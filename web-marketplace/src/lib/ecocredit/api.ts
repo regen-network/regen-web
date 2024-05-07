@@ -8,7 +8,9 @@ import { QueryClientImpl as DataQueryClientImpl } from '@regen-network/api/lib/g
 import {
   BatchBalanceInfo,
   BatchInfo,
+  ClassInfo,
   DeepPartial,
+  ProjectInfo,
   QueryBalanceRequest,
   QueryBalanceResponse,
   QueryBalancesRequest,
@@ -421,7 +423,19 @@ export const queryProjectsByClass = async ({
   request,
 }: QueryProjectsByClassProps): Promise<QueryProjectsByClassResponse> => {
   try {
-    return client.ProjectsByClass({ classId: request.classId });
+    let projects: ProjectInfo[] = [];
+    let response: QueryProjectsByClassResponse | undefined;
+    while (!response || !!response.pagination?.nextKey) {
+      if (!!response?.pagination?.nextKey) {
+        request.pagination = { key: response.pagination.nextKey };
+      }
+      response = await client.ProjectsByClass(request);
+      projects.push(...response.projects);
+    }
+    return {
+      $type: response.$type,
+      projects,
+    };
   } catch (err) {
     throw new Error(`Error fetching projects by class: ${err}`);
   }
@@ -772,7 +786,19 @@ export const queryClasses = async ({
   request,
 }: QueryClassesProps): Promise<QueryClassesResponse> => {
   try {
-    return await client.Classes(request);
+    let classes: ClassInfo[] = [];
+    let response: QueryClassesResponse | undefined;
+    while (!response || !!response.pagination?.nextKey) {
+      if (!!response?.pagination?.nextKey) {
+        request.pagination = { key: response.pagination.nextKey };
+      }
+      response = await client.Classes(request);
+      classes.push(...response.classes);
+    }
+    return {
+      $type: response.$type,
+      classes,
+    };
   } catch (err) {
     throw new Error(
       `Error in the Classes query of the ledger ecocredit module: ${err}`,
@@ -810,7 +836,19 @@ export const queryProjects = async ({
   request,
 }: QueryProjectsProps): Promise<QueryProjectsResponse> => {
   try {
-    return await client.Projects(request);
+    let projects: ProjectInfo[] = [];
+    let response: QueryProjectsResponse | undefined;
+    while (!response || !!response.pagination?.nextKey) {
+      if (!!response?.pagination?.nextKey) {
+        request.pagination = { key: response.pagination.nextKey };
+      }
+      response = await client.Projects(request);
+      projects.push(...response.projects);
+    }
+    return {
+      $type: response.$type,
+      projects,
+    };
   } catch (err) {
     throw new Error(
       `Error in the Projects query of the ledger ecocredit module: ${err}`,
@@ -829,7 +867,19 @@ export const queryProjectsByAdmin = async ({
   request,
 }: QueryProjectsByAdminProps): Promise<QueryProjectsByAdminResponse> => {
   try {
-    return await client.ProjectsByAdmin(request);
+    let projects: ProjectInfo[] = [];
+    let response: QueryProjectsByAdminResponse | undefined;
+    while (!response || !!response.pagination?.nextKey) {
+      if (!!response?.pagination?.nextKey) {
+        request.pagination = { key: response.pagination.nextKey };
+      }
+      response = await client.ProjectsByAdmin(request);
+      projects.push(...response.projects);
+    }
+    return {
+      $type: response.$type,
+      projects,
+    };
   } catch (err) {
     throw new Error(
       `Error in the ProjectsByAdmin query of the ledger ecocredit module: ${err}`,

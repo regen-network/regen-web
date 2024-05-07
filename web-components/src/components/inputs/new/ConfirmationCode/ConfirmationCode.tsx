@@ -119,22 +119,18 @@ export const ConfirmationCode = forwardRef<
 
     const handleOnPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
       const pastedValue = e.clipboardData.getData('Text');
-
       let currentInput = 0;
 
       for (let i = 0; i < pastedValue.length; i++) {
         const pastedCharacter = pastedValue.charAt(i);
-        const currentValue = inputsRef.current[currentInput].value;
         if (pastedCharacter.match(inputProps.pattern)) {
-          if (!currentValue) {
-            inputsRef.current[currentInput].value = pastedCharacter;
-            if (inputsRef.current[currentInput].nextElementSibling !== null) {
-              (
-                inputsRef.current[currentInput]
-                  .nextElementSibling as HTMLInputElement
-              ).focus();
-              currentInput++;
-            }
+          inputsRef.current[currentInput].value = pastedCharacter;
+          if (inputsRef.current[currentInput].nextElementSibling !== null) {
+            (
+              inputsRef.current[currentInput]
+                .nextElementSibling as HTMLInputElement
+            ).focus();
+            currentInput++;
           }
         }
       }

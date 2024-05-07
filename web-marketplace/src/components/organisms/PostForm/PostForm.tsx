@@ -80,8 +80,9 @@ export const PostForm = ({
     value: string,
     mimeType: string,
     fieldIndex: number,
+    lastInMultiUpload: boolean,
   ): void => {
-    if (files?.[fieldIndex]?.['url'] === DEFAULT) {
+    if (lastInMultiUpload) {
       append({
         url: DEFAULT,
         name: DEFAULT,

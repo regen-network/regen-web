@@ -132,7 +132,6 @@ export const MediaFormStory = ({
                 initialImage,
                 open,
                 value,
-                children,
                 onClose,
                 onSubmit,
               }) => (
@@ -144,24 +143,22 @@ export const MediaFormStory = ({
                   fixedCrop={cropAspectMediaForm}
                   isIgnoreCrop={!!value}
                 >
-                  {children}
+                  <TextField
+                    type="text"
+                    label="Photo credit"
+                    {...register('regen:storyMedia.schema:creditText')}
+                    helperText={
+                      errors['regen:storyMedia']?.['schema:creditText']?.message
+                    }
+                    error={!!errors['regen:storyMedia']?.['schema:creditText']}
+                    optional
+                  />
                 </CropImageModal>
               )}
               optional
               {...imageDropCommonProps}
               {...register('regen:storyMedia.schema:url')}
-            >
-              <TextField
-                type="text"
-                label="Photo credit"
-                {...register('regen:storyMedia.schema:creditText')}
-                helperText={
-                  errors['regen:storyMedia']?.['schema:creditText']?.message
-                }
-                error={!!errors['regen:storyMedia']?.['schema:creditText']}
-                optional
-              />
-            </FileDrop>
+            />
           )}
         </Radio>
       </>

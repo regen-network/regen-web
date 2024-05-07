@@ -35,8 +35,8 @@ import NotFoundPage from 'pages/NotFound';
 import { usePathSection } from 'pages/ProfileEdit/hooks/usePathSection';
 import WithLoader from 'components/atoms/WithLoader';
 import {
-  getIsUuid,
   getIsOnChainId,
+  getIsUuid,
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { useMsgClient } from 'hooks';
 

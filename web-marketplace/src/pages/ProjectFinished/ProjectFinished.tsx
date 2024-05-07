@@ -17,7 +17,10 @@ import { Link } from '../../components/atoms';
 import { OnboardingFormTemplate } from '../../components/templates';
 import { getHashUrl } from '../../lib/block-explorer';
 import { useCreateProjectContext } from '../ProjectCreate';
-import { PROJECT_OFFCHAIN_REMINDER } from './ProjectFinished.constants';
+import {
+  PROJECT_OFFCHAIN_REMINDER,
+  VIEW_PROJECT,
+} from './ProjectFinished.constants';
 
 const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { deliverTxResponse } = useCreateProjectContext();
@@ -116,7 +119,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
           role="link"
           onClick={() => navigate(`/project/${currentProjectId}`)}
         >
-          see project page
+          {VIEW_PROJECT}
         </OutlinedButton>
       </Box>
     </OnboardingFormTemplate>

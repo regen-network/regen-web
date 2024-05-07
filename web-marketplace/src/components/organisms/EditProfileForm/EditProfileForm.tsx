@@ -6,7 +6,7 @@ import { useSetAtom } from 'jotai';
 
 import RadioCard from 'web-components/src/components/atoms/RadioCard';
 import ControlledFormLabel from 'web-components/src/components/form/ControlledFormLabel';
-import TwitterIcon2 from 'web-components/src/components/icons/social/TwitterIcon2';
+import TwitterIcon from 'web-components/src/components/icons/social/TwitterIcon';
 import WebsiteLinkIcon from 'web-components/src/components/icons/social/WebsiteLinkIcon';
 import { ImageField } from 'web-components/src/components/inputs/new/ImageField/ImageField';
 import { ImageFieldAvatar } from 'web-components/src/components/inputs/new/ImageField/ImageField.Avatar';
@@ -195,9 +195,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
             {...form.register('websiteLink')}
             helperText={errors?.websiteLink?.message}
             error={!!errors?.websiteLink}
-            startAdornment={
-              <WebsiteLinkIcon sx={{ fontSize: 40, color: 'grey.100' }} />
-            }
+            startAdornment={<WebsiteLinkIcon className="text-grey-300" />}
             sx={{
               mt: { xs: 2.5, sm: 2.5 },
               mb: 5,
@@ -212,7 +210,10 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
             helperText={errors?.twitterLink?.message}
             error={!!errors?.twitterLink}
             startAdornment={
-              <TwitterIcon2 sx={{ fontSize: 40, color: 'grey.100' }} />
+              <TwitterIcon
+                color="currentColor"
+                className="ml-[9px] mr-[8px] text-grey-300"
+              />
             }
             sx={{
               mt: { xs: 0, sm: 0 },

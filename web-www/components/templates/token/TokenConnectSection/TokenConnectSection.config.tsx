@@ -1,5 +1,4 @@
 import DiscordIcon from 'web-components/src/components/icons/social/DiscordIcon';
-import TelegramIcon from 'web-components/src/components/icons/social/TelegramIcon';
 import TwitterIcon from 'web-components/src/components/icons/social/TwitterIcon';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
@@ -10,16 +9,6 @@ type Params = {
 };
 
 export const getIcons = ({ theme }: Params): IconLabelProps[] => [
-  {
-    icon: (
-      <TelegramIcon
-        color={theme.palette.primary.main}
-        hoverColor={theme.palette.secondary.main}
-      />
-    ),
-    href: 'https://t.me/regennetworkdevannounce',
-    label: 'Telegram',
-  },
   {
     icon: (
       <DiscordIcon
@@ -36,6 +25,7 @@ export const getIcons = ({ theme }: Params): IconLabelProps[] => [
       <TwitterIcon
         color={theme.palette.primary.main}
         hoverColor={theme.palette.secondary.main}
+        className="!p-15 sm:!p-25"
       />
     ),
     href: 'https://twitter.com/regen_network',

@@ -1,7 +1,7 @@
 import { Link } from '@mui/material';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import TwitterIcon2 from '../../../components/icons/social/TwitterIcon2';
+import TwitterIcon from '../../../components/icons/social/TwitterIcon';
 import WebsiteLinkIcon from '../../../components/icons/social/WebsiteLinkIcon';
 import { ProfileHeader } from './ProfileHeader';
 import { ProfileVariant } from './ProfileHeader.types';
@@ -29,7 +29,7 @@ const defaultArgs = {
     socialsLinks: [
       {
         href: '#twitter',
-        icon: <TwitterIcon2 />,
+        icon: <TwitterIcon />,
       },
       {
         href: '#externalLink',

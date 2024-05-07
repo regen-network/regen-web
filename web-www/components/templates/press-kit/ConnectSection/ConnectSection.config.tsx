@@ -1,10 +1,9 @@
 import EmailIcon from 'web-components/src/components/icons/EmailIcon';
 import DiscordIcon from 'web-components/src/components/icons/social/DiscordIcon';
-import FacebookIcon from 'web-components/src/components/icons/social/FacebookIcon';
 import GithubIcon from 'web-components/src/components/icons/social/GithubIcon';
+import HyloIcon from 'web-components/src/components/icons/social/HyloIcon';
 import LinkedInIcon from 'web-components/src/components/icons/social/LinkedInIcon';
 import MediumIcon from 'web-components/src/components/icons/social/MediumIcon';
-import TelegramIcon from 'web-components/src/components/icons/social/TelegramIcon';
 import TwitterIcon from 'web-components/src/components/icons/social/TwitterIcon';
 import YoutubeIcon from 'web-components/src/components/icons/social/YoutubeIcon';
 import { Theme } from 'web-components/src/theme/muiTheme';
@@ -12,26 +11,6 @@ import { Theme } from 'web-components/src/theme/muiTheme';
 import { IconLabelProps } from '@/components/organisms/ConnectSection/ConnectSection.types';
 
 export const getPressKitConnectIcons = (theme: Theme): IconLabelProps[] => [
-  {
-    icon: (
-      <TelegramIcon
-        color={theme.palette.primary.main}
-        hoverColor={theme.palette.secondary.main}
-      />
-    ),
-    href: 'https://t.me/regennetwork_public',
-    label: 'Telegram for General Updates',
-  },
-  {
-    icon: (
-      <TelegramIcon
-        color={theme.palette.primary.main}
-        hoverColor={theme.palette.secondary.main}
-      />
-    ),
-    href: 'https://t.me/regennetworkdevannounce',
-    label: 'Telegram for Developers',
-  },
   {
     icon: (
       <MediumIcon
@@ -47,6 +26,7 @@ export const getPressKitConnectIcons = (theme: Theme): IconLabelProps[] => [
       <TwitterIcon
         color={theme.palette.primary.main}
         hoverColor={theme.palette.secondary.main}
+        className="!p-15 sm:!p-20"
       />
     ),
     href: 'https://twitter.com/regen_network',
@@ -86,16 +66,6 @@ export const getPressKitConnectIcons = (theme: Theme): IconLabelProps[] => [
   },
   {
     icon: (
-      <FacebookIcon
-        color={theme.palette.primary.main}
-        hoverColor={theme.palette.secondary.main}
-      />
-    ),
-    href: 'https://facebook.com/weareregennetwork',
-    label: 'Facebook',
-  },
-  {
-    icon: (
       <GithubIcon
         color={theme.palette.primary.main}
         hoverColor={theme.palette.secondary.main}
@@ -103,6 +73,17 @@ export const getPressKitConnectIcons = (theme: Theme): IconLabelProps[] => [
     ),
     href: 'https://github.com/regen-network/',
     label: 'Github',
+  },
+  {
+    icon: (
+      <HyloIcon
+        color={theme.palette.primary.main}
+        hoverColor={theme.palette.secondary.main}
+        className="!w-40 !h-40 sm:!w-50 sm:!h-50"
+      />
+    ),
+    href: 'https://www.hylo.com/groups/regen-methodology-development',
+    label: 'Hylo',
   },
   {
     icon: (

@@ -90,7 +90,7 @@ const ProjectTags = ({
                 tag={ecosystem}
                 key={ecosystem.name}
                 sx={{
-                  mb: hasManyActivities ? { xs: 2.5, sm: 3.75 } : 0,
+                  mb: hasManyEcosystems ? { xs: 2.5, sm: 3.75 } : 0,
                   mr: { xs: 2, sm: hasManyEcosystems ? 2 : 0 },
                 }}
               />

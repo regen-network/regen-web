@@ -31,7 +31,6 @@ export const useProjects = ({
     sort,
     useCommunityProjects,
     creditClassFilter,
-    separatePrefinanceProjects: true,
   });
 
   const pagesCount = Math.ceil((projectsCount ?? 0) / PROJECTS_PER_PAGE);

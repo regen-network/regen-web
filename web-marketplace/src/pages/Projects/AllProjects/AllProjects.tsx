@@ -219,6 +219,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               isSoldOut={isSoldOut}
               creditsTooltip={getCreditsTooltip({ isSoldOut, project })}
               program={project.program}
+              projectPrefinancing={project.projectPrefinancing}
             />
           </Box>
         );

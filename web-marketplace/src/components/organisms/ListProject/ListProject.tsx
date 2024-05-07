@@ -31,8 +31,8 @@ const ListProject = () => {
     walletsUiConfig,
     onButtonClick,
   } = useLoginData({ createProject: true, isConnectingRef });
-  const { isIssuer } = useProfileItems({});
-
+  // const { isIssuer } = useProfileItems({});
+  const isIssuer = false;
   const { bankClient } = useLedger();
 
   // Populate cache with user balance once connected

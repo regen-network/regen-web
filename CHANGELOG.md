@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/regen-network/regen-web/compare/v2.4.0...v2.4.1) (2024-05-09)
+
+### Bug Fixes
+
+- use useQueryIsIssuer hook instead of useProfileItems ([6f795e1](https://github.com/regen-network/regen-web/commit/6f795e1cbf46ec7623c7badf550888ebb162b8bf))
+
 # [2.4.0](https://github.com/regen-network/regen-web/compare/v2.3.0...v2.4.0) (2024-04-24)
 
 ### Bug Fixes

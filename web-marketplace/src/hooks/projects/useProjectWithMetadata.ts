@@ -54,6 +54,7 @@ export interface MetadataSubmitProps {
   overwrite?: boolean;
   shouldNavigate?: boolean;
   projectPatch?: ProjectPatch;
+  offChainProjectId?: string;
 }
 
 interface Res {
@@ -104,6 +105,7 @@ export const useProjectWithMetadata = ({
       }),
     );
   const projectById = projectByOffChainIdRes?.data?.projectById;
+
   if (createOrEditOffChain && projectById) {
     offChainProject = projectById;
     metadata = projectById.metadata;
@@ -131,6 +133,7 @@ export const useProjectWithMetadata = ({
       onChainId: projectId as string,
     }),
   );
+
   // Select metadata
   if (editOnChain) {
     offChainProject = projectByOnChainIdRes?.data?.projectByOnChainId;
@@ -178,6 +181,7 @@ export const useProjectWithMetadata = ({
       overwrite = false,
       shouldNavigate = true,
       projectPatch = {},
+      offChainProjectId,
     }: MetadataSubmitProps): Promise<void> => {
       let newMetadata = values;
       if (!overwrite) {
@@ -189,7 +193,7 @@ export const useProjectWithMetadata = ({
         );
       } else {
         await createOrUpdateProject({
-          offChainProjectId: offChainProject?.id,
+          offChainProjectId: offChainProject?.id ?? offChainProjectId,
           projectPatch: { metadata: newMetadata, ...projectPatch },
         });
 

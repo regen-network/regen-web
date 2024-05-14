@@ -124,6 +124,7 @@ const Projects = (): JSX.Element => {
               hasCommunityProjects,
               prefinanceProjectsCount,
               prefinanceProjects,
+              prefinanceProjectsContent,
             }}
           />
         </div>

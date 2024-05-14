@@ -49,7 +49,7 @@ const LoginModalSelect = ({
               user guide.
             </Link>
           </Body>
-          <LoginModalProviders providers={wallets} />(
+          <LoginModalProviders providers={wallets} />
           <Grid container alignItems="center" pb={7.5} spacing={7.5} pt={5}>
             <Grid item xs={4}>
               <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
@@ -63,7 +63,6 @@ const LoginModalSelect = ({
               <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
             </Grid>
           </Grid>
-          )
         </>
       )}
       <Body

@@ -29,13 +29,17 @@ export async function uploadImage(
 }
 
 export async function deleteImage(
-  projectId: string,
+  path: string,
+  projectOrAccountId: string,
   imageUrl: string,
   apiServerUrl: string | undefined,
 ): Promise<void> {
-  const fileName = imageUrl.split(`${projectId}/`)[1];
-  await fetch(`${apiServerUrl}/marketplace/v1/files/${projectId}/${fileName}`, {
-    method: 'DELETE',
-    credentials: 'include',
-  });
+  const fileName = imageUrl.split(`${projectOrAccountId}/`)[1];
+  await fetch(
+    `${apiServerUrl}/marketplace/v1/files/${path}/${projectOrAccountId}?fileName=${fileName}`,
+    {
+      method: 'DELETE',
+      credentials: 'include',
+    },
+  );
 }

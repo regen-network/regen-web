@@ -1,12 +1,15 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
+
+import { deleteImage } from 'web-components/src/utils/s3';
 
 import { useUpdateAccountByIdMutation } from 'generated/graphql';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { apiServerUrl } from 'lib/env';
 import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
@@ -22,6 +25,7 @@ import {
   DEFAULT_PROFILE_AVATARS,
   DEFAULT_PROFILE_BG,
   DEFAULT_PROFILE_TYPE,
+  PROFILE_S3_PATH,
   PROFILE_SAVED,
 } from './ProfileEdit.constants';
 import { getDefaultAvatar } from './ProfileEdit.utils';
@@ -38,6 +42,7 @@ export const ProfileEditMain = () => {
   const [profileBannerCard, setProfileBannerCard] = useAtom(
     profileBannerCardAtom,
   );
+  const fileNamesToDeleteRef = useRef<string[]>([]);
 
   const initialValues: EditProfileFormSchemaType = useMemo(
     () => ({
@@ -86,6 +91,18 @@ export const ProfileEditMain = () => {
           },
         },
       });
+      // Delete old avatar and/or bg image
+      await Promise.all(
+        fileNamesToDeleteRef?.current.map(async fileName => {
+          await deleteImage(
+            PROFILE_S3_PATH,
+            activeAccount?.id ?? '',
+            fileName,
+            apiServerUrl,
+          );
+        }),
+      );
+      fileNamesToDeleteRef.current = [];
       // hide the banner if a user has set name, profile image, background image and one of the external links
       if (
         !profileBannerCard[activeAccount?.id] &&
@@ -128,8 +145,7 @@ export const ProfileEditMain = () => {
   }, [setBannerTextAtom, refreshProfileData, navigate]);
 
   const onUpload = useOnUploadCallback({
-    updateAccountById,
-    refreshProfileData,
+    fileNamesToDeleteRef,
   });
 
   return (

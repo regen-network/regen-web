@@ -152,6 +152,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           initialFileName={PROFILE_AVATAR_FILE_NAME}
           circularCrop
           onUpload={onUpload}
+          value={profileImage}
         >
           <ImageFieldAvatar value={profileImage} />
         </ImageField>
@@ -169,6 +170,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           {...form.register('backgroundImage')}
           name="bg-image"
           onUpload={onUpload}
+          value={backgroundImage}
         >
           <ImageFieldBackground value={backgroundImage} />
         </ImageField>

@@ -16,3 +16,4 @@ export const MAX_PHOTOS_ERROR_MESSAGE = `You must add at most ${GALLERY_PHOTOS_M
 export const CAPTION_LIMIT_ERROR_MESSAGE = `The caption message must be under ${CAPTION_CHART_LIMIT} characters.`;
 export const STORY_LABEL = 'Story video or photo';
 export const IMAGE_UPLOAD_BUTTON_LABEL = '+ Add Photo';
+export const PROJECTS_S3_PATH = 'projects';

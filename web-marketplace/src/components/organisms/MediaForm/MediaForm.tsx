@@ -17,7 +17,7 @@ import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
 
-import { DEFAULT } from './MediaForm.constants';
+import { DEFAULT, PROJECTS_S3_PATH } from './MediaForm.constants';
 import { mediaFormSchema, MediaFormSchemaType } from './MediaForm.schema';
 import { MediaFormPhotos } from './MediaFormPhotos';
 import { MediaFormStory } from './MediaFormStory';
@@ -82,6 +82,7 @@ export const MediaForm = ({
           await Promise.all(
             fileNamesToDeleteRef?.current.map(async fileName => {
               await deleteImage(
+                PROJECTS_S3_PATH,
                 offChainProjectId ?? '',
                 fileName,
                 apiServerUrl,

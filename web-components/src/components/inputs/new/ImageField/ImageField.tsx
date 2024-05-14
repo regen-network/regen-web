@@ -30,6 +30,7 @@ interface Props {
     label?: SxProps<Theme>;
     button?: SxProps<Theme>;
   };
+  value?: string;
 }
 
 export const ImageField = forwardRef<HTMLInputElement, Props>(
@@ -48,6 +49,7 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
       setValue,
       onUpload,
       sx = {},
+      value,
       ...props
     }: Props,
     ref,
@@ -75,6 +77,7 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
         onUpload,
         fileName,
         fileType,
+        value,
       });
 
       if (result) {

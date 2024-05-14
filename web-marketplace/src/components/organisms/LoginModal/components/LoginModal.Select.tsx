@@ -41,27 +41,30 @@ const LoginModalSelect = ({
       <Title variant="h4" mb={5}>
         Choose a log in method
       </Title>
-      <Body pb={7.5}>
-        Learn more about wallets in our{' '}
-        <Link href="https://guides.regen.network/guides/wallets">
-          user guide.
-        </Link>
-      </Body>
-      <LoginModalProviders providers={wallets} />
       {wallets.length > 0 && (
-        <Grid container alignItems="center" pb={7.5} spacing={7.5} pt={5}>
-          <Grid item xs={4}>
-            <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
+        <>
+          <Body pb={7.5}>
+            Learn more about wallets in our{' '}
+            <Link href="https://guides.regen.network/guides/wallets">
+              user guide.
+            </Link>
+          </Body>
+          <LoginModalProviders providers={wallets} />(
+          <Grid container alignItems="center" pb={7.5} spacing={7.5} pt={5}>
+            <Grid item xs={4}>
+              <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
+            </Grid>
+            <Grid item xs={4}>
+              <Label size="xs" color="info.dark">
+                or, log in with email / social
+              </Label>
+            </Grid>
+            <Grid item xs={4}>
+              <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
+            </Grid>
           </Grid>
-          <Grid item xs={4}>
-            <Label size="xs" color="info.dark">
-              or, log in with email / social
-            </Label>
-          </Grid>
-          <Grid item xs={4}>
-            <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
-          </Grid>
-        </Grid>
+          )
+        </>
       )}
       <Body
         size="sm"

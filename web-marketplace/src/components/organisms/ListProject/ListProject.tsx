@@ -12,6 +12,7 @@ import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQ
 
 import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
+import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 
 import { useWallet } from '../../../lib/wallet/wallet';
 import { useLoginData } from '../LoginButton/hooks/useLoginData';
@@ -20,7 +21,7 @@ import { LIST_PROJECT } from './ListProject.constants';
 
 const ListProject = () => {
   const { wallet } = useWallet();
-  const { activeAccountId } = useAuth();
+  const { activeAccountId, activeAccount } = useAuth();
   const navigate = useNavigate();
   const isConnectingRef = useRef(false);
 
@@ -31,8 +32,9 @@ const ListProject = () => {
     walletsUiConfig,
     onButtonClick,
   } = useLoginData({ createProject: true, isConnectingRef });
-  const { isIssuer } = useProfileItems({});
-
+  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({
+    address: activeAccount?.addr,
+  });
   const { bankClient } = useLedger();
 
   // Populate cache with user balance once connected
@@ -46,24 +48,26 @@ const ListProject = () => {
 
   return (
     <div>
-      <Body
-        className="text-[11px] sm:text-base font-bold bg-clip-text cursor-pointer pt-[2px] pr-10 sm:pr-50 bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)]"
-        sx={{
-          textFillColor: 'transparent',
-        }}
-        onClick={
-          activeAccountId
-            ? () =>
-                navigate(
-                  `/project-pages/${DRAFT_ID}/${
-                    isIssuer ? 'choose-credit-class' : 'basic-info'
-                  }`,
-                )
-            : onButtonClick
-        }
-      >
-        {LIST_PROJECT}
-      </Body>
+      {!isLoadingIsIssuer && (
+        <Body
+          className="text-[11px] sm:text-base font-bold bg-clip-text cursor-pointer pt-[2px] pr-10 sm:pr-50 bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)]"
+          sx={{
+            textFillColor: 'transparent',
+          }}
+          onClick={
+            activeAccountId
+              ? () =>
+                  navigate(
+                    `/project-pages/${DRAFT_ID}/${
+                      isIssuer ? 'choose-credit-class' : 'basic-info'
+                    }`,
+                  )
+              : onButtonClick
+          }
+        >
+          {LIST_PROJECT}
+        </Body>
+      )}
       <LoginFlow
         createProject
         isConnectingRef={isConnectingRef}

@@ -48,19 +48,21 @@ const LoginModalSelect = ({
         </Link>
       </Body>
       <LoginModalProviders providers={wallets} />
-      <Grid container alignItems="center" pb={7.5} spacing={7.5} pt={5}>
-        <Grid item xs={4}>
-          <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
+      {wallets.length > 0 && (
+        <Grid container alignItems="center" pb={7.5} spacing={7.5} pt={5}>
+          <Grid item xs={4}>
+            <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
+          </Grid>
+          <Grid item xs={4}>
+            <Label size="xs" color="info.dark">
+              or, log in with email / social
+            </Label>
+          </Grid>
+          <Grid item xs={4}>
+            <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
+          </Grid>
         </Grid>
-        <Grid item xs={4}>
-          <Label size="xs" color="info.dark">
-            or, log in with email / social
-          </Label>
-        </Grid>
-        <Grid item xs={4}>
-          <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
-        </Grid>
-      </Grid>
+      )}
       <Body
         size="sm"
         sx={{

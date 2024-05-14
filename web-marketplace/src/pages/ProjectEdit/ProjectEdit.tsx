@@ -19,6 +19,7 @@ import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
 import { Label, Title } from 'web-components/src/components/typography';
 import type { Theme } from 'web-components/src/theme/muiTheme';
 
+import { UseStateSetter } from 'types/react/use-state';
 import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import {
   errorModalAtom,
@@ -56,6 +57,7 @@ type ContextType = {
   projectEditSubmit: UseProjectEditSubmitParams;
   isDirtyRef: MutableRefObject<boolean>;
   isLoading: boolean;
+  setIsWarningModalOpen: UseStateSetter<string | undefined>;
 };
 
 const ProjectEditContext = createContext<ContextType>({
@@ -64,6 +66,7 @@ const ProjectEditContext = createContext<ContextType>({
   isEdit: false,
   isDirtyRef: { current: false },
   isLoading: false,
+  setIsWarningModalOpen: () => {},
 });
 
 function ProjectEdit(): JSX.Element {
@@ -213,6 +216,7 @@ function ProjectEdit(): JSX.Element {
         projectEditSubmit,
         isDirtyRef,
         isLoading,
+        setIsWarningModalOpen,
       }}
     >
       <WithLoader

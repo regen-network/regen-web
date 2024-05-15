@@ -5,9 +5,9 @@ import { useManager } from '@cosmos-kit/react-lite';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { LoginModalState } from 'components/organisms/LoginModal/LoginModal.types';
+import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 
 import { getWalletsUiConfig } from '../LoginButton.utils';
 import { useConnectToWallet } from './useConnectToWallet';
@@ -26,8 +26,10 @@ export const useLoginData = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalState, setModalState] = useState<LoginModalState>('select');
 
-  const { isIssuer, isLoadingIsIssuer } = useProfileItems({});
-  const { activeAccountId } = useAuth();
+  const { activeAccountId, activeAccount } = useAuth();
+  const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({
+    address: activeAccount?.addr,
+  });
   const navigate = useNavigate();
 
   const onButtonClick = useCallback(

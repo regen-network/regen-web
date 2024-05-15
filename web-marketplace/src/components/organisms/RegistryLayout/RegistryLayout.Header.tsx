@@ -93,9 +93,6 @@ const RegistryLayoutHeader: React.FC = () => {
     ? headerColors[pathname]
     : theme.palette.primary.light;
 
-  const { isModalOpen, modalState, onModalClose, walletsUiConfig } =
-    useLoginData({});
-
   return (
     <>
       <Header
@@ -133,14 +130,6 @@ const RegistryLayoutHeader: React.FC = () => {
             <LoginButton />
           </Box>
         }
-      />
-      <LoginFlow
-        isModalOpen={isModalOpen}
-        onModalClose={onModalClose}
-        // We can't have a logged-in account with WC (because it doesn't support signArbitrary)
-        // so there's no wallet available on mobile and only Keplr on desktop
-        wallets={checkIsMobile() ? [] : [walletsUiConfig[0]]}
-        modalState={modalState}
       />
     </>
   );

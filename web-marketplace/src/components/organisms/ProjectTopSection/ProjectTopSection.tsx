@@ -147,7 +147,9 @@ function ProjectTopSection({
 
   const projectActivity =
     projectMetadata?.['regen:projectActivity']?.['schema:name'];
-  const ecosystemTypes = creditClassMetadata?.['regen:ecosystemType'];
+  const ecosystemTypes =
+    projectMetadata?.['regen:ecosystemType'] ||
+    creditClassMetadata?.['regen:ecosystemType'];
   const { activityTags, ecosystemTags } = useTags({
     activities: projectActivity ? [projectActivity] : undefined,
     ecosystemTypes,

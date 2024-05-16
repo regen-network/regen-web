@@ -4,6 +4,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { StdSignature } from '@cosmjs/launchpad';
 import { useQuery } from '@tanstack/react-query';
 
 import admin from 'lib/admin';
@@ -15,6 +16,8 @@ import { AddressUsedWithEmailModal } from 'components/organisms/ConnectWalletFlo
 import { AddressUsedModal } from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow.AddressUsedWithEmailModal';
 import { SelectAccountModal } from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow.SelectAccountModal';
 import { useConnectWalletToAccount } from 'components/organisms/ConnectWalletFlow/hooks/useConnectWalletToAccount';
+
+import { useMergeAccounts } from './hooks/useMergeAccounts';
 
 type ConnectWalletFlowProps = {
   onConnectModalClose: () => void;
@@ -32,6 +35,7 @@ export const ConnectWalletFlow = ({
   const [addressUsedWithEmailModalOpen, setAddressUsedWithEmailModalOpen] =
     useState(false);
   const [selectAccountModalOpen, setSelectAccountModalOpen] = useState(false);
+  const [signature, setSignature] = useState<StdSignature | undefined>();
 
   useConnectWalletToAccount({
     isConnectModalOpened,
@@ -39,7 +43,10 @@ export const ConnectWalletFlow = ({
     setError,
     setAddressUsedModalOpen,
     setAddressUsedWithEmailModalOpen,
+    setSignature,
   });
+
+  const mergeAccounts = useMergeAccounts({ signature });
 
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -78,7 +85,7 @@ export const ConnectWalletFlow = ({
             },
             { ...walletAccount, current: false, addr: wallet.address },
           ]}
-          merge={async (e: boolean) => {}}
+          merge={mergeAccounts}
         />
       )}
     </>

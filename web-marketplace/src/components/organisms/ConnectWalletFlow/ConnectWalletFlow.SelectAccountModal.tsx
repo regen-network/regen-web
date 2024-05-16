@@ -19,6 +19,7 @@ import {
   SELECT_ACCOUNT_MERGE,
   SELECT_ACCOUNT_TITLE,
 } from './ConnectWalletFlow.constants';
+import { MergeAccountsParams } from './hooks/useMergeAccounts';
 
 type MergeAccount = Array<
   Pick<Account, 'id' | 'name' | 'addr' | 'image' | 'type'> & {
@@ -27,7 +28,7 @@ type MergeAccount = Array<
   }
 >;
 interface Props extends RegenModalProps {
-  merge: (keepCurrentAccount: boolean) => Promise<void>;
+  merge: (params: MergeAccountsParams) => Promise<void>;
   accounts: MergeAccount;
 }
 
@@ -87,7 +88,7 @@ export const SelectAccountModal = ({
             account => account.id === selectedAccountId,
           );
           if (selectedAccount) {
-            merge(selectedAccount.current);
+            merge({ keepCurrentAccout: selectedAccount.current });
           }
         }}
       />

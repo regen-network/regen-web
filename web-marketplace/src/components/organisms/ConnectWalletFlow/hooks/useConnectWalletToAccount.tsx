@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
+import { StdSignature } from '@cosmjs/launchpad';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { postData } from 'utils/fetch/postData';
 
@@ -25,6 +26,7 @@ type Params = {
   setError: (e: unknown) => void;
   setAddressUsedModalOpen: UseStateSetter<boolean>;
   setAddressUsedWithEmailModalOpen: UseStateSetter<boolean>;
+  setSignature: UseStateSetter<StdSignature | undefined>;
 };
 
 export const useConnectWalletToAccount = ({
@@ -33,6 +35,7 @@ export const useConnectWalletToAccount = ({
   setError,
   setAddressUsedModalOpen,
   setAddressUsedWithEmailModalOpen,
+  setSignature,
 }: Params) => {
   const { activeAccountId, activeAccount, loading } = useAuth();
   const { wallet, walletConfig } = useWallet();
@@ -91,6 +94,7 @@ export const useConnectWalletToAccount = ({
           switch (response.error) {
             case ADDRESS_USED_ERROR:
               onConnectModalClose();
+              setSignature(signature);
               setAddressUsedModalOpen(true);
               break;
             case ADDRESS_USED_WITH_EMAIL_ERROR:
@@ -119,6 +123,7 @@ export const useConnectWalletToAccount = ({
     track,
     reactQueryClient,
     onConnectModalClose,
+    setSignature,
     setAddressUsedModalOpen,
     setAddressUsedWithEmailModalOpen,
     setError,

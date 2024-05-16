@@ -21,6 +21,7 @@ import {
   useCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
+import { CREDIT_CLASS_FILTERS_TO_DESELECT } from 'lib/env';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -111,7 +112,11 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
         creditClassFilters.reduce((acc, creditClassFilter) => {
           return {
             ...acc,
-            [creditClassFilter.path]: true,
+            [creditClassFilter.path]: CREDIT_CLASS_FILTERS_TO_DESELECT.includes(
+              creditClassFilter.path,
+            )
+              ? false
+              : true,
           };
         }, {}),
       );

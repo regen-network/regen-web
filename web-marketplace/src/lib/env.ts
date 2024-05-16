@@ -5,3 +5,7 @@ export const API_URI = import.meta.env.VITE_API_URI;
 export const IMAGE_STORAGE_BASE_URL =
   import.meta.env.VITE_IMAGE_STORAGE_BASE_URL ??
   'https://regen-registry.s3.amazonaws.com/';
+export const CREDIT_CLASS_FILTERS_TO_DESELECT = import.meta.env
+  .VITE_CREDIT_CLASS_FILTERS_TO_DESELECT
+  ? import.meta.env.VITE_CREDIT_CLASS_FILTERS_TO_DESELECT.split(',')
+  : [];

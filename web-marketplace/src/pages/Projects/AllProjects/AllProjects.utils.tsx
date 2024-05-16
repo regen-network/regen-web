@@ -42,17 +42,3 @@ export const getCreditClassSelectedFilters = (
   Object.keys(creditClassSelectedFilters).reduce((accumulator, key) => {
     return { ...accumulator, [key]: value };
   }, {});
-
-export const initializeCreditClassSelectedFilters = (
-  creditClassSelectedFilters: Record<string, boolean>,
-  pathsToDeselect: string[],
-): Record<string, boolean> => {
-  return Object.fromEntries(
-    Object.entries(creditClassSelectedFilters).map(([k, v]) => {
-      if (pathsToDeselect.includes(k)) {
-        return [k, false];
-      }
-      return [k, v];
-    }),
-  );
-};

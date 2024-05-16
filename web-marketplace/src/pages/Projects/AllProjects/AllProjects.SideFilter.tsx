@@ -36,11 +36,7 @@ import { CreditClassFilter, FilterCreditClassEvent } from './AllProjects.types';
 import {
   getCreditClassSelectedFilters,
   getFilterSelected,
-  initializeCreditClassSelectedFilters,
 } from './AllProjects.utils';
-
-const creditClassesToDeselect =
-  import.meta.env.VITE_CREDIT_CLASS_FILTERS_TO_DESELECT?.split(',') || [];
 
 type Props = {
   creditClassFilters?: CreditClassFilter[];
@@ -61,15 +57,6 @@ export const SideFilter = ({
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
     creditClassSelectedFiltersAtom,
   );
-
-  useEffect(() => {
-    const initializedCreditClassSelectedFilters =
-      initializeCreditClassSelectedFilters(
-        creditClassSelectedFilters,
-        creditClassesToDeselect,
-      );
-    setCreditClassSelectedFilters(initializedCreditClassSelectedFilters);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
   const filteredCreditClassFilters = creditClassFilters.filter(

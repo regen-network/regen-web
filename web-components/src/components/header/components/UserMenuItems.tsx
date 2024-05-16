@@ -1,12 +1,12 @@
 import React from 'react';
 
+import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
+import { LogOutIcon } from '../../icons/LogOutIcon';
 import { Body } from '../../typography';
 import UserAvatar from '../../user/UserAvatar';
 import { HeaderDropdownItemProps } from './HeaderDropdown/HeaderDropdown.Item';
 import { HeaderMenuItemBase } from './HeaderMenuItem/HeaderMenuItem';
 import { UserMenuItem } from './UserMenuItem';
-import { LogOutIcon } from '../../icons/LogOutIcon';
-import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 
 interface UserMenuItemsProps extends HeaderMenuItemBase {
   nameOrAddress?: string | null;
@@ -32,7 +32,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
       item={{
         renderTitle: () => (
           <div className="flex justify-between items-center text-sm w-[164px] sm:w-[194px]">
-            <div className="flex items-center">
+            <div className="flex items-center truncate">
               <UserAvatar
                 size="small"
                 sx={{
@@ -41,7 +41,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
                 alt="default avatar"
                 src={avatar}
               />
-              {nameOrAddress}
+              <span className="truncate">{nameOrAddress}</span>
             </div>
             <BreadcrumbIcon className="w-[12px] h-[12px] text-grey-700 mr-10" />
           </div>

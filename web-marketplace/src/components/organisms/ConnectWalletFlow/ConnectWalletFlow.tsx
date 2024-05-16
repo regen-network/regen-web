@@ -68,7 +68,7 @@ export const ConnectWalletFlow = ({
       />
       {activeAccount && privActiveAccount && wallet && walletAccount && (
         <SelectAccountModal
-          open={true}
+          open={selectAccountModalOpen}
           onClose={() => setSelectAccountModalOpen(false)}
           accounts={[
             {

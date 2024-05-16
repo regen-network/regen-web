@@ -5,15 +5,15 @@ import { Body, Title } from 'web-components/src/components/typography';
 import {
   ADDRESS_USED_CANCEL,
   ADDRESS_USED_DESCRIPTION,
-  ADDRESS_USED_MERGED,
+  ADDRESS_USED_NEXT,
   ADDRESS_USED_TITLE,
 } from './ConnectWalletFlow.constants';
 
 interface Props extends RegenModalProps {
-  merge: () => void;
+  next: () => void;
 }
 
-export const AddressUsedModal = ({ open, onClose, merge }: Props) => {
+export const AddressUsedModal = ({ open, onClose, next }: Props) => {
   return (
     <Modal open={open} onClose={onClose}>
       <div className="flex justify-center">
@@ -28,8 +28,8 @@ export const AddressUsedModal = ({ open, onClose, merge }: Props) => {
       <CancelButtonFooter
         onCancel={onClose}
         cancelLabel={ADDRESS_USED_CANCEL}
-        label={ADDRESS_USED_MERGED}
-        onClick={merge}
+        label={ADDRESS_USED_NEXT}
+        onClick={next}
       />
     </Modal>
   );

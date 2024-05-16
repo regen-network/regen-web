@@ -7,12 +7,14 @@ export interface Props extends ButtonProps {
   label: string | JSX.Element;
   onCancel: () => void;
   hideCancel?: boolean;
+  cancelLabel?: string;
 }
 
 const CancelButtonFooter = ({
   onCancel,
   label,
   hideCancel,
+  cancelLabel,
   ...props
 }: Props): JSX.Element => {
   return (
@@ -29,7 +31,7 @@ const CancelButtonFooter = ({
               border: 'none',
             }}
           >
-            cancel
+            {cancelLabel || 'cancel'}
           </Button>
         </Grid>
       )}

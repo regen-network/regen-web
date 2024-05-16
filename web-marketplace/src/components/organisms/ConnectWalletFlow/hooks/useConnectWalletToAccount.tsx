@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { postData } from 'utils/fetch/postData';
 
+import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
 import { useAuth } from 'lib/auth/auth';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
@@ -13,14 +14,25 @@ import { useTracker } from 'lib/tracker/useTracker';
 import { useSignArbitrary } from 'lib/wallet/hooks/useSignArbitrary';
 import { useWallet } from 'lib/wallet/wallet';
 
+import {
+  ADDRESS_USED_ERROR,
+  ADDRESS_USED_WITH_EMAIL_ERROR,
+} from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants';
+
 type Params = {
   isConnectModalOpened?: boolean;
+  onConnectModalClose: () => void;
   setError: (e: unknown) => void;
+  setAddressUsedModalOpen: UseStateSetter<boolean>;
+  setAddressUsedWithEmailModalOpen: UseStateSetter<boolean>;
 };
 
 export const useConnectWalletToAccount = ({
   isConnectModalOpened,
+  onConnectModalClose,
   setError,
+  setAddressUsedModalOpen,
+  setAddressUsedWithEmailModalOpen,
 }: Params) => {
   const { activeAccountId, activeAccount, loading } = useAuth();
   const { wallet, walletConfig } = useWallet();
@@ -76,7 +88,18 @@ export const useConnectWalletToAccount = ({
         });
 
         if (response.error) {
-          throw Error(response.error);
+          switch (response.error) {
+            case ADDRESS_USED_ERROR:
+              onConnectModalClose();
+              setAddressUsedModalOpen(true);
+              break;
+            case ADDRESS_USED_WITH_EMAIL_ERROR:
+              onConnectModalClose();
+              setAddressUsedWithEmailModalOpen(true);
+              break;
+            default:
+              throw Error(response.error);
+          }
         }
       }
     } catch (e) {
@@ -95,6 +118,9 @@ export const useConnectWalletToAccount = ({
     retryCsrfRequest,
     track,
     reactQueryClient,
+    onConnectModalClose,
+    setAddressUsedModalOpen,
+    setAddressUsedWithEmailModalOpen,
     setError,
   ]);
 

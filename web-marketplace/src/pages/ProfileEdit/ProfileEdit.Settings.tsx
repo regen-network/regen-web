@@ -7,11 +7,11 @@ import { useWallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
 import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
+import { ConnectWalletFlow } from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow';
 import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData';
 import { UserAccountSettings } from 'components/organisms/UserAccountSettings/UserAccountSettings';
 import { WalletProviderInfo } from 'components/organisms/UserAccountSettings/UserAccountSettings.types';
 
-import { useConnectWalletToAccount } from './hooks/useConnectWalletToAccount';
 import { useSocialProviders } from './hooks/useSocialProviders';
 
 export const ProfileEditSettings = () => {
@@ -26,8 +26,6 @@ export const ProfileEditSettings = () => {
     onModalClose,
     walletsUiConfig,
   } = useLoginData({});
-
-  useConnectWalletToAccount({ isConnectModalOpened: isModalOpen, setError });
 
   // Social providers
   const socialProviders = useSocialProviders();
@@ -74,6 +72,11 @@ export const ProfileEditSettings = () => {
           },
         ]}
         state={modalState}
+      />
+      <ConnectWalletFlow
+        isConnectModalOpened={isModalOpen}
+        setError={setError}
+        onConnectModalClose={onModalClose}
       />
     </>
   );

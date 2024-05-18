@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Box,
   FormControlLabel,
@@ -57,7 +57,6 @@ export const SideFilter = ({
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
     creditClassSelectedFiltersAtom,
   );
-
   const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
   const filteredCreditClassFilters = creditClassFilters.filter(
     ({ isCommunity, path }) =>

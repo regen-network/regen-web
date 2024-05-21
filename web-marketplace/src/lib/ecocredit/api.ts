@@ -425,8 +425,8 @@ export const queryProjectsByClass = async ({
   try {
     let projects: ProjectInfo[] = [];
     let response: QueryProjectsByClassResponse | undefined;
-    while (!response || !!response.pagination?.nextKey) {
-      if (!!response?.pagination?.nextKey) {
+    while (!response || response.pagination?.nextKey?.length) {
+      if (response?.pagination?.nextKey?.length) {
         request.pagination = { key: response.pagination.nextKey };
       }
       response = await client.ProjectsByClass(request);
@@ -788,8 +788,8 @@ export const queryClasses = async ({
   try {
     let classes: ClassInfo[] = [];
     let response: QueryClassesResponse | undefined;
-    while (!response || !!response.pagination?.nextKey) {
-      if (!!response?.pagination?.nextKey) {
+    while (!response || response.pagination?.nextKey?.length) {
+      if (response?.pagination?.nextKey?.length) {
         request.pagination = { key: response.pagination.nextKey };
       }
       response = await client.Classes(request);
@@ -838,8 +838,8 @@ export const queryProjects = async ({
   try {
     let projects: ProjectInfo[] = [];
     let response: QueryProjectsResponse | undefined;
-    while (!response || !!response.pagination?.nextKey) {
-      if (!!response?.pagination?.nextKey) {
+    while (!response || response.pagination?.nextKey?.length) {
+      if (response?.pagination?.nextKey?.length) {
         request.pagination = { key: response.pagination.nextKey };
       }
       response = await client.Projects(request);
@@ -869,8 +869,8 @@ export const queryProjectsByAdmin = async ({
   try {
     let projects: ProjectInfo[] = [];
     let response: QueryProjectsByAdminResponse | undefined;
-    while (!response || !!response.pagination?.nextKey) {
-      if (!!response?.pagination?.nextKey) {
+    while (!response || response.pagination?.nextKey?.length) {
+      if (response?.pagination?.nextKey?.length) {
         request.pagination = { key: response.pagination.nextKey };
       }
       response = await client.ProjectsByAdmin(request);

@@ -41,7 +41,6 @@ export const FileDropZone = forwardRef<HTMLInputElement, Props>(
     const { classes: styles, cx } = useFileDropStyles();
     const theme = useTheme();
     const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
-
     const { getRootProps, getInputProps } = useDropzone({
       accept,
       onDropAccepted: handleDrop,

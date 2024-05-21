@@ -85,6 +85,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       multi = false,
       moveUp,
       moveDown,
+      dropZoneOption,
       ...fieldProps
     },
     ref,
@@ -247,6 +248,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
             value={value}
             accept={accept}
             ref={ref}
+            dropZoneOption={dropZoneOption}
           />
         </FieldFormControl>
         {renderModal({

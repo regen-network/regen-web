@@ -154,7 +154,7 @@ export const MediaFormPhotos = ({
         setValue={setPreviewPhoto}
         onUpload={handleUpload}
         onDelete={handleDelete}
-        dropZoneOption={{ maxFiles: 1 }}
+        dropZoneOption={{ multiple: false }}
         error={!!errors['regen:previewPhoto']}
         helperText={errors['regen:previewPhoto']?.message}
         accept="image/*"
@@ -218,7 +218,7 @@ export const MediaFormPhotos = ({
                 fieldErrorMessage ?? errors['regen:galleryPhotos']?.message
               }
               fieldIndex={index}
-              dropZoneOption={{ maxFiles: 1 }}
+              dropZoneOption={{ multiple: true }}
               className={classes.galleryItem}
               defaultStyle={isFirst ? true : false}
               accept="image/*"

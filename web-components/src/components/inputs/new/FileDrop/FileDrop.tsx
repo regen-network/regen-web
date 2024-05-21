@@ -36,11 +36,15 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
   fixedCrop?: Partial<Crop>;
   hideDragText?: boolean;
   fieldIndex?: number;
-  children?: React.ReactNode;
   dropZoneOption?: DropzoneOptions;
   isCropSubmitDisabled?: boolean;
   renderModal: (_: FileDropRenderModalProps) => React.ReactNode;
-  setValue: (value: string, mimeType: string, fieldIndex: number) => void;
+  setValue: (
+    value: string,
+    mimeType: string,
+    fieldIndex: number,
+    lastInMultiUpload: boolean,
+  ) => void;
   onDelete?: (fileName: string, doSetValue?: boolean) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string | undefined>;
   accept?: string;
@@ -73,7 +77,6 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       isSubmitting,
       fieldIndex = 0,
       isCropSubmitDisabled = false,
-      children,
       renderModal,
       setValue,
       onUpload,
@@ -82,6 +85,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       multi = false,
       moveUp,
       moveDown,
+      dropZoneOption,
       ...fieldProps
     },
     ref,
@@ -161,11 +165,17 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       });
 
       if (result) {
-        setValue(result, currentFile.type, fieldIndex + nextFieldIndex);
         const remainingFiles = selectedFiles.slice(1);
+        const lastInMultiUpload = remainingFiles.length === 0;
+        setValue(
+          result,
+          currentFile.type,
+          fieldIndex + nextFieldIndex,
+          lastInMultiUpload,
+        );
         setSelectedFiles(remainingFiles);
         setIsModalOpen(false);
-        if (multi && remainingFiles.length > 0) {
+        if (multi && !lastInMultiUpload) {
           setNextFieldIndex(current => current + 1);
           toBase64(remainingFiles[0]).then(base64String => {
             if (typeof base64String === 'string') {
@@ -238,12 +248,13 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
             value={value}
             accept={accept}
             ref={ref}
+            dropZoneOption={dropZoneOption}
           />
         </FieldFormControl>
         {renderModal({
           open: isModalOpen,
           initialImage,
-          children,
+          currentIndex: fieldIndex + nextFieldIndex,
           onClose: onModalClose,
           onSubmit: onModalSubmit,
         })}

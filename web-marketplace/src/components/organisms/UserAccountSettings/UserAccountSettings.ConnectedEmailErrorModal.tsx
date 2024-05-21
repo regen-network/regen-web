@@ -1,4 +1,5 @@
-import Modal, { RegenModalProps } from 'web-components/src/components/modal';
+import { RegenModalProps } from 'web-components/src/components/modal';
+import { SadBeeModal } from 'web-components/src/components/modal/SadBeeModal/SadBeeModal';
 import { Body, Title } from 'web-components/src/components/typography';
 
 import {
@@ -13,10 +14,7 @@ interface Props extends RegenModalProps {
 
 export const ConnectedEmailErrorModal = ({ open, onClose, email }: Props) => {
   return (
-    <Modal open={open} onClose={onClose}>
-      <div className="flex justify-center">
-        <img src="/svg/sad-bee.svg" alt="sad bee" />
-      </div>
+    <SadBeeModal open={open} onClose={onClose}>
       <Title variant="h4" align="center" sx={{ my: 5 }}>
         {CONNECTED_EMAIL_ERROR_TITLE}
       </Title>
@@ -25,6 +23,6 @@ export const ConnectedEmailErrorModal = ({ open, onClose, email }: Props) => {
         <b>{email}</b>
         {CONNECTED_EMAIL_ERROR_DESCRIPTION_END}
       </Body>
-    </Modal>
+    </SadBeeModal>
   );
 };

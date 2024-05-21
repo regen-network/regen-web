@@ -62,6 +62,7 @@ const MyProjects = (): JSX.Element => {
                   variant="skeleton"
                 >
                   <ProjectCard
+                    asAdmin
                     {...getDefaultProject(!activeAccountId)}
                     {...project}
                     draft={project.offChain && !project.published}

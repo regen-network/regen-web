@@ -5,13 +5,13 @@ import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import { VIEW_PROJECT_BUTTON } from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
 import FixedFooter from 'web-components/src/components/fixed-footer';
 import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { SaveIcon } from 'web-components/src/components/icons/SaveIcon';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { useProjectEditContext } from 'pages';
-import { VIEW_PROJECT } from 'pages/ProjectFinished/ProjectFinished.constants';
 
 interface Props {
   onSave?: () => void;
@@ -74,7 +74,7 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
             }}
           >
             <EyeIcon className={styles.saveIcon} />
-            {VIEW_PROJECT}
+            {VIEW_PROJECT_BUTTON.text}
           </OutlinedButton>
         </Grid>
         <Grid item>

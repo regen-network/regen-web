@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
+import { VIEW_PROJECT_BUTTON } from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 import { CardItem } from 'web-components/src/components/modal/TxModal';
 import { Body, Label, Title } from 'web-components/src/components/typography';
@@ -17,10 +18,7 @@ import { Link } from '../../components/atoms';
 import { OnboardingFormTemplate } from '../../components/templates';
 import { getHashUrl } from '../../lib/block-explorer';
 import { useCreateProjectContext } from '../ProjectCreate';
-import {
-  PROJECT_OFFCHAIN_REMINDER,
-  VIEW_PROJECT,
-} from './ProjectFinished.constants';
+import { PROJECT_OFFCHAIN_REMINDER } from './ProjectFinished.constants';
 
 const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { deliverTxResponse } = useCreateProjectContext();
@@ -119,7 +117,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
           role="link"
           onClick={() => navigate(`/project/${currentProjectId}`)}
         >
-          {VIEW_PROJECT}
+          {VIEW_PROJECT_BUTTON.text}
         </OutlinedButton>
       </Box>
     </OnboardingFormTemplate>

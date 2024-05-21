@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
@@ -45,6 +46,7 @@ export function ProjectCardsSection({
   const soldOutProjectsIds = useAllSoldOutProjectsIds({
     sanitySoldOutProjects,
   });
+  const navigate = useNavigate();
 
   return (
     <Section
@@ -61,6 +63,7 @@ export function ProjectCardsSection({
         <CardsGridContainer cardsCount={projects.length}>
           {projects?.map(project => {
             const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
+            const href = `/project/${project.slug ?? project.id}`;
             return (
               <ProjectCard
                 key={project.id}
@@ -75,7 +78,8 @@ export function ProjectCardsSection({
                   onButtonClick && (() => onButtonClick({ project }))
                 }
                 purchaseInfo={project.purchaseInfo}
-                href={`/project/${project.slug ?? project.id}`}
+                href={href}
+                onClick={() => navigate(href)}
                 target={'_self'}
                 imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                 apiServerUrl={API_URI}
@@ -86,6 +90,7 @@ export function ProjectCardsSection({
                 creditsTooltip={getCreditsTooltip({ isSoldOut, project })}
                 program={project.program}
                 projectPrefinancing={project.projectPrefinancing}
+                offChain={project.offChain}
               />
             );
           })}

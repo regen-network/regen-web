@@ -4882,6 +4882,7 @@ export type ProfilePage = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   bannerCard?: Maybe<BannerCard>;
+  projectCardPromptRaw?: Maybe<Scalars['JSON']>;
 };
 
 export type ProfilePageFilter = {
@@ -8708,6 +8709,7 @@ export type AllProfilePageQuery = (
   { __typename?: 'RootQuery' }
   & { allProfilePage: Array<(
     { __typename?: 'ProfilePage' }
+    & Pick<ProfilePage, 'projectCardPromptRaw'>
     & { bannerCard?: Maybe<(
       { __typename?: 'BannerCard' }
       & BannerCardFieldsFragment
@@ -10823,6 +10825,7 @@ export const AllProfilePageDocument = gql`
     bannerCard {
       ...bannerCardFields
     }
+    projectCardPromptRaw
   }
 }
     ${BannerCardFieldsFragmentDoc}`;

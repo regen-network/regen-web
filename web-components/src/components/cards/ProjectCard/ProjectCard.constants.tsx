@@ -1,7 +1,6 @@
-import EyeIcon from 'src/components/icons/EyeIcon';
-
 import { ButtonType } from '../../../types/shared/buttonType';
 import CurrentCreditsIcon from '../../icons/CurrentCreditsIcon';
+import EyeIcon from '../../icons/EyeIcon';
 import { PrefinanceIcon } from '../../icons/PrefinanceIcon';
 
 export const ERROR_CARD_PRICE = 'Error fetching price';

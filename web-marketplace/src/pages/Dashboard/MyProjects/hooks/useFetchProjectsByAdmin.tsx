@@ -99,7 +99,7 @@ export const useFetchProjectByAdmin = ({
 
       return {
         offChain: true,
-        published: project?.published,
+        published: !!project?.published,
         ...normalizeProjectWithMetadata({
           offChainProject: project,
           projectMetadata: project?.metadata,

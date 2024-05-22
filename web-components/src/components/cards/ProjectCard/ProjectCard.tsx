@@ -3,6 +3,8 @@ import { SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
 
+import { BlockContent, SanityBlockContent } from 'src/components/block-content';
+
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import { cn } from '../../../utils/styles/cn';
@@ -10,7 +12,7 @@ import OutlinedButton from '../../buttons/OutlinedButton';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import { PrefinanceIcon } from '../../icons/PrefinanceIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
-import { Label } from '../../typography';
+import { Body, Label } from '../../typography';
 import { Account, User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard/MediaCard';
 import {
@@ -57,6 +59,7 @@ export interface ProjectCardProps extends MediaCardProps {
   projectPrefinancing?: ProjectPrefinancing;
   offChain?: boolean;
   asAdmin?: boolean;
+  adminPrompt?: SanityBlockContent;
 }
 
 export function ProjectCard({
@@ -86,6 +89,7 @@ export function ProjectCard({
   projectPrefinancing,
   offChain,
   asAdmin,
+  adminPrompt,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
@@ -248,7 +252,16 @@ export function ProjectCard({
                     projectPrefinancing={projectPrefinancing}
                   />
                 ) : (
-                  <div className="h-[68px]"></div>
+                  <div className="h-[68px]">
+                    {adminPrompt && (
+                      <Body
+                        size="xs"
+                        className="p-10 bg-grey-200 text-grey-500 rounded-[5px]"
+                      >
+                        <BlockContent content={adminPrompt} />
+                      </Body>
+                    )}
+                  </div>
                 )}
                 {(onButtonClick || isPrefinanceProject || offChain) && (
                   <OutlinedButton

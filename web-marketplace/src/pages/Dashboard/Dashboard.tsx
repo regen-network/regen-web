@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 
 import { Flex } from 'web-components/src/components/box';
 import { ProfileHeader } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader';
@@ -15,6 +16,7 @@ import { useAuth } from 'lib/auth/auth';
 import { getAccountUrl } from 'lib/block-explorer';
 import { isBridgeEnabled } from 'lib/ledger';
 import { getProfileLink } from 'lib/profileLink';
+import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import {
@@ -23,6 +25,7 @@ import {
 } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
 
+import { client as sanityClient } from '../../lib/clients/sanity';
 import { DashboardBannerCard } from './Dashboard.BannerCard';
 import {
   BRIDGE,
@@ -49,6 +52,9 @@ const Dashboard = (): JSX.Element => {
     showProjects,
   } = useProfileItems({});
   const location = useLocation();
+  const { data: sanityProfilePageData } = useQuery(
+    getAllProfilePageQuery({ sanityClient, enabled: !!sanityClient }),
+  );
 
   const { activeAccount } = useAuth();
 
@@ -119,7 +125,7 @@ const Dashboard = (): JSX.Element => {
 
       <Box sx={{ bgcolor: 'grey.50' }}>
         <Box sx={{ pt: 15, ...containerStyles, px: { xs: 5, sm: 10 } }}>
-          <DashboardBannerCard />
+          <DashboardBannerCard sanityProfilePageData={sanityProfilePageData} />
           <IconTabs
             aria-label="dashboard tabs"
             tabs={tabs}
@@ -134,6 +140,7 @@ const Dashboard = (): JSX.Element => {
                   isCreditClassCreator,
                   isProjectAdmin,
                   isIssuer,
+                  sanityProfilePageData,
                 }}
               />
             </Box>

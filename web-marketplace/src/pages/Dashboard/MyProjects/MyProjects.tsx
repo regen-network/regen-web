@@ -20,7 +20,8 @@ import { getDefaultProject } from './MyProjects.utils';
 const MyProjects = (): JSX.Element => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { isIssuer, isProjectAdmin } = useDashboardContext();
+  const { isIssuer, isProjectAdmin, sanityProfilePageData } =
+    useDashboardContext();
   const { track } = useTracker();
   const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
   const { wallet, loginDisabled } = useWallet();
@@ -63,6 +64,10 @@ const MyProjects = (): JSX.Element => {
                 >
                   <ProjectCard
                     asAdmin
+                    adminPrompt={
+                      sanityProfilePageData?.allProfilePage?.[0]
+                        ?.projectCardPromptRaw
+                    }
                     {...getDefaultProject(!activeAccountId)}
                     {...project}
                     draft={project.offChain && !project.published}

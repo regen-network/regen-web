@@ -1689,6 +1689,69 @@ export type CreateMethodologyStepCardSectionSorting = {
   bottomTitle?: Maybe<SortOrder>;
 };
 
+export type CreateProjectPage = Document & {
+  __typename?: 'CreateProjectPage';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  createProjectPagePopup?: Maybe<CreateProjectPagePopup>;
+};
+
+export type CreateProjectPageFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  createProjectPagePopup?: Maybe<CreateProjectPagePopupFilter>;
+};
+
+export type CreateProjectPagePopup = {
+  __typename?: 'CreateProjectPagePopup';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  guidesLinkRaw?: Maybe<Scalars['JSON']>;
+  steps?: Maybe<Array<Maybe<TitleImageCustomBody>>>;
+  buttonLabel?: Maybe<Scalars['String']>;
+};
+
+export type CreateProjectPagePopupFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  buttonLabel?: Maybe<StringFilter>;
+};
+
+export type CreateProjectPagePopupSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  buttonLabel?: Maybe<SortOrder>;
+};
+
+export type CreateProjectPageSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  createProjectPagePopup?: Maybe<CreateProjectPagePopupSorting>;
+};
+
 export type CredibilityCard = Document & {
   __typename?: 'CredibilityCard';
   /** Document ID */
@@ -5586,6 +5649,7 @@ export type RootQuery = {
   ContactPage?: Maybe<ContactPage>;
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
   CreateMethodologyPage?: Maybe<CreateMethodologyPage>;
+  CreateProjectPage?: Maybe<CreateProjectPage>;
   CreditCategory?: Maybe<CreditCategory>;
   CreditCertification?: Maybe<CreditCertification>;
   CreditClass?: Maybe<CreditClass>;
@@ -5657,6 +5721,7 @@ export type RootQuery = {
   allContactPage: Array<ContactPage>;
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
   allCreateMethodologyPage: Array<CreateMethodologyPage>;
+  allCreateProjectPage: Array<CreateProjectPage>;
   allCreditCategory: Array<CreditCategory>;
   allCreditCertification: Array<CreditCertification>;
   allCreditClass: Array<CreditClass>;
@@ -5783,6 +5848,11 @@ export type RootQueryCreateCreditClassPageArgs = {
 
 
 export type RootQueryCreateMethodologyPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryCreateProjectPageArgs = {
   id: Scalars['ID'];
 };
 
@@ -6179,6 +6249,14 @@ export type RootQueryAllCreateCreditClassPageArgs = {
 export type RootQueryAllCreateMethodologyPageArgs = {
   where?: Maybe<CreateMethodologyPageFilter>;
   sort?: Maybe<Array<CreateMethodologyPageSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllCreateProjectPageArgs = {
+  where?: Maybe<CreateProjectPageFilter>;
+  sort?: Maybe<Array<CreateProjectPageSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -8342,6 +8420,28 @@ export type AllCreateMethodologyPageQuery = (
   )> }
 );
 
+export type AllCreateProjectPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllCreateProjectPageQuery = (
+  { __typename?: 'RootQuery' }
+  & { allCreateProjectPage: Array<(
+    { __typename?: 'CreateProjectPage' }
+    & { createProjectPagePopup?: Maybe<(
+      { __typename?: 'CreateProjectPagePopup' }
+      & Pick<CreateProjectPagePopup, 'title' | 'descriptionRaw' | 'guidesLinkRaw' | 'buttonLabel'>
+      & { steps?: Maybe<Array<Maybe<(
+        { __typename?: 'TitleImageCustomBody' }
+        & Pick<TitleImageCustomBody, 'title' | 'bodyRaw'>
+        & { image?: Maybe<(
+          { __typename?: 'CustomImage' }
+          & CustomImageFieldsFragment
+        )> }
+      )>>> }
+    )> }
+  )> }
+);
+
 export type AllCreditCertificationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -10215,6 +10315,52 @@ export function useAllCreateMethodologyPageLazyQuery(baseOptions?: Apollo.LazyQu
 export type AllCreateMethodologyPageQueryHookResult = ReturnType<typeof useAllCreateMethodologyPageQuery>;
 export type AllCreateMethodologyPageLazyQueryHookResult = ReturnType<typeof useAllCreateMethodologyPageLazyQuery>;
 export type AllCreateMethodologyPageQueryResult = Apollo.QueryResult<AllCreateMethodologyPageQuery, AllCreateMethodologyPageQueryVariables>;
+export const AllCreateProjectPageDocument = gql`
+    query AllCreateProjectPage {
+  allCreateProjectPage {
+    createProjectPagePopup {
+      title
+      descriptionRaw
+      guidesLinkRaw
+      steps {
+        title
+        bodyRaw
+        image {
+          ...customImageFields
+        }
+      }
+      buttonLabel
+    }
+  }
+}
+    ${CustomImageFieldsFragmentDoc}`;
+
+/**
+ * __useAllCreateProjectPageQuery__
+ *
+ * To run a query within a React component, call `useAllCreateProjectPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllCreateProjectPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllCreateProjectPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllCreateProjectPageQuery(baseOptions?: Apollo.QueryHookOptions<AllCreateProjectPageQuery, AllCreateProjectPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllCreateProjectPageQuery, AllCreateProjectPageQueryVariables>(AllCreateProjectPageDocument, options);
+      }
+export function useAllCreateProjectPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllCreateProjectPageQuery, AllCreateProjectPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllCreateProjectPageQuery, AllCreateProjectPageQueryVariables>(AllCreateProjectPageDocument, options);
+        }
+export type AllCreateProjectPageQueryHookResult = ReturnType<typeof useAllCreateProjectPageQuery>;
+export type AllCreateProjectPageLazyQueryHookResult = ReturnType<typeof useAllCreateProjectPageLazyQuery>;
+export type AllCreateProjectPageQueryResult = Apollo.QueryResult<AllCreateProjectPageQuery, AllCreateProjectPageQueryVariables>;
 export const AllCreditCertificationDocument = gql`
     query allCreditCertification {
   allCreditCertification {

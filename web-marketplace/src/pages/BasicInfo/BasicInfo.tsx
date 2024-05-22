@@ -1,5 +1,8 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+
+import { getAllCreateProjectPageQuery } from 'lib/queries/react-query/sanity/getAllCreateProjectPageQuery/getAllCreateProjectPageQuery';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import { useProjectEditContext } from 'pages/ProjectEdit';
@@ -8,6 +11,8 @@ import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/Basi
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import { ProjectFormTemplate } from '../../components/templates/ProjectFormTemplate';
+import { client as sanityClient } from '../../lib/clients/sanity';
+import { CreateProjectPageModal } from './BasicInfo.CreateProjectPageModal';
 
 const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectId } = useParams();
@@ -32,6 +37,11 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
     [metadata],
   );
 
+  const { data: sanityCreateProjectPageData } = useQuery(
+    getAllCreateProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+  const [open, setOpen] = useState(false);
+
   return (
     <ProjectFormTemplate
       isEdit={isEdit}
@@ -41,6 +51,13 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
       loading={loading}
     >
       <BasicInfoForm onSubmit={metadataSubmit} initialValues={initialValues} />
+      {sanityCreateProjectPageData && (
+        <CreateProjectPageModal
+          sanityCreateProjectPageData={sanityCreateProjectPageData}
+          open={open}
+          onClose={() => setOpen(false)}
+        />
+      )}
     </ProjectFormTemplate>
   );
 };

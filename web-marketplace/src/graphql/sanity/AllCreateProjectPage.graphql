@@ -1,0 +1,17 @@
+query AllCreateProjectPage {
+  allCreateProjectPage {
+    createProjectPagePopup {
+      title
+      descriptionRaw
+      guidesLinkRaw
+      steps {
+        title
+        bodyRaw
+        image {
+          ...customImageFields
+        }
+      }
+      buttonLabel
+    }
+  }
+}

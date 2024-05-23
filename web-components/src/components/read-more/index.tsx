@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { Box } from '@mui/material';
 import Fade from '@mui/material/Fade';
 import { Theme } from '@mui/material/styles';
 import ReactHtmlParser from 'html-react-parser';
@@ -87,7 +88,8 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
           {texts.rest && !expanded && <Button />}
         </Body>
         <Fade in={expanded} mountOnEnter unmountOnExit>
-          <div
+          <Box
+            component={component}
             className={
               applyExpandedClass && texts.truncated.length < applyExpandedClass
                 ? classes?.expanded
@@ -101,14 +103,14 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
             )}
             {rest.map((text, i) => (
               <Body component={component} size={size} mobileSize={mobileSize}>
-                {rest && i === 0 && expanded && (
+                {sentenceBased && rest && i === 0 && expanded && (
                   <>
                     <br />
                   </>
                 )}
                 {ReactHtmlParser(text)}
                 {rest && i === rest.length - 1 && expanded && <Button />}
-                {rest && i !== rest.length - 1 && expanded && (
+                {sentenceBased && rest && i !== rest.length - 1 && expanded && (
                   <>
                     <br />
                     <br />
@@ -116,7 +118,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
                 )}
               </Body>
             ))}
-          </div>
+          </Box>
         </Fade>
       </div>
     </div>

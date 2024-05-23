@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getAllCreateProjectPageQuery } from 'lib/queries/react-query/sanity/getAllCreateProjectPageQuery/getAllCreateProjectPageQuery';
 
+import { useCreateProjectContext } from 'pages/ProjectCreate';
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { BasicInfoForm } from 'components/organisms';
@@ -37,10 +38,11 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
     [metadata],
   );
 
+  const { creditClassOnChainId } = useCreateProjectContext();
   const { data: sanityCreateProjectPageData } = useQuery(
     getAllCreateProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
   );
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(!isEdit && !creditClassOnChainId);
 
   return (
     <ProjectFormTemplate

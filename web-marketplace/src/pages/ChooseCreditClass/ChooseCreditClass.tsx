@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
+import { useAuth } from 'lib/auth/auth';
+
 import { useCreateProjectContext } from 'pages/ProjectCreate';
 import { ProjectFormAccessTemplate } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate';
 
@@ -9,7 +11,6 @@ import { ChooseCreditClassGrid } from './ChooseCreditClass.Grid';
 import { ChooseCreditClassItem } from './ChooseCreditClass.Item';
 import { CreateOffchainProjectCard } from './ChooseCreditClass.OffchainCard';
 import { useGetCreditClassItems } from './hooks/useGetCreditClassOptions';
-import { useAuth } from 'lib/auth/auth';
 
 const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
@@ -26,8 +27,8 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
     creditClassId?: string,
     creditClassOnChainId?: string,
   ) {
-    if (creditClassOnChainId) setCreditClassOnChainId(creditClassOnChainId);
-    if (creditClassId) setCreditClassId(creditClassId);
+    setCreditClassOnChainId(creditClassOnChainId);
+    setCreditClassId(creditClassId);
 
     navigate(`/project-pages/${projectId}/basic-info`);
   }

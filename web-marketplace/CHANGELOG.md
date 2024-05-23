@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/regen-network/regen-web/compare/v2.4.1...v2.5.0) (2024-05-15)
+
+### Features
+
+- get ecosystemType primarily from projectMetadata ([a05c800](https://github.com/regen-network/regen-web/commit/a05c800eb8ccd8798646a8ed52f1984b0b1cfaf5))
+
 ## [2.4.1](https://github.com/regen-network/regen-web/compare/v2.4.0...v2.4.1) (2024-05-09)
 
 ### Bug Fixes

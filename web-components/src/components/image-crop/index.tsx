@@ -1,12 +1,13 @@
 import React, { useCallback, useRef, useState } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
-import { Button, CircularProgress } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import { Theme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
 
+import { Button } from '../buttons/Button';
 import ContainedButton from '../buttons/ContainedButton';
-import { Loading } from '../loading';
+import { CancelButtonFooter } from '../organisms/CancelButtonFooter/CancelButtonFooter';
 import { getCroppedImg } from './canvas-utils';
 import { APPLY, CANCEL, UPDATE, UPLOADING } from './ImageCrop.constants';
 
@@ -26,12 +27,19 @@ export interface ImageCropProps {
 const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    [theme.breakpoints.down('tablet')]: {
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    gap: theme.spacing(12.5),
+    alignItems: 'flex-start',
     justifyContent: 'center',
   },
   cropContainer: {
     display: 'flex',
+    [theme.breakpoints.up('tablet')]: {
+      width: '50%',
+    },
   },
   controls: {
     display: 'flex',
@@ -53,10 +61,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   cancelButton: {
     color: theme.palette.grey[500],
-    textTransform: 'none',
     fontSize: theme.spacing(4),
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
+    border: 'none',
   },
 }));
 
@@ -156,34 +164,36 @@ export default function ImageCrop({
           imageStyle={{ width: '100%', maxHeight: mobileMatches ? 380 : 500 }}
         />
       </div>
-      {children}
-      <div className={classes.controls}>
-        {!isIgnoreCrop && (
-          <Button onClick={onCancel} className={classes.cancelButton}>
-            {CANCEL}
-          </Button>
-        )}
-        <ContainedButton
-          onClick={isIgnoreCrop ? onCancel : showCroppedImage}
-          className={classes.button}
-          disabled={
-            ((!completedCrop || loading) && !isIgnoreCrop) ||
-            isCropSubmitDisabled
-          }
-        >
-          {loading ? (
-            <>
-              <div className="h-20">
-                <CircularProgress size={20} color="secondary" />
-              </div>
-              <span className="ml-5">{UPLOADING}</span>
-            </>
-          ) : isIgnoreCrop ? (
-            UPDATE
-          ) : (
-            APPLY
-          )}
-        </ContainedButton>
+      <div>
+        {children}
+        <div className={classes.controls}>
+          <CancelButtonFooter
+            onCancel={onCancel}
+            onClick={isIgnoreCrop ? onCancel : showCroppedImage}
+            className={classes.button}
+            disabled={
+              ((!completedCrop || loading) && !isIgnoreCrop) ||
+              isCropSubmitDisabled
+            }
+            label={
+              <>
+                {true ? (
+                  <>
+                    <div className="h-20">
+                      <CircularProgress size={20} color="secondary" />
+                    </div>
+                    <span className="ml-5">{UPLOADING}</span>
+                  </>
+                ) : isIgnoreCrop ? (
+                  UPDATE
+                ) : (
+                  APPLY
+                )}
+              </>
+            }
+            hideCancel={isIgnoreCrop}
+          />
+        </div>
       </div>
     </div>
   );

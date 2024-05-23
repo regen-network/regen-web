@@ -46,7 +46,7 @@ export const ConnectWalletFlow = ({
     setSignature,
   });
 
-  const mergeAccounts = useMergeAccounts({ signature });
+  const mergeAccounts = useMergeAccounts({ signature, setError });
 
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;

@@ -88,7 +88,7 @@ export const SelectAccountModal = ({
             account => account.id === selectedAccountId,
           );
           if (selectedAccount) {
-            merge({ keepCurrentAccout: selectedAccount.current });
+            merge({ keepCurrentAccount: selectedAccount.current });
           }
         }}
       />

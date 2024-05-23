@@ -1,4 +1,3 @@
-import { AccountSwitchModalProps } from 'components/organisms/AccountSwitchModal/AccountSwitchModal';
 import { atomWithImmer } from 'jotai-immer';
 
 import { RegenModalProps } from 'web-components/src/components/modal';
@@ -8,6 +7,8 @@ import { ProcessingModalProps } from 'web-components/src/components/modal/Proces
 import { TxErrorModalProps } from 'web-components/src/components/modal/TxErrorModal';
 import { Item } from 'web-components/src/components/modal/TxModal';
 import { TxSuccessfulModalProps } from 'web-components/src/components/modal/TxSuccessfulModal';
+
+import { AccountSwitchModalProps } from 'components/organisms/AccountSwitchModal/AccountSwitchModal';
 
 export const errorModalAtom = atomWithImmer({
   title: '',

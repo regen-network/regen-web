@@ -10,6 +10,7 @@ import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { SaveIcon } from 'web-components/src/components/icons/SaveIcon';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
+import { useProjectEditContext } from 'pages';
 import { VIEW_PROJECT } from 'pages/ProjectFinished/ProjectFinished.constants';
 
 interface Props {
@@ -55,6 +56,7 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
   const { classes: styles } = useStyles();
   const { projectId } = useParams();
   const navigate = useNavigate();
+  const { isDirtyRef, setIsWarningModalOpen } = useProjectEditContext();
 
   return (
     <FixedFooter>
@@ -62,7 +64,14 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
         <Grid item>
           <OutlinedButton
             className={styles.btn}
-            onClick={() => navigate(`/project/${projectId}`)}
+            onClick={() => {
+              const path = `/project/${projectId}`;
+              if (isDirtyRef.current) {
+                setIsWarningModalOpen(path);
+              } else {
+                navigate(path);
+              }
+            }}
           >
             <EyeIcon className={styles.saveIcon} />
             {VIEW_PROJECT}

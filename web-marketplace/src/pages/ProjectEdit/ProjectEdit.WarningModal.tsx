@@ -1,4 +1,5 @@
-import Modal, { RegenModalProps } from 'web-components/src/components/modal';
+import { RegenModalProps } from 'web-components/src/components/modal';
+import { SadBeeModal } from 'web-components/src/components/modal/SadBeeModal/SadBeeModal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Body, Title } from 'web-components/src/components/typography';
 
@@ -8,25 +9,22 @@ interface Props extends RegenModalProps {
 
 export const WarningModal = ({ open, onClose, navigate }: Props) => {
   return (
-    <Modal open={open} onClose={onClose}>
-      <div className="flex justify-center">
-        <img src="/svg/sad-bee.svg" alt="sad bee" />
-      </div>
+    <SadBeeModal open={open} onClose={onClose}>
       <Title variant="h4" align="center" sx={{ my: 5 }}>
         Are you sure you want to discard your changes?
       </Title>
       <Body size="lg" align="center" sx={{ mb: 12.5 }}>
-        If you proceed, you will lose all the changes you made. This cannot be
-        undone.
+        If you proceed, you will lose all unsaved changes you made. This cannot
+        be undone.
       </Body>
       <CancelButtonFooter
-        label="yes, delete"
+        label="yes, discard"
         onCancel={onClose}
         onClick={() => {
           navigate();
           onClose();
         }}
       />
-    </Modal>
+    </SadBeeModal>
   );
 };

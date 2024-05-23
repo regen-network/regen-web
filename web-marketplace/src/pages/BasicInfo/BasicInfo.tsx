@@ -42,7 +42,9 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { data: sanityCreateProjectPageData } = useQuery(
     getAllCreateProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
   );
-  const [open, setOpen] = useState(!isEdit && !creditClassOnChainId);
+  const [open, setOpen] = useState(
+    !isEdit && !creditClassOnChainId && !!sanityCreateProjectPageData,
+  );
 
   return (
     <ProjectFormTemplate

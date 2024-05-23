@@ -8,10 +8,10 @@ import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery.utils';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
-import { useSignArbitrary } from 'lib/wallet/hooks/useSignArbitrary';
-import { useWallet } from 'lib/wallet/wallet';
 import { AccountEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
+import { useSignArbitrary } from 'lib/wallet/hooks/useSignArbitrary';
+import { useWallet } from 'lib/wallet/wallet';
 
 type Params = {
   isConnectModalOpened?: boolean;
@@ -90,14 +90,17 @@ export const useConnectWalletToAccount = ({
     token,
     walletConfig,
     activeAccount?.nonce,
+    activeAccount?.id,
     activeAccountId,
     retryCsrfRequest,
+    track,
     reactQueryClient,
     setError,
   ]);
 
   // Step 5: trigger connect wallet callback whenever wallet address is available and action modal is opened
   const shouldConnectAccount =
+    !!activeAccountId &&
     !loading &&
     !hasKeplrAccount &&
     wallet?.address &&

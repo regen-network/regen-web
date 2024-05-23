@@ -75,6 +75,7 @@ export const MediaForm = ({
           };
           // Submit
           await submit({
+            offChainProjectId,
             values: filteredData,
             shouldNavigate: false,
           });

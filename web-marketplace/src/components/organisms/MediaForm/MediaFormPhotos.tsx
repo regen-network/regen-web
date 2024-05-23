@@ -89,8 +89,9 @@ export const MediaFormPhotos = ({
     value: string,
     _: string,
     fieldIndex: number,
+    lastInMultiUpload: boolean,
   ): void => {
-    if (galleryPhotos?.[fieldIndex]?.['schema:url'] === DEFAULT) {
+    if (lastInMultiUpload) {
       append({
         'schema:url': DEFAULT,
         'schema:caption': '',
@@ -153,18 +154,11 @@ export const MediaFormPhotos = ({
         setValue={setPreviewPhoto}
         onUpload={handleUpload}
         onDelete={handleDelete}
-        dropZoneOption={{ maxFiles: 1 }}
+        dropZoneOption={{ multiple: false }}
         error={!!errors['regen:previewPhoto']}
         helperText={errors['regen:previewPhoto']?.message}
         accept="image/*"
-        renderModal={({
-          initialImage,
-          open,
-          value,
-          children,
-          onClose,
-          onSubmit,
-        }) => (
+        renderModal={({ initialImage, open, value, onClose, onSubmit }) => (
           <CropImageModal
             open={open}
             onClose={onClose}
@@ -173,24 +167,22 @@ export const MediaFormPhotos = ({
             fixedCrop={cropAspectMediaForm}
             isIgnoreCrop={!!value}
           >
-            {children}
+            <TextField
+              type="text"
+              label="Photo credit"
+              {...register('regen:previewPhoto.schema:creditText')}
+              helperText={
+                errors['regen:previewPhoto']?.['schema:creditText']?.message
+              }
+              error={!!errors['regen:previewPhoto']?.['schema:creditText']}
+              optional
+            />
           </CropImageModal>
         )}
         optional
         {...imageDropCommonProps}
         {...register('regen:previewPhoto.schema:url')}
-      >
-        <TextField
-          type="text"
-          label="Photo credit"
-          {...register('regen:previewPhoto.schema:creditText')}
-          helperText={
-            errors['regen:previewPhoto']?.['schema:creditText']?.message
-          }
-          error={!!errors['regen:previewPhoto']?.['schema:creditText']}
-          optional
-        />
-      </FileDrop>
+      />
 
       <ReorderFields
         label={GALLERY_PHOTOS}
@@ -226,7 +218,7 @@ export const MediaFormPhotos = ({
                 fieldErrorMessage ?? errors['regen:galleryPhotos']?.message
               }
               fieldIndex={index}
-              dropZoneOption={{ maxFiles: 1 }}
+              dropZoneOption={{ multiple: true }}
               className={classes.galleryItem}
               defaultStyle={isFirst ? true : false}
               accept="image/*"
@@ -235,7 +227,7 @@ export const MediaFormPhotos = ({
                 initialImage,
                 open,
                 value,
-                children,
+                currentIndex,
                 onClose,
                 onSubmit,
               }) => (
@@ -248,50 +240,56 @@ export const MediaFormPhotos = ({
                   isCropSubmitDisabled={hasFieldError}
                   isIgnoreCrop={!!value}
                 >
-                  {children}
+                  <TextAreaField
+                    type="text"
+                    label="Caption"
+                    rows={3}
+                    minRows={3}
+                    multiline
+                    optional
+                    helperText={
+                      errors['regen:galleryPhotos']?.[currentIndex]?.[
+                        'schema:caption'
+                      ]?.message
+                    }
+                    error={
+                      !!errors['regen:galleryPhotos']?.[currentIndex]?.[
+                        'schema:caption'
+                      ]
+                    }
+                    {...register(
+                      `regen:galleryPhotos.${currentIndex}.schema:caption`,
+                    )}
+                  >
+                    <TextAreaFieldChartCounter
+                      value={galleryPhotos?.[currentIndex]?.['schema:caption']}
+                      charLimit={CAPTION_CHART_LIMIT}
+                    />
+                  </TextAreaField>
+                  <TextField
+                    type="text"
+                    label="Photo credit"
+                    helperText={
+                      errors['regen:galleryPhotos']?.[currentIndex]?.[
+                        'schema:creditText'
+                      ]?.message
+                    }
+                    error={
+                      !!errors['regen:galleryPhotos']?.[currentIndex]?.[
+                        'schema:creditText'
+                      ]
+                    }
+                    optional
+                    {...register(
+                      `regen:galleryPhotos.${currentIndex}.schema:creditText`,
+                    )}
+                  />
                 </CropImageModal>
               )}
               optional
               {...register(`regen:galleryPhotos.${index}.schema:url`)}
               {...imageDropCommonProps}
-            >
-              <TextAreaField
-                type="text"
-                label="Caption"
-                rows={3}
-                minRows={3}
-                multiline
-                optional
-                helperText={
-                  errors['regen:galleryPhotos']?.[index]?.['schema:caption']
-                    ?.message
-                }
-                error={
-                  !!errors['regen:galleryPhotos']?.[index]?.['schema:caption']
-                }
-                {...register(`regen:galleryPhotos.${index}.schema:caption`)}
-              >
-                <TextAreaFieldChartCounter
-                  value={galleryPhotos?.[index]?.['schema:caption']}
-                  charLimit={CAPTION_CHART_LIMIT}
-                />
-              </TextAreaField>
-              <TextField
-                type="text"
-                label="Photo credit"
-                helperText={
-                  errors['regen:galleryPhotos']?.[index]?.['schema:creditText']
-                    ?.message
-                }
-                error={
-                  !!errors['regen:galleryPhotos']?.[index]?.[
-                    'schema:creditText'
-                  ]
-                }
-                optional
-                {...register(`regen:galleryPhotos.${index}.schema:creditText`)}
-              />
-            </FileDrop>
+            />
           );
         }}
       />

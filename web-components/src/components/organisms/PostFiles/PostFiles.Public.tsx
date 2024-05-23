@@ -103,6 +103,17 @@ const PostFilesPublic = ({
     }
   };
 
+  useEffect(() => {
+    if (selectedLocation)
+      mapRef.current?.easeTo({
+        center: [
+          selectedLocation.coordinates[0],
+          selectedLocation.coordinates[1],
+        ],
+        duration: 1000,
+      });
+  }, [selectedLocation]);
+
   return (
     <div className={cn(styles.map, 'h-[600px]')}>
       <Suspense fallback={<CircularProgress color="secondary" />}>

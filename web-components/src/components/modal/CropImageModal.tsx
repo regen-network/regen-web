@@ -29,6 +29,9 @@ const useStyles = makeStyles()((theme: Theme) => ({
       paddingY: 0,
       paddingX: 2.5,
     },
+    [theme.breakpoints.between('xs', 'tablet')]: {
+      maxHeight: '100%',
+    },
   },
   root: {
     display: 'flex',

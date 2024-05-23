@@ -35,10 +35,12 @@ const useStyles = makeStyles()((theme: Theme) => ({
     alignItems: 'flex-start',
     justifyContent: 'center',
   },
-  cropContainer: {
-    display: 'flex',
+  container: {
     [theme.breakpoints.up('tablet')]: {
       width: '50%',
+    },
+    [theme.breakpoints.down('tablet')]: {
+      width: '100%',
     },
   },
   controls: {
@@ -47,7 +49,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     justifyContent: 'flex-end',
     height: 80,
     width: '100%',
-    padding: theme.spacing(6),
+    // padding: theme.spacing(6),
     marginTop: theme.spacing(10),
     [theme.breakpoints.up('sm')]: {
       paddingRight: 0,
@@ -151,50 +153,52 @@ export default function ImageCrop({
   );
 
   return (
-    <div className={classes.root}>
-      <div className={classes.cropContainer}>
-        <ReactCrop
-          src={image}
-          crop={crop}
-          onImageLoaded={onLoad}
-          onChange={setCrop}
-          onComplete={setCompletedCrop}
-          circularCrop={circularCrop}
-          crossorigin="anonymous"
-          imageStyle={{ width: '100%', maxHeight: mobileMatches ? 380 : 500 }}
-        />
-      </div>
-      <div>
-        {children}
-        <div className={classes.controls}>
-          <CancelButtonFooter
-            onCancel={onCancel}
-            onClick={isIgnoreCrop ? onCancel : showCroppedImage}
-            className={classes.button}
-            disabled={
-              ((!completedCrop || loading) && !isIgnoreCrop) ||
-              isCropSubmitDisabled
-            }
-            label={
-              <>
-                {true ? (
-                  <>
-                    <div className="h-20">
-                      <CircularProgress size={20} color="secondary" />
-                    </div>
-                    <span className="ml-5">{UPLOADING}</span>
-                  </>
-                ) : isIgnoreCrop ? (
-                  UPDATE
-                ) : (
-                  APPLY
-                )}
-              </>
-            }
-            hideCancel={isIgnoreCrop}
+    <>
+      <div className={classes.root}>
+        <div className={classes.container}>
+          <ReactCrop
+            src={image}
+            crop={crop}
+            onImageLoaded={onLoad}
+            onChange={setCrop}
+            onComplete={setCompletedCrop}
+            circularCrop={circularCrop}
+            crossorigin="anonymous"
+            imageStyle={{ width: '100%', maxHeight: mobileMatches ? 380 : 500 }}
           />
         </div>
+        <div className={classes.container}>
+          {children}
+          <div className={classes.controls}>
+            <CancelButtonFooter
+              onCancel={onCancel}
+              onClick={isIgnoreCrop ? onCancel : showCroppedImage}
+              className={classes.button}
+              disabled={
+                ((!completedCrop || loading) && !isIgnoreCrop) ||
+                isCropSubmitDisabled
+              }
+              label={
+                <>
+                  {loading ? (
+                    <>
+                      <div className="h-20">
+                        <CircularProgress size={20} color="secondary" />
+                      </div>
+                      <span className="ml-5">{UPLOADING}</span>
+                    </>
+                  ) : isIgnoreCrop ? (
+                    UPDATE
+                  ) : (
+                    APPLY
+                  )}
+                </>
+              }
+              hideCancel={isIgnoreCrop || loading}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

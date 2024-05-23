@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.1](https://github.com/regen-network/regen-web/compare/v2.5.0...v2.5.1) (2024-05-23)
+
+### Bug Fixes
+
+- APP-167 use atomscan as block explorer ([#2373](https://github.com/regen-network/regen-web/issues/2373)) ([44300ea](https://github.com/regen-network/regen-web/commit/44300ea2b60fc3f21aa68cf7919f674c4fb50142))
+
 # [2.5.0](https://github.com/regen-network/regen-web/compare/v2.4.1...v2.5.0) (2024-05-15)
 
 ### Features

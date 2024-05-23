@@ -23,12 +23,12 @@ const MyProjects = (): JSX.Element => {
   const { isIssuer, isProjectAdmin } = useDashboardContext();
   const { track } = useTracker();
   const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
-  const { wallet } = useWallet();
+  const { wallet, loginDisabled } = useWallet();
   const { activeAccountId, activeAccount } = useAuth();
 
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
     adminAccountId: activeAccountId,
-    adminAddress: activeAccount?.addr ?? wallet?.address,
+    adminAddress: loginDisabled ? wallet?.address : activeAccount?.addr,
     keepUnpublished: true,
   });
 

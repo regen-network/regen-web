@@ -1,9 +1,11 @@
 import { ButtonType } from '../../../types/shared/buttonType';
 import CurrentCreditsIcon from '../../icons/CurrentCreditsIcon';
+import EyeIcon from '../../icons/EyeIcon';
 import { PrefinanceIcon } from '../../icons/PrefinanceIcon';
 
 export const ERROR_CARD_PRICE = 'Error fetching price';
 export const SOLD_OUT = 'Sold Out';
+
 export const DEFAULT_BUY_BUTTON: ButtonType = {
   text: 'Buy ecocredits',
   startIcon: <CurrentCreditsIcon height="24px" width="24px" />,
@@ -25,3 +27,8 @@ export const PREFINANCE_PRICE_TOOLTIP =
   'Price of credits for prefinance projects have specific terms, please click on the project to learn more.';
 export const ESTIMATED_ISSUANCE_TOOLTIP =
   'Actual number of credits issued may be different from the estimated issuance.';
+
+export const VIEW_PROJECT_BUTTON: ButtonType = {
+  text: 'view project',
+  startIcon: <EyeIcon className="h-[24px] w-[24px]" />,
+};

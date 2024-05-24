@@ -6,11 +6,12 @@ import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import { cn } from '../../../utils/styles/cn';
+import { BlockContent, SanityBlockContent } from '../../block-content';
 import OutlinedButton from '../../buttons/OutlinedButton';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import { PrefinanceIcon } from '../../icons/PrefinanceIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
-import { Label } from '../../typography';
+import { Body, Label } from '../../typography';
 import { Account, User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard/MediaCard';
 import {
@@ -19,6 +20,7 @@ import {
   PREFINANCE,
   PREFINANCE_BUTTON,
   PREFINANCE_PRICE_TOOLTIP,
+  VIEW_PROJECT_BUTTON,
 } from './ProjectCard.constants';
 import { CreditPrice } from './ProjectCard.CreditPrice';
 import { ProgramImageChildren } from './ProjectCard.ImageChildren';
@@ -54,6 +56,9 @@ export interface ProjectCardProps extends MediaCardProps {
   program?: Account;
   button?: ButtonType;
   projectPrefinancing?: ProjectPrefinancing;
+  offChain?: boolean;
+  asAdmin?: boolean;
+  adminPrompt?: SanityBlockContent;
 }
 
 export function ProjectCard({
@@ -81,6 +86,9 @@ export function ProjectCard({
   program,
   button,
   projectPrefinancing,
+  offChain,
+  asAdmin,
+  adminPrompt,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
@@ -88,7 +96,12 @@ export function ProjectCard({
 
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
   const cardButton =
-    button ?? (isPrefinanceProject ? PREFINANCE_BUTTON : DEFAULT_BUY_BUTTON);
+    button ??
+    (isPrefinanceProject
+      ? PREFINANCE_BUTTON
+      : offChain
+      ? VIEW_PROJECT_BUTTON
+      : DEFAULT_BUY_BUTTON);
   const {
     text: buttonText,
     startIcon: buttonStartIcon,
@@ -98,7 +111,8 @@ export function ProjectCard({
     cardButton?.disabled !== undefined
       ? cardButton?.disabled
       : !purchaseInfo?.sellInfo?.creditsAvailableForUser &&
-        !projectPrefinancing?.isPrefinanceProject;
+        !projectPrefinancing?.isPrefinanceProject &&
+        !offChain;
   const hasButton = !!onButtonClick;
 
   const [open, setOpen] = useState<boolean>(true);
@@ -156,7 +170,7 @@ export function ProjectCard({
           <span className={classes.comingSoonText}>coming soon</span>
         </div>
       )}
-      {(purchaseInfo || isPrefinanceProject) && (
+      {(purchaseInfo || isPrefinanceProject || offChain) && (
         <div className={classes.separator} />
       )}
       {(purchaseInfo || hasButton || isPrefinanceProject) && (
@@ -223,33 +237,56 @@ export function ProjectCard({
                 />
               )}
               <>
-                <CreditPrice
-                  priceTooltip={
-                    isPrefinanceProject
-                      ? PREFINANCE_PRICE_TOOLTIP
-                      : AVG_PRICE_TOOLTIP
-                  }
-                  creditsTooltip={creditsTooltip}
-                  isSoldOut={isSoldOut}
-                  purchaseInfo={purchaseInfo}
-                  sx={{ mb: 5 }}
-                  projectPrefinancing={projectPrefinancing}
-                />
-                {onButtonClick && (
+                {!offChain || projectPrefinancing?.isPrefinanceProject ? (
+                  <CreditPrice
+                    priceTooltip={
+                      isPrefinanceProject
+                        ? PREFINANCE_PRICE_TOOLTIP
+                        : AVG_PRICE_TOOLTIP
+                    }
+                    creditsTooltip={creditsTooltip}
+                    isSoldOut={isSoldOut}
+                    purchaseInfo={purchaseInfo}
+                    sx={{ mb: 5 }}
+                    projectPrefinancing={projectPrefinancing}
+                  />
+                ) : (
+                  <div className="h-[68px]">
+                    {adminPrompt && (
+                      <Body
+                        size="xs"
+                        className="p-10 bg-grey-200 text-grey-500 rounded-[5px]"
+                      >
+                        <BlockContent content={adminPrompt} />
+                      </Body>
+                    )}
+                  </div>
+                )}
+                {(onButtonClick || isPrefinanceProject || offChain) && (
                   <OutlinedButton
                     onClick={event => {
                       event.stopPropagation();
-                      track &&
-                        !isPrefinanceProject &&
-                        track<Buy1Event>('buy1', {
-                          url: pathname ?? '',
-                          cardType: 'project',
-                          buttonLocation: 'projectCard',
-                          projectName: name,
-                          projectId: id,
-                          creditClassId,
-                        });
-                      onButtonClick && onButtonClick();
+                      if (asAdmin) {
+                        onButtonClick && onButtonClick();
+                      } else if (isPrefinanceProject) {
+                        window.open(
+                          projectPrefinancing?.stripePaymentLink,
+                          '_newtab',
+                        );
+                      } else if (offChain) {
+                        onClick && onClick();
+                      } else {
+                        track &&
+                          track<Buy1Event>('buy1', {
+                            url: pathname ?? '',
+                            cardType: 'project',
+                            buttonLocation: 'projectCard',
+                            projectName: name,
+                            projectId: id,
+                            creditClassId,
+                          });
+                        onButtonClick && onButtonClick();
+                      }
                     }}
                     size="small"
                     startIcon={buttonStartIcon}

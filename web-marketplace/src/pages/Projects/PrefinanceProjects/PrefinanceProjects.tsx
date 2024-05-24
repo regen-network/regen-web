@@ -63,12 +63,6 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
                 place={project?.place}
                 area={project?.area}
                 areaUnit={project?.areaUnit}
-                onButtonClick={() => {
-                  window.open(
-                    project.projectPrefinancing?.stripePaymentLink,
-                    '_newtab',
-                  );
-                }}
                 purchaseInfo={project.purchaseInfo || {}}
                 onClick={() =>
                   navigate(
@@ -82,6 +76,7 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
                 track={track}
                 program={project.program}
                 projectPrefinancing={project.projectPrefinancing}
+                offChain={project.offChain}
               />
             </div>
           );

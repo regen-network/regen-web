@@ -3,5 +3,6 @@ query AllProfilePage {
     bannerCard {
       ...bannerCardFields
     }
+    projectCardPromptRaw
   }
 }

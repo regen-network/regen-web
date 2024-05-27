@@ -35,7 +35,7 @@ const PostFiles = ({
     <div
       className={cn(
         'w-[100%]',
-        (isPublic || privateLocations || isAdmin) && 'md:h-[550px]',
+        (isPublic || privateLocations || isAdmin) && 'lg:h-[550px]',
       )}
     >
       {(isPublic || isAdmin) && (

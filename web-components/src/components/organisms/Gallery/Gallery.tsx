@@ -143,7 +143,7 @@ const Gallery = ({ items, sx, allImages, className, pdfPageHeight }: Props) => {
                   </Document>
                 </Suspense>
               ) : (
-                <div className="md:h-[550px] bg-grey-300 flex items-center justify-center h-[100%] text-grey-400">
+                <div className="lg:h-[550px] bg-grey-300 flex items-center justify-center h-[100%] text-grey-400">
                   {isAudio(item?.mimeType) ? (
                     <AudioFileIcon width="100" height="100" />
                   ) : isSpreadSheet(item?.mimeType) ? (

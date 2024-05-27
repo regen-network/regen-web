@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Box, ButtonBase, useTheme } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { containerPaddingX, containerStyles } from '../../../styles/container';
 import { UseStateSetter } from '../../../types/react/useState';
@@ -34,6 +35,8 @@ export const GalleryBottomBar = ({
   const hasCredit = credit !== undefined && credit !== '';
   const image = isImage(mimeType);
   const video = isVideo(mimeType);
+  const ref = useRef<HTMLParagraphElement | null>(null);
+  const desktop = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <Box
@@ -99,31 +102,36 @@ export const GalleryBottomBar = ({
         )}
         {(hasDescription || hasCredit) && (
           <Body
+            ref={ref}
             size="sm"
             mobileSize="sm"
             sx={[
               {
                 color: 'primary.main',
                 maxWidth: 890,
-                width: '100%',
-                minHeight: { xs: 42, md: 54 },
                 cursor: 'pointer',
               },
-              !isShowMore && {
-                height: { xs: 42, md: 54 },
-                background:
-                  'linear-gradient(180deg, #FFFFFF 26.04%, rgba(255, 255, 255, 0) 100%);',
-                backgroundClip: 'text',
-                textFillColor: 'transparent',
-              },
+              !isShowMore &&
+                !!ref.current?.clientHeight &&
+                ref.current.clientHeight > (desktop ? 54 : 42) && {
+                  background:
+                    'linear-gradient(180deg, #FFFFFF 26.04%, rgba(255, 255, 255, 0) 100%);',
+                  backgroundClip: 'text',
+                  textFillColor: 'transparent',
+                },
             ]}
             onClick={() => setIsShowMore(isShowMore => !isShowMore)}
           >
             {description && (
-              <Box sx={{ display: 'inline-block', mr: 0.5 }}>{description}</Box>
+              <Box component="span" sx={{ display: 'inline-block', mr: 0.5 }}>
+                {description}
+              </Box>
             )}
             {credit && (
-              <Box sx={{ display: 'inline-block', fontWeight: 300 }}>
+              <Box
+                component="span"
+                sx={{ display: 'inline-block', fontWeight: 300 }}
+              >
                 Photo credit: {credit}
               </Box>
             )}

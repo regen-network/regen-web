@@ -67,7 +67,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
         '&:before': {
           content: '""',
           display: 'inline-block',
-          width: 4,
+          width: sentenceBased ? 4 : 0,
         },
       }}
       onClick={() => setExpanded(!expanded)}

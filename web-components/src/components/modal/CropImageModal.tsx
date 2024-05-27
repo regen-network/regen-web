@@ -21,12 +21,16 @@ export interface CropImageModalProps {
 
 const useStyles = makeStyles()((theme: Theme) => ({
   modal: {
-    [theme.breakpoints.up('md')]: {
-      height: '70%',
+    [theme.breakpoints.up('tablet')]: {
+      width: '909px',
+      maxWidth: '909px',
     },
     [theme.breakpoints.down('sm')]: {
       paddingY: 0,
       paddingX: 2.5,
+    },
+    [theme.breakpoints.between('xs', 'tablet')]: {
+      maxHeight: '100%',
     },
   },
   root: {

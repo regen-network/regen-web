@@ -6,7 +6,7 @@ import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 import PhoneIcon from 'web-components/src/components/icons/PhoneIcon';
 import StaticMap from 'web-components/src/components/map/StaticMap';
 import { Props as ActionCardProps } from 'web-components/src/components/molecules/ActionCard/ActionCard';
-import { GalleryPhoto } from 'web-components/src/components/organisms/Gallery/Gallery.types';
+import { GalleryItem } from 'web-components/src/components/organisms/Gallery/Gallery.types';
 import { Asset } from 'web-components/src/components/sliders/ProjectMedia';
 import { Account } from 'web-components/src/components/user/UserInfo';
 
@@ -161,13 +161,13 @@ type GetProjectGalleryPhotosProps = {
 export const getProjectGalleryPhotos = ({
   offChainProjectMetadata,
 }: GetProjectGalleryPhotosProps) => {
-  const photos: GalleryPhoto[] =
+  const photos: GalleryItem[] =
     offChainProjectMetadata?.['regen:galleryPhotos']?.map(photo => ({
-      href: getResizedImageUrl({
+      url: getResizedImageUrl({
         url: photo['schema:url'],
         width: 1400,
       }),
-      caption: photo['schema:caption'],
+      description: photo['schema:caption'],
       credit: photo['schema:creditText'],
     })) ?? [];
 

@@ -193,6 +193,7 @@ const CreditClassDetailsSimple: React.FC<
             </Box>
             {metadata?.['schema:description'] && (
               <ReadMore
+                mobileSize="md"
                 classes={{
                   root: styles.marginBottom,
                   textContainer: styles.textContainer,

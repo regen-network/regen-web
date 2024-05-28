@@ -4,22 +4,27 @@ import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Box, IconButton, Popover, useTheme } from '@mui/material';
 import { Feature } from 'geojson';
 
+import { PlayButton } from '../../../../components/atoms/PlayButton/PlayButton';
 import { cn } from '../../../../utils/styles/cn';
-import { useArticleCardStyles } from '../../../cards/ArticleCard';
 import ArrowDownIcon from '../../../icons/ArrowDownIcon';
 import { AudioFileIcon } from '../../../icons/AudioFileIcon';
 import { DragIcon } from '../../../icons/DragIcon';
 import EditIcon from '../../../icons/EditIcon';
 import { OtherDocumentsIcon } from '../../../icons/OtherDocumentsIcon';
 import { PdfFileIcon } from '../../../icons/PdfFileIcon';
-import PlayIcon from '../../../icons/PlayIcon';
 import { SpreadsheetFileIcon } from '../../../icons/SpreadsheetFileIcon';
 import TrashIcon from '../../../icons/TrashIcon';
 import { Image } from '../../../image';
 import { Body } from '../../../typography/Body';
 import { FileDropBottomBar } from './FileDrop.BottomBar';
 import { useFileDropStyles } from './FileDrop.styles';
-import { isAudio, isImage, isVideo } from './FileDrop.utils';
+import {
+  isAudio,
+  isImage,
+  isPdf,
+  isSpreadSheet,
+  isVideo,
+} from './FileDrop.utils';
 
 type Props = {
   value: string;
@@ -55,7 +60,6 @@ export const FileDropFile = ({
   moveDown,
 }: Props) => {
   const { classes: styles, cx } = useFileDropStyles();
-  const { classes: articleCardStyles } = useArticleCardStyles();
   const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = useState<SVGSVGElement | null>(null);
@@ -88,20 +92,15 @@ export const FileDropFile = ({
               'absolute top-0 left-0 bg-grey-700 rounded-[5px] overflow-hidden',
             )}
           />
-          <div className={articleCardStyles.play}>
-            <PlayIcon
-              width={theme.spacing(8.75)}
-              height={theme.spacing(8.75)}
-            />
-          </div>
+          <PlayButton />
         </>
       ) : (
         <div className="bg-grey-300 text-grey-400 h-[100%] flex justify-center items-center">
           {isAudio(mimeType) ? (
             <AudioFileIcon />
-          ) : mimeType === 'application/pdf' ? (
+          ) : isPdf(mimeType) ? (
             <PdfFileIcon />
-          ) : mimeType === 'text/csv' ? (
+          ) : isSpreadSheet(mimeType) ? (
             <SpreadsheetFileIcon />
           ) : (
             <OtherDocumentsIcon />

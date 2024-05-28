@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { Box } from '@mui/material';
 import Fade from '@mui/material/Fade';
 import { Theme } from '@mui/material/styles';
 import ReactHtmlParser from 'html-react-parser';
@@ -6,6 +7,7 @@ import { makeStyles } from 'tss-react/mui';
 
 import { ExpandButton } from '../buttons/ExpandButton';
 import { Body } from '../typography';
+import { TextSize } from '../typography/sizing';
 import { Texts, truncate } from './truncate';
 
 export interface ReadMoreProps {
@@ -16,9 +18,15 @@ export interface ReadMoreProps {
     root?: string;
     textContainer?: string;
     description?: string;
+    button?: string;
     expanded?: string;
   };
   applyExpandedClass?: number;
+  sentenceBased?: boolean;
+  size?: TextSize;
+  mobileSize?: TextSize;
+  component?: React.ElementType<any>;
+  buttonClassName?: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -29,29 +37,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
   textContainer: {
     paddingTop: theme.spacing(4),
   },
-  buttonContainer: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  button: {
-    border: 'none',
-    marginLeft: theme.spacing(4),
-  },
-  buttonLabel: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(14),
-    },
-  },
-  text: {
-    '&:after': {
-      content: '""',
-      display: 'inline-block',
-      width: theme.spacing(1),
-    },
-  },
 }));
 
 const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
@@ -60,13 +45,31 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
   children,
   classes,
   applyExpandedClass,
+  size = 'xl',
+  mobileSize,
+  sentenceBased = true,
+  component = 'p',
 }) => {
   const { classes: styles, cx } = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const texts: Texts = truncate(children, maxLength, restMinLength);
+  const texts: Texts = truncate(
+    children,
+    maxLength,
+    restMinLength,
+    sentenceBased,
+  );
   const Button: React.FC<React.PropsWithChildren<unknown>> = () => (
     <ExpandButton
-      sx={{ p: [0, 0] }}
+      className={classes?.button}
+      sx={{
+        p: [0, 0],
+        background: 'transparent',
+        '&:before': {
+          content: '""',
+          display: 'inline-block',
+          width: sentenceBased ? 4 : 0,
+        },
+      }}
       onClick={() => setExpanded(!expanded)}
       expanded={expanded}
     />
@@ -79,36 +82,35 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
   return (
     <div className={cx(styles.root, classes?.root)}>
       <div className={cx(styles.textContainer, classes?.textContainer)}>
-        <Body size="xl" mobileSize="md">
-          <span className={styles.text}>
-            {ReactHtmlParser(texts.truncated)}
-          </span>
+        <Body component={component} size={size} mobileSize={mobileSize}>
+          {ReactHtmlParser(texts.truncated)}
+          {texts.rest && !expanded && !sentenceBased && '...'}
           {texts.rest && !expanded && <Button />}
         </Body>
         <Fade in={expanded} mountOnEnter unmountOnExit>
-          {/* https://mui.com/guides/migration-v4/#cannot-read-property-scrolltop-of-null */}
-          <div
+          <Box
+            component={component}
             className={
               applyExpandedClass && texts.truncated.length < applyExpandedClass
                 ? classes?.expanded
                 : ''
             }
           >
-            {!texts.rest.startsWith('\n') && (
-              <Body size="xl" mobileSize="md">
+            {sentenceBased && !texts.rest.startsWith('\n') && (
+              <Body component={component} size={size} mobileSize={mobileSize}>
                 {'\n'}
               </Body>
             )}
             {rest.map((text, i) => (
-              <Body size="xl" mobileSize="md">
-                {rest && i === 0 && expanded && (
+              <Body component={component} size={size} mobileSize={mobileSize}>
+                {sentenceBased && rest && i === 0 && expanded && (
                   <>
                     <br />
                   </>
                 )}
-                <span className={styles.text}>{ReactHtmlParser(text)}</span>
+                {ReactHtmlParser(text)}
                 {rest && i === rest.length - 1 && expanded && <Button />}
-                {rest && i !== rest.length - 1 && expanded && (
+                {sentenceBased && rest && i !== rest.length - 1 && expanded && (
                   <>
                     <br />
                     <br />
@@ -116,7 +118,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
                 )}
               </Body>
             ))}
-          </div>
+          </Box>
         </Fade>
       </div>
     </div>

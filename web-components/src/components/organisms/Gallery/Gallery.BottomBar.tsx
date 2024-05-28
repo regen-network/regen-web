@@ -1,32 +1,42 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Box, ButtonBase, useTheme } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-import { Body, Label } from '../../../components/typography';
 import { containerPaddingX, containerStyles } from '../../../styles/container';
 import { UseStateSetter } from '../../../types/react/useState';
 import ArrowDownIcon from '../../icons/ArrowDownIcon';
-import { GalleryPhoto } from './Gallery.types';
+import { isImage, isVideo } from '../../inputs/new/FileDrop/FileDrop.utils';
+import { Body, Label } from '../../typography';
+import { GalleryItem } from './Gallery.types';
 import { paginateGallery } from './Gallery.utils';
 
 type Props = {
-  photos: GalleryPhoto[];
-  imageIndex: number;
+  items: GalleryItem[];
+  itemIndex: number;
   page: number;
   setPage: UseStateSetter<[number, number]>;
 };
 
 export const GalleryBottomBar = ({
-  photos,
-  imageIndex,
+  items,
+  itemIndex,
   page,
   setPage,
 }: Props) => {
   const [isShowMore, setIsShowMore] = useState(false);
   const theme = useTheme();
-  const caption = photos[imageIndex]?.caption;
-  const credit = photos[imageIndex]?.credit;
-  const hasCaption = caption !== undefined && caption !== '';
+
+  const item = items[itemIndex];
+  const description = item?.description;
+  const credit = item?.credit;
+  const name = item?.name;
+  const mimeType = item?.mimeType;
+  const hasDescription = description !== undefined && description !== '';
   const hasCredit = credit !== undefined && credit !== '';
+  const image = isImage(mimeType);
+  const video = isVideo(mimeType);
+  const ref = useRef<HTMLParagraphElement | null>(null);
+  const desktop = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <Box
@@ -82,36 +92,46 @@ export const GalleryBottomBar = ({
             />
           </ButtonBase>
           <Label size="sm" sx={{ mr: 5, mt: 0.75 }}>
-            {`${imageIndex + 1}/${photos.length}`}
+            {`${itemIndex + 1}/${items.length}`}
           </Label>
         </Box>
-        {(hasCaption || hasCredit) && (
+        {name && (!(image || video) || ((image || video) && !hasDescription)) && (
+          <Body size="sm" mobileSize="sm" className="font-bold text-grey-0">
+            {name}&nbsp;
+          </Body>
+        )}
+        {(hasDescription || hasCredit) && (
           <Body
+            ref={ref}
             size="sm"
             mobileSize="sm"
             sx={[
               {
                 color: 'primary.main',
                 maxWidth: 890,
-                width: '100%',
-                minHeight: { xs: 42, md: 54 },
                 cursor: 'pointer',
               },
-              !isShowMore && {
-                height: { xs: 42, md: 54 },
-                background:
-                  'linear-gradient(180deg, #FFFFFF 26.04%, rgba(255, 255, 255, 0) 100%);',
-                backgroundClip: 'text',
-                textFillColor: 'transparent',
-              },
+              !isShowMore &&
+                !!ref.current?.clientHeight &&
+                ref.current.clientHeight > (desktop ? 54 : 42) && {
+                  background:
+                    'linear-gradient(180deg, #FFFFFF 26.04%, rgba(255, 255, 255, 0) 100%);',
+                  backgroundClip: 'text',
+                  textFillColor: 'transparent',
+                },
             ]}
             onClick={() => setIsShowMore(isShowMore => !isShowMore)}
           >
-            {caption && (
-              <Box sx={{ display: 'inline-block', mr: 0.5 }}>{caption}</Box>
+            {description && (
+              <Box component="span" sx={{ display: 'inline-block', mr: 0.5 }}>
+                {description}
+              </Box>
             )}
             {credit && (
-              <Box sx={{ display: 'inline-block', fontWeight: 300 }}>
+              <Box
+                component="span"
+                sx={{ display: 'inline-block', fontWeight: 300 }}
+              >
                 Photo credit: {credit}
               </Box>
             )}

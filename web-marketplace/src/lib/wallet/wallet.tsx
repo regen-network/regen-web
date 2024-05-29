@@ -21,6 +21,7 @@ import { AccountByAddrQuery, Maybe } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
+import { ConnectEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { useAutoConnect } from './hooks/useAutoConnect';
@@ -35,7 +36,6 @@ import { useSignArbitrary } from './hooks/useSignArbitrary';
 import { emptySender, KEPLR_MOBILE } from './wallet.constants';
 import { ConnectParams } from './wallet.types';
 import { WalletConfig } from './walletsConfig/walletsConfig.types';
-import { ConnectEvent } from 'lib/tracker/types';
 
 export interface Wallet {
   offlineSigner?: OfflineSigner;
@@ -110,19 +110,23 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
   // Connecting via Wallet Connect is handled entirely using @cosmos-kit
   const [walletConnect, setWalletConnect] = useState<boolean>(false);
+  const { closeView } = useChain('regen', false);
   const { client: walletConnectClient } = useWalletClient(KEPLR_MOBILE);
   const { mainWallet } = useCosmosKitWallet(KEPLR_MOBILE);
   const { walletRepos } = useManager();
-  const { closeView } = useChain('regen');
 
   const address = mainWallet?.getChainWallet('regen')?.address;
   const walletStatus = walletRepos[0]?.current?.walletStatus;
 
   useEffect(() => {
-    if (walletStatus === WalletStatus.Connected) {
+    if (
+      walletStatus === WalletStatus.Connected &&
+      address &&
+      !wallet?.offlineSigner
+    ) {
       const offlineSigner =
         walletConnectClient?.getOfflineSignerAmino?.('regen-1');
-      if (offlineSigner && address) {
+      if (offlineSigner) {
         closeView();
         setWallet({
           offlineSigner,
@@ -136,7 +140,14 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         });
       }
     }
-  }, [address, walletStatus, walletConnectClient, closeView]);
+  }, [
+    address,
+    walletStatus,
+    walletConnectClient,
+    closeView,
+    wallet?.offlineSigner,
+    track,
+  ]);
 
   const signArbitrary = useSignArbitrary({
     setError,

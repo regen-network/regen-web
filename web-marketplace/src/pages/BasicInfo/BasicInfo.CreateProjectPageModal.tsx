@@ -18,6 +18,7 @@ export const CreateProjectPageModal = ({
   const createProjectPagePopup =
     sanityCreateProjectPageData.allCreateProjectPage?.[0]
       ?.createProjectPagePopup;
+
   return (
     <>
       {createProjectPagePopup && (

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
@@ -42,8 +42,14 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { data: sanityCreateProjectPageData } = useQuery(
     getAllCreateProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
   );
-  const [open, setOpen] = useState(
-    !isEdit && !creditClassOnChainId && !!sanityCreateProjectPageData,
+  const [open, setOpen] = useState(false);
+
+  useEffect(
+    () =>
+      setOpen(
+        !isEdit && !creditClassOnChainId && !!sanityCreateProjectPageData,
+      ),
+    [isEdit, creditClassOnChainId, sanityCreateProjectPageData],
   );
 
   return (

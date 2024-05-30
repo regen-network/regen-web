@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/regen-network/regen-web/compare/v2.5.1...v2.6.0) (2024-05-30)
+
+### Bug Fixes
+
+- WWW-1 website redirects ([#2369](https://github.com/regen-network/regen-web/issues/2369)) ([9ccf6be](https://github.com/regen-network/regen-web/commit/9ccf6be8b77dbb007f397d9a850b017da7cb9a3a))
+
 # [2.4.0](https://github.com/regen-network/regen-web/compare/v2.3.0...v2.4.0) (2024-04-24)
 
 ### Bug Fixes

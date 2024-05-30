@@ -1,6 +1,6 @@
 {
   "name": "web-marketplace",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "private": true,
   "dependencies": {
     "@analytics/amplitude": "^0.1.3",

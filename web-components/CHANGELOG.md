@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/regen-network/regen-web/compare/v2.5.1...v2.6.0) (2024-05-30)
+
+### Bug Fixes
+
+- APP-102 truncate profile name/email in user menu ([#2368](https://github.com/regen-network/regen-web/issues/2368)) ([995f5d6](https://github.com/regen-network/regen-web/commit/995f5d6e15dccb294574da40ab2e8ac6f245c63b))
+- APP-103 ecosystem tags margin bottom ([#2358](https://github.com/regen-network/regen-web/issues/2358)) ([148feb6](https://github.com/regen-network/regen-web/commit/148feb6541ca1b83e8e0fb312498a4e52c2ae159))
+- APP-114 edit profile ([#2355](https://github.com/regen-network/regen-web/issues/2355)) ([a84b291](https://github.com/regen-network/regen-web/commit/a84b2912e7cbc4639e1c88c081f862a59ee8f0ab))
+- APP-126 adding multiple files at once to MediaForm gallery photos ([#2357](https://github.com/regen-network/regen-web/issues/2357)) ([60117a3](https://github.com/regen-network/regen-web/commit/60117a39e0ba4e90781e462c78cb79f91546ae13))
+- APP-127 replace confirmation code when logging in with email ([#2359](https://github.com/regen-network/regen-web/issues/2359)) ([719d50d](https://github.com/regen-network/regen-web/commit/719d50dcd44f2c106784da81d1c21c9ffc3a4302))
+- APP-139 upload modal layout ([#2375](https://github.com/regen-network/regen-web/issues/2375)) ([7656580](https://github.com/regen-network/regen-web/commit/76565800b76562c96df3e7aabdd914bde90d5d64))
+- APP-89 story text covered by media on project page ([#2343](https://github.com/regen-network/regen-web/issues/2343)) ([edc9e6f](https://github.com/regen-network/regen-web/commit/edc9e6fd25267273dcf7e48a929849d23ff3939a))
+
+### Features
+
+- APP-136 show warning when clicking "view project" from project edit with unsaved changes ([#2363](https://github.com/regen-network/regen-web/issues/2363)) ([dfc343b](https://github.com/regen-network/regen-web/commit/dfc343bc8e3f19c6123e55f9c96f1a7daa244d89))
+- APP-16 files drag & drop ([#2338](https://github.com/regen-network/regen-web/issues/2338)) ([5fe29d7](https://github.com/regen-network/regen-web/commit/5fe29d78e7ede07d6525200be85bfa3bb449344b))
+- APP-18 upload multiple photos in project media form gallery photo by selecting multiple files in file browser ([#2346](https://github.com/regen-network/regen-web/issues/2346)) ([5ad719e](https://github.com/regen-network/regen-web/commit/5ad719e83f843c0bd43828707e61098ce8b089a1))
+- APP-39 draft project tag ([#2341](https://github.com/regen-network/regen-web/issues/2341)) ([469d0b1](https://github.com/regen-network/regen-web/commit/469d0b1fdf36daaae0bffbdabd962e4e7fb8268c))
+- APP-9 Add a banner at top of project pages and individual profile page on first view ([#2336](https://github.com/regen-network/regen-web/issues/2336)) ([4cb477b](https://github.com/regen-network/regen-web/commit/4cb477baaad89481d7484dbb4ec1cfba1132480d))
+- APP-98 project cards update ([#2372](https://github.com/regen-network/regen-web/issues/2372)) ([59b1067](https://github.com/regen-network/regen-web/commit/59b10677e24640ac9dfc4b082237c19f95cb094f))
+- post files map / gallery view UI APP-48 ([#2273](https://github.com/regen-network/regen-web/issues/2273)) ([154502d](https://github.com/regen-network/regen-web/commit/154502dfcf3355b66b56381ec3f7c73d9d0d8a5b))
+
 # [2.4.0](https://github.com/regen-network/regen-web/compare/v2.3.0...v2.4.0) (2024-04-24)
 
 ### Features

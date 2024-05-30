@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/regen-network/regen-web/compare/v2.5.1...v2.6.0) (2024-05-30)
+
+### Features
+
+- APP-16 files drag & drop ([#2338](https://github.com/regen-network/regen-web/issues/2338)) ([5fe29d7](https://github.com/regen-network/regen-web/commit/5fe29d78e7ede07d6525200be85bfa3bb449344b))
+- APP-9 Add a banner at top of project pages and individual profile page on first view ([#2336](https://github.com/regen-network/regen-web/issues/2336)) ([4cb477b](https://github.com/regen-network/regen-web/commit/4cb477baaad89481d7484dbb4ec1cfba1132480d))
+- post files map / gallery view UI APP-48 ([#2273](https://github.com/regen-network/regen-web/issues/2273)) ([154502d](https://github.com/regen-network/regen-web/commit/154502dfcf3355b66b56381ec3f7c73d9d0d8a5b))
+
 # [2.3.0](https://github.com/regen-network/regen-web/compare/v2.2.1...v2.3.0) (2024-04-09)
 
 **Note:** Version bump only for package web-storybook

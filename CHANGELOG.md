@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/regen-network/regen-web/compare/v2.5.1...v2.6.0) (2024-05-30)
+
+### Bug Fixes
+
+- add prefinance sanity content to /projects/prefinance ([#2361](https://github.com/regen-network/regen-web/issues/2361)) ([6c0550a](https://github.com/regen-network/regen-web/commit/6c0550a436070468efe4e3a8a56b5d296e6c9ddc))
+- APP-102 truncate profile name/email in user menu ([#2368](https://github.com/regen-network/regen-web/issues/2368)) ([995f5d6](https://github.com/regen-network/regen-web/commit/995f5d6e15dccb294574da40ab2e8ac6f245c63b))
+- APP-103 ecosystem tags margin bottom ([#2358](https://github.com/regen-network/regen-web/issues/2358)) ([148feb6](https://github.com/regen-network/regen-web/commit/148feb6541ca1b83e8e0fb312498a4e52c2ae159))
+- APP-104 show prefinance projects in all projects ([#2352](https://github.com/regen-network/regen-web/issues/2352)) ([7630bfc](https://github.com/regen-network/regen-web/commit/7630bfc3086d714e1b2104135c11a7ce5923d8e0))
+- APP-112 project and credit class pagination ([#2356](https://github.com/regen-network/regen-web/issues/2356)) ([cbe749f](https://github.com/regen-network/regen-web/commit/cbe749f4447adf11c48d57f346d5d98f2df1d5ed))
+- APP-113 logging in from buy button ([#2371](https://github.com/regen-network/regen-web/issues/2371)) ([529cdbf](https://github.com/regen-network/regen-web/commit/529cdbf92f10ff85eb07dcd8bbc5fcb434dcaa22))
+- APP-114 edit profile ([#2355](https://github.com/regen-network/regen-web/issues/2355)) ([a84b291](https://github.com/regen-network/regen-web/commit/a84b2912e7cbc4639e1c88c081f862a59ee8f0ab))
+- APP-126 adding multiple files at once to MediaForm gallery photos ([#2357](https://github.com/regen-network/regen-web/issues/2357)) ([60117a3](https://github.com/regen-network/regen-web/commit/60117a39e0ba4e90781e462c78cb79f91546ae13))
+- APP-127 replace confirmation code when logging in with email ([#2359](https://github.com/regen-network/regen-web/issues/2359)) ([719d50d](https://github.com/regen-network/regen-web/commit/719d50dcd44f2c106784da81d1c21c9ffc3a4302))
+- APP-128 only display 'or, log in with email/social' if wallets available in log in modal ([#2364](https://github.com/regen-network/regen-web/issues/2364)) ([75f53cb](https://github.com/regen-network/regen-web/commit/75f53cb58e7fc5983248e9775a370d819119440a))
+- APP-139 upload modal layout ([#2375](https://github.com/regen-network/regen-web/issues/2375)) ([7656580](https://github.com/regen-network/regen-web/commit/76565800b76562c96df3e7aabdd914bde90d5d64))
+- APP-88 fix certificate share URL ([#2337](https://github.com/regen-network/regen-web/issues/2337)) ([55dfec0](https://github.com/regen-network/regen-web/commit/55dfec0adc6fe3543726000d578dbd996af013d6))
+- APP-89 story text covered by media on project page ([#2343](https://github.com/regen-network/regen-web/issues/2343)) ([edc9e6f](https://github.com/regen-network/regen-web/commit/edc9e6fd25267273dcf7e48a929849d23ff3939a))
+- APP-92 create batch form projects dropdown shows projects by admin instead of class issuers ([#2342](https://github.com/regen-network/regen-web/issues/2342)) ([01512b8](https://github.com/regen-network/regen-web/commit/01512b80a822b8eaa83627adced7d871a88b6724))
+- APP-95 projects from a Keplr wallet login show up when logged in via a new account ([#2345](https://github.com/regen-network/regen-web/issues/2345)) ([7735616](https://github.com/regen-network/regen-web/commit/773561621dc0914c91572976ce495d7b1406cba7))
+- connecting with wallet connect on mobile ([#2377](https://github.com/regen-network/regen-web/issues/2377)) ([2ca5d73](https://github.com/regen-network/regen-web/commit/2ca5d73db1e2501df48bd0d5c6cbea603ab4fac5))
+- WWW-1 website redirects ([#2369](https://github.com/regen-network/regen-web/issues/2369)) ([9ccf6be](https://github.com/regen-network/regen-web/commit/9ccf6be8b77dbb007f397d9a850b017da7cb9a3a))
+
+### Features
+
+- APP-108 edit/view project buttons ([#2351](https://github.com/regen-network/regen-web/issues/2351)) ([60a37eb](https://github.com/regen-network/regen-web/commit/60a37ebb8539e0b7de400f9b2555f644d7ac93ff))
+- APP-136 show warning when clicking "view project" from project edit with unsaved changes ([#2363](https://github.com/regen-network/regen-web/issues/2363)) ([dfc343b](https://github.com/regen-network/regen-web/commit/dfc343bc8e3f19c6123e55f9c96f1a7daa244d89))
+- APP-140 add a popup with basic info about offchain project pages for users ([#2374](https://github.com/regen-network/regen-web/issues/2374)) ([b3e06e8](https://github.com/regen-network/regen-web/commit/b3e06e81911b94bb90d332c48a7b47e9f74acf39))
+- APP-16 files drag & drop ([#2338](https://github.com/regen-network/regen-web/issues/2338)) ([5fe29d7](https://github.com/regen-network/regen-web/commit/5fe29d78e7ede07d6525200be85bfa3bb449344b))
+- APP-18 upload multiple photos in project media form gallery photo by selecting multiple files in file browser ([#2346](https://github.com/regen-network/regen-web/issues/2346)) ([5ad719e](https://github.com/regen-network/regen-web/commit/5ad719e83f843c0bd43828707e61098ce8b089a1))
+- APP-19 generate project slug based on project name ([#2335](https://github.com/regen-network/regen-web/issues/2335)) ([0313c8c](https://github.com/regen-network/regen-web/commit/0313c8c50ca40e998e55c9aa6bb28b20eea05d19))
+- APP-39 draft project tag ([#2341](https://github.com/regen-network/regen-web/issues/2341)) ([469d0b1](https://github.com/regen-network/regen-web/commit/469d0b1fdf36daaae0bffbdabd962e4e7fb8268c))
+- APP-9 Add a banner at top of project pages and individual profile page on first view ([#2336](https://github.com/regen-network/regen-web/issues/2336)) ([4cb477b](https://github.com/regen-network/regen-web/commit/4cb477baaad89481d7484dbb4ec1cfba1132480d))
+- APP-98 project cards update ([#2372](https://github.com/regen-network/regen-web/issues/2372)) ([59b1067](https://github.com/regen-network/regen-web/commit/59b10677e24640ac9dfc4b082237c19f95cb094f))
+- change default filters on project list page. ([#2365](https://github.com/regen-network/regen-web/issues/2365)) ([611872d](https://github.com/regen-network/regen-web/commit/611872d5a4ec446c52414949266c8c1e02a7c9c1))
+- get ecosystemType primarily from projectMetadata ([e1d74df](https://github.com/regen-network/regen-web/commit/e1d74df726ab2c81c384e81a25d76491b75c37aa))
+- post files map / gallery view UI APP-48 ([#2273](https://github.com/regen-network/regen-web/issues/2273)) ([154502d](https://github.com/regen-network/regen-web/commit/154502dfcf3355b66b56381ec3f7c73d9d0d8a5b))
+
 ## [2.5.1](https://github.com/regen-network/regen-web/compare/v2.5.0...v2.5.1) (2024-05-23)
 
 ### Bug Fixes

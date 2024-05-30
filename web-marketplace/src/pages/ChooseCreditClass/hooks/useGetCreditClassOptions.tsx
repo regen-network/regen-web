@@ -5,12 +5,12 @@ import {
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
 
+import { useAuth } from 'lib/auth/auth';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { normalizeCreditClassItems } from 'lib/normalizers/creditClass/normalizeCreditClassItems/normalizeCreditClassItems';
 import { getAllCreditClassesQuery } from 'lib/queries/react-query/registry-server/graphql/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getClassesByIssuerQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getClassesByIssuer/getClassesByIssuer';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
-import { useWallet } from 'lib/wallet/wallet';
 
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
@@ -29,8 +29,8 @@ function useGetCreditClassItems(): {
 } {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const { wallet } = useWallet();
-  const address = wallet?.address;
+  const { activeAccount } = useAuth();
+  const address = activeAccount?.addr;
 
   const { data: classesByIssuerData, isLoading } = useQuery(
     getClassesByIssuerQuery({

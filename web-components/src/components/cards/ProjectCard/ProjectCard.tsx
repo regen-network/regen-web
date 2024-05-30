@@ -3,6 +3,8 @@ import { SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
 
+import ContainedButton from 'src/components/buttons/ContainedButton';
+
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import { cn } from '../../../utils/styles/cn';
@@ -41,6 +43,7 @@ export interface ProjectCardProps extends MediaCardProps {
   tag?: string;
   onClick?: () => void;
   onButtonClick?: () => void;
+  onContainedButtonClick?: () => void;
   comingSoon?: boolean;
   purchaseInfo?: PurchaseInfo;
   href?: string;
@@ -55,6 +58,7 @@ export interface ProjectCardProps extends MediaCardProps {
   disabled?: boolean;
   program?: Account;
   button?: ButtonType;
+  containedButton?: ButtonType;
   projectPrefinancing?: ProjectPrefinancing;
   offChain?: boolean;
   asAdmin?: boolean;
@@ -71,6 +75,7 @@ export function ProjectCard({
   areaUnit,
   onClick,
   onButtonClick,
+  onContainedButtonClick,
   tag,
   comingSoon = false,
   purchaseInfo,
@@ -85,6 +90,7 @@ export function ProjectCard({
   pathname,
   program,
   button,
+  containedButton,
   projectPrefinancing,
   offChain,
   asAdmin,
@@ -262,41 +268,55 @@ export function ProjectCard({
                     )}
                   </div>
                 )}
-                {(onButtonClick || isPrefinanceProject || offChain) && (
-                  <OutlinedButton
-                    onClick={event => {
-                      event.stopPropagation();
-                      if (asAdmin) {
-                        onButtonClick && onButtonClick();
-                      } else if (isPrefinanceProject) {
-                        window.open(
-                          projectPrefinancing?.stripePaymentLink,
-                          '_newtab',
-                        );
-                      } else if (offChain) {
-                        onClick && onClick();
-                      } else {
-                        track &&
-                          track<Buy1Event>('buy1', {
-                            url: pathname ?? '',
-                            cardType: 'project',
-                            buttonLocation: 'projectCard',
-                            projectName: name,
-                            projectId: id,
-                            creditClassId,
-                          });
-                        onButtonClick && onButtonClick();
-                      }
-                    }}
-                    size="small"
-                    startIcon={buttonStartIcon}
-                    disabled={isButtonDisabled}
-                    sx={{ width: '100%' }}
-                    className={buttonClassName}
-                  >
-                    {buttonText}
-                  </OutlinedButton>
-                )}
+                <div className="flex gap-10">
+                  {containedButton && onContainedButtonClick && (
+                    <ContainedButton
+                      size="small"
+                      startIcon={containedButton.startIcon}
+                      disabled={containedButton.disabled}
+                      sx={{ width: '100%' }}
+                      className={containedButton.className}
+                      onClick={onContainedButtonClick}
+                    >
+                      {containedButton.text}
+                    </ContainedButton>
+                  )}
+                  {(onButtonClick || isPrefinanceProject || offChain) && (
+                    <OutlinedButton
+                      onClick={event => {
+                        event.stopPropagation();
+                        if (asAdmin) {
+                          onButtonClick && onButtonClick();
+                        } else if (isPrefinanceProject) {
+                          window.open(
+                            projectPrefinancing?.stripePaymentLink,
+                            '_newtab',
+                          );
+                        } else if (offChain) {
+                          onClick && onClick();
+                        } else {
+                          track &&
+                            track<Buy1Event>('buy1', {
+                              url: pathname ?? '',
+                              cardType: 'project',
+                              buttonLocation: 'projectCard',
+                              projectName: name,
+                              projectId: id,
+                              creditClassId,
+                            });
+                          onButtonClick && onButtonClick();
+                        }
+                      }}
+                      size="small"
+                      startIcon={buttonStartIcon}
+                      disabled={isButtonDisabled}
+                      sx={{ width: '100%' }}
+                      className={buttonClassName}
+                    >
+                      {buttonText}
+                    </OutlinedButton>
+                  )}
+                </div>
               </>
             </div>
           )}

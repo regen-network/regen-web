@@ -122,6 +122,7 @@ export const normalizeProjectWithMetadata = ({
       projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ||
       projectWithOrderData?.imgSrc ||
       creditClassImage,
+    location: projectMetadata?.['schema:location'],
     place:
       projectMetadata?.['schema:location']?.place_name ||
       projectWithOrderData?.place,

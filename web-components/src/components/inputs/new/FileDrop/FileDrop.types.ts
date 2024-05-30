@@ -2,7 +2,7 @@ export type FileDropRenderModalProps = {
   open: boolean;
   onClose: () => void;
   onSubmit: (image: HTMLImageElement) => Promise<void>;
-  initialImage: string;
+  initialFile: string;
   value?: string;
   currentIndex: number;
 };

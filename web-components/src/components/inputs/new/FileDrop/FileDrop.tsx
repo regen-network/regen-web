@@ -46,11 +46,14 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
     lastInMultiUpload: boolean,
   ) => void;
   onDelete?: (fileName: string, doSetValue?: boolean) => Promise<void>;
-  onUpload?: (imageFile: File) => Promise<string | undefined>;
+  onUpload?: (
+    imageFile: File,
+  ) => Promise<{ url: string; location?: string } | undefined>;
   accept?: string;
   multi?: boolean;
   moveUp?: () => void;
   moveDown?: () => void;
+  uploadOnAdd?: boolean;
 }
 
 /**
@@ -86,13 +89,14 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       moveUp,
       moveDown,
       dropZoneOption,
+      uploadOnAdd,
       ...fieldProps
     },
     ref,
   ) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
-    const [initialImage, setInitialImage] = useState('');
+    const [initialFile, setInitialFile] = useState('');
     const [selectedFiles, setSelectedFiles] = useState<Array<File>>([]);
     const [nextFieldIndex, setNextFieldIndex] = useState(0);
 
@@ -106,7 +110,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
         toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
             setIsModalOpen(true);
-            setInitialImage(base64String);
+            setInitialFile(base64String);
           }
         });
       }
@@ -127,14 +131,14 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
         toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
             setIsModalOpen(true);
-            setInitialImage(base64String);
+            setInitialFile(base64String);
           }
         });
       }
     };
 
     const onModalClose = (): void => {
-      setInitialImage('');
+      setInitialFile('');
       const remainingFiles = selectedFiles.slice(1);
       setSelectedFiles(remainingFiles);
       setIsModalOpen(false);
@@ -142,7 +146,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
         toBase64(remainingFiles[0]).then(base64String => {
           if (typeof base64String === 'string') {
             setIsModalOpen(true);
-            setInitialImage(base64String);
+            setInitialFile(base64String);
           }
         });
       }
@@ -180,7 +184,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
           toBase64(remainingFiles[0]).then(base64String => {
             if (typeof base64String === 'string') {
               setIsModalOpen(true);
-              setInitialImage(base64String);
+              setInitialFile(base64String);
             }
           });
         }
@@ -188,7 +192,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
     };
 
     const handleDelete = async (valueToDelete: string) => {
-      setInitialImage('');
+      setInitialFile('');
       setSelectedFiles([]);
       if (onDelete) {
         await onDelete(valueToDelete ?? '');
@@ -205,7 +209,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
             if (typeof base64String === 'string') {
               setIsEdit(true);
               setIsModalOpen(true);
-              setInitialImage(base64String);
+              setInitialFile(base64String);
             }
           });
         }
@@ -253,7 +257,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
         </FieldFormControl>
         {renderModal({
           open: isModalOpen,
-          initialImage,
+          initialFile,
           currentIndex: fieldIndex + nextFieldIndex,
           onClose: onModalClose,
           onSubmit: onModalSubmit,

@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-export async function uploadImage(
-  image: File,
+export async function uploadFile(
+  file: File,
   filePath: string,
   apiServerUrl: string | undefined,
-): Promise<string> {
+) {
   const formData = new FormData();
-  formData.append('image', image);
+  formData.append('file', file);
   formData.append('filePath', filePath);
 
   const resp = await axios.post(
@@ -22,9 +22,7 @@ export async function uploadImage(
   if (respOK) {
     const data = await resp.data;
 
-    return data.imageUrl;
-  } else {
-    return 'check request';
+    return data;
   }
 }
 

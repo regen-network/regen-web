@@ -38,7 +38,7 @@ export interface Props {
   onClose: () => void;
   mapboxToken?: string;
   geocodingPlaceName?: string;
-  setDebouncedViewState: UseStateSetter<GeocodeFeature | Feature>;
+  setDebouncedViewState: UseStateSetter<GeocodeFeature | Feature | undefined>;
 }
 
 export const EditFileForm = ({
@@ -70,25 +70,12 @@ export const EditFileForm = ({
     control: form.control,
     name: 'locationType',
   });
-
+  console.log('location', location);
   const debouncedValue = useDebounce(location);
   useEffect(() => {
     if (!isGeocodingFeature(debouncedValue))
       setDebouncedViewState(debouncedValue);
   }, [debouncedValue, setDebouncedViewState]);
-  // TODO This will need to be used at the upper level component of EditFileForm (EditFileModal)
-  // in order to get the place name associated to the center of the current view state (geocodingPlaceName)
-  // We use a debounced value so we don't make reverse geocoding queries for every move on the map.
-  // const { data } = useQuery(
-  //   getGeocodingQuery({
-  //     request: {
-  //       types: ['place'],
-  //       query: [longitude, latitude],
-  //     },
-  //     mapboxToken,
-  //     enabled: !!debouncedValue,
-  //   }),
-  // );
 
   return (
     <Form className={cn('max-w-[560px]', className)} form={form}>

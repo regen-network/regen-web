@@ -13,7 +13,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { projectsCurrentStepAtom } from 'pages/ProjectCreate/ProjectCreate.store';
 import WithLoader from 'components/atoms/WithLoader';
-import { CreatePostFlow } from 'components/organisms/CreatePostFlow/CreatePostFlow';
+import { CreatePostFlow } from 'components/organisms/PostFlow/PostFlow';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
@@ -39,6 +39,9 @@ const MyProjects = (): JSX.Element => {
   const isFirstProject = !adminProjects || adminProjects?.length < 1;
 
   const [postProjectId, setPostProjectId] = useState<string | undefined>();
+  const [postOffChainProjectId, setPostOffChainProjectId] = useState<
+    string | undefined
+  >();
 
   return (
     <>
@@ -83,6 +86,7 @@ const MyProjects = (): JSX.Element => {
                     }}
                     onButtonClick={() => {
                       setPostProjectId(project.id);
+                      setPostOffChainProjectId(project.offChainId);
                     }}
                     onContainedButtonClick={() => {
                       if (
@@ -109,14 +113,21 @@ const MyProjects = (): JSX.Element => {
             );
           })}
       </Grid>
-      <CreatePostFlow
-        onModalClose={() => setPostProjectId(undefined)}
-        initialValues={{}}
-        projectLocation={
-          adminProjects.find(project => project.id === postProjectId)?.location
-        }
-        projectId={postProjectId}
-      />
+      {postProjectId && (
+        <CreatePostFlow
+          onModalClose={() => {
+            setPostProjectId(undefined);
+            setPostOffChainProjectId(undefined);
+          }}
+          initialValues={{}}
+          projectLocation={
+            adminProjects.find(project => project.id === postProjectId)
+              ?.location
+          }
+          projectId={postProjectId}
+          offChainProjectId={postOffChainProjectId}
+        />
+      )}
     </>
   );
 };

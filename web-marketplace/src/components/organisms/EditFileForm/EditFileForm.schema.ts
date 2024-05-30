@@ -6,6 +6,7 @@ import { FILE_MAX_DESCRIPTION_LENGTH } from './EditFileForm.constants';
 import { EditFileFormLocationType } from './EditFileForm.types';
 
 export const editFileFormSchema = z.object({
+  iri: z.string(),
   url: z.string(),
   name: z.string(),
   description: z.string().max(FILE_MAX_DESCRIPTION_LENGTH).optional(),

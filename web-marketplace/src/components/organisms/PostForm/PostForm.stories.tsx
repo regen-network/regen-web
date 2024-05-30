@@ -16,6 +16,7 @@ export const Basic: Story = {
 
 Basic.args = {
   onClose: action('onClose'),
+  onSubmit: action('onClose'),
   projectLocation,
   initialValues,
 };

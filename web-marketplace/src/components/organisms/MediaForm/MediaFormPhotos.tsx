@@ -158,12 +158,12 @@ export const MediaFormPhotos = ({
         error={!!errors['regen:previewPhoto']}
         helperText={errors['regen:previewPhoto']?.message}
         accept="image/*"
-        renderModal={({ initialImage, open, value, onClose, onSubmit }) => (
+        renderModal={({ initialFile, open, value, onClose, onSubmit }) => (
           <CropImageModal
             open={open}
             onClose={onClose}
             onSubmit={onSubmit}
-            initialImage={initialImage}
+            initialImage={initialFile}
             fixedCrop={cropAspectMediaForm}
             isIgnoreCrop={!!value}
           >
@@ -224,7 +224,7 @@ export const MediaFormPhotos = ({
               accept="image/*"
               multi
               renderModal={({
-                initialImage,
+                initialFile,
                 open,
                 value,
                 currentIndex,
@@ -235,7 +235,7 @@ export const MediaFormPhotos = ({
                   open={open}
                   onClose={onClose}
                   onSubmit={onSubmit}
-                  initialImage={initialImage}
+                  initialImage={initialFile}
                   fixedCrop={cropAspectMediaForm}
                   isCropSubmitDisabled={hasFieldError}
                   isIgnoreCrop={!!value}

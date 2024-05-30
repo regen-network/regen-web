@@ -154,7 +154,7 @@ export const MediaFormStory = ({
               helperText={errors['regen:storyMedia']?.message}
               accept="image/*"
               renderModal={({
-                initialImage,
+                initialFile,
                 open,
                 value,
                 onClose,
@@ -164,7 +164,7 @@ export const MediaFormStory = ({
                   open={open}
                   onClose={onClose}
                   onSubmit={onSubmit}
-                  initialImage={initialImage}
+                  initialImage={initialFile}
                   fixedCrop={cropAspectMediaForm}
                   isIgnoreCrop={!!value}
                 >

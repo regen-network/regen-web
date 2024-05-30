@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
-import { useFieldArray, useWatch } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { SubmitHandler, useFieldArray, useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { MAPBOX_TOKEN } from 'config/globals';
 
 import { LocationIcon } from 'web-components/src/components/icons/LocationIcon';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
@@ -16,14 +17,20 @@ import { ReorderFields } from 'web-components/src/components/inputs/new/ReorderF
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import Modal from 'web-components/src/components/modal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Body, Title } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
+
+import { apiUri } from 'lib/apiUri';
 
 import { Link } from 'components/atoms';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
+import { EditFileFormSchemaType } from '../EditFileForm/EditFileForm.schema';
+import { EditFileModal } from '../EditFileModal/EditFileModal';
+import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { cropAspectMediaForm, DEFAULT } from '../MediaForm/MediaForm.constants';
 import { useMediaFormStyles } from '../MediaForm/useMediaFormStyles';
 import { useMetadataFormStyles } from '../MetadataForm/MetadataForm.styles';
@@ -39,12 +46,15 @@ export interface Props {
   className?: string;
   onClose: () => void;
   projectLocation: GeocodeFeature;
+  offChainProjectId?: string;
+  onSubmit?: SubmitHandler<PostFormSchemaType>;
 }
 
 export const PostForm = ({
   initialValues,
   className,
   projectLocation,
+  offChainProjectId: _offChainProjectId,
   onClose,
 }: Props): JSX.Element => {
   const form = useZodForm({
@@ -95,6 +105,13 @@ export const PostForm = ({
     setValue(`files.${fieldIndex}.mimeType`, encodeURI(mimeType));
   };
 
+  const [offChainProjectId, setOffChainProjectId] =
+    useState(_offChainProjectId);
+  const { handleUpload } = useHandleUpload({
+    offChainProjectId,
+    apiServerUrl: apiUri,
+    setOffChainProjectId,
+  });
   const getHandleDeleteWithIndex = async (fieldIndex: number) => {
     remove(fieldIndex);
   };
@@ -115,9 +132,13 @@ export const PostForm = ({
       });
     }
   }, [append, fields, projectLocation]);
-
+  console.log('files', files);
   return (
-    <Form className={cn('max-w-[560px]', className)} form={form}>
+    <Form
+      className={cn('max-w-[560px]', className)}
+      form={form}
+      onSubmit={onSubmit}
+    >
       <Title
         variant="h3"
         sx={{ textAlign: 'center' }}
@@ -162,7 +183,7 @@ export const PostForm = ({
         fields={fields}
         move={move}
         getFieldElement={(_: Record<'id', string>, index: number) => {
-          const file = files?.[index];
+          const file = files?.[index] as EditFileFormSchemaType;
           const url = file?.url;
 
           return (
@@ -173,6 +194,7 @@ export const PostForm = ({
                   ? undefined
                   : () => move(index, index + 1)
               }
+              onUpload={handleUpload}
               onDelete={() => getHandleDeleteWithIndex(index)}
               value={url === DEFAULT ? '' : url}
               caption={file?.description}
@@ -193,7 +215,16 @@ export const PostForm = ({
               fieldIndex={index}
               error={!!errors['files']}
               helperText={errors['files']?.message}
-              renderModal={() => <div />}
+              renderModal={({ open, value, onClose, onSubmit }) => (
+                <EditFileModal
+                  open={open}
+                  onClose={onClose}
+                  initialValues={file}
+                  projectLocation={projectLocation}
+                  mapboxToken={MAPBOX_TOKEN}
+                  onSubmit={onSubmit}
+                />
+              )}
               optional
               multi
               {...imageDropCommonProps}

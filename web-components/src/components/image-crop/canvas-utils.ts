@@ -83,7 +83,10 @@ export async function srcToFile(
 
 type GetImageSrcParams = {
   croppedImage: HTMLImageElement;
-  onUpload?: (file: File, value?: string) => Promise<string | undefined>;
+  onUpload?: (
+    file: File,
+    value?: string,
+  ) => Promise<{ url: string } | undefined>;
   fileName?: string;
   fileType?: string;
   value?: string;
@@ -96,7 +99,7 @@ export async function getImageSrc({
   fileType,
   value,
 }: GetImageSrcParams): Promise<string | undefined> {
-  let result: string | undefined = croppedImage.src;
+  let url: string | undefined = croppedImage.src;
   const timestamp = new Date().getTime();
   const fileNameWithTimestamp = `${timestamp}-${fileName}`;
 
@@ -106,7 +109,8 @@ export async function getImageSrc({
       fileNameWithTimestamp,
       fileType ?? 'image/png',
     );
-    result = await onUpload(imageFile, value);
+    const result = await onUpload(imageFile, value);
+    url = result?.url;
   }
-  return result;
+  return url;
 }

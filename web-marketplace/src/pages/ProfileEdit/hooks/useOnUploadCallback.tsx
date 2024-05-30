@@ -2,7 +2,7 @@ import { MutableRefObject, useCallback } from 'react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
-import { uploadImage } from 'web-components/src/utils/s3';
+import { uploadFile } from 'web-components/src/utils/s3';
 
 import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
@@ -22,13 +22,13 @@ export const useOnUploadCallback = ({ fileNamesToDeleteRef }: Params) => {
     async (imageFile: File, value?: string) => {
       const currentTime = new Date().getTime();
       try {
-        const result = await uploadImage(
+        const result = await uploadFile(
           imageFile,
           `${PROFILE_S3_PATH}/${activeAccount?.id}/${currentTime}`,
           apiUri,
         );
         if (value) fileNamesToDeleteRef.current.push(value);
-        return result;
+        return result?.url;
       } catch (e) {
         setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
         return '';

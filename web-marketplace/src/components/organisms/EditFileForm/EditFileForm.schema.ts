@@ -7,7 +7,7 @@ import { EditFileFormLocationType } from './EditFileForm.types';
 
 export const editFileFormSchema = z.object({
   iri: z.string(),
-  url: z.string(),
+  url: z.string().min(1),
   name: z.string(),
   description: z.string().max(FILE_MAX_DESCRIPTION_LENGTH).optional(),
   credit: z.string().optional(),

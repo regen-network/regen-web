@@ -13,7 +13,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { projectsCurrentStepAtom } from 'pages/ProjectCreate/ProjectCreate.store';
 import WithLoader from 'components/atoms/WithLoader';
-import { CreatePostFlow } from 'components/organisms/PostFlow/PostFlow';
+import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
@@ -42,6 +42,7 @@ const MyProjects = (): JSX.Element => {
   const [postOffChainProjectId, setPostOffChainProjectId] = useState<
     string | undefined
   >();
+  const [postProjectName, setPostProjectName] = useState<string | undefined>();
 
   return (
     <>
@@ -87,6 +88,7 @@ const MyProjects = (): JSX.Element => {
                     onButtonClick={() => {
                       setPostProjectId(project.id);
                       setPostOffChainProjectId(project.offChainId);
+                      setPostProjectName(project.name);
                     }}
                     onContainedButtonClick={() => {
                       if (
@@ -114,18 +116,19 @@ const MyProjects = (): JSX.Element => {
           })}
       </Grid>
       {postProjectId && (
-        <CreatePostFlow
+        <PostFlow
           onModalClose={() => {
             setPostProjectId(undefined);
             setPostOffChainProjectId(undefined);
           }}
-          initialValues={{}}
+          // initialValues={{}}
           projectLocation={
             adminProjects.find(project => project.id === postProjectId)
               ?.location
           }
           projectId={postProjectId}
           offChainProjectId={postOffChainProjectId}
+          projectName={postProjectName}
         />
       )}
     </>

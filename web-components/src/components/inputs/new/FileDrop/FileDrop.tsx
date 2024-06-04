@@ -39,16 +39,19 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
   dropZoneOption?: DropzoneOptions;
   isCropSubmitDisabled?: boolean;
   renderModal: (_: FileDropRenderModalProps) => React.ReactNode;
-  setValue: (
-    value: string,
-    mimeType: string,
-    fieldIndex: number,
-    lastInMultiUpload: boolean,
-  ) => void;
+  setValue: (params: {
+    value?: string;
+    mimeType: string;
+    fieldIndex: number;
+    lastInMultiUpload: boolean;
+    location?: Feature;
+    name?: string;
+    iri?: string;
+  }) => void;
   onDelete?: (fileName: string, doSetValue?: boolean) => Promise<void>;
   onUpload?: (
-    imageFile: File,
-  ) => Promise<{ url: string; location?: string } | undefined>;
+    file: File,
+  ) => Promise<{ url: string; location?: Feature; iri?: string } | undefined>;
   accept?: string;
   multi?: boolean;
   moveUp?: () => void;
@@ -107,37 +110,35 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       if (files && files.length > 0) {
         const file = files[0];
         setSelectedFiles(multi ? files : [file]);
-        toBase64(file).then(base64String => {
+        toBase64(file).then(async base64String => {
           if (typeof base64String === 'string') {
             setIsModalOpen(true);
             setInitialFile(base64String);
+            if (uploadOnAdd && onUpload) {
+              const uploaded = await onUpload(file);
+              if (uploaded) {
+                const remainingFiles = selectedFiles.slice(1);
+                setValue({
+                  value: uploaded.url,
+                  mimeType: file.type,
+                  name: file.name,
+                  iri: uploaded.iri,
+                  location: uploaded.location,
+                  fieldIndex: fieldIndex + nextFieldIndex,
+                  lastInMultiUpload: false,
+                });
+                setSelectedFiles(remainingFiles);
+              }
+            }
           }
         });
       }
     };
 
-    const handleFileChange = (
-      event: React.ChangeEvent<HTMLInputElement>,
-    ): void => {
-      if (
-        event &&
-        event.target &&
-        event.target.files &&
-        event.target.files.length > 0
-      ) {
-        const files = event.target.files;
-        const file = files[0];
-        setSelectedFiles(multi ? Array.from(files) : [file]);
-        toBase64(file).then(base64String => {
-          if (typeof base64String === 'string') {
-            setIsModalOpen(true);
-            setInitialFile(base64String);
-          }
-        });
+    const onModalClose = async () => {
+      if (!isEdit && uploadOnAdd && onDelete && value) {
+        await onDelete(value, true);
       }
-    };
-
-    const onModalClose = (): void => {
       setInitialFile('');
       const remainingFiles = selectedFiles.slice(1);
       setSelectedFiles(remainingFiles);
@@ -153,7 +154,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
     };
 
     const onModalSubmit = async (
-      croppedImage: HTMLImageElement,
+      croppedImage?: HTMLImageElement,
     ): Promise<void> => {
       // Delete file that has been edited
       if (isEdit && onDelete && value) {
@@ -161,22 +162,27 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
           await onDelete(value, false);
         }
       }
-      const currentFile = selectedFiles[0];
-      const result = await getImageSrc({
-        croppedImage,
-        onUpload,
-        fileName: currentFile.name,
-      });
 
-      if (result) {
+      let result;
+      const currentFile = selectedFiles[0];
+
+      if (croppedImage && !uploadOnAdd) {
+        result = await getImageSrc({
+          croppedImage,
+          onUpload,
+          fileName: currentFile.name,
+        });
+      }
+
+      if (result || uploadOnAdd) {
         const remainingFiles = selectedFiles.slice(1);
         const lastInMultiUpload = remainingFiles.length === 0;
-        setValue(
-          result,
-          currentFile.type,
-          fieldIndex + nextFieldIndex,
+        setValue({
+          value: result,
+          mimeType: currentFile?.type,
+          fieldIndex: fieldIndex + nextFieldIndex,
           lastInMultiUpload,
-        );
+        });
         setSelectedFiles(remainingFiles);
         setIsModalOpen(false);
         if (multi && !lastInMultiUpload) {
@@ -244,7 +250,6 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
           )}
           <FileDropZone
             handleDrop={handleDrop}
-            handleFileChange={handleFileChange}
             buttonText={buttonText}
             classes={classes}
             hideDragText={hideDragText}

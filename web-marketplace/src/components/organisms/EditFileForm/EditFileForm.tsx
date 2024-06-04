@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useWatch } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Feature } from 'geojson';
 
@@ -14,27 +14,21 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Title } from 'web-components/src/components/typography';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
-import { cn } from 'web-components/src/utils/styles/cn';
 
-import Form from 'components/molecules/Form/Form';
-import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { useDebounce } from 'hooks/useDebounce';
 
+import { PostFormSchemaType } from '../PostForm/PostForm.schema';
 import {
   FILE_LOCATION_DESCRIPTION,
   FILE_MAX_DESCRIPTION_LENGTH,
 } from './EditFileForm.constants';
-import {
-  editFileFormSchema,
-  EditFileFormSchemaType,
-} from './EditFileForm.schema';
 import {} from './EditFileForm.types';
 
 export interface Props {
-  initialValues: EditFileFormSchemaType;
+  onSubmit: () => Promise<void>;
+  currentIndex: number;
   projectLocation: GeocodeFeature;
   fileLocation?: Feature;
-  className?: string;
   onClose: () => void;
   mapboxToken?: string;
   geocodingPlaceName?: string;
@@ -42,8 +36,8 @@ export interface Props {
 }
 
 export const EditFileForm = ({
-  initialValues,
-  className,
+  onSubmit,
+  currentIndex,
   projectLocation,
   fileLocation,
   onClose,
@@ -51,34 +45,26 @@ export const EditFileForm = ({
   geocodingPlaceName,
   setDebouncedViewState,
 }: Props): JSX.Element => {
-  const form = useZodForm({
-    schema: editFileFormSchema,
-    defaultValues: {
-      ...initialValues,
-      location: initialValues.location || fileLocation || projectLocation,
-    },
-    mode: 'onBlur',
-  });
-  const { errors } = form.formState;
-  const { setValue } = form;
+  const ctx = useFormContext<PostFormSchemaType>();
+  const { register, control, setValue, formState } = ctx;
+  const { errors } = formState;
 
-  const url = useWatch({ control: form.control, name: 'url' });
-  const mimeType = useWatch({ control: form.control, name: 'mimeType' });
-  const description = useWatch({ control: form.control, name: 'description' });
-  const location = useWatch({ control: form.control, name: 'location' });
-  const locationType = useWatch({
-    control: form.control,
-    name: 'locationType',
-  });
-  console.log('location', location);
+  const files = useWatch({ control: control, name: 'files' });
+  const file = files?.[currentIndex];
+  const url = file?.url;
+  const mimeType = file?.mimeType;
+  const description = file?.description;
+  const location = file?.location;
+  const locationType = file?.locationType;
+
   const debouncedValue = useDebounce(location);
   useEffect(() => {
-    if (!isGeocodingFeature(debouncedValue))
+    if (debouncedValue && !isGeocodingFeature(debouncedValue))
       setDebouncedViewState(debouncedValue);
   }, [debouncedValue, setDebouncedViewState]);
 
   return (
-    <Form className={cn('max-w-[560px]', className)} form={form}>
+    <>
       <Title
         variant="h4"
         sx={{ textAlign: 'center' }}
@@ -95,7 +81,13 @@ export const EditFileForm = ({
           alt="preview"
         />
       )}
-      <TextField type="text" label="File name" {...form.register('name')} />
+      <TextField
+        type="text"
+        label="File name"
+        helperText={errors.files?.[currentIndex]?.name?.message}
+        error={!!errors.files?.[currentIndex]?.name}
+        {...register(`files.${currentIndex}.name`)}
+      />
       <TextAreaField
         type="text"
         label="Description"
@@ -104,9 +96,9 @@ export const EditFileForm = ({
         minRows={3}
         multiline
         optional
-        helperText={errors?.description?.message}
-        error={!!errors?.description}
-        {...form.register('description')}
+        helperText={errors.files?.[currentIndex]?.description?.message}
+        error={!!errors.files?.[currentIndex]?.description}
+        {...register(`files.${currentIndex}.description`)}
       >
         <TextAreaFieldChartCounter
           value={description}
@@ -119,25 +111,27 @@ export const EditFileForm = ({
         label="Photo credit"
         className="mt-40 sm:mt-50"
         optional
-        {...form.register('credit')}
+        {...register(`files.${currentIndex}.credit`)}
       />
       <div className="flex flex-col mb-40 mt-40 sm:mb-50 sm:mt-50">
         <RadioGroup label="Location" description={FILE_LOCATION_DESCRIPTION}>
-          <div className="h-[309px] sm:h-[409px] pb-10">
-            <LocationPicker
-              value={location}
-              handleChange={value =>
-                setValue('location', value, {
-                  shouldDirty: true,
-                  shouldTouch: true,
-                })
-              }
-              disabled={locationType === 'file' || locationType === 'none'}
-              mapboxToken={mapboxToken}
-              geocodingPlaceName={geocodingPlaceName}
-              {...form.register('location')}
-            />
-          </div>
+          {location && (
+            <div className="h-[309px] sm:h-[409px] pb-10">
+              <LocationPicker
+                value={location}
+                handleChange={value =>
+                  setValue(`files.${currentIndex}.location`, value, {
+                    shouldDirty: true,
+                    shouldTouch: true,
+                  })
+                }
+                disabled={locationType === 'file' || locationType === 'none'}
+                mapboxToken={mapboxToken}
+                geocodingPlaceName={geocodingPlaceName}
+                {...register(`files.${currentIndex}.location`)}
+              />
+            </div>
+          )}
           <>
             {fileLocation && (
               <Radio
@@ -145,10 +139,13 @@ export const EditFileForm = ({
                 value={'file'}
                 selectedValue={locationType}
                 sx={{ mb: 2.5 }}
-                {...form.register('locationType')}
+                {...register(`files.${currentIndex}.locationType`)}
                 onChange={e => {
-                  form.setValue('locationType', 'file');
-                  form.setValue('location', fileLocation as Feature);
+                  setValue(`files.${currentIndex}.locationType`, 'file');
+                  setValue(
+                    `files.${currentIndex}.location`,
+                    fileLocation as Feature,
+                  );
                 }}
               />
             )}
@@ -158,22 +155,25 @@ export const EditFileForm = ({
               value={'none'}
               selectedValue={locationType}
               sx={{ mb: 2.5 }}
-              {...form.register('locationType')}
+              {...register(`files.${currentIndex}.locationType`)}
               onChange={e => {
-                form.setValue('locationType', 'none');
-                form.setValue('location', projectLocation as Feature);
+                setValue(`files.${currentIndex}.locationType`, 'none');
+                setValue(
+                  `files.${currentIndex}.location`,
+                  projectLocation as Feature,
+                );
               }}
             />
             <Radio
               label="Choose a specific location on the map"
               value={'custom'}
               selectedValue={locationType}
-              {...form.register('locationType')}
+              {...register(`files.${currentIndex}.locationType`)}
             />
           </>
         </RadioGroup>
       </div>
-      <CancelButtonFooter label="apply" onCancel={onClose} type="submit" />
-    </Form>
+      <CancelButtonFooter label="apply" onCancel={onClose} onClick={onSubmit} />
+    </>
   );
 };

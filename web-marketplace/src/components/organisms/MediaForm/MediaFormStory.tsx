@@ -65,10 +65,11 @@ export const MediaFormStory = ({
 
   /* Setter */
 
-  const setStoryMediaUrl = (value: string): void => {
-    setValue('regen:storyMedia.schema:url', encodeURI(value), {
-      shouldDirty: true,
-    });
+  const setStoryMediaUrl = ({ value }: { value?: string }): void => {
+    if (value)
+      setValue('regen:storyMedia.schema:url', encodeURI(value), {
+        shouldDirty: true,
+      });
     isDirtyRef.current = true;
   };
 

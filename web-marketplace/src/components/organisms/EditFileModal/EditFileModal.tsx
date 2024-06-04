@@ -17,17 +17,15 @@ type Props = Omit<
   EditFileFormProps,
   'setDebouncedViewState' | 'geocodingPlaceName'
 > &
-  Omit<FileDropRenderModalProps, 'initialFile' | 'currentIndex'>;
+  Omit<FileDropRenderModalProps, 'initialFile' | 'onSubmit'>;
 
 export const EditFileModal = ({
-  initialValues,
+  currentIndex,
   projectLocation,
   open,
-  value,
   onClose,
   mapboxToken,
   onSubmit,
-  className,
   fileLocation,
 }: Props) => {
   const [debouncedViewState, setDebouncedViewState] = useState<
@@ -55,14 +53,14 @@ export const EditFileModal = ({
   return (
     <Modal open={open} onClose={onClose}>
       <EditFileForm
-        initialValues={initialValues}
+        currentIndex={currentIndex}
         projectLocation={projectLocation}
         fileLocation={fileLocation}
         geocodingPlaceName={geocodingPlaceName}
         onClose={onClose}
+        onSubmit={onSubmit}
         mapboxToken={mapboxToken}
         setDebouncedViewState={setDebouncedViewState}
-        className={className}
       />
     </Modal>
   );

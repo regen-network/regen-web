@@ -24,7 +24,7 @@ interface Props {
   circularCrop?: boolean;
   fixedCrop?: Partial<Crop>;
   children: ReactNode;
-  setValue: (value: string) => void;
+  setValue: (params: { value: string }) => void;
   onUpload?: (imageFile: File) => Promise<string | undefined>;
   sx?: {
     label?: SxProps<Theme>;
@@ -82,7 +82,7 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
 
       if (result) {
         setInitialImage('');
-        setValue(result);
+        setValue({ value: result });
       }
     };
 

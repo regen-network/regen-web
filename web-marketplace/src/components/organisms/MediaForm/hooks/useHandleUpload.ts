@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { Feature } from 'geojson';
 import { useSetAtom } from 'jotai';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
@@ -12,12 +13,14 @@ type UseHandleUploadParams = {
   offChainProjectId?: string;
   apiServerUrl: string;
   setOffChainProjectId: UseStateSetter<string | undefined>;
+  subFolder?: string;
 };
 
 export const useHandleUpload = ({
   offChainProjectId,
   apiServerUrl,
   setOffChainProjectId,
+  subFolder = '',
 }: UseHandleUploadParams) => {
   const { createOrUpdateProject } = useCreateOrUpdateProject();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
@@ -25,7 +28,9 @@ export const useHandleUpload = ({
   const handleUpload = useCallback(
     async (
       file: File,
-    ): Promise<{ url: string; location?: string } | undefined> => {
+    ): Promise<
+      { url: string; location?: Feature; iri?: string } | undefined
+    > => {
       let projectId = offChainProjectId;
       try {
         if (!offChainProjectId) {
@@ -41,7 +46,7 @@ export const useHandleUpload = ({
           setOffChainProjectId(projectId);
           const uploaded = await uploadFile(
             file,
-            `projects/${projectId}`,
+            `projects/${projectId}${subFolder}`,
             apiServerUrl,
           );
           return uploaded;
@@ -59,6 +64,7 @@ export const useHandleUpload = ({
       offChainProjectId,
       setErrorBannerTextAtom,
       setOffChainProjectId,
+      subFolder,
     ],
   );
   return { handleUpload };

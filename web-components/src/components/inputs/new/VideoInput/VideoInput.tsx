@@ -29,7 +29,7 @@ export interface VideoInputProps extends Partial<FieldFormControlProps> {
   name?: string;
   label?: string;
   value?: string;
-  setValue?: (value: string) => void;
+  setValue?: (params: { value?: string }) => void;
   optional?: boolean | string;
   buttonText?: string;
   setError: (error: string | undefined) => void;
@@ -68,7 +68,7 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
       setVideoUrl(videoUrl);
       if (ReactPlayer.canPlay(videoUrl) && setValue) {
         setError(undefined);
-        setValue && setValue(videoUrl);
+        setValue && setValue({ value: videoUrl });
       } else {
         setError(VIDEO_URL_NOT_VALID);
       }
@@ -91,7 +91,7 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
     };
 
     const handleDelete = (): void => {
-      setValue && setValue('');
+      setValue && setValue({ value: '' });
       setVideoUrl('');
       setVideoLoaded(false);
     };

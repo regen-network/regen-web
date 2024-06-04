@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useFieldArray, useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { MAPBOX_TOKEN } from 'config/globals';
+import { Feature } from 'geojson';
 
 import { LocationIcon } from 'web-components/src/components/icons/LocationIcon';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
@@ -17,7 +18,6 @@ import { ReorderFields } from 'web-components/src/components/inputs/new/ReorderF
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
-import Modal from 'web-components/src/components/modal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Body, Title } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
@@ -32,6 +32,7 @@ import { EditFileFormSchemaType } from '../EditFileForm/EditFileForm.schema';
 import { EditFileModal } from '../EditFileModal/EditFileModal';
 import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { cropAspectMediaForm, DEFAULT } from '../MediaForm/MediaForm.constants';
+import { getHandleDelete } from '../MediaForm/MediaForm.utils';
 import { useMediaFormStyles } from '../MediaForm/useMediaFormStyles';
 import { useMetadataFormStyles } from '../MetadataForm/MetadataForm.styles';
 import {
@@ -48,6 +49,7 @@ export interface Props {
   projectLocation: GeocodeFeature;
   offChainProjectId?: string;
   onSubmit?: SubmitHandler<PostFormSchemaType>;
+  fileNamesToDeleteRef: MutableRefObject<string[]>;
 }
 
 export const PostForm = ({
@@ -56,6 +58,8 @@ export const PostForm = ({
   projectLocation,
   offChainProjectId: _offChainProjectId,
   onClose,
+  onSubmit,
+  fileNamesToDeleteRef,
 }: Props): JSX.Element => {
   const form = useZodForm({
     schema: postFormSchema,
@@ -86,14 +90,26 @@ export const PostForm = ({
     control: form.control,
   });
 
-  const setFiles = (
-    value: string,
-    mimeType: string,
-    fieldIndex: number,
-    lastInMultiUpload: boolean,
-  ): void => {
+  const setFiles = ({
+    value,
+    mimeType,
+    fieldIndex,
+    lastInMultiUpload,
+    location,
+    name,
+    iri,
+  }: {
+    value?: string;
+    mimeType: string;
+    fieldIndex: number;
+    lastInMultiUpload: boolean;
+    location?: Feature;
+    name?: string;
+    iri?: string;
+  }): void => {
     if (lastInMultiUpload) {
       append({
+        iri: DEFAULT,
         url: DEFAULT,
         name: DEFAULT,
         location: projectLocation,
@@ -101,8 +117,14 @@ export const PostForm = ({
         mimeType: '',
       });
     }
-    setValue(`files.${fieldIndex}.url`, encodeURI(value));
-    setValue(`files.${fieldIndex}.mimeType`, encodeURI(mimeType));
+    if (value) setValue(`files.${fieldIndex}.url`, encodeURI(value));
+    if (mimeType) setValue(`files.${fieldIndex}.mimeType`, mimeType);
+    if (name) setValue(`files.${fieldIndex}.name`, name);
+    if (iri) setValue(`files.${fieldIndex}.iri`, iri);
+    if (location) {
+      setValue(`files.${fieldIndex}.location`, location || projectLocation);
+      setValue(`files.${fieldIndex}.locationType`, location ? 'file' : 'none');
+    }
   };
 
   const [offChainProjectId, setOffChainProjectId] =
@@ -111,10 +133,16 @@ export const PostForm = ({
     offChainProjectId,
     apiServerUrl: apiUri,
     setOffChainProjectId,
+    subFolder: '/posts',
   });
-  const getHandleDeleteWithIndex = async (fieldIndex: number) => {
-    remove(fieldIndex);
-  };
+
+  const getHandleDeleteWithIndex = (fieldIndex: number) =>
+    getHandleDelete({
+      fileNamesToDeleteRef,
+      callback: (doSetValue: boolean = true) => {
+        if (doSetValue) remove(fieldIndex);
+      },
+    });
 
   /* Effect */
 
@@ -124,6 +152,7 @@ export const PostForm = ({
       fields?.every(field => field['url'] !== DEFAULT)
     ) {
       append({
+        iri: DEFAULT,
         url: DEFAULT,
         name: DEFAULT,
         location: projectLocation,
@@ -132,7 +161,7 @@ export const PostForm = ({
       });
     }
   }, [append, fields, projectLocation]);
-  console.log('files', files);
+
   return (
     <Form
       className={cn('max-w-[560px]', className)}
@@ -167,7 +196,7 @@ export const PostForm = ({
         rows={4}
         minRows={4}
         multiline
-        className={cn(textAreaClasses.field, 'mb-40 sm:mb-50 mt-0')}
+        className={cn(textAreaClasses.field, 'mt-0')}
         {...form.register('comment')}
       />
       <ReorderFields
@@ -195,7 +224,7 @@ export const PostForm = ({
                   : () => move(index, index + 1)
               }
               onUpload={handleUpload}
-              onDelete={() => getHandleDeleteWithIndex(index)}
+              onDelete={getHandleDeleteWithIndex(index)}
               value={url === DEFAULT ? '' : url}
               caption={file?.description}
               credit={file?.credit}
@@ -217,9 +246,9 @@ export const PostForm = ({
               helperText={errors['files']?.message}
               renderModal={({ open, value, onClose, onSubmit }) => (
                 <EditFileModal
+                  currentIndex={index}
                   open={open}
                   onClose={onClose}
-                  initialValues={file}
                   projectLocation={projectLocation}
                   mapboxToken={MAPBOX_TOKEN}
                   onSubmit={onSubmit}
@@ -227,6 +256,7 @@ export const PostForm = ({
               )}
               optional
               multi
+              uploadOnAdd
               {...imageDropCommonProps}
               {...form.register('files')}
             />

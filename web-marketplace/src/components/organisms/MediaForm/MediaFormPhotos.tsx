@@ -79,18 +79,22 @@ export const MediaFormPhotos = ({
 
   /* Setter */
 
-  const setPreviewPhoto = (value: string): void => {
-    setValue('regen:previewPhoto.schema:url', encodeURI(value), {
-      shouldDirty: true,
-    });
+  const setPreviewPhoto = ({ value }: { value?: string }): void => {
+    if (value)
+      setValue('regen:previewPhoto.schema:url', encodeURI(value), {
+        shouldDirty: true,
+      });
     isDirtyRef.current = true;
   };
-  const setGalleryPhotos = (
-    value: string,
-    _: string,
-    fieldIndex: number,
-    lastInMultiUpload: boolean,
-  ): void => {
+  const setGalleryPhotos = ({
+    value,
+    fieldIndex,
+    lastInMultiUpload,
+  }: {
+    value?: string;
+    fieldIndex: number;
+    lastInMultiUpload: boolean;
+  }): void => {
     if (lastInMultiUpload) {
       append({
         'schema:url': DEFAULT,
@@ -98,7 +102,11 @@ export const MediaFormPhotos = ({
         'schema:creditText': '',
       });
     }
-    setValue(`regen:galleryPhotos.${fieldIndex}.schema:url`, encodeURI(value));
+    if (value)
+      setValue(
+        `regen:galleryPhotos.${fieldIndex}.schema:url`,
+        encodeURI(value),
+      );
     isDirtyRef.current = true;
   };
 

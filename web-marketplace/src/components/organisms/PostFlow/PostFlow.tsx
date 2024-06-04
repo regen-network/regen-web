@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { Point } from '@mapbox/mapbox-sdk/services/map-matching';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
 
+import { isGeocodingFeature } from 'web-components/src/components/inputs/new/LocationField/LocationField.types';
 import Modal from 'web-components/src/components/modal';
 import { Item } from 'web-components/src/components/modal/TxModal';
 import { deleteImage } from 'web-components/src/utils/s3';
@@ -80,14 +82,19 @@ export const PostFlow = ({
               ...basePostContent,
               title: data.title,
               comment: data.comment,
-              files: files?.map(file => ({
-                iri: file.iri,
-                name: file.name,
-                description: file.description,
-                credit: file.credit,
-                locationType: file.locationType,
-                location: { wkt: file.location }, // TODO convert from geojson to wkt
-              })),
+              files: files?.map(file => {
+                const geocodePoint = file.location.geometry.coordinates;
+                return {
+                  iri: file.iri,
+                  name: file.name,
+                  description: file.description,
+                  credit: file.credit,
+                  locationType: file.locationType,
+                  location: {
+                    wkt: `POINT(${geocodePoint[0]} ${geocodePoint[1]})`,
+                  },
+                };
+              }),
             },
           },
           token,

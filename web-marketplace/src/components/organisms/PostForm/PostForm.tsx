@@ -76,7 +76,7 @@ export const PostForm = ({
   });
   const { classes } = useMediaFormStyles();
   const { classes: textAreaClasses } = useMetadataFormStyles();
-  const { errors } = form.formState;
+  const { errors, isValid } = form.formState;
   const { setValue } = form;
 
   const imageDropCommonProps: Partial<FileDropProps> = {
@@ -365,7 +365,12 @@ export const PostForm = ({
           </>
         </RadioGroup>
       </div>
-      <CancelButtonFooter label="publish" onCancel={onClose} type="submit" />
+      <CancelButtonFooter
+        disabled={!isValid}
+        label="publish"
+        onCancel={onClose}
+        type="submit"
+      />
     </Form>
   );
 };

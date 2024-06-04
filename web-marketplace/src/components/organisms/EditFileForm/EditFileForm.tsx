@@ -173,7 +173,12 @@ export const EditFileForm = ({
           </>
         </RadioGroup>
       </div>
-      <CancelButtonFooter label="apply" onCancel={onClose} onClick={onSubmit} />
+      <CancelButtonFooter
+        disabled={!!errors.files?.[currentIndex]}
+        label="apply"
+        onCancel={onClose}
+        onClick={onSubmit}
+      />
     </>
   );
 };

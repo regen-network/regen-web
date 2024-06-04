@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Feature } from 'geojson';
+import { Feature, Point } from 'geojson';
 import { useSetAtom } from 'jotai';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
@@ -29,7 +29,7 @@ export const useHandleUpload = ({
     async (
       file: File,
     ): Promise<
-      { url: string; location?: Feature; iri?: string } | undefined
+      { url: string; location?: Feature<Point>; iri?: string } | undefined
     > => {
       let projectId = offChainProjectId;
       try {

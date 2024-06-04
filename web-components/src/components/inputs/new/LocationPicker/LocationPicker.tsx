@@ -18,7 +18,7 @@ type LocationPickerProps = {
   disabled?: boolean;
   value: Feature | GeocodeFeature;
   mapboxToken?: string;
-  handleChange: (value: Feature | GeocodeFeature) => void;
+  handleChange: (value: Feature<Point> | GeocodeFeature) => void;
   onBlur: (
     value: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>,
   ) => void;

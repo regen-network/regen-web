@@ -1,11 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { Point } from '@mapbox/mapbox-sdk/services/map-matching';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
 
-import { isGeocodingFeature } from 'web-components/src/components/inputs/new/LocationField/LocationField.types';
 import Modal from 'web-components/src/components/modal';
 import { Item } from 'web-components/src/components/modal/TxModal';
 import { deleteImage } from 'web-components/src/utils/s3';

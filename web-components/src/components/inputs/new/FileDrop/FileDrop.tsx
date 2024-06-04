@@ -2,7 +2,7 @@ import React, { forwardRef, ReactNode, useState } from 'react';
 import { DropzoneOptions } from 'react-dropzone';
 import { Crop } from 'react-image-crop';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { Feature } from 'geojson';
+import { Feature, Point } from 'geojson';
 
 import { getImageSrc, srcToFile } from '../../../image-crop/canvas-utils';
 import FieldFormControl, {
@@ -44,14 +44,16 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
     mimeType: string;
     fieldIndex: number;
     lastInMultiUpload: boolean;
-    location?: Feature;
+    location?: Feature<Point>;
     name?: string;
     iri?: string;
   }) => void;
   onDelete?: (fileName: string, doSetValue?: boolean) => Promise<void>;
   onUpload?: (
     file: File,
-  ) => Promise<{ url: string; location?: Feature; iri?: string } | undefined>;
+  ) => Promise<
+    { url: string; location?: Feature<Point>; iri?: string } | undefined
+  >;
   accept?: string;
   multi?: boolean;
   moveUp?: () => void;

@@ -2,7 +2,7 @@ import { MutableRefObject, useEffect } from 'react';
 import { SubmitHandler, useFieldArray, useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { MAPBOX_TOKEN } from 'config/globals';
-import { Feature } from 'geojson';
+import { Feature, Point } from 'geojson';
 
 import { LocationIcon } from 'web-components/src/components/icons/LocationIcon';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
@@ -50,7 +50,7 @@ export interface Props {
   handleUpload: (file: File) => Promise<
     | {
         url: string;
-        location?: Feature | undefined;
+        location?: Feature<Point> | undefined;
         iri?: string | undefined;
       }
     | undefined
@@ -109,7 +109,7 @@ export const PostForm = ({
     mimeType: string;
     fieldIndex: number;
     lastInMultiUpload: boolean;
-    location?: Feature;
+    location?: Feature<Point>;
     name?: string;
     iri?: string;
   }): void => {

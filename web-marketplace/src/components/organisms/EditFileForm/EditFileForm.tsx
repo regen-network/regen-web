@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { Feature } from 'geojson';
+import { Feature, Point } from 'geojson';
 
 import { isImage } from 'web-components/src/components/inputs/new/FileDrop/FileDrop.utils';
 import { isGeocodingFeature } from 'web-components/src/components/inputs/new/LocationField/LocationField.types';
@@ -144,7 +144,7 @@ export const EditFileForm = ({
                   setValue(`files.${currentIndex}.locationType`, 'file');
                   setValue(
                     `files.${currentIndex}.location`,
-                    fileLocation as Feature,
+                    fileLocation as Feature<Point>,
                   );
                 }}
               />
@@ -160,7 +160,7 @@ export const EditFileForm = ({
                 setValue(`files.${currentIndex}.locationType`, 'none');
                 setValue(
                   `files.${currentIndex}.location`,
-                  projectLocation as Feature,
+                  projectLocation as GeocodeFeature,
                 );
               }}
             />

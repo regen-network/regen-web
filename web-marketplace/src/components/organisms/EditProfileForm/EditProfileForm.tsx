@@ -45,7 +45,7 @@ export interface EditProfileFormProps {
   isDirtyRef?: MutableRefObject<boolean>;
   onSubmit: (values: EditProfileFormSchemaType) => Promise<void>;
   onSuccess?: () => void;
-  onUpload?: (imageFile: File) => Promise<string>;
+  onUpload?: (imageFile: File) => Promise<{ url: string }>;
 }
 
 const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
@@ -91,10 +91,10 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
 
     /* Setter */
 
-    const setProfileImage = (value: string): void => {
+    const setProfileImage = ({ value }: { value: string }): void => {
       form.setValue('profileImage', value);
     };
-    const setBackgroundImage = (value: string): void => {
+    const setBackgroundImage = ({ value }: { value: string }): void => {
       form.setValue('backgroundImage', value);
     };
 

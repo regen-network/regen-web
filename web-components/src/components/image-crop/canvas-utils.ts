@@ -81,7 +81,7 @@ export async function srcToFile(
   return new File([buf], fileName, { type: mimeType });
 }
 
-type GetImageSrcParams = {
+export type GetImageSrcParams = {
   croppedImage: HTMLImageElement;
   onUpload?: (
     file: File,

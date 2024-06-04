@@ -7,7 +7,10 @@ import { useQuery } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
-import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import {
+  NormalizeProject,
+  normalizeProjectWithMetadata,
+} from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin';
 import { getAccountProjectsByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
@@ -124,7 +127,7 @@ export const useFetchProjectByAdmin = ({
   ];
 
   return {
-    adminProjects: projects,
+    adminProjects: projects as NormalizeProject[],
     accountData,
     isLoadingAdminProjects:
       isAccountLoading ||

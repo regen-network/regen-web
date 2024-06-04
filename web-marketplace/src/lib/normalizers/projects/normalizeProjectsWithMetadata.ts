@@ -1,3 +1,4 @@
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
 import { formatNumber } from 'web-components/src/utils/format';
@@ -85,6 +86,19 @@ interface NormalizeProjectWithMetadataParams {
   >;
 }
 
+export type NormalizeProject = ProjectWithOrderData & {
+  id?: string;
+  offChainId?: string;
+  slug?: string;
+  name?: string;
+  href?: string;
+  imgSrc?: string;
+  location?: GeocodeFeature;
+  place?: string;
+  program?: Maybe<AccountFieldsFragment>;
+  area?: number;
+  projectPrefinancing?: ProjectPrefinancing;
+};
 export const normalizeProjectWithMetadata = ({
   offChainProject,
   projectWithOrderData,
@@ -94,7 +108,7 @@ export const normalizeProjectWithMetadata = ({
   classMetadata,
   sanityClass,
   projectPrefinancing,
-}: NormalizeProjectWithMetadataParams) => {
+}: NormalizeProjectWithMetadataParams): NormalizeProject => {
   const creditClassImage = getClassImageWithProjectDefault({
     metadata: classMetadata,
     sanityClass,
@@ -147,5 +161,5 @@ export const normalizeProjectWithMetadata = ({
           })
         : undefined,
     },
-  } as ProjectWithOrderData;
+  } as NormalizeProject;
 };

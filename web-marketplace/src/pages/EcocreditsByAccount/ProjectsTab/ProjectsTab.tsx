@@ -39,14 +39,14 @@ const ProjectsTab = (): JSX.Element => {
               <WithLoader isLoading={isLoadingAdminProjects} variant="skeleton">
                 <ProjectCard
                   {...DEFAULT_PROJECT}
-                  {...project}
+                  {...(project as ProjectWithOrderData)}
                   onClick={() => project.href && navigate(project.href)}
                   track={track}
                   pathname={location.pathname}
                   imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                   apiServerUrl={API_URI}
                   onButtonClick={() => {
-                    setSelectedProject(project);
+                    setSelectedProject(project as ProjectWithOrderData);
                     setIsBuyFlowStarted(true);
                   }}
                 />

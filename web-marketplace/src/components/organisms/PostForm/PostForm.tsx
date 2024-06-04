@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { MutableRefObject, useEffect } from 'react';
 import { SubmitHandler, useFieldArray, useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { MAPBOX_TOKEN } from 'config/globals';
@@ -22,15 +22,12 @@ import { CancelButtonFooter } from 'web-components/src/components/organisms/Canc
 import { Body, Title } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import { apiUri } from 'lib/apiUri';
-
 import { Link } from 'components/atoms';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import { EditFileFormSchemaType } from '../EditFileForm/EditFileForm.schema';
 import { EditFileModal } from '../EditFileModal/EditFileModal';
-import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { cropAspectMediaForm, DEFAULT } from '../MediaForm/MediaForm.constants';
 import { getHandleDelete } from '../MediaForm/MediaForm.utils';
 import { useMediaFormStyles } from '../MediaForm/useMediaFormStyles';
@@ -43,13 +40,21 @@ import {
 import { postFormSchema, PostFormSchemaType } from './PostForm.schema';
 
 export interface Props {
-  initialValues: PostFormSchemaType;
+  initialValues?: PostFormSchemaType;
   className?: string;
   onClose: () => void;
   projectLocation: GeocodeFeature;
   offChainProjectId?: string;
   onSubmit?: SubmitHandler<PostFormSchemaType>;
   fileNamesToDeleteRef: MutableRefObject<string[]>;
+  handleUpload: (file: File) => Promise<
+    | {
+        url: string;
+        location?: Feature | undefined;
+        iri?: string | undefined;
+      }
+    | undefined
+  >;
 }
 
 export const PostForm = ({
@@ -60,6 +65,7 @@ export const PostForm = ({
   onClose,
   onSubmit,
   fileNamesToDeleteRef,
+  handleUpload,
 }: Props): JSX.Element => {
   const form = useZodForm({
     schema: postFormSchema,
@@ -126,15 +132,6 @@ export const PostForm = ({
       setValue(`files.${fieldIndex}.locationType`, location ? 'file' : 'none');
     }
   };
-
-  const [offChainProjectId, setOffChainProjectId] =
-    useState(_offChainProjectId);
-  const { handleUpload } = useHandleUpload({
-    offChainProjectId,
-    apiServerUrl: apiUri,
-    setOffChainProjectId,
-    subFolder: '/posts',
-  });
 
   const getHandleDeleteWithIndex = (fieldIndex: number) =>
     getHandleDelete({

@@ -3,12 +3,11 @@ import { SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
 
-import ContainedButton from 'src/components/buttons/ContainedButton';
-
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import { cn } from '../../../utils/styles/cn';
 import { BlockContent, SanityBlockContent } from '../../block-content';
+import ContainedButton from '../../buttons/ContainedButton';
 import OutlinedButton from '../../buttons/OutlinedButton';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import { PrefinanceIcon } from '../../icons/PrefinanceIcon';

@@ -115,7 +115,14 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
             setIsModalOpen(true);
             setInitialFile(base64String);
             if (uploadOnAdd && onUpload) {
-              const uploaded = await onUpload(file);
+              const timestamp = new Date().getTime();
+              const fileNameWithTimestamp = `${timestamp}-${file.name}`;
+              const buf = await file.arrayBuffer();
+              const uploaded = await onUpload(
+                new File([buf], fileNameWithTimestamp, {
+                  type: file.type,
+                }),
+              );
               if (uploaded) {
                 const remainingFiles = selectedFiles.slice(1);
                 setValue({
@@ -137,6 +144,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
 
     const onModalClose = async () => {
       if (!isEdit && uploadOnAdd && onDelete && value) {
+        console.log('onDelete');
         await onDelete(value, true);
       }
       setInitialFile('');

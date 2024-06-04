@@ -124,7 +124,7 @@ const MyProjects = (): JSX.Element => {
           // initialValues={{}}
           projectLocation={
             adminProjects.find(project => project.id === postProjectId)
-              ?.location
+              ?.location as GeocodeFeature
           }
           projectId={postProjectId}
           offChainProjectId={postOffChainProjectId}

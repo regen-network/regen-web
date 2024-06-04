@@ -3,7 +3,6 @@ import { BasketTakeForm } from './BasketTakeForm';
 // import OrganizationProfileForm from './OrganizationProfileForm';
 import LoginForm from './LoginForm';
 import { FormValues, RecipientsForm } from './RecipientsForm';
-import UserProfileForm from './UserProfileForm';
 
 export default {
   title: 'Forms',
@@ -17,13 +16,6 @@ const submit = async (): Promise<void> => {
     setTimeout(resolve, 1000);
   });
 };
-
-export const userProfile = (): JSX.Element => (
-  <UserProfileForm
-    submit={submit}
-    initialValues={{ name: 'Name', roleTitle: 'Role title' }}
-  />
-);
 
 export const signUpForm = (): JSX.Element => (
   <LoginForm

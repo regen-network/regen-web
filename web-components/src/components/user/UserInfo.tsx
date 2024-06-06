@@ -35,6 +35,9 @@ interface UserInfoProps {
   border?: boolean;
   sx?: SxProps<Theme>;
   nameHasPadding?: boolean;
+  classNames?: {
+    info?: string;
+  };
 }
 export default function UserInfo({
   user,
@@ -45,6 +48,7 @@ export default function UserInfo({
   titleComponent = 'title',
   sx = [],
   nameHasPadding = true,
+  classNames,
 }: UserInfoProps): JSX.Element {
   const sizeVariant = getSizeVariant(size);
   const mobileSizeVariant = getSizeVariant(getMobileSize(size));
@@ -91,6 +95,7 @@ export default function UserInfo({
           textAlign: direction === 'column' ? 'center' : 'left',
           pt: nameHasPadding ? 2 : 0,
         }}
+        className={classNames?.info}
       >
         <div className="inline-flex">
           {user.link ? (
@@ -101,7 +106,7 @@ export default function UserInfo({
             name
           )}
           {user.tag && (
-            <TextButton className="ml-5 text-[11px] text-grey-500 bg-grey-300 rounded">
+            <TextButton className="ml-5 text-[10px] text-grey-500 bg-grey-300 rounded">
               {user.tag}
             </TextButton>
           )}

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.1](https://github.com/regen-network/regen-web/compare/v2.6.0...v2.6.1) (2024-06-06)
+
+### Bug Fixes
+
+- add missing allImages to Gallery on project page ([07ff8c9](https://github.com/regen-network/regen-web/commit/07ff8c9dfac2ff3141e6713c4edf4f5169b05ec7))
+
 # [2.6.0](https://github.com/regen-network/regen-web/compare/v2.5.1...v2.6.0) (2024-05-30)
 
 ### Bug Fixes

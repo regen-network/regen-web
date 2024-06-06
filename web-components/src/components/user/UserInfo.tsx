@@ -4,6 +4,7 @@ import Grid, { GridDirection } from '@mui/material/Grid';
 
 import { headerFontFamily, Theme } from '../../theme/muiTheme';
 import { BlockContent, SanityBlockContent } from '../block-content';
+import { TextButton } from '../buttons/TextButton';
 import { Body, Subtitle, Title } from '../typography';
 import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
 import UserAvatar from './UserAvatar';
@@ -17,6 +18,8 @@ export interface User {
   image?: string | null;
   description?: string | null;
   link?: string | null;
+  timestamp?: string;
+  tag?: string;
 }
 
 export interface Account extends User {
@@ -89,12 +92,24 @@ export default function UserInfo({
           pt: nameHasPadding ? 2 : 0,
         }}
       >
-        {user.link ? (
-          <Link sx={{ color: 'primary.contrastText' }} href={user.link}>
-            {name}
-          </Link>
-        ) : (
-          name
+        <div className="inline-flex">
+          {user.link ? (
+            <Link sx={{ color: 'primary.contrastText' }} href={user.link}>
+              {name}
+            </Link>
+          ) : (
+            name
+          )}
+          {user.tag && (
+            <TextButton className="ml-5 text-[11px] text-grey-500 bg-grey-300 rounded">
+              {user.tag}
+            </TextButton>
+          )}
+        </div>
+        {user.timestamp && (
+          <Body size="md" className="text-grey-400 pt-5">
+            {user.timestamp}
+          </Body>
         )}
         {user.location && (
           <Body size="sm" pt={1.6}>

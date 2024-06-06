@@ -12,6 +12,7 @@ import {
   Maybe,
   ProjectPrefinanceTimelineItem,
 } from 'generated/sanity-graphql';
+
 import { formatTimelineDates } from './ProjectDetails.utils';
 
 type Props = {

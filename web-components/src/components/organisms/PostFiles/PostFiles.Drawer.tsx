@@ -64,7 +64,7 @@ const PostFilesDrawer = ({
       <Slide direction="left" in={open} mountOnEnter unmountOnExit>
         <div
           ref={ref}
-          className="overflow-y-auto border-solid border-0 border-t border-l border-r border-grey-200 absolute top-0 right-0 w-[150px] h-[100%] z-10"
+          className="bg-grey-0 overflow-y-auto border-solid border-0 border-t border-l border-r border-grey-200 absolute top-0 right-0 w-[150px] h-[100%] z-10"
         >
           {files.map(file => {
             const { mimeType, url } = file;

@@ -100,6 +100,7 @@ import ShadedCreditsIcon from './ShadedCreditsIcon';
 import ShareIcon from './ShareIcon';
 import ShieldIcon from './ShieldIcon';
 import SmallArrowIcon from './SmallArrowIcon';
+import { SmallDotsIcon } from './SmallDotsIcon';
 import DiscordIcon from './social/DiscordIcon';
 import FacebookIcon from './social/FacebookIcon';
 import GithubIcon from './social/GithubIcon';
@@ -288,7 +289,7 @@ export const allIcons = (): JSX.Element => (
       icon={<NoRetirementCertificatesIcon />}
       label="NoRetirementCertificatesIcon"
     />
-    
+
     <LabeledIcon icon={<OpenInNewIcon />} label="OpenInNewIcon" />
     <LabeledIcon icon={<OrganizationIcon />} label="OrganizationIcon" />
 
@@ -342,6 +343,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<ShadedCreditsIcon />} label="ShadedCreditsIcon" />
     <LabeledIcon icon={<ShieldIcon />} label="ShieldIcon" />
     <LabeledIcon icon={<SmallArrowIcon />} label="SmallArrowIcon" />
+    <LabeledIcon icon={<SmallDotsIcon />} label="SmallDotsIcon" />
     <LabeledIcon icon={<WebsiteLinkIcon />} label="SocialLinkIcon" />
     <LabeledIcon icon={<SoilSampleIcon />} label="SoilSampleIcon" />
     <LabeledIcon icon={<Spinner />} label="Spinner" />

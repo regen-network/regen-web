@@ -65,7 +65,7 @@ const PostFilesPublic = ({
     () =>
       files.reduce((group: { [key: string]: Array<PostFile> }, file) => {
         const { location } = file;
-        const coord = `${location.coordinates[1]},${location.coordinates[0]}`;
+        const coord = `${location?.coordinates[1]},${location?.coordinates[0]}`;
         group[coord] = group[coord] ?? [];
         group[coord].push(file);
         return group;
@@ -115,7 +115,7 @@ const PostFilesPublic = ({
   }, [selectedLocation]);
 
   return (
-    <div className={cn(styles.map, 'h-[600px]')}>
+    <div className={cn(styles.map, 'h-[550px]')}>
       <Suspense fallback={<CircularProgress color="secondary" />}>
         <Map
           initialViewState={{
@@ -124,7 +124,11 @@ const PostFilesPublic = ({
             longitude: 0.0,
           }}
           ref={mapRef}
-          style={{ width: '100%', height: '100%' }}
+          style={{
+            width: '100%',
+            height: '100%',
+            borderRadius: mobile ? 'unset' : '10px',
+          }}
           mapboxAccessToken={mapboxToken}
           mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
           onLoad={onLoad}

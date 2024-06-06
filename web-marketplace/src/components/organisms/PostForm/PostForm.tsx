@@ -178,7 +178,6 @@ export const PostForm = ({
       });
     }
   }, [append, fields, projectLocation]);
-  console.log('files', files);
 
   return (
     <Form
@@ -232,7 +231,6 @@ export const PostForm = ({
         getFieldElement={(_: Record<'id', string>, index: number) => {
           const file = files?.[index] as EditFileFormSchemaType;
           const url = file?.url;
-
           return (
             <FileDrop
               moveUp={index === 0 ? undefined : () => move(index, index - 1)}
@@ -260,11 +258,12 @@ export const PostForm = ({
                 classes.galleryItem,
               )}
               fieldIndex={index}
+              dropZoneOption={{ multiple: true }}
               error={!!errors['files']}
               helperText={errors['files']?.message}
-              renderModal={({ open, value, onClose, onSubmit }) => (
+              renderModal={({ open, currentIndex, onClose, onSubmit }) => (
                 <EditFileModal
-                  currentIndex={index}
+                  currentIndex={currentIndex}
                   open={open}
                   onClose={onClose}
                   projectLocation={projectLocation}

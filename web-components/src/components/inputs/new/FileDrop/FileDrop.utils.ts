@@ -13,3 +13,41 @@ export const isVideo = (mimeType?: string) => !!mimeType?.includes('video/');
 export const isAudio = (mimeType?: string) => !!mimeType?.includes('audio/');
 export const isPdf = (mimeType?: string) => mimeType === 'application/pdf';
 export const isSpreadSheet = (mimeType?: string) => mimeType === 'text/csv';
+
+export type ExifGPSData = {
+  GPSLatitude: [number, number, number];
+  GPSLongitude: [number, number, number];
+  GPSLatitudeRef: string;
+  GPSLongitudeRef: string;
+  GPSAltitude?: number;
+};
+
+export const exifToFeature = (exifGPSData: ExifGPSData) => {
+  if (!exifGPSData.GPSLatitude) {
+    return;
+  }
+  let lat =
+    exifGPSData.GPSLatitude[0] +
+    exifGPSData.GPSLatitude[1] / 60 +
+    exifGPSData.GPSLatitude[2] / 3600;
+  let lng =
+    exifGPSData.GPSLongitude[0] +
+    exifGPSData.GPSLongitude[1] / 60 +
+    exifGPSData.GPSLongitude[2] / 3600;
+  if (exifGPSData.GPSLatitudeRef.toLowerCase() === 's') {
+    lat = -lat;
+  }
+  if (exifGPSData.GPSLongitudeRef.toLowerCase() === 'w') {
+    lng = -lng;
+  }
+  const alt = exifGPSData.GPSAltitude;
+  const coord = alt ? [lng, lat, alt] : [lng, lat];
+  return {
+    type: 'Feature',
+    properties: {},
+    geometry: {
+      type: 'Point',
+      coordinates: coord,
+    },
+  };
+};

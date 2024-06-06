@@ -11,7 +11,7 @@ import FieldFormControl, {
 import { FileDropFile } from './FileDrop.File';
 import { useFileDropStyles } from './FileDrop.styles';
 import { FileDropRenderModalProps } from './FileDrop.types';
-import { toBase64 } from './FileDrop.utils';
+import { ExifGPSData, toBase64 } from './FileDrop.utils';
 import { FileDropZone } from './FileDrop.Zone';
 
 export interface FileDropProps extends Partial<FieldFormControlProps> {
@@ -44,7 +44,7 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
     mimeType: string;
     fieldIndex: number;
     lastInMultiUpload: boolean;
-    location?: Feature<Point>;
+    location?: ExifGPSData;
     name?: string;
     iri?: string;
   }) => void;
@@ -52,7 +52,7 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
   onUpload?: (
     file: File,
   ) => Promise<
-    { url: string; location?: Feature<Point>; iri?: string } | undefined
+    { url: string; location?: ExifGPSData; iri?: string } | undefined
   >;
   accept?: string;
   multi?: boolean;
@@ -107,7 +107,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
 
     const { classes: styles, cx } = useFileDropStyles();
     const isFirstField = fieldIndex === 0;
-
+    console.log('fieldIndex', fieldIndex);
     const handleDrop = (files: File[]): void => {
       if (files && files.length > 0) {
         const file = files[0];

@@ -35,6 +35,7 @@ export const LocationPicker = ({
 }: LocationPickerProps): JSX.Element => {
   const mapRef = useRef<MapRef | null>(null);
   const point = value.geometry as Point;
+
   const displayedLocation = `${point.coordinates[0]}, ${point.coordinates[1]} ${
     geocodingPlaceName ? `(${geocodingPlaceName})` : ''
   }`;

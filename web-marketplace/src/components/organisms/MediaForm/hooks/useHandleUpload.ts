@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
-import { Feature, Point } from 'geojson';
 import { useSetAtom } from 'jotai';
 
+import { ExifGPSData } from 'web-components/src/components/inputs/new/FileDrop/FileDrop.utils';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 import { uploadFile } from 'web-components/src/utils/s3';
 
@@ -29,7 +29,7 @@ export const useHandleUpload = ({
     async (
       file: File,
     ): Promise<
-      { url: string; location?: Feature<Point>; iri?: string } | undefined
+      { url: string; location?: ExifGPSData; iri?: string } | undefined
     > => {
       let projectId = offChainProjectId;
       try {

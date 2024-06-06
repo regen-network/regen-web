@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect } from 'react';
+import { MutableRefObject, useEffect, useState } from 'react';
 import { SubmitHandler, useFieldArray, useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { MAPBOX_TOKEN } from 'config/globals';
@@ -12,6 +12,10 @@ import {
   FileDrop,
   FileDropProps,
 } from 'web-components/src/components/inputs/new/FileDrop/FileDrop';
+import {
+  ExifGPSData,
+  exifToFeature,
+} from 'web-components/src/components/inputs/new/FileDrop/FileDrop.utils';
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/RadioGroup';
 import { ReorderFields } from 'web-components/src/components/inputs/new/ReorderFields/ReorderFields';
@@ -50,7 +54,7 @@ export interface Props {
   handleUpload: (file: File) => Promise<
     | {
         url: string;
-        location?: Feature<Point> | undefined;
+        location?: ExifGPSData;
         iri?: string | undefined;
       }
     | undefined
@@ -96,6 +100,10 @@ export const PostForm = ({
     control: form.control,
   });
 
+  const [fileLocation, setFileLocation] = useState<{
+    [index: number]: Feature<Point>;
+  }>({});
+
   const setFiles = ({
     value,
     mimeType,
@@ -109,7 +117,7 @@ export const PostForm = ({
     mimeType: string;
     fieldIndex: number;
     lastInMultiUpload: boolean;
-    location?: Feature<Point>;
+    location?: ExifGPSData;
     name?: string;
     iri?: string;
   }): void => {
@@ -127,9 +135,21 @@ export const PostForm = ({
     if (mimeType) setValue(`files.${fieldIndex}.mimeType`, mimeType);
     if (name) setValue(`files.${fieldIndex}.name`, name);
     if (iri) setValue(`files.${fieldIndex}.iri`, iri);
+
+    let featureLocation: Feature<Point> | undefined;
     if (location) {
-      setValue(`files.${fieldIndex}.location`, location || projectLocation);
-      setValue(`files.${fieldIndex}.locationType`, location ? 'file' : 'none');
+      featureLocation = exifToFeature(location) as Feature<Point> | undefined;
+      if (featureLocation) {
+        setValue(`files.${fieldIndex}.location`, featureLocation);
+        setFileLocation(prev => ({
+          ...prev,
+          fieldIndex: featureLocation as Feature<Point>,
+        }));
+        setValue(
+          `files.${fieldIndex}.locationType`,
+          featureLocation ? 'file' : 'none',
+        );
+      }
     }
   };
 
@@ -158,6 +178,7 @@ export const PostForm = ({
       });
     }
   }, [append, fields, projectLocation]);
+  console.log('files', files);
 
   return (
     <Form
@@ -249,6 +270,7 @@ export const PostForm = ({
                   projectLocation={projectLocation}
                   mapboxToken={MAPBOX_TOKEN}
                   onSubmit={onSubmit}
+                  fileLocation={fileLocation[index]}
                 />
               )}
               optional

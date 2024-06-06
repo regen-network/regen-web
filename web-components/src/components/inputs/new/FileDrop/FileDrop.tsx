@@ -146,7 +146,6 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
 
     const onModalClose = async () => {
       if (!isEdit && uploadOnAdd && onDelete && value) {
-        console.log('onDelete');
         await onDelete(value, true);
       }
       setInitialFile('');

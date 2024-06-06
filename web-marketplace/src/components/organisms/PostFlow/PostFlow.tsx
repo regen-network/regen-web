@@ -97,20 +97,6 @@ export const PostFlow = ({
           },
           token,
           retryCsrfRequest,
-          onSuccess: async res => {
-            // Delete any files that were removed on S3
-            await Promise.all(
-              fileNamesToDeleteRef?.current.map(async fileName => {
-                await deleteImage(
-                  `${PROJECTS_S3_PATH}/posts`,
-                  offChainProjectId ?? '',
-                  fileName,
-                  apiServerUrl,
-                );
-              }),
-            );
-            fileNamesToDeleteRef.current = [];
-          },
         });
 
         setIri(res.iri);
@@ -172,15 +158,32 @@ export const PostFlow = ({
     setTxSuccessfulModalAtom,
   ]);
 
+  const onClose = useCallback(async () => {
+    // Delete any files that were removed on S3
+    await Promise.all(
+      fileNamesToDeleteRef?.current.map(async (fileName): Promise<void> => {
+        await deleteImage(
+          PROJECTS_S3_PATH,
+          offChainProjectId ?? '',
+          fileName,
+          apiServerUrl,
+        );
+      }),
+    );
+    fileNamesToDeleteRef.current = [];
+
+    onModalClose();
+  }, [offChainProjectId, onModalClose]);
+
   return (
     <>
-      <Modal open={!!projectId} onClose={onModalClose}>
+      <Modal open={!!projectId} onClose={onClose}>
         {projectId && (
           <PostForm
             offChainProjectId={offChainProjectId}
             initialValues={initialValues}
             projectLocation={projectLocation}
-            onClose={onModalClose}
+            onClose={onClose}
             onSubmit={onSubmit}
             fileNamesToDeleteRef={fileNamesToDeleteRef}
             handleUpload={handleUpload}

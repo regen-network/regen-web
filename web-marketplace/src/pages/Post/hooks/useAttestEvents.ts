@@ -130,7 +130,7 @@ export const useAttestEvents = ({
 
   // Adding attest events
   if (txResponses) {
-    for (let i = 0; i < txResponses.length; i++) {
+    for (let i = txResponses.length - 1; i >= 0; i--) {
       if (
         !creatorAccount?.addr ||
         txResponses[i].attestor !== creatorAccount?.addr

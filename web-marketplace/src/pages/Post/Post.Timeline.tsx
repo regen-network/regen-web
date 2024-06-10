@@ -4,6 +4,7 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import { Grid } from '@mui/material';
 
 import Section from 'web-components/src/components/section';
 import {
@@ -68,23 +69,24 @@ export const PostTimeline = ({
               </TimelineSeparator>
 
               <TimelineContent className="p-20 pt-0">
-                <div className="inline-flex items-center sm:items-start">
-                  <Subtitle
-                    component="div"
-                    className="min-w-[60px] sm:min-w-[70px] w-[100%] mr-5"
-                  >
-                    {event.label}
-                  </Subtitle>
-                  <UserInfo
-                    size="sm"
-                    user={event.user}
-                    fontFamily={defaultFontFamily}
-                    classNames={{
-                      info: 'ml-3',
-                    }}
-                    nameHasPadding={false}
-                  />
-                </div>
+                <Grid container>
+                  <Grid item>
+                    <Subtitle component="div" className="mr-5">
+                      {event.label}
+                    </Subtitle>
+                  </Grid>
+                  <Grid item>
+                    <UserInfo
+                      size="sm"
+                      user={event.user}
+                      fontFamily={defaultFontFamily}
+                      classNames={{
+                        info: 'ml-3',
+                      }}
+                      nameHasPadding={false}
+                    />
+                  </Grid>
+                </Grid>
                 <Body className="text-grey-400 pt-5 pb-10" size="xs">
                   {event.timestamp}
                 </Body>

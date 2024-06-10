@@ -16,6 +16,7 @@ import FieldFormControl, {
   FieldFormControlProps,
 } from './../FieldFormControl/FieldFormControl';
 import Input from './../Input/Input';
+import { VIDEO_URL_NOT_VALID } from './VideoInput.constants';
 import { useVideoInputStyles } from './VideoInput.styles';
 
 export interface VideoInputProps extends Partial<FieldFormControlProps> {
@@ -49,6 +50,7 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
     ref,
   ) => {
     const [videoUrl, setVideoUrl] = useState('');
+    const [error, setError] = useState<string | undefined>(undefined);
     const [videoLoaded, setVideoLoaded] = useState(false);
     const { classes: styles, cx } = useVideoInputStyles();
     const theme = useTheme();
@@ -57,11 +59,14 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
     const handleChange = (
       event: React.ChangeEvent<{ value: unknown }>,
     ): void => {
-      setVideoUrl(event.target.value as string);
-    };
-
-    const handleUrlSubmit = (): void => {
-      setValue && setValue(videoUrl);
+      const videoUrl = event.target.value as string;
+      setVideoUrl(videoUrl);
+      if (ReactPlayer.canPlay(videoUrl) && setValue) {
+        setError(undefined);
+        setValue && setValue(videoUrl);
+      } else {
+        setError(VIDEO_URL_NOT_VALID);
+      }
     };
 
     const handleDelete = (): void => {
@@ -75,6 +80,8 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
         className={cx(styles.root, classes?.root, className)}
         label={label}
         optional={optional}
+        error={!!error}
+        helperText={error ?? undefined}
         {...fieldProps}
       >
         <>
@@ -122,13 +129,6 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
                 name={name}
                 ref={ref}
               />
-              <OutlinedButton
-                classes={{ root: cx(styles.button, classes?.button) }}
-                onClick={handleUrlSubmit}
-                aria-label="set video url"
-              >
-                {buttonText || '+ video'}
-              </OutlinedButton>
             </div>
           )}
         </>

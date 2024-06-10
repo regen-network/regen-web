@@ -30,7 +30,7 @@ import { PostTimeline } from './Post.Timeline';
 function Post(): JSX.Element {
   const { iri } = useParams();
   const { activeAccountId } = useAuth();
-  const { data, isInitialLoading } = useQuery(
+  const { data, isFetching } = useQuery(
     getPostQuery({
       iri,
       enabled: !!iri,
@@ -42,7 +42,7 @@ function Post(): JSX.Element {
   const projectId = data?.projectId;
   const {
     data: offchainProjectByIdData,
-    isInitialLoading: loadingOffchainProjectById,
+    isFetching: loadingOffchainProjectById,
   } = useQuery(
     getProjectByIdQuery({
       client: graphqlClient,
@@ -53,14 +53,16 @@ function Post(): JSX.Element {
 
   const offchainProject = offchainProjectByIdData?.data?.projectById;
   const adminAccountId = offchainProject?.adminAccountId;
-  const isAdmin = adminAccountId === activeAccountId;
+  const isAdmin =
+    !!adminAccountId && !!activeAccountId && adminAccountId === activeAccountId;
   const privacyType = data?.privacy;
-  const privatePost = data?.privacy === 'private';
+  const privatePost =
+    data?.privacy === 'private' || data?.error === 'private post';
   const privateFiles = data?.privacy === 'private_files';
 
   const files = useMemo(
     () =>
-      data?.contents.files?.map((file, i) => {
+      data?.contents?.files?.map((file, i) => {
         return {
           iri: file.iri,
           url: data?.filesUrls?.[file.iri],
@@ -73,7 +75,7 @@ function Post(): JSX.Element {
             : undefined,
         };
       }),
-    [data?.contents.files, data?.filesMimeTypes, data?.filesUrls],
+    [data?.contents?.files, data?.filesMimeTypes, data?.filesUrls],
   );
 
   const { data: creatorAccountData } = useQuery(
@@ -89,72 +91,76 @@ function Post(): JSX.Element {
 
   return (
     <>
-      {!isInitialLoading && !data ? (
+      {!isFetching && !data ? (
         <NotFoundPage />
       ) : (
         <>
           {!loadingOffchainProjectById && !isAdmin && privatePost && (
             <PostPrivate />
           )}
-          {!loadingOffchainProjectById && data && (!privatePost || isAdmin) && (
-            <>
-              <PostHeader
-                projectHref={`/project/${
-                  offchainProject?.slug ??
-                  offchainProject?.onChainId ??
-                  projectId
-                }`}
-                isAdmin={isAdmin}
-                title={data.contents.title}
-                creatorAccount={creatorAccount}
-                adminAccountId={adminAccountId}
-                creatorIsAdmin={creatorIsAdmin}
-                createdAt={createdAt}
-                privatePost={privatePost}
-              />
+          {!loadingOffchainProjectById &&
+            data?.contents &&
+            (!privatePost || isAdmin) && (
+              <>
+                <PostHeader
+                  projectHref={`/project/${
+                    offchainProject?.slug ??
+                    offchainProject?.onChainId ??
+                    projectId
+                  }`}
+                  isAdmin={isAdmin}
+                  title={data.contents.title}
+                  creatorAccount={creatorAccount}
+                  adminAccountId={adminAccountId}
+                  creatorIsAdmin={creatorIsAdmin}
+                  createdAt={createdAt}
+                  privatePost={privatePost}
+                />
 
-              {privacyType && files && files.length > 0 && (
-                <div
-                  className={`${
-                    !isAdmin && privateFiles ? 'max-w-[750px]' : 'max-w-[942px]'
-                  } m-auto relative mb-30 sm:mb-[70px]`}
-                >
-                  <PostFiles
-                    privacyType={privacyType}
-                    mapboxToken={MAPBOX_TOKEN}
-                    isAdmin={isAdmin}
-                    files={files}
-                  />
-                  {(isAdmin || !privateFiles) && (
-                    <img
-                      className="absolute top-[17px] left-20 z-[-1]"
-                      src="/png/bg-shadow.png"
-                      alt="bg-shadow"
+                {privacyType && files && files.length > 0 && (
+                  <div
+                    className={`${
+                      !isAdmin && privateFiles
+                        ? 'max-w-[750px]'
+                        : 'max-w-[942px]'
+                    } m-auto relative mb-30 sm:mb-[70px]`}
+                  >
+                    <PostFiles
+                      privacyType={privacyType}
+                      mapboxToken={MAPBOX_TOKEN}
+                      isAdmin={isAdmin}
+                      files={files}
                     />
-                  )}
-                </div>
-              )}
+                    {(isAdmin || !privateFiles) && (
+                      <img
+                        className="absolute top-[17px] left-20 z-[-1]"
+                        src="/png/bg-shadow.png"
+                        alt="bg-shadow"
+                      />
+                    )}
+                  </div>
+                )}
 
-              <Section className="sm:p-0 py-0">
-                <Body className="max-w-[750px] m-auto" size="xl">
-                  {data?.contents.comment}
-                </Body>
-                <div className="my-40 sm:my-50 mx-auto border-t-[1px] border-b-0 border-solid border-grey-300 max-w-[750px] w-[100%]" />
-              </Section>
+                <Section className="sm:p-0 py-0">
+                  <Body className="max-w-[750px] m-auto" size="xl">
+                    {data?.contents.comment}
+                  </Body>
+                  <div className="my-40 sm:my-50 mx-auto border-t-[1px] border-b-0 border-solid border-grey-300 max-w-[750px] w-[100%]" />
+                </Section>
 
-              <PostTimeline
-                createdAt={createdAt}
-                creatorAccount={creatorAccount}
-                creatorIsAdmin={creatorIsAdmin}
-                registryAddr={
-                  offchainProject?.creditClassByCreditClassId
-                    ?.accountByRegistryId?.addr
-                }
-              />
+                <PostTimeline
+                  createdAt={createdAt}
+                  creatorAccount={creatorAccount}
+                  creatorIsAdmin={creatorIsAdmin}
+                  registryAddr={
+                    offchainProject?.creditClassByCreditClassId
+                      ?.accountByRegistryId?.addr
+                  }
+                />
 
-              <PostFooter />
-            </>
-          )}
+                <PostFooter />
+              </>
+            )}
         </>
       )}
     </>

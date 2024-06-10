@@ -36,6 +36,7 @@ export type Post = {
         [iri: string]: string;
       }
     | undefined;
+  error?: string;
 };
 
 export type ReactQueryGetPostQueryResponse = QueryObserverOptions<Post | null>;

@@ -22,6 +22,7 @@ import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/gra
 
 import NotFoundPage from 'pages/NotFound';
 
+import { PostFooter } from './Post.Footer';
 import { PostHeader } from './Post.Header';
 import { PostPrivate } from './Post.Private';
 import { PostTimeline } from './Post.Timeline';
@@ -150,6 +151,8 @@ function Post(): JSX.Element {
                     ?.accountByRegistryId?.addr
                 }
               />
+
+              <PostFooter />
             </>
           )}
         </>

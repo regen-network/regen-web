@@ -77,7 +77,7 @@ export const PostHeader = ({
           <div className="flex items-center">
             {privatePost && (
               <Tag
-                className="h-[26px] bg-error-300 mr-[18px]"
+                className="h-[26px] bg-error-300 mr-10 sm:mr-[18px]"
                 label={POST_IS_PRIVATE}
                 icon={<LockIcon className="w-[18px] h-[18px]" />}
               />

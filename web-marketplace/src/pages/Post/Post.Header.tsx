@@ -64,7 +64,7 @@ export const PostHeader = ({
         <TextButton
           className="flex"
           textSize="sm"
-          href={projectHref} // TODO add anchor to "Data Posts" section
+          href={projectHref} // TODO add anchor to "Data Posts" section (APP-23)
         >
           <ArrowDownIcon
             className="h-[24px] w-[24px] text-brand-400"

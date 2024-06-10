@@ -6,5 +6,6 @@ export const ALL_POSTS = 'all posts';
 export const ACTIONS = 'actions';
 export const SHARE = 'share';
 export const ADMIN = 'admin';
+export const REGISTRY = 'registry';
 export const TIMELINE = 'Timeline';
 export const SEE_BLOCKCHAIN_RECORD = 'See the blockchain record';

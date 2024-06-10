@@ -8,6 +8,7 @@ import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
 import ShareIcon from 'web-components/src/components/icons/ShareIcon';
 import { SmallDotsIcon } from 'web-components/src/components/icons/SmallDotsIcon';
 import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.constants';
+import Section from 'web-components/src/components/section';
 import { Title } from 'web-components/src/components/typography';
 import UserInfo from 'web-components/src/components/user/UserInfo';
 import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
@@ -48,7 +49,7 @@ export const PostHeader = ({
   const [shareSuccessBanner, setShareSuccessBanner] = useState(false);
 
   return (
-    <div className="max-w-[750px] m-auto mt-60 mb-30 sm:mt-[100px] sm:mb-60">
+    <Section className="max-w-[750px] m-auto pt-60 pb-30 sm:pt-[100px] sm:pb-60 sm:px-0">
       <div className="flex justify-between">
         <TextButton
           className="flex"
@@ -156,6 +157,6 @@ export const PostHeader = ({
           }}
         />
       )}
-    </div>
+    </Section>
   );
 };

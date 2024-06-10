@@ -17,7 +17,9 @@ export const getPostQuery = ({
         method: 'GET',
         credentials: 'include',
       });
-      return await resp.json();
+      if (resp.status === 200) {
+        return await resp.json();
+      }
     } catch (e) {
       return null;
     }

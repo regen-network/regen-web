@@ -11,6 +11,7 @@ import { Point } from 'geojson';
 import { parse } from 'wellknown';
 
 import { PostFiles } from 'web-components/src/components/organisms/PostFiles/PostFiles';
+import Section from 'web-components/src/components/section';
 import { Body } from 'web-components/src/components/typography';
 import { formatDate } from 'web-components/src/utils/format';
 
@@ -36,7 +37,7 @@ function Post(): JSX.Element {
   );
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-
+  console.log(data);
   const projectId = data?.projectId;
   const {
     data: offchainProjectByIdData,
@@ -132,16 +133,21 @@ function Post(): JSX.Element {
                 </div>
               )}
 
-              <Body className="max-w-[750px] m-auto" size="xl">
-                {data?.contents.comment}
-              </Body>
-
-              <div className="my-40 sm:my-50 mx-auto border-t-[1px] border-b-0 border-solid border-grey-300 max-w-[750px] w-[100%]" />
+              <Section className="sm:p-0 py-0">
+                <Body className="max-w-[750px] m-auto" size="xl">
+                  {data?.contents.comment}
+                </Body>
+                <div className="my-40 sm:my-50 mx-auto border-t-[1px] border-b-0 border-solid border-grey-300 max-w-[750px] w-[100%]" />
+              </Section>
 
               <PostTimeline
                 createdAt={createdAt}
                 creatorAccount={creatorAccount}
                 creatorIsAdmin={creatorIsAdmin}
+                registryAddr={
+                  offchainProject?.creditClassByCreditClassId
+                    ?.accountByRegistryId?.addr
+                }
               />
             </>
           )}

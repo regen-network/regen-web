@@ -1,6 +1,7 @@
 query AccountByAddr($addr: String!) {
   accountByAddr(addr: $addr) {
     id
+    addr
     name
     type
     image

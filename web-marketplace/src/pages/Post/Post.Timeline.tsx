@@ -1,96 +1,52 @@
+import { useParams } from 'react-router-dom';
 import Timeline from '@mui/lab/Timeline';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import { OrderBy } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-import { useQuery } from '@tanstack/react-query';
 
+import Section from 'web-components/src/components/section';
 import {
   Body,
   Subtitle,
   Title,
 } from 'web-components/src/components/typography';
-import UserInfo, { User } from 'web-components/src/components/user/UserInfo';
+import UserInfo from 'web-components/src/components/user/UserInfo';
 import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
+import { truncate } from 'web-components/src/utils/truncate';
 
 import { AccountByIdQuery } from 'generated/graphql';
-import { useLedger } from 'ledger';
 import { getHashUrl } from 'lib/block-explorer';
-import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
 
-import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { LinkWithArrow } from 'components/atoms';
 
-import { ADMIN, SEE_BLOCKCHAIN_RECORD, TIMELINE } from './Post.constants';
+import { useAttestEvents } from './hooks/useAttestEvents';
+import { SEE_BLOCKCHAIN_RECORD, TIMELINE } from './Post.constants';
 
 type Props = {
   createdAt: string;
   creatorAccount: AccountByIdQuery['accountById'];
   creatorIsAdmin: boolean;
-};
-type Event = {
-  icon: string;
-  label: string;
-  user: User;
-  timestamp: string;
-  hash?: string;
+  registryAddr?: string | null;
 };
 
 export const PostTimeline = ({
   createdAt,
   creatorAccount,
   creatorIsAdmin,
+  registryAddr,
 }: Props) => {
-  const events: Array<Event> = [];
-
-  const { txClient } = useLedger();
-  const { data: txsEventData, isLoading } = useQuery(
-    getGetTxsEventQuery({
-      client: txClient,
-      enabled: !!txClient,
-      request: {
-        events: [
-          `${messageActionEquals}'/${MsgBridge.$type}'`,
-          `message.sender='${address}'`,
-        ],
-        orderBy: OrderBy.ORDER_BY_DESC,
-      },
-    }),
-  );
-
-  if (creatorAccount) {
-    events.push({
-      icon: '/svg/post-created.svg',
-      label: `Created ${'and signed'} by`,
-      user: {
-        name: creatorAccount.name || DEFAULT_NAME,
-        link: `/profiles/${creatorAccount.id}`,
-        type: creatorAccount.type,
-        image: creatorAccount.image,
-        tag: creatorIsAdmin ? ADMIN : undefined,
-      },
-      timestamp: createdAt,
-      hash: 'kjejzoejosoqo12233',
-    });
-
-    events.unshift({
-      icon: '/svg/post-signed.svg',
-      label: `Signed by`,
-      user: {
-        name: creatorAccount.name || 'test',
-        link: `/profiles/${creatorAccount.id}`,
-        type: creatorAccount.type,
-        image: creatorAccount.image,
-        tag: creatorIsAdmin ? ADMIN : undefined,
-      },
-      timestamp: createdAt,
-      hash: 'kjejzoejosoqo12233',
-    });
-  }
+  const { iri } = useParams();
+  const { events } = useAttestEvents({
+    iri,
+    createdAt,
+    creatorAccount,
+    creatorIsAdmin,
+    registryAddr,
+  });
 
   return (
-    <div className="max-w-[750px] m-auto">
+    <Section className="max-w-[750px] m-auto sm:p-0 py-0">
       <Title variant="h6">{TIMELINE}</Title>
       <Timeline
         sx={{
@@ -112,8 +68,11 @@ export const PostTimeline = ({
               </TimelineSeparator>
 
               <TimelineContent className="p-20 pt-0">
-                <div className="inline-flex">
-                  <Subtitle component="div" className="w-[100%] mr-5">
+                <div className="inline-flex items-center sm:items-start">
+                  <Subtitle
+                    component="div"
+                    className="min-w-[60px] sm:min-w-[70px] w-[100%] mr-5"
+                  >
                     {event.label}
                   </Subtitle>
                   <UserInfo
@@ -129,12 +88,12 @@ export const PostTimeline = ({
                 <Body className="text-grey-400 pt-5 pb-10" size="xs">
                   {event.timestamp}
                 </Body>
-                {event.hash && (
+                {event.txhash && (
                   <Body size="sm">
                     {SEE_BLOCKCHAIN_RECORD}:{' '}
                     <LinkWithArrow
-                      href={getHashUrl(event.hash)}
-                      label={event.hash}
+                      href={getHashUrl(event.txhash)}
+                      label={truncate(event.txhash)}
                     />
                   </Body>
                 )}
@@ -143,6 +102,6 @@ export const PostTimeline = ({
           );
         })}
       </Timeline>
-    </div>
+    </Section>
   );
 };

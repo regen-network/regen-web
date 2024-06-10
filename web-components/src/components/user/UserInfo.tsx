@@ -106,7 +106,7 @@ export default function UserInfo({
             name
           )}
           {user.tag && (
-            <TextButton className="ml-5 text-[10px] text-grey-500 bg-grey-300 rounded">
+            <TextButton className="cursor-default ml-5 text-[10px] text-grey-500 bg-grey-300 rounded hover:text-grey-500 hover:bg-grey-300">
               {user.tag}
             </TextButton>
           )}

@@ -49,7 +49,7 @@ export const useAttestEvents = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  const { data: txsEventData, isLoading } = useQuery(
+  const { data: txsEventData } = useQuery(
     getGetTxsEventQuery({
       client: txClient,
       enabled: !!txClient,
@@ -138,7 +138,10 @@ export const useAttestEvents = ({
         const attestorAccount = attestorsAccounts?.find(
           acc => acc?.addr === txResponses?.[i].attestor,
         );
-        const attestorIsRegistry = attestorAccount?.addr === registryAddr;
+        const attestorIsRegistry =
+          !!registryAddr &&
+          !!attestorAccount?.addr &&
+          attestorAccount?.addr === registryAddr;
         events.unshift({
           icon: '/svg/post-signed.svg',
           label: `Signed by`,
@@ -148,9 +151,11 @@ export const useAttestEvents = ({
           ),
           txhash: txResponses[i].txhash,
           user: {
-            name: attestorAccount?.name || 'test',
-            link: `/profiles/${attestorAccount?.id}`,
-            type: attestorAccount?.type as AccountType,
+            name: attestorAccount?.name || DEFAULT_NAME,
+            link: attestorAccount?.id
+              ? `/profiles/${attestorAccount?.id}`
+              : undefined,
+            type: attestorAccount?.type,
             image: attestorAccount?.image,
             tag: attestorIsRegistry ? REGISTRY : undefined,
           },

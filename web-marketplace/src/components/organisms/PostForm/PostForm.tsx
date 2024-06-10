@@ -276,7 +276,7 @@ export const PostForm = ({
               multi
               uploadOnAdd
               {...imageDropCommonProps}
-              {...form.register('files')}
+              {...form.register(`files.${index}.url`)}
             />
           );
         }}

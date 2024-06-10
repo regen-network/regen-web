@@ -37,7 +37,7 @@ function Post(): JSX.Element {
   );
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  console.log(data);
+
   const projectId = data?.projectId;
   const {
     data: offchainProjectByIdData,
@@ -95,7 +95,7 @@ function Post(): JSX.Element {
           {!loadingOffchainProjectById && !isAdmin && privatePost && (
             <PostPrivate />
           )}
-          {!loadingOffchainProjectById && data && !privatePost && (
+          {!loadingOffchainProjectById && data && (!privatePost || isAdmin) && (
             <>
               <PostHeader
                 projectHref={`/project/${
@@ -109,6 +109,7 @@ function Post(): JSX.Element {
                 adminAccountId={adminAccountId}
                 creatorIsAdmin={creatorIsAdmin}
                 createdAt={createdAt}
+                privatePost={privatePost}
               />
 
               {privacyType && files && files.length > 0 && (

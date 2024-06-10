@@ -5,8 +5,10 @@ import Banner from 'web-components/src/components/banner';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import { SharePublicMenuItem } from 'web-components/src/components/cards/PostCard/PostCard.MenuItems';
 import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
+import { LockIcon } from 'web-components/src/components/icons/LockIcon';
 import ShareIcon from 'web-components/src/components/icons/ShareIcon';
 import { SmallDotsIcon } from 'web-components/src/components/icons/SmallDotsIcon';
+import { Tag } from 'web-components/src/components/organisms/PostFiles/components/Tag';
 import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.constants';
 import Section from 'web-components/src/components/section';
 import { Title } from 'web-components/src/components/typography';
@@ -18,7 +20,13 @@ import { AccountByIdQuery } from 'generated/graphql';
 
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 
-import { ACTIONS, ADMIN, ALL_POSTS, SHARE } from './Post.constants';
+import {
+  ACTIONS,
+  ADMIN,
+  ALL_POSTS,
+  POST_IS_PRIVATE,
+  SHARE,
+} from './Post.constants';
 
 type Props = {
   projectHref: string;
@@ -28,6 +36,7 @@ type Props = {
   adminAccountId: string;
   createdAt: string;
   creatorIsAdmin: boolean;
+  privatePost?: boolean;
 };
 
 export const PostHeader = ({
@@ -37,6 +46,7 @@ export const PostHeader = ({
   creatorAccount,
   creatorIsAdmin,
   createdAt,
+  privatePost,
 }: Props) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -64,7 +74,14 @@ export const PostHeader = ({
         </TextButton>
 
         {isAdmin ? (
-          <div className="flex">
+          <div className="flex items-center">
+            {privatePost && (
+              <Tag
+                className="h-[26px] bg-error-300 mr-[18px]"
+                label={POST_IS_PRIVATE}
+                icon={<LockIcon className="w-[18px] h-[18px]" />}
+              />
+            )}
             <TextButton
               className="text-grey-500 hover:text-grey-500 mr-10 cursor-default"
               textSize="xs"

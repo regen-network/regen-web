@@ -9,3 +9,4 @@ export const ADMIN = 'admin';
 export const REGISTRY = 'registry';
 export const TIMELINE = 'Timeline';
 export const SEE_BLOCKCHAIN_RECORD = 'See the blockchain record';
+export const POST_IS_PRIVATE = 'Post is private';

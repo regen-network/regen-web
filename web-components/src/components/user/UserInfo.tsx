@@ -13,7 +13,7 @@ import { UserInfoTypes } from './UserInfo.types';
 export interface User {
   name: string;
   nameRaw?: string | JSX.Element | SanityBlockContent;
-  type?: UserInfoTypes;
+  type: UserInfoTypes;
   location?: string;
   image?: string | null;
   description?: string | null;

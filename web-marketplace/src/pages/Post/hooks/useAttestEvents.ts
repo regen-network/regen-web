@@ -155,7 +155,7 @@ export const useAttestEvents = ({
             link: attestorAccount?.id
               ? `/profiles/${attestorAccount?.id}`
               : undefined,
-            type: attestorAccount?.type,
+            type: attestorAccount?.type ?? 'USER',
             image: attestorAccount?.image,
             tag: attestorIsRegistry ? REGISTRY : undefined,
           },

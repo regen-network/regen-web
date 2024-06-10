@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { useFormState } from 'react-hook-form';
+import { useFormState, useWatch } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
@@ -62,6 +62,10 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   });
   const { isValid, isSubmitting, isDirty, errors } = useFormState({
     control: form.control,
+  });
+  const unit = useWatch({
+    control: form.control,
+    name: 'regen:projectSize.qudt:unit',
   });
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
@@ -177,6 +181,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
               ]}
               defaultStyle={false}
               native={false}
+              value={unit}
               {...form.register('regen:projectSize.qudt:unit')}
             />
           </Box>

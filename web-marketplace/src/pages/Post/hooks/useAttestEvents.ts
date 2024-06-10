@@ -60,7 +60,13 @@ export const useAttestEvents = ({
     }),
   );
 
-  let txResponses;
+  let txResponses:
+    | {
+        timestamp: string;
+        txhash: string;
+        attestor: string;
+      }[]
+    | undefined;
   if (iri) {
     txResponses = txsEventData?.txResponses
       ?.filter(txRes => txRes.rawLog.includes(iri))

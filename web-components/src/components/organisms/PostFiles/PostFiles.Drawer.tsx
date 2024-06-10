@@ -88,7 +88,7 @@ const PostFilesDrawer = ({
               >
                 {image || video ? (
                   <>
-                    {image && (
+                    {image && url && (
                       <Image
                         className="rounded-sm w-[100%]"
                         src={url}

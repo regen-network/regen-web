@@ -55,7 +55,7 @@ export const DeleteMenuItem = (props: MenuItemProps): JSX.Element => (
   </MenuItem>
 );
 
-export const menuItems: (() => JSX.Element)[] = [
+export const menuItems: ((props: MenuItemProps) => JSX.Element)[] = [
   EditMenuItem,
   SharePublicMenuItem,
   SharePrivateMenuItem,

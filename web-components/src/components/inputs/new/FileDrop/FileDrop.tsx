@@ -107,7 +107,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
 
     const { classes: styles, cx } = useFileDropStyles();
     const isFirstField = fieldIndex === 0;
-    console.log('fieldIndex', fieldIndex);
+
     const handleDrop = (files: File[]): void => {
       if (files && files.length > 0) {
         const file = files[0];

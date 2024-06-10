@@ -136,7 +136,7 @@ export const useAttestEvents = ({
         txResponses[i].attestor !== creatorAccount?.addr
       ) {
         const attestorAccount = attestorsAccounts?.find(
-          acc => acc?.addr === txResponses[i].attestor,
+          acc => acc?.addr === txResponses?.[i].attestor,
         );
         const attestorIsRegistry = attestorAccount?.addr === registryAddr;
         events.unshift({

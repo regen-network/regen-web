@@ -5,6 +5,7 @@ export const VIEW_ECOCREDITS = 'view your ecocredits';
 export const PROJECTS_PER_PAGE = 6;
 
 export const sortOptions = [
+  { label: 'Featured projects', value: 'featured-projects' },
   { label: 'Price  - low to high', value: 'price-ascending' },
   { label: 'Price  - high to low', value: 'price-descending' },
   { label: 'Credits available  - low to high', value: 'credits-ascending' },

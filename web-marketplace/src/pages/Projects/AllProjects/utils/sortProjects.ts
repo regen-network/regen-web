@@ -3,8 +3,14 @@ import { ProjectWithOrderData } from '../AllProjects.types';
 export const sortProjects = (
   projects: ProjectWithOrderData[],
   sort: string,
+  pinnedIds?: string[],
 ): ProjectWithOrderData[] => {
   switch (sort) {
+    case 'featured-projects':
+      return projects
+        .sort(comparePriceAscending)
+        .sort(compareCreditsAvailable)
+        .sort((a, b) => sortPinnedProject(a, b, pinnedIds));
     case 'price-ascending':
       return projects.sort(comparePriceAscending).sort(compareCreditsAvailable);
     case 'price-descending':

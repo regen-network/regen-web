@@ -7,6 +7,7 @@ type Props = {
   offset?: number;
   useCommunityProjects?: boolean;
   creditClassFilter?: Record<string, boolean>;
+  sortPinnedIds?: string[]; // list of on-chain id, uuid or slug to pinned at the top if `sort` set to 'featured-projects';
 };
 
 export const useProjects = ({
@@ -14,6 +15,7 @@ export const useProjects = ({
   sort,
   useCommunityProjects = false,
   creditClassFilter = {},
+  sortPinnedIds,
 }: Props) => {
   // get normalized projects with sell order data
   const {
@@ -31,6 +33,7 @@ export const useProjects = ({
     sort,
     useCommunityProjects,
     creditClassFilter,
+    sortPinnedIds,
   });
 
   const pagesCount = Math.ceil((projectsCount ?? 0) / PROJECTS_PER_PAGE);

@@ -59,10 +59,6 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     creditClassSelectedFiltersAtom,
   );
 
-  // Page index starts at 1 for route
-  // Page index starts at 0 for logic
-  const page = Number(routePage) - 1;
-
   const {
     creditClassesWithMetadata,
     isLoading: isCreditClassesWithMetadataLoading,

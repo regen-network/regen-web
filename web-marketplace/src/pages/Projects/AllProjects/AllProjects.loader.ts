@@ -5,7 +5,10 @@ import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketpla
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
+import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
+
+import { client as sanityClient } from '../../../lib/clients/sanity';
 
 type LoaderType = {
   queryClient: QueryClient;
@@ -29,6 +32,7 @@ export const projectsLoader =
       request: {},
     });
     const simplePriceQuery = getSimplePriceQuery({});
+    const allHomePageQuery = getAllHomePageQuery({ sanityClient });
 
     // Fetch or Cache
 
@@ -44,6 +48,10 @@ export const projectsLoader =
     });
     getFromCacheOrFetch({
       query: simplePriceQuery,
+      reactQueryClient: queryClient,
+    });
+    getFromCacheOrFetch({
+      query: allHomePageQuery,
       reactQueryClient: queryClient,
     });
     return {};

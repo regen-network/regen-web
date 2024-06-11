@@ -9,6 +9,8 @@ import {
   useTheme,
 } from '@mui/material';
 
+import { UseStateSetter } from 'src/types/react/useState';
+
 import OutlinedButton from '../../../buttons/OutlinedButton';
 import Card from '../../../cards/Card';
 import TrashIcon from '../../../icons/TrashIcon';
@@ -32,6 +34,8 @@ export interface VideoInputProps extends Partial<FieldFormControlProps> {
   setValue?: (value: string) => void;
   optional?: boolean | string;
   buttonText?: string;
+  setError: (error: string | undefined) => void;
+  setErrorBanner?: UseStateSetter<string | undefined>;
 }
 
 export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
@@ -45,12 +49,15 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
       setValue,
       optional,
       buttonText,
+      error,
+      setError,
+      setErrorBanner,
+      helperText,
       ...fieldProps
     },
     ref,
   ) => {
     const [videoUrl, setVideoUrl] = useState('');
-    const [error, setError] = useState<string | undefined>(undefined);
     const [videoLoaded, setVideoLoaded] = useState(false);
     const { classes: styles, cx } = useVideoInputStyles();
     const theme = useTheme();
@@ -69,6 +76,22 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
       }
     };
 
+    const handleBlur = (): void => {
+      if (error && setErrorBanner) {
+        // We set a timeout so the click event (blur) doesn't cause the error banner
+        // to close too quickly
+        setTimeout(() => setErrorBanner(helperText), 200);
+      }
+    };
+
+    const handleKeyUp = (
+      event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
+      if (event.key === 'Enter' && error && setErrorBanner) {
+        setErrorBanner(helperText);
+      }
+    };
+
     const handleDelete = (): void => {
       setValue && setValue('');
       setVideoUrl('');
@@ -81,7 +104,7 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
         label={label}
         optional={optional}
         error={!!error}
-        helperText={error ?? undefined}
+        helperText={helperText}
         {...fieldProps}
       >
         <>
@@ -128,6 +151,8 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
                 placeholder="Add video url"
                 name={name}
                 ref={ref}
+                onBlur={handleBlur}
+                onKeyUp={handleKeyUp}
               />
             </div>
           )}

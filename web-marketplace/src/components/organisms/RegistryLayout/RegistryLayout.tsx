@@ -7,6 +7,7 @@ import CookiesTopBanner from 'web-components/src/components/banner/CookiesTopBan
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
 import { ScrollToTop } from '../../atoms';
+import { RegistryLayoutAccountSwitchModal } from './RegistryLayout.AccountSwitchModal';
 import { RegistryLayoutAddWalletModalConnect } from './RegistryLayout.AddWalletModalConnect';
 import { RegistryLayoutAddWalletModalRemove } from './RegistryLayout.AddWalletModalRemove';
 import { RegistryLayoutAddWalletModalSwitch } from './RegistryLayout.AddWalletModalSwitch';
@@ -21,7 +22,6 @@ import { RetryFailedFunctions } from './RegistryLayout.RetryFailedFunctions';
 import { RegistryLayoutSwitchWalletModal } from './RegistryLayout.SwitchWalletModal';
 import { RegistryLayoutTxErrorModal } from './RegistryLayout.TxErrorModal';
 import { RegistryLayoutTxSuccessfulModal } from './RegistryLayout.TxSuccessfulModal';
-import { RegistryLayoutAccountSwitchModal } from './RegistryLayout.AccountSwitchModal';
 
 const RegistryLayout: React.FC = () => {
   return (

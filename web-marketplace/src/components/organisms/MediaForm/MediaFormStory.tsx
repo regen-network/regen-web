@@ -1,5 +1,6 @@
-import { MutableRefObject } from 'react';
+import { MutableRefObject, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { useSetAtom } from 'jotai';
 
 import {
   FileDrop,
@@ -14,6 +15,7 @@ import CropImageModal from 'web-components/src/components/modal/CropImageModal';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { apiUri } from 'lib/apiUri';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { IMAGE_STORAGE_BASE_URL } from 'lib/env';
 
 import { useProjectEditContext } from 'pages';
@@ -42,13 +44,14 @@ export const MediaFormStory = ({
   const { classes } = useMediaFormStyles();
   const ctx = useFormContext<MediaFormSchemaType>();
   const { isDirtyRef } = useProjectEditContext();
-  const { register, control, setValue, formState } = ctx;
+  const { register, control, setValue, formState, setError, clearErrors } = ctx;
   const { errors } = formState;
   const imageDropCommonProps: Partial<FileDropProps> = {
     classes: { main: classes.fullSizeMedia },
     buttonText: IMAGE_UPLOAD_BUTTON_LABEL,
     fixedCrop: cropAspectMediaForm,
   };
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   /* Watcher */
 
@@ -103,6 +106,14 @@ export const MediaFormStory = ({
             <VideoInput
               value={url && !isImageUrl ? url : ''}
               setValue={setStoryMediaUrl}
+              setErrorBanner={setErrorBannerTextAtom}
+              setError={(err: string | undefined) => {
+                if (err)
+                  setError('regen:storyMedia.schema:url', { message: err });
+                else clearErrors('regen:storyMedia.schema:url');
+              }}
+              error={!!errors['regen:storyMedia']?.['schema:url']}
+              helperText={errors['regen:storyMedia']?.['schema:url']?.message}
               {...register(`regen:storyMedia.schema:url`)}
             />
           )}

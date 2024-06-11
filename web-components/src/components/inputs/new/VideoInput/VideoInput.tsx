@@ -9,9 +9,7 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { UseStateSetter } from 'src/types/react/useState';
-
-import OutlinedButton from '../../../buttons/OutlinedButton';
+import { UseStateSetter } from '../../../../types/react/useState';
 import Card from '../../../cards/Card';
 import TrashIcon from '../../../icons/TrashIcon';
 import FieldFormControl, {
@@ -35,7 +33,7 @@ export interface VideoInputProps extends Partial<FieldFormControlProps> {
   optional?: boolean | string;
   buttonText?: string;
   setError: (error: string | undefined) => void;
-  setErrorBanner?: UseStateSetter<string | undefined>;
+  setErrorBanner?: UseStateSetter<string>;
 }
 
 export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
@@ -77,7 +75,7 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
     };
 
     const handleBlur = (): void => {
-      if (error && setErrorBanner) {
+      if (error && setErrorBanner && helperText) {
         // We set a timeout so the click event (blur) doesn't cause the error banner
         // to close too quickly
         setTimeout(() => setErrorBanner(helperText), 200);
@@ -87,7 +85,7 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
     const handleKeyUp = (
       event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
-      if (event.key === 'Enter' && error && setErrorBanner) {
+      if (event.key === 'Enter' && error && setErrorBanner && helperText) {
         setErrorBanner(helperText);
       }
     };

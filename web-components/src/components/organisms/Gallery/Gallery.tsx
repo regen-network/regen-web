@@ -19,6 +19,12 @@ import {
   isSpreadSheet,
   isVideo,
 } from '../../inputs/new/FileDrop/FileDrop.utils';
+import {
+  audioColors,
+  jsonColors,
+  spreadsheetColors,
+} from '../PostFiles/PostFiles.constants';
+import { getColors } from '../PostFiles/PostFiles.utils';
 import { GalleryBottomBar } from './Gallery.BottomBar';
 import { galleryVariants, swipeConfidenceThreshold } from './Gallery.config';
 import { GalleryItem } from './Gallery.types';
@@ -74,6 +80,10 @@ const Gallery = ({ items, sx, allImages, className, pdfPageHeight }: Props) => {
       }
     },
   };
+
+  const audio = isAudio(item?.mimeType);
+  const spreadsheet = isSpreadSheet(item?.mimeType);
+  const colors = getColors(audio, spreadsheet);
 
   return (
     <Box
@@ -143,10 +153,12 @@ const Gallery = ({ items, sx, allImages, className, pdfPageHeight }: Props) => {
                   </Document>
                 </Suspense>
               ) : (
-                <div className="lg:h-[550px] bg-grey-300 flex items-center justify-center h-[100%] text-grey-400">
-                  {isAudio(item?.mimeType) ? (
+                <div
+                  className={`lg:h-[550px] ${colors.bg} ${colors.text} flex items-center justify-center h-[100%] text-grey-400`}
+                >
+                  {audio ? (
                     <AudioFileIcon width="100" height="100" />
-                  ) : isSpreadSheet(item?.mimeType) ? (
+                  ) : spreadsheet ? (
                     <SpreadsheetFileIcon width="100" height="100" />
                   ) : (
                     <OtherDocumentsIcon width="100" height="100" />

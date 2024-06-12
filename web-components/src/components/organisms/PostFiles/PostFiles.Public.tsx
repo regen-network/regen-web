@@ -35,8 +35,8 @@ const Marker = lazy(() => import('../../map/lib/Marker'));
 const Popup = lazy(() => import('../../map/lib/Popup'));
 
 type Props = Pick<PostFilesProps, 'files' | 'mapboxToken' | 'isAdmin'> & {
-  privateFiles: true;
-  privateLocations: true;
+  privateFiles: boolean;
+  privateLocations: boolean;
 };
 
 const PostFilesPublic = ({

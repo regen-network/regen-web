@@ -11,10 +11,14 @@ import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import PostCard from 'web-components/src/components/cards/PostCard/PostCard';
 import Navigation from 'web-components/src/components/faq/Navigation';
+import { LockIcon } from 'web-components/src/components/icons/LockIcon';
 import Section from 'web-components/src/components/section';
+import { Body, Subtitle } from 'web-components/src/components/typography';
 
+import { PostsOrderBy } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { getPostsQuery } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery';
 import { Post } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.types';
@@ -22,7 +26,13 @@ import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/gra
 
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 
-import { DATA_STREAM, DATA_STREAM_LIMIT } from './ProjectDetails.constant';
+import {
+  ADMIN,
+  DATA_STREAM,
+  DATA_STREAM_LIMIT,
+  PRIVATE_POST,
+  SEE_MORE,
+} from './ProjectDetails.constant';
 
 type Props = {
   adminAccountId?: string | null;
@@ -79,7 +89,16 @@ export const DataStream = ({ adminAccountId, offChainProjectId }: Props) => {
   }, [data?.posts, offset]);
 
   return (
-    <Section title={DATA_STREAM} titleAlign="left">
+    <Section
+      title={DATA_STREAM}
+      titleAlign="left"
+      className="mb-50 sm:mb-[100px]"
+    >
+      {isAdmin && (
+        <div className="mt-15">
+          <Body size="lg"></Body>
+        </div>
+      )}
       <div className="flex mt-50">
         <Navigation
           className="hidden sm:block w-[250px] mr-50"
@@ -94,46 +113,65 @@ export const DataStream = ({ adminAccountId, offChainProjectId }: Props) => {
             setOffset(0);
           }}
         />
-        <Timeline
-          sx={{
-            padding: 0,
-            [`& .${timelineItemClasses.root}:before`]: {
-              flex: 0,
+        <div className="w-[100%]">
+          <Timeline
+            sx={{
               padding: 0,
-            },
-          }}
-        >
-          {posts.map((post, i) => {
-            const creatorAccount = creatorAccounts[i];
-            return (
-              <TimelineItem key={post.iri}>
-                <TimelineSeparator>
-                  <div className="rounded-[50%] h-[28px] w-[28px] bg-grey-200 flex items-center justify-center"></div>
-                  <TimelineConnector className="bg-grey-300 w-1" />
-                </TimelineSeparator>
-                <TimelineContent>
-                  {post.contents && (post.privacy !== 'private' || isAdmin) && (
-                    <PostCard
-                      title={post.contents.title}
-                      description={post.contents.comment}
-                      timestamp={post.createdAt}
-                      isPrivate={post.privacy === 'private'}
-                      author={{
-                        name: creatorAccount?.name || DEFAULT_NAME,
-                        type: creatorAccount?.type ?? 'USER',
-                        image: creatorAccount?.image,
-                        link: `/profiles/${creatorAccount?.id}`,
-                        // TODO add tag once #2384 merge
-                      }}
-                      isAdmin={isAdmin}
-                    />
-                  )}
-                  {post.privacy === 'private' && !isAdmin && <></>}
-                </TimelineContent>
-              </TimelineItem>
-            );
-          })}
-        </Timeline>
+              [`& .${timelineItemClasses.root}:before`]: {
+                flex: 0,
+                padding: 0,
+              },
+            }}
+          >
+            {posts.map((post, i) => {
+              const creatorAccount = creatorAccounts[i];
+              const creatorIsAdmin = creatorAccount?.id === adminAccountId;
+              return (
+                <TimelineItem key={post.iri}>
+                  <TimelineSeparator
+                    className={`pr-10 sm:pr-40 ${
+                      i === posts.length - 1 ? 'pb-35' : ''
+                    }`}
+                  >
+                    <div className="rounded-[50%] h-[28px] w-[28px] bg-grey-200 flex items-center justify-center"></div>
+                    <TimelineConnector className="bg-grey-300 w-1" />
+                  </TimelineSeparator>
+                  <TimelineContent className="mt-[-30px] mb-30">
+                    {post.contents && (post.privacy !== 'private' || isAdmin) && (
+                      <PostCard
+                        title={post.contents.title}
+                        description={post.contents.comment}
+                        isPrivate={post.privacy === 'private'}
+                        author={{
+                          name: creatorAccount?.name || DEFAULT_NAME,
+                          type: creatorAccount?.type ?? 'USER',
+                          image: creatorAccount?.image,
+                          link: `/profiles/${creatorAccount?.id}`,
+                          timestamp: post.createdAt,
+                          tag: creatorIsAdmin ? ADMIN : undefined,
+                        }}
+                        isAdmin={isAdmin}
+                      />
+                    )}
+                    {post.privacy === 'private' && !isAdmin && (
+                      <div className="flex items-center px-[16px] py-30 sm:p-30">
+                        <LockIcon className="w-[18px] h-[18px]" />
+                        <Subtitle size="lg">{PRIVATE_POST}</Subtitle>
+                      </div>
+                    )}
+                  </TimelineContent>
+                </TimelineItem>
+              );
+            })}
+          </Timeline>
+          {data?.total && posts.length < data?.total && (
+            <ContainedButton
+              onClick={() => setOffset(prev => prev + DATA_STREAM_LIMIT)}
+            >
+              {SEE_MORE}
+            </ContainedButton>
+          )}
+        </div>
       </div>
     </Section>
   );

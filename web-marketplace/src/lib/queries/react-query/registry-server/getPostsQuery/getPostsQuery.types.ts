@@ -43,6 +43,7 @@ export type Post = {
 export type ReactQueryGetPostsQueryResponse = QueryObserverOptions<{
   posts: Post[];
   years?: Array<number>;
+  total: number;
 } | null>;
 
 export type ReactQueryGetPostsQueryParams = {

@@ -1,49 +1,28 @@
 import { useEffect, useState } from 'react';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import Timeline from '@mui/lab/Timeline';
-import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineContent from '@mui/lab/TimelineContent';
-import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import { useQueries, useQuery } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
+import { timelineItemClasses } from '@mui/lab/TimelineItem';
+import { useQuery } from '@tanstack/react-query';
 
 import {
   BlockContent,
   SanityBlockContent,
 } from 'web-components/src/components/block-content';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
-import PostCard from 'web-components/src/components/cards/PostCard/PostCard';
 import Navigation from 'web-components/src/components/faq/Navigation';
-import { LockIcon } from 'web-components/src/components/icons/LockIcon';
-import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.constants';
 import Section from 'web-components/src/components/section';
-import { Body, Subtitle } from 'web-components/src/components/typography';
-import copyTextToClipboard from 'web-components/src/utils/copy';
+import { Body } from 'web-components/src/components/typography';
 
-import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getPostsQuery } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery';
 import { Post } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.types';
-import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
-
-import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 
 import {
-  ADMIN,
   CREATE_POST,
   DATA_STREAM,
   DATA_STREAM_LIMIT,
-  FILES_ARE_PRIVATE,
-  LOCATIONS_ARE_PRIVATE,
-  POST_IS_PRIVATE,
-  PRIVATE_POST,
   SEE_MORE,
 } from './ProjectDetails.constant';
+import { DataStreamPost } from './ProjectDetails.DataStream.Post';
 
 type Props = {
   adminAccountId?: string | null;
@@ -61,9 +40,6 @@ export const DataStream = ({
   const [year, setYear] = useState<number | undefined>(undefined);
   const [years, setYears] = useState<Array<number>>([]);
   const [posts, setPosts] = useState<Array<Post>>([]);
-  const graphqlClient =
-    useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const setBannerText = useSetAtom(bannerTextAtom);
 
   const isAdmin =
     !!adminAccountId && !!activeAccountId && adminAccountId === activeAccountId;
@@ -77,17 +53,6 @@ export const DataStream = ({
       enabled: !!offChainProjectId,
     }),
   );
-
-  const creatorAccountsRes = useQueries({
-    queries: posts.map(post =>
-      getAccountByIdQuery({
-        client: graphqlClient,
-        id: post.creatorAccountId,
-        enabled: !!graphqlClient,
-      }),
-    ),
-  });
-  const creatorAccounts = creatorAccountsRes?.map(res => res.data?.accountById);
 
   useEffect(() => {
     if (data?.years) {
@@ -147,61 +112,16 @@ export const DataStream = ({
                   },
                 }}
               >
-                {posts.map((post, i) => {
-                  const creatorAccount = creatorAccounts[i];
-                  const creatorIsAdmin = creatorAccount?.id === adminAccountId;
-                  return (
-                    <TimelineItem key={post.iri}>
-                      <TimelineSeparator
-                        className={`pr-10 sm:pr-40 ${
-                          i === posts.length - 1 ? 'pb-35' : ''
-                        }`}
-                      >
-                        <div className="rounded-[50%] h-[28px] w-[28px] bg-grey-200 flex items-center justify-center"></div>
-                        <TimelineConnector className="bg-grey-300 w-1" />
-                      </TimelineSeparator>
-                      <TimelineContent className="mt-[-30px] mb-30">
-                        {post.contents &&
-                          (post.privacy !== 'private' || isAdmin) && (
-                            <PostCard
-                              title={post.contents.title}
-                              description={post.contents.comment}
-                              privacyLabel={
-                                post.privacy === 'private'
-                                  ? POST_IS_PRIVATE
-                                  : post.privacy === 'private_files'
-                                  ? FILES_ARE_PRIVATE
-                                  : post.privacy === 'private_locations'
-                                  ? LOCATIONS_ARE_PRIVATE
-                                  : undefined
-                              }
-                              author={{
-                                name: creatorAccount?.name || DEFAULT_NAME,
-                                type: creatorAccount?.type ?? 'USER',
-                                image: creatorAccount?.image,
-                                link: `/profiles/${creatorAccount?.id}`,
-                                timestamp: post.createdAt,
-                                tag: creatorIsAdmin ? ADMIN : undefined,
-                              }}
-                              isAdmin={isAdmin}
-                              handleClickShare={() => {
-                                copyTextToClipboard(
-                                  `${window.location.origin}/post/${post.iri}`,
-                                );
-                                setBannerText(COPY_SUCCESS);
-                              }}
-                            />
-                          )}
-                        {post.privacy === 'private' && !isAdmin && (
-                          <div className="flex items-center px-[16px] py-30 sm:p-30">
-                            <LockIcon className="w-[18px] h-[18px]" />
-                            <Subtitle size="lg">{PRIVATE_POST}</Subtitle>
-                          </div>
-                        )}
-                      </TimelineContent>
-                    </TimelineItem>
-                  );
-                })}
+                {posts.map((post, i) => (
+                  <DataStreamPost
+                    key={post.iri}
+                    post={post}
+                    index={i}
+                    postsLength={posts.length}
+                    isAdmin={isAdmin}
+                    adminAccountId={adminAccountId}
+                  />
+                ))}
               </Timeline>
               {data?.total && posts.length < data?.total && (
                 <ContainedButton

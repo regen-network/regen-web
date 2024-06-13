@@ -5,7 +5,6 @@ import { defaultFontFamily } from '../../../theme/muiTheme';
 import VerifiedIcon from '../../icons/VerifiedIcon';
 import WhitepaperIcon from '../../icons/WhitepaperIcon';
 import { Image, OptimizeImageProps } from '../../image';
-import StaticMap from '../../map/StaticMap';
 import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import Card from '../Card';
@@ -17,11 +16,8 @@ interface PostCardProps extends OptimizeImageProps {
   title: string;
   description: string;
   imgSrc?: string;
-  geojson?: any;
-  isGISFile?: Boolean;
-  mapboxToken?: string;
   author: User;
-  signer?: User;
+  signers?: Array<User>;
   privacyLabel?: string;
   isAdmin?: boolean;
   numberOfFiles?: number;
@@ -36,7 +32,7 @@ export default function PostCard({
   imageStorageBaseUrl,
   apiServerUrl,
   author,
-  signer,
+  signers,
   privacyLabel,
   isAdmin,
   numberOfFiles,
@@ -81,7 +77,7 @@ export default function PostCard({
               {description}
             </Body>
           </Box>
-          {signer && (
+          {signers && signers.length > 0 && (
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 3.5 }}>
               <VerifiedIcon color="white" hasFill />
               <Body
@@ -89,28 +85,32 @@ export default function PostCard({
                 mobileSize="xs"
                 sx={{
                   whiteSpace: 'nowrap',
-                  mx: 1,
+                  ml: 1,
                   fontStyle: 'italic',
                   fontWeight: 500,
                 }}
               >
                 Signed by
               </Body>
-              <UserInfo
-                fontFamily={defaultFontFamily}
-                user={signer}
-                size="xs"
-                classNames={{
-                  info: 'ml-3',
-                  title: 'text-xs font-semibold',
-                }}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  ml: 1,
-                }}
-                nameHasPadding={false}
-              />
+              {signers.map((signer, i) => (
+                <UserInfo
+                  key={`${signer.timestamp}-${i}`}
+                  fontFamily={defaultFontFamily}
+                  user={signer}
+                  size="xs"
+                  classNames={{
+                    info: 'ml-3',
+                    title: 'text-xs font-semibold',
+                  }}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    ml: 2,
+                    width: 'inherit',
+                  }}
+                  nameHasPadding={false}
+                />
+              ))}
             </Box>
           )}
         </Grid>

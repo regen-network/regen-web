@@ -1,14 +1,7 @@
-import React from 'react';
 import { StoryObj } from '@storybook/react';
 
 import PostCard from './PostCard';
-import {
-  DeleteMenuItem,
-  EditMenuItem,
-  SharePrivateMenuItem,
-  SharePublicMenuItem,
-} from './PostCard.MenuItems';
-import { commonArgs, signer } from './PostCard.mock';
+import { commonArgs, signers } from './PostCard.mock';
 
 type Story = StoryObj<typeof PostCard>;
 
@@ -27,7 +20,7 @@ export const Public: Story = {
     handleClickShare: { action: 'handle share click' },
     handleClickFile: { action: 'handle file click' },
   },
-  render: args => <PostCard {...args} signer={signer} />,
+  render: args => <PostCard {...args} signers={signers} />,
 };
 
 export const Private: Story = {
@@ -42,7 +35,7 @@ export const Private: Story = {
     handleClickShare: { action: 'handle share click' },
     handleClickFile: { action: 'handle file click' },
   },
-  render: args => <PostCard {...args} signer={signer} />,
+  render: args => <PostCard {...args} signers={signers} />,
 };
 
 export const NoImage: Story = {
@@ -56,5 +49,5 @@ export const NoImage: Story = {
     handleClickShare: { action: 'handle share click' },
     handleClickFile: { action: 'handle file click' },
   },
-  render: args => <PostCard {...args} signer={signer} />,
+  render: args => <PostCard {...args} signers={signers} />,
 };

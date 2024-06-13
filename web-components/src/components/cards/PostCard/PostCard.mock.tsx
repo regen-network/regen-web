@@ -9,13 +9,20 @@ export const user: User = {
   timestamp: '2022-01-31T12:34:56Z',
 };
 
-export const signer: User = {
-  name: 'Odonata',
-  type: 'ORGANIZATION',
-  image:
-    'https://cdn.sanity.io/images/jm12rn9t/staging/8b062589b6d8c6850a78bb13ead51d2f6f32b073-29x9.svg',
-  tag: 'admin',
-};
+export const signers: Array<User> = [
+  {
+    name: 'Odonata',
+    type: 'ORGANIZATION',
+    image:
+      'https://cdn.sanity.io/images/jm12rn9t/staging/8b062589b6d8c6850a78bb13ead51d2f6f32b073-29x9.svg',
+    tag: 'admin',
+  },
+  {
+    name: 'John Doe',
+    type: 'USER',
+    image: '/profile/default-avatar.jpg',
+  },
+];
 
 export const commonArgs = {
   title: 'Fall 2023 Update',

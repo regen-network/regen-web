@@ -1312,6 +1312,39 @@ export type CreateProjectPayloadProjectEdgeArgs = {
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
 };
 
+/** All input for the create `S3Deletion` mutation. */
+export type CreateS3DeletionInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `S3Deletion` to be created by this mutation. */
+  s3Deletion: S3DeletionInput;
+};
+
+/** The output of our create `S3Deletion` mutation. */
+export type CreateS3DeletionPayload = {
+  __typename?: 'CreateS3DeletionPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `S3Deletion` that was created by this mutation. */
+  s3Deletion?: Maybe<S3Deletion>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `S3Deletion`. May be used by Relay 1. */
+  s3DeletionEdge?: Maybe<S3DeletionsEdge>;
+};
+
+
+/** The output of our create `S3Deletion` mutation. */
+export type CreateS3DeletionPayloadS3DeletionEdgeArgs = {
+  orderBy?: Maybe<Array<S3DeletionsOrderBy>>;
+};
+
 /** All input for the create `ShaclGraph` mutation. */
 export type CreateShaclGraphInput = {
   /**
@@ -2782,6 +2815,8 @@ export type Mutation = {
   createProject?: Maybe<CreateProjectPayload>;
   /** Creates a single `ProjectPartner`. */
   createProjectPartner?: Maybe<CreateProjectPartnerPayload>;
+  /** Creates a single `S3Deletion`. */
+  createS3Deletion?: Maybe<CreateS3DeletionPayload>;
   /** Creates a single `ShaclGraph`. */
   createShaclGraph?: Maybe<CreateShaclGraphPayload>;
   /** Creates a single `Test`. */
@@ -2977,6 +3012,12 @@ export type MutationCreateProjectArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateProjectPartnerArgs = {
   input: CreateProjectPartnerInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateS3DeletionArgs = {
+  input: CreateS3DeletionInput;
 };
 
 
@@ -4066,6 +4107,8 @@ export type Query = Node & {
   allProjects?: Maybe<ProjectsConnection>;
   /** Reads and enables pagination through a set of `ProjectPartner`. */
   allProjectPartners?: Maybe<ProjectPartnersConnection>;
+  /** Reads and enables pagination through a set of `S3Deletion`. */
+  allS3Deletions?: Maybe<S3DeletionsConnection>;
   /** Reads and enables pagination through a set of `ShaclGraph`. */
   allShaclGraphs?: Maybe<ShaclGraphsConnection>;
   /** Reads and enables pagination through a set of `Test`. */
@@ -4263,6 +4306,18 @@ export type QueryAllProjectPartnersArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectPartnersOrderBy>>;
   condition?: Maybe<ProjectPartnerCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllS3DeletionsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<S3DeletionsOrderBy>>;
+  condition?: Maybe<S3DeletionCondition>;
 };
 
 
@@ -4507,6 +4562,73 @@ export type QueryShaclGraphArgs = {
 export type QueryUploadArgs = {
   nodeId: Scalars['ID'];
 };
+
+/** Table serving as a FIFO queue for files to be deleted from AWS S3. */
+export type S3Deletion = {
+  __typename?: 'S3Deletion';
+  id: Scalars['UUID'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+  bucket: Scalars['String'];
+  key: Scalars['String'];
+};
+
+/**
+ * A condition to be used against `S3Deletion` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type S3DeletionCondition = {
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `createdAt` field. */
+  createdAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `bucket` field. */
+  bucket?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `key` field. */
+  key?: Maybe<Scalars['String']>;
+};
+
+/** An input for mutations affecting `S3Deletion` */
+export type S3DeletionInput = {
+  id?: Maybe<Scalars['UUID']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+  bucket: Scalars['String'];
+  key: Scalars['String'];
+};
+
+/** A connection to a list of `S3Deletion` values. */
+export type S3DeletionsConnection = {
+  __typename?: 'S3DeletionsConnection';
+  /** A list of `S3Deletion` objects. */
+  nodes: Array<Maybe<S3Deletion>>;
+  /** A list of edges which contains the `S3Deletion` and cursor to aid in pagination. */
+  edges: Array<S3DeletionsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `S3Deletion` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `S3Deletion` edge in the connection. */
+export type S3DeletionsEdge = {
+  __typename?: 'S3DeletionsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `S3Deletion` at the end of the edge. */
+  node?: Maybe<S3Deletion>;
+};
+
+/** Methods to use when ordering `S3Deletion`. */
+export enum S3DeletionsOrderBy {
+  Natural = 'NATURAL',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  CreatedAtAsc = 'CREATED_AT_ASC',
+  CreatedAtDesc = 'CREATED_AT_DESC',
+  BucketAsc = 'BUCKET_ASC',
+  BucketDesc = 'BUCKET_DESC',
+  KeyAsc = 'KEY_ASC',
+  KeyDesc = 'KEY_DESC'
+}
 
 export type ShaclGraph = Node & {
   __typename?: 'ShaclGraph';

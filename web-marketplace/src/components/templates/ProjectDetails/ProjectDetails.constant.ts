@@ -18,3 +18,6 @@ export const ADMIN = 'admin';
 export const PRIVATE_POST = '1 private post';
 export const SEE_MORE = 'see more';
 export const CREATE_POST = '+ create post';
+export const POST_IS_PRIVATE = 'Post is private';
+export const FILES_ARE_PRIVATE = 'Files are private';
+export const LOCATIONS_ARE_PRIVATE = 'Locations are private';

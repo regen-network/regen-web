@@ -22,7 +22,7 @@ interface PostCardProps extends OptimizeImageProps {
   mapboxToken?: string;
   author: User;
   signer?: User;
-  isPrivate?: boolean;
+  privacyLabel?: string;
   isAdmin?: boolean;
   numberOfFiles?: number;
   handleClickFile?: (ev: React.MouseEvent) => void;
@@ -33,14 +33,11 @@ export default function PostCard({
   title,
   description,
   imgSrc,
-  geojson,
-  isGISFile,
-  mapboxToken,
   imageStorageBaseUrl,
   apiServerUrl,
   author,
   signer,
-  isPrivate,
+  privacyLabel,
   isAdmin,
   numberOfFiles,
   handleClickFile,
@@ -48,20 +45,13 @@ export default function PostCard({
 }: PostCardProps): JSX.Element {
   const { classes } = usePostCardStyles();
 
-  const hasImageBlock = imgSrc || (geojson && isGISFile);
+  const hasImageBlock = !!imgSrc;
 
   return (
     <Card className={classes.root} sx={{ p: [4, 8] }} borderRadius="10px">
       <ActionButton isAdmin={isAdmin} onClickShare={handleClickShare} />
-      {!hasImageBlock && isPrivate && (
-        <PrivateBadge
-          hasImageBlock={hasImageBlock}
-          // sx={theme => ({
-          //   top: hasImageBlock ? theme.spacing(3.5) : theme.spacing(7),
-          //   left: hasImageBlock ? theme.spacing(3) : undefined,
-          //   right: hasImageBlock ? undefined : theme.spacing(20),
-          // })}
-        />
+      {!hasImageBlock && privacyLabel && (
+        <PrivateBadge hasImageBlock={hasImageBlock} label={privacyLabel} />
       )}
       <Grid
         container
@@ -145,25 +135,20 @@ export default function PostCard({
                 position: 'relative',
               })}
             >
-              {hasImageBlock && isPrivate && (
-                <PrivateBadge hasImageBlock={hasImageBlock} />
+              {hasImageBlock && privacyLabel && (
+                <PrivateBadge
+                  hasImageBlock={hasImageBlock}
+                  label={privacyLabel}
+                />
               )}
-              {isPrivate && !isAdmin ? (
-                <Box sx={{ backgroundColor: 'black', height: '100%' }}>
-                  Post is Private
-                </Box>
-              ) : geojson && isGISFile ? (
-                <StaticMap geojson={geojson} mapboxToken={mapboxToken} />
-              ) : (
-                imgSrc && (
-                  <Image
-                    className={classes.image}
-                    src={imgSrc}
-                    alt={imgSrc}
-                    imageStorageBaseUrl={imageStorageBaseUrl}
-                    apiServerUrl={apiServerUrl}
-                  />
-                )
+              {imgSrc && (
+                <Image
+                  className={classes.image}
+                  src={imgSrc}
+                  alt={imgSrc}
+                  imageStorageBaseUrl={imageStorageBaseUrl}
+                  apiServerUrl={apiServerUrl}
+                />
               )}
               {numberOfFiles && (
                 <Box

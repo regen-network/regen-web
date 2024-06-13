@@ -21,7 +21,6 @@ export const Public: Story = {
   args: {
     ...commonArgs,
     imgSrc: '/coorong.png',
-    isPrivate: false,
     isAdmin: false,
   },
   argTypes: {
@@ -34,16 +33,10 @@ export const Public: Story = {
 export const Private: Story = {
   args: {
     ...commonArgs,
-    isPrivate: true,
+    privacyLabel: 'Post is private',
     numberOfFiles: 5,
     imgSrc: '/coorong.png',
     isAdmin: true,
-    adminMenuItems: [
-      <EditMenuItem />,
-      <SharePublicMenuItem />,
-      <SharePrivateMenuItem />,
-      <DeleteMenuItem />,
-    ],
   },
   argTypes: {
     handleClickShare: { action: 'handle share click' },
@@ -55,7 +48,7 @@ export const Private: Story = {
 export const NoImage: Story = {
   args: {
     ...commonArgs,
-    isPrivate: true,
+    privacyLabel: 'Files are private',
     numberOfFiles: 5,
     isAdmin: false,
   },

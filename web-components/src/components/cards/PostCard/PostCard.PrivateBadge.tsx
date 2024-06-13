@@ -4,7 +4,13 @@ import { Box } from '@mui/material';
 import { LockIcon } from '../../icons/LockIcon';
 import { Subtitle } from '../../typography';
 
-const PrivateBadge = ({ hasImageBlock }: { hasImageBlock?: boolean }) => (
+const PrivateBadge = ({
+  hasImageBlock,
+  label,
+}: {
+  hasImageBlock?: boolean;
+  label: string;
+}) => (
   <Box
     sx={{
       borderRadius: 1,
@@ -19,15 +25,9 @@ const PrivateBadge = ({ hasImageBlock }: { hasImageBlock?: boolean }) => (
       zIndex: 1,
     }}
   >
-    <LockIcon
-      sx={{
-        color: theme => theme.palette.primary.contrastText,
-        height: '18px',
-        width: '18px',
-      }}
-    />
+    <LockIcon className="h-[18px] w-[18px]" />
     <Subtitle size="sm" sx={{ pl: 1 }}>
-      Post is private
+      {label}
     </Subtitle>
   </Box>
 );

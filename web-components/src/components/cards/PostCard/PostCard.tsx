@@ -26,7 +26,6 @@ interface PostCardProps extends OptimizeImageProps {
   isAdmin?: boolean;
   numberOfFiles?: number;
   handleClickFile?: (ev: React.MouseEvent) => void;
-  adminMenuItems?: JSX.Element[];
   handleClickShare?: (ev: React.MouseEvent) => void;
 }
 
@@ -45,7 +44,6 @@ export default function PostCard({
   isAdmin,
   numberOfFiles,
   handleClickFile,
-  adminMenuItems,
   handleClickShare,
 }: PostCardProps): JSX.Element {
   const { classes } = usePostCardStyles();
@@ -54,11 +52,7 @@ export default function PostCard({
 
   return (
     <Card className={classes.root} sx={{ p: [4, 8] }} borderRadius="10px">
-      <ActionButton
-        isAdmin={isAdmin}
-        adminMenuItems={adminMenuItems}
-        onClick={handleClickShare}
-      />
+      <ActionButton isAdmin={isAdmin} onClickShare={handleClickShare} />
       {!hasImageBlock && isPrivate && (
         <PrivateBadge
           hasImageBlock={hasImageBlock}

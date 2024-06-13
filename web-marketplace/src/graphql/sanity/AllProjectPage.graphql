@@ -22,5 +22,6 @@ query allProjectPage {
         ...customImageFields
       }
     }
+    dataStreamAdminDescriptionRaw
   }
 }

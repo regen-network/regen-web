@@ -1,17 +1,17 @@
 import React, { useRef, useState } from 'react';
 import { IconButton, Menu } from '@mui/material';
 
+import copyTextToClipboard from '../../../utils/copy';
 import { HorizontalDotsIcon } from '../../icons/HorizontalDotsIcon';
 import ShareIcon from '../../icons/ShareIcon';
+import { SharePublicMenuItem } from './PostCard.MenuItems';
 
 const ActionButton = ({
   isAdmin,
-  adminMenuItems,
-  onClick,
+  onClickShare,
 }: {
   isAdmin?: boolean;
-  adminMenuItems?: JSX.Element[];
-  onClick?: (ev: React.MouseEvent<HTMLButtonElement>) => void;
+  onClickShare?: (ev: React.MouseEvent) => void;
 }): JSX.Element => {
   const menuAnchor = useRef<HTMLButtonElement | null>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -42,7 +42,7 @@ const ActionButton = ({
           },
         })}
         ref={menuAnchor}
-        onClick={isAdmin ? handleOpen : onClick}
+        onClick={isAdmin ? handleOpen : onClickShare}
       >
         {isAdmin ? (
           <HorizontalDotsIcon
@@ -57,7 +57,7 @@ const ActionButton = ({
           <ShareIcon sx={{ height: '24px', width: '24px' }} color="primary" />
         )}
       </IconButton>
-      {isAdmin && adminMenuItems && (
+      {isAdmin && (
         <Menu
           open={isOpen}
           onClose={handleClose}
@@ -72,7 +72,13 @@ const ActionButton = ({
             horizontal: 'right',
           }}
         >
-          {adminMenuItems}
+          {/* <EditMenuItem /> */}
+          <SharePublicMenuItem
+            classes={{ root: 'px-[25px]' }}
+            onClick={onClickShare}
+          />
+          {/* <SharePrivateMenuItem />
+              <DeleteMenuItem /> */}
         </Menu>
       )}
     </React.Fragment>

@@ -10,15 +10,22 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
 
+import {
+  BlockContent,
+  SanityBlockContent,
+} from 'web-components/src/components/block-content';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import PostCard from 'web-components/src/components/cards/PostCard/PostCard';
 import Navigation from 'web-components/src/components/faq/Navigation';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
+import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.constants';
 import Section from 'web-components/src/components/section';
 import { Body, Subtitle } from 'web-components/src/components/typography';
+import copyTextToClipboard from 'web-components/src/utils/copy';
 
-import { PostsOrderBy } from 'generated/graphql';
+import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getPostsQuery } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery';
 import { Post } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.types';
@@ -28,6 +35,7 @@ import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 
 import {
   ADMIN,
+  CREATE_POST,
   DATA_STREAM,
   DATA_STREAM_LIMIT,
   PRIVATE_POST,
@@ -37,8 +45,14 @@ import {
 type Props = {
   adminAccountId?: string | null;
   offChainProjectId?: string;
+  adminDescription?: SanityBlockContent;
 };
-export const DataStream = ({ adminAccountId, offChainProjectId }: Props) => {
+
+export const DataStream = ({
+  adminAccountId,
+  offChainProjectId,
+  adminDescription,
+}: Props) => {
   const { activeAccountId } = useAuth();
   const [offset, setOffset] = useState<number>(0);
   const [year, setYear] = useState<number | undefined>(undefined);
@@ -46,6 +60,7 @@ export const DataStream = ({ adminAccountId, offChainProjectId }: Props) => {
   const [posts, setPosts] = useState<Array<Post>>([]);
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const setBannerText = useSetAtom(bannerTextAtom);
 
   const isAdmin =
     !!adminAccountId && !!activeAccountId && adminAccountId === activeAccountId;
@@ -94,9 +109,13 @@ export const DataStream = ({ adminAccountId, offChainProjectId }: Props) => {
       titleAlign="left"
       className="mb-50 sm:mb-[100px]"
     >
-      {isAdmin && (
+      {isAdmin && adminDescription && (
         <div className="mt-15">
-          <Body size="lg"></Body>
+          <Body className="mb-15 max-w-[683px]" size="lg">
+            <BlockContent content={adminDescription} />
+          </Body>
+          {/* TODO wire up create post button once #2381 merged */}
+          <ContainedButton>{CREATE_POST}</ContainedButton>
         </div>
       )}
       <div className="flex mt-50">
@@ -151,6 +170,12 @@ export const DataStream = ({ adminAccountId, offChainProjectId }: Props) => {
                           tag: creatorIsAdmin ? ADMIN : undefined,
                         }}
                         isAdmin={isAdmin}
+                        handleClickShare={() => {
+                          copyTextToClipboard(
+                            `${window.location.origin}/post/${post.iri}`,
+                          );
+                          setBannerText(COPY_SUCCESS);
+                        }}
                       />
                     )}
                     {post.privacy === 'private' && !isAdmin && (

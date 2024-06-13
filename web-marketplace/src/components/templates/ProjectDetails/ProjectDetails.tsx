@@ -489,6 +489,7 @@ function ProjectDetails(): JSX.Element {
       <DataStream
         adminAccountId={offChainProject?.adminAccountId}
         offChainProjectId={offChainProject?.id}
+        adminDescription={sanityProjectPage?.dataStreamAdminDescriptionRaw}
       />
 
       <ProjectDetailsTableTabs

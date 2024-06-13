@@ -17,3 +17,4 @@ export const DATA_STREAM_LIMIT = 3;
 export const ADMIN = 'admin';
 export const PRIVATE_POST = '1 private post';
 export const SEE_MORE = 'see more';
+export const CREATE_POST = '+ create post';

@@ -64,6 +64,7 @@ import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { useStakeholders } from './hooks/useStakeholders';
 import { ProjectDetailsBannerCard } from './ProjectDetails.BannerCard';
 import { JURISDICTION_REGEX } from './ProjectDetails.constant';
+import { DataStream } from './ProjectDetails.DataStream';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
 import { ProjectDetailsStakeholders } from './ProjectDetails.Stakeholders';
@@ -485,6 +486,11 @@ function ProjectDetails(): JSX.Element {
           partners={partners}
         />
       </DetailsSection>
+
+      <DataStream
+        adminAccountId={offChainProject?.adminAccountId}
+        offChainProjectId={offChainProject?.id}
+      />
 
       <ProjectDetailsTableTabs
         sortedDocuments={sortedDocuments}

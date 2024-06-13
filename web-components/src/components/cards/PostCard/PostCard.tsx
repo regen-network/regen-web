@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Button, Grid } from '@mui/material';
 
+import { defaultFontFamily } from '../../../theme/muiTheme';
 import VerifiedIcon from '../../icons/VerifiedIcon';
 import WhitepaperIcon from '../../icons/WhitepaperIcon';
 import { Image, OptimizeImageProps } from '../../image';
@@ -8,9 +9,7 @@ import StaticMap from '../../map/StaticMap';
 import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import Card from '../Card';
-import NameWithRoleAndTimestamp from './PostCard.NameWithRoleAndTimestamp';
 import PrivateBadge from './PostCard.PrivateBadge';
-import SignerName from './PostCard.SignerName';
 import usePostCardStyles from './PostCard.styles';
 import ActionButton from './PostCardActionButton';
 
@@ -22,9 +21,7 @@ interface PostCardProps extends OptimizeImageProps {
   isGISFile?: Boolean;
   mapboxToken?: string;
   author: User;
-  authorRole?: string;
   signer?: User;
-  timestamp: string;
   isPrivate?: boolean;
   isAdmin?: boolean;
   numberOfFiles?: number;
@@ -43,9 +40,7 @@ export default function PostCard({
   imageStorageBaseUrl,
   apiServerUrl,
   author,
-  authorRole,
   signer,
-  timestamp,
   isPrivate,
   isAdmin,
   numberOfFiles,
@@ -54,22 +49,6 @@ export default function PostCard({
   handleClickShare,
 }: PostCardProps): JSX.Element {
   const { classes } = usePostCardStyles();
-
-  const authorWithNameRaw: User = {
-    ...author,
-    nameRaw: (
-      <NameWithRoleAndTimestamp
-        name={author.name}
-        authorRole={authorRole}
-        timestamp={timestamp}
-      />
-    ),
-  };
-
-  const signerWithNameRaw: User | undefined = signer && {
-    ...signer,
-    nameRaw: <SignerName name={signer.name} />,
-  };
 
   const hasImageBlock = imgSrc || (geojson && isGISFile);
 
@@ -105,16 +84,20 @@ export default function PostCard({
           </Subtitle>
           <UserInfo
             size="lg"
+            fontFamily={defaultFontFamily}
             user={author}
-            sx={{ display: 'flex', alignItems: 'center' }}
-            nameHasPadding={false}
+            classNames={{
+              info: 'ml-10',
+              title: 'text-sm',
+              timestamp: 'text-xs',
+            }}
           />
           <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
             <Body size="lg" sx={{ pb: 1.5 }} className={classes.description}>
               {description}
             </Body>
           </Box>
-          {signerWithNameRaw && (
+          {signer && (
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 3.5 }}>
               <VerifiedIcon color="white" hasFill />
               <Body
@@ -130,8 +113,13 @@ export default function PostCard({
                 Signed by
               </Body>
               <UserInfo
-                user={signerWithNameRaw}
+                fontFamily={defaultFontFamily}
+                user={signer}
                 size="xs"
+                classNames={{
+                  info: 'ml-3',
+                  title: 'text-xs font-semibold',
+                }}
                 sx={{
                   display: 'flex',
                   alignItems: 'center',

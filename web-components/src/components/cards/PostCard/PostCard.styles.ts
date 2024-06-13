@@ -4,6 +4,7 @@ import { makeStyles } from 'tss-react/mui';
 const usePostCardStyles = makeStyles()(theme => ({
   root: {
     backgroundColor: theme.palette.grey['200'],
+    position: 'relative',
   },
   image: {
     height: '100%',

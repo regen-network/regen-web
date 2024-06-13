@@ -13,3 +13,4 @@ export const CLASS_TIMELINE = 'Credit class timeline';
 export const VIEW_TIMELINE = '+ view timeline';
 export const COPY_TOOLTIP = 'Copy link to project page';
 export const DATA_STREAM = 'Data stream';
+export const DATA_STREAM_LIMIT = 3;

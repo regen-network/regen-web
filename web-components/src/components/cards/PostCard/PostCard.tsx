@@ -17,7 +17,7 @@ import ActionButton from './PostCardActionButton';
 interface PostCardProps extends OptimizeImageProps {
   title: string;
   description: string;
-  imgSrc: string;
+  imgSrc?: string;
   geojson?: any;
   isGISFile?: Boolean;
   mapboxToken?: string;
@@ -105,7 +105,7 @@ export default function PostCard({
           </Subtitle>
           <UserInfo
             size="lg"
-            user={authorWithNameRaw}
+            user={author}
             sx={{ display: 'flex', alignItems: 'center' }}
             nameHasPadding={false}
           />

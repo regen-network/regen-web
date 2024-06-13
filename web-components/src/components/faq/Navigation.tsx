@@ -7,6 +7,7 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import { Theme } from '@mui/material/styles';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
+import { cn } from '../../utils/styles/cn';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 
 interface NavigationProps {
@@ -106,7 +107,7 @@ const Navigation = ({
         return (
           <StyledListItemButton
             key={i}
-            className={classes?.listItem}
+            className={cn(classes?.listItem)}
             selected={selected}
             onClick={() => {
               onClick(name);

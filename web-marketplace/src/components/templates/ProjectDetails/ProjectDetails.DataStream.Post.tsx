@@ -85,7 +85,7 @@ export const DataStreamPost = ({
       <TimelineSeparator
         className={`pr-10 sm:pr-40 ${index === postsLength - 1 ? 'pb-35' : ''}`}
       >
-        <div className="text-grey-0 rounded-[50%] h-[28px] w-[28px] bg-grey-200 flex items-center justify-center">
+        <div className="text-grey-0 rounded-[50%] h-[28px] w-[28px] bg-blue-green-gradient flex items-center justify-center">
           <BubbleIcon />
         </div>
         <TimelineConnector className="bg-grey-300 w-1" />

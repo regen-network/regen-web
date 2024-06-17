@@ -51,13 +51,16 @@ export default function PostCard({
       )}
       <Grid
         container
-        sx={{ flexWrap: ['wrap-reverse', 'nowrap'], position: 'relative' }}
+        sx={{
+          flexWrap: { xs: 'wrap-reverse', md: 'nowrap' },
+          position: 'relative',
+        }}
       >
         <Grid
           xs={12}
-          sm={hasImageBlock ? 7 : 12}
+          md={hasImageBlock ? 7 : 12}
           item
-          sx={{ pb: [4.5, 0], pr: [0, 2] }}
+          sx={{ pb: { xs: 4.5, md: 0 }, pr: { xs: 0, md: 2 } }}
         >
           <Subtitle size="xl" mb={2.75}>
             {title}
@@ -117,10 +120,10 @@ export default function PostCard({
         {hasImageBlock && (
           <Grid
             xs={12}
-            sm={5}
+            md={5}
             item
             sx={{
-              mb: [5, 0],
+              mb: { xs: 5, md: 0 },
             }}
           >
             <Box

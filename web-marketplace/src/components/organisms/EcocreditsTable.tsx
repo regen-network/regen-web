@@ -125,8 +125,8 @@ export const EcocreditsTable: React.FC<
           <WithLoader isLoading={!row.denom} variant="skeleton">
             <AccountLink address={row.issuer} />
           </WithLoader>,
-          <GreyText>{formatDate(row.startDate)}</GreyText>,
-          <GreyText>{formatDate(row.endDate)}</GreyText>,
+          <GreyText>{formatDate(row.startDate, undefined, true)}</GreyText>,
+          <GreyText>{formatDate(row.endDate, undefined, true)}</GreyText>,
           <WithLoader isLoading={row.projectLocation === ''} variant="skeleton">
             <Box>{row.projectLocation}</Box>
           </WithLoader>,

@@ -44,7 +44,7 @@ export const DataStream = ({
   const isAdmin =
     !!adminAccountId && !!activeAccountId && adminAccountId === activeAccountId;
 
-  const { data, isFetching } = useQuery(
+  const { data } = useQuery(
     getPostsQuery({
       projectId: offChainProjectId,
       limit: DATA_STREAM_LIMIT,
@@ -73,7 +73,7 @@ export const DataStream = ({
 
   return (
     <>
-      {!isFetching && data?.posts && data?.posts.length > 0 && (
+      {posts.length > 0 && (
         <Section
           title={DATA_STREAM}
           titleAlign="left"

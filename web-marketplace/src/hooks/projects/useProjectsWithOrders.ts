@@ -40,6 +40,7 @@ export interface ProjectsWithOrdersProps {
   projectId?: string; // to filter by project
   skippedProjectId?: string; // to discard a specific project
   classId?: string; // to filter by class
+  sortPinnedIds?: string[]; // list of on-chain id, uuid or slug to pinned at the top if `sort` set to 'featured-projects'
   pinnedIds?: string[]; // list of on-chain id, uuid or slug to pinned at the top
   sort?: string;
   creditClassFilter?: Record<string, boolean>;
@@ -59,6 +60,7 @@ export function useProjectsWithOrders({
   skippedProjectId,
   classId,
   pinnedIds,
+  sortPinnedIds,
   sort = '',
   projectId,
   creditClassFilter = {},
@@ -228,10 +230,17 @@ export function useProjectsWithOrders({
 
   const sortedProjects = useMemo(
     () =>
-      sortProjects(projectsFilteredByCreditClass, sort)
+      sortProjects(projectsFilteredByCreditClass, sort, sortPinnedIds)
         .sort((a, b) => sortPinnedProject(a, b, pinnedIds))
         .slice(offset, limit ? offset + limit : undefined),
-    [projectsFilteredByCreditClass, sort, pinnedIds, offset, limit],
+    [
+      projectsFilteredByCreditClass,
+      sort,
+      sortPinnedIds,
+      offset,
+      limit,
+      pinnedIds,
+    ],
   );
 
   /* Metadata queries */

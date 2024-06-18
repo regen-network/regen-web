@@ -9,3 +9,5 @@ export const CREDIT_CLASS_FILTERS_TO_DESELECT = import.meta.env
   .VITE_CREDIT_CLASS_FILTERS_TO_DESELECT
   ? import.meta.env.VITE_CREDIT_CLASS_FILTERS_TO_DESELECT.split(',')
   : [];
+export const DEFAULT_COMMUNITY_PROJECTS_FILTER =
+  import.meta.env.VITE_DEFAULT_COMMUNITY_PROJECTS_FILTER === 'true';

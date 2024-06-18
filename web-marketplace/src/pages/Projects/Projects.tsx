@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
@@ -13,6 +14,7 @@ import {
   useCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
+import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 
 import { Link } from 'components/atoms';
 import { GettingStartedResourcesSection } from 'components/molecules';
@@ -26,6 +28,14 @@ const Projects = (): JSX.Element => {
   const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
   const [sort] = useAtom(projectsSortAtom);
   const [creditClassSelectedFilters] = useAtom(creditClassSelectedFiltersAtom);
+
+  const { data: allHomePageData, isFetching: isFetchingAllHomePage } = useQuery(
+    getAllHomePageQuery({ sanityClient, enabled: !!sanityClient }),
+  );
+  const sortPinnedIds =
+    allHomePageData?.allHomePage?.[0]?.projectsSection?.projects?.map(project =>
+      String(project?.projectId),
+    );
 
   // Page index starts at 1 for route
   // Page index starts at 0 for logic
@@ -45,6 +55,7 @@ const Projects = (): JSX.Element => {
     offset: page * PROJECTS_PER_PAGE,
     useCommunityProjects,
     creditClassFilter: creditClassSelectedFilters,
+    sortPinnedIds,
   });
 
   const tabs: IconTabProps[] = useMemo(

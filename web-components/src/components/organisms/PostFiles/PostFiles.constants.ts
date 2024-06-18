@@ -9,7 +9,7 @@ export const spreadsheetColors = {
   border: 'border-blue-400',
 };
 export const jsonColors = {
-  bg: 'bg-brand-200',
+  bg: 'bg-brand-100',
   text: 'text-brand-400',
   border: 'border-brand-400',
 };

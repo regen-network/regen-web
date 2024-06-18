@@ -154,7 +154,7 @@ const Gallery = ({ items, sx, allImages, className, pdfPageHeight }: Props) => {
                 </Suspense>
               ) : (
                 <div
-                  className={`lg:h-[550px] ${colors.bg} ${colors.text} flex items-center justify-center h-[100%] text-grey-400`}
+                  className={`lg:h-[550px] ${colors.bg} ${colors.text} flex items-center justify-center h-[100%]`}
                 >
                   {audio ? (
                     <AudioFileIcon width="100" height="100" />

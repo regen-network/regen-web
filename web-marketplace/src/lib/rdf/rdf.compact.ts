@@ -11,7 +11,7 @@ export const jsonLdCompact = async (
   const incomingContext = dataHasContext ? data['@context'] : {};
   const fullContext = { ...COMPACTED_CONTEXT, ...context, ...incomingContext };
   return await jsonld.compact(
-    { '@context': fullContext as ContextDefinition, ...data },
+    { ...data, '@context': fullContext as ContextDefinition },
     JSON.parse(JSON.stringify(fullContext)),
   );
 };

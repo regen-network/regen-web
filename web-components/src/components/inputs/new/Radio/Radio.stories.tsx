@@ -11,7 +11,7 @@ export default {
 
 const Template: ComponentStory<typeof Radio> = args => (
   <Radio {...args}>
-    <VideoInput />
+    <VideoInput setError={() => {}} />
   </Radio>
 );
 

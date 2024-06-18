@@ -25,6 +25,8 @@ import {
   cropAspectMediaForm,
   IMAGE_UPLOAD_BUTTON_LABEL,
   STORY_LABEL,
+  VIDEO_INPUT_HELPER_LINK_TEXT,
+  VIDEO_INPUT_HELPER_TEXT,
 } from './MediaForm.constants';
 import { MediaFormSchemaType } from './MediaForm.schema';
 import { getHandleDelete } from './MediaForm.utils';
@@ -97,7 +99,19 @@ export const MediaFormStory = ({
           label={'Add a video'}
           optional={RADIO_PREFERABLE}
           value={'schema:VideoObject'}
-          helperText={'Copy and paste an embeddable video url.'}
+          helperText={
+            <span>
+              {VIDEO_INPUT_HELPER_TEXT}{' '}
+              <a
+                className="font-bold"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/cookpete/react-player?tab=readme-ov-file#supported-media"
+              >
+                {VIDEO_INPUT_HELPER_LINK_TEXT}
+              </a>
+            </span>
+          }
           selectedValue={storyMedia?.['@type']}
           sx={{ mt: 5.25 }}
           {...register(`regen:storyMedia.@type`)}

@@ -22,7 +22,7 @@ export interface RadioProps extends RadioPropsMui {
   selectedValue?: string;
   variant?: RadiotVariant;
   optional?: string | boolean;
-  helperText?: string;
+  helperText?: string | JSX.Element;
   children?: React.ReactNode;
   sx?: SxProps<Theme>;
   description?: ReactNode;

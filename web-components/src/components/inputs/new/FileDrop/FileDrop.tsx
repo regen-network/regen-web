@@ -108,6 +108,30 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
     const { classes: styles, cx } = useFileDropStyles();
     const isFirstField = fieldIndex === 0;
 
+    const upload = async (file: File, fieldIndex: number) => {
+      if (uploadOnAdd && onUpload) {
+        const timestamp = new Date().getTime();
+        const fileNameWithTimestamp = `${timestamp}-${file.name}`;
+        const buf = await file.arrayBuffer();
+        const uploaded = await onUpload(
+          new File([buf], fileNameWithTimestamp, {
+            type: file.type,
+          }),
+        );
+        if (uploaded) {
+          setValue({
+            value: uploaded.url,
+            mimeType: file.type,
+            name: file.name,
+            iri: uploaded.iri,
+            location: uploaded.location,
+            fieldIndex,
+            lastInMultiUpload: false,
+          });
+        }
+      }
+    };
+
     const handleDrop = (files: File[]): void => {
       if (files && files.length > 0) {
         const file = files[0];
@@ -116,47 +140,28 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
           if (typeof base64String === 'string') {
             setIsModalOpen(true);
             setInitialFile(base64String);
-            if (uploadOnAdd && onUpload) {
-              const timestamp = new Date().getTime();
-              const fileNameWithTimestamp = `${timestamp}-${file.name}`;
-              const buf = await file.arrayBuffer();
-              const uploaded = await onUpload(
-                new File([buf], fileNameWithTimestamp, {
-                  type: file.type,
-                }),
-              );
-              if (uploaded) {
-                const remainingFiles = selectedFiles.slice(1);
-                setValue({
-                  value: uploaded.url,
-                  mimeType: file.type,
-                  name: file.name,
-                  iri: uploaded.iri,
-                  location: uploaded.location,
-                  fieldIndex: fieldIndex + nextFieldIndex,
-                  lastInMultiUpload: false,
-                });
-                setSelectedFiles(remainingFiles);
-              }
-            }
+            upload(file, fieldIndex + nextFieldIndex);
           }
         });
       }
     };
 
     const onModalClose = async () => {
+      const remainingFiles = selectedFiles.slice(1);
+      const hasRemainingFiles = remainingFiles.length > 0;
       if (!isEdit && uploadOnAdd && onDelete && value) {
-        await onDelete(value, true);
+        await onDelete(value, !multi || (multi && !hasRemainingFiles));
       }
       setInitialFile('');
-      const remainingFiles = selectedFiles.slice(1);
       setSelectedFiles(remainingFiles);
       setIsModalOpen(false);
-      if (multi && remainingFiles.length > 0) {
-        toBase64(remainingFiles[0]).then(base64String => {
+      if (multi && hasRemainingFiles) {
+        const file = remainingFiles[0];
+        toBase64(file).then(base64String => {
           if (typeof base64String === 'string') {
             setIsModalOpen(true);
             setInitialFile(base64String);
+            upload(file, fieldIndex + nextFieldIndex);
           }
         });
       }
@@ -196,10 +201,12 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
         setIsModalOpen(false);
         if (multi && !lastInMultiUpload) {
           setNextFieldIndex(current => current + 1);
-          toBase64(remainingFiles[0]).then(base64String => {
+          const file = remainingFiles[0];
+          toBase64(file).then(async base64String => {
             if (typeof base64String === 'string') {
               setIsModalOpen(true);
               setInitialFile(base64String);
+              upload(file, fieldIndex + nextFieldIndex + 1);
             }
           });
         }

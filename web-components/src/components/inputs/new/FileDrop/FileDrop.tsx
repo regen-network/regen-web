@@ -2,7 +2,7 @@ import React, { forwardRef, ReactNode, useState } from 'react';
 import { DropzoneOptions } from 'react-dropzone';
 import { Crop } from 'react-image-crop';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { Feature, Point } from 'geojson';
+import { Feature } from 'geojson';
 
 import { getImageSrc, srcToFile } from '../../../image-crop/canvas-utils';
 import FieldFormControl, {
@@ -11,6 +11,7 @@ import FieldFormControl, {
 import { FileDropFile } from './FileDrop.File';
 import { useFileDropStyles } from './FileDrop.styles';
 import { FileDropRenderModalProps } from './FileDrop.types';
+import { UploadingModal } from './FileDrop.UploadingModal';
 import { ExifGPSData, toBase64 } from './FileDrop.utils';
 import { FileDropZone } from './FileDrop.Zone';
 
@@ -101,33 +102,38 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
   ) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
+    const [uploading, setUploading] = useState(false);
     const [initialFile, setInitialFile] = useState('');
     const [selectedFiles, setSelectedFiles] = useState<Array<File>>([]);
     const [nextFieldIndex, setNextFieldIndex] = useState(0);
 
     const { classes: styles, cx } = useFileDropStyles();
     const isFirstField = fieldIndex === 0;
-
     const upload = async (file: File, fieldIndex: number) => {
       if (uploadOnAdd && onUpload) {
+        setUploading(true);
         const timestamp = new Date().getTime();
         const fileNameWithTimestamp = `${timestamp}-${file.name}`;
         const buf = await file.arrayBuffer();
-        const uploaded = await onUpload(
-          new File([buf], fileNameWithTimestamp, {
-            type: file.type,
-          }),
-        );
-        if (uploaded) {
-          setValue({
-            value: uploaded.url,
-            mimeType: file.type,
-            name: file.name,
-            iri: uploaded.iri,
-            location: uploaded.location,
-            fieldIndex,
-            lastInMultiUpload: false,
-          });
+        try {
+          const uploaded = await onUpload(
+            new File([buf], fileNameWithTimestamp, {
+              type: file.type,
+            }),
+          );
+          if (uploaded) {
+            setValue({
+              value: uploaded.url,
+              mimeType: file.type,
+              name: file.name,
+              iri: uploaded.iri,
+              location: uploaded.location,
+              fieldIndex,
+              lastInMultiUpload: false,
+            });
+          }
+        } finally {
+          setUploading(false);
         }
       }
     };
@@ -138,9 +144,9 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
         setSelectedFiles(multi ? files : [file]);
         toBase64(file).then(async base64String => {
           if (typeof base64String === 'string') {
-            setIsModalOpen(true);
             setInitialFile(base64String);
-            upload(file, fieldIndex + nextFieldIndex);
+            await upload(file, fieldIndex + nextFieldIndex);
+            setIsModalOpen(true);
           }
         });
       }
@@ -157,11 +163,11 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       setIsModalOpen(false);
       if (multi && hasRemainingFiles) {
         const file = remainingFiles[0];
-        toBase64(file).then(base64String => {
+        toBase64(file).then(async base64String => {
           if (typeof base64String === 'string') {
-            setIsModalOpen(true);
             setInitialFile(base64String);
-            upload(file, fieldIndex + nextFieldIndex);
+            await upload(file, fieldIndex + nextFieldIndex);
+            setIsModalOpen(true);
           }
         });
       }
@@ -204,9 +210,9 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
           const file = remainingFiles[0];
           toBase64(file).then(async base64String => {
             if (typeof base64String === 'string') {
-              setIsModalOpen(true);
               setInitialFile(base64String);
-              upload(file, fieldIndex + nextFieldIndex + 1);
+              await upload(file, fieldIndex + nextFieldIndex + 1);
+              setIsModalOpen(true);
             }
           });
         }
@@ -276,6 +282,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
             dropZoneOption={dropZoneOption}
           />
         </FieldFormControl>
+        <UploadingModal open={uploading} onClose={() => setUploading(false)} />
         {renderModal({
           open: isModalOpen,
           initialFile,

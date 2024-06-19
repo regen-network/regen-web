@@ -7,10 +7,11 @@ import { Theme } from '../../theme/muiTheme';
  * @param sx - additional styles for container
  */
 export const Loading: React.FC<
-  React.PropsWithChildren<{ sx?: SxProps<Theme> }>
-> = ({ sx }) => {
+  React.PropsWithChildren<{ sx?: SxProps<Theme>; className?: string }>
+> = ({ sx, className }) => {
   return (
     <Box
+      className={className}
       sx={{
         display: 'flex',
         alignItems: 'center',

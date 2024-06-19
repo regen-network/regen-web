@@ -17,6 +17,7 @@ import { AddressUsedModal } from 'components/organisms/ConnectWalletFlow/Connect
 import { SelectAccountModal } from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow.SelectAccountModal';
 import { useConnectWalletToAccount } from 'components/organisms/ConnectWalletFlow/hooks/useConnectWalletToAccount';
 
+import { hasProfileData } from './ConnectWalletFlow.utils';
 import { useMergeAccounts } from './hooks/useMergeAccounts';
 
 type ConnectWalletFlowProps = {
@@ -70,7 +71,16 @@ export const ConnectWalletFlow = ({
         onClose={() => setAddressUsedModalOpen(false)}
         next={() => {
           setAddressUsedModalOpen(false);
-          setSelectAccountModalOpen(true);
+          if (
+            hasProfileData(activeAccount) ||
+            hasProfileData(walletAccount) ||
+            activeAccount?.type !== walletAccount?.type
+          )
+            setSelectAccountModalOpen(true);
+          else {
+            // if both profile are empty and have the same account type, we directly merge accounts into the current account
+            mergeAccounts({ keepCurrentAccount: true });
+          }
         }}
       />
       {activeAccount && privActiveAccount && wallet && walletAccount && (

@@ -19,6 +19,7 @@ import copyTextToClipboard from 'web-components/src/utils/copy';
 import { AccountByIdQuery } from 'generated/graphql';
 
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
+import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
 import {
   ACTIONS,
@@ -37,6 +38,7 @@ type Props = {
   createdAt: string;
   creatorIsAdmin: boolean;
   privatePost?: boolean;
+  privateFiles?: boolean;
 };
 
 export const PostHeader = ({
@@ -47,6 +49,7 @@ export const PostHeader = ({
   creatorIsAdmin,
   createdAt,
   privatePost,
+  privateFiles,
 }: Props) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -59,7 +62,11 @@ export const PostHeader = ({
   const [shareSuccessBanner, setShareSuccessBanner] = useState(false);
 
   return (
-    <Section className="max-w-[750px] m-auto pt-60 pb-30 sm:pt-[100px] sm:pb-60 sm:px-0">
+    <Section
+      className={`max-w-[750px] m-auto pt-60 pb-30 ${
+        !isAdmin && privateFiles ? 'sm:pb-35' : 'sm:pb-60'
+      } sm:pt-[100px]  sm:px-0`}
+    >
       <div className="flex justify-between">
         <TextButton
           className="flex"
@@ -168,7 +175,7 @@ export const PostHeader = ({
             name: creatorAccount.name || DEFAULT_NAME,
             link: `/profiles/${creatorAccount.id}`,
             type: creatorAccount.type,
-            image: creatorAccount.image,
+            image: creatorAccount.image || getDefaultAvatar(creatorAccount),
             timestamp: createdAt,
             tag: creatorIsAdmin ? ADMIN : undefined,
           }}

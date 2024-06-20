@@ -64,12 +64,12 @@ export const PostTimeline = ({
               <TimelineSeparator>
                 <img src={event.icon} alt={event.label} />
                 {index < events.length - 1 && (
-                  <TimelineConnector className="bg-grey-300 w-1" />
+                  <TimelineConnector className="bg-grey-300 w-1 mr-[2px]" />
                 )}
               </TimelineSeparator>
 
               <TimelineContent className="p-20 pt-0">
-                <Grid container>
+                <Grid container alignItems="center">
                   <Grid item>
                     <Subtitle component="div" className="mr-5">
                       {event.label}

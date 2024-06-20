@@ -94,7 +94,7 @@ const PostFilesPublic = ({
           padding: {
             top: mobile ? 50 : 100,
             left: 50,
-            right: mobile ? 50 : 150,
+            right: mobile ? 50 : 310,
             bottom: mobile ? 220 : 100,
           },
           duration: 0,
@@ -103,19 +103,8 @@ const PostFilesPublic = ({
     }
   };
 
-  useEffect(() => {
-    if (selectedLocation)
-      mapRef.current?.easeTo({
-        center: [
-          selectedLocation.coordinates[0],
-          selectedLocation.coordinates[1],
-        ],
-        duration: 1000,
-      });
-  }, [selectedLocation]);
-
   return (
-    <div className={cn(styles.map, 'h-[550px]')}>
+    <div className={cn(styles.map, 'h-[600px] sm:h-[550px]')}>
       <Suspense fallback={<CircularProgress color="secondary" />}>
         <Map
           initialViewState={{
@@ -133,6 +122,7 @@ const PostFilesPublic = ({
           mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
           onLoad={onLoad}
           attributionControl={false}
+          scrollZoom={false}
         >
           {locations &&
             locations.features.map((feature, i) => {

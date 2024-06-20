@@ -19,6 +19,7 @@ import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsE
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
+import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
 import { ADMIN, REGISTRY } from '../Post.constants';
 
@@ -120,7 +121,7 @@ export const useAttestEvents = ({
         name: creatorAccount.name || DEFAULT_NAME,
         link: `/profiles/${creatorAccount.id}`,
         type: creatorAccount.type,
-        image: creatorAccount.image,
+        image: creatorAccount.image || getDefaultAvatar(creatorAccount),
         tag: creatorIsAdmin ? ADMIN : undefined,
       },
       timestamp: createdAt,
@@ -156,7 +157,7 @@ export const useAttestEvents = ({
               ? `/profiles/${attestorAccount?.id}`
               : undefined,
             type: attestorAccount?.type ?? 'USER',
-            image: attestorAccount?.image,
+            image: attestorAccount?.image || getDefaultAvatar(attestorAccount),
             tag: attestorIsRegistry ? REGISTRY : undefined,
           },
         });

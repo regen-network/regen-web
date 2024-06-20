@@ -97,7 +97,7 @@ export default function UserInfo({
         }}
         className={classNames?.info}
       >
-        <div className="inline-flex">
+        <div className="inline-flex items-center">
           {user.link ? (
             <Link sx={{ color: 'primary.contrastText' }} href={user.link}>
               {name}

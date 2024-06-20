@@ -115,15 +115,16 @@ function Post(): JSX.Element {
                   creatorIsAdmin={creatorIsAdmin}
                   createdAt={createdAt}
                   privatePost={privatePost}
+                  privateFiles={privateFiles}
                 />
 
                 {privacyType && files && files.length > 0 && (
                   <div
                     className={`${
                       !isAdmin && privateFiles
-                        ? 'max-w-[750px]'
-                        : 'max-w-[942px]'
-                    } m-auto relative mb-30 sm:mb-[70px]`}
+                        ? 'max-w-[750px] sm:mb-[35px] px-[16px] sm:px-0'
+                        : 'max-w-[942px] sm:mb-[70px]'
+                    } m-auto relative mb-30`}
                   >
                     <PostFiles
                       privacyType={privacyType}
@@ -133,7 +134,7 @@ function Post(): JSX.Element {
                     />
                     {(isAdmin || !privateFiles) && (
                       <img
-                        className="absolute top-[17px] left-20 z-[-1]"
+                        className="hidden sm:block absolute top-[17px] left-20 z-[-1]"
                         src="/png/bg-shadow.png"
                         alt="bg-shadow"
                       />

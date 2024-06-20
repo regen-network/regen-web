@@ -43,7 +43,10 @@ const PostFilesDrawer = ({
 
   useEffect(() => {
     const index = files.findIndex(file => file.url === selectedUrl);
-    ref.current?.children[index]?.scrollIntoView({ behavior: 'smooth' });
+    ref.current?.children[index]?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+    });
   }, [files, selectedUrl]);
 
   return (

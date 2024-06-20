@@ -9,13 +9,14 @@ import {
   useTheme,
 } from '@mui/material';
 
-import OutlinedButton from '../../../buttons/OutlinedButton';
+import { UseStateSetter } from '../../../../types/react/useState';
 import Card from '../../../cards/Card';
 import TrashIcon from '../../../icons/TrashIcon';
 import FieldFormControl, {
   FieldFormControlProps,
 } from './../FieldFormControl/FieldFormControl';
 import Input from './../Input/Input';
+import { VIDEO_URL_NOT_VALID } from './VideoInput.constants';
 import { useVideoInputStyles } from './VideoInput.styles';
 
 export interface VideoInputProps extends Partial<FieldFormControlProps> {
@@ -31,6 +32,8 @@ export interface VideoInputProps extends Partial<FieldFormControlProps> {
   setValue?: (value: string) => void;
   optional?: boolean | string;
   buttonText?: string;
+  setError: (error: string | undefined) => void;
+  setErrorBanner?: UseStateSetter<string>;
 }
 
 export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
@@ -44,6 +47,10 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
       setValue,
       optional,
       buttonText,
+      error,
+      setError,
+      setErrorBanner,
+      helperText,
       ...fieldProps
     },
     ref,
@@ -57,11 +64,30 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
     const handleChange = (
       event: React.ChangeEvent<{ value: unknown }>,
     ): void => {
-      setVideoUrl(event.target.value as string);
+      const videoUrl = event.target.value as string;
+      setVideoUrl(videoUrl);
+      if (ReactPlayer.canPlay(videoUrl) && setValue) {
+        setError(undefined);
+        setValue && setValue(videoUrl);
+      } else {
+        setError(VIDEO_URL_NOT_VALID);
+      }
     };
 
-    const handleUrlSubmit = (): void => {
-      setValue && setValue(videoUrl);
+    const handleBlur = (): void => {
+      if (error && setErrorBanner && helperText) {
+        // We set a timeout so the click event (blur) doesn't cause the error banner
+        // to close too quickly
+        setTimeout(() => setErrorBanner(helperText), 200);
+      }
+    };
+
+    const handleKeyUp = (
+      event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
+      if (event.key === 'Enter' && error && setErrorBanner && helperText) {
+        setErrorBanner(helperText);
+      }
     };
 
     const handleDelete = (): void => {
@@ -75,6 +101,8 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
         className={cx(styles.root, classes?.root, className)}
         label={label}
         optional={optional}
+        error={!!error}
+        helperText={helperText}
         {...fieldProps}
       >
         <>
@@ -121,14 +149,9 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
                 placeholder="Add video url"
                 name={name}
                 ref={ref}
+                onBlur={handleBlur}
+                onKeyUp={handleKeyUp}
               />
-              <OutlinedButton
-                classes={{ root: cx(styles.button, classes?.button) }}
-                onClick={handleUrlSubmit}
-                aria-label="set video url"
-              >
-                {buttonText || '+ video'}
-              </OutlinedButton>
             </div>
           )}
         </>

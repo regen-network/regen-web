@@ -130,7 +130,7 @@ export const PostFlow = ({
           label: FILE_NAMES,
           value:
             files.map(file => ({
-              name: file.name,
+              name: file.name as string,
               url: filesUrls[file.iri],
             })) || [],
         });

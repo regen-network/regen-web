@@ -27,6 +27,9 @@ const nextConfig = {
     ],
   },
   transpilePackages: ['web-components'],
+  outputFileTracingExcludes: {
+    '*': ['*/vendored/contexts/amp-context*'],
+  },
   async redirects() {
     return [
       {

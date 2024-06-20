@@ -1,6 +1,7 @@
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
+import Script from 'next/script';
 import { DefaultSeo } from 'next-seo';
 import { createEmotionSsrAdvancedApproach } from 'tss-react/next/pagesDir';
 
@@ -18,6 +19,8 @@ const { augmentDocumentWithEmotionCache, withAppEmotionCache } =
 export { augmentDocumentWithEmotionCache };
 
 const App = ({ Component, pageProps }: AppProps) => {
+  const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
   return (
     <>
       <DefaultSeo
@@ -33,6 +36,21 @@ const App = ({ Component, pageProps }: AppProps) => {
           ],
         }}
       />
+      {GA_MEASUREMENT_ID && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          />
+          <Script id="google-analytics">
+            {`
+             window.dataLayer = window.dataLayer || [];
+             function gtag(){dataLayer.push(arguments);}
+             gtag('js', new Date());
+             gtag('config', '${GA_MEASUREMENT_ID}');
+           `}
+          </Script>
+        </>
+      )}
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Layout>

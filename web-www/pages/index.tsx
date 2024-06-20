@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import { InferGetStaticPropsType } from 'next';
-import Script from 'next/script';
 
 import BlogSection from '../components/templates/home/Blog/Home.blog';
 import CarbonplusSection from '../components/templates/home/CarbonPlus/Home.CarbonPlus';
@@ -38,25 +37,9 @@ export default function Home({
   const statsData = allHomePageWeb.homeWebStatsSection;
   const valuesData = allHomePageWeb.valuesSection;
   const ledgerDescription = allHomePageWeb.ledgerDescription;
-  const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   return (
     <>
-      {GA_MEASUREMENT_ID && (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          />
-          <Script id="google-analytics">
-            {`
-             window.dataLayer = window.dataLayer || [];
-             function gtag(){dataLayer.push(arguments);}
-             gtag('js', new Date());
-             gtag('config', '${GA_MEASUREMENT_ID}');
-           `}
-          </Script>
-        </>
-      )}
       <Box sx={{ overflow: 'hidden' }}>
         <HomeFoldSection homeFoldData={homeFoldData} />
         <CarbonplusSection carbonPlusData={carbonPlusData} />

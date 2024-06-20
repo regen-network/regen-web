@@ -25,6 +25,7 @@ import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/gra
 import { useAttestEvents } from 'pages/Post/hooks/useAttestEvents';
 import { ADMIN, POST_IS_PRIVATE } from 'pages/Post/Post.constants';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
+import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
 import { API_URI, IMAGE_STORAGE_BASE_URL } from './ProjectDetails.config';
 import {
@@ -107,7 +108,7 @@ export const DataStreamPost = ({
             author={{
               name: creatorAccount?.name || DEFAULT_NAME,
               type: creatorAccount?.type ?? 'USER',
-              image: creatorAccount?.image,
+              image: creatorAccount?.image || getDefaultAvatar(creatorAccount),
               link: `/profiles/${creatorAccount?.id}`,
               timestamp: post.createdAt,
               tag: creatorIsAdmin ? ADMIN : undefined,

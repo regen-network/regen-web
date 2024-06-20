@@ -145,11 +145,14 @@ export const PostForm = ({
           ...prev,
           fieldIndex: featureLocation as Feature<Point>,
         }));
-        setValue(
-          `files.${fieldIndex}.locationType`,
-          featureLocation ? 'file' : 'none',
-        );
       }
+      setValue(
+        `files.${fieldIndex}.locationType`,
+        featureLocation ? 'file' : 'none',
+      );
+    } else if (!files?.[fieldIndex]?.location) {
+      setValue(`files.${fieldIndex}.location`, projectLocation);
+      setValue(`files.${fieldIndex}.locationType`, 'none');
     }
   };
 

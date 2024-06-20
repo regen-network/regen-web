@@ -75,6 +75,7 @@ export const useFetchProjectsWithOrders = ({
 
   /* Final Normalization */
   const projectsWithMetadata = normalizeProjectsWithMetadata({
+    offChainProjects: orderedOffChainProjects,
     projectsWithOrderData,
     projectsMetadata,
     projectPagesMetadata,

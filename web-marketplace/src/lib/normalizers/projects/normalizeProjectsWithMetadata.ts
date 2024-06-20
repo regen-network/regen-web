@@ -3,7 +3,12 @@ import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
 import { formatNumber } from 'web-components/src/utils/format';
 
-import { AccountFieldsFragment, Maybe, Project } from 'generated/graphql';
+import {
+  AccountFieldsFragment,
+  Maybe,
+  Project,
+  ProjectFieldsFragment,
+} from 'generated/graphql';
 import {
   AllCreditClassQuery,
   AllPrefinanceProjectQuery,
@@ -21,6 +26,7 @@ import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.ut
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 interface NormalizeProjectsWithOrderDataParams {
+  offChainProjects?: (Maybe<ProjectFieldsFragment> | undefined)[];
   projectsWithOrderData?: ProjectWithOrderData[];
   projectsMetadata?: (AnchoredProjectMetadataBaseLD | undefined)[];
   projectPagesMetadata?: ProjectPageMetadataLD[];
@@ -31,6 +37,7 @@ interface NormalizeProjectsWithOrderDataParams {
 }
 
 export const normalizeProjectsWithMetadata = ({
+  offChainProjects,
   projectsWithOrderData,
   projectsMetadata,
   projectPagesMetadata,
@@ -44,6 +51,7 @@ export const normalizeProjectsWithMetadata = ({
       const classMetadata = classesMetadata?.[index];
       const projectPageMetadata = projectPagesMetadata?.[index];
       const programAccount = programAccounts?.[index];
+      const offChainProject = offChainProjects?.[index];
       const sanityClass = projectWithOrderData.sanityCreditClassData;
       const prefinanceProject = prefinanceProjectsData?.allProject?.find(
         project =>
@@ -53,6 +61,7 @@ export const normalizeProjectsWithMetadata = ({
       );
 
       return normalizeProjectWithMetadata({
+        offChainProject,
         projectWithOrderData,
         projectMetadata,
         projectPageMetadata,

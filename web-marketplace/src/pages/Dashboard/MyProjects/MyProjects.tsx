@@ -43,9 +43,7 @@ const MyProjects = (): JSX.Element => {
     string | undefined
   >();
   const [postProjectName, setPostProjectName] = useState<string | undefined>();
-  console.log('postProjectId', postProjectId);
-  console.log('postOffChainProjectId', postOffChainProjectId);
-  console.log('postProjectName', postProjectName);
+
   return (
     <>
       <Grid container spacing={8}>
@@ -88,7 +86,6 @@ const MyProjects = (): JSX.Element => {
                         !activeAccountId || project.draft || !project.location,
                     }}
                     onButtonClick={() => {
-                      console.log('project', project);
                       setPostProjectId(project.id);
                       setPostOffChainProjectId(project.offChainId);
                       setPostProjectName(project.name);

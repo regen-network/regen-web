@@ -96,3 +96,9 @@ from = "https://app.regen.network/ecocredits/accounts/*"
 to = "https://app.regen.network/profiles/:splat"
 force = true
 status = 302
+
+[functions]
+  included_files = [
+      "node_modules/next/dist/server/future/route-modules/pages/vendored/contexts/amp-context*",
+      "node_modules/next/dist/server/future/route-modules/pages/vendored/contexts/head-manager-context*",
+  ]

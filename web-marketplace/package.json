@@ -77,6 +77,7 @@
     "use-analytics": "^0.0.5",
     "vite-plugin-require": "^1.1.10",
     "web-components": "workspace:*",
+    "wellknown": "^0.5.0",
     "zod": "^3.20.2"
   },
   "scripts": {
@@ -118,6 +119,7 @@
     "@types/slug": "^5.0.8",
     "@types/storybook__addon-storyshots": "^5.3.1",
     "@types/use-analytics": "^0.0.0",
+    "@types/wellknown": "^0.5.8",
     "@vitejs/plugin-react": "^4.0.0",
     "@walletconnect/types": "^2.11.2",
     "autoprefixer": "^10.4.16",
@@ -134,7 +136,7 @@
     "source-map-explorer": "^2.5.2",
     "storybook-addon-react-router-v6": "^0.1.10",
     "tailwindcss": "^3.3.3",
-    "vite": "^4.4.9",
+    "vite": "^5.2.12",
     "vite-plugin-checker": "^0.6.0",
     "vite-plugin-svgr": "^3.2.0",
     "vite-tsconfig-paths": "^4.2.0"

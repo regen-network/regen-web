@@ -7,12 +7,13 @@ import { PostFilesPublic } from './PostFiles.Public';
 import { PostPrivacyType } from './PostFiles.types';
 
 export type PostFile = {
-  url: string;
-  name: string;
+  iri: string;
+  url?: string;
+  name?: string;
   description?: string;
   credit?: string;
-  location: Point;
-  mimeType: string;
+  location?: Point;
+  mimeType?: string;
 };
 export type PostFilesProps = {
   privacyType: PostPrivacyType;

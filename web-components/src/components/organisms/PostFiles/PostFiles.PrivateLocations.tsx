@@ -2,6 +2,7 @@ import { useMediaQuery, useTheme } from '@mui/material';
 
 import PinIcon from '../../icons/PinIcon';
 import Gallery from '../Gallery';
+import { GalleryItem } from '../Gallery/Gallery.types';
 import { Tag } from './components/Tag';
 import { PostFilesProps } from './PostFiles';
 
@@ -18,7 +19,7 @@ const PostFilesPrivateLocations = ({ files }: Props) => {
         icon={<PinIcon className="w-[16px] h-[17px]" />}
       />
       <Gallery
-        items={files}
+        items={files as GalleryItem[]}
         className={{ root: 'h-[100%]' }}
         pdfPageHeight={mobile ? 340 : 550}
       />

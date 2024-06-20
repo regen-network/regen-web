@@ -1,5 +1,10 @@
 import React from 'react';
-import { ListItemIcon, ListItemText, MenuItem } from '@mui/material';
+import {
+  ListItemIcon,
+  ListItemText,
+  MenuItem,
+  MenuItemProps,
+} from '@mui/material';
 
 import EditIcon from '../../icons/EditIcon';
 import ShareIcon from '../../icons/ShareIcon';
@@ -7,9 +12,9 @@ import ShareUnlockIcon from '../../icons/ShareUnlockIcon';
 import TrashIcon from '../../icons/TrashIcon';
 import { Body } from '../../typography';
 
-export const EditMenuItem = (): JSX.Element => {
+export const EditMenuItem = (props: MenuItemProps): JSX.Element => {
   return (
-    <MenuItem>
+    <MenuItem {...props}>
       <ListItemIcon>
         <EditIcon sx={{ height: '24px', width: '24px', p: '2px' }} />
       </ListItemIcon>
@@ -18,8 +23,8 @@ export const EditMenuItem = (): JSX.Element => {
   );
 };
 
-export const SharePublicMenuItem = (): JSX.Element => (
-  <MenuItem key="2">
+export const SharePublicMenuItem = (props: MenuItemProps): JSX.Element => (
+  <MenuItem key="2" {...props}>
     <ListItemIcon sx={{ height: '24px', width: '24px' }}>
       <ShareIcon color="primary" />
     </ListItemIcon>
@@ -29,8 +34,8 @@ export const SharePublicMenuItem = (): JSX.Element => (
     </ListItemText>
   </MenuItem>
 );
-export const SharePrivateMenuItem = (): JSX.Element => (
-  <MenuItem>
+export const SharePrivateMenuItem = (props: MenuItemProps): JSX.Element => (
+  <MenuItem {...props}>
     <ListItemIcon sx={{ height: '24px', width: '24px' }}>
       <ShareUnlockIcon />
     </ListItemIcon>
@@ -41,8 +46,8 @@ export const SharePrivateMenuItem = (): JSX.Element => (
   </MenuItem>
 );
 
-export const DeleteMenuItem = (): JSX.Element => (
-  <MenuItem>
+export const DeleteMenuItem = (props: MenuItemProps): JSX.Element => (
+  <MenuItem {...props}>
     <ListItemIcon sx={{ height: '24px', width: '24px' }}>
       <TrashIcon color="black" />
     </ListItemIcon>
@@ -50,7 +55,7 @@ export const DeleteMenuItem = (): JSX.Element => (
   </MenuItem>
 );
 
-export const menuItems: (() => JSX.Element)[] = [
+export const menuItems: ((props: MenuItemProps) => JSX.Element)[] = [
   EditMenuItem,
   SharePublicMenuItem,
   SharePrivateMenuItem,

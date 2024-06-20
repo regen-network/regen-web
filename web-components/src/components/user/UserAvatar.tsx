@@ -11,6 +11,7 @@ interface UserAvatarProps {
   href?: string | null;
   icon?: any;
   sx?: SxProps<Theme>;
+  className?: string;
 }
 
 // TODO `Sizes` and `getSize` were moved from the prior /sizing helpers. This is

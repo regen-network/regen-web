@@ -43,7 +43,10 @@ const PostFilesDrawer = ({
 
   useEffect(() => {
     const index = files.findIndex(file => file.url === selectedUrl);
-    ref.current?.children[index]?.scrollIntoView({ behavior: 'smooth' });
+    ref.current?.children[index]?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+    });
   }, [files, selectedUrl]);
 
   return (
@@ -64,7 +67,7 @@ const PostFilesDrawer = ({
       <Slide direction="left" in={open} mountOnEnter unmountOnExit>
         <div
           ref={ref}
-          className="overflow-y-auto border-solid border-0 border-t border-l border-r border-grey-200 absolute top-0 right-0 w-[150px] h-[100%] z-10"
+          className="bg-grey-0 overflow-y-auto border-solid border-0 border-t border-l border-r border-grey-200 absolute top-0 right-0 w-[150px] h-[100%] z-10"
         >
           {files.map(file => {
             const { mimeType, url } = file;
@@ -88,7 +91,7 @@ const PostFilesDrawer = ({
               >
                 {image || video ? (
                   <>
-                    {image && (
+                    {image && url && (
                       <Image
                         className="rounded-sm w-[100%]"
                         src={url}

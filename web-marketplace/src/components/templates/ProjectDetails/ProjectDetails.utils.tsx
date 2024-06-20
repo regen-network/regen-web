@@ -9,6 +9,7 @@ import { Props as ActionCardProps } from 'web-components/src/components/molecule
 import { GalleryItem } from 'web-components/src/components/organisms/Gallery/Gallery.types';
 import { Asset } from 'web-components/src/components/sliders/ProjectMedia';
 import { Account } from 'web-components/src/components/user/UserInfo';
+import { formatDate } from 'web-components/src/utils/format';
 
 import {
   AccountFieldsFragment,
@@ -44,7 +45,6 @@ import {
   IMAGE_STORAGE_BASE_URL,
   MAPBOX_TOKEN,
 } from './ProjectDetails.config';
-import { formatDate } from 'web-components/src/utils/format';
 
 type FindSanityCreditClassParams = {
   sanityCreditClassData: AllCreditClassQuery | undefined;

@@ -44,7 +44,7 @@ export default defineConfig(({ mode }) => {
       react(),
       viteTsconfigPaths(),
       svgrPlugin(),
-      vitePluginRequire(),
+      vitePluginRequire.default(),
       visualizer(),
     ],
     define: isDev ? { global: {} } : { 'process.env': {} },
@@ -53,7 +53,7 @@ export default defineConfig(({ mode }) => {
         plugins:
           mode === 'development'
             ? [
-                NodeGlobalsPolyfillPlugin({
+                NodeGlobalsPolyfillPlugin.default({
                   buffer: true,
                   process: true,
                 }),

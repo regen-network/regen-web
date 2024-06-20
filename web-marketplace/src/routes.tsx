@@ -66,6 +66,7 @@ const LoginPage = lazy(() => import('./pages/Login'));
 const Media = lazy(() => import('./pages/Media'));
 const MethodologyDetails = lazy(() => import('./pages/MethodologyDetails'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
+const Post = lazy(() => import('./pages/Post'));
 const PrefinanceProjects = lazy(
   () => import('./pages/Projects/PrefinanceProjects'),
 );
@@ -161,6 +162,15 @@ export const getRoutes = ({
             queryClient: reactQueryClient,
             apolloClientFactory,
           })}
+        />
+        <Route
+          path="post/:iri"
+          element={<Post />}
+          // TODO
+          // loader={postLoader({
+          //   queryClient: reactQueryClient,
+          //   apolloClientFactory,
+          // })}
         />
         <Route
           path="profile"

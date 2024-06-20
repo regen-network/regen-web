@@ -10,8 +10,7 @@ import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
-import { useConnectWalletToAccount } from 'pages/ProfileEdit/hooks/useConnectWalletToAccount';
-
+import { ConnectWalletFlow } from '../ConnectWalletFlow/ConnectWalletFlow';
 import { ConnectWalletModal } from './components/ConnectWalletModal/ConnectWalletModal';
 import {
   KEPLR_CONNECT_BUTTON,
@@ -40,14 +39,6 @@ export const RegistryLayoutConnectWalletModal = (): JSX.Element => {
   useEffect(() => {
     if (loaded && isConnected) onCloseModal();
   }, [isConnected, loaded, onCloseModal]);
-
-  useConnectWalletToAccount({
-    isConnectModalOpened: open,
-    setError: e => {
-      setError(String(e));
-      onCloseModal();
-    },
-  });
 
   return (
     <>
@@ -82,6 +73,14 @@ export const RegistryLayoutConnectWalletModal = (): JSX.Element => {
           }}
         />
       )}
+      <ConnectWalletFlow
+        isConnectModalOpened={!!open}
+        setError={(e: unknown) => {
+          setError(String(e));
+          onCloseModal();
+        }}
+        onConnectModalClose={onCloseModal}
+      />
     </>
   );
 };

@@ -12,6 +12,11 @@ import {
   isVideo,
 } from '../../inputs/new/FileDrop/FileDrop.utils';
 import { PostFile } from './PostFiles';
+import {
+  audioColors,
+  jsonColors,
+  spreadsheetColors,
+} from './PostFiles.constants';
 
 export const getIconForFiles = (files: Array<PostFile>) => {
   const dimensions = { width: '24', height: '24' };
@@ -38,3 +43,6 @@ export const getIconForFiles = (files: Array<PostFile>) => {
   }
   return <OtherDocumentsIcon {...dimensions} />;
 };
+
+export const getColors = (audio: boolean, spreadsheet: boolean) =>
+  audio ? audioColors : spreadsheet ? spreadsheetColors : jsonColors;

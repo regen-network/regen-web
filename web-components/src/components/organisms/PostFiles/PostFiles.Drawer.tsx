@@ -20,6 +20,7 @@ import {
 } from '../../inputs/new/FileDrop/FileDrop.utils';
 import { FileBody } from './components/FileBody';
 import { PostFile } from './PostFiles';
+import { getColors } from './PostFiles.utils';
 
 const Document = lazy(() => import('./lib/Document'));
 const Page = lazy(() => import('./lib/Page'));
@@ -69,6 +70,10 @@ const PostFilesDrawer = ({
             const { mimeType, url } = file;
             const image = isImage(mimeType);
             const video = isVideo(mimeType);
+            const audio = isAudio(mimeType);
+            const spreadsheet = isSpreadSheet(mimeType);
+            const colors = getColors(audio, spreadsheet);
+
             return (
               <div
                 className={cn(
@@ -120,7 +125,9 @@ const PostFilesDrawer = ({
                         </Suspense>
                       </div>
                     ) : (
-                      <div className="flex items-center justify-center h-[70px] mb-10 rounded-sm border-solid border border-blue-400 text-blue-400 bg-blue-50">
+                      <div
+                        className={`flex items-center justify-center h-[70px] mb-10 rounded-sm border-solid border ${colors.border} ${colors.text} ${colors.bg}`}
+                      >
                         {isAudio(mimeType) ? (
                           <AudioFileIcon width="40" height="40" />
                         ) : isSpreadSheet(mimeType) ? (

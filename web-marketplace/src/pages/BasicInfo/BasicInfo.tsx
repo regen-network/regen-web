@@ -37,8 +37,8 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
     }),
     [metadata],
   );
-
-  const { creditClassOnChainId } = useCreateProjectContext();
+  const { creditClassOnChainId, hasModalBeenViewed, setHasModalBeenViewed } =
+    useCreateProjectContext();
   const { data: sanityCreateProjectPageData } = useQuery(
     getAllCreateProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
   );
@@ -52,6 +52,11 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
     [isEdit, creditClassOnChainId, sanityCreateProjectPageData],
   );
 
+  const onClose = () => {
+    setOpen(false);
+    setHasModalBeenViewed(true);
+  };
+
   return (
     <ProjectFormTemplate
       isEdit={isEdit}
@@ -61,11 +66,11 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
       loading={loading}
     >
       <BasicInfoForm onSubmit={metadataSubmit} initialValues={initialValues} />
-      {sanityCreateProjectPageData && (
+      {sanityCreateProjectPageData && !hasModalBeenViewed && (
         <CreateProjectPageModal
           sanityCreateProjectPageData={sanityCreateProjectPageData}
           open={open}
-          onClose={() => setOpen(false)}
+          onClose={onClose}
         />
       )}
     </ProjectFormTemplate>

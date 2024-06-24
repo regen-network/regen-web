@@ -37,6 +37,8 @@ export type Post = {
       }
     | undefined;
   error?: string;
+  prevIri?: string;
+  nextIri?: string;
 };
 
 export type ReactQueryGetPostQueryResponse = QueryObserverOptions<Post | null>;

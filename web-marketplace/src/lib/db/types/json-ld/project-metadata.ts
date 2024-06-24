@@ -26,6 +26,10 @@ export interface AnchoredProjectMetadataBaseLD {
   'regen:projectOriginator'?: ProjectStakeholder;
   'regen:ratings'?: Rating[];
   'regen:ecosystemType'?: string[];
+  'regen:previewPhoto'?: {
+    'schema:url': string;
+    'schema:creditText'?: string;
+  };
 }
 
 /** Un-anchored metadata from our DB. This is editable without a Ledger TX. */

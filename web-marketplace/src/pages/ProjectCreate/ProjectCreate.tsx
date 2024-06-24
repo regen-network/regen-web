@@ -1,6 +1,7 @@
 import { createContext, MutableRefObject, useRef, useState } from 'react';
 import { Outlet, useOutletContext } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+
 import { FormRef } from 'components/molecules/Form/Form';
 
 type ContextType = {
@@ -8,11 +9,13 @@ type ContextType = {
   setDeliverTxResponse: (deliverTxResponse?: DeliverTxResponse) => void;
   creditClassId?: string;
   setCreditClassId: (creditClassId?: string) => void;
-  formRef?: FormRef;
   creditClassOnChainId?: string;
   setCreditClassOnChainId: (creditClassId?: string) => void;
+  formRef?: FormRef;
   shouldNavigateRef?: MutableRefObject<boolean>;
   isDraftRef?: MutableRefObject<boolean>;
+  hasModalBeenViewed?: boolean;
+  setHasModalBeenViewed: (state: boolean) => void;
 };
 
 const defaultProjectCreateContext = createContext<ContextType>({
@@ -25,6 +28,8 @@ const defaultProjectCreateContext = createContext<ContextType>({
   formRef: undefined,
   shouldNavigateRef: undefined,
   isDraftRef: undefined,
+  hasModalBeenViewed: false,
+  setHasModalBeenViewed: () => {},
 });
 
 export const ProjectCreate = (): JSX.Element => {
@@ -33,6 +38,7 @@ export const ProjectCreate = (): JSX.Element => {
     useState<DeliverTxResponse>();
   const [creditClassId, setCreditClassId] = useState<string>('');
   const [creditClassOnChainId, setCreditClassOnChainId] = useState<string>('');
+  const [hasModalBeenViewed, setHasModalBeenViewed] = useState(false);
   const formRef = useRef();
   const shouldNavigateRef = useRef(true);
   const isDraftRef = useRef(false);
@@ -49,6 +55,8 @@ export const ProjectCreate = (): JSX.Element => {
         formRef,
         shouldNavigateRef,
         isDraftRef,
+        hasModalBeenViewed,
+        setHasModalBeenViewed,
       }}
     />
   );

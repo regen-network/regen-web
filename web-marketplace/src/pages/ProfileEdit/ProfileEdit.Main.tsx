@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
@@ -43,6 +43,7 @@ export const ProfileEditMain = () => {
     profileBannerCardAtom,
   );
   const fileNamesToDeleteRef = useRef<string[]>([]);
+  const [isSaveDisabled, setIsSaveDisabled] = useState(false);
 
   const initialValues: EditProfileFormSchemaType = useMemo(
     () => ({
@@ -148,15 +149,20 @@ export const ProfileEditMain = () => {
     fileNamesToDeleteRef,
   });
 
+  const onUpdate = (isFormUpdated: boolean) => {
+    setIsSaveDisabled(!isFormUpdated);
+  };
+
   return (
     <EditProfileForm
       onSubmit={onSubmit}
       onSuccess={onSuccess}
       onUpload={onUpload}
+      onUpdate={onUpdate}
       initialValues={initialValues}
       isDirtyRef={isDirtyRef}
     >
-      <EditProfileFormActionBar />
+      <EditProfileFormActionBar saveDisabled={isSaveDisabled} />
     </EditProfileForm>
   );
 };

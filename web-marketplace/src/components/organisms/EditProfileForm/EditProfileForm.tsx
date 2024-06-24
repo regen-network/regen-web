@@ -1,5 +1,5 @@
 import React, { MutableRefObject, useEffect } from 'react';
-import { useFormState, useWatch } from 'react-hook-form';
+import { useFormState } from 'react-hook-form';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
@@ -56,6 +56,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     onSubmit,
     onSuccess,
     onUpload,
+    onUpdate,
   }) => {
     const form = useZodForm({
       schema: editProfileFormSchema,
@@ -65,29 +66,14 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
       mode: 'onBlur',
     });
     const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
-
     const { isSubmitting, errors, isDirty } = useFormState({
       control: form.control,
     });
 
     /* Fields watch */
 
-    const profileType = useWatch({
-      control: form.control,
-      name: 'profileType',
-    });
-    const profileImage = useWatch({
-      control: form.control,
-      name: 'profileImage',
-    });
-    const backgroundImage = useWatch({
-      control: form.control,
-      name: 'backgroundImage',
-    });
-    const description = useWatch({
-      control: form.control,
-      name: 'description',
-    });
+    const formValues: EditProfileFormSchemaType = form.watch();
+    type FormValuesKeys = keyof typeof formValues;
 
     /* Setter */
 
@@ -102,8 +88,8 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
 
     useUpdateDefaultAvatar({
       setProfileImage: value => form.setValue('profileImage', value),
-      profileType,
-      profileImage,
+      profileType: formValues.profileType,
+      profileImage: formValues.profileImage,
     });
 
     useEffect(() => {
@@ -111,6 +97,16 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         isDirtyRef.current = isDirty;
       }
     }, [isDirtyRef, isDirty]);
+
+    const isFormUpdated: boolean = Object.keys(formValues).some(
+      key =>
+        formValues[key as FormValuesKeys] !==
+        initialValues[key as FormValuesKeys],
+    );
+
+    useEffect(() => {
+      onUpdate && onUpdate(isFormUpdated);
+    }, [isFormUpdated, onUpdate]);
 
     return (
       <Form
@@ -133,7 +129,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         <RadioCard
           label={PROFILE_TYPE}
           items={radioCardItems}
-          selectedValue={profileType ?? ''}
+          selectedValue={formValues.profileType ?? ''}
           {...form.register('profileType')}
         />
         <TextField
@@ -152,9 +148,9 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           initialFileName={PROFILE_AVATAR_FILE_NAME}
           circularCrop
           onUpload={onUpload}
-          value={profileImage}
+          value={formValues.profileImage}
         >
-          <ImageFieldAvatar value={profileImage} />
+          <ImageFieldAvatar value={formValues.profileImage} />
         </ImageField>
         <ImageField
           label="Background image"
@@ -170,9 +166,9 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           {...form.register('backgroundImage')}
           name="bg-image"
           onUpload={onUpload}
-          value={backgroundImage}
+          value={formValues.backgroundImage}
         >
-          <ImageFieldBackground value={backgroundImage} />
+          <ImageFieldBackground value={formValues.backgroundImage} />
         </ImageField>
         <TextAreaField
           type="text"
@@ -186,7 +182,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           error={!!errors?.description}
           {...form.register('description')}
         >
-          <TextAreaFieldChartCounter value={description} />
+          <TextAreaFieldChartCounter value={formValues.description} />
         </TextAreaField>
         <Box sx={{ mt: 6 }}>
           <ControlledFormLabel optional>{LINKS_LABEL}</ControlledFormLabel>

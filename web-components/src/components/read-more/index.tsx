@@ -102,7 +102,12 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
               </Body>
             )}
             {rest.map((text, i) => (
-              <Body component={component} size={size} mobileSize={mobileSize}>
+              <Body
+                component={component}
+                size={size}
+                mobileSize={mobileSize}
+                key={i}
+              >
                 {sentenceBased && rest && i === 0 && expanded && (
                   <>
                     <br />

@@ -231,7 +231,7 @@ const AdditionalCerfications: React.FC<
                   aria-label="delete"
                   size="large"
                 >
-                  <TrashIcon color={theme.palette.secondary.main} />
+                  <TrashIcon className="text-brand-100" />
                 </IconButton>
               </Box>
             ))}

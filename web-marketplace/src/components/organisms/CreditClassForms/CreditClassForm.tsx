@@ -68,7 +68,7 @@ export const CreditClassForm = (props: {
                           remove(index);
                         }}
                       >
-                        <TrashIcon color={theme.palette.secondary.main} />
+                        <TrashIcon className="text-brand-100" />
                       </TextButton>
                     )
                   }

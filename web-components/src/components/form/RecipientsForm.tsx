@@ -162,7 +162,7 @@ const DeleteButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
         mb: 4,
       }}
       onClick={onClick}
-      startIcon={<TrashIcon color={theme.palette.secondary.main} />}
+      startIcon={<TrashIcon className="text-brand-100" />}
     >
       <Label
         sx={{

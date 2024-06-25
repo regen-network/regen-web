@@ -134,7 +134,7 @@ function VideoInput({
                     aria-label="delete"
                     size="large"
                   >
-                    <TrashIcon color={theme.palette.error.light} />
+                    <TrashIcon className="text-error-200" />
                   </IconButton>
                 </Card>
               </Collapse>

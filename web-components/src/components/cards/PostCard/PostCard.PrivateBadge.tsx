@@ -12,18 +12,21 @@ const PrivateBadge = ({
   label: string;
 }) => (
   <Box
-    sx={{
+    className=""
+    sx={theme => ({
       borderRadius: 1,
-      backgroundColor: theme => theme.palette.error.dark,
+      backgroundColor: theme.palette.error.dark,
       position: 'absolute',
       left: hasImageBlock ? 12 : undefined,
-      right: hasImageBlock ? undefined : [80, 90],
-      top: hasImageBlock ? 12 : [30, 40],
+      right: hasImageBlock ? undefined : { xs: undefined, md: 90 },
+      top: hasImageBlock
+        ? 12
+        : { xs: theme.spacing(4.5), md: theme.spacing(6.5) },
       display: 'flex',
       alignItems: 'center',
-      p: 1.5,
+      p: 0.75,
       zIndex: 1,
-    }}
+    })}
   >
     <LockIcon className="h-[18px] w-[18px]" />
     <Subtitle size="sm" sx={{ pl: 1 }}>

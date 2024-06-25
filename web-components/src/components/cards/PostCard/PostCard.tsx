@@ -44,7 +44,11 @@ export default function PostCard({
   const hasImageBlock = !!imgSrc;
 
   return (
-    <Card className={classes.root} sx={{ p: [4, 8] }} borderRadius="10px">
+    <Card
+      className={classes.root}
+      sx={{ p: { xs: 4, md: 8 } }}
+      borderRadius="10px"
+    >
       <ActionButton isAdmin={isAdmin} onClickShare={handleClickShare} />
       {!hasImageBlock && privacyLabel && (
         <PrivateBadge hasImageBlock={hasImageBlock} label={privacyLabel} />
@@ -60,9 +64,13 @@ export default function PostCard({
           xs={12}
           md={hasImageBlock ? 7 : 12}
           item
-          sx={{ pb: { xs: 4.5, md: 0 }, pr: { xs: 0, md: 2 } }}
+          sx={{
+            pb: { xs: 4.5, md: 0 },
+            pr: { xs: 0, md: 2 },
+            pt: { xs: hasImageBlock ? 0 : 11, md: 0 },
+          }}
         >
-          <Subtitle size="xl" mb={2.75}>
+          <Subtitle size="lg" mb={2.75}>
             {title}
           </Subtitle>
           <UserInfo
@@ -76,7 +84,7 @@ export default function PostCard({
             }}
           />
           <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
-            <Body size="lg" sx={{ pb: 1.5 }} className={classes.description}>
+            <Body size="md" sx={{ pb: 1.5 }} className={classes.description}>
               {description}
             </Body>
           </Box>

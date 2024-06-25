@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { IconButton, Menu } from '@mui/material';
 
-import copyTextToClipboard from '../../../utils/copy';
 import { HorizontalDotsIcon } from '../../icons/HorizontalDotsIcon';
 import ShareIcon from '../../icons/ShareIcon';
 import { SharePublicMenuItem } from './PostCard.MenuItems';
@@ -28,13 +27,12 @@ const ActionButton = ({
       <IconButton
         sx={theme => ({
           position: 'absolute',
-          top: theme => [0, theme.spacing(3)],
-          right: theme => [0, theme.spacing(3)],
-          transform: 'translate(-50%, 50%)',
+          top: [theme.spacing(1.25), theme.spacing(3.75)],
+          right: [theme.spacing(1.25), theme.spacing(3)],
           zIndex: 1,
-          borderRadius: theme => theme.spacing(7),
+          borderRadius: theme.spacing(7),
           backgroundColor: isAdmin ? 'rgba(0, 0, 0, 0.8)' : 'white',
-          boxShadow: theme => theme.shadows[1],
+          boxShadow: theme.shadows[1],
           height: '44px',
           width: '44px',
           '&:hover': {

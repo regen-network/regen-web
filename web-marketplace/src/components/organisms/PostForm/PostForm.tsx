@@ -143,7 +143,7 @@ export const PostForm = ({
         setValue(`files.${fieldIndex}.location`, featureLocation);
         setFileLocation(prev => ({
           ...prev,
-          fieldIndex: featureLocation as Feature<Point>,
+          [fieldIndex]: featureLocation as Feature<Point>,
         }));
       }
       setValue(

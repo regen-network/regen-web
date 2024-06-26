@@ -5,10 +5,8 @@ import { Theme } from 'web-components/src/theme/muiTheme';
 
 interface SaveButtonProps {
   buttonText: string;
-  submitCount: number;
-  isSubmitting: boolean;
-  isValid: boolean;
-  saveDisabled?: boolean;
+  isDisabled?: boolean;
+  onSave?: () => void;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -38,22 +36,16 @@ const useStyles = makeStyles()((theme: Theme) => ({
 
 export function SaveButton({
   buttonText,
-  submitCount,
-  isSubmitting,
-  isValid,
-  saveDisabled,
+  isDisabled,
+  onSave = () => {},
 }: SaveButtonProps) {
   const { classes: styles } = useStyles();
   return (
     <ContainedButton
       type="submit"
       className={styles.btn}
-      disabled={
-        (submitCount > 0 && !isValid) ||
-        isSubmitting ||
-        saveDisabled ||
-        !isValid
-      }
+      disabled={isDisabled}
+      onClick={onSave}
     >
       <SaveIcon className={styles.saveIcon} />
       {buttonText}

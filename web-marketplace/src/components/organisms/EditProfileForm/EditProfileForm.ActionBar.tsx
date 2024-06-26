@@ -6,23 +6,16 @@ import { StickyBar } from 'web-components/src/components/sticky-bar/StickyBar';
 
 import { SAVE } from './EditProfileForm.constants';
 
-export const EditProfileFormActionBar = ({
-  saveDisabled,
-}: {
-  saveDisabled?: boolean;
-}) => {
-  const { isSubmitting, submitCount, isValid } = useFormState();
+export const EditProfileFormActionBar = () => {
+  const { isSubmitting, submitCount, isValid, dirtyFields } = useFormState();
+  const isFormDirty = !Object.keys(dirtyFields).length;
+  const isSaveButtonDisabled =
+    (submitCount > 0 && !isValid) || isSubmitting || isFormDirty || !isValid;
 
   return (
     <StickyBar>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-        <SaveButton
-          isSubmitting={isSubmitting}
-          submitCount={submitCount}
-          isValid={isValid}
-          saveDisabled={saveDisabled}
-          buttonText={SAVE}
-        />
+        <SaveButton buttonText={SAVE} isDisabled={isSaveButtonDisabled} />
       </Box>
     </StickyBar>
   );

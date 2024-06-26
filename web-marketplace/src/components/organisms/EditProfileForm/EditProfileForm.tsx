@@ -56,7 +56,6 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     onSubmit,
     onSuccess,
     onUpload,
-    onUpdate,
   }) => {
     const form = useZodForm({
       schema: editProfileFormSchema,
@@ -73,7 +72,6 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     /* Fields watch */
 
     const formValues: EditProfileFormSchemaType = form.watch();
-    type FormValuesKeys = keyof typeof formValues;
 
     /* Setter */
 
@@ -85,7 +83,6 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     };
 
     /* Effect */
-
     useUpdateDefaultAvatar({
       setProfileImage: value => form.setValue('profileImage', value),
       profileType: formValues.profileType,
@@ -97,16 +94,6 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         isDirtyRef.current = isDirty;
       }
     }, [isDirtyRef, isDirty]);
-
-    const isFormUpdated: boolean = Object.keys(formValues).some(
-      key =>
-        formValues[key as FormValuesKeys] !==
-        initialValues[key as FormValuesKeys],
-    );
-
-    useEffect(() => {
-      onUpdate && onUpdate(isFormUpdated);
-    }, [isFormUpdated, onUpdate]);
 
     return (
       <Form

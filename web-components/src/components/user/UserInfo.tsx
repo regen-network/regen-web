@@ -82,7 +82,13 @@ export default function UserInfo({
   );
 
   return (
-    <Grid container direction={direction} wrap="nowrap" sx={sx}>
+    <Grid
+      container
+      direction={direction}
+      wrap="nowrap"
+      sx={sx}
+      alignItems="center"
+    >
       <Grid item>
         <UserAvatar
           alt={userName}
@@ -111,7 +117,7 @@ export default function UserInfo({
             name
           )}
           {user.tag && (
-            <TextButton className="cursor-default ml-5 text-[10px] text-grey-500 bg-grey-300 rounded hover:text-grey-500 hover:bg-grey-300">
+            <TextButton className="cursor-default ml-5 text-[10px] text-grey-500 bg-grey-300 rounded hover:text-grey-500 hover:bg-grey-300 leading-[18px] min-w-fit px-3">
               {user.tag}
             </TextButton>
           )}

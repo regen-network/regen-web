@@ -77,9 +77,10 @@ export default function PostCard({
             size="lg"
             fontFamily={defaultFontFamily}
             user={author}
+            nameHasPadding={false}
             classNames={{
               info: 'ml-10',
-              title: 'text-sm',
+              title: 'text-sm truncate max-w-[120px]',
               timestamp: 'text-xs',
             }}
           />
@@ -111,7 +112,7 @@ export default function PostCard({
                   size="xs"
                   classNames={{
                     info: 'ml-3',
-                    title: 'text-xs font-semibold',
+                    title: 'text-xs font-semibold truncate max-w-[120px]',
                   }}
                   sx={{
                     display: 'flex',
@@ -153,21 +154,23 @@ export default function PostCard({
                 />
               )}
               {imgSrc && (
-                <Image
-                  className={classes.image}
-                  src={imgSrc}
-                  alt={imgSrc}
-                  imageStorageBaseUrl={imageStorageBaseUrl}
-                  apiServerUrl={apiServerUrl}
-                />
+                <>
+                  <Image
+                    className={classes.image}
+                    src={imgSrc}
+                    alt={imgSrc}
+                    imageStorageBaseUrl={imageStorageBaseUrl}
+                    apiServerUrl={apiServerUrl}
+                  />
+                  <div className="absolute top-0 w-[100%] h-[100%] bg-[linear-gradient(0deg,rgba(0,0,0,0.20)_5.23%,rgba(0,0,0,0.00)_31.4%)]" />
+                </>
               )}
               {numberOfFiles && (
                 <Box
                   sx={{
                     position: 'absolute',
-                    bottom: 0,
-                    right: 0,
-                    transform: 'translate(-50%, -25%)',
+                    bottom: theme => theme.spacing(3),
+                    right: theme => theme.spacing(3),
                     display: 'flex',
                     alignItems: 'center',
                     color: theme => theme.palette.primary.main,

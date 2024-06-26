@@ -27,8 +27,8 @@ const ActionButton = ({
       <IconButton
         sx={theme => ({
           position: 'absolute',
-          top: [theme.spacing(1.25), theme.spacing(3.75)],
-          right: [theme.spacing(1.25), theme.spacing(3)],
+          top: { xs: theme.spacing(1.25), md: theme.spacing(3.75) },
+          right: { xs: theme.spacing(1.25), md: theme.spacing(3) },
           zIndex: 1,
           borderRadius: theme.spacing(7),
           backgroundColor: isAdmin ? 'rgba(0, 0, 0, 0.8)' : 'white',

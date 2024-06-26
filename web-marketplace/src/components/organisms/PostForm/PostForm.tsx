@@ -272,7 +272,7 @@ export const PostForm = ({
                   projectLocation={projectLocation}
                   mapboxToken={MAPBOX_TOKEN}
                   onSubmit={onSubmit}
-                  fileLocation={fileLocation[index]}
+                  fileLocation={fileLocation[currentIndex]}
                 />
               )}
               optional

@@ -3,12 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
 
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import { SaveButton } from 'web-components/src/components/buttons/SaveButton';
 import { VIEW_PROJECT_BUTTON } from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
 import FixedFooter from 'web-components/src/components/fixed-footer';
 import EyeIcon from 'web-components/src/components/icons/EyeIcon';
-import { SaveIcon } from 'web-components/src/components/icons/SaveIcon';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { useProjectEditContext } from 'pages';
@@ -39,7 +38,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
       padding: theme.spacing(2, 3.5),
     },
   },
-  saveIcon: {
+  eyeIcon: {
     marginRight: theme.spacing(1),
     height: theme.typography.pxToRem(15),
     [theme.breakpoints.down('sm')]: {
@@ -73,20 +72,16 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
               }
             }}
           >
-            <EyeIcon className={styles.saveIcon} />
+            <EyeIcon className={styles.eyeIcon} />
             {VIEW_PROJECT_BUTTON.text}
           </OutlinedButton>
         </Grid>
         <Grid item>
-          <ContainedButton
-            type="submit"
-            className={styles.btn}
-            onClick={onSave}
-            disabled={saveDisabled}
-          >
-            <SaveIcon className={styles.saveIcon} />
-            {saveText}
-          </ContainedButton>
+          <SaveButton
+            buttonText={saveText}
+            isDisabled={saveDisabled}
+            onSave={onSave}
+          />
         </Grid>
       </Grid>
     </FixedFooter>

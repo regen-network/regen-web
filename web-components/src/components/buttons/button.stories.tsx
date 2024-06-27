@@ -8,6 +8,7 @@ import { EditButton } from './EditButton';
 import { ExpandButton } from './ExpandButton';
 import OutlinedButton from './OutlinedButton';
 import PrevNextButton from './PrevNextButton';
+import { SaveButton } from './SaveButton';
 import { TableActionButtons } from './TableActionButtons';
 import { TextButton } from './TextButton';
 
@@ -88,5 +89,14 @@ export const editButton = () => <EditButton onClick={() => {}} />;
 export const copyButton = {
   render: () => (
     <CopyButton content="foo" tooltipText="Copy it" toastText="Copied!" />
+  ),
+};
+
+export const saveButton = {
+  render: () => (
+    <>
+      <SaveButton buttonText="Save" className="mb-20" />
+      <SaveButton buttonText="Disabled" disabled />
+    </>
   ),
 };

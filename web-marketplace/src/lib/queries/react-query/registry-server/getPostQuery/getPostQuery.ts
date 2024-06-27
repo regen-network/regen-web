@@ -8,15 +8,21 @@ import {
 
 export const getPostQuery = ({
   iri,
+  token,
   ...params
 }: ReactQueryGetPostQueryParams): ReactQueryGetPostQueryResponse => ({
-  queryKey: [GET_POST_QUERY_KEY, iri],
+  queryKey: [GET_POST_QUERY_KEY, iri, token ?? ''],
   queryFn: async () => {
     try {
-      const resp = await fetch(`${apiUri}/marketplace/v1/posts/${iri}`, {
-        method: 'GET',
-        credentials: 'include',
-      });
+      const resp = await fetch(
+        `${apiUri}/marketplace/v1/posts/${iri}${
+          token ? `?token=${token}` : ''
+        }`,
+        {
+          method: 'GET',
+          credentials: 'include',
+        },
+      );
       if (resp.status === 200 || resp.status === 401) {
         return await resp.json();
       }

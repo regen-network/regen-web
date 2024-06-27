@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -29,10 +29,13 @@ import { PostTimeline } from './Post.Timeline';
 
 function Post(): JSX.Element {
   const { iri } = useParams();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('token');
   const { activeAccountId } = useAuth();
   const { data, isFetching } = useQuery(
     getPostQuery({
       iri,
+      token,
       enabled: !!iri,
     }),
   );
@@ -56,10 +59,15 @@ function Post(): JSX.Element {
   const isAdmin =
     !!adminAccountId && !!activeAccountId && adminAccountId === activeAccountId;
   const privacyType = data?.privacy;
-  const privatePost =
-    data?.privacy === 'private' || data?.error === 'private post';
+  const privatePostError = data?.error === 'private post';
+  const privatePost = data?.privacy === 'private';
   const privateFiles = data?.privacy === 'private_files';
+  const privateLocations = data?.privacy === 'private_locations';
   const publicPost = data?.privacy === 'public';
+
+  const hasToken =
+    (privateFiles && !!data?.filesUrls) ||
+    (privateLocations && data?.contents?.files?.some(file => file.location));
 
   const files = useMemo(
     () =>
@@ -96,12 +104,12 @@ function Post(): JSX.Element {
         <NotFoundPage />
       ) : (
         <>
-          {!loadingOffchainProjectById && !isAdmin && privatePost && (
+          {!loadingOffchainProjectById && !isAdmin && privatePostError && (
             <PostPrivate />
           )}
           {!loadingOffchainProjectById &&
             data?.contents &&
-            (!privatePost || isAdmin) && (
+            (!privatePostError || isAdmin) && (
               <>
                 <PostHeader
                   projectHref={`/project/${
@@ -133,6 +141,7 @@ function Post(): JSX.Element {
                       mapboxToken={MAPBOX_TOKEN}
                       isAdmin={isAdmin}
                       files={files}
+                      hasToken={hasToken}
                     />
                     {(isAdmin || !privateFiles) && (
                       <img

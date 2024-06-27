@@ -8,6 +8,7 @@ import { Image, OptimizeImageProps } from '../../image';
 import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import Card from '../Card';
+import { SIGNED_BY } from './PostCard.constants';
 import PrivateBadge from './PostCard.PrivateBadge';
 import usePostCardStyles from './PostCard.styles';
 import ActionButton from './PostCardActionButton';
@@ -102,7 +103,7 @@ export default function PostCard({
                   fontWeight: 500,
                 }}
               >
-                Signed by
+                {SIGNED_BY}
               </Body>
               {signers.map((signer, i) => (
                 <UserInfo

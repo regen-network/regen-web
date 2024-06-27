@@ -91,7 +91,7 @@ export const DataStreamPost = ({
         </div>
         <TimelineConnector className="bg-grey-300 w-1" />
       </TimelineSeparator>
-      <TimelineContent className="mt-[-30px] mb-30">
+      <TimelineContent className="mt-[-30px] mb-30 pr-0">
         {post.contents && (post.privacy !== 'private' || isAdmin) && (
           <PostCard
             title={post.contents.title}

@@ -108,20 +108,22 @@ export default function UserInfo({
         }}
         className={classNames?.info}
       >
-        <div className="inline-flex items-center">
-          {user.link ? (
-            <Link sx={{ color: 'primary.contrastText' }} href={user.link}>
-              {name}
-            </Link>
-          ) : (
-            name
-          )}
+        <Grid container alignItems="center">
+          <Grid item>
+            {user.link ? (
+              <Link sx={{ color: 'primary.contrastText' }} href={user.link}>
+                {name}
+              </Link>
+            ) : (
+              name
+            )}
+          </Grid>
           {user.tag && (
             <TextButton className="cursor-default ml-5 text-[10px] text-grey-500 bg-grey-300 rounded hover:text-grey-500 hover:bg-grey-300 leading-[18px] min-w-fit px-3">
               {user.tag}
             </TextButton>
           )}
-        </div>
+        </Grid>
         {user.timestamp && (
           <Body
             size="md"

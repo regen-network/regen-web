@@ -1,5 +1,5 @@
 import React, { MutableRefObject, useEffect } from 'react';
-import { useFormState } from 'react-hook-form';
+import { useFormState, useWatch } from 'react-hook-form';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
@@ -65,13 +65,29 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
       mode: 'onBlur',
     });
     const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+
     const { isSubmitting, errors, isDirty } = useFormState({
       control: form.control,
     });
 
     /* Fields watch */
 
-    const formValues: EditProfileFormSchemaType = form.watch();
+    const profileType = useWatch({
+      control: form.control,
+      name: 'profileType',
+    });
+    const profileImage = useWatch({
+      control: form.control,
+      name: 'profileImage',
+    });
+    const backgroundImage = useWatch({
+      control: form.control,
+      name: 'backgroundImage',
+    });
+    const description = useWatch({
+      control: form.control,
+      name: 'description',
+    });
 
     /* Setter */
 
@@ -83,10 +99,11 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     };
 
     /* Effect */
+
     useUpdateDefaultAvatar({
       setProfileImage: value => form.setValue('profileImage', value),
-      profileType: formValues.profileType,
-      profileImage: formValues.profileImage,
+      profileType,
+      profileImage,
     });
 
     useEffect(() => {
@@ -116,7 +133,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         <RadioCard
           label={PROFILE_TYPE}
           items={radioCardItems}
-          selectedValue={formValues.profileType ?? ''}
+          selectedValue={profileType ?? ''}
           {...form.register('profileType')}
         />
         <TextField
@@ -135,9 +152,9 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           initialFileName={PROFILE_AVATAR_FILE_NAME}
           circularCrop
           onUpload={onUpload}
-          value={formValues.profileImage}
+          value={profileImage}
         >
-          <ImageFieldAvatar value={formValues.profileImage} />
+          <ImageFieldAvatar value={profileImage} />
         </ImageField>
         <ImageField
           label="Background image"
@@ -153,9 +170,9 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           {...form.register('backgroundImage')}
           name="bg-image"
           onUpload={onUpload}
-          value={formValues.backgroundImage}
+          value={backgroundImage}
         >
-          <ImageFieldBackground value={formValues.backgroundImage} />
+          <ImageFieldBackground value={backgroundImage} />
         </ImageField>
         <TextAreaField
           type="text"
@@ -169,7 +186,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           error={!!errors?.description}
           {...form.register('description')}
         >
-          <TextAreaFieldChartCounter value={formValues.description} />
+          <TextAreaFieldChartCounter value={description} />
         </TextAreaField>
         <Box sx={{ mt: 6 }}>
           <ControlledFormLabel optional>{LINKS_LABEL}</ControlledFormLabel>

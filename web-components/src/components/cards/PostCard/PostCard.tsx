@@ -10,7 +10,6 @@ import UserInfo, { User } from '../../user/UserInfo';
 import Card from '../Card';
 import { SIGNED_BY } from './PostCard.constants';
 import PrivateBadge from './PostCard.PrivateBadge';
-import usePostCardStyles from './PostCard.styles';
 import ActionButton from './PostCardActionButton';
 
 interface PostCardProps extends OptimizeImageProps {
@@ -22,7 +21,6 @@ interface PostCardProps extends OptimizeImageProps {
   privacyLabel?: string;
   isAdmin?: boolean;
   numberOfFiles?: number;
-  handleClickFile?: (ev: React.MouseEvent) => void;
   handleClickShare?: (ev: React.MouseEvent) => void;
 }
 
@@ -37,16 +35,13 @@ export default function PostCard({
   privacyLabel,
   isAdmin,
   numberOfFiles,
-  handleClickFile,
   handleClickShare,
 }: PostCardProps): JSX.Element {
-  const { classes } = usePostCardStyles();
-
   const hasImageBlock = !!imgSrc;
 
   return (
     <Card
-      className={classes.root}
+      className="group relative bg-grey-100 hover:bg-grey-200"
       sx={{ p: { xs: 4, md: 8 } }}
       borderRadius="10px"
     >
@@ -71,7 +66,11 @@ export default function PostCard({
             pt: { xs: hasImageBlock ? 0 : 11, md: 0 },
           }}
         >
-          <Subtitle size="lg" mb={2.75}>
+          <Subtitle
+            className="group-hover:underline underline-offset-4"
+            size="lg"
+            mb={2.75}
+          >
             {title}
           </Subtitle>
           <UserInfo
@@ -86,7 +85,11 @@ export default function PostCard({
             }}
           />
           <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
-            <Body size="md" sx={{ pb: 1.5 }} className={classes.description}>
+            <Body
+              size="md"
+              sx={{ pb: 1.5 }}
+              className="line-clamp-2 overflow-hidden"
+            >
               {description}
             </Body>
           </Box>
@@ -157,7 +160,7 @@ export default function PostCard({
               {imgSrc && (
                 <>
                   <Image
-                    className={classes.image}
+                    className="h-[100%] w-[100%] object-cover group-hover:w-[120%] group-hover:h-[120%]"
                     src={imgSrc}
                     alt={imgSrc}
                     imageStorageBaseUrl={imageStorageBaseUrl}
@@ -175,27 +178,16 @@ export default function PostCard({
                     display: 'flex',
                     alignItems: 'center',
                     color: theme => theme.palette.primary.main,
-                    boxShadow: theme => theme.shadows[1],
                   }}
                 >
-                  <Button
-                    onClick={handleClickFile}
-                    sx={{
-                      p: [0, 0],
-                      border: 'none',
-                      justifyContent: 'end',
-                      minWidth: 0,
-                    }}
+                  <Subtitle
+                    size="sm"
+                    color="white"
+                    sx={{ boxShadow: theme => theme.shadows[1] }}
                   >
-                    <Subtitle
-                      size="sm"
-                      color="white"
-                      sx={{ boxShadow: theme => theme.shadows[1] }}
-                    >
-                      {numberOfFiles}
-                    </Subtitle>
-                    <WhitepaperIcon className={classes.fileIcon} />
-                  </Button>
+                    {numberOfFiles}
+                  </Subtitle>
+                  <WhitepaperIcon className="h-[24px] w-[24px] ml-[7px]" />
                 </Box>
               )}
             </Box>

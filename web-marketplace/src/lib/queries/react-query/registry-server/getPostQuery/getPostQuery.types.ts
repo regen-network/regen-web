@@ -43,4 +43,5 @@ export type ReactQueryGetPostQueryResponse = QueryObserverOptions<Post | null>;
 
 export type ReactQueryGetPostQueryParams = {
   iri?: string;
+  token?: string | null;
 } & ReactQueryBuilderResponse<ReactQueryGetPostQueryResponse>;

@@ -11,9 +11,8 @@ import { useQueries, useQuery } from '@tanstack/react-query';
 import { User } from 'web-components/src/components/user/UserInfo';
 import { formatDate } from 'web-components/src/utils/format';
 
-import { AccountByIdQuery, AccountType } from 'generated/graphql';
+import { AccountByIdQuery } from 'generated/graphql';
 import { useLedger } from 'ledger';
-import { getHashUrl } from 'lib/block-explorer';
 import { messageActionEquals } from 'lib/ecocredit/constants';
 import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';

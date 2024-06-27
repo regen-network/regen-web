@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Menu } from '@mui/material';
 
 import Banner from 'web-components/src/components/banner';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
-import { SharePublicMenuItem } from 'web-components/src/components/cards/PostCard/PostCard.MenuItems';
+import {
+  SharePrivateMenuItem,
+  SharePublicMenuItem,
+} from 'web-components/src/components/cards/PostCard/PostCard.MenuItems';
 import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
 import ShareIcon from 'web-components/src/components/icons/ShareIcon';
@@ -22,6 +26,7 @@ import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { Link } from 'components/atoms';
 
+import { useSharePrivateLink } from './hooks/useSharePrivateLink';
 import {
   ACTIONS,
   ADMIN,
@@ -41,6 +46,7 @@ type Props = {
   privatePost?: boolean;
   publicPost?: boolean;
   privateFiles?: boolean;
+  publicPost?: boolean;
 };
 
 export const PostHeader = ({
@@ -53,7 +59,9 @@ export const PostHeader = ({
   publicPost,
   privatePost,
   privateFiles,
+  publicPost,
 }: Props) => {
+  const { iri } = useParams();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -63,6 +71,7 @@ export const PostHeader = ({
     setAnchorEl(null);
   };
   const [shareSuccessBanner, setShareSuccessBanner] = useState(false);
+  const sharePrivateLink = useSharePrivateLink({ iri });
 
   return (
     <Section
@@ -139,8 +148,10 @@ export const PostHeader = ({
                 }}
                 publicPost={publicPost}
               />
-              {/* <SharePrivateMenuItem />
-              <DeleteMenuItem /> */}
+              {!publicPost && (
+                <SharePrivateMenuItem onClick={sharePrivateLink} />
+              )}
+              {/*<DeleteMenuItem /> */}
             </Menu>
           </div>
         ) : (

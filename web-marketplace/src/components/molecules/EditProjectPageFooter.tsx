@@ -79,8 +79,8 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
         <Grid item>
           <SaveButton
             buttonText={saveText}
-            isDisabled={saveDisabled}
-            onSave={onSave}
+            disabled={saveDisabled}
+            onClick={onSave}
           />
         </Grid>
       </Grid>

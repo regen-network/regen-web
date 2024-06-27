@@ -1,12 +1,11 @@
+import { ButtonProps } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { SaveIcon } from 'web-components/src/components/icons/SaveIcon';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
-interface SaveButtonProps {
+interface SaveButtonProps extends ButtonProps {
   buttonText: string;
-  isDisabled?: boolean;
-  onSave?: () => void;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -34,18 +33,16 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-export function SaveButton({
-  buttonText,
-  isDisabled,
-  onSave = () => {},
-}: SaveButtonProps) {
+export function SaveButton(props: SaveButtonProps) {
+  const { buttonText, disabled, onClick, className } = props;
   const { classes: styles } = useStyles();
   return (
     <ContainedButton
       type="submit"
-      className={styles.btn}
-      disabled={isDisabled}
-      onClick={onSave}
+      className={`${styles.btn} ${className}`}
+      disabled={disabled}
+      onClick={onClick}
+      {...props}
     >
       <SaveIcon className={styles.saveIcon} />
       {buttonText}

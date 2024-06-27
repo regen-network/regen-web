@@ -15,7 +15,7 @@ export const EditProfileFormActionBar = () => {
   return (
     <StickyBar>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-        <SaveButton buttonText={SAVE} isDisabled={isSaveButtonDisabled} />
+        <SaveButton buttonText={SAVE} disabled={isSaveButtonDisabled} />
       </Box>
     </StickyBar>
   );

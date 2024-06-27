@@ -18,7 +18,6 @@ export const Public: Story = {
   },
   argTypes: {
     handleClickShare: { action: 'handle share click' },
-    handleClickFile: { action: 'handle file click' },
   },
   render: args => <PostCard {...args} signers={signers} />,
 };
@@ -33,7 +32,6 @@ export const Private: Story = {
   },
   argTypes: {
     handleClickShare: { action: 'handle share click' },
-    handleClickFile: { action: 'handle file click' },
   },
   render: args => <PostCard {...args} signers={signers} />,
 };
@@ -47,7 +45,6 @@ export const NoImage: Story = {
   },
   argTypes: {
     handleClickShare: { action: 'handle share click' },
-    handleClickFile: { action: 'handle file click' },
   },
   render: args => <PostCard {...args} signers={signers} />,
 };

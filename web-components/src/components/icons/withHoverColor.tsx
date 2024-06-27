@@ -19,7 +19,8 @@ function withHoverColor(BaseComponent: FC<Props>) {
     const hoverColor =
       props.hoverColor || props.color || theme.palette.secondary.contrastText;
     const [color, setColor] = useState(initialColor);
-
+    console.log(initialColor);
+    console.log(hoverColor);
     const handleMouseEnter = (): void => {
       setColor(hoverColor);
     };

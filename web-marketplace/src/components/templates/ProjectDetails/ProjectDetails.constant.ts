@@ -16,6 +16,7 @@ export const DATA_STREAM = 'Data stream';
 export const DATA_STREAM_LIMIT = 3;
 export const PRIVATE_POST = '1 private post';
 export const SEE_MORE = 'see more';
+export const SEE_LESS = 'see less';
 export const CREATE_POST = '+ create post';
 export const FILES_ARE_PRIVATE = 'Files are private';
 export const LOCATIONS_ARE_PRIVATE = 'Locations are private';

@@ -21,6 +21,7 @@ import {
   CREATE_POST,
   DATA_STREAM,
   DATA_STREAM_LIMIT,
+  SEE_LESS,
   SEE_MORE,
 } from './ProjectDetails.constant';
 import { DataStreamPost } from './ProjectDetails.DataStream.Post';
@@ -133,6 +134,20 @@ export const DataStream = ({
                   {SEE_MORE}
                 </ContainedButton>
               )}
+              {data?.total &&
+                posts.length >= data.total &&
+                data.total > DATA_STREAM_LIMIT && (
+                  <ContainedButton
+                    className="ml-[55px] sm:ml-[85px]"
+                    onClick={() => setOffset(prev => 0)}
+                  >
+                    <ArrowDownIcon
+                      direction="up"
+                      className="mr-10 h-[24px] w-[24px]"
+                    />
+                    {SEE_LESS}
+                  </ContainedButton>
+                )}
             </div>
           </div>
         </Section>

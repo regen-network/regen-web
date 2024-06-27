@@ -1,42 +1,18 @@
 import React from 'react';
-import { Theme } from '@mui/material/styles';
-import SvgIcon from '@mui/material/SvgIcon';
-import { makeStyles } from 'tss-react/mui';
 
-import withHoverColor, { Props } from './withHoverColor';
+const WhitepaperIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg width="25" height="24" viewBox="0 0 25 24" fill="none" {...props}>
+    <path
+      d="M17.5 11C18.0523 11 18.5 10.5523 18.5 10C18.5 9.44772 18.0523 9 17.5 9C16.9477 9 16.5 9.44772 16.5 10C16.5 10.5523 16.9477 11 17.5 11Z"
+      fill="currentColor"
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M1.5 7C1.5 5.34315 2.84315 4 4.5 4H20.5C22.1569 4 23.5 5.34315 23.5 7V17C23.5 18.6569 22.1569 20 20.5 20H4.5C2.84315 20 1.5 18.6569 1.5 17V7ZM4.5 6H20.5C21.0523 6 21.5 6.44772 21.5 7V17C21.5 17.494 21.1418 17.9044 20.6709 17.9855L16.7865 13.2323C16.6877 13.1114 16.5035 13.1097 16.4024 13.2287L12.8326 17.4312L9.20426 12.2895C9.10466 12.1483 8.89534 12.1483 8.79574 12.2895L4.7661 18H4.5C3.94772 18 3.5 17.5523 3.5 17V7C3.5 6.44772 3.94772 6 4.5 6Z"
+      fill="currentColor"
+    />
+  </svg>
+);
 
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: {
-    width: theme.spacing(9.25),
-    height: theme.spacing(9.25),
-  },
-}));
-
-function WhitepaperIcon({
-  className,
-  color,
-  onMouseEnter,
-  onMouseLeave,
-}: Props): JSX.Element {
-  const { classes, cx } = useStyles();
-
-  return (
-    <SvgIcon
-      className={cx(className, classes.root)}
-      viewBox="0 0 51 63"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M46.4 19.9363V58.4H4V4H25.2H30.7V18.1863C30.7 19.1528 31.4835 19.9363 32.45 19.9363H46.4ZM33.7 4.52488L44.9313 16.9363H33.7V4.52488ZM0.25 0C0.111929 0 0 0.111927 0 0.249998V62.15C0 62.2881 0.111928 62.4 0.249999 62.4H50.15C50.2881 62.4 50.4 62.2881 50.4 62.15V17.1145C50.4 17.0525 50.377 16.9927 50.3354 16.9468L35.0744 0.0822561C35.027 0.0298812 34.9597 0 34.8891 0H25.2H0.25ZM11.45 31.2C11.3119 31.2 11.2 31.088 11.2 30.95V28.6136C11.2 28.4755 11.3119 28.3636 11.45 28.3636L38.95 28.3636C39.0881 28.3636 39.2 28.4755 39.2 28.6136V30.95C39.2 31.088 39.0881 31.1999 38.95 31.1999L11.45 31.2ZM11.2 39.4591C11.2 39.5972 11.3119 39.7091 11.45 39.7091H38.95C39.0881 39.7091 39.2 39.5972 39.2 39.4591V37.1227C39.2 36.9847 39.0881 36.8727 38.95 36.8727H11.45C11.3119 36.8727 11.2 36.9847 11.2 37.1227V39.4591ZM11.45 48.2181C11.3119 48.2181 11.2 48.1062 11.2 47.9681V45.6318C11.2 45.4937 11.3119 45.3818 11.45 45.3818H33.35C33.4881 45.3818 33.6 45.4937 33.6 45.6318V47.9681C33.6 48.1062 33.4881 48.2181 33.35 48.2181H11.45Z"
-        fill={color}
-      />
-    </SvgIcon>
-  );
-}
-
-export default withHoverColor(WhitepaperIcon);
+export default WhitepaperIcon;

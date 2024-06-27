@@ -59,6 +59,7 @@ function Post(): JSX.Element {
   const privatePost =
     data?.privacy === 'private' || data?.error === 'private post';
   const privateFiles = data?.privacy === 'private_files';
+  const publicPost = data?.privacy === 'public';
 
   const files = useMemo(
     () =>
@@ -116,6 +117,7 @@ function Post(): JSX.Element {
                   createdAt={createdAt}
                   privatePost={privatePost}
                   privateFiles={privateFiles}
+                  publicPost={publicPost}
                 />
 
                 {privacyType && files && files.length > 0 && (

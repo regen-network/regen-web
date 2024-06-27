@@ -8,6 +8,7 @@ import { EventAttest } from '@regen-network/api/lib/generated/regen/data/v1/even
 import { MsgAttest } from '@regen-network/api/lib/generated/regen/data/v1/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
+import { SIGNED_BY } from 'web-components/src/components/cards/PostCard/PostCard.constants';
 import { User } from 'web-components/src/components/user/UserInfo';
 import { formatDate } from 'web-components/src/utils/format';
 
@@ -144,7 +145,7 @@ export const useAttestEvents = ({
           attestorAccount?.addr === registryAddr;
         events.unshift({
           icon: '/svg/post-signed.svg',
-          label: `Signed by`,
+          label: SIGNED_BY,
           timestamp: formatDate(
             txResponses[i].timestamp,
             'MMMM D, YYYY | h:mm A',

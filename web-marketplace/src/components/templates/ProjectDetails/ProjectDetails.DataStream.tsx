@@ -9,6 +9,7 @@ import {
 } from 'web-components/src/components/block-content';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import Navigation from 'web-components/src/components/faq/Navigation';
+import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
 import Section from 'web-components/src/components/section';
 import { Body } from 'web-components/src/components/typography';
 
@@ -123,10 +124,12 @@ export const DataStream = ({
                   />
                 ))}
               </Timeline>
-              {data?.total && posts.length < data?.total && (
+              {data?.total && posts.length < data.total && (
                 <ContainedButton
+                  className="ml-[55px] sm:ml-[85px]"
                   onClick={() => setOffset(prev => prev + DATA_STREAM_LIMIT)}
                 >
+                  <ArrowDownIcon className="mr-10 h-[24px] w-[24px]" />
                   {SEE_MORE}
                 </ContainedButton>
               )}

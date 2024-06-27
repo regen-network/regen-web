@@ -6,6 +6,6 @@ export const OMITTED_METADATA_KEYS = [
   'schema:name',
   'regen:projectSize',
   'schema:location',
-  'regen:projectDeveloper',
+  // 'regen:projectDeveloper', Temporarily remove from omitted key while Roles form is hidden
   ...UNANCHORED_PROJECT_KEYS,
 ];

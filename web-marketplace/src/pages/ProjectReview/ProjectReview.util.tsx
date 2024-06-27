@@ -1,8 +1,11 @@
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import {
+  GeocodeFeature,
+  GeocodeProperties,
+} from '@mapbox/mapbox-sdk/services/geocoding';
 
 import {
   getCountryCodeByName,
-  getISOString,
   getIsoSubdivision,
 } from 'web-components/src/utils/locationStandard';
 
@@ -13,8 +16,6 @@ import {
   VCSProjectMetadataLD,
 } from 'lib/db/types/json-ld';
 import { isCFCCreditClass, isVCSCreditClass } from 'lib/ecocredit/api';
-
-const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;
 
 export const getOnChainProjectId = (
   deliverTxResponse?: DeliverTxResponse,
@@ -34,84 +35,82 @@ export const getOnChainProjectId = (
 export const getJurisdiction = async (
   metadata: Partial<AnchoredProjectMetadataBaseLD>,
 ): Promise<string | undefined> => {
-  if (!mapboxToken) return Promise.reject('Missing map API token');
-  let isoString;
   const location = metadata?.['schema:location'];
-  if (!location?.['context'] && !location?.['place_name']) {
-    return Promise.reject('Please select a location for this project.');
+
+  if (!location) {
+    throw new Error('Cannot get Jurisdiction. Location data is missing.');
   }
-  const context: any[] = location?.['context'] || [];
-  let countryKey = '';
-  let stateProvince = '';
-  let postalCode = '';
-  if (Array.isArray(context)) {
-    context.forEach(ctx => {
-      if (ctx?.['id'].includes('country')) {
-        countryKey = getCountryCodeByName(ctx?.['text'].trim());
-        return;
-      }
-      if (ctx?.['id'].includes('region')) {
-        stateProvince = ctx?.['text'];
-        return;
-      }
-      if (ctx?.['id'].includes('postcode')) {
-        postalCode = ctx?.['text'];
-        return;
-      }
-    });
+  const { context, place_name, properties } = location;
+
+  if (!context && !place_name) {
+    throw new Error('Please select a location for this project.');
   }
 
-  // if GeocodeFeature context is insufficient, we can get a country code from place_name
-  if (!countryKey && location?.['place_name']) {
-    const placeSegments = location['place_name'].split(',');
-    // find the country key
-    placeSegments.forEach((segment: string) => {
-      const foundCountry = getCountryCodeByName(segment.trim());
-      if (foundCountry) {
-        countryKey = foundCountry;
-        return;
-      }
-    });
-  }
+  let countryKey = getCountryKey(context, place_name);
+  let stateProvince = getStateProvince(
+    countryKey,
+    place_name,
+    properties,
+    context,
+  );
+  let postalCode = getPostalCode(context);
+  const jurisdiction = stateProvince ? stateProvince + postalCode : countryKey;
+  return jurisdiction.toLocaleUpperCase();
+};
 
-  if (countryKey && !stateProvince) {
-    const placeSegments = location['place_name'].split(',');
-
-    placeSegments.forEach((segment: string) => {
-      const foundStateProvince = getStateProvince(countryKey, segment.trim());
-      if (foundStateProvince) {
-        stateProvince = foundStateProvince;
-        return;
-      }
-    });
-  }
-
-  try {
-    isoString = await getISOString(mapboxToken, {
-      countryKey,
-      stateProvince,
-      postalCode,
-    });
-    // eslint-disable-next-line no-console
-    console.log(
-      'Jurisdiction ISO string based on location provided:',
-      isoString,
-    );
-  } catch (err) {
-    return Promise.reject(err);
-  }
-  return Promise.resolve(isoString);
+const getCountryKey = (context: any, place_name: string) => {
+  let countryKey =
+    findInContext(context, 'country', 'short_code') ||
+    getCountryCodeFromPlaceName(place_name);
+  return countryKey;
 };
 
 const getStateProvince = (
-  countryKey: string,
+  countryKey: string | undefined,
   stateProvince: string,
+  properties: GeocodeProperties,
+  context: GeocodeFeature | GeocodeFeature[],
 ): string | undefined => {
+  if (properties?.short_code) {
+    return properties.short_code;
+  }
+
+  const regionShortCode = findInContext(context, 'region', 'short_code');
+  if (regionShortCode) {
+    return regionShortCode;
+  }
+
   const subdivision = getIsoSubdivision({
     country: countryKey,
     subdivision: stateProvince,
   });
-  return subdivision?.name;
+  if (subdivision) {
+    return subdivision?.name;
+  }
+};
+
+const getPostalCode = (context: GeocodeFeature | GeocodeFeature[]) =>
+  findInContext(context, 'postcode', 'text');
+
+const findInContext = (
+  context: GeocodeFeature | GeocodeFeature[],
+  id: 'country' | 'region' | 'postcode',
+  property: 'short_code' | 'text',
+): string => {
+  const contextArray = Array.isArray(context) ? context : [context];
+  const found = contextArray.find(ctx => ctx.id.includes(id));
+  const foundProperty = found?.[property];
+  return foundProperty || '';
+};
+
+const getCountryCodeFromPlaceName = (place_name: string) => {
+  if (!place_name) return '';
+  const segments = place_name.split(',');
+  for (const segment of segments) {
+    const foundCountry = getCountryCodeByName(segment.trim());
+    if (foundCountry) return foundCountry;
+  }
+  return '';
 };
 
 // TODO: Handle for all cases: regen-network/regen-registry#1104

@@ -115,10 +115,10 @@ export const EditFileForm = ({
       />
       <div className="flex flex-col mb-40 mt-40 sm:mb-50 sm:mt-50">
         <RadioGroup label="Location" description={FILE_LOCATION_DESCRIPTION}>
-          {location && (
+          {(location || projectLocation) && (
             <div className="h-[309px] sm:h-[409px] pb-10">
               <LocationPicker
-                value={location}
+                value={location || projectLocation}
                 handleChange={value =>
                   setValue(`files.${currentIndex}.location`, value, {
                     shouldDirty: true,

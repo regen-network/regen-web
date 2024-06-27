@@ -54,7 +54,9 @@ export const getJurisdiction = async (
     context,
   );
   let postalCode = getPostalCode(context);
-  const jurisdiction = stateProvince ? stateProvince + postalCode : countryKey;
+  const jurisdiction = stateProvince
+    ? `${stateProvince}  ${postalCode}`
+    : countryKey;
   return jurisdiction.toLocaleUpperCase();
 };
 

@@ -82,7 +82,7 @@ export const DataStreamPost = ({
   }
 
   return (
-    <TimelineItem key={post.iri}>
+    <TimelineItem>
       <TimelineSeparator
         className={`pr-10 sm:pr-40 ${index === postsLength - 1 ? 'pb-35' : ''}`}
       >

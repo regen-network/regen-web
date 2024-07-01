@@ -108,10 +108,11 @@ export const parseOffChainProject = (
 };
 
 type ParseMediaParams = {
-  metadata?: Pick<
+  offChainProjectMetadata?: Pick<
     ProjectPageMetadataLD,
     'regen:galleryPhotos' | 'regen:previewPhoto' | 'schema:creditText'
   >;
+  onChainProjectMetadata?: AnchoredProjectMetadataBaseLD;
   geojson: any;
   geocodingJurisdictionData?: MapiResponse<GeocodeResponse> | null;
 };
@@ -124,17 +125,24 @@ type ParseMediaReturn = {
 };
 
 export const parseMedia = ({
-  metadata,
+  offChainProjectMetadata,
+  onChainProjectMetadata,
   geojson,
   geocodingJurisdictionData,
 }: ParseMediaParams): ParseMediaReturn => {
   let assets: Asset[] = [];
 
-  const previewPhoto = metadata?.['regen:previewPhoto'];
+  const previewPhotoUrl =
+    offChainProjectMetadata?.['regen:previewPhoto']?.['schema:url'] ||
+    onChainProjectMetadata?.['regen:previewPhoto']?.['schema:url'];
+  const previewPhotoCredit =
+    offChainProjectMetadata?.['regen:previewPhoto']?.['schema:creditText'] ||
+    onChainProjectMetadata?.['regen:previewPhoto']?.['schema:creditText'];
+
   const jurisdictionFallback = geocodingJurisdictionData?.body.features?.[0];
 
-  if (previewPhoto?.['schema:url']) {
-    assets.push({ src: previewPhoto['schema:url'], type: 'image' });
+  if (previewPhotoUrl) {
+    assets.push({ src: previewPhotoUrl, type: 'image' });
   }
 
   if (geojson || jurisdictionFallback) {
@@ -150,7 +158,7 @@ export const parseMedia = ({
     assets: assets ?? [],
     imageStorageBaseUrl: IMAGE_STORAGE_BASE_URL,
     apiServerUrl: API_URI,
-    imageCredits: previewPhoto?.['schema:creditText'],
+    imageCredits: previewPhotoCredit,
   };
 };
 

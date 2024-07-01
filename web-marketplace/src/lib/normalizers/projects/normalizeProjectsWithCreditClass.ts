@@ -73,7 +73,8 @@ export const normalizeProjectsWithCreditClass = ({
       id: project.id,
       name: projectMetadata?.['schema:name'] ?? '',
       imgSrc:
-        projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ??
+        projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ||
+        projectMetadata?.['regen:previewPhoto']?.['schema:url'] ||
         creditClassImage,
       place: projectMetadata?.['schema:location']?.place_name ?? '',
       area: projectMetadata?.['regen:projectSize']?.['qudt:numericValue'] ?? 0,

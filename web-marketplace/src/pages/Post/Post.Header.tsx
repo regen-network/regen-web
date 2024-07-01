@@ -20,6 +20,7 @@ import { AccountByIdQuery } from 'generated/graphql';
 
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+import { Link } from 'components/atoms';
 
 import {
   ACTIONS,
@@ -71,7 +72,8 @@ export const PostHeader = ({
         <TextButton
           className="flex"
           textSize="sm"
-          href={projectHref} // TODO add anchor to "Data Posts" section (APP-23)
+          LinkComponent={Link}
+          href={`${projectHref}#data-stream`}
         >
           <ArrowDownIcon
             className="h-[24px] w-[24px] text-brand-400"

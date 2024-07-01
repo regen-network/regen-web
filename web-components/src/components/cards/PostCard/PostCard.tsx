@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
 import { defaultFontFamily } from '../../../theme/muiTheme';
 import VerifiedIcon from '../../icons/VerifiedIcon';
@@ -22,6 +22,7 @@ interface PostCardProps extends OptimizeImageProps {
   isAdmin?: boolean;
   numberOfFiles?: number;
   handleClickShare?: (ev: React.MouseEvent) => void;
+  onClick: () => void;
 }
 
 export default function PostCard({
@@ -36,14 +37,16 @@ export default function PostCard({
   isAdmin,
   numberOfFiles,
   handleClickShare,
+  onClick,
 }: PostCardProps): JSX.Element {
   const hasImageBlock = !!imgSrc;
 
   return (
     <Card
-      className="group relative bg-grey-100 hover:bg-grey-200"
+      className="group relative bg-grey-100 hover:bg-grey-200 cursor-default"
       sx={{ p: { xs: 4, md: 8 } }}
       borderRadius="10px"
+      onClick={onClick}
     >
       <ActionButton isAdmin={isAdmin} onClickShare={handleClickShare} />
       {!hasImageBlock && privacyLabel && (

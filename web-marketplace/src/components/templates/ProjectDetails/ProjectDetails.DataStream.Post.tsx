@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   ApolloClient,
   NormalizedCacheObject,
@@ -51,6 +52,7 @@ export const DataStreamPost = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const setBannerText = useSetAtom(bannerTextAtom);
+  const navigate = useNavigate();
 
   const { iri, createdAt } = post;
 
@@ -94,6 +96,7 @@ export const DataStreamPost = ({
       <TimelineContent className="mt-[-30px] mb-30 pr-0">
         {post.contents && (post.privacy !== 'private' || isAdmin) && (
           <PostCard
+            onClick={() => navigate(`/post/${post.iri}`)}
             title={post.contents.title}
             description={post.contents.comment}
             privacyLabel={

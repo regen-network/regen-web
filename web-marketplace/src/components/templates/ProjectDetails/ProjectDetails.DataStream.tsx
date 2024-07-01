@@ -67,6 +67,7 @@ export const DataStream = ({
     if (data?.posts) {
       if (offset === 0) {
         setPosts(data.posts);
+        document.getElementById('data-stream')?.scrollIntoView();
       } else {
         setPosts(prev => [...prev, ...data.posts]);
       }
@@ -77,6 +78,7 @@ export const DataStream = ({
     <>
       {posts.length > 0 && (
         <Section
+          id="data-stream"
           title={DATA_STREAM}
           titleAlign="left"
           className="mb-50 sm:mb-[100px]"

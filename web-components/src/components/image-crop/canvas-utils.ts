@@ -76,7 +76,7 @@ export async function srcToFile(
   fileName: string,
   mimeType?: string,
 ): Promise<File> {
-  const res = await fetch(src);
+  const res = await fetch(src, { mode: 'cors' });
   const buf = await res.arrayBuffer();
   return new File([buf], fileName, { type: mimeType });
 }

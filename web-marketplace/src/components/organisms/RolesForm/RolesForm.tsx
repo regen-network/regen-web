@@ -20,6 +20,7 @@ import { useAuth } from 'lib/auth/auth';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
 import { useCreateProjectContext } from 'pages/ProjectCreate';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { RoleSubmitProps } from 'pages/Roles/hooks/useRolesSubmit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -27,13 +28,12 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { getAccountsByNameOrAddrQuery } from '../../../lib/queries/react-query/registry-server/graphql/getAccountsByNameOrAddr/getAccountsByNameOrAddrQuery';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
+import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { AdminModal } from './components/AdminModal/AdminModal';
 import { ProfileModalSchemaType } from './components/ProfileModal/ProfileModal.schema';
 import { RoleField } from './components/RoleField/RoleField';
 import { useSaveProfile } from './hooks/useSaveProfile';
 import { rolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
-import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface RolesFormProps {
   submit: (props: RoleSubmitProps) => Promise<void>;

@@ -65,10 +65,11 @@ export const MediaFormStory = ({
 
   /* Setter */
 
-  const setStoryMediaUrl = (value: string): void => {
-    setValue('regen:storyMedia.schema:url', encodeURI(value), {
-      shouldDirty: true,
-    });
+  const setStoryMediaUrl = ({ value }: { value?: string }): void => {
+    if (value)
+      setValue('regen:storyMedia.schema:url', encodeURI(value), {
+        shouldDirty: true,
+      });
     isDirtyRef.current = true;
   };
 
@@ -154,7 +155,7 @@ export const MediaFormStory = ({
               helperText={errors['regen:storyMedia']?.message}
               accept="image/*"
               renderModal={({
-                initialImage,
+                initialFile,
                 open,
                 value,
                 onClose,
@@ -164,7 +165,7 @@ export const MediaFormStory = ({
                   open={open}
                   onClose={onClose}
                   onSubmit={onSubmit}
-                  initialImage={initialImage}
+                  initialImage={initialFile}
                   fixedCrop={cropAspectMediaForm}
                   isIgnoreCrop={!!value}
                 >

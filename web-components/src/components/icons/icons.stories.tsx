@@ -357,7 +357,7 @@ export const allIcons = (): JSX.Element => (
       icon={<TradeableIcon sx={{ color: 'grey.600' }} />}
       label="tradeableIcon"
     />
-    <LabeledIcon icon={<TrashIcon color="grey" />} label="TrashIcon" />
+    <LabeledIcon icon={<TrashIcon />} label="TrashIcon" />
     <LabeledIcon icon={<TrustIcon />} label="TrustIcon" />
     <LabeledIcon icon={<TrustDocumentIcon />} label="TrustDocumentIcon" />
     <LabeledIcon icon={<TwitterIcon color="blue" />} label="TwitterIcon" />

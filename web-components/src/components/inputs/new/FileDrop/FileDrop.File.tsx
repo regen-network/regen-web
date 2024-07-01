@@ -124,7 +124,7 @@ export const FileDropFile = ({
           aria-label="delete"
           size="large"
         >
-          <TrashIcon color={theme.palette.error.dark} />
+          <TrashIcon className="text-error-300" />
         </IconButton>
       </Box>
       {(moveUp || moveDown) && (

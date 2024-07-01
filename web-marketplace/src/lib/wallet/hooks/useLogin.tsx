@@ -7,8 +7,8 @@ import { apiUri } from 'lib/apiUri';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
-import { LoginParams, SignArbitraryType } from 'lib/wallet/wallet';
 import { AccountEvent, Track } from 'lib/tracker/types';
+import { LoginParams, SignArbitraryType } from 'lib/wallet/wallet';
 
 type Params = {
   signArbitrary?: SignArbitraryType;

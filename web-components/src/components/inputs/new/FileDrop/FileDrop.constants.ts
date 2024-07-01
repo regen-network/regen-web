@@ -12,3 +12,7 @@ export const IMAGE_EXTENSIONS = [
 ];
 
 export const VIDEO_EXTENSIONS = ['mpeg', 'mp4', 'webm'];
+
+export const FILE_UPLOADING_TITLE = 'File is uploading';
+export const FILE_UPLOADING_DESCRIPTION =
+  'This may take some time if your file size is large.';

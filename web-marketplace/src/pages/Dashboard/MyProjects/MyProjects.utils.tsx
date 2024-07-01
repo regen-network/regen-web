@@ -9,7 +9,7 @@ export const getDefaultProject = (disabled: boolean): ProjectCardProps => ({
   place: '',
   area: 0,
   areaUnit: 'ha',
-  button: {
+  containedButton: {
     text: EDIT_PROJECT,
     startIcon: (
       <EditIcon

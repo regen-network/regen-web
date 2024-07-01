@@ -4,7 +4,7 @@ import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { CircularProgress } from '@mui/material';
 import { Feature, Point } from 'geojson';
 
-import PinIcon from '../../../icons/PinIcon';
+import { GreenPinIcon } from '../../../icons/GreenPinIcon';
 import { Body } from '../../../typography';
 import LocationField from '../LocationField/LocationField';
 import { isGeocodingFeature } from '../LocationField/LocationField.types';
@@ -18,7 +18,7 @@ type LocationPickerProps = {
   disabled?: boolean;
   value: Feature | GeocodeFeature;
   mapboxToken?: string;
-  handleChange: (value: Feature | GeocodeFeature) => void;
+  handleChange: (value: Feature<Point> | GeocodeFeature) => void;
   onBlur: (
     value: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>,
   ) => void;
@@ -35,6 +35,7 @@ export const LocationPicker = ({
 }: LocationPickerProps): JSX.Element => {
   const mapRef = useRef<MapRef | null>(null);
   const point = value.geometry as Point;
+
   const displayedLocation = `${point.coordinates[0]}, ${point.coordinates[1]} ${
     geocodingPlaceName ? `(${geocodingPlaceName})` : ''
   }`;
@@ -129,7 +130,7 @@ export const LocationPicker = ({
         {/* We simply absolutely position the location pin at the center,
           without using a react-map-gl Marker, so the map moves around the pin */}
         <div className="absolute top-[50%] left-[50%]">
-          <PinIcon fontSize="large" size={35} />
+          <GreenPinIcon />
         </div>
       </Map>
     </Suspense>

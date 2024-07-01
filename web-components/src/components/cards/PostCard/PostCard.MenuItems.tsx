@@ -49,7 +49,7 @@ export const SharePrivateMenuItem = (props: MenuItemProps): JSX.Element => (
 export const DeleteMenuItem = (props: MenuItemProps): JSX.Element => (
   <MenuItem {...props}>
     <ListItemIcon sx={{ height: '24px', width: '24px' }}>
-      <TrashIcon color="black" />
+      <TrashIcon className="text-grey-700" />
     </ListItemIcon>
     <ListItemText sx={{ py: '9px' }}>Delete</ListItemText>
   </MenuItem>

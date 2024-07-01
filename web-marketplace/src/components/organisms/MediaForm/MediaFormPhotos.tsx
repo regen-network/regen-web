@@ -79,18 +79,22 @@ export const MediaFormPhotos = ({
 
   /* Setter */
 
-  const setPreviewPhoto = (value: string): void => {
-    setValue('regen:previewPhoto.schema:url', encodeURI(value), {
-      shouldDirty: true,
-    });
+  const setPreviewPhoto = ({ value }: { value?: string }): void => {
+    if (value)
+      setValue('regen:previewPhoto.schema:url', encodeURI(value), {
+        shouldDirty: true,
+      });
     isDirtyRef.current = true;
   };
-  const setGalleryPhotos = (
-    value: string,
-    _: string,
-    fieldIndex: number,
-    lastInMultiUpload: boolean,
-  ): void => {
+  const setGalleryPhotos = ({
+    value,
+    fieldIndex,
+    lastInMultiUpload,
+  }: {
+    value?: string;
+    fieldIndex: number;
+    lastInMultiUpload: boolean;
+  }): void => {
     if (lastInMultiUpload) {
       append({
         'schema:url': DEFAULT,
@@ -98,7 +102,11 @@ export const MediaFormPhotos = ({
         'schema:creditText': '',
       });
     }
-    setValue(`regen:galleryPhotos.${fieldIndex}.schema:url`, encodeURI(value));
+    if (value)
+      setValue(
+        `regen:galleryPhotos.${fieldIndex}.schema:url`,
+        encodeURI(value),
+      );
     isDirtyRef.current = true;
   };
 
@@ -158,12 +166,12 @@ export const MediaFormPhotos = ({
         error={!!errors['regen:previewPhoto']}
         helperText={errors['regen:previewPhoto']?.message}
         accept="image/*"
-        renderModal={({ initialImage, open, value, onClose, onSubmit }) => (
+        renderModal={({ initialFile, open, value, onClose, onSubmit }) => (
           <CropImageModal
             open={open}
             onClose={onClose}
             onSubmit={onSubmit}
-            initialImage={initialImage}
+            initialImage={initialFile}
             fixedCrop={cropAspectMediaForm}
             isIgnoreCrop={!!value}
           >
@@ -224,7 +232,7 @@ export const MediaFormPhotos = ({
               accept="image/*"
               multi
               renderModal={({
-                initialImage,
+                initialFile,
                 open,
                 value,
                 currentIndex,
@@ -235,7 +243,7 @@ export const MediaFormPhotos = ({
                   open={open}
                   onClose={onClose}
                   onSubmit={onSubmit}
-                  initialImage={initialImage}
+                  initialImage={initialFile}
                   fixedCrop={cropAspectMediaForm}
                   isCropSubmitDisabled={hasFieldError}
                   isIgnoreCrop={!!value}

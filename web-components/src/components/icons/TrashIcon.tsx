@@ -1,80 +1,40 @@
 import React from 'react';
-import SvgIcon from '@mui/material/SvgIcon';
 
-import withHoverColor, { Props } from './withHoverColor';
-
-function TrashIcon({
-  className,
-  color,
-  onMouseEnter,
-  onMouseLeave,
-}: Props): JSX.Element {
+function TrashIcon(props: React.SVGProps<SVGSVGElement>): JSX.Element {
   return (
-    <SvgIcon
-      className={className}
-      width="17"
-      height="24"
-      viewBox="0 0 17 24"
-      xmlns="http://www.w3.org/2000/svg"
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <svg fill="none">
-        <mask id="path-1-inside-1" fill="white">
-          <path d="M12 4.75C12 4.88807 11.8881 5 11.75 5L5.25 5C5.11193 5 5 4.88807 5 4.75L5 3C5 1.34315 6.34315 -1.77008e-08 8 1.27146e-07L9 2.14569e-07C10.6569 3.59416e-07 12 1.34315 12 3L12 4.75Z" />
-        </mask>
-        <path
-          d="M12 4.75C12 4.88807 11.8881 5 11.75 5L5.25 5C5.11193 5 5 4.88807 5 4.75L5 3C5 1.34315 6.34315 -1.77008e-08 8 1.27146e-07L9 2.14569e-07C10.6569 3.59416e-07 12 1.34315 12 3L12 4.75Z"
-          stroke={color || 'black'}
-          strokeWidth="4"
-          mask="url(#path-1-inside-1)"
-        />
-        <mask id="path-2-inside-2" fill="white">
-          <path d="M1 6.25C1 6.11193 1.11193 6 1.25 6H15.75C15.8881 6 16 6.11193 16 6.25V21C16 22.6569 14.6569 24 13 24H4C2.34315 24 1 22.6569 1 21V6.25Z" />
-        </mask>
-        <path
-          d="M1 6.25C1 6.11193 1.11193 6 1.25 6H15.75C15.8881 6 16 6.11193 16 6.25V21C16 22.6569 14.6569 24 13 24H4C2.34315 24 1 22.6569 1 21V6.25Z"
-          fill="none"
-          stroke={color || 'black'}
-          strokeWidth="4"
-          mask="url(#path-2-inside-2)"
-        />
-        <rect
-          x="5"
-          y="10"
-          width="1"
-          height="10"
-          rx="0.25"
-          fill={color || 'black'}
-        />
-        <rect
-          x="17"
-          y="3"
-          width="2"
-          height="17"
-          rx="0.25"
-          transform="rotate(90 17 3)"
-          fill={color || 'black'}
-        />
-        <rect
-          x="8"
-          y="10"
-          width="1"
-          height="10"
-          rx="0.25"
-          fill={color || 'black'}
-        />
-        <rect
-          x="11"
-          y="10"
-          width="1"
-          height="10"
-          rx="0.25"
-          fill={color || 'black'}
-        />
-      </svg>
-    </SvgIcon>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M13 3L10 3C10 2.44772 10.4477 2 11 2H12C12.5523 2 13 2.44772 13 3ZM8 3H3.25C3.11193 3 3 3.11193 3 3.25V4.75C3 4.88807 3.11193 5 3.25 5L14.75 5L19.75 5C19.8881 5 20 4.88807 20 4.75V3.25C20 3.11193 19.8881 3 19.75 3H15C15 1.34315 13.6569 0 12 0H11C9.34315 0 8 1.34315 8 3ZM6 21V8H17V21C17 21.5523 16.5523 22 16 22H7C6.44772 22 6 21.5523 6 21ZM4 6.25C4 6.11193 4.11193 6 4.25 6H18.75C18.8881 6 19 6.11193 19 6.25V21C19 22.6569 17.6569 24 16 24H7C5.34315 24 4 22.6569 4 21V6.25ZM8.25 10C8.11193 10 8 10.1119 8 10.25V19.75C8 19.8881 8.11193 20 8.25 20H8.75C8.88807 20 9 19.8881 9 19.75V10.25C9 10.1119 8.88807 10 8.75 10H8.25ZM12 19.75V10.25C12 10.1119 11.8881 10 11.75 10H11.25C11.1119 10 11 10.1119 11 10.25V19.75C11 19.8881 11.1119 20 11.25 20H11.75C11.8881 20 12 19.8881 12 19.75ZM14 19.75V10.25C14 10.1119 14.1119 10 14.25 10H14.75C14.8881 10 15 10.1119 15 10.25V19.75C15 19.8881 14.8881 20 14.75 20H14.25C14.1119 20 14 19.8881 14 19.75Z"
+        fill="currentColor"
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M8 3H3.25C3.11193 3 3 3.11193 3 3.25V4.75C3 4.88807 3.11193 5 3.25 5L19.75 5C19.8881 5 20 4.88807 20 4.75V3.25C20 3.11193 19.8881 3 19.75 3H15C15 1.34315 13.6569 0 12 0H11C9.34315 0 8 1.34315 8 3ZM13 3L10 3C10 2.44772 10.4477 2 11 2H12C12.5523 2 13 2.44772 13 3Z"
+        fill="currentColor"
+      />
+      <path
+        d="M8.25 10C8.11193 10 8 10.1119 8 10.25V19.75C8 19.8881 8.11193 20 8.25 20H8.75C8.88807 20 9 19.8881 9 19.75V10.25C9 10.1119 8.88807 10 8.75 10H8.25Z"
+        fill="currentColor"
+      />
+      <path
+        d="M12 19.75V10.25C12 10.1119 11.8881 10 11.75 10H11.25C11.1119 10 11 10.1119 11 10.25V19.75C11 19.8881 11.1119 20 11.25 20H11.75C11.8881 20 12 19.8881 12 19.75Z"
+        fill="currentColor"
+      />
+      <path
+        d="M14 19.75V10.25C14 10.1119 14.1119 10 14.25 10H14.75C14.8881 10 15 10.1119 15 10.25V19.75C15 19.8881 14.8881 20 14.75 20H14.25C14.1119 20 14 19.8881 14 19.75Z"
+        fill="currentColor"
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M4 6.25C4 6.11193 4.11193 6 4.25 6H18.75C18.8881 6 19 6.11193 19 6.25V21C19 22.6569 17.6569 24 16 24H7C5.34315 24 4 22.6569 4 21V6.25ZM6 21V8H17V21C17 21.5523 16.5523 22 16 22H7C6.44772 22 6 21.5523 6 21Z"
+        fill="currentColor"
+      />
+    </svg>
   );
 }
 
-export default withHoverColor(TrashIcon);
+export default TrashIcon;

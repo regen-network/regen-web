@@ -17,7 +17,6 @@ type Props = {
     main?: string;
     button?: string;
   };
-  handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleDrop: (files: File[]) => void;
   accept?: string;
 };
@@ -31,7 +30,6 @@ export const FileDropZone = forwardRef<HTMLInputElement, Props>(
       dropZoneOption = {},
       value,
       classes,
-      handleFileChange,
       handleDrop,
       accept,
       ...props
@@ -79,7 +77,6 @@ export const FileDropZone = forwardRef<HTMLInputElement, Props>(
               contentEditable: false,
               draggable: false,
               spellCheck: false,
-              onChange: handleFileChange,
             })}
             {...props}
             ref={ref}

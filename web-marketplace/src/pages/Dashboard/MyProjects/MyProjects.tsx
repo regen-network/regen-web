@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Grid } from '@mui/material';
 import { useAtom } from 'jotai';
 
@@ -11,10 +13,11 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { projectsCurrentStepAtom } from 'pages/ProjectCreate/ProjectCreate.store';
 import WithLoader from 'components/atoms/WithLoader';
+import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
-import { DRAFT_ID } from './MyProjects.constants';
+import { CREATE_POST, DRAFT_ID } from './MyProjects.constants';
 import { getDefaultProject } from './MyProjects.utils';
 
 const MyProjects = (): JSX.Element => {
@@ -34,6 +37,12 @@ const MyProjects = (): JSX.Element => {
   });
 
   const isFirstProject = !adminProjects || adminProjects?.length < 1;
+
+  const [postProjectId, setPostProjectId] = useState<string | undefined>();
+  const [postOffChainProjectId, setPostOffChainProjectId] = useState<
+    string | undefined
+  >();
+  const [postProjectName, setPostProjectName] = useState<string | undefined>();
 
   return (
     <>
@@ -71,7 +80,17 @@ const MyProjects = (): JSX.Element => {
                     {...getDefaultProject(!activeAccountId)}
                     {...project}
                     draft={project.offChain && !project.published}
+                    button={{
+                      text: CREATE_POST,
+                      disabled:
+                        !activeAccountId || project.draft || !project.location,
+                    }}
                     onButtonClick={() => {
+                      setPostProjectId(project.id);
+                      setPostOffChainProjectId(project.offChainId);
+                      setPostProjectName(project.name);
+                    }}
+                    onContainedButtonClick={() => {
                       if (
                         !project.offChain ||
                         (project.offChain && project.published)
@@ -96,6 +115,21 @@ const MyProjects = (): JSX.Element => {
             );
           })}
       </Grid>
+      {postProjectId && (
+        <PostFlow
+          onModalClose={() => {
+            setPostProjectId(undefined);
+            setPostOffChainProjectId(undefined);
+          }}
+          projectLocation={
+            adminProjects.find(project => project.id === postProjectId)
+              ?.location as GeocodeFeature
+          }
+          projectId={postProjectId}
+          offChainProjectId={postOffChainProjectId}
+          projectName={postProjectName}
+        />
+      )}
     </>
   );
 };

@@ -5,11 +5,9 @@ import { Theme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
 
-import { Button } from '../buttons/Button';
-import ContainedButton from '../buttons/ContainedButton';
 import { CancelButtonFooter } from '../organisms/CancelButtonFooter/CancelButtonFooter';
 import { getCroppedImg } from './canvas-utils';
-import { APPLY, CANCEL, UPDATE, UPLOADING } from './ImageCrop.constants';
+import { APPLY, UPDATE, UPLOADING } from './ImageCrop.constants';
 
 import 'react-image-crop/dist/ReactCrop.css';
 

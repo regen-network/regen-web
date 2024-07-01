@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
-import { useFieldArray, useWatch } from 'react-hook-form';
+import { MutableRefObject, useEffect, useState } from 'react';
+import { SubmitHandler, useFieldArray, useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { MAPBOX_TOKEN } from 'config/globals';
+import { Feature, Point } from 'geojson';
 
 import { LocationIcon } from 'web-components/src/components/icons/LocationIcon';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
@@ -10,6 +12,10 @@ import {
   FileDrop,
   FileDropProps,
 } from 'web-components/src/components/inputs/new/FileDrop/FileDrop';
+import {
+  ExifGPSData,
+  exifToFeature,
+} from 'web-components/src/components/inputs/new/FileDrop/FileDrop.utils';
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/RadioGroup';
 import { ReorderFields } from 'web-components/src/components/inputs/new/ReorderFields/ReorderFields';
@@ -24,7 +30,10 @@ import { Link } from 'components/atoms';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
+import { EditFileFormSchemaType } from '../EditFileForm/EditFileForm.schema';
+import { EditFileModal } from '../EditFileModal/EditFileModal';
 import { cropAspectMediaForm, DEFAULT } from '../MediaForm/MediaForm.constants';
+import { getHandleDelete } from '../MediaForm/MediaForm.utils';
 import { useMediaFormStyles } from '../MediaForm/useMediaFormStyles';
 import { useMetadataFormStyles } from '../MetadataForm/MetadataForm.styles';
 import {
@@ -35,17 +44,32 @@ import {
 import { postFormSchema, PostFormSchemaType } from './PostForm.schema';
 
 export interface Props {
-  initialValues: PostFormSchemaType;
+  initialValues?: PostFormSchemaType;
   className?: string;
   onClose: () => void;
   projectLocation: GeocodeFeature;
+  offChainProjectId?: string;
+  onSubmit?: SubmitHandler<PostFormSchemaType>;
+  fileNamesToDeleteRef: MutableRefObject<string[]>;
+  handleUpload: (file: File) => Promise<
+    | {
+        url: string;
+        location?: ExifGPSData;
+        iri?: string | undefined;
+      }
+    | undefined
+  >;
 }
 
 export const PostForm = ({
   initialValues,
   className,
   projectLocation,
+  offChainProjectId: _offChainProjectId,
   onClose,
+  onSubmit,
+  fileNamesToDeleteRef,
+  handleUpload,
 }: Props): JSX.Element => {
   const form = useZodForm({
     schema: postFormSchema,
@@ -56,7 +80,7 @@ export const PostForm = ({
   });
   const { classes } = useMediaFormStyles();
   const { classes: textAreaClasses } = useMetadataFormStyles();
-  const { errors } = form.formState;
+  const { errors, isValid } = form.formState;
   const { setValue } = form;
 
   const imageDropCommonProps: Partial<FileDropProps> = {
@@ -76,14 +100,30 @@ export const PostForm = ({
     control: form.control,
   });
 
-  const setFiles = (
-    value: string,
-    mimeType: string,
-    fieldIndex: number,
-    lastInMultiUpload: boolean,
-  ): void => {
+  const [fileLocation, setFileLocation] = useState<{
+    [index: number]: Feature<Point>;
+  }>({});
+
+  const setFiles = ({
+    value,
+    mimeType,
+    fieldIndex,
+    lastInMultiUpload,
+    location,
+    name,
+    iri,
+  }: {
+    value?: string;
+    mimeType: string;
+    fieldIndex: number;
+    lastInMultiUpload: boolean;
+    location?: ExifGPSData;
+    name?: string;
+    iri?: string;
+  }): void => {
     if (lastInMultiUpload) {
       append({
+        iri: DEFAULT,
         url: DEFAULT,
         name: DEFAULT,
         location: projectLocation,
@@ -91,13 +131,38 @@ export const PostForm = ({
         mimeType: '',
       });
     }
-    setValue(`files.${fieldIndex}.url`, encodeURI(value));
-    setValue(`files.${fieldIndex}.mimeType`, encodeURI(mimeType));
+    if (value) setValue(`files.${fieldIndex}.url`, encodeURI(value));
+    if (mimeType) setValue(`files.${fieldIndex}.mimeType`, mimeType);
+    if (name) setValue(`files.${fieldIndex}.name`, name);
+    if (iri) setValue(`files.${fieldIndex}.iri`, iri);
+
+    let featureLocation: Feature<Point> | undefined;
+    if (location) {
+      featureLocation = exifToFeature(location) as Feature<Point> | undefined;
+      if (featureLocation) {
+        setValue(`files.${fieldIndex}.location`, featureLocation);
+        setFileLocation(prev => ({
+          ...prev,
+          [fieldIndex]: featureLocation as Feature<Point>,
+        }));
+        setValue(`files.${fieldIndex}.locationType`, 'file');
+      } else {
+        setValue(`files.${fieldIndex}.location`, projectLocation);
+        setValue(`files.${fieldIndex}.locationType`, 'none');
+      }
+    } else if (!files?.[fieldIndex]?.location) {
+      setValue(`files.${fieldIndex}.location`, projectLocation);
+      setValue(`files.${fieldIndex}.locationType`, 'none');
+    }
   };
 
-  const getHandleDeleteWithIndex = async (fieldIndex: number) => {
-    remove(fieldIndex);
-  };
+  const getHandleDeleteWithIndex = (fieldIndex: number) =>
+    getHandleDelete({
+      fileNamesToDeleteRef,
+      callback: (doSetValue: boolean = true) => {
+        if (doSetValue) remove(fieldIndex);
+      },
+    });
 
   /* Effect */
 
@@ -107,6 +172,7 @@ export const PostForm = ({
       fields?.every(field => field['url'] !== DEFAULT)
     ) {
       append({
+        iri: DEFAULT,
         url: DEFAULT,
         name: DEFAULT,
         location: projectLocation,
@@ -117,7 +183,11 @@ export const PostForm = ({
   }, [append, fields, projectLocation]);
 
   return (
-    <Form className={cn('max-w-[560px]', className)} form={form}>
+    <Form
+      className={cn('max-w-[560px]', className)}
+      form={form}
+      onSubmit={onSubmit}
+    >
       <Title
         variant="h3"
         sx={{ textAlign: 'center' }}
@@ -146,7 +216,7 @@ export const PostForm = ({
         rows={4}
         minRows={4}
         multiline
-        className={cn(textAreaClasses.field, 'mb-40 sm:mb-50 mt-0')}
+        className={cn(textAreaClasses.field, 'mt-0')}
         {...form.register('comment')}
       />
       <ReorderFields
@@ -162,9 +232,8 @@ export const PostForm = ({
         fields={fields}
         move={move}
         getFieldElement={(_: Record<'id', string>, index: number) => {
-          const file = files?.[index];
+          const file = files?.[index] as EditFileFormSchemaType;
           const url = file?.url;
-
           return (
             <FileDrop
               moveUp={index === 0 ? undefined : () => move(index, index - 1)}
@@ -173,7 +242,8 @@ export const PostForm = ({
                   ? undefined
                   : () => move(index, index + 1)
               }
-              onDelete={() => getHandleDeleteWithIndex(index)}
+              onUpload={handleUpload}
+              onDelete={getHandleDeleteWithIndex(index)}
               value={url === DEFAULT ? '' : url}
               caption={file?.description}
               credit={file?.credit}
@@ -191,13 +261,25 @@ export const PostForm = ({
                 classes.galleryItem,
               )}
               fieldIndex={index}
+              dropZoneOption={{ multiple: true }}
               error={!!errors['files']}
               helperText={errors['files']?.message}
-              renderModal={() => <div />}
+              renderModal={({ open, currentIndex, onClose, onSubmit }) => (
+                <EditFileModal
+                  currentIndex={currentIndex}
+                  open={open}
+                  onClose={onClose}
+                  projectLocation={projectLocation}
+                  mapboxToken={MAPBOX_TOKEN}
+                  onSubmit={onSubmit}
+                  fileLocation={fileLocation[currentIndex]}
+                />
+              )}
               optional
               multi
+              uploadOnAdd
               {...imageDropCommonProps}
-              {...form.register('files')}
+              {...form.register(`files.${index}.url`)}
             />
           );
         }}
@@ -307,7 +389,12 @@ export const PostForm = ({
           </>
         </RadioGroup>
       </div>
-      <CancelButtonFooter label="publish" onCancel={onClose} type="submit" />
+      <CancelButtonFooter
+        disabled={!isValid}
+        label="publish"
+        onCancel={onClose}
+        type="submit"
+      />
     </Form>
   );
 };

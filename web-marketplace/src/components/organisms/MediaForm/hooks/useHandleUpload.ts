@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
 import { useSetAtom } from 'jotai';
 
+import { ExifGPSData } from 'web-components/src/components/inputs/new/FileDrop/FileDrop.utils';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
-import { uploadImage } from 'web-components/src/utils/s3';
+import { uploadFile } from 'web-components/src/utils/s3';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
@@ -12,18 +13,24 @@ type UseHandleUploadParams = {
   offChainProjectId?: string;
   apiServerUrl: string;
   setOffChainProjectId: UseStateSetter<string | undefined>;
+  subFolder?: string;
 };
 
 export const useHandleUpload = ({
   offChainProjectId,
   apiServerUrl,
   setOffChainProjectId,
+  subFolder = '',
 }: UseHandleUploadParams) => {
   const { createOrUpdateProject } = useCreateOrUpdateProject();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   const handleUpload = useCallback(
-    async (imageFile: File): Promise<string | undefined> => {
+    async (
+      file: File,
+    ): Promise<
+      { url: string; location?: ExifGPSData; iri?: string } | undefined
+    > => {
       let projectId = offChainProjectId;
       try {
         if (!offChainProjectId) {
@@ -37,14 +44,14 @@ export const useHandleUpload = ({
         }
         if (projectId) {
           setOffChainProjectId(projectId);
-          const imageUrl = await uploadImage(
-            imageFile,
-            `projects/${projectId}`,
+          const uploaded = await uploadFile(
+            file,
+            `projects/${projectId}${subFolder}`,
             apiServerUrl,
           );
-          return imageUrl;
+          return uploaded;
         } else {
-          throw new Error('Cannot upload image without a project id');
+          throw new Error('Cannot upload file without a project id');
         }
       } catch (e) {
         setErrorBannerTextAtom(String(e));
@@ -57,6 +64,7 @@ export const useHandleUpload = ({
       offChainProjectId,
       setErrorBannerTextAtom,
       setOffChainProjectId,
+      subFolder,
     ],
   );
   return { handleUpload };

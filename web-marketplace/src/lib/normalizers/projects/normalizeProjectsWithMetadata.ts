@@ -1,8 +1,14 @@
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
 import { formatNumber } from 'web-components/src/utils/format';
 
-import { AccountFieldsFragment, Maybe, Project } from 'generated/graphql';
+import {
+  AccountFieldsFragment,
+  Maybe,
+  Project,
+  ProjectFieldsFragment,
+} from 'generated/graphql';
 import {
   AllCreditClassQuery,
   AllPrefinanceProjectQuery,
@@ -20,6 +26,7 @@ import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.ut
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 interface NormalizeProjectsWithOrderDataParams {
+  offChainProjects?: (Maybe<ProjectFieldsFragment> | undefined)[];
   projectsWithOrderData?: ProjectWithOrderData[];
   projectsMetadata?: (AnchoredProjectMetadataBaseLD | undefined)[];
   projectPagesMetadata?: ProjectPageMetadataLD[];
@@ -30,6 +37,7 @@ interface NormalizeProjectsWithOrderDataParams {
 }
 
 export const normalizeProjectsWithMetadata = ({
+  offChainProjects,
   projectsWithOrderData,
   projectsMetadata,
   projectPagesMetadata,
@@ -43,6 +51,7 @@ export const normalizeProjectsWithMetadata = ({
       const classMetadata = classesMetadata?.[index];
       const projectPageMetadata = projectPagesMetadata?.[index];
       const programAccount = programAccounts?.[index];
+      const offChainProject = offChainProjects?.[index];
       const sanityClass = projectWithOrderData.sanityCreditClassData;
       const prefinanceProject = prefinanceProjectsData?.allProject?.find(
         project =>
@@ -52,6 +61,7 @@ export const normalizeProjectsWithMetadata = ({
       );
 
       return normalizeProjectWithMetadata({
+        offChainProject,
         projectWithOrderData,
         projectMetadata,
         projectPageMetadata,
@@ -85,6 +95,19 @@ interface NormalizeProjectWithMetadataParams {
   >;
 }
 
+export type NormalizeProject = ProjectWithOrderData & {
+  id?: string;
+  offChainId?: string;
+  slug?: string;
+  name?: string;
+  href?: string;
+  imgSrc?: string;
+  location?: GeocodeFeature;
+  place?: string;
+  program?: Maybe<AccountFieldsFragment>;
+  area?: number;
+  projectPrefinancing?: ProjectPrefinancing;
+};
 export const normalizeProjectWithMetadata = ({
   offChainProject,
   projectWithOrderData,
@@ -94,7 +117,7 @@ export const normalizeProjectWithMetadata = ({
   classMetadata,
   sanityClass,
   projectPrefinancing,
-}: NormalizeProjectWithMetadataParams) => {
+}: NormalizeProjectWithMetadataParams): NormalizeProject => {
   const creditClassImage = getClassImageWithProjectDefault({
     metadata: classMetadata,
     sanityClass,
@@ -122,6 +145,7 @@ export const normalizeProjectWithMetadata = ({
       projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ||
       projectWithOrderData?.imgSrc ||
       creditClassImage,
+    location: projectMetadata?.['schema:location'],
     place:
       projectMetadata?.['schema:location']?.place_name ||
       projectWithOrderData?.place,
@@ -146,5 +170,5 @@ export const normalizeProjectWithMetadata = ({
           })
         : undefined,
     },
-  } as ProjectWithOrderData;
+  } as NormalizeProject;
 };

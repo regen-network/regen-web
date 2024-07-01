@@ -15,14 +15,21 @@ export const getGeocodingQuery = ({
   queryFn: async () => {
     if (!query) return null;
     const geocodingClient = getGeocodingClient(mapboxToken);
-    const geocode = reverse
-      ? geocodingClient.reverseGeocode
-      : geocodingClient.forwardGeocode;
-    const response = await geocode({
-      query,
-      limit: 1,
-      types,
-    }).send();
+    const response = reverse
+      ? await geocodingClient
+          .reverseGeocode({
+            query,
+            limit: 1,
+            types,
+          })
+          .send()
+      : await geocodingClient
+          .forwardGeocode({
+            query,
+            limit: 1,
+            types,
+          })
+          .send();
 
     return response;
   },

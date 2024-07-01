@@ -11,7 +11,8 @@ import FieldFormControl, {
 import { FileDropFile } from './FileDrop.File';
 import { useFileDropStyles } from './FileDrop.styles';
 import { FileDropRenderModalProps } from './FileDrop.types';
-import { toBase64 } from './FileDrop.utils';
+import { UploadingModal } from './FileDrop.UploadingModal';
+import { ExifGPSData, toBase64 } from './FileDrop.utils';
 import { FileDropZone } from './FileDrop.Zone';
 
 export interface FileDropProps extends Partial<FieldFormControlProps> {
@@ -39,18 +40,26 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
   dropZoneOption?: DropzoneOptions;
   isCropSubmitDisabled?: boolean;
   renderModal: (_: FileDropRenderModalProps) => React.ReactNode;
-  setValue: (
-    value: string,
-    mimeType: string,
-    fieldIndex: number,
-    lastInMultiUpload: boolean,
-  ) => void;
+  setValue: (params: {
+    value?: string;
+    mimeType: string;
+    fieldIndex: number;
+    lastInMultiUpload: boolean;
+    location?: ExifGPSData;
+    name?: string;
+    iri?: string;
+  }) => void;
   onDelete?: (fileName: string, doSetValue?: boolean) => Promise<void>;
-  onUpload?: (imageFile: File) => Promise<string | undefined>;
+  onUpload?: (
+    file: File,
+  ) => Promise<
+    { url: string; location?: ExifGPSData; iri?: string } | undefined
+  >;
   accept?: string;
   multi?: boolean;
   moveUp?: () => void;
   moveDown?: () => void;
+  uploadOnAdd?: boolean;
 }
 
 /**
@@ -86,70 +95,86 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       moveUp,
       moveDown,
       dropZoneOption,
+      uploadOnAdd,
       ...fieldProps
     },
     ref,
   ) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
-    const [initialImage, setInitialImage] = useState('');
+    const [uploading, setUploading] = useState(false);
+    const [initialFile, setInitialFile] = useState('');
     const [selectedFiles, setSelectedFiles] = useState<Array<File>>([]);
     const [nextFieldIndex, setNextFieldIndex] = useState(0);
 
     const { classes: styles, cx } = useFileDropStyles();
     const isFirstField = fieldIndex === 0;
+    const upload = async (file: File, fieldIndex: number) => {
+      if (uploadOnAdd && onUpload) {
+        setUploading(true);
+        const timestamp = new Date().getTime();
+        const fileNameWithTimestamp = `${timestamp}-${file.name}`;
+        const buf = await file.arrayBuffer();
+        try {
+          const uploaded = await onUpload(
+            new File([buf], fileNameWithTimestamp, {
+              type: file.type,
+            }),
+          );
+          if (uploaded) {
+            setValue({
+              value: uploaded.url,
+              mimeType: file.type,
+              name: file.name,
+              iri: uploaded.iri,
+              location: uploaded.location,
+              fieldIndex,
+              lastInMultiUpload: false,
+            });
+          }
+        } finally {
+          setUploading(false);
+        }
+      }
+    };
 
     const handleDrop = (files: File[]): void => {
       if (files && files.length > 0) {
         const file = files[0];
         setSelectedFiles(multi ? files : [file]);
-        toBase64(file).then(base64String => {
+        toBase64(file).then(async base64String => {
           if (typeof base64String === 'string') {
+            setInitialFile(base64String);
+            await upload(file, fieldIndex + nextFieldIndex);
             setIsModalOpen(true);
-            setInitialImage(base64String);
           }
         });
       }
     };
 
-    const handleFileChange = (
-      event: React.ChangeEvent<HTMLInputElement>,
-    ): void => {
-      if (
-        event &&
-        event.target &&
-        event.target.files &&
-        event.target.files.length > 0
-      ) {
-        const files = event.target.files;
-        const file = files[0];
-        setSelectedFiles(multi ? Array.from(files) : [file]);
-        toBase64(file).then(base64String => {
-          if (typeof base64String === 'string') {
-            setIsModalOpen(true);
-            setInitialImage(base64String);
-          }
-        });
-      }
-    };
-
-    const onModalClose = (): void => {
-      setInitialImage('');
+    const onModalClose = async () => {
       const remainingFiles = selectedFiles.slice(1);
+      const hasRemainingFiles = remainingFiles.length > 0;
+      if (!isEdit && uploadOnAdd && onDelete && value) {
+        await onDelete(value, !multi || (multi && !hasRemainingFiles));
+      }
+      setInitialFile('');
       setSelectedFiles(remainingFiles);
       setIsModalOpen(false);
-      if (multi && remainingFiles.length > 0) {
-        toBase64(remainingFiles[0]).then(base64String => {
+      if (multi && hasRemainingFiles) {
+        const file = remainingFiles[0];
+        toBase64(file).then(async base64String => {
           if (typeof base64String === 'string') {
+            setInitialFile(base64String);
+            await upload(file, fieldIndex + nextFieldIndex);
             setIsModalOpen(true);
-            setInitialImage(base64String);
           }
         });
       }
     };
 
     const onModalSubmit = async (
-      croppedImage: HTMLImageElement,
+      croppedImage?: HTMLImageElement,
     ): Promise<void> => {
       // Delete file that has been edited
       if (isEdit && onDelete && value) {
@@ -157,30 +182,37 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
           await onDelete(value, false);
         }
       }
-      const currentFile = selectedFiles[0];
-      const result = await getImageSrc({
-        croppedImage,
-        onUpload,
-        fileName: currentFile.name,
-      });
 
-      if (result) {
+      let result;
+      const currentFile = selectedFiles[0];
+
+      if (croppedImage && !uploadOnAdd) {
+        result = await getImageSrc({
+          croppedImage,
+          onUpload,
+          fileName: currentFile.name,
+        });
+      }
+
+      if (result || uploadOnAdd) {
         const remainingFiles = selectedFiles.slice(1);
         const lastInMultiUpload = remainingFiles.length === 0;
-        setValue(
-          result,
-          currentFile.type,
-          fieldIndex + nextFieldIndex,
+        setValue({
+          value: result,
+          mimeType: currentFile?.type,
+          fieldIndex: fieldIndex + nextFieldIndex,
           lastInMultiUpload,
-        );
+        });
         setSelectedFiles(remainingFiles);
         setIsModalOpen(false);
         if (multi && !lastInMultiUpload) {
           setNextFieldIndex(current => current + 1);
-          toBase64(remainingFiles[0]).then(base64String => {
+          const file = remainingFiles[0];
+          toBase64(file).then(async base64String => {
             if (typeof base64String === 'string') {
+              setInitialFile(base64String);
+              await upload(file, fieldIndex + nextFieldIndex + 1);
               setIsModalOpen(true);
-              setInitialImage(base64String);
             }
           });
         }
@@ -188,7 +220,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
     };
 
     const handleDelete = async (valueToDelete: string) => {
-      setInitialImage('');
+      setInitialFile('');
       setSelectedFiles([]);
       if (onDelete) {
         await onDelete(valueToDelete ?? '');
@@ -205,7 +237,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
             if (typeof base64String === 'string') {
               setIsEdit(true);
               setIsModalOpen(true);
-              setInitialImage(base64String);
+              setInitialFile(base64String);
             }
           });
         }
@@ -240,7 +272,6 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
           )}
           <FileDropZone
             handleDrop={handleDrop}
-            handleFileChange={handleFileChange}
             buttonText={buttonText}
             classes={classes}
             hideDragText={hideDragText}
@@ -251,9 +282,10 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
             dropZoneOption={dropZoneOption}
           />
         </FieldFormControl>
+        <UploadingModal open={uploading} onClose={() => setUploading(false)} />
         {renderModal({
           open: isModalOpen,
-          initialImage,
+          initialFile,
           currentIndex: fieldIndex + nextFieldIndex,
           onClose: onModalClose,
           onSubmit: onModalSubmit,

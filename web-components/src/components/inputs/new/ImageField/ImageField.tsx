@@ -4,7 +4,10 @@ import { Box, ButtonBase, SxProps } from '@mui/material';
 
 import { Theme } from '../../../../theme/muiTheme';
 import OutlinedButton from '../../../buttons/OutlinedButton';
-import { getImageSrc } from '../../../image-crop/canvas-utils';
+import {
+  getImageSrc,
+  GetImageSrcParams,
+} from '../../../image-crop/canvas-utils';
 import CropImageModal from '../../../modal/CropImageModal';
 import FieldFormControl from '../FieldFormControl/FieldFormControl';
 import {
@@ -24,8 +27,8 @@ interface Props {
   circularCrop?: boolean;
   fixedCrop?: Partial<Crop>;
   children: ReactNode;
-  setValue: (value: string) => void;
-  onUpload?: (imageFile: File) => Promise<string | undefined>;
+  setValue: (params: { value: string }) => void;
+  onUpload?: GetImageSrcParams['onUpload'];
   sx?: {
     label?: SxProps<Theme>;
     button?: SxProps<Theme>;
@@ -82,7 +85,7 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
 
       if (result) {
         setInitialImage('');
-        setValue(result);
+        setValue({ value: result });
       }
     };
 

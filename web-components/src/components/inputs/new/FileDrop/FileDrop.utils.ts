@@ -8,11 +8,21 @@ export const toBase64 = (file: File): Promise<string | ArrayBuffer | null> => {
   });
 };
 
+export const toText = (file: File): Promise<string | ArrayBuffer | null> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+};
+
 export const isImage = (mimeType?: string) => !!mimeType?.includes('image/');
 export const isVideo = (mimeType?: string) => !!mimeType?.includes('video/');
 export const isAudio = (mimeType?: string) => !!mimeType?.includes('audio/');
 export const isPdf = (mimeType?: string) => mimeType === 'application/pdf';
 export const isSpreadSheet = (mimeType?: string) => mimeType === 'text/csv';
+export const isJson = (mimeType?: string) => mimeType === 'application/json';
 
 export type ExifGPSData = {
   GPSLatitude: [number, number, number];

@@ -1,7 +1,9 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { pdfjs } from 'react-pdf';
 import ReactPlayer from 'react-player/es6';
 import { Box, CircularProgress } from '@mui/material';
+
+import { srcToFile } from 'src/components/image-crop/canvas-utils';
 
 import { PlayButton } from '../../../atoms/PlayButton/PlayButton';
 import { AudioFileIcon } from '../../../icons/AudioFileIcon';
@@ -10,9 +12,11 @@ import { SpreadsheetFileIcon } from '../../../icons/SpreadsheetFileIcon';
 import {
   isAudio,
   isImage,
+  isJson,
   isPdf,
   isSpreadSheet,
   isVideo,
+  toText,
 } from '../../../inputs/new/FileDrop/FileDrop.utils';
 import { Body } from '../../../typography';
 import { PostFile } from '../PostFiles';
@@ -39,8 +43,22 @@ const FilePreview = ({ file, className, pdfPageHeight, showName }: Props) => {
   const video = isVideo(mimeType);
   const audio = isAudio(mimeType);
   const spreadsheet = isSpreadSheet(mimeType);
+  const json = isJson(mimeType);
   const colors = getColors(audio, spreadsheet);
+  const [preview, setPreview] = useState<string | undefined>();
 
+  useEffect(() => {
+    async function parseFile() {
+      if ((spreadsheet || json) && file.url && file.name) {
+        const fileData = await srcToFile(file.url, file.name, file.mimeType);
+        const text = (await toText(fileData)) as string;
+        console.log(text);
+        setPreview(text);
+        // const rows = base64.split('\n').map(row => row.split(','));
+      }
+    }
+    parseFile();
+  }, [file.mimeType, file.name, file.url, json, spreadsheet]);
   return (
     <Box
       className={className}
@@ -78,6 +96,8 @@ const FilePreview = ({ file, className, pdfPageHeight, showName }: Props) => {
             <Page height={pdfPageHeight} pageNumber={1} />
           </Document>
         </Suspense>
+      ) : json ? (
+        <pre className="m-0">{preview}</pre>
       ) : (
         !isImage(mimeType) && (
           <div
@@ -86,8 +106,21 @@ const FilePreview = ({ file, className, pdfPageHeight, showName }: Props) => {
             {audio ? (
               <AudioFileIcon width="50" height="50" />
             ) : spreadsheet ? (
-              <SpreadsheetFileIcon width="50" height="50" />
+              <table>
+                {preview
+                  ?.split('\n')
+                  .map(row => row.split(','))
+                  .slice(0, 9)
+                  .map((row, i) => (
+                    <tr key={i}>
+                      {row.map(cell => (
+                        <td>{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+              </table>
             ) : (
+              // <SpreadsheetFileIcon width="50" height="50" />
               <OtherDocumentsIcon width="50" height="50" />
             )}
             {showName && (

@@ -23,14 +23,18 @@ export const EditMenuItem = (props: MenuItemProps): JSX.Element => {
   );
 };
 
-export const SharePublicMenuItem = (props: MenuItemProps): JSX.Element => (
+type SharePublicMenuItemProps = { publicPost?: boolean } & MenuItemProps;
+export const SharePublicMenuItem = ({
+  publicPost,
+  ...props
+}: SharePublicMenuItemProps): JSX.Element => (
   <MenuItem key="2" {...props}>
     <ListItemIcon sx={{ height: '24px', width: '24px' }}>
       <ShareIcon color="primary" />
     </ListItemIcon>
     <ListItemText>
       Share the public link
-      <Body size="xs">(preserves privacy)</Body>
+      {!publicPost && <Body size="xs">(preserves privacy)</Body>}
     </ListItemText>
   </MenuItem>
 );

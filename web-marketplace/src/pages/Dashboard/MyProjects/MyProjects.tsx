@@ -43,6 +43,7 @@ const MyProjects = (): JSX.Element => {
     string | undefined
   >();
   const [postProjectName, setPostProjectName] = useState<string | undefined>();
+  const [postProjectSlug, setPostProjectSlug] = useState<string | undefined>();
 
   return (
     <>
@@ -89,6 +90,7 @@ const MyProjects = (): JSX.Element => {
                       setPostProjectId(project.id);
                       setPostOffChainProjectId(project.offChainId);
                       setPostProjectName(project.name);
+                      setPostProjectSlug(project.slug);
                     }}
                     onContainedButtonClick={() => {
                       if (
@@ -120,6 +122,8 @@ const MyProjects = (): JSX.Element => {
           onModalClose={() => {
             setPostProjectId(undefined);
             setPostOffChainProjectId(undefined);
+            setPostProjectName(undefined);
+            setPostProjectSlug(undefined);
           }}
           projectLocation={
             adminProjects.find(project => project.id === postProjectId)
@@ -128,6 +132,7 @@ const MyProjects = (): JSX.Element => {
           projectId={postProjectId}
           offChainProjectId={postOffChainProjectId}
           projectName={postProjectName}
+          projectSlug={postProjectSlug}
         />
       )}
     </>

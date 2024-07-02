@@ -5156,6 +5156,7 @@ export type ProjectPage = Document & {
   gettingStartedResourcesSection?: Maybe<GettingStartedResourcesSection>;
   projectDetailsSection?: Maybe<DetailsSection>;
   otcCard?: Maybe<ActionCard>;
+  dataStreamAdminDescriptionRaw?: Maybe<Scalars['JSON']>;
 };
 
 export type ProjectPageFilter = {
@@ -8854,6 +8855,7 @@ export type AllProjectPageQuery = (
   { __typename?: 'RootQuery' }
   & { allProjectPage: Array<(
     { __typename?: 'ProjectPage' }
+    & Pick<ProjectPage, 'dataStreamAdminDescriptionRaw'>
     & { bannerCard?: Maybe<(
       { __typename?: 'BannerCard' }
       & BannerCardFieldsFragment
@@ -11101,6 +11103,7 @@ export const AllProjectPageDocument = gql`
         ...customImageFields
       }
     }
+    dataStreamAdminDescriptionRaw
   }
 }
     ${BannerCardFieldsFragmentDoc}

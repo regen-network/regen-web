@@ -70,7 +70,7 @@ export default function GlanceCard({
                 <Image
                   className={classes.image}
                   src={imgSrc}
-                  alt={imgSrc}
+                  alt={''}
                   imageStorageBaseUrl={imageStorageBaseUrl}
                   apiServerUrl={apiServerUrl}
                 />

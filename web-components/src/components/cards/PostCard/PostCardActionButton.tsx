@@ -3,15 +3,16 @@ import { IconButton, Menu } from '@mui/material';
 
 import { HorizontalDotsIcon } from '../../icons/HorizontalDotsIcon';
 import ShareIcon from '../../icons/ShareIcon';
+import { SharePublicMenuItem } from './PostCard.MenuItems';
 
 const ActionButton = ({
+  publicPost,
   isAdmin,
-  adminMenuItems,
-  onClick,
+  onClickShare,
 }: {
+  publicPost?: boolean;
   isAdmin?: boolean;
-  adminMenuItems?: JSX.Element[];
-  onClick?: (ev: React.MouseEvent<HTMLButtonElement>) => void;
+  onClickShare?: (ev: React.MouseEvent) => void;
 }): JSX.Element => {
   const menuAnchor = useRef<HTMLButtonElement | null>(null);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -19,7 +20,8 @@ const ActionButton = ({
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setAnchorEl(null);
   };
 
@@ -28,13 +30,12 @@ const ActionButton = ({
       <IconButton
         sx={theme => ({
           position: 'absolute',
-          top: theme => [0, theme.spacing(3)],
-          right: theme => [0, theme.spacing(3)],
-          transform: 'translate(-50%, 50%)',
+          top: { xs: theme.spacing(1.25), md: theme.spacing(3.75) },
+          right: { xs: theme.spacing(1.25), md: theme.spacing(3) },
           zIndex: 1,
-          borderRadius: theme => theme.spacing(7),
+          borderRadius: theme.spacing(7),
           backgroundColor: isAdmin ? 'rgba(0, 0, 0, 0.8)' : 'white',
-          boxShadow: theme => theme.shadows[1],
+          boxShadow: theme.shadows[1],
           height: '44px',
           width: '44px',
           '&:hover': {
@@ -42,7 +43,11 @@ const ActionButton = ({
           },
         })}
         ref={menuAnchor}
-        onClick={isAdmin ? handleOpen : onClick}
+        onClick={event => {
+          event.stopPropagation();
+          if (isAdmin) handleOpen(event);
+          else if (onClickShare) onClickShare(event);
+        }}
       >
         {isAdmin ? (
           <HorizontalDotsIcon
@@ -57,7 +62,7 @@ const ActionButton = ({
           <ShareIcon sx={{ height: '24px', width: '24px' }} color="primary" />
         )}
       </IconButton>
-      {isAdmin && adminMenuItems && (
+      {isAdmin && (
         <Menu
           open={isOpen}
           onClose={handleClose}
@@ -72,7 +77,17 @@ const ActionButton = ({
             horizontal: 'right',
           }}
         >
-          {adminMenuItems}
+          {/* <EditMenuItem /> */}
+          <SharePublicMenuItem
+            classes={{ root: 'px-[25px]' }}
+            onClick={event => {
+              event.stopPropagation();
+              if (onClickShare) onClickShare(event);
+            }}
+            publicPost={publicPost}
+          />
+          {/* <SharePrivateMenuItem />
+              <DeleteMenuItem /> */}
         </Menu>
       )}
     </React.Fragment>

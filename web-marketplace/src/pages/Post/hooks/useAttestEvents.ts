@@ -8,12 +8,12 @@ import { EventAttest } from '@regen-network/api/lib/generated/regen/data/v1/even
 import { MsgAttest } from '@regen-network/api/lib/generated/regen/data/v1/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
+import { SIGNED_BY } from 'web-components/src/components/cards/PostCard/PostCard.constants';
 import { User } from 'web-components/src/components/user/UserInfo';
 import { formatDate } from 'web-components/src/utils/format';
 
-import { AccountByIdQuery, AccountType } from 'generated/graphql';
+import { AccountByIdQuery } from 'generated/graphql';
 import { useLedger } from 'ledger';
-import { getHashUrl } from 'lib/block-explorer';
 import { messageActionEquals } from 'lib/ecocredit/constants';
 import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
@@ -37,6 +37,7 @@ type UseAttestEventsParams = {
   creatorIsAdmin: boolean;
   registryAddr?: string | null;
   createdAt: string;
+  onlyAttestEvents?: boolean;
 };
 
 export const useAttestEvents = ({
@@ -45,6 +46,7 @@ export const useAttestEvents = ({
   creatorIsAdmin,
   registryAddr,
   createdAt,
+  onlyAttestEvents,
 }: UseAttestEventsParams) => {
   const { txClient } = useLedger();
   const graphqlClient =
@@ -113,7 +115,7 @@ export const useAttestEvents = ({
   const creatorTx = txResponses?.find(
     txRes => txRes.attestor === creatorAccount?.addr,
   );
-  if (creatorAccount) {
+  if (creatorAccount && !onlyAttestEvents) {
     events.push({
       icon: '/svg/post-created.svg',
       label: `Created ${creatorTx ? 'and signed' : ''} by`,
@@ -145,7 +147,7 @@ export const useAttestEvents = ({
           attestorAccount?.addr === registryAddr;
         events.unshift({
           icon: '/svg/post-signed.svg',
-          label: `Signed by`,
+          label: SIGNED_BY,
           timestamp: formatDate(
             txResponses[i].timestamp,
             'MMMM D, YYYY | h:mm A',

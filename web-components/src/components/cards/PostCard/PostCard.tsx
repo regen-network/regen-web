@@ -171,7 +171,7 @@ export default function PostCard({
                   <Image
                     className="h-[100%] w-[100%] object-cover group-hover:w-[120%] group-hover:h-[120%]"
                     src={imgSrc}
-                    alt={imgSrc}
+                    alt={''}
                     imageStorageBaseUrl={imageStorageBaseUrl}
                     apiServerUrl={apiServerUrl}
                   />

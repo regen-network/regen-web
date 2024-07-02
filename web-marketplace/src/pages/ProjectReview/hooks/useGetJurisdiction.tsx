@@ -13,9 +13,16 @@ export const useGetJurisdiction = ({ metadata }: Props): string | undefined => {
 
   useEffect(() => {
     const getIsoCode = async (): Promise<void> => {
-      const isoCode = await getJurisdiction(metadata);
-      if (isoCode) {
-        setJurisdiction(isoCode);
+      try {
+        if (metadata) {
+          const isoCode = await getJurisdiction(metadata);
+          if (isoCode) {
+            setJurisdiction(isoCode);
+          }
+        }
+      } catch (error) {
+        // eslint-disable-next-line
+        console.error(error);
       }
     };
 

@@ -39,6 +39,7 @@ type Props = {
   createdAt: string;
   creatorIsAdmin: boolean;
   privatePost?: boolean;
+  publicPost?: boolean;
   privateFiles?: boolean;
 };
 
@@ -49,6 +50,7 @@ export const PostHeader = ({
   creatorAccount,
   creatorIsAdmin,
   createdAt,
+  publicPost,
   privatePost,
   privateFiles,
 }: Props) => {
@@ -135,6 +137,7 @@ export const PostHeader = ({
                   copyTextToClipboard(window.location.href);
                   setShareSuccessBanner(true);
                 }}
+                publicPost={publicPost}
               />
               {/* <SharePrivateMenuItem />
               <DeleteMenuItem /> */}

@@ -71,6 +71,7 @@ export const DataStreamPost = ({
     createdAt,
     creatorAccount,
     creatorIsAdmin,
+    onlyAttestEvents: true,
   });
 
   const mimeTypes = post.filesMimeTypes;
@@ -108,6 +109,7 @@ export const DataStreamPost = ({
                 ? LOCATIONS_ARE_PRIVATE
                 : undefined
             }
+            publicPost={post.privacy === 'public'}
             author={{
               name: creatorAccount?.name || DEFAULT_NAME,
               type: creatorAccount?.type ?? 'USER',

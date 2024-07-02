@@ -46,9 +46,11 @@ export type ReactQueryGetPostsQueryResponse = QueryObserverOptions<{
   total: number;
 } | null>;
 
-export type ReactQueryGetPostsQueryParams = {
+export type GetPostsQueryParams = {
   projectId?: string;
   limit: number;
   offset: number;
   year?: number;
-} & ReactQueryBuilderResponse<ReactQueryGetPostsQueryResponse>;
+};
+export type ReactQueryGetPostsQueryParams = GetPostsQueryParams &
+  ReactQueryBuilderResponse<ReactQueryGetPostsQueryResponse>;

@@ -6,9 +6,11 @@ import ShareIcon from '../../icons/ShareIcon';
 import { SharePublicMenuItem } from './PostCard.MenuItems';
 
 const ActionButton = ({
+  publicPost,
   isAdmin,
   onClickShare,
 }: {
+  publicPost?: boolean;
   isAdmin?: boolean;
   onClickShare?: (ev: React.MouseEvent) => void;
 }): JSX.Element => {
@@ -18,7 +20,8 @@ const ActionButton = ({
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setAnchorEl(null);
   };
 
@@ -40,7 +43,11 @@ const ActionButton = ({
           },
         })}
         ref={menuAnchor}
-        onClick={isAdmin ? handleOpen : onClickShare}
+        onClick={event => {
+          event.stopPropagation();
+          if (isAdmin) handleOpen(event);
+          else if (onClickShare) onClickShare(event);
+        }}
       >
         {isAdmin ? (
           <HorizontalDotsIcon
@@ -73,7 +80,11 @@ const ActionButton = ({
           {/* <EditMenuItem /> */}
           <SharePublicMenuItem
             classes={{ root: 'px-[25px]' }}
-            onClick={onClickShare}
+            onClick={event => {
+              event.stopPropagation();
+              if (onClickShare) onClickShare(event);
+            }}
+            publicPost={publicPost}
           />
           {/* <SharePrivateMenuItem />
               <DeleteMenuItem /> */}

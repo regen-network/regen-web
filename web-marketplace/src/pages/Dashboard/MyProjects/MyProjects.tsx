@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Grid } from '@mui/material';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import { CreateProjectCard } from 'web-components/src/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
@@ -11,14 +11,20 @@ import { useAuth } from 'lib/auth/auth';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { projectsCurrentStepAtom } from 'pages/ProjectCreate/ProjectCreate.store';
+import {
+  projectsCurrentStepAtom,
+  projectsDraftState,
+} from 'pages/ProjectCreate/ProjectCreate.store';
 import WithLoader from 'components/atoms/WithLoader';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
 import { CREATE_POST, DRAFT_ID } from './MyProjects.constants';
-import { getDefaultProject } from './MyProjects.utils';
+import {
+  getDefaultProject,
+  handleProjectsDraftStatus,
+} from './MyProjects.utils';
 
 const MyProjects = (): JSX.Element => {
   const navigate = useNavigate();
@@ -43,6 +49,14 @@ const MyProjects = (): JSX.Element => {
     string | undefined
   >();
   const [postProjectName, setPostProjectName] = useState<string | undefined>();
+
+  const setProjectsDraftState = useSetAtom(projectsDraftState);
+
+  useEffect(() => {
+    setProjectsDraftState(prevState =>
+      handleProjectsDraftStatus(prevState, adminProjects),
+    );
+  }, [adminProjects, setProjectsDraftState]);
 
   return (
     <>

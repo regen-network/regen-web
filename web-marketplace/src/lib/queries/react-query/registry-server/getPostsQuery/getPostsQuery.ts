@@ -1,10 +1,10 @@
 import { apiUri } from 'lib/apiUri';
 
-import { GET_POSTS_QUERY_KEY } from './getPostsQuery.constants';
 import {
   ReactQueryGetPostsQueryParams,
   ReactQueryGetPostsQueryResponse,
 } from './getPostsQuery.types';
+import { getPostsQueryKey } from './getPostsQuery.utils';
 
 export const getPostsQuery = ({
   projectId,
@@ -13,7 +13,7 @@ export const getPostsQuery = ({
   year,
   ...params
 }: ReactQueryGetPostsQueryParams): ReactQueryGetPostsQueryResponse => ({
-  queryKey: [GET_POSTS_QUERY_KEY, projectId, limit, offset, year],
+  queryKey: getPostsQueryKey({ projectId, limit, offset, year }),
   queryFn: async () => {
     try {
       const resp = await fetch(

@@ -37,6 +37,7 @@ type UseAttestEventsParams = {
   creatorIsAdmin: boolean;
   registryAddr?: string | null;
   createdAt: string;
+  onlyAttestEvents?: boolean;
 };
 
 export const useAttestEvents = ({
@@ -45,6 +46,7 @@ export const useAttestEvents = ({
   creatorIsAdmin,
   registryAddr,
   createdAt,
+  onlyAttestEvents,
 }: UseAttestEventsParams) => {
   const { txClient } = useLedger();
   const graphqlClient =
@@ -113,7 +115,7 @@ export const useAttestEvents = ({
   const creatorTx = txResponses?.find(
     txRes => txRes.attestor === creatorAccount?.addr,
   );
-  if (creatorAccount) {
+  if (creatorAccount && !onlyAttestEvents) {
     events.push({
       icon: '/svg/post-created.svg',
       label: `Created ${creatorTx ? 'and signed' : ''} by`,

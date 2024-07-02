@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
 
@@ -15,6 +15,9 @@ import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getPostQuery } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery';
 import { PostFile } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
+import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
+
+import { DATA_STREAM_LIMIT } from 'components/templates/ProjectDetails/ProjectDetails.constant';
 
 import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { DEFAULT, PROJECTS_S3_PATH } from '../MediaForm/MediaForm.constants';
@@ -34,6 +37,7 @@ type Props = {
   projectLocation: GeocodeFeature;
   projectId: string;
   projectName?: string;
+  projectSlug?: string | null;
   offChainProjectId?: string;
 };
 
@@ -43,12 +47,14 @@ export const PostFlow = ({
   projectLocation,
   projectId,
   projectName,
+  projectSlug,
   offChainProjectId: _offChainProjectId,
 }: Props) => {
   const fileNamesToDeleteRef = useRef<string[]>([]);
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
+  const reactQueryClient = useQueryClient();
 
   const [iri, setIri] = useState<string | undefined>();
   const { data: createdPostData } = useQuery(
@@ -71,7 +77,7 @@ export const PostFlow = ({
     async (data: PostFormSchemaType) => {
       if (token) {
         const files = data.files?.filter(file => file.url !== DEFAULT);
-        const res = await postData({
+        await postData({
           url: `${apiServerUrl}/marketplace/v1/posts`,
           data: {
             projectId: offChainProjectId,
@@ -97,12 +103,20 @@ export const PostFlow = ({
           },
           token,
           retryCsrfRequest,
+          onSuccess: async res => {
+            setIri(res.iri);
+            await reactQueryClient.invalidateQueries({
+              queryKey: getPostsQueryKey({
+                projectId: offChainProjectId,
+                limit: DATA_STREAM_LIMIT,
+                offset: 0,
+              }),
+            });
+          },
         });
-
-        setIri(res.iri);
       }
     },
-    [offChainProjectId, retryCsrfRequest, token, setIri],
+    [token, offChainProjectId, retryCsrfRequest, reactQueryClient],
   );
 
   useEffect(() => {
@@ -115,7 +129,9 @@ export const PostFlow = ({
       const files = createdPostData?.contents?.files as PostFile[] | undefined;
       const filesUrls = createdPostData?.filesUrls;
 
-      const projectUrl = `/project/${projectId ?? offChainProjectId}`;
+      const projectUrl = `/project/${
+        projectSlug ?? projectId ?? offChainProjectId
+      }`;
       const cardItems: Item[] = [
         {
           label: PROJECT,
@@ -145,7 +161,7 @@ export const PostFlow = ({
         atom.title = POST_CREATED;
         // atom.cardTitle = ''; // TODO use 'Attest' if signed
         atom.buttonTitle = VIEW_ALL_POSTS;
-        atom.buttonLink = projectUrl; // TODO scroll to "Data stream" section once implemented
+        atom.buttonLink = `${projectUrl}#data-stream`;
       });
     }
   }, [

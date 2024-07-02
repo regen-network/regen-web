@@ -1,8 +1,11 @@
 import { createContext, MutableRefObject, useRef, useState } from 'react';
-import { Outlet, useOutletContext } from 'react-router-dom';
+import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { useAtom } from 'jotai';
 
 import { FormRef } from 'components/molecules/Form/Form';
+
+import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
 
 type ContextType = {
   deliverTxResponse?: DeliverTxResponse;
@@ -36,9 +39,13 @@ export const ProjectCreate = (): JSX.Element => {
   // TODO: possibly replace these with `useMsgClient` and pass downstream
   const [deliverTxResponse, setDeliverTxResponse] =
     useState<DeliverTxResponse>();
+  const [projectsState] = useAtom<ProjectsDraftStatus>(projectsDraftState);
+  const { projectId } = useParams();
   const [creditClassId, setCreditClassId] = useState<string>('');
   const [creditClassOnChainId, setCreditClassOnChainId] = useState<string>('');
-  const [hasModalBeenViewed, setHasModalBeenViewed] = useState(false);
+  const [hasModalBeenViewed, setHasModalBeenViewed] = useState(
+    projectsState?.find(project => project.id === projectId)?.draft,
+  );
   const formRef = useRef();
   const shouldNavigateRef = useRef(true);
   const isDraftRef = useRef(false);

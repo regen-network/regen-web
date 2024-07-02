@@ -4,6 +4,8 @@ import ContainedButton from 'web-components/src/components/buttons/ContainedButt
 import { SaveIcon } from 'web-components/src/components/icons/SaveIcon';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
+import { cn } from 'src/utils/styles/cn';
+
 interface SaveButtonProps extends ButtonProps {
   buttonText: string;
 }
@@ -39,7 +41,7 @@ export function SaveButton(props: SaveButtonProps) {
   return (
     <ContainedButton
       type="submit"
-      className={`${styles.btn} ${className}`}
+      className={cn(styles.btn, className)}
       disabled={disabled}
       onClick={onClick}
       {...props}

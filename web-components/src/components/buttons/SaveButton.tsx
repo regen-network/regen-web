@@ -3,8 +3,7 @@ import { makeStyles } from 'tss-react/mui';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { SaveIcon } from 'web-components/src/components/icons/SaveIcon';
 import { Theme } from 'web-components/src/theme/muiTheme';
-
-import { cn } from 'src/utils/styles/cn';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 interface SaveButtonProps extends ButtonProps {
   buttonText: string;

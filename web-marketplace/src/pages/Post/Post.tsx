@@ -159,7 +159,7 @@ function Post(): JSX.Element {
                   }
                 />
 
-                <PostFooter />
+                <PostFooter prevIri={data?.prevIri} nextIri={data?.nextIri} />
               </>
             )}
         </>

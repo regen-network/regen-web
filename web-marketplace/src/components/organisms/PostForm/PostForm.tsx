@@ -1,5 +1,10 @@
 import { MutableRefObject, useEffect, useState } from 'react';
-import { SubmitHandler, useFieldArray, useWatch } from 'react-hook-form';
+import {
+  SubmitHandler,
+  useFieldArray,
+  useFormState,
+  useWatch,
+} from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { MAPBOX_TOKEN } from 'config/globals';
 import { Feature, Point } from 'geojson';
@@ -59,6 +64,7 @@ export interface Props {
       }
     | undefined
   >;
+  onUpdateDirtyState?: (isDirty: boolean) => void;
 }
 
 export const PostForm = ({
@@ -70,6 +76,7 @@ export const PostForm = ({
   onSubmit,
   fileNamesToDeleteRef,
   handleUpload,
+  onUpdateDirtyState,
 }: Props): JSX.Element => {
   const form = useZodForm({
     schema: postFormSchema,
@@ -181,6 +188,24 @@ export const PostForm = ({
       });
     }
   }, [append, fields, projectLocation]);
+
+  const { dirtyFields } = useFormState({
+    control: form.control,
+  });
+
+  const isFormDirty = (
+    Object.keys(dirtyFields) as Array<keyof PostFormSchemaType>
+  ).some(key =>
+    key === 'files'
+      ? dirtyFields.files && dirtyFields.files.length > 1
+      : dirtyFields[key] === true,
+  );
+
+  useEffect(() => {
+    if (onUpdateDirtyState) {
+      onUpdateDirtyState(isFormDirty);
+    }
+  }, [isFormDirty, onUpdateDirtyState]);
 
   return (
     <Form

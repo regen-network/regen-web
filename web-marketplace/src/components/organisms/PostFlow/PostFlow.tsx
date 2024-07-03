@@ -5,6 +5,7 @@ import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
 
 import Modal from 'web-components/src/components/modal';
+import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
 import { Item } from 'web-components/src/components/modal/TxModal';
 import { deleteImage } from 'web-components/src/utils/s3';
 
@@ -55,7 +56,8 @@ export const PostFlow = ({
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
   const reactQueryClient = useQueryClient();
-
+  const [isFormDirty, setIsFormDirty] = useState(false);
+  const [showOnCloseWarning, setShowOnCloseWarning] = useState(false);
   const [iri, setIri] = useState<string | undefined>();
   const { data: createdPostData } = useQuery(
     getPostQuery({
@@ -174,38 +176,51 @@ export const PostFlow = ({
     setTxSuccessfulModalAtom,
   ]);
 
-  const onClose = useCallback(async () => {
-    // Delete any files that were removed on S3
-    await Promise.all(
-      fileNamesToDeleteRef?.current.map(async (fileName): Promise<void> => {
-        await deleteImage(
-          PROJECTS_S3_PATH,
-          offChainProjectId ?? '',
-          fileName,
-          apiServerUrl,
-        );
-      }),
-    );
-    fileNamesToDeleteRef.current = [];
+  const onClose = useCallback(
+    async (isFormDirty: boolean) => {
+      if (isFormDirty) {
+        setShowOnCloseWarning(true);
+        return;
+      }
+      // Delete any files that were removed on S3
+      await Promise.all(
+        fileNamesToDeleteRef?.current.map(async (fileName): Promise<void> => {
+          await deleteImage(
+            PROJECTS_S3_PATH,
+            offChainProjectId ?? '',
+            fileName,
+            apiServerUrl,
+          );
+        }),
+      );
+      fileNamesToDeleteRef.current = [];
 
-    onModalClose();
-  }, [offChainProjectId, onModalClose]);
+      onModalClose();
+    },
+    [offChainProjectId, onModalClose],
+  );
 
   return (
     <>
-      <Modal open={!!projectId} onClose={onClose}>
+      <Modal open={!!projectId} onClose={() => onClose(isFormDirty)}>
         {projectId && (
           <PostForm
             offChainProjectId={offChainProjectId}
             initialValues={initialValues}
             projectLocation={projectLocation}
-            onClose={onClose}
+            onClose={() => onClose(isFormDirty)}
             onSubmit={onSubmit}
             fileNamesToDeleteRef={fileNamesToDeleteRef}
             handleUpload={handleUpload}
+            onUpdateDirtyState={setIsFormDirty}
           />
         )}
       </Modal>
+      <SaveChangesWarningModal
+        open={showOnCloseWarning}
+        onClose={() => setShowOnCloseWarning(false)}
+        navigate={() => onClose(false)}
+      />
     </>
   );
 };

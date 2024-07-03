@@ -6,6 +6,7 @@ import { startCase } from 'lodash';
 
 import { Flex } from 'web-components/src/components/box';
 import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
+import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
 import { Title } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
@@ -13,7 +14,6 @@ import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { WarningModal } from 'pages/ProjectEdit/ProjectEdit.WarningModal';
 import WithLoader from 'components/atoms/WithLoader';
 
 import { usePathSection } from './hooks/usePathSection';
@@ -114,7 +114,7 @@ export const ProfileEdit = () => {
           </WithLoader>
         </Flex>
       </div>
-      <WarningModal
+      <SaveChangesWarningModal
         open={!!isWarningModalOpen}
         navigate={() => {
           if (isWarningModalOpen) navigate(isWarningModalOpen);

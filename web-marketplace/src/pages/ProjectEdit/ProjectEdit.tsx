@@ -16,6 +16,7 @@ import { startCase } from 'lodash';
 
 import Banner from 'web-components/src/components/banner';
 import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
+import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
 import { Label, Title } from 'web-components/src/components/typography';
 import type { Theme } from 'web-components/src/theme/muiTheme';
 
@@ -48,7 +49,6 @@ import useProjectEditSubmit, {
 import { EDIT_PROJECT } from './ProjectEdit.constants';
 import { ProjectEditNav } from './ProjectEdit.Nav';
 import { useProjectEditStyles } from './ProjectEdit.styles';
-import { WarningModal } from './ProjectEdit.WarningModal';
 
 type ContextType = {
   confirmSave?: () => void;
@@ -268,7 +268,7 @@ function ProjectEdit(): JSX.Element {
             </div>
           </div>
           {saved && <Banner text="Changes have been saved" />}
-          <WarningModal
+          <SaveChangesWarningModal
             open={!!isWarningModalOpen}
             navigate={() => {
               if (isWarningModalOpen) navigate(isWarningModalOpen);

@@ -3,12 +3,14 @@ import { Buttons } from './components/Buttons';
 import { Cards } from './components/Cards';
 import { FilePreview } from './components/FilePreview';
 import { PostFile } from './PostFiles';
+import { FilesPreviews } from './PostFiles.types';
 
 type Props = {
   files: Array<PostFile>;
   onClose: () => void;
   setSelectedUrl: UseStateSetter<string | undefined>;
   selectedUrl: string;
+  filesPreviews: FilesPreviews;
 };
 
 const PostFilesCardsDesktop = ({
@@ -16,6 +18,7 @@ const PostFilesCardsDesktop = ({
   onClose,
   setSelectedUrl,
   selectedUrl,
+  filesPreviews,
 }: Props) => (
   <Cards
     files={files}
@@ -30,6 +33,7 @@ const PostFilesCardsDesktop = ({
     }}
     items={files.map(file => (
       <FilePreview
+        preview={file.url ? filesPreviews[file.url] : undefined}
         pdfPageHeight={196}
         className="h-[196px]"
         key={file.url}

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, useMemo, useRef, useState } from 'react';
 import type { MapRef } from 'react-map-gl';
 import { CircularProgress, useMediaQuery, useTheme } from '@mui/material';
 import bbox from '@turf/bbox';
@@ -15,9 +15,9 @@ import PlusIcon from '../../icons/PlusIcon';
 import { SpreadsheetFileIcon } from '../../icons/SpreadsheetFileIcon';
 import {
   isAudio,
+  isCsv,
   isImage,
   isPdf,
-  isSpreadSheet,
   isVideo,
 } from '../../inputs/new/FileDrop/FileDrop.utils';
 import { Body } from '../../typography/Body';
@@ -27,6 +27,7 @@ import { PostFilesCardsDesktop } from './PostFiles.Cards.Desktop';
 import { PostFilesCardsMobile } from './PostFiles.Cards.Mobile';
 import { PostFilesDrawer } from './PostFiles.Drawer';
 import { useStyles } from './PostFiles.styles';
+import { FilesPreviews } from './PostFiles.types';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -37,6 +38,7 @@ const Popup = lazy(() => import('../../map/lib/Popup'));
 type Props = Pick<PostFilesProps, 'files' | 'mapboxToken' | 'isAdmin'> & {
   privateFiles: boolean;
   privateLocations: boolean;
+  filesPreviews: FilesPreviews;
 };
 
 const PostFilesPublic = ({
@@ -45,6 +47,7 @@ const PostFilesPublic = ({
   isAdmin,
   privateFiles,
   privateLocations,
+  filesPreviews,
 }: Props) => {
   const { classes: styles } = useStyles();
   const theme = useTheme();
@@ -59,7 +62,7 @@ const PostFilesPublic = ({
   const [animateMarker, setAnimateMarker] = useState<boolean>(false);
   const mapRef = useRef<MapRef | null>(null);
 
-  useEffect(() => {}, [selectedUrl]);
+  // useEffect(() => {}, [selectedUrl]);
 
   const groupByLocation = useMemo(
     () =>
@@ -177,7 +180,7 @@ const PostFilesPublic = ({
                         <AudioFileIcon width="24" height="24" />
                       ) : isPdf(mimeType) ? (
                         <PdfFileIcon width="24" height="24" />
-                      ) : isSpreadSheet(mimeType) ? (
+                      ) : isCsv(mimeType) ? (
                         <SpreadsheetFileIcon width="24" height="24" />
                       ) : (
                         <OtherDocumentsIcon width="24" height="24" />
@@ -206,6 +209,7 @@ const PostFilesPublic = ({
                       `${selectedLocation.coordinates[1]},${selectedLocation.coordinates[0]}`
                     ]
                   }
+                  filesPreviews={filesPreviews}
                   onClose={() => {
                     setSelectedLocation(undefined);
                     setSelectedUrl(undefined);
@@ -217,6 +221,7 @@ const PostFilesPublic = ({
             )}
             <PostFilesDrawer
               files={files}
+              filesPreviews={filesPreviews}
               setSelectedUrl={setSelectedUrl}
               selectedUrl={selectedUrl}
               setSelectedLocation={setSelectedLocation}

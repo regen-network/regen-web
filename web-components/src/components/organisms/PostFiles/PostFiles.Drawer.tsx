@@ -1,35 +1,35 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player/es6';
-import { CircularProgress, Slide } from '@mui/material';
+import { Slide } from '@mui/material';
 import { Point } from 'geojson';
 
 import { UseStateSetter } from '../../../types/react/useState';
 import { cn } from '../../../utils/styles/cn';
 import { PlayButton } from '../../atoms/PlayButton/PlayButton';
-import { AudioFileIcon } from '../../icons/AudioFileIcon';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
-import { OtherDocumentsIcon } from '../../icons/OtherDocumentsIcon';
-import { SpreadsheetFileIcon } from '../../icons/SpreadsheetFileIcon';
 import { Image } from '../../image';
 import {
   isAudio,
+  isCsv,
   isImage,
+  isJson,
   isPdf,
-  isSpreadSheet,
   isVideo,
+  isXlsOrXlsx,
 } from '../../inputs/new/FileDrop/FileDrop.utils';
 import { FileBody } from './components/FileBody';
+import { PdfPreview } from './components/PdfPreview';
+import { TextOrIconFilePreview } from './components/TextOrIconFilePreview';
 import { PostFile } from './PostFiles';
+import { FilesPreviews } from './PostFiles.types';
 import { getColors } from './PostFiles.utils';
-
-const Document = lazy(() => import('./lib/Document'));
-const Page = lazy(() => import('./lib/Page'));
 
 type Props = {
   files: Array<PostFile>;
   selectedUrl?: string;
   setSelectedUrl: UseStateSetter<string | undefined>;
   setSelectedLocation: UseStateSetter<Point | undefined>;
+  filesPreviews: FilesPreviews;
 };
 
 const PostFilesDrawer = ({
@@ -37,6 +37,7 @@ const PostFilesDrawer = ({
   selectedUrl,
   setSelectedUrl,
   setSelectedLocation,
+  filesPreviews,
 }: Props) => {
   const [open, setOpen] = useState(true);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -74,8 +75,12 @@ const PostFilesDrawer = ({
             const image = isImage(mimeType);
             const video = isVideo(mimeType);
             const audio = isAudio(mimeType);
-            const spreadsheet = isSpreadSheet(mimeType);
-            const colors = getColors(audio, spreadsheet);
+            const csv = isCsv(mimeType);
+            const json = isJson(mimeType);
+            const xls = isXlsOrXlsx(mimeType);
+            const colors = getColors(audio, csv, xls, json);
+
+            const preview = url ? filesPreviews[url] : undefined;
 
             return (
               <div
@@ -115,30 +120,20 @@ const PostFilesDrawer = ({
                   <>
                     {isPdf(mimeType) ? (
                       <div className="h-[70px] overflow-hidden bg-grey-300 mb-10">
-                        <Suspense
-                          fallback={<CircularProgress color="secondary" />}
-                        >
-                          <Document
-                            className="px-30"
-                            file={url}
-                            loading={<CircularProgress color="secondary" />}
-                          >
-                            <Page height={70} pageNumber={1} />
-                          </Document>
-                        </Suspense>
+                        <PdfPreview file={url} pageHeight={70} />
                       </div>
                     ) : (
-                      <div
-                        className={`flex items-center justify-center h-[70px] mb-10 rounded-sm border-solid border ${colors.border} ${colors.text} ${colors.bg}`}
-                      >
-                        {isAudio(mimeType) ? (
-                          <AudioFileIcon width="40" height="40" />
-                        ) : isSpreadSheet(mimeType) ? (
-                          <SpreadsheetFileIcon width="40" height="40" />
-                        ) : (
-                          <OtherDocumentsIcon width="40" height="40" />
-                        )}{' '}
-                      </div>
+                      <TextOrIconFilePreview
+                        className={`overflow-hidden h-[70px] mb-10 rounded-sm border-solid border ${colors.border}`}
+                        previewClassName="text-[6px] leading-[8px]"
+                        preview={preview}
+                        audio={audio}
+                        csv={csv}
+                        xls={xls}
+                        json={json}
+                        colors={colors}
+                        iconSize="40"
+                      />
                     )}
                     <FileBody file={file} />
                   </>

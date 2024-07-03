@@ -1,29 +1,25 @@
-import { lazy, Suspense, useState } from 'react';
-import { pdfjs } from 'react-pdf';
+import { useState } from 'react';
 import ReactPlayer from 'react-player/es6';
-import { Box, CircularProgress, SxProps, useTheme } from '@mui/material';
+import { Box, SxProps, useTheme } from '@mui/material';
 import { AnimatePresence, motion, PanInfo } from 'framer-motion';
 import { wrap } from 'popmotion';
 
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import { PlayButton } from '../../atoms/PlayButton/PlayButton';
-import { AudioFileIcon } from '../../icons/AudioFileIcon';
 import { OpenInNewIcon } from '../../icons/OpenInNewIcon';
-import { OtherDocumentsIcon } from '../../icons/OtherDocumentsIcon';
-import { SpreadsheetFileIcon } from '../../icons/SpreadsheetFileIcon';
 import {
   isAudio,
+  isCsv,
   isImage,
+  isJson,
   isPdf,
-  isSpreadSheet,
   isVideo,
+  isXlsOrXlsx,
 } from '../../inputs/new/FileDrop/FileDrop.utils';
-import {
-  audioColors,
-  jsonColors,
-  spreadsheetColors,
-} from '../PostFiles/PostFiles.constants';
+import { PdfPreview } from '../PostFiles/components/PdfPreview';
+import { TextOrIconFilePreview } from '../PostFiles/components/TextOrIconFilePreview';
+import { FilesPreviews } from '../PostFiles/PostFiles.types';
 import { getColors } from '../PostFiles/PostFiles.utils';
 import { GalleryBottomBar } from './Gallery.BottomBar';
 import { galleryVariants, swipeConfidenceThreshold } from './Gallery.config';
@@ -36,16 +32,17 @@ export interface Props {
   allImages?: boolean;
   className?: { root?: string; container?: string };
   pdfPageHeight?: number;
+  filesPreviews?: FilesPreviews;
 }
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
-  import.meta.url,
-).toString();
 
-const Document = lazy(() => import('../PostFiles/lib/Document'));
-const Page = lazy(() => import('../PostFiles/lib/Page'));
-
-const Gallery = ({ items, sx, allImages, className, pdfPageHeight }: Props) => {
+const Gallery = ({
+  items,
+  sx,
+  allImages,
+  className,
+  pdfPageHeight,
+  filesPreviews,
+}: Props) => {
   const [[page, direction], setPage] = useState([0, 0]);
 
   // We may have only a finite number of images (eg: 3), but we paginate them absolutely (eg 1, 2, 3, 4, 5...) and
@@ -82,8 +79,11 @@ const Gallery = ({ items, sx, allImages, className, pdfPageHeight }: Props) => {
   };
 
   const audio = isAudio(item?.mimeType);
-  const spreadsheet = isSpreadSheet(item?.mimeType);
-  const colors = getColors(audio, spreadsheet);
+  const csv = isCsv(item?.mimeType);
+  const json = isJson(item?.mimeType);
+  const xls = isXlsOrXlsx(item?.mimeType);
+  const colors = getColors(audio, csv, xls, json);
+  const preview = filesPreviews?.[item?.url];
 
   return (
     <Box
@@ -143,27 +143,22 @@ const Gallery = ({ items, sx, allImages, className, pdfPageHeight }: Props) => {
                 <OpenInNewIcon className="h-[24px] w-[24px] rounded-[50%] text-grey-0 bg-grey-700/[.6] p-3" />
               </a>
               {isPdf(item?.mimeType) ? (
-                <Suspense fallback={<CircularProgress color="secondary" />}>
-                  <Document
-                    className="px-50 sm:px-[300px] h-[100%]"
-                    file={item?.url}
-                    loading={<CircularProgress color="secondary" />}
-                  >
-                    <Page height={pdfPageHeight} pageNumber={1} />
-                  </Document>
-                </Suspense>
+                <PdfPreview
+                  file={item?.url}
+                  className="px-50 sm:px-[300px] h-[100%]"
+                  pageHeight={pdfPageHeight}
+                />
               ) : (
-                <div
-                  className={`lg:h-[550px] ${colors.bg} ${colors.text} flex items-center justify-center h-[100%]`}
-                >
-                  {audio ? (
-                    <AudioFileIcon width="100" height="100" />
-                  ) : spreadsheet ? (
-                    <SpreadsheetFileIcon width="100" height="100" />
-                  ) : (
-                    <OtherDocumentsIcon width="100" height="100" />
-                  )}
-                </div>
+                <TextOrIconFilePreview
+                  className="lg:h-[550px]"
+                  preview={preview}
+                  audio={audio}
+                  csv={csv}
+                  xls={xls}
+                  json={json}
+                  colors={colors}
+                  iconSize="100"
+                />
               )}
             </motion.div>
           )}

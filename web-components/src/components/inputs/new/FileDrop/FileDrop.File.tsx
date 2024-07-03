@@ -1,29 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player/es6';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { Box, IconButton, Popover, useTheme } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  Popover,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { Feature } from 'geojson';
 
-import { PlayButton } from '../../../../components/atoms/PlayButton/PlayButton';
 import { cn } from '../../../../utils/styles/cn';
+import { PlayButton } from '../../../atoms/PlayButton/PlayButton';
 import ArrowDownIcon from '../../../icons/ArrowDownIcon';
-import { AudioFileIcon } from '../../../icons/AudioFileIcon';
 import { DragIcon } from '../../../icons/DragIcon';
 import EditIcon from '../../../icons/EditIcon';
-import { OtherDocumentsIcon } from '../../../icons/OtherDocumentsIcon';
-import { PdfFileIcon } from '../../../icons/PdfFileIcon';
-import { SpreadsheetFileIcon } from '../../../icons/SpreadsheetFileIcon';
 import TrashIcon from '../../../icons/TrashIcon';
 import { Image } from '../../../image';
+import { PdfPreview } from '../../../organisms/PostFiles/components/PdfPreview';
+import { TextOrIconFilePreview } from '../../../organisms/PostFiles/components/TextOrIconFilePreview';
+import {
+  getColors,
+  parseFile,
+} from '../../../organisms/PostFiles/PostFiles.utils';
 import { Body } from '../../../typography/Body';
 import { FileDropBottomBar } from './FileDrop.BottomBar';
 import { useFileDropStyles } from './FileDrop.styles';
 import {
   isAudio,
+  isCsv,
   isImage,
+  isJson,
   isPdf,
-  isSpreadSheet,
   isVideo,
+  isXlsOrXlsx,
 } from './FileDrop.utils';
 
 type Props = {
@@ -61,8 +71,10 @@ export const FileDropFile = ({
 }: Props) => {
   const { classes: styles, cx } = useFileDropStyles();
   const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [anchorEl, setAnchorEl] = useState<SVGSVGElement | null>(null);
+  const [preview, setPreview] = useState<string | undefined>();
 
   const handleClick = (event: React.MouseEvent<SVGSVGElement>) => {
     setAnchorEl(event.currentTarget);
@@ -74,6 +86,24 @@ export const FileDropFile = ({
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+
+  const audio = isAudio(mimeType);
+  const csv = isCsv(mimeType);
+  const json = isJson(mimeType);
+  const xls = isXlsOrXlsx(mimeType);
+  const colors = getColors(audio, csv, xls, json);
+
+  useEffect(() => {
+    async function parseFileAndSetPreview() {
+      const _preview = await parseFile({
+        fileUrl: value,
+        fileName: name,
+        fileMimeType: mimeType,
+      });
+      if (_preview) setPreview(_preview);
+    }
+    parseFileAndSetPreview();
+  }, [mimeType, name, value]);
 
   return (
     <div className={cx(styles.preview, classes?.main)}>
@@ -94,18 +124,22 @@ export const FileDropFile = ({
           />
           <PlayButton />
         </>
+      ) : isPdf(mimeType) ? (
+        <PdfPreview
+          file={value}
+          className="bg-grey-300 px-[65px] h-[100%]"
+          pageHeight={mobile ? 210 : 290}
+        />
       ) : (
-        <div className="bg-grey-300 text-grey-400 h-[100%] flex justify-center items-center">
-          {isAudio(mimeType) ? (
-            <AudioFileIcon />
-          ) : isPdf(mimeType) ? (
-            <PdfFileIcon />
-          ) : isSpreadSheet(mimeType) ? (
-            <SpreadsheetFileIcon />
-          ) : (
-            <OtherDocumentsIcon />
-          )}
-        </div>
+        <TextOrIconFilePreview
+          preview={preview}
+          audio={audio}
+          csv={csv}
+          xls={xls}
+          json={json}
+          colors={colors}
+          iconSize="100"
+        />
       )}
 
       <Box className={styles.buttons}>

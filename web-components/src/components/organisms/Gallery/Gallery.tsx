@@ -11,6 +11,7 @@ import { OpenInNewIcon } from '../../icons/OpenInNewIcon';
 import {
   isAudio,
   isCsv,
+  isDocx,
   isImage,
   isJson,
   isPdf,
@@ -82,7 +83,8 @@ const Gallery = ({
   const csv = isCsv(item?.mimeType);
   const json = isJson(item?.mimeType);
   const xls = isXlsOrXlsx(item?.mimeType);
-  const colors = getColors(audio, csv, xls, json);
+  const docx = isDocx(item?.mimeType);
+  const colors = getColors(audio, csv, xls, json, docx);
   const preview = filesPreviews?.[item?.url];
 
   return (
@@ -151,11 +153,13 @@ const Gallery = ({
               ) : (
                 <TextOrIconFilePreview
                   className="lg:h-[550px]"
+                  previewClassName={docx ? 'px-50 sm:px-[300px]' : undefined}
                   preview={preview}
                   audio={audio}
                   csv={csv}
                   xls={xls}
                   json={json}
+                  docx={docx}
                   colors={colors}
                   iconSize="100"
                 />

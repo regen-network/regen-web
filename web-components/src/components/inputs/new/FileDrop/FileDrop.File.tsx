@@ -29,6 +29,7 @@ import { useFileDropStyles } from './FileDrop.styles';
 import {
   isAudio,
   isCsv,
+  isDocx,
   isImage,
   isJson,
   isPdf,
@@ -91,7 +92,8 @@ export const FileDropFile = ({
   const csv = isCsv(mimeType);
   const json = isJson(mimeType);
   const xls = isXlsOrXlsx(mimeType);
-  const colors = getColors(audio, csv, xls, json);
+  const docx = isDocx(mimeType);
+  const colors = getColors(audio, csv, xls, json, docx);
 
   useEffect(() => {
     async function parseFileAndSetPreview() {
@@ -137,6 +139,7 @@ export const FileDropFile = ({
           csv={csv}
           xls={xls}
           json={json}
+          docx={docx}
           colors={colors}
           iconSize="100"
         />

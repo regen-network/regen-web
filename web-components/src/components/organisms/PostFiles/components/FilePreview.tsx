@@ -5,6 +5,7 @@ import { PlayButton } from '../../../atoms/PlayButton/PlayButton';
 import {
   isAudio,
   isCsv,
+  isDocx,
   isImage,
   isJson,
   isPdf,
@@ -39,7 +40,8 @@ const FilePreview = ({
   const csv = isCsv(mimeType);
   const json = isJson(mimeType);
   const xls = isXlsOrXlsx(mimeType);
-  const colors = getColors(audio, csv, xls, json);
+  const docx = isDocx(mimeType);
+  const colors = getColors(audio, csv, xls, json, docx);
 
   return (
     <Box
@@ -80,6 +82,7 @@ const FilePreview = ({
             audio={audio}
             csv={csv}
             xls={xls}
+            docx={docx}
             json={json}
             colors={colors}
             iconSize="50"

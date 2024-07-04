@@ -1,3 +1,4 @@
+import mammoth from 'mammoth';
 import { read, utils } from 'xlsx';
 
 import { AudioFileIcon } from '../../icons/AudioFileIcon';
@@ -10,6 +11,7 @@ import { srcToFile } from '../../image-crop/canvas-utils';
 import {
   isAudio,
   isCsv,
+  isDocx,
   isImage,
   isJson,
   isPdf,
@@ -56,10 +58,11 @@ export const getColors = (
   csv: boolean,
   json: boolean,
   xls: boolean,
+  docx: boolean,
 ) =>
   audio
     ? audioColors
-    : csv || xls || json
+    : csv || xls || json || docx
     ? textDocumentColors
     : otherDocumentColors;
 
@@ -76,19 +79,25 @@ export async function parseFile({
   const csv = isCsv(fileMimeType);
   const json = isJson(fileMimeType);
   const xls = isXlsOrXlsx(fileMimeType);
+  const docx = isDocx(fileMimeType);
 
-  if ((csv || json || xls) && fileUrl && fileName) {
+  if ((csv || json || xls || docx) && fileUrl && fileName) {
     const fileData = await srcToFile(fileUrl, fileName, fileMimeType);
     if (csv || json) {
       const text = (await toText(fileData)) as string;
       return text;
     } else {
-      const text = (await toArrayBuffer(fileData)) as ArrayBuffer;
-      const workbook = read(new Uint8Array(text), { type: 'array' });
-      const firstSheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[firstSheetName];
-      const csv = utils.sheet_to_csv(worksheet);
-      return csv;
+      const arrayBuffer = (await toArrayBuffer(fileData)) as ArrayBuffer;
+      if (xls) {
+        const workbook = read(new Uint8Array(arrayBuffer), { type: 'array' });
+        const firstSheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[firstSheetName];
+        const csv = utils.sheet_to_csv(worksheet);
+        return csv;
+      } else if (docx) {
+        const html = await mammoth.convertToHtml({ arrayBuffer });
+        return html.value;
+      }
     }
   }
   return;

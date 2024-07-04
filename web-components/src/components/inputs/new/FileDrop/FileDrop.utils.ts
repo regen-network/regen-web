@@ -38,6 +38,9 @@ export const isXlsOrXlsx = (mimeType?: string) =>
   mimeType === 'application/vnd.ms-excel' ||
   mimeType ===
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+export const isDocx = (mimeType?: string) =>
+  mimeType ===
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
 
 export type ExifGPSData = {
   GPSLatitude: [number, number, number];

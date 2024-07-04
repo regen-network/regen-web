@@ -11,6 +11,7 @@ import { Image } from '../../image';
 import {
   isAudio,
   isCsv,
+  isDocx,
   isImage,
   isJson,
   isPdf,
@@ -78,7 +79,8 @@ const PostFilesDrawer = ({
             const csv = isCsv(mimeType);
             const json = isJson(mimeType);
             const xls = isXlsOrXlsx(mimeType);
-            const colors = getColors(audio, csv, xls, json);
+            const docx = isDocx(mimeType);
+            const colors = getColors(audio, csv, xls, json, docx);
 
             const preview = url ? filesPreviews[url] : undefined;
 
@@ -124,13 +126,16 @@ const PostFilesDrawer = ({
                       </div>
                     ) : (
                       <TextOrIconFilePreview
-                        className={`overflow-hidden h-[70px] mb-10 rounded-sm border-solid border ${colors.border}`}
+                        className={`overflow-hidden h-[70px] mb-10 rounded-sm border-solid ${
+                          csv || xls ? 'border-0 border-b border-r' : 'border'
+                        } ${colors.border}`}
                         previewClassName="text-[6px] leading-[8px]"
                         preview={preview}
                         audio={audio}
                         csv={csv}
                         xls={xls}
                         json={json}
+                        docx={docx}
                         colors={colors}
                         iconSize="40"
                       />

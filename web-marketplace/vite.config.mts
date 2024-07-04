@@ -36,7 +36,7 @@ export default defineConfig(({ mode }) => {
         ? {
             outDir: 'build',
             rollupOptions: {
-              plugins: [inject({ Buffer: ['Buffer', 'Buffer'] })],
+              plugins: [inject({ Buffer: ['buffer', 'Buffer'] })],
             },
           }
         : undefined,

@@ -69,4 +69,20 @@ export const files = [
     location: location3,
     mimeType: 'application/pdf',
   },
+  {
+    iri: 'regen:123.bin',
+    url: '/xlsx-file.xlsx',
+    name: 'xlsx-file.xlsx',
+    location: location3,
+    mimeType:
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  },
+  {
+    iri: 'regen:456.bin',
+    url: '/docx-file.docx',
+    name: 'docx-file.docx',
+    location: location3,
+    mimeType:
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  },
 ];

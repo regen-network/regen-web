@@ -6,7 +6,6 @@
     "@analytics/amplitude": "^0.1.3",
     "@analytics/google-analytics": "^1.0.7",
     "@apollo/client": "^3.4.17",
-    "@auth0/auth0-react": "^1.8.0",
     "@cosmjs/cosmwasm-stargate": "^0.31.0",
     "@cosmjs/launchpad": "^0.27.0",
     "@cosmjs/stargate": "^0.27.0",

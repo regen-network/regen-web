@@ -1,18 +1,24 @@
 import { createContext, MutableRefObject, useRef, useState } from 'react';
-import { Outlet, useOutletContext } from 'react-router-dom';
+import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { useAtom } from 'jotai';
+
 import { FormRef } from 'components/molecules/Form/Form';
+
+import { projectsDraftState, ProjectsDraftStatus } from './ProjectCreate.store';
 
 type ContextType = {
   deliverTxResponse?: DeliverTxResponse;
   setDeliverTxResponse: (deliverTxResponse?: DeliverTxResponse) => void;
   creditClassId?: string;
   setCreditClassId: (creditClassId?: string) => void;
-  formRef?: FormRef;
   creditClassOnChainId?: string;
   setCreditClassOnChainId: (creditClassId?: string) => void;
+  formRef?: FormRef;
   shouldNavigateRef?: MutableRefObject<boolean>;
   isDraftRef?: MutableRefObject<boolean>;
+  hasModalBeenViewed?: boolean;
+  setHasModalBeenViewed: (state: boolean) => void;
 };
 
 const defaultProjectCreateContext = createContext<ContextType>({
@@ -25,14 +31,21 @@ const defaultProjectCreateContext = createContext<ContextType>({
   formRef: undefined,
   shouldNavigateRef: undefined,
   isDraftRef: undefined,
+  hasModalBeenViewed: false,
+  setHasModalBeenViewed: () => {},
 });
 
 export const ProjectCreate = (): JSX.Element => {
   // TODO: possibly replace these with `useMsgClient` and pass downstream
   const [deliverTxResponse, setDeliverTxResponse] =
     useState<DeliverTxResponse>();
+  const [projectsState] = useAtom<ProjectsDraftStatus>(projectsDraftState);
+  const { projectId } = useParams();
   const [creditClassId, setCreditClassId] = useState<string>('');
   const [creditClassOnChainId, setCreditClassOnChainId] = useState<string>('');
+  const [hasModalBeenViewed, setHasModalBeenViewed] = useState(
+    projectsState?.find(project => project.id === projectId)?.draft,
+  );
   const formRef = useRef();
   const shouldNavigateRef = useRef(true);
   const isDraftRef = useRef(false);
@@ -49,6 +62,8 @@ export const ProjectCreate = (): JSX.Element => {
         formRef,
         shouldNavigateRef,
         isDraftRef,
+        hasModalBeenViewed,
+        setHasModalBeenViewed,
       }}
     />
   );

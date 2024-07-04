@@ -75,11 +75,7 @@ export default function PostCard({
             pt: { xs: hasImageBlock ? 0 : 11, md: 0 },
           }}
         >
-          <Subtitle
-            className="group-hover:underline underline-offset-4"
-            size="lg"
-            mb={2.75}
-          >
+          <Subtitle className="group-hover:text-grey-500" size="lg" mb={2.75}>
             {title}
           </Subtitle>
           <UserInfo
@@ -169,7 +165,7 @@ export default function PostCard({
               {imgSrc && (
                 <>
                   <Image
-                    className="h-[100%] w-[100%] object-cover group-hover:w-[120%] group-hover:h-[120%]"
+                    className="h-[100%] w-[100%] object-cover group-hover:scale-x-105 group-hover:scale-y-105 transition-all duration-500"
                     src={imgSrc}
                     alt={''}
                     imageStorageBaseUrl={imageStorageBaseUrl}

@@ -287,7 +287,8 @@ function ProjectDetails(): JSX.Element {
   });
 
   const mediaData = parseMedia({
-    metadata: offChainProjectMetadata,
+    onChainProjectMetadata: projectMetadata,
+    offChainProjectMetadata,
     geojson,
     geocodingJurisdictionData,
   });

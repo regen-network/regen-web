@@ -143,6 +143,7 @@ export const normalizeProjectWithMetadata = ({
     href: projectId ? `/project/${projectId}` : undefined,
     imgSrc:
       projectPageMetadata?.['regen:previewPhoto']?.['schema:url'] ||
+      projectMetadata?.['regen:previewPhoto']?.['schema:url'] ||
       projectWithOrderData?.imgSrc ||
       creditClassImage,
     location: projectMetadata?.['schema:location'],

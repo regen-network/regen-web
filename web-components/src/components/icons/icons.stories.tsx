@@ -14,6 +14,7 @@ import AvatarIcon from './AvatarIcon';
 import AvatarOutlineIcon from './AvatarOutlineIcon';
 import BreadcrumbIcon from './BreadcrumbIcon';
 import { BrokenLinkIcon } from './BrokenLinkIcon';
+import { BubbleIcon } from './BubbleIcon';
 import CelebrateRegenIcon from './CelebrateRegenIcon';
 import CertifiedDocumentIcon from './CertifiedDocumentIcon';
 import CheckedIcon from './CheckedIcon';
@@ -204,6 +205,7 @@ export const allIcons = (): JSX.Element => (
     />
 
     <LabeledIcon icon={<BrokenLinkIcon />} label="BrokenLinkIcon" />
+    <LabeledIcon icon={<BubbleIcon />} label="BubbleIcon" />
     <LabeledIcon
       icon={<CelebrateRegenIcon sx={{ fontSize: 64 }} />}
       label="CelebrateRegenIcon"

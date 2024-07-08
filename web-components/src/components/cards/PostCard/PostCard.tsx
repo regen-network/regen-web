@@ -1,120 +1,104 @@
 import React from 'react';
-import { Box, Button, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
+import { defaultFontFamily } from '../../../theme/muiTheme';
 import VerifiedIcon from '../../icons/VerifiedIcon';
 import WhitepaperIcon from '../../icons/WhitepaperIcon';
 import { Image, OptimizeImageProps } from '../../image';
-import StaticMap from '../../map/StaticMap';
 import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import Card from '../Card';
-import NameWithRoleAndTimestamp from './PostCard.NameWithRoleAndTimestamp';
+import { SIGNED_BY } from './PostCard.constants';
 import PrivateBadge from './PostCard.PrivateBadge';
-import SignerName from './PostCard.SignerName';
-import usePostCardStyles from './PostCard.styles';
 import ActionButton from './PostCardActionButton';
 
 interface PostCardProps extends OptimizeImageProps {
   title: string;
   description: string;
-  imgSrc: string;
-  geojson?: any;
-  isGISFile?: Boolean;
-  mapboxToken?: string;
+  imgSrc?: string;
   author: User;
-  authorRole?: string;
-  signer?: User;
-  timestamp: string;
-  isPrivate?: boolean;
+  signers?: Array<User>;
+  privacyLabel?: string;
   isAdmin?: boolean;
   numberOfFiles?: number;
-  handleClickFile?: (ev: React.MouseEvent) => void;
-  adminMenuItems?: JSX.Element[];
   handleClickShare?: (ev: React.MouseEvent) => void;
+  onClick: () => void;
+  publicPost?: boolean;
 }
 
 export default function PostCard({
   title,
   description,
   imgSrc,
-  geojson,
-  isGISFile,
-  mapboxToken,
   imageStorageBaseUrl,
   apiServerUrl,
   author,
-  authorRole,
-  signer,
-  timestamp,
-  isPrivate,
+  signers,
+  privacyLabel,
   isAdmin,
   numberOfFiles,
-  handleClickFile,
-  adminMenuItems,
   handleClickShare,
+  onClick,
+  publicPost,
 }: PostCardProps): JSX.Element {
-  const { classes } = usePostCardStyles();
-
-  const authorWithNameRaw: User = {
-    ...author,
-    nameRaw: (
-      <NameWithRoleAndTimestamp
-        name={author.name}
-        authorRole={authorRole}
-        timestamp={timestamp}
-      />
-    ),
-  };
-
-  const signerWithNameRaw: User | undefined = signer && {
-    ...signer,
-    nameRaw: <SignerName name={signer.name} />,
-  };
-
-  const hasImageBlock = imgSrc || (geojson && isGISFile);
+  const hasImageBlock = !!imgSrc;
 
   return (
-    <Card className={classes.root} sx={{ p: [4, 8] }} borderRadius="10px">
+    <Card
+      className="group relative bg-grey-100 hover:bg-grey-200 cursor-default"
+      sx={{ p: { xs: 4, md: 8 } }}
+      borderRadius="10px"
+      onClick={onClick}
+    >
       <ActionButton
         isAdmin={isAdmin}
-        adminMenuItems={adminMenuItems}
-        onClick={handleClickShare}
+        onClickShare={handleClickShare}
+        publicPost={publicPost}
       />
-      {!hasImageBlock && isPrivate && (
-        <PrivateBadge
-          hasImageBlock={hasImageBlock}
-          // sx={theme => ({
-          //   top: hasImageBlock ? theme.spacing(3.5) : theme.spacing(7),
-          //   left: hasImageBlock ? theme.spacing(3) : undefined,
-          //   right: hasImageBlock ? undefined : theme.spacing(20),
-          // })}
-        />
+      {!hasImageBlock && privacyLabel && (
+        <PrivateBadge hasImageBlock={hasImageBlock} label={privacyLabel} />
       )}
       <Grid
         container
-        sx={{ flexWrap: ['wrap-reverse', 'nowrap'], position: 'relative' }}
+        sx={{
+          flexWrap: { xs: 'wrap-reverse', md: 'nowrap' },
+          position: 'relative',
+        }}
       >
         <Grid
           xs={12}
-          sm={hasImageBlock ? 7 : 12}
+          md={hasImageBlock ? 7 : 12}
           item
-          sx={{ pb: [4.5, 0], pr: [0, 2] }}
+          sx={{
+            pb: { xs: 4.5, md: 0 },
+            pr: { xs: 0, md: 2 },
+            pt: { xs: hasImageBlock ? 0 : 11, md: 0 },
+          }}
         >
-          <Subtitle size="xl" mb={2.75}>
+          <Subtitle className="group-hover:text-grey-500" size="lg" mb={2.75}>
             {title}
           </Subtitle>
           <UserInfo
             size="lg"
-            user={authorWithNameRaw}
-            sx={{ display: 'flex', alignItems: 'center' }}
+            fontFamily={defaultFontFamily}
+            user={author}
             nameHasPadding={false}
+            classNames={{
+              info: 'ml-10',
+              title: 'text-sm truncate max-w-[120px]',
+              timestamp: 'text-xs',
+            }}
           />
           <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
-            <Body size="lg" sx={{ pb: 1.5 }} className={classes.description}>
+            <Body
+              size="md"
+              sx={{ pb: 1.5 }}
+              className="line-clamp-2 overflow-hidden"
+            >
               {description}
             </Body>
           </Box>
-          {signerWithNameRaw && (
+          {signers && signers.length > 0 && (
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 3.5 }}>
               <VerifiedIcon color="white" hasFill />
               <Body
@@ -122,33 +106,42 @@ export default function PostCard({
                 mobileSize="xs"
                 sx={{
                   whiteSpace: 'nowrap',
-                  mx: 1,
+                  ml: 1,
                   fontStyle: 'italic',
                   fontWeight: 500,
                 }}
               >
-                Signed by
+                {SIGNED_BY}
               </Body>
-              <UserInfo
-                user={signerWithNameRaw}
-                size="xs"
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  ml: 1,
-                }}
-                nameHasPadding={false}
-              />
+              {signers.map((signer, i) => (
+                <UserInfo
+                  key={`${signer.timestamp}-${i}`}
+                  fontFamily={defaultFontFamily}
+                  user={signer}
+                  size="xs"
+                  classNames={{
+                    info: 'ml-3',
+                    title: 'text-xs font-semibold truncate max-w-[120px]',
+                  }}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    ml: 2,
+                    width: 'inherit',
+                  }}
+                  nameHasPadding={false}
+                />
+              ))}
             </Box>
           )}
         </Grid>
         {hasImageBlock && (
           <Grid
             xs={12}
-            sm={5}
+            md={5}
             item
             sx={{
-              mb: [5, 0],
+              mb: { xs: 5, md: 0 },
             }}
           >
             <Box
@@ -163,57 +156,43 @@ export default function PostCard({
                 position: 'relative',
               })}
             >
-              {hasImageBlock && isPrivate && (
-                <PrivateBadge hasImageBlock={hasImageBlock} />
+              {hasImageBlock && privacyLabel && (
+                <PrivateBadge
+                  hasImageBlock={hasImageBlock}
+                  label={privacyLabel}
+                />
               )}
-              {isPrivate && !isAdmin ? (
-                <Box sx={{ backgroundColor: 'black', height: '100%' }}>
-                  Post is Private
-                </Box>
-              ) : geojson && isGISFile ? (
-                <StaticMap geojson={geojson} mapboxToken={mapboxToken} />
-              ) : (
-                imgSrc && (
+              {imgSrc && (
+                <>
                   <Image
-                    className={classes.image}
+                    className="h-[100%] w-[100%] object-cover group-hover:scale-x-105 group-hover:scale-y-105 transition-all duration-500"
                     src={imgSrc}
-                    alt={imgSrc}
+                    alt={''}
                     imageStorageBaseUrl={imageStorageBaseUrl}
                     apiServerUrl={apiServerUrl}
                   />
-                )
+                  <div className="absolute top-0 w-[100%] h-[100%] bg-[linear-gradient(0deg,rgba(0,0,0,0.20)_5.23%,rgba(0,0,0,0.00)_31.4%)]" />
+                </>
               )}
               {numberOfFiles && (
                 <Box
                   sx={{
                     position: 'absolute',
-                    bottom: 0,
-                    right: 0,
-                    transform: 'translate(-50%, -25%)',
+                    bottom: theme => theme.spacing(3),
+                    right: theme => theme.spacing(3),
                     display: 'flex',
                     alignItems: 'center',
                     color: theme => theme.palette.primary.main,
-                    boxShadow: theme => theme.shadows[1],
                   }}
                 >
-                  <Button
-                    onClick={handleClickFile}
-                    sx={{
-                      p: [0, 0],
-                      border: 'none',
-                      justifyContent: 'end',
-                      minWidth: 0,
-                    }}
+                  <Subtitle
+                    size="sm"
+                    color="white"
+                    sx={{ boxShadow: theme => theme.shadows[1] }}
                   >
-                    <Subtitle
-                      size="sm"
-                      color="white"
-                      sx={{ boxShadow: theme => theme.shadows[1] }}
-                    >
-                      {numberOfFiles}
-                    </Subtitle>
-                    <WhitepaperIcon className={classes.fileIcon} />
-                  </Button>
+                    {numberOfFiles}
+                  </Subtitle>
+                  <WhitepaperIcon className="h-[24px] w-[24px] ml-[7px]" />
                 </Box>
               )}
             </Box>

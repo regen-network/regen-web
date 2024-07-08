@@ -3,6 +3,8 @@ import { Link, SxProps } from '@mui/material';
 import Grid, { GridDirection } from '@mui/material/Grid';
 
 import { headerFontFamily, Theme } from '../../theme/muiTheme';
+import { formatDate } from '../../utils/format';
+import { cn } from '../../utils/styles/cn';
 import { BlockContent, SanityBlockContent } from '../block-content';
 import { TextButton } from '../buttons/TextButton';
 import { Body, Subtitle, Title } from '../typography';
@@ -37,6 +39,8 @@ interface UserInfoProps {
   nameHasPadding?: boolean;
   classNames?: {
     info?: string;
+    title?: string;
+    timestamp?: string;
   };
 }
 export default function UserInfo({
@@ -58,10 +62,11 @@ export default function UserInfo({
     isValidElement(nameRaw) ? (
       nameRaw
     ) : (
-      <BlockContent content={nameRaw} />
+      <BlockContent className={classNames?.title} content={nameRaw} />
     )
   ) : (
     <TitleComponent
+      className={classNames?.title}
       sx={({ typography }) => {
         return {
           fontFamily,
@@ -77,7 +82,13 @@ export default function UserInfo({
   );
 
   return (
-    <Grid container direction={direction} wrap="nowrap" sx={sx}>
+    <Grid
+      container
+      direction={direction}
+      wrap="nowrap"
+      sx={sx}
+      alignItems="center"
+    >
       <Grid item>
         <UserAvatar
           alt={userName}
@@ -97,23 +108,28 @@ export default function UserInfo({
         }}
         className={classNames?.info}
       >
-        <div className="inline-flex items-center">
-          {user.link ? (
-            <Link sx={{ color: 'primary.contrastText' }} href={user.link}>
-              {name}
-            </Link>
-          ) : (
-            name
-          )}
+        <Grid container alignItems="center">
+          <Grid item>
+            {user.link ? (
+              <Link sx={{ color: 'primary.contrastText' }} href={user.link}>
+                {name}
+              </Link>
+            ) : (
+              name
+            )}
+          </Grid>
           {user.tag && (
-            <TextButton className="cursor-default ml-5 text-[10px] text-grey-500 bg-grey-300 rounded hover:text-grey-500 hover:bg-grey-300">
+            <TextButton className="cursor-default ml-5 text-[10px] text-grey-500 bg-grey-300 rounded hover:text-grey-500 hover:bg-grey-300 leading-[18px] min-w-fit px-3">
               {user.tag}
             </TextButton>
           )}
-        </div>
+        </Grid>
         {user.timestamp && (
-          <Body size="md" className="text-grey-400 pt-5">
-            {user.timestamp}
+          <Body
+            size="md"
+            className={cn('text-grey-400 pt-5', classNames?.timestamp)}
+          >
+            {formatDate(user.timestamp, 'MMMM D, YYYY | h:mm A')}
           </Body>
         )}
         {user.location && (

@@ -20,6 +20,7 @@ import { AccountByIdQuery } from 'generated/graphql';
 
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+import { Link } from 'components/atoms';
 
 import {
   ACTIONS,
@@ -38,6 +39,7 @@ type Props = {
   createdAt: string;
   creatorIsAdmin: boolean;
   privatePost?: boolean;
+  publicPost?: boolean;
   privateFiles?: boolean;
 };
 
@@ -48,6 +50,7 @@ export const PostHeader = ({
   creatorAccount,
   creatorIsAdmin,
   createdAt,
+  publicPost,
   privatePost,
   privateFiles,
 }: Props) => {
@@ -71,7 +74,8 @@ export const PostHeader = ({
         <TextButton
           className="flex"
           textSize="sm"
-          href={projectHref} // TODO add anchor to "Data Posts" section (APP-23)
+          LinkComponent={Link}
+          href={`${projectHref}#data-stream`}
         >
           <ArrowDownIcon
             className="h-[24px] w-[24px] text-brand-400"
@@ -133,6 +137,7 @@ export const PostHeader = ({
                   copyTextToClipboard(window.location.href);
                   setShareSuccessBanner(true);
                 }}
+                publicPost={publicPost}
               />
               {/* <SharePrivateMenuItem />
               <DeleteMenuItem /> */}

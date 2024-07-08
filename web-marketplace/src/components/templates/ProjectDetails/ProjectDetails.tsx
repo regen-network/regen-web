@@ -64,6 +64,7 @@ import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { useStakeholders } from './hooks/useStakeholders';
 import { ProjectDetailsBannerCard } from './ProjectDetails.BannerCard';
 import { JURISDICTION_REGEX } from './ProjectDetails.constant';
+import { DataStream } from './ProjectDetails.DataStream';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
 import { ProjectDetailsStakeholders } from './ProjectDetails.Stakeholders';
@@ -166,7 +167,8 @@ function ProjectDetails(): JSX.Element {
 
   const slug =
     offchainProjectByIdData?.data?.projectById?.slug ||
-    projectByOnChainId?.data?.projectByOnChainId?.slug;
+    projectByOnChainId?.data?.projectByOnChainId?.slug ||
+    projectBySlug?.data.projectBySlug?.slug;
   useEffect(() => {
     if (!!slug) {
       navigate(`/project/${slug}`, { replace: true });
@@ -485,6 +487,16 @@ function ProjectDetails(): JSX.Element {
           partners={partners}
         />
       </DetailsSection>
+
+      <DataStream
+        adminAccountId={offChainProject?.adminAccountId}
+        offChainProjectId={offChainProject?.id}
+        adminDescription={sanityProjectPage?.dataStreamAdminDescriptionRaw}
+        onChainProjectId={onChainProjectId}
+        projectName={projectMetadata?.['schema:name']}
+        projectSlug={slug}
+        projectLocation={projectMetadata?.['schema:location']}
+      />
 
       <ProjectDetailsTableTabs
         sortedDocuments={sortedDocuments}

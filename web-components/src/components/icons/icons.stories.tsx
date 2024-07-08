@@ -48,6 +48,7 @@ import ErrorIcon from './ErrorIcon';
 import EyeIcon from './EyeIcon';
 import FarmerIcon from './FarmerIcon';
 import FilterIcon from './FilterIcon';
+import USFlagIcon from './flags/USFlagIcon';
 import { GreenPinIcon } from './GreenPinIcon';
 import { HorizontalDotsIcon } from './HorizontalDotsIcon';
 import { ImageIcon } from './ImageIcon';
@@ -384,5 +385,6 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<YoutubeIcon color="red" />} label="YoutubeIcon" />
     <LabeledIcon icon={<ZoomIcon />} label="ZoomIcon" />
     <LabeledIcon icon={<WarningIcon />} label="WarningIcon" />
+    <LabeledIcon icon={<USFlagIcon />} label="USFlagIcon" />
   </Grid>
 );

@@ -126,7 +126,6 @@ function Post(): JSX.Element {
                   privatePost={privatePost}
                   publicPost={publicPost}
                   privateFiles={privateFiles}
-                  publicPost={publicPost}
                 />
 
                 {privacyType && files && files.length > 0 && (

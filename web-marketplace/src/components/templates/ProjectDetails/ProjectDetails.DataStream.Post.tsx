@@ -24,6 +24,7 @@ import { Post } from 'lib/queries/react-query/registry-server/getPostsQuery/getP
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
 import { useAttestEvents } from 'pages/Post/hooks/useAttestEvents';
+import { useSharePrivateLink } from 'pages/Post/hooks/useSharePrivateLink';
 import { ADMIN, POST_IS_PRIVATE } from 'pages/Post/Post.constants';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
@@ -53,8 +54,8 @@ export const DataStreamPost = ({
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const setBannerText = useSetAtom(bannerTextAtom);
   const navigate = useNavigate();
-
   const { iri, createdAt } = post;
+  const sharePrivateLink = useSharePrivateLink({ iri });
 
   const { data: creatorAccountData } = useQuery(
     getAccountByIdQuery({
@@ -128,6 +129,7 @@ export const DataStreamPost = ({
             imgSrc={firstImageUrl}
             numberOfFiles={post.contents.files?.length}
             signers={events.map(event => event.user)}
+            sharePrivateLink={sharePrivateLink}
           />
         )}
         {post.privacy === 'private' && !isAdmin && (

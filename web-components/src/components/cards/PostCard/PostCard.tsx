@@ -21,7 +21,8 @@ interface PostCardProps extends OptimizeImageProps {
   privacyLabel?: string;
   isAdmin?: boolean;
   numberOfFiles?: number;
-  handleClickShare?: (ev: React.MouseEvent) => void;
+  handleClickShare: (ev: React.MouseEvent) => void;
+  sharePrivateLink: (ev: React.MouseEvent) => void;
   onClick: () => void;
   publicPost?: boolean;
 }
@@ -38,6 +39,7 @@ export default function PostCard({
   isAdmin,
   numberOfFiles,
   handleClickShare,
+  sharePrivateLink,
   onClick,
   publicPost,
 }: PostCardProps): JSX.Element {
@@ -53,6 +55,7 @@ export default function PostCard({
       <ActionButton
         isAdmin={isAdmin}
         onClickShare={handleClickShare}
+        sharePrivateLink={sharePrivateLink}
         publicPost={publicPost}
       />
       {!hasImageBlock && privacyLabel && (

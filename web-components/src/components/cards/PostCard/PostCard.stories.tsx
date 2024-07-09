@@ -18,6 +18,7 @@ export const Public: Story = {
   },
   argTypes: {
     handleClickShare: { action: 'handle share click' },
+    sharePrivateLink: { action: 'share private link' },
   },
   render: args => <PostCard {...args} signers={signers} />,
 };
@@ -32,6 +33,7 @@ export const Private: Story = {
   },
   argTypes: {
     handleClickShare: { action: 'handle share click' },
+    sharePrivateLink: { action: 'share private link' },
   },
   render: args => <PostCard {...args} signers={signers} />,
 };
@@ -45,6 +47,7 @@ export const NoImage: Story = {
   },
   argTypes: {
     handleClickShare: { action: 'handle share click' },
+    sharePrivateLink: { action: 'share private link' },
   },
   render: args => <PostCard {...args} signers={signers} />,
 };

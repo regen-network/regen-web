@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   ListItemIcon,
   ListItemText,
@@ -8,7 +7,7 @@ import {
 
 import EditIcon from '../../icons/EditIcon';
 import ShareIcon from '../../icons/ShareIcon';
-import ShareUnlockIcon from '../../icons/ShareUnlockIcon';
+import { ShareUnlockIcon } from '../../icons/ShareUnlockIcon';
 import TrashIcon from '../../icons/TrashIcon';
 import { Body } from '../../typography';
 

@@ -96,3 +96,6 @@ from = "https://app.regen.network/ecocredits/accounts/*"
 to = "https://app.regen.network/profiles/:splat"
 force = true
 status = 302
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"

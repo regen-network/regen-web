@@ -1,10 +1,5 @@
 import { MutableRefObject, useEffect, useState } from 'react';
-import {
-  SubmitHandler,
-  useFieldArray,
-  useFormState,
-  useWatch,
-} from 'react-hook-form';
+import { SubmitHandler, useFieldArray, useWatch } from 'react-hook-form';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { MAPBOX_TOKEN } from 'config/globals';
 import { Feature, Point } from 'geojson';
@@ -87,7 +82,7 @@ export const PostForm = ({
   });
   const { classes } = useMediaFormStyles();
   const { classes: textAreaClasses } = useMetadataFormStyles();
-  const { errors, isValid } = form.formState;
+  const { errors, isValid, dirtyFields } = form.formState;
   const { setValue } = form;
 
   const imageDropCommonProps: Partial<FileDropProps> = {
@@ -188,10 +183,6 @@ export const PostForm = ({
       });
     }
   }, [append, fields, projectLocation]);
-
-  const { dirtyFields } = useFormState({
-    control: form.control,
-  });
 
   const isFormDirty = (
     Object.keys(dirtyFields) as Array<keyof PostFormSchemaType>

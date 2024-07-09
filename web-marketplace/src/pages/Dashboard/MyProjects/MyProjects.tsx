@@ -147,6 +147,12 @@ const MyProjects = (): JSX.Element => {
           offChainProjectId={postOffChainProjectId}
           projectName={postProjectName}
           projectSlug={postProjectSlug}
+          initialValues={{
+            title: '',
+            comment: '',
+            files: [],
+            privacyType: 'public',
+          }}
         />
       )}
     </>

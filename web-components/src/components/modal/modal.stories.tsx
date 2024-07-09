@@ -8,6 +8,7 @@ import { BasketTakeModal } from './BasketTakeModal';
 import { ConfirmModal } from './ConfirmModal';
 import CropImageModal from './CropImageModal';
 import { ProcessingModal } from './ProcessingModal';
+import { SaveChangesWarningModal } from './SaveChangesWarningModal/SaveChangesWarningModal';
 import { TxErrorModal } from './TxErrorModal';
 import { TxSuccessfulModal } from './TxSuccessfulModal';
 
@@ -204,5 +205,13 @@ export const basketTakeModal = (): JSX.Element => (
     mapboxToken={MAPBOX_TOKEN}
     onClose={() => null}
     onSubmit={() => alert('submit')}
+  />
+);
+
+export const saveChangesWarningModal = (): JSX.Element => (
+  <SaveChangesWarningModal
+    open={true}
+    onClose={() => null}
+    navigate={() => null}
   />
 );

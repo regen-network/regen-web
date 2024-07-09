@@ -59,6 +59,7 @@ export interface Props {
       }
     | undefined
   >;
+  onUpdateDirtyState?: (isDirty: boolean) => void;
 }
 
 export const PostForm = ({
@@ -70,6 +71,7 @@ export const PostForm = ({
   onSubmit,
   fileNamesToDeleteRef,
   handleUpload,
+  onUpdateDirtyState,
 }: Props): JSX.Element => {
   const form = useZodForm({
     schema: postFormSchema,
@@ -80,7 +82,7 @@ export const PostForm = ({
   });
   const { classes } = useMediaFormStyles();
   const { classes: textAreaClasses } = useMetadataFormStyles();
-  const { errors, isValid } = form.formState;
+  const { errors, isValid, dirtyFields } = form.formState;
   const { setValue } = form;
 
   const imageDropCommonProps: Partial<FileDropProps> = {
@@ -181,6 +183,20 @@ export const PostForm = ({
       });
     }
   }, [append, fields, projectLocation]);
+
+  const isFormDirty = (
+    Object.keys(dirtyFields) as Array<keyof PostFormSchemaType>
+  ).some(key =>
+    key === 'files'
+      ? dirtyFields.files && dirtyFields.files.length > 1
+      : dirtyFields[key] === true,
+  );
+
+  useEffect(() => {
+    if (onUpdateDirtyState) {
+      onUpdateDirtyState(isFormDirty);
+    }
+  }, [isFormDirty, onUpdateDirtyState]);
 
   return (
     <Form

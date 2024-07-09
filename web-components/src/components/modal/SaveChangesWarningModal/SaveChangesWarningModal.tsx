@@ -7,7 +7,7 @@ interface Props extends RegenModalProps {
   navigate: () => void;
 }
 
-export const WarningModal = ({ open, onClose, navigate }: Props) => {
+export const SaveChangesWarningModal = ({ open, onClose, navigate }: Props) => {
   return (
     <SadBeeModal open={open} onClose={onClose}>
       <Title variant="h4" align="center" sx={{ my: 5 }}>

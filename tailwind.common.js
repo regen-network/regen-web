@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ['"Lato"', '-apple-system', 'sans-serif'],
+      muli: ['"Muli"', '-apple-system', 'sans-serif'],
     },
     colors: {
       // Make sure these guidelines are followed when adding new colors: https://tailwindcss.com/docs/customizing-colors#using-css-variables

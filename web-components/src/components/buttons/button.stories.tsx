@@ -5,6 +5,7 @@ import { Flex } from '../box';
 import ContainedButton from './ContainedButton';
 import { CopyButton } from './CopyButton';
 import { EditButton } from './EditButton';
+import { EditButtonIcon } from './EditButtonIcon';
 import { ExpandButton } from './ExpandButton';
 import OutlinedButton from './OutlinedButton';
 import PrevNextButton from './PrevNextButton';
@@ -87,6 +88,8 @@ export const textButton = (): JSX.Element => (
 export const editButton = () => (
   <EditButton buttonText="Edit" onClick={() => {}} />
 );
+
+export const editButtonIcon = () => <EditButtonIcon onClick={() => {}} />;
 
 export const copyButton = {
   render: () => (

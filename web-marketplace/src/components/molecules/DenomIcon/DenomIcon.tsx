@@ -7,7 +7,7 @@ import {
   GRAVITY_USDC_DENOM,
   REGEN_DENOM,
   USD_CURRENCY_DENOM,
-} from 'config/allowedBaseDenoms';
+} from 'web-marketplace/src/config/allowedBaseDenoms';
 
 import AxlUsdcIcon from 'web-components/src/components/icons/coins/AxlUsdcIcon';
 import EeurIcon from 'web-components/src/components/icons/coins/EeurIcon';

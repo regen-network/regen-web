@@ -37,7 +37,7 @@ const ActionButton = ({
             onClickShare(event);
           }}
         >
-          <ShareIcon sx={{ height: '24px', width: '24px' }} color="primary" />
+          <ShareIcon className="w-[24px] h-[24px] text-brand-300" />
         </IconButton>
       )}
     </div>

@@ -29,7 +29,7 @@ export const SharePublicMenuItem = ({
 }: SharePublicMenuItemProps): JSX.Element => (
   <MenuItem {...props}>
     <ListItemIcon sx={{ height: '24px', width: '24px' }}>
-      <ShareIcon color="primary" />
+      <ShareIcon className="text-brand-300" />
     </ListItemIcon>
     <ListItemText>
       Share the public link

@@ -1,6 +1,5 @@
+import { CurrencyCode } from 'web-components/src/utils/currency';
 import { DenomIcon } from 'web-marketplace/src/components/molecules/DenomIcon/DenomIcon';
-
-import { CurrencyCode } from 'src/utils/currency';
 
 export function CurrencyFlag({ currency }: { currency: CurrencyCode }) {
   return (

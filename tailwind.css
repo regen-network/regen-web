@@ -86,4 +86,8 @@
     --purple-200: 128 142 171;
     --purple-100: 86 104 143;
   }
+
+  .bg-transparent {
+    background-color: transparent;
+  }
 }

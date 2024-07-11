@@ -180,9 +180,6 @@ export const DataStreamPost = ({
               copyTextToClipboard(`${window.location.origin}/post/${post.iri}`);
               setBannerText(COPY_SUCCESS);
             }}
-            imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
-            apiServerUrl={API_URI}
-            // imgSrc={fileToShowUrl}
             numberOfFiles={post.contents.files?.length}
             signers={events.map(event => event.user)}
             sharePrivateLink={sharePrivateLink}

@@ -177,7 +177,7 @@ export default function PostCard({
                   preview={preview}
                 />
               )}
-              {numberOfFiles && (
+              {numberOfFiles && numberOfFiles > 1 && (
                 <Box
                   sx={{
                     position: 'absolute',

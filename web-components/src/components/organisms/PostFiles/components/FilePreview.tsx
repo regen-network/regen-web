@@ -1,6 +1,7 @@
 import ReactPlayer from 'react-player/es6';
 import { Box } from '@mui/material';
 
+import { cn } from '../../../../utils/styles/cn';
 import { PlayButton } from '../../../atoms/PlayButton/PlayButton';
 import {
   isAudio,
@@ -18,9 +19,11 @@ import { getColors } from '../PostFiles.utils';
 import { PdfPreview } from './PdfPreview';
 import { TextOrIconFilePreview } from './TextOrIconFilePreview';
 
+export type FileToPreview = Pick<PostFile, 'mimeType' | 'url' | 'name'>;
 type Props = {
-  file: PostFile;
+  file: FileToPreview;
   className?: string;
+  linearGradientClassName?: string;
   pdfPageHeight: number;
   showName?: boolean;
   preview?: string;
@@ -29,6 +32,7 @@ type Props = {
 const FilePreview = ({
   file,
   className,
+  linearGradientClassName,
   pdfPageHeight,
   showName,
   preview,
@@ -56,7 +60,12 @@ const FilePreview = ({
         backgroundColor: image || video ? 'primary.contrastText' : undefined,
       })}
     >
-      <Box className="w-[100%] z-[1] h-[100%] absolute bg-[linear-gradient(180deg,rgba(0,0,0,0.00)_62.39%,rgba(0,0,0,0.70)_100%)]" />
+      <Box
+        className={cn(
+          'w-[100%] z-[1] h-[100%] absolute bg-[linear-gradient(180deg,rgba(0,0,0,0.00)_62.39%,rgba(0,0,0,0.70)_100%)]',
+          linearGradientClassName,
+        )}
+      />
       {video ? (
         <>
           <ReactPlayer url={url} width="100%" height="100%" />

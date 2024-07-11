@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ApolloClient,
@@ -14,7 +15,17 @@ import { useSetAtom } from 'jotai';
 import PostCard from 'web-components/src/components/cards/PostCard/PostCard';
 import { BubbleIcon } from 'web-components/src/components/icons/BubbleIcon';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
-import { isImage } from 'web-components/src/components/inputs/new/FileDrop/FileDrop.utils';
+import {
+  isCsv,
+  isDocx,
+  isImage,
+  isJson,
+  isPdf,
+  isVideo,
+  isXlsOrXlsx,
+} from 'web-components/src/components/inputs/new/FileDrop/FileDrop.utils';
+import { FileToPreview } from 'web-components/src/components/organisms/PostFiles/components/FilePreview';
+import { parseFile } from 'web-components/src/components/organisms/PostFiles/PostFiles.utils';
 import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.constants';
 import { Subtitle } from 'web-components/src/components/typography';
 import copyTextToClipboard from 'web-components/src/utils/copy';
@@ -75,15 +86,60 @@ export const DataStreamPost = ({
     onlyAttestEvents: true,
   });
 
-  const mimeTypes = post.filesMimeTypes;
-  let firstImageIri: string | undefined;
-  let firstImageUrl: string | undefined;
-  if (mimeTypes && post.filesUrls) {
-    firstImageIri = Object.keys(mimeTypes).find(key => isImage(mimeTypes[key]));
-    if (firstImageIri) {
-      firstImageUrl = post.filesUrls[firstImageIri];
+  useEffect(() => {
+    async function parseFileAndSetPreview() {
+      const mimeTypes = post.filesMimeTypes;
+      let firstFileWithPreviewIri: string | undefined;
+      let _file: FileToPreview | undefined;
+      const hasFiles = Object.keys(post.filesUrls || {}).length > 0;
+
+      if (mimeTypes && post.filesUrls && hasFiles) {
+        firstFileWithPreviewIri = Object.keys(mimeTypes).find(
+          key =>
+            // find first file with preview available
+            isImage(mimeTypes[key]) ||
+            isVideo(mimeTypes[key]) ||
+            isPdf(mimeTypes[key]) ||
+            isCsv(mimeTypes[key]) ||
+            isJson(mimeTypes[key]) ||
+            isDocx(mimeTypes[key]) ||
+            isXlsOrXlsx(mimeTypes[key]),
+        );
+        // show first file with preview available
+        if (firstFileWithPreviewIri) {
+          const previewFile = post.contents.files?.find(
+            file => file.iri === firstFileWithPreviewIri,
+          );
+          if (previewFile) {
+            _file = {
+              ...previewFile,
+              url: post.filesUrls[firstFileWithPreviewIri],
+              mimeType: mimeTypes[firstFileWithPreviewIri],
+            };
+            setFile(_file);
+          }
+        } else {
+          // or default to first file
+          _file = {
+            ...post.contents.files?.[0],
+            url: Object.values(post.filesUrls)?.[0],
+            mimeType: Object.values(mimeTypes)?.[0],
+          };
+          setFile(_file);
+        }
+      }
+      if (firstFileWithPreviewIri && _file) {
+        const _preview = await parseFile({
+          fileUrl: _file.url,
+          fileName: _file.name,
+          fileMimeType: _file.mimeType,
+        });
+        if (_preview) setPreview(_preview);
+      }
     }
-  }
+
+    parseFileAndSetPreview();
+  }, [post.contents.files, post.filesMimeTypes, post.filesUrls]);
 
   return (
     <TimelineItem>
@@ -126,10 +182,12 @@ export const DataStreamPost = ({
             }}
             imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
             apiServerUrl={API_URI}
-            imgSrc={firstImageUrl}
+            // imgSrc={fileToShowUrl}
             numberOfFiles={post.contents.files?.length}
             signers={events.map(event => event.user)}
             sharePrivateLink={sharePrivateLink}
+            file={file}
+            preview={preview}
           />
         )}
         {post.privacy === 'private' && !isAdmin && (

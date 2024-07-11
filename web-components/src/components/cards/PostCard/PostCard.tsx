@@ -1,10 +1,13 @@
 import React from 'react';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 
 import { defaultFontFamily } from '../../../theme/muiTheme';
 import VerifiedIcon from '../../icons/VerifiedIcon';
 import WhitepaperIcon from '../../icons/WhitepaperIcon';
-import { Image, OptimizeImageProps } from '../../image';
+import {
+  FilePreview,
+  FileToPreview,
+} from '../../organisms/PostFiles/components/FilePreview';
 import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import Card from '../Card';
@@ -12,7 +15,7 @@ import { SIGNED_BY } from './PostCard.constants';
 import PrivateBadge from './PostCard.PrivateBadge';
 import ActionButton from './PostCardActionButton';
 
-interface PostCardProps extends OptimizeImageProps {
+interface PostCardProps {
   title: string;
   description: string;
   imgSrc?: string;
@@ -25,14 +28,15 @@ interface PostCardProps extends OptimizeImageProps {
   sharePrivateLink: (ev: React.MouseEvent) => void;
   onClick: () => void;
   publicPost?: boolean;
+  file?: FileToPreview;
+  preview?: string;
 }
 
 export default function PostCard({
   title,
   description,
-  imgSrc,
-  imageStorageBaseUrl,
-  apiServerUrl,
+  file,
+  preview,
   author,
   signers,
   privacyLabel,
@@ -43,7 +47,9 @@ export default function PostCard({
   onClick,
   publicPost,
 }: PostCardProps): JSX.Element {
-  const hasImageBlock = !!imgSrc;
+  const hasFile = !!file;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <Card
@@ -58,8 +64,8 @@ export default function PostCard({
         sharePrivateLink={sharePrivateLink}
         publicPost={publicPost}
       />
-      {!hasImageBlock && privacyLabel && (
-        <PrivateBadge hasImageBlock={hasImageBlock} label={privacyLabel} />
+      {!hasFile && privacyLabel && (
+        <PrivateBadge hasFile={hasFile} label={privacyLabel} />
       )}
       <Grid
         container
@@ -70,12 +76,12 @@ export default function PostCard({
       >
         <Grid
           xs={12}
-          md={hasImageBlock ? 7 : 12}
+          md={hasFile ? 7 : 12}
           item
           sx={{
             pb: { xs: 4.5, md: 0 },
             pr: { xs: 0, md: 2 },
-            pt: { xs: hasImageBlock ? 0 : 11, md: 0 },
+            pt: { xs: hasFile ? 0 : 11, md: 0 },
           }}
         >
           <Subtitle className="group-hover:text-grey-500" size="lg" mb={2.75}>
@@ -138,7 +144,7 @@ export default function PostCard({
             </Box>
           )}
         </Grid>
-        {hasImageBlock && (
+        {hasFile && (
           <Grid
             xs={12}
             md={5}
@@ -159,23 +165,17 @@ export default function PostCard({
                 position: 'relative',
               })}
             >
-              {hasImageBlock && privacyLabel && (
-                <PrivateBadge
-                  hasImageBlock={hasImageBlock}
-                  label={privacyLabel}
-                />
+              {hasFile && privacyLabel && (
+                <PrivateBadge hasFile={hasFile} label={privacyLabel} />
               )}
-              {imgSrc && (
-                <>
-                  <Image
-                    className="h-[100%] w-[100%] object-cover group-hover:scale-x-105 group-hover:scale-y-105 transition-all duration-500"
-                    src={imgSrc}
-                    alt={''}
-                    imageStorageBaseUrl={imageStorageBaseUrl}
-                    apiServerUrl={apiServerUrl}
-                  />
-                  <div className="absolute top-0 w-[100%] h-[100%] bg-[linear-gradient(0deg,rgba(0,0,0,0.20)_5.23%,rgba(0,0,0,0.00)_31.4%)]" />
-                </>
+              {file && (
+                <FilePreview
+                  className="w-[100%] h-[100%] group-hover:scale-x-105 group-hover:scale-y-105 transition-all duration-500"
+                  linearGradientClassName="bg-[linear-gradient(0deg,rgba(0,0,0,0.20)_5.23%,rgba(0,0,0,0.00)_31.4%)]"
+                  file={file}
+                  pdfPageHeight={isMobile ? 197 : 204}
+                  preview={preview}
+                />
               )}
               {numberOfFiles && (
                 <Box
@@ -186,6 +186,7 @@ export default function PostCard({
                     display: 'flex',
                     alignItems: 'center',
                     color: theme => theme.palette.primary.main,
+                    zIndex: 1,
                   }}
                 >
                   <Subtitle

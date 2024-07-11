@@ -30,3 +30,9 @@ export const commonArgs = {
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   author: user,
 };
+
+export const file = {
+  url: '/coorong.png',
+  mimeType: 'image/png',
+  name: 'coorong',
+};

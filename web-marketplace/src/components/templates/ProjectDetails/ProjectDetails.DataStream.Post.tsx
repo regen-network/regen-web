@@ -93,7 +93,7 @@ export const DataStreamPost = ({
       let _file: FileToPreview | undefined;
       const hasFiles = Object.keys(post.filesUrls || {}).length > 0;
 
-      if (mimeTypes && post.filesUrls && hasFiles) {
+      if (mimeTypes && post.filesUrls && hasFiles && post.contents?.files) {
         firstFileWithPreviewIri = Object.keys(mimeTypes).find(
           key =>
             // find first file with preview available
@@ -107,7 +107,7 @@ export const DataStreamPost = ({
         );
         // show first file with preview available
         if (firstFileWithPreviewIri) {
-          const previewFile = post.contents.files?.find(
+          const previewFile = post.contents.files.find(
             file => file.iri === firstFileWithPreviewIri,
           );
           if (previewFile) {
@@ -121,7 +121,7 @@ export const DataStreamPost = ({
         } else {
           // or default to first file
           _file = {
-            ...post.contents.files?.[0],
+            ...post.contents.files[0],
             url: Object.values(post.filesUrls)?.[0],
             mimeType: Object.values(mimeTypes)?.[0],
           };
@@ -139,7 +139,7 @@ export const DataStreamPost = ({
     }
 
     parseFileAndSetPreview();
-  }, [post.contents.files, post.filesMimeTypes, post.filesUrls]);
+  }, [post.contents?.files, post.filesMimeTypes, post.filesUrls]);
 
   return (
     <TimelineItem>

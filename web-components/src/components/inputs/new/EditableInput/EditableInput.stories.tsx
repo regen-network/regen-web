@@ -1,0 +1,19 @@
+import { Meta, StoryObj } from '@storybook/react';
+
+import { EditableInput } from './EditableInput';
+
+export default {
+  title: 'EditableInput',
+  component: EditableInput,
+} as Meta<typeof EditableInput>;
+
+type Story = StoryObj<typeof EditableInput>;
+
+export const Default: Story = {
+  render: args => <EditableInput {...args} />,
+};
+
+Default.args = {
+  value: 5,
+  onChange: () => {},
+};

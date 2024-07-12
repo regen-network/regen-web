@@ -1,6 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/dom';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import { OrderSummaryCard } from './OrderSummaryCard';
 import { OrderSummaryProps } from './OrderSummaryCard.types';
@@ -22,26 +23,50 @@ describe('OrderSummaryCard', () => {
   };
 
   it('displays the project name', () => {
-    const { getByText } = render(<OrderSummaryCard {...orderSummary} />);
-    const projectName = getByText('Project Name');
+    render(<OrderSummaryCard {...orderSummary} />);
+    const projectName = screen.getByText('Project Name');
     expect(projectName).toBeInTheDocument();
   });
 
   it('displays the price per credit', () => {
-    const { getByText } = render(<OrderSummaryCard {...orderSummary} />);
-    const pricePerCredit = getByText('10.00');
+    render(<OrderSummaryCard {...orderSummary} />);
+    const pricePerCredit = screen.getByText(/10.00/i);
     expect(pricePerCredit).toBeInTheDocument();
   });
 
   it('displays the number of credits', () => {
-    const { getByText } = render(<OrderSummaryCard {...orderSummary} />);
-    const numberOfCredits = getByText('5');
+    render(<OrderSummaryCard {...orderSummary} />);
+
+    const numberOfCredits = screen.getByText('5');
     expect(numberOfCredits).toBeInTheDocument();
   });
 
+  it('updates the number of credits and total price accordingly', () => {
+    render(<OrderSummaryCard {...orderSummary} />);
+
+    const editButton = screen.getByRole('button', {
+      name: 'Edit',
+    });
+    fireEvent.click(editButton);
+    const editInput = screen.getByRole('textbox', {
+      name: 'editable-credits',
+    });
+    fireEvent.change(editInput, { target: { value: 7 } });
+
+    const updateButton = screen.getByRole('button', {
+      name: 'update',
+    });
+    fireEvent.click(updateButton);
+    const updatedNumberOfCredits = screen.getByText('7');
+    expect(updatedNumberOfCredits).toBeInTheDocument();
+
+    const pricePerCredit = screen.getByText(/70.00/i);
+    expect(pricePerCredit).toBeInTheDocument();
+  });
+
   it('displays the total price', () => {
-    const { getByText } = render(<OrderSummaryCard {...orderSummary} />);
-    const totalPrice = getByText('50.00');
+    render(<OrderSummaryCard {...orderSummary} />);
+    const totalPrice = screen.getByText(/50.00/i);
     expect(totalPrice).toBeInTheDocument();
   });
 

@@ -5,7 +5,7 @@
     "declaration": true,
     "jsx": "react-jsx",
     "noEmitOnError": true,
-    "types": ["node", "jest", "vite/client"],
+    "types": ["node", "vite/client", "vitest/globals"],
     "typeRoots": [
       "./node_modules/@types/",
       "./types",

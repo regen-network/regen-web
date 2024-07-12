@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { EditableInput } from './EditableInput';
 
 export default {
-  title: 'EditableInput',
+  title: 'Inputs/EditableInput',
   component: EditableInput,
 } as Meta<typeof EditableInput>;
 

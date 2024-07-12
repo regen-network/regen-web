@@ -16,6 +16,7 @@ export function EditButtonIcon({
       onClick={onClick}
       className={`bg-transparent border-none hover:cursor-pointer hover:opacity-80 ${className}`}
       aria-label={ariaLabel}
+      title={ariaLabel}
     >
       <EditIcon
         sx={{

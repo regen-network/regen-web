@@ -3,6 +3,7 @@
   "version": "2.6.5",
   "private": true,
   "main": "build/index.js",
+  "type": "module",
   "scripts": {
     "remove-previous-files": "shx rm -rf ./lib/* ./tsconfig.tsbuildinfo",
     "copy-assets": "cp ./src/theme/fonts.css ./lib/theme/fonts.css && cp -R ./src/theme/assets ./lib/theme/",

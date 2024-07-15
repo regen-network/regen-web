@@ -1,5 +1,5 @@
 import React from 'react';
-import { SvgIcon, SxProps, useTheme } from '@mui/material';
+import { SvgIcon, SxProps } from '@mui/material';
 
 import { Theme } from '../../theme/muiTheme';
 
@@ -10,8 +10,7 @@ export const HorizontalDotsIcon: React.FC<
     sx?: SxProps<Theme>;
   }>
 > = ({ className, color, sx, ...props }) => {
-  const theme = useTheme();
-  color = color || theme.palette.secondary.main;
+  color = color || 'currentColor';
 
   return (
     <SvgIcon

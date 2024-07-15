@@ -31,7 +31,7 @@ const TableActionButtons: React.FC<
         aria-controls="table-menu-buttons"
         sx={sx}
       >
-        <HorizontalDotsIcon />
+        <HorizontalDotsIcon className="text-brand-400" />
       </OutlinedButton>
       <Menu
         id="table-menu-buttons"

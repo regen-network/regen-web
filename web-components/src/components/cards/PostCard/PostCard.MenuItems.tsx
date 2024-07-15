@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   ListItemIcon,
   ListItemText,
@@ -8,7 +7,7 @@ import {
 
 import EditIcon from '../../icons/EditIcon';
 import ShareIcon from '../../icons/ShareIcon';
-import ShareUnlockIcon from '../../icons/ShareUnlockIcon';
+import { ShareUnlockIcon } from '../../icons/ShareUnlockIcon';
 import TrashIcon from '../../icons/TrashIcon';
 import { Body } from '../../typography';
 
@@ -28,9 +27,9 @@ export const SharePublicMenuItem = ({
   publicPost,
   ...props
 }: SharePublicMenuItemProps): JSX.Element => (
-  <MenuItem key="2" {...props}>
+  <MenuItem {...props}>
     <ListItemIcon sx={{ height: '24px', width: '24px' }}>
-      <ShareIcon color="primary" />
+      <ShareIcon className="text-brand-300" />
     </ListItemIcon>
     <ListItemText>
       Share the public link

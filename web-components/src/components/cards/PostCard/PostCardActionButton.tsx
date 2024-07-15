@@ -1,96 +1,46 @@
-import React, { useRef, useState } from 'react';
-import { IconButton, Menu } from '@mui/material';
+import React from 'react';
+import { IconButton } from '@mui/material';
 
-import { HorizontalDotsIcon } from '../../icons/HorizontalDotsIcon';
+import { PostAdminButton } from '../../buttons/PostAdminButton/PostAdminButton';
 import ShareIcon from '../../icons/ShareIcon';
-import { SharePublicMenuItem } from './PostCard.MenuItems';
 
 const ActionButton = ({
   publicPost,
   isAdmin,
   onClickShare,
+  sharePrivateLink,
 }: {
   publicPost?: boolean;
   isAdmin?: boolean;
-  onClickShare?: (ev: React.MouseEvent) => void;
+  onClickShare: (ev: React.MouseEvent) => void;
+  sharePrivateLink: (ev: React.MouseEvent) => void;
 }): JSX.Element => {
-  const menuAnchor = useRef<HTMLButtonElement | null>(null);
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const isOpen = Boolean(anchorEl);
-  const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    setAnchorEl(null);
-  };
-
   return (
-    <React.Fragment>
-      <IconButton
-        sx={theme => ({
-          position: 'absolute',
-          top: { xs: theme.spacing(1.25), md: theme.spacing(3.75) },
-          right: { xs: theme.spacing(1.25), md: theme.spacing(3) },
-          zIndex: 1,
-          borderRadius: theme.spacing(7),
-          backgroundColor: isAdmin ? 'rgba(0, 0, 0, 0.8)' : 'white',
-          boxShadow: theme.shadows[1],
-          height: '44px',
-          width: '44px',
-          '&:hover': {
-            backgroundColor: 'rgba(0, 0, 0, 0.6)',
-          },
-        })}
-        ref={menuAnchor}
-        onClick={event => {
-          event.stopPropagation();
-          if (isAdmin) handleOpen(event);
-          else if (onClickShare) onClickShare(event);
-        }}
-      >
-        {isAdmin ? (
-          <HorizontalDotsIcon
-            sx={{
-              height: '32px',
-              width: '32px',
-              m: theme => theme.spacing(-1),
-            }}
-            color="white"
-          />
-        ) : (
-          <ShareIcon sx={{ height: '24px', width: '24px' }} color="primary" />
-        )}
-      </IconButton>
-      {isAdmin && (
-        <Menu
-          open={isOpen}
-          onClose={handleClose}
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
+    <div className="z-[1] absolute top-5 right-5 lg:top-[15px] lg:right-[12px] cursor-pointer">
+      {isAdmin ? (
+        <PostAdminButton
+          publicPost={publicPost}
+          sharePublicLink={event => {
+            event.stopPropagation();
+            onClickShare(event);
           }}
-          disableScrollLock={true}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
+          sharePrivateLink={event => {
+            event.stopPropagation();
+            sharePrivateLink(event);
+          }}
+        />
+      ) : (
+        <IconButton
+          className="bg-grey-0 w-[44px] h-[44px] rounded-[50%]"
+          onClick={event => {
+            event.stopPropagation();
+            onClickShare(event);
           }}
         >
-          {/* <EditMenuItem /> */}
-          <SharePublicMenuItem
-            classes={{ root: 'px-[25px]' }}
-            onClick={event => {
-              event.stopPropagation();
-              if (onClickShare) onClickShare(event);
-            }}
-            publicPost={publicPost}
-          />
-          {/* <SharePrivateMenuItem />
-              <DeleteMenuItem /> */}
-        </Menu>
+          <ShareIcon className="w-[24px] h-[24px] text-brand-300" />
+        </IconButton>
       )}
-    </React.Fragment>
+    </div>
   );
 };
 

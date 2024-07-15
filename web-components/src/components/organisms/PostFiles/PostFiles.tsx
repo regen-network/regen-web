@@ -20,6 +20,7 @@ export type PostFilesProps = {
   files: Array<PostFile>;
   mapboxToken?: string;
   isAdmin: boolean;
+  hasToken?: boolean;
 };
 
 const PostFiles = ({
@@ -27,6 +28,7 @@ const PostFiles = ({
   files,
   mapboxToken,
   isAdmin = false,
+  hasToken = false,
 }: PostFilesProps) => {
   const isPublic = privacyType === 'public';
   const privateLocations = privacyType === 'private_locations';
@@ -39,7 +41,7 @@ const PostFiles = ({
         (isPublic || privateLocations || isAdmin) && 'lg:h-[550px]',
       )}
     >
-      {(isPublic || isAdmin) && (
+      {(isPublic || isAdmin || hasToken) && (
         <PostFilesPublic
           files={files}
           mapboxToken={mapboxToken}
@@ -48,10 +50,10 @@ const PostFiles = ({
           privateFiles={privateFiles}
         />
       )}
-      {!isAdmin && privateLocations && (
+      {!isAdmin && !hasToken && privateLocations && (
         <PostFilesPrivateLocations files={files} />
       )}
-      {!isAdmin && privateFiles && <PostFilesPrivateFiles />}
+      {!isAdmin && !hasToken && privateFiles && <PostFilesPrivateFiles />}
     </div>
   );
 };

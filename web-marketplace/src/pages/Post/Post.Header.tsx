@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { Menu } from '@mui/material';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Banner from 'web-components/src/components/banner';
+import { PostAdminButton } from 'web-components/src/components/buttons/PostAdminButton/PostAdminButton';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
-import { SharePublicMenuItem } from 'web-components/src/components/cards/PostCard/PostCard.MenuItems';
 import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
 import ShareIcon from 'web-components/src/components/icons/ShareIcon';
-import { SmallDotsIcon } from 'web-components/src/components/icons/SmallDotsIcon';
 import { Tag } from 'web-components/src/components/organisms/PostFiles/components/Tag';
 import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.constants';
 import Section from 'web-components/src/components/section';
@@ -22,6 +21,7 @@ import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { Link } from 'components/atoms';
 
+import { useSharePrivateLink } from './hooks/useSharePrivateLink';
 import {
   ACTIONS,
   ADMIN,
@@ -54,15 +54,9 @@ export const PostHeader = ({
   privatePost,
   privateFiles,
 }: Props) => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const { iri } = useParams();
   const [shareSuccessBanner, setShareSuccessBanner] = useState(false);
+  const sharePrivateLink = useSharePrivateLink({ iri });
 
   return (
     <Section
@@ -94,54 +88,19 @@ export const PostHeader = ({
               />
             )}
             <TextButton
-              className="text-grey-500 hover:text-grey-500 mr-10 cursor-default"
+              className="text-grey-500 hover:text-grey-500 mr-10"
               textSize="xs"
             >
               {ACTIONS}
             </TextButton>
-            <div
-              id="actions-button"
-              aria-controls={open ? 'actions-menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
-              onClick={handleClick}
-              className="flex w-[44px] h-[44px] rounded-[50%] bg-grey-200"
-            >
-              <SmallDotsIcon />
-            </div>
-            <Menu
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
+            <PostAdminButton
+              publicPost={publicPost}
+              sharePublicLink={() => {
+                copyTextToClipboard(window.location.href);
+                setShareSuccessBanner(true);
               }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              id="actions-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'actions-button',
-              }}
-              classes={{
-                paper:
-                  'rounded-sm py-10 border border-solid border-grey-300 shadow-[0_0_4px_0_rgba(0,0,0,0.05)]',
-              }}
-            >
-              {/* <EditMenuItem /> */}
-              <SharePublicMenuItem
-                classes={{ root: 'px-[25px]' }}
-                onClick={() => {
-                  copyTextToClipboard(window.location.href);
-                  setShareSuccessBanner(true);
-                }}
-                publicPost={publicPost}
-              />
-              {/* <SharePrivateMenuItem />
-              <DeleteMenuItem /> */}
-            </Menu>
+              sharePrivateLink={sharePrivateLink}
+            />
           </div>
         ) : (
           <div className="flex">

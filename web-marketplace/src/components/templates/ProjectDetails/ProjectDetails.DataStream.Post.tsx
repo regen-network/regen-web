@@ -40,7 +40,6 @@ import { ADMIN, POST_IS_PRIVATE } from 'pages/Post/Post.constants';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
-import { API_URI, IMAGE_STORAGE_BASE_URL } from './ProjectDetails.config';
 import {
   FILES_ARE_PRIVATE,
   LOCATIONS_ARE_PRIVATE,
@@ -65,6 +64,8 @@ export const DataStreamPost = ({
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const setBannerText = useSetAtom(bannerTextAtom);
   const navigate = useNavigate();
+  const [preview, setPreview] = useState<string | undefined>();
+  const [file, setFile] = useState<FileToPreview | undefined>();
   const { iri, createdAt } = post;
   const sharePrivateLink = useSharePrivateLink({ iri });
 

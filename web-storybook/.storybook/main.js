@@ -74,6 +74,12 @@ module.exports = {
         }),
       ],
       optimizeDeps: {
+        // https://github.com/mui/material-ui/issues/32727#issuecomment-1697253782
+        include: [
+          '@mui/material/Tooltip',
+          '@emotion/styled',
+          '@mui/material/Unstable_Grid2',
+        ],
         esbuildOptions: {
           plugins:
             configType === 'DEVELOPMENT'

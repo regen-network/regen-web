@@ -7,6 +7,7 @@ import {
   GRAVITY_USDC_DENOM,
   REGEN_DENOM,
   USD_CURRENCY_DENOM,
+  USDC_CURRENCY_DENOM,
 } from 'web-marketplace/src/config/allowedBaseDenoms';
 
 import AxlUsdcIcon from 'web-components/src/components/icons/coins/AxlUsdcIcon';
@@ -46,8 +47,14 @@ const DenomIcon = ({
       {baseDenom === EVMOS_DENOM && (
         <EvmosIcon sx={iconSx} className={className} />
       )}
+      {/* TO-DO clarify whether these below are denoms or we should 
+          create a separate collection of icons for them */}
       {baseDenom === USD_CURRENCY_DENOM && (
         <USFlagIcon sx={iconSx} className={className} />
+      )}
+      {/* If this one belongs here merge with GRAVITY_USDC_DENOM above */}
+      {baseDenom === USDC_CURRENCY_DENOM && (
+        <GravUsdcIcon sx={iconSx} className={className} />
       )}
     </Box>
   );

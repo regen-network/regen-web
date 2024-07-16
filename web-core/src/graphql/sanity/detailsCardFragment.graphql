@@ -1,0 +1,15 @@
+fragment detailsCardFields on DetailsCard {
+  credibilityCard {
+    title
+    descriptionRaw
+    icon {
+      asset {
+        altText
+        url
+      }
+    }
+  }
+  claims {
+    description
+  }
+}

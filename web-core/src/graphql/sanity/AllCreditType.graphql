@@ -1,0 +1,19 @@
+query allCreditType {
+  allCreditType {
+    name
+    largeImage {
+      ...imageFields
+    }
+    unit
+    unitDefinitionRaw
+    category {
+      name
+      icon {
+        ...imageFields
+      }
+      largeImage {
+        ...imageFields
+      }
+    }
+  }
+}

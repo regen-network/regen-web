@@ -1,0 +1,10 @@
+fragment mediaFields on Media {
+  title
+  author
+  date
+  image {
+    ...customImageFields
+  }
+  href
+  type
+}

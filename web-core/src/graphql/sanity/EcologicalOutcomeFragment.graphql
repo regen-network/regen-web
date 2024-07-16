@@ -1,0 +1,7 @@
+fragment ecologicalOutcomeFields on EcologicalOutcome {
+  title
+  descriptionRaw
+  image {
+    ...customImageFields
+  }
+}

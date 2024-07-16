@@ -1,0 +1,2 @@
+export const DEFAULT_COMMUNITY_PROJECTS_FILTER =
+  import.meta.env.VITE_DEFAULT_COMMUNITY_PROJECTS_FILTER === 'true';

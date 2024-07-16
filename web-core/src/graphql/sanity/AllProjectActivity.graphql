@@ -1,0 +1,8 @@
+query allProjectActivity {
+  allProjectActivity {
+    name
+    icon {
+      ...imageFields
+    }
+  }
+}

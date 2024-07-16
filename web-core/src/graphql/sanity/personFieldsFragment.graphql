@@ -1,0 +1,4 @@
+fragment personFields on Person {
+  name
+  role
+}

@@ -7,6 +7,9 @@
     "web-components",
     "web-storybook",
     "web-auth",
+    "web-core",
+    "web-shared-marketplace",
+    "web-clients",
     "web-www"
   ]
 }

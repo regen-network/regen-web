@@ -1,0 +1,11 @@
+query allProjectsPage {
+  allProjectsPage {
+    gettingStartedResourcesSection {
+      ...gettingStartedResourcesSectionFields
+    }
+    prefinanceProjects {
+      descriptionRaw
+      learnMore
+    }
+  }
+}

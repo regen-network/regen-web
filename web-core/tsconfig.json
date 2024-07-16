@@ -1,0 +1,38 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": true,
+    "jsx": "react-jsx",
+    "noEmitOnError": true,
+    "types": ["node", "jest", "vite/client"],
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./types",
+      "./node_modules",
+      "../node_modules/@types/",
+      "../node_modules"
+    ],
+    "outDir": "build",
+    "rootDir": "src",
+    "module": "esnext",
+    "moduleResolution": "Node",
+    "skipLibCheck": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "target": "es6",
+    "paths": {
+      "config/*": ["./src/config/*"],
+      "lib/*": ["./src/lib/*"],
+      "types/*": ["./src/types/*"],
+      "generated/*": ["./src/generated/*"],
+      "constants/*": ["./src/constants/*"],
+      "hooks/*": ["src/lib/hooks/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["**/*.test.*", "node_modules"]
+}

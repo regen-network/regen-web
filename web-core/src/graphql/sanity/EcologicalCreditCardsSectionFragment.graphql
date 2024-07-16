@@ -1,0 +1,7 @@
+fragment ecologicalCreditCardsSectionFields on EcologicalCreditCardsSection {
+  title
+  descriptionRaw
+  cards {
+    ...ecologicalCreditCardFields
+  }
+}

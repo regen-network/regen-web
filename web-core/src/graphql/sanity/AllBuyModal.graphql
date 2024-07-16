@@ -1,0 +1,11 @@
+query allBuyModal {
+  allBuyModal {
+    infoCard {
+      title
+      descriptionRaw
+      image {
+        ...customImageFields
+      }
+    }
+  }
+}

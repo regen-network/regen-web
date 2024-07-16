@@ -1,0 +1,51 @@
+fragment ecologicalCreditCardFields on EcologicalCreditCard {
+  title
+  description
+  image {
+    imageHref
+    imageAlt
+    image {
+      asset {
+        url
+      }
+    }
+  }
+  creditCategory {
+    name
+    icon {
+      asset {
+        url
+      }
+    }
+  }
+  creditClass {
+    path
+  }
+  creditInfos {
+    country
+    price
+    count
+  }
+  offsetMethods {
+    name
+    icon {
+      asset {
+        url
+      }
+    }
+  }
+  projectActivities {
+    name
+    icon {
+      asset {
+        url
+      }
+    }
+  }
+  button {
+    buttonText
+    buttonLink {
+      buttonHref
+    }
+  }
+}

@@ -1,0 +1,43 @@
+query allCreateCreditClassPage {
+  allCreateCreditClassPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    stepCardSection {
+      title
+      descriptionRaw
+      stepCards {
+        ...stepCardFields
+      }
+    }
+    creditTypeSection {
+      title
+      subtitleTop
+      descriptionTopRaw
+      subtitleBottom
+      descriptionBottomRaw
+      institutionalCards {
+        ...cardFields
+      }
+      flexCreditCards {
+        ...cardFields
+      }
+    }
+    outcomeSection {
+      ...heroSectionFields
+    }
+    outcomes {
+      ...ecologicalOutcomeFields
+    }
+    resources {
+      ...resourceFields
+    }
+    bottomBanner {
+      ...bottomBannerFields
+    }
+    footerLink
+    metadata {
+      ...pageMetadataFields
+    }
+  }
+}

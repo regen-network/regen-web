@@ -1,0 +1,9 @@
+fragment landManagementPracticeFields on LandManagementPractice {
+  title
+  descriptionRaw
+  icon {
+    asset {
+      url
+    }
+  }
+}

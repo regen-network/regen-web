@@ -1,0 +1,16 @@
+fragment ecologicalImpactRelationFields on EcologicalImpactRelation {
+  primary
+  ecologicalImpact {
+    name
+    descriptionRaw
+    image {
+      ...customImageFields
+    }
+    sdgs {
+      title
+      image {
+        ...customImageFields
+      }
+    }
+  }
+}

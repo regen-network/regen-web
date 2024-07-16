@@ -1,0 +1,43 @@
+query ProjectById($id: String!) {
+  allProject(where: { projectId: { eq: $id } }) {
+    credibilityCards {
+      ...detailsCardFields
+    }
+    projectPrefinancing {
+      isPrefinanceProject
+      price
+      estimatedIssuance
+      stripePaymentLink
+      prefinanceTermsRaw
+      purchaseAgreementLink
+      projectedCreditDeliveryDate
+      projectTimeline {
+        status {
+          description
+          icon {
+            ...customImageFields
+          }
+        }
+        prefinanceTimelineItem {
+          date
+          endDate
+          currentStatus
+        }
+      }
+      classTimeline {
+        status {
+          description
+          icon {
+            ...customImageFields
+          }
+        }
+        prefinanceTimelineItem {
+          date
+          endDate
+          currentStatus
+        }
+      }
+      supportEnables
+    }
+  }
+}

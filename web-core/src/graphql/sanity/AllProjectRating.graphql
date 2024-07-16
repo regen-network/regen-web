@@ -1,0 +1,8 @@
+query allProjectRating {
+  allProjectRating {
+    name
+    icon {
+      ...imageFields
+    }
+  }
+}

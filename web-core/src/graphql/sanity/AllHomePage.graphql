@@ -1,0 +1,37 @@
+query allHomePage {
+  allHomePage {
+    seo {
+      ...seoFields
+    }
+    heroSection {
+      title
+      bodyRaw
+      button {
+        ...buttonFields
+      }
+      background {
+        ...customImageFields
+      }
+      icon {
+        ...customImageFields
+      }
+    }
+    gettingStartedResourcesSection {
+      ...gettingStartedResourcesSectionFields
+    }
+    projectsSection {
+      titleCustomBody {
+        ...titleCustomBodyFields
+      }
+      projects {
+        projectId
+      }
+    }
+    creditClassesSection {
+      ...titleCustomBodyFields
+    }
+    bottomBanner {
+      ...bottomBannerFields
+    }
+  }
+}

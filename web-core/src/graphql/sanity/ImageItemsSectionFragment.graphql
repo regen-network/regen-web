@@ -1,0 +1,7 @@
+fragment imageItemsSectionFields on ImageItemsSection {
+  title
+  description
+  imageCards {
+    ...cardFields
+  }
+}

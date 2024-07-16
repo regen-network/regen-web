@@ -11,15 +11,18 @@
     "url": "https://github.com/regen-network/regen-web"
   },
   "workspaces": [
+    "web-shared-marketplace",
     "web-marketplace",
     "web-components",
     "web-storybook",
     "web-auth",
+    "web-core",
     "web-www"
   ],
   "scripts": {
     "build": "bun run --cwd web-marketplace build",
     "build-www": "bun run --cwd web-www build",
+    "build-shared-marketplace": "bun run --cwd web-shared-marketplace build",
     "build-components": "bun run --cwd web-components build",
     "build-storybook": "bun run --cwd web-storybook build-storybook",
     "build-auth": "bun run --cwd web-auth build",

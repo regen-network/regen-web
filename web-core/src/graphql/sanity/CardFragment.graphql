@@ -1,0 +1,9 @@
+fragment cardFields on Card {
+  title
+  descriptionRaw
+  icon {
+    asset {
+      url
+    }
+  }
+}

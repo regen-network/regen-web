@@ -1,0 +1,50 @@
+query allLandStewardsPage {
+  allLandStewardsPage {
+    heroSection {
+      ...heroSectionFields
+    }
+    designedForFarmersSection {
+      title
+      imageCards {
+        ...cardFields
+      }
+    }
+    joinFarmersSection {
+      title
+      left {
+        ...imageBoldTextLabelFields
+      }
+      right {
+        ...imageBoldTextLabelFields
+      }
+    }
+    practicesOutcomesSection {
+      title
+      note
+      practices {
+        ...landManagementPracticeFields
+      }
+      outcomes {
+        ...ecologicalOutcomeFields
+      }
+    }
+    timelineSection {
+      header
+      timelineItems {
+        ...timelineItemFields
+      }
+    }
+    featuredSection {
+      ...featuredSectionFields
+    }
+    moreQuestionsSection {
+      ...bottomBannerFields
+    }
+    footerButton {
+      ...buttonFields
+    }
+    metadata {
+      ...pageMetadataFields
+    }
+  }
+}

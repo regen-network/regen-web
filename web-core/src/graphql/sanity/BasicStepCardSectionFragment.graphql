@@ -1,0 +1,6 @@
+fragment basicStepCardSectionFields on BasicStepCardSection {
+  title
+  stepCards {
+    ...stepCardFields
+  }
+}

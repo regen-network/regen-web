@@ -1,0 +1,28 @@
+query allMethodology {
+  allMethodology {
+    path
+    nameRaw
+    descriptionRaw
+    steps {
+      ...basicStepCardSectionFields
+    }
+    documentation {
+      title
+      button {
+        ...buttonFields
+      }
+      image {
+        ...customImageFields
+      }
+    }
+    ecologicalImpact {
+      ...ecologicalImpactRelationFields
+    }
+    resources {
+      ...resourceFields
+    }
+    bottomSection {
+      ...heroSectionFields
+    }
+  }
+}

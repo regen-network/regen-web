@@ -1,0 +1,12 @@
+fragment resourceFields on Resource {
+  _updatedAt
+  titleRaw
+  descriptionRaw
+  image {
+    ...customImageFields
+  }
+  button {
+    ...buttonFields
+  }
+  lastUpdated
+}

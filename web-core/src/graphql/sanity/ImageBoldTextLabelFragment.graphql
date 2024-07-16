@@ -1,0 +1,7 @@
+fragment imageBoldTextLabelFields on ImageBoldTextLabel {
+  boldText
+  label
+  image {
+    ...customImageFields
+  }
+}

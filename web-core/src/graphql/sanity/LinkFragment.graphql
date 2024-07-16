@@ -1,0 +1,6 @@
+fragment linkFields on Link {
+  buttonHref
+  buttonDoc {
+    href
+  }
+}

@@ -1,0 +1,17 @@
+query AllPrefinanceProject {
+  allProject(where: {
+    projectPrefinancing: {
+      isPrefinanceProject: {
+        eq: true
+      }
+    } 
+  }) {
+    projectId
+    projectPrefinancing {
+      isPrefinanceProject
+      price
+      estimatedIssuance
+      stripePaymentLink
+    }
+  }
+}

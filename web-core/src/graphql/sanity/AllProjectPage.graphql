@@ -1,0 +1,27 @@
+query allProjectPage {
+  allProjectPage {
+    bannerCard {
+      ...bannerCardFields
+    }
+    gettingStartedResourcesSection {
+      ...gettingStartedResourcesSectionFields
+    }
+    projectDetailsSection {
+      label
+      title
+      descriptionRaw
+    }
+    otcCard {
+      title
+      descriptionRaw
+      button {
+        ...buttonFields
+      }
+      noteRaw
+      image {
+        ...customImageFields
+      }
+    }
+    dataStreamAdminDescriptionRaw
+  }
+}

@@ -47,6 +47,9 @@
     --purple-300: 128 142 171;
     --purple-200: 187 195 210;
     --purple-100: 221 225 233;
+
+    --white: 255 255 255;
+
   }
 
   .dark {
@@ -90,4 +93,5 @@
   .bg-transparent {
     background-color: transparent;
   }
+
 }

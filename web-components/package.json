@@ -14,7 +14,7 @@
     "format": "prettier --write --loglevel warn --ignore-path=../.prettierignore './src/**/*.{ts,tsx,json,md,css}'",
     "format-and-fix": "bun run format && bun run lint-fix",
     "test": "vitest",
-    "test:ui": "vitest --ui" 
+    "test:ui": "vitest --ui"
   },
   "browserslist": [
     ">0.2%",
@@ -88,10 +88,12 @@
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
     "@types/mapbox__mapbox-sdk": "^0.11.1",
     "@types/react-lazyload": "^3.1.0",
     "@vitest/ui": "^2.0.1",
+    "canvas": "^2.11.2",
     "clsx": "^2.0.0",
     "csstype": "^3.1.1",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -99,6 +101,6 @@
     "prettier": "2.4.1",
     "storybook-addon-react-router-v6": "^0.1.10",
     "tailwind-merge": "^1.14.0",
-    "vitest": "^2.0.1"
+    "vitest": "^2.0.2"
   }
 }

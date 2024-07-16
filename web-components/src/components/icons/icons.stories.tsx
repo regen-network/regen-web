@@ -31,11 +31,13 @@ import { CopyIcon } from './CopyIcon';
 import CountingIcon from './CountingIcon';
 import { CreditBatchIcon } from './CreditBatchIcon';
 import { CreditBatchLightIcon } from './CreditBatchLightIcon';
+import CreditCardIcon from './CreditCardIcon';
 import { CreditClassIcon } from './CreditClassIcon';
 import CreditsIcon from './CreditsIcon';
 import CreditsIssuedIcon from './CreditsIssued';
 import CreditsRetiredIcon from './CreditsRetired';
 import CreditsTradeableIcon from './CreditsTradeable';
+import CryptoIcon from './CryptoIcon';
 import CurrentCreditsIcon from './CurrentCreditsIcon';
 import DocumentIcon from './DocumentIcon';
 import { DraftDocumentIcon } from './DraftDocumentIcon';
@@ -386,5 +388,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<ZoomIcon />} label="ZoomIcon" />
     <LabeledIcon icon={<WarningIcon />} label="WarningIcon" />
     <LabeledIcon icon={<USFlagIcon />} label="USFlagIcon" />
+    <LabeledIcon icon={<CreditCardIcon />} label="CreditCardIcon" />
+    <LabeledIcon icon={<CryptoIcon />} label="CryptoIcon" />
   </Grid>
 );

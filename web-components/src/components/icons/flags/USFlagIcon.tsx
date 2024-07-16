@@ -8,6 +8,7 @@ export default function USFlagIcon({
 }: IconProps): JSX.Element {
   return (
     <SvgIcon
+      data-testid="USFlagIcon"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 25 26"
       sx={[{ fill: 'none' }, ...(Array.isArray(sx) ? sx : [sx])]}

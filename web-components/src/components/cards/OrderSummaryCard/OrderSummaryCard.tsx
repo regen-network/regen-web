@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
-import { CurrencyFlag } from 'web-components/src/components/CurrencyFlag/CurrencyFlag';
+import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
 import { EditableInput } from 'web-components/src/components/inputs/new/EditableInput/EditableInput';
 import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
 
@@ -54,7 +54,7 @@ function OrderSummaryContent({
             currencyCode={currency}
           />
         </div>
-        <CurrencyFlag currency={currency} />
+        <DenomIconWithCurrency currency={currency} />
       </div>
       <OrderSummmaryRowHeader text="# credits" />
       <div className="text-base font-normal font-['Lato'] text-[14px] sm:text-base">
@@ -76,7 +76,7 @@ function OrderSummaryContent({
             currencyCode={currency}
           />
         </div>
-        <CurrencyFlag currency={currency} />
+        <DenomIconWithCurrency currency={currency} />
       </div>
       {currentBuyingStep > 1 && paymentMethod.type && paymentMethod.cardNumber && (
         <>

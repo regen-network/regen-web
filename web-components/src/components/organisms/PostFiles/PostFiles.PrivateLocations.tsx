@@ -5,10 +5,11 @@ import Gallery from '../Gallery';
 import { GalleryItem } from '../Gallery/Gallery.types';
 import { Tag } from './components/Tag';
 import { PostFilesProps } from './PostFiles';
+import { FilesPreviews } from './PostFiles.types';
 
-type Props = Pick<PostFilesProps, 'files'>;
+type Props = Pick<PostFilesProps, 'files'> & { filesPreviews: FilesPreviews };
 
-const PostFilesPrivateLocations = ({ files }: Props) => {
+const PostFilesPrivateLocations = ({ files, filesPreviews }: Props) => {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down('sm'));
   return (
@@ -20,6 +21,7 @@ const PostFilesPrivateLocations = ({ files }: Props) => {
       />
       <Gallery
         items={files as GalleryItem[]}
+        filesPreviews={filesPreviews}
         className={{ root: 'h-[100%]' }}
         pdfPageHeight={mobile ? 340 : 550}
       />

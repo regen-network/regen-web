@@ -1,7 +1,7 @@
 import { StoryObj } from '@storybook/react';
 
 import PostCard from './PostCard';
-import { commonArgs, signers } from './PostCard.mock';
+import { commonArgs, file, signers } from './PostCard.mock';
 
 type Story = StoryObj<typeof PostCard>;
 
@@ -13,7 +13,7 @@ export default {
 export const Public: Story = {
   args: {
     ...commonArgs,
-    imgSrc: '/coorong.png',
+    file,
     isAdmin: false,
   },
   argTypes: {
@@ -28,7 +28,7 @@ export const Private: Story = {
     ...commonArgs,
     privacyLabel: 'Post is private',
     numberOfFiles: 5,
-    imgSrc: '/coorong.png',
+    file,
     isAdmin: true,
   },
   argTypes: {

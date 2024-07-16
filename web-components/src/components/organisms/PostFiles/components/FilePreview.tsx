@@ -1,54 +1,58 @@
-import { lazy, Suspense } from 'react';
-import { pdfjs } from 'react-pdf';
 import ReactPlayer from 'react-player/es6';
-import { Box, CircularProgress } from '@mui/material';
+import { Box } from '@mui/material';
 
+import { cn } from '../../../../utils/styles/cn';
 import { PlayButton } from '../../../atoms/PlayButton/PlayButton';
-import { AudioFileIcon } from '../../../icons/AudioFileIcon';
-import { OtherDocumentsIcon } from '../../../icons/OtherDocumentsIcon';
-import { SpreadsheetFileIcon } from '../../../icons/SpreadsheetFileIcon';
 import {
   isAudio,
+  isCsv,
+  isDocx,
   isImage,
+  isJson,
   isPdf,
-  isSpreadSheet,
   isVideo,
+  isXlsOrXlsx,
 } from '../../../inputs/new/FileDrop/FileDrop.utils';
 import { Body } from '../../../typography';
 import { PostFile } from '../PostFiles';
 import { getColors } from '../PostFiles.utils';
+import { PdfPreview } from './PdfPreview';
+import { TextOrIconFilePreview } from './TextOrIconFilePreview';
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
-  import.meta.url,
-).toString();
-
-const Document = lazy(() => import('../lib/Document'));
-const Page = lazy(() => import('../lib/Page'));
-
+export type FileToPreview = Pick<PostFile, 'mimeType' | 'url' | 'name'>;
 type Props = {
-  file: PostFile;
+  file: FileToPreview;
   className?: string;
+  linearGradientClassName?: string;
   pdfPageHeight: number;
   showName?: boolean;
+  preview?: string;
 };
 
-const FilePreview = ({ file, className, pdfPageHeight, showName }: Props) => {
+const FilePreview = ({
+  file,
+  className,
+  linearGradientClassName,
+  pdfPageHeight,
+  showName,
+  preview,
+}: Props) => {
   const { mimeType, url } = file;
   const image = isImage(mimeType);
   const video = isVideo(mimeType);
   const audio = isAudio(mimeType);
-  const spreadsheet = isSpreadSheet(mimeType);
-  const colors = getColors(audio, spreadsheet);
+  const csv = isCsv(mimeType);
+  const json = isJson(mimeType);
+  const xls = isXlsOrXlsx(mimeType);
+  const docx = isDocx(mimeType);
+  const colors = getColors(audio, csv, xls, json, docx);
 
   return (
     <Box
       className={className}
       sx={theme => ({
         position: 'relative',
-        background: `linear-gradient(180deg, rgba(0, 0, 0, 0.00) 62.39%, rgba(0, 0, 0, 0.70) 100%), ${
-          image ? `url(${url})` : `${theme.palette.grey[100]}`
-        }`,
+        background: `${image ? `url(${url})` : `${theme.palette.grey[100]}`}`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
@@ -56,6 +60,12 @@ const FilePreview = ({ file, className, pdfPageHeight, showName }: Props) => {
         backgroundColor: image || video ? 'primary.contrastText' : undefined,
       })}
     >
+      <Box
+        className={cn(
+          'w-[100%] z-[1] h-[100%] absolute bg-[linear-gradient(180deg,rgba(0,0,0,0.00)_62.39%,rgba(0,0,0,0.70)_100%)]',
+          linearGradientClassName,
+        )}
+      />
       {video ? (
         <>
           <ReactPlayer url={url} width="100%" height="100%" />
@@ -69,36 +79,32 @@ const FilePreview = ({ file, className, pdfPageHeight, showName }: Props) => {
           </a>
         </>
       ) : isPdf(mimeType) ? (
-        <Suspense fallback={<CircularProgress color="secondary" />}>
-          <Document
-            className="px-[65px] h-[100%]"
-            file={url}
-            loading={<CircularProgress color="secondary" />}
-          >
-            <Page height={pdfPageHeight} pageNumber={1} />
-          </Document>
-        </Suspense>
+        <PdfPreview
+          file={url}
+          pageHeight={pdfPageHeight}
+          className="px-[65px] h-[100%]"
+        />
       ) : (
         !isImage(mimeType) && (
-          <div
-            className={`flex items-center justify-center h-[100%] w-[100%] bg-[linear-gradient(180deg,rgba(0,0,0,0)_62.39%,rgba(0,0,0,0.80)_100%)] ${colors.text} ${colors.bg}`}
+          <TextOrIconFilePreview
+            preview={preview}
+            audio={audio}
+            csv={csv}
+            xls={xls}
+            docx={docx}
+            json={json}
+            colors={colors}
+            iconSize="50"
           >
-            {audio ? (
-              <AudioFileIcon width="50" height="50" />
-            ) : spreadsheet ? (
-              <SpreadsheetFileIcon width="50" height="50" />
-            ) : (
-              <OtherDocumentsIcon width="50" height="50" />
-            )}
             {showName && (
               <Body
-                className="absolute left-[13px] bottom-[13px] text-grey-0 font-bold"
+                className="absolute left-[13px] bottom-[13px] text-grey-0 font-bold z-[2]"
                 size="xs"
               >
                 {file.name}
               </Body>
             )}
-          </div>
+          </TextOrIconFilePreview>
         )
       )}
     </Box>

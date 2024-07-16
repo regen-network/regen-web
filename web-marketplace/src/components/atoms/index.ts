@@ -11,8 +11,6 @@ export * from './OptimizedImage';
 export * from './PeerReviewed';
 export * from './PeerReviewed';
 export * from './ProcessStepCard';
-export * from './ProtectedRoute';
-export * from './ProtectedRoute';
 export * from './RegistryIconLink';
 export * from './RegistryNavLink';
 export * from './SanityButton';

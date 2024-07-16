@@ -5,10 +5,10 @@ import { LockIcon } from '../../icons/LockIcon';
 import { Subtitle } from '../../typography';
 
 const PrivateBadge = ({
-  hasImageBlock,
+  hasFile,
   label,
 }: {
-  hasImageBlock?: boolean;
+  hasFile?: boolean;
   label: string;
 }) => (
   <Box
@@ -17,11 +17,9 @@ const PrivateBadge = ({
       borderRadius: 1,
       backgroundColor: theme.palette.error.dark,
       position: 'absolute',
-      left: hasImageBlock ? 12 : undefined,
-      right: hasImageBlock ? undefined : { xs: undefined, md: 90 },
-      top: hasImageBlock
-        ? 12
-        : { xs: theme.spacing(4.5), md: theme.spacing(6.5) },
+      left: hasFile ? 12 : undefined,
+      right: hasFile ? undefined : { xs: undefined, md: 90 },
+      top: hasFile ? 12 : { xs: theme.spacing(4.5), md: theme.spacing(6.5) },
       display: 'flex',
       alignItems: 'center',
       p: 0.75,

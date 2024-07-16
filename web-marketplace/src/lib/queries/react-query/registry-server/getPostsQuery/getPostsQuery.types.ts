@@ -26,7 +26,7 @@ export type Post = {
   creatorAccountId: string;
   projectId: string;
   privacy: PostPrivacyType;
-  contents: PostContents;
+  contents?: PostContents;
   filesUrls:
     | {
         [iri: string]: string;

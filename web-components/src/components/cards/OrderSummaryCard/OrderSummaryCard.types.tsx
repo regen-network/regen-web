@@ -1,10 +1,10 @@
-import { CurrencyCode } from 'web-components/src/utils/currency';
+import { Currency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 export interface OrderProps {
   projectName: string;
   pricePerCredit: number;
   credits: number;
-  currency: CurrencyCode;
+  currency: Currency;
   image: string;
 }
 
@@ -21,6 +21,6 @@ export interface OrderSummaryProps {
 }
 
 export interface PaymentMethod {
-  type: 'visa' | 'mastercard';
+  type: 'visa' | 'mastercard' | 'crypto';
   cardNumber: string;
 }

@@ -122,7 +122,7 @@ function Post(): JSX.Element {
                   creatorAccount={creatorAccount}
                   adminAccountId={adminAccountId}
                   creatorIsAdmin={creatorIsAdmin}
-                  createdAt={createdAt}
+                  createdAt={data?.createdAt}
                   privatePost={privatePost}
                   publicPost={publicPost}
                   privateFiles={privateFiles}

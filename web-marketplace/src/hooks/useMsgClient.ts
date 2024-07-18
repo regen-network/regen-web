@@ -13,7 +13,7 @@ import { BANK_BALANCE_KEY } from 'lib/queries/react-query/cosmos/bank/getBalance
 
 import { useLedger } from '../ledger';
 import { assertIsError } from '../lib/error';
-import { Wallet } from '../lib/wallet/wallet';
+import { useWallet, Wallet } from '../lib/wallet/wallet';
 
 const defaultFee = {
   amount: [
@@ -56,7 +56,8 @@ export default function useMsgClient(
   handleTxDelivered?: (deliverTxResponse: DeliverTxResponse) => void,
   handleError?: () => void,
 ): MsgClientType {
-  const { api, wallet } = useLedger();
+  const { api } = useLedger();
+  const { wallet } = useWallet();
   const [error, setError] = useState<string | undefined>();
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);

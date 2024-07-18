@@ -37,8 +37,6 @@ import PageLoader from 'components/atoms/PageLoader';
 import { LoginModalMobile } from 'components/organisms/LoginModal/components/LoginModal.Mobile';
 
 import { AuthApolloProvider } from '../apollo';
-import { LedgerProvider } from '../ledger';
-import { WalletProvider } from '../lib/wallet/wallet';
 
 const intercomId = import.meta.env.VITE_INTERCOM_APP_ID || '';
 
@@ -128,11 +126,7 @@ export const SharedProviders = ({ customTheme, children }: Props) => {
                     },
                   }}
                 >
-                  <WalletProvider>
-                    <LedgerProvider>
-                      <Suspense fallback={<PageLoader />}>{children}</Suspense>
-                    </LedgerProvider>
-                  </WalletProvider>
+                  <Suspense fallback={<PageLoader />}>{children}</Suspense>
                 </ChainProvider>
               </ThemeProvider>
             </AnalyticsProvider>

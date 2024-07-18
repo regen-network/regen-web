@@ -1,4 +1,4 @@
-import { useLedger } from 'ledger';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
@@ -17,7 +17,7 @@ export const useBuySellOrderData = ({
   projectId,
   classId,
 }: Props): ReponseType => {
-  const { wallet } = useLedger();
+  const { wallet } = useWallet();
 
   const { projectsWithOrderData, loading: loadingProjects } =
     useProjectsWithOrders({

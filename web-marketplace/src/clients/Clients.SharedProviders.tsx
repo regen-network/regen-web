@@ -26,7 +26,6 @@ import { AnalyticsProvider } from 'use-analytics';
 import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 
 import { PropsWithChildren } from 'types/react/children';
-import { AuthProvider } from 'lib/auth/auth';
 import { apolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { reactQueryClient } from 'lib/clients/reactQueryClient';
 import {
@@ -113,36 +112,29 @@ export const SharedProviders = ({ customTheme, children }: Props) => {
         <IntercomProvider appId={intercomId} autoBoot>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <AnalyticsProvider instance={analytics}>
-              <AuthProvider>
-                <ThemeProvider customTheme={customTheme}>
-                  <ChainProvider
-                    chains={chains.filter(
-                      chain => chain.chain_name === 'regen',
-                    )}
-                    assetLists={assets.filter(
-                      chain => chain.chain_name === 'regen',
-                    )}
-                    wallets={wallets}
-                    walletModal={LoginModalMobile}
-                    walletConnectOptions={{
-                      signClient: {
-                        projectId: import.meta.env
-                          .VITE_WALLET_CONNECT_PROJECT_ID,
-                        relayUrl: WALLET_CONNECT_RELAY_URL,
-                        metadata: walletConnectClientMeta,
-                      },
-                    }}
-                  >
-                    <WalletProvider>
-                      <LedgerProvider>
-                        <Suspense fallback={<PageLoader />}>
-                          {children}
-                        </Suspense>
-                      </LedgerProvider>
-                    </WalletProvider>
-                  </ChainProvider>
-                </ThemeProvider>
-              </AuthProvider>
+              <ThemeProvider customTheme={customTheme}>
+                <ChainProvider
+                  chains={chains.filter(chain => chain.chain_name === 'regen')}
+                  assetLists={assets.filter(
+                    chain => chain.chain_name === 'regen',
+                  )}
+                  wallets={wallets}
+                  walletModal={LoginModalMobile}
+                  walletConnectOptions={{
+                    signClient: {
+                      projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
+                      relayUrl: WALLET_CONNECT_RELAY_URL,
+                      metadata: walletConnectClientMeta,
+                    },
+                  }}
+                >
+                  <WalletProvider>
+                    <LedgerProvider>
+                      <Suspense fallback={<PageLoader />}>{children}</Suspense>
+                    </LedgerProvider>
+                  </WalletProvider>
+                </ChainProvider>
+              </ThemeProvider>
             </AnalyticsProvider>
           </LocalizationProvider>
         </IntercomProvider>

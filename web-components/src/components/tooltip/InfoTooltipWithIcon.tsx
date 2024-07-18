@@ -10,6 +10,7 @@ interface Props {
   outlined?: boolean;
   sx?: SxProps<Theme>;
   className?: string;
+  placement?: TooltipProps['placement'];
 }
 
 export default function InfoTooltipWithIcon({
@@ -17,9 +18,10 @@ export default function InfoTooltipWithIcon({
   outlined,
   sx,
   className = '',
+  placement = 'top',
 }: Props): JSX.Element {
   return (
-    <InfoTooltip arrow placement="top" title={title}>
+    <InfoTooltip arrow placement={placement} title={title}>
       <Box sx={{ display: 'inline-flex' }} data-testid="info-tooltip">
         {outlined ? (
           <InfoIconOutlined sx={sx} className={className} />

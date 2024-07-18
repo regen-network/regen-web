@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
+import { getClientConfig } from 'clients/Clients.config';
 
 import Header from 'web-components/src/components/header';
 import { UserMenuItems } from 'web-components/src/components/header/components/UserMenuItems';
@@ -44,6 +45,7 @@ const RegistryLayoutHeader: React.FC = () => {
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
+  const clientConfig = getClientConfig();
 
   const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
   const menuItems = useMemo(() => getMenuItems(pathname), [pathname]);
@@ -108,7 +110,7 @@ const RegistryLayoutHeader: React.FC = () => {
         pathname={pathname}
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
-            <ListProject />
+            {clientConfig.listProject && <ListProject />}
             {chainId && accountOrWallet && disconnect && (
               <UserMenuItems
                 nameOrAddress={
@@ -127,7 +129,7 @@ const RegistryLayoutHeader: React.FC = () => {
                 userMenuItems={userMenuItems}
               />
             )}
-            <LoginButton />
+            {clientConfig.loginButton && <LoginButton />}
           </Box>
         }
       />

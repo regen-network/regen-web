@@ -13,7 +13,7 @@ import { EcocreditQueryClient } from 'lib/ecocredit/api';
 import { MarketplaceQueryClient } from 'lib/ecocredit/marketplace/marketplace.types';
 
 import { ledgerRPCUri } from './lib/ledger';
-import { Wallet } from './lib/wallet/wallet';
+import { useWallet, Wallet } from './lib/wallet/wallet';
 
 interface ContextValue {
   loading: boolean;
@@ -80,6 +80,17 @@ const getApi = async (
     setLoading(false);
   }
 };
+
+export const LedgerProviderWithWallet: React.FC<React.PropsWithChildren<{}>> =
+  ({ children }) => {
+    const { wallet, loaded } = useWallet();
+
+    return (
+      <LedgerProvider wallet={wallet} walletLoaded={loaded}>
+        {children}
+      </LedgerProvider>
+    );
+  };
 
 export const LedgerProvider: React.FC<
   React.PropsWithChildren<{ wallet?: Wallet; walletLoaded: boolean }>

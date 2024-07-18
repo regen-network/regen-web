@@ -13,6 +13,16 @@ export const CLIENTS_CONFIG_MAPPING: Record<
   MARKETPLACE_CLIENT_TYPE,
   CLIENT_CONFIG
 > = {
-  regen: { buySellOrderFlow: true, buyButton: true },
-  terrasos: { buySellOrderFlow: false, buyButton: false },
+  regen: {
+    buySellOrderFlow: true,
+    buyButton: true,
+    loginButton: true,
+    listProject: true,
+  },
+  terrasos: {
+    buySellOrderFlow: false,
+    buyButton: false,
+    loginButton: false,
+    listProject: false,
+  },
 };

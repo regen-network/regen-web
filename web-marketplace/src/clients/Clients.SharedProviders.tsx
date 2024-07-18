@@ -8,8 +8,6 @@ import {
 import { IntercomProvider } from 'react-use-intercom';
 import amplitudePlugin from '@analytics/amplitude';
 import googleAnalytics from '@analytics/google-analytics';
-import { wallets } from '@cosmos-kit/keplr-mobile';
-import { ChainProvider } from '@cosmos-kit/react-lite';
 import { Box } from '@mui/material';
 import { Theme } from '@mui/material/styles';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -20,7 +18,6 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Analytics from 'analytics';
 import doNotTrack from 'analytics-plugin-do-not-track';
-import { assets, chains } from 'chain-registry';
 import { AnalyticsProvider } from 'use-analytics';
 
 import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
@@ -28,13 +25,8 @@ import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 import { PropsWithChildren } from 'types/react/children';
 import { apolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { reactQueryClient } from 'lib/clients/reactQueryClient';
-import {
-  WALLET_CONNECT_RELAY_URL,
-  walletConnectClientMeta,
-} from 'lib/wallet/wallet.constants';
 
 import PageLoader from 'components/atoms/PageLoader';
-import { LoginModalMobile } from 'components/organisms/LoginModal/components/LoginModal.Mobile';
 
 import { AuthApolloProvider } from '../apollo';
 
@@ -111,23 +103,7 @@ export const SharedProviders = ({ customTheme, children }: Props) => {
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <AnalyticsProvider instance={analytics}>
               <ThemeProvider customTheme={customTheme}>
-                <ChainProvider
-                  chains={chains.filter(chain => chain.chain_name === 'regen')}
-                  assetLists={assets.filter(
-                    chain => chain.chain_name === 'regen',
-                  )}
-                  wallets={wallets}
-                  walletModal={LoginModalMobile}
-                  walletConnectOptions={{
-                    signClient: {
-                      projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
-                      relayUrl: WALLET_CONNECT_RELAY_URL,
-                      metadata: walletConnectClientMeta,
-                    },
-                  }}
-                >
-                  <Suspense fallback={<PageLoader />}>{children}</Suspense>
-                </ChainProvider>
+                <Suspense fallback={<PageLoader />}>{children}</Suspense>
               </ThemeProvider>
             </AnalyticsProvider>
           </LocalizationProvider>

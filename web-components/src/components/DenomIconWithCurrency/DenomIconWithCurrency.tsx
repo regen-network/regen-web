@@ -11,16 +11,17 @@ export function DenomIconWithCurrency({
   tooltipText?: string;
 }) {
   return (
-    <div className="text-grey-600 text-sm font-normal font-['Lato'] flex gap-[5px] items-center">
+    <span className="text-grey-600 text-sm font-normal font-['Lato'] flex gap-[5px] items-center">
       <DenomIcon baseDenom={currency} className="h-[24px] block" />
-      <span>{currency}</span>
+      <span>{currency.toUpperCase()}</span>
       {tooltipText && (
         <InfoTooltipWithIcon
+          placement="bottom"
           outlined
           title={tooltipText}
           className="fill-current text-grey-600 fill-grey-600"
         />
       )}
-    </div>
+    </span>
   );
 }

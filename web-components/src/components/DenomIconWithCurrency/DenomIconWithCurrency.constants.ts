@@ -1,11 +1,16 @@
 import {
-  USD_CURRENCY_DENOM,
-  USDC_CURRENCY_DENOM,
+  REGEN_DENOM,
+  USD_DENOM,
+  USDC_DENOM,
+  USDCAXL_DENOM,
 } from 'web-marketplace/src/config/allowedBaseDenoms';
 
 export const CURRENCIES = {
-  USD: USD_CURRENCY_DENOM,
-  USDC: USDC_CURRENCY_DENOM,
+  usd: USD_DENOM,
+  usdc: USDC_DENOM,
+  uregen: REGEN_DENOM,
+  usdcaxl: USDCAXL_DENOM,
 } as const;
 
 export type Currency = keyof typeof CURRENCIES;
+export type CryptoCurrencies = Exclude<keyof typeof CURRENCIES, 'usd'>;

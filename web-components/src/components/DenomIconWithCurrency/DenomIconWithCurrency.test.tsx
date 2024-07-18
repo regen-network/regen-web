@@ -1,18 +1,18 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { USD_CURRENCY_DENOM } from 'web-marketplace/src/config/allowedBaseDenoms';
+import { USD_DENOM } from 'web-marketplace/src/config/allowedBaseDenoms';
 
 import { DenomIconWithCurrency } from './DenomIconWithCurrency';
 
 describe('DenomIconWithCurrency', () => {
-  const currency = USD_CURRENCY_DENOM;
+  const currency = USD_DENOM;
 
   it('renders the denom icon and currency code', () => {
     render(<DenomIconWithCurrency currency={currency} />);
 
     const flagIcon = screen.getByTestId('USFlagIcon');
-    const currencyCode = screen.getByText(currency);
+    const currencyCode = screen.getByText(currency.toUpperCase());
 
     expect(flagIcon).toBeInTheDocument();
     expect(currencyCode).toBeInTheDocument();

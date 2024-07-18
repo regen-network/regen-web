@@ -15,7 +15,7 @@ export const IconAndCurrency: Story = {
 };
 
 IconAndCurrency.args = {
-  currency: CURRENCIES.USD,
+  currency: CURRENCIES.usd,
 };
 
 export const withTooltip: Story = {
@@ -23,7 +23,7 @@ export const withTooltip: Story = {
 };
 
 withTooltip.args = {
-  currency: CURRENCIES.USDC,
+  currency: CURRENCIES.uregen,
   tooltipText:
     'Different sellers may sell the same credits at different prices. We automatically choose the lowest priced credits for you. This price is the average price of all the credits in your cart.',
 };

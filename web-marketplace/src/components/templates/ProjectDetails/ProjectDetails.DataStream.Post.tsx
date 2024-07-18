@@ -30,15 +30,18 @@ import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHea
 import { Subtitle } from 'web-components/src/components/typography';
 import copyTextToClipboard from 'web-components/src/utils/copy';
 
+import { UseStateSetter } from 'types/react/use-state';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { Post } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
 import { useAttestEvents } from 'pages/Post/hooks/useAttestEvents';
+import { useDelete } from 'pages/Post/hooks/useDelete';
 import { useSharePrivateLink } from 'pages/Post/hooks/useSharePrivateLink';
 import { ADMIN, POST_IS_PRIVATE } from 'pages/Post/Post.constants';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+import { DeletePostWarningModal } from 'components/organisms/DeletePostWarningModal/DeletePostWarningModal';
 
 import {
   FILES_ARE_PRIVATE,
@@ -52,13 +55,18 @@ type Props = {
   postsLength: number;
   isAdmin: boolean;
   adminAccountId?: string | null;
+  offChainProjectId?: string;
+  setOffset: UseStateSetter<number>;
 };
 export const DataStreamPost = ({
+  offChainProjectId,
   post,
   index,
   postsLength,
   isAdmin,
   adminAccountId,
+  setOffset,
+  setPosts,
 }: Props) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -68,6 +76,14 @@ export const DataStreamPost = ({
   const [file, setFile] = useState<FileToPreview | undefined>();
   const { iri, createdAt } = post;
   const sharePrivateLink = useSharePrivateLink({ iri });
+  const { deletePost, open, onClose, onOpen } = useDelete({
+    iri,
+    offChainProjectId,
+    onDeleteSuccess: () => {
+      setPosts(prev => prev.filter(post => post.iri !== iri));
+      setOffset(prev => prev - 1);
+    },
+  });
 
   const { data: creatorAccountData } = useQuery(
     getAccountByIdQuery({
@@ -143,58 +159,73 @@ export const DataStreamPost = ({
   }, [post.contents?.files, post.filesMimeTypes, post.filesUrls]);
 
   return (
-    <TimelineItem>
-      <TimelineSeparator
-        className={`pr-10 sm:pr-40 ${index === postsLength - 1 ? 'pb-35' : ''}`}
-      >
-        <div className="text-grey-0 rounded-[50%] h-[28px] w-[28px] bg-blue-green-gradient flex items-center justify-center">
-          <BubbleIcon />
-        </div>
-        <TimelineConnector className="bg-grey-300 w-1" />
-      </TimelineSeparator>
-      <TimelineContent className="mt-[-30px] mb-30 pr-0">
-        {post.contents && (post.privacy !== 'private' || isAdmin) && (
-          <PostCard
-            onClick={() => navigate(`/post/${post.iri}`)}
-            title={post.contents.title}
-            description={post.contents.comment}
-            privacyLabel={
-              post.privacy === 'private'
-                ? POST_IS_PRIVATE
-                : post.privacy === 'private_files'
-                ? FILES_ARE_PRIVATE
-                : post.privacy === 'private_locations'
-                ? LOCATIONS_ARE_PRIVATE
-                : undefined
-            }
-            publicPost={post.privacy === 'public'}
-            author={{
-              name: creatorAccount?.name || DEFAULT_NAME,
-              type: creatorAccount?.type ?? 'USER',
-              image: creatorAccount?.image || getDefaultAvatar(creatorAccount),
-              link: `/profiles/${creatorAccount?.id}`,
-              timestamp: post.createdAt,
-              tag: creatorIsAdmin ? ADMIN : undefined,
-            }}
-            isAdmin={isAdmin}
-            handleClickShare={() => {
-              copyTextToClipboard(`${window.location.origin}/post/${post.iri}`);
-              setBannerText(COPY_SUCCESS);
-            }}
-            numberOfFiles={post.contents.files?.length}
-            signers={events.map(event => event.user)}
-            sharePrivateLink={sharePrivateLink}
-            file={file}
-            preview={preview}
-          />
-        )}
-        {post.privacy === 'private' && !isAdmin && (
-          <div className="flex items-center px-[16px] py-30 sm:p-30">
-            <LockIcon className="w-[18px] h-[18px]" />
-            <Subtitle size="lg">{PRIVATE_POST}</Subtitle>
+    <>
+      <TimelineItem>
+        <TimelineSeparator
+          className={`pr-10 sm:pr-40 ${
+            index === postsLength - 1 ? 'pb-35' : ''
+          }`}
+        >
+          <div className="text-grey-0 rounded-[50%] h-[28px] w-[28px] bg-blue-green-gradient flex items-center justify-center">
+            <BubbleIcon />
           </div>
-        )}
-      </TimelineContent>
-    </TimelineItem>
+          <TimelineConnector className="bg-grey-300 w-1" />
+        </TimelineSeparator>
+        <TimelineContent className="mt-[-30px] mb-30 pr-0">
+          {post.contents && (post.privacy !== 'private' || isAdmin) && (
+            <PostCard
+              onClick={() => navigate(`/post/${post.iri}`)}
+              title={post.contents.title}
+              description={post.contents.comment}
+              privacyLabel={
+                post.privacy === 'private'
+                  ? POST_IS_PRIVATE
+                  : post.privacy === 'private_files'
+                  ? FILES_ARE_PRIVATE
+                  : post.privacy === 'private_locations'
+                  ? LOCATIONS_ARE_PRIVATE
+                  : undefined
+              }
+              publicPost={post.privacy === 'public'}
+              author={{
+                name: creatorAccount?.name || DEFAULT_NAME,
+                type: creatorAccount?.type ?? 'USER',
+                image:
+                  creatorAccount?.image || getDefaultAvatar(creatorAccount),
+                link: `/profiles/${creatorAccount?.id}`,
+                timestamp: post.createdAt,
+                tag: creatorIsAdmin ? ADMIN : undefined,
+              }}
+              isAdmin={isAdmin}
+              handleClickShare={() => {
+                copyTextToClipboard(
+                  `${window.location.origin}/post/${post.iri}`,
+                );
+                setBannerText(COPY_SUCCESS);
+              }}
+              onDelete={onOpen}
+              numberOfFiles={post.contents.files?.length}
+              signers={events.map(event => event.user)}
+              sharePrivateLink={sharePrivateLink}
+              file={file}
+              preview={preview}
+            />
+          )}
+          {post.privacy === 'private' && !isAdmin && (
+            <div className="flex items-center px-[16px] py-30 sm:p-30">
+              <LockIcon className="w-[18px] h-[18px]" />
+              <Subtitle size="lg">{PRIVATE_POST}</Subtitle>
+            </div>
+          )}
+        </TimelineContent>
+      </TimelineItem>
+      {isAdmin && (
+        <DeletePostWarningModal
+          onDelete={deletePost}
+          open={open}
+          onClose={onClose}
+        />
+      )}
+    </>
   );
 };

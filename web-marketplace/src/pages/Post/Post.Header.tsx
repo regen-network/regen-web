@@ -20,7 +20,9 @@ import { AccountByIdQuery } from 'generated/graphql';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { Link } from 'components/atoms';
+import { DeletePostWarningModal } from 'components/organisms/DeletePostWarningModal/DeletePostWarningModal';
 
+import { useDelete } from './hooks/useDelete';
 import { useSharePrivateLink } from './hooks/useSharePrivateLink';
 import {
   ACTIONS,
@@ -41,6 +43,7 @@ type Props = {
   privatePost?: boolean;
   publicPost?: boolean;
   privateFiles?: boolean;
+  offChainProjectId?: string;
 };
 
 export const PostHeader = ({
@@ -53,10 +56,15 @@ export const PostHeader = ({
   publicPost,
   privatePost,
   privateFiles,
+  offChainProjectId,
 }: Props) => {
   const { iri } = useParams();
   const [shareSuccessBanner, setShareSuccessBanner] = useState(false);
   const sharePrivateLink = useSharePrivateLink({ iri });
+  const { deletePost, open, onClose, onOpen } = useDelete({
+    iri,
+    offChainProjectId,
+  });
 
   return (
     <Section
@@ -100,6 +108,7 @@ export const PostHeader = ({
                 setShareSuccessBanner(true);
               }}
               sharePrivateLink={sharePrivateLink}
+              onDelete={onOpen}
             />
           </div>
         ) : (
@@ -143,6 +152,13 @@ export const PostHeader = ({
             timestamp: createdAt,
             tag: creatorIsAdmin ? ADMIN : undefined,
           }}
+        />
+      )}
+      {isAdmin && (
+        <DeletePostWarningModal
+          onDelete={deletePost}
+          open={open}
+          onClose={onClose}
         />
       )}
     </Section>

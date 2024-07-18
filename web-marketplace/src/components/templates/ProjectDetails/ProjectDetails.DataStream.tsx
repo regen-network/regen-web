@@ -142,6 +142,8 @@ export const DataStream = ({
                       postsLength={posts.length}
                       isAdmin={isAdmin}
                       adminAccountId={adminAccountId}
+                      offChainProjectId={offChainProjectId}
+                      setOffset={setOffset}
                     />
                   ))}
                 </Timeline>
@@ -159,7 +161,7 @@ export const DataStream = ({
                   data.total > DATA_STREAM_LIMIT && (
                     <ContainedButton
                       className="ml-[55px] sm:ml-[85px]"
-                      onClick={() => setOffset(prev => 0)}
+                      onClick={() => setOffset(0)}
                     >
                       <ArrowDownIcon
                         direction="up"

@@ -126,6 +126,7 @@ function Post(): JSX.Element {
                   privatePost={privatePost}
                   publicPost={publicPost}
                   privateFiles={privateFiles}
+                  offChainProjectId={projectId}
                 />
 
                 {privacyType && files && files.length > 0 && (

@@ -9,11 +9,13 @@ const ActionButton = ({
   isAdmin,
   onClickShare,
   sharePrivateLink,
+  onDelete,
 }: {
   publicPost?: boolean;
   isAdmin?: boolean;
   onClickShare: (ev: React.MouseEvent) => void;
   sharePrivateLink: (ev: React.MouseEvent) => void;
+  onDelete: (ev: React.MouseEvent) => void;
 }): JSX.Element => {
   return (
     <div className="z-[1] absolute top-5 right-5 lg:top-[15px] lg:right-[12px] cursor-pointer">
@@ -27,6 +29,10 @@ const ActionButton = ({
           sharePrivateLink={event => {
             event.stopPropagation();
             sharePrivateLink(event);
+          }}
+          onDelete={event => {
+            event.stopPropagation();
+            onDelete(event);
           }}
         />
       ) : (

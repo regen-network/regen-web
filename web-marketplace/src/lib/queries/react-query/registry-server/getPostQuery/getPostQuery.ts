@@ -25,6 +25,8 @@ export const getPostQuery = ({
       );
       if (resp.status === 200 || resp.status === 401) {
         return await resp.json();
+      } else {
+        return null;
       }
     } catch (e) {
       return null;

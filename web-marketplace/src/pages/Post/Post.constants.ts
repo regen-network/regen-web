@@ -12,3 +12,4 @@ export const SEE_BLOCKCHAIN_RECORD = 'See the blockchain record';
 export const POST_IS_PRIVATE = 'Post is private';
 export const PREV = 'prev';
 export const NEXT = 'next';
+export const POST_IS_DELETED = 'Post is deleted';

@@ -5,9 +5,10 @@ export type PostParams = {
   url: string;
   data?: any;
   token: string;
-  method?: 'POST' | 'PUT';
+  method?: 'POST' | 'PUT' | 'DELETE';
   onSuccess?: (response: any) => Promise<void>;
   retryCsrfRequest?: (failedFunction: FailedFnType) => Promise<void>;
+  parseTextResponse?: boolean;
 };
 
 export const postData = async ({
@@ -17,6 +18,7 @@ export const postData = async ({
   method = 'POST',
   onSuccess,
   retryCsrfRequest,
+  parseTextResponse,
 }: PostParams) => {
   const postRequest = async (csrfToken: string) => {
     const rawResponse = await fetch(url, {
@@ -31,11 +33,16 @@ export const postData = async ({
     });
 
     try {
-      const response = await rawResponse.json();
-      if (!response.error && onSuccess) {
-        await onSuccess(response);
+      let jsonResponse, textResponse;
+      if (parseTextResponse) {
+        textResponse = await rawResponse.text();
+      } else {
+        jsonResponse = await rawResponse.json();
       }
-      return response;
+      if ((textResponse || !jsonResponse.error) && onSuccess) {
+        await onSuccess(jsonResponse ?? textResponse);
+      }
+      return jsonResponse ?? textResponse;
     } catch (e) {
       throw Error(rawResponse.statusText);
     }

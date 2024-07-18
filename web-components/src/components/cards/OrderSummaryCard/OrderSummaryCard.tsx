@@ -78,26 +78,28 @@ function OrderSummaryContent({
         </div>
         <DenomIconWithCurrency currency={currency} />
       </div>
-      {currentBuyingStep > 1 && paymentMethod.type && paymentMethod.cardNumber && (
-        <>
-          <OrderSummmaryRowHeader text="payment" className="" />
-          <div className="flex items-center justify-between w-full">
-            <p
-              data-testid="payment-details"
-              className="font-['Lato'] text-[14px] md:text-base m-0"
-            >
-              <span className="capitalize">{paymentMethod.type}</span>
-              {` ending in ${paymentMethod.cardNumber.slice(-4)}`}
-            </p>
-            {/* TO-DO implement edit button onClick */}
-            <EditButtonIcon
-              onClick={() => {}}
-              className="self-end"
-              ariaLabel="Change payment card"
-            />
-          </div>
-        </>
-      )}
+      {currentBuyingStep > 1 &&
+        paymentMethod.type !== 'crypto' &&
+        paymentMethod.cardNumber && (
+          <>
+            <OrderSummmaryRowHeader text="payment" className="" />
+            <div className="flex items-center justify-between w-full">
+              <p
+                data-testid="payment-details"
+                className="font-['Lato'] text-[14px] md:text-base m-0"
+              >
+                <span className="capitalize">{paymentMethod.type}</span>
+                {` ending in ${paymentMethod.cardNumber.slice(-4)}`}
+              </p>
+              {/* TO-DO implement edit button onClick */}
+              <EditButtonIcon
+                onClick={() => {}}
+                className="self-end"
+                ariaLabel="Change payment card"
+              />
+            </div>
+          </>
+        )}
     </div>
   );
 }

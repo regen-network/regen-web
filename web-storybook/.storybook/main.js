@@ -63,6 +63,7 @@ module.exports = {
           assets: path.resolve(__dirname, '../../web-marketplace/src/assets'),
           config: path.resolve(__dirname, '../../web-marketplace/src/config'),
           ledger: path.resolve(__dirname, '../../web-marketplace/src/ledger'),
+          clients: path.resolve(__dirname, '../../web-marketplace/src/clients'),
         },
       },
       plugins: [

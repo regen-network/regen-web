@@ -1,5 +1,6 @@
 import { apiUri } from 'lib/apiUri';
 
+import { DATA_STREAM_LIMIT } from './getPostsQuery.constants';
 import {
   ReactQueryGetPostsQueryParams,
   ReactQueryGetPostsQueryResponse,
@@ -8,18 +9,17 @@ import { getPostsQueryKey } from './getPostsQuery.utils';
 
 export const getPostsQuery = ({
   projectId,
-  limit,
-  offset,
+  // offset,
   year,
   ...params
 }: ReactQueryGetPostsQueryParams): ReactQueryGetPostsQueryResponse => ({
-  queryKey: getPostsQueryKey({ projectId, limit, offset, year }),
-  queryFn: async () => {
+  queryKey: getPostsQueryKey({ projectId }),
+  queryFn: async ({ pageParam }) => {
     try {
       const resp = await fetch(
-        `${apiUri}/marketplace/v1/posts/project/${projectId}?limit=${limit}&offset=${offset}${
-          year ? `&year=${year}` : ''
-        }`,
+        `${apiUri}/marketplace/v1/posts/project/${projectId}?limit=${DATA_STREAM_LIMIT}${
+          pageParam ? `&next=${pageParam}` : ''
+        }${year ? `&year=${year}` : ''}`,
         {
           method: 'GET',
           credentials: 'include',
@@ -27,6 +27,8 @@ export const getPostsQuery = ({
       );
       if (resp.status === 200 || resp.status === 401) {
         return await resp.json();
+      } else {
+        return null;
       }
     } catch (e) {
       return null;

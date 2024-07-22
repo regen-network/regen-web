@@ -39,11 +39,14 @@ export const postData = async ({
       } else {
         jsonResponse = await rawResponse.json();
       }
+      console.log('textResponse', textResponse);
+      console.log('jsonResponse', jsonResponse);
       if ((textResponse || !jsonResponse.error) && onSuccess) {
         await onSuccess(jsonResponse ?? textResponse);
       }
       return jsonResponse ?? textResponse;
     } catch (e) {
+      console.log('e', e);
       throw Error(rawResponse.statusText);
     }
   };

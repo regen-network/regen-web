@@ -56,7 +56,7 @@ type Props = {
   isAdmin: boolean;
   adminAccountId?: string | null;
   offChainProjectId?: string;
-  setOffset: UseStateSetter<number>;
+  // setPosts?: UseStateSetter<Array<Post>>;
 };
 export const DataStreamPost = ({
   offChainProjectId,
@@ -65,8 +65,7 @@ export const DataStreamPost = ({
   postsLength,
   isAdmin,
   adminAccountId,
-  setOffset,
-  setPosts,
+  // setPosts,
 }: Props) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -80,8 +79,8 @@ export const DataStreamPost = ({
     iri,
     offChainProjectId,
     onDeleteSuccess: () => {
-      setPosts(prev => prev.filter(post => post.iri !== iri));
-      setOffset(prev => prev - 1);
+      // setPosts(prev => prev.filter(post => post.iri !== iri));
+      // setOffset(prev => Math.max(0, prev - 1));
     },
   });
 

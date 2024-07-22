@@ -293,3 +293,15 @@ export const formatTimelineDates = (item: PrefinanceTimelineItem) =>
   `${formatDate(item.date, 'MMM YYYY')}${
     item.endDate ? ` - ${formatDate(item.endDate, 'MMM YYYY')}` : ''
   }`;
+
+export function containsArray<T>(
+  b: Array<T>,
+  a: Array<T>,
+  bIndex?: number,
+): boolean {
+  if (!a.length) return true;
+  bIndex ??= b.findIndex(el => el === a[0]);
+  return a[0] !== b[bIndex]
+    ? false
+    : containsArray(b.slice(bIndex + 1), a.slice(1), 0);
+}

@@ -10,6 +10,7 @@ import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { GET_POST_QUERY_KEY } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.constants';
 import { GET_POSTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.constants';
+import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 
 import { POST_IS_DELETED } from '../Post.constants';
 
@@ -51,12 +52,12 @@ export const useDelete = ({
             setBannerText(POST_IS_DELETED);
             if (offChainProjectId)
               await reactQueryClient.invalidateQueries({
-                queryKey: [GET_POSTS_QUERY_KEY, offChainProjectId],
+                queryKey: getPostsQueryKey({ projectId: offChainProjectId }),
               });
             await reactQueryClient.invalidateQueries({
               queryKey: [GET_POST_QUERY_KEY, iri],
             });
-            onDeleteSuccess && onDeleteSuccess();
+            // onDeleteSuccess && onDeleteSuccess();
           },
         });
       } catch (e) {

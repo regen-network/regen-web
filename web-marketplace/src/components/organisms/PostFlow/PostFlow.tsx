@@ -18,8 +18,6 @@ import { getPostQuery } from 'lib/queries/react-query/registry-server/getPostQue
 import { PostFile } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 
-import { DATA_STREAM_LIMIT } from 'components/templates/ProjectDetails/ProjectDetails.constant';
-
 import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { DEFAULT, PROJECTS_S3_PATH } from '../MediaForm/MediaForm.constants';
 import PostForm from '../PostForm';
@@ -110,8 +108,6 @@ export const PostFlow = ({
             await reactQueryClient.invalidateQueries({
               queryKey: getPostsQueryKey({
                 projectId: offChainProjectId,
-                limit: DATA_STREAM_LIMIT,
-                offset: 0,
               }),
             });
           },
@@ -173,6 +169,7 @@ export const PostFlow = ({
     onModalClose,
     projectId,
     projectName,
+    projectSlug,
     setTxSuccessfulModalAtom,
   ]);
 

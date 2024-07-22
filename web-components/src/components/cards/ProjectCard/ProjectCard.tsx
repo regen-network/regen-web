@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
+import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
 import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
-
-import { PrefinanceTag } from 'src/components/PrefinanceTag/PrefinanceTag';
 
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';

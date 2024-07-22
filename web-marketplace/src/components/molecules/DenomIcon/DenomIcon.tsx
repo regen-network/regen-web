@@ -8,6 +8,7 @@ import {
   REGEN_DENOM,
   USD_DENOM,
   USDC_DENOM,
+  USDCAXL_DENOM,
 } from 'web-marketplace/src/config/allowedBaseDenoms';
 
 import AxlUsdcIcon from 'web-components/src/components/icons/coins/AxlUsdcIcon';
@@ -53,6 +54,9 @@ const DenomIcon = ({
       {/* If this one belongs here merge with GRAVITY_USDC_DENOM above */}
       {baseDenom === USDC_DENOM && (
         <GravUsdcIcon sx={iconSx} className={className} />
+      )}{' '}
+      {baseDenom === USDCAXL_DENOM && (
+        <AxlUsdcIcon sx={iconSx} className={className} />
       )}
     </Box>
   );

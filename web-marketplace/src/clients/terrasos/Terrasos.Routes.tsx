@@ -14,7 +14,6 @@ import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
 
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
-import { useWallet } from 'lib/wallet/wallet';
 
 import { projectsLoader } from 'pages/Projects/AllProjects/AllProjects.loader';
 import PageLoader from 'components/atoms/PageLoader';
@@ -35,13 +34,11 @@ export const TerrasosRoutes = ({
   reactQueryClient,
   apolloClientFactory,
 }: RouterProps) => {
-  const { wallet } = useWallet();
   return (
     <RouterProvider
       router={getRouter({
         reactQueryClient,
         apolloClientFactory,
-        address: wallet?.address,
       })}
       fallbackElement={<PageLoader />}
     />
@@ -51,7 +48,6 @@ export const TerrasosRoutes = ({
 type RouterParams = {
   reactQueryClient: QueryClient;
   apolloClientFactory: ApolloClientFactory;
-  address?: string;
 };
 
 export const getTerrasosRoutes = ({

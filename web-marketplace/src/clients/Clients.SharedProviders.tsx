@@ -59,29 +59,16 @@ if (import.meta.env.VITE_SENTRY_ENABLED) {
   });
 }
 
-// our current analytics setup uses both amplitude and google analytics.
-// our amplitude and GA have been set up with a development and production environment.
-// for amplitude this means that we have a development and production API key.
-// for GA this means that we have a development and production measurement id.
-// be careful not to use the production API key or measurement id in a non-prod environment.
-// but you can safely use the development API key and measurement id in non-prod environments.
-// these values are safe to hardcode because they are public.
-// also see the VITE_ANALYTICS_ENABLED environment variable.
-const DEVELOPMENT_AMPLITUDE_API_KEY = 'ef9a9d58cf90476430f62a634d72cd5c';
-const DEVELOPMENT_GA_MEASUREMENT_ID = 'G-9ENS4JTCWY';
 const analytics = Analytics({
   plugins: [
     doNotTrack(),
     amplitudePlugin({
-      apiKey:
-        import.meta.env.VITE_AMPLITUDE_API_KEY || DEVELOPMENT_AMPLITUDE_API_KEY,
+      apiKey: import.meta.env.VITE_AMPLITUDE_API_KEY,
       // by default we will not track users, they must opt-in.
       enabled: false,
     }),
     googleAnalytics({
-      measurementIds: [
-        import.meta.env.VITE_GA_MEASUREMENT_ID || DEVELOPMENT_GA_MEASUREMENT_ID,
-      ],
+      measurementIds: [import.meta.env.VITE_GA_MEASUREMENT_ID],
       enabled: false,
       gtagConfig: {
         anonymize_ip: true,

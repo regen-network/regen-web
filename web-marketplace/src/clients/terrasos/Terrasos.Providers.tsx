@@ -1,11 +1,11 @@
 import { SharedProviders } from 'clients/Clients.SharedProviders';
-import { RegenRoutes } from 'clients/regen/Regen.Routes';
 
 import { LedgerProvider } from 'ledger';
 import { apolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { reactQueryClient } from 'lib/clients/reactQueryClient';
 
 import terrasosMuiTheme from './Terrasos.muiTheme';
+import { TerrasosRoutes } from './Terrasos.Routes';
 
 import '../../App.css';
 import './Terrasos.tailwind.css';
@@ -14,7 +14,7 @@ export const TerrasosProvider = () => {
   return (
     <SharedProviders customTheme={terrasosMuiTheme}>
       <LedgerProvider walletLoaded>
-        <RegenRoutes
+        <TerrasosRoutes
           reactQueryClient={reactQueryClient}
           apolloClientFactory={apolloClientFactory}
         />

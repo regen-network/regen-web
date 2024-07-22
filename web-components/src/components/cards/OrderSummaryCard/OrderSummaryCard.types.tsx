@@ -2,6 +2,7 @@ import { Currency } from 'web-components/src/components/DenomIconWithCurrency/De
 
 export interface OrderProps {
   projectName: string;
+  prefinanceProject: boolean;
   pricePerCredit: number;
   credits: number;
   currency: Currency;

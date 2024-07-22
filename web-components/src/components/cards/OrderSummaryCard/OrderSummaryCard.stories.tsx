@@ -17,9 +17,10 @@ Default.args = {
   order: {
     image: '/coorong.png',
     projectName: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    prefinanceProject: false,
     pricePerCredit: 2,
     credits: 50,
-    currency: 'USD',
+    currency: 'usd',
   },
 };
 
@@ -31,9 +32,30 @@ WithPaymentDetails.args = {
   order: {
     image: '/coorong.png',
     projectName: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    prefinanceProject: false,
     pricePerCredit: 2,
     credits: 50,
-    currency: 'USD',
+    currency: 'usd',
+  },
+  currentBuyingStep: 2,
+  paymentMethod: {
+    type: 'visa',
+    cardNumber: '1234 5678 9012 3456',
+  },
+};
+
+export const WithPrefinanceProject: Story = {
+  render: args => <OrderSummaryCard {...args} />,
+};
+
+WithPrefinanceProject.args = {
+  order: {
+    image: '/coorong.png',
+    projectName: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    prefinanceProject: true,
+    pricePerCredit: 2,
+    credits: 50,
+    currency: 'usd',
   },
   currentBuyingStep: 2,
   paymentMethod: {

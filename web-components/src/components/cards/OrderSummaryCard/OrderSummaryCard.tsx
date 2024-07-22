@@ -2,6 +2,7 @@ import { ReactNode, useState } from 'react';
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
 import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
 import { EditableInput } from 'web-components/src/components/inputs/new/EditableInput/EditableInput';
+import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
 import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
 
 import {
@@ -104,9 +105,21 @@ function OrderSummaryContent({
   );
 }
 
-function OrderSummaryImage({ src }: { src: string }) {
+function OrderSummaryImage({
+  src,
+  prefinanceProject,
+}: {
+  src: string;
+  prefinanceProject?: boolean;
+}) {
   return (
     <div className="w-[90px] sm:w-full  sm:h-[160px]">
+      {prefinanceProject && (
+        <PrefinanceTag
+          wrapperClassName="bg-purple-gradient rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute top-20 left-0"
+          labelClassname="pl-10 font-extrabold uppercase"
+        />
+      )}
       <img
         src={src}
         alt="order summary"
@@ -118,7 +131,7 @@ function OrderSummaryImage({ src }: { src: string }) {
 
 function OrderSummary({ children }: { children: ReactNode }) {
   return (
-    <div className="sm:w-full sm:max-w-[330px] h-[100%] rounded-[5px] border border-grey-300 border-solid bg-white shadow-none flex flex-2 sm:flex-col py-20 sm:py-0">
+    <div className="relative sm:w-full sm:max-w-[330px] h-[100%] rounded-[5px] border border-grey-300 border-solid bg-white shadow-none flex flex-2 sm:flex-col py-20 sm:py-0">
       {children}
     </div>
   );
@@ -128,7 +141,10 @@ export const OrderSummaryCard = (orderSummary: OrderSummaryProps) => {
   const { order, paymentMethod, currentBuyingStep } = orderSummary;
   return (
     <OrderSummary>
-      <OrderSummaryImage src={order.image} />
+      <OrderSummaryImage
+        src={order.image}
+        prefinanceProject={order.prefinanceProject}
+      />
       <OrderSummaryContent
         order={order}
         currentBuyingStep={currentBuyingStep}

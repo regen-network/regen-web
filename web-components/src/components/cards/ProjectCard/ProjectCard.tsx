@@ -4,22 +4,22 @@ import clsx from 'clsx';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Track } from 'web-marketplace/src/lib/tracker/types';
 
+import { PrefinanceTag } from 'src/components/PrefinanceTag/PrefinanceTag';
+
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import { cn } from '../../../utils/styles/cn';
 import { BlockContent, SanityBlockContent } from '../../block-content';
 import ContainedButton from '../../buttons/ContainedButton';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
-import { PrefinanceIcon } from '../../icons/PrefinanceIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
-import { Body, Label } from '../../typography';
+import { Body } from '../../typography';
 import { Account, User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard/MediaCard';
 import { ProjectCardButton } from './ProjectCard.Button';
 import {
   AVG_PRICE_TOOLTIP,
   DEFAULT_BUY_BUTTON,
-  PREFINANCE,
   PREFINANCE_BUTTON,
   PREFINANCE_PRICE_TOOLTIP,
   VIEW_PROJECT_BUTTON,
@@ -173,16 +173,10 @@ export function ProjectCard({
         />
       </div>
       {isPrefinanceProject && (
-        <div className="bg-purple-gradient rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute top-20 left-0">
-          <PrefinanceIcon />
-          <Label
-            className="pl-10 font-extrabold uppercase"
-            component="span"
-            size="xxs"
-          >
-            {PREFINANCE}
-          </Label>
-        </div>
+        <PrefinanceTag
+          wrapperClassName="bg-purple-gradient rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute top-20 left-0"
+          labelClassname="pl-10 font-extrabold uppercase"
+        />
       )}
       {comingSoon && (
         <div className={classes.comingSoon}>

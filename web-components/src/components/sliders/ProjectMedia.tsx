@@ -8,12 +8,9 @@ import { makeStyles } from 'tss-react/mui';
 
 import { containerPaddingX, containerStyles } from '../../styles/container';
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
-import { PREFINANCE } from '../cards/ProjectCard/ProjectCard.constants';
 import PlayIcon from '../icons/PlayIcon';
-import { PrefinanceIcon } from '../icons/PrefinanceIcon';
 import { Image, OptimizeImageProps } from '../image';
-import { Label } from '../typography';
-import { PrefinanceTag } from './ProjectMedia.PrefinanceTag';
+import { PrefinanceTag } from '../PrefinanceTag/PrefinanceTag';
 import { ProjectAsset } from './ProjectMedia.ProjectAsset';
 
 export interface Media {

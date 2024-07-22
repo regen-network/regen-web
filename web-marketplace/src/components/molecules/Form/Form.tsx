@@ -7,11 +7,10 @@ import {
 } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { Box, SxProps } from '@mui/material';
-import { sxToArray } from 'utils/mui/sxToArray';
+import { IS_DEV } from 'web-marketplace/src/lib/env';
 
 import { Theme } from 'web-components/src/theme/muiTheme';
-
-import { IS_DEV } from 'lib/env';
+import { sxToArray } from 'web-components/src/utils/mui/sxToArray';
 
 export type FormRef = MutableRefObject<
   | { submitForm: (draft?: boolean) => void; isFormValid: () => boolean }
@@ -21,7 +20,7 @@ export type FormRef = MutableRefObject<
 interface Props<T extends FieldValues>
   extends Omit<ComponentProps<'form'>, 'onSubmit'> {
   form: UseFormReturn<T>;
-  onSubmit?: SubmitHandler<T>;
+  onSubmit?: SubmitHandler<T> | any;
   sx?: SxProps<Theme>;
   formRef?: FormRef;
   isDraftRef?: MutableRefObject<boolean>;

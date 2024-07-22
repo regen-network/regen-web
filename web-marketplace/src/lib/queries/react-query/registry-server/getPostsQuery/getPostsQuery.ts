@@ -9,11 +9,10 @@ import { getPostsQueryKey } from './getPostsQuery.utils';
 
 export const getPostsQuery = ({
   projectId,
-  // offset,
   year,
   ...params
 }: ReactQueryGetPostsQueryParams): ReactQueryGetPostsQueryResponse => ({
-  queryKey: getPostsQueryKey({ projectId }),
+  queryKey: getPostsQueryKey({ projectId, year }),
   queryFn: async ({ pageParam }) => {
     try {
       const resp = await fetch(

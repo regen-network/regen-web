@@ -40,16 +40,18 @@ export type Post = {
   error?: string;
 };
 
-export type ReactQueryGetPostsQueryResponse = InfiniteQueryObserverOptions<{
+export type PostsQueryResponse = {
   posts: Post[];
   years?: Array<number>;
-  total: number;
-} | null>;
+  next?: string;
+} | null;
+export type ReactQueryGetPostsQueryResponse =
+  InfiniteQueryObserverOptions<PostsQueryResponse>;
 
 export type GetPostsQueryParams = {
   projectId?: string;
-  // offset: number;
-  year?: number;
+  next?: string;
+  year?: number | null;
 };
 export type ReactQueryGetPostsQueryParams = GetPostsQueryParams &
   ReactQueryBuilderResponse<ReactQueryGetPostsQueryResponse>;

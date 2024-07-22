@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import { getClientConfig } from 'clients/Clients.config';
 import { useAtom } from 'jotai';
 
 import { Flex } from 'web-components/src/components/box';
@@ -52,6 +53,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { track } = useTracker();
   const location = useLocation();
+  const config = getClientConfig();
   const [useCommunityProjects, setUseCommunityProjects] = useAtom(
     useCommunityProjectsAtom,
   );
@@ -221,7 +223,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               creditsTooltip={getCreditsTooltip({ isSoldOut, project })}
               program={project.program}
               projectPrefinancing={project.projectPrefinancing}
-              offChain={project.offChain}
+              offChain={config.buyButton ? project.offChain : true}
             />
           </Box>
         );
@@ -263,13 +265,15 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           size={isMobile ? 'small' : 'large'}
         />
       </Flex>
-      <BuySellOrderFlow
-        isFlowStarted={isBuyFlowStarted}
-        setIsFlowStarted={setIsBuyFlowStarted}
-        projects={selectedProject && [selectedProject]}
-        track={track}
-        location={location}
-      />
+      {config.buySellOrderFlow && (
+        <BuySellOrderFlow
+          isFlowStarted={isBuyFlowStarted}
+          setIsFlowStarted={setIsBuyFlowStarted}
+          projects={selectedProject && [selectedProject]}
+          track={track}
+          location={location}
+        />
+      )}
     </>
   );
 };

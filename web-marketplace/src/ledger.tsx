@@ -25,7 +25,6 @@ interface ContextValue {
   bankClient?: BankQueryClientImpl;
   txClient?: TxServiceClientImpl;
   error: unknown;
-  wallet?: Wallet;
 }
 
 interface ConnectParams {
@@ -82,21 +81,31 @@ const getApi = async (
   }
 };
 
-export const LedgerProvider: React.FC<React.PropsWithChildren<unknown>> = ({
-  children,
-}) => {
+export const LedgerProviderWithWallet: React.FC<React.PropsWithChildren<{}>> =
+  ({ children }) => {
+    const { wallet, loaded } = useWallet();
+
+    return (
+      <LedgerProvider wallet={wallet} walletLoaded={loaded}>
+        {children}
+      </LedgerProvider>
+    );
+  };
+
+export const LedgerProvider: React.FC<
+  React.PropsWithChildren<{ wallet?: Wallet; walletLoaded: boolean }>
+> = ({ walletLoaded, wallet, children }) => {
   const [api, setApi] = useState<RegenApi | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<unknown>(undefined);
-  const { wallet, loaded } = useWallet();
 
   useEffect(() => {
-    if (loaded && !api)
+    if (walletLoaded && !api)
       getApi(setApi, setLoading, setError, wallet?.offlineSigner);
-  }, [loaded, api, setApi, setLoading, setError, wallet?.offlineSigner]);
+  }, [api, setApi, setLoading, setError, wallet?.offlineSigner, walletLoaded]);
 
   return (
-    <LedgerContext.Provider value={{ error, loading, api, wallet }}>
+    <LedgerContext.Provider value={{ error, loading, api }}>
       {children}
     </LedgerContext.Provider>
   );
@@ -104,7 +113,6 @@ export const LedgerProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
 export const useLedger = (options?: ConnectParams): ContextValue => {
   const context = React.useContext(LedgerContext);
-  const { wallet } = useWallet();
   const api = context.api;
 
   const ecocreditClient = useInitClient<EcocreditQueryClient>({
@@ -145,6 +153,5 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
     txClient,
     loading: context.loading,
     error: context.error,
-    wallet,
   };
 };

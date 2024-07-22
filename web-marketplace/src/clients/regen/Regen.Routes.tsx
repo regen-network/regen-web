@@ -41,63 +41,67 @@ import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
-import { KeplrRoute } from './components/atoms';
-import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
+import { KeplrRoute } from '../../components/atoms';
+import { ProjectMetadata } from '../../pages/ProjectMetadata/ProjectMetadata';
 
-const Additionality = lazy(() => import('./pages/Additionality'));
-const AllProjects = lazy(() => import('./pages/Projects/AllProjects'));
-const BasicInfo = lazy(() => import('./pages/BasicInfo'));
-const BatchDetails = lazy(() => import('./pages/BatchDetails'));
-const BasketDetails = lazy(() => import('./pages/BasketDetails'));
-const ChooseCreditClassPage = lazy(() => import('./pages/ChooseCreditClass'));
+const Additionality = lazy(() => import('../../pages/Additionality'));
+const AllProjects = lazy(() => import('../../pages/Projects/AllProjects'));
+const BasicInfo = lazy(() => import('../../pages/BasicInfo'));
+const BatchDetails = lazy(() => import('../../pages/BatchDetails'));
+const BasketDetails = lazy(() => import('../../pages/BasketDetails'));
+const ChooseCreditClassPage = lazy(
+  () => import('../../pages/ChooseCreditClass'),
+);
 const CreateCreditClassInfo = lazy(
-  () => import('./pages/CreateCreditClassInfo'),
+  () => import('../../pages/CreateCreditClassInfo'),
 );
-const CreateCreditClass = lazy(() => import('./pages/CreateCreditClass'));
-const CreditClassDetails = lazy(() => import('./pages/CreditClassDetails'));
-const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Description = lazy(() => import('./pages/Description'));
-const EcocreditBatches = lazy(() => import('./pages/EcocreditBatches'));
-const EcocreditsByAccount = lazy(() => import('./pages/EcocreditsByAccount'));
-const ErrorPage = lazy(() => import('./pages/ErrorPage'));
-const Home = lazy(() => import('./pages/Home'));
-const LandStewards = lazy(() => import('./pages/LandStewards'));
-const LoginPage = lazy(() => import('./pages/Login'));
-const Media = lazy(() => import('./pages/Media'));
-const MethodologyDetails = lazy(() => import('./pages/MethodologyDetails'));
-const NotFoundPage = lazy(() => import('./pages/NotFound'));
-const Post = lazy(() => import('./pages/Post'));
+const CreateCreditClass = lazy(() => import('../../pages/CreateCreditClass'));
+const CreditClassDetails = lazy(() => import('../../pages/CreditClassDetails'));
+const Dashboard = lazy(() => import('../../pages/Dashboard'));
+const Description = lazy(() => import('../../pages/Description'));
+const EcocreditBatches = lazy(() => import('../../pages/EcocreditBatches'));
+const EcocreditsByAccount = lazy(
+  () => import('../../pages/EcocreditsByAccount'),
+);
+const ErrorPage = lazy(() => import('../../pages/ErrorPage'));
+const Home = lazy(() => import('../../pages/Home'));
+const LandStewards = lazy(() => import('../../pages/LandStewards'));
+const LoginPage = lazy(() => import('../../pages/Login'));
+const Media = lazy(() => import('../../pages/Media'));
+const MethodologyDetails = lazy(() => import('../../pages/MethodologyDetails'));
+const NotFoundPage = lazy(() => import('../../pages/NotFound'));
+const Post = lazy(() => import('../../pages/Post'));
 const PrefinanceProjects = lazy(
-  () => import('./pages/Projects/PrefinanceProjects'),
+  () => import('../../pages/Projects/PrefinanceProjects'),
 );
-const Project = lazy(() => import('./pages/Project'));
-const Projects = lazy(() => import('./pages/Projects'));
-const ProjectCreate = lazy(() => import('./pages/ProjectCreate'));
-const ProjectFinished = lazy(() => import('./pages/ProjectFinished'));
-const ProjectLocation = lazy(() => import('./pages/ProjectLocation'));
-const ProjectReview = lazy(() => import('./pages/ProjectReview'));
-const Roles = lazy(() => import('./pages/Roles'));
-const VerifyEmail = lazy(() => import('./pages/VerifyEmail'));
-const ProjectEdit = lazy(() => import('./pages/ProjectEdit'));
-const Activity = lazy(() => import('./pages/Activity'));
-const CreateBatch = lazy(() => import('./pages/CreateBatch'));
-const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
-const ConnectWalletPage = lazy(() => import('./pages/ConnectWalletPage'));
-const ProfileEdit = lazy(() => import('./pages/ProfileEdit'));
+const Project = lazy(() => import('../../pages/Project'));
+const Projects = lazy(() => import('../../pages/Projects'));
+const ProjectCreate = lazy(() => import('../../pages/ProjectCreate'));
+const ProjectFinished = lazy(() => import('../../pages/ProjectFinished'));
+const ProjectLocation = lazy(() => import('../../pages/ProjectLocation'));
+const ProjectReview = lazy(() => import('../../pages/ProjectReview'));
+const Roles = lazy(() => import('../../pages/Roles'));
+const VerifyEmail = lazy(() => import('../../pages/VerifyEmail'));
+const ProjectEdit = lazy(() => import('../../pages/ProjectEdit'));
+const Activity = lazy(() => import('../../pages/Activity'));
+const CreateBatch = lazy(() => import('../../pages/CreateBatch'));
+const Storefront = lazy(() => import('../../pages/Marketplace/Storefront'));
+const ConnectWalletPage = lazy(() => import('../../pages/ConnectWalletPage'));
+const ProfileEdit = lazy(() => import('../../pages/ProfileEdit'));
 
 type RouterProps = {
   reactQueryClient: QueryClient;
   apolloClientFactory: ApolloClientFactory;
 };
 
-export const Routes = ({
+export const RegenRoutes = ({
   reactQueryClient,
   apolloClientFactory,
 }: RouterProps) => {
   const { wallet } = useWallet();
   return (
     <RouterProvider
-      router={getRouter({
+      router={getRegenRouter({
         reactQueryClient,
         apolloClientFactory,
         address: wallet?.address,
@@ -113,7 +117,7 @@ type RouterParams = {
   address?: string;
 };
 
-export const getRoutes = ({
+export const getRegenRoutes = ({
   reactQueryClient,
   apolloClientFactory,
   address,
@@ -342,14 +346,14 @@ export const getRoutes = ({
   );
 };
 
-export const getRouter = ({
+export const getRegenRouter = ({
   reactQueryClient,
   apolloClientFactory,
 }: RouterParams): Router => {
   const sentryCreateBrowserRouter =
     Sentry.wrapCreateBrowserRouter(createBrowserRouter);
   return sentryCreateBrowserRouter(
-    getRoutes({ reactQueryClient, apolloClientFactory }),
+    getRegenRoutes({ reactQueryClient, apolloClientFactory }),
     {
       basename: import.meta.env.PUBLIC_URL,
     },

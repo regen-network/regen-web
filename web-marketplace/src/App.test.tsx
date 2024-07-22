@@ -3,14 +3,13 @@ import ReactDOM, { unmountComponentAtNode } from 'react-dom';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import mediaQuery from 'css-mediaquery';
-import { useAnalytics } from 'use-analytics';
 
 import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 
 import { apolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { reactQueryClient } from 'lib/clients/reactQueryClient';
 
-import { getRoutes } from './routes';
+import { getRegenRoutes } from './clients/regen/Regen.Routes';
 
 import './jest.mock';
 
@@ -33,7 +32,7 @@ describe('App', () => {
   describe('App', () => {
     it('renders without crashing', () => {
       const router = createMemoryRouter(
-        getRoutes({ reactQueryClient, apolloClientFactory }),
+        getRegenRoutes({ reactQueryClient, apolloClientFactory }),
       );
       const container = document.createElement('div');
       document.body.appendChild(container);

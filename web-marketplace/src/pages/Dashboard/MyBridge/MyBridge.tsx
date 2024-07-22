@@ -3,12 +3,12 @@ import { Outlet } from 'react-router-dom';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 
-import { useLedger } from 'ledger';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { Bridge } from 'components/organisms';
 
 export const MyBridge = (): JSX.Element => {
-  const { wallet } = useLedger();
+  const { wallet } = useWallet();
 
   const MyBridgeOutlet = useCallback(
     (): JSX.Element => (

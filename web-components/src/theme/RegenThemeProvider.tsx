@@ -20,16 +20,21 @@ interface Props {
   readonly injectFonts?: boolean;
   readonly injectStyles?: (props?: any) => void;
   readonly children: React.ReactNode;
+  customTheme?: Theme;
 }
 
-const RegenThemeProvider = ({ injectStyles, children }: Props): JSX.Element => {
+const RegenThemeProvider = ({
+  injectStyles,
+  customTheme,
+  children,
+}: Props): JSX.Element => {
   if (injectStyles) {
     injectStyles();
   }
 
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={customTheme ?? theme}>
         <CssBaseline />
         {children}
       </ThemeProvider>

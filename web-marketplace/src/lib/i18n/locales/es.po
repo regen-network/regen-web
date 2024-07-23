@@ -6,3 +6,57 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: es\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+msgid ""
+msgstr ""
+
+#: src/pages/Activity/Activity.tsx:12
+msgid "Activity"
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:64
+msgid "block height"
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:147
+msgid "credit activity table"
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:61
+msgid "date"
+msgstr ""
+
+#: src/components/organisms/CreditTotals/CreditTotals.tsx:45
+msgid "ecocredits created"
+msgstr ""
+
+#: src/components/organisms/CreditTotals/CreditTotals.tsx:38
+msgid "ecocredits retired"
+msgstr ""
+
+#: src/components/organisms/CreditTotals/CreditTotals.tsx:32
+msgid "ecocredits tradable"
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:62
+msgid "hash"
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:220
+msgid "Loading..."
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:63
+msgid "messages"
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:201
+msgid "view transaction"
+msgstr ""

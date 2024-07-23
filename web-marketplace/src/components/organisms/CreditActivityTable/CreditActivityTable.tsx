@@ -4,6 +4,9 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { MessageDescriptor } from '@lingui/core';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -49,22 +52,23 @@ interface TxRowData {
 
 interface HeadCell {
   id: keyof TxRowData;
-  label: string;
+  label: MessageDescriptor;
   numeric: boolean;
   wrap?: boolean;
 }
 
 const headCells: HeadCell[] = [
-  { id: 'date', numeric: false, label: 'date' },
-  { id: 'txhash', numeric: false, label: 'hash' },
-  { id: 'messages', numeric: false, label: 'messages' },
-  { id: 'height', numeric: true, label: 'block height' },
-  { id: 'txUrl', numeric: false, label: '' },
+  { id: 'date', numeric: false, label: msg`date` },
+  { id: 'txhash', numeric: false, label: msg`hash` },
+  { id: 'messages', numeric: false, label: msg`messages` },
+  { id: 'height', numeric: true, label: msg`block height` },
+  { id: 'txUrl', numeric: false, label: msg`` },
 ];
 
 const ROWS_PER_PAGE_OPTIONS = { options: [5, 10, 20, 50], default: 10 };
 
 const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { _ } = useLingui();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const [order, setOrder] = useState<Order>('desc');
@@ -140,7 +144,7 @@ const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
             )}`,
         }}
       >
-        <Table aria-label="credit activity table" stickyHeader>
+        <Table aria-label={_(msg`credit activity table`)} stickyHeader>
           <TableHead>
             <TableRow>
               {headCells.map(headCell => (
@@ -155,7 +159,7 @@ const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
                     direction={orderBy === headCell.id ? order : 'asc'}
                     onClick={createSortHandler(headCell.id)}
                   >
-                    {headCell.label}
+                    {_(headCell.label)}
                   </StyledTableSortLabel>
                 </StyledTableCell>
               ))}
@@ -193,7 +197,9 @@ const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
                         {formatNumber({ num: tx.height })}
                       </StyledTableCell>
                       <StyledTableCell>
-                        <OutlinedButton>view transaction</OutlinedButton>
+                        <OutlinedButton>
+                          <Trans>view transaction</Trans>
+                        </OutlinedButton>
                       </StyledTableCell>
                     </StyledTableRow>
                   );
@@ -211,7 +217,7 @@ const CreditActivityTable: React.FC<React.PropsWithChildren<unknown>> = () => {
                     width: '100%',
                   }}
                 >
-                  Loading...
+                  <Trans>Loading...</Trans>
                 </StyledTableCell>
               </StyledTableRow>
             )}

@@ -58,9 +58,9 @@ export const useDelete = ({
             }
             await reactQueryClient.invalidateQueries({
               queryKey: [GET_POST_QUERY_KEY, iri],
-              // only mark query as invalid
-              // otherwise, if deleting a post from the post page itself,
-              // 404 would be shown before navigating to project data stream section
+              // Only mark query as invalid without refetching.
+              // Otherwise, if deleting a post from the post page itself,
+              // 404 would be shown before navigating to project data stream section.
               refetchType: 'none',
             });
             setBannerText(POST_IS_DELETED);

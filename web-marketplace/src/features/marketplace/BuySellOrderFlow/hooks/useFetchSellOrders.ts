@@ -1,5 +1,4 @@
 import { useCallback, useMemo } from 'react';
-import { PageRequest } from '@regen-network/api/lib/generated/cosmos/base/query/v1beta1/pagination';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';

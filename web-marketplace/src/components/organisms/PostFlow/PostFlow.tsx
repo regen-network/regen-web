@@ -109,6 +109,7 @@ export const PostFlow = ({
               queryKey: getPostsQueryKey({
                 projectId: offChainProjectId,
               }),
+              refetchType: 'all',
             });
           },
         });

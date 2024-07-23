@@ -64,6 +64,7 @@ export const PostHeader = ({
   const { deletePost, open, onClose, onOpen } = useDelete({
     iri,
     offChainProjectId,
+    navigateToProject: true,
   });
 
   return (

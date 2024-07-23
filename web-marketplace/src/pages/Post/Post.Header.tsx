@@ -63,8 +63,7 @@ export const PostHeader = ({
   const sharePrivateLink = useSharePrivateLink({ iri });
   const { deletePost, open, onClose, onOpen } = useDelete({
     iri,
-    offChainProjectId,
-    navigateToProject: true,
+    projectHref,
   });
 
   return (

@@ -24,7 +24,6 @@ import { DATA_STREAM_LIMIT } from 'lib/queries/react-query/registry-server/getPo
 import {
   Post,
   PostsQueryResponse,
-  ReactQueryGetPostsQueryResponse,
 } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.types';
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 

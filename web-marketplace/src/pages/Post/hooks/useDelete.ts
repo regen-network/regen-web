@@ -17,14 +17,10 @@ import { POST_IS_DELETED } from '../Post.constants';
 type Params = {
   iri?: string;
   offChainProjectId?: string;
-  navigateToProject?: boolean;
+  projectHref?: string;
 };
 
-export const useDelete = ({
-  iri,
-  offChainProjectId,
-  navigateToProject,
-}: Params) => {
+export const useDelete = ({ iri, offChainProjectId, projectHref }: Params) => {
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
@@ -64,8 +60,7 @@ export const useDelete = ({
               refetchType: 'none',
             });
             setBannerText(POST_IS_DELETED);
-            if (navigateToProject)
-              navigate(`/project/${offChainProjectId}#data-stream`);
+            if (projectHref) navigate(`${projectHref}#data-stream`);
           },
         });
       } catch (e) {
@@ -76,6 +71,7 @@ export const useDelete = ({
     iri,
     navigate,
     offChainProjectId,
+    projectHref,
     reactQueryClient,
     retryCsrfRequest,
     setBannerText,

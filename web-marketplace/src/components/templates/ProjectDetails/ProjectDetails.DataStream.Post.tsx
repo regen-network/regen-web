@@ -30,7 +30,6 @@ import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHea
 import { Subtitle } from 'web-components/src/components/typography';
 import copyTextToClipboard from 'web-components/src/utils/copy';
 
-import { UseStateSetter } from 'types/react/use-state';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { Post } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';

@@ -26,35 +26,20 @@ export const getSellOrdersExtendedQuery = ({
   request,
   ...params
 }: ReactQuerySellOrdersExtentedProps): ReactQuerySellOrdersExtentedResponse => ({
-  queryKey: [
-    SELL_ORDERS_EXTENTED_KEY,
-    request.pagination?.key,
-    request.pagination?.limit,
-    request.pagination?.reverse,
-  ],
+  queryKey: [SELL_ORDERS_EXTENTED_KEY],
   queryFn: async () => {
     if (!client) return undefined;
 
-    const key = request.pagination?.key;
-    const limit = request.pagination?.limit;
-    const reverse = request.pagination?.reverse;
-
-    // Fetching paginated sell orders or all sell orders
+    // Fetching all sell orders
+    // TODO this could potentially be improved with pagination for the storefront page
     let sellOrders: SellOrderInfo[] = [];
-    if (key || limit) {
-      const sellOrdersResponse = await client.SellOrders({
-        pagination: { key, limit, reverse },
-      });
-      sellOrders = sellOrdersResponse.sellOrders;
-    } else {
-      let response: QuerySellOrdersResponse | undefined;
-      while (!response || response.pagination?.nextKey?.length) {
-        if (response?.pagination?.nextKey?.length) {
-          request.pagination = { key: response.pagination.nextKey };
-        }
-        response = await client.SellOrders(request);
-        sellOrders.push(...response.sellOrders);
+    let response: QuerySellOrdersResponse | undefined;
+    while (!response || response.pagination?.nextKey?.length) {
+      if (response?.pagination?.nextKey?.length) {
+        request.pagination = { key: response.pagination.nextKey };
       }
+      response = await client.SellOrders(request);
+      sellOrders.push(...response.sellOrders);
     }
 
     // Find sell orders that have ibc askDenom and gather their hash

@@ -28,7 +28,7 @@ export const storefrontLoader =
     const sellOrdersQuery = getSellOrdersExtendedQuery({
       client: marketplaceClient,
       reactQueryClient: queryClient,
-      request: { pagination: { limit: DEFAULT_ROWS_PER_PAGE, reverse: true } },
+      request: {},
     });
     const allCreditClassesQuery = getAllSanityCreditClassesQuery({
       sanityClient,

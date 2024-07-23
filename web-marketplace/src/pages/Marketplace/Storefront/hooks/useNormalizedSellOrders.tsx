@@ -79,7 +79,7 @@ export const useNormalizedSellOrders = (): ResponseType => {
 
   // Batch pagination
   const batchDenoms = sortedSellOrders
-    // .slice(offset, offset + rowsPerPage)
+    .slice(offset, offset + rowsPerPage)
     .map(sellOrder => sellOrder.batchDenom);
 
   const batchesResult = useQueries({

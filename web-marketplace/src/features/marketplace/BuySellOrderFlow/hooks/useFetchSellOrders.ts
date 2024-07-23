@@ -16,10 +16,7 @@ type UseFetchSellOrdersResponse = {
   isLoadingSellOrders: boolean;
 };
 
-type UseFetchSellOrdersParams = { pagination?: PageRequest };
-export const useFetchSellOrders = ({
-  pagination,
-}: UseFetchSellOrdersParams): UseFetchSellOrdersResponse => {
+export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
   const { marketplaceClient } = useLedger();
   const reactQueryClient = useQueryClient();
 

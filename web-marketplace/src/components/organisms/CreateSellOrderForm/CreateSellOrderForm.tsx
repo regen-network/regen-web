@@ -55,7 +55,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
     price: undefined,
     askDenom: undefined,
     amount: undefined,
-    enableAutoRetire: true,
+    enableAutoRetire: false,
   };
 
   const form = useZodForm({

@@ -1,5 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 
+import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
+
 import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQueryClient';
 import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketplace/marketplaceQueryClient';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
@@ -26,7 +28,7 @@ export const storefrontLoader =
     const sellOrdersQuery = getSellOrdersExtendedQuery({
       client: marketplaceClient,
       reactQueryClient: queryClient,
-      request: {},
+      request: { pagination: { limit: DEFAULT_ROWS_PER_PAGE, reverse: true } },
     });
     const allCreditClassesQuery = getAllSanityCreditClassesQuery({
       sanityClient,

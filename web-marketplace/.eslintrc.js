@@ -1,8 +1,10 @@
+const { plugin } = require('@graphql-codegen/introspection');
 const baseConfig = require('../.eslintrc');
 
 module.exports = {
   ...baseConfig,
   ignorePatterns: ['src/generated/*.tsx'],
+  plugins: [...baseConfig.plugins, 'lingui'],
   overrides: [
     ...baseConfig.overrides,
     {

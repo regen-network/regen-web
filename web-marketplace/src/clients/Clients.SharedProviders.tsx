@@ -8,6 +8,8 @@ import {
 import { IntercomProvider } from 'react-use-intercom';
 import amplitudePlugin from '@analytics/amplitude';
 import googleAnalytics from '@analytics/google-analytics';
+import { i18n } from '@lingui/core';
+import { I18nProvider } from '@lingui/react';
 import { Box } from '@mui/material';
 import { Theme } from '@mui/material/styles';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -25,6 +27,7 @@ import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 import { PropsWithChildren } from 'types/react/children';
 import { apolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { reactQueryClient } from 'lib/clients/reactQueryClient';
+import { useDefaultLocale } from 'lib/i18n/hooks/useDefaultLocale';
 
 import PageLoader from 'components/atoms/PageLoader';
 
@@ -83,17 +86,21 @@ const analytics = Analytics({
 type Props = PropsWithChildren<{ customTheme?: Theme }>;
 
 export const SharedProviders = ({ customTheme, children }: Props) => {
+  useDefaultLocale();
+
   return (
     <QueryClientProvider client={reactQueryClient}>
       <AuthApolloProvider apolloClientFactory={apolloClientFactory}>
         <IntercomProvider appId={intercomId} autoBoot>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <AnalyticsProvider instance={analytics}>
-              <ThemeProvider customTheme={customTheme}>
-                <Suspense fallback={<PageLoader />}>{children}</Suspense>
-              </ThemeProvider>
-            </AnalyticsProvider>
-          </LocalizationProvider>
+          <I18nProvider i18n={i18n}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <AnalyticsProvider instance={analytics}>
+                <ThemeProvider customTheme={customTheme}>
+                  <Suspense fallback={<PageLoader />}>{children}</Suspense>
+                </ThemeProvider>
+              </AnalyticsProvider>
+            </LocalizationProvider>
+          </I18nProvider>
         </IntercomProvider>
         <Box sx={{ displayPrint: 'none' }}>
           <ReactQueryDevtools initialIsOpen={false} />

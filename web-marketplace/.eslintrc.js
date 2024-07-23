@@ -37,6 +37,26 @@ module.exports = {
             ],
           },
         ],
+        'lingui/no-unlocalized-strings': [
+          1,
+          { ignoreFunction: ['test'], ignoreAttribute: ['sx'] },
+        ],
+        'lingui/t-call-in-function': 2,
+        'lingui/no-single-variables-to-translate': 2,
+        'lingui/no-expression-in-message': 2,
+        'lingui/no-single-tag-to-translate': 2,
+        'lingui/no-trans-inside-trans': 2,
+        'lingui/text-restrictions': [
+          1,
+          {
+            rules: [
+              {
+                patterns: ["''", '’', '“'],
+                message: 'Error message',
+              },
+            ],
+          },
+        ],
       },
     },
   ],

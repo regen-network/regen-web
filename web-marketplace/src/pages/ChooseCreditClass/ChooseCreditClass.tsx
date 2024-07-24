@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Trans } from '@lingui/macro';
 import { Grid } from '@mui/material';
 
 import { useAuth } from 'lib/auth/auth';
@@ -55,7 +56,9 @@ const ChooseCreditClass: React.FC<React.PropsWithChildren<unknown>> = () => {
             ))
           ) : (
             <Grid item xs={12} sm={6}>
-              You are not yet listed as an issuer on any credit classes
+              <Trans>
+                You are not yet listed as an issuer on any credit classes
+              </Trans>
             </Grid>
           )}
         </>

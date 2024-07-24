@@ -39,7 +39,10 @@ module.exports = {
         ],
         'lingui/no-unlocalized-strings': [
           1,
-          { ignoreFunction: ['test'], ignoreAttribute: ['sx'] },
+          {
+            ignoreFunction: ['test'],
+            ignoreAttribute: ['sx', 'linearGradient'],
+          },
         ],
         'lingui/t-call-in-function': 2,
         'lingui/no-single-variables-to-translate': 2,

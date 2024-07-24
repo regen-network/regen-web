@@ -5,6 +5,7 @@ import {
   AllBuyersPageQuery,
   AllCreditClassQuery,
 } from 'generated/sanity-graphql';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import {
   OFFSET_GENERATION_METHOD,
@@ -15,12 +16,14 @@ type Params = {
   content: AllBuyersPageQuery['allBuyersPage'][0]['ecologicalCreditCardsSection'];
   creditClasses?: AllCreditClassQuery['allCreditClass'];
   creditClassesPrograms?: (Account | undefined)[];
+  _: TranslatorType;
 };
 
 export const normalizeEcologicalCreditCards = ({
   creditClasses,
   creditClassesPrograms,
   content,
+  _,
 }: Params): EcologicalCreditCardType[] => {
   return (
     content?.cards?.map(card => {
@@ -55,7 +58,7 @@ export const normalizeEcologicalCreditCards = ({
           href: card?.button?.buttonLink?.buttonHref ?? '',
         },
         offsetMethodList: {
-          label: OFFSET_GENERATION_METHOD,
+          label: _(OFFSET_GENERATION_METHOD),
           items:
             card?.offsetMethods?.map(method => ({
               name: method?.name ?? '',
@@ -66,7 +69,7 @@ export const normalizeEcologicalCreditCards = ({
             })) ?? [],
         },
         projectActivitiesList: {
-          label: PROJECT_ACTIVITIES,
+          label: _(PROJECT_ACTIVITIES),
           items:
             card?.projectActivities?.map(projectActivity => ({
               name: projectActivity?.name ?? '',

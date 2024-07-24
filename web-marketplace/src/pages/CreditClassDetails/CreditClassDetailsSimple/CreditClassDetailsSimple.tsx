@@ -1,4 +1,6 @@
 import React from 'react';
+import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
@@ -60,6 +62,7 @@ const CreditClassDetailsSimple: React.FC<
   issuers,
   metadata,
 }) => {
+  const { _ } = useLingui();
   const { classes: styles, cx } = useCreditClassDetailsSimpleStyles();
 
   const displayName = getCreditClassDisplayName(onChainClass.id, metadata);
@@ -161,25 +164,27 @@ const CreditClassDetailsSimple: React.FC<
                 mt={{ xs: 9, sm: 0 }}
                 sx={{ display: 'flex', alignItems: 'center' }}
               >
-                credit class{' '}
-                <InfoTooltipWithIcon
-                  title={
-                    <p>
-                      <Box component="span" sx={{ fontWeight: 700 }}>
-                        Credit class:
-                      </Box>
-                      {` ${CREDIT_CLASS_TOOLTIP}`}
-                    </p>
-                  }
-                  outlined
-                  sx={{ ml: 1 }}
-                />
+                <Trans>
+                  credit class{' '}
+                  <InfoTooltipWithIcon
+                    title={
+                      <p>
+                        <Box component="span" sx={{ fontWeight: 700 }}>
+                          Credit class:
+                        </Box>
+                        {` ${CREDIT_CLASS_TOOLTIP}`}
+                      </p>
+                    }
+                    outlined
+                    sx={{ ml: 1 }}
+                  />
+                </Trans>
               </Label>
               <Title variant="h1">{displayName}</Title>
               {generationMethods && (
                 <CreditClassCardItem
                   items={generationMethods}
-                  label={OFFSET_GENERATION_METHOD}
+                  label={_(OFFSET_GENERATION_METHOD)}
                   sx={{ my: 5 }}
                   sxListContainer={{
                     flexDirection: 'column',

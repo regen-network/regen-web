@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import { Body } from 'web-components/src/components/typography';
-import { formatDate } from 'web-components/src/utils/format';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import {

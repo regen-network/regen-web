@@ -1,9 +1,10 @@
 import React from 'react';
+import { useLingui } from '@lingui/react';
 
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 
 import CreateBatchMultiStepForm from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
-import formModel from './form-model';
+import getFormModel from './form-model';
 
 /**
  * Container integrating with:
@@ -13,6 +14,9 @@ import formModel from './form-model';
  */
 
 function CreateBatchBySteps(): React.ReactElement {
+  const { _ } = useLingui();
+  const formModel = getFormModel(_);
+
   return (
     <MultiStepTemplate
       formId={formModel.formId}

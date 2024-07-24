@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { useLocalStorage } from 'hooks';
 
@@ -197,10 +199,13 @@ export function MultiStepProvider<T extends object>({
 }
 
 export function useMultiStep<T extends object>(): ContextProps<T> {
+  const { _ } = useLingui();
   const context = React.useContext(MultiStepContext);
 
   if (context === undefined) {
-    throw new Error('useMultiStep must be used within a MultiStepProvider');
+    throw new Error(
+      _(msg`useMultiStep must be used within a MultiStepProvider`),
+    );
   }
 
   return context as unknown as ContextProps<T>;

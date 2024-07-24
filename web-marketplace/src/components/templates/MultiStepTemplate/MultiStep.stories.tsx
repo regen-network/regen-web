@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { Center } from 'web-components/src/components/box';
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
 

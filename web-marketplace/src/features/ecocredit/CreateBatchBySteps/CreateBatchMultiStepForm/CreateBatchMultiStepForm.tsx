@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLingui } from '@lingui/react';
 import { Form, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
@@ -9,7 +10,7 @@ import NotFound from 'web-components/src/components/views/NotFoundView';
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
-import formModel from '../form-model';
+import getFormModel from '../form-model';
 import useCreateBatchSubmit from '../hooks/useCreateBatchSubmit';
 import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
 import Recipients, { RecipientsFormValues } from './Recipients';
@@ -33,6 +34,9 @@ export type CreateBatchFormValues = CreditBasicsFormValues &
   RecipientsFormValues;
 
 export default function CreateBatchMultiStepForm(): React.ReactElement {
+  const { _ } = useLingui();
+  const formModel = getFormModel(_);
+
   // state for fill-the-form flow
   const {
     data,

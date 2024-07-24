@@ -1,9 +1,12 @@
+import { msg } from '@lingui/macro';
+
 import {
   getValidationSchema,
   getValidationSchemaFields,
   initialValues as recipientsInitialValues,
 } from 'web-components/src/components/form/RecipientsForm';
 
+import { TranslatorType } from 'lib/i18n/i18n.types';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import {
@@ -15,30 +18,30 @@ import {
 // address prefix `regen` used to narrow address validation for recipients
 const addressPrefix = chainInfo.bech32Config.bech32PrefixAccAddr;
 
-const formModel = {
+const getFormModel = (_: TranslatorType) => ({
   formId: 'create-batch-form',
   steps: [
     {
       id: 'credit-basics', // type: fields
-      name: 'Credit Basics',
-      title: 'Create Credit Batch',
+      name: _(msg`Credit Basics`),
+      title: _(msg`Create Credit Batch`),
     },
     {
       id: 'recipients', // type: fields
-      name: 'Recipient(s)',
-      title: 'Recipients',
+      name: _(msg`Recipient(s)`),
+      title: _(msg`Recipients`),
     },
     {
       id: 'review', // type: submit
-      name: 'Review',
-      title: 'Review',
+      name: _(msg`Review`),
+      title: _(msg`Review`),
     },
     {
       id: 'finished', // type: result
-      name: 'Finished',
+      name: _(msg`Finished`),
       resultTitle: {
-        success: 'Credits have been issued!',
-        error: 'Sorry, your transaction was not successful.',
+        success: _(msg`Credits have been issued!`),
+        error: _(msg`Sorry, your transaction was not successful.`),
       },
     },
   ],
@@ -54,6 +57,6 @@ const formModel = {
     ...creditBasicsInitialValues,
     ...recipientsInitialValues,
   },
-};
+});
 
-export default formModel;
+export default getFormModel;

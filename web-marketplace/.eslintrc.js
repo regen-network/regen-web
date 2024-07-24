@@ -46,17 +46,6 @@ module.exports = {
         'lingui/no-expression-in-message': 2,
         'lingui/no-single-tag-to-translate': 2,
         'lingui/no-trans-inside-trans': 2,
-        'lingui/text-restrictions': [
-          1,
-          {
-            rules: [
-              {
-                patterns: ["''", '’', '“'],
-                message: 'Error message',
-              },
-            ],
-          },
-        ],
       },
     },
   ],

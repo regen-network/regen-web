@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
@@ -47,6 +49,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   onSubmit,
   onPrev,
 }) => {
+  const { _ } = useLingui();
   const { classes, cx } = useBasicInfoStyles();
   const { projectId } = useParams();
   const saveAndExit = useProjectSaveAndExit();
@@ -113,10 +116,11 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
           )
         ) {
           submitUntilSuccess(values, slugIndex + 1);
-        } else setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+        } else setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
       }
     },
     [
+      _,
       confirmSave,
       form,
       initialValues,
@@ -172,11 +176,11 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
               options={[
                 {
                   value: 'unit:HA',
-                  label: 'Hectares',
+                  label: _(msg`Hectares`),
                 },
                 {
                   value: 'unit:AC',
-                  label: 'Acres',
+                  label: _(msg`Acres`),
                 },
               ]}
               defaultStyle={false}

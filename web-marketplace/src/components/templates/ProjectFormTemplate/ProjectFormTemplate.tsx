@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 import { EditFormTemplate } from './EditFormTemplate';
 import { OnboardingFormTemplate } from './OnboardingFormTemplate';
 import { ProjectFormAccessTemplate } from './ProjectFormAccessTemplate';
 import { CREATE_PROJECT_URL_REGEX } from './ProjectFormTemplate.constants';
-import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 
 type Props = {
   isEdit?: boolean;

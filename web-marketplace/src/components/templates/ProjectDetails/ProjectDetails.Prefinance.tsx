@@ -3,6 +3,7 @@ import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import {
   ESTIMATED_ISSUANCE,
   ESTIMATED_ISSUANCE_TOOLTIP,
+  SOLD_OUT,
 } from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import SuccessIcon from 'web-components/src/components/icons/SuccessIcon';
@@ -10,6 +11,8 @@ import { LabeledValue } from 'web-components/src/components/text-layouts';
 import { Body, Title } from 'web-components/src/components/typography';
 
 import { ProjectPrefinancing } from 'generated/sanity-graphql';
+
+import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constants';
 
 import {
   CLASS_STATUS,
@@ -26,9 +29,10 @@ import { PrefinanceStatus } from './ProjectDetails.PrefinanceStatus';
 
 type Props = {
   projectPrefinancing: ProjectPrefinancing;
+  isSoldOut: boolean;
 };
 
-export const Prefinance = ({ projectPrefinancing }: Props) => {
+export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
   const {
     isPrefinanceProject,
     prefinanceTermsRaw,
@@ -95,6 +99,8 @@ export const Prefinance = ({ projectPrefinancing }: Props) => {
                     alt={ESTIMATED_ISSUANCE}
                   />
                 }
+                tooltipNumber={isSoldOut ? SOLD_OUT_TOOLTIP : undefined}
+                badgeLabel={isSoldOut ? SOLD_OUT : undefined}
               />
             )}
             {projectedCreditDeliveryDate && (

@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import LazyLoad from 'react-lazyload';
 import { Box, Grid, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
@@ -63,6 +64,7 @@ function ProjectTopSection({
   onChainCreditClassId,
   program,
   projectPrefinancing,
+  isSoldOut,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
   const { ecocreditClient } = useLedger();
@@ -224,7 +226,10 @@ function ProjectTopSection({
             </Body>
           )}
           {projectPrefinancing && (
-            <Prefinance projectPrefinancing={projectPrefinancing} />
+            <Prefinance
+              projectPrefinancing={projectPrefinancing}
+              isSoldOut={isSoldOut}
+            />
           )}
           <ProjectTopSectionCreditClassCard
             creditClassSanity={creditClassSanity}

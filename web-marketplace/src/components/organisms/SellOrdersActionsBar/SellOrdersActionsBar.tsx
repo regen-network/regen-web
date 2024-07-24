@@ -20,6 +20,7 @@ import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoToolt
 import { Label, Subtitle } from 'web-components/src/components/typography';
 
 import { EDIT_PROJECT } from 'pages/ProjectEdit/ProjectEdit.constants';
+import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constants';
 
 import {
   BOOK_CALL,
@@ -42,6 +43,7 @@ type Params = {
   prefinancePrice?: string;
   isAdmin?: boolean;
   children?: ReactNode;
+  isSoldOut?: boolean;
 };
 
 export const SellOrdersActionsBar = ({
@@ -60,6 +62,7 @@ export const SellOrdersActionsBar = ({
   prefinancePrice,
   isAdmin,
   children,
+  isSoldOut,
 }: Params): JSX.Element => {
   const { _ } = useLingui();
   const location = useLocation();
@@ -92,32 +95,33 @@ export const SellOrdersActionsBar = ({
           </OutlinedButton>
         ) : (
           <>
-            {(prefinancePrice ||
-              (avgPricePerTonLabel && !!onChainProjectId)) && (
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  mr: { xs: 2, sm: 5 },
-                  py: { xs: 1, sm: 1.25 },
-                }}
-              >
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Label size="xs" sx={{ color: 'info.main', mr: 1 }}>
-                    {isPrefinanceProject ? PRICE : AVG_PRICE_LABEL}
-                  </Label>
-                  {!isPrefinanceProject && (
-                    <InfoTooltipWithIcon
-                      title={avgPricePerTonTooltip}
-                      outlined
-                      sx={{ width: 18, height: 18 }}
-                    />
-                  )}
+            {(!isBuyButtonDisabled || !isSoldOut) &&
+              (prefinancePrice ||
+                (avgPricePerTonLabel && !!onChainProjectId)) && (
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    mr: { xs: 2, sm: 5 },
+                    py: { xs: 1, sm: 1.25 },
+                  }}
+                >
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Label size="xs" sx={{ color: 'info.main', mr: 1 }}>
+                      {isPrefinanceProject ? PRICE : AVG_PRICE_LABEL}
+                    </Label>
+                    {!isPrefinanceProject && (
+                      <InfoTooltipWithIcon
+                        title={avgPricePerTonTooltip}
+                        outlined
+                        sx={{ width: 18, height: 18 }}
+                      />
+                    )}
+                  </Box>
+                  <Subtitle>{prefinancePrice ?? avgPricePerTonLabel}</Subtitle>
                 </Box>
-                <Subtitle>{prefinancePrice ?? avgPricePerTonLabel}</Subtitle>
-              </Box>
-            )}
+              )}
             {(!isCommunityCredit ||
               (!onChainProjectId && isPrefinanceProject)) && (
               <OutlinedButton
@@ -139,7 +143,13 @@ export const SellOrdersActionsBar = ({
             )}
             {(!!onChainProjectId || !!onChainCreditClassId) && (
               <InfoTooltip
-                title={isBuyButtonDisabled ? BUY_DISABLED_TOOLTIP : ''}
+                title={
+                  isSoldOut
+                    ? SOLD_OUT_TOOLTIP
+                    : isBuyButtonDisabled
+                    ? BUY_DISABLED_TOOLTIP
+                    : ''
+                }
                 arrow
                 placement="top"
               >

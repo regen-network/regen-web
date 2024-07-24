@@ -46,7 +46,10 @@ export function LabeledValue({
       sxChildren={{ height: '100%' }}
     >
       {icon && <Box sx={{ mr: 2.5, display: 'inline-flex' }}>{icon}</Box>}
-      <Title variant="h3">
+      <Title
+        variant="h3"
+        className={(number || date) && badgeLabel ? 'mr-[7.5px]' : ''}
+      >
         {number &&
           formatNumber({
             num: number,

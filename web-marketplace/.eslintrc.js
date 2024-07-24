@@ -42,6 +42,7 @@ module.exports = {
           {
             ignoreFunction: ['test'],
             ignoreAttribute: ['sx', 'linearGradient'],
+            ignoreProperty: ['margin', 'padding', 'backgroundImage'],
           },
         ],
         'lingui/t-call-in-function': 2,

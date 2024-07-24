@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useFormState } from 'react-hook-form';
+import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
@@ -13,6 +14,7 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 import { useProjectEditContext } from 'pages';
 import { useCreateProjectContext } from 'pages/ProjectCreate';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
@@ -23,7 +25,6 @@ import {
   MetadataFormSchemaType,
 } from './MetadataForm.schema';
 import { useMetadataFormStyles } from './MetadataForm.styles';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface MetadataFormFormProps {
   onSubmit: ({ values }: { values: MetadataFormSchemaType }) => Promise<void>;
@@ -40,6 +41,7 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
   creditClassId,
   graphData,
 }) => {
+  const { _ } = useLingui();
   const { classes: styles } = useMetadataFormStyles();
   const { formRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
@@ -75,7 +77,7 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
             form.reset({}, { keepValues: true });
           }
         } catch (e) {
-          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+          setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
         }
       }}
     >

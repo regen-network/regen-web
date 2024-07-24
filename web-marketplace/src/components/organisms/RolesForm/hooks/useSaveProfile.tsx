@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
@@ -12,6 +13,7 @@ import { useAuth } from 'lib/auth/auth';
 import { ProfileModalSchemaType } from '../components/ProfileModal/ProfileModal.schema';
 
 export const useSaveProfile = () => {
+  const { _ } = useLingui();
   const [createAccount] = useCreateAccountMutation();
   const [updateAccount] = useUpdateAccountByIdMutation();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
@@ -58,11 +60,11 @@ export const useSaveProfile = () => {
           };
         }
       } catch (e) {
-        setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+        setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
         return undefined;
       }
     },
-    [activeAccountId, createAccount, setErrorBannerTextAtom, updateAccount],
+    [_, activeAccountId, createAccount, setErrorBannerTextAtom, updateAccount],
   );
 
   return saveProfile;

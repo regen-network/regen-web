@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
@@ -46,6 +47,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
   onSubmit,
   onClose,
 }) => {
+  const { _ } = useLingui();
   const [options, setOptions] = useState<Option[]>([]);
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { track } = useTracker();
@@ -95,7 +97,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
 
           await onSubmit(values);
         } catch (e) {
-          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+          setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
         }
       }}
     >

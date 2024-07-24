@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
@@ -10,6 +11,7 @@ import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 import { useCreateProjectContext } from 'pages/ProjectCreate';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -31,7 +33,6 @@ import {
   descriptionFormSchema,
   DescriptionSchemaType,
 } from './DescriptionForm.schema';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface DescriptionFormProps {
   onSubmit: (props: MetadataSubmitProps) => Promise<void>;
@@ -44,6 +45,7 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
   onSubmit,
   onPrev,
 }) => {
+  const { _ } = useLingui();
   const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
     schema: descriptionFormSchema,
@@ -95,7 +97,7 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
             form.reset({}, { keepValues: true });
           }
         } catch (e) {
-          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+          setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
         }
       }}
     >

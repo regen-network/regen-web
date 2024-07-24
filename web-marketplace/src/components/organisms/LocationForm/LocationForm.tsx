@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
@@ -11,6 +12,7 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 import { useProjectEditContext } from 'pages';
 import { useCreateProjectContext } from 'pages/ProjectCreate';
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
@@ -26,7 +28,6 @@ import {
   locationFormSchema,
   LocationFormSchemaType,
 } from './LocationForm.schema';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 interface LocationFormProps {
   mapToken: string;
@@ -41,6 +42,7 @@ const LocationForm: React.FC<LocationFormProps> = ({
   onSubmit,
   onPrev,
 }) => {
+  const { _ } = useLingui();
   const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
     schema: locationFormSchema,
@@ -88,7 +90,7 @@ const LocationForm: React.FC<LocationFormProps> = ({
             form.reset({}, { keepValues: true });
           }
         } catch (e) {
-          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+          setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
         }
       }}
     >

@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useFormState } from 'react-hook-form';
+import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
@@ -37,6 +38,7 @@ export const MediaForm = ({
   onPrev,
   navigateNext,
 }: MediaFormProps): JSX.Element => {
+  const { _ } = useLingui();
   const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
     schema: mediaFormSchema,
@@ -103,7 +105,7 @@ export const MediaForm = ({
           // Reset dirty state
           isDirtyRef.current = false;
         } catch (e) {
-          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+          setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
         }
       }}
     >

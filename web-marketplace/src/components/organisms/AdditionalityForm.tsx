@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trans } from '@lingui/macro';
 import { Box } from '@mui/material';
 import { Field, Form, Formik } from 'formik';
 import { RadioGroup } from 'formik-mui';
@@ -52,7 +53,7 @@ export const AdditionalityForm: React.FC<
 
   const DateLabel: React.FC<React.PropsWithChildren<unknown>> = () => (
     <Subtitle size="sm" mb={1}>
-      Choose a practice start date
+      <Trans>Choose a practice start date</Trans>
     </Subtitle>
   );
 

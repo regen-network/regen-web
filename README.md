@@ -21,6 +21,7 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
   - [Testing](#testing)
   - [Code style](#code-style)
   - [i18n](#i18n)
+    - [Important notes](#important-notes)
   - [Typography](#typography)
     - [Sizing guide](#sizing-guide)
   - [Netlify](#netlify)
@@ -186,6 +187,11 @@ Lingui usage:
 - constants:
   - const elements = [msg\`some element\`]
   - \_(elements[0])
+
+### Important notes
+
+`<Trans>` component should be imported from `@lingui/macro` most of the time. This component is used at compile-time.
+There is another `<Trans>` component in `@lingui/react` for [special cases](https://lingui.dev/tutorials/react-patterns#lazy-translations). This component is used at runtime.
 
 ## Typography
 

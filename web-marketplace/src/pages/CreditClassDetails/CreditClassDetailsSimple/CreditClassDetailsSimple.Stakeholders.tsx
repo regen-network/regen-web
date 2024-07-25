@@ -1,3 +1,5 @@
+import { Trans } from '@lingui/macro';
+
 import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { Stakeholders } from 'components/organisms/Stakeholders/Stakeholders';
@@ -19,9 +21,11 @@ export const CreditClassDetailsStakeholders = ({
       title: 'program',
       tooltip: (
         <>
-          A <b>program</b> involves the eligibility rules, monitoring and
-          certification, and registration systems for credit trading and
-          ownership tracking.
+          <Trans>
+            A <b>program</b> involves the eligibility rules, monitoring and
+            certification, and registration systems for credit trading and
+            ownership tracking.
+          </Trans>
         </>
       ),
     },
@@ -30,8 +34,10 @@ export const CreditClassDetailsStakeholders = ({
       title: 'admin',
       tooltip: (
         <>
-          <b>Credit class admin:</b> the entity who can update a given credit
-          class.
+          <Trans>
+            <b>Credit class admin:</b> the entity who can update a given credit
+            class.
+          </Trans>
         </>
       ),
     },
@@ -40,8 +46,10 @@ export const CreditClassDetailsStakeholders = ({
       title: 'issuers',
       tooltip: (
         <>
-          <b>Credit class issuer:</b> the entity who can issue credit batches
-          under the given credit class.
+          <Trans>
+            <b>Credit class issuer:</b> the entity who can issue credit batches
+            under the given credit class.
+          </Trans>
         </>
       ),
     },

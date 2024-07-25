@@ -1,3 +1,6 @@
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+
 import { Flex } from 'web-components/src/components/box';
 import { Body, Label } from 'web-components/src/components/typography';
 
@@ -13,6 +16,7 @@ const ApprovedMethodologiesList: React.FC<
     methodologyList?: ApprovedMethodologies;
   }>
 > = ({ methodologyList }) => {
+  const { _ } = useLingui();
   if (!methodologyList) return null;
 
   const methodologies = methodologyList?.['schema:itemListElement'];
@@ -22,7 +26,7 @@ const ApprovedMethodologiesList: React.FC<
 
   return (
     <MetaDetail
-      label="approved methodologies"
+      label={_(msg`approved methodologies`)}
       customContent={
         <Flex flexDirection="column">
           {methodologies.slice(0, MAX_METHODOLOGIES_LINKS).map(methodologie => {
@@ -49,9 +53,9 @@ const ApprovedMethodologiesList: React.FC<
               href={methodologyList?.['schema:url']}
               target="_blank"
             >
-              <Label sx={{ fontSize: [16], mt: 2 }}>{`+ ${
-                count - MAX_METHODOLOGIES_LINKS
-              } more`}</Label>
+              <Label sx={{ fontSize: [16], mt: 2 }}>
+                <Trans>+ {count - MAX_METHODOLOGIES_LINKS} more</Trans>
+              </Label>
             </Link>
           )}
         </Flex>

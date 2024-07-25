@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Grid } from '@mui/material';
 import { useAtom, useSetAtom } from 'jotai';
@@ -27,6 +28,7 @@ import {
 } from './MyProjects.utils';
 
 const MyProjects = (): JSX.Element => {
+  const { _ } = useLingui();
   const navigate = useNavigate();
   const location = useLocation();
   const { isIssuer, isProjectAdmin, sanityProfilePageData } =
@@ -96,7 +98,7 @@ const MyProjects = (): JSX.Element => {
                     {...project}
                     draft={project.offChain && !project.published}
                     button={{
-                      text: CREATE_POST,
+                      text: _(CREATE_POST),
                       disabled:
                         !activeAccountId || project.draft || !project.location,
                     }}

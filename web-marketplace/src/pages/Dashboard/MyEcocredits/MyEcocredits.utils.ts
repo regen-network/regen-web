@@ -1,9 +1,11 @@
+import { msg } from '@lingui/macro';
 import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import { BatchBalanceInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Option } from 'web-components/src/components/inputs/SelectTextField';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 type GetOtherSellOrderBatchDenomOptionsProps = {
   credits: BatchInfoWithBalance[];
@@ -47,10 +49,12 @@ export const getAvailableAmountByBatch = ({
 
 type GetDenomAllowedOptionsParams = {
   allowedDenoms?: AllowedDenom[];
+  _: TranslatorType;
 };
 
 export const getDenomAllowedOptions = ({
   allowedDenoms,
+  _,
 }: GetDenomAllowedOptionsParams): Option[] => {
   const allowedDenomsOptions: Option[] =
     allowedDenoms?.map(denom => ({
@@ -58,7 +62,7 @@ export const getDenomAllowedOptions = ({
       value: denom.bankDenom,
     })) ?? [];
   allowedDenomsOptions.unshift({
-    label: 'Choose denom',
+    label: _(msg`Choose denom`),
     value: '',
     disabled: true,
     selected: true,

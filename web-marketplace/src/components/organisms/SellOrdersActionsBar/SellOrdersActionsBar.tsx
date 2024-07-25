@@ -95,7 +95,7 @@ export const SellOrdersActionsBar = ({
           </OutlinedButton>
         ) : (
           <>
-            {(!isBuyButtonDisabled || !isSoldOut) &&
+            {((!isPrefinanceProject && !isBuyButtonDisabled) || !isSoldOut) &&
               (prefinancePrice ||
                 (avgPricePerTonLabel && !!onChainProjectId)) && (
                 <Box

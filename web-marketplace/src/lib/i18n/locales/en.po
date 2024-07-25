@@ -74,6 +74,18 @@ msgstr ""
 msgid "Amount Bridged"
 msgstr ""
 
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:150
+msgid "amount of credits"
+msgstr ""
+
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:126
+msgid "amount retired"
+msgstr ""
+
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:131
+msgid "amount sent"
+msgstr ""
+
 #: src/pages/CreditClassDetails/CreditClassDetails.ApprovedMethodologies.tsx:29
 msgid "approved methodologies"
 msgstr ""
@@ -205,6 +217,12 @@ msgstr ""
 msgid "Credit Batch Details"
 msgstr ""
 
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:146
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:122
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:127
+msgid "credit batch id"
+msgstr ""
+
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:113
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:129
 msgid "Credit Batch Id"
@@ -277,8 +295,8 @@ msgid "date"
 msgstr ""
 
 #: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:3
-msgid "draft"
-msgstr ""
+#~ msgid "draft"
+#~ msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:4
 msgid "Each credit batch has a unique ID (i.e. denomination) that starts with the abbreviation of the credit type followed by the project ID, start date and end date of the vintage year, and ending in the batch sequence number."
@@ -448,6 +466,10 @@ msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:19
 msgid "Portfolio"
+msgstr ""
+
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:122
+msgid "price per credit"
 msgstr ""
 
 #: src/pages/Certificate/Certificate.tsx:84

@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { Box, CardMedia } from '@mui/material';
 
 import { ProgramImageChildren } from 'web-components/src/components/cards/ProjectCard/ProjectCard.ImageChildren';
@@ -19,6 +20,7 @@ interface Props {
 const BuyersEcologicalCreditCardsSection: React.FC<
   React.PropsWithChildren<Props>
 > = ({ content }) => {
+  const { _ } = useLingui();
   const { creditClasses, creditClassesPrograms } = useCreditClasses({
     skippedClassId: SKIPPED_CLASS_ID,
   });
@@ -26,6 +28,7 @@ const BuyersEcologicalCreditCardsSection: React.FC<
     content,
     creditClasses,
     creditClassesPrograms,
+    _,
   });
 
   return (

@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { Box, Grid } from '@mui/material';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -18,6 +19,8 @@ type Props = {
 };
 
 export const CreateOffchainProjectCard = ({ onClick }: Props) => {
+  const { _ } = useLingui();
+
   return (
     <Grid item xs={12} sm={6}>
       <Box
@@ -37,12 +40,12 @@ export const CreateOffchainProjectCard = ({ onClick }: Props) => {
         }}
       >
         <Title variant="h4" sx={{ mb: 2.5 }}>
-          {CREATE_OFFCHAIN_PROJECT_TITLE}
+          {_(CREATE_OFFCHAIN_PROJECT_TITLE)}
         </Title>
         <Body sx={{ mb: 2.5 }}>
-          {CREATE_OFFCHAIN_PROJECT_DESCRIPTION}{' '}
+          {_(CREATE_OFFCHAIN_PROJECT_DESCRIPTION)}{' '}
           <Link href={CREATE_OFFCHAIN_PROJECT_HREF}>
-            {CREATE_OFFCHAIN_PROJECT_LINK}
+            {_(CREATE_OFFCHAIN_PROJECT_LINK)}
           </Link>
         </Body>
         <OutlinedButton size="small" onClick={onClick}>

@@ -1,2 +1,4 @@
-export const OFFSET_GENERATION_METHOD = 'offset generation method';
-export const PROJECT_ACTIVITIES = 'project activities';
+import { msg } from '@lingui/macro';
+
+export const OFFSET_GENERATION_METHOD = msg`offset generation method`;
+export const PROJECT_ACTIVITIES = msg`project activities`;

@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 
 import { getAllCreateProjectPageQuery } from 'lib/queries/react-query/sanity/getAllCreateProjectPageQuery/getAllCreateProjectPageQuery';
@@ -16,6 +18,7 @@ import { client as sanityClient } from '../../lib/clients/sanity';
 import { CreateProjectPageModal } from './BasicInfo.CreateProjectPageModal';
 
 const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { _ } = useLingui();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
   const { navigateNext } = useNavigateNext({ step: 'location', projectId });
@@ -60,7 +63,7 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <ProjectFormTemplate
       isEdit={isEdit}
-      title="Basic Info"
+      title={_(msg`Basic Info`)}
       offChainProject={offChainProject}
       onChainProject={onChainProject}
       loading={loading}

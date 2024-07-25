@@ -1,5 +1,6 @@
 import React, { MutableRefObject, useEffect } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
@@ -57,6 +58,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     onSuccess,
     onUpload,
   }) => {
+    const { _ } = useLingui();
     const form = useZodForm({
       schema: editProfileFormSchema,
       defaultValues: {
@@ -125,7 +127,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
               await onSubmit(data);
               onSuccess && onSuccess();
             } catch (e) {
-              setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+              setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
             }
           }
         }}

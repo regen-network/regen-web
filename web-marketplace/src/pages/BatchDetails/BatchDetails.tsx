@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Trans } from '@lingui/macro';
 import { Box } from '@mui/material';
 
 import { Flex } from 'web-components/src/components/box';
@@ -94,7 +95,9 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
             alignItems: 'center',
           }}
         >
-          <Title variant="h2">Credit Batch Details</Title>
+          <Title variant="h2">
+            <Trans>Credit Batch Details</Trans>
+          </Title>
           {isUserBatch && (
             <OutlinedButton
               sx={{ maxWidth: 'max-content', px: 7 }}
@@ -102,7 +105,7 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
               component={Link}
               href="/profile/portfolio"
             >
-              view in portfolio
+              <Trans>view in portfolio</Trans>
             </OutlinedButton>
           )}
         </Box>
@@ -116,7 +119,7 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
                 sx={{ py: 10, borderBottom: 1, borderColor: 'grey.100' }}
               />
               <Title variant="h5" sx={{ mt: 10, mb: 8 }}>
-                All credits
+                <Trans>All credits</Trans>
               </Title>
               <BatchTotalsGrid batch={batch} />
             </Flex>

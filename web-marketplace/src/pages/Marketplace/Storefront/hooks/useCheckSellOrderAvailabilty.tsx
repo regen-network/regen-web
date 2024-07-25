@@ -1,4 +1,5 @@
 import { MutableRefObject, useEffect } from 'react';
+import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
@@ -28,6 +29,7 @@ export const useCheckSellOrderAvailabilty = ({
   setTxModalHeader,
   sellOrders,
 }: Props): void => {
+  const { _ } = useLingui();
   useEffect(() => {
     const selectedSellOrderId = selectedSellOrderIdRef.current;
     const sellOrderId = selectedSellOrderId
@@ -41,7 +43,7 @@ export const useCheckSellOrderAvailabilty = ({
 
     if (isBuyOrderInvalid) {
       setError(ERRORS.SELL_ORDER_PURCHASED);
-      setTxModalHeader(errorsMapping[ERRORS.SELL_ORDER_PURCHASED].title);
+      setTxModalHeader(_(errorsMapping[ERRORS.SELL_ORDER_PURCHASED].title));
       setTxModalTitle(`Sell order #${sellOrderId}`);
       setCardItems([
         {
@@ -58,5 +60,6 @@ export const useCheckSellOrderAvailabilty = ({
     setTxModalTitle,
     setCardItems,
     setTxModalHeader,
+    _,
   ]);
 };

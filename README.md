@@ -13,12 +13,15 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
   - [Environment variables](#environment-variables)
   - [Development](#development)
   - [Deployment](#deployment)
-    - [Registry](#registry)
+    - [Marketplace](#marketplace)
       - [GraphQL Type generation](#graphql-type-generation)
     - [Storybook](#storybook)
+    - [Website](#website)
     - [Deploying the Custom Login form to Auth0](#deploying-the-custom-login-form-to-auth0)
   - [Testing](#testing)
   - [Code style](#code-style)
+  - [i18n](#i18n)
+    - [Important notes](#important-notes)
   - [Typography](#typography)
     - [Sizing guide](#sizing-guide)
   - [Netlify](#netlify)
@@ -173,6 +176,27 @@ bun run format-and-fix
 If you are using VsCode, there are suggested workspace settings in `.vscode/settings.json.suggested` - copy those over to your workspace `settings.json` and things should format automatically.
 
 Note: You'll need the VsCode extensions for [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) and [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+## i18n
+
+Regen codebase use [lingui](https://lingui.dev/) Internationalization Framework.
+
+**Lingui package usage:**
+
+- static text in JSX: `<Trans>{'static text'}</Trans>`
+- attributes: \_(msg\`static text\`)
+- constants:
+  - const elements = [msg\`some element\`]
+  - \_(elements[0])
+
+**Lingui CLI usage:**
+
+Run `i18n:extract` inside `web-marketplace` to update the `.po` files with the newly added translation keys (with `<Trans>` or `_(msg)`).
+
+### Important notes
+
+`<Trans>` component should be imported from `@lingui/macro` most of the time. This component is used at compile-time.
+There is another `<Trans>` component in `@lingui/react` for [special cases](https://lingui.dev/tutorials/react-patterns#lazy-translations). This component is used at runtime.
 
 ## Typography
 

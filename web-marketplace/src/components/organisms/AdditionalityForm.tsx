@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { Field, Form, Formik } from 'formik';
 import { RadioGroup } from 'formik-mui';
@@ -48,11 +50,12 @@ const useStyles = makeStyles()((theme: Theme) => ({
 export const AdditionalityForm: React.FC<
   React.PropsWithChildren<AdditionalityFormProps>
 > = props => {
+  const { _ } = useLingui();
   const { classes } = useStyles();
 
   const DateLabel: React.FC<React.PropsWithChildren<unknown>> = () => (
     <Subtitle size="sm" mb={1}>
-      Choose a practice start date
+      <Trans>Choose a practice start date</Trans>
     </Subtitle>
   );
 
@@ -96,18 +99,22 @@ export const AdditionalityForm: React.FC<
           <Form>
             <OnBoardingCard className={classes.card}>
               <ControlledFormLabel>
-                Which regenerative practices have you been applying and for how
-                long?
+                <Trans>
+                  Which regenerative practices have you been applying and for
+                  how long?
+                </Trans>
               </ControlledFormLabel>
               <Field component={RadioGroup} name="includesGrasslands">
                 <Field
-                  label="Rotational grazing"
+                  label={_(msg`Rotational grazing`)}
                   type="checkbox"
                   component={Toggle}
                   onChange={handleChange}
                   name="rotationalGrazing"
                   checked={!!values.rotationalGrazing}
-                  tooltip="A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
+                  tooltip={_(
+                    msg`A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation.`,
+                  )}
                   activeContent={
                     <Box pb={2}>
                       <DateLabel />
@@ -122,13 +129,15 @@ export const AdditionalityForm: React.FC<
                   }
                 />
                 <Field
-                  label="High density grazing"
+                  label={_(msg`High density grazing`)}
                   type="checkbox"
                   component={Toggle}
                   onChange={handleChange}
                   name="highDensityGrazing"
                   checked={!!values.highDensityGrazing}
-                  tooltip="In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
+                  tooltip={_(
+                    msg`In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time.`,
+                  )}
                   activeContent={
                     <Box pb={2}>
                       <DateLabel />
@@ -143,13 +152,15 @@ export const AdditionalityForm: React.FC<
                   }
                 />
                 <Field
-                  label="Residue grazing"
+                  label={_(msg`Residue grazing`)}
                   type="checkbox"
                   component={Toggle}
                   onChange={handleChange}
                   name="residueGrazing"
                   checked={!!values.residueGrazing}
-                  tooltip="The practice of letting livestock graze crop residue after a crop has been harvested."
+                  tooltip={_(
+                    msg`The practice of letting livestock graze crop residue after a crop has been harvested.`,
+                  )}
                   activeContent={
                     <Box pb={2}>
                       <DateLabel />
@@ -164,7 +175,7 @@ export const AdditionalityForm: React.FC<
                   }
                 />
                 <Field
-                  label="Other regenerative grazing practice"
+                  label={_(msg`Other regenerative grazing practice`)}
                   type="checkbox"
                   component={Toggle}
                   onChange={handleChange}
@@ -176,12 +187,14 @@ export const AdditionalityForm: React.FC<
 
             <OnBoardingCard className={classes.card}>
               <ControlledFormLabel>
-                Prior to adopting these regenerative practices (going back 5
-                years prior) how were you using the land?
+                <Trans>
+                  Prior to adopting these regenerative practices (going back 5
+                  years prior) how were you using the land?
+                </Trans>
               </ControlledFormLabel>
               <Field component={RadioGroup} name="includesGrasslands">
                 <Field
-                  label="Cropland"
+                  label={_(msg`Cropland`)}
                   type="checkbox"
                   component={Toggle}
                   onChange={handleChange}
@@ -189,7 +202,7 @@ export const AdditionalityForm: React.FC<
                   checked={!!values.cropland}
                 />
                 <Field
-                  label="Traditional grazing"
+                  label={_(msg`Traditional grazing`)}
                   type="checkbox"
                   component={Toggle}
                   onChange={handleChange}
@@ -197,7 +210,7 @@ export const AdditionalityForm: React.FC<
                   checked={!!values.traditionalGrazing}
                 />
                 <Field
-                  label="Natural ecosystem, unmanaged"
+                  label={_(msg`Natural ecosystem, unmanaged`)}
                   type="checkbox"
                   component={Toggle}
                   onChange={handleChange}
@@ -209,11 +222,13 @@ export const AdditionalityForm: React.FC<
 
             <OnBoardingCard className={classes.card}>
               <ControlledFormLabel>
-                Prior environmental conditions
+                <Trans>Prior environmental conditions</Trans>
               </ControlledFormLabel>
               <Field
                 component={ControlledTextField}
-                description="Relevant environmental changes within the project area. These include changes in vegetation such as clearing or planting, hydrology, soil conditions, or other."
+                description={_(
+                  msg`Relevant environmental changes within the project area. These include changes in vegetation such as clearing or planting, hydrology, soil conditions, or other.`,
+                )}
                 name="environmentalConditions"
                 rows={6}
                 minRows={6}

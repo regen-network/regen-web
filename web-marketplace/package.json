@@ -16,6 +16,8 @@
     "@hookform/resolvers": "^2.9.10",
     "@keplr-wallet/provider": "^0.11.10",
     "@keplr-wallet/stores": "^0.11.10",
+    "@lingui/macro": "^4.11.2",
+    "@lingui/react": "^4.11.2",
     "@mapbox/mapbox-sdk": "^0.15.3",
     "@mapbox/togeojson": "^0.16.0",
     "@mui/lab": "^5.0.0-alpha.54",
@@ -90,7 +92,8 @@
     "graphql:codegen": "graphql-codegen --config codegen.yml",
     "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml",
     "graphql:codegen-indexer": "graphql-codegen --config indexer-codegen.yml",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "i18n:extract": "lingui extract"
   },
   "browserslist": {
     "production": [
@@ -108,6 +111,8 @@
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@hookform/devtools": "^4.3.0",
     "@keplr-wallet/types": "^0.9.0",
+    "@lingui/cli": "^4.11.2",
+    "@lingui/vite-plugin": "^4.11.2",
     "@rollup/plugin-inject": "^5.0.3",
     "@storybook/addon-storyshots": "^6.3.12",
     "@types/enzyme": "^3.10.8",
@@ -122,11 +127,13 @@
     "@vitejs/plugin-react": "^4.0.0",
     "@walletconnect/types": "^2.11.2",
     "autoprefixer": "^10.4.16",
+    "babel-plugin-macros": "^3.1.0",
     "buffer": "^6.0.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.1",
     "eslint": "^8.42.0",
+    "eslint-plugin-lingui": "^0.3.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "postcss": "^8.4.31",

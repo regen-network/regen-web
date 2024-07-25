@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
@@ -18,6 +20,7 @@ import { getCertificateData } from './Certificate.utils';
 import { useFetchRetirement } from './hooks/useFetchRetirement';
 
 function CertificatePage(): JSX.Element {
+  const { _ } = useLingui();
   const { classes } = useCertificateStyles({
     pageBackground: '/jpg/certificate-header.jpg',
   });
@@ -28,7 +31,7 @@ function CertificatePage(): JSX.Element {
     retirementNodeId: certificateId ?? '',
   });
 
-  const certificateData = getCertificateData({ retirement });
+  const certificateData = getCertificateData({ retirement, _ });
 
   return (
     <div className={classes.root}>
@@ -65,7 +68,7 @@ function CertificatePage(): JSX.Element {
             variant="h4"
             sx={{ pb: 3.75, textAlign: { xs: 'center', sm: 'inherit' } }}
           >
-            Share
+            <Trans>Share</Trans>
           </Title>
           <ShareIcons
             xsSize={theme.spacing(10)}
@@ -77,7 +80,8 @@ function CertificatePage(): JSX.Element {
             className={classes.printButton}
             onClick={() => window.print()}
           >
-            <PrintIcon className={classes.icon} /> print certificate
+            <PrintIcon className={classes.icon} />{' '}
+            <Trans>print certificate</Trans>
           </OutlinedButton>
         </Grid>
       </Grid>

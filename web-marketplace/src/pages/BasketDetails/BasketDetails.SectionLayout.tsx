@@ -1,3 +1,5 @@
+import { Trans } from '@lingui/macro';
+
 import Section from 'web-components/src/components/section';
 
 import { useSectionLayoutStyles } from './BasketDetails.styles';
@@ -9,7 +11,7 @@ export const BasketDetailsSectionLayout: React.FC<
 
   return (
     <Section
-      title="Ecocredits"
+      title={<Trans>Ecocredits</Trans>}
       titleVariant="h3"
       titleAlign="left"
       classes={styles}

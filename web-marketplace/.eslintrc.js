@@ -1,3 +1,4 @@
+const { plugin } = require('@graphql-codegen/introspection');
 const baseConfig = require('../.eslintrc');
 
 module.exports = {

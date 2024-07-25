@@ -1,4 +1,6 @@
 import { useLocation } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 
 import SEO from 'web-components/src/components/seo';
@@ -23,6 +25,7 @@ import { useBuyersStyles } from './Buyers.styles';
 import { useFetchProjectsByIds } from './hooks/useFetchProjectsByIds';
 
 const BuyersPage = (): JSX.Element => {
+  const { _ } = useLingui();
   const { classes: styles } = useBuyersStyles();
   const location = useLocation();
   const { data, isLoading: isLoadingPage } = useQuery(
@@ -37,11 +40,13 @@ const BuyersPage = (): JSX.Element => {
   });
 
   const siteMetadata = {
-    title: 'For Buyers',
+    title: _(msg`For Buyers`),
     description:
       content?.metadata?.description ||
-      'Buy carbon credits and other ecosystem system service credits to meet your climate commitments and sustainability goals.',
-    author: 'Regen Network Development, PBC',
+      _(
+        msg`Buy carbon credits and other ecosystem system service credits to meet your climate commitments and sustainability goals.`,
+      ),
+    author: _(msg`Regen Network Development, PBC`),
     siteUrl: window.location.href,
     imageUrl: content?.metadata?.openGraphImage?.asset?.url || '',
   };

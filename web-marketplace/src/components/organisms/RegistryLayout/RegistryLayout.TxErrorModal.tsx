@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 import { useAtom } from 'jotai';
 import { findFirstNonEmptyString } from 'utils/string/findFirstNonEmptyString';
@@ -14,6 +15,7 @@ import { useResetTxModalError } from './hooks/useResetTxModalError';
 import { TX_ERROR_MODAL_BUTTON } from './RegistryLayout.constants';
 
 export const RegistryLayoutTxErrorModal = (): JSX.Element => {
+  const { _ } = useLingui();
   const [
     {
       buttonLink,
@@ -41,14 +43,17 @@ export const RegistryLayoutTxErrorModal = (): JSX.Element => {
         onClose={resetTxModalError}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
-        title={findFirstNonEmptyString([title, error.title])}
-        description={findFirstNonEmptyString([description, error.description])}
+        title={findFirstNonEmptyString([title, _(error.title)])}
+        description={findFirstNonEmptyString([
+          description,
+          error.description ? _(error.description) : '',
+        ])}
         cardTitle={cardTitle ?? ''}
         linkComponent={Link}
         onButtonClick={resetTxModalError}
         buttonTitle={findFirstNonEmptyString([
           buttonTitle,
-          error.buttonTitle,
+          error.buttonTitle ? _(error.buttonTitle) : '',
           TX_ERROR_MODAL_BUTTON,
         ])}
         buttonLink={findFirstNonEmptyString([buttonLink, error.buttonLink])}

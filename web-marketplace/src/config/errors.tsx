@@ -1,3 +1,6 @@
+import { MessageDescriptor } from '@lingui/core';
+import { msg } from '@lingui/macro';
+
 import { BrokenLinkIcon } from 'web-components/src/components/icons/BrokenLinkIcon';
 import RegenNotFoundIcon from 'web-components/src/components/icons/RegenNotFoundIcon';
 import SellOrderNotFoundIcon from 'web-components/src/components/icons/SellOrderNotFoundIcon';
@@ -11,26 +14,25 @@ export enum ERRORS {
 export const errorsMapping: Record<
   ERRORS,
   {
-    title: string;
-    description?: string;
-    buttonTitle?: string;
+    title: MessageDescriptor;
+    description?: MessageDescriptor;
+    buttonTitle?: MessageDescriptor;
     buttonLink?: string;
     icon: (props: any) => JSX.Element;
   }
 > = {
   [ERRORS.DEFAULT]: {
-    title: 'Sorry, something went wrong!',
+    title: msg`Sorry, something went wrong!`,
     icon: BrokenLinkIcon,
   },
   [ERRORS.SELL_ORDER_PURCHASED]: {
-    title: 'Sorry, someone has purchased this sell order!',
+    title: msg`Sorry, someone has purchased this sell order!`,
     icon: SellOrderNotFoundIcon,
   },
   [ERRORS.NOT_ENOUGH_REGEN_FEES]: {
-    title: 'Sorry, you don’t have any REGEN to cover transaction fees',
-    description:
-      'Please purchase some REGEN to cover the transaction fees for this action.',
-    buttonTitle: 'LEARN MORE',
+    title: msg`Sorry, you don’t have any REGEN to cover transaction fees`,
+    description: msg`Please purchase some REGEN to cover the transaction fees for this action.`,
+    buttonTitle: msg`LEARN MORE`,
     buttonLink:
       'https://guides.regen.network/guides/regen-marketplace/currencies/basics#fees',
     icon: RegenNotFoundIcon,

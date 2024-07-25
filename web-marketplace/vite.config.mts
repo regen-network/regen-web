@@ -7,6 +7,7 @@ import { defineConfig } from 'vite';
 import vitePluginRequire from 'vite-plugin-require';
 import svgrPlugin from 'vite-plugin-svgr';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
+import { lingui } from '@lingui/vite-plugin';
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
@@ -42,7 +43,12 @@ export default defineConfig(({ mode }) => {
           }
         : undefined,
     plugins: [
-      react(),
+      react({
+        babel: {
+          plugins: ['macros'],
+        },
+      }),
+      lingui(),
       viteTsconfigPaths(),
       svgrPlugin(),
       vitePluginRequire.default(),

@@ -1,4 +1,5 @@
 import { MutableRefObject, useCallback } from 'react';
+import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
@@ -15,6 +16,7 @@ type Params = {
 };
 
 export const useOnUploadCallback = ({ fileNamesToDeleteRef }: Params) => {
+  const { _ } = useLingui();
   const { activeAccount } = useAuth();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
@@ -30,11 +32,11 @@ export const useOnUploadCallback = ({ fileNamesToDeleteRef }: Params) => {
         if (value) fileNamesToDeleteRef.current.push(value);
         return result?.url;
       } catch (e) {
-        setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+        setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
         return '';
       }
     },
-    [activeAccount?.id, fileNamesToDeleteRef, setErrorBannerTextAtom],
+    [_, activeAccount?.id, fileNamesToDeleteRef, setErrorBannerTextAtom],
   );
 
   return onUpload;

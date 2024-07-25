@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import {
   AdditionalityForm,
@@ -7,6 +9,8 @@ import {
 import { OnboardingFormTemplate } from '../../components/templates';
 
 const Additionality: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { _ } = useLingui();
+
   async function saveAndExit(): Promise<void> {
     // TODO: functionality
   }
@@ -19,7 +23,7 @@ const Additionality: React.FC<React.PropsWithChildren<unknown>> = () => {
   }
 
   return (
-    <OnboardingFormTemplate activeStep={0} title="Eligibility">
+    <OnboardingFormTemplate activeStep={0} title={_(msg`Eligibility`)}>
       <AdditionalityForm submit={submitAdditionality} />
     </OnboardingFormTemplate>
   );

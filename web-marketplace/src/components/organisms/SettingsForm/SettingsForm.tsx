@@ -5,6 +5,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
@@ -37,6 +38,7 @@ interface SettingsFormProps {
 export const SettingsForm: React.FC<
   React.PropsWithChildren<SettingsFormProps>
 > = ({ initialValues, submit, onPrev }) => {
+  const { _ } = useLingui();
   const form = useZodForm({
     schema: settingsFormSchema,
     defaultValues: {
@@ -95,7 +97,7 @@ export const SettingsForm: React.FC<
             form.reset({}, { keepValues: true });
           }
         } catch (e) {
-          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+          setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
         }
       }}
     >

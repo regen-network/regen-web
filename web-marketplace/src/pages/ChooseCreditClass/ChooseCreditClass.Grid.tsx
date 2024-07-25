@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import Grid, { GridProps } from '@mui/material/Grid';
 
@@ -22,6 +24,8 @@ interface TemplateProps {
 
 const ChooseCreditClassGrid: React.FC<React.PropsWithChildren<TemplateProps>> =
   ({ justifyContent = 'flex-start', loading, isIssuer, children }) => {
+    const { _ } = useLingui();
+
     return (
       <Box
         sx={theme => ({
@@ -30,13 +34,13 @@ const ChooseCreditClassGrid: React.FC<React.PropsWithChildren<TemplateProps>> =
         })}
       >
         <OnBoardingSection
-          title="Choose a credit class"
+          title={_(msg`Choose a credit class`)}
           headerChildren={
             isIssuer ? (
               <Body size="lg" as="p" pt={5} textAlign="center">
-                {CHOOSE_CREDIT_CLASS_DESCRIPTION}{' '}
+                {_(CHOOSE_CREDIT_CLASS_DESCRIPTION)}{' '}
                 <Link href={CHOOSE_CREDIT_CLASS_HREF}>
-                  {CHOOSE_CREDIT_CLASS_LINK}
+                  {_(CHOOSE_CREDIT_CLASS_LINK)}
                 </Link>
               </Body>
             ) : undefined

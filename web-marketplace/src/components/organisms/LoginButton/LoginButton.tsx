@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import { useQuery } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 
@@ -48,7 +49,7 @@ const LoginButton = ({ size = 'small' }: Props) => {
         <>
           {noAccountAndNoWallet && (
             <OutlinedButton onClick={onButtonClick} size={size}>
-              log in
+              <Trans>log in</Trans>
             </OutlinedButton>
           )}
         </>

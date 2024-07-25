@@ -1,0 +1,299 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2024-07-23 11:24+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+msgid ""
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:116
+msgid "A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
+msgstr ""
+
+#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:183
+msgid "Acres"
+msgstr ""
+
+#: src/pages/Activity/Activity.tsx:12
+msgid "Activity"
+msgstr ""
+
+#: src/pages/BatchDetails/BatchDetails.tsx:122
+msgid "All credits"
+msgstr ""
+
+#: src/pages/BasicInfo/BasicInfo.tsx:66
+msgid "Basic Info"
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:64
+msgid "block height"
+msgstr ""
+
+#: src/pages/Buyers/Buyers.tsx:47
+msgid "Buy carbon credits and other ecosystem system service credits to meet your climate commitments and sustainability goals."
+msgstr ""
+
+#: src/pages/ChooseCreditClass/ChooseCreditClass.Grid.tsx:37
+msgid "Choose a credit class"
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:58
+msgid "Choose a practice start date"
+msgstr ""
+
+#: src/pages/ChooseCreditClass/ChooseCreditClass.Item.tsx:27
+msgid "Choose credit class"
+msgstr ""
+
+#: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:8
+msgid "Create a project without a credit class"
+msgstr ""
+
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:27
+msgid "Create Credit Batch"
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:147
+msgid "credit activity table"
+msgstr ""
+
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:26
+msgid "Credit Basics"
+msgstr ""
+
+#: src/pages/BatchDetails/BatchDetails.tsx:99
+msgid "Credit Batch Details"
+msgstr ""
+
+#: src/pages/Certificate/Certificate.utils.ts:43
+msgid "Credit class"
+msgstr ""
+
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx:167
+msgid "credit class <0/>"
+msgstr ""
+
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:43
+msgid "Credits have been issued!"
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:197
+msgid "Cropland"
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:61
+msgid "date"
+msgstr ""
+
+#: src/pages/BasketDetails/BasketDetails.SectionLayout.tsx:14
+msgid "Ecocredits"
+msgstr ""
+
+#: src/components/organisms/CreditTotals/CreditTotals.tsx:45
+msgid "ecocredits created"
+msgstr ""
+
+#: src/components/organisms/CreditTotals/CreditTotals.tsx:38
+msgid "ecocredits retired"
+msgstr ""
+
+#: src/components/organisms/CreditTotals/CreditTotals.tsx:32
+msgid "ecocredits tradable"
+msgstr ""
+
+#: src/pages/Additionality/Additionality.tsx:26
+msgid "Eligibility"
+msgstr ""
+
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:41
+msgid "Finished"
+msgstr ""
+
+#: src/pages/Buyers/Buyers.tsx:43
+msgid "For Buyers"
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:62
+msgid "hash"
+msgstr ""
+
+#: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:179
+msgid "Hectares"
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:132
+msgid "High density grazing"
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:139
+msgid "In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
+msgstr ""
+
+#: src/config/errors.tsx:35
+msgid "LEARN MORE"
+msgstr ""
+
+#: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:5
+msgid "Learn more about creating a credit class»"
+msgstr ""
+
+#: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:10
+msgid "Learn more»"
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:220
+msgid "Loading..."
+msgstr ""
+
+#: src/components/organisms/LoginButton/LoginButton.tsx:52
+msgid "log in"
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:63
+msgid "messages"
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:213
+msgid "Natural ecosystem, unmanaged"
+msgstr ""
+
+#: src/pages/Buyers/Buyers.constants.ts:3
+msgid "offset generation method"
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:178
+msgid "Other regenerative grazing practice"
+msgstr ""
+
+#: src/config/errors.tsx:34
+msgid "Please purchase some REGEN to cover the transaction fees for this action."
+msgstr ""
+
+#: src/pages/Certificate/Certificate.tsx:84
+msgid "print certificate"
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:225
+msgid "Prior environmental conditions"
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:190
+msgid "Prior to adopting these regenerative practices (going back 5 years prior) how were you using the land?"
+msgstr ""
+
+#: src/pages/Certificate/Certificate.utils.ts:36
+msgid "Project"
+msgstr ""
+
+#: src/pages/Buyers/Buyers.constants.ts:4
+msgid "project activities"
+msgstr ""
+
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:31
+msgid "Recipient(s)"
+msgstr ""
+
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:32
+msgid "Recipients"
+msgstr ""
+
+#: src/pages/Buyers/Buyers.tsx:49
+msgid "Regen Network Development, PBC"
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:230
+msgid "Relevant environmental changes within the project area. These include changes in vegetation such as clearing or planting, hydrology, soil conditions, or other."
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:155
+msgid "Residue grazing"
+msgstr ""
+
+#: src/pages/Certificate/Certificate.utils.ts:50
+msgid "Retired by"
+msgstr ""
+
+#: src/pages/Certificate/Certificate.constants.ts:3
+msgid "Retirement Certificate"
+msgstr ""
+
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:36
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:37
+msgid "Review"
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:109
+msgid "Rotational grazing"
+msgstr ""
+
+#: src/pages/Certificate/Certificate.tsx:71
+msgid "Share"
+msgstr ""
+
+#: src/config/errors.tsx:29
+msgid "Sorry, someone has purchased this sell order!"
+msgstr ""
+
+#: src/config/errors.tsx:25
+msgid "Sorry, something went wrong!"
+msgstr ""
+
+#: src/config/errors.tsx:33
+msgid "Sorry, you don’t have any REGEN to cover transaction fees"
+msgstr ""
+
+#: src/features/ecocredit/CreateBatchBySteps/form-model.ts:44
+msgid "Sorry, your transaction was not successful."
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:162
+msgid "The practice of letting livestock graze crop residue after a crop has been harvested."
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:205
+msgid "Traditional grazing"
+msgstr ""
+
+#: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:207
+msgid "useMultiStep must be used within a MultiStepProvider"
+msgstr ""
+
+#: src/pages/BatchDetails/BatchDetails.tsx:108
+msgid "view in portfolio"
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:201
+msgid "view transaction"
+msgstr ""
+
+#: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:4
+msgid "We recommend choosing a credit class and creating an on chain project if possible."
+msgstr ""
+
+#: src/components/organisms/AdditionalityForm.tsx:102
+msgid "Which regenerative practices have you been applying and for how long?"
+msgstr ""
+
+#: src/pages/ChooseCreditClass/ChooseCreditClass.tsx:59
+msgid "You are not yet listed as an issuer on any credit classes"
+msgstr ""
+
+#: src/pages/ConnectWalletPage/ConnectWalletPage.constants.ts:3
+msgid "You must connect to Keplr in order to view the content of this page."
+msgstr ""
+
+#: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:9
+msgid "You will not be able to issue credits with this option unless you later register this project with a credit class."
+msgstr ""

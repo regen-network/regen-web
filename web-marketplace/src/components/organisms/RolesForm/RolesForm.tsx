@@ -5,6 +5,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
@@ -50,6 +51,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   onPrev,
   isOnChain,
 }) => {
+  const { _ } = useLingui();
   const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const form = useZodForm({
     schema: rolesFormSchema(isOnChain),
@@ -156,7 +158,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
             form.reset({}, { keepValues: true });
           }
         } catch (e) {
-          setErrorBannerTextAtom(errorsMapping[ERRORS.DEFAULT].title);
+          setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
         }
       }}
     >

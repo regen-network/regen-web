@@ -1,6 +1,8 @@
 const { mergeConfig } = require('vite');
 const tsconfigPaths = require('vite-tsconfig-paths').default;
 const svgrPlugin = require('vite-plugin-svgr').default;
+import { lingui } from '@lingui/vite-plugin';
+import react from '@vitejs/plugin-react';
 
 const {
   NodeGlobalsPolyfillPlugin,
@@ -67,6 +69,12 @@ module.exports = {
         },
       },
       plugins: [
+        react({
+          babel: {
+            plugins: ['macros'],
+          },
+        }),
+        lingui(),
         svgrPlugin({
           include: path.resolve(
             __dirname,

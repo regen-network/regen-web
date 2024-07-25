@@ -1,7 +1,10 @@
+import { msg } from '@lingui/macro';
+
 import { CertificateType } from 'web-components/src/components/certificate/certificate.types';
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getHashUrl } from 'lib/block-explorer';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 import { NormalizedRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
 
 import { CERTIFICATE_TITLE } from './Certificate.constants';
@@ -10,14 +13,17 @@ import { CERTIFICATE_TITLE } from './Certificate.constants';
 
 export type GetCertificateDataParams = {
   retirement: NormalizedRetirement;
+  _: TranslatorType;
 };
 
 export const getCertificateData = ({
   retirement,
+  _,
 }: GetCertificateDataParams): CertificateType => {
   return {
-    certificateTitle:
-      `${retirement.retirementLabel} ${CERTIFICATE_TITLE}`.trim(),
+    certificateTitle: `${retirement.retirementLabel} ${_(
+      CERTIFICATE_TITLE,
+    )}`.trim(),
     certificateIcon: retirement.retirementIcon,
     creditsUnits: Number(retirement.amountRetired),
     creditUnitName: retirement.creditClassName,
@@ -27,21 +33,21 @@ export const getCertificateData = ({
         : undefined,
     itemLinks: [
       {
-        name: 'Project',
+        name: _(msg`Project`),
         link: {
           text: retirement.projectName,
           href: `/project/${retirement?.projectId}`,
         },
       },
       {
-        name: 'Credit class',
+        name: _(msg`Credit class`),
         link: {
           text: retirement.creditClassName ?? '',
           href: `/credit-classes/${retirement.creditClassId}`,
         },
       },
       {
-        name: 'Retired by',
+        name: _(msg`Retired by`),
         link: {
           text: retirement.owner?.name ?? '',
           href: retirement.owner?.link ?? '',

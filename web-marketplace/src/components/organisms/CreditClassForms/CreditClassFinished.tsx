@@ -1,3 +1,5 @@
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Link, SxProps } from '@mui/material';
 import { truncate } from 'lodash';
 
@@ -17,16 +19,19 @@ export const CreditClassFinished = (props: {
   classId: string;
   hash: string;
 }): JSX.Element => {
+  const { _ } = useLingui();
   const { classId, hash } = props;
   return (
     <Flex col>
       <OnBoardingCard>
-        <Title variant="h5">Create Credit Class</Title>
+        <Title variant="h5">
+          <Trans>Create Credit Class</Trans>
+        </Title>
         <Flex col sx={{ mt: 6, gap: 6 }}>
-          <LabeledDetail label="Credit Class ID" sxLabel={sxs.label}>
+          <LabeledDetail label={_(msg`Credit Class ID`)} sxLabel={sxs.label}>
             <Body size="lg">{classId}</Body>
           </LabeledDetail>
-          <LabeledDetail label="Hash" sxLabel={sxs.label}>
+          <LabeledDetail label={_(msg`Hash`)} sxLabel={sxs.label}>
             <Body size="lg">
               <Link href={getHashUrl(hash)} target="_blank">
                 {truncate(hash, { length: 13 })}
@@ -40,7 +45,7 @@ export const CreditClassFinished = (props: {
         component={Link}
         href={`/credit-classes/${classId}`}
       >
-        see credit class page
+        <Trans>see credit class page</Trans>
       </OutlinedButton>
     </Flex>
   );

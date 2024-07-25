@@ -6,7 +6,7 @@ import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 
 import {
   CreateCreditClassForm,
-  createCreditClassSteps,
+  getCreateCreditClassSteps,
 } from './CreateCreditClassForm';
 import { mockMetadata, mockTxHash } from './CreditClass.mocks';
 import { CreditClassFinished } from './CreditClassFinished';
@@ -43,7 +43,7 @@ export const createCreditClassForm = (): JSX.Element => (
       admin: 'adminAddress',
       fee: '20 REGEN',
     }}
-    steps={createCreditClassSteps}
+    steps={getCreateCreditClassSteps}
   >
     {/* eslint-disable-next-line no-console */}
     <CreateCreditClassForm onSubmit={console.log} />

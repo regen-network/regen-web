@@ -193,6 +193,20 @@ Regen codebase use [lingui](https://lingui.dev/) Internationalization Framework.
 
 Run `i18n:extract` inside `web-marketplace` to update the `.po` files with the newly added translation keys (with `<Trans>` or `_(msg)`).
 
+**Tips**
+
+Here's a vscode snippet to make string translation easier:
+
+```
+"Lingui translate": {
+  "prefix": "lin",
+  "body": [
+    "_(msg`$1`)",
+  ],
+  "description": "Translate text"
+}
+```
+
 ### Important notes
 
 `<Trans>` component should be imported from `@lingui/macro` most of the time. This component is used at compile-time.

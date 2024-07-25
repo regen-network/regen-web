@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLingui } from '@lingui/react';
 
 import { RegenModalProps } from 'web-components/src/components/modal';
 import { FormModalTemplate } from 'web-components/src/components/modal/FormModalTemplate';
@@ -23,16 +24,24 @@ const CreditRetireModal: React.FC<CreditRetireModalProps> = ({
   open,
   onSubmit,
   onClose,
-}) => (
-  <FormModalTemplate title={CREDIT_RETIRE_TITLE} open={open} onClose={onClose}>
-    <CreditRetireForm
-      availableTradableAmount={availableTradableAmount}
-      batchDenom={batchDenom}
-      mapboxToken={mapboxToken}
+}) => {
+  const { _ } = useLingui();
+
+  return (
+    <FormModalTemplate
+      title={_(CREDIT_RETIRE_TITLE)}
+      open={open}
       onClose={onClose}
-      onSubmit={onSubmit}
-    />
-  </FormModalTemplate>
-);
+    >
+      <CreditRetireForm
+        availableTradableAmount={availableTradableAmount}
+        batchDenom={batchDenom}
+        mapboxToken={mapboxToken}
+        onClose={onClose}
+        onSubmit={onSubmit}
+      />
+    </FormModalTemplate>
+  );
+};
 
 export { CreditRetireModal };

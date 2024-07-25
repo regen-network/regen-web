@@ -8,7 +8,11 @@ import {
   CreateCreditClassForm,
   getCreateCreditClassSteps,
 } from './CreateCreditClassForm';
-import { mockMetadata, mockTxHash } from './CreditClass.mocks';
+import {
+  createCreditClassStepsMock,
+  mockMetadata,
+  mockTxHash,
+} from './CreditClass.mocks';
 import { CreditClassFinished } from './CreditClassFinished';
 import {
   creditClassBaseValues,
@@ -43,7 +47,7 @@ export const createCreditClassForm = (): JSX.Element => (
       admin: 'adminAddress',
       fee: '20 REGEN',
     }}
-    steps={getCreateCreditClassSteps}
+    steps={createCreditClassStepsMock}
   >
     {/* eslint-disable-next-line no-console */}
     <CreateCreditClassForm onSubmit={console.log} />

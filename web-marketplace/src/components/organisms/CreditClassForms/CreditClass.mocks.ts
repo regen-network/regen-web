@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 export const mockTxHash =
   'C5AD9746EEE7E8131066FF4DF708B1D535399F697DBB7877A195FFB638A73975';
 
@@ -77,3 +78,21 @@ export const mockMetadata = {
     },
   },
 };
+
+export const createCreditClassStepsMock = [
+  {
+    id: 'create-credit-class',
+    name: 'Create Credit Class',
+    title: 'Create Credit Class',
+  },
+  {
+    id: '',
+    name: 'Review',
+    title: 'Review',
+  },
+  {
+    id: '',
+    name: 'Finished',
+    title: 'Finished',
+  },
+];

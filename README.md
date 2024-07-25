@@ -180,13 +180,18 @@ Note: You'll need the VsCode extensions for [Prettier](https://marketplace.visua
 ## i18n
 
 Regen codebase use [lingui](https://lingui.dev/) Internationalization Framework.
-Lingui usage:
+
+**Lingui package usage:**
 
 - static text in JSX: `<Trans>{'static text'}</Trans>`
 - attributes: \_(msg\`static text\`)
 - constants:
   - const elements = [msg\`some element\`]
   - \_(elements[0])
+
+**Lingui CLI usage:**
+
+Run `i18n:extract` inside `web-marketplace` to update the `.po` files with the newly added translation keys (with `<Trans>` or `_(msg)`).
 
 ### Important notes
 

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
@@ -28,6 +30,7 @@ import writingOnPaperImg from 'assets/writing-on-paper.png';
 
 const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
   () => {
+    const { _ } = useLingui();
     const { classes } = useCreditClassInfoStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
@@ -152,7 +155,7 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
           <ResponsiveSlider
             mobileItemWidth="90%"
             padding={theme.spacing(2.5)}
-            title="Ecological outcomes"
+            title={_(msg`Ecological outcomes`)}
             arrows={content?.outcomes ? content.outcomes.length > 3 : false}
             slidesToShow={3}
             items={outcomeCards}
@@ -169,7 +172,7 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
                 root: classes.resourcesRoot,
               }}
               padding={theme.spacing(2.5)}
-              title="Resources"
+              title={_(msg`Resources`)}
               titleVariant="h2"
               arrows={
                 content?.resources
@@ -193,7 +196,7 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
         />
         <FixedFooter justifyContent="flex-end">
           <ContainedButton onClick={() => openModal(content?.footerLink)}>
-            Submit a Credit Class
+            <Trans>Submit a Credit Class</Trans>
           </ContainedButton>
         </FixedFooter>
         <Modal open={open} onClose={() => setOpen(false)} isIFrame>

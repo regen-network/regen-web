@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { useLingui } from '@lingui/react';
 import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 
@@ -43,6 +44,7 @@ const useBasketTakeSubmit = ({
   onTxSuccessful,
   onErrorCallback,
 }: Props): Params => {
+  const { _ } = useLingui();
   const { track } = useTracker();
   const basketTakeSubmit = useCallback(
     async (values: MsgTakeValues): Promise<void> => {
@@ -105,7 +107,7 @@ const useBasketTakeSubmit = ({
 
           onTxSuccessful({
             cardItems,
-            title: TAKE_HEADER,
+            title: _(TAKE_HEADER),
             cardTitle: basketTakeTitle,
           });
         }
@@ -117,13 +119,14 @@ const useBasketTakeSubmit = ({
     },
     [
       accountAddress,
-      basketTakeTitle,
-      signAndBroadcast,
-      onTxSuccessful,
-      track,
       baskets,
-      onBroadcast,
+      track,
+      signAndBroadcast,
       onErrorCallback,
+      onTxSuccessful,
+      _,
+      basketTakeTitle,
+      onBroadcast,
     ],
   );
 

@@ -5,6 +5,8 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { makeStyles } from 'tss-react/mui';
 
@@ -101,6 +103,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 const CreditClassDetailsWithContent: React.FC<
   React.PropsWithChildren<CreditDetailsProps>
 > = ({ dbClass, content, isLandSteward }) => {
+  const { _ } = useLingui();
   const [modalIframeLink, setModalIframeLink] = useState<string>('');
   const [isBuyerModalOpen, setBuyerModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -133,7 +136,9 @@ const CreditClassDetailsWithContent: React.FC<
             root: styles.sectionPadding,
             title: styles.title,
           }}
-          title={content.landSteward?.projectsTitle || 'Featured Projects'}
+          title={
+            content.landSteward?.projectsTitle || _(msg`Featured Projects`)
+          }
           projects={featuredProjects}
         />
       </div>
@@ -154,7 +159,7 @@ const CreditClassDetailsWithContent: React.FC<
       >
         <MoreProjectsSection
           classes={{ root: styles.sectionPadding, title: styles.title }}
-          title={content.buyer?.projectsTitle || 'More Projects'}
+          title={content.buyer?.projectsTitle || _(msg`More Projects`)}
           projects={allProjects}
         />
       </div>
@@ -219,7 +224,7 @@ const CreditClassDetailsWithContent: React.FC<
       >
         {content.ecologicalImpact && (
           <ImpactSection
-            title="Ecological Impact"
+            title={_(msg`Ecological Impact`)}
             impacts={content.ecologicalImpact}
           />
         )}
@@ -277,7 +282,7 @@ const CreditClassDetailsWithContent: React.FC<
         className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
       >
         <MediaSection
-          header="Videos"
+          header={_(msg`Videos`)}
           items={
             isLandSteward ? content.landSteward?.videos : content.buyer?.videos
           }
@@ -296,15 +301,15 @@ const CreditClassDetailsWithContent: React.FC<
       </div>
       {/* {isLandSteward && <CreditClassConnectSection connectSection={content.landSteward?.connectSection} />} TODO: hidden until resource is ready */}
       <SwitchFooter
-        activeOption={isLandSteward ? 'Land Steward' : 'Buyer'}
+        activeOption={isLandSteward ? _(msg`Land Steward`) : _(msg`Buyer`)}
         buttonText={
           isLandSteward
-            ? content.landSteward?.ctaButton?.buttonText || 'get started'
-            : content.buyer?.ctaButton?.buttonText || 'buy credits'
+            ? content.landSteward?.ctaButton?.buttonText || _(msg`get started`)
+            : content.buyer?.ctaButton?.buttonText || _(msg`buy credits`)
         }
-        label="I am a:"
-        leftOption="Land Steward"
-        rightOption="Buyer"
+        label={_(msg`I am a:`)}
+        leftOption={_(msg`Land Steward`)}
+        rightOption={_(msg`Buyer`)}
         onCtaClick={onCtaClick}
         onToggleClick={setContent}
       />
@@ -325,7 +330,9 @@ const CreditClassDetailsWithContent: React.FC<
           }}
         />
       </Modal>
-      {submitted && <Banner text="Thanks for submitting your information!" />}
+      {submitted && (
+        <Banner text={_(msg`Thanks for submitting your information!`)} />
+      )}
     </div>
   );
 };

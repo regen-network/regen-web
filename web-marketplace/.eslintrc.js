@@ -4,7 +4,6 @@ const baseConfig = require('../.eslintrc');
 module.exports = {
   ...baseConfig,
   ignorePatterns: ['src/generated/*.tsx'],
-  plugins: [...baseConfig.plugins, 'lingui'],
   overrides: [
     ...baseConfig.overrides,
     {
@@ -37,19 +36,6 @@ module.exports = {
             ],
           },
         ],
-        'lingui/no-unlocalized-strings': [
-          1,
-          {
-            ignoreFunction: ['test'],
-            ignoreAttribute: ['sx', 'linearGradient'],
-            ignoreProperty: ['margin', 'padding', 'backgroundImage'],
-          },
-        ],
-        'lingui/t-call-in-function': 2,
-        'lingui/no-single-variables-to-translate': 2,
-        'lingui/no-expression-in-message': 2,
-        'lingui/no-single-tag-to-translate': 2,
-        'lingui/no-trans-inside-trans': 2,
       },
     },
   ],

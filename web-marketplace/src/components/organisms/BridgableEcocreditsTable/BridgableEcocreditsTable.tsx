@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { loaderStyles } from 'styles/loader';
@@ -46,6 +48,7 @@ interface Props {
 export const BridgableEcocreditsTable = ({
   accountAddress,
 }: Props): JSX.Element => {
+  const { _ } = useLingui();
   const { track } = useTracker();
 
   const [batchToBridge, setBatchToBridge] = useState<
@@ -74,7 +77,7 @@ export const BridgableEcocreditsTable = ({
         sx={loaderStyles.withLoaderBlock}
       >
         <ActionsTable
-          tableLabel="bridgable ecocredits table"
+          tableLabel={_(msg`bridgable ecocredits table`)}
           sx={tableStyles.rootOnlyTopBorder}
           renderActionButtons={(i: number) => (
             <OutlinedButton
@@ -89,11 +92,13 @@ export const BridgableEcocreditsTable = ({
                 });
               }}
             >
-              {BRIDGE_ACTION}
+              {_(BRIDGE_ACTION)}
             </OutlinedButton>
           )}
           headerRows={[
-            <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
+            <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>
+              <Trans>Project</Trans>
+            </Box>,
             <Box
               display="flex"
               sx={{
@@ -104,30 +109,38 @@ export const BridgableEcocreditsTable = ({
               }}
             >
               <Box sx={{ width: '4.2rem' }}>
-                <BreakText>Credit Batch Id</BreakText>
+                <BreakText>
+                  <Trans>Credit Batch Id</Trans>
+                </BreakText>
               </Box>
               <Box alignSelf="flex-end" ml={2}>
-                <InfoTooltipWithIcon outlined title={CREDIT_BATCH_TOOLTIP} />
+                <InfoTooltipWithIcon outlined title={_(CREDIT_BATCH_TOOLTIP)} />
               </Box>
             </Box>,
-            'Credit Class',
+            <Trans>Credit Class</Trans>,
             <Box display="flex">
-              <BreakTextEnd>Amount Bridgable</BreakTextEnd>
+              <BreakTextEnd>
+                <Trans>Amount Bridgable</Trans>
+              </BreakTextEnd>
               <Box alignSelf="flex-end" ml={2}>
                 <InfoTooltipWithIcon
                   outlined
-                  title={AMOUNT_BRIDGABLE_TOOLTIP}
+                  title={_(AMOUNT_BRIDGABLE_TOOLTIP)}
                 />
               </Box>
             </Box>,
-            'Issuer',
+            <Trans>Issuer</Trans>,
             <Box sx={{ width: '6.25rem' }}>
-              <BreakText>Batch Start Date</BreakText>
+              <BreakText>
+                <Trans>Batch Start Date</Trans>
+              </BreakText>
             </Box>,
             <Box sx={{ width: '6.25rem' }}>
-              <BreakText>Batch End Date</BreakText>
+              <BreakText>
+                <Trans>Batch End Date</Trans>
+              </BreakText>
             </Box>,
-            'Project Location',
+            <Trans>Project Location</Trans>,
           ]}
           rows={bridgableCredits.map((row, i) => {
             return [

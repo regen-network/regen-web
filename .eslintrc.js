@@ -37,6 +37,7 @@ module.exports = {
     {
       files: ['*.stories.tsx'],
       rules: {
+        'lingui/no-unlocalized-strings': 'off',
         'import/no-anonymous-default-export': 'off',
       },
     },

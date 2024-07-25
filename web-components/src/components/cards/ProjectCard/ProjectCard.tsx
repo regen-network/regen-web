@@ -102,11 +102,14 @@ export function ProjectCard({
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
   const cardButton =
     button ??
-    (isPrefinanceProject
+    (isSoldOut
+      ? VIEW_PROJECT_BUTTON
+      : isPrefinanceProject
       ? PREFINANCE_BUTTON
       : offChain
       ? VIEW_PROJECT_BUTTON
       : DEFAULT_BUY_BUTTON);
+
   const {
     text: buttonText,
     startIcon: buttonStartIcon,
@@ -117,7 +120,8 @@ export function ProjectCard({
       ? cardButton?.disabled
       : !purchaseInfo?.sellInfo?.creditsAvailableForUser &&
         !projectPrefinancing?.isPrefinanceProject &&
-        !offChain;
+        !offChain &&
+        !isSoldOut;
   const hasButton = !!onButtonClick;
 
   const [open, setOpen] = useState<boolean>(true);
@@ -286,6 +290,8 @@ export function ProjectCard({
                         event.stopPropagation();
                         if (asAdmin) {
                           onButtonClick && onButtonClick();
+                        } else if (isSoldOut) {
+                          onClick && onClick();
                         } else if (isPrefinanceProject) {
                           window.open(
                             projectPrefinancing?.stripePaymentLink,

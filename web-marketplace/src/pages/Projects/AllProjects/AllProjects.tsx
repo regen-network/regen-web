@@ -17,7 +17,6 @@ import { Pagination } from 'web-components/src/components/pagination/Pagination'
 import { Body } from 'web-components/src/components/typography';
 import { pxToRem } from 'web-components/src/theme/muiTheme';
 
-import { useAllSoldOutProjectsQuery } from 'generated/sanity-graphql';
 import {
   creditClassSelectedFiltersAtom,
   projectsSortAtom,
@@ -29,7 +28,6 @@ import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/g
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
-import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
 import { useFetchCreditClasses } from '../hooks/useFetchCreditClasses';
 import { useProjectsContext } from '../Projects.context';
@@ -76,13 +74,6 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
-  const { data: sanitySoldOutProjects } = useAllSoldOutProjectsQuery({
-    client: sanityClient,
-  });
-  const soldOutProjectsIds = useAllSoldOutProjectsIds({
-    sanitySoldOutProjects,
-  });
-
   const [sort, setSort] = useAtom(projectsSortAtom);
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
@@ -94,6 +85,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     haveOffChainProjects,
     hasCommunityProjects,
     pagesCount,
+    soldOutProjectsIds,
   } = useProjectsContext();
 
   const { creditClassFilters } = normalizeCreditClassFilters({

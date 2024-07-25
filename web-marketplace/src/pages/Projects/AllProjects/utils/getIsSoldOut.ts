@@ -9,8 +9,9 @@ export const getIsSoldOut = ({
   project,
   soldOutProjectsIds,
 }: Params): boolean => {
-  return (
-    project?.purchaseInfo?.sellInfo?.creditsAvailable === 0 &&
-    soldOutProjectsIds.includes(project?.id)
-  );
+  return project?.projectPrefinancing?.isPrefinanceProject
+    ? (!!project?.id && soldOutProjectsIds.includes(project?.id)) ||
+        (!!project?.slug && soldOutProjectsIds.includes(project?.slug))
+    : project?.purchaseInfo?.sellInfo?.creditsAvailable === 0 &&
+        soldOutProjectsIds.includes(project?.id);
 };

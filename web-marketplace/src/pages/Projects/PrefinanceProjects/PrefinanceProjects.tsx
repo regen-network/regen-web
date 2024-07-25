@@ -14,14 +14,18 @@ import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
 } from '../AllProjects/AllProjects.config';
+import { getIsSoldOut } from '../AllProjects/utils/getIsSoldOut';
 import { useProjectsContext } from '../Projects.context';
 
 export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
   () => {
     const navigate = useNavigate();
     const { track } = useTracker();
-    const { prefinanceProjects, prefinanceProjectsContent } =
-      useProjectsContext();
+    const {
+      prefinanceProjects,
+      prefinanceProjectsContent,
+      soldOutProjectsIds,
+    } = useProjectsContext();
 
     return (
       <>
@@ -54,6 +58,7 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
           </div>
         )}
         {prefinanceProjects?.map(project => {
+          const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
           return (
             <div key={project?.id}>
               <ProjectCard
@@ -78,6 +83,7 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
                 program={project.program}
                 projectPrefinancing={project.projectPrefinancing}
                 offChain={project.offChain}
+                isSoldOut={isSoldOut}
               />
             </div>
           );

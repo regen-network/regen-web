@@ -9,7 +9,10 @@ import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { Title } from 'web-components/src/components/typography';
 
-import { useAllProjectsPageQuery } from 'generated/sanity-graphql';
+import {
+  useAllProjectsPageQuery,
+  useAllSoldOutProjectsQuery,
+} from 'generated/sanity-graphql';
 import {
   creditClassSelectedFiltersAtom,
   projectsSortAtom,
@@ -20,6 +23,7 @@ import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePa
 
 import { Link } from 'components/atoms';
 import { GettingStartedResourcesSection } from 'components/molecules';
+import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
 import { PROJECTS_PER_PAGE } from './AllProjects/AllProjects.config';
 import { useProjects } from './hooks/useProjects';
@@ -106,6 +110,13 @@ const Projects = (): JSX.Element => {
   const prefinanceProjectsContent =
     sanityProjectsPageData?.allProjectsPage?.[0]?.prefinanceProjects;
 
+  const { data: sanitySoldOutProjects } = useAllSoldOutProjectsQuery({
+    client: sanityClient,
+  });
+  const soldOutProjectsIds = useAllSoldOutProjectsIds({
+    sanitySoldOutProjects,
+  });
+
   return (
     <>
       <div className="bg-grey-100 pt-25 sm:pt-40 px-15 sm:25 pb-[80px] sm:pb-[100px]">
@@ -139,6 +150,7 @@ const Projects = (): JSX.Element => {
               prefinanceProjectsCount,
               prefinanceProjects,
               prefinanceProjectsContent,
+              soldOutProjectsIds,
             }}
           />
         </div>

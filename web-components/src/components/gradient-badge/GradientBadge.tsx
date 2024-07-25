@@ -8,15 +8,18 @@ export interface Props {
   label: string;
   variant?: GradientBadgeVariant;
   sx?: SxProps<Theme>;
+  className?: string;
 }
 
 const GradientBadge = ({
   label,
   variant = 'green',
   sx = [],
+  className,
 }: Props): JSX.Element => {
   return (
     <Box
+      className={className}
       sx={[
         {
           width: 'fit-content',

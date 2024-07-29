@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.2](https://github.com/regen-network/regen-web/compare/v2.6.1...v2.6.2) (2024-07-29)
+
+### Bug Fixes
+
+- put all web-www env var in web-www/netlify.toml ([e8892c3](https://github.com/regen-network/regen-web/commit/e8892c3af356ce4ab9e6ef67f5b5039961f87ac6))
+- use @netlify/plugin-nextjs v4 and separate netlify.toml files ([ece146f](https://github.com/regen-network/regen-web/commit/ece146f0d7893f4b355424129363b82714b9d213))
+
 # [2.6.0](https://github.com/regen-network/regen-web/compare/v2.5.1...v2.6.0) (2024-05-30)
 
 ### Bug Fixes

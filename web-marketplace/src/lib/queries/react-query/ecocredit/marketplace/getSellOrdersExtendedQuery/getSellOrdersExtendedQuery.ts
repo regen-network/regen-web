@@ -1,3 +1,7 @@
+import {
+  QuerySellOrdersResponse,
+  SellOrderInfo,
+} from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import uniq from 'lodash/uniq';
 
 import { FetchSimplePriceResponse } from 'lib/coingecko';
@@ -19,6 +23,7 @@ export const SELL_ORDERS_EXTENTED_KEY = 'sellOrdersExtented';
 export const getSellOrdersExtendedQuery = ({
   client,
   reactQueryClient,
+  request,
   ...params
 }: ReactQuerySellOrdersExtentedProps): ReactQuerySellOrdersExtentedResponse => ({
   queryKey: [SELL_ORDERS_EXTENTED_KEY],
@@ -26,8 +31,16 @@ export const getSellOrdersExtendedQuery = ({
     if (!client) return undefined;
 
     // Fetching all sell orders
-    const sellOrdersResponse = await client.SellOrders({});
-    const { sellOrders } = sellOrdersResponse;
+    // TODO this could potentially be improved with pagination for the storefront page
+    let sellOrders: SellOrderInfo[] = [];
+    let response: QuerySellOrdersResponse | undefined;
+    while (!response || response.pagination?.nextKey?.length) {
+      if (response?.pagination?.nextKey?.length) {
+        request.pagination = { key: response.pagination.nextKey };
+      }
+      response = await client.SellOrders(request);
+      sellOrders.push(...response.sellOrders);
+    }
 
     // Find sell orders that have ibc askDenom and gather their hash
     const ibcDenomHashes = uniq(

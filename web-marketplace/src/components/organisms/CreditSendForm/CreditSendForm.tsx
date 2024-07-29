@@ -149,6 +149,7 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
           />
 
           <CheckboxLabel
+            checked={withRetire}
             className={styles.checkboxLabel}
             label={
               <Subtitle size="lg" color="primary.contrastText" as="span">

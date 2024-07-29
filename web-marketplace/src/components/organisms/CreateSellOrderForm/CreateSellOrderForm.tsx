@@ -69,6 +69,10 @@ const CreateSellOrderForm: React.FC<Props> = ({
     control: form.control,
   });
   const batchDenom = useWatch({ control: form.control, name: 'batchDenom' });
+  const enableAutoRetire = useWatch({
+    control: form.control,
+    name: 'enableAutoRetire',
+  });
   const availableAmount = availableAmountByBatch[batchDenom ?? ''];
   const { setValue } = form;
   const onMaxClick = () =>
@@ -153,6 +157,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
         {...form.register('amount')}
       />
       <CheckboxLabel
+        checked={enableAutoRetire}
         label={
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Subtitle size="lg" color="primary.contrastText" sx={{ mr: 2 }}>

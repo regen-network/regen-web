@@ -22,6 +22,7 @@ export const PaymentInfoForm = ({
   accountEmail,
   accountName,
   onSubmit,
+  login,
 }: PaymentInfoFormProps) => {
   const form = useZodForm({
     schema: paymentInfoFormSchema(paymentOption),
@@ -37,6 +38,7 @@ export const PaymentInfoForm = ({
       <CustomerInfo
         paymentOption={paymentOption}
         wallet={wallet}
+        login={login}
         accountEmail={accountEmail}
         accountName={accountName}
       />

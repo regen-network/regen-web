@@ -14,6 +14,7 @@ export default function CheckedIcon({
   disabled,
 }: IconProps): JSX.Element {
   const theme: Theme = useTheme();
+
   return (
     <SvgIcon
       className={className}

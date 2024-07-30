@@ -2,7 +2,6 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { PaymentInfoForm } from './PaymentInfoForm';
-// import { files } from './PaymentInfoForm.mock';
 
 export default {
   title: 'Marketplace/Organisms/PaymentInfoForm',

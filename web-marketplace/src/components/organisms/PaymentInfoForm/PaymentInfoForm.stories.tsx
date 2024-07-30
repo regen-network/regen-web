@@ -66,6 +66,46 @@ FiatLoggedInWithPaymentMethod.args = {
   stripePublishableKey: import.meta.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY,
   amount: 1000,
   currency: 'usd',
+  paymentMethods: [
+    {
+      id: 'pm_1PazO7B79fEloexmWKaoomoY',
+      object: 'payment_method',
+      billing_details: {
+        address: {
+          city: null,
+          country: 'FR',
+          line1: null,
+          line2: null,
+          postal_code: null,
+          state: null,
+        },
+        email: null,
+        name: null,
+        phone: null,
+      },
+      card: {
+        brand: 'visa',
+        checks: {
+          address_line1_check: null,
+          address_postal_code_check: null,
+          cvc_check: 'pass',
+        },
+        country: 'US',
+        exp_month: 2,
+        exp_year: 2026,
+        fingerprint: 's7WT4PQ6SDYGr9R2',
+        funding: 'credit',
+        last4: '4242',
+        three_d_secure_usage: { supported: true },
+        wallet: null,
+      },
+      created: 1720613567,
+      customer: 'cus_QRt59xtRFmtqpR',
+      livemode: false,
+      metadata: {},
+      type: 'card',
+    },
+  ],
 };
 
 export const CryptoNoEmail: Story = {

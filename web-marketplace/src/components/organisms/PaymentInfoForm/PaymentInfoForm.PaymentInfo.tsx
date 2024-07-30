@@ -3,15 +3,14 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { PaymentMethod } from '@stripe/stripe-js';
 
 import Card from 'web-components/src/components/cards/Card';
-import { Body, Title } from 'web-components/src/components/typography';
+import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
+import { Title } from 'web-components/src/components/typography';
 
 import { CardInfo } from './PaymentInfoForm.CardInfo';
 import { PaymentInfoFormSchemaType } from './PaymentInfoForm.schema';
 
 export type PaymentInfoProps = {
-  accountEmail?: string;
   paymentMethods?: Array<PaymentMethod>;
-  hasOrCreateActiveAccount?: boolean;
   accountId?: string;
 };
 export const PaymentInfo = ({
@@ -25,9 +24,9 @@ export const PaymentInfo = ({
     control: control,
     name: 'createAccount',
   });
-  const savePaymentMethod = useWatch({
+  const paymentMethodId = useWatch({
     control: control,
-    name: 'savePaymentMethod',
+    name: 'paymentMethodId',
   });
 
   useEffect(() => {
@@ -40,11 +39,30 @@ export const PaymentInfo = ({
         Payment info
       </Title>
       {paymentMethods && paymentMethods.length > 0 ? (
-        <>TODO</>
-      ) : (
         <>
-          <CardInfo accountId={accountId} />
+          {paymentMethods.map(paymentMethod => (
+            <div className="mb-20">
+              <Radio
+                label={`Use my credit card on file ending in ${paymentMethod.card?.last4}`}
+                value={paymentMethod.id}
+                selectedValue={paymentMethodId}
+                {...register(`paymentMethodId`)}
+              />
+            </div>
+          ))}
+          <Radio
+            label={`Enter a new credit card`}
+            value={''}
+            selectedValue={paymentMethodId}
+            {...register(`paymentMethodId`)}
+          >
+            {paymentMethodId === '' && (
+              <CardInfo className="mt-20" accountId={accountId} />
+            )}
+          </Radio>
         </>
+      ) : (
+        <CardInfo accountId={accountId} />
       )}
     </Card>
   );

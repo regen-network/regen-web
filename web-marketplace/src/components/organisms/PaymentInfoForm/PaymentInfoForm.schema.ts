@@ -9,6 +9,7 @@ export const paymentInfoFormSchema = (paymentOption: PaymentOptionsType) =>
       paymentOption === 'card' ? z.string().email().min(1) : z.string().email(),
     createAccount: z.boolean(),
     savePaymentMethod: z.boolean(),
+    paymentMethodId: z.string().optional(),
   });
 
 export type PaymentInfoFormSchemaType = z.infer<

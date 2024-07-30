@@ -46,6 +46,7 @@ export const PaymentInfoForm = ({
       name: accountName,
       createAccount: true,
       savePaymentMethod: true,
+      paymentMethodId: paymentMethods?.[0]?.id,
     },
     mode: 'onBlur',
   });

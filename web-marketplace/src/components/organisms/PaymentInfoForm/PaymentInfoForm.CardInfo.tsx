@@ -1,10 +1,6 @@
 import { useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import {
-  PaymentElement,
-  useElements,
-  useStripe,
-} from '@stripe/react-stripe-js';
+import { PaymentElement } from '@stripe/react-stripe-js';
 
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import { Body } from 'web-components/src/components/typography';
@@ -14,8 +10,9 @@ import { PaymentInfoFormSchemaType } from './PaymentInfoForm.schema';
 
 type CardInfoProps = {
   accountId?: string;
+  className?: string;
 };
-export const CardInfo = ({ accountId }: CardInfoProps) => {
+export const CardInfo = ({ accountId, className }: CardInfoProps) => {
   const ctx = useFormContext<PaymentInfoFormSchemaType>();
   const { register, control, setValue } = ctx;
 
@@ -33,7 +30,7 @@ export const CardInfo = ({ accountId }: CardInfoProps) => {
   }, [createAccount, setValue]);
 
   return (
-    <>
+    <div className={className}>
       <PaymentElement id="payment-element" options={paymentElementOptions} />
       <CheckboxLabel
         className="pt-30"
@@ -42,6 +39,6 @@ export const CardInfo = ({ accountId }: CardInfoProps) => {
         label={<Body size="sm">Save my credit card info for next time</Body>}
         {...register('savePaymentMethod')}
       />
-    </>
+    </div>
   );
 };

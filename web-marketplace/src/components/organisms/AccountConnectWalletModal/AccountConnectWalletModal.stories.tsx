@@ -6,7 +6,7 @@ import { getWalletsMock } from './AccountConnectWalletModal.mock';
 import { AccountConnectModalState } from './AccountConnectWalletModal.types';
 
 const meta: Meta<typeof AccountConnectWalletModal> = {
-  title: 'Registry/Organisms/AccountConnectWalletModal',
+  title: 'Marketplace/Organisms/AccountConnectWalletModal',
   component: AccountConnectWalletModal,
 };
 export default meta;

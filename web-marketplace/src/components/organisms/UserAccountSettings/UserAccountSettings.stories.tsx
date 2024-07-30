@@ -6,7 +6,7 @@ import { Title } from 'web-components/src/components/typography';
 import { UserAccountSettings } from './UserAccountSettings';
 
 const meta: Meta<typeof UserAccountSettings> = {
-  title: 'Registry/Organisms/UserAccountSettings',
+  title: 'Marketplace/Organisms/UserAccountSettings',
   component: UserAccountSettings,
   args: {
     email: 'joemcnab@gmail.com',

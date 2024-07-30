@@ -19,6 +19,6 @@ export const createSellOrderModal = (): JSX.Element => (
 );
 
 export default {
-  title: 'Registry/Organisms/CreateSellOrderModal',
+  title: 'Marketplace/Organisms/CreateSellOrderModal',
   component: CreateSellOrderModal,
 };

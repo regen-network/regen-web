@@ -5,7 +5,7 @@ import { PaymentInfoForm } from './PaymentInfoForm';
 // import { files } from './PaymentInfoForm.mock';
 
 export default {
-  title: 'organisms/PaymentInfoForm',
+  title: 'Marketplace/Organisms/PaymentInfoForm',
   component: PaymentInfoForm,
 } as Meta<typeof PaymentInfoForm>;
 

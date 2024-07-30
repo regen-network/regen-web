@@ -5,7 +5,7 @@ import { EditProfileForm } from './EditProfileForm';
 import { EditProfileFormActionBar } from './EditProfileForm.ActionBar';
 
 export default {
-  title: 'Registry/Organisms/EditProfileForm',
+  title: 'Marketplace/Organisms/EditProfileForm',
   component: EditProfileForm,
 } as ComponentMeta<typeof EditProfileForm>;
 

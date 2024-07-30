@@ -1,7 +1,7 @@
 import { ScrollableCodebox } from './ScrollableCodebox';
 
 export default {
-  title: 'Registry/Molecules/Scrollable Codebox',
+  title: 'Marketplace/Molecules/Scrollable Codebox',
   component: ScrollableCodebox,
 };
 

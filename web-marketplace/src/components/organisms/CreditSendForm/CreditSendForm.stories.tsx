@@ -14,6 +14,6 @@ export const creditSendForm = (): JSX.Element => (
 );
 
 export default {
-  title: 'Registry/Organisms/Credit Send Form',
+  title: 'Marketplace/Organisms/Credit Send Form',
   component: CreditSendForm,
 };

@@ -14,6 +14,6 @@ export const creditSendModal = (): JSX.Element => (
 );
 
 export default {
-  title: 'Registry/Organisms/Credit Retire Modal',
+  title: 'Marketplace/Organisms/Credit Retire Modal',
   component: CreditRetireModal,
 };

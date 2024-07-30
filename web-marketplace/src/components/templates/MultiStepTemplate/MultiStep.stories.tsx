@@ -6,7 +6,7 @@ import { useMultiStep } from './MultiStep.context';
 import { MultiStepTemplate } from './MultiStepTemplate';
 
 export default {
-  title: 'Registry/Templates/Multi Step Template',
+  title: 'Marketplace/Templates/Multi Step Template',
   component: MultiStepTemplate,
 };
 

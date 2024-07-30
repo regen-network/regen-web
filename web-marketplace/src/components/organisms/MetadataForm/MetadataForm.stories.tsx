@@ -1,7 +1,7 @@
 import { MetadataForm } from './MetadataForm';
 
 export default {
-  title: 'Registry/Organisms/Metadata Form',
+  title: 'Marketplace/Organisms/Metadata Form',
   component: MetadataForm,
 };
 

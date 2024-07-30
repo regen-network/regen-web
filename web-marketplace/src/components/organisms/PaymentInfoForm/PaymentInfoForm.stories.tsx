@@ -18,17 +18,39 @@ export const FiatLoggedOut: Story = {
 FiatLoggedOut.args = {
   paymentOption: 'card',
   login: action('login'),
+  stripePublishableKey: import.meta.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY,
+  amount: 1000,
+  currency: 'usd',
 };
 
-export const FiatLoggedIn: Story = {
+export const FiatLoggedInNoEmail: Story = {
   render: args => <PaymentInfoForm {...args} />,
 };
 
-FiatLoggedIn.args = {
+FiatLoggedInNoEmail.args = {
   paymentOption: 'card',
+  accountId: '60ec0504-4a9b-11ef-84b7-0242ac120002',
+  accountName: 'John Doe',
+  wallet: { address: 'regen123456', shortAddress: 'regen123' },
+  login: action('login'),
+  stripePublishableKey: import.meta.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY,
+  amount: 1000,
+  currency: 'usd',
+};
+
+export const FiatLoggedInWithEmail: Story = {
+  render: args => <PaymentInfoForm {...args} />,
+};
+
+FiatLoggedInWithEmail.args = {
+  paymentOption: 'card',
+  accountId: '60ec0504-4a9b-11ef-84b7-0242ac120002',
   accountEmail: 'john@doe.com',
   accountName: 'John Doe',
   login: action('login'),
+  stripePublishableKey: import.meta.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY,
+  amount: 1000,
+  currency: 'usd',
 };
 
 export const CryptoNoEmail: Story = {
@@ -39,6 +61,8 @@ CryptoNoEmail.args = {
   paymentOption: 'crypto',
   wallet: { address: 'regen123456', shortAddress: 'regen123' },
   login: action('login'),
+  amount: 1000,
+  currency: 'usd',
 };
 
 export const CryptoWithEmail: Story = {
@@ -51,4 +75,6 @@ CryptoWithEmail.args = {
   accountEmail: 'john@doe.com',
   accountName: 'John Doe',
   login: action('login'),
+  amount: 1000,
+  currency: 'usd',
 };

@@ -27,6 +27,8 @@
     "@regen-network/api": "0.6.0",
     "@sentry/react": "^7.53.0",
     "@sentry/tracing": "^7.53.0",
+    "@stripe/react-stripe-js": "^2.7.3",
+    "@stripe/stripe-js": "^4.1.0",
     "@tanstack/react-query": "^4.2.3",
     "@tanstack/react-query-devtools": "^4.18.0",
     "@types/auth0-js": "^9.14.5",

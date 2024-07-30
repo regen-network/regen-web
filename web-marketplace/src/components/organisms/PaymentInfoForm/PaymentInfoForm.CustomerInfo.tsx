@@ -16,6 +16,7 @@ import { PaymentOptionsType } from './PaymentInfoForm.types';
 export type CustomerInfoProps = {
   paymentOption: PaymentOptionsType;
   wallet?: Wallet;
+  accountId?: string;
   accountEmail?: string;
   accountName?: string;
   login: () => void;
@@ -26,6 +27,7 @@ export const CustomerInfo = ({
   wallet,
   accountEmail,
   accountName,
+  accountId,
   login,
 }: CustomerInfoProps) => {
   // const { _ } = useLingui();
@@ -42,7 +44,7 @@ export const CustomerInfo = ({
     <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300">
       <div className="flex justify-between flex-wrap gap-20">
         <Title variant="h6">Customer info</Title>
-        {!accountEmail && !wallet && (
+        {!accountId && !wallet && (
           <OutlinedButton onClick={login} className="text-xs py-[9px] px-20">
             log in for faster checkout
           </OutlinedButton>
@@ -50,20 +52,17 @@ export const CustomerInfo = ({
       </div>
       <TextField
         label={`Your name`}
-        description={`This name will be used on the retirement certificate and profile, unless you choose to retire anonymously on the following step.`}
+        description={`This name will be used on the retirement certificate and is the name on your user profile, unless you choose to retire anonymously on the following step.`}
         {...register('name')}
         error={!!errors['name']}
         helperText={errors['name']?.message}
+        disabled={!!accountName}
       />
       <TextField
-        className="mb-30"
+        className={!accountId && !wallet ? 'mb-30' : ''}
         label={`Your email`}
         description={
-          paymentOption === 'card' ? (
-            `We need an email address to send you a receipt of your purchase.`
-          ) : accountEmail ? (
-            `We will send your receipt to the email address below, which is already linked to your account.`
-          ) : (
+          !!wallet && !accountEmail ? (
             <>
               Input an email address to receive a receipt of your purchase.
               <i>
@@ -72,6 +71,10 @@ export const CustomerInfo = ({
                 optional.
               </i>
             </>
+          ) : paymentOption === 'card' ? (
+            `We need an email address to send you a receipt of your purchase.`
+          ) : (
+            `We will send your receipt to the email address below, which is already linked to your account.`
           )
         }
         {...register('email')}
@@ -80,9 +83,8 @@ export const CustomerInfo = ({
         disabled={!!accountEmail}
         optional={!!wallet}
       />
-      {!accountEmail && !wallet && (
+      {!accountId && !wallet && (
         <CheckboxLabel
-          className="font-normal"
           checked={createAccount}
           label={
             <Body size="sm">

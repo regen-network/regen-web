@@ -53,6 +53,21 @@ FiatLoggedInWithEmail.args = {
   currency: 'usd',
 };
 
+export const FiatLoggedInWithPaymentMethod: Story = {
+  render: args => <PaymentInfoForm {...args} />,
+};
+
+FiatLoggedInWithPaymentMethod.args = {
+  paymentOption: 'card',
+  accountId: '60ec0504-4a9b-11ef-84b7-0242ac120002',
+  accountEmail: 'john@doe.com',
+  accountName: 'John Doe',
+  login: action('login'),
+  stripePublishableKey: import.meta.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY,
+  amount: 1000,
+  currency: 'usd',
+};
+
 export const CryptoNoEmail: Story = {
   render: args => <PaymentInfoForm {...args} />,
 };

@@ -22,7 +22,7 @@ const Checkbox = forwardRef<HTMLButtonElement, Props>((props, ref) => {
       {...props}
       ref={ref}
       color="secondary"
-      icon={<UncheckedIcon className={classes.check} />}
+      icon={<UncheckedIcon className={classes.check} disabled={disabled} />}
       checkedIcon={
         <CheckedIcon className={classes.check} disabled={disabled} />
       }

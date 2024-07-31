@@ -13,7 +13,11 @@ type Props = {
 export const PostFooter = ({ prevIri, nextIri }: Props) => {
   const navigate = useNavigate();
   return (
-    <Section className="flex justify-between sm:px-0 pb-[100px] py-0 max-w-[750px] m-auto">
+    <Section
+      className={`flex ${
+        prevIri ? 'justify-between' : 'justify-end'
+      } sm:px-0 pb-[100px] py-0 max-w-[750px] m-auto`}
+    >
       {prevIri && (
         <OutlinedButton
           className="text-sm"

@@ -16,7 +16,7 @@ import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 import { useWallet } from '../../../lib/wallet/wallet';
 import { useLoginData } from '../LoginButton/hooks/useLoginData';
 import { LoginFlow } from '../LoginFlow/LoginFlow';
-import { LIST_PROJECT } from './ListProject.constants';
+import { CREATE_PROJECT } from './ListProject.constants';
 
 const ListProject = () => {
   const { wallet } = useWallet();
@@ -64,7 +64,7 @@ const ListProject = () => {
               : onButtonClick
           }
         >
-          {LIST_PROJECT}
+          {CREATE_PROJECT}
         </Body>
       )}
       <LoginFlow

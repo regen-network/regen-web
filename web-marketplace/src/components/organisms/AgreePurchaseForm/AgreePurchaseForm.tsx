@@ -12,17 +12,20 @@ import {
   agreePurchaseFormSchema,
   AgreePurchaseFormSchemaType,
 } from './AgreePurchaseForm.schema';
+import { Tradable, TradableProps } from './AgreePurchaseForm.Tradable';
 
 type AgreePurchaseFormProps = {
   retiring: boolean;
   onSubmit: (values: AgreePurchaseFormSchemaType) => Promise<void>;
   country?: string;
-};
+} & TradableProps;
 
 export const AgreePurchaseForm = ({
   retiring,
   country,
   onSubmit,
+  goToChooseCredits,
+  imgSrc,
 }: AgreePurchaseFormProps) => {
   const form = useZodForm({
     schema: agreePurchaseFormSchema(retiring),
@@ -50,7 +53,11 @@ export const AgreePurchaseForm = ({
 
   return (
     <Form form={form} onSubmit={onSubmit} className="max-w-[560px]">
-      {retiring && <Retirement />}
+      {retiring ? (
+        <Retirement />
+      ) : (
+        <Tradable goToChooseCredits={goToChooseCredits} imgSrc={imgSrc} />
+      )}
       <div className="flex flex-col gap-20 py-20 px-20 sm:pl-40 sm:pr-0">
         <CheckboxLabel
           checked={followProject}

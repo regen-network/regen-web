@@ -20,6 +20,7 @@ export type CustomerInfoProps = {
   accountEmail?: string;
   accountName?: string;
   login: () => void;
+  retiring: boolean;
 };
 
 export const CustomerInfo = ({
@@ -28,6 +29,7 @@ export const CustomerInfo = ({
   accountEmail,
   accountName,
   accountId,
+  retiring,
   login,
 }: CustomerInfoProps) => {
   // const { _ } = useLingui();
@@ -50,14 +52,16 @@ export const CustomerInfo = ({
           </OutlinedButton>
         )}
       </div>
-      <TextField
-        label={`Your name`}
-        description={`This name will be used on the retirement certificate and is the name on your user profile, unless you choose to retire anonymously on the following step.`}
-        {...register('name')}
-        error={!!errors['name']}
-        helperText={errors['name']?.message}
-        disabled={!!accountName}
-      />
+      {retiring && (
+        <TextField
+          label={`Your name`}
+          description={`This name will appear on the retirement certificate unless you choose to retire anonymously in the next step. It is also your user profile name.`}
+          {...register('name')}
+          error={!!errors['name']}
+          helperText={errors['name']?.message}
+          disabled={!!accountName}
+        />
+      )}
       <TextField
         className={!accountId && !wallet ? 'mb-30' : ''}
         label={`Your email`}
@@ -87,7 +91,7 @@ export const CustomerInfo = ({
         <CheckboxLabel
           checked={createAccount}
           label={
-            <Body size="sm">
+            <Body size="sm" className="text-grey-700">
               Yes, please create an account for me so I can easily see my
               purchase details and retirement certificate when I log in
             </Body>

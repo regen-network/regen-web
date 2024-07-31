@@ -38,6 +38,7 @@ export const PaymentInfoForm = ({
   stripePublishableKey,
   amount,
   currency,
+  retiring,
 }: PaymentInfoFormProps) => {
   const form = useZodForm({
     schema: paymentInfoFormSchema(paymentOption),
@@ -100,6 +101,7 @@ export const PaymentInfoForm = ({
           accountEmail={accountEmail}
           accountId={accountId}
           accountName={accountName}
+          retiring={retiring}
         />
         {paymentOption === 'card' && stripePromise && (
           <Elements options={options} stripe={stripePromise}>

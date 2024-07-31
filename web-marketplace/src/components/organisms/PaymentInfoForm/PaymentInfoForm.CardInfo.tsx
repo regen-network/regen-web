@@ -36,7 +36,11 @@ export const CardInfo = ({ accountId, className }: CardInfoProps) => {
         className="pt-30"
         checked={savePaymentMethod}
         disabled={!createAccount && !accountId}
-        label={<Body size="sm">Save my credit card info for next time</Body>}
+        label={
+          <Body size="sm" className="text-grey-700">
+            Save my credit card info for next time
+          </Body>
+        }
         {...register('savePaymentMethod')}
       />
     </div>

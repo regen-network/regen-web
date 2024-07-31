@@ -24,7 +24,7 @@ export const fixedFooter = (): JSX.Element => (
 export const saveFooter = (): JSX.Element => (
   <SaveFooter
     onSave={submit}
-    saveText={'Save and Next'}
+    saveText={'Next'}
     onPrev={() => null}
     hideProgress={false}
     saveDisabled={false}

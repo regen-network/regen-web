@@ -41,7 +41,7 @@ const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
     />
   ) : (
     <SaveFooter
-      saveText={saveText || 'Save and Next'}
+      saveText={saveText || 'Next'}
       onSave={onSave}
       onPrev={props.onPrev}
       hideProgress={false}

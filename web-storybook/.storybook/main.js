@@ -69,12 +69,12 @@ module.exports = {
         },
       },
       plugins: [
-        // react({
-        //   babel: {
-        //     plugins: ['macros'],
-        //   },
-        // }),
-        // lingui(),
+        react({
+          babel: {
+            plugins: ['macros'],
+          },
+        }),
+        lingui(),
         svgrPlugin({
           include: path.resolve(
             __dirname,

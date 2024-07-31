@@ -11,6 +11,7 @@ interface Props {
   sx?: SxProps<Theme>;
   color?: string;
   size?: TextSize;
+  className?: string;
 }
 
 export default function QuestionMarkTooltip({
@@ -18,10 +19,12 @@ export default function QuestionMarkTooltip({
   sx,
   color = 'secondary.main',
   size = 'sm',
+  className,
 }: Props): JSX.Element {
   return (
     <InfoTooltip arrow placement="top" title={title}>
       <Box
+        className={className}
         sx={[
           {
             borderRadius: '50%',

@@ -18,6 +18,8 @@ interface CheckboxLabelProps extends MuiCheckboxProps {
   error?: boolean;
   helperText?: string;
   sx?: SxProps<Theme>;
+  optional?: boolean;
+  optionalClassName?: string;
 }
 
 const CheckboxLabel = forwardRef<HTMLButtonElement, CheckboxLabelProps>(
@@ -29,6 +31,8 @@ const CheckboxLabel = forwardRef<HTMLButtonElement, CheckboxLabelProps>(
       className,
       error = false,
       helperText = '',
+      optional,
+      optionalClassName,
       ...props
     },
     ref,
@@ -36,6 +40,12 @@ const CheckboxLabel = forwardRef<HTMLButtonElement, CheckboxLabelProps>(
     const theme = useTheme();
     const isLabelStringOrNumber =
       typeof label === 'string' || typeof label === 'number';
+    const labelClassName = optional
+      ? cn(
+          `after:content-['(optional)'] after:text-grey-400 after:ml-[4px] after:text-sm sm:after:text-base`,
+          optionalClassName,
+        )
+      : '';
 
     return (
       <>
@@ -50,7 +60,13 @@ const CheckboxLabel = forwardRef<HTMLButtonElement, CheckboxLabelProps>(
               {...props}
             />
           }
-          label={isLabelStringOrNumber ? <Subtitle>{label}</Subtitle> : label}
+          label={
+            isLabelStringOrNumber ? (
+              <Subtitle className={labelClassName}>{label}</Subtitle>
+            ) : (
+              <div className={labelClassName}>{label}</div>
+            )
+          }
         />
         {error && (
           <FormHelperText error={error} sx={{ ml: 9 }}>

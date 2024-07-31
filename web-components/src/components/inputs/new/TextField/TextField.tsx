@@ -21,6 +21,7 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
       label,
       customInputProps = {},
       sx = [],
+      labelClassName,
       ...props
     },
     ref,
@@ -59,6 +60,7 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
             <>
               {label && (
                 <Box
+                  className={labelClassName}
                   sx={{
                     display: 'inline-block',
                     width: optional ? 'inherit' : '100%',

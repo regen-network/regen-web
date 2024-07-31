@@ -74,7 +74,7 @@ module.exports = {
         //     plugins: ['macros'],
         //   },
         // }),
-        lingui(),
+        // lingui(),
         svgrPlugin({
           include: path.resolve(
             __dirname,

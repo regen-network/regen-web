@@ -12,4 +12,5 @@ export interface RegenTextFieldProps extends StandardTextFieldProps {
   label?: ReactNode;
   className?: string;
   name?: string;
+  labelClassName?: string;
 }

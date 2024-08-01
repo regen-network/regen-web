@@ -78,7 +78,7 @@ export function ChooseCreditsForm({
     <Suspense fallback={<Loading />}>
       <div
         data-testid="buy-credits-form"
-        className="border-grey-300 border border-solid p-15 sm:p-20"
+        className="border-grey-300 border border-solid p-15 sm:p-20 rounded-[5px]"
       >
         <Form form={form} onSubmit={handleOnSubmit}>
           {/* payment options */}

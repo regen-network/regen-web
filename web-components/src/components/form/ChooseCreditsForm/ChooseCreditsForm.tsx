@@ -1,5 +1,5 @@
 import { ChangeEvent, MouseEvent, Suspense, useState } from 'react';
-import { SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useWatch } from 'react-hook-form';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import { CreditsAmount } from 'web-components/src/components/inputs/new/CreditsAmount/CreditsAmount';
@@ -28,9 +28,6 @@ export function ChooseCreditsForm({
     PAYMENT_OPTIONS.CARD,
   );
   const [advanceSettingsOpen, setAdvanceSettingsOpen] = useState(false);
-  const [cryptoPurchaseOption, setCryptoPurchaseOption] = useState<
-    string | undefined
-  >(cryptoOptions?.[0]?.label);
   const [creditVintageOptions, setCreditVintageOptions] = useState<
     string[] | []
   >([]);
@@ -45,19 +42,22 @@ export function ChooseCreditsForm({
     defaultValues: {
       amountCurrency: 1,
       amountCredits: 1,
-      cryptoPurchaseOption,
+      cryptoPurchaseOption: cryptoOptions?.[0]?.label,
     },
     mode: 'onBlur',
   });
 
-  const handleOnSubmit: SubmitHandler<FormFields> = async data => {
-    await new Promise(resolve => setTimeout(resolve, 1000)); // do some async stuff
-    console.log('🚀 ~ data', data);
+  const cryptoPurchaseOption = useWatch({
+    control: form.control,
+    name: 'cryptoPurchaseOption',
+  });
+
+  const handleOnSubmit: SubmitHandler<FormFields> = data => {
+    // TO-DO
   };
 
   const handleCryptoPurchaseOptions = (e: ChangeEvent<HTMLInputElement>) => {
     form.setValue('cryptoPurchaseOption', e.currentTarget.value);
-    setCryptoPurchaseOption(e.currentTarget.value);
   };
 
   const handleCreditVintageOptions = (e: ChangeEvent<HTMLInputElement>) => {
@@ -201,8 +201,6 @@ export function ChooseCreditsForm({
               </div>
             </div>
           </div>
-          {/* TO-DO remove this button */}
-          <button type="submit">submit</button>
         </Form>
       </div>
     </Suspense>

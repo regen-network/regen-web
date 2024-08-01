@@ -5,6 +5,8 @@ import { EditableInput } from 'web-components/src/components/inputs/new/Editable
 import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
 import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
 
+import Title from 'src/components/typography/new/Title';
+
 import {
   OrderProps,
   OrderSummaryProps,
@@ -42,9 +44,12 @@ function OrderSummaryContent({
   const [creditsAmount, setCreditsAmount] = useState(credits);
   return (
     <div className="grid grid-cols-[75px_1fr] sm:grid-cols-[90px_1fr] max-w-full w-full pr-15 sm:px-[20px] pb-[30px] items-center sm:max-w-[330px]">
-      <h5 className="col-span-2 text-base font-black font-['Muli'] mt-0 sm:mt-[30px] mb-5 sm:mb-[15px]">
+      <Title
+        as="h5"
+        className="col-span-2 text-base font-black font-['Muli'] mt-0 sm:mt-[30px] mb-5 sm:mb-[15px]"
+      >
         Order Summary
-      </h5>
+      </Title>
       <OrderSummmaryRowHeader text="project" className="self-start mt-5" />
       <p className="text-[14px] sm:text-base sm:font-normal font-['Lato'] self-start m-0">
         {projectName}

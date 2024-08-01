@@ -31,10 +31,12 @@ function OrderSummaryContent({
   order,
   currentBuyingStep,
   paymentMethod,
+  onClickEditCard = () => {},
 }: {
   order: OrderProps;
   currentBuyingStep: number;
   paymentMethod: PaymentMethod;
+  onClickEditCard?: () => void;
 }) {
   const { projectName, currency, pricePerCredit, credits } = order;
   const [creditsAmount, setCreditsAmount] = useState(credits);
@@ -92,9 +94,8 @@ function OrderSummaryContent({
                 <span className="capitalize">{paymentMethod.type}</span>
                 {` ending in ${paymentMethod.cardNumber.slice(-4)}`}
               </p>
-              {/* TO-DO implement edit button onClick */}
               <EditButtonIcon
-                onClick={() => {}}
+                onClick={onClickEditCard}
                 className="self-end"
                 ariaLabel="Change payment card"
               />
@@ -133,7 +134,8 @@ function OrderSummary({ children }: { children: ReactNode }) {
 }
 
 export const OrderSummaryCard = (orderSummary: OrderSummaryProps) => {
-  const { order, paymentMethod, currentBuyingStep } = orderSummary;
+  const { order, paymentMethod, currentBuyingStep, onClickEditCard } =
+    orderSummary;
   return (
     <OrderSummary>
       <OrderSummaryImage
@@ -144,6 +146,7 @@ export const OrderSummaryCard = (orderSummary: OrderSummaryProps) => {
         order={order}
         currentBuyingStep={currentBuyingStep}
         paymentMethod={paymentMethod}
+        onClickEditCard={onClickEditCard}
       />
     </OrderSummary>
   );

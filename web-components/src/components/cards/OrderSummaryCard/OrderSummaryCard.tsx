@@ -116,8 +116,10 @@ function OrderSummaryImage({
     <div className="w-[90px] sm:w-full  sm:h-[160px]">
       {prefinanceProject && (
         <PrefinanceTag
-          wrapperClassName="bg-purple-gradient rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute top-20 left-0"
-          labelClassname="pl-10 font-extrabold uppercase"
+          classNames={{
+            root: 'bg-purple-gradient rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute top-20 left-0',
+            label: 'pl-10 font-extrabold uppercase',
+          }}
         />
       )}
       <img

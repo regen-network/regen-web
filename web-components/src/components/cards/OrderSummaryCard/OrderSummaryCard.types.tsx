@@ -19,6 +19,7 @@ export interface OrderSummaryProps {
     type: 'visa' | 'mastercard';
     cardNumber: string;
   };
+  onClickEditCard: () => void;
 }
 
 export interface PaymentMethod {

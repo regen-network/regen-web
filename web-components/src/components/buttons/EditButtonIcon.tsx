@@ -1,3 +1,5 @@
+import { cn } from 'web-components/src/utils/styles/cn';
+
 import EditIcon from '../icons/EditIcon';
 
 interface ButtonProps {
@@ -14,7 +16,10 @@ export function EditButtonIcon({
   return (
     <button
       onClick={onClick}
-      className={`bg-transparent border-none hover:cursor-pointer hover:opacity-80 ${className}`}
+      className={cn(
+        'bg-transparent border-none hover:cursor-pointer hover:opacity-80',
+        className,
+      )}
       aria-label={ariaLabel}
       title={ariaLabel}
     >

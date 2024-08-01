@@ -51,11 +51,10 @@ export const ReorderFields = <T extends { id: string }>({
       >
         {fields.map((field, index) => {
           const isLast = index === fields.length - 1;
-
           const fieldElement = getFieldElement(field, index);
 
           return isLast ? (
-            fieldElement
+            <div key={field.id}>{fieldElement}</div>
           ) : (
             <Reorder.Item className="relative" key={field.id} value={field}>
               {fieldElement}

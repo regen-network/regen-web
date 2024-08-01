@@ -4,10 +4,9 @@ import {
   CURRENCIES,
   Currency,
 } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
-import { PAYMENT_OPTIONS } from 'web-components/src/components/form/ChooseCreditsForm/ChooseCreditsForm.types';
 
 import { CURRENCY_AMOUNT } from './CreditsAmount.constants';
-import { CurrencyInputProps } from './CreditsAmount.types';
+import { CurrencyInputProps, PAYMENT_OPTIONS } from './CreditsAmount.types';
 
 const CustomSelect = lazy(
   () =>

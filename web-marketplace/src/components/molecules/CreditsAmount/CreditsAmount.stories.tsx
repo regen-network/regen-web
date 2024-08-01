@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { ChooseCreditsFormSchema } from 'web-components/src/components/form/ChooseCreditsForm/ChooseCreditsForm.schema';
-import { PAYMENT_OPTIONS } from 'web-components/src/components/form/ChooseCreditsForm/ChooseCreditsForm.types';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
+import { ChooseCreditsFormSchema } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { CreditsAmount } from './CreditsAmount';
+import { PAYMENT_OPTIONS } from './CreditsAmount.types';
 
 export default {
-  title: 'Inputs/CreditsAmount',
+  title: 'molecules/CreditsAmount',
   component: CreditsAmount,
 } as Meta<typeof CreditsAmount>;
 

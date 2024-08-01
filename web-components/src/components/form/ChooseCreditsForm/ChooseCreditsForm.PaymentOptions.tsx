@@ -3,17 +3,17 @@ import CreditCardIcon from 'web-components/src/components/icons/CreditCardIcon';
 import CryptoIcon from 'web-components/src/components/icons/CryptoIcon';
 
 import {
-  BuyCreditButtonProps,
+  ChooseCreditButtonProps,
   PAYMENT_OPTIONS,
   PaymentOptionsType,
-} from './BuyCreditsForm.types';
+} from './ChooseCreditsForm.types';
 
-function BuyCreditButton({
+function ChooseCreditButton({
   children,
   value,
   isChecked,
   onChange,
-}: BuyCreditButtonProps) {
+}: ChooseCreditButtonProps) {
   return (
     <label
       className={`block w-[138px] rounded-md px-[12px] py-10 font-extrabold cursor-pointer text-xs font-[lato] shadow ${
@@ -24,7 +24,7 @@ function BuyCreditButton({
     >
       <input
         type="radio"
-        name="buyCredit"
+        name="chooseCredit"
         value={value}
         checked={isChecked}
         onChange={onChange}
@@ -35,7 +35,7 @@ function BuyCreditButton({
   );
 }
 
-function BuyCreditButtonGroup({
+function ChooseCreditButtonGroup({
   onSelectOption,
 }: {
   onSelectOption: (option: PaymentOptionsType) => void;
@@ -52,7 +52,7 @@ function BuyCreditButtonGroup({
 
   return (
     <div className="flex space-x-4 gap-10">
-      <BuyCreditButton
+      <ChooseCreditButton
         value={PAYMENT_OPTIONS.CARD}
         isChecked={selectedButton === PAYMENT_OPTIONS.CARD}
         onChange={handleButtonClick}
@@ -61,8 +61,8 @@ function BuyCreditButtonGroup({
         <div className="lowercase≈">
           <span className="capitalize">buy</span> with credit card
         </div>
-      </BuyCreditButton>
-      <BuyCreditButton
+      </ChooseCreditButton>
+      <ChooseCreditButton
         value={PAYMENT_OPTIONS.CRYPTO}
         isChecked={selectedButton === PAYMENT_OPTIONS.CRYPTO}
         onChange={handleButtonClick}
@@ -71,7 +71,7 @@ function BuyCreditButtonGroup({
         <div className="lowercase">
           <span className="capitalize">buy</span> with crypto
         </div>
-      </BuyCreditButton>
+      </ChooseCreditButton>
     </div>
   );
 }
@@ -81,5 +81,5 @@ export const PaymentOptions = ({
 }: {
   setPaymentOption: (option: PaymentOptionsType) => void;
 }) => {
-  return <BuyCreditButtonGroup onSelectOption={setPaymentOption} />;
+  return <ChooseCreditButtonGroup onSelectOption={setPaymentOption} />;
 };

@@ -10,11 +10,14 @@ import Title from 'web-components/src/components/typography/new/Title';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
 
-import { PaymentOptions } from './BuyCreditsForm.PaymentOptions';
-import { buyCreditsFormSchema, FormFields } from './BuyCreditsForm.schema';
-import { PAYMENT_OPTIONS, PaymentOptionsType } from './BuyCreditsForm.types';
+import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
+import {
+  ChooseCreditsFormSchema,
+  FormFields,
+} from './ChooseCreditsForm.schema';
+import { PAYMENT_OPTIONS, PaymentOptionsType } from './ChooseCreditsForm.types';
 
-export function BuyCreditsForm({
+export function ChooseCreditsForm({
   creditVintages,
   cryptoOptions,
 }: {
@@ -38,7 +41,7 @@ export function BuyCreditsForm({
   };
 
   const form = useZodForm({
-    schema: buyCreditsFormSchema,
+    schema: ChooseCreditsFormSchema,
     defaultValues: {
       amountCurrency: 1,
       amountCredits: 1,

@@ -3,9 +3,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
-import { BuyCreditsForm } from './BuyCreditsForm';
+import { ChooseCreditsForm } from './ChooseCreditsForm';
 
-describe('BuyCreditsForm', () => {
+describe('ChooseCreditsForm', () => {
   const creditVintages = [
     { date: '2022-01-01', credits: '100' },
     { date: '2022-02-01', credits: '200' },
@@ -17,7 +17,7 @@ describe('BuyCreditsForm', () => {
 
   it('renders without crashing', () => {
     render(
-      <BuyCreditsForm
+      <ChooseCreditsForm
         creditVintages={creditVintages}
         cryptoOptions={cryptoOptions}
       />,
@@ -28,7 +28,7 @@ describe('BuyCreditsForm', () => {
 
   it('opens and closes advanced settings', () => {
     render(
-      <BuyCreditsForm
+      <ChooseCreditsForm
         creditVintages={creditVintages}
         cryptoOptions={cryptoOptions}
       />,
@@ -47,7 +47,7 @@ describe('BuyCreditsForm', () => {
 
   it('selects card payment option', () => {
     render(
-      <BuyCreditsForm
+      <ChooseCreditsForm
         creditVintages={creditVintages}
         cryptoOptions={cryptoOptions}
       />,

@@ -4,7 +4,7 @@ import {
 } from 'web-components/src/components/inputs/validation';
 import { z } from 'zod';
 
-export const buyCreditsFormSchema = z.object({
+export const ChooseCreditsFormSchema = z.object({
   amountCurrency: z
     .number({
       invalid_type_error: requiredMessage,
@@ -19,4 +19,4 @@ export const buyCreditsFormSchema = z.object({
   creditVintageOptions: z.array(z.string()),
 });
 
-export type FormFields = z.infer<typeof buyCreditsFormSchema>;
+export type FormFields = z.infer<typeof ChooseCreditsFormSchema>;

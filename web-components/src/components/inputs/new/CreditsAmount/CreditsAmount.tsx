@@ -4,7 +4,7 @@ import {
   CryptoCurrencies,
   CURRENCIES,
 } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
-import { PAYMENT_OPTIONS } from 'web-components/src/components/form/BuyCreditsForm/BuyCreditsForm.types';
+import { PAYMENT_OPTIONS } from 'web-components/src/components/form/ChooseCreditsForm/ChooseCreditsForm.types';
 
 import { CREDITS_AMOUNT, CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import { CreditsAmountHeader } from './CreditsAmount.Header';

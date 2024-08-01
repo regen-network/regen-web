@@ -114,14 +114,7 @@ function OrderSummaryImage({
 }) {
   return (
     <div className="w-[90px] sm:w-full  sm:h-[160px]">
-      {prefinanceProject && (
-        <PrefinanceTag
-          classNames={{
-            root: 'bg-purple-gradient rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute top-20 left-0',
-            label: 'pl-10 font-extrabold uppercase',
-          }}
-        />
-      )}
+      {prefinanceProject && <PrefinanceTag />}
       <img
         src={src}
         alt="order summary"

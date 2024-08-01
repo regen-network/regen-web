@@ -30,10 +30,11 @@ const useStyles = makeStyles()(theme => ({
 }));
 
 export interface ItemValue {
-  name: string | number;
+  name?: string | number;
   url?: string;
   icon?: ReactNode;
   children?: ReactNode;
+  component?: ReactNode;
 }
 
 export interface Item {

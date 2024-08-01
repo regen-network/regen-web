@@ -20,11 +20,12 @@ function OrderSummmaryRowHeader({
   className?: string;
 }) {
   return (
-    <h3
-      className={`text-grey-400 text-[11px] font-extrabold font-['Lato'] uppercase tracking-[1px] ${className} m-0`}
+    <Title
+      as="h3"
+      className={`text-grey-400 text-[11px] font-extrabold font-['Lato'] uppercase tracking-[1px] m-0 ${className}`}
     >
       {text}
-    </h3>
+    </Title>
   );
 }
 
@@ -75,21 +76,26 @@ function OrderSummaryContent({
       <div className="col-span-full">
         <hr className="border-t border-grey-300 border-solid border-l-0 border-r-0 border-b-0" />
       </div>
-      <OrderSummmaryRowHeader text="total price" />
-      <div className="flex items-center flex-wrap">
-        <div className="justify-left font-bold font-['Lato'] items-start flex sm:text-[22px] mr-5 flex-grow">
-          <SupCurrencyAndAmount
-            price={pricePerCredit * creditsAmount}
-            currencyCode={currency}
-          />
+      <div className="flex items-end col-span-full gap-5">
+        <OrderSummmaryRowHeader text="total price" className="pb-[4px]" />
+        <div className="flex items-center flex-wrap">
+          <div className="justify-left font-bold font-['Lato'] items-start flex sm:text-[22px] mr-5">
+            <SupCurrencyAndAmount
+              price={pricePerCredit * creditsAmount}
+              currencyCode={currency}
+            />
+          </div>
+          <DenomIconWithCurrency currency={currency} />
         </div>
-        <DenomIconWithCurrency currency={currency} />
       </div>
       {currentBuyingStep > 1 &&
         paymentMethod.type !== 'crypto' &&
         paymentMethod.cardNumber && (
-          <>
-            <OrderSummmaryRowHeader text="payment" className="" />
+          <div className="flex items-end col-span-full gap-5">
+            <OrderSummmaryRowHeader
+              text="payment"
+              className="items-end  pb-[4px] w-[125px]"
+            />
             <div className="flex items-center justify-between w-full">
               <p
                 data-testid="payment-details"
@@ -104,7 +110,7 @@ function OrderSummaryContent({
                 ariaLabel="Change payment card"
               />
             </div>
-          </>
+          </div>
         )}
     </div>
   );

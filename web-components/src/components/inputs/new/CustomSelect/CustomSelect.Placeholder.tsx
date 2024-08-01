@@ -19,7 +19,7 @@ export function Placeholder({
     <button
       aria-label="Select options"
       type="button"
-      className="inline-flex justify-center w-full border-none px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+      className="inline-flex justify-center w-full border-none px-4 py-2 bg-grey-0 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
       onClick={() => setIsOpen(!isOpen)}
     >
       {'value' in options[0] ? (

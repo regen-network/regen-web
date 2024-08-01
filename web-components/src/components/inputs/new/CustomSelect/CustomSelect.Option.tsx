@@ -18,7 +18,7 @@ export const SelectOption = ({ option, handleSelect }: SelectOptionProps) => {
   return (
     <button
       aria-label="Select option"
-      className="w-full py-5 px-5 text-sm border-t-white border-r-white border-l-white border-b-white border-solid items-end bg-white hover:border-b-brand-300"
+      className="w-full py-5 px-5 text-sm border-t-grey-0 border-r-grey-0 border-l-grey-0 border-b-grey-0 border-solid items-end bg-grey-0 hover:border-b-brand-300"
       role="menuitem"
       onClick={handleClick}
     >

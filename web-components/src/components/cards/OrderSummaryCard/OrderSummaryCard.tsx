@@ -4,8 +4,7 @@ import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWi
 import { EditableInput } from 'web-components/src/components/inputs/new/EditableInput/EditableInput';
 import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
 import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
-
-import Title from 'src/components/typography/new/Title';
+import Title from 'web-components/src/components/typography/new/Title';
 
 import {
   OrderProps,

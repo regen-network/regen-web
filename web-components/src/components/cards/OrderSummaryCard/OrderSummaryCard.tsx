@@ -133,7 +133,7 @@ function OrderSummaryImage({
 
 function OrderSummary({ children }: { children: ReactNode }) {
   return (
-    <div className="relative sm:w-full sm:max-w-[330px] h-[100%] rounded-[5px] border border-grey-300 border-solid bg-white shadow-none flex flex-2 sm:flex-col py-20 sm:py-0">
+    <div className="relative sm:w-full sm:max-w-[330px] h-[100%] rounded-[5px] border border-grey-300 border-solid bg-grey-0 shadow-none flex flex-2 sm:flex-col py-20 sm:py-0">
       {children}
     </div>
   );

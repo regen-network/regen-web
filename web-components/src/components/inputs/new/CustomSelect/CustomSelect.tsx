@@ -47,7 +47,7 @@ const CustomSelect = ({
       />
       {isOpen && (
         <div
-          className="w-auto absolute top-50 left-0 mt-2 shadow-lg bg-white ring-1 ring-grey-200 p-15 pb-10 pt-5 flex flex-col items-start"
+          className="w-auto absolute top-50 left-0 mt-2 shadow-lg bg-grey-0 ring-1 ring-grey-200 p-15 pb-10 pt-5 flex flex-col items-start"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="options-menu"

@@ -39,7 +39,7 @@ export const TextButton = styled(Button, {
     textTransform: 'uppercase',
     display: 'inline-block',
     ':hover': {
-      color: theme.palette.secondary.dark,
+      color: theme.palette.secondary.contrastText,
     },
     [breakpoints.up('sm')]: {
       padding: 0,

@@ -20,7 +20,7 @@ export type FormRef = MutableRefObject<
 interface Props<T extends FieldValues>
   extends Omit<ComponentProps<'form'>, 'onSubmit'> {
   form: UseFormReturn<T>;
-  onSubmit?: SubmitHandler<T> | any;
+  onSubmit?: SubmitHandler<T>;
   sx?: SxProps<Theme>;
   formRef?: FormRef;
   isDraftRef?: MutableRefObject<boolean>;

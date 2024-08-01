@@ -98,7 +98,7 @@ export function BuyCreditsForm({
           {/* crypto options */}
           {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
             <div>
-              <Title as="h2" className="text-lg">
+              <Title as="h2" className="text-lg font-black">
                 Crypto purchase options
               </Title>
               <p className="font-['Lato'] text-base m-0 text-grey-500 pb-[12px]">

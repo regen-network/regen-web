@@ -3,6 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import {
   CryptoCurrencies,
   CURRENCIES,
+  Currency,
 } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { PAYMENT_OPTIONS } from 'web-components/src/components/form/ChooseCreditsForm/ChooseCreditsForm.types';
 
@@ -21,8 +22,12 @@ export const CreditsAmount = ({
     getCurrencyPrice(CURRENCIES.usd),
   );
   const [maxCreditsSelected, setMaxCreditsSelected] = useState(false);
-
   const defaultCryptoCurrency = CURRENCIES.uregen;
+  const [currency, setCurrency] = useState<Currency>(
+    paymentOption === PAYMENT_OPTIONS.CRYPTO
+      ? defaultCryptoCurrency
+      : CURRENCIES.usd,
+  );
 
   const form = useFormContext();
 
@@ -43,16 +48,21 @@ export const CreditsAmount = ({
 
   // Payment option change
   useEffect(() => {
-    const currency =
-      paymentOption === PAYMENT_OPTIONS.CRYPTO
-        ? defaultCryptoCurrency
-        : CURRENCIES.usd;
     const newPrice = getCurrencyPrice(currency);
     setCurrencyPrice(newPrice);
     form.setValue(CURRENCY_AMOUNT, newPrice * form.getValues(CREDITS_AMOUNT), {
       shouldDirty: true,
     });
-  }, [defaultCryptoCurrency, form, paymentOption]);
+  }, [defaultCryptoCurrency, form, paymentOption, currency]);
+
+  useEffect(() => {
+    if (paymentOption === PAYMENT_OPTIONS.CRYPTO) {
+      setCurrency(defaultCryptoCurrency);
+    }
+    if (paymentOption === PAYMENT_OPTIONS.CARD) {
+      setCurrency(CURRENCIES.usd);
+    }
+  }, [defaultCryptoCurrency, paymentOption]);
 
   // Currency amount change
   const handleCurrencyAmountChange = useCallback(
@@ -90,6 +100,7 @@ export const CreditsAmount = ({
       // TO-DO get real prices from API?
       const newPrice = getCurrencyPrice(currency as CryptoCurrencies);
       setCurrencyPrice(newPrice);
+      setCurrency(currency as Currency);
       form.setValue(
         CURRENCY_AMOUNT,
         newPrice * form.getValues(CREDITS_AMOUNT),
@@ -104,8 +115,8 @@ export const CreditsAmount = ({
   return (
     <>
       <CreditsAmountHeader
+        currency={currency}
         creditsAvailable={creditsAvailable}
-        paymentOption={paymentOption}
         setMaxCreditsSelected={setMaxCreditsSelected}
       />
       <div className="flex justify-between min-w-full flex-wrap sm:flex-nowrap gap-10">

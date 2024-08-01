@@ -33,9 +33,10 @@ const DenomIcon = ({
 }: Props): JSX.Element => {
   return (
     <Box component="span" sx={[...(Array.isArray(sx) ? sx : [sx])]}>
-      {baseDenom === GRAVITY_USDC_DENOM && (
-        <GravUsdcIcon sx={iconSx} className={className} />
-      )}
+      {baseDenom === GRAVITY_USDC_DENOM ||
+        (baseDenom === USDC_DENOM && (
+          <GravUsdcIcon sx={iconSx} className={className} />
+        ))}
       {baseDenom === AXELAR_USDC_DENOM && (
         <AxlUsdcIcon sx={iconSx} className={className} />
       )}
@@ -48,13 +49,8 @@ const DenomIcon = ({
       {baseDenom === EVMOS_DENOM && (
         <EvmosIcon sx={iconSx} className={className} />
       )}
-      {/* TO-DO clarify whether these below are denoms or we should 
-          create a separate collection of icons for them */}
       {baseDenom === USD_DENOM && <USFlagIcon className={className} />}
-      {/* If this one belongs here merge with GRAVITY_USDC_DENOM above */}
-      {baseDenom === USDC_DENOM && (
-        <GravUsdcIcon sx={iconSx} className={className} />
-      )}{' '}
+
       {baseDenom === USDCAXL_DENOM && (
         <AxlUsdcIcon sx={iconSx} className={className} />
       )}

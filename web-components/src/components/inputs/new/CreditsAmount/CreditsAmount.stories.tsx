@@ -24,7 +24,7 @@ const CreditsWithForm = (args: any) => {
     mode: 'onBlur',
   });
   return (
-    <Form form={form} onSubmit={form.handleSubmit}>
+    <Form form={form as any} onSubmit={form.handleSubmit as any}>
       <CreditsAmount {...args} />
     </Form>
   );

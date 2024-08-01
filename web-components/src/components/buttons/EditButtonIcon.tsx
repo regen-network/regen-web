@@ -18,14 +18,7 @@ export function EditButtonIcon({
       aria-label={ariaLabel}
       title={ariaLabel}
     >
-      <EditIcon
-        sx={{
-          height: '24px',
-          width: '24px',
-          p: '2px',
-          color: 'info.main',
-        }}
-      />
+      <EditIcon className="h-[24px] w-[24px] p-[2px] text-grey-400" />
     </button>
   );
 }

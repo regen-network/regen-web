@@ -9,9 +9,7 @@ type TitleProps = {
 const Title = ({ as, children, className = '' }: TitleProps) => {
   const Tag = as;
 
-  return (
-    <Tag className={`font-[muli] font-black ${className}`}>{children}</Tag>
-  );
+  return <Tag className={`font-[muli] ${className}`}>{children}</Tag>;
 };
 
 export default Title;

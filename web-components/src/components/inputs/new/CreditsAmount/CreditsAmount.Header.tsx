@@ -18,7 +18,7 @@ export function CreditsAmountHeader({
 }) {
   return (
     <div className="flex justify-between items-center">
-      <Title as="h2" className="text-lg">
+      <Title as="h2" className="text-lg font-black">
         Amount
       </Title>
       <div className="flex flex-grow justify-end items-center font-['Lato'] text-base">

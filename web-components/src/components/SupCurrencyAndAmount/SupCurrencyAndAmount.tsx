@@ -1,3 +1,5 @@
+import { CURRENCIES } from '../DenomIconWithCurrency/DenomIconWithCurrency.constants';
+
 export function SupCurrencyAndAmount({
   price,
   currencyCode,
@@ -10,7 +12,7 @@ export function SupCurrencyAndAmount({
     currency: currencyCode,
   }).format(price);
 
-  if (currencyCode === 'USD') {
+  if (currencyCode === CURRENCIES.usd) {
     const firstLetter = formattedPrice.charAt(0);
     const restOfString = formattedPrice.slice(1);
     formattedPrice = firstLetter + restOfString;

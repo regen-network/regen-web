@@ -185,8 +185,8 @@ export function ChooseCreditsForm({
                         <p className="pl-[32px] m-0 mt-5">
                           <span className="italic">
                             {credits} credits available
-                          </span>{' '}
-                          |
+                          </span>
+                          <span className="px-5">|</span>
                           <TextButton
                             size="small"
                             className="text-brand-300 uppercase bg-transparent border-none font-bold hover:opacity-80 text-sm"

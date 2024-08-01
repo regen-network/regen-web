@@ -7,7 +7,7 @@ export const PAYMENT_OPTIONS = {
   CRYPTO: 'crypto',
 } as const;
 
-export interface BuyCreditButtonProps {
+export interface ChooseCreditButtonProps {
   children: ReactNode;
   value: string;
   isChecked: boolean;

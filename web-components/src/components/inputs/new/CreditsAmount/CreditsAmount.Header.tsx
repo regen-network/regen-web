@@ -4,7 +4,7 @@ import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/
 import {
   PAYMENT_OPTIONS,
   PaymentOptionsType,
-} from 'web-components/src/components/form/BuyCreditsForm/BuyCreditsForm.types';
+} from 'web-components/src/components/form/ChooseCreditsForm/ChooseCreditsForm.types';
 import Title from 'web-components/src/components/typography/new/Title';
 
 export function CreditsAmountHeader({

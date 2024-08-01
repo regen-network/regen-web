@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
 import { FormContextProvider } from '../../../../../test/testUtils';
-import { PAYMENT_OPTIONS } from '../../../form/BuyCreditsForm/BuyCreditsForm.types';
+import { PAYMENT_OPTIONS } from '../../../form/ChooseCreditsForm/ChooseCreditsForm.types';
 import { CreditsAmount } from './CreditsAmount';
 
 describe('<CreditsAmount />', () => {

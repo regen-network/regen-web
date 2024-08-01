@@ -1,15 +1,15 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+
 import {
   CryptoCurrencies,
   CURRENCIES,
   Currency,
 } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
-import { PAYMENT_OPTIONS } from 'web-components/src/components/form/ChooseCreditsForm/ChooseCreditsForm.types';
 
 import { CREDITS_AMOUNT, CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import { CreditsAmountHeader } from './CreditsAmount.Header';
-import { CreditsAmountProps } from './CreditsAmount.types';
+import { CreditsAmountProps, PAYMENT_OPTIONS } from './CreditsAmount.types';
 import { getCurrencyPrice } from './CreditsAmount.utils';
 import { CreditsInput } from './CreditsInput';
 import { CurrencyInput } from './CurrecyInput.';

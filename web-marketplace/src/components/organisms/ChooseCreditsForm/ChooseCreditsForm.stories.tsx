@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react';
-
 import {
   creditVintages,
   cryptoOptions,
-} from '../../inputs/new/CreditsAmount/CreditsAmount.mock';
+} from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.mock';
+
 import { ChooseCreditsForm } from './ChooseCreditsForm';
 
 export default {
-  title: 'Forms/ChooseCreditsForm',
+  title: 'organisms/ChooseCreditsForm',
   component: ChooseCreditsForm,
 } as Meta<typeof ChooseCreditsForm>;
 

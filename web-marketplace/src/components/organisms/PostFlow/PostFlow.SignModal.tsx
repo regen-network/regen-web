@@ -1,5 +1,7 @@
 import { useFormState, useWatch } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
+import { ContentHash_Graph } from '@regen-network/api/lib/generated/regen/data/v1/types';
+import { useQuery } from '@tanstack/react-query';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -12,14 +14,26 @@ import {
   Title,
 } from 'web-components/src/components/typography';
 
+import { useLedger } from 'ledger';
+import { convertIRIToHashQuery } from 'lib/queries/react-query/data/convertIRIToHashQuery/convertIRIToHashQuery';
+
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import useMsgClient from 'hooks/useMsgClient';
 
 import { signModalSchema } from './PostFlow.SignModal.schema';
 
-type SignModalProps = { handleSign: () => Promise<void> } & RegenModalProps;
+type SignModalProps = {
+  iri?: string;
+  handleSign: (contentHash: ContentHash_Graph) => Promise<void>;
+} & RegenModalProps;
 
-export const SignModal = ({ onClose, open, handleSign }: SignModalProps) => {
+export const SignModal = ({
+  iri,
+  onClose,
+  open,
+  handleSign,
+}: SignModalProps) => {
   const form = useZodForm({
     schema: signModalSchema,
     defaultValues: {
@@ -34,10 +48,23 @@ export const SignModal = ({ onClose, open, handleSign }: SignModalProps) => {
     control: form.control,
     name: 'verified',
   });
+  const { dataClient } = useLedger();
+  const { data } = useQuery(
+    convertIRIToHashQuery({
+      client: dataClient,
+      request: { iri },
+      enabled: !!dataClient && !!iri,
+    }),
+  );
 
   return (
     <Modal onClose={onClose} open={open}>
-      <Form form={form} onSubmit={handleSign}>
+      <Form
+        form={form}
+        onSubmit={() =>
+          data?.contentHash?.graph && handleSign(data?.contentHash?.graph)
+        }
+      >
         <Title variant="h4" align="center">
           <Trans>Attach a signature</Trans>
         </Title>
@@ -74,7 +101,10 @@ export const SignModal = ({ onClose, open, handleSign }: SignModalProps) => {
           >
             <Trans>skip this step</Trans>
           </TextButton>
-          <ContainedButton type="submit" disabled={!isValid}>
+          <ContainedButton
+            type="submit"
+            disabled={!isValid || !data?.contentHash?.graph}
+          >
             <Trans>sign</Trans>
           </ContainedButton>
         </div>

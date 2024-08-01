@@ -1,9 +1,9 @@
 import { Trans } from '@lingui/macro';
-import { truncate } from 'lodash';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import { Item } from 'web-components/src/components/modal/TxModal';
 import { CardItemValue } from 'web-components/src/components/modal/TxModal.CardItemValue';
+import { truncate } from 'web-components/src/utils/truncate';
 
 import { getHashUrl } from 'lib/block-explorer';
 import {
@@ -86,7 +86,6 @@ export const getSuccessModalContent = ({
             <Trans>anchor</Trans>:
           </TextButton>
           <CardItemValue
-            className="lowercase"
             size="sm"
             mobileSize="sm"
             value={{
@@ -105,11 +104,13 @@ export const getSuccessModalContent = ({
         <div className="flex">
           <TextButton
             textSize="sm"
-            className="font-extrabold text-grey-400 hover:text-grey-400"
+            className="font-extrabold text-grey-400 hover:text-grey-400 pr-3"
           >
             <Trans>attest</Trans>:{' '}
           </TextButton>
           <CardItemValue
+            size="sm"
+            mobileSize="sm"
             value={{
               name: truncate(attestTxHash),
               url: getHashUrl(attestTxHash),

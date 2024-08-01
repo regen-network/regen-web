@@ -1,9 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { DeliverTxResponse } from '@cosmjs/stargate';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import { OrderBy } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-import { MsgAnchor } from '@regen-network/api/lib/generated/regen/data/v1/tx';
+import {
+  MsgAnchor,
+  MsgAttest,
+} from '@regen-network/api/lib/generated/regen/data/v1/tx';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
@@ -33,6 +38,9 @@ import { getPostQuery } from 'lib/queries/react-query/registry-server/getPostQue
 import { PostFile } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
+
+import { Link } from 'components/atoms';
+import { useMsgClient } from 'hooks';
 
 import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { DEFAULT, PROJECTS_S3_PATH } from '../MediaForm/MediaForm.constants';
@@ -79,7 +87,7 @@ export const PostFlow = ({
   const [isSignModalOpen, setIsSignModalOpen] = useState(false);
   const { wallet } = useWallet();
   const { activeAccount } = useAuth();
-
+  const [isFormModalOpen, setIsFormModalOpen] = useState(true);
   const [iri, setIri] = useState<string | undefined>();
   const { data: createdPostData } = useQuery(
     getPostQuery({
@@ -87,6 +95,7 @@ export const PostFlow = ({
       enabled: !!iri,
     }),
   );
+  const { _ } = useLingui();
 
   const [offChainProjectId, setOffChainProjectId] =
     useState(_offChainProjectId);
@@ -158,6 +167,8 @@ export const PostFlow = ({
 
   const fetchMsgAnchor = useCallback(
     async (iri: string) => {
+      setProcessingModalAtom(atom => void (atom.open = true));
+
       const timer = (ms: number) => new Promise(res => setTimeout(res, ms));
 
       let txResponses: TxResponse[] | undefined = [];
@@ -165,12 +176,15 @@ export const PostFlow = ({
       let anchorTxHash: string | undefined;
 
       while (i < 10 && txResponses && txResponses.length === 0) {
-        await timer(1000);
         const { data } = await refetch();
         txResponses = data?.txResponses?.filter(txRes =>
           txRes.rawLog.includes(iri),
         );
         i++;
+        if (txResponses && txResponses.length === 1) {
+          break;
+        }
+        await timer(1000);
       }
       if (txResponses && txResponses.length === 1) {
         anchorTxHash = txResponses[0].txhash;
@@ -207,13 +221,13 @@ export const PostFlow = ({
 
   useEffect(() => {
     if (iri && createdPostData) {
-      onModalClose();
-      setProcessingModalAtom(atom => void (atom.open = true));
+      setIsFormModalOpen(false);
 
       if (wallet?.address && activeAccount?.addr === wallet.address) {
         setIsSignModalOpen(true);
       } else {
         fetchMsgAnchor(iri);
+        onModalClose();
       }
     }
   }, [
@@ -249,10 +263,14 @@ export const PostFlow = ({
     },
     [offChainProjectId, onModalClose],
   );
+  const { signAndBroadcast } = useMsgClient();
 
   return (
     <>
-      <Modal open={!!projectId} onClose={() => onClose(isFormDirty)}>
+      <Modal
+        open={!!projectId && isFormModalOpen}
+        onClose={() => onClose(isFormDirty)}
+      >
         {projectId && (
           <PostForm
             offChainProjectId={offChainProjectId}
@@ -267,10 +285,59 @@ export const PostFlow = ({
         )}
       </Modal>
       <SignModal
+        iri={iri}
         open={isSignModalOpen}
-        onClose={() => setIsSignModalOpen(false)}
-        handleSign={function (): Promise<void> {
-          throw new Error('Function not implemented.');
+        onClose={() => {
+          setIsSignModalOpen(false);
+          if (iri) fetchMsgAnchor(iri);
+        }}
+        handleSign={async (contentHash: any) => {
+          await signAndBroadcast(
+            {
+              msgs: [
+                MsgAttest.fromPartial({
+                  attestor: wallet?.address,
+                  contentHashes: [contentHash],
+                }),
+              ],
+            },
+            (): void => {
+              setProcessingModalAtom(atom => void (atom.open = true));
+            },
+            {
+              onError: (err?: Error) => {
+                setProcessingModalAtom(atom => void (atom.open = false));
+                console.log(err); // TODO
+              },
+              onSuccess: async (deliverTxResponse?: DeliverTxResponse) => {
+                const { data: anchorTxsData } = await refetch();
+                const txResponses = anchorTxsData?.txResponses?.filter(
+                  txRes => iri && txRes.rawLog.includes(iri),
+                );
+                const anchorTxHash = txResponses?.[0]?.txhash;
+                setProcessingModalAtom(atom => void (atom.open = false));
+
+                const { cardItems, buttonLink } = getSuccessModalContent({
+                  createdPostData,
+                  projectSlug,
+                  projectId,
+                  offChainProjectId,
+                  projectName,
+                  anchorTxHash:
+                    anchorTxHash ?? deliverTxResponse?.transactionHash,
+                  attestTxHash: deliverTxResponse?.transactionHash,
+                });
+                setTxSuccessfulModalAtom(atom => {
+                  atom.open = true;
+                  atom.cardItems = cardItems;
+                  atom.title = POST_CREATED;
+                  atom.cardTitle = _(msg`Attest`);
+                  atom.buttonTitle = VIEW_POST;
+                  atom.buttonLink = buttonLink;
+                });
+              },
+            },
+          );
         }}
       />
       <SaveChangesWarningModal

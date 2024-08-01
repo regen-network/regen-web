@@ -1,5 +1,6 @@
 import { ChangeEvent, MouseEvent, Suspense, useState } from 'react';
 import { SubmitHandler, useWatch } from 'react-hook-form';
+import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
 
@@ -9,8 +10,6 @@ import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/RadioGroup';
 import { Loading } from 'web-components/src/components/loading';
 import Title from 'web-components/src/components/typography/new/Title';
-
-import { CreditsAmount } from 'components/molecules/CreditsAmount/CreditsAmount';
 
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
 import {

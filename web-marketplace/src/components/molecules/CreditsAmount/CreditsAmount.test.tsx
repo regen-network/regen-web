@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
-import { FormContextProvider } from '../../../../../test/testUtils';
-import { PAYMENT_OPTIONS } from '../../../form/ChooseCreditsForm/ChooseCreditsForm.types';
+import { FormContextProvider } from '../../../../test/testUtils';
 import { CreditsAmount } from './CreditsAmount';
+import { PAYMENT_OPTIONS } from './CreditsAmount.types';
 
-describe('<CreditsAmount />', () => {
+describe('CreditsAmount', () => {
   const defaultValues = {
     creditsAvailable: 100,
     paymentOption: PAYMENT_OPTIONS.CARD,

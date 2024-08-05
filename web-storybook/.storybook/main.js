@@ -86,15 +86,12 @@ module.exports = {
           '@mui/material/Unstable_Grid2',
         ],
         esbuildOptions: {
-          plugins:
-            configType === 'DEVELOPMENT'
-              ? [
-                  NodeGlobalsPolyfillPlugin({
-                    buffer: true,
-                    process: true,
-                  }),
-                ]
-              : undefined,
+          plugins:[
+            NodeGlobalsPolyfillPlugin({
+              buffer: true,
+              process: true,
+            }),
+          ]
         },
       },
     });

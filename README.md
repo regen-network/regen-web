@@ -135,19 +135,22 @@ bun run build-www
 
 ## Testing
 
-```sh
-bun run test
-```
+We are using [Vitest](https://vitest.dev/) as a test runner.
 
-Launches the test runner in the interactive watch mode.
-[Jest](https://jestjs.io/) is used as test runner.
+Tests can be run in the terminal with the following commands from the project root: 
 
-We're using [StoryShots](https://storybook.js.org/docs/testing/structural-testing/#using-storyshots) for snapshots testing.
-Update web-components snapshots:
+* To run `web-marketplace` tests
+  ```sh
+  bun run test-marketplace
+  ```
 
-```sh
-bun run test-update-snapshot
-```
+* To run `web-components` tests
+  ```sh
+  bun run test-components
+  ```
+In both cases the test runner is launched in the interactive watch mode.
+
+
 
 ## Code style
 

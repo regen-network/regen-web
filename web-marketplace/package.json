@@ -74,7 +74,7 @@
     "react-slick": "^0.29.0",
     "react-use-intercom": "^1.2.0",
     "slug": "^9.0.0",
-    "stream": "^0.0.2",
+    "stream": "^0.0.3",
     "tss-react": "^4.4.1",
     "url-search-params-polyfill": "^8.1.0",
     "use-analytics": "^0.0.5",

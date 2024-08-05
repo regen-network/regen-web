@@ -5,10 +5,7 @@ import Grid, { GridProps } from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
 
-import {
-  BlockContent,
-  blocksToText,
-} from 'web-components/src/components/block-content';
+import { BlockContent } from 'web-components/src/components/block-content';
 import { ImageActionCard } from 'web-components/src/components/cards/ImageActionCard';
 import { ProgramImageChildren } from 'web-components/src/components/cards/ProjectCard/ProjectCard.ImageChildren';
 import { Account } from 'web-components/src/components/user/UserInfo';
@@ -16,7 +13,6 @@ import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { AllCreditClassQuery } from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';
-import { onChainClassRegExp } from '../../lib/ledger';
 
 type Props = {
   btnText: string;
@@ -62,12 +58,8 @@ const CreditClassCards: React.FC<React.PropsWithChildren<Props>> = ({
       spacing={isMobile ? 0 : 5}
     >
       {creditClassesContent?.map((c, i) => {
-        const isOnChainClass = c.path && onChainClassRegExp.test(c.path);
-        const title = isOnChainClass ? (
-          `${blocksToText(c?.nameRaw)} (${c.path})`
-        ) : (
-          <BlockContent content={c?.nameRaw} />
-        );
+        const title = <BlockContent content={c?.nameRaw} />;
+
         return (
           <Grid
             item

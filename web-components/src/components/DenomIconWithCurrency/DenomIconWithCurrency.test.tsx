@@ -1,6 +1,4 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
 import { USD_DENOM } from 'web-marketplace/src/config/allowedBaseDenoms';
 
 import { DenomIconWithCurrency } from './DenomIconWithCurrency';

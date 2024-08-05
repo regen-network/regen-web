@@ -101,6 +101,7 @@
     "prettier": "2.4.1",
     "storybook-addon-react-router-v6": "^0.1.10",
     "tailwind-merge": "^1.14.0",
+    "vite": "^5.3.5",
     "vitest": "^2.0.2"
   }
 }

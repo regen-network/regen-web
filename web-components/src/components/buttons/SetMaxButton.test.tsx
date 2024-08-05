@@ -1,6 +1,4 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, it, vi } from 'vitest';
 import { SetMaxButton } from 'web-components/src/components/buttons/SetMaxButton';
 
 describe('SetMaxButton', () => {

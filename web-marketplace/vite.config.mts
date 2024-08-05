@@ -57,12 +57,15 @@ export default defineConfig(({ mode }) => {
     define: isDev ? { global: {} } : { 'process.env': {} },
     optimizeDeps: {
       esbuildOptions: {
-        plugins: [
-          NodeGlobalsPolyfillPlugin.default({
-            buffer: true,
-            process: true,
-          }),
-        ],
+        plugins:
+          mode === 'development'
+            ? [
+                NodeGlobalsPolyfillPlugin.default({
+                  buffer: true,
+                  process: true,
+                }),
+              ]
+            : undefined,
       },
     },
     test: {

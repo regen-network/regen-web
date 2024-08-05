@@ -10,7 +10,6 @@ import {
 import { ContentHash_Graph } from '@regen-network/api/lib/generated/regen/data/v1/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ERRORS } from 'config/errors';
-import { error } from 'console';
 import { useSetAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
@@ -84,7 +83,7 @@ export const useSign = ({
           setProcessingModalAtom(atom => void (atom.open = true));
         },
         {
-          onError: (err?: Error) => {
+          onError: (error?: Error) => {
             setErrorCodeAtom(ERRORS.DEFAULT);
             setErrorModalAtom(atom => void (atom.description = String(error)));
             setProcessingModalAtom(atom => void (atom.open = false));
@@ -119,10 +118,9 @@ export const useSign = ({
             setTxSuccessfulModalAtom(atom => {
               atom.open = true;
               atom.cardItems = cardItems;
-              atom.title = POST_CREATED;
-              _(msg`${POST_CREATED}`);
+              atom.title = _(msg`${POST_CREATED}`);
               atom.cardTitle = _(msg`Attest`);
-              atom.buttonTitle = VIEW_POST;
+              atom.buttonTitle = _(msg`${VIEW_POST}`);
               atom.buttonLink = buttonLink;
               atom.txHash = undefined;
             });

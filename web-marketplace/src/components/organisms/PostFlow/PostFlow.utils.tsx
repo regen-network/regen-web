@@ -3,6 +3,7 @@ import { Trans } from '@lingui/macro';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import { Item } from 'web-components/src/components/modal/TxModal';
 import { CardItemValue } from 'web-components/src/components/modal/TxModal.CardItemValue';
+import { Subtitle } from 'web-components/src/components/typography';
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getHashUrl } from 'lib/block-explorer';
@@ -97,7 +98,16 @@ export const getSuccessModalContent = ({
         </div>
       ),
     });
+  } else {
+    hashValue.push({
+      component: (
+        <Subtitle size="lg" className="font-normal text-grey-400 italic">
+          <Trans>Anchoring in progress</Trans>
+        </Subtitle>
+      ),
+    });
   }
+
   if (attestTxHash) {
     hashValue.push({
       component: (

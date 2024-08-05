@@ -75,7 +75,7 @@ const useStyles = makeStyles<StyleProps>()((theme, { hideProgress }) => ({
 }));
 
 const SaveFooter: React.FC<React.PropsWithChildren<Props>> = ({
-  saveText = 'Save and Next',
+  saveText = 'Next',
   hideProgress = false,
   saveAndExit,
   ...props

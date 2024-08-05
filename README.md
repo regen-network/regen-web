@@ -17,7 +17,6 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
       - [GraphQL Type generation](#graphql-type-generation)
     - [Storybook](#storybook)
     - [Website](#website)
-    - [Deploying the Custom Login form to Auth0](#deploying-the-custom-login-form-to-auth0)
   - [Testing](#testing)
   - [Code style](#code-style)
   - [i18n](#i18n)
@@ -34,7 +33,6 @@ This project uses [bun](https://bun.sh/) with [bun workspaces](https://bun.sh/do
 - `web-marketplace`: Registry React application
 - `web-components`: React components and [material-ui](https://material-ui.com/) custom theme
 - `web-storybook`: [Storybook](https://storybook.js.org/) config
-- `web-auth`: React application used for Auth0 Custom Universal Login
 
 [Lerna](https://github.com/lerna/lerna) is also used to bump packages versions and push new releases.
 
@@ -62,7 +60,6 @@ bun install
 
 Set variables in `.env` files in `web-marketplace/` and `web-storybook/` folders based on provided `.env.example` files.
 
-For `web-auth`, follow these [setup instructions](web-auth/README.md#setup).
 
 ## Development
 
@@ -135,16 +132,6 @@ bun run build-storybook
 ```sh
 bun run build-www
 ```
-
-### Deploying the Custom Login form to Auth0
-
-Please, follow [these instructions](web-auth/README.md#setup) and then:
-
-1. Run `bun run build-auth` command.
-2. Copy the code from `./build/index.html`.
-3. Paste it into the Universal Login HTML form from [Auth dashboard](https://manage.auth0.com/dashboard/us/regen-network-registry/login_page) and save.
-
-This could be automated in the future.
 
 ## Testing
 

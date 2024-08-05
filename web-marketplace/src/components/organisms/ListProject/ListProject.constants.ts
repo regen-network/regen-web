@@ -1,1 +1,1 @@
-export const LIST_PROJECT = '+List a project';
+export const CREATE_PROJECT = '+Create project';

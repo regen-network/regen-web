@@ -13,8 +13,8 @@ import Title from 'web-components/src/components/typography/new/Title';
 
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
 import {
-  ChooseCreditsFormSchema,
-  FormFields,
+  chooseCreditsFormSchema,
+  ChooseCreditsFormSchemaType,
 } from './ChooseCreditsForm.schema';
 import { PAYMENT_OPTIONS, PaymentOptionsType } from './ChooseCreditsForm.types';
 
@@ -39,7 +39,7 @@ export function ChooseCreditsForm({
   };
 
   const form = useZodForm({
-    schema: ChooseCreditsFormSchema,
+    schema: chooseCreditsFormSchema,
     defaultValues: {
       amountCurrency: 1,
       amountCredits: 1,
@@ -53,7 +53,7 @@ export function ChooseCreditsForm({
     name: 'cryptoPurchaseOption',
   });
 
-  const handleOnSubmit: SubmitHandler<FormFields> = data => {
+  const handleOnSubmit: SubmitHandler<ChooseCreditsFormSchemaType> = data => {
     // TO-DO
   };
 

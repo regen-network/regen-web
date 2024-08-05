@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
-import { ChooseCreditsFormSchema } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
+import { chooseCreditsFormSchema } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { CreditsAmount } from './CreditsAmount';
 import { PAYMENT_OPTIONS } from './CreditsAmount.types';
@@ -15,7 +15,7 @@ type Story = StoryObj<typeof CreditsAmount>;
 
 const CreditsWithForm = (args: any) => {
   const form = useZodForm({
-    schema: ChooseCreditsFormSchema,
+    schema: chooseCreditsFormSchema,
     defaultValues: {
       amountCurrency: 1,
       amountCredits: 1,

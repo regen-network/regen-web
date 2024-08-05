@@ -1,7 +1,6 @@
-import React from 'react';
 import { screen } from '@testing-library/dom';
 import { fireEvent, render } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { OrderSummaryCard } from './OrderSummaryCard';
 import { OrderSummaryProps } from './OrderSummaryCard.types';
@@ -10,16 +9,18 @@ describe('OrderSummaryCard', () => {
   const orderSummary: OrderSummaryProps = {
     order: {
       projectName: 'Project Name',
-      currency: 'USD',
+      currency: CURRENCIES.usd,
       pricePerCredit: 10,
       credits: 5,
       image: 'path/to/image',
+      prefinanceProject: false,
     },
     paymentMethod: {
       type: 'visa',
       cardNumber: '1234 5678 9012 3456',
     },
     currentBuyingStep: 2,
+    onClickEditCard: vi.fn(),
   };
 
   it('displays the project name', () => {

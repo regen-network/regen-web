@@ -1,6 +1,4 @@
-import React from 'react';
 import { render } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
 import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
 
 import { CURRENCIES } from '../DenomIconWithCurrency/DenomIconWithCurrency.constants';

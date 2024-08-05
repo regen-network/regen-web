@@ -19,7 +19,6 @@ import { convertIRIToHashQuery } from 'lib/queries/react-query/data/convertIRITo
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
-import useMsgClient from 'hooks/useMsgClient';
 
 import { signModalSchema } from './PostFlow.SignModal.schema';
 

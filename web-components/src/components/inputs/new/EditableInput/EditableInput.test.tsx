@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from 'web-marketplace/test/test-utils';
 
 import { EditableInput } from './EditableInput';
 

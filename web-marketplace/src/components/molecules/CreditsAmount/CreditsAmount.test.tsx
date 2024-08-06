@@ -1,7 +1,10 @@
-import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {
+  FormContextProvider,
+  render,
+  screen,
+} from 'web-marketplace/test/test-utils';
 
-import { FormContextProvider } from '../../../../test/testUtils';
 import { CreditsAmount } from './CreditsAmount';
 import { PAYMENT_OPTIONS } from './CreditsAmount.types';
 

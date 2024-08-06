@@ -23,9 +23,13 @@
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "test/*": ["../test/*"]
+    }
   },
   "include": [
+    "test",
     "src",
     "types/url-search-params-polyfill.d.ts",
     "lib/rdf/types/rdf-validate-shacl/index.d.ts"

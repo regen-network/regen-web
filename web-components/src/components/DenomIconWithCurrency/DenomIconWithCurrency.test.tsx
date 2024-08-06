@@ -1,5 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react';
 import { USD_DENOM } from 'web-marketplace/src/config/allowedBaseDenoms';
+import { fireEvent, render, screen } from 'web-marketplace/test/test-utils';
 
 import { DenomIconWithCurrency } from './DenomIconWithCurrency';
 

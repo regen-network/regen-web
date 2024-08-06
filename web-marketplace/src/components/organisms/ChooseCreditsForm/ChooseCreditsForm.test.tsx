@@ -1,5 +1,4 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen, userEvent } from 'web-marketplace/test/test-utils';
 
 import { ChooseCreditsForm } from './ChooseCreditsForm';
 
@@ -50,11 +49,9 @@ describe('ChooseCreditsForm', () => {
         cryptoOptions={cryptoOptions}
       />,
     );
-
     const cardOption = screen.getByRole('radio', {
       name: /card/i,
     });
-
     userEvent.click(cardOption);
     expect(cardOption).toBeChecked();
   });

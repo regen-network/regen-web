@@ -10,6 +10,7 @@ import { SaveChangesWarningModal } from 'web-components/src/components/modal/Sav
 import { deleteImage } from 'web-components/src/utils/s3';
 
 import { apiUri } from 'lib/apiUri';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { apiServerUrl } from 'lib/env';
@@ -74,50 +75,61 @@ export const PostFlow = ({
     setOffChainProjectId,
     subFolder: '/posts',
   });
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   const onSubmit = useCallback(
     async (data: PostFormSchemaType) => {
       if (token) {
         const files = data.files?.filter(file => file.url !== DEFAULT);
-        await postData({
-          url: `${apiServerUrl}/marketplace/v1/posts`,
-          data: {
-            projectId: offChainProjectId,
-            privacy: data.privacyType,
-            contents: {
-              ...basePostContent,
-              title: data.title,
-              comment: data.comment,
-              files: files?.map(file => {
-                const geocodePoint = file.location.geometry.coordinates;
-                return {
-                  iri: file.iri,
-                  name: file.name,
-                  description: file.description,
-                  credit: file.credit,
-                  locationType: file.locationType,
-                  location: {
-                    wkt: `POINT(${geocodePoint[0]} ${geocodePoint[1]})`,
-                  },
-                };
-              }),
+        try {
+          await postData({
+            url: `${apiServerUrl}/marketplace/v1/posts`,
+            data: {
+              projectId: offChainProjectId,
+              privacy: data.privacyType,
+              contents: {
+                ...basePostContent,
+                title: data.title,
+                comment: data.comment,
+                files: files?.map(file => {
+                  const geocodePoint = file.location.geometry.coordinates;
+                  return {
+                    iri: file.iri,
+                    name: file.name,
+                    description: file.description,
+                    credit: file.credit,
+                    locationType: file.locationType,
+                    location: {
+                      wkt: `POINT(${geocodePoint[0]} ${geocodePoint[1]})`,
+                    },
+                  };
+                }),
+              },
             },
-          },
-          token,
-          retryCsrfRequest,
-          onSuccess: async res => {
-            setIri(res.iri);
-            await reactQueryClient.invalidateQueries({
-              queryKey: getPostsQueryKey({
-                projectId: offChainProjectId,
-              }),
-              refetchType: 'all',
-            });
-          },
-        });
+            token,
+            retryCsrfRequest,
+            onSuccess: async res => {
+              setIri(res.iri);
+              await reactQueryClient.invalidateQueries({
+                queryKey: getPostsQueryKey({
+                  projectId: offChainProjectId,
+                }),
+                refetchType: 'all',
+              });
+            },
+          });
+        } catch (e) {
+          setErrorBannerTextAtom(String(e));
+        }
       }
     },
-    [token, offChainProjectId, retryCsrfRequest, reactQueryClient],
+    [
+      token,
+      offChainProjectId,
+      retryCsrfRequest,
+      reactQueryClient,
+      setErrorBannerTextAtom,
+    ],
   );
 
   const fetchMsgAnchor = useFetchMsgAnchor({
@@ -205,12 +217,14 @@ export const PostFlow = ({
           if (iri) fetchMsgAnchor({ iri, createdPostData });
         }}
         handleSign={async (contentHash: ContentHash_Graph) => {
-          if (iri)
+          if (iri) {
+            setIsSignModalOpen(false);
             await sign({
               contentHash,
               iri,
               createdPostData,
             });
+          }
         }}
       />
       <SaveChangesWarningModal

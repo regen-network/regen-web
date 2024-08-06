@@ -38,6 +38,7 @@ type GetSuccessModalContentParams = {
   projectName?: string;
   anchorTxHash?: string;
   attestTxHash?: string;
+  signingFailed?: boolean;
 };
 export const getSuccessModalContent = ({
   createdPostData,
@@ -47,6 +48,7 @@ export const getSuccessModalContent = ({
   projectName,
   anchorTxHash,
   attestTxHash,
+  signingFailed,
 }: GetSuccessModalContentParams) => {
   const iri = createdPostData?.iri;
   const files = createdPostData?.contents?.files as PostFile[] | undefined;
@@ -128,6 +130,14 @@ export const getSuccessModalContent = ({
             linkComponent={Link}
           />
         </div>
+      ),
+    });
+  } else if (signingFailed) {
+    hashValue.push({
+      component: (
+        <Subtitle size="lg" className="text-error-400">
+          <Trans>Signing failed</Trans>
+        </Subtitle>
       ),
     });
   }

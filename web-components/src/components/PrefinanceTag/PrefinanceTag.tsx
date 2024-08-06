@@ -9,21 +9,26 @@ export const PrefinanceTag = ({
     root: '',
     label: '',
   },
+  iconSize = {
+    width: '18',
+    height: '19',
+  },
 }: {
   classNames?: { root?: string; label?: string };
+  iconSize?: {
+    width: string;
+    height: string;
+  };
 }) => (
   <div
     className={cn(
-      'bg-purple-gradient rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute left-0 top-30 sm:top-50',
+      'bg-purple-gradient rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute top-30 left-0',
       classNames.root,
     )}
   >
-    <PrefinanceIcon width="24" height="24" />
+    <PrefinanceIcon width={iconSize.width} height={iconSize.height} />
     <Label
-      className={cn(
-        'sm:text-[11px] pl-10 font-extrabold uppercase',
-        classNames.label,
-      )}
+      className={cn('pl-10 font-extrabold uppercase', classNames.label)}
       component="span"
       size="xxs"
     >

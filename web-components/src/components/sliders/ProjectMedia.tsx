@@ -321,7 +321,15 @@ export default function ProjectMedia({
                   {i === 0 && isMedia(a) && imageCredits && (
                     <Box className={classes.imageCredits}>{imageCredits}</Box>
                   )}
-                  {i === 0 && isPrefinanceProject && <PrefinanceTag />}
+                  {i === 0 && isPrefinanceProject && (
+                    <PrefinanceTag
+                      classNames={{
+                        root: 'sm:py-10 sm:top-50',
+                        label: 'sm:text-[11px]',
+                      }}
+                      iconSize={{ width: '24', height: '24' }}
+                    />
+                  )}
                 </Grid>
               ))}
             </Grid>
@@ -410,7 +418,15 @@ export default function ProjectMedia({
               }
             })}
           </Slider>
-          {isPrefinanceProject && <PrefinanceTag />}
+          {isPrefinanceProject && (
+            <PrefinanceTag
+              classNames={{
+                root: 'sm:py-10 sm:top-50',
+                label: 'sm:text-[11px]',
+              }}
+              iconSize={{ width: '24', height: '24' }}
+            />
+          )}
         </div>
       )}
     </div>

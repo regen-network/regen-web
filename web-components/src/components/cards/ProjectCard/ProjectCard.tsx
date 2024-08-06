@@ -171,7 +171,14 @@ export function ProjectCard({
           color={theme.palette.primary.light}
         />
       </div>
-      {isPrefinanceProject && <PrefinanceTag />}
+      {isPrefinanceProject && (
+        <PrefinanceTag
+          classNames={{
+            root: 'top-20 left-0',
+            label: 'text-[10px]',
+          }}
+        />
+      )}
       {comingSoon && (
         <div className={classes.comingSoon}>
           <span className={classes.comingSoonText}>coming soon</span>

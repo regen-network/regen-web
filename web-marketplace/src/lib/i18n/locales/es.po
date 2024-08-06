@@ -17,6 +17,27 @@ msgstr ""
 msgid ""
 msgstr ""
 
+#: src/components/organisms/PostFlow/hooks/useSign.ts:109
+msgid "{POST_CREATED_SIGNING_FAILED}"
+msgstr ""
+
+#: src/components/organisms/PostFlow/hooks/useFetchMsgAnchor.ts:92
+#: src/components/organisms/PostFlow/hooks/useSign.ts:146
+msgid "{POST_CREATED}"
+msgstr ""
+
+#: src/components/organisms/PostFlow/hooks/useFetchMsgAnchor.ts:93
+#: src/components/organisms/PostFlow/hooks/useSign.ts:111
+#: src/components/organisms/PostFlow/hooks/useSign.ts:148
+msgid "{VIEW_POST}"
+msgstr ""
+
+#: src/components/organisms/PostFlow/hooks/useFetchMsgAnchor.ts:93
+#: src/components/organisms/PostFlow/hooks/useSign.ts:111
+#: src/components/organisms/PostFlow/hooks/useSign.ts:148
+#~ msgid "{VIEW_POST}>>>>>>> d5b43aa8f (fix: run i18n:extract)"
+#~ msgstr ""
+
 #: src/pages/CreditClassDetails/CreditClassDetails.ApprovedMethodologies.tsx:57
 msgid "+ {0} more"
 msgstr ""
@@ -40,6 +61,10 @@ msgstr ""
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:27
 msgid "A <0>program</0> involves the eligibility rules, monitoring and certification, and registration systems for credit trading and ownership tracking."
 msgstr ""
+
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:24
+#~ msgid "A <0>program</0> involves the eligibility rules, monitoring and certification, and registration systems for credit trading and ownership tracking.======="
+#~ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:116
 msgid "A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
@@ -68,7 +93,7 @@ msgstr ""
 
 #: src/pages/BatchDetails/BatchDetails.tsx:122
 msgid "All credits"
-msgstr ""
+msgstr "<<<<<<< HEAD"
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:123
 msgid "Amount Bridgable"
@@ -94,13 +119,43 @@ msgstr ""
 msgid "amount sent"
 msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.utils.tsx:89
+msgid "anchor"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.utils.tsx:107
+msgid "Anchoring in progress"
+msgstr ""
+
 #: src/pages/CreditClassDetails/CreditClassDetails.ApprovedMethodologies.tsx:29
 msgid "approved methodologies"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:68
+msgid "Attach a signature"
 msgstr ""
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:107
 msgid "Attach arbitrary JSON-LD metadata to the credit batch below."
 msgstr ""
+
+#: src/components/organisms/CreditClassForms/CreditClassForm.tsx:107
+#~ msgid "Attach arbitrary JSON-LD metadata to the credit batch below.======="
+#~ msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.utils.tsx:121
+msgid "attest"
+msgstr ""
+
+#: src/components/organisms/PostFlow/hooks/useSign.ts:110
+#: src/components/organisms/PostFlow/hooks/useSign.ts:147
+msgid "Attest"
+msgstr ""
+
+#: src/components/organisms/PostFlow/hooks/useSign.ts:110
+#: src/components/organisms/PostFlow/hooks/useSign.ts:147
+#~ msgid "Attest>>>>>>> d5b43aa8f (fix: run i18n:extract)"
+#~ msgstr ""
 
 #: src/pages/BasicInfo/BasicInfo.tsx:66
 msgid "Basic Info"
@@ -387,7 +442,7 @@ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:132
 msgid "High density grazing"
-msgstr ""
+msgstr "<<<<<<< HEAD"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:310
 msgid "I am a:"
@@ -396,6 +451,18 @@ msgstr ""
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:20
 msgid "I just offset my carbon footprint on #RegenMarketplace with @regen_network. Join me in doing our part for planetary regeneration!"
 msgstr ""
+
+#: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:17
+#~ msgid "I just offset my carbon footprint on #RegenMarketplace with @regen_network. Join me in doing our part for planetary regeneration!======="
+#~ msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:87
+msgid "I verify this data is accurate to the best of my knowledge"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:87
+#~ msgid "I verify this data is accurate to the best of my knowledge>>>>>>> d5b43aa8f (fix: run i18n:extract)"
+#~ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:139
 msgid "In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
@@ -615,6 +682,22 @@ msgstr ""
 msgid "Share"
 msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:107
+msgid "sign"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:75
+msgid "Sign this post"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.utils.tsx:139
+msgid "Signing failed"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:101
+msgid "skip this step"
+msgstr ""
+
 #: src/config/errors.tsx:29
 msgid "Sorry, someone has purchased this sell order!"
 msgstr ""
@@ -661,7 +744,7 @@ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:162
 msgid "The practice of letting livestock graze crop residue after a crop has been harvested."
-msgstr ""
+msgstr "<<<<<<< HEAD"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.constants.ts:4
 msgid "The structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
@@ -671,6 +754,14 @@ msgstr ""
 msgid "This data is on chain or anchored on chain via a content hash."
 msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:78
+msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:78
+#~ msgid "This is comparable to signing a legal document and implies you believe the contents are accurate.>>>>>>> d5b43aa8f (fix: run i18n:extract)"
+#~ msgstr ""
+
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:90
 msgid "Timestamp"
 msgstr ""
@@ -678,6 +769,10 @@ msgstr ""
 #: src/pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:90
 msgid "Tokenization Source"
 msgstr ""
+
+#: src/pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:90
+#~ msgid "Tokenization Source======="
+#~ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:205
 msgid "Traditional grazing"

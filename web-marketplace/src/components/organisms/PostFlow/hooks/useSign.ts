@@ -9,7 +9,6 @@ import {
 } from '@regen-network/api/lib/generated/regen/data/v1/tx';
 import { ContentHash_Graph } from '@regen-network/api/lib/generated/regen/data/v1/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { ERRORS } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
@@ -26,7 +25,11 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { useMsgClient } from 'hooks';
 
-import { POST_CREATED, VIEW_POST } from '../PostFlow.constants';
+import {
+  POST_CREATED,
+  POST_CREATED_SIGNING_FAILED,
+  VIEW_POST,
+} from '../PostFlow.constants';
 import { getSuccessModalContent } from '../PostFlow.utils';
 import {
   FetchMsgAnchorParams,
@@ -83,10 +86,32 @@ export const useSign = ({
           setProcessingModalAtom(atom => void (atom.open = true));
         },
         {
-          onError: (error?: Error) => {
-            setErrorCodeAtom(ERRORS.DEFAULT);
-            setErrorModalAtom(atom => void (atom.description = String(error)));
+          onError: async (error?: Error) => {
+            const { data: anchorTxsData } = await refetch();
+            const txResponses = anchorTxsData?.txResponses?.filter(
+              txRes => iri && txRes.rawLog.includes(iri),
+            );
+            const anchorTxHash = txResponses?.[0]?.txhash;
+
             setProcessingModalAtom(atom => void (atom.open = false));
+            const { cardItems, buttonLink } = getSuccessModalContent({
+              createdPostData,
+              projectSlug,
+              projectId,
+              offChainProjectId,
+              projectName,
+              anchorTxHash,
+              signingFailed: true,
+            });
+            setTxSuccessfulModalAtom(atom => {
+              atom.open = true;
+              atom.cardItems = cardItems;
+              atom.title = _(msg`${POST_CREATED_SIGNING_FAILED}`);
+              atom.cardTitle = _(msg`Attest`);
+              atom.buttonTitle = _(msg`${VIEW_POST}`);
+              atom.buttonLink = buttonLink;
+              atom.txHash = undefined;
+            });
           },
           onSuccess: async (deliverTxResponse?: DeliverTxResponse) => {
             const { data: anchorTxsData } = await refetch();

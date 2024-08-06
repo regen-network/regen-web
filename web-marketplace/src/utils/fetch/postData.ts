@@ -44,7 +44,7 @@ export const postData = async ({
       }
       return jsonResponse ?? textResponse;
     } catch (e) {
-      throw Error(rawResponse.statusText);
+      throw new Error(rawResponse.statusText);
     }
   };
 

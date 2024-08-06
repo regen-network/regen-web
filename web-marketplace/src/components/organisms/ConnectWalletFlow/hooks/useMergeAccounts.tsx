@@ -62,7 +62,7 @@ export const useMergeAccounts = ({
           });
 
           if (response.error) {
-            throw Error(response.error);
+            throw new Error(response.error);
           }
         }
       } catch (e) {

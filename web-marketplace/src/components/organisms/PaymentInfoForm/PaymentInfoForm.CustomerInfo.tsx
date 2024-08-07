@@ -54,7 +54,7 @@ export const CustomerInfo = ({
       </div>
       {retiring && (
         <TextField
-          label={`Your name`}
+          label="Your name"
           description={`This name will appear on the retirement certificate unless you choose to retire anonymously in the next step. It is also your user profile name.`}
           {...register('name')}
           error={!!errors['name']}
@@ -64,7 +64,7 @@ export const CustomerInfo = ({
       )}
       <TextField
         className={!accountId && !wallet ? 'mb-30' : ''}
-        label={`Your email`}
+        label="Your email"
         description={
           !!wallet && !accountEmail ? (
             <>

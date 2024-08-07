@@ -21,7 +21,7 @@ describe('DenomIconWithCurrency', () => {
       <DenomIconWithCurrency currency={currency} tooltipText="tooltip text" />,
     );
 
-    const tooltipIcon = screen.getByTestId('info-tooltip');
+    const tooltipIcon = screen.getByTestId('question-mark-tooltip');
     expect(tooltipIcon).toBeInTheDocument();
 
     fireEvent.mouseEnter(tooltipIcon);

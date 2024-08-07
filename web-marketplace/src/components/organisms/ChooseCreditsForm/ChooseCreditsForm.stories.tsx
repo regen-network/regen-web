@@ -4,7 +4,7 @@ import { creditVintages } from 'web-marketplace/src/components/molecules/Credits
 import { ChooseCreditsForm } from './ChooseCreditsForm';
 
 export default {
-  title: 'Marketplace/organisms/ChooseCreditsForm',
+  title: 'Marketplace/Organisms/ChooseCreditsForm',
   component: ChooseCreditsForm,
 } as Meta<typeof ChooseCreditsForm>;
 

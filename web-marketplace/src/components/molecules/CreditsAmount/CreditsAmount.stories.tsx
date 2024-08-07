@@ -7,7 +7,7 @@ import { CreditsAmount } from './CreditsAmount';
 import { PAYMENT_OPTIONS } from './CreditsAmount.types';
 
 export default {
-  title: 'Marketplace/modules/CreditsAmount',
+  title: 'Marketplace/Modules/CreditsAmount',
   component: CreditsAmount,
 } as Meta<typeof CreditsAmount>;
 

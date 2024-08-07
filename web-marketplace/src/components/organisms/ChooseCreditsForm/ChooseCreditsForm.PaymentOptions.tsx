@@ -17,10 +17,10 @@ function ChooseCreditButton({
 }: ChooseCreditButtonProps) {
   return (
     <label
-      className={`block w-[138px] rounded-md px-[12px] py-10 font-extrabold cursor-pointer text-xs font-[lato] shadow ${
+      className={`block w-[138px] rounded-md px-[12px] py-10 font-extrabold text-xs font-[lato] shadow ${
         isChecked
-          ? 'border-brand-300 border-solid border text-brand-300'
-          : 'border-grey-300 border-solid border text-grey-500 filter grayscale'
+          ? 'border-brand-300 border-solid text-brand-300 border-2 hover:cursor-default'
+          : 'border-grey-300 border-solid border text-grey-500 filter grayscale hover:bg-grey-200 hover:cursor-pointer'
       }`}
     >
       <input

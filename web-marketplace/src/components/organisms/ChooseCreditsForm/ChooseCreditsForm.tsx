@@ -5,6 +5,7 @@ import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
+import Card from 'web-components/src/components/cards/Card';
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/RadioGroup';
@@ -77,11 +78,12 @@ export function ChooseCreditsForm({
 
   return (
     <Suspense fallback={<Loading />}>
-      <div
-        data-testid="buy-credits-form"
-        className="border-grey-300 border border-solid p-15 sm:p-20 rounded-[5px]"
-      >
-        <Form form={form} onSubmit={handleOnSubmit}>
+      <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300">
+        <Form
+          form={form}
+          onSubmit={handleOnSubmit}
+          data-testid="choose-credits-form"
+        >
           {/* payment options */}
           <PaymentOptions setPaymentOption={handlePaymentOptions} />
 
@@ -203,7 +205,7 @@ export function ChooseCreditsForm({
             </div>
           </div>
         </Form>
-      </div>
+      </Card>
     </Suspense>
   );
 }

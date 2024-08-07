@@ -12,7 +12,7 @@ import { CreditsAmountHeader } from './CreditsAmount.Header';
 import { CreditsAmountProps, PAYMENT_OPTIONS } from './CreditsAmount.types';
 import { getCurrencyPrice } from './CreditsAmount.utils';
 import { CreditsInput } from './CreditsInput';
-import { CurrencyInput } from './CurrecyInput.';
+import { CurrencyInput } from './CurrecyInput';
 
 export const CreditsAmount = ({
   creditsAvailable,

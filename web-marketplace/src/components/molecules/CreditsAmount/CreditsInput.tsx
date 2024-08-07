@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { LeafIcon } from 'web-components/src/components/icons/LeafIcon';
 
 import { CREDITS_AMOUNT } from './CreditsAmount.constants';

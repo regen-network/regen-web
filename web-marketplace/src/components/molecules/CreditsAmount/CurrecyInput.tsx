@@ -1,6 +1,4 @@
 import { lazy, useState } from 'react';
-import { msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
 
 import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
 import {
@@ -26,7 +24,6 @@ export const CurrencyInput = ({
   defaultCryptoCurrency,
   register,
 }: CurrencyInputProps) => {
-  const { _ } = useLingui();
   const [isFocused, setIsFocused] = useState(false);
 
   const handleFocus = () => setIsFocused(true);
@@ -56,7 +53,7 @@ export const CurrencyInput = ({
         className="h-full flex-grow p-20 border-none mr-10 text-base focus-visible:outline-none"
         max={maxCurrencyAmount}
         min={1}
-        aria-label={_(msg`Currency Input`)}
+        aria-label="Currency Input"
       />
       {paymentOption === PAYMENT_OPTIONS.CARD ? (
         <DenomIconWithCurrency currency={CURRENCIES.usd} />

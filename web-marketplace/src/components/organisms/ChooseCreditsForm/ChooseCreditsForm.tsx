@@ -30,9 +30,6 @@ export function ChooseCreditsForm({
     PAYMENT_OPTIONS.CARD,
   );
   const [advanceSettingsOpen, setAdvanceSettingsOpen] = useState(false);
-  const [creditVintageOptions, setCreditVintageOptions] = useState<
-    string[] | []
-  >([]);
 
   const toggleAdvancedSettings = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -54,6 +51,11 @@ export function ChooseCreditsForm({
     name: 'cryptoPurchaseOption',
   });
 
+  const creditVintageOptions = useWatch({
+    control: form.control,
+    name: 'creditVintageOptions',
+  });
+
   const handleOnSubmit: SubmitHandler<ChooseCreditsFormSchemaType> = data => {
     // TO-DO
   };
@@ -65,11 +67,12 @@ export function ChooseCreditsForm({
   const handleCreditVintageOptions = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const checked = e.target.checked;
-    const updatedItems = checked
-      ? [...creditVintageOptions, value]
-      : creditVintageOptions.filter(item => item !== value);
-    form.setValue('creditVintageOptions', updatedItems);
-    setCreditVintageOptions(updatedItems);
+    const currentValues = creditVintageOptions || [];
+    const updatedValues = checked
+      ? [...currentValues, value]
+      : currentValues.filter(item => item !== value);
+
+    form.setValue('creditVintageOptions', updatedValues);
   };
 
   const handlePaymentOptions = (option: string) => {

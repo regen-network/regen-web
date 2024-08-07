@@ -114,11 +114,12 @@ export const CreditsAmount = ({
   );
 
   return (
-    <div className="grid min-h-min grid-rows-2">
+    <div className={`grid min-h-min sm:grid-rows-2`}>
       <CreditsAmountHeader
         currency={currency}
         creditsAvailable={creditsAvailable}
         setMaxCreditsSelected={setMaxCreditsSelected}
+        paymentOption={paymentOption}
       />
       <div className="flex justify-between min-w-full flex-wrap sm:flex-nowrap gap-10">
         <CurrencyInput
@@ -137,7 +138,7 @@ export const CreditsAmount = ({
         />
       </div>
       {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
-        <p className="italic text-xs m-0 py-20 self-start justify-self-start">
+        <p className="italic text-xs m-0 py-20 self-start justify-self-start  sm:mb-20">
           Credit prices vary. By default the lowest priced credits will be
           purchased first.
         </p>

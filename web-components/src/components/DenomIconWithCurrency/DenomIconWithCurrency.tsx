@@ -18,7 +18,7 @@ export function DenomIconWithCurrency({
   return (
     <Body size="sm" className={cn('flex gap-5', className)}>
       <DenomIcon baseDenom={currency} className="h-[24px] inline-block" />
-      <span className="pb-5">{currency.toUpperCase()}</span>
+      <span className="pb-5 pt-1 text-sm">{currency.toUpperCase()}</span>
       {tooltipText && (
         <QuestionMarkTooltip
           placement="bottom"

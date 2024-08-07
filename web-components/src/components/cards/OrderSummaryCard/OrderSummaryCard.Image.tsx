@@ -9,7 +9,7 @@ export function OrderSummaryImage({
 }) {
   return (
     <div className="w-[90px] sm:w-full  sm:h-[160px]">
-      {prefinanceProject && <PrefinanceTag />}
+      {prefinanceProject && <PrefinanceTag classNames={{ root: 'top-20' }} />}
       <img
         src={src}
         alt="order summary"

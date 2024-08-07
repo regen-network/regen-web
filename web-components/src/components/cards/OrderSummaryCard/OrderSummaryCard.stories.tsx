@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
+import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { OrderSummaryCard } from './OrderSummaryCard';
 
@@ -20,7 +21,7 @@ Default.args = {
     prefinanceProject: false,
     pricePerCredit: 2,
     credits: 50,
-    currency: 'usd',
+    currency: CURRENCIES.usd,
   },
 };
 
@@ -35,7 +36,7 @@ WithPaymentDetails.args = {
     prefinanceProject: false,
     pricePerCredit: 2,
     credits: 50,
-    currency: 'usd',
+    currency: CURRENCIES.usd,
   },
   currentBuyingStep: 2,
   paymentMethod: {
@@ -61,5 +62,20 @@ WithPrefinanceProject.args = {
   paymentMethod: {
     type: 'visa',
     cardNumber: '1234 5678 9012 3456',
+  },
+};
+
+export const WithCrypto: Story = {
+  render: args => <OrderSummaryCard {...args} />,
+};
+
+WithCrypto.args = {
+  order: {
+    image: '/coorong.png',
+    projectName: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    prefinanceProject: false,
+    pricePerCredit: 2,
+    credits: 50,
+    currency: CURRENCIES.uregen,
   },
 };

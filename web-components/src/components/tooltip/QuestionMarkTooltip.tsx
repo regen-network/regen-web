@@ -1,4 +1,5 @@
 import { Box, SxProps, TooltipProps } from '@mui/material';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import { Theme } from '../../theme/muiTheme';
 import { sxToArray } from '../../utils/mui/sxToArray';
@@ -11,6 +12,7 @@ interface Props {
   sx?: SxProps<Theme>;
   color?: string;
   size?: TextSize;
+  placement?: TooltipProps['placement'];
   className?: string;
 }
 
@@ -19,10 +21,16 @@ export default function QuestionMarkTooltip({
   sx,
   color = 'secondary.main',
   size = 'sm',
-  className,
+  placement = 'top',
+  className = '',
 }: Props): JSX.Element {
   return (
-    <InfoTooltip arrow placement="top" title={title}>
+    <InfoTooltip
+      arrow
+      placement={placement}
+      title={title}
+      className={cn(className)}
+    >
       <Box
         className={className}
         sx={[

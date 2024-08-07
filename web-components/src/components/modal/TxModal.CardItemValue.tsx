@@ -1,3 +1,4 @@
+import { TextButton } from '../buttons/TextButton';
 import { CollapseList } from '../organisms/CollapseList/CollapseList';
 import { Subtitle } from '../typography';
 import { TextSize } from '../typography/sizing';
@@ -7,52 +8,51 @@ interface CardItemValueProps {
   value: ItemValue;
   color?: string;
   linkComponent: LinkComponentProp;
-  size?: TextSize;
-  mobileSize?: TextSize;
-  className?: string;
 }
 
 export const CardItemValue = ({
   value,
   color,
   linkComponent: LinkComponent,
-  size,
-  mobileSize,
-  className,
 }: CardItemValueProps): JSX.Element => {
   return (
-    <>
-      {value.name && (
-        <Subtitle
-          className={className}
-          key={value.name}
-          size={size || 'lg'}
-          mobileSize={mobileSize || 'sm'}
-          color={color || 'info.dark'}
-          sx={{
-            display: 'flex',
-            alignItems: 'flex-end',
-          }}
+    <div className="flex">
+      {value.label && (
+        <TextButton
+          textSize="sm"
+          className="font-extrabold text-grey-400 hover:text-grey-400 pr-3"
         >
-          {value.icon && value.icon}
-          {value.url ? (
-            <LinkComponent
-              sx={{
-                color: 'secondary.main',
-              }}
-              href={value.url}
-              target={value.url.startsWith('/') ? '_self' : '_blank'}
-            >
-              {value.name}
-            </LinkComponent>
-          ) : (
-            <>{value.name}</>
-          )}
-          {value.children && value.children}
-        </Subtitle>
+          {value.label}:
+        </TextButton>
       )}
-      {value.component}
-    </>
+      <Subtitle
+        className={value.className}
+        key={value.name}
+        size={value.size || 'lg'}
+        mobileSize={value.mobileSize || 'sm'}
+        color={color || 'info.dark'}
+        sx={{
+          display: 'flex',
+          alignItems: 'flex-end',
+        }}
+      >
+        {value.icon && value.icon}
+        {value.url ? (
+          <LinkComponent
+            sx={{
+              color: 'secondary.main',
+            }}
+            href={value.url}
+            target={value.url.startsWith('/') ? '_self' : '_blank'}
+          >
+            {value.name}
+          </LinkComponent>
+        ) : (
+          <>{value.name}</>
+        )}
+        {value.children && value.children}
+      </Subtitle>
+    </div>
   );
 };
 

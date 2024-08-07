@@ -17,7 +17,8 @@ import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsE
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 
 import { POST_CREATED, VIEW_POST } from '../PostFlow.constants';
-import { getSuccessModalContent } from '../PostFlow.utils';
+import { timer } from '../PostFlow.utils';
+import { useGetSuccessModalContent } from './useGetSuccessModalContent';
 
 export type FetchMsgAnchorParams = {
   iri: string;
@@ -38,6 +39,7 @@ export const useFetchMsgAnchor = ({
 }: UseFetchMsgAnchorParams) => {
   const { txClient } = useLedger();
   const { _ } = useLingui();
+  const getSuccessModalContent = useGetSuccessModalContent();
 
   const { refetch } = useQuery(
     getGetTxsEventQuery({
@@ -56,8 +58,6 @@ export const useFetchMsgAnchor = ({
   const fetchMsgAnchor = useCallback(
     async ({ iri, createdPostData }: FetchMsgAnchorParams) => {
       setProcessingModalAtom(atom => void (atom.open = true));
-
-      const timer = (ms: number) => new Promise(res => setTimeout(res, ms));
 
       let txResponses: TxResponse[] | undefined = [];
       let i = 1;
@@ -96,6 +96,7 @@ export const useFetchMsgAnchor = ({
     },
     [
       _,
+      getSuccessModalContent,
       offChainProjectId,
       projectId,
       projectName,

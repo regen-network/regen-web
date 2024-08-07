@@ -1,13 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import {
-  creditVintages,
-  cryptoOptions,
-} from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.mock';
+import { creditVintages } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.mock';
 
 import { ChooseCreditsForm } from './ChooseCreditsForm';
 
 export default {
-  title: 'organisms/ChooseCreditsForm',
+  title: 'Marketplace/organisms/ChooseCreditsForm',
   component: ChooseCreditsForm,
 } as Meta<typeof ChooseCreditsForm>;
 
@@ -18,6 +15,5 @@ export const ChooseCreditsStep1: Story = {
 };
 
 ChooseCreditsStep1.args = {
-  cryptoOptions,
   creditVintages,
 };

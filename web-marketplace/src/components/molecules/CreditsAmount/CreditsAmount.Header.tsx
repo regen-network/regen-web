@@ -1,7 +1,7 @@
 import { SetMaxButton } from 'web-components/src/components/buttons/SetMaxButton';
 import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
 import { Currency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
-import Title from 'web-components/src/components/typography/new/Title';
+import { Title } from 'web-components/src/components/typography/Title';
 
 export function CreditsAmountHeader({
   creditsAvailable,
@@ -14,7 +14,7 @@ export function CreditsAmountHeader({
 }) {
   return (
     <div className="flex justify-between items-center">
-      <Title as="h2" className="text-lg font-black">
+      <Title variant="h2" className="text-lg font-black">
         Amount
       </Title>
       <div className="flex flex-grow justify-end items-center font-['Lato'] text-base">

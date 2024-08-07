@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
+import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { chooseCreditsFormSchema } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { CreditsAmount } from './CreditsAmount';
-import { PAYMENT_OPTIONS } from './CreditsAmount.types';
 
 export default {
   title: 'Marketplace/Modules/CreditsAmount',

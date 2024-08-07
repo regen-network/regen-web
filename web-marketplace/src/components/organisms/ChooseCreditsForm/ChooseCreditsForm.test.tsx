@@ -11,7 +11,7 @@ describe('ChooseCreditsForm', () => {
   it('renders without crashing', () => {
     render(<ChooseCreditsForm creditVintages={creditVintages} />);
 
-    expect(screen.getByTestId('buy-credits-form')).toBeInTheDocument();
+    expect(screen.getByTestId('choose-credits-form')).toBeInTheDocument();
   });
 
   it('opens and closes advanced settings', () => {

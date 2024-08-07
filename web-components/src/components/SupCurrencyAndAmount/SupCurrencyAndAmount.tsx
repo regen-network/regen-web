@@ -9,21 +9,12 @@ export function SupCurrencyAndAmount({
   currencyCode: string;
   className?: string;
 }) {
-  let formattedPrice = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: currencyCode,
-  }).format(price);
-
-  if (currencyCode === CURRENCIES.usd) {
-    const firstLetter = formattedPrice.charAt(0);
-    const restOfString = formattedPrice.slice(1);
-    formattedPrice = firstLetter + restOfString;
-    return (
-      <>
-        <span className="align-top text-xs">{firstLetter}</span>
-        <span className={className}>{restOfString}</span>
-      </>
-    );
-  }
-  return formattedPrice;
+  return currencyCode === CURRENCIES.usd ? (
+    <>
+      <span className="align-top text-xs">$</span>
+      <span className={className}>{price.toFixed(2)}</span>
+    </>
+  ) : (
+    <span className={className}>{price}</span>
+  );
 }

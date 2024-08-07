@@ -18,13 +18,18 @@ export function CreditsAmountHeader({
         Amount
       </Title>
       <div className="flex flex-grow justify-end items-center font-['Lato'] text-base">
-        <p className="text-sm sm:text-base pr-5 flex">
-          <span className="font-bold font-['Lato'] mr-5">
-            {creditsAvailable}
+        <div className="text-sm sm:text-base pr-5 pt-10 sm:pt-0 flex flex-col items-end sm:flex-row sm:items-start">
+          <span>
+            <span className="font-bold font-['Lato'] mr-5">
+              {creditsAvailable}
+            </span>
+            credits available
           </span>
-          <span className="pr-5">credits available in</span>
-          <DenomIconWithCurrency currency={currency} />
-        </p>
+          <span className="flex">
+            <span className="px-[4px]">in</span>
+            <DenomIconWithCurrency currency={currency} className="pt-[2px]" />
+          </span>
+        </div>
         <SetMaxButton
           onClick={event => {
             event.preventDefault();

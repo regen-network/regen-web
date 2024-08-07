@@ -7,29 +7,15 @@ describe('ChooseCreditsForm', () => {
     { date: '2022-01-01', credits: '100' },
     { date: '2022-02-01', credits: '200' },
   ];
-  const cryptoOptions = [
-    { label: 'Option 1', linkTo: '/option1' },
-    { label: 'Option 2', linkTo: '/option2' },
-  ];
 
   it('renders without crashing', () => {
-    render(
-      <ChooseCreditsForm
-        creditVintages={creditVintages}
-        cryptoOptions={cryptoOptions}
-      />,
-    );
+    render(<ChooseCreditsForm creditVintages={creditVintages} />);
 
     expect(screen.getByTestId('buy-credits-form')).toBeInTheDocument();
   });
 
   it('opens and closes advanced settings', () => {
-    render(
-      <ChooseCreditsForm
-        creditVintages={creditVintages}
-        cryptoOptions={cryptoOptions}
-      />,
-    );
+    render(<ChooseCreditsForm creditVintages={creditVintages} />);
 
     const advancedSettingsButton = screen.getByRole('button', {
       name: /advanced settings/i,
@@ -43,12 +29,7 @@ describe('ChooseCreditsForm', () => {
   });
 
   it('selects card payment option', () => {
-    render(
-      <ChooseCreditsForm
-        creditVintages={creditVintages}
-        cryptoOptions={cryptoOptions}
-      />,
-    );
+    render(<ChooseCreditsForm creditVintages={creditVintages} />);
     const cardOption = screen.getByRole('radio', {
       name: /card/i,
     });

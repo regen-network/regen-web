@@ -9,7 +9,9 @@ import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabe
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/RadioGroup';
 import { Loading } from 'web-components/src/components/loading';
-import Title from 'web-components/src/components/typography/new/Title';
+import { Title } from 'web-components/src/components/typography/Title';
+
+import { cryptoOptions } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
 
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
 import {
@@ -20,10 +22,8 @@ import { PAYMENT_OPTIONS, PaymentOptionsType } from './ChooseCreditsForm.types';
 
 export function ChooseCreditsForm({
   creditVintages,
-  cryptoOptions,
 }: {
   creditVintages: { date: string; credits: string }[];
-  cryptoOptions: { label: string; description?: string; linkTo: string }[];
 }) {
   const [paymentOption, setPaymentOption] = useState<PaymentOptionsType>(
     PAYMENT_OPTIONS.CARD,
@@ -102,7 +102,7 @@ export function ChooseCreditsForm({
           {/* crypto options */}
           {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
             <div>
-              <Title as="h2" className="text-lg font-black">
+              <Title variant="h2" className="text-lg font-black">
                 Crypto purchase options
               </Title>
               <p className="font-['Lato'] text-base m-0 text-grey-500 pb-[12px]">

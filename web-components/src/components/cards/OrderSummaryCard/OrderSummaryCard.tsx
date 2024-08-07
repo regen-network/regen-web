@@ -1,169 +1,13 @@
-import { ReactNode, useState } from 'react';
-import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
-import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
-import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
-import { EditableInput } from 'web-components/src/components/inputs/new/EditableInput/EditableInput';
-import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
-import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
-import { Title } from 'web-components/src/components/typography/Title';
-
-import { CRYPTO_TOOLTIP_TEXT } from './OrderSummaryCard.constants';
-import {
-  OrderProps,
-  OrderSummaryProps,
-  PaymentMethod,
-} from './OrderSummaryCard.types';
-
-function OrderSummmaryRowHeader({
-  text,
-  className = '',
-}: {
-  text: string;
-  className?: string;
-}) {
-  return (
-    <Title
-      variant="h6"
-      className={`text-grey-400 text-[11px] font-extrabold font-['Lato'] uppercase tracking-[1px] m-0 ${className}`}
-    >
-      {text}
-    </Title>
-  );
-}
-
-function OrderSummaryContent({
-  order,
-  currentBuyingStep,
-  paymentMethod,
-  onClickEditCard = () => {},
-}: {
-  order: OrderProps;
-  currentBuyingStep: number;
-  paymentMethod: PaymentMethod;
-  onClickEditCard?: () => void;
-}) {
-  const { projectName, currency, pricePerCredit, credits } = order;
-  const [creditsAmount, setCreditsAmount] = useState(credits);
-  return (
-    <div className="grid grid-cols-[75px_1fr] sm:grid-cols-[90px_1fr] max-w-full w-full pr-15 sm:px-[20px] pb-[30px] items-center sm:max-w-[330px]">
-      <Title
-        variant="h5"
-        className="col-span-2 text-base font-black font-['Muli'] mt-0 sm:mt-[30px] mb-5 sm:mb-[15px]"
-      >
-        Order Summary
-      </Title>
-      <OrderSummmaryRowHeader text="project" className="self-start mt-5" />
-      <p className="text-[14px] sm:text-base sm:font-normal font-['Lato'] self-start m-0">
-        {projectName}
-      </p>
-      <OrderSummmaryRowHeader
-        text={`${currency !== CURRENCIES.usd ? 'avg' : ''} price per credit`}
-      />
-      <div className="justify-start items-center flex">
-        <span>
-          <SupCurrencyAndAmount
-            price={pricePerCredit}
-            currencyCode={currency}
-          />
-        </span>
-        <DenomIconWithCurrency
-          currency={currency}
-          className="pt-[8px] ml-10 text-[14px] sm:text-base"
-          tooltipText={`${
-            currency !== CURRENCIES.usd ? CRYPTO_TOOLTIP_TEXT : ''
-          }`}
-        />
-      </div>
-      <OrderSummmaryRowHeader text="# credits" className="pt-5" />
-      <div className="text-base font-normal font-['Lato'] text-[14px] sm:text-base">
-        <EditableInput
-          value={creditsAmount}
-          onChange={setCreditsAmount}
-          ariaLabel="editable-credits"
-          name="editable-credits"
-        />
-      </div>
-      <div className="col-span-full">
-        <hr className="border-t border-grey-300 border-solid border-l-0 border-r-0 border-b-0" />
-      </div>
-      <div className="flex items-end col-span-full gap-5">
-        <OrderSummmaryRowHeader text="total price" className="pb-[9px]" />
-        <div className="flex flex-wrap">
-          <span className="pt-[11px] sm:pt-5">
-            <SupCurrencyAndAmount
-              price={pricePerCredit * creditsAmount}
-              currencyCode={currency}
-              className="font-bold font-['Lato'] sm:text-[22px] mr-10"
-            />
-          </span>
-          <DenomIconWithCurrency
-            currency={currency}
-            className="pt-[12px] text-[14px] sm:text-base"
-          />
-        </div>
-      </div>
-      {currentBuyingStep > 1 &&
-        paymentMethod.type !== 'crypto' &&
-        paymentMethod.cardNumber && (
-          <div className="flex items-end col-span-full gap-5">
-            <OrderSummmaryRowHeader
-              text="payment"
-              className="items-end  pb-[4px] w-[125px]"
-            />
-            <div className="flex items-center justify-between w-full">
-              <p
-                data-testid="payment-details"
-                className="font-['Lato'] text-[14px] md:text-base m-0"
-              >
-                <span className="capitalize">
-                  {paymentMethod.type} ending in
-                </span>{' '}
-                {paymentMethod.cardNumber.slice(-4)}
-              </p>
-              <EditButtonIcon
-                onClick={onClickEditCard}
-                className="self-end"
-                ariaLabel="Change payment card"
-              />
-            </div>
-          </div>
-        )}
-    </div>
-  );
-}
-
-function OrderSummaryImage({
-  src,
-  prefinanceProject,
-}: {
-  src: string;
-  prefinanceProject?: boolean;
-}) {
-  return (
-    <div className="w-[90px] sm:w-full  sm:h-[160px]">
-      {prefinanceProject && <PrefinanceTag />}
-      <img
-        src={src}
-        alt="order summary"
-        className="w-[90px] h-[60px] px-15 sm:h-[160px] sm:px-0 sm:w-full object-cover object-center"
-      />
-    </div>
-  );
-}
-
-function OrderSummary({ children }: { children: ReactNode }) {
-  return (
-    <div className="relative sm:w-full sm:max-w-[330px] h-[100%] rounded-[5px] border border-grey-300 border-solid bg-grey-0 shadow-none flex flex-2 sm:flex-col py-20 sm:py-0">
-      {children}
-    </div>
-  );
-}
+import Card from '../Card';
+import { OrderSummaryContent } from './OrderSummaryCard.Content';
+import { OrderSummaryImage } from './OrderSummaryCard.Image';
+import { OrderSummaryProps } from './OrderSummaryCard.types';
 
 export const OrderSummaryCard = (orderSummary: OrderSummaryProps) => {
   const { order, paymentMethod, currentBuyingStep, onClickEditCard } =
     orderSummary;
   return (
-    <OrderSummary>
+    <Card className="relative sm:w-full sm:max-w-[330px] h-[100%] py-20 sm:py-0 flex flex-2 sm:flex-col ">
       <OrderSummaryImage
         src={order.image}
         prefinanceProject={order.prefinanceProject}
@@ -174,6 +18,6 @@ export const OrderSummaryCard = (orderSummary: OrderSummaryProps) => {
         paymentMethod={paymentMethod}
         onClickEditCard={onClickEditCard}
       />
-    </OrderSummary>
+    </Card>
   );
 };

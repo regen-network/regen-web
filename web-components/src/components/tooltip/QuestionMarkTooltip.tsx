@@ -30,6 +30,7 @@ export default function QuestionMarkTooltip({
       placement={placement}
       title={title}
       className={cn(className)}
+      data-testid="question-mark-tooltip"
     >
       <Box
         className={className}

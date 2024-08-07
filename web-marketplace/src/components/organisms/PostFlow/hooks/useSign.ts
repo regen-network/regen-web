@@ -30,11 +30,11 @@ import {
   POST_CREATED_SIGNING_FAILED,
   VIEW_POST,
 } from '../PostFlow.constants';
-import { getSuccessModalContent } from '../PostFlow.utils';
 import {
   FetchMsgAnchorParams,
   UseFetchMsgAnchorParams,
 } from './useFetchMsgAnchor';
+import { useGetSuccessModalContent } from './useGetSuccessModalContent';
 
 type UseSignParams = UseFetchMsgAnchorParams;
 type SignParams = {
@@ -48,6 +48,7 @@ export const useSign = ({
   projectName,
 }: UseSignParams) => {
   const { _ } = useLingui();
+  const getSuccessModalContent = useGetSuccessModalContent();
 
   const { txClient } = useLedger();
   const { wallet } = useWallet();
@@ -101,7 +102,7 @@ export const useSign = ({
               offChainProjectId,
               projectName,
               anchorTxHash,
-              signingFailed: true,
+              signingError: String(error),
             });
             setTxSuccessfulModalAtom(atom => {
               atom.open = true;

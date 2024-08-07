@@ -13,6 +13,7 @@ import Modal, { RegenModalProps } from '../modal';
 import ShareSection from '../share-section';
 import { SocialItems } from '../share-section/ShareSection.types';
 import { Body, Label, Title } from '../typography';
+import { TextSize } from '../typography/sizing';
 import { CardItemValue, CardItemValueList } from './TxModal.CardItemValue';
 
 const useStyles = makeStyles()(theme => ({
@@ -30,11 +31,14 @@ const useStyles = makeStyles()(theme => ({
 }));
 
 export interface ItemValue {
+  label?: string;
   name?: string | number;
   url?: string;
   icon?: ReactNode;
   children?: ReactNode;
-  component?: ReactNode;
+  size?: TextSize;
+  mobileSize?: TextSize;
+  className?: string;
 }
 
 export interface Item {

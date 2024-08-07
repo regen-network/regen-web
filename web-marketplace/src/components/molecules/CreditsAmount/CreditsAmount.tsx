@@ -114,7 +114,7 @@ export const CreditsAmount = ({
   );
 
   return (
-    <>
+    <div className="grid min-h-min grid-rows-2">
       <CreditsAmountHeader
         currency={currency}
         creditsAvailable={creditsAvailable}
@@ -129,7 +129,7 @@ export const CreditsAmount = ({
           defaultCryptoCurrency={defaultCryptoCurrency}
           {...form}
         />
-        <span className="grow-0 p-10 sm:p-20 text-xl">=</span>
+        <span className="p-10 sm:p-20 text-xl">=</span>
         <CreditsInput
           creditsAvailable={creditsAvailable}
           handleCreditsAmountChange={handleCreditsAmountChange}
@@ -137,11 +137,11 @@ export const CreditsAmount = ({
         />
       </div>
       {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
-        <p className="grow-0 italic text-xs m-0 py-20 self-start justify-self-start">
+        <p className="italic text-xs m-0 py-20 self-start justify-self-start">
           Credit prices vary. By default the lowest priced credits will be
           purchased first.
         </p>
       )}
-    </>
+    </div>
   );
 };

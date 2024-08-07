@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { truncate } from 'lodash';
 
 import { Item, ItemValue } from 'web-components/src/components/modal/TxModal';
+import { truncate } from 'web-components/src/utils/truncate';
 
 import { getHashUrl } from 'lib/block-explorer';
 import {

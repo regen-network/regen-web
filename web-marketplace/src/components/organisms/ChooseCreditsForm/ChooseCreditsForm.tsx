@@ -12,6 +12,7 @@ import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/
 import { Loading } from 'web-components/src/components/loading';
 import { Title } from 'web-components/src/components/typography/Title';
 
+import { Link } from 'components/atoms';
 import { cryptoOptions } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
 
 import { PAYMENT_OPTIONS } from './ChooseCreditsForm.constants';
@@ -25,7 +26,7 @@ import { PaymentOptionsType } from './ChooseCreditsForm.types';
 export function ChooseCreditsForm({
   creditVintages,
 }: {
-  creditVintages: { date: string; credits: string }[];
+  creditVintages: { date: string; credits: string; batchDenom: string }[];
 }) {
   const [paymentOption, setPaymentOption] = useState<PaymentOptionsType>(
     PAYMENT_OPTIONS.CARD,
@@ -176,7 +177,7 @@ export function ChooseCreditsForm({
                         purchased first)
                       </span>
                     </p>
-                    {creditVintages.map(({ date, credits }) => (
+                    {creditVintages.map(({ date, credits, batchDenom }) => (
                       <div
                         key={date}
                         className="h-auto flex flex-col items-start w-full p-15 border border-solid border-grey-300 mb-10 rounded-md"
@@ -194,12 +195,13 @@ export function ChooseCreditsForm({
                             {credits} credits available
                           </span>
                           <span className="px-5">|</span>
-                          <TextButton
-                            size="small"
-                            className="text-brand-300 uppercase bg-transparent border-none font-bold hover:opacity-80 text-sm"
+                          <Link
+                            target="_blank"
+                            href={`/credit-batches/${batchDenom}`}
+                            className="text-brand-300 uppercase bg-transparent border-none font-bold hover:opacity-80 text-xs"
                           >
                             view batch »
-                          </TextButton>
+                          </Link>
                         </p>
                       </div>
                     ))}

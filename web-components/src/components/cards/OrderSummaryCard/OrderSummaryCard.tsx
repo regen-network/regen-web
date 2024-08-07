@@ -4,7 +4,7 @@ import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWi
 import { EditableInput } from 'web-components/src/components/inputs/new/EditableInput/EditableInput';
 import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
 import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
-import Title from 'web-components/src/components/typography/new/Title';
+import { Title } from 'web-components/src/components/typography/Title';
 
 import {
   OrderProps,
@@ -21,7 +21,7 @@ function OrderSummmaryRowHeader({
 }) {
   return (
     <Title
-      as="h3"
+      variant="h6"
       className={`text-grey-400 text-[11px] font-extrabold font-['Lato'] uppercase tracking-[1px] m-0 ${className}`}
     >
       {text}
@@ -45,7 +45,7 @@ function OrderSummaryContent({
   return (
     <div className="grid grid-cols-[75px_1fr] sm:grid-cols-[90px_1fr] max-w-full w-full pr-15 sm:px-[20px] pb-[30px] items-center sm:max-w-[330px]">
       <Title
-        as="h5"
+        variant="h5"
         className="col-span-2 text-base font-black font-['Muli'] mt-0 sm:mt-[30px] mb-5 sm:mb-[15px]"
       >
         Order Summary
@@ -55,16 +55,19 @@ function OrderSummaryContent({
         {projectName}
       </p>
       <OrderSummmaryRowHeader text="price per credit" />
-      <div className="sm:grow shrink basis-0 justify-start items-center flex">
-        <div className="font-['Lato'] text-[14px] sm:text-base mr-10">
+      <div className="justify-start items-center flex">
+        <span>
           <SupCurrencyAndAmount
             price={pricePerCredit}
             currencyCode={currency}
           />
-        </div>
-        <DenomIconWithCurrency currency={currency} />
+        </span>
+        <DenomIconWithCurrency
+          currency={currency}
+          className="pt-[8px] ml-10 text-[14px] sm:text-base"
+        />
       </div>
-      <OrderSummmaryRowHeader text="# credits" />
+      <OrderSummmaryRowHeader text="# credits" className="pt-5" />
       <div className="text-base font-normal font-['Lato'] text-[14px] sm:text-base">
         <EditableInput
           value={creditsAmount}
@@ -77,15 +80,19 @@ function OrderSummaryContent({
         <hr className="border-t border-grey-300 border-solid border-l-0 border-r-0 border-b-0" />
       </div>
       <div className="flex items-end col-span-full gap-5">
-        <OrderSummmaryRowHeader text="total price" className="pb-[4px]" />
-        <div className="flex items-center flex-wrap">
-          <div className="justify-left font-bold font-['Lato'] items-start flex sm:text-[22px] mr-5">
+        <OrderSummmaryRowHeader text="total price" className="pb-[9px]" />
+        <div className="flex flex-wrap">
+          <span className="pt-[11px] sm:pt-5">
             <SupCurrencyAndAmount
               price={pricePerCredit * creditsAmount}
               currencyCode={currency}
+              className="font-bold font-['Lato'] sm:text-[22px] mr-10"
             />
-          </div>
-          <DenomIconWithCurrency currency={currency} />
+          </span>
+          <DenomIconWithCurrency
+            currency={currency}
+            className="pt-[12px] text-[14px] sm:text-base"
+          />
         </div>
       </div>
       {currentBuyingStep > 1 &&
@@ -101,8 +108,10 @@ function OrderSummaryContent({
                 data-testid="payment-details"
                 className="font-['Lato'] text-[14px] md:text-base m-0"
               >
-                <span className="capitalize">{paymentMethod.type}</span>
-                {` ending in ${paymentMethod.cardNumber.slice(-4)}`}
+                <span className="capitalize">
+                  {paymentMethod.type} ending in
+                </span>{' '}
+                {paymentMethod.cardNumber.slice(-4)}
               </p>
               <EditButtonIcon
                 onClick={onClickEditCard}

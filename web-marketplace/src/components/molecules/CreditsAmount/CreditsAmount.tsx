@@ -1,5 +1,6 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 
 import {
   CryptoCurrencies,
@@ -9,7 +10,7 @@ import {
 
 import { CREDITS_AMOUNT, CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import { CreditsAmountHeader } from './CreditsAmount.Header';
-import { CreditsAmountProps, PAYMENT_OPTIONS } from './CreditsAmount.types';
+import { CreditsAmountProps } from './CreditsAmount.types';
 import { getCurrencyPrice } from './CreditsAmount.utils';
 import { CreditsInput } from './CreditsInput';
 import { CurrencyInput } from './CurrecyInput';

@@ -1,10 +1,11 @@
 import { ChangeEvent, useState } from 'react';
+
 import CreditCardIcon from 'web-components/src/components/icons/CreditCardIcon';
 import CryptoIcon from 'web-components/src/components/icons/CryptoIcon';
 
+import { PAYMENT_OPTIONS } from './ChooseCreditsForm.constants';
 import {
   ChooseCreditButtonProps,
-  PAYMENT_OPTIONS,
   PaymentOptionsType,
 } from './ChooseCreditsForm.types';
 

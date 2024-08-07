@@ -1,4 +1,5 @@
 import { lazy, useState } from 'react';
+import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 
 import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
 import {
@@ -7,7 +8,7 @@ import {
 } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { CURRENCY_AMOUNT } from './CreditsAmount.constants';
-import { CurrencyInputProps, PAYMENT_OPTIONS } from './CreditsAmount.types';
+import { CurrencyInputProps } from './CreditsAmount.types';
 
 const CustomSelect = lazy(
   () =>

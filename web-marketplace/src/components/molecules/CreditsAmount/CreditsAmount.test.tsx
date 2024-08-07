@@ -1,4 +1,5 @@
 import userEvent from '@testing-library/user-event';
+import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import {
   FormContextProvider,
   render,
@@ -6,7 +7,6 @@ import {
 } from 'web-marketplace/test/test-utils';
 
 import { CreditsAmount } from './CreditsAmount';
-import { PAYMENT_OPTIONS } from './CreditsAmount.types';
 
 describe('CreditsAmount', () => {
   const defaultValues = {

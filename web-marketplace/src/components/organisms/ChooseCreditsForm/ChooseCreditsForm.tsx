@@ -14,12 +14,13 @@ import { Title } from 'web-components/src/components/typography/Title';
 
 import { cryptoOptions } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
 
+import { PAYMENT_OPTIONS } from './ChooseCreditsForm.constants';
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
 import {
   chooseCreditsFormSchema,
   ChooseCreditsFormSchemaType,
 } from './ChooseCreditsForm.schema';
-import { PAYMENT_OPTIONS, PaymentOptionsType } from './ChooseCreditsForm.types';
+import { PaymentOptionsType } from './ChooseCreditsForm.types';
 
 export function ChooseCreditsForm({
   creditVintages,

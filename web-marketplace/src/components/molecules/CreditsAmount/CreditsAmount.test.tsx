@@ -1,35 +1,27 @@
 import userEvent from '@testing-library/user-event';
 import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
-import {
-  FormContextProvider,
-  render,
-  screen,
-} from 'web-marketplace/test/test-utils';
+import { render, screen } from 'web-marketplace/test/test-utils';
 
 import { CreditsAmount } from './CreditsAmount';
 
 describe('CreditsAmount', () => {
-  const defaultValues = {
+  const formDefaultValues = {
     creditsAvailable: 100,
     paymentOption: PAYMENT_OPTIONS.CARD,
   };
 
   it('renders without crashing', () => {
-    render(
-      <FormContextProvider defaultValues={defaultValues}>
-        <CreditsAmount {...defaultValues} />
-      </FormContextProvider>,
-    );
+    render(<CreditsAmount {...formDefaultValues} />, {
+      formDefaultValues,
+    });
 
     expect(screen.getByText(/Amount/i)).toBeInTheDocument();
   });
 
   it('updates credits amount', async () => {
-    render(
-      <FormContextProvider defaultValues={defaultValues}>
-        <CreditsAmount {...defaultValues} />
-      </FormContextProvider>,
-    );
+    render(<CreditsAmount {...formDefaultValues} />, {
+      formDefaultValues,
+    });
 
     const creditsInput = screen.getByLabelText(/Credits Input/i);
     userEvent.clear(creditsInput);
@@ -38,11 +30,9 @@ describe('CreditsAmount', () => {
   });
 
   it('updates currency amount', async () => {
-    render(
-      <FormContextProvider defaultValues={defaultValues}>
-        <CreditsAmount {...defaultValues} />
-      </FormContextProvider>,
-    );
+    render(<CreditsAmount {...formDefaultValues} />, {
+      formDefaultValues,
+    });
 
     const currencyInput = screen.getByLabelText(/Currency Input/i);
     userEvent.clear(currencyInput);
@@ -51,11 +41,9 @@ describe('CreditsAmount', () => {
   });
 
   it('updates currency amount when credits amount changes', async () => {
-    render(
-      <FormContextProvider defaultValues={defaultValues}>
-        <CreditsAmount {...defaultValues} />
-      </FormContextProvider>,
-    );
+    render(<CreditsAmount {...formDefaultValues} />, {
+      formDefaultValues,
+    });
 
     const creditsInput = screen.getByLabelText(/Credits Input/i);
     const currencyInput = screen.getByLabelText(/Currency Input/i);
@@ -67,11 +55,9 @@ describe('CreditsAmount', () => {
   });
 
   it('updates credits amount when currency amount changes', async () => {
-    render(
-      <FormContextProvider defaultValues={defaultValues}>
-        <CreditsAmount {...defaultValues} />
-      </FormContextProvider>,
-    );
+    render(<CreditsAmount {...formDefaultValues} />, {
+      formDefaultValues,
+    });
 
     const creditsInput = screen.getByLabelText(/Credits Input/i);
     const currencyInput = screen.getByLabelText(/Currency Input/i);
@@ -83,11 +69,9 @@ describe('CreditsAmount', () => {
   });
 
   it('updates credits amount when max credits is selected', async () => {
-    render(
-      <FormContextProvider defaultValues={defaultValues}>
-        <CreditsAmount {...defaultValues} />
-      </FormContextProvider>,
-    );
+    render(<CreditsAmount {...formDefaultValues} />, {
+      formDefaultValues,
+    });
 
     const creditsInput = screen.getByLabelText(/Credits Input/i);
     const maxCreditsButton = screen.getByRole('button', {
@@ -100,11 +84,9 @@ describe('CreditsAmount', () => {
   });
 
   it('updates currency amount when max credits is selected', async () => {
-    render(
-      <FormContextProvider defaultValues={defaultValues}>
-        <CreditsAmount {...defaultValues} />
-      </FormContextProvider>,
-    );
+    render(<CreditsAmount {...formDefaultValues} />, {
+      formDefaultValues,
+    });
 
     const currencyInput = screen.getByLabelText(/Currency Input/i);
     const maxCreditsButton = screen.getByRole('button', {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Menu } from '@mui/material';
 
 import {
+  DeleteMenuItem,
   SharePrivateMenuItem,
   SharePublicMenuItem,
 } from '../../cards/PostCard/PostCard.MenuItems';
@@ -11,12 +12,14 @@ type Props = {
   publicPost?: boolean;
   sharePublicLink: (ev: React.MouseEvent) => void;
   sharePrivateLink: (ev: React.MouseEvent) => void;
+  onDelete: (ev: React.MouseEvent) => void;
 };
 
 export const PostAdminButton = ({
   publicPost,
   sharePublicLink,
   sharePrivateLink,
+  onDelete,
 }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -63,17 +66,11 @@ export const PostAdminButton = ({
       >
         {/* <EditMenuItem /> */}
         <SharePublicMenuItem
-          classes={{ root: 'px-[25px]' }}
           onClick={sharePublicLink}
           publicPost={publicPost}
         />
-        {!publicPost && (
-          <SharePrivateMenuItem
-            classes={{ root: 'px-[25px]' }}
-            onClick={sharePrivateLink}
-          />
-        )}
-        {/*<DeleteMenuItem /> */}
+        {!publicPost && <SharePrivateMenuItem onClick={sharePrivateLink} />}
+        <DeleteMenuItem onClick={onDelete} />
       </Menu>
     </>
   );

@@ -1,4 +1,4 @@
-import { QueryObserverOptions } from '@tanstack/react-query';
+import { InfiniteQueryObserverOptions } from '@tanstack/react-query';
 import { JsonLdDocument } from 'jsonld';
 
 import { PostPrivacyType } from 'web-components/src/components/organisms/PostFiles/PostFiles.types';
@@ -40,17 +40,18 @@ export type Post = {
   error?: string;
 };
 
-export type ReactQueryGetPostsQueryResponse = QueryObserverOptions<{
+export type PostsQueryResponse = {
   posts: Post[];
   years?: Array<number>;
-  total: number;
-} | null>;
+  next?: string;
+} | null;
+export type ReactQueryGetPostsQueryResponse =
+  InfiniteQueryObserverOptions<PostsQueryResponse>;
 
 export type GetPostsQueryParams = {
   projectId?: string;
-  limit: number;
-  offset: number;
-  year?: number;
+  next?: string;
+  year?: number | null;
 };
 export type ReactQueryGetPostsQueryParams = GetPostsQueryParams &
   ReactQueryBuilderResponse<ReactQueryGetPostsQueryResponse>;

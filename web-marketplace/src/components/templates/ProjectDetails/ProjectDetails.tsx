@@ -169,11 +169,20 @@ function ProjectDetails(): JSX.Element {
     offchainProjectByIdData?.data?.projectById?.slug ||
     projectByOnChainId?.data?.projectByOnChainId?.slug ||
     projectBySlug?.data.projectBySlug?.slug;
+
   useEffect(() => {
     if (!!slug) {
-      navigate(`/project/${slug}`, { replace: true });
+      const hash = location.hash || '';
+      navigate(`/project/${slug}${hash}`, { replace: true });
     }
-  }, [slug, navigate]);
+  }, [slug, navigate, location.hash]);
+
+  const element = document.getElementById(location.hash.substring(1));
+  useEffect(() => {
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [element]);
 
   const projectBySlugOnChainId =
     projectBySlug?.data.projectBySlug?.onChainId ?? undefined;

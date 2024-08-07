@@ -26,6 +26,7 @@ interface PostCardProps {
   numberOfFiles?: number;
   handleClickShare: (ev: React.MouseEvent) => void;
   sharePrivateLink: (ev: React.MouseEvent) => void;
+  onDelete: (ev: React.MouseEvent) => void;
   onClick: () => void;
   publicPost?: boolean;
   file?: FileToPreview;
@@ -46,6 +47,7 @@ export default function PostCard({
   sharePrivateLink,
   onClick,
   publicPost,
+  onDelete,
 }: PostCardProps): JSX.Element {
   const hasFile = !!file;
   const theme = useTheme();
@@ -62,6 +64,7 @@ export default function PostCard({
         isAdmin={isAdmin}
         onClickShare={handleClickShare}
         sharePrivateLink={sharePrivateLink}
+        onDelete={onDelete}
         publicPost={publicPost}
       />
       {!hasFile && privacyLabel && (

@@ -16,7 +16,7 @@ export const Tradable = ({ goToChooseCredits, imgSrc }: TradableProps) => {
           alt="info with hand"
         />
         <div>
-          <Title className="text-base">
+          <Title as="h2" className="text-base">
             You have chosen to purchase tradable credits, so you will not
             receive a retirement certificate.
           </Title>

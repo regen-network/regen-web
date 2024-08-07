@@ -23,7 +23,6 @@ const LocationStateField = lazy(
     ),
 );
 
-export type RetirementProps = {};
 export const Retirement = () => {
   const ctx = useFormContext<AgreePurchaseFormSchemaType>();
   const { register, formState, control } = ctx;
@@ -64,7 +63,7 @@ export const Retirement = () => {
         <CheckboxLabel
           checked={anonymousPurchase}
           optional
-          optionalClassName="sm:after:text-sm"
+          optionalTextClassName="sm:after:text-sm"
           label={
             <Body size="sm" mobileSize="sm" className="text-grey-700" as="span">
               Make your purchase anonymous. Your name will be hidden from the

@@ -19,7 +19,7 @@ interface CheckboxLabelProps extends MuiCheckboxProps {
   helperText?: string;
   sx?: SxProps<Theme>;
   optional?: boolean;
-  optionalClassName?: string;
+  optionalTextClassName?: string;
 }
 
 const CheckboxLabel = forwardRef<HTMLButtonElement, CheckboxLabelProps>(
@@ -32,7 +32,7 @@ const CheckboxLabel = forwardRef<HTMLButtonElement, CheckboxLabelProps>(
       error = false,
       helperText = '',
       optional,
-      optionalClassName,
+      optionalTextClassName,
       ...props
     },
     ref,
@@ -43,7 +43,7 @@ const CheckboxLabel = forwardRef<HTMLButtonElement, CheckboxLabelProps>(
     const labelClassName = optional
       ? cn(
           `after:content-['(optional)'] after:text-grey-400 after:ml-[4px] after:text-sm sm:after:text-base`,
-          optionalClassName,
+          optionalTextClassName,
         )
       : '';
 

@@ -66,7 +66,13 @@ module.exports = {
       },
     },
     {
-      files: ['*.test.ts', '*.spec.ts', '*.test.tsx', '*.spec.tsx'],
+      files: [
+        '*.test.ts',
+        '*.spec.ts',
+        '*.test.tsx',
+        '*.spec.tsx',
+        '*.stories.tsx',
+      ],
       rules: {
         'lingui/no-unlocalized-strings': 'off',
       },

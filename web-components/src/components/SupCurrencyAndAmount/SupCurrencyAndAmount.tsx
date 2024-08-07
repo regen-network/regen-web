@@ -3,9 +3,11 @@ import { CURRENCIES } from '../DenomIconWithCurrency/DenomIconWithCurrency.const
 export function SupCurrencyAndAmount({
   price,
   currencyCode,
+  className = '',
 }: {
   price: number;
   currencyCode: string;
+  className?: string;
 }) {
   let formattedPrice = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -19,7 +21,7 @@ export function SupCurrencyAndAmount({
     return (
       <>
         <span className="align-top text-xs">{firstLetter}</span>
-        {restOfString}
+        <span className={className}>{restOfString}</span>
       </>
     );
   }

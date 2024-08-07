@@ -1,11 +1,13 @@
 import { ReactNode, useState } from 'react';
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
 import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
+import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { EditableInput } from 'web-components/src/components/inputs/new/EditableInput/EditableInput';
 import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
 import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
 import { Title } from 'web-components/src/components/typography/Title';
 
+import { CRYPTO_TOOLTIP_TEXT } from './OrderSummaryCard.constants';
 import {
   OrderProps,
   OrderSummaryProps,
@@ -54,7 +56,9 @@ function OrderSummaryContent({
       <p className="text-[14px] sm:text-base sm:font-normal font-['Lato'] self-start m-0">
         {projectName}
       </p>
-      <OrderSummmaryRowHeader text="price per credit" />
+      <OrderSummmaryRowHeader
+        text={`${currency !== CURRENCIES.usd ? 'avg' : ''} price per credit`}
+      />
       <div className="justify-start items-center flex">
         <span>
           <SupCurrencyAndAmount
@@ -65,6 +69,9 @@ function OrderSummaryContent({
         <DenomIconWithCurrency
           currency={currency}
           className="pt-[8px] ml-10 text-[14px] sm:text-base"
+          tooltipText={`${
+            currency !== CURRENCIES.usd ? CRYPTO_TOOLTIP_TEXT : ''
+          }`}
         />
       </div>
       <OrderSummmaryRowHeader text="# credits" className="pt-5" />

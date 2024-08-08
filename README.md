@@ -135,6 +135,7 @@ bun run build-www
 
 ## Testing
 
+#### - Running tests
 We are using [Vitest](https://vitest.dev/) as a test runner.
 
 Tests can be run in the terminal with the following commands from the project root: 
@@ -150,6 +151,10 @@ Tests can be run in the terminal with the following commands from the project ro
   ```
 In both cases the test runner is launched in the interactive watch mode.
 
+#### - Writing tests
+When writing test in `web-marketplace` remember to import the methods from`'web-marketplace/test/test-utils'`, specially the `render` method, as it is a custom render that wraps components with the necessary providers.
+
+In `web-components`, methods should be imported directly from `'@testing-library/*'`
 
 
 ## Code style

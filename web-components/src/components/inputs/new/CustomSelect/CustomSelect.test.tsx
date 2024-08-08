@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from 'web-components/test/test-utils';
+import { render } from '@testing-library/react';
+import { fireEvent, screen } from 'web-components/test/test-utils';
 
 import CustomSelect from './CustomSelect';
 

@@ -1,7 +1,6 @@
 import { TextButton } from '../buttons/TextButton';
 import { CollapseList } from '../organisms/CollapseList/CollapseList';
 import { Subtitle } from '../typography';
-import { TextSize } from '../typography/sizing';
 import { ItemValue, LinkComponentProp } from './TxModal';
 
 interface CardItemValueProps {
@@ -16,7 +15,7 @@ export const CardItemValue = ({
   linkComponent: LinkComponent,
 }: CardItemValueProps): JSX.Element => {
   return (
-    <div className="flex">
+    <div className="flex items-baseline">
       {value.label && (
         <TextButton
           textSize="sm"

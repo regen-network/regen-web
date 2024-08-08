@@ -17,9 +17,9 @@ import { useRadioStyles } from './Radio.styles';
 import { RadiotVariant } from './Radio.types';
 
 export interface RadioProps extends RadioPropsMui {
-  value?: string;
+  value?: string | boolean;
   label?: ReactNode;
-  selectedValue?: string;
+  selectedValue?: string | boolean;
   variant?: RadiotVariant;
   optional?: string | boolean;
   helperText?: string | JSX.Element;

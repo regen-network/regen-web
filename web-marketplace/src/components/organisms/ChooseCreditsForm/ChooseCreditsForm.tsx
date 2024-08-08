@@ -34,12 +34,7 @@ import { PaymentOptionsType } from './ChooseCreditsForm.types';
 
 export function ChooseCreditsForm({
   creditVintages,
-  creditsAvailable = [
-    {
-      credits: 2000,
-      currency: 'usd',
-    },
-  ],
+  creditsAvailable,
 }: {
   creditVintages: { date: string; credits: string; batchDenom: string }[];
   creditsAvailable: {
@@ -68,14 +63,14 @@ export function ChooseCreditsForm({
     defaultValues: {
       amountCurrency: 1,
       amountCredits: 1,
-      cryptoPurchaseOption: cryptoOptions?.[0]?.label,
+      retiring: true,
     },
     mode: 'onBlur',
   });
 
-  const cryptoPurchaseOption = useWatch({
+  const retiring = useWatch({
     control: form.control,
-    name: 'cryptoPurchaseOption',
+    name: 'retiring',
   });
 
   const creditVintageOptions = useWatch({
@@ -87,8 +82,8 @@ export function ChooseCreditsForm({
     // TO-DO
   };
 
-  const handleCryptoPurchaseOptions = (e: ChangeEvent<HTMLInputElement>) => {
-    form.setValue('cryptoPurchaseOption', e.currentTarget.value);
+  const handleCryptoPurchaseOptions = () => {
+    form.setValue('retiring', !retiring);
   };
 
   const handleCreditVintageOptions = (e: ChangeEvent<HTMLInputElement>) => {
@@ -136,8 +131,7 @@ export function ChooseCreditsForm({
           />
           {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
             <CryptoOptions
-              register={form.register}
-              cryptoPurchaseOption={cryptoPurchaseOption}
+              retiring={retiring}
               handleCryptoPurchaseOptions={handleCryptoPurchaseOptions}
             />
           )}

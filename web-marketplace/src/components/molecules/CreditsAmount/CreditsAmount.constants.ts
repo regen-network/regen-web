@@ -11,6 +11,7 @@ export const cryptoOptions = [
       'These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible.',
     linkTo:
       'https://guides.regen.network/guides/regen-marketplace-buyers-guides/ecocredits/retire-ecocredits/retirement-certification#individual-entity-credit-retirement.',
+    value: true,
   },
   {
     label: 'Buy tradable ecocredits',
@@ -18,5 +19,6 @@ export const cryptoOptions = [
       'These credits will be a tradeable asset. They can be retired later via Regen Marketplace.',
     linkTo:
       'https://guides.regen.network/guides/regen-marketplace-buyers-guides/ecocredits/retire-ecocredits/retirement-certification#individual-entity-credit-retirement.',
+    value: false,
   },
 ];

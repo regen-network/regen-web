@@ -1,8 +1,11 @@
+import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
 import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { chooseCreditsFormSchema } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
+
+import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { CreditsAmount } from './CreditsAmount';
 
@@ -37,6 +40,8 @@ export const CreditsAmountCard: Story = {
 CreditsAmountCard.args = {
   creditsAvailable: 100,
   paymentOption: PAYMENT_OPTIONS.CARD,
+  onCurrencyChange: action('onCurrencyChange'),
+  currency: CURRENCIES.usd,
 };
 
 export const CreditsAmountCrypto: Story = {
@@ -46,4 +51,6 @@ export const CreditsAmountCrypto: Story = {
 CreditsAmountCrypto.args = {
   creditsAvailable: 100,
   paymentOption: PAYMENT_OPTIONS.CRYPTO,
+  onCurrencyChange: action('onCurrencyChange'),
+  currency: CURRENCIES.usd,
 };

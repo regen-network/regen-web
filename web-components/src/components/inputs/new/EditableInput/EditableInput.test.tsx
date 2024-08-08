@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from 'web-marketplace/test/test-utils';
+import { fireEvent, render, screen } from 'web-components/test/test-utils';
 
 import { EditableInput } from './EditableInput';
 

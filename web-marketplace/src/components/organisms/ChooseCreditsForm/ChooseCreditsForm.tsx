@@ -139,7 +139,6 @@ export function ChooseCreditsForm({
             creditVintages={creditVintages}
             advanceSettingsOpen={advanceSettingsOpen}
             toggleAdvancedSettings={toggleAdvancedSettings}
-            register={form.register}
             handleCreditVintageOptions={handleCreditVintageOptions}
           />
         </Form>

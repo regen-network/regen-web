@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.3](https://github.com/regen-network/regen-web/compare/v2.6.2...v2.6.3) (2024-07-29)
+
+### Bug Fixes
+
+- enable autoretire checked by default ([14c1d48](https://github.com/regen-network/regen-web/commit/14c1d48363656854ed67c5d2c9e32a38af78cfe0))
+- enableAutoRetire default value and sell orders query ([e057611](https://github.com/regen-network/regen-web/commit/e057611cbb7e61722b0db8ad6fbc354452eb17bb))
+
 ## [2.6.2](https://github.com/regen-network/regen-web/compare/v2.6.1...v2.6.2) (2024-07-29)
 
 ### Bug Fixes

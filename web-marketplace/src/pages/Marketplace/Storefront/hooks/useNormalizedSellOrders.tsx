@@ -1,9 +1,4 @@
 import { useMemo, useState } from 'react';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
 import {
@@ -45,7 +40,6 @@ type ResponseType = {
 };
 
 export const useNormalizedSellOrders = (): ResponseType => {
-  const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { ecocreditClient, dataClient } = useLedger();
 
   const [paginationParams, setPaginationParams] =
@@ -57,10 +51,6 @@ export const useNormalizedSellOrders = (): ResponseType => {
   const { offset, rowsPerPage } = paginationParams;
   useQuery(getSimplePriceQuery({}));
 
-  // We do not use pagination yet on the SellOrders query
-  // because the ledger currently returns sell orders ordered by seller address and not by id
-  // which would result in a list of non sequential ids in the sell orders table and look weird
-  // TODO: use pagination as soon as this is fixed on Regen Ledger side (as part of v5.0)
   const { sellOrders, refetchSellOrders, isLoadingSellOrders } =
     useFetchSellOrders();
 

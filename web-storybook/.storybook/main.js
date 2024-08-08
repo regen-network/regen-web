@@ -69,7 +69,15 @@ module.exports = {
         },
       },
       plugins: [
+<<<<<<< HEAD
         macrosPlugin(),
+=======
+        react({
+          babel: {
+            plugins: ['macros'],
+          },
+        }),
+>>>>>>> f9b157f2 (fix: revert lingui config back)
         lingui(),
         svgrPlugin({
           include: path.resolve(

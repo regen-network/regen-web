@@ -1,5 +1,6 @@
+import { render } from '@testing-library/react';
 import { SetMaxButton } from 'web-components/src/components/buttons/SetMaxButton';
-import { fireEvent, render, screen } from 'web-components/test/test-utils';
+import { fireEvent, screen } from 'web-components/test/test-utils';
 
 describe('SetMaxButton', () => {
   it('calls onClick when clicked', () => {

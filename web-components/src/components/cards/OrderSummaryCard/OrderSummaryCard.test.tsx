@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/dom';
+import { render } from '@testing-library/react';
 import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
-import { fireEvent, render } from 'web-components/test/test-utils';
+import { fireEvent } from 'web-components/test/test-utils';
 
 import { OrderSummaryCard } from './OrderSummaryCard';
 import { OrderSummaryProps } from './OrderSummaryCard.types';

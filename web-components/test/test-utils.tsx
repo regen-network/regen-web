@@ -1,1 +1,2 @@
-export * from '../../test/test-utils';
+export * from '@testing-library/react';
+export * from '@testing-library/user-event';

@@ -1,22 +1,24 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { Link } from 'web-marketplace/src/components/atoms';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 
+import { ChooseCreditsFormSchemaType } from './ChooseCreditsForm.schema';
+
 export function AdvanceSettings({
   advanceSettingsOpen,
   toggleAdvancedSettings,
   creditVintages,
-  register,
   handleCreditVintageOptions,
 }: {
   advanceSettingsOpen: boolean;
   toggleAdvancedSettings: (e: React.MouseEvent<HTMLElement>) => void;
   creditVintages: { date: string; credits: string; batchDenom: string }[];
-  register: any;
   handleCreditVintageOptions: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
+  const { register } = useFormContext<ChooseCreditsFormSchemaType>();
   return (
     <div className="grid grid-rows-1 mt-20 sm:mt-40">
       <div className="flex flex-col">

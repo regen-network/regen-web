@@ -1,5 +1,7 @@
 import { render, screen, userEvent } from 'web-marketplace/test/test-utils';
 
+import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+
 import { ChooseCreditsForm } from './ChooseCreditsForm';
 
 describe('ChooseCreditsForm', () => {
@@ -8,16 +10,30 @@ describe('ChooseCreditsForm', () => {
     { date: '2022-02-01', credits: '200', batchDenom: '2' },
   ];
 
+  const creditAvailability = [
+    {
+      credits: 1000,
+      currency: CURRENCIES.usd,
+    },
+    {
+      credits: 2000,
+      currency: CURRENCIES.uregen,
+    },
+    {
+      credits: 3000,
+      currency: CURRENCIES.usdc,
+    },
+    {
+      credits: 4000,
+      currency: CURRENCIES.usdcaxl,
+    },
+  ];
+
   it('renders without crashing', () => {
     render(
       <ChooseCreditsForm
         creditVintages={creditVintages}
-        creditsAvailable={[
-          {
-            credits: 2000,
-            currency: 'usd',
-          },
-        ]}
+        creditsAvailable={creditAvailability}
       />,
     );
 
@@ -28,12 +44,7 @@ describe('ChooseCreditsForm', () => {
     render(
       <ChooseCreditsForm
         creditVintages={creditVintages}
-        creditsAvailable={[
-          {
-            credits: 2000,
-            currency: 'usd',
-          },
-        ]}
+        creditsAvailable={creditAvailability}
       />,
     );
 
@@ -52,12 +63,7 @@ describe('ChooseCreditsForm', () => {
     render(
       <ChooseCreditsForm
         creditVintages={creditVintages}
-        creditsAvailable={[
-          {
-            credits: 2000,
-            currency: 'usd',
-          },
-        ]}
+        creditsAvailable={creditAvailability}
       />,
     );
     const cardOption = screen.getByRole('radio', {

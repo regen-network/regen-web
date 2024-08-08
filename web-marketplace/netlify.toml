@@ -2,7 +2,7 @@
 VITE_SANITY_TAG = "default"
 VITE_SANITY_DATASET = "production"
 VITE_API_URI = "https://api.regen.network"
-VITE_BLOCK_EXPLORER = "https://atomscan.com"
+VITE_BLOCK_EXPLORER = "https://www.mintscan.io"
 VITE_LEDGER_CHAIN_ID = "regen-1"
 VITE_SENTRY_ENABLED = "true"
 VITE_SENTRY_ENVIRONMENT = "production"

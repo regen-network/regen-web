@@ -7,6 +7,7 @@ type UseStylesParams = {
 export const useInputLabelStyles = makeStyles<UseStylesParams>()(
   (theme, { optional }) => ({
     root: {
+      whiteSpace: 'normal',
       lineHeight: '140%',
       color: theme.palette.primary.contrastText,
       fontWeight: 'bold',

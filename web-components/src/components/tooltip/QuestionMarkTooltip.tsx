@@ -14,7 +14,6 @@ interface Props {
   size?: TextSize;
   placement?: TooltipProps['placement'];
   className?: string;
-}
 
 export default function QuestionMarkTooltip({
   title,
@@ -33,6 +32,7 @@ export default function QuestionMarkTooltip({
       data-testid="question-mark-tooltip"
     >
       <Box
+        className={className}
         sx={[
           {
             borderRadius: '50%',

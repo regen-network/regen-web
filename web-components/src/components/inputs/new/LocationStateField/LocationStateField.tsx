@@ -14,6 +14,7 @@ interface FieldProps extends PropsWithChildren {
   helperText?: string;
   optional?: boolean;
   value?: string;
+  className?: string;
 }
 
 const LocationStateField = forwardRef<HTMLDivElement, FieldProps>(

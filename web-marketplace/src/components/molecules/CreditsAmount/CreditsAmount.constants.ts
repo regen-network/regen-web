@@ -1,5 +1,8 @@
+import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+
 export const CREDITS_AMOUNT = 'creditsAmount';
 export const CURRENCY_AMOUNT = 'currencyAmount';
+export const DEFAULT_CRYPTO_CURRENCY = CURRENCIES.uregen;
 
 export const cryptoOptions = [
   {

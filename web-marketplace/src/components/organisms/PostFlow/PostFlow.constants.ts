@@ -40,7 +40,9 @@ export const basePostContent = {
 };
 
 export const POST_CREATED = 'Congrats! You successfully created this post.';
-export const VIEW_ALL_POSTS = 'view all posts';
+export const VIEW_POST = 'view post';
 export const FILE_NAMES = 'file name(s)';
 export const PROJECT = 'project';
 export const HASH = 'hash';
+export const POST_CREATED_SIGNING_FAILED =
+  'You successfully created this post but signing failed.';

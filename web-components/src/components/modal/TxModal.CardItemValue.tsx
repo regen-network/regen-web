@@ -1,5 +1,4 @@
-import { Box } from '@mui/material';
-
+import { TextButton } from '../buttons/TextButton';
 import { CollapseList } from '../organisms/CollapseList/CollapseList';
 import { Subtitle } from '../typography';
 import { ItemValue, LinkComponentProp } from './TxModal';
@@ -16,32 +15,43 @@ export const CardItemValue = ({
   linkComponent: LinkComponent,
 }: CardItemValueProps): JSX.Element => {
   return (
-    <Subtitle
-      key={value.name}
-      size="lg"
-      mobileSize="sm"
-      color={color || 'info.dark'}
-      sx={{
-        display: 'flex',
-        alignItems: 'flex-end',
-      }}
-    >
-      {value.icon && value.icon}
-      {value.url ? (
-        <LinkComponent
-          sx={{
-            color: 'secondary.main',
-          }}
-          href={value.url}
-          target={value.url.startsWith('/') ? '_self' : '_blank'}
+    <div className="flex items-baseline">
+      {value.label && (
+        <TextButton
+          textSize="sm"
+          className="font-extrabold text-grey-400 hover:text-grey-400 pr-3"
         >
-          {value.name}
-        </LinkComponent>
-      ) : (
-        <>{value.name}</>
+          {value.label}:
+        </TextButton>
       )}
-      {value.children && value.children}
-    </Subtitle>
+      <Subtitle
+        className={value.className}
+        key={value.name}
+        size={value.size || 'lg'}
+        mobileSize={value.mobileSize || 'sm'}
+        color={color || 'info.dark'}
+        sx={{
+          display: 'flex',
+          alignItems: 'flex-end',
+        }}
+      >
+        {value.icon && value.icon}
+        {value.url ? (
+          <LinkComponent
+            sx={{
+              color: 'secondary.main',
+            }}
+            href={value.url}
+            target={value.url.startsWith('/') ? '_self' : '_blank'}
+          >
+            {value.name}
+          </LinkComponent>
+        ) : (
+          <>{value.name}</>
+        )}
+        {value.children && value.children}
+      </Subtitle>
+    </div>
   );
 };
 

@@ -102,7 +102,7 @@ export const useConnectWalletToAccount = ({
               setAddressUsedWithEmailModalOpen(true);
               break;
             default:
-              throw Error(response.error);
+              throw new Error(response.error);
           }
         }
       }

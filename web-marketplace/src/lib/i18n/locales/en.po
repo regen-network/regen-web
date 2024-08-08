@@ -17,6 +17,21 @@ msgstr ""
 msgid ""
 msgstr ""
 
+#: src/components/organisms/PostFlow/hooks/useSign.ts:109
+msgid "{POST_CREATED_SIGNING_FAILED}"
+msgstr ""
+
+#: src/components/organisms/PostFlow/hooks/useFetchMsgAnchor.ts:92
+#: src/components/organisms/PostFlow/hooks/useSign.ts:146
+msgid "{POST_CREATED}"
+msgstr ""
+
+#: src/components/organisms/PostFlow/hooks/useFetchMsgAnchor.ts:93
+#: src/components/organisms/PostFlow/hooks/useSign.ts:111
+#: src/components/organisms/PostFlow/hooks/useSign.ts:148
+msgid "{VIEW_POST}"
+msgstr ""
+
 #: src/components/organisms/AdditionalityForm.tsx:116
 msgid "A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
 msgstr ""
@@ -31,6 +46,27 @@ msgstr ""
 
 #: src/pages/BatchDetails/BatchDetails.tsx:122
 msgid "All credits"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.utils.tsx:89
+msgid "anchor"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.utils.tsx:107
+msgid "Anchoring in progress"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:68
+msgid "Attach a signature"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.utils.tsx:121
+msgid "attest"
+msgstr ""
+
+#: src/components/organisms/PostFlow/hooks/useSign.ts:110
+#: src/components/organisms/PostFlow/hooks/useSign.ts:147
+msgid "Attest"
 msgstr ""
 
 #: src/pages/BasicInfo/BasicInfo.tsx:66
@@ -135,6 +171,10 @@ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:132
 msgid "High density grazing"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:87
+msgid "I verify this data is accurate to the best of my knowledge"
 msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:139
@@ -242,6 +282,22 @@ msgstr ""
 msgid "Share"
 msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:107
+msgid "sign"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:75
+msgid "Sign this post"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.utils.tsx:139
+msgid "Signing failed"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:101
+msgid "skip this step"
+msgstr ""
+
 #: src/config/errors.tsx:29
 msgid "Sorry, someone has purchased this sell order!"
 msgstr ""
@@ -260,6 +316,10 @@ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:162
 msgid "The practice of letting livestock graze crop residue after a crop has been harvested."
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:78
+msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
 msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:205

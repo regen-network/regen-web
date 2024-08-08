@@ -6,7 +6,7 @@ import { socialProvidersMock, wallets } from './LoginModal.mock';
 import { LoginModalState } from './LoginModal.types';
 
 const meta: Meta<typeof LoginModal> = {
-  title: 'Registry/Organisms/LoginModal',
+  title: 'Marketplace/Organisms/LoginModal',
   component: LoginModal,
 };
 export default meta;

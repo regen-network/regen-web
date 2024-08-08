@@ -61,6 +61,6 @@ export const creditClassFinished = (): JSX.Element => (
 );
 
 export default {
-  title: 'Registry/Organisms/Credit Class Form',
+  title: 'Marketplace/Organisms/Credit Class Form',
   component: CreditClassForm,
 };

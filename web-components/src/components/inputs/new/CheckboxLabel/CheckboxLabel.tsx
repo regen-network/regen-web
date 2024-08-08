@@ -7,6 +7,7 @@ import FormControlLabel, {
 import FormHelperText from '@mui/material/FormHelperText';
 
 import { Theme } from '../../../../theme/muiTheme';
+import { cn } from '../../../../utils/styles/cn';
 import { Subtitle } from '../../../typography';
 import Checkbox from '../CheckBox/Checkbox';
 
@@ -39,8 +40,8 @@ const CheckboxLabel = forwardRef<HTMLButtonElement, CheckboxLabelProps>(
     return (
       <>
         <FormControlLabel
-          className={className}
-          sx={[{ ml: 0 }, ...(Array.isArray(sx) ? sx : [sx])]}
+          className={cn('ml-0 flex items-start', className)}
+          sx={[...(Array.isArray(sx) ? sx : [sx])]}
           control={
             <Checkbox
               sx={{ p: 0, mr: 3.5 }}

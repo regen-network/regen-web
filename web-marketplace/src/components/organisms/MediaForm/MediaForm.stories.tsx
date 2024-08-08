@@ -2,7 +2,7 @@ import { MediaForm } from './MediaForm';
 import { MediaFormSchemaType } from './MediaForm.schema';
 
 export default {
-  title: 'Registry/Organisms/MediaForm',
+  title: 'Marketplace/Organisms/MediaForm',
   component: MediaForm,
 };
 

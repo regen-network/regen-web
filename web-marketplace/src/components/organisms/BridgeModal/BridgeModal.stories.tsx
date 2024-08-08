@@ -10,6 +10,6 @@ export const bridgeModal = (): JSX.Element => (
 );
 
 export default {
-  title: 'Registry/Organisms/Bridge Modal',
+  title: 'Marketplace/Organisms/Bridge Modal',
   component: BridgeModal,
 };

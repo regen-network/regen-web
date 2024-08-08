@@ -15,6 +15,6 @@ export const creditSendModal = (): JSX.Element => (
 );
 
 export default {
-  title: 'Registry/Organisms/Credit Send Modal',
+  title: 'Marketplace/Organisms/Credit Send Modal',
   component: CreditSendModal,
 };

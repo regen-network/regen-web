@@ -19,7 +19,7 @@ export const useInputLabelStyles = makeStyles<UseStylesParams>()(
       '&.Mui-error': {
         color: theme.palette.primary.contrastText,
       },
-      '&::after': {
+      '& > :first-child::after': {
         content: !!optional ? '" (optional)"' : '""',
         fontWeight: 'normal',
         color: theme.palette.info.main,

@@ -16,7 +16,7 @@ import {
 } from './RoleField.mock';
 
 export default {
-  title: 'Registry/Organisms/RolesForm/RoleField',
+  title: 'Marketplace/Organisms/RolesForm/RoleField',
   component: RoleField,
 } as ComponentMeta<typeof RoleField>;
 

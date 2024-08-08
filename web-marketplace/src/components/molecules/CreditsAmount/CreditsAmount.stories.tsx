@@ -22,7 +22,7 @@ const CreditsWithForm = (args: any) => {
     defaultValues: {
       amountCurrency: 1,
       amountCredits: 1,
-      cryptoPurchaseOption: PAYMENT_OPTIONS.CARD,
+      retiring: true,
     },
     mode: 'onBlur',
   });

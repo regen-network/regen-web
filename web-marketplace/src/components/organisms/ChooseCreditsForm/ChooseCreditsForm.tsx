@@ -8,10 +8,7 @@ import {
 } from 'react';
 import { SubmitHandler, useWatch } from 'react-hook-form';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
-import {
-  cryptoOptions,
-  DEFAULT_CRYPTO_CURRENCY,
-} from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
+import { DEFAULT_CRYPTO_CURRENCY } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
 

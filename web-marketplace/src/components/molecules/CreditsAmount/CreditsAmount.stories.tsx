@@ -10,7 +10,7 @@ import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/
 import { CreditsAmount } from './CreditsAmount';
 
 export default {
-  title: 'Marketplace/Modules/CreditsAmount',
+  title: 'Marketplace/Molecules/CreditsAmount',
   component: CreditsAmount,
 } as Meta<typeof CreditsAmount>;
 

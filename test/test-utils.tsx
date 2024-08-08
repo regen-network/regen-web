@@ -23,7 +23,7 @@ interface FormContextProviderProps {
   formDefaultValues: Record<string, any>;
 }
 
-export const FormContextProvider = ({
+const FormContextProvider = ({
   children,
   formDefaultValues,
 }: FormContextProviderProps) => {

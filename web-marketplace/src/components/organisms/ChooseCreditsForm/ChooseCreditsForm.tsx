@@ -1,11 +1,25 @@
-import { ChangeEvent, MouseEvent, Suspense, useState } from 'react';
+import {
+  ChangeEvent,
+  MouseEvent,
+  Suspense,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import { SubmitHandler, useWatch } from 'react-hook-form';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
-import { cryptoOptions } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
+import {
+  cryptoOptions,
+  DEFAULT_CRYPTO_CURRENCY,
+} from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
 
 import Card from 'web-components/src/components/cards/Card';
+import {
+  CURRENCIES,
+  Currency,
+} from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { Loading } from 'web-components/src/components/loading';
 
 import { AdvanceSettings } from './ChooseCreditsForm.AdvanceSettings';
@@ -20,8 +34,18 @@ import { PaymentOptionsType } from './ChooseCreditsForm.types';
 
 export function ChooseCreditsForm({
   creditVintages,
+  creditsAvailable = [
+    {
+      credits: 2000,
+      currency: 'usd',
+    },
+  ],
 }: {
   creditVintages: { date: string; credits: string; batchDenom: string }[];
+  creditsAvailable: {
+    credits: number;
+    currency: Currency;
+  }[];
 }) {
   const [paymentOption, setPaymentOption] = useState<PaymentOptionsType>(
     PAYMENT_OPTIONS.CARD,
@@ -32,6 +56,12 @@ export function ChooseCreditsForm({
     e.preventDefault();
     setAdvanceSettingsOpen(prev => !prev);
   };
+
+  const [currency, setCurrency] = useState<Currency>(
+    paymentOption === PAYMENT_OPTIONS.CRYPTO
+      ? DEFAULT_CRYPTO_CURRENCY
+      : CURRENCIES.usd,
+  );
 
   const form = useZodForm({
     schema: chooseCreditsFormSchema,
@@ -76,6 +106,19 @@ export function ChooseCreditsForm({
     setPaymentOption(option as PaymentOptionsType);
   };
 
+  const getCurrencyAvailableCredits = useCallback(
+    (currency: Currency) => {
+      const curr = creditsAvailable.find(item => item.currency === currency);
+      return curr?.credits || 0;
+    },
+    [creditsAvailable],
+  );
+
+  const currencyAvailableCredits = useMemo(
+    () => getCurrencyAvailableCredits(currency),
+    [currency, getCurrencyAvailableCredits],
+  );
+
   return (
     <Suspense fallback={<Loading />}>
       <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300">
@@ -86,8 +129,10 @@ export function ChooseCreditsForm({
         >
           <PaymentOptions setPaymentOption={handlePaymentOptions} />
           <CreditsAmount
-            creditsAvailable={1500} // TO-DO update with max credits available {creditsAvailable}
+            creditsAvailable={currencyAvailableCredits}
             paymentOption={paymentOption}
+            currency={currency}
+            onCurrencyChange={setCurrency}
           />
           {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
             <CryptoOptions

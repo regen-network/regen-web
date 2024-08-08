@@ -1,12 +1,17 @@
 import { ChangeEvent } from 'react';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 
-import { CryptoCurrencies } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import {
+  CryptoCurrencies,
+  Currency,
+} from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 export type PaymentOptionsType = 'card' | 'crypto';
 export interface CreditsAmountProps {
   creditsAvailable: number;
   paymentOption: PaymentOptionsType;
+  currency: Currency;
+  onCurrencyChange: (currency: Currency) => void;
 }
 
 export interface CreditsInputProps {

@@ -4,18 +4,38 @@ import { ChooseCreditsForm } from './ChooseCreditsForm';
 
 describe('ChooseCreditsForm', () => {
   const creditVintages = [
-    { date: '2022-01-01', credits: '100' },
-    { date: '2022-02-01', credits: '200' },
+    { date: '2022-01-01', credits: '100', batchDenom: '1' },
+    { date: '2022-02-01', credits: '200', batchDenom: '2' },
   ];
 
   it('renders without crashing', () => {
-    render(<ChooseCreditsForm creditVintages={creditVintages} />);
+    render(
+      <ChooseCreditsForm
+        creditVintages={creditVintages}
+        creditsAvailable={[
+          {
+            credits: 2000,
+            currency: 'usd',
+          },
+        ]}
+      />,
+    );
 
     expect(screen.getByTestId('choose-credits-form')).toBeInTheDocument();
   });
 
   it('opens and closes advanced settings', () => {
-    render(<ChooseCreditsForm creditVintages={creditVintages} />);
+    render(
+      <ChooseCreditsForm
+        creditVintages={creditVintages}
+        creditsAvailable={[
+          {
+            credits: 2000,
+            currency: 'usd',
+          },
+        ]}
+      />,
+    );
 
     const advancedSettingsButton = screen.getByRole('button', {
       name: /advanced settings/i,
@@ -29,7 +49,17 @@ describe('ChooseCreditsForm', () => {
   });
 
   it('selects card payment option', () => {
-    render(<ChooseCreditsForm creditVintages={creditVintages} />);
+    render(
+      <ChooseCreditsForm
+        creditVintages={creditVintages}
+        creditsAvailable={[
+          {
+            credits: 2000,
+            currency: 'usd',
+          },
+        ]}
+      />,
+    );
     const cardOption = screen.getByRole('radio', {
       name: /card/i,
     });

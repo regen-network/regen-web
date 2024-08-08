@@ -8,7 +8,11 @@ import {
   Currency,
 } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
-import { CREDITS_AMOUNT, CURRENCY_AMOUNT } from './CreditsAmount.constants';
+import {
+  CREDITS_AMOUNT,
+  CURRENCY_AMOUNT,
+  DEFAULT_CRYPTO_CURRENCY,
+} from './CreditsAmount.constants';
 import { CreditsAmountHeader } from './CreditsAmount.Header';
 import { CreditsAmountProps } from './CreditsAmount.types';
 import { getCurrencyPrice } from './CreditsAmount.utils';
@@ -18,18 +22,13 @@ import { CurrencyInput } from './CurrecyInput';
 export const CreditsAmount = ({
   creditsAvailable,
   paymentOption,
+  currency,
+  onCurrencyChange,
 }: CreditsAmountProps) => {
   const [currencyPrice, setCurrencyPrice] = useState(
     getCurrencyPrice(CURRENCIES.usd),
   );
   const [maxCreditsSelected, setMaxCreditsSelected] = useState(false);
-  const defaultCryptoCurrency = CURRENCIES.uregen;
-  const [currency, setCurrency] = useState<Currency>(
-    paymentOption === PAYMENT_OPTIONS.CRYPTO
-      ? defaultCryptoCurrency
-      : CURRENCIES.usd,
-  );
-
   const form = useFormContext();
 
   // Max credits set
@@ -54,16 +53,16 @@ export const CreditsAmount = ({
     form.setValue(CURRENCY_AMOUNT, newPrice * form.getValues(CREDITS_AMOUNT), {
       shouldDirty: true,
     });
-  }, [defaultCryptoCurrency, form, paymentOption, currency]);
+  }, [form, paymentOption, currency]);
 
   useEffect(() => {
     if (paymentOption === PAYMENT_OPTIONS.CRYPTO) {
-      setCurrency(defaultCryptoCurrency);
+      onCurrencyChange(DEFAULT_CRYPTO_CURRENCY);
     }
     if (paymentOption === PAYMENT_OPTIONS.CARD) {
-      setCurrency(CURRENCIES.usd);
+      onCurrencyChange(CURRENCIES.usd);
     }
-  }, [defaultCryptoCurrency, paymentOption]);
+  }, [onCurrencyChange, paymentOption]);
 
   // Currency amount change
   const handleCurrencyAmountChange = useCallback(
@@ -101,7 +100,6 @@ export const CreditsAmount = ({
       // TO-DO get real prices from API?
       const newPrice = getCurrencyPrice(currency as CryptoCurrencies);
       setCurrencyPrice(newPrice);
-      setCurrency(currency as Currency);
       form.setValue(
         CURRENCY_AMOUNT,
         newPrice * form.getValues(CREDITS_AMOUNT),
@@ -109,8 +107,9 @@ export const CreditsAmount = ({
           shouldDirty: true,
         },
       );
+      onCurrencyChange(currency as Currency);
     },
-    [form],
+    [form, onCurrencyChange],
   );
 
   return (
@@ -127,7 +126,7 @@ export const CreditsAmount = ({
           paymentOption={paymentOption}
           handleCurrencyAmountChange={handleCurrencyAmountChange}
           handleCurrencyChange={handleCurrencyChange}
-          defaultCryptoCurrency={defaultCryptoCurrency}
+          defaultCryptoCurrency={DEFAULT_CRYPTO_CURRENCY}
           {...form}
         />
         <span className="p-10 sm:p-20 text-xl">=</span>

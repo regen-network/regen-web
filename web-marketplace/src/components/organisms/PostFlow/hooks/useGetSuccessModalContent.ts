@@ -70,14 +70,11 @@ export const useGetSuccessModalContent = () => {
         hashValue.push({
           name: truncate(anchorTxHash),
           url: getHashUrl(anchorTxHash),
-          size: 'sm',
-          mobileSize: 'sm',
           label: _(msg`anchor`),
         });
       } else {
         hashValue.push({
           name: _(msg`Anchoring in progress`),
-          size: 'lg',
           className: 'font-normal text-grey-400 italic',
         });
       }
@@ -86,14 +83,11 @@ export const useGetSuccessModalContent = () => {
         hashValue.push({
           name: truncate(attestTxHash),
           url: getHashUrl(attestTxHash),
-          size: 'sm',
-          mobileSize: 'sm',
           label: _(msg`attest`),
         });
       } else if (signingError) {
         hashValue.push({
           name: `${_(msg`Signing failed`)}: ${signingError}}`,
-          size: 'lg',
           className: 'text-error-400',
         });
       }

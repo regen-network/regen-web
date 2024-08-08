@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.4](https://github.com/regen-network/regen-web/compare/v2.6.3...v2.6.4) (2024-08-08)
+
+**Note:** Version bump only for package web-marketplace
+
 ## [2.6.3](https://github.com/regen-network/regen-web/compare/v2.6.2...v2.6.3) (2024-07-29)
 
 ### Bug Fixes

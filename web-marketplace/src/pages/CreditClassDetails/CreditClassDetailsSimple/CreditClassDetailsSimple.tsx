@@ -172,7 +172,7 @@ const CreditClassDetailsSimple: React.FC<
                         <Box component="span" sx={{ fontWeight: 700 }}>
                           Credit class:
                         </Box>
-                        {` ${CREDIT_CLASS_TOOLTIP}`}
+                        {` ${_(CREDIT_CLASS_TOOLTIP)}`}
                       </p>
                     }
                     outlined
@@ -213,7 +213,7 @@ const CreditClassDetailsSimple: React.FC<
             impact={impactCards}
             activities={activityTags}
             ecosystems={ecosystemTags}
-            activitiesLabel={ELIGIBLE_ACTIVITIES}
+            activitiesLabel={_(ELIGIBLE_ACTIVITIES)}
           />
         </Box>
       </EcocreditsSection>
@@ -248,6 +248,7 @@ const CreditClassDetailsSimple: React.FC<
           creditBatches={batchesWithSupply}
           initialPaginationParams={paginationParams}
           onTableChange={setPaginationParams}
+          _={_}
         />
       </div>
     </Box>

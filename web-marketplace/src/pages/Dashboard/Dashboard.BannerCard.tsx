@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
 import BannerCard from 'web-components/src/components/molecules/BannerCard';
@@ -13,6 +15,7 @@ type Props = {
   sanityProfilePageData?: AllProfilePageQuery;
 };
 export const DashboardBannerCard = ({ sanityProfilePageData }: Props) => {
+  const { _ } = useLingui();
   const [profileBannerCard, setProfileBannerCard] = useAtom(
     profileBannerCardAtom,
   );
@@ -29,7 +32,7 @@ export const DashboardBannerCard = ({ sanityProfilePageData }: Props) => {
             description={content.descriptionRaw}
             image={{
               src: getSanityImgSrc(content.image),
-              alt: content.image?.imageAlt || 'profile banner',
+              alt: content.image?.imageAlt || _(msg`profile banner`),
             }}
             buttonLabel={content.buttonLabel as string}
             onClick={() => {

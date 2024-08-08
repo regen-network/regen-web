@@ -1,4 +1,6 @@
 import { useCallback } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { MsgSell } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { useQueryClient } from '@tanstack/react-query';
@@ -44,6 +46,7 @@ const useCreateSellOrderSubmit = ({
   setTxButtonTitle,
   onTxBroadcast,
 }: Props): Return => {
+  const { _ } = useLingui();
   const { track } = useTracker();
   const reactQueryClient = useQueryClient();
   const createSellOrderSubmit = useCallback(
@@ -53,7 +56,7 @@ const useCreateSellOrderSubmit = ({
 
       // convert to udenom
       const priceInMicro = price ? String(denomToMicro(price)) : ''; // TODO: When other currencies, check for micro denom before converting
-      const msg = MsgSell.fromPartial({
+      const msgSell = MsgSell.fromPartial({
         seller: accountAddress,
         orders: [
           {
@@ -66,7 +69,7 @@ const useCreateSellOrderSubmit = ({
       });
 
       const tx = {
-        msgs: [msg],
+        msgs: [msgSell],
         fee: undefined,
         memo: undefined,
       };
@@ -116,7 +119,7 @@ const useCreateSellOrderSubmit = ({
 
         setCardItems([
           {
-            label: 'price per credit',
+            label: _(msg`price per credit`),
             value: {
               name: String(price),
               icon: (
@@ -140,16 +143,16 @@ const useCreateSellOrderSubmit = ({
             },
           },
           {
-            label: 'credit batch id',
+            label: _(msg`credit batch id`),
             value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
           },
           {
-            label: 'amount of credits',
+            label: _(msg`amount of credits`),
             value: { name: getFormattedNumber(amount) },
           },
         ]);
-        setTxModalHeader(CREATE_SELL_ORDER_HEADER);
-        setTxButtonTitle(CREATE_SELL_ORDER_BUTTON);
+        setTxModalHeader(_(CREATE_SELL_ORDER_HEADER));
+        setTxButtonTitle(_(CREATE_SELL_ORDER_BUTTON));
       }
     },
     [
@@ -158,10 +161,11 @@ const useCreateSellOrderSubmit = ({
       onTxBroadcast,
       credits,
       track,
+      reactQueryClient,
       setCardItems,
       setTxModalHeader,
+      _,
       setTxButtonTitle,
-      reactQueryClient,
     ],
   );
 

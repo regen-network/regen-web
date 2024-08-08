@@ -1,15 +1,15 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { NotFoundPage } from 'pages/NotFound/NotFound';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 import { ProjectDenied } from '../../organisms/ProjectDenied/ProjectDenied';
-import { useParams } from 'react-router-dom';
-import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 
 type Props = {
   adminAddr?: string | null;

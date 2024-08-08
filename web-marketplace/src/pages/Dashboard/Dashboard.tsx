@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
@@ -43,6 +45,7 @@ import {
 import { useProfileItems } from './hooks/useProfileItems';
 
 const Dashboard = (): JSX.Element => {
+  const { _ } = useLingui();
   const { wallet, accountByAddr, isConnected } = useWallet();
   const {
     showCreditClasses,
@@ -71,22 +74,25 @@ const Dashboard = (): JSX.Element => {
 
   const tabs: IconTabProps[] = useMemo(
     () => [
-      { hidden: !isConnected, ...PORTFOLIO },
-      { hidden: !showProjects, ...PROJECTS },
+      { hidden: !isConnected, ...PORTFOLIO, label: _(PORTFOLIO.label) },
+      { hidden: !showProjects, ...PROJECTS, label: _(PROJECTS.label) },
       {
         hidden: !showCreditClasses,
         ...CREDIT_CLASSES,
+        label: _(CREDIT_CLASSES.label),
       },
       {
         hidden: !isIssuer,
         ...CREDIT_BATCHES,
+        label: _(CREDIT_BATCHES.label),
       },
       {
         hidden: !isBridgeEnabled || !isConnected,
         ...BRIDGE,
+        label: _(BRIDGE.label),
       },
     ],
-    [isConnected, isIssuer, showCreditClasses, showProjects],
+    [_, isConnected, isIssuer, showCreditClasses, showProjects],
   );
 
   const activeTab = Math.max(
@@ -127,7 +133,7 @@ const Dashboard = (): JSX.Element => {
         <Box sx={{ pt: 15, ...containerStyles, px: { xs: 5, sm: 10 } }}>
           <DashboardBannerCard sanityProfilePageData={sanityProfilePageData} />
           <IconTabs
-            aria-label="dashboard tabs"
+            aria-label={_(msg`dashboard tabs`)}
             tabs={tabs}
             activeTab={activeTab}
             linkComponent={Link}

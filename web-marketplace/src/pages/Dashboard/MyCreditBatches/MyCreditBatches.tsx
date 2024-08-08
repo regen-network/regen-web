@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 
@@ -15,6 +17,7 @@ import { NO_CREDIT_BATCHES_MESSAGE } from './MyCreditBatches.constants';
 import { MyCreditBatchesTable } from './MyCreditBatches.Table';
 
 export const MyCreditBatches = (): JSX.Element => {
+  const { _ } = useLingui();
   const theme = useTheme();
   const { wallet } = useWallet();
   const { batchesWithSupply, setPaginationParams, paginationParams } =
@@ -34,7 +37,7 @@ export const MyCreditBatches = (): JSX.Element => {
       />
       {hasNoBatches && (
         <EmptyState
-          message={NO_CREDIT_BATCHES_MESSAGE}
+          message={_(NO_CREDIT_BATCHES_MESSAGE)}
           icon={<NoEcocreditsIcon sx={{ width: 100, height: 100 }} />}
           sx={{ backgroundColor: 'info.light' }}
         >
@@ -43,7 +46,7 @@ export const MyCreditBatches = (): JSX.Element => {
             component={Link}
             to="/ecocredits/create-batch"
           >
-            create credit batch
+            <Trans>create credit batch</Trans>
           </OutlinedButton>
         </EmptyState>
       )}

@@ -1,3 +1,5 @@
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box, Grid } from '@mui/material';
 
 import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
@@ -28,6 +30,7 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
   classId,
   metadata,
 }: AdditionalInfoProps<T>): JSX.Element | null => {
+  const { _ } = useLingui();
   if (!classId && !metadata) return null;
 
   const sectoralScopes = metadata?.['regen:sectoralScope'];
@@ -54,17 +57,17 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
     >
       {metadata && (
         <Body size="lg" sx={{ pb: 7 }}>
-          {CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_HELPER_TEXT}
+          {_(CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_HELPER_TEXT)}
         </Body>
       )}
       <Grid container spacing={8}>
         <Grid item xs={12} sm={6} sx={{ flexDirection: 'column' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Label size="xs" sx={{ mr: 1 }}>
-              class id
+              <Trans>class id</Trans>
             </Label>
             <InfoTooltipWithIcon
-              title={CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_CLASS_ID_TOOLTIP}
+              title={_(CREDIT_CLASS_DETAILS_ADDITIONAL_INFO_CLASS_ID_TOOLTIP)}
               outlined
             />
           </Box>
@@ -72,18 +75,27 @@ const AdditionalInfo = <T extends CreditClassMetadataLD>({
         </Grid>
         <MetaDetail label="registry" value={sourceRegistry} />
         <MetaDetail
-          label="carbon offset standard"
+          label={_(msg`carbon offset standard`)}
           value={carbonOffsetStandard}
         />
         <ApprovedMethodologiesList
           methodologyList={metadata?.['regen:approvedMethodologies']}
         />
-        <MetaDetail label="project activities" value={projectActivities} />
-        <MetaDetail label="sectoral scopes" value={sectoralScopes} />
-        <MetaDetail label="Tokenization Source" value={tokenizationSource} />
-        <MetaDetail label="ecosystem type" value={ecosystemTypes} />
-        <MetaDetail label="verification method" value={verificationMethod} />
-        <MetaDetail label="measured GHGs" value={measuredGHGs} />
+        <MetaDetail
+          label={_(msg`project activities`)}
+          value={projectActivities}
+        />
+        <MetaDetail label={_(msg`sectoral scopes`)} value={sectoralScopes} />
+        <MetaDetail
+          label={_(msg`Tokenization Source`)}
+          value={tokenizationSource}
+        />
+        <MetaDetail label={_(msg`ecosystem type`)} value={ecosystemTypes} />
+        <MetaDetail
+          label={_(msg`verification method`)}
+          value={verificationMethod}
+        />
+        <MetaDetail label={_(msg`measured GHGs`)} value={measuredGHGs} />
         <BufferPoolAccounts
           bufferPoolAccounts={bufferPoolAccounts?.['schema:itemListElement']}
         />

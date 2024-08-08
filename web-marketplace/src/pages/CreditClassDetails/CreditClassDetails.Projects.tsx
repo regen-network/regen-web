@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import cx from 'classnames';
 
@@ -14,6 +16,7 @@ interface Props {
 }
 
 function ProjectsSection({ classId }: Props): JSX.Element {
+  const { _ } = useLingui();
   const { projectsWithOrderData, loading } = useProjectsWithOrders({
     classId,
     useCommunityProjects: true,
@@ -37,7 +40,7 @@ function ProjectsSection({ classId }: Props): JSX.Element {
           sx={{ pb: 9 }}
         >
           <ProjectCardsSection
-            title="Projects"
+            title={_(msg`Projects`)}
             projects={projectsWithOrderData}
             loading={loading}
             onButtonClick={({ project }) => {

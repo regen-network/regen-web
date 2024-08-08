@@ -1,3 +1,5 @@
+import { msg } from '@lingui/macro';
+
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 
 import { CreditBatches } from 'components/organisms';
@@ -11,10 +13,11 @@ export const getCreditClassDetailsTabs = ({
   creditBatches,
   initialPaginationParams,
   onTableChange,
+  _,
 }: CreditClassDetailsTableTabsProps): IconTabProps[] =>
   [
     {
-      label: 'Credit Issuance',
+      label: _(msg`Credit Issuance`),
       content: (
         <CreditBatches
           creditClassId={onChainCreditClassId}
@@ -27,7 +30,7 @@ export const getCreditClassDetailsTabs = ({
       hidden: !onChainCreditClassId,
     },
     {
-      label: 'Additional Info',
+      label: _(msg`Additional Info`),
       content: (
         <AdditionalInfo
           classId={onChainCreditClassId}

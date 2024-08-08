@@ -1,4 +1,6 @@
-import { Box, useTheme } from '@mui/material';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+import { Box } from '@mui/material';
 import { Field, FieldArray, Form, useFormikContext } from 'formik';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -30,19 +32,18 @@ export const CreditClassForm = (props: {
   id?: string;
   disabledFields?: string[];
 }): JSX.Element => {
-  const { disabledFields = [] } = props;
+  const { _ } = useLingui();
   const { values } = useFormikContext<CreditClassValues>();
-  const theme = useTheme();
 
   const fieldDisabled = (field: string): boolean =>
-    disabledFields.includes(field);
+    props?.disabledFields?.includes(field) ?? false;
 
   return (
     <Form translate="yes" id={props.id}>
       <OnBoardingCard>
         <Field
           component={ControlledTextField}
-          label="Admin"
+          label={_(msg`Admin`)}
           name="admin"
           type="string"
           disabled={fieldDisabled('admin')}
@@ -50,12 +51,12 @@ export const CreditClassForm = (props: {
         <FieldArray name="issuers">
           {({ push, remove }) => (
             <Box sx={{ mt: [6, 4] }}>
-              {values.issuers.map((_, index) => (
+              {values.issuers.map((issuer, index) => (
                 <Field
                   key={index}
                   component={ControlledTextField}
                   defaultStyle={false}
-                  label={index === 0 && 'Issuers'}
+                  label={index === 0 && _(msg`Issuers`)}
                   name={`issuers[${index}]`}
                   type="string"
                   errors={{ 'issuers[0]': 'hmm' }}
@@ -82,33 +83,35 @@ export const CreditClassForm = (props: {
                 }}
                 sx={{ float: 'right', mt: [5.5] }}
               >
-                {'+ add another issuer'}
+                <Trans>+ add another issuer'</Trans>
               </TextButton>
             </Box>
           )}
         </FieldArray>
         <Field
           component={SelectTextField}
-          label="Credit Type"
+          label={_(msg`Credit Type`)}
           name="creditTypeAbbr"
           options={[
             // TODO:
-            { value: '', label: 'Choose a credit type' },
-            { value: 'ct1', label: 'Credit type 1' },
-            { value: 'ct2', label: 'Credit type 2' },
+            { value: '', label: _(msg`Choose a credit type`) },
+            { value: 'ct1', label: _(msg`Credit type 1`) },
+            { value: 'ct2', label: _(msg`Credit type 2`) },
           ]}
         />
         <Field
           component={ControlledTextField}
           multiline
-          label="Metadata"
-          description="Attach arbitrary JSON-LD metadata to the credit batch below. "
+          label={_(msg`Metadata`)}
+          description={_(
+            msg`Attach arbitrary JSON-LD metadata to the credit batch below.`,
+          )}
           name="metadata"
           rows={5}
         />
         <Field
           component={RegenTextField}
-          label="Credit class creation fee"
+          label={_(msg`Credit class creation fee`)}
           name="fee"
           type="string"
           disabled={fieldDisabled('fee')}

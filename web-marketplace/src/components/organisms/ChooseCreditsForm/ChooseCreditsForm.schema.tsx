@@ -16,7 +16,7 @@ export const chooseCreditsFormSchema = z.object({
       invalid_type_error: requiredMessage,
     })
     .positive(positiveNumber),
-  cryptoPurchaseOption: z.string(),
+  retiring: z.boolean(),
   creditVintageOptions: z.array(z.string()),
 });
 

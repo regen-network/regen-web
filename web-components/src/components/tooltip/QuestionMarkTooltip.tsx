@@ -14,6 +14,7 @@ interface Props {
   size?: TextSize;
   placement?: TooltipProps['placement'];
   className?: string;
+}
 
 export default function QuestionMarkTooltip({
   title,

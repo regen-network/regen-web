@@ -8,12 +8,9 @@ import { makeStyles } from 'tss-react/mui';
 
 import { containerPaddingX, containerStyles } from '../../styles/container';
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
-import { PREFINANCE } from '../cards/ProjectCard/ProjectCard.constants';
 import PlayIcon from '../icons/PlayIcon';
-import { PrefinanceIcon } from '../icons/PrefinanceIcon';
 import { Image, OptimizeImageProps } from '../image';
-import { Label } from '../typography';
-import { PrefinanceTag } from './ProjectMedia.PrefinanceTag';
+import { PrefinanceTag } from '../PrefinanceTag/PrefinanceTag';
 import { ProjectAsset } from './ProjectMedia.ProjectAsset';
 
 export interface Media {
@@ -324,7 +321,15 @@ export default function ProjectMedia({
                   {i === 0 && isMedia(a) && imageCredits && (
                     <Box className={classes.imageCredits}>{imageCredits}</Box>
                   )}
-                  {i === 0 && isPrefinanceProject && <PrefinanceTag />}
+                  {i === 0 && isPrefinanceProject && (
+                    <PrefinanceTag
+                      classNames={{
+                        root: 'sm:py-10 sm:top-50',
+                        label: 'sm:text-[11px]',
+                      }}
+                      iconSize={{ width: '24', height: '24' }}
+                    />
+                  )}
                 </Grid>
               ))}
             </Grid>
@@ -413,7 +418,15 @@ export default function ProjectMedia({
               }
             })}
           </Slider>
-          {isPrefinanceProject && <PrefinanceTag />}
+          {isPrefinanceProject && (
+            <PrefinanceTag
+              classNames={{
+                root: 'sm:py-10 sm:top-50',
+                label: 'sm:text-[11px]',
+              }}
+              iconSize={{ width: '24', height: '24' }}
+            />
+          )}
         </div>
       )}
     </div>

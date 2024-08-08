@@ -33,5 +33,17 @@ module.exports = {
         'import/no-anonymous-default-export': 'off',
       },
     },
+    {
+      files: [
+        '*.test.ts',
+        '*.spec.ts',
+        '*.test.tsx',
+        '*.spec.tsx',
+        '*.stories.tsx',
+      ],
+      rules: {
+        'lingui/no-unlocalized-strings': 'off',
+      },
+    },
   ],
 };

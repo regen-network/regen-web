@@ -17,7 +17,6 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
       - [GraphQL Type generation](#graphql-type-generation)
     - [Storybook](#storybook)
     - [Website](#website)
-    - [Deploying the Custom Login form to Auth0](#deploying-the-custom-login-form-to-auth0)
   - [Testing](#testing)
   - [Code style](#code-style)
   - [i18n](#i18n)
@@ -34,7 +33,6 @@ This project uses [bun](https://bun.sh/) with [bun workspaces](https://bun.sh/do
 - `web-marketplace`: Registry React application
 - `web-components`: React components and [material-ui](https://material-ui.com/) custom theme
 - `web-storybook`: [Storybook](https://storybook.js.org/) config
-- `web-auth`: React application used for Auth0 Custom Universal Login
 
 [Lerna](https://github.com/lerna/lerna) is also used to bump packages versions and push new releases.
 
@@ -62,7 +60,6 @@ bun install
 
 Set variables in `.env` files in `web-marketplace/` and `web-storybook/` folders based on provided `.env.example` files.
 
-For `web-auth`, follow these [setup instructions](web-auth/README.md#setup).
 
 ## Development
 
@@ -136,31 +133,29 @@ bun run build-storybook
 bun run build-www
 ```
 
-### Deploying the Custom Login form to Auth0
-
-Please, follow [these instructions](web-auth/README.md#setup) and then:
-
-1. Run `bun run build-auth` command.
-2. Copy the code from `./build/index.html`.
-3. Paste it into the Universal Login HTML form from [Auth dashboard](https://manage.auth0.com/dashboard/us/regen-network-registry/login_page) and save.
-
-This could be automated in the future.
-
 ## Testing
 
-```sh
-bun run test
-```
+#### - Running tests
+We are using [Vitest](https://vitest.dev/) as a test runner.
 
-Launches the test runner in the interactive watch mode.
-[Jest](https://jestjs.io/) is used as test runner.
+Tests can be run in the terminal with the following commands from the project root: 
 
-We're using [StoryShots](https://storybook.js.org/docs/testing/structural-testing/#using-storyshots) for snapshots testing.
-Update web-components snapshots:
+* To run `web-marketplace` tests
+  ```sh
+  bun run test-marketplace
+  ```
 
-```sh
-bun run test-update-snapshot
-```
+* To run `web-components` tests
+  ```sh
+  bun run test-components
+  ```
+In both cases the test runner is launched in the interactive watch mode.
+
+#### - Writing tests
+When writing test in `web-marketplace` remember to import the methods from`'web-marketplace/test/test-utils'`, specially the `render` method, as it is a custom render that wraps components with the necessary providers.
+
+In `web-components`, methods should be imported directly from `'@testing-library/*'`
+
 
 ## Code style
 

@@ -39,7 +39,7 @@ const PostFiles = ({
 
   useEffect(() => {
     async function parseFiles() {
-      files.map(async file => {
+      files?.map(async file => {
         const fileUrl = file.url;
         if (fileUrl) {
           const preview = await parseFile({

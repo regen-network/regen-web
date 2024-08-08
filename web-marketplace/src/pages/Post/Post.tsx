@@ -122,7 +122,7 @@ function Post(): JSX.Element {
                   creatorAccount={creatorAccount}
                   adminAccountId={adminAccountId}
                   creatorIsAdmin={creatorIsAdmin}
-                  createdAt={createdAt}
+                  createdAt={data?.createdAt}
                   privatePost={privatePost}
                   publicPost={publicPost}
                   privateFiles={privateFiles}
@@ -171,7 +171,7 @@ function Post(): JSX.Element {
                   }
                 />
 
-                <PostFooter />
+                <PostFooter prevIri={data?.prevIri} nextIri={data?.nextIri} />
               </>
             )}
         </>

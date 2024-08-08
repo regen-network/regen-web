@@ -1,5 +1,5 @@
 import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
-import { render } from 'web-marketplace/test/test-utils';
+import { render } from 'web-components/test/test-utils';
 
 import { CURRENCIES } from '../DenomIconWithCurrency/DenomIconWithCurrency.constants';
 

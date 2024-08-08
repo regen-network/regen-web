@@ -199,9 +199,15 @@ export const DataStream = ({
               }}
               projectLocation={projectLocation}
               projectId={onChainProjectId || postProjectId}
-              offChainProjectId={postProjectId}
+              offChainProjectId={offChainProjectId}
               projectName={projectName}
               projectSlug={projectSlug}
+              initialValues={{
+                title: '',
+                comment: '',
+                files: [],
+                privacyType: 'public',
+              }}
             />
           )}
         </>

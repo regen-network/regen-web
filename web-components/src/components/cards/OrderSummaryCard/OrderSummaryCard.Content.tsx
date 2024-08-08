@@ -27,7 +27,7 @@ export function OrderSummaryContent({
     <div className="grid grid-cols-[75px_1fr] sm:grid-cols-[90px_1fr] max-w-full w-full pr-15 sm:px-[20px] pb-[30px] items-center sm:max-w-[330px]">
       <Title
         variant="h5"
-        className="col-span-2 text-base font-black font-['Muli'] mt-0 sm:mt-[30px] mb-5 sm:mb-[15px]"
+        className="col-span-2 text-base mt-0 sm:mt-[30px] mb-5 sm:mb-[15px]"
       >
         Order Summary
       </Title>

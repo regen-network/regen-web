@@ -47,7 +47,7 @@ type Params = {
   isAdmin?: boolean;
   children?: ReactNode;
   isSoldOut?: boolean;
-  onClickCreatePost: () => void;
+  onClickCreatePost?: () => void;
 };
 
 export const SellOrdersActionsBar = ({
@@ -88,7 +88,7 @@ export const SellOrdersActionsBar = ({
       >
         {isAdmin ? (
           <>
-            {!loginDisabled && (
+            {!loginDisabled && onClickCreatePost && (
               <OutlinedButton onClick={onClickCreatePost} className="mr-20">
                 {_(CREATE_POST)}
               </OutlinedButton>

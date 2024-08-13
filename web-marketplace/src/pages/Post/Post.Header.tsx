@@ -78,6 +78,13 @@ export const PostHeader = ({
           textSize="sm"
           LinkComponent={Link}
           href={`${projectHref}#data-stream`}
+          sx={{
+            '&:hover': {
+              '& svg': {
+                color: theme => theme.palette.secondary.contrastText,
+              },
+            },
+          }}
         >
           <ArrowDownIcon
             className="h-[24px] w-[24px] text-brand-400"

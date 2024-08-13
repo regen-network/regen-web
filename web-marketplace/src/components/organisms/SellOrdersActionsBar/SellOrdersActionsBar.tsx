@@ -19,12 +19,15 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
 import { Label, Subtitle } from 'web-components/src/components/typography';
 
+import { useWallet } from 'lib/wallet/wallet';
+
 import { EDIT_PROJECT } from 'pages/ProjectEdit/ProjectEdit.constants';
 import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constants';
 
 import {
   BOOK_CALL,
   BUY_DISABLED_TOOLTIP,
+  CREATE_POST,
 } from './SellOrdersActionsBar.constants';
 
 type Params = {
@@ -44,6 +47,7 @@ type Params = {
   isAdmin?: boolean;
   children?: ReactNode;
   isSoldOut?: boolean;
+  onClickCreatePost: () => void;
 };
 
 export const SellOrdersActionsBar = ({
@@ -63,6 +67,7 @@ export const SellOrdersActionsBar = ({
   isAdmin,
   children,
   isSoldOut,
+  onClickCreatePost,
 }: Params): JSX.Element => {
   const { _ } = useLingui();
   const location = useLocation();
@@ -70,6 +75,7 @@ export const SellOrdersActionsBar = ({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
+  const { loginDisabled } = useWallet();
 
   return (
     <StickyBar>
@@ -81,18 +87,25 @@ export const SellOrdersActionsBar = ({
         }}
       >
         {isAdmin ? (
-          <OutlinedButton
-            onClick={() =>
-              navigate(
-                `/project-pages/${
-                  onChainProjectId ?? offChainProjectId
-                }/edit/basic-info`,
-              )
-            }
-          >
-            <EditIcon className="mr-10" />
-            {_(EDIT_PROJECT)}
-          </OutlinedButton>
+          <>
+            {!loginDisabled && (
+              <OutlinedButton onClick={onClickCreatePost} className="mr-20">
+                {_(CREATE_POST)}
+              </OutlinedButton>
+            )}
+            <ContainedButton
+              onClick={() =>
+                navigate(
+                  `/project-pages/${
+                    onChainProjectId ?? offChainProjectId
+                  }/edit/basic-info`,
+                )
+              }
+            >
+              <EditIcon className="mr-10" sx={{ color: '#fff' }} />
+              {_(EDIT_PROJECT)}
+            </ContainedButton>
+          </>
         ) : (
           <>
             {((!isPrefinanceProject && !isBuyButtonDisabled) || !isSoldOut) &&

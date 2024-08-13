@@ -6,3 +6,4 @@ export const AVG_PRICE_TOOLTIP_PROJECT =
 export const AVG_PRICE_TOOLTIP_CREDIT_CLASS =
   'This is the median average price for all open sell orders in this credit class.';
 export const BOOK_CALL = 'book a call';
+export const CREATE_POST = msg`+ create post`;

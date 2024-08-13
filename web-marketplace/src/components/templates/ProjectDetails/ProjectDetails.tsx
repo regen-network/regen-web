@@ -12,7 +12,9 @@ import { PREFINANCE } from 'web-components/src/components/cards/ProjectCard/Proj
 import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
 import SEO from 'web-components/src/components/seo';
-import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
+import ProjectMedia, {
+  Media,
+} from 'web-components/src/components/sliders/ProjectMedia';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import { Project } from 'generated/graphql';
@@ -50,6 +52,7 @@ import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constan
 import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Link } from 'components/atoms';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
+import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
@@ -75,8 +78,10 @@ import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   findSanityCreditClass,
   formatOtcCardData,
+  getImageNameFromUrl,
   getIsOnChainId,
   getIsUuid,
+  getMimeTypeFromExtension as getMimeTypeFromFileExtension,
   getProjectGalleryPhotos,
   parseMedia,
   parseOffChainProject,
@@ -97,6 +102,8 @@ function ProjectDetails(): JSX.Element {
   const navigate = useNavigate();
   const { activeAccount } = useAuth();
   const { _ } = useLingui();
+
+  const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -382,6 +389,11 @@ function ProjectDetails(): JSX.Element {
     (!!activeAccount?.id &&
       offChainProject?.adminAccountId === activeAccount?.id);
 
+  const postMediaUrl =
+    projectMetadata?.['regen:previewPhoto']?.['schema:url'] ||
+    (mediaData?.assets[0] as Media)?.src ||
+    '';
+
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
@@ -451,6 +463,9 @@ function ProjectDetails(): JSX.Element {
           }
           isPrefinanceProject={isPrefinanceProject}
           isSoldOut={isSoldOut}
+          onClickCreatePost={() => {
+            setIsCreatePostModalOpen(onChainProjectId || offChainProject?.id);
+          }}
         >
           {!isAdmin &&
             isPrefinanceProject &&
@@ -537,10 +552,10 @@ function ProjectDetails(): JSX.Element {
         adminAccountId={offChainProject?.adminAccountId}
         offChainProjectId={offChainProject?.id}
         adminDescription={sanityProjectPage?.dataStreamAdminDescriptionRaw}
-        onChainProjectId={onChainProjectId}
-        projectName={projectMetadata?.['schema:name']}
-        projectSlug={slug}
         projectLocation={projectMetadata?.['schema:location']}
+        onClickCreatePost={() => {
+          setIsCreatePostModalOpen(onChainProjectId || offChainProject?.id);
+        }}
       />
 
       <ProjectDetailsTableTabs
@@ -592,6 +607,38 @@ function ProjectDetails(): JSX.Element {
         setIsFlowStarted={setIsSellFlowStarted}
         credits={creditsWithProjectName}
       />
+
+      {isCreatePostModalOpen && projectMetadata?.['schema:location'] && (
+        <PostFlow
+          onModalClose={() => {
+            setIsCreatePostModalOpen(false);
+          }}
+          projectLocation={projectMetadata?.['schema:location']}
+          projectId={onChainProjectId || offChainProject?.id}
+          offChainProjectId={offChainProject?.id}
+          projectName={projectMetadata?.['schema:name']}
+          projectSlug={slug}
+          initialValues={{
+            title: '',
+            comment: '',
+            files: projectMetadata?.['schema:location']
+              ? [
+                  {
+                    iri: '',
+                    url: postMediaUrl,
+                    name: getImageNameFromUrl(postMediaUrl) || '',
+                    description: '',
+                    credit: '',
+                    locationType: 'none',
+                    location: projectMetadata?.['schema:location'],
+                    mimeType: getMimeTypeFromFileExtension(postMediaUrl) || '',
+                  },
+                ]
+              : [],
+            privacyType: 'public',
+          }}
+        />
+      )}
     </Box>
   );
 }

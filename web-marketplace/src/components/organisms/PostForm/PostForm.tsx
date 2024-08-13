@@ -42,6 +42,7 @@ import {
   POST_PRIVACY_DESCRIPTION,
 } from './PostForm.constants';
 import { postFormSchema, PostFormSchemaType } from './PostForm.schema';
+import { Warning } from './PostForm.Warning';
 
 export interface Props {
   initialValues?: PostFormSchemaType;
@@ -411,6 +412,12 @@ export const PostForm = ({
         onCancel={onClose}
         type="submit"
       />
+      <div className="flex flex-col items-end mt-20">
+        <Warning
+          text="NOTE: As posts are anchored to the blockchain, they are not editable
+        once published"
+        />
+      </div>
     </Form>
   );
 };

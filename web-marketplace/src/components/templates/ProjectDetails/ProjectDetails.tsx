@@ -389,11 +389,6 @@ function ProjectDetails(): JSX.Element {
     (!!activeAccount?.id &&
       offChainProject?.adminAccountId === activeAccount?.id);
 
-  const postMediaUrl =
-    projectMetadata?.['regen:previewPhoto']?.['schema:url'] ||
-    (mediaData?.assets[0] as Media)?.src ||
-    '';
-
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
@@ -618,25 +613,6 @@ function ProjectDetails(): JSX.Element {
           offChainProjectId={offChainProject?.id}
           projectName={projectMetadata?.['schema:name']}
           projectSlug={slug}
-          initialValues={{
-            title: '',
-            comment: '',
-            files: projectMetadata?.['schema:location']
-              ? [
-                  {
-                    iri: '',
-                    url: postMediaUrl,
-                    name: getImageNameFromUrl(postMediaUrl) || '',
-                    description: '',
-                    credit: '',
-                    locationType: 'none',
-                    location: projectMetadata?.['schema:location'],
-                    mimeType: getMimeTypeFromFileExtension(postMediaUrl) || '',
-                  },
-                ]
-              : [],
-            privacyType: 'public',
-          }}
         />
       )}
     </Box>

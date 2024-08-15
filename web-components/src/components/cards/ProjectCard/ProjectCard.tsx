@@ -63,6 +63,7 @@ export interface ProjectCardProps extends MediaCardProps {
   offChain?: boolean;
   asAdmin?: boolean;
   adminPrompt?: SanityBlockContent;
+  isKeplrMobileWeb?: boolean;
   tooltipText?: string;
 }
 
@@ -96,6 +97,7 @@ export function ProjectCard({
   offChain,
   asAdmin,
   adminPrompt,
+  isKeplrMobileWeb,
   tooltipText,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
@@ -287,7 +289,7 @@ export function ProjectCard({
                       {containedButton.text}
                     </ContainedButton>
                   )}
-                  {(onButtonClick || isPrefinanceProject || offChain) &&
+                  {(onButtonClick || isPrefinanceProject || offChain) && !isKeplrMobileWeb && (
                     (isButtonDisabled && tooltipText ? (
                       <InfoTooltip arrow title={tooltipText} placement="top">
                         <div className="inline-flex w-full">

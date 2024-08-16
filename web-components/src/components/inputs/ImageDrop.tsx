@@ -31,7 +31,7 @@ export interface ImageDropProps extends FieldProps {
   fixedCrop: Partial<Crop>;
   hideDragText?: boolean;
   onDelete?: (fileName: string) => Promise<void>;
-  onUpload?: (imageFile: File) => Promise<{ url: string }>;
+  onUpload?: (imageFile: File) => Promise<{ url: string } | undefined>;
 }
 
 const useStyles = makeStyles()(theme => ({

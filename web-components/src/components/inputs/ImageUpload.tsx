@@ -21,7 +21,9 @@ function ImageUpload({
 }: ImageUploadProps): JSX.Element {
   const projectPath = `projects/${projectId}`;
 
-  const handleUpload = async (imageFile: File): Promise<string> => {
+  const handleUpload = async (
+    imageFile: File,
+  ): Promise<{ url: string } | undefined> => {
     return uploadFile(imageFile, projectPath, apiServerUrl);
   };
 

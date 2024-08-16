@@ -110,7 +110,6 @@ export async function getImageSrc({
       fileType ?? 'image/png',
     );
     const result = await onUpload(imageFile, value);
-    console.log(result);
     url = result?.url;
   }
   return url;

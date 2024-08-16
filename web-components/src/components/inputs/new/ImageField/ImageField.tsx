@@ -79,7 +79,6 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
         fileType,
         value,
       });
-      console.log(result);
 
       if (result) {
         setInitialImage('');

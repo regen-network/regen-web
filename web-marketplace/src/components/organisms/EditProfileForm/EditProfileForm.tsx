@@ -45,9 +45,8 @@ export interface EditProfileFormProps {
   isDirtyRef?: MutableRefObject<boolean>;
   onSubmit: (values: EditProfileFormSchemaType) => Promise<void>;
   onSuccess?: () => void;
-  onUpload?: (imageFile: File) => Promise<string>;
+  onUpload?: (imageFile: File) => Promise<{ url: string }>;
 }
-
 const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
   ({
     children,

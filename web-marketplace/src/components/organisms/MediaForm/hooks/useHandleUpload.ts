@@ -37,12 +37,12 @@ export const useHandleUpload = ({
         }
         if (projectId) {
           setOffChainProjectId(projectId);
-          const imageUrl = await uploadFile(
+          const uploaded = await uploadFile(
             file,
             `projects/${projectId}`,
             apiServerUrl,
           );
-          return imageUrl;
+          return uploaded;
         } else {
           throw new Error('Cannot upload image without a project id');
         }

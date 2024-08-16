@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { deleteImage, uploadImage } from '../../utils/s3';
+import { deleteImage, uploadFile } from '../../utils/s3';
 import { ImageDrop, ImageDropProps } from './ImageDrop';
 import ImageField from './ImageField';
 
@@ -21,8 +21,10 @@ function ImageUpload({
 }: ImageUploadProps): JSX.Element {
   const projectPath = `projects/${projectId}`;
 
-  const handleUpload = async (imageFile: File): Promise<string> => {
-    return uploadImage(imageFile, projectPath, apiServerUrl);
+  const handleUpload = async (
+    imageFile: File,
+  ): Promise<{ url: string } | undefined> => {
+    return uploadFile(imageFile, projectPath, apiServerUrl);
   };
 
   const handleDelete = async (fileName: string): Promise<void> => {

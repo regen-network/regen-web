@@ -26,7 +26,7 @@ interface ProfileModalProps {
   initialValues?: ProfileModalSchemaType;
   onClose: () => void;
   onSubmit: (profile: ProfileModalSchemaType) => void;
-  onUpload?: (imageFile: File) => Promise<string | undefined>;
+  onUpload?: (imageFile: File) => Promise<{ url: string } | undefined>;
 }
 
 function ProfileModal({

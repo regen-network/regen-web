@@ -46,7 +46,7 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
     lastInMultiUpload: boolean,
   ) => void;
   onDelete?: (fileName: string, doSetValue?: boolean) => Promise<void>;
-  onUpload?: (imageFile: File) => Promise<string | undefined>;
+  onUpload?: (imageFile: File) => Promise<{ url: string } | undefined>;
   accept?: string;
   multi?: boolean;
   moveUp?: () => void;

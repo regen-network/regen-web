@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useSetAtom } from 'jotai';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
-import { uploadImage } from 'web-components/src/utils/s3';
+import { uploadFile } from 'web-components/src/utils/s3';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
@@ -23,7 +23,7 @@ export const useHandleUpload = ({
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   const handleUpload = useCallback(
-    async (imageFile: File): Promise<string | undefined> => {
+    async (file: File): Promise<{ url: string } | undefined> => {
       let projectId = offChainProjectId;
       try {
         if (!offChainProjectId) {
@@ -37,12 +37,12 @@ export const useHandleUpload = ({
         }
         if (projectId) {
           setOffChainProjectId(projectId);
-          const imageUrl = await uploadImage(
-            imageFile,
+          const uploaded = await uploadFile(
+            file,
             `projects/${projectId}`,
             apiServerUrl,
           );
-          return imageUrl;
+          return uploaded;
         } else {
           throw new Error('Cannot upload image without a project id');
         }

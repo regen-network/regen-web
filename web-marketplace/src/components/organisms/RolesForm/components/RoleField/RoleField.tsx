@@ -49,7 +49,7 @@ interface Props {
     profile: ProfileModalSchemaType,
     initialValue?: ProfileModalSchemaType | null,
   ) => Promise<{ id: string; creatorId: string } | undefined>;
-  onUpload?: (imageFile: File) => Promise<string | undefined>;
+  onUpload?: (imageFile: File) => Promise<{ url: string } | undefined>;
 }
 
 export const RoleField = forwardRef<HTMLInputElement, Props>(

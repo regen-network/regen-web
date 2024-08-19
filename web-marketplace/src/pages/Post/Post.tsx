@@ -66,6 +66,7 @@ function Post(): JSX.Element {
   const publicPost = data?.privacy === 'public';
 
   const hasToken =
+    (privatePost && !!data?.filesUrls) ||
     (privateFiles && !!data?.filesUrls) ||
     (privateLocations && data?.contents?.files?.some(file => file.location));
 

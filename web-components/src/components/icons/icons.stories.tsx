@@ -134,6 +134,7 @@ import WalletErrorIcon from './WalletErrorIcon';
 import { WalletIcon } from './WalletIcon';
 import WhitepaperIcon from './WhitepaperIcon';
 import ZoomIcon from './ZoomIcon';
+import WarningIcon from './WarningIcon';
 
 export default {
   title: 'Icons',
@@ -380,5 +381,6 @@ export const allIcons = (): JSX.Element => (
     />
     <LabeledIcon icon={<YoutubeIcon color="red" />} label="YoutubeIcon" />
     <LabeledIcon icon={<ZoomIcon />} label="ZoomIcon" />
+    <LabeledIcon icon={<WarningIcon />} label="WarningIcon" />
   </Grid>
 );

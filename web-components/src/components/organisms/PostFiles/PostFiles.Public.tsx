@@ -85,6 +85,16 @@ const PostFilesPublic = ({
     })),
   };
 
+  const onLoad = (): void => {
+    if (locations.features.length > 1) {
+      const [minLng, minLat, maxLng, maxLat] = bbox(locations);
+      mapRef.current?.fitBounds([
+        [minLng, minLat],
+        [maxLng, maxLat],
+      ]);
+    }
+  };
+
   return (
     <div className={cn(styles.map, 'h-[600px] sm:h-[550px]')}>
       <Suspense fallback={<CircularProgress color="secondary" />}>
@@ -109,6 +119,7 @@ const PostFilesPublic = ({
           mapboxAccessToken={mapboxToken}
           mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
           attributionControl={false}
+          onLoad={onLoad}
           scrollZoom={false}
         >
           {locations &&

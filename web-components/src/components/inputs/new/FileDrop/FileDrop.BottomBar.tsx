@@ -52,7 +52,7 @@ export const FileDropBottomBar = ({
             <span className="mr-1 font-light">{name}</span>
           ) : null}
           {credit && (
-            <span className="font-light">{`${PHOTO_CREDIT}: ${credit}`}</span>
+            <span className="font-light pl-5">{`${PHOTO_CREDIT}: ${credit}`}</span>
           )}
           {location && (
             <InfoTooltip

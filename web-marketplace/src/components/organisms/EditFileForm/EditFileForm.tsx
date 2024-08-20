@@ -106,13 +106,15 @@ export const EditFileForm = ({
           sx={{ mb: { xs: 0, sm: 0 } }}
         />
       </TextAreaField>
-      <TextField
-        type="text"
-        label="Photo credit"
-        className="mt-40 sm:mt-50"
-        optional
-        {...register(`files.${currentIndex}.credit`)}
-      />
+      {isImage(mimeType) && (
+        <TextField
+          type="text"
+          label="Photo credit"
+          className="mt-40 sm:mt-50"
+          optional
+          {...register(`files.${currentIndex}.credit`)}
+        />
+      )}
       <div className="flex flex-col mb-40 mt-40 sm:mb-50 sm:mt-50">
         <RadioGroup label="Location" description={FILE_LOCATION_DESCRIPTION}>
           {(location || projectLocation) && (

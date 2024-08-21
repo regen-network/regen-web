@@ -64,7 +64,7 @@ const Form = <T extends FieldValues>({
           {children}
         </Box>
       </form>
-      {/* {IS_DEV && <DevTool control={form.control} />} */}
+      {IS_DEV && <DevTool control={form.control} />}
     </FormProvider>
   );
 };

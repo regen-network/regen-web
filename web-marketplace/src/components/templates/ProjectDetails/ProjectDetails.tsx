@@ -78,10 +78,8 @@ import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   findSanityCreditClass,
   formatOtcCardData,
-  getImageNameFromUrl,
   getIsOnChainId,
   getIsUuid,
-  getMimeTypeFromExtension as getMimeTypeFromFileExtension,
   getProjectGalleryPhotos,
   parseMedia,
   parseOffChainProject,
@@ -389,6 +387,11 @@ function ProjectDetails(): JSX.Element {
     (!!activeAccount?.id &&
       offChainProject?.adminAccountId === activeAccount?.id);
 
+  const isProjectPublished = onChainProjectId
+    ? !!onChainProjectId
+    : offchainProjectByIdData?.data?.projectById?.published ||
+      projectBySlug?.data.projectBySlug?.published;
+
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
@@ -461,6 +464,9 @@ function ProjectDetails(): JSX.Element {
           onClickCreatePost={() => {
             setIsCreatePostModalOpen(onChainProjectId || offChainProject?.id);
           }}
+          isCreatePostButtonDisabled={
+            !projectMetadata?.['schema:location'] || !isProjectPublished
+          }
         >
           {!isAdmin &&
             isPrefinanceProject &&

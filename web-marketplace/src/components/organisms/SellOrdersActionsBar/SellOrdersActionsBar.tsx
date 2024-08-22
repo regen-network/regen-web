@@ -28,6 +28,7 @@ import {
   BOOK_CALL,
   BUY_DISABLED_TOOLTIP,
   CREATE_POST,
+  CREATE_POST_DISABLED_TOOLTIP,
 } from './SellOrdersActionsBar.constants';
 
 type Params = {
@@ -48,6 +49,7 @@ type Params = {
   children?: ReactNode;
   isSoldOut?: boolean;
   onClickCreatePost?: () => void;
+  isCreatePostButtonDisabled?: boolean;
 };
 
 export const SellOrdersActionsBar = ({
@@ -68,6 +70,7 @@ export const SellOrdersActionsBar = ({
   children,
   isSoldOut,
   onClickCreatePost,
+  isCreatePostButtonDisabled,
 }: Params): JSX.Element => {
   const { _ } = useLingui();
   const location = useLocation();
@@ -75,7 +78,17 @@ export const SellOrdersActionsBar = ({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
-  const { loginDisabled } = useWallet();
+  const { isKeplrMobileWeb } = useWallet();
+
+  const createPostButton = (
+    <OutlinedButton
+      onClick={onClickCreatePost}
+      className="mr-20"
+      disabled={isCreatePostButtonDisabled}
+    >
+      {_(CREATE_POST)}
+    </OutlinedButton>
+  );
 
   return (
     <StickyBar>
@@ -88,11 +101,19 @@ export const SellOrdersActionsBar = ({
       >
         {isAdmin ? (
           <>
-            {!loginDisabled && onClickCreatePost && (
-              <OutlinedButton onClick={onClickCreatePost} className="mr-20">
-                {_(CREATE_POST)}
-              </OutlinedButton>
-            )}
+            {!isKeplrMobileWeb &&
+              onClickCreatePost &&
+              (isCreatePostButtonDisabled ? (
+                <InfoTooltip
+                  arrow
+                  title={CREATE_POST_DISABLED_TOOLTIP}
+                  placement="top"
+                >
+                  <div>{createPostButton}</div>
+                </InfoTooltip>
+              ) : (
+                createPostButton
+              ))}
             <ContainedButton
               onClick={() =>
                 navigate(

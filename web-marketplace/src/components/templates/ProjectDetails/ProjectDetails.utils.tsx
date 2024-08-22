@@ -293,30 +293,3 @@ export const formatTimelineDates = (item: PrefinanceTimelineItem) =>
   `${formatDate(item.date, 'MMM YYYY')}${
     item.endDate ? ` - ${formatDate(item.endDate, 'MMM YYYY')}` : ''
   }`;
-
-export function getImageNameFromUrl(url: string | undefined): string | null {
-  if (!url) return null;
-  return url.substring(url.lastIndexOf('/') + 1);
-}
-
-export function getMimeTypeFromExtension(
-  url: string | undefined,
-): string | null {
-  if (!url) return null;
-
-  const mimeTypes: { [key: string]: string } = {
-    jpg: 'image/jpeg',
-    jpeg: 'image/jpeg',
-    png: 'image/png',
-    gif: 'image/gif',
-    webp: 'image/webp',
-    svg: 'image/svg+xml',
-    bmp: 'image/bmp',
-    tiff: 'image/tiff',
-  };
-  const extension = url.split('.').pop()?.toLowerCase();
-  if (extension) {
-    return mimeTypes[extension];
-  }
-  return 'application/octet-stream';
-}

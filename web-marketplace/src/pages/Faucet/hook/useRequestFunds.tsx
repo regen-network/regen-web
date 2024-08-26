@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
 
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 export const useRequestFunds = () => {
+  const { _ } = useLingui();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const setBannerTextAtom = useSetAtom(bannerTextAtom);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,14 +24,14 @@ export const useRequestFunds = () => {
       });
 
       if (!response.ok) {
-        setErrorBannerTextAtom('Failed to request funds');
+        setErrorBannerTextAtom(_(msg`Failed to request funds`));
       }
 
       await response.json();
 
-      setBannerTextAtom('Funds successfully requested!');
+      setBannerTextAtom(_(msg`Funds successfully requested!`));
     } catch (error) {
-      setErrorBannerTextAtom('Failed to request funds');
+      setErrorBannerTextAtom(_(msg`Failed to request funds`));
       console.error(error);
     } finally {
       setIsLoading(false);

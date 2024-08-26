@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import LazyLoad from 'react-lazyload';
 import { Box, Grid, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';

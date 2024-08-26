@@ -6,7 +6,6 @@ import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
-import { AllProjectsQuery } from '../../../generated/graphql';
 import {
   NormalizedSellOrder,
   ProjectInfoWithMetadata,
@@ -100,6 +99,7 @@ export const normalizeSellOrders = ({
             ? undefined
             : projectsInfosByHandleMap.get(projectId)?.classId ?? null,
         },
+        // eslint-disable-next-line lingui/no-unlocalized-strings
         status: 'Partially filled',
         askAmount,
         askUsdAmount,

@@ -1,3 +1,4 @@
+import { msg } from '@lingui/macro';
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 
 import { Item } from 'web-components/src/components/modal/ConfirmModal';
@@ -7,6 +8,7 @@ import {
   FetchSimplePriceResponse,
 } from 'lib/coingecko';
 import { microToDenom } from 'lib/denom.utils';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
@@ -27,21 +29,28 @@ export const sortBySellOrderId = (
 
 /* getCancelCardItems */
 
+type GetCancelCardItemsParams = {
+  sellOrder: NormalizedSellOrder;
+  _: TranslatorType;
+};
+
 export const getCancelCardItems = ({
-  id,
-  amountAvailable,
-  batchDenom,
-}: NormalizedSellOrder): Item[] => [
-  { label: 'sell order id:', value: { name: String(id) } },
-  { label: 'quantity:', value: { name: String(amountAvailable) } },
-  {
-    label: 'batch denom:',
-    value: {
-      name: 'C01-20190101-20201010-003',
-      url: `/credit-batches/${batchDenom}`,
+  sellOrder,
+  _,
+}: GetCancelCardItemsParams): Item[] => {
+  const { amountAvailable, batchDenom, id } = sellOrder;
+  return [
+    { label: _(msg`sell order id:`), value: { name: String(id) } },
+    { label: 'quantity:', value: { name: String(amountAvailable) } },
+    {
+      label: _(msg`batch denom:`),
+      value: {
+        name: 'C01-20190101-20201010-003',
+        url: `/credit-batches/${batchDenom}`,
+      },
     },
-  },
-];
+  ];
+};
 
 /* checkIsBuyOrderInvalid */
 

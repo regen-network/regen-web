@@ -96,6 +96,7 @@ function Post(): JSX.Element {
     }),
   );
   const creatorAccount = creatorAccountData?.accountById;
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   const createdAt = formatDate(data?.createdAt, 'MMMM D, YYYY | h:mm A');
   const creatorIsAdmin = creatorAccount?.id === adminAccountId;
 

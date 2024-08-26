@@ -3,6 +3,8 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { OrderBy } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { EventAttest } from '@regen-network/api/lib/generated/regen/data/v1/events';
 import { MsgAttest } from '@regen-network/api/lib/generated/regen/data/v1/tx';
@@ -48,6 +50,7 @@ export const useAttestEvents = ({
   createdAt,
   onlyAttestEvents,
 }: UseAttestEventsParams) => {
+  const { _ } = useLingui();
   const { txClient } = useLedger();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -118,13 +121,13 @@ export const useAttestEvents = ({
   if (creatorAccount && !onlyAttestEvents) {
     events.push({
       icon: '/svg/post-created.svg',
-      label: `Created ${creatorTx ? 'and signed' : ''} by`,
+      label: creatorTx ? _(msg`Created and signed by`) : _(msg`Created by`),
       user: {
         name: creatorAccount.name || DEFAULT_NAME,
         link: `/profiles/${creatorAccount.id}`,
         type: creatorAccount.type,
         image: creatorAccount.image || getDefaultAvatar(creatorAccount),
-        tag: creatorIsAdmin ? ADMIN : undefined,
+        tag: creatorIsAdmin ? _(ADMIN) : undefined,
       },
       timestamp: createdAt,
       txhash: creatorTx?.txhash,
@@ -150,6 +153,7 @@ export const useAttestEvents = ({
           label: SIGNED_BY,
           timestamp: formatDate(
             txResponses[i].timestamp,
+            // eslint-disable-next-line lingui/no-unlocalized-strings
             'MMMM D, YYYY | h:mm A',
           ),
           txhash: txResponses[i].txhash,
@@ -160,7 +164,7 @@ export const useAttestEvents = ({
               : undefined,
             type: attestorAccount?.type ?? 'USER',
             image: attestorAccount?.image || getDefaultAvatar(attestorAccount),
-            tag: attestorIsRegistry ? REGISTRY : undefined,
+            tag: attestorIsRegistry ? _(REGISTRY) : undefined,
           },
         });
       }

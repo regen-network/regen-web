@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
@@ -11,6 +12,7 @@ type Props = {
   nextIri?: string;
 };
 export const PostFooter = ({ prevIri, nextIri }: Props) => {
+  const { _ } = useLingui();
   const navigate = useNavigate();
   return (
     <Section
@@ -24,7 +26,7 @@ export const PostFooter = ({ prevIri, nextIri }: Props) => {
           onClick={() => navigate(`/post/${prevIri}`)}
         >
           <ArrowDownIcon className="w-[24px] h-[24px] mr-10" direction="prev" />
-          {PREV}
+          {_(PREV)}
         </OutlinedButton>
       )}
       {nextIri && (
@@ -32,7 +34,7 @@ export const PostFooter = ({ prevIri, nextIri }: Props) => {
           className="text-sm"
           onClick={() => navigate(`/post/${nextIri}`)}
         >
-          {NEXT}
+          {_(NEXT)}
           <ArrowDownIcon className="w-[24px] h-[24px] ml-10" direction="next" />
         </OutlinedButton>
       )}

@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import Timeline from '@mui/lab/Timeline';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
@@ -37,6 +38,7 @@ export const PostTimeline = ({
   creatorIsAdmin,
   registryAddr,
 }: Props) => {
+  const { _ } = useLingui();
   const { iri } = useParams();
   const { events } = useAttestEvents({
     iri,
@@ -48,7 +50,7 @@ export const PostTimeline = ({
 
   return (
     <Section className="max-w-[750px] m-auto sm:p-0 py-0">
-      <Title variant="h6">{TIMELINE}</Title>
+      <Title variant="h6">{_(TIMELINE)}</Title>
       <Timeline
         sx={{
           padding: 0,
@@ -92,7 +94,7 @@ export const PostTimeline = ({
                 </Body>
                 {event.txhash && (
                   <Body size="sm">
-                    {SEE_BLOCKCHAIN_RECORD}:{' '}
+                    {_(SEE_BLOCKCHAIN_RECORD)}:{' '}
                     <LinkWithArrow
                       href={getHashUrl(event.txhash)}
                       label={truncate(event.txhash)}

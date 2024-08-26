@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 
 import Banner from 'web-components/src/components/banner';
 import { PostAdminButton } from 'web-components/src/components/buttons/PostAdminButton/PostAdminButton';
@@ -58,6 +59,7 @@ export const PostHeader = ({
   privateFiles,
   offChainProjectId,
 }: Props) => {
+  const { _ } = useLingui();
   const { iri } = useParams();
   const [shareSuccessBanner, setShareSuccessBanner] = useState(false);
   const sharePrivateLink = useSharePrivateLink({ iri });
@@ -90,7 +92,7 @@ export const PostHeader = ({
             className="h-[24px] w-[24px] text-brand-400"
             direction="prev"
           />
-          {ALL_POSTS}
+          {_(ALL_POSTS)}
         </TextButton>
 
         {isAdmin ? (
@@ -98,7 +100,7 @@ export const PostHeader = ({
             {privatePost && (
               <Tag
                 className="h-[26px] bg-error-300 mr-10 sm:mr-[18px]"
-                label={POST_IS_PRIVATE}
+                label={_(POST_IS_PRIVATE)}
                 icon={<LockIcon className="w-[18px] h-[18px]" />}
               />
             )}
@@ -106,7 +108,7 @@ export const PostHeader = ({
               className="text-grey-500 hover:text-grey-500 mr-10"
               textSize="xs"
             >
-              {ACTIONS}
+              {_(ACTIONS)}
             </TextButton>
             <PostAdminButton
               publicPost={publicPost}
@@ -125,7 +127,7 @@ export const PostHeader = ({
               textSize="xs"
               onClick={() => {}}
             >
-              {SHARE}
+              {_(SHARE)}
             </TextButton>
             <ShareIcon
               className="cursor-pointer"
@@ -157,7 +159,7 @@ export const PostHeader = ({
             type: creatorAccount.type,
             image: creatorAccount.image || getDefaultAvatar(creatorAccount),
             timestamp: createdAt,
-            tag: creatorIsAdmin ? ADMIN : undefined,
+            tag: creatorIsAdmin ? _(ADMIN) : undefined,
           }}
         />
       )}

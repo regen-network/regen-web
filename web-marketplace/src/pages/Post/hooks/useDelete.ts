@@ -59,7 +59,7 @@ export const useDelete = ({ iri, offChainProjectId, projectHref }: Params) => {
               // 404 would be shown before navigating to project data stream section.
               refetchType: 'none',
             });
-            setBannerText(POST_IS_DELETED);
+            setBannerText(_(POST_IS_DELETED));
             if (projectHref) navigate(`${projectHref}#data-stream`);
           },
         });

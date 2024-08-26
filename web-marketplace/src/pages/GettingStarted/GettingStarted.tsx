@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { makeStyles } from 'tss-react/mui';
 
 import { Step, StepCard } from 'web-components/src/components/cards/StepCard';
@@ -13,6 +15,8 @@ import TrustDocumentIcon from 'web-components/src/components/icons/TrustDocument
 import TrustIcon from 'web-components/src/components/icons/TrustIcon';
 import OnBoardingSection from 'web-components/src/components/section/OnBoardingSection';
 import { Theme } from 'web-components/src/theme/muiTheme';
+
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 const useStyles = makeStyles()((theme: Theme) => ({
   content: {
@@ -61,119 +65,192 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 // TODO: move copy to mocks.json and query.  See issue #538
-const questionItems: QuestionItem[] = [
+const getQuestionItems = (_: TranslatorType): QuestionItem[] => [
   {
-    question: 'How do I implement the land management practices?',
-    answer:
-      'you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do.',
+    question: _(msg`How do I implement the land management practices?`),
+    answer: _(
+      msg`you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do.`,
+    ),
   },
   {
-    question: 'Lorem ipsum dolor sit apsicing sit amut?',
-    answer:
-      'you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do.',
+    question: _(msg`Lorem ipsum dolor sit apsicing sit amut?`),
+    answer: _(
+      msg`you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do.`,
+    ),
   },
   {
-    question: 'How do i so and so?',
-    answer:
-      'you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do.',
+    question: _(msg`How do i so and so?`),
+    answer: _(
+      msg`you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do.`,
+    ),
   },
   {
-    question: 'How do i so and so again?',
-    answer:
-      'you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do.',
+    question: _(msg`How do i so and so again?`),
+    answer: _(
+      msg`you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do.`,
+    ),
   },
 ];
 
-const steps: Step[] = [
+const getSteps = (_: TranslatorType): Step[] => [
   {
     stepNumber: 1,
-    title: 'Fill out a project plan',
-    tagName: 'immediate',
+    title: _(msg`Fill out a project plan`),
+    tagName: _(msg`immediate`),
     isActive: true,
-    description:
-      'This project plan includes all the details about your monitoring, management practices, and more.',
+    description: _(
+      msg`This project plan includes all the details about your monitoring, management practices, and more.`,
+    ),
     faqs: [],
   },
   {
     stepNumber: 2,
-    title: 'Review and Submit',
-    tagName: 'immediate',
+    title: _(msg`Review and Submit`),
+    tagName: _(msg`immediate`),
     isActive: true,
-    description:
-      'Review your project plan to make sure all entries are correct.',
+    description: _(
+      msg`Review your project plan to make sure all entries are correct.`,
+    ),
   },
   {
     stepNumber: 3,
-    title: 'Sign a contract and project officially starts',
-    tagName: 'immediate',
+    title: _(msg`Sign a contract and project officially starts`),
+    tagName: _(msg`immediate`),
     isActive: true,
-    description:
-      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
-    faqs: questionItems,
+    description: (
+      <Trans>
+        <span>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut.{' '}
+          <a
+            href="https://regen.network"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read full documentation»
+          </a>
+        </span>
+        '
+      </Trans>
+    ),
+    faqs: getQuestionItems(_),
   },
   {
     stepNumber: 4,
-    title: 'Create a project page',
-    tagName: 'immediate',
+    title: _(msg`Create a project page`),
+    tagName: _(msg`immediate`),
     isActive: false,
-    description:
-      'This marketing page help advertise your project to potential buyers.',
+    description: _(
+      msg`This marketing page help advertise your project to potential buyers.`,
+    ),
   },
   {
     stepNumber: 5,
-    title:
-      'Hire a monitor to establish a baseline measurement and additional monitoring rounds (if applicable)',
-    tagName: 'within 60 days',
+    title: _(
+      msg`Hire a monitor to establish a baseline measurement and additional monitoring rounds (if applicable)`,
+    ),
+    tagName: _(msg`within 60 days`),
     isActive: false,
-    description:
-      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
-    faqs: questionItems,
+    description: (
+      <span>
+        <Trans>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut.{' '}
+          <a
+            href="https://regen.network"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read full documentation»
+          </a>
+        </Trans>
+      </span>
+    ),
+    faqs: getQuestionItems(_),
   },
   {
     stepNumber: 6,
-    title: 'Implement land management',
-    tagName: 'within 3 months',
+    title: _(msg`Implement land management`),
+    tagName: _(msg`within 3 months`),
     isActive: false,
-    description:
-      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
-    faqs: questionItems,
+    description: (
+      <span>
+        <Trans>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut.{' '}
+          <a
+            href="https://regen.network"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read full documentation»
+          </a>
+        </Trans>
+      </span>
+    ),
+    faqs: getQuestionItems(_),
     videoSrc: 'https://www.youtube.com/embed/Eh19aQ1dd7c',
   },
   {
     stepNumber: 7,
-    title: 'Hire a verifier as needed given the verification schedule',
-    tagName: 'within 6 months',
+    title: _(msg`Hire a verifier as needed given the verification schedule`),
+    tagName: _(msg`within 6 months`),
     isActive: false,
-    description:
-      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
-    faqs: questionItems,
+    description: (
+      <span>
+        <Trans>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut.{' '}
+          <a
+            href="https://regen.network"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read full documentation»
+          </a>
+        </Trans>
+      </span>
+    ),
+    faqs: getQuestionItems(_),
   },
   {
     stepNumber: 8,
-    title: 'Hire a broker or sell through Regen Network',
+    title: _(msg`Hire a broker or sell through Regen Network`),
     tagName: 'variable',
-    description:
-      '<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <a href="https://regen.network" target="_blank" rel="noopener noreferrer">Read full documentation»</a></span>',
-    faqs: questionItems,
+    description: (
+      <span>
+        <Trans>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut.{' '}
+          <a
+            href="https://regen.network"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read full documentation»
+          </a>
+        </Trans>
+      </span>
+    ),
+    faqs: getQuestionItems(_),
   },
 ];
 
 const GettingStarted: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { classes } = useStyles();
   const [stepsMap, setStepsMap] = useState<any>({});
-
-  // TODO: maybe just organize JSON this way (indexed by stepNumber)?
-  const indexStepsByStepNumber = (): any => {
-    return Object.assign({}, ...steps.map(x => ({ [x.stepNumber]: x })));
-  };
+  const { _ } = useLingui();
 
   useEffect(() => {
-    const indexedSteps = indexStepsByStepNumber();
+    const indexedSteps = Object.assign(
+      {},
+      ...getSteps(_).map(x => ({ [x.stepNumber]: x })),
+    );
     setStepsMap(indexedSteps);
-  }, []);
+  }, [_]);
 
   return (
-    <OnBoardingSection formContainer title="Getting Started">
+    <OnBoardingSection formContainer title={_(msg`Getting Started`)}>
       <div className={classes.content}>
         <StepCard
           step={stepsMap['1']}

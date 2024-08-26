@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import {
   IncludesGrasslandsForm,
@@ -8,6 +10,7 @@ import {
 import { OnboardingFormTemplate } from '../../components/templates';
 
 const Eligibility: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { _ } = useLingui();
   const navigate = useNavigate();
 
   async function saveAndExit(): Promise<void> {
@@ -30,7 +33,7 @@ const Eligibility: React.FC<React.PropsWithChildren<unknown>> = () => {
   }
 
   return (
-    <OnboardingFormTemplate activeStep={0} title="Eligibility">
+    <OnboardingFormTemplate activeStep={0} title={_(msg`Eligibility`)}>
       <IncludesGrasslandsForm submit={submitIncludesGrasslands} />
     </OnboardingFormTemplate>
   );

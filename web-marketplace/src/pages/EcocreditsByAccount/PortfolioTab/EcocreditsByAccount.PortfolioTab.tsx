@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useFetchBaskets } from 'pages/Dashboard/MyEcocredits/hooks/useFetchBaskets';
@@ -6,7 +7,6 @@ import { useFetchRetirements } from 'pages/Dashboard/MyEcocredits/hooks/useFetch
 import { Portfolio } from 'components/organisms';
 
 import { useProfileData } from '../hooks/useProfileData';
-import { useEffect } from 'react';
 
 export const PortfolioTab = (): JSX.Element => {
   const { address, account, isLoading } = useProfileData();

@@ -129,7 +129,7 @@ export const LocationPicker = ({
         </div>
         {/* We simply absolutely position the location pin at the center,
           without using a react-map-gl Marker, so the map moves around the pin */}
-        <div className="absolute top-[50%] left-[50%]">
+        <div className="absolute top-[50%] left-[50%] -ml-[18.5px] -mt-50">
           <GreenPinIcon />
         </div>
       </Map>

@@ -21,6 +21,7 @@ module.exports = {
           'margin',
           'padding',
           'backgroundImage',
+          'border',
           'borderTop',
           'borderBottom',
           'rel',

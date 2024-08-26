@@ -70,7 +70,7 @@ export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
                     className={disabled ? 'text-grey-400' : 'text-grey-700'}
                     size="sm"
                   >
-                    {description}
+                    &nbsp;{description}
                   </Body>
                 )}
               </>

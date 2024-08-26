@@ -3,6 +3,7 @@ import OrganizationIcon from 'web-components/src/components/icons/OrganizationIc
 import UserIcon from 'web-components/src/components/icons/UserIcon';
 
 import { AccountType } from 'generated/graphql';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import {
   DEFAULT_NAME,
@@ -13,15 +14,17 @@ import {
 
 import { EditProfileFormSchemaType } from './EditProfileForm.schema';
 
-export const editProfileFormInitialValues: EditProfileFormSchemaType = {
+export const getEditProfileFormInitialValues = (
+  _: TranslatorType,
+): EditProfileFormSchemaType => ({
   profileType: DEFAULT_PROFILE_TYPE,
-  name: DEFAULT_NAME,
+  name: _(DEFAULT_NAME),
   profileImage: DEFAULT_PROFILE_USER_AVATAR,
   backgroundImage: DEFAULT_PROFILE_BG,
   description: '',
   twitterLink: '',
   websiteLink: '',
-};
+});
 
 export const radioCardItems: RadioCardItem[] = [
   {

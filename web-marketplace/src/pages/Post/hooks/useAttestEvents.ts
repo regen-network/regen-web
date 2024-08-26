@@ -123,7 +123,7 @@ export const useAttestEvents = ({
       icon: '/svg/post-created.svg',
       label: creatorTx ? _(msg`Created and signed by`) : _(msg`Created by`),
       user: {
-        name: creatorAccount.name || DEFAULT_NAME,
+        name: creatorAccount.name || _(DEFAULT_NAME),
         link: `/profiles/${creatorAccount.id}`,
         type: creatorAccount.type,
         image: creatorAccount.image || getDefaultAvatar(creatorAccount),
@@ -158,7 +158,7 @@ export const useAttestEvents = ({
           ),
           txhash: txResponses[i].txhash,
           user: {
-            name: attestorAccount?.name || DEFAULT_NAME,
+            name: attestorAccount?.name || _(DEFAULT_NAME),
             link: attestorAccount?.id
               ? `/profiles/${attestorAccount?.id}`
               : undefined,

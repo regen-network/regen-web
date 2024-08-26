@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import Modal, { RegenModalProps } from 'web-components/src/components/modal';
@@ -38,6 +40,7 @@ export const SelectAccountModal = ({
   merge,
   accounts,
 }: Props) => {
+  const { _ } = useLingui();
   const [selectedAccountId, setSelectedAccountId] = useState<
     MergeAccount | undefined
   >();
@@ -59,12 +62,12 @@ export const SelectAccountModal = ({
           >
             <UserAvatar
               size="small"
-              alt="default avatar"
+              alt={_(msg`default avatar`)}
               src={account.image || getDefaultAvatar(account)}
             />
             <div className="ml-15">
               <Body size="lg" className="font-bold text-grey-600">
-                {account.name || DEFAULT_NAME}
+                {account.name || _(DEFAULT_NAME)}
               </Body>
               <Body size="sm" className="text-grey-400">
                 {account.email || truncate(account.addr)}

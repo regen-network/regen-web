@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import WithLoader from 'components/atoms/WithLoader';
@@ -15,6 +16,7 @@ import { useRolesSubmit } from './hooks/useRolesSubmit';
 import { getProjectStakeholderInitialValues } from './Roles.utils';
 
 const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { _ } = useLingui();
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { wallet, loaded } = useWallet();
@@ -59,15 +61,16 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
       // In edit mode, use existing on chain project admin
       // In creation mode, use active account wallet address
       admin: (isEdit ? onChainProject?.admin : activeAccount?.addr) || '',
-      projectDeveloper: getProjectStakeholderInitialValues(projectDeveloper),
-      verifier: getProjectStakeholderInitialValues(verifier),
+      projectDeveloper: getProjectStakeholderInitialValues(_, projectDeveloper),
+      verifier: getProjectStakeholderInitialValues(_, verifier),
     }),
     [
       isEdit,
       onChainProject?.admin,
+      activeAccount?.addr,
+      _,
       projectDeveloper,
       verifier,
-      activeAccount?.addr,
     ],
   );
 

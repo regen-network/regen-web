@@ -154,7 +154,7 @@ export const PostHeader = ({
         <UserInfo
           fontFamily={defaultFontFamily}
           user={{
-            name: creatorAccount.name || DEFAULT_NAME,
+            name: creatorAccount.name || _(DEFAULT_NAME),
             link: `/profiles/${creatorAccount.id}`,
             type: creatorAccount.type,
             image: creatorAccount.image || getDefaultAvatar(creatorAccount),

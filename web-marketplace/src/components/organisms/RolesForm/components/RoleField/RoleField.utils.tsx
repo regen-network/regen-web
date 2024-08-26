@@ -3,6 +3,7 @@ import { isValidElement } from 'react';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { AccountFieldsFragment, AccountType, Maybe } from 'generated/graphql';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
@@ -24,12 +25,13 @@ export const group = (
     : ALL_PROFILES;
 
 export const getAccounts = (
+  _: TranslatorType,
   accounts?: Maybe<AccountFieldsFragment | undefined>[],
 ) =>
   accounts?.map(account => ({
     creatorId: account?.creatorId,
     id: account?.id as string,
-    name: account?.name || DEFAULT_NAME,
+    name: account?.name || _(DEFAULT_NAME),
     profileType: account?.type as AccountType,
     profileImage: account?.image || getDefaultAvatar(account),
     description: account?.description || undefined,
@@ -61,7 +63,7 @@ export const getIsOptionEqualToValue = (
 ) => isProfile(option) && isProfile(value) && option.id === value.id;
 
 export const getOptionLabel = (option: OptionType) =>
-  isProfile(option) ? option.name || DEFAULT_NAME : '';
+  isProfile(option) ? option.name || 'Unnamed' : '';
 
 export const groupOptions = (
   options: ProfileModalSchemaType[],

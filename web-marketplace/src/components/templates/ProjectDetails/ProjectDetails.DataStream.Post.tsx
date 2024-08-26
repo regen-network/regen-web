@@ -182,7 +182,7 @@ export const DataStreamPost = ({
               }
               publicPost={post.privacy === 'public'}
               author={{
-                name: creatorAccount?.name || DEFAULT_NAME,
+                name: creatorAccount?.name || _(DEFAULT_NAME),
                 type: creatorAccount?.type ?? 'USER',
                 image:
                   creatorAccount?.image || getDefaultAvatar(creatorAccount),

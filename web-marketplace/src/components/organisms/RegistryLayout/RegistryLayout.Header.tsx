@@ -66,7 +66,7 @@ const RegistryLayoutHeader: React.FC = () => {
         profile: activeAccount
           ? {
               id: activeAccount.id,
-              name: activeAccount.name ? activeAccount.name : DEFAULT_NAME,
+              name: activeAccount.name ? activeAccount.name : _(DEFAULT_NAME),
               profileImage: activeAccount.image
                 ? activeAccount.image
                 : getDefaultAvatar(activeAccount),

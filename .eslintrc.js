@@ -23,6 +23,7 @@ module.exports = {
           'backgroundImage',
           'border',
           'borderTop',
+          'borderLeft',
           'borderBottom',
           'rel',
         ],

@@ -11,7 +11,7 @@ import {
   PostFile,
 } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 
-import { FILE_NAMES, HASH, PROJECT } from '../PostFlow.constants';
+import { BLOCKCHAIN_RECORD, FILE_NAMES, PROJECT } from '../PostFlow.constants';
 
 type GetSuccessModalContentParams = {
   createdPostData?: Post | null;
@@ -70,7 +70,7 @@ export const useGetSuccessModalContent = () => {
         hashValue.push({
           name: truncate(anchorTxHash),
           url: getHashUrl(anchorTxHash),
-          label: _(msg`anchor`),
+          label: _(msg`create post`),
         });
       } else {
         hashValue.push({
@@ -83,7 +83,7 @@ export const useGetSuccessModalContent = () => {
         hashValue.push({
           name: truncate(attestTxHash),
           url: getHashUrl(attestTxHash),
-          label: _(msg`attest`),
+          label: _(msg`signature`),
         });
       } else if (signingError) {
         hashValue.push({
@@ -94,7 +94,7 @@ export const useGetSuccessModalContent = () => {
 
       if (hashValue.length > 0)
         cardItems.push({
-          label: HASH,
+          label: BLOCKCHAIN_RECORD,
           value: hashValue,
         });
 

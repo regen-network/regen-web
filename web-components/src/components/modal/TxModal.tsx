@@ -170,7 +170,7 @@ const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
           ))}
           {txHash && (
             <CardItem
-              label="hash"
+              label="blockchain record"
               value={{ name: truncate(txHash), url: txHashUrl }}
               linkComponent={linkComponent}
             />

@@ -12,9 +12,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
-import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import {
-  errorModalAtom,
   processingModalAtom,
   txSuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
@@ -26,6 +24,7 @@ import { useWallet } from 'lib/wallet/wallet';
 import { useMsgClient } from 'hooks';
 
 import {
+  CREATE_DATA_POST,
   POST_CREATED,
   POST_CREATED_SIGNING_FAILED,
   VIEW_POST,
@@ -66,8 +65,6 @@ export const useSign = ({
 
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
-  const setErrorCodeAtom = useSetAtom(errorCodeAtom);
-  const setErrorModalAtom = useSetAtom(errorModalAtom);
 
   const { signAndBroadcast } = useMsgClient();
   const reactQueryClient = useQueryClient();
@@ -145,7 +142,7 @@ export const useSign = ({
               atom.open = true;
               atom.cardItems = cardItems;
               atom.title = _(msg`${POST_CREATED}`);
-              atom.cardTitle = _(msg`Attest`);
+              atom.cardTitle = _(msg`${CREATE_DATA_POST}`);
               atom.buttonTitle = _(msg`${VIEW_POST}`);
               atom.buttonLink = buttonLink;
               atom.txHash = undefined;
@@ -156,14 +153,13 @@ export const useSign = ({
     },
     [
       _,
+      getSuccessModalContent,
       offChainProjectId,
       projectId,
       projectName,
       projectSlug,
       reactQueryClient,
       refetch,
-      setErrorCodeAtom,
-      setErrorModalAtom,
       setProcessingModalAtom,
       setTxSuccessfulModalAtom,
       signAndBroadcast,

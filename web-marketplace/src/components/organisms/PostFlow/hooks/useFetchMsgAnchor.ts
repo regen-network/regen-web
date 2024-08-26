@@ -16,7 +16,11 @@ import { messageActionEquals } from 'lib/ecocredit/constants';
 import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 
-import { POST_CREATED, VIEW_POST } from '../PostFlow.constants';
+import {
+  CREATE_DATA_POST,
+  POST_CREATED,
+  VIEW_POST,
+} from '../PostFlow.constants';
 import { timer } from '../PostFlow.utils';
 import { useGetSuccessModalContent } from './useGetSuccessModalContent';
 
@@ -90,6 +94,7 @@ export const useFetchMsgAnchor = ({
         atom.open = true;
         atom.cardItems = cardItems;
         atom.title = _(msg`${POST_CREATED}`);
+        atom.cardTitle = _(msg`${CREATE_DATA_POST}`);
         atom.buttonTitle = _(msg`${VIEW_POST}`);
         atom.buttonLink = buttonLink;
       });

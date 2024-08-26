@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import { useProjectEditContext } from 'pages/ProjectEdit';
@@ -15,6 +17,7 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { isEdit, onChainProject, projectEditSubmit, isLoading } =
     useProjectEditContext();
   const { navigateNext } = useNavigateNext({ step: 'media', projectId });
+  const { _ } = useLingui();
 
   const { metadata, metadataSubmit, offChainProject, loading } =
     useProjectWithMetadata({
@@ -42,7 +45,7 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <ProjectFormTemplate
       isEdit={isEdit}
-      title="Description"
+      title={_(msg`Description`)}
       offChainProject={offChainProject}
       onChainProject={onChainProject}
       loading={loading}

@@ -5,12 +5,15 @@ import {
 } from '@apollo/client';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import { OrderBy } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { EventAttest } from '@regen-network/api/lib/generated/regen/data/v1/events';
-import { MsgAttest } from '@regen-network/api/lib/generated/regen/data/v1/tx';
+import {
+  MsgAnchor,
+  MsgAttest,
+} from '@regen-network/api/lib/generated/regen/data/v1/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
-import { SIGNED_BY } from 'web-components/src/components/cards/PostCard/PostCard.constants';
 import { User } from 'web-components/src/components/user/UserInfo';
 import { formatDate } from 'web-components/src/utils/format';
 
@@ -55,7 +58,18 @@ export const useAttestEvents = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  const { data: txsEventData } = useQuery(
+  const { data: anchorTxsEventData } = useQuery(
+    getGetTxsEventQuery({
+      client: txClient,
+      enabled: !!txClient && !onlyAttestEvents,
+      request: {
+        events: [`${messageActionEquals}'/${MsgAnchor.$type}'`],
+        orderBy: OrderBy.ORDER_BY_DESC,
+      },
+    }),
+  );
+
+  const { data: attestTxsEventData } = useQuery(
     getGetTxsEventQuery({
       client: txClient,
       enabled: !!txClient,
@@ -66,7 +80,8 @@ export const useAttestEvents = ({
     }),
   );
 
-  let txResponses:
+  let anchorTx: TxResponse | undefined;
+  let attestTxResponses:
     | {
         timestamp: string;
         txhash: string;
@@ -74,7 +89,11 @@ export const useAttestEvents = ({
       }[]
     | undefined;
   if (iri) {
-    txResponses = txsEventData?.txResponses
+    anchorTx = anchorTxsEventData?.txResponses?.filter(txRes =>
+      txRes.rawLog.includes(iri),
+    )?.[0];
+
+    attestTxResponses = attestTxsEventData?.txResponses
       ?.filter(txRes => txRes.rawLog.includes(iri))
       ?.map(txRes => {
         const events = txRes.logs[0].events.filter(event => {
@@ -97,7 +116,7 @@ export const useAttestEvents = ({
 
   const attestorsAccountsResults = useQueries({
     queries:
-      txResponses?.map(txRes =>
+      attestTxResponses?.map(txRes =>
         getAccountByAddrQuery({
           addr: txRes.attestor,
           client: graphqlClient,
@@ -114,14 +133,14 @@ export const useAttestEvents = ({
 
   const events: Array<Event> = [];
 
-  // Adding the creation (optionnally signed) event
-  const creatorTx = txResponses?.find(
+  // Adding the creation event
+  const creatorTx = attestTxResponses?.find(
     txRes => txRes.attestor === creatorAccount?.addr,
   );
   if (creatorAccount && !onlyAttestEvents) {
     events.push({
       icon: '/svg/post-created.svg',
-      label: creatorTx ? _(msg`Created and signed by`) : _(msg`Created by`),
+      label: _(msg`Created by`),
       user: {
         name: creatorAccount.name || _(DEFAULT_NAME),
         link: `/profiles/${creatorAccount.id}`,
@@ -129,45 +148,45 @@ export const useAttestEvents = ({
         image: creatorAccount.image || getDefaultAvatar(creatorAccount),
         tag: creatorIsAdmin ? _(ADMIN) : undefined,
       },
-      timestamp: createdAt,
-      txhash: creatorTx?.txhash,
+      timestamp:
+        formatDate(
+          anchorTx?.timestamp || creatorTx?.timestamp,
+          // eslint-disable-next-line lingui/no-unlocalized-strings
+          'MMMM D, YYYY | h:mm A',
+        ) || createdAt,
+      txhash: anchorTx?.txhash || creatorTx?.txhash,
     });
   }
 
   // Adding attest events
-  if (txResponses) {
-    for (let i = txResponses.length - 1; i >= 0; i--) {
-      if (
-        !creatorAccount?.addr ||
-        txResponses[i].attestor !== creatorAccount?.addr
-      ) {
-        const attestorAccount = attestorsAccounts?.find(
-          acc => acc?.addr === txResponses?.[i].attestor,
-        );
-        const attestorIsRegistry =
-          !!registryAddr &&
-          !!attestorAccount?.addr &&
-          attestorAccount?.addr === registryAddr;
-        events.unshift({
-          icon: '/svg/post-signed.svg',
-          label: SIGNED_BY,
-          timestamp: formatDate(
-            txResponses[i].timestamp,
-            // eslint-disable-next-line lingui/no-unlocalized-strings
-            'MMMM D, YYYY | h:mm A',
-          ),
-          txhash: txResponses[i].txhash,
-          user: {
-            name: attestorAccount?.name || _(DEFAULT_NAME),
-            link: attestorAccount?.id
-              ? `/profiles/${attestorAccount?.id}`
-              : undefined,
-            type: attestorAccount?.type ?? 'USER',
-            image: attestorAccount?.image || getDefaultAvatar(attestorAccount),
-            tag: attestorIsRegistry ? _(REGISTRY) : undefined,
-          },
-        });
-      }
+  if (attestTxResponses) {
+    for (let i = attestTxResponses.length - 1; i >= 0; i--) {
+      const attestorAccount = attestorsAccounts?.find(
+        acc => acc?.addr === attestTxResponses?.[i].attestor,
+      );
+      const attestorIsRegistry =
+        !!registryAddr &&
+        !!attestorAccount?.addr &&
+        attestorAccount?.addr === registryAddr;
+      events.unshift({
+        icon: '/svg/post-signed.svg',
+        label: _(msg`Signed by`),
+        timestamp: formatDate(
+          attestTxResponses[i].timestamp,
+          // eslint-disable-next-line lingui/no-unlocalized-strings
+          'MMMM D, YYYY | h:mm A',
+        ),
+        txhash: attestTxResponses[i].txhash,
+        user: {
+          name: attestorAccount?.name || _(DEFAULT_NAME),
+          link: attestorAccount?.id
+            ? `/profiles/${attestorAccount?.id}`
+            : undefined,
+          type: attestorAccount?.type ?? 'USER',
+          image: attestorAccount?.image || getDefaultAvatar(attestorAccount),
+          tag: attestorIsRegistry ? _(REGISTRY) : undefined,
+        },
+      });
     }
   }
   return { events };

@@ -8,8 +8,12 @@ import { QueryObserverOptions } from '@tanstack/react-query';
 
 import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
 
+export type GetTxsEventQueryResponse = Pick<
+  GetTxsEventResponse,
+  'txs' | 'txResponses'
+>;
 export type ReactQueryGetTxsEventResponse =
-  QueryObserverOptions<GetTxsEventResponse | null>;
+  QueryObserverOptions<GetTxsEventQueryResponse | null>;
 
 export type ReactQueryGetTxsEventProps = {
   request: DeepPartial<GetTxsEventRequest>;

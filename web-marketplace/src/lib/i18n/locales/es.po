@@ -329,11 +329,7 @@ msgstr ""
 msgid "Create Sell Order"
 msgstr ""
 
-#: src/pages/Post/hooks/useAttestEvents.ts:124
-msgid "Created and signed by"
-msgstr ""
-
-#: src/pages/Post/hooks/useAttestEvents.ts:124
+#: src/pages/Post/hooks/useAttestEvents.ts:143
 msgid "Created by"
 msgstr ""
 
@@ -1108,6 +1104,10 @@ msgstr ""
 
 #: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:86
 msgid "signature"
+msgstr ""
+
+#: src/pages/Post/hooks/useAttestEvents.ts:173
+msgid "Signed by"
 msgstr ""
 
 #: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:90

@@ -391,8 +391,11 @@ function ProjectDetails(): JSX.Element {
     (!!activeAccount?.addr && onChainProject?.admin === activeAccount?.addr) ||
     (!!activeAccount?.id &&
       offChainProject?.adminAccountId === activeAccount?.id) ||
-    !!(wallet?.address && wallet?.address === onChainProject?.admin) ||
-    !!(wallet?.address && wallet?.address === activeAccount?.addr);
+    !!(
+      loginDisabled &&
+      wallet?.address &&
+      wallet?.address === onChainProject?.admin
+    );
 
   const isProjectPublished = onChainProjectId
     ? !!onChainProjectId

@@ -36,10 +36,24 @@ export const TextOrIconFilePreview = ({
   const [childWidth, setChildWidth] = useState('100%');
 
   useEffect(() => {
-    if (parentRef.current) {
-      const parentWidth = parentRef.current.offsetWidth;
-      setChildWidth(`${parentWidth}px`);
+    const parent = parentRef.current;
+    const measureWidth = () => {
+      if (parent) {
+        const parentWidth = parent.offsetWidth;
+        setChildWidth(`${parentWidth}px`);
+      }
+    };
+
+    const observer = new ResizeObserver(measureWidth);
+    if (parent) {
+      observer.observe(parent);
     }
+
+    return () => {
+      if (parent) {
+        observer.unobserve(parent);
+      }
+    };
   }, []);
 
   return (

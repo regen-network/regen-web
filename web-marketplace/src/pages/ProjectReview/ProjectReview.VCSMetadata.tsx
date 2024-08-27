@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { ItemDisplay } from 'web-components/src/components/cards/ReviewCard/ReviewCard.ItemDisplay';
 import { formatDate } from 'web-components/src/utils/format';
@@ -14,15 +16,16 @@ interface Props {
 const VCSMetadata: React.FC<React.PropsWithChildren<Props>> = ({
   metadata,
 }) => {
+  const { _ } = useLingui();
   return (
     <>
-      <ItemDisplay name="Offset generation method">
+      <ItemDisplay name={_(msg`Offset generation method`)}>
         {metadata?.['regen:offsetGenerationMethod']}
       </ItemDisplay>
-      <ItemDisplay name="Project activity">
+      <ItemDisplay name={_(msg`Project activity`)}>
         {metadata?.['regen:projectActivity']?.['schema:name']}
       </ItemDisplay>
-      <ItemDisplay name="Project activity url">
+      <ItemDisplay name={_(msg`Project activity url`)}>
         <Link
           target="_blank"
           href={metadata?.['regen:projectActivity']?.['schema:url'] || ''}
@@ -30,15 +33,15 @@ const VCSMetadata: React.FC<React.PropsWithChildren<Props>> = ({
           {metadata?.['regen:projectActivity']?.['schema:url']}
         </Link>
       </ItemDisplay>
-      <ItemDisplay name="VCS project ID">
+      <ItemDisplay name={_(msg`VCS project ID`)}>
         {metadata?.['regen:vcsProjectId']}
       </ItemDisplay>
-      <ItemDisplay name="VCS project page url">
+      <ItemDisplay name={_(msg`VCS project page url`)}>
         <Link target="_blank" href={metadata?.['regen:vcsProjectPage'] || ''}>
           {metadata?.['regen:vcsProjectPage']}
         </Link>
       </ItemDisplay>
-      <ItemDisplay name="Project start and end date">{`${formatDate(
+      <ItemDisplay name={_(msg`Project start and end date`)}>{`${formatDate(
         metadata?.['regen:projectStartDate'],
         undefined,
         true,
@@ -47,10 +50,10 @@ const VCSMetadata: React.FC<React.PropsWithChildren<Props>> = ({
         undefined,
         true,
       )}`}</ItemDisplay>
-      <ItemDisplay name="VCS methodology name">
+      <ItemDisplay name={_(msg`VCS methodology name`)}>
         {metadata?.['regen:vcsMethodology']?.['schema:name']}
       </ItemDisplay>
-      <ItemDisplay name="VCS methodology url">
+      <ItemDisplay name={_(msg`VCS methodology url`)}>
         <Link
           target="_blank"
           href={metadata?.['regen:vcsMethodology']?.['schema:url'] || ''}

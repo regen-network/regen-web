@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
+import { CREATE_POST_DISABLED_TOOLTIP } from 'web-marketplace/src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
 import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
+
+import InfoTooltip from 'src/components/tooltip/InfoTooltip';
 
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
@@ -134,6 +137,41 @@ export function ProjectCard({
     purchaseInfo?.vintageMetadata?.[
       'https://schema.regen.network#additionalCertifications'
     ]?.['@list'];
+
+  const createPostButton = (
+    <OutlinedButton
+      onClick={event => {
+        event.stopPropagation();
+        if (asAdmin) {
+          onButtonClick && onButtonClick();
+        } else if (isSoldOut) {
+          onClick && onClick();
+        } else if (isPrefinanceProject) {
+          window.open(projectPrefinancing?.stripePaymentLink, '_newtab');
+        } else if (offChain) {
+          onClick && onClick();
+        } else {
+          track &&
+            track<Buy1Event>('buy1', {
+              url: pathname ?? '',
+              cardType: 'project',
+              buttonLocation: 'projectCard',
+              projectName: name,
+              projectId: id,
+              creditClassId,
+            });
+          onButtonClick && onButtonClick();
+        }
+      }}
+      size="small"
+      startIcon={buttonStartIcon}
+      disabled={isButtonDisabled}
+      sx={{ width: '100%' }}
+      className={buttonClassName}
+    >
+      {buttonText}
+    </OutlinedButton>
+  );
 
   return (
     <MediaCard
@@ -284,43 +322,20 @@ export function ProjectCard({
                       {containedButton.text}
                     </ContainedButton>
                   )}
-                  {(onButtonClick || isPrefinanceProject || offChain) && (
-                    <OutlinedButton
-                      onClick={event => {
-                        event.stopPropagation();
-                        if (asAdmin) {
-                          onButtonClick && onButtonClick();
-                        } else if (isSoldOut) {
-                          onClick && onClick();
-                        } else if (isPrefinanceProject) {
-                          window.open(
-                            projectPrefinancing?.stripePaymentLink,
-                            '_newtab',
-                          );
-                        } else if (offChain) {
-                          onClick && onClick();
-                        } else {
-                          track &&
-                            track<Buy1Event>('buy1', {
-                              url: pathname ?? '',
-                              cardType: 'project',
-                              buttonLocation: 'projectCard',
-                              projectName: name,
-                              projectId: id,
-                              creditClassId,
-                            });
-                          onButtonClick && onButtonClick();
-                        }
-                      }}
-                      size="small"
-                      startIcon={buttonStartIcon}
-                      disabled={isButtonDisabled}
-                      sx={{ width: '100%' }}
-                      className={buttonClassName}
-                    >
-                      {buttonText}
-                    </OutlinedButton>
-                  )}
+                  {(onButtonClick || isPrefinanceProject || offChain) &&
+                    (isButtonDisabled ? (
+                      <InfoTooltip
+                        arrow
+                        title={CREATE_POST_DISABLED_TOOLTIP}
+                        placement="top"
+                      >
+                        <div className="inline-flex w-full">
+                          {createPostButton}
+                        </div>
+                      </InfoTooltip>
+                    ) : (
+                      createPostButton
+                    ))}
                 </div>
               </>
             </div>

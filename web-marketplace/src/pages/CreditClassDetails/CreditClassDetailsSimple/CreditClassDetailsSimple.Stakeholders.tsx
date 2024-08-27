@@ -1,3 +1,6 @@
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+
 import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { Stakeholders } from 'components/organisms/Stakeholders/Stakeholders';
@@ -13,35 +16,43 @@ export const CreditClassDetailsStakeholders = ({
   issuers,
   program,
 }: Props) => {
+  const { _ } = useLingui();
+
   const stakeholders = [
     {
       accounts: program,
-      title: 'program',
+      title: _(msg`program`),
       tooltip: (
         <>
-          A <b>program</b> involves the eligibility rules, monitoring and
-          certification, and registration systems for credit trading and
-          ownership tracking.
+          <Trans>
+            A <b>program</b> involves the eligibility rules, monitoring and
+            certification, and registration systems for credit trading and
+            ownership tracking.
+          </Trans>
         </>
       ),
     },
     {
       accounts: admin,
-      title: 'admin',
+      title: _(msg`admin`),
       tooltip: (
         <>
-          <b>Credit class admin:</b> the entity who can update a given credit
-          class.
+          <Trans>
+            <b>Credit class admin:</b> the entity who can update a given credit
+            class.
+          </Trans>
         </>
       ),
     },
     {
       accounts: issuers,
-      title: 'issuers',
+      title: _(msg`issuers`),
       tooltip: (
         <>
-          <b>Credit class issuer:</b> the entity who can issue credit batches
-          under the given credit class.
+          <Trans>
+            <b>Credit class issuer:</b> the entity who can issue credit batches
+            under the given credit class.
+          </Trans>
         </>
       ),
     },

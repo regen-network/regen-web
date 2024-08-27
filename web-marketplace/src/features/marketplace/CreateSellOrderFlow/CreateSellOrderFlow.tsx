@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
@@ -43,6 +44,7 @@ export const CreateSellOrderFlow = ({
   setIsFlowStarted,
   credits = [],
 }: Props): JSX.Element => {
+  const { _ } = useLingui();
   const [isCreateSellOrderOpen, setIsCreateSellOrderOpen] = useState(false);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [txModalTitle, setTxModalTitle] = useState<string>('');
@@ -125,6 +127,7 @@ export const CreateSellOrderFlow = ({
 
   const allowedDenomOptions = getDenomAllowedOptions({
     allowedDenoms: allowedDenomsData?.allowedDenoms,
+    _,
   });
 
   useEffect(() => {
@@ -160,7 +163,7 @@ export const CreateSellOrderFlow = ({
         open={isCreateSellOrderOpen}
         onClose={closeCreateModal}
         onSubmit={createSellOrderSubmit}
-        title={CREATE_SELL_ORDER_TITLE}
+        title={_(CREATE_SELL_ORDER_TITLE)}
         allowedDenoms={allowedDenomOptions}
       />
       <ProcessingModal

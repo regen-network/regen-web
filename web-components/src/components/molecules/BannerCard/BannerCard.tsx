@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { ImageType } from '../../../types/shared/imageType';
 import { cn } from '../../../utils/styles/cn';
 import { BlockContent, SanityBlockContent } from '../../block-content';

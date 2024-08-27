@@ -1,7 +1,10 @@
+import { msg } from '@lingui/macro';
 import { Formik } from 'formik';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
 import NotFound from 'web-components/src/components/views/NotFoundView';
+
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
@@ -13,23 +16,23 @@ import { CreditClassReview } from './CreditClassReview';
 
 import RotationalGrazing from 'assets/rotational-grazing.png';
 
-export const createCreditClassSteps = [
+export const getCreateCreditClassSteps = (_: TranslatorType) => [
   {
     id: 'create-credit-class',
-    name: 'Create Credit Class',
-    title: 'Create Credit Class',
+    name: _(msg`Create Credit Class`),
+    title: _(msg`Create Credit Class`),
   },
   {
     // TODO: ID probably isn't needed on the next two, as they aren't stored in
     // localstorage?
     id: '',
-    name: 'Review',
-    title: 'Review',
+    name: _(msg`Review`),
+    title: _(msg`Review`),
   },
   {
     id: '',
-    name: 'Finished',
-    title: 'Finished',
+    name: _(msg`Finished`),
+    title: _(msg`Finished`),
   },
 ];
 

@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 
 import EditIcon from 'web-components/src/components/icons/EditIcon';
@@ -13,6 +14,7 @@ import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClas
 import { MY_CREDIT_CLASS_BUTTON } from './MyCreditClasses.constants';
 
 export const MyCreditClasses = (): JSX.Element => {
+  const { _ } = useLingui();
   const { wallet } = useWallet();
   const { creditClasses, isLoadingCreditClasses } =
     useFetchCreditClassesWithOrder({
@@ -30,7 +32,7 @@ export const MyCreditClasses = (): JSX.Element => {
             <CreditClassGridCard
               {...creditClass}
               button={{
-                text: MY_CREDIT_CLASS_BUTTON,
+                text: _(MY_CREDIT_CLASS_BUTTON),
                 startIcon: <EditIcon sx={{ color: 'grey.100' }} />,
                 disabled: true,
               }}

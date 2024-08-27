@@ -1,3 +1,5 @@
+import { msg } from '@lingui/macro';
+
 import BridgeIcon from 'web-components/src/components/icons/BridgeIcon';
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';
@@ -14,44 +16,44 @@ export const SEPARATOR = {
 };
 
 export const PORTFOLIO = {
-  label: 'Portfolio',
+  label: msg`Portfolio`,
   href: '/profile/portfolio',
   icon: <CreditsIcon fontSize="small" linearGradient />,
   className,
 };
 export const PROJECTS = {
-  label: 'Projects',
+  label: msg`Projects`,
   href: '/profile/projects',
   icon: <ProjectPageIcon linearGradient />,
   className,
 };
 export const CREDIT_CLASSES = {
-  label: 'Credit Classes',
+  label: msg`Credit Classes`,
   href: '/profile/credit-classes',
   icon: <CreditClassIcon linearGradient />,
   className,
 };
 export const CREDIT_BATCHES = {
-  label: 'Credit Batches',
+  label: msg`Credit Batches`,
   href: '/profile/credit-batches',
   icon: <CreditBatchIcon linearGradient />,
   className,
 };
 export const BRIDGE = {
-  label: 'Bridge',
+  label: msg`Bridge`,
   href: '/profile/bridge',
   icon: <BridgeIcon linearGradient />,
   className,
 };
 export const EDIT_PROFILE = {
-  label: 'Edit profile',
+  label: msg`Edit profile`,
   href: '/profile/edit/profile',
   icon: <EditIcon className="w-[24px] h-[24px] text-[18px]" linearGradient />,
   labelClassName,
   className,
 };
 export const PROFILE_SETTINGS = {
-  label: 'Settings',
+  label: msg`Settings`,
   href: '/profile/edit/settings',
   icon: <CogIcon linearGradient />,
   labelClassName,

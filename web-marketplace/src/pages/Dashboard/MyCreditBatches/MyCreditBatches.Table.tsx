@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Trans } from '@lingui/macro';
 import { useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 
@@ -60,7 +61,7 @@ export const MyCreditBatchesTable = ({
             }}
             size="xl"
           >
-            Successfully issued credit batches
+            <Trans>Successfully issued credit batches</Trans>
           </Subtitle>
           {useCreate && (
             <OutlinedButton
@@ -68,7 +69,7 @@ export const MyCreditBatchesTable = ({
               component={Link}
               to="/ecocredits/create-batch"
             >
-              create credit batch
+              <Trans>create credit batch</Trans>
             </OutlinedButton>
           )}
         </Box>

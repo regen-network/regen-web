@@ -3,6 +3,7 @@ import { TablePaginationParams } from 'web-components/src/components/table/Actio
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 export type CreditClassDetailsTableTabsProps = {
   creditClassMetadata?: CreditClassMetadataLD;
@@ -10,4 +11,5 @@ export type CreditClassDetailsTableTabsProps = {
   creditBatches?: BatchInfoWithSupply[];
   onTableChange?: UseStateSetter<TablePaginationParams>;
   initialPaginationParams?: TablePaginationParams;
+  _: TranslatorType;
 };

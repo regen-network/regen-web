@@ -1,4 +1,6 @@
 import { useCallback } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { MsgRetire } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
 import type { Item } from 'web-components/src/components/modal/TxModal';
@@ -47,6 +49,7 @@ const useCreditRetireSubmit = ({
   setTxModalTitle,
   setTxButtonTitle,
 }: Props): Params => {
+  const { _ } = useLingui();
   const { track } = useTracker();
   const creditRetireSubmit = useCallback(
     async (values: CreditRetireFormSchemaType): Promise<void> => {
@@ -64,7 +67,7 @@ const useCreditRetireSubmit = ({
       const { amount: amountValue, retireFields } = values;
       const { retirementJurisdiction, note } = retireFields?.[0] || {};
       const amount = values.amount.toString();
-      const msg = MsgRetire.fromPartial({
+      const msgRetire = MsgRetire.fromPartial({
         owner: accountAddress,
         jurisdiction: retirementJurisdiction,
         credits: [
@@ -77,7 +80,7 @@ const useCreditRetireSubmit = ({
       });
 
       const tx = {
-        msgs: [msg],
+        msgs: [msgRetire],
         fee: undefined,
       };
 
@@ -107,7 +110,7 @@ const useCreditRetireSubmit = ({
       if (batchDenom && amount) {
         setCardItems([
           {
-            label: 'project',
+            label: _(msg`project`),
             value: {
               name:
                 credits[creditRetireOpen].projectName ||
@@ -116,31 +119,32 @@ const useCreditRetireSubmit = ({
             },
           },
           {
-            label: 'credit batch id',
+            label: _(msg`credit batch id`),
             value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
           },
           {
-            label: 'amount retired',
+            label: _(msg`amount retired`),
             value: { name: amount },
           },
         ]);
-        setTxModalHeader(RETIRE_HEADER);
+        setTxModalHeader(_(RETIRE_HEADER));
         setTxModalTitle(creditRetireTitle);
-        setTxButtonTitle(RETIRE_SUCCESS_BUTTON);
+        setTxButtonTitle(_(RETIRE_SUCCESS_BUTTON));
       }
     },
     [
-      accountAddress,
-      creditRetireOpen,
-      creditRetireTitle,
       credits,
-      setCardItems,
+      creditRetireOpen,
+      track,
+      accountAddress,
+      signAndBroadcast,
       setCreditRetireOpen,
+      setCardItems,
+      _,
       setTxModalHeader,
       setTxModalTitle,
+      creditRetireTitle,
       setTxButtonTitle,
-      signAndBroadcast,
-      track,
     ],
   );
 

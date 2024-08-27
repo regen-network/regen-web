@@ -17,7 +17,14 @@ module.exports = {
       {
         ignoreFunction: ['test'],
         ignoreAttribute: ['sx', 'linearGradient'],
-        ignoreProperty: ['margin', 'padding', 'backgroundImage'],
+        ignoreProperty: [
+          'margin',
+          'padding',
+          'backgroundImage',
+          'borderTop',
+          'borderBottom',
+          'rel',
+        ],
       },
     ],
     'lingui/t-call-in-function': 2,
@@ -30,6 +37,7 @@ module.exports = {
     {
       files: ['*.stories.tsx'],
       rules: {
+        'lingui/no-unlocalized-strings': 'off',
         'import/no-anonymous-default-export': 'off',
       },
     },

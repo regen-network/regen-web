@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { SxProps, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
@@ -11,14 +12,8 @@ import AvailableCreditsIconAlt from 'web-components/src/components/icons/Availab
 import PutInBasketIcon from 'web-components/src/components/icons/PutInBasketIcon';
 import TakeFromBasketIcon from 'web-components/src/components/icons/TakeFromBasketIcon';
 import { Option } from 'web-components/src/components/inputs/SelectTextField';
-import {
-  BASKET_PUT_TITLE,
-  BasketPutModal,
-} from 'web-components/src/components/modal/BasketPutModal';
-import {
-  BASKET_TAKE_TITLE,
-  BasketTakeModal,
-} from 'web-components/src/components/modal/BasketTakeModal';
+import { BasketPutModal } from 'web-components/src/components/modal/BasketPutModal';
+import { BasketTakeModal } from 'web-components/src/components/modal/BasketTakeModal';
 import { ProcessingModal } from 'web-components/src/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
 import { Item } from 'web-components/src/components/modal/TxModal';
@@ -42,10 +37,7 @@ import WithLoader from 'components/atoms/WithLoader';
 import { CreateSellOrderModal } from 'components/organisms/CreateSellOrderModal/CreateSellOrderModal';
 import { CreditRetireModal } from 'components/organisms/Modals/CreditRetireModal/CreditRetireModal';
 import { CREDIT_RETIRE_TITLE } from 'components/organisms/Modals/CreditRetireModal/CreditRetireModal.constants';
-import {
-  CREDIT_SEND_TITLE,
-  CreditSendModal,
-} from 'components/organisms/Modals/CreditSendModal/CreditSendModal';
+import { CreditSendModal } from 'components/organisms/Modals/CreditSendModal/CreditSendModal';
 import { Portfolio } from 'components/organisms/Portfolio/Portfolio';
 import { useMsgClient } from 'hooks';
 import type { BasketTokens } from 'hooks/useBasketTokens';
@@ -62,12 +54,16 @@ import useOpenTakeModal from './hooks/useOpenTakeModal';
 import { useUpdateCardItemsTakeBasket } from './hooks/useUpdateCardItemsTakeBasket';
 import { useUpdateTxModalTitle } from './hooks/useUpdateTxModalTitle';
 import {
+  BASKET_PUT_TITLE,
+  BASKET_TAKE_SUBTITLE,
+  BASKET_TAKE_TITLE,
   CREATE_SELL_ORDER_BUTTON,
   CREATE_SELL_ORDER_SHORT,
   CREATE_SELL_ORDER_TITLE,
+  CREDIT_SEND_TITLE,
   ERROR_BUTTON,
+  getSocialTwitterTextMapping,
   RETIRE_SUCCESS_BUTTON,
-  SOCIAL_TWITTER_TEXT_MAPPING,
 } from './MyEcocredits.constants';
 import { OnTxSuccessfulProps } from './MyEcocredits.types';
 import {
@@ -80,6 +76,7 @@ import {
 const addressPrefix = chainInfo.bech32Config.bech32PrefixAccAddr;
 
 export const MyEcocredits = (): JSX.Element => {
+  const { _ } = useLingui();
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
   const [creditSendOpen, setCreditSendOpen] = useState<number>(-1);
   const [creditRetireOpen, setCreditRetireOpen] = useState<number>(-1);
@@ -134,10 +131,10 @@ export const MyEcocredits = (): JSX.Element => {
 
   const onButtonClick = (): void => {
     handleTxModalClose();
-    if (txButtonTitle === CREATE_SELL_ORDER_BUTTON && !error) {
+    if (txButtonTitle === _(CREATE_SELL_ORDER_BUTTON) && !error) {
       navigate('/storefront');
     }
-    if (txButtonTitle === RETIRE_SUCCESS_BUTTON && !error) {
+    if (txButtonTitle === _(RETIRE_SUCCESS_BUTTON) && !error) {
       setActivePortfolioTab(1);
       reloadRetirements();
       setTimeout(() => reloadRetirements(), 5000);
@@ -172,6 +169,7 @@ export const MyEcocredits = (): JSX.Element => {
     setCardItems,
   });
 
+  const SOCIAL_TWITTER_TEXT_MAPPING = getSocialTwitterTextMapping(_);
   const theme = useTheme();
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
@@ -202,6 +200,7 @@ export const MyEcocredits = (): JSX.Element => {
 
   const allowedDenomOptions = getDenomAllowedOptions({
     allowedDenoms: allowedDenomsData?.allowedDenoms,
+    _,
   });
 
   useUpdateTxModalTitle({ setTxModalTitle, deliverTxResponse });
@@ -214,7 +213,7 @@ export const MyEcocredits = (): JSX.Element => {
 
   const basketTakeSubmit = useBasketTakeSubmit({
     accountAddress,
-    basketTakeTitle: BASKET_TAKE_TITLE,
+    basketTakeTitle: _(BASKET_TAKE_TITLE),
     baskets: baskets?.basketsInfo,
     signAndBroadcast,
     onTxSuccessful,
@@ -224,7 +223,7 @@ export const MyEcocredits = (): JSX.Element => {
   const creditSendSubmit = useCreditSendSubmit({
     accountAddress,
     creditSendOpen,
-    creditSendTitle: CREDIT_SEND_TITLE,
+    creditSendTitle: _(CREDIT_SEND_TITLE),
     credits,
     setCardItems,
     setCreditSendOpen,
@@ -236,7 +235,7 @@ export const MyEcocredits = (): JSX.Element => {
   const basketPutSubmit = useBasketPutSubmit({
     accountAddress,
     baskets: baskets?.basketsInfo,
-    basketPutTitle: BASKET_PUT_TITLE,
+    basketPutTitle: _(BASKET_PUT_TITLE),
     credit: credits[basketPutOpen],
     onBroadcast: onCloseBasketPutModal,
     onTxSuccessful,
@@ -246,7 +245,7 @@ export const MyEcocredits = (): JSX.Element => {
   const creditRetireSubmit = useCreditRetireSubmit({
     accountAddress,
     creditRetireOpen,
-    creditRetireTitle: CREDIT_RETIRE_TITLE,
+    creditRetireTitle: _(CREDIT_RETIRE_TITLE),
     credits,
     setCardItems,
     setCreditRetireOpen,
@@ -305,7 +304,7 @@ export const MyEcocredits = (): JSX.Element => {
                   const buttons = [
                     {
                       icon: <AvailableCreditsIconAlt sx={sxs.arrow} />,
-                      label: CREATE_SELL_ORDER_SHORT,
+                      label: _(CREATE_SELL_ORDER_SHORT),
                       onClick: () => {
                         track<Sell1Event>('sell1', {
                           projectId: credits[i].projectId,
@@ -323,7 +322,7 @@ export const MyEcocredits = (): JSX.Element => {
                           direction="next"
                         />
                       ),
-                      label: CREDIT_SEND_TITLE,
+                      label: _(CREDIT_SEND_TITLE),
                       onClick: () => {
                         track<Send1Event>('send1', {
                           batchDenom: credits[i].denom,
@@ -342,7 +341,7 @@ export const MyEcocredits = (): JSX.Element => {
                           direction="down"
                         />
                       ),
-                      label: CREDIT_RETIRE_TITLE,
+                      label: _(CREDIT_RETIRE_TITLE),
                       onClick: () => {
                         track<Retire1Event>('retire1', {
                           batchDenom: credits[i].denom,
@@ -361,7 +360,7 @@ export const MyEcocredits = (): JSX.Element => {
                     buttons.splice(1, 0, {
                       // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
                       icon: <PutInBasketIcon />,
-                      label: BASKET_PUT_TITLE,
+                      label: _(BASKET_PUT_TITLE),
                       onClick: () => {
                         track<PutInBasket1Event>('putInBasket1', {
                           batchDenom: credits[i].denom,
@@ -382,7 +381,7 @@ export const MyEcocredits = (): JSX.Element => {
               buttons={[
                 {
                   icon: <TakeFromBasketIcon />,
-                  label: BASKET_TAKE_TITLE,
+                  label: _(BASKET_TAKE_TITLE),
                   onClick: () => {
                     openTakeModal(i);
                   },
@@ -394,6 +393,7 @@ export const MyEcocredits = (): JSX.Element => {
       </WithLoader>
       {creditSendOpen > -1 && !!accountAddress && (
         <CreditSendModal
+          title={_(CREDIT_SEND_TITLE)}
           sender={accountAddress}
           batchDenom={credits[creditSendOpen].denom}
           availableTradableAmount={Number(
@@ -439,6 +439,8 @@ export const MyEcocredits = (): JSX.Element => {
       )}
       {!!basketTakeTokens?.basket && !!accountAddress && (
         <BasketTakeModal
+          title={_(BASKET_TAKE_TITLE)}
+          subtitle={_(BASKET_TAKE_SUBTITLE)}
           open={true}
           accountAddress={accountAddress}
           basket={basketTakeTokens?.basket}
@@ -472,7 +474,7 @@ export const MyEcocredits = (): JSX.Element => {
           open={true}
           onClose={() => setSellOrderCreateOpen(-1)}
           onSubmit={createSellOrderSubmit}
-          title={CREATE_SELL_ORDER_TITLE}
+          title={_(CREATE_SELL_ORDER_TITLE)}
         />
       )}
       <ProcessingModal
@@ -507,7 +509,7 @@ export const MyEcocredits = (): JSX.Element => {
         txHash={txHash || ''}
         txHashUrl={txHashUrl}
         cardTitle={txModalTitle ?? ''}
-        buttonTitle={ERROR_BUTTON}
+        buttonTitle={_(ERROR_BUTTON)}
         linkComponent={Link}
         onButtonClick={onButtonClick}
       />

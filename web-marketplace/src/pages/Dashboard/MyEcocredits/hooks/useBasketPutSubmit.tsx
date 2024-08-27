@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useLingui } from '@lingui/react';
 import type { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 
@@ -44,6 +45,7 @@ const useBasketPutSubmit = ({
   onTxSuccessful,
   onErrorCallback,
 }: Props): Return => {
+  const { _ } = useLingui();
   const { track } = useTracker();
 
   const basketPutSubmit = useCallback(
@@ -120,7 +122,7 @@ const useBasketPutSubmit = ({
 
           onTxSuccessful({
             cardItems,
-            title: PUT_HEADER,
+            title: _(PUT_HEADER),
             cardTitle: basketPutTitle,
           });
         }
@@ -131,15 +133,19 @@ const useBasketPutSubmit = ({
       });
     },
     [
-      accountAddress,
-      basketPutTitle,
       baskets,
-      credit,
-      onBroadcast,
-      onTxSuccessful,
-      onErrorCallback,
-      signAndBroadcast,
       track,
+      credit.denom,
+      credit.classId,
+      credit.projectId,
+      credit.projectName,
+      accountAddress,
+      signAndBroadcast,
+      onErrorCallback,
+      onTxSuccessful,
+      _,
+      basketPutTitle,
+      onBroadcast,
     ],
   );
 

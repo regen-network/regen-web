@@ -1,4 +1,6 @@
 import { useCallback } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
 import type { Item } from 'web-components/src/components/modal/TxModal';
@@ -43,6 +45,7 @@ const useCreditSendSubmit = ({
   setTxModalHeader,
   setTxModalTitle,
 }: Props): Return => {
+  const { _ } = useLingui();
   const { track } = useTracker();
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormSchemaType): Promise<void> => {
@@ -59,7 +62,7 @@ const useCreditSendSubmit = ({
 
       const { withRetire, recipient, amount, retireFields } = values;
       const { retirementJurisdiction, note } = retireFields?.[0] || {};
-      const msg = MsgSend.fromPartial({
+      const msgSend = MsgSend.fromPartial({
         sender: accountAddress,
         recipient,
         credits: [
@@ -74,7 +77,7 @@ const useCreditSendSubmit = ({
       });
 
       const tx = {
-        msgs: [msg],
+        msgs: [msgSend],
         fee: undefined,
       };
 
@@ -112,7 +115,7 @@ const useCreditSendSubmit = ({
         setCardItems(
           [
             {
-              label: 'project',
+              label: _(msg`project`),
               value: {
                 name:
                   credits[creditSendOpen].projectName ||
@@ -121,11 +124,11 @@ const useCreditSendSubmit = ({
               },
             },
             {
-              label: 'credit batch id',
+              label: _(msg`credit batch id`),
               value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
             },
             {
-              label: 'amount sent',
+              label: _(msg`amount sent`),
               value: { name: amount.toString() },
             },
             {
@@ -134,11 +137,12 @@ const useCreditSendSubmit = ({
             },
           ].filter(item => Number(item.value.name) !== 0),
         );
-        setTxModalHeader(SEND_HEADER);
+        setTxModalHeader(_(SEND_HEADER));
         setTxModalTitle(creditSendTitle);
       }
     },
     [
+      _,
       accountAddress,
       creditSendOpen,
       creditSendTitle,

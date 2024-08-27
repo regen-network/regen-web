@@ -1,3 +1,6 @@
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+
 import { Flex } from 'web-components/src/components/box';
 import { Body } from 'web-components/src/components/typography';
 
@@ -12,6 +15,7 @@ type Props = {
 };
 
 const BufferPoolAccounts: React.FC<Props> = ({ bufferPoolAccounts }) => {
+  const { _ } = useLingui();
   if (!bufferPoolAccounts) return null;
 
   const count = bufferPoolAccounts?.length;
@@ -20,7 +24,7 @@ const BufferPoolAccounts: React.FC<Props> = ({ bufferPoolAccounts }) => {
 
   return (
     <MetaDetail
-      label="buffer pool accounts"
+      label={_(msg`buffer pool accounts`)}
       customContent={
         <Flex flexDirection="column">
           {bufferPoolAccounts.map(account => (

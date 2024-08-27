@@ -64,7 +64,7 @@ export const BridgableEcocreditsTable = ({
   if (!bridgableCredits?.length && !isLoadingCredits) {
     return (
       <NoCredits
-        title={NO_BRIDGABLE_CREDITS}
+        title={_(NO_BRIDGABLE_CREDITS)}
         icon={<EmptyCartIcon sx={{ width: '100px', height: '100px' }} />}
       />
     );

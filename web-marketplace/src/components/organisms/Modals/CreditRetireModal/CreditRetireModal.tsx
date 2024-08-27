@@ -15,8 +15,6 @@ interface CreditRetireModalProps
   extends RegenModalProps,
     CreditRetireFormProps {}
 
-export const CREDIT_SEND_TITLE = 'Send';
-
 const CreditRetireModal: React.FC<CreditRetireModalProps> = ({
   batchDenom,
   availableTradableAmount,

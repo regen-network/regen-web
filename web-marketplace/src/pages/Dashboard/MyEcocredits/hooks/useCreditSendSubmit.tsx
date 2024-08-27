@@ -115,7 +115,7 @@ const useCreditSendSubmit = ({
         setCardItems(
           [
             {
-              label: 'project',
+              label: _(msg`project`),
               value: {
                 name:
                   credits[creditSendOpen].projectName ||

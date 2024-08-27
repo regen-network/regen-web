@@ -1,4 +1,5 @@
-import { Trans } from '@lingui/macro';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { Account } from 'web-components/src/components/user/UserInfo';
 
@@ -15,10 +16,12 @@ export const CreditClassDetailsStakeholders = ({
   issuers,
   program,
 }: Props) => {
+  const { _ } = useLingui();
+
   const stakeholders = [
     {
       accounts: program,
-      title: 'program',
+      title: _(msg`program`),
       tooltip: (
         <>
           <Trans>
@@ -31,7 +34,7 @@ export const CreditClassDetailsStakeholders = ({
     },
     {
       accounts: admin,
-      title: 'admin',
+      title: _(msg`admin`),
       tooltip: (
         <>
           <Trans>
@@ -43,7 +46,7 @@ export const CreditClassDetailsStakeholders = ({
     },
     {
       accounts: issuers,
-      title: 'issuers',
+      title: _(msg`issuers`),
       tooltip: (
         <>
           <Trans>

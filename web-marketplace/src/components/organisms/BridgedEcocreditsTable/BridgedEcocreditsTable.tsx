@@ -65,7 +65,7 @@ export const BridgedEcocreditsTable = ({
   if (!bridgedCredits?.length && !isLoadingBridgedCredits) {
     return (
       <NoCredits
-        title={NO_BRIDGED_CREDITS}
+        title={_(NO_BRIDGED_CREDITS)}
         icon={
           <EmptyCartIcon
             sx={{ width: '100px', height: '100px', color: 'info.main' }}
@@ -93,7 +93,7 @@ export const BridgedEcocreditsTable = ({
               <Trans>Status</Trans>
             </Box>
             <Box sx={{ mb: -1.5 }}>
-              <InfoTooltipWithIcon outlined title={STATUS_TOOLTIP} />
+              <InfoTooltipWithIcon outlined title={_(STATUS_TOOLTIP)} />
             </Box>
 
             <CircularProgress
@@ -130,7 +130,7 @@ export const BridgedEcocreditsTable = ({
               </BreakText>
             </Box>
             <Box alignSelf="flex-end" ml={2}>
-              <InfoTooltipWithIcon outlined title={CREDIT_BATCH_TOOLTIP} />
+              <InfoTooltipWithIcon outlined title={_(CREDIT_BATCH_TOOLTIP)} />
             </Box>
           </Box>,
           <Trans>Credit Class</Trans>,
@@ -139,7 +139,7 @@ export const BridgedEcocreditsTable = ({
               <Trans>Amount Bridged</Trans>
             </BreakTextEnd>
             <Box alignSelf="flex-end" ml={2}>
-              <InfoTooltipWithIcon outlined title={AMOUNT_BRIDGED_TOOLTIP} />
+              <InfoTooltipWithIcon outlined title={_(AMOUNT_BRIDGED_TOOLTIP)} />
             </Box>
           </Box>,
           <Trans>Issuer</Trans>,

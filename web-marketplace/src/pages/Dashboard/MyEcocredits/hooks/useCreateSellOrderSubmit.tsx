@@ -136,7 +136,7 @@ const useCreateSellOrderSubmit = ({
             },
           },
           {
-            label: 'project',
+            label: _(msg`project`),
             value: {
               name: projectName ?? projectId,
               url: `/project/${projectId}`,

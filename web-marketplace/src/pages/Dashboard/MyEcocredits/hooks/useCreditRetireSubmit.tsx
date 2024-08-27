@@ -110,7 +110,7 @@ const useCreditRetireSubmit = ({
       if (batchDenom && amount) {
         setCardItems([
           {
-            label: 'project',
+            label: _(msg`project`),
             value: {
               name:
                 credits[creditRetireOpen].projectName ||

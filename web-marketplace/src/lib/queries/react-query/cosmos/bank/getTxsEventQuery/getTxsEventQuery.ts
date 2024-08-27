@@ -17,8 +17,11 @@ export const getGetTxsEventQuery = ({
   queryFn: async () => {
     if (!client) return null;
 
-    if (request.pagination) return await client.GetTxsEvent(request);
+    // Just use provided pagination
+    if (request.pagination || request.page)
+      return await client.GetTxsEvent(request);
 
+    // Or loop through all the pages to get all txs
     let txs: Tx[] = [],
       txResponses: TxResponse[] = [];
     let response: GetTxsEventResponse | undefined;

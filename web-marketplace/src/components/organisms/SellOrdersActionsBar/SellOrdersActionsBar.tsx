@@ -78,7 +78,7 @@ export const SellOrdersActionsBar = ({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
-  const { isKeplrMobileWeb } = useWallet();
+  const { loginDisabled } = useWallet();
 
   const createPostButton = (
     <OutlinedButton
@@ -101,7 +101,7 @@ export const SellOrdersActionsBar = ({
       >
         {isAdmin ? (
           <>
-            {!isKeplrMobileWeb &&
+            {!loginDisabled &&
               onClickCreatePost &&
               (isCreatePostButtonDisabled ? (
                 <InfoTooltip

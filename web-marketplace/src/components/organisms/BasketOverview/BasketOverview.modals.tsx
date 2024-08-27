@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { ERRORS } from 'config/errors';
 import { useAtom, useSetAtom } from 'jotai';
 
@@ -15,6 +16,10 @@ import { useWallet } from 'lib/wallet/wallet';
 import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
 import useBasketPutSubmit from 'pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from 'pages/Dashboard/MyEcocredits/hooks/useBasketTakeSubmit';
+import {
+  BASKET_TAKE_SUBTITLE,
+  BASKET_TAKE_TITLE,
+} from 'pages/Dashboard/MyEcocredits/MyEcocredits.constants';
 import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.types';
 import { useMsgClient } from 'hooks';
 
@@ -35,6 +40,7 @@ export const BasketOverviewModals = ({
   basketPutData,
   basketTakeData,
 }: Props): JSX.Element => {
+  const { _ } = useLingui();
   const [{ isPutModalOpen, isTakeModalOpen }, setBasketDetailAtom] =
     useAtom(basketDetailAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
@@ -126,6 +132,8 @@ export const BasketOverviewModals = ({
       />
       <BasketTakeModal
         open={isTakeModalOpen}
+        title={_(BASKET_TAKE_TITLE)}
+        subtitle={_(BASKET_TAKE_SUBTITLE)}
         accountAddress={accountAddress}
         basket={basketToken?.basket}
         basketDisplayDenom={basketToken?.metadata?.metadata?.display || ''}

@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import WithLoader from 'components/atoms/WithLoader';
@@ -12,6 +14,7 @@ import { useProjectEditContext } from '../ProjectEdit';
 import { useSettingsSubmit } from './hooks/useSettingsSubmit';
 
 const Settings: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { _ } = useLingui();
   const { projectId } = useParams();
   const { navigateNext } = useNavigateNext({ step: 'description', projectId });
 
@@ -46,7 +49,7 @@ const Settings: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <ProjectFormTemplate
       isEdit={isEdit}
-      title="Settings"
+      title={_(msg`Settings`)}
       offChainProject={offChainProject}
       onChainProject={onChainProject}
       loading={!offChainProject}

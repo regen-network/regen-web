@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
@@ -81,7 +82,7 @@ const Roles: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <ProjectFormTemplate
       isEdit={isEdit}
-      title="Roles"
+      title={_(msg`Roles`)}
       offChainProject={offChainProject}
       onChainProject={onChainProject}
       loading={withMetadataLoading}

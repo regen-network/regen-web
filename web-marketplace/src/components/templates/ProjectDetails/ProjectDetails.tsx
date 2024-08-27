@@ -92,11 +92,16 @@ function ProjectDetails(): JSX.Element {
   const { ecocreditClient, dataClient } = useLedger();
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
-  const { activeWalletAddr, isConnected } = useWallet();
+  const {
+    activeWalletAddr,
+    isConnected,
+    isKeplrMobileWeb,
+    wallet,
+    loginDisabled,
+  } = useWallet();
   const graphqlClient = useApolloClient();
   const { track } = useTracker();
   const location = useLocation();
-  const { isKeplrMobileWeb } = useWallet();
   const navigate = useNavigate();
   const { activeAccount } = useAuth();
   const { _ } = useLingui();
@@ -385,7 +390,9 @@ function ProjectDetails(): JSX.Element {
   const isAdmin =
     (!!activeAccount?.addr && onChainProject?.admin === activeAccount?.addr) ||
     (!!activeAccount?.id &&
-      offChainProject?.adminAccountId === activeAccount?.id);
+      offChainProject?.adminAccountId === activeAccount?.id) ||
+    !!(wallet?.address && wallet?.address === onChainProject?.admin) ||
+    !!(wallet?.address && wallet?.address === activeAccount?.addr);
 
   const isProjectPublished = onChainProjectId
     ? !!onChainProjectId
@@ -426,7 +433,9 @@ function ProjectDetails(): JSX.Element {
         </Box>
       )}
 
-      {(onChainProjectId || isPrefinanceProject || isAdmin) && (
+      {(onChainProjectId ||
+        isPrefinanceProject ||
+        (isAdmin && !loginDisabled)) && (
         <SellOrdersActionsBar
           isBuyButtonDisabled={isBuyFlowDisabled}
           isCommunityCredit={isCommunityCredit}

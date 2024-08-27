@@ -41,7 +41,7 @@ const MyProjects = (): JSX.Element => {
     useDashboardContext();
   const { track } = useTracker();
   const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
-  const { wallet, loginDisabled, isKeplrMobileWeb } = useWallet();
+  const { wallet, loginDisabled } = useWallet();
   const { activeAccountId, activeAccount } = useAuth();
 
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
@@ -134,7 +134,7 @@ const MyProjects = (): JSX.Element => {
                     }}
                     track={track}
                     pathname={location.pathname}
-                    isKeplrMobileWeb={isKeplrMobileWeb}
+                    loginDisabled={loginDisabled}
                     tooltipText={_(CREATE_POST_DISABLED_TOOLTIP)}
                   />
                 </WithLoader>

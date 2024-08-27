@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { Buy1Event } from 'web-marketplace/src/lib/tracker/types';
 import { useTracker } from 'web-marketplace/src/lib/tracker/useTracker';
@@ -60,6 +61,7 @@ export const SellOrdersActionsBar = ({
   isAdmin,
   children,
 }: Params): JSX.Element => {
+  const { _ } = useLingui();
   const location = useLocation();
   const { track } = useTracker();
   const theme = useTheme();
@@ -86,7 +88,7 @@ export const SellOrdersActionsBar = ({
             }
           >
             <EditIcon className="mr-10" />
-            {EDIT_PROJECT}
+            {_(EDIT_PROJECT)}
           </OutlinedButton>
         ) : (
           <>

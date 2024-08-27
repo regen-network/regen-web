@@ -7,6 +7,8 @@ import {
 } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
@@ -70,6 +72,7 @@ const ProjectEditContext = createContext<ContextType>({
 });
 
 function ProjectEdit(): JSX.Element {
+  const { _ } = useLingui();
   const { classes: styles } = useProjectEditStyles();
   const theme = useTheme<Theme>();
   const [saved, setSaved] = useState(false);
@@ -104,7 +107,7 @@ function ProjectEdit(): JSX.Element {
       atom.cardItems = cardItems;
       atom.title = title;
       atom.cardTitle = cardTitle;
-      atom.buttonTitle = EDIT_PROJECT;
+      atom.buttonTitle = _(EDIT_PROJECT);
     });
   };
 
@@ -237,7 +240,11 @@ function ProjectEdit(): JSX.Element {
                   color={theme.palette.secondary.main}
                   direction="prev"
                 />
-                {!isMobile && <Label>back to projects</Label>}
+                {!isMobile && (
+                  <Label>
+                    <Trans>back to projects</Trans>
+                  </Label>
+                )}
               </Box>
             </div>
             {!isMobile && (
@@ -253,7 +260,7 @@ function ProjectEdit(): JSX.Element {
               <div className={styles.section}>
                 <div className={styles.topAlign}>
                   <Title variant="h3" align="center" sx={{ flex: 1 }}>
-                    {section ? startCase(section) : 'Edit Project Page'}
+                    {section ? startCase(section) : _(msg`Edit Project Page`)}
                   </Title>
                 </div>
                 {isMobile && !section && (
@@ -267,7 +274,7 @@ function ProjectEdit(): JSX.Element {
               </div>
             </div>
           </div>
-          {saved && <Banner text="Changes have been saved" />}
+          {saved && <Banner text={_(msg`Changes have been saved`)} />}
           <SaveChangesWarningModal
             open={!!isWarningModalOpen}
             navigate={() => {

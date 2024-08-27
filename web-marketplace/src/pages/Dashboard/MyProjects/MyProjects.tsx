@@ -94,7 +94,7 @@ const MyProjects = (): JSX.Element => {
                       sanityProfilePageData?.allProfilePage?.[0]
                         ?.projectCardPromptRaw
                     }
-                    {...getDefaultProject(!activeAccountId)}
+                    {...getDefaultProject(!activeAccountId, _)}
                     {...project}
                     draft={project.offChain && !project.published}
                     button={{

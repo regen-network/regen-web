@@ -1,5 +1,6 @@
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { SKIPPED_CLASS_ID } from 'lib/env';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { CreditClassWithMedata } from '../hooks/useFetchCreditClasses';
 import {
@@ -13,6 +14,7 @@ type NormalizeCreditClassesFilterParams = {
   sanityCreditClassesData?: AllCreditClassQuery;
   creditClassesWithMetadata?: CreditClassWithMedata[];
   haveOffChainProjects: boolean;
+  _: TranslatorType;
 };
 
 type NormalizeCreditClassFiltersResponse = {
@@ -24,6 +26,7 @@ export const normalizeCreditClassFilters = ({
   creditClassesWithMetadata,
   sanityCreditClassesData,
   haveOffChainProjects,
+  _,
 }: NormalizeCreditClassesFilterParams): NormalizeCreditClassFiltersResponse => {
   const sanityCreditClassIds = sanityCreditClassesData?.allCreditClass.map(
     sanityCreditClass => sanityCreditClass.path,
@@ -53,7 +56,7 @@ export const normalizeCreditClassFilters = ({
 
   if (haveOffChainProjects)
     creditClassFilters.push({
-      name: UNREGISTERED_PROJECTS,
+      name: _(UNREGISTERED_PROJECTS),
       path: UNREGISTERED_PATH,
     });
 

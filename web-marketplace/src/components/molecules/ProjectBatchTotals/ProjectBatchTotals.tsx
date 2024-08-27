@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Grid, SxProps, Theme } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 
@@ -37,6 +39,7 @@ export function ProjectBatchTotals({
   soldOutProjectsIds: string[];
   sx?: SxProps<Theme>;
 }): JSX.Element {
+  const { _ } = useLingui();
   const isSoldOut = getIsSoldOut({
     project: projectWithOrderData,
     soldOutProjectsIds,
@@ -58,7 +61,7 @@ export function ProjectBatchTotals({
     >
       <GridItem>
         <LabeledValue
-          label="Credits issued"
+          label={_(msg`Credits issued`)}
           tooltipLabel={ISSUED_CREDITS_TOOLTIP}
           number={totals.tradableAmount + totals.retiredAmount}
           formatNumberOptions={{
@@ -70,11 +73,12 @@ export function ProjectBatchTotals({
       </GridItem>
       <GridItem>
         <LabeledValue
-          label="Credits Tradable"
+          label={_(msg`Credits Tradable`)}
           tooltipLabel={TRADEABLE_CREDITS_TOOLTIP}
           tooltipNumber={getCreditsTooltip({
             isSoldOut,
             project: projectWithOrderData,
+            _,
           })}
           number={isSoldOut ? undefined : totals.tradableAmount}
           badgeLabel={isSoldOut ? SOLD_OUT : undefined}
@@ -87,7 +91,7 @@ export function ProjectBatchTotals({
       </GridItem>
       <GridItem>
         <LabeledValue
-          label="Credits Retired"
+          label={_(msg`Credits Retired`)}
           tooltipLabel={RETIRED_CREDITS_TOOLTIP}
           number={totals.retiredAmount}
           formatNumberOptions={{

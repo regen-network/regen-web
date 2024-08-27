@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import {
   Box,
   FormControlLabel,
@@ -14,7 +16,7 @@ import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton
 import FilterIcon from 'web-components/src/components/icons/FilterIcon';
 import Checkbox from 'web-components/src/components/inputs/new/CheckBox/Checkbox';
 import { CollapseList } from 'web-components/src/components/organisms/CollapseList/CollapseList';
-import { Body, Subtitle } from 'web-components/src/components/typography';
+import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import {
@@ -53,6 +55,7 @@ export const SideFilter = ({
   resetFilter,
   sx = [],
 }: Props) => {
+  const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
     creditClassSelectedFiltersAtom,
@@ -80,7 +83,7 @@ export const SideFilter = ({
         }
         sx={[{ mr: 4 }, ...sxToArray(sx)]}
       >
-        {SIDE_FILTERS_BUTTON}
+        {_(SIDE_FILTERS_BUTTON)}
       </OutlinedButton>
       <SwipeableDrawer
         anchor="right"
@@ -97,7 +100,7 @@ export const SideFilter = ({
               mb: 7.5,
             }}
           >
-            <Subtitle size="lg">{FILTERS_LABEL}</Subtitle>
+            <Subtitle size="lg">{_(FILTERS_LABEL)}</Subtitle>
             {showFiltersReset && (
               <Box
                 onClick={resetFilter}
@@ -108,13 +111,13 @@ export const SideFilter = ({
                   fontSize: 14,
                 }}
               >
-                {RESET_FILTERS_LABEL}
+                {_(RESET_FILTERS_LABEL)}
               </Box>
             )}
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Subtitle size="md" sx={{ mb: 3.75 }}>
-              {CREDIT_CLASS_FILTER_LABEL}
+              {_(CREDIT_CLASS_FILTER_LABEL)}
             </Subtitle>
             <div className="pb-15 text-grey-500">
               <Subtitle
@@ -136,7 +139,7 @@ export const SideFilter = ({
                     );
                 }}
               >
-                Select all
+                <Trans>Select all</Trans>
               </Subtitle>
               |
               <Subtitle
@@ -158,7 +161,7 @@ export const SideFilter = ({
                     );
                 }}
               >
-                Clear all
+                <Trans>Clear all</Trans>
               </Subtitle>
             </div>
             <CollapseList
@@ -216,7 +219,7 @@ export const SideFilter = ({
               <Box sx={{ height: '1px', bgcolor: 'info.light', my: 7.5 }} />
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Subtitle size="md" sx={{ mb: 3.75 }}>
-                  {COMMUNITY_FILTER_LABEL}
+                  {_(COMMUNITY_FILTER_LABEL)}
                 </Subtitle>
 
                 <CommunityFilter

@@ -1,3 +1,5 @@
+import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box, FormControlLabel, Link, SxProps, Theme } from '@mui/material';
 import { useAtom } from 'jotai';
 
@@ -17,6 +19,7 @@ type CommunityFilterProps = {
 };
 
 export const CommunityFilter = ({ sx }: CommunityFilterProps) => {
+  const { _ } = useLingui();
   const { track } = useTracker();
   const [useCommunityProjects, setUseCommunityProjects] = useAtom(
     useCommunityProjectsAtom,
@@ -40,30 +43,32 @@ export const CommunityFilter = ({ sx }: CommunityFilterProps) => {
             }}
           />
         }
-        label={COMMUNITY_FILTER}
+        label={_(COMMUNITY_FILTER)}
         sx={{ whiteSpace: 'nowrap', mr: 1, ml: 0, fontSize: 14 }}
       />
       <InfoTooltipWithIcon
         title={
           <Box sx={{ textAlign: 'start' }}>
-            Community credits are credits that have not been through the{' '}
-            <Link
-              href="https://registry.regen.network/"
-              target="_blank"
-              sx={{ color: 'secondary.main', fontWeight: 700, mr: 1 }}
-            >
-              Regen Registry program
-            </Link>
-            or are not associated with another known registry. <br />
-            <br />
-            To create your own credits,{' '}
-            <Link
-              href="https://docs.regen.network/tutorials/"
-              target="_blank"
-              sx={{ color: 'secondary.main', fontWeight: 700 }}
-            >
-              learn more in our docs.
-            </Link>
+            <Trans>
+              Community credits are credits that have not been through the{' '}
+              <Link
+                href="https://registry.regen.network/"
+                target="_blank"
+                sx={{ color: 'secondary.main', fontWeight: 700, mr: 1 }}
+              >
+                Regen Registry program
+              </Link>
+              or are not associated with another known registry. <br />
+              <br />
+              To create your own credits,{' '}
+              <Link
+                href="https://docs.regen.network/tutorials/"
+                target="_blank"
+                sx={{ color: 'secondary.main', fontWeight: 700 }}
+              >
+                learn more in our docs.
+              </Link>
+            </Trans>
           </Box>
         }
         outlined

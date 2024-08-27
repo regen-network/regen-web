@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { getClientConfig } from 'clients/Clients.config';
@@ -47,6 +49,7 @@ import { getCreditsTooltip } from './utils/getCreditsTooltip';
 import { getIsSoldOut } from './utils/getIsSoldOut';
 
 export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { _ } = useLingui();
   const { page: routePage } = useParams();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -98,7 +101,17 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     sanityCreditClassesData,
     allProjects,
     haveOffChainProjects,
+    _,
   });
+
+  const sortOptionsTranslated = useMemo(
+    () =>
+      sortOptions.map(option => ({
+        label: _(option.label),
+        value: option.value,
+      })),
+    [_],
+  );
 
   useEffect(() => {
     // Check all the credit class filters by default
@@ -183,12 +196,12 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                 fontWeight: 700,
               }}
             >
-              Sort by:
+              <Trans>Sort by:</Trans>
             </Body>
             <SelectTextFieldBase
               className="w-[100%]"
               defaultValue={sort}
-              options={sortOptions}
+              options={sortOptionsTranslated}
               defaultStyle={false}
               onChange={handleSort}
               sx={{ width: 'fit-content' }}
@@ -220,7 +233,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               sx={{ width: 400, height: 479 }}
               track={track}
               isSoldOut={isSoldOut}
-              creditsTooltip={getCreditsTooltip({ isSoldOut, project })}
+              creditsTooltip={getCreditsTooltip({ isSoldOut, project, _ })}
               program={project.program}
               projectPrefinancing={project.projectPrefinancing}
               offChain={config.buyButton ? project.offChain : true}
@@ -230,7 +243,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
       })}
       {projectsCount === 0 && (
         <EmptyState
-          message={EMPTY_PROJECTS_LABEL}
+          message={_(EMPTY_PROJECTS_LABEL)}
           icon={<NoProjectIcon sx={{ fontSize: 100 }} />}
           sx={{ gridColumn: '1 / -1', backgroundColor: 'info.light' }}
         >
@@ -245,7 +258,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                   fontSize: 18,
                 }}
               >
-                {RESET_FILTERS_LABEL}
+                {_(RESET_FILTERS_LABEL)}
               </Box>
             )}
           </>

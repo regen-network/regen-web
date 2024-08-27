@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
@@ -32,12 +34,13 @@ interface Props {
 
 export function ProjectCardsSection({
   projects,
-  title = 'Projects',
+  title,
   body,
   titleAlign = 'center',
   onButtonClick,
   loading,
 }: Props): JSX.Element {
+  const { _ } = useLingui();
   const { classes } = useSectionStyles();
   const { track } = useTracker();
   const { data: sanitySoldOutProjects, isFetching } = useQuery(
@@ -50,7 +53,7 @@ export function ProjectCardsSection({
 
   return (
     <Section
-      title={title}
+      title={title ?? _(msg`Projects`)}
       titleAlign={titleAlign}
       classes={{ root: classes.section, title: classes.title }}
     >
@@ -87,7 +90,7 @@ export function ProjectCardsSection({
                 sx={{ width: 400, height: 479 }}
                 track={track}
                 isSoldOut={isSoldOut}
-                creditsTooltip={getCreditsTooltip({ isSoldOut, project })}
+                creditsTooltip={getCreditsTooltip({ isSoldOut, project, _ })}
                 program={project.program}
                 projectPrefinancing={project.projectPrefinancing}
                 offChain={project.offChain}

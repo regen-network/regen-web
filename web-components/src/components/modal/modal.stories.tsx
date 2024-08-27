@@ -189,6 +189,8 @@ const MAPBOX_TOKEN = import.meta.env.STORYBOOK_MAPBOX_TOKEN || '';
 
 export const basketTakeModal = (): JSX.Element => (
   <BasketTakeModal
+    title="Take from basket"
+    subtitle="You will receive one ecocredit for every basket token you redeem. Oldest batches will be pulled first."
     open={true}
     accountAddress="123xyz"
     basketDisplayDenom="eco.C.rNCT"

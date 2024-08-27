@@ -60,10 +60,10 @@ const PostFilesPublic = ({
     files[0]?.location,
   );
   const [animateMarker, setAnimateMarker] = useState<boolean>(false);
-  const [isFilesWindowOpen, setIsFilesWindowOpen] = useState(false);
+  const [isFilesWindowOpen, setIsFilesWindowOpen] = useState(
+    selectedUrl === files[0]?.url,
+  );
   const mapRef = useRef<MapRef | null>(null);
-
-  // useEffect(() => {}, [selectedUrl]);
 
   const groupByLocation = useMemo(
     () =>
@@ -143,7 +143,11 @@ const PostFilesPublic = ({
                       setSelectedLocation(geometry);
                       // Set first file of group as selected
                       setSelectedUrl(group[0].url);
-                      setIsFilesWindowOpen(current => !current);
+                      if (group[0].url !== selectedUrl) {
+                        setIsFilesWindowOpen(true);
+                      } else {
+                        setIsFilesWindowOpen(current => !current);
+                      }
                     }}
                     className={cn(
                       'transition duration-500 cursor-pointer flex items-center justify-center border border-solid rounded-[30px] h-30',

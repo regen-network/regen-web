@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { CREATE_POST_DISABLED_TOOLTIP } from 'web-marketplace/src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
 import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
-
-import InfoTooltip from 'src/components/tooltip/InfoTooltip';
 
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';

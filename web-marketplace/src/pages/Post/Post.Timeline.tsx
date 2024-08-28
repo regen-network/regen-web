@@ -30,6 +30,7 @@ type Props = {
   creatorAccount: AccountByIdQuery['accountById'];
   creatorIsAdmin: boolean;
   registryAddr?: string | null;
+  adminAddr?: string | null;
 };
 
 export const PostTimeline = ({
@@ -37,6 +38,7 @@ export const PostTimeline = ({
   creatorAccount,
   creatorIsAdmin,
   registryAddr,
+  adminAddr,
 }: Props) => {
   const { _ } = useLingui();
   const { iri } = useParams();
@@ -46,6 +48,7 @@ export const PostTimeline = ({
     creatorAccount,
     creatorIsAdmin,
     registryAddr,
+    adminAddr,
   });
 
   return (

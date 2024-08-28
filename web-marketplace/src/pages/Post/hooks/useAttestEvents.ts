@@ -41,6 +41,7 @@ type UseAttestEventsParams = {
   creatorAccount: AccountByIdQuery['accountById'];
   creatorIsAdmin: boolean;
   registryAddr?: string | null;
+  adminAddr?: string | null;
   createdAt: string;
   onlyAttestEvents?: boolean;
 };
@@ -50,6 +51,7 @@ export const useAttestEvents = ({
   creatorAccount,
   creatorIsAdmin,
   registryAddr,
+  adminAddr,
   createdAt,
   onlyAttestEvents,
 }: UseAttestEventsParams) => {
@@ -120,10 +122,7 @@ export const useAttestEvents = ({
         getAccountByAddrQuery({
           addr: txRes.attestor,
           client: graphqlClient,
-          enabled:
-            (!creatorAccount?.addr ||
-              creatorAccount?.addr !== txRes.attestor) &&
-            !!graphqlClient,
+          enabled: !!graphqlClient,
         }),
       ) || [],
   });
@@ -168,6 +167,12 @@ export const useAttestEvents = ({
         !!registryAddr &&
         !!attestorAccount?.addr &&
         attestorAccount?.addr === registryAddr;
+
+      const attestorIsAdmin =
+        !!adminAddr &&
+        !!attestorAccount?.addr &&
+        attestorAccount?.addr === adminAddr;
+
       events.unshift({
         icon: '/svg/post-signed.svg',
         label: _(msg`Signed by`),
@@ -184,7 +189,11 @@ export const useAttestEvents = ({
             : undefined,
           type: attestorAccount?.type ?? 'USER',
           image: attestorAccount?.image || getDefaultAvatar(attestorAccount),
-          tag: attestorIsRegistry ? _(REGISTRY) : undefined,
+          tag: attestorIsAdmin
+            ? _(ADMIN)
+            : attestorIsRegistry
+            ? _(REGISTRY)
+            : undefined,
         },
       });
     }

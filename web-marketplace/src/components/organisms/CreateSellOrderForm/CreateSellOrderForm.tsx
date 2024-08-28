@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
@@ -106,7 +107,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
       }}
     >
       <SelectTextField
-        label="Batch denom"
+        label={_(msg`Batch denom`)}
         options={options}
         disabled={options.length === 1}
         sx={{ mb: 10.5 }}
@@ -130,7 +131,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
           }}
         >
           <TextField
-            label="Price"
+            label={_(msg`Price`)}
             type="number"
             error={!!errors['price']}
             helperText={errors['price']?.message}
@@ -150,7 +151,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
         </Box>
       </Box>
       <AmountField
-        label="Amount to sell"
+        label={_(msg`Amount to sell`)}
         availableAmount={availableAmount}
         error={!!errors['amount']}
         helperText={errors['amount']?.message}
@@ -163,12 +164,12 @@ const CreateSellOrderForm: React.FC<Props> = ({
         label={
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Subtitle size="lg" color="primary.contrastText" sx={{ mr: 2 }}>
-              Require that credits are retired upon purchase
+              <Trans>Require that credits are retired upon purchase</Trans>
             </Subtitle>
             <InfoTooltip
-              title={
-                'If you uncheck this option, buyers will be able to choose to keep the credits tradable'
-              }
+              title={_(
+                msg`If you uncheck this option, buyers will be able to choose to keep the credits tradable`,
+              )}
               arrow
               placement="top"
             >
@@ -188,7 +189,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
         onClose={onClose}
         isValid={isValid}
         submitCount={submitCount}
-        label="Create Sell Order"
+        label={_(msg`Create Sell Order`)}
       />
     </Form>
   );

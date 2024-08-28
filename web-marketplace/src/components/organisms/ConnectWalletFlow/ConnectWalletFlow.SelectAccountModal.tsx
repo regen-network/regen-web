@@ -47,10 +47,10 @@ export const SelectAccountModal = ({
   return (
     <Modal open={open} onClose={onClose}>
       <Title variant="h4" align="center" sx={{ my: 5 }}>
-        {SELECT_ACCOUNT_TITLE}
+        {_(SELECT_ACCOUNT_TITLE)}
       </Title>
       <Body size="lg" align="center" sx={{ mb: 12.5 }}>
-        {SELECT_ACCOUNT_DESCRIPTION}
+        {_(SELECT_ACCOUNT_DESCRIPTION)}
       </Body>
       <div className="pb-40">
         {accounts.map(account => (
@@ -74,7 +74,7 @@ export const SelectAccountModal = ({
               </Body>
               {account.current && (
                 <TextButton className="pt-10 text-[11px] text-grey-600 hover:text-grey-600">
-                  {CURRENT_ACCOUNT}
+                  {_(CURRENT_ACCOUNT)}
                 </TextButton>
               )}
             </div>
@@ -84,8 +84,8 @@ export const SelectAccountModal = ({
       <CancelButtonFooter
         onCancel={onClose}
         disabled={!selectedAccountId}
-        cancelLabel={SELECT_ACCOUNT_CANCEL}
-        label={SELECT_ACCOUNT_MERGE}
+        cancelLabel={_(SELECT_ACCOUNT_CANCEL)}
+        label={_(SELECT_ACCOUNT_MERGE)}
         onClick={() => {
           const selectedAccount = accounts.find(
             account => account.id === selectedAccountId,

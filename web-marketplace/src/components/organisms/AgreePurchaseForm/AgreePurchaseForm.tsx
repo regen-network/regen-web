@@ -1,4 +1,5 @@
 import { useFormState, useWatch } from 'react-hook-form';
+import { Trans } from '@lingui/macro';
 
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import { Body } from 'web-components/src/components/typography/Body';
@@ -64,7 +65,7 @@ export const AgreePurchaseForm = ({
           optional
           label={
             <Body className="text-grey-700" size="md" as="span">
-              Follow this project get project update to my inbox
+              <Trans>Follow this project get project update to my inbox</Trans>
             </Body>
           }
           {...form.register('followProject')}
@@ -74,8 +75,10 @@ export const AgreePurchaseForm = ({
           optional
           label={
             <Body className="text-grey-700" size="md" as="span">
-              Subscribe to Regen Network newsletter, which includes product
-              updates and new and exciting projects
+              <Trans>
+                Subscribe to Regen Network newsletter, which includes product
+                updates and new and exciting projects
+              </Trans>
             </Body>
           }
           {...form.register('subscribeNewsletter')}

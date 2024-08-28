@@ -1,4 +1,5 @@
 import { UseFormReturn } from 'react-hook-form';
+import { msg } from '@lingui/macro';
 
 import {
   invalidMemoLength,
@@ -10,12 +11,15 @@ import {
   validateMemoLength,
 } from 'web-components/src/components/inputs/validation';
 
+import { TranslatorType } from 'lib/i18n/i18n.types';
+
 import { CreditSendFormSchemaType } from './CreditSendForm.schema';
 
 type Props = {
   values: CreditSendFormSchemaType;
   addressPrefix?: string;
   availableTradableAmount: number;
+  _: TranslatorType;
   setError: UseFormReturn<CreditSendFormSchemaType>['setError'];
 };
 
@@ -33,6 +37,7 @@ export const validateCreditSendForm = ({
   values,
   addressPrefix,
   availableTradableAmount,
+  _,
   setError,
 }: Props): boolean => {
   let hasError = false;
@@ -55,7 +60,9 @@ export const validateCreditSendForm = ({
   // TODO: temporarily disable sending credits to the same account
   if (values.sender && values.recipient && values.sender === values.recipient) {
     setError('recipient', {
-      message: 'The recipient address cannot be the same as the sender address',
+      message: _(
+        msg`The recipient address cannot be the same as the sender address`,
+      ),
     });
     hasError = true;
   }

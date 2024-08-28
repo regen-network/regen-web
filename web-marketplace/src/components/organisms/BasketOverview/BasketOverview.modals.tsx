@@ -79,7 +79,7 @@ export const BasketOverviewModals = ({
       atom.cardItems = cardItems;
       atom.title = title;
       atom.cardTitle = cardTitle;
-      atom.buttonTitle = VIEW_PORTFOLIO;
+      atom.buttonTitle = _(VIEW_PORTFOLIO);
       atom.buttonLink = '/profile/portfolio';
     });
   };
@@ -97,7 +97,7 @@ export const BasketOverviewModals = ({
   const basketPutSubmit = useBasketPutSubmit({
     accountAddress,
     baskets: basketInfo ? [basketInfo] : [],
-    basketPutTitle: PUT_BASKET_LABEL,
+    basketPutTitle: _(PUT_BASKET_LABEL),
     credit,
     onBroadcast,
     onTxSuccessful,
@@ -108,7 +108,7 @@ export const BasketOverviewModals = ({
   const basketTakeSubmit = useBasketTakeSubmit({
     accountAddress,
     baskets: basketInfo ? [basketInfo] : [],
-    basketTakeTitle: TAKE_BASKET_LABEL,
+    basketTakeTitle: _(TAKE_BASKET_LABEL),
     onBroadcast,
     onTxSuccessful,
     onErrorCallback: onError,

@@ -16,7 +16,13 @@ module.exports = {
       1,
       {
         ignoreFunction: ['test'],
-        ignoreAttribute: ['sx', 'linearGradient', 'rel'],
+        ignoreAttribute: [
+          'sx',
+          'linearGradient',
+          'rel',
+          'labelClassName',
+          'classes',
+        ],
         ignoreProperty: [
           'margin',
           'padding',
@@ -25,6 +31,9 @@ module.exports = {
           'borderTop',
           'borderLeft',
           'borderBottom',
+          'flexFlow',
+          'transition',
+          'transform',
         ],
       },
     ],

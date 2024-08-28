@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
@@ -36,28 +38,38 @@ export const BasketEcocreditsTable: React.FC<
   isIgnoreOffset,
   onTableChange,
 }) => {
+  const { _ } = useLingui();
+
   if (!basketCredits?.length) {
-    return <NoCredits title="No ecocredits to display" />;
+    return <NoCredits title={_(msg`No ecocredits to display`)} />;
   }
 
   return (
     <ActionsTable
-      tableLabel="basket ecocredits table"
+      tableLabel={_(msg`basket ecocredits table`)}
       renderActionButtons={renderActionButtons}
       onTableChange={onTableChange}
       initialPaginationParams={initialPaginationParams}
       isIgnoreOffset={isIgnoreOffset}
       headerRows={[
-        <Box sx={{ minWidth: '8rem' }}>Project</Box>,
-        <Box sx={{ minWidth: { xs: '8rem', sm: '11rem', md: 'auto' } }}>
-          Batch Denom
+        <Box sx={{ minWidth: '8rem' }}>
+          <Trans>Project</Trans>
         </Box>,
-        'Issuer',
-        'Amount',
-        <BreakText>Credit Class</BreakText>,
-        <BreakText>Batch Start Date</BreakText>,
-        <BreakText>Batch End Date</BreakText>,
-        'Project Location',
+        <Box sx={{ minWidth: { xs: '8rem', sm: '11rem', md: 'auto' } }}>
+          <Trans>Batch Denom</Trans>
+        </Box>,
+        <Trans>Issuer</Trans>,
+        <Trans>Amount</Trans>,
+        <BreakText>
+          <Trans>Credit Class</Trans>
+        </BreakText>,
+        <BreakText>
+          <Trans>Batch Start Date</Trans>
+        </BreakText>,
+        <BreakText>
+          <Trans>Batch End Date</Trans>
+        </BreakText>,
+        <Trans>Project Location</Trans>,
       ]}
       rows={basketCredits.map(credit => [
         <WithLoader isLoading={credit.projectName === ''} variant="skeleton">

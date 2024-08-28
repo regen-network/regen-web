@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg, plural } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 import { useAtom, useSetAtom } from 'jotai';
 
@@ -71,6 +73,7 @@ export const BasketOverview: React.FC<
   minStartDate,
   startDateWindow,
 }) => {
+  const { _ } = useLingui();
   const { classes: styles } = useBasketOverviewStyles();
   const basketPutData = useBasketPutData();
   const basketTakeData = useBasketTakeData();
@@ -117,7 +120,7 @@ export const BasketOverview: React.FC<
                   columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                 >
                   <BasketItem
-                    label="total amount"
+                    label={_(msg`total amount`)}
                     data={formatNumber({ num: totalAmount })}
                   />
                   <BasketItem
@@ -126,17 +129,20 @@ export const BasketOverview: React.FC<
                     link={getAccountUrl(curator.address as string)}
                   />
                   <BasketItemWithLinkList
-                    label={`allowed credit class${
-                      allowedCreditClasses.length > 1 ? 'es' : ''
-                    }`}
+                    label={plural(allowedCreditClasses.length, {
+                      one: 'allowed credit class',
+                      other: 'allowed credit classes',
+                    })}
                     data={allowedCreditClasses}
                     link={'/credit-classes/'}
                   />
                   <BasketItem
                     label={
-                      startDateWindow ? 'start date window' : 'min start date'
+                      startDateWindow
+                        ? _(msg`start date window`)
+                        : _(msg`min start date`)
                     }
-                    data={getDateCriteria(minStartDate, startDateWindow)}
+                    data={getDateCriteria(_, minStartDate, startDateWindow)}
                   />
                 </Grid>
               </OnBoardingCard>
@@ -145,8 +151,8 @@ export const BasketOverview: React.FC<
                   title={
                     isPutButtonDisabled ? (
                       <BasketOverviewTooltip
-                        text={PUT_BASKET_TOOLTIP}
-                        href={PUT_BASKET_HREF}
+                        text={_(PUT_BASKET_TOOLTIP)}
+                        href={_(PUT_BASKET_HREF)}
                       />
                     ) : (
                       ''
@@ -177,7 +183,7 @@ export const BasketOverview: React.FC<
                       }}
                       disabled={isPutButtonDisabled}
                     >
-                      {PUT_BASKET_LABEL}
+                      {_(PUT_BASKET_LABEL)}
                     </OutlinedButton>
                   </span>
                 </InfoTooltip>
@@ -185,8 +191,8 @@ export const BasketOverview: React.FC<
                   title={
                     isTakeButtonDisabled ? (
                       <BasketOverviewTooltip
-                        text={TAKE_BASKET_TOOLTIP}
-                        href={TAKE_BASKET_HREF}
+                        text={_(TAKE_BASKET_TOOLTIP)}
+                        href={_(TAKE_BASKET_HREF)}
                       />
                     ) : (
                       ''
@@ -210,7 +216,7 @@ export const BasketOverview: React.FC<
                       }}
                       disabled={isTakeButtonDisabled}
                     >
-                      {TAKE_BASKET_LABEL}
+                      {_(TAKE_BASKET_LABEL)}
                     </OutlinedButton>
                   </span>
                 </InfoTooltip>

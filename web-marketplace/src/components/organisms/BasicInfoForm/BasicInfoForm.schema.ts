@@ -29,4 +29,6 @@ export const basicInfoFormDraftSchema = z
   .partial();
 
 export type BasicInfoFormSchemaType = z.infer<typeof basicInfoFormSchema>;
-export type BasicInfoFormDraftSchemaType = z.infer<typeof basicInfoFormDraftSchema>;
+export type BasicInfoFormDraftSchemaType = z.infer<
+  typeof basicInfoFormDraftSchema
+>;

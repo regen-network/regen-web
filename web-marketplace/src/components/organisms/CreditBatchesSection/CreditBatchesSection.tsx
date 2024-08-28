@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import { Box } from '@mui/material';
 
 import Section from 'web-components/src/components/section';
@@ -20,7 +21,7 @@ function CreditBatchesSection({
       {/* spacing here based on padding-top for `<Section />` component */}
       <Box sx={{ mt: { xs: 17.75, sm: 22.25 } }}>
         <Title variant="h3" sx={{ pb: 8 }}>
-          Credit Batches
+          <Trans>Credit Batches</Trans>
         </Title>
         <CreditBatches
           creditClassId={offChainProject?.creditClassByCreditClassId?.onChainId}

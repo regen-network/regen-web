@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useFieldArray, useFormState, useWatch } from 'react-hook-form';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/system';
 import { makeStyles } from 'tss-react/mui';
 
@@ -60,6 +62,7 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
     onClose,
     onSubmit,
   }) => {
+    const { _ } = useLingui();
     const { classes: styles } = useStyles();
     const form = useZodForm({
       schema: CreditSendFormSchema({ addressPrefix }),
@@ -97,9 +100,10 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
           onSubmit={data => {
             const hasError = validateCreditSendForm({
               availableTradableAmount,
-              setError: form.setError,
               values: data,
               addressPrefix,
+              setError: form.setError,
+              _,
             });
             if (!hasError) {
               onSubmit(data);
@@ -108,13 +112,13 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
         >
           <TextField
             type="text"
-            label="Sender"
+            label={_(msg`Sender`)}
             disabled
             {...form.register('sender')}
           />
           <TextField
             type="text"
-            label="Recipient"
+            label={_(msg`Recipient`)}
             helperText={errors.recipient?.message}
             error={!!errors.recipient}
             {...form.register('recipient')}
@@ -123,9 +127,13 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
           <AmountField
             label={
               <Flex align="center">
-                <Box sx={{ mr: 1 }}>{'Amount of credits'}</Box>
+                <Box sx={{ mr: 1 }}>
+                  <Trans>Amount of credits</Trans>
+                </Box>
                 <InfoTooltip
-                  title="By default these credits are tradable but you may check “retire all credits upon transfer” below to automatically retire them upon sending."
+                  title={_(
+                    msg`By default these credits are tradable but you may check “retire all credits upon transfer” below to automatically retire them upon sending.`,
+                  )}
                   arrow
                   placement="top"
                 >
@@ -154,10 +162,10 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
             label={
               <Subtitle size="lg" color="primary.contrastText" as="span">
                 <Box sx={{ display: 'inline' }}>
-                  Retire all credits upon transfer
+                  <Trans>Retire all credits upon transfer</Trans>
                 </Box>{' '}
                 <Box sx={{ display: 'inline', fontWeight: 400 }}>
-                  {'(retirement is permanent and non-reversible)'}
+                  <Trans>(retirement is permanent and non-reversible)</Trans>
                 </Box>
               </Subtitle>
             }
@@ -185,7 +193,7 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
             onClose={onClose}
             isValid={isValid}
             submitCount={submitCount}
-            label={'Send'}
+            label={_(msg`Send`)}
           />
         </Form>
       </>

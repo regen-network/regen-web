@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { SxProps } from '@mui/material';
 import Box from '@mui/material/Box';
 import cx from 'clsx';
@@ -27,7 +29,7 @@ import { NoCredits } from 'components/molecules';
 
 import {
   CreditBatchesHeadCell,
-  creditBatchesHeadCells,
+  getCreditBatchesHeadCells,
 } from './CreditBatches.config';
 import { useCreditBatchesStyles } from './CreditBatches.styles';
 
@@ -56,7 +58,12 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
   initialPaginationParams,
   sx,
 }) => {
+  const { _ } = useLingui();
   const { classes } = useCreditBatchesStyles();
+  const creditBatchesHeadCells = useMemo(
+    () => getCreditBatchesHeadCells(_),
+    [_],
+  );
 
   let columnsToShow = [...creditBatchesHeadCells];
 
@@ -82,7 +89,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
   if (!creditBatches?.length) {
     return (
       <NoCredits
-        title="No credits issued"
+        title={_(msg`No credits issued`)}
         icon={
           <NoEcocreditsIcon
             sx={{
@@ -102,7 +109,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
 
   const table = (
     <ActionsTable
-      tableLabel="credit batch table"
+      tableLabel={_(msg`credit batch table`)}
       headerRows={columnsToShow.map(headCell => (
         <Box
           display="flex"
@@ -214,7 +221,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
     withSection ? (
       <Section
         classes={{ root: classes.section, title: classes.title }}
-        title="Credit Batches"
+        title={_(msg`Credit Batches`)}
         titleVariant="h2"
         titleAlign={titleAlign}
       >

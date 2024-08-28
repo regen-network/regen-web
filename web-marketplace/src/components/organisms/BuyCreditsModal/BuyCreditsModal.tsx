@@ -1,6 +1,8 @@
 import React, { lazy, Suspense, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Link, useLocation } from 'react-router-dom';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box, useTheme } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
@@ -122,6 +124,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     imageStorageBaseUrl,
     isCommunityCredit = false,
   }) => {
+    const { _ } = useLingui();
     const { classes, cx } = useBuyCreditsModalStyles();
     const theme = useTheme();
     const { marketplaceClient } = useLedger();
@@ -184,7 +187,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
             align="center"
             sx={{ pt: 0, pb: 5, px: { xs: 0, sm: 7.5 } }}
           >
-            {'Buy Ecocredits'}
+            <Trans>Buy Ecocredits</Trans>
           </Title>
           {buyModalContent && !isCommunityCredit && (
             <BuyCreditsModalInfoCard
@@ -209,7 +212,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                   <Title sx={{ fontSize: { xs: 16, sm: 21 } }}>
                     {project.creditDenom &&
                       ReactHtmlParser(project.creditDenom)}{' '}
-                    Credits
+                    <Trans>Credits</Trans>
                   </Title>
                   <Subtitle size="lg" mobileSize="xs">
                     <Link to={`/project/${project.id}`} target="_blank">
@@ -264,7 +267,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                 <div>
                   <Form translate="yes">
                     <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                      {'Sell order'}
+                      <Trans>Sell order</Trans>
                     </Title>
                     <Field
                       name="sellOrderId"
@@ -285,7 +288,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                     <Collapse in={!!selectedSellOrder}>
                       <div className={classes.field}>
                         <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                          Amount of credits
+                          <Trans>Amount of credits</Trans>
                         </Title>
                         <Body
                           size="md"
@@ -302,7 +305,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                             allowedDenomsData,
                             bankDenom: selectedSellOrder?.askDenom ?? '',
                             baseDenom: selectedSellOrder?.askBaseDenom,
-                          })}/credit`}
+                          })}/${_(msg`credit`)}`}
                         </Body>
                         <Body
                           size="md"
@@ -312,7 +315,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                             mb: 3,
                           }}
                         >
-                          {'Batch denom: '}
+                          <Trans>Batch denom: </Trans>
                           <Body
                             as="span"
                             sx={{
@@ -397,7 +400,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                       </div>
                     </Collapse>
                     <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                      Purchase options
+                      <Trans>Purchase options</Trans>
                     </Title>
                     <Field
                       className={classes.field}
@@ -409,17 +412,19 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                         type="radio"
                         value="autoretire"
                         checked={values['retirementAction'] === 'autoretire'}
-                        label="Retire credits now"
+                        label={_(msg`Retire credits now`)}
                         description={
                           <>
-                            {
-                              'These credits will be retired upon purchase and will not be tradable. Retirement is permanent and non-reversible.'
-                            }
+                            <Trans>
+                              These credits will be retired upon purchase and
+                              will not be tradable. Retirement is permanent and
+                              non-reversible.
+                            </Trans>
                             <DynamicLink
                               href="https://guides.regen.network/guides/regen-marketplace/profile/buy-ecocredits/by-project#5.-select-credit-retirement-options"
                               sx={{ ml: 1 }}
                             >
-                              Learn more»
+                              <Trans>Learn more»</Trans>
                             </DynamicLink>
                           </>
                         }
@@ -429,12 +434,13 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                         type="radio"
                         value="manual"
                         checked={values['retirementAction'] === 'manual'} // if disableAutoRetire, this is an option
-                        label="Buy tradable ecocredits"
+                        label={_(msg`Buy tradable ecocredits`)}
                         description={
                           <>
-                            {
-                              'These credits will be a tradable asset. They can be retired later via Regen Marketplace.'
-                            }
+                            <Trans>
+                              These credits will be a tradable asset. They can
+                              be retired later via Regen Marketplace.
+                            </Trans>
                             <DynamicLink
                               href="https://guides.regen.network/guides/regen-marketplace/profile/buy-ecocredits/by-project#5.-select-credit-retirement-options"
                               sx={[
@@ -447,7 +453,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                                 },
                               ]}
                             >
-                              Learn more»
+                              <Trans>Learn more»</Trans>
                             </DynamicLink>
                           </>
                         }
@@ -455,9 +461,11 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                         tooltip={
                           !isDisableAutoRetire ? (
                             <Box sx={{ textAlign: 'start' }}>
-                              {
-                                'The seller of these credits has chosen to only allow for immediate retiring of credits. These credits cannot be purchased as a tradable asset.'
-                              }
+                              <Trans>
+                                The seller of these credits has chosen to only
+                                allow for immediate retiring of credits. These
+                                credits cannot be purchased as a tradable asset.
+                              </Trans>
                               <DynamicLink
                                 href="https://guides.regen.network/guides/regen-marketplace/profile/buy-ecocredits/by-project#5.-select-credit-retirement-options"
                                 sx={{
@@ -467,7 +475,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                                   fontWeight: 700,
                                 }}
                               >
-                                Learn more»
+                                <Trans>Learn more»</Trans>
                               </DynamicLink>
                             </Box>
                           ) : undefined
@@ -477,14 +485,20 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                     <Collapse in={values['retirementAction'] === 'autoretire'}>
                       <Flex>
                         <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                          Retirement reason
+                          <Trans>Retirement reason</Trans>
                         </Title>
-                        <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
+                        <InfoTooltipWithIcon
+                          title={_(
+                            msg`You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')`,
+                          )}
+                        />
                       </Flex>
                       <Flex>
                         <Field
                           component={TextField}
-                          label="Explain the reason you are retiring these credits"
+                          label={_(
+                            msg`Explain the reason you are retiring these credits`,
+                          )}
                           name="retirementReason"
                           optional
                           sx={{
@@ -497,14 +511,20 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                       </Flex>
                       <Flex>
                         <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                          Credit retirement location
+                          <Trans>Credit retirement location</Trans>
                         </Title>
-                        <InfoTooltipWithIcon title="The retirement location can be where you live or your business operates." />
+                        <InfoTooltipWithIcon
+                          title={_(
+                            msg`The retirement location can be where you live or your business operates.`,
+                          )}
+                        />
                       </Flex>
                       <Body sx={{ color: 'info.dark', mb: { xs: 0, sm: 3 } }}>
-                        Please enter a location for the retirement of these
-                        credits. This prevents double counting of credits in
-                        different locations. These credits will auto-retire.
+                        <Trans>
+                          Please enter a location for the retirement of these
+                          credits. This prevents double counting of credits in
+                          different locations. These credits will auto-retire.
+                        </Trans>
                       </Body>
                       <Grid container className={classes.stateCountryGrid}>
                         <Grid
@@ -516,7 +536,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                           <Suspense
                             fallback={
                               <SelectFieldFallback
-                                label="Country"
+                                label={_(msg`Country`)}
                                 name="country"
                               />
                             }
@@ -533,7 +553,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                           <Suspense
                             fallback={
                               <SelectFieldFallback
-                                label="State / Region"
+                                label={_(msg`State / Region`)}
                                 name="state"
                               />
                             }
@@ -548,7 +568,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                       <Field
                         className={cx(classes.field, classes.postalCodeField)}
                         component={ControlledTextField}
-                        label="Postal Code"
+                        label={_(msg`Postal Code`)}
                         name="postalCode"
                         optional
                       />

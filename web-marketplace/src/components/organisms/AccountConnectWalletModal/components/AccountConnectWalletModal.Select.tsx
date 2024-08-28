@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import { Box } from '@mui/system';
 
 import { Body, Title } from 'web-components/src/components/typography';
@@ -15,13 +16,15 @@ const LoginModalSelect = ({ wallets }: Props): JSX.Element => {
   return (
     <Box textAlign="center">
       <Title variant="h4" mb={5}>
-        Select a wallet
+        <Trans>Select a wallet</Trans>
       </Title>
       <Body pb={7.5}>
-        Learn more about wallets in our{' '}
-        <Link href="https://guides.regen.network/guides/wallets">
-          user guide.
-        </Link>
+        <Trans>
+          Learn more about wallets in our{' '}
+          <Link href="https://guides.regen.network/guides/wallets">
+            user guide.
+          </Link>
+        </Trans>
       </Body>
       <LoginModalProviders providers={wallets} />
     </Box>

@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { LoginProvider } from './AccountConnectWalletModal.types';
 
 type GetWalletsMockParams = {

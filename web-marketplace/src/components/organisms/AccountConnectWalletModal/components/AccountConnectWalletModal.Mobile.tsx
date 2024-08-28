@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import QRCode from 'qrcode.react';
 
@@ -16,11 +17,13 @@ export interface Props {
 }
 
 const LoginModalMobile = ({ qrCodeUri, connecting }: Props): JSX.Element => {
+  const { _ } = useLingui();
+
   return (
     <Box sx={{ minHeight: 400 }}>
       <Title variant="h5" sx={{ mb: 7.5, textAlign: 'center' }}>
-        {connecting && CONNECTING_LABEL}
-        {qrCodeUri && QR_CODE_LABEL}
+        {connecting && _(CONNECTING_LABEL)}
+        {qrCodeUri && _(QR_CODE_LABEL)}
       </Title>
       <Center sx={{ pt: 9, height: 340 }}>
         {connecting && <Loading />}

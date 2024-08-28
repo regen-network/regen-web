@@ -1,3 +1,5 @@
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import Submit from 'web-components/src/components/form/Submit';
@@ -14,6 +16,7 @@ import { RegenModalProps } from 'web-components/src/components/modal';
 
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckbox';
 
+// eslint-disable-next-line lingui/no-unlocalized-strings
 const BRIDGE_ALLOWED_CHAINS = [{ label: 'Polygon', value: 'polygon' }];
 
 export interface BridgeProps {
@@ -39,6 +42,8 @@ const BridgeForm = ({
   availableBridgeableAmount,
   batchDenom,
 }: FormProps): JSX.Element => {
+  const { _ } = useLingui();
+
   const initialValues = {
     amount: undefined,
     recipient: '',
@@ -73,7 +78,7 @@ const BridgeForm = ({
         <Form>
           <Field
             name="target"
-            label="Chain"
+            label={_(msg`Chain`)}
             component={SelectTextField}
             options={BRIDGE_ALLOWED_CHAINS}
             disabled
@@ -83,15 +88,17 @@ const BridgeForm = ({
             type="text"
             label={
               <FormLabel
-                label="Recipient"
-                description="This is the Polygon address of the recipient."
+                label={_(msg`Recipient`)}
+                description={_(
+                  msg`This is the Polygon address of the recipient.`,
+                )}
               />
             }
             component={TextField}
           />
           <AmountField
             name="amount"
-            label="Amount"
+            label={_(msg`Amount`)}
             availableAmount={availableBridgeableAmount}
             denom={batchDenom}
           />

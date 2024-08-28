@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
@@ -22,6 +23,8 @@ export const BasketDetailsActionsBar = ({
   isBuyButtonDisabled = false,
   onBuyButtonClick,
 }: Props): JSX.Element => {
+  const { _ } = useLingui();
+
   return (
     <StickyBar>
       <Box
@@ -33,7 +36,7 @@ export const BasketDetailsActionsBar = ({
         }}
       >
         <Box sx={{ mr: 5 }}>
-          <InfoTooltipWithIcon title={BUY_BASKET_TOKENS_TOOLTIP} outlined />
+          <InfoTooltipWithIcon title={_(BUY_BASKET_TOKENS_TOOLTIP)} outlined />
         </Box>
         <span>
           <ContainedButton
@@ -45,7 +48,7 @@ export const BasketDetailsActionsBar = ({
             LinkComponent={Link}
             disabled={isBuyButtonDisabled}
           >
-            {BUY_BASKET_TOKENS}
+            {_(BUY_BASKET_TOKENS)}
           </ContainedButton>
         </span>
       </Box>

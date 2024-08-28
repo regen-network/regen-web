@@ -4,10 +4,7 @@ import { Center } from 'web-components/src/components/box';
 
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 
-import {
-  CreateCreditClassForm,
-  getCreateCreditClassSteps,
-} from './CreateCreditClassForm';
+import { CreateCreditClassForm } from './CreateCreditClassForm';
 import {
   createCreditClassStepsMock,
   mockMetadata,

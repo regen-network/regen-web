@@ -236,7 +236,7 @@ export const MyEcocredits = (): JSX.Element => {
     accountAddress,
     baskets: baskets?.basketsInfo,
     basketPutTitle: _(BASKET_PUT_TITLE),
-    credit: credits[basketPutOpen],
+    credit: credits[basketPutOpen] ?? {},
     onBroadcast: onCloseBasketPutModal,
     onTxSuccessful,
     signAndBroadcast,

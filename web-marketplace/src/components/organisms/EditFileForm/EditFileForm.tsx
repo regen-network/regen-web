@@ -127,15 +127,17 @@ export const EditFileForm = ({
             <div className="h-[309px] sm:h-[409px] pb-10">
               <LocationPicker
                 value={location || projectLocation}
-                handleChange={value =>
+                handleChange={value => {
                   setValue(`files.${currentIndex}.location`, value, {
                     shouldDirty: true,
                     shouldTouch: true,
-                  })
-                }
+                  });
+                  setValue(`files.${currentIndex}.locationType`, 'custom');
+                }}
                 disabled={locationType === 'file' || locationType === 'none'}
                 mapboxToken={mapboxToken}
                 geocodingPlaceName={geocodingPlaceName}
+                dragHint={_(msg`Drag map to choose location`)}
                 {...register(`files.${currentIndex}.location`)}
               />
             </div>

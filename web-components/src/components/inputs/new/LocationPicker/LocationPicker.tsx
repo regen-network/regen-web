@@ -23,6 +23,7 @@ type LocationPickerProps = {
     value: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>,
   ) => void;
   geocodingPlaceName?: string;
+  dragHint: string;
 };
 
 export const LocationPicker = ({
@@ -32,6 +33,7 @@ export const LocationPicker = ({
   handleChange,
   onBlur,
   geocodingPlaceName,
+  dragHint,
 }: LocationPickerProps): JSX.Element => {
   const mapRef = useRef<MapRef | null>(null);
   const point = value.geometry as Point;
@@ -88,15 +90,9 @@ export const LocationPicker = ({
           });
         }}
         attributionControl={false}
-        boxZoom={!disabled}
-        doubleClickZoom={!disabled}
-        dragRotate={!disabled}
-        dragPan={!disabled}
-        keyboard={!disabled}
-        scrollZoom={disabled ? false : { around: 'center' }}
-        touchPitch={!disabled}
-        touchZoomRotate={disabled ? false : { around: 'center' }}
-        cursor={disabled ? 'default' : undefined}
+        scrollZoom={{ around: 'center' }}
+        touchZoomRotate={{ around: 'center' }}
+        cursor={'default'}
       >
         <div className="absolute top-0 w-[100%]">
           {disabled ? (
@@ -131,6 +127,12 @@ export const LocationPicker = ({
           without using a react-map-gl Marker, so the map moves around the pin */}
         <div className="absolute top-[50%] left-[50%] -ml-[18.5px] -mt-50">
           <GreenPinIcon />
+          <Body
+            className="mt-15 text-grey-0 bg-grey-700 py-5 px-10 rounded-[30px] -ml-[78px]"
+            size="sm"
+          >
+            {dragHint}
+          </Body>
         </div>
       </Map>
     </Suspense>

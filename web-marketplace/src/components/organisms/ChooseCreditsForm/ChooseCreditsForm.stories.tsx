@@ -12,7 +12,7 @@ export default {
 
 type Story = StoryObj<typeof ChooseCreditsForm>;
 
-const creditAvailability = [
+const creditsAvailable = [
   {
     credits: 1000,
     currency: CURRENCIES.usd,
@@ -31,11 +31,11 @@ const creditAvailability = [
   },
 ];
 
-export const ChooseCreditsStep1: Story = {
+export const ChooseCredits: Story = {
   render: args => <ChooseCreditsForm {...args} />,
 };
 
-ChooseCreditsStep1.args = {
+ChooseCredits.args = {
   creditVintages,
-  creditsAvailable: creditAvailability,
+  creditsAvailable,
 };

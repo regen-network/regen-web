@@ -1,18 +1,26 @@
 import userEvent from '@testing-library/user-event';
+import { Mock } from 'vitest';
 import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { render, screen } from 'web-marketplace/test/test-utils';
 
 import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { CreditsAmount } from './CreditsAmount';
+import { getCurrencyPrice } from './CreditsAmount.utils';
+
+vi.mock('./CreditsAmount.utils', () => ({
+  getCurrencyPrice: vi.fn(),
+}));
 
 describe('CreditsAmount', () => {
   const formDefaultValues = {
-    creditsAvailable: 100,
+    creditsAvailable: [{ credits: 100, currency: CURRENCIES.usd }],
     paymentOption: PAYMENT_OPTIONS.CARD,
-    currency: CURRENCIES.usd,
-    onCurrencyChange: vi.fn(),
   };
+
+  beforeEach(() => {
+    (getCurrencyPrice as Mock).mockReset();
+  });
 
   it('renders without crashing', () => {
     render(<CreditsAmount {...formDefaultValues} />, {
@@ -45,6 +53,7 @@ describe('CreditsAmount', () => {
   });
 
   it('updates currency amount when credits amount changes', async () => {
+    (getCurrencyPrice as Mock).mockReturnValue(2);
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
     });
@@ -55,10 +64,11 @@ describe('CreditsAmount', () => {
     userEvent.clear(creditsInput);
     await userEvent.type(creditsInput, '50');
 
-    expect(currencyInput).toHaveValue(50);
+    expect(currencyInput).toHaveValue(100);
   });
 
   it('updates credits amount when currency amount changes', async () => {
+    (getCurrencyPrice as Mock).mockReturnValue(1);
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
     });
@@ -88,6 +98,7 @@ describe('CreditsAmount', () => {
   });
 
   it('updates currency amount when max credits is selected', async () => {
+    (getCurrencyPrice as Mock).mockReturnValue(1);
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
     });

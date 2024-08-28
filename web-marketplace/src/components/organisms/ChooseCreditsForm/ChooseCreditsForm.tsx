@@ -49,12 +49,6 @@ export function ChooseCreditsForm({
     setAdvanceSettingsOpen(prev => !prev);
   };
 
-  const [currency, setCurrency] = useState<Currency>(
-    paymentOption === PAYMENT_OPTIONS.CRYPTO
-      ? DEFAULT_CRYPTO_CURRENCY
-      : CURRENCIES.usd,
-  );
-
   const form = useZodForm({
     schema: chooseCreditsFormSchema,
     defaultValues: {
@@ -98,19 +92,6 @@ export function ChooseCreditsForm({
     setPaymentOption(option as PaymentOptionsType);
   };
 
-  const getCurrencyAvailableCredits = useCallback(
-    (currency: Currency) => {
-      const curr = creditsAvailable.find(item => item.currency === currency);
-      return curr?.credits || 0;
-    },
-    [creditsAvailable],
-  );
-
-  const currencyAvailableCredits = useMemo(
-    () => getCurrencyAvailableCredits(currency),
-    [currency, getCurrencyAvailableCredits],
-  );
-
   return (
     <Suspense fallback={<Loading />}>
       <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300">
@@ -121,10 +102,8 @@ export function ChooseCreditsForm({
         >
           <PaymentOptions setPaymentOption={handlePaymentOptions} />
           <CreditsAmount
-            creditsAvailable={currencyAvailableCredits}
+            creditsAvailable={creditsAvailable}
             paymentOption={paymentOption}
-            currency={currency}
-            onCurrencyChange={setCurrency}
           />
           {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
             <CryptoOptions

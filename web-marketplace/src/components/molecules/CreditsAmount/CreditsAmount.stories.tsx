@@ -9,6 +9,25 @@ import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/
 
 import { CreditsAmount } from './CreditsAmount';
 
+const creditsAvailable = [
+  {
+    credits: 1000,
+    currency: CURRENCIES.usd,
+  },
+  {
+    credits: 2000,
+    currency: CURRENCIES.uregen,
+  },
+  {
+    credits: 3000,
+    currency: CURRENCIES.usdc,
+  },
+  {
+    credits: 4000,
+    currency: CURRENCIES.usdcaxl,
+  },
+];
+
 export default {
   title: 'Marketplace/Molecules/CreditsAmount',
   component: CreditsAmount,
@@ -38,10 +57,8 @@ export const CreditsAmountCard: Story = {
 };
 
 CreditsAmountCard.args = {
-  creditsAvailable: 100,
+  creditsAvailable,
   paymentOption: PAYMENT_OPTIONS.CARD,
-  onCurrencyChange: action('onCurrencyChange'),
-  currency: CURRENCIES.usd,
 };
 
 export const CreditsAmountCrypto: Story = {
@@ -49,8 +66,6 @@ export const CreditsAmountCrypto: Story = {
 };
 
 CreditsAmountCrypto.args = {
-  creditsAvailable: 100,
+  creditsAvailable,
   paymentOption: PAYMENT_OPTIONS.CRYPTO,
-  onCurrencyChange: action('onCurrencyChange'),
-  currency: CURRENCIES.usd,
 };

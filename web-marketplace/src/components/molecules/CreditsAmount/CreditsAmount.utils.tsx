@@ -7,13 +7,13 @@ import {
 export const getCurrencyPrice = (currency: Currency) => {
   switch (currency) {
     case CURRENCIES.uregen:
-      return 2;
+      return 0.75;
     case CURRENCIES.usdc:
-      return 0.5;
+      return 0.5423;
     case CURRENCIES.usd:
-      return 1;
+      return 0.25;
     case CURRENCIES.usdcaxl:
-      return 4;
+      return 1.2543;
     default:
       return 1;
   }

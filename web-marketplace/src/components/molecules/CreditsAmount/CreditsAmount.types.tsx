@@ -1,5 +1,4 @@
 import { ChangeEvent } from 'react';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 import {
   CryptoCurrencies,
@@ -8,19 +7,17 @@ import {
 
 export type PaymentOptionsType = 'card' | 'crypto';
 export interface CreditsAmountProps {
-  creditsAvailable: number;
+  creditsAvailable: {
+    credits: number;
+    currency: Currency;
+  }[];
   paymentOption: PaymentOptionsType;
-  currency: Currency;
-  onCurrencyChange: (currency: Currency) => void;
 }
 
 export interface CreditsInputProps {
   creditsAvailable: number;
   handleCreditsAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  register: UseFormRegister<FieldValues>;
-  formState: {
-    isDirty: boolean;
-  };
+  paymentOption: PaymentOptionsType;
 }
 
 export interface CurrencyInputProps {
@@ -29,8 +26,4 @@ export interface CurrencyInputProps {
   handleCurrencyAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleCurrencyChange: (currency: CryptoCurrencies | string) => void;
   defaultCryptoCurrency: CryptoCurrencies;
-  register: UseFormRegister<FieldValues>;
-  formState: {
-    isDirty: boolean;
-  };
 }

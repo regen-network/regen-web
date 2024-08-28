@@ -1,4 +1,5 @@
 import { lazy, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 
 import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
@@ -23,8 +24,9 @@ export const CurrencyInput = ({
   handleCurrencyAmountChange,
   handleCurrencyChange,
   defaultCryptoCurrency,
-  register,
 }: CurrencyInputProps) => {
+  const { register } = useFormContext();
+
   const [isFocused, setIsFocused] = useState(false);
 
   const handleFocus = () => setIsFocused(true);
@@ -45,7 +47,7 @@ export const CurrencyInput = ({
       <input
         id="currency-input"
         {...register(CURRENCY_AMOUNT, {
-          value: 1,
+          value: 0,
         })}
         onChange={handleCurrencyAmountChange}
         onFocus={handleFocus}
@@ -53,8 +55,9 @@ export const CurrencyInput = ({
         type="number"
         className="h-full flex-grow p-20 border-none mr-10 text-base focus-visible:outline-none"
         max={maxCurrencyAmount}
-        min={1}
+        min={0}
         aria-label="Currency Input"
+        step="0.1"
       />
       {paymentOption === PAYMENT_OPTIONS.CARD ? (
         <DenomIconWithCurrency currency={CURRENCIES.usd} />

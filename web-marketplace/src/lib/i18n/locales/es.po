@@ -43,6 +43,7 @@ msgstr ""
 msgid "+ add another issuer'"
 msgstr ""
 
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:12
 #: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:4
 msgid "+ create post"
 msgstr ""
@@ -113,7 +114,10 @@ msgid "Additional Info"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:37
+<<<<<<< HEAD
 #: src/pages/Post/Post.constants.ts:8
+=======
+>>>>>>> f45078599 (feat: update lingui catalogs with new messages)
 msgid "admin"
 msgstr ""
 
@@ -1078,10 +1082,14 @@ msgstr ""
 msgid "Natural ecosystem, unmanaged"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/organisms/BasketDetailsActionsBar/BasketDetailsActionsBar.constants.ts:3
 msgid "NCT represents the first IBC-compatible carbon token to the Interchain economy, and launches via NCT: Regen and NCT: Osmo pools on the Osmosis exchange."
 msgstr ""
 
+=======
+<<<<<<< HEAD
+>>>>>>> 40d6ba17b (feat: update lingui catalogs with new messages)
 #: src/pages/ProjectEdit/hooks/useProjectEditSubmit.tsx:103
 msgid "new project admin"
 msgstr ""
@@ -1094,6 +1102,8 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
+=======
+>>>>>>> f45078599 (feat: update lingui catalogs with new messages)
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:6
 msgid "No bridgable ecocredits found"
 msgstr ""
@@ -1102,6 +1112,7 @@ msgstr ""
 msgid "No bridged ecocredits found"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab.constants.ts:3
 msgid "No credit batches to display"
 msgstr ""
@@ -1122,6 +1133,8 @@ msgstr ""
 msgid "No specific location"
 msgstr ""
 
+=======
+>>>>>>> f45078599 (feat: update lingui catalogs with new messages)
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:112
 msgid "Note / Link"
 msgstr ""
@@ -1254,6 +1267,7 @@ msgstr ""
 msgid "profile banner"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.constants.tsx:3
 msgid "Profile not found"
 msgstr ""
@@ -1262,6 +1276,8 @@ msgstr ""
 msgid "Profile Saved"
 msgstr ""
 
+=======
+>>>>>>> f45078599 (feat: update lingui catalogs with new messages)
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:24
 msgid "program"
 msgstr ""
@@ -1270,8 +1286,11 @@ msgstr ""
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:139
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:118
+<<<<<<< HEAD
 #: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:196
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:105
+=======
+>>>>>>> f45078599 (feat: update lingui catalogs with new messages)
 msgid "project"
 msgstr ""
 
@@ -1542,7 +1561,11 @@ msgstr ""
 msgid "Sell"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:270
+=======
+<<<<<<< HEAD
+>>>>>>> 40d6ba17b (feat: update lingui catalogs with new messages)
 #: src/pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty.tsx:48
 msgid "Sell order"
 msgstr ""
@@ -1559,7 +1582,12 @@ msgstr ""
 msgid "Sell orders"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:196
+=======
+=======
+>>>>>>> f45078599 (feat: update lingui catalogs with new messages)
+>>>>>>> 40d6ba17b (feat: update lingui catalogs with new messages)
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:18
 msgid "Send"
 msgstr ""
@@ -1667,6 +1695,7 @@ msgstr ""
 msgid "Status refreshes automatically once every 10 seconds if in a pending state."
 msgstr ""
 
+<<<<<<< HEAD
 #: src/pages/ProjectReview/ProjectReview.constants.ts:4
 msgid "Story photo"
 msgstr ""
@@ -1675,6 +1704,8 @@ msgstr ""
 msgid "Story video"
 msgstr ""
 
+=======
+>>>>>>> f45078599 (feat: update lingui catalogs with new messages)
 #: src/pages/CreateCreditClassInfo/CreateCreditClassInfo.tsx:199
 msgid "Submit a Credit Class"
 msgstr ""
@@ -2013,6 +2044,7 @@ msgstr ""
 msgid "You are not yet listed as an issuer on any credit classes"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:75
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:492
 msgid "You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')"
@@ -2036,6 +2068,10 @@ msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Tradable.tsx:25
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
+=======
+#: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:5
+msgid "You cannot make posts because either the project is still a draft or it doesn't have assigned a location."
+>>>>>>> 40d6ba17b (feat: update lingui catalogs with new messages)
 msgstr ""
 
 #: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.constants.ts:3

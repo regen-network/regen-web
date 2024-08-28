@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-08-29 16:20+0200\n"
+"POT-Creation-Date: 2024-08-29 16:22+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,11 +11,11 @@ msgstr ""
 msgid ""
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:179
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:181
 msgid "(drag map to choose location)"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:163
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:165
 msgid "(file will be associated with the project location by default)"
 msgstr ""
 
@@ -235,7 +235,7 @@ msgstr ""
 msgid "Choose a practice start date"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:178
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:180
 msgid "Choose a specific location on the map"
 msgstr ""
 
@@ -407,6 +407,10 @@ msgstr ""
 
 #: src/pages/Home/Home.FeaturedProjects.tsx:53
 msgid "DISCOVER PROJECTS"
+msgstr ""
+
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:140
+msgid "Drag map to choose location"
 msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:4
@@ -644,7 +648,7 @@ msgstr ""
 msgid "No credit batches to display"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:161
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:163
 msgid "No specific location"
 msgstr ""
 
@@ -991,7 +995,7 @@ msgstr ""
 msgid "Unnamed"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:146
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:148
 msgid "Use file geolocation"
 msgstr ""
 

@@ -27,9 +27,8 @@ import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constan
 import {
   BOOK_CALL,
   BUY_DISABLED_TOOLTIP,
-  CREATE_POST,
-  CREATE_POST_DISABLED_TOOLTIP,
 } from './SellOrdersActionsBar.constants';
+import { SellOrdersActionsBarCreatePostButton } from './SellOrdersActionsBar.CreatePostButton';
 
 type Params = {
   isBuyButtonDisabled: boolean;
@@ -50,6 +49,7 @@ type Params = {
   isSoldOut?: boolean;
   onClickCreatePost?: () => void;
   isCreatePostButtonDisabled?: boolean;
+  tooltipText?: string;
 };
 
 export const SellOrdersActionsBar = ({
@@ -71,6 +71,7 @@ export const SellOrdersActionsBar = ({
   isSoldOut,
   onClickCreatePost,
   isCreatePostButtonDisabled,
+  tooltipText,
 }: Params): JSX.Element => {
   const { _ } = useLingui();
   const location = useLocation();
@@ -79,16 +80,6 @@ export const SellOrdersActionsBar = ({
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
   const { loginDisabled } = useWallet();
-
-  const createPostButton = (
-    <OutlinedButton
-      onClick={onClickCreatePost}
-      className="mr-20"
-      disabled={isCreatePostButtonDisabled}
-    >
-      {_(CREATE_POST)}
-    </OutlinedButton>
-  );
 
   return (
     <StickyBar>
@@ -103,16 +94,20 @@ export const SellOrdersActionsBar = ({
           <>
             {!loginDisabled &&
               onClickCreatePost &&
-              (isCreatePostButtonDisabled ? (
-                <InfoTooltip
-                  arrow
-                  title={CREATE_POST_DISABLED_TOOLTIP}
-                  placement="top"
-                >
-                  <div>{createPostButton}</div>
+              (isCreatePostButtonDisabled && tooltipText ? (
+                <InfoTooltip arrow title={tooltipText} placement="top">
+                  <div>
+                    <SellOrdersActionsBarCreatePostButton
+                      onClickCreatePost={onClickCreatePost}
+                      isCreatePostButtonDisabled={isCreatePostButtonDisabled}
+                    />
+                  </div>
                 </InfoTooltip>
               ) : (
-                createPostButton
+                <SellOrdersActionsBarCreatePostButton
+                  onClickCreatePost={onClickCreatePost}
+                  isCreatePostButtonDisabled={!!isCreatePostButtonDisabled}
+                />
               ))}
             <ContainedButton
               onClick={() =>

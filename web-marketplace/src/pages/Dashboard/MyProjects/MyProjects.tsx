@@ -7,6 +7,7 @@ import { useAtom, useSetAtom } from 'jotai';
 
 import { CreateProjectCard } from 'web-components/src/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
+import { CREATE_POST_DISABLED_TOOLTIP } from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
 
 import { useAuth } from 'lib/auth/auth';
 import { useTracker } from 'lib/tracker/useTracker';
@@ -127,6 +128,7 @@ const MyProjects = (): JSX.Element => {
                     }}
                     track={track}
                     pathname={location.pathname}
+                    tooltipText={CREATE_POST_DISABLED_TOOLTIP}
                   />
                 </WithLoader>
               </Grid>

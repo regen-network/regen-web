@@ -2,21 +2,20 @@ import { useState } from 'react';
 import { SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
-import { CREATE_POST_DISABLED_TOOLTIP } from 'web-marketplace/src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
-import { Buy1Event, Track } from 'web-marketplace/src/lib/tracker/types';
+import { Track } from 'web-marketplace/src/lib/tracker/types';
 
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import { cn } from '../../../utils/styles/cn';
 import { BlockContent, SanityBlockContent } from '../../block-content';
 import ContainedButton from '../../buttons/ContainedButton';
-import OutlinedButton from '../../buttons/OutlinedButton';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import { PrefinanceIcon } from '../../icons/PrefinanceIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
 import { Body, Label } from '../../typography';
 import { Account, User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard/MediaCard';
+import { ProjectCardButton } from './ProjectCard.Button';
 import {
   AVG_PRICE_TOOLTIP,
   DEFAULT_BUY_BUTTON,
@@ -64,6 +63,7 @@ export interface ProjectCardProps extends MediaCardProps {
   offChain?: boolean;
   asAdmin?: boolean;
   adminPrompt?: SanityBlockContent;
+  tooltipText?: string;
 }
 
 export function ProjectCard({
@@ -96,6 +96,7 @@ export function ProjectCard({
   offChain,
   asAdmin,
   adminPrompt,
+  tooltipText,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
@@ -136,41 +137,6 @@ export function ProjectCard({
     purchaseInfo?.vintageMetadata?.[
       'https://schema.regen.network#additionalCertifications'
     ]?.['@list'];
-
-  const createPostButton = (
-    <OutlinedButton
-      onClick={event => {
-        event.stopPropagation();
-        if (asAdmin) {
-          onButtonClick && onButtonClick();
-        } else if (isSoldOut) {
-          onClick && onClick();
-        } else if (isPrefinanceProject) {
-          window.open(projectPrefinancing?.stripePaymentLink, '_newtab');
-        } else if (offChain) {
-          onClick && onClick();
-        } else {
-          track &&
-            track<Buy1Event>('buy1', {
-              url: pathname ?? '',
-              cardType: 'project',
-              buttonLocation: 'projectCard',
-              projectName: name,
-              projectId: id,
-              creditClassId,
-            });
-          onButtonClick && onButtonClick();
-        }
-      }}
-      size="small"
-      startIcon={buttonStartIcon}
-      disabled={isButtonDisabled}
-      sx={{ width: '100%' }}
-      className={buttonClassName}
-    >
-      {buttonText}
-    </OutlinedButton>
-  );
 
   return (
     <MediaCard
@@ -322,18 +288,48 @@ export function ProjectCard({
                     </ContainedButton>
                   )}
                   {(onButtonClick || isPrefinanceProject || offChain) &&
-                    (isButtonDisabled ? (
-                      <InfoTooltip
-                        arrow
-                        title={CREATE_POST_DISABLED_TOOLTIP}
-                        placement="top"
-                      >
+                    (isButtonDisabled && tooltipText ? (
+                      <InfoTooltip arrow title={tooltipText} placement="top">
                         <div className="inline-flex w-full">
-                          {createPostButton}
+                          <ProjectCardButton
+                            id={id}
+                            name={name}
+                            creditClassId={creditClassId}
+                            onClick={onClick}
+                            onButtonClick={onButtonClick}
+                            track={track}
+                            pathname={pathname}
+                            projectPrefinancing={projectPrefinancing}
+                            offChain={offChain}
+                            asAdmin={asAdmin}
+                            isPrefinanceProject={isPrefinanceProject}
+                            buttonText={buttonText}
+                            buttonStartIcon={buttonStartIcon}
+                            buttonClassName={buttonClassName}
+                            isButtonDisabled={isButtonDisabled}
+                            isSoldOut={isSoldOut}
+                          />
                         </div>
                       </InfoTooltip>
                     ) : (
-                      createPostButton
+                      <ProjectCardButton
+                        id={id}
+                        name={name}
+                        creditClassId={creditClassId}
+                        onClick={onClick}
+                        onButtonClick={onButtonClick}
+                        track={track}
+                        pathname={pathname}
+                        projectPrefinancing={projectPrefinancing}
+                        offChain={offChain}
+                        asAdmin={asAdmin}
+                        isPrefinanceProject={isPrefinanceProject}
+                        buttonText={buttonText}
+                        buttonStartIcon={buttonStartIcon}
+                        buttonClassName={buttonClassName}
+                        isButtonDisabled={isButtonDisabled}
+                        isSoldOut={isSoldOut}
+                      />
                     ))}
                 </div>
               </>

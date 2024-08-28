@@ -8,14 +8,14 @@ import cx from 'classnames';
 import { useSetAtom } from 'jotai';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
-import { PREFINANCE } from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
+import {
+  CREATE_POST_DISABLED_TOOLTIP,
+  PREFINANCE,
+} from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
 import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
 import SEO from 'web-components/src/components/seo';
-import ProjectMedia, {
-  Media,
-} from 'web-components/src/components/sliders/ProjectMedia';
-import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
+import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
 
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
@@ -479,6 +479,7 @@ function ProjectDetails(): JSX.Element {
           isCreatePostButtonDisabled={
             !projectMetadata?.['schema:location'] || !isProjectPublished
           }
+          tooltipText={CREATE_POST_DISABLED_TOOLTIP}
         >
           {!isAdmin &&
             isPrefinanceProject &&

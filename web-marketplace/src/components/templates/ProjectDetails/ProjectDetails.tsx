@@ -632,6 +632,12 @@ function ProjectDetails(): JSX.Element {
           offChainProjectId={offChainProject?.id}
           projectName={projectMetadata?.['schema:name']}
           projectSlug={slug}
+          initialValues={{
+            title: '',
+            comment: '',
+            files: [],
+            privacyType: 'public',
+          }}
         />
       )}
     </Box>

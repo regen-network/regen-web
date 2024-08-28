@@ -66,11 +66,12 @@ export const useFetchEcocredits = ({
       }),
     [
       ecocreditClient,
+      hideEcocredits,
+      address,
+      wallet?.address,
+      isPaginatedQuery,
       page,
       rowsPerPage,
-      wallet?.address,
-      address,
-      isPaginatedQuery,
     ],
   );
   const { data: balancesData, isLoading: isLoadingCredits } =

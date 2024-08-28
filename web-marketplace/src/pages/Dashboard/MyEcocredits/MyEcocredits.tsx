@@ -231,7 +231,7 @@ export const MyEcocredits = (): JSX.Element => {
     setTxModalTitle,
     signAndBroadcast,
   });
-
+  console.log(basketPutOpen, credits);
   const basketPutSubmit = useBasketPutSubmit({
     accountAddress,
     baskets: baskets?.basketsInfo,

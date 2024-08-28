@@ -29,15 +29,15 @@ msgstr ""
 msgid "+ create post"
 msgstr ""
 
-#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:37
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:40
 msgid "<0>Credit class admin:</0> the entity who can update a given credit class."
 msgstr ""
 
-#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:49
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:52
 msgid "<0>Credit class issuer:</0> the entity who can issue credit batches under the given credit class."
 msgstr ""
 
-#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:24
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:27
 msgid "A <0>program</0> involves the eligibility rules, monitoring and certification, and registration systems for credit trading and ownership tracking."
 msgstr ""
 
@@ -57,6 +57,10 @@ msgstr ""
 msgid "Additional Info"
 msgstr ""
 
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:37
+msgid "admin"
+msgstr ""
+
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:46
 #: src/components/organisms/CreditClassForms/CreditClassReview.tsx:26
 msgid "Admin"
@@ -72,6 +76,10 @@ msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:139
 msgid "Amount Bridged"
+msgstr ""
+
+#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:21
+msgid "Amount bridged is the same as amount cancelled in the ledger documentation"
 msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:150
@@ -299,6 +307,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:4
+#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:19
 msgid "Each credit batch has a unique ID (i.e. denomination) that starts with the abbreviation of the credit type followed by the project ID, start date and end date of the vintage year, and ending in the batch sequence number."
 msgstr ""
 
@@ -384,7 +393,7 @@ msgstr ""
 msgid "I am a:"
 msgstr ""
 
-#: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:17
+#: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:20
 msgid "I just offset my carbon footprint on #RegenMarketplace with @regen_network. Join me in doing our part for planetary regeneration!"
 msgstr ""
 
@@ -395,6 +404,10 @@ msgstr ""
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:132
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:145
 msgid "Issuer"
+msgstr ""
+
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:49
+msgid "issuers"
 msgstr ""
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:59
@@ -448,6 +461,14 @@ msgstr ""
 msgid "Natural ecosystem, unmanaged"
 msgstr ""
 
+#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:6
+msgid "No bridgable ecocredits found"
+msgstr ""
+
+#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:20
+msgid "No bridged ecocredits found"
+msgstr ""
+
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:112
 msgid "Note / Link"
 msgstr ""
@@ -486,6 +507,16 @@ msgstr ""
 
 #: src/pages/Dashboard/Dashboard.BannerCard.tsx:35
 msgid "profile banner"
+msgstr ""
+
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:24
+msgid "program"
+msgstr ""
+
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:139
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:118
+msgid "project"
 msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:100
@@ -572,6 +603,10 @@ msgstr ""
 msgid "Sell"
 msgstr ""
 
+#: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:18
+msgid "Send"
+msgstr ""
+
 #: src/pages/Dashboard/Dashboard.constants.tsx:56
 msgid "Settings"
 msgstr ""
@@ -600,12 +635,20 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
+#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:22
+msgid "Status refreshes automatically once every 10 seconds if in a pending state."
+msgstr ""
+
 #: src/pages/CreateCreditClassInfo/CreateCreditClassInfo.tsx:199
 msgid "Submit a Credit Class"
 msgstr ""
 
 #: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.Table.tsx:64
 msgid "Successfully issued credit batches"
+msgstr ""
+
+#: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:16
+msgid "Take from basket"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:334
@@ -698,6 +741,10 @@ msgstr ""
 
 #: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:9
 msgid "You will not be able to issue credits with this option unless you later register this project with a credit class."
+msgstr ""
+
+#: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:17
+msgid "You will receive one ecocredit for every basket token you redeem. Oldest batches will be pulled first."
 msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:7

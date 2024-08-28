@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Field, useFormikContext } from 'formik';
 import { startCase } from 'lodash';
 
 import SelectTextField, {
   Option,
 } from 'web-components/src/components/inputs/SelectTextField';
+
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { useCreditClassByOnChainIdQuery } from '../../generated/graphql';
 
@@ -16,7 +20,10 @@ interface FieldProps {
   saveOptions?: (options: Option[]) => void;
 }
 
-const defaultProjectOption = { value: '', label: 'Choose Project' };
+const getDefaultProjectOption = (_: TranslatorType) => ({
+  value: '',
+  label: _(msg`Choose Project`),
+});
 
 const ProjectSelect: React.FC<React.PropsWithChildren<FieldProps>> = ({
   creditClassId,
@@ -29,8 +36,11 @@ const ProjectSelect: React.FC<React.PropsWithChildren<FieldProps>> = ({
   const { data: dbDataByOnChainId } = useCreditClassByOnChainIdQuery({
     variables: { onChainId: creditClassId as string },
   });
+  const { _ } = useLingui();
   const { setFieldValue } = useFormikContext();
   const [projectOptions, setProjectOptions] = useState<Option[]>([]);
+
+  const defaultProjectOption = useMemo(() => getDefaultProjectOption(_), [_]);
 
   useEffect(() => {
     setProjectOptions([]);
@@ -66,11 +76,12 @@ const ProjectSelect: React.FC<React.PropsWithChildren<FieldProps>> = ({
     dbDataByOnChainId?.creditClassByOnChainId?.projectsByCreditClassId?.nodes,
     initialSelection,
     saveOptions,
+    defaultProjectOption,
   ]);
 
   return (
     <Field
-      label="Project"
+      label={_(msg`Project`)}
       name={name}
       component={SelectTextField}
       options={projectOptions}

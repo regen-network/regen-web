@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box, Grid } from '@mui/material';
 
 import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
@@ -26,6 +28,8 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   metadata,
   onChainProjectId,
 }) => {
+  const { _ } = useLingui();
+
   if (!onChainProjectId && !metadata) return null;
 
   // Common
@@ -57,7 +61,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
     >
       {metadata && (
         <Body sx={{ pb: 7 }} size="lg">
-          {PROJECT_PAGE_METADATA_HELPER_TEXT}
+          {_(PROJECT_PAGE_METADATA_HELPER_TEXT)}
         </Body>
       )}
       <Box>
@@ -65,10 +69,10 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
           <Grid item xs={12} sm={6} sx={{ flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Label size="xs" sx={{ mr: 1 }}>
-                project id
+                <Trans>project id</Trans>
               </Label>
               <InfoTooltipWithIcon
-                title={PROJECT_PAGE_METADATA_ID_TOOLTIP}
+                title={_(PROJECT_PAGE_METADATA_ID_TOOLTIP)}
                 outlined
               />
             </Box>
@@ -76,7 +80,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
           </Grid>
 
           <MetaDetail
-            label="toucan project token id"
+            label={_(msg`toucan project token id`)}
             value={
               toucanProjectTokenId && {
                 'schema:name': toucanProjectTokenId.toString(),
@@ -85,7 +89,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
             }
           />
           <MetaDetail
-            label="vcs project id"
+            label={_(msg`vcs project id`)}
             value={
               vcsProjectId && {
                 'schema:name': vcsProjectId.toString(),
@@ -94,7 +98,9 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
             }
           />
           <MetaDetail
-            label={`${vcsProjectId ? 'vcs ' : ''}project type`}
+            label={`${
+              vcsProjectId ? _(msg`vcs project type`) : _(msg`project type`)
+            }`}
             value={projectType}
           />
           <MetaDetail
@@ -107,7 +113,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
             }
           />
           <MetaDetail
-            label="reference id (cfc project id)"
+            label={_(msg`reference id (cfc project id)`)}
             value={
               cfcProjectId && {
                 'schema:name': cfcProjectId,
@@ -116,7 +122,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
             }
           />
           <MetaDetail
-            label="project start date"
+            label={_(msg`project start date`)}
             value={startDate}
             rdfType={getFieldType(
               'regen:projectStartDate',
@@ -124,7 +130,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
             )}
           />
           <MetaDetail
-            label="project end date"
+            label={_(msg`project end date`)}
             value={endDate}
             rdfType={getFieldType(
               'regen:projectEndDate',

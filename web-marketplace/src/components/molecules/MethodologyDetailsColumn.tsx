@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -41,17 +43,18 @@ function MethodologyDetailsColumn({
   classes,
   className,
 }: MethodologyDetailsColumnProps): JSX.Element {
+  const { _ } = useLingui();
   const { classes: styles, cx } = useStyles();
 
   return (
     <div className={cx(classes?.root, className)}>
       <Card className={styles.card}>
         <Title variant="h4" sx={{ mb: 4 }}>
-          Methodology Details
+          <Trans>Methodology Details</Trans>
         </Title>
         {nameRaw && (
           <LineItem
-            label="methodology name"
+            label={_(msg`methodology name`)}
             data={<BlockContent content={nameRaw} />}
           />
         )}
@@ -60,19 +63,19 @@ function MethodologyDetailsColumn({
         )}
         {methodology.methodologyDesigner && (
           <LineItem
-            label="methodology designer"
+            label={_(msg`methodology designer`)}
             data={methodology.methodologyDesigner}
           />
         )}
         {methodology.uncertaintyDeductions && (
           <LineItem
-            label="uncertainty deductions"
+            label={_(msg`uncertainty deductions`)}
             data={methodology.uncertaintyDeductions}
           />
         )}
         {methodology.measurementApproach && (
           <LineItem
-            label="measurement approach"
+            label={_(msg`measurement approach`)}
             data={methodology.measurementApproach}
           />
         )}

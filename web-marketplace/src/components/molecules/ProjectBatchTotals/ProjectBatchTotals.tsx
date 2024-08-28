@@ -62,7 +62,7 @@ export function ProjectBatchTotals({
       <GridItem>
         <LabeledValue
           label={_(msg`Credits issued`)}
-          tooltipLabel={ISSUED_CREDITS_TOOLTIP}
+          tooltipLabel={_(ISSUED_CREDITS_TOOLTIP)}
           number={totals.tradableAmount + totals.retiredAmount}
           formatNumberOptions={{
             ...quantityFormatNumberOptions,
@@ -74,14 +74,14 @@ export function ProjectBatchTotals({
       <GridItem>
         <LabeledValue
           label={_(msg`Credits Tradable`)}
-          tooltipLabel={TRADEABLE_CREDITS_TOOLTIP}
+          tooltipLabel={_(TRADEABLE_CREDITS_TOOLTIP)}
           tooltipNumber={getCreditsTooltip({
             isSoldOut,
             project: projectWithOrderData,
             _,
           })}
           number={isSoldOut ? undefined : totals.tradableAmount}
-          badgeLabel={isSoldOut ? SOLD_OUT : undefined}
+          badgeLabel={isSoldOut ? _(SOLD_OUT) : undefined}
           formatNumberOptions={{
             ...quantityFormatNumberOptions,
             maximumFractionDigits: MAX_FRACTION_DIGITS_PROJECT_CREDITS,
@@ -92,7 +92,7 @@ export function ProjectBatchTotals({
       <GridItem>
         <LabeledValue
           label={_(msg`Credits Retired`)}
-          tooltipLabel={RETIRED_CREDITS_TOOLTIP}
+          tooltipLabel={_(RETIRED_CREDITS_TOOLTIP)}
           number={totals.retiredAmount}
           formatNumberOptions={{
             ...quantityFormatNumberOptions,

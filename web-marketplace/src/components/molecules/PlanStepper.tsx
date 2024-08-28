@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import Stepper from 'web-components/src/components/stepper';
+
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import background from '../../assets/topography-pattern-full-1.png';
 
@@ -10,19 +12,23 @@ interface PlanStepperProps {
   activeStep: number;
 }
 
-const steps = [msg`Create Project`, msg`Review`, msg`Finished`];
+const getSteps = (_: TranslatorType) => [
+  _(msg`Create Project`),
+  _(msg`Review`),
+  _(msg`Finished`),
+];
 
 const PlanStepper: React.FC<React.PropsWithChildren<PlanStepperProps>> = ({
   activeStep,
 }) => {
   const { _ } = useLingui();
-  const translatedSteps = steps.map(step => _(step));
+  const steps = useMemo(() => getSteps(_), [_]);
 
   return (
     <Stepper
       sx={{ mw: 240 }}
       activeStep={activeStep}
-      steps={translatedSteps}
+      steps={steps}
       background={background}
     />
   );

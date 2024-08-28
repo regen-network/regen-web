@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trans } from '@lingui/macro';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
 
@@ -87,7 +88,7 @@ const FeaturedSection: React.FC<React.PropsWithChildren<Props>> = ({
                   href={content?.button?.buttonLink?.buttonHref || ''}
                   className={styles.button}
                 >
-                  more details
+                  <Trans>more details</Trans>
                 </ContainedButton>
               </Grid>
               <Grid item xs={12}>
@@ -102,7 +103,7 @@ const FeaturedSection: React.FC<React.PropsWithChildren<Props>> = ({
       </Section>
     );
   } else {
-    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console, lingui/no-unlocalized-strings
     console.error('Missing some fields. Please check Sanity');
     return <></>;
   }

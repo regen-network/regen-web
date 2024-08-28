@@ -1,5 +1,7 @@
 import { Suspense, useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 
 import { Flex } from 'web-components/src/components/box';
@@ -27,6 +29,7 @@ export interface BottomCreditRetireFieldsProps {
 export const BottomCreditRetireFields: React.FC<
   React.PropsWithChildren<BottomCreditRetireFieldsProps>
 > = ({ mapboxToken, fieldId, fieldIndex }) => {
+  const { _ } = useLingui();
   const { classes: styles } = useBottomCreditRetireFieldsStyles();
   const ctx = useFormContext<CreditSendFormSchemaType>();
   const { register, control, setValue, formState } = ctx;
@@ -65,13 +68,17 @@ export const BottomCreditRetireFields: React.FC<
         <>
           <Flex sx={sxs.title}>
             <Title variant="h5" sx={{ mr: 2 }}>
-              Retirement note
+              <Trans>Retirement note</Trans>
             </Title>
-            <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
+            <InfoTooltipWithIcon
+              title={_(
+                msg`You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')`,
+              )}
+            />
           </Flex>
           <TextField
             type="text"
-            label="Explain the reason you are retiring these credits"
+            label={_(msg`Explain the reason you are retiring these credits`)}
             key={fieldId}
             error={!!errors?.retireFields?.[fieldIndex]?.note}
             helperText={errors?.retireFields?.[fieldIndex]?.note?.message}
@@ -83,18 +90,26 @@ export const BottomCreditRetireFields: React.FC<
       )}
       <Flex sx={sxs.title}>
         <Title variant="h5" sx={{ mr: 2 }}>
-          Location of retirement
+          <Trans>Location of retirement</Trans>
         </Title>
-        <InfoTooltipWithIcon title="The retirement location can be where you live or your business operates." />
+        <InfoTooltipWithIcon
+          title={_(
+            msg`The retirement location can be where you live or your business operates.`,
+          )}
+        />
       </Flex>
 
       <Body>
-        Please enter a location for the retirement of these credits. This
-        prevents double counting of credits in different locations.
+        <Trans>
+          Please enter a location for the retirement of these credits. This
+          prevents double counting of credits in different locations.
+        </Trans>
       </Body>
       <Grid container className={styles.stateCountryGrid}>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-          <Suspense fallback={<SelectTextField label="Country" options={[]} />}>
+          <Suspense
+            fallback={<SelectTextField label={_(msg`Country`)} options={[]} />}
+          >
             <LocationCountryField
               exclude
               key={fieldId}
@@ -107,7 +122,9 @@ export const BottomCreditRetireFields: React.FC<
         </Grid>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
           <Suspense
-            fallback={<SelectTextField label="State / Region" options={[]} />}
+            fallback={
+              <SelectTextField label={_(msg`State / Region`)} options={[]} />
+            }
           >
             <LocationStateField
               optional
@@ -125,7 +142,7 @@ export const BottomCreditRetireFields: React.FC<
       </Grid>
       <TextField
         type="text"
-        label="Postal Code"
+        label={_(msg`Postal Code`)}
         key={fieldId}
         optional
         error={!!errors?.retireFields?.[fieldIndex]?.postalCode}

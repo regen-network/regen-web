@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import { Box } from '@mui/material';
 
 import { Flex } from 'web-components/src/components/box';
@@ -23,7 +24,7 @@ export const BatchMetadata = ({
       }}
     >
       <Title variant="h5" sx={{ mb: 4 }}>
-        Additional Info
+        <Trans>Additional Info</Trans>
       </Title>
       <Flex col sx={{ gap: 8 }}>
         <BatchMetadataAdditionalInfo data={data} />

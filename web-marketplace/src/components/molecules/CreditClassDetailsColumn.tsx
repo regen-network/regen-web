@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Avatar } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
@@ -93,6 +95,7 @@ function CreditClassDetailsColumn({
   classes,
   className,
 }: CreditClassDetailsColumnProps): JSX.Element {
+  const { _ } = useLingui();
   const { classes: styles, cx } = useStyles();
   const creditClassVersion = dbClass?.creditClassVersionsById?.nodes[0];
 
@@ -100,7 +103,7 @@ function CreditClassDetailsColumn({
     <div className={cx(classes?.root, className)}>
       <Card className={styles.card}>
         <Title variant="h4" sx={{ mb: 4 }}>
-          Credit Details
+          <Trans>Credit Details</Trans>
         </Title>
         <div className={cx(styles.lineItem, styles.images)}>
           <div className={styles.explainer}>
@@ -108,11 +111,11 @@ function CreditClassDetailsColumn({
               <img
                 className={styles.icon}
                 src={CarbonCreditFruit}
-                alt="carbon credit"
+                alt={_(msg`carbon credit`)}
               />
             </Avatar>
             <Title variant="h6" align="center">
-              1 Credit
+              <Trans>1 Credit</Trans>
             </Title>
           </div>
           <span className={styles.equals}>=</span>
@@ -121,17 +124,17 @@ function CreditClassDetailsColumn({
               <img
                 className={styles.icon}
                 src={Sequestration}
-                alt="ton of carbon"
+                alt={_(msg`ton of carbon`)}
               />
             </Avatar>
             <Title variant="h6" align="center">
-              1 Ton of CO2e
+              <Trans>1 Ton of CO2e</Trans>
             </Title>
           </div>
         </div>
         {nameRaw && (
           <LineItem
-            label="credit name"
+            label={_(msg`credit name`)}
             data={<BlockContent content={nameRaw} />}
           />
         )}
@@ -151,7 +154,7 @@ function CreditClassDetailsColumn({
           'https://schema.regen.network#offsetGenerationMethod'
         ] && (
           <LineItem
-            label="offset generation method"
+            label={_(msg`offset generation method`)}
             data={
               creditClassVersion?.metadata?.[
                 'https://schema.regen.network#offsetGenerationMethod'

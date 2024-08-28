@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { SxProps, Theme } from '@mui/material';
 import { ExpandedTermDefinition } from 'jsonld';
 import { sxToArray } from 'utils/mui/sxToArray';
@@ -25,6 +26,7 @@ const MetaDetailBaseValue: React.FC<Props> = ({
   bodySize,
   sx,
 }) => {
+  const { _ } = useLingui();
   let formattedValue: string | undefined;
   const isNumber = typeof value === 'number';
   const isString = typeof value === 'string';
@@ -40,7 +42,7 @@ const MetaDetailBaseValue: React.FC<Props> = ({
     if (rdfType === 'xsd:date') {
       formattedValue = formatDate(value);
     } else if (rdfType?.includes('Duration')) {
-      formattedValue = fromISO8601(value) || value;
+      formattedValue = fromISO8601(value, _) || value;
     } else {
       formattedValue = value;
     }

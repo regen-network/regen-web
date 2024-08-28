@@ -7,7 +7,6 @@ import { useAtom, useSetAtom } from 'jotai';
 
 import { CreateProjectCard } from 'web-components/src/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
-import { CREATE_POST_DISABLED_TOOLTIP } from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
 
 import { useAuth } from 'lib/auth/auth';
 import { useTracker } from 'lib/tracker/useTracker';
@@ -22,7 +21,11 @@ import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
-import { CREATE_POST, DRAFT_ID } from './MyProjects.constants';
+import {
+  CREATE_POST,
+  CREATE_POST_DISABLED_TOOLTIP,
+  DRAFT_ID,
+} from './MyProjects.constants';
 import {
   getDefaultProject,
   handleProjectsDraftStatus,
@@ -128,7 +131,7 @@ const MyProjects = (): JSX.Element => {
                     }}
                     track={track}
                     pathname={location.pathname}
-                    tooltipText={CREATE_POST_DISABLED_TOOLTIP}
+                    tooltipText={_(CREATE_POST_DISABLED_TOOLTIP)}
                   />
                 </WithLoader>
               </Grid>

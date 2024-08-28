@@ -479,7 +479,7 @@ function ProjectDetails(): JSX.Element {
           isCreatePostButtonDisabled={
             !projectMetadata?.['schema:location'] || !isProjectPublished
           }
-          tooltipText={CREATE_POST_DISABLED_TOOLTIP}
+          tooltipText={_(CREATE_POST_DISABLED_TOOLTIP)}
         >
           {!isAdmin &&
             isPrefinanceProject &&
@@ -632,12 +632,6 @@ function ProjectDetails(): JSX.Element {
           offChainProjectId={offChainProject?.id}
           projectName={projectMetadata?.['schema:name']}
           projectSlug={slug}
-          initialValues={{
-            title: '',
-            comment: '',
-            files: [],
-            privacyType: 'public',
-          }}
         />
       )}
     </Box>

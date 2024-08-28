@@ -32,5 +32,3 @@ export const VIEW_PROJECT_BUTTON: ButtonType = {
   text: 'view project',
   startIcon: <EyeIcon className="h-[24px] w-[24px]" />,
 };
-export const CREATE_POST_DISABLED_TOOLTIP =
-  "You cannot make posts because either the project is still a draft or it doesn't have assigned a location.";

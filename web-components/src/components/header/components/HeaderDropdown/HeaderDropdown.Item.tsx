@@ -2,9 +2,9 @@ import React, { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import ReactHtmlParser from 'html-react-parser';
 
+import { cn } from '../../../../utils/styles/cn';
 import { NavLinkProps } from '../NavLink';
 import { useStyles } from './HeaderDropdown.styles';
-import { cn } from '../../../../utils/styles/cn';
 
 export type HeaderDropdownItemProps = {
   label: string;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trans } from '@lingui/macro';
 import Box from '@mui/material/Box';
 
 import { Label } from 'web-components/src/components/typography';
@@ -18,8 +19,10 @@ const PeerReviewed: React.FC<React.PropsWithChildren<unknown>> = () => {
         color="info.main"
         sx={{ fontSize: ['9px'], lineHeight: ['11.3px'] }}
       >
-        Peer <br />
-        Reviewed
+        <Trans>
+          Peer <br />
+          Reviewed
+        </Trans>
       </Label>
     </Box>
   );

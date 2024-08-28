@@ -4,8 +4,14 @@ import { HeaderColors } from 'web-components/src/components/header';
 import { HeaderDropdownItemProps } from 'web-components/src/components/header/components/HeaderDropdown/HeaderDropdown.Item';
 import { Item } from 'web-components/src/components/header/components/HeaderMenuItem/HeaderMenuItem';
 import { NavLinkProps } from 'web-components/src/components/header/components/NavLink';
+import {
+  UserMenuItemProfile,
+  UserMenuItemProfileProps,
+} from 'web-components/src/components/header/components/UserMenuItem.Profile';
+import { OnProfileClickType } from 'web-components/src/components/header/components/UserMenuItem.types';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
 
+import { TranslatorType } from 'lib/i18n/i18n.types';
 import { isBridgeEnabled } from 'lib/ledger';
 
 import {
@@ -19,11 +25,6 @@ import {
   SEPARATOR,
 } from 'pages/Dashboard/Dashboard.constants';
 import { Link } from 'components/atoms';
-import {
-  UserMenuItemProfile,
-  UserMenuItemProfileProps,
-} from 'web-components/src/components/header/components/UserMenuItem.Profile';
-import { OnProfileClickType } from 'web-components/src/components/header/components/UserMenuItem.types';
 
 export const getMenuItems = (pathname: string): Item[] => [
   {
@@ -86,6 +87,7 @@ interface GetUserMenuItemsParams {
   isWalletConnected: boolean;
   loginDisabled: boolean;
   profile?: UserMenuItemProfileProps;
+  _: TranslatorType;
   onProfileClick?: OnProfileClickType;
 }
 
@@ -98,6 +100,7 @@ export const getUserMenuItems = ({
   isWalletConnected,
   loginDisabled,
   profile,
+  _,
   onProfileClick,
 }: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
   [
@@ -111,28 +114,33 @@ export const getUserMenuItems = ({
       linkComponent,
       importCallback: (): Promise<any> => import('../../../pages/Dashboard'),
       ...PORTFOLIO,
+      label: _(PORTFOLIO.label),
       icon: <CreditsIcon sx={{ width: 24, height: 20 }} linearGradient />,
     },
     showProjects && {
       pathname,
       linkComponent,
       ...PROJECTS,
+      label: _(PROJECTS.label),
     },
     showCreditClasses && {
       pathname,
       linkComponent,
       ...CREDIT_CLASSES,
+      label: _(CREDIT_CLASSES.label),
     },
     isIssuer && {
       pathname,
       linkComponent,
       ...CREDIT_BATCHES,
+      label: _(CREDIT_BATCHES.label),
     },
     isWalletConnected &&
       isBridgeEnabled && {
         pathname,
         linkComponent,
         ...BRIDGE,
+        label: _(BRIDGE.label),
       },
     !loginDisabled && {
       ...SEPARATOR,
@@ -141,11 +149,13 @@ export const getUserMenuItems = ({
       pathname,
       linkComponent,
       ...EDIT_PROFILE,
+      label: _(EDIT_PROFILE.label),
     },
     !loginDisabled && {
       pathname,
       linkComponent,
       ...PROFILE_SETTINGS,
+      label: _(PROFILE_SETTINGS.label),
     },
     {
       ...SEPARATOR,

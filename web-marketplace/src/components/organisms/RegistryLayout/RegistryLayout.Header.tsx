@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
@@ -36,6 +37,7 @@ import { fullWidthRegExp } from './RegistryLayout.constants';
 import { getAddress } from './RegistryLayout.utils';
 
 const RegistryLayoutHeader: React.FC = () => {
+  const { _ } = useLingui();
   const { pathname } = useLocation();
   const { activeAccount, privActiveAccount } = useAuth();
 
@@ -75,6 +77,7 @@ const RegistryLayoutHeader: React.FC = () => {
               selected: true,
             }
           : undefined,
+        _,
       }),
     [
       pathname,
@@ -83,9 +86,10 @@ const RegistryLayoutHeader: React.FC = () => {
       showProjects,
       isConnected,
       loginDisabled,
-      onProfileClick,
       activeAccount,
       privActiveAccount?.email,
+      _,
+      onProfileClick,
     ],
   );
 

@@ -47,6 +47,7 @@ export const LocationPicker = ({
     zoom: 5,
   });
   const [locationSearch, setLocationSearch] = useState<string | undefined>();
+  const [showDragHint, setShowDragHint] = useState<boolean>(true);
 
   useEffect(() => {
     if (
@@ -80,6 +81,7 @@ export const LocationPicker = ({
           if (mapRef.current?.isZooming()) {
             return;
           }
+          setShowDragHint(false); // hide drag hint as soon as user moves on the map
           handleChange({
             type: 'Feature',
             properties: [],
@@ -127,12 +129,14 @@ export const LocationPicker = ({
           without using a react-map-gl Marker, so the map moves around the pin */}
         <div className="absolute top-1/2 left-1/2 -ml-[18.5px] -mt-50">
           <GreenPinIcon />
-          <Body
-            className="mt-15 text-grey-0 bg-grey-700 py-5 px-10 rounded-[30px] -ml-[78px]"
-            size="sm"
-          >
-            {dragHint}
-          </Body>
+          {showDragHint && (
+            <Body
+              className="mt-15 text-grey-0 bg-grey-700 py-5 px-10 rounded-[30px] -ml-[78px]"
+              size="sm"
+            >
+              {dragHint}
+            </Body>
+          )}
         </div>
       </Map>
     </Suspense>

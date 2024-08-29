@@ -9,6 +9,7 @@ import FieldFormControl from '../FieldFormControl/FieldFormControl';
 import Input from '../Input/Input';
 import { useLocationStyles } from './LocationField.styles';
 import { isGeocodingFeature } from './LocationField.types';
+import { getLongLat } from './LocationField.utils';
 
 interface LocationFieldProps {
   className?: string;
@@ -104,19 +105,18 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
             onChange={({ target: { value } }) => {
               handleChange(value);
               if (value.length >= 1) {
-                const isCoordinates =
-                  /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/.test(
-                    value,
-                  );
-                if (isCoordinates) {
-                  const [longitude, latitude] = value
-                    .split(',')
-                    .map(Number) as [number, number];
-                  const coordinates: [number, number] = [longitude, latitude];
+                const longLat = getLongLat(value);
+
+                if (longLat) {
+                  const coordinates: [number, number] = [
+                    longLat[0],
+                    longLat[1],
+                  ];
                   geocoderService
                     .reverseGeocode({
                       mode: 'mapbox.places',
                       query: coordinates,
+                      types: ['place'],
                     })
                     .send()
                     .then(({ body }) => {
@@ -146,6 +146,24 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
                 key={index}
                 className={classes.result}
                 onClick={() => {
+                  let geojson;
+                  const longLat = getLongLat(value as string);
+                  // in case the user entered precise coordinates,
+                  // we keep those but add the corresponding place name to be displayed on the project page
+                  if (longLat) {
+                    const { context, place_name } = item;
+                    geojson = {
+                      type: 'Feature',
+                      geometry: {
+                        type: 'Point',
+                        coordinates: [longLat[0], longLat[1]],
+                      },
+                      context,
+                      place_name,
+                    };
+                  } else {
+                    geojson = item;
+                  }
                   handleChange({
                     // @ts-ignore
                     '@context': {
@@ -153,7 +171,7 @@ const LocationField = forwardRef<HTMLInputElement, Props>(
                       type: '@type',
                       coordinates: { '@container': '@list' },
                     },
-                    ...item,
+                    ...geojson,
                   });
                   setShowResults(false);
                 }}

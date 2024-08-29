@@ -54,7 +54,7 @@ export const RegistryLayoutTxErrorModal = (): JSX.Element => {
         buttonTitle={findFirstNonEmptyString([
           buttonTitle,
           error.buttonTitle ? _(error.buttonTitle) : '',
-          TX_ERROR_MODAL_BUTTON,
+          _(TX_ERROR_MODAL_BUTTON),
         ])}
         buttonLink={findFirstNonEmptyString([buttonLink, error.buttonLink])}
         cardItems={cardItems}

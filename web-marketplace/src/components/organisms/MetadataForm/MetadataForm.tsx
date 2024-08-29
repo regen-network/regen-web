@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useFormState } from 'react-hook-form';
+import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
@@ -82,9 +83,13 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
       }}
     >
       <OnBoardingCard>
-        <ControlledFormLabel>{'Project metadata'}</ControlledFormLabel>
+        <ControlledFormLabel>
+          <Trans>Project metadata</Trans>
+        </ControlledFormLabel>
         <Body size="sm" mt={1} mb={3}>
-          {'Attach arbitrary JSON-LD metadata to the project metadata below. '}
+          <Trans>
+            Attach arbitrary JSON-LD metadata to the project metadata below.{' '}
+          </Trans>
         </Body>
         <TextField
           rows={5}

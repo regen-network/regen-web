@@ -1,1 +1,3 @@
-export const CREATE_PROJECT = '+Create project';
+import { msg } from '@lingui/macro';
+
+export const CREATE_PROJECT = msg`+Create project`;

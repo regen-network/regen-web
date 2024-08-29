@@ -1,3 +1,5 @@
+import { useLingui } from '@lingui/react';
+
 import Modal, { RegenModalProps } from 'web-components/src/components/modal';
 import ConnectWallet from 'web-components/src/components/organisms/ConnectWallet';
 
@@ -13,23 +15,27 @@ import {
 
 interface Props extends RegenModalProps {}
 
-export const ConnectWalletModal = ({ open, onClose }: Props) => (
-  <Modal open={open} onClose={onClose}>
-    <ConnectWallet
-      title={CONNECT_WALLET_MODAL_TITLE}
-      description={
-        <>
-          {CONNECT_WALLET_MODAL_DESCRIPTION}
-          <Link
-            href={CONNECT_WALLET_MODAL_HREF}
-            sx={{ display: 'inline-block', color: 'secondary.main' }}
-          >
-            {CONNECT_WALLET_MODAL_LINK}
-          </Link>
-        </>
-      }
-      button={<LoginButton size="large" />}
-      variant="modal"
-    />
-  </Modal>
-);
+export const ConnectWalletModal = ({ open, onClose }: Props) => {
+  const { _ } = useLingui();
+
+  return (
+    <Modal open={open} onClose={onClose}>
+      <ConnectWallet
+        title={_(CONNECT_WALLET_MODAL_TITLE)}
+        description={
+          <>
+            {_(CONNECT_WALLET_MODAL_DESCRIPTION)}
+            <Link
+              href={CONNECT_WALLET_MODAL_HREF}
+              sx={{ display: 'inline-block', color: 'secondary.main' }}
+            >
+              {_(CONNECT_WALLET_MODAL_LINK)}
+            </Link>
+          </>
+        }
+        button={<LoginButton size="large" />}
+        variant="modal"
+      />
+    </Modal>
+  );
+};

@@ -167,7 +167,7 @@ export const SellOrdersActionsBar = ({
                   isPrefinanceProject ? PREFINANCE_BUTTON.className : ''
                 }
               >
-                {BOOK_CALL}
+                {_(BOOK_CALL)}
               </OutlinedButton>
             )}
             {(!!onChainProjectId || !!onChainCreditClassId) && (

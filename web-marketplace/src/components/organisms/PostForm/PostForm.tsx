@@ -1,5 +1,7 @@
 import { MutableRefObject, useEffect, useState } from 'react';
 import { SubmitHandler, useFieldArray, useWatch } from 'react-hook-form';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { MAPBOX_TOKEN } from 'config/globals';
 import { Feature, Point } from 'geojson';
@@ -74,6 +76,7 @@ export const PostForm = ({
   handleUpload,
   onUpdateDirtyState,
 }: Props): JSX.Element => {
+  const { _ } = useLingui();
   const form = useZodForm({
     schema: postFormSchema,
     defaultValues: {
@@ -88,7 +91,7 @@ export const PostForm = ({
 
   const imageDropCommonProps: Partial<FileDropProps> = {
     classes: { main: classes.fullSizeMedia },
-    buttonText: FILE_UPLOAD_BUTTON_LABEL,
+    buttonText: _(FILE_UPLOAD_BUTTON_LABEL),
     fixedCrop: cropAspectMediaForm,
   };
 
@@ -216,12 +219,12 @@ export const PostForm = ({
         sx={{ textAlign: 'center' }}
         className="mb-40 sm:mb-50"
       >
-        New post
+        <Trans>New post</Trans>
       </Title>
       <TextField
         type="text"
-        label="Title"
-        description="Summarize this update."
+        label={_(msg`Title`)}
+        description={_(msg`Summarize this update.`)}
         className="mb-40 sm:mb-50"
         helperText={
           <TextAreaFieldChartCounter
@@ -234,8 +237,8 @@ export const PostForm = ({
       />
       <TextAreaField
         type="text"
-        label="Comment"
-        description="Write a short comment or longer project update. "
+        label={_(msg`Comment`)}
+        description={_(msg`Write a short comment or longer project update. `)}
         rows={4}
         minRows={4}
         multiline
@@ -243,13 +246,16 @@ export const PostForm = ({
         {...form.register('comment')}
       />
       <ReorderFields
-        label={'Files'}
+        label={_(msg`Files`)}
         description={
           <Body>
-            {
-              '5MB max. Supported file types include text, spreadsheets, images, and video files. '
-            }
-            <Link href="#">{'View all supported file types»'}</Link>
+            <Trans>
+              '5MB max. Supported file types include text, spreadsheets, images,
+              and video files. '
+            </Trans>
+            <Link href="#">
+              <Trans>View all supported file types»</Trans>
+            </Link>
           </Body>
         }
         fields={fields}
@@ -313,20 +319,24 @@ export const PostForm = ({
           label={
             <span className="inline-flex items-center">
               <LockIcon className="mr-10" />
-              {'Privacy settings'}
+              <Trans>Privacy settings</Trans>
             </span>
           }
-          description={POST_PRIVACY_DESCRIPTION}
+          description={_(POST_PRIVACY_DESCRIPTION)}
         >
           <>
             <Radio
               label={
                 <span className={cn('flex items-center')}>
                   <UnlockIcon className="mr-15" />
-                  {'Make the entire post public'}
+                  <Trans>Make the entire post public</Trans>
                 </span>
               }
-              tooltip={<b>This post and all of its files will be visible.</b>}
+              tooltip={
+                <b>
+                  <Trans>This post and all of its files will be visible.</Trans>
+                </b>
+              }
               value={'public'}
               selectedValue={privacy}
               sx={{ mb: 2.5 }}
@@ -336,22 +346,28 @@ export const PostForm = ({
               label={
                 <div className={cn('flex items-center')}>
                   <LocationIcon className="mr-15" />
-                  {'Make the location data private'}
+                  <Trans>Make the location data private</Trans>
                 </div>
               }
               description={
-                <span className="ml-[39px]">Post and files are public</span>
+                <span className="ml-[39px]">
+                  <Trans>Post and files are public</Trans>
+                </span>
               }
               tooltip={
                 <>
                   <b>
-                    Only the locations of the files will be hidden from public
-                    view.
+                    <Trans>
+                      Only the locations of the files will be hidden from public
+                      view.
+                    </Trans>
                   </b>
                   <br />
                   <i>
-                    File locations can still be shared privately via a secret
-                    link.
+                    <Trans>
+                      File locations can still be shared privately via a secret
+                      link.
+                    </Trans>
                   </i>
                 </>
               }
@@ -365,18 +381,28 @@ export const PostForm = ({
               label={
                 <span className={cn('flex items-center')}>
                   <PrivateFile className="mr-15" />
-                  {'Make the files and location data private'}
+                  <Trans>Make the files and location data private</Trans>
                 </span>
               }
-              description={<span className="ml-[39px]">Post is public</span>}
+              description={
+                <span className="ml-[39px]">
+                  <Trans>Post is public</Trans>
+                </span>
+              }
               tooltip={
                 <>
                   <b>
-                    All uploaded files and their location data will be hidden
-                    from public view.
+                    <Trans>
+                      All uploaded files and their location data will be hidden
+                      from public view.
+                    </Trans>
                   </b>
                   <br />
-                  <i>Files can still be shared privately via secret link.</i>
+                  <i>
+                    <Trans>
+                      Files can still be shared privately via secret link.
+                    </Trans>
+                  </i>
                 </>
               }
               value={'private_files'}
@@ -389,19 +415,23 @@ export const PostForm = ({
               label={
                 <span className={cn('flex items-center')}>
                   <LockIcon className="mr-15" />
-                  {'Make the entire post private'}
+                  <Trans>Make the entire post private</Trans>
                 </span>
               }
               tooltip={
                 <>
                   <b>
-                    The post and all of its contents will be hidden from public
-                    view.
+                    <Trans>
+                      The post and all of its contents will be hidden from
+                      public view.
+                    </Trans>
                   </b>
                   <br />
                   <i>
-                    The post and files still can be shared privately via secret
-                    link.
+                    <Trans>
+                      The post and files still can be shared privately via
+                      secret link.
+                    </Trans>
                   </i>
                 </>
               }
@@ -420,8 +450,9 @@ export const PostForm = ({
       />
       <div className="flex flex-col items-end mt-20">
         <Warning
-          text="NOTE: As posts are anchored to the blockchain, they are not editable
-        once published"
+          text={_(
+            msg`NOTE: As posts are anchored to the blockchain, they are not editable once published`,
+          )}
         />
       </div>
     </Form>

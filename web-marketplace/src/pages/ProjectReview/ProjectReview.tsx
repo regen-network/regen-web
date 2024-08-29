@@ -224,7 +224,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         onEditClick={() => navigate(`${editPath}/media`)}
       >
         {previewPhoto?.['schema:url'] && (
-          <ItemDisplay name={MAIN_PHOTO}>
+          <ItemDisplay name={_(MAIN_PHOTO)}>
             {previewPhoto && (
               <Photo
                 src={previewPhoto['schema:url']}
@@ -234,7 +234,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
           </ItemDisplay>
         )}
         {galleryPhotos?.length > 0 && (
-          <ItemDisplay name={GALLERY_PHOTOS}>
+          <ItemDisplay name={_(GALLERY_PHOTOS)}>
             {galleryPhotos?.map(
               photo =>
                 photo && (

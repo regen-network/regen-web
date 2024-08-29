@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useState } from 'react';
+import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Autocomplete, TextField } from '@mui/material';
 
@@ -97,12 +98,13 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       if (inputValue === '' || (value && value.name === inputValue)) {
         setOptions(
           groupOptions(
+            _,
             [
               {
                 id: '',
                 profileType: DEFAULT_PROFILE_TYPE,
                 profileImage: '',
-                name: PLACEHOLDER,
+                name: _(PLACEHOLDER),
               },
               ...yourProfiles,
               ...valueArr,
@@ -118,7 +120,11 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
         accounts?.getAccountsByNameOrAddr?.nodes,
       );
       setOptions(
-        groupOptions([...searchProfiles, ...valueArr], authenticatedAccountIds),
+        groupOptions(
+          _,
+          [...searchProfiles, ...valueArr],
+          authenticatedAccountIds,
+        ),
       );
     }, [
       inputValue,
@@ -133,7 +139,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       setProfileAdd(null);
     };
 
-    const valueWithGroup = getValue(value, authenticatedAccountIds);
+    const valueWithGroup = getValue(_, value, authenticatedAccountIds);
 
     return (
       <div className={cx(styles.root, classes && classes.root)}>
@@ -168,7 +174,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             renderInput={params => (
               <TextField
                 {...params}
-                placeholder={PLACEHOLDER}
+                placeholder={_(PLACEHOLDER)}
                 variant="outlined"
               />
             )}
@@ -179,7 +185,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             renderOption={(props, option) =>
               valueWithGroup &&
               getIsOptionEqualToValue(option, valueWithGroup) &&
-              valueWithGroup.group === ALL_PROFILES ? null : (
+              valueWithGroup.group === _(ALL_PROFILES) ? null : (
                 <RoleFieldOption option={option} {...props} key={props.id} />
               )
             }
@@ -210,7 +216,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
                 pr: 1.25,
               }}
             />
-            edit profile
+            <Trans>edit profile</Trans>
           </OutlinedButton>
         )}
         {profileAdd && (

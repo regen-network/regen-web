@@ -5,6 +5,7 @@ import {
   isValidAddress,
 } from 'web-components/src/components/inputs/validation';
 
+import { TranslatorType } from 'lib/i18n/i18n.types';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import { DIFFERENT_ADDRESSES_ERROR_MSG } from './AdminModal.constants';
@@ -32,14 +33,17 @@ export const optionalAddressSchema = z
   .optional()
   .nullable();
 
-export const adminModalSchema = z
-  .object({
-    currentAddress: addressSchema,
-    newAddress: addressSchema,
-  })
-  .refine(schema => schema.currentAddress !== schema.newAddress, {
-    message: DIFFERENT_ADDRESSES_ERROR_MSG,
-    path: ['newAddress'],
-  });
+export const getAdminModalSchema = (_: TranslatorType) =>
+  z
+    .object({
+      currentAddress: addressSchema,
+      newAddress: addressSchema,
+    })
+    .refine(schema => schema.currentAddress !== schema.newAddress, {
+      message: _(DIFFERENT_ADDRESSES_ERROR_MSG),
+      path: ['newAddress'],
+    });
 
-export type AdminModalSchemaType = z.infer<typeof adminModalSchema>;
+export type AdminModalSchemaType = z.infer<
+  ReturnType<typeof getAdminModalSchema>
+>;

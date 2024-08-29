@@ -1,4 +1,6 @@
 import { useFormState } from 'react-hook-form';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
@@ -32,6 +34,7 @@ export const UserAccountSettings = ({
   socialProviders,
   walletProvider,
 }: UserAccountSettingsProps) => {
+  const { _ } = useLingui();
   const {
     isConfirmationModalOpen,
     email,
@@ -60,7 +63,7 @@ export const UserAccountSettings = ({
       <Form form={form} onSubmit={onEmailSubmit}>
         <div className="flex items-end justify-end gap-10">
           <TextField
-            label="Login Email"
+            label={_(msg`Login Email`)}
             disabled={!!initialEmail}
             {...form.register('email')}
             error={!!errors['email']}
@@ -72,24 +75,25 @@ export const UserAccountSettings = ({
                 sx={{ height: { xs: 50, sm: 60 }, width: '100%' }}
                 type="submit"
               >
-                connect
+                <Trans>connect</Trans>
               </ContainedButton>
             </div>
           )}
         </div>
       </Form>
       <EmailConfirmationModal
-        resendText={getResendCodeLabel({ resendTimeLeft })}
+        resendText={getResendCodeLabel({ resendTimeLeft, _ })}
         resendButtonLink={getResendCodeButtonLink({
           resendTimeLeft,
           onResendPasscode,
+          _,
         })}
         cancelButton={{
-          text: EMAIL_CONFIRMATION_CANCEL,
+          text: _(EMAIL_CONFIRMATION_CANCEL),
           onClick: onConfirmationModalClose,
         }}
         signInButton={{
-          text: EMAIL_CONFIRMATION_SUBMIT,
+          text: _(EMAIL_CONFIRMATION_SUBMIT),
           disabled: true,
           onClick: () => void 0,
         }}
@@ -106,9 +110,13 @@ export const UserAccountSettings = ({
       />
       <div className="flex flex-col gap-30">
         <div className="flex flex-col gap-10">
-          <Subtitle size="lg">Social Accounts</Subtitle>
+          <Subtitle size="lg">
+            <Trans>Social Accounts</Trans>
+          </Subtitle>
           <Body size="sm" color="info.dark-grey">
-            Use your social account to log in to Regen Marketplace.&nbsp;
+            <Trans>
+              Use your social account to log in to Regen Marketplace.&nbsp;
+            </Trans>
             {/* TODO: add link when we have the content ready */}
             {/* <a>Learn more»</a> */}
           </Body>
@@ -127,15 +135,20 @@ export const UserAccountSettings = ({
       </div>
       <div className="flex flex-col gap-30">
         <div className="flex flex-col gap-10">
-          <Subtitle size="lg">Wallet integration</Subtitle>
+          <Subtitle size="lg">
+            <Trans>Wallet integration</Trans>
+          </Subtitle>
           <Body size="sm" color="info.dark-grey">
-            Connect a wallet address to be able to perform on chain tasks such
-            as buying and selling credits, and creating projects on Regen
-            Ledger.&nbsp;
+            <Trans>
+              Connect a wallet address to be able to perform on chain tasks such
+              as buying and selling credits, and creating projects on Regen
+              Ledger.&nbsp;
+            </Trans>
             {/* TODO: add link when we have the content ready */}
             {/* <a>Learn more»</a> */}
           </Body>
         </div>
+        {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
         <ConnectField name="Keplr" {...walletProvider} />
       </div>
     </div>

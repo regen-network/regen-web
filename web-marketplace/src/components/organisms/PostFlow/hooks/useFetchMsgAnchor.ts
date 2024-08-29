@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import { OrderBy } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';

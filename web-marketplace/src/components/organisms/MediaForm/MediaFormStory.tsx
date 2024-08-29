@@ -1,5 +1,7 @@
-import { MutableRefObject, useState } from 'react';
+import { MutableRefObject } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
 
 import {
@@ -43,6 +45,7 @@ export const MediaFormStory = ({
   offChainProjectId,
   setOffChainProjectId,
 }: Props) => {
+  const { _ } = useLingui();
   const { classes } = useMediaFormStyles();
   const ctx = useFormContext<MediaFormSchemaType>();
   const { isDirtyRef } = useProjectEditContext();
@@ -50,7 +53,7 @@ export const MediaFormStory = ({
   const { errors } = formState;
   const imageDropCommonProps: Partial<FileDropProps> = {
     classes: { main: classes.fullSizeMedia },
-    buttonText: IMAGE_UPLOAD_BUTTON_LABEL,
+    buttonText: _(IMAGE_UPLOAD_BUTTON_LABEL),
     fixedCrop: cropAspectMediaForm,
   };
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
@@ -94,22 +97,22 @@ export const MediaFormStory = ({
   });
 
   return (
-    <RadioGroup label={STORY_LABEL} optional>
+    <RadioGroup label={_(STORY_LABEL)} optional>
       <>
         <Radio
-          label={'Add a video'}
+          label={_(msg`Add a video`)}
           optional={RADIO_PREFERABLE}
           value={'schema:VideoObject'}
           helperText={
             <span>
-              {VIDEO_INPUT_HELPER_TEXT}{' '}
+              {_(VIDEO_INPUT_HELPER_TEXT)}{' '}
               <a
                 className="font-bold"
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://github.com/cookpete/react-player?tab=readme-ov-file#supported-media"
               >
-                {VIDEO_INPUT_HELPER_LINK_TEXT}
+                {_(VIDEO_INPUT_HELPER_LINK_TEXT)}
               </a>
             </span>
           }
@@ -134,12 +137,12 @@ export const MediaFormStory = ({
           )}
         </Radio>
         <Radio
-          label={'Add a photo'}
+          label={_(msg`Add a photo`)}
           value={'schema:ImageObject'}
           selectedValue={storyMedia?.['@type']}
-          helperText={
-            'If you don’t have a video for this project, you can add a photo to enhance the story section of your project page.'
-          }
+          helperText={_(
+            msg`If you don’t have a video for this project, you can add a photo to enhance the story section of your project page.`,
+          )}
           sx={{ mt: 2.5 }}
           {...register(`regen:storyMedia.@type`)}
         >
@@ -171,7 +174,7 @@ export const MediaFormStory = ({
                 >
                   <TextField
                     type="text"
-                    label="Photo credit"
+                    label={_(msg`Photo credit`)}
                     {...register('regen:storyMedia.schema:creditText')}
                     helperText={
                       errors['regen:storyMedia']?.['schema:creditText']?.message

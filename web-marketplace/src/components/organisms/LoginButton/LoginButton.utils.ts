@@ -10,10 +10,12 @@ import { mobileWalletsName } from './LoginButton.constants';
 /* getWalletsUiConfig */
 
 export const getWalletsUiConfig = ({
+  _,
   connectToWallet,
 }: GetWalletsUiConfigParams): LoginProvider[] => {
   const walletsUiConfig = getAllWalletsUiConfig({
     connectToWallet,
+    _,
   });
 
   if (checkIsMobile()) {

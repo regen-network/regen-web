@@ -5,6 +5,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
@@ -164,9 +165,11 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
     >
       <OnBoardingCard>
         <RoleField
-          label="Project Developer"
+          label={_(msg`Project Developer`)}
           optional
-          description="The individual or organization that is in charge of managing the project and will appear on the project page."
+          description={_(
+            msg`The individual or organization that is in charge of managing the project and will appear on the project page.`,
+          )}
           setValue={setProjectDeveloper}
           value={projectDeveloper}
           setDebouncedValue={setProjectDeveloperValue}
@@ -179,9 +182,11 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           {...form.register('projectDeveloper')}
         />
         <RoleField
-          label="Verifier"
+          label={_(msg`Verifier`)}
           optional
-          description="A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
+          description={_(
+            msg`A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor).`,
+          )}
           setValue={setVerifier}
           value={verifier}
           setDebouncedValue={setVerifierValue}
@@ -197,7 +202,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
           <Flex alignItems="flex-end" sx={{ mt: { xs: 8.25, sm: 10 } }}>
             <TextField
               type="text"
-              label="Admin"
+              label={_(msg`Admin`)}
               disabled
               {...form.register('admin')}
             />

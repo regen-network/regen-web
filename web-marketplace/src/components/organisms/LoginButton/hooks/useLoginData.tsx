@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useManager } from '@cosmos-kit/react-lite';
+import { useLingui } from '@lingui/react';
 
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
@@ -20,6 +21,7 @@ export const useLoginData = ({
   createProject?: boolean;
   isConnectingRef?: React.MutableRefObject<boolean>;
 }) => {
+  const { _ } = useLingui();
   const { wallet, connect } = useWallet();
   const { walletRepos } = useManager();
 
@@ -54,8 +56,9 @@ export const useLoginData = ({
     () =>
       getWalletsUiConfig({
         connectToWallet,
+        _,
       }),
-    [connectToWallet],
+    [connectToWallet, _],
   );
 
   useResetModalOnConnect({ setIsModalOpen, setModalState, wallet });

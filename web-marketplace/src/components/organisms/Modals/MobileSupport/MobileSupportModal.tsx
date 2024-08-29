@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Trans } from '@lingui/macro';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 import RegenModal from 'web-components/src/components/modal';
@@ -27,10 +28,12 @@ export const MobileSupportModal = (): JSX.Element => {
         sx={{ display: 'flex', flexDirection: 'column', textAlign: 'center' }}
       >
         <Title variant="h3" sx={{ mb: 5 }}>
-          {'This site works better on desktop'}
+          <Trans>This site works better on desktop</Trans>
         </Title>
         <Body mobileSize="md">
-          {'We are working on a keplr mobile wallet integration, coming soon.'}
+          <Trans>
+            We are working on a keplr mobile wallet integration, coming soon.
+          </Trans>
         </Body>
       </Box>
     </RegenModal>

@@ -1,3 +1,5 @@
+import { msg } from '@lingui/macro';
+
 import { RadioCardItem } from 'web-components/src/components/atoms/RadioCard/RadioCard.types';
 import OrganizationIcon from 'web-components/src/components/icons/OrganizationIcon';
 import UserIcon from 'web-components/src/components/icons/UserIcon';
@@ -26,26 +28,26 @@ export const getEditProfileFormInitialValues = (
   websiteLink: '',
 });
 
-export const radioCardItems: RadioCardItem[] = [
+export const getRadioCardItems = (_: TranslatorType): RadioCardItem[] => [
   {
     id: 'individual',
-    label: 'Individual',
+    label: _(msg`Individual`),
     value: AccountType.User,
     icon: <UserIcon />,
   },
   {
     id: 'organization',
-    label: 'Organization',
+    label: _(msg`Organization`),
     value: AccountType.Organization,
     icon: <OrganizationIcon />,
   },
 ];
 
-export const PROFILE_TYPE = 'Profile type';
-export const UPLOAD_IMAGE = 'Upload image';
-export const SAVE = 'Save';
+export const PROFILE_TYPE = msg`Profile type`;
+export const UPLOAD_IMAGE = msg`Upload image`;
+export const SAVE = msg`Save`;
 export const PROFILE_BG_ASPECT_RATIO = 1440 / 326;
-export const LINKS_LABEL = 'Links';
+export const LINKS_LABEL = msg`Links`;
 export const WEBSITE_PLACEHOLDER = 'https://yourwebsite.com';
 export const TWITTER_PLACEHOLDER = 'https://twitter.com/yourtwitterhandle';
 export const PROFILE_AVATAR_FILE_NAME = 'avatar';

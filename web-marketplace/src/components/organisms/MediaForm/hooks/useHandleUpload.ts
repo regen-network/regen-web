@@ -1,4 +1,6 @@
 import { useCallback } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
 
 import { ExifGPSData } from 'web-components/src/components/inputs/new/FileDrop/FileDrop.utils';
@@ -22,6 +24,7 @@ export const useHandleUpload = ({
   setOffChainProjectId,
   subFolder = '',
 }: UseHandleUploadParams) => {
+  const { _ } = useLingui();
   const { createOrUpdateProject } = useCreateOrUpdateProject();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
@@ -51,7 +54,7 @@ export const useHandleUpload = ({
           );
           return uploaded;
         } else {
-          throw new Error('Cannot upload file without a project id');
+          throw new Error(_(msg`Cannot upload file without a project id`));
         }
       } catch (e) {
         setErrorBannerTextAtom(String(e));
@@ -59,6 +62,7 @@ export const useHandleUpload = ({
       }
     },
     [
+      _,
       apiServerUrl,
       createOrUpdateProject,
       offChainProjectId,

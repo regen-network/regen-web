@@ -47,6 +47,7 @@ export const EditFileForm = ({
   geocodingPlaceName,
   setDebouncedViewState,
 }: Props): JSX.Element => {
+  const { _ } = useLingui();
   const ctx = useFormContext<PostFormSchemaType>();
   const { register, control, setValue, formState } = ctx;
   const { errors } = formState;
@@ -121,7 +122,7 @@ export const EditFileForm = ({
       <div className="flex flex-col mb-40 mt-40 sm:mb-50 sm:mt-50">
         <RadioGroup
           label={_(msg`Location`)}
-          description={FILE_LOCATION_DESCRIPTION}
+          description={_(FILE_LOCATION_DESCRIPTION)}
         >
           {(location || projectLocation) && (
             <div className="h-[309px] sm:h-[409px] pb-10">
@@ -161,9 +162,9 @@ export const EditFileForm = ({
             )}
             <Radio
               label={_(msg`No specific location`)}
-              description={_(
+              description={` ${_(
                 msg`(file will be associated with the project location by default)`,
-              )}
+              )}`}
               value={'none'}
               selectedValue={locationType}
               sx={{ mb: 2.5 }}
@@ -178,7 +179,6 @@ export const EditFileForm = ({
             />
             <Radio
               label={_(msg`Choose a specific location on the map`)}
-              description={_(msg`(drag map to choose location)`)}
               value={'custom'}
               selectedValue={locationType}
               {...register(`files.${currentIndex}.locationType`)}

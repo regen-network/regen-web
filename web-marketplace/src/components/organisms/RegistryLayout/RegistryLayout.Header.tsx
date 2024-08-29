@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
-import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
 import { getClientConfig } from 'clients/Clients.config';
 
 import Header from 'web-components/src/components/header';
@@ -22,9 +21,7 @@ import { useAuthData } from 'hooks/useAuthData';
 import { chainId } from '../../../lib/ledger';
 import { RegistryIconLink, RegistryNavLink } from '../../atoms';
 import { ListProject } from '../ListProject/ListProject';
-import { useLoginData } from '../LoginButton/hooks/useLoginData';
 import { LoginButton } from '../LoginButton/LoginButton';
-import { LoginFlow } from '../LoginFlow/LoginFlow';
 import { useOnProfileClick } from './hooks/useOnProfileClick';
 import {
   getBorderBottom,
@@ -50,7 +47,7 @@ const RegistryLayoutHeader: React.FC = () => {
   const clientConfig = getClientConfig();
 
   const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
-  const menuItems = useMemo(() => getMenuItems(pathname), [pathname]);
+  const menuItems = useMemo(() => getMenuItems(pathname, _), [pathname, _]);
   const onProfileClick = useOnProfileClick();
   const userMenuItems = useMemo(
     () =>

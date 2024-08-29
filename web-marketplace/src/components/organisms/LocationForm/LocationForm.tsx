@@ -96,9 +96,9 @@ const LocationForm: React.FC<LocationFormProps> = ({
     >
       <OnBoardingCard>
         <LocationField
-          label={LOCATION_LABEL}
-          description={LOCATION_DESCRIPTION}
-          placeholder={LOCATION_PLACEHOLDER}
+          label={_(LOCATION_LABEL)}
+          description={_(LOCATION_DESCRIPTION)}
+          placeholder={_(LOCATION_PLACEHOLDER)}
           token={mapToken}
           error={!!errors['schema:location']}
           helperText={errors['schema:location']?.message?.toString()}

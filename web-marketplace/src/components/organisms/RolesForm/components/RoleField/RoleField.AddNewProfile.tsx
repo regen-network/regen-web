@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import { Box } from '@mui/material';
 
 import { Label } from 'web-components/src/components/typography';
@@ -30,7 +31,7 @@ export const AddNewProfile: React.FC<AddNewProfileProps> = ({
     }}
   >
     <Label size="xs" color="secondary.main">
-      + Add New Profile
+      <Trans>+ Add New Profile</Trans>
     </Label>
   </Box>
 );

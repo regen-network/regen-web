@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 
 import { ProjectImpactCardProps } from 'web-components/src/components/cards/ProjectImpactCard/ProjectImpactCard';
@@ -31,6 +32,7 @@ export default function useImpact({
   creditClassMetadata,
   projectMetadata,
 }: InputProps) {
+  const { _ } = useLingui();
   const primaryImpact = creditClassMetadata?.['regen:primaryImpact'];
   const projectImpact = projectMetadata?.['regen:primaryImpact'];
   const coBenefits = creditClassMetadata?.['regen:coBenefits'];
@@ -81,6 +83,7 @@ export default function useImpact({
           sdg =>
             sdg?.iri?.current && primaryImpactSdgIris.includes(sdg.iri.current),
         ),
+        _,
       }) as ProjectImpactCardProps,
     );
   }
@@ -107,13 +110,14 @@ export default function useImpact({
           sdg =>
             sdg?.iri?.current && coBenefitsSdgIris[i].includes(sdg.iri.current),
         ),
+        _,
       }),
     ) as ProjectImpactCardProps[];
   } else if (sanityCoBenefits.length > 0) {
     // This is to handle the case where the impact are only stored off-chain,
     // assuming they have a mapping to sanity impact.
     normalizedCoBenefits = sanityCoBenefits.map(coBenefit =>
-      normalizeCoBenefit({ sanityImpact: coBenefit }),
+      normalizeCoBenefit({ sanityImpact: coBenefit, _ }),
     ) as ProjectImpactCardProps[];
   }
   return [...impact, ...normalizedCoBenefits];

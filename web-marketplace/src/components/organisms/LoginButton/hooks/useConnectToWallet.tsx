@@ -44,7 +44,7 @@ export const useConnectToWallet = ({
         await connectWalletConnect(KEPLR_MOBILE, true);
       }
     },
-    [connect, connectWalletConnect, onModalClose, openView],
+    [connect, connectWalletConnect, isConnectingRef, onModalClose, openView],
   );
 
   return connectToWallet;

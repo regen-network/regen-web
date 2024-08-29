@@ -5,6 +5,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { useLingui } from '@lingui/react';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
@@ -56,6 +57,7 @@ interface CreditDetailsProps {
 function CreditClassDetails({
   isLandSteward,
 }: CreditDetailsProps): JSX.Element {
+  const { _ } = useLingui();
   const { activeWalletAddr, isConnected } = useWallet();
   const { dataClient, ecocreditClient } = useLedger();
   const { creditClassId } = useParams();
@@ -255,7 +257,7 @@ function CreditClassDetails({
         onChainCreditClassId={onChainClass?.id}
         creditClassName={metadata?.['schema:name']}
         avgPricePerTonLabel={avgPricePerTonLabel}
-        avgPricePerTonTooltip={AVG_PRICE_TOOLTIP_CREDIT_CLASS}
+        avgPricePerTonTooltip={_(AVG_PRICE_TOOLTIP_CREDIT_CLASS)}
       />
       <BuySellOrderFlow
         isFlowStarted={isBuyFlowStarted}

@@ -20,6 +20,7 @@ const LoginModalMobile = ({
   setOpen,
   walletRepo,
 }: WalletModalProps) => {
+  const { _ } = useLingui();
   const onCloseModal = () => {
     setOpen(false);
   };

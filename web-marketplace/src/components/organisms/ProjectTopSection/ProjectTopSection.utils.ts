@@ -16,6 +16,7 @@ import {
 import { Certification } from 'lib/db/types/json-ld/certification';
 import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
 import { Rating } from 'lib/db/types/json-ld/rating';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
@@ -40,17 +41,19 @@ export const getSdgsImages = ({ sdgs }: GetSdgsImagesParams) => {
 };
 type ParseMethodologiesParams = {
   methodologies?: ApprovedMethodologies;
+  _: TranslatorType;
 };
 
 export const parseMethodologies = ({
   methodologies,
+  _,
 }: ParseMethodologiesParams) => {
   if (
     methodologies?.['schema:url'] &&
     methodologies?.['schema:itemListElement'].length > 1
   ) {
     return {
-      'schema:name': SEE_ALL_METHODOLOGIES,
+      'schema:name': _(SEE_ALL_METHODOLOGIES),
       'schema:url': methodologies?.['schema:url'],
     };
   }
@@ -75,6 +78,7 @@ export type ProjectMethodology = {
 };
 
 export const parseProjectMetadata = (
+  _: TranslatorType,
   projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD,
   onChainProjectId?: string,
 ): ParseProjectMetadataReturn => {
@@ -94,6 +98,7 @@ export const parseProjectMetadata = (
       projectMetadata?.['regen:offsetProtocol'] ??
       parseMethodologies({
         methodologies: projectMetadata?.['regen:approvedMethodologies'],
+        _,
       });
 
     // Rating
@@ -187,6 +192,7 @@ type GetRatingAndCertificationsDataParams = {
   ratingIcons?: Record<string, string | undefined>;
   certifications?: Certification[];
   certificationIcons?: Record<string, string | undefined>;
+  _: TranslatorType;
 };
 
 export const getRatingsAndCertificationsData = ({
@@ -194,13 +200,14 @@ export const getRatingsAndCertificationsData = ({
   ratingIcons,
   certifications,
   certificationIcons,
+  _,
 }: GetRatingAndCertificationsDataParams):
   | RoundLogoItemsListType
   | undefined => {
   const hasCertification = certifications && certifications.length > 0;
   const hasRating = ratings && ratings.length > 0;
-  const certificationTitle = hasCertification ? CERTIFICATIONS : '';
-  const ratingTitle = hasRating ? RATINGS : '';
+  const certificationTitle = hasCertification ? _(CERTIFICATIONS) : '';
+  const ratingTitle = hasRating ? _(RATINGS) : '';
 
   let title: string;
   if (hasCertification && hasRating) {

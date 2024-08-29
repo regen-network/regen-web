@@ -33,14 +33,21 @@ export const TextOrIconFilePreview = ({
   children,
 }: Props) => {
   const parentRef = useRef<HTMLDivElement>(null);
-  const [childWidth, setChildWidth] = useState('100%');
+  const [childSize, setChildSize] = useState({
+    height: '100%',
+    width: '100%',
+  });
 
   useEffect(() => {
     const parent = parentRef.current;
     const measureWidth = () => {
       if (parent) {
         const parentWidth = parent.offsetWidth;
-        setChildWidth(`${parentWidth}px`);
+        const parentHeight = parent.offsetHeight;
+        setChildSize({
+          width: `${parentWidth}px`,
+          height: `${parentHeight}px`,
+        });
       }
     };
 
@@ -73,7 +80,7 @@ export const TextOrIconFilePreview = ({
           <div
             className="max-w-full h-full overflow-hidden"
             style={{
-              width: childWidth,
+              width: childSize.width,
             }}
           >
             <table
@@ -104,7 +111,8 @@ export const TextOrIconFilePreview = ({
           <div
             className="max-w-full"
             style={{
-              width: childWidth,
+              width: childSize.width,
+              height: childSize.height,
             }}
           >
             <pre

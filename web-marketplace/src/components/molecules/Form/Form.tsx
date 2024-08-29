@@ -25,6 +25,7 @@ interface Props<T extends FieldValues>
   sx?: SxProps<Theme>;
   formRef?: FormRef;
   isDraftRef?: MutableRefObject<boolean>;
+  fieldsetClassName?: string;
 }
 
 const Form = <T extends FieldValues>({
@@ -34,6 +35,7 @@ const Form = <T extends FieldValues>({
   formRef,
   isDraftRef,
   sx = [],
+  fieldsetClassName = '',
   ...props
 }: Props<T>): JSX.Element => {
   useImperativeHandle(formRef, () => ({
@@ -57,6 +59,7 @@ const Form = <T extends FieldValues>({
           component="fieldset"
           disabled={form.formState.isSubmitting}
           sx={[{ borderWidth: 0, padding: 0, margin: 0 }, ...sxToArray(sx)]}
+          className={fieldsetClassName}
         >
           {children}
         </Box>

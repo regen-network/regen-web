@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import ReactHtmlParser from 'html-react-parser';
 
 import { cn } from '../../../../utils/styles/cn';
@@ -31,12 +32,44 @@ export const TextOrIconFilePreview = ({
   previewClassName,
   children,
 }: Props) => {
+  const parentRef = useRef<HTMLDivElement>(null);
+  const [childSize, setChildSize] = useState({
+    height: '100%',
+    width: '100%',
+  });
+
+  useEffect(() => {
+    const parent = parentRef.current;
+    const measureWidth = () => {
+      if (parent) {
+        const parentWidth = parent.offsetWidth;
+        const parentHeight = parent.offsetHeight;
+        setChildSize({
+          width: `${parentWidth}px`,
+          height: `${parentHeight}px`,
+        });
+      }
+    };
+
+    const observer = new ResizeObserver(measureWidth);
+    if (parent) {
+      observer.observe(parent);
+    }
+
+    return () => {
+      if (parent) {
+        observer.unobserve(parent);
+      }
+    };
+  }, []);
+
   return (
     <div
+      ref={parentRef}
       className={cn(
         `flex ${
           !csv && !xls && !docx ? 'justify-center items-center' : ''
-        } h-[100%] w-[100%] ${colors.text} ${colors.bg}`,
+        } h-full w-full overflow-hidden ${colors.text} ${colors.bg}`,
         className,
       )}
     >
@@ -44,37 +77,53 @@ export const TextOrIconFilePreview = ({
         <AudioFileIcon width={iconSize} height={iconSize} />
       ) : preview ? (
         csv || xls ? (
-          <table
-            className={cn(
-              'whitespace-nowrap border-collapse w-[100%] h-[100%]',
-              previewClassName,
-            )}
+          <div
+            className="max-w-full h-full overflow-hidden"
+            style={{
+              width: childSize.width,
+            }}
           >
-            {preview
-              .split('\n')
-              .map(row => row.split(','))
-              .slice(0, 9)
-              .map((row, i) => (
-                <tr key={i}>
-                  {row.map((cell, j) => (
-                    <td key={j} className="border border-solid border-grey-300">
-                      {cell}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-          </table>
+            <table
+              className={cn(
+                'whitespace-nowrap border-collapse w-full h-full',
+                previewClassName,
+              )}
+            >
+              {preview
+                .split('\n')
+                .map(row => row.split(','))
+                .slice(0, 9)
+                .map((row, i) => (
+                  <tr key={i}>
+                    {row.map((cell, j) => (
+                      <td
+                        key={j}
+                        className="border border-solid border-grey-300"
+                      >
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+            </table>
+          </div>
         ) : json ? (
-          <>
+          <div
+            className="max-w-full"
+            style={{
+              width: childSize.width,
+              height: childSize.height,
+            }}
+          >
             <pre
               className={cn(
-                'text-grey-400 m-0 w-[100%] h-[100%] font-bold',
+                'text-grey-400 m-0 w-full h-full font-bold',
                 previewClassName,
               )}
             >
               {JSON.stringify(JSON.parse(preview), null, 2)}
             </pre>
-          </>
+          </div>
         ) : docx ? (
           <div className={previewClassName}>{ReactHtmlParser(preview)}</div>
         ) : (

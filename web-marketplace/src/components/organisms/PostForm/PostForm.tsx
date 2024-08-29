@@ -201,9 +201,10 @@ export const PostForm = ({
 
   return (
     <Form
-      className={cn('max-w-[560px]', className)}
+      className={cn('max-w-full w-[560px]', className)}
       form={form}
       onSubmit={onSubmit}
+      fieldsetClassName="min-w-full"
     >
       <Title
         variant="h3"

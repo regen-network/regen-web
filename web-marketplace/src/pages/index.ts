@@ -12,7 +12,6 @@ export * from './Dashboard';
 export * from './Description';
 export * from './EcocreditsByAccount';
 export * from './Eligibility';
-export * from './GettingStarted';
 export * from './Home';
 export * from './LandStewards';
 export * from './Login';

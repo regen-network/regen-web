@@ -1,4 +1,6 @@
 import { useCallback } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { MsgCancelSellOrder } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
@@ -47,6 +49,8 @@ const useCancelSellOrderSubmit = ({
   setSelectedSellOrder,
   setIsProcessingModalOpen,
 }: Props): Return => {
+  const { _ } = useLingui();
+
   const cancelSellOrderSubmit = useCallback(async (): Promise<void> => {
     if (!accountAddress) return Promise.reject();
 
@@ -55,13 +59,13 @@ const useCancelSellOrderSubmit = ({
     setIsProcessingModalOpen(true);
     setSelectedSellOrder(null);
 
-    const msg = MsgCancelSellOrder.fromPartial({
+    const msgCancelSellOrder = MsgCancelSellOrder.fromPartial({
       seller: accountAddress,
       sellOrderId: selectedSellOrder.id,
     });
 
     const tx = {
-      msgs: [msg],
+      msgs: [msgCancelSellOrder],
       fee: undefined,
       memo: undefined,
     };
@@ -77,7 +81,7 @@ const useCancelSellOrderSubmit = ({
 
     setCardItems([
       {
-        label: 'price per credit',
+        label: _(msg`price per credit`),
         value: {
           name: formatNumber({
             num: microToDenom(askAmount),
@@ -98,34 +102,35 @@ const useCancelSellOrderSubmit = ({
         },
       },
       {
-        label: 'project',
+        label: _(msg`project`),
         value: {
           name: selectedSellOrder.project?.name || projectId,
           url: `/project/${projectId}`,
         },
       },
       {
-        label: 'credit batch id',
+        label: _(msg`credit batch id`),
         value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
       },
       {
-        label: 'amount',
+        label: _(msg`amount`),
         value: { name: getFormattedNumber(Number(amountAvailable)) },
       },
     ]);
-    setTxModalHeader(CANCEL_SELL_ORDER_HEADER);
-    setTxModalTitle(CANCEL_SELL_ORDER_TITLE + id);
-    setTxButtonTitle(CANCEL_SELL_ORDER_BUTTON);
+    setTxModalHeader(_(CANCEL_SELL_ORDER_HEADER));
+    setTxModalTitle(_(CANCEL_SELL_ORDER_TITLE) + id);
+    setTxButtonTitle(_(CANCEL_SELL_ORDER_BUTTON));
   }, [
-    setCardItems,
-    setTxModalTitle,
-    setTxModalHeader,
-    setSelectedSellOrder,
-    setTxButtonTitle,
-    setIsProcessingModalOpen,
-    selectedSellOrder,
     accountAddress,
+    selectedSellOrder,
+    _,
+    setIsProcessingModalOpen,
+    setSelectedSellOrder,
     signAndBroadcast,
+    setCardItems,
+    setTxModalHeader,
+    setTxModalTitle,
+    setTxButtonTitle,
   ]);
 
   return cancelSellOrderSubmit;

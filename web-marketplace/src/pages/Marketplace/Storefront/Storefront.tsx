@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 import { useSetAtom } from 'jotai';
@@ -48,6 +50,7 @@ import { SellOrderActions } from './Storefront.types';
 import { getCancelCardItems } from './Storefront.utils';
 
 export const Storefront = (): JSX.Element => {
+  const { _ } = useLingui();
   const [selectedSellOrder, setSelectedSellOrder] = useState<number | null>(
     null,
   );
@@ -107,7 +110,7 @@ export const Storefront = (): JSX.Element => {
   };
 
   const onButtonClick = (): void => {
-    if (txModalTitle === BUY_SELL_ORDER_TITLE) {
+    if (txModalTitle === _(BUY_SELL_ORDER_TITLE)) {
       navigate('/profile/portfolio');
     } else {
       handleTxModalClose();
@@ -160,7 +163,7 @@ export const Storefront = (): JSX.Element => {
     setTxButtonTitle,
     setTxModalHeader,
     setTxModalTitle,
-    buttonTitle: BUY_SELL_ORDER_BUTTON,
+    buttonTitle: _(BUY_SELL_ORDER_BUTTON),
     refetchSellOrders,
     onSubmitCallback,
   });
@@ -231,7 +234,7 @@ export const Storefront = (): JSX.Element => {
     <Box sx={{ backgroundColor: 'grey.50' }}>
       <Section>
         <Title variant="h2" sx={{ mb: 8.5 }}>
-          Sell orders
+          <Trans>Sell orders</Trans>
         </Title>
         <Box sx={{ paddingBottom: '150px' }}>
           <WithLoader
@@ -251,7 +254,7 @@ export const Storefront = (): JSX.Element => {
                       <TableActionButtons
                         buttons={[
                           {
-                            label: CANCEL_SELL_ORDER_ACTION,
+                            label: _(CANCEL_SELL_ORDER_ACTION),
                             onClick: () => {
                               setSelectedAction('cancel');
                               setSelectedSellOrder(i);
@@ -292,7 +295,7 @@ export const Storefront = (): JSX.Element => {
                           }
                         }}
                       >
-                        {BUY_SELL_ORDER_ACTION}
+                        {_(BUY_SELL_ORDER_ACTION)}
                       </OutlinedButton>
                     )}
                   </>
@@ -348,7 +351,7 @@ export const Storefront = (): JSX.Element => {
           ) : undefined
         }
         socialItems={getSocialItems({
-          twitter: { text: STOREFRONT_TWITTER_TEXT, url: shareUrl },
+          twitter: { text: _(STOREFRONT_TWITTER_TEXT), url: shareUrl },
           linkedIn: { url: shareUrl },
         })}
       />
@@ -371,12 +374,13 @@ export const Storefront = (): JSX.Element => {
         onClose={handleCancelModalClose}
         linkComponent={Link}
         onConfirm={cancelSellOrderSubmit}
-        onConfirmTitle="Yes, cancel sell order"
-        onCancelTitle="WHOOPS, EXIT"
-        title="Are you sure would you like to cancel this sell order?"
-        cardItems={getCancelCardItems(
-          normalizedSellOrders[selectedSellOrder ?? 0] ?? {},
-        )}
+        onConfirmTitle={_(msg`Yes, cancel sell order`)}
+        onCancelTitle={_(msg`WHOOPS, EXIT`)}
+        title={_(msg`Are you sure would you like to cancel this sell order?`)}
+        cardItems={getCancelCardItems({
+          sellOrder: normalizedSellOrders[selectedSellOrder ?? 0] ?? {},
+          _,
+        })}
       />
     </Box>
   );

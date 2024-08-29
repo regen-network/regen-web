@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Trans } from '@lingui/macro';
 import { Box } from '@mui/material';
 
 import Section from 'web-components/src/components/section';
@@ -27,7 +28,7 @@ export const EcocreditBatches = (): JSX.Element => {
     <Box sx={{ backgroundColor: 'grey.50' }}>
       <Section>
         <Title variant="h2" sx={{ mb: 8.5 }}>
-          {'Ecocredit Batches'}
+          <Trans>Ecocredit Batches</Trans>
         </Title>
         <Box sx={{ paddingBottom: '150px' }}>
           <CreditBatches

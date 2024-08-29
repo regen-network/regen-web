@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import { Box, CircularProgress } from '@mui/material';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -28,7 +29,7 @@ export const Faucet = () => {
         variant="h1"
         sx={{ textAlign: 'center', color: 'primary.contrastText', mb: 4.25 }}
       >
-        {'Redwood Testnet Faucet'}
+        <Trans>Redwood Testnet Faucet</Trans>
       </Title>
       <OutlinedButton
         disabled={isLoading || !address}
@@ -41,7 +42,7 @@ export const Faucet = () => {
         }
         sx={{ whiteSpace: 'nowrap', mt: 8 }}
       >
-        Request fund
+        <Trans>Request fund</Trans>
       </OutlinedButton>
     </Box>
   );

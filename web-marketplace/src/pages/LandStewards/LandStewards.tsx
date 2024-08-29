@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
@@ -75,6 +77,7 @@ const useStyles = makeStyles()(theme => ({
 }));
 
 const LandStewards = (): JSX.Element => {
+  const { _ } = useLingui();
   const { classes: styles } = useStyles();
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string | undefined>();
@@ -93,10 +96,13 @@ const LandStewards = (): JSX.Element => {
   const content = data?.allLandStewardsPage?.[0];
 
   const siteMetadata = {
-    title: 'For Land Stewards',
+    title: _(msg`For Land Stewards`),
     description:
       content?.metadata?.description ||
-      'Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship.',
+      _(
+        msg`Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship.`,
+      ),
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     author: 'Regen Network Development, PBC',
     siteUrl: window.location.href,
     imageUrl: content?.metadata?.openGraphImage?.asset?.url || '',

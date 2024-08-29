@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { gradients } from 'styles/gradients';
@@ -30,6 +32,7 @@ import { useHomeStyles } from './Home.styles';
 import { useCreditClasses } from './hooks/useCreditClasses';
 
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { _ } = useLingui();
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>('');
   const { isKeplrMobileWeb } = useWallet();
@@ -78,6 +81,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
         siteMetadata={{
           title: seo?.title || '',
           description: seo?.description || '',
+          // eslint-disable-next-line lingui/no-unlocalized-strings
           author: 'Regen Network Development, PBC',
           siteUrl: window.location.href,
         }}
@@ -110,16 +114,20 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
               }}
             >
               <Box sx={{ display: 'inline-block' }}>
-                Unlock{' '}
-                <Box sx={{ display: 'inline-block', ...gradients.blueGreen }}>
-                  Regenerative Finances
-                </Box>
-                <Box sx={{ display: { xs: 'none', md: 'inline-block' } }}>
-                  with{' '}
+                <Trans>
+                  Unlock{' '}
                   <Box sx={{ display: 'inline-block', ...gradients.blueGreen }}>
-                    Regen Marketplace
+                    Regenerative Finances
                   </Box>
-                </Box>
+                  <Box sx={{ display: { xs: 'none', md: 'inline-block' } }}>
+                    with{' '}
+                    <Box
+                      sx={{ display: 'inline-block', ...gradients.blueGreen }}
+                    >
+                      Regen Marketplace
+                    </Box>
+                  </Box>
+                </Trans>
               </Box>
             </Title>
             <Body
@@ -153,7 +161,9 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
       </BackgroundImgSection>
 
       <FeaturedProjects
-        title={projectsSection?.titleCustomBody?.title || 'Featured Projects'}
+        title={
+          projectsSection?.titleCustomBody?.title || _(msg`Featured Projects`)
+        }
         body={projectsSection?.titleCustomBody?.bodyRaw}
         sanityFeaturedProjects={projectsSection?.projects}
       />
@@ -164,7 +174,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
             display: 'flex',
             alignItems: 'center',
           }}
-          title={creditClassesSection?.title || 'Credit Classes'}
+          title={creditClassesSection?.title || _(msg`Credit Classes`)}
           classes={{
             root: cx(
               classes.creditClassBackground,
@@ -183,7 +193,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
             sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
           >
             <CreditClassCards
-              btnText="Learn More"
+              btnText={_(msg`Learn More`)}
               justifyContent={['center', 'center', 'flex-start']}
               creditClassesContent={creditClasses} // CMS data
               creditClassesProgram={creditClassesPrograms}

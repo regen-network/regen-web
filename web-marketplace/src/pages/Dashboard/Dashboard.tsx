@@ -110,7 +110,7 @@ const Dashboard = (): JSX.Element => {
   return (
     <>
       <ProfileHeader
-        name={account?.name ? account.name : DEFAULT_NAME}
+        name={account?.name ? account.name : _(DEFAULT_NAME)}
         backgroundImage={backgroundImage}
         avatar={avatarImage}
         infos={{

@@ -5,6 +5,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { useLingui } from '@lingui/react';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineItem from '@mui/lab/TimelineItem';
@@ -64,6 +65,7 @@ export const DataStreamPost = ({
   isAdmin,
   adminAccountId,
 }: Props) => {
+  const { _ } = useLingui();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const setBannerText = useSetAtom(bannerTextAtom);
@@ -171,22 +173,22 @@ export const DataStreamPost = ({
               description={post.contents.comment}
               privacyLabel={
                 post.privacy === 'private'
-                  ? POST_IS_PRIVATE
+                  ? _(POST_IS_PRIVATE)
                   : post.privacy === 'private_files'
-                  ? FILES_ARE_PRIVATE
+                  ? _(FILES_ARE_PRIVATE)
                   : post.privacy === 'private_locations'
-                  ? LOCATIONS_ARE_PRIVATE
+                  ? _(LOCATIONS_ARE_PRIVATE)
                   : undefined
               }
               publicPost={post.privacy === 'public'}
               author={{
-                name: creatorAccount?.name || DEFAULT_NAME,
+                name: creatorAccount?.name || _(DEFAULT_NAME),
                 type: creatorAccount?.type ?? 'USER',
                 image:
                   creatorAccount?.image || getDefaultAvatar(creatorAccount),
                 link: `/profiles/${creatorAccount?.id}`,
                 timestamp: post.createdAt,
-                tag: creatorIsAdmin ? ADMIN : undefined,
+                tag: creatorIsAdmin ? _(ADMIN) : undefined,
               }}
               isAdmin={isAdmin}
               handleClickShare={() => {

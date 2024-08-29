@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 
 import { Flex } from 'web-components/src/components/box';
@@ -39,6 +41,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
   const { wallet } = useWallet();
   const location = useLocation();
+  const { _ } = useLingui();
 
   const { address, account, isLoading } = useProfileData();
   const { avatarImage, backgroundImage } = getUserImages({ account });
@@ -61,32 +64,33 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const tabs: IconTabProps[] = useMemo(
     () => [
       {
-        label: 'Portfolio',
+        label: _(msg`Portfolio`),
         icon: <CreditsIcon fontSize="small" linearGradient />,
         href: `/profiles/${accountAddressOrId}/portfolio`,
         hidden:
           !address || (!!account?.hideEcocredits && !!account?.hideRetirements),
       },
       {
-        label: 'Projects',
+        label: _(msg`Projects`),
         icon: <ProjectPageIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/projects`,
         hidden: !isProjectAdmin,
       },
       {
-        label: 'Credit Classes',
+        label: _(msg`Credit Classes`),
         icon: <CreditClassIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/credit-classes`,
         hidden: !showCreditClasses || creditClasses.length === 0,
       },
       {
-        label: 'Credit Batches',
+        label: _(msg`Credit Batches`),
         icon: <CreditBatchIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/credit-batches`,
         hidden: !isIssuer,
       },
     ],
     [
+      _,
       account?.hideEcocredits,
       account?.hideRetirements,
       accountAddressOrId,
@@ -120,7 +124,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
         {!isProfileNotFound && (
           <>
             <ProfileHeader
-              name={account?.name ? account?.name : DEFAULT_NAME}
+              name={account?.name ? account?.name : _(DEFAULT_NAME)}
               backgroundImage={backgroundImage}
               avatar={avatarImage}
               infos={{
@@ -145,7 +149,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
             <Box sx={{ backgroundColor: 'grey.50' }}>
               <Section sx={{ root: { pt: { xs: 15 } } }}>
                 <IconTabs
-                  aria-label="public profile tabs"
+                  aria-label={_(msg`public profile tabs`)}
                   tabs={tabs}
                   linkComponent={Link}
                   activeTab={activeTab}

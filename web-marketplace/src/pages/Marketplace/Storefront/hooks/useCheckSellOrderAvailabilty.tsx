@@ -1,4 +1,5 @@
 import { MutableRefObject, useEffect } from 'react';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 
@@ -44,10 +45,10 @@ export const useCheckSellOrderAvailabilty = ({
     if (isBuyOrderInvalid) {
       setError(ERRORS.SELL_ORDER_PURCHASED);
       setTxModalHeader(_(errorsMapping[ERRORS.SELL_ORDER_PURCHASED].title));
-      setTxModalTitle(`Sell order #${sellOrderId}`);
+      setTxModalTitle(`${_(msg`Sell order`)} #${sellOrderId}`);
       setCardItems([
         {
-          label: 'AMOUNT AVAILABLE',
+          label: _(msg`AMOUNT AVAILABLE`),
           value: { name: amountAvailable },
         },
       ]);

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export const ViewProfileButton = ({ setIsWarningModalOpen }: Props) => {
+  const { _ } = useLingui();
   const [isDirtyRef] = useAtom(isProfileEditDirtyRef);
   const navigate = useNavigate();
 
@@ -28,7 +30,7 @@ export const ViewProfileButton = ({ setIsWarningModalOpen }: Props) => {
       }}
       startIcon={<EyeIcon />}
     >
-      {VIEW_PROFILE}
+      {_(VIEW_PROFILE)}
     </OutlinedButton>
   );
 };

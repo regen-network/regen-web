@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 
 import { Flex } from 'web-components/src/components/box';
 import ConnectWallet from 'web-components/src/components/organisms/ConnectWallet';
@@ -12,6 +13,7 @@ import { useAuthData } from 'hooks/useAuthData';
 import { LOGIN_PAGE_TITLE } from './Login.constants';
 
 export const Login = () => {
+  const { _ } = useLingui();
   const { loading: authLoading, activeAccountId } = useAuth();
   const { accountOrWallet } = useAuthData();
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ export const Login = () => {
   return (
     <Flex justifyContent="center" pt={17} pb={27.5}>
       <ConnectWallet
-        title={LOGIN_PAGE_TITLE}
+        title={_(LOGIN_PAGE_TITLE)}
         button={<LoginButton size="large" />}
         variant="page"
       />

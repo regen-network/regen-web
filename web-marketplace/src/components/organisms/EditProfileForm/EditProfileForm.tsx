@@ -22,7 +22,7 @@ import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import {
-  editProfileFormInitialValues,
+  getEditProfileFormInitialValues,
   LINKS_LABEL,
   PROFILE_AVATAR_FILE_NAME,
   PROFILE_BG_ASPECT_RATIO,
@@ -52,7 +52,7 @@ export interface EditProfileFormProps {
 const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
   ({
     children,
-    initialValues = editProfileFormInitialValues,
+    initialValues = getEditProfileFormInitialValues,
     isDirtyRef,
     onSubmit,
     onSuccess,

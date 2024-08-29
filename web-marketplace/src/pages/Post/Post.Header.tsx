@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 
 import Banner from 'web-components/src/components/banner';
 import { PostAdminButton } from 'web-components/src/components/buttons/PostAdminButton/PostAdminButton';
@@ -8,7 +9,6 @@ import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
 import ShareIcon from 'web-components/src/components/icons/ShareIcon';
 import { Tag } from 'web-components/src/components/organisms/PostFiles/components/Tag';
-import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.constants';
 import Section from 'web-components/src/components/section';
 import { Title } from 'web-components/src/components/typography';
 import UserInfo from 'web-components/src/components/user/UserInfo';
@@ -16,6 +16,7 @@ import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
 import copyTextToClipboard from 'web-components/src/utils/copy';
 
 import { AccountByIdQuery } from 'generated/graphql';
+import { COPY_SUCCESS } from 'lib/constants/shared.constants';
 
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
@@ -58,6 +59,7 @@ export const PostHeader = ({
   privateFiles,
   offChainProjectId,
 }: Props) => {
+  const { _ } = useLingui();
   const { iri } = useParams();
   const [shareSuccessBanner, setShareSuccessBanner] = useState(false);
   const sharePrivateLink = useSharePrivateLink({ iri });
@@ -90,7 +92,7 @@ export const PostHeader = ({
             className="h-[24px] w-[24px] text-brand-400"
             direction="prev"
           />
-          {ALL_POSTS}
+          {_(ALL_POSTS)}
         </TextButton>
 
         {isAdmin ? (
@@ -98,7 +100,7 @@ export const PostHeader = ({
             {privatePost && (
               <Tag
                 className="h-[26px] bg-error-300 mr-10 sm:mr-[18px]"
-                label={POST_IS_PRIVATE}
+                label={_(POST_IS_PRIVATE)}
                 icon={<LockIcon className="w-[18px] h-[18px]" />}
               />
             )}
@@ -106,7 +108,7 @@ export const PostHeader = ({
               className="text-grey-500 hover:text-grey-500 mr-10"
               textSize="xs"
             >
-              {ACTIONS}
+              {_(ACTIONS)}
             </TextButton>
             <PostAdminButton
               publicPost={publicPost}
@@ -125,7 +127,7 @@ export const PostHeader = ({
               textSize="xs"
               onClick={() => {}}
             >
-              {SHARE}
+              {_(SHARE)}
             </TextButton>
             <ShareIcon
               className="cursor-pointer"
@@ -138,7 +140,7 @@ export const PostHeader = ({
         )}
         {shareSuccessBanner && (
           <Banner
-            text={COPY_SUCCESS}
+            text={_(COPY_SUCCESS)}
             onClose={() => {
               setShareSuccessBanner(false);
             }}
@@ -152,12 +154,12 @@ export const PostHeader = ({
         <UserInfo
           fontFamily={defaultFontFamily}
           user={{
-            name: creatorAccount.name || DEFAULT_NAME,
+            name: creatorAccount.name || _(DEFAULT_NAME),
             link: `/profiles/${creatorAccount.id}`,
             type: creatorAccount.type,
             image: creatorAccount.image || getDefaultAvatar(creatorAccount),
             timestamp: createdAt,
-            tag: creatorIsAdmin ? ADMIN : undefined,
+            tag: creatorIsAdmin ? _(ADMIN) : undefined,
           }}
         />
       )}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Trans } from '@lingui/macro';
 import { Box } from '@mui/material';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
@@ -48,7 +49,9 @@ export function FeaturedProjects({
       />
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 20 }}>
         <Link to="/projects/1">
-          <ContainedButton>{'DISCOVER PROJECTS'}</ContainedButton>
+          <ContainedButton>
+            <Trans>DISCOVER PROJECTS</Trans>
+          </ContainedButton>
         </Link>
       </Box>
       <BuySellOrderFlow

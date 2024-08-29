@@ -1,14 +1,15 @@
 import { useCallback } from 'react';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
 
-import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.constants';
 import copyTextToClipboard from 'web-components/src/utils/copy';
 
 import { apiUri } from 'lib/apiUri';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { COPY_SUCCESS } from 'lib/constants/shared.constants';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
@@ -17,6 +18,7 @@ type Params = {
 };
 
 export const useSharePrivateLink = ({ iri }: Params) => {
+  const { _ } = useLingui();
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
@@ -34,13 +36,13 @@ export const useSharePrivateLink = ({ iri }: Params) => {
             await copyTextToClipboard(
               `${window.location.origin}/post/${iri}?token=${token}`,
             );
-            setBannerText(COPY_SUCCESS);
+            setBannerText(_(COPY_SUCCESS));
           },
         });
       } catch (e) {
         setErrorBannerTextAtom(String(e));
       }
     }
-  }, [iri, retryCsrfRequest, setBannerText, setErrorBannerTextAtom, token]);
+  }, [_, iri, retryCsrfRequest, setBannerText, setErrorBannerTextAtom, token]);
   return sharePrivateLink;
 };

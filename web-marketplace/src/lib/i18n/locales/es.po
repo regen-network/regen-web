@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-08-29 10:27+0200\n"
+"POT-Creation-Date: 2024-08-29 15:48+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -43,6 +43,10 @@ msgstr ""
 msgid "Acres"
 msgstr ""
 
+#: src/pages/Post/Post.constants.ts:6
+msgid "actions"
+msgstr ""
+
 #: src/pages/Activity/Activity.tsx:12
 msgid "Activity"
 msgstr ""
@@ -52,6 +56,7 @@ msgid "Additional Info"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:37
+#: src/pages/Post/Post.constants.ts:8
 msgid "admin"
 msgstr ""
 
@@ -62,6 +67,18 @@ msgstr ""
 
 #: src/pages/BatchDetails/BatchDetails.tsx:122
 msgid "All credits"
+msgstr ""
+
+#: src/pages/Post/Post.constants.ts:5
+msgid "all posts"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:116
+msgid "amount"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty.tsx:51
+msgid "AMOUNT AVAILABLE"
 msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:123
@@ -77,10 +94,12 @@ msgid "Amount bridged is the same as amount cancelled in the ledger documentatio
 msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:150
+#: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:208
 msgid "amount of credits"
 msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:126
+#: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:209
 msgid "amount retired"
 msgstr ""
 
@@ -94,6 +113,10 @@ msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetails.ApprovedMethodologies.tsx:29
 msgid "approved methodologies"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/Storefront.tsx:379
+msgid "Are you sure would you like to cancel this sell order?"
 msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:68
@@ -110,6 +133,10 @@ msgstr ""
 
 #: src/pages/BasicInfo/BasicInfo.tsx:66
 msgid "Basic Info"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/Storefront.utils.ts:46
+msgid "batch denom:"
 msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:140
@@ -155,6 +182,14 @@ msgstr ""
 msgid "buffer pool accounts"
 msgstr ""
 
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:4
+msgid "Buy"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:5
+msgid "BUY"
+msgstr ""
+
 #: src/pages/Buyers/Buyers.tsx:47
 msgid "Buy carbon credits and other ecosystem system service credits to meet your climate commitments and sustainability goals."
 msgstr ""
@@ -163,9 +198,17 @@ msgstr ""
 msgid "buy credits"
 msgstr ""
 
+#: src/pages/EcocreditsByAccount/CreditClassTab/CreditClassTab.constants.ts:3
+msgid "buy ecocredits"
+msgstr ""
+
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:304
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:312
 msgid "Buyer"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:10
+msgid "Cancel"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:78
@@ -204,6 +247,10 @@ msgstr ""
 msgid "Congrats! You successfully created this post."
 msgstr ""
 
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:3
+msgid "Congrats! Your purchase was successful."
+msgstr ""
+
 #: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:8
 msgid "Create a project without a credit class"
 msgstr ""
@@ -235,6 +282,14 @@ msgstr ""
 msgid "Create Sell Order"
 msgstr ""
 
+#: src/pages/Post/hooks/useAttestEvents.ts:124
+msgid "Created and signed by"
+msgstr ""
+
+#: src/pages/Post/hooks/useAttestEvents.ts:124
+msgid "Created by"
+msgstr ""
+
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:147
 msgid "credit activity table"
 msgstr ""
@@ -250,6 +305,8 @@ msgstr ""
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:146
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:122
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:127
+#: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:203
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:112
 msgid "credit batch id"
 msgstr ""
 
@@ -259,6 +316,7 @@ msgid "Credit Batch Id"
 msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:37
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:86
 msgid "Credit Batches"
 msgstr ""
 
@@ -288,6 +346,8 @@ msgid "Credit Class Info"
 msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:31
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:80
+#: src/pages/Home/Home.tsx:177
 msgid "Credit Classes"
 msgstr ""
 
@@ -324,9 +384,25 @@ msgstr ""
 msgid "date"
 msgstr ""
 
+#: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.SelectAccountModal.tsx:65
+msgid "default avatar"
+msgstr ""
+
+#: src/pages/Description/Description.tsx:48
+msgid "Description"
+msgstr ""
+
+#: src/pages/Home/Home.FeaturedProjects.tsx:53
+msgid "DISCOVER PROJECTS"
+msgstr ""
+
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:4
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:19
 msgid "Each credit batch has a unique ID (i.e. denomination) that starts with the abbreviation of the credit type followed by the project ID, start date and end date of the vintage year, and ending in the batch sequence number."
+msgstr ""
+
+#: src/pages/EcocreditBatches/EcocreditBatches.tsx:31
+msgid "Ecocredit Batches"
 msgstr ""
 
 #: src/pages/BasketDetails/BasketDetails.SectionLayout.tsx:14
@@ -346,6 +422,7 @@ msgid "ecocredits tradable"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:227
+#: src/pages/MethodologyDetails/MethodologyDetails.tsx:59
 msgid "Ecological Impact"
 msgstr ""
 
@@ -366,6 +443,7 @@ msgid "Edit profile"
 msgstr ""
 
 #: src/pages/Additionality/Additionality.tsx:26
+#: src/pages/Eligibility/Eligibility.tsx:36
 msgid "Eligibility"
 msgstr ""
 
@@ -373,7 +451,13 @@ msgstr ""
 msgid "eligible activities"
 msgstr ""
 
+#: src/pages/Faucet/hook/useRequestFunds.tsx:27
+#: src/pages/Faucet/hook/useRequestFunds.tsx:34
+msgid "Failed to request funds"
+msgstr ""
+
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:140
+#: src/pages/Home/Home.tsx:165
 msgid "Featured Projects"
 msgstr ""
 
@@ -389,6 +473,14 @@ msgstr ""
 
 #: src/pages/Buyers/Buyers.tsx:43
 msgid "For Buyers"
+msgstr ""
+
+#: src/pages/LandStewards/LandStewards.tsx:99
+msgid "For Land Stewards"
+msgstr ""
+
+#: src/pages/Faucet/hook/useRequestFunds.tsx:32
+msgid "Funds successfully requested!"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:307
@@ -419,12 +511,20 @@ msgstr ""
 msgid "I just offset my carbon footprint on #RegenMarketplace with @regen_network. Join me in doing our part for planetary regeneration!"
 msgstr ""
 
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:13
+msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future!"
+msgstr ""
+
 #: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:87
 msgid "I verify this data is accurate to the best of my knowledge"
 msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:139
 msgid "In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
+msgstr ""
+
+#: src/pages/LandStewards/LandStewards.tsx:103
+msgid "Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship."
 msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:132
@@ -446,6 +546,10 @@ msgstr ""
 msgid "Land Steward"
 msgstr ""
 
+#: src/pages/Home/Home.tsx:196
+msgid "Learn More"
+msgstr ""
+
 #: src/config/errors.tsx:35
 msgid "LEARN MORE"
 msgstr ""
@@ -456,6 +560,10 @@ msgstr ""
 
 #: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:10
 msgid "Learn more»"
+msgstr ""
+
+#: src/lib/constants/shared.constants.ts:3
+msgid "Link copied!"
 msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:220
@@ -470,6 +578,10 @@ msgstr ""
 msgid "measured GHGs"
 msgstr ""
 
+#: src/pages/Media/Media.tsx:72
+msgid "Media"
+msgstr ""
+
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:63
 msgid "messages"
 msgstr ""
@@ -477,6 +589,10 @@ msgstr ""
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:105
 #: src/components/organisms/CreditClassForms/CreditClassReview.tsx:37
 msgid "Metadata"
+msgstr ""
+
+#: src/pages/MethodologyDetails/MethodologyDetails.tsx:73
+msgid "Methodology not found"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:162
@@ -487,12 +603,20 @@ msgstr ""
 msgid "Natural ecosystem, unmanaged"
 msgstr ""
 
+#: src/pages/Post/Post.constants.ts:14
+msgid "next"
+msgstr ""
+
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:6
 msgid "No bridgable ecocredits found"
 msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:20
 msgid "No bridged ecocredits found"
+msgstr ""
+
+#: src/pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab.constants.ts:3
+msgid "No credit batches to display"
 msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:112
@@ -507,15 +631,33 @@ msgstr ""
 msgid "Other regenerative grazing practice"
 msgstr ""
 
+#: src/pages/Post/Post.constants.ts:4
+msgid "Please contact the project admin to request access."
+msgstr ""
+
 #: src/config/errors.tsx:34
 msgid "Please purchase some REGEN to cover the transaction fees for this action."
 msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:19
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:67
 msgid "Portfolio"
 msgstr ""
 
+#: src/pages/Post/Post.constants.ts:15
+msgid "Post is deleted"
+msgstr ""
+
+#: src/pages/Post/Post.constants.ts:12
+msgid "Post is private"
+msgstr ""
+
+#: src/pages/Post/Post.constants.ts:13
+msgid "prev"
+msgstr ""
+
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:122
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:84
 msgid "price per credit"
 msgstr ""
 
@@ -531,8 +673,20 @@ msgstr ""
 msgid "Prior to adopting these regenerative practices (going back 5 years prior) how were you using the land?"
 msgstr ""
 
+#: src/pages/ProfileEdit/ProfileEdit.constants.ts:7
+msgid "Profile"
+msgstr ""
+
 #: src/pages/Dashboard/Dashboard.BannerCard.tsx:35
 msgid "profile banner"
+msgstr ""
+
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.constants.tsx:3
+msgid "Profile not found"
+msgstr ""
+
+#: src/pages/ProfileEdit/ProfileEdit.constants.ts:9
+msgid "Profile Saved"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:24
@@ -542,6 +696,8 @@ msgstr ""
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:139
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:118
+#: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:196
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:105
 msgid "project"
 msgstr ""
 
@@ -563,11 +719,20 @@ msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:43
 #: src/pages/Dashboard/Dashboard.constants.tsx:25
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:74
 msgid "Projects"
+msgstr ""
+
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:152
+msgid "public profile tabs"
 msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:15
 msgid "Put in basket"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/Storefront.utils.ts:44
+msgid "quantity:"
 msgstr ""
 
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:31
@@ -578,12 +743,24 @@ msgstr ""
 msgid "Recipients"
 msgstr ""
 
+#: src/pages/Faucet/Faucet.tsx:32
+msgid "Redwood Testnet Faucet"
+msgstr ""
+
 #: src/pages/Buyers/Buyers.tsx:49
 msgid "Regen Network Development, PBC"
 msgstr ""
 
+#: src/pages/Post/Post.constants.ts:9
+msgid "registry"
+msgstr ""
+
 #: src/components/organisms/AdditionalityForm.tsx:230
 msgid "Relevant environmental changes within the project area. These include changes in vegetation such as clearing or planting, hydrology, soil conditions, or other."
+msgstr ""
+
+#: src/pages/Faucet/Faucet.tsx:45
+msgid "Request fund"
 msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:155
@@ -625,8 +802,28 @@ msgstr ""
 msgid "see credit class page"
 msgstr ""
 
+#: src/pages/Post/Post.constants.ts:11
+msgid "See the blockchain record"
+msgstr ""
+
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:11
 msgid "Sell"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty.tsx:48
+msgid "Sell order"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:9
+msgid "Sell Order #"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/Storefront.utils.ts:43
+msgid "sell order id:"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/Storefront.tsx:237
+msgid "Sell orders"
 msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:18
@@ -635,6 +832,10 @@ msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:56
 msgid "Settings"
+msgstr ""
+
+#: src/pages/Post/Post.constants.ts:7
+msgid "share"
 msgstr ""
 
 #: src/pages/Certificate/Certificate.tsx:71
@@ -721,6 +922,14 @@ msgstr ""
 msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
 msgstr ""
 
+#: src/pages/Post/Post.constants.ts:3
+msgid "This post has been made private by the project administrator."
+msgstr ""
+
+#: src/pages/Post/Post.constants.ts:10
+msgid "Timeline"
+msgstr ""
+
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:90
 msgid "Timestamp"
 msgstr ""
@@ -729,12 +938,24 @@ msgstr ""
 msgid "Tokenization Source"
 msgstr ""
 
+#: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:175
+msgid "total purchase price"
+msgstr ""
+
 #: src/components/organisms/AdditionalityForm.tsx:205
 msgid "Traditional grazing"
 msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:89
 msgid "Tx Hash"
+msgstr ""
+
+#: src/pages/Home/Home.tsx:117
+msgid "Unlock <0>Regenerative Finances</0><1>with <2>Regen Marketplace</2></1>"
+msgstr ""
+
+#: src/pages/ProfileEdit/ProfileEdit.constants.ts:12
+msgid "Unnamed"
 msgstr ""
 
 #: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:207
@@ -749,6 +970,10 @@ msgstr ""
 msgid "Videos"
 msgstr ""
 
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:11
+msgid "View all sell orders"
+msgstr ""
+
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:12
 msgid "VIEW ALL SELL ORDERS"
 msgstr ""
@@ -761,6 +986,10 @@ msgstr ""
 msgid "view post"
 msgstr ""
 
+#: src/pages/ProfileEdit/ProfileEdit.constants.ts:8
+msgid "View Profile"
+msgstr ""
+
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:13
 msgid "view retirement certificates"
 msgstr ""
@@ -769,8 +998,16 @@ msgstr ""
 msgid "view transaction"
 msgstr ""
 
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:6
+msgid "View your ecocredits"
+msgstr ""
+
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:14
 msgid "VIEW YOUR PORTFOLIO"
+msgstr ""
+
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.constants.tsx:4
+msgid "visit our homepage instead"
 msgstr ""
 
 #: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:4
@@ -779,6 +1016,14 @@ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:102
 msgid "Which regenerative practices have you been applying and for how long?"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/Storefront.tsx:378
+msgid "WHOOPS, EXIT"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/Storefront.tsx:377
+msgid "Yes, cancel sell order"
 msgstr ""
 
 #: src/pages/ChooseCreditClass/ChooseCreditClass.tsx:59
@@ -791,6 +1036,10 @@ msgstr ""
 
 #: src/pages/ConnectWalletPage/ConnectWalletPage.constants.ts:3
 msgid "You must connect to Keplr in order to view the content of this page."
+msgstr ""
+
+#: src/pages/Login/Login.constants.ts:3
+msgid "You must log in in order to view the content of this page."
 msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:49
@@ -811,6 +1060,10 @@ msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:6
 msgid "Your retirement was successful!"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:8
+msgid "Your sell order was cancelled"
 msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:5

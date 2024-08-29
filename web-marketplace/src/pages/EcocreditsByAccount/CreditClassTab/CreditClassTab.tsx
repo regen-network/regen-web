@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 
 import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
@@ -17,6 +18,7 @@ import { useProfileData } from '../hooks/useProfileData';
 import { ACCOUNT_CREDIT_CLASS_BUTTON } from './CreditClassTab.constants';
 
 export const CreditClassTab = () => {
+  const { _ } = useLingui();
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [creditClassId, setCreditClassId] = useState<string | undefined>();
   const { wallet } = useWallet();
@@ -42,7 +44,7 @@ export const CreditClassTab = () => {
               <CreditClassGridCard
                 {...creditClass}
                 button={{
-                  text: ACCOUNT_CREDIT_CLASS_BUTTON,
+                  text: _(ACCOUNT_CREDIT_CLASS_BUTTON),
                   startIcon: <CurrentCreditsIcon height="18px" width="18px" />,
                   onClick: () => {
                     setCreditClassId(creditClass.id);

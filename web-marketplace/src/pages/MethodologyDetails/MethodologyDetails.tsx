@@ -1,4 +1,6 @@
 import { useParams } from 'react-router-dom';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from 'web-components/src/theme/muiTheme';
@@ -28,6 +30,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 function MethodologyDetails(): JSX.Element {
+  const { _ } = useLingui();
   const { classes: styles } = useStyles();
   const { methodologyId } = useParams();
   const { data } = useAllMethodologyQuery({ client });
@@ -53,7 +56,7 @@ function MethodologyDetails(): JSX.Element {
         />
         <div className={styles.topoBackground}>
           <ImpactSection
-            title="Ecological Impact"
+            title={_(msg`Ecological Impact`)}
             impacts={content?.ecologicalImpact}
           />
         </div>
@@ -65,7 +68,11 @@ function MethodologyDetails(): JSX.Element {
       </div>
     );
   } else {
-    return <div>Methodology not found</div>;
+    return (
+      <div>
+        <Trans>Methodology not found</Trans>
+      </div>
+    );
   }
 }
 

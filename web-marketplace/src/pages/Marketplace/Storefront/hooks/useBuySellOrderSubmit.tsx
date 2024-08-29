@@ -1,5 +1,7 @@
 import { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { quantityFormatNumberOptions } from 'config/decimals';
@@ -63,6 +65,7 @@ const useBuySellOrderSubmit = ({
   refetchSellOrders,
   onSubmitCallback,
 }: Props): Params => {
+  const { _ } = useLingui();
   const { track } = useTracker();
   const location = useLocation();
   const buySellOrderSubmit = useCallback(
@@ -103,7 +106,7 @@ const useBuySellOrderSubmit = ({
 
       const isTradeable = retirementAction === 'manual';
 
-      const msg = MsgBuyDirect.fromPartial({
+      const msgBuyDirect = MsgBuyDirect.fromPartial({
         buyer: accountAddress,
         orders: [
           {
@@ -124,7 +127,7 @@ const useBuySellOrderSubmit = ({
       });
 
       const tx = {
-        msgs: [msg],
+        msgs: [msgBuyDirect],
         fee: undefined,
       };
 
@@ -169,7 +172,7 @@ const useBuySellOrderSubmit = ({
 
         setCardItems([
           {
-            label: 'total purchase price',
+            label: _(msg`total purchase price`),
             value: {
               name: formatNumber({
                 num: creditCount * microToDenom(price),
@@ -190,23 +193,25 @@ const useBuySellOrderSubmit = ({
             },
           },
           {
-            label: 'project',
+            label: _(msg`project`),
             value: {
               name: project.name,
               url: `/project/${project.id}`,
             },
           },
           {
-            label: 'credit batch id',
+            label: _(msg`credit batch id`),
             value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
           },
           {
-            label: isTradeable ? 'amount of credits' : 'amount retired',
+            label: isTradeable
+              ? _(msg`amount of credits`)
+              : _(msg`amount retired`),
             value: { name: getFormattedNumber(creditCount) },
           },
         ]);
-        setTxModalHeader(BUY_SELL_ORDER_HEADER);
-        setTxModalTitle(BUY_SELL_ORDER_TITLE);
+        setTxModalHeader(_(BUY_SELL_ORDER_HEADER));
+        setTxModalTitle(_(BUY_SELL_ORDER_TITLE));
         setTxButtonTitle(buttonTitle);
       }
     },
@@ -217,13 +222,14 @@ const useBuySellOrderSubmit = ({
       signAndBroadcast,
       project,
       track,
+      location.pathname,
       onBroadcast,
       setCardItems,
+      _,
       setTxModalHeader,
       setTxModalTitle,
       setTxButtonTitle,
       buttonTitle,
-      location,
     ],
   );
 

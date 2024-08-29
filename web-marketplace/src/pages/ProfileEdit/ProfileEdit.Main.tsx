@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 
@@ -31,6 +32,7 @@ import {
 import { getDefaultAvatar } from './ProfileEdit.utils';
 
 export const ProfileEditMain = () => {
+  const { _ } = useLingui();
   const [isDirtyRef] = useAtom(isProfileEditDirtyRef);
   const setBannerTextAtom = useSetAtom(bannerTextAtom);
   const { wallet } = useWallet();
@@ -139,10 +141,10 @@ export const ProfileEditMain = () => {
   }, [activeAccount, reactQueryClient, wallet?.address]);
 
   const onSuccess = useCallback(() => {
-    setBannerTextAtom(PROFILE_SAVED);
+    setBannerTextAtom(_(PROFILE_SAVED));
     refreshProfileData();
     navigate('/profile');
-  }, [setBannerTextAtom, refreshProfileData, navigate]);
+  }, [setBannerTextAtom, _, refreshProfileData, navigate]);
 
   const onUpload = useOnUploadCallback({
     fileNamesToDeleteRef,

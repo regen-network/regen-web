@@ -4,6 +4,8 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
@@ -18,6 +20,7 @@ import { MediaForm } from '../../components/organisms/MediaForm';
 import { useProjectEditContext } from '../ProjectEdit';
 
 const Media = (): JSX.Element => {
+  const { _ } = useLingui();
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
@@ -66,7 +69,7 @@ const Media = (): JSX.Element => {
   return (
     <ProjectFormTemplate
       isEdit={isEdit}
-      title="Media"
+      title={_(msg`Media`)}
       offChainProject={offChainProject}
       onChainProject={onChainProject}
       loading={loading}

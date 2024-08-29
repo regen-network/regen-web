@@ -95,7 +95,7 @@
     "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml",
     "graphql:codegen-indexer": "graphql-codegen --config indexer-codegen.yml",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "i18n:extract": "lingui extract"
+    "i18n:extract": "lingui extract --overwrite"
   },
   "browserslist": {
     "production": [

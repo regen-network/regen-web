@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useState } from 'react';
+import { useLingui } from '@lingui/react';
 import { Autocomplete, TextField } from '@mui/material';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -72,6 +73,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     }: Props,
     ref,
   ) => {
+    const { _ } = useLingui();
     const { classes: styles, cx } = useStyles();
     const [options, setOptions] = useState<Option[]>([]);
     const [profileAdd, setProfileAdd] = useState<ProfileModalSchemaType | null>(
@@ -86,7 +88,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     );
 
     useEffect(() => {
-      const yourProfiles = getAccounts(authenticatedAccounts);
+      const yourProfiles = getAccounts(_, authenticatedAccounts);
       const valueArr = value
         ? yourProfiles.find(p => p.id === value.id)
           ? []
@@ -112,6 +114,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       }
 
       const searchProfiles = getAccounts(
+        _,
         accounts?.getAccountsByNameOrAddr?.nodes,
       );
       setOptions(
@@ -123,6 +126,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
       value,
       authenticatedAccounts,
       authenticatedAccountIds,
+      _,
     ]);
 
     const closeProfileModal = (): void => {

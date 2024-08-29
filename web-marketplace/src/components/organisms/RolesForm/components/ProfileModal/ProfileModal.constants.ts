@@ -1,3 +1,5 @@
+import { TranslatorType } from 'lib/i18n/i18n.types';
+
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_TYPE,
@@ -6,10 +8,12 @@ import {
 
 import { ProfileModalSchemaType } from './ProfileModal.schema';
 
-export const profileModalInitialValues: ProfileModalSchemaType = {
+export const getProfileModalInitialValues = (
+  _: TranslatorType,
+): ProfileModalSchemaType => ({
   profileType: DEFAULT_PROFILE_TYPE,
-  name: DEFAULT_NAME,
+  name: _(DEFAULT_NAME),
   profileImage: DEFAULT_PROFILE_USER_AVATAR,
   description: '',
   address: '',
-};
+});

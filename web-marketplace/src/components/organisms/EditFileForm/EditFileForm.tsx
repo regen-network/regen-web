@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Feature, Point } from 'geojson';
 
@@ -48,6 +50,7 @@ export const EditFileForm = ({
   const ctx = useFormContext<PostFormSchemaType>();
   const { register, control, setValue, formState } = ctx;
   const { errors } = formState;
+  const { _ } = useLingui();
 
   const files = useWatch({ control: control, name: 'files' });
   const file = files?.[currentIndex];
@@ -70,7 +73,7 @@ export const EditFileForm = ({
         sx={{ textAlign: 'center' }}
         className="mb-40 sm:mb-50"
       >
-        Edit your file
+        <Trans>Edit your file</Trans>
       </Title>
       {url && isImage(mimeType) && (
         <img
@@ -83,14 +86,14 @@ export const EditFileForm = ({
       )}
       <TextField
         type="text"
-        label="File name"
+        label={_(msg`File name`)}
         helperText={errors.files?.[currentIndex]?.name?.message}
         error={!!errors.files?.[currentIndex]?.name}
         {...register(`files.${currentIndex}.name`)}
       />
       <TextAreaField
         type="text"
-        label="Description"
+        label={_(msg`Description`)}
         className="mt-40 sm:mt-50"
         rows={3}
         minRows={3}
@@ -109,27 +112,32 @@ export const EditFileForm = ({
       {isImage(mimeType) && (
         <TextField
           type="text"
-          label="Photo credit"
+          label={_(msg`Photo credit`)}
           className="mt-40 sm:mt-50"
           optional
           {...register(`files.${currentIndex}.credit`)}
         />
       )}
       <div className="flex flex-col mb-40 mt-40 sm:mb-50 sm:mt-50">
-        <RadioGroup label="Location" description={FILE_LOCATION_DESCRIPTION}>
+        <RadioGroup
+          label={_(msg`Location`)}
+          description={FILE_LOCATION_DESCRIPTION}
+        >
           {(location || projectLocation) && (
             <div className="h-[309px] sm:h-[409px] pb-10">
               <LocationPicker
                 value={location || projectLocation}
-                handleChange={value =>
+                handleChange={value => {
                   setValue(`files.${currentIndex}.location`, value, {
                     shouldDirty: true,
                     shouldTouch: true,
-                  })
-                }
+                  });
+                  setValue(`files.${currentIndex}.locationType`, 'custom');
+                }}
                 disabled={locationType === 'file' || locationType === 'none'}
                 mapboxToken={mapboxToken}
                 geocodingPlaceName={geocodingPlaceName}
+                dragHint={_(msg`Drag map to choose location`)}
                 {...register(`files.${currentIndex}.location`)}
               />
             </div>
@@ -137,7 +145,7 @@ export const EditFileForm = ({
           <>
             {fileLocation && (
               <Radio
-                label="Use file geolocation"
+                label={_(msg`Use file geolocation`)}
                 value={'file'}
                 selectedValue={locationType}
                 sx={{ mb: 2.5 }}
@@ -152,8 +160,10 @@ export const EditFileForm = ({
               />
             )}
             <Radio
-              label="No specific location"
-              description=" (file will be associated with the project location by default)"
+              label={_(msg`No specific location`)}
+              description={_(
+                msg`(file will be associated with the project location by default)`,
+              )}
               value={'none'}
               selectedValue={locationType}
               sx={{ mb: 2.5 }}
@@ -167,7 +177,8 @@ export const EditFileForm = ({
               }}
             />
             <Radio
-              label="Choose a specific location on the map"
+              label={_(msg`Choose a specific location on the map`)}
+              description={_(msg`(drag map to choose location)`)}
               value={'custom'}
               selectedValue={locationType}
               {...register(`files.${currentIndex}.locationType`)}

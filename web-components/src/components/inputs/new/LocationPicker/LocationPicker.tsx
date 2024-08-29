@@ -23,6 +23,7 @@ type LocationPickerProps = {
     value: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement, Element>,
   ) => void;
   geocodingPlaceName?: string;
+  dragHint: string;
 };
 
 export const LocationPicker = ({
@@ -32,6 +33,7 @@ export const LocationPicker = ({
   handleChange,
   onBlur,
   geocodingPlaceName,
+  dragHint,
 }: LocationPickerProps): JSX.Element => {
   const mapRef = useRef<MapRef | null>(null);
   const point = value.geometry as Point;
@@ -45,6 +47,7 @@ export const LocationPicker = ({
     zoom: 5,
   });
   const [locationSearch, setLocationSearch] = useState<string | undefined>();
+  const [showDragHint, setShowDragHint] = useState<boolean>(true);
 
   useEffect(() => {
     if (
@@ -78,6 +81,7 @@ export const LocationPicker = ({
           if (mapRef.current?.isZooming()) {
             return;
           }
+          setShowDragHint(false); // hide drag hint as soon as user moves on the map
           handleChange({
             type: 'Feature',
             properties: [],
@@ -88,15 +92,9 @@ export const LocationPicker = ({
           });
         }}
         attributionControl={false}
-        boxZoom={!disabled}
-        doubleClickZoom={!disabled}
-        dragRotate={!disabled}
-        dragPan={!disabled}
-        keyboard={!disabled}
-        scrollZoom={disabled ? false : { around: 'center' }}
-        touchPitch={!disabled}
-        touchZoomRotate={disabled ? false : { around: 'center' }}
-        cursor={disabled ? 'default' : undefined}
+        scrollZoom={{ around: 'center' }}
+        touchZoomRotate={{ around: 'center' }}
+        cursor="default"
       >
         <div className="absolute top-0 w-[100%]">
           {disabled ? (
@@ -129,8 +127,16 @@ export const LocationPicker = ({
         </div>
         {/* We simply absolutely position the location pin at the center,
           without using a react-map-gl Marker, so the map moves around the pin */}
-        <div className="absolute top-[50%] left-[50%] -ml-[18.5px] -mt-50">
+        <div className="absolute top-1/2 left-1/2 -ml-[18.5px] -mt-50">
           <GreenPinIcon />
+          {showDragHint && (
+            <Body
+              className="mt-15 text-grey-0 bg-grey-700 py-5 px-10 rounded-[30px] -ml-[78px]"
+              size="sm"
+            >
+              {dragHint}
+            </Body>
+          )}
         </div>
       </Map>
     </Suspense>

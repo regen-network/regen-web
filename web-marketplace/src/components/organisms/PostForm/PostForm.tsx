@@ -164,6 +164,11 @@ export const PostForm = ({
       fileNamesToDeleteRef,
       callback: (doSetValue: boolean = true) => {
         if (doSetValue) remove(fieldIndex);
+        setFileLocation(prev => {
+          const newFileLocation = { ...prev };
+          delete newFileLocation[fieldIndex];
+          return newFileLocation;
+        });
       },
     });
 

@@ -66,8 +66,9 @@ export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
                 {label}
                 {description && (
                   <Body
-                    component="span"
-                    className={disabled ? 'text-grey-400' : 'text-grey-700'}
+                    className={`font-inherit ${
+                      disabled ? 'text-grey-400' : 'text-grey-700'
+                    }`}
                     size="sm"
                   >
                     {description}

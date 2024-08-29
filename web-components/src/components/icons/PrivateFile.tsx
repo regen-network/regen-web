@@ -18,7 +18,7 @@ export const PrivateFile = (props: React.SVGProps<SVGSVGElement>) => (
     </g>
     <defs>
       <clipPath id="clip0_2339_7111">
-        <rect width="24" height="24" fill="white" fill-opacity="0" />
+        <rect width="24" height="24" fill="white" fillOpacity="0" />
       </clipPath>
     </defs>
   </svg>

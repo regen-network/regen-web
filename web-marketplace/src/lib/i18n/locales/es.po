@@ -1,17 +1,11 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-07-23 11:24+0200\n"
+"POT-Creation-Date: 2024-08-29 10:27+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: es\n"
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Plural-Forms: \n"
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 msgid ""
@@ -94,12 +88,24 @@ msgstr ""
 msgid "amount sent"
 msgstr ""
 
+#: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:77
+msgid "Anchoring in progress"
+msgstr ""
+
 #: src/pages/CreditClassDetails/CreditClassDetails.ApprovedMethodologies.tsx:29
 msgid "approved methodologies"
 msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:68
+msgid "Attach a signature"
+msgstr ""
+
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:107
 msgid "Attach arbitrary JSON-LD metadata to the credit batch below."
+msgstr ""
+
+#: src/components/organisms/PostFlow/hooks/useSign.ts:108
+msgid "Attest"
 msgstr ""
 
 #: src/pages/BasicInfo/BasicInfo.tsx:66
@@ -118,6 +124,10 @@ msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:64
 msgid "block height"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.constants.ts:48
+msgid "blockchain record"
 msgstr ""
 
 #: src/pages/Dashboard/MyBridge/MyBridge.tsx:28
@@ -190,6 +200,10 @@ msgstr ""
 msgid "Class ID: unique identifier of the credit class on Regen Ledger."
 msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.constants.ts:44
+msgid "Congrats! You successfully created this post."
+msgstr ""
+
 #: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:8
 msgid "Create a project without a credit class"
 msgstr ""
@@ -207,6 +221,14 @@ msgstr ""
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:23
 #: src/components/organisms/CreditClassForms/CreditClassFinished.tsx:28
 msgid "Create Credit Class"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.constants.ts:50
+msgid "Create Data Post"
+msgstr ""
+
+#: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:73
+msgid "create post"
 msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
@@ -302,10 +324,6 @@ msgstr ""
 msgid "date"
 msgstr ""
 
-#: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:3
-#~ msgid "draft"
-#~ msgstr ""
-
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:4
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:19
 msgid "Each credit batch has a unique ID (i.e. denomination) that starts with the abbreviation of the credit type followed by the project ID, start date and end date of the vintage year, and ending in the batch sequence number."
@@ -359,6 +377,10 @@ msgstr ""
 msgid "Featured Projects"
 msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.constants.ts:46
+msgid "file name(s)"
+msgstr ""
+
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:34
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:35
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:41
@@ -395,6 +417,10 @@ msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:20
 msgid "I just offset my carbon footprint on #RegenMarketplace with @regen_network. Join me in doing our part for planetary regeneration!"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:87
+msgid "I verify this data is accurate to the best of my knowledge"
 msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:139
@@ -615,6 +641,26 @@ msgstr ""
 msgid "Share"
 msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:107
+msgid "sign"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:75
+msgid "Sign this post"
+msgstr ""
+
+#: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:86
+msgid "signature"
+msgstr ""
+
+#: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:90
+msgid "Signing failed"
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:101
+msgid "skip this step"
+msgstr ""
+
 #: src/config/errors.tsx:29
 msgid "Sorry, someone has purchased this sell order!"
 msgstr ""
@@ -671,6 +717,10 @@ msgstr ""
 msgid "This data is on chain or anchored on chain via a content hash."
 msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:78
+msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
+msgstr ""
+
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:90
 msgid "Timestamp"
 msgstr ""
@@ -707,6 +757,10 @@ msgstr ""
 msgid "view in portfolio"
 msgstr ""
 
+#: src/components/organisms/PostFlow/PostFlow.constants.ts:45
+msgid "view post"
+msgstr ""
+
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:13
 msgid "view retirement certificates"
 msgstr ""
@@ -737,6 +791,10 @@ msgstr ""
 
 #: src/pages/ConnectWalletPage/ConnectWalletPage.constants.ts:3
 msgid "You must connect to Keplr in order to view the content of this page."
+msgstr ""
+
+#: src/components/organisms/PostFlow/PostFlow.constants.ts:49
+msgid "You successfully created this post but signing failed."
 msgstr ""
 
 #: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:9

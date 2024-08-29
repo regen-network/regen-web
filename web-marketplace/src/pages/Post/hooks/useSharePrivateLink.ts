@@ -9,7 +9,7 @@ import copyTextToClipboard from 'web-components/src/utils/copy';
 import { apiUri } from 'lib/apiUri';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { COPY_SUCCESS } from 'lib/constants/sharedConstants';
+import { COPY_SUCCESS } from 'lib/constants/shared.constants';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
@@ -43,6 +43,6 @@ export const useSharePrivateLink = ({ iri }: Params) => {
         setErrorBannerTextAtom(String(e));
       }
     }
-  }, [iri, retryCsrfRequest, setBannerText, setErrorBannerTextAtom, token]);
+  }, [_, iri, retryCsrfRequest, setBannerText, setErrorBannerTextAtom, token]);
   return sharePrivateLink;
 };

@@ -16,7 +16,7 @@ import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
 import copyTextToClipboard from 'web-components/src/utils/copy';
 
 import { AccountByIdQuery } from 'generated/graphql';
-import { COPY_SUCCESS } from 'lib/constants/sharedConstants';
+import { COPY_SUCCESS } from 'lib/constants/shared.constants';
 
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';

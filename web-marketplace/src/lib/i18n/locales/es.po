@@ -1,18 +1,11 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-08-29 10:48+0200\n"
-"POT-Creation-Date: 2024-08-29 10:48+0200\n"
+"POT-Creation-Date: 2024-08-29 15:48+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: es\n"
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Plural-Forms: \n"
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 msgid ""
@@ -120,31 +113,23 @@ msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetails.ApprovedMethodologies.tsx:29
 msgid "approved methodologies"
-msgstr "<<<<<<< HEAD"
+msgstr ""
 
 #: src/pages/Marketplace/Storefront/Storefront.tsx:379
 msgid "Are you sure would you like to cancel this sell order?"
-msgstr "<<<<<<< HEAD"
-
-#: src/pages/Marketplace/Storefront/Storefront.tsx:379
-#~ msgid "Are you sure would you like to cancel this sell order?>>>>>>> be14af220 (feat: update i18n messages)"
-#~ msgstr ">>>>>>> 89c83e3fa (feat: update i18n messages)"
+msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:68
 msgid "Attach a signature"
-msgstr "==============>>>>>>> b18a395b8 (fix: po files generation)"
+msgstr ""
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:107
 msgid "Attach arbitrary JSON-LD metadata to the credit batch below."
-msgstr "<<<<<<< HEAD<<<<<<< HEAD"
-
-#: src/components/organisms/CreditClassForms/CreditClassForm.tsx:107
-#~ msgid "Attach arbitrary JSON-LD metadata to the credit batch below.======="
-#~ msgstr ">>>>>>> 89c83e3fa (feat: update i18n messages)"
+msgstr ""
 
 #: src/components/organisms/PostFlow/hooks/useSign.ts:108
 msgid "Attest"
-msgstr "==============>>>>>>> b18a395b8 (fix: po files generation)"
+msgstr ""
 
 #: src/pages/BasicInfo/BasicInfo.tsx:66
 msgid "Basic Info"
@@ -256,27 +241,15 @@ msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetails.constants.ts:7
 msgid "Class ID: unique identifier of the credit class on Regen Ledger."
-msgstr "<<<<<<< HEAD<<<<<<< HEAD"
-
-#: src/pages/CreditClassDetails/CreditClassDetails.constants.ts:7
-#~ msgid "Class ID: unique identifier of the credit class on Regen Ledger.======="
-#~ msgstr ""
+msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:44
 msgid "Congrats! You successfully created this post."
-msgstr "==============>>>>>>> b18a395b8 (fix: po files generation)"
+msgstr ""
 
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:3
 msgid "Congrats! Your purchase was successful."
-msgstr "<<<<<<< HEAD"
-
-#: src/pages/GettingStarted/GettingStarted.tsx:140
-#~ msgid "Create a project page"
-#~ msgstr ""
-
-#: src/pages/GettingStarted/GettingStarted.tsx:140
-#~ msgid "Create a project page>>>>>>> be14af220 (feat: update i18n messages)"
-#~ msgstr ">>>>>>> 89c83e3fa (feat: update i18n messages)=======>>>>>>> b18a395b8 (fix: po files generation)"
+msgstr ""
 
 #: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:8
 msgid "Create a project without a credit class"
@@ -486,14 +459,11 @@ msgstr ""
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:140
 #: src/pages/Home/Home.tsx:165
 msgid "Featured Projects"
-msgstr "<<<<<<< HEAD"
+msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:46
 msgid "file name(s)"
-msgstr "=======<<<<<<< HEAD"
-
-#~ msgid "Fill out a project plan"
-#~ msgstr ">>>>>>> be14af220 (feat: update i18n messages)>>>>>>> 9a3625682 (fix: handle review comments)=======>>>>>>> b18a395b8 (fix: po files generation)"
+msgstr ""
 
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:34
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:35
@@ -539,30 +509,15 @@ msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:20
 msgid "I just offset my carbon footprint on #RegenMarketplace with @regen_network. Join me in doing our part for planetary regeneration!"
-msgstr "<<<<<<< HEAD"
+msgstr ""
 
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:13
 msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future!"
-msgstr "<<<<<<< HEAD"
+msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:87
 msgid "I verify this data is accurate to the best of my knowledge"
-msgstr "======="
-
-#: src/pages/GettingStarted/GettingStarted.tsx:99
-#: src/pages/GettingStarted/GettingStarted.tsx:109
-#: src/pages/GettingStarted/GettingStarted.tsx:118
-#: src/pages/GettingStarted/GettingStarted.tsx:141
-#~ msgid "immediate"
-#~ msgstr ""
-
-#: src/pages/GettingStarted/GettingStarted.tsx:173
-#~ msgid "Implement land management"
-#~ msgstr ""
-
-#: src/pages/GettingStarted/GettingStarted.tsx:173
-#~ msgid "Implement land management>>>>>>> be14af220 (feat: update i18n messages)"
-#~ msgstr ">>>>>>> 89c83e3fa (feat: update i18n messages)=======>>>>>>> b18a395b8 (fix: po files generation)"
+msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:139
 msgid "In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
@@ -607,7 +562,7 @@ msgstr ""
 msgid "Learn more»"
 msgstr ""
 
-#: src/lib/constants/sharedConstants.ts:3
+#: src/lib/constants/shared.constants.ts:3
 msgid "Link copied!"
 msgstr ""
 
@@ -885,23 +840,11 @@ msgstr ""
 
 #: src/pages/Certificate/Certificate.tsx:71
 msgid "Share"
-msgstr "<<<<<<< HEAD<<<<<<< HEAD"
-
-#: src/pages/Post/Post.constants.ts:7
-#~ msgid "share>>>>>>> be14af220 (feat: update i18n messages)"
-#~ msgstr ""
+msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:107
 msgid "sign"
 msgstr ""
-
-#: src/pages/GettingStarted/GettingStarted.tsx:117
-#~ msgid "Sign a contract and project officially starts"
-#~ msgstr ""
-
-#: src/pages/GettingStarted/GettingStarted.tsx:117
-#~ msgid "Sign a contract and project officially starts>>>>>>> 89c83e3fa (feat: update i18n messages)"
-#~ msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:75
 msgid "Sign this post"
@@ -918,10 +861,6 @@ msgstr ""
 #: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:101
 msgid "skip this step"
 msgstr ""
-
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:101
-#~ msgid "skip this step======="
-#~ msgstr "=======>>>>>>> b18a395b8 (fix: po files generation)"
 
 #: src/config/errors.tsx:29
 msgid "Sorry, someone has purchased this sell order!"
@@ -977,19 +916,11 @@ msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetails.constants.ts:5
 msgid "This data is on chain or anchored on chain via a content hash."
-msgstr "<<<<<<< HEAD"
+msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:78
 msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
-msgstr "<<<<<<< HEAD"
-
-#: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:78
-#~ msgid "This is comparable to signing a legal document and implies you believe the contents are accurate.======="
-#~ msgstr ""
-
-#: src/pages/GettingStarted/GettingStarted.tsx:144
-#~ msgid "This marketing page help advertise your project to potential buyers."
-#~ msgstr "=======>>>>>>> b18a395b8 (fix: po files generation)"
+msgstr ""
 
 #: src/pages/Post/Post.constants.ts:3
 msgid "This post has been made private by the project administrator."
@@ -998,10 +929,6 @@ msgstr ""
 #: src/pages/Post/Post.constants.ts:10
 msgid "Timeline"
 msgstr ""
-
-#: src/pages/Post/Post.constants.ts:10
-#~ msgid "Timeline>>>>>>> 89c83e3fa (feat: update i18n messages)"
-#~ msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:90
 msgid "Timestamp"
@@ -1057,15 +984,11 @@ msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:45
 msgid "view post"
-msgstr "======="
+msgstr ""
 
 #: src/pages/ProfileEdit/ProfileEdit.constants.ts:8
 msgid "View Profile"
-msgstr "<<<<<<< HEAD<<<<<<< HEAD"
-
-#: src/pages/ProfileEdit/ProfileEdit.constants.ts:8
-#~ msgid "View Profile>>>>>>> be14af220 (feat: update i18n messages)"
-#~ msgstr ">>>>>>> 89c83e3fa (feat: update i18n messages)=======>>>>>>> b18a395b8 (fix: po files generation)"
+msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:13
 msgid "view retirement certificates"
@@ -1113,23 +1036,15 @@ msgstr ""
 
 #: src/pages/ConnectWalletPage/ConnectWalletPage.constants.ts:3
 msgid "You must connect to Keplr in order to view the content of this page."
-msgstr "<<<<<<< HEAD"
+msgstr ""
 
 #: src/pages/Login/Login.constants.ts:3
 msgid "You must log in in order to view the content of this page."
 msgstr ""
 
-#: src/pages/Login/Login.constants.ts:3
-#~ msgid "You must log in in order to view the content of this page.>>>>>>> 89c83e3fa (feat: update i18n messages)"
-#~ msgstr ""
-
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:49
 msgid "You successfully created this post but signing failed."
 msgstr ""
-
-#: src/components/organisms/PostFlow/PostFlow.constants.ts:49
-#~ msgid "You successfully created this post but signing failed.======="
-#~ msgstr ""
 
 #: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:9
 msgid "You will not be able to issue credits with this option unless you later register this project with a credit class."

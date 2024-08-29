@@ -1,3 +1,5 @@
+import { msg } from '@lingui/macro';
+
 export const basePostContent = {
   '@type': 'ProjectPost',
   '@context': {
@@ -39,11 +41,10 @@ export const basePostContent = {
   },
 };
 
-export const POST_CREATED = 'Congrats! You successfully created this post.';
-export const VIEW_POST = 'view post';
-export const FILE_NAMES = 'file name(s)';
+export const POST_CREATED = msg`Congrats! You successfully created this post.`;
+export const VIEW_POST = msg`view post`;
+export const FILE_NAMES = msg`file name(s)`;
 export const PROJECT = 'project';
-export const BLOCKCHAIN_RECORD = 'blockchain record';
-export const POST_CREATED_SIGNING_FAILED =
-  'You successfully created this post but signing failed.';
-export const CREATE_DATA_POST = 'Create Data Post';
+export const BLOCKCHAIN_RECORD = msg`blockchain record`;
+export const POST_CREATED_SIGNING_FAILED = msg`You successfully created this post but signing failed.`;
+export const CREATE_DATA_POST = msg`Create Data Post`;

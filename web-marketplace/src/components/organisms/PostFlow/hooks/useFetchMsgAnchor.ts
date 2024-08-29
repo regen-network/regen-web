@@ -93,9 +93,9 @@ export const useFetchMsgAnchor = ({
       setTxSuccessfulModalAtom(atom => {
         atom.open = true;
         atom.cardItems = cardItems;
-        atom.title = _(msg`${POST_CREATED}`);
-        atom.cardTitle = _(msg`${CREATE_DATA_POST}`);
-        atom.buttonTitle = _(msg`${VIEW_POST}`);
+        atom.title = _(POST_CREATED);
+        atom.cardTitle = _(CREATE_DATA_POST);
+        atom.buttonTitle = _(VIEW_POST);
         atom.buttonLink = buttonLink;
       });
     },

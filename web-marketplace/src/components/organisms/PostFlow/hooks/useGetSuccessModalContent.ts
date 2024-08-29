@@ -47,7 +47,7 @@ export const useGetSuccessModalContent = () => {
       }`;
       const cardItems: Item[] = [
         {
-          label: PROJECT,
+          label: _(PROJECT),
           value: {
             name: projectName ?? projectId ?? offChainProjectId,
             url: projectUrl,
@@ -56,7 +56,7 @@ export const useGetSuccessModalContent = () => {
       ];
       if (files && files.length && filesUrls && filesUrls.length) {
         cardItems.unshift({
-          label: FILE_NAMES,
+          label: _(FILE_NAMES),
           value:
             files.map(file => ({
               name: file.name as string,
@@ -94,7 +94,7 @@ export const useGetSuccessModalContent = () => {
 
       if (hashValue.length > 0)
         cardItems.push({
-          label: BLOCKCHAIN_RECORD,
+          label: _(BLOCKCHAIN_RECORD),
           value: hashValue,
         });
 

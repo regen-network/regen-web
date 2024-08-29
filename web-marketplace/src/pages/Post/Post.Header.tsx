@@ -9,7 +9,6 @@ import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
 import ShareIcon from 'web-components/src/components/icons/ShareIcon';
 import { Tag } from 'web-components/src/components/organisms/PostFiles/components/Tag';
-import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.constants';
 import Section from 'web-components/src/components/section';
 import { Title } from 'web-components/src/components/typography';
 import UserInfo from 'web-components/src/components/user/UserInfo';
@@ -17,6 +16,7 @@ import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
 import copyTextToClipboard from 'web-components/src/utils/copy';
 
 import { AccountByIdQuery } from 'generated/graphql';
+import { COPY_SUCCESS } from 'lib/constants/sharedConstants';
 
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
@@ -140,7 +140,7 @@ export const PostHeader = ({
         )}
         {shareSuccessBanner && (
           <Banner
-            text={COPY_SUCCESS}
+            text={_(COPY_SUCCESS)}
             onClose={() => {
               setShareSuccessBanner(false);
             }}

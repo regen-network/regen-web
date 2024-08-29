@@ -41,7 +41,7 @@ export const getCancelCardItems = ({
   const { amountAvailable, batchDenom, id } = sellOrder;
   return [
     { label: _(msg`sell order id:`), value: { name: String(id) } },
-    { label: 'quantity:', value: { name: String(amountAvailable) } },
+    { label: _(msg`quantity:`), value: { name: String(amountAvailable) } },
     {
       label: _(msg`batch denom:`),
       value: {

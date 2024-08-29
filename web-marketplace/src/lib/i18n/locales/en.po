@@ -38,8 +38,8 @@ msgid "<0>Credit class issuer:</0> the entity who can issue credit batches under
 msgstr "<<<<<<< HEAD======="
 
 #: src/pages/GettingStarted/GettingStarted.tsx:121
-msgid "<0>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <1>Read full documentation»</1></0>'"
-msgstr ">>>>>>> 565beeff5 (feat: update i18n messages)"
+#~ msgid "<0>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <1>Read full documentation»</1></0>'"
+#~ msgstr ">>>>>>> 565beeff5 (feat: update i18n messages)"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:27
 msgid "A <0>program</0> involves the eligibility rules, monitoring and certification, and registration systems for credit trading and ownership tracking."
@@ -94,6 +94,10 @@ msgstr ""
 
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:116
 msgid "amount"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty.tsx:51
+msgid "AMOUNT AVAILABLE"
 msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:123
@@ -304,8 +308,8 @@ msgid "Congrats! Your purchase was successful."
 msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:140
-msgid "Create a project page"
-msgstr ""
+#~ msgid "Create a project page"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:140
 #~ msgid "Create a project page>>>>>>> be14af220 (feat: update i18n messages)"
@@ -541,9 +545,8 @@ msgstr "<<<<<<< HEAD"
 msgid "file name(s)"
 msgstr "======="
 
-#: src/pages/GettingStarted/GettingStarted.tsx:98
-msgid "Fill out a project plan"
-msgstr ">>>>>>> be14af220 (feat: update i18n messages)>>>>>>> 89c83e3fa (feat: update i18n messages)"
+#~ msgid "Fill out a project plan"
+#~ msgstr ">>>>>>> be14af220 (feat: update i18n messages)>>>>>>> 9a3625682 (fix: handle review comments)"
 
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:34
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:35
@@ -572,8 +575,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:253
-msgid "Getting Started"
-msgstr ""
+#~ msgid "Getting Started"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:253
 #~ msgid "Getting Started>>>>>>> be14af220 (feat: update i18n messages)"
@@ -596,28 +599,28 @@ msgid "High density grazing"
 msgstr "<<<<<<< HEAD"
 
 #: src/pages/GettingStarted/GettingStarted.tsx:218
-msgid "Hire a broker or sell through Regen Network"
-msgstr ""
+#~ msgid "Hire a broker or sell through Regen Network"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:150
-msgid "Hire a monitor to establish a baseline measurement and additional monitoring rounds (if applicable)"
-msgstr ""
+#~ msgid "Hire a monitor to establish a baseline measurement and additional monitoring rounds (if applicable)"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:196
-msgid "Hire a verifier as needed given the verification schedule"
-msgstr ""
+#~ msgid "Hire a verifier as needed given the verification schedule"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:70
-msgid "How do I implement the land management practices?"
-msgstr ""
+#~ msgid "How do I implement the land management practices?"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:88
-msgid "How do i so and so again?"
-msgstr ""
+#~ msgid "How do i so and so again?"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:82
-msgid "How do i so and so?"
-msgstr ""
+#~ msgid "How do i so and so?"
+#~ msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:310
 msgid "I am a:"
@@ -643,12 +646,12 @@ msgstr "======="
 #: src/pages/GettingStarted/GettingStarted.tsx:109
 #: src/pages/GettingStarted/GettingStarted.tsx:118
 #: src/pages/GettingStarted/GettingStarted.tsx:141
-msgid "immediate"
-msgstr ""
+#~ msgid "immediate"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:173
-msgid "Implement land management"
-msgstr ""
+#~ msgid "Implement land management"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:173
 #~ msgid "Implement land management>>>>>>> be14af220 (feat: update i18n messages)"
@@ -706,6 +709,10 @@ msgstr ""
 #~ msgid "Learn More>>>>>>> be14af220 (feat: update i18n messages)"
 #~ msgstr ""
 
+#: src/lib/constants/sharedConstants.ts:3
+msgid "Link copied!"
+msgstr ""
+
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:220
 msgid "Loading..."
 msgstr ""
@@ -718,12 +725,12 @@ msgstr "<<<<<<< HEAD"
 #: src/pages/GettingStarted/GettingStarted.tsx:178
 #: src/pages/GettingStarted/GettingStarted.tsx:201
 #: src/pages/GettingStarted/GettingStarted.tsx:222
-msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <0>Read full documentation»</0>"
-msgstr ""
+#~ msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. <0>Read full documentation»</0>"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:76
-msgid "Lorem ipsum dolor sit apsicing sit amut?"
-msgstr ""
+#~ msgid "Lorem ipsum dolor sit apsicing sit amut?"
+#~ msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:98
 msgid "measured GHGs"
@@ -914,6 +921,10 @@ msgstr ""
 #~ msgid "Put in basket======="
 #~ msgstr ""
 
+#: src/pages/Marketplace/Storefront/Storefront.utils.ts:44
+msgid "quantity:"
+msgstr ""
+
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:31
 msgid "Recipient(s)"
 msgstr ""
@@ -970,12 +981,12 @@ msgid "Review"
 msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:108
-msgid "Review and Submit"
-msgstr ""
+#~ msgid "Review and Submit"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:112
-msgid "Review your project plan to make sure all entries are correct."
-msgstr ""
+#~ msgid "Review your project plan to make sure all entries are correct."
+#~ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:109
 msgid "Rotational grazing"
@@ -1042,8 +1053,8 @@ msgid "sign"
 msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:117
-msgid "Sign a contract and project officially starts"
-msgstr ""
+#~ msgid "Sign a contract and project officially starts"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:117
 #~ msgid "Sign a contract and project officially starts>>>>>>> 89c83e3fa (feat: update i18n messages)"
@@ -1134,16 +1145,16 @@ msgstr ""
 #~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:144
-msgid "This marketing page help advertise your project to potential buyers."
-msgstr ""
+#~ msgid "This marketing page help advertise your project to potential buyers."
+#~ msgstr ""
 
 #: src/pages/Post/Post.constants.ts:3
 msgid "This post has been made private by the project administrator."
 msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:102
-msgid "This project plan includes all the details about your monitoring, management practices, and more."
-msgstr ""
+#~ msgid "This project plan includes all the details about your monitoring, management practices, and more."
+#~ msgstr ""
 
 #: src/pages/Post/Post.constants.ts:10
 msgid "Timeline"
@@ -1286,16 +1297,16 @@ msgid "WHOOPS, EXIT"
 msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:174
-msgid "within 3 months"
-msgstr ""
+#~ msgid "within 3 months"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:197
-msgid "within 6 months"
-msgstr ""
+#~ msgid "within 6 months"
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:152
-msgid "within 60 days"
-msgstr ""
+#~ msgid "within 60 days"
+#~ msgstr ""
 
 #: src/pages/Marketplace/Storefront/Storefront.tsx:377
 msgid "Yes, cancel sell order"
@@ -1316,12 +1327,12 @@ msgstr ""
 #: src/pages/GettingStarted/GettingStarted.tsx:72
 #: src/pages/GettingStarted/GettingStarted.tsx:78
 #: src/pages/GettingStarted/GettingStarted.tsx:90
-msgid "you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do."
-msgstr ""
+#~ msgid "you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do."
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:84
-msgid "you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do."
-msgstr ""
+#~ msgid "you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do."
+#~ msgstr ""
 
 #: src/pages/GettingStarted/GettingStarted.tsx:84
 #~ msgid "you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do. you just do. you just do. you just do. ok okok okok okookok ABC123 okokokok ok. you just do. you just do. you just do.>>>>>>> be14af220 (feat: update i18n messages)"

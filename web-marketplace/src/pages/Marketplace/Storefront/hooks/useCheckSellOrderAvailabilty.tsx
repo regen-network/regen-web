@@ -48,7 +48,7 @@ export const useCheckSellOrderAvailabilty = ({
       setTxModalTitle(`${_(msg`Sell order`)} #${sellOrderId}`);
       setCardItems([
         {
-          label: 'AMOUNT AVAILABLE',
+          label: _(msg`AMOUNT AVAILABLE`),
           value: { name: amountAvailable },
         },
       ]);

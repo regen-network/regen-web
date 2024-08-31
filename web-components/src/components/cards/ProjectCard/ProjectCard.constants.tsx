@@ -32,3 +32,7 @@ export const VIEW_PROJECT_BUTTON: ButtonType = {
   text: 'view project',
   startIcon: <EyeIcon className="h-[24px] w-[24px]" />,
 };
+
+export const REGISTER_WITH_PROTOCOL = 'Register with a crediting protocol';
+export const CONVERT_TO_DRAFT = 'Convert to draft';
+export const DELETE_PROJECT = 'Delete project';

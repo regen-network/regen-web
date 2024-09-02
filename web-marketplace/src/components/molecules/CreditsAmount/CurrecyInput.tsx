@@ -83,6 +83,7 @@ export const CurrencyInput = ({
           min: 0,
           step: '0.1',
           type: 'number',
+          'aria-label': 'Currency Input',
         }}
         sx={{
           '& .MuiInputBase-root': {

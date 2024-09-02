@@ -50,6 +50,7 @@ export const CreditsInput = ({
           max: maxCreditsAvailable,
           min: 0,
           type: 'number',
+          'aria-label': 'Credits Input',
         }}
         onChange={onHandleChange}
         onFocus={onHandleFocus}

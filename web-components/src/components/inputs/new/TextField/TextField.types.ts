@@ -12,6 +12,7 @@ export interface RegenTextFieldProps extends StandardTextFieldProps {
     max?: number;
     step?: string | number;
     type?: string;
+    'aria-label'?: string;
   };
   description?: string | ReactNode;
   label?: ReactNode;

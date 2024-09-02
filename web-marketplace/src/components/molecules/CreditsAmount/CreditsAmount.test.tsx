@@ -6,16 +6,23 @@ import { render, screen } from 'web-marketplace/test/test-utils';
 import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { CreditsAmount } from './CreditsAmount';
-import { getCurrencyPrice } from './CreditsAmount.utils';
+import { creditDetails } from './CreditsAmount.mock';
+import {
+  getCreditsAvailablePerCurrency,
+  getCurrencyPrice,
+} from './CreditsAmount.utils';
 
 vi.mock('./CreditsAmount.utils', () => ({
   getCurrencyPrice: vi.fn(),
+  getCreditsAvailablePerCurrency: vi.fn(),
 }));
 
 describe('CreditsAmount', () => {
   const formDefaultValues = {
-    creditsAvailable: [{ credits: 100, currency: CURRENCIES.usd }],
+    creditDetails,
     paymentOption: PAYMENT_OPTIONS.CARD,
+    currency: CURRENCIES.usd,
+    setCurrency: () => {},
   };
 
   beforeEach(() => {
@@ -83,6 +90,9 @@ describe('CreditsAmount', () => {
   });
 
   it('updates credits amount when max credits is selected', async () => {
+    (getCreditsAvailablePerCurrency as Mock).mockReturnValue(
+      creditDetails[0].availableCredits,
+    );
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
     });
@@ -93,12 +103,15 @@ describe('CreditsAmount', () => {
     });
 
     await userEvent.click(maxCreditsButton);
-
-    expect(creditsInput).toHaveValue(100);
+    screen.debug();
+    expect(creditsInput).toHaveValue(creditDetails[0].availableCredits);
   });
 
   it('updates currency amount when max credits is selected', async () => {
     (getCurrencyPrice as Mock).mockReturnValue(1);
+    (getCreditsAvailablePerCurrency as Mock).mockReturnValue(
+      creditDetails[0].availableCredits,
+    );
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
     });
@@ -110,6 +123,8 @@ describe('CreditsAmount', () => {
 
     await userEvent.click(maxCreditsButton);
 
-    expect(currencyInput).toHaveValue(100);
+    expect(currencyInput).toHaveValue(
+      creditDetails[0].availableCredits * creditDetails[0].creditPrice,
+    );
   });
 });

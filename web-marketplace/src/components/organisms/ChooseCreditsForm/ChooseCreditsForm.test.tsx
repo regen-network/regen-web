@@ -1,39 +1,17 @@
+import {
+  creditDetails,
+  creditVintages,
+} from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.mock';
 import { render, screen, userEvent } from 'web-marketplace/test/test-utils';
-
-import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { ChooseCreditsForm } from './ChooseCreditsForm';
 
 describe('ChooseCreditsForm', () => {
-  const creditVintages = [
-    { date: '2022-01-01', credits: '100', batchDenom: '1' },
-    { date: '2022-02-01', credits: '200', batchDenom: '2' },
-  ];
-
-  const creditAvailability = [
-    {
-      credits: 1000,
-      currency: CURRENCIES.usd,
-    },
-    {
-      credits: 2000,
-      currency: CURRENCIES.uregen,
-    },
-    {
-      credits: 3000,
-      currency: CURRENCIES.usdc,
-    },
-    {
-      credits: 4000,
-      currency: CURRENCIES.usdcaxl,
-    },
-  ];
-
   it('renders without crashing', () => {
     render(
       <ChooseCreditsForm
         creditVintages={creditVintages}
-        creditsAvailable={creditAvailability}
+        creditDetails={creditDetails}
       />,
     );
 
@@ -44,7 +22,7 @@ describe('ChooseCreditsForm', () => {
     render(
       <ChooseCreditsForm
         creditVintages={creditVintages}
-        creditsAvailable={creditAvailability}
+        creditDetails={creditDetails}
       />,
     );
 
@@ -63,7 +41,7 @@ describe('ChooseCreditsForm', () => {
     render(
       <ChooseCreditsForm
         creditVintages={creditVintages}
-        creditsAvailable={creditAvailability}
+        creditDetails={creditDetails}
       />,
     );
     const cardOption = screen.getByRole('radio', {

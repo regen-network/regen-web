@@ -68,7 +68,6 @@ export function useProjectsWithOrders({
   useOffChainProjects = false,
   enableOffchainProjectsQuery = true,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
-  const { _ } = useLingui();
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
 
   const graphqlClient = useApolloClient();

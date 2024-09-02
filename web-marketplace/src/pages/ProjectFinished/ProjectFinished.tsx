@@ -79,7 +79,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
           )}
           {!!deliverTxResponse?.transactionHash && (
             <CardItem
-              label="hash"
+              label={_(msg`blockchain record`)}
               value={{
                 name: truncateHash(deliverTxResponse?.transactionHash) || '',
                 url: getHashUrl(deliverTxResponse?.transactionHash),
@@ -88,7 +88,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
             />
           )}
           <CardItem
-            label="url"
+            label={_(msg`url`)}
             value={{
               name: projectUrl,
               url: projectUrl,

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-09-02 09:54+0200\n"
+"POT-Creation-Date: 2024-09-02 10:06+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -171,6 +171,7 @@ msgid "block height"
 msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:48
+#: src/pages/ProjectFinished/ProjectFinished.tsx:82
 msgid "blockchain record"
 msgstr ""
 
@@ -1243,6 +1244,10 @@ msgstr ""
 
 #: src/pages/ProjectEdit/ProjectEdit.constants.ts:4
 msgid "Update project metadata"
+msgstr ""
+
+#: src/pages/ProjectFinished/ProjectFinished.tsx:91
+msgid "url"
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:148

@@ -103,7 +103,7 @@ function Post(): JSX.Element {
 
   return (
     <>
-      {!isFetching && !data ? (
+      {!isFetching && (!data || (isAdmin && !data?.published)) ? (
         <NotFoundPage />
       ) : (
         <>

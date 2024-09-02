@@ -21,7 +21,13 @@ export const createChooseCreditsFormSchema = ({
     [CURRENCY_AMOUNT]: z.coerce
       .number()
       .positive(positiveNumber)
-      .max(spendingCap, `${maxAmount} ${spendingCap.toFixed(2)}`),
+      .max(
+        spendingCap,
+        `${maxAmount} ${spendingCap.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}`,
+      ),
     [CREDITS_AMOUNT]: z.coerce
       .number()
       .positive(positiveNumber)

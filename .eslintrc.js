@@ -38,6 +38,7 @@ module.exports = {
           'border',
           'borderImageSource',
           'borderColor',
+          'borderRadius',
           'borderTop',
           'borderLeft',
           'borderRight',

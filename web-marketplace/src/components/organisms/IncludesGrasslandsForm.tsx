@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Field, Form, Formik } from 'formik';
 import { RadioGroup } from 'formik-mui';
 
@@ -22,6 +24,8 @@ interface IncludesGrasslandsFormValues {
 export const IncludesGrasslandsForm: React.FC<
   React.PropsWithChildren<IncludesGrasslandsFormProps>
 > = ({ submit }) => {
+  const { _ } = useLingui();
+
   return (
     <Formik
       initialValues={{
@@ -57,21 +61,23 @@ export const IncludesGrasslandsForm: React.FC<
           <Form>
             <OnBoardingCard>
               <ControlledFormLabel>
-                Does your project include grasslands?
+                <Trans>Does your project include grasslands?</Trans>
               </ControlledFormLabel>
               <Field component={RadioGroup} name="includesGrasslands">
                 <Field
                   component={Toggle}
                   type="radio"
-                  label="Yes, my project includes grasslands"
-                  description="Grassland is defined as land made up of large open areas of grasses and herbaceous vegetation which account for greater than 80% of the total vegetation. Grassland projects are not subjective to intensive management such as tilling, but may include pasturelands where grasses and/or legumes are planted for livestock grazing, and land managed with agroforestry practices."
+                  label={_(msg`Yes, my project includes grasslands`)}
+                  description={_(
+                    msg`Grassland is defined as land made up of large open areas of grasses and herbaceous vegetation which account for greater than 80% of the total vegetation. Grassland projects are not subjective to intensive management such as tilling, but may include pasturelands where grasses and/or legumes are planted for livestock grazing, and land managed with agroforestry practices.`,
+                  )}
                   value={true}
                   checked={values['includesGrasslands'] === 'true'}
                 />
                 <Field
                   component={Toggle}
                   type="radio"
-                  label="No, my project does not include grasslands"
+                  label={_(msg`No, my project does not include grasslands`)}
                   value={false}
                   checked={values['includesGrasslands'] === 'false'}
                 />

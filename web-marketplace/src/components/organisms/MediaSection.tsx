@@ -43,7 +43,7 @@ const MediaSection: React.FC<React.PropsWithChildren<MediaSectionProps>> = ({
   return (
     <div>
       <SliderSection
-        title={header || 'Resources'}
+        title={header || _(msg`Resources`)}
         items={
           items?.map((item, i) => (
             <ArticleCard

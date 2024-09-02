@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
 
@@ -132,7 +134,9 @@ interface PurchasedCreditsProps {
 }
 
 function UserCredits({ credits }: PurchasedCreditsProps): JSX.Element {
+  const { _ } = useLingui();
   const { classes } = useStyles();
+
   return (
     <div className={classes.root}>
       <Grid
@@ -143,7 +147,7 @@ function UserCredits({ credits }: PurchasedCreditsProps): JSX.Element {
       >
         <Grid item sm={6} xs={12}>
           <Title variant="h3">
-            Credits for{' '}
+            <Trans>Credits for</Trans>{' '}
             <Link
               to={`/project/${credits.project.id}`}
               className={classes.projectName}
@@ -160,7 +164,7 @@ function UserCredits({ credits }: PurchasedCreditsProps): JSX.Element {
         <Grid className={classes.card} item xs={12} sm={4}>
           <PurchasedCreditsCard
             number={credits.currentPurchase.total}
-            description="credits you purchased"
+            description={_(msg`credits you purchased`)}
             date={credits.currentPurchase.date}
             icon={<CurrentCreditsIcon />}
           />
@@ -168,14 +172,14 @@ function UserCredits({ credits }: PurchasedCreditsProps): JSX.Element {
         <Grid className={classes.card} item xs={12} sm={4}>
           <PurchasedCreditsCard
             number={credits.totalPurchased}
-            description="total credits you have purchased"
+            description={_(msg`total credits you have purchased`)}
             icon={<TotalCreditsIcon />}
           />
         </Grid>
         <Grid className={classes.card} item xs={12} sm={4}>
           <PurchasedCreditsCard
             number={credits.totalAvailable}
-            description="credits available for purchase"
+            description={_(msg`credits available for purchase`)}
             icon={<AvailableCreditsIcon />}
           />
         </Grid>

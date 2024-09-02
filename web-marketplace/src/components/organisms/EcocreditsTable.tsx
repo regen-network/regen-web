@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
@@ -37,13 +39,14 @@ export const EcocreditsTable: React.FC<
   initialPaginationParams,
   isIgnoreOffset = false,
 }) => {
+  const { _ } = useLingui();
   const hasMorePages =
     (initialPaginationParams?.count ?? 0) >
     (initialPaginationParams?.rowsPerPage ?? 0);
   if (!credits || (!credits?.length && !hasMorePages)) {
     return (
       <NoCredits
-        title="No ecocredits to display"
+        title={_(msg`No ecocredits to display`)}
         icon={<NoEcocreditsIcon sx={{ width: 100, height: 100 }} />}
       />
     );
@@ -51,14 +54,16 @@ export const EcocreditsTable: React.FC<
 
   return (
     <ActionsTable
-      tableLabel="ecocredits table"
+      tableLabel={_(msg`ecocredits table`)}
       renderActionButtons={renderActionButtons}
       onTableChange={onTableChange}
       initialPaginationParams={initialPaginationParams}
       isIgnoreOffset={isIgnoreOffset}
       /* eslint-disable react/jsx-key */
       headerRows={[
-        <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>{'Project'}</Box>,
+        <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>
+          <Trans>Project</Trans>
+        </Box>,
         <Box
           sx={{
             minWidth: {
@@ -68,26 +73,32 @@ export const EcocreditsTable: React.FC<
             },
           }}
         >
-          {'Batch Denom'}
+          <Trans>Batch Denom</Trans>
         </Box>,
-        'Credit Class',
-        <BreakText>Amount Tradable</BreakText>,
-        <BreakText>Amount Retired</BreakText>,
+        <Trans>Credit Class</Trans>,
+        <BreakText>
+          <Trans>Amount Tradable</Trans>
+        </BreakText>,
+        <BreakText>
+          <Trans>Amount Retired</Trans>
+        </BreakText>,
         <Box display="flex">
-          <BreakText>Amount Escrowed</BreakText>
+          <BreakText>
+            <Trans>Amount Escrowed</Trans>
+          </BreakText>
           <Box alignSelf="flex-end" ml={2}>
             <InfoTooltipWithIcon
               outlined
-              title={
-                'Credits are held in escrow when a sell order is created, and taken out of escrow when the sell order is either cancelled, updated with a reduced quantity, or processed.'
-              }
+              title={_(
+                msg`Credits are held in escrow when a sell order is created, and taken out of escrow when the sell order is either cancelled, updated with a reduced quantity, or processed.`,
+              )}
             />
           </Box>
         </Box>,
-        'Issuer',
-        'Batch Start Date',
-        'Batch End Date',
-        'Project Location',
+        <Trans>Issuer</Trans>,
+        <Trans>Batch Start Date</Trans>,
+        <Trans>Batch End Date</Trans>,
+        <Trans>Project Location</Trans>,
       ]}
       rows={credits.map((row, i) => {
         return [

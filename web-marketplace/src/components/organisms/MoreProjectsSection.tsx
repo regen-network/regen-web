@@ -1,4 +1,6 @@
 import LazyLoad from 'react-lazyload';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
@@ -36,13 +38,14 @@ const MoreProjectsSection = ({
   projects,
   title,
 }: MoreProjectsProps): JSX.Element => {
+  const { _ } = useLingui();
   const { classes: styles, cx } = useStyles();
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Section
-      title={title || 'More Projects'}
+      title={title || _(msg`More Projects`)}
       titleAlign={isMobile ? 'left' : 'center'}
       classes={{
         root: cx(styles.root, classes?.root),

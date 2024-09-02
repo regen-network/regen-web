@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useLingui } from '@lingui/react';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import { Body } from 'web-components/src/components/typography';
@@ -22,6 +23,7 @@ type Props = {
 };
 
 export const PrefinanceStatus = ({ title, timeline }: Props) => {
+  const { _ } = useLingui();
   const orderedDoneTimeline = useMemo(
     () =>
       timeline
@@ -62,7 +64,7 @@ export const PrefinanceStatus = ({ title, timeline }: Props) => {
               onClick={() => setOpen(true)}
               className="mt-15 text-[11px]"
             >
-              {VIEW_TIMELINE}
+              {_(VIEW_TIMELINE)}
             </TextButton>
           </div>
         </div>

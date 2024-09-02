@@ -1,3 +1,7 @@
+import { useMemo } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+
 import EmptyState from 'web-components/src/components/empty-state';
 import EmptyCartIcon from 'web-components/src/components/icons/EmptyCartIcon';
 import {
@@ -10,7 +14,7 @@ import {
 import { UseStateSetter } from 'types/react/use-state';
 
 import { NormalizedSellOrder } from '../../../pages/Marketplace/Storefront/Storefront.types';
-import { SELL_ORDERS_ROW } from './SellOrdersTable.config';
+import { getSellOrdersRow } from './SellOrdersTable.config';
 import getSellOrdersTableRow from './SellOrdersTable.Row';
 
 type Props = {
@@ -26,13 +30,15 @@ const SellOrdersTable = ({
   renderActionButtonsFunc = i => void 0,
   onTableChange,
 }: Props): JSX.Element => {
+  const { _ } = useLingui();
   const hasSellOrders = sellOrders.length > 0;
+  const SellOrdersRow = useMemo(() => getSellOrdersRow(_), [_]);
   return (
     <>
       {hasSellOrders && (
         <ActionsTable
-          tableLabel="Sell orders"
-          headerRows={SELL_ORDERS_ROW}
+          tableLabel={_(msg`Sell orders`)}
+          headerRows={SellOrdersRow}
           rows={sellOrders.map(sellOrder =>
             getSellOrdersTableRow({ sellOrder }),
           )}
@@ -43,7 +49,7 @@ const SellOrdersTable = ({
       )}
       {!hasSellOrders && (
         <EmptyState
-          message={'No sell orders found'}
+          message={_(msg`No sell orders found`)}
           icon={<EmptyCartIcon sx={{ fontSize: 84, fill: 'none' }} />}
         />
       )}

@@ -1,3 +1,6 @@
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { CopyButton } from 'web-components/src/components/buttons/CopyButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -32,18 +35,22 @@ export const ConnectField = ({
         {address ? (
           <AddressWidget address={address} />
         ) : (
-          <Body size="sm">{email ? email : 'Not connected'}</Body>
+          <Body size="sm">{email ? email : <Trans>Not connected</Trans>}</Body>
         )}
       </div>
       <div className="ml-auto">
         {connect ? (
-          <ContainedButton onClick={connect}>CONNECT</ContainedButton>
+          <ContainedButton onClick={connect}>
+            <Trans>CONNECT</Trans>
+          </ContainedButton>
         ) : (
           disconnect && (
             <OutlinedButton onClick={disconnect}>
               <div className="flex flex-row gap-10 items-center">
                 <CloseIcon className="stroke-brand-400 w-[26px] h-[26px]" />
-                <div>DISCONNECT</div>
+                <div>
+                  <Trans>DISCONNECT</Trans>
+                </div>
               </div>
             </OutlinedButton>
           )
@@ -53,13 +60,17 @@ export const ConnectField = ({
   );
 };
 
-const AddressWidget = ({ address }: { address: string }) => (
-  <div className="flex flex-row gap-5">
-    <Body size="sm">{address}</Body>
-    <CopyButton
-      content={address}
-      tooltipText="Copy address"
-      toastText="Address copied!"
-    />
-  </div>
-);
+const AddressWidget = ({ address }: { address: string }) => {
+  const { _ } = useLingui();
+
+  return (
+    <div className="flex flex-row gap-5">
+      <Body size="sm">{address}</Body>
+      <CopyButton
+        content={address}
+        tooltipText={_(msg`Copy address`)}
+        toastText={_(msg`Address copied!`)}
+      />
+    </div>
+  );
+};

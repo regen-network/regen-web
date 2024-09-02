@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import cx from 'classnames';
 
@@ -12,6 +14,7 @@ import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/Pr
 import useMoreProjects from './hooks/useMoreProjects';
 
 export function MoreProjects(): JSX.Element {
+  const { _ } = useLingui();
   const { projectId } = useParams();
   const { projectsWithOrderData, loading } = useMoreProjects(
     projectId as string,
@@ -28,7 +31,7 @@ export function MoreProjects(): JSX.Element {
       sx={{ pb: 9 }}
     >
       <ProjectCardsSection
-        title="More Projects"
+        title={_(msg`More Projects`)}
         projects={projectsWithOrderData}
         loading={loading}
         onButtonClick={({ project }) => {

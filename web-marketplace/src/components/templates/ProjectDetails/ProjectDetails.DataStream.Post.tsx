@@ -32,7 +32,7 @@ import { Subtitle } from 'web-components/src/components/typography';
 import copyTextToClipboard from 'web-components/src/utils/copy';
 
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
-import { Post } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.types';
+import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
 import { useAttestEvents } from 'pages/Post/hooks/useAttestEvents';

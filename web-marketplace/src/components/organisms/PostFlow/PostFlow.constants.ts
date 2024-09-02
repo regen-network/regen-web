@@ -49,5 +49,4 @@ export const PROJECT = 'project';
 export const BLOCKCHAIN_RECORD = msg`blockchain record`;
 export const POST_CREATED_SIGNING_FAILED = msg`You successfully created this post but signing failed.`;
 export const CREATE_DATA_POST = msg`Create Data Post`;
-export const VIEW_ALL_POSTS = msg`view all posts`;
-export const HASH = msg`hash`;
+export const DRAFT_CREATED = msg`Draft created!`;

@@ -11,6 +11,7 @@ export const postFormSchema = z.object({
   comment: z.string().min(1),
   files: z.array(editFileFormSchema).optional(),
   privacyType: z.custom<PostPrivacyType>(val => !!val, requiredMessage),
+  published: z.boolean(),
 });
 
 export type PostFormSchemaType = z.infer<typeof postFormSchema>;

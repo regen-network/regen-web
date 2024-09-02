@@ -168,6 +168,7 @@ const MyProjects = (): JSX.Element => {
             comment: '',
             files: [],
             privacyType: 'public',
+            published: true,
           }}
         />
       )}

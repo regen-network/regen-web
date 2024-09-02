@@ -6,6 +6,7 @@ import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { MAPBOX_TOKEN } from 'config/globals';
 import { Feature, Point } from 'geojson';
 
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import { LocationIcon } from 'web-components/src/components/icons/LocationIcon';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
 import { PrivateFile } from 'web-components/src/components/icons/PrivateFile';
@@ -448,7 +449,17 @@ export const PostForm = ({
         label="publish"
         onCancel={onClose}
         type="submit"
-      />
+      >
+        <OutlinedButton
+          className="mr-10"
+          onClick={() => {
+            setValue('published', false);
+            onSubmit && onSubmit(form.getValues());
+          }}
+        >
+          <Trans>save draft</Trans>
+        </OutlinedButton>
+      </CancelButtonFooter>
       <div className="flex flex-col items-end mt-20">
         <Warning
           text={_(

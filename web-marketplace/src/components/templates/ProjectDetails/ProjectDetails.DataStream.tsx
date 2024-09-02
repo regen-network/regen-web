@@ -19,12 +19,10 @@ import Section from 'web-components/src/components/section';
 import { Body } from 'web-components/src/components/typography';
 
 import { useAuth } from 'lib/auth/auth';
+import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getPostsQuery } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery';
 import { DATA_STREAM_LIMIT } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.constants';
-import {
-  Post,
-  PostsQueryResponse,
-} from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.types';
+import { PostsQueryResponse } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.types';
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 
 import {

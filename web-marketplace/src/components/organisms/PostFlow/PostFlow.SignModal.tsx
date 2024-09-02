@@ -25,6 +25,8 @@ import { signModalSchema } from './PostFlow.SignModal.schema';
 type SignModalProps = {
   iri?: string;
   handleSign: (contentHash: ContentHash_Graph) => Promise<void>;
+  published?: boolean;
+  hasAddress: boolean;
 } & RegenModalProps;
 
 export const SignModal = ({
@@ -32,6 +34,8 @@ export const SignModal = ({
   onClose,
   open,
   handleSign,
+  published,
+  hasAddress,
 }: SignModalProps) => {
   const form = useZodForm({
     schema: signModalSchema,
@@ -52,7 +56,7 @@ export const SignModal = ({
     convertIRIToHashQuery({
       client: dataClient,
       request: { iri },
-      enabled: !!dataClient && !!iri,
+      enabled: !!dataClient && !!iri && published && hasAddress,
     }),
   );
 

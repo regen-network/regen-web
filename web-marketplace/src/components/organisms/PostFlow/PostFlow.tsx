@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { ContentHash_Graph } from '@regen-network/api/lib/generated/regen/data/v1/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
@@ -10,6 +11,7 @@ import { SaveChangesWarningModal } from 'web-components/src/components/modal/Sav
 import { deleteImage } from 'web-components/src/utils/s3';
 
 import { apiUri } from 'lib/apiUri';
+import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
@@ -26,7 +28,7 @@ import PostForm from '../PostForm';
 import { PostFormSchemaType } from '../PostForm/PostForm.schema';
 import { useFetchMsgAnchor } from './hooks/useFetchMsgAnchor';
 import { useSign } from './hooks/useSign';
-import { basePostContent } from './PostFlow.constants';
+import { basePostContent, DRAFT_CREATED } from './PostFlow.constants';
 import { SignModal } from './PostFlow.SignModal';
 
 type Props = {
@@ -37,6 +39,7 @@ type Props = {
   projectName?: string;
   projectSlug?: string | null;
   offChainProjectId?: string;
+  postIri?: string;
 };
 
 export const PostFlow = ({
@@ -47,6 +50,7 @@ export const PostFlow = ({
   projectName,
   projectSlug,
   offChainProjectId: _offChainProjectId,
+  postIri,
 }: Props) => {
   const fileNamesToDeleteRef = useRef<string[]>([]);
   const retryCsrfRequest = useRetryCsrfRequest();
@@ -66,6 +70,7 @@ export const PostFlow = ({
       enabled: !!iri,
     }),
   );
+  const { _ } = useLingui();
 
   const [offChainProjectId, setOffChainProjectId] =
     useState(_offChainProjectId);
@@ -76,14 +81,32 @@ export const PostFlow = ({
     subFolder: '/posts',
   });
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const setBannerText = useSetAtom(bannerTextAtom);
 
   const onSubmit = useCallback(
     async (data: PostFormSchemaType) => {
       if (token) {
-        const files = data.files?.filter(file => file.url !== DEFAULT);
+        const files = data.files
+          ?.filter(file => file.url !== DEFAULT)
+          ?.map(file => {
+            const geocodePoint = file.location.geometry.coordinates;
+            return {
+              iri: file.iri,
+              name: file.name,
+              description: file.description,
+              credit: file.credit,
+              locationType: file.locationType,
+              location: {
+                wkt: `POINT(${geocodePoint[0]} ${geocodePoint[1]})`,
+              },
+            };
+          });
         try {
           await postData({
-            url: `${apiServerUrl}/marketplace/v1/posts`,
+            url: `${apiServerUrl}/marketplace/v1/posts${
+              postIri ? `/${postIri}` : ''
+            }`,
+            method: postIri ? 'PUT' : 'POST',
             data: {
               projectId: offChainProjectId,
               privacy: data.privacyType,
@@ -91,20 +114,9 @@ export const PostFlow = ({
                 ...basePostContent,
                 title: data.title,
                 comment: data.comment,
-                files: files?.map(file => {
-                  const geocodePoint = file.location.geometry.coordinates;
-                  return {
-                    iri: file.iri,
-                    name: file.name,
-                    description: file.description,
-                    credit: file.credit,
-                    locationType: file.locationType,
-                    location: {
-                      wkt: `POINT(${geocodePoint[0]} ${geocodePoint[1]})`,
-                    },
-                  };
-                }),
+                files,
               },
+              published: data.published,
             },
             token,
             retryCsrfRequest,
@@ -125,6 +137,7 @@ export const PostFlow = ({
     },
     [
       token,
+      postIri,
       offChainProjectId,
       retryCsrfRequest,
       reactQueryClient,
@@ -140,25 +153,33 @@ export const PostFlow = ({
     onModalClose,
   });
 
+  const hasAddress =
+    !!wallet?.address && activeAccount?.addr === wallet.address;
+
   useEffect(() => {
     if (iri && createdPostData) {
       setIsFormModalOpen(false);
-
-      if (wallet?.address && activeAccount?.addr === wallet.address) {
-        setIsSignModalOpen(true);
+      if (createdPostData.published) {
+        if (hasAddress) {
+          setIsSignModalOpen(true);
+        } else {
+          fetchMsgAnchor({ iri, createdPostData });
+          onModalClose();
+        }
       } else {
-        fetchMsgAnchor({ iri, createdPostData });
+        setBannerText(_(DRAFT_CREATED));
         onModalClose();
       }
     }
   }, [
-    activeAccount?.addr,
+    _,
     createdPostData,
     fetchMsgAnchor,
+    hasAddress,
     iri,
     onModalClose,
+    setBannerText,
     setProcessingModalAtom,
-    wallet?.address,
   ]);
 
   const onClose = useCallback(
@@ -213,6 +234,8 @@ export const PostFlow = ({
       </Modal>
       <SignModal
         iri={iri}
+        published={createdPostData?.published}
+        hasAddress={hasAddress}
         open={isSignModalOpen}
         onClose={() => {
           setIsSignModalOpen(false);

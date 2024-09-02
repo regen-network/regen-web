@@ -15,8 +15,9 @@ const CancelButtonFooter = ({
   label,
   hideCancel,
   cancelLabel,
+  children,
   ...props
-}: Props): JSX.Element => {
+}: React.PropsWithChildren<Props>): JSX.Element => {
   return (
     <Grid container alignItems="center" justifyContent="flex-end">
       {!hideCancel && (
@@ -35,7 +36,7 @@ const CancelButtonFooter = ({
           </Button>
         </Grid>
       )}
-
+      {children}
       <Grid item>
         <ContainedButton {...props}>{label}</ContainedButton>
       </Grid>

@@ -171,6 +171,7 @@ export const DataStreamPost = ({
         <TimelineContent className="mt-[-30px] mb-30 pr-0">
           {post.contents && (post.privacy !== 'private' || isAdmin) && (
             <PostCard
+              draft={!post.published}
               onClick={() => navigate(`/post/${post.iri}`)}
               title={post.contents.title}
               comment={post.contents.comment}

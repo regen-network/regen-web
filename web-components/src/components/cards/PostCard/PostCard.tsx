@@ -32,6 +32,7 @@ interface PostCardProps {
   publicPost?: boolean;
   file?: FileToPreview;
   preview?: string;
+  draft?: boolean;
 }
 
 export default function PostCard({
@@ -49,6 +50,7 @@ export default function PostCard({
   onClick,
   publicPost,
   onDelete,
+  draft,
 }: PostCardProps): JSX.Element {
   const hasFile = !!file;
   const theme = useTheme();

@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
@@ -23,6 +25,7 @@ import { PROJECTS_PER_PAGE } from './AllProjects/AllProjects.config';
 import { useProjects } from './hooks/useProjects';
 
 const Projects = (): JSX.Element => {
+  const { _ } = useLingui();
   const { page: routePage } = useParams();
   const location = useLocation();
   const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
@@ -63,7 +66,7 @@ const Projects = (): JSX.Element => {
       {
         label: (
           <Title variant="h4" mobileVariant="body1">
-            All projects{' '}
+            <Trans>All projects</Trans>{' '}
             <span className="font-medium text-grey-400">({projectsCount})</span>
           </Title>
         ),
@@ -73,7 +76,7 @@ const Projects = (): JSX.Element => {
         hidden: !prefinanceProjectsCount,
         label: (
           <Title variant="h4" mobileVariant="body1">
-            Prefinance projects{' '}
+            <Trans>Prefinance projects</Trans>{' '}
             <span className="font-medium text-grey-400">
               ({prefinanceProjectsCount})
             </span>
@@ -109,7 +112,7 @@ const Projects = (): JSX.Element => {
         <div className="max-w-[1400px] m-auto grid grid-cols-[repeat(auto-fit,minmax(300px,400px))] gap-[18px] justify-center">
           <IconTabs
             className="col-[1/-1]"
-            aria-label="projects tabs"
+            aria-label={_(msg`projects tabs`)}
             tabs={tabs}
             activeTab={activeTab}
             linkComponent={Link}

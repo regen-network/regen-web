@@ -3,6 +3,8 @@ import ReactPlayer from 'react-player/es6';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box, Card, CardMedia, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { omit } from 'lodash';
@@ -26,6 +28,7 @@ import {
   qudtUnit,
 } from 'lib/rdf';
 
+import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import { OMITTED_METADATA_KEYS } from 'pages/ProjectMetadata/ProjectMetadata.config';
 import {
   STORY_LABEL,
@@ -54,9 +57,9 @@ import {
   getProjectReferenceID,
 } from './ProjectReview.util';
 import { VCSMetadata } from './ProjectReview.VCSMetadata';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { _ } = useLingui();
   const { projectId } = useParams();
   const navigate = useNavigate();
   const { setDeliverTxResponse } = useCreateProjectContext();
@@ -89,7 +92,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const handleError = (): void => {
     closeSubmitModal();
-    setTxModalTitle('MsgCreateProject Error');
+    setTxModalTitle(_(msg`MsgCreateProject Error`));
   };
 
   const handleTxDelivered = async (
@@ -146,7 +149,9 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const submit = async (): Promise<void> => {
     if (!jurisdiction) {
       setBannerError(
-        `Error getting ISO string for jurisdiction. Please edit your location.`,
+        _(
+          msg`Error getting ISO string for jurisdiction. Please edit your location.`,
+        ),
       );
       return;
     }
@@ -168,14 +173,20 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   };
 
   return (
-    <OnboardingFormTemplate activeStep={1} title="Review" loading={isLoading}>
+    <OnboardingFormTemplate
+      activeStep={1}
+      title={_(msg`Review`)}
+      loading={isLoading}
+    >
       <ReviewCard
-        title="Basic Info"
+        title={_(msg`Basic Info`)}
         onEditClick={() => navigate(`${editPath}/basic-info`)}
         sx={{ mt: [8, 10] }}
       >
-        <ItemDisplay name="Name">{metadata?.['schema:name']}</ItemDisplay>
-        <ItemDisplay name="Size">
+        <ItemDisplay name={_(msg`Name`)}>
+          {metadata?.['schema:name']}
+        </ItemDisplay>
+        <ItemDisplay name={_(msg`Size`)}>
           {metadata?.['regen:projectSize']?.['qudt:numericValue'] || '-'}{' '}
           {
             QUDT_UNIT_MAP[
@@ -185,16 +196,16 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         </ItemDisplay>
       </ReviewCard>
       <ReviewCard
-        title="Location"
+        title={_(msg`Location`)}
         onEditClick={() => navigate(`${editPath}/location`)}
       >
         <ItemDisplay>
           {metadata?.['schema:location']?.['place_name']}
         </ItemDisplay>
-        <ItemDisplay name="Jurisdiction">{jurisdiction}</ItemDisplay>
+        <ItemDisplay name={_(msg`Jurisdiction`)}>{jurisdiction}</ItemDisplay>
       </ReviewCard>
       <ReviewCard
-        title="Description"
+        title={_(msg`Description`)}
         onEditClick={() => navigate(`${editPath}/description`)}
       >
         <ItemDisplay name={SUMMARY_LABEL}>
@@ -208,7 +219,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         </ItemDisplay>
       </ReviewCard>
       <ReviewCard
-        title={'Media'}
+        title={_(msg`Media`)}
         onEditClick={() => navigate(`${editPath}/media`)}
       >
         {previewPhoto?.['schema:url'] && (
@@ -238,14 +249,18 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
           </ItemDisplay>
         )}
         {storyMedia?.['schema:url'] && (
-          <ItemDisplay name={isVideo ? STORY_VIDEO : STORY_PHOTO}>
+          <ItemDisplay name={isVideo ? _(STORY_VIDEO) : _(STORY_PHOTO)}>
             <>
               {isVideo && (
                 <Card>
                   <CardMedia
                     component={ReactPlayer}
                     url={storyMedia['schema:url']}
-                    fallback={<div>Loading video player...</div>}
+                    fallback={
+                      <div>
+                        <Trans>Loading video player...</Trans>
+                      </div>
+                    }
                     height={isMobile ? 216 : 293}
                     width="100%"
                   />
@@ -278,7 +293,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       </ReviewCard> */}
       {!!creditClassId && (
         <ReviewCard
-          title="Metadata"
+          title={_(msg`Metadata`)}
           onEditClick={() => navigate(`${editPath}/metadata`)}
         >
           {isVCS ? (

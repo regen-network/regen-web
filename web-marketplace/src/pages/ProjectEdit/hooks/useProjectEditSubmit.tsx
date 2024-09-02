@@ -1,4 +1,6 @@
 import { useCallback } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import {
   MsgUpdateProjectAdmin,
   MsgUpdateProjectMetadata,
@@ -47,6 +49,8 @@ const useProjectEditSubmit = ({
   onTxSuccessful,
   onErrorCallback,
 }: Props): UseProjectEditSubmitParams => {
+  const { _ } = useLingui();
+
   const projectEditSubmit = useCallback(
     async (
       metadata: NestedPartial<ProjectMetadataLD>,
@@ -96,14 +100,14 @@ const useProjectEditSubmit = ({
           if (doUpdateAdmin && admin && newAdmin) {
             cardItems.push(
               {
-                label: 'new project admin',
+                label: _(msg`new project admin`),
                 value: {
                   name: newAdmin,
                   url: `/profiles/${newAdmin}/portfolio`,
                 },
               },
               {
-                label: 'old project admin',
+                label: _(msg`old project admin`),
                 value: {
                   name: admin,
                   url: `/profiles/${admin}/portfolio`,
@@ -114,8 +118,8 @@ const useProjectEditSubmit = ({
 
           onTxSuccessful({
             cardItems,
-            title: PROJECT_UPDATED_METADATA_HEADER,
-            cardTitle: PROJECT_UPDATE_METADATA_LABEL,
+            title: _(PROJECT_UPDATED_METADATA_HEADER),
+            cardTitle: _(PROJECT_UPDATE_METADATA_LABEL),
           });
         }
       };
@@ -129,6 +133,7 @@ const useProjectEditSubmit = ({
       creditClassId,
       projectId,
       admin,
+      _,
       signAndBroadcast,
       onErrorCallback,
       onTxSuccessful,

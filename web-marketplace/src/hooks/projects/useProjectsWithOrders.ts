@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useApolloClient } from '@apollo/client';
+import { useLingui } from '@lingui/react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -204,9 +205,9 @@ export function useProjectsWithOrders({
         ? [...projectsWithOrderDataFiltered, ...allOffChainProjects]
         : projectsWithOrderDataFiltered,
     [
-      projectsWithOrderDataFiltered,
       creditClassFilter,
       useOffChainProjects,
+      projectsWithOrderDataFiltered,
       allOffChainProjects,
     ],
   );

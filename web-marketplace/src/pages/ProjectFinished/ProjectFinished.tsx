@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/system';
 import { useQuery } from '@tanstack/react-query';
 
@@ -21,6 +23,7 @@ import { useCreateProjectContext } from '../ProjectCreate';
 import { PROJECT_OFFCHAIN_REMINDER } from './ProjectFinished.constants';
 
 const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { _ } = useLingui();
   const { deliverTxResponse } = useCreateProjectContext();
   const { projectId } = useParams();
   const navigate = useNavigate();
@@ -43,7 +46,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <OnboardingFormTemplate
       activeStep={2}
-      title="Project has been created!"
+      title={_(msg`Project has been created!`)}
       loading={isLoading}
     >
       <Box
@@ -54,10 +57,12 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
         }}
       >
         <OnBoardingCard>
-          <Title variant="h5">Create Project</Title>
+          <Title variant="h5">
+            <Trans>Create Project</Trans>
+          </Title>
           {projectOnChainId ? (
             <CardItem
-              label="project id"
+              label={_(msg`project id`)}
               value={{
                 name: projectOnChainId,
               }}
@@ -65,7 +70,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
             />
           ) : (
             <CardItem
-              label="project name"
+              label={_(msg`project name`)}
               value={{
                 name: data?.data?.projectById?.metadata?.['schema:name'],
               }}
@@ -74,7 +79,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
           )}
           {!!deliverTxResponse?.transactionHash && (
             <CardItem
-              label="hash"
+              label={_(msg`blockchain record`)}
               value={{
                 name: truncateHash(deliverTxResponse?.transactionHash) || '',
                 url: getHashUrl(deliverTxResponse?.transactionHash),
@@ -83,7 +88,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
             />
           )}
           <CardItem
-            label="url"
+            label={_(msg`url`)}
             value={{
               name: projectUrl,
               url: projectUrl,
@@ -100,7 +105,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
                   >
                     <EditIcon sx={{ mr: 1, width: 22, height: 22 }} />{' '}
                     <Label size="xs" color="primary.contrastText">
-                      {'edit'}
+                      <Trans>edit</Trans>
                     </Label>
                   </Link>
                 </Box>
@@ -109,7 +114,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
             linkComponent={Link}
           />
           {!projectOnChainId && (
-            <Body sx={{ mt: 2 }}>{PROJECT_OFFCHAIN_REMINDER}</Body>
+            <Body sx={{ mt: 2 }}>{_(PROJECT_OFFCHAIN_REMINDER)}</Body>
           )}
         </OnBoardingCard>
         <OutlinedButton

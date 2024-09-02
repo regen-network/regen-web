@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Trans } from '@lingui/macro';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -45,7 +46,7 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
                   href={prefinanceProjectsContent.learnMore}
                   textSize="sm"
                 >
-                  learn more&nbsp;
+                  <Trans>learn more</Trans>&nbsp;
                   <SmallArrowIcon />
                 </TextButton>
               )}

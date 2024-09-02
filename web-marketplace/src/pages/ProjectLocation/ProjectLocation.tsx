@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
 import { useProjectEditContext } from 'pages/ProjectEdit';
@@ -10,6 +12,7 @@ import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 import { LocationForm } from '../../components/organisms/LocationForm/LocationForm';
 
 const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { _ } = useLingui();
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
@@ -38,7 +41,7 @@ const ProjectLocation: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <ProjectFormTemplate
       isEdit={isEdit}
-      title="Location"
+      title={_(msg`Location`)}
       offChainProject={offChainProject}
       onChainProject={onChainProject}
       loading={loading}

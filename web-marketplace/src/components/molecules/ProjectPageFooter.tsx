@@ -1,5 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
 
@@ -27,6 +29,7 @@ const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
   saveAndExit,
   ...props
 }) => {
+  const { _ } = useLingui();
   const { isEdit } = useProjectEditContext();
   const saveDisabled = !isValid || isSubmitting;
   const { pathname } = useLocation();
@@ -35,13 +38,13 @@ const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
 
   return isEdit ? (
     <EditProjectPageFooter
-      saveText={saveText || 'Save'}
+      saveText={saveText || _(msg`Save`)}
       onSave={onSave}
       saveDisabled={saveDisabled || !dirty}
     />
   ) : (
     <SaveFooter
-      saveText={saveText || 'Next'}
+      saveText={saveText || _(msg`Next`)}
       onSave={onSave}
       onPrev={props.onPrev}
       hideProgress={false}

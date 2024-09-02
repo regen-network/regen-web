@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { omit } from 'lodash';
 
@@ -20,6 +22,7 @@ import { OMITTED_METADATA_KEYS } from './ProjectMetadata.config';
 
 export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
   () => {
+    const { _ } = useLingui();
     const navigate = useNavigate();
     const { projectId } = useParams();
     const graphqlClient = useApolloClient();
@@ -66,7 +69,7 @@ export const ProjectMetadata: React.FC<React.PropsWithChildren<unknown>> =
         {creditClassId ? (
           <ProjectFormTemplate
             isEdit={isEdit}
-            title="Metadata"
+            title={_(msg`Metadata`)}
             offChainProject={offChainProject}
             onChainProject={onChainProject}
             loading={loading}

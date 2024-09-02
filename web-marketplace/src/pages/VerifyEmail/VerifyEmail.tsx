@@ -1,4 +1,6 @@
 import React, { useCallback, useState } from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import Link from '@mui/material/Link';
 import axios from 'axios';
 
@@ -11,6 +13,7 @@ import { Body } from 'web-components/src/components/typography';
 import { apiUri } from '../../lib/apiUri';
 
 function VerifyEmail(): JSX.Element {
+  const { _ } = useLingui();
   const search = new URLSearchParams(window.location.search);
   const email = search.get('email');
   const [error, setError] = useState<Error | null>(null);
@@ -25,7 +28,7 @@ function VerifyEmail(): JSX.Element {
       })
       .then(resp => {
         setSubmitting(false);
-        setStatus('Email resent! Please check your inbox.');
+        setStatus(_(msg`Email resent! Please check your inbox.`));
         setError(null);
       })
       .catch(err => {
@@ -33,22 +36,29 @@ function VerifyEmail(): JSX.Element {
         setError(err);
         setStatus(null);
       });
-  }, [email]);
+  }, [_, email]);
 
   return (
-    <OnBoardingSection formContainer title="Please confirm your email address">
+    <OnBoardingSection
+      formContainer
+      title={_(msg`Please confirm your email address`)}
+    >
       <OnBoardingCard>
         <Body size="lg">
-          We've just sent a confirmation email to:{' '}
+          <Trans>We've just sent a confirmation email to:</Trans>{' '}
           <a href={`mailto:${email}`}>{email}</a>.
         </Body>
         <br />
         <Body size="lg">
-          Click on the confirmation link to return to Regen Network.
+          <Trans>
+            Click on the confirmation link to return to Regen Network.
+          </Trans>
         </Body>
       </OnBoardingCard>
       <Body size="xl" sx={{ cursor: 'pointer', pt: [33, 0], px: [2.5, 10] }}>
-        Don’t see anything? <Link onClick={resendEmail}>Resend email</Link>.
+        <Trans>
+          Don’t see anything? <Link onClick={resendEmail}>Resend email</Link>.
+        </Trans>
       </Body>
       {!isSubmitting && error && <ErrorBanner text={error.toString()} />}
       {!isSubmitting && status && <Banner text={status} />}

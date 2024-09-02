@@ -1,4 +1,5 @@
 import { useFormContext } from 'react-hook-form';
+import { Trans } from '@lingui/macro';
 import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
@@ -27,7 +28,7 @@ export function CreditsAmountHeader({
   return (
     <div className="flex justify-between items-center my-15 sm:mt-30">
       <Title variant="h2" className="text-lg font-black">
-        Amount
+        <Trans>Amount</Trans>
       </Title>
       <div className="flex flex-grow justify-end items-center font-['Lato'] text-base">
         <div className="text-sm sm:text-base pr-5 flex flex-col items-end sm:flex-row sm:items-center h-[55px]">
@@ -41,11 +42,13 @@ export function CreditsAmountHeader({
             <span className="font-bold font-['Lato'] mr-5">
               {creditsAvailable}
             </span>
-            credits available
+            <Trans>credits available</Trans>
           </span>
           {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
             <span className="flex sm:items-center">
-              <span className="px-[4px]">in</span>
+              <span className="px-[4px]">
+                <Trans>in</Trans>
+              </span>
               <DenomIconWithCurrency
                 currency={cryptoCurrency}
                 className="sm:pt-10"

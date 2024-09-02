@@ -1,5 +1,5 @@
-/* eslint-disable lingui/no-unlocalized-strings */
-import { useFormContext, UseFormRegister } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
+import { Trans } from '@lingui/macro';
 import { cryptoOptions } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
@@ -19,11 +19,13 @@ export function CryptoOptions({
   return (
     <div>
       <Title variant="h2" className="text-lg font-black">
-        Crypto purchase options
+        <Trans>Crypto purchase options</Trans>
       </Title>
       <p className="font-['Lato'] text-base m-0 text-grey-500 pb-[12px]">
-        Credits purchased with crypto can be purchased in either a retired or
-        tradable state.
+        <Trans>
+          Credits purchased with crypto can be purchased in either a retired or
+          tradable state.
+        </Trans>
       </p>
       <RadioGroup className="gap-10">
         {cryptoOptions.map(({ label, description, linkTo, value }) => (
@@ -49,7 +51,7 @@ export function CryptoOptions({
                   className="pl-10 hover:opacity-80"
                   rel="noreferrer"
                 >
-                  Learn more »
+                  <Trans>Learn more</Trans> »
                 </a>
               </p>
             }

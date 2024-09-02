@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { Trans } from '@lingui/macro';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { LeafIcon } from 'web-components/src/components/icons/LeafIcon';
@@ -62,7 +63,7 @@ export const CreditsInput = ({
         }}
         endAdornment={
           <span className="flex items-center">
-            <LeafIcon className="mx-5" /> credits
+            <LeafIcon className="mx-5" /> <Trans>credits</Trans>
           </span>
         }
       />

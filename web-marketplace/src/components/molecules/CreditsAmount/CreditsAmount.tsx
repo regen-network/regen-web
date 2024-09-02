@@ -1,5 +1,6 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { Trans } from '@lingui/macro';
 import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 
 import {
@@ -123,8 +124,10 @@ export const CreditsAmount = ({
       </div>
       {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
         <em className="italic text-xs m-0 py-20 self-start justify-self-start  sm:mb-20">
-          Credit prices vary. By default the lowest priced credits will be
-          purchased first.
+          <Trans>
+            Credit prices vary. By default the lowest priced credits will be
+            purchased first.
+          </Trans>
         </em>
       )}
     </div>

@@ -1,4 +1,4 @@
-import { ChangeEvent, lazy, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, lazy, useCallback, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';

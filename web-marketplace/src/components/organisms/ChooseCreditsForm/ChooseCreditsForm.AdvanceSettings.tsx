@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import { Trans } from '@lingui/macro';
 import { Link } from 'web-marketplace/src/components/atoms';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -30,7 +31,7 @@ export function AdvanceSettings({
           <span className="text-base w-10 inline-block mr-5">
             {advanceSettingsOpen ? '-' : '+'}
           </span>
-          Advanced settings
+          <Trans>Advanced settings</Trans>
         </TextButton>
         {advanceSettingsOpen && (
           <div
@@ -39,9 +40,13 @@ export function AdvanceSettings({
             } flex flex-grow justify-end items-center font-['Lato'] text-base flex-col mt-4 overflow-hidden transition-all duration-500 ease-in-out max-h-0`}
           >
             <p className="self-start text-sm ">
-              Choose specific credit vintages{' '}
+              <Trans>Choose specific credit vintages</Trans>{' '}
               <span className="italic">
-                (by default the cheapest credit vintage will be purchased first)
+                (
+                <Trans>
+                  by default the cheapest credit vintage will be purchased first
+                </Trans>
+                )
               </span>
             </p>
             {creditVintages.map(({ date, credits, batchDenom }) => (
@@ -58,14 +63,16 @@ export function AdvanceSettings({
                   onChange={handleCreditVintageOptions}
                 />
                 <p className="pl-[32px] m-0 mt-5 text-sm">
-                  <span className="italic">{credits} credits available</span>
+                  <span className="italic">
+                    {credits} <Trans>credits available</Trans>
+                  </span>
                   <span className="px-[4px]">|</span>
                   <Link
                     target="_blank"
                     href={`/credit-batches/${batchDenom}`}
                     className="text-brand-300 uppercase bg-transparent border-none font-bold hover:opacity-80 text-xs"
                   >
-                    view batch »
+                    <Trans>view batch</Trans> »
                   </Link>
                 </p>
               </div>

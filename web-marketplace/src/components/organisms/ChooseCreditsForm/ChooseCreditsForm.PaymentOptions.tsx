@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react';
+import { Trans } from '@lingui/macro';
 
 import CreditCardIcon from 'web-components/src/components/icons/CreditCardIcon';
 import CryptoIcon from 'web-components/src/components/icons/CryptoIcon';
@@ -60,7 +61,10 @@ function ChooseCreditButtonGroup({
       >
         <CreditCardIcon />
         <div className="lowercase≈">
-          <span className="capitalize">buy</span> with credit card
+          <span className="capitalize">
+            <Trans>buy</Trans>
+          </span>{' '}
+          <Trans>with credit card</Trans>
         </div>
       </ChooseCreditButton>
       <ChooseCreditButton
@@ -70,7 +74,10 @@ function ChooseCreditButtonGroup({
       >
         <CryptoIcon />
         <div className="lowercase">
-          <span className="capitalize">buy</span> with crypto
+          <span className="capitalize">
+            <Trans>buy</Trans>
+          </span>{' '}
+          <Trans>with crypto</Trans>
         </div>
       </ChooseCreditButton>
     </div>

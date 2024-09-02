@@ -40,7 +40,7 @@ const SellOrdersTable = ({
           tableLabel={_(msg`Sell orders`)}
           headerRows={SellOrdersRow}
           rows={sellOrders.map(sellOrder =>
-            getSellOrdersTableRow({ sellOrder }),
+            getSellOrdersTableRow({ sellOrder, _ }),
           )}
           sortCallbacks={sortCallbacks}
           renderActionButtons={renderActionButtonsFunc}

@@ -155,7 +155,7 @@ export const useEmailConfirmationData = ({
           },
         });
         if (response.error) {
-          if (response.error === CONNECTED_EMAIL_ERROR_TITLE) {
+          if (response.error === _(CONNECTED_EMAIL_ERROR_TITLE)) {
             setIsConnectedEmailErrorModalOpen(true);
           }
         }

@@ -15,122 +15,83 @@ import {
 } from './CreditsAmount.constants';
 import { CreditsAmountHeader } from './CreditsAmount.Header';
 import { CreditsAmountProps } from './CreditsAmount.types';
-import { getCurrencyPrice } from './CreditsAmount.utils';
+import {
+  getCreditsAvailablePerCurrency,
+  getCurrencyPrice,
+} from './CreditsAmount.utils';
 import { CreditsInput } from './CreditsInput';
 import { CurrencyInput } from './CurrecyInput';
 
 export const CreditsAmount = ({
-  creditsAvailable,
+  creditDetails,
   paymentOption,
+  currency,
+  setCurrency,
 }: CreditsAmountProps) => {
   const [pricePerCredit, setPricePerCredit] = useState(
-    getCurrencyPrice(CURRENCIES.usd),
+    getCurrencyPrice(CURRENCIES.usd, creditDetails),
   );
   const [maxCreditsSelected, setMaxCreditsSelected] = useState(false);
-  const form = useFormContext();
-
-  const [currency, setCurrency] = useState<Currency>(
-    paymentOption === PAYMENT_OPTIONS.CRYPTO
-      ? DEFAULT_CRYPTO_CURRENCY
-      : CURRENCIES.usd,
-  );
-
-  const getCreditsAvailablePerCurrency = useCallback(
-    (currency: Currency) => {
-      const curr = creditsAvailable.find(item => item.currency === currency);
-      return curr?.credits || 0;
-    },
-    [creditsAvailable],
-  );
+  const { setValue } = useFormContext();
 
   const [creditsAvailablePerCurrency, setCreditsAvailablePerCurrency] =
-    useState(getCreditsAvailablePerCurrency(currency));
+    useState(getCreditsAvailablePerCurrency(currency, creditDetails));
 
-  const resetFormValues = useCallback(() => {
-    form.setValue(CREDITS_AMOUNT, 0);
-    form.setValue(CURRENCY_AMOUNT, 0);
+  useEffect(() => {
     setMaxCreditsSelected(false);
-    const currency =
-      paymentOption === PAYMENT_OPTIONS.CRYPTO
-        ? DEFAULT_CRYPTO_CURRENCY
-        : CURRENCIES.usd;
-    setCreditsAvailablePerCurrency(getCreditsAvailablePerCurrency(currency));
-    const newPrice = getCurrencyPrice(currency);
+    setCreditsAvailablePerCurrency(
+      getCreditsAvailablePerCurrency(currency, creditDetails),
+    );
+    const newPrice = getCurrencyPrice(currency, creditDetails);
     setPricePerCredit(newPrice);
-    if (paymentOption === PAYMENT_OPTIONS.CRYPTO) {
-      setCurrency(DEFAULT_CRYPTO_CURRENCY);
-    }
-    if (paymentOption === PAYMENT_OPTIONS.CARD) {
-      setCurrency(CURRENCIES.usd);
-    }
-  }, [form, getCreditsAvailablePerCurrency, paymentOption]);
+    setCurrency(currency);
+  }, [creditDetails, currency, paymentOption, setCurrency]);
 
   // Max credits set
   useEffect(() => {
     if (maxCreditsSelected) {
-      form.setValue(CREDITS_AMOUNT, creditsAvailablePerCurrency);
-      form.setValue(
-        CURRENCY_AMOUNT,
-        creditsAvailablePerCurrency * pricePerCredit,
-      );
+      setValue(CREDITS_AMOUNT, creditsAvailablePerCurrency);
+      setValue(CURRENCY_AMOUNT, creditsAvailablePerCurrency * pricePerCredit);
       setMaxCreditsSelected(false);
     }
   }, [
     creditsAvailablePerCurrency,
     pricePerCredit,
-    form,
     maxCreditsSelected,
     setMaxCreditsSelected,
+    setValue,
   ]);
-
-  useEffect(() => {
-    resetFormValues();
-  }, [paymentOption, resetFormValues]);
-
-  // Currency amount change
-  const handleCurrencyAmountChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      let value = e.target.value;
-      const currentCurrencyAmount = parseInt(value, 10) || 1;
-      const creditsQty = currentCurrencyAmount / pricePerCredit;
-      form.setValue(CREDITS_AMOUNT, creditsQty, {
-        shouldDirty: true,
-      });
-    },
-    [pricePerCredit, form],
-  );
 
   // Credits amount change
   const handleCreditsAmountChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      const currentCreditsAmount = parseFloat(e.target.value);
-      form.setValue(CREDITS_AMOUNT, currentCreditsAmount, {
-        shouldDirty: true,
-      });
+      const currentCreditsAmount = e.target.valueAsNumber;
+      setValue(CREDITS_AMOUNT, currentCreditsAmount);
 
-      const currentCurrencyAmount =
-        parseInt(e.target.value, 10) * pricePerCredit;
-      form.setValue(CURRENCY_AMOUNT, currentCurrencyAmount, {
-        shouldDirty: true,
-      });
+      const currentCurrencyAmount = parseFloat(e.target.value) * pricePerCredit;
+      setValue(CURRENCY_AMOUNT, currentCurrencyAmount);
     },
-    [pricePerCredit, form],
+    [pricePerCredit, setValue],
   );
 
   // Currency type change
   const handleCurrencyChange = useCallback(
-    (currency: CryptoCurrencies | string) => {
-      // TO-DO get real prices from API?
-      const newPrice = getCurrencyPrice(currency as CryptoCurrencies);
-      setPricePerCredit(newPrice);
-      form.setValue(CURRENCY_AMOUNT, 0);
-      form.setValue(CREDITS_AMOUNT, 0);
-      setCurrency(currency as Currency);
-      setCreditsAvailablePerCurrency(
-        getCreditsAvailablePerCurrency(currency as Currency),
+    (currency: string) => {
+      const newPrice = getCurrencyPrice(
+        currency as CryptoCurrencies,
+        creditDetails,
       );
+      setPricePerCredit(newPrice);
+      setValue(CURRENCY_AMOUNT, 0);
+      setValue(CREDITS_AMOUNT, 0);
+      setCurrency(currency as Currency);
+      const creditsAvailablePerCurrency = getCreditsAvailablePerCurrency(
+        currency as Currency,
+        creditDetails,
+      );
+      setCreditsAvailablePerCurrency(creditsAvailablePerCurrency);
     },
-    [form, getCreditsAvailablePerCurrency],
+    [creditDetails, setCurrency, setValue],
   );
 
   return (
@@ -145,9 +106,13 @@ export const CreditsAmount = ({
         <CurrencyInput
           maxCurrencyAmount={creditsAvailablePerCurrency * pricePerCredit}
           paymentOption={paymentOption}
-          handleCurrencyAmountChange={handleCurrencyAmountChange}
           handleCurrencyChange={handleCurrencyChange}
-          defaultCryptoCurrency={DEFAULT_CRYPTO_CURRENCY}
+          defaultCryptoCurrency={
+            currency === CURRENCIES.usd ? DEFAULT_CRYPTO_CURRENCY : currency
+          }
+          creditDetails={creditDetails}
+          currency={currency}
+          setCurrency={setCurrency}
         />
         <span className="p-10 sm:p-20 text-xl">=</span>
         <CreditsInput

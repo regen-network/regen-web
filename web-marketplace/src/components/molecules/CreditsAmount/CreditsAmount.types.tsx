@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import { CreditDetails } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
 import {
   CryptoCurrencies,
@@ -7,11 +8,10 @@ import {
 
 export type PaymentOptionsType = 'card' | 'crypto';
 export interface CreditsAmountProps {
-  creditsAvailable: {
-    credits: number;
-    currency: Currency;
-  }[];
+  creditDetails: CreditDetails[];
   paymentOption: PaymentOptionsType;
+  currency: Currency;
+  setCurrency: (currency: Currency) => void;
 }
 
 export interface CreditsInputProps {
@@ -23,7 +23,9 @@ export interface CreditsInputProps {
 export interface CurrencyInputProps {
   maxCurrencyAmount: number;
   paymentOption: PaymentOptionsType;
-  handleCurrencyAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleCurrencyChange: (currency: CryptoCurrencies | string) => void;
   defaultCryptoCurrency: CryptoCurrencies;
+  creditDetails: CreditDetails[];
+  currency: Currency;
+  setCurrency: (currency: Currency) => void;
 }

@@ -1,9 +1,14 @@
+import { useFormContext } from 'react-hook-form';
+import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
+import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
+
 import { SetMaxButton } from 'web-components/src/components/buttons/SetMaxButton';
 import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
-import { Currency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import {
+  CURRENCIES,
+  Currency,
+} from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { Title } from 'web-components/src/components/typography/Title';
-
-import { PAYMENT_OPTIONS } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 
 export function CreditsAmountHeader({
   creditsAvailable,
@@ -16,6 +21,9 @@ export function CreditsAmountHeader({
   currency: Currency;
   paymentOption: string;
 }) {
+  const cryptoCurrency =
+    currency === CURRENCIES.usd ? CURRENCIES.uregen : currency;
+  const { clearErrors } = useFormContext<ChooseCreditsFormSchemaType>();
   return (
     <div className="flex justify-between items-center my-15 sm:mt-30">
       <Title variant="h2" className="text-lg font-black">
@@ -38,7 +46,10 @@ export function CreditsAmountHeader({
           {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
             <span className="flex sm:items-center">
               <span className="px-[4px]">in</span>
-              <DenomIconWithCurrency currency={currency} className="sm:pt-10" />
+              <DenomIconWithCurrency
+                currency={cryptoCurrency}
+                className="sm:pt-10"
+              />
             </span>
           )}
         </div>
@@ -46,6 +57,7 @@ export function CreditsAmountHeader({
           onClick={event => {
             event.preventDefault();
             setMaxCreditsSelected(true);
+            clearErrors();
           }}
         />
       </div>

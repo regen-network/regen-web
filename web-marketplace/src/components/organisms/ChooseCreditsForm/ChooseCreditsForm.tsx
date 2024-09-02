@@ -3,12 +3,15 @@ import {
   MouseEvent,
   Suspense,
   useCallback,
-  useMemo,
+  useEffect,
   useState,
 } from 'react';
 import { SubmitHandler, useWatch } from 'react-hook-form';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
-import { DEFAULT_CRYPTO_CURRENCY } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
+import {
+  CREDITS_AMOUNT,
+  CURRENCY_AMOUNT,
+} from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
 
@@ -24,39 +27,47 @@ import { PAYMENT_OPTIONS } from './ChooseCreditsForm.constants';
 import { CryptoOptions } from './ChooseCreditsForm.CryptoOptions';
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
 import {
-  chooseCreditsFormSchema,
   ChooseCreditsFormSchemaType,
+  createChooseCreditsFormSchema,
 } from './ChooseCreditsForm.schema';
-import { PaymentOptionsType } from './ChooseCreditsForm.types';
+import {
+  CreditDetails,
+  CreditsVintages,
+  PaymentOptionsType,
+} from './ChooseCreditsForm.types';
+import { getSpendingCap } from './ChooseCreditsForm.utils';
 
 export function ChooseCreditsForm({
   creditVintages,
-  creditsAvailable,
+  creditDetails,
 }: {
-  creditVintages: { date: string; credits: string; batchDenom: string }[];
-  creditsAvailable: {
-    credits: number;
-    currency: Currency;
-  }[];
+  creditVintages: CreditsVintages[];
+  creditDetails: CreditDetails[];
 }) {
   const [paymentOption, setPaymentOption] = useState<PaymentOptionsType>(
     PAYMENT_OPTIONS.CARD,
   );
   const [advanceSettingsOpen, setAdvanceSettingsOpen] = useState(false);
 
-  const toggleAdvancedSettings = (e: MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    setAdvanceSettingsOpen(prev => !prev);
-  };
+  const [spendingCap, setSpendingCap] = useState(
+    getSpendingCap(CURRENCIES.usd, creditDetails),
+  );
+  const [currency, setCurrency] = useState<Currency>(CURRENCIES.usd);
+
+  const chooseCreditsFormSchema = createChooseCreditsFormSchema({
+    creditsCap: creditDetails.find(credit => credit.currency === currency)
+      ?.availableCredits!,
+    spendingCap,
+  });
 
   const form = useZodForm({
     schema: chooseCreditsFormSchema,
     defaultValues: {
-      amountCurrency: 1,
-      amountCredits: 1,
+      [CURRENCY_AMOUNT]: 0,
+      [CREDITS_AMOUNT]: 0,
       retiring: true,
     },
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   const retiring = useWatch({
@@ -69,28 +80,60 @@ export function ChooseCreditsForm({
     name: 'creditVintageOptions',
   });
 
-  const handleOnSubmit: SubmitHandler<ChooseCreditsFormSchemaType> = data => {
-    // TO-DO
-  };
+  useEffect(() => {
+    form.reset({
+      [CURRENCY_AMOUNT]: 0,
+      [CREDITS_AMOUNT]: 0,
+      retiring,
+    });
+  }, [form, spendingCap, currency, retiring]);
 
-  const handleCryptoPurchaseOptions = () => {
+  useEffect(() => {
+    setSpendingCap(getSpendingCap(currency, creditDetails));
+  }, [creditDetails, currency]);
+
+  const handleOnSubmit: SubmitHandler<ChooseCreditsFormSchemaType> =
+    useCallback(data => {
+      // TO-DO
+    }, []);
+
+  const handleCryptoPurchaseOptions = useCallback(() => {
     form.setValue('retiring', !retiring);
-  };
+  }, [form, retiring]);
 
-  const handleCreditVintageOptions = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const checked = e.target.checked;
-    const currentValues = creditVintageOptions || [];
-    const updatedValues = checked
-      ? [...currentValues, value]
-      : currentValues.filter(item => item !== value);
+  const handleCreditVintageOptions = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      const checked = e.target.checked;
+      const currentValues = creditVintageOptions || [];
+      const updatedValues = checked
+        ? [...currentValues, value]
+        : currentValues.filter(item => item !== value);
 
-    form.setValue('creditVintageOptions', updatedValues);
-  };
+      form.setValue('creditVintageOptions', updatedValues);
+    },
+    [creditVintageOptions, form],
+  );
 
-  const handlePaymentOptions = (option: string) => {
-    setPaymentOption(option as PaymentOptionsType);
-  };
+  const handlePaymentOptions = useCallback(
+    (option: string) => {
+      setPaymentOption(option as PaymentOptionsType);
+      if (option === PAYMENT_OPTIONS.CRYPTO) {
+        setCurrency(CURRENCIES.uregen);
+        setSpendingCap(getSpendingCap(CURRENCIES.uregen, creditDetails));
+      }
+      if (option === PAYMENT_OPTIONS.CARD) {
+        setCurrency(CURRENCIES.usd);
+        setSpendingCap(getSpendingCap(CURRENCIES.usd, creditDetails));
+      }
+    },
+    [creditDetails],
+  );
+
+  const toggleAdvancedSettings = useCallback((e: MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    setAdvanceSettingsOpen(prev => !prev);
+  }, []);
 
   return (
     <Suspense fallback={<Loading />}>
@@ -102,8 +145,10 @@ export function ChooseCreditsForm({
         >
           <PaymentOptions setPaymentOption={handlePaymentOptions} />
           <CreditsAmount
-            creditsAvailable={creditsAvailable}
+            creditDetails={creditDetails}
             paymentOption={paymentOption}
+            currency={currency}
+            setCurrency={setCurrency}
           />
           {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
             <CryptoOptions

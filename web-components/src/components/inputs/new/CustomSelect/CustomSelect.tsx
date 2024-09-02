@@ -37,7 +37,7 @@ const CustomSelect = ({
   }, [options, selectedOption, setOptionComponent]);
 
   return (
-    <div className="relative items-center inline-block p-10 pt-15">
+    <div className="relative items-center inline-block p-10 pt-15 custom-select">
       <Placeholder
         setIsOpen={setIsOpen}
         isOpen={isOpen}

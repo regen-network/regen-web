@@ -1,3 +1,4 @@
+import { i18n } from '@lingui/core';
 import {
   CREDITS_AMOUNT,
   CURRENCY_AMOUNT,
@@ -23,7 +24,7 @@ export const createChooseCreditsFormSchema = ({
       .positive(positiveNumber)
       .max(
         spendingCap,
-        `${maxAmount} ${spendingCap.toLocaleString(undefined, {
+        `${i18n._(maxAmount)} ${spendingCap.toLocaleString(undefined, {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         })}`,
@@ -31,7 +32,7 @@ export const createChooseCreditsFormSchema = ({
     [CREDITS_AMOUNT]: z.coerce
       .number()
       .positive(positiveNumber)
-      .max(creditsCap, `${maxCredits} ${creditsCap}`),
+      .max(creditsCap, `${i18n._(maxCredits)} ${creditsCap}`),
     retiring: z.boolean(),
     creditVintageOptions: z.array(z.string()),
   });

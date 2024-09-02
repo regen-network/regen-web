@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { cryptoOptions } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
@@ -16,6 +17,7 @@ export function CryptoOptions({
   handleCryptoPurchaseOptions: () => void;
 }) {
   const { register } = useFormContext<ChooseCreditsFormSchemaType>();
+  const { _ } = useLingui();
   return (
     <div>
       <Title variant="h2" className="text-lg font-black">
@@ -36,15 +38,15 @@ export function CryptoOptions({
             })}
             onChange={handleCryptoPurchaseOptions}
             selectedValue={retiring}
-            key={label}
+            key={_(label)}
             label={
               <span className="block text-base font-bold font-['Lato']">
-                {label}
+                {_(label)}
               </span>
             }
             description={
               <p className="text-black text-sm font-normal font-['Lato'] my-0">
-                {description}
+                {_(description)}
                 <a
                   href={linkTo}
                   target="_blank"

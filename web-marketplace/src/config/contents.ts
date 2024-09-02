@@ -1,2 +1,3 @@
-export const ERROR_BANNER =
-  'Please connect to Keplr to use Regen Ledger features';
+import { msg } from '@lingui/macro';
+
+export const ERROR_BANNER = msg`Please connect to Keplr to use Regen Ledger features`;

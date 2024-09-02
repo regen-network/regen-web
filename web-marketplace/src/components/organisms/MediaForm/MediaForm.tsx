@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useFormState } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
@@ -19,7 +19,7 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
 
 import { DEFAULT, PROJECTS_S3_PATH } from './MediaForm.constants';
-import { mediaFormSchema, MediaFormSchemaType } from './MediaForm.schema';
+import { getMediaFormSchema, MediaFormSchemaType } from './MediaForm.schema';
 import { MediaFormPhotos } from './MediaFormPhotos';
 import { MediaFormStory } from './MediaFormStory';
 
@@ -40,6 +40,7 @@ export const MediaForm = ({
 }: MediaFormProps): JSX.Element => {
   const { _ } = useLingui();
   const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
+  const mediaFormSchema = useMemo(() => getMediaFormSchema(_), [_]);
   const form = useZodForm({
     schema: mediaFormSchema,
     draftSchema: mediaFormSchema, // same schema since all fields are optional

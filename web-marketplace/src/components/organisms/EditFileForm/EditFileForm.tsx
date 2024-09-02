@@ -51,7 +51,6 @@ export const EditFileForm = ({
   const ctx = useFormContext<PostFormSchemaType>();
   const { register, control, setValue, formState } = ctx;
   const { errors } = formState;
-  const { _ } = useLingui();
 
   const files = useWatch({ control: control, name: 'files' });
   const file = files?.[currentIndex];

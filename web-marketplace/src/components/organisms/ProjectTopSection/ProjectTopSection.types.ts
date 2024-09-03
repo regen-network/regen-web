@@ -47,6 +47,7 @@ export type ProjectTopSectionProps = {
   onChainCreditClassId?: string;
   program?: Account;
   projectPrefinancing?: ProjectPrefinancing | null;
+  isSoldOut: boolean;
 };
 
 export type SdgType = SdgByIriQuery['allSdg'][0];

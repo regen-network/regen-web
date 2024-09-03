@@ -1,6 +1,6 @@
 import { msg } from '@lingui/macro';
 
-export const SOLD_OUT_TOOLTIP = msg`These credits are sold out and will not be available in the future.`;
+export const SOLD_OUT_TOOLTIP = msg`These credits are currently sold out. More may become available in the future.`;
 export const NO_CREDITS_TOOLTIP = msg`There are currently no open sell orders for this project.`;
 export const COMMUNITY_FILTER = msg`Show community credits`;
 export const OFFCHAIN_FILTER = msg`Show off-chain projects`;

@@ -120,12 +120,15 @@ export const CreditPrice = ({
             alignItems: 'center',
           }}
         >
-          {isSoldOut ? (
+          {isSoldOut && !isPrefinanceProject ? (
             <GradientBadge label={SOLD_OUT} />
           ) : (
-            purchaseInfo?.sellInfo?.creditsAvailable ??
-            projectPrefinancing?.estimatedIssuance ??
-            '0'
+            <>
+              {purchaseInfo?.sellInfo?.creditsAvailable ??
+                projectPrefinancing?.estimatedIssuance ??
+                '0'}
+              {isSoldOut && <GradientBadge className="ml-5" label={SOLD_OUT} />}
+            </>
           )}
           {creditsTooltip && (
             <InfoTooltipWithIcon

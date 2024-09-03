@@ -15,6 +15,7 @@ type ProjectsContextType = {
   prefinanceProjectsCount?: number;
   prefinanceProjectsContent?: Maybe<PrefinanceProjects>;
   pagesCount: number;
+  soldOutProjectsIds: string[];
 };
 
 export const useProjectsContext = (): ProjectsContextType => {

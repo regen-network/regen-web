@@ -63,6 +63,7 @@ function ProjectTopSection({
   onChainCreditClassId,
   program,
   projectPrefinancing,
+  isSoldOut,
 }: ProjectTopSectionProps): JSX.Element {
   const { classes } = useProjectTopSectionStyles();
   const { ecocreditClient } = useLedger();
@@ -224,7 +225,10 @@ function ProjectTopSection({
             </Body>
           )}
           {projectPrefinancing && (
-            <Prefinance projectPrefinancing={projectPrefinancing} />
+            <Prefinance
+              projectPrefinancing={projectPrefinancing}
+              isSoldOut={isSoldOut}
+            />
           )}
           <ProjectTopSectionCreditClassCard
             creditClassSanity={creditClassSanity}

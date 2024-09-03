@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
+import { useLingui } from '@lingui/react';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
@@ -12,6 +13,7 @@ import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIc
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
 import SEO from 'web-components/src/components/seo';
 import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
@@ -44,6 +46,7 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
+import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constants';
 import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Link } from 'components/atoms';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
@@ -93,6 +96,7 @@ function ProjectDetails(): JSX.Element {
   const { isKeplrMobileWeb } = useWallet();
   const navigate = useNavigate();
   const { activeAccount } = useAuth();
+  const { _ } = useLingui();
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -334,6 +338,21 @@ function ProjectDetails(): JSX.Element {
     }));
   }, [credits, projectsWithOrderData]);
 
+  const isSoldOut = useMemo(
+    () =>
+      (offChainProject?.id &&
+        soldOutProjectsIds.includes(offChainProject?.id)) ||
+      (onChainProject?.id && soldOutProjectsIds.includes(onChainProject?.id)) ||
+      (offChainProject?.slug &&
+        soldOutProjectsIds.includes(offChainProject?.slug)),
+    [
+      offChainProject?.id,
+      offChainProject?.slug,
+      onChainProject?.id,
+      soldOutProjectsIds,
+    ],
+  );
+
   if (
     !loadingDb &&
     !loadingAnchoredMetadata &&
@@ -431,19 +450,32 @@ function ProjectDetails(): JSX.Element {
               : undefined
           }
           isPrefinanceProject={isPrefinanceProject}
+          isSoldOut={isSoldOut}
         >
           {!isAdmin &&
             isPrefinanceProject &&
             projectPrefinancing?.stripePaymentLink && (
-              <Link href={projectPrefinancing?.stripePaymentLink}>
-                <ContainedButton
-                  className="bg-purple-gradient"
-                  startIcon={<PrefinanceIcon width="24" height="24" />}
-                  sx={{ height: '100%' }}
-                >
-                  {PREFINANCE}
-                </ContainedButton>
-              </Link>
+              <InfoTooltip
+                title={isSoldOut ? _(SOLD_OUT_TOOLTIP) : ''}
+                arrow
+                placement="top"
+              >
+                <span>
+                  <ContainedButton
+                    className="bg-purple-gradient"
+                    startIcon={<PrefinanceIcon width="24" height="24" />}
+                    sx={{ height: '100%' }}
+                    disabled={isSoldOut}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    href={
+                      isSoldOut ? '' : projectPrefinancing?.stripePaymentLink
+                    }
+                  >
+                    {PREFINANCE}
+                  </ContainedButton>
+                </span>
+              </InfoTooltip>
             )}
         </SellOrdersActionsBar>
       )}
@@ -474,6 +506,7 @@ function ProjectDetails(): JSX.Element {
         onChainCreditClassId={onChainCreditClassId}
         program={program}
         projectPrefinancing={projectPrefinancing}
+        isSoldOut={isSoldOut}
       />
 
       {hasProjectPhotos && (

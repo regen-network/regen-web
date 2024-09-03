@@ -72,8 +72,8 @@ export default function PostCard({
         publicPost={publicPost}
       />
       {!hasFile && (
-        <div className="flex gap-5 absolute md:right-[90px] top-[18px] md:top-[26px]">
-          {privacyLabel && <PrivateBadge label={privacyLabel} />}
+        <div className="absolute lg:right-[90px] top-[18px] lg:top-[26px]">
+          {!draftLabel && privacyLabel && <PrivateBadge label={privacyLabel} />}
           {draftLabel && <DraftBadge label={draftLabel} />}
         </div>
       )}
@@ -184,8 +184,10 @@ export default function PostCard({
                 position: 'relative',
               })}
             >
-              <div className="flex gap-5 absolute z-[1] left-[12px] top-[12px]">
-                {privacyLabel && <PrivateBadge label={privacyLabel} />}
+              <div className="absolute z-[1] left-[12px] top-[12px]">
+                {!draftLabel && privacyLabel && (
+                  <PrivateBadge label={privacyLabel} />
+                )}
                 {draftLabel && <DraftBadge label={draftLabel} />}
               </div>
               {file && (

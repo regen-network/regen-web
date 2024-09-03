@@ -173,7 +173,7 @@ export const DataStreamPost = ({
           {post.contents && (post.privacy !== 'private' || isAdmin) && (
             <PostCard
               draftLabel={!post.published ? _(DRAFT) : undefined}
-              onClick={() => navigate(`/post/${post.iri}`)}
+              onClick={() => post.published && navigate(`/post/${post.iri}`)}
               title={post.contents.title || _(msg`Untitled`)}
               comment={post.contents.comment}
               privacyLabel={

@@ -5,6 +5,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
@@ -38,7 +39,7 @@ import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/gra
 import { useAttestEvents } from 'pages/Post/hooks/useAttestEvents';
 import { useDelete } from 'pages/Post/hooks/useDelete';
 import { useSharePrivateLink } from 'pages/Post/hooks/useSharePrivateLink';
-import { ADMIN, POST_IS_PRIVATE } from 'pages/Post/Post.constants';
+import { ADMIN, DRAFT, POST_IS_PRIVATE } from 'pages/Post/Post.constants';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { DeletePostWarningModal } from 'components/organisms/DeletePostWarningModal/DeletePostWarningModal';
@@ -171,9 +172,9 @@ export const DataStreamPost = ({
         <TimelineContent className="mt-[-30px] mb-30 pr-0">
           {post.contents && (post.privacy !== 'private' || isAdmin) && (
             <PostCard
-              draft={!post.published}
+              draftLabel={!post.published ? _(DRAFT) : undefined}
               onClick={() => navigate(`/post/${post.iri}`)}
-              title={post.contents.title}
+              title={post.contents.title || _(msg`Untitled`)}
               comment={post.contents.comment}
               privacyLabel={
                 post.privacy === 'private'

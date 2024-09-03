@@ -41,6 +41,7 @@ import CryptoIcon from './CryptoIcon';
 import CurrentCreditsIcon from './CurrentCreditsIcon';
 import DocumentIcon from './DocumentIcon';
 import { DraftDocumentIcon } from './DraftDocumentIcon';
+import { DraftIcon } from './DraftIcon';
 import { DragIcon } from './DragIcon';
 import DropdownIcon from './DropdownIcon';
 import EditIcon from './EditIcon';
@@ -249,6 +250,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<DiscordIcon color="blue" />} label="DiscordIcon" />
     <LabeledIcon icon={<DocumentIcon />} label="DocumentIcon" />
     <LabeledIcon icon={<DraftDocumentIcon />} label="DraftDocumentIcon" />
+    <LabeledIcon icon={<DraftIcon />} label="DraftIcon" />
     <LabeledIcon icon={<DragIcon />} label="DragIcon" />
     <LabeledIcon icon={<DropdownIcon />} label="DropdownIcon" />
     <LabeledIcon icon={<EditIcon />} label="EditIcon" />

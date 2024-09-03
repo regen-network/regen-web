@@ -51,3 +51,32 @@ export const NoImage: Story = {
   },
   render: args => <PostCard {...args} signers={signers} />,
 };
+
+export const Draft: Story = {
+  args: {
+    ...commonArgs,
+    privacyLabel: 'Post is private',
+    isAdmin: true,
+    draftLabel: 'draft',
+  },
+  argTypes: {
+    handleClickShare: { action: 'handle share click' },
+    sharePrivateLink: { action: 'share private link' },
+  },
+  render: args => <PostCard {...args} signers={signers} />,
+};
+
+export const DraftPrivate: Story = {
+  args: {
+    ...commonArgs,
+    privacyLabel: 'Post is private',
+    numberOfFiles: 5,
+    isAdmin: true,
+    draftLabel: 'draft',
+  },
+  argTypes: {
+    handleClickShare: { action: 'handle share click' },
+    sharePrivateLink: { action: 'share private link' },
+  },
+  render: args => <PostCard {...args} signers={signers} />,
+};

@@ -14,8 +14,8 @@ export type PostFile = {
 };
 
 export type PostContents = JsonLdDocument & {
-  title: string;
-  comment: string;
+  title?: string;
+  comment?: string;
   files?: Array<PostFile>;
 };
 

@@ -13,12 +13,13 @@ import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import Card from '../Card';
 import { SIGNED_BY } from './PostCard.constants';
-import PrivateBadge from './PostCard.PrivateBadge';
+import { DraftBadge } from './PostCard.DraftBadge';
+import { PrivateBadge } from './PostCard.PrivateBadge';
 import ActionButton from './PostCardActionButton';
 
 interface PostCardProps {
   title: string;
-  comment: string;
+  comment?: string;
   imgSrc?: string;
   author: User;
   signers?: Array<User>;
@@ -32,7 +33,7 @@ interface PostCardProps {
   publicPost?: boolean;
   file?: FileToPreview;
   preview?: string;
-  draft?: boolean;
+  draftLabel?: string;
 }
 
 export default function PostCard({
@@ -50,7 +51,7 @@ export default function PostCard({
   onClick,
   publicPost,
   onDelete,
-  draft,
+  draftLabel,
 }: PostCardProps): JSX.Element {
   const hasFile = !!file;
   const theme = useTheme();
@@ -70,9 +71,13 @@ export default function PostCard({
         onDelete={onDelete}
         publicPost={publicPost}
       />
-      {!hasFile && privacyLabel && (
-        <PrivateBadge hasFile={hasFile} label={privacyLabel} />
+      {!hasFile && (
+        <div className="flex gap-5 absolute md:right-[90px] top-[18px] md:top-[26px]">
+          {privacyLabel && <PrivateBadge label={privacyLabel} />}
+          {draftLabel && <DraftBadge label={draftLabel} />}
+        </div>
       )}
+
       <Grid
         container
         sx={{
@@ -104,21 +109,23 @@ export default function PostCard({
               timestamp: 'text-xs',
             }}
           />
-          <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
-            <Body
-              onClick={e => e.stopPropagation()}
-              size="md"
-              sx={{ pb: 1.5 }}
-              className="line-clamp-2 overflow-hidden"
-            >
-              <Linkify
-                // eslint-disable-next-line lingui/no-unlocalized-strings
-                options={{ target: '_blank', rel: 'noopener noreferrer' }}
+          {comment && (
+            <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
+              <Body
+                onClick={e => e.stopPropagation()}
+                size="md"
+                sx={{ pb: 1.5 }}
+                className="line-clamp-2 overflow-hidden"
               >
-                {comment}
-              </Linkify>
-            </Body>
-          </Box>
+                <Linkify
+                  // eslint-disable-next-line lingui/no-unlocalized-strings
+                  options={{ target: '_blank', rel: 'noopener noreferrer' }}
+                >
+                  {comment}
+                </Linkify>
+              </Body>
+            </Box>
+          )}
           {signers && signers.length > 0 && (
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 3.5 }}>
               <VerifiedIcon color="white" hasFill />
@@ -177,9 +184,10 @@ export default function PostCard({
                 position: 'relative',
               })}
             >
-              {hasFile && privacyLabel && (
-                <PrivateBadge hasFile={hasFile} label={privacyLabel} />
-              )}
+              <div className="flex gap-5 absolute z-[1] left-[12px] top-[12px]">
+                {privacyLabel && <PrivateBadge label={privacyLabel} />}
+                {draftLabel && <DraftBadge label={draftLabel} />}
+              </div>
               {file && (
                 <FilePreview
                   className="w-[100%] h-[100%] group-hover:scale-x-105 group-hover:scale-y-105 transition-all duration-500"

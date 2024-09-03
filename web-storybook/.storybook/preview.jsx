@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { CssBaseline } from '@mui/material';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Buffer } from 'buffer';
 import { I18nProvider } from '@lingui/react';
+import { Buffer } from 'buffer';
 import { i18n } from '@lingui/core';
 
 import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';

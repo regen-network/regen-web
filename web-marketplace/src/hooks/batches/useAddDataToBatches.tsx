@@ -30,7 +30,6 @@ export const useAddDataToBatches = ({
     getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
-  /* TODO: this is limited to 100 results. We need to find a better way */
   const { data: createBatchTxs, isFetching: isLoadingCreateBatchTxs } =
     useQuery(
       getGetTxsEventQuery({

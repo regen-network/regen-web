@@ -38,6 +38,7 @@ import {
 import { DataStreamPost } from './ProjectDetails.DataStream.Post';
 
 type Props = {
+  adminAddr?: string | null;
   adminAccountId?: string | null;
   offChainProjectId?: string;
   adminDescription?: SanityBlockContent;
@@ -48,6 +49,7 @@ type Props = {
 };
 
 export const DataStream = ({
+  adminAddr,
   adminAccountId,
   offChainProjectId,
   adminDescription,
@@ -143,6 +145,7 @@ export const DataStream = ({
                         isAdmin={isAdmin}
                         adminAccountId={adminAccountId}
                         offChainProjectId={offChainProjectId}
+                        adminAddr={adminAddr}
                       />
                     ))}
                   </Timeline>

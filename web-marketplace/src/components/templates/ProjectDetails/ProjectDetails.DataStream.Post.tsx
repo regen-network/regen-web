@@ -56,6 +56,7 @@ type Props = {
   isAdmin: boolean;
   adminAccountId?: string | null;
   offChainProjectId?: string;
+  adminAddr?: string | null;
 };
 export const DataStreamPost = ({
   offChainProjectId,
@@ -64,6 +65,7 @@ export const DataStreamPost = ({
   postsLength,
   isAdmin,
   adminAccountId,
+  adminAddr,
 }: Props) => {
   const { _ } = useLingui();
   const graphqlClient =
@@ -95,6 +97,7 @@ export const DataStreamPost = ({
     creatorAccount,
     creatorIsAdmin,
     onlyAttestEvents: true,
+    adminAddr,
   });
 
   useEffect(() => {

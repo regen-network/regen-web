@@ -171,6 +171,7 @@ function Post(): JSX.Element {
                     offchainProject?.creditClassByCreditClassId
                       ?.accountByRegistryId?.addr
                   }
+                  adminAddr={offchainProject?.accountByAdminAccountId?.addr}
                 />
 
                 <PostFooter prevIri={data?.prevIri} nextIri={data?.nextIri} />

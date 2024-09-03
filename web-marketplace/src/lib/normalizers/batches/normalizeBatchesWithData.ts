@@ -1,4 +1,3 @@
-import { GetTxsEventResponse } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import {
   BatchInfo,
   QueryProjectResponse,
@@ -13,14 +12,15 @@ import {
 } from 'lib/db/types/json-ld';
 import { getTxHashForBatch } from 'lib/ecocredit/api';
 import { v1Alpha1BatchDenomMapping } from 'lib/ecocredit/ecocredit.config';
+import { GetTxsEventQueryResponse } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.types';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 type Props = {
   sanityCreditClassData?: AllCreditClassQuery;
   batches: BatchInfo[];
-  createBatchTxs?: GetTxsEventResponse | null;
-  createBatchAlphaTxs?: GetTxsEventResponse | null;
+  createBatchTxs?: GetTxsEventQueryResponse | null;
+  createBatchAlphaTxs?: GetTxsEventQueryResponse | null;
   batchesSupplyResult?: UseQueryResult<QuerySupplyResponse>[];
   batchesProjectResult?: UseQueryResult<QueryProjectResponse | null>[];
   batchesProjectMetadataResult?: UseQueryResult<

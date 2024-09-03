@@ -533,6 +533,7 @@ function ProjectDetails(): JSX.Element {
       </DetailsSection>
 
       <DataStream
+        adminAddr={offChainProject?.accountByAdminAccountId?.addr}
         adminAccountId={offChainProject?.adminAccountId}
         offChainProjectId={offChainProject?.id}
         adminDescription={sanityProjectPage?.dataStreamAdminDescriptionRaw}

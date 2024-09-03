@@ -73,6 +73,7 @@ export const CurrencyInput = ({
         onBlur={handleOnBlur}
         name={name}
         ref={ref}
+        type="number"
         className={`${
           isFocused
             ? 'border-2 border-solid border-grey-500'
@@ -82,7 +83,6 @@ export const CurrencyInput = ({
           max: maxCurrencyAmount,
           min: 0,
           step: '0.1',
-          type: 'number',
           'aria-label': 'Currency Input',
         }}
         sx={{

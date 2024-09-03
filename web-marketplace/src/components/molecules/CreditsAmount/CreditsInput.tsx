@@ -45,11 +45,11 @@ export const CreditsInput = ({
         className={`${
           isFocused ? 'border-2 border-grey-500' : 'border-grey-300'
         } border border-solid border-grey-300 flex items-center pr-10 sm:h-60`}
+        type="number"
         customInputProps={{
           step: '0.1',
           max: maxCreditsAvailable,
           min: 0,
-          type: 'number',
           'aria-label': 'Credits Input',
         }}
         onChange={onHandleChange}

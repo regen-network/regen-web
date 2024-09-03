@@ -1,4 +1,5 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -29,7 +30,8 @@ const WrappedResourcesCard: React.FC<
       title={<BlockContent content={resource?.titleRaw} />}
       description={<BlockContent content={resource?.descriptionRaw} />}
       updated={getFormattedDate(resource?.lastUpdated || resource?._updatedAt)}
-      buttonText={resource?.button?.buttonText}
+      buttonText={resource?.button?.buttonText ?? _(msg`view resource`)}
+      updatedLabel={_(msg`Last Updated:`)}
       target={getLinkTarget(resource?.button?.buttonBlankTarget)}
       link={getBtnHref(resource?.button)}
       draftText={_(DRAFT_TEXT)}

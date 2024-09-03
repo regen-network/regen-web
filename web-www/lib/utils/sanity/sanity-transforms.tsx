@@ -1,7 +1,5 @@
-import React from 'react';
-
 import { BlockContent } from 'web-components/src/components/block-content';
-import type { ArticleCardProps } from 'web-components/src/components/cards/ArticleCard';
+import type { ArticleCardProps } from 'web-components/src/components/cards/ArticleCard/ArticleCard';
 import type { ResourcesCardProps } from 'web-components/src/components/cards/ResourcesCard';
 import { Document } from 'web-components/src/components/table/DocumentationTable/DocumentationTable';
 import { formatDate } from 'web-components/src/utils/format';
@@ -12,7 +10,11 @@ import {
   MediaFieldsFragment,
   Resource,
 } from '@/generated/sanity-graphql';
-import { DRAFT_TEXT } from '@/lib/constants/shared.constants';
+import {
+  ARTICLE_CARD_BTN_TEXT_MAPPING,
+  DRAFT_TEXT,
+} from '@/lib/constants/shared.constants';
+import { ArticleType } from 'web-components/src/components/cards/ArticleCard/ArticleCard.types';
 
 /**
  *
@@ -70,9 +72,10 @@ export function sanityMediaToArticleCardProps(
       imgSrc: item?.image?.image?.asset?.url || item?.image?.imageHref || '',
       url: item?.href || '',
       name: item?.title || '',
-      type: item?.type || '',
+      type: (item?.type as ArticleType) || 'article',
       play: item?.type === 'video',
       draftText: DRAFT_TEXT,
+      btnTextMapping: ARTICLE_CARD_BTN_TEXT_MAPPING,
     };
   });
 }

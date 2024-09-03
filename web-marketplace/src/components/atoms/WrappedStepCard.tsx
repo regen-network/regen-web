@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import { StepCard } from 'web-components/src/components/cards/StepCard';
@@ -16,6 +18,7 @@ const WrappedStepCard: React.FC<
     stepCard: Maybe<StepCardFieldsFragment>;
   }>
 > = ({ openModal, stepNumber, stepCard }) => {
+  const { _ } = useLingui();
   if (!stepCard) {
     return null;
   }
@@ -53,6 +56,7 @@ const WrappedStepCard: React.FC<
         btnText: button?.buttonText,
         onBtnClick: () => onBtnClick(openModal, button),
       }}
+      stepLabel={_(msg`step`)}
     />
   );
 };

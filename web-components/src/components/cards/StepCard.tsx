@@ -16,7 +16,8 @@ import { Body, Label, Title } from '../typography';
 export interface StepCardProps {
   className?: string;
   icon?: JSX.Element;
-  step?: Step;
+  step: Step;
+  stepLabel: string;
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
 }
@@ -108,19 +109,11 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-const fallbackStep: Step = {
-  stepNumber: 404,
-  title: 'Not found',
-  tagName: 'Not found',
-  isActive: false,
-  description: 'Please set up content for this step number',
-  faqs: [],
-};
-
 function StepCard({
   className,
   icon,
-  step = fallbackStep,
+  step,
+  stepLabel,
   imageStorageBaseUrl,
   apiServerUrl,
 }: StepCardProps): JSX.Element {
@@ -191,7 +184,7 @@ function StepCard({
             mobileSize="sm"
             color={step.isActive ? 'secondary.main' : 'info.dark'}
           >
-            step {step.stepNumber}
+            {`${stepLabel} ${step.stepNumber}`}
           </Label>
           <Title
             variant="h4"

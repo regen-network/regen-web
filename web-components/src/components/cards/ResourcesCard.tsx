@@ -13,7 +13,8 @@ export interface ResourcesCardProps {
   title: JSX.Element | string;
   updated?: string;
   description: JSX.Element | string;
-  buttonText?: string | null;
+  buttonText: string;
+  updatedLabel: string;
   link: string;
   target?: string;
   backgroundGradient?: boolean;
@@ -35,7 +36,8 @@ export default function ResourcesCard({
   title,
   updated,
   description,
-  buttonText = 'view resource',
+  updatedLabel,
+  buttonText,
   link,
   target = '_blank',
   backgroundGradient = true,
@@ -66,7 +68,7 @@ export default function ResourcesCard({
         {updated && (
           <Body size="xs" color="info.main" mt={2}>
             <Label as="span" size="xs">
-              Last Updated:{' '}
+              {updatedLabel}{' '}
             </Label>
             {updated}
           </Body>

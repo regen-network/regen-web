@@ -25,6 +25,10 @@ interface CreditCardProps {
   onClick: () => void;
   width?: string;
   draftText: string;
+  numberOfHoldersLabel: string;
+  numberOfProjects: number;
+  numberOfProjectsLabel: string;
+  totalAmountLabel: string;
 }
 
 export default function CreditCard({
@@ -32,6 +36,9 @@ export default function CreditCard({
   onClick,
   width,
   draftText,
+  numberOfHoldersLabel,
+  numberOfProjectsLabel,
+  totalAmountLabel,
 }: CreditCardProps): JSX.Element {
   return (
     <MediaCard
@@ -51,9 +58,12 @@ export default function CreditCard({
       <Box mt={2}>
         <Credits
           numberOfHolders={credit.numberOfHolders}
+          numberOfHoldersLabel={numberOfHoldersLabel}
           numberOfProjects={credit.numberOfProjects}
-          amount={credit.amount}
+          numberOfProjectsLabel={numberOfProjectsLabel}
           totalAmount={credit.totalAmount}
+          totalAmountLabel={totalAmountLabel}
+          amount={credit.amount}
         />
       </Box>
     </MediaCard>

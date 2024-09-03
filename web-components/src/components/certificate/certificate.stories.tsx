@@ -1,5 +1,5 @@
 import Certificate from '.';
-import { certificateMock } from './certificate.mock';
+import { certificateLabels, certificateMock } from './certificate.mock';
 
 export default {
   title: 'Certificate',
@@ -11,5 +11,6 @@ export const certificate = (): JSX.Element => (
     {...certificateMock}
     background="./certificate-bg.png"
     linkComponent={({ children, href }) => <a href={href}>{children}</a>}
+    labels={certificateLabels}
   />
 );

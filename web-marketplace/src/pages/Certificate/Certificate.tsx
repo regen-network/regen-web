@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -15,6 +15,7 @@ import { LinkComponentType } from 'web-components/src/types/shared/linkComponent
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 
+import { getCertificateLabels } from './Certificate.constants';
 import { useCertificateStyles } from './Certificate.styles';
 import { getCertificateData } from './Certificate.utils';
 import { useFetchRetirement } from './hooks/useFetchRetirement';
@@ -32,6 +33,7 @@ function CertificatePage(): JSX.Element {
   });
 
   const certificateData = getCertificateData({ retirement, _ });
+  const certificateLabels = useMemo(() => getCertificateLabels(_), [_]);
 
   return (
     <div className={classes.root}>
@@ -51,6 +53,7 @@ function CertificatePage(): JSX.Element {
           >
             <Certificate
               {...certificateData}
+              labels={certificateLabels}
               background="/svg/topology.svg"
               linkComponent={Link as LinkComponentType}
             />

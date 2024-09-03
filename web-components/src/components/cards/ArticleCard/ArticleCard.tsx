@@ -1,25 +1,29 @@
 import { Box } from '@mui/material';
 
-import { PlayButton } from '../atoms/PlayButton/PlayButton';
-import OutlinedButton from '../buttons/OutlinedButton';
-import { Body } from '../typography';
-import MediaCard from './MediaCard/MediaCard';
+import { PlayButton } from '../../atoms/PlayButton/PlayButton';
+import OutlinedButton from '../../buttons/OutlinedButton';
+import { Body } from '../../typography';
+import MediaCard from '../MediaCard/MediaCard';
+import { ArticleType } from './ArticleCard.types';
 
-function getBtnText(type?: string | null): string {
+function getBtnText(
+  type: ArticleType,
+  btnTextMapping: Record<ArticleType, string>,
+): string {
   switch (type) {
     case 'video':
-      return 'watch video';
+      return btnTextMapping['video'];
     case 'article':
-      return 'read article';
+      return btnTextMapping['article'];
     case 'podcast':
-      return 'listen to podcast';
+      return btnTextMapping['podcast'];
     default:
-      return 'read article';
+      return btnTextMapping['article'];
   }
 }
 
 export interface ArticleCardProps {
-  type: string;
+  type: ArticleType;
   name: string;
   date: string;
   author: string;
@@ -28,6 +32,7 @@ export interface ArticleCardProps {
   className?: string;
   play?: boolean;
   draftText: string;
+  btnTextMapping: Record<ArticleType, string>;
 }
 
 export default function ArticleCard({
@@ -40,6 +45,7 @@ export default function ArticleCard({
   type,
   play = false,
   draftText,
+  btnTextMapping,
 }: ArticleCardProps): JSX.Element {
   return (
     <MediaCard
@@ -71,7 +77,7 @@ export default function ArticleCard({
           mx: [4, 5],
         }}
       >
-        {getBtnText(type)}
+        {getBtnText(type, btnTextMapping)}
       </OutlinedButton>
     </MediaCard>
   );

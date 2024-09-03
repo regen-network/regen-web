@@ -37,7 +37,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 export default function GlanceCard({
-  title = 'At a glance',
+  title,
   text,
   imgSrc,
   imageStorageBaseUrl,

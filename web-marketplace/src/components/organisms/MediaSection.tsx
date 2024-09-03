@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { makeStyles } from 'tss-react/mui';
 
-import ArticleCard from 'web-components/src/components/cards/ArticleCard';
+import ArticleCard from 'web-components/src/components/cards/ArticleCard/ArticleCard';
+import { ArticleType } from 'web-components/src/components/cards/ArticleCard/ArticleCard.types';
 import { SliderSection } from 'web-components/src/components/section/SliderSection';
 import { Theme } from 'web-components/src/theme/muiTheme';
 import { getFormattedDate } from 'web-components/src/utils/format';
@@ -30,6 +31,15 @@ const MediaSection: React.FC<React.PropsWithChildren<MediaSectionProps>> = ({
   const { _ } = useLingui();
   const { classes: styles } = useStyles();
 
+  const btnTextMapping: Record<ArticleType, string> = useMemo(
+    () => ({
+      video: _(msg`watch video`),
+      article: _(msg`read article`),
+      podcast: _(msg`listen to podcast`),
+    }),
+    [_],
+  );
+
   return (
     <div>
       <SliderSection
@@ -43,10 +53,11 @@ const MediaSection: React.FC<React.PropsWithChildren<MediaSectionProps>> = ({
               url={item?.href || ''}
               name={item?.title || ''}
               author={item?.author || ''}
-              type={item?.type || ''}
+              type={(item?.type as ArticleType) ?? 'article'}
               imgSrc={getSanityImgSrc(item?.image)}
               date={getFormattedDate(item?.date)}
               play={item?.type === 'video'}
+              btnTextMapping={btnTextMapping}
             />
           )) || []
         }

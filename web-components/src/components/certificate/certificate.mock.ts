@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 export const certificateMock = {
   date: '10-10-2020',
   txHash: { text: '321899...898123', href: '#' },
@@ -29,4 +30,17 @@ export const certificateMock = {
   ],
   retirementReason: 'For a better future for my children',
   retirementLocation: 'Denver, Colorado, United States',
+};
+
+export const certificateLabels = {
+  TX_HASH: 'Blockchain record',
+  EQUIVALENT_TO: 'Equivalent to',
+  CREDIT_UNIT: 'ton',
+  CREDIT_UNIT_SUFFIX: 'of CO2e',
+  NUMBER_OF_CREDITS: 'Number of credits',
+  PROJECT: 'Project',
+  CREDIT_CLASS: 'Credit class',
+  RETIRED_BY: 'Retired by',
+  RETIREMENT_REASON: 'Retirement reason',
+  RETIREMENT_LOCATION: 'Retirement location',
 };

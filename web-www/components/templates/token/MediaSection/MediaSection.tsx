@@ -1,7 +1,6 @@
-import React from 'react';
 import { useTheme } from '@mui/material';
 
-import ArticleCard from 'web-components/src/components/cards/ArticleCard';
+import ArticleCard from 'web-components/src/components/cards/ArticleCard/ArticleCard';
 import Section from 'web-components/src/components/section';
 import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
 import { Title } from 'web-components/src/components/typography';
@@ -9,7 +8,11 @@ import { Title } from 'web-components/src/components/typography';
 import { useMediaSectionStyles } from './MediaSection.styles';
 
 import { TokenMediaSectionFieldsFragment } from '@/generated/sanity-graphql';
-import { DRAFT_TEXT } from '@/lib/constants/shared.constants';
+import {
+  ARTICLE_CARD_BTN_TEXT_MAPPING,
+  DRAFT_TEXT,
+} from '@/lib/constants/shared.constants';
+import { ArticleType } from 'web-components/src/components/cards/ArticleCard/ArticleCard.types';
 
 type Props = {
   tokenMediaData?: TokenMediaSectionFieldsFragment;
@@ -27,11 +30,12 @@ const MediaSection = ({ tokenMediaData }: Props) => {
         url={item?.href || ''}
         name={item?.title || ''}
         author={item?.author || ''}
-        type={item?.type || ''}
+        type={(item?.type as ArticleType) || 'article'}
         imgSrc={item?.image?.image?.asset?.url || ''}
         date={item?.date}
         play={item?.type === 'videos'}
         draftText={DRAFT_TEXT}
+        btnTextMapping={ARTICLE_CARD_BTN_TEXT_MAPPING}
       />
     ),
   );

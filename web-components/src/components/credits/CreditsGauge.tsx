@@ -10,6 +10,8 @@ import GaugeText from './GaugeText';
 export interface CreditsProps {
   purchased: number; // current purchased amount
   issued: number; // total issued amount
+  creditsPurchasedLabel: string;
+  creditsIssuedLabel: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -29,14 +31,14 @@ export default function CreditsGauge(props: CreditsProps): JSX.Element {
           <GaugeText
             format
             number={props.purchased}
-            label={`${pluralize(props.purchased, 'credit')} purchased`}
+            label={props.creditsPurchasedLabel}
             textSize="xs"
           />
         )}
         <GaugeText
           format
           number={available}
-          label={`${pluralize(available, 'credit')} available`}
+          label={props.creditsIssuedLabel}
           textSize="xs"
         />
       </Grid>

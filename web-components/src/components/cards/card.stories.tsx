@@ -208,6 +208,7 @@ export const stepCard: React.FC<React.PropsWithChildren<unknown>> = () => {
         description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       }}
+      stepLabel="step"
     />
   );
 };
@@ -315,6 +316,8 @@ export const resourcesCard = (): JSX.Element => (
   <ResourcesCard
     title="Resources"
     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    buttonText="view resource"
+    updatedLabel="Last Updated:"
     link="#"
     image={{ publicURL: '/coorong.png' }}
     updated="July 4, 1776"

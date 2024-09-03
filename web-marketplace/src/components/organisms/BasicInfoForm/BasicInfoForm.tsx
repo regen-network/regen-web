@@ -112,6 +112,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
       } catch (e) {
         if (
           (e as Error)?.message.includes(
+            // eslint-disable-next-line lingui/no-unlocalized-strings
             'duplicate key value violates unique constraint "project_slug_key"',
           )
         ) {
@@ -142,15 +143,15 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
     >
       <OnBoardingCard>
         <TextField
-          label={BASIC_INFO_NAME_LABEL}
-          description={BASIC_INFO_NAME_DESCRIPTION}
-          placeholder={BASIC_INFO_NAME_PLACEHOLDER}
+          label={_(BASIC_INFO_NAME_LABEL)}
+          description={_(BASIC_INFO_NAME_DESCRIPTION)}
+          placeholder={_(BASIC_INFO_NAME_PLACEHOLDER)}
           error={!!errors['schema:name']}
           helperText={errors['schema:name']?.message}
           {...form.register('schema:name')}
         />
         <Box sx={{ display: 'flex', flexDirection: 'column', pt: [3, 12] }}>
-          <InputLabel>{BASIC_INFO_SIZE_LABEL}</InputLabel>
+          <InputLabel>{_(BASIC_INFO_SIZE_LABEL)}</InputLabel>
           <Box
             sx={{
               display: 'flex',

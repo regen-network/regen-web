@@ -1,3 +1,5 @@
+import { Trans } from '@lingui/macro';
+
 import { Body } from 'web-components/src/components/typography';
 
 import { Link } from 'components/atoms';
@@ -11,7 +13,7 @@ export const BasketOverviewTooltip = ({ text, href }: Props): JSX.Element => (
   <Body>
     {text}{' '}
     <Link href={href} target="_blank">
-      Learn more»
+      <Trans>Learn more»</Trans>
     </Link>
   </Body>
 );

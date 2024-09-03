@@ -1,6 +1,9 @@
+import { msg } from '@lingui/macro';
 import { formatDuration } from 'date-fns';
 
-export function fromISO8601(iso8601Duration: string) {
+import { TranslatorType } from 'lib/i18n/i18n.types';
+
+export function fromISO8601(iso8601Duration: string, _: TranslatorType) {
   const iso8601DurationRegex =
     /(-)?P(-)?(?:([.,\d]+)Y)?(?:([.,\d]+)M)?(?:([.,\d]+)W)?(?:([.,\d]+)D)?(?:T(?:([.,\d]+)H)?(?:([.,\d]+)M)?(?:([.,\d]+)S)?)?/;
   var matches = iso8601Duration.match(iso8601DurationRegex);
@@ -15,6 +18,6 @@ export function fromISO8601(iso8601Duration: string) {
   };
   if (Object.values(duration).findIndex(v => v !== 0) > -1)
     return `${
-      matches?.[1] === '-' || matches?.[2] === '-' ? 'Previous ' : ''
+      matches?.[1] === '-' || matches?.[2] === '-' ? _(msg`Previous `) : ''
     }${formatDuration(duration)}`;
 }

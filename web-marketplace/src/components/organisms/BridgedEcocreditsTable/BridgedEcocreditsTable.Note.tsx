@@ -1,3 +1,5 @@
+import { Trans } from '@lingui/macro';
+
 import { BridgedTxStatus } from 'types/ledger/ecocredit';
 
 import { Link } from 'components/atoms';
@@ -15,23 +17,24 @@ export const Note: React.FC<
   switch (BRIDGED_STATUSES[status]) {
     case STATUS_COMPLETE:
       return import.meta.env.VITE_TOUCAN_LINK ? (
+        // eslint-disable-next-line lingui/no-unlocalized-strings
         <Link href={import.meta.env.VITE_TOUCAN_LINK}>{'toucan.earth'}</Link>
       ) : null;
     case STATUS_ERROR:
       return (
-        <>
+        <Trans>
           {'Please contact us at '}
           <Link href="support@regen.network">support@regen.network</Link>
           {' to resolve this issue. Do not reinitiate the transaction.'}
-        </>
+        </Trans>
       );
     case STATUS_PENDING:
       return (
-        <>
+        <Trans>
           {'Usually takes <30 minutes to process. Please contact us at '}
           <Link href="support@regen.network">support@regen.network</Link>
           {' if more time has passed.'}
-        </>
+        </Trans>
       );
     default:
       return null;

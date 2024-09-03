@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import { Link as LinkExt, SxProps, Theme, useTheme } from '@mui/material';
 import {
   URL_REGISTRY_MARKETPLACE_LEGAL,
@@ -19,14 +20,14 @@ const AgreeErpaCheckbox: React.FC<React.PropsWithChildren<Props>> = ({
       name="agreeErpa"
       label={
         <>
-          {'I agree to the '}
+          <Trans>I agree to the </Trans>
           <LinkExt
             href={URL_REGISTRY_MARKETPLACE_LEGAL}
             target="_blank"
             rel="noopener noreferrer"
             sx={{ color: theme.palette.secondary.main }}
           >
-            Ecocredit Sales Agreement
+            <Trans>Ecocredit Sales Agreement</Trans>
           </LinkExt>
           {' and '}
           <LinkExt
@@ -35,7 +36,7 @@ const AgreeErpaCheckbox: React.FC<React.PropsWithChildren<Props>> = ({
             rel="noopener noreferrer"
             sx={{ color: theme.palette.secondary.main }}
           >
-            terms of service
+            <Trans>terms of service</Trans>
           </LinkExt>
         </>
       }

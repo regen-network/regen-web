@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
@@ -30,8 +31,8 @@ import {
   SUMMARY_LABEL,
 } from './DescriptionForm.constants';
 import {
-  descriptionFormSchema,
   DescriptionSchemaType,
+  getDescriptionFormSchema,
 } from './DescriptionForm.schema';
 
 interface DescriptionFormProps {
@@ -47,6 +48,7 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
 }) => {
   const { _ } = useLingui();
   const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
+  const descriptionFormSchema = useMemo(() => getDescriptionFormSchema(_), [_]);
   const form = useZodForm({
     schema: descriptionFormSchema,
     draftSchema: descriptionFormSchema, // same schema since all fields are optional
@@ -104,8 +106,8 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
       <OnBoardingCard sx={{ mb: [2.5], ...(isEdit && { mt: [0] }) }}>
         <TextAreaField
           type="text"
-          label={SUMMARY_LABEL}
-          description={SUMMARY_DESCRIPTION}
+          label={_(SUMMARY_LABEL)}
+          description={_(SUMMARY_DESCRIPTION)}
           rows={3}
           disabled={isSubmitting}
           multiline
@@ -123,8 +125,8 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
       <OnBoardingCard sx={{ mt: [0] }}>
         <TextAreaField
           type="text"
-          label={STORY_LABEL}
-          description={STORY_DESCRIPTION}
+          label={_(STORY_LABEL)}
+          description={_(STORY_DESCRIPTION)}
           rows={10}
           disabled={isSubmitting}
           multiline
@@ -140,12 +142,12 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
         </TextAreaField>
         <TextAreaField
           type="text"
-          label={STORY_TITLE_LABEL}
-          description={STORY_TITLE_DESCRIPTION}
+          label={_(STORY_TITLE_LABEL)}
+          description={_(STORY_TITLE_DESCRIPTION)}
           rows={2}
           disabled={isSubmitting}
           multiline
-          optional="(required if you added a project story)"
+          optional={_(msg`(required if you added a project story)`)}
           helperText={errors['regen:storyTitle']?.message}
           error={!!errors['regen:storyTitle']}
           {...form.register('regen:storyTitle')}

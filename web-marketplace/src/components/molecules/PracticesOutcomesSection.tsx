@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
@@ -51,6 +53,7 @@ interface Props {
 const PracticesOutcomesSection: React.FC<React.PropsWithChildren<Props>> = ({
   content,
 }) => {
+  const { _ } = useLingui();
   const { classes, cx } = useStyles();
   const theme = useTheme();
   const { practices, outcomes, title } = content;
@@ -77,7 +80,7 @@ const PracticesOutcomesSection: React.FC<React.PropsWithChildren<Props>> = ({
     >
       <ImageItems
         className={classes.slider}
-        title="Land Management Practices"
+        title={_(msg`Land Management Practices`)}
         arrows
         slidesToShow={practiceItems.length <= 3 ? practiceItems.length : 4}
         items={practiceItems}
@@ -86,7 +89,7 @@ const PracticesOutcomesSection: React.FC<React.PropsWithChildren<Props>> = ({
         mobileItemWidth="90%"
         padding={theme.spacing(2.5)}
         className={cx(classes.outcomes, classes.slider)}
-        title="Ecological Outcomes"
+        title={_(msg`Ecological Outcomes`)}
         arrows
         slidesToShow={outcomeCards.length <= 2 ? outcomeCards.length : 3}
         items={outcomeCards}

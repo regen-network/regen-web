@@ -1,15 +1,18 @@
-import { Box, Grid } from '@mui/material';
 import { useState } from 'react';
+import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+import { Box, Grid } from '@mui/material';
+
 import {
   BlockContent,
   SanityBlockContent,
 } from 'web-components/src/components/block-content';
-
 import { Flex } from 'web-components/src/components/box';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import Modal from 'web-components/src/components/modal';
 import { Body, Title } from 'web-components/src/components/typography';
+
 import { CREDIT_UNIT_DEFINITION } from './DetailsSection.constants';
 
 type Props = {
@@ -19,6 +22,7 @@ type Props = {
 };
 
 export const DetailsSectionCredit = ({ src, label, learnMore }: Props) => {
+  const { _ } = useLingui();
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -47,7 +51,7 @@ export const DetailsSectionCredit = ({ src, label, learnMore }: Props) => {
             className="flex items-center text-[11px] mx-auto mt-[7px]"
             onClick={() => setOpen(true)}
           >
-            learn more&nbsp;
+            <Trans>learn more</Trans>&nbsp;
             <SmallArrowIcon />
           </TextButton>
         )}
@@ -55,7 +59,7 @@ export const DetailsSectionCredit = ({ src, label, learnMore }: Props) => {
       {learnMore && (
         <Modal open={open} onClose={() => setOpen(false)}>
           <Title variant="h4" align="center">
-            {CREDIT_UNIT_DEFINITION}
+            {_(CREDIT_UNIT_DEFINITION)}
           </Title>
           <Body size="lg" className="pt-20">
             <BlockContent content={learnMore} />

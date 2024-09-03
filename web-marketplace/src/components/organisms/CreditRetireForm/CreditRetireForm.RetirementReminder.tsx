@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import { SxProps } from '@mui/material';
 
 import { Body } from 'web-components/src/components/typography';
@@ -10,7 +11,7 @@ export const RetirementReminder = ({
 }): JSX.Element => {
   return (
     <Body size="lg" color="black" sx={sx}>
-      Retirement is permanent and non-reversible.
+      <Trans>Retirement is permanent and non-reversible.</Trans>
     </Body>
   );
 };

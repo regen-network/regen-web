@@ -4,9 +4,9 @@ import {
   NavLinkProps,
   useNavLinkStyles,
 } from 'web-components/src/components/header/components/NavLink';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import { Link } from './Link';
-import { cn } from 'web-components/src/utils/styles/cn';
 
 /**
  * @returns a registry `Link` with the navlink styles applied.

@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
-import { Link as LinkExt, SxProps, Theme, useTheme } from '@mui/material';
+import { Trans } from '@lingui/macro';
+import { Link as LinkExt, SxProps, Theme } from '@mui/material';
 import {
   URL_REGISTRY_MARKETPLACE_LEGAL,
   URL_REGISTRY_TERMS_SERVICE,
@@ -19,7 +20,6 @@ interface Props {
 
 const AgreeErpaCheckbox = forwardRef<HTMLButtonElement, Props>(
   ({ sx, labelClassName, labelSize, ...props }, ref) => {
-    const theme = useTheme();
     return (
       <CheckboxLabel
         {...props}
@@ -31,23 +31,23 @@ const AgreeErpaCheckbox = forwardRef<HTMLButtonElement, Props>(
             color="primary.contrastText"
             as="span"
           >
-            {'I agree to the '}
+            <Trans>I agree to the </Trans>
             <LinkExt
               className="font-bold text-brand-400"
               href={URL_REGISTRY_MARKETPLACE_LEGAL}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Ecocredit Sales Agreement
+              <Trans>Ecocredit Sales Agreement</Trans>
             </LinkExt>
-            {' and '}
+            <Trans> and </Trans>
             <LinkExt
               className="font-bold text-brand-400"
               href={URL_REGISTRY_TERMS_SERVICE}
               target="_blank"
               rel="noopener noreferrer"
             >
-              terms of service
+              <Trans>terms of service</Trans>
             </LinkExt>
           </Subtitle>
         }

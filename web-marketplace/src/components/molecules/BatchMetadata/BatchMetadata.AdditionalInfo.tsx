@@ -1,3 +1,6 @@
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+
 import { CreditBatchMetadataIntersectionLD } from 'lib/db/types/json-ld';
 import {
   getBatchUnknownFields,
@@ -14,6 +17,7 @@ export const BatchMetadataAdditionalInfo = <
 }: {
   data?: T;
 }): JSX.Element | null => {
+  const { _ } = useLingui();
   if (!data) return null;
 
   const context = data?.['@context'];
@@ -38,27 +42,27 @@ export const BatchMetadataAdditionalInfo = <
     <>
       {/* VCS */}
       <BatchMetadataMetaDetail
-        label="vcs retirement serial number"
+        label={_(msg`vcs retirement serial number`)}
         value={vcsRetirementSerialNumber}
       />
       <BatchMetadataMetaDetail
-        label="additional certifications"
+        label={_(msg`additional certifications`)}
         value={additionalCertifications}
       />
 
       {/* CFC */}
       <BatchMetadataMetaDetail
-        label="cfc retirement serial numbers"
+        label={_(msg`cfc retirement serial numbers`)}
         value={serialNumbers}
       />
 
       <BatchMetadataMetaDetail
-        label="cfc vintage year"
+        label={_(msg`cfc vintage year`)}
         value={cfcVintageYear}
         rdfType={getFieldType('regen:cfcVintageYear', context)}
       />
       <BatchMetadataMetaDetail
-        label="verification reports"
+        label={_(msg`verification reports`)}
         value={
           reports?.map(report => ({
             'schema:name': 'Verification report',
@@ -69,7 +73,7 @@ export const BatchMetadataAdditionalInfo = <
 
       {/* Toucan */}
       <BatchMetadataMetaDetail
-        label="Toucan Vintage Token Id"
+        label={_(msg`Toucan Vintage Token Id`)}
         value={
           toucanVintageTokenId && {
             'schema:name': toucanVintageTokenId,

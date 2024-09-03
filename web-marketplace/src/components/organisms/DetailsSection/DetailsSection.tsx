@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import { sxToArray } from 'utils/mui/sxToArray';
 
@@ -28,6 +29,7 @@ export const DetailsSection: React.FC<
   children,
   sx = [],
 }) => {
+  const { _ } = useLingui();
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -64,13 +66,13 @@ export const DetailsSection: React.FC<
                   {creditClassDoc && (
                     <DetailsSectionButton
                       href={creditClassDoc['schema:url']}
-                      label={VIEW_CREDIT_CLASS_DOC}
+                      label={_(VIEW_CREDIT_CLASS_DOC)}
                     />
                   )}
                   {methodology && (
                     <DetailsSectionButton
                       href={methodology['schema:url']}
-                      label={VIEW_METHODOLOGY}
+                      label={_(VIEW_METHODOLOGY)}
                     />
                   )}
                 </Grid>
@@ -83,7 +85,7 @@ export const DetailsSection: React.FC<
                   <Grid container justifyContent="space-evenly" wrap="nowrap">
                     <DetailsSectionCredit
                       src={credit.creditImage}
-                      label={CREDIT}
+                      label={_(CREDIT)}
                     />
                     <Grid
                       item

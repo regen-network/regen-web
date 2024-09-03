@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useFieldArray, useFormState } from 'react-hook-form';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/system';
 
 import { RetirementReminder } from 'web-components/src/components/form/CreditRetireForm';
@@ -38,6 +40,7 @@ const CreditRetireForm: React.FC<
   onClose,
   onSubmit,
 }) => {
+  const { _ } = useLingui();
   const form = useZodForm({
     schema: CreditRetireFormSchema(),
     defaultValues: { ...creditSendFormInitialValues },
@@ -80,7 +83,11 @@ const CreditRetireForm: React.FC<
       >
         <RetirementReminder sx={{ textAlign: 'center', mb: 8 }} />
         <AmountField
-          label={<Box>{'Amount retired'}</Box>}
+          label={
+            <Box>
+              <Trans>Amount retired</Trans>
+            </Box>
+          }
           helperText={errors.amount?.message}
           error={!!errors.amount}
           availableAmount={availableTradableAmount}
@@ -104,7 +111,7 @@ const CreditRetireForm: React.FC<
           onClose={onClose}
           isValid={isValid}
           submitCount={submitCount}
-          label={'Retire'}
+          label={_(msg`Retire`)}
         />
       </Form>
     </>

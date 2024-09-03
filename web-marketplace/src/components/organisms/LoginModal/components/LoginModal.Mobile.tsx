@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { State, WalletModalProps, WalletStatus } from '@cosmos-kit/core';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import QRCode from 'qrcode.react';
 
@@ -22,6 +23,7 @@ const LoginModalMobile = ({
   const onCloseModal = () => {
     setOpen(false);
   };
+  const { _ } = useLingui();
   const [qrState, setQRState] = useState<State>(State.Init); // state of QRCode
   const [qrMsg, setQRMsg] = useState<string>(''); // message of QRCode error
   const [connecting, setConnecting] = useState<boolean>(false);
@@ -58,7 +60,7 @@ const LoginModalMobile = ({
     <Modal open={isOpen} onClose={onCloseModal}>
       <Box sx={{ minHeight: 400 }}>
         <Title variant="h5" sx={{ mb: 7.5, textAlign: 'center' }}>
-          {connecting ? CONNECTING_LABEL : qrCodeUri && QR_CODE_LABEL}
+          {connecting ? _(CONNECTING_LABEL) : qrCodeUri && _(QR_CODE_LABEL)}
         </Title>
         <Center sx={{ pt: 9, height: 340 }}>
           {connecting ? (

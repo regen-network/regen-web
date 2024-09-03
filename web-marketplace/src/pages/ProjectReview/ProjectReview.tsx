@@ -208,13 +208,13 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         title={_(msg`Description`)}
         onEditClick={() => navigate(`${editPath}/description`)}
       >
-        <ItemDisplay name={SUMMARY_LABEL}>
+        <ItemDisplay name={_(SUMMARY_LABEL)}>
           {metadata?.['schema:description']}
         </ItemDisplay>
-        <ItemDisplay name={STORY_LABEL}>
+        <ItemDisplay name={_(STORY_LABEL)}>
           {metadata?.['regen:story']}
         </ItemDisplay>
-        <ItemDisplay name={STORY_TITLE_LABEL}>
+        <ItemDisplay name={_(STORY_TITLE_LABEL)}>
           {metadata?.['regen:storyTitle']}
         </ItemDisplay>
       </ReviewCard>

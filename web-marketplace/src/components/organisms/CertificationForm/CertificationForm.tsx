@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Field, Form, Formik } from 'formik';
 import { TextField } from 'formik-mui';
 import { AnyObjectSchema, object, string } from 'yup';
@@ -25,6 +27,8 @@ const CertificationForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   onClose,
   onSubmit,
 }) => {
+  const { _ } = useLingui();
+
   const initialValues: NameUrl = {
     'schema:name': '',
     'schema:url': {
@@ -54,13 +58,13 @@ const CertificationForm: React.FC<React.PropsWithChildren<FormProps>> = ({
           <OnBoardingCard>
             <Field
               name="schema:name"
-              label="Additional certification name"
+              label={_(msg`Additional certification name`)}
               required
               component={TextField}
             />
             <Field
               name="schema:url.@value"
-              label="Additional certification url"
+              label={_(msg`Additional certification url`)}
               optional
               component={TextField}
             />

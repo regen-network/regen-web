@@ -7,7 +7,6 @@ import {
 import { StdSignature } from '@cosmjs/launchpad';
 import { useQuery } from '@tanstack/react-query';
 
-import admin from 'lib/admin';
 import { useAuth } from 'lib/auth/auth';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';

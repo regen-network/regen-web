@@ -1,5 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import Card from 'web-components/src/components/cards/Card';
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
@@ -24,6 +26,7 @@ const LocationStateField = lazy(
 );
 
 export const Retirement = () => {
+  const { _ } = useLingui();
   const ctx = useFormContext<AgreePurchaseFormSchemaType>();
   const { register, formState, control } = ctx;
   const { errors } = formState;
@@ -45,15 +48,17 @@ export const Retirement = () => {
     <>
       <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300">
         <Title variant="h6" className="flex items-center">
-          Retirement reason
+          <Trans>Retirement reason</Trans>
           <QuestionMarkTooltip
             className="ml-5"
-            title={`Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization.`}
+            title={_(
+              msg`Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization.`,
+            )}
           />
         </Title>
         <TextField
           className="!my-20 sm:!my-30"
-          label={`Explain the reason you are retiring these credits`}
+          label={_(msg`Explain the reason you are retiring these credits`)}
           {...register('retirementReason')}
           error={!!errors['retirementReason']}
           helperText={errors['retirementReason']?.message}
@@ -66,9 +71,11 @@ export const Retirement = () => {
           optionalTextClassName="sm:after:text-sm"
           label={
             <Body size="sm" mobileSize="sm" className="text-grey-700" as="span">
-              Make your purchase anonymous. Your name will be hidden from the
-              retirement certificate and the certificate will be hidden from
-              your public profile.
+              <Trans>
+                Make your purchase anonymous. Your name will be hidden from the
+                retirement certificate and the certificate will be hidden from
+                your public profile.
+              </Trans>
             </Body>
           }
           {...register('anonymousPurchase')}
@@ -76,16 +83,20 @@ export const Retirement = () => {
       </Card>
       <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300 my-20">
         <Title variant="h6" className="flex items-center pb-30">
-          Credit retirement location
+          <Trans>Credit retirement location</Trans>
           <QuestionMarkTooltip
             className="ml-5"
-            title={`The retirement location can be where you live or your business operates.`}
+            title={_(
+              msg`The retirement location can be where you live or your business operates.`,
+            )}
           />
         </Title>
         <div>
           <div className="flex sm:gap-20 flex-col sm:flex-row">
             <Suspense
-              fallback={<SelectTextField label="Country" options={[]} />}
+              fallback={
+                <SelectTextField label={_(msg`Country`)} options={[]} />
+              }
             >
               <LocationCountryField
                 exclude
@@ -96,7 +107,9 @@ export const Retirement = () => {
               />
             </Suspense>
             <Suspense
-              fallback={<SelectTextField label="State / Region" options={[]} />}
+              fallback={
+                <SelectTextField label={_(msg`State / Region`)} options={[]} />
+              }
             >
               <LocationStateField
                 className="sm:mt-0"
@@ -110,7 +123,7 @@ export const Retirement = () => {
             </Suspense>
           </div>
           <TextField
-            label={`Postal code`}
+            label={_(msg`Postal code`)}
             {...register('postalCode')}
             error={!!errors['postalCode']}
             helperText={errors['postalCode']?.message}

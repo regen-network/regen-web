@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
 
@@ -48,10 +50,11 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
-  saveText = 'Save',
+  saveText,
   onSave,
   saveDisabled,
 }) => {
+  const { _ } = useLingui();
   const { classes: styles } = useStyles();
   const { projectId } = useParams();
   const navigate = useNavigate();
@@ -78,7 +81,7 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
         </Grid>
         <Grid item>
           <SaveButton
-            buttonText={saveText}
+            buttonText={saveText ?? _(msg`Save`)}
             disabled={saveDisabled}
             onClick={onSave}
           />

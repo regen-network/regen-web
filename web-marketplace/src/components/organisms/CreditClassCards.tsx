@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
 import Grid, { GridProps } from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -10,6 +11,8 @@ import { ImageActionCard } from 'web-components/src/components/cards/ImageAction
 import { ProgramImageChildren } from 'web-components/src/components/cards/ProjectCard/ProjectCard.ImageChildren';
 import { Account } from 'web-components/src/components/user/UserInfo';
 import { Theme } from 'web-components/src/theme/muiTheme';
+
+import { DRAFT_TEXT } from 'lib/constants/shared.constants';
 
 import { AllCreditClassQuery } from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';
@@ -45,6 +48,7 @@ const CreditClassCards: React.FC<React.PropsWithChildren<Props>> = ({
   btnText,
   classes,
 }) => {
+  const { _ } = useLingui();
   const navigate = useNavigate();
   const { classes: styles, cx } = useStyles();
   const theme = useTheme<Theme>();
@@ -84,6 +88,7 @@ const CreditClassCards: React.FC<React.PropsWithChildren<Props>> = ({
               imageChildren={
                 <ProgramImageChildren program={creditClassesProgram?.[i]} />
               }
+              draftText={_(DRAFT_TEXT)}
             />
           </Grid>
         );

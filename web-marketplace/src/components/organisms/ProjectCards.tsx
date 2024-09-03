@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
@@ -9,6 +10,7 @@ import { makeStyles } from 'tss-react/mui';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
+import { DRAFT_TEXT } from 'lib/constants/shared.constants';
 import { QUDT_UNIT_MAP, qudtUnit } from 'lib/rdf';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -65,6 +67,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
+  const { _ } = useLingui();
   const { classes: styles, cx } = useStyles();
   const theme: Theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -96,6 +99,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
       }
       track={track}
       pathname={location.pathname}
+      draftText={_(DRAFT_TEXT)}
     />
   );
 

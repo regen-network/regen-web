@@ -24,12 +24,14 @@ interface CreditCardProps {
   // TODO: add func + variable related to heart round icon, need more info on this
   onClick: () => void;
   width?: string;
+  draftText: string;
 }
 
 export default function CreditCard({
   credit,
   onClick,
   width,
+  draftText,
 }: CreditCardProps): JSX.Element {
   return (
     <MediaCard
@@ -38,6 +40,7 @@ export default function CreditCard({
       imgSrc={credit.imgSrc}
       name={credit.name}
       width={width}
+      draftText={draftText}
     >
       <Body size="sm">{credit.description}</Body>
       <CreditPlaceInfo

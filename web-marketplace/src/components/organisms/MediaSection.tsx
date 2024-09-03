@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { makeStyles } from 'tss-react/mui';
 
 import ArticleCard from 'web-components/src/components/cards/ArticleCard';
@@ -25,6 +27,7 @@ const MediaSection: React.FC<React.PropsWithChildren<MediaSectionProps>> = ({
   header,
   items,
 }) => {
+  const { _ } = useLingui();
   const { classes: styles } = useStyles();
 
   return (
@@ -34,6 +37,7 @@ const MediaSection: React.FC<React.PropsWithChildren<MediaSectionProps>> = ({
         items={
           items?.map((item, i) => (
             <ArticleCard
+              draftText={_(msg`Draft`)}
               className={styles.card}
               key={i}
               url={item?.href || ''}

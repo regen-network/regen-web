@@ -10,11 +10,13 @@ export interface BlogPostProps {
   description: SanityBlockOr<string>; // optional array for sanity block content
   img: JSX.Element;
   url: string;
+  buttonText: string;
 }
 
 const BlogPost: React.FC<React.PropsWithChildren<BlogPostProps>> = ({
   header,
   description,
+  buttonText,
   img,
   url,
 }) => {
@@ -48,7 +50,7 @@ const BlogPost: React.FC<React.PropsWithChildren<BlogPostProps>> = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        read more
+        {buttonText}
       </OutlinedButton>
     </div>
   );

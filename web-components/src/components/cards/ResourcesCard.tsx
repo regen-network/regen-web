@@ -18,6 +18,7 @@ export interface ResourcesCardProps {
   target?: string;
   backgroundGradient?: boolean;
   titleOverwrite?: boolean;
+  draftText: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -39,6 +40,7 @@ export default function ResourcesCard({
   target = '_blank',
   backgroundGradient = true,
   titleOverwrite = true,
+  draftText,
 }: ResourcesCardProps): JSX.Element {
   const { classes } = useStyles();
   return (
@@ -50,6 +52,7 @@ export default function ResourcesCard({
       elevation={1}
       backgroundGradient={backgroundGradient}
       titleOverwrite={titleOverwrite}
+      draftText={draftText}
     >
       <Box
         sx={{

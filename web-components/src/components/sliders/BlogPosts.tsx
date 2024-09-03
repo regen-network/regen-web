@@ -12,6 +12,7 @@ export interface BlogPostsProps {
   classes?: {
     item?: string;
   };
+  readMoreText: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -66,6 +67,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 export default function BlogPosts({
   posts,
   classes,
+  readMoreText,
 }: BlogPostsProps): JSX.Element {
   const { classes: styles, cx } = useStyles();
   const theme = useTheme();
@@ -86,7 +88,7 @@ export default function BlogPosts({
       <Slider {...settings} className={styles.slider} variableWidth>
         {posts.map((post, index) => (
           <div key={index} className={cx(styles.item, classes?.item)}>
-            <BlogPost {...post} />
+            <BlogPost {...post} buttonText={readMoreText} />
           </div>
         ))}
       </Slider>

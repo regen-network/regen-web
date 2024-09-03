@@ -10,6 +10,7 @@ import {
   ResourceFieldsFragment,
 } from '@/generated/sanity-graphql';
 import { sanityResourcesToCardProps } from '@/lib/utils/sanity/sanity-transforms';
+import { DRAFT_TEXT } from '@/lib/constants/shared.constants';
 
 type Props = {
   resourceSectionData?: Maybe<ResourceFieldsFragment>;
@@ -27,6 +28,7 @@ const ResourcesSection = ({ resourceSectionData }: Props): JSX.Element => {
           items={sanityResourcesToCardProps(
             resourceSectionData?.cards as Resource[],
           )}
+          draftText={DRAFT_TEXT}
         />
       </Section>
     </div>

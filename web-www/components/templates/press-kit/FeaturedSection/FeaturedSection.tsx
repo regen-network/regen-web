@@ -5,6 +5,7 @@ import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSl
 import { useFeaturedSectionStyles } from './FeaturedSection.styles';
 
 import { PressKitFeaturedSectionFieldsFragment } from '@/generated/sanity-graphql';
+import { DRAFT_TEXT } from '@/lib/constants/shared.constants';
 
 type Props = {
   featuredSectionData?: PressKitFeaturedSectionFieldsFragment['featuredSection'];
@@ -23,6 +24,7 @@ const FeaturedSection = ({ featuredSectionData }: Props): JSX.Element => {
         date={item?.date || ''}
         url={item?.href || ''}
         key={item?.title}
+        draftText={DRAFT_TEXT}
       />
     ),
   );

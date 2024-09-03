@@ -9,6 +9,7 @@ import { Title } from 'web-components/src/components/typography';
 import { useMediaSectionStyles } from './MediaSection.styles';
 
 import { TokenMediaSectionFieldsFragment } from '@/generated/sanity-graphql';
+import { DRAFT_TEXT } from '@/lib/constants/shared.constants';
 
 type Props = {
   tokenMediaData?: TokenMediaSectionFieldsFragment;
@@ -30,6 +31,7 @@ const MediaSection = ({ tokenMediaData }: Props) => {
         imgSrc={item?.image?.image?.asset?.url || ''}
         date={item?.date}
         play={item?.type === 'videos'}
+        draftText={DRAFT_TEXT}
       />
     ),
   );

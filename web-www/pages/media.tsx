@@ -14,6 +14,7 @@ import {
   getMediaGrouped,
 } from '@/lib/utils/pages/Media.utils';
 import { useMediaStyles } from '@/styles/pages/Media.styles';
+import { DRAFT_TEXT } from '@/lib/constants/shared.constants';
 
 export default function MediaPage({
   mediaPageData,
@@ -80,6 +81,7 @@ export default function MediaPage({
                           date={item.date}
                           url={item?.href || ''}
                           imgSrc={item?.image?.image?.asset?.url || ''}
+                          draftText={DRAFT_TEXT}
                         />
                       </Grid>
                     ))}

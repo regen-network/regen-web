@@ -6,6 +6,8 @@ import Grid from '@mui/material/Grid';
 import { ImageActionCard } from 'web-components/src/components/cards/ImageActionCard';
 import { CreditClassIcon } from 'web-components/src/components/icons/CreditClassIcon';
 
+import { DRAFT_TEXT } from 'lib/constants/shared.constants';
+
 interface ClassOptionProps {
   title: string;
   imgSrc: string;
@@ -32,6 +34,7 @@ const ChooseCreditClassItem: React.FC<
         startIcon={
           <CreditClassIcon className="text-brand-400" sx={{ mt: '-2px' }} />
         }
+        draftText={_(DRAFT_TEXT)}
       />
     </Grid>
   );

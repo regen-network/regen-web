@@ -1,9 +1,12 @@
 import React from 'react';
+import { useLingui } from '@lingui/react';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import ResourcesCard from 'web-components/src/components/cards/ResourcesCard';
 import { getFormattedDate } from 'web-components/src/utils/format';
 import { getLinkTarget } from 'web-components/src/utils/linkTarget';
+
+import { DRAFT_TEXT } from 'lib/constants/shared.constants';
 
 import { Maybe, ResourceFieldsFragment } from '../../generated/sanity-graphql';
 import { getBtnHref } from '../../lib/button';
@@ -18,6 +21,8 @@ const WrappedResourcesCard: React.FC<
     resource: Maybe<ResourceFieldsFragment>;
   }>
 > = ({ resource }) => {
+  const { _ } = useLingui();
+
   return (
     <ResourcesCard
       image={{ publicURL: getSanityImgSrc(resource?.image) }}
@@ -27,6 +32,7 @@ const WrappedResourcesCard: React.FC<
       buttonText={resource?.button?.buttonText}
       target={getLinkTarget(resource?.button?.buttonBlankTarget)}
       link={getBtnHref(resource?.button)}
+      draftText={_(DRAFT_TEXT)}
     />
   );
 };

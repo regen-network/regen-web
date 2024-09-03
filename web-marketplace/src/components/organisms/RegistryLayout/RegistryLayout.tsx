@@ -1,8 +1,5 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { URL_REGISTRY_TERMS_SERVICE, URL_WEB_PRIVACY } from 'config/globals';
-
-import CookiesTopBanner from 'web-components/src/components/banner/CookiesTopBanner';
 
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
@@ -14,6 +11,7 @@ import { RegistryLayoutAddWalletModalSwitch } from './RegistryLayout.AddWalletMo
 import { RegistryLayoutAddWalletModalSwitchWarning } from './RegistryLayout.AddWalletModalSwitchWarning';
 import { RegistryLayoutBannerModal } from './RegistryLayout.Banner';
 import { RegistryLayoutConnectWalletModal } from './RegistryLayout.ConnectWalletModal';
+import { RegistryLayoutCookiesTopBanner } from './RegistryLayout.CookiesTopBanner';
 import { RegistryLayoutErrorBannerModal } from './RegistryLayout.ErrorBanner';
 import { RegistryLayoutFooter } from './RegistryLayout.Footer';
 import { RegistryLayoutHeader } from './RegistryLayout.Header';
@@ -32,10 +30,7 @@ const RegistryLayout: React.FC = () => {
       <PageViewTracking />
       <ScrollToTop />
       <RetryFailedFunctions />
-      <CookiesTopBanner
-        privacyUrl={URL_WEB_PRIVACY}
-        TOSUrl={URL_REGISTRY_TERMS_SERVICE}
-      />
+      <RegistryLayoutCookiesTopBanner />
       <RegistryLayoutTxErrorModal />
       <RegistryLayoutBannerModal />
       <RegistryLayoutTxSuccessfulModal />

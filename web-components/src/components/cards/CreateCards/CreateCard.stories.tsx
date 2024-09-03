@@ -9,6 +9,10 @@ export default {
 };
 
 const onClick = () => null;
+const projectButtonText = '+ create project';
+const projectEmptyTitle = 'You have not created any projects yet';
+const creditClassButtonText = '+ create credit class';
+const creditClassEmptyTitle = 'You have not created any credit classes yet';
 
 export const withTitleAndIcon = (): JSX.Element => (
   <CreateCard
@@ -32,15 +36,35 @@ export const noTitleOrIcon = (): JSX.Element => (
 );
 
 export const firstProjectCard = () => (
-  <CreateProjectCard isFirstProject onClick={onClick} />
+  <CreateProjectCard
+    isFirstProject
+    onClick={onClick}
+    buttonText={projectButtonText}
+    emptyTitle={projectEmptyTitle}
+  />
 );
 
-export const createProjectCard = () => <CreateProjectCard onClick={onClick} />;
+export const createProjectCard = () => (
+  <CreateProjectCard
+    onClick={onClick}
+    buttonText={projectButtonText}
+    emptyTitle={projectEmptyTitle}
+  />
+);
 
 export const firstCreditClassCard = () => (
-  <CreateCreditClassCard isFirstCreditClass onClick={onClick} />
+  <CreateCreditClassCard
+    isFirstCreditClass
+    onClick={onClick}
+    buttonText={creditClassButtonText}
+    emptyTitle={creditClassEmptyTitle}
+  />
 );
 
 export const createCreditClassCard = () => (
-  <CreateCreditClassCard onClick={onClick} />
+  <CreateCreditClassCard
+    onClick={onClick}
+    buttonText={creditClassButtonText}
+    emptyTitle={creditClassEmptyTitle}
+  />
 );

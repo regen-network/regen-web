@@ -84,7 +84,9 @@ export const textButton = (): JSX.Element => (
   </Flex>
 );
 
-export const editButton = () => <EditButton onClick={() => {}} />;
+export const editButton = () => (
+  <EditButton buttonText="Edit" onClick={() => {}} />
+);
 
 export const copyButton = {
   render: () => (

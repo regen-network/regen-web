@@ -12,6 +12,7 @@ import {
   MediaFieldsFragment,
   Resource,
 } from '@/generated/sanity-graphql';
+import { DRAFT_TEXT } from '@/lib/constants/shared.constants';
 
 /**
  *
@@ -71,6 +72,7 @@ export function sanityMediaToArticleCardProps(
       name: item?.title || '',
       type: item?.type || '',
       play: item?.type === 'video',
+      draftText: DRAFT_TEXT,
     };
   });
 }

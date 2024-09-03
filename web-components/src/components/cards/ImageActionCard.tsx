@@ -25,6 +25,7 @@ type Props = {
   disabled?: boolean;
   startIcon?: ReactNode;
   imageChildren?: ReactNode;
+  draftText: string;
 };
 
 const ImageActionCard: React.FC<React.PropsWithChildren<Props>> = props => {
@@ -38,6 +39,7 @@ const ImageActionCard: React.FC<React.PropsWithChildren<Props>> = props => {
       borderRadius="10px"
       borderColor={theme.palette.grey[100]}
       imageChildren={props.imageChildren}
+      draftText={props.draftText}
     >
       <CardContent
         sx={{

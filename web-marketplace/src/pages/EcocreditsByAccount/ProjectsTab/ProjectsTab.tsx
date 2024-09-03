@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
@@ -13,13 +14,15 @@ import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.typ
 import WithLoader from 'components/atoms/WithLoader';
 
 import { useProfileData } from '../hooks/useProfileData';
-import { DEFAULT_PROJECT } from './ProjectsTab.constants';
+import { getDefaultProject } from './ProjectsTab.constants';
 
 const ProjectsTab = (): JSX.Element => {
+  const { _ } = useLingui();
   const location = useLocation();
   const navigate = useNavigate();
   const { track } = useTracker();
   const { address, account } = useProfileData();
+  const defaultProject = useMemo(() => getDefaultProject({ _ }), [_]);
 
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
     adminAccountId: account?.id,
@@ -38,7 +41,7 @@ const ProjectsTab = (): JSX.Element => {
             <Grid key={i} item xs={12} md={6} lg={4}>
               <WithLoader isLoading={isLoadingAdminProjects} variant="skeleton">
                 <ProjectCard
-                  {...DEFAULT_PROJECT}
+                  {...defaultProject}
                   {...(project as ProjectWithOrderData)}
                   onClick={() => project.href && navigate(project.href)}
                   track={track}

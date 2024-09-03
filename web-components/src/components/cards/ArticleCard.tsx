@@ -27,6 +27,7 @@ export interface ArticleCardProps {
   url: string;
   className?: string;
   play?: boolean;
+  draftText: string;
 }
 
 export default function ArticleCard({
@@ -38,6 +39,7 @@ export default function ArticleCard({
   url,
   type,
   play = false,
+  draftText,
 }: ArticleCardProps): JSX.Element {
   return (
     <MediaCard
@@ -46,6 +48,7 @@ export default function ArticleCard({
       imgSrc={imgSrc}
       backgroundGradient={false}
       elevation={1}
+      draftText={draftText}
     >
       {play && <PlayButton />}
       <Body size="sm" sx={{ flex: '1 0 auto', py: [2.5, 2], px: [4, 5] }}>

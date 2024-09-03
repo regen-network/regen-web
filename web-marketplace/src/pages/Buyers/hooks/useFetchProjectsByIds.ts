@@ -1,4 +1,5 @@
 import { useApolloClient } from '@apollo/client';
+import { useLingui } from '@lingui/react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery } from '@tanstack/react-query';
 
@@ -21,6 +22,7 @@ interface Props {
 }
 
 export const useFetchProjectsByIds = ({ projectIds }: Props): Response => {
+  const { _ } = useLingui();
   const graphqlClient = useApolloClient();
 
   const { data: creditClassData } = useQuery(
@@ -59,6 +61,7 @@ export const useFetchProjectsByIds = ({ projectIds }: Props): Response => {
     programParties,
     classesMetadata,
     sanityCreditClassData: creditClassData,
+    _,
   });
 
   return {

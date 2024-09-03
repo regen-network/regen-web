@@ -5,7 +5,6 @@ import cx from 'clsx';
 import { DraftDocumentIcon } from '../../icons/DraftDocumentIcon';
 import { Image } from '../../image';
 import { Body, Label } from '../../typography';
-import { DRAFT } from './MediaCard.constants';
 
 type Props = {
   imageClassName?: string;
@@ -17,6 +16,7 @@ type Props = {
   tag?: string;
   children?: ReactNode;
   draft?: boolean;
+  draftText: string;
 };
 
 const BackgroundGradient = styled('div')({
@@ -40,6 +40,7 @@ export const MediaCardImage = ({
   tag,
   children,
   draft,
+  draftText,
 }: Props): JSX.Element => (
   <Image
     className={cx(imageClassName, classes.image)}
@@ -74,7 +75,7 @@ export const MediaCardImage = ({
       >
         <DraftDocumentIcon />
         &nbsp;
-        {DRAFT}
+        {draftText}
       </Body>
     )}
     {children}

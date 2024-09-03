@@ -23,6 +23,7 @@ import {
   useCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
+import { DRAFT_TEXT } from 'lib/constants/shared.constants';
 import { CREDIT_CLASS_FILTERS_TO_DESELECT } from 'lib/env';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useTracker } from 'lib/tracker/useTracker';
@@ -229,6 +230,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               program={project.program}
               projectPrefinancing={project.projectPrefinancing}
               offChain={config.buyButton ? project.offChain : true}
+              draftText={_(DRAFT_TEXT)}
             />
           </Box>
         );

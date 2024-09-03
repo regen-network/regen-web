@@ -5,11 +5,13 @@ import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCar
 
 import { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import { DRAFT_TEXT } from 'lib/constants/shared.constants';
 import {
   AnchoredProjectMetadataBaseLD,
   CreditClassMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import {
   findSanityCreditClass,
@@ -26,6 +28,7 @@ interface Params {
   programParties?: Maybe<AccountFieldsFragment | undefined>[];
   classesMetadata?: (CreditClassMetadataLD | undefined)[];
   sanityCreditClassData?: AllCreditClassQuery;
+  _: TranslatorType;
 }
 
 export const normalizeProjectsWithCreditClass = ({
@@ -35,6 +38,7 @@ export const normalizeProjectsWithCreditClass = ({
   classesMetadata,
   projects,
   sanityCreditClassData,
+  _,
 }: Params): ProjectCardProps[] =>
   projects?.map((project, index) => {
     const projectMetadata = projectsMetadata?.[index];
@@ -89,5 +93,6 @@ export const normalizeProjectsWithCreditClass = ({
         image: '/svg/class-default.svg',
       },
       program,
+      draftText: _(DRAFT_TEXT),
     };
   }) ?? [];

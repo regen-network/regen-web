@@ -8,6 +8,8 @@ import {
   ReviewCard,
 } from 'web-components/src/components/cards/ReviewCard';
 
+import { EDIT_TEXT } from 'lib/constants/shared.constants';
+
 import { ScrollableCodebox } from 'components/molecules/ScrollableCodebox';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
@@ -21,6 +23,7 @@ export const CreditClassReview = (): JSX.Element => {
     <ReviewCard
       title={_(msg`Credit Class Info`)}
       onEditClick={handleBack}
+      editText={_(EDIT_TEXT)}
       sx={{ mt: [8, 10] }}
     >
       <ItemDisplay name={_(msg`Admin`)}>{values.admin}</ItemDisplay>

@@ -12,6 +12,7 @@ export const blogPost = (): JSX.Element => (
       header="This is a blog post header"
       url="https://medium.com/regen-network"
       description="This is a blog post description"
+      buttonText="read more"
     />
   </div>
 );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -8,6 +9,7 @@ import { ProjectCard } from 'web-components/src/components/cards/ProjectCard';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Body } from 'web-components/src/components/typography';
 
+import { DRAFT_TEXT } from 'lib/constants/shared.constants';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import {
@@ -19,6 +21,7 @@ import { useProjectsContext } from '../Projects.context';
 
 export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
   () => {
+    const { _ } = useLingui();
     const navigate = useNavigate();
     const { track } = useTracker();
     const {
@@ -84,6 +87,7 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
                 projectPrefinancing={project.projectPrefinancing}
                 offChain={project.offChain}
                 isSoldOut={isSoldOut}
+                draftText={_(DRAFT_TEXT)}
               />
             </div>
           );

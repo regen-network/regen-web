@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
-import Link from '@mui/material/Link';
 import Cookies from 'js-cookie';
 
 // TODO use Section component
@@ -9,8 +8,9 @@ import ContainedButton from '../buttons/ContainedButton';
 import { Body } from '../typography';
 
 interface CookiesTopBannerProps {
-  privacyUrl: string;
-  TOSUrl: string;
+  acceptLabel: string;
+  rejectLabel: string;
+  children: ReactNode;
 }
 
 const rejectCookieName: string = 'cookies-rejected';
@@ -44,8 +44,9 @@ function setCookie(name: string, cookieValue: string): void {
 }
 
 export default function CookiesTopBanner({
-  privacyUrl,
-  TOSUrl,
+  acceptLabel,
+  rejectLabel,
+  children,
 }: CookiesTopBannerProps): JSX.Element | null {
   const [visible, setVisible] = useState(false);
 
@@ -103,16 +104,7 @@ export default function CookiesTopBanner({
             })}
           >
             <Body mobileSize="xs" pr={5}>
-              We use cookies to provide you with a great user experience. By
-              using this site, you accept our use of{' '}
-              <Link href={privacyUrl} color="secondary.main">
-                cookies policy
-              </Link>{' '}
-              and agree to our{' '}
-              <Link href={TOSUrl} color="secondary.main">
-                platform terms of service
-              </Link>
-              .
+              {children}
             </Body>
             <Box
               sx={{
@@ -130,7 +122,7 @@ export default function CookiesTopBanner({
                   height: spacing(8.75),
                 })}
               >
-                accept
+                {acceptLabel}
               </ContainedButton>
               <Body
                 size="sm"
@@ -143,7 +135,7 @@ export default function CookiesTopBanner({
                   pl: [null, 8.5],
                 }}
               >
-                Reject
+                {rejectLabel}
               </Body>
             </Box>
           </Box>

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
+import { useLingui } from '@lingui/react';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
@@ -95,6 +96,7 @@ function ProjectDetails(): JSX.Element {
   const { isKeplrMobileWeb } = useWallet();
   const navigate = useNavigate();
   const { activeAccount } = useAuth();
+  const { _ } = useLingui();
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -454,7 +456,7 @@ function ProjectDetails(): JSX.Element {
             isPrefinanceProject &&
             projectPrefinancing?.stripePaymentLink && (
               <InfoTooltip
-                title={isSoldOut ? SOLD_OUT_TOOLTIP : ''}
+                title={isSoldOut ? _(SOLD_OUT_TOOLTIP) : ''}
                 arrow
                 placement="top"
               >

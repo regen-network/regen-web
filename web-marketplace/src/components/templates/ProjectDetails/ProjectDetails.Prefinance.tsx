@@ -1,3 +1,5 @@
+import { useLingui } from '@lingui/react';
+
 import { BlockContent } from 'web-components/src/components/block-content';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import {
@@ -43,6 +45,8 @@ export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
     projectTimeline,
     classTimeline,
   } = projectPrefinancing;
+
+  const { _ } = useLingui();
 
   return (
     <>
@@ -99,7 +103,7 @@ export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
                     alt={ESTIMATED_ISSUANCE}
                   />
                 }
-                tooltipNumber={isSoldOut ? SOLD_OUT_TOOLTIP : undefined}
+                tooltipNumber={isSoldOut ? _(SOLD_OUT_TOOLTIP) : undefined}
                 badgeLabel={isSoldOut ? SOLD_OUT : undefined}
               />
             )}

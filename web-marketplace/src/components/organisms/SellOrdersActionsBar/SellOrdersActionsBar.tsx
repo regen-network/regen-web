@@ -145,9 +145,9 @@ export const SellOrdersActionsBar = ({
               <InfoTooltip
                 title={
                   isSoldOut
-                    ? SOLD_OUT_TOOLTIP
+                    ? _(SOLD_OUT_TOOLTIP)
                     : isBuyButtonDisabled
-                    ? BUY_DISABLED_TOOLTIP
+                    ? _(BUY_DISABLED_TOOLTIP)
                     : ''
                 }
                 arrow

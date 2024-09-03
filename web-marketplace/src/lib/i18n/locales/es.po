@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-09-03 10:19+0200\n"
+"POT-Creation-Date: 2024-09-03 10:27+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1186,6 +1186,7 @@ msgstr ""
 msgid "The structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr ""
 
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:3
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:4
 msgid "There are currently no open sell orders for this project."
 msgstr ""

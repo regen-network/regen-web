@@ -30,7 +30,7 @@ export const useOnUploadCallback = ({ fileNamesToDeleteRef }: Params) => {
           apiUri,
         );
         if (value) fileNamesToDeleteRef.current.push(value);
-        return result?.url;
+        return result;
       } catch (e) {
         setErrorBannerTextAtom(_(errorsMapping[ERRORS.DEFAULT].title));
         return '';

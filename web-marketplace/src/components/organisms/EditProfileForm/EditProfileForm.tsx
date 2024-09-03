@@ -48,7 +48,6 @@ export interface EditProfileFormProps {
   onSuccess?: () => void;
   onUpload?: (imageFile: File) => Promise<{ url: string }>;
 }
-
 const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
   ({
     children,

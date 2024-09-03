@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.5](https://github.com/regen-network/regen-web/compare/v2.6.4...v2.6.5) (2024-08-16)
+
+### Bug Fixes
+
+- APP-283 file upload ([#2435](https://github.com/regen-network/regen-web/issues/2435)) ([e4eb2f3](https://github.com/regen-network/regen-web/commit/e4eb2f35ad64e836dbfe9246f67f0c23491442f3))
+
 ## [2.6.4](https://github.com/regen-network/regen-web/compare/v2.6.3...v2.6.4) (2024-08-08)
 
 **Note:** Version bump only for package web-marketplace

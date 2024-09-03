@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-09-03 10:27+0200\n"
+"POT-Creation-Date: 2024-09-03 10:38+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1192,7 +1192,7 @@ msgid "There are currently no open sell orders for this project."
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:3
-msgid "These credits are currently sold out.\\nMore may become available in the future."
+msgid "These credits are currently sold out. More may become available in the future."
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetails.constants.ts:5

@@ -42,7 +42,6 @@ export const NoImage: Story = {
   args: {
     ...commonArgs,
     privacyLabel: 'Files are private',
-    numberOfFiles: 5,
     isAdmin: false,
   },
   argTypes: {
@@ -55,9 +54,8 @@ export const NoImage: Story = {
 export const Draft: Story = {
   args: {
     ...commonArgs,
-    privacyLabel: 'Post is private',
     isAdmin: true,
-    draftLabel: 'draft',
+    draftLabel: 'Draft',
   },
   argTypes: {
     handleClickShare: { action: 'handle share click' },
@@ -72,7 +70,8 @@ export const DraftPrivate: Story = {
     privacyLabel: 'Post is private',
     numberOfFiles: 5,
     isAdmin: true,
-    draftLabel: 'draft',
+    draftLabel: 'Draft',
+    file,
   },
   argTypes: {
     handleClickShare: { action: 'handle share click' },

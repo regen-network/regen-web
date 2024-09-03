@@ -1,6 +1,10 @@
 msgid ""
 msgstr ""
+<<<<<<< HEAD
 "POT-Creation-Date: 2024-09-03 11:19+0200\n"
+=======
+"POT-Creation-Date: 2024-09-03 12:19+0100\n"
+>>>>>>> 452d5ae4f (chore: update .po files)
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -43,7 +47,7 @@ msgstr ""
 msgid "+ add another issuer'"
 msgstr ""
 
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:12
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:11
 #: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:4
 msgid "+ create post"
 msgstr ""
@@ -114,10 +118,7 @@ msgid "Additional Info"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:37
-<<<<<<< HEAD
 #: src/pages/Post/Post.constants.ts:8
-=======
->>>>>>> f45078599 (feat: update lingui catalogs with new messages)
 msgid "admin"
 msgstr ""
 
@@ -1083,6 +1084,7 @@ msgid "Natural ecosystem, unmanaged"
 msgstr ""
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: src/components/organisms/BasketDetailsActionsBar/BasketDetailsActionsBar.constants.ts:3
 msgid "NCT represents the first IBC-compatible carbon token to the Interchain economy, and launches via NCT: Regen and NCT: Osmo pools on the Osmosis exchange."
 msgstr ""
@@ -1090,6 +1092,8 @@ msgstr ""
 =======
 <<<<<<< HEAD
 >>>>>>> 40d6ba17b (feat: update lingui catalogs with new messages)
+=======
+>>>>>>> 452d5ae4f (chore: update .po files)
 #: src/pages/ProjectEdit/hooks/useProjectEditSubmit.tsx:103
 msgid "new project admin"
 msgstr ""
@@ -1102,8 +1106,6 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-=======
->>>>>>> f45078599 (feat: update lingui catalogs with new messages)
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:6
 msgid "No bridgable ecocredits found"
 msgstr ""
@@ -1112,7 +1114,6 @@ msgstr ""
 msgid "No bridged ecocredits found"
 msgstr ""
 
-<<<<<<< HEAD
 #: src/pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab.constants.ts:3
 msgid "No credit batches to display"
 msgstr ""
@@ -1133,8 +1134,6 @@ msgstr ""
 msgid "No specific location"
 msgstr ""
 
-=======
->>>>>>> f45078599 (feat: update lingui catalogs with new messages)
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:112
 msgid "Note / Link"
 msgstr ""
@@ -1267,7 +1266,6 @@ msgstr ""
 msgid "profile banner"
 msgstr ""
 
-<<<<<<< HEAD
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.constants.tsx:3
 msgid "Profile not found"
 msgstr ""
@@ -1276,8 +1274,6 @@ msgstr ""
 msgid "Profile Saved"
 msgstr ""
 
-=======
->>>>>>> f45078599 (feat: update lingui catalogs with new messages)
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:24
 msgid "program"
 msgstr ""
@@ -1286,11 +1282,8 @@ msgstr ""
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:139
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:118
-<<<<<<< HEAD
 #: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:196
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:105
-=======
->>>>>>> f45078599 (feat: update lingui catalogs with new messages)
 msgid "project"
 msgstr ""
 
@@ -1562,10 +1555,13 @@ msgid "Sell"
 msgstr ""
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:270
 =======
 <<<<<<< HEAD
 >>>>>>> 40d6ba17b (feat: update lingui catalogs with new messages)
+=======
+>>>>>>> 452d5ae4f (chore: update .po files)
 #: src/pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty.tsx:48
 msgid "Sell order"
 msgstr ""
@@ -1583,11 +1579,14 @@ msgid "Sell orders"
 msgstr ""
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:196
 =======
 =======
 >>>>>>> f45078599 (feat: update lingui catalogs with new messages)
 >>>>>>> 40d6ba17b (feat: update lingui catalogs with new messages)
+=======
+>>>>>>> 452d5ae4f (chore: update .po files)
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:18
 msgid "Send"
 msgstr ""
@@ -1695,7 +1694,6 @@ msgstr ""
 msgid "Status refreshes automatically once every 10 seconds if in a pending state."
 msgstr ""
 
-<<<<<<< HEAD
 #: src/pages/ProjectReview/ProjectReview.constants.ts:4
 msgid "Story photo"
 msgstr ""
@@ -1704,8 +1702,6 @@ msgstr ""
 msgid "Story video"
 msgstr ""
 
-=======
->>>>>>> f45078599 (feat: update lingui catalogs with new messages)
 #: src/pages/CreateCreditClassInfo/CreateCreditClassInfo.tsx:199
 msgid "Submit a Credit Class"
 msgstr ""
@@ -1762,11 +1758,15 @@ msgstr ""
 msgid "The structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:3
 msgid "The total amount of credits that were issued to this project."
 msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:3
+=======
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:5
+>>>>>>> 452d5ae4f (chore: update .po files)
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:4
 msgid "There are currently no open sell orders for this project."
 msgstr ""

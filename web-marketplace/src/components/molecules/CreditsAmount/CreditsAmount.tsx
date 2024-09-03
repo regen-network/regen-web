@@ -21,7 +21,7 @@ import {
   getCurrencyPrice,
 } from './CreditsAmount.utils';
 import { CreditsInput } from './CreditsInput';
-import { CurrencyInput } from './CurrecyInput';
+import { CurrencyInput } from './CurrencyInput';
 
 export const CreditsAmount = ({
   creditDetails,

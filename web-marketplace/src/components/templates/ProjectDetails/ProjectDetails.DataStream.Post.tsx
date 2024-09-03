@@ -5,14 +5,16 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import { useQuery } from '@tanstack/react-query';
+import { Feature, Point } from 'geojson';
 import { useSetAtom } from 'jotai';
+import { parse } from 'wellknown';
 
 import PostCard from 'web-components/src/components/cards/PostCard/PostCard';
 import { BubbleIcon } from 'web-components/src/components/icons/BubbleIcon';
@@ -30,6 +32,7 @@ import { FileToPreview } from 'web-components/src/components/organisms/PostFiles
 import { parseFile } from 'web-components/src/components/organisms/PostFiles/PostFiles.utils';
 import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.constants';
 import { Subtitle } from 'web-components/src/components/typography';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 import copyTextToClipboard from 'web-components/src/utils/copy';
 
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
@@ -39,10 +42,16 @@ import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/gra
 import { useAttestEvents } from 'pages/Post/hooks/useAttestEvents';
 import { useDelete } from 'pages/Post/hooks/useDelete';
 import { useSharePrivateLink } from 'pages/Post/hooks/useSharePrivateLink';
-import { ADMIN, DRAFT, POST_IS_PRIVATE } from 'pages/Post/Post.constants';
+import {
+  ADMIN,
+  DRAFT,
+  POST_IS_PRIVATE,
+  UNTITLED,
+} from 'pages/Post/Post.constants';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { DeletePostWarningModal } from 'components/organisms/DeletePostWarningModal/DeletePostWarningModal';
+import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 
 import {
   FILES_ARE_PRIVATE,
@@ -58,6 +67,9 @@ type Props = {
   adminAccountId?: string | null;
   offChainProjectId?: string;
   adminAddr?: string | null;
+  setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
+  projectLocation: GeocodeFeature;
+  openCreatePostModal: () => void;
 };
 export const DataStreamPost = ({
   offChainProjectId,
@@ -67,6 +79,9 @@ export const DataStreamPost = ({
   isAdmin,
   adminAccountId,
   adminAddr,
+  setDraftPost,
+  projectLocation,
+  openCreatePostModal,
 }: Props) => {
   const { _ } = useLingui();
   const graphqlClient =
@@ -174,7 +189,7 @@ export const DataStreamPost = ({
             <PostCard
               draftLabel={!post.published ? _(DRAFT) : undefined}
               onClick={() => post.published && navigate(`/post/${post.iri}`)}
-              title={post.contents.title || _(msg`Untitled`)}
+              title={post.contents.title || _(UNTITLED)}
               comment={post.contents.comment}
               privacyLabel={
                 post.privacy === 'private'
@@ -196,7 +211,7 @@ export const DataStreamPost = ({
                 tag: creatorIsAdmin ? _(ADMIN) : undefined,
               }}
               isAdmin={isAdmin}
-              handleClickShare={() => {
+              sharePublicLink={() => {
                 copyTextToClipboard(
                   `${window.location.origin}/post/${post.iri}`,
                 );
@@ -208,6 +223,29 @@ export const DataStreamPost = ({
               sharePrivateLink={sharePrivateLink}
               file={file}
               preview={preview}
+              onEditDraft={() => {
+                setDraftPost({
+                  iri: post.iri,
+                  title: post.contents?.title,
+                  comment: post.contents?.comment,
+                  published: post.published,
+                  privacyType: post.privacy,
+                  files: post.contents?.files?.map(file => ({
+                    ...file,
+                    location:
+                      file.locationType === 'none'
+                        ? projectLocation
+                        : ({
+                            type: 'Feature',
+                            geometry: parse(file.location.wkt) as Point,
+                            properties: {},
+                          } as Feature<Point>),
+                    url: post.filesUrls?.[file.iri] as string,
+                    mimeType: post.filesMimeTypes?.[file.iri] as string,
+                  })),
+                });
+                openCreatePostModal();
+              }}
             />
           )}
           {post.privacy === 'private' && !isAdmin && (

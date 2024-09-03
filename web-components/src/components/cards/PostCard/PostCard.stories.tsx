@@ -17,7 +17,7 @@ export const Public: Story = {
     isAdmin: false,
   },
   argTypes: {
-    handleClickShare: { action: 'handle share click' },
+    sharePublicLink: { action: 'share public click' },
     sharePrivateLink: { action: 'share private link' },
   },
   render: args => <PostCard {...args} signers={signers} />,
@@ -32,7 +32,7 @@ export const Private: Story = {
     isAdmin: true,
   },
   argTypes: {
-    handleClickShare: { action: 'handle share click' },
+    sharePublicLink: { action: 'share public click' },
     sharePrivateLink: { action: 'share private link' },
   },
   render: args => <PostCard {...args} signers={signers} />,
@@ -45,7 +45,7 @@ export const NoImage: Story = {
     isAdmin: false,
   },
   argTypes: {
-    handleClickShare: { action: 'handle share click' },
+    sharePublicLink: { action: 'share public click' },
     sharePrivateLink: { action: 'share private link' },
   },
   render: args => <PostCard {...args} signers={signers} />,
@@ -58,8 +58,9 @@ export const Draft: Story = {
     draftLabel: 'Draft',
   },
   argTypes: {
-    handleClickShare: { action: 'handle share click' },
+    sharePublicLink: { action: 'share public click' },
     sharePrivateLink: { action: 'share private link' },
+    onEditDraft: { action: 'edit draft' },
   },
   render: args => <PostCard {...args} signers={signers} />,
 };
@@ -74,8 +75,9 @@ export const DraftPrivate: Story = {
     file,
   },
   argTypes: {
-    handleClickShare: { action: 'handle share click' },
+    sharePublicLink: { action: 'share public click' },
     sharePrivateLink: { action: 'share private link' },
+    onEditDraft: { action: 'edit draft' },
   },
   render: args => <PostCard {...args} signers={signers} />,
 };

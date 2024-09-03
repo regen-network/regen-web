@@ -17,6 +17,7 @@ import Navigation from 'web-components/src/components/faq/Navigation';
 import ArrowDownIcon from 'web-components/src/components/icons/ArrowDownIcon';
 import Section from 'web-components/src/components/section';
 import { Body } from 'web-components/src/components/typography';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { useAuth } from 'lib/auth/auth';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
@@ -24,6 +25,8 @@ import { getPostsQuery } from 'lib/queries/react-query/registry-server/getPostsQ
 import { DATA_STREAM_LIMIT } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.constants';
 import { PostsQueryResponse } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.types';
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
+
+import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 
 import {
   CREATE_POST,
@@ -39,7 +42,8 @@ type Props = {
   offChainProjectId?: string;
   adminDescription?: SanityBlockContent;
   projectLocation?: GeocodeFeature;
-  onClickCreatePost: () => void;
+  openCreatePostModal: () => void;
+  setDraftPost: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
 };
 
 export const DataStream = ({
@@ -48,7 +52,8 @@ export const DataStream = ({
   offChainProjectId,
   adminDescription,
   projectLocation,
-  onClickCreatePost,
+  openCreatePostModal,
+  setDraftPost,
 }: Props) => {
   const { activeAccountId } = useAuth();
   const [year, setYear] = useState<number | null>(null);
@@ -94,7 +99,7 @@ export const DataStream = ({
                 <Body className="mb-15 max-w-[683px]" size="lg">
                   <BlockContent content={adminDescription} />
                 </Body>
-                <ContainedButton onClick={onClickCreatePost}>
+                <ContainedButton onClick={openCreatePostModal}>
                   {CREATE_POST}
                 </ContainedButton>
               </div>
@@ -112,7 +117,7 @@ export const DataStream = ({
                   setYear(Number(yearClicked));
                 }}
               />
-              {!isLoading && posts && posts.length > 0 && (
+              {!isLoading && projectLocation && posts && posts.length > 0 && (
                 <div className="w-[100%]">
                   <Timeline
                     sx={{
@@ -133,6 +138,9 @@ export const DataStream = ({
                         adminAccountId={adminAccountId}
                         offChainProjectId={offChainProjectId}
                         adminAddr={adminAddr}
+                        setDraftPost={setDraftPost}
+                        projectLocation={projectLocation}
+                        openCreatePostModal={openCreatePostModal}
                       />
                     ))}
                   </Timeline>

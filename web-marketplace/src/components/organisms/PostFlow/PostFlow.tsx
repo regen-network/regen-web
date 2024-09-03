@@ -39,7 +39,7 @@ type Props = {
   projectName?: string;
   projectSlug?: string | null;
   offChainProjectId?: string;
-  postIri?: string;
+  draftPostIri?: string;
 };
 
 export const PostFlow = ({
@@ -50,7 +50,7 @@ export const PostFlow = ({
   projectName,
   projectSlug,
   offChainProjectId: _offChainProjectId,
-  postIri,
+  draftPostIri,
 }: Props) => {
   const fileNamesToDeleteRef = useRef<string[]>([]);
   const retryCsrfRequest = useRetryCsrfRequest();
@@ -104,9 +104,9 @@ export const PostFlow = ({
         try {
           await postData({
             url: `${apiServerUrl}/marketplace/v1/posts${
-              postIri ? `/${postIri}` : ''
+              draftPostIri ? `/${draftPostIri}` : ''
             }`,
-            method: postIri ? 'PUT' : 'POST',
+            method: draftPostIri ? 'PUT' : 'POST',
             data: {
               projectId: offChainProjectId,
               privacy: data.privacyType,
@@ -137,7 +137,7 @@ export const PostFlow = ({
     },
     [
       token,
-      postIri,
+      draftPostIri,
       offChainProjectId,
       retryCsrfRequest,
       reactQueryClient,

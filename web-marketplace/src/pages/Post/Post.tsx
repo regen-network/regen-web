@@ -5,6 +5,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { MAPBOX_TOKEN } from 'config/globals';
 import { Point } from 'geojson';
@@ -23,6 +24,7 @@ import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/gra
 
 import NotFoundPage from 'pages/NotFound';
 
+import { UNTITLED } from './Post.constants';
 import { PostFooter } from './Post.Footer';
 import { PostHeader } from './Post.Header';
 import { PostPrivate } from './Post.Private';
@@ -30,6 +32,7 @@ import { PostTimeline } from './Post.Timeline';
 
 function Post(): JSX.Element {
   const { iri } = useParams();
+  const { _ } = useLingui();
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
   const { activeAccountId } = useAuth();
@@ -121,7 +124,7 @@ function Post(): JSX.Element {
                     projectId
                   }`}
                   isAdmin={isAdmin}
-                  title={data.contents.title}
+                  title={data.contents.title || _(UNTITLED)}
                   creatorAccount={creatorAccount}
                   adminAccountId={adminAccountId}
                   creatorIsAdmin={creatorIsAdmin}

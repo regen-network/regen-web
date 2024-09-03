@@ -7,6 +7,7 @@ import { editFileFormSchema } from '../EditFileForm/EditFileForm.schema';
 import { POST_MAX_TITLE_LENGTH } from './PostForm.constants';
 
 export const postFormSchema = z.object({
+  iri: z.string().optional(),
   title: z.string().max(POST_MAX_TITLE_LENGTH).min(1),
   comment: z.string().min(1),
   files: z.array(editFileFormSchema).optional(),

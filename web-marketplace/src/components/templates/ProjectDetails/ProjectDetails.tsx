@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { useLingui } from '@lingui/react';
@@ -51,6 +51,7 @@ import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constan
 import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
+import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
@@ -105,6 +106,9 @@ function ProjectDetails(): JSX.Element {
   const { activeAccount } = useAuth();
 
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
+  const [draftPost, setDraftPost] = useState<
+    Partial<PostFormSchemaType> | undefined
+  >();
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -365,6 +369,10 @@ function ProjectDetails(): JSX.Element {
     ],
   );
 
+  const openCreatePostModal = useCallback(() => {
+    setIsCreatePostModalOpen(onChainProjectId || offChainProject?.id);
+  }, [offChainProject?.id, onChainProjectId]);
+
   if (
     !loadingDb &&
     !loadingAnchoredMetadata &&
@@ -403,6 +411,7 @@ function ProjectDetails(): JSX.Element {
     ? !!onChainProjectId
     : offchainProjectByIdData?.data?.projectById?.published ||
       projectBySlug?.data.projectBySlug?.published;
+  const projectLocation = projectMetadata?.['schema:location'];
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
@@ -475,12 +484,8 @@ function ProjectDetails(): JSX.Element {
           }
           isPrefinanceProject={isPrefinanceProject}
           isSoldOut={isSoldOut}
-          onClickCreatePost={() => {
-            setIsCreatePostModalOpen(onChainProjectId || offChainProject?.id);
-          }}
-          isCreatePostButtonDisabled={
-            !projectMetadata?.['schema:location'] || !isProjectPublished
-          }
+          onClickCreatePost={openCreatePostModal}
+          isCreatePostButtonDisabled={!projectLocation || !isProjectPublished}
           tooltipText={_(CREATE_POST_DISABLED_TOOLTIP_TEXT)}
         >
           {!isAdmin &&
@@ -568,10 +573,9 @@ function ProjectDetails(): JSX.Element {
         adminAccountId={offChainProject?.adminAccountId}
         offChainProjectId={offChainProject?.id}
         adminDescription={sanityProjectPage?.dataStreamAdminDescriptionRaw}
-        projectLocation={projectMetadata?.['schema:location']}
-        onClickCreatePost={() => {
-          setIsCreatePostModalOpen(onChainProjectId || offChainProject?.id);
-        }}
+        projectLocation={projectLocation}
+        openCreatePostModal={openCreatePostModal}
+        setDraftPost={setDraftPost}
       />
 
       <ProjectDetailsTableTabs
@@ -624,16 +628,23 @@ function ProjectDetails(): JSX.Element {
         credits={creditsWithProjectName}
       />
 
-      {isCreatePostModalOpen && projectMetadata?.['schema:location'] && (
+      {isCreatePostModalOpen && projectLocation && (
         <PostFlow
           onModalClose={() => {
             setIsCreatePostModalOpen(false);
           }}
-          projectLocation={projectMetadata?.['schema:location']}
+          projectLocation={projectLocation}
           projectId={onChainProjectId || offChainProject?.id}
           offChainProjectId={offChainProject?.id}
           projectName={projectMetadata?.['schema:name']}
           projectSlug={slug}
+          initialValues={{
+            title: draftPost?.title || '',
+            comment: draftPost?.comment || '',
+            files: draftPost?.files || [],
+            privacyType: draftPost?.privacyType || 'public',
+            published: draftPost?.published || true,
+          }}
         />
       )}
     </Box>

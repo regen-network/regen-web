@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-09-03 11:19+0200\n"
+"POT-Creation-Date: 2024-09-03 12:33+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -43,6 +43,7 @@ msgstr ""
 msgid "+ add another issuer'"
 msgstr ""
 
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:11
 #: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:4
 msgid "+ create post"
 msgstr ""
@@ -1735,7 +1736,7 @@ msgstr ""
 msgid "The total amount of credits that were issued to this project."
 msgstr ""
 
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:3
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:5
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:4
 msgid "There are currently no open sell orders for this project."
 msgstr ""
@@ -2024,6 +2025,10 @@ msgstr ""
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:4
 msgid "You cannot connect your account to this wallet address. This wallet address is already associated with another email address."
+msgstr ""
+
+#: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:5
+msgid "You cannot make posts because either the project is still a draft or it doesn't have assigned a location."
 msgstr ""
 
 #: src/components/organisms/BasketOverview/BasketOverview.constants.ts:4

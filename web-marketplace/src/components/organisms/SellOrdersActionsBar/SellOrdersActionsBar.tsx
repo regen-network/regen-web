@@ -19,6 +19,8 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
 import { Label, Subtitle } from 'web-components/src/components/typography';
 
+import { useWallet } from 'lib/wallet/wallet';
+
 import { EDIT_PROJECT } from 'pages/ProjectEdit/ProjectEdit.constants';
 import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constants';
 
@@ -26,6 +28,7 @@ import {
   BOOK_CALL,
   BUY_DISABLED_TOOLTIP,
 } from './SellOrdersActionsBar.constants';
+import { SellOrdersActionsBarCreatePostButton } from './SellOrdersActionsBar.CreatePostButton';
 
 type Params = {
   isBuyButtonDisabled: boolean;
@@ -44,6 +47,9 @@ type Params = {
   isAdmin?: boolean;
   children?: ReactNode;
   isSoldOut?: boolean;
+  onClickCreatePost?: () => void;
+  isCreatePostButtonDisabled?: boolean;
+  tooltipText?: string;
 };
 
 export const SellOrdersActionsBar = ({
@@ -63,6 +69,9 @@ export const SellOrdersActionsBar = ({
   isAdmin,
   children,
   isSoldOut,
+  onClickCreatePost,
+  isCreatePostButtonDisabled,
+  tooltipText,
 }: Params): JSX.Element => {
   const { _ } = useLingui();
   const location = useLocation();
@@ -70,6 +79,7 @@ export const SellOrdersActionsBar = ({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
+  const { loginDisabled } = useWallet();
 
   return (
     <StickyBar>
@@ -81,18 +91,37 @@ export const SellOrdersActionsBar = ({
         }}
       >
         {isAdmin ? (
-          <OutlinedButton
-            onClick={() =>
-              navigate(
-                `/project-pages/${
-                  onChainProjectId ?? offChainProjectId
-                }/edit/basic-info`,
-              )
-            }
-          >
-            <EditIcon className="mr-10" />
-            {_(EDIT_PROJECT)}
-          </OutlinedButton>
+          <>
+            {!loginDisabled &&
+              onClickCreatePost &&
+              (isCreatePostButtonDisabled && tooltipText ? (
+                <InfoTooltip arrow title={tooltipText} placement="top">
+                  <div>
+                    <SellOrdersActionsBarCreatePostButton
+                      onClickCreatePost={onClickCreatePost}
+                      isCreatePostButtonDisabled={isCreatePostButtonDisabled}
+                    />
+                  </div>
+                </InfoTooltip>
+              ) : (
+                <SellOrdersActionsBarCreatePostButton
+                  onClickCreatePost={onClickCreatePost}
+                  isCreatePostButtonDisabled={!!isCreatePostButtonDisabled}
+                />
+              ))}
+            <ContainedButton
+              onClick={() =>
+                navigate(
+                  `/project-pages/${
+                    onChainProjectId ?? offChainProjectId
+                  }/edit/basic-info`,
+                )
+              }
+            >
+              <EditIcon className="mr-10" sx={{ color: '#fff' }} />
+              {_(EDIT_PROJECT)}
+            </ContainedButton>
+          </>
         ) : (
           <>
             {((!isPrefinanceProject && !isBuyButtonDisabled) || !isSoldOut) &&

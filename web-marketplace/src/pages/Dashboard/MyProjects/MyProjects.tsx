@@ -21,7 +21,11 @@ import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
-import { CREATE_POST, DRAFT_ID } from './MyProjects.constants';
+import {
+  CREATE_POST,
+  CREATE_POST_DISABLED_TOOLTIP,
+  DRAFT_ID,
+} from './MyProjects.constants';
 import {
   getDefaultProject,
   handleProjectsDraftStatus,
@@ -127,6 +131,7 @@ const MyProjects = (): JSX.Element => {
                     }}
                     track={track}
                     pathname={location.pathname}
+                    tooltipText={_(CREATE_POST_DISABLED_TOOLTIP)}
                   />
                 </WithLoader>
               </Grid>

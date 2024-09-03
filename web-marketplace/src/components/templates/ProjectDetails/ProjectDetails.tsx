@@ -46,10 +46,12 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
+import { CREATE_POST_DISABLED_TOOLTIP } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constants';
 import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Link } from 'components/atoms';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
+import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
@@ -89,14 +91,21 @@ function ProjectDetails(): JSX.Element {
   const { ecocreditClient, dataClient } = useLedger();
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
-  const { activeWalletAddr, isConnected } = useWallet();
+  const {
+    activeWalletAddr,
+    isConnected,
+    isKeplrMobileWeb,
+    wallet,
+    loginDisabled,
+  } = useWallet();
   const graphqlClient = useApolloClient();
   const { track } = useTracker();
   const location = useLocation();
-  const { isKeplrMobileWeb } = useWallet();
   const navigate = useNavigate();
   const { activeAccount } = useAuth();
   const { _ } = useLingui();
+
+  const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -380,7 +389,17 @@ function ProjectDetails(): JSX.Element {
   const isAdmin =
     (!!activeAccount?.addr && onChainProject?.admin === activeAccount?.addr) ||
     (!!activeAccount?.id &&
-      offChainProject?.adminAccountId === activeAccount?.id);
+      offChainProject?.adminAccountId === activeAccount?.id) ||
+    !!(
+      loginDisabled &&
+      wallet?.address &&
+      wallet?.address === onChainProject?.admin
+    );
+
+  const isProjectPublished = onChainProjectId
+    ? !!onChainProjectId
+    : offchainProjectByIdData?.data?.projectById?.published ||
+      projectBySlug?.data.projectBySlug?.published;
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
@@ -416,7 +435,9 @@ function ProjectDetails(): JSX.Element {
         </Box>
       )}
 
-      {(onChainProjectId || isPrefinanceProject || isAdmin) && (
+      {(onChainProjectId ||
+        isPrefinanceProject ||
+        (isAdmin && !loginDisabled)) && (
         <SellOrdersActionsBar
           isBuyButtonDisabled={isBuyFlowDisabled}
           isCommunityCredit={isCommunityCredit}
@@ -451,6 +472,13 @@ function ProjectDetails(): JSX.Element {
           }
           isPrefinanceProject={isPrefinanceProject}
           isSoldOut={isSoldOut}
+          onClickCreatePost={() => {
+            setIsCreatePostModalOpen(onChainProjectId || offChainProject?.id);
+          }}
+          isCreatePostButtonDisabled={
+            !projectMetadata?.['schema:location'] || !isProjectPublished
+          }
+          tooltipText={_(CREATE_POST_DISABLED_TOOLTIP)}
         >
           {!isAdmin &&
             isPrefinanceProject &&
@@ -537,10 +565,10 @@ function ProjectDetails(): JSX.Element {
         adminAccountId={offChainProject?.adminAccountId}
         offChainProjectId={offChainProject?.id}
         adminDescription={sanityProjectPage?.dataStreamAdminDescriptionRaw}
-        onChainProjectId={onChainProjectId}
-        projectName={projectMetadata?.['schema:name']}
-        projectSlug={slug}
         projectLocation={projectMetadata?.['schema:location']}
+        onClickCreatePost={() => {
+          setIsCreatePostModalOpen(onChainProjectId || offChainProject?.id);
+        }}
       />
 
       <ProjectDetailsTableTabs
@@ -592,6 +620,19 @@ function ProjectDetails(): JSX.Element {
         setIsFlowStarted={setIsSellFlowStarted}
         credits={creditsWithProjectName}
       />
+
+      {isCreatePostModalOpen && projectMetadata?.['schema:location'] && (
+        <PostFlow
+          onModalClose={() => {
+            setIsCreatePostModalOpen(false);
+          }}
+          projectLocation={projectMetadata?.['schema:location']}
+          projectId={onChainProjectId || offChainProject?.id}
+          offChainProjectId={offChainProject?.id}
+          projectName={projectMetadata?.['schema:name']}
+          projectSlug={slug}
+        />
+      )}
     </Box>
   );
 }

@@ -27,8 +27,6 @@ import {
 } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.types';
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 
-import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
-
 import {
   CREATE_POST,
   DATA_STREAM,
@@ -42,10 +40,8 @@ type Props = {
   adminAccountId?: string | null;
   offChainProjectId?: string;
   adminDescription?: SanityBlockContent;
-  onChainProjectId?: string;
-  projectName?: string;
-  projectSlug?: string | null;
   projectLocation?: GeocodeFeature;
+  onClickCreatePost: () => void;
 };
 
 export const DataStream = ({
@@ -53,15 +49,12 @@ export const DataStream = ({
   adminAccountId,
   offChainProjectId,
   adminDescription,
-  onChainProjectId,
-  projectName,
-  projectSlug,
   projectLocation,
+  onClickCreatePost,
 }: Props) => {
   const { activeAccountId } = useAuth();
   const [year, setYear] = useState<number | null>(null);
   const [years, setYears] = useState<Array<number>>([]);
-  const [postProjectId, setPostProjectId] = useState<string | undefined>();
 
   const isAdmin =
     !!adminAccountId && !!activeAccountId && adminAccountId === activeAccountId;
@@ -103,11 +96,7 @@ export const DataStream = ({
                 <Body className="mb-15 max-w-[683px]" size="lg">
                   <BlockContent content={adminDescription} />
                 </Body>
-                <ContainedButton
-                  onClick={() =>
-                    setPostProjectId(onChainProjectId || offChainProjectId)
-                  }
-                >
+                <ContainedButton onClick={onClickCreatePost}>
                   {CREATE_POST}
                 </ContainedButton>
               </div>
@@ -195,24 +184,6 @@ export const DataStream = ({
               )}
             </div>
           </Section>
-          {postProjectId && projectLocation && (
-            <PostFlow
-              onModalClose={() => {
-                setPostProjectId(undefined);
-              }}
-              projectLocation={projectLocation}
-              projectId={onChainProjectId || postProjectId}
-              offChainProjectId={offChainProjectId}
-              projectName={projectName}
-              projectSlug={projectSlug}
-              initialValues={{
-                title: '',
-                comment: '',
-                files: [],
-                privacyType: 'public',
-              }}
-            />
-          )}
         </>
       )}
     </>

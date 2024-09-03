@@ -1,5 +1,4 @@
 import { Bech32Address } from '@keplr-wallet/cosmos';
-import { msg } from '@lingui/macro';
 
 /* Constants, limits */
 
@@ -28,8 +27,6 @@ export const requiredDenom: string = 'Please choose a denom';
 export const invalidDecimalCount: string = `More than ${MAX_FRACTION_DIGITS} decimal places not allowed`;
 export const invalidMemoLength: string = `Must be ${MEMO_MAX_LENGTH} characters or fewer`;
 export const positiveNumber = 'Must be positive';
-export const maxAmount = msg`Amount cannot exceed`;
-export const maxCredits = msg`Credits cannot exceed`;
 
 /* Validation Functions */
 

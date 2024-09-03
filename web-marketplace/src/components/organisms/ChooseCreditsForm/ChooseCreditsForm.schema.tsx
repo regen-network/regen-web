@@ -6,10 +6,10 @@ import {
 import { z } from 'zod';
 
 import {
-  maxAmount,
-  maxCredits,
-  positiveNumber,
-} from 'web-components/src/components/inputs/validation';
+  MAX_AMOUNT,
+  MAX_CREDITS,
+  POSITIVE_NUMBER,
+} from './ChooseCreditsForm.constants';
 
 export const createChooseCreditsFormSchema = ({
   creditsCap,
@@ -21,18 +21,18 @@ export const createChooseCreditsFormSchema = ({
   return z.object({
     [CURRENCY_AMOUNT]: z.coerce
       .number()
-      .positive(positiveNumber)
+      .positive(POSITIVE_NUMBER)
       .max(
         spendingCap,
-        `${i18n._(maxAmount)} ${spendingCap.toLocaleString(undefined, {
+        `${i18n._(MAX_AMOUNT)} ${spendingCap.toLocaleString(undefined, {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         })}`,
       ),
     [CREDITS_AMOUNT]: z.coerce
       .number()
-      .positive(positiveNumber)
-      .max(creditsCap, `${i18n._(maxCredits)} ${creditsCap}`),
+      .positive(POSITIVE_NUMBER)
+      .max(creditsCap, `${i18n._(MAX_CREDITS)} ${creditsCap}`),
     retiring: z.boolean(),
     creditVintageOptions: z.array(z.string()),
   });

@@ -38,7 +38,7 @@ export const LocationPicker = ({
   const mapRef = useRef<MapRef | null>(null);
   const point = value.geometry as Point;
 
-  const displayedLocation = `${point.coordinates[0]}, ${point.coordinates[1]} ${
+  const displayedLocation = `${point.coordinates[1]}, ${point.coordinates[0]} ${
     geocodingPlaceName ? `(${geocodingPlaceName})` : ''
   }`;
   const [viewState, setViewState] = useState<RestrictedViewState>({

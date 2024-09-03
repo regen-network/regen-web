@@ -8,6 +8,7 @@ import { postData } from 'utils/fetch/postData';
 
 import Modal from 'web-components/src/components/modal';
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 import { deleteImage } from 'web-components/src/utils/s3';
 
 import { apiUri } from 'lib/apiUri';
@@ -39,7 +40,7 @@ type Props = {
   projectName?: string;
   projectSlug?: string | null;
   offChainProjectId?: string;
-  draftPostIri?: string;
+  setDraftPost?: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
 };
 
 export const PostFlow = ({
@@ -50,7 +51,7 @@ export const PostFlow = ({
   projectName,
   projectSlug,
   offChainProjectId: _offChainProjectId,
-  draftPostIri,
+  setDraftPost,
 }: Props) => {
   const fileNamesToDeleteRef = useRef<string[]>([]);
   const retryCsrfRequest = useRetryCsrfRequest();
@@ -82,6 +83,7 @@ export const PostFlow = ({
   });
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const setBannerText = useSetAtom(bannerTextAtom);
+  const draftPostIri = initialValues?.iri;
 
   const onSubmit = useCallback(
     async (data: PostFormSchemaType) => {
@@ -121,7 +123,11 @@ export const PostFlow = ({
             token,
             retryCsrfRequest,
             onSuccess: async res => {
-              setIri(res.iri);
+              if (draftPostIri && setDraftPost) {
+                setDraftPost(undefined);
+              }
+              if (res.iri) setIri(res.iri);
+
               await reactQueryClient.invalidateQueries({
                 queryKey: getPostsQueryKey({
                   projectId: offChainProjectId,
@@ -140,6 +146,7 @@ export const PostFlow = ({
       draftPostIri,
       offChainProjectId,
       retryCsrfRequest,
+      setDraftPost,
       reactQueryClient,
       setErrorBannerTextAtom,
     ],
@@ -201,9 +208,10 @@ export const PostFlow = ({
       );
       fileNamesToDeleteRef.current = [];
 
+      setDraftPost && setDraftPost(undefined);
       onModalClose();
     },
-    [offChainProjectId, onModalClose],
+    [offChainProjectId, onModalClose, setDraftPost],
   );
   const sign = useSign({
     projectSlug,

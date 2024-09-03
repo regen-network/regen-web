@@ -639,12 +639,14 @@ function ProjectDetails(): JSX.Element {
           projectName={projectMetadata?.['schema:name']}
           projectSlug={slug}
           initialValues={{
+            iri: draftPost?.iri,
             title: draftPost?.title || '',
             comment: draftPost?.comment || '',
             files: draftPost?.files || [],
             privacyType: draftPost?.privacyType || 'public',
             published: draftPost?.published || true,
           }}
+          setDraftPost={setDraftPost}
         />
       )}
     </Box>

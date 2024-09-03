@@ -84,6 +84,7 @@ function Post(): JSX.Element {
           name: file.name,
           description: file.description,
           credit: file.credit,
+          locationType: file.locationType,
           location: file.location?.wkt
             ? (parse(file.location?.wkt) as Point)
             : undefined,

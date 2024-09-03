@@ -104,7 +104,6 @@ function ProjectDetails(): JSX.Element {
   const location = useLocation();
   const navigate = useNavigate();
   const { activeAccount } = useAuth();
-  const { _ } = useLingui();
 
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
 

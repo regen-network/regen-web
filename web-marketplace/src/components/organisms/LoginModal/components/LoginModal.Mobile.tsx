@@ -24,7 +24,6 @@ const LoginModalMobile = ({
   const onCloseModal = () => {
     setOpen(false);
   };
-  const { _ } = useLingui();
   const [qrState, setQRState] = useState<State>(State.Init); // state of QRCode
   const [qrMsg, setQRMsg] = useState<string>(''); // message of QRCode error
   const [connecting, setConnecting] = useState<boolean>(false);

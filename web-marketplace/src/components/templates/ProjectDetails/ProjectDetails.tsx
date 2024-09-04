@@ -46,10 +46,9 @@ import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellO
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
-import { CREATE_POST_DISABLED_TOOLTIP } from 'pages/Dashboard/MyProjects/MyProjects.constants';
+import { CREATE_POST_TOOLTIP_TEXT } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constants';
 import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
-import { Link } from 'components/atoms';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
@@ -482,7 +481,7 @@ function ProjectDetails(): JSX.Element {
           isCreatePostButtonDisabled={
             !projectMetadata?.['schema:location'] || !isProjectPublished
           }
-          tooltipText={_(CREATE_POST_DISABLED_TOOLTIP)}
+          tooltipText={_(CREATE_POST_TOOLTIP_TEXT)}
         >
           {!isAdmin &&
             isPrefinanceProject &&

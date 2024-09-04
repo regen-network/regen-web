@@ -21,7 +21,11 @@ export const getDefaultProject = (
     text: _(EDIT_PROJECT),
     startIcon: (
       <EditIcon
-        sx={{ width: 20, height: 20, color: disabled ? 'grey.100' : 'inherit' }}
+        sx={{
+          width: 20,
+          height: 20,
+          color: disabled ? 'primary.main' : 'inherit',
+        }}
       />
     ),
     disabled,

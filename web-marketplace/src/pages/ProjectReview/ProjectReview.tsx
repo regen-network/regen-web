@@ -107,6 +107,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
             id: projectId,
             projectPatch: {
               onChainId: projectOnChainId,
+              published: true,
               metadata: getUnanchoredProjectMetadata(
                 metadata,
                 projectOnChainId,

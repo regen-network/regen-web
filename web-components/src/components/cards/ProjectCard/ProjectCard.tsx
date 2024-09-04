@@ -276,7 +276,7 @@ export function ProjectCard({
                     )}
                   </div>
                 )}
-                <div className="flex gap-10">
+                <div className="grid gap-10 grid-cols-2">
                   {containedButton &&
                     onContainedButtonClick &&
                     (containedButton.disabled && editProjectTooltipText ? (
@@ -285,7 +285,7 @@ export function ProjectCard({
                         title={editProjectTooltipText}
                         placement="top"
                       >
-                        <div className="inline-flex w-full">
+                        <div>
                           <ContainedButton
                             size="small"
                             startIcon={containedButton.startIcon}
@@ -317,7 +317,7 @@ export function ProjectCard({
                         title={createPostTooltipText}
                         placement="top"
                       >
-                        <div className="inline-flex w-full">
+                        <div>
                           <ProjectCardButton
                             id={id}
                             name={name}
@@ -332,7 +332,7 @@ export function ProjectCard({
                             isPrefinanceProject={isPrefinanceProject}
                             buttonText={buttonText}
                             buttonStartIcon={buttonStartIcon}
-                            buttonClassName={buttonClassName}
+                            buttonClassName={`${buttonClassName} h-full`}
                             isButtonDisabled={isButtonDisabled}
                             isSoldOut={isSoldOut}
                           />

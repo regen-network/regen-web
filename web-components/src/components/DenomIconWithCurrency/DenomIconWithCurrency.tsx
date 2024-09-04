@@ -20,7 +20,7 @@ export function DenomIconWithCurrency({
         baseDenom={currency}
         className="h-[24px] inline-block denom-icon"
       />
-      <span className="pb-5 pt-1 text-sm">{currency.toUpperCase()}</span>
+      <span className="pb-5 pt-3 text-sm">{currency.toUpperCase()}</span>
       {tooltipText && (
         <QuestionMarkTooltip
           placement="bottom"

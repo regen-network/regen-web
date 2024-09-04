@@ -93,7 +93,7 @@ export const CurrencyInput = ({
             width: '15px !important',
             height: '15px !important',
             right: 'auto !important',
-            top: '-3px !important',
+            top: '-2px !important',
             position: 'relative !important',
           },
           '& .MuiSvgIcon-root': {
@@ -105,6 +105,9 @@ export const CurrencyInput = ({
           },
           '& .MuiTypography-root': {
             'min-width': '60px',
+          },
+          '& .MuiInputAdornment-root': {
+            'padding-top': '5px',
           },
         }}
         endAdornment={

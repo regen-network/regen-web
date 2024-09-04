@@ -62,7 +62,7 @@ export const TextOrIconFilePreview = ({
       }
     };
   }, []);
-
+  console.log(preview);
   return (
     <div
       ref={parentRef}

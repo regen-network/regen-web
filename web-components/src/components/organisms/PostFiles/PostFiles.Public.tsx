@@ -245,6 +245,7 @@ const PostFilesPublic = ({
               }}
               setSelectedLocation={setSelectedLocation}
               setAnimateMarker={setAnimateMarker}
+              filesPreviews={filesPreviews}
             />
           )}
           {isAdmin && (privateLocations || privateFiles) && (

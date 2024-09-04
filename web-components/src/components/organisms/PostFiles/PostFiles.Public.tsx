@@ -88,20 +88,10 @@ const PostFilesPublic = ({
   const onLoad = (): void => {
     if (locations.features.length > 1) {
       const [minLng, minLat, maxLng, maxLat] = bbox(locations);
-      mapRef.current?.fitBounds(
-        [
-          [minLng, minLat],
-          [maxLng, maxLat],
-        ],
-        {
-          padding: {
-            top: mobile ? 50 : 100,
-            left: 50,
-            right: mobile ? 50 : 0,
-            bottom: mobile ? 220 : 100,
-          },
-        },
-      );
+      mapRef.current?.fitBounds([
+        [minLng, minLat],
+        [maxLng, maxLat],
+      ]);
     }
   };
 
@@ -117,7 +107,7 @@ const PostFilesPublic = ({
               top: mobile ? 50 : 100,
               left: 50,
               right: mobile ? 50 : 310,
-              bottom: mobile ? 220 : 100,
+              bottom: mobile ? 270 : 100,
             },
           }}
           ref={mapRef}

@@ -7,6 +7,7 @@ import { FileBody } from './components/FileBody';
 import { FilePreview } from './components/FilePreview';
 import { PostFile } from './PostFiles';
 import { useStyles } from './PostFiles.styles';
+import { FilesPreviews } from './PostFiles.types';
 
 type Props = {
   files: Array<PostFile>;
@@ -15,6 +16,7 @@ type Props = {
   setSelectedLocation: UseStateSetter<Point | undefined>;
   selectedUrl: string;
   setAnimateMarker: UseStateSetter<boolean>;
+  filesPreviews: FilesPreviews;
 };
 
 const PostFilesCardsMobile = ({
@@ -24,6 +26,7 @@ const PostFilesCardsMobile = ({
   setSelectedLocation,
   selectedUrl,
   setAnimateMarker,
+  filesPreviews,
 }: Props) => {
   const { classes: styles } = useStyles();
 
@@ -44,6 +47,7 @@ const PostFilesCardsMobile = ({
           className="relative bg-grey-0 h-[230px] rounded-[10px] border-[3px] border-solid border-grey-0"
         >
           <FilePreview
+            preview={file.url ? filesPreviews[file.url] : undefined}
             pdfPageHeight={183}
             className="rounded-t-[10px] h-[183px] overflow-hidden"
             file={file}

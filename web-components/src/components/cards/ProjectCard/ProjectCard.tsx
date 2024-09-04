@@ -120,7 +120,7 @@ export function ProjectCard({
     startIcon: buttonStartIcon,
     className: buttonClassName,
   } = cardButton;
-  const isCreatePostButtonDisabled =
+  const isButtonDisabled =
     cardButton?.disabled !== undefined
       ? cardButton?.disabled
       : !purchaseInfo?.sellInfo?.creditsAvailableForUser &&
@@ -311,7 +311,7 @@ export function ProjectCard({
                       </ContainedButton>
                     ))}
                   {(onButtonClick || isPrefinanceProject || offChain) &&
-                    (isCreatePostButtonDisabled && createPostTooltipText ? (
+                    (isButtonDisabled && createPostTooltipText ? (
                       <InfoTooltip
                         arrow
                         title={createPostTooltipText}
@@ -333,7 +333,7 @@ export function ProjectCard({
                             buttonText={buttonText}
                             buttonStartIcon={buttonStartIcon}
                             buttonClassName={buttonClassName}
-                            isButtonDisabled={isCreatePostButtonDisabled}
+                            isButtonDisabled={isButtonDisabled}
                             isSoldOut={isSoldOut}
                           />
                         </div>
@@ -354,7 +354,7 @@ export function ProjectCard({
                         buttonText={buttonText}
                         buttonStartIcon={buttonStartIcon}
                         buttonClassName={buttonClassName}
-                        isButtonDisabled={isCreatePostButtonDisabled}
+                        isButtonDisabled={isButtonDisabled}
                         isSoldOut={isSoldOut}
                       />
                     ))}

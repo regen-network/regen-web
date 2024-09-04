@@ -100,7 +100,6 @@ const MyProjects = (): JSX.Element => {
                     }
                     {...getDefaultProject(!activeAccountId, _)}
                     {...project}
-                    draft={project.offChain && !project.published}
                     button={{
                       text: _(CREATE_POST),
                       disabled:

@@ -77,7 +77,7 @@ export const normalizeProjectsWithMetadata = ({
 };
 
 interface NormalizeProjectWithMetadataParams {
-  offChainProject?: Maybe<Pick<Project, 'id' | 'slug'>>;
+  offChainProject?: Maybe<Pick<Project, 'id' | 'slug' | 'published'>>;
   projectWithOrderData?: ProjectWithOrderData;
   projectMetadata?: AnchoredProjectMetadataBaseLD | undefined;
   projectPageMetadata?: ProjectPageMetadataLD;
@@ -134,6 +134,7 @@ export const normalizeProjectWithMetadata = ({
     id: projectId,
     offChainId: offChainProject?.id,
     slug: offChainProject?.slug ?? projectWithOrderData?.slug,
+    draft: !projectWithOrderData && !offChainProject?.published,
     name:
       projectMetadata?.['schema:name'] ||
       projectWithOrderData?.name ||

@@ -29,7 +29,11 @@ import PostForm from '../PostForm';
 import { PostFormSchemaType } from '../PostForm/PostForm.schema';
 import { useFetchMsgAnchor } from './hooks/useFetchMsgAnchor';
 import { useSign } from './hooks/useSign';
-import { basePostContent, DRAFT_CREATED } from './PostFlow.constants';
+import {
+  basePostContent,
+  DRAFT_CREATED,
+  DRAFT_SAVED,
+} from './PostFlow.constants';
 import { SignModal } from './PostFlow.SignModal';
 
 type Props = {
@@ -123,9 +127,6 @@ export const PostFlow = ({
             token,
             retryCsrfRequest,
             onSuccess: async res => {
-              if (draftPostIri && setDraftPost) {
-                setDraftPost(undefined);
-              }
               if (res.iri) setIri(res.iri);
 
               await reactQueryClient.invalidateQueries({
@@ -146,7 +147,6 @@ export const PostFlow = ({
       draftPostIri,
       offChainProjectId,
       retryCsrfRequest,
-      setDraftPost,
       reactQueryClient,
       setErrorBannerTextAtom,
     ],
@@ -174,18 +174,24 @@ export const PostFlow = ({
           onModalClose();
         }
       } else {
-        setBannerText(_(DRAFT_CREATED));
+        setBannerText(draftPostIri ? _(DRAFT_SAVED) : _(DRAFT_CREATED));
+        if (draftPostIri && setDraftPost) {
+          setDraftPost(undefined);
+        }
         onModalClose();
       }
     }
   }, [
     _,
     createdPostData,
+    draftPostIri,
     fetchMsgAnchor,
     hasAddress,
+    initialValues.iri,
     iri,
     onModalClose,
     setBannerText,
+    setDraftPost,
     setProcessingModalAtom,
   ]);
 

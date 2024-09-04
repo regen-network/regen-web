@@ -107,7 +107,7 @@ const PostFilesPublic = ({
               top: mobile ? 50 : 100,
               left: 50,
               right: mobile ? 50 : 310,
-              bottom: mobile ? 220 : 100,
+              bottom: mobile ? 270 : 100,
             },
           }}
           ref={mapRef}

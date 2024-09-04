@@ -229,10 +229,14 @@ function ProjectDetails(): JSX.Element {
   const publishedOffchainProjectById = offChainProjectById?.published
     ? offChainProjectById
     : undefined;
+  const publishedOffchainProjectBySlug = projectBySlug?.data?.projectBySlug
+    ?.published
+    ? projectBySlug?.data?.projectBySlug
+    : undefined;
 
   const offChainProject = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
-    : publishedOffchainProjectById ?? projectBySlug?.data.projectBySlug;
+    : publishedOffchainProjectById ?? publishedOffchainProjectBySlug;
 
   /* Credit class */
 

@@ -12,11 +12,11 @@ msgstr ""
 msgid ""
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:181
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:180
 msgid "(drag map to choose location)"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:165
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:164
 msgid "(file will be associated with the project location by default)"
 msgstr ""
 
@@ -578,7 +578,7 @@ msgstr ""
 msgid "Choose a practice start date"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:180
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:179
 msgid "Choose a specific location on the map"
 msgstr ""
 
@@ -967,7 +967,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:96
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:95
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:182
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:123
 #: src/pages/Description/Description.tsx:48
@@ -997,7 +997,11 @@ msgstr ""
 msgid "Draft created!"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:140
+#: src/components/organisms/PostFlow/PostFlow.constants.ts:53
+msgid "Draft saved!"
+msgstr ""
+
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:139
 msgid "Drag map to choose location"
 msgstr ""
 
@@ -1103,7 +1107,7 @@ msgstr ""
 msgid "Edit Project Page"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:76
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:75
 msgid "Edit your file"
 msgstr ""
 
@@ -1181,7 +1185,7 @@ msgstr ""
 msgid "File locations can still be shared privately via a secret link."
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:89
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:88
 msgid "File name"
 msgstr ""
 
@@ -1463,7 +1467,7 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:123
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:122
 #: src/pages/ProjectLocation/ProjectLocation.tsx:44
 #: src/pages/ProjectReview/ProjectReview.tsx:202
 msgid "Location"
@@ -1665,7 +1669,7 @@ msgstr ""
 msgid "No retirements to display"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:163
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:162
 msgid "No specific location"
 msgstr ""
 
@@ -1739,7 +1743,7 @@ msgstr ""
 msgid "Peer <0/>Reviewed"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:115
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:114
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:183
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:282
 #: src/components/organisms/MediaForm/MediaFormStory.tsx:177
@@ -2801,7 +2805,7 @@ msgstr ""
 msgid "Unregistered projects"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.DataStream.Post.tsx:177
+#: src/pages/Post/Post.constants.ts:17
 msgid "Untitled"
 msgstr ""
 
@@ -2821,7 +2825,7 @@ msgstr ""
 msgid "USD"
 msgstr ""
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:148
+#: src/components/organisms/EditFileForm/EditFileForm.tsx:147
 msgid "Use file geolocation"
 msgstr ""
 

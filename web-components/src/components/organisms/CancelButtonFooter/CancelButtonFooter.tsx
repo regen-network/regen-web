@@ -8,6 +8,7 @@ export interface Props extends ButtonProps {
   onCancel: () => void;
   hideCancel?: boolean;
   cancelLabel?: string;
+  cancelClassName?: string;
 }
 
 const CancelButtonFooter = ({
@@ -15,14 +16,16 @@ const CancelButtonFooter = ({
   label,
   hideCancel,
   cancelLabel,
+  cancelClassName,
   children,
   ...props
 }: React.PropsWithChildren<Props>): JSX.Element => {
   return (
-    <Grid container alignItems="center" justifyContent="flex-end">
+    <Grid container alignItems="center" justifyContent="flex-end" wrap="nowrap">
       {!hideCancel && (
         <Grid item>
           <Button
+            className={cancelClassName}
             onClick={onCancel}
             sx={{
               color: 'info.main',
@@ -36,7 +39,7 @@ const CancelButtonFooter = ({
           </Button>
         </Grid>
       )}
-      {children}
+      <Grid item>{children}</Grid>
       <Grid item>
         <ContainedButton {...props}>{label}</ContainedButton>
       </Grid>

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { ContentHash_Graph } from '@regen-network/api/lib/generated/regen/data/v1/types';
@@ -76,6 +77,7 @@ export const PostFlow = ({
     }),
   );
   const { _ } = useLingui();
+  const navigate = useNavigate();
 
   const [offChainProjectId, setOffChainProjectId] =
     useState(_offChainProjectId);
@@ -179,6 +181,11 @@ export const PostFlow = ({
           setDraftPost(undefined);
         }
         onModalClose();
+        navigate(
+          `/project/${
+            projectSlug ?? offChainProjectId ?? projectId
+          }#data-stream`,
+        );
       }
     }
   }, [
@@ -189,7 +196,11 @@ export const PostFlow = ({
     hasAddress,
     initialValues?.iri,
     iri,
+    navigate,
+    offChainProjectId,
     onModalClose,
+    projectId,
+    projectSlug,
     setBannerText,
     setDraftPost,
     setProcessingModalAtom,

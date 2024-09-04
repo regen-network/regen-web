@@ -10,6 +10,7 @@ import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton
 import { LocationIcon } from 'web-components/src/components/icons/LocationIcon';
 import { LockIcon } from 'web-components/src/components/icons/LockIcon';
 import { PrivateFile } from 'web-components/src/components/icons/PrivateFile';
+import { SaveIcon } from 'web-components/src/components/icons/SaveIcon';
 import { UnlockIcon } from 'web-components/src/components/icons/UnlockIcon';
 import {
   FileDrop,
@@ -451,12 +452,13 @@ export const PostForm = ({
         type="submit"
       >
         <OutlinedButton
-          className="mr-10"
+          className="mr-10 flex justify-center gap-10"
           onClick={() => {
             setValue('published', false);
             onSubmit && onSubmit(form.getValues());
           }}
         >
+          <SaveIcon className="mb-2" />
           <Trans>save draft</Trans>
         </OutlinedButton>
       </CancelButtonFooter>

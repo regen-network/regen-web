@@ -104,6 +104,7 @@ export default function PostCard({
           />
           <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
             <Body
+              onClick={e => e.stopPropagation()}
               size="md"
               sx={{ pb: 1.5 }}
               className="line-clamp-2 overflow-hidden"

@@ -226,7 +226,10 @@ const PostFilesPublic = ({
               filesPreviews={filesPreviews}
               setSelectedUrl={setSelectedUrl}
               selectedUrl={selectedUrl}
-              setSelectedLocation={setSelectedLocation}
+              setSelectedLocation={point => {
+                setSelectedLocation(point);
+                setIsFilesWindowOpen(true);
+              }}
             />
             <div
               onClick={() => mapRef.current?.zoomOut()}

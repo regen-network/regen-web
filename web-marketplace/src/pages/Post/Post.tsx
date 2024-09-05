@@ -8,6 +8,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { MAPBOX_TOKEN } from 'config/globals';
 import { Point } from 'geojson';
+import Linkify from 'linkify-react';
 import { parse } from 'wellknown';
 
 import { PostFiles } from 'web-components/src/components/organisms/PostFiles/PostFiles';
@@ -158,7 +159,12 @@ function Post(): JSX.Element {
 
                 <Section className="sm:p-0 py-0">
                   <Body className="max-w-[750px] m-auto" size="xl">
-                    {data?.contents.comment}
+                    <Linkify
+                      // eslint-disable-next-line lingui/no-unlocalized-strings
+                      options={{ target: '_blank', rel: 'noopener noreferrer' }}
+                    >
+                      {data?.contents.comment}
+                    </Linkify>
                   </Body>
                   <div className="my-40 sm:my-50 mx-auto border-t-[1px] border-b-0 border-solid border-grey-300 max-w-[750px] w-[100%]" />
                 </Section>

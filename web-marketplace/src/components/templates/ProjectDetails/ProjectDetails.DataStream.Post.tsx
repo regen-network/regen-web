@@ -173,7 +173,7 @@ export const DataStreamPost = ({
             <PostCard
               onClick={() => navigate(`/post/${post.iri}`)}
               title={post.contents.title}
-              description={post.contents.comment}
+              comment={post.contents.comment}
               privacyLabel={
                 post.privacy === 'private'
                   ? _(POST_IS_PRIVATE)

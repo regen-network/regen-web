@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
+import Linkify from 'linkify-react';
 
 import { defaultFontFamily } from '../../../theme/muiTheme';
 import VerifiedIcon from '../../icons/VerifiedIcon';
@@ -17,7 +18,7 @@ import ActionButton from './PostCardActionButton';
 
 interface PostCardProps {
   title: string;
-  description: string;
+  comment: string;
   imgSrc?: string;
   author: User;
   signers?: Array<User>;
@@ -35,7 +36,7 @@ interface PostCardProps {
 
 export default function PostCard({
   title,
-  description,
+  comment,
   file,
   preview,
   author,
@@ -107,7 +108,12 @@ export default function PostCard({
               sx={{ pb: 1.5 }}
               className="line-clamp-2 overflow-hidden"
             >
-              {description}
+              <Linkify
+                // eslint-disable-next-line lingui/no-unlocalized-strings
+                options={{ target: '_blank', rel: 'noopener noreferrer' }}
+              >
+                {comment}
+              </Linkify>
             </Body>
           </Box>
           {signers && signers.length > 0 && (

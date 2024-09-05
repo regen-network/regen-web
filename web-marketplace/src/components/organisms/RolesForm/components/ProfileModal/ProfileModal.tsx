@@ -65,7 +65,7 @@ function ProfileModal({
   /* Setter */
 
   const setProfileImage = ({ value }: { value: string }): void => {
-    form.setValue('profileImage', value);
+    form.setValue('profileImage', value, { shouldDirty: true });
   };
 
   /* Effect */

@@ -93,10 +93,10 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     /* Setter */
 
     const setProfileImage = ({ value }: { value: string }): void => {
-      form.setValue('profileImage', value);
+      form.setValue('profileImage', value, { shouldDirty: true });
     };
     const setBackgroundImage = ({ value }: { value: string }): void => {
-      form.setValue('backgroundImage', value);
+      form.setValue('backgroundImage', value, { shouldDirty: true });
     };
 
     /* Effect */

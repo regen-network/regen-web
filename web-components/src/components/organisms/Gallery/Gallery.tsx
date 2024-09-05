@@ -123,7 +123,7 @@ const Gallery = ({
             <motion.img key={page} src={item?.url} {...motionSettings} />
           ) : isVideo(item?.mimeType) && item?.url ? (
             <motion.div key={page} {...motionSettings}>
-              <VideoPreview url={item?.url} />
+              <VideoPreview url={item?.url} buttonClassName="lg:top-[42%]" />
             </motion.div>
           ) : (
             <motion.div key={page} {...motionSettings}>

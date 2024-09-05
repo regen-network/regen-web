@@ -4,7 +4,13 @@ import { PauseButton } from 'web-components/src/components/atoms/PauseButton/Pau
 
 import { PlayButton } from '../../../atoms/PlayButton/PlayButton';
 
-export const VideoPreview = ({ url }: { url: string }) => {
+export const VideoPreview = ({
+  url,
+  buttonClassName = '',
+}: {
+  url: string;
+  buttonClassName?: string;
+}) => {
   const [playing, setPlaying] = useState(false);
   const [hovered, setHovered] = useState(false);
 
@@ -40,9 +46,9 @@ export const VideoPreview = ({ url }: { url: string }) => {
           className="outline-none cursor-pointer bg-transparent border-none"
         >
           {playing ? (
-            <PauseButton className="w-50 h-50" />
+            <PauseButton className={`w-50 h-50 ${buttonClassName}`} />
           ) : (
-            <PlayButton className="w-50 h-50" />
+            <PlayButton className={`w-50 h-50 ${buttonClassName}`} />
           )}
         </button>
       </div>

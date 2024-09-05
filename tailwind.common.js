@@ -85,6 +85,9 @@ module.exports = {
       fontWeight: {
         inherit: "inherit",
       },
+      backgroundColor: {
+        transparent: 'transparent',
+      },
     },
   },
   plugins: [],

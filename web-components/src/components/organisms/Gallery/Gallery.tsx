@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import ReactPlayer from 'react-player/es6';
 import { Box, SxProps, useTheme } from '@mui/material';
 import { AnimatePresence, motion, PanInfo } from 'framer-motion';
 import { wrap } from 'popmotion';
 
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
-import { PlayButton } from '../../atoms/PlayButton/PlayButton';
 import { OpenInNewIcon } from '../../icons/OpenInNewIcon';
 import {
   isAudio,
@@ -20,6 +18,7 @@ import {
 } from '../../inputs/new/FileDrop/FileDrop.utils';
 import { PdfPreview } from '../PostFiles/components/PdfPreview';
 import { TextOrIconFilePreview } from '../PostFiles/components/TextOrIconFilePreview';
+import { VideoPreview } from '../PostFiles/components/VideoPreview';
 import { FilesPreviews } from '../PostFiles/PostFiles.types';
 import { getColors } from '../PostFiles/PostFiles.utils';
 import { GalleryBottomBar } from './Gallery.BottomBar';
@@ -122,17 +121,9 @@ const Gallery = ({
         <AnimatePresence initial={false} custom={direction}>
           {allImages || isImage(item?.mimeType) ? (
             <motion.img key={page} src={item?.url} {...motionSettings} />
-          ) : isVideo(item?.mimeType) ? (
+          ) : isVideo(item?.mimeType) && item?.url ? (
             <motion.div key={page} {...motionSettings}>
-              <ReactPlayer url={item?.url} width="100%" height="100%" />
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={item?.url}
-                className="outline-none cursor-pointer"
-              >
-                <PlayButton className="w-100 h-100 sm:top-[33%]" />
-              </a>
+              <VideoPreview url={item?.url} />
             </motion.div>
           ) : (
             <motion.div key={page} {...motionSettings}>

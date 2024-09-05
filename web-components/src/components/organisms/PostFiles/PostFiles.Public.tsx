@@ -60,9 +60,10 @@ const PostFilesPublic = ({
     files[0]?.location,
   );
   const [animateMarker, setAnimateMarker] = useState<boolean>(false);
+  const [isFilesWindowOpen, setIsFilesWindowOpen] = useState(
+    selectedUrl === files[0]?.url,
+  );
   const mapRef = useRef<MapRef | null>(null);
-
-  // useEffect(() => {}, [selectedUrl]);
 
   const groupByLocation = useMemo(
     () =>
@@ -142,6 +143,11 @@ const PostFilesPublic = ({
                       setSelectedLocation(geometry);
                       // Set first file of group as selected
                       setSelectedUrl(group[0].url);
+                      if (group[0].url !== selectedUrl) {
+                        setIsFilesWindowOpen(true);
+                      } else {
+                        setIsFilesWindowOpen(current => !current);
+                      }
                     }}
                     className={cn(
                       'transition duration-500 cursor-pointer flex items-center justify-center border border-solid rounded-[30px] h-30',
@@ -188,7 +194,7 @@ const PostFilesPublic = ({
             {/* We need to check for mobile media query too because `display: none` (`hidden` class) only
               hides the element from the rendered tree but it's still in the DOM and that might
               conflict with mobile desired behavior */}
-            {selectedLocation && selectedUrl && !mobile && (
+            {selectedLocation && selectedUrl && !mobile && isFilesWindowOpen && (
               <Popup
                 className={styles.popup}
                 longitude={selectedLocation.coordinates[0]}
@@ -208,6 +214,7 @@ const PostFilesPublic = ({
                   onClose={() => {
                     setSelectedLocation(undefined);
                     setSelectedUrl(undefined);
+                    setIsFilesWindowOpen(false);
                   }}
                   setSelectedUrl={setSelectedUrl}
                   selectedUrl={selectedUrl}
@@ -219,7 +226,10 @@ const PostFilesPublic = ({
               filesPreviews={filesPreviews}
               setSelectedUrl={setSelectedUrl}
               selectedUrl={selectedUrl}
-              setSelectedLocation={setSelectedLocation}
+              setSelectedLocation={point => {
+                setSelectedLocation(point);
+                setIsFilesWindowOpen(true);
+              }}
             />
             <div
               onClick={() => mapRef.current?.zoomOut()}
@@ -234,7 +244,7 @@ const PostFilesPublic = ({
               <PlusIcon className="h-30 w-30 text-grey-0" />
             </div>
           </div>
-          {selectedLocation && selectedUrl && mobile && (
+          {selectedLocation && selectedUrl && mobile && isFilesWindowOpen && (
             <PostFilesCardsMobile
               files={files}
               setSelectedUrl={setSelectedUrl}
@@ -242,6 +252,7 @@ const PostFilesPublic = ({
               onClose={() => {
                 setSelectedUrl(undefined);
                 setSelectedLocation(undefined);
+                setIsFilesWindowOpen(false);
               }}
               setSelectedLocation={setSelectedLocation}
               setAnimateMarker={setAnimateMarker}

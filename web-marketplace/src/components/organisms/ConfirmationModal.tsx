@@ -112,8 +112,9 @@ const ConfirmationModal: React.FC<React.PropsWithChildren<Props>> = ({
           <Title variant="h6">
             <Trans>Regen - Ecocredits</Trans>
           </Title>
+          {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
           <Label size="xs" color="info.main">
-            <Trans>C01-20190101-20201010-02</Trans>
+            C01-20190101-20201010-02
           </Label>
           <Body size="sm" mobileSize="sm">
             <Trans>

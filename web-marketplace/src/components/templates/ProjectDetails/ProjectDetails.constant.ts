@@ -6,8 +6,7 @@ export const PREFINANCE_TERMS = msg`Project prefinance terms`;
 export const SEE_PURCHASE_AGREEMENTS = msg`see purchase agreement`;
 export const SUPPORT_ENABLES = msg`What your support enables`;
 export const PROJECTED_CREDIT_DELIVERY_DATE = msg`projected credit delivery date`;
-export const PROJECTED_CREDIT_DELIVERY_DATE_TOOLTIP =
-  'Delivery dates may vary widely as this project is still in the early stages of development. ';
+export const PROJECTED_CREDIT_DELIVERY_DATE_TOOLTIP = msg`Delivery dates may vary widely as this project is still in the early stages of development. `;
 export const PROJECT_STATUS = msg`project status`;
 export const CLASS_STATUS = msg`credit class status`;
 export const PROJECT_TIMELINE = msg`Project timeline`;

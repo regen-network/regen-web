@@ -43,8 +43,8 @@ export const OnboardingSubmit: React.FC<React.PropsWithChildren<Props>> = ({
   onSubmit,
   onCancel,
   disabled,
-  submitText = 'Next',
-  cancelText = 'Back',
+  submitText,
+  cancelText,
 }) => {
   const { classes, cx } = useStyles();
   return (

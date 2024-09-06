@@ -13,14 +13,14 @@ import {
   requiredMessage,
   validateEmail,
 } from '../inputs/validation';
-import { Body } from '../typography';
 
 interface NewsletterFormProps {
-  submitLabel?: string;
-  inputPlaceholder?: string;
+  submitLabel: string;
+  inputPlaceholder: string;
   apiUri?: string;
   textFieldClassName?: string;
   buttonClassName?: string;
+  successChildren: React.ReactNode;
   buttonSize?: ButtonProps['size'];
   gridXs?: {
     textField:
@@ -100,12 +100,13 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 export default function NewsletterForm({
-  submitLabel = 'join us',
+  submitLabel,
   apiUri = 'http://localhost:5000',
-  inputPlaceholder = 'Your email',
+  inputPlaceholder,
   textFieldClassName,
   buttonClassName,
   buttonSize = 'small',
+  successChildren,
   gridXs = { textField: 8, button: 4 },
 }: NewsletterFormProps): JSX.Element {
   const { classes, cx } = useStyles();
@@ -149,16 +150,7 @@ export default function NewsletterForm({
         status,
       }) => {
         if (status && status.success) {
-          return (
-            <>
-              <Body color="primary.main" align="center">
-                Thank you!
-              </Body>
-              <Body color="primary.main" align="center">
-                You have successfully joined our subscriber list.
-              </Body>
-            </>
-          );
+          return successChildren;
         }
         return (
           <Form>

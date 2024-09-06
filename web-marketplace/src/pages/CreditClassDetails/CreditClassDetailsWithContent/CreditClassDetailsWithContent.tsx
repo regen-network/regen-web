@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   ApolloClient,
@@ -36,6 +36,21 @@ import {
   ResourcesSection,
   StepsSection,
 } from 'components/organisms';
+
+import {
+  CREDIT_CLASS_BUDGET_LABEL,
+  CREDIT_CLASS_EMAIL_LABEL,
+  CREDIT_CLASS_NAME_LABEL,
+  CREDIT_CLASS_ON_BEHALF_OF_LABEL,
+  CREDIT_CLASS_ON_BEHALF_OF_OPTIONS,
+  CREDIT_CLASS_ORG_NAME_LABEL,
+  CREDIT_CLASS_PROJECT_TYPES_LABEL,
+  CREDIT_CLASS_PROTEC_TYPES_OPTIONS,
+  CREDIT_CLASS_SUBMIT_ERROR_TEXT,
+  CREDIT_CLASS_SUBMIT_LABEL,
+  CREDIT_CLASS_TITLE,
+  CREDIT_CLASS_USD_TEXT,
+} from './CreditClassDetailsWithContent.constants';
 
 import hero from 'assets/credit-class-grasslands-hero.png';
 
@@ -118,6 +133,24 @@ const CreditClassDetailsWithContent: React.FC<
     getMoreProjectsQuery({
       client: graphqlClient,
     }),
+  );
+
+  const projectTypesOptions = useMemo(
+    () =>
+      CREDIT_CLASS_PROTEC_TYPES_OPTIONS.map(option => ({
+        label: _(option.label),
+        value: option.value,
+      })),
+    [_],
+  );
+
+  const onBehalfOfOptions = useMemo(
+    () =>
+      CREDIT_CLASS_ON_BEHALF_OF_OPTIONS.map(option => ({
+        label: _(option.label),
+        value: option.value,
+      })),
+    [_],
   );
 
   const getFeaturedProjects = (): JSX.Element => {
@@ -322,6 +355,18 @@ const CreditClassDetailsWithContent: React.FC<
       </Modal>
       <Modal open={isBuyerModalOpen} onClose={() => setBuyerModalOpen(false)}>
         <MoreInfoForm
+          title={_(CREDIT_CLASS_TITLE)}
+          nameLabel={_(CREDIT_CLASS_NAME_LABEL)}
+          emailLabel={_(CREDIT_CLASS_EMAIL_LABEL)}
+          orgNameLabel={_(CREDIT_CLASS_ORG_NAME_LABEL)}
+          budgetLabel={_(CREDIT_CLASS_BUDGET_LABEL)}
+          projectTypesLabel={_(CREDIT_CLASS_PROJECT_TYPES_LABEL)}
+          onBehalfOfLabel={_(CREDIT_CLASS_ON_BEHALF_OF_LABEL)}
+          usdText={_(CREDIT_CLASS_USD_TEXT)}
+          protecTypesOptions={projectTypesOptions}
+          onBehalfOfOptions={onBehalfOfOptions}
+          submitErrorText={_(CREDIT_CLASS_SUBMIT_ERROR_TEXT)}
+          submitLabel={_(CREDIT_CLASS_SUBMIT_LABEL)}
           apiUrl={apiUri}
           onClose={() => setBuyerModalOpen(false)}
           onSubmit={() => {

@@ -4,7 +4,7 @@ export const EcologicalCreditCardMock: EcologicalCreditCardProps = {
   image: {
     src: 'https://cdn.sanity.io/images/jm12rn9t/staging/16afff120712a3e148efa306ff362c409403209b-720x635.jpg?w=2000&fit=max&auto=format',
   },
-  type: {
+  creditCategory: {
     icon: {
       src: 'https://cdn.sanity.io/images/jm12rn9t/staging/c6de355349dec9f4914fea0705e293596d40f068-66x106.svg',
       alt: 'co2',

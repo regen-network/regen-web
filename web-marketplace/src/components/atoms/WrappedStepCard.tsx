@@ -19,6 +19,7 @@ const WrappedStepCard: React.FC<
   }>
 > = ({ openModal, stepNumber, stepCard }) => {
   const { _ } = useLingui();
+
   if (!stepCard) {
     return null;
   }
@@ -57,6 +58,9 @@ const WrappedStepCard: React.FC<
         onBtnClick: () => onBtnClick(openModal, button),
       }}
       stepLabel={_(msg`step`)}
+      stepFaqsTitle={_(msg`top faqs`)}
+      copyText={_(msg`Copy`)}
+      copySuccessText={_(msg`Successfully copied!`)}
     />
   );
 };

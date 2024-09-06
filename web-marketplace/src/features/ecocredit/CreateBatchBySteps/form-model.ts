@@ -10,6 +10,10 @@ import { TranslatorType } from 'lib/i18n/i18n.types';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import {
+  CREATE_BATCH_FORM_MINIMUM_ERROR,
+  CREATE_BATCH_FORM_REQUIRED_ERROR,
+} from './CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants';
+import {
   creditBasicsInitialValues,
   creditBasicsValidationSchema,
   creditBasicsValidationSchemaFields,
@@ -47,11 +51,19 @@ const getFormModel = (_: TranslatorType) => ({
   ],
   validationSchema: [
     creditBasicsValidationSchema,
-    getValidationSchema(addressPrefix),
+    getValidationSchema(
+      addressPrefix,
+      _(CREATE_BATCH_FORM_REQUIRED_ERROR),
+      _(CREATE_BATCH_FORM_MINIMUM_ERROR),
+    ),
   ],
   validationSchemaFields: {
     ...creditBasicsValidationSchemaFields,
-    ...getValidationSchemaFields(addressPrefix),
+    ...getValidationSchemaFields(
+      addressPrefix,
+      _(CREATE_BATCH_FORM_REQUIRED_ERROR),
+      _(CREATE_BATCH_FORM_MINIMUM_ERROR),
+    ),
   },
   initialValues: {
     ...creditBasicsInitialValues,

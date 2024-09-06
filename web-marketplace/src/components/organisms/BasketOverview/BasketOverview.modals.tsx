@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
 import { ERRORS } from 'config/errors';
 import { useAtom, useSetAtom } from 'jotai';
@@ -11,6 +12,21 @@ import {
   processingModalAtom,
   txSuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
+import {
+  AMOUNT_LABEL,
+  BASKET_LABEL,
+  BASKET_PUT_SUBMIT_LABEL,
+  BASKET_TAKE_AMOUNT_ERROR_TEXT,
+  BASKET_TAKE_SUBMIT_LABEL,
+  BATCH_DESCRIPTION,
+  BATCH_LABEL,
+  getBottomFieldsTextMapping,
+  RETIRE_ON_TAKE_LABEL,
+  RETIRE_ON_TAKE_TOOLTIP,
+  RETIREMENT_INFO_TEXT,
+  STATE_PROVINCE_ERROR_TEXT,
+  SUBMIT_ERROR_TEXT,
+} from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
@@ -50,6 +66,10 @@ export const BasketOverviewModals = ({
   const { wallet } = useWallet();
   const accountAddress = wallet?.address ?? '';
   const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN || '';
+  const bottomFieldsTextMapping = useMemo(
+    () => getBottomFieldsTextMapping(_),
+    [_],
+  );
 
   // Modals callbacks
   const onClosePutModal = (): void =>
@@ -129,6 +149,13 @@ export const BasketOverviewModals = ({
             atom => void (atom.creditBatchDenom = batchDenom ?? ''),
           )
         }
+        batchLabel={_(BATCH_LABEL)}
+        batchDescription={BATCH_DESCRIPTION}
+        basketLabel={_(BASKET_LABEL)}
+        amountLabel={_(AMOUNT_LABEL)}
+        submitLabel={_(BASKET_PUT_SUBMIT_LABEL)}
+        submitErrorText={_(SUBMIT_ERROR_TEXT)}
+        title={_(BASKET_PUT_SUBMIT_LABEL)}
       />
       <BasketTakeModal
         open={isTakeModalOpen}
@@ -142,6 +169,15 @@ export const BasketOverviewModals = ({
           Math.pow(10, basketToken?.basket?.exponent ?? 0)
         }
         mapboxToken={mapboxToken}
+        amountErrorText={_(BASKET_TAKE_AMOUNT_ERROR_TEXT)}
+        amountLabel={_(AMOUNT_LABEL)}
+        retireOnTakeLabel={_(RETIRE_ON_TAKE_LABEL)}
+        retireOnTakeTooltip={_(RETIRE_ON_TAKE_TOOLTIP)}
+        submitLabel={_(BASKET_TAKE_SUBMIT_LABEL)}
+        submitErrorText={_(SUBMIT_ERROR_TEXT)}
+        stateProvinceErrorText={_(STATE_PROVINCE_ERROR_TEXT)}
+        retirementInfoText={_(RETIREMENT_INFO_TEXT)}
+        bottomTextMapping={bottomFieldsTextMapping}
         onClose={onCloseTakeModal}
         onSubmit={basketTakeSubmit}
       />

@@ -15,7 +15,7 @@ module.exports = {
     'lingui/no-unlocalized-strings': [
       1,
       {
-        ignoreFunction: ['test'],
+        ignoreFunction: ['test', 'makeStyles', 'withStyles'],
         ignoreAttribute: [
           'allow',
           'sx',
@@ -23,6 +23,7 @@ module.exports = {
           'rel',
           'labelClassName',
           'classes',
+          'classNames',
         ],
         ignoreProperty: [
           'border',
@@ -41,6 +42,7 @@ module.exports = {
           'borderLeft',
           'borderRight',
           'borderBottom',
+          'borderRadius',
           'flexFlow',
           'transition',
           'transform',

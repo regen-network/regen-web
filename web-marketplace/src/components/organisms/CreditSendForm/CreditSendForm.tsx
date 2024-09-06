@@ -16,6 +16,8 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
+import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
+
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
 import { BottomCreditRetireFields } from 'components/molecules/BottomCreditRetireFields/BottomCreditRetireFields';
 import Form from 'components/molecules/Form/Form';
@@ -194,6 +196,7 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
             isValid={isValid}
             submitCount={submitCount}
             label={_(msg`Send`)}
+            errorText={_(SUBMIT_ERRORS)}
           />
         </Form>
       </>

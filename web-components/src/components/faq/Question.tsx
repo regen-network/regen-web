@@ -20,6 +20,8 @@ export interface QuestionProps extends QuestionItem {
   last?: boolean;
   questionId?: string;
   isShareable?: boolean;
+  copyText: string;
+  copySuccessText: string;
 }
 
 interface StyleProps {
@@ -92,6 +94,8 @@ const Question = ({
   question,
   answer,
   questionId,
+  copyText,
+  copySuccessText,
   first = false,
   last = false,
   isShareable = false,
@@ -137,7 +141,9 @@ const Question = ({
               direction="up"
             />
           ) : (
-            <BreadcrumbIcon className={cx(classes.icon, classNames?.icon, 'text-brand-400')} />
+            <BreadcrumbIcon
+              className={cx(classes.icon, classNames?.icon, 'text-brand-400')}
+            />
           )}
         </Title>
         <Body
@@ -186,7 +192,7 @@ const Question = ({
                   color={theme.palette.secondary.dark}
                 />
                 <Label size="xs" color="secondary.main" ml={2.5}>
-                  copy question link
+                  {copyText}
                 </Label>
               </Link>
             )
@@ -195,7 +201,7 @@ const Question = ({
           )}
         </Body>
       </Box>
-      {copied && <Banner text="Link copied to your clipboard" />}
+      {copied && <Banner text={copySuccessText} />}
     </div>
   );
 };

@@ -5,13 +5,12 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { Theme } from '@mui/material/styles';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
+import { cn } from '../../utils/styles/cn';
 import ContainedButton from '../buttons/ContainedButton';
 import OutlinedButton from '../buttons/OutlinedButton';
+import { TextButton } from '../buttons/TextButton';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import FixedFooter from './';
-import { TextButton } from '../buttons/TextButton';
-import { SAVE_EXIT } from './SaveFooter.constants';
-import { cn } from '../../utils/styles/cn';
 
 const StyledLinearProgress = withStyles(LinearProgress, theme => ({
   root: {
@@ -40,7 +39,8 @@ interface Props {
   onPrev?: () => void;
   onSave?: () => void;
   saveDisabled: boolean;
-  saveText?: string;
+  saveText: string;
+  saveExitText: string;
   hideProgress?: boolean;
   // TODO: we should probably use a helper function to calculate this, or it would
   // be hard to manage. One idea is to have an array with all routes which contain
@@ -75,12 +75,13 @@ const useStyles = makeStyles<StyleProps>()((theme, { hideProgress }) => ({
 }));
 
 const SaveFooter: React.FC<React.PropsWithChildren<Props>> = ({
-  saveText = 'Next',
+  saveText,
+  saveExitText,
   hideProgress = false,
   saveAndExit,
   ...props
 }) => {
-  const { classes, cx } = useStyles({ hideProgress });
+  const { classes } = useStyles({ hideProgress });
   const theme: Theme = useTheme();
 
   return (
@@ -99,7 +100,7 @@ const SaveFooter: React.FC<React.PropsWithChildren<Props>> = ({
               textSize="sm"
               onClick={saveAndExit}
             >
-              {SAVE_EXIT}
+              {saveExitText}
             </TextButton>
           )}
         </Grid>

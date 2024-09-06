@@ -17,6 +17,18 @@ import { Body, Title } from '../typography';
 import Submit from './Submit';
 
 interface MoreInfoFormProps {
+  title: string;
+  nameLabel: string;
+  emailLabel: string;
+  orgNameLabel: string;
+  budgetLabel: string;
+  usdText: string;
+  projectTypesLabel: string;
+  protecTypesOptions: { label: string; value: string }[];
+  onBehalfOfLabel: string;
+  onBehalfOfOptions: { label: string; value: string }[];
+  submitLabel: string;
+  submitErrorText: string;
   onClose: () => void;
   onSubmit?: () => void;
   apiUrl: string;
@@ -46,6 +58,18 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 export default function MoreInfoForm({
+  title,
+  budgetLabel,
+  nameLabel,
+  emailLabel,
+  orgNameLabel,
+  projectTypesLabel,
+  onBehalfOfLabel,
+  usdText,
+  protecTypesOptions,
+  onBehalfOfOptions,
+  submitLabel,
+  submitErrorText,
   onClose,
   onSubmit,
   apiUrl,
@@ -54,7 +78,7 @@ export default function MoreInfoForm({
   return (
     <div>
       <Title align="center" variant="h4" sx={{ mb: [4.75, 5] }}>
-        Yes, I’m interested in buying credits for myself or my organization!
+        {title}
       </Title>
       <Formik
         initialValues={{
@@ -131,21 +155,17 @@ export default function MoreInfoForm({
           return (
             <div>
               <Form className={classes.form} translate="yes">
-                <Field
-                  component={TextField}
-                  label="Your full name"
-                  name="name"
-                />
+                <Field component={TextField} label={nameLabel} name="name" />
                 <Field
                   component={TextField}
                   type="email"
-                  label="Your email address"
+                  label={emailLabel}
                   name="email"
                 />
                 <Field
                   component={TextField}
                   name="orgName"
-                  label="Organization name"
+                  label={orgNameLabel}
                   optional
                 />
                 <Grid
@@ -179,67 +199,25 @@ export default function MoreInfoForm({
                         { value: '$500,001+', label: '$500,001+' },
                       ]}
                       component={SelectTextField}
-                      label="Budget"
+                      label={budgetLabel}
                       name="budget"
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <Body sx={{ mt: 7, ml: [2.75, 4.875] }}>USD</Body>
+                    <Body sx={{ mt: 7, ml: [2.75, 4.875] }}>{usdText}</Body>
                   </Grid>
                 </Grid>
                 <Field
                   component={CheckboxGroup}
                   name="projectTypes"
                   className={classes.textField}
-                  label="Which types of carbon credits projects are you interested in?"
-                  options={[
-                    {
-                      label: 'All nature based carbon credits',
-                      value: 'All nature based carbon credits',
-                    },
-                    {
-                      label: 'Forestry-based credits',
-                      value: 'Forestry-based credits',
-                    },
-                    {
-                      label: 'Grasslands-based credits',
-                      value: 'Grasslands-based credits',
-                    },
-                    {
-                      label: 'Cropland-based credits',
-                      value: 'Cropland-based credits',
-                    },
-                  ]}
+                  label={projectTypesLabel}
+                  options={protecTypesOptions}
                 />
                 <Field
-                  options={[
-                    {
-                      label: '',
-                      value: '',
-                    },
-                    {
-                      label: 'Consumer/Individual/myself',
-                      value: 'Consumer/Individual/myself',
-                    },
-                    {
-                      label: 'Small or Medium Sized Business',
-                      value: 'Small or Medium Sized Business',
-                    },
-                    {
-                      label: 'Nonprofit',
-                      value: 'Nonprofit',
-                    },
-                    {
-                      label: 'Large Corporation',
-                      value: 'Large Corporation',
-                    },
-                    {
-                      label: 'Crypto Organization',
-                      value: 'Crypto Organization',
-                    },
-                  ]}
+                  options={onBehalfOfOptions}
                   component={SelectTextField}
-                  label="I am interested in buying carbon credits on behalf of:"
+                  label={onBehalfOfLabel}
                   name="onBehalfOf"
                 />
               </Form>
@@ -250,6 +228,8 @@ export default function MoreInfoForm({
                 isValid={isValid}
                 submitCount={submitCount}
                 submitForm={submitForm}
+                label={submitLabel}
+                errorText={submitErrorText}
               />
             </div>
           );

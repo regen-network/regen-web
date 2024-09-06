@@ -20,6 +20,9 @@ export interface StepCardProps {
   stepLabel: string;
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
+  stepFaqsTitle: string;
+  copyText: string;
+  copySuccessText: string;
 }
 
 export interface Step {
@@ -116,6 +119,9 @@ function StepCard({
   stepLabel,
   imageStorageBaseUrl,
   apiServerUrl,
+  stepFaqsTitle,
+  copyText,
+  copySuccessText,
 }: StepCardProps): JSX.Element {
   const { classes: styles, cx } = useStyles();
   const theme = useTheme();
@@ -208,7 +214,13 @@ function StepCard({
           )}
         </Box>
         {step.faqs && step.faqs.length > 0 && (
-          <StepFAQs questionItems={step.faqs} isActive={step.isActive} />
+          <StepFAQs
+            questionItems={step.faqs}
+            isActive={step.isActive}
+            title={stepFaqsTitle}
+            copyText={copyText}
+            copySuccessText={copySuccessText}
+          />
         )}
       </Card>
       <ArrowFilledIcon className="down-arrow" color={theme.palette.info.main} />

@@ -10,6 +10,7 @@ export const creditSendModal = (): JSX.Element => (
     open={true}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
+    retirementInfoText="Retirement is permanent and non-reversible."
   />
 );
 

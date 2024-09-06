@@ -7,21 +7,28 @@ import {
 import { RegenModalProps } from '../modal';
 import { FormModalTemplate } from './FormModalTemplate';
 
-interface BasketPutModalProps extends RegenModalProps, BasketPutProps {}
-
-export const BASKET_PUT_TITLE = 'Put in basket';
+interface BasketPutModalProps extends RegenModalProps, BasketPutProps {
+  title: string;
+}
 
 const BasketPutModal: React.FC<React.PropsWithChildren<BasketPutModalProps>> =
   ({
+    title,
     basketOptions,
     batchDenoms,
     availableTradableAmount,
     open,
+    batchLabel,
+    batchDescription,
+    basketLabel,
+    amountLabel,
+    submitLabel,
+    submitErrorText,
     onClose,
     onSubmit,
     onBatchDenomChange,
   }) => (
-    <FormModalTemplate title={BASKET_PUT_TITLE} open={open} onClose={onClose}>
+    <FormModalTemplate title={title} open={open} onClose={onClose}>
       <BasketPutForm
         basketOptions={basketOptions}
         batchDenoms={batchDenoms}
@@ -29,6 +36,12 @@ const BasketPutModal: React.FC<React.PropsWithChildren<BasketPutModalProps>> =
         onClose={onClose}
         onSubmit={onSubmit}
         onBatchDenomChange={onBatchDenomChange}
+        batchLabel={batchLabel}
+        batchDescription={batchDescription}
+        basketLabel={basketLabel}
+        amountLabel={amountLabel}
+        submitLabel={submitLabel}
+        submitErrorText={submitErrorText}
       />
     </FormModalTemplate>
   );

@@ -6,5 +6,5 @@ export default {
 };
 
 export const document = (): JSX.Element => (
-  <Document name="certificate" link="/" info="476d7a44" />
+  <Document name="certificate" link="/" linkText={`View 476d7a44 »`} />
 );

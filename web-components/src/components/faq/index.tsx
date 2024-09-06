@@ -3,12 +3,12 @@ import Box from '@mui/material/Box';
 import { Theme } from '@mui/material/styles';
 import { makeStyles } from 'tss-react/mui';
 
+import { cn } from '../../utils/styles/cn';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import { Label } from '../typography';
 import Category from './Category';
 import Navigation from './Navigation';
 import { QuestionItem } from './Question';
-import { cn } from '../../utils/styles/cn';
 
 export interface FAQProps {
   categories: {
@@ -21,6 +21,9 @@ export interface FAQProps {
 interface Props extends FAQProps {
   navigate: (c: string) => void;
   questionId?: string; // current question title from url anchor
+  backText: string;
+  copyText: string;
+  copySuccessText: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -43,6 +46,9 @@ const FAQ = ({
   header,
   categories,
   questionId,
+  backText,
+  copyText,
+  copySuccessText,
 }: Props): JSX.Element => {
   const { classes } = useStyles();
   if (!categories.length) {
@@ -79,6 +85,8 @@ const FAQ = ({
             questionId={questionId}
             name={category.header}
             questions={category.questions}
+            copyText={copyText}
+            copySuccessText={copySuccessText}
           />
         </div>
       </Box>
@@ -101,12 +109,14 @@ const FAQ = ({
                 className={cn(classes.icon, 'text-brand-400')}
                 direction="prev"
               />
-              back
+              {backText}
             </Label>
             <Category
               questionId={questionId}
               name={category.header}
               questions={category.questions}
+              copyText={copyText}
+              copySuccessText={copySuccessText}
             />
           </div>
         ) : (

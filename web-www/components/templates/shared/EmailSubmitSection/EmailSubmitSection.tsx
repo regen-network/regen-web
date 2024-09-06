@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import NewsletterForm from 'web-components/src/components/form/NewsletterForm';
-import { Label, Title } from 'web-components/src/components/typography';
+import { Body, Label, Title } from 'web-components/src/components/typography';
 
 import { useEmailSubmitSectionStyles } from './EmailSubmitSection.styles';
 
@@ -56,10 +56,20 @@ const EmailSubmitSection = ({ altContent, sharedNewsletterData }: Props) => {
         </Label>
         <NewsletterForm
           apiUri={process.env.NEXT_PUBLIC_API_URI}
-          submitLabel={altContent?.buttonText}
-          inputPlaceholder={altContent?.inputText}
+          submitLabel={altContent?.buttonText ?? 'subscribe'}
+          inputPlaceholder="Your email"
           buttonSize="large"
           buttonClassName={styles.button}
+          successChildren={
+            <>
+              <Body color="primary.main" align="center">
+                Thank you!
+              </Body>
+              <Body color="primary.main" align="center">
+                You have successfully joined our subscriber list.
+              </Body>
+            </>
+          }
         />
       </div>
     </BackgroundImage>

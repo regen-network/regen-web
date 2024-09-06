@@ -1,9 +1,11 @@
 import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Formik } from 'formik';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
 import NotFound from 'web-components/src/components/views/NotFoundView';
 
+import { SAVE_EXIT_TEXT, SAVE_TEXT } from 'lib/constants/shared.constants';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
@@ -61,6 +63,8 @@ const CurrentStep = (props: {
 export const CreateCreditClassForm = (props: {
   onSubmit: (values: CreditClassValues) => void;
 }): JSX.Element => {
+  const { _ } = useLingui();
+
   const {
     data,
     percentComplete,
@@ -93,6 +97,8 @@ export const CreateCreditClassForm = (props: {
               onSave={handleNext} // TODO this should handle submission
               saveDisabled={!isValid || isSubmitting}
               percentComplete={percentComplete}
+              saveExitText={_(SAVE_EXIT_TEXT)}
+              saveText={_(SAVE_TEXT)}
             />
           )}
         </>

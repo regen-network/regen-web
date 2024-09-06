@@ -43,6 +43,8 @@ const MultiStepContent = (): JSX.Element => {
         onSave={() => null}
         saveDisabled={false}
         percentComplete={percentComplete}
+        saveExitText="Save and exit"
+        saveText="Save"
       />
     </Center>
   );

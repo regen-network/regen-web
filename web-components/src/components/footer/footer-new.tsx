@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   Box,
   Grid,
@@ -81,6 +81,11 @@ const Footer: React.FC<
     privacyUrl: string;
     iconLink?: React.FC<React.PropsWithChildren<{ color: string }>>;
     linkComponent?: React.FC<React.PropsWithChildren<{ href: string }>>;
+    regenText: ReactNode;
+    dataProviderText: string;
+    termsText: string;
+    privacyText: string;
+    joinText: string;
   }>
 > = ({
   footerItems,
@@ -88,6 +93,11 @@ const Footer: React.FC<
   privacyUrl,
   linkComponent: LinkComponent = Link,
   iconLink: IconLink = HeaderLogoLink,
+  regenText,
+  dataProviderText,
+  termsText,
+  privacyText,
+  joinText,
 }) => {
   const theme = useTheme();
 
@@ -119,14 +129,7 @@ const Footer: React.FC<
               <IconLink color={theme.palette.primary.main} />
               <Box mt={4}>
                 <Body size="lg" color="primary">
-                  A project of{' '}
-                  <Link
-                    href="https://www.regen.network"
-                    sx={{ color: 'secondary.main' }}
-                  >
-                    Regen Network
-                    <br /> Development, PBC
-                  </Link>
+                  {regenText}
                 </Body>
               </Box>
             </Box>
@@ -162,7 +165,7 @@ const Footer: React.FC<
         </Grid>
 
         <Box mt={[10, 20]}>
-          <SocialLinks />
+          <SocialLinks joinText={joinText} />
         </Box>
         <Box
           component="hr"
@@ -182,11 +185,11 @@ const Footer: React.FC<
         >
           <Grid item>
             <Body styleLinks={false} color="primary" display="flex">
-              <LinkComponent href={termsUrl}>Terms</LinkComponent>
+              <LinkComponent href={termsUrl}>{termsText}</LinkComponent>
               <Box component="span" sx={{ mx: 2 }}>
                 {'|'}
               </Box>
-              <LinkComponent href={privacyUrl}>Privacy</LinkComponent>
+              <LinkComponent href={privacyUrl}>{privacyText}</LinkComponent>
             </Body>
           </Grid>
           <Grid item>
@@ -201,7 +204,7 @@ const Footer: React.FC<
                   mt: 0.5,
                 }}
               >
-                data provided by <CoinGeckoIcon sx={{ width: 80, ml: 1.8 }} />
+                {dataProviderText} <CoinGeckoIcon sx={{ width: 80, ml: 1.8 }} />
               </LinkComponent>
             </Body>
           </Grid>

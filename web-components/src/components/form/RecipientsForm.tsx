@@ -32,7 +32,17 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 export interface FormProps extends BottomCreditRetireFieldsProps {
+  retirementInfoText: string;
   addressPrefix: string;
+  deleteButtonText: string;
+  addButtonText: string;
+  recipientLabel: string;
+  amountTradableLabel: string;
+  amountRetiredLabel: string;
+  withRetireLabel: string;
+  submitButtonText: string;
+  requiredError: string;
+  minimumError: string;
   onSubmit: (values: FormValues) => void;
 }
 
@@ -51,7 +61,11 @@ type Return = {
 };
 
 // validationSchemaFields
-export function getValidationSchemaFields(addressPrefix: string): Return {
+export function getValidationSchemaFields(
+  addressPrefix: string,
+  requiredError: string,
+  minimumError: string,
+): Return {
   return {
     recipients: Yup.array()
       .of(
@@ -87,15 +101,19 @@ export function getValidationSchemaFields(addressPrefix: string): Return {
           }),
         }),
       )
-      .required('Must have recipients') // these constraints are shown if and only if inner constraints are satisfied
-      .min(1, 'Minimum of 1 recipient'),
+      .required(requiredError) // these constraints are shown if and only if inner constraints are satisfied
+      .min(1, minimumError),
   };
 }
 
 export function getValidationSchema(
   addressPrefix: string,
+  requiredError: string,
+  minimumError: string,
 ): Yup.AnyObjectSchema {
-  return Yup.object().shape(getValidationSchemaFields(addressPrefix));
+  return Yup.object().shape(
+    getValidationSchemaFields(addressPrefix, requiredError, minimumError),
+  );
 }
 
 const recipientInitialValues = {
@@ -112,19 +130,44 @@ export const initialValues = {
 export const RecipientsForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   addressPrefix,
   mapboxToken,
+  bottomTextMapping,
+  retirementInfoText,
+  deleteButtonText,
+  addButtonText,
+  recipientLabel,
+  amountTradableLabel,
+  amountRetiredLabel,
+  withRetireLabel,
+  submitButtonText,
+  requiredError,
+  minimumError,
   onSubmit,
 }) => {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={getValidationSchema(addressPrefix)}
+      validationSchema={getValidationSchema(
+        addressPrefix,
+        requiredError,
+        minimumError,
+      )}
       onSubmit={onSubmit}
     >
       {() => (
         <Form>
-          <RecipientsFieldArray mapboxToken={mapboxToken} />
+          <RecipientsFieldArray
+            deleteButtonText={deleteButtonText}
+            addButtonText={addButtonText}
+            recipientLabel={recipientLabel}
+            amountTradableLabel={amountTradableLabel}
+            amountRetiredLabel={amountRetiredLabel}
+            withRetireLabel={withRetireLabel}
+            retirementInfoText={retirementInfoText}
+            mapboxToken={mapboxToken}
+            bottomTextMapping={bottomTextMapping}
+          />
           <Card>
-            <OutlinedButton type="submit">Next</OutlinedButton>
+            <OutlinedButton type="submit">{submitButtonText}</OutlinedButton>
           </Card>
         </Form>
       )}
@@ -144,10 +187,12 @@ const Card = styled('div')(({ theme }) => ({
 }));
 
 interface ButtonProps {
+  buttonText: string;
   onClick: () => void;
 }
 
 const DeleteButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
+  buttonText,
   onClick,
 }) => {
   const theme = useTheme<Theme>();
@@ -173,25 +218,44 @@ const DeleteButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
           },
         }}
       >
-        Delete
+        {buttonText}
       </Label>
     </OutlinedButton>
   );
 };
 
 const AddRecipientButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
+  buttonText,
   onClick,
 }) => (
   <OnBoardingCard>
     <OutlinedButton onClick={onClick} sx={{ width: '100%' }}>
-      + Add recipient
+      {buttonText}
     </OutlinedButton>
   </OnBoardingCard>
 );
 
+export type RecipientsFieldArrayProps = BottomCreditRetireFieldsProps & {
+  deleteButtonText: string;
+  addButtonText: string;
+  recipientLabel: string;
+  amountTradableLabel: string;
+  amountRetiredLabel: string;
+  withRetireLabel: string;
+  retirementInfoText: string;
+};
+
 export function RecipientsFieldArray({
   mapboxToken,
-}: BottomCreditRetireFieldsProps): React.ReactElement {
+  bottomTextMapping,
+  retirementInfoText,
+  deleteButtonText,
+  addButtonText,
+  recipientLabel,
+  amountTradableLabel,
+  amountRetiredLabel,
+  withRetireLabel,
+}: RecipientsFieldArrayProps): React.ReactElement {
   const { classes: styles } = useStyles();
   const { values } = useFormikContext<FormValues>();
 
@@ -202,17 +266,22 @@ export function RecipientsFieldArray({
           {values.recipients.length > 0 &&
             values.recipients.map((recipient, index) => (
               <OnBoardingCard key={`recipient-${index}`}>
-                {index > 0 && <DeleteButton onClick={() => remove(index)} />}
+                {index > 0 && (
+                  <DeleteButton
+                    buttonText={deleteButtonText}
+                    onClick={() => remove(index)}
+                  />
+                )}
                 <Field
                   name={`recipients.${index}.recipient`}
                   type="text"
-                  label="Recipient address"
+                  label={recipientLabel}
                   component={TextField}
                 />
                 <Field
                   name={`recipients.${index}.tradableAmount`}
                   type="number"
-                  label="Amount tradable"
+                  label={amountTradableLabel}
                   component={TextField}
                 />
                 <Field
@@ -222,21 +291,25 @@ export function RecipientsFieldArray({
                   className={styles.checkboxLabel}
                   label={
                     <Subtitle size="lg" color="primary.contrastText">
-                      Send additional retired credits
+                      {withRetireLabel}
                     </Subtitle>
                   }
                 />
 
                 {values.recipients[index].withRetire && (
                   <>
-                    <RetirementReminder sx={{ mt: 8 }} />
+                    <RetirementReminder
+                      sx={{ mt: 8 }}
+                      retirementInfoText={retirementInfoText}
+                    />
                     <Field
                       name={`recipients.${index}.retiredAmount`}
                       type="number"
-                      label="Amount retired"
+                      label={amountRetiredLabel}
                       component={TextField}
                     />
                     <BottomCreditRetireFields
+                      bottomTextMapping={bottomTextMapping}
                       mapboxToken={mapboxToken}
                       arrayIndex={index}
                       arrayPrefix={`recipients.${index}.`}
@@ -247,6 +320,7 @@ export function RecipientsFieldArray({
             ))}
 
           <AddRecipientButton
+            buttonText={addButtonText}
             onClick={() => push({ ...recipientInitialValues })}
           />
         </div>

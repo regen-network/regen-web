@@ -13,6 +13,7 @@ import {
 } from 'web-components/src/components/inputs/validation';
 import { RegenModalProps } from 'web-components/src/components/modal';
 
+import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
 import { NameUrl } from 'lib/rdf/types';
 
 export interface CertificationProps {
@@ -76,6 +77,7 @@ const CertificationForm: React.FC<React.PropsWithChildren<FormProps>> = ({
               submitCount={submitCount}
               submitForm={submitForm}
               label="save"
+              errorText={_(SUBMIT_ERRORS)}
             />
           </OnBoardingCard>
         </Form>

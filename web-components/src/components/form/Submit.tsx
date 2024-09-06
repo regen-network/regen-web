@@ -12,7 +12,8 @@ interface SubmitProps {
   status?: {
     serverError: string;
   };
-  label?: string;
+  label: string;
+  errorText: string;
 }
 
 const useStyles = makeStyles()(theme => ({
@@ -44,7 +45,8 @@ export default function Submit({
   isValid,
   submitCount,
   submitForm = () => void 0,
-  label = 'submit',
+  label,
+  errorText,
 }: SubmitProps): JSX.Element {
   const { classes } = useStyles();
   return (
@@ -62,7 +64,7 @@ export default function Submit({
         type="submit"
       ></CancelButtonFooter>
       {submitCount > 0 && !isValid && (
-        <Box className={classes.error}>Please correct the errors above</Box>
+        <Box className={classes.error}>{errorText}</Box>
       )}
       {status && status.serverError && (
         <Box className={classes.error}>{status.serverError}</Box>

@@ -14,6 +14,7 @@ import YoutubeIcon from '../icons/social/YoutubeIcon';
 import { Label } from '../typography';
 
 interface Props {
+  joinText: string;
   className?: string;
 }
 
@@ -45,6 +46,7 @@ const useStyles = makeStyles()(theme => ({
 }));
 
 const SocialLinks: React.FC<React.PropsWithChildren<Props>> = ({
+  joinText,
   className,
 }) => {
   const { classes: styles, cx } = useStyles();
@@ -56,7 +58,7 @@ const SocialLinks: React.FC<React.PropsWithChildren<Props>> = ({
         mobileSize="sm"
         sx={{ textAlign: { sm: 'center' }, mb: { xs: 4.5, sm: 3.75 } }}
       >
-        join the community
+        {joinText}
       </Label>
       <Grid
         container

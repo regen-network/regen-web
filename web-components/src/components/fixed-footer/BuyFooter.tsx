@@ -14,14 +14,16 @@ export interface CreditPrice {
 }
 
 interface BuyFooterProps {
+  creditText: string;
+  buyText: string;
   creditPrice?: CreditPrice;
-  href?: string;
   onClick?: () => void;
 }
 
 export default function BuyFooter({
   creditPrice,
-  href,
+  creditText,
+  buyText,
   onClick,
 }: BuyFooterProps): JSX.Element {
   const theme = useTheme();
@@ -37,7 +39,7 @@ export default function BuyFooter({
             </Title>
             <Body as="span" size="lg" mobileSize="xs" color="info.dark">
               {' '}
-              / credit {creditPrice.currency}
+              / {creditText} {creditPrice.currency}
             </Body>
           </Body>
         </Grid>
@@ -50,7 +52,7 @@ export default function BuyFooter({
             color={theme.palette.primary.main}
           />
           <Box component="span" sx={{ pl: [1.5, 3.5] }}>
-            buy credits
+            {buyText}
           </Box>
         </ContainedButton>
       </Grid>

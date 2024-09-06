@@ -3,6 +3,7 @@ import type { MapRef } from 'react-map-gl';
 import { CircularProgress, useMediaQuery, useTheme } from '@mui/material';
 import bbox from '@turf/bbox';
 import { Point } from 'geojson';
+import YoutubeIcon from 'web-components/src/components/icons/social/YoutubeIcon';
 
 import { cn } from '../../../utils/styles/cn';
 import { AudioFileIcon } from '../../icons/AudioFileIcon';
@@ -176,7 +177,10 @@ const PostFilesPublic = ({
                       (isImage(mimeType) ? (
                         <ImageIcon width="24" height="24" />
                       ) : isVideo(mimeType) ? (
-                        <></>
+                        <YoutubeIcon
+                          className={cn('w-[24px] h-[16px]')}
+                          color={cn('fill-grey-700')}
+                        />
                       ) : isAudio(mimeType) ? (
                         <AudioFileIcon width="24" height="24" />
                       ) : isPdf(mimeType) ? (

@@ -140,6 +140,11 @@ export function ProjectCard({
       'https://schema.regen.network#additionalCertifications'
     ]?.['@list'];
 
+  const showTwoButons =
+    containedButton &&
+    onContainedButtonClick &&
+    (onButtonClick || isPrefinanceProject || offChain);
+
   return (
     <MediaCard
       onClick={onClick}
@@ -276,7 +281,11 @@ export function ProjectCard({
                     )}
                   </div>
                 )}
-                <div className="grid gap-10 grid-cols-2">
+                <div
+                  className={`grid gap-10 ${
+                    showTwoButons ? 'grid-cols-2' : 'grid-cols-1'
+                  }`}
+                >
                   {containedButton &&
                     onContainedButtonClick &&
                     (containedButton.disabled && editProjectTooltipText ? (

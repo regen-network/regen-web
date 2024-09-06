@@ -341,7 +341,7 @@ export function ProjectCard({
                             isPrefinanceProject={isPrefinanceProject}
                             buttonText={buttonText}
                             buttonStartIcon={buttonStartIcon}
-                            buttonClassName={`${buttonClassName} h-full`}
+                            buttonClassName={cn(buttonClassName, 'h-full')}
                             isButtonDisabled={isButtonDisabled}
                             isSoldOut={isSoldOut}
                           />

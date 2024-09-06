@@ -1,6 +1,5 @@
+import { MessageDescriptor } from '@lingui/core';
 import { msg } from '@lingui/macro';
-
-import { MessageDescriptorType } from 'lib/i18n/i18n.types';
 
 import { SELL_ORDERS_HEADERS } from './SellOrdersTable.types';
 
@@ -10,7 +9,7 @@ export const PURCHASE_OPTION_TOOLTIP = msg`Ecocredits from some sell orders can 
 
 export const SELL_ORDERS_MAPPING: Record<
   SELL_ORDERS_HEADERS,
-  { name: MessageDescriptorType; sortKey: string; sortEnabled?: boolean }
+  { name: MessageDescriptor; sortKey: string; sortEnabled?: boolean }
 > = {
   [SELL_ORDERS_HEADERS.ID]: {
     name: msg`SELL ORDER ID`,

@@ -95,7 +95,6 @@ type NormalizeImpactInput = {
   projectImpact?: ProjectImpact;
   sanityImpact?: EcologicalImpact;
   sdgs?: Maybe<Maybe<Sdg>[]>;
-  _: TranslatorType;
 };
 
 const normalizeImpact = ({
@@ -113,17 +112,22 @@ const normalizeImpact = ({
 
 /* normalizePrimaryImpact */
 
-export const normalizePrimaryImpact = (input: NormalizeImpactInput) =>
+export const normalizePrimaryImpact = (
+  input: NormalizeImpactInput,
+  _: TranslatorType,
+) =>
   (input?.impact || input?.sanityImpact) && {
     ...normalizeImpact(input),
-    label: input._(PRIMARY_IMPACT),
+    label: _(PRIMARY_IMPACT),
   };
 
 /* normalizeCoBenefit */
 
-export const normalizeCoBenefit = (input: NormalizeImpactInput) => {
+export const normalizeCoBenefit = (
+  input: NormalizeImpactInput,
+  _: TranslatorType,
+) => {
   if (input?.impact || input?.sanityImpact) {
-    const { _ } = input;
     return {
       ...normalizeImpact(input),
       label: !!input?.impact?.['@type']

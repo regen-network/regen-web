@@ -161,9 +161,9 @@ export const EditFileForm = ({
             )}
             <Radio
               label={_(msg`No specific location`)}
-              description={` ${_(
+              description={_(
                 msg`(file will be associated with the project location by default)`,
-              )}`}
+              )}
               value={'none'}
               selectedValue={locationType}
               sx={{ mb: 2.5 }}
@@ -178,6 +178,7 @@ export const EditFileForm = ({
             />
             <Radio
               label={_(msg`Choose a specific location on the map`)}
+              description={_(msg`(drag map to choose location)`)}
               value={'custom'}
               selectedValue={locationType}
               {...register(`files.${currentIndex}.locationType`)}

@@ -26,7 +26,7 @@ export const getMediaFormSchema = (_: TranslatorType) =>
           'schema:creditText': z.string().optional(),
           'schema:caption': z
             .string()
-            .max(CAPTION_CHART_LIMIT, CAPTION_LIMIT_ERROR_MESSAGE)
+            .max(CAPTION_CHART_LIMIT, _(CAPTION_LIMIT_ERROR_MESSAGE))
             .optional(),
         }),
       )

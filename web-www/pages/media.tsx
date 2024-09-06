@@ -4,21 +4,21 @@ import { InferGetStaticPropsType } from 'next';
 import { NextSeo } from 'next-seo';
 
 import ArticleCard from 'web-components/src/components/cards/ArticleCard/ArticleCard';
+import { ArticleType } from 'web-components/src/components/cards/ArticleCard/ArticleCard.types';
 import SelectTextField from 'web-components/src/components/inputs/SelectTextField';
 import Section from 'web-components/src/components/section';
 
 import { MediaPageDocument, MediaPageQuery } from '@/generated/sanity-graphql';
 import { sanityClient } from '@/lib/clients/sanityClient';
 import {
+  ARTICLE_CARD_BTN_TEXT_MAPPING,
+  DRAFT_TEXT,
+} from '@/lib/constants/shared.constants';
+import {
   getMediaCategories,
   getMediaGrouped,
 } from '@/lib/utils/pages/Media.utils';
 import { useMediaStyles } from '@/styles/pages/Media.styles';
-import {
-  ARTICLE_CARD_BTN_TEXT_MAPPING,
-  DRAFT_TEXT,
-} from '@/lib/constants/shared.constants';
-import { ArticleType } from 'web-components/src/components/cards/ArticleCard/ArticleCard.types';
 
 export default function MediaPage({
   mediaPageData,

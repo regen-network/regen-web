@@ -1,4 +1,5 @@
 import ArticleCard from 'web-components/src/components/cards/ArticleCard/ArticleCard';
+import { ArticleType } from 'web-components/src/components/cards/ArticleCard/ArticleCard.types';
 import Section from 'web-components/src/components/section';
 import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
 
@@ -9,7 +10,6 @@ import {
   ARTICLE_CARD_BTN_TEXT_MAPPING,
   DRAFT_TEXT,
 } from '@/lib/constants/shared.constants';
-import { ArticleType } from 'web-components/src/components/cards/ArticleCard/ArticleCard.types';
 
 type Props = {
   featuredSectionData?: PressKitFeaturedSectionFieldsFragment['featuredSection'];

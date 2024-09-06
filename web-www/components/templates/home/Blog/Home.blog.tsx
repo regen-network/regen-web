@@ -6,9 +6,9 @@ import Section from 'web-components/src/components/section';
 import BlogPosts from 'web-components/src/components/sliders/BlogPosts';
 
 import { useBlogStyles } from './Home.Blog.styles';
+import { READ_MORE_TEXT } from './Home.constants';
 
 import { BlogSectionQuery } from '@/generated/sanity-graphql';
-import { READ_MORE_TEXT } from './Home.constants';
 
 type Props = {
   blogData?: ApolloQueryResult<BlogSectionQuery>;

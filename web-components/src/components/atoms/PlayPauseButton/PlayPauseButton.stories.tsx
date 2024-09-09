@@ -14,7 +14,7 @@ export const Play: Story = {
 };
 
 Play.args = {
-  paused: false,
+  playing: false,
 };
 
 export const Pause: Story = {
@@ -22,5 +22,5 @@ export const Pause: Story = {
 };
 
 Pause.args = {
-  paused: true,
+  playing: true,
 };

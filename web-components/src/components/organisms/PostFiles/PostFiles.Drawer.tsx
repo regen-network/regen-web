@@ -114,7 +114,7 @@ const PostFilesDrawer = ({
                           height="100%"
                         />
                         <PlayPauseButton
-                          paused={false}
+                          playing={false}
                           className="w-[28px] h-[28px] top-[40%]"
                         />
                       </div>

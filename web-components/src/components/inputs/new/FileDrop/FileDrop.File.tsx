@@ -124,7 +124,7 @@ export const FileDropFile = ({
               'absolute top-0 left-0 bg-grey-700 rounded-[5px] overflow-hidden',
             )}
           />
-          <PlayPauseButton paused={false} />
+          <PlayPauseButton playing={false} />
         </>
       ) : isPdf(mimeType) ? (
         <PdfPreview

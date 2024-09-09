@@ -40,7 +40,7 @@ export const VideoPreview = ({
         onMouseLeave={playing ? handleMouseLeave : undefined}
       >
         <PlayPauseButton
-          paused={playing}
+          playing={playing}
           handlePlayPause={handlePlayPause}
           className={buttonClassName}
         />

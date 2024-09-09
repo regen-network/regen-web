@@ -5,13 +5,13 @@ import { usePlayPauseButtonStyles } from './PlayPauseButton.styles';
 
 type Props = {
   className?: string;
-  paused?: boolean;
+  playing?: boolean;
   handlePlayPause?: () => void;
 };
 
 export const PlayPauseButton = ({
   className,
-  paused = false,
+  playing = false,
   handlePlayPause,
 }: Props) => {
   const { classes: styles } = usePlayPauseButtonStyles();
@@ -21,7 +21,7 @@ export const PlayPauseButton = ({
       className="outline-none cursor-pointer bg-transparent border-none"
     >
       <div className={cn(styles.button, className)}>
-        {paused ? (
+        {playing ? (
           <PauseIcon width="100%" height="100%" />
         ) : (
           <PlayIcon width="50%" height="50%" />

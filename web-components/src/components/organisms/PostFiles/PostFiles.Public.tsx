@@ -3,8 +3,7 @@ import type { MapRef } from 'react-map-gl';
 import { CircularProgress, useMediaQuery, useTheme } from '@mui/material';
 import bbox from '@turf/bbox';
 import { Point } from 'geojson';
-
-import { VideoIcon } from 'src/components/icons/VideoIcon';
+import { VideoIcon } from 'web-components/src/components/icons/VideoIcon';
 
 import { cn } from '../../../utils/styles/cn';
 import { AudioFileIcon } from '../../icons/AudioFileIcon';

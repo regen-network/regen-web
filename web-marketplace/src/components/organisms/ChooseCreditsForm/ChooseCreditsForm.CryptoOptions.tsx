@@ -1,7 +1,10 @@
 import { useFormContext } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { cryptoOptions } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
+import {
+  cryptoOptions,
+  RETIRING,
+} from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/RadioGroup';
@@ -32,7 +35,7 @@ export function CryptoOptions({
       <RadioGroup className="gap-10">
         {cryptoOptions.map(({ label, description, linkTo, value }) => (
           <Radio
-            {...(register('retiring'),
+            {...(register(RETIRING),
             {
               value,
             })}

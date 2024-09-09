@@ -2,6 +2,7 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
 import { Link } from 'web-marketplace/src/components/atoms';
+import { CREDIT_VINTAGE_OPTIONS } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
@@ -19,7 +20,9 @@ export function AdvanceSettings({
   creditVintages: { date: string; credits: string; batchDenom: string }[];
   handleCreditVintageOptions: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
-  const { register } = useFormContext<ChooseCreditsFormSchemaType>();
+  const { register, getValues } = useFormContext<ChooseCreditsFormSchemaType>();
+  const creditVintageOptions = getValues(CREDIT_VINTAGE_OPTIONS);
+
   return (
     <div className="grid grid-rows-1 mt-20 sm:mt-40">
       <div className="flex flex-col">
@@ -56,11 +59,12 @@ export function AdvanceSettings({
               >
                 <CheckboxLabel
                   label={date}
-                  {...(register(`creditVintageOptions`),
+                  {...(register(CREDIT_VINTAGE_OPTIONS),
                   {
-                    value: date,
+                    value: batchDenom,
                   })}
                   onChange={handleCreditVintageOptions}
+                  checked={creditVintageOptions.includes(batchDenom)}
                 />
                 <p className="pl-[32px] m-0 mt-5 text-sm">
                   <span className="italic">

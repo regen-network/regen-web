@@ -51,7 +51,7 @@ export function CreditsAmountHeader({
               </span>
               <DenomIconWithCurrency
                 currency={cryptoCurrency}
-                className="sm:pt-10"
+                className="sm:pt-5"
               />
             </span>
           )}

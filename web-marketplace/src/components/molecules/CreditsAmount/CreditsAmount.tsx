@@ -2,6 +2,7 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
 import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
+import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import {
   CryptoCurrencies,
@@ -10,6 +11,7 @@ import {
 } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import {
+  CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
   CURRENCY_AMOUNT,
   DEFAULT_CRYPTO_CURRENCY,
@@ -28,35 +30,71 @@ export const CreditsAmount = ({
   paymentOption,
   currency,
   setCurrency,
+  setSpendingCap,
+  creditsAvailable,
+  setCreditsAvailable,
+  creditVintages,
 }: CreditsAmountProps) => {
   const [pricePerCredit, setPricePerCredit] = useState(
     getCurrencyPrice(CURRENCIES.usd, creditDetails),
   );
   const [maxCreditsSelected, setMaxCreditsSelected] = useState(false);
-  const { setValue } = useFormContext();
+  const { setValue, getValues } = useFormContext<ChooseCreditsFormSchemaType>();
 
-  const [creditsAvailablePerCurrency, setCreditsAvailablePerCurrency] =
-    useState(getCreditsAvailablePerCurrency(currency, creditDetails));
+  const creditVintageOptions = getValues(CREDIT_VINTAGE_OPTIONS);
+
+  useEffect(() => {
+    if (creditVintageOptions && creditVintageOptions.length > 0) {
+      const getVintageCredits = (creditVintageOptions: string[]) => {
+        return creditVintageOptions.reduce((sum: number, option: string) => {
+          const credits =
+            creditVintages.find(vintage => vintage.batchDenom === option)
+              ?.credits || '0';
+          return sum + +credits;
+        }, 0);
+      };
+      setCreditsAvailable(getVintageCredits(creditVintageOptions));
+      setSpendingCap(creditsAvailable);
+    } else {
+      setCreditsAvailable(
+        getCreditsAvailablePerCurrency(currency, creditDetails),
+      );
+    }
+  }, [
+    creditDetails,
+    creditVintageOptions,
+    creditVintages,
+    creditsAvailable,
+    currency,
+    setCreditsAvailable,
+    setSpendingCap,
+  ]);
 
   useEffect(() => {
     setMaxCreditsSelected(false);
-    setCreditsAvailablePerCurrency(
+    setCreditsAvailable(
       getCreditsAvailablePerCurrency(currency, creditDetails),
     );
     const newPrice = getCurrencyPrice(currency, creditDetails);
     setPricePerCredit(newPrice);
     setCurrency(currency);
-  }, [creditDetails, currency, paymentOption, setCurrency]);
+  }, [
+    creditDetails,
+    currency,
+    paymentOption,
+    setCreditsAvailable,
+    setCurrency,
+  ]);
 
   // Max credits set
   useEffect(() => {
     if (maxCreditsSelected) {
-      setValue(CREDITS_AMOUNT, creditsAvailablePerCurrency);
-      setValue(CURRENCY_AMOUNT, creditsAvailablePerCurrency * pricePerCredit);
+      setValue(CREDITS_AMOUNT, creditsAvailable);
+      setValue(CURRENCY_AMOUNT, creditsAvailable * pricePerCredit);
       setMaxCreditsSelected(false);
     }
   }, [
-    creditsAvailablePerCurrency,
+    creditsAvailable,
     pricePerCredit,
     maxCreditsSelected,
     setMaxCreditsSelected,
@@ -83,29 +121,27 @@ export const CreditsAmount = ({
         creditDetails,
       );
       setPricePerCredit(newPrice);
-      setValue(CURRENCY_AMOUNT, 0);
-      setValue(CREDITS_AMOUNT, 0);
       setCurrency(currency as Currency);
       const creditsAvailablePerCurrency = getCreditsAvailablePerCurrency(
         currency as Currency,
         creditDetails,
       );
-      setCreditsAvailablePerCurrency(creditsAvailablePerCurrency);
+      setCreditsAvailable(creditsAvailablePerCurrency);
     },
-    [creditDetails, setCurrency, setValue],
+    [creditDetails, setCreditsAvailable, setCurrency],
   );
 
   return (
     <div className={`grid min-h-min`} style={{ gridAutoRows: 'min-content' }}>
       <CreditsAmountHeader
         currency={currency}
-        creditsAvailable={creditsAvailablePerCurrency}
+        creditsAvailable={creditsAvailable}
         setMaxCreditsSelected={setMaxCreditsSelected}
         paymentOption={paymentOption}
       />
       <div className="flex justify-between min-w-full flex-wrap sm:flex-nowrap gap-10 items-start">
         <CurrencyInput
-          maxCurrencyAmount={creditsAvailablePerCurrency * pricePerCredit}
+          maxCurrencyAmount={creditsAvailable * pricePerCredit}
           paymentOption={paymentOption}
           handleCurrencyChange={handleCurrencyChange}
           defaultCryptoCurrency={
@@ -117,7 +153,7 @@ export const CreditsAmount = ({
         />
         <span className="p-10 sm:p-20 text-xl">=</span>
         <CreditsInput
-          creditsAvailable={creditsAvailablePerCurrency}
+          creditsAvailable={creditsAvailable}
           handleCreditsAmountChange={handleCreditsAmountChange}
           paymentOption={paymentOption}
         />

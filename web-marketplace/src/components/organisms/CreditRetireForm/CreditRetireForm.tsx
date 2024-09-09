@@ -9,7 +9,11 @@ import Submit from 'web-components/src/components/form/Submit';
 import AmountField from 'web-components/src/components/inputs/new/AmountField/AmountField';
 import { RegenModalProps } from 'web-components/src/components/modal';
 
-import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
+import {
+  AVAILABLE_LABEL,
+  MAX_LABEL,
+  SUBMIT_ERRORS,
+} from 'lib/constants/shared.constants';
 
 import { BottomCreditRetireFields } from 'components/molecules/BottomCreditRetireFields/BottomCreditRetireFields';
 import Form from 'components/molecules/Form/Form';
@@ -95,6 +99,8 @@ const CreditRetireForm: React.FC<
               <Trans>Amount retired</Trans>
             </Box>
           }
+          availableLabel={_(AVAILABLE_LABEL)}
+          maxLabel={_(MAX_LABEL)}
           helperText={errors.amount?.message}
           error={!!errors.amount}
           availableAmount={availableTradableAmount}

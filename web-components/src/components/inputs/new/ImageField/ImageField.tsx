@@ -27,6 +27,11 @@ interface Props {
   circularCrop?: boolean;
   fixedCrop?: Partial<Crop>;
   children: ReactNode;
+  uploadText: string;
+  updateText: string;
+  applyText: string;
+  title: string;
+  titleIgnoreCrop: string;
   setValue: (params: { value: string }) => void;
   onUpload?: GetImageSrcParams['onUpload'];
   sx?: {
@@ -49,6 +54,11 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
       circularCrop = false,
       fixedCrop = {},
       children,
+      uploadText,
+      updateText,
+      applyText,
+      title,
+      titleIgnoreCrop,
       setValue,
       onUpload,
       sx = {},
@@ -155,6 +165,11 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
           fixedCrop={fixedCrop}
           initialImage={initialImage}
           open={!!initialImage}
+          uploadText={uploadText}
+          updateText={updateText}
+          applyText={applyText}
+          title={title}
+          titleIgnoreCrop={titleIgnoreCrop}
           onClose={handleCropModalClose}
           onSubmit={onCropModalSubmit}
         />

@@ -19,7 +19,13 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
+import {
+  AMOUNT_SELL_LABEL,
+  AVAILABLE_LABEL,
+  EMPTY_OPTION_TEXT,
+  MAX_LABEL,
+  SUBMIT_ERRORS,
+} from 'lib/constants/shared.constants';
 import { Sell2Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -110,6 +116,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
       <SelectTextField
         label={_(msg`Batch denom`)}
         options={options}
+        emptyOptionText={_(EMPTY_OPTION_TEXT)}
         disabled={options.length === 1}
         sx={{ mb: 10.5 }}
         native={false}
@@ -147,13 +154,16 @@ const CreateSellOrderForm: React.FC<Props> = ({
             options={allowedDenoms}
             error={!!errors['askDenom']}
             helperText={errors['askDenom']?.message}
+            emptyOptionText={_(EMPTY_OPTION_TEXT)}
             {...form.register('askDenom')}
           />
         </Box>
       </Box>
       <AmountField
-        label={_(msg`Amount to sell`)}
+        label={_(AMOUNT_SELL_LABEL)}
         availableAmount={availableAmount}
+        availableLabel={_(AVAILABLE_LABEL)}
+        maxLabel={_(MAX_LABEL)}
         error={!!errors['amount']}
         helperText={errors['amount']?.message}
         denom={batchDenom ?? ''}

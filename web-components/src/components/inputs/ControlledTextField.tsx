@@ -15,6 +15,7 @@ interface ControlledTextFieldProps
   description?: string;
   label?: string;
   optional?: boolean | string;
+  exampleText?: string;
   onExampleClick?: () => void;
   sx?: SxProps<Theme>;
 }
@@ -30,6 +31,7 @@ export default function ControlledTextField({
   meta,
   optional,
   startAdornment,
+  exampleText,
   onExampleClick,
   defaultStyle = true,
   sx,
@@ -54,6 +56,7 @@ export default function ControlledTextField({
     <FieldFormControl
       label={label}
       description={description}
+      exampleText={exampleText}
       onExampleClick={onExampleClick}
       disabled={form.isSubmitting}
       optional={optional}

@@ -12,6 +12,8 @@ interface UserMenuItemsProps extends HeaderMenuItemBase {
   nameOrAddress?: string | null;
   avatar: string;
   userMenuItems: HeaderDropdownItemProps[];
+  logoutText: string;
+  avatarAlt: string;
   disconnect: () => void;
 }
 

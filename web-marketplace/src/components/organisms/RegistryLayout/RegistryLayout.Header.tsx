@@ -30,7 +30,11 @@ import {
   getMenuItems,
   getUserMenuItems,
 } from './RegistryLayout.config';
-import { fullWidthRegExp } from './RegistryLayout.constants';
+import {
+  AVATAR_ALT,
+  fullWidthRegExp,
+  LOGOUT_TEXT,
+} from './RegistryLayout.constants';
 import { getAddress } from './RegistryLayout.utils';
 
 const RegistryLayoutHeader: React.FC = () => {
@@ -128,6 +132,8 @@ const RegistryLayoutHeader: React.FC = () => {
                 pathname={pathname}
                 linkComponent={RegistryNavLink}
                 userMenuItems={userMenuItems}
+                logoutText={_(LOGOUT_TEXT)}
+                avatarAlt={_(AVATAR_ALT)}
               />
             )}
             {clientConfig.loginButton && <LoginButton />}

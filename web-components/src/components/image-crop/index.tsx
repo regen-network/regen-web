@@ -7,7 +7,6 @@ import { makeStyles } from 'tss-react/mui';
 
 import { CancelButtonFooter } from '../organisms/CancelButtonFooter/CancelButtonFooter';
 import { getCroppedImg } from './canvas-utils';
-import { APPLY, UPDATE, UPLOADING } from './ImageCrop.constants';
 
 import 'react-image-crop/dist/ReactCrop.css';
 
@@ -19,6 +18,9 @@ export interface ImageCropProps {
   fixedCrop: Partial<Crop>;
   isCropSubmitDisabled?: boolean;
   isIgnoreCrop?: boolean;
+  uploadText: string;
+  updateText: string;
+  applyText: string;
   children?: React.ReactNode;
 }
 
@@ -76,6 +78,9 @@ export default function ImageCrop({
   fixedCrop,
   isCropSubmitDisabled,
   isIgnoreCrop = false,
+  uploadText,
+  updateText,
+  applyText,
   children,
 }: ImageCropProps): JSX.Element {
   const { classes } = useStyles();
@@ -183,12 +188,12 @@ export default function ImageCrop({
                       <div className="h-20">
                         <CircularProgress size={20} color="secondary" />
                       </div>
-                      <span className="ml-5">{UPLOADING}</span>
+                      <span className="ml-5">{uploadText}</span>
                     </>
                   ) : isIgnoreCrop ? (
-                    UPDATE
+                    updateText
                   ) : (
-                    APPLY
+                    applyText
                   )}
                 </>
               }

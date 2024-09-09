@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
-import { msg } from '@lingui/macro';
+import { msg, plural } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
 import RadioCard from 'web-components/src/components/atoms/RadioCard';
 import { ImageField } from 'web-components/src/components/inputs/new/ImageField/ImageField';
@@ -9,6 +10,13 @@ import { ImageFieldAvatar } from 'web-components/src/components/inputs/new/Image
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+
+import {
+  APPLY,
+  TITLE_CROP,
+  TITLE_IGNORE_CROP,
+  UPDATE,
+} from 'lib/constants/shared.constants';
 
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import {
@@ -68,6 +76,11 @@ function ProfileModal({
     name: 'description',
   });
 
+  const remainingDescriptionCharacters = useMemo(
+    () => getRemainingCharacters({ value: description }),
+    [description],
+  );
+
   /* Setter */
 
   const setProfileImage = ({ value }: { value: string }): void => {
@@ -109,6 +122,11 @@ function ProfileModal({
       <ImageField
         label={_(msg`Profile image`)}
         buttonText={_(UPLOAD_IMAGE)}
+        uploadText={_(UPLOAD_IMAGE)}
+        updateText={_(UPDATE)}
+        applyText={_(APPLY)}
+        title={_(TITLE_CROP)}
+        titleIgnoreCrop={_(TITLE_IGNORE_CROP)}
         setValue={setProfileImage}
         {...form.register('profileImage')}
         name="profile-image"
@@ -130,7 +148,14 @@ function ProfileModal({
         error={!!errors.description}
         {...form.register('description')}
       >
-        <TextAreaFieldChartCounter value={description} />
+        <TextAreaFieldChartCounter
+          value={description}
+          charsLeft={remainingDescriptionCharacters}
+          remainingCharactersText={plural(remainingDescriptionCharacters, {
+            one: `${remainingDescriptionCharacters} character remaining`,
+            other: `${remainingDescriptionCharacters} characters remaining`,
+          })}
+        />
       </TextAreaField>
       <TextField
         type="text"

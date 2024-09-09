@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { Radio } from '../Radio/Radio';
-import { RADIO_PREFERABLE } from '../Radio/Radio.constants';
+import { RADIO_PREFERABLE } from '../Radio/Radio.mock';
 import { VideoInput } from '../VideoInput/VideoInput';
 import { RadioGroup } from './RadioGroup';
 

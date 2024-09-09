@@ -16,7 +16,11 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
-import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
+import {
+  AVAILABLE_LABEL,
+  MAX_LABEL,
+  SUBMIT_ERRORS,
+} from 'lib/constants/shared.constants';
 
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
 import { BottomCreditRetireFields } from 'components/molecules/BottomCreditRetireFields/BottomCreditRetireFields';
@@ -149,6 +153,8 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
                 </InfoTooltip>
               </Flex>
             }
+            availableLabel={_(AVAILABLE_LABEL)}
+            maxLabel={_(MAX_LABEL)}
             helperText={errors.amount?.message}
             error={!!errors.amount}
             availableAmount={availableTradableAmount}

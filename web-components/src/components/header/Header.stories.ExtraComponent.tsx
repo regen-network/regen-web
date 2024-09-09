@@ -8,7 +8,17 @@ import { getUserMenuItemsMock } from './components/UserMenuItems.mock';
 
 const REGEN_TEST_ADDRESS = 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46';
 
-export const ExtraComponent = (): JSX.Element => {
+type Props = {
+  loginText: string;
+  logoutText: string;
+  avatarAlt: string;
+};
+
+export const ExtraComponent = ({
+  loginText,
+  avatarAlt,
+  logoutText,
+}: Props): JSX.Element => {
   const [address, setAddress] = useState('');
   const userMenuItems = getUserMenuItemsMock({
     linkComponent: NavLink,
@@ -18,6 +28,9 @@ export const ExtraComponent = (): JSX.Element => {
     <Box display="flex" justifyContent="center" alignItems="center">
       {address && (
         <UserMenuItems
+          nameOrAddress={address}
+          avatarAlt={avatarAlt}
+          logoutText={logoutText}
           avatar={''}
           disconnect={() => setAddress('')}
           pathname={''}
@@ -30,7 +43,7 @@ export const ExtraComponent = (): JSX.Element => {
           size="small"
           onClick={() => setAddress(REGEN_TEST_ADDRESS)}
         >
-          {'login'}
+          {loginText}
         </ContainedButton>
       )}
     </Box>

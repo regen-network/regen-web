@@ -14,6 +14,7 @@ import SelectTextField from 'web-components/src/components/inputs/new/SelectText
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { EMPTY_OPTION_TEXT } from 'lib/constants/shared.constants';
 
 import { useProjectEditContext } from 'pages';
 import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
@@ -187,6 +188,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
               defaultStyle={false}
               native={false}
               value={unit}
+              emptyOptionText={_(EMPTY_OPTION_TEXT)}
               {...form.register('regen:projectSize.qudt:unit')}
             />
           </Box>

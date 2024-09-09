@@ -16,7 +16,6 @@ import FieldFormControl, {
   FieldFormControlProps,
 } from './../FieldFormControl/FieldFormControl';
 import Input from './../Input/Input';
-import { VIDEO_URL_NOT_VALID } from './VideoInput.constants';
 import { useVideoInputStyles } from './VideoInput.styles';
 
 export interface VideoInputProps extends Partial<FieldFormControlProps> {
@@ -29,6 +28,9 @@ export interface VideoInputProps extends Partial<FieldFormControlProps> {
   name?: string;
   label?: string;
   value?: string;
+  urlNotValidText: string;
+  loadingText: string;
+  addPlaceholder: string;
   setValue?: (params: { value?: string }) => void;
   optional?: boolean | string;
   buttonText?: string;
@@ -48,6 +50,9 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
       optional,
       buttonText,
       error,
+      urlNotValidText,
+      loadingText,
+      addPlaceholder,
       setError,
       setErrorBanner,
       helperText,
@@ -70,7 +75,7 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
         setError(undefined);
         setValue && setValue({ value: videoUrl });
       } else {
-        setError(VIDEO_URL_NOT_VALID);
+        setError(urlNotValidText);
       }
     };
 
@@ -123,7 +128,7 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
                     url={value}
                     onReady={() => setVideoLoaded(true)}
                     height={isMobile ? 210 : 318}
-                    fallback={<div>Loading video player...</div>}
+                    fallback={<div>{loadingText}</div>}
                     width="100%"
                   />
                   <IconButton
@@ -146,7 +151,7 @@ export const VideoInput = forwardRef<HTMLInputElement, VideoInputProps>(
                 className={styles.input}
                 onChange={handleChange}
                 value={videoUrl}
-                placeholder="Add video url"
+                placeholder={addPlaceholder}
                 name={name}
                 ref={ref}
                 onBlur={handleBlur}

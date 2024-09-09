@@ -52,6 +52,9 @@ type Props = {
     main?: string;
     button?: string;
   };
+  locationText: string;
+  moveUpText: string;
+  moveDownText: string;
   moveUp?: () => void;
   moveDown?: () => void;
 };
@@ -64,6 +67,9 @@ export const FileDropFile = ({
   location,
   mimeType,
   accept,
+  locationText,
+  moveUpText,
+  moveDownText,
   handleDelete,
   handleEdit,
   classes,
@@ -222,6 +228,7 @@ export const FileDropFile = ({
 
       {(caption || credit || name) && (
         <FileDropBottomBar
+          locationText={locationText}
           name={name}
           caption={caption}
           credit={credit}

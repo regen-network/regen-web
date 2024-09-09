@@ -16,6 +16,7 @@ import {
 } from './EmailConfirmationModal.constants';
 
 export interface EmailConfirmationModalProps extends RegenModalProps {
+  ariaLabel: string;
   mailLink: LinkType;
   resendText?: string;
   error?: ReactNode;
@@ -26,6 +27,7 @@ export interface EmailConfirmationModalProps extends RegenModalProps {
 }
 
 export const EmailConfirmationModal = ({
+  ariaLabel,
   open,
   mailLink,
   resendText,
@@ -60,6 +62,7 @@ export const EmailConfirmationModal = ({
           {EMAIL_CONFIRMATION_CODE_HELPER}
         </Body>
         <ConfirmationCode
+          ariaLabel={ariaLabel}
           onChange={onCodeChange}
           ref={codeInputRef}
           className="mb-20"

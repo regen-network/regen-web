@@ -1,9 +1,7 @@
-import React from 'react';
 import Grid from '@mui/material/Grid';
 import { Theme } from '@mui/material/styles';
 import { makeStyles } from 'tss-react/mui';
 
-import { pluralize } from '../../utils/pluralize';
 import Gauge from './Gauge';
 import GaugeText from './GaugeText';
 

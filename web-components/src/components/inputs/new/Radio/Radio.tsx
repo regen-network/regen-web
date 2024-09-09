@@ -12,7 +12,6 @@ import { Theme } from '../../../../theme/muiTheme';
 import { sxToArray } from '../../../../utils/mui/sxToArray';
 import QuestionMarkTooltip from '../../../tooltip/QuestionMarkTooltip';
 import { Body } from '../../../typography';
-import { RADIO_DEFAULT_OPTIONAL } from './Radio.constants';
 import { useRadioStyles } from './Radio.styles';
 import { RadiotVariant } from './Radio.types';
 
@@ -23,6 +22,7 @@ export interface RadioProps extends RadioPropsMui {
   variant?: RadiotVariant;
   optional?: string | boolean;
   helperText?: string | JSX.Element;
+  defaultOptional?: string;
   children?: React.ReactNode;
   sx?: SxProps<Theme>;
   description?: ReactNode;
@@ -38,6 +38,7 @@ export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
       selectedValue = '',
       variant = 'default',
       optional,
+      defaultOptional,
       helperText,
       children,
       sx = [],
@@ -53,7 +54,7 @@ export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
     const { classes, cx } = useRadioStyles({ isSelected });
     const isDefaultVariant = variant === 'default';
     const optionalText =
-      typeof optional === 'string' ? optional : RADIO_DEFAULT_OPTIONAL;
+      typeof optional === 'string' ? optional : defaultOptional;
 
     return (
       <Box

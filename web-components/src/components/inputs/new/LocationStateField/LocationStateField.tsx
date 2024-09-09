@@ -12,13 +12,15 @@ interface FieldProps extends PropsWithChildren {
   country: string;
   error?: boolean;
   helperText?: string;
+  emptyOptionText: string;
+  label: string;
   optional?: boolean;
   value?: string;
   className?: string;
 }
 
 const LocationStateField = forwardRef<HTMLDivElement, FieldProps>(
-  ({ country, ...props }, ref) => {
+  ({ country, label, emptyOptionText, ...props }, ref) => {
     const [options, setOptions] = useState<Option[]>([]);
     const value = options.length > 0 ? props.value ?? '' : '';
 
@@ -31,7 +33,8 @@ const LocationStateField = forwardRef<HTMLDivElement, FieldProps>(
       <SelectTextField
         {...props}
         value={value}
-        label="State / Region"
+        label={label}
+        emptyOptionText={emptyOptionText}
         options={options}
         native={false}
         ref={ref}

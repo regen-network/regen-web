@@ -1,10 +1,11 @@
 import React, { MutableRefObject, useEffect, useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
-import { msg } from '@lingui/macro';
+import { msg, plural } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
+import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
 import RadioCard from 'web-components/src/components/atoms/RadioCard';
 import ControlledFormLabel from 'web-components/src/components/form/ControlledFormLabel';
@@ -18,6 +19,12 @@ import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import {
+  APPLY,
+  TITLE_CROP,
+  TITLE_IGNORE_CROP,
+  UPDATE,
+} from 'lib/constants/shared.constants';
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -92,6 +99,11 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
       name: 'description',
     });
 
+    const remainingDescriptionCharacters = useMemo(
+      () => getRemainingCharacters({ value: description }),
+      [description],
+    );
+
     /* Setter */
 
     const setProfileImage = ({ value }: { value: string }): void => {
@@ -153,6 +165,11 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           {...form.register('profileImage')}
           name="profile-image"
           initialFileName={PROFILE_AVATAR_FILE_NAME}
+          uploadText={_(UPLOAD_IMAGE)}
+          updateText={_(UPDATE)}
+          applyText={_(APPLY)}
+          title={_(TITLE_CROP)}
+          titleIgnoreCrop={_(TITLE_IGNORE_CROP)}
           circularCrop
           onUpload={onUpload}
           value={profileImage}
@@ -163,6 +180,11 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           label={_(msg`Background image`)}
           setValue={setBackgroundImage}
           initialFileName={PROFILE_BG_FILE_NAME}
+          uploadText={_(UPLOAD_IMAGE)}
+          updateText={_(UPDATE)}
+          applyText={_(APPLY)}
+          title={_(TITLE_CROP)}
+          titleIgnoreCrop={_(TITLE_IGNORE_CROP)}
           sx={{
             label: { width: '100%' },
             button: { width: '100%' },
@@ -189,7 +211,14 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           error={!!errors?.description}
           {...form.register('description')}
         >
-          <TextAreaFieldChartCounter value={description} />
+          <TextAreaFieldChartCounter
+            value={description}
+            charsLeft={remainingDescriptionCharacters}
+            remainingCharactersText={plural(remainingDescriptionCharacters, {
+              one: `${remainingDescriptionCharacters} character remaining`,
+              other: `${remainingDescriptionCharacters} characters remaining`,
+            })}
+          />
         </TextAreaField>
         <Box sx={{ mt: 6 }}>
           <ControlledFormLabel optional>{_(LINKS_LABEL)}</ControlledFormLabel>

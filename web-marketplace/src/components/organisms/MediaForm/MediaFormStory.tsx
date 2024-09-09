@@ -9,7 +9,6 @@ import {
   FileDropProps,
 } from 'web-components/src/components/inputs/new/FileDrop/FileDrop';
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
-import { RADIO_PREFERABLE } from 'web-components/src/components/inputs/new/Radio/Radio.constants';
 import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/RadioGroup';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 import { VideoInput } from 'web-components/src/components/inputs/new/VideoInput/VideoInput';
@@ -18,10 +17,25 @@ import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import {
+  APPLY,
+  FILE_DROP_BUTTON_TEXT,
+  FILE_DROP_LOCATION_TEXT,
+  FILE_DROP_MOVE_DOWN_TEXT,
+  FILE_DROP_MOVE_UP_TEXT,
+  FILE_UPLOADING_DESCRIPTION,
+  FILE_UPLOADING_TITLE,
+  RADIO_PREFERABLE,
+  TITLE_CROP,
+  TITLE_IGNORE_CROP,
+  UPDATE,
+} from 'lib/constants/shared.constants';
 import { IMAGE_STORAGE_BASE_URL } from 'lib/env';
 
 import { useProjectEditContext } from 'pages';
+import { DragAndDropLabel } from 'components/atoms/DragAndDropLabel';
 
+import { UPLOAD_IMAGE } from '../EditProfileForm/EditProfileForm.constants';
 import { useHandleUpload } from './hooks/useHandleUpload';
 import {
   cropAspectMediaForm,
@@ -29,6 +43,9 @@ import {
   STORY_LABEL,
   VIDEO_INPUT_HELPER_LINK_TEXT,
   VIDEO_INPUT_HELPER_TEXT,
+  VIDEO_PLAYER_LOADING,
+  VIDEO_URL_NOT_VALID,
+  VIDEO_URL_PLACEHOLDER,
 } from './MediaForm.constants';
 import { MediaFormSchemaType } from './MediaForm.schema';
 import { getHandleDelete } from './MediaForm.utils';
@@ -101,7 +118,7 @@ export const MediaFormStory = ({
       <>
         <Radio
           label={_(msg`Add a video`)}
-          optional={RADIO_PREFERABLE}
+          optional={_(RADIO_PREFERABLE)}
           value={'schema:VideoObject'}
           helperText={
             <span>
@@ -132,6 +149,9 @@ export const MediaFormStory = ({
               }}
               error={!!errors['regen:storyMedia']?.['schema:url']}
               helperText={errors['regen:storyMedia']?.['schema:url']?.message}
+              urlNotValidText={_(VIDEO_URL_NOT_VALID)}
+              loadingText={_(VIDEO_PLAYER_LOADING)}
+              addPlaceholder={_(VIDEO_URL_PLACEHOLDER)}
               {...register(`regen:storyMedia.schema:url`)}
             />
           )}
@@ -148,6 +168,13 @@ export const MediaFormStory = ({
         >
           {isImage && (
             <FileDrop
+              fileUploadingTitle={_(FILE_UPLOADING_TITLE)}
+              fileUplaodingDescription={_(FILE_UPLOADING_DESCRIPTION)}
+              locationText={_(FILE_DROP_LOCATION_TEXT)}
+              moveUpText={_(FILE_DROP_MOVE_UP_TEXT)}
+              moveDownText={_(FILE_DROP_MOVE_DOWN_TEXT)}
+              buttonText={_(FILE_DROP_BUTTON_TEXT)}
+              dragAndDropLabel={<DragAndDropLabel />}
               value={url && isImageUrl ? url : ''}
               credit={storyMedia?.['schema:creditText']}
               setValue={setStoryMediaUrl}
@@ -171,6 +198,11 @@ export const MediaFormStory = ({
                   initialImage={initialFile}
                   fixedCrop={cropAspectMediaForm}
                   isIgnoreCrop={!!value}
+                  uploadText={_(UPLOAD_IMAGE)}
+                  updateText={_(UPDATE)}
+                  applyText={_(APPLY)}
+                  title={_(TITLE_CROP)}
+                  titleIgnoreCrop={_(TITLE_IGNORE_CROP)}
                 >
                   <TextField
                     type="text"

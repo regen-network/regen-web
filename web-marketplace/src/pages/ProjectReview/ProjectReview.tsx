@@ -17,7 +17,10 @@ import { ProcessingModal } from 'web-components/src/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
 
 import { useAuth } from 'lib/auth/auth';
-import { EDIT_TEXT } from 'lib/constants/shared.constants';
+import {
+  EDIT_TEXT,
+  FILE_DROP_LOCATION_TEXT,
+} from 'lib/constants/shared.constants';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { PROJECTS_QUERY_KEY } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery.constants';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
@@ -232,6 +235,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
           <ItemDisplay name={_(MAIN_PHOTO)}>
             {previewPhoto && (
               <Photo
+                locationText={_(FILE_DROP_LOCATION_TEXT)}
                 src={previewPhoto['schema:url']}
                 credit={previewPhoto['schema:creditText']}
               />
@@ -244,6 +248,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
               photo =>
                 photo && (
                   <Photo
+                    locationText={_(FILE_DROP_LOCATION_TEXT)}
                     key={photo['schema:url']}
                     src={photo['schema:url']}
                     caption={photo['schema:caption']}
@@ -274,6 +279,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
               )}
               {isImage && (
                 <Photo
+                  locationText={_(FILE_DROP_LOCATION_TEXT)}
                   src={storyMedia['schema:url']}
                   credit={storyMedia['schema:creditText']}
                 />

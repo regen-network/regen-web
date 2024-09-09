@@ -1,7 +1,8 @@
-import { MutableRefObject, useEffect } from 'react';
+import { MutableRefObject, useEffect, useMemo } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
+import { msg, plural, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
 import {
   FileDrop,
@@ -14,9 +15,24 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import CropImageModal from 'web-components/src/components/modal/CropImageModal';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import {
+  APPLY,
+  FILE_DROP_BUTTON_TEXT,
+  FILE_DROP_LOCATION_TEXT,
+  FILE_DROP_MOVE_DOWN_TEXT,
+  FILE_DROP_MOVE_UP_TEXT,
+  FILE_UPLOADING_DESCRIPTION,
+  FILE_UPLOADING_TITLE,
+  TITLE_CROP,
+  TITLE_IGNORE_CROP,
+  UPDATE,
+} from 'lib/constants/shared.constants';
+
 import { useProjectEditContext } from 'pages';
+import { DragAndDropLabel } from 'components/atoms/DragAndDropLabel';
 
 import { apiUri } from '../../../lib/apiUri';
+import { UPLOAD_IMAGE } from '../EditProfileForm/EditProfileForm.constants';
 import { useHandleUpload } from './hooks/useHandleUpload';
 import {
   CAPTION_CHART_LIMIT,
@@ -75,6 +91,16 @@ export const MediaFormPhotos = ({
     control: control,
   });
 
+  const cropImageModalText = useMemo(
+    () => ({
+      uploadText: _(UPLOAD_IMAGE),
+      updateText: _(UPDATE),
+      applyText: _(APPLY),
+      title: _(TITLE_CROP),
+      titleIgnoreCrop: _(TITLE_IGNORE_CROP),
+    }),
+    [_],
+  );
   /* Watcher */
 
   const previewPhoto = useWatch({ control, name: 'regen:previewPhoto' });
@@ -158,6 +184,13 @@ export const MediaFormPhotos = ({
   return (
     <>
       <FileDrop
+        fileUploadingTitle={_(FILE_UPLOADING_TITLE)}
+        fileUplaodingDescription={_(FILE_UPLOADING_DESCRIPTION)}
+        locationText={_(FILE_DROP_LOCATION_TEXT)}
+        moveUpText={_(FILE_DROP_MOVE_UP_TEXT)}
+        moveDownText={_(FILE_DROP_MOVE_DOWN_TEXT)}
+        buttonText={_(FILE_DROP_BUTTON_TEXT)}
+        dragAndDropLabel={<DragAndDropLabel />}
         label={_(MAIN_PHOTO)}
         description={_(MAIN_PHOTO_DESCRIPTION)}
         value={previewPhoto?.['schema:url']}
@@ -177,6 +210,11 @@ export const MediaFormPhotos = ({
             initialImage={initialFile}
             fixedCrop={cropAspectMediaForm}
             isIgnoreCrop={!!value}
+            uploadText={_(UPLOAD_IMAGE)}
+            updateText={_(UPDATE)}
+            applyText={_(APPLY)}
+            title={_(TITLE_CROP)}
+            titleIgnoreCrop={_(TITLE_IGNORE_CROP)}
           >
             <TextField
               type="text"
@@ -200,7 +238,7 @@ export const MediaFormPhotos = ({
         description={_(GALLERY_PHOTOS_DESCRIPTION)}
         fields={fields}
         move={move}
-        getFieldElement={(_: Record<'id', string>, index: number) => {
+        getFieldElement={(field: Record<'id', string>, index: number) => {
           const url = galleryPhotos?.[index]?.['schema:url'];
           const isFirst = index === 0;
           const isLast = index === fields.length - 1;
@@ -208,8 +246,20 @@ export const MediaFormPhotos = ({
           const fieldErrorMessage =
             errors['regen:galleryPhotos']?.[index]?.['schema:caption']?.message;
 
+          const remainingCaptionCharacters = getRemainingCharacters({
+            value: galleryPhotos?.[index]?.['schema:caption'],
+            charLimit: CAPTION_CHART_LIMIT,
+          });
+
           return (
             <FileDrop
+              fileUploadingTitle={_(FILE_UPLOADING_TITLE)}
+              fileUplaodingDescription={_(FILE_UPLOADING_DESCRIPTION)}
+              locationText={_(FILE_DROP_LOCATION_TEXT)}
+              moveUpText={_(FILE_DROP_MOVE_UP_TEXT)}
+              moveDownText={_(FILE_DROP_MOVE_DOWN_TEXT)}
+              buttonText={_(FILE_DROP_BUTTON_TEXT)}
+              dragAndDropLabel={<DragAndDropLabel />}
               moveUp={isFirst ? undefined : () => move(index, index - 1)}
               moveDown={
                 index === fields.length - 2
@@ -250,6 +300,7 @@ export const MediaFormPhotos = ({
                   fixedCrop={cropAspectMediaForm}
                   isCropSubmitDisabled={hasFieldError}
                   isIgnoreCrop={!!value}
+                  {...cropImageModalText}
                 >
                   <TextAreaField
                     type="text"
@@ -274,7 +325,14 @@ export const MediaFormPhotos = ({
                   >
                     <TextAreaFieldChartCounter
                       value={galleryPhotos?.[currentIndex]?.['schema:caption']}
-                      charLimit={CAPTION_CHART_LIMIT}
+                      charsLeft={remainingCaptionCharacters}
+                      remainingCharactersText={plural(
+                        remainingCaptionCharacters,
+                        {
+                          one: `${remainingCaptionCharacters} character remaining`,
+                          other: `${remainingCaptionCharacters} characters remaining`,
+                        },
+                      )}
                     />
                   </TextAreaField>
                   <TextField

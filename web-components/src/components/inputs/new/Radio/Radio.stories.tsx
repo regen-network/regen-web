@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { VideoInput } from '../VideoInput/VideoInput';
 import { Radio } from './Radio';
-import { RADIO_PREFERABLE } from './Radio.constants';
+import { RADIO_PREFERABLE } from './Radio.mock';
 
 export default {
   title: 'atoms/inputs/Radio',

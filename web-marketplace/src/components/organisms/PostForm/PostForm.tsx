@@ -1,10 +1,11 @@
-import { MutableRefObject, useEffect, useState } from 'react';
+import { MutableRefObject, useEffect, useMemo, useState } from 'react';
 import { SubmitHandler, useFieldArray, useWatch } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
+import { msg, plural, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { MAPBOX_TOKEN } from 'config/globals';
 import { Feature, Point } from 'geojson';
+import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import { LocationIcon } from 'web-components/src/components/icons/LocationIcon';
@@ -30,7 +31,17 @@ import { CancelButtonFooter } from 'web-components/src/components/organisms/Canc
 import { Body, Title } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import {
+  FILE_DROP_BUTTON_TEXT,
+  FILE_DROP_LOCATION_TEXT,
+  FILE_DROP_MOVE_DOWN_TEXT,
+  FILE_DROP_MOVE_UP_TEXT,
+  FILE_UPLOADING_DESCRIPTION,
+  FILE_UPLOADING_TITLE,
+} from 'lib/constants/shared.constants';
+
 import { Link } from 'components/atoms';
+import { DragAndDropLabel } from 'components/atoms/DragAndDropLabel';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
@@ -100,8 +111,16 @@ export const PostForm = ({
   const title = useWatch({ control: form.control, name: 'title' });
   const files = useWatch({ control: form.control, name: 'files' });
   const privacy = useWatch({ control: form.control, name: 'privacyType' });
-
   const noFiles = (files?.length ?? 0) <= 1;
+
+  const remainingTitleCharacters = useMemo(
+    () =>
+      getRemainingCharacters({
+        value: title,
+        charLimit: POST_MAX_TITLE_LENGTH,
+      }),
+    [title],
+  );
 
   const { fields, append, remove, move } = useFieldArray({
     name: 'files',
@@ -234,7 +253,11 @@ export const PostForm = ({
           errors.title?.message || (
             <TextAreaFieldChartCounter
               value={title}
-              charLimit={POST_MAX_TITLE_LENGTH}
+              charsLeft={remainingTitleCharacters}
+              remainingCharactersText={plural(remainingTitleCharacters, {
+                one: `${remainingTitleCharacters} character remaining`,
+                other: `${remainingTitleCharacters} characters remaining`,
+              })}
               sx={{ mb: { xs: 0, sm: 0 } }}
             />
           )
@@ -270,11 +293,18 @@ export const PostForm = ({
         }
         fields={fields}
         move={move}
-        getFieldElement={(_: Record<'id', string>, index: number) => {
+        getFieldElement={(field: Record<'id', string>, index: number) => {
           const file = files?.[index] as EditFileFormSchemaType;
           const url = file?.url;
           return (
             <FileDrop
+              dragAndDropLabel={<DragAndDropLabel />}
+              fileUploadingTitle={_(FILE_UPLOADING_TITLE)}
+              fileUplaodingDescription={_(FILE_UPLOADING_DESCRIPTION)}
+              locationText={_(FILE_DROP_LOCATION_TEXT)}
+              moveUpText={_(FILE_DROP_MOVE_UP_TEXT)}
+              moveDownText={_(FILE_DROP_MOVE_DOWN_TEXT)}
+              buttonText={_(FILE_DROP_BUTTON_TEXT)}
               moveUp={index === 0 ? undefined : () => move(index, index - 1)}
               moveDown={
                 index === fields.length - 2

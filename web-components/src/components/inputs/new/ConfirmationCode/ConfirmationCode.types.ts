@@ -2,7 +2,7 @@ export type ConfirmationCodeProps = {
   /**
    * A label for the confirmation code input field.
    */
-  ariaLabel?: string;
+  ariaLabel: string;
 
   /**
    * Whether the confirmation code input field should be focused when the component mounts.

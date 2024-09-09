@@ -1,17 +1,17 @@
-import { forwardRef } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 import OutlinedButton from '../../../buttons/OutlinedButton';
-import { Label } from '../../../typography';
 import { useFileDropStyles } from './FileDrop.styles';
 
 type Props = {
-  buttonText?: string;
+  buttonText: string;
   name?: string;
   hideDragText?: boolean;
   dropZoneOption?: DropzoneOptions;
   value?: string;
+  dragAndDropLabel: ReactNode;
   classes?: {
     root?: string;
     main?: string;
@@ -27,6 +27,7 @@ export const FileDropZone = forwardRef<HTMLInputElement, Props>(
       buttonText,
       name,
       hideDragText,
+      dragAndDropLabel,
       dropZoneOption = {},
       value,
       classes,
@@ -58,14 +59,7 @@ export const FileDropZone = forwardRef<HTMLInputElement, Props>(
             className: cx('dropzone', styles.drop),
           })}
         >
-          {isDesktop && !hideDragText && (
-            <>
-              <Label size="xs" mb={2}>
-                drag and drop
-              </Label>
-              <span className={styles.or}>or</span>
-            </>
-          )}
+          {isDesktop && !hideDragText && dragAndDropLabel}
 
           <input
             type="file"
@@ -86,7 +80,7 @@ export const FileDropZone = forwardRef<HTMLInputElement, Props>(
               component="span"
               classes={{ root: classes?.button }}
             >
-              {buttonText || '+ add'}
+              {buttonText}
             </OutlinedButton>
           </label>
         </div>

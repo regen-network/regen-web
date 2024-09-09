@@ -19,6 +19,7 @@ export interface SelectTextFieldProps extends DefaultStyleProps {
   native?: boolean;
   value?: string;
   disabled?: boolean;
+  emptyOptionText: string;
   label?: string;
   error?: boolean;
   helperText?: string;
@@ -28,7 +29,16 @@ export interface SelectTextFieldProps extends DefaultStyleProps {
 
 const SelectTextField = forwardRef<HTMLDivElement, SelectTextFieldProps>(
   (
-    { options, native = true, value, disabled, label, className, ...props },
+    {
+      options,
+      native = true,
+      value,
+      disabled,
+      label,
+      className,
+      emptyOptionText,
+      ...props
+    },
     ref,
   ) => {
     const { classes: styles, cx } = useSelectTextFieldStyles({
@@ -79,7 +89,7 @@ const SelectTextField = forwardRef<HTMLDivElement, SelectTextFieldProps>(
           ))
         ) : (
           <Box component={native ? 'option' : MenuItem} key="loading">
-            No options available
+            {emptyOptionText}
           </Box>
         )}
       </TextField>

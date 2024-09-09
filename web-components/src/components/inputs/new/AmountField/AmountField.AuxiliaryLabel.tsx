@@ -7,6 +7,7 @@ interface AuxiliaryLabelProps {
   availableAmount: number;
   denom: string;
   auxiliaryLabel?: string;
+  availableLabel: string;
   className?: string;
 }
 
@@ -14,6 +15,7 @@ export const AuxiliaryLabel = ({
   availableAmount,
   denom,
   auxiliaryLabel,
+  availableLabel,
   className,
 }: AuxiliaryLabelProps): JSX.Element => {
   const { classes: styles } = useAmountFieldStyles();
@@ -29,7 +31,7 @@ export const AuxiliaryLabel = ({
           <span className={styles.availableLabel}>{auxiliaryLabel}</span>
         )}
         <span>
-          <span className={styles.availableLabel}>Available:</span>{' '}
+          <span className={styles.availableLabel}>{`${availableLabel}:`}</span>{' '}
           <span className={styles.availableAmount}>
             {getFormattedNumber(availableAmount)}
           </span>

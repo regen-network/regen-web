@@ -1,5 +1,5 @@
 import { cn } from '../../../utils/styles/cn';
-import PauseIcon from '../../icons/PauseIcon';
+import { PauseIcon } from '../../icons/PauseIcon';
 import PlayIcon from '../../icons/PlayIcon';
 import { usePlayPauseButtonStyles } from './PlayPauseButton.styles';
 

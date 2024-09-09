@@ -39,8 +39,8 @@ const CancelButtonFooter = ({
           </Button>
         </Grid>
       )}
-      <Grid item>{children}</Grid>
       <Grid item>
+        {children}
         <ContainedButton {...props}>{label}</ContainedButton>
       </Grid>
     </Grid>

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-09-09 09:42+0200\n"
+"POT-Creation-Date: 2024-09-09 09:57+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -161,7 +161,7 @@ msgid "admin"
 msgstr ""
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:46
-#: src/components/organisms/CreditClassForms/CreditClassReview.tsx:26
+#: src/components/organisms/CreditClassForms/CreditClassReview.tsx:29
 #: src/components/organisms/RolesForm/RolesForm.tsx:205
 msgid "Admin"
 msgstr ""
@@ -302,7 +302,7 @@ msgid "Background image"
 msgstr ""
 
 #: src/pages/BasicInfo/BasicInfo.tsx:66
-#: src/pages/ProjectReview/ProjectReview.tsx:183
+#: src/pages/ProjectReview/ProjectReview.tsx:184
 msgid "Basic Info"
 msgstr ""
 
@@ -360,6 +360,10 @@ msgstr ""
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:49
 #: src/pages/ProjectFinished/ProjectFinished.tsx:82
 msgid "blockchain record"
+msgstr ""
+
+#: src/pages/Certificate/Certificate.constants.ts:9
+msgid "Blockchain record"
 msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:8
@@ -536,7 +540,7 @@ msgstr ""
 msgid "Choose a specific location on the map"
 msgstr ""
 
-#: src/pages/ChooseCreditClass/ChooseCreditClass.Item.tsx:27
+#: src/pages/ChooseCreditClass/ChooseCreditClass.Item.tsx:29
 msgid "Choose credit class"
 msgstr ""
 
@@ -718,6 +722,7 @@ msgstr ""
 msgid "credit class"
 msgstr ""
 
+#: src/pages/Certificate/Certificate.constants.ts:15
 #: src/pages/Certificate/Certificate.utils.ts:43
 msgid "Credit class"
 msgstr ""
@@ -729,6 +734,10 @@ msgstr ""
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:39
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:10
 msgid "Credit Class"
+msgstr ""
+
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:10
+msgid "CREDIT CLASS"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx:168
@@ -743,8 +752,12 @@ msgstr ""
 msgid "Credit Class ID"
 msgstr ""
 
-#: src/components/organisms/CreditClassForms/CreditClassReview.tsx:22
+#: src/components/organisms/CreditClassForms/CreditClassReview.tsx:24
 msgid "Credit Class Info"
+msgstr ""
+
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:13
+msgid "Credit class: the structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:28
@@ -772,7 +785,7 @@ msgid "Credit retirement location"
 msgstr ""
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:93
-#: src/components/organisms/CreditClassForms/CreditClassReview.tsx:34
+#: src/components/organisms/CreditClassForms/CreditClassReview.tsx:37
 msgid "Credit Type"
 msgstr ""
 
@@ -854,7 +867,7 @@ msgstr ""
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:182
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:123
 #: src/pages/Description/Description.tsx:48
-#: src/pages/ProjectReview/ProjectReview.tsx:209
+#: src/pages/ProjectReview/ProjectReview.tsx:212
 msgid "Description"
 msgstr ""
 
@@ -868,6 +881,11 @@ msgstr ""
 
 #: src/pages/VerifyEmail/VerifyEmail.tsx:59
 msgid "Don’t see anything? <0>Resend email</0>."
+msgstr ""
+
+#: src/components/organisms/MediaSection.tsx:50
+#: src/lib/constants/shared.constants.ts:5
+msgid "Draft"
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:140
@@ -943,6 +961,10 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
+#: src/lib/constants/shared.constants.ts:4
+msgid "Edit"
+msgstr ""
+
 #: src/pages/Dashboard/MyCreditClasses/MyCreditClasses.constants.ts:3
 msgid "edit credit class"
 msgstr ""
@@ -1005,7 +1027,11 @@ msgstr ""
 msgid "Enter the wallet address here if this entity has a wallet address but has not yet signed up on Regen Marketplace. Make sure this is a valid wallet address."
 msgstr ""
 
-#: src/pages/ProjectReview/ProjectReview.tsx:154
+#: src/pages/Certificate/Certificate.constants.ts:10
+msgid "Equivalent to"
+msgstr ""
+
+#: src/pages/ProjectReview/ProjectReview.tsx:155
 msgid "Error getting ISO string for jurisdiction. Please edit your location."
 msgstr ""
 
@@ -1216,11 +1242,11 @@ msgid "issuers"
 msgstr ""
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:59
-#: src/components/organisms/CreditClassForms/CreditClassReview.tsx:27
+#: src/components/organisms/CreditClassForms/CreditClassReview.tsx:30
 msgid "Issuers"
 msgstr ""
 
-#: src/pages/ProjectReview/ProjectReview.tsx:206
+#: src/pages/ProjectReview/ProjectReview.tsx:209
 msgid "Jurisdiction"
 msgstr ""
 
@@ -1241,12 +1267,16 @@ msgstr ""
 msgid "Land Steward"
 msgstr ""
 
+#: src/components/atoms/WrappedResourcesCard.tsx:34
+msgid "Last Updated:"
+msgstr ""
+
 #: src/components/organisms/RegistryLayout/components/ConnectWalletModal/ConnectWalletModal.constants.ts:5
 msgid "Learn how to"
 msgstr ""
 
 #: src/components/organisms/DetailsSection/DetailsSection.Credit.tsx:54
-#: src/pages/Projects/PrefinanceProjects/PrefinanceProjects.tsx:53
+#: src/pages/Projects/PrefinanceProjects/PrefinanceProjects.tsx:56
 msgid "learn more"
 msgstr ""
 
@@ -1284,7 +1314,11 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
-#: src/pages/ProjectReview/ProjectReview.tsx:262
+#: src/components/organisms/MediaSection.tsx:38
+msgid "listen to podcast"
+msgstr ""
+
+#: src/pages/ProjectReview/ProjectReview.tsx:267
 msgid "Loading video player..."
 msgstr ""
 
@@ -1294,7 +1328,7 @@ msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:123
 #: src/pages/ProjectLocation/ProjectLocation.tsx:44
-#: src/pages/ProjectReview/ProjectReview.tsx:200
+#: src/pages/ProjectReview/ProjectReview.tsx:202
 msgid "Location"
 msgstr ""
 
@@ -1361,7 +1395,7 @@ msgid "measurement approach"
 msgstr ""
 
 #: src/pages/Media/Media.tsx:72
-#: src/pages/ProjectReview/ProjectReview.tsx:223
+#: src/pages/ProjectReview/ProjectReview.tsx:227
 msgid "Media"
 msgstr ""
 
@@ -1375,9 +1409,9 @@ msgstr ""
 
 #: src/components/molecules/MetadataJSONField.tsx:53
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:105
-#: src/components/organisms/CreditClassForms/CreditClassReview.tsx:37
+#: src/components/organisms/CreditClassForms/CreditClassReview.tsx:40
 #: src/pages/ProjectMetadata/ProjectMetadata.tsx:72
-#: src/pages/ProjectReview/ProjectReview.tsx:297
+#: src/pages/ProjectReview/ProjectReview.tsx:303
 msgid "Metadata"
 msgstr ""
 
@@ -1409,13 +1443,13 @@ msgstr ""
 msgid "More Projects"
 msgstr ""
 
-#: src/pages/ProjectReview/ProjectReview.tsx:95
+#: src/pages/ProjectReview/ProjectReview.tsx:96
 msgid "MsgCreateProject Error"
 msgstr ""
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:144
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:104
-#: src/pages/ProjectReview/ProjectReview.tsx:187
+#: src/pages/ProjectReview/ProjectReview.tsx:189
 msgid "Name"
 msgstr ""
 
@@ -1499,11 +1533,20 @@ msgstr ""
 msgid "NOTE: Only project page creation and user profile creation available with email / social log in."
 msgstr ""
 
+#: src/pages/Certificate/Certificate.constants.ts:13
+msgid "Number of credits"
+msgstr ""
+
+#: src/pages/Certificate/Certificate.constants.ts:12
+msgid "of CO2e"
+msgstr ""
+
 #: src/components/molecules/CreditClassDetailsColumn.tsx:157
 #: src/pages/Buyers/Buyers.constants.ts:3
 msgid "offset generation method"
 msgstr ""
 
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:11
 #: src/pages/ProjectReview/ProjectReview.VCSMetadata.tsx:22
 msgid "Offset generation method"
 msgstr ""
@@ -1643,7 +1686,7 @@ msgstr ""
 msgid "primary impact"
 msgstr ""
 
-#: src/pages/Certificate/Certificate.tsx:84
+#: src/pages/Certificate/Certificate.tsx:87
 msgid "print certificate"
 msgstr ""
 
@@ -1711,6 +1754,7 @@ msgstr ""
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:100
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:116
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:18
+#: src/pages/Certificate/Certificate.constants.ts:14
 #: src/pages/Certificate/Certificate.utils.ts:36
 msgid "Project"
 msgstr ""
@@ -1780,6 +1824,10 @@ msgstr ""
 msgid "Project metadata updated"
 msgstr ""
 
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:12
+msgid "Project methodology"
+msgstr ""
+
 #: src/pages/ProjectFinished/ProjectFinished.tsx:73
 msgid "project name"
 msgstr ""
@@ -1809,7 +1857,7 @@ msgstr ""
 msgid "project type"
 msgstr ""
 
-#: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:56
+#: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:57
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:36
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:24
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:43
@@ -1841,6 +1889,10 @@ msgstr ""
 
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:4
 msgid "ratings"
+msgstr ""
+
+#: src/components/organisms/MediaSection.tsx:37
+msgid "read article"
 msgstr ""
 
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:91
@@ -1945,6 +1997,7 @@ msgstr ""
 msgid "Retire credits now"
 msgstr ""
 
+#: src/pages/Certificate/Certificate.constants.ts:16
 #: src/pages/Certificate/Certificate.utils.ts:50
 msgid "Retired by"
 msgstr ""
@@ -1953,7 +2006,7 @@ msgstr ""
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr ""
 
-#: src/pages/Certificate/Certificate.constants.ts:3
+#: src/pages/Certificate/Certificate.constants.ts:5
 msgid "Retirement Certificate"
 msgstr ""
 
@@ -1970,6 +2023,7 @@ msgid "Retirement is permanent and non-reversible."
 msgstr ""
 
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:54
+#: src/pages/Certificate/Certificate.constants.ts:18
 msgid "Retirement location"
 msgstr ""
 
@@ -1979,6 +2033,7 @@ msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:51
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:488
+#: src/pages/Certificate/Certificate.constants.ts:17
 msgid "Retirement reason"
 msgstr ""
 
@@ -1987,7 +2042,7 @@ msgstr ""
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:30
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:36
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:37
-#: src/pages/ProjectReview/ProjectReview.tsx:179
+#: src/pages/ProjectReview/ProjectReview.tsx:180
 msgid "Review"
 msgstr ""
 
@@ -2091,7 +2146,7 @@ msgstr ""
 msgid "share"
 msgstr ""
 
-#: src/pages/Certificate/Certificate.tsx:71
+#: src/pages/Certificate/Certificate.tsx:74
 msgid "Share"
 msgstr ""
 
@@ -2131,7 +2186,7 @@ msgstr ""
 msgid "Signing failed"
 msgstr ""
 
-#: src/pages/ProjectReview/ProjectReview.tsx:190
+#: src/pages/ProjectReview/ProjectReview.tsx:192
 msgid "Size"
 msgstr ""
 
@@ -2168,7 +2223,7 @@ msgstr ""
 msgid "Sorry, your transaction was not successful."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:191
+#: src/pages/Projects/AllProjects/AllProjects.tsx:192
 msgid "Sort by:"
 msgstr ""
 
@@ -2205,6 +2260,10 @@ msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:22
 msgid "Status refreshes automatically once every 10 seconds if in a pending state."
+msgstr ""
+
+#: src/components/atoms/WrappedStepCard.tsx:59
+msgid "step"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:37
@@ -2405,6 +2464,10 @@ msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:90
 msgid "Tokenization Source"
+msgstr ""
+
+#: src/pages/Certificate/Certificate.constants.ts:11
+msgid "ton"
 msgstr ""
 
 #: src/components/molecules/CreditClassDetailsColumn.tsx:127
@@ -2612,6 +2675,10 @@ msgstr ""
 msgid "View Profile"
 msgstr ""
 
+#: src/components/atoms/WrappedResourcesCard.tsx:33
+msgid "view resource"
+msgstr ""
+
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:13
 msgid "view retirement certificates"
 msgstr ""
@@ -2644,12 +2711,20 @@ msgstr ""
 msgid "Wallet integration"
 msgstr ""
 
+#: src/components/organisms/MediaSection.tsx:36
+msgid "watch video"
+msgstr ""
+
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:84
 msgid "We need an email address to send you a receipt of your purchase."
 msgstr ""
 
 #: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:4
 msgid "We recommend choosing a credit class and creating an on chain project if possible."
+msgstr ""
+
+#: src/components/organisms/RegistryLayout/RegistryLayout.CookiesTopBanner.tsx:18
+msgid "We use cookies to provide you with a great user experience. By using this site, you accept our use of <0>cookies policy</0> and agree to our <1>platform terms of service</1>."
 msgstr ""
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:88

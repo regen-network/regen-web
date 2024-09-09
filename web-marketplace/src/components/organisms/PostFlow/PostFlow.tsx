@@ -46,6 +46,7 @@ type Props = {
   projectSlug?: string | null;
   offChainProjectId?: string;
   setDraftPost?: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
+  scrollIntoDataStream?: () => void;
 };
 
 export const PostFlow = ({
@@ -57,6 +58,7 @@ export const PostFlow = ({
   projectSlug,
   offChainProjectId: _offChainProjectId,
   setDraftPost,
+  scrollIntoDataStream,
 }: Props) => {
   const fileNamesToDeleteRef = useRef<string[]>([]);
   const retryCsrfRequest = useRetryCsrfRequest();
@@ -186,6 +188,7 @@ export const PostFlow = ({
             projectSlug ?? offChainProjectId ?? projectId
           }#data-stream`,
         );
+        scrollIntoDataStream && scrollIntoDataStream();
       }
     }
   }, [
@@ -201,6 +204,7 @@ export const PostFlow = ({
     onModalClose,
     projectId,
     projectSlug,
+    scrollIntoDataStream,
     setBannerText,
     setDraftPost,
     setProcessingModalAtom,

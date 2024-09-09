@@ -647,6 +647,11 @@ function ProjectDetails(): JSX.Element {
             published: draftPost?.published || true,
           }}
           setDraftPost={setDraftPost}
+          scrollIntoDataStream={() => {
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
         />
       )}
     </Box>

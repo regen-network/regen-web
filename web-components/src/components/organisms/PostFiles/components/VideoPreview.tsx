@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import ReactPlayer from 'react-player/es6';
-import { PauseButton } from 'web-components/src/components/atoms/PauseButton/PauseButton';
 
-import { PlayButton } from '../../../atoms/PlayButton/PlayButton';
+import { PlayPauseButton } from 'src/components/atoms/PlayPauseButton/PlayPauseButton';
 
 export const VideoPreview = ({
   url,
@@ -41,16 +40,11 @@ export const VideoPreview = ({
         onMouseEnter={playing ? handleMouseEnter : undefined}
         onMouseLeave={playing ? handleMouseLeave : undefined}
       >
-        <button
-          onClick={handlePlayPause}
-          className="outline-none cursor-pointer bg-transparent border-none"
-        >
-          {playing ? (
-            <PauseButton className={`w-50 h-50 ${buttonClassName}`} />
-          ) : (
-            <PlayButton className={`w-50 h-50 ${buttonClassName}`} />
-          )}
-        </button>
+        <PlayPauseButton
+          paused={playing}
+          handlePlayPause={handlePlayPause}
+          className={buttonClassName}
+        />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-import { PlayButton } from '../../atoms/PlayButton/PlayButton';
+import { PlayPauseButton } from '../../atoms/PlayPauseButton/PlayPauseButton';
 import OutlinedButton from '../../buttons/OutlinedButton';
 import { Body } from '../../typography';
 import MediaCard from '../MediaCard/MediaCard';
@@ -56,7 +56,7 @@ export default function ArticleCard({
       elevation={1}
       draftText={draftText}
     >
-      {play && <PlayButton />}
+      {play && <PlayPauseButton paused={false} />}
       <Body size="sm" sx={{ flex: '1 0 auto', py: [2.5, 2], px: [4, 5] }}>
         <Box component="span" sx={{ fontWeight: 'bold' }}>
           {author}

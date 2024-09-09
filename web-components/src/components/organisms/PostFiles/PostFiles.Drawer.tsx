@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player/es6';
 import { Slide } from '@mui/material';
 import { Point } from 'geojson';
+import { PlayPauseButton } from 'web-components/src/components/atoms/PlayPauseButton/PlayPauseButton';
 
 import { UseStateSetter } from '../../../types/react/useState';
 import { cn } from '../../../utils/styles/cn';
-import { PlayButton } from '../../atoms/PlayButton/PlayButton';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import { Image } from '../../image';
 import {
@@ -113,7 +113,10 @@ const PostFilesDrawer = ({
                           width="100%"
                           height="100%"
                         />
-                        <PlayButton className="w-[28px] h-[28px]" />
+                        <PlayPauseButton
+                          paused={false}
+                          className="w-[28px] h-[28px] top-[40%]"
+                        />
                       </div>
                     )}
                     <FileBody file={file} />

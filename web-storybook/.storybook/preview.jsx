@@ -13,13 +13,17 @@ import '../../tailwind.css';
 window.Buffer = Buffer;
 
 const StorybookI18nProvider = ({ children }) => {
-  useEffect(async () => {
-    const { messages } = await import(
-      `web-marketplace/src/lib/i18n/locales/en.po`
-    );
+  useEffect(() => {
+    const loadTranslations = async () => {
+      const { messages } = await import(
+        `web-marketplace/src/lib/i18n/locales/en.po`
+      );
 
-    i18n.load('en', messages);
-    i18n.activate('en');
+      i18n.load('en', messages);
+      i18n.activate('en');
+    };
+
+    loadTranslations();
   }, []);
 
   return <I18nProvider i18n={i18n}>{children}</I18nProvider>;

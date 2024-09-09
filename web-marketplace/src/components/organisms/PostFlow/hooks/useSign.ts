@@ -35,7 +35,7 @@ import {
 } from './useFetchMsgAnchor';
 import { useGetSuccessModalContent } from './useGetSuccessModalContent';
 
-type UseSignParams = UseFetchMsgAnchorParams;
+type UseSignParams = { onModalClose: () => void } & UseFetchMsgAnchorParams;
 type SignParams = {
   contentHash: ContentHash_Graph;
 } & FetchMsgAnchorParams;
@@ -45,6 +45,7 @@ export const useSign = ({
   projectId,
   offChainProjectId,
   projectName,
+  onModalClose,
 }: UseSignParams) => {
   const { _ } = useLingui();
   const getSuccessModalContent = useGetSuccessModalContent();
@@ -147,6 +148,7 @@ export const useSign = ({
               atom.buttonLink = buttonLink;
               atom.txHash = undefined;
             });
+            onModalClose();
           },
         },
       );
@@ -155,6 +157,7 @@ export const useSign = ({
       _,
       getSuccessModalContent,
       offChainProjectId,
+      onModalClose,
       projectId,
       projectName,
       projectSlug,

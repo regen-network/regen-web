@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 "POT-Creation-Date: 2024-09-11 09:33+0200\n"
 =======
 =======
@@ -22,6 +23,9 @@ msgstr ""
 "POT-Creation-Date: 2024-09-03 13:28+0100\n"
 >>>>>>> 7d48504a6 (chore: update .po files)
 >>>>>>> af124d169 (chore: update .po files)
+=======
+"POT-Creation-Date: 2024-09-09 12:29+0100\n"
+>>>>>>> 324264eb0 (chore: update .po files)
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -196,7 +200,7 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:34
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:37
 msgid "Advanced settings"
 msgstr ""
 
@@ -524,6 +528,7 @@ msgstr ""
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:438
 =======
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:437
@@ -533,6 +538,9 @@ msgstr ""
 >>>>>>> 32ec9740b (chore: update lingui catalogs)
 =======
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:18
+=======
+#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:20
+>>>>>>> 324264eb0 (chore: update .po files)
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:437
 >>>>>>> af124d169 (chore: update .po files)
 msgid "Buy tradable ecocredits"
@@ -543,12 +551,11 @@ msgstr ""
 msgid "Buyer"
 msgstr ""
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:115
 msgid "By connecting to Regen Marketplace, you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>"
 msgstr ""
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:137
 =======
@@ -557,10 +564,12 @@ msgstr ""
 >>>>>>> 963088d74 (chore: update lingui catalogs)
 =======
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:46
+=======
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:49
+>>>>>>> 324264eb0 (chore: update .po files)
 msgid "by default the cheapest credit vintage will be purchased first"
 msgstr ""
 
->>>>>>> 7d48504a6 (chore: update .po files)
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:135
 >>>>>>> 32ec9740b (chore: update lingui catalogs)
 msgid "By default these credits are tradable but you may check “retire all credits upon transfer” below to automatically retire them upon sending."
@@ -675,7 +684,7 @@ msgstr ""
 msgid "Choose Project"
 msgstr ""
 
-#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:43
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:46
 msgid "Choose specific credit vintages"
 msgstr ""
 
@@ -914,7 +923,7 @@ msgstr ""
 msgid "credit name"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:127
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:163
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr ""
 
@@ -955,7 +964,7 @@ msgid "Credits"
 msgstr ""
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:45
-#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:67
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:71
 msgid "credits available"
 msgstr ""
 
@@ -987,7 +996,7 @@ msgstr ""
 msgid "Credits issued"
 msgstr ""
 
-#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:27
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:30
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr ""
 
@@ -1007,6 +1016,7 @@ msgstr ""
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:25
 msgid "Cropland-based credits"
 msgstr ""
@@ -1024,6 +1034,9 @@ msgid "current account"
 =======
 >>>>>>> af124d169 (chore: update .po files)
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:24
+=======
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:27
+>>>>>>> 324264eb0 (chore: update .po files)
 msgid "Crypto purchase options"
 msgstr ""
 
@@ -1399,16 +1412,10 @@ msgstr ""
 msgid "If you’d prefer retired credits, please modify your choice on the <0>previous screen.</0>"
 msgstr ""
 
-<<<<<<< HEAD
 #: src/components/organisms/ImpactSection.tsx:37
 msgid "Impact"
 msgstr ""
 
-#: src/components/organisms/DescriptionForm/DescriptionForm.constants.ts:15
-msgid "In one sentence, summarize the story above."
-=======
-=======
->>>>>>> 7d48504a6 (chore: update .po files)
 #: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:50
 msgid "in"
 msgstr ""
@@ -1503,14 +1510,11 @@ msgstr ""
 msgid "learn more"
 msgstr ""
 
-<<<<<<< HEAD
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:56
-=======
-#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:56
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:59
 msgid "Learn more"
 msgstr ""
 
->>>>>>> 963088d74 (chore: update lingui catalogs)
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:56
 #: src/pages/Home/Home.tsx:196
 msgid "Learn More"
 msgstr ""
@@ -1683,6 +1687,7 @@ msgid "MsgCreateProject Error"
 msgstr ""
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:3
 msgid "Must have recipients"
 msgstr ""
@@ -1694,12 +1699,15 @@ msgstr ""
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:104
 #: src/pages/ProjectReview/ProjectReview.tsx:189
 =======
+=======
+>>>>>>> 324264eb0 (chore: update .po files)
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:10
 msgid "Must be positive"
 msgstr ""
 
-#: src/pages/ProjectReview/ProjectReview.tsx:186
->>>>>>> 7d48504a6 (chore: update .po files)
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:144
+#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:104
+#: src/pages/ProjectReview/ProjectReview.tsx:189
 msgid "Name"
 msgstr ""
 
@@ -2289,11 +2297,15 @@ msgstr ""
 msgid "Retire all credits upon transfer"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:11
 <<<<<<< HEAD
 >>>>>>> 7d86b1e5d (chore: update lingui catalogs)
 >>>>>>> 32ec9740b (chore: update lingui catalogs)
 =======
+=======
+#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:13
+>>>>>>> 324264eb0 (chore: update .po files)
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:415
 >>>>>>> af124d169 (chore: update .po files)
 msgid "Retire credits now"
@@ -2747,9 +2759,13 @@ msgid "These credits will be a tradable asset. They can be retired later via Reg
 msgstr ""
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:419
 =======
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:19
+=======
+#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:21
+>>>>>>> 324264eb0 (chore: update .po files)
 msgid "These credits will be a tradeable asset. They can be retired later via Regen Marketplace."
 msgstr ""
 
@@ -2758,25 +2774,16 @@ msgstr ""
 msgid "These credits will be retired upon purchase and will not be tradable. Retirement is permanent and non-reversible."
 msgstr ""
 
-<<<<<<< HEAD
+#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:14
+msgid "These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
+msgstr ""
+
 #: src/components/organisms/RolesForm/components/AdminModal/AdminModal.tsx:71
 msgid "This change will only be made after you save the change and sign the transaction."
 msgstr ""
 
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:13
 msgid "This code has expired!"
-msgstr ""
-
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.constants.ts:3
-=======
-#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:19
-msgid "These credits will be a tradeable asset. They can be retired later via Regen Marketplace."
-msgstr ""
-
-=======
->>>>>>> 7d48504a6 (chore: update .po files)
-#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:12
-msgid "These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
 msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.constants.ts:3
@@ -3028,30 +3035,25 @@ msgstr ""
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: src/components/organisms/PostForm/PostForm.tsx:258
 =======
 =======
 >>>>>>> af124d169 (chore: update .po files)
 <<<<<<< HEAD
+=======
+>>>>>>> 324264eb0 (chore: update .po files)
 #: src/components/organisms/PostForm/PostForm.tsx:257
 >>>>>>> 32ec9740b (chore: update lingui catalogs)
 msgid "View all supported file types»"
 msgstr ""
 
-#: src/components/organisms/Portfolio/Portfolio.constants.ts:3
-msgid "View Certificate"
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:79
+msgid "view batch"
 msgstr ""
 
-=======
-<<<<<<< HEAD
->>>>>>> 963088d74 (chore: update lingui catalogs)
-#: src/components/organisms/DetailsSection/DetailsSection.constants.ts:4
-msgid "view credit class doc"
-=======
-=======
->>>>>>> 7d48504a6 (chore: update .po files)
-#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:75
-msgid "view batch"
+#: src/components/organisms/Portfolio/Portfolio.constants.ts:3
+msgid "View Certificate"
 msgstr ""
 
 #: src/components/organisms/DetailsSection/DetailsSection.constants.ts:4

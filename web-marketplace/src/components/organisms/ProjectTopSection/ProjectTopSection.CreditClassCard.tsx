@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -11,6 +12,12 @@ import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 
 import { Link } from 'components/atoms';
 
+import {
+  CREDIT_CLASS_SUBTITLE,
+  CREDIT_CLASS_TOOLTIP,
+  OFFSET_GENERATION_METHOD,
+  PROJECT_METHODOLOGY,
+} from './ProjectTopSection.constants';
 import { ProjectMethodology } from './ProjectTopSection.utils';
 
 type Props = {
@@ -33,9 +40,11 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
   generationMethods,
   methodology,
   program,
-}) =>
-  (creditClassSanity || creditClassMetadata) &&
-  (creditClassSanity?.path || onChainCreditClassId) ? (
+}) => {
+  const { _ } = useLingui();
+
+  return (creditClassSanity || creditClassMetadata) &&
+    (creditClassSanity?.path || onChainCreditClassId) ? (
     <Link
       href={`/credit-classes/${
         creditClassSanity?.path || onChainCreditClassId
@@ -47,11 +56,15 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
             <BlockContent content={creditClassSanity?.nameRaw} />
           )
         }
+        subtitle={_(CREDIT_CLASS_SUBTITLE)}
         description={
           creditClassMetadata?.['schema:description'] || (
             <BlockContent content={creditClassSanity?.shortDescriptionRaw} />
           )
         }
+        creditClassTooltip={_(CREDIT_CLASS_TOOLTIP)}
+        methodologyLabel={_(PROJECT_METHODOLOGY)}
+        offsetGenerationMethodLabel={_(OFFSET_GENERATION_METHOD)}
         imgSrc={getClassImageWithGreyDefault({
           metadata: creditClassMetadata,
           sanityClass: creditClassSanity,
@@ -72,3 +85,4 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
       />
     </Link>
   ) : null;
+};

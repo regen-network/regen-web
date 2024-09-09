@@ -6,9 +6,10 @@ import { Label } from '../typography';
 
 interface ButtonProps {
   onClick: () => void;
+  buttonText: string;
 }
 
-function EditButton({ onClick }: ButtonProps): JSX.Element {
+function EditButton({ onClick, buttonText }: ButtonProps): JSX.Element {
   return (
     <OutlinedButton
       size="small"
@@ -20,7 +21,7 @@ function EditButton({ onClick }: ButtonProps): JSX.Element {
       startIcon={<EditIcon sx={{ height: 13, width: 13 }} />}
     >
       <Label size="sm" sx={{ color: 'info.dark' }}>
-        Edit
+        {buttonText}
       </Label>
     </OutlinedButton>
   );

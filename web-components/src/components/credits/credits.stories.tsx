@@ -44,7 +44,12 @@ export const creditDetails = (): JSX.Element => (
 );
 
 export const creditsGauge = (): JSX.Element => (
-  <CreditsGauge purchased={1527} issued={2237} />
+  <CreditsGauge
+    purchased={1527}
+    issued={2237}
+    creditsIssuedLabel="credits issued"
+    creditsPurchasedLabel="credits purchased"
+  />
 );
 
 // export const creditsWithGauge = (): JSX.Element => (

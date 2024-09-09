@@ -6,21 +6,13 @@ import { pluralize } from '../../utils/pluralize';
 import RegenIcon from '../icons/RegenIcon';
 import { Body, Subtitle, Title } from '../typography';
 import { certificateFormater, certificateOptions } from './certificate.config';
-import {
-  CREDIT_UNIT,
-  CREDIT_UNIT_SUFFIX,
-  EQUIVALENT_TO,
-  NUMBER_OF_CREDITS,
-  RETIREMENT_LOCATION,
-  RETIREMENT_REASON,
-  TX_HASH,
-} from './certificate.constants';
 import { CertificateItem } from './certificate.Item';
 import { useCertificateStyles } from './certificate.styles';
 import { CertificateType } from './certificate.types';
 
 interface CertificateProps extends CertificateType {
   background: string;
+  labels: Record<string, string>;
   linkComponent: LinkComponentType;
 }
 
@@ -35,6 +27,7 @@ export default function Certificate({
   retirementReason,
   retirementLocation,
   background,
+  labels,
   linkComponent: LinkComponent,
 }: CertificateProps): JSX.Element {
   const { classes, cx } = useCertificateStyles({ background });
@@ -91,7 +84,7 @@ export default function Certificate({
                   mr: 1,
                 }}
               >
-                {`${TX_HASH}: `}
+                {`${labels.TX_HASH}: `}
               </Box>
               <Body
                 size="sm"
@@ -159,7 +152,7 @@ export default function Certificate({
         <div className={classes.text}>
           {equivalentTonsCO2 && (
             <CertificateItem
-              name={EQUIVALENT_TO}
+              name={labels.EQUIVALENT_TO}
               sx={{ mb: { xs: 1.25, sm: 2.5 }, '@media print': { mb: 0 } }}
             >
               <Subtitle
@@ -169,15 +162,14 @@ export default function Certificate({
                 sx={{ '@media print': { fontSize: 9, lineHeight: 0.4 } }}
               >
                 {certificateFormater.format(equivalentTonsCO2)}{' '}
-                {`${pluralize(
-                  equivalentTonsCO2,
-                  CREDIT_UNIT,
-                )} ${CREDIT_UNIT_SUFFIX}`}
+                {`${pluralize(equivalentTonsCO2, labels.CREDIT_UNIT)} ${
+                  labels.CREDIT_UNIT_SUFFIX
+                }`}
               </Subtitle>
             </CertificateItem>
           )}
           <CertificateItem
-            name={NUMBER_OF_CREDITS}
+            name={labels.NUMBER_OF_CREDITS}
             sx={{ mb: { xs: 1.25, sm: 2.5 }, '@media print': { mb: 0 } }}
           >
             <Subtitle
@@ -211,7 +203,7 @@ export default function Certificate({
             </CertificateItem>
           ))}
           <CertificateItem
-            name={RETIREMENT_REASON}
+            name={labels.RETIREMENT_REASON}
             sx={{ mb: 2.5, '@media print': { mb: 0 } }}
           >
             <Body
@@ -223,7 +215,7 @@ export default function Certificate({
             </Body>
           </CertificateItem>
           <CertificateItem
-            name={RETIREMENT_LOCATION}
+            name={labels.RETIREMENT_LOCATION}
             sx={{ mb: 2.5, '@media print': { mb: 0 } }}
           >
             <Body

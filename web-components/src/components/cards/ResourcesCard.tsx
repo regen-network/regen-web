@@ -13,11 +13,13 @@ export interface ResourcesCardProps {
   title: JSX.Element | string;
   updated?: string;
   description: JSX.Element | string;
-  buttonText?: string | null;
+  buttonText: string;
+  updatedLabel: string;
   link: string;
   target?: string;
   backgroundGradient?: boolean;
   titleOverwrite?: boolean;
+  draftText: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -34,11 +36,13 @@ export default function ResourcesCard({
   title,
   updated,
   description,
-  buttonText = 'view resource',
+  updatedLabel,
+  buttonText,
   link,
   target = '_blank',
   backgroundGradient = true,
   titleOverwrite = true,
+  draftText,
 }: ResourcesCardProps): JSX.Element {
   const { classes } = useStyles();
   return (
@@ -50,6 +54,7 @@ export default function ResourcesCard({
       elevation={1}
       backgroundGradient={backgroundGradient}
       titleOverwrite={titleOverwrite}
+      draftText={draftText}
     >
       <Box
         sx={{
@@ -63,7 +68,7 @@ export default function ResourcesCard({
         {updated && (
           <Body size="xs" color="info.main" mt={2}>
             <Label as="span" size="xs">
-              Last Updated:{' '}
+              {updatedLabel}{' '}
             </Label>
             {updated}
           </Body>

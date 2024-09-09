@@ -9,6 +9,7 @@ import Section from 'web-components/src/components/section';
 
 import { Maybe, Scalars } from 'generated/sanity-graphql';
 import { client as sanityClient } from 'lib/clients/sanity';
+import { DRAFT_TEXT } from 'lib/constants/shared.constants';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -94,6 +95,7 @@ export function ProjectCardsSection({
                 program={project.program}
                 projectPrefinancing={project.projectPrefinancing}
                 offChain={project.offChain}
+                draftText={_(DRAFT_TEXT)}
               />
             );
           })}

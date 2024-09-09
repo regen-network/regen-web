@@ -3,12 +3,17 @@ import { Field, Form, Formik } from 'formik';
 import { InferGetStaticPropsType } from 'next';
 import { NextSeo } from 'next-seo';
 
-import ArticleCard from 'web-components/src/components/cards/ArticleCard';
+import ArticleCard from 'web-components/src/components/cards/ArticleCard/ArticleCard';
+import { ArticleType } from 'web-components/src/components/cards/ArticleCard/ArticleCard.types';
 import SelectTextField from 'web-components/src/components/inputs/SelectTextField';
 import Section from 'web-components/src/components/section';
 
 import { MediaPageDocument, MediaPageQuery } from '@/generated/sanity-graphql';
 import { sanityClient } from '@/lib/clients/sanityClient';
+import {
+  ARTICLE_CARD_BTN_TEXT_MAPPING,
+  DRAFT_TEXT,
+} from '@/lib/constants/shared.constants';
 import {
   getMediaCategories,
   getMediaGrouped,
@@ -73,13 +78,15 @@ export default function MediaPage({
                       <Grid item xs={12} sm={6} md={4} key={i}>
                         <ArticleCard
                           className={styles.card}
-                          type={item?.type || 'article'}
+                          type={(item?.type as ArticleType) || 'article'}
                           play={item?.type === 'video'}
                           name={item?.title || ''}
                           author={item?.author || ''}
                           date={item.date}
                           url={item?.href || ''}
                           imgSrc={item?.image?.image?.asset?.url || ''}
+                          draftText={DRAFT_TEXT}
+                          btnTextMapping={ARTICLE_CARD_BTN_TEXT_MAPPING}
                         />
                       </Grid>
                     ))}

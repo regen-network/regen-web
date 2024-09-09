@@ -1,10 +1,10 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import CookiesTopBanner from 'web-components/src/components/banner/CookiesTopBanner';
 import Footer from 'web-components/src/components/footer';
 
 import { footerItems } from './Layout.config';
+import { LayoutCookiesTopBanner } from './Layout.CookiesTopBanner';
 import { useLayoutStyles } from './Layout.styles';
 
 import { MarketingNav } from '@/components/organisms/MarketingNav/MarketingNav';
@@ -24,7 +24,7 @@ const Layout = ({ children }: Props) => {
       <div>
         <main className={styles.root}>{children}</main>
       </div>
-      <CookiesTopBanner privacyUrl="/privacy-policy/" TOSUrl="" />
+      <LayoutCookiesTopBanner />
       <footer>
         <Footer
           footerItems={footerItems}

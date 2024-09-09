@@ -7,17 +7,21 @@ interface Props {
   sx?: SxProps<Theme>;
   onClick: () => void;
   isFirstCreditClass?: boolean;
+  buttonText: string;
+  emptyTitle: string;
 }
 
 export const CreateCreditClassCard = ({
   sx = [],
   onClick,
   isFirstCreditClass,
+  buttonText,
+  emptyTitle,
 }: Props): JSX.Element => {
   let title;
   let icon;
   if (isFirstCreditClass) {
-    title = 'You have not created any credit classes yet';
+    title = emptyTitle;
     icon = (
       <CreditClassIcon
         sx={theme => ({
@@ -33,7 +37,7 @@ export const CreateCreditClassCard = ({
       sx={sx}
       title={title}
       onClick={onClick}
-      buttonText="+ create credit class"
+      buttonText={buttonText}
       icon={icon}
     />
   );

@@ -7,15 +7,20 @@ interface Props {
   sx?: SxProps<Theme>;
   onClick: () => void;
   isFirstProject?: boolean;
+  emptyTitle: string;
+  buttonText: string;
 }
 
-function getCardData(isFirstProject?: boolean): {
+function getCardData(
+  emptyTitle: string,
+  isFirstProject?: boolean,
+): {
   title?: string;
   icon?: React.ReactElement;
 } {
   let title, icon;
   if (isFirstProject) {
-    title = 'You have not created any projects yet';
+    title = emptyTitle;
     icon = (
       <NoProjectIcon
         sx={theme => ({
@@ -32,14 +37,16 @@ export const CreateProjectCard = ({
   sx = [],
   onClick,
   isFirstProject,
+  buttonText,
+  emptyTitle,
 }: Props): JSX.Element => {
-  const { title, icon } = getCardData(isFirstProject);
+  const { title, icon } = getCardData(emptyTitle, isFirstProject);
   return (
     <CreateCard
       sx={sx}
       title={title}
       onClick={onClick}
-      buttonText="+ create project"
+      buttonText={buttonText}
       icon={icon}
     />
   );

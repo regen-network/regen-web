@@ -6,6 +6,7 @@ import Section from 'web-components/src/components/section';
 import BlogPosts from 'web-components/src/components/sliders/BlogPosts';
 
 import { useBlogStyles } from './Home.Blog.styles';
+import { READ_MORE_TEXT } from './Home.constants';
 
 import { BlogSectionQuery } from '@/generated/sanity-graphql';
 
@@ -43,7 +44,11 @@ const BlogSection = ({ blogData }: Props): JSX.Element => {
         title={content?.header || ''}
         titleVariant="h1"
       >
-        <BlogPosts posts={posts} classes={{ item: styles.item }} />
+        <BlogPosts
+          posts={posts}
+          classes={{ item: styles.item }}
+          readMoreText={READ_MORE_TEXT}
+        />
       </Section>
     </div>
   );

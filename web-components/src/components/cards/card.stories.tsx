@@ -83,6 +83,7 @@ export const projectCard = (): JSX.Element => (
         },
       }}
       creditsTooltip="These credits are sold out and will not be available in the future."
+      draftText="Draft"
       isSoldOut
       sx={{ maxWidth: 338, mr: 10, mb: 10 }}
     />
@@ -104,6 +105,7 @@ export const projectCard = (): JSX.Element => (
         },
       }}
       sx={{ maxWidth: 338, mr: 10, mb: 10 }}
+      draftText="Draft"
     />
 
     <ProjectCard
@@ -118,6 +120,7 @@ export const projectCard = (): JSX.Element => (
       onClick={onClick}
       sx={{ maxWidth: 338 }}
       draft
+      draftText="Draft"
     />
   </Box>
 );
@@ -180,6 +183,7 @@ export const imageActionCard = (): JSX.Element => (
     btnText="Choose Credit Class"
     title="Carbon<i>Plus</i> Grasslands"
     description="This credit class is a built as a holistic credit that includes multiple ecological benefits: Carbon Sequestration and Net GHG reduction, increased animal welfare, ecosystem health, and soil health."
+    draftText="Draft"
   />
 );
 
@@ -204,6 +208,7 @@ export const stepCard: React.FC<React.PropsWithChildren<unknown>> = () => {
         description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       }}
+      stepLabel="step"
     />
   );
 };
@@ -311,14 +316,17 @@ export const resourcesCard = (): JSX.Element => (
   <ResourcesCard
     title="Resources"
     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    buttonText="view resource"
+    updatedLabel="Last Updated:"
     link="#"
     image={{ publicURL: '/coorong.png' }}
     updated="July 4, 1776"
+    draftText="Draft"
   />
 );
 
 export const reviewCard = (): JSX.Element => (
-  <ReviewCard title="Review Card" onEditClick={() => {}}>
+  <ReviewCard title="Review Card" onEditClick={() => {}} editText="Edit">
     <ItemDisplay name="Name A">Description A</ItemDisplay>
     <ItemDisplay name="Name B">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

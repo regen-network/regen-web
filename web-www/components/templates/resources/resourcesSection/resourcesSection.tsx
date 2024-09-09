@@ -2,6 +2,7 @@ import Section from 'web-components/src/components/section';
 import ResourceCardsSlider from 'web-components/src/components/sliders/ResourceCards';
 import { Title } from 'web-components/src/components/typography';
 
+import { UPDATED_LABEL } from './resourcesSection.constants';
 import { useLedgerStyles } from './resourcesSection.styles';
 
 import {
@@ -9,6 +10,7 @@ import {
   Resource,
   ResourceFieldsFragment,
 } from '@/generated/sanity-graphql';
+import { DRAFT_TEXT } from '@/lib/constants/shared.constants';
 import { sanityResourcesToCardProps } from '@/lib/utils/sanity/sanity-transforms';
 
 type Props = {
@@ -27,6 +29,8 @@ const ResourcesSection = ({ resourceSectionData }: Props): JSX.Element => {
           items={sanityResourcesToCardProps(
             resourceSectionData?.cards as Resource[],
           )}
+          draftText={DRAFT_TEXT}
+          updatedLabel={UPDATED_LABEL}
         />
       </Section>
     </div>

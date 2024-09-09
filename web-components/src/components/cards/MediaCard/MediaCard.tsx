@@ -31,6 +31,7 @@ export interface MediaCardProps extends OptimizeImageProps {
   imageChildren?: ReactNode;
   sx?: SxProps<Theme>;
   draft?: boolean;
+  draftText: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -63,6 +64,7 @@ export default function MediaCard({
   imageChildren,
   sx = [],
   draft,
+  draftText,
 }: MediaCardProps): JSX.Element {
   const { classes, cx } = useStyles();
   const optimizedImage = useCallback(
@@ -77,6 +79,7 @@ export default function MediaCard({
         tag={tag}
         children={imageChildren}
         draft={draft}
+        draftText={draftText}
       />
     ),
     // eslint-disable-next-line react-hooks/exhaustive-deps

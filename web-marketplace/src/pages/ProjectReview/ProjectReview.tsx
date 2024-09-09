@@ -17,6 +17,7 @@ import { ProcessingModal } from 'web-components/src/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
 
 import { useAuth } from 'lib/auth/auth';
+import { EDIT_TEXT } from 'lib/constants/shared.constants';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { PROJECTS_QUERY_KEY } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery.constants';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
@@ -182,6 +183,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       <ReviewCard
         title={_(msg`Basic Info`)}
         onEditClick={() => navigate(`${editPath}/basic-info`)}
+        editText={_(EDIT_TEXT)}
         sx={{ mt: [8, 10] }}
       >
         <ItemDisplay name={_(msg`Name`)}>
@@ -198,6 +200,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       </ReviewCard>
       <ReviewCard
         title={_(msg`Location`)}
+        editText={_(EDIT_TEXT)}
         onEditClick={() => navigate(`${editPath}/location`)}
       >
         <ItemDisplay>
@@ -207,6 +210,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       </ReviewCard>
       <ReviewCard
         title={_(msg`Description`)}
+        editText={_(EDIT_TEXT)}
         onEditClick={() => navigate(`${editPath}/description`)}
       >
         <ItemDisplay name={_(SUMMARY_LABEL)}>
@@ -221,6 +225,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       </ReviewCard>
       <ReviewCard
         title={_(msg`Media`)}
+        editText={_(EDIT_TEXT)}
         onEditClick={() => navigate(`${editPath}/media`)}
       >
         {previewPhoto?.['schema:url'] && (
@@ -279,6 +284,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       </ReviewCard>
       {/* <ReviewCard
         title="Roles"
+        editText={_(EDIT_TEXT)}
         onEditClick={() => navigate(`${editPath}/roles`)}
       >
         {metadata?.['regen:projectDeveloper'] && (
@@ -295,6 +301,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
       {!!creditClassId && (
         <ReviewCard
           title={_(msg`Metadata`)}
+          editText={_(EDIT_TEXT)}
           onEditClick={() => navigate(`${editPath}/metadata`)}
         >
           {isVCS ? (

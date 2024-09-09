@@ -10,11 +10,6 @@ import { parseText } from '../../../utils/textParser';
 import { OptimizeImageProps } from '../../image';
 import { Body, Subtitle, Title } from '../../typography';
 import { ProgramImageChildren } from '../ProjectCard/ProjectCard.ImageChildren';
-import {
-  CREDIT_CLASS_TOOLTIP,
-  METHODOLOGY,
-  OFFSET_GENERATION_METHOD,
-} from './CreditClassCard.constants';
 import { CreditClassCardItem } from './CreditClassCard.Item';
 import { useCreditClassCardStyles } from './CreditClassCard.styles';
 import { CreditClassCardItemType } from './CreditClassCard.types';
@@ -22,7 +17,11 @@ import { CreditClassCardItemType } from './CreditClassCard.types';
 export interface Props extends OptimizeImageProps {
   type?: CreditClassCardItemType;
   title: string | JSX.Element;
+  subtitle: string;
   description: string | JSX.Element;
+  creditClassTooltip: string;
+  methodologyLabel: string;
+  offsetGenerationMethodLabel: string;
   imgSrc: string;
   generationMethods?: CreditClassCardItemType[];
   methodology?: Partial<LinkType>;
@@ -32,7 +31,11 @@ export interface Props extends OptimizeImageProps {
 
 const CreditClassCard = ({
   title,
+  subtitle,
   description,
+  creditClassTooltip,
+  methodologyLabel,
+  offsetGenerationMethodLabel,
   imgSrc,
   type,
   generationMethods,
@@ -96,9 +99,9 @@ const CreditClassCard = ({
               alignItems: 'center',
             }}
           >
-            {'CREDIT CLASS'}
+            {subtitle}
             <InfoTooltipWithIcon
-              title={CREDIT_CLASS_TOOLTIP}
+              title={creditClassTooltip}
               outlined
               sx={{ ml: 1, fontSize: 16 }}
             />
@@ -122,7 +125,7 @@ const CreditClassCard = ({
           <Flex flexDirection={{ xs: 'column', sm: 'row' }}>
             {generationMethods && (
               <CreditClassCardItem
-                label={OFFSET_GENERATION_METHOD}
+                label={offsetGenerationMethodLabel}
                 items={generationMethods}
                 sx={{ maxWidth: { sm: 195 }, mr: 5, mb: { xs: 5, sm: 0 } }}
                 sxListContainer={{
@@ -134,7 +137,7 @@ const CreditClassCard = ({
             )}
             {methodology && (
               <CreditClassCardItem
-                label={METHODOLOGY}
+                label={methodologyLabel}
                 link={methodology}
                 sx={{ maxWidth: { sm: 195 } }}
               />

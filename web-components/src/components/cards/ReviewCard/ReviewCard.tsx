@@ -9,12 +9,14 @@ import OnBoardingCard from '../OnBoardingCard';
 
 export interface ReviewCardProps {
   title: string;
+  editText: string;
   onEditClick: () => void;
   sx?: SxProps<Theme>;
 }
 
 export const ReviewCard: React.FC<React.PropsWithChildren<ReviewCardProps>> = ({
   title,
+  editText,
   onEditClick,
   children,
   sx = [],
@@ -30,7 +32,7 @@ export const ReviewCard: React.FC<React.PropsWithChildren<ReviewCardProps>> = ({
         }}
       >
         <Label size="sm">{title}</Label>
-        <EditButton onClick={onEditClick} />
+        <EditButton buttonText={editText} onClick={onEditClick} />
       </Flex>
       <Flex col sx={{ mt: [4, 7], pb: 4, gap: [8, 10] }}>
         {children}

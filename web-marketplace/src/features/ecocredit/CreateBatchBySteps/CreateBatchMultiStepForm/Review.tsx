@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useLingui } from '@lingui/react';
 import { Link } from '@mui/material';
 import { useFormikContext } from 'formik';
 
@@ -10,6 +11,8 @@ import {
   formatDate,
   getFormattedNumber,
 } from 'web-components/src/utils/format';
+
+import { EDIT_TEXT } from 'lib/constants/shared.constants';
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
@@ -61,6 +64,7 @@ function CreditBatchInfo({
   data,
   dataDisplay,
 }: CreditBatchInfoProps): JSX.Element {
+  const { _ } = useLingui();
   const { handleActiveStep } = useMultiStep();
   const metadata = data.metadata;
 
@@ -68,6 +72,7 @@ function CreditBatchInfo({
     <ReviewCard
       title="Credit Batch Info"
       onEditClick={() => handleActiveStep(0)}
+      editText={_(EDIT_TEXT)}
       sx={{ mt: [8, 10] }}
     >
       <ItemDisplay name={'Project'}>
@@ -105,10 +110,12 @@ type RecipientInfoProps = {
 };
 
 function RecipientInfo({ data, index }: RecipientInfoProps): JSX.Element {
+  const { _ } = useLingui();
   const { handleActiveStep } = useMultiStep();
   return (
     <ReviewCard
       title={`Recipient ${index}`}
+      editText={_(EDIT_TEXT)}
       onEditClick={() => handleActiveStep(1)}
     >
       <ItemDisplay name={'Recipient address'}>{data.recipient}</ItemDisplay>

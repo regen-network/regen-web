@@ -25,6 +25,8 @@ import {
   CREATE_POST,
   CREATE_POST_DISABLED_TOOLTIP,
   DRAFT_ID,
+  MY_PROJECTS_BUTTON_TEXT,
+  MY_PROJECTS_EMPTY_TITLE,
 } from './MyProjects.constants';
 import {
   getDefaultProject,
@@ -71,6 +73,8 @@ const MyProjects = (): JSX.Element => {
         {activeAccountId && (
           <Grid item xs={12} md={6} lg={4}>
             <CreateProjectCard
+              buttonText={MY_PROJECTS_BUTTON_TEXT}
+              emptyTitle={MY_PROJECTS_EMPTY_TITLE}
               isFirstProject={isFirstProject}
               onClick={() => {
                 if (isIssuer) {

@@ -23,6 +23,10 @@ describe('CreditsAmount', () => {
     paymentOption: PAYMENT_OPTIONS.CARD,
     currency: CURRENCIES.usd,
     setCurrency: () => {},
+    setSpendingCap: () => {},
+    creditsAvailable: 1000,
+    setCreditsAvailable: () => {},
+    creditVintages: [],
   };
 
   beforeEach(() => {

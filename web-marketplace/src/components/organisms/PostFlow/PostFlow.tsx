@@ -137,6 +137,7 @@ export const PostFlow = ({
     projectId,
     offChainProjectId,
     projectName,
+    onModalClose,
   });
 
   useEffect(() => {

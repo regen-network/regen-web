@@ -35,7 +35,7 @@ import {
 } from './useFetchMsgAnchor';
 import { useGetSuccessModalContent } from './useGetSuccessModalContent';
 
-type UseSignParams = { onModalClose: () => void } & UseFetchMsgAnchorParams;
+type UseSignParams = UseFetchMsgAnchorParams;
 type SignParams = {
   contentHash: ContentHash_Graph;
 } & FetchMsgAnchorParams;

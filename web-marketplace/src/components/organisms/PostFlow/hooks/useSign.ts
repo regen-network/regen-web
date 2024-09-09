@@ -111,6 +111,7 @@ export const useSign = ({
               atom.buttonLink = buttonLink;
               atom.txHash = undefined;
             });
+            onModalClose();
           },
           onSuccess: async (deliverTxResponse?: DeliverTxResponse) => {
             const { data: anchorTxsData } = await refetch();

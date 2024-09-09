@@ -1,14 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { startCase } from 'lodash';
 
 import type { Option } from 'web-components/src/components/inputs/SelectTextField';
 
+import { TranslatorType } from 'lib/i18n/i18n.types';
+
 import type { ProjectWithMetadataObj as Project } from '../../../../types/ledger/ecocredit';
 
-const defaultProjectOption = { value: '', label: 'Choose Project' };
+const getDefaultProjectOption = (_: TranslatorType) => ({
+  value: '',
+  label: _(msg`Choose Project`),
+});
 
 export default function useUpdateProjectOptions(projects: Project[]): Option[] {
+  const { _ } = useLingui();
   const [projectOptions, setProjectOptions] = useState<Option[]>([]);
+  const defaultProjectOption = useMemo(() => getDefaultProjectOption(_), [_]);
 
   useEffect(() => {
     if (!projects.length) return;
@@ -25,7 +34,7 @@ export default function useUpdateProjectOptions(projects: Project[]): Option[] {
       }) || [];
 
     setProjectOptions([defaultProjectOption, ...options]);
-  }, [projects, setProjectOptions]);
+  }, [defaultProjectOption, projects, setProjectOptions]);
 
   return projectOptions;
 }

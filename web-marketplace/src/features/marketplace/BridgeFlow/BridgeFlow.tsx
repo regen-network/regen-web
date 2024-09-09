@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
@@ -44,6 +46,7 @@ export const BridgeFlow = ({
   resetIsFlowStarted,
   setBatchToBridge,
 }: Props): JSX.Element => {
+  const { _ } = useLingui();
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>(
     undefined,
   );
@@ -66,7 +69,7 @@ export const BridgeFlow = ({
 
   const handleError = (): void => {
     setIsProcessingModalOpen(false);
-    setTxModalTitle(BRIDGE_TITLE);
+    setTxModalTitle(_(BRIDGE_TITLE));
     setTxModalDescription('');
   };
 
@@ -182,7 +185,7 @@ export const BridgeFlow = ({
         cardTitle={txModalTitle ?? ''}
         linkComponent={Link}
         onButtonClick={handleTxModalClose}
-        buttonTitle={'CLOSE WINDOW'}
+        buttonTitle={_(msg`CLOSE WINDOW`)}
         cardItems={cardItems}
         icon={<ErrorIcon sx={{ fontSize: 100 }} />}
       />

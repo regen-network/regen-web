@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
@@ -76,7 +77,7 @@ export const CreateSellOrderFlow = ({
   };
   const handleError = (): void => {
     closeProcessingModal();
-    setTxModalTitle('Buy Credits Error');
+    setTxModalTitle(_(msg`Buy Credits Error`));
   };
   const handleTxDelivered = async (
     _deliverTxResponse: DeliverTxResponse,
@@ -192,7 +193,7 @@ export const CreateSellOrderFlow = ({
         cardTitle={txModalTitle}
         linkComponent={Link}
         onButtonClick={handleTxModalClose}
-        buttonTitle="close"
+        buttonTitle={_(msg`close`)}
       />
     </>
   );

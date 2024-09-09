@@ -18,6 +18,7 @@ export const getSocialItems = ({
   return [
     {
       Icon: TwitterBadgeIcon,
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       name: 'Twitter',
       href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
         twitter.text,
@@ -25,6 +26,7 @@ export const getSocialItems = ({
     },
     {
       Icon: LinkedInBadgeIcon,
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       name: 'LinkedIn',
       href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURI(
         linkedIn.url,

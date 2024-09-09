@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Location, useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 import { useSetAtom } from 'jotai';
@@ -55,6 +57,7 @@ export const BuySellOrderFlow = ({
   /**
    * ui management
    */
+  const { _ } = useLingui();
   const navigate = useNavigate();
 
   // persistence for Tx details (orderId and amount)
@@ -118,7 +121,7 @@ export const BuySellOrderFlow = ({
   };
   const handleError = (): void => {
     closeProcessingModal();
-    setTxModalTitle('Buy Credits Error');
+    setTxModalTitle(_(msg`Buy Credits Error`));
   };
 
   const {
@@ -282,7 +285,7 @@ export const BuySellOrderFlow = ({
         onButtonClick={onTxSuccessButtonClick}
         icon={<CelebrateIcon sx={{ width: '85px', height: '106px' }} />}
         socialItems={getSocialItems({
-          twitter: { text: BUY_FLOW_TWITTER_TEXT, url: shareUrl },
+          twitter: { text: _(BUY_FLOW_TWITTER_TEXT), url: shareUrl },
           linkedIn: { url: shareUrl },
         })}
       />

@@ -1,4 +1,6 @@
 import { useCallback } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
 import type { Item } from 'web-components/src/components/modal/TxModal';
@@ -47,6 +49,7 @@ const useCreditBridgeSubmit = ({
   setTxButtonTitle,
   setTxModalDescription,
 }: Props): Params => {
+  const { _ } = useLingui();
   const { track } = useTracker();
 
   const creditBridgeSubmit = useCallback(
@@ -63,7 +66,7 @@ const useCreditBridgeSubmit = ({
       if (!accountAddress) return Promise.reject();
       const { recipient, amount, target } = values;
 
-      const msg = MsgBridge.fromPartial({
+      const msgBridge = MsgBridge.fromPartial({
         owner: accountAddress,
         target,
         recipient,
@@ -76,7 +79,7 @@ const useCreditBridgeSubmit = ({
       });
 
       const tx = {
-        msgs: [msg],
+        msgs: [msgBridge],
         fee: undefined,
       };
 
@@ -103,18 +106,18 @@ const useCreditBridgeSubmit = ({
               },
             },
             {
-              label: 'credit batch id',
+              label: _(msg`credit batch id`),
               value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
             },
             {
-              label: 'amount',
+              label: _(msg`amount`),
               value: { name: amount?.toString() || '0' },
             },
           ]);
-          setTxModalHeader(BRIDGE_HEADER);
-          setTxModalTitle(BRIDGE_TITLE);
-          setTxButtonTitle(BRIDGE_BUTTON_TEXT);
-          setTxModalDescription(BRIDGE_TX_DESCRIPTION);
+          setTxModalHeader(_(BRIDGE_HEADER));
+          setTxModalTitle(_(BRIDGE_TITLE));
+          setTxButtonTitle(_(BRIDGE_BUTTON_TEXT));
+          setTxModalDescription(_(BRIDGE_TX_DESCRIPTION));
         }
         track<BridgeSuccessEvent>('bridgeSuccess', {
           batchDenom,
@@ -131,19 +134,20 @@ const useCreditBridgeSubmit = ({
       });
     },
     [
-      accountAddress,
-      creditBridgeBatch?.classId,
       creditBridgeBatch?.denom,
+      creditBridgeBatch?.classId,
       creditBridgeBatch?.projectId,
       creditBridgeBatch?.projectName,
+      track,
+      accountAddress,
+      signAndBroadcast,
       setCardItems,
-      setCreditBridgeOpen,
-      setTxButtonTitle,
+      _,
       setTxModalHeader,
       setTxModalTitle,
+      setTxButtonTitle,
       setTxModalDescription,
-      signAndBroadcast,
-      track,
+      setCreditBridgeOpen,
     ],
   );
 

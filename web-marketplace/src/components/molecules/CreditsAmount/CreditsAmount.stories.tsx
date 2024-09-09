@@ -48,6 +48,10 @@ CreditsAmountCard.args = {
   paymentOption: PAYMENT_OPTIONS.CARD,
   currency: CURRENCIES.usd,
   setCurrency: () => {},
+  setSpendingCap: () => {},
+  creditsAvailable: 1000,
+  setCreditsAvailable: () => {},
+  creditVintages: [],
 };
 
 export const CreditsAmountCrypto: Story = {
@@ -59,4 +63,8 @@ CreditsAmountCrypto.args = {
   paymentOption: PAYMENT_OPTIONS.CRYPTO,
   currency: CURRENCIES.usd,
   setCurrency: () => {},
+  setSpendingCap: () => {},
+  creditsAvailable: 1000,
+  setCreditsAvailable: () => {},
+  creditVintages: [],
 };

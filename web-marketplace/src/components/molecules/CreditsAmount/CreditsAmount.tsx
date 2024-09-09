@@ -21,6 +21,7 @@ import { CreditsAmountProps } from './CreditsAmount.types';
 import {
   getCreditsAvailablePerCurrency,
   getCurrencyPrice,
+  getVintageCredits,
 } from './CreditsAmount.utils';
 import { CreditsInput } from './CreditsInput';
 import { CurrencyInput } from './CurrencyInput';
@@ -45,15 +46,9 @@ export const CreditsAmount = ({
 
   useEffect(() => {
     if (creditVintageOptions && creditVintageOptions.length > 0) {
-      const getVintageCredits = (creditVintageOptions: string[]) => {
-        return creditVintageOptions.reduce((sum: number, option: string) => {
-          const credits =
-            creditVintages.find(vintage => vintage.batchDenom === option)
-              ?.credits || '0';
-          return sum + +credits;
-        }, 0);
-      };
-      setCreditsAvailable(getVintageCredits(creditVintageOptions));
+      setCreditsAvailable(
+        getVintageCredits(creditVintageOptions, creditVintages),
+      );
       setSpendingCap(creditsAvailable);
     } else {
       setCreditsAvailable(
@@ -78,13 +73,7 @@ export const CreditsAmount = ({
     const newPrice = getCurrencyPrice(currency, creditDetails);
     setPricePerCredit(newPrice);
     setCurrency(currency);
-  }, [
-    creditDetails,
-    currency,
-    paymentOption,
-    setCreditsAvailable,
-    setCurrency,
-  ]);
+  }, [creditDetails, currency, setCreditsAvailable, setCurrency]);
 
   // Max credits set
   useEffect(() => {
@@ -93,13 +82,7 @@ export const CreditsAmount = ({
       setValue(CURRENCY_AMOUNT, creditsAvailable * pricePerCredit);
       setMaxCreditsSelected(false);
     }
-  }, [
-    creditsAvailable,
-    pricePerCredit,
-    maxCreditsSelected,
-    setMaxCreditsSelected,
-    setValue,
-  ]);
+  }, [creditsAvailable, maxCreditsSelected, pricePerCredit, setValue]);
 
   // Credits amount change
   const handleCreditsAmountChange = useCallback(

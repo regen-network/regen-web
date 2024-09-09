@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { AccountType } from 'generated/graphql';
 
 export const activeAccountId = '200053c0-0905-11ee-be56-0242ac120002';

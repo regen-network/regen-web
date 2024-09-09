@@ -24,6 +24,8 @@ module.exports = {
           'classes',
         ],
         ignoreProperty: [
+          'border',
+          'background',
           'margin',
           'padding',
           'backgroundImage',

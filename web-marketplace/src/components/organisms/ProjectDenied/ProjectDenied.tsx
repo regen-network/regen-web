@@ -1,3 +1,6 @@
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+
 import { Flex } from 'web-components/src/components/box';
 import {
   Body,
@@ -15,6 +18,8 @@ type Props = {
 };
 
 export const ProjectDenied = ({ address, projectId, isEdit }: Props) => {
+  const { _ } = useLingui();
+
   return (
     <Flex
       alignItems="center"
@@ -32,7 +37,11 @@ export const ProjectDenied = ({ address, projectId, isEdit }: Props) => {
       }}
     >
       <Title as="h1" variant="h3" sx={{ mb: { xs: 10, sm: 7.5 } }}>
-        {`${isEdit ? 'Edit' : 'Create'} Project - Access Denied`}
+        {`${
+          isEdit
+            ? _(msg`Edit Project - Access Denied`)
+            : _(msg`Create Project - Access Denied`)
+        }`}
       </Title>
       <Subtitle
         size="sm"
@@ -46,7 +55,7 @@ export const ProjectDenied = ({ address, projectId, isEdit }: Props) => {
           textAlign: 'center',
         }}
       >
-        {'You must have access to the following address: '}
+        <Trans>You must have access to the following address: </Trans>
       </Subtitle>
       <Link
         href={`/profiles/${address}/portfolio`}
@@ -59,7 +68,9 @@ export const ProjectDenied = ({ address, projectId, isEdit }: Props) => {
         {address}
       </Link>
       <Body size="lg" sx={{ mb: 10, textAlign: 'center' }}>
-        {'Please select this address in keplr in order to access this page.'}
+        <Trans>
+          Please select this address in keplr in order to access this page.
+        </Trans>
       </Body>
       {isEdit && (
         <>
@@ -74,11 +85,12 @@ export const ProjectDenied = ({ address, projectId, isEdit }: Props) => {
               letterSpacing: 1,
             }}
           >
-            {'The project can still be viewed at:'}
+            <Trans>The project can still be viewed at:</Trans>
           </Subtitle>
-          <Link
-            href={`/project/${projectId}`}
-          >{`app.regen.network/project/${projectId}`}</Link>
+          <Link href={`/project/${projectId}`}>
+            {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
+            {`app.regen.network/project/${projectId}`}
+          </Link>
         </>
       )}
     </Flex>

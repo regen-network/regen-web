@@ -17,12 +17,13 @@ export const isProfile = (option: OptionType): option is Option =>
   !isValidElement(option);
 
 export const group = (
+  _: TranslatorType,
   value: ProfileModalSchemaType,
   authenticatedAccountIds?: string[],
 ) =>
   value.id && authenticatedAccountIds?.includes(value.id)
-    ? YOUR_PROFILES
-    : ALL_PROFILES;
+    ? _(YOUR_PROFILES)
+    : _(ALL_PROFILES);
 
 export const getAccounts = (
   _: TranslatorType,
@@ -39,12 +40,13 @@ export const getAccounts = (
   })) || [];
 
 export const getValue = (
+  _: TranslatorType,
   value?: ProfileModalSchemaType | null,
   authenticatedAccountIds?: string[],
 ) =>
   value
     ? {
-        group: group(value, authenticatedAccountIds),
+        group: group(_, value, authenticatedAccountIds),
         ...value,
       }
     : null;
@@ -66,10 +68,11 @@ export const getOptionLabel = (option: OptionType) =>
   isProfile(option) ? option.name || 'Unnamed' : '';
 
 export const groupOptions = (
+  _: TranslatorType,
   options: ProfileModalSchemaType[],
   authenticatedAccountIds?: string[],
 ) =>
   options.map(option => ({
-    group: group(option, authenticatedAccountIds),
+    group: group(_, option, authenticatedAccountIds),
     ...option,
   }));

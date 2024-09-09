@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
@@ -36,6 +37,7 @@ export const useEmailConfirmationData = ({
   emailConfirmationText,
   isConnectingRef,
 }: EmailConfirmationDataParams) => {
+  const { _ } = useLingui();
   const reactQueryClient = useQueryClient();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [isConnectedEmailErrorModalOpen, setIsConnectedEmailErrorModalOpen] =
@@ -67,11 +69,11 @@ export const useEmailConfirmationData = ({
           email,
         },
         token,
-        defaultError: DEFAULT_RESEND_ERROR,
+        defaultError: _(DEFAULT_RESEND_ERROR),
         setEmailModalErrorCode,
         retryCsrfRequest,
       });
-      setBannerText(RESEND_SUCCES);
+      setBannerText(_(RESEND_SUCCES));
     }
   };
   const onMailCodeChange = async (passcode: string) => {
@@ -83,11 +85,11 @@ export const useEmailConfirmationData = ({
           passcode,
         },
         token,
-        defaultError: DEFAULT_VALIDATE_ERROR,
+        defaultError: _(DEFAULT_VALIDATE_ERROR),
         retryCsrfRequest,
         onSuccess: async response => {
           await reactQueryClient.invalidateQueries([GET_ACCOUNTS_QUERY_KEY]);
-          setBannerText(emailConfirmationText ?? EMAIL_CONFIRMATION_SUCCES);
+          setBannerText(emailConfirmationText ?? _(EMAIL_CONFIRMATION_SUCCES));
           onConfirmationModalClose();
           if (isConnectingRef) isConnectingRef.current = true;
           if (response?.user?.accountId)
@@ -106,6 +108,7 @@ export const useEmailConfirmationData = ({
 
   const emailModalError = getEmailModalError({
     errorCode: emailModalErrorCode,
+    _,
     onResend: onResendPasscode,
   });
 

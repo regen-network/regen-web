@@ -86,6 +86,7 @@ import {
 import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
 
 function ProjectDetails(): JSX.Element {
+  const { _ } = useLingui();
   const theme = useTheme();
   const { projectId } = useParams();
   const { ecocreditClient, dataClient } = useLedger();
@@ -103,7 +104,6 @@ function ProjectDetails(): JSX.Element {
   const location = useLocation();
   const navigate = useNavigate();
   const { activeAccount } = useAuth();
-  const { _ } = useLingui();
 
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
 
@@ -466,7 +466,7 @@ function ProjectDetails(): JSX.Element {
             projectsWithOrderData[0]?.purchaseInfo?.sellInfo
               ?.avgPricePerTonLabel
           }
-          avgPricePerTonTooltip={AVG_PRICE_TOOLTIP_PROJECT}
+          avgPricePerTonTooltip={_(AVG_PRICE_TOOLTIP_PROJECT)}
           prefinancePrice={
             projectPrefinancing?.price
               ? getPriceToDisplay({

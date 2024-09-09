@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
@@ -19,6 +20,7 @@ import { LoginFlow } from '../LoginFlow/LoginFlow';
 import { CREATE_PROJECT } from './ListProject.constants';
 
 const ListProject = () => {
+  const { _ } = useLingui();
   const { wallet } = useWallet();
   const { activeAccountId, activeAccount } = useAuth();
   const navigate = useNavigate();
@@ -64,7 +66,7 @@ const ListProject = () => {
               : onButtonClick
           }
         >
-          {CREATE_PROJECT}
+          {_(CREATE_PROJECT)}
         </Body>
       )}
       <LoginFlow

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { URL_REGISTRY_TERMS_SERVICE, URL_WEB_PRIVACY } from 'config/globals';
 
 import {
@@ -10,62 +12,63 @@ import {
 import { Link, RegistryIconLink } from 'components/atoms';
 
 const RegistryLayoutFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { _ } = useLingui();
   const { pathname } = useLocation();
   const isHidden = ['/project-pages'].some(route => pathname.startsWith(route));
 
   const footerItems: [FooterItem, FooterItem, FooterItem, FooterItem] = [
     {
-      title: 'Explore',
+      title: _(msg`Explore`),
       items: [
         {
-          title: 'Projects',
+          title: _(msg`Projects`),
           href: '/projects/1',
         },
         {
-          title: 'Credit Classes',
+          title: _(msg`Credit Classes`),
           href: '/#credit-classes',
         },
       ],
     },
     {
-      title: 'Trade',
+      title: _(msg`Trade`),
       items: [
         {
-          title: 'Storefront',
+          title: _(msg`Storefront`),
           href: `/storefront`,
         },
       ],
     },
     {
-      title: 'Stats',
+      title: _(msg`Stats`),
       items: [
         {
-          title: 'Activity',
+          title: _(msg`Activity`),
           href: '/stats/activity',
         },
         {
-          title: 'Ecocredit batches',
+          title: _(msg`Ecocredit batches`),
           href: '/ecocredit-batches/1',
         },
       ],
     },
     {
-      title: 'Learn More',
+      title: _(msg`Learn More`),
       items: [
         {
-          title: 'Program Guide',
+          title: _(msg`Program Guide`),
           href: 'https://registry.regen.network/v/regen-registry-program-guide/',
         },
         {
-          title: 'How-to Articles',
+          title: _(msg`How-to Articles`),
           href: 'https://guides.regen.network/guides/regen-marketplace/',
         },
         {
-          title: 'How-to Videos',
+          title: _(msg`How-to Videos`),
           href: 'https://www.youtube.com/playlist?list=PLtrLQfpXvAUxDUxhaqzPJiH__-LKtkIUz',
         },
         {
-          title: 'Support',
+          title: _(msg`Support`),
           href: 'https://discord.com/channels/684494798358315010/1016745508590596116',
         },
       ],

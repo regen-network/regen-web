@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import ProjectImpactCard from 'web-components/src/components/cards/ProjectImpactCard/ProjectImpactCard';
@@ -27,10 +29,12 @@ function ImpactSection({
   title,
   classes,
 }: ProjectImpactProps): JSX.Element {
+  const { _ } = useLingui();
+
   return (
     <SliderSection
       classes={classes}
-      title={title || 'Impact'}
+      title={title || _(msg`Impact`)}
       items={
         impacts?.map((impact, index) => (
           <ProjectImpactCard
@@ -42,7 +46,7 @@ function ImpactSection({
               />
             }
             imgSrc={getSanityImgSrc(impact?.ecologicalImpact?.image)}
-            label={impact?.primary ? PRIMARY_IMPACT : CO_BENEFIT}
+            label={impact?.primary ? _(PRIMARY_IMPACT) : _(CO_BENEFIT)}
           />
         )) || []
       }

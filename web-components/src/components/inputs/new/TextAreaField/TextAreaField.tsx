@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import { InputAdornment, InputProps, SxProps } from '@mui/material';
 import { Theme } from '@mui/material/styles';
 
@@ -10,7 +10,7 @@ import Input from '../Input/Input';
 interface TextareaFieldProps extends InputProps, DefaultStyleProps {
   charLimit?: number;
   description?: string;
-  label?: string;
+  label?: ReactNode;
   optional?: boolean | string;
   disabled?: boolean;
   children?: React.ReactNode;

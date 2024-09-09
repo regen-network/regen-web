@@ -1,3 +1,4 @@
+import { msg } from '@lingui/macro';
 import { Theme } from '@mui/material';
 
 import { HeaderColors } from 'web-components/src/components/header';
@@ -26,18 +27,18 @@ import {
 } from 'pages/Dashboard/Dashboard.constants';
 import { Link } from 'components/atoms';
 
-export const getMenuItems = (pathname: string): Item[] => [
+export const getMenuItems = (pathname: string, _: TranslatorType): Item[] => [
   {
     title: 'NCT',
     href: '/baskets/eco.uC.NCT',
   },
   {
-    title: 'Projects',
+    title: _(msg`Projects`),
     dropdownItems: [
       {
         pathname,
         href: '/projects/1',
-        label: 'All projects',
+        label: _(msg`All projects`),
         linkComponent: Link,
         importCallback: (): Promise<any> =>
           import('../../../pages/Projects/AllProjects'),
@@ -45,7 +46,7 @@ export const getMenuItems = (pathname: string): Item[] => [
       {
         pathname,
         href: '/projects/prefinance',
-        label: 'Prefinance projects',
+        label: _(msg`Prefinance projects`),
         linkComponent: Link,
         importCallback: (): Promise<any> =>
           import('../../../pages/Projects/PrefinanceProjects'),
@@ -53,23 +54,23 @@ export const getMenuItems = (pathname: string): Item[] => [
     ],
   },
   {
-    title: 'Trade',
+    title: _(msg`Trade`),
     href: '/storefront',
   },
   {
-    title: 'Stats',
+    title: _(msg`Stats`),
     dropdownItems: [
       {
         pathname,
         href: '/stats/activity',
-        label: 'Activity',
+        label: _(msg`Activity`),
         linkComponent: Link,
         importCallback: (): Promise<any> => import('../../../pages/Activity'),
       },
       {
         pathname,
         href: '/ecocredit-batches/1',
-        label: 'Ecocredit batches',
+        label: _(msg`Ecocredit batches`),
         linkComponent: Link,
         importCallback: (): Promise<any> =>
           import('../../../pages/EcocreditBatches'),

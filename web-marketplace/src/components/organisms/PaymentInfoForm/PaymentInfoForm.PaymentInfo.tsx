@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { PaymentMethod } from '@stripe/stripe-js';
 
 import Card from 'web-components/src/components/cards/Card';
@@ -17,6 +19,7 @@ export const PaymentInfo = ({
   paymentMethods,
   accountId,
 }: PaymentInfoProps) => {
+  const { _ } = useLingui();
   const ctx = useFormContext<PaymentInfoFormSchemaType>();
   const { register, control, setValue } = ctx;
 
@@ -36,14 +39,16 @@ export const PaymentInfo = ({
   return (
     <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300">
       <Title className="pb-30" variant="h6">
-        Payment info
+        <Trans>Payment info</Trans>
       </Title>
       {paymentMethods && paymentMethods.length > 0 ? (
         <>
           {paymentMethods.map(paymentMethod => (
             <div className="mb-20">
               <Radio
-                label={`Use my credit card on file ending in ${paymentMethod.card?.last4}`}
+                label={_(
+                  msg`Use my credit card on file ending in ${paymentMethod.card?.last4}`,
+                )}
                 value={paymentMethod.id}
                 selectedValue={paymentMethodId}
                 {...register(`paymentMethodId`)}
@@ -51,7 +56,7 @@ export const PaymentInfo = ({
             </div>
           ))}
           <Radio
-            label={`Enter a new credit card`}
+            label={_(msg`Enter a new credit card`)}
             value={''}
             selectedValue={paymentMethodId}
             {...register(`paymentMethodId`)}

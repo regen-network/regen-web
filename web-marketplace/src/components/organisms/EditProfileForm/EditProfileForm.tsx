@@ -1,5 +1,6 @@
-import React, { MutableRefObject, useEffect } from 'react';
+import React, { MutableRefObject, useEffect, useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
@@ -23,12 +24,12 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import {
   getEditProfileFormInitialValues,
+  getRadioCardItems,
   LINKS_LABEL,
   PROFILE_AVATAR_FILE_NAME,
   PROFILE_BG_ASPECT_RATIO,
   PROFILE_BG_FILE_NAME,
   PROFILE_TYPE,
-  radioCardItems,
   TWITTER_PLACEHOLDER,
   UPLOAD_IMAGE,
   WEBSITE_PLACEHOLDER,
@@ -70,6 +71,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     const { isSubmitting, errors, isDirty } = useFormState({
       control: form.control,
     });
+    const radioCardItems = useMemo(() => getRadioCardItems(_), [_]);
 
     /* Fields watch */
 
@@ -132,21 +134,21 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         }}
       >
         <RadioCard
-          label={PROFILE_TYPE}
+          label={_(PROFILE_TYPE)}
           items={radioCardItems}
           selectedValue={profileType ?? ''}
           {...form.register('profileType')}
         />
         <TextField
           type="text"
-          label="Name"
+          label={_(msg`Name`)}
           {...form.register('name')}
           helperText={errors.name?.message}
           error={!!errors.name}
         />
         <ImageField
-          label="Profile image"
-          buttonText={UPLOAD_IMAGE}
+          label={_(msg`Profile image`)}
+          buttonText={_(UPLOAD_IMAGE)}
           setValue={setProfileImage}
           {...form.register('profileImage')}
           name="profile-image"
@@ -158,7 +160,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           <ImageFieldAvatar value={profileImage} />
         </ImageField>
         <ImageField
-          label="Background image"
+          label={_(msg`Background image`)}
           setValue={setBackgroundImage}
           initialFileName={PROFILE_BG_FILE_NAME}
           sx={{
@@ -177,7 +179,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         </ImageField>
         <TextAreaField
           type="text"
-          label="Description"
+          label={_(msg`Description`)}
           rows={3}
           minRows={3}
           disabled={isSubmitting}
@@ -190,7 +192,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           <TextAreaFieldChartCounter value={description} />
         </TextAreaField>
         <Box sx={{ mt: 6 }}>
-          <ControlledFormLabel optional>{LINKS_LABEL}</ControlledFormLabel>
+          <ControlledFormLabel optional>{_(LINKS_LABEL)}</ControlledFormLabel>
           <TextField
             type="text"
             label=""

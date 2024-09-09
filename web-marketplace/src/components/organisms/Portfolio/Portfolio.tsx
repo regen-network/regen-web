@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, SxProps } from '@mui/material';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+import { Box } from '@mui/material';
 import { tabsStyles } from 'styles/tabs';
 
 import Card from 'web-components/src/components/cards/Card';
@@ -10,7 +12,6 @@ import {
 } from 'web-components/src/components/table/ActionsTable';
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
-import { Label } from 'web-components/src/components/typography';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
@@ -38,13 +39,6 @@ export interface PortfolioProps {
   hideRetirements?: boolean;
 }
 
-const sxs = {
-  title: {
-    color: 'info.dark',
-    mb: { xs: 4.25, sm: 8.5 },
-  } as SxProps,
-};
-
 export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   credits,
   retirements,
@@ -60,12 +54,13 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   hideEcocredits,
   hideRetirements,
 }) => {
+  const { _ } = useLingui();
   const navigate = useNavigate();
 
   const tabs: IconTabProps[] = useMemo(
     () => [
       {
-        label: 'Ecocredits',
+        label: _(msg`Ecocredits`),
         content: (
           <EcocreditsTable
             credits={credits}
@@ -78,7 +73,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
         hidden: hideEcocredits,
       },
       {
-        label: 'Retirement Certificates',
+        label: _(msg`Retirement Certificates`),
         content: (
           <RetirementCertificatesTable
             retirements={retirements}
@@ -96,7 +91,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
         hidden: hideRetirements,
       },
       {
-        label: 'Basket Tokens',
+        label: _(msg`Basket Tokens`),
         content: (
           <BasketsTable
             basketTokens={basketTokens}
@@ -107,17 +102,20 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
       },
     ],
     [
+      _,
       credits,
-      retirements,
       renderCreditActionButtons,
       onTableChange,
-      onRetirementTableChange,
       initialPaginationParams,
-      retirementsPaginationParams,
       isIgnoreOffset,
-      navigate,
       hideEcocredits,
+      retirements,
+      onRetirementTableChange,
+      retirementsPaginationParams,
       hideRetirements,
+      basketTokens,
+      renderBasketActionButtons,
+      navigate,
     ],
   );
 

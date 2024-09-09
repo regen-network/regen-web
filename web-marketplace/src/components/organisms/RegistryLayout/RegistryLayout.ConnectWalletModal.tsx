@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from 'react';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { useAtom, useSetAtom } from 'jotai';
 
@@ -19,6 +20,7 @@ import {
 } from './RegistryLayout.constants';
 
 export const RegistryLayoutConnectWalletModal = (): JSX.Element => {
+  const { _ } = useLingui();
   const [connectWalletModal, setConnectWalletModal] = useAtom(
     connectWalletModalAtom,
   );
@@ -51,10 +53,10 @@ export const RegistryLayoutConnectWalletModal = (): JSX.Element => {
           onClose={onCloseModal}
           helpLink={{
             href: KEPLR_LINK_URL,
-            text: KEPLR_LINK_TEXT,
+            text: _(KEPLR_LINK_TEXT),
           }}
           button={{
-            text: KEPLR_CONNECT_BUTTON,
+            text: _(KEPLR_CONNECT_BUTTON),
             onClick: async () => {
               connect &&
                 (await connect({

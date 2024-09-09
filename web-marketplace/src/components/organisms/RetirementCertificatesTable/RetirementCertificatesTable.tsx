@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
@@ -19,7 +21,7 @@ import { GreyText, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 
-import { retirementCertificateHeaders } from './RetirementCertificatesTable.headers';
+import { getRetirementCertificateHeaders } from './RetirementCertificatesTable.headers';
 
 type RetirementCertificatesTableProps = {
   retirements?: NormalizedRetirement[];
@@ -38,10 +40,16 @@ export const RetirementCertificatesTable: React.FC<
   initialPaginationParams,
   isIgnoreOffset = false,
 }) => {
+  const { _ } = useLingui();
+  const retirementCertificateHeaders = useMemo(
+    () => getRetirementCertificateHeaders(_),
+    [_],
+  );
+
   if (!retirements?.length) {
     return (
       <NoCredits
-        title="No retirements to display"
+        title={_(msg`No retirements to display`)}
         icon={<NoRetirementCertificatesIcon sx={{ height: 100, width: 105 }} />}
       />
     );
@@ -49,7 +57,7 @@ export const RetirementCertificatesTable: React.FC<
 
   return (
     <ActionsTable
-      tableLabel="ecocredits table"
+      tableLabel={_(msg`Ecocredits table`)}
       renderActionButtons={renderActionButtons}
       onTableChange={onTableChange}
       initialPaginationParams={initialPaginationParams}

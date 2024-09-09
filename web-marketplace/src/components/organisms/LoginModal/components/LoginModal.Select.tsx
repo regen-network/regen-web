@@ -1,4 +1,6 @@
 import { useFormState } from 'react-hook-form';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 import { Box } from '@mui/system';
 
@@ -25,6 +27,7 @@ const LoginModalSelect = ({
   socialProviders,
   onEmailSubmit,
 }: Props): JSX.Element => {
+  const { _ } = useLingui();
   const form = useZodForm({
     schema: emailFormSchema,
     defaultValues: {
@@ -39,15 +42,17 @@ const LoginModalSelect = ({
   return (
     <Box textAlign="center">
       <Title variant="h4" mb={5}>
-        Choose a log in method
+        <Trans>Choose a log in method</Trans>
       </Title>
       {wallets.length > 0 && (
         <>
           <Body pb={7.5}>
-            Learn more about wallets in our{' '}
-            <Link href="https://guides.regen.network/guides/wallets">
-              user guide.
-            </Link>
+            <Trans>
+              Learn more about wallets in our{' '}
+              <Link href="https://guides.regen.network/guides/wallets">
+                user guide.
+              </Link>
+            </Trans>
           </Body>
           <LoginModalProviders providers={wallets} />
           <Grid container alignItems="center" pb={7.5} spacing={7.5} pt={5}>
@@ -56,7 +61,7 @@ const LoginModalSelect = ({
             </Grid>
             <Grid item xs={4}>
               <Label size="xs" color="info.dark">
-                or, log in with email / social
+                <Trans>or, log in with email / social</Trans>
               </Label>
             </Grid>
             <Grid item xs={4}>
@@ -74,14 +79,16 @@ const LoginModalSelect = ({
           pb: 7.5,
         }}
       >
-        NOTE: Only project page creation and user profile creation available
-        with email / social log in.
+        <Trans>
+          NOTE: Only project page creation and user profile creation available
+          with email / social log in.
+        </Trans>
       </Body>
       <Form form={form} onSubmit={onEmailSubmit}>
         <Grid container columnSpacing={2} alignItems="flex-end" pb={7.5}>
           <Grid item xs={8}>
             <TextField
-              label="Email"
+              label={_(msg`Email`)}
               {...form.register('email')}
               error={!!errors['email']}
               helperText={errors['email']?.message}
@@ -92,7 +99,7 @@ const LoginModalSelect = ({
               sx={{ height: { xs: 50, sm: 60 }, width: '100%' }}
               type="submit"
             >
-              log in
+              <Trans>log in</Trans>
             </ContainedButton>
           </Grid>
         </Grid>
@@ -105,14 +112,16 @@ const LoginModalSelect = ({
           margin: '0 auto',
         }}
       >
-        By connecting to Regen Marketplace, you agree to our{' '}
-        <Link href="https://regennetwork.notion.site/Platform-Terms-of-Service-b77faf978cd04e2e8d3c58f76841bad1">
-          Terms of Service
-        </Link>{' '}
-        and{' '}
-        <Link href="https://www.regen.network/privacy-policy">
-          Privacy Policy
-        </Link>
+        <Trans>
+          By connecting to Regen Marketplace, you agree to our{' '}
+          <Link href="https://regennetwork.notion.site/Platform-Terms-of-Service-b77faf978cd04e2e8d3c58f76841bad1">
+            Terms of Service
+          </Link>{' '}
+          and{' '}
+          <Link href="https://www.regen.network/privacy-policy">
+            Privacy Policy
+          </Link>
+        </Trans>
       </Body>
     </Box>
   );

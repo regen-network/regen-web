@@ -1,4 +1,6 @@
 import ReactPlayer from 'react-player/es6';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box, Grid } from '@mui/material';
 import cx from 'clsx';
 
@@ -9,6 +11,7 @@ export function StoryMedia({
   storyMedia,
   hasText,
 }: StoryMediaProps): JSX.Element {
+  const { _ } = useLingui();
   const { classes } = useProjectStorySectionStyles();
 
   return (
@@ -28,7 +31,7 @@ export function StoryMedia({
           <Box
             component="img"
             src={storyMedia['schema:url']}
-            alt="project story"
+            alt={_(msg`project story`)}
             sx={{
               width: '100%',
               height: '100%',

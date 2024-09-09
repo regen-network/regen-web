@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -10,6 +11,8 @@ type Props = {
 };
 
 export const ViewCertificateButton = ({ onClick }: Props) => {
+  const { _ } = useLingui();
+
   return (
     <OutlinedButton
       startIcon={
@@ -24,7 +27,7 @@ export const ViewCertificateButton = ({ onClick }: Props) => {
           overflow: { xs: 'hidden', sm: 'visible' },
         }}
       >
-        {VIEW_CERTIFICATE}
+        {_(VIEW_CERTIFICATE)}
       </Box>
     </OutlinedButton>
   );

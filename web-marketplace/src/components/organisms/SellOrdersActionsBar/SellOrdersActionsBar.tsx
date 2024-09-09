@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { Buy1Event } from 'web-marketplace/src/lib/tracker/types';
@@ -167,7 +168,7 @@ export const SellOrdersActionsBar = ({
                   isPrefinanceProject ? PREFINANCE_BUTTON.className : ''
                 }
               >
-                {BOOK_CALL}
+                {_(BOOK_CALL)}
               </OutlinedButton>
             )}
             {(!!onChainProjectId || !!onChainCreditClassId) && (
@@ -201,7 +202,7 @@ export const SellOrdersActionsBar = ({
                     disabled={isBuyButtonDisabled}
                     sx={{ height: '100%' }}
                   >
-                    {isMobile ? 'BUY' : 'BUY CREDITS'}
+                    {isMobile ? _(msg`BUY`) : _(msg`BUY CREDITS`)}
                   </ContainedButton>
                 </span>
               </InfoTooltip>

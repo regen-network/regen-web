@@ -2,7 +2,6 @@ import { Box } from '@mui/system';
 
 import Modal, { RegenModalProps } from 'web-components/src/components/modal';
 
-import { LoginModalMobile } from './components/LoginModal.Mobile';
 import { LoginModalSelect } from './components/LoginModal.Select';
 import { EmailFormSchemaType } from './LoginModal.schema';
 import { LoginModalState, LoginProvider } from './LoginModal.types';

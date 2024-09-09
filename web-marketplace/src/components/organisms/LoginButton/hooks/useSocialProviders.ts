@@ -6,6 +6,7 @@ export const useSocialProviders = (createProject: boolean = false) => {
   const { track } = useTracker();
   return [
     {
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       name: 'Google',
       imageUrl: '/png/google.png',
       onClick: async () => {

@@ -1,9 +1,12 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useMediaQuery, useTheme } from '@mui/material';
 
 import { GettingStartedResourcesCard } from 'web-components/src/components/cards/GettingStartedResourcesCard';
 import { Root } from 'web-components/src/components/section';
 import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
+import { Title } from 'web-components/src/components/typography';
 import { Theme } from 'web-components/src/theme/muiTheme';
 import { getLinkTarget } from 'web-components/src/utils/linkTarget';
 
@@ -13,13 +16,12 @@ import { getSanityImgSrc } from 'lib/imgSrc';
 
 import { Link } from 'components/atoms';
 
-import { Title } from 'web-components/src/components/typography';
-
 const GettingStartedResourcesSection: React.FC<
   React.PropsWithChildren<{
     section: GettingStartedResourcesSectionFieldsFragment;
   }>
 > = ({ section }) => {
+  const { _ } = useLingui();
   const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -27,7 +29,7 @@ const GettingStartedResourcesSection: React.FC<
     <div className="overflow-x-hidden pb-[80px] sm:pb-[120px]">
       <Root>
         <Title className="text-left sm:text-center" variant="h2" align="center">
-          {section.header || 'Resources for Getting Started'}
+          {section.header || _(msg`Resources for Getting Started`)}
         </Title>
       </Root>
       <ResponsiveSlider

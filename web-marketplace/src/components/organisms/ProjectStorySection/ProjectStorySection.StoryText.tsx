@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import { Grid } from '@mui/material';
 
 import ReadMore from 'web-components/src/components/read-more';
@@ -25,7 +26,7 @@ export function StoryText({
       }}
     >
       <Label size="sm" mobileSize="sm" color="info.main">
-        story
+        <Trans>story</Trans>
       </Label>
       <Title variant="h3" mobileVariant="h5" sx={{ py: 2.5 }}>
         {storyTitle}

@@ -1,5 +1,7 @@
 import { MutableRefObject, useEffect } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import {
   FileDrop,
@@ -53,6 +55,7 @@ export const MediaFormPhotos = ({
   fileNamesToDeleteRef,
   setOffChainProjectId,
 }: Props): JSX.Element => {
+  const { _ } = useLingui();
   const { classes } = useMediaFormStyles();
   const ctx = useFormContext<MediaFormSchemaType>();
   const { register, control, setValue, formState } = ctx;
@@ -63,7 +66,7 @@ export const MediaFormPhotos = ({
   const { isDirtyRef } = useProjectEditContext();
   const imageDropCommonProps: Partial<FileDropProps> = {
     classes: { main: classes.fullSizeMedia },
-    buttonText: IMAGE_UPLOAD_BUTTON_LABEL,
+    buttonText: _(IMAGE_UPLOAD_BUTTON_LABEL),
     fixedCrop: cropAspectMediaForm,
   };
 
@@ -155,8 +158,8 @@ export const MediaFormPhotos = ({
   return (
     <>
       <FileDrop
-        label={MAIN_PHOTO}
-        description={MAIN_PHOTO_DESCRIPTION}
+        label={_(MAIN_PHOTO)}
+        description={_(MAIN_PHOTO_DESCRIPTION)}
         value={previewPhoto?.['schema:url']}
         credit={previewPhoto?.['schema:creditText']}
         setValue={setPreviewPhoto}
@@ -177,7 +180,7 @@ export const MediaFormPhotos = ({
           >
             <TextField
               type="text"
-              label="Photo credit"
+              label={_(msg`Photo credit`)}
               {...register('regen:previewPhoto.schema:creditText')}
               helperText={
                 errors['regen:previewPhoto']?.['schema:creditText']?.message
@@ -193,8 +196,8 @@ export const MediaFormPhotos = ({
       />
 
       <ReorderFields
-        label={GALLERY_PHOTOS}
-        description={GALLERY_PHOTOS_DESCRIPTION}
+        label={_(GALLERY_PHOTOS)}
+        description={_(GALLERY_PHOTOS_DESCRIPTION)}
         fields={fields}
         move={move}
         getFieldElement={(_: Record<'id', string>, index: number) => {
@@ -250,7 +253,7 @@ export const MediaFormPhotos = ({
                 >
                   <TextAreaField
                     type="text"
-                    label="Caption"
+                    label={<Trans>Caption</Trans>}
                     rows={3}
                     minRows={3}
                     multiline
@@ -276,7 +279,7 @@ export const MediaFormPhotos = ({
                   </TextAreaField>
                   <TextField
                     type="text"
-                    label="Photo credit"
+                    label={<Trans>Photo credit</Trans>}
                     helperText={
                       errors['regen:galleryPhotos']?.[currentIndex]?.[
                         'schema:creditText'

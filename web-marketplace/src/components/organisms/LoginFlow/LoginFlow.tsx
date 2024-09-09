@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
 import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
@@ -35,6 +36,7 @@ const LoginFlow = ({
   createProject,
   isConnectingRef,
 }: Props) => {
+  const { _ } = useLingui();
   const {
     isConfirmationModalOpen,
     email,
@@ -64,17 +66,18 @@ const LoginFlow = ({
         state={modalState}
       />
       <EmailConfirmationModal
-        resendText={getResendCodeLabel({ resendTimeLeft })}
+        resendText={getResendCodeLabel({ resendTimeLeft, _ })}
         resendButtonLink={getResendCodeButtonLink({
           resendTimeLeft,
           onResendPasscode,
+          _,
         })}
         cancelButton={{
-          text: EMAIL_CONFIRMATION_CANCEL,
+          text: _(EMAIL_CONFIRMATION_CANCEL),
           onClick: onConfirmationModalClose,
         }}
         signInButton={{
-          text: EMAIL_CONFIRMATION_SUBMIT,
+          text: _(EMAIL_CONFIRMATION_SUBMIT),
           disabled: true,
           onClick: () => void 0,
         }}

@@ -1,4 +1,6 @@
 import LazyLoad from 'react-lazyload';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box, Grid, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
@@ -65,6 +67,7 @@ function ProjectTopSection({
   projectPrefinancing,
   isSoldOut,
 }: ProjectTopSectionProps): JSX.Element {
+  const { _ } = useLingui();
   const { classes } = useProjectTopSectionStyles();
   const { ecocreditClient } = useLedger();
 
@@ -75,7 +78,7 @@ function ProjectTopSection({
     placeName,
     projectMethodology,
     ratings,
-  } = parseProjectMetadata(projectMetadata, onChainProjectId);
+  } = parseProjectMetadata(_, projectMetadata, onChainProjectId);
 
   const { glanceText, primaryDescription, quote } =
     parseProjectPageMetadata(projectPageMetadata);
@@ -131,12 +134,16 @@ function ProjectTopSection({
     ratingIcons: projectRatingIconsMapping,
     certifications,
     certificationIcons: creditCertificationIconsMapping,
+    _,
   });
 
   const displayName =
-    projectName ?? (onChainProjectId && `Project ${onChainProjectId}`) ?? '';
+    projectName ??
+    (onChainProjectId && _(msg`Project ${onChainProjectId}`)) ??
+    '';
   const creditClassMethodology = parseMethodologies({
     methodologies: creditClassMetadata?.['regen:approvedMethodologies'],
+    _,
   });
   const methodology = projectMethodology ?? creditClassMethodology;
   const generationMethods = creditClassMetadata?.[

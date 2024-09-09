@@ -12,6 +12,7 @@ import {
   ProjectImpact,
 } from 'lib/db/types/json-ld';
 import { microToDenom } from 'lib/denom.utils';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 import { getSanityImgSrc } from 'lib/imgSrc';
 
 import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
@@ -111,24 +112,33 @@ const normalizeImpact = ({
 
 /* normalizePrimaryImpact */
 
-export const normalizePrimaryImpact = (input: NormalizeImpactInput) =>
+export const normalizePrimaryImpact = (
+  input: NormalizeImpactInput,
+  _: TranslatorType,
+) =>
   (input?.impact || input?.sanityImpact) && {
     ...normalizeImpact(input),
-    label: PRIMARY_IMPACT,
+    label: _(PRIMARY_IMPACT),
   };
 
 /* normalizeCoBenefit */
 
-export const normalizeCoBenefit = (input: NormalizeImpactInput) =>
-  (input?.impact || input?.sanityImpact) && {
-    ...normalizeImpact(input),
-    label: !!input?.impact?.['@type']
-      ? input.impact['@type'] === MEASURED_CO_BENEFIT_IRI
-        ? MEASURED_CO_BENEFIT
-        : PROJECT_BENEFIT
-      : CO_BENEFIT,
-    labelSx:
-      input?.impact?.['@type'] === MEASURED_CO_BENEFIT_IRI
-        ? { maxWidth: { xs: '72%', sm: '58%' } }
-        : undefined,
-  };
+export const normalizeCoBenefit = (
+  input: NormalizeImpactInput,
+  _: TranslatorType,
+) => {
+  if (input?.impact || input?.sanityImpact) {
+    return {
+      ...normalizeImpact(input),
+      label: !!input?.impact?.['@type']
+        ? input.impact['@type'] === MEASURED_CO_BENEFIT_IRI
+          ? _(MEASURED_CO_BENEFIT)
+          : _(PROJECT_BENEFIT)
+        : _(CO_BENEFIT),
+      labelSx:
+        input?.impact?.['@type'] === MEASURED_CO_BENEFIT_IRI
+          ? { maxWidth: { xs: '72%', sm: '58%' } }
+          : undefined,
+    };
+  }
+};

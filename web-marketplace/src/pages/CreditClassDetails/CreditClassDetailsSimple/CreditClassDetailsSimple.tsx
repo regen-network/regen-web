@@ -97,6 +97,7 @@ const CreditClassDetailsSimple: React.FC<
 
   const methodology = parseMethodologies({
     methodologies: metadata?.['regen:approvedMethodologies'],
+    _,
   });
 
   return (

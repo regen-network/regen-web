@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 
 import { ProjectImpactCardProps } from 'web-components/src/components/cards/ProjectImpactCard/ProjectImpactCard';
@@ -31,6 +32,7 @@ export default function useImpact({
   creditClassMetadata,
   projectMetadata,
 }: InputProps) {
+  const { _ } = useLingui();
   const primaryImpact = creditClassMetadata?.['regen:primaryImpact'];
   const projectImpact = projectMetadata?.['regen:primaryImpact'];
   const coBenefits = creditClassMetadata?.['regen:coBenefits'];
@@ -73,47 +75,55 @@ export default function useImpact({
   let impact: ProjectImpactCardProps[] = [];
   if (primaryImpact || sanityPrimaryImpact) {
     impact.push(
-      normalizePrimaryImpact({
-        impact: primaryImpact,
-        projectImpact,
-        sanityImpact: sanityPrimaryImpact,
-        sdgs: sdgs?.filter(
-          sdg =>
-            sdg?.iri?.current && primaryImpactSdgIris.includes(sdg.iri.current),
-        ),
-      }) as ProjectImpactCardProps,
+      normalizePrimaryImpact(
+        {
+          impact: primaryImpact,
+          projectImpact,
+          sanityImpact: sanityPrimaryImpact,
+          sdgs: sdgs?.filter(
+            sdg =>
+              sdg?.iri?.current &&
+              primaryImpactSdgIris.includes(sdg.iri.current),
+          ),
+        },
+        _,
+      ) as ProjectImpactCardProps,
     );
   }
   let normalizedCoBenefits: ProjectImpactCardProps[] = [];
   if (coBenefits?.length) {
     normalizedCoBenefits = coBenefits.map((coBenefit, i) =>
-      normalizeCoBenefit({
-        // The case where coBenefit is a string can be removed as part of C04 metadata fixes (#1983).
-        impact:
-          typeof coBenefit === 'string'
-            ? { '@id': coBenefit, 'schema:name': coBenefit }
-            : coBenefit,
-        projectImpact: projectCoBenefits?.find(
-          projectCoBenefit =>
-            projectCoBenefit['@id'] ===
-            (typeof coBenefit === 'string' ? coBenefit : coBenefit['@id']),
-        ),
-        sanityImpact: sanityCoBenefits.find(sanityCoBenefit =>
-          typeof coBenefit === 'string'
-            ? sanityCoBenefit.iri?.current === coBenefit
-            : sanityCoBenefit.iri?.current === coBenefit['@id'],
-        ),
-        sdgs: sdgs?.filter(
-          sdg =>
-            sdg?.iri?.current && coBenefitsSdgIris[i].includes(sdg.iri.current),
-        ),
-      }),
+      normalizeCoBenefit(
+        {
+          // The case where coBenefit is a string can be removed as part of C04 metadata fixes (#1983).
+          impact:
+            typeof coBenefit === 'string'
+              ? { '@id': coBenefit, 'schema:name': coBenefit }
+              : coBenefit,
+          projectImpact: projectCoBenefits?.find(
+            projectCoBenefit =>
+              projectCoBenefit['@id'] ===
+              (typeof coBenefit === 'string' ? coBenefit : coBenefit['@id']),
+          ),
+          sanityImpact: sanityCoBenefits.find(sanityCoBenefit =>
+            typeof coBenefit === 'string'
+              ? sanityCoBenefit.iri?.current === coBenefit
+              : sanityCoBenefit.iri?.current === coBenefit['@id'],
+          ),
+          sdgs: sdgs?.filter(
+            sdg =>
+              sdg?.iri?.current &&
+              coBenefitsSdgIris[i].includes(sdg.iri.current),
+          ),
+        },
+        _,
+      ),
     ) as ProjectImpactCardProps[];
   } else if (sanityCoBenefits.length > 0) {
     // This is to handle the case where the impact are only stored off-chain,
     // assuming they have a mapping to sanity impact.
     normalizedCoBenefits = sanityCoBenefits.map(coBenefit =>
-      normalizeCoBenefit({ sanityImpact: coBenefit }),
+      normalizeCoBenefit({ sanityImpact: coBenefit }, _),
     ) as ProjectImpactCardProps[];
   }
   return [...impact, ...normalizedCoBenefits];

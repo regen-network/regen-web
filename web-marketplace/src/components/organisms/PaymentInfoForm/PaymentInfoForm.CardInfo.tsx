@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
+import { Trans } from '@lingui/macro';
 import { PaymentElement } from '@stripe/react-stripe-js';
 
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
@@ -38,7 +39,7 @@ export const CardInfo = ({ accountId, className }: CardInfoProps) => {
         disabled={!createAccount && !accountId}
         label={
           <Body size="sm" className="text-grey-700">
-            Save my credit card info for next time
+            <Trans>Save my credit card info for next time</Trans>
           </Body>
         }
         {...register('savePaymentMethod')}

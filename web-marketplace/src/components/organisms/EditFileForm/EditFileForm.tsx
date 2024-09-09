@@ -47,10 +47,10 @@ export const EditFileForm = ({
   geocodingPlaceName,
   setDebouncedViewState,
 }: Props): JSX.Element => {
+  const { _ } = useLingui();
   const ctx = useFormContext<PostFormSchemaType>();
   const { register, control, setValue, formState } = ctx;
   const { errors } = formState;
-  const { _ } = useLingui();
 
   const files = useWatch({ control: control, name: 'files' });
   const file = files?.[currentIndex];
@@ -121,7 +121,7 @@ export const EditFileForm = ({
       <div className="flex flex-col mb-40 mt-40 sm:mb-50 sm:mt-50">
         <RadioGroup
           label={_(msg`Location`)}
-          description={FILE_LOCATION_DESCRIPTION}
+          description={_(FILE_LOCATION_DESCRIPTION)}
         >
           {(location || projectLocation) && (
             <div className="h-[309px] sm:h-[409px] pb-10">

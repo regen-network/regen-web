@@ -1,4 +1,7 @@
+import { useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import RadioCard from 'web-components/src/components/atoms/RadioCard';
 import { ImageField } from 'web-components/src/components/inputs/new/ImageField/ImageField';
@@ -9,9 +12,9 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import {
+  getRadioCardItems,
   PROFILE_AVATAR_FILE_NAME,
   PROFILE_TYPE,
-  radioCardItems,
   UPLOAD_IMAGE,
 } from 'components/organisms/EditProfileForm/EditProfileForm.constants';
 import { useUpdateDefaultAvatar } from 'components/organisms/EditProfileForm/hooks/useUpdateDefaultAvatar';
@@ -35,6 +38,7 @@ function ProfileModal({
   onSubmit,
   onUpload,
 }: ProfileModalProps): JSX.Element {
+  const { _ } = useLingui();
   const form = useZodForm({
     schema: profileModalSchema,
     defaultValues: {
@@ -46,6 +50,8 @@ function ProfileModal({
   const { isSubmitting, errors, isValid } = useFormState({
     control: form.control,
   });
+
+  const radioCardItems = useMemo(() => getRadioCardItems(_), [_]);
 
   /* Fields watch */
 
@@ -78,7 +84,9 @@ function ProfileModal({
 
   return (
     <ModalTemplate
-      title={`${initialValues?.id ? 'Edit' : 'Add'} Profile`}
+      title={`${
+        initialValues?.id ? _(msg`Edit profile`) : _(msg`Add Profile`)
+      }`}
       open={!!initialValues}
       onClose={onClose}
       form={form}
@@ -86,21 +94,21 @@ function ProfileModal({
       submitDisabled={!isValid || isSubmitting}
     >
       <RadioCard
-        label={PROFILE_TYPE}
+        label={_(PROFILE_TYPE)}
         items={radioCardItems}
         selectedValue={profileType ?? ''}
         {...form.register('profileType')}
       />
       <TextField
         type="text"
-        label="Name"
+        label={_(msg`Name`)}
         {...form.register('name')}
         helperText={errors.name?.message}
         error={!!errors.name}
       />
       <ImageField
-        label="Profile image"
-        buttonText={UPLOAD_IMAGE}
+        label={_(msg`Profile image`)}
+        buttonText={_(UPLOAD_IMAGE)}
         setValue={setProfileImage}
         {...form.register('profileImage')}
         name="profile-image"
@@ -112,7 +120,7 @@ function ProfileModal({
       </ImageField>
       <TextAreaField
         type="text"
-        label="Description"
+        label={_(msg`Description`)}
         rows={3}
         minRows={3}
         disabled={isSubmitting}
@@ -126,8 +134,10 @@ function ProfileModal({
       </TextAreaField>
       <TextField
         type="text"
-        label="REGEN wallet address"
-        description="Enter the wallet address here if this entity has a wallet address but has not yet signed up on Regen Marketplace. Make sure this is a valid wallet address."
+        label={_(msg`REGEN wallet address`)}
+        description={_(
+          msg`Enter the wallet address here if this entity has a wallet address but has not yet signed up on Regen Marketplace. Make sure this is a valid wallet address.`,
+        )}
         {...form.register('address')}
         helperText={errors.address?.message}
         error={!!errors.address}

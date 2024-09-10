@@ -20,11 +20,12 @@ const AgreeErpaCheckbox: React.FC<React.PropsWithChildren<Props>> = ({
       name="agreeErpa"
       label={
         <>
-          <Trans>I agree to the</Trans>{' '}
+          <Trans>I agree to the</Trans>
           <LinkExt
             href={URL_REGISTRY_MARKETPLACE_LEGAL}
             target="_blank"
             rel="noopener noreferrer"
+            className="mx-5"
             sx={{ color: theme.palette.secondary.main }}
           >
             <Trans>Ecocredit Sales Agreement</Trans>
@@ -34,6 +35,7 @@ const AgreeErpaCheckbox: React.FC<React.PropsWithChildren<Props>> = ({
             href={URL_REGISTRY_TERMS_SERVICE}
             target="_blank"
             rel="noopener noreferrer"
+            className="ml-5"
             sx={{ color: theme.palette.secondary.main }}
           >
             <Trans>terms of service</Trans>

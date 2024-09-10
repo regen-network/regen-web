@@ -31,7 +31,7 @@ const AgreeErpaCheckbox = forwardRef<HTMLButtonElement, Props>(
             color="primary.contrastText"
             as="span"
           >
-            <Trans>I agree to the </Trans>
+            <Trans>I agree to the</Trans>{' '}
             <LinkExt
               className="font-bold text-brand-400"
               href={URL_REGISTRY_MARKETPLACE_LEGAL}

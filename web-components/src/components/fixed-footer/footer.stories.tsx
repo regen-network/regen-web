@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import FixedFooter from './';
-import BuyFooter from './BuyFooter';
 import SaveFooter from './SaveFooter';
 import { SwitchFooter } from './SwitchFooter';
 
@@ -20,15 +19,6 @@ export const fixedFooter = (): JSX.Element => (
   <FixedFooter>
     <div>Fixed footer content</div>
   </FixedFooter>
-);
-
-export const buyFooter = (): JSX.Element => (
-  <BuyFooter
-    creditText="credit"
-    buyText="buy credits"
-    creditPrice={{ unitPrice: 100, currency: 'USD' }}
-    onClick={submit}
-  />
 );
 
 export const saveFooter = (): JSX.Element => (

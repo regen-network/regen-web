@@ -20,7 +20,7 @@ const AgreeErpaCheckbox: React.FC<React.PropsWithChildren<Props>> = ({
       name="agreeErpa"
       label={
         <>
-          <Trans>I agree to the </Trans>
+          <Trans>I agree to the</Trans>{' '}
           <LinkExt
             href={URL_REGISTRY_MARKETPLACE_LEGAL}
             target="_blank"

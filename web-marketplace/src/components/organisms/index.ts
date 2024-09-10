@@ -36,5 +36,4 @@ export * from './RolesForm/RolesForm';
 export * from './SDGs';
 export * from './StepCardsWithDescription';
 export * from './StepsSection';
-export * from './StoryForm';
 export * from './UserCredits';

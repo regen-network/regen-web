@@ -1,6 +1,10 @@
 msgid ""
 msgstr ""
+<<<<<<< HEAD
 "POT-Creation-Date: 2024-09-10 16:07+0200\n"
+=======
+"POT-Creation-Date: 2024-09-10 08:37+0100\n"
+>>>>>>> fe5b407fd (chore: update .po files)
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2578,6 +2582,13 @@ msgstr ""
 msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
 msgstr ""
 
+<<<<<<< HEAD
+=======
+#: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:6
+msgid "This is not yet supported by Wallet Connect and Keplr mobile. Please log in using Keplr browser extension on desktop."
+msgstr ""
+
+>>>>>>> fe5b407fd (chore: update .po files)
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:7
 msgid "This is the median average price for all open sell orders in this credit class."
 msgstr ""

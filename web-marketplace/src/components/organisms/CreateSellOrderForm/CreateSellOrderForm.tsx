@@ -19,6 +19,7 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
 import { Sell2Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -190,6 +191,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
         isValid={isValid}
         submitCount={submitCount}
         label={_(msg`Create Sell Order`)}
+        errorText={_(SUBMIT_ERRORS)}
       />
     </Form>
   );

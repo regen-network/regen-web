@@ -18,7 +18,6 @@ export const ExtraComponent = (): JSX.Element => {
     <Box display="flex" justifyContent="center" alignItems="center">
       {address && (
         <UserMenuItems
-          address={address}
           avatar={''}
           disconnect={() => setAddress('')}
           pathname={''}

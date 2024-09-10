@@ -14,6 +14,8 @@ import {
 } from 'web-components/src/components/inputs/validation';
 import { RegenModalProps } from 'web-components/src/components/modal';
 
+import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
+
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckbox';
 
 // eslint-disable-next-line lingui/no-unlocalized-strings
@@ -111,6 +113,7 @@ const BridgeForm = ({
             submitCount={submitCount}
             submitForm={submitForm}
             label="bridge"
+            errorText={_(SUBMIT_ERRORS)}
           />
         </Form>
       )}

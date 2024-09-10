@@ -4,6 +4,8 @@ import { useLingui } from '@lingui/react';
 import { RegenModalProps } from 'web-components/src/components/modal';
 import { FormModalTemplate } from 'web-components/src/components/modal/FormModalTemplate';
 
+import { RETIREMENT_INFO_TEXT } from 'lib/constants/shared.constants';
+
 import {
   CreditRetireForm,
   CreditRetireFormProps,
@@ -32,6 +34,7 @@ const CreditRetireModal: React.FC<CreditRetireModalProps> = ({
       onClose={onClose}
     >
       <CreditRetireForm
+        retirementInfoText={_(RETIREMENT_INFO_TEXT)}
         availableTradableAmount={availableTradableAmount}
         batchDenom={batchDenom}
         mapboxToken={mapboxToken}

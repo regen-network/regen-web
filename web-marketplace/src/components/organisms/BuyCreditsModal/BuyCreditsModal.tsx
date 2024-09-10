@@ -36,6 +36,7 @@ import {
 
 import { useLedger } from 'ledger';
 import { client } from 'lib/clients/sanity';
+import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
 import { microToDenom } from 'lib/denom.utils';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getBuyModalQuery } from 'lib/queries/react-query/sanity/getBuyModalQuery/getBuyModalQuery';
@@ -584,6 +585,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                     submitCount={submitCount}
                     submitForm={submitForm}
                     label="purchase"
+                    errorText={_(SUBMIT_ERRORS)}
                   />
                 </div>
               );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Avatar, Button, Card, CardMedia, Link } from '@mui/material';
 
+import { bottomTextMapping } from '../form/form.mock';
 import { SocialItemsMock } from '../share-section/ShareSection.mock';
 import Modal from '.';
 import { BasketPutModal } from './BasketPutModal';
@@ -176,12 +177,29 @@ export const txErrorModal = (): JSX.Element => (
 
 export const basketPutModal = (): JSX.Element => (
   <BasketPutModal
+    title="Put in basket"
     basketOptions={[{ label: 'NCT', value: 'eco.uC.NCT' }]}
     availableTradableAmount={1000}
     batchDenoms={['C01-20190101-20201010-02']}
     open={true}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
+    batchLabel="Choose ecocredits batch"
+    batchDescription={
+      <>
+        {'Choose any ecocredits that are eligible for this basket. '}
+        <Link
+          href="https://guides.regen.network/guides/regen-marketplace/baskets/put-in-basket"
+          target="_blank"
+        >
+          Learn more»
+        </Link>
+      </>
+    }
+    basketLabel="Choose basket"
+    amountLabel="Amount"
+    submitLabel="Put in basket"
+    submitErrorText="Please correct the errors above"
   />
 );
 
@@ -207,6 +225,15 @@ export const basketTakeModal = (): JSX.Element => (
     mapboxToken={MAPBOX_TOKEN}
     onClose={() => null}
     onSubmit={() => alert('submit')}
+    amountErrorText="You don't have enough basket tokens"
+    stateProvinceErrorText="Required with postal code"
+    amountLabel="Amount"
+    retireOnTakeLabel="Retire credits upon transfer"
+    retireOnTakeTooltip="The creator of this basket has chosen that all credits must be retired upon take."
+    submitLabel="take from basket"
+    submitErrorText="Please correct the errors above"
+    retirementInfoText="Retirement is permanent and non-reversible."
+    bottomTextMapping={bottomTextMapping}
   />
 );
 

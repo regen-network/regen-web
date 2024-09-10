@@ -5,6 +5,8 @@ import { useLingui } from '@lingui/react';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
 
+import { SAVE_EXIT_TEXT, SAVE_TEXT } from 'lib/constants/shared.constants';
+
 import { getProjectCreationPercentage } from 'pages/ProjectCreate/ProjectCreate.utils';
 
 import { useProjectEditContext } from '../../pages/ProjectEdit';
@@ -51,6 +53,7 @@ const ProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
       saveDisabled={saveDisabled}
       percentComplete={percentage}
       saveAndExit={saveAndExit}
+      saveExitText={_(SAVE_EXIT_TEXT)}
     />
   );
 };

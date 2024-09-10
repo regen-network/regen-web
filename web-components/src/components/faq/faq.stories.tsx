@@ -28,11 +28,18 @@ export const question = (): JSX.Element => (
     question={questions[0].question}
     answer={questions[0].answer}
     isShareable
+    copyText="copy question link"
+    copySuccessText="Link copied to your clipboard"
   />
 );
 
 export const category = (): JSX.Element => (
-  <Category name={'tech'} questions={questions} />
+  <Category
+    name={'tech'}
+    questions={questions}
+    copyText="copy question link"
+    copySuccessText="Link copied to your clipboard"
+  />
 );
 
 export const navigation = (): JSX.Element => (
@@ -45,11 +52,14 @@ export const navigation = (): JSX.Element => (
 export const faq = (): JSX.Element => (
   <FAQ
     navigate={() => {}}
+    backText="back"
     categories={[
       {
         header: 'concept',
         questions,
       },
     ]}
+    copyText="copy question link"
+    copySuccessText="Link copied to your clipboard"
   />
 );

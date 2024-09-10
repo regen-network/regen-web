@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from '@mui/material';
+import React, { ReactNode } from 'react';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import { Body } from '../../../components/typography';
@@ -14,6 +13,12 @@ export interface BasketPutProps {
   basketOptions: Option[];
   batchDenoms: string[];
   availableTradableAmount: number;
+  batchLabel: string;
+  batchDescription: ReactNode;
+  basketLabel: string;
+  amountLabel: string;
+  submitLabel: string;
+  submitErrorText: string;
   onSubmit: (values: FormValues) => Promise<void>;
   onBatchDenomChange?: (batchDenom: string | undefined) => void;
 }
@@ -32,6 +37,12 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   batchDenoms,
   basketOptions,
   availableTradableAmount,
+  amountLabel,
+  batchLabel,
+  batchDescription,
+  basketLabel,
+  submitLabel,
+  submitErrorText,
   onClose,
   onSubmit,
   onBatchDenomChange,
@@ -51,7 +62,7 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
 
   const finalBasketOptions = hasOneBasketDenom
     ? basketOptions
-    : [{ value: '', label: 'choose basket' }, ...basketOptions];
+    : [{ value: '', label: basketLabel }, ...basketOptions];
 
   const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
     let errors: FormikErrors<FormValues> = {};
@@ -76,18 +87,8 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
           {hasManyBatchDenoms && (
             <Field
               name="batchDenom"
-              label="Choose ecocredits batch"
-              description={
-                <Body>
-                  {'Choose any ecocredits that are eligible for this basket. '}
-                  <Link
-                    href="https://guides.regen.network/guides/regen-marketplace/baskets/put-in-basket"
-                    target="_blank"
-                  >
-                    Learn more»
-                  </Link>
-                </Body>
-              }
+              label={batchLabel}
+              description={<Body>{batchDescription}</Body>}
               component={SelectTextField}
               options={batchDenomsOptions}
               native={false}
@@ -95,7 +96,7 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
           )}
           <Field
             name="basketDenom"
-            label="Choose basket"
+            label={basketLabel}
             component={SelectTextField}
             options={finalBasketOptions}
             disabled={hasOneBasketDenom}
@@ -103,7 +104,7 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
           />
           <AmountField
             name="amount"
-            label="Amount"
+            label={amountLabel}
             availableAmount={availableTradableAmount}
             denom={values.batchDenom ?? batchDenoms[0]}
           />
@@ -115,7 +116,8 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
             isValid={isValid}
             submitCount={submitCount}
             submitForm={submitForm}
-            label="Put in basket"
+            label={submitLabel}
+            errorText={submitErrorText}
           />
           <BasketPutFormOnChange onBatchDenomChange={onBatchDenomChange} />
         </Form>

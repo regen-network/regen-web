@@ -36,6 +36,9 @@ export const FaqSection = ({ categories, header, navigate }: Props) => {
           questionId={questionId}
           categories={categories}
           navigate={navigate}
+          backText="back"
+          copyText="copy question link"
+          copySuccessText="Link copied to your clipboard"
         />
       </Section>
     </div>

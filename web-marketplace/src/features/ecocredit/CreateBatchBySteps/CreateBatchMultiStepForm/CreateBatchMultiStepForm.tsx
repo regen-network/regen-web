@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { Form, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
@@ -8,10 +8,25 @@ import { Option } from 'web-components/src/components/inputs/SelectTextField';
 import { ProcessingModal } from 'web-components/src/components/modal/ProcessingModal';
 import NotFound from 'web-components/src/components/views/NotFoundView';
 
+import {
+  getBottomFieldsTextMapping,
+  RETIREMENT_INFO_TEXT,
+  SAVE_EXIT_TEXT,
+  SUBMIT_TEXT,
+} from 'lib/constants/shared.constants';
+
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import getFormModel from '../form-model';
 import useCreateBatchSubmit from '../hooks/useCreateBatchSubmit';
+import {
+  CREATE_BATCH_FORM_ADD_BUTTON_TEXT,
+  CREATE_BATCH_FORM_AMOUNT_RETIRED_LABEL,
+  CREATE_BATCH_FORM_AMOUNT_TRADABLE_LABEL,
+  CREATE_BATCH_FORM_DELETE_BUTTON_TEXT,
+  CREATE_BATCH_FORM_RECIPIENT_LABEL,
+  CREATE_BATCH_FORM_WITH_RETIRE_LABEL,
+} from './CreateBatchMultiStepForm.constants';
 import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
 import Recipients, { RecipientsFormValues } from './Recipients';
 import Result from './Result';
@@ -67,6 +82,11 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
 
   const [projectOptionSelected, setProjectOptionSelected] = useState<Option>();
 
+  const bottomFieldsTextMapping = useMemo(
+    () => getBottomFieldsTextMapping(_),
+    [_],
+  );
+
   useEffect(() => {
     if (submitStatus === 'success') handleSuccess();
     if (submitStatus === 'error') handleError();
@@ -98,7 +118,19 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
           <CreditBasics saveProjectOptionSelected={setProjectOptionSelected} />
         );
       case 1:
-        return <Recipients />;
+        return (
+          <Recipients
+            addButtonText={_(CREATE_BATCH_FORM_ADD_BUTTON_TEXT)}
+            deleteButtonText={_(CREATE_BATCH_FORM_DELETE_BUTTON_TEXT)}
+            recipientLabel={_(CREATE_BATCH_FORM_RECIPIENT_LABEL)}
+            amountTradableLabel={_(CREATE_BATCH_FORM_AMOUNT_TRADABLE_LABEL)}
+            amountRetiredLabel={_(CREATE_BATCH_FORM_AMOUNT_RETIRED_LABEL)}
+            withRetireLabel={_(CREATE_BATCH_FORM_WITH_RETIRE_LABEL)}
+            retirementInfoText={_(RETIREMENT_INFO_TEXT)}
+            bottomTextMapping={bottomFieldsTextMapping}
+            mapboxToken={import.meta.env.VITE_MAPBOX_TOKEN || ''}
+          />
+        );
       case 2:
         return <Review />;
       default:
@@ -126,7 +158,8 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
               <SaveFooter
                 onPrev={activeStep > 0 ? handleBack : undefined}
                 onSave={submitForm}
-                saveText={activeStep === 2 ? 'submit' : undefined}
+                saveText={activeStep === 2 ? _(SUBMIT_TEXT) : ''}
+                saveExitText={activeStep === 2 ? _(SAVE_EXIT_TEXT) : ''}
                 saveDisabled={!isValid || isSubmitting}
                 percentComplete={percentComplete}
               />

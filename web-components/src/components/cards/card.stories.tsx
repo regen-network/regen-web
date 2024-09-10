@@ -209,6 +209,9 @@ export const stepCard: React.FC<React.PropsWithChildren<unknown>> = () => {
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       }}
       stepLabel="step"
+      stepFaqsTitle="top faqs"
+      copyText="Copy"
+      copySuccessText="Successfully copied!"
     />
   );
 };

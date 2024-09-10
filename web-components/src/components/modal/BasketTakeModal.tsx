@@ -18,6 +18,15 @@ const BasketTakeModal: React.FC<React.PropsWithChildren<TakeModalProps>> = ({
   accountAddress,
   open,
   mapboxToken,
+  amountErrorText,
+  amountLabel,
+  retireOnTakeLabel,
+  retireOnTakeTooltip,
+  submitLabel,
+  submitErrorText,
+  bottomTextMapping,
+  retirementInfoText,
+  stateProvinceErrorText,
   onClose,
   onSubmit,
 }) => {
@@ -36,6 +45,15 @@ const BasketTakeModal: React.FC<React.PropsWithChildren<TakeModalProps>> = ({
         basketDisplayDenom={basketDisplayDenom}
         onClose={onClose}
         onSubmit={onSubmit}
+        amountErrorText={amountErrorText}
+        amountLabel={amountLabel}
+        retireOnTakeLabel={retireOnTakeLabel}
+        retireOnTakeTooltip={retireOnTakeTooltip}
+        submitLabel={submitLabel}
+        submitErrorText={submitErrorText}
+        bottomTextMapping={bottomTextMapping}
+        retirementInfoText={retirementInfoText}
+        stateProvinceErrorText={stateProvinceErrorText}
       />
     </FormModalTemplate>
   );

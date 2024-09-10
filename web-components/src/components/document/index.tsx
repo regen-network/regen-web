@@ -4,8 +4,8 @@ import { makeStyles } from 'tss-react/mui';
 
 export interface DocumentInfo {
   name: string;
-  info: string;
   link: string;
+  linkText: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -34,8 +34,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
 
 export default function Document({
   name,
-  info,
   link,
+  linkText,
 }: DocumentInfo): JSX.Element {
   const { classes } = useStyles();
   return (
@@ -47,7 +47,7 @@ export default function Document({
         target="_blank"
         rel="noopener noreferrer"
       >
-        View {info} »
+        {linkText}
       </a>
     </div>
   );

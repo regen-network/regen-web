@@ -9,6 +9,8 @@ import Submit from 'web-components/src/components/form/Submit';
 import AmountField from 'web-components/src/components/inputs/new/AmountField/AmountField';
 import { RegenModalProps } from 'web-components/src/components/modal';
 
+import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
+
 import { BottomCreditRetireFields } from 'components/molecules/BottomCreditRetireFields/BottomCreditRetireFields';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -29,6 +31,7 @@ export interface CreditRetireFormProps {
   onSubmit: (values: CreditRetireFormSchemaType) => Promise<void>;
   onClose: RegenModalProps['onClose'];
   mapboxToken: string;
+  retirementInfoText: string;
 }
 
 const CreditRetireForm: React.FC<
@@ -36,6 +39,7 @@ const CreditRetireForm: React.FC<
 > = ({
   batchDenom,
   availableTradableAmount,
+  retirementInfoText,
   mapboxToken,
   onClose,
   onSubmit,
@@ -81,7 +85,10 @@ const CreditRetireForm: React.FC<
           }
         }}
       >
-        <RetirementReminder sx={{ textAlign: 'center', mb: 8 }} />
+        <RetirementReminder
+          sx={{ textAlign: 'center', mb: 8 }}
+          retirementInfoText={retirementInfoText}
+        />
         <AmountField
           label={
             <Box>
@@ -112,6 +119,7 @@ const CreditRetireForm: React.FC<
           isValid={isValid}
           submitCount={submitCount}
           label={_(msg`Retire`)}
+          errorText={_(SUBMIT_ERRORS)}
         />
       </Form>
     </>

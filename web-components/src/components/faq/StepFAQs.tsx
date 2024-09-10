@@ -11,6 +11,9 @@ import Question, { QuestionItem } from './Question';
 interface StepFAQProps {
   questionItems: QuestionItem[];
   isActive?: boolean;
+  title: string;
+  copyText: string;
+  copySuccessText: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -86,6 +89,9 @@ const useStyles = makeStyles()((theme: Theme) => ({
 const StepFAQs: React.FC<React.PropsWithChildren<StepFAQProps>> = ({
   questionItems,
   isActive,
+  title,
+  copyText,
+  copySuccessText,
 }) => {
   const { classes, cx } = useStyles();
   const theme = useTheme();
@@ -95,7 +101,7 @@ const StepFAQs: React.FC<React.PropsWithChildren<StepFAQProps>> = ({
     <div className={cx(classes.faq, isExpanded && classes.lessPaddingBottom)}>
       <div className={classes.top}>
         <Title variant="h6" className={classes.title}>
-          top faqs
+          {title}
         </Title>
         <Button
           className={classes.addButton}
@@ -135,6 +141,8 @@ const StepFAQs: React.FC<React.PropsWithChildren<StepFAQProps>> = ({
             answer={questionItem.answer}
             first={i === 0}
             last={i === questionItems.length - 1}
+            copyText={copyText}
+            copySuccessText={copySuccessText}
           />
         ))}
       </Collapse>

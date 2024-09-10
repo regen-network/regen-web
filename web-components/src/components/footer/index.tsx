@@ -27,6 +27,14 @@ interface FooterProps {
   termsUrl: string;
   privacyUrl: string;
   apiUri?: string;
+  subscribeText: string;
+  termsText: string;
+  privacyText: string;
+  joinText: string;
+  newsletterText: string;
+  newsletterSuccessChildren: React.ReactNode;
+  newsletterSubmitLabel: string;
+  newsletterInputPlaceholder: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -100,6 +108,14 @@ export default function Footer({
   footerItems,
   termsUrl,
   privacyUrl,
+  subscribeText,
+  newsletterText,
+  newsletterInputPlaceholder,
+  newsletterSubmitLabel,
+  newsletterSuccessChildren,
+  termsText,
+  privacyText,
+  joinText,
   apiUri = 'http://localhost:5000',
 }: FooterProps): JSX.Element {
   const { classes } = useStyles();
@@ -146,23 +162,25 @@ export default function Footer({
           </Grid>
           <Grid item xs={12} md={4} className={classes.footerItem}>
             <Label size="lg" sx={sxs.text}>
-              subscribe
+              {subscribeText}
             </Label>
             <Body size="lg" color="primary.main">
-              Stay up to date! Sign up for our monthly newsletter.
+              {newsletterText}
             </Body>
             <Box sx={{ pt: 4 }}>
               <NewsletterForm
-                submitLabel="subscribe"
+                submitLabel={newsletterSubmitLabel}
+                inputPlaceholder={newsletterInputPlaceholder}
                 buttonClassName={classes.button}
                 textFieldClassName={classes.textField}
                 apiUri={apiUri}
                 gridXs={{ textField: 7, button: 5 }}
+                successChildren={newsletterSuccessChildren}
               />
             </Box>
           </Grid>
         </Grid>
-        <SocialLinks className={classes.community} />
+        <SocialLinks className={classes.community} joinText={joinText} />
         <Box
           component="hr"
           sx={{
@@ -181,18 +199,18 @@ export default function Footer({
         >
           <Grid item>
             <Link variant="textSmall" href={termsUrl}>
-              Terms
+              {termsText}
             </Link>{' '}
             |{' '}
             <Link variant="textSmall" href={privacyUrl}>
-              Privacy
+              {privacyText}
             </Link>
           </Grid>
           <Grid item>
-            <Body
-              sx={{ color: 'primary.main' }}
-              size="sm"
-            >{`© ${new Date().getUTCFullYear()} Regen Network Development, PBC`}</Body>
+            <Body sx={{ color: 'primary.main' }} size="sm">
+              {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
+              {`© ${new Date().getUTCFullYear()} Regen Network Development, PBC`}
+            </Body>
           </Grid>
         </Grid>
       </Section>

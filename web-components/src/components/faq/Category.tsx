@@ -10,6 +10,8 @@ interface CategoryProps {
   name: string;
   questionId?: string;
   questions: QuestionItem[];
+  copyText: string;
+  copySuccessText: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -28,6 +30,8 @@ const Category = ({
   questions,
   name,
   questionId,
+  copyText,
+  copySuccessText,
 }: CategoryProps): JSX.Element => {
   const { classes } = useStyles();
 
@@ -43,6 +47,8 @@ const Category = ({
             question={q.question}
             answer={q.answer}
             isShareable
+            copyText={copyText}
+            copySuccessText={copySuccessText}
           />
         </div>
       ))}

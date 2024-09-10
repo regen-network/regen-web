@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { SxProps, useTheme } from '@mui/material';
@@ -22,6 +22,21 @@ import type { Theme } from 'web-components/src/theme/muiTheme';
 
 import { useLedger } from 'ledger';
 import { getHashUrl } from 'lib/block-explorer';
+import {
+  AMOUNT_LABEL,
+  BASKET_LABEL,
+  BASKET_PUT_SUBMIT_LABEL,
+  BASKET_TAKE_AMOUNT_ERROR_TEXT,
+  BASKET_TAKE_SUBMIT_LABEL,
+  BATCH_DESCRIPTION,
+  BATCH_LABEL,
+  getBottomFieldsTextMapping,
+  RETIRE_ON_TAKE_LABEL,
+  RETIRE_ON_TAKE_TOOLTIP,
+  RETIREMENT_INFO_TEXT,
+  STATE_PROVINCE_ERROR_TEXT,
+  SUBMIT_ERROR_TEXT,
+} from 'lib/constants/shared.constants';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import {
   PutInBasket1Event,
@@ -95,6 +110,10 @@ export const MyEcocredits = (): JSX.Element => {
   const navigate = useNavigate();
   const { track } = useTracker();
   const { marketplaceClient } = useLedger();
+  const bottomFieldsTextMapping = useMemo(
+    () => getBottomFieldsTextMapping(_),
+    [_],
+  );
 
   const {
     retirements,
@@ -423,6 +442,13 @@ export const MyEcocredits = (): JSX.Element => {
           open={basketPutOpen > -1}
           onClose={() => setBasketPutOpen(-1)}
           onSubmit={basketPutSubmit}
+          batchLabel={_(BATCH_LABEL)}
+          batchDescription={BATCH_DESCRIPTION}
+          basketLabel={_(BASKET_LABEL)}
+          amountLabel={_(AMOUNT_LABEL)}
+          submitLabel={_(BASKET_PUT_SUBMIT_LABEL)}
+          submitErrorText={_(SUBMIT_ERROR_TEXT)}
+          title={_(BASKET_PUT_SUBMIT_LABEL)}
         />
       )}
       {creditRetireOpen > -1 && !!accountAddress && (
@@ -435,6 +461,7 @@ export const MyEcocredits = (): JSX.Element => {
           open={creditRetireOpen > -1}
           onClose={() => setCreditRetireOpen(-1)}
           onSubmit={creditRetireSubmit}
+          retirementInfoText={_(RETIREMENT_INFO_TEXT)}
         />
       )}
       {!!basketTakeTokens?.basket && !!accountAddress && (
@@ -454,6 +481,15 @@ export const MyEcocredits = (): JSX.Element => {
           mapboxToken={mapboxToken}
           onClose={() => setBasketTakeTokens(undefined)}
           onSubmit={basketTakeSubmit}
+          amountLabel={_(AMOUNT_LABEL)}
+          amountErrorText={_(BASKET_TAKE_AMOUNT_ERROR_TEXT)}
+          retireOnTakeLabel={_(RETIRE_ON_TAKE_LABEL)}
+          retireOnTakeTooltip={_(RETIRE_ON_TAKE_TOOLTIP)}
+          submitLabel={_(BASKET_TAKE_SUBMIT_LABEL)}
+          submitErrorText={_(SUBMIT_ERROR_TEXT)}
+          retirementInfoText={_(RETIREMENT_INFO_TEXT)}
+          bottomTextMapping={bottomFieldsTextMapping}
+          stateProvinceErrorText={_(STATE_PROVINCE_ERROR_TEXT)}
         />
       )}
       {sellOrderCreateOpen > -1 && !!accountAddress && (

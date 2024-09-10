@@ -63,6 +63,14 @@ export interface BasketTakeProps extends BottomCreditRetireFieldsProps {
   basketDisplayDenom: string;
   accountAddress: string;
   balance: number;
+  amountErrorText: string;
+  stateProvinceErrorText: string;
+  amountLabel: string;
+  retireOnTakeLabel: string;
+  retireOnTakeTooltip: string;
+  retirementInfoText: string;
+  submitLabel: string;
+  submitErrorText: string;
   onSubmit: (values: MsgTakeValues) => void;
 }
 
@@ -77,6 +85,15 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   basket,
   basketDisplayDenom,
   balance,
+  amountErrorText,
+  amountLabel,
+  retireOnTakeLabel,
+  retireOnTakeTooltip,
+  stateProvinceErrorText,
+  submitLabel,
+  submitErrorText,
+  retirementInfoText,
+  bottomTextMapping,
   onClose,
   onSubmit,
 }) => {
@@ -96,11 +113,7 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   ): FormikErrors<CreditTakeFormValues> => {
     let errors: FormikErrors<CreditTakeFormValues> = {};
 
-    const errAmount = validateAmount(
-      balance,
-      values.amount,
-      `You don't have enough basket tokens`,
-    );
+    const errAmount = validateAmount(balance, values.amount, amountErrorText);
     if (errAmount) errors.amount = errAmount;
 
     // Retire form validation (optional subform)
@@ -112,7 +125,12 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
         stateProvince: values.stateProvince,
         postalCode: values.postalCode,
       };
-      errors = validateCreditRetire(balance, retirementValues, errors);
+      errors = validateCreditRetire(
+        balance,
+        retirementValues,
+        errors,
+        stateProvinceErrorText,
+      );
     }
     return errors;
   };
@@ -141,7 +159,7 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
           <>
             <AmountField
               name="amount"
-              label="Amount"
+              label={amountLabel}
               availableAmount={balance}
               denom={basketDisplayDenom}
             />
@@ -153,10 +171,10 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
               className={styles.checkboxLabel}
               label={
                 <Subtitle display="flex" size="lg" color="primary.contrastText">
-                  Retire credits upon transfer
+                  {retireOnTakeLabel}
                   {values.retireOnTake && !basket?.disableAutoRetire && (
                     <InfoTooltip
-                      title={RETIRED_UPON_TAKE_TOOLTIP}
+                      title={retireOnTakeTooltip}
                       arrow
                       placement="top"
                     >
@@ -175,8 +193,14 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
             <Collapse in={values.retireOnTake} collapsedSize={0}>
               {values.retireOnTake && (
                 <>
-                  <RetirementReminder sx={{ mt: 8 }} />
-                  <BottomCreditRetireFields mapboxToken={mapboxToken} />
+                  <RetirementReminder
+                    sx={{ mt: 8 }}
+                    retirementInfoText={retirementInfoText}
+                  />
+                  <BottomCreditRetireFields
+                    mapboxToken={mapboxToken}
+                    bottomTextMapping={bottomTextMapping}
+                  />
                 </>
               )}
             </Collapse>
@@ -188,7 +212,8 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
             isValid={isValid}
             submitCount={submitCount}
             submitForm={submitForm}
-            label="take from basket"
+            label={submitLabel}
+            errorText={submitErrorText}
           />
         </Form>
       )}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { msg } from '@lingui/macro';
+import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { URL_REGISTRY_TERMS_SERVICE, URL_WEB_PRIVACY } from 'config/globals';
 
@@ -83,6 +83,22 @@ const RegistryLayoutFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
         linkComponent={Link}
         privacyUrl={URL_WEB_PRIVACY}
         termsUrl={URL_REGISTRY_TERMS_SERVICE}
+        regenText={
+          <Trans>
+            A project of{' '}
+            <Link
+              href="https://www.regen.network"
+              sx={{ color: 'secondary.main' }}
+            >
+              Regen Network
+              <br /> Development, PBC
+            </Link>
+          </Trans>
+        }
+        dataProviderText={_(msg`Regen Data Provider`)}
+        termsText={_(msg`Terms`)}
+        privacyText={_(msg`Privacy`)}
+        joinText={_(msg`join the community`)}
       />
     </footer>
   );

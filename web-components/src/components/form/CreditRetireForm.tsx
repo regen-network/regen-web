@@ -69,12 +69,15 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-export interface CreditRetireProps extends CreditRetireFieldsProps {
-  onSubmit: (values: RetireFormValues) => void;
-}
+export interface CreditRetireProps extends CreditRetireFieldsProps {}
 
 // Input (args)
 interface FormProps extends CreditRetireProps {
+  submitLabel: string;
+  submitErrorText: string;
+  retirementInfoText: string;
+  stateProvinceError: string;
+  onSubmit: (values: RetireFormValues) => void;
   onClose: RegenModalProps['onClose'];
 }
 
@@ -97,6 +100,7 @@ interface RetireFormValuesArray {
 interface CreditRetireFieldsProps extends BottomCreditRetireFieldsProps {
   batchDenom: string;
   availableTradableAmount: number;
+  amountRetiredLabel: string;
 }
 
 const sxs = {
@@ -110,11 +114,22 @@ export interface BottomCreditRetireFieldsProps {
   mapboxToken: string;
   arrayPrefix?: string;
   arrayIndex?: number;
+  bottomTextMapping: {
+    title: string;
+    tooltip: string;
+    reasonLabel: string;
+    locationTitle: string;
+    locationTooltip: string;
+    locationDescription: string;
+    countryLabel: string;
+    stateLabel: string;
+    postalCodeLabel: string;
+  };
 }
 
 export const BottomCreditRetireFields: React.FC<
   React.PropsWithChildren<BottomCreditRetireFieldsProps>
-> = ({ mapboxToken, arrayPrefix = '', arrayIndex }) => {
+> = ({ mapboxToken, arrayPrefix = '', arrayIndex, bottomTextMapping }) => {
   const { classes: styles } = useStyles();
   const { values, setFieldValue } = useFormikContext<
     RetireFormValues | RetireFormValuesArray
@@ -125,6 +140,18 @@ export const BottomCreditRetireFields: React.FC<
       : (values as RetireFormValues);
 
   const { country, stateProvince, postalCode } = item;
+
+  const {
+    countryLabel,
+    stateLabel,
+    postalCodeLabel,
+    locationDescription,
+    locationTitle,
+    locationTooltip,
+    reasonLabel,
+    title,
+    tooltip,
+  } = bottomTextMapping;
 
   useEffect(() => {
     const retirementJurisdictionName = `${arrayPrefix}retirementJurisdiction`;
@@ -164,14 +191,14 @@ export const BottomCreditRetireFields: React.FC<
         <>
           <Flex sx={sxs.title}>
             <Title variant="h5" sx={{ mr: 2 }}>
-              Retirement reason
+              {title}
             </Title>
-            <InfoTooltipWithIcon title="You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')" />
+            <InfoTooltipWithIcon title={tooltip} />
           </Flex>
           <Field
             name={`${arrayPrefix}note`}
             type="text"
-            label="Explain the reason you are retiring these credits"
+            label={reasonLabel}
             component={TextField}
             className={styles.noteTextField}
             optional
@@ -181,21 +208,18 @@ export const BottomCreditRetireFields: React.FC<
       )}
       <Flex sx={sxs.title}>
         <Title variant="h5" sx={{ mr: 2 }}>
-          Location of retirement
+          {locationTitle}
         </Title>
-        <InfoTooltipWithIcon title="The retirement location can be where you live or your business operates." />
+        <InfoTooltipWithIcon title={locationTooltip} />
       </Flex>
 
-      <Body>
-        Please enter a location for the retirement of these credits. This
-        prevents double counting of credits in different locations.
-      </Body>
+      <Body>{locationDescription}</Body>
       <Grid container className={styles.stateCountryGrid}>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
           <Suspense
             fallback={
               <SelectFieldFallback
-                label="Country"
+                label={countryLabel}
                 name={`${arrayPrefix}country`}
               />
             }
@@ -207,7 +231,7 @@ export const BottomCreditRetireFields: React.FC<
           <Suspense
             fallback={
               <SelectFieldFallback
-                label="State / Region"
+                label={stateLabel}
                 name={`${arrayPrefix}stateProvince`}
                 optional={!postalCode}
               />
@@ -224,7 +248,7 @@ export const BottomCreditRetireFields: React.FC<
       </Grid>
       <Field
         component={ControlledTextField}
-        label="Postal Code"
+        label={postalCodeLabel}
         name={`${arrayPrefix}postalCode`}
         optional
       />
@@ -238,12 +262,14 @@ export const CreditRetireFields = ({
   mapboxToken,
   arrayPrefix = '',
   arrayIndex,
-}: CreditRetireFieldsProps): JSX.Element => {
+  amountRetiredLabel,
+  bottomTextMapping,
+}: CreditRetireProps): JSX.Element => {
   return (
     <>
       <AmountField
         name={`${arrayPrefix}retiredAmount`}
-        label="Amount retired"
+        label={amountRetiredLabel}
         availableAmount={availableTradableAmount}
         denom={batchDenom}
       />
@@ -251,6 +277,7 @@ export const CreditRetireFields = ({
         mapboxToken={mapboxToken}
         arrayPrefix={arrayPrefix}
         arrayIndex={arrayIndex}
+        bottomTextMapping={bottomTextMapping}
       />
     </>
   );
@@ -258,12 +285,14 @@ export const CreditRetireFields = ({
 
 export const RetirementReminder = ({
   sx,
+  retirementInfoText,
 }: {
+  retirementInfoText: string;
   sx?: SxProps<Theme>;
 }): JSX.Element => {
   return (
     <Body size="lg" color="black" sx={sx}>
-      Retirement is permanent and non-reversible.
+      {retirementInfoText}
     </Body>
   );
 };
@@ -272,12 +301,13 @@ export const validateCreditRetire = (
   availableTradableAmount: number,
   values: RetireFormValues,
   errors: FormikErrors<RetireFormValues>,
+  stateProvinceError: string,
 ): FormikErrors<RetireFormValues> => {
   if (!values.country) {
     errors.country = requiredMessage;
   }
   if (values.postalCode && !values.stateProvince) {
-    errors.stateProvince = 'Required with postal code';
+    errors.stateProvince = stateProvinceError;
   }
   const errAmount = validateAmount(
     availableTradableAmount,
@@ -301,8 +331,14 @@ export const initialValues = {
 
 const CreditRetireForm: React.FC<FormProps> = ({
   batchDenom,
+  amountRetiredLabel,
   availableTradableAmount,
   mapboxToken,
+  submitLabel,
+  submitErrorText,
+  bottomTextMapping,
+  retirementInfoText,
+  stateProvinceError,
   onClose,
   onSubmit,
 }) => {
@@ -310,7 +346,12 @@ const CreditRetireForm: React.FC<FormProps> = ({
     values: RetireFormValues,
   ): FormikErrors<RetireFormValues> => {
     let errors: FormikErrors<RetireFormValues> = {};
-    errors = validateCreditRetire(availableTradableAmount, values, errors);
+    errors = validateCreditRetire(
+      availableTradableAmount,
+      values,
+      errors,
+      stateProvinceError,
+    );
     return errors;
   };
 
@@ -322,11 +363,16 @@ const CreditRetireForm: React.FC<FormProps> = ({
     >
       {({ submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
-          <RetirementReminder sx={{ textAlign: 'center', mb: 8 }} />
+          <RetirementReminder
+            sx={{ textAlign: 'center', mb: 8 }}
+            retirementInfoText={retirementInfoText}
+          />
           <CreditRetireFields
+            amountRetiredLabel={amountRetiredLabel}
             availableTradableAmount={availableTradableAmount}
             batchDenom={batchDenom}
             mapboxToken={mapboxToken}
+            bottomTextMapping={bottomTextMapping}
           />
           <Submit
             isSubmitting={isSubmitting}
@@ -335,7 +381,8 @@ const CreditRetireForm: React.FC<FormProps> = ({
             isValid={isValid}
             submitCount={submitCount}
             submitForm={submitForm}
-            label={'Retire'}
+            label={submitLabel}
+            errorText={submitErrorText}
           />
         </Form>
       )}

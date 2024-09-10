@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 
 import Footer from 'web-components/src/components/footer';
+import { Body } from 'web-components/src/components/typography';
 
 import { footerItems } from './Layout.config';
 import { LayoutCookiesTopBanner } from './Layout.CookiesTopBanner';
@@ -31,6 +32,23 @@ const Layout = ({ children }: Props) => {
           privacyUrl="/privacy-policy"
           termsUrl="/terms-service"
           apiUri={process.env.NEXT_PUBLIC_API_URI}
+          newsletterText="Stay up to date! Sign up for our monthly newsletter."
+          subscribeText="subscribe"
+          termsText="Terms"
+          privacyText="Privacy"
+          joinText="join the community"
+          newsletterInputPlaceholder="Your email"
+          newsletterSubmitLabel="subscribe"
+          newsletterSuccessChildren={
+            <>
+              <Body color="primary.main" align="center">
+                Thank you!
+              </Body>
+              <Body color="primary.main" align="center">
+                You have successfully joined our subscriber list.
+              </Body>
+            </>
+          }
         />
       </footer>
     </>

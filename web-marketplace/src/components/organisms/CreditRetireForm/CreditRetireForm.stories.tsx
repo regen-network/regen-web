@@ -9,6 +9,7 @@ export const creditRetireForm = (): JSX.Element => (
     mapboxToken={MAPBOX_TOKEN}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
+    retirementInfoText="Retirement is permanent and non-reversible."
   />
 );
 

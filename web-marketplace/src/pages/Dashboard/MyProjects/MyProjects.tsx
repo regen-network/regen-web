@@ -135,7 +135,11 @@ const MyProjects = (): JSX.Element => {
                     }}
                     track={track}
                     pathname={location.pathname}
-                    createPostTooltipText={_(CREATE_POST_TOOLTIP_TEXT)}
+                    createPostTooltipText={
+                      loginDisabled
+                        ? _(EDIT_PROJECT_TOOLTIP_TEXT)
+                        : _(CREATE_POST_TOOLTIP_TEXT)
+                    }
                     editProjectTooltipText={_(EDIT_PROJECT_TOOLTIP_TEXT)}
                   />
                 </WithLoader>

@@ -9,9 +9,9 @@ import {
   useTheme,
 } from '@mui/material';
 import { Feature } from 'geojson';
+import { PlayPauseButton } from 'web-components/src/components/atoms/PlayPauseButton/PlayPauseButton';
 
 import { cn } from '../../../../utils/styles/cn';
-import { PlayButton } from '../../../atoms/PlayButton/PlayButton';
 import ArrowDownIcon from '../../../icons/ArrowDownIcon';
 import { DragIcon } from '../../../icons/DragIcon';
 import EditIcon from '../../../icons/EditIcon';
@@ -124,7 +124,7 @@ export const FileDropFile = ({
               'absolute top-0 left-0 bg-grey-700 rounded-[5px] overflow-hidden',
             )}
           />
-          <PlayButton />
+          <PlayPauseButton />
         </>
       ) : isPdf(mimeType) ? (
         <PdfPreview

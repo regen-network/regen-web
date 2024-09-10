@@ -1,8 +1,6 @@
-import ReactPlayer from 'react-player/es6';
 import { Box } from '@mui/material';
 
 import { cn } from '../../../../utils/styles/cn';
-import { PlayButton } from '../../../atoms/PlayButton/PlayButton';
 import {
   isAudio,
   isCsv,
@@ -18,6 +16,7 @@ import { PostFile } from '../PostFiles';
 import { getColors } from '../PostFiles.utils';
 import { PdfPreview } from './PdfPreview';
 import { TextOrIconFilePreview } from './TextOrIconFilePreview';
+import { VideoPreview } from './VideoPreview';
 
 export type FileToPreview = Pick<PostFile, 'mimeType' | 'url' | 'name'>;
 type Props = {
@@ -66,18 +65,8 @@ const FilePreview = ({
           linearGradientClassName,
         )}
       />
-      {video ? (
-        <>
-          <ReactPlayer url={url} width="100%" height="100%" />
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={url}
-            className="outline-none cursor-pointer"
-          >
-            <PlayButton className="w-50 h-50" />
-          </a>
-        </>
+      {video && url ? (
+        <VideoPreview url={url} />
       ) : isPdf(mimeType) ? (
         <PdfPreview
           file={url}

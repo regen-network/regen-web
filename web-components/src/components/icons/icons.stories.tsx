@@ -68,6 +68,7 @@ import { OpenInNewIcon } from './OpenInNewIcon';
 import OrganizationIcon from './OrganizationIcon';
 import { OtherDocumentsIcon } from './OtherDocumentsIcon';
 import OutlinedCheckIcon from './OutlinedCheckIcon';
+import { PauseIcon } from './PauseIcon';
 import { PdfFileIcon } from './PdfFileIcon';
 import PendingIcon from './PendingIcon';
 import PhoneIcon from './PhoneIcon';
@@ -132,9 +133,9 @@ import VerifiedIcon from './VerifiedIcon';
 import { VideoIcon } from './VideoIcon';
 import WalletErrorIcon from './WalletErrorIcon';
 import { WalletIcon } from './WalletIcon';
+import WarningIcon from './WarningIcon';
 import WhitepaperIcon from './WhitepaperIcon';
 import ZoomIcon from './ZoomIcon';
-import WarningIcon from './WarningIcon';
 
 export default {
   title: 'Icons',
@@ -306,6 +307,7 @@ export const allIcons = (): JSX.Element => (
     />
     <LabeledIcon icon={<PinIcon fontSize="small" />} label="PinIcon" />
     <LabeledIcon icon={<PlayIcon height={'20px'} />} label="PlayIcon" />
+    <LabeledIcon icon={<PauseIcon height={'50px'} />} label="PauseIcon" />
     <LabeledIcon icon={<PlusIcon />} label="PlusIcon" />
     <LabeledIcon icon={<PointerIcon />} label="PointerIcon" />
     <LabeledIcon icon={<PrefinanceIcon />} label="PrefinanceIcon" />

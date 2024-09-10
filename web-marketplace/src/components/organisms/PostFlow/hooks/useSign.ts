@@ -45,6 +45,7 @@ export const useSign = ({
   projectId,
   offChainProjectId,
   projectName,
+  onModalClose,
 }: UseSignParams) => {
   const { _ } = useLingui();
   const getSuccessModalContent = useGetSuccessModalContent();
@@ -110,6 +111,7 @@ export const useSign = ({
               atom.buttonLink = buttonLink;
               atom.txHash = undefined;
             });
+            onModalClose();
           },
           onSuccess: async (deliverTxResponse?: DeliverTxResponse) => {
             const { data: anchorTxsData } = await refetch();
@@ -147,6 +149,7 @@ export const useSign = ({
               atom.buttonLink = buttonLink;
               atom.txHash = undefined;
             });
+            onModalClose();
           },
         },
       );
@@ -155,6 +158,7 @@ export const useSign = ({
       _,
       getSuccessModalContent,
       offChainProjectId,
+      onModalClose,
       projectId,
       projectName,
       projectSlug,

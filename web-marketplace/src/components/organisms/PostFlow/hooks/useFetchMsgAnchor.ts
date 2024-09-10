@@ -32,6 +32,7 @@ export type UseFetchMsgAnchorParams = {
   projectName?: string;
   projectSlug?: string | null;
   offChainProjectId?: string;
+  onModalClose: () => void;
 };
 
 export const useFetchMsgAnchor = ({
@@ -39,6 +40,7 @@ export const useFetchMsgAnchor = ({
   projectId,
   offChainProjectId,
   projectName,
+  onModalClose,
 }: UseFetchMsgAnchorParams) => {
   const { txClient } = useLedger();
   const { _ } = useLingui();
@@ -97,11 +99,13 @@ export const useFetchMsgAnchor = ({
         atom.buttonTitle = _(VIEW_POST);
         atom.buttonLink = buttonLink;
       });
+      onModalClose();
     },
     [
       _,
       getSuccessModalContent,
       offChainProjectId,
+      onModalClose,
       projectId,
       projectName,
       projectSlug,

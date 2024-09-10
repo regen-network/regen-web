@@ -10,8 +10,9 @@ import { Body, Title } from 'web-components/src/components/typography';
 
 import { Wallet } from 'lib/wallet/wallet';
 
+import { PaymentOptionsType } from 'features/marketplace/BuyCredits/BuyCredits.types';
+
 import { PaymentInfoFormSchemaType } from './PaymentInfoForm.schema';
-import { PaymentOptionsType } from './PaymentInfoForm.types';
 
 export type CustomerInfoProps = {
   paymentOption: PaymentOptionsType;

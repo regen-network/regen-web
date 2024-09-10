@@ -1,8 +1,9 @@
-import { lazy, Suspense, useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useMemo, useRef, useState } from 'react';
 import type { MapRef } from 'react-map-gl';
 import { CircularProgress, useMediaQuery, useTheme } from '@mui/material';
 import bbox from '@turf/bbox';
 import { Point } from 'geojson';
+import { VideoIcon } from 'web-components/src/components/icons/VideoIcon';
 
 import { cn } from '../../../utils/styles/cn';
 import { AudioFileIcon } from '../../icons/AudioFileIcon';
@@ -96,6 +97,27 @@ const PostFilesPublic = ({
     }
   };
 
+  const handleMarkerClick = useCallback(
+    (geometry: Point, group: PostFile[]): void => {
+      const newSelectedUrl = group[0].url;
+      setSelectedLocation(geometry);
+      setSelectedUrl(newSelectedUrl);
+
+      if (newSelectedUrl !== selectedUrl) {
+        setIsFilesWindowOpen(true);
+      } else {
+        if (isFilesWindowOpen) {
+          setSelectedUrl(undefined);
+          setSelectedLocation(undefined);
+          setIsFilesWindowOpen(false);
+        } else {
+          setIsFilesWindowOpen(true);
+        }
+      }
+    },
+    [selectedUrl, isFilesWindowOpen],
+  );
+
   return (
     <div className={cn(styles.map, 'h-[600px] sm:h-[550px]')}>
       <Suspense fallback={<CircularProgress color="secondary" />}>
@@ -139,16 +161,7 @@ const PostFilesPublic = ({
                   longitude={geometry.coordinates[0]}
                 >
                   <div
-                    onClick={() => {
-                      setSelectedLocation(geometry);
-                      // Set first file of group as selected
-                      setSelectedUrl(group[0].url);
-                      if (group[0].url !== selectedUrl) {
-                        setIsFilesWindowOpen(true);
-                      } else {
-                        setIsFilesWindowOpen(current => !current);
-                      }
-                    }}
+                    onClick={() => handleMarkerClick(geometry, group)}
                     className={cn(
                       'transition duration-500 cursor-pointer flex items-center justify-center border border-solid rounded-[30px] h-30',
                       selectedLocation === geometry
@@ -176,7 +189,7 @@ const PostFilesPublic = ({
                       (isImage(mimeType) ? (
                         <ImageIcon width="24" height="24" />
                       ) : isVideo(mimeType) ? (
-                        <></>
+                        <VideoIcon width="24" height="24" />
                       ) : isAudio(mimeType) ? (
                         <AudioFileIcon width="24" height="24" />
                       ) : isPdf(mimeType) ? (

@@ -1,6 +1,6 @@
 export const PauseIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 70 70" {...props}>
-    <g id="Pause button">
+    <g id="Pause icon">
       <circle
         id="Ellipse 3"
         cx="35"

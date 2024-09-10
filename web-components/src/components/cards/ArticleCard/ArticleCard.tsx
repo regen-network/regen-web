@@ -56,7 +56,7 @@ export default function ArticleCard({
       elevation={1}
       draftText={draftText}
     >
-      {play && <PlayPauseButton playing={false} />}
+      {play && <PlayPauseButton />}
       <Body size="sm" sx={{ flex: '1 0 auto', py: [2.5, 2], px: [4, 5] }}>
         <Box component="span" sx={{ fontWeight: 'bold' }}>
           {author}

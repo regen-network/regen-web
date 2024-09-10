@@ -137,7 +137,7 @@ export const PostForm = ({
         mimeType: '',
       });
     }
-    if (value) setValue(`files.${fieldIndex}.url`, encodeURI(value));
+    if (value) setValue(`files.${fieldIndex}.url`, decodeURI(value));
     if (mimeType) setValue(`files.${fieldIndex}.mimeType`, mimeType);
     if (name) setValue(`files.${fieldIndex}.name`, name);
     if (iri) setValue(`files.${fieldIndex}.iri`, iri);

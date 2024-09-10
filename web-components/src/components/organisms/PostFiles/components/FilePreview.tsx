@@ -52,7 +52,7 @@ const FilePreview = ({
       className={className}
       sx={theme => ({
         position: 'relative',
-        background: `${image ? `url(${url})` : `${theme.palette.grey[100]}`}`,
+        background: `${image ? `url("${url}")` : `${theme.palette.grey[100]}`}`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',

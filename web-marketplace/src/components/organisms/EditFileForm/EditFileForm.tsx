@@ -80,7 +80,7 @@ export const EditFileForm = ({
           className="block m-auto pb-40 sm:pb-50"
           width="180px"
           height="100%"
-          src={url}
+          src={decodeURI(url)}
           alt="preview"
         />
       )}

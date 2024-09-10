@@ -4,6 +4,7 @@ import { loadStripe, StripeElementsOptionsMode } from '@stripe/stripe-js';
 
 import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
 
+import { PaymentOptionsType } from 'features/marketplace/BuyCredits/BuyCredits.types';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
@@ -16,7 +17,6 @@ import {
   paymentInfoFormSchema,
   PaymentInfoFormSchemaType,
 } from './PaymentInfoForm.schema';
-import { PaymentOptionsType } from './PaymentInfoForm.types';
 
 type PaymentInfoFormProps = {
   paymentOption: PaymentOptionsType;

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { PaymentOptionsType } from './PaymentInfoForm.types';
+import { PaymentOptionsType } from 'features/marketplace/BuyCredits/BuyCredits.types';
 
 export const paymentInfoFormSchema = (paymentOption: PaymentOptionsType) =>
   z.object({

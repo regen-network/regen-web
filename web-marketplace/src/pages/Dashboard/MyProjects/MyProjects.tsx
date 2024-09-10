@@ -23,10 +23,11 @@ import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
 import {
   CREATE_POST,
-  CREATE_POST_DISABLED_TOOLTIP,
+  CREATE_POST_DISABLED_TOOLTIP_TEXT,
   DRAFT_ID,
   MY_PROJECTS_BUTTON_TEXT,
   MY_PROJECTS_EMPTY_TITLE,
+  NOT_SUPPORTED_TOOLTIP_TEXT,
 } from './MyProjects.constants';
 import {
   getDefaultProject,
@@ -134,7 +135,12 @@ const MyProjects = (): JSX.Element => {
                     }}
                     track={track}
                     pathname={location.pathname}
-                    tooltipText={_(CREATE_POST_DISABLED_TOOLTIP)}
+                    createPostTooltipText={
+                      loginDisabled
+                        ? _(NOT_SUPPORTED_TOOLTIP_TEXT)
+                        : _(CREATE_POST_DISABLED_TOOLTIP_TEXT)
+                    }
+                    editProjectTooltipText={_(NOT_SUPPORTED_TOOLTIP_TEXT)}
                   />
                 </WithLoader>
               </Grid>

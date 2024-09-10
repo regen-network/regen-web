@@ -88,7 +88,7 @@ const CustomTooltip = withStyles(Tooltip, (theme: Theme) => ({
 
 const RegenTooltip = (props: TooltipProps): JSX.Element =>
   props.title ? (
-    <CustomTooltip enterTouchDelay={100} {...props} />
+    <CustomTooltip enterTouchDelay={100} leaveTouchDelay={5000} {...props} />
   ) : (
     <>{props.children}</>
   );

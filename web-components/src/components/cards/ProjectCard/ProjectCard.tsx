@@ -63,7 +63,8 @@ export interface ProjectCardProps extends MediaCardProps {
   offChain?: boolean;
   asAdmin?: boolean;
   adminPrompt?: SanityBlockContent;
-  tooltipText?: string;
+  createPostTooltipText?: string;
+  editProjectTooltipText?: string;
 }
 
 export function ProjectCard({
@@ -96,7 +97,8 @@ export function ProjectCard({
   offChain,
   asAdmin,
   adminPrompt,
-  tooltipText,
+  createPostTooltipText,
+  editProjectTooltipText,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
@@ -137,6 +139,11 @@ export function ProjectCard({
     purchaseInfo?.vintageMetadata?.[
       'https://schema.regen.network#additionalCertifications'
     ]?.['@list'];
+
+  const showTwoButons =
+    containedButton &&
+    onContainedButtonClick &&
+    (onButtonClick || isPrefinanceProject || offChain);
 
   return (
     <MediaCard
@@ -274,23 +281,52 @@ export function ProjectCard({
                     )}
                   </div>
                 )}
-                <div className="flex gap-10">
-                  {containedButton && onContainedButtonClick && (
-                    <ContainedButton
-                      size="small"
-                      startIcon={containedButton.startIcon}
-                      disabled={containedButton.disabled}
-                      sx={{ width: '100%' }}
-                      className={containedButton.className}
-                      onClick={onContainedButtonClick}
-                    >
-                      {containedButton.text}
-                    </ContainedButton>
-                  )}
+                <div
+                  className={`grid gap-10 ${
+                    showTwoButons ? 'grid-cols-2' : 'grid-cols-1'
+                  }`}
+                >
+                  {containedButton &&
+                    onContainedButtonClick &&
+                    (containedButton.disabled && editProjectTooltipText ? (
+                      <InfoTooltip
+                        arrow
+                        title={editProjectTooltipText}
+                        placement="top"
+                      >
+                        <div>
+                          <ContainedButton
+                            size="small"
+                            startIcon={containedButton.startIcon}
+                            disabled={containedButton.disabled}
+                            sx={{ width: '100%' }}
+                            className={containedButton.className}
+                            onClick={onContainedButtonClick}
+                          >
+                            {containedButton.text}
+                          </ContainedButton>
+                        </div>
+                      </InfoTooltip>
+                    ) : (
+                      <ContainedButton
+                        size="small"
+                        startIcon={containedButton.startIcon}
+                        disabled={containedButton.disabled}
+                        sx={{ width: '100%' }}
+                        className={containedButton.className}
+                        onClick={onContainedButtonClick}
+                      >
+                        {containedButton.text}
+                      </ContainedButton>
+                    ))}
                   {(onButtonClick || isPrefinanceProject || offChain) &&
-                    (isButtonDisabled && tooltipText ? (
-                      <InfoTooltip arrow title={tooltipText} placement="top">
-                        <div className="inline-flex w-full">
+                    (isButtonDisabled && createPostTooltipText ? (
+                      <InfoTooltip
+                        arrow
+                        title={createPostTooltipText}
+                        placement="top"
+                      >
+                        <div>
                           <ProjectCardButton
                             id={id}
                             name={name}
@@ -305,7 +341,7 @@ export function ProjectCard({
                             isPrefinanceProject={isPrefinanceProject}
                             buttonText={buttonText}
                             buttonStartIcon={buttonStartIcon}
-                            buttonClassName={buttonClassName}
+                            buttonClassName={cn(buttonClassName, 'h-full')}
                             isButtonDisabled={isButtonDisabled}
                             isSoldOut={isSoldOut}
                           />

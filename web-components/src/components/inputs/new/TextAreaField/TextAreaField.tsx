@@ -52,6 +52,7 @@ export const TextAreaField = forwardRef<HTMLInputElement, TextareaFieldProps>(
       error={error}
       helperText={helperText}
       sx={sx}
+      required={inputProps.required}
     >
       <>
         <Input

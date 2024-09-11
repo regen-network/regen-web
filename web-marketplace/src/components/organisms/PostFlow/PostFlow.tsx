@@ -21,6 +21,7 @@ import { apiServerUrl } from 'lib/env';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getPostQuery } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery';
+import { GET_POST_QUERY_KEY } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.constants';
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -112,6 +113,7 @@ export const PostFlow = ({
             };
           });
         try {
+          console.log(data.published);
           await postData({
             url: `${apiServerUrl}/marketplace/v1/posts${
               draftPostIri ? `/${draftPostIri}` : ''
@@ -131,7 +133,13 @@ export const PostFlow = ({
             token,
             retryCsrfRequest,
             onSuccess: async res => {
-              if (res.iri) setIri(res.iri);
+              if (res.iri) {
+                setIri(res.iri);
+                await reactQueryClient.invalidateQueries({
+                  queryKey: [GET_POST_QUERY_KEY, res.iri, ''],
+                  refetchType: 'all',
+                });
+              }
 
               await reactQueryClient.invalidateQueries({
                 queryKey: getPostsQueryKey({
@@ -166,7 +174,7 @@ export const PostFlow = ({
 
   const hasAddress =
     !!wallet?.address && activeAccount?.addr === wallet.address;
-
+  console.log('createdPostData', createdPostData);
   useEffect(() => {
     if (iri && createdPostData) {
       setIsFormModalOpen(false);

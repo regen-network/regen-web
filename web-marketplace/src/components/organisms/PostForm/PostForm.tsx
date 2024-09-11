@@ -224,20 +224,25 @@ export const PostForm = ({
         <Trans>New post</Trans>
       </Title>
       <TextField
+        required
         type="text"
         label={_(msg`Title`)}
         description={_(msg`Summarize this update.`)}
         className="mb-40 sm:mb-50"
+        error={!!errors.title}
         helperText={
-          <TextAreaFieldChartCounter
-            value={title}
-            charLimit={POST_MAX_TITLE_LENGTH}
-            sx={{ mb: { xs: 0, sm: 0 } }}
-          />
+          errors.title?.message || (
+            <TextAreaFieldChartCounter
+              value={title}
+              charLimit={POST_MAX_TITLE_LENGTH}
+              sx={{ mb: { xs: 0, sm: 0 } }}
+            />
+          )
         }
         {...form.register('title')}
       />
       <TextAreaField
+        required
         type="text"
         label={_(msg`Comment`)}
         description={_(msg`Write a short comment or longer project update. `)}
@@ -245,6 +250,8 @@ export const PostForm = ({
         minRows={4}
         multiline
         className={cn(textAreaClasses.field, 'mt-0')}
+        error={!!errors.comment}
+        helperText={errors.comment?.message}
         {...form.register('comment')}
       />
       <ReorderFields
@@ -319,6 +326,7 @@ export const PostForm = ({
 
       <div className="flex flex-col mb-40 sm:mb-50">
         <RadioGroup
+          required
           label={
             <span className="inline-flex items-center">
               <LockIcon className="mr-10" />
@@ -326,6 +334,8 @@ export const PostForm = ({
             </span>
           }
           description={_(POST_PRIVACY_DESCRIPTION)}
+          error={!!errors.privacyType}
+          helperText={errors.privacyType?.message}
         >
           <>
             <Radio

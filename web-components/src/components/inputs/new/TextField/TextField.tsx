@@ -22,6 +22,7 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
       customInputProps = {},
       sx = [],
       labelClassName,
+      required,
       ...props
     },
     ref,
@@ -67,6 +68,7 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
                   }}
                 >
                   {label}
+                  {required ? '*' : ''}
                 </Box>
               )}
               {description && (

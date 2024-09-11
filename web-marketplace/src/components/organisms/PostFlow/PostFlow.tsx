@@ -203,7 +203,7 @@ export const PostFlow = ({
     draftPostIri,
     fetchMsgAnchor,
     hasAddress,
-    initialValues.iri,
+    initialValues?.iri,
     iri,
     isFetching,
     navigate,

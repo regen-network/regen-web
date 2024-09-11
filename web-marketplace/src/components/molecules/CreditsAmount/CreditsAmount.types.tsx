@@ -9,7 +9,8 @@ import {
   Currency,
 } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
-export type PaymentOptionsType = 'card' | 'crypto';
+import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
+
 export interface CreditsAmountProps {
   creditDetails: CreditDetails[];
   paymentOption: PaymentOptionsType;

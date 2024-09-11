@@ -1,21 +1,23 @@
 import { QueryObserverOptions } from '@tanstack/react-query';
 import { JsonLdDocument } from 'jsonld';
 
+import { FileLocationType } from 'web-components/src/components/organisms/PostFiles/PostFiles';
 import { PostPrivacyType } from 'web-components/src/components/organisms/PostFiles/PostFiles.types';
 
 import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 
 export type PostFile = {
   iri: string;
-  name?: string;
+  name: string;
   description?: string;
-  location?: { wkt: string };
+  location: { wkt: string };
+  locationType: FileLocationType;
   credit?: string;
 };
 
 export type PostContents = JsonLdDocument & {
-  title: string;
-  comment: string;
+  title?: string;
+  comment?: string;
   files?: Array<PostFile>;
 };
 
@@ -25,7 +27,8 @@ export type Post = {
   creatorAccountId: string;
   projectId: string;
   privacy: PostPrivacyType;
-  contents: PostContents;
+  contents?: PostContents;
+  published?: boolean;
   filesUrls:
     | {
         [iri: string]: string;

@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { ContentHash_Graph } from '@regen-network/api/lib/generated/regen/data/v1/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
@@ -7,9 +9,11 @@ import { postData } from 'utils/fetch/postData';
 
 import Modal from 'web-components/src/components/modal';
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 import { deleteImage } from 'web-components/src/utils/s3';
 
 import { apiUri } from 'lib/apiUri';
+import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
@@ -17,6 +21,7 @@ import { apiServerUrl } from 'lib/env';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getPostQuery } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery';
+import { GET_POST_QUERY_KEY } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.constants';
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -26,7 +31,11 @@ import PostForm from '../PostForm';
 import { PostFormSchemaType } from '../PostForm/PostForm.schema';
 import { useFetchMsgAnchor } from './hooks/useFetchMsgAnchor';
 import { useSign } from './hooks/useSign';
-import { basePostContent } from './PostFlow.constants';
+import {
+  basePostContent,
+  DRAFT_CREATED,
+  DRAFT_SAVED,
+} from './PostFlow.constants';
 import { SignModal } from './PostFlow.SignModal';
 
 type Props = {
@@ -37,6 +46,8 @@ type Props = {
   projectName?: string;
   projectSlug?: string | null;
   offChainProjectId?: string;
+  setDraftPost?: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
+  scrollIntoDataStream?: () => void;
 };
 
 export const PostFlow = ({
@@ -47,6 +58,8 @@ export const PostFlow = ({
   projectName,
   projectSlug,
   offChainProjectId: _offChainProjectId,
+  setDraftPost,
+  scrollIntoDataStream,
 }: Props) => {
   const fileNamesToDeleteRef = useRef<string[]>([]);
   const retryCsrfRequest = useRetryCsrfRequest();
@@ -60,12 +73,14 @@ export const PostFlow = ({
   const { activeAccount } = useAuth();
   const [isFormModalOpen, setIsFormModalOpen] = useState(true);
   const [iri, setIri] = useState<string | undefined>();
-  const { data: createdPostData } = useQuery(
+  const { data: createdPostData, isFetching } = useQuery(
     getPostQuery({
       iri,
       enabled: !!iri,
     }),
   );
+  const { _ } = useLingui();
+  const navigate = useNavigate();
 
   const [offChainProjectId, setOffChainProjectId] =
     useState(_offChainProjectId);
@@ -76,14 +91,33 @@ export const PostFlow = ({
     subFolder: '/posts',
   });
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const setBannerText = useSetAtom(bannerTextAtom);
+  const draftPostIri = initialValues?.iri;
 
   const onSubmit = useCallback(
     async (data: PostFormSchemaType) => {
       if (token) {
-        const files = data.files?.filter(file => file.url !== DEFAULT);
+        const files = data.files
+          ?.filter(file => file.url !== DEFAULT)
+          ?.map(file => {
+            const geocodePoint = file.location.geometry.coordinates;
+            return {
+              iri: file.iri,
+              name: file.name,
+              description: file.description,
+              credit: file.credit,
+              locationType: file.locationType,
+              location: {
+                wkt: `POINT(${geocodePoint[0]} ${geocodePoint[1]})`,
+              },
+            };
+          });
         try {
           await postData({
-            url: `${apiServerUrl}/marketplace/v1/posts`,
+            url: `${apiServerUrl}/marketplace/v1/posts${
+              draftPostIri ? `/${draftPostIri}` : ''
+            }`,
+            method: draftPostIri ? 'PUT' : 'POST',
             data: {
               projectId: offChainProjectId,
               privacy: data.privacyType,
@@ -91,25 +125,21 @@ export const PostFlow = ({
                 ...basePostContent,
                 title: data.title,
                 comment: data.comment,
-                files: files?.map(file => {
-                  const geocodePoint = file.location.geometry.coordinates;
-                  return {
-                    iri: file.iri,
-                    name: file.name,
-                    description: file.description,
-                    credit: file.credit,
-                    locationType: file.locationType,
-                    location: {
-                      wkt: `POINT(${geocodePoint[0]} ${geocodePoint[1]})`,
-                    },
-                  };
-                }),
+                files,
               },
+              published: data.published,
             },
             token,
             retryCsrfRequest,
             onSuccess: async res => {
-              setIri(res.iri);
+              if (res.iri) {
+                setIri(res.iri);
+                await reactQueryClient.invalidateQueries({
+                  queryKey: [GET_POST_QUERY_KEY, res.iri, ''],
+                  refetchType: 'all',
+                });
+              }
+
               await reactQueryClient.invalidateQueries({
                 queryKey: getPostsQueryKey({
                   projectId: offChainProjectId,
@@ -125,6 +155,7 @@ export const PostFlow = ({
     },
     [
       token,
+      draftPostIri,
       offChainProjectId,
       retryCsrfRequest,
       reactQueryClient,
@@ -140,25 +171,50 @@ export const PostFlow = ({
     onModalClose,
   });
 
+  const hasAddress =
+    !!wallet?.address && activeAccount?.addr === wallet.address;
   useEffect(() => {
-    if (iri && createdPostData) {
+    if (iri && createdPostData && !isFetching) {
       setIsFormModalOpen(false);
-
-      if (wallet?.address && activeAccount?.addr === wallet.address) {
-        setIsSignModalOpen(true);
+      if (createdPostData.published) {
+        if (hasAddress) {
+          setIsSignModalOpen(true);
+        } else {
+          fetchMsgAnchor({ iri, createdPostData });
+          onModalClose();
+        }
       } else {
-        fetchMsgAnchor({ iri, createdPostData });
+        setBannerText(draftPostIri ? _(DRAFT_SAVED) : _(DRAFT_CREATED));
+        if (draftPostIri && setDraftPost) {
+          setDraftPost(undefined);
+        }
         onModalClose();
+        navigate(
+          `/project/${
+            projectSlug ?? offChainProjectId ?? projectId
+          }#data-stream`,
+        );
+        scrollIntoDataStream && scrollIntoDataStream();
       }
     }
   }, [
-    activeAccount?.addr,
+    _,
     createdPostData,
+    draftPostIri,
     fetchMsgAnchor,
+    hasAddress,
+    initialValues?.iri,
     iri,
+    isFetching,
+    navigate,
+    offChainProjectId,
     onModalClose,
+    projectId,
+    projectSlug,
+    scrollIntoDataStream,
+    setBannerText,
+    setDraftPost,
     setProcessingModalAtom,
-    wallet?.address,
   ]);
 
   const onClose = useCallback(
@@ -180,9 +236,10 @@ export const PostFlow = ({
       );
       fileNamesToDeleteRef.current = [];
 
+      setDraftPost && setDraftPost(undefined);
       onModalClose();
     },
-    [offChainProjectId, onModalClose],
+    [offChainProjectId, onModalClose, setDraftPost],
   );
   const sign = useSign({
     projectSlug,
@@ -213,6 +270,8 @@ export const PostFlow = ({
       </Modal>
       <SignModal
         iri={iri}
+        published={createdPostData?.published}
+        hasAddress={hasAddress}
         open={isSignModalOpen}
         onClose={() => {
           setIsSignModalOpen(false);

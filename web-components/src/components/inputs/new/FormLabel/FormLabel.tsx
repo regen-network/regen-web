@@ -12,6 +12,7 @@ interface Props {
   optional?: boolean | string;
   label?: ReactNode;
   onExampleClick?: () => void;
+  required?: boolean;
 }
 
 /**
@@ -23,6 +24,7 @@ export default function FormLabel({
   disabled,
   className,
   optional,
+  required,
   onExampleClick,
 }: Props): JSX.Element {
   return (
@@ -30,6 +32,7 @@ export default function FormLabel({
       {label && (
         <ControlledFormLabel optional={optional} disabled={disabled}>
           {label}
+          {required ? '*' : ''}
         </ControlledFormLabel>
       )}
       {description && (

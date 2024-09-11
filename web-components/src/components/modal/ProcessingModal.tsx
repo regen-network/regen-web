@@ -40,7 +40,7 @@ const ProcessingModal: React.FC<React.PropsWithChildren<ProcessingModalProps>> =
           Please wait while transaction processes
         </Title>
         <Body size="lg" sx={{ mx: 4, mb: [8, 0] }}>
-          This may take up to 10 minutes.
+          This may take up to 15 seconds.
         </Body>
       </Modal>
     );

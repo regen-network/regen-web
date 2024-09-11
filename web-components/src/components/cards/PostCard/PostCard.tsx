@@ -13,25 +13,28 @@ import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import Card from '../Card';
 import { SIGNED_BY } from './PostCard.constants';
-import PrivateBadge from './PostCard.PrivateBadge';
+import { DraftBadge } from './PostCard.DraftBadge';
+import { PrivateBadge } from './PostCard.PrivateBadge';
 import ActionButton from './PostCardActionButton';
 
 interface PostCardProps {
   title: string;
-  comment: string;
+  comment?: string;
   imgSrc?: string;
   author: User;
   signers?: Array<User>;
   privacyLabel?: string;
   isAdmin?: boolean;
   numberOfFiles?: number;
-  handleClickShare: (ev: React.MouseEvent) => void;
+  sharePublicLink: (ev: React.MouseEvent) => void;
   sharePrivateLink: (ev: React.MouseEvent) => void;
   onDelete: (ev: React.MouseEvent) => void;
+  onEditDraft?: (ev: React.MouseEvent) => void;
   onClick: () => void;
   publicPost?: boolean;
   file?: FileToPreview;
   preview?: string;
+  draftLabel?: string;
 }
 
 export default function PostCard({
@@ -44,11 +47,13 @@ export default function PostCard({
   privacyLabel,
   isAdmin,
   numberOfFiles,
-  handleClickShare,
+  sharePublicLink,
   sharePrivateLink,
   onClick,
   publicPost,
   onDelete,
+  onEditDraft,
+  draftLabel,
 }: PostCardProps): JSX.Element {
   const hasFile = !!file;
   const theme = useTheme();
@@ -62,15 +67,21 @@ export default function PostCard({
       onClick={onClick}
     >
       <ActionButton
+        draft={!!draftLabel}
         isAdmin={isAdmin}
-        onClickShare={handleClickShare}
+        sharePublicLink={sharePublicLink}
         sharePrivateLink={sharePrivateLink}
         onDelete={onDelete}
+        onEditDraft={onEditDraft}
         publicPost={publicPost}
       />
-      {!hasFile && privacyLabel && (
-        <PrivateBadge hasFile={hasFile} label={privacyLabel} />
+      {!hasFile && (
+        <div className="absolute lg:right-[90px] top-[18px] lg:top-[26px]">
+          {!draftLabel && privacyLabel && <PrivateBadge label={privacyLabel} />}
+          {draftLabel && <DraftBadge label={draftLabel} />}
+        </div>
       )}
+
       <Grid
         container
         sx={{
@@ -102,21 +113,23 @@ export default function PostCard({
               timestamp: 'text-xs',
             }}
           />
-          <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
-            <Body
-              onClick={e => e.stopPropagation()}
-              size="md"
-              sx={{ pb: 1.5 }}
-              className="line-clamp-2 overflow-hidden"
-            >
-              <Linkify
-                // eslint-disable-next-line lingui/no-unlocalized-strings
-                options={{ target: '_blank', rel: 'noopener noreferrer' }}
+          {comment && (
+            <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
+              <Body
+                onClick={e => e.stopPropagation()}
+                size="md"
+                sx={{ pb: 1.5 }}
+                className="line-clamp-2 overflow-hidden"
               >
-                {comment}
-              </Linkify>
-            </Body>
-          </Box>
+                <Linkify
+                  // eslint-disable-next-line lingui/no-unlocalized-strings
+                  options={{ target: '_blank', rel: 'noopener noreferrer' }}
+                >
+                  {comment}
+                </Linkify>
+              </Body>
+            </Box>
+          )}
           {signers && signers.length > 0 && (
             <Box sx={{ display: 'flex', alignItems: 'center', mt: 3.5 }}>
               <VerifiedIcon color="white" hasFill />
@@ -175,9 +188,12 @@ export default function PostCard({
                 position: 'relative',
               })}
             >
-              {hasFile && privacyLabel && (
-                <PrivateBadge hasFile={hasFile} label={privacyLabel} />
-              )}
+              <div className="absolute z-[1] left-[12px] top-[12px]">
+                {!draftLabel && privacyLabel && (
+                  <PrivateBadge label={privacyLabel} />
+                )}
+                {draftLabel && <DraftBadge label={draftLabel} />}
+              </div>
               {file && (
                 <FilePreview
                   className="w-[100%] h-[100%] group-hover:scale-x-105 group-hover:scale-y-105 transition-all duration-500"

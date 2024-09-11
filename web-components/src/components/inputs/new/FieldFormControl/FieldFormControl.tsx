@@ -23,6 +23,7 @@ export interface FieldFormControlProps extends DefaultStyleProps {
   label?: ReactNode;
   onExampleClick?: () => void;
   error?: boolean;
+  required?: boolean;
   helperText?: string;
 }
 
@@ -42,6 +43,7 @@ export default function FieldFormControl({
   forceDefaultStyle = false,
   error = false,
   helperText,
+  required,
 }: FieldFormControlProps): JSX.Element {
   const { classes: styles, cx } = useFieldFormControlStyles({
     disabled,
@@ -65,6 +67,7 @@ export default function FieldFormControl({
           description={description}
           onExampleClick={onExampleClick}
           disabled={disabled}
+          required={required}
         />
       )}
       {children}

@@ -13,3 +13,5 @@ export const POST_IS_PRIVATE = msg`Post is private`;
 export const PREV = msg`prev`;
 export const NEXT = msg`next`;
 export const POST_IS_DELETED = msg`Post is deleted`;
+export const DRAFT = msg`Draft`;
+export const UNTITLED = msg`Untitled`;

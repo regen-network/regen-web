@@ -196,7 +196,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
 
       if (result || uploadOnAdd) {
         const remainingFiles = selectedFiles.slice(1);
-        const lastInMultiUpload = remainingFiles.length === 0;
+        const lastInMultiUpload = !isEdit && remainingFiles.length === 0;
         setValue({
           value: result,
           mimeType: currentFile?.type,

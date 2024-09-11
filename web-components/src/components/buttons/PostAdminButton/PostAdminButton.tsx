@@ -3,24 +3,29 @@ import { Menu } from '@mui/material';
 
 import {
   DeleteMenuItem,
+  EditDraftMenuItem,
   SharePrivateMenuItem,
   SharePublicMenuItem,
 } from '../../cards/PostCard/PostCard.MenuItems';
 import { HorizontalDotsIcon } from '../../icons/HorizontalDotsIcon';
 
-type Props = {
+export type PostAdminButtonProps = {
   publicPost?: boolean;
+  draft?: boolean;
   sharePublicLink: (ev: React.MouseEvent) => void;
   sharePrivateLink: (ev: React.MouseEvent) => void;
   onDelete: (ev: React.MouseEvent) => void;
+  onEditDraft?: (ev: React.MouseEvent) => void;
 };
 
 export const PostAdminButton = ({
   publicPost,
+  draft,
   sharePublicLink,
   sharePrivateLink,
   onDelete,
-}: Props) => {
+  onEditDraft,
+}: PostAdminButtonProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -31,6 +36,7 @@ export const PostAdminButton = ({
     event.stopPropagation();
     setAnchorEl(null);
   };
+
   return (
     <>
       <div
@@ -64,12 +70,16 @@ export const PostAdminButton = ({
             'rounded-sm py-10 border border-solid border-grey-300 shadow-[0_0_4px_0_rgba(0,0,0,0.05)]',
         }}
       >
-        {/* <EditMenuItem /> */}
-        <SharePublicMenuItem
-          onClick={sharePublicLink}
-          publicPost={publicPost}
-        />
-        {!publicPost && <SharePrivateMenuItem onClick={sharePrivateLink} />}
+        {draft && onEditDraft && <EditDraftMenuItem onClick={onEditDraft} />}
+        {!draft && (
+          <SharePublicMenuItem
+            onClick={sharePublicLink}
+            publicPost={publicPost}
+          />
+        )}
+        {!publicPost && !draft && (
+          <SharePrivateMenuItem onClick={sharePrivateLink} />
+        )}
         <DeleteMenuItem onClick={onDelete} />
       </Menu>
     </>

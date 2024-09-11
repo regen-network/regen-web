@@ -24,7 +24,6 @@ import {
   FILE_LOCATION_DESCRIPTION,
   FILE_MAX_DESCRIPTION_LENGTH,
 } from './EditFileForm.constants';
-import {} from './EditFileForm.types';
 
 export interface Props {
   onSubmit: () => Promise<void>;

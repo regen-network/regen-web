@@ -8,6 +8,7 @@ import { PostFilesPublic } from './PostFiles.Public';
 import { FilesPreviews, PostPrivacyType } from './PostFiles.types';
 import { parseFile } from './PostFiles.utils';
 
+export type FileLocationType = 'none' | 'file' | 'custom';
 export type PostFile = {
   iri: string;
   url?: string;
@@ -15,6 +16,7 @@ export type PostFile = {
   description?: string;
   credit?: string;
   location?: Point;
+  locationType: FileLocationType;
   mimeType?: string;
 };
 export type PostFilesProps = {

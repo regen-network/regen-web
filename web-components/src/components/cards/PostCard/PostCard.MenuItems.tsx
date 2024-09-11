@@ -12,20 +12,20 @@ import TrashIcon from '../../icons/TrashIcon';
 import { Body } from '../../typography';
 import {
   DELETE,
-  EDIT,
+  EDIT_DRAFT,
   PRESERVES_PRIVACY,
   PRIVATE_VISIBLE,
   SHARE_PUBLIC_LINK,
   SHARE_SECRET_LINK,
 } from './PostCard.constants';
 
-export const EditMenuItem = (props: MenuItemProps): JSX.Element => {
+export const EditDraftMenuItem = (props: MenuItemProps): JSX.Element => {
   return (
     <MenuItem {...props} classes={{ root: 'px-[25px]' }}>
       <ListItemIcon>
         <EditIcon sx={{ height: '24px', width: '24px', p: '2px' }} />
       </ListItemIcon>
-      <ListItemText sx={{ py: '9px' }}>{EDIT}</ListItemText>
+      <ListItemText sx={{ py: '9px' }}>{EDIT_DRAFT}</ListItemText>
     </MenuItem>
   );
 };
@@ -67,7 +67,7 @@ export const DeleteMenuItem = (props: MenuItemProps): JSX.Element => (
 );
 
 export const menuItems: ((props: MenuItemProps) => JSX.Element)[] = [
-  EditMenuItem,
+  EditDraftMenuItem,
   SharePublicMenuItem,
   SharePrivateMenuItem,
   DeleteMenuItem,

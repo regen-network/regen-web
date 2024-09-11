@@ -167,7 +167,10 @@ export const UserAccountSettings = ({
                 recipient of the retired blockchain credits. Please do not send
                 funds or tradable credits to this address, as you will not have
                 the ability to initiate transactions from this account.
-                <Link className="inline ml-5" href="http://google.com">
+                <Link
+                  className="inline ml-5"
+                  href="https://guides.regen.network/guides/regen-marketplace-buyers-guides/ecocredits/buy-ecocredits"
+                >
                   Learn more»
                 </Link>
               </Trans>

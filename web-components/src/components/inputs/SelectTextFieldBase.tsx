@@ -26,6 +26,7 @@ export type SelectTextFieldProps = DefaultStyleProps &
   SelectProps & {
     options?: Option[];
     label?: string;
+    emptyOptionText: string;
   };
 
 interface StyleProps {
@@ -37,6 +38,7 @@ export default function SelectTextFieldBase({
   disabled,
   label,
   defaultStyle,
+  emptyOptionText,
   ...selectProps
 }: SelectTextFieldProps): JSX.Element {
   const { classes: styles } = useStyles({ defaultStyle: !!defaultStyle });
@@ -64,7 +66,7 @@ export default function SelectTextFieldBase({
           </option>
         ))
       ) : (
-        <option key="loading">No options available</option>
+        <option key="loading">{emptyOptionText}</option>
       )}
     </TextFieldBase>
   );

@@ -69,7 +69,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-export interface CreditRetireProps extends CreditRetireFieldsProps {}
+export interface CreditRetireProps extends CreditRetireFieldsProps {
+  maxLabel: string;
+  availableLabel: string;
+}
 
 // Input (args)
 interface FormProps extends CreditRetireProps {
@@ -77,6 +80,8 @@ interface FormProps extends CreditRetireProps {
   submitErrorText: string;
   retirementInfoText: string;
   stateProvinceError: string;
+  maxLabel: string;
+  availableLabel: string;
   onSubmit: (values: RetireFormValues) => void;
   onClose: RegenModalProps['onClose'];
 }
@@ -224,7 +229,11 @@ export const BottomCreditRetireFields: React.FC<
               />
             }
           >
-            <LocationCountryField exclude name={`${arrayPrefix}country`} />
+            <LocationCountryField
+              exclude
+              name={`${arrayPrefix}country`}
+              label={countryLabel}
+            />
           </Suspense>
         </Grid>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
@@ -238,6 +247,7 @@ export const BottomCreditRetireFields: React.FC<
             }
           >
             <LocationStateField
+              label={stateLabel}
               country={country}
               optional={!postalCode}
               name={`${arrayPrefix}stateProvince`}
@@ -264,6 +274,8 @@ export const CreditRetireFields = ({
   arrayIndex,
   amountRetiredLabel,
   bottomTextMapping,
+  maxLabel,
+  availableLabel,
 }: CreditRetireProps): JSX.Element => {
   return (
     <>
@@ -272,6 +284,8 @@ export const CreditRetireFields = ({
         label={amountRetiredLabel}
         availableAmount={availableTradableAmount}
         denom={batchDenom}
+        maxLabel={maxLabel}
+        availableLabel={availableLabel}
       />
       <BottomCreditRetireFields
         mapboxToken={mapboxToken}
@@ -339,6 +353,8 @@ const CreditRetireForm: React.FC<FormProps> = ({
   bottomTextMapping,
   retirementInfoText,
   stateProvinceError,
+  maxLabel,
+  availableLabel,
   onClose,
   onSubmit,
 }) => {
@@ -368,6 +384,8 @@ const CreditRetireForm: React.FC<FormProps> = ({
             retirementInfoText={retirementInfoText}
           />
           <CreditRetireFields
+            maxLabel={maxLabel}
+            availableLabel={availableLabel}
             amountRetiredLabel={amountRetiredLabel}
             availableTradableAmount={availableTradableAmount}
             batchDenom={batchDenom}

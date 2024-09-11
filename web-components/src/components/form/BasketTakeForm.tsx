@@ -76,6 +76,8 @@ export interface BasketTakeProps extends BottomCreditRetireFieldsProps {
 
 // Input (args)
 interface FormProps extends BasketTakeProps {
+  maxLabel: string;
+  availableLabel: string;
   onClose: RegenModalProps['onClose'];
 }
 
@@ -94,6 +96,8 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   submitErrorText,
   retirementInfoText,
   bottomTextMapping,
+  maxLabel,
+  availableLabel,
   onClose,
   onSubmit,
 }) => {
@@ -158,6 +162,8 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
         <Form>
           <>
             <AmountField
+              maxLabel={maxLabel}
+              availableLabel={availableLabel}
               name="amount"
               label={amountLabel}
               availableAmount={balance}

@@ -36,7 +36,11 @@ import {
 
 import { useLedger } from 'ledger';
 import { client } from 'lib/clients/sanity';
-import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
+import {
+  COUNTRY_LABEL,
+  STATE_LABEL,
+  SUBMIT_ERRORS,
+} from 'lib/constants/shared.constants';
 import { microToDenom } from 'lib/denom.utils';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getBuyModalQuery } from 'lib/queries/react-query/sanity/getBuyModalQuery/getBuyModalQuery';
@@ -542,7 +546,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                               />
                             }
                           >
-                            <LocationCountryField />
+                            <LocationCountryField label={_(COUNTRY_LABEL)} />
                           </Suspense>
                         </Grid>
                         <Grid
@@ -560,6 +564,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                             }
                           >
                             <LocationStateField
+                              label={_(STATE_LABEL)}
                               country={values.country}
                               optional
                             />

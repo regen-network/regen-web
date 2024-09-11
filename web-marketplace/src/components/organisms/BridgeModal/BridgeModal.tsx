@@ -20,12 +20,16 @@ import {
 
 interface BridgeModalProps extends RegenModalProps {
   batch?: BatchInfoWithBalance;
+  maxLabel: string;
+  availableLabel: string;
   onSubmit: BridgeProps['onSubmit'];
 }
 
 const BridgeModal = ({
   batch,
   open,
+  maxLabel,
+  availableLabel,
   onClose,
   onSubmit,
 }: BridgeModalProps): JSX.Element => {
@@ -45,6 +49,8 @@ const BridgeModal = ({
       onClose={onClose}
     >
       <BridgeForm
+        maxLabel={maxLabel}
+        availableLabel={availableLabel}
         onClose={onClose}
         onSubmit={onSubmit}
         availableBridgeableAmount={Number(batch?.balance?.tradableAmount) ?? 0}

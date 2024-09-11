@@ -24,6 +24,8 @@ export interface BasketPutProps {
 }
 
 interface FormProps extends BasketPutProps {
+  maxLabel: string;
+  availableLabel: string;
   onClose: RegenModalProps['onClose'];
 }
 
@@ -34,6 +36,8 @@ export interface FormValues {
 }
 
 const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
+  maxLabel,
+  availableLabel,
   batchDenoms,
   basketOptions,
   availableTradableAmount,
@@ -103,6 +107,8 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
             native={false}
           />
           <AmountField
+            maxLabel={maxLabel}
+            availableLabel={availableLabel}
             name="amount"
             label={amountLabel}
             availableAmount={availableTradableAmount}

@@ -49,6 +49,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 
 interface AuxiliarLabelProps {
   availableAmount: number;
+  availableLabel: string;
   denom: string;
   auxiliarLabel?: string;
   className?: string;
@@ -56,6 +57,7 @@ interface AuxiliarLabelProps {
 
 interface AmountLabelProps {
   label?: string | JSX.Element;
+  availableLabel: string;
   auxiliarLabel?: string;
   availableAmount: number;
   denom: string;
@@ -64,11 +66,14 @@ interface AmountLabelProps {
 interface AmountFieldProps extends AmountLabelProps {
   name: string;
   auxiliarLabel?: string;
+  maxLabel: string;
+  availableLabel: string;
   className?: string;
 }
 
 const AuxiliarLabel: React.FC<React.PropsWithChildren<AuxiliarLabelProps>> = ({
   availableAmount,
+  availableLabel,
   denom,
   auxiliarLabel,
   className,
@@ -86,7 +91,7 @@ const AuxiliarLabel: React.FC<React.PropsWithChildren<AuxiliarLabelProps>> = ({
           <span className={styles.availableLabel}>{auxiliarLabel}</span>
         )}
         <span>
-          <span className={styles.availableLabel}>Available:</span>{' '}
+          <span className={styles.availableLabel}>{availableLabel}:</span>{' '}
           <span className={styles.availableAmount}>
             {getFormattedNumber(availableAmount)}
           </span>
@@ -101,6 +106,7 @@ const AmountLabel: React.FC<React.PropsWithChildren<AmountLabelProps>> = ({
   label,
   auxiliarLabel,
   availableAmount,
+  availableLabel,
   denom,
 }) => {
   const { classes: styles } = useStyles();
@@ -109,6 +115,7 @@ const AmountLabel: React.FC<React.PropsWithChildren<AmountLabelProps>> = ({
       <span className={styles.mainLabel}>{label}</span>
       <AuxiliarLabel
         availableAmount={availableAmount}
+        availableLabel={availableLabel}
         auxiliarLabel={auxiliarLabel}
         denom={denom}
         className={styles.auxiliarLabelDesktop}
@@ -119,10 +126,11 @@ const AmountLabel: React.FC<React.PropsWithChildren<AmountLabelProps>> = ({
 
 interface AmountTextFieldProps extends RegenTextFieldProps {
   availableAmount: number;
+  maxLabel: string;
 }
 
 const AmountTextField: React.FC<React.PropsWithChildren<AmountTextFieldProps>> =
-  ({ availableAmount, ...props }: AmountTextFieldProps) => {
+  ({ availableAmount, maxLabel, ...props }: AmountTextFieldProps) => {
     const {
       form: { setFieldValue },
       field: { name },
@@ -151,7 +159,7 @@ const AmountTextField: React.FC<React.PropsWithChildren<AmountTextFieldProps>> =
             })}
             onClick={() => setFieldValue(name, availableAmount)}
           >
-            max
+            {maxLabel}
           </Grid>
         }
       />
@@ -160,9 +168,11 @@ const AmountTextField: React.FC<React.PropsWithChildren<AmountTextFieldProps>> =
 
 const AmountField: React.FC<React.PropsWithChildren<AmountFieldProps>> = ({
   name,
-  label = 'Amount',
+  label,
   auxiliarLabel,
   availableAmount,
+  maxLabel,
+  availableLabel,
   denom,
   className,
 }) => {
@@ -174,10 +184,12 @@ const AmountField: React.FC<React.PropsWithChildren<AmountFieldProps>> = ({
         type="number"
         component={AmountTextField}
         availableAmount={availableAmount}
+        maxLabel={maxLabel}
         className={cx(styles.textField, className)}
         label={
           <AmountLabel
             label={label}
+            availableLabel={availableLabel}
             auxiliarLabel={auxiliarLabel}
             availableAmount={availableAmount}
             denom={denom}
@@ -186,6 +198,7 @@ const AmountField: React.FC<React.PropsWithChildren<AmountFieldProps>> = ({
       />
       <AuxiliarLabel
         availableAmount={availableAmount}
+        availableLabel={availableLabel}
         denom={denom}
         className={styles.auxiliarLabelMobile}
       />

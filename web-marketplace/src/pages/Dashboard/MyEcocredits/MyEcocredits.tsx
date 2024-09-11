@@ -24,6 +24,7 @@ import { useLedger } from 'ledger';
 import { getHashUrl } from 'lib/block-explorer';
 import {
   AMOUNT_LABEL,
+  AVAILABLE_LABEL,
   BASKET_LABEL,
   BASKET_PUT_SUBMIT_LABEL,
   BASKET_TAKE_AMOUNT_ERROR_TEXT,
@@ -31,6 +32,7 @@ import {
   BATCH_DESCRIPTION,
   BATCH_LABEL,
   getBottomFieldsTextMapping,
+  MAX_LABEL,
   RETIRE_ON_TAKE_LABEL,
   RETIRE_ON_TAKE_TOOLTIP,
   RETIREMENT_INFO_TEXT,
@@ -449,6 +451,8 @@ export const MyEcocredits = (): JSX.Element => {
           submitLabel={_(BASKET_PUT_SUBMIT_LABEL)}
           submitErrorText={_(SUBMIT_ERROR_TEXT)}
           title={_(BASKET_PUT_SUBMIT_LABEL)}
+          maxLabel={_(MAX_LABEL)}
+          availableLabel={_(AVAILABLE_LABEL)}
         />
       )}
       {creditRetireOpen > -1 && !!accountAddress && (
@@ -490,6 +494,8 @@ export const MyEcocredits = (): JSX.Element => {
           retirementInfoText={_(RETIREMENT_INFO_TEXT)}
           bottomTextMapping={bottomFieldsTextMapping}
           stateProvinceErrorText={_(STATE_PROVINCE_ERROR_TEXT)}
+          maxLabel={_(MAX_LABEL)}
+          availableLabel={_(AVAILABLE_LABEL)}
         />
       )}
       {sellOrderCreateOpen > -1 && !!accountAddress && (

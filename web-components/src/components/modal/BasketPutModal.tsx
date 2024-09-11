@@ -9,6 +9,8 @@ import { FormModalTemplate } from './FormModalTemplate';
 
 interface BasketPutModalProps extends RegenModalProps, BasketPutProps {
   title: string;
+  maxLabel: string;
+  availableLabel: string;
 }
 
 const BasketPutModal: React.FC<React.PropsWithChildren<BasketPutModalProps>> =
@@ -24,12 +26,16 @@ const BasketPutModal: React.FC<React.PropsWithChildren<BasketPutModalProps>> =
     amountLabel,
     submitLabel,
     submitErrorText,
+    maxLabel,
+    availableLabel,
     onClose,
     onSubmit,
     onBatchDenomChange,
   }) => (
     <FormModalTemplate title={title} open={open} onClose={onClose}>
       <BasketPutForm
+        maxLabel={maxLabel}
+        availableLabel={availableLabel}
         basketOptions={basketOptions}
         batchDenoms={batchDenoms}
         availableTradableAmount={availableTradableAmount}

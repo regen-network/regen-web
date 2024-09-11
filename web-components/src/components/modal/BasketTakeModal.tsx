@@ -7,6 +7,8 @@ import { RegenModalProps } from './index';
 export interface TakeModalProps extends RegenModalProps, BasketTakeProps {
   title: string;
   subtitle: string;
+  maxLabel: string;
+  availableLabel: string;
 }
 
 const BasketTakeModal: React.FC<React.PropsWithChildren<TakeModalProps>> = ({
@@ -27,6 +29,8 @@ const BasketTakeModal: React.FC<React.PropsWithChildren<TakeModalProps>> = ({
   bottomTextMapping,
   retirementInfoText,
   stateProvinceErrorText,
+  maxLabel,
+  availableLabel,
   onClose,
   onSubmit,
 }) => {
@@ -38,6 +42,8 @@ const BasketTakeModal: React.FC<React.PropsWithChildren<TakeModalProps>> = ({
       onClose={onClose}
     >
       <BasketTakeForm
+        maxLabel={maxLabel}
+        availableLabel={availableLabel}
         mapboxToken={mapboxToken}
         accountAddress={accountAddress}
         balance={balance}

@@ -28,6 +28,8 @@ export interface BridgeProps {
 }
 
 interface FormProps extends BridgeProps {
+  maxLabel: string;
+  availableLabel: string;
   onClose: RegenModalProps['onClose'];
 }
 
@@ -39,10 +41,12 @@ export interface BridgeFormValues {
 }
 
 const BridgeForm = ({
-  onClose,
-  onSubmit,
+  maxLabel,
+  availableLabel,
   availableBridgeableAmount,
   batchDenom,
+  onClose,
+  onSubmit,
 }: FormProps): JSX.Element => {
   const { _ } = useLingui();
 
@@ -99,6 +103,8 @@ const BridgeForm = ({
             component={TextField}
           />
           <AmountField
+            maxLabel={maxLabel}
+            availableLabel={availableLabel}
             name="amount"
             label={_(msg`Amount`)}
             availableAmount={availableBridgeableAmount}

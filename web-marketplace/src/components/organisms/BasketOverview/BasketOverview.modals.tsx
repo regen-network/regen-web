@@ -21,7 +21,12 @@ import {
   BATCH_DESCRIPTION,
   BATCH_LABEL,
   getBottomFieldsTextMapping,
+  INSUFFICIENT_CREDITS,
+  INVALID_AMOUNT,
+  INVALID_DECIMAL_COUNT,
+  INVALID_MEMO_LENGTH,
   MAX_LABEL,
+  REQUIRED_MESSAGE,
   RETIRE_ON_TAKE_LABEL,
   RETIRE_ON_TAKE_TOOLTIP,
   RETIREMENT_INFO_TEXT,
@@ -160,6 +165,10 @@ export const BasketOverviewModals = ({
         title={_(BASKET_PUT_SUBMIT_LABEL)}
         maxLabel={_(MAX_LABEL)}
         availableLabel={_(AVAILABLE_LABEL)}
+        requiredMessage={_(REQUIRED_MESSAGE)}
+        invalidAmount={_(INVALID_AMOUNT)}
+        insufficientCredits={_(INSUFFICIENT_CREDITS)}
+        invalidDecimalCount={_(INVALID_DECIMAL_COUNT)}
       />
       <BasketTakeModal
         open={isTakeModalOpen}
@@ -186,6 +195,11 @@ export const BasketOverviewModals = ({
         onSubmit={basketTakeSubmit}
         maxLabel={_(MAX_LABEL)}
         availableLabel={_(AVAILABLE_LABEL)}
+        requiredMessage={_(REQUIRED_MESSAGE)}
+        invalidAmount={_(INVALID_AMOUNT)}
+        insufficientCredits={_(INSUFFICIENT_CREDITS)}
+        invalidDecimalCount={_(INVALID_DECIMAL_COUNT)}
+        invalidMemoLength={_(INVALID_MEMO_LENGTH)}
       />
     </>
   );

@@ -38,6 +38,7 @@ import {
   FILE_DROP_MOVE_UP_TEXT,
   FILE_UPLOADING_DESCRIPTION,
   FILE_UPLOADING_TITLE,
+  REQUIRED_MESSAGE,
 } from 'lib/constants/shared.constants';
 
 import { Link } from 'components/atoms';
@@ -56,7 +57,7 @@ import {
   POST_MAX_TITLE_LENGTH,
   POST_PRIVACY_DESCRIPTION,
 } from './PostForm.constants';
-import { postFormSchema, PostFormSchemaType } from './PostForm.schema';
+import { getPostFormSchema, PostFormSchemaType } from './PostForm.schema';
 import { Warning } from './PostForm.Warning';
 
 export interface Props {
@@ -90,6 +91,13 @@ export const PostForm = ({
   onUpdateDirtyState,
 }: Props): JSX.Element => {
   const { _ } = useLingui();
+  const postFormSchema = useMemo(
+    () =>
+      getPostFormSchema({
+        requiredMessage: _(REQUIRED_MESSAGE),
+      }),
+    [_],
+  );
   const form = useZodForm({
     schema: postFormSchema,
     defaultValues: {

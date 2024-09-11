@@ -21,11 +21,7 @@ import SelectFieldFallback from 'web-components/src/components/inputs/SelectFiel
 import SelectTextField from 'web-components/src/components/inputs/SelectTextField';
 import TextField from 'web-components/src/components/inputs/TextField';
 import Toggle from 'web-components/src/components/inputs/Toggle';
-import {
-  invalidMemoLength,
-  requirementAgreement,
-  validateMemoLength,
-} from 'web-components/src/components/inputs/validation';
+import { validateMemoLength } from 'web-components/src/components/inputs/validation';
 import Modal, { RegenModalProps } from 'web-components/src/components/modal';
 import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
 import {
@@ -38,6 +34,8 @@ import { useLedger } from 'ledger';
 import { client } from 'lib/clients/sanity';
 import {
   COUNTRY_LABEL,
+  INVALID_MEMO_LENGTH,
+  REQUIREMENT_AGREEMENT,
   STATE_LABEL,
   SUBMIT_ERRORS,
 } from 'lib/constants/shared.constants';
@@ -156,10 +154,10 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
         values.retirementReason &&
         !validateMemoLength(values.retirementReason)
       ) {
-        errors.retirementReason = invalidMemoLength;
+        errors.retirementReason = _(INVALID_MEMO_LENGTH);
       }
 
-      if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
+      if (!values.agreeErpa) errors.agreeErpa = _(REQUIREMENT_AGREEMENT);
 
       return errors;
     };

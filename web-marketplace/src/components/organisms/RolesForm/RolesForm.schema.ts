@@ -1,12 +1,24 @@
 import { z } from 'zod';
 
 import {
+  AddressSchemaType,
+  OptionalAddressSchemaType,
+} from './components/AdminModal/AdminModal.schema';
+import { ProfileModalRawSchemaType } from './components/ProfileModal/ProfileModal.schema';
+
+type GetRolesFormSchemaParams = {
+  isOnChain: boolean;
+  addressSchema: AddressSchemaType;
+  optionalAddressSchema: OptionalAddressSchemaType;
+  profileModalSchema: ProfileModalRawSchemaType;
+};
+
+export const getRolesFormSchema = ({
+  isOnChain,
   addressSchema,
   optionalAddressSchema,
-} from './components/AdminModal/AdminModal.schema';
-import { profileModalSchema } from './components/ProfileModal/ProfileModal.schema';
-
-export const rolesFormSchema = (isOnChain: boolean) => {
+  profileModalSchema,
+}: GetRolesFormSchemaParams) => {
   const baseRolesSchema = z.object({
     projectDeveloper: profileModalSchema.nullable().optional(),
     verifier: profileModalSchema.nullable().optional(),
@@ -16,4 +28,6 @@ export const rolesFormSchema = (isOnChain: boolean) => {
     ? baseRolesSchema.required({ admin: true })
     : baseRolesSchema;
 };
-export type RolesFormSchemaType = z.infer<ReturnType<typeof rolesFormSchema>>;
+export type RolesFormSchemaType = z.infer<
+  ReturnType<typeof getRolesFormSchema>
+>;

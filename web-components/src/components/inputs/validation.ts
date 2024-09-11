@@ -5,29 +5,6 @@ import { Bech32Address } from '@keplr-wallet/cosmos';
 export const MAX_FRACTION_DIGITS: number = 6; // useful for conversion to micro udenom (BigInt)
 export const MEMO_MAX_LENGTH: number = 512;
 
-/* Messages */
-
-export const requiredMessage: string = 'This field is required';
-export const invalidEmailMessage: string = 'Please enter a valid email address';
-export const invalidPassword: string =
-  'Your password must contain at least 1 letter, 1 number, 1 special character (!@#$%^&*) and at least 8 characters';
-export const requirementAgreement: string = 'You must agree to continue';
-export const invalidAmount: string = 'Please enter a valid amount';
-export const insufficientCredits: string = "You don't have enough credits";
-export const invalidDate: string = 'Invalid date';
-export const invalidPastDate: string = 'Must be a date in the past';
-export const invalidURL: string = 'Please enter a valid URL';
-export const invalidVCSRetirement: string =
-  'Please enter a valid VCS retirement serial number';
-export const invalidVCSID: string = 'Please enter a valid VCS Project ID';
-export const invalidJSON: string = 'Please enter valid JSON-LD';
-export const invalidRegenAddress: string = 'Invalid regen address';
-export const invalidPolygonAddress: string = 'Invalid Polygon address';
-export const requiredDenom: string = 'Please choose a denom';
-export const invalidDecimalCount: string = `More than ${MAX_FRACTION_DIGITS} decimal places not allowed`;
-export const invalidMemoLength: string = `Must be ${MEMO_MAX_LENGTH} characters or fewer`;
-export const positiveNumber = 'Must be positive';
-
 /* Validation Functions */
 
 export const numericOnlyRE = /^\d*$/gm;
@@ -65,12 +42,27 @@ const decimalCount = (num: number): number => {
   return num.toString().split(decimalSymbolRE)?.[1]?.length;
 };
 
-export function validateAmount(
-  availableTradableAmount: number,
-  amount?: number,
-  customInsufficientCredits?: string,
-  zeroAllowed?: boolean,
-): string | undefined {
+type ValidateAmountProps = {
+  availableTradableAmount: number;
+  requiredMessage: string;
+  invalidAmount: string;
+  insufficientCredits: string;
+  invalidDecimalCount: string;
+  amount?: number;
+  customInsufficientCredits?: string;
+  zeroAllowed?: boolean;
+};
+
+export function validateAmount({
+  availableTradableAmount,
+  insufficientCredits,
+  invalidAmount,
+  invalidDecimalCount,
+  requiredMessage,
+  amount,
+  customInsufficientCredits,
+  zeroAllowed,
+}: ValidateAmountProps): string | undefined {
   if (zeroAllowed && (amount === 0 || (amount && Math.sign(amount) === 0)))
     return;
   if (!amount) {
@@ -104,10 +96,21 @@ export function isValidAddress(value: string, prefix?: string): boolean {
   }
 }
 
-export function validatePrice(
-  price?: number,
-  maximumFractionDigits?: number,
-): string | undefined {
+type ValidatePriceProps = {
+  requiredMessage: string;
+  invalidAmount: string;
+  maximumDecimalMessage: string;
+  price?: number;
+  maximumFractionDigits?: number;
+};
+
+export function validatePrice({
+  requiredMessage,
+  invalidAmount,
+  maximumDecimalMessage,
+  price,
+  maximumFractionDigits,
+}: ValidatePriceProps): string | undefined {
   if (!price) {
     return requiredMessage;
   }
@@ -117,7 +120,7 @@ export function validatePrice(
   const priceDecimalPlaces = decimalCount(price);
   maximumFractionDigits = maximumFractionDigits || MAX_FRACTION_DIGITS;
   if (!!priceDecimalPlaces && priceDecimalPlaces > maximumFractionDigits) {
-    return `Maximum ${maximumFractionDigits} decimal places`;
+    return maximumDecimalMessage;
   }
   return;
 }
@@ -133,7 +136,17 @@ const isValidEthAddress = (address: string): boolean => {
   return /^(0x)?[0-9a-f]{40}$/i.test(address);
 };
 
-export function validatePolygonAddress(address: string): string | undefined {
+type ValidatePolygonAddressProps = {
+  requiredMessage: string;
+  invalidPolygonAddress: string;
+  address?: string;
+};
+
+export function validatePolygonAddress({
+  requiredMessage,
+  invalidPolygonAddress,
+  address,
+}: ValidatePolygonAddressProps): string | undefined {
   if (!address) {
     return requiredMessage;
   } else if (!isValidEthAddress(address)) {

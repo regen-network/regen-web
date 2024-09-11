@@ -7,7 +7,8 @@ import { RadioGroup } from 'formik-mui';
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
 import ControlledFormLabel from 'web-components/src/components/form/ControlledFormLabel';
 import Toggle from 'web-components/src/components/inputs/Toggle';
-import { requiredMessage } from 'web-components/src/components/inputs/validation';
+
+import { REQUIRED_MESSAGE } from 'lib/constants/shared.constants';
 
 interface IncludesGrasslandsFormProps {
   submit: (values: IncludesGrasslandsValues) => Promise<void>;
@@ -38,7 +39,7 @@ export const IncludesGrasslandsForm: React.FC<
         ];
         errorFields.forEach(value => {
           if (!values[value]) {
-            errors[value] = requiredMessage;
+            errors[value] = _(REQUIRED_MESSAGE);
           }
         });
         return errors;

@@ -14,12 +14,7 @@ import SelectTextField, {
 } from 'web-components/src/components/inputs/SelectTextField';
 import TextField from 'web-components/src/components/inputs/TextField';
 import {
-  invalidDate,
-  invalidJSON,
-  invalidPastDate,
-  invalidVCSRetirement,
   isValidJSON,
-  requiredMessage,
   vcsRetirementSerialRE,
 } from 'web-components/src/components/inputs/validation';
 import { Body } from 'web-components/src/components/typography';
@@ -44,28 +39,62 @@ export interface CreditBasicsFormValues {
   metadata?: any; //TODO: type that works for any metadata shape
 }
 
-const vcsMetadataSchema: Yup.AnyObjectSchema = Yup.object({
-  'regen:vcsRetirementSerialNumber': Yup.string()
-    .required(requiredMessage)
-    .matches(vcsRetirementSerialRE, { message: invalidVCSRetirement }),
-});
+type VcsMetadataSchemaParams = {
+  requiredMessage: string;
+  invalidVCSRetirement: string;
+};
 
-const JSONSchema = Yup.string().test(
-  'is-json',
-  invalidJSON,
-  (value, context) => !!value && isValidJSON(value),
-);
+export const getVcsMetadataSchema = ({
+  requiredMessage,
+  invalidVCSRetirement,
+}: VcsMetadataSchemaParams): Yup.AnyObjectSchema =>
+  Yup.object({
+    'regen:vcsRetirementSerialNumber': Yup.string()
+      .required(requiredMessage)
+      .matches(vcsRetirementSerialRE, { message: invalidVCSRetirement }),
+  });
 
-const isPastDateTest = {
+type getJSONSchemaParams = {
+  invalidJSON: string;
+};
+
+export const getJSONSchema = ({ invalidJSON }: getJSONSchemaParams) =>
+  Yup.string().test(
+    'is-json',
+    invalidJSON,
+    (value, context) => !!value && isValidJSON(value),
+  );
+
+type getIsPastDateTestParams = {
+  invalidPastDate: string;
+};
+
+export const getIsPastDateTest = ({
+  invalidPastDate,
+}: getIsPastDateTestParams) => ({
   name: 'is-past-date',
   message: invalidPastDate,
   test: (value: Date | undefined) => {
     if (!value) return false;
     return isPast(value);
   },
+});
+
+type getCreditBasicsValidationSchemaFieldsParams = {
+  requiredMessage: string;
+  invalidDate: string;
+  isPastDateTest: ReturnType<typeof getIsPastDateTest>;
+  vcsMetadataSchema: ReturnType<typeof getVcsMetadataSchema>;
+  JSONSchema: ReturnType<typeof getJSONSchema>;
 };
 
-export const creditBasicsValidationSchemaFields = {
+export const getCreditBasicsValidationSchemaFields = ({
+  requiredMessage,
+  invalidDate,
+  isPastDateTest,
+  vcsMetadataSchema,
+  JSONSchema,
+}: getCreditBasicsValidationSchemaFieldsParams) => ({
   projectId: Yup.string().required(requiredMessage),
   startDate: Yup.date()
     .required(requiredMessage)
@@ -80,11 +109,35 @@ export const creditBasicsValidationSchemaFields = {
     then: schema => vcsMetadataSchema,
     otherwise: schema => JSONSchema,
   }),
+});
+
+type getCreditBasicsValidationSchemaParams = {
+  requiredMessage: string;
+  invalidDate: string;
+  isPastDateTest: ReturnType<typeof getIsPastDateTest>;
+  invalidVCSRetirement: string;
+  invalidJSON: string;
 };
 
-export const creditBasicsValidationSchema = Yup.object(
-  creditBasicsValidationSchemaFields,
-);
+export const getCreditBasicsValidationSchema = ({
+  requiredMessage,
+  invalidDate,
+  isPastDateTest,
+  invalidVCSRetirement,
+  invalidJSON,
+}: getCreditBasicsValidationSchemaParams) =>
+  Yup.object(
+    getCreditBasicsValidationSchemaFields({
+      requiredMessage,
+      invalidDate,
+      isPastDateTest,
+      vcsMetadataSchema: getVcsMetadataSchema({
+        requiredMessage,
+        invalidVCSRetirement,
+      }),
+      JSONSchema: getJSONSchema({ invalidJSON }),
+    }),
+  );
 
 export const creditBasicsInitialValues = {
   projectId: '',

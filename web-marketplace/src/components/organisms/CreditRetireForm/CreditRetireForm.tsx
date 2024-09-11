@@ -11,7 +11,11 @@ import { RegenModalProps } from 'web-components/src/components/modal';
 
 import {
   AVAILABLE_LABEL,
+  INSUFFICIENT_CREDITS,
+  INVALID_AMOUNT,
+  INVALID_DECIMAL_COUNT,
   MAX_LABEL,
+  REQUIRED_MESSAGE,
   SUBMIT_ERRORS,
 } from 'lib/constants/shared.constants';
 
@@ -81,8 +85,13 @@ const CreditRetireForm: React.FC<
         onSubmit={data => {
           const hasError = validateCreditRetireForm({
             availableTradableAmount,
-            setError: form.setError,
             values: data,
+            insufficientCredits: _(INSUFFICIENT_CREDITS),
+            invalidDecimalCount: _(INVALID_DECIMAL_COUNT),
+            requiredMessage: _(REQUIRED_MESSAGE),
+            invalidAmount: _(INVALID_AMOUNT),
+            _,
+            setError: form.setError,
           });
           if (!hasError) {
             onSubmit(data);

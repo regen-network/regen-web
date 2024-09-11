@@ -71,11 +71,16 @@ export interface BasketTakeProps extends BottomCreditRetireFieldsProps {
   retirementInfoText: string;
   submitLabel: string;
   submitErrorText: string;
+  invalidMemoLength: string;
   onSubmit: (values: MsgTakeValues) => void;
 }
 
 // Input (args)
 interface FormProps extends BasketTakeProps {
+  requiredMessage: string;
+  invalidAmount: string;
+  insufficientCredits: string;
+  invalidDecimalCount: string;
   maxLabel: string;
   availableLabel: string;
   onClose: RegenModalProps['onClose'];
@@ -87,7 +92,6 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   basket,
   basketDisplayDenom,
   balance,
-  amountErrorText,
   amountLabel,
   retireOnTakeLabel,
   retireOnTakeTooltip,
@@ -98,6 +102,11 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   bottomTextMapping,
   maxLabel,
   availableLabel,
+  requiredMessage,
+  invalidAmount,
+  insufficientCredits,
+  invalidDecimalCount,
+  invalidMemoLength,
   onClose,
   onSubmit,
 }) => {
@@ -117,7 +126,14 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   ): FormikErrors<CreditTakeFormValues> => {
     let errors: FormikErrors<CreditTakeFormValues> = {};
 
-    const errAmount = validateAmount(balance, values.amount, amountErrorText);
+    const errAmount = validateAmount({
+      availableTradableAmount: balance,
+      requiredMessage,
+      invalidAmount,
+      insufficientCredits,
+      invalidDecimalCount,
+      amount: values.amount,
+    });
     if (errAmount) errors.amount = errAmount;
 
     // Retire form validation (optional subform)
@@ -129,12 +145,17 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
         stateProvince: values.stateProvince,
         postalCode: values.postalCode,
       };
-      errors = validateCreditRetire(
-        balance,
-        retirementValues,
+      errors = validateCreditRetire({
+        availableTradableAmount: balance,
+        values: retirementValues,
         errors,
-        stateProvinceErrorText,
-      );
+        stateProvinceError: stateProvinceErrorText,
+        requiredMessage,
+        invalidAmount,
+        insufficientCredits,
+        invalidDecimalCount,
+        invalidMemoLength,
+      });
     }
     return errors;
   };

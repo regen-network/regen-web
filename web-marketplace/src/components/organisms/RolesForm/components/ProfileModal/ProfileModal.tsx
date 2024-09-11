@@ -13,6 +13,7 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 
 import {
   APPLY,
+  INVALID_REGEN_ADDRESS,
   TITLE_CROP,
   TITLE_IGNORE_CROP,
   UPDATE,
@@ -27,9 +28,10 @@ import {
 } from 'components/organisms/EditProfileForm/EditProfileForm.constants';
 import { useUpdateDefaultAvatar } from 'components/organisms/EditProfileForm/hooks/useUpdateDefaultAvatar';
 
+import { getOptionalAddressSchema } from '../AdminModal/AdminModal.schema';
 import { ModalTemplate } from '../ModalTemplate/ModalTemplate';
 import {
-  profileModalSchema,
+  getProfileModalSchema,
   ProfileModalSchemaType,
 } from './ProfileModal.schema';
 
@@ -47,6 +49,18 @@ function ProfileModal({
   onUpload,
 }: ProfileModalProps): JSX.Element {
   const { _ } = useLingui();
+  const optionalAddressSchema = useMemo(
+    () =>
+      getOptionalAddressSchema({
+        invalidRegenAddress: _(INVALID_REGEN_ADDRESS),
+      }),
+    [_],
+  );
+  const profileModalSchema = useMemo(
+    () => getProfileModalSchema({ optionalAddressSchema }),
+    [optionalAddressSchema],
+  );
+
   const form = useZodForm({
     schema: profileModalSchema,
     defaultValues: {

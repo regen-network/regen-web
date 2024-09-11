@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -14,6 +14,7 @@ import SelectTextField, {
   Option,
 } from 'web-components/src/components/inputs/new/SelectTextField/SelectTextField';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { MAX_FRACTION_DIGITS } from 'web-components/src/components/inputs/validation';
 import { RegenModalProps } from 'web-components/src/components/modal';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
@@ -23,7 +24,13 @@ import {
   AMOUNT_SELL_LABEL,
   AVAILABLE_LABEL,
   EMPTY_OPTION_TEXT,
+  getMaximumDecimalMessage,
+  INSUFFICIENT_CREDITS,
+  INVALID_AMOUNT,
+  INVALID_DECIMAL_COUNT,
   MAX_LABEL,
+  POSITIVE_NUMBER,
+  REQUIRED_MESSAGE,
   SUBMIT_ERRORS,
 } from 'lib/constants/shared.constants';
 import { Sell2Event } from 'lib/tracker/types';
@@ -68,8 +75,25 @@ const CreateSellOrderForm: React.FC<Props> = ({
     enableAutoRetire: true,
   };
 
+  const maximumDecimalMessage = useMemo(
+    () =>
+      getMaximumDecimalMessage({
+        _,
+        maximumFractionDigits: MAX_FRACTION_DIGITS,
+      }),
+    [_],
+  );
+
   const form = useZodForm({
-    schema: createSellOrderFormSchema({ availableAmountByBatch }),
+    schema: createSellOrderFormSchema({
+      availableAmountByBatch,
+      requiredMessage: _(REQUIRED_MESSAGE),
+      positiveNumber: _(POSITIVE_NUMBER),
+      invalidAmount: _(INVALID_AMOUNT),
+      maximumDecimalMessage: maximumDecimalMessage,
+      insufficientCredits: _(INSUFFICIENT_CREDITS),
+      invalidDecimalCount: _(INVALID_DECIMAL_COUNT),
+    }),
     defaultValues: {
       ...(initialValues ?? defaultInitialValues),
     },

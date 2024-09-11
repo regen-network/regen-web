@@ -1,17 +1,29 @@
 import { z } from 'zod';
 
 import {
-  positiveNumber,
-  requiredMessage,
   validateAmount,
   validatePrice,
 } from 'web-components/src/components/inputs/validation';
 
 type Params = {
   availableAmountByBatch?: { [batchDenom: string]: number };
+  requiredMessage: string;
+  positiveNumber: string;
+  invalidAmount: string;
+  maximumDecimalMessage: string;
+  insufficientCredits: string;
+  invalidDecimalCount: string;
 };
 
-export const createSellOrderFormSchema = ({ availableAmountByBatch }: Params) =>
+export const createSellOrderFormSchema = ({
+  availableAmountByBatch,
+  requiredMessage,
+  positiveNumber,
+  invalidAmount,
+  maximumDecimalMessage,
+  insufficientCredits,
+  invalidDecimalCount,
+}: Params) =>
   z
     .object({
       batchDenom: z.string().nonempty(requiredMessage),
@@ -22,9 +34,20 @@ export const createSellOrderFormSchema = ({ availableAmountByBatch }: Params) =>
         })
         .positive(positiveNumber)
         .refine(
-          value => !validatePrice(value),
+          value =>
+            !validatePrice({
+              price: value,
+              requiredMessage,
+              invalidAmount,
+              maximumDecimalMessage,
+            }),
           value => ({
-            message: validatePrice(value),
+            message: validatePrice({
+              price: value,
+              requiredMessage,
+              invalidAmount,
+              maximumDecimalMessage,
+            }),
           }),
         ),
       askDenom: z.string().nonempty(requiredMessage),
@@ -38,15 +61,25 @@ export const createSellOrderFormSchema = ({ availableAmountByBatch }: Params) =>
     })
     .refine(
       schema =>
-        !validateAmount(
-          availableAmountByBatch?.[schema.batchDenom ?? ''] ?? 0,
-          schema.amount,
-        ),
+        !validateAmount({
+          availableTradableAmount:
+            availableAmountByBatch?.[schema.batchDenom ?? ''] ?? 0,
+          amount: schema.amount,
+          requiredMessage,
+          invalidAmount,
+          insufficientCredits,
+          invalidDecimalCount,
+        }),
       schema => ({
-        message: validateAmount(
-          availableAmountByBatch?.[schema.batchDenom ?? ''] ?? 0,
-          schema.amount,
-        ),
+        message: validateAmount({
+          availableTradableAmount:
+            availableAmountByBatch?.[schema.batchDenom ?? ''] ?? 0,
+          amount: schema.amount,
+          requiredMessage,
+          invalidAmount,
+          insufficientCredits,
+          invalidDecimalCount,
+        }),
       }),
     );
 

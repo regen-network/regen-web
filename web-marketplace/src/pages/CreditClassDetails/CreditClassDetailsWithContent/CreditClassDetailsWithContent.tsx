@@ -23,6 +23,14 @@ import { CreditClassByUriQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
 import { apiUri } from 'lib/apiUri';
 import { onBtnClick } from 'lib/button';
+import {
+  INSUFFICIENT_CREDITS,
+  INVALID_AMOUNT,
+  INVALID_DECIMAL_COUNT,
+  INVALID_EMAIL_MESSAGE,
+  INVALID_MEMO_LENGTH,
+  REQUIRED_MESSAGE,
+} from 'lib/constants/shared.constants';
 import { getMoreProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getMoreProjectsQuery/getMoreProjectsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -367,6 +375,12 @@ const CreditClassDetailsWithContent: React.FC<
           onBehalfOfOptions={onBehalfOfOptions}
           submitErrorText={_(CREDIT_CLASS_SUBMIT_ERROR_TEXT)}
           submitLabel={_(CREDIT_CLASS_SUBMIT_LABEL)}
+          requiredMessage={_(REQUIRED_MESSAGE)}
+          invalidEmailMessage={_(INVALID_EMAIL_MESSAGE)}
+          invalidAmount={_(INVALID_AMOUNT)}
+          insufficientCredits={_(INSUFFICIENT_CREDITS)}
+          invalidDecimalCount={_(INVALID_DECIMAL_COUNT)}
+          invalidMemoLength={_(INVALID_MEMO_LENGTH)}
           apiUrl={apiUri}
           onClose={() => setBuyerModalOpen(false)}
           onSubmit={() => {

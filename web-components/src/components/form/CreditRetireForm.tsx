@@ -10,12 +10,7 @@ import AmountField from '../inputs/AmountField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import SelectFieldFallback from '../inputs/SelectFieldFallback';
 import TextField from '../inputs/TextField';
-import {
-  invalidMemoLength,
-  requiredMessage,
-  validateAmount,
-  validateMemoLength,
-} from '../inputs/validation';
+import { validateAmount, validateMemoLength } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import InfoTooltipWithIcon from '../tooltip/InfoTooltipWithIcon';
 import { Body, Title } from '../typography';
@@ -82,6 +77,11 @@ interface FormProps extends CreditRetireProps {
   stateProvinceError: string;
   maxLabel: string;
   availableLabel: string;
+  requiredMessage: string;
+  invalidMemoLength: string;
+  invalidAmount: string;
+  insufficientCredits: string;
+  invalidDecimalCount: string;
   onSubmit: (values: RetireFormValues) => void;
   onClose: RegenModalProps['onClose'];
 }
@@ -311,22 +311,43 @@ export const RetirementReminder = ({
   );
 };
 
-export const validateCreditRetire = (
-  availableTradableAmount: number,
-  values: RetireFormValues,
-  errors: FormikErrors<RetireFormValues>,
-  stateProvinceError: string,
-): FormikErrors<RetireFormValues> => {
+type ValidateCreditRetireProps = {
+  availableTradableAmount: number;
+  requiredMessage: string;
+  stateProvinceError: string;
+  invalidMemoLength: string;
+  invalidAmount: string;
+  insufficientCredits: string;
+  invalidDecimalCount: string;
+  values: RetireFormValues;
+  errors: FormikErrors<RetireFormValues>;
+};
+
+export const validateCreditRetire = ({
+  availableTradableAmount,
+  requiredMessage,
+  stateProvinceError,
+  invalidMemoLength,
+  invalidAmount,
+  insufficientCredits,
+  invalidDecimalCount,
+  values,
+  errors,
+}: ValidateCreditRetireProps): FormikErrors<RetireFormValues> => {
   if (!values.country) {
     errors.country = requiredMessage;
   }
   if (values.postalCode && !values.stateProvince) {
     errors.stateProvince = stateProvinceError;
   }
-  const errAmount = validateAmount(
+  const errAmount = validateAmount({
     availableTradableAmount,
-    values.retiredAmount,
-  );
+    amount: values.retiredAmount,
+    requiredMessage,
+    invalidAmount,
+    insufficientCredits,
+    invalidDecimalCount,
+  });
   if (errAmount) errors.retiredAmount = errAmount;
 
   if (values.note && !validateMemoLength(values.note)) {
@@ -355,6 +376,11 @@ const CreditRetireForm: React.FC<FormProps> = ({
   stateProvinceError,
   maxLabel,
   availableLabel,
+  requiredMessage,
+  invalidMemoLength,
+  invalidAmount,
+  insufficientCredits,
+  invalidDecimalCount,
   onClose,
   onSubmit,
 }) => {
@@ -362,12 +388,17 @@ const CreditRetireForm: React.FC<FormProps> = ({
     values: RetireFormValues,
   ): FormikErrors<RetireFormValues> => {
     let errors: FormikErrors<RetireFormValues> = {};
-    errors = validateCreditRetire(
+    errors = validateCreditRetire({
       availableTradableAmount,
+      requiredMessage,
+      invalidMemoLength,
+      invalidAmount,
+      insufficientCredits,
+      invalidDecimalCount,
       values,
       errors,
       stateProvinceError,
-    );
+    });
     return errors;
   };
 

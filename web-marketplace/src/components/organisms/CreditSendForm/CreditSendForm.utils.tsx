@@ -2,15 +2,16 @@ import { UseFormReturn } from 'react-hook-form';
 import { msg } from '@lingui/macro';
 
 import {
-  invalidMemoLength,
-  invalidRegenAddress,
   isValidAddress,
-  requiredMessage,
-  requirementAgreement,
   validateAmount,
   validateMemoLength,
 } from 'web-components/src/components/inputs/validation';
 
+import {
+  INSUFFICIENT_CREDITS,
+  INVALID_AMOUNT,
+  INVALID_DECIMAL_COUNT,
+} from 'lib/constants/shared.constants';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { CreditSendFormSchemaType } from './CreditSendForm.schema';
@@ -19,6 +20,10 @@ type Props = {
   values: CreditSendFormSchemaType;
   addressPrefix?: string;
   availableTradableAmount: number;
+  requiredMessage: string;
+  invalidRegenAddress: string;
+  requirementAgreement: string;
+  invalidMemoLength: string;
   _: TranslatorType;
   setError: UseFormReturn<CreditSendFormSchemaType>['setError'];
 };
@@ -37,6 +42,10 @@ export const validateCreditSendForm = ({
   values,
   addressPrefix,
   availableTradableAmount,
+  requiredMessage,
+  invalidRegenAddress,
+  requirementAgreement,
+  invalidMemoLength,
   _,
   setError,
 }: Props): boolean => {
@@ -67,7 +76,14 @@ export const validateCreditSendForm = ({
     hasError = true;
   }
 
-  const errAmount = validateAmount(availableTradableAmount, values.amount);
+  const errAmount = validateAmount({
+    availableTradableAmount,
+    amount: values.amount,
+    requiredMessage,
+    insufficientCredits: _(INSUFFICIENT_CREDITS),
+    invalidAmount: _(INVALID_AMOUNT),
+    invalidDecimalCount: _(INVALID_DECIMAL_COUNT),
+  });
   if (errAmount) {
     setError('amount', { message: errAmount });
     hasError = true;

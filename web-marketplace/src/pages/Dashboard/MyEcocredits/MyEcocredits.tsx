@@ -32,7 +32,12 @@ import {
   BATCH_DESCRIPTION,
   BATCH_LABEL,
   getBottomFieldsTextMapping,
+  INSUFFICIENT_CREDITS,
+  INVALID_AMOUNT,
+  INVALID_DECIMAL_COUNT,
+  INVALID_MEMO_LENGTH,
   MAX_LABEL,
+  REQUIRED_MESSAGE,
   RETIRE_ON_TAKE_LABEL,
   RETIRE_ON_TAKE_TOOLTIP,
   RETIREMENT_INFO_TEXT,
@@ -453,6 +458,10 @@ export const MyEcocredits = (): JSX.Element => {
           title={_(BASKET_PUT_SUBMIT_LABEL)}
           maxLabel={_(MAX_LABEL)}
           availableLabel={_(AVAILABLE_LABEL)}
+          requiredMessage={_(REQUIRED_MESSAGE)}
+          invalidAmount={_(INVALID_AMOUNT)}
+          insufficientCredits={_(INSUFFICIENT_CREDITS)}
+          invalidDecimalCount={_(INVALID_DECIMAL_COUNT)}
         />
       )}
       {creditRetireOpen > -1 && !!accountAddress && (
@@ -496,6 +505,11 @@ export const MyEcocredits = (): JSX.Element => {
           stateProvinceErrorText={_(STATE_PROVINCE_ERROR_TEXT)}
           maxLabel={_(MAX_LABEL)}
           availableLabel={_(AVAILABLE_LABEL)}
+          requiredMessage={_(REQUIRED_MESSAGE)}
+          invalidAmount={_(INVALID_AMOUNT)}
+          insufficientCredits={_(INSUFFICIENT_CREDITS)}
+          invalidDecimalCount={_(INVALID_DECIMAL_COUNT)}
+          invalidMemoLength={_(INVALID_MEMO_LENGTH)}
         />
       )}
       {sellOrderCreateOpen > -1 && !!accountAddress && (

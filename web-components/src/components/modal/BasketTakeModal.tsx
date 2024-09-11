@@ -9,6 +9,11 @@ export interface TakeModalProps extends RegenModalProps, BasketTakeProps {
   subtitle: string;
   maxLabel: string;
   availableLabel: string;
+  requiredMessage: string;
+  invalidAmount: string;
+  insufficientCredits: string;
+  invalidDecimalCount: string;
+  invalidMemoLength: string;
 }
 
 const BasketTakeModal: React.FC<React.PropsWithChildren<TakeModalProps>> = ({
@@ -31,6 +36,11 @@ const BasketTakeModal: React.FC<React.PropsWithChildren<TakeModalProps>> = ({
   stateProvinceErrorText,
   maxLabel,
   availableLabel,
+  requiredMessage,
+  invalidAmount,
+  insufficientCredits,
+  invalidDecimalCount,
+  invalidMemoLength,
   onClose,
   onSubmit,
 }) => {
@@ -60,6 +70,11 @@ const BasketTakeModal: React.FC<React.PropsWithChildren<TakeModalProps>> = ({
         bottomTextMapping={bottomTextMapping}
         retirementInfoText={retirementInfoText}
         stateProvinceErrorText={stateProvinceErrorText}
+        requiredMessage={requiredMessage}
+        invalidAmount={invalidAmount}
+        insufficientCredits={insufficientCredits}
+        invalidDecimalCount={invalidDecimalCount}
+        invalidMemoLength={invalidMemoLength}
       />
     </FormModalTemplate>
   );

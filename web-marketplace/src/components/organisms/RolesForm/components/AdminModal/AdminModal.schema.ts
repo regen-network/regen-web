@@ -1,39 +1,67 @@
 import { z } from 'zod';
 
-import {
-  invalidRegenAddress,
-  isValidAddress,
-} from 'web-components/src/components/inputs/validation';
+import { isValidAddress } from 'web-components/src/components/inputs/validation';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import { DIFFERENT_ADDRESSES_ERROR_MSG } from './AdminModal.constants';
 
-export const addressSchema = z
-  .string()
-  .refine(
-    value => isValidAddress(value, chainInfo.bech32Config.bech32PrefixAccAddr),
-    {
-      message: invalidRegenAddress,
-    },
-  );
+type GetAddressSchemaParams = {
+  invalidRegenAddress: string;
+  requiredMessage: string;
+  differentAddressesErrorMessage: string;
+};
 
-export const optionalAddressSchema = z
-  .string()
-  .refine(
-    value =>
-      value
-        ? isValidAddress(value, chainInfo.bech32Config.bech32PrefixAccAddr)
-        : true,
-    {
-      message: invalidRegenAddress,
-    },
-  )
-  .optional()
-  .nullable();
+export const getAddressSchema = ({
+  invalidRegenAddress,
+}: GetAddressSchemaParams) =>
+  z
+    .string()
+    .refine(
+      value =>
+        isValidAddress(value, chainInfo.bech32Config.bech32PrefixAccAddr),
+      {
+        message: invalidRegenAddress,
+      },
+    );
 
-export const getAdminModalSchema = (_: TranslatorType) =>
+export type AddressSchemaType = ReturnType<typeof getAddressSchema>;
+
+type GetOptionalAddressSchemaParams = {
+  invalidRegenAddress: string;
+};
+
+export const getOptionalAddressSchema = ({
+  invalidRegenAddress,
+}: GetOptionalAddressSchemaParams) =>
+  z
+    .string()
+    .refine(
+      value =>
+        value
+          ? isValidAddress(value, chainInfo.bech32Config.bech32PrefixAccAddr)
+          : true,
+      {
+        message: invalidRegenAddress,
+      },
+    )
+    .optional()
+    .nullable();
+
+export type OptionalAddressSchemaType = ReturnType<
+  typeof getOptionalAddressSchema
+>;
+
+type GetAdminModalSchemaParams = {
+  addressSchema: AddressSchemaType;
+  _: TranslatorType;
+};
+
+export const getAdminModalSchema = ({
+  addressSchema,
+  _,
+}: GetAdminModalSchemaParams) =>
   z
     .object({
       currentAddress: addressSchema,

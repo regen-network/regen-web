@@ -10,6 +10,13 @@ import NotFound from 'web-components/src/components/views/NotFoundView';
 
 import {
   getBottomFieldsTextMapping,
+  INVALID_AMOUNT,
+  INVALID_DATE,
+  INVALID_JSON,
+  INVALID_PAST_DATE,
+  INVALID_REGEN_ADDRESS,
+  INVALID_VCS_RETIREMENT,
+  REQUIRED_MESSAGE,
   RETIREMENT_INFO_TEXT,
   SAVE_EXIT_TEXT,
   SUBMIT_TEXT,
@@ -27,7 +34,12 @@ import {
   CREATE_BATCH_FORM_RECIPIENT_LABEL,
   CREATE_BATCH_FORM_WITH_RETIRE_LABEL,
 } from './CreateBatchMultiStepForm.constants';
-import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
+import CreditBasics, {
+  CreditBasicsFormValues,
+  getIsPastDateTest,
+  getJSONSchema,
+  getVcsMetadataSchema,
+} from './CreditBasics';
 import Recipients, { RecipientsFormValues } from './Recipients';
 import Result from './Result';
 import Review from './Review';
@@ -50,7 +62,44 @@ export type CreateBatchFormValues = CreditBasicsFormValues &
 
 export default function CreateBatchMultiStepForm(): React.ReactElement {
   const { _ } = useLingui();
-  const formModel = getFormModel(_);
+  const isPastDateTest = useMemo(
+    () =>
+      getIsPastDateTest({
+        invalidPastDate: _(INVALID_PAST_DATE),
+      }),
+    [_],
+  );
+  const vcsMetadataSchema = useMemo(
+    () =>
+      getVcsMetadataSchema({
+        requiredMessage: _(REQUIRED_MESSAGE),
+        invalidVCSRetirement: _(INVALID_VCS_RETIREMENT),
+      }),
+    [_],
+  );
+  const JSONSchema = useMemo(
+    () =>
+      getJSONSchema({
+        invalidJSON: _(INVALID_JSON),
+      }),
+    [_],
+  );
+  const formModel = useMemo(
+    () =>
+      getFormModel({
+        requiredMessage: _(REQUIRED_MESSAGE),
+        invalidRegenAddress: _(INVALID_REGEN_ADDRESS),
+        invalidAmount: _(INVALID_AMOUNT),
+        invalidDate: _(INVALID_DATE),
+        invalidVCSRetirement: _(INVALID_VCS_RETIREMENT),
+        invalidJSON: _(INVALID_JSON),
+        isPastDateTest,
+        vcsMetadataSchema,
+        JSONSchema,
+        _,
+      }),
+    [isPastDateTest, vcsMetadataSchema, JSONSchema, _],
+  );
 
   // state for fill-the-form flow
   const {

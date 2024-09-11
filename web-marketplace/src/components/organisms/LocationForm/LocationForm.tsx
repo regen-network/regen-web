@@ -9,6 +9,7 @@ import LocationField from 'web-components/src/components/inputs/new/LocationFiel
 import { isGeocodingFeature } from 'web-components/src/components/inputs/new/LocationField/LocationField.types';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { REQUIRED_MESSAGE } from 'lib/constants/shared.constants';
 
 import { useProjectEditContext } from 'pages';
 import { useCreateProjectContext } from 'pages/ProjectCreate';
@@ -24,8 +25,8 @@ import {
   LOCATION_PLACEHOLDER,
 } from './LocationForm.constants';
 import {
+  getLocationFormSchema,
   locationFormDraftSchema,
-  locationFormSchema,
   LocationFormSchemaType,
 } from './LocationForm.schema';
 
@@ -44,6 +45,9 @@ const LocationForm: React.FC<LocationFormProps> = ({
 }) => {
   const { _ } = useLingui();
   const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
+  const locationFormSchema = getLocationFormSchema({
+    requiredMessage: _(REQUIRED_MESSAGE),
+  });
   const form = useZodForm({
     schema: locationFormSchema,
     draftSchema: locationFormDraftSchema,

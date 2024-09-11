@@ -11,6 +11,10 @@ interface BasketPutModalProps extends RegenModalProps, BasketPutProps {
   title: string;
   maxLabel: string;
   availableLabel: string;
+  requiredMessage: string;
+  invalidAmount: string;
+  insufficientCredits: string;
+  invalidDecimalCount: string;
 }
 
 const BasketPutModal: React.FC<React.PropsWithChildren<BasketPutModalProps>> =
@@ -28,6 +32,10 @@ const BasketPutModal: React.FC<React.PropsWithChildren<BasketPutModalProps>> =
     submitErrorText,
     maxLabel,
     availableLabel,
+    requiredMessage,
+    invalidAmount,
+    insufficientCredits,
+    invalidDecimalCount,
     onClose,
     onSubmit,
     onBatchDenomChange,
@@ -48,6 +56,10 @@ const BasketPutModal: React.FC<React.PropsWithChildren<BasketPutModalProps>> =
         amountLabel={amountLabel}
         submitLabel={submitLabel}
         submitErrorText={submitErrorText}
+        requiredMessage={requiredMessage}
+        invalidAmount={invalidAmount}
+        insufficientCredits={insufficientCredits}
+        invalidDecimalCount={invalidDecimalCount}
       />
     </FormModalTemplate>
   );

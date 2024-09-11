@@ -11,9 +11,10 @@ import ControlledFormLabel from 'web-components/src/components/form/ControlledFo
 import ControlledTextField from 'web-components/src/components/inputs/ControlledTextField';
 import { DatePickField } from 'web-components/src/components/inputs/DatePickField';
 import Toggle from 'web-components/src/components/inputs/Toggle';
-import { requiredMessage } from 'web-components/src/components/inputs/validation';
 import { Subtitle } from 'web-components/src/components/typography';
 import { Theme } from 'web-components/src/theme/muiTheme';
+
+import { REQUIRED_MESSAGE } from 'lib/constants/shared.constants';
 
 interface AdditionalityFormProps {
   submit: (values: AdditionalityValues) => Promise<void>;
@@ -79,7 +80,7 @@ export const AdditionalityForm: React.FC<
         const errorFields: Array<keyof AdditionalityValues> = [];
         errorFields.forEach(value => {
           if (!values[value]) {
-            errors[value] = requiredMessage;
+            errors[value] = _(REQUIRED_MESSAGE);
           }
         });
         return errors;

@@ -21,6 +21,7 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import {
   APPLY,
+  REQUIRED_MESSAGE,
   TITLE_CROP,
   TITLE_IGNORE_CROP,
   UPDATE,
@@ -134,6 +135,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           const hasError = validateEditProfileForm({
             setError: form.setError,
             values: data,
+            requiredMessage: _(REQUIRED_MESSAGE),
           });
           if (!hasError) {
             try {

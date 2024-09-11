@@ -1,15 +1,20 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { z } from 'zod';
 
-import { requiredMessage } from 'web-components/src/components/inputs/validation';
+type LocationFormSchemaParams = {
+  requiredMessage: string;
+};
 
-export const locationFormSchema = z.object({
-  'schema:location': z
-    .union([z.string(), z.custom<GeocodeFeature>()])
-    .refine(value => !!value, {
-      message: requiredMessage,
-    }),
-});
+export const getLocationFormSchema = ({
+  requiredMessage,
+}: LocationFormSchemaParams) =>
+  z.object({
+    'schema:location': z
+      .union([z.string(), z.custom<GeocodeFeature>()])
+      .refine(value => !!value, {
+        message: requiredMessage,
+      }),
+  });
 
 export const locationFormDraftSchema = z.object({
   'schema:location': z
@@ -17,4 +22,6 @@ export const locationFormDraftSchema = z.object({
     .optional(),
 });
 
-export type LocationFormSchemaType = z.infer<typeof locationFormSchema>;
+export type LocationFormSchemaType = z.infer<
+  ReturnType<typeof getLocationFormSchema>
+>;

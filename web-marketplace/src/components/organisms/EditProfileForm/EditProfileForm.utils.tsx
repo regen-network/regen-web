@@ -1,16 +1,16 @@
 import { UseFormReturn } from 'react-hook-form';
 
-import { requiredMessage } from 'web-components/src/components/inputs/validation';
-
 import { EditProfileFormSchemaType } from './EditProfileForm.schema';
 
 type Props = {
   values: EditProfileFormSchemaType;
+  requiredMessage: string;
   setError: UseFormReturn<EditProfileFormSchemaType>['setError'];
 };
 
 export const validateEditProfileForm = ({
   values,
+  requiredMessage,
   setError,
 }: Props): boolean => {
   let hasError = false;

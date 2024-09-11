@@ -1,22 +1,26 @@
 import { z } from 'zod';
 
-import {
-  positiveNumber,
-  requiredMessage,
-} from 'web-components/src/components/inputs/validation';
+type Params = {
+  requiredMessage: string;
+  positiveNumber: string;
+};
 
-export const basicInfoFormSchema = z.object({
-  'schema:name': z.string().min(1, requiredMessage),
-  'regen:projectSize': z.object({
-    'qudt:numericValue': z
-      .number({
-        invalid_type_error: requiredMessage,
-      })
-      .positive(positiveNumber)
-      .optional(),
-    'qudt:unit': z.string(),
-  }),
-});
+export const getBasicInfoFormSchema = ({
+  requiredMessage,
+  positiveNumber,
+}: Params) =>
+  z.object({
+    'schema:name': z.string().min(1, requiredMessage),
+    'regen:projectSize': z.object({
+      'qudt:numericValue': z
+        .number({
+          invalid_type_error: requiredMessage,
+        })
+        .positive(positiveNumber)
+        .optional(),
+      'qudt:unit': z.string(),
+    }),
+  });
 
 export const basicInfoFormDraftSchema = z
   .object({
@@ -28,7 +32,9 @@ export const basicInfoFormDraftSchema = z
   })
   .partial();
 
-export type BasicInfoFormSchemaType = z.infer<typeof basicInfoFormSchema>;
+export type BasicInfoFormSchemaType = z.infer<
+  ReturnType<typeof getBasicInfoFormSchema>
+>;
 export type BasicInfoFormDraftSchemaType = z.infer<
   typeof basicInfoFormDraftSchema
 >;

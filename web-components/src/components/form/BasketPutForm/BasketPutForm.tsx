@@ -4,7 +4,7 @@ import { Field, Form, Formik, FormikErrors } from 'formik';
 import { Body } from '../../../components/typography';
 import AmountField from '../../inputs/AmountField';
 import SelectTextField, { Option } from '../../inputs/SelectTextField';
-import { requiredMessage, validateAmount } from '../../inputs/validation';
+import { validateAmount } from '../../inputs/validation';
 import { RegenModalProps } from '../../modal';
 import Submit from '../Submit';
 import { BasketPutFormOnChange } from './BasketPutForm.OnChange';
@@ -19,6 +19,10 @@ export interface BasketPutProps {
   amountLabel: string;
   submitLabel: string;
   submitErrorText: string;
+  requiredMessage: string;
+  invalidAmount: string;
+  insufficientCredits: string;
+  invalidDecimalCount: string;
   onSubmit: (values: FormValues) => Promise<void>;
   onBatchDenomChange?: (batchDenom: string | undefined) => void;
 }
@@ -47,6 +51,10 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   basketLabel,
   submitLabel,
   submitErrorText,
+  requiredMessage,
+  invalidAmount,
+  insufficientCredits,
+  invalidDecimalCount,
   onClose,
   onSubmit,
   onBatchDenomChange,
@@ -74,7 +82,14 @@ const BasketPutForm: React.FC<React.PropsWithChildren<FormProps>> = ({
     if (!values.basketDenom) {
       errors.basketDenom = requiredMessage;
     }
-    const errAmount = validateAmount(availableTradableAmount, values.amount);
+    const errAmount = validateAmount({
+      availableTradableAmount,
+      requiredMessage,
+      invalidAmount,
+      insufficientCredits,
+      invalidDecimalCount,
+      amount: values.amount,
+    });
     if (errAmount) errors.amount = errAmount;
 
     return errors;

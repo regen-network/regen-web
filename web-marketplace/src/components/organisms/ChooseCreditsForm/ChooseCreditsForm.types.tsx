@@ -2,8 +2,6 @@ import { ChangeEvent, ReactNode } from 'react';
 
 import { Currency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
-export type PaymentOptionsType = 'card' | 'crypto';
-
 export interface ChooseCreditButtonProps {
   children: ReactNode;
   value: string;

@@ -250,10 +250,11 @@ export const PostForm = ({
         description={
           <Body>
             <Trans>
-              '5MB max. Supported file types include text, spreadsheets, images,
-              and video files. '
+              5MB max. Supported file types include text, spreadsheets, images,
+              and video files.
             </Trans>
-            <Link href="#">
+            &nbsp;
+            <Link href="https://guides.regen.network/guides/regen-marketplace-project-developers-and-land-stewards/creating-posts">
               <Trans>View all supported file types»</Trans>
             </Link>
           </Body>

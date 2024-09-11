@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-09-10 18:28+0100\n"
+"POT-Creation-Date: 2024-09-11 09:33+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,10 +10,6 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:31
 msgid ""
-msgstr ""
-
-#: src/components/organisms/PostForm/PostForm.tsx:252
-msgid "'5MB max. Supported file types include text, spreadsheets, images, and video files. '"
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:181
@@ -87,6 +83,10 @@ msgstr ""
 
 #: src/components/molecules/CreditClassDetailsColumn.tsx:131
 msgid "1 Ton of CO2e"
+msgstr ""
+
+#: src/components/organisms/PostForm/PostForm.tsx:252
+msgid "5MB max. Supported file types include text, spreadsheets, images, and video files."
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:27
@@ -196,7 +196,7 @@ msgstr ""
 msgid "All projects"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:395
+#: src/components/organisms/PostForm/PostForm.tsx:396
 msgid "All uploaded files and their location data will be hidden from public view."
 msgstr ""
 
@@ -1124,7 +1124,7 @@ msgstr ""
 msgid "Featured Projects"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:367
+#: src/components/organisms/PostForm/PostForm.tsx:368
 msgid "File locations can still be shared privately via a secret link."
 msgstr ""
 
@@ -1140,7 +1140,7 @@ msgstr ""
 msgid "Files"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:402
+#: src/components/organisms/PostForm/PostForm.tsx:403
 msgid "Files can still be shared privately via secret link."
 msgstr ""
 
@@ -1440,19 +1440,19 @@ msgstr ""
 msgid "Make sure this is the correct REGEN address. <0>If you change this to an address you don’t have access to, you will be unable to edit the project.</0>"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:418
+#: src/components/organisms/PostForm/PostForm.tsx:419
 msgid "Make the entire post private"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:332
+#: src/components/organisms/PostForm/PostForm.tsx:333
 msgid "Make the entire post public"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:384
+#: src/components/organisms/PostForm/PostForm.tsx:385
 msgid "Make the files and location data private"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:349
+#: src/components/organisms/PostForm/PostForm.tsx:350
 msgid "Make the location data private"
 msgstr ""
 
@@ -1617,7 +1617,7 @@ msgstr ""
 msgid "Note: all location data can be made private on the main create post form."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:454
+#: src/components/organisms/PostForm/PostForm.tsx:455
 msgid "NOTE: As posts are anchored to the blockchain, they are not editable once published"
 msgstr ""
 
@@ -1647,7 +1647,7 @@ msgstr ""
 msgid "old project admin"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:360
+#: src/components/organisms/PostForm/PostForm.tsx:361
 msgid "Only the locations of the files will be hidden from public view."
 msgstr ""
 
@@ -1730,7 +1730,7 @@ msgstr ""
 msgid "Portfolio"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:354
+#: src/components/organisms/PostForm/PostForm.tsx:355
 msgid "Post and files are public"
 msgstr ""
 
@@ -1742,7 +1742,7 @@ msgstr ""
 msgid "Post is private"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:389
+#: src/components/organisms/PostForm/PostForm.tsx:390
 msgid "Post is public"
 msgstr ""
 
@@ -1806,7 +1806,7 @@ msgstr ""
 msgid "Privacy"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:322
+#: src/components/organisms/PostForm/PostForm.tsx:323
 msgid "Privacy settings"
 msgstr ""
 
@@ -2505,11 +2505,11 @@ msgstr ""
 msgid "The individual or organization that is in charge of managing the project and will appear on the project page."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:424
+#: src/components/organisms/PostForm/PostForm.tsx:425
 msgid "The post and all of its contents will be hidden from public view."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:431
+#: src/components/organisms/PostForm/PostForm.tsx:432
 msgid "The post and files still can be shared privately via secret link."
 msgstr ""
 
@@ -2603,7 +2603,7 @@ msgstr ""
 msgid "This name will appear on the retirement certificate unless you choose to retire anonymously in the next step. It is also your user profile name."
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:337
+#: src/components/organisms/PostForm/PostForm.tsx:338
 msgid "This post and all of its files will be visible."
 msgstr ""
 
@@ -2816,7 +2816,7 @@ msgstr ""
 msgid "VIEW ALL SELL ORDERS"
 msgstr ""
 
-#: src/components/organisms/PostForm/PostForm.tsx:257
+#: src/components/organisms/PostForm/PostForm.tsx:258
 msgid "View all supported file types»"
 msgstr ""
 

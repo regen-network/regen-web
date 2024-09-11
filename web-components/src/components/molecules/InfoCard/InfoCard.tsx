@@ -1,3 +1,4 @@
+import { isValidElement } from 'react';
 import { Box, SxProps } from '@mui/material';
 
 import { BlockContent } from '../../../components/block-content';
@@ -42,7 +43,11 @@ const InfoCard = ({
             {parseText(title)}
           </Subtitle>
           <Body as="div" sx={{ mt: 1.75 }}>
-            <BlockContent content={description} />
+            {isValidElement(description) ? (
+              description
+            ) : (
+              <BlockContent content={description} />
+            )}
           </Body>
         </Box>
       </Box>

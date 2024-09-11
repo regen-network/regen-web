@@ -5,7 +5,7 @@
     "declaration": true,
     "jsx": "react-jsx",
     "noEmitOnError": true,
-    "types": ["node", "jest", "vite/client"],
+    "types": ["node", "vite/client", "vitest/globals","@testing-library/jest-dom"],
     "typeRoots": [
       "./node_modules/@types/",
       "./types",
@@ -24,6 +24,6 @@
     "isolatedModules": true,
     "target": "es6"
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["**/*.test.*", "node_modules"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.test.ts", "src/**/*.spec.tsx"],
+  "exclude": ["node_modules"]
 }

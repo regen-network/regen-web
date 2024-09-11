@@ -1,4 +1,5 @@
 import NodeGlobalsPolyfillPlugin from '@esbuild-plugins/node-globals-polyfill';
+import { lingui } from '@lingui/vite-plugin';
 import inject from '@rollup/plugin-inject';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -7,7 +8,6 @@ import { defineConfig } from 'vite';
 import vitePluginRequire from 'vite-plugin-require';
 import svgrPlugin from 'vite-plugin-svgr';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
-import { lingui } from '@lingui/vite-plugin';
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
@@ -31,6 +31,7 @@ export default defineConfig(({ mode }) => {
         config: path.resolve(__dirname, 'src/config'),
         ledger: path.resolve(__dirname, 'src/ledger'),
         clients: path.resolve(__dirname, 'src/clients'),
+        test: path.resolve(__dirname, '../test'),
       },
     },
     build:
@@ -67,6 +68,11 @@ export default defineConfig(({ mode }) => {
               ]
             : undefined,
       },
+    },
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: './test/setup.ts',
     },
   };
 });

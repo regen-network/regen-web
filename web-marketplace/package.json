@@ -74,7 +74,7 @@
     "react-slick": "^0.29.0",
     "react-use-intercom": "^1.2.0",
     "slug": "^9.0.0",
-    "stream": "^0.0.2",
+    "stream": "^0.0.3",
     "tss-react": "^4.4.1",
     "url-search-params-polyfill": "^8.1.0",
     "use-analytics": "^0.0.5",
@@ -95,7 +95,8 @@
     "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml",
     "graphql:codegen-indexer": "graphql-codegen --config indexer-codegen.yml",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "i18n:extract": "rm -rf src/lib/i18n/locales && lingui extract --overwrite"
+    "i18n:extract": "rm -rf src/lib/i18n/locales && lingui extract --overwrite",
+    "test": "vitest"
   },
   "browserslist": {
     "production": [
@@ -116,14 +117,15 @@
     "@lingui/cli": "^4.11.2",
     "@lingui/vite-plugin": "^4.11.2",
     "@rollup/plugin-inject": "^5.0.3",
-    "@storybook/addon-storyshots": "^6.3.12",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/mapbox__mapbox-sdk": "^0.13.6",
     "@types/react-lazyload": "^3.1.0",
     "@types/react-router-hash-link": "^2.4.5",
     "@types/slug": "^5.0.8",
-    "@types/storybook__addon-storyshots": "^5.3.1",
     "@types/use-analytics": "^0.0.0",
     "@types/wellknown": "^0.5.8",
     "@vitejs/plugin-react": "^4.0.0",
@@ -148,7 +150,8 @@
     "vite": "^5.2.12",
     "vite-plugin-checker": "^0.6.0",
     "vite-plugin-svgr": "^3.2.0",
-    "vite-tsconfig-paths": "^4.2.0"
+    "vite-tsconfig-paths": "^4.2.0",
+    "vitest": "^2.0.5"
   },
   "overrides": {
     "@walletconnect/sign-client": "2.10.4"

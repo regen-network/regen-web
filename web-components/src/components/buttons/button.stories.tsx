@@ -5,10 +5,12 @@ import { Flex } from '../box';
 import ContainedButton from './ContainedButton';
 import { CopyButton } from './CopyButton';
 import { EditButton } from './EditButton';
+import { EditButtonIcon } from './EditButtonIcon';
 import { ExpandButton } from './ExpandButton';
 import OutlinedButton from './OutlinedButton';
 import PrevNextButton from './PrevNextButton';
 import { SaveButton } from './SaveButton';
+import { SetMaxButton } from './SetMaxButton';
 import { TableActionButtons } from './TableActionButtons';
 import { TextButton } from './TextButton';
 
@@ -88,6 +90,8 @@ export const editButton = () => (
   <EditButton buttonText="Edit" onClick={() => {}} />
 );
 
+export const editButtonIcon = () => <EditButtonIcon onClick={() => {}} />;
+
 export const copyButton = {
   render: () => (
     <CopyButton content="foo" tooltipText="Copy it" toastText="Copied!" />
@@ -99,6 +103,14 @@ export const saveButton = {
     <>
       <SaveButton buttonText="Save" className="mb-20" />
       <SaveButton buttonText="Disabled" disabled />
+    </>
+  ),
+};
+
+export const setMaxButton = {
+  render: () => (
+    <>
+      <SetMaxButton onClick={() => {}} />
     </>
   ),
 };

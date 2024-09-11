@@ -6,28 +6,54 @@ import {
   EVMOS_DENOM,
   GRAVITY_USDC_DENOM,
   REGEN_DENOM,
-} from 'config/allowedBaseDenoms';
+  USD_DENOM,
+  USDC_DENOM,
+  USDCAXL_DENOM,
+} from 'web-marketplace/src/config/allowedBaseDenoms';
 
 import AxlUsdcIcon from 'web-components/src/components/icons/coins/AxlUsdcIcon';
 import EeurIcon from 'web-components/src/components/icons/coins/EeurIcon';
 import EvmosIcon from 'web-components/src/components/icons/coins/EvmosIcon';
 import GravUsdcIcon from 'web-components/src/components/icons/coins/GravUsdcIcon';
+import USFlagIcon from 'web-components/src/components/icons/flags/USFlagIcon';
 import { RegenTokenIcon } from 'web-components/src/components/icons/RegenTokenIcon';
 
 export interface Props {
   baseDenom?: string;
   sx?: SxProps<Theme>;
   iconSx?: SxProps<Theme>;
+  className?: string;
 }
 
-const DenomIcon = ({ baseDenom, sx = [], iconSx }: Props): JSX.Element => {
+const DenomIcon = ({
+  baseDenom,
+  sx = [],
+  iconSx,
+  className = '',
+}: Props): JSX.Element => {
   return (
     <Box component="span" sx={[...(Array.isArray(sx) ? sx : [sx])]}>
-      {baseDenom === GRAVITY_USDC_DENOM && <GravUsdcIcon sx={iconSx} />}
-      {baseDenom === AXELAR_USDC_DENOM && <AxlUsdcIcon sx={iconSx} />}
-      {baseDenom === EEUR_DENOM && <EeurIcon sx={iconSx} />}
-      {baseDenom === REGEN_DENOM && <RegenTokenIcon sx={iconSx} />}
-      {baseDenom === EVMOS_DENOM && <EvmosIcon sx={iconSx} />}
+      {baseDenom === GRAVITY_USDC_DENOM ||
+        (baseDenom === USDC_DENOM && (
+          <GravUsdcIcon sx={iconSx} className={className} />
+        ))}
+      {baseDenom === AXELAR_USDC_DENOM && (
+        <AxlUsdcIcon sx={iconSx} className={className} />
+      )}
+      {baseDenom === EEUR_DENOM && (
+        <EeurIcon sx={iconSx} className={className} />
+      )}
+      {baseDenom === REGEN_DENOM && (
+        <RegenTokenIcon sx={iconSx} className={className} />
+      )}
+      {baseDenom === EVMOS_DENOM && (
+        <EvmosIcon sx={iconSx} className={className} />
+      )}
+      {baseDenom === USD_DENOM && <USFlagIcon className={className} />}
+
+      {baseDenom === USDCAXL_DENOM && (
+        <AxlUsdcIcon sx={iconSx} className={className} />
+      )}
     </Box>
   );
 };

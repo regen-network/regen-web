@@ -1,4 +1,4 @@
-import { forwardRef, ReactNode } from 'react';
+import { ChangeEvent, forwardRef, ReactNode } from 'react';
 import {
   Box,
   FormControlLabel,
@@ -17,9 +17,9 @@ import { useRadioStyles } from './Radio.styles';
 import { RadiotVariant } from './Radio.types';
 
 export interface RadioProps extends RadioPropsMui {
-  value?: string;
+  value?: string | boolean;
   label?: ReactNode;
-  selectedValue?: string;
+  selectedValue?: string | boolean;
   variant?: RadiotVariant;
   optional?: string | boolean;
   helperText?: string | JSX.Element;
@@ -27,6 +27,7 @@ export interface RadioProps extends RadioPropsMui {
   sx?: SxProps<Theme>;
   description?: ReactNode;
   tooltip?: ReactNode;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
@@ -43,6 +44,7 @@ export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
       description,
       tooltip,
       disabled,
+      onChange,
       ...props
     },
     ref,
@@ -89,6 +91,7 @@ export const Radio = forwardRef<HTMLButtonElement, RadioProps>(
                 icon={<span className={classes.radioBtn} />}
                 sx={{ p: 0 }}
                 ref={ref}
+                onChange={onChange}
               />
             }
             sx={{ ml: 0, mr: 1 }}

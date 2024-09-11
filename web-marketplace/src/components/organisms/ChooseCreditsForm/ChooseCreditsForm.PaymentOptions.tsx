@@ -4,11 +4,10 @@ import { Trans } from '@lingui/macro';
 import CreditCardIcon from 'web-components/src/components/icons/CreditCardIcon';
 import CryptoIcon from 'web-components/src/components/icons/CryptoIcon';
 
+import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
+
 import { PAYMENT_OPTIONS } from './ChooseCreditsForm.constants';
-import {
-  ChooseCreditButtonProps,
-  PaymentOptionsType,
-} from './ChooseCreditsForm.types';
+import { ChooseCreditButtonProps } from './ChooseCreditsForm.types';
 
 function ChooseCreditButton({
   children,

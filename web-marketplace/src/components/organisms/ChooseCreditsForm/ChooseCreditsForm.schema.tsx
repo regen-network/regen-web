@@ -1,5 +1,6 @@
 import { i18n } from '@lingui/core';
 import {
+  CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
   CURRENCY_AMOUNT,
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
@@ -33,8 +34,7 @@ export const createChooseCreditsFormSchema = ({
       .number()
       .positive(POSITIVE_NUMBER)
       .max(creditsCap, `${i18n._(MAX_CREDITS)} ${creditsCap}`),
-    retiring: z.boolean(),
-    creditVintageOptions: z.array(z.string()),
+    [CREDIT_VINTAGE_OPTIONS]: z.array(z.string()),
   });
 };
 

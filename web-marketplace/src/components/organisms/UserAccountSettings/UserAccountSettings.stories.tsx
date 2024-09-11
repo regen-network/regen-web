@@ -28,6 +28,7 @@ const meta: Meta<typeof UserAccountSettings> = {
         action('disconnect wallet')();
       },
     },
+    custodialAddress: 'mock-regen-custodial-address',
   },
 };
 

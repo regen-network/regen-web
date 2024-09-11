@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/regen-network/regen-web/compare/v2.6.5...v2.7.0) (2024-09-11)
+
+### Bug Fixes
+
+- WWW-4 google analytics on all website pages ([#2395](https://github.com/regen-network/regen-web/issues/2395)) ([7fc7ba6](https://github.com/regen-network/regen-web/commit/7fc7ba645078c95102344e599f277296d1e72e86))
+
+### Features
+
+- APP-201 buy credits flow step 1 ([#2408](https://github.com/regen-network/regen-web/issues/2408)) ([a622abb](https://github.com/regen-network/regen-web/commit/a622abb5e2329869490bf8714dc93991f4d8d404))
+- translate web components part1 ([#2454](https://github.com/regen-network/regen-web/issues/2454)) ([80e59d0](https://github.com/regen-network/regen-web/commit/80e59d0e7d12a0fdc50cf125fdd53ca7fcb568c2))
+- translate web-components from Document to forms ([#2464](https://github.com/regen-network/regen-web/issues/2464)) ([4570801](https://github.com/regen-network/regen-web/commit/4570801995f047d11c2ee61bc4d7bf10830e9114))
+
 ## [2.6.5](https://github.com/regen-network/regen-web/compare/v2.6.4...v2.6.5) (2024-08-16)
 
 **Note:** Version bump only for package web-www

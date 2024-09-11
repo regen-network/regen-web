@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/regen-network/regen-web/compare/v2.6.5...v2.7.0) (2024-09-11)
+
+### Bug Fixes
+
+- APP-366 storybook issue on story change ([#2467](https://github.com/regen-network/regen-web/issues/2467)) ([57c18a8](https://github.com/regen-network/regen-web/commit/57c18a88a70c3089a3c8cf3a79c2b623bf962268))
+- storybook issue with vite react plugin ([#2438](https://github.com/regen-network/regen-web/issues/2438)) ([3053ba2](https://github.com/regen-network/regen-web/commit/3053ba264993d09dbae3d9ea3adce7fedd788916))
+- storybook vite config ([#2406](https://github.com/regen-network/regen-web/issues/2406)) ([7e79f44](https://github.com/regen-network/regen-web/commit/7e79f4493f31649ec95277a1656f4723258c05cb))
+
+### Features
+
+- APP-195 files preview ([#2403](https://github.com/regen-network/regen-web/issues/2403)) ([a295de2](https://github.com/regen-network/regen-web/commit/a295de25be2d39cfe9809895aa5008e3f6ac0410))
+- APP-202 buy credits step 2 ([#2418](https://github.com/regen-network/regen-web/issues/2418)) ([30e0bcb](https://github.com/regen-network/regen-web/commit/30e0bcb7e629ced57b301b9d51e4723015b7fafd))
+- APP-203 buy credits step 3 ([#2419](https://github.com/regen-network/regen-web/issues/2419)) ([9eac1f0](https://github.com/regen-network/regen-web/commit/9eac1f0f6963f94c8d6b822fb4e49acb3a4b787a))
+- enable marketplace customization ([#2407](https://github.com/regen-network/regen-web/issues/2407)) ([eed7ab9](https://github.com/regen-network/regen-web/commit/eed7ab9181f226b5d516557f9683f639eb5b455a))
+- trad components part2 ([#2449](https://github.com/regen-network/regen-web/issues/2449)) ([6ab5e84](https://github.com/regen-network/regen-web/commit/6ab5e84cc9f829851bd9c91ccb67c4a42535453f))
+
 # [2.6.0](https://github.com/regen-network/regen-web/compare/v2.5.1...v2.6.0) (2024-05-30)
 
 ### Features

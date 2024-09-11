@@ -73,7 +73,7 @@ export const PostFlow = ({
   const { activeAccount } = useAuth();
   const [isFormModalOpen, setIsFormModalOpen] = useState(true);
   const [iri, setIri] = useState<string | undefined>();
-  const { data: createdPostData } = useQuery(
+  const { data: createdPostData, isFetching } = useQuery(
     getPostQuery({
       iri,
       enabled: !!iri,
@@ -113,7 +113,6 @@ export const PostFlow = ({
             };
           });
         try {
-          console.log(data.published);
           await postData({
             url: `${apiServerUrl}/marketplace/v1/posts${
               draftPostIri ? `/${draftPostIri}` : ''
@@ -174,9 +173,8 @@ export const PostFlow = ({
 
   const hasAddress =
     !!wallet?.address && activeAccount?.addr === wallet.address;
-  console.log('createdPostData', createdPostData);
   useEffect(() => {
-    if (iri && createdPostData) {
+    if (iri && createdPostData && !isFetching) {
       setIsFormModalOpen(false);
       if (createdPostData.published) {
         if (hasAddress) {
@@ -205,8 +203,9 @@ export const PostFlow = ({
     draftPostIri,
     fetchMsgAnchor,
     hasAddress,
-    initialValues?.iri,
+    initialValues.iri,
     iri,
+    isFetching,
     navigate,
     offChainProjectId,
     onModalClose,

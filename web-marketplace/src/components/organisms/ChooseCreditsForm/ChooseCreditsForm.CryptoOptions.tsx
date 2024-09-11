@@ -1,16 +1,11 @@
 import { useFormContext } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import {
-  cryptoOptions,
-  RETIRING,
-} from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
+import { cryptoOptions } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
 import { RadioGroup } from 'web-components/src/components/inputs/new/RadioGroup/RadioGroup';
 import { Title } from 'web-components/src/components/typography/Title';
-
-import { ChooseCreditsFormSchemaType } from './ChooseCreditsForm.schema';
 
 export function CryptoOptions({
   retiring,
@@ -19,7 +14,6 @@ export function CryptoOptions({
   retiring: boolean;
   handleCryptoPurchaseOptions: () => void;
 }) {
-  const { register } = useFormContext<ChooseCreditsFormSchemaType>();
   const { _ } = useLingui();
   return (
     <div>
@@ -35,10 +29,7 @@ export function CryptoOptions({
       <RadioGroup className="gap-10">
         {cryptoOptions.map(({ label, description, linkTo, value }) => (
           <Radio
-            {...(register(RETIRING),
-            {
-              value,
-            })}
+            value={value}
             onChange={handleCryptoPurchaseOptions}
             selectedValue={retiring}
             key={_(label)}

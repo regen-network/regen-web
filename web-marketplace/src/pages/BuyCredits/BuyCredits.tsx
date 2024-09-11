@@ -5,6 +5,7 @@ import { useLingui } from '@lingui/react';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
+import { BuyCreditsForm } from './BuyCredits.Form';
 import { PaymentOptionsType } from './BuyCredits.types';
 import { getFormModel } from './BuyCredits.utils';
 
@@ -27,7 +28,12 @@ export const BuyCredits = () => {
       steps={formModel.steps}
       initialValues={formModel.initialValues}
     >
-      <BuyCreditsMultiStepForm />
+      <BuyCreditsForm
+        setPaymentOption={setPaymentOption}
+        paymentOption={paymentOption}
+        retiring={retiring}
+        setRetiring={setRetiring}
+      />
     </MultiStepTemplate>
   );
 };

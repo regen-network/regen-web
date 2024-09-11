@@ -7,6 +7,7 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
 import { Body, Subtitle } from 'web-components/src/components/typography';
 
+import { Link } from 'components/atoms';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
@@ -33,6 +34,7 @@ export const UserAccountSettings = ({
   email: initialEmail,
   socialProviders,
   walletProvider,
+  custodialAddress,
 }: UserAccountSettingsProps) => {
   const { _ } = useLingui();
   const {
@@ -152,6 +154,28 @@ export const UserAccountSettings = ({
         {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
         <ConnectField name="Keplr" {...walletProvider} />
       </div>
+      {custodialAddress && (
+        <div className="flex flex-col gap-30">
+          <div className="flex flex-col gap-10">
+            <Subtitle size="lg">
+              <Trans>Regen impact address</Trans>
+            </Subtitle>
+            <Body size="sm" color="info.dark-grey">
+              <Trans>
+                In order to buy and retire ecocredits using credit card payment,
+                we may generate a dedicated hosted wallet address to use as the
+                recipient of the retired blockchain credits. Please do not send
+                funds or tradable credits to this address, as you will not have
+                the ability to initiate transactions from this account.
+                <Link className="inline ml-5" href="http://google.com">
+                  Learn more»
+                </Link>
+              </Trans>
+            </Body>
+          </div>
+          <ConnectField address={custodialAddress} />
+        </div>
+      )}
     </div>
   );
 };

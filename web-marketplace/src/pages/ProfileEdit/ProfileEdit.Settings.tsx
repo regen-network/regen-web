@@ -55,6 +55,7 @@ export const ProfileEditSettings = () => {
         email={privActiveAccount?.email ?? ''}
         socialProviders={_socialProviders}
         walletProvider={walletProviderInfo}
+        custodialAddress={activeAccount?.custodialAddress}
       />
       <AccountConnectWalletModal
         open={isModalOpen}

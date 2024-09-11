@@ -1,3 +1,5 @@
+import { AccountByIdQuery } from 'generated/graphql';
+
 /**
  * Describes the props for the UserAccountSettings component.
  */
@@ -16,6 +18,13 @@ export interface UserAccountSettingsProps {
    * The wallet provider that the user can connect to.
    */
   walletProvider: WalletProviderInfo;
+
+  /**
+   * The current user's custodial address.
+   */
+  custodialAddress: NonNullable<
+    AccountByIdQuery['accountById']
+  >['custodialAddress'];
 }
 
 type DisconnectedState = {

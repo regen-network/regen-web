@@ -1,6 +1,10 @@
 msgid ""
 msgstr ""
+<<<<<<< HEAD
 "POT-Creation-Date: 2024-09-12 12:50+0200\n"
+=======
+"POT-Creation-Date: 2024-09-11 14:21+0100\n"
+>>>>>>> d818d2a0f (chore: update .po files)
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -749,15 +753,19 @@ msgstr ""
 msgid "Congrats! Your purchase was successful."
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:78
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:80
 msgid "connect"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.ConnectField.tsx:44
 msgid "CONNECT"
 msgstr ""
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:142
+=======
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:144
+>>>>>>> d818d2a0f (chore: update .po files)
 msgid "Connect a wallet address to be able to perform on chain tasks such as buying and selling credits, and creating projects on Regen Ledger."
 msgstr ""
 
@@ -1511,6 +1519,10 @@ msgstr ""
 msgid "In one sentence, summarize the story above."
 msgstr ""
 
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:163
+msgid "In order to buy and retire ecocredits using credit card payment, we may generate a dedicated hosted wallet address to use as the recipient of the retired blockchain credits. Please do not send funds or tradable credits to this address, as you will not have the ability to initiate transactions from this account.<0>Learn more»</0>"
+msgstr ""
+
 #: src/components/organisms/AdditionalityForm.tsx:139
 msgid "In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
 msgstr ""
@@ -1682,7 +1694,7 @@ msgstr ""
 msgid "log in for faster checkout"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:66
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:68
 msgid "Login Email"
 msgstr ""
 
@@ -2373,6 +2385,10 @@ msgstr ""
 msgid "Regen Data Provider"
 msgstr ""
 
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:160
+msgid "Regen impact address"
+msgstr ""
+
 #: src/siteMetadata.ts:4
 msgid "Regen Marketplace"
 msgstr ""
@@ -2727,7 +2743,7 @@ msgstr ""
 msgid "Small or Medium Sized Business"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:114
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:116
 msgid "Social Accounts"
 msgstr ""
 
@@ -3170,7 +3186,7 @@ msgstr ""
 msgid "Use my credit card on file ending in {0}"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:117
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:119
 msgid "Use your social account to log in to Regen Marketplace."
 msgstr ""
 
@@ -3314,7 +3330,7 @@ msgstr ""
 msgid "visit our homepage instead"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:139
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:141
 msgid "Wallet integration"
 msgstr ""
 

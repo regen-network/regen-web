@@ -31,7 +31,7 @@ export const getFormModel = ({
             : _(msg`Choose info`),
       },
       {
-        id: 'retirement-agree',
+        id: 'agree-purchase',
         name: retiring ? _(msg`Retirement`) : _(msg`Agree & purchase`),
       },
     ],

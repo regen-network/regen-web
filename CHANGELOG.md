@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.1](https://github.com/regen-network/regen-web/compare/v2.7.0...v2.7.1) (2024-09-11)
+
+### Bug Fixes
+
+- delete post success banner and redirect ([cca8177](https://github.com/regen-network/regen-web/commit/cca8177a21e0f645e029c37c1d8b92fff3807935))
+
 # [2.7.0](https://github.com/regen-network/regen-web/compare/v2.6.5...v2.7.0) (2024-09-11)
 
 ### Bug Fixes

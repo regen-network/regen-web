@@ -19,6 +19,7 @@ import {
 } from 'web-components/src/utils/format';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
 import { Bridge1Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -78,6 +79,7 @@ export const BridgableEcocreditsTable = ({
       >
         <ActionsTable
           tableLabel={_(msg`bridgable ecocredits table`)}
+          actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
           sx={tableStyles.rootOnlyTopBorder}
           renderActionButtons={(i: number) => (
             <OutlinedButton

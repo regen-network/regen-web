@@ -7,10 +7,7 @@ import Modal from '..';
 import { AddWalletModalConnectProps } from './AddWalletModalConnect';
 
 export interface AddWalletModalTemplateProps
-  extends AddWalletModalConnectProps {
-  title: string;
-  subtitle?: string;
-}
+  extends AddWalletModalConnectProps {}
 
 const AddWalletModalTemplate: React.FC<
   React.PropsWithChildren<AddWalletModalTemplateProps>

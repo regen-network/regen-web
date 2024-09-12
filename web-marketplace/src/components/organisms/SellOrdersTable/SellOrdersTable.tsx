@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import { useMemo } from 'react';
 import { msg } from '@lingui/macro';
+=======
+>>>>>>> 213a71eb1 (feat: translate web-components from map to views)
 import { useLingui } from '@lingui/react';
 
 import EmptyState from 'web-components/src/components/empty-state';
@@ -12,6 +15,7 @@ import {
 } from 'web-components/src/components/table/ActionsTable';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
 
 import { NormalizedSellOrder } from '../../../pages/Marketplace/Storefront/Storefront.types';
 import { getSellOrdersRow } from './SellOrdersTable.config';
@@ -31,14 +35,16 @@ const SellOrdersTable = ({
   onTableChange,
 }: Props): JSX.Element => {
   const { _ } = useLingui();
+
   const hasSellOrders = sellOrders.length > 0;
-  const SellOrdersRow = useMemo(() => getSellOrdersRow(_), [_]);
+  const sellOrdersRow = useMemo(() => getSellOrdersRow(_), [_]);
   return (
     <>
       {hasSellOrders && (
         <ActionsTable
           tableLabel={_(msg`Sell orders`)}
-          headerRows={SellOrdersRow}
+          headerRows={sellOrdersRow}
+          actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
           rows={sellOrders.map(sellOrder =>
             getSellOrdersTableRow({ sellOrder, _ }),
           )}

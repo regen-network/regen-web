@@ -55,6 +55,9 @@ export const Basic: Story = {
     return (
       <EmailConfirmationModal
         {...args}
+        title="Please check your email"
+        description="We’ve just sent a confirmation email to:"
+        helperText="Please enter the code from that email:"
         onClose={onClose}
         open={open}
         error={error ?? args.error}

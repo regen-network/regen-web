@@ -31,6 +31,7 @@ export interface Props {
   sx?: SxProps<Theme>;
   allImages?: boolean;
   className?: { root?: string; container?: string };
+  photoCredit: string;
   pdfPageHeight?: number;
   filesPreviews?: FilesPreviews;
 }
@@ -40,6 +41,7 @@ const Gallery = ({
   sx,
   allImages,
   className,
+  photoCredit,
   pdfPageHeight,
   filesPreviews,
 }: Props) => {
@@ -164,6 +166,7 @@ const Gallery = ({
         itemIndex={itemIndex}
         page={page}
         setPage={setPage}
+        photoCredit={photoCredit}
       />
     </Box>
   );

@@ -7,7 +7,15 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
 import { Body, Subtitle } from 'web-components/src/components/typography';
 
+<<<<<<< HEAD
 import { EMAIL_CONFIRMATION_ARIA_LABEL } from 'lib/constants/shared.constants';
+=======
+import {
+  EMAIL_CONFIRMATION_CODE_HELPER,
+  EMAIL_CONFIRMATION_DESCRIPTION,
+  EMAIL_CONFIRMATION_TITLE,
+} from 'lib/constants/shared.constants';
+>>>>>>> e096c3ca6 (feat: translate web-components from map to views)
 
 import { Link } from 'components/atoms';
 import Form from 'components/molecules/Form/Form';
@@ -87,6 +95,9 @@ export const UserAccountSettings = ({
       </Form>
       <EmailConfirmationModal
         ariaLabel={_(EMAIL_CONFIRMATION_ARIA_LABEL)}
+        title={_(EMAIL_CONFIRMATION_TITLE)}
+        description={_(EMAIL_CONFIRMATION_DESCRIPTION)}
+        helperText={_(EMAIL_CONFIRMATION_CODE_HELPER)}
         resendText={getResendCodeLabel({ resendTimeLeft, _ })}
         resendButtonLink={getResendCodeButtonLink({
           resendTimeLeft,

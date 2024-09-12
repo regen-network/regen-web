@@ -17,6 +17,9 @@ import {
   KEPLR_CONNECT_BUTTON,
   KEPLR_LINK_TEXT,
   KEPLR_LINK_URL,
+  KEPLR_WALLET_CONNECT_LEARN_HOW_TEXT,
+  KEPLR_WALLET_CONNECT_SUBTITLE,
+  KEPLR_WALLET_CONNECT_TITLE,
 } from './RegistryLayout.constants';
 
 export const RegistryLayoutConnectWalletModal = (): JSX.Element => {
@@ -73,6 +76,9 @@ export const RegistryLayoutConnectWalletModal = (): JSX.Element => {
               />
             ),
           }}
+          title={_(KEPLR_WALLET_CONNECT_TITLE)}
+          subtitle={_(KEPLR_WALLET_CONNECT_SUBTITLE)}
+          learnMoreText={_(KEPLR_WALLET_CONNECT_LEARN_HOW_TEXT)}
         />
       )}
       <ConnectWalletFlow

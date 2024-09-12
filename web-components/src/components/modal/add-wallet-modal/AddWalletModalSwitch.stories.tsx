@@ -14,7 +14,15 @@ const Template: ComponentStory<typeof AddWalletModalSwitch> = args => {
     setOpen(false);
   };
 
-  return <AddWalletModalSwitch onClose={onClose} open={open} />;
+  return (
+    <AddWalletModalSwitch
+      onClose={onClose}
+      open={open}
+      title="Switch wallet addresses in Keplr to add another address to your account"
+      subtitle="The current address is already linked to your account.
+Please first switch wallet addresses in the Keplr app to be able to add another address to your account."
+    />
+  );
 };
 
 export const Default = Template.bind({});

@@ -15,3 +15,7 @@ export const NEXT = msg`next`;
 export const POST_IS_DELETED = msg`Post is deleted`;
 export const DRAFT = msg`Draft`;
 export const UNTITLED = msg`Untitled`;
+export const PRIVATE_FILES_LABEL = msg`Files available on request`;
+export const PRIVATE_LOCATIONS_LABEL = msg`Location data available on request`;
+export const ADMIN_PRIVATE_LOCATIONS_LABEL = msg`Locations are private`;
+export const ADMIN_PRIVATE_FILES_LABEL = msg`Files are private`;

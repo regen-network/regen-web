@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react';
 import { Box, Link } from '@mui/material';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -10,6 +11,7 @@ import {
 
 import { Document } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';
+import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
 
 import { DOCUMENTATION_ROW } from './ProjectDetails.Documentation.config';
 import { DOCUMENT, VIEW } from './ProjectDetails.Documentation.constants';
@@ -26,9 +28,12 @@ export const ProjectDetailsDocumentationTable = ({
   sortCallbacks = [],
   onTableChange,
 }: Props): JSX.Element => {
+  const { _ } = useLingui();
+
   return (
     <ActionsTable
       tableLabel="Project documentation"
+      actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
       headerRows={DOCUMENTATION_ROW}
       rows={documents.map(document => getDocumentationTableRow({ document }))}
       sortCallbacks={sortCallbacks}

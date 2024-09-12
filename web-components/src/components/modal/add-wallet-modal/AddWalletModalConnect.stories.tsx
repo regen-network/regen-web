@@ -25,5 +25,7 @@ Default.args = {
     name: 'unnamed',
     addr: truncate('regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46'),
     profileImage: '/illustrations/frog.jpg',
+    title: 'Connect wallet address',
+    subtitle: 'Check your wallet for a confirmation popup.',
   },
 };

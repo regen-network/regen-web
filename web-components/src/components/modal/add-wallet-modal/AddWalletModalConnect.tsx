@@ -1,5 +1,4 @@
 import { RegenModalProps } from '..';
-import { SUBTITLE, TITLE } from './AddWalletModalConnect.constants';
 import { AddWalletModalTemplate } from './AddWalletModalTemplate';
 
 export interface AddWalletModalConnectProps extends RegenModalProps {
@@ -7,12 +6,20 @@ export interface AddWalletModalConnectProps extends RegenModalProps {
     addr: string;
     name: string;
     profileImage: string;
+    title: string;
+    subtitle: string;
   };
+  title: string;
+  subtitle?: string;
 }
 const AddWalletModalConnect: React.FC<
   React.PropsWithChildren<AddWalletModalConnectProps>
 > = props => (
-  <AddWalletModalTemplate title={TITLE} subtitle={SUBTITLE} {...props} />
+  <AddWalletModalTemplate
+    {...props}
+    title={props.title}
+    subtitle={props.subtitle}
+  />
 );
 
 export { AddWalletModalConnect };

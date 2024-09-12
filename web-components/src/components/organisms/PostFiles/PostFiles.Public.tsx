@@ -40,6 +40,7 @@ type Props = Pick<PostFilesProps, 'files' | 'mapboxToken' | 'isAdmin'> & {
   privateFiles: boolean;
   privateLocations: boolean;
   filesPreviews: FilesPreviews;
+  adminPrivateLabel: string;
 };
 
 const PostFilesPublic = ({
@@ -49,6 +50,7 @@ const PostFilesPublic = ({
   privateFiles,
   privateLocations,
   filesPreviews,
+  adminPrivateLabel,
 }: Props) => {
   const { classes: styles } = useStyles();
   const theme = useTheme();
@@ -276,7 +278,7 @@ const PostFilesPublic = ({
             <Tag
               className="top-20 left-20 sm:left-[110px] absolute bg-error-300"
               icon={<LockIcon width="18" height="18" />}
-              label={`${privateLocations ? 'Locations' : 'Files'} are private`}
+              label={adminPrivateLabel}
             />
           )}
         </Map>

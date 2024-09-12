@@ -4,7 +4,6 @@ import bbox from '@turf/bbox';
 import { FeatureCollection } from 'geojson';
 
 import { GreenPinIcon } from '../icons/GreenPinIcon';
-import PinIcon from '../icons/PinIcon';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 

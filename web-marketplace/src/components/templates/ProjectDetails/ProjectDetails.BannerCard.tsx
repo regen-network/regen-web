@@ -7,13 +7,13 @@ import { useAtom } from 'jotai';
 import Banner from 'web-components/src/components/banner';
 import ShareIcon from 'web-components/src/components/icons/ShareIcon';
 import BannerCard from 'web-components/src/components/molecules/BannerCard';
-import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.constants';
 import Section from 'web-components/src/components/section';
 import copyTextToClipboard from 'web-components/src/utils/copy';
 
 import { Maybe, Project } from 'generated/graphql';
 import { BannerCardFieldsFragment } from 'generated/sanity-graphql';
 import { useAuth } from 'lib/auth/auth';
+import { COPY_SUCCESS } from 'lib/constants/shared.constants';
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -81,7 +81,7 @@ export const ProjectDetailsBannerCard = ({
       ) : null}
       {copySuccessBanner && (
         <Banner
-          text={COPY_SUCCESS}
+          text={_(COPY_SUCCESS)}
           onClose={() => {
             setCopySuccessBanner(false);
           }}

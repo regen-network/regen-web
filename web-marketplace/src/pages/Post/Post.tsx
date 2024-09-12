@@ -18,13 +18,20 @@ import { Body } from 'web-components/src/components/typography';
 import { formatDate } from 'web-components/src/utils/format';
 
 import { useAuth } from 'lib/auth/auth';
+import { PHOTO_CREDIT } from 'lib/constants/shared.constants';
 import { getPostQuery } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import NotFoundPage from 'pages/NotFound';
 
-import { UNTITLED } from './Post.constants';
+import {
+  ADMIN_PRIVATE_FILES_LABEL,
+  ADMIN_PRIVATE_LOCATIONS_LABEL,
+  PRIVATE_FILES_LABEL,
+  PRIVATE_LOCATIONS_LABEL,
+  UNTITLED,
+} from './Post.constants';
 import { PostFooter } from './Post.Footer';
 import { PostHeader } from './Post.Header';
 import { PostPrivate } from './Post.Private';
@@ -145,11 +152,19 @@ function Post(): JSX.Element {
                     } m-auto relative mb-30`}
                   >
                     <PostFiles
+                      photoCredit={_(PHOTO_CREDIT)}
                       privacyType={privacyType}
                       mapboxToken={MAPBOX_TOKEN}
                       isAdmin={isAdmin}
                       files={files}
                       hasToken={hasToken}
+                      adminPrivateLabel={
+                        privacyType === 'private_locations'
+                          ? _(ADMIN_PRIVATE_LOCATIONS_LABEL)
+                          : _(ADMIN_PRIVATE_FILES_LABEL)
+                      }
+                      privateFilesLabel={_(PRIVATE_FILES_LABEL)}
+                      privateLocationsLabel={_(PRIVATE_LOCATIONS_LABEL)}
                     />
                     {(isAdmin || !privateFiles) && (
                       <img

@@ -9,11 +9,6 @@ import { ButtonType } from '../../../types/shared/buttonType';
 import { LinkType } from '../../../types/shared/linkType';
 import { Body, Title } from '../../typography';
 import Modal, { RegenModalProps } from '..';
-import {
-  EMAIL_CONFIRMATION_CODE_HELPER,
-  EMAIL_CONFIRMATION_DESCRIPTION,
-  EMAIL_CONFIRMATION_TITLE,
-} from './EmailConfirmationModal.constants';
 
 export interface EmailConfirmationModalProps extends RegenModalProps {
   ariaLabel: string;
@@ -23,6 +18,9 @@ export interface EmailConfirmationModalProps extends RegenModalProps {
   resendButtonLink?: ButtonType;
   cancelButton: ButtonType;
   signInButton: ButtonType;
+  title: string;
+  description: string;
+  helperText: string;
   onCodeChange: (code: string) => void;
 }
 
@@ -35,6 +33,9 @@ export const EmailConfirmationModal = ({
   error,
   cancelButton,
   signInButton,
+  title,
+  description,
+  helperText,
   onClose,
   onCodeChange,
 }: EmailConfirmationModalProps) => {
@@ -51,15 +52,14 @@ export const EmailConfirmationModal = ({
         }}
       >
         <Title align="center" variant="h4" mb={5}>
-          {EMAIL_CONFIRMATION_TITLE}
+          {title}
         </Title>
         <Body size="lg" align="center" mb={5}>
-          {EMAIL_CONFIRMATION_DESCRIPTION}{' '}
-          <Link href={mailLink.href}>{mailLink.text}</Link>
+          {description} <Link href={mailLink.href}>{mailLink.text}</Link>
           {'.'}
         </Body>
         <Body size="lg" align="center" mb={5} sx={{ fontWeight: 700 }}>
-          {EMAIL_CONFIRMATION_CODE_HELPER}
+          {helperText}
         </Body>
         <ConfirmationCode
           ariaLabel={ariaLabel}

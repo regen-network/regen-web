@@ -4,8 +4,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 import PrevNextButton from '../buttons/PrevNextButton';
 import { Title } from '../typography';
-import { useStyles } from './ResponsiveSlider.Header.styles';
 import { ResponsiveSliderProps } from './ResponsiveSlider';
+import { useStyles } from './ResponsiveSlider.Header.styles';
 
 type Props = {
   slickPrev: () => void;

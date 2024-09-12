@@ -32,7 +32,7 @@ const TxErrorModal: React.FC<React.PropsWithChildren<TxErrorModalProps>> = ({
     <TxModal
       icon={icon ?? <BrokenLinkIcon sx={{ pb: 4.5 }} />}
       cardItems={cardItems ? cardItems : defaultCardItems}
-      title={title ?? 'Sorry, your transaction was not successful.'}
+      title={title}
       {...props}
     />
   );

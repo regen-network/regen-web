@@ -18,6 +18,7 @@ interface TimelineProps {
   events: Event[];
   txClient?: ServiceClientImpl;
   completedItemIndex?: number;
+  viewLedgerText: string;
   onViewOnLedger: (creditVintage: any) => void;
 }
 
@@ -49,6 +50,7 @@ export default function Timeline({
   events,
   completedItemIndex,
   txClient,
+  viewLedgerText,
   onViewOnLedger,
 }: TimelineProps): JSX.Element {
   const { classes } = useStyles();
@@ -99,6 +101,7 @@ export default function Timeline({
                 odd={index % 2 !== 0}
                 last={index === events.length - 1}
                 txClient={txClient}
+                viewLedgerText={viewLedgerText}
                 onViewOnLedger={onViewOnLedger}
               />
             </div>

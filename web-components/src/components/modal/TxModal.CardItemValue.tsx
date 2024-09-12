@@ -58,6 +58,8 @@ export const CardItemValue = ({
 interface CardItemValueListProps {
   value: ItemValue[];
   color?: string;
+  seeMoreText: string;
+  seeLessText: string;
   linkComponent: LinkComponentProp;
 }
 
@@ -68,6 +70,8 @@ export const CardItemValueList = (
     <CollapseList
       buttonTextSize="xxs"
       max={2}
+      seeMoreText={props.seeMoreText}
+      seeLessText={props.seeLessText}
       items={props.value.map(row => (
         <CardItemValue {...props} value={row} key={row.name} />
       ))}

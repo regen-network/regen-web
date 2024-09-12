@@ -16,6 +16,11 @@ import {
   INVALID_PAST_DATE,
   INVALID_REGEN_ADDRESS,
   INVALID_VCS_RETIREMENT,
+  PAGE_NOT_FOUND_BODY,
+  PAGE_NOT_FOUND_BUTTON,
+  PAGE_NOT_FOUND_TITLE,
+  PROCESSING_MODAL_BODY,
+  PROCESSING_MODAL_TITLE,
   REQUIRED_MESSAGE,
   RETIREMENT_INFO_TEXT,
   SAVE_EXIT_TEXT,
@@ -183,7 +188,13 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
       case 2:
         return <Review />;
       default:
-        return <NotFound img={<img alt="home" src={RotationalGrazing} />} />;
+        return (
+          <NotFound
+            title={_(PAGE_NOT_FOUND_TITLE)}
+            bodyText={_(PAGE_NOT_FOUND_BODY)}
+            buttonChildren={PAGE_NOT_FOUND_BUTTON}
+          />
+        );
     }
   }
 
@@ -216,7 +227,12 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
           </Form>
         )}
       </Formik>
-      <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
+      <ProcessingModal
+        open={isSubmitModalOpen}
+        onClose={closeSubmitModal}
+        title={_(PROCESSING_MODAL_TITLE)}
+        bodyText={_(PROCESSING_MODAL_BODY)}
+      />
     </>
   );
 }

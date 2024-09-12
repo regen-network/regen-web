@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
@@ -9,6 +10,13 @@ import {
   DocumentationTable,
 } from 'web-components/src/components/table/DocumentationTable/DocumentationTable';
 import { Theme } from 'web-components/src/theme/muiTheme';
+
+import {
+  DOCUMENTATION_TABLE_ARIA_LABEL,
+  DOCUMENTATION_TABLE_VIEW_DOCUMENT_TEXT,
+  DOCUMENTATION_TABLE_VIEW_LEDGER_TEXT,
+  getDocumentationHeadCells,
+} from './Documentation.constants';
 
 export interface DocumentationProps {
   txClient?: ServiceClientImpl;
@@ -43,6 +51,8 @@ function Documentation({
   const { _ } = useLingui();
   const { classes: styles } = useStyles();
 
+  const headCells = useMemo(() => getDocumentationHeadCells(_), [_]);
+
   return (
     <Section
       classes={{ root: styles.section, title: styles.title }}
@@ -55,6 +65,10 @@ function Documentation({
         txClient={txClient}
         onViewOnLedger={onViewOnLedger}
         rows={documents}
+        headCells={headCells}
+        viewLedgerText={_(DOCUMENTATION_TABLE_VIEW_LEDGER_TEXT)}
+        viewDocumentText={_(DOCUMENTATION_TABLE_VIEW_DOCUMENT_TEXT)}
+        tableAriaLabel={_(DOCUMENTATION_TABLE_ARIA_LABEL)}
       />
     </Section>
   );

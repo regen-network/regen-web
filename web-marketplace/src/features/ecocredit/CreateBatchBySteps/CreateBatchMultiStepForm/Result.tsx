@@ -1,5 +1,6 @@
 import React from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -14,6 +15,7 @@ import {
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getAccountUrl, getHashUrl } from 'lib/block-explorer';
+import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
 
 import { Link } from 'components/atoms';
 
@@ -129,11 +131,15 @@ const SuccessResult = ({
   recipients,
   txHash,
 }: SuccessProps): React.ReactElement => {
+  const { _ } = useLingui();
+
   return (
     <>
       <OnBoardingCard>
         <Title variant="h5">Create Credit Batch</Title>
         <CardItem
+          seeMoreText={_(SEE_MORE)}
+          seeLessText={_(SEE_LESS)}
           label="batch denom"
           value={{
             name: batchDenom,
@@ -146,6 +152,8 @@ const SuccessResult = ({
           values={recipients || []}
         />
         <CardItem
+          seeMoreText={_(SEE_MORE)}
+          seeLessText={_(SEE_LESS)}
           label="hash"
           value={{
             name: truncate(txHash),
@@ -168,6 +176,8 @@ type ErrorResultProps = {
 };
 
 const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
+  const { _ } = useLingui();
+
   return (
     <>
       <Box
@@ -194,6 +204,8 @@ const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
       <OnBoardingCard>
         <Title variant="h5">Create Credit Batch</Title>
         <CardItem
+          seeMoreText={_(SEE_MORE)}
+          seeLessText={_(SEE_LESS)}
           color="error.main"
           label="error"
           value={{ name: error }}

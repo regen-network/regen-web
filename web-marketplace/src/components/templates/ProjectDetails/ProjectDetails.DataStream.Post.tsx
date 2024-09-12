@@ -30,12 +30,12 @@ import {
 } from 'web-components/src/components/inputs/new/FileDrop/FileDrop.utils';
 import { FileToPreview } from 'web-components/src/components/organisms/PostFiles/components/FilePreview';
 import { parseFile } from 'web-components/src/components/organisms/PostFiles/PostFiles.utils';
-import { COPY_SUCCESS } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.constants';
 import { Subtitle } from 'web-components/src/components/typography';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 import copyTextToClipboard from 'web-components/src/utils/copy';
 
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
+import { COPY_SUCCESS } from 'lib/constants/shared.constants';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
@@ -215,7 +215,7 @@ export const DataStreamPost = ({
                 copyTextToClipboard(
                   `${window.location.origin}/post/${post.iri}`,
                 );
-                setBannerText(COPY_SUCCESS);
+                setBannerText(_(COPY_SUCCESS));
               }}
               onDelete={onOpen}
               numberOfFiles={post.contents.files?.length}

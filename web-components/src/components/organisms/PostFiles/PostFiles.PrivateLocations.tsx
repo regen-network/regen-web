@@ -7,9 +7,18 @@ import { Tag } from './components/Tag';
 import { PostFilesProps } from './PostFiles';
 import { FilesPreviews } from './PostFiles.types';
 
-type Props = Pick<PostFilesProps, 'files'> & { filesPreviews: FilesPreviews };
+type Props = Pick<PostFilesProps, 'files'> & {
+  filesPreviews: FilesPreviews;
+  photoCredit: string;
+  label: string;
+};
 
-const PostFilesPrivateLocations = ({ files, filesPreviews }: Props) => {
+const PostFilesPrivateLocations = ({
+  files,
+  filesPreviews,
+  photoCredit,
+  label,
+}: Props) => {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down('sm'));
   return (
@@ -24,6 +33,7 @@ const PostFilesPrivateLocations = ({ files, filesPreviews }: Props) => {
         filesPreviews={filesPreviews}
         className={{ root: 'h-[100%]' }}
         pdfPageHeight={mobile ? 340 : 550}
+        photoCredit={photoCredit}
       />
     </div>
   );

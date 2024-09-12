@@ -15,7 +15,13 @@ const Template: ComponentStory<typeof AddWalletModalSwitchWarning> = args => {
     setTimeout(() => setOpen(true), 1000);
   };
 
-  return <AddWalletModalSwitchWarning onClose={onClose} open={open} />;
+  return (
+    <AddWalletModalSwitchWarning
+      onClose={onClose}
+      open={open}
+      title="Please switch to this address in Keplr to access this profile."
+    />
+  );
 };
 
 export const Default = Template.bind({});

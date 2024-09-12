@@ -1,9 +1,13 @@
 import { RegenModalProps } from '..';
-import { TITLE } from './AddWalletModalSwitchWarning.constants';
 import { AddWalletModalTemplate } from './AddWalletModalTemplate';
 
-const AddWalletModalSwitchWarning: React.FC<
-  React.PropsWithChildren<RegenModalProps>
-> = props => <AddWalletModalTemplate title={TITLE} {...props} />;
+type Props = RegenModalProps & {
+  title: string;
+};
+
+const AddWalletModalSwitchWarning: React.FC<React.PropsWithChildren<Props>> = ({
+  title,
+  ...props
+}) => <AddWalletModalTemplate title={title} {...props} />;
 
 export { AddWalletModalSwitchWarning };

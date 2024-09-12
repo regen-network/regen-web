@@ -57,7 +57,7 @@ export type LinkComponentProp = React.FC<React.PropsWithChildren<LinkProps>>;
 export interface TxModalProps extends RegenModalProps {
   onButtonClick: () => void;
   cardTitle: string;
-  buttonTitle?: string;
+  buttonTitle: string;
   cardItems?: Item[];
   linkComponent: LinkComponentProp;
   txHash: string;
@@ -67,10 +67,16 @@ export interface TxModalProps extends RegenModalProps {
   description?: string;
   buttonLink?: string;
   socialItems?: SocialItems;
+  blockchainRecordText: string;
+  seeMoreText: string;
+  seeLessText: string;
+  shareTitle?: string;
 }
 
 interface CardItemProps extends Item {
   linkComponent: LinkComponentProp;
+  seeMoreText: string;
+  seeLessText: string;
 }
 
 export const CardItem: React.FC<React.PropsWithChildren<CardItemProps>> = ({
@@ -78,6 +84,8 @@ export const CardItem: React.FC<React.PropsWithChildren<CardItemProps>> = ({
   label,
   value,
   linkComponent,
+  seeMoreText,
+  seeLessText,
 }) => {
   return (
     <Box sx={{ pt: 5 }}>
@@ -90,6 +98,8 @@ export const CardItem: React.FC<React.PropsWithChildren<CardItemProps>> = ({
           value={value}
           color={color}
           linkComponent={linkComponent}
+          seeMoreText={seeMoreText}
+          seeLessText={seeLessText}
         />
       ) : (
         <CardItemValue
@@ -106,7 +116,7 @@ const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
   icon,
   title,
   description,
-  buttonTitle = 'view your portfolio',
+  buttonTitle,
   open,
   onClose,
   onButtonClick,
@@ -117,6 +127,10 @@ const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
   linkComponent,
   buttonLink,
   socialItems,
+  blockchainRecordText,
+  seeMoreText,
+  seeLessText,
+  shareTitle,
 }) => {
   const { classes: styles } = useStyles();
   const hasCardItems = !!cardItems && cardItems.length > 0;
@@ -166,13 +180,21 @@ const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
         >
           <Title variant="h5">{cardTitle}</Title>
           {cardItems?.map((item, i) => (
-            <CardItem {...item} linkComponent={linkComponent} key={i} />
+            <CardItem
+              {...item}
+              linkComponent={linkComponent}
+              key={i}
+              seeMoreText={seeMoreText}
+              seeLessText={seeLessText}
+            />
           ))}
           {txHash && (
             <CardItem
-              label="blockchain record"
+              label={blockchainRecordText}
               value={{ name: truncate(txHash), url: txHashUrl }}
               linkComponent={linkComponent}
+              seeMoreText={seeMoreText}
+              seeLessText={seeLessText}
             />
           )}
         </Card>
@@ -185,8 +207,12 @@ const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
       >
         {buttonTitle}
       </OutlinedButton>
-      {socialItems && (
-        <ShareSection items={socialItems} sx={{ mt: 10, maxWidth: 370 }} />
+      {socialItems && shareTitle && (
+        <ShareSection
+          items={socialItems}
+          sx={{ mt: 10, maxWidth: 370 }}
+          title={shareTitle}
+        />
       )}
     </Modal>
   );

@@ -4,7 +4,12 @@ import { useAtom } from 'jotai';
 import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
 
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
-import { EMAIL_CONFIRMATION_ARIA_LABEL } from 'lib/constants/shared.constants';
+import {
+  EMAIL_CONFIRMATION_ARIA_LABEL,
+  EMAIL_CONFIRMATION_CODE_HELPER,
+  EMAIL_CONFIRMATION_DESCRIPTION,
+  EMAIL_CONFIRMATION_TITLE,
+} from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useSocialProviders } from '../LoginButton/hooks/useSocialProviders';
@@ -88,6 +93,9 @@ const LoginFlow = ({
         open={isConfirmationModalOpen}
         error={emailModalError}
         onCodeChange={onMailCodeChange}
+        title={_(EMAIL_CONFIRMATION_TITLE)}
+        description={_(EMAIL_CONFIRMATION_DESCRIPTION)}
+        helperText={_(EMAIL_CONFIRMATION_CODE_HELPER)}
       />
       {loginDisabled && (
         <MobileSigningModal

@@ -1,11 +1,21 @@
+import { useLingui } from '@lingui/react';
+
 import NotFound from 'web-components/src/components/views/NotFoundView';
 
-import RotationalGrazing from 'assets/rotational-grazing.png';
+import {
+  PAGE_NOT_FOUND_BODY,
+  PAGE_NOT_FOUND_BUTTON,
+  PAGE_NOT_FOUND_TITLE,
+} from 'lib/constants/shared.constants';
 
 const NotFoundPage = (): JSX.Element => {
+  const { _ } = useLingui();
+
   return (
     <NotFound
-      img={<img alt="home" src={RotationalGrazing} />}
+      title={_(PAGE_NOT_FOUND_TITLE)}
+      bodyText={_(PAGE_NOT_FOUND_BODY)}
+      buttonChildren={PAGE_NOT_FOUND_BUTTON}
       home={import.meta.env.VITE_WEBSITE_URL}
     />
   );

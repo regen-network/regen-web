@@ -5,7 +5,13 @@ import { Formik } from 'formik';
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
 import NotFound from 'web-components/src/components/views/NotFoundView';
 
-import { SAVE_EXIT_TEXT, SAVE_TEXT } from 'lib/constants/shared.constants';
+import {
+  PAGE_NOT_FOUND_BODY,
+  PAGE_NOT_FOUND_BUTTON,
+  PAGE_NOT_FOUND_TITLE,
+  SAVE_EXIT_TEXT,
+  SAVE_TEXT,
+} from 'lib/constants/shared.constants';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
@@ -42,6 +48,8 @@ const CurrentStep = (props: {
   activeStep: number;
   disabledFields: string[];
 }): JSX.Element => {
+  const { _ } = useLingui();
+
   switch (props.activeStep) {
     case 0:
       return (
@@ -55,7 +63,13 @@ const CurrentStep = (props: {
     case 2:
       return <CreditClassFinished hash={mockTxHash} classId={mockClassId} />;
     default:
-      return <NotFound img={<img alt="home" src={RotationalGrazing} />} />;
+      return (
+        <NotFound
+          title={_(PAGE_NOT_FOUND_TITLE)}
+          bodyText={_(PAGE_NOT_FOUND_BODY)}
+          buttonChildren={PAGE_NOT_FOUND_BUTTON}
+        />
+      );
   }
 };
 

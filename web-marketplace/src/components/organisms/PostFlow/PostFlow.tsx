@@ -17,6 +17,10 @@ import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import {
+  DISCARD_CHANGES_BODY,
+  DISCARD_CHANGES_TITLE,
+} from 'lib/constants/shared.constants';
 import { apiServerUrl } from 'lib/env';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
@@ -25,6 +29,7 @@ import { GET_POST_QUERY_KEY } from 'lib/queries/react-query/registry-server/getP
 import { getPostsQueryKey } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { DISCARD_CHANGES_BUTTON } from '../../../lib/constants/shared.constants';
 import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { DEFAULT, PROJECTS_S3_PATH } from '../MediaForm/MediaForm.constants';
 import PostForm from '../PostForm';
@@ -292,6 +297,9 @@ export const PostFlow = ({
         open={showOnCloseWarning}
         onClose={() => setShowOnCloseWarning(false)}
         navigate={() => onClose(false)}
+        title={_(DISCARD_CHANGES_TITLE)}
+        bodyText={_(DISCARD_CHANGES_BODY)}
+        buttonText={_(DISCARD_CHANGES_BUTTON)}
       />
     </>
   );

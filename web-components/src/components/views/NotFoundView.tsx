@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import { Theme } from '@mui/material/styles';
 import { makeStyles } from 'tss-react/mui';
@@ -9,6 +9,9 @@ import { Body, Label, Title } from '../typography';
 export interface NotFoundProps {
   img?: JSX.Element;
   home?: string;
+  title: string;
+  bodyText: string;
+  buttonChildren: ReactNode;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -49,7 +52,13 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-const NotFound = ({ img, home = '/' }: NotFoundProps): JSX.Element => {
+const NotFound = ({
+  img,
+  home = '/',
+  title,
+  bodyText,
+  buttonChildren,
+}: NotFoundProps): JSX.Element => {
   const { classes } = useStyles();
 
   return (
@@ -71,20 +80,16 @@ const NotFound = ({ img, home = '/' }: NotFoundProps): JSX.Element => {
           variant="h1"
           sx={{ textAlign: 'center', color: 'primary.contrastText', mb: 4.25 }}
         >
-          Oops! Page not found.
+          {title}
         </Title>
-        <Body size="lg">
-          The page you are looking for might have been temporarily removed or
-          had its name changed.
-        </Body>
+        <Body size="lg">{bodyText}</Body>
         <ContainedButton
           size="large"
           style={{ whiteSpace: 'nowrap' }}
           href={home}
           sx={{ whiteSpace: 'nowrap', mt: 8 }}
         >
-          Visit Our Homepage{' '}
-          <Box display={{ xs: 'none', sm: 'inline' }}>{'\u00A0'}Instead</Box>
+          {buttonChildren}
         </ContainedButton>
       </div>
     </Box>

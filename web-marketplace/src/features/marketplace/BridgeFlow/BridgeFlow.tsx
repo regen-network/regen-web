@@ -21,7 +21,18 @@ import {
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
-import { AVAILABLE_LABEL, MAX_LABEL } from 'lib/constants/shared.constants';
+import {
+  AVAILABLE_LABEL,
+  BLOCKCHAIN_RECORD,
+  MAX_LABEL,
+  PROCESSING_MODAL_BODY,
+  PROCESSING_MODAL_TITLE,
+  SEE_LESS,
+  SEE_MORE,
+  TX_ERROR_MODAL_TITLE,
+  TX_MODAL_TITLE,
+  TX_SUCCESSFUL_MODAL_TITLE,
+} from 'lib/constants/shared.constants';
 import { messageActionEquals } from 'lib/ecocredit/constants';
 import { GET_TXS_EVENT_KEY } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.constants';
 import { getEventsKey } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.utils';
@@ -163,34 +174,42 @@ export const BridgeFlow = ({
       <ProcessingModal
         open={isProcessingModalOpen}
         onClose={() => setIsProcessingModalOpen(false)}
+        title={_(PROCESSING_MODAL_TITLE)}
+        bodyText={_(PROCESSING_MODAL_BODY)}
       />
       <TxSuccessfulModal
+        seeMoreText={_(SEE_MORE)}
+        seeLessText={_(SEE_LESS)}
         open={!!txHash && !error}
         onClose={handleTxModalClose}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
-        title={txModalHeader}
+        title={txModalHeader ?? _(TX_SUCCESSFUL_MODAL_TITLE)}
         description={txModalDescription}
         cardTitle={txModalTitle ?? ''}
-        buttonTitle={txButtonTitle}
+        buttonTitle={txButtonTitle ?? _(TX_MODAL_TITLE)}
         cardItems={cardItems}
         linkComponent={Link}
         onButtonClick={onTxSuccessButtonClick}
         icon={<CelebrateIcon sx={{ width: '85px', height: '106px' }} />}
+        blockchainRecordText={_(BLOCKCHAIN_RECORD)}
       />
       <TxErrorModal
+        seeMoreText={_(SEE_MORE)}
+        seeLessText={_(SEE_LESS)}
         error={error ?? ''}
         open={!!error}
         onClose={handleTxModalClose}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
-        title={txModalHeader}
+        title={txModalHeader ?? _(TX_ERROR_MODAL_TITLE)}
         cardTitle={txModalTitle ?? ''}
         linkComponent={Link}
         onButtonClick={handleTxModalClose}
         buttonTitle={_(msg`CLOSE WINDOW`)}
         cardItems={cardItems}
         icon={<ErrorIcon sx={{ fontSize: 100 }} />}
+        blockchainRecordText={_(BLOCKCHAIN_RECORD)}
       />
     </>
   );

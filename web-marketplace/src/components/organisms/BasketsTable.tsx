@@ -1,5 +1,8 @@
 import React from 'react';
+<<<<<<< HEAD
 import { msg, Trans } from '@lingui/macro';
+=======
+>>>>>>> 213a71eb1 (feat: translate web-components from map to views)
 import { useLingui } from '@lingui/react';
 import { Box, Grid } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
@@ -10,6 +13,8 @@ import {
   RenderActionButtonsFunc,
 } from 'web-components/src/components/table/ActionsTable';
 import { formatNumber } from 'web-components/src/utils/format';
+
+import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
 
 import { ReactComponent as BasketIcon } from '../../assets/svgs/rNCT.svg';
 import { BasketTokens } from '../../hooks/useBasketTokens';
@@ -36,6 +41,7 @@ export const BasketsTable: React.FC<React.PropsWithChildren<BasketTableProps>> =
     return (
       <ActionsTable
         tableLabel={_(msg`baskets table`)}
+        actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
         renderActionButtons={renderActionButtons}
         headerRows={[
           /* eslint-disable react/jsx-key */

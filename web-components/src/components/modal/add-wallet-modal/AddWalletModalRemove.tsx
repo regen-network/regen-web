@@ -5,24 +5,23 @@ import {
   Props as CancelButtonFooterProps,
 } from '../../organisms/CancelButtonFooter/CancelButtonFooter';
 import { AddWalletModalConnectProps } from './AddWalletModalConnect';
-import {
-  BUTTON_LABEL,
-  SUBTITLE,
-  TITLE,
-} from './AddWalletModalRemove.constants';
 import { AddWalletModalTemplate } from './AddWalletModalTemplate';
 
 export interface AddWalletModalRemoveProps
   extends AddWalletModalConnectProps,
-    Omit<CancelButtonFooterProps, 'label'> {}
+    Omit<CancelButtonFooterProps, 'label'> {
+  title: string;
+  subtitle: string;
+  buttonLabel: string;
+}
 
 const AddWalletModalRemove: React.FC<
   React.PropsWithChildren<AddWalletModalRemoveProps>
-> = ({ onClick, onCancel, ...props }) => (
-  <AddWalletModalTemplate title={TITLE} subtitle={SUBTITLE} {...props}>
+> = ({ onClick, onCancel, title, subtitle, buttonLabel, ...props }) => (
+  <AddWalletModalTemplate title={title} subtitle={subtitle} {...props}>
     <Box sx={{ mt: 12.75 }}>
       <CancelButtonFooter
-        label={BUTTON_LABEL}
+        label={buttonLabel}
         onClick={onClick}
         onCancel={onCancel}
       />

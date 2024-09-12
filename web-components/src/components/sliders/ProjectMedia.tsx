@@ -204,6 +204,7 @@ const useStyles = makeStyles<StyleProps>()(
 );
 
 function getThumbnailStyle(thumbsTranslate: number): object {
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   const translate: string = `translate(${thumbsTranslate}px, 0)`;
   return {
     WebkitTransform: translate,

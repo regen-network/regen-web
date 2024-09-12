@@ -29,5 +29,11 @@ Default.args = {
     name: 'unnamed',
     addr: truncate('regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46'),
     profileImage: '/illustrations/frog.jpg',
+    title: 'Connect wallet address',
+    subtitle: 'Check your wallet for a confirmation popup.',
   },
+  title:
+    'This address is already linked to another account. Remove it from that account and connect it to yours?',
+  subtitle: 'Check your wallet for a confirmation popup.',
+  buttonLabel: 'yes, remove & connect',
 };

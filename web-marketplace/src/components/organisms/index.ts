@@ -15,7 +15,7 @@ export * from './CreditClassCards';
 export * from './CreditClassConnectSection';
 export * from './CreditClassOverviewSection';
 export * from './CreditTotals/CreditTotals';
-export * from './Documentation';
+export * from './Documentation/Documentation';
 export * from './EcocreditsTable';
 export * from './ImpactSection';
 export * from './IncludesGrasslandsForm';

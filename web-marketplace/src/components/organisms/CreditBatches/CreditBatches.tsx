@@ -22,6 +22,7 @@ import { truncateHash } from 'web-components/src/utils/truncate';
 import type { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
+import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
 
 import { AccountLink, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
@@ -110,6 +111,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
   const table = (
     <ActionsTable
       tableLabel={_(msg`credit batch table`)}
+      actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
       headerRows={columnsToShow.map(headCell => (
         <Box
           display="flex"

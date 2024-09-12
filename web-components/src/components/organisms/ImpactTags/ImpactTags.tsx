@@ -18,7 +18,10 @@ export interface Props {
   ecosystems?: ProjectTagType[];
   impact: ProjectImpactCardProps[];
   sx?: SxProps<Theme>;
-  activitiesLabel?: string;
+  activitiesLabel: string;
+  ecosystemLabel: string;
+  seeMoreText: string;
+  seeLessText: string;
 }
 
 const ImpactTags = ({
@@ -27,6 +30,9 @@ const ImpactTags = ({
   impact,
   sx,
   activitiesLabel,
+  ecosystemLabel,
+  seeMoreText,
+  seeLessText,
 }: Props) => {
   const isImpactCollapsed = impact.length > DEFAULT_COLLAPSED_ITEMS;
   return (
@@ -55,6 +61,8 @@ const ImpactTags = ({
               <ProjectImpactCard {...imp} />
             </Box>
           ))}
+          seeMoreText={seeMoreText}
+          seeLessText={seeLessText}
         />
       </Box>
       {(activities || ecosystems) && (
@@ -65,6 +73,7 @@ const ImpactTags = ({
             mb: { xs: 7.5, sm: 10 },
           }}
           activitiesLabel={activitiesLabel}
+          ecosystemLabel={ecosystemLabel}
         />
       )}
     </Box>

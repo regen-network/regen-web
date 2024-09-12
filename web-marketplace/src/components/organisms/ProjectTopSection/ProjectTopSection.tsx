@@ -14,6 +14,12 @@ import { Body, Label, Title } from 'web-components/src/components/typography';
 
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
+import {
+  ECOSYSTEM_LABEL,
+  PROJECT_ACTIVITY_LABEL,
+  SEE_LESS,
+  SEE_MORE,
+} from 'lib/constants/shared.constants';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllCreditCertificationQuery } from 'lib/queries/react-query/sanity/getAllCreditCertificationQuery/getAllCreditCertificationQuery';
@@ -294,9 +300,13 @@ function ProjectTopSection({
         {columnLayout && (
           <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 5 } }}>
             <ImpactTags
+              seeMoreText={_(SEE_MORE)}
+              seeLessText={_(SEE_LESS)}
               activities={activityTags}
               ecosystems={ecosystemTags}
               impact={[...impact]}
+              activitiesLabel={_(PROJECT_ACTIVITY_LABEL)}
+              ecosystemLabel={_(ECOSYSTEM_LABEL)}
             />
             {ratingsAndCertificationsData && (
               <RoundLogoItemsList

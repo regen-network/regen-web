@@ -205,6 +205,12 @@ export const basketPutModal = (): JSX.Element => (
     amountLabel="Amount"
     submitLabel="Put in basket"
     submitErrorText="Please correct the errors above"
+    requiredMessage="Required"
+    invalidAmount="Invalid amount"
+    maxLabel="Max"
+    availableLabel="Available"
+    insufficientCredits="Insufficient credits"
+    invalidDecimalCount="Invalid decimal count"
   />
 );
 
@@ -238,6 +244,13 @@ export const basketTakeModal = (): JSX.Element => (
     submitLabel="take from basket"
     submitErrorText="Please correct the errors above"
     retirementInfoText="Retirement is permanent and non-reversible."
+    requiredMessage="Required"
+    invalidAmount="Invalid amount"
+    maxLabel="Max"
+    availableLabel="Available"
+    insufficientCredits="Insufficient credits"
+    invalidDecimalCount="Invalid decimal count"
+    invalidMemoLength="Invalid memo length"
     bottomTextMapping={bottomTextMapping}
   />
 );

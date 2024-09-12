@@ -8,11 +8,7 @@ import { makeStyles } from 'tss-react/mui';
 
 import ContainedButton from '../buttons/ContainedButton';
 import TextField from '../inputs/TextField';
-import {
-  invalidEmailMessage,
-  requiredMessage,
-  validateEmail,
-} from '../inputs/validation';
+import { validateEmail } from '../inputs/validation';
 
 interface NewsletterFormProps {
   submitLabel: string;
@@ -22,6 +18,8 @@ interface NewsletterFormProps {
   buttonClassName?: string;
   successChildren: React.ReactNode;
   buttonSize?: ButtonProps['size'];
+  requiredMessage: string;
+  invalidEmailMessage: string;
   gridXs?: {
     textField:
       | boolean
@@ -107,6 +105,8 @@ export default function NewsletterForm({
   buttonClassName,
   buttonSize = 'small',
   successChildren,
+  requiredMessage,
+  invalidEmailMessage,
   gridXs = { textField: 8, button: 4 },
 }: NewsletterFormProps): JSX.Element {
   const { classes, cx } = useStyles();

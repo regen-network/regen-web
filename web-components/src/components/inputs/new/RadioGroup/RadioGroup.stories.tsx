@@ -25,7 +25,12 @@ const Template: ComponentStory<typeof RadioGroup> = args => {
           selectedValue={selectedValue}
           sx={{ mt: 5.25 }}
         >
-          <VideoInput setError={() => {}} />
+          <VideoInput
+            setError={() => {}}
+            urlNotValidText="Invalid URL"
+            loadingText="Loading"
+            addPlaceholder="Add a video"
+          />
         </Radio>
         <Radio
           name={'radio-story'}

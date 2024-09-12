@@ -11,7 +11,12 @@ export default {
 
 const Template: ComponentStory<typeof Radio> = args => (
   <Radio {...args}>
-    <VideoInput setError={() => {}} />
+    <VideoInput
+      setError={() => {}}
+      urlNotValidText="Invalid URL"
+      loadingText="Loading"
+      addPlaceholder="Add a video"
+    />
   </Radio>
 );
 

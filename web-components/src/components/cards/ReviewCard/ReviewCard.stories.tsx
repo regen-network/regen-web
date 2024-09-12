@@ -22,10 +22,10 @@ export const itemDisplay = () => (
   <ItemDisplay name="Item">Some content</ItemDisplay>
 );
 
-export const photo = () => <Photo src={imgSrc} />;
+export const photo = () => <Photo src={imgSrc} locationText="Location" />;
 
 export const reviewCard = () => (
   <ReviewCard title="review card" onEditClick={onClick} editText="Edit">
-    <Photo src={imgSrc} />
+    <Photo src={imgSrc} locationText="Location" />
   </ReviewCard>
 );

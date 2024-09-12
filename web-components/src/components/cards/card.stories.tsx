@@ -359,6 +359,6 @@ export const reviewCard = (): JSX.Element => (
     <ItemDisplay name="URL">
       <a href="http://www.url.com/">www.url.com</a>
     </ItemDisplay>
-    <Photo src="/coorong.png" />
+    <Photo src="/coorong.png" locationText="Location" />
   </ReviewCard>
 );

@@ -13,11 +13,7 @@ import ContainedButton from 'web-components/src/components/buttons/ContainedButt
 import Card from 'web-components/src/components/cards/Card';
 import SelectTextField from 'web-components/src/components/inputs/SelectTextField';
 import TextField from 'web-components/src/components/inputs/TextField';
-import {
-  invalidEmailMessage,
-  requiredMessage,
-  validateEmail,
-} from 'web-components/src/components/inputs/validation';
+import { validateEmail } from 'web-components/src/components/inputs/validation';
 import Section from 'web-components/src/components/section';
 import { Body, Title } from 'web-components/src/components/typography';
 
@@ -27,6 +23,10 @@ import {
   ContactPageQuery,
 } from '@/generated/sanity-graphql';
 import { sanityClient } from '@/lib/clients/sanityClient';
+import {
+  INVALID_EMAIL_MESSAGE,
+  REQUIRED_MESSAGE,
+} from '@/lib/constants/shared.constants';
 import { useContactStyles } from '@/styles/pages/Contact.styles';
 
 interface Values {
@@ -81,18 +81,18 @@ export default function ContactPage({
                 validate={(values: Values) => {
                   const errors: Partial<Values> = {};
                   if (!values.email) {
-                    errors.email = requiredMessage;
+                    errors.email = REQUIRED_MESSAGE;
                   } else if (!validateEmail(values.email)) {
-                    errors.email = invalidEmailMessage;
+                    errors.email = INVALID_EMAIL_MESSAGE;
                   }
                   if (!values.name) {
-                    errors.name = requiredMessage;
+                    errors.name = REQUIRED_MESSAGE;
                   }
                   if (!values.requestType) {
-                    errors.requestType = requiredMessage;
+                    errors.requestType = REQUIRED_MESSAGE;
                   }
                   if (!values.message) {
-                    errors.message = requiredMessage;
+                    errors.message = REQUIRED_MESSAGE;
                   }
                   return errors;
                 }}

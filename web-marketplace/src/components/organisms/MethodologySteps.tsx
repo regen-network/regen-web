@@ -1,3 +1,5 @@
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { makeStyles } from 'tss-react/mui';
 
 import OnBoardingSection from 'web-components/src/components/section/OnBoardingSection';
@@ -66,11 +68,12 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 function MethodologySteps({ steps }: Props): JSX.Element {
+  const { _ } = useLingui();
   const { classes: styles } = useStyles();
 
   return (
     <OnBoardingSection
-      title={steps?.title || 'Methodology Process'}
+      title={steps?.title || _(msg`Methodology Process`)}
       classes={{
         root: styles.stepSection,
         title: styles.sectionTitle,

@@ -1,3 +1,5 @@
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { makeStyles } from 'tss-react/mui';
 
@@ -38,12 +40,13 @@ function Documentation({
   onViewOnLedger,
   documents,
 }: DocumentationProps): JSX.Element {
+  const { _ } = useLingui();
   const { classes: styles } = useStyles();
 
   return (
     <Section
       classes={{ root: styles.section, title: styles.title }}
-      title="Documentation"
+      title={_(msg`Documentation`)}
       titleVariant="h2"
       titleAlign="left"
     >

@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -130,6 +132,7 @@ const OverviewCards: React.FC<
 const CreditClassOverviewSection: React.FC<
   React.PropsWithChildren<CreditClassOverviewSectionProps>
 > = ({ dbClass, className, nameRaw, overviewCards, sdgs }) => {
+  const { _ } = useLingui();
   const { classes: styles, cx } = useStyles();
   const theme = useTheme();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('sm'));
@@ -141,7 +144,7 @@ const CreditClassOverviewSection: React.FC<
           root: cx(styles.sectionRoot, className),
           title: styles.title,
         }}
-        title="Overview"
+        title={_(msg`Overview`)}
         titleVariant="h2"
         titleAlign="left"
       >
@@ -155,7 +158,7 @@ const CreditClassOverviewSection: React.FC<
                 align="left"
                 sx={{ pb: 8 }}
               >
-                SDGs
+                <Trans>SDGs</Trans>
               </Title>
               <SDGs sdgs={sdgs} />
             </div>
@@ -166,7 +169,7 @@ const CreditClassOverviewSection: React.FC<
       {!isMobile && sdgs && (
         <Section
           classes={{ root: styles.sdgsSection, title: styles.title }}
-          title="SDGs"
+          title={_(msg`SDGs`)}
           titleAlign="left"
         >
           <SDGs sdgs={sdgs} />

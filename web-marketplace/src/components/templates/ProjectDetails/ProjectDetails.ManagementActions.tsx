@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import cx from 'classnames';
 
 import { NameImageDescription } from 'lib/db/types/json-ld';
@@ -11,7 +13,9 @@ interface InputProps {
 }
 
 export function ManagementActions({ actions }: InputProps): JSX.Element {
+  const { _ } = useLingui();
   const { isKeplrMobileWeb } = useWallet();
+
   return (
     <>
       <div
@@ -23,8 +27,10 @@ export function ManagementActions({ actions }: InputProps): JSX.Element {
             description: action['schema:description'],
             imgSrc: action['schema:image'],
           }))}
-          title="Land Management Actions"
-          subtitle="This is how the project developers are planning to achieve the primary impact."
+          title={_(msg`Land Management Actions`)}
+          subtitle={_(
+            msg`This is how the project developers are planning to achieve the primary impact.`,
+          )}
         />
       </div>
     </>

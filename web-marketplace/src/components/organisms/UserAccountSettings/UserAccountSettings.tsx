@@ -46,7 +46,7 @@ export const UserAccountSettings = ({
     onEmailSubmit,
     isConnectedEmailErrorModalOpen,
     onConnectedEmailErrorModalClose,
-  } = useEmailConfirmationData({ emailConfirmationText: EMAIL_ADDED });
+  } = useEmailConfirmationData({ emailConfirmationText: _(EMAIL_ADDED) });
   const form = useZodForm({
     schema: emailFormSchema,
     defaultValues: {
@@ -148,6 +148,7 @@ export const UserAccountSettings = ({
             {/* <a>Learn more»</a> */}
           </Body>
         </div>
+
         {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
         <ConnectField name="Keplr" {...walletProvider} />
       </div>

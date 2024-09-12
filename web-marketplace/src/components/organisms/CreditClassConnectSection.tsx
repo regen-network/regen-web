@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { makeStyles } from 'tss-react/mui';
 
 import { Title } from 'web-components/src/components/typography';
@@ -68,6 +70,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 function CreditClassConnectSection({ connectSection }: Props): JSX.Element {
+  const { _ } = useLingui();
   const { classes: styles } = useStyles();
 
   return (
@@ -84,7 +87,7 @@ function CreditClassConnectSection({ connectSection }: Props): JSX.Element {
         mobileVariant="h3"
         sx={{ color: 'primary.main', textAlign: 'center' }}
       >
-        {connectSection?.title || 'Connect and Learn'}
+        {connectSection?.title || _(msg`Connect and Learn`)}
       </Title>
       <div className={styles.links}>
         {connectSection?.links?.map((link, i) => (

@@ -1,4 +1,5 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
@@ -7,6 +8,8 @@ import { BlockContent } from 'web-components/src/components/block-content';
 import InfoLabel from 'web-components/src/components/info-label';
 import { formatDate, formatNumber } from 'web-components/src/utils/format';
 import { truncate } from 'web-components/src/utils/truncate';
+
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import DenomIcon from 'components/molecules/DenomIcon';
 import DenomLabel from 'components/molecules/DenomLabel';
@@ -23,6 +26,7 @@ import { SellOrderPurchaseIcon } from './SellOrderstable.PurchaseIcon';
 
 type Props = {
   sellOrder: NormalizedSellOrder;
+  _: TranslatorType;
 };
 
 const getSellOrdersTableRow = ({
@@ -39,6 +43,7 @@ const getSellOrdersTableRow = ({
     project,
     disableAutoRetire,
   },
+  _,
 }: Props): React.ReactNode[] => [
   <Box sx={{ color: 'info.main' }}>{id}</Box>,
   <WithLoader isLoading={project?.name === undefined} variant="skeleton">
@@ -93,14 +98,14 @@ const getSellOrdersTableRow = ({
   <Box sx={{ display: 'flex', alignItems: 'center' }}>
     {disableAutoRetire && (
       <InfoLabel
-        label="Tradable"
+        label={_(msg`Tradable`)}
         variant="success"
         icon={<SellOrderPurchaseIcon icon="tradable" />}
         sx={{ mr: 4 }}
       />
     )}
     <InfoLabel
-      label="Retirable"
+      label={_(msg`Retirable`)}
       variant="default"
       icon={<SellOrderPurchaseIcon icon="arrowDown" />}
     />

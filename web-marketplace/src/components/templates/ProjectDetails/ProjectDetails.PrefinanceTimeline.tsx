@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import Timeline from '@mui/lab/Timeline';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
@@ -77,7 +78,7 @@ export const PrefinanceTimeline = ({
                 >
                   {projected && item?.prefinanceTimelineItem?.date && (
                     <div className="uppercase font-bold text-[11px]">
-                      PROJECTED:
+                      <Trans>PROJECTED:</Trans>
                     </div>
                   )}
                   <Body size="md">

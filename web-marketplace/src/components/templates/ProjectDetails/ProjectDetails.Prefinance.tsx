@@ -35,6 +35,7 @@ type Props = {
 };
 
 export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
+  const { _ } = useLingui();
   const {
     isPrefinanceProject,
     prefinanceTermsRaw,
@@ -46,14 +47,12 @@ export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
     classTimeline,
   } = projectPrefinancing;
 
-  const { _ } = useLingui();
-
   return (
     <>
       {isPrefinanceProject && (
         <div className="rounded-[10px] relative sm:py-50 px-20 pt-[170px] pb-50 rounded-10 bg-prefinance-gradient shadow-[0px_0px_20px_0px_rgba(0,0,0,0.05)]">
           <div className="relative z-[1]">
-            <Title variant="h4">{PREFINANCE_TERMS}</Title>
+            <Title variant="h4">{_(PREFINANCE_TERMS)}</Title>
             <Body className="mt-10 sm:max-w-[504px]" size="lg">
               <BlockContent
                 className="inline"
@@ -72,7 +71,7 @@ export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
                     href={purchaseAgreementLink}
                     textSize="sm"
                   >
-                    {SEE_PURCHASE_AGREEMENTS}&nbsp;
+                    {_(SEE_PURCHASE_AGREEMENTS)}&nbsp;
                     <SmallArrowIcon className="h-10" />
                   </TextButton>
                 </span>
@@ -87,11 +86,11 @@ export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
             className="absolute top-50 left-[50%] translate-x-[-50%] sm:translate-x-[auto] sm:left-[auto] sm:right-0 sm:top-25"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 pt-40 pb-40 sm:pb-50 gap-40 md:gap-y-50 md:gap-x-auto pb-40 sm:pb-50">
+          <div className="grid grid-cols-1 md:grid-cols-2 pt-40 gap-40 md:gap-y-50 md:gap-x-auto pb-40 sm:pb-50">
             {estimatedIssuance && (
               <LabeledValue
-                label={ESTIMATED_ISSUANCE}
-                tooltipLabel={ESTIMATED_ISSUANCE_TOOLTIP}
+                label={_(ESTIMATED_ISSUANCE)}
+                tooltipLabel={_(ESTIMATED_ISSUANCE_TOOLTIP)}
                 number={estimatedIssuance}
                 formatNumberOptions={{
                   minimumFractionDigits: 2,
@@ -100,7 +99,7 @@ export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
                 icon={
                   <img
                     src="/svg/estimated-issuance.svg"
-                    alt={ESTIMATED_ISSUANCE}
+                    alt={_(ESTIMATED_ISSUANCE)}
                   />
                 }
                 tooltipNumber={isSoldOut ? _(SOLD_OUT_TOOLTIP) : undefined}
@@ -109,39 +108,39 @@ export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
             )}
             {projectedCreditDeliveryDate && (
               <LabeledValue
-                label={PROJECTED_CREDIT_DELIVERY_DATE}
-                tooltipLabel={PROJECTED_CREDIT_DELIVERY_DATE_TOOLTIP}
+                label={_(PROJECTED_CREDIT_DELIVERY_DATE)}
+                tooltipLabel={_(PROJECTED_CREDIT_DELIVERY_DATE_TOOLTIP)}
                 date={projectedCreditDeliveryDate}
                 formatDateOption="MMM YYYY"
                 icon={
                   <img
                     src="/svg/calendar.svg"
-                    alt={PROJECTED_CREDIT_DELIVERY_DATE}
+                    alt={_(PROJECTED_CREDIT_DELIVERY_DATE)}
                   />
                 }
               />
             )}
 
             {projectTimeline && (
-              <LabeledValue label={PROJECT_STATUS}>
+              <LabeledValue label={_(PROJECT_STATUS)}>
                 <PrefinanceStatus
                   timeline={projectTimeline}
-                  title={PROJECT_TIMELINE}
+                  title={_(PROJECT_TIMELINE)}
                 />
               </LabeledValue>
             )}
             {classTimeline && (
-              <LabeledValue label={CLASS_STATUS}>
+              <LabeledValue label={_(CLASS_STATUS)}>
                 <PrefinanceStatus
                   timeline={classTimeline}
-                  title={CLASS_TIMELINE}
+                  title={_(CLASS_TIMELINE)}
                 />
               </LabeledValue>
             )}
           </div>
 
           <Title className="pb-5" variant="h4">
-            {SUPPORT_ENABLES}
+            {_(SUPPORT_ENABLES)}
           </Title>
           {supportEnables?.map((item, i) => (
             <div className="flex pt-10" key={i}>

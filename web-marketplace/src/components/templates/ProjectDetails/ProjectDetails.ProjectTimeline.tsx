@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import cx from 'classnames';
@@ -20,13 +22,15 @@ export function ProjectTimeline({
   txClient,
   viewOnLedger,
 }: InputProps): JSX.Element {
+  const { _ } = useLingui();
   const { isKeplrMobileWeb } = useWallet();
+
   return (
     <Box
       className={cx('topo-background-alternate', isKeplrMobileWeb && 'dark')}
       sx={{ pb: { xs: 17, sm: 22.25 } }}
     >
-      <Section titleVariant="h2" title="Timeline" titleAlign="left">
+      <Section titleVariant="h2" title={_(msg`Timeline`)} titleAlign="left">
         <Box sx={{ mt: { xs: 10, sm: 12 } }}>
           <Timeline
             txClient={txClient}

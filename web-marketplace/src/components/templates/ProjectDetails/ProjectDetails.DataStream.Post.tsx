@@ -251,7 +251,7 @@ export const DataStreamPost = ({
           {post.privacy === 'private' && !isAdmin && (
             <div className="flex items-center px-[16px] py-30 sm:p-30">
               <LockIcon className="w-[18px] h-[18px]" />
-              <Subtitle size="lg">{PRIVATE_POST}</Subtitle>
+              <Subtitle size="lg">{_(PRIVATE_POST)}</Subtitle>
             </div>
           )}
         </TimelineContent>

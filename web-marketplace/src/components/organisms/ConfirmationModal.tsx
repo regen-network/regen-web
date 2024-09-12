@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Avatar, Box, Link } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
@@ -74,6 +76,7 @@ const ConfirmationModal: React.FC<React.PropsWithChildren<Props>> = ({
   onClose,
   transactionHash,
 }) => {
+  const { _ } = useLingui();
   const { classes: styles, cx } = useStyles();
 
   return (
@@ -81,17 +84,17 @@ const ConfirmationModal: React.FC<React.PropsWithChildren<Props>> = ({
       <img
         className={cx(styles.cows, styles.verticalSpacing)}
         src={CowIllustration}
-        alt="cows celebrating"
+        alt={_(msg`cows celebrating`)}
       />
       <Title align="center" variant="h3" sx={{ pb: [6, 0] }}>
-        Congrats! Your purchase was successful.
+        <Trans>Congrats! Your purchase was successful.</Trans>
       </Title>
       <Card className={cx(styles.card, styles.verticalSpacing)}>
         <Avatar className={styles.iconContainer}>
           <img
             className={styles.icon}
             src={CarbonCreditFruit}
-            alt="eco-credit"
+            alt={_(msg`eco-credit`)}
           />
         </Avatar>
         <div className={styles.creditDetails}>
@@ -106,12 +109,17 @@ const ConfirmationModal: React.FC<React.PropsWithChildren<Props>> = ({
           >
             500
           </Title>
-          <Title variant="h6">Regen - Ecocredits</Title>
+          <Title variant="h6">
+            <Trans>Regen - Ecocredits</Trans>
+          </Title>
+          {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
           <Label size="xs" color="info.main">
             C01-20190101-20201010-02
           </Label>
           <Body size="sm" mobileSize="sm">
-            Wilmot, Carbon<i>Plus</i> Grasslands Credits
+            <Trans>
+              Wilmot, Carbon<i>Plus</i> Grasslands Credits
+            </Trans>
           </Body>
           <Box
             sx={{
@@ -121,7 +129,7 @@ const ConfirmationModal: React.FC<React.PropsWithChildren<Props>> = ({
             }}
           >
             <Label size="xs" mr={4}>
-              hash:{' '}
+              <Trans>blockchain record:</Trans>{' '}
             </Label>
             <Link
               color="secondary.main"

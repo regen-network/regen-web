@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import {
   ApolloClient,
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
@@ -25,7 +26,7 @@ import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
 import { SLUG_DESCRIPTION, SLUG_TAKEN_ERROR } from './SettingsForm.constants';
 import {
-  settingsFormSchema,
+  getSettingsFormSchema,
   SettingsFormSchemaType,
 } from './SettingsForm.schema';
 
@@ -39,6 +40,7 @@ export const SettingsForm: React.FC<
   React.PropsWithChildren<SettingsFormProps>
 > = ({ initialValues, submit, onPrev }) => {
   const { _ } = useLingui();
+  const settingsFormSchema = useMemo(() => getSettingsFormSchema(_), [_]);
   const form = useZodForm({
     schema: settingsFormSchema,
     defaultValues: {
@@ -83,7 +85,7 @@ export const SettingsForm: React.FC<
   );
   const isNewSlug = initialValues?.slug !== slugValue;
   const projectBySlug = projectBySlugData?.data.projectBySlug;
-  const slugTakenError = projectBySlug && isNewSlug ? SLUG_TAKEN_ERROR : '';
+  const slugTakenError = projectBySlug && isNewSlug ? _(SLUG_TAKEN_ERROR) : '';
 
   return (
     <Form
@@ -104,8 +106,8 @@ export const SettingsForm: React.FC<
       <OnBoardingCard>
         <DebouncedField
           type="text"
-          label="Custom url"
-          description={SLUG_DESCRIPTION}
+          label={_(msg`Custom url`)}
+          description={_(SLUG_DESCRIPTION)}
           value={slug}
           setValue={setSlug}
           setDebouncedValue={setSlugValue}

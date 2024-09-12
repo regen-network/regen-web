@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useAtom } from 'jotai';
 
@@ -32,6 +33,7 @@ export const ProjectDetailsBannerCard = ({
   content,
   slug,
 }: Props) => {
+  const { _ } = useLingui();
   const { activeAccountId, activeAccount } = useAuth();
   const { wallet, loginDisabled } = useWallet();
   const [projectsBannerCard, setProjectsBannerCard] = useAtom(
@@ -58,7 +60,7 @@ export const ProjectDetailsBannerCard = ({
             description={content.descriptionRaw}
             image={{
               src: getSanityImgSrc(content.image),
-              alt: content.image?.imageAlt || 'project banner',
+              alt: content.image?.imageAlt || _(msg`project banner`),
             }}
             buttonLabel={content.buttonLabel as string}
             icon={<ShareIcon />}
@@ -73,7 +75,7 @@ export const ProjectDetailsBannerCard = ({
                 [offChainOrOnChainprojectId]: true,
               })
             }
-            tooltip={COPY_TOOLTIP}
+            tooltip={_(COPY_TOOLTIP)}
           />
         </Section>
       ) : null}

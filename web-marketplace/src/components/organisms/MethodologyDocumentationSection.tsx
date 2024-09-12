@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { makeStyles } from 'tss-react/mui';
 
 import EyeIcon from 'web-components/src/components/icons/EyeIcon';
@@ -65,6 +67,7 @@ function MethodologyDocumentationSection({
   documentation,
   nameRaw,
 }: Props): JSX.Element {
+  const { _ } = useLingui();
   const { classes: styles } = useStyles();
 
   return (
@@ -73,13 +76,15 @@ function MethodologyDocumentationSection({
         <div className={styles.cards}>
           {documentation && (
             <DocumentationCard
-              mainTitle="Documentation"
+              mainTitle={_(msg`Documentation`)}
               cardTitle={documentation.title || ''}
               imageSrc={getSanityImgSrc(documentation.image)}
               imageAlt={
                 documentation.image?.imageAlt || documentation.title || ''
               }
-              buttonText={documentation.button?.buttonText || 'view document'}
+              buttonText={
+                documentation.button?.buttonText || _(msg`view document`)
+              }
               buttonUrl={getBtnHref(documentation.button)}
               buttonIcon={<EyeIcon />}
               version={methodology.version}
@@ -90,11 +95,11 @@ function MethodologyDocumentationSection({
             />
           )}
           <DocumentationCard
-            mainTitle="Related Credit Class"
+            mainTitle={_(msg`Related Credit Class`)}
             cardTitle={methodology.creditClassName}
             imageSrc={methodology.creditClassImage}
             imageAlt={methodology?.creditClassImageAltText}
-            buttonText={'learn more'}
+            buttonText={_(msg`learn more`)}
             buttonUrl={methodology.creditClassUrl}
             buttonBlankTarget={!isInternalLink(methodology.creditClassUrl)}
           />

@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Box, Grid } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 
@@ -20,10 +22,12 @@ type BasketTableProps = {
 
 export const BasketsTable: React.FC<React.PropsWithChildren<BasketTableProps>> =
   ({ basketTokens, renderActionButtons }) => {
+    const { _ } = useLingui();
+
     if (!basketTokens?.length) {
       return (
         <NoCredits
-          title="No basket tokens to display"
+          title={_(msg`No basket tokens to display`)}
           icon={<NoBasketTokensIcon sx={{ width: 100, height: 100 }} />}
         />
       );
@@ -31,7 +35,7 @@ export const BasketsTable: React.FC<React.PropsWithChildren<BasketTableProps>> =
 
     return (
       <ActionsTable
-        tableLabel="baskets table"
+        tableLabel={_(msg`baskets table`)}
         renderActionButtons={renderActionButtons}
         headerRows={[
           /* eslint-disable react/jsx-key */
@@ -44,9 +48,9 @@ export const BasketsTable: React.FC<React.PropsWithChildren<BasketTableProps>> =
               },
             }}
           >
-            Asset
+            <Trans>Asset</Trans>
           </Box>,
-          'Amount available',
+          <Trans>Amount available</Trans>,
         ]}
         rows={basketTokens.map((row, i) => {
           return [

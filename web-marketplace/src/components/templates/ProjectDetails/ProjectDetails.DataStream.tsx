@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import Timeline from '@mui/lab/Timeline';
 import { timelineItemClasses } from '@mui/lab/TimelineItem';
@@ -55,6 +56,7 @@ export const DataStream = ({
   openCreatePostModal,
   setDraftPost,
 }: Props) => {
+  const { _ } = useLingui();
   const { activeAccountId } = useAuth();
   const [year, setYear] = useState<number | null>(null);
   const [years, setYears] = useState<Array<number>>([]);
@@ -90,7 +92,7 @@ export const DataStream = ({
         <>
           <Section
             id="data-stream"
-            title={DATA_STREAM}
+            title={_(DATA_STREAM)}
             titleAlign="left"
             className="mb-50 sm:mb-[100px]"
           >
@@ -100,7 +102,7 @@ export const DataStream = ({
                   <BlockContent content={adminDescription} />
                 </Body>
                 <ContainedButton onClick={openCreatePostModal}>
-                  {CREATE_POST}
+                  {_(CREATE_POST)}
                 </ContainedButton>
               </div>
             )}
@@ -152,7 +154,7 @@ export const DataStream = ({
                       }}
                     >
                       <ArrowDownIcon className="mr-10 h-[24px] w-[24px]" />
-                      {SEE_MORE}
+                      {_(SEE_MORE)}
                     </ContainedButton>
                   )}
                   {!hasNextPage && posts.length > DATA_STREAM_LIMIT && (
@@ -183,7 +185,7 @@ export const DataStream = ({
                         direction="up"
                         className="mr-10 h-[24px] w-[24px]"
                       />
-                      {SEE_LESS}
+                      {_(SEE_LESS)}
                     </ContainedButton>
                   )}
                 </div>

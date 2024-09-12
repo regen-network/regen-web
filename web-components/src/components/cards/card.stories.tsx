@@ -140,6 +140,7 @@ export const projectCard = (): JSX.Element => (
         estimatedIssuance: '200',
         stripePaymentLink: 'https://stripe.com',
       }}
+      draftText="Draft"
     />
   </Box>
 );

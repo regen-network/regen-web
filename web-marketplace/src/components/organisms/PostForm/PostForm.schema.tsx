@@ -11,6 +11,7 @@ type PostFormSchemaParams = {
 
 export const getPostFormSchema = ({ requiredMessage }: PostFormSchemaParams) =>
   z.object({
+    iri: z.string().optional(),
     title: z.string().max(POST_MAX_TITLE_LENGTH).min(1),
     comment: z.string().min(1),
     files: z.array(editFileFormSchema).optional(),

@@ -1,26 +1,35 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, ReactNode, useState } from 'react';
 import { Trans } from '@lingui/macro';
 
 import CreditCardIcon from 'web-components/src/components/icons/CreditCardIcon';
 import CryptoIcon from 'web-components/src/components/icons/CryptoIcon';
 
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 
-import { PAYMENT_OPTIONS } from './ChooseCreditsForm.constants';
-import { ChooseCreditButtonProps } from './ChooseCreditsForm.types';
+interface ChooseCreditButtonProps {
+  children: ReactNode;
+  value: string;
+  isChecked: boolean;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
+}
 
 function ChooseCreditButton({
   children,
   value,
   isChecked,
+  disabled,
   onChange,
 }: ChooseCreditButtonProps) {
   return (
     <label
-      className={`block w-[138px] rounded-md px-[12px] py-10 font-extrabold text-xs font-[lato] shadow ${
-        isChecked
-          ? 'border-brand-300 border-solid text-brand-300 border-2 hover:cursor-default'
-          : 'border-grey-300 border-solid border text-grey-500 filter grayscale hover:bg-grey-200 hover:cursor-pointer'
+      className={`block w-[138px] rounded-md px-[12px] py-10 font-extrabold text-xs font-[lato] shadow border-solid ${
+        disabled
+          ? 'border-grey-300 text-brand-300 border-2 bg-grey-200 text-grey-400'
+          : isChecked
+          ? 'border-brand-300 text-brand-300 border-2 hover:cursor-default'
+          : 'border-grey-300 border text-grey-500 filter grayscale hover:bg-grey-200 hover:cursor-pointer'
       }`}
     >
       <input
@@ -30,17 +39,18 @@ function ChooseCreditButton({
         checked={isChecked}
         onChange={onChange}
         className="hidden"
+        disabled={disabled}
       />
       <div className="flex flex-col items-start">{children}</div>
     </label>
   );
 }
 
-function ChooseCreditButtonGroup({
-  onSelectOption,
-}: {
-  onSelectOption: (option: PaymentOptionsType) => void;
-}) {
+type Props = {
+  setPaymentOption: (option: PaymentOptionsType) => void;
+  cardDisabled: boolean;
+};
+export const PaymentOptions = ({ setPaymentOption, cardDisabled }: Props) => {
   const [selectedButton, setSelectedButton] = useState<PaymentOptionsType>(
     PAYMENT_OPTIONS.CARD,
   );
@@ -48,7 +58,7 @@ function ChooseCreditButtonGroup({
   const handleButtonClick = (e: ChangeEvent<HTMLInputElement>) => {
     const paymentType = e.target.value as PaymentOptionsType;
     setSelectedButton(paymentType);
-    onSelectOption(paymentType);
+    setPaymentOption(paymentType);
   };
 
   return (
@@ -57,6 +67,7 @@ function ChooseCreditButtonGroup({
         value={PAYMENT_OPTIONS.CARD}
         isChecked={selectedButton === PAYMENT_OPTIONS.CARD}
         onChange={handleButtonClick}
+        disabled={cardDisabled}
       >
         <CreditCardIcon />
         <div className="lowercase≈">
@@ -81,12 +92,4 @@ function ChooseCreditButtonGroup({
       </ChooseCreditButton>
     </div>
   );
-}
-
-export const PaymentOptions = ({
-  setPaymentOption,
-}: {
-  setPaymentOption: (option: PaymentOptionsType) => void;
-}) => {
-  return <ChooseCreditButtonGroup onSelectOption={setPaymentOption} />;
 };

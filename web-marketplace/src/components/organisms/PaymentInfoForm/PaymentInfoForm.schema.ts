@@ -1,12 +1,14 @@
 import { z } from 'zod';
 
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 
 export const paymentInfoFormSchema = (paymentOption: PaymentOptionsType) =>
   z.object({
-    name: paymentOption === 'card' ? z.string().min(1) : z.string(),
+    name:
+      paymentOption === PAYMENT_OPTIONS.CARD ? z.string().min(1) : z.string(),
     email:
-      paymentOption === 'card'
+      paymentOption === PAYMENT_OPTIONS.CARD
         ? z.string().email().min(1)
         : z.union([z.literal(''), z.string().email()]),
     createAccount: z.boolean(),

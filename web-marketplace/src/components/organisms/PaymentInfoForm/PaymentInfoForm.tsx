@@ -4,6 +4,7 @@ import { loadStripe, StripeElementsOptionsMode } from '@stripe/stripe-js';
 
 import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
 
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -55,7 +56,7 @@ export const PaymentInfoForm = ({
 
   const stripePromise = useMemo(
     () =>
-      paymentOption === 'card' &&
+      paymentOption === PAYMENT_OPTIONS.CARD &&
       stripePublishableKey &&
       loadStripe(stripePublishableKey),
     [paymentOption, stripePublishableKey],
@@ -110,7 +111,7 @@ export const PaymentInfoForm = ({
           accountName={accountName}
           retiring={retiring}
         />
-        {paymentOption === 'card' && stripePromise && (
+        {paymentOption === PAYMENT_OPTIONS.CARD && stripePromise && (
           <Elements options={options} stripe={stripePromise}>
             <PaymentInfo
               paymentMethods={paymentMethods}

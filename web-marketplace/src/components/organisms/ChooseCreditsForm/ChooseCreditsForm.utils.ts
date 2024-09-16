@@ -1,15 +1,13 @@
-import { getCurrencyPrice } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.utils';
+import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 
 import { Currency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
-import { CreditDetails } from './ChooseCreditsForm.types';
-
-export function getSpendingCap(
+export function getFilteredCryptoSellOrders(
   currency: Currency,
-  creditsDetails: CreditDetails[],
+  groupCryptoSellOrders: Partial<Record<string, Array<SellOrderInfo>>>,
+  retiring: boolean,
 ) {
-  return (
-    getCurrencyPrice(currency, creditsDetails) *
-    creditsDetails.find(item => item.currency === currency)!.availableCredits
+  return groupCryptoSellOrders[currency]?.filter(
+    order => retiring || order.disableAutoRetire,
   );
 }

@@ -1,6 +1,9 @@
 import React from 'react';
 
-type Props = { linearGradient?: boolean } & React.SVGProps<SVGSVGElement>;
+type Props = {
+  linearGradient?: boolean;
+  disabled?: boolean;
+} & React.SVGProps<SVGSVGElement>;
 
 export const CogIcon = ({ linearGradient, ...props }: Props) => (
   <svg
@@ -31,8 +34,11 @@ export const CogIcon = ({ linearGradient, ...props }: Props) => (
         y2="21.3195"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.00458717" stop-color="#7BC796" />
-        <stop offset="1" stop-color="#C5E6D1" />
+        <stop
+          offset="0.00458717"
+          stop-color={props.disabled ? 'currentColor' : '#7BC796'}
+        />
+        <stop offset="1" stop-color={props.disabled ? '#EFEFEF' : '#C5E6D1'} />
       </linearGradient>
       <linearGradient
         id="linear1_cog_icon"
@@ -42,8 +48,11 @@ export const CogIcon = ({ linearGradient, ...props }: Props) => (
         y2="14.6"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0.00458717" stop-color="#7BC796" />
-        <stop offset="1" stop-color="#C5E6D1" />
+        <stop
+          offset="0.00458717"
+          stop-color={props.disabled ? 'currentColor' : '#7BC796'}
+        />
+        <stop offset="1" stop-color={props.disabled ? '#EFEFEF' : '#C5E6D1'} />
       </linearGradient>
     </defs>
   </svg>

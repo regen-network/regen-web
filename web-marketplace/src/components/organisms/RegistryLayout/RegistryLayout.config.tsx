@@ -143,20 +143,24 @@ export const getUserMenuItems = ({
         ...BRIDGE,
         label: _(BRIDGE.label),
       },
-    !loginDisabled && {
+    {
       ...SEPARATOR,
     },
-    !loginDisabled && {
+    {
       pathname,
       linkComponent,
       ...EDIT_PROFILE,
       label: _(EDIT_PROFILE.label),
+      disabled: loginDisabled,
+      disabledTooltipText: _(EDIT_PROFILE.disabledTooltipText),
     },
-    !loginDisabled && {
+    {
       pathname,
       linkComponent,
       ...PROFILE_SETTINGS,
       label: _(PROFILE_SETTINGS.label),
+      disabled: loginDisabled,
+      disabledTooltipText: _(PROFILE_SETTINGS.disabledTooltipText),
     },
     {
       ...SEPARATOR,

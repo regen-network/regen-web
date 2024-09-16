@@ -12,15 +12,22 @@ import { Link } from './Link';
  * @returns a registry `Link` with the navlink styles applied.
  */
 export const RegistryNavLink: React.FC<React.PropsWithChildren<NavLinkProps>> =
-  ({ children, href, overrideClassname, className }) => {
+  ({ children, href, overrideClassname, className, disabled }) => {
     const isActive =
       window && window.location && window.location.pathname === href;
-    const { classes } = useNavLinkStyles({ isActive: !!isActive });
+    const { classes } = useNavLinkStyles({ isActive: !!isActive, disabled });
+
+    const handleDisabledButtonClick = (
+      e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    ) => {
+      e.preventDefault();
+    };
 
     return (
       <Link
         href={href}
         className={overrideClassname ?? cn(classes.navLink, className)}
+        {...(disabled ? { onClick: handleDisabledButtonClick } : {})}
       >
         {children}
       </Link>

@@ -11,6 +11,8 @@ import { ProjectPageIcon } from 'web-components/src/components/icons/ProjectPage
 const className = 'pl-20';
 const labelClassName = 'text-sm';
 
+export const DISABLED_DROPDOWN_ITEM_TOOLTIP_TEXT = msg`This is not yet supported by Wallet Connect and Keplr mobile. Please log in using Keplr browser extension on desktop`;
+
 export const SEPARATOR = {
   children: <div className="h-1 bg-grey-300 w-[280px] my-[14px]" />,
 };
@@ -51,6 +53,7 @@ export const EDIT_PROFILE = {
   icon: <EditIcon className="w-[24px] h-[24px] text-[18px]" linearGradient />,
   labelClassName,
   className,
+  disabledTooltipText: DISABLED_DROPDOWN_ITEM_TOOLTIP_TEXT,
 };
 export const PROFILE_SETTINGS = {
   label: msg`Settings`,
@@ -58,4 +61,5 @@ export const PROFILE_SETTINGS = {
   icon: <CogIcon linearGradient />,
   labelClassName,
   className,
+  disabledTooltipText: DISABLED_DROPDOWN_ITEM_TOOLTIP_TEXT,
 };

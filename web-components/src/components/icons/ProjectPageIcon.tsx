@@ -3,6 +3,8 @@ import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 export type SvgLinearGradientProps = {
   linearGradient?: boolean;
+  disabled?: boolean;
+  color?: string;
 } & SvgIconProps;
 
 export const ProjectPageIcon: React.FC<

@@ -80,7 +80,7 @@ export const CustomerInfo = ({
                 optional.
               </i>
             </Trans>
-          ) : paymentOption === 'card' ? (
+          ) : paymentOption === PAYMENT_OPTIONS.CARD ? (
             _(
               msg`We need an email address to send you a receipt of your purchase.`,
             )

@@ -1,3 +1,5 @@
+import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
@@ -13,12 +15,15 @@ type Props = {
   setPaymentOption: UseStateSetter<PaymentOptionsType>;
   retiring: boolean;
   setRetiring: UseStateSetter<boolean>;
+  cardSellOrders: Array<{ usdPrice: number } & SellOrderInfo>;
+  cryptoSellOrders: Array<SellOrderInfo>;
 };
 export const BuyCreditsForm = ({
   paymentOption,
   setPaymentOption,
   retiring,
   setRetiring,
+  cardSellOrders,
 }: Props) => {
   const {
     data,
@@ -28,6 +33,8 @@ export const BuyCreditsForm = ({
     handleNext,
     isLastStep,
   } = useMultiStep();
+  const cardDisabled = cardSellOrders.length === 0;
+
   return (
     <>
       {activeStep === 0 && (
@@ -36,8 +43,7 @@ export const BuyCreditsForm = ({
           paymentOption={paymentOption}
           retiring={retiring}
           setRetiring={setRetiring}
-          creditVintages={[]}
-          creditDetails={[]}
+          cardDisabled={cardDisabled}
           onSubmit={() => {}}
         />
       )}
@@ -58,7 +64,7 @@ export const BuyCreditsForm = ({
           login={function (): void {
             throw new Error('Function not implemented.');
           }}
-          retiring={false}
+          retiring={retiring}
         />
       )}
       {activeStep === 2 && (

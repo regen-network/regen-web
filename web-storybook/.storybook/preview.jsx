@@ -9,15 +9,8 @@ import { i18n } from '@lingui/core';
 import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 import 'web-components/src/theme/fonts.css';
 import '../../tailwind.css';
-import { AuthApolloProvider } from '../../web-marketplace/src/apollo';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { apolloClientFactory } from 'lib/clients/apolloClientFactory';
-import { reactQueryClient } from 'lib/clients/reactQueryClient';
-import { AnalyticsProvider } from 'use-analytics';
-import Analytics from 'analytics';
 
 window.Buffer = Buffer;
-const analytics = Analytics();
 
 const StorybookI18nProvider = ({ children }) => {
   useEffect(() => {
@@ -38,20 +31,14 @@ const StorybookI18nProvider = ({ children }) => {
 
 export const decorators = [
   Story => (
-    <QueryClientProvider client={reactQueryClient}>
-      <AuthApolloProvider apolloClientFactory={apolloClientFactory}>
-        <StorybookI18nProvider>
-          <AnalyticsProvider instance={analytics}>
-            <ThemeProvider injectFonts>
-              <CssBaseline />
-              <Router>
-                <Story />
-              </Router>
-            </ThemeProvider>
-          </AnalyticsProvider>
-        </StorybookI18nProvider>
-      </AuthApolloProvider>
-    </QueryClientProvider>
+    <StorybookI18nProvider>
+      <ThemeProvider injectFonts>
+        <CssBaseline />
+        <Router>
+          <Story />
+        </Router>
+      </ThemeProvider>
+    </StorybookI18nProvider>
   ),
 ];
 

@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.1](https://github.com/regen-network/regen-web/compare/v2.7.0...v2.7.1) (2024-09-11)
+
+### Bug Fixes
+
+- delete post success banner and redirect ([cca8177](https://github.com/regen-network/regen-web/commit/cca8177a21e0f645e029c37c1d8b92fff3807935))
+
+# [2.7.0](https://github.com/regen-network/regen-web/compare/v2.6.5...v2.7.0) (2024-09-11)
+
+### Bug Fixes
+
+- render photo credit field only for images in EditFileForm ([#2432](https://github.com/regen-network/regen-web/issues/2432)) ([b82ad04](https://github.com/regen-network/regen-web/commit/b82ad048aca187056d9b6f582fceae1e41a1e199))
+- add condition for private post with token ([#2430](https://github.com/regen-network/regen-web/issues/2430)) ([ea19fd9](https://github.com/regen-network/regen-web/commit/ea19fd9a0cb74816fc69319e93aa2806a8a86161))
+- all posts link icon hover color ([#2429](https://github.com/regen-network/regen-web/issues/2429)) ([5a01bbf](https://github.com/regen-network/regen-web/commit/5a01bbf94257400c1578cc4d7c8f64d24cff0cfd))
+- APP-135 update Save button disabled functionality and styles ([#2396](https://github.com/regen-network/regen-web/issues/2396)) ([2bb89d9](https://github.com/regen-network/regen-web/commit/2bb89d93aff5bd99a7377327b9136f662a01c7dd))
+- APP-138 long story text width ([#2392](https://github.com/regen-network/regen-web/issues/2392)) ([19cc159](https://github.com/regen-network/regen-web/commit/19cc159364f8b681481fb134b0e10cf2d7afae2a))
+- APP-147 project size always displayed as hectares in BasicInfoForm ([#2386](https://github.com/regen-network/regen-web/issues/2386)) ([7e84ca8](https://github.com/regen-network/regen-web/commit/7e84ca899a9603c30ad7f74d46abdd7557a0c581))
+- APP-178 display UTC batch start/end dates ([#2391](https://github.com/regen-network/regen-web/issues/2391)) ([78dd52e](https://github.com/regen-network/regen-web/commit/78dd52ebb9fca188ecb0a18023c5cac60c87fdd9))
+- APP-237 use offChainProjectId in PostFlow on onchain project data stream ([#2426](https://github.com/regen-network/regen-web/issues/2426)) ([879da08](https://github.com/regen-network/regen-web/commit/879da08a05dc36a374df6df364341afb0dcc1f1c))
+- APP-262 APP-303 create post files rendering ([#2436](https://github.com/regen-network/regen-web/issues/2436)) ([13f1d7e](https://github.com/regen-network/regen-web/commit/13f1d7e2ec4153a6f4f9c5e0e2a05542d73e5a49))
+- APP-277 entering latitude, longitude in the location field ([#2448](https://github.com/regen-network/regen-web/issues/2448)) ([dd31dae](https://github.com/regen-network/regen-web/commit/dd31dae250961aaabd2de48c6a457301531b2623))
+- APP-295 set Edit Profile form as dirty on image change ([#2459](https://github.com/regen-network/regen-web/issues/2459)) ([3f40499](https://github.com/regen-network/regen-web/commit/3f40499b943a8a60ba203c9f475d89cadf1c53f2))
+- APP-296 set published to true after on chain project created ([#2458](https://github.com/regen-network/regen-web/issues/2458)) ([af3a622](https://github.com/regen-network/regen-web/commit/af3a6223cf3f5e0e4e1f4006d4ba51ab34142af8))
+- APP-307 user menu translate issue ([#2445](https://github.com/regen-network/regen-web/issues/2445)) ([cd4ea08](https://github.com/regen-network/regen-web/commit/cd4ea082aee93e03c59fe1f6628f805bb5556f53))
+- APP-310 create post draft disabled ([#2457](https://github.com/regen-network/regen-web/issues/2457)) ([5a1fcb8](https://github.com/regen-network/regen-web/commit/5a1fcb83450b14f7dc9ee462c40f1f08455e66a9))
+- APP-316 decoding file URLs ([#2462](https://github.com/regen-network/regen-web/issues/2462)) ([7f0f673](https://github.com/regen-network/regen-web/commit/7f0f6739e0933ad7121c07246de8c5748d3dc16e))
+- APP-331 close PostFlow modal on sign tx success ([#2465](https://github.com/regen-network/regen-web/issues/2465)) ([065adcc](https://github.com/regen-network/regen-web/commit/065adccf93f35bb8c88417fe19f3eaf5d1838ca6))
+- profile portfolio issue ([#2446](https://github.com/regen-network/regen-web/issues/2446)) ([d3f2b91](https://github.com/regen-network/regen-web/commit/d3f2b9192f4b1c6a8373ce3419f03c326c700feb))
+- temporarily remove `regen:projectDeveloper` from Project Metadata form omitted keys ([#2400](https://github.com/regen-network/regen-web/issues/2400)) ([3d343b0](https://github.com/regen-network/regen-web/commit/3d343b0732061f1eab8fcba30d3c8f3875b4b6c6))
+
+### Features
+
+- APP-115 account merging ([#2370](https://github.com/regen-network/regen-web/issues/2370)) ([d2f91e6](https://github.com/regen-network/regen-web/commit/d2f91e603a6ca361a5a2d92aff3719b0ee17f092))
+- APP-150 add featured projects sorting on /projects page ([#2387](https://github.com/regen-network/regen-web/issues/2387)) ([0937aa9](https://github.com/regen-network/regen-web/commit/0937aa96d2b27dd29c1939b23b930eb6537c7c1d))
+- APP-155 update VideoInput to detect valid url and display error ([#2385](https://github.com/regen-network/regen-web/issues/2385)) ([e272b77](https://github.com/regen-network/regen-web/commit/e272b77a09f5c7ec04feacb0b18da7e4f2a416b3))
+- APP-176 fallback to on-chain image if no off-chain project metadata is defined ([#2397](https://github.com/regen-network/regen-web/issues/2397)) ([34892f3](https://github.com/regen-network/regen-web/commit/34892f3ec617da91dbef82c36fdfb4df74a6c8e9))
+- APP-183 attach signature to data post + APP-240 ([#2423](https://github.com/regen-network/regen-web/issues/2423)) ([5373c43](https://github.com/regen-network/regen-web/commit/5373c4319ac8bfe7e87c88783a8a4492278a1c72))
+- APP-188 delete post ([#2409](https://github.com/regen-network/regen-web/issues/2409)) ([b9220b5](https://github.com/regen-network/regen-web/commit/b9220b5ed159a3d667337b36d082cf5ecae43e7f))
+- APP-189 post secret link ([#2401](https://github.com/regen-network/regen-web/issues/2401)) ([be1e1e6](https://github.com/regen-network/regen-web/commit/be1e1e69b1912ca7717bbdc7c72483c5ac5e0b0e))
+- APP-194 add prev/next post functionality ([#2398](https://github.com/regen-network/regen-web/issues/2398)) ([7ba2017](https://github.com/regen-network/regen-web/commit/7ba2017786251aca5f6e19018e517c97b82182f3))
+- APP-195 files preview ([#2403](https://github.com/regen-network/regen-web/issues/2403)) ([a295de2](https://github.com/regen-network/regen-web/commit/a295de25be2d39cfe9809895aa5008e3f6ac0410))
+- APP-200 create post close confirmation modal ([#2405](https://github.com/regen-network/regen-web/issues/2405)) ([8c914f6](https://github.com/regen-network/regen-web/commit/8c914f6a1958d8b5a22726df1805375a2594db22))
+- APP-201 buy credits flow step 1 ([#2408](https://github.com/regen-network/regen-web/issues/2408)) ([a622abb](https://github.com/regen-network/regen-web/commit/a622abb5e2329869490bf8714dc93991f4d8d404))
+- APP-202 buy credits step 2 ([#2418](https://github.com/regen-network/regen-web/issues/2418)) ([30e0bcb](https://github.com/regen-network/regen-web/commit/30e0bcb7e629ced57b301b9d51e4723015b7fafd))
+- APP-203 buy credits step 3 ([#2419](https://github.com/regen-network/regen-web/issues/2419)) ([9eac1f0](https://github.com/regen-network/regen-web/commit/9eac1f0f6963f94c8d6b822fb4e49acb3a4b787a))
+- APP-214 sold out projects ([#2414](https://github.com/regen-network/regen-web/issues/2414)) ([7287d5f](https://github.com/regen-network/regen-web/commit/7287d5f58682578dbcb0341063ed3a9702e2c370))
+- APP-218 add create post to SellOrdersActionsBar ([#2427](https://github.com/regen-network/regen-web/issues/2427)) ([fb9c906](https://github.com/regen-network/regen-web/commit/fb9c906d84adb5e96293042e1238a51dd5cc12d9))
+- APP-228 draft posts ([#2453](https://github.com/regen-network/regen-web/issues/2453)) ([dfd6a23](https://github.com/regen-network/regen-web/commit/dfd6a232494282ff1932b0bc8640d25e820ebafb))
+- APP-23 project data stream ([#2390](https://github.com/regen-network/regen-web/issues/2390)) ([d28906d](https://github.com/regen-network/regen-web/commit/d28906de6f57befbcc16f5e1a4c545ecaffacae8))
+- APP-24 create post ([#2381](https://github.com/regen-network/regen-web/issues/2381)) ([bad6016](https://github.com/regen-network/regen-web/commit/bad6016ceb9f365a9150588d1ac7883b22c5213b))
+- APP-243 disable create post button in keplr mobile ([#2433](https://github.com/regen-network/regen-web/issues/2433)) ([df0908f](https://github.com/regen-network/regen-web/commit/df0908f2b0f65c1cdf17697a28e0af3007f2c8dd))
+- APP-25 post page ([#2384](https://github.com/regen-network/regen-web/issues/2384)) ([23581c8](https://github.com/regen-network/regen-web/commit/23581c8ca0c2f00dd3e76dac5c0ebca85d0a1507))
+- APP-297 render urls in post comment as hyperlinks ([#2460](https://github.com/regen-network/regen-web/issues/2460)) ([4c84ce4](https://github.com/regen-network/regen-web/commit/4c84ce4e3824f3e6d8b6106fff173a0a4cf1575f))
+- enable marketplace customization ([#2407](https://github.com/regen-network/regen-web/issues/2407)) ([eed7ab9](https://github.com/regen-network/regen-web/commit/eed7ab9181f226b5d516557f9683f639eb5b455a))
+- pages translation part 2 ([#2415](https://github.com/regen-network/regen-web/issues/2415)) ([9306fb2](https://github.com/regen-network/regen-web/commit/9306fb28f62d06b9fe7aa41e446e2c88004df7d2))
+- pages translation part4 ([#2444](https://github.com/regen-network/regen-web/issues/2444)) ([7381ba9](https://github.com/regen-network/regen-web/commit/7381ba9e7b5411778398f9cb6e99e38ec6583696))
+- trad components part1 ([#2447](https://github.com/regen-network/regen-web/issues/2447)) ([30b2f42](https://github.com/regen-network/regen-web/commit/30b2f42c841dd7c178192ad78628e68090fdcaf1))
+- trad components part2 ([#2449](https://github.com/regen-network/regen-web/issues/2449)) ([6ab5e84](https://github.com/regen-network/regen-web/commit/6ab5e84cc9f829851bd9c91ccb67c4a42535453f))
+- trad pages part3 ([#2441](https://github.com/regen-network/regen-web/issues/2441)) ([5dbd517](https://github.com/regen-network/regen-web/commit/5dbd517efc9a0b1cb883d421c056cb52679182a4))
+- translate features ([#2450](https://github.com/regen-network/regen-web/issues/2450)) ([71ea2c4](https://github.com/regen-network/regen-web/commit/71ea2c466261f0ecd4fe99f14aedf3ddf54127dc))
+- translate web components part1 ([#2454](https://github.com/regen-network/regen-web/issues/2454)) ([80e59d0](https://github.com/regen-network/regen-web/commit/80e59d0e7d12a0fdc50cf125fdd53ca7fcb568c2))
+- translate web-components from Document to forms ([#2464](https://github.com/regen-network/regen-web/issues/2464)) ([4570801](https://github.com/regen-network/regen-web/commit/4570801995f047d11c2ee61bc4d7bf10830e9114))
+
 ## [2.6.5](https://github.com/regen-network/regen-web/compare/v2.6.4...v2.6.5) (2024-08-16)
 
 ### Bug Fixes

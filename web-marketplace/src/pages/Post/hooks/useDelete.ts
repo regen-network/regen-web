@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
@@ -21,6 +22,7 @@ type Params = {
 };
 
 export const useDelete = ({ iri, offChainProjectId, projectHref }: Params) => {
+  const { _ } = useLingui();
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
@@ -45,7 +47,7 @@ export const useDelete = ({ iri, offChainProjectId, projectHref }: Params) => {
           token,
           parseTextResponse: true,
           retryCsrfRequest,
-          onSuccess: async _ => {
+          onSuccess: async () => {
             if (offChainProjectId) {
               await reactQueryClient.invalidateQueries({
                 queryKey: getPostsQueryKey({ projectId: offChainProjectId }),
@@ -68,6 +70,7 @@ export const useDelete = ({ iri, offChainProjectId, projectHref }: Params) => {
       }
     }
   }, [
+    _,
     iri,
     navigate,
     offChainProjectId,

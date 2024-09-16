@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLingui } from '@lingui/react';
 
 import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
 
@@ -17,6 +18,7 @@ import { WalletProviderInfo } from 'components/organisms/UserAccountSettings/Use
 import { useSocialProviders } from './hooks/useSocialProviders';
 
 export const ProfileEditSettings = () => {
+  const { _ } = useLingui();
   const [error, setError] = useState<unknown>(undefined);
   const { activeAccount, privActiveAccount } = useAuth();
   const hasKeplrAccount = !!activeAccount?.addr;
@@ -46,7 +48,7 @@ export const ProfileEditSettings = () => {
     : { connect: onButtonClick };
 
   const emailConfirmationData = useEmailConfirmationData({
-    emailConfirmationText: EMAIL_ADDED,
+    emailConfirmationText: _(EMAIL_ADDED),
   });
 
   return (

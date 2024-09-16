@@ -1,119 +1,180 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
-import {
-  CryptoCurrencies,
-  CURRENCIES,
-  Currency,
-} from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
-import {
-  CREDIT_VINTAGE_OPTIONS,
-  CREDITS_AMOUNT,
-  CURRENCY_AMOUNT,
-  DEFAULT_CRYPTO_CURRENCY,
-} from './CreditsAmount.constants';
+import { CREDITS_AMOUNT, CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import { CreditsAmountHeader } from './CreditsAmount.Header';
 import { CreditsAmountProps } from './CreditsAmount.types';
 import {
   getCreditsAvailablePerCurrency,
-  getCurrencyPrice,
-  getVintageCredits,
+  getSpendingCap,
 } from './CreditsAmount.utils';
 import { CreditsInput } from './CreditsInput';
 import { CurrencyInput } from './CurrencyInput';
 
 export const CreditsAmount = ({
-  creditDetails,
   paymentOption,
   currency,
   setCurrency,
-  setSpendingCap,
   creditsAvailable,
   setCreditsAvailable,
-  creditVintages,
+  filteredCryptoSellOrders,
+  cardSellOrders,
+  spendingCap,
+  setSpendingCap,
+  defaultCryptoCurrency,
 }: CreditsAmountProps) => {
   const { _ } = useLingui();
-  const [pricePerCredit, setPricePerCredit] = useState(
-    getCurrencyPrice(CURRENCIES.usd, creditDetails),
-  );
-  const [maxCreditsSelected, setMaxCreditsSelected] = useState(false);
-  const { setValue, getValues } = useFormContext<ChooseCreditsFormSchemaType>();
 
-  const creditVintageOptions = getValues(CREDIT_VINTAGE_OPTIONS);
+  const [maxCreditsSelected, setMaxCreditsSelected] = useState(false);
+  const { setValue } = useFormContext<ChooseCreditsFormSchemaType>();
+
+  const card = paymentOption === PAYMENT_OPTIONS.CARD;
+  const orderedSellOrders = useMemo(
+    () =>
+      card
+        ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
+        : filteredCryptoSellOrders?.sort(
+            (a, b) => Number(a.askAmount) - Number(b.askAmount),
+          ) || [],
+
+    [card, cardSellOrders, filteredCryptoSellOrders],
+  );
 
   useEffect(() => {
-    if (creditVintageOptions && creditVintageOptions.length > 0) {
-      setCreditsAvailable(
-        getVintageCredits(creditVintageOptions, creditVintages),
-      );
-      setSpendingCap(creditsAvailable);
-    } else {
-      setCreditsAvailable(
-        getCreditsAvailablePerCurrency(currency, creditDetails),
-      );
-    }
+    // Reset amounts to 0 on currency change
+    setValue(CREDITS_AMOUNT, 0);
+    setValue(CURRENCY_AMOUNT, 0);
+  }, [currency, setValue]);
+
+  useEffect(() => {
+    setSpendingCap(
+      getSpendingCap(paymentOption, filteredCryptoSellOrders, cardSellOrders),
+    );
+    setCreditsAvailable(
+      getCreditsAvailablePerCurrency(
+        paymentOption,
+        filteredCryptoSellOrders,
+        cardSellOrders,
+      ),
+    );
   }, [
-    creditDetails,
-    creditVintageOptions,
-    creditVintages,
-    creditsAvailable,
-    currency,
+    cardSellOrders,
+    filteredCryptoSellOrders,
+    paymentOption,
     setCreditsAvailable,
     setSpendingCap,
   ]);
-
-  useEffect(() => {
-    setMaxCreditsSelected(false);
-    setCreditsAvailable(
-      getCreditsAvailablePerCurrency(currency, creditDetails),
-    );
-    const newPrice = getCurrencyPrice(currency, creditDetails);
-    setPricePerCredit(newPrice);
-    setCurrency(currency);
-  }, [creditDetails, currency, setCreditsAvailable, setCurrency]);
 
   // Max credits set
   useEffect(() => {
     if (maxCreditsSelected) {
       setValue(CREDITS_AMOUNT, creditsAvailable);
-      setValue(CURRENCY_AMOUNT, creditsAvailable * pricePerCredit);
+      setValue(CURRENCY_AMOUNT, spendingCap);
       setMaxCreditsSelected(false);
     }
-  }, [creditsAvailable, maxCreditsSelected, pricePerCredit, setValue]);
+  }, [creditsAvailable, maxCreditsSelected, setValue, spendingCap]);
 
   // Credits amount change
   const handleCreditsAmountChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
+      // Set currency amount according to credits quantity,
+      // selecting the cheapest credits first
       const currentCreditsAmount = e.target.valueAsNumber;
-      setValue(CREDITS_AMOUNT, currentCreditsAmount);
+      let currentCurrencyAmount = 0;
+      let creditsAmountLeft = currentCreditsAmount;
+      const sellOrders = [];
 
-      const currentCurrencyAmount = parseFloat(e.target.value) * pricePerCredit;
+      for (let i = 0; i < orderedSellOrders.length; i++) {
+        const order = orderedSellOrders[i];
+        const price = card
+          ? (order as CardSellOrder).usdPrice
+          : Number(order.askAmount);
+        const quantity = Number(order.quantity);
+
+        // Take all credits from this sell order
+        if (creditsAmountLeft >= quantity) {
+          creditsAmountLeft -= quantity;
+          currentCurrencyAmount += quantity * price;
+          sellOrders.push({
+            sellOrderId: order.id,
+            quantity: order.quantity,
+            bidPrice: !card
+              ? { amount: String(price), denom: order.askDenom }
+              : undefined,
+            price: card ? price : undefined,
+          });
+          if (creditsAmountLeft === 0) break;
+        } else {
+          // Take only remaining credits
+          currentCurrencyAmount += creditsAmountLeft * price;
+          sellOrders.push({
+            sellOrderId: order.id,
+            quantity: String(creditsAmountLeft),
+            bidPrice: !card
+              ? { amount: String(price), denom: order.askDenom }
+              : undefined,
+            price: card ? price : undefined,
+          });
+          break;
+        }
+      }
       setValue(CURRENCY_AMOUNT, currentCurrencyAmount);
     },
-    [pricePerCredit, setValue],
+    [card, orderedSellOrders, setValue],
   );
 
-  // Currency type change
-  const handleCurrencyChange = useCallback(
-    (currency: string) => {
-      const newPrice = getCurrencyPrice(
-        currency as CryptoCurrencies,
-        creditDetails,
-      );
-      setPricePerCredit(newPrice);
-      setCurrency(currency as Currency);
-      const creditsAvailablePerCurrency = getCreditsAvailablePerCurrency(
-        currency as Currency,
-        creditDetails,
-      );
-      setCreditsAvailable(creditsAvailablePerCurrency);
+  // Currency amount change
+  const handleCurrencyAmountChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      // Set credits quantity according to currency amount,
+      // selecting the cheapest credits first
+      const currentCurrencyAmount = e.target.valueAsNumber;
+      let currentCreditsAmount = 0;
+      let currencyAmountLeft = currentCurrencyAmount;
+      const sellOrders = [];
+
+      for (let i = 0; i < orderedSellOrders.length; i++) {
+        const order = orderedSellOrders[i];
+        const price = card
+          ? (order as CardSellOrder).usdPrice
+          : Number(order.askAmount);
+        const quantity = Number(order.quantity);
+        const orderTotalAmount = quantity * price;
+
+        if (currencyAmountLeft >= orderTotalAmount) {
+          currencyAmountLeft -= orderTotalAmount;
+          currentCreditsAmount += quantity;
+          sellOrders.push({
+            sellOrderId: order.id,
+            quantity: order.quantity,
+            bidPrice: !card
+              ? { amount: String(price), denom: order.askDenom }
+              : undefined,
+            price: card ? price : undefined,
+          });
+          if (currencyAmountLeft === 0) break;
+        } else {
+          currentCreditsAmount += currencyAmountLeft / price;
+          sellOrders.push({
+            sellOrderId: order.id,
+            quantity: currencyAmountLeft / price,
+            bidPrice: !card
+              ? { amount: String(price), denom: order.askDenom }
+              : undefined,
+            price: card ? price : undefined,
+          });
+          break;
+        }
+      }
+      setValue(CREDITS_AMOUNT, currentCreditsAmount);
     },
-    [creditDetails, setCreditsAvailable, setCurrency],
+    [card, orderedSellOrders, setValue],
   );
 
   return (
@@ -126,17 +187,14 @@ export const CreditsAmount = ({
       />
       <div className="flex justify-between min-w-full flex-wrap sm:flex-nowrap gap-10 items-start">
         <CurrencyInput
-          maxCurrencyAmount={creditsAvailable * pricePerCredit}
+          maxCurrencyAmount={spendingCap}
           paymentOption={paymentOption}
-          handleCurrencyChange={handleCurrencyChange}
-          defaultCryptoCurrency={
-            currency === CURRENCIES.usd ? DEFAULT_CRYPTO_CURRENCY : currency
-          }
-          creditDetails={creditDetails}
+          defaultCryptoCurrency={defaultCryptoCurrency}
           currency={currency}
           setCurrency={setCurrency}
           selectPlaceholderAriaLabel={_(msg`Select option`)}
           selectAriaLabel={_(msg`Select option`)}
+          handleCurrencyAmountChange={handleCurrencyAmountChange}
         />
         <span className="p-10 sm:p-20 text-xl">=</span>
         <CreditsInput

@@ -1,37 +1,34 @@
-import {
-  CreditDetails,
-  CreditsVintages,
-} from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
+import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { CardSellOrder } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
-import { Currency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
-
-export const getCurrencyPrice = (
-  currency: Currency,
-  creditDetails: CreditDetails[],
-) => {
-  return (
-    creditDetails.find(credit => credit.currency === currency)?.creditPrice || 1
-  );
-};
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 
 export const getCreditsAvailablePerCurrency = (
-  currency: Currency,
-  creditDetails: CreditDetails[],
+  paymentOption: PaymentOptionsType,
+  filteredCryptoSellOrders: Array<SellOrderInfo> | undefined,
+  cardSellOrders: Array<CardSellOrder>,
 ) => {
-  return (
-    creditDetails.find(credit => credit.currency === currency)
-      ?.availableCredits || 0
-  );
+  return paymentOption === PAYMENT_OPTIONS.CARD
+    ? cardSellOrders.reduce((prev, cur) => prev + Number(cur.quantity), 0)
+    : filteredCryptoSellOrders?.reduce(
+        (prev, cur) => prev + Number(cur.quantity),
+        0,
+      ) || 0;
 };
 
-export const getVintageCredits = (
-  creditVintageOptions: string[],
-  creditVintages: CreditsVintages[],
-) => {
-  return creditVintageOptions.reduce((sum: number, option: string) => {
-    const credits =
-      creditVintages.find(vintage => vintage.batchDenom === option)?.credits ||
-      '0';
-    return sum + +credits;
-  }, 0);
-};
+export function getSpendingCap(
+  paymentOption: PaymentOptionsType,
+  filteredCryptoSellOrders: SellOrderInfo[] | undefined,
+  cardSellOrders: Array<CardSellOrder>,
+) {
+  return paymentOption === PAYMENT_OPTIONS.CARD
+    ? cardSellOrders.reduce(
+        (prev, cur) => prev + Number(cur.quantity) * cur.usdPrice,
+        0,
+      )
+    : filteredCryptoSellOrders?.reduce(
+        (prev, cur) => prev + Number(cur.quantity) * Number(cur.askAmount),
+        0,
+      ) || 0;
+}

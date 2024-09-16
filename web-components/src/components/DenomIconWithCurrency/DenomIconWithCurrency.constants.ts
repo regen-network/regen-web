@@ -1,4 +1,5 @@
 import {
+  EVMOS_DENOM,
   REGEN_DENOM,
   USD_DENOM,
   USDC_DENOM,
@@ -10,6 +11,7 @@ export const CURRENCIES = {
   usdc: USDC_DENOM,
   uregen: REGEN_DENOM,
   usdcaxl: USDCAXL_DENOM,
+  atevmos: EVMOS_DENOM,
 } as const;
 
 export type Currency = keyof typeof CURRENCIES;

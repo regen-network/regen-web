@@ -4,9 +4,12 @@ import {
   Suspense,
   useCallback,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import { useWatch } from 'react-hook-form';
+import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { SellOrder } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import {
   CREDIT_VINTAGE_OPTIONS,
@@ -19,72 +22,75 @@ import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/u
 
 import Card from 'web-components/src/components/cards/Card';
 import {
+  CryptoCurrencies,
   CURRENCIES,
   Currency,
 } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { Loading } from 'web-components/src/components/loading';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 
-import { AdvanceSettings } from './ChooseCreditsForm.AdvanceSettings';
-import { PAYMENT_OPTIONS } from './ChooseCreditsForm.constants';
 import { CryptoOptions } from './ChooseCreditsForm.CryptoOptions';
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
 import {
   ChooseCreditsFormSchemaType,
   createChooseCreditsFormSchema,
 } from './ChooseCreditsForm.schema';
-import { CreditDetails, CreditsVintages } from './ChooseCreditsForm.types';
-import { getSpendingCap } from './ChooseCreditsForm.utils';
+import { CardSellOrder } from './ChooseCreditsForm.types';
+import { getFilteredCryptoSellOrders } from './ChooseCreditsForm.utils';
 
-type Props = {
+export type Props = {
   paymentOption: PaymentOptionsType;
   setPaymentOption: UseStateSetter<PaymentOptionsType>;
-  creditVintages: CreditsVintages[];
-  creditDetails: CreditDetails[];
   retiring: boolean;
   setRetiring: UseStateSetter<boolean>;
   onSubmit: (values: ChooseCreditsFormSchemaType) => Promise<void>;
+  cardSellOrders: Array<CardSellOrder>;
+  cryptoSellOrders: Array<SellOrderInfo>;
+  cardDisabled: boolean;
 };
 
 export function ChooseCreditsForm({
   paymentOption,
   setPaymentOption,
-  creditVintages,
-  creditDetails,
   retiring,
   setRetiring,
   onSubmit,
+  cardSellOrders,
+  cryptoSellOrders,
+  cardDisabled,
 }: Props) {
-  /** TODO
-   *
-   * 1. Update available creditVintages when currency changes.
-   * Other option would be to simply append to each creditDetails a list of available creditVintages
-   * and the sum of those vintages credits would be equal to the creditDetails.availableCredits.
-   *
-   * 2. For crypto purchase, we also need to know whether sold credits are tradable or not, because
-   * if the user picks up "Buy tradable ecocredits" option then we don't want to show credits
-   * for sell that are not tradable.
-   *
-   * 3. Implement Advance Settings functionality.
-   *
-   */
-
-  const [advanceSettingsOpen, setAdvanceSettingsOpen] = useState(false);
-
-  const [spendingCap, setSpendingCap] = useState(
-    getSpendingCap(CURRENCIES.usd, creditDetails),
+  const groupedCryptoSellOrders = useMemo(
+    () =>
+      cryptoSellOrders.reduce(
+        (result: { [denom: string]: Array<SellOrderInfo> }, order) => {
+          (result[order.askDenom] = result[order.askDenom] || []).push(order);
+          return result;
+        },
+        {},
+      ),
+    [cryptoSellOrders],
   );
-  const [currency, setCurrency] = useState<Currency>(CURRENCIES.usd);
-
-  const [creditsAvailable, setCreditsAvailable] = useState(
-    getCreditsAvailablePerCurrency(currency, creditDetails),
+  // TODO make part of state?
+  // in case retiring = false, not all crypto cur might be available
+  const cryptoCurrencies = useMemo(
+    () => Object.keys(groupedCryptoSellOrders),
+    [groupedCryptoSellOrders],
   );
+
+  const defaultCryptoCurrency = cryptoCurrencies[0] as CryptoCurrencies;
+  const initCurrency =
+    paymentOption === PAYMENT_OPTIONS.CARD
+      ? CURRENCIES.usd
+      : defaultCryptoCurrency;
+  const [currency, setCurrency] = useState<Currency>(initCurrency);
+  const [spendingCap, setSpendingCap] = useState(0);
+  const [creditsAvailable, setCreditsAvailable] = useState(0);
 
   const chooseCreditsFormSchema = createChooseCreditsFormSchema({
-    creditsCap: creditDetails.find(credit => credit.currency === currency)
-      ?.availableCredits!,
+    creditsAvailable,
     spendingCap,
   });
 
@@ -97,88 +103,82 @@ export function ChooseCreditsForm({
     mode: 'onChange',
   });
 
-  const creditVintageOptions = useWatch({
-    control: form.control,
-    name: CREDIT_VINTAGE_OPTIONS,
-  });
-
-  useEffect(() => {
-    if (!advanceSettingsOpen) {
-      form.setValue(CREDIT_VINTAGE_OPTIONS, []);
-    }
-  }, [advanceSettingsOpen, form]);
-
-  useEffect(() => {
-    form.reset({
-      [CURRENCY_AMOUNT]: 0,
-      [CREDITS_AMOUNT]: 0,
-      [CREDIT_VINTAGE_OPTIONS]: form.getValues(CREDIT_VINTAGE_OPTIONS) || [],
-    });
-  }, [form, spendingCap]);
-
-  useEffect(() => {
-    setSpendingCap(getSpendingCap(currency, creditDetails));
-  }, [creditDetails, currency]);
+  const filteredCryptoSellOrders = useMemo(
+    () =>
+      getFilteredCryptoSellOrders(currency, groupedCryptoSellOrders, retiring),
+    [currency, groupedCryptoSellOrders, retiring],
+  );
 
   const handleCryptoPurchaseOptions = useCallback(() => {
     setRetiring(prev => !prev);
-  }, [setRetiring]);
 
-  const handleCreditVintageOptions = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-      const checked = e.target.checked;
-      const currentValues = creditVintageOptions || [];
-      const updatedValues = checked
-        ? [...currentValues, value]
-        : currentValues.filter(item => item !== value);
-
-      form.setValue(CREDIT_VINTAGE_OPTIONS, updatedValues);
-    },
-    [creditVintageOptions, form],
-  );
+    // Reset amounts to 0 on retirement change
+    form.setValue(CREDITS_AMOUNT, 0);
+    form.setValue(CURRENCY_AMOUNT, 0);
+  }, [form, setRetiring]);
 
   const handlePaymentOptions = useCallback(
     (option: string) => {
       setPaymentOption(option as PaymentOptionsType);
       form.setValue(CREDIT_VINTAGE_OPTIONS, []);
-      if (option === PAYMENT_OPTIONS.CRYPTO) {
-        setCurrency(CURRENCIES.uregen);
-        setSpendingCap(getSpendingCap(CURRENCIES.uregen, creditDetails));
-        setCreditsAvailable(
-          getCreditsAvailablePerCurrency(CURRENCIES.uregen, creditDetails),
-        );
-      }
-      if (option === PAYMENT_OPTIONS.CARD) {
-        setCurrency(CURRENCIES.usd);
-        setSpendingCap(getSpendingCap(CURRENCIES.usd, creditDetails));
-        setCreditsAvailable(
-          getCreditsAvailablePerCurrency(CURRENCIES.usd, creditDetails),
-        );
-      }
+      setCurrency(
+        option === PAYMENT_OPTIONS.CARD
+          ? CURRENCIES.usd
+          : defaultCryptoCurrency,
+      );
     },
-    [creditDetails, form, setPaymentOption],
+    [defaultCryptoCurrency, form, setPaymentOption],
   );
 
-  const toggleAdvancedSettings = useCallback((e: MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    setAdvanceSettingsOpen(prev => !prev);
-  }, []);
+  // Advanced settings not enabled for MVP
+  // const [advanceSettingsOpen, setAdvanceSettingsOpen] = useState(false);
+  // const creditVintageOptions = useWatch({
+  //   control: form.control,
+  //   name: CREDIT_VINTAGE_OPTIONS,
+  // });
+  // useEffect(() => {
+  //   if (!advanceSettingsOpen) {
+  //     form.setValue(CREDIT_VINTAGE_OPTIONS, []);
+  //   }
+  // }, [advanceSettingsOpen, form]);
+
+  // const handleCreditVintageOptions = useCallback(
+  //   (e: ChangeEvent<HTMLInputElement>) => {
+  //     const value = e.target.value;
+  //     const checked = e.target.checked;
+  //     const currentValues = creditVintageOptions || [];
+  //     const updatedValues = checked
+  //       ? [...currentValues, value]
+  //       : currentValues.filter(item => item !== value);
+
+  //     form.setValue(CREDIT_VINTAGE_OPTIONS, updatedValues);
+  //   },
+  //   [creditVintageOptions, form],
+  // );
+  // const toggleAdvancedSettings = useCallback((e: MouseEvent<HTMLElement>) => {
+  //   e.preventDefault();
+  //   setAdvanceSettingsOpen(prev => !prev);
+  // }, []);
 
   return (
     <Suspense fallback={<Loading />}>
       <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300">
         <Form form={form} onSubmit={onSubmit} data-testid="choose-credits-form">
-          <PaymentOptions setPaymentOption={handlePaymentOptions} />
+          <PaymentOptions
+            setPaymentOption={handlePaymentOptions}
+            cardDisabled={cardDisabled}
+          />
           <CreditsAmount
-            creditDetails={creditDetails}
             paymentOption={paymentOption}
             currency={currency}
             setCurrency={setCurrency}
+            spendingCap={spendingCap}
             setSpendingCap={setSpendingCap}
-            setCreditsAvailable={setCreditsAvailable}
             creditsAvailable={creditsAvailable}
-            creditVintages={creditVintages}
+            setCreditsAvailable={setCreditsAvailable}
+            filteredCryptoSellOrders={filteredCryptoSellOrders}
+            cardSellOrders={cardSellOrders}
+            defaultCryptoCurrency={defaultCryptoCurrency}
           />
           {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
             <CryptoOptions
@@ -186,12 +186,13 @@ export function ChooseCreditsForm({
               handleCryptoPurchaseOptions={handleCryptoPurchaseOptions}
             />
           )}
-          <AdvanceSettings
+          {/* Advanced settings not enabled for MVP */}
+          {/* <AdvanceSettings
             creditVintages={creditVintages}
             advanceSettingsOpen={advanceSettingsOpen}
             toggleAdvancedSettings={toggleAdvancedSettings}
             handleCreditVintageOptions={handleCreditVintageOptions}
-          />
+          /> */}
         </Form>
       </Card>
     </Suspense>

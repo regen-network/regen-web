@@ -3,6 +3,7 @@ import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
   CURRENCY_AMOUNT,
+  SELL_ORDERS,
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 import { z } from 'zod';
 
@@ -13,10 +14,10 @@ import {
 } from './ChooseCreditsForm.constants';
 
 export const createChooseCreditsFormSchema = ({
-  creditsCap,
+  creditsAvailable,
   spendingCap,
 }: {
-  creditsCap: number;
+  creditsAvailable: number;
   spendingCap: number;
 }) => {
   return z.object({
@@ -33,7 +34,17 @@ export const createChooseCreditsFormSchema = ({
     [CREDITS_AMOUNT]: z.coerce
       .number()
       .positive(POSITIVE_NUMBER)
-      .max(creditsCap, `${i18n._(MAX_CREDITS)} ${creditsCap}`),
+      .max(creditsAvailable, `${i18n._(MAX_CREDITS)} ${creditsAvailable}`),
+    [SELL_ORDERS]: z.array(
+      z.object({
+        sellOrderId: z.string(),
+        quantity: z.string(),
+        price: z.number().optional(),
+        bidPrice: z
+          .object({ amount: z.string(), denom: z.string() })
+          .optional(),
+      }),
+    ),
     [CREDIT_VINTAGE_OPTIONS]: z.array(z.string()),
   });
 };

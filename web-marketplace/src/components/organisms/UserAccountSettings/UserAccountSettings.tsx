@@ -17,11 +17,9 @@ import {
 } from '../LoginButton/LoginButton.constants';
 import { getResendCodeButtonLink } from '../LoginButton/utils/getResendCodeButtonLink';
 import { getResendCodeLabel } from '../LoginButton/utils/getResendCodeLabel';
-import { useEmailConfirmationData } from '../LoginFlow/hooks/useEmailConfirmationData';
 import { emailFormSchema } from '../LoginModal/LoginModal.schema';
 import { ConnectedEmailErrorModal } from './UserAccountSettings.ConnectedEmailErrorModal';
 import { ConnectField } from './UserAccountSettings.ConnectField';
-import { EMAIL_ADDED } from './UserAccountSettings.constants';
 import { UserAccountSettingsProps } from './UserAccountSettings.types';
 
 /** UserAccountSettings is a component for displaying and managing a user's
@@ -35,6 +33,7 @@ export const UserAccountSettings = ({
   socialProviders,
   walletProvider,
   custodialAddress,
+  emailConfirmationData,
 }: UserAccountSettingsProps) => {
   const { _ } = useLingui();
   const {
@@ -48,7 +47,12 @@ export const UserAccountSettings = ({
     onEmailSubmit,
     isConnectedEmailErrorModalOpen,
     onConnectedEmailErrorModalClose,
+<<<<<<< HEAD
   } = useEmailConfirmationData({ emailConfirmationText: _(EMAIL_ADDED) });
+=======
+  } = emailConfirmationData;
+
+>>>>>>> 31fee8f34 (reafactor: move useEmailConfirmationData to the parent component)
   const form = useZodForm({
     schema: emailFormSchema,
     defaultValues: {

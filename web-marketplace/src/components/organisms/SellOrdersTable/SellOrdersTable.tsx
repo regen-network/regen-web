@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import { useMemo } from 'react';
 import { msg } from '@lingui/macro';
-=======
->>>>>>> 213a71eb1 (feat: translate web-components from map to views)
 import { useLingui } from '@lingui/react';
 
 import EmptyState from 'web-components/src/components/empty-state';

@@ -1,8 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
 import { msg, Trans } from '@lingui/macro';
-=======
->>>>>>> 213a71eb1 (feat: translate web-components from map to views)
 import { useLingui } from '@lingui/react';
 import { Box, Grid } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';

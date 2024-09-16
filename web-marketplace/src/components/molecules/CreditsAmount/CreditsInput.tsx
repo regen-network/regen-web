@@ -37,8 +37,8 @@ export const CreditsInput = ({
   }, [creditsAvailable, paymentOption, setValue]);
 
   const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    handleCreditsAmountChange(event);
     onChange(event);
+    handleCreditsAmountChange(event);
   };
 
   return (

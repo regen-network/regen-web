@@ -2,7 +2,6 @@ import { ChangeEvent, lazy, useCallback, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
@@ -12,9 +11,10 @@ import {
 } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
-import { CREDITS_AMOUNT, CURRENCY_AMOUNT } from './CreditsAmount.constants';
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+
+import { CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import { CurrencyInputProps } from './CreditsAmount.types';
-import { getCurrencyPrice } from './CreditsAmount.utils';
 
 const CustomSelect = lazy(
   () =>
@@ -26,17 +26,15 @@ const CustomSelect = lazy(
 export const CurrencyInput = ({
   maxCurrencyAmount,
   paymentOption,
-  handleCurrencyChange,
   defaultCryptoCurrency,
-  creditDetails,
   currency,
   setCurrency,
   selectPlaceholderAriaLabel,
   selectAriaLabel,
+  handleCurrencyAmountChange,
 }: CurrencyInputProps) => {
   const {
     register,
-    setValue,
     formState: { errors },
   } = useFormContext<ChooseCreditsFormSchemaType>();
   const { _ } = useLingui();
@@ -50,21 +48,17 @@ export const CurrencyInput = ({
   };
   const handleOnChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.valueAsNumber;
-      const creditsQty =
-        value / getCurrencyPrice(CURRENCIES[currency], creditDetails);
-      setValue(CREDITS_AMOUNT, creditsQty);
       onChange(event);
+      handleCurrencyAmountChange(event);
     },
-    [creditDetails, currency, onChange, setValue],
+    [handleCurrencyAmountChange, onChange],
   );
 
   const onHandleCurrencyChange = useCallback(
     (currency: string) => {
-      handleCurrencyChange(currency);
       setCurrency(currency as Currency);
     },
-    [handleCurrencyChange, setCurrency],
+    [setCurrency],
   );
 
   return (
@@ -73,11 +67,11 @@ export const CurrencyInput = ({
         <span className="absolute top-[18px] left-10 z-50">$</span>
       )}
       <TextField
+        ref={ref}
+        name={name}
         onFocus={handleOnFocus}
         onChange={handleOnChange}
         onBlur={handleOnBlur}
-        name={name}
-        ref={ref}
         type="number"
         className={`${
           isFocused

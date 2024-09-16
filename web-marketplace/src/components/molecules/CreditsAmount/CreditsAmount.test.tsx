@@ -1,37 +1,26 @@
 import userEvent from '@testing-library/user-event';
-import { Mock } from 'vitest';
-import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { render, screen } from 'web-marketplace/test/test-utils';
 
 import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
-import { CreditsAmount } from './CreditsAmount';
-import { creditDetails } from './CreditsAmount.mock';
-import {
-  getCreditsAvailablePerCurrency,
-  getCurrencyPrice,
-} from './CreditsAmount.utils';
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 
-vi.mock('./CreditsAmount.utils', () => ({
-  getCurrencyPrice: vi.fn(),
-  getCreditsAvailablePerCurrency: vi.fn(),
-}));
+import { CreditsAmount } from './CreditsAmount';
+import { cardSellOrders } from './CreditsAmount.mock';
 
 describe('CreditsAmount', () => {
   const formDefaultValues = {
-    creditDetails,
     paymentOption: PAYMENT_OPTIONS.CARD,
     currency: CURRENCIES.usd,
     setCurrency: () => {},
+    spendingCap: 3185,
     setSpendingCap: () => {},
-    creditsAvailable: 1000,
+    creditsAvailable: 1125,
     setCreditsAvailable: () => {},
-    creditVintages: [],
+    defaultCryptoCurrency: CURRENCIES.uregen,
+    filteredCryptoSellOrders: [],
+    cardSellOrders,
   };
-
-  beforeEach(() => {
-    (getCurrencyPrice as Mock).mockReset();
-  });
 
   it('renders without crashing', () => {
     render(<CreditsAmount {...formDefaultValues} />, {
@@ -64,7 +53,6 @@ describe('CreditsAmount', () => {
   });
 
   it('updates currency amount when credits amount changes', async () => {
-    (getCurrencyPrice as Mock).mockReturnValue(2);
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
     });
@@ -73,13 +61,12 @@ describe('CreditsAmount', () => {
     const currencyInput = screen.getByLabelText(/Currency Input/i);
 
     userEvent.clear(creditsInput);
-    await userEvent.type(creditsInput, '50');
+    await userEvent.type(creditsInput, '101');
 
-    expect(currencyInput).toHaveValue(100);
+    expect(currencyInput).toHaveValue(102);
   });
 
   it('updates credits amount when currency amount changes', async () => {
-    (getCurrencyPrice as Mock).mockReturnValue(1);
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
     });
@@ -88,47 +75,26 @@ describe('CreditsAmount', () => {
     const currencyInput = screen.getByLabelText(/Currency Input/i);
 
     userEvent.clear(currencyInput);
-    await userEvent.type(currencyInput, '50');
+    await userEvent.type(currencyInput, '102');
 
-    expect(creditsInput).toHaveValue(50);
+    expect(creditsInput).toHaveValue(101);
   });
 
-  it('updates credits amount when max credits is selected', async () => {
-    (getCreditsAvailablePerCurrency as Mock).mockReturnValue(
-      creditDetails[0].availableCredits,
-    );
+  it('updates credits amount and currency amount when max credits is selected', async () => {
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
     });
 
-    const creditsInput = screen.getByLabelText(/Credits Input/i);
     const maxCreditsButton = screen.getByRole('button', {
       name: /Max Credits/i,
     });
+    const creditsInput = screen.getByLabelText(/Credits Input/i);
+    const currencyInput = screen.getByLabelText(/Currency Input/i);
 
     await userEvent.click(maxCreditsButton);
     screen.debug();
-    expect(creditsInput).toHaveValue(creditDetails[0].availableCredits);
-  });
 
-  it('updates currency amount when max credits is selected', async () => {
-    (getCurrencyPrice as Mock).mockReturnValue(1);
-    (getCreditsAvailablePerCurrency as Mock).mockReturnValue(
-      creditDetails[0].availableCredits,
-    );
-    render(<CreditsAmount {...formDefaultValues} />, {
-      formDefaultValues,
-    });
-
-    const currencyInput = screen.getByLabelText(/Currency Input/i);
-    const maxCreditsButton = screen.getByRole('button', {
-      name: /Max Credits/i,
-    });
-
-    await userEvent.click(maxCreditsButton);
-
-    expect(currencyInput).toHaveValue(
-      creditDetails[0].availableCredits * creditDetails[0].creditPrice,
-    );
+    expect(creditsInput).toHaveValue(1125);
+    expect(currencyInput).toHaveValue(3185);
   });
 });

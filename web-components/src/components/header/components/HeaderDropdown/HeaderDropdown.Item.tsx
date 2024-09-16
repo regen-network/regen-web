@@ -1,8 +1,7 @@
 import React, { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import ReactHtmlParser from 'html-react-parser';
-
-import InfoTooltip from 'src/components/tooltip/InfoTooltip';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import { cn } from '../../../../utils/styles/cn';
 import { NavLinkProps } from '../NavLink';

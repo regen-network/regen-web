@@ -47,12 +47,8 @@ export const UserAccountSettings = ({
     onEmailSubmit,
     isConnectedEmailErrorModalOpen,
     onConnectedEmailErrorModalClose,
-<<<<<<< HEAD
-  } = useEmailConfirmationData({ emailConfirmationText: _(EMAIL_ADDED) });
-=======
   } = emailConfirmationData;
 
->>>>>>> 31fee8f34 (reafactor: move useEmailConfirmationData to the parent component)
   const form = useZodForm({
     schema: emailFormSchema,
     defaultValues: {

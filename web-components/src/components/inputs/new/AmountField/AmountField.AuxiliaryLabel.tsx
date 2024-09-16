@@ -31,7 +31,7 @@ export const AuxiliaryLabel = ({
           <span className={styles.availableLabel}>{auxiliaryLabel}</span>
         )}
         <span>
-          <span className={styles.availableLabel}>{`${availableLabel}:`}</span>{' '}
+          <span className={styles.availableLabel}>{availableLabel}:</span>&nbsp;
           <span className={styles.availableAmount}>
             {getFormattedNumber(availableAmount)}
           </span>

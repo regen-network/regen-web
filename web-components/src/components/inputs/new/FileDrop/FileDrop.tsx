@@ -40,7 +40,7 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
   dropZoneOption?: DropzoneOptions;
   isCropSubmitDisabled?: boolean;
   fileUploadingTitle: string;
-  fileUplaodingDescription: string;
+  fileUploadingDescription: string;
   locationText: string;
   moveUpText: string;
   moveDownText: string;
@@ -93,7 +93,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       fieldIndex = 0,
       isCropSubmitDisabled = false,
       fileUploadingTitle,
-      fileUplaodingDescription,
+      fileUploadingDescription,
       locationText,
       moveUpText,
       moveDownText,
@@ -301,7 +301,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
         <UploadingModal
           open={uploading}
           onClose={() => setUploading(false)}
-          fileUplaodingDescription={fileUplaodingDescription}
+          fileUploadingDescription={fileUploadingDescription}
           fileUploadingTitle={fileUploadingTitle}
         />
         {renderModal({

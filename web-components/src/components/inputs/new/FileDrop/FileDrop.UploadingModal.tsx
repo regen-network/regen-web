@@ -4,11 +4,11 @@ import { Body, Title } from '../../../typography';
 
 type Props = RegenModalProps & {
   fileUploadingTitle: string;
-  fileUplaodingDescription: string;
+  fileUploadingDescription: string;
 };
 
 export const UploadingModal = ({
-  fileUplaodingDescription,
+  fileUploadingDescription,
   fileUploadingTitle,
   open,
   onClose,
@@ -23,6 +23,6 @@ export const UploadingModal = ({
     <Title className="pt-30 pb-20" variant="h3">
       {fileUploadingTitle}
     </Title>
-    <Body size="lg">{fileUplaodingDescription}</Body>
+    <Body size="lg">{fileUploadingDescription}</Body>
   </Modal>
 );

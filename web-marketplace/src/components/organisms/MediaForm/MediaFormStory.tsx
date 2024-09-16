@@ -169,7 +169,7 @@ export const MediaFormStory = ({
           {isImage && (
             <FileDrop
               fileUploadingTitle={_(FILE_UPLOADING_TITLE)}
-              fileUplaodingDescription={_(FILE_UPLOADING_DESCRIPTION)}
+              fileUploadingDescription={_(FILE_UPLOADING_DESCRIPTION)}
               locationText={_(FILE_DROP_LOCATION_TEXT)}
               moveUpText={_(FILE_DROP_MOVE_UP_TEXT)}
               moveDownText={_(FILE_DROP_MOVE_DOWN_TEXT)}

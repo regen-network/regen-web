@@ -1,5 +1,5 @@
 import { Option } from 'web-components/src/components/inputs/new/CustomSelect/CustomSelect.types';
-import { CryptoCurrencies } from 'web-marketplace/src/components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { CryptoCurrencies } from 'web-marketplace/src/components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 type SelectOptionProps = {
   option: Option;

@@ -7,7 +7,7 @@ import { SetMaxButton } from 'web-components/src/components/buttons/SetMaxButton
 import { Title } from 'web-components/src/components/typography/Title';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { DenomIconWithCurrency } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency';
+import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
 
 import {
   SET_MAX_CREDITS_ARIA_LABEL,

@@ -7,8 +7,8 @@ import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/orga
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { DenomIconWithCurrency } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency';
-import { CURRENCIES } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
+import { CURRENCIES } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import { CURRENCY_AMOUNT } from './CreditsAmount.constants';

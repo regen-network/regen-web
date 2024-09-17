@@ -1,10 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
+import { allowedDenoms } from '../CreditsAmount/CreditsAmount.mock';
+import { CURRENCIES } from '../DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { OrderSummaryCard } from './OrderSummaryCard';
 
 export default {
-  title: 'Cards/OrderSummaryCard',
+  title: 'Marketplace/Molecules/OrderSummaryCard',
   component: OrderSummaryCard,
 } as Meta<typeof OrderSummaryCard>;
 
@@ -21,7 +22,7 @@ Default.args = {
     prefinanceProject: false,
     pricePerCredit: 2,
     credits: 50,
-    currency: CURRENCIES.usd,
+    currency: { askDenom: CURRENCIES.usd, askBaseDenom: CURRENCIES.usd },
   },
 };
 
@@ -36,13 +37,15 @@ WithPaymentDetails.args = {
     prefinanceProject: false,
     pricePerCredit: 2,
     credits: 50,
-    currency: CURRENCIES.usd,
+    currency: { askDenom: CURRENCIES.usd, askBaseDenom: CURRENCIES.usd },
   },
+  paymentOption: 'card',
   currentBuyingStep: 2,
   paymentMethod: {
     type: 'visa',
     cardNumber: '1234 5678 9012 3456',
   },
+  allowedDenoms,
 };
 
 export const WithPrefinanceProject: Story = {
@@ -56,13 +59,15 @@ WithPrefinanceProject.args = {
     prefinanceProject: true,
     pricePerCredit: 2,
     credits: 50,
-    currency: 'usd',
+    currency: { askDenom: CURRENCIES.usd, askBaseDenom: CURRENCIES.usd },
   },
+  paymentOption: 'card',
   currentBuyingStep: 2,
   paymentMethod: {
     type: 'visa',
     cardNumber: '1234 5678 9012 3456',
   },
+  allowedDenoms,
 };
 
 export const WithCrypto: Story = {
@@ -76,6 +81,8 @@ WithCrypto.args = {
     prefinanceProject: false,
     pricePerCredit: 2,
     credits: 50,
-    currency: CURRENCIES.uregen,
+    currency: { askBaseDenom: CURRENCIES.uregen, askDenom: CURRENCIES.uregen },
   },
+  paymentOption: 'crypto',
+  allowedDenoms,
 };

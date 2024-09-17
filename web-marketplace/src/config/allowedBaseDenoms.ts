@@ -1,4 +1,4 @@
-import { CURRENCIES } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { CURRENCIES } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 const isRedwood = import.meta.env.VITE_LEDGER_CHAIN_ID === 'regen-redwood-1';
 

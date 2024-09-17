@@ -1,6 +1,10 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { useQuery } from '@tanstack/react-query';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
+
+import { useLedger } from 'ledger';
+import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
@@ -35,6 +39,14 @@ export const BuyCreditsForm = ({
   } = useMultiStep();
   const cardDisabled = cardSellOrders.length === 0;
 
+  const { marketplaceClient } = useLedger();
+  const { data: allowedDenomsData } = useQuery(
+    getAllowedDenomQuery({
+      client: marketplaceClient,
+      enabled: !!marketplaceClient,
+    }),
+  );
+
   return (
     <>
       {activeStep === 0 && (
@@ -45,6 +57,7 @@ export const BuyCreditsForm = ({
           setRetiring={setRetiring}
           cardDisabled={cardDisabled}
           onSubmit={() => {}}
+          allowedDenoms={allowedDenomsData?.allowedDenoms}
         />
       )}
       {activeStep === 1 && (

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { CURRENCIES } from 'web-marketplace/src/components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { CURRENCIES } from 'web-marketplace/src/components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { SupCurrencyAndAmount } from './SupCurrencyAndAmount';
 
 export default {

@@ -1,4 +1,4 @@
-import { CURRENCIES } from 'web-marketplace/src/components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { CURRENCIES } from 'web-marketplace/src/components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 export function SupCurrencyAndAmount({
   price,

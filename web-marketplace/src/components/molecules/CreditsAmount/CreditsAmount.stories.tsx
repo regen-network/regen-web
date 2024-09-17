@@ -5,7 +5,7 @@ import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/u
 import { createChooseCreditsFormSchema } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { CURRENCIES } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { CURRENCIES } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { CreditsAmount } from './CreditsAmount';
 import { CREDITS_AMOUNT, CURRENCY_AMOUNT } from './CreditsAmount.constants';

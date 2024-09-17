@@ -1,4 +1,7 @@
-import { Currency } from 'web-marketplace/src/components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
+
+import { Currency } from '../CreditsAmount/CreditsAmount.types';
+import { AllowedDenoms } from '../DenomLabel/DenomLabel.utils';
 
 export interface OrderProps {
   projectName: string;
@@ -19,6 +22,8 @@ export interface OrderSummaryProps {
     type: 'visa' | 'mastercard';
     cardNumber: string;
   };
+  paymentOption: PaymentOptionsType;
+  allowedDenoms: AllowedDenoms;
   onClickEditCard: () => void;
 }
 

@@ -1,12 +1,12 @@
-import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { CardSellOrder } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 export const getCreditsAvailablePerCurrency = (
   paymentOption: PaymentOptionsType,
-  filteredCryptoSellOrders: Array<SellOrderInfo> | undefined,
+  filteredCryptoSellOrders: Array<UISellOrderInfo> | undefined,
   cardSellOrders: Array<CardSellOrder>,
 ) => {
   return paymentOption === PAYMENT_OPTIONS.CARD
@@ -19,7 +19,7 @@ export const getCreditsAvailablePerCurrency = (
 
 export function getSpendingCap(
   paymentOption: PaymentOptionsType,
-  filteredCryptoSellOrders: SellOrderInfo[] | undefined,
+  filteredCryptoSellOrders: Array<UISellOrderInfo> | undefined,
   cardSellOrders: Array<CardSellOrder>,
 ) {
   return paymentOption === PAYMENT_OPTIONS.CARD

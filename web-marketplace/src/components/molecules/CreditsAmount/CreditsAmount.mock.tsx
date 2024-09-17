@@ -2,7 +2,7 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
-import { CURRENCIES } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { CURRENCIES } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 export const cryptoSellOrders = [
   {

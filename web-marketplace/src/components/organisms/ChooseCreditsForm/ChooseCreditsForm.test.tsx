@@ -1,4 +1,5 @@
 import {
+  allowedDenoms,
   cardSellOrders,
   cryptoSellOrders,
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.mock';
@@ -19,6 +20,7 @@ describe('ChooseCreditsForm', () => {
     cardSellOrders,
     cryptoSellOrders,
     cardDisabled: false,
+    allowedDenoms,
   };
   it('renders without crashing', () => {
     render(<ChooseCreditsForm {...props} />);

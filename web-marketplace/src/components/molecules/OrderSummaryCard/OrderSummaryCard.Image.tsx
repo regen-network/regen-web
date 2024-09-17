@@ -1,22 +1,27 @@
+import { useLingui } from '@lingui/react';
+
 import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
 
-import { ProjectCardBodyTextsMapping } from '../ProjectCard/ProjectCard.types';
+import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
 
 export function OrderSummaryImage({
   src,
   prefinanceProject,
-  bodyTexts,
   altText,
 }: {
   src: string;
   prefinanceProject?: boolean;
-  bodyTexts: ProjectCardBodyTextsMapping;
   altText: string;
 }) {
+  const { _ } = useLingui();
+
   return (
     <div className="w-[90px] sm:w-full  sm:h-[160px]">
       {prefinanceProject && (
-        <PrefinanceTag classNames={{ root: 'top-20' }} bodyTexts={bodyTexts} />
+        <PrefinanceTag
+          classNames={{ root: 'top-20' }}
+          bodyTexts={getProjectCardBodyTextMapping(_)}
+        />
       )}
       <img
         src={src}

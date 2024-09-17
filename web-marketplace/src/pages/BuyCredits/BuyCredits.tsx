@@ -33,8 +33,6 @@ export const BuyCredits = () => {
 
   const formModel = getFormModel({ _, paymentOption, retiring });
 
-  projectsWithOrderData.map(p => p.sellOrders.)
-
   return (
     <MultiStepTemplate
       formId={formModel.formId}

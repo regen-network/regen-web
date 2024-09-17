@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
 
-import { CURRENCIES } from '../DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { CURRENCIES } from 'web-marketplace/src/components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 describe('SupCurrencyAndAmount', () => {
   it('renders the currency symbol and amount', () => {

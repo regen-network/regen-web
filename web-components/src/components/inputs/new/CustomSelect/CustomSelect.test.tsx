@@ -8,7 +8,7 @@ describe('CustomSelect', () => {
   const onSelect = vi.fn();
   const options = [
     { label: 'USD', value: 'usd' },
-    { label: 'UREGEN', value: 'uregen' },
+    { label: 'REGEN', value: 'uregen' },
     { label: 'USDC', value: 'usdc' },
   ];
 

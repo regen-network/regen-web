@@ -1,15 +1,17 @@
 import { ChangeEvent } from 'react';
 import { CardSellOrder } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
-import {
-  CryptoCurrencies,
-  Currency,
-} from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
+import { AllowedDenoms } from '../DenomLabel/DenomLabel.utils';
+
+export type Currency = {
+  askBaseDenom: string;
+  askDenom: string;
+};
 export interface CreditsAmountProps {
   paymentOption: PaymentOptionsType;
   currency: Currency;
@@ -20,7 +22,9 @@ export interface CreditsAmountProps {
   setCreditsAvailable: UseStateSetter<number>;
   filteredCryptoSellOrders: Array<UISellOrderInfo> | undefined;
   cardSellOrders: Array<CardSellOrder>;
-  defaultCryptoCurrency: CryptoCurrencies;
+  defaultCryptoCurrency: Currency;
+  cryptoCurrencies: Currency[];
+  allowedDenoms?: AllowedDenoms;
 }
 
 export interface CreditsInputProps {
@@ -32,10 +36,13 @@ export interface CreditsInputProps {
 export interface CurrencyInputProps {
   maxCurrencyAmount: number;
   paymentOption: PaymentOptionsType;
-  defaultCryptoCurrency: CryptoCurrencies;
+  defaultCryptoCurrency: Currency;
   currency: Currency;
   setCurrency: (currency: Currency) => void;
   selectPlaceholderAriaLabel: string;
   selectAriaLabel: string;
   handleCurrencyAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  cryptoCurrencies: Currency[];
+  allowedDenoms?: AllowedDenoms;
+  displayDenom: string;
 }

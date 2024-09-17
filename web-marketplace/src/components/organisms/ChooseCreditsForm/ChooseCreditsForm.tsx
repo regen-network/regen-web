@@ -1,22 +1,10 @@
-import {
-  ChangeEvent,
-  MouseEvent,
-  Suspense,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import { useWatch } from 'react-hook-form';
-import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import { SellOrder } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
+import { Suspense, useCallback, useMemo, useState } from 'react';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
   CURRENCY_AMOUNT,
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
-import { getCreditsAvailablePerCurrency } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.utils';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
 
@@ -31,6 +19,7 @@ import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 import { CryptoOptions } from './ChooseCreditsForm.CryptoOptions';
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
@@ -48,7 +37,7 @@ export type Props = {
   setRetiring: UseStateSetter<boolean>;
   onSubmit: (values: ChooseCreditsFormSchemaType) => Promise<void>;
   cardSellOrders: Array<CardSellOrder>;
-  cryptoSellOrders: Array<SellOrderInfo>;
+  cryptoSellOrders: Array<UISellOrderInfo>;
   cardDisabled: boolean;
 };
 
@@ -65,7 +54,7 @@ export function ChooseCreditsForm({
   const groupedCryptoSellOrders = useMemo(
     () =>
       cryptoSellOrders.reduce(
-        (result: { [denom: string]: Array<SellOrderInfo> }, order) => {
+        (result: { [denom: string]: Array<UISellOrderInfo> }, order) => {
           (result[order.askDenom] = result[order.askDenom] || []).push(order);
           return result;
         },

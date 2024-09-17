@@ -7,13 +7,15 @@ export default function EditIcon({
   sx,
   linearGradient,
   disabled,
-  color,
   ...props
 }: SvgLinearGradientProps): JSX.Element {
-  const gradientId = color ? `linear_edit_icon-${color}` : 'linear_edit_icon';
+  const randomId = Math.random().toString(36).substring(7);
+  const gradientId = disabled
+    ? `linear_edit_icon-${randomId}`
+    : 'linear_edit_icon';
   return (
     <SvgIcon
-      sx={[{ color: disabled ? color : '#4FB573' }, ...sxToArray(sx)]}
+      sx={[{ color: disabled ? '#8F8F8F' : '#4FB573' }, ...sxToArray(sx)]}
       width="13"
       height="13"
       viewBox="0 0 24 24"
@@ -37,12 +39,9 @@ export default function EditIcon({
         >
           <stop
             offset="0.00458717"
-            stopColor={disabled && color ? color : '#7BC796'}
+            stopColor={disabled ? '#8F8F8F' : '#7BC796'}
           />
-          <stop
-            offset="1"
-            stopColor={disabled && color ? '#EFEFEF' : '#C5E6D1'}
-          />
+          <stop offset="1" stopColor={disabled ? '#EFEFEF' : '#C5E6D1'} />
         </linearGradient>
       </defs>
     </SvgIcon>

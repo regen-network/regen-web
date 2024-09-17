@@ -41,13 +41,11 @@ export const HeaderDropdownItem: React.FC<
   const onHover = (): Promise<any> | undefined =>
     importCallback && importCallback();
 
-  // If the icon is disabled, we need to add two new
-  // props to change the color to grey and disable it
+  // If the icon is disabled, we need to add the disable prop
   const iconElement =
     icon && props.disabled
       ? React.cloneElement(icon, {
           disabled: true,
-          color: '#8F8F8F',
         })
       : icon;
 

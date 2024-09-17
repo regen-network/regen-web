@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from 'web-marketplace/test/test-utils';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { CURRENCIES } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { CURRENCIES } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { CreditsAmount } from './CreditsAmount';
 import { cardSellOrders, cryptoCurrencies } from './CreditsAmount.mock';

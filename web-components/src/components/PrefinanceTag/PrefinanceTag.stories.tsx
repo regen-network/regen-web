@@ -18,4 +18,5 @@ Default.args = {
     root: '',
     label: '',
   },
+  bodyTexts: { prefinance: 'prefinance' },
 };

@@ -1,15 +1,16 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
+import { allowedDenoms } from '../CreditsAmount/CreditsAmount.mock';
 import { OrderSummaryCard } from './OrderSummaryCard';
-import { orderSummaryCommonProps } from './OrderSummaryCard.mock';
 
 export default {
-  title: 'Cards/OrderSummaryCard',
+  title: 'Marketplace/Molecules/OrderSummaryCard',
   component: OrderSummaryCard,
 } as Meta<typeof OrderSummaryCard>;
 
 type Story = StoryObj<typeof OrderSummaryCard>;
+
+const currency = { askDenom: 'usd', askBaseDenom: 'usd' };
 
 export const Default: Story = {
   render: args => <OrderSummaryCard {...args} />,
@@ -22,9 +23,9 @@ Default.args = {
     prefinanceProject: false,
     pricePerCredit: 2,
     credits: 50,
-    currency: CURRENCIES.usd,
+    currency,
   },
-  ...orderSummaryCommonProps,
+  imageAltText: 'imageAltText',
 };
 
 export const WithPaymentDetails: Story = {
@@ -38,14 +39,16 @@ WithPaymentDetails.args = {
     prefinanceProject: false,
     pricePerCredit: 2,
     credits: 50,
-    currency: CURRENCIES.usd,
+    currency,
   },
+  paymentOption: 'card',
   currentBuyingStep: 2,
   paymentMethod: {
     type: 'visa',
     cardNumber: '1234 5678 9012 3456',
   },
-  ...orderSummaryCommonProps,
+  imageAltText: 'imageAltText',
+  allowedDenoms,
 };
 
 export const WithPrefinanceProject: Story = {
@@ -59,14 +62,16 @@ WithPrefinanceProject.args = {
     prefinanceProject: true,
     pricePerCredit: 2,
     credits: 50,
-    currency: 'usd',
+    currency,
   },
+  paymentOption: 'card',
   currentBuyingStep: 2,
   paymentMethod: {
     type: 'visa',
     cardNumber: '1234 5678 9012 3456',
   },
-  ...orderSummaryCommonProps,
+  imageAltText: 'imageAltText',
+  allowedDenoms,
 };
 
 export const WithCrypto: Story = {
@@ -80,7 +85,9 @@ WithCrypto.args = {
     prefinanceProject: false,
     pricePerCredit: 2,
     credits: 50,
-    currency: CURRENCIES.uregen,
+    currency,
   },
-  ...orderSummaryCommonProps,
+  paymentOption: 'crypto',
+  imageAltText: 'imageAltText',
+  allowedDenoms,
 };

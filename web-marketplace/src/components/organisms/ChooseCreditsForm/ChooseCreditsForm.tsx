@@ -15,11 +15,12 @@ import { UseStateSetter } from 'web-components/src/types/react/useState';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import {
   CryptoCurrencies,
   CURRENCIES,
-} from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
-import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
+} from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { AllowedDenoms } from 'components/molecules/DenomLabel/DenomLabel.utils';
 
 import { CryptoOptions } from './ChooseCreditsForm.CryptoOptions';
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
@@ -39,6 +40,7 @@ export type Props = {
   cardSellOrders: Array<CardSellOrder>;
   cryptoSellOrders: Array<UISellOrderInfo>;
   cardDisabled: boolean;
+  allowedDenoms?: AllowedDenoms;
 };
 
 export function ChooseCreditsForm({
@@ -50,6 +52,7 @@ export function ChooseCreditsForm({
   cardSellOrders,
   cryptoSellOrders,
   cardDisabled,
+  allowedDenoms,
 }: Props) {
   const cryptoCurrencies = useMemo(
     () =>
@@ -174,6 +177,7 @@ export function ChooseCreditsForm({
             cardSellOrders={cardSellOrders}
             defaultCryptoCurrency={defaultCryptoCurrency}
             cryptoCurrencies={cryptoCurrencies}
+            allowedDenoms={allowedDenoms}
           />
           {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
             <CryptoOptions

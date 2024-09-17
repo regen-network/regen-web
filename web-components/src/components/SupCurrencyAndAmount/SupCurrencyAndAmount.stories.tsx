@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { CURRENCIES } from 'web-marketplace/src/components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { SupCurrencyAndAmount } from './SupCurrencyAndAmount';
 
 export default {
@@ -16,5 +15,5 @@ export const Default: Story = {
 
 Default.args = {
   price: 5,
-  currencyCode: CURRENCIES.usd,
+  currencyCode: 'usd',
 };

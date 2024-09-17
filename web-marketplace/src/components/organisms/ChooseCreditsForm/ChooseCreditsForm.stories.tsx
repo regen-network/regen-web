@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import {
+  allowedDenoms,
   cardSellOrders,
   cryptoSellOrders,
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.mock';
@@ -39,4 +40,5 @@ export const ChooseCredits: Story = {
 ChooseCredits.args = {
   cryptoSellOrders,
   cardSellOrders,
+  allowedDenoms,
 };

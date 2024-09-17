@@ -1,17 +1,18 @@
 import { screen } from '@testing-library/dom';
 import { render } from '@testing-library/react';
-import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+
 import { fireEvent } from 'web-components/test/test-utils';
 
+import { allowedDenoms } from '../CreditsAmount/CreditsAmount.mock';
+import { CURRENCIES } from '../DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { OrderSummaryCard } from './OrderSummaryCard';
-import { orderSummaryCommonProps } from './OrderSummaryCard.mock';
 import { OrderSummaryProps } from './OrderSummaryCard.types';
 
 describe('OrderSummaryCard', () => {
   const orderSummary: OrderSummaryProps = {
     order: {
       projectName: 'Project Name',
-      currency: CURRENCIES.usd,
+      currency: { askDenom: CURRENCIES.usd, askBaseDenom: CURRENCIES.usd },
       pricePerCredit: 10,
       credits: 5,
       image: 'path/to/image',
@@ -21,9 +22,11 @@ describe('OrderSummaryCard', () => {
       type: 'visa',
       cardNumber: '1234 5678 9012 3456',
     },
+    imageAltText: 'imageAltText',
+    paymentOption: 'card',
+    allowedDenoms,
     currentBuyingStep: 2,
     onClickEditCard: vi.fn(),
-    ...orderSummaryCommonProps,
   };
 
   it('displays the project name', () => {

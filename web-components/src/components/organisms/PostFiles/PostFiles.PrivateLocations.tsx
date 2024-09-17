@@ -25,7 +25,7 @@ const PostFilesPrivateLocations = ({
     <div className="h-[100%] relative">
       <Tag
         className="top-20 left-20 absolute"
-        label="Location data available on request"
+        label={label}
         icon={<PinIcon className="w-[16px] h-[17px]" />}
       />
       <Gallery

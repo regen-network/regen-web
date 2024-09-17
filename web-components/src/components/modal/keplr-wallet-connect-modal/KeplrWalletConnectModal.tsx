@@ -49,7 +49,7 @@ const KeplrWalletConnectModal = ({
           {subtitle}
         </Body>
         <Body sx={{ mt: 2 }}>
-          {learnMoreText}
+          {`${learnMoreText} `}
           <Link href={helpLink.href} target="_blank">
             {helpLink.text}
           </Link>

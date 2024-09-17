@@ -3,11 +3,17 @@ import { Box, Grid } from '@mui/material';
 import Card from '../../cards/Card';
 import { Body, Title } from '../../typography';
 import UserAvatar from '../../user/UserAvatar';
-import Modal from '..';
-import { AddWalletModalConnectProps } from './AddWalletModalConnect';
+import Modal, { RegenModalProps } from '..';
 
-export interface AddWalletModalTemplateProps
-  extends AddWalletModalConnectProps {}
+export interface AddWalletModalTemplateProps extends RegenModalProps {
+  title: string;
+  subtitle?: string;
+  partyInfo?: {
+    addr: string;
+    name: string;
+    profileImage: string;
+  };
+}
 
 const AddWalletModalTemplate: React.FC<
   React.PropsWithChildren<AddWalletModalTemplateProps>

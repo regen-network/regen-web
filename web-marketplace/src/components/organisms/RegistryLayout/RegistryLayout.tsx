@@ -5,9 +5,6 @@ import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
 import { ScrollToTop } from '../../atoms';
 import { RegistryLayoutAccountSwitchModal } from './RegistryLayout.AccountSwitchModal';
-import { RegistryLayoutAddWalletModalConnect } from './RegistryLayout.AddWalletModalConnect';
-import { RegistryLayoutAddWalletModalRemove } from './RegistryLayout.AddWalletModalRemove';
-import { RegistryLayoutAddWalletModalSwitch } from './RegistryLayout.AddWalletModalSwitch';
 import { RegistryLayoutAddWalletModalSwitchWarning } from './RegistryLayout.AddWalletModalSwitchWarning';
 import { RegistryLayoutBannerModal } from './RegistryLayout.Banner';
 import { RegistryLayoutConnectWalletModal } from './RegistryLayout.ConnectWalletModal';
@@ -38,9 +35,6 @@ const RegistryLayout: React.FC = () => {
       <RegistryLayoutErrorBannerModal />
       <RegistryLayoutConnectWalletModal />
       <RegistryLayoutSwitchWalletModal />
-      <RegistryLayoutAddWalletModalConnect />
-      <RegistryLayoutAddWalletModalRemove />
-      <RegistryLayoutAddWalletModalSwitch />
       <RegistryLayoutAddWalletModalSwitchWarning />
       <RegistryLayoutAccountSwitchModal />
     </>

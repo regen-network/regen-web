@@ -53,6 +53,10 @@ const RegistryLayoutHeader: React.FC = () => {
   const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
   const menuItems = useMemo(() => getMenuItems(pathname, _), [pathname, _]);
   const onProfileClick = useOnProfileClick();
+
+  // TODO: implement savedPaymentInfo
+  const savedPaymentInfo = true;
+
   const userMenuItems = useMemo(
     () =>
       getUserMenuItems({
@@ -64,6 +68,7 @@ const RegistryLayoutHeader: React.FC = () => {
         isWalletConnected: isConnected,
         loginDisabled,
         onProfileClick,
+        savedPaymentInfo,
         profile: activeAccount
           ? {
               id: activeAccount.id,
@@ -87,10 +92,11 @@ const RegistryLayoutHeader: React.FC = () => {
       showProjects,
       isConnected,
       loginDisabled,
-      activeAccount,
-      privActiveAccount?.email,
-      _,
       onProfileClick,
+      savedPaymentInfo,
+      activeAccount,
+      _,
+      privActiveAccount?.email,
     ],
   );
 

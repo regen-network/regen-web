@@ -1,12 +1,12 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 
-import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
-
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import { CURRENCIES } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 export const cryptoSellOrders = [
   {
-    id: 1,
+    id: '1',
+    askBaseDenom: CURRENCIES.uregen,
     askDenom: CURRENCIES.uregen,
     askAmount: '10',
     quantity: '100',
@@ -15,7 +15,8 @@ export const cryptoSellOrders = [
     disableAutoRetire: true,
   },
   {
-    id: 2,
+    id: '2',
+    askBaseDenom: CURRENCIES.uregen,
     askDenom: CURRENCIES.uregen,
     askAmount: '20',
     quantity: '10',
@@ -24,8 +25,9 @@ export const cryptoSellOrders = [
     disableAutoRetire: false,
   },
   {
-    id: 3,
-    askDenom: CURRENCIES.usdc,
+    id: '3',
+    askBaseDenom: CURRENCIES.usdc,
+    askDenom: 'ibc/123',
     askAmount: '2',
     quantity: '1000',
     seller: 'addr1',
@@ -33,8 +35,9 @@ export const cryptoSellOrders = [
     disableAutoRetire: false,
   },
   {
-    id: 4,
-    askDenom: CURRENCIES.usdcaxl,
+    id: '4',
+    askBaseDenom: CURRENCIES.usdcaxl,
+    askDenom: 'ibc/456',
     askAmount: '3',
     quantity: '10',
     batchDenom: 'C01-20190101-20200101-002',
@@ -42,8 +45,9 @@ export const cryptoSellOrders = [
     disableAutoRetire: false,
   },
   {
-    id: 5,
-    askDenom: CURRENCIES.atevmos,
+    id: '5',
+    askBaseDenom: CURRENCIES.atevmos,
+    askDenom: 'ibc/567',
     askAmount: '4',
     quantity: '5',
     batchDenom: 'C01-20180101-20190101-001',
@@ -58,8 +62,28 @@ export const cardSellOrders = cryptoSellOrders.map((order, i) => ({
 }));
 
 export const cryptoCurrencies = [
-  CURRENCIES.uregen,
-  CURRENCIES.usdc,
-  CURRENCIES.usdcaxl,
-  CURRENCIES.atevmos,
+  { askDenom: CURRENCIES.uregen, askBaseDenom: CURRENCIES.uregen },
+  { askDenom: 'ibc/123', askBaseDenom: CURRENCIES.usdc },
+  { askDenom: 'ibc/456', askBaseDenom: CURRENCIES.usdcaxl },
+  { askDenom: 'ibc/789', askBaseDenom: CURRENCIES.atevmos },
+];
+
+export const allowedDenoms = [
+  {
+    displayDenom: 'regen',
+    bankDenom: CURRENCIES.uregen,
+  },
+  {
+    displayDenom: 'USDC',
+    bankDenom: 'ibc/123',
+  },
+  {
+    // eslint-disable-next-line lingui/no-unlocalized-strings
+    displayDenom: 'USDC.axl',
+    bankDenom: 'ibc/456',
+  },
+  {
+    displayDenom: 'evmos',
+    bankDenom: 'ibc/789',
+  },
 ];

@@ -3,28 +3,24 @@ import { Trans } from '@lingui/macro';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { SetMaxButton } from 'web-components/src/components/buttons/SetMaxButton';
-import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
-import {
-  CURRENCIES,
-  Currency,
-} from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { Title } from 'web-components/src/components/typography/Title';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { DenomIconWithCurrency } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency';
 
 export function CreditsAmountHeader({
   creditsAvailable,
   setMaxCreditsSelected,
-  currency,
+  displayDenom,
+  baseDenom,
   paymentOption,
 }: {
   creditsAvailable: number;
   setMaxCreditsSelected: (value: boolean) => void;
-  currency: Currency;
   paymentOption: string;
+  baseDenom: string;
+  displayDenom: string;
 }) {
-  const cryptoCurrency =
-    currency === CURRENCIES.usd ? CURRENCIES.uregen : currency;
   const { clearErrors } = useFormContext<ChooseCreditsFormSchemaType>();
   return (
     <div className="flex justify-between items-center my-15 sm:mt-30">
@@ -51,7 +47,8 @@ export function CreditsAmountHeader({
                 <Trans>in</Trans>
               </span>
               <DenomIconWithCurrency
-                currency={cryptoCurrency}
+                displayDenom={displayDenom}
+                baseDenom={baseDenom}
                 className="sm:pt-5"
               />
             </span>

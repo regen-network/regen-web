@@ -6,6 +6,7 @@ import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/orga
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
+import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import { CREDITS_AMOUNT, CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import { CreditsAmountHeader } from './CreditsAmount.Header';
 import { CreditsAmountProps } from './CreditsAmount.types';
@@ -27,6 +28,8 @@ export const CreditsAmount = ({
   spendingCap,
   setSpendingCap,
   defaultCryptoCurrency,
+  cryptoCurrencies,
+  allowedDenoms,
 }: CreditsAmountProps) => {
   const [maxCreditsSelected, setMaxCreditsSelected] = useState(false);
   const { setValue } = useFormContext<ChooseCreditsFormSchemaType>();
@@ -174,10 +177,17 @@ export const CreditsAmount = ({
     [card, orderedSellOrders, setValue],
   );
 
+  const displayDenom = findDisplayDenom({
+    allowedDenoms,
+    bankDenom: currency.askDenom,
+    baseDenom: currency.askBaseDenom,
+  });
+
   return (
     <div className={`grid min-h-min`} style={{ gridAutoRows: 'min-content' }}>
       <CreditsAmountHeader
-        currency={currency}
+        displayDenom={displayDenom}
+        baseDenom={currency.askBaseDenom}
         creditsAvailable={creditsAvailable}
         setMaxCreditsSelected={setMaxCreditsSelected}
         paymentOption={paymentOption}
@@ -190,6 +200,9 @@ export const CreditsAmount = ({
           currency={currency}
           setCurrency={setCurrency}
           handleCurrencyAmountChange={handleCurrencyAmountChange}
+          cryptoCurrencies={cryptoCurrencies}
+          displayDenom={displayDenom}
+          allowedDenoms={allowedDenoms}
         />
         <span className="p-10 sm:p-20 text-xl">=</span>
         <CreditsInput

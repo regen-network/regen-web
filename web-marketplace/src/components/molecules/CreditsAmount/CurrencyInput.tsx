@@ -2,15 +2,13 @@ import { ChangeEvent, lazy, useCallback, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
-import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
-import {
-  CURRENCIES,
-  Currency,
-} from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { DenomIconWithCurrency } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency';
+import { CURRENCIES } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
+import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import { CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import { CurrencyInputProps } from './CreditsAmount.types';
 
@@ -28,6 +26,9 @@ export const CurrencyInput = ({
   currency,
   setCurrency,
   handleCurrencyAmountChange,
+  cryptoCurrencies,
+  displayDenom,
+  allowedDenoms,
 }: CurrencyInputProps) => {
   const {
     register,
@@ -50,10 +51,19 @@ export const CurrencyInput = ({
   );
 
   const onHandleCurrencyChange = useCallback(
-    (currency: string) => {
-      setCurrency(currency as Currency);
+    (askDenom: string) => {
+      setCurrency(
+        askDenom === CURRENCIES.usd
+          ? { askDenom: CURRENCIES.usd, askBaseDenom: CURRENCIES.usd }
+          : {
+              askDenom,
+              askBaseDenom: cryptoCurrencies.filter(
+                cur => cur.askDenom === askDenom,
+              )?.[0].askBaseDenom,
+            },
+      );
     },
-    [setCurrency],
+    [cryptoCurrencies, setCurrency],
   );
 
   return (
@@ -106,28 +116,36 @@ export const CurrencyInput = ({
         }}
         endAdornment={
           paymentOption === PAYMENT_OPTIONS.CARD ? (
-            <DenomIconWithCurrency currency={CURRENCIES.usd} />
+            <DenomIconWithCurrency
+              baseDenom={currency.askBaseDenom}
+              displayDenom={displayDenom}
+            />
           ) : (
             <CustomSelect
-              options={Object.keys(CURRENCIES)
-                .filter(currency => currency !== CURRENCIES.usd)
-                .map(currency => ({
-                  component: {
-                    label: currency,
-                    element: () => (
-                      <DenomIconWithCurrency currency={currency as Currency} />
-                    ),
-                  },
-                }))}
+              options={cryptoCurrencies.map(currency => ({
+                component: {
+                  label: currency.askDenom,
+                  element: () => (
+                    <DenomIconWithCurrency
+                      baseDenom={currency.askBaseDenom}
+                      displayDenom={findDisplayDenom({
+                        allowedDenoms,
+                        bankDenom: currency.askDenom,
+                        baseDenom: currency.askBaseDenom,
+                      })}
+                    />
+                  ),
+                },
+              }))}
               onSelect={onHandleCurrencyChange}
-              defaultOption={defaultCryptoCurrency}
+              defaultOption={defaultCryptoCurrency.askDenom}
             />
           )
         }
       />
       {errors[CURRENCY_AMOUNT]?.message && (
         <div className="pl-20 pt-5 text-error-300 text-sm top-full left-0">
-          {`${errors[CURRENCY_AMOUNT].message} ${currency.toUpperCase()}`}
+          {`${errors[CURRENCY_AMOUNT].message} ${displayDenom}`}
         </div>
       )}
     </div>

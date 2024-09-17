@@ -3,9 +3,16 @@ import React from 'react';
 type Props = {
   linearGradient?: boolean;
   disabled?: boolean;
+  width?: string;
+  height?: string;
 } & React.SVGProps<SVGSVGElement>;
 
-export const PrefinanceIcon = ({ disabled, ...props }: Props) => {
+export const PrefinanceIcon = ({
+  width = '18',
+  height = '19',
+  disabled,
+  ...props
+}: Props) => {
   const randomId = Math.random().toString(36).substring(7);
   const gradientId = props
     ? `shopping_bag_gradient-${randomId}`
@@ -13,6 +20,8 @@ export const PrefinanceIcon = ({ disabled, ...props }: Props) => {
   return (
     <svg
       id={randomId}
+      width={width}
+      height={height}
       viewBox="0 0 24 24"
       fill="none"
       preserveAspectRatio="none"

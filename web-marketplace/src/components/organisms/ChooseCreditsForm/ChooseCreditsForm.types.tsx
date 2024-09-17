@@ -1,3 +1,3 @@
-import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
-export type CardSellOrder = { usdPrice: number } & SellOrderInfo;
+export type CardSellOrder = { usdPrice: number } & UISellOrderInfo;

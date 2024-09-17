@@ -1,12 +1,12 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import Long from 'long';
 
 import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+
 export const cryptoSellOrders = [
   {
-    $type: 'regen.ecocredit.marketplace.v1.SellOrderInfo',
-    id: Long.fromValue(1),
+    id: 1,
     askDenom: CURRENCIES.uregen,
     askAmount: '10',
     quantity: '100',
@@ -15,8 +15,7 @@ export const cryptoSellOrders = [
     disableAutoRetire: true,
   },
   {
-    $type: 'regen.ecocredit.marketplace.v1.SellOrderInfo',
-    id: Long.fromValue(2),
+    id: 2,
     askDenom: CURRENCIES.uregen,
     askAmount: '20',
     quantity: '10',
@@ -25,8 +24,7 @@ export const cryptoSellOrders = [
     disableAutoRetire: false,
   },
   {
-    $type: 'regen.ecocredit.marketplace.v1.SellOrderInfo',
-    id: Long.fromValue(3),
+    id: 3,
     askDenom: CURRENCIES.usdc,
     askAmount: '2',
     quantity: '1000',
@@ -35,8 +33,7 @@ export const cryptoSellOrders = [
     disableAutoRetire: false,
   },
   {
-    $type: 'regen.ecocredit.marketplace.v1.SellOrderInfo',
-    id: Long.fromValue(4),
+    id: 4,
     askDenom: CURRENCIES.usdcaxl,
     askAmount: '3',
     quantity: '10',
@@ -45,8 +42,7 @@ export const cryptoSellOrders = [
     disableAutoRetire: false,
   },
   {
-    $type: 'regen.ecocredit.marketplace.v1.SellOrderInfo',
-    id: Long.fromValue(5),
+    id: 5,
     askDenom: CURRENCIES.atevmos,
     askAmount: '4',
     quantity: '5',
@@ -54,7 +50,7 @@ export const cryptoSellOrders = [
     seller: 'addr1',
     disableAutoRetire: true,
   },
-] as Array<SellOrderInfo>;
+] as Array<UISellOrderInfo>;
 
 export const cardSellOrders = cryptoSellOrders.map((order, i) => ({
   usdPrice: i + 1,
@@ -66,21 +62,4 @@ export const cryptoCurrencies = [
   CURRENCIES.usdc,
   CURRENCIES.usdcaxl,
   CURRENCIES.atevmos,
-];
-export const creditVintages = [
-  {
-    date: 'Jan 1, 2019 - December 31, 2019',
-    credits: '100',
-    batchDenom: 'mock-batch-denom-1',
-  },
-  {
-    date: 'Jan 1, 2020 - December 31, 2020',
-    credits: '200',
-    batchDenom: 'mock-batch-denom-2',
-  },
-  {
-    date: 'Jan 1, 2021 - December 31, 2021',
-    credits: '300',
-    batchDenom: 'mock-batch-denom-3',
-  },
 ];

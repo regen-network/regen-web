@@ -1,5 +1,4 @@
 import { ChangeEvent } from 'react';
-import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { CardSellOrder } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
 import {
@@ -9,6 +8,7 @@ import {
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 export interface CreditsAmountProps {
   paymentOption: PaymentOptionsType;
@@ -18,7 +18,7 @@ export interface CreditsAmountProps {
   setSpendingCap: UseStateSetter<number>;
   creditsAvailable: number;
   setCreditsAvailable: UseStateSetter<number>;
-  filteredCryptoSellOrders: Array<SellOrderInfo> | undefined;
+  filteredCryptoSellOrders: Array<UISellOrderInfo> | undefined;
   cardSellOrders: Array<CardSellOrder>;
   defaultCryptoCurrency: CryptoCurrencies;
 }

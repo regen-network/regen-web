@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
+import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetProject';
 
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsForm } from './BuyCredits.Form';
@@ -11,9 +12,19 @@ import { getFormModel } from './BuyCredits.utils';
 
 export const BuyCredits = () => {
   const { _ } = useLingui();
-  const { projectId } = useParams();
-
-  // Get project info: on chain id, sanity (available credits for fiat purchase)
+  const {
+    sanityProject,
+    projectBySlug,
+    loadingProjectBySlug,
+    projectByOnChainId,
+    loadingProjectByOnChainId,
+    offchainProjectByIdData,
+    loadingOffchainProjectById,
+    isBuyFlowDisabled,
+    projectsWithOrderData,
+    onChainProjectId,
+    offChainProject,
+  } = useGetProject();
 
   const [paymentOption, setPaymentOption] = useState<PaymentOptionsType>(
     PAYMENT_OPTIONS.CARD, // TODO or set to crypto if not credits with fiat purchase
@@ -21,6 +32,8 @@ export const BuyCredits = () => {
   const [retiring, setRetiring] = useState<boolean>(true);
 
   const formModel = getFormModel({ _, paymentOption, retiring });
+
+  projectsWithOrderData.map(p => p.sellOrders.)
 
   return (
     <MultiStepTemplate
@@ -33,6 +46,8 @@ export const BuyCredits = () => {
         paymentOption={paymentOption}
         retiring={retiring}
         setRetiring={setRetiring}
+        cardSellOrders={[]}
+        cryptoSellOrders={[]}
       />
     </MultiStepTemplate>
   );

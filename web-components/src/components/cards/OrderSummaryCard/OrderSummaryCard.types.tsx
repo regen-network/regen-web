@@ -1,4 +1,4 @@
-import { Currency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { Currency } from 'web-marketplace/src/components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { ProjectCardBodyTextsMapping } from '../ProjectCard/ProjectCard.types';
 

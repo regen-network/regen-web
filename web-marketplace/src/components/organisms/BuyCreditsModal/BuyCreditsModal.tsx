@@ -307,7 +307,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                           {`${microToDenom(
                             selectedSellOrder?.askAmount || '',
                           )} ${findDisplayDenom({
-                            allowedDenomsData,
+                            allowedDenoms: allowedDenomsData?.allowedDenoms,
                             bankDenom: selectedSellOrder?.askDenom ?? '',
                             baseDenom: selectedSellOrder?.askBaseDenom,
                           })}/${_(msg`credit`)}`}
@@ -345,7 +345,8 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                                 ),
                                 askAmount: Number(selectedSellOrder?.askAmount),
                                 displayDenom: findDisplayDenom({
-                                  allowedDenomsData,
+                                  allowedDenoms:
+                                    allowedDenomsData?.allowedDenoms,
                                   bankDenom: selectedSellOrder?.askDenom ?? '',
                                   baseDenom: selectedSellOrder?.askBaseDenom,
                                 }),

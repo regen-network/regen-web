@@ -69,7 +69,7 @@ export const getSellOrderLabel = ({
   };
   const price = microToDenom(askAmount);
   const displayDenom = findDisplayDenom({
-    allowedDenomsData,
+    allowedDenoms: allowedDenomsData?.allowedDenoms,
     bankDenom: askDenom,
     baseDenom: askBaseDenom,
   });
@@ -154,7 +154,7 @@ export const getOptions = ({
     allowedDenomsData,
     setSelectedProjectById,
   });
-
+  console.log('allowedDenomsData', allowedDenomsData);
   const allOptionsLength =
     retirableOptions.length + retirableAndTradableOptions.length;
 

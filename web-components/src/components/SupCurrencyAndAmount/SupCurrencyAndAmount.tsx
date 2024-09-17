@@ -1,4 +1,4 @@
-import { CURRENCIES } from '../DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { CURRENCIES } from 'web-marketplace/src/components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 export function SupCurrencyAndAmount({
   price,

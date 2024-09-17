@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-09-18 09:24+0200\n"
+"POT-Creation-Date: 2024-09-18 09:25+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,7 +17,7 @@ msgstr ""
 msgid "- see less"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:5
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:7
 msgid ". Please use a different email address."
 msgstr ""
 
@@ -1835,7 +1835,7 @@ msgstr ""
 msgid "log in"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:6
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:8
 msgid "Log in email successfully added"
 msgstr ""
 
@@ -3007,7 +3007,7 @@ msgstr ""
 msgid "Sorry, something went wrong!"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:3
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:5
 msgid "Sorry, this email is already connected to another account"
 msgstr ""
 
@@ -3800,7 +3800,7 @@ msgstr ""
 msgid "You don't have enough basket tokens"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:4
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:6
 msgid "You entered:"
 msgstr ""
 

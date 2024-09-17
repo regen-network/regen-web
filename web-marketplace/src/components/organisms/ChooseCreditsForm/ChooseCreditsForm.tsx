@@ -9,17 +9,17 @@ import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
 
 import Card from 'web-components/src/components/cards/Card';
-import {
-  CryptoCurrencies,
-  CURRENCIES,
-  Currency,
-} from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { Loading } from 'web-components/src/components/loading';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import {
+  CryptoCurrencies,
+  CURRENCIES,
+} from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 
 import { CryptoOptions } from './ChooseCreditsForm.CryptoOptions';
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
@@ -51,28 +51,31 @@ export function ChooseCreditsForm({
   cryptoSellOrders,
   cardDisabled,
 }: Props) {
-  const groupedCryptoSellOrders = useMemo(
+  const cryptoCurrencies = useMemo(
     () =>
-      cryptoSellOrders.reduce(
-        (result: { [denom: string]: Array<UISellOrderInfo> }, order) => {
-          (result[order.askDenom] = result[order.askDenom] || []).push(order);
-          return result;
-        },
-        {},
-      ),
+      cryptoSellOrders
+        .map(order => ({
+          askDenom: order.askDenom,
+          askBaseDenom: order.askBaseDenom,
+        }))
+        .filter(
+          (obj1, i, arr) =>
+            arr.findIndex(obj2 => obj2.askDenom === obj1.askDenom) === i,
+        ),
     [cryptoSellOrders],
   );
-  // TODO make part of state?
-  // in case retiring = false, not all crypto cur might be available
-  const cryptoCurrencies = useMemo(
-    () => Object.keys(groupedCryptoSellOrders),
-    [groupedCryptoSellOrders],
-  );
 
-  const defaultCryptoCurrency = cryptoCurrencies[0] as CryptoCurrencies;
+  const defaultCryptoCurrency = cryptoCurrencies[0];
+  const cardCurrency = useMemo(
+    () => ({
+      askDenom: CURRENCIES.usd,
+      askBaseDenom: CURRENCIES.usd,
+    }),
+    [],
+  );
   const initCurrency =
     paymentOption === PAYMENT_OPTIONS.CARD
-      ? CURRENCIES.usd
+      ? cardCurrency
       : defaultCryptoCurrency;
   const [currency, setCurrency] = useState<Currency>(initCurrency);
   const [spendingCap, setSpendingCap] = useState(0);
@@ -94,8 +97,12 @@ export function ChooseCreditsForm({
 
   const filteredCryptoSellOrders = useMemo(
     () =>
-      getFilteredCryptoSellOrders(currency, groupedCryptoSellOrders, retiring),
-    [currency, groupedCryptoSellOrders, retiring],
+      getFilteredCryptoSellOrders(
+        currency.askDenom,
+        cryptoSellOrders,
+        retiring,
+      ),
+    [cryptoSellOrders, currency.askDenom, retiring],
   );
 
   const handleCryptoPurchaseOptions = useCallback(() => {
@@ -111,12 +118,10 @@ export function ChooseCreditsForm({
       setPaymentOption(option as PaymentOptionsType);
       form.setValue(CREDIT_VINTAGE_OPTIONS, []);
       setCurrency(
-        option === PAYMENT_OPTIONS.CARD
-          ? CURRENCIES.usd
-          : defaultCryptoCurrency,
+        option === PAYMENT_OPTIONS.CARD ? cardCurrency : defaultCryptoCurrency,
       );
     },
-    [defaultCryptoCurrency, form, setPaymentOption],
+    [cardCurrency, defaultCryptoCurrency, form, setPaymentOption],
   );
 
   // Advanced settings not enabled for MVP
@@ -168,6 +173,7 @@ export function ChooseCreditsForm({
             filteredCryptoSellOrders={filteredCryptoSellOrders}
             cardSellOrders={cardSellOrders}
             defaultCryptoCurrency={defaultCryptoCurrency}
+            cryptoCurrencies={cryptoCurrencies}
           />
           {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
             <CryptoOptions

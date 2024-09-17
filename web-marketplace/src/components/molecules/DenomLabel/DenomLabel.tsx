@@ -26,15 +26,16 @@ const DenomLabel = ({
   sx = [],
 }: Props): JSX.Element => {
   const { marketplaceClient } = useLedger();
-  const { data: allowedDenoms, isLoading: isLoadingAllowedDenoms } = useQuery(
-    getAllowedDenomQuery({
-      client: marketplaceClient,
-      enabled: !!marketplaceClient,
-    }),
-  );
+  const { data: allowedDenomsData, isLoading: isLoadingAllowedDenoms } =
+    useQuery(
+      getAllowedDenomQuery({
+        client: marketplaceClient,
+        enabled: !!marketplaceClient,
+      }),
+    );
 
   const displayDenom = findDisplayDenom({
-    allowedDenoms,
+    allowedDenoms: allowedDenomsData?.allowedDenoms,
     bankDenom,
     baseDenom,
   });

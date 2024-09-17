@@ -1,3 +1,5 @@
+import { CURRENCIES } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+
 const isRedwood = import.meta.env.VITE_LEDGER_CHAIN_ID === 'regen-redwood-1';
 
 export const GRAVITY_USDC_DENOM = isRedwood

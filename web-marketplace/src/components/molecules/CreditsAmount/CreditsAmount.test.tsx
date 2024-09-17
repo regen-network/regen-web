@@ -1,25 +1,28 @@
 import userEvent from '@testing-library/user-event';
 import { render, screen } from 'web-marketplace/test/test-utils';
 
-import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
-
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { CURRENCIES } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { CreditsAmount } from './CreditsAmount';
-import { cardSellOrders } from './CreditsAmount.mock';
+import { cardSellOrders, cryptoCurrencies } from './CreditsAmount.mock';
 
 describe('CreditsAmount', () => {
   const formDefaultValues = {
     paymentOption: PAYMENT_OPTIONS.CARD,
-    currency: CURRENCIES.usd,
+    currency: { askDenom: CURRENCIES.usd, askBaseDenom: CURRENCIES.usd },
     setCurrency: () => {},
     spendingCap: 3185,
     setSpendingCap: () => {},
     creditsAvailable: 1125,
     setCreditsAvailable: () => {},
-    defaultCryptoCurrency: CURRENCIES.uregen,
+    defaultCryptoCurrency: {
+      askDenom: CURRENCIES.uregen,
+      askBaseDenom: CURRENCIES.uregen,
+    },
     filteredCryptoSellOrders: [],
     cardSellOrders,
+    cryptoCurrencies,
   };
 
   it('renders without crashing', () => {

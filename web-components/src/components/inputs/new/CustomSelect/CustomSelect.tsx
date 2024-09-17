@@ -1,6 +1,6 @@
 import { ComponentType, useEffect, useState } from 'react';
-import { CryptoCurrencies } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { Option } from 'web-components/src/components/inputs/new/CustomSelect/CustomSelect.types';
+import { CryptoCurrencies } from 'web-marketplace/src/components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { SelectOption } from './CustomSelect.Option';
 import { Placeholder } from './CustomSelect.Placeholder';

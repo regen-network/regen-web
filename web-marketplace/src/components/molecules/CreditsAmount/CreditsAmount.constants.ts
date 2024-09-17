@@ -1,6 +1,6 @@
 import { msg } from '@lingui/macro';
 
-import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { CURRENCIES } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 export const CREDITS_AMOUNT = 'creditsAmount';
 export const CURRENCY_AMOUNT = 'currencyAmount';

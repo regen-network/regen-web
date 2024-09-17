@@ -4,20 +4,18 @@ import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
 import { createChooseCreditsFormSchema } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
-import {
-  CURRENCIES,
-  Currency,
-} from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
-
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { CURRENCIES } from 'components/atoms/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { CreditsAmount } from './CreditsAmount';
 import { CREDITS_AMOUNT, CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import {
+  allowedDenoms,
   cardSellOrders,
   cryptoCurrencies,
   cryptoSellOrders,
 } from './CreditsAmount.mock';
+import { Currency } from './CreditsAmount.types';
 
 export default {
   title: 'Marketplace/Molecules/CreditsAmount',
@@ -30,7 +28,7 @@ const CreditsWithForm = (args: any) => {
   const defaultCryptoCurrency = cryptoCurrencies[0];
   const initCurrency =
     args.paymentOption === PAYMENT_OPTIONS.CARD
-      ? CURRENCIES.usd
+      ? { askDenom: CURRENCIES.usd, askBaseDenom: CURRENCIES.usd }
       : defaultCryptoCurrency;
   const [currency, setCurrency] = useState<Currency>(initCurrency);
   const [spendingCap, setSpendingCap] = useState(0);
@@ -49,7 +47,7 @@ const CreditsWithForm = (args: any) => {
     mode: 'onChange',
   });
   const filteredCryptoSellOrders = cryptoSellOrders.filter(
-    order => order.askDenom === currency,
+    order => order.askDenom === currency.askDenom,
   );
   return (
     <Form form={form as any} onSubmit={form.handleSubmit as any}>
@@ -75,6 +73,8 @@ export const CreditsAmountCard: Story = {
 CreditsAmountCard.args = {
   paymentOption: PAYMENT_OPTIONS.CARD,
   cardSellOrders,
+  cryptoCurrencies,
+  allowedDenoms,
 };
 
 export const CreditsAmountCrypto: Story = {
@@ -84,4 +84,6 @@ export const CreditsAmountCrypto: Story = {
 CreditsAmountCrypto.args = {
   paymentOption: PAYMENT_OPTIONS.CRYPTO,
   cardSellOrders,
+  cryptoCurrencies,
+  allowedDenoms,
 };

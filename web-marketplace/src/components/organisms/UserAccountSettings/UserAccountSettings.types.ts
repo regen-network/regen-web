@@ -1,3 +1,7 @@
+import { AccountByIdQuery } from 'generated/graphql';
+
+import { useEmailConfirmationData } from '../LoginFlow/hooks/useEmailConfirmationData';
+
 /**
  * Describes the props for the UserAccountSettings component.
  */
@@ -16,6 +20,31 @@ export interface UserAccountSettingsProps {
    * The wallet provider that the user can connect to.
    */
   walletProvider: WalletProviderInfo;
+
+  /**
+   * The current user's custodial address.
+   */
+  custodialAddress: NonNullable<
+    AccountByIdQuery['accountById']
+  >['custodialAddress'];
+
+  /**
+   * Methods and data related to email confirmation,
+   * returned by the useEmailConfirmationData hook.
+   */
+  emailConfirmationData: Pick<
+    ReturnType<typeof useEmailConfirmationData>,
+    | 'isConfirmationModalOpen'
+    | 'email'
+    | 'emailModalError'
+    | 'resendTimeLeft'
+    | 'onConfirmationModalClose'
+    | 'onMailCodeChange'
+    | 'onResendPasscode'
+    | 'onEmailSubmit'
+    | 'isConnectedEmailErrorModalOpen'
+    | 'onConnectedEmailErrorModalClose'
+  >;
 }
 
 type DisconnectedState = {

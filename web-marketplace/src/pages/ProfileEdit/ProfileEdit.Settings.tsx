@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLingui } from '@lingui/react';
 
 import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
 
@@ -9,12 +10,15 @@ import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
 import { ConnectWalletFlow } from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow';
 import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData';
+import { useEmailConfirmationData } from 'components/organisms/LoginFlow/hooks/useEmailConfirmationData';
 import { UserAccountSettings } from 'components/organisms/UserAccountSettings/UserAccountSettings';
+import { EMAIL_ADDED } from 'components/organisms/UserAccountSettings/UserAccountSettings.constants';
 import { WalletProviderInfo } from 'components/organisms/UserAccountSettings/UserAccountSettings.types';
 
 import { useSocialProviders } from './hooks/useSocialProviders';
 
 export const ProfileEditSettings = () => {
+  const { _ } = useLingui();
   const [error, setError] = useState<unknown>(undefined);
   const { activeAccount, privActiveAccount } = useAuth();
   const hasKeplrAccount = !!activeAccount?.addr;
@@ -43,6 +47,10 @@ export const ProfileEditSettings = () => {
     ? { address: String(activeAccount?.addr) }
     : { connect: onButtonClick };
 
+  const emailConfirmationData = useEmailConfirmationData({
+    emailConfirmationText: _(EMAIL_ADDED),
+  });
+
   return (
     <>
       {error && (
@@ -55,6 +63,8 @@ export const ProfileEditSettings = () => {
         email={privActiveAccount?.email ?? ''}
         socialProviders={_socialProviders}
         walletProvider={walletProviderInfo}
+        custodialAddress={activeAccount?.custodialAddress}
+        emailConfirmationData={emailConfirmationData}
       />
       <AccountConnectWalletModal
         open={isModalOpen}

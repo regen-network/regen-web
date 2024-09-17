@@ -46,6 +46,9 @@ export type Account = Node & {
   addr?: Maybe<Scalars['String']>;
   hideEcocredits?: Maybe<Scalars['Boolean']>;
   hideRetirements?: Maybe<Scalars['Boolean']>;
+  stripeCustomerId?: Maybe<Scalars['String']>;
+  custodialAddress?: Maybe<Scalars['String']>;
+  active?: Maybe<Scalars['Boolean']>;
   /** Reads a single `Account` that is related to this `Account`. */
   accountByCreatorId?: Maybe<Account>;
   /** Reads and enables pagination through a set of `CreditClass`. */
@@ -589,6 +592,12 @@ export type AccountCondition = {
   hideEcocredits?: Maybe<Scalars['Boolean']>;
   /** Checks for equality with the object’s `hideRetirements` field. */
   hideRetirements?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `stripeCustomerId` field. */
+  stripeCustomerId?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `custodialAddress` field. */
+  custodialAddress?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `active` field. */
+  active?: Maybe<Scalars['Boolean']>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -719,6 +728,9 @@ export type AccountInput = {
   addr?: Maybe<Scalars['String']>;
   hideEcocredits?: Maybe<Scalars['Boolean']>;
   hideRetirements?: Maybe<Scalars['Boolean']>;
+  stripeCustomerId?: Maybe<Scalars['String']>;
+  custodialAddress?: Maybe<Scalars['String']>;
+  active?: Maybe<Scalars['Boolean']>;
 };
 
 /** Represents an update to a `Account`. Fields that are set will be updated. */
@@ -738,6 +750,9 @@ export type AccountPatch = {
   addr?: Maybe<Scalars['String']>;
   hideEcocredits?: Maybe<Scalars['Boolean']>;
   hideRetirements?: Maybe<Scalars['Boolean']>;
+  stripeCustomerId?: Maybe<Scalars['String']>;
+  custodialAddress?: Maybe<Scalars['String']>;
+  active?: Maybe<Scalars['Boolean']>;
 };
 
 /** A connection to a list of `Project` values, with data from `Post`. */
@@ -895,62 +910,16 @@ export enum AccountsOrderBy {
   HideEcocreditsDesc = 'HIDE_ECOCREDITS_DESC',
   HideRetirementsAsc = 'HIDE_RETIREMENTS_ASC',
   HideRetirementsDesc = 'HIDE_RETIREMENTS_DESC',
+  StripeCustomerIdAsc = 'STRIPE_CUSTOMER_ID_ASC',
+  StripeCustomerIdDesc = 'STRIPE_CUSTOMER_ID_DESC',
+  CustodialAddressAsc = 'CUSTODIAL_ADDRESS_ASC',
+  CustodialAddressDesc = 'CUSTODIAL_ADDRESS_DESC',
+  ActiveAsc = 'ACTIVE_ASC',
+  ActiveDesc = 'ACTIVE_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
-
-export type Context = {
-  __typename?: 'Context';
-  column?: Maybe<Scalars['JSON']>;
-};
-
-/** A condition to be used against `Context` object types. All fields are tested for equality and combined with a logical ‘and.’ */
-export type ContextCondition = {
-  /** Checks for equality with the object’s `column` field. */
-  column?: Maybe<Scalars['JSON']>;
-};
-
-/** A filter to be used against `Context` object types. All fields are combined with a logical ‘and.’ */
-export type ContextFilter = {
-  /** Filter by the object’s `column` field. */
-  column?: Maybe<JsonFilter>;
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<ContextFilter>>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<ContextFilter>>;
-  /** Negates the expression. */
-  not?: Maybe<ContextFilter>;
-};
-
-/** A connection to a list of `Context` values. */
-export type ContextsConnection = {
-  __typename?: 'ContextsConnection';
-  /** A list of `Context` objects. */
-  nodes: Array<Maybe<Context>>;
-  /** A list of edges which contains the `Context` and cursor to aid in pagination. */
-  edges: Array<ContextsEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Context` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Context` edge in the connection. */
-export type ContextsEdge = {
-  __typename?: 'ContextsEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Context` at the end of the edge. */
-  node?: Maybe<Context>;
-};
-
-/** Methods to use when ordering `Context`. */
-export enum ContextsOrderBy {
-  Natural = 'NATURAL',
-  ColumnAsc = 'COLUMN_ASC',
-  ColumnDesc = 'COLUMN_DESC'
-}
 
 /** All input for the create `Account` mutation. */
 export type CreateAccountInput = {
@@ -1378,39 +1347,6 @@ export type CreateShaclGraphPayloadShaclGraphEdgeArgs = {
   orderBy?: Maybe<Array<ShaclGraphsOrderBy>>;
 };
 
-/** All input for the create `Test` mutation. */
-export type CreateTestInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Test` to be created by this mutation. */
-  test: TestInput;
-};
-
-/** The output of our create `Test` mutation. */
-export type CreateTestPayload = {
-  __typename?: 'CreateTestPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** The `Test` that was created by this mutation. */
-  test?: Maybe<Test>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** An edge for our `Test`. May be used by Relay 1. */
-  testEdge?: Maybe<TestsEdge>;
-};
-
-
-/** The output of our create `Test` mutation. */
-export type CreateTestPayloadTestEdgeArgs = {
-  orderBy?: Maybe<Array<TestsOrderBy>>;
-};
-
 /** All input for the create `Upload` mutation. */
 export type CreateUploadInput = {
   /**
@@ -1786,7 +1722,7 @@ export type CreditClassInput = {
   id?: Maybe<Scalars['UUID']>;
   createdAt?: Maybe<Scalars['Datetime']>;
   updatedAt?: Maybe<Scalars['Datetime']>;
-  uri: Scalars['String'];
+  uri?: Maybe<Scalars['String']>;
   onChainId?: Maybe<Scalars['String']>;
   registryId?: Maybe<Scalars['UUID']>;
 };
@@ -2492,6 +2428,50 @@ export type DeleteProjectPayloadProjectEdgeArgs = {
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
 };
 
+/** All input for the `deleteS3DeletionById` mutation. */
+export type DeleteS3DeletionByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['UUID'];
+};
+
+/** All input for the `deleteS3Deletion` mutation. */
+export type DeleteS3DeletionInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `S3Deletion` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `S3Deletion` mutation. */
+export type DeleteS3DeletionPayload = {
+  __typename?: 'DeleteS3DeletionPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `S3Deletion` that was deleted by this mutation. */
+  s3Deletion?: Maybe<S3Deletion>;
+  deletedS3DeletionId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `S3Deletion`. May be used by Relay 1. */
+  s3DeletionEdge?: Maybe<S3DeletionsEdge>;
+};
+
+
+/** The output of our delete `S3Deletion` mutation. */
+export type DeleteS3DeletionPayloadS3DeletionEdgeArgs = {
+  orderBy?: Maybe<Array<S3DeletionsOrderBy>>;
+};
+
 /** All input for the `deleteShaclGraphByUri` mutation. */
 export type DeleteShaclGraphByUriInput = {
   /**
@@ -2715,6 +2695,7 @@ export type MetadataGraph = Node & {
   nodeId: Scalars['ID'];
   iri: Scalars['String'];
   createdAt: Scalars['Datetime'];
+  updatedAt: Scalars['Datetime'];
   metadata: Scalars['JSON'];
 };
 
@@ -2727,6 +2708,8 @@ export type MetadataGraphCondition = {
   iri?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `createdAt` field. */
   createdAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `updatedAt` field. */
+  updatedAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `metadata` field. */
   metadata?: Maybe<Scalars['JSON']>;
 };
@@ -2747,6 +2730,7 @@ export type MetadataGraphFilter = {
 export type MetadataGraphInput = {
   iri: Scalars['String'];
   createdAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
   metadata: Scalars['JSON'];
 };
 
@@ -2754,6 +2738,7 @@ export type MetadataGraphInput = {
 export type MetadataGraphPatch = {
   iri?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
   metadata?: Maybe<Scalars['JSON']>;
 };
 
@@ -2786,6 +2771,8 @@ export enum MetadataGraphsOrderBy {
   IriDesc = 'IRI_DESC',
   CreatedAtAsc = 'CREATED_AT_ASC',
   CreatedAtDesc = 'CREATED_AT_DESC',
+  UpdatedAtAsc = 'UPDATED_AT_ASC',
+  UpdatedAtDesc = 'UPDATED_AT_DESC',
   MetadataAsc = 'METADATA_ASC',
   MetadataDesc = 'METADATA_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
@@ -2819,8 +2806,6 @@ export type Mutation = {
   createS3Deletion?: Maybe<CreateS3DeletionPayload>;
   /** Creates a single `ShaclGraph`. */
   createShaclGraph?: Maybe<CreateShaclGraphPayload>;
-  /** Creates a single `Test`. */
-  createTest?: Maybe<CreateTestPayload>;
   /** Creates a single `Upload`. */
   createUpload?: Maybe<CreateUploadPayload>;
   /** Updates a single `Account` using its globally unique id and a patch. */
@@ -2877,6 +2862,10 @@ export type Mutation = {
   updateProjectPartner?: Maybe<UpdateProjectPartnerPayload>;
   /** Updates a single `ProjectPartner` using a unique key and a patch. */
   updateProjectPartnerByProjectIdAndAccountId?: Maybe<UpdateProjectPartnerPayload>;
+  /** Updates a single `S3Deletion` using its globally unique id and a patch. */
+  updateS3Deletion?: Maybe<UpdateS3DeletionPayload>;
+  /** Updates a single `S3Deletion` using a unique key and a patch. */
+  updateS3DeletionById?: Maybe<UpdateS3DeletionPayload>;
   /** Updates a single `ShaclGraph` using its globally unique id and a patch. */
   updateShaclGraph?: Maybe<UpdateShaclGraphPayload>;
   /** Updates a single `ShaclGraph` using a unique key and a patch. */
@@ -2941,6 +2930,10 @@ export type Mutation = {
   deleteProjectPartner?: Maybe<DeleteProjectPartnerPayload>;
   /** Deletes a single `ProjectPartner` using a unique key. */
   deleteProjectPartnerByProjectIdAndAccountId?: Maybe<DeleteProjectPartnerPayload>;
+  /** Deletes a single `S3Deletion` using its globally unique id. */
+  deleteS3Deletion?: Maybe<DeleteS3DeletionPayload>;
+  /** Deletes a single `S3Deletion` using a unique key. */
+  deleteS3DeletionById?: Maybe<DeleteS3DeletionPayload>;
   /** Deletes a single `ShaclGraph` using its globally unique id. */
   deleteShaclGraph?: Maybe<DeleteShaclGraphPayload>;
   /** Deletes a single `ShaclGraph` using a unique key. */
@@ -2951,7 +2944,6 @@ export type Mutation = {
   deleteUploadByUrl?: Maybe<DeleteUploadPayload>;
   /** Deletes a single `Upload` using a unique key. */
   deleteUploadById?: Maybe<DeleteUploadPayload>;
-  shuffle?: Maybe<ShufflePayload>;
 };
 
 
@@ -3024,12 +3016,6 @@ export type MutationCreateS3DeletionArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateShaclGraphArgs = {
   input: CreateShaclGraphInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateTestArgs = {
-  input: CreateTestInput;
 };
 
 
@@ -3198,6 +3184,18 @@ export type MutationUpdateProjectPartnerArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateProjectPartnerByProjectIdAndAccountIdArgs = {
   input: UpdateProjectPartnerByProjectIdAndAccountIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateS3DeletionArgs = {
+  input: UpdateS3DeletionInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateS3DeletionByIdArgs = {
+  input: UpdateS3DeletionByIdInput;
 };
 
 
@@ -3394,6 +3392,18 @@ export type MutationDeleteProjectPartnerByProjectIdAndAccountIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteS3DeletionArgs = {
+  input: DeleteS3DeletionInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteS3DeletionByIdArgs = {
+  input: DeleteS3DeletionByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteShaclGraphArgs = {
   input: DeleteShaclGraphInput;
 };
@@ -3420,12 +3430,6 @@ export type MutationDeleteUploadByUrlArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteUploadByIdArgs = {
   input: DeleteUploadByIdInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationShuffleArgs = {
-  input: ShuffleInput;
 };
 
 /** An object with a globally unique `ID`. */
@@ -3544,7 +3548,8 @@ export type Post = Node & {
   creatorAccountId: Scalars['UUID'];
   projectId: Scalars['UUID'];
   privacy: PostPrivacy;
-  contents?: Maybe<Scalars['JSON']>;
+  contents: Scalars['JSON'];
+  published?: Maybe<Scalars['Boolean']>;
   /** Reads a single `Account` that is related to this `Post`. */
   accountByCreatorAccountId?: Maybe<Account>;
   /** Reads a single `Project` that is related to this `Post`. */
@@ -3565,6 +3570,8 @@ export type PostCondition = {
   privacy?: Maybe<PostPrivacy>;
   /** Checks for equality with the object’s `contents` field. */
   contents?: Maybe<Scalars['JSON']>;
+  /** Checks for equality with the object’s `published` field. */
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 /** A filter to be used against `Post` object types. All fields are combined with a logical ‘and.’ */
@@ -3586,7 +3593,8 @@ export type PostInput = {
   creatorAccountId: Scalars['UUID'];
   projectId: Scalars['UUID'];
   privacy?: Maybe<PostPrivacy>;
-  contents?: Maybe<Scalars['JSON']>;
+  contents: Scalars['JSON'];
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 /** Represents an update to a `Post`. Fields that are set will be updated. */
@@ -3597,6 +3605,7 @@ export type PostPatch = {
   projectId?: Maybe<Scalars['UUID']>;
   privacy?: Maybe<PostPrivacy>;
   contents?: Maybe<Scalars['JSON']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 /**
@@ -3649,6 +3658,8 @@ export enum PostsOrderBy {
   PrivacyDesc = 'PRIVACY_DESC',
   ContentsAsc = 'CONTENTS_ASC',
   ContentsDesc = 'CONTENTS_DESC',
+  PublishedAsc = 'PUBLISHED_ASC',
+  PublishedDesc = 'PUBLISHED_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -4087,8 +4098,6 @@ export type Query = Node & {
   node?: Maybe<Node>;
   /** Reads and enables pagination through a set of `Account`. */
   allAccounts?: Maybe<AccountsConnection>;
-  /** Reads and enables pagination through a set of `Context`. */
-  allContexts?: Maybe<ContextsConnection>;
   /** Reads and enables pagination through a set of `CreditBatch`. */
   allCreditBatches?: Maybe<CreditBatchesConnection>;
   /** Reads and enables pagination through a set of `CreditClass`. */
@@ -4111,8 +4120,6 @@ export type Query = Node & {
   allS3Deletions?: Maybe<S3DeletionsConnection>;
   /** Reads and enables pagination through a set of `ShaclGraph`. */
   allShaclGraphs?: Maybe<ShaclGraphsConnection>;
-  /** Reads and enables pagination through a set of `Test`. */
-  allTests?: Maybe<TestsConnection>;
   /** Reads and enables pagination through a set of `Upload`. */
   allUploads?: Maybe<UploadsConnection>;
   accountById?: Maybe<Account>;
@@ -4132,6 +4139,7 @@ export type Query = Node & {
   projectBySlug?: Maybe<Project>;
   projectByOnChainId?: Maybe<Project>;
   projectPartnerByProjectIdAndAccountId?: Maybe<ProjectPartner>;
+  s3DeletionById?: Maybe<S3Deletion>;
   shaclGraphByUri?: Maybe<ShaclGraph>;
   uploadByUrl?: Maybe<Upload>;
   uploadById?: Maybe<Upload>;
@@ -4158,6 +4166,8 @@ export type Query = Node & {
   project?: Maybe<Project>;
   /** Reads a single `ProjectPartner` using its globally unique `ID`. */
   projectPartner?: Maybe<ProjectPartner>;
+  /** Reads a single `S3Deletion` using its globally unique `ID`. */
+  s3Deletion?: Maybe<S3Deletion>;
   /** Reads a single `ShaclGraph` using its globally unique `ID`. */
   shaclGraph?: Maybe<ShaclGraph>;
   /** Reads a single `Upload` using its globally unique `ID`. */
@@ -4180,19 +4190,6 @@ export type QueryAllAccountsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AccountsOrderBy>>;
   condition?: Maybe<AccountCondition>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllContextsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ContextsOrderBy>>;
-  condition?: Maybe<ContextCondition>;
-  filter?: Maybe<ContextFilter>;
 };
 
 
@@ -4335,19 +4332,6 @@ export type QueryAllShaclGraphsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
-export type QueryAllTestsArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<TestsOrderBy>>;
-  condition?: Maybe<TestCondition>;
-  filter?: Maybe<TestFilter>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
 export type QueryAllUploadsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -4464,6 +4448,12 @@ export type QueryProjectPartnerByProjectIdAndAccountIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryS3DeletionByIdArgs = {
+  id: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryShaclGraphByUriArgs = {
   uri: Scalars['String'];
 };
@@ -4553,6 +4543,12 @@ export type QueryProjectPartnerArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryS3DeletionArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryShaclGraphArgs = {
   nodeId: Scalars['ID'];
 };
@@ -4564,8 +4560,10 @@ export type QueryUploadArgs = {
 };
 
 /** Table serving as a FIFO queue for files to be deleted from AWS S3. */
-export type S3Deletion = {
+export type S3Deletion = Node & {
   __typename?: 'S3Deletion';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
   id: Scalars['UUID'];
   createdAt?: Maybe<Scalars['Datetime']>;
   bucket: Scalars['String'];
@@ -4593,6 +4591,14 @@ export type S3DeletionInput = {
   createdAt?: Maybe<Scalars['Datetime']>;
   bucket: Scalars['String'];
   key: Scalars['String'];
+};
+
+/** Represents an update to a `S3Deletion`. Fields that are set will be updated. */
+export type S3DeletionPatch = {
+  id?: Maybe<Scalars['UUID']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+  bucket?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `S3Deletion` values. */
@@ -4627,7 +4633,9 @@ export enum S3DeletionsOrderBy {
   BucketAsc = 'BUCKET_ASC',
   BucketDesc = 'BUCKET_DESC',
   KeyAsc = 'KEY_ASC',
-  KeyDesc = 'KEY_DESC'
+  KeyDesc = 'KEY_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
 export type ShaclGraph = Node & {
@@ -4718,86 +4726,6 @@ export enum ShaclGraphsOrderBy {
   GraphDesc = 'GRAPH_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
-}
-
-/** All input for the `shuffle` mutation. */
-export type ShuffleInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  arg0?: Maybe<Scalars['String']>;
-};
-
-/** The output of our `shuffle` mutation. */
-export type ShufflePayload = {
-  __typename?: 'ShufflePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  string?: Maybe<Scalars['String']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
-
-export type Test = {
-  __typename?: 'Test';
-  j?: Maybe<Scalars['JSON']>;
-};
-
-/** A condition to be used against `Test` object types. All fields are tested for equality and combined with a logical ‘and.’ */
-export type TestCondition = {
-  /** Checks for equality with the object’s `j` field. */
-  j?: Maybe<Scalars['JSON']>;
-};
-
-/** A filter to be used against `Test` object types. All fields are combined with a logical ‘and.’ */
-export type TestFilter = {
-  /** Filter by the object’s `j` field. */
-  j?: Maybe<JsonFilter>;
-  /** Checks for all expressions in this list. */
-  and?: Maybe<Array<TestFilter>>;
-  /** Checks for any expressions in this list. */
-  or?: Maybe<Array<TestFilter>>;
-  /** Negates the expression. */
-  not?: Maybe<TestFilter>;
-};
-
-/** An input for mutations affecting `Test` */
-export type TestInput = {
-  j?: Maybe<Scalars['JSON']>;
-};
-
-/** A connection to a list of `Test` values. */
-export type TestsConnection = {
-  __typename?: 'TestsConnection';
-  /** A list of `Test` objects. */
-  nodes: Array<Maybe<Test>>;
-  /** A list of edges which contains the `Test` and cursor to aid in pagination. */
-  edges: Array<TestsEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Test` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Test` edge in the connection. */
-export type TestsEdge = {
-  __typename?: 'TestsEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Test` at the end of the edge. */
-  node?: Maybe<Test>;
-};
-
-/** Methods to use when ordering `Test`. */
-export enum TestsOrderBy {
-  Natural = 'NATURAL',
-  JAsc = 'J_ASC',
-  JDesc = 'J_DESC'
 }
 
 
@@ -5387,6 +5315,53 @@ export type UpdateProjectPayloadProjectEdgeArgs = {
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
 };
 
+/** All input for the `updateS3DeletionById` mutation. */
+export type UpdateS3DeletionByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `S3Deletion` being updated. */
+  s3DeletionPatch: S3DeletionPatch;
+  id: Scalars['UUID'];
+};
+
+/** All input for the `updateS3Deletion` mutation. */
+export type UpdateS3DeletionInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `S3Deletion` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `S3Deletion` being updated. */
+  s3DeletionPatch: S3DeletionPatch;
+};
+
+/** The output of our update `S3Deletion` mutation. */
+export type UpdateS3DeletionPayload = {
+  __typename?: 'UpdateS3DeletionPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `S3Deletion` that was updated by this mutation. */
+  s3Deletion?: Maybe<S3Deletion>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `S3Deletion`. May be used by Relay 1. */
+  s3DeletionEdge?: Maybe<S3DeletionsEdge>;
+};
+
+
+/** The output of our update `S3Deletion` mutation. */
+export type UpdateS3DeletionPayloadS3DeletionEdgeArgs = {
+  orderBy?: Maybe<Array<S3DeletionsOrderBy>>;
+};
+
 /** All input for the `updateShaclGraphByUri` mutation. */
 export type UpdateShaclGraphByUriInput = {
   /**
@@ -5627,7 +5602,7 @@ export type AccountByIdQuery = (
   { __typename?: 'Query' }
   & { accountById?: Maybe<(
     { __typename?: 'Account' }
-    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce' | 'hideEcocredits' | 'hideRetirements'>
+    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce' | 'hideEcocredits' | 'hideRetirements' | 'custodialAddress'>
   )> }
 );
 
@@ -6154,6 +6129,7 @@ export const AccountByIdDocument = gql`
     nonce
     hideEcocredits
     hideRetirements
+    custodialAddress
   }
 }
     `;

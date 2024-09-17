@@ -12,5 +12,6 @@ query AccountById($id: UUID!) {
     nonce
     hideEcocredits
     hideRetirements
+    custodialAddress
   }
 }

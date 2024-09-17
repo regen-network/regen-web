@@ -9,7 +9,8 @@ import { Body } from 'web-components/src/components/typography';
 
 import { SocialProviderInfo } from './UserAccountSettings.types';
 
-type Props = SocialProviderInfo & {
+type Props = Omit<SocialProviderInfo, 'name'> & {
+  name?: string;
   connect?: () => void;
   disconnect?: () => void;
   address?: string;
@@ -29,9 +30,11 @@ export const ConnectField = ({
   return (
     <div className="flex flex-row justify-between flex-wrap gap-y-10">
       <div className="flex flex-col gap-5">
-        <Body size="md" color="info.dark-grey">
-          {name}
-        </Body>
+        {name && (
+          <Body size="md" color="info.dark-grey">
+            {name}
+          </Body>
+        )}
         {address ? (
           <AddressWidget address={address} />
         ) : (

@@ -34,6 +34,11 @@ export const Basic: Story = {
         />
       ),
     },
+    title:
+      'You must connect a Keplr wallet address to your existing account in order to view this content.',
+    subtitle:
+      'Blockchain-based actions such as buying are only possible with a wallet address. Please set up a Keplr wallet in order to continue. ',
+    learnMoreText: 'Learn how to ',
   },
   render: args => {
     const [open, setOpen] = useState(true);

@@ -18,7 +18,7 @@ import { onPostData } from 'components/organisms/LoginButton/hooks/onLoginPostDa
 import { useTimer } from 'components/organisms/LoginButton/hooks/useTimer';
 import { getEmailModalError } from 'components/organisms/LoginButton/utils/getEmailModalError';
 import { EmailFormSchemaType } from 'components/organisms/LoginModal/LoginModal.schema';
-import { CONNECTED_EMAIL_ERROR_TITLE } from 'components/organisms/UserAccountSettings/UserAccountSettings.constants';
+import { CONNECTED_EMAIL_ERROR } from 'components/organisms/UserAccountSettings/UserAccountSettings.constants';
 
 import {
   DEFAULT_RESEND_ERROR,
@@ -155,7 +155,7 @@ export const useEmailConfirmationData = ({
           },
         });
         if (response.error) {
-          if (response.error === _(CONNECTED_EMAIL_ERROR_TITLE)) {
+          if (response.error === CONNECTED_EMAIL_ERROR) {
             setIsConnectedEmailErrorModalOpen(true);
           }
         }

@@ -1,9 +1,12 @@
+import { useLingui } from '@lingui/react';
 import { Grid, TooltipProps } from '@mui/material';
 
 import { CollapseList } from 'web-components/src/components/organisms/CollapseList/CollapseList';
 import UserInfo, { Account } from 'web-components/src/components/user/UserInfo';
 import UserInfoWithTitle from 'web-components/src/components/user/UserInfoWithTitle';
 import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
+
+import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
 
 export type Stakeholder = {
   accounts: Account | Account[] | undefined;
@@ -16,6 +19,8 @@ type Props = {
 };
 
 export const Stakeholders = ({ stakeholders }: Props) => {
+  const { _ } = useLingui();
+
   const filtered = stakeholders.filter(u =>
     Array.isArray(u.accounts) ? u.accounts.length > 0 : Boolean(u.accounts),
   );
@@ -39,6 +44,8 @@ export const Stakeholders = ({ stakeholders }: Props) => {
                 />
                 {accounts.length > 1 && (
                   <CollapseList
+                    seeMoreText={_(SEE_MORE)}
+                    seeLessText={_(SEE_LESS)}
                     max={0}
                     items={accounts.slice(1, accounts.length).map(account => (
                       <UserInfo

@@ -6,14 +6,13 @@ import { ButtonType } from '../../../types/shared/buttonType';
 import { LinkType } from '../../../types/shared/linkType';
 import { Body, Title } from '../../typography';
 import Modal, { RegenModalProps } from '..';
-import {
-  KEPLR_WALLET_CONNECT_SUBTITLE,
-  KEPLR_WALLET_CONNECT_TITLE,
-} from './KeplrWalletConnectModal.constants';
 
 export interface KeplrWalletConnectModalProps extends RegenModalProps {
   helpLink: LinkType;
   button: ButtonType;
+  title: string;
+  subtitle: string;
+  learnMoreText: string;
 }
 
 const KeplrWalletConnectModal = ({
@@ -21,6 +20,9 @@ const KeplrWalletConnectModal = ({
   helpLink,
   button,
   onClose,
+  title,
+  subtitle,
+  learnMoreText,
 }: KeplrWalletConnectModalProps) => {
   const { text, disabled, onClick, startIcon } = button;
 
@@ -41,13 +43,13 @@ const KeplrWalletConnectModal = ({
           }}
         />
         <Title align="center" variant="h4" mb={5}>
-          {KEPLR_WALLET_CONNECT_TITLE}
+          {title}
         </Title>
         <Body size="lg" align="center">
-          {KEPLR_WALLET_CONNECT_SUBTITLE}
+          {subtitle}
         </Body>
         <Body sx={{ mt: 2 }}>
-          {'Learn how to '}
+          {`${learnMoreText} `}
           <Link href={helpLink.href} target="_blank">
             {helpLink.text}
           </Link>

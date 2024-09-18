@@ -1,7 +1,6 @@
 import { Box, BoxProps, Link } from '@mui/material';
 
 import { Subtitle } from '../typography';
-import { SHARE_DEFAULT_TITLE } from './ShareSection.constants';
 import { ShareItem } from './ShareSection.Item';
 import { SocialItems } from './ShareSection.types';
 
@@ -10,12 +9,7 @@ export interface Props extends BoxProps {
   items: SocialItems;
 }
 
-const ShareSection = ({
-  title = SHARE_DEFAULT_TITLE,
-  items,
-  sx,
-  ...props
-}: Props): JSX.Element => {
+const ShareSection = ({ title, items, sx, ...props }: Props): JSX.Element => {
   return (
     <Box
       component="section"

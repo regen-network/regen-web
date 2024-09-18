@@ -1,5 +1,7 @@
 import { Point } from 'geojson';
 
+import { FileLocationType } from './PostFiles';
+
 const location1: Point = {
   type: 'Point',
   coordinates: [-74.01592482325455, 40.68983643942107],
@@ -23,6 +25,7 @@ export const files = [
       'Far far away, behind the word mountains, far from the countries lorem ipsum dolor sit apsicing Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ven.',
     location: location1,
     mimeType: 'image/jpeg',
+    locationType: 'public' as FileLocationType,
   },
   {
     iri: 'regen:123.webm',
@@ -31,6 +34,7 @@ export const files = [
     description: 'video with a short description',
     location: location2,
     mimeType: 'video/webm',
+    locationType: 'public' as FileLocationType,
   },
   {
     iri: 'regen:123.mp4',
@@ -38,6 +42,7 @@ export const files = [
     name: 'audio-file.mp4',
     location: location2,
     mimeType: 'audio/mp4',
+    locationType: 'public' as FileLocationType,
   },
   {
     iri: 'regen:123.csv',
@@ -46,13 +51,14 @@ export const files = [
     description: 'csv with a short description',
     location: location2,
     mimeType: 'text/csv',
+    locationType: 'public' as FileLocationType,
   },
   {
     iri: 'regen:123.json',
     url: '/json-file.json',
     name: 'json-file.json',
     location: location2,
-    locationType: 'none',
+    locationType: 'public' as FileLocationType,
     mimeType: 'application/json',
   },
   {
@@ -61,6 +67,7 @@ export const files = [
     name: 'image-no-description.jpg',
     location: location1,
     mimeType: 'image/png',
+    locationType: 'public' as FileLocationType,
   },
   {
     iri: 'regen:123.pdf',
@@ -68,6 +75,7 @@ export const files = [
     name: 'pdf-file.pdf',
     location: location3,
     mimeType: 'application/pdf',
+    locationType: 'public' as FileLocationType,
   },
   {
     iri: 'regen:123.bin',
@@ -76,6 +84,7 @@ export const files = [
     location: location3,
     mimeType:
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    locationType: 'public' as FileLocationType,
   },
   {
     iri: 'regen:456.bin',
@@ -84,5 +93,6 @@ export const files = [
     location: location3,
     mimeType:
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    locationType: 'public' as FileLocationType,
   },
 ];

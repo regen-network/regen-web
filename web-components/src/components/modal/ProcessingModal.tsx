@@ -27,20 +27,23 @@ const useStyles = makeStyles()(theme => ({
   },
 }));
 
-export interface ProcessingModalProps extends RegenModalProps {}
+export interface ProcessingModalProps extends RegenModalProps {
+  title: string;
+  bodyText: string;
+}
 
 const ProcessingModal: React.FC<React.PropsWithChildren<ProcessingModalProps>> =
-  ({ open, onClose }) => {
+  ({ open, onClose, title, bodyText }) => {
     const { classes: styles, cx } = useStyles();
 
     return (
       <Modal className={styles.root} open={open} onClose={onClose}>
         <Spinner className={cx(styles.verticalSpacing, styles.spinner)} />
         <Title align="center" variant="h3" mb={6}>
-          Please wait while transaction processes
+          {title}
         </Title>
         <Body size="lg" sx={{ mx: 4, mb: [8, 0] }}>
-          This may take up to 15 seconds.
+          {bodyText}
         </Body>
       </Modal>
     );

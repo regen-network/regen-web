@@ -127,7 +127,12 @@ export const cropRoundImageModal = (): JSX.Element => (
   <OpenCropImageModal circularCrop />
 );
 export const processingModal = (): JSX.Element => (
-  <ProcessingModal open={true} onClose={() => {}} />
+  <ProcessingModal
+    open={true}
+    onClose={() => {}}
+    title="Processing"
+    bodyText="Processing"
+  />
 );
 export const confirmModal = (): JSX.Element => (
   <ConfirmModal
@@ -165,6 +170,11 @@ export const txSuccessfulModal = (): JSX.Element => (
       'Visit <a href="https://app.regen.network" target="_blank">this link</a> to view the transaction.'
     }
     socialItems={SocialItemsMock}
+    title="Put in basket"
+    buttonTitle="View on portfolio"
+    blockchainRecordText="Blockchain record"
+    seeMoreText="+ see more"
+    seeLessText="- see less"
   />
 );
 export const txErrorModal = (): JSX.Element => (
@@ -177,6 +187,10 @@ export const txErrorModal = (): JSX.Element => (
     txHash="3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
     txHashUrl="https://redwood.regen.aneka.io/txs/3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
     error="Lorem ipsum dolor sit apsicing sit amut."
+    buttonTitle="View on portfolio"
+    blockchainRecordText="Blockchain record"
+    seeMoreText="+ see more"
+    seeLessText="- see less"
   />
 );
 
@@ -260,5 +274,8 @@ export const saveChangesWarningModal = (): JSX.Element => (
     open={true}
     onClose={() => null}
     navigate={() => null}
+    title="Save changes"
+    bodyText="Are you sure you want to save changes?"
+    buttonText="Save"
   />
 );

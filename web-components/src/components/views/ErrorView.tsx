@@ -9,6 +9,9 @@ export interface ErrorViewProps {
   img?: JSX.Element;
   home?: string;
   msg?: string;
+  title: string;
+  bodyText: string;
+  buttonText: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -43,7 +46,14 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-const ErrorView = ({ img, home = '/', msg }: ErrorViewProps): JSX.Element => {
+const ErrorView = ({
+  img,
+  home = '/',
+  msg,
+  title,
+  bodyText,
+  buttonText,
+}: ErrorViewProps): JSX.Element => {
   const { classes } = useStyles();
 
   return (
@@ -54,7 +64,7 @@ const ErrorView = ({ img, home = '/', msg }: ErrorViewProps): JSX.Element => {
           variant="h1"
           sx={{ textAlign: 'center', color: 'primary.contrastText', mb: 4.25 }}
         >
-          {'That’s an error.'}
+          {title}
         </Title>
         {msg && (
           <Body
@@ -65,17 +75,14 @@ const ErrorView = ({ img, home = '/', msg }: ErrorViewProps): JSX.Element => {
             {msg}
           </Body>
         )}
-        <Body size="md">
-          {'For help resolving an issue, reach out to support@regen.network.'}
-        </Body>
+        <Body size="md">{bodyText}</Body>
         <ContainedButton
           size="large"
           style={{ whiteSpace: 'nowrap' }}
           href={home}
           sx={{ whiteSpace: 'nowrap', mt: 12 }}
         >
-          {'Visit Our Homepage'}{' '}
-          <Box display={{ xs: 'none', sm: 'inline' }}></Box>
+          {buttonText}
         </ContainedButton>
       </div>
     </Box>

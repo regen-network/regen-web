@@ -4,10 +4,10 @@ import { useTheme } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import { useStyles } from './ResponsiveSlider.styles';
 import { cn } from '../../utils/styles/cn';
 import { Root } from '../section';
 import { Header } from './ResponsiveSlider.Header';
+import { useStyles } from './ResponsiveSlider.styles';
 
 export interface ResponsiveSliderProps {
   items?: JSX.Element[];

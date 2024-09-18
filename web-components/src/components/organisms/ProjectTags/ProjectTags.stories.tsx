@@ -40,6 +40,8 @@ Default.args = {
       icon: { src: '/tag/forest.svg' },
     },
   ],
+  activitiesLabel: 'Project Activity',
+  ecosystemLabel: 'Ecosystem',
 };
 
 OneAndThree.args = {
@@ -63,6 +65,8 @@ OneAndThree.args = {
       icon: { src: '/tag/forest.svg' },
     },
   ],
+  activitiesLabel: 'Project Activity',
+  ecosystemLabel: 'Ecosystem',
 };
 
 OneAndOne.args = {
@@ -78,4 +82,6 @@ OneAndOne.args = {
       icon: { src: '/tag/forest.svg' },
     },
   ],
+  activitiesLabel: 'Project Activity',
+  ecosystemLabel: 'Ecosystem',
 };

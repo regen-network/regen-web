@@ -9,6 +9,7 @@ import Section from 'web-components/src/components/section';
 import Timeline from 'web-components/src/components/timeline';
 import { getFormattedDate } from 'web-components/src/utils/format';
 
+import { VIEW_ON_LEDGER_TEXT } from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
 interface InputProps {
@@ -33,6 +34,7 @@ export function ProjectTimeline({
       <Section titleVariant="h2" title={_(msg`Timeline`)} titleAlign="left">
         <Box sx={{ mt: { xs: 10, sm: 12 } }}>
           <Timeline
+            viewLedgerText={_(VIEW_ON_LEDGER_TEXT)}
             txClient={txClient}
             onViewOnLedger={viewOnLedger}
             events={events.map((node: any) => ({

@@ -14,6 +14,7 @@ type Props = {
   items: GalleryItem[];
   itemIndex: number;
   page: number;
+  photoCredit: string;
   setPage: UseStateSetter<[number, number]>;
 };
 
@@ -21,6 +22,7 @@ export const GalleryBottomBar = ({
   items,
   itemIndex,
   page,
+  photoCredit,
   setPage,
 }: Props) => {
   const [isShowMore, setIsShowMore] = useState(false);
@@ -132,7 +134,7 @@ export const GalleryBottomBar = ({
                 component="span"
                 sx={{ display: 'inline-block', fontWeight: 300 }}
               >
-                Photo credit: {credit}
+                {`${photoCredit}: ${credit}`}
               </Box>
             )}
           </Body>

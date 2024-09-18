@@ -5,16 +5,14 @@ import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import { TextButton } from '../../buttons/TextButton';
 import { LabelSize } from '../../typography/sizing';
-import {
-  DEFAULT_COLLAPSED_ITEMS,
-  SEE_LESS,
-  SEE_MORE,
-} from './CollapseList.constants';
+import { DEFAULT_COLLAPSED_ITEMS } from './CollapseList.constants';
 
 type Props = {
   items: JSX.Element[];
   max?: number;
   buttonTextSize?: LabelSize;
+  seeMoreText: string;
+  seeLessText: string;
   sx?: SxProps<Theme>;
 };
 
@@ -22,6 +20,8 @@ export const CollapseList = ({
   items,
   max = DEFAULT_COLLAPSED_ITEMS,
   buttonTextSize = 'xs',
+  seeMoreText,
+  seeLessText,
   sx,
 }: Props): JSX.Element | null => {
   const [expanded, setExpanded] = useState<boolean>(false);
@@ -48,7 +48,7 @@ export const CollapseList = ({
           ':hover': { bgcolor: 'transparent' },
         }}
       >
-        {expanded ? `${SEE_LESS}` : `${SEE_MORE}`}
+        {expanded ? `${seeLessText}` : `${seeMoreText}`}
       </TextButton>
     </Box>
   );

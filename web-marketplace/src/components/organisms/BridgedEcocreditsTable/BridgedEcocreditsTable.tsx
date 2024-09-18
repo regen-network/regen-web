@@ -20,6 +20,7 @@ import {
 import { truncateHash } from 'web-components/src/utils/truncate';
 
 import { getHashUrl } from 'lib/block-explorer';
+import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
 
 import {
   AccountLink,
@@ -82,6 +83,7 @@ export const BridgedEcocreditsTable = ({
     >
       <ActionsTable
         tableLabel={_(msg`bridged ecocredits table`)}
+        actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
         sx={tableStyles.rootOnlyTopBorder}
         initialPaginationParams={paginationParams}
         onTableChange={setPaginationParams}

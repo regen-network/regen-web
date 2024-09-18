@@ -5,6 +5,7 @@ import {
   DocumentationTable,
   DocumentRowData,
 } from '../table/DocumentationTable/DocumentationTable';
+import { DOCUMENTATION_HEAD_CELLS } from '../table/DocumentationTable/DocumentationTable.mock';
 import Tabs, { RegenTab } from '.';
 import { IconTabProps } from './IconTab';
 import { IconTabs } from './IconTabs';
@@ -68,7 +69,15 @@ const creditDetailsTab: RegenTab = {
 
 const documentationTab: RegenTab = {
   label: 'Documentation',
-  content: <DocumentationTable rows={data} />,
+  content: (
+    <DocumentationTable
+      rows={data}
+      headCells={DOCUMENTATION_HEAD_CELLS}
+      tableAriaLabel="Documentation Table"
+      viewLedgerText="View on ledger"
+      viewDocumentText="View document"
+    />
+  ),
 };
 
 const tabs: RegenTab[] = [creditDetailsTab, documentationTab];

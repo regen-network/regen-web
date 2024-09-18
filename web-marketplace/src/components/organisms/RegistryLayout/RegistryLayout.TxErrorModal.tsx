@@ -8,6 +8,12 @@ import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
 import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import { errorModalAtom } from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
+import {
+  BLOCKCHAIN_RECORD,
+  SEE_LESS,
+  SEE_MORE,
+  TX_ERROR_MODAL_TITLE,
+} from 'lib/constants/shared.constants';
 
 import { Link } from 'components/atoms';
 
@@ -38,12 +44,17 @@ export const RegistryLayoutTxErrorModal = (): JSX.Element => {
   return (
     <>
       <TxErrorModal
+        seeMoreText={_(SEE_MORE)}
+        seeLessText={_(SEE_LESS)}
         error={txError ?? ''}
         open={!!errorCode}
         onClose={resetTxModalError}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
-        title={findFirstNonEmptyString([title, _(error.title)])}
+        title={
+          findFirstNonEmptyString([title, _(error.title)]) ??
+          _(TX_ERROR_MODAL_TITLE)
+        }
         description={findFirstNonEmptyString([
           description,
           error.description ? _(error.description) : '',
@@ -59,6 +70,7 @@ export const RegistryLayoutTxErrorModal = (): JSX.Element => {
         buttonLink={findFirstNonEmptyString([buttonLink, error.buttonLink])}
         cardItems={cardItems}
         icon={<ErrorIcon sx={{ fontSize: 100, color: 'grey.600' }} />}
+        blockchainRecordText={_(BLOCKCHAIN_RECORD)}
       />
     </>
   );

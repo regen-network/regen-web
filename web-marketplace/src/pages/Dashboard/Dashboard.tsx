@@ -16,6 +16,13 @@ import { truncate } from 'web-components/src/utils/truncate';
 
 import { useAuth } from 'lib/auth/auth';
 import { getAccountUrl } from 'lib/block-explorer';
+import {
+  ALT_PROFILE_AVATAR,
+  ALT_PROFILE_BACKGROUND_IMAGE,
+  COPY_PROFILE_TEXT,
+  COPY_SUCCESS,
+  EDIT_PROFILE_TEXT,
+} from 'lib/constants/shared.constants';
 import { isBridgeEnabled } from 'lib/ledger';
 import { getProfileLink } from 'lib/profileLink';
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
@@ -127,6 +134,11 @@ const Dashboard = (): JSX.Element => {
           account?.type ? profileVariantMapping[account.type] : 'individual'
         }
         LinkComponent={Link as LinkComponentType}
+        copyProfileText={_(COPY_PROFILE_TEXT)}
+        editProfileText={_(EDIT_PROFILE_TEXT)}
+        copySuccessText={_(COPY_SUCCESS)}
+        altBackgroundImage={_(ALT_PROFILE_BACKGROUND_IMAGE)}
+        altAvatar={_(ALT_PROFILE_AVATAR)}
       />
 
       <Box sx={{ bgcolor: 'grey.50' }}>

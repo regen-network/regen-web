@@ -8,6 +8,7 @@ import {
   DocumentationTable,
   DocumentRowData,
 } from './DocumentationTable/DocumentationTable';
+import { DOCUMENTATION_HEAD_CELLS } from './DocumentationTable/DocumentationTable.mock';
 import { TablePagination } from './Table.TablePagination';
 
 export default {
@@ -40,7 +41,13 @@ const data: DocumentRowData[] = [
 ];
 
 export const documentationTable = (): JSX.Element => (
-  <DocumentationTable rows={data} />
+  <DocumentationTable
+    rows={data}
+    headCells={DOCUMENTATION_HEAD_CELLS}
+    tableAriaLabel="Documentation Table"
+    viewLedgerText="View on ledger"
+    viewDocumentText="View document"
+  />
 );
 
 export const tablePagination = (): JSX.Element => (
@@ -63,6 +70,7 @@ export const tablePagination = (): JSX.Element => (
 export const actionsTable = (): JSX.Element => (
   <ActionsTable
     tableLabel="actions table"
+    actionButtonsText="Actions"
     renderActionButtons={i => (
       <TableActionButtons
         buttons={[

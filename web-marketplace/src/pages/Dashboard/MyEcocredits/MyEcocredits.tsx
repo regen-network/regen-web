@@ -31,18 +31,27 @@ import {
   BASKET_TAKE_SUBMIT_LABEL,
   BATCH_DESCRIPTION,
   BATCH_LABEL,
+  BLOCKCHAIN_RECORD,
   getBottomFieldsTextMapping,
   INSUFFICIENT_CREDITS,
   INVALID_AMOUNT,
   INVALID_DECIMAL_COUNT,
   INVALID_MEMO_LENGTH,
   MAX_LABEL,
+  PROCESSING_MODAL_BODY,
+  PROCESSING_MODAL_TITLE,
   REQUIRED_MESSAGE,
   RETIRE_ON_TAKE_LABEL,
   RETIRE_ON_TAKE_TOOLTIP,
   RETIREMENT_INFO_TEXT,
+  SEE_LESS,
+  SEE_MORE,
+  SHARE_TITLE,
   STATE_PROVINCE_ERROR_TEXT,
   SUBMIT_ERROR_TEXT,
+  TX_ERROR_MODAL_TITLE,
+  TX_MODAL_TITLE,
+  TX_SUCCESSFUL_MODAL_TITLE,
 } from 'lib/constants/shared.constants';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import {
@@ -536,16 +545,20 @@ export const MyEcocredits = (): JSX.Element => {
       <ProcessingModal
         open={!deliverTxResponse && isProcessingModalOpen}
         onClose={() => setIsProcessingModalOpen(false)}
+        title={_(PROCESSING_MODAL_TITLE)}
+        bodyText={_(PROCESSING_MODAL_BODY)}
       />
       {!error && txHash && cardItems && (txModalTitle || txModalHeader) && (
         <TxSuccessfulModal
+          seeMoreText={_(SEE_MORE)}
+          seeLessText={_(SEE_LESS)}
           open={!error && (!!txModalTitle || !!deliverTxResponse)}
           onClose={handleTxModalClose}
           txHash={txHash ?? ''}
           txHashUrl={txHashUrl}
-          title={txModalHeader}
+          title={txModalHeader ?? _(TX_SUCCESSFUL_MODAL_TITLE)}
           cardTitle={txModalTitle ?? ''}
-          buttonTitle={txButtonTitle}
+          buttonTitle={txButtonTitle ?? _(TX_MODAL_TITLE)}
           cardItems={cardItems}
           linkComponent={Link}
           onButtonClick={onButtonClick}
@@ -556,9 +569,13 @@ export const MyEcocredits = (): JSX.Element => {
             },
             linkedIn: { url: shareUrl },
           })}
+          shareTitle={_(SHARE_TITLE)}
+          blockchainRecordText={_(BLOCKCHAIN_RECORD)}
         />
       )}
       <TxErrorModal
+        seeMoreText={_(SEE_MORE)}
+        seeLessText={_(SEE_LESS)}
         error={error ?? ''}
         open={!!error}
         onClose={handleTxModalClose}
@@ -568,6 +585,8 @@ export const MyEcocredits = (): JSX.Element => {
         buttonTitle={_(ERROR_BUTTON)}
         linkComponent={Link}
         onButtonClick={onButtonClick}
+        title={_(TX_ERROR_MODAL_TITLE)}
+        blockchainRecordText={_(BLOCKCHAIN_RECORD)}
       />
     </>
   );

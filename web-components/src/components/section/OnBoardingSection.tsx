@@ -10,7 +10,7 @@ interface OnBoardingSectionProps {
   description?: string | JSX.Element;
   headerChildren?: ReactNode;
   formContainer?: boolean; // set max width and center
-  exampleProjectUrl?: string;
+  exampleProjectChildren?: ReactNode;
   classes?: {
     root?: string;
     title?: string;
@@ -58,7 +58,7 @@ const OnBoardingSection: React.FC<
   React.PropsWithChildren<OnBoardingSectionProps>
 > = ({
   formContainer = false,
-  exampleProjectUrl,
+  exampleProjectChildren,
   classes,
   title,
   description,
@@ -87,14 +87,7 @@ const OnBoardingSection: React.FC<
           !!classes && classes.formWrap,
         )}
       >
-        {exampleProjectUrl && (
-          <Body sx={{ pt: 2, pb: 1 }}>
-            See an example{' '}
-            <RouterLink to={exampleProjectUrl} target="_blank">
-              project page»
-            </RouterLink>
-          </Body>
-        )}
+        {exampleProjectChildren ? exampleProjectChildren : null}
         {children}
       </div>
     </Section>

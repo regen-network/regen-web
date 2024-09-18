@@ -17,6 +17,11 @@ import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
+import {
+  ECOSYSTEM_LABEL,
+  SEE_LESS,
+  SEE_MORE,
+} from 'lib/constants/shared.constants';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getAllCreditClassPageQuery } from 'lib/queries/react-query/sanity/getAllCreditClassPageQuery/getAllCreditClassPageQuery';
 import { useWallet } from 'lib/wallet/wallet';
@@ -211,10 +216,13 @@ const CreditClassDetailsSimple: React.FC<
             )}
           </Box>
           <ImpactTags
+            seeMoreText={_(SEE_MORE)}
+            seeLessText={_(SEE_LESS)}
             impact={impactCards}
             activities={activityTags}
             ecosystems={ecosystemTags}
             activitiesLabel={_(ELIGIBLE_ACTIVITIES)}
+            ecosystemLabel={_(ECOSYSTEM_LABEL)}
           />
         </Box>
       </EcocreditsSection>

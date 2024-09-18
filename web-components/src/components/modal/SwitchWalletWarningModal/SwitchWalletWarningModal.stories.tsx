@@ -24,6 +24,14 @@ export const Basic: Story = {
       setOpen(false);
     };
 
-    return <SwitchWalletWarningModal {...args} onClose={onClose} open={open} />;
+    return (
+      <SwitchWalletWarningModal
+        {...args}
+        onClose={onClose}
+        open={open}
+        title="Please select the following wallet address in Keplr in order to proceed"
+        bodyText="The email address you are using to log in is associated with the above wallet address, so it must be the currently selected account in Keplr in order to continue."
+      />
+    );
   },
 };

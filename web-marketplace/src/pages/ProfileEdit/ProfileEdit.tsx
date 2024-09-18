@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
 import { useSetAtom } from 'jotai';
 import { startCase } from 'lodash';
@@ -12,15 +13,21 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { DISCARD_CHANGES_TITLE } from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
 
+import {
+  DISCARD_CHANGES_BODY,
+  DISCARD_CHANGES_BUTTON,
+} from '../../lib/constants/shared.constants';
 import { usePathSection } from './hooks/usePathSection';
 import { ProfileEditNav } from './ProfileEdit.Nav';
 import { ViewProfileButton } from './ProfileEdit.ViewProfile';
 
 export const ProfileEdit = () => {
+  const { _ } = useLingui();
   const { accountChanging } = useWallet();
   const { loading } = useAuth();
   const theme = useTheme();
@@ -116,6 +123,9 @@ export const ProfileEdit = () => {
       </div>
       <SaveChangesWarningModal
         open={!!isWarningModalOpen}
+        title={_(DISCARD_CHANGES_TITLE)}
+        bodyText={_(DISCARD_CHANGES_BODY)}
+        buttonText={_(DISCARD_CHANGES_BUTTON)}
         navigate={() => {
           if (isWarningModalOpen) navigate(isWarningModalOpen);
           isDirtyRef.current = false;

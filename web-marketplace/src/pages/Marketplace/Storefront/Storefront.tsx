@@ -27,6 +27,17 @@ import {
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
+import {
+  BLOCKCHAIN_RECORD,
+  CLOSE_BUTTON_TEXT,
+  PROCESSING_MODAL_BODY,
+  PROCESSING_MODAL_TITLE,
+  SEE_LESS,
+  SEE_MORE,
+  SHARE_TITLE,
+  TX_ERROR_MODAL_TITLE,
+  TX_MODAL_TITLE,
+} from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { Link } from 'components/atoms';
@@ -333,15 +344,19 @@ export const Storefront = (): JSX.Element => {
       <ProcessingModal
         open={isProcessingModalOpen}
         onClose={() => setIsProcessingModalOpen(false)}
+        title={_(PROCESSING_MODAL_TITLE)}
+        bodyText={_(PROCESSING_MODAL_BODY)}
       />
       <TxSuccessfulModal
+        seeMoreText={_(SEE_MORE)}
+        seeLessText={_(SEE_LESS)}
         open={!!txHash && !error}
         onClose={handleTxModalClose}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
         title={txModalHeader}
         cardTitle={txModalTitle}
-        buttonTitle={txButtonTitle}
+        buttonTitle={txButtonTitle ?? _(TX_MODAL_TITLE)}
         cardItems={cardItems}
         linkComponent={Link}
         onButtonClick={onButtonClick}
@@ -354,20 +369,25 @@ export const Storefront = (): JSX.Element => {
           twitter: { text: _(STOREFRONT_TWITTER_TEXT), url: shareUrl },
           linkedIn: { url: shareUrl },
         })}
+        shareTitle={_(SHARE_TITLE)}
+        blockchainRecordText={_(BLOCKCHAIN_RECORD)}
       />
       <TxErrorModal
+        seeMoreText={_(SEE_MORE)}
+        seeLessText={_(SEE_LESS)}
         error={error ?? ''}
         open={!!error}
         onClose={handleTxModalClose}
         txHash={txHash ?? ''}
         txHashUrl={txHashUrl}
-        title={txModalHeader}
+        title={txModalHeader ?? _(TX_ERROR_MODAL_TITLE)}
         cardTitle={txModalTitle}
-        buttonTitle={'CLOSE WINDOW'}
+        buttonTitle={_(CLOSE_BUTTON_TEXT)}
         cardItems={cardItems}
         icon={<ErrorIcon sx={{ fontSize: 100 }} />}
         linkComponent={Link}
         onButtonClick={onButtonClick}
+        blockchainRecordText={_(BLOCKCHAIN_RECORD)}
       />
       <CancelConfirmModal
         open={isCancelModalOpen}

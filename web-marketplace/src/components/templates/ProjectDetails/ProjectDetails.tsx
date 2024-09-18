@@ -23,6 +23,7 @@ import {
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { onBtnClick } from 'lib/button';
+import { PHOTO_CREDIT } from 'lib/constants/shared.constants';
 import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
@@ -546,7 +547,12 @@ function ProjectDetails(): JSX.Element {
       />
 
       {hasProjectPhotos && (
-        <Gallery items={projectPhotos} sx={{ mb: 25 }} allImages />
+        <Gallery
+          items={projectPhotos}
+          sx={{ mb: 25 }}
+          allImages
+          photoCredit={_(PHOTO_CREDIT)}
+        />
       )}
 
       <ProjectStorySection

@@ -1,5 +1,5 @@
 import { msg, Trans } from '@lingui/macro';
-import { Link } from '@mui/material';
+import { Box, Link } from '@mui/material';
 
 import {
   MAX_FRACTION_DIGITS,
@@ -108,3 +108,36 @@ export const getMaximumDecimalMessage = ({
   maximumFractionDigits,
 }: GetMaximumDecimalMessageProps) =>
   _(msg`Maximum ${maximumFractionDigits} decimal places`);
+export const EMAIL_CONFIRMATION_TITLE = msg`Please check your email`;
+export const EMAIL_CONFIRMATION_DESCRIPTION = msg`We've just sent a confirmation email to:`;
+export const EMAIL_CONFIRMATION_CODE_HELPER = msg`Please enter the code from that email:`;
+export const DISCARD_CHANGES_TITLE = msg`Are you sure you want to discard your changes?`;
+export const DISCARD_CHANGES_BODY = msg`If you proceed, you will lose all unsaved changes you made. This cannot be undone.`;
+export const DISCARD_CHANGES_BUTTON = msg`yes, discard`;
+export const PROCESSING_MODAL_TITLE = msg`Please wait while transaction processes`;
+export const PROCESSING_MODAL_BODY = msg`This may take up to 15 seconds.`;
+export const TX_ERROR_MODAL_TITLE = msg`Sorry, your transaction was not successful.`;
+export const TX_MODAL_TITLE = msg`view your portfolio`;
+export const TX_SUCCESSFUL_MODAL_TITLE = msg`Congrats! Your transaction was successful.`;
+export const BLOCKCHAIN_RECORD = msg`blockchain record`;
+export const CLOSE_BUTTON_TEXT = msg`CLOSE WINDOW`;
+export const SEE_LESS = msg`- see less`;
+export const SEE_MORE = msg`+ see more`;
+export const PHOTO_CREDIT = msg`Photo credit`;
+export const EDIT_PROFILE_TEXT = msg`Edit Profile`;
+export const COPY_PROFILE_TEXT = msg`Copy link to profile`;
+export const ALT_PROFILE_BACKGROUND_IMAGE = msg`user profile background image`;
+export const ALT_PROFILE_AVATAR = msg`user profile avatar`;
+export const PROJECT_ACTIVITY_LABEL = msg`Project Activity`;
+export const ECOSYSTEM_LABEL = msg`Ecosystem`;
+export const SHARE_TITLE = msg`Share`;
+export const ACTIONS_TABLE_ACTIONS_TEXT = msg`Actions`;
+export const VIEW_ON_LEDGER_TEXT = msg`view on ledger`;
+export const PAGE_NOT_FOUND_TITLE = msg`Oops! Page not found.`;
+export const PAGE_NOT_FOUND_BODY = msg`The page you are looking for might have been temporarily removed or had its name changed.`;
+export const PAGE_NOT_FOUND_BUTTON = (
+  <Trans>
+    Visit Our Homepage{' '}
+    <Box display={{ xs: 'none', sm: 'inline' }}>{'\u00A0'}Instead</Box>
+  </Trans>
+);

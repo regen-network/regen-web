@@ -18,8 +18,14 @@ import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
 
 import { useAuth } from 'lib/auth/auth';
 import {
+  BLOCKCHAIN_RECORD,
   EDIT_TEXT,
   FILE_DROP_LOCATION_TEXT,
+  PROCESSING_MODAL_BODY,
+  PROCESSING_MODAL_TITLE,
+  SEE_LESS,
+  SEE_MORE,
+  TX_ERROR_MODAL_TITLE,
 } from 'lib/constants/shared.constants';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { PROJECTS_QUERY_KEY } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery.constants';
@@ -348,18 +354,27 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         isSubmitting={isSubmitModalOpen}
         saveAndExit={saveAndExit}
       />
-      <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
+      <ProcessingModal
+        open={isSubmitModalOpen}
+        onClose={closeSubmitModal}
+        title={_(PROCESSING_MODAL_TITLE)}
+        bodyText={_(PROCESSING_MODAL_BODY)}
+      />
       {error && txModalTitle && (
         <TxErrorModal
+          seeMoreText={_(SEE_MORE)}
+          seeLessText={_(SEE_LESS)}
           error={error}
           open={!!error && (!!txModalTitle || !!deliverTxResponse)}
           onClose={handleTxModalClose}
           txHash={txHash || ''}
           txHashUrl={txHashUrl}
           cardTitle={txModalTitle}
+          title={_(TX_ERROR_MODAL_TITLE)}
           linkComponent={Link}
           onButtonClick={handleTxModalClose}
-          buttonTitle="close"
+          buttonTitle={_(msg`close`)}
+          blockchainRecordText={_(BLOCKCHAIN_RECORD)}
         />
       )}
       {bannerError && <ErrorBanner text={bannerError} />}

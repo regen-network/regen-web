@@ -12,9 +12,6 @@ import { Theme } from '../../../theme/muiTheme';
 import { LinkComponentType } from '../../../types/shared/linkComponentType';
 import copyTextToClipboard from '../../../utils/copy';
 import {
-  COPY_PROFILE,
-  COPY_SUCCESS,
-  EDIT_PROFILE,
   PROFILE_AVATAR_MARGIN_TOP_DESKTOP,
   PROFILE_AVATAR_MARGIN_TOP_MOBILE,
   PROFILE_AVATAR_MARGIN_TOP_TABLET,
@@ -35,6 +32,11 @@ export interface Props {
   infos: ProfileInfos;
   editLink: string;
   profileLink: string;
+  editProfileText: string;
+  copyProfileText: string;
+  copySuccessText: string;
+  altBackgroundImage: string;
+  altAvatar: string;
   LinkComponent: LinkComponentType;
   sx?: SxProps<Theme>;
 }
@@ -47,6 +49,11 @@ const ProfileHeader = ({
   variant,
   editLink,
   profileLink,
+  editProfileText,
+  copyProfileText,
+  copySuccessText,
+  altBackgroundImage,
+  altAvatar,
   LinkComponent,
   sx = [],
 }: Props): JSX.Element => {
@@ -66,7 +73,7 @@ const ProfileHeader = ({
     >
       {showProfileLinkSuccessBanner && (
         <Banner
-          text={COPY_SUCCESS}
+          text={copySuccessText}
           onClose={() => {
             setShowProfileLinkSuccessBanner(false);
           }}
@@ -97,7 +104,7 @@ const ProfileHeader = ({
         <Box
           component="img"
           src={backgroundImage}
-          alt="user profile background image"
+          alt={altBackgroundImage}
           sx={{
             position: 'absolute',
             width: '100%',
@@ -116,7 +123,7 @@ const ProfileHeader = ({
       >
         <Avatar
           src={avatar}
-          alt="user profile avatar"
+          alt={altAvatar}
           sx={{
             mt: {
               xs: PROFILE_AVATAR_MARGIN_TOP_MOBILE,
@@ -184,12 +191,12 @@ const ProfileHeader = ({
                   <EditIcon
                     sx={{ fontSize: 17, mr: 2, color: 'primary.main' }}
                   />
-                  {EDIT_PROFILE}
+                  {editProfileText}
                 </Label>
               </LinkComponent>
             )}
             {profileLink !== '' && (
-              <InfoTooltip arrow placement="top" title={COPY_PROFILE}>
+              <InfoTooltip arrow placement="top" title={copyProfileText}>
                 <Link
                   sx={{
                     display: 'flex',

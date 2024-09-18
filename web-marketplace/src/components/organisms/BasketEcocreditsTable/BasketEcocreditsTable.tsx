@@ -14,6 +14,7 @@ import {
 import { formatDate, formatNumber } from 'web-components/src/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
 
 import { BasketBatchInfoWithBalance } from 'pages/BasketDetails/utils/normalizeBasketEcocredits';
 import { BreakText, GreyText, Link } from 'components/atoms';
@@ -51,6 +52,7 @@ export const BasketEcocreditsTable: React.FC<
       onTableChange={onTableChange}
       initialPaginationParams={initialPaginationParams}
       isIgnoreOffset={isIgnoreOffset}
+      actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
       headerRows={[
         <Box sx={{ minWidth: '8rem' }}>
           <Trans>Project</Trans>

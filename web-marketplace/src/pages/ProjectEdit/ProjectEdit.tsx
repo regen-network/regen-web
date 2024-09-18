@@ -30,6 +30,11 @@ import {
   txSuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import {
+  DISCARD_CHANGES_BODY,
+  DISCARD_CHANGES_BUTTON,
+  DISCARD_CHANGES_TITLE,
+} from 'lib/constants/shared.constants';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
@@ -277,6 +282,9 @@ function ProjectEdit(): JSX.Element {
           {saved && <Banner text={_(msg`Changes have been saved`)} />}
           <SaveChangesWarningModal
             open={!!isWarningModalOpen}
+            title={_(DISCARD_CHANGES_TITLE)}
+            bodyText={_(DISCARD_CHANGES_BODY)}
+            buttonText={_(DISCARD_CHANGES_BUTTON)}
             navigate={() => {
               if (isWarningModalOpen) navigate(isWarningModalOpen);
               isDirtyRef.current = false;

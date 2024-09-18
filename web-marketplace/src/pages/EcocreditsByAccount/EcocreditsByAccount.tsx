@@ -17,6 +17,13 @@ import { LinkComponentType } from 'web-components/src/types/shared/linkComponent
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
+import {
+  ALT_PROFILE_AVATAR,
+  ALT_PROFILE_BACKGROUND_IMAGE,
+  COPY_PROFILE_TEXT,
+  COPY_SUCCESS,
+  EDIT_PROFILE_TEXT,
+} from 'lib/constants/shared.constants';
 import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -145,6 +152,11 @@ export const EcocreditsByAccount = (): JSX.Element => {
                   : 'individual'
               }
               LinkComponent={Link as LinkComponentType}
+              copyProfileText={_(COPY_PROFILE_TEXT)}
+              editProfileText={_(EDIT_PROFILE_TEXT)}
+              copySuccessText={_(COPY_SUCCESS)}
+              altBackgroundImage={_(ALT_PROFILE_BACKGROUND_IMAGE)}
+              altAvatar={_(ALT_PROFILE_AVATAR)}
             />
             <Box sx={{ backgroundColor: 'grey.50' }}>
               <Section sx={{ root: { pt: { xs: 15 } } }}>

@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { SxProps } from '@mui/system';
 
 import { Theme } from '../../../theme/muiTheme';

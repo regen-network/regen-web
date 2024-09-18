@@ -37,15 +37,20 @@ export interface DocumentationTableProps {
   canClickRow?: boolean;
   onViewOnLedger?: (ledgerData: any) => void;
   txClient?: ServiceClientImpl;
+  headCells: HeadCell[];
+  viewLedgerText: string;
+  viewDocumentText: string;
+  tableAriaLabel: string;
 }
 
-interface HeadCell {
+export interface HeadCell {
   id: keyof DocumentRowData;
   label: string;
   numeric: boolean;
 }
 
 interface EnhancedTableProps {
+  headCells: HeadCell[];
   classes: Record<string, string>;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
@@ -57,21 +62,16 @@ interface EnhancedTableProps {
 }
 
 function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
-  const { order, orderBy, onRequestSort, hasViewOnLedgerColumn } = props;
+  const { order, orderBy, onRequestSort, hasViewOnLedgerColumn, headCells } =
+    props;
+  const headCellsCopy = [...headCells];
   const createSortHandler =
     (property: keyof DocumentRowData) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
 
-  let headCells: HeadCell[] = [
-    { id: 'name', numeric: false, label: 'Name of document' },
-    { id: 'type', numeric: true, label: 'Document type' },
-    { id: 'date', numeric: true, label: 'Date of upload' },
-    { id: 'url', numeric: true, label: '' },
-  ];
-
   const ledgerColumnCell: HeadCell = { id: 'ledger', numeric: true, label: '' };
-  if (hasViewOnLedgerColumn) headCells.splice(3, 0, ledgerColumnCell); // don't show this headerCell if no ledger data
+  if (hasViewOnLedgerColumn) headCellsCopy.splice(3, 0, ledgerColumnCell); // don't show this headerCell if no ledger data
 
   return (
     <TableHead>
@@ -99,7 +99,17 @@ function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
 
 const DocumentationTable: React.FC<
   React.PropsWithChildren<DocumentationTableProps>
-> = ({ rows, canClickRow = false, onViewOnLedger, txClient, className }) => {
+> = ({
+  rows,
+  canClickRow = false,
+  onViewOnLedger,
+  txClient,
+  className,
+  headCells,
+  viewLedgerText,
+  viewDocumentText,
+  tableAriaLabel,
+}) => {
   const { classes: styles, cx } = useDocumentationTableStyles();
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<keyof DocumentRowData>('name');
@@ -134,9 +144,10 @@ const DocumentationTable: React.FC<
 
   return (
     <StyledTableContainer className={className}>
-      <Table aria-label="documentation table" stickyHeader>
+      <Table aria-label={tableAriaLabel} stickyHeader>
         <EnhancedTableHead
           classes={styles}
+          headCells={headCells}
           order={order}
           orderBy={orderBy}
           onRequestSort={handleRequestSort}
@@ -191,7 +202,7 @@ const DocumentationTable: React.FC<
                       }
                       startIcon={<ShieldIcon />}
                     >
-                      view on ledger
+                      {viewLedgerText}
                     </ContainedButton>
                   </StyledTableCell>
                 )}
@@ -207,7 +218,7 @@ const DocumentationTable: React.FC<
                       startIcon={<EyeIcon />}
                       className={styles.button}
                     >
-                      view document
+                      {viewDocumentText}
                     </OutlinedButton>
                   </a>
                 </StyledTableCell>

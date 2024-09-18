@@ -23,6 +23,7 @@ import {
   creditClassSelectedFiltersAtom,
   useCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
+import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { CommunityFilter } from './AllProjects.CommunityFilter';
@@ -165,6 +166,8 @@ export const SideFilter = ({
               </Subtitle>
             </div>
             <CollapseList
+              seeMoreText={_(SEE_MORE)}
+              seeLessText={_(SEE_LESS)}
               max={3}
               items={filteredCreditClassFilters.map(({ name, path }) => (
                 <Grid container direction={'column'} wrap="nowrap" key={path}>

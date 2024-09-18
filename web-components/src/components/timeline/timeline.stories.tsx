@@ -44,7 +44,12 @@ const events: Event[] = [
 const voidFunc = (): void => void null;
 
 export const timeline = (): JSX.Element => (
-  <Timeline onViewOnLedger={voidFunc} events={events} completedItemIndex={1} />
+  <Timeline
+    onViewOnLedger={voidFunc}
+    events={events}
+    completedItemIndex={1}
+    viewLedgerText="View on ledger"
+  />
 );
 export const timelineItem = (): JSX.Element => (
   <TimelineItem
@@ -57,6 +62,7 @@ export const timelineItem = (): JSX.Element => (
     barColor={theme.palette.secondary.main}
     odd={false}
     last={false}
+    viewLedgerText="View on ledger"
   />
 );
 

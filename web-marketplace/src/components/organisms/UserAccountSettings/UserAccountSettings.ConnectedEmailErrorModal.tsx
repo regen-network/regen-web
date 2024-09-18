@@ -23,8 +23,7 @@ export const ConnectedEmailErrorModal = ({ open, onClose, email }: Props) => {
         {_(CONNECTED_EMAIL_ERROR_TITLE)}
       </Title>
       <Body size="lg" align="center" sx={{ mb: 12.5 }}>
-        {_(CONNECTED_EMAIL_ERROR_DESCRIPTION_START)}
-        <b>{email}</b>
+        {_(CONNECTED_EMAIL_ERROR_DESCRIPTION_START)} <b>{email}</b>
         {_(CONNECTED_EMAIL_ERROR_DESCRIPTION_END)}
       </Body>
     </SadBeeModal>

@@ -14,6 +14,7 @@ import { CardItem } from 'web-components/src/components/modal/TxModal';
 import { Body, Label, Title } from 'web-components/src/components/typography';
 import { truncateHash } from 'web-components/src/utils/truncate';
 
+import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import { Link } from '../../components/atoms';
@@ -62,6 +63,8 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
           </Title>
           {projectOnChainId ? (
             <CardItem
+              seeMoreText={_(SEE_MORE)}
+              seeLessText={_(SEE_LESS)}
               label={_(msg`project id`)}
               value={{
                 name: projectOnChainId,
@@ -70,6 +73,8 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
             />
           ) : (
             <CardItem
+              seeMoreText={_(SEE_MORE)}
+              seeLessText={_(SEE_LESS)}
               label={_(msg`project name`)}
               value={{
                 name: data?.data?.projectById?.metadata?.['schema:name'],
@@ -79,6 +84,8 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
           )}
           {!!deliverTxResponse?.transactionHash && (
             <CardItem
+              seeMoreText={_(SEE_MORE)}
+              seeLessText={_(SEE_LESS)}
               label={_(msg`blockchain record`)}
               value={{
                 name: truncateHash(deliverTxResponse?.transactionHash) || '',
@@ -88,6 +95,8 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
             />
           )}
           <CardItem
+            seeMoreText={_(SEE_MORE)}
+            seeLessText={_(SEE_LESS)}
             label={_(msg`url`)}
             value={{
               name: projectUrl,

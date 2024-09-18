@@ -66,6 +66,7 @@ interface ActionsTableProps {
   initialPaginationParams?: TablePaginationParams;
   sortCallbacks?: SortCallbacksType;
   isIgnoreOffset?: boolean;
+  actionButtonsText: string;
   sx?: {
     root?: SxProps<Theme>;
   };
@@ -80,6 +81,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   initialPaginationParams = DEFAULT_TABLE_PAGINATION_PARAMS,
   sortCallbacks = [],
   isIgnoreOffset = false,
+  actionButtonsText,
   sx,
 }) => {
   const {
@@ -195,7 +197,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
                   >
                     <Box>
                       <BorderLeft />
-                      Actions
+                      {actionButtonsText}
                     </Box>
                   </StyledTableCell>
                 )}

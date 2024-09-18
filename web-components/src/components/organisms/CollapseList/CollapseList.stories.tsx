@@ -18,4 +18,6 @@ export const Default = Template.bind({});
 
 Default.args = {
   items: [...Array(10).keys()].map(k => <div key={k}>{k} </div>),
+  seeMoreText: '+ see more',
+  seeLessText: '- see less',
 };

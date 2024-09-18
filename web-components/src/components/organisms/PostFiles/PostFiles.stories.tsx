@@ -17,7 +17,8 @@ export const Public: Story = {
 Public.args = {
   privacyType: 'public',
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
-  files: [],
+  files,
+  photoCredit: 'Photo credit',
 };
 
 export const PrivateLocations: Story = {

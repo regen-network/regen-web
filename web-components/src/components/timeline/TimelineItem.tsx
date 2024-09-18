@@ -13,6 +13,7 @@ interface TimelineItemProps extends Event {
   odd: boolean;
   last: boolean;
   txClient?: ServiceClientImpl;
+  viewLedgerText: string;
   onViewOnLedger: (creditVintage: any) => void;
   creditVintage?: any;
 }
@@ -168,6 +169,7 @@ export default function TimelineItem({
   odd,
   last,
   txClient,
+  viewLedgerText,
   onViewOnLedger,
 }: TimelineItemProps): JSX.Element {
   const { classes } = useStyles({ circleColor, barColor, odd, last });
@@ -188,7 +190,7 @@ export default function TimelineItem({
           onClick={() => onViewOnLedger(creditVintage)}
           startIcon={<ShieldIcon />}
         >
-          view on ledger
+          {viewLedgerText}
         </ContainedButton>
       )}
       <span className={classes.circle} />

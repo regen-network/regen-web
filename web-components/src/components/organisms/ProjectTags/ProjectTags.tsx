@@ -5,23 +5,21 @@ import { Label } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import { ProjectTagType } from '../../molecules/ProjectTag/ProjectTag.types';
-import {
-  ECOSYSTEM_LABEL,
-  PROJECT_ACTIVITY_LABEL,
-} from './ProjectTags.constants';
 
 export interface Props {
   activities?: ProjectTagType[];
   ecosystems?: ProjectTagType[];
   sx?: SxProps<Theme>;
   activitiesLabel?: string;
+  ecosystemLabel: string;
 }
 
 const ProjectTags = ({
   activities = [],
   ecosystems = [],
   sx = [],
-  activitiesLabel = PROJECT_ACTIVITY_LABEL,
+  activitiesLabel,
+  ecosystemLabel,
 }: Props): JSX.Element => {
   const hasActivities = activities.length > 0;
   const hasManyActivities = activities.length > 1;
@@ -74,7 +72,7 @@ const ProjectTags = ({
       )}
       {hasEcosystems && (
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Label sx={{ fontSize: { xs: 11 }, mb: 2 }}>{ECOSYSTEM_LABEL}</Label>
+          <Label sx={{ fontSize: { xs: 11 }, mb: 2 }}>{ecosystemLabel}</Label>
           <Box
             sx={{
               display: 'flex',

@@ -17,6 +17,7 @@ import { formatDate, formatNumber } from 'web-components/src/utils/format';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
+import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
 
 import { AccountLink, BreakText, GreyText, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
@@ -40,6 +41,7 @@ export const EcocreditsTable: React.FC<
   isIgnoreOffset = false,
 }) => {
   const { _ } = useLingui();
+
   const hasMorePages =
     (initialPaginationParams?.count ?? 0) >
     (initialPaginationParams?.rowsPerPage ?? 0);
@@ -55,6 +57,7 @@ export const EcocreditsTable: React.FC<
   return (
     <ActionsTable
       tableLabel={_(msg`ecocredits table`)}
+      actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
       renderActionButtons={renderActionButtons}
       onTableChange={onTableChange}
       initialPaginationParams={initialPaginationParams}

@@ -1,18 +1,14 @@
 /* eslint-disable lingui/no-unlocalized-strings */
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
-interface IconProps extends SvgIconProps {}
-
-export default function CryptoIcon({
-  sx = [],
-  ...props
-}: IconProps): JSX.Element {
+export default function CryptoIcon(
+  props: React.SVGProps<SVGSVGElement>,
+): JSX.Element {
   return (
-    <SvgIcon
+    <svg
       data-testid="CryptoIcon"
-      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 29 16"
-      sx={[{ fill: 'none' }, ...(Array.isArray(sx) ? sx : [sx])]}
+      width="29"
+      height="16"
       {...props}
     >
       <circle cx="8.5" cy="8" r="8" fill="white" />
@@ -108,6 +104,6 @@ export default function CryptoIcon({
           <stop offset="1" stop-color="#6EC2B7" />
         </linearGradient>
       </defs>
-    </SvgIcon>
+    </svg>
   );
 }

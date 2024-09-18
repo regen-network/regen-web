@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 
+import { useFetchSellOrders } from 'features/marketplace/BuySellOrderFlow/hooks/useFetchSellOrders';
+import WithLoader from 'components/atoms/WithLoader';
+import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetProject';
 
@@ -24,29 +27,63 @@ export const BuyCredits = () => {
     projectsWithOrderData,
     onChainProjectId,
     offChainProject,
+    creditClassOnChain,
+    loadingBuySellOrders,
   } = useGetProject();
 
   const [paymentOption, setPaymentOption] = useState<PaymentOptionsType>(
-    PAYMENT_OPTIONS.CARD, // TODO or set to crypto if not credits with fiat purchase
+    sanityProject?.fiatSellOrders && sanityProject?.fiatSellOrders.length > 0
+      ? PAYMENT_OPTIONS.CARD
+      : PAYMENT_OPTIONS.CRYPTO,
   );
   const [retiring, setRetiring] = useState<boolean>(true);
 
   const formModel = getFormModel({ _, paymentOption, retiring });
+  const sellOrders = useMemo(
+    () => projectsWithOrderData?.[0]?.sellOrders || [],
+    [projectsWithOrderData],
+  );
+
+  const cardSellOrders = useMemo(
+    () =>
+      sanityProject?.fiatSellOrders?.map(fiatOrder => ({
+        ...fiatOrder,
+        ...sellOrders.filter(
+          cryptoOrder => cryptoOrder.id.toString() === fiatOrder?.sellOrderId,
+        )?.[0],
+      })) || [],
+    [sanityProject?.fiatSellOrders, sellOrders],
+  );
 
   return (
-    <MultiStepTemplate
-      formId={formModel.formId}
-      steps={formModel.steps}
-      initialValues={formModel.initialValues}
+    <WithLoader
+      isLoading={loadingBuySellOrders}
+      className="flex w-full items-center justify-center h-[500px]"
     >
-      <BuyCreditsForm
-        setPaymentOption={setPaymentOption}
-        paymentOption={paymentOption}
-        retiring={retiring}
-        setRetiring={setRetiring}
-        cardSellOrders={[]}
-        cryptoSellOrders={[]}
-      />
-    </MultiStepTemplate>
+      <>
+        {!isBuyFlowDisabled && (
+          <MultiStepTemplate
+            formId={formModel.formId}
+            steps={formModel.steps}
+            initialValues={{}}
+          >
+            <BuyCreditsForm
+              setPaymentOption={setPaymentOption}
+              paymentOption={paymentOption}
+              retiring={retiring}
+              setRetiring={setRetiring}
+              cardSellOrders={cardSellOrders as CardSellOrder[]}
+              cryptoSellOrders={sellOrders}
+              creditTypeAbbrev={creditClassOnChain?.class?.creditTypeAbbrev}
+              projectHref={`/project/${
+                offChainProject?.slug ??
+                offChainProject?.onChainId ??
+                onChainProjectId
+              }`}
+            />
+          </MultiStepTemplate>
+        )}
+      </>
+    </WithLoader>
   );
 };

@@ -5031,6 +5031,7 @@ export type Project = Document & {
   projectId?: Maybe<Scalars['String']>;
   projectPrefinancing?: Maybe<ProjectPrefinancing>;
   credibilityCards?: Maybe<Array<Maybe<DetailsCard>>>;
+  fiatSellOrders?: Maybe<Array<Maybe<SellOrderPrice>>>;
   projectName?: Maybe<Scalars['String']>;
   image?: Maybe<CustomImage>;
   location?: Maybe<Scalars['String']>;
@@ -7298,6 +7299,29 @@ export type SdgSorting = {
   image?: Maybe<CustomImageSorting>;
 };
 
+export type SellOrderPrice = {
+  __typename?: 'SellOrderPrice';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  sellOrderId?: Maybe<Scalars['String']>;
+  /** price per credit in USD */
+  usdPrice?: Maybe<Scalars['Float']>;
+};
+
+export type SellOrderPriceFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  sellOrderId?: Maybe<StringFilter>;
+  usdPrice?: Maybe<FloatFilter>;
+};
+
+export type SellOrderPriceSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  sellOrderId?: Maybe<SortOrder>;
+  usdPrice?: Maybe<SortOrder>;
+};
+
 export type Seo = {
   __typename?: 'Seo';
   _key?: Maybe<Scalars['String']>;
@@ -9296,7 +9320,10 @@ export type ProjectByIdQuery = (
           & Pick<PrefinanceTimelineItem, 'date' | 'endDate' | 'currentStatus'>
         )> }
       )>>> }
-    )> }
+    )>, fiatSellOrders?: Maybe<Array<Maybe<(
+      { __typename?: 'SellOrderPrice' }
+      & Pick<SellOrderPrice, 'sellOrderId' | 'usdPrice'>
+    )>>> }
   )> }
 );
 
@@ -11343,6 +11370,10 @@ export const ProjectByIdDocument = gql`
         }
       }
       supportEnables
+    }
+    fiatSellOrders {
+      sellOrderId
+      usdPrice
     }
   }
 }

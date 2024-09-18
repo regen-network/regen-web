@@ -65,34 +65,34 @@ export const LeafIcon = ({ className }: IconProps): JSX.Element => {
         <path
           d="M17.2738 21.9539C24.8535 11.6243 12.6298 6.30246 12.6298 6.30246C7.38872 12.904 9.562 20.2079 17.2738 21.9539Z"
           stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M12.5594 6.60371C12.7558 11.0812 14.4264 20.8367 19.5381 24.039"
           stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M17.8721 10.6133L14.3111 15.8485"
           stroke="white"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M15.7061 8.30859L13.2745 12.043"
           stroke="white"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M19.4082 13.5332L15.8106 18.9055"
           stroke="white"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
       <defs>

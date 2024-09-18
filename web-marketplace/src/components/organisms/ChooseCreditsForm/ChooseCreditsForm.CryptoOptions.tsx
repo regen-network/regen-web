@@ -1,4 +1,3 @@
-import { useFormContext } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { cryptoOptions } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
@@ -10,9 +9,11 @@ import { Title } from 'web-components/src/components/typography/Title';
 export function CryptoOptions({
   retiring,
   handleCryptoPurchaseOptions,
+  tradableDisabled = false,
 }: {
   retiring: boolean;
   handleCryptoPurchaseOptions: () => void;
+  tradableDisabled?: boolean;
 }) {
   const { _ } = useLingui();
   return (
@@ -29,6 +30,7 @@ export function CryptoOptions({
       <RadioGroup className="gap-10">
         {cryptoOptions.map(({ label, description, linkTo, value }) => (
           <Radio
+            disabled={tradableDisabled && value === false}
             value={value}
             onChange={handleCryptoPurchaseOptions}
             selectedValue={retiring}

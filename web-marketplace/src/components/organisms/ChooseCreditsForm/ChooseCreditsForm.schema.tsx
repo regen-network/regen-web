@@ -23,7 +23,7 @@ export const createChooseCreditsFormSchema = ({
   return z.object({
     [CURRENCY_AMOUNT]: z.coerce
       .number()
-      .positive(POSITIVE_NUMBER)
+      .positive(i18n._(POSITIVE_NUMBER))
       .max(
         spendingCap,
         `${i18n._(MAX_AMOUNT)} ${spendingCap.toLocaleString(undefined, {
@@ -33,7 +33,7 @@ export const createChooseCreditsFormSchema = ({
       ),
     [CREDITS_AMOUNT]: z.coerce
       .number()
-      .positive(POSITIVE_NUMBER)
+      .positive(i18n._(POSITIVE_NUMBER))
       .max(creditsAvailable, `${i18n._(MAX_CREDITS)} ${creditsAvailable}`),
     [SELL_ORDERS]: z.array(
       z.object({

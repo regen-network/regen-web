@@ -28,7 +28,7 @@ export const getFormModel = ({
         name:
           paymentOption === PAYMENT_OPTIONS.CARD
             ? _(msg`Payment info`)
-            : _(msg`Choose info`),
+            : _(msg`Customer info`),
       },
       {
         id: 'agree-purchase',

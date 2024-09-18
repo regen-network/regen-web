@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useApolloClient } from '@apollo/client';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
@@ -32,18 +31,13 @@ import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/g
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
-import { getProjectByIdQuery as getOffChainProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
-import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
-import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
-import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
-import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { CREATE_POST_DISABLED_TOOLTIP_TEXT } from 'pages/Dashboard/MyProjects/MyProjects.constants';
@@ -77,8 +71,6 @@ import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   findSanityCreditClass,
   formatOtcCardData,
-  getIsOnChainId,
-  getIsUuid,
   getProjectGalleryPhotos,
   parseMedia,
   parseOffChainProject,
@@ -88,7 +80,6 @@ import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
 function ProjectDetails(): JSX.Element {
   const { _ } = useLingui();
   const theme = useTheme();
-  const { projectId } = useParams();
   const { ecocreditClient, dataClient } = useLedger();
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
@@ -99,7 +90,7 @@ function ProjectDetails(): JSX.Element {
     wallet,
     loginDisabled,
   } = useWallet();
-  const graphqlClient = useApolloClient();
+
   const { track } = useTracker();
   const location = useLocation();
   const navigate = useNavigate();
@@ -142,6 +133,8 @@ function ProjectDetails(): JSX.Element {
     projectsWithOrderData,
     onChainProjectId,
     offChainProject,
+    onChainCreditClassId,
+    creditClassOnChain,
   } = useGetProject();
 
   const slug =
@@ -185,18 +178,6 @@ function ProjectDetails(): JSX.Element {
 
   /* Credit class */
 
-  const onChainCreditClassId =
-    offChainProject?.creditClassByCreditClassId?.onChainId ??
-    onChainProjectId?.split('-')?.[0];
-  const { data: creditClassOnChain } = useQuery(
-    getClassQuery({
-      client: ecocreditClient,
-      request: {
-        classId: onChainCreditClassId ?? '',
-      },
-      enabled: !!ecocreditClient && !!onChainCreditClassId,
-    }),
-  );
   const creditClassMetadataRes = useQuery(
     getMetadataQuery({
       iri: creditClassOnChain?.class?.metadata,

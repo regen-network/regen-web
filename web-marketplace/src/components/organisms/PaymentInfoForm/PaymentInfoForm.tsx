@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useFormState } from 'react-hook-form';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, StripeElementsOptionsMode } from '@stripe/stripe-js';
 
@@ -53,6 +54,12 @@ export const PaymentInfoForm = ({
     },
     mode: 'onBlur',
   });
+  const { isValid, isSubmitting, errors } = useFormState({
+    control: form.control,
+  });
+  console.log('values', form.getValues());
+  console.log('isValid', isValid);
+  console.log('errors', errors);
 
   const stripePromise = useMemo(
     () =>

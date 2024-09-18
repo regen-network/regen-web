@@ -82,16 +82,20 @@ export const CurrencyInput = ({
           isFocused
             ? 'border-2 border-solid border-grey-500'
             : 'border border-solid border-grey-300'
-        } w-full sm:w-auto flex justify-start relative pr-10 sm:h-60 rounded-sm items-center pl-5`}
+        } ${
+          paymentOption === PAYMENT_OPTIONS.CARD ? 'pl-5' : ''
+        } w-full sm:w-auto flex justify-start relative sm:h-60 rounded-sm items-center`}
         customInputProps={{
           max: maxCurrencyAmount,
           min: 0,
-          step: '0.1',
+          step: '0.000001',
           'aria-label': 'Currency Input',
         }}
         sx={{
           '& .MuiInputBase-root': {
             border: 'none',
+            paddingRight: theme =>
+              paymentOption === PAYMENT_OPTIONS.CARD ? theme.spacing(5) : 0,
           },
           '& .custom-select .MuiSvgIcon-root:not(.denom-icon)': {
             width: '15px !important',
@@ -107,11 +111,8 @@ export const CurrencyInput = ({
             top: 'auto !important',
             position: 'relative !important',
           },
-          '& .MuiTypography-root': {
-            'min-width': '60px',
-          },
           '& .MuiInputAdornment-root': {
-            'padding-top': '5px',
+            paddingTop: '5px',
           },
         }}
         endAdornment={

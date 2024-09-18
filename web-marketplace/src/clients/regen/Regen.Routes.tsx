@@ -168,10 +168,9 @@ export const getRegenRoutes = ({
               queryClient: reactQueryClient,
               apolloClientFactory,
             })}
-          >
-            <Route path="buy" element={<BuyCredits />} />
-          </Route>
+          ></Route>
         </Route>
+        <Route path="project/:projectId/buy" element={<BuyCredits />} />
         <Route
           path="post/:iri"
           element={<Post />}

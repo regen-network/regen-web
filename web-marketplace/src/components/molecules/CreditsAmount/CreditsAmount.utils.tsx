@@ -8,13 +8,15 @@ export const getCreditsAvailablePerCurrency = (
   paymentOption: PaymentOptionsType,
   filteredCryptoSellOrders: Array<UISellOrderInfo> | undefined,
   cardSellOrders: Array<CardSellOrder>,
+  creditTypePrecision?: number | null,
 ) => {
   return paymentOption === PAYMENT_OPTIONS.CARD
     ? cardSellOrders.reduce((prev, cur) => prev + Number(cur.quantity), 0)
-    : filteredCryptoSellOrders?.reduce(
-        (prev, cur) => prev + Number(cur.quantity),
-        0,
-      ) || 0;
+    : filteredCryptoSellOrders?.reduce((prev, cur) => {
+        return parseFloat(
+          (prev + Number(cur.quantity)).toFixed(creditTypePrecision || 6),
+        );
+      }, 0) || 0;
 };
 
 export function getSpendingCap(

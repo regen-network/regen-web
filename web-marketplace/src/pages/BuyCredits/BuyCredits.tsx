@@ -66,6 +66,7 @@ export const BuyCredits = () => {
             formId={formModel.formId}
             steps={formModel.steps}
             initialValues={{}}
+            useLocalStorage={false}
           >
             <BuyCreditsForm
               setPaymentOption={setPaymentOption}

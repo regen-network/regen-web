@@ -103,6 +103,7 @@ export const BuyCreditsForm = ({
               throw new Error('Function not implemented.');
             }}
             retiring={retiring}
+            stripePublishableKey={import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY}
           />
         )}
         {activeStep === 2 && (

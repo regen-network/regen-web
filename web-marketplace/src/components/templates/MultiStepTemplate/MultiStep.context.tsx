@@ -2,7 +2,7 @@ import React from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
-import { useLocalStorage } from 'hooks';
+import { useStorage } from 'hooks';
 
 // TODO - persistence alternatives: component / localstorage / db
 // Instead of directly using the local storage hook here, we should use an
@@ -83,6 +83,7 @@ export type ProviderProps<T extends object> = {
   initialValues: T;
   steps: Step[];
   children?: JSX.Element | JSX.Element[];
+  useLocalStorage?: boolean;
 };
 
 export function MultiStepProvider<T extends object>({
@@ -90,13 +91,17 @@ export function MultiStepProvider<T extends object>({
   initialValues,
   steps,
   children,
+  useLocalStorage = true,
 }: React.PropsWithChildren<ProviderProps<T>>): JSX.Element {
   // we don't pass initialValues to localStorage
   // to avoid persist the initial empty data structure.
   // So initially, data (from storage) is `undefined` or
   // previously persisted data.
   // If undefined, then we return the initialValues
-  const { data, saveData, removeData } = useLocalStorage<FormData<T>>(formId);
+  const { data, saveData, removeData } = useStorage<FormData<T>>(
+    formId,
+    useLocalStorage,
+  );
 
   const maxAllowedStep = data?.maxAllowedStep || 0;
 

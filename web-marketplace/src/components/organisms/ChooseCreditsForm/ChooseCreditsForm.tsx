@@ -18,7 +18,7 @@ import { Loading } from 'web-components/src/components/loading';
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
@@ -231,7 +231,7 @@ export function ChooseCreditsForm({
         <div className="float-right pt-40">
           <PrevNextButtons
             saveDisabled={false} // use isValid
-            saveText={_(msg`next`)}
+            saveText={_(NEXT)}
             onPrev={() => {
               navigate(projectHref);
             }}

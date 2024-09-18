@@ -62,6 +62,11 @@ export const CreditsInput = ({
         sx={{
           '& .MuiInputBase-root': {
             border: 'none',
+            '& input': {
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            },
           },
         }}
         endAdornment={

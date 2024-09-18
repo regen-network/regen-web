@@ -43,8 +43,8 @@ export const BuyCreditsForm = ({
   creditTypeAbbrev,
   projectHref,
 }: Props) => {
-  const { data, activeStep, handleNext } = useMultiStep();
-
+  const { data, activeStep, handleSaveNext } = useMultiStep();
+  console.log('data', data);
   const cardDisabled = cardSellOrders.length === 0;
 
   const { marketplaceClient, ecocreditClient } = useLedger();
@@ -78,8 +78,7 @@ export const BuyCreditsForm = ({
             cardSellOrders={cardSellOrders}
             cryptoSellOrders={cryptoSellOrders}
             onSubmit={async (values: ChooseCreditsFormSchemaType) => {
-              // TODO save values
-              handleNext();
+              handleSaveNext(values);
             }}
             allowedDenoms={allowedDenomsData?.allowedDenoms}
             creditTypePrecision={creditTypeData?.creditType?.precision}

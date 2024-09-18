@@ -207,7 +207,7 @@ export const CreditsAmount = ({
         setMaxCreditsSelected={setMaxCreditsSelected}
         paymentOption={paymentOption}
       />
-      <div className="flex justify-between min-w-full flex-wrap sm:flex-nowrap gap-10 items-start">
+      <div className="flex justify-between min-w-full flex-wrap sm:flex-nowrap gap-10 sm:gap-0 items-start">
         <CurrencyInput
           maxCurrencyAmount={spendingCap}
           paymentOption={paymentOption}

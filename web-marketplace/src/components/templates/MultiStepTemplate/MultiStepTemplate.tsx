@@ -10,12 +10,14 @@ export function MultiStepTemplate<T extends object>({
   steps,
   initialValues,
   children,
+  useLocalStorage,
 }: MultiStepProps<T>): JSX.Element {
   return (
     <MultiStepProvider
       formId={formId}
       steps={steps}
       initialValues={initialValues}
+      useLocalStorage={useLocalStorage}
     >
       <StepperSection>{children}</StepperSection>
     </MultiStepProvider>

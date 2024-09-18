@@ -1,14 +1,17 @@
 import { useMemo } from 'react';
 import { useFormState } from 'react-hook-form';
+import { useLingui } from '@lingui/react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, StripeElementsOptionsMode } from '@stripe/stripe-js';
 
+import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
 
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import {
   CustomerInfo,
@@ -43,6 +46,9 @@ export const PaymentInfoForm = ({
   currency,
   retiring,
 }: PaymentInfoFormProps) => {
+  const { _ } = useLingui();
+  const { handleBack } = useMultiStep();
+
   const form = useZodForm({
     schema: paymentInfoFormSchema(paymentOption),
     defaultValues: {
@@ -126,6 +132,13 @@ export const PaymentInfoForm = ({
             />
           </Elements>
         )}
+        <div className="float-right pt-40">
+          <PrevNextButtons
+            saveDisabled={!isValid || isSubmitting}
+            saveText={_(NEXT)}
+            onPrev={handleBack}
+          />
+        </div>
       </div>
     </Form>
   );

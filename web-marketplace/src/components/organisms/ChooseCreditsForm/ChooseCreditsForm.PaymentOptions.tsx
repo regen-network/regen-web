@@ -26,7 +26,7 @@ function ChooseCreditButton({
     <label
       className={`block w-[138px] rounded-md px-[12px] py-10 font-extrabold text-xs font-[lato] shadow border-solid ${
         disabled
-          ? 'border-grey-300 text-brand-300 border-2 bg-grey-200 text-grey-400'
+          ? 'border-grey-300 border-2 bg-grey-200 !text-grey-400'
           : isChecked
           ? 'border-brand-300 text-brand-300 border-2 hover:cursor-default'
           : 'border-grey-300 border text-grey-500 filter grayscale hover:bg-grey-200 hover:cursor-pointer'
@@ -47,17 +47,17 @@ function ChooseCreditButton({
 }
 
 type Props = {
+  paymentOption: PaymentOptionsType;
   setPaymentOption: (option: PaymentOptionsType) => void;
   cardDisabled: boolean;
 };
-export const PaymentOptions = ({ setPaymentOption, cardDisabled }: Props) => {
-  const [selectedButton, setSelectedButton] = useState<PaymentOptionsType>(
-    PAYMENT_OPTIONS.CARD,
-  );
-
+export const PaymentOptions = ({
+  paymentOption,
+  setPaymentOption,
+  cardDisabled,
+}: Props) => {
   const handleButtonClick = (e: ChangeEvent<HTMLInputElement>) => {
     const paymentType = e.target.value as PaymentOptionsType;
-    setSelectedButton(paymentType);
     setPaymentOption(paymentType);
   };
 
@@ -65,29 +65,25 @@ export const PaymentOptions = ({ setPaymentOption, cardDisabled }: Props) => {
     <div className="flex space-x-4 gap-10">
       <ChooseCreditButton
         value={PAYMENT_OPTIONS.CARD}
-        isChecked={selectedButton === PAYMENT_OPTIONS.CARD}
+        isChecked={paymentOption === PAYMENT_OPTIONS.CARD}
         onChange={handleButtonClick}
         disabled={cardDisabled}
       >
-        <CreditCardIcon />
-        <div className="lowercase≈">
-          <span className="capitalize">
-            <Trans>buy</Trans>
-          </span>{' '}
-          <Trans>with credit card</Trans>
+        <CreditCardIcon
+          className={cardDisabled ? 'text-grey-300' : 'text-inherit'}
+        />
+        <div>
+          <Trans>Buy with credit card</Trans>
         </div>
       </ChooseCreditButton>
       <ChooseCreditButton
         value={PAYMENT_OPTIONS.CRYPTO}
-        isChecked={selectedButton === PAYMENT_OPTIONS.CRYPTO}
+        isChecked={paymentOption === PAYMENT_OPTIONS.CRYPTO}
         onChange={handleButtonClick}
       >
         <CryptoIcon />
-        <div className="lowercase">
-          <span className="capitalize">
-            <Trans>buy</Trans>
-          </span>{' '}
-          <Trans>with crypto</Trans>
+        <div>
+          <Trans>Buy with crypto</Trans>
         </div>
       </ChooseCreditButton>
     </div>

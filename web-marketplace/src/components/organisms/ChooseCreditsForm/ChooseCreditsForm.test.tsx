@@ -21,6 +21,7 @@ describe('ChooseCreditsForm', () => {
     cryptoSellOrders,
     cardDisabled: false,
     allowedDenoms,
+    projectHref: '/lorem',
   };
   it('renders without crashing', () => {
     render(<ChooseCreditsForm {...props} />);

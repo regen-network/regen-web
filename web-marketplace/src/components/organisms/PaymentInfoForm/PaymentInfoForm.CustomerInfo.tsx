@@ -10,6 +10,7 @@ import { Body, Title } from 'web-components/src/components/typography';
 
 import { Wallet } from 'lib/wallet/wallet';
 
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 
 import { PaymentInfoFormSchemaType } from './PaymentInfoForm.schema';

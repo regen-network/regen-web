@@ -1,5 +1,7 @@
+import { BottomTextMapping } from './CreditRetireForm';
+
 /* eslint-disable lingui/no-unlocalized-strings */
-export const bottomTextMapping = {
+export const bottomTextMapping: BottomTextMapping = {
   title: 'Retirement reason',
   tooltip:
     'You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. "Retired on behalf of ABC Organization")',
@@ -12,4 +14,6 @@ export const bottomTextMapping = {
   countryLabel: 'Country',
   stateLabel: 'State / Region',
   postalCodeLabel: 'Postal Code',
+  locationStatePlaceholderLabel: 'State / Region',
+  countryLabelPlaceholder: 'Country',
 };

@@ -22,8 +22,6 @@ import type { CreditClassValues } from './CreditClassForm';
 import { CreditClassForm } from './CreditClassForm';
 import { CreditClassReview } from './CreditClassReview';
 
-import RotationalGrazing from 'assets/rotational-grazing.png';
-
 export const getCreateCreditClassSteps = (_: TranslatorType) => [
   {
     id: 'create-credit-class',

@@ -16,7 +16,7 @@ interface NavigationProps {
     root?: string;
     listItem?: string;
   };
-  categories: string[];
+  categories: { label: string; value: string }[];
   onClick: (c: string) => void;
   category?: string;
   showIcon?: boolean;
@@ -102,18 +102,18 @@ const Navigation = ({
 
   return (
     <StyledList className={cx(classes?.root, className)}>
-      {categories.map((name, i) => {
-        const selected = !!category && category === name;
+      {categories.map(({ label, value }, i) => {
+        const selected = !!category && category === value;
         return (
           <StyledListItemButton
             key={i}
             className={cn(classes?.listItem)}
             selected={selected}
             onClick={() => {
-              onClick(name);
+              onClick(value);
             }}
           >
-            {name}
+            {label}
             <Box
               display={{
                 xs: 'block',

@@ -1,4 +1,5 @@
 import { isValidElement } from 'react';
+import { msg } from '@lingui/macro';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
@@ -64,8 +65,8 @@ export const getIsOptionEqualToValue = (
   value: OptionType,
 ) => isProfile(option) && isProfile(value) && option.id === value.id;
 
-export const getOptionLabel = (option: OptionType) =>
-  isProfile(option) ? option.name || 'Unnamed' : '';
+export const getOptionLabel = (_: TranslatorType) => (option: OptionType) =>
+  isProfile(option) ? option.name || _(msg`Unnamed`) : '';
 
 export const groupOptions = (
   _: TranslatorType,

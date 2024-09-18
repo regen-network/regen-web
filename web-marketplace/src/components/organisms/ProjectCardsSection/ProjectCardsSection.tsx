@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -9,7 +10,12 @@ import Section from 'web-components/src/components/section';
 
 import { Maybe, Scalars } from 'generated/sanity-graphql';
 import { client as sanityClient } from 'lib/clients/sanity';
-import { DRAFT_TEXT } from 'lib/constants/shared.constants';
+import {
+  DRAFT_TEXT,
+  getProjectCardBodyTextMapping,
+  getProjectCardButtonMapping,
+  getProjectCardPurchaseDetailsTitleMapping,
+} from 'lib/constants/shared.constants';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -51,7 +57,12 @@ export function ProjectCardsSection({
     sanitySoldOutProjects,
   });
   const navigate = useNavigate();
-
+  const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
+  const purchaseDetailsTitles = useMemo(
+    () => getProjectCardPurchaseDetailsTitleMapping(_),
+    [_],
+  );
+  const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
   return (
     <Section
       title={title ?? _(msg`Projects`)}
@@ -70,6 +81,7 @@ export function ProjectCardsSection({
             const href = `/project/${project.slug ?? project.id}`;
             return (
               <ProjectCard
+                buttons={buttons}
                 key={project.id}
                 id={project.id}
                 name={project.name}
@@ -96,6 +108,8 @@ export function ProjectCardsSection({
                 projectPrefinancing={project.projectPrefinancing}
                 offChain={project.offChain}
                 draftText={_(DRAFT_TEXT)}
+                bodyTexts={bodyTexts}
+                purchaseDetailsTitles={purchaseDetailsTitles}
               />
             );
           })}

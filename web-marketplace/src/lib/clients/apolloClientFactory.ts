@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { ApolloClient, ApolloClientOptions } from '@apollo/client';
 
 type ClientType = ApolloClient<unknown> | null;

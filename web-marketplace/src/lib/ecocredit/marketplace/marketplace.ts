@@ -22,6 +22,7 @@ export const queryAllowedDenoms = async ({
     return await client.AllowedDenoms(request);
   } catch (err) {
     throw new Error(
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       `Error in the AllowedDenoms query of the ledger ecocredit/marketplace module: ${err}`,
     );
   }
@@ -41,6 +42,7 @@ export const querySellOrders = async ({
     return await client.SellOrders(request);
   } catch (err) {
     throw new Error(
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       `Error in the SellOrders query of the ledger ecocredit/marketplace module: ${err}`,
     );
   }

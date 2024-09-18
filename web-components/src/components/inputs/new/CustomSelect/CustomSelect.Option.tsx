@@ -3,10 +3,15 @@ import { Option } from 'web-components/src/components/inputs/new/CustomSelect/Cu
 
 type SelectOptionProps = {
   option: Option;
+  ariaLabel: string;
   handleSelect: (currency: CryptoCurrencies | string) => void;
 };
 
-export const SelectOption = ({ option, handleSelect }: SelectOptionProps) => {
+export const SelectOption = ({
+  option,
+  ariaLabel,
+  handleSelect,
+}: SelectOptionProps) => {
   const handleClick = () => {
     if (option?.value && 'value' in option) {
       handleSelect(option.value);
@@ -17,7 +22,7 @@ export const SelectOption = ({ option, handleSelect }: SelectOptionProps) => {
 
   return (
     <button
-      aria-label="Select option"
+      aria-label={ariaLabel}
       className="w-full py-5 px-5 text-sm border-t-grey-0 border-r-grey-0 border-l-grey-0 border-b-grey-0 border-solid items-end bg-grey-0 hover:border-b-brand-300"
       role="menuitem"
       onClick={handleClick}

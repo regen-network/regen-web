@@ -34,7 +34,9 @@ import { useLedger } from 'ledger';
 import { client } from 'lib/clients/sanity';
 import {
   COUNTRY_LABEL,
+  COUNTRY_LABEL_PLACEHOLDER,
   INVALID_MEMO_LENGTH,
+  LOCATION_STATE_PLACEHOLDER_LABEL,
   REQUIREMENT_AGREEMENT,
   STATE_LABEL,
   SUBMIT_ERRORS,
@@ -348,6 +350,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                                   baseDenom: selectedSellOrder?.askBaseDenom,
                                 }),
                                 userBalance,
+                                _,
                               })}
                             />
                           </div>
@@ -544,7 +547,12 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                               />
                             }
                           >
-                            <LocationCountryField label={_(COUNTRY_LABEL)} />
+                            <LocationCountryField
+                              countryLabelPlaceholder={_(
+                                COUNTRY_LABEL_PLACEHOLDER,
+                              )}
+                              label={_(COUNTRY_LABEL)}
+                            />
                           </Suspense>
                         </Grid>
                         <Grid
@@ -564,6 +572,9 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                             <LocationStateField
                               label={_(STATE_LABEL)}
                               country={values.country}
+                              placeholderLabel={_(
+                                LOCATION_STATE_PLACEHOLDER_LABEL,
+                              )}
                               optional
                             />
                           </Suspense>

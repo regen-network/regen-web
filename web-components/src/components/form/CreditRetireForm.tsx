@@ -115,21 +115,24 @@ const sxs = {
   } as SxProps,
 };
 
+export type BottomTextMapping = {
+  title: string;
+  tooltip: string;
+  reasonLabel: string;
+  locationTitle: string;
+  locationTooltip: string;
+  locationDescription: string;
+  countryLabel: string;
+  stateLabel: string;
+  postalCodeLabel: string;
+  locationStatePlaceholderLabel: string;
+  countryLabelPlaceholder: string;
+};
 export interface BottomCreditRetireFieldsProps {
   mapboxToken: string;
   arrayPrefix?: string;
   arrayIndex?: number;
-  bottomTextMapping: {
-    title: string;
-    tooltip: string;
-    reasonLabel: string;
-    locationTitle: string;
-    locationTooltip: string;
-    locationDescription: string;
-    countryLabel: string;
-    stateLabel: string;
-    postalCodeLabel: string;
-  };
+  bottomTextMapping: BottomTextMapping;
 }
 
 export const BottomCreditRetireFields: React.FC<
@@ -156,6 +159,8 @@ export const BottomCreditRetireFields: React.FC<
     reasonLabel,
     title,
     tooltip,
+    locationStatePlaceholderLabel,
+    countryLabelPlaceholder,
   } = bottomTextMapping;
 
   useEffect(() => {
@@ -233,6 +238,7 @@ export const BottomCreditRetireFields: React.FC<
               exclude
               name={`${arrayPrefix}country`}
               label={countryLabel}
+              countryLabelPlaceholder={countryLabelPlaceholder}
             />
           </Suspense>
         </Grid>
@@ -249,6 +255,7 @@ export const BottomCreditRetireFields: React.FC<
             <LocationStateField
               label={stateLabel}
               country={country}
+              placeholderLabel={locationStatePlaceholderLabel}
               optional={!postalCode}
               name={`${arrayPrefix}stateProvince`}
               initialSelection={stateProvince}

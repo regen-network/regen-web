@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { msg, Trans } from '@lingui/macro';
@@ -8,13 +8,16 @@ import { useQuery } from '@tanstack/react-query';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
-import { VIEW_PROJECT_BUTTON } from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 import { CardItem } from 'web-components/src/components/modal/TxModal';
 import { Body, Label, Title } from 'web-components/src/components/typography';
 import { truncateHash } from 'web-components/src/utils/truncate';
 
-import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
+import {
+  getProjectCardButtonMapping,
+  SEE_LESS,
+  SEE_MORE,
+} from 'lib/constants/shared.constants';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import { Link } from '../../components/atoms';
@@ -35,6 +38,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
       id: projectId,
     }),
   );
+  const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
 
   const project = data?.data?.projectById;
   const projectOnChainId = project?.onChainId;
@@ -131,7 +135,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
           role="link"
           onClick={() => navigate(`/project/${currentProjectId}`)}
         >
-          {VIEW_PROJECT_BUTTON.text}
+          {buttons.view.text}
         </OutlinedButton>
       </Box>
     </OnboardingFormTemplate>

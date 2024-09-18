@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
@@ -14,7 +14,10 @@ import {
 import { formatDate, formatNumber } from 'web-components/src/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
-import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
+import {
+  ACTIONS_TABLE_ACTIONS_TEXT,
+  getLabelDisplayedRows,
+} from 'lib/constants/shared.constants';
 
 import { BasketBatchInfoWithBalance } from 'pages/BasketDetails/utils/normalizeBasketEcocredits';
 import { BreakText, GreyText, Link } from 'components/atoms';
@@ -41,6 +44,16 @@ export const BasketEcocreditsTable: React.FC<
 }) => {
   const { _ } = useLingui();
 
+  const labelDisplayedRows = useMemo(
+    () =>
+      getLabelDisplayedRows({
+        _,
+        isIgnoreOffset,
+        rowsLength: basketCredits.length,
+      }),
+    [_, basketCredits.length, isIgnoreOffset],
+  );
+
   if (!basketCredits?.length) {
     return <NoCredits title={_(msg`No ecocredits to display`)} />;
   }
@@ -48,11 +61,12 @@ export const BasketEcocreditsTable: React.FC<
   return (
     <ActionsTable
       tableLabel={_(msg`basket ecocredits table`)}
+      actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
+      labelDisplayedRows={labelDisplayedRows}
       renderActionButtons={renderActionButtons}
       onTableChange={onTableChange}
       initialPaginationParams={initialPaginationParams}
       isIgnoreOffset={isIgnoreOffset}
-      actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
       headerRows={[
         <Box sx={{ minWidth: '8rem' }}>
           <Trans>Project</Trans>

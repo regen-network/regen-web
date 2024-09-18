@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { OrderSummaryCard } from './OrderSummaryCard';
+import { orderSummaryCommonProps } from './OrderSummaryCard.mock';
 
 export default {
   title: 'Cards/OrderSummaryCard',
@@ -23,6 +24,7 @@ Default.args = {
     credits: 50,
     currency: CURRENCIES.usd,
   },
+  ...orderSummaryCommonProps,
 };
 
 export const WithPaymentDetails: Story = {
@@ -43,6 +45,7 @@ WithPaymentDetails.args = {
     type: 'visa',
     cardNumber: '1234 5678 9012 3456',
   },
+  ...orderSummaryCommonProps,
 };
 
 export const WithPrefinanceProject: Story = {
@@ -63,6 +66,7 @@ WithPrefinanceProject.args = {
     type: 'visa',
     cardNumber: '1234 5678 9012 3456',
   },
+  ...orderSummaryCommonProps,
 };
 
 export const WithCrypto: Story = {
@@ -78,4 +82,5 @@ WithCrypto.args = {
     credits: 50,
     currency: CURRENCIES.uregen,
   },
+  ...orderSummaryCommonProps,
 };

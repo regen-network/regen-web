@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { styled } from '@mui/material';
 import Button from '@mui/material/Button';
 

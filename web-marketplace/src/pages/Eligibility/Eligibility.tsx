@@ -13,10 +13,6 @@ const Eligibility: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
   const navigate = useNavigate();
 
-  async function saveAndExit(): Promise<void> {
-    // TODO: functionality
-  }
-
   function next(): void {
     navigate('/project-plans/eligibility/additionality');
   }

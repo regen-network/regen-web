@@ -6,7 +6,9 @@ interface EditableInputProps {
   value: number;
   onChange: (amount: number) => void;
   name?: string;
-  ariaLabel?: string;
+  inputAriaLabel: string;
+  editButtonAriaLabel: string;
+  updateButtonText: string;
   className?: string;
 }
 
@@ -14,7 +16,9 @@ export const EditableInput = ({
   value,
   onChange,
   name = '',
-  ariaLabel = 'Editable text input',
+  inputAriaLabel,
+  editButtonAriaLabel,
+  updateButtonText,
   className = '',
 }: EditableInputProps) => {
   const [editable, setEditable] = useState(false);
@@ -57,22 +61,25 @@ export const EditableInput = ({
             value={amount}
             onChange={handleOnChange}
             onKeyDown={handleKeyDown}
-            aria-label={ariaLabel}
+            aria-label={inputAriaLabel}
             name={name}
             autoFocus
           />
           <TextButton
             className="lowercase text-[12px] mt-5 sm:mt-0"
             onClick={handleOnUpdate}
-            aria-label="update"
+            aria-label={updateButtonText}
           >
-            update
+            {updateButtonText}
           </TextButton>
         </div>
       ) : (
         <div className="flex justify-between h-[47px] items-center">
           <span>{amount}</span>
-          <EditButtonIcon onClick={toggleEditable} ariaLabel="Edit" />
+          <EditButtonIcon
+            onClick={toggleEditable}
+            ariaLabel={editButtonAriaLabel}
+          />
         </div>
       )}
     </>

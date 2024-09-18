@@ -22,7 +22,10 @@ import { truncateHash } from 'web-components/src/utils/truncate';
 import type { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
-import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
+import {
+  ACTIONS_TABLE_ACTIONS_TEXT,
+  getLabelDisplayedRows,
+} from 'lib/constants/shared.constants';
 
 import { AccountLink, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
@@ -83,6 +86,16 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
 
   const someTx = creditBatches?.some(batch => batch.txhash);
 
+  const labelDisplayedRows = useMemo(
+    () =>
+      getLabelDisplayedRows({
+        _,
+        isIgnoreOffset,
+        rowsLength: creditBatches?.length ?? 0,
+      }),
+    [_, isIgnoreOffset, creditBatches?.length],
+  );
+
   if (!someTx) {
     columnsToShow = columnsToShow.filter(column => column.id !== 'txhash');
   }
@@ -130,91 +143,94 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
       initialPaginationParams={initialPaginationParams}
       isIgnoreOffset={isIgnoreOffset}
       sx={sx}
-      rows={creditBatches.map(batch => {
-        /* eslint-disable react/jsx-key */
-        let result = [];
-        if (someTx) {
+      rows={
+        creditBatches?.map(batch => {
+          /* eslint-disable react/jsx-key */
+          let result = [];
+          if (someTx) {
+            result.push(
+              <Link href={getHashUrl(batch.txhash)}>
+                {truncateHash(batch.txhash)}
+              </Link>,
+            );
+          }
+
           result.push(
-            <Link href={getHashUrl(batch.txhash)}>
-              {truncateHash(batch.txhash)}
+            <WithLoader isLoading={!batch.projectName} variant="skeleton">
+              <Link
+                href={`/project/${batch?.projectId}`}
+                sx={tableStyles.ellipsisColumn}
+              >
+                {batch?.projectName}
+              </Link>
+            </WithLoader>,
+            <WithLoader
+              isLoading={!batch.classId}
+              variant="skeleton"
+              key="classId"
+            >
+              <Link
+                href={`/credit-classes/${batch.classId}`}
+                sx={tableStyles.ellipsisContentColumn}
+              >
+                <BlockContent content={batch.className} />
+              </Link>
+            </WithLoader>,
+            <Link
+              className={classes.noWrap}
+              href={`/credit-batches/${batch.denom}`}
+            >
+              {batch.denom}
             </Link>,
-          );
-        }
-
-        result.push(
-          <WithLoader isLoading={!batch.projectName} variant="skeleton">
-            <Link
-              href={`/project/${batch?.projectId}`}
-              sx={tableStyles.ellipsisColumn}
+            <AccountLink address={batch.issuer} />,
+            <WithLoader isLoading={!batch.tradableAmount} variant="skeleton">
+              <Box>
+                {formatNumber({
+                  num: batch.tradableAmount,
+                  ...quantityFormatNumberOptions,
+                })}
+              </Box>
+            </WithLoader>,
+            <WithLoader isLoading={!batch.retiredAmount} variant="skeleton">
+              <Box>
+                {formatNumber({
+                  num: batch.retiredAmount,
+                  ...quantityFormatNumberOptions,
+                })}
+              </Box>
+            </WithLoader>,
+            <WithLoader isLoading={!batch.cancelledAmount} variant="skeleton">
+              <Box>
+                {formatNumber({
+                  num: batch.cancelledAmount,
+                  ...quantityFormatNumberOptions,
+                })}
+              </Box>
+            </WithLoader>,
+            <Box className={classes.noWrap}>
+              {formatDate(batch.startDate as Date, undefined, true)}
+            </Box>,
+            <Box className={classes.noWrap}>
+              {formatDate(batch.endDate as Date, undefined, true)}
+            </Box>,
+            <WithLoader
+              key="projectLocation"
+              isLoading={!batch.projectLocation}
+              variant="skeleton"
             >
-              {batch?.projectName}
-            </Link>
-          </WithLoader>,
-          <WithLoader
-            isLoading={!batch.classId}
-            variant="skeleton"
-            key="classId"
-          >
-            <Link
-              href={`/credit-classes/${batch.classId}`}
-              sx={tableStyles.ellipsisContentColumn}
-            >
-              <BlockContent content={batch.className} />
-            </Link>
-          </WithLoader>,
-          <Link
-            className={classes.noWrap}
-            href={`/credit-batches/${batch.denom}`}
-          >
-            {batch.denom}
-          </Link>,
-          <AccountLink address={batch.issuer} />,
-          <WithLoader isLoading={!batch.tradableAmount} variant="skeleton">
-            <Box>
-              {formatNumber({
-                num: batch.tradableAmount,
-                ...quantityFormatNumberOptions,
-              })}
-            </Box>
-          </WithLoader>,
-          <WithLoader isLoading={!batch.retiredAmount} variant="skeleton">
-            <Box>
-              {formatNumber({
-                num: batch.retiredAmount,
-                ...quantityFormatNumberOptions,
-              })}
-            </Box>
-          </WithLoader>,
-          <WithLoader isLoading={!batch.cancelledAmount} variant="skeleton">
-            <Box>
-              {formatNumber({
-                num: batch.cancelledAmount,
-                ...quantityFormatNumberOptions,
-              })}
-            </Box>
-          </WithLoader>,
-          <Box className={classes.noWrap}>
-            {formatDate(batch.startDate as Date, undefined, true)}
-          </Box>,
-          <Box className={classes.noWrap}>
-            {formatDate(batch.endDate as Date, undefined, true)}
-          </Box>,
-          <WithLoader
-            key="projectLocation"
-            isLoading={!batch.projectLocation}
-            variant="skeleton"
-          >
-            <Box className={classes.noWrap}>{batch.projectLocation}</Box>
-          </WithLoader>,
-        );
-
-        return result.filter(item => {
-          return (
-            !(creditClassId && item?.key === 'classId') &&
-            !filteredColumns?.includes(String(item?.key))
+              <Box className={classes.noWrap}>{batch.projectLocation}</Box>
+            </WithLoader>,
           );
-        });
-      })}
+
+          return result.filter(item => {
+            return (
+              !(creditClassId && item?.key === 'classId') &&
+              !filteredColumns?.includes(String(item?.key))
+            );
+          });
+        }) ?? []
+      }
+      labelDisplayedRows={labelDisplayedRows}
       /* eslint-enable react/jsx-key */
     />
   );

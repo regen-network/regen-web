@@ -68,6 +68,7 @@ export const AuthApolloProvider = ({
   };
 
   const errorLink = onError(({ operation, networkError, forward }) => {
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     if (networkError && networkError.message.includes('status code 403')) {
       const observable = new Observable<FetchResult<Record<string, any>>>(
         observer => {

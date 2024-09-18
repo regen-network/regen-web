@@ -6,15 +6,10 @@ import { Body, Subtitle } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import {
-  AVG_PRICE_LABEL,
-  CREDITS_AVAILABLE,
-  ERROR_CARD_PRICE,
-  ESTIMATED_ISSUANCE,
-  ESTIMATED_ISSUANCE_TOOLTIP,
-  PRICE,
-  SOLD_OUT,
-} from './ProjectCard.constants';
-import { ProjectPrefinancing, PurchaseInfo } from './ProjectCard.types';
+  ProjectCardBodyTextsMapping,
+  ProjectPrefinancing,
+  PurchaseInfo,
+} from './ProjectCard.types';
 
 type Props = {
   purchaseInfo?: PurchaseInfo;
@@ -23,6 +18,7 @@ type Props = {
   creditsTooltip?: string;
   sx?: SxProps<Theme>;
   projectPrefinancing?: ProjectPrefinancing;
+  bodyTexts: ProjectCardBodyTextsMapping;
 };
 
 export const CreditPrice = ({
@@ -31,6 +27,7 @@ export const CreditPrice = ({
   creditsTooltip,
   isSoldOut,
   projectPrefinancing,
+  bodyTexts,
   sx,
 }: Props) => {
   const avgPricePerTonLabel = purchaseInfo?.sellInfo?.avgPricePerTonLabel;
@@ -58,7 +55,7 @@ export const CreditPrice = ({
               textTransform: 'uppercase',
             }}
           >
-            {isPrefinanceProject ? PRICE : AVG_PRICE_LABEL}
+            {isPrefinanceProject ? bodyTexts.price : bodyTexts.avgPriceLabel}
           </Subtitle>
           {priceTooltip && (
             <InfoTooltipWithIcon
@@ -83,7 +80,7 @@ export const CreditPrice = ({
             }}
           >
             {purchaseInfo?.sellInfo
-              ? avgPricePerTonLabel ?? ERROR_CARD_PRICE
+              ? avgPricePerTonLabel ?? bodyTexts.errorCardPrice
               : projectPrefinancing?.price ?? '-'}
           </Body>
         </Box>
@@ -100,11 +97,13 @@ export const CreditPrice = ({
               textTransform: 'uppercase',
             }}
           >
-            {isPrefinanceProject ? ESTIMATED_ISSUANCE : CREDITS_AVAILABLE}
+            {isPrefinanceProject
+              ? bodyTexts.estimatedIssuance
+              : bodyTexts.creditsAvailable}
           </Subtitle>
           {isPrefinanceProject && (
             <InfoTooltipWithIcon
-              title={ESTIMATED_ISSUANCE_TOOLTIP}
+              title={bodyTexts.estimatedIssuanceTooltip}
               sx={{ width: 20, height: 20 }}
               outlined
             />
@@ -121,13 +120,15 @@ export const CreditPrice = ({
           }}
         >
           {isSoldOut && !isPrefinanceProject ? (
-            <GradientBadge label={SOLD_OUT} />
+            <GradientBadge label={bodyTexts.soldOut} />
           ) : (
             <>
               {purchaseInfo?.sellInfo?.creditsAvailable ??
                 projectPrefinancing?.estimatedIssuance ??
                 '0'}
-              {isSoldOut && <GradientBadge className="ml-5" label={SOLD_OUT} />}
+              {isSoldOut && (
+                <GradientBadge className="ml-5" label={bodyTexts.soldOut} />
+              )}
             </>
           )}
           {creditsTooltip && (

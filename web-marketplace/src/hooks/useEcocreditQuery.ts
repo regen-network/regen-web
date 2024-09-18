@@ -191,6 +191,7 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
       default:
         setError(
           new Error(
+            // eslint-disable-next-line lingui/no-unlocalized-strings
             'You need to provide a valid ecocredit query name (ie. batchInfo)',
           ),
         );

@@ -80,7 +80,6 @@ const ProjectCreate = lazy(() => import('../../pages/ProjectCreate'));
 const ProjectFinished = lazy(() => import('../../pages/ProjectFinished'));
 const ProjectLocation = lazy(() => import('../../pages/ProjectLocation'));
 const ProjectReview = lazy(() => import('../../pages/ProjectReview'));
-const Roles = lazy(() => import('../../pages/Roles'));
 const VerifyEmail = lazy(() => import('../../pages/VerifyEmail'));
 const ProjectEdit = lazy(() => import('../../pages/ProjectEdit'));
 const Activity = lazy(() => import('../../pages/Activity'));

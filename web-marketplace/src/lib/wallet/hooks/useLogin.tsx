@@ -89,7 +89,15 @@ export const useLogin = ({
         setError(e);
       }
     },
-    [signArbitrary, token, retryCsrfRequest, reactQueryClient, setError, track],
+    [
+      signArbitrary,
+      token,
+      logout,
+      retryCsrfRequest,
+      track,
+      reactQueryClient,
+      setError,
+    ],
   );
 
   return login;

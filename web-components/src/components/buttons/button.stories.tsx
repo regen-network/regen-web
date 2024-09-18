@@ -110,7 +110,11 @@ export const saveButton = {
 export const setMaxButton = {
   render: () => (
     <>
-      <SetMaxButton onClick={() => {}} />
+      <SetMaxButton
+        onClick={() => {}}
+        ariaLabel="Set max"
+        buttonText="Set max"
+      />
     </>
   ),
 };

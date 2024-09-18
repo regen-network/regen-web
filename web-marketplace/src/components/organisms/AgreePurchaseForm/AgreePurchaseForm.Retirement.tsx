@@ -12,7 +12,9 @@ import { Body, Title } from 'web-components/src/components/typography';
 
 import {
   COUNTRY_LABEL,
+  COUNTRY_LABEL_PLACEHOLDER,
   EMPTY_OPTION_TEXT,
+  LOCATION_STATE_PLACEHOLDER_LABEL,
   STATE_LABEL,
 } from 'lib/constants/shared.constants';
 
@@ -109,6 +111,7 @@ export const Retirement = () => {
               }
             >
               <LocationCountryField
+                countryLabelPlaceholder={_(COUNTRY_LABEL_PLACEHOLDER)}
                 label={_(COUNTRY_LABEL)}
                 emptyOptionText={_(EMPTY_OPTION_TEXT)}
                 exclude
@@ -128,6 +131,7 @@ export const Retirement = () => {
               }
             >
               <LocationStateField
+                placeholderLabel={_(LOCATION_STATE_PLACEHOLDER_LABEL)}
                 label={_(STATE_LABEL)}
                 emptyOptionText={_(EMPTY_OPTION_TEXT)}
                 className="sm:mt-0"

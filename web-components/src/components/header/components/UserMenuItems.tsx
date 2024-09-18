@@ -20,7 +20,9 @@ interface UserMenuItemsProps extends HeaderMenuItemBase {
 const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
   nameOrAddress,
   avatar,
+  avatarAlt,
   disconnect,
+  logoutText,
   pathname,
   linkComponent,
   userMenuItems,
@@ -40,7 +42,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
                 sx={{
                   mr: 2.75,
                 }}
-                alt="default avatar"
+                alt={avatarAlt}
                 src={avatar}
               />
               <span className="truncate">{nameOrAddress}</span>
@@ -57,7 +59,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
               onClick={disconnect}
               className="text-grey-400 pl-[18px]"
             >
-              Log out
+              {logoutText}
             </Body>
           </div>
         ),

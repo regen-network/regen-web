@@ -13,6 +13,7 @@ import TwitterIcon from './social/TwitterIcon';
 
 interface ShareIconsProps {
   url: string;
+  copySuccessText: string;
   twitterShare?: string;
   telegramShare?: string;
   xsSize?: string | number;
@@ -61,6 +62,7 @@ export default function ShareIcons({
   twitterShare = '',
   telegramShare = '',
   xsSize,
+  copySuccessText,
 }: ShareIconsProps): JSX.Element {
   const theme = useTheme();
   const { classes } = useStyles({ xsSize });
@@ -134,7 +136,7 @@ export default function ShareIcons({
           </div>
         </Grid>
       </Grid>
-      {copied && <Banner text="Link copied to your clipboard" />}
+      {copied && <Banner text={copySuccessText} />}
     </>
   );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { StatCardType } from '../../../components/molecules/StatCard/StatCard.types';
 
 export const statCardsMock: StatCardType[] = [

@@ -10,7 +10,9 @@ describe('EditableInput', () => {
       <EditableInput
         value={100}
         onChange={onChangeMock}
-        ariaLabel="testEditableInput"
+        inputAriaLabel="testEditableInput"
+        editButtonAriaLabel="Edit"
+        updateButtonText="Update"
       />,
     );
     const amount = screen.getByText('100');
@@ -28,7 +30,9 @@ describe('EditableInput', () => {
       <EditableInput
         value={100}
         onChange={onChangeMock}
-        ariaLabel="testEditableInput"
+        inputAriaLabel="testEditableInput"
+        editButtonAriaLabel="Edit"
+        updateButtonText="Update"
       />,
     );
     const editButton = screen.getByRole('button', {
@@ -52,7 +56,9 @@ describe('EditableInput', () => {
       <EditableInput
         value={100}
         onChange={onChangeMock}
-        ariaLabel="testEditableInput"
+        inputAriaLabel="testEditableInput"
+        editButtonAriaLabel="Edit"
+        updateButtonText="Update"
       />,
     );
 

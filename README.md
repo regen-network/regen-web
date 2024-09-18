@@ -18,9 +18,12 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
     - [Storybook](#storybook)
     - [Website](#website)
   - [Testing](#testing)
+    - [- Running tests](#--running-tests)
+    - [- Writing tests](#--writing-tests)
   - [Code style](#code-style)
   - [i18n](#i18n)
     - [Important notes](#important-notes)
+    - [web-components](#web-components)
   - [Typography](#typography)
     - [Sizing guide](#sizing-guide)
   - [Netlify](#netlify)
@@ -59,7 +62,6 @@ bun install
 ## Environment variables
 
 Set variables in `.env` files in `web-marketplace/` and `web-storybook/` folders based on provided `.env.example` files.
-
 
 ## Development
 
@@ -136,26 +138,28 @@ bun run build-www
 ## Testing
 
 #### - Running tests
+
 We are using [Vitest](https://vitest.dev/) as a test runner.
 
-Tests can be run in the terminal with the following commands from the project root: 
+Tests can be run in the terminal with the following commands from the project root:
 
-* To run `web-marketplace` tests
+- To run `web-marketplace` tests
+
   ```sh
   bun run test-marketplace
   ```
 
-* To run `web-components` tests
+- To run `web-components` tests
   ```sh
   bun run test-components
   ```
-In both cases the test runner is launched in the interactive watch mode.
+  In both cases the test runner is launched in the interactive watch mode.
 
 #### - Writing tests
+
 When writing test in `web-marketplace` remember to import the methods from`'web-marketplace/test/test-utils'`, specially the `render` method, as it is a custom render that wraps components with the necessary providers.
 
 In `web-components`, methods should be imported directly from `'@testing-library/*'`
-
 
 ## Code style
 
@@ -206,6 +210,10 @@ Here's a vscode snippet to make string translation easier:
 
 `<Trans>` component should be imported from `@lingui/macro` most of the time. This component is used at compile-time.
 There is another `<Trans>` component in `@lingui/react` for [special cases](https://lingui.dev/tutorials/react-patterns#lazy-translations). This component is used at runtime.
+
+### web-components
+
+components in `web-components` should not use any i18n code in order to make them more generic and reusable.
 
 ## Typography
 

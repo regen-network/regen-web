@@ -14,6 +14,7 @@ import {
   TableBody,
   TableFooter,
   TableHead,
+  TablePaginationProps,
   TableRow,
 } from '@mui/material';
 
@@ -67,6 +68,7 @@ interface ActionsTableProps {
   sortCallbacks?: SortCallbacksType;
   isIgnoreOffset?: boolean;
   actionButtonsText: string;
+  labelDisplayedRows: TablePaginationProps['labelDisplayedRows'];
   sx?: {
     root?: SxProps<Theme>;
   };
@@ -76,12 +78,13 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   tableLabel,
   headerRows,
   rows,
-  renderActionButtons,
-  onTableChange,
   initialPaginationParams = DEFAULT_TABLE_PAGINATION_PARAMS,
   sortCallbacks = [],
   isIgnoreOffset = false,
   actionButtonsText,
+  renderActionButtons,
+  onTableChange,
+  labelDisplayedRows,
   sx,
 }) => {
   const {
@@ -237,14 +240,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
                   onChangeRowsPerPage={onChangeRowsPerPage}
                   count={initialPaginationParams?.count ?? rows.length}
                   page={page}
-                  labelDisplayedRows={({ from, to, count }) => {
-                    const displayedTo = isIgnoreOffset
-                      ? from + rows.length - 1
-                      : to;
-                    return `${from}–${displayedTo} of ${
-                      count !== -1 ? count : `more than ${to}`
-                    }`;
-                  }}
+                  labelDisplayedRows={labelDisplayedRows}
                   onPageChange={onPageChange}
                 />
               </TableRow>

@@ -12,7 +12,10 @@ import {
 } from 'web-components/src/components/table/ActionsTable';
 
 import { UseStateSetter } from 'types/react/use-state';
-import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
+import {
+  ACTIONS_TABLE_ACTIONS_TEXT,
+  getLabelDisplayedRows,
+} from 'lib/constants/shared.constants';
 
 import { NormalizedSellOrder } from '../../../pages/Marketplace/Storefront/Storefront.types';
 import { getSellOrdersRow } from './SellOrdersTable.config';
@@ -32,7 +35,14 @@ const SellOrdersTable = ({
   onTableChange,
 }: Props): JSX.Element => {
   const { _ } = useLingui();
-
+  const labelDisplayedRows = useMemo(
+    () =>
+      getLabelDisplayedRows({
+        _,
+        rowsLength: sellOrders?.length ?? 0,
+      }),
+    [_, sellOrders?.length],
+  );
   const hasSellOrders = sellOrders.length > 0;
   const sellOrdersRow = useMemo(() => getSellOrdersRow(_), [_]);
   return (
@@ -40,6 +50,7 @@ const SellOrdersTable = ({
       {hasSellOrders && (
         <ActionsTable
           tableLabel={_(msg`Sell orders`)}
+          labelDisplayedRows={labelDisplayedRows}
           headerRows={sellOrdersRow}
           actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
           rows={sellOrders.map(sellOrder =>

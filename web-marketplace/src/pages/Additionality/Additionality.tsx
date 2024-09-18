@@ -11,10 +11,6 @@ import { OnboardingFormTemplate } from '../../components/templates';
 const Additionality: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
 
-  async function saveAndExit(): Promise<void> {
-    // TODO: functionality
-  }
-
   async function submitAdditionality(
     values: AdditionalityValues,
   ): Promise<void> {

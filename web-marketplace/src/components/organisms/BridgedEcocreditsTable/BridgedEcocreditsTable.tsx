@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, CircularProgress } from '@mui/material';
@@ -20,7 +21,10 @@ import {
 import { truncateHash } from 'web-components/src/utils/truncate';
 
 import { getHashUrl } from 'lib/block-explorer';
-import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
+import {
+  ACTIONS_TABLE_ACTIONS_TEXT,
+  getLabelDisplayedRows,
+} from 'lib/constants/shared.constants';
 
 import {
   AccountLink,
@@ -63,6 +67,15 @@ export const BridgedEcocreditsTable = ({
     address: accountAddress,
   });
 
+  const labelDisplayedRows = useMemo(
+    () =>
+      getLabelDisplayedRows({
+        _,
+        rowsLength: bridgedCredits.length,
+      }),
+    [_, bridgedCredits.length],
+  );
+
   if (!bridgedCredits?.length && !isLoadingBridgedCredits) {
     return (
       <NoCredits
@@ -84,6 +97,7 @@ export const BridgedEcocreditsTable = ({
       <ActionsTable
         tableLabel={_(msg`bridged ecocredits table`)}
         actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
+        labelDisplayedRows={labelDisplayedRows}
         sx={tableStyles.rootOnlyTopBorder}
         initialPaginationParams={paginationParams}
         onTableChange={setPaginationParams}

@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
@@ -10,6 +11,11 @@ import {
   Currency,
 } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { Title } from 'web-components/src/components/typography/Title';
+
+import {
+  SET_MAX_CREDITS_ARIA_LABEL,
+  SET_MAX_CREDITS_BUTTON_TEXT,
+} from './CreditsAmount.constants';
 
 export function CreditsAmountHeader({
   creditsAvailable,
@@ -22,6 +28,7 @@ export function CreditsAmountHeader({
   currency: Currency;
   paymentOption: string;
 }) {
+  const { _ } = useLingui();
   const cryptoCurrency =
     currency === CURRENCIES.usd ? CURRENCIES.uregen : currency;
   const { clearErrors } = useFormContext<ChooseCreditsFormSchemaType>();
@@ -57,6 +64,8 @@ export function CreditsAmountHeader({
           )}
         </div>
         <SetMaxButton
+          ariaLabel={_(SET_MAX_CREDITS_ARIA_LABEL)}
+          buttonText={_(SET_MAX_CREDITS_BUTTON_TEXT)}
           onClick={event => {
             event.preventDefault();
             setMaxCreditsSelected(true);

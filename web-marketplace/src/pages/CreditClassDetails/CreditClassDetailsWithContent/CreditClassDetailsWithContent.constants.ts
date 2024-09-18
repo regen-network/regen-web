@@ -11,18 +11,22 @@ export const CREDIT_CLASS_USD_TEXT = msg`USD`;
 export const CREDIT_CLASS_PROTEC_TYPES_OPTIONS = [
   {
     label: msg`All nature based carbon credits`,
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     value: 'All nature based carbon credits',
   },
   {
     label: msg`Forestry-based credits`,
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     value: 'Forestry-based credits',
   },
   {
     label: msg`Grasslands-based credits`,
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     value: 'Grasslands-based credits',
   },
   {
     label: msg`Cropland-based credits`,
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     value: 'Cropland-based credits',
   },
 ];
@@ -33,22 +37,27 @@ export const CREDIT_CLASS_ON_BEHALF_OF_OPTIONS = [
   },
   {
     label: msg`Consumer/Individual/myself`,
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     value: 'Consumer/Individual/myself',
   },
   {
     label: msg`Small or Medium Sized Business`,
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     value: 'Small or Medium Sized Business',
   },
   {
     label: msg`Nonprofit`,
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     value: 'Nonprofit',
   },
   {
     label: msg`Large Corporation`,
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     value: 'Large Corporation',
   },
   {
     label: msg`Crypto Organization`,
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     value: 'Crypto Organization',
   },
 ];

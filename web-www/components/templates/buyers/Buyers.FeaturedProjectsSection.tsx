@@ -10,7 +10,12 @@ import {
   AllBuyersPageQuery,
   FeaturedProjectCard,
 } from '@/generated/sanity-graphql';
-import { DRAFT_TEXT } from '@/lib/constants/shared.constants';
+import {
+  DRAFT_TEXT,
+  projectCardBodyTextMapping,
+  projectCardButtonMapping,
+  projectCardPurchaseDetailsTitleMapping,
+} from '@/lib/constants/shared.constants';
 
 interface Props {
   content: AllBuyersPageQuery['allBuyersPage'][0]['featuredProjectCardsSection'];
@@ -65,6 +70,9 @@ const BuyersFeaturedProjectsSection = ({ content, sx }: Props) => {
                 image: image?.asset?.url,
               }}
               draftText={DRAFT_TEXT}
+              bodyTexts={projectCardBodyTextMapping}
+              purchaseDetailsTitles={projectCardPurchaseDetailsTitleMapping}
+              buttons={projectCardButtonMapping}
             />
           );
         })}

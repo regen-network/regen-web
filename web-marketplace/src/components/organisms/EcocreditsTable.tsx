@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
@@ -17,7 +17,10 @@ import { formatDate, formatNumber } from 'web-components/src/utils/format';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
-import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
+import {
+  ACTIONS_TABLE_ACTIONS_TEXT,
+  getLabelDisplayedRows,
+} from 'lib/constants/shared.constants';
 
 import { AccountLink, BreakText, GreyText, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
@@ -42,6 +45,16 @@ export const EcocreditsTable: React.FC<
 }) => {
   const { _ } = useLingui();
 
+  const labelDisplayedRows = useMemo(
+    () =>
+      getLabelDisplayedRows({
+        _,
+        isIgnoreOffset,
+        rowsLength: credits?.length ?? 0,
+      }),
+    [_, credits?.length, isIgnoreOffset],
+  );
+
   const hasMorePages =
     (initialPaginationParams?.count ?? 0) >
     (initialPaginationParams?.rowsPerPage ?? 0);
@@ -59,6 +72,7 @@ export const EcocreditsTable: React.FC<
       tableLabel={_(msg`ecocredits table`)}
       actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
       renderActionButtons={renderActionButtons}
+      labelDisplayedRows={labelDisplayedRows}
       onTableChange={onTableChange}
       initialPaginationParams={initialPaginationParams}
       isIgnoreOffset={isIgnoreOffset}

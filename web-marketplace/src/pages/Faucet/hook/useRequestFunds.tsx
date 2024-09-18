@@ -32,6 +32,7 @@ export const useRequestFunds = () => {
       setBannerTextAtom(_(msg`Funds successfully requested!`));
     } catch (error) {
       setErrorBannerTextAtom(_(msg`Failed to request funds`));
+      // eslint-disable-next-line no-console
       console.error(error);
     } finally {
       setIsLoading(false);

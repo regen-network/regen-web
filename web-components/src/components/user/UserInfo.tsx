@@ -129,6 +129,7 @@ export default function UserInfo({
             size="md"
             className={cn('text-grey-400 pt-5', classNames?.timestamp)}
           >
+            {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
             {formatDate(user.timestamp, 'MMMM D, YYYY | h:mm A')}
           </Body>
         )}

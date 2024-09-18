@@ -1,10 +1,11 @@
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import { PREFINANCE } from '../cards/ProjectCard/ProjectCard.constants';
+import { ProjectCardBodyTextsMapping } from '../cards/ProjectCard/ProjectCard.types';
 import { PrefinanceIcon } from '../icons/PrefinanceIcon';
 import { Label } from '../typography';
 
 export const PrefinanceTag = ({
+  bodyTexts,
   classNames = {
     root: '',
     label: '',
@@ -14,6 +15,7 @@ export const PrefinanceTag = ({
     height: '19',
   },
 }: {
+  bodyTexts: ProjectCardBodyTextsMapping;
   classNames?: { root?: string; label?: string };
   iconSize?: {
     width: string;
@@ -32,7 +34,7 @@ export const PrefinanceTag = ({
       component="span"
       size="xxs"
     >
-      {PREFINANCE}
+      {bodyTexts.prefinance}
     </Label>
   </div>
 );

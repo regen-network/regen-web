@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -7,10 +7,11 @@ import { makeStyles } from 'tss-react/mui';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import { SaveButton } from 'web-components/src/components/buttons/SaveButton';
-import { VIEW_PROJECT_BUTTON } from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
 import FixedFooter from 'web-components/src/components/fixed-footer';
 import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { Theme } from 'web-components/src/theme/muiTheme';
+
+import { getProjectCardButtonMapping } from 'lib/constants/shared.constants';
 
 import { useProjectEditContext } from 'pages';
 
@@ -59,6 +60,7 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
   const { projectId } = useParams();
   const navigate = useNavigate();
   const { isDirtyRef, setIsWarningModalOpen } = useProjectEditContext();
+  const projectCardButtons = useMemo(() => getProjectCardButtonMapping(_), [_]);
 
   return (
     <FixedFooter>
@@ -76,7 +78,7 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
             }}
           >
             <EyeIcon className={styles.eyeIcon} />
-            {VIEW_PROJECT_BUTTON.text}
+            {projectCardButtons.view.text}
           </OutlinedButton>
         </Grid>
         <Grid item>

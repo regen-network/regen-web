@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 interface IconProps extends SvgIconProps {}

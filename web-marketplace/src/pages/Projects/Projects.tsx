@@ -36,7 +36,7 @@ const Projects = (): JSX.Element => {
   const [sort] = useAtom(projectsSortAtom);
   const [creditClassSelectedFilters] = useAtom(creditClassSelectedFiltersAtom);
 
-  const { data: allHomePageData, isFetching: isFetchingAllHomePage } = useQuery(
+  const { data: allHomePageData } = useQuery(
     getAllHomePageQuery({ sanityClient, enabled: !!sanityClient }),
   );
   const sortPinnedIds =

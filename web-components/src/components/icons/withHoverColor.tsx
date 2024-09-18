@@ -1,4 +1,4 @@
-import { ComponentType, FC, PropsWithChildren, useState } from 'react';
+import { FC, useState } from 'react';
 import { useTheme } from '@mui/material';
 
 export interface Props {

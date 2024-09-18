@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { UseStateSetter } from 'types/react/use-state';
 
@@ -16,6 +18,7 @@ export const useUpdateTxModalTitle = ({
   deliverTxResponse,
   setTxModalTitle,
 }: Props) => {
+  const { _ } = useLingui();
   const rawLog = deliverTxResponse?.rawLog;
 
   useEffect(() => {
@@ -33,8 +36,8 @@ export const useUpdateTxModalTitle = ({
           (attribute: any) => attribute.key === SELL_ORDER_ATTRIBUTE_KEY,
         )?.value;
 
-        setTxModalTitle(`Sell Order #${sellOrderId.replaceAll('"', '')}`);
+        setTxModalTitle(_(msg`Sell Order #${sellOrderId.replaceAll('"', '')}`));
       }
     }
-  }, [rawLog, setTxModalTitle]);
+  }, [_, rawLog, setTxModalTitle]);
 };

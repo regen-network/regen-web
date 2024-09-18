@@ -4,6 +4,7 @@ import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/
 import { fireEvent } from 'web-components/test/test-utils';
 
 import { OrderSummaryCard } from './OrderSummaryCard';
+import { orderSummaryCommonProps } from './OrderSummaryCard.mock';
 import { OrderSummaryProps } from './OrderSummaryCard.types';
 
 describe('OrderSummaryCard', () => {
@@ -22,6 +23,7 @@ describe('OrderSummaryCard', () => {
     },
     currentBuyingStep: 2,
     onClickEditCard: vi.fn(),
+    ...orderSummaryCommonProps,
   };
 
   it('displays the project name', () => {

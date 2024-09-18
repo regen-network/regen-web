@@ -14,7 +14,6 @@ import {
 import {
   WalletClient,
   WalletConfig,
-  WalletType,
 } from './walletsConfig/walletsConfig.types';
 
 /* getWallet */

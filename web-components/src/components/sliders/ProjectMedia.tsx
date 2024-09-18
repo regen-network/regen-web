@@ -8,6 +8,7 @@ import { makeStyles } from 'tss-react/mui';
 
 import { containerPaddingX, containerStyles } from '../../styles/container';
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
+import { ProjectCardBodyTextsMapping } from '../cards/ProjectCard/ProjectCard.types';
 import PlayIcon from '../icons/PlayIcon';
 import { Image, OptimizeImageProps } from '../image';
 import { PrefinanceTag } from '../PrefinanceTag/PrefinanceTag';
@@ -28,6 +29,7 @@ interface ProjectMediaProps extends OptimizeImageProps {
   xsBorderRadius?: boolean;
   mobileHeight?: string | number;
   isPrefinanceProject?: boolean | null;
+  bodyTexts: ProjectCardBodyTextsMapping;
 }
 
 interface StyleProps {
@@ -224,6 +226,7 @@ export default function ProjectMedia({
   apiServerUrl,
   imageCredits,
   isPrefinanceProject,
+  bodyTexts,
 }: ProjectMediaProps): JSX.Element {
   const { classes } = useStyles({ mobileHeight, xsBorderRadius });
   const theme = useTheme();
@@ -329,6 +332,7 @@ export default function ProjectMedia({
                         label: 'sm:text-[11px]',
                       }}
                       iconSize={{ width: '24', height: '24' }}
+                      bodyTexts={bodyTexts}
                     />
                   )}
                 </Grid>
@@ -421,6 +425,7 @@ export default function ProjectMedia({
           </Slider>
           {isPrefinanceProject && (
             <PrefinanceTag
+              bodyTexts={bodyTexts}
               classNames={{
                 root: 'sm:py-10 sm:top-50',
                 label: 'sm:text-[11px]',

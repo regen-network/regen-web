@@ -8,16 +8,18 @@ export function Placeholder({
   options,
   selectedOption,
   OptionComponent,
+  ariaLabel,
 }: {
   setIsOpen: (isOpen: boolean) => void;
   isOpen: boolean;
   options: Option[];
   selectedOption: string;
+  ariaLabel: string;
   OptionComponent: ComponentType;
 }) {
   return (
     <button
-      aria-label="Select options"
+      aria-label={ariaLabel}
       type="button"
       className="inline-flex justify-center w-full border-none px-4 py-2 bg-grey-0 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
       onClick={() => setIsOpen(!isOpen)}

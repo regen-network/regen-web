@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import OrganizationIcon from '../../../components/icons/OrganizationIcon';
 import UserIcon from '../../../components/icons/UserIcon';
 import { RadioCardItem } from './RadioCard.types';

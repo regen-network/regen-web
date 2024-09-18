@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import LinkedInBadgeIcon from '../icons/social/LinkedInBadgeIcon';
 import TwitterBadgeIcon from '../icons/social/TwitterBadgeIcon';
 import { SocialItems } from './ShareSection.types';

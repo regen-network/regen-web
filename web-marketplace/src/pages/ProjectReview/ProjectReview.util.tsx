@@ -24,6 +24,7 @@ export const getOnChainProjectId = (
   const rawLog = JSON.parse(deliverTxResponse?.rawLog);
   // regen.ecocredit.v1.EventCreateProject
   const event = rawLog?.[0]?.events?.find((event: any) =>
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     event?.type?.includes('EventCreateProject'),
   );
   const projectId = event?.attributes
@@ -38,11 +39,13 @@ export const getJurisdiction = async (
   const location = metadata?.['schema:location'];
 
   if (!location) {
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     throw new Error('Cannot get Jurisdiction. Location data is missing.');
   }
   const { context, place_name, properties } = location;
 
   if (!context && !place_name) {
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     throw new Error('Please select a location for this project.');
   }
 

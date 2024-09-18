@@ -204,7 +204,7 @@ export const FileDropFile = ({
                 }}
               >
                 <div className="flex items-center justify-between">
-                  Move up <ArrowDownIcon direction="up" />
+                  {moveUpText} <ArrowDownIcon direction="up" />
                 </div>
               </Body>
             )}
@@ -217,7 +217,7 @@ export const FileDropFile = ({
                 }}
               >
                 <div className="flex items-center justify-between">
-                  Move down
+                  {moveDownText}
                   <ArrowDownIcon direction="down" />
                 </div>
               </Body>

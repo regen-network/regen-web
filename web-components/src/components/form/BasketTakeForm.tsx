@@ -34,9 +34,6 @@ import Submit from './Submit';
  *    retirement_jurisdiction: must be a valid location
  */
 
-const RETIRED_UPON_TAKE_TOOLTIP =
-  'The creator of this basket has chosen that all credits must be retired upon take.';
-
 const useStyles = makeStyles()((theme: Theme) => ({
   checkboxLabel: {
     marginTop: theme.spacing(10.75),

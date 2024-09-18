@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Box, IconButton, Link, useTheme } from '@mui/material';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+import { Box, IconButton, Link } from '@mui/material';
 import { isPast } from 'date-fns';
 import { Field, FieldArray, useFormikContext } from 'formik';
 import * as Yup from 'yup';
@@ -18,7 +20,6 @@ import {
   vcsRetirementSerialRE,
 } from 'web-components/src/components/inputs/validation';
 import { Body } from 'web-components/src/components/typography';
-import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { useAuth } from 'lib/auth/auth';
 import { NameUrl } from 'lib/rdf/types';
@@ -153,6 +154,7 @@ type Props = {
 export default function CreditBasics({
   saveProjectOptionSelected,
 }: Props): React.ReactElement {
+  const { _ } = useLingui();
   const { wallet } = useWallet();
   const { activeAccount } = useAuth();
   const projects = useQueryProjectsByIssuer(
@@ -178,7 +180,7 @@ export default function CreditBasics({
   return (
     <OnBoardingCard>
       <Field
-        label="Project"
+        label={_(msg`Project`)}
         name="projectId"
         component={SelectTextField}
         options={projectOptions}
@@ -194,8 +196,8 @@ export default function CreditBasics({
       >
         <Box sx={{ mr: [0, 1] }}>
           <Field
-            label="Start Date"
-            placeholder="Start Date"
+            label={_(msg`Start Date`)}
+            placeholder={_(msg`Start Date`)}
             name="startDate"
             required
             maxDate={values.endDate || new Date()}
@@ -204,8 +206,8 @@ export default function CreditBasics({
         </Box>
         <Box sx={{ mt: [10, 0], ml: [0, 1] }}>
           <Field
-            label="End Date"
-            placeholder="End Date"
+            label={_(msg`End Date`)}
+            placeholder={_(msg`End Date`)}
             name="endDate"
             required
             minDate={values.startDate}
@@ -215,13 +217,15 @@ export default function CreditBasics({
         </Box>
       </Box>
       <Body size="sm" mt={2}>
-        The dates should correspond to the batch monitoring period or vintage.
+        <Trans>
+          The dates should correspond to the batch monitoring period or vintage.
+        </Trans>
       </Body>
       {isVCS ? (
         <>
           <Field
             name="metadata['regen:vcsRetirementSerialNumber']"
-            label="VCS retirement serial number"
+            label={_(msg`VCS retirement serial number`)}
             required={isVCS}
             component={TextField}
           />
@@ -244,12 +248,13 @@ const AdditionalCerfications: React.FC<
     certifications: NameUrl[];
   }>
 > = ({ certifications }) => {
-  const theme = useTheme<Theme>();
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <Box sx={{ mt: 10 }}>
-      <InputLabel optional>Additional Certifications</InputLabel>
+      <InputLabel optional>
+        <Trans>Additional Certifications</Trans>
+      </InputLabel>
       <FieldArray
         name="metadata['regen:additionalCertifications']"
         render={arrayHelpers => (
@@ -292,7 +297,7 @@ const AdditionalCerfications: React.FC<
               onClick={() => setModalOpen(true)}
               sx={{ mt: 3, width: '100%' }}
             >
-              + add certification
+              <Trans>+ add certification</Trans>
             </OutlinedButton>
             <AddCertificationModal
               open={modalOpen}

@@ -5,6 +5,7 @@ import {
 } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
+
 import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';

@@ -24,6 +24,7 @@ export const FileDropBottomBar = ({
   caption,
   credit,
   location,
+  locationText,
   sx = [],
 }: Props) => {
   const point = location?.geometry as Point;
@@ -61,7 +62,7 @@ export const FileDropBottomBar = ({
               placement="top"
               title={
                 <div className="text-grey-500">
-                  <b>Location:</b>{' '}
+                  <b>{locationText}:</b>{' '}
                   {`${point.coordinates[0]}, ${point.coordinates[1]} ${
                     isGeocodingFeature(location)
                       ? `(${location.place_name})`

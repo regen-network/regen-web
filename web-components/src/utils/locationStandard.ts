@@ -64,6 +64,7 @@ export const getJurisdictionIsoCode = ({
   postalCode,
 }: LocationType): string => {
   // check iso country
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   if (!getIsoCountry(country)) throw new Error(`Invalid country: ${country}`);
   // check subdivision exists, also iso subdivision (failing search is an empty object)
   if (!stateProvince || !getIsoSubdivision({ code: stateProvince })?.code)
@@ -85,12 +86,8 @@ export const getJurisdictionIsoCode = ({
  * the default country as the first option in the list, after the placeholder.
  */
 
-const COUNTRY_OPTION_PLACEHOLDER: Option = {
-  value: '',
-  label: 'Please choose a country',
-};
-
 interface CountryOptionsProps {
+  countryLabelPlaceholder: string;
   exclude?: boolean;
 }
 
@@ -100,6 +97,7 @@ const isIncluded = (code: string): boolean => {
 };
 
 export function getCountryOptions({
+  countryLabelPlaceholder,
   exclude = false,
 }: CountryOptionsProps): Option[] {
   const countriesCodes = exclude
@@ -120,7 +118,12 @@ export function getCountryOptions({
     country => country.value !== DEFAULT_COUNTRY,
   );
 
-  let options = [COUNTRY_OPTION_PLACEHOLDER];
+  let options = [
+    {
+      value: '',
+      label: countryLabelPlaceholder,
+    },
+  ];
   if (defaultCountry) options.push(defaultCountry);
   options.push(...otherCountries);
 
@@ -133,12 +136,10 @@ export function getCountryOptions({
  * iso-3166-2 package, for the selector type input.
  */
 
-const COUNTRY_SUBDIVISION_OPTION_PLACEHOLDER: Option = {
-  value: '',
-  label: 'Please choose a state',
-};
-
-export function getCountrySubdivisionOptions(country: string): Option[] {
+export function getCountrySubdivisionOptions(
+  country: string,
+  placeholderLabel: string,
+): Option[] {
   const countrySubdivisions = getIsoCountry(country);
 
   const options: Option[] = Object.keys(countrySubdivisions?.sub || {})
@@ -149,7 +150,10 @@ export function getCountrySubdivisionOptions(country: string): Option[] {
     .sort((a, b) => a.label.localeCompare(b.label));
 
   if (options.length > 0)
-    options.unshift(COUNTRY_SUBDIVISION_OPTION_PLACEHOLDER);
+    options.unshift({
+      value: '',
+      label: placeholderLabel,
+    });
 
   return options;
 }

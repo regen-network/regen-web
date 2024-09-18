@@ -7,7 +7,10 @@ import { sxToArray } from '../../../utils/mui/sxToArray';
 import { truncateTwoLines } from '../../../utils/mui/truncate';
 import OutlinedButton from '../../buttons/OutlinedButton';
 import { CreditPrice } from '../../cards/ProjectCard/ProjectCard.CreditPrice';
-import { PurchaseInfo } from '../../cards/ProjectCard/ProjectCard.types';
+import {
+  ProjectCardBodyTextsMapping,
+  PurchaseInfo,
+} from '../../cards/ProjectCard/ProjectCard.types';
 import { Title } from '../../typography';
 
 export interface Props {
@@ -19,6 +22,7 @@ export interface Props {
   className?: string;
   LinkComponent?: LinkComponentType;
   sx?: SxProps<Theme>;
+  bodyTexts: ProjectCardBodyTextsMapping;
 }
 
 export const CreditClassGridCard = ({
@@ -28,6 +32,7 @@ export const CreditClassGridCard = ({
   name,
   purchaseInfo,
   className,
+  bodyTexts,
   LinkComponent = ({ children }) => <>{children}</>,
   sx = [],
 }: Props): JSX.Element => {
@@ -56,7 +61,11 @@ export const CreditClassGridCard = ({
         <Title variant="h5" sx={[truncateTwoLines, { mb: 5, height: '57px' }]}>
           {name}
         </Title>
-        <CreditPrice purchaseInfo={purchaseInfo} sx={{ mb: 5 }} />
+        <CreditPrice
+          purchaseInfo={purchaseInfo}
+          sx={{ mb: 5 }}
+          bodyTexts={bodyTexts}
+        />
         <OutlinedButton
           onClick={onClick}
           size="small"

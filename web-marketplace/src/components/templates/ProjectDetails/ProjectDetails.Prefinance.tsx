@@ -1,18 +1,15 @@
+import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
-import {
-  ESTIMATED_ISSUANCE,
-  ESTIMATED_ISSUANCE_TOOLTIP,
-  SOLD_OUT,
-} from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import SuccessIcon from 'web-components/src/components/icons/SuccessIcon';
 import { LabeledValue } from 'web-components/src/components/text-layouts';
 import { Body, Title } from 'web-components/src/components/typography';
 
 import { ProjectPrefinancing } from 'generated/sanity-graphql';
+import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
 
 import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constants';
 
@@ -46,6 +43,7 @@ export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
     projectTimeline,
     classTimeline,
   } = projectPrefinancing;
+  const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
 
   return (
     <>
@@ -89,8 +87,8 @@ export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
           <div className="grid grid-cols-1 md:grid-cols-2 pt-40 gap-40 md:gap-y-50 md:gap-x-auto pb-40 sm:pb-50">
             {estimatedIssuance && (
               <LabeledValue
-                label={_(ESTIMATED_ISSUANCE)}
-                tooltipLabel={_(ESTIMATED_ISSUANCE_TOOLTIP)}
+                label={bodyTexts.estimatedIssuance}
+                tooltipLabel={bodyTexts.estimatedIssuanceTooltip}
                 number={estimatedIssuance}
                 formatNumberOptions={{
                   minimumFractionDigits: 2,
@@ -99,11 +97,11 @@ export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
                 icon={
                   <img
                     src="/svg/estimated-issuance.svg"
-                    alt={_(ESTIMATED_ISSUANCE)}
+                    alt={bodyTexts.estimatedIssuance}
                   />
                 }
                 tooltipNumber={isSoldOut ? _(SOLD_OUT_TOOLTIP) : undefined}
-                badgeLabel={isSoldOut ? SOLD_OUT : undefined}
+                badgeLabel={isSoldOut ? bodyTexts.soldOut : undefined}
               />
             )}
             {projectedCreditDeliveryDate && (

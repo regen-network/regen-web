@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 type SortArgType = string | number;
 function isSortArgType(a: unknown): a is SortArgType {
   return typeof a === 'string' || typeof a === 'number';

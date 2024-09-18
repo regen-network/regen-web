@@ -24,3 +24,6 @@ export const cryptoOptions = [
     value: false,
   },
 ];
+
+export const SET_MAX_CREDITS_ARIA_LABEL = msg`Set max credits`;
+export const SET_MAX_CREDITS_BUTTON_TEXT = msg`Max`;

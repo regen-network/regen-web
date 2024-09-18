@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/dom';
-import { render } from '@testing-library/react';
+import { render } from 'web-marketplace/test/test-utils';
 
 import { fireEvent } from 'web-components/test/test-utils';
 

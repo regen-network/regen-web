@@ -23,8 +23,8 @@ export const CogIcon = ({ linearGradient, ...props }: Props) => (
           ? '#8F8F8F'
           : 'currentColor'
       }
-      stroke-width="2"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinejoin="round"
     />
     <path
       d="M8.71875 11.66C8.71875 13.2837 10.035 14.6 11.6587 14.6C13.2825 14.6 14.5987 13.2837 14.5987 11.66C14.5987 10.0363 13.2825 8.71997 11.6587 8.71997C10.035 8.71997 8.71875 10.0363 8.71875 11.66Z"
@@ -35,7 +35,7 @@ export const CogIcon = ({ linearGradient, ...props }: Props) => (
           ? '#8F8F8F'
           : 'currentColor'
       }
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
     <defs>
       <linearGradient
@@ -48,9 +48,9 @@ export const CogIcon = ({ linearGradient, ...props }: Props) => (
       >
         <stop
           offset="0.00458717"
-          stop-color={props.disabled ? '#8F8F8F' : '#7BC796'}
+          stopColor={props.disabled ? '#8F8F8F' : '#7BC796'}
         />
-        <stop offset="1" stop-color={props.disabled ? '#EFEFEF' : '#C5E6D1'} />
+        <stop offset="1" stopColor={props.disabled ? '#EFEFEF' : '#C5E6D1'} />
       </linearGradient>
       <linearGradient
         id="linear1_cog_icon"
@@ -62,9 +62,9 @@ export const CogIcon = ({ linearGradient, ...props }: Props) => (
       >
         <stop
           offset="0.00458717"
-          stop-color={props.disabled ? '#8F8F8F' : '#7BC796'}
+          stopColor={props.disabled ? '#8F8F8F' : '#7BC796'}
         />
-        <stop offset="1" stop-color={props.disabled ? '#EFEFEF' : '#C5E6D1'} />
+        <stop offset="1" stopColor={props.disabled ? '#EFEFEF' : '#C5E6D1'} />
       </linearGradient>
     </defs>
   </svg>

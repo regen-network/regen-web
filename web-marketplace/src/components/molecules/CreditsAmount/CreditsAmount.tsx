@@ -4,11 +4,17 @@ import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
+import { denomToMicro, microToDenom } from 'lib/denom.utils';
+
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
-import { CREDITS_AMOUNT, CURRENCY_AMOUNT } from './CreditsAmount.constants';
+import {
+  CREDITS_AMOUNT,
+  CURRENCY_AMOUNT,
+  SELL_ORDERS,
+} from './CreditsAmount.constants';
 import { CreditsAmountHeader } from './CreditsAmount.Header';
 import { CreditsAmountProps } from './CreditsAmount.types';
 import {
@@ -31,6 +37,7 @@ export const CreditsAmount = ({
   defaultCryptoCurrency,
   cryptoCurrencies,
   allowedDenoms,
+  creditTypePrecision,
 }: CreditsAmountProps) => {
   const { _ } = useLingui();
 
@@ -64,6 +71,7 @@ export const CreditsAmount = ({
         paymentOption,
         filteredCryptoSellOrders,
         cardSellOrders,
+        creditTypePrecision,
       ),
     );
   }, [
@@ -72,13 +80,14 @@ export const CreditsAmount = ({
     paymentOption,
     setCreditsAvailable,
     setSpendingCap,
+    creditTypePrecision,
   ]);
 
   // Max credits set
   useEffect(() => {
     if (maxCreditsSelected) {
       setValue(CREDITS_AMOUNT, creditsAvailable);
-      setValue(CURRENCY_AMOUNT, spendingCap);
+      setValue(CURRENCY_AMOUNT, microToDenom(spendingCap));
       setMaxCreditsSelected(false);
     }
   }, [creditsAvailable, maxCreditsSelected, setValue, spendingCap]);
@@ -127,7 +136,11 @@ export const CreditsAmount = ({
           break;
         }
       }
-      setValue(CURRENCY_AMOUNT, currentCurrencyAmount);
+      setValue(
+        CURRENCY_AMOUNT,
+        card ? currentCurrencyAmount : microToDenom(currentCurrencyAmount),
+      );
+      setValue(SELL_ORDERS, sellOrders);
     },
     [card, orderedSellOrders, setValue],
   );
@@ -137,7 +150,8 @@ export const CreditsAmount = ({
     (e: ChangeEvent<HTMLInputElement>) => {
       // Set credits quantity according to currency amount,
       // selecting the cheapest credits first
-      const currentCurrencyAmount = e.target.valueAsNumber;
+      const value = e.target.valueAsNumber;
+      const currentCurrencyAmount = card ? value : denomToMicro(value);
       let currentCreditsAmount = 0;
       let currencyAmountLeft = currentCurrencyAmount;
       const sellOrders = [];
@@ -166,7 +180,7 @@ export const CreditsAmount = ({
           currentCreditsAmount += currencyAmountLeft / price;
           sellOrders.push({
             sellOrderId: order.id,
-            quantity: currencyAmountLeft / price,
+            quantity: String(currencyAmountLeft / price),
             bidPrice: !card
               ? { amount: String(price), denom: order.askDenom }
               : undefined,
@@ -176,6 +190,7 @@ export const CreditsAmount = ({
         }
       }
       setValue(CREDITS_AMOUNT, currentCreditsAmount);
+      setValue(SELL_ORDERS, sellOrders);
     },
     [card, orderedSellOrders, setValue],
   );

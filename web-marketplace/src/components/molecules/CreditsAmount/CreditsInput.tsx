@@ -49,7 +49,7 @@ export const CreditsInput = ({
         } border border-solid border-grey-300 flex items-center pr-10 sm:h-60`}
         type="number"
         customInputProps={{
-          step: '0.1',
+          step: '0.000001',
           max: maxCreditsAvailable,
           min: 0,
           'aria-label': _(msg`Credits Input`),

@@ -2,6 +2,8 @@ import { useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
 
+import { useLedger } from 'ledger';
+import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectByIdQuery as getOffChainProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
@@ -15,6 +17,7 @@ import { getIsOnChainId, getIsUuid } from '../ProjectDetails.utils';
 export const useGetProject = () => {
   const { projectId } = useParams();
   const graphqlClient = useApolloClient();
+  const { ecocreditClient } = useLedger();
 
   // first, check if projectId is an off-chain project handle (for legacy projects like "wilmot")
   // or an chain project id
@@ -73,9 +76,10 @@ export const useGetProject = () => {
     ? projectId
     : projectBySlugOnChainId ?? projectByUuidOnChainId;
 
-  const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
-    projectId: onChainProjectId,
-  });
+  const { isBuyFlowDisabled, projectsWithOrderData, loadingBuySellOrders } =
+    useBuySellOrderData({
+      projectId: onChainProjectId,
+    });
 
   const offChainProjectById = offchainProjectByIdData?.data.projectById;
   const publishedOffchainProjectById = offChainProjectById?.published
@@ -88,7 +92,20 @@ export const useGetProject = () => {
   const offChainProject = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
     : publishedOffchainProjectById ?? publishedOffchainProjectBySlug;
-  console.log(projectsWithOrderData.map(p => p.sellOrders));
+
+  const onChainCreditClassId =
+    offChainProject?.creditClassByCreditClassId?.onChainId ??
+    onChainProjectId?.split('-')?.[0];
+  const { data: creditClassOnChain } = useQuery(
+    getClassQuery({
+      client: ecocreditClient,
+      request: {
+        classId: onChainCreditClassId ?? '',
+      },
+      enabled: !!ecocreditClient && !!onChainCreditClassId,
+    }),
+  );
+
   return {
     sanityProject,
     projectBySlug,
@@ -101,5 +118,8 @@ export const useGetProject = () => {
     projectsWithOrderData,
     onChainProjectId,
     offChainProject,
+    onChainCreditClassId,
+    creditClassOnChain,
+    loadingBuySellOrders,
   };
 };

@@ -1,12 +1,16 @@
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
-export function getFilteredCryptoSellOrders(
-  askDenom: string,
-  cryptoSellOrders: Array<UISellOrderInfo>,
-  retiring: boolean,
-) {
+export function getFilteredCryptoSellOrders({
+  askDenom,
+  cryptoSellOrders,
+  retiring,
+}: {
+  askDenom?: string;
+  cryptoSellOrders: Array<UISellOrderInfo>;
+  retiring: boolean;
+}) {
   return cryptoSellOrders?.filter(
     order =>
-      order.askAmount === askDenom && (retiring || order.disableAutoRetire),
+      order.askDenom === askDenom && (retiring || order.disableAutoRetire),
   );
 }

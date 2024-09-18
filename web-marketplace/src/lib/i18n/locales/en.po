@@ -2832,10 +2832,6 @@ msgstr ""
 msgid "See all methodologies"
 msgstr ""
 
-#: src/components/atoms/ExampleProjectLink.tsx:13
-msgid "See an example <0>project page»</0>"
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:74
 msgid "See an example»"
 msgstr ""

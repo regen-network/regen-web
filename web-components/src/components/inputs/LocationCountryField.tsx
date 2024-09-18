@@ -9,10 +9,12 @@ interface FieldProps {
   optional?: boolean;
   name?: string;
   exclude?: boolean;
+  label: string;
 }
 
 const LocationCountryField: React.FC<React.PropsWithChildren<FieldProps>> = ({
   name = 'country',
+  label,
   className,
   optional = false,
   exclude = false,
@@ -26,7 +28,7 @@ const LocationCountryField: React.FC<React.PropsWithChildren<FieldProps>> = ({
   return (
     <Field
       name={name}
-      label="Country"
+      label={label}
       component={SelectTextField}
       className={className}
       options={options}

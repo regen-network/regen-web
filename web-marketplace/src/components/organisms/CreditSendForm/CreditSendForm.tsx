@@ -16,7 +16,15 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
-import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
+import {
+  AVAILABLE_LABEL,
+  INVALID_MEMO_LENGTH,
+  INVALID_REGEN_ADDRESS,
+  MAX_LABEL,
+  REQUIRED_MESSAGE,
+  REQUIREMENT_AGREEMENT,
+  SUBMIT_ERRORS,
+} from 'lib/constants/shared.constants';
 
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
 import { BottomCreditRetireFields } from 'components/molecules/BottomCreditRetireFields/BottomCreditRetireFields';
@@ -26,8 +34,8 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { initialValuesRetire } from '../CreditRetireForm/CreditRetireForm.constants';
 import { creditSendFormInitialValues } from './CreditSendForm.constants';
 import {
-  CreditSendFormSchema,
   CreditSendFormSchemaType,
+  getCreditSendFormSchema,
 } from './CreditSendForm.schema';
 import { validateCreditSendForm } from './CreditSendForm.utils';
 
@@ -66,8 +74,14 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
   }) => {
     const { _ } = useLingui();
     const { classes: styles } = useStyles();
+    const creditSendFormSchema = getCreditSendFormSchema({
+      addressPrefix,
+      requiredMessage: _(REQUIRED_MESSAGE),
+      invalidRegenAddress: _(INVALID_REGEN_ADDRESS),
+    });
+
     const form = useZodForm({
-      schema: CreditSendFormSchema({ addressPrefix }),
+      schema: creditSendFormSchema,
       defaultValues: { ...creditSendFormInitialValues, sender },
       mode: 'onBlur',
     });
@@ -104,6 +118,10 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
               availableTradableAmount,
               values: data,
               addressPrefix,
+              requiredMessage: _(REQUIRED_MESSAGE),
+              invalidRegenAddress: _(INVALID_REGEN_ADDRESS),
+              requirementAgreement: _(REQUIREMENT_AGREEMENT),
+              invalidMemoLength: _(INVALID_MEMO_LENGTH),
               setError: form.setError,
               _,
             });
@@ -149,6 +167,8 @@ const CreditSendForm: React.FC<React.PropsWithChildren<CreditSendFormProps>> =
                 </InfoTooltip>
               </Flex>
             }
+            availableLabel={_(AVAILABLE_LABEL)}
+            maxLabel={_(MAX_LABEL)}
             helperText={errors.amount?.message}
             error={!!errors.amount}
             availableAmount={availableTradableAmount}

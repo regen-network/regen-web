@@ -8,3 +8,5 @@ export const COOKIES_TOP_BANNER_ACCEPT_LABEL = 'accept';
 export const COOKIES_TOP_BANNER_REJECT_LABEL = 'Reject';
 export const KEPLR_LINK_URL =
   'https://guides.regen.network/guides/wallets/wallet-setup/create-a-keplr-wallet';
+export const LOGOUT_TEXT = msg`Log out`;
+export const AVATAR_ALT = msg`default avatar`;

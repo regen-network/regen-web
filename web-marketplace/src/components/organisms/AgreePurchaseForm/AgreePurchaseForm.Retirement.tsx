@@ -10,6 +10,12 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
 import { Body, Title } from 'web-components/src/components/typography';
 
+import {
+  COUNTRY_LABEL,
+  EMPTY_OPTION_TEXT,
+  STATE_LABEL,
+} from 'lib/constants/shared.constants';
+
 import { AgreePurchaseFormSchemaType } from './AgreePurchaseForm.schema';
 
 const LocationCountryField = lazy(
@@ -95,10 +101,16 @@ export const Retirement = () => {
           <div className="flex sm:gap-20 flex-col sm:flex-row">
             <Suspense
               fallback={
-                <SelectTextField label={_(msg`Country`)} options={[]} />
+                <SelectTextField
+                  label={_(COUNTRY_LABEL)}
+                  options={[]}
+                  emptyOptionText={_(EMPTY_OPTION_TEXT)}
+                />
               }
             >
               <LocationCountryField
+                label={_(COUNTRY_LABEL)}
+                emptyOptionText={_(EMPTY_OPTION_TEXT)}
                 exclude
                 error={!!errors['country']}
                 helperText={errors['country']?.message}
@@ -108,10 +120,16 @@ export const Retirement = () => {
             </Suspense>
             <Suspense
               fallback={
-                <SelectTextField label={_(msg`State / Region`)} options={[]} />
+                <SelectTextField
+                  label={_(msg`State / Region`)}
+                  options={[]}
+                  emptyOptionText={_(EMPTY_OPTION_TEXT)}
+                />
               }
             >
               <LocationStateField
+                label={_(STATE_LABEL)}
+                emptyOptionText={_(EMPTY_OPTION_TEXT)}
                 className="sm:mt-0"
                 optional
                 country={country as string}

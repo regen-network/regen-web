@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import BridgeIcon from '../../icons/BridgeIcon';
 import CreditsIcon from '../../icons/CreditsIcon';
 import { HeaderDropdownItemProps } from './HeaderDropdown/HeaderDropdown.Item';

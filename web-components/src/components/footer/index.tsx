@@ -35,6 +35,8 @@ interface FooterProps {
   newsletterSuccessChildren: React.ReactNode;
   newsletterSubmitLabel: string;
   newsletterInputPlaceholder: string;
+  requiredMessage: string;
+  invalidEmailMessage: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -116,6 +118,8 @@ export default function Footer({
   termsText,
   privacyText,
   joinText,
+  requiredMessage,
+  invalidEmailMessage,
   apiUri = 'http://localhost:5000',
 }: FooterProps): JSX.Element {
   const { classes } = useStyles();
@@ -176,6 +180,8 @@ export default function Footer({
                 apiUri={apiUri}
                 gridXs={{ textField: 7, button: 5 }}
                 successChildren={newsletterSuccessChildren}
+                requiredMessage={requiredMessage}
+                invalidEmailMessage={invalidEmailMessage}
               />
             </Box>
           </Grid>

@@ -1,9 +1,10 @@
 import { useEffect, useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
-import { msg } from '@lingui/macro';
+import { msg, plural } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
+import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
@@ -78,6 +79,30 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
 
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { confirmSave, isEdit, isDirtyRef } = useProjectEditContext();
+  const remainingSummaryCharacters = useMemo(
+    () =>
+      getRemainingCharacters({
+        value: description,
+        charLimit: SUMMARY_CHAR_LIMIT,
+      }),
+    [description],
+  );
+  const remainingStoryCharacters = useMemo(
+    () =>
+      getRemainingCharacters({
+        value: story,
+        charLimit: STORY_CHAR_LIMIT,
+      }),
+    [story],
+  );
+  const remainingStoryTitleCharacters = useMemo(
+    () =>
+      getRemainingCharacters({
+        value: storyTitle,
+        charLimit: STORY_TITLE_CHAR_LIMIT,
+      }),
+    [storyTitle],
+  );
 
   useEffect(() => {
     isDirtyRef.current = isDirty;
@@ -118,7 +143,11 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
         >
           <TextAreaFieldChartCounter
             value={description}
-            charLimit={SUMMARY_CHAR_LIMIT}
+            charsLeft={remainingSummaryCharacters}
+            remainingCharactersText={plural(remainingSummaryCharacters, {
+              one: `${remainingSummaryCharacters} character remaining`,
+              other: `${remainingSummaryCharacters} characters remaining`,
+            })}
           />
         </TextAreaField>
       </OnBoardingCard>
@@ -137,7 +166,11 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
         >
           <TextAreaFieldChartCounter
             value={story}
-            charLimit={STORY_CHAR_LIMIT}
+            charsLeft={remainingStoryCharacters}
+            remainingCharactersText={plural(remainingStoryCharacters, {
+              one: `${remainingStoryCharacters} character remaining`,
+              other: `${remainingStoryCharacters} characters remaining`,
+            })}
           />
         </TextAreaField>
         <TextAreaField
@@ -154,7 +187,11 @@ const DescriptionForm: React.FC<DescriptionFormProps> = ({
         >
           <TextAreaFieldChartCounter
             value={storyTitle}
-            charLimit={STORY_TITLE_CHAR_LIMIT}
+            charsLeft={remainingStoryTitleCharacters}
+            remainingCharactersText={plural(remainingStoryTitleCharacters, {
+              one: `${remainingStoryTitleCharacters} character remaining`,
+              other: `${remainingStoryTitleCharacters} characters remaining`,
+            })}
           />
         </TextAreaField>
       </OnBoardingCard>

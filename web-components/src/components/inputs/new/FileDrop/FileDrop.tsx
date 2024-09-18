@@ -33,12 +33,18 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
   mimeType?: string;
   description?: ReactNode;
   optional?: boolean | string;
-  buttonText?: string;
+  buttonText: string;
   fixedCrop?: Partial<Crop>;
   hideDragText?: boolean;
   fieldIndex?: number;
   dropZoneOption?: DropzoneOptions;
   isCropSubmitDisabled?: boolean;
+  fileUploadingTitle: string;
+  fileUploadingDescription: string;
+  locationText: string;
+  moveUpText: string;
+  moveDownText: string;
+  dragAndDropLabel: ReactNode;
   renderModal: (_: FileDropRenderModalProps) => React.ReactNode;
   setValue: (params: {
     value?: string;
@@ -86,6 +92,12 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       isSubmitting,
       fieldIndex = 0,
       isCropSubmitDisabled = false,
+      fileUploadingTitle,
+      fileUploadingDescription,
+      locationText,
+      moveUpText,
+      moveDownText,
+      dragAndDropLabel,
       renderModal,
       setValue,
       onUpload,
@@ -266,6 +278,9 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
               mimeType={mimeType}
               accept={accept}
               classes={classes}
+              locationText={locationText}
+              moveUpText={moveUpText}
+              moveDownText={moveDownText}
               moveUp={moveUp}
               moveDown={moveDown}
             />
@@ -280,9 +295,15 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
             accept={accept}
             ref={ref}
             dropZoneOption={dropZoneOption}
+            dragAndDropLabel={dragAndDropLabel}
           />
         </FieldFormControl>
-        <UploadingModal open={uploading} onClose={() => setUploading(false)} />
+        <UploadingModal
+          open={uploading}
+          onClose={() => setUploading(false)}
+          fileUploadingDescription={fileUploadingDescription}
+          fileUploadingTitle={fileUploadingTitle}
+        />
         {renderModal({
           open: isModalOpen,
           initialFile,

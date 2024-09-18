@@ -12,6 +12,8 @@ interface AmountFieldProps
     Omit<RegenTextFieldProps, 'label'> {
   name: string;
   auxiliaryLabel?: string;
+  maxLabel: string;
+  availableLabel: string;
   className?: string;
   onMaxClick?: (amount: number) => void;
 }
@@ -20,10 +22,12 @@ const AmountField = forwardRef<HTMLDivElement, AmountFieldProps>(
   (
     {
       name,
-      label = 'Amount',
+      label,
       auxiliaryLabel,
       availableAmount,
       denom,
+      maxLabel,
+      availableLabel,
       className,
       onMaxClick,
       ...props
@@ -44,10 +48,12 @@ const AmountField = forwardRef<HTMLDivElement, AmountFieldProps>(
           availableAmount={availableAmount}
           className={cx(styles.textField, className)}
           onMaxClick={onMaxClick}
+          maxLabel={maxLabel}
           label={
             <AmountLabel
               label={label}
               auxiliaryLabel={auxiliaryLabel}
+              availableLabel={availableLabel}
               availableAmount={availableAmount}
               denom={denom}
             />
@@ -55,6 +61,7 @@ const AmountField = forwardRef<HTMLDivElement, AmountFieldProps>(
           {...props}
         />
         <AuxiliaryLabel
+          availableLabel={availableLabel}
           availableAmount={availableAmount}
           denom={denom}
           className={styles.auxiliarLabelMobile}

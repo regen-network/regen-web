@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
+import { msg, plural, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Feature, Point } from 'geojson';
+import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
 import { isImage } from 'web-components/src/components/inputs/new/FileDrop/FileDrop.utils';
 import { isGeocodingFeature } from 'web-components/src/components/inputs/new/LocationField/LocationField.types';
@@ -58,6 +59,14 @@ export const EditFileForm = ({
   const description = file?.description;
   const location = file?.location;
   const locationType = file?.locationType;
+  const remainingDescriptionCharacters = useMemo(
+    () =>
+      getRemainingCharacters({
+        value: description,
+        charLimit: FILE_MAX_DESCRIPTION_LENGTH,
+      }),
+    [description],
+  );
 
   const debouncedValue = useDebounce(location);
   useEffect(() => {
@@ -104,7 +113,11 @@ export const EditFileForm = ({
       >
         <TextAreaFieldChartCounter
           value={description}
-          charLimit={FILE_MAX_DESCRIPTION_LENGTH}
+          charsLeft={remainingDescriptionCharacters}
+          remainingCharactersText={plural(remainingDescriptionCharacters, {
+            one: `${remainingDescriptionCharacters} character remaining`,
+            other: `${remainingDescriptionCharacters} characters remaining`,
+          })}
           sx={{ mb: { xs: 0, sm: 0 } }}
         />
       </TextAreaField>

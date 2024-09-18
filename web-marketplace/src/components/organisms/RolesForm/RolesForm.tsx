@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import {
   ApolloClient,
@@ -19,6 +19,10 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';
+import {
+  INVALID_REGEN_ADDRESS,
+  REQUIRED_MESSAGE,
+} from 'lib/constants/shared.constants';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
 import { useCreateProjectContext } from 'pages/ProjectCreate';
@@ -32,10 +36,18 @@ import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
 import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { AdminModal } from './components/AdminModal/AdminModal';
-import { ProfileModalSchemaType } from './components/ProfileModal/ProfileModal.schema';
+import { DIFFERENT_ADDRESSES_ERROR_MSG } from './components/AdminModal/AdminModal.constants';
+import {
+  getAddressSchema,
+  getOptionalAddressSchema,
+} from './components/AdminModal/AdminModal.schema';
+import {
+  getProfileModalSchema,
+  ProfileModalSchemaType,
+} from './components/ProfileModal/ProfileModal.schema';
 import { RoleField } from './components/RoleField/RoleField';
 import { useSaveProfile } from './hooks/useSaveProfile';
-import { rolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
+import { getRolesFormSchema, RolesFormSchemaType } from './RolesForm.schema';
 
 interface RolesFormProps {
   submit: (props: RoleSubmitProps) => Promise<void>;
@@ -54,9 +66,42 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
 }) => {
   const { _ } = useLingui();
   const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
+  const addressSchema = useMemo(
+    () =>
+      getAddressSchema({
+        invalidRegenAddress: _(INVALID_REGEN_ADDRESS),
+        requiredMessage: _(REQUIRED_MESSAGE),
+        differentAddressesErrorMessage: _(DIFFERENT_ADDRESSES_ERROR_MSG),
+      }),
+    [_],
+  );
+  const optionalAddressSchema = useMemo(
+    () =>
+      getOptionalAddressSchema({
+        invalidRegenAddress: _(INVALID_REGEN_ADDRESS),
+      }),
+    [_],
+  );
+  const profileModalSchema = useMemo(
+    () =>
+      getProfileModalSchema({
+        optionalAddressSchema,
+      }),
+    [optionalAddressSchema],
+  );
+  const rolesFormSchema = useMemo(
+    () =>
+      getRolesFormSchema({
+        isOnChain,
+        addressSchema,
+        optionalAddressSchema,
+        profileModalSchema,
+      }),
+    [isOnChain, addressSchema, optionalAddressSchema, profileModalSchema],
+  );
   const form = useZodForm({
-    schema: rolesFormSchema(isOnChain),
-    draftSchema: rolesFormSchema(isOnChain), // same schema since all fields are optional
+    schema: rolesFormSchema,
+    draftSchema: rolesFormSchema, // same schema since all fields are optional
     defaultValues: {
       ...initialValues,
     },

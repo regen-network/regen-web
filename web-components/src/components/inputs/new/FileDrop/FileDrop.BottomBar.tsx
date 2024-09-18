@@ -16,6 +16,7 @@ type Props = {
   credit?: string;
   sx?: SxProps<Theme>;
   location?: GeocodeFeature | Feature;
+  locationText: string;
 };
 
 export const FileDropBottomBar = ({

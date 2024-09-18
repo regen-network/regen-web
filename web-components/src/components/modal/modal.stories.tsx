@@ -94,6 +94,11 @@ function OpenCropImageModal(props: CropStoryProps): JSX.Element {
         onSubmit={handleSubmit}
         initialImage={uploadedImage}
         circularCrop={props.circularCrop}
+        applyText="Apply"
+        updateText="Update"
+        uploadText="Uploading image"
+        titleIgnoreCrop="Update image details"
+        title="Position and size your image"
       />
       <Card style={{ width: 200, height: 200, marginTop: 32 }}>
         {props.circularCrop ? (
@@ -200,6 +205,12 @@ export const basketPutModal = (): JSX.Element => (
     amountLabel="Amount"
     submitLabel="Put in basket"
     submitErrorText="Please correct the errors above"
+    requiredMessage="Required"
+    invalidAmount="Invalid amount"
+    maxLabel="Max"
+    availableLabel="Available"
+    insufficientCredits="Insufficient credits"
+    invalidDecimalCount="Invalid decimal count"
   />
 );
 
@@ -233,6 +244,13 @@ export const basketTakeModal = (): JSX.Element => (
     submitLabel="take from basket"
     submitErrorText="Please correct the errors above"
     retirementInfoText="Retirement is permanent and non-reversible."
+    requiredMessage="Required"
+    invalidAmount="Invalid amount"
+    maxLabel="Max"
+    availableLabel="Available"
+    insufficientCredits="Insufficient credits"
+    invalidDecimalCount="Invalid decimal count"
+    invalidMemoLength="Invalid memo length"
     bottomTextMapping={bottomTextMapping}
   />
 );

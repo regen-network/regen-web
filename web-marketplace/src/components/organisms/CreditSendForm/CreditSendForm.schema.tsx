@@ -1,18 +1,20 @@
 import { z } from 'zod';
 
-import {
-  invalidRegenAddress,
-  isValidAddress,
-  requiredMessage,
-} from 'web-components/src/components/inputs/validation';
+import { isValidAddress } from 'web-components/src/components/inputs/validation';
 
 import { RetireFormSchema } from '../CreditRetireForm/CreditRetireForm.schema';
 
 type Params = {
   addressPrefix?: string;
+  requiredMessage: string;
+  invalidRegenAddress: string;
 };
 
-export const CreditSendFormSchema = ({ addressPrefix }: Params) =>
+export const getCreditSendFormSchema = ({
+  addressPrefix,
+  requiredMessage,
+  invalidRegenAddress,
+}: Params) =>
   z.object({
     sender: z.string(),
     recipient: z
@@ -30,5 +32,5 @@ export const CreditSendFormSchema = ({ addressPrefix }: Params) =>
   });
 
 export type CreditSendFormSchemaType = z.infer<
-  ReturnType<typeof CreditSendFormSchema>
+  ReturnType<typeof getCreditSendFormSchema>
 >;

@@ -27,6 +27,7 @@ interface Props extends FieldProps, DefaultStyleProps {
   disabled?: boolean;
   optional?: boolean | string;
   label?: string;
+  exampleText?: string;
   onExampleClick?: () => void;
 }
 
@@ -83,6 +84,7 @@ export default function FieldFormControl({
   className,
   sx,
   optional,
+  exampleText,
   onExampleClick,
   defaultStyle = true,
   forceDefaultStyle = false,
@@ -124,6 +126,7 @@ export default function FieldFormControl({
           label={label}
           optional={optional}
           description={description}
+          exampleText={exampleText}
           onExampleClick={onExampleClick}
           disabled={disabled}
         />

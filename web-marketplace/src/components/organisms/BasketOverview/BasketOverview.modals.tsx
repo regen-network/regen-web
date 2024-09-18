@@ -21,6 +21,12 @@ import {
   BATCH_DESCRIPTION,
   BATCH_LABEL,
   getBottomFieldsTextMapping,
+  INSUFFICIENT_CREDITS,
+  INVALID_AMOUNT,
+  INVALID_DECIMAL_COUNT,
+  INVALID_MEMO_LENGTH,
+  MAX_LABEL,
+  REQUIRED_MESSAGE,
   RETIRE_ON_TAKE_LABEL,
   RETIRE_ON_TAKE_TOOLTIP,
   RETIREMENT_INFO_TEXT,
@@ -39,6 +45,7 @@ import {
 import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.types';
 import { useMsgClient } from 'hooks';
 
+import { AVAILABLE_LABEL } from '../../../lib/constants/shared.constants';
 import {
   PUT_BASKET_LABEL,
   TAKE_BASKET_LABEL,
@@ -156,6 +163,12 @@ export const BasketOverviewModals = ({
         submitLabel={_(BASKET_PUT_SUBMIT_LABEL)}
         submitErrorText={_(SUBMIT_ERROR_TEXT)}
         title={_(BASKET_PUT_SUBMIT_LABEL)}
+        maxLabel={_(MAX_LABEL)}
+        availableLabel={_(AVAILABLE_LABEL)}
+        requiredMessage={_(REQUIRED_MESSAGE)}
+        invalidAmount={_(INVALID_AMOUNT)}
+        insufficientCredits={_(INSUFFICIENT_CREDITS)}
+        invalidDecimalCount={_(INVALID_DECIMAL_COUNT)}
       />
       <BasketTakeModal
         open={isTakeModalOpen}
@@ -180,6 +193,13 @@ export const BasketOverviewModals = ({
         bottomTextMapping={bottomFieldsTextMapping}
         onClose={onCloseTakeModal}
         onSubmit={basketTakeSubmit}
+        maxLabel={_(MAX_LABEL)}
+        availableLabel={_(AVAILABLE_LABEL)}
+        requiredMessage={_(REQUIRED_MESSAGE)}
+        invalidAmount={_(INVALID_AMOUNT)}
+        insufficientCredits={_(INSUFFICIENT_CREDITS)}
+        invalidDecimalCount={_(INVALID_DECIMAL_COUNT)}
+        invalidMemoLength={_(INVALID_MEMO_LENGTH)}
       />
     </>
   );

@@ -8,13 +8,20 @@ import FormLabel from 'web-components/src/components/inputs/FormLabel';
 import SelectTextField from 'web-components/src/components/inputs/SelectTextField';
 import TextField from 'web-components/src/components/inputs/TextField';
 import {
-  requirementAgreement,
   validateAmount,
   validatePolygonAddress,
 } from 'web-components/src/components/inputs/validation';
 import { RegenModalProps } from 'web-components/src/components/modal';
 
-import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
+import {
+  INSUFFICIENT_CREDITS,
+  INVALID_AMOUNT,
+  INVALID_DECIMAL_COUNT,
+  INVALID_POLYGON_ADDRESS,
+  REQUIRED_MESSAGE,
+  REQUIREMENT_AGREEMENT,
+  SUBMIT_ERRORS,
+} from 'lib/constants/shared.constants';
 
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckbox';
 
@@ -28,6 +35,8 @@ export interface BridgeProps {
 }
 
 interface FormProps extends BridgeProps {
+  maxLabel: string;
+  availableLabel: string;
   onClose: RegenModalProps['onClose'];
 }
 
@@ -39,10 +48,12 @@ export interface BridgeFormValues {
 }
 
 const BridgeForm = ({
-  onClose,
-  onSubmit,
+  maxLabel,
+  availableLabel,
   availableBridgeableAmount,
   batchDenom,
+  onClose,
+  onSubmit,
 }: FormProps): JSX.Element => {
   const { _ } = useLingui();
 
@@ -59,13 +70,24 @@ const BridgeForm = ({
   ): FormikErrors<BridgeFormValues> => {
     let errors: FormikErrors<BridgeFormValues> = {};
 
-    const errRecipient = validatePolygonAddress(values.recipient);
+    const errRecipient = validatePolygonAddress({
+      address: values.recipient,
+      requiredMessage: _(REQUIRED_MESSAGE),
+      invalidPolygonAddress: _(INVALID_POLYGON_ADDRESS),
+    });
     if (errRecipient) errors.recipient = errRecipient;
 
-    const errAmount = validateAmount(availableBridgeableAmount, values.amount);
+    const errAmount = validateAmount({
+      availableTradableAmount: availableBridgeableAmount,
+      amount: values.amount,
+      invalidDecimalCount: _(INVALID_DECIMAL_COUNT),
+      requiredMessage: _(REQUIRED_MESSAGE),
+      invalidAmount: _(INVALID_AMOUNT),
+      insufficientCredits: _(INSUFFICIENT_CREDITS),
+    });
     if (errAmount) errors.amount = errAmount;
 
-    if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
+    if (!values.agreeErpa) errors.agreeErpa = _(REQUIREMENT_AGREEMENT);
 
     return errors;
   };
@@ -99,6 +121,8 @@ const BridgeForm = ({
             component={TextField}
           />
           <AmountField
+            maxLabel={maxLabel}
+            availableLabel={availableLabel}
             name="amount"
             label={_(msg`Amount`)}
             availableAmount={availableBridgeableAmount}

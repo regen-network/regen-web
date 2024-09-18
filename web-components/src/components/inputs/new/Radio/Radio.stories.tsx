@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { VideoInput } from '../VideoInput/VideoInput';
 import { Radio } from './Radio';
-import { RADIO_PREFERABLE } from './Radio.constants';
+import { RADIO_PREFERABLE } from './Radio.mock';
 
 export default {
   title: 'atoms/inputs/Radio',
@@ -11,7 +11,12 @@ export default {
 
 const Template: ComponentStory<typeof Radio> = args => (
   <Radio {...args}>
-    <VideoInput setError={() => {}} />
+    <VideoInput
+      setError={() => {}}
+      urlNotValidText="Invalid URL"
+      loadingText="Loading"
+      addPlaceholder="Add a video"
+    />
   </Radio>
 );
 

@@ -30,12 +30,14 @@ export interface SelectTextFieldProps
     DefaultStyleProps {
   options?: Option[];
   native?: boolean;
+  emptyOptionText: string;
 }
 
 export default function SelectTextField({
   options,
   disabled,
   native = true,
+  emptyOptionText,
   ...props
 }: SelectTextFieldProps): JSX.Element {
   const {
@@ -84,7 +86,7 @@ export default function SelectTextField({
         ))
       ) : (
         <Box component={native ? 'option' : MenuItem} key="loading">
-          No options available
+          {emptyOptionText}
         </Box>
       )}
     </TextField>

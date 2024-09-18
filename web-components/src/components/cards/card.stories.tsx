@@ -140,6 +140,7 @@ export const projectCard = (): JSX.Element => (
         estimatedIssuance: '200',
         stripePaymentLink: 'https://stripe.com',
       }}
+      draftText="Draft"
     />
   </Box>
 );
@@ -359,6 +360,6 @@ export const reviewCard = (): JSX.Element => (
     <ItemDisplay name="URL">
       <a href="http://www.url.com/">www.url.com</a>
     </ItemDisplay>
-    <Photo src="/coorong.png" />
+    <Photo src="/coorong.png" locationText="Location" />
   </ReviewCard>
 );

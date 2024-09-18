@@ -15,14 +15,41 @@ import {
 } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants';
 import {
   creditBasicsInitialValues,
-  creditBasicsValidationSchema,
-  creditBasicsValidationSchemaFields,
+  getCreditBasicsValidationSchema,
+  getCreditBasicsValidationSchemaFields,
+  getIsPastDateTest,
+  getJSONSchema,
+  getVcsMetadataSchema,
 } from './CreateBatchMultiStepForm/CreditBasics';
 
 // address prefix `regen` used to narrow address validation for recipients
 const addressPrefix = chainInfo.bech32Config.bech32PrefixAccAddr;
 
-const getFormModel = (_: TranslatorType) => ({
+type GetFormModelParams = {
+  requiredMessage: string;
+  invalidRegenAddress: string;
+  invalidAmount: string;
+  invalidDate: string;
+  invalidVCSRetirement: string;
+  invalidJSON: string;
+  isPastDateTest: ReturnType<typeof getIsPastDateTest>;
+  vcsMetadataSchema: ReturnType<typeof getVcsMetadataSchema>;
+  JSONSchema: ReturnType<typeof getJSONSchema>;
+  _: TranslatorType;
+};
+
+export const getFormModel = ({
+  requiredMessage,
+  invalidRegenAddress,
+  invalidAmount,
+  invalidDate,
+  invalidVCSRetirement,
+  invalidJSON,
+  isPastDateTest,
+  vcsMetadataSchema,
+  JSONSchema,
+  _,
+}: GetFormModelParams) => ({
   formId: 'create-batch-form',
   steps: [
     {
@@ -50,20 +77,38 @@ const getFormModel = (_: TranslatorType) => ({
     },
   ],
   validationSchema: [
-    creditBasicsValidationSchema,
-    getValidationSchema(
+    getCreditBasicsValidationSchema({
+      requiredMessage,
+      invalidDate,
+      isPastDateTest,
+      invalidVCSRetirement,
+      invalidJSON,
+    }),
+    getValidationSchema({
+      requiredMessage,
+      invalidRegenAddress,
+      invalidAmount,
       addressPrefix,
-      _(CREATE_BATCH_FORM_REQUIRED_ERROR),
-      _(CREATE_BATCH_FORM_MINIMUM_ERROR),
-    ),
+      requiredError: _(CREATE_BATCH_FORM_REQUIRED_ERROR),
+      minimumError: _(CREATE_BATCH_FORM_MINIMUM_ERROR),
+    }),
   ],
   validationSchemaFields: {
-    ...creditBasicsValidationSchemaFields,
-    ...getValidationSchemaFields(
+    ...getCreditBasicsValidationSchemaFields({
+      invalidDate,
+      isPastDateTest,
+      vcsMetadataSchema,
+      JSONSchema,
+      requiredMessage,
+    }),
+    ...getValidationSchemaFields({
+      requiredMessage,
+      invalidRegenAddress,
+      invalidAmount,
       addressPrefix,
-      _(CREATE_BATCH_FORM_REQUIRED_ERROR),
-      _(CREATE_BATCH_FORM_MINIMUM_ERROR),
-    ),
+      requiredError: _(CREATE_BATCH_FORM_REQUIRED_ERROR),
+      minimumError: _(CREATE_BATCH_FORM_MINIMUM_ERROR),
+    }),
   },
   initialValues: {
     ...creditBasicsInitialValues,

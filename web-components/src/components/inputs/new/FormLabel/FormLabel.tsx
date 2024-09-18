@@ -11,6 +11,7 @@ interface Props {
   disabled?: boolean;
   optional?: boolean | string;
   label?: ReactNode;
+  exampleText?: string;
   onExampleClick?: () => void;
   required?: boolean;
 }
@@ -25,6 +26,7 @@ export default function FormLabel({
   className,
   optional,
   required,
+  exampleText,
   onExampleClick,
 }: Props): JSX.Element {
   return (
@@ -39,14 +41,14 @@ export default function FormLabel({
         <Flex sx={{ mt: 1 }}>
           <Body size="sm">
             {description}
-            {onExampleClick && (
+            {onExampleClick && onExampleClick && (
               <Box
                 component="span"
                 role="button"
                 onClick={onExampleClick}
                 sx={{ color: 'secondary.main', cursor: 'pointer' }}
               >
-                &nbsp;See an example»
+                &nbsp;{exampleText}
               </Box>
             )}
           </Body>

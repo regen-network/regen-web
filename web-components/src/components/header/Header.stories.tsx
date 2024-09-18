@@ -22,7 +22,13 @@ Default.args = {
   absolute: true,
   color: 'black',
   borderBottom: false,
-  extras: <ExtraComponent />,
+  extras: (
+    <ExtraComponent
+      avatarAlt="default avatar"
+      logoutText="Log out"
+      loginText="Login"
+    />
+  ),
 };
 
 Default.argTypes = {};

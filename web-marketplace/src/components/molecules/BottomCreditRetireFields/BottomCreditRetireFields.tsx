@@ -13,6 +13,12 @@ import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoToolt
 import { Body, Title } from 'web-components/src/components/typography';
 import { getJurisdictionIsoCode } from 'web-components/src/utils/locationStandard';
 
+import {
+  COUNTRY_LABEL,
+  EMPTY_OPTION_TEXT,
+  STATE_LABEL,
+} from 'lib/constants/shared.constants';
+
 import { CreditSendFormSchemaType } from 'components/organisms/CreditSendForm/CreditSendForm.schema';
 
 import {
@@ -108,9 +114,17 @@ export const BottomCreditRetireFields: React.FC<
       <Grid container className={styles.stateCountryGrid}>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
           <Suspense
-            fallback={<SelectTextField label={_(msg`Country`)} options={[]} />}
+            fallback={
+              <SelectTextField
+                label={_(COUNTRY_LABEL)}
+                options={[]}
+                emptyOptionText={_(EMPTY_OPTION_TEXT)}
+              />
+            }
           >
             <LocationCountryField
+              label={_(COUNTRY_LABEL)}
+              emptyOptionText={_(EMPTY_OPTION_TEXT)}
               exclude
               key={fieldId}
               error={!!errors?.retireFields?.[fieldIndex]?.country}
@@ -123,11 +137,17 @@ export const BottomCreditRetireFields: React.FC<
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
           <Suspense
             fallback={
-              <SelectTextField label={_(msg`State / Region`)} options={[]} />
+              <SelectTextField
+                label={_(msg`State / Region`)}
+                options={[]}
+                emptyOptionText={_(EMPTY_OPTION_TEXT)}
+              />
             }
           >
             <LocationStateField
               optional
+              emptyOptionText={_(EMPTY_OPTION_TEXT)}
+              label={_(STATE_LABEL)}
               country={country}
               key={fieldId}
               error={!!errors?.retireFields?.[fieldIndex]?.stateProvince}

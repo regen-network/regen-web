@@ -4,6 +4,7 @@ import { useAtom } from 'jotai';
 import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
 
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
+import { EMAIL_CONFIRMATION_ARIA_LABEL } from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useSocialProviders } from '../LoginButton/hooks/useSocialProviders';
@@ -66,6 +67,7 @@ const LoginFlow = ({
         state={modalState}
       />
       <EmailConfirmationModal
+        ariaLabel={_(EMAIL_CONFIRMATION_ARIA_LABEL)}
         resendText={getResendCodeLabel({ resendTimeLeft, _ })}
         resendButtonLink={getResendCodeButtonLink({
           resendTimeLeft,

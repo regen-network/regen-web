@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { GradientBadgeVariant } from './GradientBadge.types';
 
 export const GradientBadgeVariantMapping: {

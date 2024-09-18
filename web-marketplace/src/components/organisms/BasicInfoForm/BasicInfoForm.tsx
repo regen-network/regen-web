@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { msg } from '@lingui/macro';
@@ -14,6 +14,11 @@ import SelectTextField from 'web-components/src/components/inputs/new/SelectText
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import {
+  EMPTY_OPTION_TEXT,
+  POSITIVE_NUMBER,
+  REQUIRED_MESSAGE,
+} from 'lib/constants/shared.constants';
 
 import { useProjectEditContext } from 'pages';
 import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
@@ -32,8 +37,8 @@ import {
 } from './BasicInfoForm.constants';
 import {
   basicInfoFormDraftSchema,
-  basicInfoFormSchema,
   BasicInfoFormSchemaType,
+  getBasicInfoFormSchema,
 } from './BasicInfoForm.schema';
 import { useBasicInfoStyles } from './BasicInfoForm.styles';
 import { useSubmitCreateProject } from './hooks/useSubmitCreateProject';
@@ -54,6 +59,14 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
   const { projectId } = useParams();
   const saveAndExit = useProjectSaveAndExit();
   const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
+  const basicInfoFormSchema = useMemo(
+    () =>
+      getBasicInfoFormSchema({
+        requiredMessage: _(REQUIRED_MESSAGE),
+        positiveNumber: _(POSITIVE_NUMBER),
+      }),
+    [_],
+  );
   const form = useZodForm({
     schema: basicInfoFormSchema,
     draftSchema: basicInfoFormDraftSchema,
@@ -187,6 +200,7 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({
               defaultStyle={false}
               native={false}
               value={unit}
+              emptyOptionText={_(EMPTY_OPTION_TEXT)}
               {...form.register('regen:projectSize.qudt:unit')}
             />
           </Box>

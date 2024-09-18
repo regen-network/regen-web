@@ -7,13 +7,13 @@ import { AnyObjectSchema, object, string } from 'yup';
 
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
 import Submit from 'web-components/src/components/form/Submit';
-import {
-  invalidURL,
-  requiredMessage,
-} from 'web-components/src/components/inputs/validation';
 import { RegenModalProps } from 'web-components/src/components/modal';
 
-import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
+import {
+  INVALID_URL,
+  REQUIRED_MESSAGE,
+  SUBMIT_ERRORS,
+} from 'lib/constants/shared.constants';
 import { NameUrl } from 'lib/rdf/types';
 
 export interface CertificationProps {
@@ -40,11 +40,11 @@ const CertificationForm: React.FC<React.PropsWithChildren<FormProps>> = ({
 
   const urlSchema: AnyObjectSchema = object({
     '@type': string(),
-    '@value': string().url(invalidURL),
+    '@value': string().url(_(INVALID_URL)),
   });
 
   const nameUrlSchema: AnyObjectSchema = object({
-    'schema:name': string().required(requiredMessage),
+    'schema:name': string().required(_(REQUIRED_MESSAGE)),
     'schema:url': urlSchema,
   });
 

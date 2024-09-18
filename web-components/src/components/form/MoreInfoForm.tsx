@@ -8,11 +8,7 @@ import { makeStyles } from 'tss-react/mui';
 import CheckboxGroup from '../inputs/CheckboxGroup';
 import SelectTextField from '../inputs/SelectTextField';
 import TextField from '../inputs/TextField';
-import {
-  invalidEmailMessage,
-  requiredMessage,
-  validateEmail,
-} from '../inputs/validation';
+import { validateEmail } from '../inputs/validation';
 import { Body, Title } from '../typography';
 import Submit from './Submit';
 
@@ -29,6 +25,12 @@ interface MoreInfoFormProps {
   onBehalfOfOptions: { label: string; value: string }[];
   submitLabel: string;
   submitErrorText: string;
+  requiredMessage: string;
+  invalidEmailMessage: string;
+  invalidAmount: string;
+  insufficientCredits: string;
+  invalidDecimalCount: string;
+  invalidMemoLength: string;
   onClose: () => void;
   onSubmit?: () => void;
   apiUrl: string;
@@ -70,6 +72,12 @@ export default function MoreInfoForm({
   onBehalfOfOptions,
   submitLabel,
   submitErrorText,
+  requiredMessage,
+  invalidEmailMessage,
+  invalidAmount,
+  insufficientCredits,
+  invalidDecimalCount,
+  invalidMemoLength,
   onClose,
   onSubmit,
   apiUrl,

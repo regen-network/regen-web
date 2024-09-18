@@ -36,10 +36,6 @@ export const useFileDropStyles = makeStyles()((theme: Theme) => ({
     background: theme.palette.grey[50],
     border: `2px dashed ${theme.palette.grey[100]}`,
   },
-  or: {
-    marginBottom: theme.spacing(4),
-    fontSize: theme.typography.pxToRem(12),
-  },
   buttons: {
     position: 'absolute',
     left: 0,

@@ -7,6 +7,8 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import { EmailConfirmationModal } from 'web-components/src/components/modal/EmailConfirmationModal/EmailConfirmationModal';
 import { Body, Subtitle } from 'web-components/src/components/typography';
 
+import { EMAIL_CONFIRMATION_ARIA_LABEL } from 'lib/constants/shared.constants';
+
 import { Link } from 'components/atoms';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -84,6 +86,7 @@ export const UserAccountSettings = ({
         </div>
       </Form>
       <EmailConfirmationModal
+        ariaLabel={_(EMAIL_CONFIRMATION_ARIA_LABEL)}
         resendText={getResendCodeLabel({ resendTimeLeft, _ })}
         resendButtonLink={getResendCodeButtonLink({
           resendTimeLeft,

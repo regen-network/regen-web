@@ -38,6 +38,12 @@ export const basketPutForm = (): JSX.Element => (
     amountLabel="Amount"
     submitLabel="Put in basket"
     submitErrorText="Please correct the errors above"
+    requiredMessage="Required"
+    invalidAmount="Invalid amount"
+    insufficientCredits="Insufficient credits"
+    invalidDecimalCount="Invalid decimal count"
+    maxLabel="Max"
+    availableLabel="Available"
   />
 );
 
@@ -67,6 +73,13 @@ export const basketTakeForm = (): JSX.Element => (
     submitErrorText="Please correct the errors above"
     retirementInfoText="Retirement is permanent and non-reversible."
     bottomTextMapping={bottomTextMapping}
+    requiredMessage="Required"
+    invalidAmount="Invalid amount"
+    insufficientCredits="Insufficient credits"
+    invalidDecimalCount="Invalid decimal count"
+    maxLabel="Max"
+    availableLabel="Available"
+    invalidMemoLength="Invalid memo length"
   />
 );
 
@@ -88,6 +101,9 @@ export const creditBatchRecipientsForm = (): JSX.Element => (
     }
     bottomTextMapping={bottomTextMapping}
     retirementInfoText="Retirement is permanent and non-reversible."
+    requiredMessage="Required"
+    invalidRegenAddress="Invalid Regen address"
+    invalidAmount="Invalid amount"
   />
 );
 
@@ -150,6 +166,12 @@ export const moreInfoForm = (): JSX.Element => (
     ]}
     submitLabel="Submit"
     submitErrorText="Please correct the errors above"
+    requiredMessage="Required"
+    invalidEmailMessage="Invalid email"
+    invalidAmount="Invalid amount"
+    insufficientCredits="Insufficient credits"
+    invalidDecimalCount="Invalid decimal count"
+    invalidMemoLength="Invalid memo length"
   />
 );
 
@@ -170,5 +192,7 @@ export const newsletterForm = (): JSX.Element => (
         </Body>
       </>
     }
+    requiredMessage="Required"
+    invalidEmailMessage="Invalid email"
   />
 );

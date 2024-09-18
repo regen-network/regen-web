@@ -8,6 +8,10 @@ import { useEmailSubmitSectionStyles } from './EmailSubmitSection.styles';
 
 import { BackgroundImage } from '@/components/organisms/BackgroundImage/BackgroundImage';
 import { SharedNewsletterSectionFieldsFragment } from '@/generated/sanity-graphql';
+import {
+  INVALID_EMAIL_MESSAGE,
+  REQUIRED_MESSAGE,
+} from '@/lib/constants/shared.constants';
 import deerNewsletterBg from '@/public/images/token/deer-newsletter-bg.png';
 
 interface Content {
@@ -70,6 +74,8 @@ const EmailSubmitSection = ({ altContent, sharedNewsletterData }: Props) => {
               </Body>
             </>
           }
+          requiredMessage={REQUIRED_MESSAGE}
+          invalidEmailMessage={INVALID_EMAIL_MESSAGE}
         />
       </div>
     </BackgroundImage>

@@ -21,6 +21,7 @@ import {
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
+import { AVAILABLE_LABEL, MAX_LABEL } from 'lib/constants/shared.constants';
 import { messageActionEquals } from 'lib/ecocredit/constants';
 import { GET_TXS_EVENT_KEY } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.constants';
 import { getEventsKey } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery.utils';
@@ -156,6 +157,8 @@ export const BridgeFlow = ({
         onSubmit={creditBridgeSubmit}
         onClose={() => setBatchToBridge(undefined)}
         batch={selectedBatch}
+        maxLabel={_(MAX_LABEL)}
+        availableLabel={_(AVAILABLE_LABEL)}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

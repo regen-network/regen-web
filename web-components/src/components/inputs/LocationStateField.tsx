@@ -10,12 +10,14 @@ interface FieldProps {
   className?: string;
   optional?: boolean;
   initialSelection?: string;
+  label: string;
 }
 
 const LocationStateField: React.FC<React.PropsWithChildren<FieldProps>> = ({
   country,
   name = 'stateProvince',
   className,
+  label,
   optional = false,
   initialSelection,
 }) => {
@@ -35,7 +37,7 @@ const LocationStateField: React.FC<React.PropsWithChildren<FieldProps>> = ({
   return (
     <Field
       name={name}
-      label="State / Region"
+      label={label}
       options={stateOptions}
       component={SelectTextField}
       className={className}

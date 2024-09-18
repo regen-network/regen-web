@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
-import { msg } from '@lingui/macro';
+import { msg, plural } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
 import RadioCard from 'web-components/src/components/atoms/RadioCard';
 import { ImageField } from 'web-components/src/components/inputs/new/ImageField/ImageField';
@@ -9,6 +10,14 @@ import { ImageFieldAvatar } from 'web-components/src/components/inputs/new/Image
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+
+import {
+  APPLY,
+  INVALID_REGEN_ADDRESS,
+  TITLE_CROP,
+  TITLE_IGNORE_CROP,
+  UPDATE,
+} from 'lib/constants/shared.constants';
 
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import {
@@ -19,9 +28,10 @@ import {
 } from 'components/organisms/EditProfileForm/EditProfileForm.constants';
 import { useUpdateDefaultAvatar } from 'components/organisms/EditProfileForm/hooks/useUpdateDefaultAvatar';
 
+import { getOptionalAddressSchema } from '../AdminModal/AdminModal.schema';
 import { ModalTemplate } from '../ModalTemplate/ModalTemplate';
 import {
-  profileModalSchema,
+  getProfileModalSchema,
   ProfileModalSchemaType,
 } from './ProfileModal.schema';
 
@@ -39,6 +49,18 @@ function ProfileModal({
   onUpload,
 }: ProfileModalProps): JSX.Element {
   const { _ } = useLingui();
+  const optionalAddressSchema = useMemo(
+    () =>
+      getOptionalAddressSchema({
+        invalidRegenAddress: _(INVALID_REGEN_ADDRESS),
+      }),
+    [_],
+  );
+  const profileModalSchema = useMemo(
+    () => getProfileModalSchema({ optionalAddressSchema }),
+    [optionalAddressSchema],
+  );
+
   const form = useZodForm({
     schema: profileModalSchema,
     defaultValues: {
@@ -67,6 +89,11 @@ function ProfileModal({
     control: form.control,
     name: 'description',
   });
+
+  const remainingDescriptionCharacters = useMemo(
+    () => getRemainingCharacters({ value: description }),
+    [description],
+  );
 
   /* Setter */
 
@@ -109,6 +136,11 @@ function ProfileModal({
       <ImageField
         label={_(msg`Profile image`)}
         buttonText={_(UPLOAD_IMAGE)}
+        uploadText={_(UPLOAD_IMAGE)}
+        updateText={_(UPDATE)}
+        applyText={_(APPLY)}
+        title={_(TITLE_CROP)}
+        titleIgnoreCrop={_(TITLE_IGNORE_CROP)}
         setValue={setProfileImage}
         {...form.register('profileImage')}
         name="profile-image"
@@ -130,7 +162,14 @@ function ProfileModal({
         error={!!errors.description}
         {...form.register('description')}
       >
-        <TextAreaFieldChartCounter value={description} />
+        <TextAreaFieldChartCounter
+          value={description}
+          charsLeft={remainingDescriptionCharacters}
+          remainingCharactersText={plural(remainingDescriptionCharacters, {
+            one: `${remainingDescriptionCharacters} character remaining`,
+            other: `${remainingDescriptionCharacters} characters remaining`,
+          })}
+        />
       </TextAreaField>
       <TextField
         type="text"

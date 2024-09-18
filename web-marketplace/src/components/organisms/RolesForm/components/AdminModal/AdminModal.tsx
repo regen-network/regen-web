@@ -6,11 +6,24 @@ import { Box } from '@mui/material';
 
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
+import {
+  INVALID_REGEN_ADDRESS,
+  REQUIRED_MESSAGE,
+} from 'lib/constants/shared.constants';
+
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import { ModalTemplate } from '../ModalTemplate/ModalTemplate';
-import { SUBMIT_LABEL, TITLE } from './AdminModal.constants';
-import { AdminModalSchemaType, getAdminModalSchema } from './AdminModal.schema';
+import {
+  DIFFERENT_ADDRESSES_ERROR_MSG,
+  SUBMIT_LABEL,
+  TITLE,
+} from './AdminModal.constants';
+import {
+  AdminModalSchemaType,
+  getAddressSchema,
+  getAdminModalSchema,
+} from './AdminModal.schema';
 
 interface AdminModalProps {
   initialValues?: AdminModalSchemaType;
@@ -24,7 +37,15 @@ function AdminModal({
   onSubmit,
 }: AdminModalProps): JSX.Element {
   const { _ } = useLingui();
-  const adminModalSchema = useMemo(() => getAdminModalSchema(_), [_]);
+  const addressSchema = getAddressSchema({
+    invalidRegenAddress: _(INVALID_REGEN_ADDRESS),
+    requiredMessage: _(REQUIRED_MESSAGE),
+    differentAddressesErrorMessage: _(DIFFERENT_ADDRESSES_ERROR_MSG),
+  });
+  const adminModalSchema = useMemo(
+    () => getAdminModalSchema({ addressSchema, _ }),
+    [addressSchema, _],
+  );
 
   const form = useZodForm({
     schema: adminModalSchema,

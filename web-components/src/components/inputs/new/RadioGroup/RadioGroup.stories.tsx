@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { Radio } from '../Radio/Radio';
-import { RADIO_PREFERABLE } from '../Radio/Radio.constants';
+import { RADIO_PREFERABLE } from '../Radio/Radio.mock';
 import { VideoInput } from '../VideoInput/VideoInput';
 import { RadioGroup } from './RadioGroup';
 
@@ -25,7 +25,12 @@ const Template: ComponentStory<typeof RadioGroup> = args => {
           selectedValue={selectedValue}
           sx={{ mt: 5.25 }}
         >
-          <VideoInput setError={() => {}} />
+          <VideoInput
+            setError={() => {}}
+            urlNotValidText="Invalid URL"
+            loadingText="Loading"
+            addPlaceholder="Add a video"
+          />
         </Radio>
         <Radio
           name={'radio-story'}

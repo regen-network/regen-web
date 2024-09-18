@@ -10,12 +10,7 @@ import OnBoardingCard from '../cards/OnBoardingCard';
 import TrashIcon from '../icons/TrashIcon';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import TextField from '../inputs/TextField';
-import {
-  invalidAmount,
-  invalidRegenAddress,
-  isValidAddress,
-  requiredMessage,
-} from '../inputs/validation';
+import { isValidAddress } from '../inputs/validation';
 import { Label, Subtitle } from '../typography';
 import {
   BottomCreditRetireFields,
@@ -43,6 +38,9 @@ export interface FormProps extends BottomCreditRetireFieldsProps {
   submitButtonText: string;
   requiredError: string;
   minimumError: string;
+  requiredMessage: string;
+  invalidRegenAddress: string;
+  invalidAmount: string;
   onSubmit: (values: FormValues) => void;
 }
 
@@ -60,12 +58,24 @@ type Return = {
   recipients: Yup.ArraySchema<Yup.AnyObjectSchema>;
 };
 
+type ValidationSchemaFieldsType = {
+  requiredMessage: string;
+  invalidRegenAddress: string;
+  invalidAmount: string;
+  addressPrefix: string;
+  requiredError: string;
+  minimumError: string;
+};
+
 // validationSchemaFields
-export function getValidationSchemaFields(
-  addressPrefix: string,
-  requiredError: string,
-  minimumError: string,
-): Return {
+export function getValidationSchemaFields({
+  requiredMessage,
+  invalidRegenAddress,
+  invalidAmount,
+  addressPrefix,
+  requiredError,
+  minimumError,
+}: ValidationSchemaFieldsType): Return {
   return {
     recipients: Yup.array()
       .of(
@@ -106,13 +116,32 @@ export function getValidationSchemaFields(
   };
 }
 
-export function getValidationSchema(
-  addressPrefix: string,
-  requiredError: string,
-  minimumError: string,
-): Yup.AnyObjectSchema {
+type ValidationSchemaType = {
+  requiredMessage: string;
+  invalidRegenAddress: string;
+  invalidAmount: string;
+  addressPrefix: string;
+  requiredError: string;
+  minimumError: string;
+};
+
+export function getValidationSchema({
+  requiredMessage,
+  invalidRegenAddress,
+  invalidAmount,
+  addressPrefix,
+  requiredError,
+  minimumError,
+}: ValidationSchemaType): Yup.AnyObjectSchema {
   return Yup.object().shape(
-    getValidationSchemaFields(addressPrefix, requiredError, minimumError),
+    getValidationSchemaFields({
+      requiredMessage,
+      invalidRegenAddress,
+      invalidAmount,
+      addressPrefix,
+      requiredError,
+      minimumError,
+    }),
   );
 }
 
@@ -141,16 +170,22 @@ export const RecipientsForm: React.FC<React.PropsWithChildren<FormProps>> = ({
   submitButtonText,
   requiredError,
   minimumError,
+  requiredMessage,
+  invalidRegenAddress,
+  invalidAmount,
   onSubmit,
 }) => {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={getValidationSchema(
+      validationSchema={getValidationSchema({
+        requiredMessage,
+        invalidRegenAddress,
+        invalidAmount,
         addressPrefix,
         requiredError,
         minimumError,
-      )}
+      })}
       onSubmit={onSubmit}
     >
       {() => (

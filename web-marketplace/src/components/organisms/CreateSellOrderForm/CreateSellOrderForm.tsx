@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -14,12 +14,25 @@ import SelectTextField, {
   Option,
 } from 'web-components/src/components/inputs/new/SelectTextField/SelectTextField';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { MAX_FRACTION_DIGITS } from 'web-components/src/components/inputs/validation';
 import { RegenModalProps } from 'web-components/src/components/modal';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { SUBMIT_ERRORS } from 'lib/constants/shared.constants';
+import {
+  AMOUNT_SELL_LABEL,
+  AVAILABLE_LABEL,
+  EMPTY_OPTION_TEXT,
+  getMaximumDecimalMessage,
+  INSUFFICIENT_CREDITS,
+  INVALID_AMOUNT,
+  INVALID_DECIMAL_COUNT,
+  MAX_LABEL,
+  POSITIVE_NUMBER,
+  REQUIRED_MESSAGE,
+  SUBMIT_ERRORS,
+} from 'lib/constants/shared.constants';
 import { Sell2Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -62,8 +75,25 @@ const CreateSellOrderForm: React.FC<Props> = ({
     enableAutoRetire: true,
   };
 
+  const maximumDecimalMessage = useMemo(
+    () =>
+      getMaximumDecimalMessage({
+        _,
+        maximumFractionDigits: MAX_FRACTION_DIGITS,
+      }),
+    [_],
+  );
+
   const form = useZodForm({
-    schema: createSellOrderFormSchema({ availableAmountByBatch }),
+    schema: createSellOrderFormSchema({
+      availableAmountByBatch,
+      requiredMessage: _(REQUIRED_MESSAGE),
+      positiveNumber: _(POSITIVE_NUMBER),
+      invalidAmount: _(INVALID_AMOUNT),
+      maximumDecimalMessage: maximumDecimalMessage,
+      insufficientCredits: _(INSUFFICIENT_CREDITS),
+      invalidDecimalCount: _(INVALID_DECIMAL_COUNT),
+    }),
     defaultValues: {
       ...(initialValues ?? defaultInitialValues),
     },
@@ -110,6 +140,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
       <SelectTextField
         label={_(msg`Batch denom`)}
         options={options}
+        emptyOptionText={_(EMPTY_OPTION_TEXT)}
         disabled={options.length === 1}
         sx={{ mb: 10.5 }}
         native={false}
@@ -147,13 +178,16 @@ const CreateSellOrderForm: React.FC<Props> = ({
             options={allowedDenoms}
             error={!!errors['askDenom']}
             helperText={errors['askDenom']?.message}
+            emptyOptionText={_(EMPTY_OPTION_TEXT)}
             {...form.register('askDenom')}
           />
         </Box>
       </Box>
       <AmountField
-        label={_(msg`Amount to sell`)}
+        label={_(AMOUNT_SELL_LABEL)}
         availableAmount={availableAmount}
+        availableLabel={_(AVAILABLE_LABEL)}
+        maxLabel={_(MAX_LABEL)}
         error={!!errors['amount']}
         helperText={errors['amount']?.message}
         denom={batchDenom ?? ''}

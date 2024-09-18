@@ -1,10 +1,6 @@
 import { z } from 'zod';
 
-import {
-  invalidJSON,
-  isValidJSON,
-  requiredMessage,
-} from 'web-components/src/components/inputs/validation';
+import { isValidJSON } from 'web-components/src/components/inputs/validation';
 
 import { ShaclGraphByUriQuery } from 'generated/graphql';
 import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
@@ -12,11 +8,18 @@ import { getCompactedPath, getProjectBaseData, validate } from 'lib/rdf';
 type Params = {
   creditClassId?: string;
   graphData?: ShaclGraphByUriQuery;
+  requiredMessage: string;
+  invalidJSON: string;
 };
 
 let metadataErrors: string | undefined;
 
-export const metadataFormSchema = ({ creditClassId, graphData }: Params) =>
+export const getMetadataFormSchema = ({
+  creditClassId,
+  graphData,
+  requiredMessage,
+  invalidJSON,
+}: Params) =>
   z.object({
     metadata: z
       .string()
@@ -57,5 +60,5 @@ export const metadataFormDraftSchema = z.object({
 });
 
 export type MetadataFormSchemaType = z.infer<
-  ReturnType<typeof metadataFormSchema>
+  ReturnType<typeof getMetadataFormSchema>
 >;

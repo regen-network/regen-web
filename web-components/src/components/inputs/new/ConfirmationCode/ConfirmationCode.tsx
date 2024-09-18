@@ -34,6 +34,7 @@ export const ConfirmationCode = forwardRef<
     ref,
   ) => {
     if (isNaN(length) || length < 1) {
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       throw new Error('Length should be a number and greater than 0');
     }
 
@@ -118,6 +119,7 @@ export const ConfirmationCode = forwardRef<
     };
 
     const handleOnPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       const pastedValue = e.clipboardData.getData('Text');
       let currentInput = 0;
 
@@ -159,11 +161,7 @@ export const ConfirmationCode = forwardRef<
             inputClassName,
           )}
           autoComplete={i === 0 ? 'one-time-code' : 'off'}
-          aria-label={
-            ariaLabel
-              ? `${ariaLabel}. Character ${i + 1}.`
-              : `Character ${i + 1}.`
-          }
+          aria-label={`${ariaLabel} ${i + 1}.`}
           disabled={disabled}
           placeholder={placeholder}
         />,

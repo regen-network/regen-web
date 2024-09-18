@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useFormState } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -12,6 +12,7 @@ import { Body } from 'web-components/src/components/typography';
 
 import { ShaclGraphByUriQuery } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { INVALID_JSON, REQUIRED_MESSAGE } from 'lib/constants/shared.constants';
 
 import { useProjectEditContext } from 'pages';
 import { useCreateProjectContext } from 'pages/ProjectCreate';
@@ -21,8 +22,8 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import { ProjectPageFooter } from '../../molecules';
 import {
+  getMetadataFormSchema,
   metadataFormDraftSchema,
-  metadataFormSchema,
   MetadataFormSchemaType,
 } from './MetadataForm.schema';
 import { useMetadataFormStyles } from './MetadataForm.styles';
@@ -45,8 +46,19 @@ const MetadataForm: React.FC<MetadataFormFormProps> = ({
   const { _ } = useLingui();
   const { classes: styles } = useMetadataFormStyles();
   const { formRef, isDraftRef } = useCreateProjectContext();
+  const metadataSchema = useMemo(
+    () =>
+      getMetadataFormSchema({
+        requiredMessage: _(REQUIRED_MESSAGE),
+        invalidJSON: _(INVALID_JSON),
+        creditClassId,
+        graphData,
+      }),
+    [creditClassId, graphData, _],
+  );
+
   const form = useZodForm({
-    schema: metadataFormSchema({ creditClassId, graphData }),
+    schema: metadataSchema,
     draftSchema: metadataFormDraftSchema,
     defaultValues: {
       ...initialValues,

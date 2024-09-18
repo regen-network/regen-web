@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { Item } from './components/HeaderMenuItem/HeaderMenuItem';
 
 export const headerMenuItemsMock: Item[] = [

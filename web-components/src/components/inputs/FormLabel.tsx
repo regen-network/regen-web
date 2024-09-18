@@ -10,6 +10,7 @@ interface Props {
   disabled?: boolean;
   optional?: boolean | string;
   label?: string;
+  exampleText?: string;
   onExampleClick?: () => void;
 }
 
@@ -22,6 +23,7 @@ export default function FormLabel({
   disabled,
   className,
   optional,
+  exampleText,
   onExampleClick,
 }: Props): JSX.Element {
   return (
@@ -42,7 +44,7 @@ export default function FormLabel({
                 onClick={onExampleClick}
                 sx={{ color: 'secondary.main', cursor: 'pointer' }}
               >
-                &nbsp;See an example»
+                &nbsp;{exampleText}
               </Box>
             )}
           </Body>

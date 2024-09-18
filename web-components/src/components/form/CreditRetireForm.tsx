@@ -10,12 +10,7 @@ import AmountField from '../inputs/AmountField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import SelectFieldFallback from '../inputs/SelectFieldFallback';
 import TextField from '../inputs/TextField';
-import {
-  invalidMemoLength,
-  requiredMessage,
-  validateAmount,
-  validateMemoLength,
-} from '../inputs/validation';
+import { validateAmount, validateMemoLength } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import InfoTooltipWithIcon from '../tooltip/InfoTooltipWithIcon';
 import { Body, Title } from '../typography';
@@ -69,7 +64,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-export interface CreditRetireProps extends CreditRetireFieldsProps {}
+export interface CreditRetireProps extends CreditRetireFieldsProps {
+  maxLabel: string;
+  availableLabel: string;
+}
 
 // Input (args)
 interface FormProps extends CreditRetireProps {
@@ -77,6 +75,13 @@ interface FormProps extends CreditRetireProps {
   submitErrorText: string;
   retirementInfoText: string;
   stateProvinceError: string;
+  maxLabel: string;
+  availableLabel: string;
+  requiredMessage: string;
+  invalidMemoLength: string;
+  invalidAmount: string;
+  insufficientCredits: string;
+  invalidDecimalCount: string;
   onSubmit: (values: RetireFormValues) => void;
   onClose: RegenModalProps['onClose'];
 }
@@ -224,7 +229,11 @@ export const BottomCreditRetireFields: React.FC<
               />
             }
           >
-            <LocationCountryField exclude name={`${arrayPrefix}country`} />
+            <LocationCountryField
+              exclude
+              name={`${arrayPrefix}country`}
+              label={countryLabel}
+            />
           </Suspense>
         </Grid>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
@@ -238,6 +247,7 @@ export const BottomCreditRetireFields: React.FC<
             }
           >
             <LocationStateField
+              label={stateLabel}
               country={country}
               optional={!postalCode}
               name={`${arrayPrefix}stateProvince`}
@@ -264,6 +274,8 @@ export const CreditRetireFields = ({
   arrayIndex,
   amountRetiredLabel,
   bottomTextMapping,
+  maxLabel,
+  availableLabel,
 }: CreditRetireProps): JSX.Element => {
   return (
     <>
@@ -272,6 +284,8 @@ export const CreditRetireFields = ({
         label={amountRetiredLabel}
         availableAmount={availableTradableAmount}
         denom={batchDenom}
+        maxLabel={maxLabel}
+        availableLabel={availableLabel}
       />
       <BottomCreditRetireFields
         mapboxToken={mapboxToken}
@@ -297,22 +311,43 @@ export const RetirementReminder = ({
   );
 };
 
-export const validateCreditRetire = (
-  availableTradableAmount: number,
-  values: RetireFormValues,
-  errors: FormikErrors<RetireFormValues>,
-  stateProvinceError: string,
-): FormikErrors<RetireFormValues> => {
+type ValidateCreditRetireProps = {
+  availableTradableAmount: number;
+  requiredMessage: string;
+  stateProvinceError: string;
+  invalidMemoLength: string;
+  invalidAmount: string;
+  insufficientCredits: string;
+  invalidDecimalCount: string;
+  values: RetireFormValues;
+  errors: FormikErrors<RetireFormValues>;
+};
+
+export const validateCreditRetire = ({
+  availableTradableAmount,
+  requiredMessage,
+  stateProvinceError,
+  invalidMemoLength,
+  invalidAmount,
+  insufficientCredits,
+  invalidDecimalCount,
+  values,
+  errors,
+}: ValidateCreditRetireProps): FormikErrors<RetireFormValues> => {
   if (!values.country) {
     errors.country = requiredMessage;
   }
   if (values.postalCode && !values.stateProvince) {
     errors.stateProvince = stateProvinceError;
   }
-  const errAmount = validateAmount(
+  const errAmount = validateAmount({
     availableTradableAmount,
-    values.retiredAmount,
-  );
+    amount: values.retiredAmount,
+    requiredMessage,
+    invalidAmount,
+    insufficientCredits,
+    invalidDecimalCount,
+  });
   if (errAmount) errors.retiredAmount = errAmount;
 
   if (values.note && !validateMemoLength(values.note)) {
@@ -339,6 +374,13 @@ const CreditRetireForm: React.FC<FormProps> = ({
   bottomTextMapping,
   retirementInfoText,
   stateProvinceError,
+  maxLabel,
+  availableLabel,
+  requiredMessage,
+  invalidMemoLength,
+  invalidAmount,
+  insufficientCredits,
+  invalidDecimalCount,
   onClose,
   onSubmit,
 }) => {
@@ -346,12 +388,17 @@ const CreditRetireForm: React.FC<FormProps> = ({
     values: RetireFormValues,
   ): FormikErrors<RetireFormValues> => {
     let errors: FormikErrors<RetireFormValues> = {};
-    errors = validateCreditRetire(
+    errors = validateCreditRetire({
       availableTradableAmount,
+      requiredMessage,
+      invalidMemoLength,
+      invalidAmount,
+      insufficientCredits,
+      invalidDecimalCount,
       values,
       errors,
       stateProvinceError,
-    );
+    });
     return errors;
   };
 
@@ -368,6 +415,8 @@ const CreditRetireForm: React.FC<FormProps> = ({
             retirementInfoText={retirementInfoText}
           />
           <CreditRetireFields
+            maxLabel={maxLabel}
+            availableLabel={availableLabel}
             amountRetiredLabel={amountRetiredLabel}
             availableTradableAmount={availableTradableAmount}
             batchDenom={batchDenom}

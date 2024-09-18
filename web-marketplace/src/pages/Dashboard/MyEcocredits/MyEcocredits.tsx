@@ -24,6 +24,7 @@ import { useLedger } from 'ledger';
 import { getHashUrl } from 'lib/block-explorer';
 import {
   AMOUNT_LABEL,
+  AVAILABLE_LABEL,
   BASKET_LABEL,
   BASKET_PUT_SUBMIT_LABEL,
   BASKET_TAKE_AMOUNT_ERROR_TEXT,
@@ -31,6 +32,12 @@ import {
   BATCH_DESCRIPTION,
   BATCH_LABEL,
   getBottomFieldsTextMapping,
+  INSUFFICIENT_CREDITS,
+  INVALID_AMOUNT,
+  INVALID_DECIMAL_COUNT,
+  INVALID_MEMO_LENGTH,
+  MAX_LABEL,
+  REQUIRED_MESSAGE,
   RETIRE_ON_TAKE_LABEL,
   RETIRE_ON_TAKE_TOOLTIP,
   RETIREMENT_INFO_TEXT,
@@ -449,6 +456,12 @@ export const MyEcocredits = (): JSX.Element => {
           submitLabel={_(BASKET_PUT_SUBMIT_LABEL)}
           submitErrorText={_(SUBMIT_ERROR_TEXT)}
           title={_(BASKET_PUT_SUBMIT_LABEL)}
+          maxLabel={_(MAX_LABEL)}
+          availableLabel={_(AVAILABLE_LABEL)}
+          requiredMessage={_(REQUIRED_MESSAGE)}
+          invalidAmount={_(INVALID_AMOUNT)}
+          insufficientCredits={_(INSUFFICIENT_CREDITS)}
+          invalidDecimalCount={_(INVALID_DECIMAL_COUNT)}
         />
       )}
       {creditRetireOpen > -1 && !!accountAddress && (
@@ -490,6 +503,13 @@ export const MyEcocredits = (): JSX.Element => {
           retirementInfoText={_(RETIREMENT_INFO_TEXT)}
           bottomTextMapping={bottomFieldsTextMapping}
           stateProvinceErrorText={_(STATE_PROVINCE_ERROR_TEXT)}
+          maxLabel={_(MAX_LABEL)}
+          availableLabel={_(AVAILABLE_LABEL)}
+          requiredMessage={_(REQUIRED_MESSAGE)}
+          invalidAmount={_(INVALID_AMOUNT)}
+          insufficientCredits={_(INSUFFICIENT_CREDITS)}
+          invalidDecimalCount={_(INVALID_DECIMAL_COUNT)}
+          invalidMemoLength={_(INVALID_MEMO_LENGTH)}
         />
       )}
       {sellOrderCreateOpen > -1 && !!accountAddress && (

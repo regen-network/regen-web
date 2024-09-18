@@ -8,8 +8,13 @@ const Photo = ({
   src,
   caption,
   credit,
+  locationText,
   sx = [],
-}: CardMediaProps & { caption?: string; credit?: string }): JSX.Element => {
+}: CardMediaProps & {
+  caption?: string;
+  credit?: string;
+  locationText: string;
+}): JSX.Element => {
   return (
     <Card sx={[{ height: [216, 293], position: 'relative' }, ...sxToArray(sx)]}>
       <CardMedia
@@ -19,6 +24,7 @@ const Photo = ({
       />
       {(caption || credit) && (
         <FileDropBottomBar
+          locationText={locationText}
           caption={caption}
           credit={credit}
           sx={{ position: 'absolute', bottom: 0 }}

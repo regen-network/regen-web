@@ -17,7 +17,7 @@ export const Public: Story = {
 Public.args = {
   privacyType: 'public',
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
-  files,
+  files: [],
 };
 
 export const PrivateLocations: Story = {
@@ -27,7 +27,7 @@ export const PrivateLocations: Story = {
 PrivateLocations.args = {
   privacyType: 'private_locations',
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
-  files,
+  files: [],
 };
 
 export const PrivateFiles: Story = {
@@ -37,7 +37,7 @@ export const PrivateFiles: Story = {
 PrivateFiles.args = {
   privacyType: 'private_files',
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
-  files,
+  files: [],
 };
 
 export const PrivateLocationsAsAdmin: Story = {
@@ -47,7 +47,7 @@ export const PrivateLocationsAsAdmin: Story = {
 PrivateLocationsAsAdmin.args = {
   privacyType: 'private_locations',
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
-  files,
+  files: [],
   isAdmin: true,
 };
 
@@ -58,6 +58,6 @@ export const PrivateFilesAsAdmin: Story = {
 PrivateFilesAsAdmin.args = {
   privacyType: 'private_files',
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
-  files,
+  files: [],
   isAdmin: true,
 };

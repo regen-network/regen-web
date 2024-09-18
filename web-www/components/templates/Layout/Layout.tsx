@@ -9,6 +9,10 @@ import { LayoutCookiesTopBanner } from './Layout.CookiesTopBanner';
 import { useLayoutStyles } from './Layout.styles';
 
 import { MarketingNav } from '@/components/organisms/MarketingNav/MarketingNav';
+import {
+  INVALID_EMAIL_MESSAGE,
+  REQUIRED_MESSAGE,
+} from '@/lib/constants/shared.constants';
 
 type Props = {
   children: React.ReactNode;
@@ -49,6 +53,8 @@ const Layout = ({ children }: Props) => {
               </Body>
             </>
           }
+          requiredMessage={REQUIRED_MESSAGE}
+          invalidEmailMessage={INVALID_EMAIL_MESSAGE}
         />
       </footer>
     </>

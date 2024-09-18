@@ -101,6 +101,11 @@ export const CurrencyInput = ({
             border: 'none',
             paddingRight: theme =>
               paymentOption === PAYMENT_OPTIONS.CARD ? theme.spacing(5) : 0,
+            '& input': {
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            },
           },
           '& .custom-select .MuiSvgIcon-root:not(.denom-icon)': {
             width: '15px !important',

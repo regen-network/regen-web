@@ -60,12 +60,9 @@ export const PaymentInfoForm = ({
     },
     mode: 'onBlur',
   });
-  const { isValid, isSubmitting, errors } = useFormState({
+  const { isValid, isSubmitting } = useFormState({
     control: form.control,
   });
-  console.log('values', form.getValues());
-  console.log('isValid', isValid);
-  console.log('errors', errors);
 
   const stripePromise = useMemo(
     () =>
@@ -132,13 +129,13 @@ export const PaymentInfoForm = ({
             />
           </Elements>
         )}
-        <div className="float-right pt-40">
-          <PrevNextButtons
-            saveDisabled={!isValid || isSubmitting}
-            saveText={_(NEXT)}
-            onPrev={handleBack}
-          />
-        </div>
+      </div>
+      <div className="float-right pt-40">
+        <PrevNextButtons
+          saveDisabled={!isValid || isSubmitting}
+          saveText={_(NEXT)}
+          onPrev={handleBack}
+        />
       </div>
     </Form>
   );

@@ -24,6 +24,8 @@ import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseF
 import { ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
+import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData';
+import { LoginFlow } from 'components/organisms/LoginFlow/LoginFlow';
 import { PaymentInfoForm } from 'components/organisms/PaymentInfoForm/PaymentInfoForm';
 import { PaymentInfoFormSchemaType } from 'components/organisms/PaymentInfoForm/PaymentInfoForm.schema';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
@@ -57,6 +59,14 @@ export const BuyCreditsForm = ({
   >();
   const { wallet } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
+  const {
+    isModalOpen,
+    modalState,
+    onModalClose,
+    walletsUiConfig,
+    onButtonClick,
+  } = useLoginData({});
+
   const cardDisabled = cardSellOrders.length === 0;
 
   const { marketplaceClient, ecocreditClient } = useLedger();
@@ -110,9 +120,7 @@ export const BuyCreditsForm = ({
             onSubmit={async (values: PaymentInfoFormSchemaType) => {}}
             amount={(data?.[CURRENCY_AMOUNT] ?? 0) * 100} // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00)
             currency={USD_DENOM}
-            login={function (): void {
-              throw new Error('Function not implemented.');
-            }}
+            login={onButtonClick}
             retiring={retiring}
             stripePublishableKey={import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY}
             wallet={wallet}
@@ -133,6 +141,12 @@ export const BuyCreditsForm = ({
           />
         )}
       </div>
+      <LoginFlow
+        isModalOpen={isModalOpen}
+        onModalClose={onModalClose}
+        wallets={walletsUiConfig}
+        modalState={modalState}
+      />
     </div>
   );
 };

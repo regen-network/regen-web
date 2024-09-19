@@ -121,6 +121,7 @@ export const getCurrencyAmount = ({
       break;
     }
   }
+  console.log('currentCurrencyAmount', microToDenom(currentCurrencyAmount));
   return {
     [CURRENCY_AMOUNT]: card
       ? currentCurrencyAmount

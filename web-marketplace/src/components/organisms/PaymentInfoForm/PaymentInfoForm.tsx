@@ -1,11 +1,9 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useFormState } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe, StripeElementsOptionsMode } from '@stripe/stripe-js';
+import { useElements, useStripe } from '@stripe/react-stripe-js';
 
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
-import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
 
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
@@ -23,12 +21,12 @@ import {
   PaymentInfoFormSchemaType,
 } from './PaymentInfoForm.schema';
 
-type PaymentInfoFormProps = {
+export type PaymentInfoFormProps = {
   paymentOption: PaymentOptionsType;
-  onSubmit: (values: PaymentInfoFormSchemaType) => Promise<void>;
-  stripePublishableKey?: string;
-  amount: number;
-  currency: string;
+  onSubmit: (
+    values: PaymentInfoFormSchemaType & { confirmationTokenId?: string },
+  ) => Promise<void>;
+  setError: (error: string) => void;
 } & CustomerInfoProps &
   PaymentInfoProps;
 
@@ -41,13 +39,13 @@ export const PaymentInfoForm = ({
   onSubmit,
   login,
   paymentMethods,
-  stripePublishableKey,
-  amount,
-  currency,
+  setError,
   retiring,
 }: PaymentInfoFormProps) => {
   const { _ } = useLingui();
   const { handleBack } = useMultiStep();
+  const stripe = useStripe();
+  const elements = useElements();
 
   const form = useZodForm({
     schema: paymentInfoFormSchema(paymentOption),
@@ -64,51 +62,6 @@ export const PaymentInfoForm = ({
     control: form.control,
   });
 
-  const stripePromise = useMemo(
-    () =>
-      paymentOption === PAYMENT_OPTIONS.CARD &&
-      stripePublishableKey &&
-      loadStripe(stripePublishableKey),
-    [paymentOption, stripePublishableKey],
-  );
-
-  const options: StripeElementsOptionsMode = useMemo(
-    () => ({
-      mode: 'payment',
-      amount,
-      currency,
-      paymentMethodCreation: 'manual',
-      fonts: [
-        {
-          cssSrc:
-            'https://fonts.googleapis.com/css?family=Lato:100,300,400,700,800',
-        },
-      ],
-      appearance: {
-        theme: 'stripe',
-        variables: {
-          colorText: '#000',
-          colorDanger: '#DE4526',
-          fontFamily: defaultFontFamily,
-          spacingUnit: '5px',
-          borderRadius: '2px',
-        },
-        rules: {
-          '.Label': {
-            fontWeight: 'bold',
-            fontSize: '16px',
-          },
-          '.Input': {
-            boxShadow: 'none',
-            borderColor: '#D2D5D9',
-            marginTop: '9px',
-          },
-        },
-      },
-    }),
-    [amount, currency],
-  );
-
   useEffect(() => {
     // set form values after login
     if (accountEmail) form.setValue('email', accountEmail);
@@ -118,7 +71,42 @@ export const PaymentInfoForm = ({
   }, [accountEmail, accountName, form, paymentMethods]);
 
   return (
-    <Form form={form} onSubmit={onSubmit}>
+    <Form
+      form={form}
+      onSubmit={async (values: PaymentInfoFormSchemaType) => {
+        const card = paymentOption === PAYMENT_OPTIONS.CARD;
+        if (card && !stripe) {
+          return;
+        }
+        let confirmationTokenId: string | undefined;
+        if (card && stripe && elements && !values.paymentMethodId) {
+          const submitRes = await elements?.submit();
+          if (submitRes?.error?.message) {
+            setError(submitRes?.error?.message);
+            return;
+          }
+          // Create the ConfirmationToken using the details collected by the Payment Element
+          const { error, confirmationToken } =
+            await stripe.createConfirmationToken({
+              elements,
+              params: {
+                payment_method_data: {
+                  billing_details: {
+                    name: values.name,
+                    email: values.email,
+                  },
+                },
+              },
+            });
+          if (error?.message) {
+            setError(error?.message);
+            return;
+          }
+          confirmationTokenId = confirmationToken?.id;
+        }
+        onSubmit({ confirmationTokenId, ...values });
+      }}
+    >
       <div className="flex flex-col gap-10 sm:gap-20 max-w-[560px]">
         <CustomerInfo
           paymentOption={paymentOption}
@@ -129,18 +117,17 @@ export const PaymentInfoForm = ({
           accountName={accountName}
           retiring={retiring}
         />
-        {paymentOption === PAYMENT_OPTIONS.CARD && stripePromise && (
-          <Elements options={options} stripe={stripePromise}>
-            <PaymentInfo
-              paymentMethods={paymentMethods}
-              accountId={accountId}
-            />
-          </Elements>
+        {paymentOption === PAYMENT_OPTIONS.CARD && (
+          <PaymentInfo paymentMethods={paymentMethods} accountId={accountId} />
         )}
       </div>
       <div className="float-right pt-40">
         <PrevNextButtons
-          saveDisabled={!isValid || isSubmitting}
+          saveDisabled={
+            !isValid ||
+            isSubmitting ||
+            (!stripe && paymentOption === PAYMENT_OPTIONS.CARD)
+          }
           saveText={_(NEXT)}
           onPrev={handleBack}
         />

@@ -1,7 +1,12 @@
 import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
-import { PaymentInfoForm } from './PaymentInfoForm';
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+
+import { PaymentInfoForm, PaymentInfoFormProps } from './PaymentInfoForm';
+import { defaultStripeOptions } from './PaymentInfoForm.constants';
 
 export default {
   title: 'Marketplace/Organisms/PaymentInfoForm',
@@ -10,21 +15,33 @@ export default {
 
 type Story = StoryObj<typeof PaymentInfoForm>;
 
+const stripeKey = import.meta.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY;
+
+const WrappedPaymentInfoForm = (args: PaymentInfoFormProps) => {
+  const options = { amount: 1000, currency: 'usd', ...defaultStripeOptions };
+  const stripePromise =
+    args.paymentOption === PAYMENT_OPTIONS.CARD &&
+    stripeKey &&
+    loadStripe(stripeKey);
+
+  return (
+    <Elements options={options} stripe={stripePromise}>
+      <PaymentInfoForm {...args} />
+    </Elements>
+  );
+};
 export const FiatLoggedOut: Story = {
-  render: args => <PaymentInfoForm {...args} />,
+  render: args => <WrappedPaymentInfoForm {...args} />,
 };
 
 FiatLoggedOut.args = {
   paymentOption: 'card',
   login: action('login'),
-  stripePublishableKey: import.meta.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY,
-  amount: 1000,
-  currency: 'usd',
   retiring: true,
 };
 
 export const FiatLoggedInNoEmail: Story = {
-  render: args => <PaymentInfoForm {...args} />,
+  render: args => <WrappedPaymentInfoForm {...args} />,
 };
 
 FiatLoggedInNoEmail.args = {
@@ -33,14 +50,11 @@ FiatLoggedInNoEmail.args = {
   accountName: 'John Doe',
   wallet: { address: 'regen123456', shortAddress: 'regen123' },
   login: action('login'),
-  stripePublishableKey: import.meta.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY,
-  amount: 1000,
-  currency: 'usd',
   retiring: true,
 };
 
 export const FiatLoggedInWithEmail: Story = {
-  render: args => <PaymentInfoForm {...args} />,
+  render: args => <WrappedPaymentInfoForm {...args} />,
 };
 
 FiatLoggedInWithEmail.args = {
@@ -49,14 +63,11 @@ FiatLoggedInWithEmail.args = {
   accountEmail: 'john@doe.com',
   accountName: 'John Doe',
   login: action('login'),
-  stripePublishableKey: import.meta.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY,
-  amount: 1000,
-  currency: 'usd',
   retiring: true,
 };
 
 export const FiatLoggedInWithPaymentMethod: Story = {
-  render: args => <PaymentInfoForm {...args} />,
+  render: args => <WrappedPaymentInfoForm {...args} />,
 };
 
 FiatLoggedInWithPaymentMethod.args = {
@@ -65,9 +76,6 @@ FiatLoggedInWithPaymentMethod.args = {
   accountEmail: 'john@doe.com',
   accountName: 'John Doe',
   login: action('login'),
-  stripePublishableKey: import.meta.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY,
-  amount: 1000,
-  currency: 'usd',
   retiring: true,
   paymentMethods: [
     {
@@ -112,33 +120,29 @@ FiatLoggedInWithPaymentMethod.args = {
 };
 
 export const CryptoNoEmail: Story = {
-  render: args => <PaymentInfoForm {...args} />,
+  render: args => <WrappedPaymentInfoForm {...args} />,
 };
 
 CryptoNoEmail.args = {
   paymentOption: 'crypto',
   wallet: { address: 'regen123456', shortAddress: 'regen123' },
   login: action('login'),
-  amount: 1000,
-  currency: 'usd',
   retiring: true,
 };
 
 export const CryptoTradableCredits: Story = {
-  render: args => <PaymentInfoForm {...args} />,
+  render: args => <WrappedPaymentInfoForm {...args} />,
 };
 
 CryptoTradableCredits.args = {
   paymentOption: 'crypto',
   wallet: { address: 'regen123456', shortAddress: 'regen123' },
   login: action('login'),
-  amount: 1000,
-  currency: 'usd',
   retiring: false,
 };
 
 export const CryptoWithEmail: Story = {
-  render: args => <PaymentInfoForm {...args} />,
+  render: args => <WrappedPaymentInfoForm {...args} />,
 };
 
 CryptoWithEmail.args = {
@@ -147,7 +151,5 @@ CryptoWithEmail.args = {
   accountEmail: 'john@doe.com',
   accountName: 'John Doe',
   login: action('login'),
-  amount: 1000,
-  currency: 'usd',
   retiring: true,
 };

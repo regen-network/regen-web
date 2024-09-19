@@ -3,6 +3,7 @@ import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { useQuery } from '@tanstack/react-query';
+import { USD_DENOM } from 'config/allowedBaseDenoms';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
@@ -10,15 +11,21 @@ import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNex
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { useLedger } from 'ledger';
+import { useAuth } from 'lib/auth/auth';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
+import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import { CURRENCY_AMOUNT } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
+import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';
 import { ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { PaymentInfoForm } from 'components/organisms/PaymentInfoForm/PaymentInfoForm';
+import { PaymentInfoFormSchemaType } from 'components/organisms/PaymentInfoForm/PaymentInfoForm.schema';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { PaymentOptionsType } from './BuyCredits.types';
@@ -43,11 +50,17 @@ export const BuyCreditsForm = ({
   creditTypeAbbrev,
   projectHref,
 }: Props) => {
-  const { data, activeStep, handleSaveNext } = useMultiStep();
-  console.log('data', data);
+  const { data, activeStep, handleSaveNext } = useMultiStep<
+    Partial<ChooseCreditsFormSchemaType> &
+      Partial<PaymentInfoFormSchemaType> &
+      Partial<AgreePurchaseFormSchemaType>
+  >();
+  const { wallet } = useWallet();
+  const { activeAccount, privActiveAccount } = useAuth();
   const cardDisabled = cardSellOrders.length === 0;
 
   const { marketplaceClient, ecocreditClient } = useLedger();
+
   const { data: allowedDenomsData } = useQuery(
     getAllowedDenomQuery({
       client: marketplaceClient,
@@ -62,6 +75,12 @@ export const BuyCreditsForm = ({
         abbreviation: creditTypeAbbrev,
       },
       enabled: !!ecocreditClient && !!creditTypeAbbrev,
+    }),
+  );
+
+  const { data: paymentMethodData } = useQuery(
+    getPaymentMethodsQuery({
+      enabled: !!activeAccount,
     }),
   );
 
@@ -88,39 +107,25 @@ export const BuyCreditsForm = ({
         {activeStep === 1 && (
           <PaymentInfoForm
             paymentOption={paymentOption}
-            onSubmit={function (values: {
-              name: string;
-              email: string;
-              createAccount: boolean;
-              savePaymentMethod: boolean;
-              paymentMethodId?: string | undefined;
-            }): Promise<void> {
-              throw new Error('Function not implemented.');
-            }}
-            amount={0}
-            currency={''}
+            onSubmit={async (values: PaymentInfoFormSchemaType) => {}}
+            amount={(data?.[CURRENCY_AMOUNT] ?? 0) * 100} // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00)
+            currency={USD_DENOM}
             login={function (): void {
               throw new Error('Function not implemented.');
             }}
             retiring={retiring}
             stripePublishableKey={import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY}
+            wallet={wallet}
+            accountEmail={privActiveAccount?.email}
+            accountName={activeAccount?.name}
+            accountId={activeAccount?.id}
+            paymentMethods={paymentMethodData?.paymentMethods}
           />
         )}
         {activeStep === 2 && (
           <AgreePurchaseForm
             retiring={retiring}
-            onSubmit={function (values: {
-              anonymousPurchase: boolean;
-              stateProvince: string;
-              postalCode: string;
-              followProject: boolean;
-              subscribeNewsletter: boolean;
-              agreeErpa: boolean;
-              retirementReason?: string | undefined;
-              country?: string | undefined;
-            }): Promise<void> {
-              throw new Error('Function not implemented.');
-            }}
+            onSubmit={async (values: AgreePurchaseFormSchemaType) => {}}
             goToChooseCredits={function (): void {
               throw new Error('Function not implemented.');
             }}

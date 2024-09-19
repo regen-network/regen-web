@@ -17,7 +17,11 @@ import {
 import { CreditsAmountHeader } from './CreditsAmount.Header';
 import { CreditsAmountProps } from './CreditsAmount.types';
 import {
+  formatFullSellOrder,
+  getCreditsAmount,
   getCreditsAvailablePerCurrency,
+  getCurrencyAmount,
+  getSellOrderPrice,
   getSpendingCap,
 } from './CreditsAmount.utils';
 import { CreditsInput } from './CreditsInput';
@@ -84,10 +88,30 @@ export const CreditsAmount = ({
   useEffect(() => {
     if (maxCreditsSelected) {
       setValue(CREDITS_AMOUNT, creditsAvailable);
-      setValue(CURRENCY_AMOUNT, microToDenom(spendingCap));
+      setValue(
+        CURRENCY_AMOUNT,
+        paymentOption === PAYMENT_OPTIONS.CARD
+          ? spendingCap
+          : microToDenom(spendingCap),
+      );
+      setValue(
+        SELL_ORDERS,
+        orderedSellOrders.map(order => {
+          const price = getSellOrderPrice({ order, card });
+          return formatFullSellOrder({ order, card, price });
+        }),
+      );
       setMaxCreditsSelected(false);
     }
-  }, [creditsAvailable, maxCreditsSelected, setValue, spendingCap]);
+  }, [
+    card,
+    creditsAvailable,
+    maxCreditsSelected,
+    orderedSellOrders,
+    paymentOption,
+    setValue,
+    spendingCap,
+  ]);
 
   // Credits amount change
   const handleCreditsAmountChange = useCallback(
@@ -95,48 +119,12 @@ export const CreditsAmount = ({
       // Set currency amount according to credits quantity,
       // selecting the cheapest credits first
       const currentCreditsAmount = e.target.valueAsNumber;
-      let currentCurrencyAmount = 0;
-      let creditsAmountLeft = currentCreditsAmount;
-      const sellOrders = [];
-
-      for (let i = 0; i < orderedSellOrders.length; i++) {
-        const order = orderedSellOrders[i];
-        const price = card
-          ? (order as CardSellOrder).usdPrice
-          : Number(order.askAmount);
-        const quantity = Number(order.quantity);
-
-        // Take all credits from this sell order
-        if (creditsAmountLeft >= quantity) {
-          creditsAmountLeft -= quantity;
-          currentCurrencyAmount += quantity * price;
-          sellOrders.push({
-            sellOrderId: order.id,
-            quantity: order.quantity,
-            bidPrice: !card
-              ? { amount: String(price), denom: order.askDenom }
-              : undefined,
-            price: card ? price : undefined,
-          });
-          if (creditsAmountLeft === 0) break;
-        } else {
-          // Take only remaining credits
-          currentCurrencyAmount += creditsAmountLeft * price;
-          sellOrders.push({
-            sellOrderId: order.id,
-            quantity: String(creditsAmountLeft),
-            bidPrice: !card
-              ? { amount: String(price), denom: order.askDenom }
-              : undefined,
-            price: card ? price : undefined,
-          });
-          break;
-        }
-      }
-      setValue(
-        CURRENCY_AMOUNT,
-        card ? currentCurrencyAmount : microToDenom(currentCurrencyAmount),
-      );
+      const { currencyAmount, sellOrders } = getCurrencyAmount({
+        currentCreditsAmount,
+        card,
+        orderedSellOrders,
+      });
+      setValue(CURRENCY_AMOUNT, currencyAmount);
       setValue(SELL_ORDERS, sellOrders);
     },
     [card, orderedSellOrders, setValue],
@@ -148,44 +136,11 @@ export const CreditsAmount = ({
       // Set credits quantity according to currency amount,
       // selecting the cheapest credits first
       const value = e.target.valueAsNumber;
-      const currentCurrencyAmount = card ? value : denomToMicro(value);
-      let currentCreditsAmount = 0;
-      let currencyAmountLeft = currentCurrencyAmount;
-      const sellOrders = [];
-
-      for (let i = 0; i < orderedSellOrders.length; i++) {
-        const order = orderedSellOrders[i];
-        const price = card
-          ? (order as CardSellOrder).usdPrice
-          : Number(order.askAmount);
-        const quantity = Number(order.quantity);
-        const orderTotalAmount = quantity * price;
-
-        if (currencyAmountLeft >= orderTotalAmount) {
-          currencyAmountLeft -= orderTotalAmount;
-          currentCreditsAmount += quantity;
-          sellOrders.push({
-            sellOrderId: order.id,
-            quantity: order.quantity,
-            bidPrice: !card
-              ? { amount: String(price), denom: order.askDenom }
-              : undefined,
-            price: card ? price : undefined,
-          });
-          if (currencyAmountLeft === 0) break;
-        } else {
-          currentCreditsAmount += currencyAmountLeft / price;
-          sellOrders.push({
-            sellOrderId: order.id,
-            quantity: String(currencyAmountLeft / price),
-            bidPrice: !card
-              ? { amount: String(price), denom: order.askDenom }
-              : undefined,
-            price: card ? price : undefined,
-          });
-          break;
-        }
-      }
+      const { currentCreditsAmount, sellOrders } = getCreditsAmount({
+        value,
+        card,
+        orderedSellOrders,
+      });
       setValue(CREDITS_AMOUNT, currentCreditsAmount);
       setValue(SELL_ORDERS, sellOrders);
     },

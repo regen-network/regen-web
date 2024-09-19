@@ -19,7 +19,7 @@ export type CustomerInfoProps = {
   paymentOption: PaymentOptionsType;
   wallet?: Wallet;
   accountId?: string;
-  accountEmail?: string;
+  accountEmail?: string | null;
   accountName?: string;
   login: () => void;
   retiring: boolean;

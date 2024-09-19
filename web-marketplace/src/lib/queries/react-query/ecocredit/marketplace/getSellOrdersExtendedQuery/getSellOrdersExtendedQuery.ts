@@ -41,7 +41,6 @@ export const getSellOrdersExtendedQuery = ({
       response = await client.SellOrders(request);
       sellOrders.push(...response.sellOrders);
     }
-    console.log(sellOrders);
 
     // Find sell orders that have ibc askDenom and gather their hash
     const ibcDenomHashes = uniq(

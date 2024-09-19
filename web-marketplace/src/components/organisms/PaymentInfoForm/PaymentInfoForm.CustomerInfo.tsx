@@ -50,7 +50,7 @@ export const CustomerInfo = ({
         <Title variant="h6">
           <Trans>Customer info</Trans>
         </Title>
-        {!accountId && !wallet && (
+        {!accountId && !wallet?.address && (
           <OutlinedButton onClick={login} className="text-xs py-[9px] px-20">
             <Trans>log in for faster checkout</Trans>
           </OutlinedButton>

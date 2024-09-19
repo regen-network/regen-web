@@ -11,6 +11,7 @@ export interface Props {
   variant?: InfoLabelVariant;
   icon?: React.ReactNode;
   sx?: SxProps<Theme>;
+  labelClassName?: string;
 }
 
 const InfoLabel = ({
@@ -18,6 +19,7 @@ const InfoLabel = ({
   variant = 'default',
   icon,
   sx = [],
+  labelClassName,
 }: Props): JSX.Element => {
   const theme = useTheme();
   const infoLabelColorMapping = useMemo(
@@ -44,6 +46,7 @@ const InfoLabel = ({
         sx={{
           color: 'primary.light',
         }}
+        className={labelClassName}
       >
         {label}
       </Body>

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useFormState } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { Elements } from '@stripe/react-stripe-js';
@@ -108,6 +108,14 @@ export const PaymentInfoForm = ({
     }),
     [amount, currency],
   );
+
+  useEffect(() => {
+    // set form values after login
+    if (accountEmail) form.setValue('email', accountEmail);
+    if (accountName) form.setValue('name', accountName);
+    if (paymentMethods)
+      form.setValue('paymentMethodId', paymentMethods?.[0]?.id);
+  }, [accountEmail, accountName, form, paymentMethods]);
 
   return (
     <Form form={form} onSubmit={onSubmit}>

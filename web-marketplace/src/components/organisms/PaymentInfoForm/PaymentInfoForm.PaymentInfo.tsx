@@ -12,7 +12,7 @@ import { CardInfo } from './PaymentInfoForm.CardInfo';
 import { PaymentInfoFormSchemaType } from './PaymentInfoForm.schema';
 
 export type PaymentInfoProps = {
-  paymentMethods?: Array<PaymentMethod>;
+  paymentMethods?: Array<PaymentMethod> | null;
   accountId?: string;
 };
 export const PaymentInfo = ({

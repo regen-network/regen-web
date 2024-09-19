@@ -56,7 +56,7 @@ export const CreditsAmount = ({
 
     [card, cardSellOrders, filteredCryptoSellOrders],
   );
-
+  console.log('orderedSellOrders', orderedSellOrders);
   useEffect(() => {
     // Reset amounts to 0 on currency change
     setValue(CREDITS_AMOUNT, 0);

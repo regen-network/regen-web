@@ -1,16 +1,14 @@
-import { useNavigate } from 'react-router-dom';
-import { msg, Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
-import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { useMemo } from 'react';
+import { Elements, useElements, useStripe } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import { useQuery } from '@tanstack/react-query';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
+import { useSetAtom } from 'jotai';
 
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
-import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
-import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { useLedger } from 'ledger';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
@@ -27,9 +25,11 @@ import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCred
 import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData';
 import { LoginFlow } from 'components/organisms/LoginFlow/LoginFlow';
 import { PaymentInfoForm } from 'components/organisms/PaymentInfoForm/PaymentInfoForm';
+import { defaultStripeOptions } from 'components/organisms/PaymentInfoForm/PaymentInfoForm.constants';
 import { PaymentInfoFormSchemaType } from 'components/organisms/PaymentInfoForm/PaymentInfoForm.schema';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
+import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
 import { PaymentOptionsType } from './BuyCredits.types';
 
 type Props = {
@@ -54,8 +54,9 @@ export const BuyCreditsForm = ({
 }: Props) => {
   const { data, activeStep, handleSaveNext } = useMultiStep<
     Partial<ChooseCreditsFormSchemaType> &
-      Partial<PaymentInfoFormSchemaType> &
-      Partial<AgreePurchaseFormSchemaType>
+      Partial<PaymentInfoFormSchemaType> & {
+        confirmationTokenId?: string;
+      } & Partial<AgreePurchaseFormSchemaType>
   >();
   const { wallet } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
@@ -66,6 +67,8 @@ export const BuyCreditsForm = ({
     walletsUiConfig,
     onButtonClick,
   } = useLoginData({});
+
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   const cardDisabled = cardSellOrders.length === 0;
 
@@ -94,6 +97,16 @@ export const BuyCreditsForm = ({
     }),
   );
 
+  const stripePromise = loadStripe(stripeKey);
+  const stripeOptions = useMemo(
+    () => ({
+      amount: (data?.[CURRENCY_AMOUNT] ?? 0) * 100, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00),
+      currency: USD_DENOM,
+      ...defaultStripeOptions,
+    }),
+    [data],
+  );
+
   return (
     <div className="flex">
       <div>
@@ -115,20 +128,22 @@ export const BuyCreditsForm = ({
           />
         )}
         {activeStep === 1 && (
-          <PaymentInfoForm
-            paymentOption={paymentOption}
-            onSubmit={async (values: PaymentInfoFormSchemaType) => {}}
-            amount={(data?.[CURRENCY_AMOUNT] ?? 0) * 100} // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00)
-            currency={USD_DENOM}
-            login={onButtonClick}
-            retiring={retiring}
-            stripePublishableKey={import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY}
-            wallet={wallet}
-            accountEmail={privActiveAccount?.email}
-            accountName={activeAccount?.name}
-            accountId={activeAccount?.id}
-            paymentMethods={paymentMethodData?.paymentMethods}
-          />
+          <Elements options={stripeOptions} stripe={stripePromise}>
+            <PaymentInfoForm
+              paymentOption={paymentOption}
+              onSubmit={async (values: PaymentInfoFormSchemaType) => {
+                handleSaveNext({ ...values });
+              }}
+              login={onButtonClick}
+              retiring={retiring}
+              wallet={wallet}
+              accountEmail={privActiveAccount?.email}
+              accountName={activeAccount?.name}
+              accountId={activeAccount?.id}
+              paymentMethods={paymentMethodData?.paymentMethods}
+              setError={setErrorBannerTextAtom}
+            />
+          </Elements>
         )}
         {activeStep === 2 && (
           <AgreePurchaseForm

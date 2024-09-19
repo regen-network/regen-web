@@ -5,3 +5,5 @@ export const PAYMENT_OPTIONS = {
   CRYPTO: 'crypto',
 } as const;
 export const NEXT = msg`next`;
+
+export const stripeKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;

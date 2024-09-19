@@ -88,6 +88,7 @@ import { ProjectPageIconSmall } from './ProjectPageIconSmall';
 import PutInBasketIcon from './PutInBasketIcon';
 import QuestionIcon from './QuestionIcon';
 import QuestionIconOutlined from './QuestionIconOutlined';
+import ReceiptIcon from './ReceiptIcon';
 import RegenIcon from './RegenIcon';
 import RegenLedgerIcon from './RegenLedgerIcon';
 import RegenLogoIcon from './RegenLogoIcon';
@@ -392,5 +393,6 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<USFlagIcon />} label="USFlagIcon" />
     <LabeledIcon icon={<CreditCardIcon />} label="CreditCardIcon" />
     <LabeledIcon icon={<CryptoIcon />} label="CryptoIcon" />
+    <LabeledIcon icon={<ReceiptIcon />} label="ReceiptIcon" />
   </Grid>
 );

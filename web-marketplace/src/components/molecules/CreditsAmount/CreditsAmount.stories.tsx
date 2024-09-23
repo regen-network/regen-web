@@ -30,6 +30,7 @@ const CreditsWithForm = (args: any) => {
     args.paymentOption === PAYMENT_OPTIONS.CARD
       ? { askDenom: CURRENCIES.usd, askBaseDenom: CURRENCIES.usd }
       : defaultCryptoCurrency;
+  const [currency] = useState<Currency>(initCurrency);
   const [spendingCap, setSpendingCap] = useState(0);
   const [creditsAvailable, setCreditsAvailable] = useState(0);
 
@@ -52,6 +53,7 @@ const CreditsWithForm = (args: any) => {
     <Form form={form as any} onSubmit={form.handleSubmit as any}>
       <CreditsAmount
         {...args}
+        currency={currency}
         spendingCap={spendingCap}
         setSpendingCap={setSpendingCap}
         creditsAvailable={creditsAvailable}

@@ -203,6 +203,7 @@ export function ChooseCreditsForm({
               cryptoCurrencies={cryptoCurrencies}
               allowedDenoms={allowedDenoms}
               creditTypePrecision={creditTypePrecision}
+              currency={currency}
             />
           )}
           {paymentOption === PAYMENT_OPTIONS.CRYPTO && (

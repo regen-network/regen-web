@@ -5,7 +5,6 @@ import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
-import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { AllowedDenoms } from '../DenomLabel/DenomLabel.utils';
 
@@ -25,6 +24,7 @@ export interface CreditsAmountProps {
   cryptoCurrencies: Currency[];
   allowedDenoms?: AllowedDenoms;
   creditTypePrecision?: number | null;
+  currency: Currency;
 }
 
 export interface CreditsInputProps {

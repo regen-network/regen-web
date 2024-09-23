@@ -38,6 +38,7 @@ export const BuyCredits = () => {
   const [confirmationTokenId, setConfirmationTokenId] = useState<
     string | undefined
   >();
+  const [paymentMethodId, setPaymentMethodId] = useState<string | undefined>();
 
   const formModel = getFormModel({ _, paymentOption, retiring });
   const sellOrders = useMemo(
@@ -76,6 +77,7 @@ export const BuyCredits = () => {
                 onChainProjectId
               }`}
               setConfirmationTokenId={setConfirmationTokenId}
+              setPaymentMethodId={setPaymentMethodId}
             />
           </MultiStepTemplate>
         )}

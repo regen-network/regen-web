@@ -48,6 +48,7 @@ type Props = {
   retiring: boolean;
   setRetiring: UseStateSetter<boolean>;
   setConfirmationTokenId: UseStateSetter<string | undefined>;
+  setPaymentMethodId: UseStateSetter<string | undefined>;
   cardSellOrders: Array<CardSellOrder>;
   cryptoSellOrders: Array<UISellOrderInfo>;
   creditTypeAbbrev?: string;
@@ -59,6 +60,7 @@ export const BuyCreditsForm = ({
   retiring,
   setRetiring,
   setConfirmationTokenId,
+  setPaymentMethodId,
   cardSellOrders,
   cryptoSellOrders,
   creditTypeAbbrev,
@@ -153,14 +155,11 @@ export const BuyCreditsForm = ({
             creditTypePrecision={creditTypeData?.creditType?.precision}
             onPrev={() => navigate(projectHref)}
             initialValues={{
-              [CURRENCY_AMOUNT]: data?.[CURRENCY_AMOUNT] || 0,
-              [CREDITS_AMOUNT]: data?.[CREDITS_AMOUNT] || 0,
-              [SELL_ORDERS]: data?.[SELL_ORDERS] || [],
-              [CREDIT_VINTAGE_OPTIONS]: data?.[CREDIT_VINTAGE_OPTIONS] || [],
-              [CURRENCY]: data?.[CURRENCY] || {
-                askBaseDenom: '',
-                askDenom: '',
-              },
+              [CURRENCY_AMOUNT]: data?.[CURRENCY_AMOUNT],
+              [CREDITS_AMOUNT]: data?.[CREDITS_AMOUNT],
+              [SELL_ORDERS]: data?.[SELL_ORDERS],
+              [CREDIT_VINTAGE_OPTIONS]: data?.[CREDIT_VINTAGE_OPTIONS],
+              [CURRENCY]: data?.[CURRENCY],
             }}
           />
         )}
@@ -171,7 +170,11 @@ export const BuyCreditsForm = ({
                 <PaymentInfoFormFiat
                   paymentOption={paymentOption}
                   onSubmit={async (values: PaymentInfoFormSchemaType) => {
-                    handleSaveNext({ ...data, ...values });
+                    const { paymentMethodId, ...others } = values;
+                    // we don't store paymentMethodId in local storage for security reasons,
+                    // only in current state
+                    handleSaveNext({ ...others, ...values });
+                    setPaymentMethodId(paymentMethodId);
                   }}
                   login={onButtonClick}
                   retiring={retiring}
@@ -182,6 +185,12 @@ export const BuyCreditsForm = ({
                   paymentMethods={paymentMethodData?.paymentMethods}
                   setError={setErrorBannerTextAtom}
                   setConfirmationTokenId={setConfirmationTokenId}
+                  initialValues={{
+                    email: data?.email,
+                    name: data?.name,
+                    createAccount: data?.createAccount,
+                    savePaymentMethod: data?.savePaymentMethod,
+                  }}
                 />
               </Elements>
             ) : (
@@ -199,6 +208,12 @@ export const BuyCreditsForm = ({
                 paymentMethods={paymentMethodData?.paymentMethods}
                 setError={setErrorBannerTextAtom}
                 setConfirmationTokenId={setConfirmationTokenId}
+                initialValues={{
+                  email: data?.email,
+                  name: data?.name,
+                  createAccount: data?.createAccount,
+                  savePaymentMethod: data?.savePaymentMethod,
+                }}
               />
             )}
           </>

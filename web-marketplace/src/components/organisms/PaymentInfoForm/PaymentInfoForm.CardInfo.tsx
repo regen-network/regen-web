@@ -5,6 +5,7 @@ import { PaymentElement } from '@stripe/react-stripe-js';
 
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import { Body } from 'web-components/src/components/typography';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { paymentElementOptions } from './PaymentInfoForm.constants';
 import { PaymentInfoFormSchemaType } from './PaymentInfoForm.schema';
@@ -12,8 +13,13 @@ import { PaymentInfoFormSchemaType } from './PaymentInfoForm.schema';
 type CardInfoProps = {
   accountId?: string;
   className?: string;
+  setPaymentInfoValid: UseStateSetter<boolean>;
 };
-export const CardInfo = ({ accountId, className }: CardInfoProps) => {
+export const CardInfo = ({
+  accountId,
+  className,
+  setPaymentInfoValid,
+}: CardInfoProps) => {
   const ctx = useFormContext<PaymentInfoFormSchemaType>();
   const { register, control, setValue } = ctx;
 
@@ -32,7 +38,11 @@ export const CardInfo = ({ accountId, className }: CardInfoProps) => {
 
   return (
     <div className={className}>
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
+      <PaymentElement
+        id="payment-element"
+        options={paymentElementOptions}
+        onChange={event => setPaymentInfoValid(event.complete)}
+      />
       <CheckboxLabel
         className="pt-30"
         checked={savePaymentMethod}

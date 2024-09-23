@@ -1,9 +1,7 @@
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
-
-import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { microToDenom } from 'lib/denom.utils';
 
@@ -12,6 +10,7 @@ import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import {
   CREDITS_AMOUNT,
+  CURRENCY,
   CURRENCY_AMOUNT,
   SELL_ORDERS,
 } from './CreditsAmount.constants';
@@ -30,8 +29,6 @@ import { CurrencyInput } from './CurrencyInput';
 
 export const CreditsAmount = ({
   paymentOption,
-  currency,
-  setCurrency,
   creditsAvailable,
   setCreditsAvailable,
   filteredCryptoSellOrders,
@@ -44,7 +41,12 @@ export const CreditsAmount = ({
   creditTypePrecision,
 }: CreditsAmountProps) => {
   const [maxCreditsSelected, setMaxCreditsSelected] = useState(false);
-  const { setValue, trigger } = useFormContext<ChooseCreditsFormSchemaType>();
+  const { setValue, trigger, control } =
+    useFormContext<ChooseCreditsFormSchemaType>();
+  const currency = useWatch({
+    control,
+    name: CURRENCY,
+  });
 
   const card = paymentOption === PAYMENT_OPTIONS.CARD;
   const orderedSellOrders = useMemo(
@@ -57,13 +59,6 @@ export const CreditsAmount = ({
 
     [card, cardSellOrders, filteredCryptoSellOrders],
   );
-
-  useEffect(() => {
-    // Reset amounts to 0 on currency change
-    setValue(CREDITS_AMOUNT, 0);
-    setValue(CURRENCY_AMOUNT, 0);
-    trigger();
-  }, [currency, setValue, trigger]);
 
   useEffect(() => {
     setSpendingCap(
@@ -172,8 +167,6 @@ export const CreditsAmount = ({
           maxCurrencyAmount={spendingCap}
           paymentOption={paymentOption}
           defaultCryptoCurrency={defaultCryptoCurrency}
-          currency={currency}
-          setCurrency={setCurrency}
           handleCurrencyAmountChange={handleCurrencyAmountChange}
           cryptoCurrencies={cryptoCurrencies}
           displayDenom={displayDenom}

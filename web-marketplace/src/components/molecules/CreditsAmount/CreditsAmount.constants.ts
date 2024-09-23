@@ -4,6 +4,7 @@ import { CURRENCIES } from 'components/molecules/DenomIconWithCurrency/DenomIcon
 
 export const CREDITS_AMOUNT = 'creditsAmount';
 export const CURRENCY_AMOUNT = 'currencyAmount';
+export const CURRENCY = 'currency';
 export const CREDIT_VINTAGE_OPTIONS = 'creditVintageOptions';
 export const SELL_ORDERS = 'sellOrders';
 

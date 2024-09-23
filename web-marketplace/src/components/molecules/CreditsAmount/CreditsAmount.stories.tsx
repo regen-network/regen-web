@@ -30,7 +30,6 @@ const CreditsWithForm = (args: any) => {
     args.paymentOption === PAYMENT_OPTIONS.CARD
       ? { askDenom: CURRENCIES.usd, askBaseDenom: CURRENCIES.usd }
       : defaultCryptoCurrency;
-  const [currency, setCurrency] = useState<Currency>(initCurrency);
   const [spendingCap, setSpendingCap] = useState(0);
   const [creditsAvailable, setCreditsAvailable] = useState(0);
 
@@ -47,14 +46,12 @@ const CreditsWithForm = (args: any) => {
     mode: 'onChange',
   });
   const filteredCryptoSellOrders = cryptoSellOrders.filter(
-    order => order.askDenom === currency.askDenom,
+    order => order.askDenom === initCurrency.askDenom,
   );
   return (
     <Form form={form as any} onSubmit={form.handleSubmit as any}>
       <CreditsAmount
         {...args}
-        currency={currency}
-        setCurrency={setCurrency}
         spendingCap={spendingCap}
         setSpendingCap={setSpendingCap}
         creditsAvailable={creditsAvailable}

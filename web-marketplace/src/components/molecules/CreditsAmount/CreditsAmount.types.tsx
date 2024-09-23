@@ -5,6 +5,7 @@ import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { AllowedDenoms } from '../DenomLabel/DenomLabel.utils';
 
@@ -14,8 +15,6 @@ export type Currency = {
 };
 export interface CreditsAmountProps {
   paymentOption: PaymentOptionsType;
-  currency: Currency;
-  setCurrency: (currency: Currency) => void;
   spendingCap: number;
   setSpendingCap: UseStateSetter<number>;
   creditsAvailable: number;
@@ -37,8 +36,6 @@ export interface CurrencyInputProps {
   maxCurrencyAmount: number;
   paymentOption: PaymentOptionsType;
   defaultCryptoCurrency: Currency;
-  currency: Currency;
-  setCurrency: (currency: Currency) => void;
   handleCurrencyAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
   cryptoCurrencies: Currency[];
   allowedDenoms?: AllowedDenoms;

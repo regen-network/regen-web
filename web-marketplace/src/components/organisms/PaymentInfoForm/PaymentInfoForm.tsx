@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useFormState } from 'react-hook-form';
+import { useEffect, useMemo, useState } from 'react';
+import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
 
@@ -29,6 +29,7 @@ export type PaymentInfoFormProps = {
   setConfirmationTokenId: UseStateSetter<string | undefined>;
   stripe?: Stripe | null;
   elements?: StripeElements | null;
+  initialValues?: DefaultValues<PaymentInfoFormSchemaType>;
 } & CustomerInfoProps &
   PaymentInfoProps;
 
@@ -46,17 +47,19 @@ export const PaymentInfoForm = ({
   setConfirmationTokenId,
   stripe,
   elements,
+  initialValues,
 }: PaymentInfoFormProps) => {
   const { _ } = useLingui();
   const { handleBack } = useMultiStep();
+  const [paymentInfoValid, setPaymentInfoValid] = useState(false);
 
   const form = useZodForm({
-    schema: paymentInfoFormSchema(paymentOption),
+    schema: paymentInfoFormSchema(paymentOption, wallet),
     defaultValues: {
-      email: accountEmail,
-      name: accountName,
-      createAccount: true,
-      savePaymentMethod: true,
+      email: initialValues?.email || accountEmail,
+      name: initialValues?.name || accountName,
+      createAccount: initialValues?.createAccount || true,
+      savePaymentMethod: initialValues?.savePaymentMethod || true,
       paymentMethodId: paymentMethods?.[0]?.id,
     },
     mode: 'onBlur',
@@ -73,6 +76,14 @@ export const PaymentInfoForm = ({
       form.setValue('paymentMethodId', paymentMethods?.[0]?.id);
   }, [accountEmail, accountName, form, paymentMethods]);
 
+  const paymentMethodId = useWatch({
+    control: form.control,
+    name: 'paymentMethodId',
+  });
+  const card = useMemo(
+    () => paymentOption === PAYMENT_OPTIONS.CARD,
+    [paymentOption],
+  );
   return (
     <Form
       form={form}
@@ -119,8 +130,12 @@ export const PaymentInfoForm = ({
           accountName={accountName}
           retiring={retiring}
         />
-        {paymentOption === PAYMENT_OPTIONS.CARD && (
-          <PaymentInfo paymentMethods={paymentMethods} accountId={accountId} />
+        {card && (
+          <PaymentInfo
+            paymentMethods={paymentMethods}
+            accountId={accountId}
+            setPaymentInfoValid={setPaymentInfoValid}
+          />
         )}
       </div>
       <div className="float-right pt-40">
@@ -128,7 +143,8 @@ export const PaymentInfoForm = ({
           saveDisabled={
             !isValid ||
             isSubmitting ||
-            (!stripe && paymentOption === PAYMENT_OPTIONS.CARD)
+            (!stripe && card) ||
+            (card && !paymentMethodId && !paymentInfoValid)
           }
           saveText={_(NEXT)}
           onPrev={handleBack}

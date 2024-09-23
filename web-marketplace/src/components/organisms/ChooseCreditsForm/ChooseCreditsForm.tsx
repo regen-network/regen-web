@@ -1,5 +1,5 @@
-import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
-import { useFormState, useWatch } from 'react-hook-form';
+import { Suspense, useCallback, useMemo, useState } from 'react';
+import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import {
@@ -44,7 +44,7 @@ export type Props = {
   cardDisabled: boolean;
   allowedDenoms?: AllowedDenoms;
   creditTypePrecision?: number | null;
-  initialValues?: ChooseCreditsFormSchemaType;
+  initialValues?: DefaultValues<ChooseCreditsFormSchemaType>;
   onPrev: () => void;
 };
 

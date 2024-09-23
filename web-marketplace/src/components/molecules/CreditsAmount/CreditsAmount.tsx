@@ -29,6 +29,7 @@ import { CreditsInput } from './CreditsInput';
 import { CurrencyInput } from './CurrencyInput';
 
 export const CreditsAmount = ({
+  currency,
   paymentOption,
   creditsAvailable,
   setCreditsAvailable,
@@ -43,12 +44,7 @@ export const CreditsAmount = ({
   const { _ } = useLingui();
 
   const [maxCreditsSelected, setMaxCreditsSelected] = useState(false);
-  const { setValue, trigger, control } =
-    useFormContext<ChooseCreditsFormSchemaType>();
-  const currency = useWatch({
-    control,
-    name: CURRENCY,
-  });
+  const { setValue, trigger } = useFormContext<ChooseCreditsFormSchemaType>();
 
   const card = paymentOption === PAYMENT_OPTIONS.CARD;
   const orderedSellOrders = useMemo(

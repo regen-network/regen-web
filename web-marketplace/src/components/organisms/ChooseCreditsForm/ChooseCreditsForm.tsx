@@ -46,6 +46,7 @@ export type Props = {
   allowedDenoms?: AllowedDenoms;
   creditTypePrecision?: number | null;
   projectHref: string;
+  initialValues?: ChooseCreditsFormSchemaType;
 };
 
 export function ChooseCreditsForm({
@@ -60,6 +61,7 @@ export function ChooseCreditsForm({
   allowedDenoms,
   creditTypePrecision,
   projectHref,
+  initialValues,
 }: Props) {
   const { _ } = useLingui();
   const navigate = useNavigate();
@@ -104,14 +106,12 @@ export function ChooseCreditsForm({
   const [spendingCap, setSpendingCap] = useState(0);
   const [creditsAvailable, setCreditsAvailable] = useState(0);
 
-  const chooseCreditsFormSchema = createChooseCreditsFormSchema({
-    creditsAvailable,
-    spendingCap,
-  });
-
   const form = useZodForm({
-    schema: chooseCreditsFormSchema,
-    defaultValues: {
+    schema: createChooseCreditsFormSchema({
+      creditsAvailable,
+      spendingCap,
+    }),
+    defaultValues: initialValues || {
       [CURRENCY_AMOUNT]: 0,
       [CREDITS_AMOUNT]: 0,
       [SELL_ORDERS]: [],
@@ -119,12 +119,9 @@ export function ChooseCreditsForm({
     },
     mode: 'onChange',
   });
-  // const { isValid, isSubmitting, errors } = useFormState({
-  //   control: form.control,
-  // });
-  // console.log('values', form.getValues());
-  // console.log('isValid', isValid);
-  // console.log('errors', errors);
+  const { isValid, isSubmitting } = useFormState({
+    control: form.control,
+  });
 
   const filteredCryptoSellOrders = useMemo(
     () =>
@@ -142,6 +139,7 @@ export function ChooseCreditsForm({
     // Reset amounts to 0 on retirement change
     form.setValue(CREDITS_AMOUNT, 0);
     form.setValue(CURRENCY_AMOUNT, 0);
+    form.trigger(); // trigger validation
   }, [form, setRetiring]);
 
   const handlePaymentOptions = useCallback(
@@ -151,6 +149,7 @@ export function ChooseCreditsForm({
       setCurrency(
         option === PAYMENT_OPTIONS.CARD ? cardCurrency : defaultCryptoCurrency,
       );
+      form.trigger();
     },
     [cardCurrency, defaultCryptoCurrency, form, setPaymentOption],
   );
@@ -230,7 +229,7 @@ export function ChooseCreditsForm({
         </Card>
         <div className="float-right pt-40">
           <PrevNextButtons
-            saveDisabled={false} // use isValid
+            saveDisabled={!isValid || isSubmitting}
             saveText={_(NEXT)}
             onPrev={() => {
               navigate(projectHref);

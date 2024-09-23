@@ -31,7 +31,6 @@ export interface CreditsAmountProps {
 export interface CreditsInputProps {
   creditsAvailable: number;
   handleCreditsAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  paymentOption: PaymentOptionsType;
 }
 
 export interface CurrencyInputProps {

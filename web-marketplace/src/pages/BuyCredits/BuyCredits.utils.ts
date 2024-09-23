@@ -1,6 +1,9 @@
 import { msg } from '@lingui/macro';
 
+import { Project } from 'generated/sanity-graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
+
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { PaymentOptionsType } from './BuyCredits.types';
@@ -37,3 +40,14 @@ export const getFormModel = ({
     ],
   };
 };
+
+export const getCardSellOrders = (
+  sanityFiatSellOrders: Project['fiatSellOrders'],
+  sellOrders: UISellOrderInfo[],
+) =>
+  sanityFiatSellOrders?.map(fiatOrder => ({
+    ...fiatOrder,
+    ...sellOrders.filter(
+      cryptoOrder => cryptoOrder.id.toString() === fiatOrder?.sellOrderId,
+    )?.[0],
+  })) || [];

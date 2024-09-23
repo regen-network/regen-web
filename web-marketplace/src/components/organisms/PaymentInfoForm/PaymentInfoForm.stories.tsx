@@ -3,8 +3,6 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-
 import { PaymentInfoForm, PaymentInfoFormProps } from './PaymentInfoForm';
 import { defaultStripeOptions } from './PaymentInfoForm.constants';
 
@@ -19,10 +17,7 @@ const stripeKey = import.meta.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY;
 
 const WrappedPaymentInfoForm = (args: PaymentInfoFormProps) => {
   const options = { amount: 1000, currency: 'usd', ...defaultStripeOptions };
-  const stripePromise =
-    args.paymentOption === PAYMENT_OPTIONS.CARD &&
-    stripeKey &&
-    loadStripe(stripeKey);
+  const stripePromise = loadStripe(stripeKey);
 
   return (
     <Elements options={options} stripe={stripePromise}>

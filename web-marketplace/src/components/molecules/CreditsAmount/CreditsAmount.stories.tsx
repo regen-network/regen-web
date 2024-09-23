@@ -14,7 +14,6 @@ import {
   cryptoCurrencies,
   cryptoSellOrders,
 } from './CreditsAmount.mock';
-import { Currency } from './CreditsAmount.types';
 
 export default {
   title: 'Marketplace/Molecules/CreditsAmount',
@@ -29,7 +28,6 @@ const CreditsWithForm = (args: any) => {
     args.paymentOption === PAYMENT_OPTIONS.CARD
       ? { askDenom: 'usd', askBaseDenom: 'usd' }
       : defaultCryptoCurrency;
-  const [currency, setCurrency] = useState<Currency>(initCurrency);
   const [spendingCap, setSpendingCap] = useState(0);
   const [creditsAvailable, setCreditsAvailable] = useState(0);
 
@@ -46,19 +44,16 @@ const CreditsWithForm = (args: any) => {
     mode: 'onChange',
   });
   const filteredCryptoSellOrders = cryptoSellOrders.filter(
-    order => order.askDenom === currency.askDenom,
+    order => order.askDenom === initCurrency.askDenom,
   );
   return (
     <Form form={form as any} onSubmit={form.handleSubmit as any}>
       <CreditsAmount
         {...args}
-        currency={currency}
-        setCurrency={setCurrency}
         spendingCap={spendingCap}
         setSpendingCap={setSpendingCap}
         creditsAvailable={creditsAvailable}
         setCreditsAvailable={setCreditsAvailable}
-        defaultCryptoCurrency={defaultCryptoCurrency}
         filteredCryptoSellOrders={filteredCryptoSellOrders}
       />
     </Form>

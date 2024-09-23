@@ -16,12 +16,12 @@ describe('ChooseCreditsForm', () => {
     setPaymentOption: () => {},
     retiring: true,
     setRetiring: () => {},
+    onPrev: () => {},
     onSubmit: async (values: ChooseCreditsFormSchemaType) => {},
     cardSellOrders,
     cryptoSellOrders,
     cardDisabled: false,
     allowedDenoms,
-    projectHref: '/lorem',
   };
   it('renders without crashing', () => {
     render(<ChooseCreditsForm {...props} />);

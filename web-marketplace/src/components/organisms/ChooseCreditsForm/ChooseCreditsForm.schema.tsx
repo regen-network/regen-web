@@ -2,6 +2,7 @@ import { i18n } from '@lingui/core';
 import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
+  CURRENCY,
   CURRENCY_AMOUNT,
   SELL_ORDERS,
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
@@ -46,6 +47,10 @@ export const createChooseCreditsFormSchema = ({
       }),
     ),
     [CREDIT_VINTAGE_OPTIONS]: z.array(z.string()),
+    [CURRENCY]: z.object({
+      askDenom: z.string(),
+      askBaseDenom: z.string(),
+    }),
   });
 };
 

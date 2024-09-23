@@ -9,6 +9,7 @@ import { cardSellOrders, cryptoCurrencies } from './CreditsAmount.mock';
 describe('CreditsAmount', () => {
   const formDefaultValues = {
     paymentOption: PAYMENT_OPTIONS.CARD,
+    currency: { askDenom: CURRENCIES.usd, askBaseDenom: CURRENCIES.usd },
     spendingCap: 3185,
     setSpendingCap: () => {},
     creditsAvailable: 1125,

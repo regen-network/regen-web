@@ -23,6 +23,7 @@ export interface CreditsAmountProps {
   cryptoCurrencies: Currency[];
   allowedDenoms?: AllowedDenoms;
   creditTypePrecision?: number | null;
+  currency: Currency;
 }
 
 export interface CreditsInputProps {

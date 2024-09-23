@@ -31,7 +31,7 @@ export type PaymentInfoFormProps = {
   elements?: StripeElements | null;
   initialValues?: DefaultValues<PaymentInfoFormSchemaType>;
 } & CustomerInfoProps &
-  PaymentInfoProps;
+  Omit<PaymentInfoProps, 'setPaymentInfoValid'>;
 
 export const PaymentInfoForm = ({
   paymentOption,

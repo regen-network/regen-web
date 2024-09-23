@@ -82,7 +82,7 @@ export const PostForm = ({
     defaultValues: {
       ...initialValues,
     },
-    mode: 'onBlur',
+    mode: 'onChange',
   });
   const { classes } = useMediaFormStyles();
   const { classes: textAreaClasses } = useMetadataFormStyles();

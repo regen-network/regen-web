@@ -34,14 +34,8 @@ export const CurrencyInput = ({
     register,
     formState: { errors },
   } = useFormContext<ChooseCreditsFormSchemaType>();
-  const { onChange, onBlur, name, ref } = register(CURRENCY_AMOUNT);
-  const [isFocused, setIsFocused] = useState(false);
+  const { onChange } = register(CURRENCY_AMOUNT);
 
-  const handleOnFocus = () => setIsFocused(true);
-  const handleOnBlur = (event: { target: any; type?: any }) => {
-    setIsFocused(false);
-    onBlur(event);
-  };
   const handleOnChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       onChange(event);
@@ -72,17 +66,10 @@ export const CurrencyInput = ({
         <span className="absolute top-[18px] left-10 z-50">$</span>
       )}
       <TextField
-        ref={ref}
-        name={name}
-        onFocus={handleOnFocus}
+        {...register(CURRENCY_AMOUNT)}
         onChange={handleOnChange}
-        onBlur={handleOnBlur}
         type="number"
-        className={`${
-          isFocused
-            ? 'border-2 border-solid border-grey-500'
-            : 'border border-solid border-grey-300'
-        } ${
+        className={`border border-solid border-grey-300 focus-within:border-grey-500 focus-within:border-2 ${
           paymentOption === PAYMENT_OPTIONS.CARD ? 'pl-5' : ''
         } w-full sm:w-auto flex justify-start relative sm:h-60 rounded-sm items-center`}
         customInputProps={{

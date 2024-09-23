@@ -3,6 +3,8 @@ import { useFormContext } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
+import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+
 import { microToDenom } from 'lib/denom.utils';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
@@ -42,7 +44,7 @@ export const CreditsAmount = ({
   creditTypePrecision,
 }: CreditsAmountProps) => {
   const [maxCreditsSelected, setMaxCreditsSelected] = useState(false);
-  const { setValue } = useFormContext<ChooseCreditsFormSchemaType>();
+  const { setValue, trigger } = useFormContext<ChooseCreditsFormSchemaType>();
 
   const card = paymentOption === PAYMENT_OPTIONS.CARD;
   const orderedSellOrders = useMemo(
@@ -60,7 +62,8 @@ export const CreditsAmount = ({
     // Reset amounts to 0 on currency change
     setValue(CREDITS_AMOUNT, 0);
     setValue(CURRENCY_AMOUNT, 0);
-  }, [currency, setValue]);
+    trigger();
+  }, [currency, setValue, trigger]);
 
   useEffect(() => {
     setSpendingCap(
@@ -100,6 +103,7 @@ export const CreditsAmount = ({
           return formatFullSellOrder({ order, card, price });
         }),
       );
+      trigger();
       setMaxCreditsSelected(false);
     }
   }, [
@@ -110,6 +114,7 @@ export const CreditsAmount = ({
     paymentOption,
     setValue,
     spendingCap,
+    trigger,
   ]);
 
   // Credits amount change
@@ -178,7 +183,6 @@ export const CreditsAmount = ({
         <CreditsInput
           creditsAvailable={creditsAvailable}
           handleCreditsAmountChange={handleCreditsAmountChange}
-          paymentOption={paymentOption}
         />
       </div>
       {paymentOption === PAYMENT_OPTIONS.CRYPTO && (

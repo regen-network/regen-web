@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { useFormState } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
-import { useElements, useStripe } from '@stripe/react-stripe-js';
+import { Stripe, StripeElements } from '@stripe/stripe-js';
 
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
@@ -23,10 +24,11 @@ import {
 
 export type PaymentInfoFormProps = {
   paymentOption: PaymentOptionsType;
-  onSubmit: (
-    values: PaymentInfoFormSchemaType & { confirmationTokenId?: string },
-  ) => Promise<void>;
+  onSubmit: (values: PaymentInfoFormSchemaType) => Promise<void>;
   setError: (error: string) => void;
+  setConfirmationTokenId: UseStateSetter<string | undefined>;
+  stripe?: Stripe | null;
+  elements?: StripeElements | null;
 } & CustomerInfoProps &
   PaymentInfoProps;
 
@@ -41,11 +43,12 @@ export const PaymentInfoForm = ({
   paymentMethods,
   setError,
   retiring,
+  setConfirmationTokenId,
+  stripe,
+  elements,
 }: PaymentInfoFormProps) => {
   const { _ } = useLingui();
   const { handleBack } = useMultiStep();
-  const stripe = useStripe();
-  const elements = useElements();
 
   const form = useZodForm({
     schema: paymentInfoFormSchema(paymentOption),
@@ -78,7 +81,6 @@ export const PaymentInfoForm = ({
         if (card && !stripe) {
           return;
         }
-        let confirmationTokenId: string | undefined;
         if (card && stripe && elements && !values.paymentMethodId) {
           const submitRes = await elements?.submit();
           if (submitRes?.error?.message) {
@@ -102,9 +104,9 @@ export const PaymentInfoForm = ({
             setError(error?.message);
             return;
           }
-          confirmationTokenId = confirmationToken?.id;
+          setConfirmationTokenId(confirmationToken?.id);
         }
-        onSubmit({ confirmationTokenId, ...values });
+        onSubmit(values);
       }}
     >
       <div className="flex flex-col gap-10 sm:gap-20 max-w-[560px]">

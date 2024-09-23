@@ -43,11 +43,13 @@ type GetCreditsAmountParams = {
   value: number;
   card: boolean;
   orderedSellOrders: UISellOrderInfo[];
+  creditTypePrecision?: number | null;
 };
 export const getCreditsAmount = ({
   value,
   card,
   orderedSellOrders,
+  creditTypePrecision,
 }: GetCreditsAmountParams) => {
   const currentCurrencyAmount = card ? value : denomToMicro(value);
   let currentCreditsAmount = 0;
@@ -78,7 +80,12 @@ export const getCreditsAmount = ({
       break;
     }
   }
-  return { currentCreditsAmount, sellOrders };
+  return {
+    currentCreditsAmount: parseFloat(
+      currentCreditsAmount.toFixed(creditTypePrecision || 6),
+    ),
+    sellOrders,
+  };
 };
 
 type GetCurrencyAmountParams = {
@@ -121,11 +128,11 @@ export const getCurrencyAmount = ({
       break;
     }
   }
-  console.log('currentCurrencyAmount', microToDenom(currentCurrencyAmount));
+
   return {
     [CURRENCY_AMOUNT]: card
-      ? currentCurrencyAmount
-      : microToDenom(currentCurrencyAmount),
+      ? parseFloat(currentCurrencyAmount.toFixed(6))
+      : parseFloat(microToDenom(currentCurrencyAmount).toFixed(6)),
     sellOrders,
   };
 };

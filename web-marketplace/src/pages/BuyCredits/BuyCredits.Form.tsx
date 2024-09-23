@@ -27,6 +27,7 @@ import { LoginFlow } from 'components/organisms/LoginFlow/LoginFlow';
 import { PaymentInfoForm } from 'components/organisms/PaymentInfoForm/PaymentInfoForm';
 import { defaultStripeOptions } from 'components/organisms/PaymentInfoForm/PaymentInfoForm.constants';
 import { PaymentInfoFormSchemaType } from 'components/organisms/PaymentInfoForm/PaymentInfoForm.schema';
+import { PaymentInfoFormFiat } from 'components/organisms/PaymentInfoForm/PaymentInfoFormFiat';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
@@ -37,6 +38,7 @@ type Props = {
   setPaymentOption: UseStateSetter<PaymentOptionsType>;
   retiring: boolean;
   setRetiring: UseStateSetter<boolean>;
+  setConfirmationTokenId: UseStateSetter<string | undefined>;
   cardSellOrders: Array<CardSellOrder>;
   cryptoSellOrders: Array<UISellOrderInfo>;
   creditTypeAbbrev?: string;
@@ -47,6 +49,7 @@ export const BuyCreditsForm = ({
   setPaymentOption,
   retiring,
   setRetiring,
+  setConfirmationTokenId,
   cardSellOrders,
   cryptoSellOrders,
   creditTypeAbbrev,
@@ -54,9 +57,8 @@ export const BuyCreditsForm = ({
 }: Props) => {
   const { data, activeStep, handleSaveNext } = useMultiStep<
     Partial<ChooseCreditsFormSchemaType> &
-      Partial<PaymentInfoFormSchemaType> & {
-        confirmationTokenId?: string;
-      } & Partial<AgreePurchaseFormSchemaType>
+      Partial<PaymentInfoFormSchemaType> &
+      Partial<AgreePurchaseFormSchemaType>
   >();
   const { wallet } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
@@ -100,7 +102,7 @@ export const BuyCreditsForm = ({
   const stripePromise = loadStripe(stripeKey);
   const stripeOptions = useMemo(
     () => ({
-      amount: (data?.[CURRENCY_AMOUNT] ?? 0) * 100, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00),
+      amount: (data?.[CURRENCY_AMOUNT] || 0) * 100, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00),
       currency: USD_DENOM,
       ...defaultStripeOptions,
     }),
@@ -128,22 +130,43 @@ export const BuyCreditsForm = ({
           />
         )}
         {activeStep === 1 && (
-          <Elements options={stripeOptions} stripe={stripePromise}>
-            <PaymentInfoForm
-              paymentOption={paymentOption}
-              onSubmit={async (values: PaymentInfoFormSchemaType) => {
-                handleSaveNext({ ...values });
-              }}
-              login={onButtonClick}
-              retiring={retiring}
-              wallet={wallet}
-              accountEmail={privActiveAccount?.email}
-              accountName={activeAccount?.name}
-              accountId={activeAccount?.id}
-              paymentMethods={paymentMethodData?.paymentMethods}
-              setError={setErrorBannerTextAtom}
-            />
-          </Elements>
+          <>
+            {paymentOption === PAYMENT_OPTIONS.CARD ? (
+              <Elements options={stripeOptions} stripe={stripePromise}>
+                <PaymentInfoFormFiat
+                  paymentOption={paymentOption}
+                  onSubmit={async (values: PaymentInfoFormSchemaType) => {
+                    handleSaveNext(values);
+                  }}
+                  login={onButtonClick}
+                  retiring={retiring}
+                  wallet={wallet}
+                  accountEmail={privActiveAccount?.email}
+                  accountName={activeAccount?.name}
+                  accountId={activeAccount?.id}
+                  paymentMethods={paymentMethodData?.paymentMethods}
+                  setError={setErrorBannerTextAtom}
+                  setConfirmationTokenId={setConfirmationTokenId}
+                />
+              </Elements>
+            ) : (
+              <PaymentInfoForm
+                paymentOption={paymentOption}
+                onSubmit={async (values: PaymentInfoFormSchemaType) => {
+                  handleSaveNext(values);
+                }}
+                login={onButtonClick}
+                retiring={retiring}
+                wallet={wallet}
+                accountEmail={privActiveAccount?.email}
+                accountName={activeAccount?.name}
+                accountId={activeAccount?.id}
+                paymentMethods={paymentMethodData?.paymentMethods}
+                setError={setErrorBannerTextAtom}
+                setConfirmationTokenId={setConfirmationTokenId}
+              />
+            )}
+          </>
         )}
         {activeStep === 2 && (
           <AgreePurchaseForm

@@ -95,7 +95,6 @@ describe('CreditsAmount', () => {
     const currencyInput = screen.getByLabelText(/Currency Input/i);
 
     await userEvent.click(maxCreditsButton);
-    screen.debug();
 
     expect(creditsInput).toHaveValue(1125);
     expect(currencyInput).toHaveValue(3185);

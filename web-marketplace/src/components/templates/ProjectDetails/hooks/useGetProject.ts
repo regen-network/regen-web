@@ -19,9 +19,9 @@ export const useGetProject = () => {
   const graphqlClient = useApolloClient();
   const { ecocreditClient } = useLedger();
 
-  // first, check if projectId is an off-chain project handle (for legacy projects like "wilmot")
-  // or an chain project id
-  // or and off-chain project with an UUID
+  // First, check if projectId is an on-chain project id
+  // or an off-chain project UUID.
+  // If neither of those, it's a project slug.
   const isOnChainId = getIsOnChainId(projectId);
   const isOffChainUuid = getIsUuid(projectId);
 

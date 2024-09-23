@@ -1,8 +1,6 @@
 import { useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 
-import { useFetchSellOrders } from 'features/marketplace/BuySellOrderFlow/hooks/useFetchSellOrders';
 import WithLoader from 'components/atoms/WithLoader';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
@@ -11,7 +9,7 @@ import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetP
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsForm } from './BuyCredits.Form';
 import { PaymentOptionsType } from './BuyCredits.types';
-import { getFormModel } from './BuyCredits.utils';
+import { getCardSellOrders, getFormModel } from './BuyCredits.utils';
 
 export const BuyCredits = () => {
   const { _ } = useLingui();
@@ -37,6 +35,9 @@ export const BuyCredits = () => {
       : PAYMENT_OPTIONS.CRYPTO,
   );
   const [retiring, setRetiring] = useState<boolean>(true);
+  const [confirmationTokenId, setConfirmationTokenId] = useState<
+    string | undefined
+  >();
 
   const formModel = getFormModel({ _, paymentOption, retiring });
   const sellOrders = useMemo(
@@ -45,13 +46,7 @@ export const BuyCredits = () => {
   );
 
   const cardSellOrders = useMemo(
-    () =>
-      sanityProject?.fiatSellOrders?.map(fiatOrder => ({
-        ...fiatOrder,
-        ...sellOrders.filter(
-          cryptoOrder => cryptoOrder.id.toString() === fiatOrder?.sellOrderId,
-        )?.[0],
-      })) || [],
+    () => getCardSellOrders(sanityProject?.fiatSellOrders, sellOrders),
     [sanityProject?.fiatSellOrders, sellOrders],
   );
 
@@ -66,7 +61,6 @@ export const BuyCredits = () => {
             formId={formModel.formId}
             steps={formModel.steps}
             initialValues={{}}
-            useLocalStorage={false}
           >
             <BuyCreditsForm
               setPaymentOption={setPaymentOption}
@@ -81,6 +75,7 @@ export const BuyCredits = () => {
                 offChainProject?.onChainId ??
                 onChainProjectId
               }`}
+              setConfirmationTokenId={setConfirmationTokenId}
             />
           </MultiStepTemplate>
         )}

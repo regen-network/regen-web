@@ -14,15 +14,12 @@ export type Currency = {
 };
 export interface CreditsAmountProps {
   paymentOption: PaymentOptionsType;
-  currency: Currency;
-  setCurrency: (currency: Currency) => void;
   spendingCap: number;
   setSpendingCap: UseStateSetter<number>;
   creditsAvailable: number;
   setCreditsAvailable: UseStateSetter<number>;
   filteredCryptoSellOrders: Array<UISellOrderInfo> | undefined;
   cardSellOrders: Array<CardSellOrder>;
-  defaultCryptoCurrency: Currency;
   cryptoCurrencies: Currency[];
   allowedDenoms?: AllowedDenoms;
   creditTypePrecision?: number | null;
@@ -36,9 +33,6 @@ export interface CreditsInputProps {
 export interface CurrencyInputProps {
   maxCurrencyAmount: number;
   paymentOption: PaymentOptionsType;
-  defaultCryptoCurrency: Currency;
-  currency: Currency;
-  setCurrency: (currency: Currency) => void;
   selectPlaceholderAriaLabel: string;
   selectAriaLabel: string;
   handleCurrencyAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;

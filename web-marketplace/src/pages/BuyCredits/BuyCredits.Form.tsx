@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
-import { Elements, useElements, useStripe } from '@stripe/react-stripe-js';
+import { useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { useQuery } from '@tanstack/react-query';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
@@ -16,10 +17,18 @@ import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/
 import { useWallet } from 'lib/wallet/wallet';
 
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
-import { CURRENCY_AMOUNT } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
+import {
+  CREDIT_VINTAGE_OPTIONS,
+  CREDITS_AMOUNT,
+  CURRENCY,
+  CURRENCY_AMOUNT,
+  SELL_ORDERS,
+} from 'components/molecules/CreditsAmount/CreditsAmount.constants';
+import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';
 import { ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
+import { PaymentOptions } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData';
@@ -56,7 +65,10 @@ export const BuyCreditsForm = ({
   projectHref,
 }: Props) => {
   const { data, activeStep, handleSaveNext } = useMultiStep<
-    Partial<ChooseCreditsFormSchemaType> &
+    {
+      paymentOption?: PaymentOptionsType;
+      retiring?: boolean;
+    } & Partial<ChooseCreditsFormSchemaType> &
       Partial<PaymentInfoFormSchemaType> &
       Partial<AgreePurchaseFormSchemaType>
   >();
@@ -69,6 +81,7 @@ export const BuyCreditsForm = ({
     walletsUiConfig,
     onButtonClick,
   } = useLoginData({});
+  const navigate = useNavigate();
 
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
@@ -109,6 +122,13 @@ export const BuyCreditsForm = ({
     [data],
   );
 
+  useEffect(() => {
+    setRetiring(prev =>
+      typeof data?.retiring === 'undefined' ? prev : data?.retiring,
+    );
+    setPaymentOption(prev => data?.paymentOption || prev);
+  }, [data, setPaymentOption, setRetiring]);
+
   return (
     <div className="flex">
       <div>
@@ -122,11 +142,26 @@ export const BuyCreditsForm = ({
             cardSellOrders={cardSellOrders}
             cryptoSellOrders={cryptoSellOrders}
             onSubmit={async (values: ChooseCreditsFormSchemaType) => {
-              handleSaveNext({ ...data, ...values });
+              handleSaveNext({
+                ...data,
+                ...values,
+                retiring,
+                paymentOption,
+              });
             }}
             allowedDenoms={allowedDenomsData?.allowedDenoms}
             creditTypePrecision={creditTypeData?.creditType?.precision}
-            projectHref={projectHref}
+            onPrev={() => navigate(projectHref)}
+            initialValues={{
+              [CURRENCY_AMOUNT]: data?.[CURRENCY_AMOUNT] || 0,
+              [CREDITS_AMOUNT]: data?.[CREDITS_AMOUNT] || 0,
+              [SELL_ORDERS]: data?.[SELL_ORDERS] || [],
+              [CREDIT_VINTAGE_OPTIONS]: data?.[CREDIT_VINTAGE_OPTIONS] || [],
+              [CURRENCY]: data?.[CURRENCY] || {
+                askBaseDenom: '',
+                askDenom: '',
+              },
+            }}
           />
         )}
         {activeStep === 1 && (

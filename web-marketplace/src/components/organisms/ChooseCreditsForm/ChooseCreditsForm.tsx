@@ -1,12 +1,11 @@
 import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
-import { useFormState } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { msg } from '@lingui/macro';
+import { useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
+  CURRENCY,
   CURRENCY_AMOUNT,
   SELL_ORDERS,
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
@@ -45,8 +44,8 @@ export type Props = {
   cardDisabled: boolean;
   allowedDenoms?: AllowedDenoms;
   creditTypePrecision?: number | null;
-  projectHref: string;
   initialValues?: ChooseCreditsFormSchemaType;
+  onPrev: () => void;
 };
 
 export function ChooseCreditsForm({
@@ -60,12 +59,10 @@ export function ChooseCreditsForm({
   cardDisabled,
   allowedDenoms,
   creditTypePrecision,
-  projectHref,
   initialValues,
+  onPrev,
 }: Props) {
   const { _ } = useLingui();
-  const navigate = useNavigate();
-
   const cryptoCurrencies = useMemo(
     () =>
       cryptoSellOrders
@@ -90,19 +87,6 @@ export function ChooseCreditsForm({
     [],
   );
 
-  const [currency, setCurrency] = useState<Currency | undefined>(undefined);
-  useEffect(
-    () =>
-      setCurrency(
-        prev =>
-          prev ||
-          (paymentOption === PAYMENT_OPTIONS.CARD
-            ? cardCurrency
-            : defaultCryptoCurrency),
-      ),
-    [cardCurrency, defaultCryptoCurrency, paymentOption],
-  );
-
   const [spendingCap, setSpendingCap] = useState(0);
   const [creditsAvailable, setCreditsAvailable] = useState(0);
 
@@ -111,16 +95,26 @@ export function ChooseCreditsForm({
       creditsAvailable,
       spendingCap,
     }),
-    defaultValues: initialValues || {
-      [CURRENCY_AMOUNT]: 0,
-      [CREDITS_AMOUNT]: 0,
-      [SELL_ORDERS]: [],
-      [CREDIT_VINTAGE_OPTIONS]: [],
+    defaultValues: {
+      [CURRENCY_AMOUNT]: initialValues?.[CURRENCY_AMOUNT] || 0,
+      [CREDITS_AMOUNT]: initialValues?.[CREDITS_AMOUNT] || 0,
+      [SELL_ORDERS]: initialValues?.[SELL_ORDERS] || [],
+      [CREDIT_VINTAGE_OPTIONS]: initialValues?.[CREDIT_VINTAGE_OPTIONS] || [],
+      [CURRENCY]: initialValues?.[CURRENCY]?.askDenom
+        ? initialValues?.[CURRENCY]
+        : paymentOption === PAYMENT_OPTIONS.CARD
+        ? cardCurrency
+        : defaultCryptoCurrency,
     },
     mode: 'onChange',
   });
   const { isValid, isSubmitting } = useFormState({
     control: form.control,
+  });
+
+  const currency = useWatch({
+    control: form.control,
+    name: CURRENCY,
   });
 
   const filteredCryptoSellOrders = useMemo(
@@ -146,9 +140,12 @@ export function ChooseCreditsForm({
     (option: string) => {
       setPaymentOption(option as PaymentOptionsType);
       form.setValue(CREDIT_VINTAGE_OPTIONS, []);
-      setCurrency(
+      form.setValue(
+        CURRENCY,
         option === PAYMENT_OPTIONS.CARD ? cardCurrency : defaultCryptoCurrency,
       );
+      form.setValue(CREDITS_AMOUNT, 0);
+      form.setValue(CURRENCY_AMOUNT, 0);
       form.trigger();
     },
     [cardCurrency, defaultCryptoCurrency, form, setPaymentOption],
@@ -196,15 +193,12 @@ export function ChooseCreditsForm({
           {currency && (
             <CreditsAmount
               paymentOption={paymentOption}
-              currency={currency}
-              setCurrency={setCurrency}
               spendingCap={spendingCap}
               setSpendingCap={setSpendingCap}
               creditsAvailable={creditsAvailable}
               setCreditsAvailable={setCreditsAvailable}
               filteredCryptoSellOrders={filteredCryptoSellOrders}
               cardSellOrders={cardSellOrders}
-              defaultCryptoCurrency={defaultCryptoCurrency}
               cryptoCurrencies={cryptoCurrencies}
               allowedDenoms={allowedDenoms}
               creditTypePrecision={creditTypePrecision}
@@ -231,9 +225,7 @@ export function ChooseCreditsForm({
           <PrevNextButtons
             saveDisabled={!isValid || isSubmitting}
             saveText={_(NEXT)}
-            onPrev={() => {
-              navigate(projectHref);
-            }}
+            onPrev={onPrev}
           />
         </div>
       </Form>

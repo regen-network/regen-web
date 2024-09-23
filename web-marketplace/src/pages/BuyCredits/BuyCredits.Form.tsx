@@ -122,7 +122,7 @@ export const BuyCreditsForm = ({
             cardSellOrders={cardSellOrders}
             cryptoSellOrders={cryptoSellOrders}
             onSubmit={async (values: ChooseCreditsFormSchemaType) => {
-              handleSaveNext(values);
+              handleSaveNext({ ...data, ...values });
             }}
             allowedDenoms={allowedDenomsData?.allowedDenoms}
             creditTypePrecision={creditTypeData?.creditType?.precision}
@@ -136,7 +136,7 @@ export const BuyCreditsForm = ({
                 <PaymentInfoFormFiat
                   paymentOption={paymentOption}
                   onSubmit={async (values: PaymentInfoFormSchemaType) => {
-                    handleSaveNext(values);
+                    handleSaveNext({ ...data, ...values });
                   }}
                   login={onButtonClick}
                   retiring={retiring}
@@ -153,7 +153,7 @@ export const BuyCreditsForm = ({
               <PaymentInfoForm
                 paymentOption={paymentOption}
                 onSubmit={async (values: PaymentInfoFormSchemaType) => {
-                  handleSaveNext(values);
+                  handleSaveNext({ ...data, ...values });
                 }}
                 login={onButtonClick}
                 retiring={retiring}

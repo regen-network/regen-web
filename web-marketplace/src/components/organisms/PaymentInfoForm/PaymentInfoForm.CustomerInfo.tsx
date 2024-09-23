@@ -72,7 +72,7 @@ export const CustomerInfo = ({
         className={!accountId && !wallet?.address ? 'mb-30' : ''}
         label={_(msg`Your email`)}
         description={
-          !!wallet && !accountEmail ? (
+          !!wallet?.address && !accountEmail ? (
             <Trans>
               Input an email address to receive a receipt of your purchase.
               <i>

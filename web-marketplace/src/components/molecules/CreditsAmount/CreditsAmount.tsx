@@ -1,12 +1,11 @@
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
-import { useFormContext, useWatch } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
-import { denomToMicro, microToDenom } from 'lib/denom.utils';
+import { microToDenom } from 'lib/denom.utils';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import {
@@ -56,7 +55,7 @@ export const CreditsAmount = ({
 
     [card, cardSellOrders, filteredCryptoSellOrders],
   );
-  console.log('orderedSellOrders', orderedSellOrders);
+
   useEffect(() => {
     // Reset amounts to 0 on currency change
     setValue(CREDITS_AMOUNT, 0);
@@ -140,11 +139,12 @@ export const CreditsAmount = ({
         value,
         card,
         orderedSellOrders,
+        creditTypePrecision,
       });
       setValue(CREDITS_AMOUNT, currentCreditsAmount);
       setValue(SELL_ORDERS, sellOrders);
     },
-    [card, orderedSellOrders, setValue],
+    [card, orderedSellOrders, setValue, creditTypePrecision],
   );
 
   const displayDenom = findDisplayDenom({

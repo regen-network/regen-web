@@ -69,7 +69,7 @@ export const CustomerInfo = ({
         />
       )}
       <TextField
-        className={!accountId && !wallet ? 'mb-30' : ''}
+        className={!accountId && !wallet?.address ? 'mb-30' : ''}
         label={_(msg`Your email`)}
         description={
           !!wallet && !accountEmail ? (
@@ -97,7 +97,7 @@ export const CustomerInfo = ({
         disabled={!!accountEmail}
         optional={!!wallet}
       />
-      {!accountId && !wallet && (
+      {!accountId && !wallet?.address && (
         <CheckboxLabel
           checked={createAccount}
           label={

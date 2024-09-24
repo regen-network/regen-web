@@ -5,13 +5,17 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { TebuHeaderItemType } from './TebuHeader.types';
 
-export interface Props {
+export interface TebuHeaderProps {
   logo: string;
   items: TebuHeaderItemType[];
   className?: string;
 }
 
-export const TebuHeader = ({ logo, items, className }: Props): JSX.Element => {
+export const TebuHeader = ({
+  logo,
+  items,
+  className,
+}: TebuHeaderProps): JSX.Element => {
   const { _ } = useLingui();
 
   return (
@@ -21,7 +25,7 @@ export const TebuHeader = ({ logo, items, className }: Props): JSX.Element => {
         <ul className="flex items-center list-none">
           {items.map(item => (
             <li
-              key={item.label}
+              key={item.text}
               className="mr-25 last:mr-0 border-solid border-0 border-b-2 border-brand-100 hover:border-grey-0 pb-3"
             >
               <a
@@ -29,7 +33,7 @@ export const TebuHeader = ({ logo, items, className }: Props): JSX.Element => {
                 className="text-grey-700 font-montserrat font-bold text-base leading-[130%] no-underline"
                 style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
               >
-                {item.label}
+                {item.text}
               </a>
             </li>
           ))}

@@ -1,4 +1,4 @@
 export type TebuHeaderItemType = {
-  label: string;
+  text: string;
   href: string;
 };

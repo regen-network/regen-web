@@ -1,0 +1,8 @@
+query TebuBanner {
+  allTebuBanner {
+    links {
+      href
+      text
+    }
+  }
+}

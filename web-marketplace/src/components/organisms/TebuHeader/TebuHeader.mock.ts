@@ -2,11 +2,11 @@
 import { TebuHeaderItemType } from './TebuHeader.types';
 
 export const tebuHeaderItemsMock: TebuHeaderItemType[] = [
-  { label: 'About Terrasos', href: '#' },
-  { label: 'Projects', href: '#' },
-  { label: 'Habitat Banks', href: '#' },
-  { label: 'Geovisor', href: '#' },
-  { label: 'Partners', href: '#' },
-  { label: 'Act Now', href: '#' },
-  { label: 'More', href: '#' },
+  { text: 'About Terrasos', href: '#' },
+  { text: 'Projects', href: '#' },
+  { text: 'Habitat Banks', href: '#' },
+  { text: 'Geovisor', href: '#' },
+  { text: 'Partners', href: '#' },
+  { text: 'Act Now', href: '#' },
+  { text: 'More', href: '#' },
 ];

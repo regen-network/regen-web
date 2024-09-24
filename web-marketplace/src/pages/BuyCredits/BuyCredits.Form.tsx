@@ -39,6 +39,7 @@ import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
 import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
+import { usePurchase } from './hooks/usePurchase';
 
 type Props = {
   paymentOption: PaymentOptionsType;
@@ -143,6 +144,7 @@ export const BuyCreditsForm = ({
     },
     [data, handleSaveNext, setPaymentMethodId],
   );
+  const purchase = usePurchase();
 
   return (
     <div className="flex">
@@ -228,7 +230,34 @@ export const BuyCreditsForm = ({
         {activeStep === 2 && (
           <AgreePurchaseForm
             retiring={retiring}
-            onSubmit={async (values: AgreePurchaseFormSchemaType) => {}}
+            onSubmit={async (values: AgreePurchaseFormSchemaType) => {
+              const { retirementReason, country, stateProvince, postalCode } =
+                values;
+              const {
+                sellOrders: selectedSellOrders,
+                email,
+                name,
+                savePaymentMethod,
+                createAccount: createActiveAccount,
+                // subscribeNewsletter, TODO
+                // followProject,
+              } = data;
+
+              if (selectedSellOrders)
+                purchase({
+                  paymentOption,
+                  selectedSellOrders,
+                  retiring,
+                  retirementReason,
+                  country,
+                  stateProvince,
+                  postalCode,
+                  email,
+                  name,
+                  savePaymentMethod,
+                  createActiveAccount,
+                });
+            }}
             goToChooseCredits={() => handleActiveStep(0)}
             imgSrc="/svg/info-with-hand.svg"
             country={cardDetails?.country || 'US'}

@@ -24,7 +24,6 @@ export const getFormModel = ({
       {
         id: 'choose-credits',
         name: _(msg`Choose credits`),
-        // schema: TODO
       },
       {
         id: 'payment-customer-info',
@@ -37,6 +36,7 @@ export const getFormModel = ({
         id: 'agree-purchase',
         name: retiring ? _(msg`Retirement`) : _(msg`Agree & purchase`),
       },
+      { id: 'complete', name: _(msg`Complete`) },
     ],
   };
 };

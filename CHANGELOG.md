@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.3](https://github.com/regen-network/regen-web/compare/v2.7.2...v2.7.3) (2024-09-24)
+
+### Bug Fixes
+
+- add overflow-hidden class to PostForm gallery items ([d35613b](https://github.com/regen-network/regen-web/commit/d35613bf9fe1361a6afc20ec72a3fbbe3886d59b))
+
 ## [2.7.2](https://github.com/regen-network/regen-web/compare/v2.7.1...v2.7.2) (2024-09-12)
 
 ### Bug Fixes

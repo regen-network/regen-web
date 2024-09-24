@@ -2,15 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
-import { useQuery } from '@tanstack/react-query';
-import { postData } from 'utils/fetch/postData';
 
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
-
-import { apiUri } from 'lib/apiUri';
-import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import {
@@ -63,8 +57,6 @@ export const PaymentInfoForm = ({
   const { _ } = useLingui();
   const { handleBack } = useMultiStep();
   const [paymentInfoValid, setPaymentInfoValid] = useState(false);
-  const { data: token } = useQuery(getCsrfTokenQuery({}));
-  const retryCsrfRequest = useRetryCsrfRequest();
 
   const form = useZodForm({
     schema: paymentInfoFormSchema(paymentOption, wallet),
@@ -128,24 +120,23 @@ export const PaymentInfoForm = ({
             setError(error?.message);
             return;
           }
-          const confirmationTokenId = confirmationToken?.id;
-          setConfirmationTokenId(confirmationTokenId);
-
-          try {
-            if (token) {
-              await postData({
-                url: `${apiUri}/marketplace/v1/stripe/summarize-payment`,
-                data: { confirmationTokenId },
-                token,
-                retryCsrfRequest,
-                onSuccess: async res => {
-                  setCardDetails(res);
-                },
-              });
-            }
-          } catch (error) {
-            setError(String(error));
-          }
+          setConfirmationTokenId(confirmationToken?.id);
+        }
+        if (
+          card &&
+          paymentMethods &&
+          paymentMethods.length > 0 &&
+          values.paymentMethodId
+        ) {
+          const paymentMethod = paymentMethods.find(
+            method => method.id === values.paymentMethodId,
+          );
+          if (paymentMethod?.card)
+            setCardDetails({
+              last4: paymentMethod.card.last4,
+              country: paymentMethod.card.country,
+              brand: paymentMethod.card.brand,
+            });
         }
         onSubmit(values);
       }}

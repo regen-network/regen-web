@@ -14,6 +14,6 @@ export const bottomTextMapping: BottomTextMapping = {
   countryLabel: 'Country',
   stateLabel: 'State / Region',
   postalCodeLabel: 'Postal Code',
-  locationStatePlaceholderLabel: 'State / Region',
+  locationStatePlaceholderLabel: 'Please choose a state',
   countryLabelPlaceholder: 'Country',
 };

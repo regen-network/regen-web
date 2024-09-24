@@ -61,9 +61,11 @@ export const getCreditsAmount = ({
     const price = getSellOrderPrice({ order, card });
     const quantity = Number(order.quantity);
     const orderTotalAmount = quantity * price;
-    console.log(i, currencyAmountLeft, orderTotalAmount);
+
     if (currencyAmountLeft >= orderTotalAmount) {
-      currencyAmountLeft -= orderTotalAmount;
+      currencyAmountLeft = parseFloat(
+        (currencyAmountLeft - orderTotalAmount).toFixed(6),
+      );
       currentCreditsAmount += quantity;
       sellOrders.push(formatFullSellOrder({ order, card, price }));
       if (currencyAmountLeft === 0) break;

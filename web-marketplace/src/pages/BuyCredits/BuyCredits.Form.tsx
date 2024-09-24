@@ -40,7 +40,7 @@ import { PaymentInfoFormFiat } from 'components/organisms/PaymentInfoForm/Paymen
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
-import { PaymentOptionsType } from './BuyCredits.types';
+import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
 
 type Props = {
   paymentOption: PaymentOptionsType;
@@ -49,10 +49,12 @@ type Props = {
   setRetiring: UseStateSetter<boolean>;
   setConfirmationTokenId: UseStateSetter<string | undefined>;
   setPaymentMethodId: UseStateSetter<string | undefined>;
+  setCardDetails: UseStateSetter<CardDetails | undefined>;
   cardSellOrders: Array<CardSellOrder>;
   cryptoSellOrders: Array<UISellOrderInfo>;
   creditTypeAbbrev?: string;
   projectHref: string;
+  cardDetails?: CardDetails;
 };
 export const BuyCreditsForm = ({
   paymentOption,
@@ -61,12 +63,14 @@ export const BuyCreditsForm = ({
   setRetiring,
   setConfirmationTokenId,
   setPaymentMethodId,
+  setCardDetails,
   cardSellOrders,
   cryptoSellOrders,
   creditTypeAbbrev,
   projectHref,
+  cardDetails,
 }: Props) => {
-  const { data, activeStep, handleSaveNext } = useMultiStep<
+  const { data, activeStep, handleSaveNext, handleActiveStep } = useMultiStep<
     {
       paymentOption?: PaymentOptionsType;
       retiring?: boolean;
@@ -191,6 +195,7 @@ export const BuyCreditsForm = ({
                     createAccount: data?.createAccount,
                     savePaymentMethod: data?.savePaymentMethod,
                   }}
+                  setCardDetails={setCardDetails}
                 />
               </Elements>
             ) : (
@@ -214,6 +219,7 @@ export const BuyCreditsForm = ({
                   createAccount: data?.createAccount,
                   savePaymentMethod: data?.savePaymentMethod,
                 }}
+                setCardDetails={setCardDetails}
               />
             )}
           </>
@@ -222,10 +228,9 @@ export const BuyCreditsForm = ({
           <AgreePurchaseForm
             retiring={retiring}
             onSubmit={async (values: AgreePurchaseFormSchemaType) => {}}
-            goToChooseCredits={function (): void {
-              throw new Error('Function not implemented.');
-            }}
-            imgSrc={''}
+            goToChooseCredits={() => handleActiveStep(0)}
+            imgSrc="/svg/info-with-hand.svg"
+            country={cardDetails?.country || 'US'}
           />
         )}
       </div>

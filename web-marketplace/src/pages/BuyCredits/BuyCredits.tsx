@@ -8,7 +8,7 @@ import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetP
 
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsForm } from './BuyCredits.Form';
-import { PaymentOptionsType } from './BuyCredits.types';
+import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
 import { getCardSellOrders, getFormModel } from './BuyCredits.utils';
 
 export const BuyCredits = () => {
@@ -39,6 +39,7 @@ export const BuyCredits = () => {
     string | undefined
   >();
   const [paymentMethodId, setPaymentMethodId] = useState<string | undefined>();
+  const [cardDetails, setCardDetails] = useState<CardDetails | undefined>();
 
   const formModel = getFormModel({ _, paymentOption, retiring });
   const sellOrders = useMemo(
@@ -78,6 +79,8 @@ export const BuyCredits = () => {
               }`}
               setConfirmationTokenId={setConfirmationTokenId}
               setPaymentMethodId={setPaymentMethodId}
+              setCardDetails={setCardDetails}
+              cardDetails={cardDetails}
             />
           </MultiStepTemplate>
         )}

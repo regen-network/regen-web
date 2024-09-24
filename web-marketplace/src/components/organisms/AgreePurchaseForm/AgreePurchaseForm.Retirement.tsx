@@ -25,7 +25,9 @@ const LocationStateField = lazy(
     ),
 );
 
-export const Retirement = () => {
+type Props = { retiring: boolean };
+
+export const Retirement = ({ retiring }: Props) => {
   const { _ } = useLingui();
   const ctx = useFormContext<AgreePurchaseFormSchemaType>();
   const { register, formState, control } = ctx;
@@ -45,7 +47,7 @@ export const Retirement = () => {
   });
 
   return (
-    <>
+    <div className={retiring ? '' : 'hidden'}>
       <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300">
         <Title variant="h6" className="flex items-center">
           <Trans>Retirement reason</Trans>
@@ -131,6 +133,6 @@ export const Retirement = () => {
           />
         </div>
       </Card>
-    </>
+    </div>
   );
 };

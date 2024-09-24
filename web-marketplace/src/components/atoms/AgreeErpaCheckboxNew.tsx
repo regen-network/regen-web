@@ -1,22 +1,21 @@
 import { forwardRef } from 'react';
 import { Trans } from '@lingui/macro';
-import { Link as LinkExt, SxProps, Theme } from '@mui/material';
+import { Link as LinkExt } from '@mui/material';
 import {
   URL_REGISTRY_MARKETPLACE_LEGAL,
   URL_REGISTRY_TERMS_SERVICE,
 } from 'config/globals';
 
-import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
+import CheckboxLabel, {
+  CheckboxLabelProps,
+} from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import { Subtitle } from 'web-components/src/components/typography';
 import { TextSize } from 'web-components/src/components/typography/sizing';
 
-interface Props {
-  error?: boolean;
-  helperText?: string;
-  sx?: SxProps<Theme>;
+type Props = {
   labelClassName?: string;
   labelSize?: TextSize;
-}
+} & Omit<CheckboxLabelProps, 'label'>;
 
 const AgreeErpaCheckbox = forwardRef<HTMLButtonElement, Props>(
   ({ sx, labelClassName, labelSize, ...props }, ref) => {

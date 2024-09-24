@@ -1,12 +1,17 @@
+import { useEffect } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
-import { Trans } from '@lingui/macro';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
+import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { Body } from 'web-components/src/components/typography/Body';
 
+import { NEXT } from 'pages/BuyCredits/BuyCredits.constants';
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { Retirement } from './AgreePurchaseForm.Retirement';
 import {
@@ -28,6 +33,9 @@ export const AgreePurchaseForm = ({
   goToChooseCredits,
   imgSrc,
 }: AgreePurchaseFormProps) => {
+  const { _ } = useLingui();
+  const { handleBack } = useMultiStep();
+
   const form = useZodForm({
     schema: agreePurchaseFormSchema(retiring),
     defaultValues: {
@@ -39,9 +47,12 @@ export const AgreePurchaseForm = ({
     },
     mode: 'onBlur',
   });
-  const { errors } = useFormState({
+  const { errors, isValid, isSubmitting } = useFormState({
     control: form.control,
   });
+  console.log('isValid', isValid);
+  console.log('errors', errors);
+  console.log('values', form.getValues());
 
   const followProject = useWatch({
     control: form.control,
@@ -51,6 +62,10 @@ export const AgreePurchaseForm = ({
     control: form.control,
     name: 'subscribeNewsletter',
   });
+
+  useEffect(() => {
+    form.setValue('country', country);
+  }, [country, form]);
 
   return (
     <Form form={form} onSubmit={onSubmit} className="max-w-[560px]">
@@ -89,6 +104,13 @@ export const AgreePurchaseForm = ({
           error={!!errors.agreeErpa}
           helperText={errors.agreeErpa?.message}
           {...form.register('agreeErpa')}
+        />
+      </div>
+      <div className="float-right pt-40">
+        <PrevNextButtons
+          saveDisabled={!isValid || isSubmitting}
+          saveText={_(msg`purchase now`)}
+          onPrev={handleBack}
         />
       </div>
     </Form>

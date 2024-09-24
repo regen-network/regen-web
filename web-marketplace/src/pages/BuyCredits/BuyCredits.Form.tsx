@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -24,11 +24,9 @@ import {
   CURRENCY_AMOUNT,
   SELL_ORDERS,
 } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
-import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';
 import { ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
-import { PaymentOptions } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData';
@@ -135,6 +133,17 @@ export const BuyCreditsForm = ({
     setPaymentOption(prev => data?.paymentOption || prev);
   }, [data, setPaymentOption, setRetiring]);
 
+  const paymentInfoFormSubmit = useCallback(
+    async (values: PaymentInfoFormSchemaType) => {
+      const { paymentMethodId, ...others } = values;
+      // we don't store paymentMethodId in local storage for security reasons,
+      // only in current state
+      handleSaveNext({ ...data, ...others });
+      setPaymentMethodId(paymentMethodId);
+    },
+    [data, handleSaveNext, setPaymentMethodId],
+  );
+
   return (
     <div className="flex">
       <div>
@@ -173,13 +182,7 @@ export const BuyCreditsForm = ({
               <Elements options={stripeOptions} stripe={stripePromise}>
                 <PaymentInfoFormFiat
                   paymentOption={paymentOption}
-                  onSubmit={async (values: PaymentInfoFormSchemaType) => {
-                    const { paymentMethodId, ...others } = values;
-                    // we don't store paymentMethodId in local storage for security reasons,
-                    // only in current state
-                    handleSaveNext({ ...others, ...values });
-                    setPaymentMethodId(paymentMethodId);
-                  }}
+                  onSubmit={paymentInfoFormSubmit}
                   login={onButtonClick}
                   retiring={retiring}
                   wallet={wallet}
@@ -201,9 +204,7 @@ export const BuyCreditsForm = ({
             ) : (
               <PaymentInfoForm
                 paymentOption={paymentOption}
-                onSubmit={async (values: PaymentInfoFormSchemaType) => {
-                  handleSaveNext({ ...data, ...values });
-                }}
+                onSubmit={paymentInfoFormSubmit}
                 login={onButtonClick}
                 retiring={retiring}
                 wallet={wallet}

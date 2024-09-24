@@ -120,11 +120,12 @@ export const CreditsAmount = ({
         currentCreditsAmount,
         card,
         orderedSellOrders,
+        creditTypePrecision,
       });
       setValue(CURRENCY_AMOUNT, currencyAmount);
       setValue(SELL_ORDERS, sellOrders);
     },
-    [card, orderedSellOrders, setValue],
+    [card, orderedSellOrders, setValue, creditTypePrecision],
   );
 
   // Currency amount change

@@ -50,9 +50,6 @@ export const AgreePurchaseForm = ({
   const { errors, isValid, isSubmitting } = useFormState({
     control: form.control,
   });
-  console.log('isValid', isValid);
-  console.log('errors', errors);
-  console.log('values', form.getValues());
 
   const followProject = useWatch({
     control: form.control,
@@ -62,6 +59,10 @@ export const AgreePurchaseForm = ({
     control: form.control,
     name: 'subscribeNewsletter',
   });
+  const agreeErpa = useWatch({
+    control: form.control,
+    name: 'agreeErpa',
+  });
 
   useEffect(() => {
     form.setValue('country', country);
@@ -69,11 +70,11 @@ export const AgreePurchaseForm = ({
 
   return (
     <Form form={form} onSubmit={onSubmit} className="max-w-[560px]">
-      {retiring ? (
-        <Retirement />
-      ) : (
+      <Retirement retiring={retiring} />
+      {!retiring && (
         <Tradable goToChooseCredits={goToChooseCredits} imgSrc={imgSrc} />
       )}
+
       <div className="flex flex-col gap-20 py-20 px-20 sm:pl-40 sm:pr-0">
         <CheckboxLabel
           checked={followProject}
@@ -99,6 +100,7 @@ export const AgreePurchaseForm = ({
           {...form.register('subscribeNewsletter')}
         />
         <AgreeErpaCheckbox
+          checked={agreeErpa}
           labelSize="md"
           labelClassName="font-normal"
           error={!!errors.agreeErpa}

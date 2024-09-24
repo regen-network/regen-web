@@ -61,7 +61,7 @@ export const getCreditsAmount = ({
     const price = getSellOrderPrice({ order, card });
     const quantity = Number(order.quantity);
     const orderTotalAmount = quantity * price;
-
+    console.log(i, currencyAmountLeft, orderTotalAmount);
     if (currencyAmountLeft >= orderTotalAmount) {
       currencyAmountLeft -= orderTotalAmount;
       currentCreditsAmount += quantity;
@@ -71,7 +71,9 @@ export const getCreditsAmount = ({
       currentCreditsAmount += currencyAmountLeft / price;
       sellOrders.push({
         sellOrderId: order.id,
-        quantity: String(currencyAmountLeft / price),
+        quantity: (currencyAmountLeft / price).toFixed(
+          creditTypePrecision || 6,
+        ),
         bidPrice: !card
           ? { amount: String(price), denom: order.askDenom }
           : undefined,
@@ -92,11 +94,13 @@ type GetCurrencyAmountParams = {
   currentCreditsAmount: number;
   card: boolean;
   orderedSellOrders: UISellOrderInfo[];
+  creditTypePrecision?: number | null;
 };
 export const getCurrencyAmount = ({
   currentCreditsAmount,
   card,
   orderedSellOrders,
+  creditTypePrecision,
 }: GetCurrencyAmountParams) => {
   let currentCurrencyAmount = 0;
   let creditsAmountLeft = currentCreditsAmount;
@@ -109,7 +113,9 @@ export const getCurrencyAmount = ({
 
     // Take all credits from this sell order
     if (creditsAmountLeft >= quantity) {
-      creditsAmountLeft -= quantity;
+      creditsAmountLeft = parseFloat(
+        (creditsAmountLeft - quantity).toFixed(creditTypePrecision || 6),
+      );
       currentCurrencyAmount += quantity * price;
       sellOrders.push(formatFullSellOrder({ order, card, price }));
 

@@ -140,7 +140,7 @@ export const useFetchRetirements = ({ address, hideRetirements }: Props) => {
         address ?? wallet?.address ?? '',
       ),
     });
-  }, [reactQueryClient, wallet?.address]);
+  }, [address, reactQueryClient, wallet?.address]);
 
   return {
     retirements: normalizedRetirements,

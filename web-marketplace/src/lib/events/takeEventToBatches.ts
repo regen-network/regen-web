@@ -13,6 +13,7 @@ export const takeEventToBatches = (
   if (!deliverTxResponse || !deliverTxResponse.rawLog) return;
   const rawLog = JSON.parse(deliverTxResponse.rawLog);
   const rawEventTake: EventTx = rawLog[0].events.find((event: EventTx) =>
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     event.type.includes('EventTake'),
   );
   if (!rawEventTake) return;

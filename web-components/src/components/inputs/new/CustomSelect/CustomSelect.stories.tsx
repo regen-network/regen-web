@@ -33,6 +33,7 @@ WithText.args = {
   options: options,
   onSelect: () => {},
   defaultOption: 'usd',
+  placeholderAriaLabel: 'Select options',
 };
 
 export const WithComponent: Story = {
@@ -43,4 +44,6 @@ WithComponent.args = {
   options: componentOptions,
   onSelect: () => {},
   defaultOption: 'Component1',
+  placeholderAriaLabel: 'Select options',
+  selectAriaLabel: 'Select option',
 };

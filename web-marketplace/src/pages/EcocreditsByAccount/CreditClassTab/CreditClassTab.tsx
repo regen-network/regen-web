@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 
@@ -6,6 +6,7 @@ import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCredi
 import { CreditClassGridCard } from 'web-components/src/components/molecules/CreditClassGridCard/CreditClassGridCard';
 import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
 
+import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
@@ -31,6 +32,7 @@ export const CreditClassTab = () => {
       admin: address,
       userAddress: wallet?.address,
     });
+  const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
 
   return (
     <>
@@ -42,6 +44,7 @@ export const CreditClassTab = () => {
           {creditClasses.map(creditClass => (
             <Grid item xs={12} md={6} lg={4}>
               <CreditClassGridCard
+                bodyTexts={bodyTexts}
                 {...creditClass}
                 button={{
                   text: _(ACCOUNT_CREDIT_CLASS_BUTTON),

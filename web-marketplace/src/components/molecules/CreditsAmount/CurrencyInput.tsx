@@ -1,5 +1,7 @@
 import { ChangeEvent, lazy, useCallback, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
@@ -29,12 +31,15 @@ export const CurrencyInput = ({
   creditDetails,
   currency,
   setCurrency,
+  selectPlaceholderAriaLabel,
+  selectAriaLabel,
 }: CurrencyInputProps) => {
   const {
     register,
     setValue,
     formState: { errors },
   } = useFormContext<ChooseCreditsFormSchemaType>();
+  const { _ } = useLingui();
   const { onChange, onBlur, name, ref } = register(CURRENCY_AMOUNT);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -83,7 +88,7 @@ export const CurrencyInput = ({
           max: maxCurrencyAmount,
           min: 0,
           step: '0.1',
-          'aria-label': 'Currency Input',
+          'aria-label': _(msg`Currency Input`),
         }}
         sx={{
           '& .MuiInputBase-root': {
@@ -127,6 +132,8 @@ export const CurrencyInput = ({
                 }))}
               onSelect={onHandleCurrencyChange}
               defaultOption={defaultCryptoCurrency}
+              placeholderAriaLabel={selectPlaceholderAriaLabel}
+              selectAriaLabel={selectAriaLabel}
             />
           )
         }

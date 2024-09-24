@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
-import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Track } from 'web-marketplace/src/lib/tracker/types';
 
 import { ButtonType } from '../../../types/shared/buttonType';
@@ -16,18 +16,17 @@ import { Body } from '../../typography';
 import { Account, User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard/MediaCard';
 import { ProjectCardButton } from './ProjectCard.Button';
-import {
-  AVG_PRICE_TOOLTIP,
-  DEFAULT_BUY_BUTTON,
-  PREFINANCE_BUTTON,
-  PREFINANCE_PRICE_TOOLTIP,
-  VIEW_PROJECT_BUTTON,
-} from './ProjectCard.constants';
 import { CreditPrice } from './ProjectCard.CreditPrice';
 import { ProgramImageChildren } from './ProjectCard.ImageChildren';
 import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
-import { ProjectPrefinancing, PurchaseInfo } from './ProjectCard.types';
+import {
+  ProjectCardBodyTextsMapping,
+  ProjectCardButtonsMapping,
+  ProjectCardTitlesMapping,
+  ProjectPrefinancing,
+  PurchaseInfo,
+} from './ProjectCard.types';
 import { getAbbreviation } from './ProjectCard.utils';
 
 export interface ProjectCardProps extends MediaCardProps {
@@ -64,6 +63,9 @@ export interface ProjectCardProps extends MediaCardProps {
   adminPrompt?: SanityBlockContent;
   createPostTooltipText?: string;
   editProjectTooltipText?: string;
+  bodyTexts: ProjectCardBodyTextsMapping;
+  purchaseDetailsTitles: ProjectCardTitlesMapping;
+  buttons: ProjectCardButtonsMapping;
 }
 
 export function ProjectCard({
@@ -98,6 +100,9 @@ export function ProjectCard({
   adminPrompt,
   createPostTooltipText,
   editProjectTooltipText,
+  bodyTexts,
+  purchaseDetailsTitles,
+  buttons,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
@@ -107,12 +112,12 @@ export function ProjectCard({
   const cardButton =
     button ??
     (isSoldOut
-      ? VIEW_PROJECT_BUTTON
+      ? buttons.view
       : isPrefinanceProject
-      ? PREFINANCE_BUTTON
+      ? buttons.prefinance
       : offChain
-      ? VIEW_PROJECT_BUTTON
-      : DEFAULT_BUY_BUTTON);
+      ? buttons.view
+      : buttons.default);
 
   const {
     text: buttonText,
@@ -173,6 +178,7 @@ export function ProjectCard({
       </div>
       {isPrefinanceProject && (
         <PrefinanceTag
+          bodyTexts={bodyTexts}
           classNames={{
             root: 'top-20 left-0',
             label: 'text-[10px]',
@@ -181,7 +187,7 @@ export function ProjectCard({
       )}
       {comingSoon && (
         <div className={classes.comingSoon}>
-          <span className={classes.comingSoonText}>coming soon</span>
+          <span className={classes.comingSoonText}>{bodyTexts.comingSoon}</span>
         </div>
       )}
       {(purchaseInfo || isPrefinanceProject || offChain) && (
@@ -192,7 +198,7 @@ export function ProjectCard({
           {purchaseInfo?.units && (
             <>
               <span className={classes.units}>
-                {purchaseInfo.units} credits purchased
+                {purchaseInfo.units} {bodyTexts.creditsPurchased}
               </span>
               <span
                 onClick={() => setOpen(!open)}
@@ -202,7 +208,7 @@ export function ProjectCard({
                   direction={open ? 'up' : 'down'}
                   className={cn(classes.icon, 'text-brand-400')}
                 />{' '}
-                view details
+                {bodyTexts.viewDetails}
               </span>
             </>
           )}
@@ -210,7 +216,11 @@ export function ProjectCard({
             <div className={classes.purchaseDetails}>
               {purchaseInfo?.creditClass?.standard && (
                 <PurchaseDetails
-                  title={`vintage id${serialNumber ? ' (serial number)' : ''}`}
+                  title={
+                    serialNumber
+                      ? purchaseDetailsTitles.vintageIdWithSerial
+                      : purchaseDetailsTitles.vintageId
+                  }
                   info={
                     (serialNumber ||
                       purchaseInfo?.vintageId?.substring(0, 8)) ??
@@ -220,43 +230,44 @@ export function ProjectCard({
               )}
               {purchaseInfo?.vintagePeriod && (
                 <PurchaseDetails
-                  title="vintage period"
+                  title={purchaseDetailsTitles.vintagePeriod}
                   info={purchaseInfo.vintagePeriod}
                 />
               )}
               {purchaseInfo?.creditClass && (
                 <PurchaseDetails
                   url={purchaseInfo?.creditClass?.url}
-                  title="credit class"
+                  title={purchaseDetailsTitles.creditClass}
                   info={formatStandardInfo(purchaseInfo.creditClass)}
                 />
               )}
               {purchaseInfo?.methodology && (
                 <PurchaseDetails
                   url={purchaseInfo?.methodology.url}
-                  title="methodology"
+                  title={purchaseDetailsTitles.methodology}
                   info={formatStandardInfo(purchaseInfo.methodology)}
                 />
               )}
               {purchaseInfo?.projectType && (
                 <PurchaseDetails
-                  title="project type"
+                  title={purchaseDetailsTitles.projectType}
                   info={purchaseInfo?.projectType}
                 />
               )}
               {additionalCertifications && (
                 <PurchaseDetails
-                  title="additional certifications"
+                  title={purchaseDetailsTitles.additionalCertifications}
                   info={additionalCertifications.join(', ')}
                 />
               )}
               <>
                 {!offChain || projectPrefinancing?.isPrefinanceProject ? (
                   <CreditPrice
+                    bodyTexts={bodyTexts}
                     priceTooltip={
                       isPrefinanceProject
-                        ? PREFINANCE_PRICE_TOOLTIP
-                        : AVG_PRICE_TOOLTIP
+                        ? bodyTexts.prefinancePriceTooltip
+                        : bodyTexts.avgPriceTooltip
                     }
                     creditsTooltip={creditsTooltip}
                     isSoldOut={isSoldOut}

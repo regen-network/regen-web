@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import React from 'react';
 import { styled } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';

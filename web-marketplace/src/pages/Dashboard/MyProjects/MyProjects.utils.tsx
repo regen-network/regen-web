@@ -1,7 +1,12 @@
 import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCard';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 
-import { DRAFT_TEXT } from 'lib/constants/shared.constants';
+import {
+  DRAFT_TEXT,
+  getProjectCardBodyTextMapping,
+  getProjectCardButtonMapping,
+  getProjectCardPurchaseDetailsTitleMapping,
+} from 'lib/constants/shared.constants';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { ProjectsDraftStatus } from 'pages/ProjectCreate/ProjectCreate.store';
@@ -31,6 +36,9 @@ export const getDefaultProject = (
     disabled,
   },
   draftText: _(DRAFT_TEXT),
+  bodyTexts: getProjectCardBodyTextMapping(_),
+  buttons: getProjectCardButtonMapping(_),
+  purchaseDetailsTitles: getProjectCardPurchaseDetailsTitleMapping(_),
 });
 
 export const handleProjectsDraftStatus = (

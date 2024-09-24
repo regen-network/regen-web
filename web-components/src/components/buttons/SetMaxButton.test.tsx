@@ -5,7 +5,13 @@ import { fireEvent, screen } from 'web-components/test/test-utils';
 describe('SetMaxButton', () => {
   it('calls onClick when clicked', () => {
     const onClick = vi.fn();
-    render(<SetMaxButton onClick={onClick} />);
+    render(
+      <SetMaxButton
+        onClick={onClick}
+        ariaLabel="Set max credits"
+        buttonText="Set max credits"
+      />,
+    );
     const button = screen.getByLabelText('Set max credits');
     fireEvent.click(button);
     expect(onClick).toHaveBeenCalledTimes(1);

@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { Props } from './QuoteSection';
 
 export const quoteSectionMockData: Partial<Props> = {

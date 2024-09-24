@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { MoreProjectsDocument, MoreProjectsQuery } from 'generated/graphql';
 import { jsonLdCompact } from 'lib/rdf';
 

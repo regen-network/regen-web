@@ -9,6 +9,7 @@ export const getDenomTraceByHashesQuery = ({
   hashes,
   ...params
 }: ReactQueryDenomTraceByHashesProps): ReactQueryAddDataToBatchResponse => ({
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   queryKey: ['DenomTraceByHashes', hashes.join('-')],
   queryFn: async () => {
     return queryDenomTraceByHashes({ hashes });

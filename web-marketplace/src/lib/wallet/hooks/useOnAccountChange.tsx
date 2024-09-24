@@ -5,12 +5,12 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { postData } from 'utils/fetch/postData';
+import { useSetAtom } from 'jotai';
 
+import { AccountByIdQuery } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';
-import { apiUri } from 'lib/apiUri';
+import { accountSwitchModalAtom } from 'lib/atoms/modals.atoms';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
-import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
@@ -19,9 +19,6 @@ import { Wallet } from '../wallet';
 import { getWallet } from '../wallet.utils';
 import { WalletConfig, WalletType } from '../walletsConfig/walletsConfig.types';
 import { ConnectWalletType } from './useConnectWallet';
-import { accountSwitchModalAtom } from 'lib/atoms/modals.atoms';
-import { useSetAtom } from 'jotai';
-import { AccountByIdQuery } from 'generated/graphql';
 
 type Props = {
   wallet: Wallet;
@@ -113,6 +110,8 @@ export const useOnAccountChange = ({
     keplrMobileWeb,
     walletConfigRef,
     setAccountChanging,
+    activeAccount?.addr,
+    setAccountSwitchModalAtom,
   ]);
 
   // Prompt the user to login to the new account if different from the current account
@@ -156,5 +155,6 @@ export const useOnAccountChange = ({
     authenticatedAccountIds,
     reactQueryClient,
     retryCsrfRequest,
+    setAccountSwitchModalAtom,
   ]);
 };

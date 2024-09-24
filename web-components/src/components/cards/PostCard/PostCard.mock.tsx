@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { User } from 'src/components/user/UserInfo';
 
 export const user: User = {

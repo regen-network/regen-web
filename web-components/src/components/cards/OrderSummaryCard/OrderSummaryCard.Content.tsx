@@ -10,17 +10,39 @@ import { CRYPTO_TOOLTIP_TEXT } from './OrderSummaryCard.constants';
 import { OrderProps, PaymentMethod } from './OrderSummaryCard.types';
 import { OrderSummmaryRowHeader } from './OrderSummmaryCard.RowHeader';
 
-export function OrderSummaryContent({
-  order,
-  currentBuyingStep,
-  paymentMethod,
-  onClickEditCard = () => {},
-}: {
+type Props = {
+  title: string;
   order: OrderProps;
   currentBuyingStep: number;
   paymentMethod: PaymentMethod;
+  headers: {
+    project: string;
+    pricePerCredit: string;
+    credits: string;
+    totalPrice: string;
+    payment: string;
+  };
+  ariaLabels: {
+    editableCredits: string;
+    changePaymentCard: string;
+    editButtonAriaLabel: string;
+  };
+  editableUpdateButtonText: string;
+  endingInText: string;
   onClickEditCard?: () => void;
-}) {
+};
+
+export function OrderSummaryContent({
+  title,
+  order,
+  currentBuyingStep,
+  paymentMethod,
+  headers,
+  ariaLabels,
+  editableUpdateButtonText,
+  endingInText,
+  onClickEditCard = () => {},
+}: Props) {
   const { projectName, currency, pricePerCredit, credits } = order;
   const [creditsAmount, setCreditsAmount] = useState(credits);
   return (
@@ -29,15 +51,13 @@ export function OrderSummaryContent({
         variant="h5"
         className="col-span-2 text-base mt-0 sm:mt-[30px] mb-5 sm:mb-[15px]"
       >
-        Order Summary
+        {title}
       </Title>
       <OrderSummmaryRowHeader text="project" className="self-start mt-5" />
       <p className="text-[14px] sm:text-base sm:font-normal font-['Lato'] self-start m-0">
         {projectName}
       </p>
-      <OrderSummmaryRowHeader
-        text={`${currency !== CURRENCIES.usd ? 'avg' : ''} price per credit`}
-      />
+      <OrderSummmaryRowHeader text={headers.pricePerCredit} />
       <div className="justify-start items-center flex">
         <span>
           <SupCurrencyAndAmount
@@ -53,12 +73,14 @@ export function OrderSummaryContent({
           }`}
         />
       </div>
-      <OrderSummmaryRowHeader text="# credits" className="pt-5" />
+      <OrderSummmaryRowHeader text={headers.credits} />
       <div className="text-base font-normal font-['Lato'] text-[14px] sm:text-base">
         <EditableInput
           value={creditsAmount}
           onChange={setCreditsAmount}
-          ariaLabel="editable-credits"
+          inputAriaLabel={ariaLabels.editableCredits}
+          editButtonAriaLabel={ariaLabels.editButtonAriaLabel}
+          updateButtonText={editableUpdateButtonText}
           name="editable-credits"
         />
       </div>
@@ -66,7 +88,10 @@ export function OrderSummaryContent({
         <hr className="border-t border-grey-300 border-solid border-l-0 border-r-0 border-b-0" />
       </div>
       <div className="flex items-end col-span-full gap-5">
-        <OrderSummmaryRowHeader text="total price" className="pb-[9px]" />
+        <OrderSummmaryRowHeader
+          text={headers.totalPrice}
+          className="pb-[9px]"
+        />
         <div className="flex flex-wrap">
           <span className="pt-[11px] sm:pt-5">
             <SupCurrencyAndAmount
@@ -95,14 +120,14 @@ export function OrderSummaryContent({
                 className="font-['Lato'] text-[14px] md:text-base m-0"
               >
                 <span className="capitalize">
-                  {paymentMethod.type} ending in
+                  {paymentMethod.type} {endingInText}
                 </span>{' '}
                 {paymentMethod.cardNumber.slice(-4)}
               </p>
               <EditButtonIcon
                 onClick={onClickEditCard}
                 className="self-end"
-                ariaLabel="Change payment card"
+                ariaLabel={ariaLabels.changePaymentCard}
               />
             </div>
           </div>

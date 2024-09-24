@@ -17,17 +17,18 @@ interface FieldProps extends PropsWithChildren {
   optional?: boolean;
   value?: string;
   className?: string;
+  placeholderLabel: string;
 }
 
 const LocationStateField = forwardRef<HTMLDivElement, FieldProps>(
-  ({ country, label, emptyOptionText, ...props }, ref) => {
+  ({ country, label, emptyOptionText, placeholderLabel, ...props }, ref) => {
     const [options, setOptions] = useState<Option[]>([]);
     const value = options.length > 0 ? props.value ?? '' : '';
 
     useEffect(() => {
-      const options = getCountrySubdivisionOptions(country);
+      const options = getCountrySubdivisionOptions(country, placeholderLabel);
       setOptions(options);
-    }, [country]);
+    }, [country, placeholderLabel]);
 
     return (
       <SelectTextField

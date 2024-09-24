@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { EcologicalCreditCardProps } from './EcologicalCreditCard';
 
 export const EcologicalCreditCardMock: EcologicalCreditCardProps = {

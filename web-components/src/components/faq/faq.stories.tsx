@@ -45,7 +45,12 @@ export const category = (): JSX.Element => (
 export const navigation = (): JSX.Element => (
   <Navigation
     onClick={(c: string) => {}}
-    categories={['concept', 'regen registry', 'regen ledger', 'tech']}
+    categories={[
+      { label: 'concept', value: 'concept' },
+      { label: 'regen registry', value: 'regen registry' },
+      { label: 'regen ledger', value: 'regen ledger' },
+      { label: 'tech', value: 'tech' },
+    ]}
   />
 );
 

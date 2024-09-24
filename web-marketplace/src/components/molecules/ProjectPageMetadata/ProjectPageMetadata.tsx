@@ -107,7 +107,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
             label="documents"
             value={
               projectDesignDocument && {
-                'schema:name': 'Project Design Document',
+                'schema:name': _(msg`Project Design Document`),
                 'schema:url': projectDesignDocument,
               }
             }

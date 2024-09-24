@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useEffect, useMemo, useState } from 'react';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Autocomplete, TextField } from '@mui/material';
@@ -140,6 +140,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     };
 
     const valueWithGroup = getValue(_, value, authenticatedAccountIds);
+    const getOptionLabelFunction = useMemo(() => getOptionLabel(_), [_]);
 
     return (
       <div className={cx(styles.root, classes && classes.root)}>
@@ -181,7 +182,7 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
             inputValue={inputValue}
             value={valueWithGroup}
             isOptionEqualToValue={getIsOptionEqualToValue}
-            getOptionLabel={getOptionLabel}
+            getOptionLabel={getOptionLabelFunction}
             renderOption={(props, option) =>
               valueWithGroup &&
               getIsOptionEqualToValue(option, valueWithGroup) &&

@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { Box, SxProps } from '@mui/material';
 import { Theme } from '@mui/material/styles';
 import { makeStyles } from 'tss-react/mui';

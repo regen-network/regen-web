@@ -1,12 +1,22 @@
-import { msg, Trans } from '@lingui/macro';
-import { Box, Link } from '@mui/material';
+import { msg, plural, Trans } from '@lingui/macro';
+import { Box, LabelDisplayedRowsArgs, Link } from '@mui/material';
 
+import {
+  ProjectCardBodyTextsMapping,
+  ProjectCardButtonsMapping,
+  ProjectCardTitlesMapping,
+} from 'web-components/src/components/cards/ProjectCard/ProjectCard.types';
+import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
+import EyeIcon from 'web-components/src/components/icons/EyeIcon';
+import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
 import {
   MAX_FRACTION_DIGITS,
   MEMO_MAX_LENGTH,
 } from 'web-components/src/components/inputs/validation';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
+
+// Contants
 
 export const COPY_SUCCESS = msg`Link copied!`;
 export const EDIT_TEXT = msg`Edit`;
@@ -15,19 +25,7 @@ export const SAVE_TEXT = msg`Next`;
 export const SAVE_EXIT_TEXT = msg`Save draft & exit`;
 export const SUBMIT_TEXT = msg`submit`;
 export const SUBMIT_ERRORS = msg`Please correct the errors above`;
-
 export const BATCH_LABEL = msg`Choose ecocredits batch`;
-export const BATCH_DESCRIPTION = (
-  <Trans>
-    Choose any ecocredits that are eligible for this basket.
-    <Link
-      href="https://guides.regen.network/guides/regen-marketplace/baskets/put-in-basket"
-      target="_blank"
-    >
-      Learn more»
-    </Link>
-  </Trans>
-);
 export const BASKET_LABEL = msg`Choose basket`;
 export const AMOUNT_LABEL = msg`Amount`;
 export const BASKET_PUT_SUBMIT_LABEL = msg`Put in basket`;
@@ -36,23 +34,8 @@ export const BASKET_TAKE_AMOUNT_ERROR_TEXT = msg`You don't have enough basket to
 export const RETIRE_ON_TAKE_LABEL = msg`Retire credits upon transfer`;
 export const RETIRE_ON_TAKE_TOOLTIP = msg`The creator of this basket has chosen that all credits must be retired upon take.`;
 export const BASKET_TAKE_SUBMIT_LABEL = msg`take from basket`;
-export const getBottomFieldsTextMapping = (_: TranslatorType) => ({
-  title: _(msg`Retirement reason`),
-  tooltip: _(
-    msg`You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. "Retired on behalf of ABC Organization")`,
-  ),
-  reasonLabel: _(msg`Explain the reason you are retiring these credits`),
-  locationTitle: _(msg`Location of retirement`),
-  locationTooltip: _(
-    msg`The retirement location can be where you live or your business operates.`,
-  ),
-  locationDescription: _(
-    msg`Please enter a location for the retirement of these credits. This prevents double counting of credits in different locations.`,
-  ),
-  countryLabel: _(msg`Country`),
-  stateLabel: _(msg`State / Region`),
-  postalCodeLabel: _(msg`Postal Code`),
-});
+export const LOCATION_STATE_PLACEHOLDER_LABEL = msg`Please choose a state`;
+export const COUNTRY_LABEL_PLACEHOLDER = msg`Please choose a country`;
 export const STATE_PROVINCE_ERROR_TEXT = msg`Required with postal code`;
 export const RETIREMENT_INFO_TEXT = msg`Retirement is permanent and non-reversible.`;
 export const APPLY = msg`Apply`;
@@ -97,17 +80,6 @@ export const REQUIRED_DENOM = msg`Please choose a denom`;
 export const INVALID_DECIMAL_COUNT = `More than ${MAX_FRACTION_DIGITS} decimal places not allowed`;
 export const INVALID_MEMO_LENGTH = `Must be ${MEMO_MAX_LENGTH} characters or fewer`;
 export const POSITIVE_NUMBER = msg`Must be positive`;
-
-// Functions
-type GetMaximumDecimalMessageProps = {
-  _: TranslatorType;
-  maximumFractionDigits: number;
-};
-export const getMaximumDecimalMessage = ({
-  _,
-  maximumFractionDigits,
-}: GetMaximumDecimalMessageProps) =>
-  _(msg`Maximum ${maximumFractionDigits} decimal places`);
 export const EMAIL_CONFIRMATION_TITLE = msg`Please check your email`;
 export const EMAIL_CONFIRMATION_DESCRIPTION = msg`We've just sent a confirmation email to:`;
 export const EMAIL_CONFIRMATION_CODE_HELPER = msg`Please enter the code from that email:`;
@@ -135,9 +107,126 @@ export const ACTIONS_TABLE_ACTIONS_TEXT = msg`Actions`;
 export const VIEW_ON_LEDGER_TEXT = msg`view on ledger`;
 export const PAGE_NOT_FOUND_TITLE = msg`Oops! Page not found.`;
 export const PAGE_NOT_FOUND_BODY = msg`The page you are looking for might have been temporarily removed or had its name changed.`;
+
+// Components
+
+export const BATCH_DESCRIPTION = (
+  <Trans>
+    Choose any ecocredits that are eligible for this basket.
+    <Link
+      href="https://guides.regen.network/guides/regen-marketplace/baskets/put-in-basket"
+      target="_blank"
+    >
+      Learn more»
+    </Link>
+  </Trans>
+);
+
 export const PAGE_NOT_FOUND_BUTTON = (
   <Trans>
     Visit Our Homepage{' '}
     <Box display={{ xs: 'none', sm: 'inline' }}>{'\u00A0'}Instead</Box>
   </Trans>
 );
+
+// Functions
+
+type GetMaximumDecimalMessageProps = {
+  _: TranslatorType;
+  maximumFractionDigits: number;
+};
+export const getMaximumDecimalMessage = ({
+  _,
+  maximumFractionDigits,
+}: GetMaximumDecimalMessageProps) =>
+  _(msg`Maximum ${maximumFractionDigits} decimal places`);
+
+export const getBottomFieldsTextMapping = (_: TranslatorType) => ({
+  title: _(msg`Retirement reason`),
+  tooltip: _(
+    msg`You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. "Retired on behalf of ABC Organization")`,
+  ),
+  reasonLabel: _(msg`Explain the reason you are retiring these credits`),
+  locationTitle: _(msg`Location of retirement`),
+  locationTooltip: _(
+    msg`The retirement location can be where you live or your business operates.`,
+  ),
+  locationDescription: _(
+    msg`Please enter a location for the retirement of these credits. This prevents double counting of credits in different locations.`,
+  ),
+  countryLabel: _(msg`Country`),
+  stateLabel: _(msg`State / Region`),
+  postalCodeLabel: _(msg`Postal Code`),
+  locationStatePlaceholderLabel: _(LOCATION_STATE_PLACEHOLDER_LABEL),
+  countryLabelPlaceholder: _(COUNTRY_LABEL_PLACEHOLDER),
+});
+
+export const getProjectCardBodyTextMapping = (
+  _: TranslatorType,
+): ProjectCardBodyTextsMapping => ({
+  comingSoon: _(msg`coming soon`),
+  creditsPurchased: _(msg`credits purchased`),
+  viewDetails: _(msg`view details`),
+  errorCardPrice: _(msg`Error fetching price`),
+  soldOut: _(msg`Sold Out`),
+  avgPriceLabel: _(msg`Avg Price`),
+  avgPriceTooltip: _(
+    msg`This is the median average price of all open sell orders for this project.`,
+  ),
+  prefinance: _(msg`prefinance`),
+  price: _(msg`price`),
+  estimatedIssuance: _(msg`estimated issuance`),
+  creditsAvailable: _(msg`credits available`),
+  prefinancePriceTooltip: _(
+    msg`Price of credits for prefinance projects have specific terms, please click on the project to learn more.`,
+  ),
+  estimatedIssuanceTooltip: _(
+    msg`Actual number of credits issued may be different from the estimated issuance.`,
+  ),
+});
+
+export const getProjectCardPurchaseDetailsTitleMapping = (
+  _: TranslatorType,
+): ProjectCardTitlesMapping => ({
+  vintageId: _(msg`vintage id`),
+  vintageIdWithSerial: _(msg`vintage id (serial number)`),
+  vintagePeriod: _(msg`vintage period`),
+  creditClass: _(msg`credit class`),
+  methodology: _(msg`methodology`),
+  projectType: _(msg`project type`),
+  additionalCertifications: _(msg`additional certifications`),
+});
+
+export const getProjectCardButtonMapping = (
+  _: TranslatorType,
+): ProjectCardButtonsMapping => ({
+  default: {
+    text: _(msg`Buy ecocredits`),
+    startIcon: <CurrentCreditsIcon height="24px" width="24px" />,
+  },
+  prefinance: {
+    text: _(msg`prefinance this project`),
+    startIcon: <PrefinanceIcon height="24px" width="24px" />,
+    className:
+      '[border-image:linear-gradient(179deg,#515D89_19.77%,#7DC9BF_114.05%,#FAEBD1_200.67%)_1] text-purple-400 hover:bg-purple-100 hover:border-purple-100',
+  },
+  view: {
+    text: _(msg`view project`),
+    startIcon: <EyeIcon className="h-[24px] w-[24px]" />,
+  },
+});
+
+type GetLabelDisplayedRowsProps = {
+  _: TranslatorType;
+  isIgnoreOffset?: boolean;
+  rowsLength: number;
+};
+
+export const getLabelDisplayedRows =
+  ({ _, isIgnoreOffset, rowsLength }: GetLabelDisplayedRowsProps) =>
+  ({ from, to, count }: LabelDisplayedRowsArgs) => {
+    const displayedTo = isIgnoreOffset ? from + rowsLength - 1 : to;
+    return count !== -1
+      ? _(msg`${from}–${displayedTo} of ${count}`)
+      : _(msg`${from}–${displayedTo} of more than ${to}`);
+  };

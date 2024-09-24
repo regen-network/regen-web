@@ -1,4 +1,5 @@
 import SvgIcon from '@mui/material/SvgIcon';
+
 import { SvgLinearGradientProps } from './ProjectPageIcon';
 
 export default function BridgeIcon({

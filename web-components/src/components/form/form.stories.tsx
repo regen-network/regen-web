@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Link } from '@mui/material';
 
 import { Body } from '../typography';

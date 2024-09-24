@@ -1,8 +1,6 @@
 import React, { ReactNode } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
 
-import { Body } from '../typography';
 import Section from './index';
 
 interface OnBoardingSectionProps {

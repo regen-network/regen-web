@@ -20,7 +20,14 @@ export const PortfolioTab = (): JSX.Element => {
     ) {
       navigate(`/profiles/${accountAddressOrId}/projects`, { replace: true });
     }
-  }, [address, isLoading]);
+  }, [
+    account?.hideEcocredits,
+    account?.hideRetirements,
+    accountAddressOrId,
+    address,
+    isLoading,
+    navigate,
+  ]);
 
   const hideEcocredits = !!account?.hideEcocredits;
   const hideRetirements = !!account?.hideRetirements;

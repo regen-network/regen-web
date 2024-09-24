@@ -1,5 +1,6 @@
 import Grid from '@mui/material/Grid';
 
+import { projectCardBodyTextMapping } from '../cards/ProjectCard/ProjectCard.mock';
 import StaticMap from '../map/StaticMap';
 import { ItemProps } from './Item';
 import ProjectMedia, { Asset, Media } from './ProjectMedia';
@@ -45,7 +46,7 @@ const mediaAssets: Media[] = [
 
 export const projectMedia = (): JSX.Element => (
   <div style={{ width: 600, height: 400 }}>
-    <ProjectMedia assets={mediaAssets} />
+    <ProjectMedia assets={mediaAssets} bodyTexts={projectCardBodyTextMapping} />
   </div>
 );
 
@@ -90,7 +91,11 @@ const assets: Asset[] = [
 
 export const projectMediaWithMap = (): JSX.Element => (
   <div style={{ width: '100%' }}>
-    <ProjectMedia gridView assets={assets} />
+    <ProjectMedia
+      gridView
+      assets={assets}
+      bodyTexts={projectCardBodyTextMapping}
+    />
   </div>
 );
 

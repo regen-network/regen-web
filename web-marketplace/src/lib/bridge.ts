@@ -30,6 +30,7 @@ export const getBridgeTxStatus = async (
             // a special pending status instead of an error.
             // eslint-disable-next-line no-console
             console.log(
+              // eslint-disable-next-line lingui/no-unlocalized-strings
               `Bridge service did not find hash ${hash} yet. Marking as "Pending"...`,
             );
             return {

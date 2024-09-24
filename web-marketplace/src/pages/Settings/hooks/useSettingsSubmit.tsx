@@ -31,6 +31,7 @@ export const useSettingsSubmit = ({ offChainProject }: Props): Return => {
           projectPatch,
         });
       } catch (e) {
+        // eslint-disable-next-line no-console
         console.log(e);
       }
     },

@@ -113,7 +113,10 @@ export const DataStream = ({
                   listItem:
                     '!border-0 font-sans text-lg font-normal !rounded-[5px] p-10',
                 }}
-                categories={years.map(year => String(year))}
+                categories={years.map(year => ({
+                  label: String(year),
+                  value: String(year),
+                }))}
                 category={String(year)}
                 onClick={(yearClicked: string) => {
                   setYear(Number(yearClicked));

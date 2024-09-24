@@ -14,6 +14,7 @@ export const queryDenomTrace = async (
     return client.DenomTrace({ hash });
   } catch (err) {
     throw new Error(
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       `Error fetching denom trace with hash: ${hash}, err: ${err}`,
     );
   }
@@ -24,6 +25,7 @@ export const queryDenomTraces = async (): Promise<QueryDenomTracesResponse> => {
   try {
     return client.DenomTraces({});
   } catch (err) {
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     throw new Error(`Error fetching denom traces, err: ${err}`);
   }
 };

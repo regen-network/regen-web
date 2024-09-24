@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { useCallback } from 'react';
 import { useSetAtom } from 'jotai';
 

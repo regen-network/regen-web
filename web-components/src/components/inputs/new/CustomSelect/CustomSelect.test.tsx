@@ -25,6 +25,8 @@ describe('CustomSelect', () => {
         options={options}
         onSelect={onSelect}
         defaultOption={defaultOption}
+        placeholderAriaLabel="Select options"
+        selectAriaLabel="Select option"
       />,
     );
 
@@ -38,6 +40,8 @@ describe('CustomSelect', () => {
         options={options}
         onSelect={onSelect}
         defaultOption={defaultOption}
+        placeholderAriaLabel="Select options"
+        selectAriaLabel="Select option"
       />,
     );
 
@@ -54,6 +58,8 @@ describe('CustomSelect', () => {
         options={options}
         onSelect={onSelect}
         defaultOption={defaultOption}
+        placeholderAriaLabel="Select options"
+        selectAriaLabel="Select option"
       />,
     );
 
@@ -72,6 +78,8 @@ describe('CustomSelect', () => {
         options={componentOption}
         onSelect={onSelect}
         defaultOption={defaultOption}
+        placeholderAriaLabel="Select options"
+        selectAriaLabel="Select option"
       />,
     );
 
@@ -87,6 +95,8 @@ describe('CustomSelect', () => {
         options={componentOption}
         onSelect={onSelect}
         defaultOption={defaultOption}
+        placeholderAriaLabel="Select options"
+        selectAriaLabel="Select option"
       />,
     );
 
@@ -105,6 +115,8 @@ describe('CustomSelect', () => {
         options={componentOption}
         onSelect={onSelect}
         defaultOption={defaultOption}
+        placeholderAriaLabel="Select options"
+        selectAriaLabel="Select option"
       />,
     );
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -9,7 +9,12 @@ import { ProjectCard } from 'web-components/src/components/cards/ProjectCard';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Body } from 'web-components/src/components/typography';
 
-import { DRAFT_TEXT } from 'lib/constants/shared.constants';
+import {
+  DRAFT_TEXT,
+  getProjectCardBodyTextMapping,
+  getProjectCardButtonMapping,
+  getProjectCardPurchaseDetailsTitleMapping,
+} from 'lib/constants/shared.constants';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import {
@@ -29,6 +34,13 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
       prefinanceProjectsContent,
       soldOutProjectsIds,
     } = useProjectsContext();
+
+    const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
+    const purchaseDetailsTitles = useMemo(
+      () => getProjectCardPurchaseDetailsTitleMapping(_),
+      [_],
+    );
+    const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
 
     return (
       <>
@@ -88,6 +100,9 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
                 offChain={project.offChain}
                 isSoldOut={isSoldOut}
                 draftText={_(DRAFT_TEXT)}
+                bodyTexts={bodyTexts}
+                purchaseDetailsTitles={purchaseDetailsTitles}
+                buttons={buttons}
               />
             </div>
           );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
@@ -10,7 +10,12 @@ import { makeStyles } from 'tss-react/mui';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
-import { DRAFT_TEXT } from 'lib/constants/shared.constants';
+import {
+  DRAFT_TEXT,
+  getProjectCardBodyTextMapping,
+  getProjectCardButtonMapping,
+  getProjectCardPurchaseDetailsTitleMapping,
+} from 'lib/constants/shared.constants';
 import { QUDT_UNIT_MAP, qudtUnit } from 'lib/rdf';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -75,6 +80,12 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
   const apiServerUrl = import.meta.env.VITE_API_URI;
   const { track } = useTracker();
   const location = useLocation();
+  const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
+  const purchaseDetailsTitles = useMemo(
+    () => getProjectCardPurchaseDetailsTitleMapping(_),
+    [_],
+  );
+  const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
 
   const LinkedProject: React.FC<
     React.PropsWithChildren<{
@@ -82,6 +93,9 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
     }>
   > = ({ project }) => (
     <ProjectCard
+      bodyTexts={bodyTexts}
+      purchaseDetailsTitles={purchaseDetailsTitles}
+      buttons={buttons}
       sx={theme => ({ width: { xs: theme.spacing(73), md: '100%' } })}
       name={project.metadata?.['schema:name']}
       imgSrc={

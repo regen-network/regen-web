@@ -8,7 +8,6 @@ import cx from 'classnames';
 import { useSetAtom } from 'jotai';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
-import { PREFINANCE } from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
 import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
 import SEO from 'web-components/src/components/seo';
@@ -23,7 +22,10 @@ import {
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { onBtnClick } from 'lib/button';
-import { PHOTO_CREDIT } from 'lib/constants/shared.constants';
+import {
+  getProjectCardBodyTextMapping,
+  PHOTO_CREDIT,
+} from 'lib/constants/shared.constants';
 import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
@@ -105,11 +107,11 @@ function ProjectDetails(): JSX.Element {
   const location = useLocation();
   const navigate = useNavigate();
   const { activeAccount } = useAuth();
-
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
   const [draftPost, setDraftPost] = useState<
     Partial<PostFormSchemaType> | undefined
   >();
+  const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
 
   const { data: sanityProjectPageData } = useQuery(
     getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
@@ -316,6 +318,7 @@ function ProjectDetails(): JSX.Element {
     projectPageMetadata: offChainProjectMetadata,
     projectDeveloper,
     creditClassName,
+    _,
   });
 
   const mediaData = parseMedia({
@@ -437,6 +440,7 @@ function ProjectDetails(): JSX.Element {
       {mediaData.assets.length > 0 && (
         <Box sx={{ pt: { xs: 0, sm: 12.5 } }}>
           <ProjectMedia
+            bodyTexts={bodyTexts}
             gridView
             assets={mediaData.assets}
             apiServerUrl={mediaData.apiServerUrl}
@@ -509,7 +513,7 @@ function ProjectDetails(): JSX.Element {
                       isSoldOut ? '' : projectPrefinancing?.stripePaymentLink
                     }
                   >
-                    {PREFINANCE}
+                    {bodyTexts.prefinance}
                   </ContainedButton>
                 </span>
               </InfoTooltip>
@@ -596,6 +600,7 @@ function ProjectDetails(): JSX.Element {
         }}
         paginationParams={paginationParams}
         setPaginationParams={setPaginationParams}
+        _={_}
         sx={{ pt: { xs: 0 } }}
       />
 

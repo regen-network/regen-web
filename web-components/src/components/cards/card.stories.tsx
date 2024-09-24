@@ -17,6 +17,11 @@ import MapCard from './MapCard';
 import OnBoardingCard from './OnBoardingCard';
 import { OverviewCard } from './OverviewCard';
 import ProjectCard from './ProjectCard';
+import {
+  projectCardBodyTextMapping,
+  projectCardButtonMapping,
+  projectCardPurchaseDetailsTitleMapping,
+} from './ProjectCard/ProjectCard.mock';
 import ProjectImpactCard from './ProjectImpactCard/ProjectImpactCard';
 import PurchasedCreditsCard from './PurchasedCreditsCard';
 import ResourcesCard from './ResourcesCard';
@@ -86,6 +91,9 @@ export const projectCard = (): JSX.Element => (
       draftText="Draft"
       isSoldOut
       sx={{ maxWidth: 338, mr: 10, mb: 10 }}
+      bodyTexts={projectCardBodyTextMapping}
+      purchaseDetailsTitles={projectCardPurchaseDetailsTitleMapping}
+      buttons={projectCardButtonMapping}
     />
 
     <ProjectCard
@@ -106,6 +114,9 @@ export const projectCard = (): JSX.Element => (
       }}
       sx={{ maxWidth: 338, mr: 10, mb: 10 }}
       draftText="Draft"
+      bodyTexts={projectCardBodyTextMapping}
+      purchaseDetailsTitles={projectCardPurchaseDetailsTitleMapping}
+      buttons={projectCardButtonMapping}
     />
 
     <ProjectCard
@@ -121,6 +132,9 @@ export const projectCard = (): JSX.Element => (
       sx={{ maxWidth: 338, mr: 10, mb: 10 }}
       draft
       draftText="Draft"
+      bodyTexts={projectCardBodyTextMapping}
+      purchaseDetailsTitles={projectCardPurchaseDetailsTitleMapping}
+      buttons={projectCardButtonMapping}
     />
 
     <ProjectCard
@@ -141,6 +155,9 @@ export const projectCard = (): JSX.Element => (
         stripePaymentLink: 'https://stripe.com',
       }}
       draftText="Draft"
+      bodyTexts={projectCardBodyTextMapping}
+      purchaseDetailsTitles={projectCardPurchaseDetailsTitleMapping}
+      buttons={projectCardButtonMapping}
     />
   </Box>
 );

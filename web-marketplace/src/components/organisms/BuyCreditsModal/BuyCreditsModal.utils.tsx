@@ -1,3 +1,4 @@
+import { msg, Trans } from '@lingui/macro';
 import { Box } from '@mui/material';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { quantityFormatNumberOptions } from 'config/decimals';
@@ -7,6 +8,7 @@ import { Option } from 'web-components/src/components/inputs/SelectTextField';
 import { formatNumber } from 'web-components/src/utils/format';
 
 import { microToDenom } from 'lib/denom.utils';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
@@ -79,12 +81,14 @@ export const getSellOrderLabel = ({
 
   return (
     <Box onClick={clickHandler} sx={{ ml: 4 }}>
-      <Box
-        sx={{ display: 'inline', fontWeight: 700 }}
-      >{`${price} ${displayDenom}/credit: `}</Box>
-      <Box
-        sx={{ display: 'inline', mr: 1 }}
-      >{`${truncatedQuantity} credit(s) available`}</Box>
+      <Box sx={{ display: 'inline', fontWeight: 700 }}>
+        <Trans>
+          {price} {displayDenom}/credit:{' '}
+        </Trans>
+      </Box>
+      <Box sx={{ display: 'inline', mr: 1 }}>
+        <Trans>{truncatedQuantity} credit(s) available</Trans>
+      </Box>
       <Box sx={{ display: 'inline', color: 'info.main' }}>
         {prepareSellOrderSupplementaryData({
           sellOrderId: id,
@@ -157,18 +161,30 @@ export const getOptions = ({
   return allOptionsLength > 1
     ? [
         {
-          label: <Box sx={{ color: 'info.main' }}>{'Choose a sell order'}</Box>,
+          label: (
+            <Box sx={{ color: 'info.main' }}>
+              <Trans>Choose a sell order</Trans>
+            </Box>
+          ),
           value: '',
           disabled: true,
         },
         {
-          label: <Box sx={{ fontWeight: 700 }}>{'TRADABLE AND RETIRABLE'}</Box>,
+          label: (
+            <Box sx={{ fontWeight: 700 }}>
+              <Trans>TRADABLE AND RETIRABLE</Trans>
+            </Box>
+          ),
           value: '',
           disabled: true,
         },
         ...retirableAndTradableOptions,
         {
-          label: <Box sx={{ fontWeight: 700 }}>{'RETIRABLE ONLY'}</Box>,
+          label: (
+            <Box sx={{ fontWeight: 700 }}>
+              <Trans>RETIRABLE ONLY</Trans>
+            </Box>
+          ),
           value: '',
           disabled: true,
         },
@@ -185,6 +201,7 @@ export const handleBuyCreditsSubmit = async (
   selectedSellOrder?: UISellOrderInfo,
 ): Promise<void> => {
   if (!onSubmit || !selectedSellOrder) {
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     throw new Error('onSubmit and selectedSellOrder are required');
   }
   const { country, postalCode, stateProvince, retirementAction } = values;
@@ -209,6 +226,7 @@ interface GetCreditCountValidationProps {
   userBalance: number;
   askAmount: number;
   displayDenom?: string;
+  _: TranslatorType;
 }
 
 export const getCreditCountValidation =
@@ -217,15 +235,18 @@ export const getCreditCountValidation =
     askAmount,
     displayDenom,
     userBalance,
+    _,
   }: GetCreditCountValidationProps) =>
   (creditCount: number) => {
     let error;
 
     if (askAmount && userBalance < askAmount * creditCount) {
-      error = `You don’t have enough ${displayDenom}.`;
+      error = _(msg`You don’t have enough ${displayDenom}.`);
     }
     if (creditCount > creditAvailable) {
-      error = `Must be less than or equal to the max credit(s) available (${creditAvailable}).`;
+      error = _(
+        msg`Must be less than or equal to the max credit(s) available (${creditAvailable}).`,
+      );
     }
     return error;
   };

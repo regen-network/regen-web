@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Link } from '@mui/material';
 import { useFormikContext } from 'formik';
@@ -70,19 +71,19 @@ function CreditBatchInfo({
 
   return (
     <ReviewCard
-      title="Credit Batch Info"
+      title={_(msg`Credit Batch Info`)}
       onEditClick={() => handleActiveStep(0)}
       editText={_(EDIT_TEXT)}
       sx={{ mt: [8, 10] }}
     >
-      <ItemDisplay name={'Project'}>
+      <ItemDisplay name={_(msg`Project`)}>
         {dataDisplay?.project?.label || data.projectId}
       </ItemDisplay>
-      <ItemDisplay name={'Start and end date'}>
+      <ItemDisplay name={_(msg`Start and end date`)}>
         {`${formatDate(data.startDate)} - ${formatDate(data.endDate)}`}
       </ItemDisplay>
       {metadata?.['regen:vcsRetirementSerialNumber'] && (
-        <ItemDisplay name={'VCS retirement serial number'}>
+        <ItemDisplay name={_(msg`VCS retirement serial number`)}>
           {metadata['regen:vcsRetirementSerialNumber']}
         </ItemDisplay>
       )}
@@ -114,24 +115,28 @@ function RecipientInfo({ data, index }: RecipientInfoProps): JSX.Element {
   const { handleActiveStep } = useMultiStep();
   return (
     <ReviewCard
-      title={`Recipient ${index}`}
+      title={_(msg`Recipient ${index}`)}
       editText={_(EDIT_TEXT)}
       onEditClick={() => handleActiveStep(1)}
     >
-      <ItemDisplay name={'Recipient address'}>{data.recipient}</ItemDisplay>
-      <ItemDisplay name={'Amount tradable'}>
+      <ItemDisplay name={_(msg`Recipient address`)}>
+        {data.recipient}
+      </ItemDisplay>
+      <ItemDisplay name={_(msg`Amount tradable`)}>
         {getFormattedNumber(data.tradableAmount)}
       </ItemDisplay>
       {data.withRetire && (
         <>
-          <ItemDisplay name={'Amount retired'}>
+          <ItemDisplay name={_(msg`Amount retired`)}>
             {getFormattedNumber(data.retiredAmount)}
           </ItemDisplay>
           {data.note && (
-            <ItemDisplay name={'Retirement note'}>{data.note}</ItemDisplay>
+            <ItemDisplay name={_(msg`Retirement note`)}>
+              {data.note}
+            </ItemDisplay>
           )}
           {data.retirementJurisdiction && (
-            <ItemDisplay name={'Retirement location'}>
+            <ItemDisplay name={_(msg`Retirement location`)}>
               {data.retirementJurisdiction}
             </ItemDisplay>
           )}
@@ -155,14 +160,14 @@ function AdditionalCertificationDisplay({
   return (
     <>
       <Subtitle size="lg" sx={{ mt: 9, mb: 2 }}>
-        Additional certification {index}
+        <Trans>Additional certification {index}</Trans>
       </Subtitle>
       <Body size="lg">{name}</Body>
 
       {url && (
         <>
           <Subtitle size="lg" sx={{ mt: 9, mb: 2 }}>
-            Additional certification {index} url
+            <Trans>Additional certification {index} url</Trans>
           </Subtitle>
           <Link
             sx={{ color: 'secondary.main', fontWeight: 'bold' }}

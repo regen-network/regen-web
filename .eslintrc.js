@@ -50,6 +50,7 @@ module.exports = {
           'transform',
           'filter',
           'rel',
+          'textShadow',
         ],
       },
     ],

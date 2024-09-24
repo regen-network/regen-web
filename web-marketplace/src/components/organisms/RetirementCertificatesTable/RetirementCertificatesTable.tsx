@@ -15,7 +15,10 @@ import {
 import { formatDate, formatNumber } from 'web-components/src/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
-import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
+import {
+  ACTIONS_TABLE_ACTIONS_TEXT,
+  getLabelDisplayedRows,
+} from 'lib/constants/shared.constants';
 import { NormalizedRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
 
 import { GreyText, Link } from 'components/atoms';
@@ -47,6 +50,16 @@ export const RetirementCertificatesTable: React.FC<
     [_],
   );
 
+  const labelDisplayedRows = useMemo(
+    () =>
+      getLabelDisplayedRows({
+        _,
+        isIgnoreOffset,
+        rowsLength: retirements?.length ?? 0,
+      }),
+    [_, isIgnoreOffset, retirements?.length],
+  );
+
   if (!retirements?.length) {
     return (
       <NoCredits
@@ -60,6 +73,7 @@ export const RetirementCertificatesTable: React.FC<
     <ActionsTable
       tableLabel={_(msg`Ecocredits table`)}
       actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
+      labelDisplayedRows={labelDisplayedRows}
       renderActionButtons={renderActionButtons}
       onTableChange={onTableChange}
       initialPaginationParams={initialPaginationParams}

@@ -9,10 +9,14 @@ const CustomSelect = ({
   options,
   onSelect,
   defaultOption,
+  selectAriaLabel,
+  placeholderAriaLabel,
 }: {
   options: Option[];
   onSelect: (currency: CryptoCurrencies | string) => void;
   defaultOption: string;
+  selectAriaLabel: string;
+  placeholderAriaLabel: string;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>(defaultOption);
@@ -44,6 +48,7 @@ const CustomSelect = ({
         options={options}
         selectedOption={selectedOption}
         OptionComponent={OptionComponent}
+        ariaLabel={placeholderAriaLabel}
       />
       {isOpen && (
         <div
@@ -63,6 +68,7 @@ const CustomSelect = ({
                 <SelectOption
                   key={`${option}-${i}`}
                   option={option}
+                  ariaLabel={selectAriaLabel}
                   handleSelect={handleSelect}
                 />
               );

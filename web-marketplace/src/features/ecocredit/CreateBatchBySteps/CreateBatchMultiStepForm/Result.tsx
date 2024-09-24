@@ -1,5 +1,6 @@
 import React from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 
@@ -136,11 +137,13 @@ const SuccessResult = ({
   return (
     <>
       <OnBoardingCard>
-        <Title variant="h5">Create Credit Batch</Title>
+        <Title variant="h5">
+          <Trans>Create Credit Batch</Trans>
+        </Title>
         <CardItem
           seeMoreText={_(SEE_MORE)}
           seeLessText={_(SEE_LESS)}
-          label="batch denom"
+          label={_(msg`batch denom`)}
           value={{
             name: batchDenom,
             url: `/credit-batches/${batchDenom}`,
@@ -164,7 +167,7 @@ const SuccessResult = ({
       </OnBoardingCard>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <OutlinedButton component={Link} href={`/credit-batches/${batchDenom}`}>
-          SEE CREDIT BATCH
+          <Trans>SEE CREDIT BATCH</Trans>
         </OutlinedButton>
       </Box>
     </>
@@ -198,11 +201,13 @@ const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
           align="center"
           variant="h3"
         >
-          Sorry, your transaction was not successful.
+          <Trans>Sorry, your transaction was not successful.</Trans>
         </Title>
       </Box>
       <OnBoardingCard>
-        <Title variant="h5">Create Credit Batch</Title>
+        <Title variant="h5">
+          <Trans>Create Credit Batch</Trans>
+        </Title>
         <CardItem
           seeMoreText={_(SEE_MORE)}
           seeLessText={_(SEE_LESS)}
@@ -214,7 +219,7 @@ const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
       </OnBoardingCard>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <OutlinedButton href="/profile/portfolio" component={Link}>
-          SEE ALL CREDIT BATCHES
+          <Trans>SEE ALL CREDIT BATCHES</Trans>
         </OutlinedButton>
       </Box>
     </>

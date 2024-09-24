@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
@@ -19,7 +19,10 @@ import {
 } from 'web-components/src/utils/format';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
+import {
+  ACTIONS_TABLE_ACTIONS_TEXT,
+  getLabelDisplayedRows,
+} from 'lib/constants/shared.constants';
 import { Bridge1Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -62,6 +65,15 @@ export const BridgableEcocreditsTable = ({
     isPaginatedQuery: false,
   });
 
+  const labelDisplayedRows = useMemo(
+    () =>
+      getLabelDisplayedRows({
+        _,
+        rowsLength: bridgableCredits.length,
+      }),
+    [_, bridgableCredits],
+  );
+
   if (!bridgableCredits?.length && !isLoadingCredits) {
     return (
       <NoCredits
@@ -80,6 +92,7 @@ export const BridgableEcocreditsTable = ({
         <ActionsTable
           tableLabel={_(msg`bridgable ecocredits table`)}
           actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
+          labelDisplayedRows={labelDisplayedRows}
           sx={tableStyles.rootOnlyTopBorder}
           renderActionButtons={(i: number) => (
             <OutlinedButton

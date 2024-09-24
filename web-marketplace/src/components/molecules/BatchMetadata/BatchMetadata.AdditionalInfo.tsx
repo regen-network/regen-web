@@ -65,7 +65,7 @@ export const BatchMetadataAdditionalInfo = <
         label={_(msg`verification reports`)}
         value={
           reports?.map(report => ({
-            'schema:name': 'Verification report',
+            'schema:name': _(msg`Verification report`),
             ...report,
           })) ?? []
         }

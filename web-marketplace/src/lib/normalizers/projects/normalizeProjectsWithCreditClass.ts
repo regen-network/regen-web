@@ -5,7 +5,12 @@ import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCar
 
 import { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
-import { DRAFT_TEXT } from 'lib/constants/shared.constants';
+import {
+  DRAFT_TEXT,
+  getProjectCardBodyTextMapping,
+  getProjectCardButtonMapping,
+  getProjectCardPurchaseDetailsTitleMapping,
+} from 'lib/constants/shared.constants';
 import {
   AnchoredProjectMetadataBaseLD,
   CreditClassMetadataLD,
@@ -41,6 +46,7 @@ export const normalizeProjectsWithCreditClass = ({
   _,
 }: Params): ProjectCardProps[] =>
   projects?.map((project, index) => {
+    const buttons = getProjectCardButtonMapping(_);
     const projectMetadata = projectsMetadata?.[index];
     const creditClassMetadata = classesMetadata?.[index];
     const projectPageMetadata = projectPagesMetadata?.[index];
@@ -94,5 +100,8 @@ export const normalizeProjectsWithCreditClass = ({
       },
       program,
       draftText: _(DRAFT_TEXT),
+      bodyTexts: getProjectCardBodyTextMapping(_),
+      buttons,
+      purchaseDetailsTitles: getProjectCardPurchaseDetailsTitleMapping(_),
     };
   }) ?? [];

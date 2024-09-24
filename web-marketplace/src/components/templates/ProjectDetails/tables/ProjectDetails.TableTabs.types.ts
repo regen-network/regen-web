@@ -8,6 +8,7 @@ import {
   AnchoredProjectMetadataLD,
   LegacyProjectMetadataLD,
 } from 'lib/db/types/json-ld';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { ProjectMiddleSectionProps } from 'components/organisms/CreditBatchesSection/CreditBatchesSection.types';
 
@@ -17,4 +18,5 @@ export type ProjectDetailsTableTabsProps = {
   projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD;
   onChainProjectId?: string;
   sx?: SxProps<Theme>;
+  _: TranslatorType;
 } & ProjectMiddleSectionProps;

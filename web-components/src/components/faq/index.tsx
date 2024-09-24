@@ -55,7 +55,9 @@ const FAQ = ({
     return <></>;
   }
 
-  const categoriesHeader: string[] = categories.map(c => c.header);
+  const categoriesHeader: { label: string; value: string }[] = categories.map(
+    c => ({ label: c.header, value: c.header }),
+  );
 
   let category = categories[0];
   if (header) {

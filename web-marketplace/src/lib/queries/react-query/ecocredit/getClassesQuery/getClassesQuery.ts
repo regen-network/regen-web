@@ -1,4 +1,5 @@
 import { queryClasses } from 'lib/ecocredit/api';
+
 import { CLASSES_KEY } from './getClassesQuery.constants';
 import {
   ReactQueryClassesProps,

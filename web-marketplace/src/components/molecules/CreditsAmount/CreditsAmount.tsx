@@ -1,6 +1,7 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Trans } from '@lingui/macro';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
@@ -36,6 +37,7 @@ export const CreditsAmount = ({
   setCreditsAvailable,
   creditVintages,
 }: CreditsAmountProps) => {
+  const { _ } = useLingui();
   const [pricePerCredit, setPricePerCredit] = useState(
     getCurrencyPrice(CURRENCIES.usd, creditDetails),
   );
@@ -133,6 +135,8 @@ export const CreditsAmount = ({
           creditDetails={creditDetails}
           currency={currency}
           setCurrency={setCurrency}
+          selectPlaceholderAriaLabel={_(msg`Select option`)}
+          selectAriaLabel={_(msg`Select option`)}
         />
         <span className="p-10 sm:p-20 text-xl">=</span>
         <CreditsInput

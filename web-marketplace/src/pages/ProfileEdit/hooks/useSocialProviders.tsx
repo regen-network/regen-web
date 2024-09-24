@@ -45,12 +45,21 @@ export const useSocialProviders = () => {
           setErrorBannerTextAtom(String(e));
         }
     },
-    [retryCsrfRequest, reactQueryClient, setErrorBannerTextAtom, token],
+    [
+      token,
+      retryCsrfRequest,
+      track,
+      activeAccount?.id,
+      activeAccount?.addr,
+      reactQueryClient,
+      setErrorBannerTextAtom,
+    ],
   );
 
   const socialProviders: SocialProvider[] = [
     {
       id: 'google',
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       name: 'Google',
       connect: async () => {
         await track<AccountEvent>('connectGoogle', {
@@ -61,6 +70,7 @@ export const useSocialProviders = () => {
         window.location.href = `${apiUri}/marketplace/v1/auth/google/connect`;
       },
       disconnect: () =>
+        // eslint-disable-next-line lingui/no-unlocalized-strings
         disconnect('Google', '/marketplace/v1/auth/google/disconnect'),
     },
   ];

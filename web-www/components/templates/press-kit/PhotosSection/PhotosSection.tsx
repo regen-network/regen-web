@@ -6,6 +6,7 @@ import ProjectMedia, {
 import { usePhotosSectionStyles } from './PhotosSection.styles';
 
 import { PressKitPhotosSectionFieldsFragment } from '@/generated/sanity-graphql';
+import { projectCardBodyTextMapping } from '@/lib/constants/shared.constants';
 
 type Props = {
   photosSectionData?: PressKitPhotosSectionFieldsFragment['photosSection'];
@@ -27,7 +28,11 @@ const PhotosSection = ({ photosSectionData }: Props): JSX.Element => {
       classes={{ root: styles.root, title: styles.title }}
     >
       <div className={styles.slider}>
-        <ProjectMedia xsBorderRadius assets={assets} />
+        <ProjectMedia
+          xsBorderRadius
+          assets={assets}
+          bodyTexts={projectCardBodyTextMapping}
+        />
       </div>
     </Section>
   );

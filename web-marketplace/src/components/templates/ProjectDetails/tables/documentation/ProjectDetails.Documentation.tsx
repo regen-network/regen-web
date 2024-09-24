@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, Link } from '@mui/material';
 
@@ -11,7 +13,10 @@ import {
 
 import { Document } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';
-import { ACTIONS_TABLE_ACTIONS_TEXT } from 'lib/constants/shared.constants';
+import {
+  ACTIONS_TABLE_ACTIONS_TEXT,
+  getLabelDisplayedRows,
+} from 'lib/constants/shared.constants';
 
 import { DOCUMENTATION_ROW } from './ProjectDetails.Documentation.config';
 import { DOCUMENT, VIEW } from './ProjectDetails.Documentation.constants';
@@ -29,11 +34,20 @@ export const ProjectDetailsDocumentationTable = ({
   onTableChange,
 }: Props): JSX.Element => {
   const { _ } = useLingui();
+  const labelDisplayedRows = useMemo(
+    () =>
+      getLabelDisplayedRows({
+        _,
+        rowsLength: documents?.length ?? 0,
+      }),
+    [_, documents?.length],
+  );
 
   return (
     <ActionsTable
-      tableLabel="Project documentation"
       actionButtonsText={_(ACTIONS_TABLE_ACTIONS_TEXT)}
+      tableLabel={_(msg`Project documentation`)}
+      labelDisplayedRows={labelDisplayedRows}
       headerRows={DOCUMENTATION_ROW}
       rows={documents.map(document => getDocumentationTableRow({ document }))}
       sortCallbacks={sortCallbacks}

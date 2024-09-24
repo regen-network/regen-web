@@ -35,4 +35,6 @@ export interface CurrencyInputProps {
   creditDetails: CreditDetails[];
   currency: Currency;
   setCurrency: (currency: Currency) => void;
+  selectPlaceholderAriaLabel: string;
+  selectAriaLabel: string;
 }

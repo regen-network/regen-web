@@ -10,6 +10,7 @@ interface FieldProps {
   name?: string;
   exclude?: boolean;
   label: string;
+  countryLabelPlaceholder: string;
 }
 
 const LocationCountryField: React.FC<React.PropsWithChildren<FieldProps>> = ({
@@ -18,12 +19,13 @@ const LocationCountryField: React.FC<React.PropsWithChildren<FieldProps>> = ({
   className,
   optional = false,
   exclude = false,
+  countryLabelPlaceholder,
 }) => {
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
-    setOptions(getCountryOptions({ exclude }));
-  }, [exclude]);
+    setOptions(getCountryOptions({ exclude, countryLabelPlaceholder }));
+  }, [exclude, countryLabelPlaceholder]);
 
   return (
     <Field

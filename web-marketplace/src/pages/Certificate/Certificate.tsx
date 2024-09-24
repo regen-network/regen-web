@@ -1,6 +1,6 @@
 import { useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
+import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
@@ -76,6 +76,7 @@ function CertificatePage(): JSX.Element {
           <ShareIcons
             xsSize={theme.spacing(10)}
             url={`${window.location.origin}/certificate/${certificateId}`}
+            copySuccessText={_(msg`Link copied to your clipboard`)}
           />
         </Grid>
         <Grid item xs={12} md={6}>

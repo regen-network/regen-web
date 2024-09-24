@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Trans } from '@lingui/macro';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { LeafIcon } from 'web-components/src/components/icons/LeafIcon';
@@ -14,6 +15,7 @@ export const CreditsInput = ({
   handleCreditsAmountChange,
   paymentOption,
 }: CreditsInputProps) => {
+  const { _ } = useLingui();
   const [maxCreditsAvailable, setMaxCreditsAvailable] =
     useState(creditsAvailable);
   const [isFocused, setIsFocused] = useState(false);
@@ -50,7 +52,7 @@ export const CreditsInput = ({
           step: '0.1',
           max: maxCreditsAvailable,
           min: 0,
-          'aria-label': 'Credits Input',
+          'aria-label': _(msg`Credits Input`),
         }}
         onChange={onHandleChange}
         onFocus={onHandleFocus}

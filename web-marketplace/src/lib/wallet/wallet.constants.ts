@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 export const AUTO_CONNECT_WALLET_KEY = 'auto_connect_wallet';
 export const WALLET_CONNECT_KEY = 'walletconnect';
 export const WALLET_CONNECT_RELAY_URL = 'wss://relay.walletconnect.org';

@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { MsgSend as MsgSendCosmos } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/tx';
 import { MsgUpdateClient } from '@regen-network/api/lib/generated/ibc/core/client/v1/tx';
 import {

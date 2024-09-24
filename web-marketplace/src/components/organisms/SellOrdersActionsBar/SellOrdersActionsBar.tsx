@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -8,11 +8,6 @@ import { useTracker } from 'web-marketplace/src/lib/tracker/useTracker';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
-import {
-  AVG_PRICE_LABEL,
-  PREFINANCE_BUTTON,
-  PRICE,
-} from 'web-components/src/components/cards/ProjectCard/ProjectCard.constants';
 import CurrentCreditsIcon from 'web-components/src/components/icons/CurrentCreditsIcon';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 import { StickyBar } from 'web-components/src/components/sticky-bar/StickyBar';
@@ -20,6 +15,10 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
 import { Label, Subtitle } from 'web-components/src/components/typography';
 
+import {
+  getProjectCardBodyTextMapping,
+  getProjectCardButtonMapping,
+} from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { EDIT_PROJECT } from 'pages/ProjectEdit/ProjectEdit.constants';
@@ -81,7 +80,8 @@ export const SellOrdersActionsBar = ({
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
   const { loginDisabled } = useWallet();
-
+  const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
+  const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
   return (
     <StickyBar>
       <Box
@@ -139,7 +139,9 @@ export const SellOrdersActionsBar = ({
                 >
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <Label size="xs" sx={{ color: 'info.main', mr: 1 }}>
-                      {isPrefinanceProject ? PRICE : AVG_PRICE_LABEL}
+                      {isPrefinanceProject
+                        ? bodyTexts.price
+                        : bodyTexts.avgPriceLabel}
                     </Label>
                     {!isPrefinanceProject && (
                       <InfoTooltipWithIcon
@@ -165,7 +167,7 @@ export const SellOrdersActionsBar = ({
                   },
                 }}
                 className={
-                  isPrefinanceProject ? PREFINANCE_BUTTON.className : ''
+                  isPrefinanceProject ? buttons.prefinance.className : ''
                 }
               >
                 {_(BOOK_CALL)}

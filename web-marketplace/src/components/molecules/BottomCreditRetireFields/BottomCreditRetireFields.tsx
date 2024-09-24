@@ -15,7 +15,9 @@ import { getJurisdictionIsoCode } from 'web-components/src/utils/locationStandar
 
 import {
   COUNTRY_LABEL,
+  COUNTRY_LABEL_PLACEHOLDER,
   EMPTY_OPTION_TEXT,
+  LOCATION_STATE_PLACEHOLDER_LABEL,
   STATE_LABEL,
 } from 'lib/constants/shared.constants';
 
@@ -123,6 +125,7 @@ export const BottomCreditRetireFields: React.FC<
             }
           >
             <LocationCountryField
+              countryLabelPlaceholder={_(COUNTRY_LABEL_PLACEHOLDER)}
               label={_(COUNTRY_LABEL)}
               emptyOptionText={_(EMPTY_OPTION_TEXT)}
               exclude
@@ -145,6 +148,7 @@ export const BottomCreditRetireFields: React.FC<
             }
           >
             <LocationStateField
+              placeholderLabel={_(LOCATION_STATE_PLACEHOLDER_LABEL)}
               optional
               emptyOptionText={_(EMPTY_OPTION_TEXT)}
               label={_(STATE_LABEL)}

@@ -33,8 +33,10 @@ const getBorderColor = (
     ? theme.palette.grey[100]
     : theme.palette.grey[400];
   return disabled
-    ? `linear-gradient(${disabledColor}, ${disabledColor})`
-    : 'linear-gradient(204.4deg, #527984 5.94%, #79C6AA 51.92%, #C4DAB5 97.89%)';
+    ? // eslint-disable-next-line lingui/no-unlocalized-strings
+      `linear-gradient(${disabledColor}, ${disabledColor})`
+    : // eslint-disable-next-line lingui/no-unlocalized-strings
+      'linear-gradient(204.4deg, #527984 5.94%, #79C6AA 51.92%, #C4DAB5 97.89%)';
 };
 
 const getBackgroundColor = (

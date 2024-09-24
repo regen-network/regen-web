@@ -1,3 +1,5 @@
+import { msg } from '@lingui/macro';
+
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 
 import { ProjectPageMetadata } from 'components/molecules';
@@ -11,15 +13,16 @@ export const getProjectDetailsTabs = ({
   sortedDocuments,
   sortCallbacksDocuments,
   paginationParams,
-  setPaginationParams,
   offChainProject,
   batchData,
   onChainProjectId,
   projectMetadata,
+  setPaginationParams,
+  _,
 }: ProjectDetailsTableTabsProps): IconTabProps[] =>
   [
     {
-      label: 'Project documentation',
+      label: _(msg`Project documentation`),
       content: (
         <ProjectDetailsDocumentationTable
           documents={sortedDocuments}
@@ -29,7 +32,7 @@ export const getProjectDetailsTabs = ({
       hidden: (sortedDocuments.length ?? 0) === 0,
     },
     {
-      label: 'Credit Issuance',
+      label: _(msg`Credit Issuance`),
       content: (
         <CreditBatches
           creditClassId={offChainProject?.creditClassByCreditClassId?.onChainId}
@@ -44,7 +47,7 @@ export const getProjectDetailsTabs = ({
       hidden: (batchData?.batches?.length ?? 0) === 0,
     },
     {
-      label: 'Additional Info',
+      label: _(msg`Additional Info`),
       content: (
         <>
           {isAnchoredProjectMetadata(projectMetadata, onChainProjectId) && (

@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import type { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
@@ -63,7 +64,7 @@ const useBasketPutSubmit = ({
         projectId: credit.projectId,
       });
 
-      const msg = MsgPut.fromPartial({
+      const msgPut = MsgPut.fromPartial({
         basketDenom: values.basketDenom,
         owner: accountAddress,
         credits: [
@@ -97,25 +98,25 @@ const useBasketPutSubmit = ({
         if (basket && amount) {
           const cardItems = [
             {
-              label: 'basket',
+              label: _(msg`basket`),
               value: { name: basket.name },
             },
             {
-              label: 'project',
+              label: _(msg`project`),
               value: {
                 name: credit.projectName || credit.projectId,
                 url: `/project/${credit.projectId}`,
               },
             },
             {
-              label: 'credit batch id',
+              label: _(msg`credit batch id`),
               value: {
                 name: credit.denom,
                 url: `/credit-batches/${credit.denom}`,
               },
             },
             {
-              label: 'amount',
+              label: _(msg`amount`),
               value: { name: amount },
             },
           ];
@@ -127,7 +128,7 @@ const useBasketPutSubmit = ({
           });
         }
       };
-      await signAndBroadcast({ msgs: [msg] }, () => onBroadcast(), {
+      await signAndBroadcast({ msgs: [msgPut] }, () => onBroadcast(), {
         onError,
         onSuccess,
       });

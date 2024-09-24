@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { msg, plural } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
 
@@ -21,6 +23,7 @@ export const useUpdateCardItemsTakeBasket = ({
   cardItems,
   setCardItems,
 }: Props): Output => {
+  const { _ } = useLingui();
   const [cardItemsTakeDone, setCardItemsTakeDone] = useState<boolean>(false);
 
   useEffect(() => {
@@ -35,7 +38,12 @@ export const useUpdateCardItemsTakeBasket = ({
     setCardItems([
       ...cardItems.slice(0, 1),
       {
-        label: `credit batch id${moreThanOne ? '(s)' : ''}`,
+        label: _(
+          msg`credit batch id${plural(batchesFromTake.length, {
+            one: '',
+            other: '(s)',
+          })}`,
+        ),
         value: moreThanOne ? [...batchesFromTake] : { ...batchesFromTake[0] },
       },
       ...cardItems.slice(1),
@@ -48,6 +56,7 @@ export const useUpdateCardItemsTakeBasket = ({
     setCardItems,
     cardItemsTakeDone,
     setCardItemsTakeDone,
+    _,
   ]);
 
   return { setCardItemsTakeDone };

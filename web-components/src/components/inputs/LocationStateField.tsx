@@ -11,6 +11,7 @@ interface FieldProps {
   optional?: boolean;
   initialSelection?: string;
   label: string;
+  placeholderLabel: string;
 }
 
 const LocationStateField: React.FC<React.PropsWithChildren<FieldProps>> = ({
@@ -20,19 +21,20 @@ const LocationStateField: React.FC<React.PropsWithChildren<FieldProps>> = ({
   label,
   optional = false,
   initialSelection,
+  placeholderLabel,
 }) => {
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
   const { setFieldValue } = useFormikContext();
 
   useEffect(() => {
-    const options = getCountrySubdivisionOptions(country);
+    const options = getCountrySubdivisionOptions(country, placeholderLabel);
     const isValidSelection: boolean =
       !!initialSelection &&
       options.some((opt: Option) => opt.value === initialSelection);
 
     setFieldValue(name, isValidSelection ? initialSelection : '');
     setStateOptions(options);
-  }, [country, setFieldValue, name, initialSelection]);
+  }, [country, setFieldValue, name, initialSelection, placeholderLabel]);
 
   return (
     <Field

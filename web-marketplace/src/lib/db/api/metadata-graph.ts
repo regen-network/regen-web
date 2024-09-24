@@ -74,6 +74,7 @@ export async function generateIri<T>(
     const response = await axios.post(apiUri + iriUrl, metadata);
     return response.data;
   } catch (err) {
+    // eslint-disable-next-line lingui/no-unlocalized-strings
     throw new Error(`Error in iri generation service: ${err}`);
   }
 }

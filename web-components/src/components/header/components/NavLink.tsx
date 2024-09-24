@@ -23,7 +23,7 @@ export const useNavLinkStyles = makeStyles<UseNavLinkStylesParams>()(
       }`,
       '&:hover': {
         borderBottom: `2px solid ${
-          disabled ? 'trasparent' : theme.palette.secondary.main
+          disabled ? 'transparent' : theme.palette.secondary.main
         }`,
       },
       '&:link, &:visited, &:hover, &:active': {

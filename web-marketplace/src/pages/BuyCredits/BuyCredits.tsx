@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
 
 import WithLoader from 'components/atoms/WithLoader';
@@ -10,6 +10,7 @@ import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsForm } from './BuyCredits.Form';
 import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
 import { getCardSellOrders, getFormModel } from './BuyCredits.utils';
+import { useSummarizePayment } from './hooks/useSummarizePayment';
 
 export const BuyCredits = () => {
   const { _ } = useLingui();
@@ -51,6 +52,11 @@ export const BuyCredits = () => {
     () => getCardSellOrders(sanityProject?.fiatSellOrders, sellOrders),
     [sanityProject?.fiatSellOrders, sellOrders],
   );
+
+  const summarizePayment = useSummarizePayment(setCardDetails);
+  useEffect(() => {
+    if (confirmationTokenId) summarizePayment(confirmationTokenId);
+  }, [confirmationTokenId, summarizePayment]);
 
   return (
     <WithLoader

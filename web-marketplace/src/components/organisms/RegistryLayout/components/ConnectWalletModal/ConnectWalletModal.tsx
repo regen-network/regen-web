@@ -24,7 +24,7 @@ export const ConnectWalletModal = ({ open, onClose }: Props) => {
         title={_(CONNECT_WALLET_MODAL_TITLE)}
         description={
           <>
-            {_(CONNECT_WALLET_MODAL_DESCRIPTION)}
+            {_(CONNECT_WALLET_MODAL_DESCRIPTION)}{' '}
             <Link
               href={CONNECT_WALLET_MODAL_HREF}
               sx={{ display: 'inline-block', color: 'secondary.main' }}

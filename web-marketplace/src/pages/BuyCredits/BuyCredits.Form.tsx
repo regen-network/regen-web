@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
@@ -10,6 +10,10 @@ import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { useLedger } from 'ledger';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import {
+  connectWalletModalAtom,
+  switchWalletModalAtom,
+} from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
@@ -80,7 +84,7 @@ export const BuyCreditsForm = ({
 }: Props) => {
   const { data, activeStep, handleSaveNext, handleActiveStep } =
     useMultiStep<BuyCreditsSchemaTypes>();
-  const { wallet } = useWallet();
+  const { wallet, isConnected, activeWalletAddr } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
   const {
     isModalOpen,
@@ -92,6 +96,10 @@ export const BuyCreditsForm = ({
   const navigate = useNavigate();
 
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
+  const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
+  const [paymentOptionCryptoClicked, setPaymentOptionCryptoClicked] =
+    useState(false);
 
   const cardDisabled = cardSellOrders.length === 0;
 
@@ -225,6 +233,19 @@ export const BuyCreditsForm = ({
               [CREDIT_VINTAGE_OPTIONS]: data?.[CREDIT_VINTAGE_OPTIONS],
               [CURRENCY]: data?.[CURRENCY],
             }}
+            isConnected={isConnected}
+            setupWalletModal={() => {
+              setPaymentOptionCryptoClicked(true);
+              if (!activeWalletAddr) {
+                // no connected wallet address
+                setConnectWalletModal(atom => void (atom.open = true));
+              } else if (!isConnected) {
+                // user logged in with web2 but not connected to the wallet address associated to his/er account
+                setSwitchWalletModalAtom(atom => void (atom.open = true));
+              }
+            }}
+            paymentOptionCryptoClicked={paymentOptionCryptoClicked}
+            setPaymentOptionCryptoClicked={setPaymentOptionCryptoClicked}
           />
         )}
 

@@ -1,3 +1,4 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 // This file defines the common tailwind configuration to be used as the basis
 // of each project's tailwind.config.js file.
 module.exports = {
@@ -5,6 +6,7 @@ module.exports = {
     fontFamily: {
       sans: ['"Lato"', '-apple-system', 'sans-serif'],
       muli: ['"Muli"', '-apple-system', 'sans-serif'],
+      montserrat: ['"Montserrat"', '-apple-system', 'sans-serif'],
     },
     colors: {
       // Make sure these guidelines are followed when adding new colors: https://tailwindcss.com/docs/customizing-colors#using-css-variables
@@ -77,14 +79,15 @@ module.exports = {
           'linear-gradient(24deg, rgba(81, 93, 137, 0.10) 2.82%, rgba(125, 201, 191, 0.10) 23.42%, rgba(250, 235, 209, 0.10) 79.07%)',
         'purple-gradient':
           'linear-gradient(179deg,#515D89 19.77%,#7DC9BF 114.05%,#FAEBD1 200.67%)',
-        'blue-green-gradient': 'linear-gradient(197deg, #7D9AA2 8.02%, #9AD3BE 43.42%, #D1E2C7 78.83%)'
+        'blue-green-gradient':
+          'linear-gradient(197deg, #7D9AA2 8.02%, #9AD3BE 43.42%, #D1E2C7 78.83%)',
       },
       boxShadow: {
         sm: '0px 4px 10px 0px rgba(0, 0, 0, 0.05)',
         md: '0px 4px 10px 0px rgba(0, 0, 0, 0.05), 0px 0px 10px 0px rgba(250, 250, 216, 0.80)',
       },
       fontWeight: {
-        inherit: "inherit",
+        inherit: 'inherit',
       },
       backgroundColor: {
         transparent: 'transparent',

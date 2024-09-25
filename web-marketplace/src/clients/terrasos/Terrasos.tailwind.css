@@ -12,20 +12,19 @@
       Colors are based off of https://www.figma.com/file/Md1Cl2B9eJi4NMzQgpbdMF/Dark-Mode?type=design&node-id=112-9885&mode=design&t=YKxx8fYvslM2TeLp-0.
     */
 
-    --brand-400: 79 181 115;
-    --brand-300: 123 199 150;
-    --brand-200: 185 225 199;
-    --brand-100: 220 240 227;
+    --brand-400: 189 154 17;
+    --brand-300: 189 154 17;
+    --brand-200: 189 154 17;
+    --brand-100: 189 154 17;
 
     --grey-0: 255 255 255;
     --grey-100: 250 250 250;
     --grey-200: 239 239 239;
     --grey-300: 210 213 217;
     --grey-400: 143 143 143;
-    --grey-500: 84 85 85;
+    --grey-500: 99 100 100;
     --grey-600: 32 32 32;
     --grey-700: 0 0 0;
-
     --warning-400: 255 196 50;
     --warning-300: 255 211 101;
     --warning-200: 255 231 173;

@@ -1,0 +1,6 @@
+query TebuBanner {
+  allTebuBanner {
+    contentRaw
+    learnMoreLink
+  }
+}

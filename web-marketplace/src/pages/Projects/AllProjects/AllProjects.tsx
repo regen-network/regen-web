@@ -35,6 +35,7 @@ import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/g
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
+import { TebuBannerWrapper } from 'components/organisms/TebuBannerWrapper/TebuBannerWrapper';
 
 import { useFetchCreditClasses } from '../hooks/useFetchCreditClasses';
 import { useProjectsContext } from '../Projects.context';
@@ -217,6 +218,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           </Flex>
         </Flex>
       </Flex>
+      <TebuBannerWrapper className="mt-30 mb-50 col-span-full" />
       {projects?.map(project => {
         const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
         return (

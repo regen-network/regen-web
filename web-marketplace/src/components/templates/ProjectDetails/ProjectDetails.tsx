@@ -148,6 +148,7 @@ function ProjectDetails(): JSX.Element {
     offChainProject,
     onChainCreditClassId,
     creditClassOnChain,
+    cardSellOrders,
   } = useGetProject();
 
   const slug =
@@ -392,8 +393,7 @@ function ProjectDetails(): JSX.Element {
             if (
               // some credits are available for fiat purchase
               !loadingSanityProject &&
-              sanityProject?.fiatSellOrders &&
-              sanityProject?.fiatSellOrders.length > 0
+              cardSellOrders.length > 0
             ) {
               // so we can always go to the buy page,
               // no matter if the user is logged in/connected to a wallet or not

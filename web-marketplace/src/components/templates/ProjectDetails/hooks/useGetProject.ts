@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
@@ -12,7 +13,11 @@ import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectBy
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 
 import { client as sanityClient } from '../../../../lib/clients/sanity';
-import { getIsOnChainId, getIsUuid } from '../ProjectDetails.utils';
+import {
+  getCardSellOrders,
+  getIsOnChainId,
+  getIsUuid,
+} from '../ProjectDetails.utils';
 
 export const useGetProject = () => {
   const { projectId } = useParams();
@@ -107,6 +112,16 @@ export const useGetProject = () => {
     }),
   );
 
+  const sellOrders = useMemo(
+    () => projectsWithOrderData?.[0]?.sellOrders || [],
+    [projectsWithOrderData],
+  );
+
+  const cardSellOrders = useMemo(
+    () => getCardSellOrders(sanityProject?.fiatSellOrders, sellOrders),
+    [sanityProject?.fiatSellOrders, sellOrders],
+  );
+
   return {
     sanityProject,
     loadingSanityProject,
@@ -123,5 +138,7 @@ export const useGetProject = () => {
     onChainCreditClassId,
     creditClassOnChain,
     loadingBuySellOrders,
+    sellOrders,
+    cardSellOrders,
   };
 };

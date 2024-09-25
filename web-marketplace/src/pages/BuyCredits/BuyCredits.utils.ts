@@ -42,14 +42,3 @@ export const getFormModel = ({
     ],
   };
 };
-
-export const getCardSellOrders = (
-  sanityFiatSellOrders: Project['fiatSellOrders'],
-  sellOrders: UISellOrderInfo[],
-) =>
-  sanityFiatSellOrders?.map(fiatOrder => ({
-    ...fiatOrder,
-    ...sellOrders.filter(
-      cryptoOrder => cryptoOrder.id.toString() === fiatOrder?.sellOrderId,
-    )?.[0],
-  })) || [];

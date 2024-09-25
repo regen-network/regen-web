@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 
@@ -12,7 +12,7 @@ import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetP
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsForm } from './BuyCredits.Form';
 import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
-import { getCardSellOrders, getFormModel } from './BuyCredits.utils';
+import { getFormModel } from './BuyCredits.utils';
 import { useSummarizePayment } from './hooks/useSummarizePayment';
 
 export const BuyCredits = () => {
@@ -21,7 +21,6 @@ export const BuyCredits = () => {
   const navigate = useNavigate();
 
   const {
-    sanityProject,
     loadingSanityProject,
     // The following var might be used on the OrderSummarCard
     // projectBySlug,
@@ -31,11 +30,12 @@ export const BuyCredits = () => {
     // offchainProjectByIdData,
     // loadingOffchainProjectById,
     isBuyFlowDisabled,
-    projectsWithOrderData,
     onChainProjectId,
     offChainProject,
     creditClassOnChain,
     loadingBuySellOrders,
+    sellOrders,
+    cardSellOrders,
   } = useGetProject();
 
   const [paymentOption, setPaymentOption] = useState<PaymentOptionsType>(
@@ -47,20 +47,26 @@ export const BuyCredits = () => {
     // If there are some sell orders available for fiat purchase, default to 'card' option
     if (
       !loadingSanityProject &&
-      sanityProject?.fiatSellOrders &&
-      sanityProject?.fiatSellOrders.length > 0
+      !loadingBuySellOrders &&
+      cardSellOrders.length > 0
     )
       setPaymentOption(PAYMENT_OPTIONS.CARD);
-    else if (!loadingSanityProject && loaded && !wallet?.address)
+    else if (
+      !loadingSanityProject &&
+      !loadingBuySellOrders &&
+      loaded &&
+      !wallet?.address
+    )
       // Else if there's no connected wallet address, redirect to project page
       navigate(`/project/${projectId}`, { replace: true });
   }, [
-    sanityProject?.fiatSellOrders,
     loadingSanityProject,
+    loadingBuySellOrders,
     loaded,
     wallet?.address,
     navigate,
     projectId,
+    cardSellOrders.length,
   ]);
 
   const [retiring, setRetiring] = useState<boolean>(true);
@@ -76,15 +82,6 @@ export const BuyCredits = () => {
     retiring,
     projectId: onChainProjectId ?? offChainProject?.id,
   });
-  const sellOrders = useMemo(
-    () => projectsWithOrderData?.[0]?.sellOrders || [],
-    [projectsWithOrderData],
-  );
-
-  const cardSellOrders = useMemo(
-    () => getCardSellOrders(sanityProject?.fiatSellOrders, sellOrders),
-    [sanityProject?.fiatSellOrders, sellOrders],
-  );
 
   const summarizePayment = useSummarizePayment(setCardDetails);
   useEffect(() => {

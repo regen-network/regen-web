@@ -1,5 +1,5 @@
-query TebuBanner {
-  allTebuBanner {
+query TerrasosHeader {
+  allTerrasosHeader {
     links {
       href
       text

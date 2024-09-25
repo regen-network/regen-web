@@ -22740,7 +22740,7 @@
           },
           {
             "kind": "OBJECT",
-            "name": "TebuBanner",
+            "name": "TerrasosHeader",
             "ofType": null
           },
           {
@@ -53436,12 +53436,12 @@
             "deprecationReason": null
           },
           {
-            "name": "TebuBanner",
+            "name": "TerrasosHeader",
             "description": null,
             "args": [
               {
                 "name": "id",
-                "description": "TebuBanner document ID",
+                "description": "TerrasosHeader document ID",
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -53458,7 +53458,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "TebuBanner",
+              "name": "TerrasosHeader",
               "ofType": null
             },
             "isDeprecated": false,
@@ -59222,7 +59222,7 @@
             "deprecationReason": null
           },
           {
-            "name": "allTebuBanner",
+            "name": "allTerrasosHeader",
             "description": null,
             "args": [
               {
@@ -59230,7 +59230,7 @@
                 "description": null,
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "TebuBannerFilter",
+                  "name": "TerrasosHeaderFilter",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -59248,7 +59248,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "TebuBannerSorting",
+                      "name": "TerrasosHeaderSorting",
                       "ofType": null
                     }
                   }
@@ -59293,7 +59293,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "OBJECT",
-                    "name": "TebuBanner",
+                    "name": "TerrasosHeader",
                     "ofType": null
                   }
                 }
@@ -68085,7 +68085,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "TebuBanner",
+        "name": "TerrasosHeader",
         "description": null,
         "fields": [
           {
@@ -68190,7 +68190,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TebuBannerFilter",
+        "name": "TerrasosHeaderFilter",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -68285,7 +68285,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TebuBannerSorting",
+        "name": "TerrasosHeaderSorting",
         "description": null,
         "fields": null,
         "inputFields": [

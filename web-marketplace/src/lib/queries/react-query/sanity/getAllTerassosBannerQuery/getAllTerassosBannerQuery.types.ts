@@ -1,13 +1,13 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { QueryObserverOptions } from '@tanstack/react-query';
 
-import { TebuBannerQuery } from 'generated/sanity-graphql';
+import { TerrasosHeaderQuery } from 'generated/sanity-graphql';
 
 import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 
-export type ReactQueryTebuBannerQueryResponse =
-  QueryObserverOptions<TebuBannerQuery>;
+export type ReactQueryTerrasosHeaderQueryResponse =
+  QueryObserverOptions<TerrasosHeaderQuery>;
 
 export type ReactQueryAllActivityQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
-} & ReactQueryBuilderResponse<ReactQueryTebuBannerQueryResponse>;
+} & ReactQueryBuilderResponse<ReactQueryTerrasosHeaderQueryResponse>;

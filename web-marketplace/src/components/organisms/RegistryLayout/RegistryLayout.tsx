@@ -6,7 +6,7 @@ import { MARKETPLACE_CLIENT } from 'lib/env';
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
 import { ScrollToTop } from '../../atoms';
-import { TebuHeaderWrapper } from '../TebuHeaderWrapper/TebuHeaderWrapper';
+import { TerrasosHeaderWrapper } from '../TerrasosHeaderWrapper/TerrasosHeaderWrapper';
 import { RegistryLayoutAccountSwitchModal } from './RegistryLayout.AccountSwitchModal';
 import { RegistryLayoutAddWalletModalSwitchWarning } from './RegistryLayout.AddWalletModalSwitchWarning';
 import { RegistryLayoutBannerModal } from './RegistryLayout.Banner';
@@ -28,7 +28,7 @@ const RegistryLayout: React.FC = () => {
   return (
     <>
       {isRegen && <RegistryLayoutHeader />}
-      {isTerrasos && <TebuHeaderWrapper />}
+      {isTerrasos && <TerrasosHeaderWrapper />}
       <Outlet />
       <RegistryLayoutFooter />
       <PageViewTracking />

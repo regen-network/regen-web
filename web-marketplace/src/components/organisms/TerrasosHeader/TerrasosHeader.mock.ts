@@ -1,7 +1,7 @@
 /* eslint-disable lingui/no-unlocalized-strings */
-import { TebuHeaderItemType } from './TebuHeader.types';
+import { TerrasosHeaderItemType } from './TerrasosHeader.types';
 
-export const tebuHeaderItemsMock: TebuHeaderItemType[] = [
+export const terrasosHeaderItemsMock: TerrasosHeaderItemType[] = [
   { text: 'About Terrasos', href: '#' },
   { text: 'Projects', href: '#' },
   { text: 'Habitat Banks', href: '#' },

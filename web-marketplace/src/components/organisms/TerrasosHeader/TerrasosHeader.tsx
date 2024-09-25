@@ -3,19 +3,19 @@ import { useLingui } from '@lingui/react';
 
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import { TebuHeaderItemType } from './TebuHeader.types';
+import { TerrasosHeaderItemType } from './TerrasosHeader.types';
 
-export interface TebuHeaderProps {
+export interface TerrasosHeaderProps {
   logo: string;
-  items: TebuHeaderItemType[];
+  items: TerrasosHeaderItemType[];
   className?: string;
 }
 
-export const TebuHeader = ({
+export const TerrasosHeader = ({
   logo,
   items,
   className,
-}: TebuHeaderProps): JSX.Element => {
+}: TerrasosHeaderProps): JSX.Element => {
   const { _ } = useLingui();
 
   return (

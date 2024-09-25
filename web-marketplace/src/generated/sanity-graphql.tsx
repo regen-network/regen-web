@@ -5910,7 +5910,7 @@ export type RootQuery = {
   FundPage?: Maybe<FundPage>;
   RegenTeamMember?: Maybe<RegenTeamMember>;
   ValidatorsPage?: Maybe<ValidatorsPage>;
-  TebuBanner?: Maybe<TebuBanner>;
+  TerrasosHeader?: Maybe<TerrasosHeader>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   Document?: Maybe<Document>;
@@ -5984,7 +5984,7 @@ export type RootQuery = {
   allFundPage: Array<FundPage>;
   allRegenTeamMember: Array<RegenTeamMember>;
   allValidatorsPage: Array<ValidatorsPage>;
-  allTebuBanner: Array<TebuBanner>;
+  allTerrasosHeader: Array<TerrasosHeader>;
   allSanityImageAsset: Array<SanityImageAsset>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allDocument: Array<Document>;
@@ -6341,7 +6341,7 @@ export type RootQueryValidatorsPageArgs = {
 };
 
 
-export type RootQueryTebuBannerArgs = {
+export type RootQueryTerrasosHeaderArgs = {
   id: Scalars['ID'];
 };
 
@@ -6921,9 +6921,9 @@ export type RootQueryAllValidatorsPageArgs = {
 };
 
 
-export type RootQueryAllTebuBannerArgs = {
-  where?: Maybe<TebuBannerFilter>;
-  sort?: Maybe<Array<TebuBannerSorting>>;
+export type RootQueryAllTerrasosHeaderArgs = {
+  where?: Maybe<TerrasosHeaderFilter>;
+  sort?: Maybe<Array<TerrasosHeaderSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -7919,8 +7919,8 @@ export type TeamSectionSorting = {
   title?: Maybe<SortOrder>;
 };
 
-export type TebuBanner = Document & {
-  __typename?: 'TebuBanner';
+export type TerrasosHeader = Document & {
+  __typename?: 'TerrasosHeader';
   /** Document ID */
   _id?: Maybe<Scalars['ID']>;
   /** Document type */
@@ -7935,7 +7935,7 @@ export type TebuBanner = Document & {
   links?: Maybe<Array<Maybe<LinkItem>>>;
 };
 
-export type TebuBannerFilter = {
+export type TerrasosHeaderFilter = {
   /** Apply filters on document level */
   _?: Maybe<Sanity_DocumentFilter>;
   _id?: Maybe<IdFilter>;
@@ -7946,7 +7946,7 @@ export type TebuBannerFilter = {
   _key?: Maybe<StringFilter>;
 };
 
-export type TebuBannerSorting = {
+export type TerrasosHeaderSorting = {
   _id?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   _createdAt?: Maybe<SortOrder>;
@@ -9702,13 +9702,13 @@ export type StepCardFieldsFragment = (
   )> }
 );
 
-export type TebuBannerQueryVariables = Exact<{ [key: string]: never; }>;
+export type TerrasosHeaderQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TebuBannerQuery = (
+export type TerrasosHeaderQuery = (
   { __typename?: 'RootQuery' }
-  & { allTebuBanner: Array<(
-    { __typename?: 'TebuBanner' }
+  & { allTerrasosHeader: Array<(
+    { __typename?: 'TerrasosHeader' }
     & { links?: Maybe<Array<Maybe<(
       { __typename?: 'LinkItem' }
       & Pick<LinkItem, 'href' | 'text'>
@@ -11768,9 +11768,9 @@ export function useSdgByIriLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<S
 export type SdgByIriQueryHookResult = ReturnType<typeof useSdgByIriQuery>;
 export type SdgByIriLazyQueryHookResult = ReturnType<typeof useSdgByIriLazyQuery>;
 export type SdgByIriQueryResult = Apollo.QueryResult<SdgByIriQuery, SdgByIriQueryVariables>;
-export const TebuBannerDocument = gql`
-    query TebuBanner {
-  allTebuBanner {
+export const TerrasosHeaderDocument = gql`
+    query TerrasosHeader {
+  allTerrasosHeader {
     links {
       href
       text
@@ -11780,31 +11780,31 @@ export const TebuBannerDocument = gql`
     `;
 
 /**
- * __useTebuBannerQuery__
+ * __useTerrasosHeaderQuery__
  *
- * To run a query within a React component, call `useTebuBannerQuery` and pass it any options that fit your needs.
- * When your component renders, `useTebuBannerQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useTerrasosHeaderQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTerrasosHeaderQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useTebuBannerQuery({
+ * const { data, loading, error } = useTerrasosHeaderQuery({
  *   variables: {
  *   },
  * });
  */
-export function useTebuBannerQuery(baseOptions?: Apollo.QueryHookOptions<TebuBannerQuery, TebuBannerQueryVariables>) {
+export function useTerrasosHeaderQuery(baseOptions?: Apollo.QueryHookOptions<TerrasosHeaderQuery, TerrasosHeaderQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TebuBannerQuery, TebuBannerQueryVariables>(TebuBannerDocument, options);
+        return Apollo.useQuery<TerrasosHeaderQuery, TerrasosHeaderQueryVariables>(TerrasosHeaderDocument, options);
       }
-export function useTebuBannerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TebuBannerQuery, TebuBannerQueryVariables>) {
+export function useTerrasosHeaderLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TerrasosHeaderQuery, TerrasosHeaderQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TebuBannerQuery, TebuBannerQueryVariables>(TebuBannerDocument, options);
+          return Apollo.useLazyQuery<TerrasosHeaderQuery, TerrasosHeaderQueryVariables>(TerrasosHeaderDocument, options);
         }
-export type TebuBannerQueryHookResult = ReturnType<typeof useTebuBannerQuery>;
-export type TebuBannerLazyQueryHookResult = ReturnType<typeof useTebuBannerLazyQuery>;
-export type TebuBannerQueryResult = Apollo.QueryResult<TebuBannerQuery, TebuBannerQueryVariables>;
+export type TerrasosHeaderQueryHookResult = ReturnType<typeof useTerrasosHeaderQuery>;
+export type TerrasosHeaderLazyQueryHookResult = ReturnType<typeof useTerrasosHeaderLazyQuery>;
+export type TerrasosHeaderQueryResult = Apollo.QueryResult<TerrasosHeaderQuery, TerrasosHeaderQueryVariables>;
 export const AllBridgePageDocument = gql`
     query allBridgePage {
   allBridgePage {

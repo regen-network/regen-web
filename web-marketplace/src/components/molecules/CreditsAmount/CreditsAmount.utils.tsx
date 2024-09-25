@@ -79,7 +79,7 @@ export const getCreditsAmount = ({
         bidPrice: !card
           ? { amount: String(price), denom: order.askDenom }
           : undefined,
-        price: card ? price : undefined,
+        price: card ? price * 100 : undefined, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00)
       });
       break;
     }
@@ -131,7 +131,7 @@ export const getCurrencyAmount = ({
         bidPrice: !card
           ? { amount: String(price), denom: order.askDenom }
           : undefined,
-        price: card ? price : undefined,
+        price: card ? price * 100 : undefined, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00)
       });
       break;
     }
@@ -164,6 +164,6 @@ export const formatFullSellOrder = ({
     bidPrice: !card
       ? { amount: String(price), denom: order.askDenom }
       : undefined,
-    price: card ? price : undefined,
+    price: card ? price * 100 : undefined, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00)
   };
 };

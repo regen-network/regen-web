@@ -98,12 +98,14 @@ export const PaymentInfoForm = ({
           return;
         }
         if (card && stripe && elements && !values.paymentMethodId) {
-          const submitRes = await elements?.submit();
+          const submitRes = await elements.submit();
           if (submitRes?.error?.message) {
             setError(submitRes?.error?.message);
             return;
           }
           // Create the ConfirmationToken using the details collected by the Payment Element
+          if (values.savePaymentMethod)
+            elements.update({ setupFutureUsage: 'on_session' });
           const { error, confirmationToken } =
             await stripe.createConfirmationToken({
               elements,

@@ -154,7 +154,7 @@ export const getOptions = ({
     allowedDenomsData,
     setSelectedProjectById,
   });
-  console.log('allowedDenomsData', allowedDenomsData);
+
   const allOptionsLength =
     retirableOptions.length + retirableAndTradableOptions.length;
 

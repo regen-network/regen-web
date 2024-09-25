@@ -55,7 +55,10 @@ const ConnectWallet = ({
         {title}
       </Title>
       {description && (
-        <Body size="lg" sx={{ mb: marginBottoms.description }}>
+        <Body
+          size="lg"
+          sx={{ mb: marginBottoms.description, textAlign: 'center' }}
+        >
           {description}
         </Body>
       )}

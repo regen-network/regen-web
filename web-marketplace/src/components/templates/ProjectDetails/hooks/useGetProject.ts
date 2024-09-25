@@ -25,13 +25,14 @@ export const useGetProject = () => {
   const isOnChainId = getIsOnChainId(projectId);
   const isOffChainUuid = getIsUuid(projectId);
 
-  const { data: sanityProjectData } = useQuery(
-    getProjectByIdQuery({
-      id: projectId as string,
-      sanityClient,
-      enabled: !!sanityClient && !!projectId,
-    }),
-  );
+  const { data: sanityProjectData, isInitialLoading: loadingSanityProject } =
+    useQuery(
+      getProjectByIdQuery({
+        id: projectId as string,
+        sanityClient,
+        enabled: !!sanityClient && !!projectId,
+      }),
+    );
   const sanityProject = sanityProjectData?.allProject?.[0];
 
   // if projectId is slug, query project by slug
@@ -108,6 +109,7 @@ export const useGetProject = () => {
 
   return {
     sanityProject,
+    loadingSanityProject,
     projectBySlug,
     loadingProjectBySlug,
     projectByOnChainId,

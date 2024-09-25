@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { Stripe, StripeElements } from '@stripe/stripe-js';
 
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
@@ -20,16 +21,24 @@ import {
 } from './AgreePurchaseForm.schema';
 import { Tradable, TradableProps } from './AgreePurchaseForm.Tradable';
 
-type AgreePurchaseFormProps = {
+export type AgreePurchaseFormProps = {
   retiring: boolean;
-  onSubmit: (values: AgreePurchaseFormSchemaType) => Promise<void>;
+  onSubmit: (
+    values: AgreePurchaseFormSchemaType,
+    stripe?: Stripe | null,
+    elements?: StripeElements | null,
+  ) => Promise<void>;
   country?: string;
+  stripe?: Stripe | null;
+  elements?: StripeElements | null;
 } & TradableProps;
 
 export const AgreePurchaseForm = ({
   retiring,
   country,
   onSubmit,
+  stripe,
+  elements,
   goToChooseCredits,
   imgSrc,
 }: AgreePurchaseFormProps) => {
@@ -69,7 +78,13 @@ export const AgreePurchaseForm = ({
   }, [country, form]);
 
   return (
-    <Form form={form} onSubmit={onSubmit} className="max-w-[560px]">
+    <Form
+      form={form}
+      onSubmit={(values: AgreePurchaseFormSchemaType) =>
+        onSubmit(values, stripe, elements)
+      }
+      className="max-w-[560px]"
+    >
       <Retirement retiring={retiring} />
       {!retiring && (
         <Tradable goToChooseCredits={goToChooseCredits} imgSrc={imgSrc} />

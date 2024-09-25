@@ -12,14 +12,16 @@ type GetFormModelParams = {
   _: TranslatorType;
   paymentOption: PaymentOptionsType;
   retiring: boolean;
+  projectId: string;
 };
 export const getFormModel = ({
   _,
   paymentOption,
   retiring,
+  projectId,
 }: GetFormModelParams) => {
   return {
-    formId: 'buy-credits',
+    formId: `buy-credits-${projectId}`,
     steps: [
       {
         id: 'choose-credits',

@@ -54,10 +54,9 @@ export const BuyCredits = () => {
     else if (
       !loadingSanityProject &&
       !loadingBuySellOrders &&
-      loaded &&
-      !wallet?.address
+      ((loaded && !wallet?.address) || isBuyFlowDisabled)
     )
-      // Else if there's no connected wallet address, redirect to project page
+      // Else if there's no connected wallet address or buy disabled, redirect to project page
       navigate(`/project/${projectId}`, { replace: true });
   }, [
     loadingSanityProject,
@@ -67,6 +66,7 @@ export const BuyCredits = () => {
     navigate,
     projectId,
     cardSellOrders.length,
+    isBuyFlowDisabled,
   ]);
 
   const [retiring, setRetiring] = useState<boolean>(true);
@@ -90,38 +90,36 @@ export const BuyCredits = () => {
 
   return (
     <WithLoader
-      isLoading={loadingBuySellOrders}
+      isLoading={loadingBuySellOrders || loadingSanityProject}
       className="flex w-full items-center justify-center h-[500px]"
     >
       <>
-        {!isBuyFlowDisabled && (
-          <MultiStepTemplate
-            formId={formModel.formId}
-            steps={formModel.steps}
-            initialValues={{}}
-          >
-            <BuyCreditsForm
-              setPaymentOption={setPaymentOption}
-              paymentOption={paymentOption}
-              retiring={retiring}
-              setRetiring={setRetiring}
-              cardSellOrders={cardSellOrders as CardSellOrder[]}
-              cryptoSellOrders={sellOrders}
-              creditTypeAbbrev={creditClassOnChain?.class?.creditTypeAbbrev}
-              projectHref={`/project/${
-                offChainProject?.slug ??
-                offChainProject?.onChainId ??
-                onChainProjectId
-              }`}
-              confirmationTokenId={confirmationTokenId}
-              setConfirmationTokenId={setConfirmationTokenId}
-              paymentMethodId={paymentMethodId}
-              setPaymentMethodId={setPaymentMethodId}
-              setCardDetails={setCardDetails}
-              cardDetails={cardDetails}
-            />
-          </MultiStepTemplate>
-        )}
+        <MultiStepTemplate
+          formId={formModel.formId}
+          steps={formModel.steps}
+          initialValues={{}}
+        >
+          <BuyCreditsForm
+            setPaymentOption={setPaymentOption}
+            paymentOption={paymentOption}
+            retiring={retiring}
+            setRetiring={setRetiring}
+            cardSellOrders={cardSellOrders as CardSellOrder[]}
+            cryptoSellOrders={sellOrders}
+            creditTypeAbbrev={creditClassOnChain?.class?.creditTypeAbbrev}
+            projectHref={`/project/${
+              offChainProject?.slug ??
+              offChainProject?.onChainId ??
+              onChainProjectId
+            }`}
+            confirmationTokenId={confirmationTokenId}
+            setConfirmationTokenId={setConfirmationTokenId}
+            paymentMethodId={paymentMethodId}
+            setPaymentMethodId={setPaymentMethodId}
+            setCardDetails={setCardDetails}
+            cardDetails={cardDetails}
+          />
+        </MultiStepTemplate>
       </>
     </WithLoader>
   );

@@ -37,7 +37,7 @@ type Story = StoryObj<typeof Order>;
 
 export const Default: Story = {
   render: args => (
-    <div className="w-[800px]">
+    <div className="max-w-[800px]">
       <Order {...args} />
     </div>
   ),
@@ -53,7 +53,7 @@ Default.args = {
 
 export const Crypto: Story = {
   render: args => (
-    <div className="w-[800px]">
+    <div className="max-w-[800px]">
       <Order {...args} />
     </div>
   ),
@@ -86,7 +86,7 @@ Crypto.args = {
 
 export const Prefinance: Story = {
   render: args => (
-    <div className="w-[800px]">
+    <div className="max-w-[800px]">
       <Order {...args} />
     </div>
   ),
@@ -102,7 +102,7 @@ Prefinance.args = {
 
 export const PendingOrder: Story = {
   render: args => (
-    <div className="w-[800px]">
+    <div className="max-w-[800px]">
       <Order {...args} />
     </div>
   ),
@@ -128,7 +128,7 @@ PendingOrder.args = {
 
 export const TradableOrder: Story = {
   render: args => (
-    <div className="w-[800px]">
+    <div className="max-w-[800px]">
       <Order {...args} />
     </div>
   ),

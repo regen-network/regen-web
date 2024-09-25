@@ -113,29 +113,42 @@ export const usePurchase = () => {
                     clientSecret,
                     {
                       payment_method: paymentMethodId,
-                      return_url: window.location.origin, // TODO APP-361 redirect to certificate with success modal, this return_url might be used when using 3DS
                     },
                   );
                   if (error) {
                     setErrorBannerTextAtom(String(error));
                   }
+                  // this will go to the last "Complete" step, we should redirect to the certificate page APP-361
+                  // there, we need to getGetTxsEventQuery + show success modal
                   handleSuccess();
                 } else {
                   // or new credit card
-                  const { error } = await stripe.confirmPayment({
+                  const { error, paymentIntent } = await stripe.confirmPayment({
                     clientSecret,
                     confirmParams: {
                       confirmation_token: confirmationTokenId,
-                      return_url: window.location.origin, // TODO APP-361 redirect to certificate with success modal
-                      // return_url comes with following url params: payment_intent (id), payment_intent_client_secret and redirect_status
-                      // on this return_url, we need to getGetTxsEventQuery + show success modal
                     },
+                    redirect: 'if_required',
                   });
                   if (error) {
                     // This point is only reached if there's an immediate error when
                     // confirming the payment. Show the error to your customer (for example, payment details incomplete)
                     setErrorBannerTextAtom(String(error.message));
                   }
+                  if (
+                    paymentIntent?.client_secret &&
+                    paymentIntent?.status === 'requires_action'
+                  ) {
+                    // If action is required (e.g., 3D Secure), handle it manually
+                    const { error: actionError } =
+                      await stripe.handleCardAction(
+                        paymentIntent.client_secret,
+                      );
+                    if (actionError) {
+                      setErrorBannerTextAtom(String(actionError.message));
+                    }
+                  }
+                  handleSuccess();
                 }
               },
             });

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
@@ -36,10 +36,8 @@ import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMet
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
-import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { CREATE_POST_DISABLED_TOOLTIP_TEXT } from 'pages/Dashboard/MyProjects/MyProjects.constants';
@@ -83,6 +81,7 @@ import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
 function ProjectDetails(): JSX.Element {
   const { _ } = useLingui();
   const theme = useTheme();
+  const { projectId } = useParams();
   const { ecocreditClient, dataClient } = useLedger();
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
@@ -94,7 +93,6 @@ function ProjectDetails(): JSX.Element {
     loginDisabled,
   } = useWallet();
 
-  const { track } = useTracker();
   const location = useLocation();
   const navigate = useNavigate();
   const { activeAccount } = useAuth();
@@ -127,8 +125,17 @@ function ProjectDetails(): JSX.Element {
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
 
+  useEffect(() => {
+    // As soon as user connects to the right wallet address,
+    // we navigate to the buy page
+    if (isBuyFlowStarted && isConnected) {
+      navigate(`/project/${projectId}/buy`);
+    }
+  }, [isBuyFlowStarted, isConnected, navigate, projectId]);
+
   const {
     sanityProject,
+    loadingSanityProject,
     projectBySlug,
     loadingProjectBySlug,
     projectByOnChainId,
@@ -377,18 +384,33 @@ function ProjectDetails(): JSX.Element {
         isPrefinanceProject ||
         (isAdmin && !loginDisabled)) && (
         <SellOrdersActionsBar
-          isBuyButtonDisabled={isBuyFlowDisabled}
+          isBuyButtonDisabled={isBuyFlowDisabled || loadingSanityProject}
           isCommunityCredit={isCommunityCredit}
           onBookCallButtonClick={onBookCallButtonClick}
           isAdmin={isAdmin}
           onBuyButtonClick={() => {
-            if (!activeWalletAddr) {
-              setConnectWalletModal(atom => void (atom.open = true));
-            } else {
-              if (isConnected) {
+            if (
+              // some credits are available for fiat purchase
+              !loadingSanityProject &&
+              sanityProject?.fiatSellOrders &&
+              sanityProject?.fiatSellOrders.length > 0
+            ) {
+              // so we can always go to the buy page,
+              // no matter if the user is logged in/connected to a wallet or not
+              navigate(`/project/${projectId}/buy`);
+            } else if (!loadingSanityProject) {
+              if (!activeWalletAddr) {
+                // no connected wallet address
                 setIsBuyFlowStarted(true);
+                setConnectWalletModal(atom => void (atom.open = true));
               } else {
-                setSwitchWalletModalAtom(atom => void (atom.open = true));
+                if (isConnected) {
+                  navigate(`/project/${projectId}/buy`);
+                } else {
+                  // user logged in with web2 but not connected to the wallet address associated to his/er account
+                  setIsBuyFlowStarted(true);
+                  setSwitchWalletModalAtom(atom => void (atom.open = true));
+                }
               }
             }
           }}
@@ -541,19 +563,6 @@ function ProjectDetails(): JSX.Element {
           />
         </div>
       )}
-
-      <BuySellOrderFlow
-        isFlowStarted={isBuyFlowStarted}
-        isCommunityCredit={isCommunityCredit}
-        setIsFlowStarted={setIsBuyFlowStarted}
-        projects={
-          projectsWithOrderData?.length > 0
-            ? [projectsWithOrderData[0]]
-            : undefined
-        }
-        track={track}
-        location={location}
-      />
       <CreateSellOrderFlow
         isFlowStarted={isSellFlowStarted}
         setIsFlowStarted={setIsSellFlowStarted}

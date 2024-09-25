@@ -33,7 +33,7 @@ export const ConnectWalletModal = ({ open, onClose }: Props) => {
             </Link>
           </>
         }
-        button={<LoginButton size="large" />}
+        button={<LoginButton size="large" onlyWallets />}
         variant="modal"
       />
     </Modal>

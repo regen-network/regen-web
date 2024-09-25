@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useMemo, useState } from 'react';
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
@@ -46,6 +46,10 @@ export type Props = {
   creditTypePrecision?: number | null;
   initialValues?: DefaultValues<ChooseCreditsFormSchemaType>;
   onPrev: () => void;
+  isConnected: boolean;
+  setupWalletModal: () => void;
+  paymentOptionCryptoClicked: boolean;
+  setPaymentOptionCryptoClicked: UseStateSetter<boolean>;
 };
 
 export function ChooseCreditsForm({
@@ -61,6 +65,10 @@ export function ChooseCreditsForm({
   creditTypePrecision,
   initialValues,
   onPrev,
+  isConnected,
+  setupWalletModal,
+  paymentOptionCryptoClicked,
+  setPaymentOptionCryptoClicked,
 }: Props) {
   const { _ } = useLingui();
   const cryptoCurrencies = useMemo(
@@ -148,8 +156,27 @@ export function ChooseCreditsForm({
       form.setValue(CURRENCY_AMOUNT, 0);
       form.trigger();
     },
-    [cardCurrency, defaultCryptoCurrency, form, setPaymentOption],
+    [setPaymentOption, form, cardCurrency, defaultCryptoCurrency],
   );
+
+  useEffect(() => {
+    // If there are some sell orders available for fiat purchase, default to 'card' option
+    if (cardSellOrders.length > 0) {
+      handlePaymentOptions(PAYMENT_OPTIONS.CARD); // just run this once
+    }
+  }, [cardSellOrders.length]);
+
+  useEffect(() => {
+    if (paymentOptionCryptoClicked && isConnected) {
+      handlePaymentOptions(PAYMENT_OPTIONS.CRYPTO);
+      setPaymentOptionCryptoClicked(false);
+    }
+  }, [
+    setPaymentOptionCryptoClicked,
+    isConnected,
+    paymentOptionCryptoClicked,
+    handlePaymentOptions,
+  ]);
 
   // Advanced settings not enabled for MVP
   // const [advanceSettingsOpen, setAdvanceSettingsOpen] = useState(false);
@@ -189,6 +216,8 @@ export function ChooseCreditsForm({
             paymentOption={paymentOption}
             setPaymentOption={handlePaymentOptions}
             cardDisabled={cardDisabled}
+            isConnected={isConnected}
+            setupWalletModal={setupWalletModal}
           />
           {currency && (
             <CreditsAmount

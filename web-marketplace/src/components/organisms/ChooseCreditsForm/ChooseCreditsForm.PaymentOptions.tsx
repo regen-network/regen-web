@@ -50,15 +50,23 @@ type Props = {
   paymentOption: PaymentOptionsType;
   setPaymentOption: (option: PaymentOptionsType) => void;
   cardDisabled: boolean;
+  isConnected: boolean;
+  setupWalletModal: () => void;
 };
 export const PaymentOptions = ({
   paymentOption,
   setPaymentOption,
   cardDisabled,
+  isConnected,
+  setupWalletModal,
 }: Props) => {
   const handleButtonClick = (e: ChangeEvent<HTMLInputElement>) => {
     const paymentType = e.target.value as PaymentOptionsType;
-    setPaymentOption(paymentType);
+    if (paymentType === PAYMENT_OPTIONS.CRYPTO && !isConnected) {
+      setupWalletModal();
+    } else {
+      setPaymentOption(paymentType);
+    }
   };
 
   return (

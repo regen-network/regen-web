@@ -144,6 +144,7 @@ function ProjectDetails(): JSX.Element {
     loadingOffchainProjectById,
     isBuyFlowDisabled,
     projectsWithOrderData,
+    loadingBuySellOrders,
     onChainProjectId,
     offChainProject,
     onChainCreditClassId,
@@ -393,12 +394,13 @@ function ProjectDetails(): JSX.Element {
             if (
               // some credits are available for fiat purchase
               !loadingSanityProject &&
+              !loadingBuySellOrders &&
               cardSellOrders.length > 0
             ) {
               // so we can always go to the buy page,
               // no matter if the user is logged in/connected to a wallet or not
               navigate(`/project/${projectId}/buy`);
-            } else if (!loadingSanityProject) {
+            } else if (!loadingSanityProject && !loadingBuySellOrders) {
               if (!activeWalletAddr) {
                 // no connected wallet address
                 setIsBuyFlowStarted(true);

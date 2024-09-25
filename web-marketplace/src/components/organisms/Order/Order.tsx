@@ -22,6 +22,7 @@ import { ORDER_STATUS } from './Order.constants';
 import { OrderLabel } from './Order.Label';
 import { OrderSummary } from './Order.Summary';
 import { OrderDataProps, RetirementInfoData } from './Order.types';
+import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
 
 export const Order = (orderData: OrderDataProps) => {
   const theme = useTheme();
@@ -39,6 +40,7 @@ export const Order = (orderData: OrderDataProps) => {
         <>
           {project.prefinance && (
             <PrefinanceTag
+              bodyTexts={getProjectCardBodyTextMapping(_)}
               classNames={{ root: 'z-50 absolute top-35 left-[17px]' }}
             />
           )}
@@ -67,7 +69,10 @@ export const Order = (orderData: OrderDataProps) => {
               }}
             >
               {project.prefinance && (
-                <PrefinanceTag classNames={{ root: 'z-50 absolute top-10' }} />
+                <PrefinanceTag
+                  bodyTexts={getProjectCardBodyTextMapping(_)}
+                  classNames={{ root: 'z-50 absolute top-10' }}
+                />
               )}
               <Image className="z-40" src={project.imageSrc} width={1560} />
             </Avatar>

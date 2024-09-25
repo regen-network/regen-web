@@ -9,12 +9,12 @@ interface StorageApi<T> {
 
 export default function useStorage<T>(
   key: string,
-  useLocalStorage: boolean,
+  withLocalStorage: boolean,
   initialValue?: T,
 ): StorageApi<T> {
   const [data, saveData] = useState<T | undefined>(() => {
     // this way, as a fn, this initialization happens just once
-    if (useLocalStorage) {
+    if (withLocalStorage) {
       try {
         const value = localStorage.getItem(key);
         return value ? JSON.parse(value) : initialValue;
@@ -25,7 +25,7 @@ export default function useStorage<T>(
   });
 
   useEffect(() => {
-    if (useLocalStorage && data) {
+    if (withLocalStorage && data) {
       // TODO: if (_.isEqual(data, initialValues)) return;
       try {
         localStorage.setItem(key, JSON.stringify(data));
@@ -34,12 +34,12 @@ export default function useStorage<T>(
         console.log(err);
       }
     }
-  }, [data, key, useLocalStorage]);
+  }, [data, key, withLocalStorage]);
 
   // TODO: Remove data (key/value)
   const removeData = (): void => {
     try {
-      if (useLocalStorage) localStorage.removeItem(key);
+      if (withLocalStorage) localStorage.removeItem(key);
       // reset state to initial values
       saveData(initialValue);
     } catch (err) {

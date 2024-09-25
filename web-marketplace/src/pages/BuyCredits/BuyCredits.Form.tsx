@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery } from '@tanstack/react-query';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { useSetAtom } from 'jotai';
@@ -26,6 +26,7 @@ import {
 } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';
+import { AgreePurchaseFormFiat } from 'components/organisms/AgreePurchaseForm/AgreePurchaseFormFiat';
 import { ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
@@ -38,7 +39,11 @@ import { PaymentInfoFormFiat } from 'components/organisms/PaymentInfoForm/Paymen
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
-import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
+import {
+  BuyCreditsSchemaTypes,
+  CardDetails,
+  PaymentOptionsType,
+} from './BuyCredits.types';
 import { usePurchase } from './hooks/usePurchase';
 
 type Props = {
@@ -46,7 +51,9 @@ type Props = {
   setPaymentOption: UseStateSetter<PaymentOptionsType>;
   retiring: boolean;
   setRetiring: UseStateSetter<boolean>;
+  confirmationTokenId?: string;
   setConfirmationTokenId: UseStateSetter<string | undefined>;
+  paymentMethodId?: string;
   setPaymentMethodId: UseStateSetter<string | undefined>;
   setCardDetails: UseStateSetter<CardDetails | undefined>;
   cardSellOrders: Array<CardSellOrder>;
@@ -60,7 +67,9 @@ export const BuyCreditsForm = ({
   setPaymentOption,
   retiring,
   setRetiring,
+  confirmationTokenId,
   setConfirmationTokenId,
+  paymentMethodId,
   setPaymentMethodId,
   setCardDetails,
   cardSellOrders,
@@ -69,14 +78,8 @@ export const BuyCreditsForm = ({
   projectHref,
   cardDetails,
 }: Props) => {
-  const { data, activeStep, handleSaveNext, handleActiveStep } = useMultiStep<
-    {
-      paymentOption?: PaymentOptionsType;
-      retiring?: boolean;
-    } & Partial<ChooseCreditsFormSchemaType> &
-      Partial<PaymentInfoFormSchemaType> &
-      Partial<AgreePurchaseFormSchemaType>
-  >();
+  const { data, activeStep, handleSaveNext, handleActiveStep } =
+    useMultiStep<BuyCreditsSchemaTypes>();
   const { wallet } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
   const {
@@ -144,7 +147,53 @@ export const BuyCreditsForm = ({
     },
     [data, handleSaveNext, setPaymentMethodId],
   );
+
   const purchase = usePurchase();
+  const agreePurchaseFormSubmit = useCallback(
+    async (
+      values: AgreePurchaseFormSchemaType,
+      stripe?: Stripe | null,
+      elements?: StripeElements | null,
+    ) => {
+      const { retirementReason, country, stateProvince, postalCode } = values;
+      const {
+        sellOrders: selectedSellOrders,
+        email,
+        name,
+        savePaymentMethod,
+        createAccount: createActiveAccount,
+        // subscribeNewsletter, TODO
+        // followProject,
+      } = data;
+
+      if (selectedSellOrders)
+        purchase({
+          paymentOption,
+          selectedSellOrders,
+          retiring,
+          retirementReason,
+          country,
+          stateProvince,
+          postalCode,
+          email,
+          name,
+          savePaymentMethod,
+          createActiveAccount,
+          paymentMethodId,
+          stripe,
+          elements,
+          confirmationTokenId,
+        });
+    },
+    [
+      confirmationTokenId,
+      data,
+      paymentMethodId,
+      paymentOption,
+      purchase,
+      retiring,
+    ],
+  );
 
   return (
     <div className="flex">
@@ -178,32 +227,45 @@ export const BuyCreditsForm = ({
             }}
           />
         )}
-        {activeStep === 1 && (
+
+        {paymentOption === PAYMENT_OPTIONS.CARD &&
+        (activeStep === 1 || activeStep === 2) ? (
+          <Elements options={stripeOptions} stripe={stripePromise}>
+            {activeStep === 1 && (
+              <PaymentInfoFormFiat
+                paymentOption={paymentOption}
+                onSubmit={paymentInfoFormSubmit}
+                login={onButtonClick}
+                retiring={retiring}
+                wallet={wallet}
+                accountEmail={privActiveAccount?.email}
+                accountName={activeAccount?.name}
+                accountId={activeAccount?.id}
+                paymentMethods={paymentMethodData?.paymentMethods}
+                setError={setErrorBannerTextAtom}
+                setConfirmationTokenId={setConfirmationTokenId}
+                initialValues={{
+                  email: data?.email,
+                  name: data?.name,
+                  createAccount: data?.createAccount,
+                  savePaymentMethod: data?.savePaymentMethod,
+                }}
+                setCardDetails={setCardDetails}
+              />
+            )}
+            {activeStep === 2 && (
+              <AgreePurchaseFormFiat
+                retiring={retiring}
+                onSubmit={agreePurchaseFormSubmit}
+                goToChooseCredits={() => handleActiveStep(0)}
+                imgSrc="/svg/info-with-hand.svg"
+                country={cardDetails?.country || 'US'}
+              />
+            )}
+          </Elements>
+        ) : (
           <>
-            {paymentOption === PAYMENT_OPTIONS.CARD ? (
-              <Elements options={stripeOptions} stripe={stripePromise}>
-                <PaymentInfoFormFiat
-                  paymentOption={paymentOption}
-                  onSubmit={paymentInfoFormSubmit}
-                  login={onButtonClick}
-                  retiring={retiring}
-                  wallet={wallet}
-                  accountEmail={privActiveAccount?.email}
-                  accountName={activeAccount?.name}
-                  accountId={activeAccount?.id}
-                  paymentMethods={paymentMethodData?.paymentMethods}
-                  setError={setErrorBannerTextAtom}
-                  setConfirmationTokenId={setConfirmationTokenId}
-                  initialValues={{
-                    email: data?.email,
-                    name: data?.name,
-                    createAccount: data?.createAccount,
-                    savePaymentMethod: data?.savePaymentMethod,
-                  }}
-                  setCardDetails={setCardDetails}
-                />
-              </Elements>
-            ) : (
+            {activeStep === 1 && (
               <PaymentInfoForm
                 paymentOption={paymentOption}
                 onSubmit={paymentInfoFormSubmit}
@@ -225,43 +287,16 @@ export const BuyCreditsForm = ({
                 setCardDetails={setCardDetails}
               />
             )}
+            {activeStep === 2 && (
+              <AgreePurchaseForm
+                retiring={retiring}
+                onSubmit={agreePurchaseFormSubmit}
+                goToChooseCredits={() => handleActiveStep(0)}
+                imgSrc="/svg/info-with-hand.svg"
+                country={cardDetails?.country || 'US'}
+              />
+            )}
           </>
-        )}
-        {activeStep === 2 && (
-          <AgreePurchaseForm
-            retiring={retiring}
-            onSubmit={async (values: AgreePurchaseFormSchemaType) => {
-              const { retirementReason, country, stateProvince, postalCode } =
-                values;
-              const {
-                sellOrders: selectedSellOrders,
-                email,
-                name,
-                savePaymentMethod,
-                createAccount: createActiveAccount,
-                // subscribeNewsletter, TODO
-                // followProject,
-              } = data;
-
-              if (selectedSellOrders)
-                purchase({
-                  paymentOption,
-                  selectedSellOrders,
-                  retiring,
-                  retirementReason,
-                  country,
-                  stateProvince,
-                  postalCode,
-                  email,
-                  name,
-                  savePaymentMethod,
-                  createActiveAccount,
-                });
-            }}
-            goToChooseCredits={() => handleActiveStep(0)}
-            imgSrc="/svg/info-with-hand.svg"
-            country={cardDetails?.country || 'US'}
-          />
         )}
       </div>
       <LoginFlow

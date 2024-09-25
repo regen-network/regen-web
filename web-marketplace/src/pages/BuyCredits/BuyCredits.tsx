@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
+
+import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
@@ -14,8 +17,12 @@ import { useSummarizePayment } from './hooks/useSummarizePayment';
 
 export const BuyCredits = () => {
   const { _ } = useLingui();
+  const { projectId } = useParams();
+  const navigate = useNavigate();
+
   const {
     sanityProject,
+    loadingSanityProject,
     // The following var might be used on the OrderSummarCard
     // projectBySlug,
     // loadingProjectBySlug,
@@ -32,10 +39,30 @@ export const BuyCredits = () => {
   } = useGetProject();
 
   const [paymentOption, setPaymentOption] = useState<PaymentOptionsType>(
-    sanityProject?.fiatSellOrders && sanityProject?.fiatSellOrders.length > 0
-      ? PAYMENT_OPTIONS.CARD
-      : PAYMENT_OPTIONS.CRYPTO,
+    PAYMENT_OPTIONS.CRYPTO,
   );
+  const { wallet, loaded } = useWallet();
+
+  useEffect(() => {
+    // If there are some sell orders available for fiat purchase, default to 'card' option
+    if (
+      !loadingSanityProject &&
+      sanityProject?.fiatSellOrders &&
+      sanityProject?.fiatSellOrders.length > 0
+    )
+      setPaymentOption(PAYMENT_OPTIONS.CARD);
+    else if (!loadingSanityProject && loaded && !wallet?.address)
+      // Else if there's no connected wallet address, redirect to project page
+      navigate(`/project/${projectId}`, { replace: true });
+  }, [
+    sanityProject?.fiatSellOrders,
+    loadingSanityProject,
+    loaded,
+    wallet?.address,
+    navigate,
+    projectId,
+  ]);
+
   const [retiring, setRetiring] = useState<boolean>(true);
   const [confirmationTokenId, setConfirmationTokenId] = useState<
     string | undefined

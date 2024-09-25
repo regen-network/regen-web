@@ -43,4 +43,8 @@ ChooseCredits.args = {
   cardSellOrders,
   allowedDenoms,
   onPrev: action('prev'),
+  isConnected: true,
+  setupWalletModal: action('setupWalletModal'),
+  paymentOptionCryptoClicked: false,
+  setPaymentOptionCryptoClicked: () => {},
 };

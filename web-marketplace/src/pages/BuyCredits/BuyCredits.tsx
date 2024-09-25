@@ -44,16 +44,10 @@ export const BuyCredits = () => {
   const { wallet, loaded } = useWallet();
 
   useEffect(() => {
-    // If there are some sell orders available for fiat purchase, default to 'card' option
     if (
       !loadingSanityProject &&
       !loadingBuySellOrders &&
-      cardSellOrders.length > 0
-    )
-      setPaymentOption(PAYMENT_OPTIONS.CARD);
-    else if (
-      !loadingSanityProject &&
-      !loadingBuySellOrders &&
+      cardSellOrders.length === 0 &&
       ((loaded && !wallet?.address) || isBuyFlowDisabled)
     )
       // Else if there's no connected wallet address or buy disabled, redirect to project page

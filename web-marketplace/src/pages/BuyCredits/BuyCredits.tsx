@@ -16,12 +16,13 @@ export const BuyCredits = () => {
   const { _ } = useLingui();
   const {
     sanityProject,
-    projectBySlug,
-    loadingProjectBySlug,
-    projectByOnChainId,
-    loadingProjectByOnChainId,
-    offchainProjectByIdData,
-    loadingOffchainProjectById,
+    // The following var might be used on the OrderSummarCard
+    // projectBySlug,
+    // loadingProjectBySlug,
+    // projectByOnChainId,
+    // loadingProjectByOnChainId,
+    // offchainProjectByIdData,
+    // loadingOffchainProjectById,
     isBuyFlowDisabled,
     projectsWithOrderData,
     onChainProjectId,
@@ -42,7 +43,12 @@ export const BuyCredits = () => {
   const [paymentMethodId, setPaymentMethodId] = useState<string | undefined>();
   const [cardDetails, setCardDetails] = useState<CardDetails | undefined>();
 
-  const formModel = getFormModel({ _, paymentOption, retiring });
+  const formModel = getFormModel({
+    _,
+    paymentOption,
+    retiring,
+    projectId: onChainProjectId ?? offChainProject?.id,
+  });
   const sellOrders = useMemo(
     () => projectsWithOrderData?.[0]?.sellOrders || [],
     [projectsWithOrderData],
@@ -83,7 +89,9 @@ export const BuyCredits = () => {
                 offChainProject?.onChainId ??
                 onChainProjectId
               }`}
+              confirmationTokenId={confirmationTokenId}
               setConfirmationTokenId={setConfirmationTokenId}
+              paymentMethodId={paymentMethodId}
               setPaymentMethodId={setPaymentMethodId}
               setCardDetails={setCardDetails}
               cardDetails={cardDetails}

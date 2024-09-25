@@ -11,6 +11,7 @@ export interface Props extends RegenModalProps {
   wallets: LoginProvider[];
   socialProviders: LoginProvider[];
   onEmailSubmit: (values: EmailFormSchemaType) => Promise<void>;
+  onlyWallets?: boolean;
 }
 
 const LoginModal = ({
@@ -20,6 +21,7 @@ const LoginModal = ({
   wallets,
   socialProviders,
   onEmailSubmit,
+  onlyWallets,
 }: Props): JSX.Element => {
   const isSelectState = state === 'select';
   return (
@@ -30,6 +32,7 @@ const LoginModal = ({
             wallets={wallets}
             socialProviders={socialProviders}
             onEmailSubmit={onEmailSubmit}
+            onlyWallets={onlyWallets}
           />
         )}
       </Box>

@@ -117,6 +117,7 @@ export const usePurchase = () => {
                   );
                   if (error) {
                     setErrorBannerTextAtom(String(error));
+                    return;
                   }
                   // this will go to the last "Complete" step, we should redirect to the certificate page APP-361
                   // there, we need to getGetTxsEventQuery + show success modal
@@ -134,6 +135,7 @@ export const usePurchase = () => {
                     // This point is only reached if there's an immediate error when
                     // confirming the payment. Show the error to your customer (for example, payment details incomplete)
                     setErrorBannerTextAtom(String(error.message));
+                    return;
                   }
                   if (
                     paymentIntent?.client_secret &&
@@ -146,6 +148,7 @@ export const usePurchase = () => {
                       );
                     if (actionError) {
                       setErrorBannerTextAtom(String(actionError.message));
+                      return;
                     }
                   }
                   handleSuccess();

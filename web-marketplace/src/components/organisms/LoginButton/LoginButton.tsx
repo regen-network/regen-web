@@ -18,9 +18,10 @@ import { ButtonSize } from './LoginButton.types';
 
 type Props = {
   size?: ButtonSize;
+  onlyWallets?: boolean;
 };
 
-const LoginButton = ({ size = 'small' }: Props) => {
+const LoginButton = ({ size = 'small', onlyWallets }: Props) => {
   const styles = useLoginButtonStyles();
   const { wallet } = useWallet();
   const {
@@ -58,6 +59,7 @@ const LoginButton = ({ size = 'small' }: Props) => {
           onModalClose={onModalClose}
           wallets={walletsUiConfig}
           modalState={modalState}
+          onlyWallets={onlyWallets}
         />
       </div>
     </>

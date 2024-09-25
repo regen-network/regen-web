@@ -26,6 +26,7 @@ type Props = {
   qrCodeUri?: string;
   createProject?: boolean;
   isConnectingRef?: React.MutableRefObject<boolean>;
+  onlyWallets?: boolean;
 };
 
 const LoginFlow = ({
@@ -35,6 +36,7 @@ const LoginFlow = ({
   modalState,
   createProject,
   isConnectingRef,
+  onlyWallets,
 }: Props) => {
   const { _ } = useLingui();
   const {
@@ -64,6 +66,7 @@ const LoginFlow = ({
           await onEmailSubmit({ email, callback: onModalClose });
         }}
         state={modalState}
+        onlyWallets={onlyWallets}
       />
       <EmailConfirmationModal
         resendText={getResendCodeLabel({ resendTimeLeft, _ })}

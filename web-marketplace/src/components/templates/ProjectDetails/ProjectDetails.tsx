@@ -36,7 +36,6 @@ import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldO
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { CREATE_POST_DISABLED_TOOLTIP_TEXT } from 'pages/Dashboard/MyProjects/MyProjects.constants';

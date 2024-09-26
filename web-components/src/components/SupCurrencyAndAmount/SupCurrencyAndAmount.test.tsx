@@ -1,11 +1,10 @@
 import { render } from '@testing-library/react';
 import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
-
-import { CURRENCIES } from 'web-marketplace/src/components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { USD_DENOM } from 'web-marketplace/src/config/allowedBaseDenoms';
 
 describe('SupCurrencyAndAmount', () => {
   it('renders the currency symbol and amount', () => {
-    const currency = CURRENCIES.usd;
+    const currency = USD_DENOM;
     const amount = '100.00';
 
     const { getByText } = render(

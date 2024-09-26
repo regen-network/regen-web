@@ -2,13 +2,13 @@ import { ChangeEvent, lazy, useCallback } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
-import { CURRENCIES } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import {
@@ -63,8 +63,8 @@ export const CurrencyInput = ({
     (askDenom: string) => {
       setValue(
         CURRENCY,
-        askDenom === CURRENCIES.usd
-          ? { askDenom: CURRENCIES.usd, askBaseDenom: CURRENCIES.usd }
+        askDenom === USD_DENOM
+          ? { askDenom: USD_DENOM, askBaseDenom: USD_DENOM }
           : {
               askDenom,
               askBaseDenom: cryptoCurrencies.filter(

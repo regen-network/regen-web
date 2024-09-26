@@ -1,10 +1,9 @@
 import { Option } from 'web-components/src/components/inputs/new/CustomSelect/CustomSelect.types';
-import { CryptoCurrencies } from 'web-marketplace/src/components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 type SelectOptionProps = {
   option: Option;
   ariaLabel: string;
-  handleSelect: (currency: CryptoCurrencies | string) => void;
+  handleSelect: (currency: string) => void;
 };
 
 export const SelectOption = ({
@@ -16,7 +15,7 @@ export const SelectOption = ({
     if (option?.value && 'value' in option) {
       handleSelect(option.value);
     } else if (option?.component?.label) {
-      handleSelect(option.component.label as CryptoCurrencies);
+      handleSelect(option.component.label);
     }
   };
 

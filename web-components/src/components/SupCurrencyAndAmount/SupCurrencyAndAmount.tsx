@@ -1,4 +1,4 @@
-import { CURRENCIES } from 'web-marketplace/src/components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { USD_DENOM } from 'web-marketplace/src/config/allowedBaseDenoms';
 
 export function SupCurrencyAndAmount({
   price,
@@ -9,7 +9,7 @@ export function SupCurrencyAndAmount({
   currencyCode: string;
   className?: string;
 }) {
-  return currencyCode === CURRENCIES.usd ? (
+  return currencyCode === USD_DENOM ? (
     <>
       <span className="align-top text-xs">$</span>
       <span className={className}>{price.toFixed(2)}</span>

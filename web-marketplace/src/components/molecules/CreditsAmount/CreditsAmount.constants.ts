@@ -1,14 +1,10 @@
 import { msg } from '@lingui/macro';
 
-import { CURRENCIES } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
-
 export const CREDITS_AMOUNT = 'creditsAmount';
 export const CURRENCY_AMOUNT = 'currencyAmount';
 export const CURRENCY = 'currency';
 export const CREDIT_VINTAGE_OPTIONS = 'creditVintageOptions';
 export const SELL_ORDERS = 'sellOrders';
-
-export const DEFAULT_CRYPTO_CURRENCY = CURRENCIES.uregen;
 
 export const cryptoOptions = [
   {

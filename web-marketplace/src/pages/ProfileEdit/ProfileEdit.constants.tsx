@@ -37,40 +37,40 @@ export const profileVariantMapping: Record<AccountType, ProfileVariant> = {
 
 export const dashboardNavSections: DashboardNavSection[] = [
   {
-    heading: 'Orders',
+    heading: msg`Orders`,
     items: [
       {
-        name: 'My Orders',
+        name: msg`My Orders`,
         icon: <ShoppingBagIcon linearGradient />,
-        href: '/profile/edit/my-orders',
+        href: '/profile/edit/orders',
       },
       {
-        name: 'My prefinance projects',
+        name: msg`My prefinance projects`,
         icon: <PrefinanceIcon linearGradient width="24" height="24" />,
         href: '/profile/edit/prefinance-projects',
       },
       {
-        name: 'Saved payment info',
+        name: msg`Saved payment info`,
         icon: <PaymentInfoIcon linearGradient />,
-        href: '/profile/edit/saved-payment-info',
+        href: '/profile/edit/payment-info',
       },
     ],
   },
   {
-    heading: 'Profile',
+    heading: msg`Profile`,
     items: [
       {
-        name: 'Edit Profile',
+        name: msg`Edit Profile`,
         icon: <UserMenuIcon linearGradient />,
         href: '/profile/edit/profile',
       },
       {
-        name: 'Settings',
+        name: msg`Settings`,
         icon: <CogIcon linearGradient />,
         href: '/profile/edit/settings',
       },
       {
-        name: 'Email updates',
+        name: msg`Email updates`,
         icon: <EnvelopeIcon linearGradient />,
         href: '/profile/email-updates',
       },

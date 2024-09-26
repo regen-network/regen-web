@@ -1,3 +1,5 @@
+import { MessageDescriptor } from '@lingui/core';
+
 export type SocialProvider = {
   id: 'google';
   name: string;
@@ -6,12 +8,12 @@ export type SocialProvider = {
 };
 
 export type DashboardNavSection = {
-  heading: string;
+  heading: MessageDescriptor;
   items: DashboardNavItem[];
 };
 
 type DashboardNavItem = {
-  name: string;
+  name: MessageDescriptor;
   icon: JSX.Element;
   href: string;
 };

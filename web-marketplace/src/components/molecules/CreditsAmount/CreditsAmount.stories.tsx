@@ -14,6 +14,7 @@ import {
   cryptoCurrencies,
   cryptoSellOrders,
 } from './CreditsAmount.mock';
+import { Currency } from './CreditsAmount.types';
 
 export default {
   title: 'Marketplace/Molecules/CreditsAmount',

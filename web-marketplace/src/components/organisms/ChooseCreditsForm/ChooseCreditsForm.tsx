@@ -1,6 +1,7 @@
 import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
+import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import {
   CREDIT_VINTAGE_OPTIONS,
@@ -21,7 +22,6 @@ import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
-import { CURRENCIES } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { AllowedDenoms } from 'components/molecules/DenomLabel/DenomLabel.utils';
 
 import { CryptoOptions } from './ChooseCreditsForm.CryptoOptions';
@@ -89,8 +89,8 @@ export function ChooseCreditsForm({
 
   const cardCurrency = useMemo(
     () => ({
-      askDenom: CURRENCIES.usd,
-      askBaseDenom: CURRENCIES.usd,
+      askDenom: USD_DENOM,
+      askBaseDenom: USD_DENOM,
     }),
     [],
   );

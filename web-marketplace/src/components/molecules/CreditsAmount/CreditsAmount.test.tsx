@@ -1,4 +1,5 @@
 import userEvent from '@testing-library/user-event';
+import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { render, screen } from 'web-marketplace/test/test-utils';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
@@ -9,7 +10,7 @@ import { cardSellOrders, cryptoCurrencies } from './CreditsAmount.mock';
 describe('CreditsAmount', () => {
   const formDefaultValues = {
     paymentOption: PAYMENT_OPTIONS.CARD,
-    currency: { askDenom: CURRENCIES.usd, askBaseDenom: CURRENCIES.usd },
+    currency: { askDenom: USD_DENOM, askBaseDenom: USD_DENOM },
     spendingCap: 3185,
     setSpendingCap: () => {},
     creditsAvailable: 1125,

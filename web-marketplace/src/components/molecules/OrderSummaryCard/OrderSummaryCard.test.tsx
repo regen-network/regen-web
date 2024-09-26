@@ -1,10 +1,10 @@
 import { screen } from '@testing-library/dom';
+import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { render } from 'web-marketplace/test/test-utils';
 
 import { fireEvent } from 'web-components/test/test-utils';
 
 import { allowedDenoms } from '../CreditsAmount/CreditsAmount.mock';
-import { CURRENCIES } from '../DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { OrderSummaryCard } from './OrderSummaryCard';
 import { OrderSummaryProps } from './OrderSummaryCard.types';
 
@@ -12,7 +12,7 @@ describe('OrderSummaryCard', () => {
   const orderSummary: OrderSummaryProps = {
     order: {
       projectName: 'Project Name',
-      currency: { askDenom: CURRENCIES.usd, askBaseDenom: CURRENCIES.usd },
+      currency: { askDenom: USD_DENOM, askBaseDenom: USD_DENOM },
       pricePerCredit: 10,
       credits: 5,
       image: 'path/to/image',

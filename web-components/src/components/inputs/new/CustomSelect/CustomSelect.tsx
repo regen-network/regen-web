@@ -1,6 +1,5 @@
 import { ComponentType, useEffect, useState } from 'react';
 import { Option } from 'web-components/src/components/inputs/new/CustomSelect/CustomSelect.types';
-import { CryptoCurrencies } from 'web-marketplace/src/components/molecules/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 
 import { SelectOption } from './CustomSelect.Option';
 import { Placeholder } from './CustomSelect.Placeholder';
@@ -13,7 +12,7 @@ const CustomSelect = ({
   placeholderAriaLabel,
 }: {
   options: Option[];
-  onSelect: (currency: CryptoCurrencies | string) => void;
+  onSelect: (currency: string) => void;
   defaultOption: string;
   selectAriaLabel: string;
   placeholderAriaLabel: string;
@@ -24,7 +23,7 @@ const CustomSelect = ({
     () => options[0].component?.element as ComponentType,
   );
 
-  const handleSelect = (option: CryptoCurrencies | string) => {
+  const handleSelect = (option: string) => {
     setSelectedOption(option);
     onSelect(option);
     setIsOpen(false);

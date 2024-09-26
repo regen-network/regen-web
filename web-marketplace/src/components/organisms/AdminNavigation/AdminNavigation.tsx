@@ -1,4 +1,3 @@
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import {
   List,
@@ -9,29 +8,32 @@ import {
   ListSubheader,
 } from '@mui/material';
 
-import { dashboardNavSections } from './ProfileEdit.constants';
-import { DashboardNavSection } from './ProfileEdit.types';
+import { AdminNavigationSection } from './AdminNavigation.types';
+import { isSelected } from './AdminNavigation.utils';
 
-type DashboardNavProps = {
+export type AdminNavigationProps = {
   className?: string;
-  sections: DashboardNavSection[];
+  sections: AdminNavigationSection[];
+  onNavItemClick: (sectionName: string) => void;
+  currentPath: string;
 };
 
-const DashboardNav = ({ className, sections }: DashboardNavProps) => {
-  const navigate = useNavigate();
-  const location = useLocation();
+export const AdminNavigation = ({
+  className = '',
+  sections,
+  onNavItemClick,
+  currentPath,
+}: AdminNavigationProps) => {
   const { _ } = useLingui();
 
-  // TODO: implement savedPaymentInfo
-  const savedPaymentInfo = false;
+  // TODO: implement savedPaymentInfo to check if there's any payment info saved
+  const savedPaymentInfo = true;
 
   if (!savedPaymentInfo) {
-    // If there is no saved payment info remove the item from sections
+    // If there is no saved payment info remove the item from the nav
     sections = sections.map(section => ({
       ...section,
-      items: section.items.filter(
-        item => item.href !== '/profile/edit/payment-info',
-      ),
+      items: section.items.filter(item => item.path !== 'payment-info'),
     }));
   }
 
@@ -58,8 +60,8 @@ const DashboardNav = ({ className, sections }: DashboardNavProps) => {
               <ListItemButton
                 disableRipple
                 className="flex p-2 cursor-pointer"
-                onClick={() => navigate(item.href)}
-                selected={item.href === location.pathname}
+                onClick={() => onNavItemClick(item.path)}
+                selected={isSelected(item.path, currentPath)}
                 sx={{
                   '&.Mui-selected, &.Mui-selected:hover': {
                     backgroundColor: 'rgb(239, 239, 239)',
@@ -82,8 +84,4 @@ const DashboardNav = ({ className, sections }: DashboardNavProps) => {
       ))}
     </nav>
   );
-};
-
-export const ProfileEditNav = () => {
-  return <DashboardNav sections={dashboardNavSections} />;
 };

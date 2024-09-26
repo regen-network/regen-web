@@ -17,13 +17,14 @@ import { DISCARD_CHANGES_TITLE } from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
+import { AdminNavigation } from 'components/organisms/AdminNavigation/AdminNavigation';
+import { adminNavigationSections } from 'components/organisms/AdminNavigation/AdminNavigation.constants';
 
 import {
   DISCARD_CHANGES_BODY,
   DISCARD_CHANGES_BUTTON,
 } from '../../lib/constants/shared.constants';
 import { usePathSection } from './hooks/usePathSection';
-import { ProfileEditNav } from './ProfileEdit.Nav';
 import { ViewProfileButton } from './ProfileEdit.ViewProfile';
 
 export const ProfileEdit = () => {
@@ -88,13 +89,10 @@ export const ProfileEdit = () => {
             />
           </div>
         </div>
-        <ProfileEditNav
-          section={section}
-          onNavClick={onNavClick}
-          className={cn(
-            'flex-col lg:flex w-full lg:w-fit md:mr-50',
-            section ? 'hidden' : 'flex',
-          )}
+        <AdminNavigation
+          sections={adminNavigationSections}
+          onNavItemClick={onNavClick}
+          currentPath={pathname}
         />
         <Flex
           sx={{

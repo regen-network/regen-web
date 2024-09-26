@@ -9,6 +9,7 @@ import { getProjectByIdQuery as getOffChainProjectByIdQuery } from 'lib/queries/
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 
@@ -23,6 +24,7 @@ export const useGetProject = () => {
   const { projectId } = useParams();
   const graphqlClient = useApolloClient();
   const { ecocreditClient } = useLedger();
+  const { wallet } = useWallet();
 
   // First, check if projectId is an on-chain project id
   // or an off-chain project UUID.
@@ -113,7 +115,10 @@ export const useGetProject = () => {
   );
 
   const sellOrders = useMemo(
-    () => projectsWithOrderData?.[0]?.sellOrders || [],
+    () =>
+      (projectsWithOrderData?.[0]?.sellOrders || []).filter(
+        sellOrder => sellOrder.seller !== wallet?.address,
+      ),
     [projectsWithOrderData],
   );
 

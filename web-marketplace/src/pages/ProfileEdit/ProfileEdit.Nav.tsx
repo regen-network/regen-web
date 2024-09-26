@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import {
   List,
@@ -21,41 +20,41 @@ type DashboardNavProps = {
 const DashboardNav = ({ className, sections }: DashboardNavProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { _ } = useLingui();
 
   // TODO: implement savedPaymentInfo
-  const savedPaymentInfo = true;
+  const savedPaymentInfo = false;
 
   if (!savedPaymentInfo) {
-    // If there is no saved payment info remove the item from navSections
-    sections = sections.map(navSection => {
-      if (navSection.heading === 'Orders') {
-        navSection.items = navSection.items.filter(
-          item => item.href !== '/profile/edit/saved-payment-info',
-        );
-      }
-      return navSection;
-    });
+    // If there is no saved payment info remove the item from sections
+    sections = sections.map(section => ({
+      ...section,
+      items: section.items.filter(
+        item => item.href !== '/profile/edit/payment-info',
+      ),
+    }));
   }
 
   return (
     <nav className={className}>
-      {sections.map(navSection => (
+      {sections.map(section => (
         <List
-          key={navSection.heading}
-          aria-labelledby={`${navSection.heading.toLowerCase()}-list-subheader`}
+          key={_(section.heading)}
+          aria-labelledby={`${_(section.heading).toLowerCase()}-list-subheader`}
           subheader={
             <ListSubheader
-              component="div"
+              id={`${_(section.heading).toLowerCase()}-list-subheader`}
               className="bg-transparent text-gray-700 uppercase font-extrabold tracking-wider font-muli"
-              id={`${navSection.heading.toLowerCase()}-list-subheader`}
+              component="div"
+              disableSticky
             >
-              {navSection.heading}
+              {_(section.heading)}
             </ListSubheader>
           }
-          className="mb-4"
+          className="mb-15"
         >
-          {navSection.items.map(item => (
-            <ListItem key={item.name} disablePadding className="pb-1">
+          {section.items.map(item => (
+            <ListItem key={_(item.name)} disablePadding className="pb-1">
               <ListItemButton
                 disableRipple
                 className="flex p-2 cursor-pointer"
@@ -75,7 +74,7 @@ const DashboardNav = ({ className, sections }: DashboardNavProps) => {
                 <ListItemIcon className="min-w-[40px]">
                   {item.icon}
                 </ListItemIcon>
-                <ListItemText className="w-full">{item.name}</ListItemText>
+                <ListItemText className="w-full">{_(item.name)}</ListItemText>
               </ListItemButton>
             </ListItem>
           ))}

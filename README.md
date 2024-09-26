@@ -182,12 +182,29 @@ Regen codebase use [lingui](https://lingui.dev/) Internationalization Framework.
 
 **Lingui package usage:**
 
-- static text in JSX: `<Trans>{'static text'}</Trans>`
-- attributes: \_(msg\`static text\`)
-- constants:
-  - const elements = [msg\`some element\`]
-  - \_(elements[0])
+ * static text in JSX: 
+```
+<Trans>{'static text'}</Trans>
+```
+* attributes: 
+```
+  const { _ } = useLingui();
+  _(msg\`static text\`)
+  ```
+* constants:
+```
+  const elements = [msg\`some element\`]
+  _(elements[0])
+```
+  - If the constant is an object:
+```
+import { i18n } from '@lingui/core';
+import { msg } from '@lingui/macro';
 
+const myObject = {
+  myKey: i18n._(msg`MyValue`)
+}
+```
 **Lingui CLI usage:**
 
 Run `i18n:extract` inside `web-marketplace` to update the `.po` files with the newly added translation keys (with `<Trans>` or `_(msg)`).

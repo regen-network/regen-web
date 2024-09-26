@@ -124,8 +124,9 @@ export const CreditsAmount = ({
       });
       setValue(CURRENCY_AMOUNT, currencyAmount);
       setValue(SELL_ORDERS, sellOrders);
+      trigger();
     },
-    [card, orderedSellOrders, setValue, creditTypePrecision],
+    [card, orderedSellOrders, setValue, creditTypePrecision, trigger],
   );
 
   // Currency amount change
@@ -142,8 +143,9 @@ export const CreditsAmount = ({
       });
       setValue(CREDITS_AMOUNT, currentCreditsAmount);
       setValue(SELL_ORDERS, sellOrders);
+      trigger();
     },
-    [card, orderedSellOrders, setValue, creditTypePrecision],
+    [card, orderedSellOrders, setValue, creditTypePrecision, trigger],
   );
 
   const displayDenom = findDisplayDenom({

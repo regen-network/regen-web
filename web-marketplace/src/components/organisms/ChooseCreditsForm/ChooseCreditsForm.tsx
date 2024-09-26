@@ -162,9 +162,13 @@ export function ChooseCreditsForm({
   useEffect(() => {
     // If there are some sell orders available for fiat purchase, default to 'card' option
     if (cardSellOrders.length > 0) {
-      handlePaymentOptions(PAYMENT_OPTIONS.CARD); // just run this once
+      setPaymentOption(PAYMENT_OPTIONS.CARD);
+      form.setValue(CREDIT_VINTAGE_OPTIONS, []);
+      form.setValue(CURRENCY, cardCurrency);
+      form.setValue(CREDITS_AMOUNT, 0);
+      form.setValue(CURRENCY_AMOUNT, 0);
     }
-  }, [cardSellOrders.length]);
+  }, [cardSellOrders.length]); // just run this once
 
   useEffect(() => {
     if (paymentOptionCryptoClicked && isConnected) {

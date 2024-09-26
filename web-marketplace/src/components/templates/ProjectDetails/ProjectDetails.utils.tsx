@@ -301,9 +301,9 @@ export const getCardSellOrders = (
 ) =>
   sanityFiatSellOrders
     ?.map(fiatOrder => {
-      const sellOrder = sellOrders.filter(
+      const sellOrder = sellOrders.find(
         cryptoOrder => cryptoOrder.id.toString() === fiatOrder?.sellOrderId,
-      )?.[0];
+      );
       if (sellOrder) {
         return {
           ...fiatOrder,

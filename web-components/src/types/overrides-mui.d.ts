@@ -16,7 +16,7 @@ declare module '@mui/material/styles' {
       dark?: string;
       contrastText: string;
     };
-    green: {
+    green?: {
       light?: string;
       main?: string;
       dark?: string;
@@ -31,7 +31,7 @@ declare module '@mui/material/styles' {
       dark?: string;
       contrastText: string;
     };
-    green: {
+    green?: {
       light?: string;
       main?: string;
       dark?: string;

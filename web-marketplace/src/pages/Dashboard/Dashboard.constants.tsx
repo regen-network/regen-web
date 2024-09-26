@@ -8,6 +8,8 @@ import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 import { ProjectPageIcon } from 'web-components/src/components/icons/ProjectPageIcon';
 
+import { NOT_SUPPORTED_TOOLTIP_TEXT } from './MyProjects/MyProjects.constants';
+
 const className = 'pl-20';
 const labelClassName = 'text-sm';
 
@@ -51,6 +53,7 @@ export const EDIT_PROFILE = {
   icon: <EditIcon className="w-[24px] h-[24px] text-[18px]" linearGradient />,
   labelClassName,
   className,
+  disabledTooltipText: NOT_SUPPORTED_TOOLTIP_TEXT,
 };
 export const PROFILE_SETTINGS = {
   label: msg`Settings`,
@@ -58,4 +61,5 @@ export const PROFILE_SETTINGS = {
   icon: <CogIcon linearGradient />,
   labelClassName,
   className,
+  disabledTooltipText: NOT_SUPPORTED_TOOLTIP_TEXT,
 };

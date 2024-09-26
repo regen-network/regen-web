@@ -6,10 +6,11 @@ import { cn } from '../../../utils/styles/cn';
 
 type UseNavLinkStylesParams = {
   isActive: boolean;
+  disabled?: boolean;
 };
 
 export const useNavLinkStyles = makeStyles<UseNavLinkStylesParams>()(
-  (theme, { isActive }) => ({
+  (theme, { isActive, disabled }) => ({
     navLink: {
       color: theme.palette.primary.contrastText,
       textDecoration: 'none',
@@ -21,7 +22,9 @@ export const useNavLinkStyles = makeStyles<UseNavLinkStylesParams>()(
         isActive ? theme.palette.secondary.main : 'transparent'
       }`,
       '&:hover': {
-        borderBottom: `2px solid ${theme.palette.secondary.main}`,
+        borderBottom: `2px solid ${
+          disabled ? 'transparent' : theme.palette.secondary.main
+        }`,
       },
       '&:link, &:visited, &:hover, &:active': {
         textDecoration: 'none',
@@ -36,6 +39,7 @@ export type NavLinkProps = {
   pathname: string;
   overrideClassname?: string;
   className?: string;
+  disabled?: boolean;
 };
 
 export const NavLink: React.FC<React.PropsWithChildren<NavLinkProps>> = ({

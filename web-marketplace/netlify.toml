@@ -29,7 +29,6 @@ VITE_BRIDGE = "true"
 VITE_SKIPPED_CLASS_ID = ""
 
 [context.deploy-preview.environment]
-VITE_SANITY_TAG = "default"
 VITE_SANITY_DATASET = "staging"
 VITE_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
 VITE_API_URI = "https://api-staging.regen.network"

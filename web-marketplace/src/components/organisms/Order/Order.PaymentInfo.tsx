@@ -13,8 +13,8 @@ export const OrderPaymentInfo = ({
   title,
   data,
 }: OrderSummarySectionProps) => {
-  const { nameOnCard, denom, cardInfo } = data as PaymentInfoData;
-  const isCardPayment = nameOnCard && cardInfo && denom === 'usd';
+  const { nameOnCard, denom, cardLast4 } = data as PaymentInfoData;
+  const isCardPayment = nameOnCard && cardLast4 && denom === 'usd';
   const { _ } = useLingui();
   return (
     <section className="flex gap-20">
@@ -32,9 +32,9 @@ export const OrderPaymentInfo = ({
             <OrderSummaryRow
               title={_(msg`card info`)}
               value={
-                <p>
-                  {_(msg`Visa ending in`)} {cardInfo}
-                </p>
+                <span>
+                  {_(msg`Visa ending in`)} {cardLast4}
+                </span>
               }
               className="flex items-center"
             />

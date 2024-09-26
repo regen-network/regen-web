@@ -29,7 +29,7 @@ export const OrderRetirementInfo = ({
         {isTradable ? (
           <OrderSummaryRow
             title={_(msg`Tradable Credits`)}
-            value={tradableCredits}
+            value={<span className="italic">{tradableCredits}</span>}
             clampDescription={false}
           />
         ) : (

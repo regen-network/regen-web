@@ -31,11 +31,11 @@ const labelConfig: LabelConfig = {
   [ORDER_STATUS.delivered]: {
     variant: 'success' as InfoLabelVariant,
     label: CREDITS_DELIVERED,
-    labelColor: 'text-brand-400',
+    labelColor: 'text-brand-500',
     icon: (
       <ArrowDownIcon
         sx={theme => ({
-          color: theme.palette.secondary.main,
+          color: theme.palette.green?.dark,
           display: 'flex',
           alignItems: 'center',
         })}
@@ -70,7 +70,7 @@ export const OrderLabel = ({
       variant={variant}
       label={_(label)}
       sx={{ padding: '6px 10px', borderRadius: '50px' }}
-      labelClassName={`${labelColor} text-xs font-extrabold`}
+      labelClassName={`${labelColor} text-xs font-bold`}
       icon={icon}
       wrapperClassName={wrapperClassName}
     />

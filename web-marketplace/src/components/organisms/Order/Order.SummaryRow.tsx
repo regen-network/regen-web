@@ -5,17 +5,19 @@ export const OrderSummaryRow = ({
   value,
   className = '',
   clampDescription = true,
+  titleClassName = '',
 }: {
   title: string | JSX.Element;
   value: string | boolean | null | JSX.Element;
   className?: string;
   clampDescription?: boolean;
+  titleClassName?: string;
 }) => {
   return (
     <div className={`grid grid-cols-[105px_auto] mb-10 ${className}`}>
       <Title
         variant="h6"
-        className="text-grey-400 text-xs font-extrabold font-['Lato'] uppercase tracking-[1px] mt-[3px]"
+        className={`text-grey-400 text-xs font-extrabold font-['Lato'] uppercase tracking-[1px] mt-[3px] ${titleClassName}`}
       >
         {title}
       </Title>

@@ -34,14 +34,18 @@ export const OrderCredits = ({
               <SupCurrencyAndAmount
                 price={+price}
                 currencyCode={denom}
-                className="mr-10"
+                className="mr-10 text-base"
               />
-              <DenomIconWithCurrency currency={denom} />
+              <DenomIconWithCurrency currency={denom} className="mt-5" />
             </div>
           }
         />
-        <OrderSummaryRow title={_(msg`# credits`)} value={credits} />
-        <hr className="w-full inline-block border-solid border-0 border-b-[1px] border-grey-300" />
+        <OrderSummaryRow
+          title={_(msg`# credits`)}
+          titleClassName="mt-[6px]"
+          value={<span className="text-base">{credits}</span>}
+        />
+        <hr className="w-full inline-block border-solid border-0 border-b-[1px] border-grey-300 mb-10" />
         <OrderSummaryRow
           title={_(msg`total price`)}
           value={
@@ -51,7 +55,7 @@ export const OrderCredits = ({
                 currencyCode={denom}
                 className="mr-10 text-lg pb-5"
               />
-              <DenomIconWithCurrency currency={denom} />
+              <DenomIconWithCurrency currency={denom} className="mt-5" />
             </div>
           }
           className="flex items-baseline"

@@ -6,4 +6,4 @@ export const ORDER_STATUS = {
 } as const;
 
 export const CREDITS_DELIVERED = msg`Credits delivered`;
-export const CREDITS_ISSUANCE_PENDING = msg`credits issuance pending`;
+export const CREDITS_ISSUANCE_PENDING = msg`Credits issuance pending`;

@@ -12,17 +12,18 @@ import {
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import Card from 'web-components/src/components/cards/Card';
 import CertifiedDocumentIcon from 'web-components/src/components/icons/CertifiedDocumentIcon';
-import ReceiptIcon from 'web-components/src/components/icons/ReceiptIcon';
+// import ReceiptIcon from 'web-components/src/components/icons/ReceiptIcon';
 import { Image } from 'web-components/src/components/image';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
 import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
 import { Title } from 'web-components/src/components/typography';
 
+import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
+
 import { ORDER_STATUS } from './Order.constants';
 import { OrderLabel } from './Order.Label';
 import { OrderSummary } from './Order.Summary';
 import { OrderDataProps, RetirementInfoData } from './Order.types';
-import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
 
 export const Order = (orderData: OrderDataProps) => {
   const theme = useTheme();
@@ -74,7 +75,11 @@ export const Order = (orderData: OrderDataProps) => {
                   classNames={{ root: 'z-50 absolute top-10' }}
                 />
               )}
-              <Image className="z-40" src={project.imageSrc} width={1560} />
+              <Image
+                className="z-40 w-full h-auto max-w-full max-h-full object-contain"
+                src={project.imageSrc}
+                width={1560}
+              />
             </Avatar>
           ) : (
             <></>

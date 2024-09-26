@@ -220,7 +220,7 @@ describe('Order Component', () => {
               data: {
                 ...mockOrderData.order.paymentInfo.data,
                 nameOnCard: 'John Doe',
-                cardInfo: '1234',
+                cardLast4: '1234',
                 denom: 'usd',
               },
             },

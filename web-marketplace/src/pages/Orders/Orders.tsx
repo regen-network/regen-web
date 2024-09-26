@@ -75,37 +75,35 @@ export const Orders = () => {
   ];
 
   return (
-    <div className="bg-grey-100">
-      <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly max-w-[1140px] mx-auto p-10 lg:py-50 lg:px-15 min-h-screen">
-        <ProfileEditNav
-          section={section}
-          onNavClick={onNavClick}
-          className={cn(
-            'flex-col lg:flex w-full lg:w-fit md:mr-50',
-            section ? 'hidden' : 'flex',
-          )}
-        />
-        <Flex
-          sx={{
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-          className="w-full lg:w-[950px]"
-        >
-          <Flex justifyContent="space-between" className="mb-25 w-full">
-            <Title variant="h3">
-              <Trans>My Orders</Trans>
-            </Title>
-          </Flex>
-          <WithLoader isLoading={false} sx={{ mx: 'auto' }}>
-            <div className="w-full py-40 px-10 md:py-50 md:px-40 rounded-md border border-grey-200 bg-grey-0">
-              {orders.map((order, index) => (
-                <Order key={`${order.project.name}-${index}`} {...order} />
-              ))}
-            </div>
-          </WithLoader>
+    <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly max-w-[1140px] mx-auto p-10 lg:py-50 lg:px-15 min-h-screen">
+      <ProfileEditNav
+        section={section}
+        onNavClick={onNavClick}
+        className={cn(
+          'flex-col lg:flex w-full lg:w-fit md:mr-50',
+          section ? 'hidden' : 'flex',
+        )}
+      />
+      <Flex
+        sx={{
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+        className="w-full lg:w-[950px]"
+      >
+        <Flex justifyContent="space-between" className="mb-25 w-full">
+          <Title variant="h3">
+            <Trans>My Orders</Trans>
+          </Title>
         </Flex>
-      </div>
+        <WithLoader isLoading={false} sx={{ mx: 'auto' }}>
+          <div className="w-full rounded-md border border-grey-200 bg-grey-0">
+            {orders.map((order, index) => (
+              <Order key={`${order.project.name}-${index}`} {...order} />
+            ))}
+          </div>
+        </WithLoader>
+      </Flex>
     </div>
   );
 };

@@ -141,12 +141,26 @@ TradableOrder.args = {
   },
   order: {
     ...args.order,
+    credits: {
+      ...args.order.credits,
+      data: {
+        ...args.order.credits.data,
+        denom: 'usdc',
+      },
+    },
     retirementInfo: {
       ...args.order.retirementInfo,
       data: {
         ...args.order.retirementInfo.data,
         tradableCredits:
           'Credits were purchased in a tradable format and were not retired',
+      },
+    },
+    paymentInfo: {
+      ...args.order.paymentInfo,
+      data: {
+        ...args.order.paymentInfo.data,
+        denom: 'usdc',
       },
     },
   },

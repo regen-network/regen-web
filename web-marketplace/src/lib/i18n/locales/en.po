@@ -349,8 +349,8 @@ msgstr ""
 msgid "all profiles"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
-#: src/pages/Projects/Projects.tsx:74
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
+#: src/pages/Projects/Projects.tsx:73
 msgid "All projects"
 msgstr ""
 
@@ -645,7 +645,7 @@ msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
 #: src/features/marketplace/BridgeFlow/BridgeFlow.constants.ts:4
-#: src/pages/Dashboard/Dashboard.constants.tsx:45
+#: src/pages/Dashboard/Dashboard.constants.tsx:48
 msgid "Bridge"
 msgstr ""
 
@@ -1115,7 +1115,7 @@ msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:242
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/pages/Dashboard/Dashboard.constants.tsx:39
+#: src/pages/Dashboard/Dashboard.constants.tsx:42
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:93
 msgid "Credit Batches"
 msgstr ""
@@ -1174,7 +1174,7 @@ msgid "Credit class: the structure, procedures and requirements for project regi
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:28
-#: src/pages/Dashboard/Dashboard.constants.tsx:33
+#: src/pages/Dashboard/Dashboard.constants.tsx:36
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:87
 #: src/pages/Home/Home.tsx:177
 msgid "Credit Classes"
@@ -1276,6 +1276,10 @@ msgstr ""
 
 #: src/components/molecules/CreditsAmount/CreditsInput.tsx:43
 msgid "Credits Input"
+msgstr ""
+
+#: src/components/organisms/Order/Order.constants.ts:9
+msgid "Credits issuance pending"
 msgstr ""
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:64
@@ -1545,10 +1549,11 @@ msgid "edit profile"
 msgstr ""
 
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:115
-#: src/pages/Dashboard/Dashboard.constants.tsx:51
+#: src/pages/Dashboard/Dashboard.constants.tsx:54
 msgid "Edit profile"
 msgstr ""
 
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:38
 #: src/lib/constants/shared.constants.tsx:99
 msgid "Edit Profile"
 msgstr ""
@@ -1588,6 +1593,10 @@ msgstr ""
 
 #: src/pages/VerifyEmail/VerifyEmail.tsx:31
 msgid "Email resent! Please check your inbox."
+msgstr ""
+
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:48
+msgid "Email updates"
 msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:44
@@ -2525,7 +2534,7 @@ msgstr ""
 msgid "Please wait while transaction processes"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:21
+#: src/pages/Dashboard/Dashboard.constants.tsx:24
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:74
 msgid "Portfolio"
 msgstr ""
@@ -2568,8 +2577,8 @@ msgstr ""
 msgid "prefinance"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:49
-#: src/pages/Projects/Projects.tsx:84
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:54
+#: src/pages/Projects/Projects.tsx:83
 msgid "Prefinance projects"
 msgstr ""
 
@@ -2646,11 +2655,12 @@ msgstr ""
 msgid "Proceed with caution: this cannot be undone!"
 msgstr ""
 
-#: src/pages/ProfileEdit/ProfileEdit.Nav.tsx:22
+#: src/pages/Dashboard/Dashboard.constants.tsx:81
 msgid "profile"
 msgstr ""
 
-#: src/pages/ProfileEdit/ProfileEdit.constants.ts:7
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:35
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:7
 msgid "Profile"
 msgstr ""
 
@@ -2667,7 +2677,7 @@ msgstr ""
 msgid "Profile not found"
 msgstr ""
 
-#: src/pages/ProfileEdit/ProfileEdit.constants.ts:9
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:9
 msgid "Profile Saved"
 msgstr ""
 
@@ -2855,10 +2865,10 @@ msgid "PROJECTED:"
 msgstr ""
 
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:68
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:36
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:24
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:43
-#: src/pages/Dashboard/Dashboard.constants.tsx:27
+#: src/pages/Dashboard/Dashboard.constants.tsx:30
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:81
 msgid "Projects"
 msgstr ""
@@ -3151,6 +3161,11 @@ msgstr ""
 msgid "Save my credit card info for next time"
 msgstr ""
 
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:28
+#: src/pages/Dashboard/Dashboard.constants.tsx:103
+msgid "Saved payment info"
+msgstr ""
+
 #: src/components/organisms/AccountConnectWalletModal/components/AccountConnectWalletModal.Mobile.constants.ts:4
 #: src/components/organisms/LoginModal/components/LoginModal.Mobile.constants.ts:4
 msgid "Scan with the Keplr mobile app"
@@ -3270,12 +3285,12 @@ msgstr ""
 msgid "set up a Keplr wallet →"
 msgstr ""
 
-#: src/pages/ProfileEdit/ProfileEdit.Nav.tsx:23
 #: src/pages/ProjectEdit/ProjectEdit.Nav.tsx:29
 msgid "settings"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:59
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:43
+#: src/pages/Dashboard/Dashboard.constants.tsx:62
 #: src/pages/Settings/Settings.tsx:52
 msgid "Settings"
 msgstr ""
@@ -3836,7 +3851,7 @@ msgid "Unlock <0>Regenerative Finances</0><1>with <2>Regen Marketplace</2></1>"
 msgstr ""
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:69
-#: src/pages/ProfileEdit/ProfileEdit.constants.ts:12
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:12
 msgid "Unnamed"
 msgstr ""
 
@@ -4024,7 +4039,7 @@ msgstr ""
 msgid "view post"
 msgstr ""
 
-#: src/pages/ProfileEdit/ProfileEdit.constants.ts:8
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
 msgid "View Profile"
 msgstr ""
 
@@ -4070,6 +4085,10 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:193
 msgid "vintage period"
+msgstr ""
+
+#: src/components/organisms/Order/Order.PaymentInfo.tsx:36
+msgid "Visa ending in"
 msgstr ""
 
 #: src/features/marketplace/BridgeFlow/BridgeFlow.constants.ts:6

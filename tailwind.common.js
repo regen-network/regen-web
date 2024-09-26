@@ -12,6 +12,7 @@ module.exports = {
       // Make sure these guidelines are followed when adding new colors: https://tailwindcss.com/docs/customizing-colors#using-css-variables
       // Color variables should be added to tailwind.css.
       brand: {
+        500: 'rgb(var(--brand-500) / <alpha-value>)',
         400: 'rgb(var(--brand-400) / <alpha-value>)',
         300: 'rgb(var(--brand-300) / <alpha-value>)',
         200: 'rgb(var(--brand-200) / <alpha-value>)',

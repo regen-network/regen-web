@@ -57,6 +57,9 @@ const regenTheme = createTheme({
     orange: {
       contrastText: '#FBDBB6',
     },
+    green: {
+      dark: '#1A7D3C',
+    },
     grey: {
       50: '#FAFAFA',
       100: '#D2D5D9',

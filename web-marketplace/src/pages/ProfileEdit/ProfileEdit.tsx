@@ -90,6 +90,7 @@ export const ProfileEdit = () => {
           </div>
         </div>
         <AdminNavigation
+          className="hidden lg:block"
           sections={adminNavigationSections}
           onNavItemClick={onNavClick}
           currentPath={pathname}

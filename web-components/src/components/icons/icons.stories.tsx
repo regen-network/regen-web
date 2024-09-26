@@ -135,7 +135,7 @@ import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
 import TrustIcon from './TrustIcon';
 import { UnlockIcon } from './UnlockIcon';
-import UserMenuIcon from './UserMenuIcon';
+import { UserMenuIcon } from './UserMenuIcon';
 import VerifiedIcon from './VerifiedIcon';
 import { VideoIcon } from './VideoIcon';
 import WalletErrorIcon from './WalletErrorIcon';

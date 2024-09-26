@@ -45,7 +45,7 @@ export type CreditsData = {
 
 export type PaymentInfoData = {
   nameOnCard: string;
-  cardInfo: string;
+  cardLast4: string;
   denom: Currency;
 };
 

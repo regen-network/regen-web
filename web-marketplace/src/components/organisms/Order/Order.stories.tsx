@@ -71,14 +71,14 @@ Crypto.args = {
       ...args.order.credits,
       data: {
         ...args.order.credits.data,
-        denom: 'usdc',
+        askDenom: 'usdc',
       },
     },
     paymentInfo: {
       ...args.order.paymentInfo,
       data: {
         ...args.order.paymentInfo.data,
-        denom: 'usdc',
+        askDenom: 'usdc',
       },
     },
   },
@@ -145,7 +145,7 @@ TradableOrder.args = {
       ...args.order.credits,
       data: {
         ...args.order.credits.data,
-        denom: 'usdc',
+        askDenom: 'usdc',
       },
     },
     retirementInfo: {
@@ -160,7 +160,7 @@ TradableOrder.args = {
       ...args.order.paymentInfo,
       data: {
         ...args.order.paymentInfo.data,
-        denom: 'usdc',
+        askDenom: 'usdc',
       },
     },
   },

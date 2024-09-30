@@ -54,10 +54,6 @@ export const getMenuItems = (pathname: string, _: TranslatorType): Item[] => [
     ],
   },
   {
-    title: _(msg`Trade`),
-    href: '/storefront',
-  },
-  {
     title: _(msg`Stats`),
     dropdownItems: [
       {

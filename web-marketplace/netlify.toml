@@ -12,6 +12,23 @@ VITE_GA_MEASUREMENT_ID = "G-6ZGJM8JXYN"
 VITE_TOUCAN_LINK = "https://toucan.earth/overview?chainId=137"
 VITE_SKIPPED_CLASS_ID = "C01"
 
+[context.terrasos-dev.environment]
+VITE_SANITY_TAG = "default"
+VITE_SANITY_DATASET = "staging"
+VITE_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
+VITE_API_URI = "https://api-staging.regen.network"
+VITE_INTERCOM_APP_ID = "kn5di10s"
+VITE_LEDGER_CHAIN_ID = "regen-redwood-1"
+VITE_LEDGER_CHAIN_NAME = "Regen - Redwood Testnet"
+VITE_BLOCK_EXPLORER = "https://redwood.regen.aneka.io"
+VITE_SENTRY_ENVIRONMENT = "development"
+VITE_TOUCAN_LINK = "https://test.app.toucan.earth/?chainId=137"
+VITE_BRIDGE_API_URI = "https://toucan-bridge-staging.herokuapp.com"
+VITE_BRIDGE_CREDIT_CLASS_ID = "C56"
+VITE_BRIDGE = "true"
+VITE_SKIPPED_CLASS_ID = ""
+VITE_MARKETPLACE_CLIENT = "terrasos"
+
 [context.dev.environment]
 VITE_SANITY_TAG = "default"
 VITE_SANITY_DATASET = "staging"

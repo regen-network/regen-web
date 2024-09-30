@@ -64,7 +64,7 @@ export const OrderCredits = ({
               />
             </div>
           }
-          className="flex items-baseline"
+          className="items-baseline"
         />
       </div>
     </section>

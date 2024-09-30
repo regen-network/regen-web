@@ -1,19 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
-import { useSetAtom } from 'jotai';
 import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
 import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialItems.constants';
-import { Buy1Event } from 'web-marketplace/src/lib/tracker/types';
-import { useTracker } from 'web-marketplace/src/lib/tracker/useTracker';
 
-import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import { TableActionButtons } from 'web-components/src/components/buttons/TableActionButtons';
 import { CelebrateIcon } from 'web-components/src/components/icons/CelebrateIcon';
-import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
 import { ConfirmModal as CancelConfirmModal } from 'web-components/src/components/modal/ConfirmModal';
 import { ProcessingModal } from 'web-components/src/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
@@ -22,10 +17,6 @@ import { TxSuccessfulModal } from 'web-components/src/components/modal/TxSuccess
 import Section from 'web-components/src/components/section';
 import { Title } from 'web-components/src/components/typography';
 
-import {
-  connectWalletModalAtom,
-  switchWalletModalAtom,
-} from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
 import {
   BLOCKCHAIN_RECORD,
@@ -51,7 +42,6 @@ import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
 import { useCheckSellOrderAvailabilty } from './hooks/useCheckSellOrderAvailabilty';
 import { useNormalizedSellOrders } from './hooks/useNormalizedSellOrders';
 import {
-  BUY_SELL_ORDER_ACTION,
   BUY_SELL_ORDER_BUTTON,
   BUY_SELL_ORDER_TITLE,
   CANCEL_SELL_ORDER_ACTION,
@@ -76,11 +66,7 @@ export const Storefront = (): JSX.Element => {
   const submittedQuantityRef = useRef<number>();
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
   const isReadyToBuy = selectedSellOrder !== null && selectedAction === 'buy';
-  const setConnectWalletModalAtom = useSetAtom(connectWalletModalAtom);
-  const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const navigate = useNavigate();
-  const location = useLocation();
-  const { track } = useTracker();
   const isCancelModalOpen =
     selectedSellOrder !== null && selectedAction === 'cancel';
 
@@ -136,7 +122,7 @@ export const Storefront = (): JSX.Element => {
     submittedQuantityRef.current = creditCount;
   };
 
-  const { isConnected, wallet, activeWalletAddr } = useWallet();
+  const { isConnected, wallet } = useWallet();
   const {
     signAndBroadcast,
     setDeliverTxResponse,
@@ -256,62 +242,30 @@ export const Storefront = (): JSX.Element => {
               sellOrders={normalizedSellOrders}
               sortCallbacks={sortCallbacks}
               onTableChange={setPaginationParams}
-              renderActionButtonsFunc={(i: number) => {
-                const isOwnSellOrder =
-                  normalizedSellOrders[i]?.seller === accountAddress;
-                return (
-                  <>
-                    {isConnected && isOwnSellOrder && (
-                      <TableActionButtons
-                        buttons={[
-                          {
-                            label: _(CANCEL_SELL_ORDER_ACTION),
-                            onClick: () => {
-                              setSelectedAction('cancel');
-                              setSelectedSellOrder(i);
-                            },
-                          },
-                        ]}
-                        sx={{ width: '100%' }}
-                      />
-                    )}
-                    {!isOwnSellOrder && (
-                      <OutlinedButton
-                        startIcon={<CreditsIcon className="text-brand-400" />}
-                        size="small"
-                        onClick={async () => {
-                          track<Buy1Event>('buy1', {
-                            url: location.pathname,
-                            buttonLocation: 'sellOrderTable',
-                            projectName: normalizedSellOrders[i].project?.name,
-                            projectId: normalizedSellOrders[i].project?.id,
-                            creditClassId:
-                              normalizedSellOrders[i].project?.classId,
-                          });
-                          selectedSellOrderIdRef.current = Number(
-                            normalizedSellOrders?.[i].id,
-                          );
-                          submittedQuantityRef.current = undefined;
-                          refetchSellOrders();
-                          setSelectedAction('buy');
-                          setSelectedSellOrder(i);
-                          if (!activeWalletAddr) {
-                            setConnectWalletModalAtom(
-                              atom => void (atom.open = true),
-                            );
-                          } else if (!isConnected) {
-                            setSwitchWalletModalAtom(
-                              atom => void (atom.open = true),
-                            );
-                          }
-                        }}
-                      >
-                        {_(BUY_SELL_ORDER_ACTION)}
-                      </OutlinedButton>
-                    )}
-                  </>
-                );
-              }}
+              renderActionButtonsFunc={
+                isConnected
+                  ? (i: number) => {
+                      const isOwnSellOrder =
+                        normalizedSellOrders[i]?.seller === accountAddress;
+                      return (
+                        isOwnSellOrder && (
+                          <TableActionButtons
+                            buttons={[
+                              {
+                                label: _(CANCEL_SELL_ORDER_ACTION),
+                                onClick: () => {
+                                  setSelectedAction('cancel');
+                                  setSelectedSellOrder(i);
+                                },
+                              },
+                            ]}
+                            sx={{ width: '100%' }}
+                          />
+                        )
+                      );
+                    }
+                  : undefined
+              }
             />
           </WithLoader>
         </Box>

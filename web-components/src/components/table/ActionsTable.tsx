@@ -188,7 +188,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
                     <StyledTableCell key={i}>{headerRow}</StyledTableCell>
                   ),
                 )}
-                {!!renderActionButtons && (
+                {!!renderActionButtons ? (
                   <StyledTableCell
                     sx={{
                       textAlign: 'left',
@@ -203,6 +203,18 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
                       {actionButtonsText}
                     </Box>
                   </StyledTableCell>
+                ) : (
+                  <StyledTableCell
+                    sx={{
+                      textAlign: 'left',
+                      background: 'primary.main',
+                      position: 'sticky',
+                      right: 0,
+                      width: { sm: 3, padding: 0 },
+                    }}
+                  >
+                    <BorderLeft />
+                  </StyledTableCell>
                 )}
               </TableRow>
             </TableHead>
@@ -212,7 +224,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
                   {row.map((elem, j) => (
                     <StyledTableCell key={j}>{elem}</StyledTableCell>
                   ))}
-                  {!!renderActionButtons && (
+                  {!!renderActionButtons ? (
                     <StyledTableCell
                       sx={{
                         background: 'inherit',
@@ -223,6 +235,18 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
                     >
                       <BorderLeft />
                       {renderActionButtons(offset + i)}
+                    </StyledTableCell>
+                  ) : (
+                    <StyledTableCell
+                      sx={{
+                        textAlign: 'left',
+                        background: 'primary.main',
+                        position: 'sticky',
+                        right: 0,
+                        width: { sm: 2, padding: '0 !important' },
+                      }}
+                    >
+                      <BorderLeft />
                     </StyledTableCell>
                   )}
                 </StyledTableRow>

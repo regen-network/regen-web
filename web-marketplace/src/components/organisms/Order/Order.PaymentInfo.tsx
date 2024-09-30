@@ -22,7 +22,7 @@ export const OrderPaymentInfo = ({
       <div className="">
         <Title
           variant="h5"
-          className="text-sm text-grey-600 uppercase font-extrabold font-['muli'] mb-15 tracking-[1px]"
+          className="text-xs text-grey-600 uppercase font-extrabold mb-15 tracking-[1px]"
         >
           {title}
         </Title>

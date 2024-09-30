@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-09-26 11:41+0100\n"
+"POT-Creation-Date: 2024-09-30 11:58+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -95,7 +95,7 @@ msgstr ""
 msgid "{truncatedQuantity} credit(s) available"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Credits.tsx:44
+#: src/components/organisms/Order/Order.Credits.tsx:45
 msgid "# credits"
 msgstr ""
 
@@ -1476,6 +1476,7 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
+#: src/components/organisms/Order/Order.MakeAnonymous.tsx:74
 #: src/lib/constants/shared.constants.tsx:22
 msgid "Edit"
 msgstr ""
@@ -2004,6 +2005,10 @@ msgstr ""
 msgid "Main photo"
 msgstr ""
 
+#: src/components/organisms/Order/Order.MakeAnonymous.tsx:20
+msgid "Make Anonymous select"
+msgstr ""
+
 #: src/components/organisms/RolesForm/components/AdminModal/AdminModal.tsx:84
 msgid "Make sure this is the correct REGEN address. <0>If you change this to an address you don’t have access to, you will be unable to edit the project.</0>"
 msgstr ""
@@ -2199,6 +2204,11 @@ msgstr ""
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:11
 #: src/lib/constants/shared.constants.tsx:24
 msgid "Next"
+msgstr ""
+
+#: src/components/organisms/Order/Order.MakeAnonymous.tsx:57
+#: src/components/organisms/Order/Order.MakeAnonymous.tsx:58
+msgid "No"
 msgstr ""
 
 #: src/components/organisms/BasketsTable.tsx:44
@@ -2528,7 +2538,7 @@ msgstr ""
 msgid "price per credit"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Credits.tsx:31
+#: src/components/organisms/Order/Order.Credits.tsx:32
 msgid "Price per credit"
 msgstr ""
 
@@ -3675,7 +3685,7 @@ msgstr ""
 msgid "total credits you have purchased"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Credits.tsx:50
+#: src/components/organisms/Order/Order.Credits.tsx:51
 msgid "total price"
 msgstr ""
 
@@ -3746,6 +3756,10 @@ msgstr ""
 
 #: src/pages/Post/Post.constants.ts:17
 msgid "Untitled"
+msgstr ""
+
+#: src/components/organisms/Order/Order.MakeAnonymous.tsx:66
+msgid "update"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:43
@@ -4046,6 +4060,11 @@ msgstr ""
 
 #: src/components/organisms/PostForm/PostForm.tsx:279
 msgid "Write a short comment or longer project update."
+msgstr ""
+
+#: src/components/organisms/Order/Order.MakeAnonymous.tsx:54
+#: src/components/organisms/Order/Order.MakeAnonymous.tsx:55
+msgid "Yes"
 msgstr ""
 
 #: src/pages/Marketplace/Storefront/Storefront.tsx:246

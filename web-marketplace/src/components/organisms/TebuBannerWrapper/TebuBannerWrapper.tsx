@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
@@ -22,9 +21,7 @@ const TebuBannerWrapper = ({ className }: Props) => {
   const response = tebuBannerResponse.data?.allTebuBanner[0];
 
   return (
-    <div
-      className={cn('tebu-header-wrapper', !isVisible && 'hidden', className)}
-    >
+    <div className={cn(!isVisible && 'hidden', className)}>
       <TebuBanner
         content={response?.contentRaw}
         learnMoreLink={response?.learnMoreLink ?? ''}

@@ -31,7 +31,7 @@ export const TebuBanner = ({
   return (
     <div
       className={cn(
-        'flex items-center-col p-20 relative w-full border border-solid border-grey-300 rounded-[5px]',
+        'flex items-center-col p-20 relative w-full border border-solid border-grey-300 rounded-[5px] bg-grey-0',
         className,
       )}
     >
@@ -44,10 +44,9 @@ export const TebuBanner = ({
         className="flex flex-col max-w-[620px] gap-10 sm:gap-20 font-montserrat"
         style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
       >
-        <BlockContent
-          className="sm:text-base text-sm font-normal leading-[145%] text-grey-500"
-          content={content}
-        />
+        <div className="sm:text-base text-sm font-normal leading-[145%] text-grey-500">
+          <BlockContent content={content} />
+        </div>
         <Link
           href={learnMoreLink}
           className="text-brand-400 sm:text-sm text-xs font-extrabold uppercase tracking-[1px] cursor-pointer flex items-center w-fit"

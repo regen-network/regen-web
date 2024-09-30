@@ -219,7 +219,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
         </Flex>
       </Flex>
       {IS_TERRASOS && (
-        <TebuBannerWrapper className="mt-30 mb-50 col-span-full" />
+        <TebuBannerWrapper className="-mt-15 mb-3 sm:mt-20 sm:mb-30 col-span-full" />
       )}
       {projects?.map(project => {
         const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });

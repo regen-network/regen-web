@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { isTebuBannerVisibleAtom } from 'lib/atoms/banner.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { getTebuBannerQuery } from 'lib/queries/react-query/sanity/getTebuBannerQuery/getTebuBannerQuery';
 
@@ -15,7 +17,7 @@ type Props = {
 };
 
 const TebuBannerWrapper = ({ className }: Props) => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useAtom(isTebuBannerVisibleAtom);
   const tebuBannerResponse = useQuery(getTebuBannerQuery({ sanityClient }));
   const response = tebuBannerResponse.data?.allTebuBanner[0];
 

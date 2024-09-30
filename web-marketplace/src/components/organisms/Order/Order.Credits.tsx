@@ -2,6 +2,7 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
+import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
 import { Title } from 'web-components/src/components/typography';
 
@@ -55,7 +56,12 @@ export const OrderCredits = ({
                 currencyCode={denom}
                 className="mr-10 text-lg pb-5"
               />
-              <DenomIconWithCurrency currency={denom} className="mt-5" />
+              <DenomIconWithCurrency
+                currency={denom}
+                className={`${
+                  denom === CURRENCIES.usd ? 'mt-[7px]' : 'mt-[2px]'
+                }`}
+              />
             </div>
           }
           className="flex items-baseline"

@@ -27,8 +27,8 @@ export const OrderSummaryRow = ({
       </Title>
       <p
         className={cn(
-          clampDescription ? 'line-clamp-2' : '',
           'text-grey-700 m-0 ml-5 p-0 text-sm',
+          clampDescription ? 'line-clamp-2' : '',
         )}
       >
         {value}

@@ -93,7 +93,7 @@ describe('Order Component', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders the Retirement Info component with tradable row only', () => {
+  it('renders the Retirement Info section with tradable row only', () => {
     render(
       <Order
         {...{
@@ -118,7 +118,7 @@ describe('Order Component', () => {
     expect(screen.queryByText(/certificate/i)).not.toBeInTheDocument();
   });
 
-  it('renders the RetirementInfo component with `certificate` button and rows except `tradable credits`', () => {
+  it('renders the RetirementInfo section with `certificate` button and rows except `tradable credits`', () => {
     render(<Order {...mockOrderData} />);
     expect(screen.queryByText(/tradable credits/i)).not.toBeInTheDocument();
     expect(screen.getByText(/retirement reason/i)).toBeInTheDocument();
@@ -128,13 +128,13 @@ describe('Order Component', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders the Blockchain Details component with correct data', () => {
+  it('renders the Blockchain Details section with correct data', () => {
     render(<Order {...mockOrderData} />);
     expect(screen.getByText(/dec 15, 2024/i)).toBeInTheDocument();
     expect(screen.getByText(/d6jfk121o54ded6jfk121o54de/i)).toBeInTheDocument();
   });
 
-  it('renders the Blockchain Details component without blockchain record', () => {
+  it('renders the Blockchain Details section without blockchain record', () => {
     render(
       <Order
         {...{
@@ -158,7 +158,7 @@ describe('Order Component', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('renders the Credits component with correct data in USD', () => {
+  it('renders the Credits section with correct data in USD', () => {
     render(
       <Order
         {...{
@@ -183,7 +183,7 @@ describe('Order Component', () => {
     expect(screen.getAllByText(/usd/i)).toHaveLength(2);
   });
 
-  it('renders the Credits component with correct data in USDC', () => {
+  it('renders the Credits section with correct data in USDC', () => {
     render(
       <Order
         {...{
@@ -205,10 +205,10 @@ describe('Order Component', () => {
     );
     expect(screen.getByText(/2000/i)).toBeInTheDocument();
     expect(screen.getByText(/400000/i)).toBeInTheDocument();
-    expect(screen.getAllByText(/usdc/i)).toHaveLength(2);
+    expect(screen.getByText(/usdc/i)).toBeInTheDocument();
   });
 
-  it('renders the Payment Info component with card data', () => {
+  it('renders the Payment Info section with card data', () => {
     render(
       <Order
         {...{
@@ -233,7 +233,7 @@ describe('Order Component', () => {
     expect(screen.getByText(/visa ending in 1234/i)).toBeInTheDocument();
   });
 
-  it('renders the Payment Info component with crypto data', () => {
+  it('renders the Payment Info section with crypto data', () => {
     render(
       <Order
         {...{
@@ -254,6 +254,6 @@ describe('Order Component', () => {
     expect(screen.queryByText(/name on card/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/card info/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/visa ending in 1234/i)).not.toBeInTheDocument();
-    expect(screen.getByText(/usdc/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/usdc/i)).toHaveLength(2);
   });
 });

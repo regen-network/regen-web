@@ -135,7 +135,7 @@ export const Order = (orderData: OrderDataProps) => {
         <OrderSummary
           retirementInfo={retirementInfo}
           blockchainDetails={blockchainDetails}
-          credits={credits}
+          creditsData={credits}
           paymentInfo={paymentInfo}
         />
       </CardContent>

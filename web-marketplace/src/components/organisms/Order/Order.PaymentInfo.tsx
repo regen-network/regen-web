@@ -36,7 +36,7 @@ export const OrderPaymentInfo = ({
                   {_(msg`Visa ending in`)} {cardLast4}
                 </span>
               }
-              className="flex items-center"
+              className="items-center"
             />
           </>
         ) : (

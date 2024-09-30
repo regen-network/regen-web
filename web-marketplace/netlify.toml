@@ -12,6 +12,21 @@ VITE_GA_MEASUREMENT_ID = "G-6ZGJM8JXYN"
 VITE_TOUCAN_LINK = "https://toucan.earth/overview?chainId=137"
 VITE_SKIPPED_CLASS_ID = "C01"
 
+[context.terrasos.environment]
+VITE_SANITY_TAG = "default"
+VITE_SANITY_DATASET = "production"
+VITE_API_URI = "https://api.regen.network"
+VITE_BLOCK_EXPLORER = "https://www.mintscan.io"
+VITE_LEDGER_CHAIN_ID = "regen-1"
+VITE_SENTRY_ENABLED = "true"
+VITE_SENTRY_ENVIRONMENT = "production"
+VITE_ANALYTICS_ENABLED = "true"
+VITE_BRIDGE_CREDIT_CLASS_ID = "C03"
+VITE_GA_MEASUREMENT_ID = "G-6ZGJM8JXYN"
+VITE_TOUCAN_LINK = "https://toucan.earth/overview?chainId=137"
+VITE_SKIPPED_CLASS_ID = "C01"
+VITE_MARKETPLACE_CLIENT = "terrasos"
+
 [context.dev.environment]
 VITE_SANITY_TAG = "default"
 VITE_SANITY_DATASET = "staging"

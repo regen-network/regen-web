@@ -1,6 +1,11 @@
 import React from 'react';
 
-export const BlockchainIcon = (props: React.SVGProps<SVGSVGElement>) => {
+type Props = {
+  color?: string;
+  className?: string;
+} & React.SVGProps<SVGSVGElement>;
+
+export const BlockchainIcon = (props: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,13 +18,13 @@ export const BlockchainIcon = (props: React.SVGProps<SVGSVGElement>) => {
       <g clip-path="url(#clip0_4785_34949)">
         <path
           d="M12.5 5L19.4282 8.5V15.5L12.5 19L5.5718 15.5V8.5L12.5 5Z"
-          stroke="#545555"
+          stroke="currentColor"
           stroke-width="2"
           stroke-linejoin="round"
         />
         <path
           d="M12.5 1L22.8923 6.5V17.5L12.5 23L2.1077 17.5V6.5L12.5 1Z"
-          stroke="#545555"
+          stroke="currentColor"
           stroke-linejoin="round"
           stroke-dasharray="2 2"
         />
@@ -28,7 +33,7 @@ export const BlockchainIcon = (props: React.SVGProps<SVGSVGElement>) => {
           y1="12"
           x2="12.5"
           y2="19"
-          stroke="#545555"
+          stroke="currentColor"
           stroke-width="2"
         />
         <line
@@ -36,7 +41,7 @@ export const BlockchainIcon = (props: React.SVGProps<SVGSVGElement>) => {
           y1="8.89404"
           x2="11.948"
           y2="12.4779"
-          stroke="#545555"
+          stroke="currentColor"
           stroke-width="2"
         />
         <line
@@ -44,7 +49,7 @@ export const BlockchainIcon = (props: React.SVGProps<SVGSVGElement>) => {
           x2="8"
           y2="-1"
           transform="matrix(0.894043 0.447982 0.447982 -0.894043 6.5 8)"
-          stroke="#545555"
+          stroke="currentColor"
           stroke-width="2"
         />
       </g>

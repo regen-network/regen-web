@@ -16,7 +16,7 @@ export const OrderCredits = ({
   data,
 }: OrderSummarySectionProps) => {
   const { _ } = useLingui();
-  const { credits, price, denom } = data as CreditsData;
+  const { credits, price, askDenom } = data as CreditsData;
   const totalPrice = +credits * +price;
   return (
     <section className="flex gap-20">
@@ -34,10 +34,10 @@ export const OrderCredits = ({
             <div className="flex items-center">
               <SupCurrencyAndAmount
                 price={+price}
-                currencyCode={denom}
+                currencyCode={askDenom}
                 className="mr-10 text-base"
               />
-              <DenomIconWithCurrency currency={denom} className="mt-5" />
+              <DenomIconWithCurrency currency={askDenom} className="mt-5" />
             </div>
           }
         />
@@ -53,13 +53,13 @@ export const OrderCredits = ({
             <div className="flex items-center">
               <SupCurrencyAndAmount
                 price={totalPrice}
-                currencyCode={denom}
+                currencyCode={askDenom}
                 className="mr-10 text-lg pb-5"
               />
               <DenomIconWithCurrency
-                currency={denom}
+                currency={askDenom}
                 className={`${
-                  denom === CURRENCIES.usd ? 'mt-[7px]' : 'mt-[2px]'
+                  askDenom === CURRENCIES.usd ? 'mt-[7px]' : 'mt-[2px]'
                 }`}
               />
             </div>

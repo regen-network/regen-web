@@ -1,4 +1,5 @@
 import { Title } from 'web-components/src/components/typography';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 export const OrderSummaryRow = ({
   title,
@@ -14,17 +15,21 @@ export const OrderSummaryRow = ({
   titleClassName?: string;
 }) => {
   return (
-    <div className={`grid grid-cols-[105px_auto] mb-10 ${className}`}>
+    <div className={cn('grid grid-cols-[105px_auto] mb-10', className)}>
       <Title
         variant="h6"
-        className={`text-grey-400 text-xs font-extrabold font-['Lato'] uppercase tracking-[1px] mt-[3px] ${titleClassName}`}
+        className={cn(
+          "text-grey-400 text-xs font-extrabold font-['Lato'] uppercase tracking-[1px] mt-[3px]",
+          titleClassName,
+        )}
       >
         {title}
       </Title>
       <p
-        className={`${
-          clampDescription ? 'line-clamp-2' : ''
-        } text-grey-700 m-0 ml-5 p-0 text-sm`}
+        className={cn(
+          clampDescription ? 'line-clamp-2' : '',
+          'text-grey-700 m-0 ml-5 p-0 text-sm',
+        )}
       >
         {value}
       </p>

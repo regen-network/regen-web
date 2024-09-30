@@ -9,7 +9,7 @@ import {
   paymentInfo,
   retirementInfo,
 } from './Order.mock';
-import { OrderDataProps } from './Order.types';
+import { CreditsData, OrderDataProps } from './Order.types';
 
 describe('Order Component', () => {
   const mockOrderData: OrderDataProps = {
@@ -171,8 +171,8 @@ describe('Order Component', () => {
                 ...mockOrderData.order.credits.data,
                 credits: '2000',
                 price: '400000',
-                denom: 'usd',
-              },
+                askDenom: 'usd',
+              } as CreditsData,
             },
           },
         }}
@@ -196,7 +196,7 @@ describe('Order Component', () => {
                 ...mockOrderData.order.credits.data,
                 credits: '2000',
                 price: '400000',
-                denom: 'usdc',
+                askDenom: 'usdc',
               },
             },
           },
@@ -221,7 +221,7 @@ describe('Order Component', () => {
                 ...mockOrderData.order.paymentInfo.data,
                 nameOnCard: 'John Doe',
                 cardLast4: '1234',
-                denom: 'usd',
+                askDenom: 'usd',
               },
             },
           },
@@ -244,7 +244,7 @@ describe('Order Component', () => {
               ...mockOrderData.order.paymentInfo,
               data: {
                 ...mockOrderData.order.paymentInfo.data,
-                denom: 'usdc',
+                askDenom: 'usdc',
               },
             },
           },

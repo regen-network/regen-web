@@ -40,13 +40,15 @@ export type BlockchainDetailsData = {
 export type CreditsData = {
   credits: string;
   price: string;
-  denom: Currency;
+  askDenom: string;
+  askBaseDenom: string;
 };
 
 export type PaymentInfoData = {
   nameOnCard: string;
   cardLast4: string;
-  denom: Currency;
+  askDenom: string;
+  askBaseDenom: string;
 };
 
 export interface OrderSummarySectionProps {

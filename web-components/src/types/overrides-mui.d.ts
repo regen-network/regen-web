@@ -16,12 +16,6 @@ declare module '@mui/material/styles' {
       dark?: string;
       contrastText: string;
     };
-    green?: {
-      light?: string;
-      main?: string;
-      dark?: string;
-      contrastText?: string;
-    };
   }
 
   interface PaletteOptions {
@@ -30,12 +24,6 @@ declare module '@mui/material/styles' {
       main?: string;
       dark?: string;
       contrastText: string;
-    };
-    green?: {
-      light?: string;
-      main?: string;
-      dark?: string;
-      contrastText?: string;
     };
   }
 }

@@ -1,4 +1,6 @@
 import { ChangeEvent, useState } from 'react';
+import { i18n } from '@lingui/core';
+import { msg, Trans } from '@lingui/macro';
 
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -15,7 +17,7 @@ export const MakeAnonymous = ({
   value,
   onChange,
   name = '',
-  ariaLabel = 'Make Anonymous select',
+  ariaLabel = i18n._(msg`Make Anonymous select`),
   className = '',
 }: MakeAnonymousProps) => {
   const [editable, setEditable] = useState(false);
@@ -49,21 +51,28 @@ export const MakeAnonymous = ({
             name={name}
             autoFocus
           >
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
+            <option value={i18n._(msg`Yes`)}>
+              <Trans>Yes</Trans>
+            </option>
+            <option value={i18n._(msg`No`)}>
+              <Trans>No</Trans>
+            </option>
           </select>
           <TextButton
             className="lowercase text-[12px] mt-5 sm:mt-0"
             onClick={handleOnUpdate}
             aria-label="update"
           >
-            update
+            <Trans>update</Trans>
           </TextButton>
         </div>
       ) : (
         <div className="w-fullflex justify-between h-[47px] items-center">
           <span>{isAnonymous}</span>
-          <EditButtonIcon onClick={toggleEditable} ariaLabel="Edit" />
+          <EditButtonIcon
+            onClick={toggleEditable}
+            ariaLabel={i18n._(msg`Edit`)}
+          />
         </div>
       )}
     </>

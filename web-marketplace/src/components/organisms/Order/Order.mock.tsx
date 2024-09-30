@@ -1,4 +1,6 @@
 /* eslint-disable lingui/no-unlocalized-strings */
+import { USD_DENOM } from 'config/allowedBaseDenoms';
+
 import { BlockchainIcon } from 'web-components/src/components/icons/BlockchainIcon';
 import CertifiedDocumentIcon from 'web-components/src/components/icons/CertifiedDocumentIcon';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
@@ -7,7 +9,7 @@ import { PaymentInfoIcon } from 'web-components/src/components/icons/PaymentInfo
 import { OrderSummarySectionProps } from './Order.types';
 
 export const retirementInfo: OrderSummarySectionProps = {
-  icon: <CertifiedDocumentIcon sx={{ color: 'info.dark' }} />,
+  icon: <CertifiedDocumentIcon className="text-grey-500" />,
   title: 'Retirement Info',
   data: {
     tradableCredits: null,
@@ -19,7 +21,7 @@ export const retirementInfo: OrderSummarySectionProps = {
 };
 
 export const blockchainDetails: OrderSummarySectionProps = {
-  icon: <BlockchainIcon />,
+  icon: <BlockchainIcon className="text-grey-500" />,
   title: 'Blockchain Details',
   data: {
     purchaseDate: 'Dec 15, 2024',
@@ -33,7 +35,8 @@ export const credits: OrderSummarySectionProps = {
   data: {
     credits: '2',
     price: '40',
-    denom: 'usd',
+    askDenom: USD_DENOM,
+    askBaseDenom: USD_DENOM,
   },
 };
 
@@ -41,7 +44,8 @@ export const paymentInfo: OrderSummarySectionProps = {
   icon: <PaymentInfoIcon className="text-grey-500" />,
   title: 'payment info',
   data: {
-    denom: 'usd',
+    askDenom: USD_DENOM,
+    askBaseDenom: USD_DENOM,
     nameOnCard: 'Steph Green',
     cardLast4: '1234',
   },

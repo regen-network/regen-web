@@ -32,15 +32,7 @@ const labelConfig: LabelConfig = {
     variant: 'success' as InfoLabelVariant,
     label: CREDITS_DELIVERED,
     labelColor: 'text-brand-500',
-    icon: (
-      <ArrowDownIcon
-        sx={theme => ({
-          color: theme.palette.green?.dark,
-          display: 'flex',
-          alignItems: 'center',
-        })}
-      />
-    ),
+    icon: <ArrowDownIcon className="text-brand-500 flex items-center" />,
   },
   [ORDER_STATUS.pending]: {
     variant: 'pending' as InfoLabelVariant,
@@ -49,11 +41,9 @@ const labelConfig: LabelConfig = {
     icon: (
       <PendingIcon
         sx={{
-          color: '#7A400B',
-          display: 'flex',
-          alignItems: 'center',
           '&.MuiSvgIcon-root': { width: '16px', height: '16px' },
         }}
+        className="text-orange-700 flex items-center"
       />
     ),
   },

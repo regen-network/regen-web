@@ -19,7 +19,7 @@ export const OrderRetirementInfo = ({
   return (
     <section className="flex gap-20">
       <OrderDetailsIcon icon={icon} />
-      <div className="">
+      <div>
         <Title
           variant="h5"
           className="text-sm text-grey-600 uppercase font-extrabold font-['muli'] mb-15 tracking-[1px]"

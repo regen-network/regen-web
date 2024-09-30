@@ -3,14 +3,13 @@ import { DenomIcon } from 'web-marketplace/src/components/molecules/DenomIcon/De
 
 import QuestionMarkTooltip from '../tooltip/QuestionMarkTooltip';
 import { Body } from '../typography';
-import { Currency } from './DenomIconWithCurrency.constants';
 
 export function DenomIconWithCurrency({
   currency,
   className,
   tooltipText,
 }: {
-  currency: Currency;
+  currency: string;
   className?: string;
   tooltipText?: string;
 }) {

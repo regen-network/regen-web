@@ -137,12 +137,7 @@ export function ChooseCreditsForm({
 
   const handleCryptoPurchaseOptions = useCallback(() => {
     setRetiring(prev => !prev);
-
-    // Reset amounts to 0 on retirement change
-    form.setValue(CREDITS_AMOUNT, 0);
-    form.setValue(CURRENCY_AMOUNT, 0);
-    form.trigger(); // trigger validation
-  }, [form, setRetiring]);
+  }, [setRetiring]);
 
   const handlePaymentOptions = useCallback(
     (option: string) => {

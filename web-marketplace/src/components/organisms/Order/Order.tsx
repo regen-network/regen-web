@@ -34,7 +34,7 @@ export const Order = (orderData: OrderDataProps) => {
   const { retirementInfo, blockchainDetails, credits, paymentInfo, status } =
     orderData.order;
   const isRetirementTradable =
-    (retirementInfo.data as RetirementInfoData).tradableCredits !== null;
+    (retirementInfo as RetirementInfoData).tradableCredits !== null;
   return (
     <Card className="bg-grey-100 border-[1px] border-grey-200">
       {isMobile && (

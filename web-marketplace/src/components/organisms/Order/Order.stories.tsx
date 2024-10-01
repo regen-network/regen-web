@@ -69,17 +69,11 @@ Crypto.args = {
     ...args.order,
     credits: {
       ...args.order.credits,
-      data: {
-        ...args.order.credits.data,
-        askDenom: 'usdc',
-      },
+      askDenom: 'usdc',
     },
     paymentInfo: {
       ...args.order.paymentInfo,
-      data: {
-        ...args.order.paymentInfo.data,
-        askDenom: 'usdc',
-      },
+      askDenom: 'usdc',
     },
   },
 };
@@ -118,10 +112,7 @@ PendingOrder.args = {
     status: ORDER_STATUS.pending,
     blockchainDetails: {
       ...args.order.blockchainDetails,
-      data: {
-        ...args.order.blockchainDetails.data,
-        blockchainRecord: '',
-      },
+      blockchainRecord: '',
     },
   },
 };
@@ -143,25 +134,16 @@ TradableOrder.args = {
     ...args.order,
     credits: {
       ...args.order.credits,
-      data: {
-        ...args.order.credits.data,
-        askDenom: 'usdc',
-      },
+      askDenom: 'usdc',
     },
     retirementInfo: {
       ...args.order.retirementInfo,
-      data: {
-        ...args.order.retirementInfo.data,
-        tradableCredits:
-          'Credits were purchased in a tradable format and were not retired',
-      },
+      tradableCredits:
+        'Credits were purchased in a tradable format and were not retired',
     },
     paymentInfo: {
       ...args.order.paymentInfo,
-      data: {
-        ...args.order.paymentInfo.data,
-        askDenom: 'usdc',
-      },
+      askDenom: 'usdc',
     },
   },
 };

@@ -102,10 +102,7 @@ describe('Order Component', () => {
             ...mockOrderData.order,
             retirementInfo: {
               ...mockOrderData.order.retirementInfo,
-              data: {
-                ...mockOrderData.order.retirementInfo.data,
-                tradableCredits: 'yes',
-              },
+              tradableCredits: 'yes',
             },
           },
         }}
@@ -143,10 +140,7 @@ describe('Order Component', () => {
             ...mockOrderData.order,
             blockchainDetails: {
               ...mockOrderData.order.blockchainDetails,
-              data: {
-                ...mockOrderData.order.blockchainDetails.data,
-                blockchainRecord: '',
-              },
+              blockchainRecord: '',
             },
           },
         }}
@@ -167,12 +161,9 @@ describe('Order Component', () => {
             ...mockOrderData.order,
             credits: {
               ...mockOrderData.order.credits,
-              data: {
-                ...mockOrderData.order.credits.data,
-                credits: '2000',
-                price: '400000',
-                askDenom: 'usd',
-              } as CreditsData,
+              credits: '2000',
+              price: '400000',
+              askDenom: 'usd',
             },
           },
         }}
@@ -192,12 +183,9 @@ describe('Order Component', () => {
             ...mockOrderData.order,
             credits: {
               ...mockOrderData.order.credits,
-              data: {
-                ...mockOrderData.order.credits.data,
-                credits: '2000',
-                price: '400000',
-                askDenom: 'usdc',
-              },
+              credits: '2000',
+              price: '400000',
+              askDenom: 'usdc',
             },
           },
         }}
@@ -217,12 +205,9 @@ describe('Order Component', () => {
             ...mockOrderData.order,
             paymentInfo: {
               ...mockOrderData.order.paymentInfo,
-              data: {
-                ...mockOrderData.order.paymentInfo.data,
-                nameOnCard: 'John Doe',
-                cardLast4: '1234',
-                askDenom: 'usd',
-              },
+              nameOnCard: 'John Doe',
+              cardLast4: '1234',
+              askDenom: 'usd',
             },
           },
         }}
@@ -242,10 +227,7 @@ describe('Order Component', () => {
             ...mockOrderData.order,
             paymentInfo: {
               ...mockOrderData.order.paymentInfo,
-              data: {
-                ...mockOrderData.order.paymentInfo.data,
-                askDenom: 'usdc',
-              },
+              askDenom: 'usdc',
             },
           },
         }}

@@ -62,10 +62,7 @@ export const Orders = () => {
         status: ORDER_STATUS.delivered,
         retirementInfo: {
           ...retirementInfo,
-          data: {
-            ...retirementInfo.data,
-            location,
-          },
+          location,
         },
         blockchainDetails,
         credits,

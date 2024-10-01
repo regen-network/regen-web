@@ -2,6 +2,10 @@ import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
+import { BlockchainIcon } from 'web-components/src/components/icons/BlockchainIcon';
+import CertifiedDocumentIcon from 'web-components/src/components/icons/CertifiedDocumentIcon';
+import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
+import { PaymentInfoIcon } from 'web-components/src/components/icons/PaymentInfoIcon';
 import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
 import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
 
@@ -32,28 +36,27 @@ export const OrderSummary = ({
 }: OrderSummaryProps) => {
   const { _ } = useLingui();
   const { purchaseDate, blockchainRecord } =
-    blockchainDetails.data as BlockchainDetailsData;
-  const { nameOnCard, askDenom, cardLast4 } =
-    paymentInfo.data as PaymentInfoData;
+    blockchainDetails as BlockchainDetailsData;
+  const { nameOnCard, askDenom, cardLast4 } = paymentInfo as PaymentInfoData;
   const isCardPayment = nameOnCard && cardLast4 && askDenom === 'usd';
   const isTradable =
-    (retirementInfo.data as RetirementInfoData).tradableCredits !== null;
+    (retirementInfo as RetirementInfoData).tradableCredits !== null;
   const { reason, location, tradableCredits } =
-    retirementInfo.data as RetirementInfoData;
+    retirementInfo as RetirementInfoData;
   const {
     credits,
     price,
     askDenom: creditAskDenom,
-  } = creditsData.data as CreditsData;
-  console.log(
-    '🚀 ~ file: Order.Summary.tsx:48 ~ creditAskDenom:',
-    creditAskDenom,
-  );
+  } = creditsData as CreditsData;
+
   const totalPrice = +credits * +price;
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 gap-30">
-      <OrderSummarySection icon={creditsData.icon} title={creditsData.title}>
+      <OrderSummarySection
+        icon={<CreditsIcon fontSize="medium" className="text-grey-500" />}
+        title={_(msg`Credits`)}
+      >
         <OrderSummaryRow
           title={_(msg`Price per credit`)}
           value={
@@ -95,8 +98,8 @@ export const OrderSummary = ({
         />
       </OrderSummarySection>
       <OrderSummarySection
-        icon={retirementInfo.icon}
-        title={retirementInfo.title}
+        icon={<CertifiedDocumentIcon className="text-grey-500" />}
+        title={_(msg`Retirement Info`)}
       >
         {isTradable ? (
           <OrderSummaryRow
@@ -125,7 +128,10 @@ export const OrderSummary = ({
           </>
         )}
       </OrderSummarySection>
-      <OrderSummarySection icon={paymentInfo.icon} title={paymentInfo.title}>
+      <OrderSummarySection
+        icon={<PaymentInfoIcon className="text-grey-500" />}
+        title={_(msg`payment info`)}
+      >
         {isCardPayment ? (
           <>
             <OrderSummaryRow title={_(msg`name on card`)} value={nameOnCard} />
@@ -147,8 +153,8 @@ export const OrderSummary = ({
         )}
       </OrderSummarySection>
       <OrderSummarySection
-        icon={blockchainDetails.icon}
-        title={blockchainDetails.title}
+        icon={<BlockchainIcon className="text-grey-500" />}
+        title={_(msg`Blockchain Details`)}
       >
         <OrderSummaryRow title={_(msg`purchase date`)} value={purchaseDate} />
         {blockchainRecord && (

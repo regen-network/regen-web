@@ -51,12 +51,8 @@ export type PaymentInfoData = {
   askBaseDenom: string;
 };
 
-export interface OrderSummarySectionProps {
-  icon: React.ReactNode;
-  title: string;
-  data:
-    | CreditsData
-    | RetirementInfoData
-    | PaymentInfoData
-    | BlockchainDetailsData;
-}
+export type OrderSummarySectionProps =
+  | CreditsData
+  | RetirementInfoData
+  | PaymentInfoData
+  | BlockchainDetailsData;

@@ -45,6 +45,10 @@ msgstr ""
 msgid "(retirement is permanent and non-reversible)"
 msgstr ""
 
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:99
+msgid "{_creditsAvailable, plural, one {Only {_creditsAvailable} credit available with those paramaters, order quantity changed} other {Only {_creditsAvailable} credits available with those paramaters, order quantity changed}}"
+msgstr ""
+
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:132
 msgid "{0, plural, one {allowed credit class} other {allowed credit classes}}"
 msgstr ""
@@ -715,7 +719,7 @@ msgstr ""
 msgid "buy NCT"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:22
+#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:18
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:444
 msgid "Buy tradable ecocredits"
 msgstr ""
@@ -1189,7 +1193,7 @@ msgstr ""
 msgid "credit name"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:183
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:223
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr ""
 
@@ -2084,7 +2088,7 @@ msgstr ""
 msgid "Make your purchase anonymous. Your name will be hidden from the retirement certificate and the certificate will be hidden from your public profile."
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:31
+#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:27
 #: src/lib/constants/shared.constants.tsx:49
 msgid "Max"
 msgstr ""
@@ -3032,7 +3036,7 @@ msgstr ""
 msgid "Retire all credits upon transfer"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:15
+#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:11
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:422
 msgid "Retire credits now"
 msgstr ""
@@ -3197,8 +3201,8 @@ msgstr ""
 msgid "Select all"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:168
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:169
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:208
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:209
 msgid "Select option"
 msgstr ""
 
@@ -3249,7 +3253,7 @@ msgstr ""
 msgid "Sender"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:30
+#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:26
 msgid "Set max credits"
 msgstr ""
 
@@ -3606,7 +3610,7 @@ msgstr ""
 msgid "These credits will be a tradable asset. They can be retired later via Regen Marketplace."
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:23
+#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:19
 msgid "These credits will be a tradeable asset. They can be retired later via Regen Marketplace."
 msgstr ""
 
@@ -3614,7 +3618,7 @@ msgstr ""
 msgid "These credits will be retired upon purchase and will not be tradable. Retirement is permanent and non-reversible."
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:16
+#: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:12
 msgid "These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
 msgstr ""
 

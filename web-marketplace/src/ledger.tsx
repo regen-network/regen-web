@@ -74,6 +74,8 @@ const getApi = async (
   try {
     const regenApi = await connect({ signer });
     setApi(regenApi);
+    console.log('signer', signer);
+    console.log('regenApi', regenApi);
     setLoading(false);
   } catch (e) {
     setError(e);
@@ -86,7 +88,7 @@ export const LedgerProviderWithWallet: React.FC<React.PropsWithChildren<{}>> =
     const { wallet, loaded } = useWallet();
 
     return (
-      <LedgerProvider wallet={wallet} walletLoaded={true}>
+      <LedgerProvider wallet={wallet} walletLoaded={loaded}>
         {children}
       </LedgerProvider>
     );

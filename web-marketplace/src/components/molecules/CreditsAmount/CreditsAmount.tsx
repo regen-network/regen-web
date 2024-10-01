@@ -1,9 +1,11 @@
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
+import { msg, plural, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { useSetAtom } from 'jotai';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { microToDenom } from 'lib/denom.utils';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
@@ -44,7 +46,9 @@ export const CreditsAmount = ({
   const { _ } = useLingui();
 
   const [maxCreditsSelected, setMaxCreditsSelected] = useState(false);
-  const { setValue, trigger } = useFormContext<ChooseCreditsFormSchemaType>();
+  const { setValue, trigger, getValues } =
+    useFormContext<ChooseCreditsFormSchemaType>();
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
   const card = paymentOption === PAYMENT_OPTIONS.CARD;
   const orderedSellOrders = useMemo(
@@ -59,17 +63,45 @@ export const CreditsAmount = ({
   );
 
   useEffect(() => {
-    setSpendingCap(
-      getSpendingCap(paymentOption, filteredCryptoSellOrders, cardSellOrders),
+    const _spendingCap = getSpendingCap(
+      paymentOption,
+      filteredCryptoSellOrders,
+      cardSellOrders,
     );
-    setCreditsAvailable(
-      getCreditsAvailablePerCurrency(
-        paymentOption,
-        filteredCryptoSellOrders,
-        cardSellOrders,
-        creditTypePrecision,
-      ),
+    setSpendingCap(_spendingCap);
+    const _creditsAvailable = getCreditsAvailablePerCurrency(
+      paymentOption,
+      filteredCryptoSellOrders,
+      cardSellOrders,
+      creditTypePrecision,
     );
+    setCreditsAvailable(_creditsAvailable);
+
+    // This can happen when the user wants to buy only tradable credits,
+    // but the amount set is above the amount of tradable credits
+    // (all credits can be retired but are not necessarily all tradable based on disableAutoRetire value)
+    if (getValues(CREDITS_AMOUNT) > _creditsAvailable) {
+      setValue(CREDITS_AMOUNT, _creditsAvailable);
+      setValue(
+        CURRENCY_AMOUNT,
+        paymentOption === PAYMENT_OPTIONS.CARD
+          ? _spendingCap
+          : microToDenom(_spendingCap),
+      );
+      setValue(
+        SELL_ORDERS,
+        orderedSellOrders.map(order => {
+          const price = getSellOrderPrice({ order, card });
+          return formatFullSellOrder({ order, card, price });
+        }),
+      );
+      setErrorBannerTextAtom(
+        plural(_creditsAvailable, {
+          one: `Only ${_creditsAvailable} credit available with those paramaters, order quantity changed`,
+          other: `Only ${_creditsAvailable} credits available with those paramaters, order quantity changed`,
+        }),
+      );
+    }
   }, [
     cardSellOrders,
     filteredCryptoSellOrders,
@@ -77,6 +109,12 @@ export const CreditsAmount = ({
     setCreditsAvailable,
     setSpendingCap,
     creditTypePrecision,
+    getValues,
+    setValue,
+    orderedSellOrders,
+    card,
+    setErrorBannerTextAtom,
+    _,
   ]);
 
   // Max credits set

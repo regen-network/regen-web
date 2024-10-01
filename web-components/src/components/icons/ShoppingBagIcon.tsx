@@ -7,9 +7,7 @@ type Props = {
 
 export const ShoppingBagIcon = (props: Props) => {
   const randomId = Math.random().toString(36).substring(7);
-  const gradientId = props.disabled
-    ? `shopping_bag_gradient-${randomId}`
-    : 'shopping_bag_gradient';
+  const gradientId = `shopping_bag_gradient-${randomId}`;
   return (
     <svg
       width="24"

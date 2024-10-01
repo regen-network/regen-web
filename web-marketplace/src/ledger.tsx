@@ -86,7 +86,7 @@ export const LedgerProviderWithWallet: React.FC<React.PropsWithChildren<{}>> =
     const { wallet, loaded } = useWallet();
 
     return (
-      <LedgerProvider wallet={wallet} walletLoaded={loaded}>
+      <LedgerProvider wallet={wallet} walletLoaded={true}>
         {children}
       </LedgerProvider>
     );

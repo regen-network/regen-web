@@ -14,8 +14,8 @@ import { Link } from 'components/atoms';
 
 export interface TebuBannerProps {
   content: SanityBlockContent;
-  learnMoreLink?: LinkType;
-  logo?: string;
+  learnMoreLink: LinkType;
+  logo: string;
   logoAlt?: string;
   className?: string;
   onClose: () => void;

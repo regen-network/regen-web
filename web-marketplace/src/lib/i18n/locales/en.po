@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-09-30 11:58+0100\n"
+"POT-Creation-Date: 2024-10-01 12:58+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -95,7 +95,7 @@ msgstr ""
 msgid "{truncatedQuantity} credit(s) available"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Credits.tsx:45
+#: src/components/organisms/Order/Order.Summary.tsx:77
 msgid "# credits"
 msgstr ""
 
@@ -214,7 +214,7 @@ msgstr ""
 msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr ""
 
-#: src/components/organisms/Order/Order.BlockchainDetails.tsx:41
+#: src/components/organisms/Order/Order.Summary.tsx:170
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr ""
 
@@ -591,7 +591,11 @@ msgstr ""
 msgid "block height"
 msgstr ""
 
-#: src/components/organisms/Order/Order.BlockchainDetails.tsx:36
+#: src/components/organisms/Order/Order.Summary.tsx:157
+msgid "Blockchain Details"
+msgstr ""
+
+#: src/components/organisms/Order/Order.Summary.tsx:165
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:49
 #: src/lib/constants/shared.constants.tsx:94
 #: src/pages/ProjectFinished/ProjectFinished.tsx:93
@@ -755,7 +759,7 @@ msgstr ""
 msgid "carbon offset standard"
 msgstr ""
 
-#: src/components/organisms/Order/Order.PaymentInfo.tsx:33
+#: src/components/organisms/Order/Order.Summary.tsx:139
 msgid "card info"
 msgstr ""
 
@@ -1180,6 +1184,7 @@ msgid "credits"
 msgstr ""
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:220
+#: src/components/organisms/Order/Order.Summary.tsx:58
 msgid "Credits"
 msgstr ""
 
@@ -2154,7 +2159,7 @@ msgstr ""
 msgid "Must have recipients"
 msgstr ""
 
-#: src/pages/Orders/Orders.tsx:96
+#: src/pages/Orders/Orders.tsx:93
 msgid "My Orders"
 msgstr ""
 
@@ -2168,7 +2173,7 @@ msgstr ""
 msgid "Name of document"
 msgstr ""
 
-#: src/components/organisms/Order/Order.PaymentInfo.tsx:31
+#: src/components/organisms/Order/Order.Summary.tsx:137
 msgid "name on card"
 msgstr ""
 
@@ -2338,8 +2343,12 @@ msgstr ""
 msgid "partners"
 msgstr ""
 
-#: src/components/organisms/Order/Order.PaymentInfo.tsx:44
+#: src/components/organisms/Order/Order.Summary.tsx:150
 msgid "payment currency"
+msgstr ""
+
+#: src/components/organisms/Order/Order.Summary.tsx:133
+msgid "payment info"
 msgstr ""
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.PaymentInfo.tsx:42
@@ -2538,7 +2547,7 @@ msgstr ""
 msgid "price per credit"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Credits.tsx:32
+#: src/components/organisms/Order/Order.Summary.tsx:61
 msgid "Price per credit"
 msgstr ""
 
@@ -2794,7 +2803,7 @@ msgstr ""
 msgid "public profile tabs"
 msgstr ""
 
-#: src/components/organisms/Order/Order.BlockchainDetails.tsx:30
+#: src/components/organisms/Order/Order.Summary.tsx:159
 msgid "purchase date"
 msgstr ""
 
@@ -2993,12 +3002,16 @@ msgstr ""
 msgid "Retirement date"
 msgstr ""
 
+#: src/components/organisms/Order/Order.Summary.tsx:102
+msgid "Retirement Info"
+msgstr ""
+
 #: src/components/organisms/CreditRetireForm/CreditRetireForm.RetirementReminder.tsx:14
 #: src/lib/constants/shared.constants.tsx:40
 msgid "Retirement is permanent and non-reversible."
 msgstr ""
 
-#: src/components/organisms/Order/Order.RetirementInfo.tsx:39
+#: src/components/organisms/Order/Order.Summary.tsx:114
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:54
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:139
 #: src/pages/Certificate/Certificate.constants.ts:18
@@ -3012,7 +3025,7 @@ msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:59
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:494
-#: src/components/organisms/Order/Order.RetirementInfo.tsx:37
+#: src/components/organisms/Order/Order.Summary.tsx:112
 #: src/lib/constants/shared.constants.tsx:145
 #: src/pages/Certificate/Certificate.constants.ts:17
 msgid "Retirement reason"
@@ -3685,7 +3698,7 @@ msgstr ""
 msgid "total credits you have purchased"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Credits.tsx:51
+#: src/components/organisms/Order/Order.Summary.tsx:83
 msgid "total price"
 msgstr ""
 
@@ -3709,7 +3722,7 @@ msgstr ""
 msgid "TRADABLE AND RETIRABLE"
 msgstr ""
 
-#: src/components/organisms/Order/Order.RetirementInfo.tsx:31
+#: src/components/organisms/Order/Order.Summary.tsx:106
 msgid "Tradable Credits"
 msgstr ""
 
@@ -3977,7 +3990,7 @@ msgstr ""
 msgid "vintage period"
 msgstr ""
 
-#: src/components/organisms/Order/Order.PaymentInfo.tsx:36
+#: src/components/organisms/Order/Order.Summary.tsx:142
 msgid "Visa ending in"
 msgstr ""
 

@@ -11,6 +11,7 @@ import '../../App.css';
 import './Terrasos.tailwind.css';
 
 export const TerrasosProvider = () => {
+  console.log('TerrasosProvider');
   return (
     <SharedProviders customTheme={terrasosMuiTheme}>
       <LedgerProvider walletLoaded>

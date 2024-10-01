@@ -21,6 +21,7 @@ import '../../../../tailwind.css';
 import '../../App.css';
 
 export const RegenProvider = () => {
+  console.log('RegenProvider');
   return (
     <SharedProviders>
       <AuthProvider>

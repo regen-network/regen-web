@@ -53,6 +53,7 @@ const useCreditRetireSubmit = ({
   const { track } = useTracker();
   const creditRetireSubmit = useCallback(
     async (values: CreditRetireFormSchemaType): Promise<void> => {
+      console.log('creditRetireSubmit');
       const batchDenom = credits[creditRetireOpen].denom;
       track<Retire2Event>('retire2', {
         batchDenom,
@@ -103,6 +104,8 @@ const useCreditRetireSubmit = ({
           quantity: amountValue,
         });
       };
+      console.log('tx', tx);
+
       await signAndBroadcast(tx, () => setCreditRetireOpen(-1), {
         onError,
         onSuccess,

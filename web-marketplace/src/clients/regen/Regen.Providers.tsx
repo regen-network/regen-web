@@ -50,3 +50,5 @@ export const RegenProvider = () => {
     </SharedProviders>
   );
 };
+
+export default RegenProvider;

@@ -22,3 +22,5 @@ export const TerrasosProvider = () => {
     </SharedProviders>
   );
 };
+
+export default TerrasosProvider;

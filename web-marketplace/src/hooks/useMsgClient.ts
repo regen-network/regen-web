@@ -93,13 +93,14 @@ export default function useMsgClient(
       }
 
       setIsWaitingForSigning(true);
-
+      console.log('userRegenBalance', userRegenBalance);
       const txBytes = await api.msgClient.sign(
         wallet.address,
         msgs,
         fee,
         memo || '',
       );
+      console.log('txBytes', txBytes);
 
       setIsWaitingForSigning(false);
 

@@ -1,5 +1,6 @@
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
-import { useFormContext, useWatch } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
+import { i18n } from '@lingui/core';
 import { msg, plural, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
@@ -13,7 +14,6 @@ import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import {
   CREDITS_AMOUNT,
-  CURRENCY,
   CURRENCY_AMOUNT,
   SELL_ORDERS,
 } from './CreditsAmount.constants';
@@ -95,10 +95,11 @@ export const CreditsAmount = ({
           return formatFullSellOrder({ order, card, price });
         }),
       );
+      const formattedCreditsAvailable = i18n.number(_creditsAvailable);
       setErrorBannerTextAtom(
         plural(_creditsAvailable, {
-          one: `Only ${_creditsAvailable} credit available with those paramaters, order quantity changed`,
-          other: `Only ${_creditsAvailable} credits available with those paramaters, order quantity changed`,
+          one: `Only ${formattedCreditsAvailable} credit available with those paramaters, order quantity changed`,
+          other: `Only ${formattedCreditsAvailable} credits available with those paramaters, order quantity changed`,
         }),
       );
     }

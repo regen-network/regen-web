@@ -7,14 +7,16 @@ import {
 } from 'web-components/src/components/block-content';
 import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
+import { LinkType } from 'web-components/src/types/shared/linkType';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { Link } from 'components/atoms';
 
 export interface TebuBannerProps {
   content: SanityBlockContent;
-  learnMoreLink: string;
-  logo: string;
+  learnMoreLink?: LinkType;
+  logo?: string;
+  logoAlt?: string;
   className?: string;
   onClose: () => void;
 }
@@ -48,10 +50,10 @@ export const TebuBanner = ({
           <BlockContent content={content} />
         </div>
         <Link
-          href={learnMoreLink}
+          href={learnMoreLink.href}
           className="text-brand-400 sm:text-sm text-xs font-extrabold uppercase tracking-[1px] cursor-pointer flex items-center w-fit"
         >
-          <span className="mr-3">{_(msg`Learn more`)}</span>
+          <span className="mr-3">{learnMoreLink.text}</span>
           <SmallArrowIcon />
         </Link>
       </div>

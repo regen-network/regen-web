@@ -4005,6 +4005,28 @@ export type LinkFilter = {
   buttonDoc?: Maybe<DocFilter>;
 };
 
+export type LinkItem = {
+  __typename?: 'LinkItem';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  href?: Maybe<Scalars['String']>;
+  text?: Maybe<Scalars['String']>;
+};
+
+export type LinkItemFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  href?: Maybe<StringFilter>;
+  text?: Maybe<StringFilter>;
+};
+
+export type LinkItemSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  href?: Maybe<SortOrder>;
+  text?: Maybe<SortOrder>;
+};
+
 export type LinkSorting = {
   _key?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
@@ -7910,7 +7932,8 @@ export type TebuBanner = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   contentRaw?: Maybe<Scalars['JSON']>;
-  learnMoreLink?: Maybe<Scalars['String']>;
+  learnMoreLink?: Maybe<LinkItem>;
+  logo?: Maybe<CustomImage>;
   language?: Maybe<Scalars['String']>;
 };
 
@@ -7923,7 +7946,8 @@ export type TebuBannerFilter = {
   _updatedAt?: Maybe<DatetimeFilter>;
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
-  learnMoreLink?: Maybe<StringFilter>;
+  learnMoreLink?: Maybe<LinkItemFilter>;
+  logo?: Maybe<CustomImageFilter>;
   language?: Maybe<StringFilter>;
 };
 
@@ -7934,7 +7958,8 @@ export type TebuBannerSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
-  learnMoreLink?: Maybe<SortOrder>;
+  learnMoreLink?: Maybe<LinkItemSorting>;
+  logo?: Maybe<CustomImageSorting>;
   language?: Maybe<SortOrder>;
 };
 
@@ -9692,7 +9717,14 @@ export type TebuBannerQuery = (
   { __typename?: 'RootQuery' }
   & { allTebuBanner: Array<(
     { __typename?: 'TebuBanner' }
-    & Pick<TebuBanner, 'contentRaw' | 'learnMoreLink'>
+    & Pick<TebuBanner, 'contentRaw'>
+    & { learnMoreLink?: Maybe<(
+      { __typename?: 'LinkItem' }
+      & Pick<LinkItem, 'text' | 'href'>
+    )>, logo?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
+    )> }
   )> }
 );
 
@@ -11752,10 +11784,16 @@ export const TebuBannerDocument = gql`
     query TebuBanner {
   allTebuBanner {
     contentRaw
-    learnMoreLink
+    learnMoreLink {
+      text
+      href
+    }
+    logo {
+      ...customImageFields
+    }
   }
 }
-    `;
+    ${CustomImageFieldsFragmentDoc}`;
 
 /**
  * __useTebuBannerQuery__

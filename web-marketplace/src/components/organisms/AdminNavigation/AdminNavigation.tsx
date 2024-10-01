@@ -62,16 +62,16 @@ export const AdminNavigation = ({
                 className="flex p-2 cursor-pointer"
                 onClick={() => onNavItemClick(item.path)}
                 selected={isSelected(item.path, currentPath)}
-                sx={{
+                sx={theme => ({
                   '&.Mui-selected, &.Mui-selected:hover': {
-                    backgroundColor: 'rgb(239, 239, 239)',
+                    backgroundColor: theme.palette.info.light,
                     borderRadius: '5px',
                   },
                   '&:hover': {
-                    backgroundColor: 'rgb(239, 239, 239)',
+                    backgroundColor: theme.palette.info.light,
                     borderRadius: '5px',
                   },
-                }}
+                })}
               >
                 <ListItemIcon className="min-w-[40px]">
                   {item.icon}

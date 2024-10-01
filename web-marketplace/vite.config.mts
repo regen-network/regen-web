@@ -37,6 +37,7 @@ export default defineConfig(({ mode }) => {
     build:
       mode === 'production'
         ? {
+            sourcemap: true,
             outDir: 'build',
             rollupOptions: {
               plugins: [inject({ Buffer: ['buffer/', 'Buffer'] })],

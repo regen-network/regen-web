@@ -25,26 +25,27 @@ type Props = {
 const TebuBannerWrapper = ({ className }: Props) => {
   const { _ } = useLingui();
   const [isVisible, setIsVisible] = useAtom(isTebuBannerVisibleAtom);
-  const tebuBannerResponse = useQuery(getTebuBannerQuery({ sanityClient }));
-  const response = tebuBannerResponse.data?.allTebuBanner[0];
+  const { data: tebuBannerResponse, isLoading } = useQuery(
+    getTebuBannerQuery({ sanityClient }),
+  );
+  const response = tebuBannerResponse?.allTebuBanner[0];
   const defaultTebuBannerLink = useMemo(() => getDefaultTebuBannerLink(_), [_]);
   const defaultTebuBannerLogo = useMemo(() => getDefaultTebuBannerLogo(_), [_]);
-  const learnMoreLink = (response?.learnMoreLink ??
-    defaultTebuBannerLink) as LinkType;
-  const logo = String(
-    getCustomImage(response?.logo) ?? defaultTebuBannerLogo.imageHref,
-  );
-  const logoAlt = String(
-    response?.logo?.imageAlt ?? defaultTebuBannerLogo.imageAlt,
-  );
+  const learnMoreLink = response?.learnMoreLink as LinkType;
+  const logo = getCustomImage(response?.logo);
+  const logoAlt = response?.logo?.imageAlt;
 
   return (
     <div className={cn(!isVisible && 'hidden', className)}>
       <TebuBanner
         content={response?.contentRaw}
-        learnMoreLink={learnMoreLink}
-        logo={logo}
-        logoAlt={logoAlt}
+        learnMoreLink={
+          isLoading ? learnMoreLink : learnMoreLink ?? defaultTebuBannerLink
+        }
+        logo={isLoading ? logo : logo ?? defaultTebuBannerLogo.imageHref}
+        logoAlt={
+          isLoading ? logoAlt : logoAlt ?? defaultTebuBannerLogo.imageAlt
+        }
         onClose={() => setIsVisible(false)}
       />
     </div>

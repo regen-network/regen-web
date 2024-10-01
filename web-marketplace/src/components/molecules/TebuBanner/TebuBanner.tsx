@@ -14,9 +14,9 @@ import { Link } from 'components/atoms';
 
 export interface TebuBannerProps {
   content: SanityBlockContent;
-  learnMoreLink: LinkType;
-  logo: string;
-  logoAlt?: string;
+  learnMoreLink?: LinkType | null;
+  logo?: string | null;
+  logoAlt?: string | null;
   className?: string;
   onClose: () => void;
 }
@@ -37,11 +37,13 @@ export const TebuBanner = ({
         className,
       )}
     >
-      <img
-        src={logo}
-        alt={_(msg`Tebu banner`)}
-        className="mr-20 sm:mr-30 object-contain"
-      />
+      {logo && (
+        <img
+          src={logo}
+          alt={_(msg`Tebu banner`)}
+          className="mr-20 sm:mr-30 object-contain"
+        />
+      )}
       <div
         className="flex flex-col max-w-[620px] gap-10 sm:gap-20 font-montserrat"
         style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}
@@ -49,13 +51,15 @@ export const TebuBanner = ({
         <div className="sm:text-base text-sm font-normal leading-[145%] text-grey-500">
           <BlockContent content={content} />
         </div>
-        <Link
-          href={learnMoreLink.href}
-          className="text-brand-400 sm:text-sm text-xs font-extrabold uppercase tracking-[1px] cursor-pointer flex items-center w-fit"
-        >
-          <span className="mr-3">{learnMoreLink.text}</span>
-          <SmallArrowIcon />
-        </Link>
+        {learnMoreLink && (
+          <Link
+            href={learnMoreLink.href}
+            className="text-brand-400 sm:text-sm text-xs font-extrabold uppercase tracking-[1px] cursor-pointer flex items-center w-fit"
+          >
+            <span className="mr-3">{learnMoreLink.text}</span>
+            <SmallArrowIcon />
+          </Link>
+        )}
       </div>
       <CloseIcon
         role="button"

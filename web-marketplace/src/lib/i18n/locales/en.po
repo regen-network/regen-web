@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-09-25 16:26+0100\n"
+"POT-Creation-Date: 2024-10-01 14:02+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -444,7 +444,7 @@ msgid "approved methodologies"
 msgstr ""
 
 #: src/pages/Marketplace/Storefront/Storefront.tsx:399
-msgid "Are you sure would you like to cancel this sell order?"
+msgid "Are you sure you want to cancel this sell order?"
 msgstr ""
 
 #: src/components/organisms/RolesForm/components/AdminModal/AdminModal.constants.ts:4
@@ -1865,6 +1865,7 @@ msgid "learn more"
 msgstr ""
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:59
+#: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:10
 msgid "Learn more"
 msgstr ""
 
@@ -3230,7 +3231,7 @@ msgstr ""
 msgid "Sorry, your transaction was not successful."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:206
+#: src/pages/Projects/AllProjects/AllProjects.tsx:207
 msgid "Sort by:"
 msgstr ""
 
@@ -3348,6 +3349,14 @@ msgstr ""
 #: src/components/organisms/BasketOverview/BasketOverview.constants.ts:5
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:16
 msgid "Take from basket"
+msgstr ""
+
+#: src/components/molecules/TebuBanner/TebuBanner.tsx:43
+msgid "Tebu banner"
+msgstr ""
+
+#: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:15
+msgid "Tebu logo"
 msgstr ""
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.constants.ts:14

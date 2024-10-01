@@ -1,0 +1,12 @@
+query TebuBanner {
+  allTebuBanner {
+    contentRaw
+    learnMoreLink {
+      text
+      href
+    }
+    logo {
+      ...customImageFields
+    }
+  }
+}

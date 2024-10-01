@@ -30,11 +30,12 @@ import {
   getProjectCardButtonMapping,
   getProjectCardPurchaseDetailsTitleMapping,
 } from 'lib/constants/shared.constants';
-import { CREDIT_CLASS_FILTERS_TO_DESELECT } from 'lib/env';
+import { CREDIT_CLASS_FILTERS_TO_DESELECT, IS_TERRASOS } from 'lib/env';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
+import { TebuBannerWrapper } from 'components/organisms/TebuBannerWrapper/TebuBannerWrapper';
 
 import { useFetchCreditClasses } from '../hooks/useFetchCreditClasses';
 import { useProjectsContext } from '../Projects.context';
@@ -217,6 +218,9 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           </Flex>
         </Flex>
       </Flex>
+      {IS_TERRASOS && (
+        <TebuBannerWrapper className="-mt-15 mb-3 sm:mt-20 sm:mb-30 col-span-full" />
+      )}
       {projects?.map(project => {
         const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
         return (

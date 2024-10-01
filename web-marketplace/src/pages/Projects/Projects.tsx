@@ -138,7 +138,6 @@ const Projects = (): JSX.Element => {
               },
             }}
           />
-
           <Outlet
             context={{
               allProjects,

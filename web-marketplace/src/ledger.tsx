@@ -87,6 +87,11 @@ export const LedgerProviderWithWallet: React.FC<React.PropsWithChildren<{}>> =
   ({ children }) => {
     const { wallet, loaded } = useWallet();
 
+    // Prevent rendering until wallet is loaded
+    if (!loaded) {
+      return null; // TODO use loading
+    }
+
     return (
       <LedgerProvider wallet={wallet} walletLoaded={loaded}>
         {children}

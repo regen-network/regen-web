@@ -16,6 +16,7 @@ import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { NormalizedRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { BasketTokens } from 'hooks/useBasketTokens';
 
@@ -56,6 +57,8 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
 }) => {
   const { _ } = useLingui();
   const navigate = useNavigate();
+  const { wallet } = useWallet();
+  console.log('wallet', wallet);
 
   const tabs: IconTabProps[] = useMemo(
     () => [

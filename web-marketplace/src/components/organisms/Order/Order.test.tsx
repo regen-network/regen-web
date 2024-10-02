@@ -1,3 +1,4 @@
+import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { describe, expect, it } from 'vitest';
 import { render, screen } from 'web-marketplace/test/test-utils';
 
@@ -9,7 +10,7 @@ import {
   paymentInfo,
   retirementInfo,
 } from './Order.mock';
-import { CreditsData, OrderDataProps } from './Order.types';
+import { OrderDataProps } from './Order.types';
 
 describe('Order Component', () => {
   const mockOrderData: OrderDataProps = {
@@ -163,7 +164,7 @@ describe('Order Component', () => {
               ...mockOrderData.order.credits,
               credits: '2000',
               price: '400000',
-              askDenom: 'usd',
+              askDenom: USD_DENOM,
             },
           },
         }}
@@ -207,7 +208,7 @@ describe('Order Component', () => {
               ...mockOrderData.order.paymentInfo,
               nameOnCard: 'John Doe',
               cardLast4: '1234',
-              askDenom: 'usd',
+              askDenom: USD_DENOM,
             },
           },
         }}

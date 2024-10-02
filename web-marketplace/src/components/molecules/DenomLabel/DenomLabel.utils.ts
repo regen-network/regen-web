@@ -1,18 +1,25 @@
-import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import { UPPERCASE_DENOM } from 'config/allowedBaseDenoms';
 
+export type AllowedDenoms = Array<
+  Pick<AllowedDenom, 'bankDenom' | 'displayDenom'>
+>;
 type Params = {
   bankDenom: string;
   baseDenom?: string;
-  allowedDenomsData?: QueryAllowedDenomsResponse;
+  allowedDenoms?: AllowedDenoms;
 };
 
 export const findDisplayDenom = ({
-  allowedDenomsData,
+  allowedDenoms,
   bankDenom,
   baseDenom,
 }: Params): string => {
-  const allowedDenom = allowedDenomsData?.allowedDenoms?.find(
+  console.log(
+    '🚀 ~ file: DenomLabel.utils.ts:18 ~ allowedDenoms:',
+    allowedDenoms,
+  );
+  const allowedDenom = allowedDenoms?.find(
     allowedDenom => allowedDenom.bankDenom === bankDenom,
   );
   const displayDenom = allowedDenom?.displayDenom ?? baseDenom;

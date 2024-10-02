@@ -19,7 +19,7 @@ export const OrderSummaryRow = ({
       <Title
         variant="h6"
         className={cn(
-          "text-grey-400 text-[11px] font-extrabold font-['muli'] uppercase tracking-[1px] mt-[3px]",
+          'text-grey-400 text-[11px] font-extrabold uppercase tracking-[1px] mt-[3px]',
           titleClassName,
         )}
       >

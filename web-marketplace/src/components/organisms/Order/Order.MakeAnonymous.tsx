@@ -51,10 +51,12 @@ export const MakeAnonymous = ({
             name={name}
             autoFocus
           >
-            <option value={i18n._(msg`Yes`)}>
+            {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
+            <option value="Yes">
               <Trans>Yes</Trans>
             </option>
-            <option value={i18n._(msg`No`)}>
+            {/* eslint-disable-next-line lingui/no-unlocalized-strings */}
+            <option value="No">
               <Trans>No</Trans>
             </option>
           </select>

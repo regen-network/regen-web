@@ -1,25 +1,27 @@
-import { cn } from 'web-components/src/utils/styles/cn';
 import { DenomIcon } from 'web-marketplace/src/components/molecules/DenomIcon/DenomIcon';
 
-import QuestionMarkTooltip from '../tooltip/QuestionMarkTooltip';
-import { Body } from '../typography';
+import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
+import { Body } from 'web-components/src/components/typography/Body';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 export function DenomIconWithCurrency({
-  currency,
+  baseDenom,
+  displayDenom,
   className,
   tooltipText,
 }: {
-  currency: string;
+  baseDenom: string;
+  displayDenom: string;
   className?: string;
   tooltipText?: string;
 }) {
   return (
     <Body size="sm" className={cn('flex gap-5', className)}>
       <DenomIcon
-        baseDenom={currency}
+        baseDenom={baseDenom}
         className="h-[24px] inline-block denom-icon"
       />
-      <span className="pb-5 pt-3 text-sm">{currency.toUpperCase()}</span>
+      <span className="pb-5 pt-3 text-sm">{displayDenom}</span>
       {tooltipText && (
         <QuestionMarkTooltip
           placement="bottom"

@@ -1,7 +1,8 @@
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { USD_DENOM } from 'config/allowedBaseDenoms';
 
-import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
+// import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
 import { BlockchainIcon } from 'web-components/src/components/icons/BlockchainIcon';
 import CertifiedDocumentIcon from 'web-components/src/components/icons/CertifiedDocumentIcon';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
@@ -10,22 +11,24 @@ import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyA
 import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
 
 import { Link } from 'components/atoms';
+import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
+import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
+import { allowedDenoms } from 'components/organisms/Order/Order.mock';
 
 import { OrderSummarySection } from './Order.Summary.Section';
 import { OrderSummaryRow } from './Order.SummaryRow';
 import {
   BlockchainDetailsData,
   CreditsData,
-  OrderSummarySectionProps,
   PaymentInfoData,
   RetirementInfoData,
 } from './Order.types';
 
 interface OrderSummaryProps {
-  retirementInfo: OrderSummarySectionProps;
-  blockchainDetails: OrderSummarySectionProps;
-  creditsData: OrderSummarySectionProps;
-  paymentInfo: OrderSummarySectionProps;
+  retirementInfo: RetirementInfoData;
+  blockchainDetails: BlockchainDetailsData;
+  creditsData: CreditsData;
+  paymentInfo: PaymentInfoData;
 }
 
 export const OrderSummary = ({
@@ -35,19 +38,18 @@ export const OrderSummary = ({
   paymentInfo,
 }: OrderSummaryProps) => {
   const { _ } = useLingui();
-  const { purchaseDate, blockchainRecord } =
-    blockchainDetails as BlockchainDetailsData;
-  const { nameOnCard, askDenom, cardLast4 } = paymentInfo as PaymentInfoData;
-  const isCardPayment = nameOnCard && cardLast4 && askDenom === 'usd';
-  const isTradable =
-    (retirementInfo as RetirementInfoData).tradableCredits !== null;
-  const { reason, location, tradableCredits } =
-    retirementInfo as RetirementInfoData;
+  const { purchaseDate, blockchainRecord } = blockchainDetails;
+  const { nameOnCard, askDenom, askBaseDenom, cardLast4, cardBrand } =
+    paymentInfo;
+  const isCardPayment = nameOnCard && cardLast4 && askDenom === USD_DENOM;
+  const isTradable = retirementInfo.tradableCredits !== null;
+  const { reason, location, tradableCredits } = retirementInfo;
   const {
     credits,
     price,
     askDenom: creditAskDenom,
-  } = creditsData as CreditsData;
+    askBaseDenom: creditAskBaseDenom,
+  } = creditsData;
 
   const totalPrice = +credits * +price;
 
@@ -67,7 +69,12 @@ export const OrderSummary = ({
                 className="mr-10 text-base"
               />
               <DenomIconWithCurrency
-                currency={creditAskDenom}
+                baseDenom={creditAskBaseDenom}
+                displayDenom={findDisplayDenom({
+                  allowedDenoms,
+                  bankDenom: creditAskDenom,
+                  baseDenom: creditAskBaseDenom,
+                })}
                 className="mt-5"
               />
             </div>
@@ -89,8 +96,15 @@ export const OrderSummary = ({
                 className="mr-10 text-lg pb-5"
               />
               <DenomIconWithCurrency
-                currency={askDenom}
-                className={`${askDenom === 'usd' ? 'mt-[7px]' : 'mt-[2px]'}`}
+                baseDenom={askBaseDenom}
+                displayDenom={findDisplayDenom({
+                  allowedDenoms,
+                  bankDenom: askDenom,
+                  baseDenom: askBaseDenom,
+                })}
+                className={`${
+                  askDenom === USD_DENOM ? 'mt-[7px]' : 'mt-[2px]'
+                }`}
               />
             </div>
           }
@@ -139,7 +153,7 @@ export const OrderSummary = ({
               title={_(msg`card info`)}
               value={
                 <span>
-                  {_(msg`Visa ending in`)} {cardLast4}
+                  {cardBrand} {_(msg`ending in`)} {cardLast4}
                 </span>
               }
               className="items-center"
@@ -148,7 +162,16 @@ export const OrderSummary = ({
         ) : (
           <OrderSummaryRow
             title={_(msg`payment currency`)}
-            value={<DenomIconWithCurrency currency={askDenom} />}
+            value={
+              <DenomIconWithCurrency
+                baseDenom={askBaseDenom}
+                displayDenom={findDisplayDenom({
+                  allowedDenoms,
+                  bankDenom: askDenom,
+                  baseDenom: askBaseDenom,
+                })}
+              />
+            }
           />
         )}
       </OrderSummarySection>
@@ -174,7 +197,11 @@ export const OrderSummary = ({
             }
             value={
               <Link
-                href="https://google.com"
+                href={`${
+                  import.meta.env.VITE_BLOCK_EXPLORER
+                }/txs/${blockchainRecord}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-grey-700 !underline inline-block text-ellipsis w-[100px] overflow-hidden"
               >
                 {blockchainRecord}

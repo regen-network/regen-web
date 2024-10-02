@@ -1,5 +1,3 @@
-import { Currency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
-
 import { ORDER_STATUS } from './Order.constants';
 
 export type OrderStatus = keyof typeof ORDER_STATUS;
@@ -8,10 +6,10 @@ export interface OrderDataProps {
   project: OrderProjectData;
   order: {
     status: OrderStatus;
-    retirementInfo: OrderSummarySectionProps;
-    blockchainDetails: OrderSummarySectionProps;
-    credits: OrderSummarySectionProps;
-    paymentInfo: OrderSummarySectionProps;
+    retirementInfo: RetirementInfoData;
+    blockchainDetails: BlockchainDetailsData;
+    credits: CreditsData;
+    paymentInfo: PaymentInfoData;
   };
 }
 
@@ -47,12 +45,7 @@ export type CreditsData = {
 export type PaymentInfoData = {
   nameOnCard: string;
   cardLast4: string;
+  cardBrand: string;
   askDenom: string;
   askBaseDenom: string;
 };
-
-export type OrderSummarySectionProps =
-  | CreditsData
-  | RetirementInfoData
-  | PaymentInfoData
-  | BlockchainDetailsData;

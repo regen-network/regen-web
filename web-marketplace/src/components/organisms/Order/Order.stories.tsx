@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
+import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { Order } from 'web-marketplace/src/components/organisms/Order/Order';
 import { ORDER_STATUS } from 'web-marketplace/src/components/organisms/Order/Order.constants';
 
@@ -21,6 +22,7 @@ const args = {
   },
   order: {
     status: ORDER_STATUS.delivered,
+    cardData: '**** **** **** 1234',
     retirementInfo,
     blockchainDetails,
     credits,
@@ -69,11 +71,13 @@ Crypto.args = {
     ...args.order,
     credits: {
       ...args.order.credits,
-      askDenom: 'usdc',
+      askDenom: REGEN_DENOM,
+      askBaseDenom: REGEN_DENOM,
     },
     paymentInfo: {
       ...args.order.paymentInfo,
-      askDenom: 'usdc',
+      askDenom: REGEN_DENOM,
+      askBaseDenom: REGEN_DENOM,
     },
   },
 };
@@ -134,7 +138,8 @@ TradableOrder.args = {
     ...args.order,
     credits: {
       ...args.order.credits,
-      askDenom: 'usdc',
+      askDenom: REGEN_DENOM,
+      askBaseDenom: REGEN_DENOM,
     },
     retirementInfo: {
       ...args.order.retirementInfo,
@@ -143,7 +148,8 @@ TradableOrder.args = {
     },
     paymentInfo: {
       ...args.order.paymentInfo,
-      askDenom: 'usdc',
+      askDenom: REGEN_DENOM,
+      askBaseDenom: REGEN_DENOM,
     },
   },
 };

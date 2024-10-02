@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-01 12:25+0200\n"
+"POT-Creation-Date: 2024-10-02 15:46+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -45,8 +45,8 @@ msgstr ""
 msgid "(retirement is permanent and non-reversible)"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:99
-msgid "{_creditsAvailable, plural, one {Only {_creditsAvailable} credit available with those paramaters, order quantity changed} other {Only {_creditsAvailable} credits available with those paramaters, order quantity changed}}"
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:100
+msgid "{_creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
 msgstr ""
 
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:132
@@ -1171,7 +1171,7 @@ msgstr ""
 msgid "credit name"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:223
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:224
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr ""
 
@@ -3126,8 +3126,8 @@ msgstr ""
 msgid "Select all"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:208
 #: src/components/molecules/CreditsAmount/CreditsAmount.tsx:209
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:210
 msgid "Select option"
 msgstr ""
 

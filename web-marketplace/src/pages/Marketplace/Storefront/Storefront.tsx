@@ -396,7 +396,7 @@ export const Storefront = (): JSX.Element => {
         onConfirm={cancelSellOrderSubmit}
         onConfirmTitle={_(msg`Yes, cancel sell order`)}
         onCancelTitle={_(msg`WHOOPS, EXIT`)}
-        title={_(msg`Are you sure would you like to cancel this sell order?`)}
+        title={_(msg`Are you sure you want to cancel this sell order?`)}
         cardItems={getCancelCardItems({
           sellOrder: normalizedSellOrders[selectedSellOrder ?? 0] ?? {},
           _,

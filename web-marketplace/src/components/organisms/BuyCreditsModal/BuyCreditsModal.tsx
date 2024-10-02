@@ -164,7 +164,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
       return errors;
     };
 
-    const { data: allowedDenomsData } = useQuery(
+    const { data: allowedDenoms } = useQuery(
       getAllowedDenomQuery({
         client: marketplaceClient,
         enabled: !!marketplaceClient,
@@ -174,7 +174,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     const sellOrdersOptions = getOptions({
       sellOrders,
       setSelectedProjectById,
-      allowedDenomsData,
+      allowedDenomsData: allowedDenoms,
     });
 
     const isDisableAutoRetire = selectedSellOrder?.disableAutoRetire;
@@ -307,7 +307,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                           {`${microToDenom(
                             selectedSellOrder?.askAmount || '',
                           )} ${findDisplayDenom({
-                            allowedDenomsData,
+                            allowedDenoms,
                             bankDenom: selectedSellOrder?.askDenom ?? '',
                             baseDenom: selectedSellOrder?.askBaseDenom,
                           })}/${_(msg`credit`)}`}
@@ -345,7 +345,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                                 ),
                                 askAmount: Number(selectedSellOrder?.askAmount),
                                 displayDenom: findDisplayDenom({
-                                  allowedDenomsData,
+                                  allowedDenoms,
                                   bankDenom: selectedSellOrder?.askDenom ?? '',
                                   baseDenom: selectedSellOrder?.askBaseDenom,
                                 }),

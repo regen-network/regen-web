@@ -69,7 +69,7 @@ export const getSellOrderLabel = ({
   };
   const price = microToDenom(askAmount);
   const displayDenom = findDisplayDenom({
-    allowedDenomsData,
+    allowedDenoms: allowedDenomsData,
     bankDenom: askDenom,
     baseDenom: askBaseDenom,
   });

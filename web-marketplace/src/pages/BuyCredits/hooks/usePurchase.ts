@@ -79,6 +79,15 @@ export const usePurchase = () => {
       elements,
       confirmationTokenId,
     }: PurchaseParams) => {
+      const retirementJurisdiction =
+        retiring && country
+          ? getJurisdictionIsoCode({
+              country,
+              stateProvince,
+              postalCode,
+            })
+          : '';
+
       // Fiat payment
       if (paymentOption === PAYMENT_OPTIONS.CARD && stripe && elements) {
         // 1. Create payment intent
@@ -101,6 +110,8 @@ export const usePurchase = () => {
                 savePaymentMethod,
                 createActiveAccount,
                 paymentMethodId,
+                retirementJurisdiction,
+                retirementReason,
               },
               token,
               retryCsrfRequest,
@@ -169,14 +180,7 @@ export const usePurchase = () => {
             disableAutoRetire: !retiring,
             quantity: String(order.quantity),
             retirementReason: retirementReason,
-            retirementJurisdiction:
-              retiring && country
-                ? getJurisdictionIsoCode({
-                    country,
-                    stateProvince,
-                    postalCode,
-                  })
-                : '',
+            retirementJurisdiction,
           })),
         });
 

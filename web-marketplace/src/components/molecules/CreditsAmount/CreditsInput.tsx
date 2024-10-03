@@ -57,7 +57,7 @@ export const CreditsInput = ({
         }
       />
       {errors[CREDITS_AMOUNT] && (
-        <div className="pl-20 pt-5 text-error-300 text-sm absolute top-full left-0">
+        <div className="pt-5 text-error-300 text-sm">
           {`${errors[CREDITS_AMOUNT].message}`}
         </div>
       )}

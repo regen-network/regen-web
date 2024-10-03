@@ -62,8 +62,7 @@ export const CreditsAmount = ({
     [card, cardSellOrders, filteredCryptoSellOrders],
   );
 
-  useEffect(() => {
-    // Set initial credits amount to min(1, creditsAvailable)
+  const setInitialCreditsAmount = useCallback(async () => {
     if (getValues(CREDITS_AMOUNT) === 0) {
       const _creditsAvailable = getCreditsAvailablePerCurrency(
         paymentOption,
@@ -72,7 +71,7 @@ export const CreditsAmount = ({
         creditTypePrecision,
       );
       const creditsAmount = Math.min(_creditsAvailable, 1);
-      setValue(CREDITS_AMOUNT, creditsAmount);
+      await setValue(CREDITS_AMOUNT, creditsAmount);
 
       const { currencyAmount, sellOrders } = getCurrencyAmount({
         currentCreditsAmount: creditsAmount,
@@ -80,8 +79,9 @@ export const CreditsAmount = ({
         orderedSellOrders,
         creditTypePrecision,
       });
-      setValue(CURRENCY_AMOUNT, currencyAmount);
-      setValue(SELL_ORDERS, sellOrders);
+      await setValue(CURRENCY_AMOUNT, currencyAmount);
+      await setValue(SELL_ORDERS, sellOrders);
+      trigger();
     }
   }, [
     card,
@@ -92,7 +92,13 @@ export const CreditsAmount = ({
     orderedSellOrders,
     paymentOption,
     setValue,
+    trigger,
   ]);
+
+  useEffect(() => {
+    // Set initial credits amount to min(1, creditsAvailable)
+    setInitialCreditsAmount();
+  }, [setInitialCreditsAmount]);
 
   useEffect(() => {
     const _spendingCap = getSpendingCap(
@@ -161,12 +167,13 @@ export const CreditsAmount = ({
   // Max credits set
   useEffect(() => {
     if (maxCreditsSelected) {
-      setValue(CREDITS_AMOUNT, creditsAvailable);
+      setValue(CREDITS_AMOUNT, creditsAvailable, { shouldValidate: true });
       setValue(
         CURRENCY_AMOUNT,
         paymentOption === PAYMENT_OPTIONS.CARD
           ? spendingCap
           : microToDenom(spendingCap),
+        { shouldValidate: true },
       );
       setValue(
         SELL_ORDERS,
@@ -175,7 +182,6 @@ export const CreditsAmount = ({
           return formatFullSellOrder({ order, card, price });
         }),
       );
-      trigger();
       setMaxCreditsSelected(false);
     }
   }, [
@@ -186,7 +192,6 @@ export const CreditsAmount = ({
     paymentOption,
     setValue,
     spendingCap,
-    trigger,
   ]);
 
   // Credits amount change
@@ -201,11 +206,10 @@ export const CreditsAmount = ({
         orderedSellOrders,
         creditTypePrecision,
       });
-      setValue(CURRENCY_AMOUNT, currencyAmount);
+      setValue(CURRENCY_AMOUNT, currencyAmount, { shouldValidate: true });
       setValue(SELL_ORDERS, sellOrders);
-      trigger();
     },
-    [card, orderedSellOrders, setValue, creditTypePrecision, trigger],
+    [card, orderedSellOrders, setValue, creditTypePrecision],
   );
 
   // Currency amount change
@@ -220,11 +224,10 @@ export const CreditsAmount = ({
         orderedSellOrders,
         creditTypePrecision,
       });
-      setValue(CREDITS_AMOUNT, currentCreditsAmount);
+      setValue(CREDITS_AMOUNT, currentCreditsAmount, { shouldValidate: true });
       setValue(SELL_ORDERS, sellOrders);
-      trigger();
     },
-    [card, orderedSellOrders, setValue, creditTypePrecision, trigger],
+    [card, orderedSellOrders, setValue, creditTypePrecision],
   );
 
   const displayDenom = findDisplayDenom({

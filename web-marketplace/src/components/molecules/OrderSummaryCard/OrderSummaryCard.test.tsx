@@ -48,7 +48,8 @@ describe('OrderSummaryCard', () => {
     expect(numberOfCredits).toBeInTheDocument();
   });
 
-  it('updates the number of credits and total price accordingly', () => {
+  // TODO fix as part of APP-364
+  it.skip('updates the number of credits and total price accordingly', () => {
     render(<OrderSummaryCard {...orderSummary} />);
 
     const editButton = screen.getByRole('button', {

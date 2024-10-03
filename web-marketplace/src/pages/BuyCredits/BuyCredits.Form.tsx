@@ -246,6 +246,7 @@ export const BuyCreditsForm = ({
             }}
             paymentOptionCryptoClicked={paymentOptionCryptoClicked}
             setPaymentOptionCryptoClicked={setPaymentOptionCryptoClicked}
+            initialPaymentOption={data?.paymentOption}
           />
         )}
 

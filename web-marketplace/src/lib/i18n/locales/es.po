@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-01 14:02+0100\n"
+"POT-Creation-Date: 2024-10-03 10:17+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -226,7 +226,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:66
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:62
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:46
 #: src/pages/Activity/Activity.tsx:12
 msgid "Activity"
@@ -443,7 +443,7 @@ msgstr ""
 msgid "approved methodologies"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.tsx:399
+#: src/pages/Marketplace/Storefront/Storefront.tsx:248
 msgid "Are you sure you want to cancel this sell order?"
 msgstr ""
 
@@ -722,7 +722,7 @@ msgid "cancel"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:42
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:10
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:9
 msgid "Cancel"
 msgstr ""
 
@@ -1383,7 +1383,7 @@ msgstr ""
 msgid "Ecocredit batch ID"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:73
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:69
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:50
 msgid "Ecocredit batches"
 msgstr ""
@@ -1702,7 +1702,7 @@ msgid "I just offset my carbon footprint on #RegenMarketplace with @regen_networ
 msgstr ""
 
 #: src/features/marketplace/BuySellOrderFlow/BuySellOrderFlow.constants.ts:3
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:13
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:12
 msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future!"
 msgstr ""
 
@@ -3073,7 +3073,7 @@ msgstr ""
 msgid "Sell order"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:9
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:8
 msgid "Sell Order #"
 msgstr ""
 
@@ -3090,7 +3090,7 @@ msgid "sell order id:"
 msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:52
-#: src/pages/Marketplace/Storefront/Storefront.tsx:248
+#: src/pages/Marketplace/Storefront/Storefront.tsx:154
 msgid "Sell orders"
 msgstr ""
 
@@ -3268,7 +3268,7 @@ msgstr ""
 msgid "State / Region"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:61
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:57
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:43
 msgid "Stats"
 msgstr ""
@@ -3648,7 +3648,6 @@ msgstr ""
 msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:57
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:34
 msgid "Trade"
 msgstr ""
@@ -3803,7 +3802,7 @@ msgstr ""
 msgid "Videos"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:11
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:10
 msgid "View all sell orders"
 msgstr ""
 
@@ -3885,10 +3884,6 @@ msgstr ""
 msgid "view transaction"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:6
-msgid "View your ecocredits"
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:92
 msgid "view your portfolio"
 msgstr ""
@@ -3966,7 +3961,7 @@ msgstr ""
 msgid "whoops, cancel"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.tsx:398
+#: src/pages/Marketplace/Storefront/Storefront.tsx:247
 msgid "WHOOPS, EXIT"
 msgstr ""
 
@@ -3990,7 +3985,7 @@ msgstr ""
 msgid "Write a short comment or longer project update."
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.tsx:397
+#: src/pages/Marketplace/Storefront/Storefront.tsx:246
 msgid "Yes, cancel sell order"
 msgstr ""
 
@@ -4159,7 +4154,7 @@ msgstr ""
 msgid "Your retirement was successful!"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:8
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:7
 msgid "Your sell order was cancelled"
 msgstr ""
 

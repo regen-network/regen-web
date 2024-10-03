@@ -50,6 +50,7 @@ export type Props = {
   setupWalletModal: () => void;
   paymentOptionCryptoClicked: boolean;
   setPaymentOptionCryptoClicked: UseStateSetter<boolean>;
+  initialPaymentOption?: PaymentOptionsType;
 };
 
 export function ChooseCreditsForm({
@@ -69,6 +70,7 @@ export function ChooseCreditsForm({
   setupWalletModal,
   paymentOptionCryptoClicked,
   setPaymentOptionCryptoClicked,
+  initialPaymentOption,
 }: Props) {
   const { _ } = useLingui();
   const cryptoCurrencies = useMemo(
@@ -124,7 +126,6 @@ export function ChooseCreditsForm({
     control: form.control,
     name: CURRENCY,
   });
-  console.log(form.getValues(CREDITS_AMOUNT));
 
   const filteredCryptoSellOrders = useMemo(
     () =>
@@ -154,12 +155,12 @@ export function ChooseCreditsForm({
 
   useEffect(() => {
     // If there are some sell orders available for fiat purchase, default to 'card' option
-    if (cardSellOrders.length > 0) {
+    if (cardSellOrders.length > 0 && !initialPaymentOption) {
       setPaymentOption(PAYMENT_OPTIONS.CARD);
       form.setValue(CREDIT_VINTAGE_OPTIONS, []);
       form.setValue(CURRENCY, cardCurrency);
     }
-  }, [cardSellOrders.length]); // just run this once
+  }, [cardSellOrders.length, initialPaymentOption]); // just run this once
 
   useEffect(() => {
     if (paymentOptionCryptoClicked && isConnected) {

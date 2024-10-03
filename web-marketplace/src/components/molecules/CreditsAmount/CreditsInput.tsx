@@ -19,10 +19,15 @@ export const CreditsInput = ({
   const {
     register,
     formState: { errors },
+    setValue,
   } = useFormContext<ChooseCreditsFormSchemaType>();
   const { onChange } = register(CREDITS_AMOUNT);
 
   const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    // Remove leading zeros and update the value
+    const value = event.target.value;
+    const newValue = Number(value);
+    setValue(CREDITS_AMOUNT, newValue);
     onChange(event);
     handleCreditsAmountChange(event);
   };

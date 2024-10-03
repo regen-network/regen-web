@@ -1,6 +1,7 @@
 msgid ""
 msgstr ""
 "POT-Creation-Date: 2024-10-03 10:17+0100\n"
+"POT-Creation-Date: 2024-10-03 10:27+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1197,10 +1198,6 @@ msgstr ""
 msgid "Credits cannot exceed"
 msgstr ""
 
-#: src/components/organisms/Order/Order.constants.ts:8
-msgid "Credits delivered"
-msgstr ""
-
 #: src/components/organisms/UserCredits.tsx:150
 msgid "Credits for"
 msgstr ""
@@ -1211,10 +1208,6 @@ msgstr ""
 
 #: src/components/molecules/CreditsAmount/CreditsInput.tsx:55
 msgid "Credits Input"
-msgstr ""
-
-#: src/components/organisms/Order/Order.constants.ts:9
-msgid "Credits issuance pending"
 msgstr ""
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:64
@@ -1560,10 +1553,6 @@ msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:63
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
-msgstr ""
-
-#: src/components/organisms/Order/Order.tsx:127
-msgid "Expected delivery date"
 msgstr ""
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:89
@@ -1994,10 +1983,6 @@ msgstr ""
 msgid "Main photo"
 msgstr ""
 
-#: src/components/organisms/Order/Order.MakeAnonymous.tsx:20
-msgid "Make Anonymous select"
-msgstr ""
-
 #: src/components/organisms/RolesForm/components/AdminModal/AdminModal.tsx:84
 msgid "Make sure this is the correct REGEN address. <0>If you change this to an address you don’t have access to, you will be unable to edit the project.</0>"
 msgstr ""
@@ -2145,6 +2130,20 @@ msgstr ""
 
 #: src/pages/Orders/Orders.tsx:96
 msgid "My Orders"
+msgstr ""
+
+#: src/pages/Dashboard/Dashboard.constants.tsx:73
+msgid "my orders"
+msgstr ""
+
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:18
+#: src/pages/Dashboard/Dashboard.constants.tsx:87
+msgid "My Orders"
+msgstr ""
+
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:23
+#: src/pages/Dashboard/Dashboard.constants.tsx:95
+msgid "My prefinance projects"
 msgstr ""
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:158

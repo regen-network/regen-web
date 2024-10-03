@@ -33,10 +33,12 @@ export function getSpendingCap(
         (prev, cur) => prev + Number(cur.quantity) * cur.usdPrice,
         0,
       )
-    : filteredCryptoSellOrders?.reduce(
-        (prev, cur) => prev + Number(cur.quantity) * Number(cur.askAmount),
-        0,
-      ) || 0;
+    : microToDenom(
+        filteredCryptoSellOrders?.reduce(
+          (prev, cur) => prev + Number(cur.quantity) * Number(cur.askAmount),
+          0,
+        ) || 0,
+      );
 }
 
 type GetCreditsAmountParams = {

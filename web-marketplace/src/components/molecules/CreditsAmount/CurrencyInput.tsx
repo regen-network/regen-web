@@ -150,7 +150,7 @@ export const CurrencyInput = ({
         }
       />
       {errors[CURRENCY_AMOUNT]?.message && (
-        <div className="pl-20 pt-5 text-error-300 text-sm top-full left-0">
+        <div className="pt-5 text-error-300 text-sm">
           {`${errors[CURRENCY_AMOUNT].message} ${displayDenom}`}
         </div>
       )}

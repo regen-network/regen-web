@@ -63,6 +63,38 @@ export const CreditsAmount = ({
   );
 
   useEffect(() => {
+    // Set initial credits amount to min(1, creditsAvailable)
+    if (getValues(CREDITS_AMOUNT) === 0) {
+      const _creditsAvailable = getCreditsAvailablePerCurrency(
+        paymentOption,
+        filteredCryptoSellOrders,
+        cardSellOrders,
+        creditTypePrecision,
+      );
+      const creditsAmount = Math.min(_creditsAvailable, 1);
+      setValue(CREDITS_AMOUNT, creditsAmount);
+
+      const { currencyAmount, sellOrders } = getCurrencyAmount({
+        currentCreditsAmount: creditsAmount,
+        card,
+        orderedSellOrders,
+        creditTypePrecision,
+      });
+      setValue(CURRENCY_AMOUNT, currencyAmount);
+      setValue(SELL_ORDERS, sellOrders);
+    }
+  }, [
+    card,
+    cardSellOrders,
+    creditTypePrecision,
+    filteredCryptoSellOrders,
+    getValues,
+    orderedSellOrders,
+    paymentOption,
+    setValue,
+  ]);
+
+  useEffect(() => {
     const _spendingCap = getSpendingCap(
       paymentOption,
       filteredCryptoSellOrders,

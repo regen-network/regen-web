@@ -124,6 +124,7 @@ export function ChooseCreditsForm({
     control: form.control,
     name: CURRENCY,
   });
+  console.log(form.getValues(CREDITS_AMOUNT));
 
   const filteredCryptoSellOrders = useMemo(
     () =>
@@ -157,8 +158,6 @@ export function ChooseCreditsForm({
       setPaymentOption(PAYMENT_OPTIONS.CARD);
       form.setValue(CREDIT_VINTAGE_OPTIONS, []);
       form.setValue(CURRENCY, cardCurrency);
-      form.setValue(CREDITS_AMOUNT, 0);
-      form.setValue(CURRENCY_AMOUNT, 0);
     }
   }, [cardSellOrders.length]); // just run this once
 

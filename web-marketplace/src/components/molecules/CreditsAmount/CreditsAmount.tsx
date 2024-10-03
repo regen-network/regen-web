@@ -77,17 +77,13 @@ export const CreditsAmount = ({
     );
     setCreditsAvailable(_creditsAvailable);
 
-    // This can happen when the user wants to buy only tradable credits,
-    // but the amount set is above the amount of tradable credits
-    // (all credits can be retired but are not necessarily all tradable based on disableAutoRetire value)
-    if (getValues(CREDITS_AMOUNT) > _creditsAvailable) {
+    // This can happen when the user switches payment option, currency,
+    // or to only buy tradable credits,
+    // but the amount set is above the amount of newly available credits
+    const currentCreditsAmount = getValues(CREDITS_AMOUNT);
+    if (currentCreditsAmount > _creditsAvailable) {
       setValue(CREDITS_AMOUNT, _creditsAvailable);
-      setValue(
-        CURRENCY_AMOUNT,
-        paymentOption === PAYMENT_OPTIONS.CARD
-          ? _spendingCap
-          : microToDenom(_spendingCap),
-      );
+      setValue(CURRENCY_AMOUNT, _spendingCap);
       setValue(
         SELL_ORDERS,
         orderedSellOrders.map(order => {
@@ -102,6 +98,18 @@ export const CreditsAmount = ({
           other: `Only ${formattedCreditsAvailable} credits available with those paramaters, order quantity changed`,
         }),
       );
+    } else {
+      // Else we keep the same amount of credits
+      // but we still need to update currency amount and sell orders
+      // (because pricing and sell orders can be different)
+      const { currencyAmount, sellOrders } = getCurrencyAmount({
+        currentCreditsAmount,
+        card,
+        orderedSellOrders,
+        creditTypePrecision,
+      });
+      setValue(CURRENCY_AMOUNT, currencyAmount);
+      setValue(SELL_ORDERS, sellOrders);
     }
   }, [
     cardSellOrders,

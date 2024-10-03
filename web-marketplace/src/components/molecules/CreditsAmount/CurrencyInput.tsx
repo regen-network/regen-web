@@ -11,11 +11,7 @@ import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
-import {
-  CREDITS_AMOUNT,
-  CURRENCY,
-  CURRENCY_AMOUNT,
-} from './CreditsAmount.constants';
+import { CURRENCY, CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import { CurrencyInputProps } from './CreditsAmount.types';
 
 const CustomSelect = lazy(
@@ -40,7 +36,6 @@ export const CurrencyInput = ({
     formState: { errors },
     setValue,
     control,
-    trigger,
   } = useFormContext<ChooseCreditsFormSchemaType>();
   const { _ } = useLingui();
 
@@ -72,11 +67,8 @@ export const CurrencyInput = ({
               )?.[0].askBaseDenom,
             },
       );
-      setValue(CREDITS_AMOUNT, 0);
-      setValue(CURRENCY_AMOUNT, 0);
-      trigger();
     },
-    [cryptoCurrencies, setValue, trigger],
+    [cryptoCurrencies, setValue],
   );
 
   return (

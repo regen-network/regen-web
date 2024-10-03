@@ -147,9 +147,6 @@ export function ChooseCreditsForm({
         CURRENCY,
         option === PAYMENT_OPTIONS.CARD ? cardCurrency : defaultCryptoCurrency,
       );
-      form.setValue(CREDITS_AMOUNT, 0);
-      form.setValue(CURRENCY_AMOUNT, 0);
-      form.trigger();
     },
     [setPaymentOption, form, cardCurrency, defaultCryptoCurrency],
   );

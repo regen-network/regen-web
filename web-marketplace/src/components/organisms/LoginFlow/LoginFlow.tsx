@@ -32,6 +32,7 @@ type Props = {
   qrCodeUri?: string;
   createProject?: boolean;
   isConnectingRef?: React.MutableRefObject<boolean>;
+  buyCreditsFrom?: string;
 };
 
 const LoginFlow = ({
@@ -41,6 +42,7 @@ const LoginFlow = ({
   modalState,
   createProject,
   isConnectingRef,
+  buyCreditsFrom,
 }: Props) => {
   const { _ } = useLingui();
   const {
@@ -57,7 +59,7 @@ const LoginFlow = ({
     isWaitingForSigningAtom,
   );
   const { loginDisabled } = useWallet();
-  const socialProviders = useSocialProviders(createProject);
+  const socialProviders = useSocialProviders(createProject, buyCreditsFrom);
 
   return (
     <>

@@ -48,10 +48,14 @@ export const CurrencyInput = ({
 
   const handleOnChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
+      // Remove leading zeros and update the value
+      const value = event.target.value;
+      const newValue = Number(value);
+      setValue(CURRENCY_AMOUNT, newValue);
       onChange(event);
       handleCurrencyAmountChange(event);
     },
-    [handleCurrencyAmountChange, onChange],
+    [handleCurrencyAmountChange, onChange, setValue],
   );
 
   const onHandleCurrencyChange = useCallback(

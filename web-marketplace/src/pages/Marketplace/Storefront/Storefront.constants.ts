@@ -3,7 +3,6 @@ import { msg } from '@lingui/macro';
 export const BUY_SELL_ORDER_HEADER = msg`Congrats! Your purchase was successful.`;
 export const BUY_SELL_ORDER_TITLE = msg`Buy`;
 export const BUY_SELL_ORDER_ACTION = msg`BUY`;
-export const BUY_SELL_ORDER_BUTTON = msg`View your ecocredits`;
 
 export const CANCEL_SELL_ORDER_HEADER = msg`Your sell order was cancelled`;
 export const CANCEL_SELL_ORDER_TITLE = msg`Sell Order #`;

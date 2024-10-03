@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -33,16 +33,13 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
-import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 import SellOrdersTable from 'components/organisms/SellOrdersTable/SellOrdersTable';
 import useMsgClient from 'hooks/useMsgClient';
 
-import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
 import { useCheckSellOrderAvailabilty } from './hooks/useCheckSellOrderAvailabilty';
 import { useNormalizedSellOrders } from './hooks/useNormalizedSellOrders';
 import {
-  BUY_SELL_ORDER_BUTTON,
   BUY_SELL_ORDER_TITLE,
   CANCEL_SELL_ORDER_ACTION,
   STOREFRONT_TWITTER_TEXT,
@@ -64,8 +61,6 @@ export const Storefront = (): JSX.Element => {
   const selectedSellOrderIdRef = useRef<number>();
   const lastProjectIdRef = useRef('');
   const submittedQuantityRef = useRef<number>();
-  const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
-  const isReadyToBuy = selectedSellOrder !== null && selectedAction === 'buy';
   const navigate = useNavigate();
   const isCancelModalOpen =
     selectedSellOrder !== null && selectedAction === 'cancel';
@@ -114,14 +109,6 @@ export const Storefront = (): JSX.Element => {
     }
   };
 
-  const onSubmitCallback = ({
-    creditCount,
-    sellOrderId,
-  }: BuyCreditsValues): void => {
-    selectedSellOrderIdRef.current = Number(sellOrderId);
-    submittedQuantityRef.current = creditCount;
-  };
-
   const { isConnected, wallet } = useWallet();
   const {
     signAndBroadcast,
@@ -136,34 +123,7 @@ export const Storefront = (): JSX.Element => {
   const errorEnum = findErrorByCodeEnum({ errorCode: error });
   const ErrorIcon = errorsMapping[errorEnum].icon;
 
-  const projectData = useMemo(() => {
-    const sellOrder = normalizedSellOrders?.find(
-      sellOrder => Number(sellOrder.id) === selectedSellOrderIdRef.current,
-    );
-    const projectId = sellOrder?.project?.id;
-    if (!projectId) return;
-    lastProjectIdRef.current = projectId;
-    return {
-      id: projectId,
-      name: sellOrder?.project?.name ?? projectId,
-    };
-  }, [normalizedSellOrders]);
-
   const shareUrl = REGEN_APP_PROJECT_URL + (lastProjectIdRef.current ?? '');
-
-  const buySellOrderSubmit = useBuySellOrderSubmit({
-    accountAddress,
-    project: projectData,
-    signAndBroadcast,
-    setCardItems,
-    onBroadcast: () => setSelectedSellOrder(null),
-    setTxButtonTitle,
-    setTxModalHeader,
-    setTxModalTitle,
-    buttonTitle: _(BUY_SELL_ORDER_BUTTON),
-    refetchSellOrders,
-    onSubmitCallback,
-  });
 
   const cancelSellOrderSubmit = useCancelSellOrderSubmit({
     selectedSellOrder: normalizedSellOrders[selectedSellOrder ?? 0],
@@ -177,40 +137,6 @@ export const Storefront = (): JSX.Element => {
     accountAddress,
   });
 
-  const {
-    askAmount,
-    askBaseDenom,
-    askDenom,
-    batchDenom,
-    id: orderId,
-    project,
-    seller,
-    amountAvailable,
-    disableAutoRetire,
-  } = normalizedSellOrders[selectedSellOrder ?? 0] ?? {};
-
-  // Community credits are identified by the presence of a credit class in sanity.
-  // If the field classIdOrName is the same as the on chain classId then it means that there is no associated credit class in sanity.
-  // In that case we assume that the credit is a community credit.
-  const isCommunityCredit = project?.classId === project?.classIdOrName;
-
-  const initialValues = useMemo(
-    () => ({
-      creditCount: 1,
-      retirementReason: '',
-      stateProvince: '',
-      country: 'US',
-      postalCode: '',
-      retirementAction: 'autoretire',
-      price: Number(askAmount),
-      askDenom,
-      batchDenom: batchDenom,
-      sellOrderId: orderId,
-      agreeErpa: false,
-    }),
-    [askAmount, askDenom, batchDenom, orderId],
-  );
-
   useCheckSellOrderAvailabilty({
     selectedSellOrderIdRef,
     submittedQuantityRef,
@@ -220,12 +146,6 @@ export const Storefront = (): JSX.Element => {
     setTxModalHeader,
     setTxModalTitle,
   });
-
-  useEffect(() => {
-    if (isReadyToBuy && !isBuyModalOpen && isConnected) {
-      setIsBuyModalOpen(true);
-    }
-  }, [isReadyToBuy, isBuyModalOpen, isConnected]);
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
@@ -270,31 +190,6 @@ export const Storefront = (): JSX.Element => {
           </WithLoader>
         </Box>
       </Section>
-      <BuyCreditsModal
-        open={isBuyModalOpen && selectedSellOrder !== null}
-        onClose={() => {
-          setSelectedSellOrder(null);
-          setIsBuyModalOpen(false);
-        }}
-        onSubmit={buySellOrderSubmit}
-        sellOrders={[
-          {
-            id: orderId,
-            askAmount,
-            askDenom,
-            askBaseDenom,
-            batchDenom,
-            seller,
-            quantity: amountAvailable,
-            disableAutoRetire,
-          },
-        ]}
-        project={{
-          id: project?.id ?? '',
-        }}
-        initialValues={initialValues}
-        isCommunityCredit={isCommunityCredit}
-      />
       <ProcessingModal
         open={isProcessingModalOpen}
         onClose={() => setIsProcessingModalOpen(false)}

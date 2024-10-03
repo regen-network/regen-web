@@ -7,6 +7,9 @@ import {
   ListItemText,
   ListSubheader,
 } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
+
+import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 
 import { AdminNavigationSection } from './AdminNavigation.types';
 import { isSelected } from './AdminNavigation.utils';
@@ -26,8 +29,13 @@ export const AdminNavigation = ({
 }: AdminNavigationProps) => {
   const { _ } = useLingui();
 
-  // TODO: implement savedPaymentInfo to check if there's any payment info saved
-  const savedPaymentInfo = true;
+  const { data: paymentMethodData } = useQuery(
+    getPaymentMethodsQuery({
+      enabled: true,
+    }),
+  );
+
+  const savedPaymentInfo = (paymentMethodData?.paymentMethods?.length ?? 0) > 0;
 
   if (!savedPaymentInfo) {
     // If there is no saved payment info remove the item from the nav

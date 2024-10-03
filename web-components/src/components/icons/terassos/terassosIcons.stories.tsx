@@ -3,7 +3,7 @@ import { Grid } from '@mui/material';
 import { Meta } from '@storybook/react';
 
 import { LabeledIcon } from '../icons.stories';
-import RegionIndicatorIcon from './RegionIndicatorIcon';
+import RegionIndicatorIcon from './ColombiaRegionIndicatorIcon';
 
 export default {
   title: 'Terassos/Icons',

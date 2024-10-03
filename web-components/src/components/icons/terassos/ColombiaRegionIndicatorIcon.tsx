@@ -1,8 +1,8 @@
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
-import path from 'path';
 
 import { sxToArray } from '../../../utils/mui/sxToArray';
 
+// TODO: utilize theme colors?
 const selectedFill = '#BD9A11';
 const selectedStroke = '#8A6E0B';
 
@@ -26,7 +26,6 @@ const ANDEAN_PATH =
 export type Region = 'PACIFIC' | 'ORINOCO' | 'CARIBBEAN' | 'AMAZON' | 'ANDEAN';
 
 interface RegionPaths {
-  // [key in Region]: string;
   PACIFIC: string;
   ORINOCO: string;
   CARIBBEAN: string;
@@ -73,20 +72,24 @@ export default function RegionIndicatorIcon({
 }: RegionIndicatorIconProps): JSX.Element {
   const activeRegionPath = Object.entries(regionPaths).filter(
     ([key, value]) => key === region,
+    // TODO: review this
   )[0][1];
   const otherRegionPaths = Object.entries(regionPaths)
     .filter(([key, value]) => key !== region)
     .map(([_, value]) => value);
   return (
     <SvgIcon
-      sx={[{ color: '#4FB573' }, ...sxToArray(sx)]}
+      sx={[
+        { color: '#4FB573', mr: 1, width: '30px', height: '30px' },
+        ...sxToArray(sx),
+      ]}
       width="30"
       height="30"
       viewBox="0 0 30 30"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <g clip-path="url(#clip0_1479_22775)">
+      <g clipPath="url(#clip0_1479_22775)">
         {otherRegionPaths.map((path: string, index: number) => (
           <RegionPath key={index} path={path} />
         ))}

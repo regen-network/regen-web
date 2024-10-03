@@ -52,13 +52,13 @@ describe('Order Component', () => {
     expect(screen.getByText(/prefinance/i)).toBeInTheDocument();
   });
 
-  it('renders the `Expected delivery date` and `Credits issuance pending` tag if the issuance is pending', () => {
+  it('renders the `Expected delivery date` and `Credit issuance pending` tag if the issuance is pending', () => {
     render(<Order {...mockOrderData} />);
 
     expect(
       screen.getByText(/expected delivery date 2023-10-01/i),
     ).toBeInTheDocument();
-    expect(screen.getByText(/Credits issuance pending/i)).toBeInTheDocument();
+    expect(screen.getByText(/Credit issuance pending/i)).toBeInTheDocument();
   });
 
   it('renders the date and `credits delivered` tag if the issuance is delivered', () => {

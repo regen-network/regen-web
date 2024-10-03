@@ -7,8 +7,8 @@ import InfoLabel from 'web-components/src/components/info-label';
 import { InfoLabelVariant } from 'web-components/src/components/info-label/InfoLabel.types';
 
 import {
+  CREDIT_ISSUANCE_PENDING,
   CREDITS_DELIVERED,
-  CREDITS_ISSUANCE_PENDING,
   ORDER_STATUS,
 } from './Order.constants';
 import { OrderStatus } from './Order.types';
@@ -36,7 +36,7 @@ const labelConfig: LabelConfig = {
   },
   [ORDER_STATUS.pending]: {
     variant: 'pending' as InfoLabelVariant,
-    label: CREDITS_ISSUANCE_PENDING,
+    label: CREDIT_ISSUANCE_PENDING,
     labelColor: 'text-orange-700',
     icon: (
       <PendingIcon

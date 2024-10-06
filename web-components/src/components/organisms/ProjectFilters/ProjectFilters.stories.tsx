@@ -35,6 +35,7 @@ const Template: StoryFn = args => {
       filters={args.filters}
       activeFilterIds={activeFilters}
       onFilterChange={onFilterChange}
+      onFilterReset={() => setActiveFilters([])}
     />
   );
 };

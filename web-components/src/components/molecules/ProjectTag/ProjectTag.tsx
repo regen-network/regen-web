@@ -8,9 +8,10 @@ import { isImageType, ProjectTagType } from './ProjectTag.types';
 export interface Props {
   tag: ProjectTagType;
   sx?: SxProps<Theme>;
+  onClick?: () => void;
 }
 
-const ProjectTag = ({ tag, sx = [] }: Props): JSX.Element => {
+const ProjectTag = ({ tag, sx = [], onClick }: Props): JSX.Element => {
   const { icon, name } = tag;
 
   return (
@@ -28,6 +29,7 @@ const ProjectTag = ({ tag, sx = [] }: Props): JSX.Element => {
         },
         ...sxToArray(sx),
       ]}
+      onClick={onClick}
     >
       {isImageType(icon) && (
         <Box

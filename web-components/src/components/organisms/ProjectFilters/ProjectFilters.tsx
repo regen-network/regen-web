@@ -1,6 +1,7 @@
-import { Box, Divider, FormControlLabel } from '@mui/material';
+import React, { cloneElement } from 'react';
+import { Trans } from '@lingui/macro';
+import { Box, ButtonBase, Divider, FormControlLabel } from '@mui/material';
 import Checkbox from 'web-components/src/components/inputs/new/CheckBox/Checkbox';
-
 
 import { ProjectTag } from '../../molecules/ProjectTag/ProjectTag';
 import { Title } from '../../typography';
@@ -18,23 +19,42 @@ const tagSx = {
   },
 };
 
-function TagFilter({ icon, name }: { icon: JSX.Element; name: string }) {
+interface TagFilterProps {
+  icon: JSX.Element;
+  name: string;
+  isSelected: boolean;
+  onClick?: () => void;
+}
+
+function TagFilter({ icon, name, isSelected, onClick }: TagFilterProps) {
+  // add isSelected prop to icon
+  const iconWithProps = cloneElement(icon, { isSelected });
   return (
     <ProjectTag
-      // onClick={() => console.log('clicked')}
       sx={tagSx}
       tag={{
         name,
-        icon,
+        icon: iconWithProps,
       }}
+      onClick={onClick}
     />
   );
 }
 
-function CheckboxFilter({ icon, name }: { icon: JSX.Element; name: string }) {
+function CheckboxFilter({
+  icon,
+  name,
+  isSelected,
+  onChange,
+}: {
+  icon: JSX.Element;
+  name: string;
+  isSelected: boolean;
+  onChange?: () => void;
+}) {
   return (
     <FormControlLabel
-      control={<Checkbox />}
+      control={<Checkbox checked={isSelected} onChange={onChange} />}
       label={
         <Box display="flex" flexWrap="nowrap" alignItems="center">
           {name}
@@ -61,13 +81,17 @@ export interface Filter {
 export default function ProjectFilters({
   filters,
   activeFilterIds,
+  onFilterChange,
 }: {
   filters: Filter[];
   activeFilterIds: string[];
+  onFilterChange: (id: string) => void;
 }) {
   return (
     <>
-      <Title variant="h4">Filters</Title>
+      <Title variant="h4">
+        <Trans>Filters</Trans>
+      </Title>
       <Divider sx={{ my: 5 }} />
       {filters.map(filter => {
         return (
@@ -78,7 +102,13 @@ export default function ProjectFilters({
             {filter.displayType === 'tag' && (
               <Box display="flex" flexWrap="wrap" gap={2}>
                 {filter.options.map(({ name, icon, id }) => (
-                  <TagFilter name={name} icon={icon} key={id} />
+                  <TagFilter
+                    name={name}
+                    icon={icon}
+                    key={id}
+                    isSelected={activeFilterIds.includes(id)}
+                    onClick={() => onFilterChange(id)}
+                  />
                 ))}
               </Box>
             )}
@@ -86,7 +116,13 @@ export default function ProjectFilters({
             {filter.displayType === 'checkbox' && (
               <Box display="flex" flexDirection="column">
                 {filter.options.map(({ name, icon, id }) => (
-                  <CheckboxFilter name={name} icon={icon} key={id} />
+                  <CheckboxFilter
+                    isSelected={activeFilterIds.includes(id)}
+                    name={name}
+                    icon={icon}
+                    key={id}
+                    onChange={() => onFilterChange(id)}
+                  />
                 ))}
               </Box>
             )}

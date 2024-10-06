@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import { Box } from '@mui/material';
 import { Meta, StoryFn } from '@storybook/react';
 
-import SvgThemeWrapper from '../../icons/SvgThemeWrapper';
-import RegionIndicatorIcon, {
-  Region,
-} from '../../icons/terassos/ColombiaRegionIndicatorIcon';
+import RegionIndicatorIcon from '../../icons/terassos/ColombiaRegionIcon';
+import ComplianceBadge from '../../icons/terassos/ComplianceBadge';
+import SvgWithSelectedColor from '../../icons/utils/SvgWithSelectedColor';
 import ProjectFilters, { Filter, FilterOptions } from './ProjectFilters';
 
 export default {
@@ -12,39 +12,32 @@ export default {
   component: ProjectFilters,
 } as Meta;
 
-const activeFilters = ['AMAZON', 'TROPICAL_VERY_HUMID_FOREST'];
+const initialActiveFilters = [
+  'AMAZON',
+  'TROPICAL_VERY_HUMID_FOREST',
+  'VOLUNTARY',
+];
 
-export function ComplianceBadge() {
+
+
+const Template: StoryFn = args => {
+  const [activeFilters, setActiveFilters] =
+    useState<string[]>(initialActiveFilters);
+  const onFilterChange = (id: string) => {
+    const newFilters = activeFilters.includes(id)
+      ? activeFilters.filter(filterId => filterId !== id)
+      : [...activeFilters, id];
+    setActiveFilters(newFilters);
+  };
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      width="24px"
-      height="24px"
-      padding="3px"
-      borderRadius="50%"
-      fontSize="12px"
-      fontWeight={700}
-      sx={{
-        borderRadius: '40px',
-        border: '1px dashed var(--surface-stroke, #D2D5D9)',
-        background: 'var(--surface-selected-item-background, #EFEFEF)',
-        ml: 2,
-      }}
-    >
-      ha.
-    </Box>
+    <ProjectFilters
+      {...args}
+      filters={args.filters}
+      activeFilterIds={activeFilters}
+      onFilterChange={onFilterChange}
+    />
   );
-}
-
-const Template: StoryFn = args => (
-  <ProjectFilters
-    {...args}
-    filters={args.filters}
-    activeFilterIds={activeFilters}
-  />
-);
+};
 // add another component
 
 const ecosystemIconSx = {
@@ -58,10 +51,11 @@ const ecosystemTags: FilterOptions[] = [
     name: 'Tropical very humid forest',
     id: 'TROPICAL_VERY_HUMID_FOREST',
     icon: (
-      <SvgThemeWrapper
+      <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
-        color="#A5A4A4"
+        unselectedColor="#A5A4A4"
+        selectedColor="#BD9A11"
       />
     ),
   },
@@ -69,10 +63,11 @@ const ecosystemTags: FilterOptions[] = [
     name: 'Tropical humid forest',
     id: 'TROPICAL_HUMID_FOREST',
     icon: (
-      <SvgThemeWrapper
+      <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
-        color="#A5A4A4"
+        unselectedColor="#A5A4A4"
+        selectedColor="#BD9A11"
       />
     ),
   },
@@ -80,10 +75,11 @@ const ecosystemTags: FilterOptions[] = [
     name: 'Tropical dry forest',
     id: 'TROPICAL_DRY_FOREST',
     icon: (
-      <SvgThemeWrapper
+      <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
-        color="#A5A4A4"
+        unselectedColor="#A5A4A4"
+        selectedColor="#BD9A11"
       />
     ),
   },
@@ -91,10 +87,11 @@ const ecosystemTags: FilterOptions[] = [
     name: 'Premontane humid forest',
     id: 'PREMONTANE_HUMID_FOREST',
     icon: (
-      <SvgThemeWrapper
+      <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
-        color="#A5A4A4"
+        unselectedColor="#A5A4A4"
+        selectedColor="#BD9A11"
       />
     ),
   },
@@ -102,10 +99,11 @@ const ecosystemTags: FilterOptions[] = [
     name: 'Low montane very humid forest',
     id: 'LOW_MONTANE_VERY_HUMID_FOREST',
     icon: (
-      <SvgThemeWrapper
+      <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
-        color="#A5A4A4"
+        unselectedColor="#A5A4A4"
+        selectedColor="#BD9A11"
       />
     ),
   },
@@ -115,52 +113,27 @@ const regionTags: FilterOptions[] = [
   {
     name: 'Amazon',
     id: 'AMAZON',
-    icon: (
-      <RegionIndicatorIcon
-        isSelected={activeFilters.includes('AMAZON')}
-        region={'AMAZON'}
-      />
-    ),
+    icon: <RegionIndicatorIcon region="AMAZON" />,
   },
   {
     name: 'Pacific',
     id: 'PACIFIC',
-    icon: (
-      <RegionIndicatorIcon
-        isSelected={activeFilters.includes('PACIFIC')}
-        region="PACIFIC"
-      />
-    ),
+    icon: <RegionIndicatorIcon region="PACIFIC" />,
   },
   {
     name: 'Orinoco',
     id: 'ORINOCO',
-    icon: (
-      <RegionIndicatorIcon
-        isSelected={activeFilters.includes('ORINOCO')}
-        region="ORINOCO"
-      />
-    ),
+    icon: <RegionIndicatorIcon region="ORINOCO" />,
   },
   {
     name: 'Caribbean',
     id: 'CARIBBEAN',
-    icon: (
-      <RegionIndicatorIcon
-        isSelected={activeFilters.includes('CARIBBEAN')}
-        region="CARIBBEAN"
-      />
-    ),
+    icon: <RegionIndicatorIcon region="CARIBBEAN" />,
   },
   {
     name: 'Andean',
     id: 'ANDEAN',
-    icon: (
-      <RegionIndicatorIcon
-        isSelected={activeFilters.includes('ANDEAN')}
-        region="ANDEAN"
-      />
-    ),
+    icon: <RegionIndicatorIcon region="ANDEAN" />,
   },
 ];
 

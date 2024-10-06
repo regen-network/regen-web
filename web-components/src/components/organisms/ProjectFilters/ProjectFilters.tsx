@@ -1,70 +1,9 @@
-import React, { cloneElement } from 'react';
 import { Trans } from '@lingui/macro';
-import { Box, ButtonBase, Divider, FormControlLabel } from '@mui/material';
-import Checkbox from 'web-components/src/components/inputs/new/CheckBox/Checkbox';
+import { Box, Divider } from '@mui/material';
 
-import { ProjectTag } from '../../molecules/ProjectTag/ProjectTag';
-import { Title } from '../../typography';
-
-export interface ProjectFiltersProps {
-  // Add props here
-}
-
-const tagSx = {
-  cursor: 'pointer',
-  boxShadow:
-    '0px 2px 2px 0px var(--tag-filter-outer-shadow, rgba(0, 0, 0, 0.20))',
-  '&:hover': {
-    filter: 'brightness(0.9)',
-  },
-};
-
-interface TagFilterProps {
-  icon: JSX.Element;
-  name: string;
-  isSelected: boolean;
-  onClick?: () => void;
-}
-
-function TagFilter({ icon, name, isSelected, onClick }: TagFilterProps) {
-  // add isSelected prop to icon
-  const iconWithProps = cloneElement(icon, { isSelected });
-  return (
-    <ProjectTag
-      sx={tagSx}
-      tag={{
-        name,
-        icon: iconWithProps,
-      }}
-      onClick={onClick}
-    />
-  );
-}
-
-function CheckboxFilter({
-  icon,
-  name,
-  isSelected,
-  onChange,
-}: {
-  icon: JSX.Element;
-  name: string;
-  isSelected: boolean;
-  onChange?: () => void;
-}) {
-  return (
-    <FormControlLabel
-      control={<Checkbox checked={isSelected} onChange={onChange} />}
-      label={
-        <Box display="flex" flexWrap="nowrap" alignItems="center">
-          {name}
-          {icon}
-        </Box>
-      }
-      sx={{ mb: 2 }}
-    />
-  );
-}
+import { Subtitle, Title } from '../../typography';
+import TagFilter from './ProjectFilter.TagFilter';
+import CheckboxFilter from './ProjectFilters.CheckboxFilter';
 
 export interface FilterOptions {
   name: string;
@@ -82,16 +21,23 @@ export default function ProjectFilters({
   filters,
   activeFilterIds,
   onFilterChange,
+  onFilterReset,
 }: {
   filters: Filter[];
   activeFilterIds: string[];
   onFilterChange: (id: string) => void;
+  onFilterReset: () => void;
 }) {
   return (
     <>
-      <Title variant="h4">
-        <Trans>Filters</Trans>
-      </Title>
+      <Box display="flex" justifyContent="space-between" alignItems="baseline">
+        <Title variant="h4">
+          <Trans>Filters</Trans>
+        </Title>
+        <Subtitle onClick={onFilterReset} sx={{ cursor: 'pointer' }}>
+          <Trans>Reset filters</Trans>
+        </Subtitle>
+      </Box>
       <Divider sx={{ my: 5 }} />
       {filters.map(filter => {
         return (

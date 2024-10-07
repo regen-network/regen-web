@@ -168,6 +168,7 @@ const filters: Filter[] = [
     displayType: 'tag',
     title: 'Ecosystem',
     options: ecosystemTags,
+    hasCollapse: true,
   },
   {
     displayType: 'checkbox',

@@ -57,9 +57,9 @@ export const getCreditsAmount = ({
   let currentCreditsAmount = 0;
   let currencyAmountLeft = currentCurrencyAmount;
   const sellOrders = [];
+  const creditPrecision = creditTypePrecision || 6;
 
-  for (let i = 0; i < orderedSellOrders.length; i++) {
-    const order = orderedSellOrders[i];
+  for (const order of orderedSellOrders) {
     const price = getSellOrderPrice({ order, card });
     const quantity = Number(order.quantity);
     const orderTotalAmount = quantity * price;
@@ -69,26 +69,24 @@ export const getCreditsAmount = ({
         (currencyAmountLeft - orderTotalAmount).toFixed(6),
       );
       currentCreditsAmount += quantity;
-      sellOrders.push(formatFullSellOrder({ order, card, price }));
+      sellOrders.push(formatSellOrder({ order, card, price }));
       if (currencyAmountLeft === 0) break;
     } else {
       currentCreditsAmount += currencyAmountLeft / price;
-      sellOrders.push({
-        sellOrderId: order.id,
-        quantity: (currencyAmountLeft / price).toFixed(
-          creditTypePrecision || 6,
-        ),
-        bidPrice: !card
-          ? { amount: String(price), denom: order.askDenom }
-          : undefined,
-        price: card ? price * 100 : undefined, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00)
-      });
+      sellOrders.push(
+        formatSellOrder({
+          order,
+          card,
+          price,
+          quantity: (currencyAmountLeft / price).toFixed(creditPrecision),
+        }),
+      );
       break;
     }
   }
   return {
     currentCreditsAmount: parseFloat(
-      currentCreditsAmount.toFixed(creditTypePrecision || 6),
+      currentCreditsAmount.toFixed(creditPrecision),
     ),
     sellOrders,
   };
@@ -110,8 +108,7 @@ export const getCurrencyAmount = ({
   let creditsAmountLeft = currentCreditsAmount;
   const sellOrders = [];
 
-  for (let i = 0; i < orderedSellOrders.length; i++) {
-    const order = orderedSellOrders[i];
+  for (const order of orderedSellOrders) {
     const price = getSellOrderPrice({ order, card });
     const quantity = Number(order.quantity);
 
@@ -121,20 +118,20 @@ export const getCurrencyAmount = ({
         (creditsAmountLeft - quantity).toFixed(creditTypePrecision || 6),
       );
       currentCurrencyAmount += quantity * price;
-      sellOrders.push(formatFullSellOrder({ order, card, price }));
+      sellOrders.push(formatSellOrder({ order, card, price }));
 
       if (creditsAmountLeft === 0) break;
     } else {
       // Take only remaining credits
       currentCurrencyAmount += creditsAmountLeft * price;
-      sellOrders.push({
-        sellOrderId: order.id,
-        quantity: String(creditsAmountLeft),
-        bidPrice: !card
-          ? { amount: String(price), denom: order.askDenom }
-          : undefined,
-        price: card ? price * 100 : undefined, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00)
-      });
+      sellOrders.push(
+        formatSellOrder({
+          order,
+          card,
+          price,
+          quantity: String(creditsAmountLeft),
+        }),
+      );
       break;
     }
   }
@@ -154,15 +151,19 @@ type GetSellOrderPriceParams = {
 export const getSellOrderPrice = ({ order, card }: GetSellOrderPriceParams) =>
   card ? (order as CardSellOrder).usdPrice : Number(order.askAmount);
 
-type FormatFullSellOrderParams = { price: number } & GetSellOrderPriceParams;
-export const formatFullSellOrder = ({
+type FormatSellOrderParams = {
+  price: number;
+  quantity?: string;
+} & GetSellOrderPriceParams;
+export const formatSellOrder = ({
   order,
   card,
   price,
-}: FormatFullSellOrderParams) => {
+  quantity,
+}: FormatSellOrderParams) => {
   return {
     sellOrderId: order.id,
-    quantity: order.quantity,
+    quantity: quantity || order.quantity,
     bidPrice: !card
       ? { amount: String(price), denom: order.askDenom }
       : undefined,

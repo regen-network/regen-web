@@ -70,7 +70,7 @@ const ListProject = () => {
         </Body>
       )}
       <LoginFlow
-        createProject
+        redirectRoute="project-pages/draft/basic-info"
         isConnectingRef={isConnectingRef}
         isModalOpen={isModalOpen}
         onModalClose={onModalClose}

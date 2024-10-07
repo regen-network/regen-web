@@ -30,9 +30,8 @@ type Props = {
   wallets: LoginProvider[];
   modalState: LoginModalState;
   qrCodeUri?: string;
-  createProject?: boolean;
   isConnectingRef?: React.MutableRefObject<boolean>;
-  buyCreditsFrom?: string;
+  redirectRoute?: string;
 };
 
 const LoginFlow = ({
@@ -40,9 +39,8 @@ const LoginFlow = ({
   onModalClose,
   wallets,
   modalState,
-  createProject,
   isConnectingRef,
-  buyCreditsFrom,
+  redirectRoute,
 }: Props) => {
   const { _ } = useLingui();
   const {
@@ -59,7 +57,7 @@ const LoginFlow = ({
     isWaitingForSigningAtom,
   );
   const { loginDisabled } = useWallet();
-  const socialProviders = useSocialProviders(createProject, buyCreditsFrom);
+  const socialProviders = useSocialProviders(redirectRoute);
 
   return (
     <>

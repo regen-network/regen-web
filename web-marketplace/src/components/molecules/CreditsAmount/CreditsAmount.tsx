@@ -20,7 +20,7 @@ import {
 import { CreditsAmountHeader } from './CreditsAmount.Header';
 import { CreditsAmountProps } from './CreditsAmount.types';
 import {
-  formatFullSellOrder,
+  formatSellOrder,
   getCreditsAmount,
   getCreditsAvailablePerCurrency,
   getCurrencyAmount,
@@ -50,7 +50,10 @@ export const CreditsAmount = ({
     useFormContext<ChooseCreditsFormSchemaType>();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
-  const card = paymentOption === PAYMENT_OPTIONS.CARD;
+  const card = useMemo(
+    () => paymentOption === PAYMENT_OPTIONS.CARD,
+    [paymentOption],
+  );
   const orderedSellOrders = useMemo(
     () =>
       card
@@ -126,7 +129,7 @@ export const CreditsAmount = ({
         SELL_ORDERS,
         orderedSellOrders.map(order => {
           const price = getSellOrderPrice({ order, card });
-          return formatFullSellOrder({ order, card, price });
+          return formatSellOrder({ order, card, price });
         }),
       );
       const formattedCreditsAvailable = i18n.number(_creditsAvailable);
@@ -179,7 +182,7 @@ export const CreditsAmount = ({
         SELL_ORDERS,
         orderedSellOrders.map(order => {
           const price = getSellOrderPrice({ order, card });
-          return formatFullSellOrder({ order, card, price });
+          return formatSellOrder({ order, card, price });
         }),
       );
       setMaxCreditsSelected(false);

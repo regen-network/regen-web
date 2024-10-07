@@ -119,7 +119,7 @@ export const useGetProject = () => {
       (projectsWithOrderData?.[0]?.sellOrders || []).filter(
         sellOrder => sellOrder.seller !== wallet?.address,
       ),
-    [projectsWithOrderData],
+    [projectsWithOrderData, wallet?.address],
   );
 
   const cardSellOrders = useMemo(

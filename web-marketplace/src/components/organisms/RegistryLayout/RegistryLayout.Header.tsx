@@ -58,7 +58,7 @@ const RegistryLayoutHeader: React.FC = () => {
 
   const { data: paymentMethodData } = useQuery(
     getPaymentMethodsQuery({
-      enabled: !!isConnected,
+      enabled: !!activeAccount,
     }),
   );
 

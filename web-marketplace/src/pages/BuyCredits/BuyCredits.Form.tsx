@@ -31,6 +31,7 @@ import {
   CURRENCY_AMOUNT,
   SELL_ORDERS,
 } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
+import { getCurrencyAmount } from 'components/molecules/CreditsAmount/CreditsAmount.utils';
 import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSummaryCard';
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';
@@ -38,6 +39,7 @@ import { AgreePurchaseFormFiat } from 'components/organisms/AgreePurchaseForm/Ag
 import { ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
+import { getFilteredCryptoSellOrders } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.utils';
 import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData';
 import { LoginFlow } from 'components/organisms/LoginFlow/LoginFlow';
 import { PaymentInfoForm } from 'components/organisms/PaymentInfoForm/PaymentInfoForm';
@@ -89,7 +91,7 @@ export const BuyCreditsForm = ({
   cardDetails,
   project,
 }: Props) => {
-  const { data, activeStep, handleSaveNext, handleActiveStep } =
+  const { data, activeStep, handleSaveNext, handleSave, handleActiveStep } =
     useMultiStep<BuyCreditsSchemaTypes>();
   const { wallet, isConnected, activeWalletAddr } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
@@ -217,6 +219,35 @@ export const BuyCreditsForm = ({
 
   const allowedDenoms = allowedDenomsData?.allowedDenoms;
 
+  const currency = data?.[CURRENCY];
+  const creditsAmount = data?.[CREDITS_AMOUNT];
+  const currencyAmount = data?.[CURRENCY_AMOUNT];
+  const creditTypePrecision = creditTypeData?.creditType?.precision;
+
+  const card = useMemo(
+    () => paymentOption === PAYMENT_OPTIONS.CARD,
+    [paymentOption],
+  );
+  const filteredCryptoSellOrders = useMemo(
+    () =>
+      getFilteredCryptoSellOrders({
+        askDenom: currency?.askDenom,
+        cryptoSellOrders,
+        retiring,
+      }),
+    [cryptoSellOrders, currency?.askDenom, retiring],
+  );
+  const orderedSellOrders = useMemo(
+    () =>
+      card
+        ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
+        : filteredCryptoSellOrders?.sort(
+            (a, b) => Number(a.askAmount) - Number(b.askAmount),
+          ) || [],
+
+    [card, cardSellOrders, filteredCryptoSellOrders],
+  );
+
   return (
     <div>
       <div>
@@ -238,7 +269,7 @@ export const BuyCreditsForm = ({
               });
             }}
             allowedDenoms={allowedDenoms}
-            creditTypePrecision={creditTypeData?.creditType?.precision}
+            creditTypePrecision={creditTypePrecision}
             onPrev={() => navigate(projectHref)}
             initialValues={{
               [CURRENCY_AMOUNT]: data?.[CURRENCY_AMOUNT],
@@ -264,6 +295,7 @@ export const BuyCreditsForm = ({
             project={project}
             cardDetails={cardDetails}
             goToPaymentInfo={goToPaymentInfo}
+            card={card}
           />
         )}
 
@@ -338,39 +370,48 @@ export const BuyCreditsForm = ({
           </>
         )}
       </div>
-      {project && allowedDenoms && (
-        // We need to put this inside the form itself
-        // so we can display amounts updates in real time
-        <OrderSummaryCard
-          order={{
-            projectName: project.name,
-            prefinanceProject: false, // TODO APP-367
-            pricePerCredit: currencyAmount / creditsAmount,
-            credits: creditsAmount,
-            currency,
-            image: project.imgSrc,
-            currencyAmount,
-          }}
-          cardDetails={cardDetails}
-          imageAltText={project.name}
-          paymentOption={paymentOption}
-          allowedDenoms={allowedDenoms}
-          onClickEditCard={goToPaymentInfo}
-          setCreditsAmount={(value: number) => {
-            form.setValue(CREDITS_AMOUNT, value);
-            const { currencyAmount, sellOrders } = getCurrencyAmount({
-              currentCreditsAmount: value,
-              card,
-              orderedSellOrders,
-              creditTypePrecision,
-            });
-            form.setValue(CURRENCY_AMOUNT, currencyAmount, {
-              shouldValidate: true,
-            });
-            form.setValue(SELL_ORDERS, sellOrders);
-          }}
-        />
-      )}
+      {project &&
+        allowedDenoms &&
+        activeStep !== 0 &&
+        currency &&
+        creditsAmount &&
+        currencyAmount && (
+          // We need to put this inside the form itself
+          // so we can display amounts updates in real time
+          <OrderSummaryCard
+            order={{
+              projectName: project.name,
+              prefinanceProject: false, // TODO APP-367
+              pricePerCredit: currencyAmount / creditsAmount,
+              credits: creditsAmount,
+              currency,
+              image: project.imgSrc,
+              currencyAmount,
+            }}
+            cardDetails={cardDetails}
+            imageAltText={project.name}
+            paymentOption={paymentOption}
+            allowedDenoms={allowedDenoms}
+            onClickEditCard={goToPaymentInfo}
+            setCreditsAmount={(creditsAmount: number) => {
+              const { currencyAmount, sellOrders } = getCurrencyAmount({
+                currentCreditsAmount: creditsAmount,
+                card,
+                orderedSellOrders,
+                creditTypePrecision,
+              });
+              handleSave(
+                {
+                  ...data,
+                  currencyAmount,
+                  sellOrders,
+                  creditsAmount,
+                },
+                activeStep,
+              );
+            }}
+          />
+        )}
       <LoginFlow
         isModalOpen={isModalOpen}
         onModalClose={onModalClose}

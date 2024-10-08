@@ -37,6 +37,7 @@ type ContextProps<T extends object> = {
   handleActiveStep: (step: number) => void;
   handleNext: () => void;
   handleBack: () => void;
+  handleSave: (formValues: T | {}, nextStep: number, dataDisplay?: any) => void;
   handleSaveNext: (formValues: T, dataDisplay?: any) => void;
   handleResetReview: () => void;
   handleSuccess: () => void;
@@ -56,6 +57,7 @@ const initialValues = {
   handleActiveStep: () => {},
   handleNext: () => {},
   handleBack: () => {},
+  handleSave: () => {},
   handleSaveNext: () => {},
   handleResetReview: () => {},
   handleSuccess: () => {},
@@ -189,6 +191,7 @@ export function MultiStepProvider<T extends object>({
     handleActiveStep,
     handleNext,
     handleBack,
+    handleSave,
     handleSaveNext,
     handleResetReview,
     handleSuccess,

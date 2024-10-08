@@ -42,6 +42,8 @@ export const CreditsAmount = ({
   cryptoCurrencies,
   allowedDenoms,
   creditTypePrecision,
+  card,
+  orderedSellOrders,
 }: CreditsAmountProps) => {
   const { _ } = useLingui();
 
@@ -49,21 +51,6 @@ export const CreditsAmount = ({
   const { setValue, trigger, getValues } =
     useFormContext<ChooseCreditsFormSchemaType>();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
-
-  const card = useMemo(
-    () => paymentOption === PAYMENT_OPTIONS.CARD,
-    [paymentOption],
-  );
-  const orderedSellOrders = useMemo(
-    () =>
-      card
-        ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
-        : filteredCryptoSellOrders?.sort(
-            (a, b) => Number(a.askAmount) - Number(b.askAmount),
-          ) || [],
-
-    [card, cardSellOrders, filteredCryptoSellOrders],
-  );
 
   const setInitialCreditsAmount = useCallback(async () => {
     if (getValues(CREDITS_AMOUNT) === 0) {

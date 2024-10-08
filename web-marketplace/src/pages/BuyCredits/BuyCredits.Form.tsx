@@ -217,6 +217,8 @@ export const BuyCreditsForm = ({
     [handleActiveStep],
   );
 
+  const allowedDenoms = allowedDenomsData?.allowedDenoms;
+
   return (
     <div>
       <div>
@@ -237,7 +239,7 @@ export const BuyCreditsForm = ({
                 paymentOption,
               });
             }}
-            allowedDenoms={allowedDenomsData?.allowedDenoms}
+            allowedDenoms={allowedDenoms}
             creditTypePrecision={creditTypeData?.creditType?.precision}
             onPrev={() => navigate(projectHref)}
             initialValues={{
@@ -338,7 +340,39 @@ export const BuyCreditsForm = ({
           </>
         )}
       </div>
-
+      {project && allowedDenoms && (
+        // We need to put this inside the form itself
+        // so we can display amounts updates in real time
+        <OrderSummaryCard
+          order={{
+            projectName: project.name,
+            prefinanceProject: false, // TODO APP-367
+            pricePerCredit: currencyAmount / creditsAmount,
+            credits: creditsAmount,
+            currency,
+            image: project.imgSrc,
+            currencyAmount,
+          }}
+          cardDetails={cardDetails}
+          imageAltText={project.name}
+          paymentOption={paymentOption}
+          allowedDenoms={allowedDenoms}
+          onClickEditCard={goToPaymentInfo}
+          setCreditsAmount={(value: number) => {
+            form.setValue(CREDITS_AMOUNT, value);
+            const { currencyAmount, sellOrders } = getCurrencyAmount({
+              currentCreditsAmount: value,
+              card,
+              orderedSellOrders,
+              creditTypePrecision,
+            });
+            form.setValue(CURRENCY_AMOUNT, currencyAmount, {
+              shouldValidate: true,
+            });
+            form.setValue(SELL_ORDERS, sellOrders);
+          }}
+        />
+      )}
       <LoginFlow
         isModalOpen={isModalOpen}
         onModalClose={onModalClose}

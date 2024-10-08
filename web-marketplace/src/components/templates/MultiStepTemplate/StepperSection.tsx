@@ -1,7 +1,9 @@
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 
-import OnBoardingSection from 'web-components/src/components/section/OnBoardingSection';
+import OnBoardingSection, {
+  OnBoardingSectionProps,
+} from 'web-components/src/components/section/OnBoardingSection';
 import Stepper from 'web-components/src/components/stepper';
 
 import { useMultiStep } from './MultiStep.context';
@@ -14,10 +16,13 @@ import { useMultiStep } from './MultiStep.context';
 
 type StepperSectionProps = {
   children: JSX.Element | JSX.Element[];
-};
+} & Pick<OnBoardingSectionProps, 'classes'>;
 
 // TODO: this should maybe live in MultiStepTemplate.tsx
-export function StepperSection({ children }: StepperSectionProps): JSX.Element {
+export function StepperSection({
+  children,
+  classes,
+}: StepperSectionProps): JSX.Element {
   const { steps, activeStep, resultStatus } = useMultiStep();
   const { _ } = useLingui();
 
@@ -44,7 +49,7 @@ export function StepperSection({ children }: StepperSectionProps): JSX.Element {
         activeStep={activeStep}
         onStepClick={() => null}
       />
-      <OnBoardingSection title={title} formContainer>
+      <OnBoardingSection title={title} formContainer classes={classes}>
         <Box minHeight="50vh">{children}</Box>
       </OnBoardingSection>
     </>

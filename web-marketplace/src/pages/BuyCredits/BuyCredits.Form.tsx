@@ -20,7 +20,10 @@ import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketpl
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import {
+  ProjectWithOrderData,
+  UISellOrderInfo,
+} from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
@@ -28,6 +31,7 @@ import {
   CURRENCY_AMOUNT,
   SELL_ORDERS,
 } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
+import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSummaryCard';
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';
 import { AgreePurchaseFormFiat } from 'components/organisms/AgreePurchaseForm/AgreePurchaseFormFiat';
@@ -66,7 +70,9 @@ type Props = {
   creditTypeAbbrev?: string;
   projectHref: string;
   cardDetails?: CardDetails;
+  project?: ProjectWithOrderData;
 };
+
 export const BuyCreditsForm = ({
   paymentOption,
   setPaymentOption,
@@ -82,6 +88,7 @@ export const BuyCreditsForm = ({
   creditTypeAbbrev,
   projectHref,
   cardDetails,
+  project,
 }: Props) => {
   const { data, activeStep, handleSaveNext, handleActiveStep } =
     useMultiStep<BuyCreditsSchemaTypes>();
@@ -205,8 +212,13 @@ export const BuyCreditsForm = ({
     ],
   );
 
+  const goToPaymentInfo = useCallback(
+    () => handleActiveStep(1),
+    [handleActiveStep],
+  );
+
   return (
-    <div className="flex">
+    <div>
       <div>
         {activeStep === 0 && (
           <ChooseCreditsForm
@@ -249,6 +261,9 @@ export const BuyCreditsForm = ({
             paymentOptionCryptoClicked={paymentOptionCryptoClicked}
             setPaymentOptionCryptoClicked={setPaymentOptionCryptoClicked}
             initialPaymentOption={data?.paymentOption}
+            project={project}
+            cardDetails={cardDetails}
+            goToPaymentInfo={goToPaymentInfo}
           />
         )}
 
@@ -323,6 +338,7 @@ export const BuyCreditsForm = ({
           </>
         )}
       </div>
+
       <LoginFlow
         isModalOpen={isModalOpen}
         onModalClose={onModalClose}

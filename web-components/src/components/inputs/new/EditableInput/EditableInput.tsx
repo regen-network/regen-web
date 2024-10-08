@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 
@@ -23,6 +23,10 @@ export const EditableInput = ({
 }: EditableInputProps) => {
   const [editable, setEditable] = useState(false);
   const [amount, setAmount] = useState(value);
+
+  useEffect(() => {
+    if (!editable && value !== amount) setAmount(value);
+  }, [amount, value, editable]);
 
   const toggleEditable = () => {
     setEditable(!editable);
@@ -67,7 +71,7 @@ export const EditableInput = ({
             data-testid="editable-input"
           />
           <TextButton
-            className="lowercase text-[12px] mt-5 sm:mt-0"
+            className="lowercase text-[12px] mt-5 sm:mt-0 font-sans"
             onClick={handleOnUpdate}
             aria-label={updateButtonText}
           >

@@ -26,6 +26,7 @@ describe('ChooseCreditsForm', () => {
     setupWalletModal: () => {},
     paymentOptionCryptoClicked: false,
     setPaymentOptionCryptoClicked: () => {},
+    goToPaymentInfo: () => {},
   };
   it('renders without crashing', () => {
     render(<ChooseCreditsForm {...props} />);

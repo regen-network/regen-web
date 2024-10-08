@@ -22,13 +22,7 @@ export const BuyCredits = () => {
 
   const {
     loadingSanityProject,
-    // The following var might be used on the OrderSummarCard
-    // projectBySlug,
-    // loadingProjectBySlug,
-    // projectByOnChainId,
-    // loadingProjectByOnChainId,
-    // offchainProjectByIdData,
-    // loadingOffchainProjectById,
+    projectsWithOrderData,
     isBuyFlowDisabled,
     onChainProjectId,
     offChainProject,
@@ -92,6 +86,7 @@ export const BuyCredits = () => {
           formId={formModel.formId}
           steps={formModel.steps}
           initialValues={{}}
+          classes={{ formWrap: 'max-w-[942px]' }}
         >
           <BuyCreditsForm
             setPaymentOption={setPaymentOption}
@@ -112,6 +107,7 @@ export const BuyCredits = () => {
             setPaymentMethodId={setPaymentMethodId}
             setCardDetails={setCardDetails}
             cardDetails={cardDetails}
+            project={projectsWithOrderData[0]}
           />
         </MultiStepTemplate>
       </>

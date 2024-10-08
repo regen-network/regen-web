@@ -62,6 +62,7 @@ export type Props = {
   project?: ProjectWithOrderData;
   cardDetails?: CardDetails;
   goToPaymentInfo: () => void;
+  card: boolean;
 };
 
 export function ChooseCreditsForm({
@@ -85,6 +86,7 @@ export function ChooseCreditsForm({
   project,
   cardDetails,
   goToPaymentInfo,
+  card,
 }: Props) {
   const { _ } = useLingui();
   const cryptoCurrencies = useMemo(
@@ -126,7 +128,7 @@ export function ChooseCreditsForm({
       [CREDIT_VINTAGE_OPTIONS]: initialValues?.[CREDIT_VINTAGE_OPTIONS] || [],
       [CURRENCY]: initialValues?.[CURRENCY]?.askDenom
         ? initialValues?.[CURRENCY]
-        : paymentOption === PAYMENT_OPTIONS.CARD
+        : card
         ? cardCurrency
         : defaultCryptoCurrency,
     },
@@ -157,6 +159,17 @@ export function ChooseCreditsForm({
         retiring,
       }),
     [cryptoSellOrders, currency?.askDenom, retiring],
+  );
+
+  const orderedSellOrders = useMemo(
+    () =>
+      card
+        ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
+        : filteredCryptoSellOrders?.sort(
+            (a, b) => Number(a.askAmount) - Number(b.askAmount),
+          ) || [],
+
+    [card, cardSellOrders, filteredCryptoSellOrders],
   );
 
   const handleCryptoPurchaseOptions = useCallback(() => {
@@ -225,21 +238,6 @@ export function ChooseCreditsForm({
   //   e.preventDefault();
   //   setAdvanceSettingsOpen(prev => !prev);
   // }, []);
-
-  const card = useMemo(
-    () => paymentOption === PAYMENT_OPTIONS.CARD,
-    [paymentOption],
-  );
-  const orderedSellOrders = useMemo(
-    () =>
-      card
-        ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
-        : filteredCryptoSellOrders?.sort(
-            (a, b) => Number(a.askAmount) - Number(b.askAmount),
-          ) || [],
-
-    [card, cardSellOrders, filteredCryptoSellOrders],
-  );
 
   return (
     <Suspense fallback={<Loading />}>

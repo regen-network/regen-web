@@ -1,7 +1,9 @@
+import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { allowedDenoms } from '../CreditsAmount/CreditsAmount.mock';
 import { OrderSummaryCard } from './OrderSummaryCard';
+import { order } from './OrderSummaryCard.mock';
 
 export default {
   title: 'Marketplace/Molecules/OrderSummaryCard',
@@ -10,21 +12,14 @@ export default {
 
 type Story = StoryObj<typeof OrderSummaryCard>;
 
-const currency = { askDenom: 'usd', askBaseDenom: 'usd' };
-
 export const Default: Story = {
   render: args => <OrderSummaryCard {...args} />,
 };
 
 Default.args = {
-  order: {
-    image: '/coorong.png',
-    projectName: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    prefinanceProject: false,
-    pricePerCredit: 2,
-    credits: 50,
-    currency,
-  },
+  order,
+  setCreditsAmount: action('setCreditsAmount'),
+  onClickEditCard: action('onClickEditCard'),
   imageAltText: 'imageAltText',
 };
 
@@ -33,22 +28,17 @@ export const WithPaymentDetails: Story = {
 };
 
 WithPaymentDetails.args = {
-  order: {
-    image: '/coorong.png',
-    projectName: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    prefinanceProject: false,
-    pricePerCredit: 2,
-    credits: 50,
-    currency,
-  },
+  order,
   paymentOption: 'card',
-  currentBuyingStep: 2,
-  paymentMethod: {
-    type: 'visa',
-    cardNumber: '1234 5678 9012 3456',
+  cardDetails: {
+    brand: 'visa',
+    last4: '3456',
+    country: 'US',
   },
   imageAltText: 'imageAltText',
   allowedDenoms,
+  setCreditsAmount: action('setCreditsAmount'),
+  onClickEditCard: action('onClickEditCard'),
 };
 
 export const WithPrefinanceProject: Story = {
@@ -57,21 +47,19 @@ export const WithPrefinanceProject: Story = {
 
 WithPrefinanceProject.args = {
   order: {
-    image: '/coorong.png',
-    projectName: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    ...order,
     prefinanceProject: true,
-    pricePerCredit: 2,
-    credits: 50,
-    currency,
   },
   paymentOption: 'card',
-  currentBuyingStep: 2,
-  paymentMethod: {
-    type: 'visa',
-    cardNumber: '1234 5678 9012 3456',
+  cardDetails: {
+    brand: 'visa',
+    last4: '3456',
+    country: 'US',
   },
   imageAltText: 'imageAltText',
   allowedDenoms,
+  setCreditsAmount: action('setCreditsAmount'),
+  onClickEditCard: action('onClickEditCard'),
 };
 
 export const WithCrypto: Story = {
@@ -79,15 +67,10 @@ export const WithCrypto: Story = {
 };
 
 WithCrypto.args = {
-  order: {
-    image: '/coorong.png',
-    projectName: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    prefinanceProject: false,
-    pricePerCredit: 2,
-    credits: 50,
-    currency,
-  },
+  order,
   paymentOption: 'crypto',
   imageAltText: 'imageAltText',
   allowedDenoms,
+  setCreditsAmount: action('setCreditsAmount'),
+  onClickEditCard: action('onClickEditCard'),
 };

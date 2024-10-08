@@ -15,18 +15,20 @@ describe('OrderSummaryCard', () => {
       currency: { askDenom: USD_DENOM, askBaseDenom: USD_DENOM },
       pricePerCredit: 10,
       credits: 5,
+      currencyAmount: 50,
       image: 'path/to/image',
       prefinanceProject: false,
     },
-    paymentMethod: {
-      type: 'visa',
-      cardNumber: '1234 5678 9012 3456',
+    cardDetails: {
+      brand: 'visa',
+      last4: '3456',
+      country: 'US',
     },
     imageAltText: 'imageAltText',
     paymentOption: 'card',
     allowedDenoms,
-    currentBuyingStep: 2,
     onClickEditCard: vi.fn(),
+    setCreditsAmount: vi.fn(),
   };
 
   it('displays the project name', () => {

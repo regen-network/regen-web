@@ -47,4 +47,5 @@ ChooseCredits.args = {
   setupWalletModal: action('setupWalletModal'),
   paymentOptionCryptoClicked: false,
   setPaymentOptionCryptoClicked: () => {},
+  goToPaymentInfo: () => {},
 };

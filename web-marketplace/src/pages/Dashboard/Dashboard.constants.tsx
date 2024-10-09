@@ -85,7 +85,7 @@ export const HEADING_PROFILE = {
 
 export const MY_ORDERS = {
   label: msg`My Orders`,
-  href: '/profile/edit/my-orders',
+  href: '/profile/edit/orders',
   icon: <ShoppingBagIcon linearGradient />,
   labelClassName,
   className,

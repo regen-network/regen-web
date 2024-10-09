@@ -29,16 +29,16 @@ export const getSellOrdersExtendedQuery = ({
   queryKey: [SELL_ORDERS_EXTENTED_KEY],
   queryFn: async () => {
     if (!client) return undefined;
-
+    let _request = { ...request };
     // Fetching all sell orders
     // TODO this could potentially be improved with pagination for the storefront page
     let sellOrders: SellOrderInfo[] = [];
     let response: QuerySellOrdersResponse | undefined;
     while (!response || response.pagination?.nextKey?.length) {
       if (response?.pagination?.nextKey?.length) {
-        request.pagination = { key: response.pagination.nextKey };
+        _request.pagination = { key: response.pagination.nextKey };
       }
-      response = await client.SellOrders(request);
+      response = await client.SellOrders(_request);
       sellOrders.push(...response.sellOrders);
     }
 

@@ -55,10 +55,10 @@ export const ProfileEdit = () => {
   }, [isDirtyRef, setIsProfileEditDirtyref]);
 
   return (
-    <div className="bg-grey-100">
-      <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly max-w-[946px] mx-auto p-10 lg:py-50 lg:px-15 min-h-screen">
+    <>
+      <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly max-w-[1150px] mx-auto p-10 lg:py-50 lg:px-15 min-h-screen">
         <AdminNavigation
-          className="hidden lg:block"
+          className="hidden lg:block min-w-[235px]"
           sections={adminNavigationSections}
           onNavItemClick={onNavClick}
           currentPath={pathname}
@@ -68,7 +68,10 @@ export const ProfileEdit = () => {
             flexDirection: 'column',
             alignItems: 'center',
           }}
-          className={cn('w-full lg:w-[560px]', section ? 'flex' : 'hidden')}
+          className={cn(
+            'w-full lg:w-[850px] ml-10 xl:ml-30',
+            section ? 'flex' : 'hidden',
+          )}
         >
           <Flex justifyContent="space-between" className="mb-25 w-full">
             <Title variant="h3">{startCase(section)}</Title>
@@ -78,11 +81,8 @@ export const ProfileEdit = () => {
               />
             )}
           </Flex>
-          <WithLoader
-            isLoading={accountChanging || loading}
-            sx={{ mx: 'auto' }}
-          >
-            <div className="py-40 px-10 md:py-50 md:px-40 rounded-md border border-grey-200 bg-grey-0">
+          <WithLoader isLoading={accountChanging || loading}>
+            <div className="rounded-md border border-grey-200 bg-grey-0 lg:mt-30">
               <Outlet />
             </div>
           </WithLoader>
@@ -101,6 +101,6 @@ export const ProfileEdit = () => {
           setIsWarningModalOpen(undefined);
         }}
       />
-    </div>
+    </>
   );
 };

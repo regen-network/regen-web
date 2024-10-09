@@ -164,7 +164,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
       return errors;
     };
 
-    const { data: allowedDenoms } = useQuery(
+    const { data: allowedDenomsData } = useQuery(
       getAllowedDenomQuery({
         client: marketplaceClient,
         enabled: !!marketplaceClient,
@@ -174,7 +174,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     const sellOrdersOptions = getOptions({
       sellOrders,
       setSelectedProjectById,
-      allowedDenomsData: allowedDenoms,
+      allowedDenomsData,
     });
 
     const isDisableAutoRetire = selectedSellOrder?.disableAutoRetire;
@@ -307,11 +307,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                           {`${microToDenom(
                             selectedSellOrder?.askAmount || '',
                           )} ${findDisplayDenom({
-<<<<<<< HEAD
-                            allowedDenoms,
-=======
                             allowedDenoms: allowedDenomsData?.allowedDenoms,
->>>>>>> 773b69b7d (feat: show correct display denom)
                             bankDenom: selectedSellOrder?.askDenom ?? '',
                             baseDenom: selectedSellOrder?.askBaseDenom,
                           })}/${_(msg`credit`)}`}
@@ -349,12 +345,8 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                                 ),
                                 askAmount: Number(selectedSellOrder?.askAmount),
                                 displayDenom: findDisplayDenom({
-<<<<<<< HEAD
-                                  allowedDenoms,
-=======
                                   allowedDenoms:
                                     allowedDenomsData?.allowedDenoms,
->>>>>>> 773b69b7d (feat: show correct display denom)
                                   bankDenom: selectedSellOrder?.askDenom ?? '',
                                   baseDenom: selectedSellOrder?.askBaseDenom,
                                 }),

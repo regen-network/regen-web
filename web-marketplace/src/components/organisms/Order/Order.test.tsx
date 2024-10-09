@@ -1,4 +1,4 @@
-import { USD_DENOM } from 'config/allowedBaseDenoms';
+import { USD_DENOM, USDC_DENOM } from 'config/allowedBaseDenoms';
 import { describe, expect, it } from 'vitest';
 import { render, screen } from 'web-marketplace/test/test-utils';
 
@@ -186,12 +186,14 @@ describe('Order Component', () => {
               ...mockOrderData.order.credits,
               credits: '2000',
               price: '400000',
-              askDenom: 'usdc',
+              askDenom: USDC_DENOM,
+              askBaseDenom: USDC_DENOM,
             },
           },
         }}
       />,
     );
+
     expect(screen.getByText(/2000/i)).toBeInTheDocument();
     expect(screen.getByText(/400000/i)).toBeInTheDocument();
     expect(screen.getByText(/usdc/i)).toBeInTheDocument();
@@ -209,6 +211,7 @@ describe('Order Component', () => {
               nameOnCard: 'John Doe',
               cardLast4: '1234',
               askDenom: USD_DENOM,
+              askBaseDenom: USD_DENOM,
             },
           },
         }}
@@ -228,7 +231,8 @@ describe('Order Component', () => {
             ...mockOrderData.order,
             paymentInfo: {
               ...mockOrderData.order.paymentInfo,
-              askDenom: 'usdc',
+              askDenom: USDC_DENOM,
+              askBaseDenom: USDC_DENOM,
             },
           },
         }}

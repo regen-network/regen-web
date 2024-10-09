@@ -2,7 +2,6 @@ import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
 
-// import { DenomIconWithCurrency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency';
 import { BlockchainIcon } from 'web-components/src/components/icons/BlockchainIcon';
 import CertifiedDocumentIcon from 'web-components/src/components/icons/CertifiedDocumentIcon';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
@@ -202,7 +201,7 @@ export const OrderSummary = ({
                 }/txs/${blockchainRecord}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-grey-700 !underline inline-block text-ellipsis w-[100px] overflow-hidden"
+                className="text-grey-700 inline-block text-ellipsis w-[100px] overflow-hidden border-0 border-b-[1px] border-solid leading-5"
               >
                 {blockchainRecord}
               </Link>

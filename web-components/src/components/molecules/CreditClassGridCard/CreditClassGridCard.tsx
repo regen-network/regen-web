@@ -17,7 +17,7 @@ export interface Props {
   name: string;
   imgSrc: string;
   purchaseInfo?: PurchaseInfo;
-  button: ButtonType;
+  button?: ButtonType;
   href?: string;
   className?: string;
   LinkComponent?: LinkComponentType;
@@ -36,8 +36,6 @@ export const CreditClassGridCard = ({
   LinkComponent = ({ children }) => <>{children}</>,
   sx = [],
 }: Props): JSX.Element => {
-  const { text, disabled, startIcon, onClick } = button;
-
   return (
     <Card
       elevation={1}
@@ -66,15 +64,17 @@ export const CreditClassGridCard = ({
           sx={{ mb: 5 }}
           bodyTexts={bodyTexts}
         />
-        <OutlinedButton
-          onClick={onClick}
-          size="small"
-          startIcon={startIcon}
-          disabled={disabled}
-          sx={{ width: '100%' }}
-        >
-          {text}
-        </OutlinedButton>
+        {button && (
+          <OutlinedButton
+            onClick={button.onClick}
+            size="small"
+            startIcon={button.startIcon}
+            disabled={button.disabled}
+            sx={{ width: '100%' }}
+          >
+            {button.text}
+          </OutlinedButton>
+        )}
       </Box>
     </Card>
   );

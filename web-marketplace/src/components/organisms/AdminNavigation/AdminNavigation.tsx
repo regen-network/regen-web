@@ -7,9 +7,6 @@ import {
   ListItemText,
   ListSubheader,
 } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
-
-import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 
 import { AdminNavigationSection } from './AdminNavigation.types';
 import { isSelected } from './AdminNavigation.utils';
@@ -19,6 +16,7 @@ export type AdminNavigationProps = {
   sections: AdminNavigationSection[];
   onNavItemClick: (sectionName: string) => void;
   currentPath: string;
+  savedPaymentInfo?: boolean;
 };
 
 export const AdminNavigation = ({
@@ -26,16 +24,9 @@ export const AdminNavigation = ({
   sections,
   onNavItemClick,
   currentPath,
+  savedPaymentInfo,
 }: AdminNavigationProps) => {
   const { _ } = useLingui();
-
-  const { data: paymentMethodData } = useQuery(
-    getPaymentMethodsQuery({
-      enabled: true,
-    }),
-  );
-
-  const savedPaymentInfo = (paymentMethodData?.paymentMethods?.length ?? 0) > 0;
 
   if (!savedPaymentInfo) {
     // If there is no saved payment info remove the item from the nav

@@ -64,6 +64,7 @@ export const EditableInput = ({
             aria-label={inputAriaLabel}
             name={name}
             autoFocus
+            data-testid="editable-input"
           />
           <TextButton
             className="lowercase text-[12px] mt-5 sm:mt-0"

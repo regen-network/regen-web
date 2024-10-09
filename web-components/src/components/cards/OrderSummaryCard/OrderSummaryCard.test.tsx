@@ -52,9 +52,8 @@ describe('OrderSummaryCard', () => {
       name: /edit/i,
     });
     fireEvent.click(editButton);
-    const editInput = screen.queryByRole('textbox', {
-      name: 'editable-credits',
-    });
+    const editInput = screen.getByTestId(/editable-input/i);
+
     if (editInput) {
       fireEvent.change(editInput, { target: { value: 7 } });
 

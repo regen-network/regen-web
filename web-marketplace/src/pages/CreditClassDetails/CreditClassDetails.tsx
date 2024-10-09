@@ -5,45 +5,34 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { useLingui } from '@lingui/react';
 import { useQueries, useQuery } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
 
 import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { useCreditClassByUriQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
-import {
-  connectWalletModalAtom,
-  switchWalletModalAtom,
-} from 'lib/atoms/modals.atoms';
 import { openLink } from 'lib/button';
 import { client } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { queryClassIssuers } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
-import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { getBuyModalOptionsQuery } from 'lib/queries/react-query/sanity/getBuyModalOptionsQuery/getBuyModalOptionsQuery';
-import { useWallet } from 'lib/wallet/wallet';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import useImpact from 'pages/CreditClassDetails/hooks/useImpact';
 import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
-import { AVG_PRICE_TOOLTIP_CREDIT_CLASS } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 import { useLedger } from '../../ledger';
 import {
-  getCreditClassAvgPricePerTonLabel,
   getProjectNameFromProjectsData,
   parseCreditClassVersion,
 } from './CreditClassDetails.utils';
@@ -57,17 +46,12 @@ interface CreditDetailsProps {
 function CreditClassDetails({
   isLandSteward,
 }: CreditDetailsProps): JSX.Element {
-  const { _ } = useLingui();
-  const { activeWalletAddr, isConnected } = useWallet();
   const { dataClient, ecocreditClient } = useLedger();
   const { creditClassId } = useParams();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const [issuers, setIssuers] = useState<string[] | undefined>(undefined);
-  const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
-  const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
-  const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
 
   const { data: buyModalOptionsContent } = useQuery(
     getBuyModalOptionsQuery({ sanityClient: client }),
@@ -133,7 +117,7 @@ function CreditClassDetails({
   const dbCreditClassByOnChainId = dbDataByOnChainId?.creditClassByOnChainId;
   const dbCreditClassByUri = dbDataByUri?.creditClassByUri;
 
-  const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
+  const { projectsWithOrderData } = useBuySellOrderData({
     classId: creditClassId,
   });
 
@@ -152,13 +136,6 @@ function CreditClassDetails({
         ) ?? undefined,
     }));
   }, [credits, projectsWithOrderData]);
-
-  const simplePrice = useQuery(getSimplePriceQuery({}));
-
-  const avgPricePerTonLabel = getCreditClassAvgPricePerTonLabel({
-    geckoPrices: simplePrice.data,
-    projectsWithOrderData,
-  });
 
   const onBookCallButtonClick = () => openLink(scheduleCallLink, true);
   const impact = useImpact({
@@ -240,30 +217,8 @@ function CreditClassDetails({
         />
       )}
       <SellOrdersActionsBar
-        isBuyButtonDisabled={isBuyFlowDisabled}
         isCommunityCredit={isCommunityCredit}
         onBookCallButtonClick={onBookCallButtonClick}
-        onBuyButtonClick={() => {
-          if (!activeWalletAddr) {
-            setConnectWalletModal(atom => void (atom.open = true));
-          } else {
-            if (isConnected) {
-              setIsBuyFlowStarted(true);
-            } else {
-              setSwitchWalletModalAtom(atom => void (atom.open = true));
-            }
-          }
-        }}
-        onChainCreditClassId={onChainClass?.id}
-        creditClassName={metadata?.['schema:name']}
-        avgPricePerTonLabel={avgPricePerTonLabel}
-        avgPricePerTonTooltip={_(AVG_PRICE_TOOLTIP_CREDIT_CLASS)}
-      />
-      <BuySellOrderFlow
-        isFlowStarted={isBuyFlowStarted}
-        isCommunityCredit={isCommunityCredit}
-        setIsFlowStarted={setIsBuyFlowStarted}
-        projects={projectsWithOrderData}
       />
       <CreateSellOrderFlow
         isFlowStarted={isSellFlowStarted}

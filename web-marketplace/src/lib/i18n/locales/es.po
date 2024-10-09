@@ -1,6 +1,10 @@
 msgid ""
 msgstr ""
+<<<<<<< HEAD
 "POT-Creation-Date: 2024-10-14 10:17+0200\n"
+=======
+"POT-Creation-Date: 2024-10-09 12:20+0100\n"
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -99,7 +103,10 @@ msgstr ""
 msgid "{truncatedQuantity} credit(s) available"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:80
+=======
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 #: src/components/organisms/Order/Order.Summary.tsx:83
 msgid "# credits"
 msgstr ""
@@ -243,7 +250,11 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:62
+=======
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:67
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:46
 #: src/pages/Activity/Activity.tsx:12
 msgid "Activity"
@@ -1262,6 +1273,10 @@ msgstr ""
 msgid "Credits cannot exceed"
 msgstr ""
 
+#: src/components/organisms/Order/Order.constants.ts:8
+msgid "Credits delivered"
+msgstr ""
+
 #: src/components/organisms/UserCredits.tsx:150
 msgid "Credits for"
 msgstr ""
@@ -1454,7 +1469,11 @@ msgstr ""
 msgid "Ecocredit batch ID"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:69
+=======
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:74
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:50
 msgid "Ecocredit batches"
 msgstr ""
@@ -1522,7 +1541,10 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:86
+=======
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:76
 #: src/lib/constants/shared.constants.tsx:22
 msgid "Edit"
@@ -1599,7 +1621,11 @@ msgstr ""
 msgid "ending in"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.PaymentInfo.tsx:62
+=======
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.PaymentInfo.tsx:59
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 msgid "Enter a new credit card"
 msgstr ""
 
@@ -1626,6 +1652,10 @@ msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:65
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
+msgstr ""
+
+#: src/components/organisms/Order/Order.tsx:127
+msgid "Expected delivery date"
 msgstr ""
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:89
@@ -2057,6 +2087,10 @@ msgstr ""
 msgid "Main photo"
 msgstr ""
 
+#: src/components/organisms/Order/Order.MakeAnonymous.tsx:20
+msgid "Make Anonymous select"
+msgstr ""
+
 #: src/components/organisms/RolesForm/components/AdminModal/AdminModal.tsx:84
 msgid "Make sure this is the correct REGEN address. <0>If you change this to an address you don’t have access to, you will be unable to edit the project.</0>"
 msgstr ""
@@ -2202,10 +2236,27 @@ msgstr ""
 msgid "Must have recipients"
 msgstr ""
 
+<<<<<<< HEAD
+=======
+#: src/pages/Dashboard/Dashboard.constants.tsx:73
+msgid "my orders"
+msgstr ""
+
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:18
+#: src/pages/Dashboard/Dashboard.constants.tsx:87
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 #: src/pages/Orders/Orders.tsx:93
 msgid "My Orders"
 msgstr ""
 
+<<<<<<< HEAD
+=======
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:23
+#: src/pages/Dashboard/Dashboard.constants.tsx:95
+msgid "My prefinance projects"
+msgstr ""
+
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:158
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/pages/ProjectReview/ProjectReview.tsx:198
@@ -2390,10 +2441,13 @@ msgstr ""
 msgid "partners"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:119
 msgid "payment"
 msgstr ""
 
+=======
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 #: src/components/organisms/Order/Order.Summary.tsx:163
 msgid "payment currency"
 msgstr ""
@@ -2402,8 +2456,12 @@ msgstr ""
 msgid "payment info"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.PaymentInfo.tsx:45
 #: src/pages/BuyCredits/BuyCredits.utils.ts:34
+=======
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.PaymentInfo.tsx:42
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 msgid "Payment info"
 msgstr ""
 
@@ -2864,11 +2922,15 @@ msgstr ""
 msgid "purchase date"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:129
 msgid "purchase now"
 msgstr ""
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:410
+=======
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:409
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 msgid "Purchase options"
 msgstr ""
 
@@ -3088,8 +3150,13 @@ msgstr ""
 msgid "Retirement note"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:61
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:495
+=======
+#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:59
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:494
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 #: src/components/organisms/Order/Order.Summary.tsx:125
 #: src/lib/constants/shared.constants.tsx:145
 #: src/pages/Certificate/Certificate.constants.ts:17
@@ -3407,7 +3474,11 @@ msgstr ""
 msgid "State / Region"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:57
+=======
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:62
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:43
 msgid "Stats"
 msgstr ""
@@ -3763,7 +3834,10 @@ msgstr ""
 msgid "total credits you have purchased"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:96
+=======
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 #: src/components/organisms/Order/Order.Summary.tsx:89
 msgid "total price"
 msgstr ""
@@ -3837,7 +3911,10 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:87
+=======
+>>>>>>> 2bf6444a4 (chore: generate .po files)
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:68
 msgid "update"
 msgstr ""

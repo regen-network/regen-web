@@ -8,7 +8,7 @@ import {
 
 function getUnknowFields(data: object, knownFields: string[]) {
   return Object.entries(data).filter(
-    ([key]) => !['@context', '@type', '@id', ...knownFields].includes(key),
+    ([key]) => !['@context', '@graph', '@type', '@id', ...knownFields].includes(key),
   );
 }
 

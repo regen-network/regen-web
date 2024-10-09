@@ -127,10 +127,8 @@ export function OrderSummaryContent({
               className="font-['Lato'] text-[14px] md:text-base m-0"
             >
               <Trans>
-                <span className="capitalize">
-                  {cardDetails.brand} ending in
-                </span>{' '}
-                {cardDetails.last4}
+                <span className="capitalize">{cardDetails.brand}</span> ending
+                in {cardDetails.last4}
               </Trans>
             </p>
             <EditButtonIcon

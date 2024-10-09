@@ -45,7 +45,7 @@ msgstr ""
 msgid "(retirement is permanent and non-reversible)"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:148
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:135
 msgid "{_creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
 msgstr ""
 
@@ -99,7 +99,7 @@ msgstr ""
 msgid "{truncatedQuantity} credit(s) available"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:80
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:84
 #: src/components/organisms/Order/Order.Summary.tsx:83
 msgid "# credits"
 msgstr ""
@@ -150,8 +150,8 @@ msgstr ""
 msgid "+Create project"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:127
-msgid "<0>{0} ending in</0> {1}"
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:129
+msgid "<0>{0}</0> ending in {1}"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:40
@@ -512,7 +512,7 @@ msgstr ""
 msgid "Avg Price"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:63
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:67
 msgid "avg price per credit"
 msgstr ""
 
@@ -1197,7 +1197,7 @@ msgstr ""
 msgid "credit name"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:276
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:263
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr ""
 
@@ -1526,7 +1526,7 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:86
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:90
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:76
 #: src/lib/constants/shared.constants.tsx:22
 msgid "Edit"
@@ -1570,7 +1570,7 @@ msgstr ""
 msgid "Edit your file"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:85
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:89
 msgid "Editable credits"
 msgstr ""
 
@@ -1710,7 +1710,7 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:99
+#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:98
 msgid "Follow this project get project update to my inbox"
 msgstr ""
 
@@ -2386,7 +2386,7 @@ msgstr ""
 msgid "or, log in with email / social"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:54
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:58
 msgid "Order Summary"
 msgstr ""
 
@@ -2410,7 +2410,7 @@ msgstr ""
 msgid "partners"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:119
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:121
 msgid "payment"
 msgstr ""
 
@@ -2694,7 +2694,7 @@ msgstr ""
 msgid "Program Guide"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:57
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:61
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:139
@@ -2885,7 +2885,7 @@ msgstr ""
 msgid "purchase date"
 msgstr ""
 
-#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:129
+#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:128
 msgid "purchase now"
 msgstr ""
 
@@ -3223,8 +3223,8 @@ msgstr ""
 msgid "Select all"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:261
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:262
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:248
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:249
 msgid "Select option"
 msgstr ""
 
@@ -3482,7 +3482,7 @@ msgstr ""
 msgid "Submit a Credit Class"
 msgstr ""
 
-#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:109
+#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:108
 msgid "Subscribe to Regen Network newsletter, which includes product updates and new and exciting projects"
 msgstr ""
 
@@ -3788,7 +3788,7 @@ msgstr ""
 msgid "total credits you have purchased"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:96
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:100
 #: src/components/organisms/Order/Order.Summary.tsx:89
 msgid "total price"
 msgstr ""
@@ -3862,7 +3862,7 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:87
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:91
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:68
 msgid "update"
 msgstr ""
@@ -3907,7 +3907,7 @@ msgstr ""
 msgid "Use your social account to log in to Regen Marketplace."
 msgstr ""
 
-#: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:212
+#: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:215
 msgid "useMultiStep must be used within a MultiStepProvider"
 msgstr ""
 

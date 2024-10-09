@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
+import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { startCase } from 'lodash';
 
@@ -12,6 +13,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { DISCARD_CHANGES_TITLE } from 'lib/constants/shared.constants';
+import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
@@ -38,6 +40,12 @@ export const ProfileEdit = () => {
   const { pathname } = useLocation();
   const section = usePathSection();
 
+  const { data: paymentMethodData } = useQuery(
+    getPaymentMethodsQuery({
+      enabled: true,
+    }),
+  );
+
   const onNavClick = (sectionName: string): void => {
     const isFormDirty = isDirtyRef.current;
     const path = `/profile/edit/${sectionName.replace(' ', '-')}`;
@@ -62,6 +70,9 @@ export const ProfileEdit = () => {
           sections={adminNavigationSections}
           onNavItemClick={onNavClick}
           currentPath={pathname}
+          savedPaymentInfo={
+            (paymentMethodData?.paymentMethods?.length ?? 0) > 0
+          }
         />
         <Flex
           sx={{

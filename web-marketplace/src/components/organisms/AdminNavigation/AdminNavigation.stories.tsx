@@ -27,6 +27,7 @@ export const Default: Story = (args: AdminNavigationProps) => {
         sections={adminNavigationSections}
         currentPath={currentPath}
         onNavItemClick={handleNavItemClick}
+        savedPaymentInfo={true}
       />
     </div>
   );

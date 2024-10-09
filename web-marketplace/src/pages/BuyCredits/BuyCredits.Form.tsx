@@ -75,6 +75,8 @@ type Props = {
   project?: ProjectWithOrderData;
 };
 
+const stripePromise = loadStripe(stripeKey);
+
 export const BuyCreditsForm = ({
   paymentOption,
   setPaymentOption,
@@ -139,7 +141,7 @@ export const BuyCreditsForm = ({
     }),
   );
 
-  const stripePromise = loadStripe(stripeKey);
+  const stripe = useMemo(() => stripePromise, []);
   const stripeOptions = useMemo(
     () => ({
       amount: (data?.[CURRENCY_AMOUNT] || 0) * 100, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00),
@@ -251,7 +253,13 @@ export const BuyCreditsForm = ({
   );
 
   return (
-    <div>
+    <div
+      className={
+        activeStep !== 0
+          ? 'flex gap-10 sm:gap-50 flex-col-reverse lg:flex-row items-center lg:items-start'
+          : undefined
+      }
+    >
       <div>
         {activeStep === 0 && (
           <ChooseCreditsForm
@@ -303,7 +311,7 @@ export const BuyCreditsForm = ({
 
         {paymentOption === PAYMENT_OPTIONS.CARD &&
         (activeStep === 1 || activeStep === 2) ? (
-          <Elements options={stripeOptions} stripe={stripePromise}>
+          <Elements options={stripeOptions} stripe={stripe}>
             {activeStep === 1 && (
               <PaymentInfoFormFiat
                 paymentOption={paymentOption}

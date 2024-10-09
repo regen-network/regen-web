@@ -11,6 +11,8 @@ export interface Props {
   variant?: InfoLabelVariant;
   icon?: React.ReactNode;
   sx?: SxProps<Theme>;
+  labelClassName?: string;
+  wrapperClassName?: string;
 }
 
 const InfoLabel = ({
@@ -18,6 +20,8 @@ const InfoLabel = ({
   variant = 'default',
   icon,
   sx = [],
+  labelClassName,
+  wrapperClassName,
 }: Props): JSX.Element => {
   const theme = useTheme();
   const infoLabelColorMapping = useMemo(
@@ -38,12 +42,14 @@ const InfoLabel = ({
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
+      className={wrapperClassName}
     >
       {icon && <Box sx={{ mr: 1 }}>{icon}</Box>}
       <Body
         sx={{
           color: 'primary.light',
         }}
+        className={labelClassName}
       >
         {label}
       </Body>

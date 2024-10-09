@@ -49,23 +49,24 @@ describe('OrderSummaryCard', () => {
     render(<OrderSummaryCard {...orderSummary} />);
 
     const editButton = screen.getByRole('button', {
-      name: 'Edit',
+      name: /edit/i,
     });
     fireEvent.click(editButton);
-    const editInput = screen.getByRole('textbox', {
-      name: 'editable-credits',
-    });
-    fireEvent.change(editInput, { target: { value: 7 } });
+    const editInput = screen.getByTestId(/editable-input/i);
 
-    const updateButton = screen.getByRole('button', {
-      name: 'update',
-    });
-    fireEvent.click(updateButton);
-    const updatedNumberOfCredits = screen.getByText('7');
-    expect(updatedNumberOfCredits).toBeInTheDocument();
+    if (editInput) {
+      fireEvent.change(editInput, { target: { value: 7 } });
 
-    const pricePerCredit = screen.getByText(/70.00/i);
-    expect(pricePerCredit).toBeInTheDocument();
+      const updateButton = screen.getByRole('button', {
+        name: 'update',
+      });
+      fireEvent.click(updateButton);
+      const updatedNumberOfCredits = screen.getByText('7');
+      expect(updatedNumberOfCredits).toBeInTheDocument();
+
+      const pricePerCredit = screen.getByText(/70.00/i);
+      expect(pricePerCredit).toBeInTheDocument();
+    }
   });
 
   it('displays the total price', () => {

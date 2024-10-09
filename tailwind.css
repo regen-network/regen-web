@@ -11,7 +11,7 @@
 
       Colors are based off of https://www.figma.com/file/Md1Cl2B9eJi4NMzQgpbdMF/Dark-Mode?type=design&node-id=112-9885&mode=design&t=YKxx8fYvslM2TeLp-0.
     */
-
+    --brand-500: 26 125 60;
     --brand-400: 79 181 115;
     --brand-300: 123 199 150;
     --brand-200: 185 225 199;
@@ -47,6 +47,9 @@
     --purple-300: 128 142 171;
     --purple-200: 187 195 210;
     --purple-100: 221 225 233;
+
+    --orange-700: 122 64 11;
+
   }
 
   .dark {

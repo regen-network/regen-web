@@ -1,15 +1,17 @@
+import { isValidElement } from 'react';
 import { Box, SxProps } from '@mui/material';
 
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
-import { ProjectTagType } from './ProjectTag.types';
+import { isImageType, ProjectTagType } from './ProjectTag.types';
 
 export interface Props {
   tag: ProjectTagType;
   sx?: SxProps<Theme>;
+  onClick?: () => void;
 }
 
-const ProjectTag = ({ tag, sx = [] }: Props): JSX.Element => {
+const ProjectTag = ({ tag, sx = [], onClick }: Props): JSX.Element => {
   const { icon, name } = tag;
 
   return (
@@ -27,8 +29,9 @@ const ProjectTag = ({ tag, sx = [] }: Props): JSX.Element => {
         },
         ...sxToArray(sx),
       ]}
+      onClick={onClick}
     >
-      {icon.src && (
+      {isImageType(icon) && (
         <Box
           component="img"
           src={icon.src}
@@ -40,6 +43,7 @@ const ProjectTag = ({ tag, sx = [] }: Props): JSX.Element => {
           }}
         />
       )}
+      {isValidElement(icon) && icon}
       <Box sx={{ fontWeight: 700, fontSize: { xs: 12, sm: 14 } }}>{name}</Box>
     </Box>
   );

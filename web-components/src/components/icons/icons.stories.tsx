@@ -147,7 +147,7 @@ export default {
   component: ArrowDownIcon,
 };
 
-function LabeledIcon(props: {
+export function LabeledIcon(props: {
   icon: React.ReactElement;
   label: string;
 }): JSX.Element {

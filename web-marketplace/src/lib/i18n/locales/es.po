@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-09 12:20+0100\n"
+"POT-Creation-Date: 2024-10-09 15:43+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2174,7 +2174,6 @@ msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:18
 #: src/pages/Dashboard/Dashboard.constants.tsx:87
-#: src/pages/Orders/Orders.tsx:93
 msgid "My Orders"
 msgstr ""
 

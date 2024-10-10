@@ -126,7 +126,7 @@ export const CurrencyInput = ({
         endAdornment={
           paymentOption === PAYMENT_OPTIONS.CARD ? (
             <DenomIconWithCurrency
-              baseDenom={currency.askBaseDenom}
+              baseDenom={currency?.askBaseDenom}
               displayDenom={displayDenom}
             />
           ) : (

@@ -24,10 +24,9 @@ export const CreditsInput = ({
   const { onChange } = register(CREDITS_AMOUNT);
 
   const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    // Remove leading zeros and update the value
+    // Remove zeros in non decimal values and update the value
     const value = event.target.value;
-    const newValue = Number(value);
-    setValue(CREDITS_AMOUNT, newValue);
+    if (!value.includes('.')) setValue(CREDITS_AMOUNT, Number(value));
     onChange(event);
     handleCreditsAmountChange(event);
   };

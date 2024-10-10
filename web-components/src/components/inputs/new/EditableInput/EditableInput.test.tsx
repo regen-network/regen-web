@@ -9,6 +9,7 @@ describe('EditableInput', () => {
     render(
       <EditableInput
         value={100}
+        maxValue={1000}
         onChange={onChangeMock}
         inputAriaLabel="testEditableInput"
         editButtonAriaLabel="Edit"
@@ -29,6 +30,7 @@ describe('EditableInput', () => {
     render(
       <EditableInput
         value={100}
+        maxValue={1000}
         onChange={onChangeMock}
         inputAriaLabel="testEditableInput"
         editButtonAriaLabel="Edit"
@@ -55,6 +57,7 @@ describe('EditableInput', () => {
     render(
       <EditableInput
         value={100}
+        maxValue={1000}
         onChange={onChangeMock}
         inputAriaLabel="testEditableInput"
         editButtonAriaLabel="Edit"

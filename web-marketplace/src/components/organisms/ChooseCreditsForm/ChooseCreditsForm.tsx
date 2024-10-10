@@ -2,6 +2,7 @@ import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
+import { useSetAtom } from 'jotai';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import {
   CREDIT_VINTAGE_OPTIONS,
@@ -18,11 +19,14 @@ import { Loading } from 'web-components/src/components/loading';
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import {
   CardDetails,
   PaymentOptionsType,
 } from 'pages/BuyCredits/BuyCredits.types';
+import { getCreditsAvailableBannerText } from 'pages/BuyCredits/BuyCredits.utils';
 import {
   ProjectWithOrderData,
   UISellOrderInfo,
@@ -89,6 +93,8 @@ export function ChooseCreditsForm({
   card,
 }: Props) {
   const { _ } = useLingui();
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+
   const cryptoCurrencies = useMemo(
     () =>
       cryptoSellOrders
@@ -301,7 +307,9 @@ export function ChooseCreditsForm({
               order={{
                 projectName: project.name,
                 prefinanceProject: false, // TODO APP-367
-                pricePerCredit: currencyAmount / creditsAmount,
+                pricePerCredit: parseFloat(
+                  (currencyAmount / creditsAmount).toFixed(6),
+                ),
                 credits: creditsAmount,
                 currency,
                 image: project.imgSrc,
@@ -325,6 +333,12 @@ export function ChooseCreditsForm({
                 });
                 form.setValue(SELL_ORDERS, sellOrders);
               }}
+              creditsAvailable={creditsAvailable}
+              onInvalidCredits={() =>
+                setErrorBannerTextAtom(
+                  getCreditsAvailableBannerText(creditsAvailable),
+                )
+              }
             />
           )}
         </div>

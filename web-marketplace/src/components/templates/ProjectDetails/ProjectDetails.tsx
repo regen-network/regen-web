@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useApolloClient } from '@apollo/client';
 import { useLingui } from '@lingui/react';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
@@ -31,22 +30,14 @@ import {
   CreditClassMetadataLD,
 } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
-import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
-import { getProjectByIdQuery as getOffChainProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
-import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
-import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
-import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
-import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
-import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { CREATE_POST_DISABLED_TOOLTIP_TEXT } from 'pages/Dashboard/MyProjects/MyProjects.constants';
@@ -67,6 +58,7 @@ import { NotFoundPage } from '../../../pages/NotFound/NotFound';
 import { GettingStartedResourcesSection } from '../../molecules';
 import { ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';
+import { useGetProject } from './hooks/useGetProject';
 import useSeo from './hooks/useSeo';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { useStakeholders } from './hooks/useStakeholders';
@@ -80,8 +72,6 @@ import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   findSanityCreditClass,
   formatOtcCardData,
-  getIsOnChainId,
-  getIsUuid,
   getProjectGalleryPhotos,
   parseMedia,
   parseOffChainProject,
@@ -102,8 +92,7 @@ function ProjectDetails(): JSX.Element {
     wallet,
     loginDisabled,
   } = useWallet();
-  const graphqlClient = useApolloClient();
-  const { track } = useTracker();
+
   const location = useLocation();
   const navigate = useNavigate();
   const { activeAccount } = useAuth();
@@ -136,53 +125,32 @@ function ProjectDetails(): JSX.Element {
   const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
 
-  // first, check if projectId is an off-chain project handle (for legacy projects like "wilmot")
-  // or an chain project id
-  // or and off-chain project with an UUID
-  const isOnChainId = getIsOnChainId(projectId);
-  const isOffChainUuid = getIsUuid(projectId);
+  useEffect(() => {
+    // As soon as user connects to the right wallet address,
+    // we navigate to the buy page
+    if (isBuyFlowStarted && isConnected) {
+      navigate(`/project/${projectId}/buy`);
+    }
+  }, [isBuyFlowStarted, isConnected, navigate, projectId]);
 
-  const { data: sanityProjectData } = useQuery(
-    getProjectByIdQuery({
-      id: projectId as string,
-      sanityClient,
-      enabled: !!sanityClient && !!projectId,
-    }),
-  );
-
-  // if projectId is slug, query project by slug
-  const { data: projectBySlug, isInitialLoading: loadingProjectBySlug } =
-    useQuery(
-      getProjectBySlugQuery({
-        client: graphqlClient,
-        slug: projectId as string,
-        enabled: !!projectId && !isOnChainId && !isOffChainUuid,
-      }),
-    );
-
-  // else fetch project by onChainId
   const {
-    data: projectByOnChainId,
-    isInitialLoading: loadingProjectByOnChainId,
-  } = useQuery(
-    getProjectByOnChainIdQuery({
-      client: graphqlClient,
-      enabled: !!projectId && !!isOnChainId,
-      onChainId: projectId as string,
-    }),
-  );
-
-  // else fetch project by uuid
-  const {
-    data: offchainProjectByIdData,
-    isInitialLoading: loadingOffchainProjectById,
-  } = useQuery(
-    getOffChainProjectByIdQuery({
-      client: graphqlClient,
-      enabled: !!projectId && !!isOffChainUuid,
-      id: projectId,
-    }),
-  );
+    sanityProject,
+    loadingSanityProject,
+    projectBySlug,
+    loadingProjectBySlug,
+    projectByOnChainId,
+    loadingProjectByOnChainId,
+    offchainProjectByIdData,
+    loadingOffchainProjectById,
+    isBuyFlowDisabled,
+    projectsWithOrderData,
+    loadingBuySellOrders,
+    onChainProjectId,
+    offChainProject,
+    onChainCreditClassId,
+    creditClassOnChain,
+    cardSellOrders,
+  } = useGetProject();
 
   const slug =
     offchainProjectByIdData?.data?.projectById?.slug ||
@@ -202,14 +170,6 @@ function ProjectDetails(): JSX.Element {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   }, [element]);
-
-  const projectBySlugOnChainId =
-    projectBySlug?.data.projectBySlug?.onChainId ?? undefined;
-  const projectByUuidOnChainId =
-    offchainProjectByIdData?.data.projectById?.onChainId ?? undefined;
-  const onChainProjectId = isOnChainId
-    ? projectId
-    : projectBySlugOnChainId ?? projectByUuidOnChainId;
 
   const { data: projectResponse } = useQuery(
     getProjectQuery({
@@ -231,33 +191,8 @@ function ProjectDetails(): JSX.Element {
     }),
   );
 
-  const offChainProjectById = offchainProjectByIdData?.data.projectById;
-  const publishedOffchainProjectById = offChainProjectById?.published
-    ? offChainProjectById
-    : undefined;
-  const publishedOffchainProjectBySlug = projectBySlug?.data?.projectBySlug
-    ?.published
-    ? projectBySlug?.data?.projectBySlug
-    : undefined;
-
-  const offChainProject = isOnChainId
-    ? projectByOnChainId?.data.projectByOnChainId
-    : publishedOffchainProjectById ?? publishedOffchainProjectBySlug;
-
   /* Credit class */
 
-  const onChainCreditClassId =
-    offChainProject?.creditClassByCreditClassId?.onChainId ??
-    onChainProjectId?.split('-')?.[0];
-  const { data: creditClassOnChain } = useQuery(
-    getClassQuery({
-      client: ecocreditClient,
-      request: {
-        classId: onChainCreditClassId ?? '',
-      },
-      enabled: !!ecocreditClient && !!onChainCreditClassId,
-    }),
-  );
   const creditClassMetadataRes = useQuery(
     getMetadataQuery({
       iri: creditClassOnChain?.class?.metadata,
@@ -333,10 +268,6 @@ function ProjectDetails(): JSX.Element {
     loadingProjectBySlug ||
     loadingOffchainProjectById;
 
-  const { isBuyFlowDisabled, projectsWithOrderData } = useBuySellOrderData({
-    projectId: onChainProjectId,
-  });
-
   const { credits } = useCreateSellOrderData({
     projectId: projectsWithOrderData[0]?.id,
   });
@@ -397,7 +328,6 @@ function ProjectDetails(): JSX.Element {
     setIsBuyFlowStarted,
   });
 
-  const sanityProject = sanityProjectData?.allProject?.[0];
   const projectPrefinancing = sanityProject?.projectPrefinancing;
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
 
@@ -456,18 +386,33 @@ function ProjectDetails(): JSX.Element {
         isPrefinanceProject ||
         (isAdmin && !loginDisabled)) && (
         <SellOrdersActionsBar
-          isBuyButtonDisabled={isBuyFlowDisabled}
+          isBuyButtonDisabled={isBuyFlowDisabled || loadingSanityProject}
           isCommunityCredit={isCommunityCredit}
           onBookCallButtonClick={onBookCallButtonClick}
           isAdmin={isAdmin}
           onBuyButtonClick={() => {
-            if (!activeWalletAddr) {
-              setConnectWalletModal(atom => void (atom.open = true));
-            } else {
-              if (isConnected) {
+            if (
+              // some credits are available for fiat purchase
+              !loadingSanityProject &&
+              !loadingBuySellOrders &&
+              cardSellOrders.length > 0
+            ) {
+              // so we can always go to the buy page,
+              // no matter if the user is logged in/connected to a wallet or not
+              navigate(`/project/${projectId}/buy`);
+            } else if (!loadingSanityProject && !loadingBuySellOrders) {
+              if (!activeWalletAddr) {
+                // no connected wallet address
                 setIsBuyFlowStarted(true);
+                setConnectWalletModal(atom => void (atom.open = true));
               } else {
-                setSwitchWalletModalAtom(atom => void (atom.open = true));
+                if (isConnected) {
+                  navigate(`/project/${projectId}/buy`);
+                } else {
+                  // user logged in with web2 but not connected to the wallet address associated to his/er account
+                  setIsBuyFlowStarted(true);
+                  setSwitchWalletModalAtom(atom => void (atom.open = true));
+                }
               }
             }
           }}
@@ -620,19 +565,6 @@ function ProjectDetails(): JSX.Element {
           />
         </div>
       )}
-
-      <BuySellOrderFlow
-        isFlowStarted={isBuyFlowStarted}
-        isCommunityCredit={isCommunityCredit}
-        setIsFlowStarted={setIsBuyFlowStarted}
-        projects={
-          projectsWithOrderData?.length > 0
-            ? [projectsWithOrderData[0]]
-            : undefined
-        }
-        track={track}
-        location={location}
-      />
       <CreateSellOrderFlow
         isFlowStarted={isSellFlowStarted}
         setIsFlowStarted={setIsSellFlowStarted}

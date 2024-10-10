@@ -124,7 +124,10 @@ const RegenModal: React.FC<React.PropsWithChildren<RegenModalProps>> = ({
         >
           {children}
           <div className={styles.closeIcon} onClick={onClose}>
-            <CloseIcon svgColor={closeIconColor} />
+            <CloseIcon
+              svgColor={closeIconColor}
+              data-testid="buy-fiat-modal-close"
+            />
           </div>
         </div>
       </RemoveScroll>

@@ -55,6 +55,7 @@ export const SelectAccountModal = ({
       <div className="pb-40">
         {accounts.map(account => (
           <div
+            key={account.addr}
             className={`flex border-solid border border-grey-300 p-20 mb-10 rounded-[10px] cursor-pointer ${
               account.id === selectedAccountId ? 'bg-grey-200' : 'bg-grey-0'
             }`}

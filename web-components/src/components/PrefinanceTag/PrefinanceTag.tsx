@@ -15,7 +15,7 @@ export const PrefinanceTag = ({
     height: '19',
   },
 }: {
-  bodyTexts: ProjectCardBodyTextsMapping;
+  bodyTexts: Pick<ProjectCardBodyTextsMapping, 'prefinance'>;
   classNames?: { root?: string; label?: string };
   iconSize?: {
     width: string;

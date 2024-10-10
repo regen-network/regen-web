@@ -11,7 +11,7 @@ import { cn } from '../../../../utils/styles/cn';
 import { Subtitle } from '../../../typography';
 import Checkbox from '../CheckBox/Checkbox';
 
-interface CheckboxLabelProps extends MuiCheckboxProps {
+export interface CheckboxLabelProps extends MuiCheckboxProps {
   label: FormControlLabelProps['label'];
   disabled?: boolean;
   className?: string;

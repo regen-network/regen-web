@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+import { USD_DENOM } from 'config/allowedBaseDenoms';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
 import { createChooseCreditsFormSchema } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
@@ -14,7 +15,7 @@ import {
   cryptoCurrencies,
   cryptoSellOrders,
 } from './CreditsAmount.mock';
-import { Currency } from './CreditsAmount.types';
+import { CreditsAmountProps, Currency } from './CreditsAmount.types';
 
 export default {
   title: 'Marketplace/Molecules/CreditsAmount',
@@ -23,22 +24,22 @@ export default {
 
 type Story = StoryObj<typeof CreditsAmount>;
 
-const CreditsWithForm = (args: any) => {
+const CreditsWithForm = (args: CreditsAmountProps) => {
   const defaultCryptoCurrency = cryptoCurrencies[0];
   const initCurrency =
     args.paymentOption === PAYMENT_OPTIONS.CARD
-      ? { askDenom: 'usd', askBaseDenom: 'usd' }
+      ? { askDenom: USD_DENOM, askBaseDenom: USD_DENOM }
       : defaultCryptoCurrency;
   const [currency] = useState<Currency>(initCurrency);
   const [spendingCap, setSpendingCap] = useState(0);
   const [creditsAvailable, setCreditsAvailable] = useState(0);
 
-  const chooseCreditsFormSchema = createChooseCreditsFormSchema({
-    creditsAvailable,
-    spendingCap,
-  });
   const form = useZodForm({
-    schema: chooseCreditsFormSchema,
+    schema: createChooseCreditsFormSchema({
+      creditsAvailable,
+      spendingCap,
+      userBalance: 1000,
+    }),
     defaultValues: {
       [CURRENCY_AMOUNT]: 1,
       [CREDITS_AMOUNT]: 1,

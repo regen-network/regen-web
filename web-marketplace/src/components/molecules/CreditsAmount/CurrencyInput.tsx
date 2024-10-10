@@ -48,10 +48,9 @@ export const CurrencyInput = ({
 
   const handleOnChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      // Remove leading zeros and update the value
+      // Remove zeros in non decimal values and update the value
       const value = event.target.value;
-      const newValue = Number(value);
-      setValue(CURRENCY_AMOUNT, newValue);
+      if (!value.includes('.')) setValue(CURRENCY_AMOUNT, Number(value));
       onChange(event);
       handleCurrencyAmountChange(event);
     },

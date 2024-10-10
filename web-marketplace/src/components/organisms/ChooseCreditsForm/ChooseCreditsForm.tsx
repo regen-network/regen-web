@@ -18,12 +18,15 @@ import { Loading } from 'web-components/src/components/loading';
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import { microToDenom } from 'lib/denom.utils';
+
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { AllowedDenoms } from 'components/molecules/DenomLabel/DenomLabel.utils';
 
+import { useFetchUserBalance } from '../BuyCreditsModal/hooks/useFetchUserBalance';
 import { CryptoOptions } from './ChooseCreditsForm.CryptoOptions';
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
 import {
@@ -99,11 +102,15 @@ export function ChooseCreditsForm({
 
   const [spendingCap, setSpendingCap] = useState(0);
   const [creditsAvailable, setCreditsAvailable] = useState(0);
+  // A big number here avoids the NOT_ENOUGH_BALANCE error on rendering
+  // the form until the actual user balance is fetched
+  const [userBalance, setUserBalance] = useState(10101010101010101);
 
   const form = useZodForm({
     schema: createChooseCreditsFormSchema({
       creditsAvailable,
       spendingCap,
+      userBalance,
     }),
     defaultValues: {
       [CURRENCY_AMOUNT]: initialValues?.[CURRENCY_AMOUNT] || 0,
@@ -126,6 +133,17 @@ export function ChooseCreditsForm({
     control: form.control,
     name: CURRENCY,
   });
+
+  const microUserBalance = useFetchUserBalance({
+    askDenom: currency?.askDenom,
+  });
+
+  useEffect(() => {
+    if (microUserBalance) {
+      const _userBalance = microToDenom(microUserBalance);
+      setUserBalance(_userBalance);
+    }
+  }, [microUserBalance, userBalance]);
 
   const filteredCryptoSellOrders = useMemo(
     () =>

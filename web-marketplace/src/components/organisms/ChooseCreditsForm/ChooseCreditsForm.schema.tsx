@@ -11,15 +11,18 @@ import { z } from 'zod';
 import {
   MAX_AMOUNT,
   MAX_CREDITS,
+  NOT_ENOUGH_BALANCE,
   POSITIVE_NUMBER,
 } from './ChooseCreditsForm.constants';
 
 export const createChooseCreditsFormSchema = ({
   creditsAvailable,
   spendingCap,
+  userBalance,
 }: {
   creditsAvailable: number;
   spendingCap: number;
+  userBalance: number;
 }) => {
   return z.object({
     [CURRENCY_AMOUNT]: z.coerce
@@ -31,7 +34,8 @@ export const createChooseCreditsFormSchema = ({
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         })}`,
-      ),
+      )
+      .max(userBalance, `${i18n._(NOT_ENOUGH_BALANCE)}`),
     [CREDITS_AMOUNT]: z.coerce
       .number()
       .positive(i18n._(POSITIVE_NUMBER))

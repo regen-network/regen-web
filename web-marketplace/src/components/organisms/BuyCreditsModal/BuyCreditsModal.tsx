@@ -356,7 +356,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
                                   bankDenom: selectedSellOrder?.askDenom ?? '',
                                   baseDenom: selectedSellOrder?.askBaseDenom,
                                 }),
-                                userBalance,
+                                userBalance: userBalance || 0,
                                 _,
                               })}
                             />

@@ -3,8 +3,10 @@ import { msg, plural } from '@lingui/macro';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
-import { PaymentOptionsType } from './BuyCredits.types';
+import { BuyCreditsSchemaTypes, PaymentOptionsType } from './BuyCredits.types';
 
 type GetFormModelParams = {
   _: TranslatorType;
@@ -47,4 +49,15 @@ export const getCreditsAvailableBannerText = (creditsAvailable: number) => {
     one: `Only ${formattedCreditsAvailable} credit available with those paramaters, order quantity changed`,
     other: `Only ${formattedCreditsAvailable} credits available with those paramaters, order quantity changed`,
   });
+};
+
+export const findMatchingSellOrders = (
+  data: BuyCreditsSchemaTypes,
+  sellOrders: UISellOrderInfo[] | undefined,
+) => {
+  if (!sellOrders) return [];
+
+  const sellOrderIds = data?.sellOrders?.map(order => order.sellOrderId);
+
+  return sellOrders.filter(order => sellOrderIds?.includes(order.id));
 };

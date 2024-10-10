@@ -29,6 +29,8 @@ type Props = {
   paymentOption: PaymentOptionsType;
   allowedDenoms: AllowedDenoms;
   setCreditsAmount: (creditsAmount: number) => void;
+  creditsAvailable: number;
+  onInvalidCredits?: () => void;
 };
 
 export function OrderSummaryContent({
@@ -38,6 +40,8 @@ export function OrderSummaryContent({
   paymentOption,
   allowedDenoms,
   setCreditsAmount,
+  creditsAvailable,
+  onInvalidCredits,
 }: Props) {
   const { _ } = useLingui();
 
@@ -65,8 +69,8 @@ export function OrderSummaryContent({
         {projectName}
       </p>
       <OrderSummmaryRowHeader text={_(msg`avg price per credit`)} />
-      <div className="justify-start items-center flex">
-        <span>
+      <div className="justify-start items-center flex flex-wrap">
+        <span className="mr-10">
           <SupCurrencyAndAmount
             price={pricePerCredit || 0}
             currencyCode={currency.askDenom}
@@ -75,7 +79,7 @@ export function OrderSummaryContent({
         <DenomIconWithCurrency
           baseDenom={currency.askBaseDenom}
           displayDenom={displayDenom}
-          className="pt-[8px] ml-10 text-[14px] sm:text-base"
+          className="pt-[8px] text-[14px] sm:text-base"
           tooltipText={
             paymentOption !== PAYMENT_OPTIONS.CARD ? _(CRYPTO_TOOLTIP_TEXT) : ''
           }
@@ -85,11 +89,13 @@ export function OrderSummaryContent({
       <div className="text-base font-normal font-['Lato'] text-[14px] sm:text-base">
         <EditableInput
           value={credits}
+          maxValue={creditsAvailable}
           onChange={setCreditsAmount}
           inputAriaLabel={_(msg`Editable credits`)}
           editButtonAriaLabel={_(msg`Edit`)}
           updateButtonText={_(msg`update`)}
           name="editable-credits"
+          onInvalidValue={onInvalidCredits}
         />
       </div>
       <div className="col-span-full">

@@ -16,5 +16,6 @@ export const Default: Story = {
 
 Default.args = {
   value: 5,
+  maxValue: 10,
   onChange: action('onChange'),
 };

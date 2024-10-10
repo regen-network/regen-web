@@ -24,4 +24,6 @@ export interface OrderSummaryProps {
   allowedDenoms: AllowedDenoms;
   onClickEditCard: () => void;
   setCreditsAmount: (creditsAmount: number) => void;
+  creditsAvailable: number;
+  onInvalidCredits?: () => void;
 }

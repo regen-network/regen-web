@@ -31,7 +31,10 @@ import {
   CURRENCY_AMOUNT,
   SELL_ORDERS,
 } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
-import { getCurrencyAmount } from 'components/molecules/CreditsAmount/CreditsAmount.utils';
+import {
+  getCreditsAvailablePerCurrency,
+  getCurrencyAmount,
+} from 'components/molecules/CreditsAmount/CreditsAmount.utils';
 import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSummaryCard';
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';
@@ -55,6 +58,7 @@ import {
   CardDetails,
   PaymentOptionsType,
 } from './BuyCredits.types';
+import { getCreditsAvailableBannerText } from './BuyCredits.utils';
 import { usePurchase } from './hooks/usePurchase';
 
 type Props = {
@@ -252,6 +256,22 @@ export const BuyCreditsForm = ({
     [card, cardSellOrders, filteredCryptoSellOrders],
   );
 
+  const creditsAvailable = useMemo(
+    () =>
+      getCreditsAvailablePerCurrency(
+        paymentOption,
+        filteredCryptoSellOrders,
+        cardSellOrders,
+        creditTypePrecision,
+      ),
+    [
+      cardSellOrders,
+      creditTypePrecision,
+      filteredCryptoSellOrders,
+      paymentOption,
+    ],
+  );
+
   return (
     <div
       className={
@@ -392,7 +412,9 @@ export const BuyCreditsForm = ({
             order={{
               projectName: project.name,
               prefinanceProject: false, // TODO APP-367
-              pricePerCredit: currencyAmount / creditsAmount,
+              pricePerCredit: parseFloat(
+                (currencyAmount / creditsAmount).toFixed(6),
+              ),
               credits: creditsAmount,
               currency,
               image: project.imgSrc,
@@ -420,6 +442,12 @@ export const BuyCreditsForm = ({
                 activeStep,
               );
             }}
+            creditsAvailable={creditsAvailable}
+            onInvalidCredits={() =>
+              setErrorBannerTextAtom(
+                getCreditsAvailableBannerText(creditsAvailable),
+              )
+            }
           />
         )}
       <LoginFlow

@@ -1,19 +1,20 @@
+import { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import Form from 'web-marketplace/src/components/molecules/Form/Form';
 import { useZodForm } from 'web-marketplace/src/components/molecules/Form/hook/useZodForm';
-import { PAYMENT_OPTIONS } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { createChooseCreditsFormSchema } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
-import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 
 import { CreditsAmount } from './CreditsAmount';
 import { CREDITS_AMOUNT, CURRENCY_AMOUNT } from './CreditsAmount.constants';
-import { creditDetails } from './CreditsAmount.mock';
-
-const chooseCreditsFormSchema = createChooseCreditsFormSchema({
-  creditsCap: 100,
-  spendingCap: 1000,
-});
+import {
+  allowedDenoms,
+  cardSellOrders,
+  cryptoCurrencies,
+  cryptoSellOrders,
+} from './CreditsAmount.mock';
+import { Currency } from './CreditsAmount.types';
 
 export default {
   title: 'Marketplace/Molecules/CreditsAmount',
@@ -23,18 +24,41 @@ export default {
 type Story = StoryObj<typeof CreditsAmount>;
 
 const CreditsWithForm = (args: any) => {
+  const defaultCryptoCurrency = cryptoCurrencies[0];
+  const initCurrency =
+    args.paymentOption === PAYMENT_OPTIONS.CARD
+      ? { askDenom: 'usd', askBaseDenom: 'usd' }
+      : defaultCryptoCurrency;
+  const [currency] = useState<Currency>(initCurrency);
+  const [spendingCap, setSpendingCap] = useState(0);
+  const [creditsAvailable, setCreditsAvailable] = useState(0);
+
+  const chooseCreditsFormSchema = createChooseCreditsFormSchema({
+    creditsAvailable,
+    spendingCap,
+  });
   const form = useZodForm({
     schema: chooseCreditsFormSchema,
     defaultValues: {
       [CURRENCY_AMOUNT]: 1,
       [CREDITS_AMOUNT]: 1,
-      retiring: true,
     },
     mode: 'onChange',
   });
+  const filteredCryptoSellOrders = cryptoSellOrders.filter(
+    order => order.askDenom === initCurrency.askDenom,
+  );
   return (
     <Form form={form as any} onSubmit={form.handleSubmit as any}>
-      <CreditsAmount {...args} />
+      <CreditsAmount
+        {...args}
+        currency={currency}
+        spendingCap={spendingCap}
+        setSpendingCap={setSpendingCap}
+        creditsAvailable={creditsAvailable}
+        setCreditsAvailable={setCreditsAvailable}
+        filteredCryptoSellOrders={filteredCryptoSellOrders}
+      />
     </Form>
   );
 };
@@ -44,14 +68,10 @@ export const CreditsAmountCard: Story = {
 };
 
 CreditsAmountCard.args = {
-  creditDetails,
   paymentOption: PAYMENT_OPTIONS.CARD,
-  currency: CURRENCIES.usd,
-  setCurrency: () => {},
-  setSpendingCap: () => {},
-  creditsAvailable: 1000,
-  setCreditsAvailable: () => {},
-  creditVintages: [],
+  cardSellOrders,
+  cryptoCurrencies,
+  allowedDenoms,
 };
 
 export const CreditsAmountCrypto: Story = {
@@ -59,12 +79,8 @@ export const CreditsAmountCrypto: Story = {
 };
 
 CreditsAmountCrypto.args = {
-  creditDetails,
   paymentOption: PAYMENT_OPTIONS.CRYPTO,
-  currency: CURRENCIES.usd,
-  setCurrency: () => {},
-  setSpendingCap: () => {},
-  creditsAvailable: 1000,
-  setCreditsAvailable: () => {},
-  creditVintages: [],
+  cardSellOrders,
+  cryptoCurrencies,
+  allowedDenoms,
 };

@@ -16,13 +16,14 @@ const WithLoader = ({
   children,
   variant = 'circular',
   sx,
+  className,
 }: Props): JSX.Element => {
   const isCircular = variant === 'circular';
   const isSkeleton = variant === 'skeleton';
 
   if (isLoading) {
     return (
-      <Box sx={sx}>
+      <Box sx={sx} className={className}>
         {isCircular && <CircularProgress color="secondary" />}
         {isSkeleton && <Skeleton />}
       </Box>

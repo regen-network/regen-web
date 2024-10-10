@@ -1,7 +1,10 @@
 import { i18n } from '@lingui/core';
 import {
+  CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
+  CURRENCY,
   CURRENCY_AMOUNT,
+  SELL_ORDERS,
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 import { z } from 'zod';
 
@@ -12,16 +15,16 @@ import {
 } from './ChooseCreditsForm.constants';
 
 export const createChooseCreditsFormSchema = ({
-  creditsCap,
+  creditsAvailable,
   spendingCap,
 }: {
-  creditsCap: number;
+  creditsAvailable: number;
   spendingCap: number;
 }) => {
   return z.object({
     [CURRENCY_AMOUNT]: z.coerce
       .number()
-      .positive(POSITIVE_NUMBER)
+      .positive(i18n._(POSITIVE_NUMBER))
       .max(
         spendingCap,
         `${i18n._(MAX_AMOUNT)} ${spendingCap.toLocaleString(undefined, {
@@ -31,10 +34,23 @@ export const createChooseCreditsFormSchema = ({
       ),
     [CREDITS_AMOUNT]: z.coerce
       .number()
-      .positive(POSITIVE_NUMBER)
-      .max(creditsCap, `${i18n._(MAX_CREDITS)} ${creditsCap}`),
-    retiring: z.boolean(),
-    creditVintageOptions: z.array(z.string()),
+      .positive(i18n._(POSITIVE_NUMBER))
+      .max(creditsAvailable, `${i18n._(MAX_CREDITS)} ${creditsAvailable}`),
+    [SELL_ORDERS]: z.array(
+      z.object({
+        sellOrderId: z.string(),
+        quantity: z.string(),
+        price: z.number().optional(),
+        bidPrice: z
+          .object({ amount: z.string(), denom: z.string() })
+          .optional(),
+      }),
+    ),
+    [CREDIT_VINTAGE_OPTIONS]: z.array(z.string()),
+    [CURRENCY]: z.object({
+      askDenom: z.string(),
+      askBaseDenom: z.string(),
+    }),
   });
 };
 

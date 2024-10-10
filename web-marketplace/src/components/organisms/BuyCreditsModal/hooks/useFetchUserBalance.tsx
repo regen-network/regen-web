@@ -9,12 +9,16 @@ import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 interface Params {
   selectedSellOrder?: UISellOrderInfo;
+  askDenom?: string;
 }
 
-export const useFetchUserBalance = ({ selectedSellOrder }: Params): number => {
+export const useFetchUserBalance = ({
+  selectedSellOrder,
+  askDenom,
+}: Params): number | null => {
   const { wallet } = useWallet();
   const { bankClient } = useLedger();
-  const { data: allBalancesData } = useQuery(
+  const { data: allBalancesData, isLoading } = useQuery(
     getAllBalancesQuery({
       request: { address: wallet?.address },
       client: bankClient,
@@ -25,10 +29,13 @@ export const useFetchUserBalance = ({ selectedSellOrder }: Params): number => {
   const userBalance = useMemo(
     () =>
       allBalancesData?.balances.find(
-        balance => balance.denom === selectedSellOrder?.askDenom,
+        balance => balance.denom === selectedSellOrder?.askDenom || askDenom,
       )?.amount,
-    [allBalancesData?.balances, selectedSellOrder?.askDenom],
+    [allBalancesData?.balances, selectedSellOrder?.askDenom, askDenom],
   );
 
+  if (isLoading) {
+    return null;
+  }
   return userBalance ? Number(userBalance) : 0;
 };

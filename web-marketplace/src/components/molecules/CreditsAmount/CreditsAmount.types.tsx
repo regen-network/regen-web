@@ -24,6 +24,8 @@ export interface CreditsAmountProps {
   allowedDenoms?: AllowedDenoms;
   creditTypePrecision?: number | null;
   currency: Currency;
+  card: boolean;
+  orderedSellOrders: UISellOrderInfo[];
 }
 
 export interface CreditsInputProps {

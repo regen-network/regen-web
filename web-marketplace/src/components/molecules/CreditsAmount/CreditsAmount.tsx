@@ -1,15 +1,14 @@
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { i18n } from '@lingui/core';
-import { msg, plural, Trans } from '@lingui/macro';
+import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { microToDenom } from 'lib/denom.utils';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { getCreditsAvailableBannerText } from 'pages/BuyCredits/BuyCredits.utils';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import {
@@ -42,6 +41,8 @@ export const CreditsAmount = ({
   cryptoCurrencies,
   allowedDenoms,
   creditTypePrecision,
+  card,
+  orderedSellOrders,
 }: CreditsAmountProps) => {
   const { _ } = useLingui();
 
@@ -49,21 +50,6 @@ export const CreditsAmount = ({
   const { setValue, trigger, getValues } =
     useFormContext<ChooseCreditsFormSchemaType>();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
-
-  const card = useMemo(
-    () => paymentOption === PAYMENT_OPTIONS.CARD,
-    [paymentOption],
-  );
-  const orderedSellOrders = useMemo(
-    () =>
-      card
-        ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
-        : filteredCryptoSellOrders?.sort(
-            (a, b) => Number(a.askAmount) - Number(b.askAmount),
-          ) || [],
-
-    [card, cardSellOrders, filteredCryptoSellOrders],
-  );
 
   const setInitialCreditsAmount = useCallback(async () => {
     if (getValues(CREDITS_AMOUNT) === 0) {
@@ -132,13 +118,7 @@ export const CreditsAmount = ({
           return formatSellOrder({ order, card, price });
         }),
       );
-      const formattedCreditsAvailable = i18n.number(_creditsAvailable);
-      setErrorBannerTextAtom(
-        plural(_creditsAvailable, {
-          one: `Only ${formattedCreditsAvailable} credit available with those paramaters, order quantity changed`,
-          other: `Only ${formattedCreditsAvailable} credits available with those paramaters, order quantity changed`,
-        }),
-      );
+      setErrorBannerTextAtom(getCreditsAvailableBannerText(_creditsAvailable));
     } else {
       // Else we keep the same amount of credits
       // but we still need to update currency amount and sell orders

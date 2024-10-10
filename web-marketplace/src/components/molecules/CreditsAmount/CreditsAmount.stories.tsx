@@ -48,6 +48,13 @@ const CreditsWithForm = (args: any) => {
   const filteredCryptoSellOrders = cryptoSellOrders.filter(
     order => order.askDenom === initCurrency.askDenom,
   );
+  const card = args.paymentOption === PAYMENT_OPTIONS.CARD;
+  const orderedSellOrders = card
+    ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
+    : filteredCryptoSellOrders?.sort(
+        (a, b) => Number(a.askAmount) - Number(b.askAmount),
+      ) || [];
+
   return (
     <Form form={form as any} onSubmit={form.handleSubmit as any}>
       <CreditsAmount
@@ -58,6 +65,8 @@ const CreditsWithForm = (args: any) => {
         creditsAvailable={creditsAvailable}
         setCreditsAvailable={setCreditsAvailable}
         filteredCryptoSellOrders={filteredCryptoSellOrders}
+        card={card}
+        orderedSellOrders={orderedSellOrders}
       />
     </Form>
   );

@@ -7,15 +7,17 @@ import { OrderSummaryProps } from './OrderSummaryCard.types';
 export const OrderSummaryCard = (orderSummary: OrderSummaryProps) => {
   const {
     order,
-    paymentMethod,
-    currentBuyingStep,
+    cardDetails,
     imageAltText,
     onClickEditCard,
     paymentOption,
     allowedDenoms,
+    setCreditsAmount,
+    creditsAvailable,
+    onInvalidCredits,
   } = orderSummary;
   return (
-    <Card className="relative sm:w-full sm:max-w-[330px] h-[100%] py-20 sm:py-0 flex flex-2 sm:flex-col ">
+    <Card className="relative w-full max-w-[560px] lg:max-w-[330px] h-[100%] py-20 sm:py-0 flex flex-2 sm:flex-col border-grey-300">
       <OrderSummaryImage
         src={order.image}
         prefinanceProject={order.prefinanceProject}
@@ -23,11 +25,13 @@ export const OrderSummaryCard = (orderSummary: OrderSummaryProps) => {
       />
       <OrderSummaryContent
         order={order}
-        currentBuyingStep={currentBuyingStep}
-        paymentMethod={paymentMethod}
+        cardDetails={cardDetails}
         onClickEditCard={onClickEditCard}
         paymentOption={paymentOption}
         allowedDenoms={allowedDenoms}
+        setCreditsAmount={setCreditsAmount}
+        creditsAvailable={creditsAvailable}
+        onInvalidCredits={onInvalidCredits}
       />
     </Card>
   );

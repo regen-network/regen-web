@@ -8,7 +8,6 @@ import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabe
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { Body } from 'web-components/src/components/typography/Body';
 
-import { NEXT } from 'pages/BuyCredits/BuyCredits.constants';
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';

@@ -1,9 +1,7 @@
-import { msg } from '@lingui/macro';
+import { i18n } from '@lingui/core';
+import { msg, plural } from '@lingui/macro';
 
-import { Project } from 'generated/sanity-graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
-
-import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { PaymentOptionsType } from './BuyCredits.types';
@@ -41,4 +39,12 @@ export const getFormModel = ({
       { id: 'complete', name: _(msg`Complete`) },
     ],
   };
+};
+
+export const getCreditsAvailableBannerText = (creditsAvailable: number) => {
+  const formattedCreditsAvailable = i18n.number(creditsAvailable);
+  return plural(creditsAvailable, {
+    one: `Only ${formattedCreditsAvailable} credit available with those paramaters, order quantity changed`,
+    other: `Only ${formattedCreditsAvailable} credits available with those paramaters, order quantity changed`,
+  });
 };

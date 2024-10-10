@@ -393,7 +393,7 @@ msgid "all profiles"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
-#: src/pages/Projects/Projects.tsx:79
+#: src/pages/Projects/Projects.tsx:73
 msgid "All projects"
 msgstr ""
 
@@ -706,6 +706,7 @@ msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
 #: src/features/marketplace/BridgeFlow/BridgeFlow.constants.ts:4
+#: src/pages/Dashboard/Dashboard.constants.tsx:48
 #: src/pages/Dashboard/Dashboard.constants.tsx:48
 msgid "Bridge"
 msgstr ""
@@ -1216,6 +1217,7 @@ msgstr ""
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:243
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
 #: src/pages/Dashboard/Dashboard.constants.tsx:42
+#: src/pages/Dashboard/Dashboard.constants.tsx:42
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:93
 msgid "Credit Batches"
 msgstr ""
@@ -1275,6 +1277,7 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:28
 #: src/pages/Dashboard/Dashboard.constants.tsx:36
+#: src/pages/Dashboard/Dashboard.constants.tsx:36
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:87
 #: src/pages/Home/Home.tsx:183
 msgid "Credit Classes"
@@ -1323,6 +1326,7 @@ msgstr ""
 msgid "Credit unit definition"
 msgstr ""
 
+#: src/components/molecules/CreditsAmount/CreditsInput.tsx:59
 #: src/components/molecules/CreditsAmount/CreditsInput.tsx:59
 msgid "credits"
 msgstr ""
@@ -1379,6 +1383,7 @@ msgid "Credits have been issued!"
 msgstr ""
 
 #: src/components/molecules/CreditsAmount/CreditsInput.tsx:43
+#: src/components/molecules/CreditsAmount/CreditsInput.tsx:43
 msgid "Credits Input"
 msgstr ""
 
@@ -1432,7 +1437,8 @@ msgstr ""
 msgid "CURRENCY DENOM"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:95
+#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:93
+#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:93
 msgid "Currency Input"
 msgstr ""
 
@@ -1679,9 +1685,11 @@ msgstr ""
 #: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:38
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:115
 #: src/pages/Dashboard/Dashboard.constants.tsx:54
+#: src/pages/Dashboard/Dashboard.constants.tsx:54
 msgid "Edit profile"
 msgstr ""
 
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:38
 #: src/lib/constants/shared.constants.tsx:99
 msgid "Edit Profile"
 msgstr ""
@@ -1725,6 +1733,10 @@ msgstr ""
 
 #: src/pages/VerifyEmail/VerifyEmail.tsx:31
 msgid "Email resent! Please check your inbox."
+msgstr ""
+
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:48
+msgid "Email updates"
 msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:44
@@ -2749,6 +2761,7 @@ msgid "Please wait while transaction processes"
 msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:24
+#: src/pages/Dashboard/Dashboard.constants.tsx:24
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:74
 msgid "Portfolio"
 msgstr ""
@@ -2796,7 +2809,7 @@ msgid "prefinance"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:54
-#: src/pages/Projects/Projects.tsx:89
+#: src/pages/Projects/Projects.tsx:83
 msgid "Prefinance projects"
 msgstr ""
 
@@ -2886,9 +2899,12 @@ msgid "Proceed with caution: this cannot be undone!"
 msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:81
+#: src/pages/Dashboard/Dashboard.constants.tsx:81
 msgid "profile"
 msgstr ""
 
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:35
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:7
 #: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:35
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:7
 msgid "Profile"
@@ -2907,6 +2923,7 @@ msgstr ""
 msgid "Profile not found"
 msgstr ""
 
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:9
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:9
 msgid "Profile Saved"
 msgstr ""
@@ -3101,7 +3118,8 @@ msgstr ""
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:24
-#: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
+#: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:43
+#: src/pages/Dashboard/Dashboard.constants.tsx:30
 #: src/pages/Dashboard/Dashboard.constants.tsx:30
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:81
 msgid "Projects"
@@ -3415,6 +3433,7 @@ msgstr ""
 msgid "Save my credit card info for next time"
 msgstr ""
 
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:28
 #: src/pages/Dashboard/Dashboard.constants.tsx:103
 msgid "Saved payment info"
 msgstr ""
@@ -3546,6 +3565,8 @@ msgstr ""
 msgid "settings"
 msgstr ""
 
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:43
+#: src/pages/Dashboard/Dashboard.constants.tsx:62
 #: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:43
 #: src/pages/Dashboard/Dashboard.constants.tsx:62
 #: src/pages/Settings/Settings.tsx:52
@@ -4175,6 +4196,7 @@ msgstr ""
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:69
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:12
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:12
 msgid "Unnamed"
 msgstr ""
 
@@ -4363,6 +4385,7 @@ msgid "view post"
 msgstr ""
 
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
 msgid "View Profile"
 msgstr ""
 
@@ -4408,6 +4431,10 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:193
 msgid "vintage period"
+msgstr ""
+
+#: src/components/organisms/Order/Order.PaymentInfo.tsx:36
+msgid "Visa ending in"
 msgstr ""
 
 #: src/features/marketplace/BridgeFlow/BridgeFlow.constants.ts:6

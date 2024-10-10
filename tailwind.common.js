@@ -96,6 +96,269 @@ module.exports = {
       backgroundColor: {
         transparent: 'transparent',
       },
+      colors: {
+        bc: {
+          red: {
+            100: 'rgb(var(--bc-red-100) / <alpha-value>)',
+            200: 'rgb(var(--bc-red-200) / <alpha-value>)',
+            300: 'rgb(var(--bc-red-300) / <alpha-value>)',
+            400: 'rgb(var(--bc-red-400) / <alpha-value>)',
+            500: 'rgb(var(--bc-red-500) / <alpha-value>)',
+            600: 'rgb(var(--bc-red-600) / <alpha-value>)',
+            700: 'rgb(var(--bc-red-700) / <alpha-value>)',
+          },
+          green: {
+            100: 'rgb(var(--bc-green-100) / <alpha-value>)',
+            200: 'rgb(var(--bc-green-200) / <alpha-value>)',
+            300: 'rgb(var(--bc-green-300) / <alpha-value>)',
+            400: 'rgb(var(--bc-green-400) / <alpha-value>)',
+            500: 'rgb(var(--bc-green-500) / <alpha-value>)',
+            600: 'rgb(var(--bc-green-600) / <alpha-value>)',
+            700: 'rgb(var(--bc-green-700) / <alpha-value>)',
+          },
+          yellow: {
+            100: 'rgb(var(--bc-yellow-100) / <alpha-value>)',
+            200: 'rgb(var(--bc-yellow-200) / <alpha-value>)',
+            300: 'rgb(var(--bc-yellow-300) / <alpha-value>)',
+            400: 'rgb(var(--bc-yellow-400) / <alpha-value>)',
+            500: 'rgb(var(--bc-yellow-500) / <alpha-value>)',
+            600: 'rgb(var(--bc-yellow-600) / <alpha-value>)',
+            700: 'rgb(var(--bc-yellow-700) / <alpha-value>)',
+          },
+          neutral: {
+            0: 'rgb(var(--bc-neutral-0) / <alpha-value>)',
+            100: 'rgb(var(--bc-neutral-100) / <alpha-value>)',
+            200: 'rgb(var(--bc-neutral-200) / <alpha-value>)',
+            300: 'rgb(var(--bc-neutral-300) / <alpha-value>)',
+            400: 'rgb(var(--bc-neutral-400) / <alpha-value>)',
+            500: 'rgb(var(--bc-neutral-500) / <alpha-value>)',
+            600: 'rgb(var(--bc-neutral-600) / <alpha-value>)',
+            700: 'rgb(var(--bc-neutral-700) / <alpha-value>)',
+          },
+        },
+        ac: {
+          error: {
+            500: 'rgb(var(--ac-error-500) / <alpha-value>)',
+            400: 'rgb(var(--ac-error-400) / <alpha-value>)',
+          },
+          success: {
+            500: 'rgb(var(--ac-success-500) / <alpha-value>)',
+            400: 'rgb(var(--ac-success-400) / <alpha-value>)',
+          },
+          gradients: {
+            'purple-gradient': {
+              600: 'rgb(var(--ac-gradients-purple-gradient-600) / <alpha-value>)',
+              500: 'rgb(var(--ac-gradients-purple-gradient-500) / <alpha-value>)',
+              400: 'rgb(var(--ac-gradients-purple-gradient-400) / <alpha-value>)',
+            },
+            'primary-gradient': {
+              600: 'rgb(var(--ac-gradients-primary-gradient-600) / <alpha-value>)',
+              500: 'rgb(var(--ac-gradients-primary-gradient-500) / <alpha-value>)',
+              400: 'rgb(var(--ac-gradients-primary-gradient-400) / <alpha-value>)',
+            },
+          },
+          neutral: {
+            0: 'rgb(var(--ac-neutral-0) / <alpha-value>)',
+            100: 'rgb(var(--ac-neutral-100) / <alpha-value>)',
+            200: 'rgb(var(--ac-neutral-200) / <alpha-value>)',
+            300: 'rgb(var(--ac-neutral-300) / <alpha-value>)',
+            400: 'rgb(var(--ac-neutral-400) / <alpha-value>)',
+            500: 'rgb(var(--ac-neutral-500) / <alpha-value>)',
+            600: 'rgb(var(--ac-neutral-600) / <alpha-value>)',
+            700: 'rgb(var(--ac-neutral-700) / <alpha-value>)',
+          },
+          primary: {
+            700: 'rgb(var(--ac-primary-700) / <alpha-value>)',
+            600: 'rgb(var(--ac-primary-600) / <alpha-value>)',
+            500: 'rgb(var(--ac-primary-500) / <alpha-value>)',
+            400: 'rgb(var(--ac-primary-400) / <alpha-value>)',
+            300: 'rgb(var(--ac-primary-300) / <alpha-value>)',
+            200: 'rgb(var(--ac-primary-200) / <alpha-value>)',
+            100: 'rgb(var(--ac-primary-100) / <alpha-value>)',
+          },
+        },
+        s: {
+          tooltip: {
+            fill: 'rgb(var(--tooltip-fill) / <alpha-value>)',
+            outline: 'rgb(var(--tooltip-outline) / <alpha-value>)',
+          },
+          text: {
+            paragraph: 'rgb(var(--text-paragraph) / <alpha-value>)',
+            header: 'rgb(var(--text-header) / <alpha-value>)',
+            link: 'rgb(var(--text-link) / <alpha-value>)',
+            'sub-header': 'rgb(var(--text-sub-header) / <alpha-value>)',
+            disabled: 'rgb(var(--text-disabled) / <alpha-value>)',
+            error: 'rgb(var(--text-error) / <alpha-value>)',
+            'over-image': 'rgb(var(--text-over-image) / <alpha-value>)',
+          },
+          card: {
+            standard: {
+              background:
+                'rgb(var(--card-standard-background) / <alpha-value>)',
+              stroke: 'rgb(var(--card-standard-stroke) / <alpha-value>)',
+              'header-background':
+                'rgb(var(--card-standard-header-background) / <alpha-value>)',
+            },
+            credibility: {
+              'diagonal-background':
+                'rgb(var(--card-credibility-diagonal-background) / <alpha-value>)',
+            },
+          },
+          button: {
+            'text-icon': {
+              light: 'rgb(var(--button-text-icon-light) / <alpha-value>)',
+              dark: 'rgb(var(--button-text-icon-dark) / <alpha-value>)',
+              disabled: 'rgb(var(--button-text-icon-disabled) / <alpha-value>)',
+              prefinance:
+                'rgb(var(--button-text-icon-prefinance) / <alpha-value>)',
+            },
+            surface: {
+              standard: {
+                'secondary-hover':
+                  'rgb(var(--button-surface-standard-secondary-hover) / <alpha-value>)',
+                'primary-disabled':
+                  'rgb(var(--button-surface-standard-secondary-hover) / <alpha-value>)',
+                'secondary-default':
+                  'rgb(var(--button-surface-standard-secondary-hover) / <alpha-value>)',
+                'secondary-disabled':
+                  'rgb(var(--button-surface-standard-secondary-hover) / <alpha-value>)',
+              },
+              prefinance: {
+                400: 'rgb(var(--button-surface-prefinance-400) / <alpha-value>)',
+                500: 'rgb(var(--button-surface-prefinance-500) / <alpha-value>)',
+                600: 'rgb(var(--button-surface-prefinance-600) / <alpha-value>)',
+              },
+            },
+            outline: {
+              'secondary-disabled':
+                'rgb(var(--button-outline-secondary-disabled) / <alpha-value>)',
+            },
+          },
+          'checkbox-or-radio-selector': {
+            'background-default':
+              'rgb(var(--checkbox-or-radio-selector-background-default) / <alpha-value>)',
+            'background-selected':
+              'rgb(var(--checkbox-or-radio-selector-background-selected) / <alpha-value>)',
+            stroke:
+              'rgb(var(--checkbox-or-radio-selector-stroke) / <alpha-value>)',
+          },
+          gradient: {
+            'lighter-gradient': {
+              300: 'rgb(var(--gradient-lighter-gradient-300) / <alpha-value>)',
+              500: 'rgb(var(--gradient-lighter-gradient-500) / <alpha-value>)',
+            },
+            'heavy-gradient': {
+              400: 'rgb(var(--gradient-heavy-gradient-400) / <alpha-value>)',
+              500: 'rgb(var(--gradient-heavy-gradient-500) / <alpha-value>)',
+              600: 'rgb(var(--gradient-heavy-gradient-600) / <alpha-value>)',
+            },
+          },
+          icon: {
+            standard: {
+              background:
+                'rgb(var(--icon-standard-background) / <alpha-value>)',
+              dark: 'rgb(var(--icon-standard-dark) / <alpha-value>)',
+              disabled: 'rgb(var(--icon-standard-disabled) / <alpha-value>)',
+              error: 'rgb(var(--icon-standard-error) / <alpha-value>)',
+              light: 'rgb(var(--icon-standard-light) / <alpha-value>)',
+              shade: 'rgb(var(--icon-standard-shade) / <alpha-value>)',
+              success: 'rgb(var(--icon-standard-success) / <alpha-value>)',
+            },
+            credibility: {
+              '10-blue-green-gradient': {
+                400: 'rgb(var(--icon-credibility-10-blue-green-gradient-400) / <alpha-value>)',
+                500: 'rgb(var(--icon-credibility-10-blue-green-gradient-500) / <alpha-value>)',
+                600: 'rgb(var(--icon-credibility-10-blue-green-gradient-600) / <alpha-value>)',
+              },
+              '25-blue-green-gradient': {
+                400: 'rgb(var(--icon-credibility-25-blue-green-gradient-400) / <alpha-value>)',
+                500: 'rgb(var(--icon-credibility-25-blue-green-gradient-500) / <alpha-value>)',
+                600: 'rgb(var(--icon-credibility-25-blue-green-gradient-600) / <alpha-value>)',
+              },
+              '100-blue-green-gradient': {
+                400: 'rgb(var(--icon-credibility-100-blue-green-gradient-400) / <alpha-value>)',
+                500: 'rgb(var(--icon-credibility-100-blue-green-gradient-500) / <alpha-value>)',
+                600: 'rgb(var(--icon-credibility-100-blue-green-gradient-600) / <alpha-value>)',
+              },
+              background:
+                'rgb(var(--icon-credibility-background) / <alpha-value>)',
+            },
+            ecosystem: {
+              400: 'rgb(var(--icon-ecosystem-400) / <alpha-value>)',
+              500: 'rgb(var(--icon-ecosystem-500) / <alpha-value>)',
+              600: 'rgb(var(--icon-ecosystem-600) / <alpha-value>)',
+            },
+            sdg: {
+              400: 'rgb(var(--icon-sdg-400) / <alpha-value>)',
+              500: 'rgb(var(--icon-sdg-500) / <alpha-value>)',
+              600: 'rgb(var(--icon-sdg-600) / <alpha-value>)',
+              background: 'rgb(var(--icon-sdg-background) / <alpha-value>)',
+              header: 'rgb(var(--icon-sdg-header) / <alpha-value>)',
+              number: 'rgb(var(--icon-sdg-number) / <alpha-value>)',
+              'stroke-shadow':
+                'rgb(var(--icon-sdg-stroke-shadow) / <alpha-value>)',
+            },
+          },
+          input: {
+            'background-default':
+              'rgb(var(--input-background-default) / <alpha-value>)',
+            'background-disabled':
+              'rgb(var(--input-background-disabled) / <alpha-value>)',
+            'triangle-icon-default':
+              'rgb(var(--input-triangle-icon-default) / <alpha-value>)',
+            'triangle-icon-disabled':
+              'rgb(var(--input-triangle-icon-disabled) / <alpha-value>)',
+          },
+          surface: {
+            'page-background-default':
+              'rgb(var(--surface-page-background-default) / <alpha-value>)',
+            'page-background-light':
+              'rgb(var(--surface-page-background-light) / <alpha-value>)',
+            stroke: 'rgb(var(--surface-stroke) / <alpha-value>)',
+          },
+          table: {
+            'surface-dark': 'rgb(var(--table-surface-dark) / <alpha-value>)',
+            'surface-light': 'rgb(var(--table-surface-light) / <alpha-value>)',
+            stroke: 'rgb(var(--table-stroke) / <alpha-value>)',
+          },
+          tabs: {
+            'tab-underline': 'rgb(var(--tabs-tab-underline) / <alpha-value>)',
+          },
+          tag: {
+            'credit-category': {
+              300: 'rgb(var(--tag-credit-category-300) / <alpha-value>)',
+              500: 'rgb(var(--tag-credit-category-500) / <alpha-value>)',
+              'text-icon':
+                'rgb(var(--tag-credit-category-text-icon) / <alpha-value>)',
+            },
+            filter: {
+              'background-unselected':
+                'rgb(var(--tag-filter-background-unselected) / <alpha-value>)',
+              'background-selected':
+                'rgb(var(--tag-filter-background-selected) / <alpha-value>)',
+              'stroke-unselected':
+                'rgb(var(--tag-filter-stroke-unselected) / <alpha-value>)',
+              'stroke-selected':
+                'rgb(var(--tag-filter-stroke-selected) / <alpha-value>)',
+              'outer-shadow':
+                'rgb(var(--tag-filter-outer-shadow) / <alpha-value>)',
+              'inner-shadow':
+                'rgb(var(--tag-filter-inner-shadow) / <alpha-value>)',
+            },
+            impact: {
+              background: 'rgb(var(--tag-impact-background) / <alpha-value>)',
+              'text-icon': 'rgb(var(--tag-impact-text-icon) / <alpha-value>)',
+            },
+            prefinance: {
+              400: 'rgb(var(--tag-prefinance-400) / <alpha-value>)',
+              500: 'rgb(var(--tag-prefinance-500) / <alpha-value>)',
+              600: 'rgb(var(--tag-prefinance-600) / <alpha-value>)',
+              'text-icon':
+                'rgb(var(--tag-prefinance-text-icon) / <alpha-value>)',
+            },
+          },
+        },
+      },
     },
   },
   plugins: [],

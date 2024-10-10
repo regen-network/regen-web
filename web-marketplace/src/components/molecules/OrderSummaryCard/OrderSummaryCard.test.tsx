@@ -29,6 +29,7 @@ describe('OrderSummaryCard', () => {
     allowedDenoms,
     onClickEditCard: vi.fn(),
     setCreditsAmount: vi.fn(),
+    creditsAvailable: 100,
   };
 
   it('displays the project name', () => {

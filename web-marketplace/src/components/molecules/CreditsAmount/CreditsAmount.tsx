@@ -171,13 +171,7 @@ export const CreditsAmount = ({
   useEffect(() => {
     if (maxCreditsSelected) {
       setValue(CREDITS_AMOUNT, creditsAvailable, { shouldValidate: true });
-      setValue(
-        CURRENCY_AMOUNT,
-        paymentOption === PAYMENT_OPTIONS.CARD
-          ? spendingCap
-          : microToDenom(spendingCap),
-        { shouldValidate: true },
-      );
+      setValue(CURRENCY_AMOUNT, spendingCap, { shouldValidate: true });
       setValue(
         SELL_ORDERS,
         orderedSellOrders.map(order => {

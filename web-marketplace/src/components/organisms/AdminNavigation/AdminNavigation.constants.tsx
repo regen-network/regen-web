@@ -15,9 +15,9 @@ export const adminNavigationSections: AdminNavigationSection[] = [
     heading: i18n._(msg`Orders`),
     items: [
       {
-        name: i18n._(msg`My Orders`),
+        name: i18n._(msg`My orders`),
         icon: <ShoppingBagIcon linearGradient />,
-        path: 'orders',
+        path: 'my-orders',
       },
       {
         name: i18n._(msg`My prefinance projects`),
@@ -35,7 +35,7 @@ export const adminNavigationSections: AdminNavigationSection[] = [
     heading: i18n._(msg`Profile`),
     items: [
       {
-        name: i18n._(msg`Edit Profile`),
+        name: i18n._(msg`Edit profile`),
         icon: <UserMenuIcon linearGradient />,
         path: 'profile',
       },

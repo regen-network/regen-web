@@ -52,10 +52,10 @@ export const ProfileEditSettings = () => {
   });
 
   return (
-    <>
-      {error && (
+    <div className="p-40">
+      {(error as string) && (
         <ErrorBanner
-          text={error.toString()}
+          text={(error as string).toString()}
           onClose={() => setError(undefined)}
         />
       )}
@@ -88,6 +88,6 @@ export const ProfileEditSettings = () => {
         setError={setError}
         onConnectModalClose={onModalClose}
       />
-    </>
+    </div>
   );
 };

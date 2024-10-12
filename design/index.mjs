@@ -40,19 +40,24 @@ const referenceFixes = [
 ];
 
 const pathTransforms = [
-  { pattern: /alias.regen.color/g, replacement: 'ac' },
-  { pattern: /alias.terrasos.color/g, replacement: 'ac' },
-  { pattern: /regen base colors/g, replacement: 'bc' },
-  { pattern: /terrasos base colors/g, replacement: 'bc' },
-  { pattern: /mapped.regen light/g, replacement: 's' },
-  { pattern: /mapped.regen dark/g, replacement: 's' },
-  { pattern: /mapped.terrasos light/g, replacement: 's' },
-  { pattern: /mapped.terrasos dark/g, replacement: 's' },
+  { pattern: 'alias.regen.color', replacement: 'ac' },
+  { pattern: 'alias.terrasos.color', replacement: 'ac' },
+  { pattern: 'regen base colors', replacement: 'bc' },
+  { pattern: 'terrasos base colors', replacement: 'bc' },
+  { pattern: 'mapped.regen light', replacement: 'sc' },
+  { pattern: 'mapped.regen dark', replacement: 'sc' },
+  { pattern: 'mapped.terrasos light', replacement: 'sc' },
+  { pattern: 'mapped.terrasos dark', replacement: 'sc' },
 ];
+const nameTransforms = pathTransforms.map(({ pattern, replacement }) => ({
+  pattern: new RegExp(pattern.replace(/\.|\ /g, '-'), 'g'),
+  replacement,
+}));
 
 // Function to update the value field based on the specified rules
 const updateValue = value => {
   let originalValue = value;
+
   for (const { pattern, replacement } of referenceFixes) {
     value = value.replace(pattern, replacement);
   }
@@ -106,11 +111,12 @@ StyleDictionary.registerTransform({
   type: 'name',
   transform: prop => {
     let transformedName = prop.name;
-
-    for (const { pattern, replacement } of pathTransforms) {
-      transformedName = transformedName.replace(pattern, `${replacement}-`);
+    for (const { pattern, replacement } of nameTransforms) {
+      transformedName = transformedName.replace(
+        new RegExp(pattern, 'g'),
+        `${replacement}`,
+      );
     }
-
     return transformedName;
   },
 });
@@ -122,8 +128,12 @@ StyleDictionary.registerTransform({
     let transformedValue = prop.value;
 
     for (const { pattern, replacement } of pathTransforms) {
-      transformedValue = transformedValue.replace(pattern, `${replacement}-`);
+      transformedValue = transformedValue.replace(
+        new RegExp(pattern, 'g'),
+        `${replacement}-`,
+      );
     }
+    console.log(`${prop.value} => ${transformedValue}`);
 
     return transformedValue;
   },
@@ -162,7 +172,7 @@ StyleDictionary.registerFormat({
 
       for (const { pattern, replacement } of pathTransforms) {
         newPath = newPath
-          .replace(pattern, replacement)
+          .replace(new RegExp(pattern, 'g'), replacement)
           .replace(/\&/g, '-')
           .replace(/\%/g, '');
       }
@@ -170,7 +180,7 @@ StyleDictionary.registerFormat({
       if (isReference(y.original.value)) {
         newValue = y.original.value.slice(1, -1);
         for (const { pattern, replacement } of pathTransforms) {
-          newValue = newValue.replace(pattern, replacement);
+          newValue = newValue.replace(new RegExp(pattern), replacement);
         }
       } else {
         newValue = newPath.replace(/\./g, '-');
@@ -183,6 +193,7 @@ StyleDictionary.registerFormat({
         Object,
       );
     });
+
 
     return `module.exports = {
       theme: {
@@ -262,7 +273,7 @@ const config = {
           destination: `${name}.css`,
           format: 'css/variables',
           options: {
-            outputReferences: outputReferencesFilter,
+            outputReferences: true,
           },
           filter: function (token) {
             return token.path.join('.').includes(tokenPath);

@@ -176,15 +176,7 @@ StyleDictionary.registerFormat({
           .replace(/\&/g, '-')
           .replace(/\%/g, '');
       }
-
-      if (isReference(y.original.value)) {
-        newValue = y.original.value.slice(1, -1);
-        for (const { pattern, replacement } of pathTransforms) {
-          newValue = newValue.replace(new RegExp(pattern), replacement);
-        }
-      } else {
-        newValue = newPath.replace(/\./g, '-');
-      }
+      newValue = newPath.replace(/\./g, '-');
 
       _.setWith(
         tokens,
@@ -194,6 +186,7 @@ StyleDictionary.registerFormat({
       );
     });
 
+    // console.log(JSON.stringify(tokens, null, 2));
 
     return `module.exports = {
       theme: {
@@ -258,10 +251,6 @@ const config = {
       ],
       buildPath: 'build/',
       files: [
-        // {
-        //   destination: 'tailwind.config2.js',
-        //   format: 'tailwind/colors',
-        // },
         {
           destination: 'tailwind.common.js',
           format: 'tailwind/colors-shared',

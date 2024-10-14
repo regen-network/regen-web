@@ -33,7 +33,8 @@
     "test-update-snapshot": "bun run --cwd web-marketplace test-update-snapshot",
     "bump": "lerna version --no-push --conventional-commits",
     "bump-and-push": "lerna version --conventional-commits",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "build-design-tokens": "bun run --cwd design build-tokens"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.4",

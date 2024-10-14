@@ -1,6 +1,9 @@
 /* eslint-disable lingui/no-unlocalized-strings */
 // This file defines the common tailwind configuration to be used as the basis
 // of each project's tailwind.config.js file.
+
+// colors generated from Figma design tokens are under extend.colors as bc (base colors), ac (alias colors), and sc (semantic colors)
+// prefer using semantic colors over alias colors, and only use base colors as a last resort
 module.exports = {
   theme: {
     fontFamily: {
@@ -95,6 +98,311 @@ module.exports = {
       },
       backgroundColor: {
         transparent: 'transparent',
+      },
+      colors: {
+        bc: {
+          neutral: {
+            0: 'rgb(var(--bc-neutral-0) / <alpha-value>)',
+            100: 'rgb(var(--bc-neutral-100) / <alpha-value>)',
+            200: 'rgb(var(--bc-neutral-200) / <alpha-value>)',
+            300: 'rgb(var(--bc-neutral-300) / <alpha-value>)',
+            400: 'rgb(var(--bc-neutral-400) / <alpha-value>)',
+            500: 'rgb(var(--bc-neutral-500) / <alpha-value>)',
+            600: 'rgb(var(--bc-neutral-600) / <alpha-value>)',
+            700: 'rgb(var(--bc-neutral-700) / <alpha-value>)',
+          },
+          green: {
+            100: 'rgb(var(--bc-green-100) / <alpha-value>)',
+            200: 'rgb(var(--bc-green-200) / <alpha-value>)',
+            300: 'rgb(var(--bc-green-300) / <alpha-value>)',
+            400: 'rgb(var(--bc-green-400) / <alpha-value>)',
+            500: 'rgb(var(--bc-green-500) / <alpha-value>)',
+            600: 'rgb(var(--bc-green-600) / <alpha-value>)',
+            700: 'rgb(var(--bc-green-700) / <alpha-value>)',
+          },
+          yellow: {
+            100: 'rgb(var(--bc-yellow-100) / <alpha-value>)',
+            200: 'rgb(var(--bc-yellow-200) / <alpha-value>)',
+            300: 'rgb(var(--bc-yellow-300) / <alpha-value>)',
+            400: 'rgb(var(--bc-yellow-400) / <alpha-value>)',
+            500: 'rgb(var(--bc-yellow-500) / <alpha-value>)',
+            600: 'rgb(var(--bc-yellow-600) / <alpha-value>)',
+            700: 'rgb(var(--bc-yellow-700) / <alpha-value>)',
+          },
+          red: {
+            100: 'rgb(var(--bc-red-100) / <alpha-value>)',
+            200: 'rgb(var(--bc-red-200) / <alpha-value>)',
+            300: 'rgb(var(--bc-red-300) / <alpha-value>)',
+            400: 'rgb(var(--bc-red-400) / <alpha-value>)',
+            500: 'rgb(var(--bc-red-500) / <alpha-value>)',
+            600: 'rgb(var(--bc-red-600) / <alpha-value>)',
+            700: 'rgb(var(--bc-red-700) / <alpha-value>)',
+          },
+          blue: {
+            100: 'rgb(var(--bc-blue-100) / <alpha-value>)',
+            200: 'rgb(var(--bc-blue-200) / <alpha-value>)',
+            300: 'rgb(var(--bc-blue-300) / <alpha-value>)',
+            400: 'rgb(var(--bc-blue-400) / <alpha-value>)',
+            500: 'rgb(var(--bc-blue-500) / <alpha-value>)',
+            600: 'rgb(var(--bc-blue-600) / <alpha-value>)',
+            700: 'rgb(var(--bc-blue-700) / <alpha-value>)',
+          },
+          orange: {
+            100: 'rgb(var(--bc-orange-100) / <alpha-value>)',
+            200: 'rgb(var(--bc-orange-200) / <alpha-value>)',
+            300: 'rgb(var(--bc-orange-300) / <alpha-value>)',
+            400: 'rgb(var(--bc-orange-400) / <alpha-value>)',
+            500: 'rgb(var(--bc-orange-500) / <alpha-value>)',
+            600: 'rgb(var(--bc-orange-600) / <alpha-value>)',
+            700: 'rgb(var(--bc-orange-700) / <alpha-value>)',
+          },
+          purple: {
+            100: 'rgb(var(--bc-purple-100) / <alpha-value>)',
+            200: 'rgb(var(--bc-purple-200) / <alpha-value>)',
+            300: 'rgb(var(--bc-purple-300) / <alpha-value>)',
+            400: 'rgb(var(--bc-purple-400) / <alpha-value>)',
+            500: 'rgb(var(--bc-purple-500) / <alpha-value>)',
+            600: 'rgb(var(--bc-purple-600) / <alpha-value>)',
+            700: 'rgb(var(--bc-purple-700) / <alpha-value>)',
+          },
+          gradients: {
+            'blue-green': {
+              400: 'rgb(var(--bc-gradients-blue-green-400) / <alpha-value>)',
+              500: 'rgb(var(--bc-gradients-blue-green-500) / <alpha-value>)',
+              600: 'rgb(var(--bc-gradients-blue-green-600) / <alpha-value>)',
+            },
+            purple: {
+              400: 'rgb(var(--bc-gradients-purple-400) / <alpha-value>)',
+            },
+          },
+        },
+        ac: {
+          primary: {
+            100: 'rgb(var(--ac-primary-100) / <alpha-value>)',
+            200: 'rgb(var(--ac-primary-200) / <alpha-value>)',
+            300: 'rgb(var(--ac-primary-300) / <alpha-value>)',
+            400: 'rgb(var(--ac-primary-400) / <alpha-value>)',
+            500: 'rgb(var(--ac-primary-500) / <alpha-value>)',
+            600: 'rgb(var(--ac-primary-600) / <alpha-value>)',
+            700: 'rgb(var(--ac-primary-700) / <alpha-value>)',
+          },
+          neutral: {
+            0: 'rgb(var(--ac-neutral-0) / <alpha-value>)',
+            100: 'rgb(var(--ac-neutral-100) / <alpha-value>)',
+            200: 'rgb(var(--ac-neutral-200) / <alpha-value>)',
+            300: 'rgb(var(--ac-neutral-300) / <alpha-value>)',
+            400: 'rgb(var(--ac-neutral-400) / <alpha-value>)',
+            500: 'rgb(var(--ac-neutral-500) / <alpha-value>)',
+            600: 'rgb(var(--ac-neutral-600) / <alpha-value>)',
+            700: 'rgb(var(--ac-neutral-700) / <alpha-value>)',
+          },
+          gradients: {
+            'primary-gradient': {
+              400: 'rgb(var(--ac-gradients-primary-gradient-400) / <alpha-value>)',
+              500: 'rgb(var(--ac-gradients-primary-gradient-500) / <alpha-value>)',
+              600: 'rgb(var(--ac-gradients-primary-gradient-600) / <alpha-value>)',
+            },
+            'purple-gradient': {
+              400: 'rgb(var(--ac-gradients-purple-gradient-400) / <alpha-value>)',
+              500: 'rgb(var(--ac-gradients-purple-gradient-500) / <alpha-value>)',
+              600: 'rgb(var(--ac-gradients-purple-gradient-600) / <alpha-value>)',
+            },
+          },
+          success: {
+            400: 'rgb(var(--ac-success-400) / <alpha-value>)',
+            500: 'rgb(var(--ac-success-500) / <alpha-value>)',
+          },
+          error: {
+            400: 'rgb(var(--ac-error-400) / <alpha-value>)',
+            500: 'rgb(var(--ac-error-500) / <alpha-value>)',
+          },
+        },
+        sc: {
+          text: {
+            paragraph: 'rgb(var(--sc-text-paragraph) / <alpha-value>)',
+            header: 'rgb(var(--sc-text-header) / <alpha-value>)',
+            link: 'rgb(var(--sc-text-link) / <alpha-value>)',
+            'sub-header': 'rgb(var(--sc-text-sub-header) / <alpha-value>)',
+            disabled: 'rgb(var(--sc-text-disabled) / <alpha-value>)',
+            error: 'rgb(var(--sc-text-error) / <alpha-value>)',
+            'over-image': 'rgb(var(--sc-text-over-image) / <alpha-value>)',
+          },
+          surface: {
+            'page-background-default':
+              'rgb(var(--sc-surface-page-background-default) / <alpha-value>)',
+            stroke: 'rgb(var(--sc-surface-stroke) / <alpha-value>)',
+            'page-background-light':
+              'rgb(var(--sc-surface-page-background-light) / <alpha-value>)',
+          },
+          card: {
+            standard: {
+              background:
+                'rgb(var(--sc-card-standard-background) / <alpha-value>)',
+              stroke: 'rgb(var(--sc-card-standard-stroke) / <alpha-value>)',
+              'header-background':
+                'rgb(var(--sc-card-standard-header-background) / <alpha-value>)',
+            },
+            credibility: {
+              'diagonal-background':
+                'rgb(var(--sc-card-credibility-diagonal-background) / <alpha-value>)',
+            },
+          },
+          icon: {
+            standard: {
+              dark: 'rgb(var(--sc-icon-standard-dark) / <alpha-value>)',
+              light: 'rgb(var(--sc-icon-standard-light) / <alpha-value>)',
+              error: 'rgb(var(--sc-icon-standard-error) / <alpha-value>)',
+              success: 'rgb(var(--sc-icon-standard-success) / <alpha-value>)',
+              background:
+                'rgb(var(--sc-icon-standard-background) / <alpha-value>)',
+              disabled: 'rgb(var(--sc-icon-standard-disabled) / <alpha-value>)',
+              shade: 'rgb(var(--sc-icon-standard-shade) / <alpha-value>)',
+            },
+            ecosystem: {
+              400: 'rgb(var(--sc-icon-ecosystem-400) / <alpha-value>)',
+              500: 'rgb(var(--sc-icon-ecosystem-500) / <alpha-value>)',
+              600: 'rgb(var(--sc-icon-ecosystem-600) / <alpha-value>)',
+            },
+            sdg: {
+              400: 'rgb(var(--sc-icon-sdg-400) / <alpha-value>)',
+              500: 'rgb(var(--sc-icon-sdg-500) / <alpha-value>)',
+              600: 'rgb(var(--sc-icon-sdg-600) / <alpha-value>)',
+              number: 'rgb(var(--sc-icon-sdg-number) / <alpha-value>)',
+              header: 'rgb(var(--sc-icon-sdg-header) / <alpha-value>)',
+              'stroke-shadow':
+                'rgb(var(--sc-icon-sdg-stroke-shadow) / <alpha-value>)',
+              background: 'rgb(var(--sc-icon-sdg-background) / <alpha-value>)',
+            },
+            credibility: {
+              '100-blue-green-gradient': {
+                400: 'rgb(var(--sc-icon-credibility-100-blue-green-gradient-400) / <alpha-value>)',
+                500: 'rgb(var(--sc-icon-credibility-100-blue-green-gradient-500) / <alpha-value>)',
+                600: 'rgb(var(--sc-icon-credibility-100-blue-green-gradient-600) / <alpha-value>)',
+              },
+              '25-blue-green-gradient': {
+                400: 'rgb(var(--sc-icon-credibility-25-blue-green-gradient-400) / <alpha-value>)',
+                500: 'rgb(var(--sc-icon-credibility-25-blue-green-gradient-500) / <alpha-value>)',
+                600: 'rgb(var(--sc-icon-credibility-25-blue-green-gradient-600) / <alpha-value>)',
+              },
+              '10-blue-green-gradient': {
+                400: 'rgb(var(--sc-icon-credibility-10-blue-green-gradient-400) / <alpha-value>)',
+                500: 'rgb(var(--sc-icon-credibility-10-blue-green-gradient-500) / <alpha-value>)',
+                600: 'rgb(var(--sc-icon-credibility-10-blue-green-gradient-600) / <alpha-value>)',
+              },
+              background:
+                'rgb(var(--sc-icon-credibility-background) / <alpha-value>)',
+            },
+          },
+          gradient: {
+            'lighter-gradient': {
+              300: 'rgb(var(--sc-gradient-lighter-gradient-300) / <alpha-value>)',
+              500: 'rgb(var(--sc-gradient-lighter-gradient-500) / <alpha-value>)',
+            },
+            'heavy-gradient': {
+              400: 'rgb(var(--sc-gradient-heavy-gradient-400) / <alpha-value>)',
+              500: 'rgb(var(--sc-gradient-heavy-gradient-500) / <alpha-value>)',
+              600: 'rgb(var(--sc-gradient-heavy-gradient-600) / <alpha-value>)',
+            },
+          },
+          button: {
+            'text-icon': {
+              light: 'rgb(var(--sc-button-text-icon-light) / <alpha-value>)',
+              dark: 'rgb(var(--sc-button-text-icon-dark) / <alpha-value>)',
+              disabled:
+                'rgb(var(--sc-button-text-icon-disabled) / <alpha-value>)',
+              prefinance:
+                'rgb(var(--sc-button-text-icon-prefinance) / <alpha-value>)',
+            },
+            surface: {
+              standard: {
+                'secondary-hover':
+                  'rgb(var(--sc-button-surface-standard-secondary-hover) / <alpha-value>)',
+                'primary-disabled':
+                  'rgb(var(--sc-button-surface-standard-primary-disabled) / <alpha-value>)',
+                'secondary-default':
+                  'rgb(var(--sc-button-surface-standard-secondary-default) / <alpha-value>)',
+                'secondary-disabled':
+                  'rgb(var(--sc-button-surface-standard-secondary-disabled) / <alpha-value>)',
+              },
+              prefinance: {
+                400: 'rgb(var(--sc-button-surface-prefinance-400) / <alpha-value>)',
+                500: 'rgb(var(--sc-button-surface-prefinance-500) / <alpha-value>)',
+                600: 'rgb(var(--sc-button-surface-prefinance-600) / <alpha-value>)',
+              },
+            },
+            outline: {
+              'secondary-disabled':
+                'rgb(var(--sc-button-outline-secondary-disabled) / <alpha-value>)',
+            },
+          },
+          tabs: {
+            'tab-underline':
+              'rgb(var(--sc-tabs-tab-underline) / <alpha-value>)',
+          },
+          tag: {
+            impact: {
+              background:
+                'rgb(var(--sc-tag-impact-background) / <alpha-value>)',
+              'text-icon':
+                'rgb(var(--sc-tag-impact-text-icon) / <alpha-value>)',
+            },
+            prefinance: {
+              400: 'rgb(var(--sc-tag-prefinance-400) / <alpha-value>)',
+              500: 'rgb(var(--sc-tag-prefinance-500) / <alpha-value>)',
+              600: 'rgb(var(--sc-tag-prefinance-600) / <alpha-value>)',
+              'text-icon':
+                'rgb(var(--sc-tag-prefinance-text-icon) / <alpha-value>)',
+            },
+            filter: {
+              'background-unselected':
+                'rgb(var(--sc-tag-filter-background-unselected) / <alpha-value>)',
+              'background-selected':
+                'rgb(var(--sc-tag-filter-background-selected) / <alpha-value>)',
+              'stroke-unselected':
+                'rgb(var(--sc-tag-filter-stroke-unselected) / <alpha-value>)',
+              'stroke-selected':
+                'rgb(var(--sc-tag-filter-stroke-selected) / <alpha-value>)',
+              'outer-shadow':
+                'rgb(var(--sc-tag-filter-outer-shadow) / <alpha-value>)',
+              'inner-shadow':
+                'rgb(var(--sc-tag-filter-inner-shadow) / <alpha-value>)',
+            },
+            'credit-category': {
+              300: 'rgb(var(--sc-tag-credit-category-300) / <alpha-value>)',
+              500: 'rgb(var(--sc-tag-credit-category-500) / <alpha-value>)',
+              'text-icon':
+                'rgb(var(--sc-tag-credit-category-text-icon) / <alpha-value>)',
+            },
+          },
+          tooltip: {
+            outline: 'rgb(var(--sc-tooltip-outline) / <alpha-value>)',
+            fill: 'rgb(var(--sc-tooltip-fill) / <alpha-value>)',
+          },
+          input: {
+            'background-default':
+              'rgb(var(--sc-input-background-default) / <alpha-value>)',
+            'background-disabled':
+              'rgb(var(--sc-input-background-disabled) / <alpha-value>)',
+            'triangle-icon-default':
+              'rgb(var(--sc-input-triangle-icon-default) / <alpha-value>)',
+            'triangle-icon-disabled':
+              'rgb(var(--sc-input-triangle-icon-disabled) / <alpha-value>)',
+          },
+          table: {
+            'surface-dark': 'rgb(var(--sc-table-surface-dark) / <alpha-value>)',
+            'surface-light':
+              'rgb(var(--sc-table-surface-light) / <alpha-value>)',
+            stroke: 'rgb(var(--sc-table-stroke) / <alpha-value>)',
+          },
+          'checkbox-or-radio-selector': {
+            'background-default':
+              'rgb(var(--sc-checkbox-or-radio-selector-background-default) / <alpha-value>)',
+            stroke:
+              'rgb(var(--sc-checkbox-or-radio-selector-stroke) / <alpha-value>)',
+            'background-selected':
+              'rgb(var(--sc-checkbox-or-radio-selector-background-selected) / <alpha-value>)',
+          },
+        },
       },
     },
   },

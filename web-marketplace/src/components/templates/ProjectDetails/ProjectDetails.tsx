@@ -40,6 +40,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
+import { buyFromProjectIdAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { CREATE_POST_DISABLED_TOOLTIP_TEXT } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constants';
 import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
@@ -51,6 +52,7 @@ import { ProjectStorySection } from 'components/organisms/ProjectStorySection/Pr
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { AVG_PRICE_TOOLTIP_PROJECT } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import { useLedger } from '../../../ledger';
 import { client as sanityClient } from '../../../lib/clients/sanity';
@@ -122,16 +124,8 @@ function ProjectDetails(): JSX.Element {
     getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
-  const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
+  const setBuyFromProjectId = useSetAtom(buyFromProjectIdAtom);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
-
-  useEffect(() => {
-    // As soon as user connects to the right wallet address,
-    // we navigate to the buy page
-    if (isBuyFlowStarted && isConnected) {
-      navigate(`/project/${projectId}/buy`);
-    }
-  }, [isBuyFlowStarted, isConnected, navigate, projectId]);
 
   const {
     sanityProject,
@@ -151,6 +145,8 @@ function ProjectDetails(): JSX.Element {
     creditClassOnChain,
     cardSellOrders,
   } = useGetProject();
+
+  const onBuyButtonClick = useOnBuyButtonClick();
 
   const slug =
     offchainProjectByIdData?.data?.projectById?.slug ||
@@ -325,7 +321,8 @@ function ProjectDetails(): JSX.Element {
     isConnected,
     orders: projectsWithOrderData[0]?.sellOrders,
     hideOtcCard: isCommunityCredit || !onChainProjectId,
-    setIsBuyFlowStarted,
+    setBuyFromProjectId,
+    projectId,
   });
 
   const projectPrefinancing = sanityProject?.projectPrefinancing;
@@ -391,30 +388,11 @@ function ProjectDetails(): JSX.Element {
           onBookCallButtonClick={onBookCallButtonClick}
           isAdmin={isAdmin}
           onBuyButtonClick={() => {
-            if (
-              // some credits are available for fiat purchase
-              !loadingSanityProject &&
-              !loadingBuySellOrders &&
-              cardSellOrders.length > 0
-            ) {
-              // so we can always go to the buy page,
-              // no matter if the user is logged in/connected to a wallet or not
-              navigate(`/project/${projectId}/buy`);
-            } else if (!loadingSanityProject && !loadingBuySellOrders) {
-              if (!activeWalletAddr) {
-                // no connected wallet address
-                setIsBuyFlowStarted(true);
-                setConnectWalletModal(atom => void (atom.open = true));
-              } else {
-                if (isConnected) {
-                  navigate(`/project/${projectId}/buy`);
-                } else {
-                  // user logged in with web2 but not connected to the wallet address associated to his/er account
-                  setIsBuyFlowStarted(true);
-                  setSwitchWalletModalAtom(atom => void (atom.open = true));
-                }
-              }
-            }
+            onBuyButtonClick({
+              projectId,
+              loading: loadingSanityProject || loadingBuySellOrders,
+              cardSellOrders,
+            });
           }}
           onChainProjectId={onChainProjectId}
           offChainProjectId={offChainProject?.id}

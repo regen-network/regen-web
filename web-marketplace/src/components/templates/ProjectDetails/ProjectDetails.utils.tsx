@@ -250,7 +250,8 @@ type FormatOtcCardDataParams = {
   isConnected: boolean;
   orders?: UISellOrderInfo[];
   hideOtcCard?: boolean;
-  setIsBuyFlowStarted: UseStateSetter<boolean>;
+  setBuyFromProjectId: UseStateSetter<string>;
+  projectId?: string;
 };
 
 export const formatOtcCardData = ({
@@ -258,13 +259,14 @@ export const formatOtcCardData = ({
   isConnected,
   orders = [],
   hideOtcCard,
-  setIsBuyFlowStarted,
+  setBuyFromProjectId,
+  projectId,
 }: FormatOtcCardDataParams): ActionCardProps | undefined => {
   const isNoteVisible = !isConnected || orders?.length > 0;
   const noteOnClick = (e: MouseEvent<HTMLButtonElement>) => {
-    if (isConnected && orders?.length > 0) {
+    if (projectId && isConnected && orders?.length > 0) {
       e.preventDefault();
-      setIsBuyFlowStarted(true);
+      setBuyFromProjectId(projectId);
     }
   };
 

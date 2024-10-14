@@ -12,7 +12,6 @@ interface TagFilterProps {
 const tagSx = {
   cursor: 'pointer',
   boxShadow:
-    // eslint-disable-next-line lingui/no-unlocalized-strings
     '0px 2px 2px 0px var(--tag-filter-outer-shadow, rgba(0, 0, 0, 0.20))',
   '&:hover': {
     filter: 'brightness(0.9)',

@@ -26,7 +26,6 @@ import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNex
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-
 import { microToDenom } from 'lib/denom.utils';
 
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
@@ -170,9 +169,9 @@ export function ChooseCreditsForm({
     name: CURRENCY_AMOUNT,
   });
 
-  const microUserBalance = useFetchUserBalance({
-    askDenom: currency?.askDenom,
-  });
+  const { isLoading, userBalance: microUserBalance } = useFetchUserBalance(
+    currency?.askDenom,
+  );
 
   useEffect(() => {
     if (microUserBalance) {

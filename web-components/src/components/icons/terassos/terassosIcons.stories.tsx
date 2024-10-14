@@ -15,46 +15,31 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon
       label="Pacific"
       icon={
-        <RegionIndicatorIcon
-          region="PACIFIC"
-          sx={{ height: '60px', width: '60px' }}
-        />
+        <RegionIndicatorIcon region="PACIFIC" className="w-[60px] h-[60px]" />
       }
     />
     <LabeledIcon
       label="Orinoco"
       icon={
-        <RegionIndicatorIcon
-          region="ORINOCO"
-          sx={{ height: '60px', width: '60px' }}
-        />
+        <RegionIndicatorIcon region="ORINOCO" className="w-[60px] h-[60px]" />
       }
     />
     <LabeledIcon
       label="Caribbean"
       icon={
-        <RegionIndicatorIcon
-          region="CARIBBEAN"
-          sx={{ height: '60px', width: '60px' }}
-        />
+        <RegionIndicatorIcon region="CARIBBEAN" className="w-[60px] h-[60px]" />
       }
     />
     <LabeledIcon
       label="Amazon"
       icon={
-        <RegionIndicatorIcon
-          region="AMAZON"
-          sx={{ height: '60px', width: '60px' }}
-        />
+        <RegionIndicatorIcon region="AMAZON" className="w-[60px] h-[60px]" />
       }
     />
     <LabeledIcon
       label="Andean"
       icon={
-        <RegionIndicatorIcon
-          region="ANDEAN"
-          sx={{ height: '60px', width: '60px' }}
-        />
+        <RegionIndicatorIcon region="ANDEAN" className="w-[60px] h-[60px]" />
       }
     />
     <LabeledIcon
@@ -62,7 +47,7 @@ export const allIcons = (): JSX.Element => (
       icon={
         <RegionIndicatorIcon
           region="ANDEAN"
-          sx={{ height: '60px', width: '60px' }}
+          className="w-[60px] h-[60px]"
           isSelected={true}
         />
       }

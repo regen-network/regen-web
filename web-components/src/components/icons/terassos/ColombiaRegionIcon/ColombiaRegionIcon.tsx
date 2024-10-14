@@ -1,80 +1,34 @@
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
+import classNames from 'classnames';
 
 import { sxToArray } from '../../../../utils/mui/sxToArray';
 import {
   activeFill,
   activeStroke,
-  AMAZON_PATH,
-  ANDEAN_PATH,
-  CARIBBEAN_PATH,
-  inactiveFill,
-  inactiveStroke,
-  ORINOCO_PATH,
-  PACIFIC_PATH,
+  regionPaths,
   selectedFill,
   selectedStroke,
 } from './ColombiaRegionIcon.constants';
-
-export type Region = 'PACIFIC' | 'ORINOCO' | 'CARIBBEAN' | 'AMAZON' | 'ANDEAN';
-
-interface RegionPaths {
-  PACIFIC: string;
-  ORINOCO: string;
-  CARIBBEAN: string;
-  AMAZON: string;
-  ANDEAN: string;
-}
-
-export const regionPaths: RegionPaths = {
-  PACIFIC: PACIFIC_PATH,
-  ORINOCO: ORINOCO_PATH,
-  CARIBBEAN: CARIBBEAN_PATH,
-  AMAZON: AMAZON_PATH,
-  ANDEAN: ANDEAN_PATH,
-};
-
-interface RegionIndicatorIconProps extends SvgIconProps {
-  region: Region;
-  isSelected?: boolean;
-}
-
-const RegionPath = ({
-  path,
-  fill = inactiveFill,
-  stroke = inactiveStroke,
-}: {
-  path: string;
-  fill?: string;
-  stroke?: string;
-}) => (
-  <path
-    d={path}
-    fill={fill}
-    stroke={stroke}
-    strokeWidth="0.2"
-    strokeLinejoin="round"
-  />
-);
+import RegionPath from './ColombiaRegionIcon.RegionPath';
+import { RegionIndicatorIconProps } from './ColombiaRegionIcon.types';
 
 export default function RegionIndicatorIcon({
   region,
   sx,
   isSelected = false,
+  className,
   ...props
 }: RegionIndicatorIconProps): JSX.Element {
   const activeRegionPath = Object.entries(regionPaths).filter(
-    ([key, value]) => key === region,
-    // TODO: review this
+    ([key, _]) => key === region,
   )[0][1];
   const otherRegionPaths = Object.entries(regionPaths)
-    .filter(([key, value]) => key !== region)
+    .filter(([key, _]) => key !== region)
     .map(([_, value]) => value);
   return (
     <SvgIcon
-      sx={[
-        { color: '#4FB573', mr: 1, width: '30px', height: '30px' },
-        ...sxToArray(sx),
-      ]}
+      sx={sx}
+      className={classNames('mr-1 w-[30px] h-[30px]', className)}
       width="30"
       height="30"
       viewBox="0 0 30 30"
@@ -83,10 +37,10 @@ export default function RegionIndicatorIcon({
     >
       <g clipPath="url(#clip0_1479_22775)">
         {otherRegionPaths.map((path: string, index: number) => (
-          <RegionPath key={index} path={path} />
+          <RegionPath key={index} pathData={path} />
         ))}
         <RegionPath
-          path={activeRegionPath}
+          pathData={activeRegionPath}
           fill={isSelected ? selectedFill : activeFill}
           stroke={isSelected ? selectedStroke : activeStroke}
         />

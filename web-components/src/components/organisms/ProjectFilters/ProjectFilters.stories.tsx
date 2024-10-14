@@ -36,6 +36,12 @@ const Template: StoryFn = args => {
       activeFilterIds={activeFilters}
       onFilterChange={onFilterChange}
       onFilterReset={() => setActiveFilters([])}
+      labels={{
+        title: 'Filters',
+        reset: 'Reset',
+        expand: '+ See more',
+        collapse: '- See less',
+      }}
     />
   );
 };

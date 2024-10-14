@@ -26,16 +26,25 @@ export interface Filter {
   hasCollapse?: boolean;
 }
 
+export interface ProjectFilterLabels {
+  title: string;
+  reset: string;
+  expand: string;
+  collapse: string;
+}
+
 export default function ProjectFilters({
   filters,
   activeFilterIds,
   onFilterChange,
   onFilterReset,
+  labels,
 }: {
   filters: Filter[];
   activeFilterIds: string[];
   onFilterChange: (id: string) => void;
   onFilterReset: () => void;
+  labels: ProjectFilterLabels;
 }) {
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.down('sm'));
@@ -46,11 +55,9 @@ export default function ProjectFilters({
   return (
     <>
       <Box display="flex" justifyContent="space-between" alignItems="baseline">
-        <Title variant="h4">
-          <Trans>Filters</Trans>
-        </Title>
+        <Title variant="h4">{labels.title}</Title>
         <Subtitle onClick={onFilterReset} sx={{ cursor: 'pointer' }}>
-          <Trans>Reset filters</Trans>
+          {labels.reset}
         </Subtitle>
       </Box>
       <Divider sx={{ my: 5 }} />
@@ -101,11 +108,7 @@ export default function ProjectFilters({
                 onClick={() => handleExpand(index)}
                 sx={{ fontWeight: '700' }}
               >
-                {isExpanded[index] ? (
-                  <Trans>- See Less</Trans>
-                ) : (
-                  <Trans>+ See More</Trans>
-                )}
+                {isExpanded[index] ? labels.collapse : labels.expand}
               </ButtonBase>
             )}
 

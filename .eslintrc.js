@@ -45,6 +45,7 @@ module.exports = {
           'borderRight',
           'borderBottom',
           'borderRadius',
+          'boxShadow',
           'flexFlow',
           'transition',
           'transform',

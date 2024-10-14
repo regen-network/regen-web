@@ -11,12 +11,11 @@ export default function ComplianceBadge() {
       padding="3px"
       borderRadius="50%"
       fontSize="12px"
+      className="rounded-full ml-2"
       fontWeight={700}
       sx={{
-        borderRadius: '40px',
-        border: '1px dashed var(--surface-stroke, #D2D5D9)',
-        background: 'var(--surface-selected-item-background, #EFEFEF)',
-        ml: 2,
+        border: '1px dashed var(--sc-surface-stroke, #D2D5D9)',
+        background: 'var(--sc-surface-selected-item-background, #EFEFEF)',
       }}
       // eslint-disable-next-line lingui/no-unlocalized-strings
     >

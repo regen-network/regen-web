@@ -5,6 +5,9 @@ import {
   useTheme,
 } from '@mui/material';
 
+import { ColorScheme } from 'src/theme/theme.types';
+import { cn } from 'src/utils/styles/cn';
+
 import { Theme } from '../../theme/muiTheme';
 import ArrowLeftIcon from '../icons/ArrowLeft';
 import ArrowRightIcon from '../icons/ArrowRight';
@@ -18,9 +21,15 @@ import {
 
 export interface Props extends PaginationProps {
   sx?: SxProps<Theme>;
+  colorScheme: ColorScheme;
 }
 
-const Pagination = ({ size, sx = [], ...props }: Props): JSX.Element => {
+const Pagination = ({
+  size,
+  sx = [],
+  colorScheme,
+  ...props
+}: Props): JSX.Element => {
   const theme = useTheme();
   const isSmall = size === 'small';
   const { classes } = usePaginationStyles();
@@ -36,8 +45,13 @@ const Pagination = ({ size, sx = [], ...props }: Props): JSX.Element => {
           slots={{
             first: () => (
               <ArrowSkipLeftIcon
-                sx={getArrowSkipStyle({ disabled: item.disabled, theme })}
+                sx={getArrowSkipStyle({
+                  disabled: item.disabled,
+                  theme,
+                  colorScheme,
+                })}
                 disabled={item.disabled}
+                useGradient={colorScheme === 'regen'}
               />
             ),
             last: () => (
@@ -45,14 +59,37 @@ const Pagination = ({ size, sx = [], ...props }: Props): JSX.Element => {
                 sx={getArrowSkipStyle({
                   disabled: item.disabled,
                   theme,
+                  colorScheme,
                 })}
                 disabled={item.disabled}
+                useGradient={colorScheme === 'regen'}
               />
             ),
-            previous: ArrowLeftIcon,
-            next: ArrowRightIcon,
+            previous: props => (
+              <ArrowLeftIcon
+                {...props}
+                className={cn(
+                  props.className,
+                  'text-sc-text-header',
+                  item.disabled &&
+                    'text-sc-button-surface-standard-primary-disabled',
+                )}
+              />
+            ),
+            next: props => (
+              <ArrowRightIcon
+                {...props}
+                className={cn(
+                  props.className,
+                  'text-sc-text-header',
+                  item.disabled &&
+                    'text-sc-button-surface-standard-primary-disabled',
+                )}
+              />
+            ),
           }}
           disableRipple
+          colorScheme={colorScheme}
           {...item}
         />
       )}

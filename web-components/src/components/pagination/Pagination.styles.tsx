@@ -1,5 +1,7 @@
-import { PaginationItem, SxProps } from '@mui/material';
+import { PaginationItem, PaginationItemProps, SxProps } from '@mui/material';
 import { makeStyles, withStyles } from 'tss-react/mui';
+
+import { ColorScheme } from 'src/theme/theme.types';
 
 import { pxToRem, Theme } from '../../theme/muiTheme';
 
@@ -15,9 +17,18 @@ export const usePaginationStyles = makeStyles()(theme => ({
   },
 }));
 
+const PaginationItemWrapper = ({
+  ...props
+}: PaginationItemProps & {
+  colorScheme: ColorScheme;
+  disableRipple: boolean;
+}) => {
+  return <PaginationItem {...props} />;
+};
+
 export const StyledPaginationItem = withStyles(
-  PaginationItem,
-  (theme: Theme, { disabled }) => ({
+  PaginationItemWrapper,
+  (theme: Theme, { disabled, colorScheme }) => ({
     icon: {
       fontSize: pxToRem(40),
       [theme.breakpoints.up('md')]: {
@@ -44,7 +55,10 @@ export const StyledPaginationItem = withStyles(
         bottom: 0,
         width: '11px',
         height: '4px',
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor:
+          colorScheme === 'terrasos'
+            ? theme.palette.warning.main
+            : theme.palette.secondary.main,
       },
     },
   }),
@@ -53,13 +67,20 @@ export const StyledPaginationItem = withStyles(
 type GetArrowSkipStyleType = {
   theme: Theme;
   disabled: boolean;
+  colorScheme: ColorScheme;
 };
 
 export const getArrowSkipStyle = ({
   theme,
   disabled,
-}: GetArrowSkipStyleType): SxProps =>
-  ({
+  colorScheme,
+}: GetArrowSkipStyleType): SxProps => {
+  const enabledColor =
+    colorScheme === 'terrasos'
+      ? theme.palette.primary.contrastText
+      : theme.palette.secondary.main;
+  return {
     fontSize: pxToRem(50),
-    color: disabled ? theme.palette.grey[100] : theme.palette.secondary.main,
-  } as SxProps);
+    color: disabled ? theme.palette.grey[100] : enabledColor,
+  } as SxProps;
+};

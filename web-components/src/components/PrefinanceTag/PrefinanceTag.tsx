@@ -1,5 +1,7 @@
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { ColorScheme } from 'src/theme/theme.types';
+
 import { ProjectCardBodyTextsMapping } from '../cards/ProjectCard/ProjectCard.types';
 import { PrefinanceIcon } from '../icons/PrefinanceIcon';
 import { Label } from '../typography';
@@ -14,6 +16,7 @@ export const PrefinanceTag = ({
     width: '18',
     height: '19',
   },
+  colorScheme,
 }: {
   bodyTexts: Pick<ProjectCardBodyTextsMapping, 'prefinance'>;
   classNames?: { root?: string; label?: string };
@@ -21,10 +24,13 @@ export const PrefinanceTag = ({
     width: string;
     height: string;
   };
+  colorScheme: ColorScheme;
 }) => (
   <div
     className={cn(
-      'bg-purple-gradient rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute top-30 left-0',
+      'rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute top-30 left-0',
+      colorScheme === 'regen' && 'bg-purple-gradient',
+      colorScheme === 'terrasos' && 'bg-warning-400 text-bc-neutral-700',
       classNames.root,
     )}
   >

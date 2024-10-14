@@ -5,6 +5,8 @@ import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/Prefi
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Track } from 'web-marketplace/src/lib/tracker/types';
 
+import { ColorScheme } from 'src/theme/theme.types';
+
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import { cn } from '../../../utils/styles/cn';
@@ -66,6 +68,7 @@ export interface ProjectCardProps extends MediaCardProps {
   bodyTexts: ProjectCardBodyTextsMapping;
   purchaseDetailsTitles: ProjectCardTitlesMapping;
   buttons: ProjectCardButtonsMapping;
+  colorScheme?: ColorScheme;
 }
 
 export function ProjectCard({
@@ -103,10 +106,12 @@ export function ProjectCard({
   bodyTexts,
   purchaseDetailsTitles,
   buttons,
+  colorScheme = 'regen',
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const { classes } = useProjectCardStyles();
+  const isRegen = colorScheme === 'regen';
 
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
   const cardButton =
@@ -183,6 +188,7 @@ export function ProjectCard({
             root: 'top-20 left-0',
             label: 'text-[10px]',
           }}
+          colorScheme={colorScheme}
         />
       )}
       {comingSoon && (
@@ -325,7 +331,8 @@ export function ProjectCard({
                         {containedButton.text}
                       </ContainedButton>
                     ))}
-                  {(onButtonClick || isPrefinanceProject || offChain) &&
+                  {(hasButton || isPrefinanceProject || offChain) &&
+                    isRegen &&
                     (isButtonDisabled && createPostTooltipText ? (
                       <InfoTooltip
                         arrow

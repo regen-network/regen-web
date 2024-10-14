@@ -2,6 +2,8 @@ import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { Box, styled, SxProps } from '@mui/material';
 import Tabs, { TabsProps } from '@mui/material/Tabs';
 
+import { ColorScheme } from 'src/theme/theme.types';
+
 import type { Theme } from '../../theme/muiTheme';
 import { LinkItem } from '../footer/footer-new';
 import { TextSize } from '../typography/sizing';
@@ -30,6 +32,7 @@ interface IconTabsProps {
       inner?: SxProps<Theme>;
     };
   };
+  colorScheme: ColorScheme;
   hideIndicator?: boolean;
   mobileFullWidth?: boolean;
   className?: string;
@@ -38,29 +41,36 @@ interface IconTabsProps {
 const StyledTabs = styled(Tabs, {
   shouldForwardProp: prop =>
     prop !== 'hideIndicator' && prop !== 'mobileFullWidth',
-})<TabsProps & { mobileFullWidth: boolean; hideIndicator: boolean }>(
-  ({ mobileFullWidth, theme, hideIndicator }) => ({
-    '& .MuiTabs-flexContainer': {
-      display: 'block',
+})<
+  TabsProps & {
+    mobileFullWidth: boolean;
+    hideIndicator: boolean;
+    colorScheme: ColorScheme;
+  }
+>(({ mobileFullWidth, colorScheme, theme, hideIndicator }) => ({
+  '& .MuiTabs-flexContainer': {
+    display: 'block',
+  },
+  '& .MuiTabs-scroller': {
+    [theme.breakpoints.up('md')]: {
+      marginLeft: mobileFullWidth ? theme.spacing(-3) : 0,
     },
-    '& .MuiTabs-scroller': {
-      [theme.breakpoints.up('md')]: {
-        marginLeft: mobileFullWidth ? theme.spacing(-3) : 0,
-      },
-      [theme.breakpoints.down('md')]: {
-        paddingLeft: mobileFullWidth ? theme.spacing(7) : 0,
-      },
-      [theme.breakpoints.down('sm')]: {
-        paddingLeft: mobileFullWidth ? theme.spacing(1) : 0,
-      },
+    [theme.breakpoints.down('md')]: {
+      paddingLeft: mobileFullWidth ? theme.spacing(7) : 0,
     },
-    '& .MuiTabs-indicator': {
-      display: hideIndicator && 'none',
-      backgroundColor: theme.palette.secondary.main,
-      height: '3px',
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: mobileFullWidth ? theme.spacing(1) : 0,
     },
-  }),
-);
+  },
+  '& .MuiTabs-indicator': {
+    display: hideIndicator && 'none',
+    backgroundColor:
+      colorScheme === 'terrasos'
+        ? theme.palette.warning.main
+        : theme.palette.primary.main,
+    height: '3px',
+  },
+}));
 
 const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
   activeTab = 0,
@@ -68,6 +78,7 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
   size,
   sxs,
   linkComponent,
+  colorScheme,
   hideIndicator = false,
   mobileFullWidth = false,
   className,
@@ -104,6 +115,7 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
           aria-label="tabs"
           hideIndicator={hideIndicator}
           mobileFullWidth={mobileFullWidth}
+          colorScheme={colorScheme}
         >
           {filteredTabs.map((tab, index) => (
             <IconTab

@@ -30,7 +30,11 @@ import {
   getProjectCardButtonMapping,
   getProjectCardPurchaseDetailsTitleMapping,
 } from 'lib/constants/shared.constants';
-import { CREDIT_CLASS_FILTERS_TO_DESELECT, IS_TERRASOS } from 'lib/env';
+import {
+  COLOR_SCHEME,
+  CREDIT_CLASS_FILTERS_TO_DESELECT,
+  IS_TERRASOS,
+} from 'lib/env';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -233,10 +237,14 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               place={project?.place}
               area={project?.area}
               areaUnit={project?.areaUnit}
-              onButtonClick={() => {
-                setSelectedProject(project);
-                setIsBuyFlowStarted(true);
-              }}
+              onButtonClick={
+                IS_TERRASOS
+                  ? undefined
+                  : () => {
+                      setSelectedProject(project);
+                      setIsBuyFlowStarted(true);
+                    }
+              }
               purchaseInfo={project.purchaseInfo || {}}
               onClick={() => navigate(`/project/${project.id}`)}
               imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
@@ -252,6 +260,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               draftText={_(DRAFT_TEXT)}
               bodyTexts={bodyTexts}
               purchaseDetailsTitles={purchaseDetailsTitles}
+              colorScheme={COLOR_SCHEME}
               buttons={buttons}
             />
           </Box>
@@ -292,6 +301,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           page={Number(routePage)}
           onChange={(event, value) => navigate(`/projects/${value}`)}
           size={isMobile ? 'small' : 'large'}
+          colorScheme={COLOR_SCHEME}
         />
       </Flex>
       {config.buySellOrderFlow && (

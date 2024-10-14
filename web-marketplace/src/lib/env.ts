@@ -1,5 +1,7 @@
 import { MARKETPLACE_CLIENT_TYPE } from 'clients/Clients.types';
 
+import { ColorScheme } from 'web-components/src/theme/theme.types';
+
 export const IS_DEV = import.meta.env.DEV;
 export const apiServerUrl = import.meta.env.VITE_API_URI;
 export const SKIPPED_CLASS_ID = import.meta.env.VITE_SKIPPED_CLASS_ID;
@@ -16,3 +18,5 @@ export const DEFAULT_COMMUNITY_PROJECTS_FILTER =
 export const MARKETPLACE_CLIENT = (import.meta.env.VITE_MARKETPLACE_CLIENT ??
   'regen') as MARKETPLACE_CLIENT_TYPE;
 export const IS_TERRASOS = MARKETPLACE_CLIENT === 'terrasos';
+export const IS_REGEN = MARKETPLACE_CLIENT === 'regen';
+export const COLOR_SCHEME: ColorScheme = IS_TERRASOS ? 'terrasos' : 'regen';

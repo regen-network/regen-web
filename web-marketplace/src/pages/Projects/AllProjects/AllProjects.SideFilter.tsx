@@ -24,6 +24,7 @@ import {
   useCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
+import { COLOR_SCHEME, IS_TERRASOS } from 'lib/env';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { CommunityFilter } from './AllProjects.CommunityFilter';
@@ -80,8 +81,15 @@ export const SideFilter = ({
         size="small"
         onClick={() => setIsOpen(true)}
         startIcon={
-          <FilterIcon sx={{ color: 'secondary.dark', with: 25, height: 24 }} />
+          <FilterIcon
+            sx={{
+              color: IS_TERRASOS ? 'primary.contrastText' : 'secondary.dark',
+              with: 25,
+              height: 24,
+            }}
+          />
         }
+        colorScheme={COLOR_SCHEME}
         sx={[{ mr: 4 }, ...sxToArray(sx)]}
       >
         {_(SIDE_FILTERS_BUTTON)}

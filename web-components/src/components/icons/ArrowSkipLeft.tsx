@@ -2,10 +2,12 @@ import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 interface IconProps extends SvgIconProps {
   disabled?: boolean;
+  useGradient?: boolean;
 }
 
 export default function ArrowSkipLeftIcon({
   disabled,
+  useGradient = true,
   sx = [],
   ...props
 }: IconProps): JSX.Element {
@@ -24,7 +26,7 @@ export default function ArrowSkipLeftIcon({
         r={24}
         transform="matrix(-1 0 0 1 25.5 25)"
         fill="#fff"
-        stroke="url(#skipLeft)"
+        stroke={useGradient ? 'url(#skipLeft)' : 'currentColor'}
         strokeWidth={2}
       />
       <path

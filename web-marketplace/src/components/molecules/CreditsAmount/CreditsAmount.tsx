@@ -7,7 +7,6 @@ import { useSetAtom } from 'jotai';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { microToDenom } from 'lib/denom.utils';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 
@@ -65,16 +64,25 @@ export const CreditsAmount = ({
     [card, cardSellOrders, filteredCryptoSellOrders],
   );
 
-  const setInitialCreditsAmount = useCallback(async () => {
-    if (getValues(CREDITS_AMOUNT) === 0) {
+  useEffect(() => {
+    // Set initial credits amount to min(1, creditsAvailable)
+    if (
+      ((filteredCryptoSellOrders &&
+        filteredCryptoSellOrders.length > 0 &&
+        !card) ||
+        (cardSellOrders && cardSellOrders.length > 0 && card)) &&
+      getValues(CREDITS_AMOUNT) === 0 &&
+      creditsAvailable !== 0
+    ) {
       const _creditsAvailable = getCreditsAvailablePerCurrency(
         paymentOption,
         filteredCryptoSellOrders,
         cardSellOrders,
         creditTypePrecision,
       );
+
       const creditsAmount = Math.min(_creditsAvailable, 1);
-      await setValue(CREDITS_AMOUNT, creditsAmount);
+      setValue(CREDITS_AMOUNT, creditsAmount);
 
       const { currencyAmount, sellOrders } = getCurrencyAmount({
         currentCreditsAmount: creditsAmount,
@@ -82,14 +90,15 @@ export const CreditsAmount = ({
         orderedSellOrders,
         creditTypePrecision,
       });
-      await setValue(CURRENCY_AMOUNT, currencyAmount);
-      await setValue(SELL_ORDERS, sellOrders);
+      setValue(CURRENCY_AMOUNT, currencyAmount);
+      setValue(SELL_ORDERS, sellOrders);
       trigger();
     }
   }, [
     card,
     cardSellOrders,
     creditTypePrecision,
+    creditsAvailable,
     filteredCryptoSellOrders,
     getValues,
     orderedSellOrders,
@@ -99,58 +108,61 @@ export const CreditsAmount = ({
   ]);
 
   useEffect(() => {
-    // Set initial credits amount to min(1, creditsAvailable)
-    setInitialCreditsAmount();
-  }, [setInitialCreditsAmount]);
-
-  useEffect(() => {
-    const _spendingCap = getSpendingCap(
-      paymentOption,
-      filteredCryptoSellOrders,
-      cardSellOrders,
-    );
-    setSpendingCap(_spendingCap);
-    const _creditsAvailable = getCreditsAvailablePerCurrency(
-      paymentOption,
-      filteredCryptoSellOrders,
-      cardSellOrders,
-      creditTypePrecision,
-    );
-    setCreditsAvailable(_creditsAvailable);
-
-    // This can happen when the user switches payment option, currency,
-    // or to only buy tradable credits,
-    // but the amount set is above the amount of newly available credits
-    const currentCreditsAmount = getValues(CREDITS_AMOUNT);
-    if (currentCreditsAmount > _creditsAvailable) {
-      setValue(CREDITS_AMOUNT, _creditsAvailable);
-      setValue(CURRENCY_AMOUNT, _spendingCap);
-      setValue(
-        SELL_ORDERS,
-        orderedSellOrders.map(order => {
-          const price = getSellOrderPrice({ order, card });
-          return formatSellOrder({ order, card, price });
-        }),
+    if (
+      (filteredCryptoSellOrders &&
+        filteredCryptoSellOrders.length > 0 &&
+        !card) ||
+      (cardSellOrders && cardSellOrders.length > 0 && card)
+    ) {
+      const _spendingCap = getSpendingCap(
+        paymentOption,
+        filteredCryptoSellOrders,
+        cardSellOrders,
       );
-      const formattedCreditsAvailable = i18n.number(_creditsAvailable);
-      setErrorBannerTextAtom(
-        plural(_creditsAvailable, {
-          one: `Only ${formattedCreditsAvailable} credit available with those paramaters, order quantity changed`,
-          other: `Only ${formattedCreditsAvailable} credits available with those paramaters, order quantity changed`,
-        }),
-      );
-    } else {
-      // Else we keep the same amount of credits
-      // but we still need to update currency amount and sell orders
-      // (because pricing and sell orders can be different)
-      const { currencyAmount, sellOrders } = getCurrencyAmount({
-        currentCreditsAmount,
-        card,
-        orderedSellOrders,
+      setSpendingCap(_spendingCap);
+
+      const _creditsAvailable = getCreditsAvailablePerCurrency(
+        paymentOption,
+        filteredCryptoSellOrders,
+        cardSellOrders,
         creditTypePrecision,
-      });
-      setValue(CURRENCY_AMOUNT, currencyAmount);
-      setValue(SELL_ORDERS, sellOrders);
+      );
+      setCreditsAvailable(_creditsAvailable);
+
+      // This can happen when the user switches payment option, currency,
+      // or to only buy tradable credits,
+      // but the amount set is above the amount of newly available credits
+      const currentCreditsAmount = getValues(CREDITS_AMOUNT);
+      if (currentCreditsAmount > _creditsAvailable) {
+        setValue(CREDITS_AMOUNT, _creditsAvailable);
+        setValue(CURRENCY_AMOUNT, _spendingCap);
+        setValue(
+          SELL_ORDERS,
+          orderedSellOrders.map(order => {
+            const price = getSellOrderPrice({ order, card });
+            return formatSellOrder({ order, card, price });
+          }),
+        );
+        const formattedCreditsAvailable = i18n.number(_creditsAvailable);
+        setErrorBannerTextAtom(
+          plural(_creditsAvailable, {
+            one: `Only ${formattedCreditsAvailable} credit available with those paramaters, order quantity changed`,
+            other: `Only ${formattedCreditsAvailable} credits available with those paramaters, order quantity changed`,
+          }),
+        );
+      } else {
+        // Else we keep the same amount of credits
+        // but we still need to update currency amount and sell orders
+        // (because pricing and sell orders can be different)
+        const { currencyAmount, sellOrders } = getCurrencyAmount({
+          currentCreditsAmount,
+          card,
+          orderedSellOrders,
+          creditTypePrecision,
+        });
+        setValue(CURRENCY_AMOUNT, currencyAmount);
+        setValue(SELL_ORDERS, sellOrders);
+      }
     }
   }, [
     cardSellOrders,

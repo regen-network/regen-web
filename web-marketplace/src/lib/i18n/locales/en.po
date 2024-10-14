@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-09 13:19+0200\n"
+"POT-Creation-Date: 2024-10-14 10:17+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "(retirement is permanent and non-reversible)"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:100
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:148
 msgid "{_creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
 msgstr ""
 
@@ -1193,7 +1193,7 @@ msgstr ""
 msgid "credit name"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:224
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:276
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr ""
 
@@ -1219,7 +1219,7 @@ msgstr ""
 msgid "Credit unit definition"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsInput.tsx:55
+#: src/components/molecules/CreditsAmount/CreditsInput.tsx:59
 msgid "credits"
 msgstr ""
 
@@ -1270,7 +1270,7 @@ msgstr ""
 msgid "Credits have been issued!"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsInput.tsx:39
+#: src/components/molecules/CreditsAmount/CreditsInput.tsx:43
 msgid "Credits Input"
 msgstr ""
 
@@ -1320,7 +1320,7 @@ msgstr ""
 msgid "CURRENCY DENOM"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:98
+#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:93
 msgid "Currency Input"
 msgstr ""
 
@@ -3201,8 +3201,8 @@ msgstr ""
 msgid "Select all"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:209
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:210
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:261
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:262
 msgid "Select option"
 msgstr ""
 

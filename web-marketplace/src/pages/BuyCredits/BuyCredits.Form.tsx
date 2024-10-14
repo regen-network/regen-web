@@ -4,7 +4,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery } from '@tanstack/react-query';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
@@ -42,6 +42,7 @@ import { PaymentInfoFormSchemaType } from 'components/organisms/PaymentInfoForm/
 import { PaymentInfoFormFiat } from 'components/organisms/PaymentInfoForm/PaymentInfoFormFiat';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
+import { paymentOptionCryptoClickedAtom } from './BuyCredits.atoms';
 import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
 import {
   BuyCreditsSchemaTypes,
@@ -98,8 +99,9 @@ export const BuyCreditsForm = ({
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
-  const [paymentOptionCryptoClicked, setPaymentOptionCryptoClicked] =
-    useState(false);
+  const [paymentOptionCryptoClicked, setPaymentOptionCryptoClicked] = useAtom(
+    paymentOptionCryptoClickedAtom,
+  );
 
   const cardDisabled = cardSellOrders.length === 0;
 

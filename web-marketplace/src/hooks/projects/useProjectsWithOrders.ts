@@ -290,7 +290,7 @@ export function useProjectsWithOrders({
     sortedProjects.map(project => project?.creditClassId),
   );
 
-  // Fiat sell orders
+  // Sanity projects
   const sanityProjectsResults = useQueries({
     queries: sortedProjects?.map(project => {
       const id = project.slug || project.id;
@@ -301,11 +301,12 @@ export function useProjectsWithOrders({
       });
     }),
   });
-  const sanityProjects = sanityProjectsResults
-    .map(res => {
-      return res.data?.allProject;
-    })
-    .flat();
+  const sanityProjects = sanityProjectsResults.map(res => {
+    return res.data?.allProject?.[0];
+  });
+  const sanityProjectsLoading = sanityProjectsResults.some(
+    res => res.isFetching,
+  );
 
   /* Final Normalization */
 
@@ -320,8 +321,9 @@ export function useProjectsWithOrders({
         projectPagesMetadata,
         programAccounts,
         sanityCreditClassData: creditClassData,
-        prefinanceProjectsData,
         classesMetadata,
+        sanityProjects,
+        wallet,
       }),
     [
       sortedProjects,
@@ -329,8 +331,9 @@ export function useProjectsWithOrders({
       projectPagesMetadata,
       programAccounts,
       creditClassData,
-      prefinanceProjectsData,
       classesMetadata,
+      sanityProjects,
+      wallet,
     ],
   );
 
@@ -351,6 +354,7 @@ export function useProjectsWithOrders({
       isLoadingSellOrders ||
       isLoadingSanityCreditClasses ||
       isLoadingPrefinanceProjects ||
+      sanityProjectsLoading ||
       isLoadingProject ||
       isClassesMetadataLoading ||
       projectsMetadataLoading ||

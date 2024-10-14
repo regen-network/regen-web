@@ -1,12 +1,14 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { useLedger } from 'ledger';
+import { client as sanityClient } from 'lib/clients/sanity';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
+import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
@@ -73,6 +75,21 @@ export const useFetchProjectsWithOrders = ({
     project => project?.creditClassByCreditClassId?.accountByRegistryId,
   );
 
+  // Sanity projects
+  const sanityProjectsResults = useQueries({
+    queries: projectsWithOrderData?.map(project => {
+      const id = project.slug || project.id;
+      return getProjectByIdQuery({
+        id,
+        sanityClient,
+        enabled: !!sanityClient && !!id,
+      });
+    }),
+  });
+  const sanityProjects = sanityProjectsResults.map(res => {
+    return res.data?.allProject?.[0];
+  });
+
   /* Final Normalization */
   const projectsWithMetadata = normalizeProjectsWithMetadata({
     offChainProjects: orderedOffChainProjects,
@@ -81,6 +98,8 @@ export const useFetchProjectsWithOrders = ({
     projectPagesMetadata,
     programAccounts,
     classesMetadata,
+    sanityProjects,
+    wallet,
   });
 
   return {

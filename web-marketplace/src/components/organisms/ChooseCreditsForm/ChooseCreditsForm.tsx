@@ -129,9 +129,7 @@ export function ChooseCreditsForm({
 
   const [spendingCap, setSpendingCap] = useState(0);
   const [creditsAvailable, setCreditsAvailable] = useState(0);
-  // A big number here avoids the NOT_ENOUGH_BALANCE error on rendering
-  // the form until the actual user balance is fetched
-  const [userBalance, setUserBalance] = useState(10101010101010101);
+  const [userBalance, setUserBalance] = useState(0);
 
   const form = useZodForm({
     schema: createChooseCreditsFormSchema({

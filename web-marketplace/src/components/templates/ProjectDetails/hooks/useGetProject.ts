@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
@@ -10,7 +9,7 @@ import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-ser
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 
-import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
+import { useBuySellOrderData } from 'hooks/useBuySellOrderData';
 
 import { client as sanityClient } from '../../../../lib/clients/sanity';
 import { getIsOnChainId, getIsUuid } from '../ProjectDetails.utils';

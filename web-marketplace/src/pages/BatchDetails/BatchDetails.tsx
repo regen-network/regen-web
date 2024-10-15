@@ -103,7 +103,7 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
               sx={{ maxWidth: 'max-content', px: 7 }}
               size="small"
               component={Link}
-              href="/profile/portfolio"
+              href="/dashboard/portfolio"
             >
               <Trans>view in portfolio</Trans>
             </OutlinedButton>

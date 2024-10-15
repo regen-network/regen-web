@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -7,9 +7,8 @@ import cx from 'classnames';
 
 import { useWallet } from 'lib/wallet/wallet';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import useMoreProjects from './hooks/useMoreProjects';
 
@@ -20,10 +19,8 @@ export function MoreProjects(): JSX.Element {
     projectId as string,
   );
 
-  const [selectedProject, setSelectedProject] =
-    useState<ProjectWithOrderData | null>(null);
-  const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const { isKeplrMobileWeb } = useWallet();
+  const onBuyButtonClick = useOnBuyButtonClick();
 
   return (
     <Box
@@ -35,14 +32,12 @@ export function MoreProjects(): JSX.Element {
         projects={projectsWithOrderData}
         loading={loading}
         onButtonClick={({ project }) => {
-          setSelectedProject(project);
-          setIsBuyFlowStarted(true);
+          onBuyButtonClick({
+            projectId: project?.id,
+            cardSellOrders: project?.cardSellOrders,
+            loading,
+          });
         }}
-      />
-      <BuySellOrderFlow
-        isFlowStarted={isBuyFlowStarted}
-        setIsFlowStarted={setIsBuyFlowStarted}
-        projects={selectedProject && [selectedProject]}
       />
     </Box>
   );

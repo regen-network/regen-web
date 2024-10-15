@@ -1,5 +1,5 @@
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
 export type ProjectCardOnButtonClickParams = {
-  project: ProjectWithOrderData;
+  project: NormalizeProject;
 };

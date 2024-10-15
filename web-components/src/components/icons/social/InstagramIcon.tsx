@@ -1,16 +1,7 @@
-import React from 'react';
-import { Theme } from '@mui/material/styles';
 import SvgIcon from '@mui/material/SvgIcon';
-import { makeStyles } from 'tss-react/mui';
 
+import { cn } from '../../../utils/styles/cn';
 import withHoverColor, { Props } from '../withHoverColor';
-
-const useStyles = makeStyles()((theme: Theme) => ({
-  root: {
-    width: theme.spacing(9.25),
-    height: theme.spacing(9.25),
-  },
-}));
 
 function InstagramIcon({
   className,
@@ -18,11 +9,9 @@ function InstagramIcon({
   onMouseEnter,
   onMouseLeave,
 }: Props): JSX.Element {
-  const { classes, cx } = useStyles();
-
   return (
     <SvgIcon
-      className={cx(classes.root, className)}
+      className={cn('w-[37px] h-[37px]', className)}
       viewBox="0 0 37 37"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

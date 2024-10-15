@@ -87,7 +87,7 @@ export const Orders = () => {
         className="w-full xl:w-[850px]"
       >
         <WithLoader isLoading={false} sx={{ mx: 'auto' }}>
-          <div className="w-full rounded-md border border-grey-200 bg-grey-0">
+          <div className="w-full rounded-md border border-grey-200 bg-grey-100">
             {orders.map((order, index) => (
               <Order
                 key={`${order.project.name}-${index}`}

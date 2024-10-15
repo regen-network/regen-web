@@ -23,13 +23,13 @@ import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/g
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { getBuyModalOptionsQuery } from 'lib/queries/react-query/sanity/getBuyModalOptionsQuery/getBuyModalOptionsQuery';
 
-import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import useImpact from 'pages/CreditClassDetails/hooks/useImpact';
 import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+import { useBuySellOrderData } from 'hooks/useBuySellOrderData';
 
 import { useLedger } from '../../ledger';
 import {

@@ -54,10 +54,31 @@ export const Orders = () => {
         paymentInfo,
       },
     },
+    {
+      project: {
+        name: 'Project 2 Name',
+        date: 'Jan 15, 2025',
+        placeName: location,
+        area: 100.1,
+        areaUnit: 'hectares',
+        imageSrc: '/jpg/default-project.jpg',
+        prefinance: false,
+      },
+      order: {
+        status: ORDER_STATUS.pending,
+        retirementInfo: {
+          ...retirementInfo,
+          location,
+        },
+        blockchainDetails,
+        credits,
+        paymentInfo,
+      },
+    },
   ];
 
   return (
-    <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly mx-auto min-h-screen">
+    <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly mx-auto">
       <Flex
         sx={{
           flexDirection: 'column',
@@ -68,7 +89,13 @@ export const Orders = () => {
         <WithLoader isLoading={false} sx={{ mx: 'auto' }}>
           <div className="w-full rounded-md border border-grey-200 bg-grey-0">
             {orders.map((order, index) => (
-              <Order key={`${order.project.name}-${index}`} {...order} />
+              <Order
+                key={`${order.project.name}-${index}`}
+                className={
+                  orders.length > 1 && index < orders.length - 1 ? 'mb-20' : ''
+                }
+                {...order}
+              />
             ))}
           </div>
         </WithLoader>

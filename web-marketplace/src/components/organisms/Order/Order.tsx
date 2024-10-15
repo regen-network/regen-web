@@ -17,6 +17,7 @@ import { Image } from 'web-components/src/components/image';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
 import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
 import { Title } from 'web-components/src/components/typography';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
 
@@ -36,7 +37,12 @@ export const Order = (orderData: OrderDataProps) => {
   const isRetirementTradable =
     (retirementInfo as RetirementInfoData).tradableCredits !== null;
   return (
-    <Card className="bg-grey-100 border-[1px] border-grey-200">
+    <Card
+      className={cn(
+        'bg-grey-100 border-[1px] border-grey-200',
+        orderData.className,
+      )}
+    >
       {isMobile && (
         <>
           {project.prefinance && (

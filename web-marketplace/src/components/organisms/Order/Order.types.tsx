@@ -11,6 +11,7 @@ export interface OrderDataProps {
     credits: CreditsData;
     paymentInfo: PaymentInfoData;
   };
+  className?: string;
 }
 
 export type OrderProjectData = {

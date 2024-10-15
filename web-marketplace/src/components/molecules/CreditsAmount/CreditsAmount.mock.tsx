@@ -1,43 +1,94 @@
 /* eslint-disable lingui/no-unlocalized-strings */
-import { CURRENCIES } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import {
+  EVMOS_DENOM,
+  REGEN_DENOM,
+  USDC_DENOM,
+  USDCAXL_DENOM,
+} from 'config/allowedBaseDenoms';
 
-export const creditVintages = [
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+
+export const cryptoSellOrders = [
   {
-    date: 'Jan 1, 2019 - December 31, 2019',
-    credits: '100',
-    batchDenom: 'mock-batch-denom-1',
+    id: '1',
+    askBaseDenom: REGEN_DENOM,
+    askDenom: REGEN_DENOM,
+    askAmount: '10000000',
+    quantity: '100',
+    seller: 'addr1',
+    batchDenom: 'C01-20190101-20200101-002',
+    disableAutoRetire: true,
   },
   {
-    date: 'Jan 1, 2020 - December 31, 2020',
-    credits: '200',
-    batchDenom: 'mock-batch-denom-2',
+    id: '2',
+    askBaseDenom: REGEN_DENOM,
+    askDenom: REGEN_DENOM,
+    askAmount: '20000000',
+    quantity: '10',
+    seller: 'addr2',
+    batchDenom: 'C01-20180101-20190101-001',
+    disableAutoRetire: false,
   },
   {
-    date: 'Jan 1, 2021 - December 31, 2021',
-    credits: '300',
-    batchDenom: 'mock-batch-denom-3',
+    id: '3',
+    askBaseDenom: USDC_DENOM,
+    askDenom: 'ibc/123',
+    askAmount: '2000000',
+    quantity: '1000',
+    seller: 'addr1',
+    batchDenom: 'C01-20190101-20200101-002',
+    disableAutoRetire: false,
   },
+  {
+    id: '4',
+    askBaseDenom: USDCAXL_DENOM,
+    askDenom: 'ibc/456',
+    askAmount: '3000000',
+    quantity: '10',
+    batchDenom: 'C01-20190101-20200101-002',
+    seller: 'addr1',
+    disableAutoRetire: false,
+  },
+  {
+    id: '5',
+    askBaseDenom: EVMOS_DENOM,
+    askDenom: 'ibc/567',
+    askAmount: '4000000',
+    quantity: '5',
+    batchDenom: 'C01-20180101-20190101-001',
+    seller: 'addr1',
+    disableAutoRetire: true,
+  },
+] as Array<UISellOrderInfo>;
+
+export const cardSellOrders = cryptoSellOrders.map((order, i) => ({
+  usdPrice: i + 1,
+  ...order,
+}));
+
+export const cryptoCurrencies = [
+  { askDenom: REGEN_DENOM, askBaseDenom: REGEN_DENOM },
+  { askDenom: 'ibc/123', askBaseDenom: USDC_DENOM },
+  { askDenom: 'ibc/456', askBaseDenom: USDCAXL_DENOM },
+  { askDenom: 'ibc/789', askBaseDenom: EVMOS_DENOM },
 ];
 
-export const creditDetails = [
+export const allowedDenoms = [
   {
-    availableCredits: 1000,
-    currency: CURRENCIES.usd,
-    creditPrice: 1,
+    displayDenom: 'regen',
+    bankDenom: REGEN_DENOM,
   },
   {
-    availableCredits: 2000,
-    currency: CURRENCIES.uregen,
-    creditPrice: 0.5,
+    displayDenom: 'USDC',
+    bankDenom: 'ibc/123',
   },
   {
-    availableCredits: 3000,
-    currency: CURRENCIES.usdc,
-    creditPrice: 2,
+    // eslint-disable-next-line lingui/no-unlocalized-strings
+    displayDenom: 'USDC.axl',
+    bankDenom: 'ibc/456',
   },
   {
-    availableCredits: 4000,
-    currency: CURRENCIES.usdcaxl,
-    creditPrice: 3,
+    displayDenom: 'evmos',
+    bankDenom: 'ibc/789',
   },
 ];

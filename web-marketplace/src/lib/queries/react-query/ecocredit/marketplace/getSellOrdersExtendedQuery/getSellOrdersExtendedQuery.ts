@@ -89,7 +89,6 @@ export const getSellOrdersExtendedQuery = ({
         askUsdAmount,
       };
     });
-
     return sellOrdersWithBaseDenom;
   },
   keepPreviousData: true,

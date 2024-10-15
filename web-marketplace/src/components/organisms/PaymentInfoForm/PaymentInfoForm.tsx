@@ -1,11 +1,19 @@
-import { useMemo } from 'react';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe, StripeElementsOptionsMode } from '@stripe/stripe-js';
+import { useEffect, useMemo, useState } from 'react';
+import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
+import { useLingui } from '@lingui/react';
+import { Stripe, StripeElements } from '@stripe/stripe-js';
 
-import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
+import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import {
+  CardDetails,
+  PaymentOptionsType,
+} from 'pages/BuyCredits/BuyCredits.types';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import {
   CustomerInfo,
@@ -16,16 +24,18 @@ import {
   paymentInfoFormSchema,
   PaymentInfoFormSchemaType,
 } from './PaymentInfoForm.schema';
-import { PaymentOptionsType } from './PaymentInfoForm.types';
 
-type PaymentInfoFormProps = {
+export type PaymentInfoFormProps = {
   paymentOption: PaymentOptionsType;
   onSubmit: (values: PaymentInfoFormSchemaType) => Promise<void>;
-  stripePublishableKey?: string;
-  amount: number;
-  currency: string;
+  setError: (error: string) => void;
+  setConfirmationTokenId: UseStateSetter<string | undefined>;
+  stripe?: Stripe | null;
+  elements?: StripeElements | null;
+  initialValues?: DefaultValues<PaymentInfoFormSchemaType>;
+  setCardDetails: UseStateSetter<CardDetails | undefined>;
 } & CustomerInfoProps &
-  PaymentInfoProps;
+  Omit<PaymentInfoProps, 'setPaymentInfoValid'>;
 
 export const PaymentInfoForm = ({
   paymentOption,
@@ -36,70 +46,103 @@ export const PaymentInfoForm = ({
   onSubmit,
   login,
   paymentMethods,
-  stripePublishableKey,
-  amount,
-  currency,
+  setError,
   retiring,
+  setConfirmationTokenId,
+  stripe,
+  elements,
+  initialValues,
+  setCardDetails,
 }: PaymentInfoFormProps) => {
+  const { _ } = useLingui();
+  const { handleBack } = useMultiStep();
+  const [paymentInfoValid, setPaymentInfoValid] = useState(false);
+
   const form = useZodForm({
-    schema: paymentInfoFormSchema(paymentOption),
+    schema: paymentInfoFormSchema(paymentOption, wallet),
     defaultValues: {
-      email: accountEmail,
-      name: accountName,
-      createAccount: true,
-      savePaymentMethod: true,
+      email: initialValues?.email || accountEmail,
+      name: initialValues?.name || accountName,
+      createAccount: initialValues?.createAccount || true,
+      savePaymentMethod: initialValues?.savePaymentMethod || true,
       paymentMethodId: paymentMethods?.[0]?.id,
     },
     mode: 'onBlur',
   });
+  const { isValid, isSubmitting } = useFormState({
+    control: form.control,
+  });
 
-  const stripePromise = useMemo(
-    () =>
-      paymentOption === 'card' &&
-      stripePublishableKey &&
-      loadStripe(stripePublishableKey),
-    [paymentOption, stripePublishableKey],
+  useEffect(() => {
+    // set form values after login
+    if (accountEmail) form.setValue('email', accountEmail);
+    if (accountName) form.setValue('name', accountName);
+    if (paymentMethods)
+      form.setValue('paymentMethodId', paymentMethods?.[0]?.id);
+  }, [accountEmail, accountName, form, paymentMethods]);
+
+  const paymentMethodId = useWatch({
+    control: form.control,
+    name: 'paymentMethodId',
+  });
+  const card = useMemo(
+    () => paymentOption === PAYMENT_OPTIONS.CARD,
+    [paymentOption],
   );
-
-  const options: StripeElementsOptionsMode = useMemo(
-    () => ({
-      mode: 'payment',
-      amount,
-      currency,
-      paymentMethodCreation: 'manual',
-      fonts: [
-        {
-          cssSrc:
-            'https://fonts.googleapis.com/css?family=Lato:100,300,400,700,800',
-        },
-      ],
-      appearance: {
-        theme: 'stripe',
-        variables: {
-          colorText: '#000',
-          colorDanger: '#DE4526',
-          fontFamily: defaultFontFamily,
-          spacingUnit: '5px',
-          borderRadius: '2px',
-        },
-        rules: {
-          '.Label': {
-            fontWeight: 'bold',
-            fontSize: '16px',
-          },
-          '.Input': {
-            boxShadow: 'none',
-            borderColor: '#D2D5D9',
-            marginTop: '9px',
-          },
-        },
-      },
-    }),
-    [amount, currency],
-  );
-
   return (
-    <Form form={form} onSubmit={onSubmit}>
+    <Form
+      form={form}
+      onSubmit={async (values: PaymentInfoFormSchemaType) => {
+        const card = paymentOption === PAYMENT_OPTIONS.CARD;
+        if (card && !stripe) {
+          return;
+        }
+        if (card && stripe && elements && !values.paymentMethodId) {
+          const submitRes = await elements.submit();
+          if (submitRes?.error?.message) {
+            setError(submitRes?.error?.message);
+            return;
+          }
+          // Create the ConfirmationToken using the details collected by the Payment Element
+          if (values.savePaymentMethod)
+            elements.update({ setupFutureUsage: 'on_session' });
+          const { error, confirmationToken } =
+            await stripe.createConfirmationToken({
+              elements,
+              params: {
+                payment_method_data: {
+                  billing_details: {
+                    name: values.name,
+                    email: values.email,
+                  },
+                },
+              },
+            });
+          if (error?.message) {
+            setError(error?.message);
+            return;
+          }
+          setConfirmationTokenId(confirmationToken?.id);
+        }
+        if (
+          card &&
+          paymentMethods &&
+          paymentMethods.length > 0 &&
+          values.paymentMethodId
+        ) {
+          const paymentMethod = paymentMethods.find(
+            method => method.id === values.paymentMethodId,
+          );
+          if (paymentMethod?.card)
+            setCardDetails({
+              last4: paymentMethod.card.last4,
+              country: paymentMethod.card.country,
+              brand: paymentMethod.card.brand,
+            });
+        }
+        onSubmit(values);
+      }}
+    >
       <div className="flex flex-col gap-10 sm:gap-20 max-w-[560px]">
         <CustomerInfo
           paymentOption={paymentOption}
@@ -110,14 +153,25 @@ export const PaymentInfoForm = ({
           accountName={accountName}
           retiring={retiring}
         />
-        {paymentOption === 'card' && stripePromise && (
-          <Elements options={options} stripe={stripePromise}>
-            <PaymentInfo
-              paymentMethods={paymentMethods}
-              accountId={accountId}
-            />
-          </Elements>
+        {card && (
+          <PaymentInfo
+            paymentMethods={paymentMethods}
+            accountId={accountId}
+            setPaymentInfoValid={setPaymentInfoValid}
+          />
         )}
+      </div>
+      <div className="float-right pt-40">
+        <PrevNextButtons
+          saveDisabled={
+            !isValid ||
+            isSubmitting ||
+            (!stripe && card) ||
+            (card && !paymentMethodId && !paymentInfoValid)
+          }
+          saveText={_(NEXT)}
+          onPrev={handleBack}
+        />
       </div>
     </Form>
   );

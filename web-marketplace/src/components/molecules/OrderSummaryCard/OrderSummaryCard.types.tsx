@@ -1,6 +1,7 @@
-import { Currency } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 
-import { ProjectCardBodyTextsMapping } from '../ProjectCard/ProjectCard.types';
+import { Currency } from '../CreditsAmount/CreditsAmount.types';
+import { AllowedDenoms } from '../DenomLabel/DenomLabel.utils';
 
 export interface OrderProps {
   projectName: string;
@@ -12,7 +13,6 @@ export interface OrderProps {
 }
 
 export interface OrderSummaryProps {
-  title: string;
   order: OrderProps;
   // TO-DO remove currentBuyingStep prop and get the current step from the context
   // this cound be a number or a string (choose credits | payment info | retirement | complete |)
@@ -22,22 +22,9 @@ export interface OrderSummaryProps {
     type: 'visa' | 'mastercard';
     cardNumber: string;
   };
-  headers: {
-    project: string;
-    pricePerCredit: string;
-    credits: string;
-    totalPrice: string;
-    payment: string;
-  };
-  ariaLabels: {
-    editableCredits: string;
-    changePaymentCard: string;
-    editButtonAriaLabel: string;
-  };
-  editableUpdateButtonText: string;
-  endingInText: string;
-  bodyTexts: ProjectCardBodyTextsMapping;
   imageAltText: string;
+  paymentOption: PaymentOptionsType;
+  allowedDenoms: AllowedDenoms;
   onClickEditCard: () => void;
 }
 

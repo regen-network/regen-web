@@ -1,12 +1,18 @@
+import { useEffect } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
-import { Trans } from '@lingui/macro';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+import { Stripe, StripeElements } from '@stripe/stripe-js';
 
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
+import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { Body } from 'web-components/src/components/typography/Body';
 
+import { NEXT } from 'pages/BuyCredits/BuyCredits.constants';
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { Retirement } from './AgreePurchaseForm.Retirement';
 import {
@@ -15,19 +21,30 @@ import {
 } from './AgreePurchaseForm.schema';
 import { Tradable, TradableProps } from './AgreePurchaseForm.Tradable';
 
-type AgreePurchaseFormProps = {
+export type AgreePurchaseFormProps = {
   retiring: boolean;
-  onSubmit: (values: AgreePurchaseFormSchemaType) => Promise<void>;
+  onSubmit: (
+    values: AgreePurchaseFormSchemaType,
+    stripe?: Stripe | null,
+    elements?: StripeElements | null,
+  ) => Promise<void>;
   country?: string;
+  stripe?: Stripe | null;
+  elements?: StripeElements | null;
 } & TradableProps;
 
 export const AgreePurchaseForm = ({
   retiring,
   country,
   onSubmit,
+  stripe,
+  elements,
   goToChooseCredits,
   imgSrc,
 }: AgreePurchaseFormProps) => {
+  const { _ } = useLingui();
+  const { handleBack } = useMultiStep();
+
   const form = useZodForm({
     schema: agreePurchaseFormSchema(retiring),
     defaultValues: {
@@ -39,7 +56,7 @@ export const AgreePurchaseForm = ({
     },
     mode: 'onBlur',
   });
-  const { errors } = useFormState({
+  const { errors, isValid, isSubmitting } = useFormState({
     control: form.control,
   });
 
@@ -51,14 +68,28 @@ export const AgreePurchaseForm = ({
     control: form.control,
     name: 'subscribeNewsletter',
   });
+  const agreeErpa = useWatch({
+    control: form.control,
+    name: 'agreeErpa',
+  });
+
+  useEffect(() => {
+    form.setValue('country', country);
+  }, [country, form]);
 
   return (
-    <Form form={form} onSubmit={onSubmit} className="max-w-[560px]">
-      {retiring ? (
-        <Retirement />
-      ) : (
+    <Form
+      form={form}
+      onSubmit={(values: AgreePurchaseFormSchemaType) =>
+        onSubmit(values, stripe, elements)
+      }
+      className="max-w-[560px]"
+    >
+      <Retirement retiring={retiring} />
+      {!retiring && (
         <Tradable goToChooseCredits={goToChooseCredits} imgSrc={imgSrc} />
       )}
+
       <div className="flex flex-col gap-20 py-20 px-20 sm:pl-40 sm:pr-0">
         <CheckboxLabel
           checked={followProject}
@@ -84,11 +115,19 @@ export const AgreePurchaseForm = ({
           {...form.register('subscribeNewsletter')}
         />
         <AgreeErpaCheckbox
+          checked={agreeErpa}
           labelSize="md"
           labelClassName="font-normal"
           error={!!errors.agreeErpa}
           helperText={errors.agreeErpa?.message}
           {...form.register('agreeErpa')}
+        />
+      </div>
+      <div className="float-right pt-40">
+        <PrevNextButtons
+          saveDisabled={!isValid || isSubmitting}
+          saveText={_(msg`purchase now`)}
+          onPrev={handleBack}
         />
       </div>
     </Form>

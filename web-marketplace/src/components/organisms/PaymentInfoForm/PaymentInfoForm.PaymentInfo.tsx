@@ -7,17 +7,20 @@ import { PaymentMethod } from '@stripe/stripe-js';
 import Card from 'web-components/src/components/cards/Card';
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
 import { Title } from 'web-components/src/components/typography';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { CardInfo } from './PaymentInfoForm.CardInfo';
 import { PaymentInfoFormSchemaType } from './PaymentInfoForm.schema';
 
 export type PaymentInfoProps = {
-  paymentMethods?: Array<PaymentMethod>;
+  paymentMethods?: Array<PaymentMethod> | null;
+  setPaymentInfoValid: UseStateSetter<boolean>;
   accountId?: string;
 };
 export const PaymentInfo = ({
   paymentMethods,
   accountId,
+  setPaymentInfoValid,
 }: PaymentInfoProps) => {
   const { _ } = useLingui();
   const ctx = useFormContext<PaymentInfoFormSchemaType>();
@@ -62,12 +65,19 @@ export const PaymentInfo = ({
             {...register(`paymentMethodId`)}
           >
             {paymentMethodId === '' && (
-              <CardInfo className="mt-20" accountId={accountId} />
+              <CardInfo
+                className="mt-20"
+                accountId={accountId}
+                setPaymentInfoValid={setPaymentInfoValid}
+              />
             )}
           </Radio>
         </>
       ) : (
-        <CardInfo accountId={accountId} />
+        <CardInfo
+          accountId={accountId}
+          setPaymentInfoValid={setPaymentInfoValid}
+        />
       )}
     </Card>
   );

@@ -20,12 +20,14 @@ export interface Props {
   wallets: LoginProvider[];
   socialProviders: LoginProvider[];
   onEmailSubmit: (values: EmailFormSchemaType) => Promise<void>;
+  onlyWallets?: boolean;
 }
 
 const LoginModalSelect = ({
   wallets,
   socialProviders,
   onEmailSubmit,
+  onlyWallets,
 }: Props): JSX.Element => {
   const { _ } = useLingui();
   const form = useZodForm({
@@ -55,56 +57,62 @@ const LoginModalSelect = ({
             </Trans>
           </Body>
           <LoginModalProviders providers={wallets} />
-          <Grid container alignItems="center" pb={7.5} spacing={7.5} pt={5}>
-            <Grid item xs={4}>
-              <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
+          {!onlyWallets && (
+            <Grid container alignItems="center" pb={7.5} spacing={7.5} pt={5}>
+              <Grid item xs={4}>
+                <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
+              </Grid>
+              <Grid item xs={4}>
+                <Label size="xs" color="info.dark">
+                  <Trans>or, log in with email / social</Trans>
+                </Label>
+              </Grid>
+              <Grid item xs={4}>
+                <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
+              </Grid>
             </Grid>
-            <Grid item xs={4}>
-              <Label size="xs" color="info.dark">
-                <Trans>or, log in with email / social</Trans>
-              </Label>
-            </Grid>
-            <Grid item xs={4}>
-              <Box sx={{ height: '1px', backgroundColor: 'grey.100' }} />
-            </Grid>
-          </Grid>
+          )}
         </>
       )}
-      <Body
-        size="sm"
-        sx={{
-          fontStyle: 'italic',
-          maxWidth: '356px',
-          margin: '0 auto',
-          pb: 7.5,
-        }}
-      >
-        <Trans>
-          NOTE: Only project page creation and user profile creation available
-          with email / social log in.
-        </Trans>
-      </Body>
-      <Form form={form} onSubmit={onEmailSubmit}>
-        <Grid container columnSpacing={2} alignItems="flex-end" pb={7.5}>
-          <Grid item xs={8}>
-            <TextField
-              label={_(msg`Email`)}
-              {...form.register('email')}
-              error={!!errors['email']}
-              helperText={errors['email']?.message}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <ContainedButton
-              sx={{ height: { xs: 50, sm: 60 }, width: '100%' }}
-              type="submit"
-            >
-              <Trans>log in</Trans>
-            </ContainedButton>
-          </Grid>
-        </Grid>
-      </Form>
-      <LoginModalProviders providers={socialProviders} />
+      {!onlyWallets && (
+        <>
+          <Body
+            size="sm"
+            sx={{
+              fontStyle: 'italic',
+              maxWidth: '356px',
+              margin: '0 auto',
+              pb: 7.5,
+            }}
+          >
+            <Trans>
+              NOTE: Only project page creation and user profile creation
+              available with email / social log in.
+            </Trans>
+          </Body>
+          <Form form={form} onSubmit={onEmailSubmit}>
+            <Grid container columnSpacing={2} alignItems="flex-end" pb={7.5}>
+              <Grid item xs={8}>
+                <TextField
+                  label={_(msg`Email`)}
+                  {...form.register('email')}
+                  error={!!errors['email']}
+                  helperText={errors['email']?.message}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <ContainedButton
+                  sx={{ height: { xs: 50, sm: 60 }, width: '100%' }}
+                  type="submit"
+                >
+                  <Trans>log in</Trans>
+                </ContainedButton>
+              </Grid>
+            </Grid>
+          </Form>
+          <LoginModalProviders providers={socialProviders} />
+        </>
+      )}
       <Body
         size="sm"
         sx={{

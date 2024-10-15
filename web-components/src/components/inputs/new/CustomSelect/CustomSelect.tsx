@@ -1,5 +1,4 @@
 import { ComponentType, useEffect, useState } from 'react';
-import { CryptoCurrencies } from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
 import { Option } from 'web-components/src/components/inputs/new/CustomSelect/CustomSelect.types';
 
 import { SelectOption } from './CustomSelect.Option';
@@ -13,7 +12,7 @@ const CustomSelect = ({
   placeholderAriaLabel,
 }: {
   options: Option[];
-  onSelect: (currency: CryptoCurrencies | string) => void;
+  onSelect: (currency: string) => void;
   defaultOption: string;
   selectAriaLabel: string;
   placeholderAriaLabel: string;
@@ -24,7 +23,7 @@ const CustomSelect = ({
     () => options[0].component?.element as ComponentType,
   );
 
-  const handleSelect = (option: CryptoCurrencies | string) => {
+  const handleSelect = (option: string) => {
     setSelectedOption(option);
     onSelect(option);
     setIsOpen(false);
@@ -41,7 +40,7 @@ const CustomSelect = ({
   }, [options, selectedOption, setOptionComponent]);
 
   return (
-    <div className="relative items-center inline-block p-10 pt-15 custom-select">
+    <div className="relative items-center inline-block pb-10 pt-15 custom-select">
       <Placeholder
         setIsOpen={setIsOpen}
         isOpen={isOpen}

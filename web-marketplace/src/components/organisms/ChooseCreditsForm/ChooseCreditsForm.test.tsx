@@ -1,49 +1,40 @@
 import {
-  creditDetails,
-  creditVintages,
+  allowedDenoms,
+  cardSellOrders,
+  cryptoSellOrders,
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.mock';
 import { render, screen, userEvent } from 'web-marketplace/test/test-utils';
 
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+
 import { ChooseCreditsForm } from './ChooseCreditsForm';
+import { ChooseCreditsFormSchemaType } from './ChooseCreditsForm.schema';
 
 describe('ChooseCreditsForm', () => {
+  const props = {
+    paymentOption: PAYMENT_OPTIONS.CARD,
+    setPaymentOption: () => {},
+    retiring: true,
+    setRetiring: () => {},
+    onPrev: () => {},
+    onSubmit: async (values: ChooseCreditsFormSchemaType) => {},
+    cardSellOrders,
+    cryptoSellOrders,
+    cardDisabled: false,
+    allowedDenoms,
+    isConnected: true,
+    setupWalletModal: () => {},
+    paymentOptionCryptoClicked: false,
+    setPaymentOptionCryptoClicked: () => {},
+  };
   it('renders without crashing', () => {
-    render(
-      <ChooseCreditsForm
-        creditVintages={creditVintages}
-        creditDetails={creditDetails}
-      />,
-    );
+    render(<ChooseCreditsForm {...props} />);
 
     expect(screen.getByTestId('choose-credits-form')).toBeInTheDocument();
   });
 
-  it('opens and closes advanced settings', () => {
-    render(
-      <ChooseCreditsForm
-        creditVintages={creditVintages}
-        creditDetails={creditDetails}
-      />,
-    );
-
-    const advancedSettingsButton = screen.getByRole('button', {
-      name: /advanced settings/i,
-    });
-
-    userEvent.click(advancedSettingsButton);
-    expect(screen.getByText(/advanced settings/i)).toBeInTheDocument();
-
-    userEvent.click(advancedSettingsButton);
-    expect(screen.queryByTestId('advanced-settings')).not.toBeInTheDocument();
-  });
-
   it('selects card payment option', () => {
-    render(
-      <ChooseCreditsForm
-        creditVintages={creditVintages}
-        creditDetails={creditDetails}
-      />,
-    );
+    render(<ChooseCreditsForm {...props} />);
     const cardOption = screen.getByRole('radio', {
       name: /card/i,
     });

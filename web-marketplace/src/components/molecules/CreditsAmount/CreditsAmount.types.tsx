@@ -1,40 +1,43 @@
 import { ChangeEvent } from 'react';
-import {
-  CreditDetails,
-  CreditsVintages,
-} from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
+import { CardSellOrder } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
-import {
-  CryptoCurrencies,
-  Currency,
-} from 'web-components/src/components/DenomIconWithCurrency/DenomIconWithCurrency.constants';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
-export type PaymentOptionsType = 'card' | 'crypto';
+import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+
+import { AllowedDenoms } from '../DenomLabel/DenomLabel.utils';
+
+export type Currency = {
+  askBaseDenom: string;
+  askDenom: string;
+};
 export interface CreditsAmountProps {
-  creditDetails: CreditDetails[];
   paymentOption: PaymentOptionsType;
-  currency: Currency;
-  setCurrency: (currency: Currency) => void;
-  setSpendingCap: (spendingCap: number) => void;
+  spendingCap: number;
+  setSpendingCap: UseStateSetter<number>;
   creditsAvailable: number;
-  setCreditsAvailable: (creditsAvailable: number) => void;
-  creditVintages: CreditsVintages[];
+  setCreditsAvailable: UseStateSetter<number>;
+  filteredCryptoSellOrders: Array<UISellOrderInfo> | undefined;
+  cardSellOrders: Array<CardSellOrder>;
+  cryptoCurrencies: Currency[];
+  allowedDenoms?: AllowedDenoms;
+  creditTypePrecision?: number | null;
+  currency: Currency;
 }
 
 export interface CreditsInputProps {
   creditsAvailable: number;
   handleCreditsAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  paymentOption: PaymentOptionsType;
 }
 
 export interface CurrencyInputProps {
   maxCurrencyAmount: number;
   paymentOption: PaymentOptionsType;
-  handleCurrencyChange: (currency: CryptoCurrencies | string) => void;
-  defaultCryptoCurrency: CryptoCurrencies;
-  creditDetails: CreditDetails[];
-  currency: Currency;
-  setCurrency: (currency: Currency) => void;
   selectPlaceholderAriaLabel: string;
   selectAriaLabel: string;
+  handleCurrencyAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  cryptoCurrencies: Currency[];
+  allowedDenoms?: AllowedDenoms;
+  displayDenom: string;
 }

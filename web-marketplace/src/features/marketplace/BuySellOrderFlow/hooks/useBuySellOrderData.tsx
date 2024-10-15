@@ -11,6 +11,7 @@ type Props = {
 type ReponseType = {
   isBuyFlowDisabled: boolean;
   projectsWithOrderData: ProjectWithOrderData[];
+  loadingBuySellOrders: boolean;
 };
 
 export const useBuySellOrderData = ({
@@ -29,12 +30,14 @@ export const useBuySellOrderData = ({
   const sellOrdersAvailable = projectsWithOrderData[0]?.sellOrders.filter(
     sellOrder => sellOrder.seller !== wallet?.address,
   );
+
   const isBuyFlowDisabled =
     loadingProjects ||
     projectsWithOrderData?.length === 0 ||
     sellOrdersAvailable?.length === 0;
 
   return {
+    loadingBuySellOrders: loadingProjects,
     isBuyFlowDisabled,
     projectsWithOrderData,
   };

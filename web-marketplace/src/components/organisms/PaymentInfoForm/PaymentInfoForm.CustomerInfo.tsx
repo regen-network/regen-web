@@ -10,14 +10,16 @@ import { Body, Title } from 'web-components/src/components/typography';
 
 import { Wallet } from 'lib/wallet/wallet';
 
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
+
 import { PaymentInfoFormSchemaType } from './PaymentInfoForm.schema';
-import { PaymentOptionsType } from './PaymentInfoForm.types';
 
 export type CustomerInfoProps = {
   paymentOption: PaymentOptionsType;
   wallet?: Wallet;
   accountId?: string;
-  accountEmail?: string;
+  accountEmail?: string | null;
   accountName?: string;
   login: () => void;
   retiring: boolean;
@@ -48,7 +50,7 @@ export const CustomerInfo = ({
         <Title variant="h6">
           <Trans>Customer info</Trans>
         </Title>
-        {!accountId && !wallet && (
+        {!accountId && !wallet?.address && (
           <OutlinedButton onClick={login} className="text-xs py-[9px] px-20">
             <Trans>log in for faster checkout</Trans>
           </OutlinedButton>
@@ -67,10 +69,10 @@ export const CustomerInfo = ({
         />
       )}
       <TextField
-        className={!accountId && !wallet ? 'mb-30' : ''}
+        className={!accountId && !wallet?.address ? 'mb-30' : ''}
         label={_(msg`Your email`)}
         description={
-          !!wallet && !accountEmail ? (
+          !!wallet?.address && !accountEmail ? (
             <Trans>
               Input an email address to receive a receipt of your purchase.
               <i>
@@ -79,7 +81,7 @@ export const CustomerInfo = ({
                 optional.
               </i>
             </Trans>
-          ) : paymentOption === 'card' ? (
+          ) : paymentOption === PAYMENT_OPTIONS.CARD ? (
             _(
               msg`We need an email address to send you a receipt of your purchase.`,
             )
@@ -93,9 +95,9 @@ export const CustomerInfo = ({
         error={!!errors['email']}
         helperText={errors['email']?.message}
         disabled={!!accountEmail}
-        optional={!!wallet}
+        optional={!!wallet?.address}
       />
-      {!accountId && !wallet && (
+      {!accountId && !wallet?.address && (
         <CheckboxLabel
           checked={createAccount}
           label={

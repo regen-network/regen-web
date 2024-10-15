@@ -22,6 +22,7 @@ export const useBuySellOrderData = ({
       projectId,
       classId,
       enableOffchainProjectsQuery: false,
+      useCommunityProjects: true,
     });
 
   const isBuyFlowDisabled =

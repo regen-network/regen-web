@@ -352,6 +352,7 @@ export function useProjectsWithOrders({
       isLoadingProjects ||
       isLoadingProjectsByClass ||
       isLoadingSellOrders ||
+      !marketplaceClient ||
       isLoadingSanityCreditClasses ||
       isLoadingPrefinanceProjects ||
       sanityProjectsLoading ||

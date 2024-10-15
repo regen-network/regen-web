@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { Box } from '@mui/material';
@@ -11,9 +10,8 @@ import {
   Scalars,
 } from 'generated/sanity-graphql';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import { useFeaturedProjects } from './hooks/useFeaturedProjects';
 
@@ -32,9 +30,8 @@ export function FeaturedProjects({
     String(project?.projectId),
   );
   const { featuredProjects, loading } = useFeaturedProjects({ pinnedIds });
-  const [selectedProject, setSelectedProject] =
-    useState<ProjectWithOrderData | null>(null);
-  const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
+  const onBuyButtonClick = useOnBuyButtonClick();
+
   return (
     <div id="projects">
       <ProjectCardsSection
@@ -42,8 +39,11 @@ export function FeaturedProjects({
         body={body}
         projects={featuredProjects}
         onButtonClick={({ project }) => {
-          setSelectedProject(project);
-          setIsBuyFlowStarted(true);
+          onBuyButtonClick({
+            projectId: project?.id,
+            cardSellOrders: project?.cardSellOrders,
+            loading,
+          });
         }}
         loading={loading}
       />
@@ -54,11 +54,6 @@ export function FeaturedProjects({
           </ContainedButton>
         </Link>
       </Box>
-      <BuySellOrderFlow
-        isFlowStarted={isBuyFlowStarted}
-        setIsFlowStarted={setIsBuyFlowStarted}
-        projects={selectedProject && [selectedProject]}
-      />
     </div>
   );
 }

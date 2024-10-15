@@ -1,17 +1,21 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 
+import {
+  getProjectCardBodyTextMapping,
+  getProjectCardButtonMapping,
+  getProjectCardPurchaseDetailsTitleMapping,
+} from 'lib/constants/shared.constants';
 import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import WithLoader from 'components/atoms/WithLoader';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import { useProfileData } from '../hooks/useProfileData';
 import { getDefaultProject } from './ProjectsTab.constants';
@@ -29,9 +33,13 @@ const ProjectsTab = (): JSX.Element => {
     adminAddress: address,
   });
 
-  const [selectedProject, setSelectedProject] =
-    useState<ProjectWithOrderData | null>(null);
-  const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
+  const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
+  const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
+  const purchaseDetailsTitles = useMemo(
+    () => getProjectCardPurchaseDetailsTitleMapping(_),
+    [_],
+  );
+  const onBuyButtonClick = useOnBuyButtonClick();
 
   return (
     <>
@@ -42,29 +50,28 @@ const ProjectsTab = (): JSX.Element => {
               <WithLoader isLoading={isLoadingAdminProjects} variant="skeleton">
                 <ProjectCard
                   {...defaultProject}
-                  {...(project as ProjectWithOrderData)}
+                  {...project}
                   onClick={() => project.href && navigate(project.href)}
                   track={track}
                   pathname={location.pathname}
                   imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                   apiServerUrl={API_URI}
                   onButtonClick={() => {
-                    setSelectedProject(project as ProjectWithOrderData);
-                    setIsBuyFlowStarted(true);
+                    onBuyButtonClick({
+                      projectId: project?.id,
+                      cardSellOrders: project?.cardSellOrders,
+                      loading: isLoadingAdminProjects,
+                    });
                   }}
+                  buttons={buttons}
+                  bodyTexts={bodyTexts}
+                  purchaseDetailsTitles={purchaseDetailsTitles}
                 />
               </WithLoader>
             </Grid>
           );
         })}
       </Grid>
-      <BuySellOrderFlow
-        isFlowStarted={isBuyFlowStarted}
-        setIsFlowStarted={setIsBuyFlowStarted}
-        projects={selectedProject && [selectedProject]}
-        track={track}
-        location={location}
-      />
     </>
   );
 };

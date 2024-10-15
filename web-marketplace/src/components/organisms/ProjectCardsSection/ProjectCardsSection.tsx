@@ -16,6 +16,7 @@ import {
   getProjectCardButtonMapping,
   getProjectCardPurchaseDetailsTitleMapping,
 } from 'lib/constants/shared.constants';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -31,7 +32,7 @@ import { useSectionStyles } from './ProjectCardsSection.styles';
 import { ProjectCardOnButtonClickParams } from './ProjectCardsSection.types';
 
 interface Props {
-  projects: ProjectWithOrderData[];
+  projects: NormalizeProject[];
   title?: string;
   body?: Maybe<Scalars['JSON']>;
   titleAlign?: 'center' | 'left';

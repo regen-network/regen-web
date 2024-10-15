@@ -18,8 +18,14 @@ const OutlinedButton = styled(Button)<OutlinedButtonProps>(
         ? 'linear-gradient(201.8deg, #636464, #636464)'
         : 'linear-gradient(201.8deg, #4FB573, #B9E1C7)',
     '&:hover': {
-      backgroundColor: theme.palette.secondary.light,
-      borderColor: theme.palette.secondary.light,
+      backgroundColor:
+        colorScheme === 'terrasos' ? '#636464' : theme.palette.secondary.light,
+      color:
+        colorScheme === 'terrasos'
+          ? theme.palette.primary.main
+          : theme.palette.secondary.main,
+      borderColor:
+        colorScheme === 'terrasos' ? '#636464' : theme.palette.secondary.light,
       borderImageSource: 'none',
     },
     '&:disabled': {

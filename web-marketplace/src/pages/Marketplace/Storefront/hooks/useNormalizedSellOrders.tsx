@@ -15,7 +15,6 @@ import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQ
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-import { useFetchSellOrders } from 'features/marketplace/BuySellOrderFlow/hooks/useFetchSellOrders';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
@@ -26,6 +25,7 @@ import {
   normalizeSellOrders,
 } from '../Storefront.normalizer';
 import { NormalizedSellOrder } from '../Storefront.types';
+import { useFetchSellOrders } from './useFetchSellOrders';
 import { useSortedSellOrders } from './useSortedSellOrders';
 
 type ResponseType = {

@@ -36,7 +36,7 @@ export const DashboardBannerCard = ({ sanityProfilePageData }: Props) => {
             }}
             buttonLabel={content.buttonLabel as string}
             onClick={() => {
-              navigate('/profile/edit/profile');
+              navigate('/dashboard/admin/profile');
             }}
             onClose={() => {
               setProfileBannerCard({

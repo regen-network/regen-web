@@ -22,37 +22,37 @@ export const SEPARATOR = {
 
 export const PORTFOLIO = {
   label: msg`Portfolio`,
-  href: '/profile/portfolio',
+  href: '/dashboard/portfolio',
   icon: <CreditsIcon fontSize="small" linearGradient />,
   className,
 };
 export const PROJECTS = {
   label: msg`Projects`,
-  href: '/profile/projects',
+  href: '/dashboard/projects',
   icon: <ProjectPageIcon linearGradient />,
   className,
 };
 export const CREDIT_CLASSES = {
   label: msg`Credit Classes`,
-  href: '/profile/credit-classes',
+  href: '/dashboard/credit-classes',
   icon: <CreditClassIcon linearGradient />,
   className,
 };
 export const CREDIT_BATCHES = {
   label: msg`Credit Batches`,
-  href: '/profile/credit-batches',
+  href: '/dashboard/credit-batches',
   icon: <CreditBatchIcon linearGradient />,
   className,
 };
 export const BRIDGE = {
   label: msg`Bridge`,
-  href: '/profile/bridge',
+  href: '/dashboard/bridge',
   icon: <BridgeIcon linearGradient />,
   className,
 };
 export const EDIT_PROFILE = {
   label: msg`Edit profile`,
-  href: '/profile/edit/profile',
+  href: '/dashboard/admin/profile',
   icon: <EditIcon className="w-[24px] h-[24px] text-[18px]" linearGradient />,
   labelClassName,
   className,
@@ -60,7 +60,7 @@ export const EDIT_PROFILE = {
 };
 export const PROFILE_SETTINGS = {
   label: msg`Settings`,
-  href: '/profile/edit/settings',
+  href: '/dashboard/admin/settings',
   icon: <CogIcon linearGradient />,
   labelClassName,
   className,

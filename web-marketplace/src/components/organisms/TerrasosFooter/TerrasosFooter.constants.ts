@@ -6,7 +6,7 @@ import YoutubeIcon from 'web-components/src/components/icons/social/YoutubeIcon'
 
 import { TerrasosSocialItem } from './Terrasos.types';
 
-export const TerrasosFooterSocialItems: TerrasosSocialItem[] = [
+export const terrasosFooterSocialItems: TerrasosSocialItem[] = [
   {
     name: 'Twitter',
     href: 'https://x.com/TerrasosCo',

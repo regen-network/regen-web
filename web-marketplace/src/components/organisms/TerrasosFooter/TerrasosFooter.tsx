@@ -21,7 +21,7 @@ export const TerrasosFooter = ({
   return (
     <div
       className={cn(
-        'flex flex-col items-end w-full sm:p-[18px_50px_100px_50px] sm:gap-[11px] bg-brand-400 text-bc-neutral-700 p-[18px_50px_40px_10px] gap-[10px]',
+        'flex flex-col items-end w-full sm:p-[18px_50px_100px_50px] sm:gap-[11px] bg-brand-300 text-bc-neutral-700 p-[18px_50px_40px_10px] gap-[10px]',
         className,
       )}
     >

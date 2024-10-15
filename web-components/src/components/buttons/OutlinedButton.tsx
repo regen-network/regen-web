@@ -1,9 +1,11 @@
 import { styled } from '@mui/material';
 import Button, { ButtonProps } from '@mui/material/Button';
 
-import { ColorScheme } from 'src/theme/theme.types';
+import { ColorScheme } from '../../theme/theme.types';
 
-type OutlinedButtonProps = ButtonProps & { colorScheme: ColorScheme };
+interface OutlinedButtonProps extends ButtonProps {
+  colorScheme?: ColorScheme;
+}
 
 const OutlinedButton = styled(Button)<OutlinedButtonProps>(
   ({ theme, colorScheme = 'regen' }) => ({
@@ -36,5 +38,4 @@ const OutlinedButton = styled(Button)<OutlinedButtonProps>(
     },
   }),
 );
-
-export default OutlinedButton;
+export default OutlinedButton as typeof Button;

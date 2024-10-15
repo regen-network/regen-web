@@ -1,7 +1,6 @@
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import { ColorScheme } from 'src/theme/theme.types';
-
+import { ColorScheme } from '../../theme/theme.types';
 import { ProjectCardBodyTextsMapping } from '../cards/ProjectCard/ProjectCard.types';
 import { PrefinanceIcon } from '../icons/PrefinanceIcon';
 import { Label } from '../typography';
@@ -16,7 +15,7 @@ export const PrefinanceTag = ({
     width: '18',
     height: '19',
   },
-  colorScheme,
+  colorScheme = 'regen',
 }: {
   bodyTexts: Pick<ProjectCardBodyTextsMapping, 'prefinance'>;
   classNames?: { root?: string; label?: string };
@@ -24,7 +23,7 @@ export const PrefinanceTag = ({
     width: string;
     height: string;
   };
-  colorScheme: ColorScheme;
+  colorScheme?: ColorScheme;
 }) => (
   <div
     className={cn(

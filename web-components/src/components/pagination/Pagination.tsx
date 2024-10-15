@@ -5,10 +5,9 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { ColorScheme } from 'src/theme/theme.types';
-import { cn } from 'src/utils/styles/cn';
-
 import { Theme } from '../../theme/muiTheme';
+import { ColorScheme } from '../../theme/theme.types';
+import { cn } from '../../utils/styles/cn';
 import ArrowLeftIcon from '../icons/ArrowLeft';
 import ArrowRightIcon from '../icons/ArrowRight';
 import ArrowSkipLeftIcon from '../icons/ArrowSkipLeft';

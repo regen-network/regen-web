@@ -2,9 +2,8 @@ import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { Box, styled, SxProps } from '@mui/material';
 import Tabs, { TabsProps } from '@mui/material/Tabs';
 
-import { ColorScheme } from 'src/theme/theme.types';
-
 import type { Theme } from '../../theme/muiTheme';
+import { ColorScheme } from '../../theme/theme.types';
 import { LinkItem } from '../footer/footer-new';
 import { TextSize } from '../typography/sizing';
 import { a11yProps } from './';
@@ -32,7 +31,7 @@ interface IconTabsProps {
       inner?: SxProps<Theme>;
     };
   };
-  colorScheme: ColorScheme;
+  colorScheme?: ColorScheme;
   hideIndicator?: boolean;
   mobileFullWidth?: boolean;
   className?: string;
@@ -78,7 +77,7 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
   size,
   sxs,
   linkComponent,
-  colorScheme,
+  colorScheme = 'regen',
   hideIndicator = false,
   mobileFullWidth = false,
   className,

@@ -77,6 +77,7 @@ export const SideFilter = ({
 
   return (
     <>
+      {/* @ts-ignore */}
       <OutlinedButton
         size="small"
         onClick={() => setIsOpen(true)}

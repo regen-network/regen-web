@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
@@ -39,8 +39,8 @@ import {
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
 import { TebuBannerWrapper } from 'components/organisms/TebuBannerWrapper/TebuBannerWrapper';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import { useFetchCreditClasses } from '../hooks/useFetchCreditClasses';
 import { useProjectsContext } from '../Projects.context';
@@ -55,7 +55,6 @@ import {
 } from './AllProjects.constants';
 import { normalizeCreditClassFilters } from './AllProjects.normalizers';
 import { SideFilter } from './AllProjects.SideFilter';
-import { ProjectWithOrderData } from './AllProjects.types';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
 import { getIsSoldOut } from './utils/getIsSoldOut';
 
@@ -66,7 +65,6 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { track } = useTracker();
-  const location = useLocation();
   const config = getClientConfig();
 
   const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
@@ -96,8 +94,6 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   );
 
   const [sort, setSort] = useAtom(projectsSortAtom);
-  const [selectedProject, setSelectedProject] =
-    useState<ProjectWithOrderData | null>(null);
 
   const {
     allProjects,
@@ -107,6 +103,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     hasCommunityProjects,
     pagesCount,
     soldOutProjectsIds,
+    loading,
   } = useProjectsContext();
 
   const { creditClassFilters } = normalizeCreditClassFilters({
@@ -150,7 +147,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     setCreditClassSelectedFilters,
   ]);
 
-  const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
+  const onBuyButtonClick = useOnBuyButtonClick();
 
   const handleSort = (event: SelectChangeEvent<unknown>): void => {
     setSort(event.target.value as string);
@@ -242,8 +239,11 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                 IS_TERRASOS
                   ? undefined
                   : () => {
-                      setSelectedProject(project);
-                      setIsBuyFlowStarted(true);
+                      onBuyButtonClick({
+                        projectId: project?.id,
+                        cardSellOrders: project?.cardSellOrders,
+                        loading,
+                      });
                     }
               }
               purchaseInfo={project.purchaseInfo || {}}
@@ -305,15 +305,6 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           colorScheme={COLOR_SCHEME}
         />
       </Flex>
-      {config.buySellOrderFlow && (
-        <BuySellOrderFlow
-          isFlowStarted={isBuyFlowStarted}
-          setIsFlowStarted={setIsBuyFlowStarted}
-          projects={selectedProject && [selectedProject]}
-          track={track}
-          location={location}
-        />
-      )}
     </>
   );
 };

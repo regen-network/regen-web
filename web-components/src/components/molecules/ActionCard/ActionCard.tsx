@@ -32,7 +32,7 @@ const ActionCard = ({
   sx = [],
 }: Props): JSX.Element => {
   const isColumn = variant === 'column';
-  console.log('note', note);
+
   return (
     <Box
       sx={[

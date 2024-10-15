@@ -102,7 +102,7 @@ export const BuyCredits = () => {
             paymentOption={paymentOption}
             retiring={retiring}
             setRetiring={setRetiring}
-            cardSellOrders={cardSellOrders as CardSellOrder[]}
+            cardSellOrders={cardSellOrders}
             cryptoSellOrders={sellOrders}
             creditTypeAbbrev={creditClassOnChain?.class?.creditTypeAbbrev}
             projectHref={`/project/${

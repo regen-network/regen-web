@@ -108,8 +108,8 @@ export const useGetProject = () => {
     }),
   );
 
-  const sellOrders = projectsWithOrderData?.[0]?.filteredSellOrders;
-  const cardSellOrders = projectsWithOrderData?.[0]?.cardSellOrders;
+  const sellOrders = projectsWithOrderData?.[0]?.filteredSellOrders || [];
+  const cardSellOrders = projectsWithOrderData?.[0]?.cardSellOrders || [];
 
   const slug =
     offchainProjectByIdData?.data?.projectById?.slug ||

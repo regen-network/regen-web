@@ -80,7 +80,7 @@ export const ProfileEdit = () => {
             alignItems: 'center',
           }}
           className={cn(
-            'w-full lg:w-[850px] ml-10 xl:ml-30',
+            'w-full lg:w-[850px] md:ml-10 xl:ml-30',
             section ? 'flex' : 'hidden',
           )}
         >

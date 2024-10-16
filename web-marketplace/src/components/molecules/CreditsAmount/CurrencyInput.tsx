@@ -149,7 +149,7 @@ export const CurrencyInput = ({
               onSelect={onHandleCurrencyChange}
               placeholderAriaLabel={selectPlaceholderAriaLabel}
               selectAriaLabel={selectAriaLabel}
-              defaultOption={currency.askDenom}
+              defaultOption={currency?.askDenom}
             />
           )
         }

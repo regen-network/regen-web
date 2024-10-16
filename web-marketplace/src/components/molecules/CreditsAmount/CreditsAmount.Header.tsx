@@ -35,7 +35,7 @@ export function CreditsAmountHeader({
       <Title variant="h2" className="text-lg font-black">
         <Trans>Amount</Trans>
       </Title>
-      <div className="flex flex-grow justify-end items-center font-['Lato'] text-base">
+      <div className="flex flex-grow justify-end items-center font-sans text-base">
         <div className="text-sm sm:text-base pr-5 flex flex-col items-end sm:flex-row sm:items-center h-[55px]">
           <span
             className={`${
@@ -44,9 +44,7 @@ export function CreditsAmountHeader({
                 : 'pt-[7px] sm:pt-0'
             }`}
           >
-            <span className="font-bold font-['Lato'] mr-5">
-              {creditsAvailable}
-            </span>
+            <span className="font-bold font-sans mr-5">{creditsAvailable}</span>
             <Trans>credits available</Trans>
           </span>
           {paymentOption === PAYMENT_OPTIONS.CRYPTO && (

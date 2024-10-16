@@ -40,7 +40,7 @@ export function AdvanceSettings({
           <div
             className={`${
               advanceSettingsOpen ? 'max-h-[400px] sm:max-h-[350px]' : 'max-h-0'
-            } flex flex-grow justify-end items-center font-['Lato'] text-base flex-col mt-4 overflow-hidden transition-all duration-500 ease-in-out max-h-0`}
+            } flex flex-grow justify-end items-center font-sans text-base flex-col mt-4 overflow-hidden transition-all duration-500 ease-in-out max-h-0`}
           >
             <p className="self-start text-sm ">
               <Trans>Choose specific credit vintages</Trans>{' '}

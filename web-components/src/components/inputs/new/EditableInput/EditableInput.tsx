@@ -44,7 +44,9 @@ export const EditableInput = ({
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const newValue = +e.target.value;
+    const value = e.target.value;
+    const newValue = +value;
+
     if (isNaN(newValue)) return;
     if (newValue > maxValue && onInvalidValue) {
       onInvalidValue();
@@ -66,7 +68,10 @@ export const EditableInput = ({
     }
   };
 
-  const amountValid = useMemo(() => amount <= maxValue, [amount, maxValue]);
+  const amountValid = useMemo(
+    () => amount <= maxValue && amount > 0,
+    [amount, maxValue],
+  );
 
   return (
     <>
@@ -76,9 +81,10 @@ export const EditableInput = ({
         >
           <input
             type="number"
+            step="0.000001"
             min={0}
             max={maxValue}
-            className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none min-w-60 max-w-[80px] h-30 py-20 px-10 border border-gray-300 text-base font-normal font-['Lato']"
+            className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-50 py-20 px-15 w-[62px] border border-solid border-grey-300 text-base font-normal font-sans focus:outline-none"
             value={amount}
             onChange={handleOnChange}
             onKeyDown={handleKeyDown}

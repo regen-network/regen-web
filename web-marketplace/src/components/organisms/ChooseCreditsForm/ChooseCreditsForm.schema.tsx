@@ -8,6 +8,8 @@ import {
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 import { z } from 'zod';
 
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+
 import {
   MAX_AMOUNT,
   MAX_CREDITS,
@@ -19,10 +21,12 @@ export const createChooseCreditsFormSchema = ({
   creditsAvailable,
   spendingCap,
   userBalance,
+  paymentOption,
 }: {
   creditsAvailable: number;
   spendingCap: number;
   userBalance: number;
+  paymentOption: string;
 }) => {
   return z.object({
     [CURRENCY_AMOUNT]: z.coerce
@@ -35,7 +39,12 @@ export const createChooseCreditsFormSchema = ({
           maximumFractionDigits: 2,
         })}`,
       )
-      .max(userBalance, `${i18n._(NOT_ENOUGH_BALANCE)}`),
+      .refine(
+        value => paymentOption === PAYMENT_OPTIONS.CARD || userBalance > value,
+        {
+          message: `${i18n._(NOT_ENOUGH_BALANCE)}`,
+        },
+      ),
     [CREDITS_AMOUNT]: z.coerce
       .number()
       .positive(i18n._(POSITIVE_NUMBER))

@@ -39,6 +39,7 @@ const CreditsWithForm = (args: CreditsAmountProps) => {
       creditsAvailable,
       spendingCap,
       userBalance: 1000,
+      paymentOption: args.paymentOption,
     }),
     defaultValues: {
       [CURRENCY_AMOUNT]: 1,

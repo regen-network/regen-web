@@ -121,7 +121,7 @@ export const BridgeFlow = ({
 
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
-    navigate('/profile/bridge/bridged');
+    navigate('/dashboard/bridge/bridged');
   };
 
   const accountAddress = wallet?.address;

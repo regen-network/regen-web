@@ -12,7 +12,7 @@ export const useProjectSaveAndExit = () => {
       await formRef?.current?.submitForm(true);
       shouldNavigateRef.current = true;
     }
-    navigate('/profile/projects');
+    navigate('/dashboard/projects');
   };
 
   return saveAndExit;

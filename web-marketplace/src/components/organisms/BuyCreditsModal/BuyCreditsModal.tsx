@@ -144,7 +144,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
       getBuyModalQuery({ sanityClient: client }),
     );
 
-    const userBalance = useFetchUserBalance({ selectedSellOrder });
+    const { userBalance } = useFetchUserBalance(selectedSellOrder?.askAmount);
     useRefreshUserBalance({ open });
 
     const validationHandler = (

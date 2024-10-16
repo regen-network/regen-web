@@ -39,7 +39,7 @@ export const BuyCredits = () => {
   } = useGetProject();
 
   const [paymentOption, setPaymentOption] = useState<PaymentOptionsType>(
-    PAYMENT_OPTIONS.CRYPTO,
+    PAYMENT_OPTIONS.CARD,
   );
   const { wallet, loaded } = useWallet();
 

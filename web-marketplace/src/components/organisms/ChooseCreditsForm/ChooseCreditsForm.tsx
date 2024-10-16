@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
@@ -18,12 +18,15 @@ import { Loading } from 'web-components/src/components/loading';
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import { microToDenom } from 'lib/denom.utils';
+
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { AllowedDenoms } from 'components/molecules/DenomLabel/DenomLabel.utils';
 
+import { useFetchUserBalance } from '../BuyCreditsModal/hooks/useFetchUserBalance';
 import { CryptoOptions } from './ChooseCreditsForm.CryptoOptions';
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
 import {
@@ -99,11 +102,14 @@ export function ChooseCreditsForm({
 
   const [spendingCap, setSpendingCap] = useState(0);
   const [creditsAvailable, setCreditsAvailable] = useState(0);
+  const [userBalance, setUserBalance] = useState(0);
 
   const form = useZodForm({
     schema: createChooseCreditsFormSchema({
       creditsAvailable,
       spendingCap,
+      userBalance,
+      paymentOption,
     }),
     defaultValues: {
       [CURRENCY_AMOUNT]: initialValues?.[CURRENCY_AMOUNT] || 0,
@@ -127,6 +133,17 @@ export function ChooseCreditsForm({
     name: CURRENCY,
   });
 
+  const { isLoading, userBalance: microUserBalance } = useFetchUserBalance(
+    currency?.askDenom,
+  );
+
+  useEffect(() => {
+    if (microUserBalance) {
+      const _userBalance = microToDenom(microUserBalance);
+      setUserBalance(_userBalance);
+    }
+  }, [microUserBalance, userBalance]);
+
   const filteredCryptoSellOrders = useMemo(
     () =>
       getFilteredCryptoSellOrders({
@@ -144,11 +161,14 @@ export function ChooseCreditsForm({
   const handlePaymentOptions = useCallback(
     (option: string) => {
       setPaymentOption(option as PaymentOptionsType);
-      form.setValue(CREDIT_VINTAGE_OPTIONS, []);
-      form.setValue(
-        CURRENCY,
-        option === PAYMENT_OPTIONS.CARD ? cardCurrency : defaultCryptoCurrency,
-      );
+      form.reset({
+        ...form.getValues(),
+        [CREDIT_VINTAGE_OPTIONS]: [],
+        [CURRENCY]:
+          option === PAYMENT_OPTIONS.CARD
+            ? cardCurrency
+            : defaultCryptoCurrency,
+      });
     },
     [setPaymentOption, form, cardCurrency, defaultCryptoCurrency],
   );
@@ -205,56 +225,60 @@ export function ChooseCreditsForm({
   // }, []);
 
   return (
-    <Suspense fallback={<Loading />}>
-      <Form form={form} onSubmit={onSubmit} data-testid="choose-credits-form">
-        <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300 sm:w-[560px]">
-          <PaymentOptions
-            paymentOption={paymentOption}
-            setPaymentOption={handlePaymentOptions}
-            cardDisabled={cardDisabled}
-            isConnected={isConnected}
-            setupWalletModal={setupWalletModal}
-          />
-          {currency && (
-            <CreditsAmount
+    <Form form={form} onSubmit={onSubmit} data-testid="choose-credits-form">
+      <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300 sm:w-[560px]">
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <PaymentOptions
               paymentOption={paymentOption}
-              spendingCap={spendingCap}
-              setSpendingCap={setSpendingCap}
-              creditsAvailable={creditsAvailable}
-              setCreditsAvailable={setCreditsAvailable}
-              filteredCryptoSellOrders={filteredCryptoSellOrders}
-              cardSellOrders={cardSellOrders}
-              cryptoCurrencies={cryptoCurrencies}
-              allowedDenoms={allowedDenoms}
-              creditTypePrecision={creditTypePrecision}
-              currency={currency}
+              setPaymentOption={handlePaymentOptions}
+              cardDisabled={cardDisabled}
+              isConnected={isConnected}
+              setupWalletModal={setupWalletModal}
             />
-          )}
-          {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
-            <CryptoOptions
-              retiring={retiring}
-              handleCryptoPurchaseOptions={handleCryptoPurchaseOptions}
-              tradableDisabled={cryptoSellOrders.every(
-                order => order.disableAutoRetire === false,
-              )}
-            />
-          )}
-          {/* Advanced settings not enabled for MVP */}
-          {/* <AdvanceSettings
-            creditVintages={creditVintages}
-            advanceSettingsOpen={advanceSettingsOpen}
-            toggleAdvancedSettings={toggleAdvancedSettings}
-            handleCreditVintageOptions={handleCreditVintageOptions}
-          /> */}
-        </Card>
-        <div className="float-right pt-40">
-          <PrevNextButtons
-            saveDisabled={!isValid || isSubmitting}
-            saveText={_(NEXT)}
-            onPrev={onPrev}
-          />
-        </div>
-      </Form>
-    </Suspense>
+            {currency && (
+              <CreditsAmount
+                paymentOption={paymentOption}
+                spendingCap={spendingCap}
+                setSpendingCap={setSpendingCap}
+                creditsAvailable={creditsAvailable}
+                setCreditsAvailable={setCreditsAvailable}
+                filteredCryptoSellOrders={filteredCryptoSellOrders}
+                cardSellOrders={cardSellOrders}
+                cryptoCurrencies={cryptoCurrencies}
+                allowedDenoms={allowedDenoms}
+                creditTypePrecision={creditTypePrecision}
+                currency={currency}
+              />
+            )}
+            {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
+              <CryptoOptions
+                retiring={retiring}
+                handleCryptoPurchaseOptions={handleCryptoPurchaseOptions}
+                tradableDisabled={cryptoSellOrders.every(
+                  order => order.disableAutoRetire === false,
+                )}
+              />
+            )}
+            {/* Advanced settings not enabled for MVP */}
+            {/* <AdvanceSettings
+              creditVintages={creditVintages}
+              advanceSettingsOpen={advanceSettingsOpen}
+              toggleAdvancedSettings={toggleAdvancedSettings}
+              handleCreditVintageOptions={handleCreditVintageOptions}
+            /> */}
+          </>
+        )}
+      </Card>
+      <div className="float-right pt-40">
+        <PrevNextButtons
+          saveDisabled={!isValid || isSubmitting || isLoading}
+          saveText={_(NEXT)}
+          onPrev={onPrev}
+        />
+      </div>
+    </Form>
   );
 }

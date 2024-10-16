@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
@@ -47,11 +47,15 @@ export function OrderSummaryContent({
 
   const { projectName, currency, pricePerCredit, credits } = order;
 
-  const displayDenom = findDisplayDenom({
-    allowedDenoms,
-    bankDenom: currency.askDenom,
-    baseDenom: currency.askBaseDenom,
-  });
+  const displayDenom = useMemo(
+    () =>
+      findDisplayDenom({
+        allowedDenoms,
+        bankDenom: currency.askDenom,
+        baseDenom: currency.askBaseDenom,
+      }),
+    [allowedDenoms, currency.askBaseDenom, currency.askDenom],
+  );
 
   return (
     <div className="grid grid-cols-[75px_1fr] sm:grid-cols-[90px_1fr] max-w-full w-full pr-15 sm:px-[20px] pb-[30px] items-center sm:max-w-[330px]">

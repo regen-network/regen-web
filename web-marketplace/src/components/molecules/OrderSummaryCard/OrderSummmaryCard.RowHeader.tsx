@@ -10,7 +10,7 @@ export function OrderSummmaryRowHeader({
   return (
     <Title
       variant="h6"
-      className={`text-grey-400 text-[11px] font-extrabold font-['Lato'] uppercase tracking-[1px] m-0 ${className}`}
+      className={`text-grey-400 text-[11px] font-extrabold font-sans uppercase tracking-[1px] m-0 ${className}`}
     >
       {text}
     </Title>

@@ -65,7 +65,7 @@ export function OrderSummaryContent({
         text={_(msg`project`)}
         className="self-start mt-5"
       />
-      <p className="text-[14px] sm:text-base sm:font-normal font-['Lato'] self-start m-0">
+      <p className="text-[14px] sm:text-base sm:font-normal font-sans self-start m-0">
         {projectName}
       </p>
       <OrderSummmaryRowHeader text={_(msg`avg price per credit`)} />
@@ -86,7 +86,7 @@ export function OrderSummaryContent({
         />
       </div>
       <OrderSummmaryRowHeader text={_(msg`# credits`)} className="pt-5" />
-      <div className="text-base font-normal font-['Lato'] text-[14px] sm:text-base">
+      <div className="text-base font-normal font-sans text-[14px] sm:text-base">
         <EditableInput
           value={credits}
           maxValue={creditsAvailable}
@@ -98,7 +98,7 @@ export function OrderSummaryContent({
           onInvalidValue={onInvalidCredits}
         />
       </div>
-      <div className="col-span-full">
+      <div className="col-span-full pt-10">
         <hr className="border-t border-grey-300 border-solid border-l-0 border-r-0 border-b-0" />
       </div>
       <div className="flex items-end col-span-full gap-5">
@@ -111,7 +111,7 @@ export function OrderSummaryContent({
             <SupCurrencyAndAmount
               price={order.currencyAmount}
               currencyCode={currency.askDenom}
-              className="font-bold font-['Lato'] sm:text-[22px] mr-10"
+              className="font-bold font-sans sm:text-[22px] mr-10"
             />
           </span>
           <DenomIconWithCurrency
@@ -130,7 +130,7 @@ export function OrderSummaryContent({
           <div className="flex items-center justify-between w-full">
             <p
               data-testid="payment-details"
-              className="font-['Lato'] text-[14px] md:text-base m-0"
+              className="font-sans text-[14px] md:text-base m-0"
             >
               <Trans>
                 <span className="capitalize">{cardDetails.brand}</span> ending

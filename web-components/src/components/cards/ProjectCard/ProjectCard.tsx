@@ -279,6 +279,7 @@ export function ProjectCard({
                     purchaseInfo={purchaseInfo}
                     sx={{ mb: 5 }}
                     projectPrefinancing={projectPrefinancing}
+                    colorScheme={colorScheme}
                   />
                 ) : (
                   <div className="h-[68px]">

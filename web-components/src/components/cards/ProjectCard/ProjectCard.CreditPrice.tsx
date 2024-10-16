@@ -4,7 +4,9 @@ import GradientBadge from '../../../components/gradient-badge';
 import InfoTooltipWithIcon from '../../../components/tooltip/InfoTooltipWithIcon';
 import { Body, Subtitle } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
+import { ColorScheme } from '../../../theme/theme.types';
 import { sxToArray } from '../../../utils/mui/sxToArray';
+import { cn } from '../../../utils/styles/cn';
 import {
   ProjectCardBodyTextsMapping,
   ProjectPrefinancing,
@@ -19,6 +21,7 @@ type Props = {
   sx?: SxProps<Theme>;
   projectPrefinancing?: ProjectPrefinancing;
   bodyTexts: ProjectCardBodyTextsMapping;
+  colorScheme?: ColorScheme;
 };
 
 export const CreditPrice = ({
@@ -28,10 +31,12 @@ export const CreditPrice = ({
   isSoldOut,
   projectPrefinancing,
   bodyTexts,
+  colorScheme = 'regen',
   sx,
 }: Props) => {
   const avgPricePerTonLabel = purchaseInfo?.sellInfo?.avgPricePerTonLabel;
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
+  const isTerrasos = colorScheme === 'terrasos';
 
   return (
     <Box
@@ -120,14 +125,22 @@ export const CreditPrice = ({
           }}
         >
           {isSoldOut && !isPrefinanceProject ? (
-            <GradientBadge label={bodyTexts.soldOut} />
+            <GradientBadge
+              className={cn(isTerrasos && 'text-ac-neutral-700')}
+              label={bodyTexts.soldOut}
+              variant={isTerrasos ? 'yellow' : 'green'}
+            />
           ) : (
             <>
               {purchaseInfo?.sellInfo?.creditsAvailable ??
                 projectPrefinancing?.estimatedIssuance ??
                 '0'}
               {isSoldOut && (
-                <GradientBadge className="ml-5" label={bodyTexts.soldOut} />
+                <GradientBadge
+                  className={cn('ml-5', isTerrasos && 'text-ac-neutral-700')}
+                  label={bodyTexts.soldOut}
+                  variant={isTerrasos ? 'yellow' : 'green'}
+                />
               )}
             </>
           )}

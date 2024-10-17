@@ -187,7 +187,6 @@ export function ProjectCard({
             root: 'top-20 left-0',
             label: 'text-[10px]',
           }}
-          colorScheme={colorScheme}
         />
       )}
       {comingSoon && (

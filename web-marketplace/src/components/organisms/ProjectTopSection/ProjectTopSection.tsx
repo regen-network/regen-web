@@ -21,6 +21,7 @@ import {
   SEE_MORE,
 } from 'lib/constants/shared.constants';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
+import { IS_REGEN } from 'lib/env';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllCreditCertificationQuery } from 'lib/queries/react-query/sanity/getAllCreditCertificationQuery/getAllCreditCertificationQuery';
 import { getAllCreditTypeQuery } from 'lib/queries/react-query/sanity/getAllCreditTypeQuery/getAllCreditTypeQuery';
@@ -314,7 +315,7 @@ function ProjectTopSection({
                 sx={{ mb: { xs: 7.5, sm: 10 } }}
               />
             )}
-            {otcCard && (
+            {otcCard && IS_REGEN && (
               <Box>
                 <ActionCard {...otcCard} variant="column" />
               </Box>

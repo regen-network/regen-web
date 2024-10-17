@@ -149,21 +149,21 @@ export const getUserMenuItems = ({
     {
       ...SEPARATOR,
     },
-    {
-      ...HEADING_MY_ORDERS,
-    },
-    {
-      pathname,
-      linkComponent,
-      ...MY_ORDERS,
-      label: _(MY_ORDERS.label),
-    },
-    {
-      pathname,
-      linkComponent,
-      ...MY_PREFINANCE_PROJECTS,
-      label: _(MY_PREFINANCE_PROJECTS.label),
-    },
+    // {
+    //   ...HEADING_MY_ORDERS,
+    // },
+    // {
+    //   pathname,
+    //   linkComponent,
+    //   ...MY_ORDERS,
+    //   label: _(MY_ORDERS.label),
+    // },
+    // {
+    //   pathname,
+    //   linkComponent,
+    //   ...MY_PREFINANCE_PROJECTS,
+    //   label: _(MY_PREFINANCE_PROJECTS.label),
+    // },
     savedPaymentInfo && {
       pathname,
       linkComponent,

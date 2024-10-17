@@ -33,6 +33,7 @@ import {
 import {
   COLOR_SCHEME,
   CREDIT_CLASS_FILTERS_TO_DESELECT,
+  IS_REGEN,
   IS_TERRASOS,
 } from 'lib/env';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
@@ -260,8 +261,8 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               draftText={_(DRAFT_TEXT)}
               bodyTexts={bodyTexts}
               purchaseDetailsTitles={purchaseDetailsTitles}
-              colorScheme={COLOR_SCHEME}
               buttons={buttons}
+              useProjectCardButton={IS_REGEN}
             />
           </Box>
         );

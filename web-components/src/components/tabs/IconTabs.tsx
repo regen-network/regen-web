@@ -3,7 +3,6 @@ import { Box, styled, SxProps } from '@mui/material';
 import Tabs, { TabsProps } from '@mui/material/Tabs';
 
 import type { Theme } from '../../theme/muiTheme';
-import { ColorScheme } from '../../theme/theme.types';
 import { LinkItem } from '../footer/footer-new';
 import { TextSize } from '../typography/sizing';
 import { a11yProps } from './';

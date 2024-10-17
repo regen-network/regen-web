@@ -67,7 +67,7 @@ export interface ProjectCardProps extends MediaCardProps {
   bodyTexts: ProjectCardBodyTextsMapping;
   purchaseDetailsTitles: ProjectCardTitlesMapping;
   buttons: ProjectCardButtonsMapping;
-  colorScheme?: ColorScheme;
+  useProjectCardButton?: boolean;
 }
 
 export function ProjectCard({
@@ -105,12 +105,11 @@ export function ProjectCard({
   bodyTexts,
   purchaseDetailsTitles,
   buttons,
-  colorScheme = 'regen',
+  useProjectCardButton = true,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const { classes } = useProjectCardStyles();
-  const isRegen = colorScheme === 'regen';
 
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
   const cardButton =
@@ -330,7 +329,7 @@ export function ProjectCard({
                       </ContainedButton>
                     ))}
                   {(hasButton || isPrefinanceProject || offChain) &&
-                    isRegen &&
+                    useProjectCardButton &&
                     (isButtonDisabled && createPostTooltipText ? (
                       <InfoTooltip
                         arrow

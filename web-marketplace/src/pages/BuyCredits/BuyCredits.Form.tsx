@@ -328,7 +328,7 @@ export const BuyCreditsForm = ({
         onModalClose={onModalClose}
         wallets={walletsUiConfig}
         modalState={modalState}
-        redirectRoute={`${projectHref}/buy`}
+        redirectRoute={`${projectHref.replace(/^\//, '')}/buy`}
       />
     </div>
   );

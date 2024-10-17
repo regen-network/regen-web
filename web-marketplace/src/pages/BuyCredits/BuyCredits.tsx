@@ -36,7 +36,7 @@ export const BuyCredits = () => {
   useNavigateToSlug(slug, '/buy');
 
   const [paymentOption, setPaymentOption] = useState<PaymentOptionsType>(
-    PAYMENT_OPTIONS.CARD,
+    PAYMENT_OPTIONS.CRYPTO,
   );
   const { wallet, loaded } = useWallet();
 

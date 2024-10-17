@@ -13,8 +13,8 @@ export const useSocialProviders = (redirectRoute?: string) => {
         await track<GoogleLoginEvent>('loginGoogle', {
           date: new Date().toUTCString(),
         });
-        window.location.href = `${apiUri}/marketplace/v1/auth/google
-        ${redirectRoute ? `?route=${redirectRoute}` : ''}`;
+        // prettier-ignore
+        window.location.href = `${apiUri}/marketplace/v1/auth/google${redirectRoute ? `?route=${redirectRoute}` : ''}`;
       },
     },
   ];

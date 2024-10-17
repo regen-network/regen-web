@@ -21,7 +21,7 @@ export const TerrasosFooter = ({
   return (
     <div
       className={cn(
-        'flex flex-col items-end w-full sm:p-[18px_50px_100px_50px] sm:gap-[11px] bg-brand-300 text-bc-neutral-700 p-[18px_50px_40px_10px] gap-[10px]',
+        'flex flex-col items-end w-full sm:p-[18px_50px_100px_50px] sm:gap-[11px] bg-brand-300 text-sc-button-text-icon-dark p-[18px_50px_40px_10px] gap-[10px]',
         className,
       )}
     >
@@ -40,7 +40,7 @@ export const TerrasosFooter = ({
             <Link href={item.href} key={item.name}>
               <item.Icon
                 className={cn(
-                  'w-30 h-30 p-[7px] rounded-[25px] bg-bc-neutral-700',
+                  'w-30 h-30 p-[7px] rounded-[25px] bg-sc-button-text-icon-dark',
                   item.className,
                 )}
               />

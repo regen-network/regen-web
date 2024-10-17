@@ -31,7 +31,6 @@ interface IconTabsProps {
       inner?: SxProps<Theme>;
     };
   };
-  colorScheme?: ColorScheme;
   hideIndicator?: boolean;
   mobileFullWidth?: boolean;
   className?: string;
@@ -44,9 +43,8 @@ const StyledTabs = styled(Tabs, {
   TabsProps & {
     mobileFullWidth: boolean;
     hideIndicator: boolean;
-    colorScheme: ColorScheme;
   }
->(({ mobileFullWidth, colorScheme, theme, hideIndicator }) => ({
+>(({ mobileFullWidth, theme, hideIndicator }) => ({
   '& .MuiTabs-flexContainer': {
     display: 'block',
   },
@@ -63,10 +61,7 @@ const StyledTabs = styled(Tabs, {
   },
   '& .MuiTabs-indicator': {
     display: hideIndicator && 'none',
-    backgroundColor:
-      colorScheme === 'terrasos'
-        ? theme.palette.warning.main
-        : theme.palette.primary.main,
+    backgroundColor: 'rgba(var(--sc-tabs-tab-underline) / 1)',
     height: '3px',
   },
 }));
@@ -77,7 +72,6 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
   size,
   sxs,
   linkComponent,
-  colorScheme = 'regen',
   hideIndicator = false,
   mobileFullWidth = false,
   className,
@@ -114,7 +108,6 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
           aria-label="tabs"
           hideIndicator={hideIndicator}
           mobileFullWidth={mobileFullWidth}
-          colorScheme={colorScheme}
         >
           {filteredTabs.map((tab, index) => (
             <IconTab

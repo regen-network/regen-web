@@ -22,7 +22,7 @@ export default function ArrowSkipRightIcon({
         r={24}
         transform="matrix(-1 0 0 1 25.5 25)"
         fill="#fff"
-        stroke={useGradient ? 'url(#skipRight)' : 'currentColor'}
+        stroke={'url(#skipRight)'}
         strokeWidth={2}
       />
       <path
@@ -40,12 +40,29 @@ export default function ArrowSkipRightIcon({
           y2={55.423}
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor={disabled ? 'currentColor' : '#527984'} />
+          <stop
+            stopColor={
+              disabled || !useGradient
+                ? 'currentColor'
+                : 'rgba(var(--sc-tag-prefinance-600) / 1)'
+            }
+          />
           <stop
             offset={0.5}
-            stopColor={disabled ? 'currentColor' : '#79C6AA'}
+            stopColor={
+              disabled || !useGradient
+                ? 'currentColor'
+                : 'rgba(var(--sc-tag-prefinance-500) / 1)'
+            }
           />
-          <stop offset={1} stopColor={disabled ? 'currentColor' : '#C4DAB5'} />
+          <stop
+            offset={1}
+            stopColor={
+              disabled || !useGradient
+                ? 'currentColor'
+                : 'rgba(var(--sc-tag-prefinance-400) / 1)'
+            }
+          />
         </linearGradient>
       </defs>
     </SvgIcon>

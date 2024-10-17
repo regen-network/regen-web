@@ -47,7 +47,6 @@ const Pagination = ({
                 sx={getArrowSkipStyle({
                   disabled: item.disabled,
                   theme,
-                  colorScheme,
                 })}
                 disabled={item.disabled}
                 useGradient={colorScheme === 'regen'}
@@ -58,7 +57,6 @@ const Pagination = ({
                 sx={getArrowSkipStyle({
                   disabled: item.disabled,
                   theme,
-                  colorScheme,
                 })}
                 disabled={item.disabled}
                 useGradient={colorScheme === 'regen'}
@@ -88,7 +86,6 @@ const Pagination = ({
             ),
           }}
           disableRipple
-          colorScheme={colorScheme}
           {...item}
         />
       )}

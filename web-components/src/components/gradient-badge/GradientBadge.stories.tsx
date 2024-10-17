@@ -17,10 +17,4 @@ Default.args = {
   label: 'SOLD OUT',
 };
 
-Default.argTypes = {
-  variant: {
-    control: 'radio',
-    options: ['green'],
-    defaultValue: 'green',
-  },
-};
+Default.argTypes = {};

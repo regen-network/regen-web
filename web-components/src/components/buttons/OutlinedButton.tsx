@@ -1,41 +1,25 @@
 import { styled } from '@mui/material';
 import Button, { ButtonProps } from '@mui/material/Button';
 
-import { ColorScheme } from '../../theme/theme.types';
-
-interface OutlinedButtonProps extends ButtonProps {
-  colorScheme?: ColorScheme;
-}
-
-const OutlinedButton = styled(Button)<OutlinedButtonProps>(
-  ({ theme, colorScheme = 'regen' }) => ({
-    color:
-      colorScheme === 'terrasos'
-        ? theme.palette.primary.contrastText
-        : theme.palette.secondary.main,
-    backgroundColor: theme.palette.primary.main,
-    borderImageSlice: 1,
-    borderImageSource:
-      colorScheme === 'terrasos'
-        ? 'linear-gradient(201.8deg, #636464, #636464)'
-        : 'linear-gradient(201.8deg, #4FB573, #B9E1C7)',
-    '&:hover': {
-      backgroundColor:
-        colorScheme === 'terrasos' ? '#636464' : theme.palette.secondary.light,
-      color:
-        colorScheme === 'terrasos'
-          ? theme.palette.primary.main
-          : theme.palette.secondary.main,
-      borderColor:
-        colorScheme === 'terrasos' ? '#636464' : theme.palette.secondary.light,
-      borderImageSource: 'none',
-    },
-    '&:disabled': {
-      color: theme.palette.grey[100],
-      background: theme.palette.grey[50],
-      borderImageSource: 'none',
-      borderColor: theme.palette.grey[100],
-    },
-  }),
-);
+const OutlinedButton = styled(Button)<ButtonProps>(({ theme }) => ({
+  color: 'rgba(var(--sc-button-text-icon-dark) / 1)',
+  backgroundColor:
+    'rgba(var(--sc-button-surface-standard-secondary-default) / 1)',
+  borderImageSlice: 1,
+  borderImageSource:
+    'linear-gradient(201.8deg, rgba(var(--sc-gradient-lighter-gradient-500) / 1), rgba(var(--sc-gradient-lighter-gradient-300) / 1))',
+  '&:hover': {
+    backgroundColor:
+      'rgba(var(--sc-button-surface-standard-secondary-hover) / 1)',
+    color: 'rgba(var(--sc-button-text-icon-dark) / 1)',
+    borderColor: 'rgba(var(--sc-button-surface-standard-secondary-hover) / 1)',
+    borderImageSource: 'none',
+  },
+  '&:disabled': {
+    color: theme.palette.grey[100],
+    background: theme.palette.grey[50],
+    borderImageSource: 'none',
+    borderColor: theme.palette.grey[100],
+  },
+}));
 export default OutlinedButton as typeof Button;

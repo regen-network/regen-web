@@ -1,1 +1,1 @@
-export type GradientBadgeVariant = 'green' | 'yellow';
+export type GradientBadgeVariant = 'green';

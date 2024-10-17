@@ -164,12 +164,12 @@ export const getUserMenuItems = ({
     //   ...MY_PREFINANCE_PROJECTS,
     //   label: _(MY_PREFINANCE_PROJECTS.label),
     // },
-    savedPaymentInfo && {
-      pathname,
-      linkComponent,
-      ...SAVED_PAYMENT_INFO,
-      label: _(SAVED_PAYMENT_INFO.label),
-    },
+    // savedPaymentInfo && {
+    //   pathname,
+    //   linkComponent,
+    //   ...SAVED_PAYMENT_INFO,
+    //   label: _(SAVED_PAYMENT_INFO.label),
+    // },
     {
       ...HEADING_PROFILE,
     },

@@ -84,18 +84,15 @@ export const SideFilter = ({
         startIcon={
           <FilterIcon
             sx={{
-              color: IS_TERRASOS ? '' : 'secondary.dark',
               with: 25,
               height: 24,
             }}
           />
         }
-        colorScheme={COLOR_SCHEME}
         sx={[
           {
             mr: 4,
           },
-          IS_TERRASOS ? 'text-bc-neutral-700 hover:text-bc-neutral-0' : '',
           ...sxToArray(sx),
         ]}
       >

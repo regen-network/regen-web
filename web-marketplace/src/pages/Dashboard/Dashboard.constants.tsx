@@ -77,7 +77,7 @@ export const HEADING_MY_ORDERS = {
 
 export const HEADING_PROFILE = {
   children: (
-    <div className="text-xs text-grey-400 uppercase font-extrabold pl-20 tracking-wider mt-10">
+    <div className="text-xs text-grey-400 uppercase font-extrabold pl-20 tracking-wider">
       <Trans>profile</Trans>
     </div>
   ),
@@ -96,7 +96,7 @@ export const MY_PREFINANCE_PROJECTS = {
   href: '/profile/edit/my-prefinance-projects',
   icon: <PrefinanceIcon linearGradient width="24" height="24" />,
   labelClassName,
-  className,
+  className: `${className} mb-10`,
 };
 
 export const SAVED_PAYMENT_INFO = {

@@ -1,6 +1,7 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import { IS_TERRASOS } from 'lib/env';
 
 import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
@@ -38,10 +39,14 @@ export const normalizeProjectsWithOrderData = ({
       creditClassIdOrUrl: project.classId ?? '',
     });
 
+    const defaultProjectImage = IS_TERRASOS
+      ? '/jpg/default-project2.jpg'
+      : '/jpg/default-project.jpg';
+
     return {
       id: project.id,
       name: project.id,
-      imgSrc: '/jpg/default-project.jpg',
+      imgSrc: defaultProjectImage,
       place: project.jurisdiction,
       area: 0,
       areaUnit: '',

@@ -1,22 +1,26 @@
 import { styled } from '@mui/material';
-import Button from '@mui/material/Button';
+import Button, { ButtonProps } from '@mui/material/Button';
 
-const OutlinedButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.secondary.main,
-  backgroundColor: theme.palette.primary.main,
+const OutlinedButton = styled(Button)<ButtonProps>(() => ({
+  color: 'rgba(var(--sc-button-text-icon-dark) / 1)',
+  backgroundColor:
+    'rgba(var(--sc-button-surface-standard-secondary-default) / 1)',
   borderImageSlice: 1,
-  borderImageSource: 'linear-gradient(201.8deg, #4FB573, #B9E1C7)',
+  borderImageSource:
+    'linear-gradient(201.8deg, rgba(var(--sc-gradient-lighter-gradient-500) / 1), rgba(var(--sc-gradient-lighter-gradient-300) / 1))',
   '&:hover': {
-    backgroundColor: theme.palette.secondary.light,
-    borderColor: theme.palette.secondary.light,
+    backgroundColor:
+      'rgba(var(--sc-button-surface-standard-secondary-hover) / 1)',
+    color: 'rgba(var(--sc-button-text-icon-dark) / 1)',
+    borderColor: 'rgba(var(--sc-button-surface-standard-secondary-hover) / 1)',
     borderImageSource: 'none',
   },
   '&:disabled': {
-    color: theme.palette.grey[100],
-    background: theme.palette.grey[50],
+    color: 'rgba(var(--sc-button-surface-standard-primary-disabled) / 1)',
+    background:
+      'rgba(var(--sc-button-surface-standard-secondary-disabled) / 1)',
     borderImageSource: 'none',
-    borderColor: theme.palette.grey[100],
+    borderColor: 'rgba(var(--sc-button-outline-secondary-disabled) / 1)',
   },
 }));
-
 export default OutlinedButton as typeof Button;

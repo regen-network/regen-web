@@ -23,3 +23,5 @@ export const KEPLR_WALLET_CONNECT_SUBTITLE = msg`Blockchain-based actions such a
 export const KEPLR_WALLET_CONNECT_LEARN_HOW_TEXT = msg`Learn how to `;
 export const SWITCH_WALLET_WARNING_MODAL_TITLE = msg`Please select the following wallet address in Keplr in order to proceed`;
 export const SWITCH_WALLET_WARNING_MODAL_MESSAGE = msg`The email address you are using to log in is associated with the above wallet address, so it must be the currently selected account in Keplr in order to continue.`;
+export const TERRAOS_POWERED_BY = msg`Powered by`;
+export const TERRAOS_COPYRIGHT = msg`Copyright © 2024 Terrasos | All rights reserved`;

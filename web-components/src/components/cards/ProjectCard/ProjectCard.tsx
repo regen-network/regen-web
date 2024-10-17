@@ -5,6 +5,7 @@ import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/Prefi
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Track } from 'web-marketplace/src/lib/tracker/types';
 
+import { ColorScheme } from '../../../theme/theme.types';
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import { cn } from '../../../utils/styles/cn';
@@ -66,6 +67,7 @@ export interface ProjectCardProps extends MediaCardProps {
   bodyTexts: ProjectCardBodyTextsMapping;
   purchaseDetailsTitles: ProjectCardTitlesMapping;
   buttons: ProjectCardButtonsMapping;
+  useProjectCardButton?: boolean;
 }
 
 export function ProjectCard({
@@ -103,6 +105,7 @@ export function ProjectCard({
   bodyTexts,
   purchaseDetailsTitles,
   buttons,
+  useProjectCardButton = true,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
@@ -325,7 +328,8 @@ export function ProjectCard({
                         {containedButton.text}
                       </ContainedButton>
                     ))}
-                  {(onButtonClick || isPrefinanceProject || offChain) &&
+                  {(hasButton || isPrefinanceProject || offChain) &&
+                    useProjectCardButton &&
                     (isButtonDisabled && createPostTooltipText ? (
                       <InfoTooltip
                         arrow

@@ -1,7 +1,9 @@
-import { PaginationItem, SxProps } from '@mui/material';
+/* eslint-disable lingui/no-unlocalized-strings */
+import { PaginationItem, PaginationItemProps, SxProps } from '@mui/material';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
 import { pxToRem, Theme } from '../../theme/muiTheme';
+import { ColorScheme } from '../../theme/theme.types';
 
 export const usePaginationStyles = makeStyles()(theme => ({
   root: {
@@ -15,8 +17,16 @@ export const usePaginationStyles = makeStyles()(theme => ({
   },
 }));
 
+const PaginationItemWrapper = ({
+  ...props
+}: PaginationItemProps & {
+  disableRipple: boolean;
+}) => {
+  return <PaginationItem {...props} />;
+};
+
 export const StyledPaginationItem = withStyles(
-  PaginationItem,
+  PaginationItemWrapper,
   (theme: Theme, { disabled }) => ({
     icon: {
       fontSize: pxToRem(40),
@@ -44,7 +54,7 @@ export const StyledPaginationItem = withStyles(
         bottom: 0,
         width: '11px',
         height: '4px',
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: 'rgba(var(--sc-tabs-tab-underline) / 1)',
       },
     },
   }),
@@ -58,8 +68,11 @@ type GetArrowSkipStyleType = {
 export const getArrowSkipStyle = ({
   theme,
   disabled,
-}: GetArrowSkipStyleType): SxProps =>
-  ({
+}: GetArrowSkipStyleType): SxProps => {
+  return {
     fontSize: pxToRem(50),
-    color: disabled ? theme.palette.grey[100] : theme.palette.secondary.main,
-  } as SxProps);
+    color: disabled
+      ? theme.palette.grey[100]
+      : 'rgba(var(--sc-button-text-icon-dark) / 1)',
+  } as SxProps;
+};

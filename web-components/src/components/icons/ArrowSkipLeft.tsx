@@ -2,10 +2,12 @@ import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 interface IconProps extends SvgIconProps {
   disabled?: boolean;
+  useGradient?: boolean;
 }
 
 export default function ArrowSkipLeftIcon({
   disabled,
+  useGradient = true,
   sx = [],
   ...props
 }: IconProps): JSX.Element {
@@ -24,7 +26,7 @@ export default function ArrowSkipLeftIcon({
         r={24}
         transform="matrix(-1 0 0 1 25.5 25)"
         fill="#fff"
-        stroke="url(#skipLeft)"
+        stroke={'url(#skipLeft)'}
         strokeWidth={2}
       />
       <path
@@ -42,12 +44,29 @@ export default function ArrowSkipLeftIcon({
           y2={55.423}
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor={disabled ? 'currentColor' : '#527984'} />
+          <stop
+            stopColor={
+              disabled || !useGradient
+                ? 'currentColor'
+                : 'rgba(var(--sc-tag-prefinance-600) / 1)'
+            }
+          />
           <stop
             offset={0.5}
-            stopColor={disabled ? 'currentColor' : '#79C6AA'}
+            stopColor={
+              disabled || !useGradient
+                ? 'currentColor'
+                : 'rgba(var(--sc-tag-prefinance-500) / 1)'
+            }
           />
-          <stop offset={1} stopColor={disabled ? 'currentColor' : '#C4DAB5'} />
+          <stop
+            offset={1}
+            stopColor={
+              disabled || !useGradient
+                ? 'currentColor'
+                : 'rgba(var(--sc-tag-prefinance-400) / 1)'
+            }
+          />
         </linearGradient>
       </defs>
     </SvgIcon>

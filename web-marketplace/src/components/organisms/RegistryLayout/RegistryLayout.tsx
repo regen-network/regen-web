@@ -1,6 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
+import { IS_TERRASOS } from 'lib/env';
+
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
 import { ScrollToTop } from '../../atoms';
@@ -15,6 +17,7 @@ import { RegistryLayoutHeader } from './RegistryLayout.Header';
 import { RegistryLayoutProcessingModal } from './RegistryLayout.ProcessingModal';
 import { RetryFailedFunctions } from './RegistryLayout.RetryFailedFunctions';
 import { RegistryLayoutSwitchWalletModal } from './RegistryLayout.SwitchWalletModal';
+import { RegistryLayoutTerrasosFooter } from './RegistryLayout.TerrasosFooter';
 import { RegistryLayoutTxErrorModal } from './RegistryLayout.TxErrorModal';
 import { RegistryLayoutTxSuccessfulModal } from './RegistryLayout.TxSuccessfulModal';
 
@@ -23,7 +26,11 @@ const RegistryLayout: React.FC = () => {
     <>
       <RegistryLayoutHeader />
       <Outlet />
-      <RegistryLayoutFooter />
+      {IS_TERRASOS ? (
+        <RegistryLayoutTerrasosFooter />
+      ) : (
+        <RegistryLayoutFooter />
+      )}
       <PageViewTracking />
       <ScrollToTop />
       <RetryFailedFunctions />

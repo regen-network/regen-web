@@ -574,22 +574,24 @@ export const BuyCreditsForm = ({
               ...userCanPurchaseCredits,
               openModal: false,
             });
-            // After a purchase attempt where there's partial credits availablility,
-            // we need to update the form with the new credits and currency amounts.
+            const amounts = getCurrencyAmount({
+              currentCreditsAmount: userCanPurchaseCredits.amountAvailable,
+              card: paymentOption === PAYMENT_OPTIONS.CARD,
+              orderedSellOrders:
+                paymentOption === PAYMENT_OPTIONS.CARD
+                  ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
+                  : filteredCryptoSellOrders?.sort(
+                      (a, b) => Number(a.askAmount) - Number(b.askAmount),
+                    ) || [],
+              creditTypePrecision: creditTypeData?.creditType?.precision,
+            });
+            // After a purchase attempt where there's partial credits availability,
+            // we need to update the form with the new credits, currency amount and sell orders.
             handleSaveNext({
               ...data,
               [CREDITS_AMOUNT]: userCanPurchaseCredits.amountAvailable,
-              [CURRENCY_AMOUNT]: getCurrencyAmount({
-                currentCreditsAmount: userCanPurchaseCredits.amountAvailable,
-                card: paymentOption === PAYMENT_OPTIONS.CARD,
-                orderedSellOrders:
-                  paymentOption === PAYMENT_OPTIONS.CARD
-                    ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
-                    : filteredCryptoSellOrders?.sort(
-                        (a, b) => Number(a.askAmount) - Number(b.askAmount),
-                      ) || [],
-                creditTypePrecision: creditTypeData?.creditType?.precision,
-              }).currencyAmount,
+              [CURRENCY_AMOUNT]: amounts.currencyAmount,
+              [SELL_ORDERS]: amounts.sellOrders,
             });
             window.scrollTo(0, 0);
             handleActiveStep(0);

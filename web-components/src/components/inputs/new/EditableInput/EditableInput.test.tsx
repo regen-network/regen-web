@@ -9,6 +9,7 @@ describe('EditableInput', () => {
     render(
       <EditableInput
         value={100}
+        maxValue={1000}
         onChange={onChangeMock}
         inputAriaLabel="testEditableInput"
         editButtonAriaLabel="Edit"
@@ -24,11 +25,12 @@ describe('EditableInput', () => {
     expect(editButton).toBeInTheDocument();
   });
 
-  it('renders the input field and update button when when click edit', () => {
+  it('renders the input field and update button when click edit', () => {
     const onChangeMock = vi.fn();
     render(
       <EditableInput
         value={100}
+        maxValue={1000}
         onChange={onChangeMock}
         inputAriaLabel="testEditableInput"
         editButtonAriaLabel="Edit"
@@ -55,6 +57,7 @@ describe('EditableInput', () => {
     render(
       <EditableInput
         value={100}
+        maxValue={1000}
         onChange={onChangeMock}
         inputAriaLabel="testEditableInput"
         editButtonAriaLabel="Edit"

@@ -1,28 +1,42 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 
 interface EditableInputProps {
   value: number;
+  maxValue: number;
   onChange: (amount: number) => void;
   name?: string;
   inputAriaLabel: string;
   editButtonAriaLabel: string;
   updateButtonText: string;
   className?: string;
+  onInvalidValue?: () => void;
 }
 
 export const EditableInput = ({
   value,
+  maxValue,
   onChange,
   name = '',
   inputAriaLabel,
   editButtonAriaLabel,
   updateButtonText,
   className = '',
+  onInvalidValue,
 }: EditableInputProps) => {
   const [editable, setEditable] = useState(false);
   const [amount, setAmount] = useState(value);
+
+  useEffect(() => {
+    if (!editable && value !== amount) setAmount(value);
+  }, [amount, value, editable]);
 
   const toggleEditable = () => {
     setEditable(!editable);
@@ -30,11 +44,18 @@ export const EditableInput = ({
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (isNaN(+e.target.value)) return;
-    setAmount(+e.target.value);
+    const value = e.target.value;
+    const newValue = +value;
+
+    if (isNaN(newValue)) return;
+    if (newValue > maxValue && onInvalidValue) {
+      onInvalidValue();
+    }
+    setAmount(Math.min(newValue, maxValue));
   };
 
   const handleOnUpdate = () => {
+    if (!amountValid) return;
     onChange(+amount);
     toggleEditable();
   };
@@ -47,6 +68,11 @@ export const EditableInput = ({
     }
   };
 
+  const amountValid = useMemo(
+    () => amount <= maxValue && amount > 0,
+    [amount, maxValue],
+  );
+
   return (
     <>
       {editable ? (
@@ -54,10 +80,11 @@ export const EditableInput = ({
           className={`flex [@media(max-width:340px)]:flex-col [@media(max-width:340px)]:mb-20 sm:flex-row items-center [@media(max-width:340px)]:items-start h-[47px] ${className}`}
         >
           <input
-            pattern="[0-9]*"
-            maxLength={6}
-            className="min-w-60 max-w-[80px] h-30 py-20 px-10 border border-gray-300 text-base font-normal font-['Lato']"
-            type="text"
+            type="number"
+            step="0.000001"
+            min={0}
+            max={maxValue}
+            className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-50 py-20 px-15 w-[120px] border border-solid border-grey-300 text-base font-normal font-sans focus:outline-none"
             value={amount}
             onChange={handleOnChange}
             onKeyDown={handleKeyDown}
@@ -67,7 +94,11 @@ export const EditableInput = ({
             data-testid="editable-input"
           />
           <TextButton
-            className="lowercase text-[12px] mt-5 sm:mt-0"
+            className={`lowercase text-[12px] mt-5 sm:mt-0 font-sans ${
+              amountValid
+                ? ''
+                : 'text-grey-300 hover:text-grey-300 cursor-default'
+            }`}
             onClick={handleOnUpdate}
             aria-label={updateButtonText}
           >

@@ -3,7 +3,7 @@ import { makeStyles } from 'tss-react/mui';
 
 import Section from './index';
 
-interface OnBoardingSectionProps {
+export interface OnBoardingSectionProps {
   title: string;
   description?: string | JSX.Element;
   headerChildren?: ReactNode;

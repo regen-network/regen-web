@@ -26,12 +26,17 @@ export const TerrasosFooter = ({
       )}
     >
       <div className="flex flex-col sm:flex-row items-start gap-20 sm:gap-0 sm:justify-between sm:items-center self-stretch">
-        <div className="flex items-center">
-          <span className="font-montserrat text-[9px] font-bold leading-normal tracking-[1px] uppercase mr-10">
-            {poweredBy}
-          </span>
-          <RegenIcon className="mr-40 w-[73px] h-[33px]" />
-        </div>
+        <Link
+          href="https://app.regen.network/"
+          className="text-sc-button-text-icon-dark"
+        >
+          <div className="flex items-center">
+            <span className="font-montserrat text-[9px] font-bold leading-normal tracking-[1px] uppercase mr-10">
+              {poweredBy}
+            </span>
+            <RegenIcon className="mr-40 w-[73px] h-[33px]" />
+          </div>
+        </Link>
         <span className="text-black font-['Montserrat'] text-xs font-normal leading-[130%]">
           {copyright}
         </span>

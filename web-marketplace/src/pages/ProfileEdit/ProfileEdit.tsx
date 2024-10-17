@@ -64,7 +64,7 @@ export const ProfileEdit = () => {
 
   return (
     <div className="bg-grey-100">
-      <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly max-w-[1150px] mx-auto p-10 lg:py-50 lg:px-15 min-h-screen">
+      <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly max-w-[1150px] mx-auto p-10 lg:py-50 lg:px-15 lg:min-h-screen">
         <AdminNavigation
           className="hidden lg:block min-w-[235px]"
           sections={adminNavigationSections}
@@ -84,7 +84,10 @@ export const ProfileEdit = () => {
             section ? 'flex' : 'hidden',
           )}
         >
-          <Flex justifyContent="space-between" className="mb-25 w-full h-50">
+          <Flex
+            justifyContent="space-between"
+            className="my-10 md:mb-25 w-full h-50"
+          >
             <Title variant="h3">{startCase(section)}</Title>
             {section === 'profile' && (
               <ViewProfileButton

@@ -16,3 +16,4 @@ export const DEFAULT_COMMUNITY_PROJECTS_FILTER =
 export const MARKETPLACE_CLIENT = (import.meta.env.VITE_MARKETPLACE_CLIENT ??
   'regen') as MARKETPLACE_CLIENT_TYPE;
 export const IS_TERRASOS = MARKETPLACE_CLIENT === 'terrasos';
+export const IS_REGEN = MARKETPLACE_CLIENT === 'regen';

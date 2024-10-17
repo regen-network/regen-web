@@ -58,9 +58,26 @@ export default function OutlinedCheckIcon({
           y2="19.2302"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#527984" />
-          <stop offset="0.5" stopColor="#79C6AA" />
-          <stop offset="1" stopColor="#C4DAB5" />
+          <stop
+            style={{
+              stopColor:
+                'rgba(var(--ac-gradients-primary-gradient-600, #527984) / 1)',
+            }}
+          />
+          <stop
+            offset="0.5"
+            style={{
+              stopColor:
+                'rgba(var(--ac-gradients-primary-gradient-500, #79C6AA) / 1)',
+            }}
+          />
+          <stop
+            offset="1"
+            style={{
+              stopColor:
+                'rgba(var(--ac-gradients-primary-gradient-400, #C4DAB5) / 1)',
+            }}
+          />
         </linearGradient>
         <linearGradient
           id="paint1_linear_8447_24777"
@@ -70,9 +87,26 @@ export default function OutlinedCheckIcon({
           y2="19.2302"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#527984" />
-          <stop offset="0.5" stopColor="#79C6AA" />
-          <stop offset="1" stopColor="#C4DAB5" />
+          <stop
+            style={{
+              stopColor:
+                'rgba(var(--ac-gradients-primary-gradient-600, #527984) / 1)',
+            }}
+          />
+          <stop
+            offset="0.5"
+            style={{
+              stopColor:
+                'rgba(var(--ac-gradients-primary-gradient-500, #79C6AA) / 1)',
+            }}
+          />
+          <stop
+            offset="1"
+            style={{
+              stopColor:
+                'rgba(var(--ac-gradients-primary-gradient-400, #C4DAB5) / 1)',
+            }}
+          />
         </linearGradient>
       </defs>
     </SvgIcon>

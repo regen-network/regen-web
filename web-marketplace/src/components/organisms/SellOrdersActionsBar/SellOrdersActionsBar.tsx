@@ -202,7 +202,12 @@ export const SellOrdersActionsBar = ({
                       onBuyButtonClick();
                     }}
                     disabled={isBuyButtonDisabled}
-                    sx={{ height: '100%' }}
+                    sx={{
+                      height: '100%',
+                      backgroundImage:
+                        'linear-gradient(197deg, rgba(var(--sc-gradient-lighter-gradient-500) / 1) 14.67%, rgba(var(--sc-gradient-lighter-gradient-300) / 1) 97.14%)',
+
+                    }}
                   >
                     {isMobile ? _(msg`BUY`) : _(msg`BUY CREDITS`)}
                   </ContainedButton>

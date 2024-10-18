@@ -308,6 +308,7 @@ function ProjectTopSection({
               impact={[...impact]}
               activitiesLabel={_(PROJECT_ACTIVITY_LABEL)}
               ecosystemLabel={_(ECOSYSTEM_LABEL)}
+              overrideIconColor={!IS_REGEN}
             />
             {ratingsAndCertificationsData && (
               <RoundLogoItemsList

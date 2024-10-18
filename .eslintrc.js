@@ -25,6 +25,7 @@ module.exports = {
           'classes',
           'classNames',
           'previewClassName',
+          'color',
         ],
         ignoreProperty: [
           'border',

@@ -45,7 +45,7 @@ export const getCancelCardItems = ({
     {
       label: _(msg`batch denom:`),
       value: {
-        name: 'C01-20190101-20201010-003',
+        name: batchDenom,
         url: `/credit-batches/${batchDenom}`,
       },
     },

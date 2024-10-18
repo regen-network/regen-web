@@ -103,7 +103,7 @@ export const PostForm = ({
     defaultValues: {
       ...initialValues,
     },
-    mode: 'onBlur',
+    mode: 'onChange',
   });
   const { classes } = useMediaFormStyles();
   const { classes: textAreaClasses } = useMetadataFormStyles();
@@ -334,7 +334,7 @@ export const PostForm = ({
                 index === fields.length - 1
                   ? 'mb-40 sm:mb-50'
                   : 'mb-20 sm:mb-30',
-                ' mt-0',
+                ' mt-0 overflow-hidden',
                 classes.galleryItem,
               )}
               fieldIndex={index}

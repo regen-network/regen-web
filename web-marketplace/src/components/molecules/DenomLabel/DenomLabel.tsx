@@ -35,7 +35,7 @@ const DenomLabel = ({
     );
 
   const displayDenom = findDisplayDenom({
-    allowedDenomsData,
+    allowedDenoms: allowedDenomsData?.allowedDenoms,
     bankDenom,
     baseDenom,
   });

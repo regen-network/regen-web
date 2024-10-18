@@ -13,4 +13,9 @@ export const USDCAXL_DENOM = 'usdcaxl';
 
 export const USD_DENOMS = [GRAVITY_USDC_DENOM, AXELAR_USDC_DENOM];
 export const EUR_DENOMS = [EEUR_DENOM];
-export const UPPERCASE_DENOM = [REGEN_DENOM, EEUR_DENOM, EVMOS_DENOM];
+export const UPPERCASE_DENOM = [
+  REGEN_DENOM,
+  EEUR_DENOM,
+  EVMOS_DENOM,
+  USD_DENOM,
+];

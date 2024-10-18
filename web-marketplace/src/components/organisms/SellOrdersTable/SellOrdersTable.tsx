@@ -31,7 +31,7 @@ type Props = {
 const SellOrdersTable = ({
   sellOrders,
   sortCallbacks = [],
-  renderActionButtonsFunc = i => void 0,
+  renderActionButtonsFunc,
   onTableChange,
 }: Props): JSX.Element => {
   const { _ } = useLingui();

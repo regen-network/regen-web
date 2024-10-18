@@ -8,6 +8,8 @@ import { QueryClientImpl as BasketQueryClientImpl } from '@regen-network/api/lib
 import { QueryClientImpl as MarketplaceQueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { QueryClientImpl as EcocreditQueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import { Loading } from 'web-components/src/components/loading';
+
 import { useInitClient } from 'lib/clients/hooks/useInitClient';
 import { EcocreditQueryClient } from 'lib/ecocredit/api';
 import { MarketplaceQueryClient } from 'lib/ecocredit/marketplace/marketplace.types';
@@ -84,6 +86,11 @@ const getApi = async (
 export const LedgerProviderWithWallet: React.FC<React.PropsWithChildren<{}>> =
   ({ children }) => {
     const { wallet, loaded } = useWallet();
+
+    // Prevent rendering until wallet is loaded
+    if (!loaded) {
+      return <Loading className="h-screen" />;
+    }
 
     return (
       <LedgerProvider wallet={wallet} walletLoaded={loaded}>

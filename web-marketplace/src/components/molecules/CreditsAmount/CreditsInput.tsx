@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -13,55 +13,45 @@ import { CreditsInputProps } from './CreditsAmount.types';
 export const CreditsInput = ({
   creditsAvailable,
   handleCreditsAmountChange,
-  paymentOption,
 }: CreditsInputProps) => {
   const { _ } = useLingui();
-  const [maxCreditsAvailable, setMaxCreditsAvailable] =
-    useState(creditsAvailable);
-  const [isFocused, setIsFocused] = useState(false);
+
   const {
-    setValue,
     register,
     formState: { errors },
+    setValue,
   } = useFormContext<ChooseCreditsFormSchemaType>();
-  const { onChange, onBlur, name, ref } = register(CREDITS_AMOUNT);
-
-  const onHandleFocus = () => setIsFocused(true);
-  const onHandleBlur = (event: { target: any; type?: any }) => {
-    setIsFocused(false);
-    onBlur(event);
-  };
-
-  useEffect(() => {
-    setMaxCreditsAvailable(creditsAvailable);
-  }, [creditsAvailable, paymentOption, setValue]);
+  const { onChange } = register(CREDITS_AMOUNT);
 
   const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    handleCreditsAmountChange(event);
+    // Remove zeros in non decimal values and update the value
+    const value = event.target.value;
+    if (!value.includes('.')) setValue(CREDITS_AMOUNT, Number(value));
     onChange(event);
+    handleCreditsAmountChange(event);
   };
 
   return (
     <div className="flex-1 relative">
       <TextField
-        className={`${
-          isFocused ? 'border-2 border-grey-500' : 'border-grey-300'
-        } border border-solid border-grey-300 flex items-center pr-10 sm:h-60`}
+        className={`border border-solid border-grey-300 focus-within:border-grey-500 focus-within:border-2 border border-solid border-grey-300 flex items-center pr-10 sm:h-60`}
         type="number"
         customInputProps={{
-          step: '0.1',
-          max: maxCreditsAvailable,
+          step: '0.000001',
+          max: creditsAvailable,
           min: 0,
           'aria-label': _(msg`Credits Input`),
         }}
+        {...register(CREDITS_AMOUNT)}
         onChange={onHandleChange}
-        onFocus={onHandleFocus}
-        onBlur={onHandleBlur}
-        name={name}
-        ref={ref}
         sx={{
           '& .MuiInputBase-root': {
             border: 'none',
+            '& input': {
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            },
           },
         }}
         endAdornment={
@@ -71,7 +61,7 @@ export const CreditsInput = ({
         }
       />
       {errors[CREDITS_AMOUNT] && (
-        <div className="pl-20 pt-5 text-error-300 text-sm absolute top-full left-0">
+        <div className="pt-5 text-error-300 text-sm">
           {`${errors[CREDITS_AMOUNT].message}`}
         </div>
       )}

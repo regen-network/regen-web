@@ -33,7 +33,7 @@ const GradientBadge = ({
           textTransform: 'uppercase',
           fontWeight: 800,
           fontFamily: headerFontFamily,
-          color: 'primary.main',
+          color: 'rgba(var(--sc-tag-prefinance-text-icon) / 1)',
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}

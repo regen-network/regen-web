@@ -49,6 +49,7 @@ const AllProjects = lazy(() => import('../../pages/Projects/AllProjects'));
 const BasicInfo = lazy(() => import('../../pages/BasicInfo'));
 const BatchDetails = lazy(() => import('../../pages/BatchDetails'));
 const BasketDetails = lazy(() => import('../../pages/BasketDetails'));
+const BuyCredits = lazy(() => import('../../pages/BuyCredits'));
 const ChooseCreditClassPage = lazy(
   () => import('../../pages/ChooseCreditClass'),
 );
@@ -80,6 +81,7 @@ const ProjectCreate = lazy(() => import('../../pages/ProjectCreate'));
 const ProjectFinished = lazy(() => import('../../pages/ProjectFinished'));
 const ProjectLocation = lazy(() => import('../../pages/ProjectLocation'));
 const ProjectReview = lazy(() => import('../../pages/ProjectReview'));
+// const Roles = lazy(() => import('../../pages/Roles'));
 const VerifyEmail = lazy(() => import('../../pages/VerifyEmail'));
 const ProjectEdit = lazy(() => import('../../pages/ProjectEdit'));
 const Activity = lazy(() => import('../../pages/Activity'));
@@ -87,6 +89,7 @@ const CreateBatch = lazy(() => import('../../pages/CreateBatch'));
 const Storefront = lazy(() => import('../../pages/Marketplace/Storefront'));
 const ConnectWalletPage = lazy(() => import('../../pages/ConnectWalletPage'));
 const ProfileEdit = lazy(() => import('../../pages/ProfileEdit'));
+const Orders = lazy(() => import('../../pages/Orders'));
 
 type RouterProps = {
   reactQueryClient: QueryClient;
@@ -158,14 +161,17 @@ export const getRegenRoutes = ({
           />
           <Route path="prefinance" element={<PrefinanceProjects />} />
         </Route>
-        <Route
-          path="project/:projectId"
-          element={<Project />}
-          loader={projectDetailsLoader({
-            queryClient: reactQueryClient,
-            apolloClientFactory,
-          })}
-        />
+        <Route path="project">
+          <Route
+            path=":projectId"
+            element={<Project />}
+            loader={projectDetailsLoader({
+              queryClient: reactQueryClient,
+              apolloClientFactory,
+            })}
+          ></Route>
+        </Route>
+        <Route path="project/:projectId/buy" element={<BuyCredits />} />
         <Route
           path="post/:iri"
           element={<Post />}
@@ -337,6 +343,7 @@ export const getRegenRoutes = ({
             element={<AuthRoute component={ProfileEditSettings} />}
           />
         </Route>
+        <Route path="orders" element={<AuthRoute component={Orders} />} />
       </Route>
       <Route path="connect-wallet" element={<ConnectWalletPage />} />
       <Route path="login" element={<LoginPage />} />

@@ -45,7 +45,7 @@ describe('EditableInput', () => {
     expect(input).toBeInTheDocument();
 
     const updateButton = screen.getByRole('button', {
-      name: 'update',
+      name: /update/i,
     });
     expect(updateButton).toBeInTheDocument();
   });
@@ -73,7 +73,7 @@ describe('EditableInput', () => {
     fireEvent.change(input, { target: { value: '200' } });
 
     const updateButton = screen.getByRole('button', {
-      name: 'update',
+      name: /update/i,
     });
     fireEvent.click(updateButton);
 

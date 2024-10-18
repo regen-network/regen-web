@@ -19,7 +19,14 @@ const StatusLabel = ({ status, label }: Props): JSX.Element => {
       case 'complete':
         return <SuccessIcon sx={iconStyle} />;
       case 'pending':
-        return <PendingIcon sx={iconStyle} />;
+        return (
+          <PendingIcon
+            sx={theme => ({
+              ...iconStyle,
+              color: theme.palette.primary.contrastText,
+            })}
+          />
+        );
       case 'error':
         return <ErrorIcon sx={iconStyle} />;
       default:

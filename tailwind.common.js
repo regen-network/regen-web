@@ -90,6 +90,8 @@ module.exports = {
           'linear-gradient(197deg, #7D9AA2 8.02%, #9AD3BE 43.42%, #D1E2C7 78.83%)',
         'prefinance-tag':
           'linear-gradient(179deg, rgba(var(--sc-tag-prefinance-600) / 1) 19.77%, rgba(var(--sc-tag-prefinance-500) / 1) 114.05%, rgba(var(--sc-tag-prefinance-400) / 1) 200.67%)',
+        'credit-category':
+          'linear-gradient(202deg, rgba(var(--sc-tag-credit-category-300) / 1) 14.67%, rgba(var(--sc-tag-credit-category-500) / 1) 97.14%)',
       },
       boxShadow: {
         sm: '0px 4px 10px 0px rgba(0, 0, 0, 0.05)',

@@ -132,7 +132,7 @@ export const CreditPrice = ({
                 '0'}
               {isSoldOut && (
                 <GradientBadge
-                  className="text-sc-button-text-icon-dark"
+                  className="ml-5"
                   label={bodyTexts.soldOut}
                   variant="green"
                 />

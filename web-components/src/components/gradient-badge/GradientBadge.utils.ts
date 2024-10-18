@@ -5,5 +5,5 @@ export const GradientBadgeVariantMapping: {
   [key in GradientBadgeVariant]: string;
 } = {
   green:
-    'linear-gradient(179deg, rgba(var(--sc-tag-prefinance-600) / 1) 19.77%, rgba(var(--sc-tag-prefinance-500) / 1) 114.05%, rgba(var(--sc-tag-prefinance-400) / 1) 200.67%)',
+    'linear-gradient(202deg, rgba(var(--sc-tag-credit-category-300) / 1) 14.67%, rgba(var(--sc-tag-credit-category-500) / 1) 97.14%)',
 };

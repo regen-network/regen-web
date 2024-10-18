@@ -67,10 +67,11 @@ const Pagination = ({
                 {...props}
                 className={cn(
                   props.className,
-                  'text-sc-text-header',
+                  'text-sc-icon-credibility-100-blue-green-gradient-500',
                   item.disabled &&
                     'text-sc-button-surface-standard-primary-disabled',
                 )}
+                isDisabled={item.disabled}
               />
             ),
             next: props => (
@@ -78,10 +79,11 @@ const Pagination = ({
                 {...props}
                 className={cn(
                   props.className,
-                  'text-sc-text-header',
+                  'text-sc-icon-credibility-100-blue-green-gradient-500',
                   item.disabled &&
                     'text-sc-button-surface-standard-primary-disabled',
                 )}
+                isDisabled={item.disabled}
               />
             ),
           }}

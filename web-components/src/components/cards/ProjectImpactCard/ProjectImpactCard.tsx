@@ -114,7 +114,6 @@ export default function ProjectImpactCard({
                     ) : (
                       <SvgColorOverride
                         src={sdg.src}
-                        // eslint-disable-next-line lingui/no-unlocalized-strings
                         color="rgba(var(--ac-neutral-500) / 1)"
                         filterIntensity={6}
                         sx={{

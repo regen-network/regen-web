@@ -3,7 +3,7 @@ import { styled } from '@mui/material';
 import Button from '@mui/material/Button';
 
 const gradient =
-  'linear-gradient(204.4deg, #527984 5.94%, #79C6AA 51.92%, #C4DAB5 97.89%)';
+  'linear-gradient(204.4deg, rgba(var(--sc-gradient-heavy-gradient-600)) 5.94%, rgba(var(--sc-gradient-heavy-gradient-500)) 51.92%, rgba(var(--sc-gradient-heavy-gradient-400)) 97.89%)';
 
 const ContainedButton = styled(Button)(({ theme }) => {
   return {

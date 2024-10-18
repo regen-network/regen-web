@@ -16,7 +16,7 @@ export const CredibilityCard: React.FC<CredibilityCardProps> = ({
   descriptionRaw,
   icon,
   claims,
-  isWhiteLabel = false,
+  overrideIconColor = false,
 }) => (
   <Card
     borderColor="grey.100"
@@ -30,7 +30,7 @@ export const CredibilityCard: React.FC<CredibilityCardProps> = ({
       },
     }}
   >
-    {icon && isString(icon) && isWhiteLabel ? (
+    {icon && isString(icon) && overrideIconColor ? (
       <SvgColorOverride
         alt={title}
         src={icon}

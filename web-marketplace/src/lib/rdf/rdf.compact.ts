@@ -3,6 +3,7 @@ import { ContextDefinition, JsonLdDocument, NodeObject } from 'jsonld';
 
 import { COMPACTED_CONTEXT } from './rdf.constants';
 
+// TODO: Support documents with @graph
 export const jsonLdCompact = async (
   data: JsonLdDocument,
   context?: object,

@@ -6,4 +6,5 @@ export type CredibilityCardProps = {
   descriptionRaw: SanityBlockContent;
   icon?: string | null;
   claims: Array<{ description: string }>;
+  overrideIconColor?: boolean;
 };

@@ -1,7 +1,10 @@
 import { Box } from '@mui/material';
+import { IS_REGEN } from 'lib/env';
 
+import isString from '../../../utils/isString';
 import { BlockContent } from '../../block-content';
 import OutlinedCheckIcon from '../../icons/OutlinedCheckIcon';
+import SvgColorOverride from '../../icons/utils/SvgColorOverride';
 import { Body, Title } from '../../typography';
 import Card from '../Card';
 import { CredibilityCardProps } from './CredibilityCard.types';
@@ -13,6 +16,7 @@ export const CredibilityCard: React.FC<CredibilityCardProps> = ({
   descriptionRaw,
   icon,
   claims,
+  overrideIconColor = false,
 }) => (
   <Card
     borderColor="grey.100"
@@ -26,11 +30,24 @@ export const CredibilityCard: React.FC<CredibilityCardProps> = ({
       },
     }}
   >
-    {icon && (
+    {icon && isString(icon) && overrideIconColor ? (
+      <SvgColorOverride
+        alt={title}
+        src={icon}
+        color="rgba(var(--ac-neutral-500))"
+        filterIntensity={1}
+        sx={{
+          float: 'right',
+          mr: [1.75, 4.5],
+          height: [100, 126],
+          width: [100, 126],
+        }}
+      />
+    ) : (
       <Box
         component="img"
         alt={title}
-        src={icon}
+        src={icon as string}
         height={[100, 126]}
         sx={{ float: 'right', mr: [1.75, 4.5] }}
       />

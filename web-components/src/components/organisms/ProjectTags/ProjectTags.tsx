@@ -1,10 +1,16 @@
 import { Box, SxProps } from '@mui/material';
 
+import { isImage } from 'src/components/inputs/new/FileDrop/FileDrop.utils';
+
 import { ProjectTag } from '../../../components/molecules/ProjectTag/ProjectTag';
 import { Label } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
-import { ProjectTagType } from '../../molecules/ProjectTag/ProjectTag.types';
+import SvgColorOverride from '../../icons/utils/SvgColorOverride';
+import {
+  isImageType,
+  ProjectTagType,
+} from '../../molecules/ProjectTag/ProjectTag.types';
 
 export interface Props {
   activities?: ProjectTagType[];
@@ -12,6 +18,7 @@ export interface Props {
   sx?: SxProps<Theme>;
   activitiesLabel?: string;
   ecosystemLabel: string;
+  overrideIconColor?: boolean;
 }
 
 const ProjectTags = ({
@@ -20,6 +27,7 @@ const ProjectTags = ({
   sx = [],
   activitiesLabel,
   ecosystemLabel,
+  overrideIconColor = false,
 }: Props): JSX.Element => {
   const hasActivities = activities.length > 0;
   const hasManyActivities = activities.length > 1;
@@ -85,7 +93,20 @@ const ProjectTags = ({
           >
             {ecosystems.map(ecosystem => (
               <ProjectTag
-                tag={ecosystem}
+                tag={{
+                  ...ecosystem,
+                  icon:
+                    overrideIconColor && isImageType(ecosystem.icon) ? (
+                      <SvgColorOverride
+                        src={ecosystem.icon.src}
+                        color="rgba(var(--sc-icon-ecosystem-600))"
+                        className="h-[40px] w-[40px]"
+                        sx={{ mr: 2.5 }}
+                      />
+                    ) : (
+                      ecosystem.icon
+                    ),
+                }}
                 key={ecosystem.name}
                 sx={{
                   mb: hasManyEcosystems ? { xs: 2.5, sm: 3.75 } : 0,

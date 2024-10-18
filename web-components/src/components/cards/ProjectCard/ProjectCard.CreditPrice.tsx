@@ -120,14 +120,22 @@ export const CreditPrice = ({
           }}
         >
           {isSoldOut && !isPrefinanceProject ? (
-            <GradientBadge label={bodyTexts.soldOut} />
+            <GradientBadge
+              className="text-sc-button-text-icon-dark"
+              label={bodyTexts.soldOut}
+              variant={'green'}
+            />
           ) : (
             <>
               {purchaseInfo?.sellInfo?.creditsAvailable ??
                 projectPrefinancing?.estimatedIssuance ??
                 '0'}
               {isSoldOut && (
-                <GradientBadge className="ml-5" label={bodyTexts.soldOut} />
+                <GradientBadge
+                  className="ml-5"
+                  label={bodyTexts.soldOut}
+                  variant="green"
+                />
               )}
             </>
           )}

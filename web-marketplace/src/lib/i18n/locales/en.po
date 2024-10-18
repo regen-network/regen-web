@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-14 10:17+0200\n"
+"POT-Creation-Date: 2024-10-16 09:16+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -350,7 +350,7 @@ msgid "all profiles"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
-#: src/pages/Projects/Projects.tsx:73
+#: src/pages/Projects/Projects.tsx:74
 msgid "All projects"
 msgstr ""
 
@@ -901,7 +901,7 @@ msgstr ""
 msgid "Class ID: unique identifier of the credit class on Regen Ledger."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:165
+#: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:180
 msgid "Clear all"
 msgstr ""
 
@@ -1007,6 +1007,10 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:15
 msgid "Copy link to project page"
+msgstr ""
+
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:27
+msgid "Copyright © 2024 Terrasos | All rights reserved"
 msgstr ""
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:546
@@ -2556,12 +2560,16 @@ msgstr ""
 msgid "Postal Code"
 msgstr ""
 
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:26
+msgid "Powered by"
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:176
 msgid "prefinance"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:49
-#: src/pages/Projects/Projects.tsx:83
+#: src/pages/Projects/Projects.tsx:84
 msgid "Prefinance projects"
 msgstr ""
 
@@ -2855,7 +2863,7 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
-#: src/pages/Projects/Projects.tsx:126
+#: src/pages/Projects/Projects.tsx:127
 msgid "projects tabs"
 msgstr ""
 
@@ -3197,7 +3205,7 @@ msgstr ""
 msgid "Select a wallet"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:143
+#: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:158
 msgid "Select all"
 msgstr ""
 
@@ -3373,7 +3381,7 @@ msgstr ""
 msgid "Sorry, your transaction was not successful."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:207
+#: src/pages/Projects/AllProjects/AllProjects.tsx:211
 msgid "Sort by:"
 msgstr ""
 

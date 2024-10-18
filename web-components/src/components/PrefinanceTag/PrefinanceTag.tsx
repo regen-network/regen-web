@@ -24,7 +24,7 @@ export const PrefinanceTag = ({
 }) => (
   <div
     className={cn(
-      'bg-purple-gradient rounded-r-[5px] flex items-center justify-center px-10 py-[3px] text-grey-0 absolute top-30 left-0',
+      'rounded-r-[5px] flex items-center justify-center px-10 py-[3px] absolute top-30 left-0 text-sc-tag-prefinance-text-icon bg-prefinance-tag',
       classNames.root,
     )}
   >

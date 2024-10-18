@@ -66,6 +66,7 @@ export interface ProjectCardProps extends MediaCardProps {
   bodyTexts: ProjectCardBodyTextsMapping;
   purchaseDetailsTitles: ProjectCardTitlesMapping;
   buttons: ProjectCardButtonsMapping;
+  useProjectCardButton?: boolean;
 }
 
 export function ProjectCard({
@@ -103,6 +104,7 @@ export function ProjectCard({
   bodyTexts,
   purchaseDetailsTitles,
   buttons,
+  useProjectCardButton = true,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
@@ -325,7 +327,8 @@ export function ProjectCard({
                         {containedButton.text}
                       </ContainedButton>
                     ))}
-                  {(onButtonClick || isPrefinanceProject || offChain) &&
+                  {(hasButton || isPrefinanceProject || offChain) &&
+                    useProjectCardButton &&
                     (isButtonDisabled && createPostTooltipText ? (
                       <InfoTooltip
                         arrow

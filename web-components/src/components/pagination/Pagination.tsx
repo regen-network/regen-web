@@ -6,6 +6,8 @@ import {
 } from '@mui/material';
 
 import { Theme } from '../../theme/muiTheme';
+import { ColorScheme } from '../../theme/theme.types';
+import { cn } from '../../utils/styles/cn';
 import ArrowLeftIcon from '../icons/ArrowLeft';
 import ArrowRightIcon from '../icons/ArrowRight';
 import ArrowSkipLeftIcon from '../icons/ArrowSkipLeft';
@@ -18,9 +20,15 @@ import {
 
 export interface Props extends PaginationProps {
   sx?: SxProps<Theme>;
+  colorScheme: ColorScheme;
 }
 
-const Pagination = ({ size, sx = [], ...props }: Props): JSX.Element => {
+const Pagination = ({
+  size,
+  sx = [],
+  colorScheme,
+  ...props
+}: Props): JSX.Element => {
   const theme = useTheme();
   const isSmall = size === 'small';
   const { classes } = usePaginationStyles();
@@ -36,8 +44,12 @@ const Pagination = ({ size, sx = [], ...props }: Props): JSX.Element => {
           slots={{
             first: () => (
               <ArrowSkipLeftIcon
-                sx={getArrowSkipStyle({ disabled: item.disabled, theme })}
+                sx={getArrowSkipStyle({
+                  disabled: item.disabled,
+                  theme,
+                })}
                 disabled={item.disabled}
+                useGradient={colorScheme === 'regen'}
               />
             ),
             last: () => (
@@ -47,10 +59,33 @@ const Pagination = ({ size, sx = [], ...props }: Props): JSX.Element => {
                   theme,
                 })}
                 disabled={item.disabled}
+                useGradient={colorScheme === 'regen'}
               />
             ),
-            previous: ArrowLeftIcon,
-            next: ArrowRightIcon,
+            previous: props => (
+              <ArrowLeftIcon
+                {...props}
+                className={cn(
+                  props.className,
+                  'text-sc-icon-credibility-100-blue-green-gradient-500',
+                  item.disabled &&
+                    'text-sc-button-surface-standard-primary-disabled',
+                )}
+                isDisabled={item.disabled}
+              />
+            ),
+            next: props => (
+              <ArrowRightIcon
+                {...props}
+                className={cn(
+                  props.className,
+                  'text-sc-icon-credibility-100-blue-green-gradient-500',
+                  item.disabled &&
+                    'text-sc-button-surface-standard-primary-disabled',
+                )}
+                isDisabled={item.disabled}
+              />
+            ),
           }}
           disableRipple
           {...item}

@@ -38,29 +38,32 @@ interface IconTabsProps {
 const StyledTabs = styled(Tabs, {
   shouldForwardProp: prop =>
     prop !== 'hideIndicator' && prop !== 'mobileFullWidth',
-})<TabsProps & { mobileFullWidth: boolean; hideIndicator: boolean }>(
-  ({ mobileFullWidth, theme, hideIndicator }) => ({
-    '& .MuiTabs-flexContainer': {
-      display: 'block',
+})<
+  TabsProps & {
+    mobileFullWidth: boolean;
+    hideIndicator: boolean;
+  }
+>(({ mobileFullWidth, theme, hideIndicator }) => ({
+  '& .MuiTabs-flexContainer': {
+    display: 'block',
+  },
+  '& .MuiTabs-scroller': {
+    [theme.breakpoints.up('md')]: {
+      marginLeft: mobileFullWidth ? theme.spacing(-3) : 0,
     },
-    '& .MuiTabs-scroller': {
-      [theme.breakpoints.up('md')]: {
-        marginLeft: mobileFullWidth ? theme.spacing(-3) : 0,
-      },
-      [theme.breakpoints.down('md')]: {
-        paddingLeft: mobileFullWidth ? theme.spacing(7) : 0,
-      },
-      [theme.breakpoints.down('sm')]: {
-        paddingLeft: mobileFullWidth ? theme.spacing(1) : 0,
-      },
+    [theme.breakpoints.down('md')]: {
+      paddingLeft: mobileFullWidth ? theme.spacing(7) : 0,
     },
-    '& .MuiTabs-indicator': {
-      display: hideIndicator && 'none',
-      backgroundColor: theme.palette.secondary.main,
-      height: '3px',
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: mobileFullWidth ? theme.spacing(1) : 0,
     },
-  }),
-);
+  },
+  '& .MuiTabs-indicator': {
+    display: hideIndicator && 'none',
+    backgroundColor: 'rgba(var(--sc-tabs-tab-underline) / 1)',
+    height: '3px',
+  },
+}));
 
 const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
   activeTab = 0,

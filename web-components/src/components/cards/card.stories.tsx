@@ -159,6 +159,30 @@ export const projectCard = (): JSX.Element => (
       purchaseDetailsTitles={projectCardPurchaseDetailsTitleMapping}
       buttons={projectCardButtonMapping}
     />
+
+    <ProjectCard
+      track={trackMock}
+      name="Coorong Project"
+      place={'Adelaide, South Australia, Australia'}
+      area={200}
+      comingSoon={false}
+      areaUnit="hectares"
+      imgSrc="/coorong.png"
+      tag="biodiversity"
+      onClick={onClick}
+      sx={{ maxWidth: 338, mr: 10, mb: 10 }}
+      projectPrefinancing={{
+        isPrefinanceProject: true,
+        price: '100',
+        estimatedIssuance: '200',
+        stripePaymentLink: 'https://stripe.com',
+      }}
+      draftText="Draft"
+      bodyTexts={projectCardBodyTextMapping}
+      purchaseDetailsTitles={projectCardPurchaseDetailsTitleMapping}
+      buttons={projectCardButtonMapping}
+      colorScheme="terrasos"
+    />
   </Box>
 );
 

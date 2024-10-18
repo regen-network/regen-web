@@ -19,6 +19,7 @@ import {
   useCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
+import { IS_TERRASOS } from 'lib/env';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 
 import { Link } from 'components/atoms';
@@ -154,7 +155,7 @@ const Projects = (): JSX.Element => {
           />
         </div>
       </div>
-      {gettingStartedResourcesSection && (
+      {gettingStartedResourcesSection && !IS_TERRASOS && (
         <GettingStartedResourcesSection
           section={gettingStartedResourcesSection}
         />

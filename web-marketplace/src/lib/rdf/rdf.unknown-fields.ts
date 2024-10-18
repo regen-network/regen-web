@@ -127,7 +127,8 @@ export function getBatchUnknownFields<
 }
 
 export function getFieldLabel(fieldName: string) {
-  return fieldName.split(':')[1].replace(/([A-Z])/g, ' $1');
+  // Remove the field prefix and add space before capital letters.
+  return fieldName.replace(/[^:]*\:/, '').replace(/([A-Z])/g, ' $1');
 }
 
 export function getFieldType(fieldName: string, context?: ContextDefinition) {

@@ -8,7 +8,7 @@ export const useNavigateToSlug = (slug?: string | null, path?: string) => {
   useEffect(() => {
     if (!!slug) {
       const hash = location.hash || '';
-      navigate(`/project/${slug}${path}${hash}`, { replace: true });
+      navigate(`/project/${slug}${path || ''}${hash}`, { replace: true });
     }
   }, [slug, navigate, location.hash, path]);
 };

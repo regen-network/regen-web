@@ -60,6 +60,7 @@ import { GettingStartedResourcesSection } from '../../molecules';
 import { ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';
 import { useGetProject } from './hooks/useGetProject';
+import { useNavigateToSlug } from './hooks/useNavigateToSlug';
 import useSeo from './hooks/useSeo';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { useStakeholders } from './hooks/useStakeholders';
@@ -151,19 +152,10 @@ function ProjectDetails(): JSX.Element {
     onChainCreditClassId,
     creditClassOnChain,
     cardSellOrders,
+    slug,
   } = useGetProject();
 
-  const slug =
-    offchainProjectByIdData?.data?.projectById?.slug ||
-    projectByOnChainId?.data?.projectByOnChainId?.slug ||
-    projectBySlug?.data.projectBySlug?.slug;
-
-  useEffect(() => {
-    if (!!slug) {
-      const hash = location.hash || '';
-      navigate(`/project/${slug}${hash}`, { replace: true });
-    }
-  }, [slug, navigate, location.hash]);
+  useNavigateToSlug(slug);
 
   const element = document.getElementById(location.hash.substring(1));
   useEffect(() => {

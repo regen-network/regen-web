@@ -8,6 +8,7 @@ import WithLoader from 'components/atoms/WithLoader';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetProject';
+import { useNavigateToSlug } from 'components/templates/ProjectDetails/hooks/useNavigateToSlug';
 
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsForm } from './BuyCredits.Form';
@@ -36,7 +37,10 @@ export const BuyCredits = () => {
     loadingBuySellOrders,
     sellOrders,
     cardSellOrders,
+    slug,
   } = useGetProject();
+
+  useNavigateToSlug(slug);
 
   const [paymentOption, setPaymentOption] = useState<PaymentOptionsType>(
     PAYMENT_OPTIONS.CRYPTO,

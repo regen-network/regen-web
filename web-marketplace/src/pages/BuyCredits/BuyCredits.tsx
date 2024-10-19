@@ -40,7 +40,7 @@ export const BuyCredits = () => {
     slug,
   } = useGetProject();
 
-  useNavigateToSlug(slug);
+  useNavigateToSlug(slug, '/buy');
 
   const [paymentOption, setPaymentOption] = useState<PaymentOptionsType>(
     PAYMENT_OPTIONS.CRYPTO,

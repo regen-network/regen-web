@@ -1,7 +1,9 @@
 import { Box, Grid, SxProps, Theme } from '@mui/material';
+import { IS_REGEN } from 'lib/env';
 
 import { ImageType } from '../../../types/shared/imageType';
 import { sxToArray } from '../../../utils/mui/sxToArray';
+import SvgColorOverride from '../../icons/utils/SvgColorOverride';
 import { Image } from '../../image';
 import { Body, Label, Title } from '../../typography';
 import Card from '../Card';
@@ -68,14 +70,13 @@ export default function ProjectImpactCard({
                   top: [15, 25],
                   left: 0,
                   width: 'fit-content',
-                  backgroundColor: 'secondary.main',
-                  color: 'primary.main',
                   borderRadius: '0px 2px 2px 0px',
                   p: 1.25,
                   pl: 2.5,
                 },
                 ...sxToArray(labelSx),
               ]}
+              className="text-sc-tag-prefinance-text-icon bg-sc-tag-impact-background"
             >
               {label}
             </Label>
@@ -100,15 +101,27 @@ export default function ProjectImpactCard({
               <Grid container spacing={2.5} sx={{ mb: 3.125, mt: -2.5 }}>
                 {sdgs.map(sdg => (
                   <Grid key={sdg.src} item>
-                    <Box
-                      component="img"
-                      sx={{
-                        width: { xs: 50, sm: 60 },
-                        height: { xs: 50, sm: 60 },
-                      }}
-                      src={sdg.src}
-                      alt={sdg.alt}
-                    />
+                    {IS_REGEN ? (
+                      <Box
+                        component="img"
+                        sx={{
+                          width: { xs: 50, sm: 60 },
+                          height: { xs: 50, sm: 60 },
+                        }}
+                        src={sdg.src}
+                        alt={sdg.alt}
+                      />
+                    ) : (
+                      <SvgColorOverride
+                        src={sdg.src}
+                        color="rgba(var(--ac-neutral-500) / 1)"
+                        filterIntensity={6}
+                        sx={{
+                          width: { xs: 50, sm: 60 },
+                          height: { xs: 50, sm: 60 },
+                        }}
+                      />
+                    )}
                   </Grid>
                 ))}
               </Grid>

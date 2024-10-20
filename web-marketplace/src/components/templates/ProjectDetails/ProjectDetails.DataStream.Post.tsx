@@ -179,7 +179,13 @@ export const DataStreamPost = ({
             index === postsLength - 1 ? 'pb-35' : ''
           }`}
         >
-          <div className="text-grey-0 rounded-[50%] h-[28px] w-[28px] bg-blue-green-gradient flex items-center justify-center">
+          <div
+            className="text-grey-0 rounded-[50%] h-[28px] w-[28px] flex items-center justify-center color"
+            style={{
+              background:
+                'linear-gradient(197deg, rgba(var(--ac-gradients-primary-gradient-600)) 8.02%, rgba(var(--ac-gradients-primary-gradient-500)) 43.42%, rgba(var(--ac-gradients-primary-gradient-400)) 78.83%)',
+            }}
+          >
             <BubbleIcon />
           </div>
           <TimelineConnector className="bg-grey-300 w-1" />

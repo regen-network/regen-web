@@ -9,6 +9,8 @@ import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSl
 import { Body, Label, Title } from 'web-components/src/components/typography';
 import { headerFontFamily, Theme } from 'web-components/src/theme/muiTheme';
 
+import { IS_REGEN } from 'lib/env';
+
 import { DetailsSectionButton } from './DetailsSection.Button';
 import {
   CREDIT,
@@ -91,6 +93,7 @@ export const DetailsSection: React.FC<
                       item
                       sx={{
                         background:
+                          // TODO: get design system colors for this gradient
                           'linear-gradient(206deg, #7D9AA2 0%, #9AD3BE 50%, #D1E2C7 100%)',
                         '-webkit-background-clip': 'text',
                         '-webkit-text-fill-color': 'transparent',
@@ -132,6 +135,7 @@ export const DetailsSection: React.FC<
               title={card?.credibilityCard?.title as string}
               descriptionRaw={card?.credibilityCard?.descriptionRaw}
               icon={card?.credibilityCard?.icon?.asset?.url}
+              overrideIconColor={!IS_REGEN}
               claims={
                 card?.claims?.map(claim => ({
                   description: claim?.description as string,

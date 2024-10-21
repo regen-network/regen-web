@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-16 09:16+0200\n"
+"POT-Creation-Date: 2024-10-21 14:09+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -677,7 +677,7 @@ msgstr ""
 msgid "Buy"
 msgstr ""
 
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:207
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:5
 msgid "BUY"
 msgstr ""
@@ -694,7 +694,7 @@ msgstr ""
 msgid "buy credits"
 msgstr ""
 
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:207
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
 msgid "BUY CREDITS"
 msgstr ""
 
@@ -901,7 +901,7 @@ msgstr ""
 msgid "Class ID: unique identifier of the credit class on Regen Ledger."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:180
+#: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:176
 msgid "Clear all"
 msgstr ""
 
@@ -2713,7 +2713,7 @@ msgstr ""
 msgid "PROJECT"
 msgstr ""
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:148
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:149
 msgid "Project {onChainProjectId}"
 msgstr ""
 
@@ -3205,7 +3205,7 @@ msgstr ""
 msgid "Select a wallet"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:158
+#: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:154
 msgid "Select all"
 msgstr ""
 
@@ -3381,7 +3381,7 @@ msgstr ""
 msgid "Sorry, your transaction was not successful."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:211
+#: src/pages/Projects/AllProjects/AllProjects.tsx:212
 msgid "Sort by:"
 msgstr ""
 

@@ -4,6 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2024-10-22 09:37+0100\n"
 "POT-Creation-Date: 2024-10-16 09:16+0200\n"
 "POT-Creation-Date: 2024-10-16 15:27+0100\n"
+"POT-Creation-Date: 2024-10-21 16:20+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -353,7 +354,7 @@ msgid "all profiles"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
-#: src/pages/Projects/Projects.tsx:73
+#: src/pages/Projects/Projects.tsx:74
 msgid "All projects"
 msgstr ""
 
@@ -683,6 +684,7 @@ msgid "Buy"
 msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:5
 msgid "BUY"
 msgstr ""
@@ -699,6 +701,7 @@ msgstr ""
 msgid "buy credits"
 msgstr ""
 
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
 msgid "BUY CREDITS"
 msgstr ""
@@ -905,6 +908,7 @@ msgstr ""
 msgid "Class ID: unique identifier of the credit class on Regen Ledger."
 msgstr ""
 
+#: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:176
 #: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:176
 msgid "Clear all"
 msgstr ""
@@ -1206,6 +1210,7 @@ msgid "credit name"
 msgstr ""
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.tsx:259
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:280
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr ""
 
@@ -2589,7 +2594,7 @@ msgid "prefinance"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:49
-#: src/pages/Projects/Projects.tsx:83
+#: src/pages/Projects/Projects.tsx:84
 msgid "Prefinance projects"
 msgstr ""
 
@@ -2741,6 +2746,7 @@ msgstr ""
 msgid "PROJECT"
 msgstr ""
 
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:149
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:149
 msgid "Project {onChainProjectId}"
 msgstr ""
@@ -3238,11 +3244,14 @@ msgid "Select a wallet"
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:154
+#: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:154
 msgid "Select all"
 msgstr ""
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.tsx:244
 #: src/components/molecules/CreditsAmount/CreditsAmount.tsx:245
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:265
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:266
 msgid "Select option"
 msgstr ""
 
@@ -3418,6 +3427,8 @@ msgid "Sorry, your transaction was not successful."
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.tsx:209
+#: src/pages/Projects/AllProjects/AllProjects.tsx:212
+#: src/pages/Projects/AllProjects/AllProjects.tsx:212
 msgid "Sort by:"
 msgstr ""
 

@@ -43,7 +43,7 @@ export const ProfileEdit = () => {
   const onBackClick = (): void => {
     const isFormDirty = isDirtyRef.current;
 
-    const path = '/profile/edit';
+    const path = '/dashboard/admin';
     if (isFormDirty) {
       setIsWarningModalOpen(path);
     } else {
@@ -58,7 +58,7 @@ export const ProfileEdit = () => {
 
   const onNavClick = (sectionName: string): void => {
     const isFormDirty = isDirtyRef.current;
-    const path = `/profile/edit/${sectionName.replace(' ', '-')}`;
+    const path = `/dashboard/admin/${sectionName.replace(' ', '-')}`;
     if (isFormDirty) {
       setIsWarningModalOpen(path);
     } else {

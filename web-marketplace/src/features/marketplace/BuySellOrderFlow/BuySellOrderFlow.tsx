@@ -114,7 +114,7 @@ export const BuySellOrderFlow = ({
   };
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
-    navigate('/profile/portfolio');
+    navigate('/dashboard/portfolio');
   };
 
   /**

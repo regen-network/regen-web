@@ -222,11 +222,15 @@ export const CreditsAmount = ({
     [card, orderedSellOrders, setValue, creditTypePrecision],
   );
 
-  const displayDenom = findDisplayDenom({
-    allowedDenoms,
-    bankDenom: currency.askDenom,
-    baseDenom: currency.askBaseDenom,
-  });
+  const displayDenom = useMemo(
+    () =>
+      findDisplayDenom({
+        allowedDenoms,
+        bankDenom: currency.askDenom,
+        baseDenom: currency.askBaseDenom,
+      }),
+    [allowedDenoms, currency.askDenom, currency.askBaseDenom],
+  );
 
   return (
     <div className={`grid min-h-min`} style={{ gridAutoRows: 'min-content' }}>

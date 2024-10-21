@@ -127,6 +127,11 @@ export const useGetProject = () => {
     [sanityProject?.fiatSellOrders, sellOrders],
   );
 
+  const slug =
+    offchainProjectByIdData?.data?.projectById?.slug ||
+    projectByOnChainId?.data?.projectByOnChainId?.slug ||
+    projectBySlug?.data.projectBySlug?.slug;
+
   return {
     sanityProject,
     loadingSanityProject,
@@ -145,5 +150,6 @@ export const useGetProject = () => {
     loadingBuySellOrders,
     sellOrders,
     cardSellOrders,
+    slug,
   };
 };

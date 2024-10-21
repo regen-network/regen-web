@@ -138,11 +138,13 @@ export function ChooseCreditsForm({
   );
 
   useEffect(() => {
-    if (microUserBalance) {
-      const _userBalance = microToDenom(microUserBalance);
-      setUserBalance(_userBalance);
-    }
-  }, [microUserBalance, userBalance]);
+    const _userBalance = microToDenom(microUserBalance);
+    setUserBalance(_userBalance);
+  }, [microUserBalance]);
+
+  useEffect(() => {
+    form.trigger(CURRENCY_AMOUNT);
+  }, [userBalance, form]);
 
   const filteredCryptoSellOrders = useMemo(
     () =>
@@ -161,14 +163,11 @@ export function ChooseCreditsForm({
   const handlePaymentOptions = useCallback(
     (option: string) => {
       setPaymentOption(option as PaymentOptionsType);
-      form.reset({
-        ...form.getValues(),
-        [CREDIT_VINTAGE_OPTIONS]: [],
-        [CURRENCY]:
-          option === PAYMENT_OPTIONS.CARD
-            ? cardCurrency
-            : defaultCryptoCurrency,
-      });
+      form.setValue(CREDIT_VINTAGE_OPTIONS, []);
+      form.setValue(
+        CURRENCY,
+        option === PAYMENT_OPTIONS.CARD ? cardCurrency : defaultCryptoCurrency,
+      );
     },
     [setPaymentOption, form, cardCurrency, defaultCryptoCurrency],
   );

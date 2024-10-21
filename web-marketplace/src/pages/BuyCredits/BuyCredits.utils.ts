@@ -1,12 +1,11 @@
 import { msg } from '@lingui/macro';
 
-import { Project } from 'generated/sanity-graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
-import { PaymentOptionsType } from './BuyCredits.types';
+import { BuyCreditsSchemaTypes, PaymentOptionsType } from './BuyCredits.types';
 
 type GetFormModelParams = {
   _: TranslatorType;
@@ -41,4 +40,15 @@ export const getFormModel = ({
       { id: 'complete', name: _(msg`Complete`) },
     ],
   };
+};
+
+export const findMatchingSellOrders = (
+  data: BuyCreditsSchemaTypes,
+  sellOrders: UISellOrderInfo[] | undefined,
+) => {
+  if (!sellOrders) return [];
+
+  const sellOrderIds = data?.sellOrders?.map(order => order.sellOrderId);
+
+  return sellOrders.filter(order => sellOrderIds?.includes(order.id));
 };

@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery } from '@tanstack/react-query';
@@ -20,7 +22,9 @@ import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketpl
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { useFetchSellOrders } from 'features/marketplace/BuySellOrderFlow/hooks/useFetchSellOrders';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
@@ -28,12 +32,16 @@ import {
   CURRENCY_AMOUNT,
   SELL_ORDERS,
 } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
+import { getCurrencyAmount } from 'components/molecules/CreditsAmount/CreditsAmount.utils';
+import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';
 import { AgreePurchaseFormFiat } from 'components/organisms/AgreePurchaseForm/AgreePurchaseFormFiat';
+import { BuyFiatModal } from 'components/organisms/BuyFiatModal/BuyFiatModal';
 import { ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
+import { getFilteredCryptoSellOrders } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.utils';
 import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData';
 import { LoginFlow } from 'components/organisms/LoginFlow/LoginFlow';
 import { PaymentInfoForm } from 'components/organisms/PaymentInfoForm/PaymentInfoForm';
@@ -49,6 +57,7 @@ import {
   CardDetails,
   PaymentOptionsType,
 } from './BuyCredits.types';
+import { findMatchingSellOrders } from './BuyCredits.utils';
 import { usePurchase } from './hooks/usePurchase';
 
 type Props = {
@@ -67,6 +76,7 @@ type Props = {
   projectHref: string;
   cardDetails?: CardDetails;
 };
+
 export const BuyCreditsForm = ({
   paymentOption,
   setPaymentOption,
@@ -95,6 +105,7 @@ export const BuyCreditsForm = ({
     onButtonClick,
   } = useLoginData({});
   const navigate = useNavigate();
+  const { _ } = useLingui();
 
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
@@ -102,6 +113,12 @@ export const BuyCreditsForm = ({
   const [paymentOptionCryptoClicked, setPaymentOptionCryptoClicked] = useAtom(
     paymentOptionCryptoClickedAtom,
   );
+  const [userCanPurchaseCredits, setUserCanPurchaseCredits] = useState({
+    openModal: false,
+    amountAvailable: 0,
+  });
+
+  const { refetchSellOrders } = useFetchSellOrders();
 
   const cardDisabled = cardSellOrders.length === 0;
 
@@ -165,35 +182,61 @@ export const BuyCreditsForm = ({
       stripe?: Stripe | null,
       elements?: StripeElements | null,
     ) => {
-      const { retirementReason, country, stateProvince, postalCode } = values;
-      const {
-        sellOrders: selectedSellOrders,
-        email,
-        name,
-        savePaymentMethod,
-        createAccount: createActiveAccount,
-        // subscribeNewsletter, TODO
-        // followProject,
-      } = data;
+      const sellOrders = await refetchSellOrders();
+      const requestedSellOrders = findMatchingSellOrders(
+        data,
+        sellOrders?.map(normalizeToUISellOrderInfo),
+      );
+      const currentAvailableCredits = requestedSellOrders.reduce(
+        (credits, sellOrder) => credits + Number(sellOrder.quantity),
+        0,
+      );
+      const sellCanProceed =
+        data.creditsAmount && data.creditsAmount < currentAvailableCredits;
+      const partialCreditsAvailable =
+        data.creditsAmount && data.creditsAmount > currentAvailableCredits;
 
-      if (selectedSellOrders)
-        purchase({
-          paymentOption,
-          selectedSellOrders,
-          retiring,
-          retirementReason,
-          country,
-          stateProvince,
-          postalCode,
+      if (sellCanProceed) {
+        const { retirementReason, country, stateProvince, postalCode } = values;
+        const {
+          sellOrders: selectedSellOrders,
           email,
           name,
           savePaymentMethod,
-          createActiveAccount,
-          paymentMethodId,
-          stripe,
-          elements,
-          confirmationTokenId,
+          createAccount: createActiveAccount,
+          // subscribeNewsletter, TODO
+          // followProject,
+        } = data;
+
+        if (selectedSellOrders)
+          purchase({
+            paymentOption,
+            selectedSellOrders,
+            retiring,
+            retirementReason,
+            country,
+            stateProvince,
+            postalCode,
+            email,
+            name,
+            savePaymentMethod,
+            createActiveAccount,
+            paymentMethodId,
+            stripe,
+            elements,
+            confirmationTokenId,
+          });
+      } else if (partialCreditsAvailable) {
+        setUserCanPurchaseCredits({
+          openModal: true,
+          amountAvailable: currentAvailableCredits,
         });
+      } else {
+        setUserCanPurchaseCredits({
+          openModal: true,
+          amountAvailable: 0,
+        });
+      }
     },
     [
       confirmationTokenId,
@@ -201,8 +244,56 @@ export const BuyCreditsForm = ({
       paymentMethodId,
       paymentOption,
       purchase,
+      refetchSellOrders,
       retiring,
     ],
+  );
+
+  const fiatModalConfig =
+    userCanPurchaseCredits.amountAvailable > 0
+      ? {
+          title: _(
+            msg`Sorry, another user has purchased some or all of the credits you selected!`,
+          ),
+          content: (
+            <>
+              <p className="uppercase font-muli text-sm font-extrabold pb-10">
+                <Trans>amount now available in</Trans>
+                {` ${findDisplayDenom({
+                  allowedDenoms: allowedDenomsData?.allowedDenoms,
+                  bankDenom: data?.currency?.askDenom!,
+                  baseDenom: data?.currency?.askBaseDenom!,
+                })}`}
+              </p>
+              <span>{userCanPurchaseCredits.amountAvailable}</span>
+            </>
+          ),
+          button: { text: _(msg`Choose new credits`), href: null },
+        }
+      : {
+          title: _(
+            msg`Sorry, another user has purchased all of the available credits from this project`,
+          ),
+          content: (
+            <p className="text-lg pb-10 text-center">
+              <Trans>
+                Because we use blockchain technology, if another user purchases
+                the credits before you check out, you’ll need to choose
+                different credits.
+              </Trans>
+            </p>
+          ),
+          button: { text: _(msg`search for new credits`), href: '/projects' },
+        };
+
+  const filteredCryptoSellOrders = useMemo(
+    () =>
+      getFilteredCryptoSellOrders({
+        askDenom: data.currency?.askDenom,
+        cryptoSellOrders,
+        retiring,
+      }),
+    [cryptoSellOrders, data.currency?.askDenom, retiring],
   );
 
   return (
@@ -328,6 +419,45 @@ export const BuyCreditsForm = ({
         onModalClose={onModalClose}
         wallets={walletsUiConfig}
         modalState={modalState}
+      />
+      <BuyFiatModal
+        title={fiatModalConfig.title}
+        content={fiatModalConfig.content}
+        button={fiatModalConfig.button}
+        userCanPurchaseCredits={userCanPurchaseCredits}
+        onClose={setUserCanPurchaseCredits}
+        handleClick={() => {
+          // If there is no credits available, we need to navigate to the projects page
+          if (fiatModalConfig.button.href) {
+            navigate(fiatModalConfig.button.href);
+          } else {
+            setUserCanPurchaseCredits({
+              ...userCanPurchaseCredits,
+              openModal: false,
+            });
+            const amounts = getCurrencyAmount({
+              currentCreditsAmount: userCanPurchaseCredits.amountAvailable,
+              card: paymentOption === PAYMENT_OPTIONS.CARD,
+              orderedSellOrders:
+                paymentOption === PAYMENT_OPTIONS.CARD
+                  ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
+                  : filteredCryptoSellOrders?.sort(
+                      (a, b) => Number(a.askAmount) - Number(b.askAmount),
+                    ) || [],
+              creditTypePrecision: creditTypeData?.creditType?.precision,
+            });
+            // After a purchase attempt where there's partial credits availability,
+            // we need to update the form with the new credits, currency amount and sell orders.
+            handleSaveNext({
+              ...data,
+              [CREDITS_AMOUNT]: userCanPurchaseCredits.amountAvailable,
+              [CURRENCY_AMOUNT]: amounts.currencyAmount,
+              [SELL_ORDERS]: amounts.sellOrders,
+            });
+            window.scrollTo(0, 0);
+            handleActiveStep(0);
+          }
+        }}
       />
     </div>
   );

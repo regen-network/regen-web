@@ -77,7 +77,9 @@ export const CurrencyInput = ({
   return (
     <div className="grow sm:flex-1 w-full sm:w-auto relative">
       {paymentOption === PAYMENT_OPTIONS.CARD && (
-        <span className="absolute top-[18px] left-10 z-50">$</span>
+        <span className="text-sm absolute top-[13px] sm:top-[18px] left-10 z-50">
+          $
+        </span>
       )}
       <TextField
         {...register(CURRENCY_AMOUNT)}

@@ -186,11 +186,12 @@ export const BuyCreditsForm = ({
         name,
         savePaymentMethod,
         createAccount: createActiveAccount,
+        creditsAmount,
         // subscribeNewsletter, TODO
         // followProject,
       } = data;
 
-      if (selectedSellOrders)
+      if (selectedSellOrders && creditsAmount)
         purchase({
           paymentOption,
           selectedSellOrders,
@@ -207,6 +208,7 @@ export const BuyCreditsForm = ({
           stripe,
           elements,
           confirmationTokenId,
+          creditsAmount,
         });
     },
     [
@@ -278,8 +280,8 @@ export const BuyCreditsForm = ({
     <div
       className={
         activeStep !== 0
-          ? 'flex gap-10 sm:gap-50 flex-col-reverse lg:flex-row items-center lg:items-start'
-          : undefined
+          ? 'flex mt-20 sm:mt-40 gap-10 sm:gap-50 flex-col-reverse lg:flex-row items-center lg:items-start'
+          : 'mt-20 sm:mt-40'
       }
     >
       <div>

@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { select } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
@@ -23,11 +24,17 @@ import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCs
 import { useWallet } from 'lib/wallet/wallet';
 
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
+import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useMsgClient } from 'hooks';
 
-import { PAYMENT_OPTIONS, VIEW_CERTIFICATE } from '../BuyCredits.constants';
+import {
+  PAYMENT_OPTIONS,
+  PURCHASE_SUCCESSFUL,
+  VIEW_CERTIFICATE,
+} from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
+import { useFetchLastRetirement } from './useFetchLastRetirement';
 
 type PurchaseParams = {
   paymentOption: PaymentOptionsType;
@@ -45,6 +52,7 @@ type PurchaseParams = {
   stripe?: Stripe | null;
   elements?: StripeElements | null;
   confirmationTokenId?: string;
+  creditsAmount: number;
 };
 
 export const usePurchase = () => {
@@ -60,6 +68,7 @@ export const usePurchase = () => {
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const retryCsrfRequest = useRetryCsrfRequest();
   const { handleSuccess } = useMultiStep<BuyCreditsSchemaTypes>();
+  const fetchLastRetirement = useFetchLastRetirement();
 
   const purchase = useCallback(
     async ({
@@ -78,6 +87,7 @@ export const usePurchase = () => {
       stripe,
       elements,
       confirmationTokenId,
+      creditsAmount,
     }: PurchaseParams) => {
       const retirementJurisdiction =
         retiring && country
@@ -130,9 +140,6 @@ export const usePurchase = () => {
                     setErrorBannerTextAtom(String(error));
                     return;
                   }
-                  // this will go to the last "Complete" step, we should redirect to the certificate page APP-361
-                  // there, we need to getGetTxsEventQuery + show success modal
-                  handleSuccess();
                 } else {
                   // or new credit card
                   const { error, paymentIntent } = await stripe.confirmPayment({
@@ -162,8 +169,17 @@ export const usePurchase = () => {
                       return;
                     }
                   }
-                  handleSuccess();
                 }
+
+                const retirement = await fetchLastRetirement({
+                  batchDenoms: selectedSellOrders.map(
+                    sellOrder => sellOrder.batchDenom,
+                  ),
+                  retirementJurisdiction,
+                  retirementReason,
+                  creditsAmount,
+                });
+                if (retirement) handleSuccess();
               },
             });
           }
@@ -221,7 +237,7 @@ export const usePurchase = () => {
               setTxSuccessfulModalAtom(atom => {
                 atom.open = true;
                 // atom.cardItems = cardItems; // TODO
-                // atom.title = _(POST_CREATED);
+                atom.title = _(PURCHASE_SUCCESSFUL);
                 atom.buttonTitle = _(VIEW_CERTIFICATE);
                 // atom.buttonLink = buttonLink;
                 atom.txHash = deliverTxResponse?.transactionHash;

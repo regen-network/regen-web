@@ -18,6 +18,7 @@ export interface SectionProps {
     root?: string;
     title?: string;
     titleWrap?: string;
+    description?: string;
   };
   sx?: {
     root?: SxProps<Theme>;
@@ -176,6 +177,7 @@ const Section = ({
               pt={[3.25, 7.75]}
               textAlign="center"
               sx={sx?.description}
+              className={classes?.description}
             >
               {typeof description === 'string' ? (
                 ReactHtmlParser(description)

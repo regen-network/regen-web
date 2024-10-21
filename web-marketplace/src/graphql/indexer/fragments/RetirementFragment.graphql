@@ -4,6 +4,7 @@ fragment retirementFields on Retirement {
   amount
   reason
   batchDenom
+  batchDenoms
   jurisdiction
   timestamp
   reason

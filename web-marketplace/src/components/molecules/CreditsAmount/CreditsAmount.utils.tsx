@@ -163,6 +163,7 @@ export const formatSellOrder = ({
 }: FormatSellOrderParams) => {
   return {
     sellOrderId: order.id,
+    batchDenom: order.batchDenom,
     quantity: quantity || order.quantity,
     bidPrice: !card
       ? { amount: String(price), denom: order.askDenom }

@@ -20,8 +20,8 @@ import {
   POST_CREATED,
   VIEW_POST,
 } from '../PostFlow.constants';
-import { timer } from '../PostFlow.utils';
 import { useGetSuccessModalContent } from './useGetSuccessModalContent';
+import { timer } from 'utils/timer';
 
 export type FetchMsgAnchorParams = {
   iri: string;

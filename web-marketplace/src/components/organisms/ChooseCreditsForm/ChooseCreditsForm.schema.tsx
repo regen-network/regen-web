@@ -39,6 +39,7 @@ export const createChooseCreditsFormSchema = ({
     [SELL_ORDERS]: z.array(
       z.object({
         sellOrderId: z.string(),
+        batchDenom: z.string(),
         quantity: z.string(),
         price: z.number().optional(),
         bidPrice: z

@@ -23,6 +23,7 @@ type Step = {
     success: string;
     error: string;
   };
+  description?: string;
 };
 
 type ContextProps<T extends object> = {

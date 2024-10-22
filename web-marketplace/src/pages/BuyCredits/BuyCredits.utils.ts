@@ -4,6 +4,7 @@ import { msg, plural } from '@lingui/macro';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from './BuyCredits.types';
@@ -60,4 +61,16 @@ export const findMatchingSellOrders = (
   const sellOrderIds = data?.sellOrders?.map(order => order.sellOrderId);
 
   return sellOrders.filter(order => sellOrderIds?.includes(order.id));
+};
+
+export const getOrderedSellOrders = (
+  isCard: boolean,
+  cardSellOrders: CardSellOrder[],
+  filteredCryptoSellOrders: UISellOrderInfo[],
+): UISellOrderInfo[] => {
+  return isCard
+    ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
+    : filteredCryptoSellOrders?.sort(
+        (a, b) => Number(a.askAmount) - Number(b.askAmount),
+      ) || [];
 };

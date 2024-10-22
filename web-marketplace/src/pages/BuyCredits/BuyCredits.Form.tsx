@@ -67,6 +67,7 @@ import {
 import {
   findMatchingSellOrders,
   getCreditsAvailableBannerText,
+  getOrderedSellOrders,
 } from './BuyCredits.utils';
 import { usePurchase } from './hooks/usePurchase';
 
@@ -557,12 +558,11 @@ export const BuyCreditsForm = ({
             const amounts = getCurrencyAmount({
               currentCreditsAmount: userCanPurchaseCredits.amountAvailable,
               card: paymentOption === PAYMENT_OPTIONS.CARD,
-              orderedSellOrders:
-                paymentOption === PAYMENT_OPTIONS.CARD
-                  ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
-                  : filteredCryptoSellOrders?.sort(
-                      (a, b) => Number(a.askAmount) - Number(b.askAmount),
-                    ) || [],
+              orderedSellOrders: getOrderedSellOrders(
+                paymentOption === PAYMENT_OPTIONS.CARD,
+                cardSellOrders,
+                filteredCryptoSellOrders,
+              ),
               creditTypePrecision: creditTypeData?.creditType?.precision,
             });
             // After a purchase attempt where there's partial credits availability,

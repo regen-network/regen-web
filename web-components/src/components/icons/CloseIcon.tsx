@@ -4,6 +4,8 @@ import { Theme } from '@mui/material/styles';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import { makeStyles } from 'tss-react/mui';
 
+import { cn } from '../../utils/styles/cn';
+
 interface CloseIconProps extends SvgIconProps {
   svgColor?: string;
 }
@@ -17,13 +19,18 @@ const useStyles = makeStyles()((theme: Theme) => ({
 
 export default function CloseIcon({
   svgColor,
+  className,
   ...props
 }: CloseIconProps): JSX.Element {
   const { classes } = useStyles();
   const theme = useTheme();
 
   return (
-    <SvgIcon viewBox="0 0 26 26" className={classes.root} {...props}>
+    <SvgIcon
+      viewBox="0 0 26 26"
+      className={cn(classes.root, className)}
+      {...props}
+    >
       <rect
         x="7.08997"
         y="20.0477"

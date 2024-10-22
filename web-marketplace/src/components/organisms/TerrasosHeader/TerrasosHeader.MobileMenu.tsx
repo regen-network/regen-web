@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import useClickOutside from 'utils/hooks/useClickOutside';
 
@@ -22,6 +23,7 @@ export const TerrasosHeaderMobileMenu = ({
   setIsOpen,
 }: TerrasosHeaderMobileMenuProps) => {
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
+  const { pathname } = useLocation();
   const menuRef = useClickOutside<HTMLDivElement>(() => setIsOpen(false));
 
   return (
@@ -29,10 +31,10 @@ export const TerrasosHeaderMobileMenu = ({
       className={cn(
         'fixed right-0 top-0 bottom-0',
         'flex flex-col items-start flex-shrink-0 lg:hidden',
-        'w-[305px] bg-ac-neutral-600 text-sc-button-text-icon-light',
-        'font-montserrat text-[13px] leading-[145%] [font-feature-settings:"liga"off,"clig"off]',
+        'w-[350px] bg-ac-neutral-600 text-sc-button-text-icon-light',
+        'font-montserrat text-[15px] leading-[145%] [font-feature-settings:"liga"off,"clig"off]',
         'overflow-y-auto z-50',
-        'pt-[45px] pl-[45px]',
+        'p-50',
       )}
       animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : '100%' }}
       transition={{
@@ -46,17 +48,17 @@ export const TerrasosHeaderMobileMenu = ({
       <div
         onClick={() => setIsOpen(false)}
         role="button"
-        className="cursor-pointer absolute right-[15px] top-[11px] w-[24px] h-[24px] hover:text-brand-300 transition-colors duration-300"
+        className="cursor-pointer absolute right-[14px] top-[14px] hover:text-brand-300 transition-colors duration-300"
       >
-        <CloseIcon />
+        <CloseIcon className="w-[32px] h-[32px]" />
       </div>
       <ul className="pl-0 my-0 w-full">
         {items.map((item, index) => (
-          <li key={index} className={cn('flex flex-col font-semibold')}>
+          <li key={index} className={cn('flex flex-col font-bold')}>
             <div
               className={cn(
-                'flex items-center cursor-pointer hover:text-brand-300 pr-20 pl-15 py-[7px]',
-                selectedItem === index && 'text-brand-300',
+                'flex items-center cursor-pointer hover:text-brand-300 px-20 py-[8px]',
+                pathname === item.href && 'text-brand-300',
               )}
               onClick={e => {
                 if (item.items && item.href === '') {
@@ -70,7 +72,7 @@ export const TerrasosHeaderMobileMenu = ({
             >
               <a href={item.href}>{item.label}</a>
               {item.items && (
-                <ArrowDownIcon className={cn('text-[14px] ml-5')} />
+                <ArrowDownIcon className={cn('text-[18px] ml-5')} />
               )}
             </div>
             <AnimatePresence>

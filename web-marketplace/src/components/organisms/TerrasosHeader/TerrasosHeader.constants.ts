@@ -23,7 +23,7 @@ export const getTerrasosHeaderItems = (
   },
   {
     label: _(msg`Habitat banks`),
-    href: 'https://www.terrasos.co/bancos-de-habitat/',
+    href: '/projects/1',
     items: [
       {
         label: _(msg`Information`),
@@ -40,7 +40,7 @@ export const getTerrasosHeaderItems = (
     href: 'https://www.terrasos.co/que-es-tebu/',
   },
   {
-    label: _(msg`Geovisor`),
+    label: _(msg`Geo-viewer`),
     href: 'https://www.terrasos.co/geovisor/',
   },
   {

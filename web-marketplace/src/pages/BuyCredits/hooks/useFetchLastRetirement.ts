@@ -40,21 +40,19 @@ export const useFetchLastRetirement = () => {
       creditsAmount,
     }: FetchLastRetirementParams) => {
       setProcessingModalAtom(atom => void (atom.open = true));
-
       let i = 1;
       let retirement;
       while (i < 10) {
         const { data } = await refetch();
-        console.log('batchDenoms', batchDenoms);
-        console.log('retirement data', data);
-        retirement = data?.data?.allRetirements?.nodes?.filter(
-          retirement =>
+        retirement = data?.data?.allRetirements?.nodes?.filter(retirement => {
+          return (
             retirement?.batchDenoms.sort().toString() ===
               batchDenoms.sort().toString() &&
             retirement.reason === retirementReason &&
             retirement.jurisdiction === retirementJurisdiction &&
-            retirement.amount === creditsAmount.toString(),
-        )?.[0];
+            Number(retirement.amount) === creditsAmount
+          );
+        })?.[0];
         i++;
         if (!!retirement) {
           break;

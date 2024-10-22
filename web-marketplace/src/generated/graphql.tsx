@@ -76,6 +76,8 @@ export type Account = Node & {
   projectPartnersByAccountId: ProjectPartnersConnection;
   /** Reads and enables pagination through a set of `AccountTranslation`. */
   accountTranslationsById: AccountTranslationsConnection;
+  /** Reads and enables pagination through a set of `FiatOrder`. */
+  fiatOrdersByAccountId: FiatOrdersConnection;
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByProjectDeveloperIdAndCreditClassId: AccountCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
@@ -214,6 +216,17 @@ export type AccountAccountTranslationsByIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AccountTranslationsOrderBy>>;
   condition?: Maybe<AccountTranslationCondition>;
+};
+
+
+export type AccountFiatOrdersByAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<FiatOrdersOrderBy>>;
+  condition?: Maybe<FiatOrderCondition>;
 };
 
 
@@ -1261,6 +1274,41 @@ export type CreateDocumentTranslationPayloadDocumentTranslationEdgeArgs = {
   orderBy?: Maybe<Array<DocumentTranslationsOrderBy>>;
 };
 
+/** All input for the create `FiatOrder` mutation. */
+export type CreateFiatOrderInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `FiatOrder` to be created by this mutation. */
+  fiatOrder: FiatOrderInput;
+};
+
+/** The output of our create `FiatOrder` mutation. */
+export type CreateFiatOrderPayload = {
+  __typename?: 'CreateFiatOrderPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `FiatOrder` that was created by this mutation. */
+  fiatOrder?: Maybe<FiatOrder>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `FiatOrder`. */
+  accountByAccountId?: Maybe<Account>;
+  /** An edge for our `FiatOrder`. May be used by Relay 1. */
+  fiatOrderEdge?: Maybe<FiatOrdersEdge>;
+};
+
+
+/** The output of our create `FiatOrder` mutation. */
+export type CreateFiatOrderPayloadFiatOrderEdgeArgs = {
+  orderBy?: Maybe<Array<FiatOrdersOrderBy>>;
+};
+
 /** All input for the create `MetadataGraph` mutation. */
 export type CreateMetadataGraphInput = {
   /**
@@ -2164,6 +2212,16 @@ export type DeleteAccountByAddrInput = {
   addr: Scalars['String'];
 };
 
+/** All input for the `deleteAccountByCustodialAddress` mutation. */
+export type DeleteAccountByCustodialAddressInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  custodialAddress: Scalars['String'];
+};
+
 /** All input for the `deleteAccountById` mutation. */
 export type DeleteAccountByIdInput = {
   /**
@@ -2519,6 +2577,62 @@ export type DeleteDocumentTranslationPayload = {
 /** The output of our delete `DocumentTranslation` mutation. */
 export type DeleteDocumentTranslationPayloadDocumentTranslationEdgeArgs = {
   orderBy?: Maybe<Array<DocumentTranslationsOrderBy>>;
+};
+
+/** All input for the `deleteFiatOrderById` mutation. */
+export type DeleteFiatOrderByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['UUID'];
+};
+
+/** All input for the `deleteFiatOrderByStripePaymentIntentId` mutation. */
+export type DeleteFiatOrderByStripePaymentIntentIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  stripePaymentIntentId: Scalars['String'];
+};
+
+/** All input for the `deleteFiatOrder` mutation. */
+export type DeleteFiatOrderInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `FiatOrder` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `FiatOrder` mutation. */
+export type DeleteFiatOrderPayload = {
+  __typename?: 'DeleteFiatOrderPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `FiatOrder` that was deleted by this mutation. */
+  fiatOrder?: Maybe<FiatOrder>;
+  deletedFiatOrderId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `FiatOrder`. */
+  accountByAccountId?: Maybe<Account>;
+  /** An edge for our `FiatOrder`. May be used by Relay 1. */
+  fiatOrderEdge?: Maybe<FiatOrdersEdge>;
+};
+
+
+/** The output of our delete `FiatOrder` mutation. */
+export type DeleteFiatOrderPayloadFiatOrderEdgeArgs = {
+  orderBy?: Maybe<Array<FiatOrdersOrderBy>>;
 };
 
 /** All input for the `deleteMetadataGraphByIri` mutation. */
@@ -3285,6 +3399,142 @@ export enum DocumentsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
+export type FiatOrder = Node & {
+  __typename?: 'FiatOrder';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  id: Scalars['UUID'];
+  createdAt: Scalars['Datetime'];
+  accountId: Scalars['UUID'];
+  txHash: Scalars['String'];
+  stripePaymentIntentId: Scalars['String'];
+  retiredCredits: Scalars['Boolean'];
+  totalPrice: Scalars['Float'];
+  askDenom: Scalars['String'];
+  creditsAmount: Scalars['Float'];
+  projectOnChainId: Scalars['String'];
+  customerName?: Maybe<Scalars['String']>;
+  anonymous: Scalars['Boolean'];
+  /** Reads a single `Account` that is related to this `FiatOrder`. */
+  accountByAccountId?: Maybe<Account>;
+};
+
+/**
+ * A condition to be used against `FiatOrder` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type FiatOrderCondition = {
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `createdAt` field. */
+  createdAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `accountId` field. */
+  accountId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `txHash` field. */
+  txHash?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `stripePaymentIntentId` field. */
+  stripePaymentIntentId?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `retiredCredits` field. */
+  retiredCredits?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `totalPrice` field. */
+  totalPrice?: Maybe<Scalars['Float']>;
+  /** Checks for equality with the object’s `askDenom` field. */
+  askDenom?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `creditsAmount` field. */
+  creditsAmount?: Maybe<Scalars['Float']>;
+  /** Checks for equality with the object’s `projectOnChainId` field. */
+  projectOnChainId?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `customerName` field. */
+  customerName?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `anonymous` field. */
+  anonymous?: Maybe<Scalars['Boolean']>;
+};
+
+/** An input for mutations affecting `FiatOrder` */
+export type FiatOrderInput = {
+  id?: Maybe<Scalars['UUID']>;
+  createdAt: Scalars['Datetime'];
+  accountId: Scalars['UUID'];
+  txHash: Scalars['String'];
+  stripePaymentIntentId: Scalars['String'];
+  retiredCredits: Scalars['Boolean'];
+  totalPrice: Scalars['Float'];
+  askDenom: Scalars['String'];
+  creditsAmount: Scalars['Float'];
+  projectOnChainId: Scalars['String'];
+  customerName?: Maybe<Scalars['String']>;
+  anonymous?: Maybe<Scalars['Boolean']>;
+};
+
+/** Represents an update to a `FiatOrder`. Fields that are set will be updated. */
+export type FiatOrderPatch = {
+  id?: Maybe<Scalars['UUID']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+  accountId?: Maybe<Scalars['UUID']>;
+  txHash?: Maybe<Scalars['String']>;
+  stripePaymentIntentId?: Maybe<Scalars['String']>;
+  retiredCredits?: Maybe<Scalars['Boolean']>;
+  totalPrice?: Maybe<Scalars['Float']>;
+  askDenom?: Maybe<Scalars['String']>;
+  creditsAmount?: Maybe<Scalars['Float']>;
+  projectOnChainId?: Maybe<Scalars['String']>;
+  customerName?: Maybe<Scalars['String']>;
+  anonymous?: Maybe<Scalars['Boolean']>;
+};
+
+/** A connection to a list of `FiatOrder` values. */
+export type FiatOrdersConnection = {
+  __typename?: 'FiatOrdersConnection';
+  /** A list of `FiatOrder` objects. */
+  nodes: Array<Maybe<FiatOrder>>;
+  /** A list of edges which contains the `FiatOrder` and cursor to aid in pagination. */
+  edges: Array<FiatOrdersEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `FiatOrder` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `FiatOrder` edge in the connection. */
+export type FiatOrdersEdge = {
+  __typename?: 'FiatOrdersEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `FiatOrder` at the end of the edge. */
+  node?: Maybe<FiatOrder>;
+};
+
+/** Methods to use when ordering `FiatOrder`. */
+export enum FiatOrdersOrderBy {
+  Natural = 'NATURAL',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  CreatedAtAsc = 'CREATED_AT_ASC',
+  CreatedAtDesc = 'CREATED_AT_DESC',
+  AccountIdAsc = 'ACCOUNT_ID_ASC',
+  AccountIdDesc = 'ACCOUNT_ID_DESC',
+  TxHashAsc = 'TX_HASH_ASC',
+  TxHashDesc = 'TX_HASH_DESC',
+  StripePaymentIntentIdAsc = 'STRIPE_PAYMENT_INTENT_ID_ASC',
+  StripePaymentIntentIdDesc = 'STRIPE_PAYMENT_INTENT_ID_DESC',
+  RetiredCreditsAsc = 'RETIRED_CREDITS_ASC',
+  RetiredCreditsDesc = 'RETIRED_CREDITS_DESC',
+  TotalPriceAsc = 'TOTAL_PRICE_ASC',
+  TotalPriceDesc = 'TOTAL_PRICE_DESC',
+  AskDenomAsc = 'ASK_DENOM_ASC',
+  AskDenomDesc = 'ASK_DENOM_DESC',
+  CreditsAmountAsc = 'CREDITS_AMOUNT_ASC',
+  CreditsAmountDesc = 'CREDITS_AMOUNT_DESC',
+  ProjectOnChainIdAsc = 'PROJECT_ON_CHAIN_ID_ASC',
+  ProjectOnChainIdDesc = 'PROJECT_ON_CHAIN_ID_DESC',
+  CustomerNameAsc = 'CUSTOMER_NAME_ASC',
+  CustomerNameDesc = 'CUSTOMER_NAME_DESC',
+  AnonymousAsc = 'ANONYMOUS_ASC',
+  AnonymousDesc = 'ANONYMOUS_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
 
 /** A filter to be used against JSON fields. All fields are combined with a logical ‘and.’ */
 export type JsonFilter = {
@@ -3505,6 +3755,8 @@ export type Mutation = {
   createDocument?: Maybe<CreateDocumentPayload>;
   /** Creates a single `DocumentTranslation`. */
   createDocumentTranslation?: Maybe<CreateDocumentTranslationPayload>;
+  /** Creates a single `FiatOrder`. */
+  createFiatOrder?: Maybe<CreateFiatOrderPayload>;
   /** Creates a single `MetadataGraph`. */
   createMetadataGraph?: Maybe<CreateMetadataGraphPayload>;
   /** Creates a single `MetadataGraphTranslation`. */
@@ -3533,6 +3785,8 @@ export type Mutation = {
   updateAccountById?: Maybe<UpdateAccountPayload>;
   /** Updates a single `Account` using a unique key and a patch. */
   updateAccountByAddr?: Maybe<UpdateAccountPayload>;
+  /** Updates a single `Account` using a unique key and a patch. */
+  updateAccountByCustodialAddress?: Maybe<UpdateAccountPayload>;
   /** Updates a single `AccountTranslation` using its globally unique id and a patch. */
   updateAccountTranslation?: Maybe<UpdateAccountTranslationPayload>;
   /** Updates a single `AccountTranslation` using a unique key and a patch. */
@@ -3563,6 +3817,12 @@ export type Mutation = {
   updateDocumentTranslation?: Maybe<UpdateDocumentTranslationPayload>;
   /** Updates a single `DocumentTranslation` using a unique key and a patch. */
   updateDocumentTranslationByIdAndLanguageCode?: Maybe<UpdateDocumentTranslationPayload>;
+  /** Updates a single `FiatOrder` using its globally unique id and a patch. */
+  updateFiatOrder?: Maybe<UpdateFiatOrderPayload>;
+  /** Updates a single `FiatOrder` using a unique key and a patch. */
+  updateFiatOrderById?: Maybe<UpdateFiatOrderPayload>;
+  /** Updates a single `FiatOrder` using a unique key and a patch. */
+  updateFiatOrderByStripePaymentIntentId?: Maybe<UpdateFiatOrderPayload>;
   /** Updates a single `MetadataGraph` using its globally unique id and a patch. */
   updateMetadataGraph?: Maybe<UpdateMetadataGraphPayload>;
   /** Updates a single `MetadataGraph` using a unique key and a patch. */
@@ -3621,6 +3881,8 @@ export type Mutation = {
   deleteAccountById?: Maybe<DeleteAccountPayload>;
   /** Deletes a single `Account` using a unique key. */
   deleteAccountByAddr?: Maybe<DeleteAccountPayload>;
+  /** Deletes a single `Account` using a unique key. */
+  deleteAccountByCustodialAddress?: Maybe<DeleteAccountPayload>;
   /** Deletes a single `AccountTranslation` using its globally unique id. */
   deleteAccountTranslation?: Maybe<DeleteAccountTranslationPayload>;
   /** Deletes a single `AccountTranslation` using a unique key. */
@@ -3651,6 +3913,12 @@ export type Mutation = {
   deleteDocumentTranslation?: Maybe<DeleteDocumentTranslationPayload>;
   /** Deletes a single `DocumentTranslation` using a unique key. */
   deleteDocumentTranslationByIdAndLanguageCode?: Maybe<DeleteDocumentTranslationPayload>;
+  /** Deletes a single `FiatOrder` using its globally unique id. */
+  deleteFiatOrder?: Maybe<DeleteFiatOrderPayload>;
+  /** Deletes a single `FiatOrder` using a unique key. */
+  deleteFiatOrderById?: Maybe<DeleteFiatOrderPayload>;
+  /** Deletes a single `FiatOrder` using a unique key. */
+  deleteFiatOrderByStripePaymentIntentId?: Maybe<DeleteFiatOrderPayload>;
   /** Deletes a single `MetadataGraph` using its globally unique id. */
   deleteMetadataGraph?: Maybe<DeleteMetadataGraphPayload>;
   /** Deletes a single `MetadataGraph` using a unique key. */
@@ -3749,6 +4017,12 @@ export type MutationCreateDocumentTranslationArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateFiatOrderArgs = {
+  input: CreateFiatOrderInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateMetadataGraphArgs = {
   input: CreateMetadataGraphInput;
 };
@@ -3829,6 +4103,12 @@ export type MutationUpdateAccountByIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateAccountByAddrArgs = {
   input: UpdateAccountByAddrInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateAccountByCustodialAddressArgs = {
+  input: UpdateAccountByCustodialAddressInput;
 };
 
 
@@ -3919,6 +4199,24 @@ export type MutationUpdateDocumentTranslationArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateDocumentTranslationByIdAndLanguageCodeArgs = {
   input: UpdateDocumentTranslationByIdAndLanguageCodeInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateFiatOrderArgs = {
+  input: UpdateFiatOrderInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateFiatOrderByIdArgs = {
+  input: UpdateFiatOrderByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateFiatOrderByStripePaymentIntentIdArgs = {
+  input: UpdateFiatOrderByStripePaymentIntentIdInput;
 };
 
 
@@ -4097,6 +4395,12 @@ export type MutationDeleteAccountByAddrArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteAccountByCustodialAddressArgs = {
+  input: DeleteAccountByCustodialAddressInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteAccountTranslationArgs = {
   input: DeleteAccountTranslationInput;
 };
@@ -4183,6 +4487,24 @@ export type MutationDeleteDocumentTranslationArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteDocumentTranslationByIdAndLanguageCodeArgs = {
   input: DeleteDocumentTranslationByIdAndLanguageCodeInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteFiatOrderArgs = {
+  input: DeleteFiatOrderInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteFiatOrderByIdArgs = {
+  input: DeleteFiatOrderByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteFiatOrderByStripePaymentIntentIdArgs = {
+  input: DeleteFiatOrderByStripePaymentIntentIdInput;
 };
 
 
@@ -5239,6 +5561,8 @@ export type Query = Node & {
   allDocuments?: Maybe<DocumentsConnection>;
   /** Reads and enables pagination through a set of `DocumentTranslation`. */
   allDocumentTranslations?: Maybe<DocumentTranslationsConnection>;
+  /** Reads and enables pagination through a set of `FiatOrder`. */
+  allFiatOrders?: Maybe<FiatOrdersConnection>;
   /** Reads and enables pagination through a set of `MetadataGraph`. */
   allMetadataGraphs?: Maybe<MetadataGraphsConnection>;
   /** Reads and enables pagination through a set of `MetadataGraphTranslation`. */
@@ -5263,6 +5587,7 @@ export type Query = Node & {
   allUploads?: Maybe<UploadsConnection>;
   accountById?: Maybe<Account>;
   accountByAddr?: Maybe<Account>;
+  accountByCustodialAddress?: Maybe<Account>;
   accountTranslationByIdAndLanguageCode?: Maybe<AccountTranslation>;
   creditBatchById?: Maybe<CreditBatch>;
   creditBatchByBatchDenom?: Maybe<CreditBatch>;
@@ -5272,6 +5597,8 @@ export type Query = Node & {
   creditClassVersionByIdAndCreatedAt?: Maybe<CreditClassVersion>;
   documentById?: Maybe<Document>;
   documentTranslationByIdAndLanguageCode?: Maybe<DocumentTranslation>;
+  fiatOrderById?: Maybe<FiatOrder>;
+  fiatOrderByStripePaymentIntentId?: Maybe<FiatOrder>;
   metadataGraphByIri?: Maybe<MetadataGraph>;
   metadataGraphTranslationByIriAndLanguageCode?: Maybe<MetadataGraphTranslation>;
   organizationById?: Maybe<Organization>;
@@ -5290,6 +5617,7 @@ export type Query = Node & {
   /** Reads and enables pagination through a set of `Account`. */
   getAccountsByNameOrAddr?: Maybe<AccountsConnection>;
   getCurrentAccount?: Maybe<Account>;
+  getTxHashForPaymentIntent?: Maybe<Scalars['String']>;
   /** Reads a single `Account` using its globally unique `ID`. */
   account?: Maybe<Account>;
   /** Reads a single `AccountTranslation` using its globally unique `ID`. */
@@ -5304,6 +5632,8 @@ export type Query = Node & {
   document?: Maybe<Document>;
   /** Reads a single `DocumentTranslation` using its globally unique `ID`. */
   documentTranslation?: Maybe<DocumentTranslation>;
+  /** Reads a single `FiatOrder` using its globally unique `ID`. */
+  fiatOrder?: Maybe<FiatOrder>;
   /** Reads a single `MetadataGraph` using its globally unique `ID`. */
   metadataGraph?: Maybe<MetadataGraph>;
   /** Reads a single `MetadataGraphTranslation` using its globally unique `ID`. */
@@ -5418,6 +5748,18 @@ export type QueryAllDocumentTranslationsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<DocumentTranslationsOrderBy>>;
   condition?: Maybe<DocumentTranslationCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllFiatOrdersArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<FiatOrdersOrderBy>>;
+  condition?: Maybe<FiatOrderCondition>;
 };
 
 
@@ -5573,6 +5915,12 @@ export type QueryAccountByAddrArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAccountByCustodialAddressArgs = {
+  custodialAddress: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAccountTranslationByIdAndLanguageCodeArgs = {
   id: Scalars['UUID'];
   languageCode: Scalars['String'];
@@ -5626,6 +5974,18 @@ export type QueryDocumentByIdArgs = {
 export type QueryDocumentTranslationByIdAndLanguageCodeArgs = {
   id: Scalars['UUID'];
   languageCode: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryFiatOrderByIdArgs = {
+  id: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryFiatOrderByStripePaymentIntentIdArgs = {
+  stripePaymentIntentId: Scalars['String'];
 };
 
 
@@ -5735,6 +6095,12 @@ export type QueryGetAccountsByNameOrAddrArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryGetTxHashForPaymentIntentArgs = {
+  paymentIntentId?: Maybe<Scalars['String']>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAccountArgs = {
   nodeId: Scalars['ID'];
 };
@@ -5772,6 +6138,12 @@ export type QueryDocumentArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryDocumentTranslationArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryFiatOrderArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -6021,6 +6393,18 @@ export type UpdateAccountByAddrInput = {
   /** An object where the defined keys will be set on the `Account` being updated. */
   accountPatch: AccountPatch;
   addr: Scalars['String'];
+};
+
+/** All input for the `updateAccountByCustodialAddress` mutation. */
+export type UpdateAccountByCustodialAddressInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Account` being updated. */
+  accountPatch: AccountPatch;
+  custodialAddress: Scalars['String'];
 };
 
 /** All input for the `updateAccountById` mutation. */
@@ -6405,6 +6789,67 @@ export type UpdateDocumentTranslationPayload = {
 /** The output of our update `DocumentTranslation` mutation. */
 export type UpdateDocumentTranslationPayloadDocumentTranslationEdgeArgs = {
   orderBy?: Maybe<Array<DocumentTranslationsOrderBy>>;
+};
+
+/** All input for the `updateFiatOrderById` mutation. */
+export type UpdateFiatOrderByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `FiatOrder` being updated. */
+  fiatOrderPatch: FiatOrderPatch;
+  id: Scalars['UUID'];
+};
+
+/** All input for the `updateFiatOrderByStripePaymentIntentId` mutation. */
+export type UpdateFiatOrderByStripePaymentIntentIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `FiatOrder` being updated. */
+  fiatOrderPatch: FiatOrderPatch;
+  stripePaymentIntentId: Scalars['String'];
+};
+
+/** All input for the `updateFiatOrder` mutation. */
+export type UpdateFiatOrderInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `FiatOrder` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `FiatOrder` being updated. */
+  fiatOrderPatch: FiatOrderPatch;
+};
+
+/** The output of our update `FiatOrder` mutation. */
+export type UpdateFiatOrderPayload = {
+  __typename?: 'UpdateFiatOrderPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `FiatOrder` that was updated by this mutation. */
+  fiatOrder?: Maybe<FiatOrder>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `FiatOrder`. */
+  accountByAccountId?: Maybe<Account>;
+  /** An edge for our `FiatOrder`. May be used by Relay 1. */
+  fiatOrderEdge?: Maybe<FiatOrdersEdge>;
+};
+
+
+/** The output of our update `FiatOrder` mutation. */
+export type UpdateFiatOrderPayloadFiatOrderEdgeArgs = {
+  orderBy?: Maybe<Array<FiatOrdersOrderBy>>;
 };
 
 /** All input for the `updateMetadataGraphByIri` mutation. */
@@ -7303,6 +7748,16 @@ export type GetAccountsByNameOrAddrQuery = (
   )> }
 );
 
+export type GetTxHashForPaymentIntentQueryVariables = Exact<{
+  paymentIntentId: Scalars['String'];
+}>;
+
+
+export type GetTxHashForPaymentIntentQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'getTxHashForPaymentIntent'>
+);
+
 export type MoreProjectFieldsFragment = (
   { __typename?: 'Project' }
   & Pick<Project, 'slug' | 'onChainId' | 'metadata'>
@@ -8036,6 +8491,39 @@ export function useGetAccountsByNameOrAddrLazyQuery(baseOptions?: Apollo.LazyQue
 export type GetAccountsByNameOrAddrQueryHookResult = ReturnType<typeof useGetAccountsByNameOrAddrQuery>;
 export type GetAccountsByNameOrAddrLazyQueryHookResult = ReturnType<typeof useGetAccountsByNameOrAddrLazyQuery>;
 export type GetAccountsByNameOrAddrQueryResult = Apollo.QueryResult<GetAccountsByNameOrAddrQuery, GetAccountsByNameOrAddrQueryVariables>;
+export const GetTxHashForPaymentIntentDocument = gql`
+    query GetTxHashForPaymentIntent($paymentIntentId: String!) {
+  getTxHashForPaymentIntent(paymentIntentId: $paymentIntentId)
+}
+    `;
+
+/**
+ * __useGetTxHashForPaymentIntentQuery__
+ *
+ * To run a query within a React component, call `useGetTxHashForPaymentIntentQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTxHashForPaymentIntentQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTxHashForPaymentIntentQuery({
+ *   variables: {
+ *      paymentIntentId: // value for 'paymentIntentId'
+ *   },
+ * });
+ */
+export function useGetTxHashForPaymentIntentQuery(baseOptions: Apollo.QueryHookOptions<GetTxHashForPaymentIntentQuery, GetTxHashForPaymentIntentQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTxHashForPaymentIntentQuery, GetTxHashForPaymentIntentQueryVariables>(GetTxHashForPaymentIntentDocument, options);
+      }
+export function useGetTxHashForPaymentIntentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTxHashForPaymentIntentQuery, GetTxHashForPaymentIntentQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTxHashForPaymentIntentQuery, GetTxHashForPaymentIntentQueryVariables>(GetTxHashForPaymentIntentDocument, options);
+        }
+export type GetTxHashForPaymentIntentQueryHookResult = ReturnType<typeof useGetTxHashForPaymentIntentQuery>;
+export type GetTxHashForPaymentIntentLazyQueryHookResult = ReturnType<typeof useGetTxHashForPaymentIntentLazyQuery>;
+export type GetTxHashForPaymentIntentQueryResult = Apollo.QueryResult<GetTxHashForPaymentIntentQuery, GetTxHashForPaymentIntentQueryVariables>;
 export const MoreProjectsDocument = gql`
     query MoreProjects {
   allProjects {

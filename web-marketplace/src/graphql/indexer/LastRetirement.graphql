@@ -1,4 +1,4 @@
-query LastRetirement {
+query IndexerLastRetirement {
   allRetirements(first: 1, orderBy: [TIMESTAMP_DESC]) {
     nodes {
       ...retirementFields

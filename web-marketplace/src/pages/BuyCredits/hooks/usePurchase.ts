@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { select } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -23,6 +24,7 @@ import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/mark
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { VIEW_PORTFOLIO } from 'components/organisms/BasketOverview/BasketOverview.constants';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
@@ -58,6 +60,7 @@ type PurchaseParams = {
 export const usePurchase = () => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
+  const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
@@ -179,7 +182,22 @@ export const usePurchase = () => {
                   retirementReason,
                   creditsAmount,
                 });
-                if (retirement) handleSuccess();
+                if (retirement) {
+                  setTxSuccessfulModalAtom(atom => {
+                    atom.open = true;
+                    // atom.cardItems = cardItems; // TODO
+                    atom.title = _(PURCHASE_SUCCESSFUL);
+                    atom.buttonTitle = _(VIEW_CERTIFICATE);
+                    atom.onButtonClick = () =>
+                      setTxSuccessfulModalAtom(
+                        atom => void (atom.open = false),
+                      );
+                    atom.txHash = retirement.txHash;
+                    atom.keepOpenOnLocationChange = true;
+                  });
+                  handleSuccess();
+                  navigate(`/certificate/${retirement.nodeId}`);
+                }
               },
             });
           }
@@ -238,9 +256,14 @@ export const usePurchase = () => {
                 atom.open = true;
                 // atom.cardItems = cardItems; // TODO
                 atom.title = _(PURCHASE_SUCCESSFUL);
-                atom.buttonTitle = _(VIEW_CERTIFICATE);
+                atom.buttonTitle = retiring
+                  ? _(VIEW_CERTIFICATE)
+                  : _(VIEW_PORTFOLIO);
+                atom.onButtonClick = () =>
+                  setTxSuccessfulModalAtom(atom => void (atom.open = false));
                 // atom.buttonLink = buttonLink;
                 atom.txHash = deliverTxResponse?.transactionHash;
+                atom.keepOpenOnLocationChange = true;
               });
 
               // Reload sell orders

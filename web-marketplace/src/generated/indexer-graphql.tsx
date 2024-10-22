@@ -4205,10 +4205,10 @@ export type IndexerIssuersByClassIdQuery = (
   )> }
 );
 
-export type LastRetirementQueryVariables = Exact<{ [key: string]: never; }>;
+export type IndexerLastRetirementQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LastRetirementQuery = (
+export type IndexerLastRetirementQuery = (
   { __typename?: 'Query' }
   & { allRetirements?: Maybe<(
     { __typename?: 'RetirementsConnection' }
@@ -4452,8 +4452,8 @@ export function useIndexerIssuersByClassIdLazyQuery(baseOptions?: Apollo.LazyQue
 export type IndexerIssuersByClassIdQueryHookResult = ReturnType<typeof useIndexerIssuersByClassIdQuery>;
 export type IndexerIssuersByClassIdLazyQueryHookResult = ReturnType<typeof useIndexerIssuersByClassIdLazyQuery>;
 export type IndexerIssuersByClassIdQueryResult = Apollo.QueryResult<IndexerIssuersByClassIdQuery, IndexerIssuersByClassIdQueryVariables>;
-export const LastRetirementDocument = gql`
-    query LastRetirement {
+export const IndexerLastRetirementDocument = gql`
+    query IndexerLastRetirement {
   allRetirements(first: 1, orderBy: [TIMESTAMP_DESC]) {
     nodes {
       ...retirementFields
@@ -4463,31 +4463,31 @@ export const LastRetirementDocument = gql`
     ${RetirementFieldsFragmentDoc}`;
 
 /**
- * __useLastRetirementQuery__
+ * __useIndexerLastRetirementQuery__
  *
- * To run a query within a React component, call `useLastRetirementQuery` and pass it any options that fit your needs.
- * When your component renders, `useLastRetirementQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useIndexerLastRetirementQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIndexerLastRetirementQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useLastRetirementQuery({
+ * const { data, loading, error } = useIndexerLastRetirementQuery({
  *   variables: {
  *   },
  * });
  */
-export function useLastRetirementQuery(baseOptions?: Apollo.QueryHookOptions<LastRetirementQuery, LastRetirementQueryVariables>) {
+export function useIndexerLastRetirementQuery(baseOptions?: Apollo.QueryHookOptions<IndexerLastRetirementQuery, IndexerLastRetirementQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<LastRetirementQuery, LastRetirementQueryVariables>(LastRetirementDocument, options);
+        return Apollo.useQuery<IndexerLastRetirementQuery, IndexerLastRetirementQueryVariables>(IndexerLastRetirementDocument, options);
       }
-export function useLastRetirementLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LastRetirementQuery, LastRetirementQueryVariables>) {
+export function useIndexerLastRetirementLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerLastRetirementQuery, IndexerLastRetirementQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<LastRetirementQuery, LastRetirementQueryVariables>(LastRetirementDocument, options);
+          return Apollo.useLazyQuery<IndexerLastRetirementQuery, IndexerLastRetirementQueryVariables>(IndexerLastRetirementDocument, options);
         }
-export type LastRetirementQueryHookResult = ReturnType<typeof useLastRetirementQuery>;
-export type LastRetirementLazyQueryHookResult = ReturnType<typeof useLastRetirementLazyQuery>;
-export type LastRetirementQueryResult = Apollo.QueryResult<LastRetirementQuery, LastRetirementQueryVariables>;
+export type IndexerLastRetirementQueryHookResult = ReturnType<typeof useIndexerLastRetirementQuery>;
+export type IndexerLastRetirementLazyQueryHookResult = ReturnType<typeof useIndexerLastRetirementLazyQuery>;
+export type IndexerLastRetirementQueryResult = Apollo.QueryResult<IndexerLastRetirementQuery, IndexerLastRetirementQueryVariables>;
 export const IndexerRetirementByNodeIdDocument = gql`
     query IndexerRetirementByNodeId($nodeId: ID!) {
   retirement(nodeId: $nodeId) {

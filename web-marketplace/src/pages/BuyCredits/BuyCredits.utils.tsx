@@ -1,31 +1,31 @@
 import { i18n } from '@lingui/core';
 import { msg, plural } from '@lingui/macro';
 
-import { TranslatorType } from 'lib/i18n/i18n.types';
+import { getFormattedNumber } from 'web-components/src/utils/format';
 
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { PaymentOptionsType } from './BuyCredits.types';
 
 type GetFormModelParams = {
-  _: TranslatorType;
   paymentOption: PaymentOptionsType;
   retiring: boolean;
   projectId: string;
 };
 export const getFormModel = ({
-  _,
   paymentOption,
   retiring,
   projectId,
 }: GetFormModelParams) => {
-  const nameStep1 = _(msg`Choose credits`);
+  const nameStep1 = i18n._(msg`Choose credits`);
   const nameStep2 =
     paymentOption === PAYMENT_OPTIONS.CARD
-      ? _(msg`Payment info`)
-      : _(msg`Customer info`);
-  const nameStep3 = retiring ? _(msg`Retirement`) : _(msg`Agree & purchase`);
+      ? i18n._(msg`Payment info`)
+      : i18n._(msg`Customer info`);
+  const nameStep3 = retiring
+    ? i18n._(msg`Retirement`)
+    : i18n._(msg`Agree & purchase`);
   const descriptionStep3 = retiring
-    ? _(
+    ? i18n._(
         msg`Retirement permanently removes used credits from circulation to prevent their reuse, ensuring that the environmental benefit claimed is real and not double-counted.`,
       )
     : undefined;
@@ -49,10 +49,54 @@ export const getFormModel = ({
         title: nameStep3,
         description: descriptionStep3,
       },
-      { id: 'complete', name: _(msg`Complete`) },
+      { id: 'complete', name: i18n._(msg`Complete`) },
     ],
   };
 };
+
+type GetCardItemsParams = {
+  retiring: boolean;
+  creditsAmount: number;
+};
+export const getCardItems = ({
+  retiring,
+  creditsAmount,
+}: GetCardItemsParams) => [
+  {
+    label: i18n._(msg`total purchase price`),
+    value: {
+      name: formatNumber({
+        num: creditCount * microToDenom(price),
+        ...quantityFormatNumberOptions,
+      }),
+      icon: (
+        <Box
+          component="span"
+          sx={{
+            mr: '4px',
+            display: 'inline-block',
+            verticalAlign: 'bottom',
+          }}
+        >
+          <DenomIcon baseDenom={baseDenom} sx={{ display: 'flex' }} />
+        </Box>
+      ),
+    },
+  },
+  {
+    label: i18n._(msg`project`),
+    value: {
+      name: project.name,
+      url: `/project/${project.id}`,
+    },
+  },
+  {
+    label: retiring
+      ? i18n._(msg`amount retired`)
+      : i18n._(msg`amount tradable`),
+    value: { name: getFormattedNumber(creditsAmount) },
+  },
+];
 
 export const getCreditsAvailableBannerText = (creditsAvailable: number) => {
   const formattedCreditsAvailable = i18n.number(creditsAvailable);

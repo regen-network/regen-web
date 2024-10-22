@@ -1,7 +1,7 @@
 import {
-  LastRetirementDocument,
-  LastRetirementQuery,
-  LastRetirementQueryVariables,
+  IndexerLastRetirementDocument,
+  IndexerLastRetirementQuery,
+  IndexerLastRetirementQueryVariables,
 } from 'generated/indexer-graphql';
 
 import { getLastRetirementKey } from './getLastRetirement.constants';
@@ -18,10 +18,10 @@ export const getLastRetirement = ({
   queryFn: async () => {
     try {
       const data = await client.query<
-        LastRetirementQuery,
-        LastRetirementQueryVariables
+        IndexerLastRetirementQuery,
+        IndexerLastRetirementQueryVariables
       >({
-        query: LastRetirementDocument,
+        query: IndexerLastRetirementDocument,
       });
 
       return data;

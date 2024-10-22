@@ -79,7 +79,7 @@ type Props = {
   project?: ProjectWithOrderData;
 };
 
-const stripePromise = loadStripe(stripeKey);
+const stripe = loadStripe(stripeKey);
 
 export const BuyCreditsForm = ({
   paymentOption,
@@ -145,7 +145,6 @@ export const BuyCreditsForm = ({
     }),
   );
 
-  const stripe = useMemo(() => stripePromise, []);
   const stripeOptions = useMemo(
     () => ({
       amount: (data?.[CURRENCY_AMOUNT] || 0) * 100, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00),
@@ -225,7 +224,10 @@ export const BuyCreditsForm = ({
     [handleActiveStep],
   );
 
-  const allowedDenoms = allowedDenomsData?.allowedDenoms;
+  const allowedDenoms = useMemo(
+    () => allowedDenomsData?.allowedDenoms,
+    [allowedDenomsData?.allowedDenoms],
+  );
 
   const currency = data?.[CURRENCY];
   const creditsAmount = data?.[CREDITS_AMOUNT];

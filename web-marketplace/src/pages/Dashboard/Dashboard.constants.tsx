@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg, Trans } from '@lingui/macro';
 
 import BridgeIcon from 'web-components/src/components/icons/BridgeIcon';
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
@@ -6,7 +6,10 @@ import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatch
 import { CreditClassIcon } from 'web-components/src/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
+import { PaymentInfoIcon } from 'web-components/src/components/icons/PaymentInfoIcon';
+import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
 import { ProjectPageIcon } from 'web-components/src/components/icons/ProjectPageIcon';
+import { ShoppingBagIcon } from 'web-components/src/components/icons/ShoppingBagIcon';
 
 import { NOT_SUPPORTED_TOOLTIP_TEXT } from './MyProjects/MyProjects.constants';
 
@@ -62,4 +65,44 @@ export const PROFILE_SETTINGS = {
   labelClassName,
   className,
   disabledTooltipText: NOT_SUPPORTED_TOOLTIP_TEXT,
+};
+
+export const HEADING_MY_ORDERS = {
+  children: (
+    <div className="text-xs text-grey-400 uppercase font-extrabold pl-20 tracking-wider">
+      <Trans>my orders</Trans>
+    </div>
+  ),
+};
+
+export const HEADING_PROFILE = {
+  children: (
+    <div className="text-xs text-grey-400 uppercase font-extrabold pl-20 tracking-wider">
+      <Trans>profile</Trans>
+    </div>
+  ),
+};
+
+export const MY_ORDERS = {
+  label: msg`My orders`,
+  href: '/profile/edit/my-orders',
+  icon: <ShoppingBagIcon linearGradient />,
+  labelClassName,
+  className,
+};
+
+export const MY_PREFINANCE_PROJECTS = {
+  label: msg`My prefinance projects`,
+  href: '/profile/edit/my-prefinance-projects',
+  icon: <PrefinanceIcon linearGradient width="24" height="24" />,
+  labelClassName,
+  className: `${className} mb-10`,
+};
+
+export const SAVED_PAYMENT_INFO = {
+  label: msg`Saved payment info`,
+  href: '/profile/edit/payment-info',
+  icon: <PaymentInfoIcon linearGradient />,
+  labelClassName,
+  className,
 };

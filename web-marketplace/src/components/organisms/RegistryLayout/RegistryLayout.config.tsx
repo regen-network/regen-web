@@ -20,9 +20,14 @@ import {
   CREDIT_BATCHES,
   CREDIT_CLASSES,
   EDIT_PROFILE,
+  HEADING_MY_ORDERS,
+  HEADING_PROFILE,
+  MY_ORDERS,
+  MY_PREFINANCE_PROJECTS,
   PORTFOLIO,
   PROFILE_SETTINGS,
   PROJECTS,
+  SAVED_PAYMENT_INFO,
   SEPARATOR,
 } from 'pages/Dashboard/Dashboard.constants';
 import { Link } from 'components/atoms';
@@ -86,6 +91,7 @@ interface GetUserMenuItemsParams {
   profile?: UserMenuItemProfileProps;
   _: TranslatorType;
   onProfileClick?: OnProfileClickType;
+  savedPaymentInfo: boolean;
 }
 
 export const getUserMenuItems = ({
@@ -99,6 +105,7 @@ export const getUserMenuItems = ({
   profile,
   _,
   onProfileClick,
+  savedPaymentInfo,
 }: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
   [
     profile && {
@@ -142,7 +149,31 @@ export const getUserMenuItems = ({
     {
       ...SEPARATOR,
     },
+    // {
+    //   ...HEADING_MY_ORDERS,
+    // },
+    // {
+    //   pathname,
+    //   linkComponent,
+    //   ...MY_ORDERS,
+    //   label: _(MY_ORDERS.label),
+    // },
+    // {
+    //   pathname,
+    //   linkComponent,
+    //   ...MY_PREFINANCE_PROJECTS,
+    //   label: _(MY_PREFINANCE_PROJECTS.label),
+    // },
+    // savedPaymentInfo && {
+    //   pathname,
+    //   linkComponent,
+    //   ...SAVED_PAYMENT_INFO,
+    //   label: _(SAVED_PAYMENT_INFO.label),
+    // },
     {
+      ...HEADING_PROFILE,
+    },
+    !loginDisabled && {
       pathname,
       linkComponent,
       ...EDIT_PROFILE,

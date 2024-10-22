@@ -1,37 +1,114 @@
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+type Props = {
+  linearGradient?: boolean;
+  disabled?: boolean;
+} & React.SVGProps<SVGSVGElement>;
 
-import { sxToArray } from '../../utils/mui/sxToArray';
-
-interface IconProps extends SvgIconProps {}
-
-export default function UserMenuIcon({
-  sx = [],
-  ...props
-}: IconProps): JSX.Element {
+export const UserMenuIcon = (props: Props) => {
+  const randomId = Math.random().toString(36).substring(7);
+  const gradientId1 = props.disabled
+    ? `user_menu_icon_gradient-${randomId}`
+    : 'user_menu_icon_gradient';
+  const gradientId2 = props.disabled
+    ? `user_menu_icon_gradient-${randomId}`
+    : 'user_menu_icon_gradient';
+  const gradientId3 = props.disabled
+    ? `user_menu_icon_gradient-${randomId}`
+    : 'user_menu_icon_gradient';
   return (
-    <SvgIcon
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 25 25"
-      sx={[{ fill: 'none' }, ...sxToArray(sx)]}
       {...props}
     >
-      <circle
-        cx="12.5"
-        cy="12.5"
-        r="11.5"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-      <path
-        d="M17.2083 9.37502C17.2083 11.9754 15.1003 14.0834 12.5 14.0834C9.89965 14.0834 7.79166 11.9754 7.79166 9.37502C7.79166 6.77468 9.89965 4.66669 12.5 4.66669C15.1003 4.66669 17.2083 6.77468 17.2083 9.37502Z"
-        stroke="currentColor"
-      />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M3.91647 21.587C4.79687 17.2447 8.30558 14 12.5 14C16.6944 14 20.2031 17.2447 21.0835 21.5871C20.8013 21.8537 20.5068 22.1073 20.2008 22.3469C19.6062 18.1158 16.3114 15 12.5 15C8.68849 15 5.39375 18.1158 4.79914 22.3469C4.49314 22.1072 4.1986 21.8536 3.91647 21.587Z"
-        fill="currentColor"
-      />
-    </SvgIcon>
+      <g id="Icon / User">
+        <circle
+          id="Ellipse 1"
+          cx="12"
+          cy="12"
+          r="11"
+          stroke={
+            props.linearGradient
+              ? `url(#${gradientId1})`
+              : props.disabled
+              ? '#8F8F8F'
+              : 'currentColor'
+          }
+          stroke-width="2"
+        />
+        <circle
+          id="Ellipse 2"
+          cx="12"
+          cy="9"
+          r="4.5"
+          stroke={
+            props.linearGradient
+              ? `url(#${gradientId2})`
+              : props.disabled
+              ? '#8F8F8F'
+              : 'currentColor'
+          }
+        />
+        <path
+          id="Intersect"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M3.75983 20.725C4.60501 16.5563 7.97337 13.4414 12 13.4414C16.0266 13.4414 19.395 16.5564 20.2401 20.725C19.9581 20.9915 19.6632 21.2444 19.3564 21.4828C18.7968 17.4261 15.6426 14.4414 12 14.4414C8.35735 14.4414 5.20321 17.4261 4.64358 21.4828C4.33677 21.2444 4.04184 20.9914 3.75983 20.725Z"
+          fill={
+            props.linearGradient
+              ? `url(#${gradientId3})`
+              : props.disabled
+              ? '#8F8F8F'
+              : 'currentColor'
+          }
+        />
+      </g>
+      <defs>
+        <linearGradient
+          id={gradientId1}
+          x1="12"
+          y1="2.86102e-07"
+          x2="2.4"
+          y2="24"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop
+            offset="0.00458717"
+            stopColor={props.disabled ? '#8F8F8F' : '#7BC796'}
+          />
+          <stop offset="1" stopColor={props.disabled ? '#EFEFEF' : '#C5E6D1'} />
+        </linearGradient>
+        <linearGradient
+          id={gradientId2}
+          x1="12"
+          y1="4"
+          x2="8"
+          y2="14"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop
+            offset="0.00458717"
+            stopColor={props.disabled ? '#8F8F8F' : '#7BC796'}
+          />
+          <stop offset="1" stopColor={props.disabled ? '#EFEFEF' : '#C5E6D1'} />
+        </linearGradient>
+        <linearGradient
+          id={gradientId3}
+          x1="12"
+          y1="13.4414"
+          x2="10.2462"
+          y2="22.4271"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop
+            offset="0.00458717"
+            stopColor={props.disabled ? '#8F8F8F' : '#7BC796'}
+          />
+          <stop offset="1" stopColor={props.disabled ? '#EFEFEF' : '#C5E6D1'} />
+        </linearGradient>
+      </defs>
+    </svg>
   );
-}
+};

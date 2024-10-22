@@ -130,6 +130,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
 
     return (
       <Form
+        className="px-10 py-40 md:p-40"
         form={form}
         onSubmit={async data => {
           const hasError = validateEditProfileForm({

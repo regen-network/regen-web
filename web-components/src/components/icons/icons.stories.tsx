@@ -73,6 +73,7 @@ import OrganizationIcon from './OrganizationIcon';
 import { OtherDocumentsIcon } from './OtherDocumentsIcon';
 import OutlinedCheckIcon from './OutlinedCheckIcon';
 import { PauseIcon } from './PauseIcon';
+import { PaymentInfoIcon } from './PaymentInfoIcon';
 import { PdfFileIcon } from './PdfFileIcon';
 import PendingIcon from './PendingIcon';
 import PhoneIcon from './PhoneIcon';
@@ -106,6 +107,7 @@ import SellOrderNotFoundIcon from './SellOrderNotFoundIcon';
 import ShadedCreditsIcon from './ShadedCreditsIcon';
 import ShareIcon from './ShareIcon';
 import ShieldIcon from './ShieldIcon';
+import { ShoppingBagIcon } from './ShoppingBagIcon';
 import SmallArrowIcon from './SmallArrowIcon';
 import { SmallDotsIcon } from './SmallDotsIcon';
 import DiscordIcon from './social/DiscordIcon';
@@ -133,7 +135,7 @@ import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
 import TrustIcon from './TrustIcon';
 import { UnlockIcon } from './UnlockIcon';
-import UserMenuIcon from './UserMenuIcon';
+import { UserMenuIcon } from './UserMenuIcon';
 import VerifiedIcon from './VerifiedIcon';
 import { VideoIcon } from './VideoIcon';
 import WalletErrorIcon from './WalletErrorIcon';
@@ -393,6 +395,8 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<USFlagIcon />} label="USFlagIcon" />
     <LabeledIcon icon={<CreditCardIcon />} label="CreditCardIcon" />
     <LabeledIcon icon={<CryptoIcon />} label="CryptoIcon" />
+    <LabeledIcon icon={<PaymentInfoIcon />} label="PaymentInfoIcon" />
+    <LabeledIcon icon={<ShoppingBagIcon />} label="ShoppingBagIcon" />
     <LabeledIcon icon={<ReceiptIcon />} label="ReceiptIcon" />
   </Grid>
 );

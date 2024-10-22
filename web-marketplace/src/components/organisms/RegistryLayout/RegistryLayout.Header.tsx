@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
+import { useQuery } from '@tanstack/react-query';
 import { getClientConfig } from 'clients/Clients.config';
 
 import Header from 'web-components/src/components/header';
@@ -10,6 +11,7 @@ import { UserMenuItems } from 'web-components/src/components/header/components/U
 import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { useAuth } from 'lib/auth/auth';
+import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { getWalletAddress } from 'pages/Dashboard/Dashboard.utils';
@@ -53,6 +55,15 @@ const RegistryLayoutHeader: React.FC = () => {
   const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
   const menuItems = useMemo(() => getMenuItems(pathname, _), [pathname, _]);
   const onProfileClick = useOnProfileClick();
+
+  const { data: paymentMethodData } = useQuery(
+    getPaymentMethodsQuery({
+      enabled: !!activeAccount,
+    }),
+  );
+
+  const savedPaymentInfo = (paymentMethodData?.paymentMethods?.length ?? 0) > 0;
+
   const userMenuItems = useMemo(
     () =>
       getUserMenuItems({
@@ -64,6 +75,7 @@ const RegistryLayoutHeader: React.FC = () => {
         isWalletConnected: isConnected,
         loginDisabled,
         onProfileClick,
+        savedPaymentInfo,
         profile: activeAccount
           ? {
               id: activeAccount.id,
@@ -87,10 +99,11 @@ const RegistryLayoutHeader: React.FC = () => {
       showProjects,
       isConnected,
       loginDisabled,
-      activeAccount,
-      privActiveAccount?.email,
-      _,
       onProfileClick,
+      savedPaymentInfo,
+      activeAccount,
+      _,
+      privActiveAccount?.email,
     ],
   );
 

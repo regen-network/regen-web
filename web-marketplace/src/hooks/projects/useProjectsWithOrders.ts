@@ -17,6 +17,7 @@ import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMet
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/sanity/getAllPrefinanceProjectsQuery/getAllPrefinanceProjectsQuery';
+import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { UNREGISTERED_PATH } from 'pages/Projects/AllProjects/AllProjects.constants';
@@ -289,6 +290,24 @@ export function useProjectsWithOrders({
     sortedProjects.map(project => project?.creditClassId),
   );
 
+  // Sanity projects
+  const sanityProjectsResults = useQueries({
+    queries: sortedProjects?.map(project => {
+      const id = project.slug || project.id;
+      return getProjectByIdQuery({
+        id,
+        sanityClient,
+        enabled: !!sanityClient && !!id,
+      });
+    }),
+  });
+  const sanityProjects = sanityProjectsResults.map(res => {
+    return res.data?.allProject?.[0];
+  });
+  const sanityProjectsLoading = sanityProjectsResults.some(
+    res => res.isFetching,
+  );
+
   /* Final Normalization */
 
   const projectsWithMetadata = useMemo(
@@ -302,8 +321,9 @@ export function useProjectsWithOrders({
         projectPagesMetadata,
         programAccounts,
         sanityCreditClassData: creditClassData,
-        prefinanceProjectsData,
         classesMetadata,
+        sanityProjects,
+        wallet,
       }),
     [
       sortedProjects,
@@ -311,8 +331,9 @@ export function useProjectsWithOrders({
       projectPagesMetadata,
       programAccounts,
       creditClassData,
-      prefinanceProjectsData,
       classesMetadata,
+      sanityProjects,
+      wallet,
     ],
   );
 
@@ -331,8 +352,10 @@ export function useProjectsWithOrders({
       isLoadingProjects ||
       isLoadingProjectsByClass ||
       isLoadingSellOrders ||
+      !marketplaceClient ||
       isLoadingSanityCreditClasses ||
       isLoadingPrefinanceProjects ||
+      sanityProjectsLoading ||
       isLoadingProject ||
       isClassesMetadataLoading ||
       projectsMetadataLoading ||

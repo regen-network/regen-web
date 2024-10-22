@@ -16,10 +16,10 @@ import {
   getProjectCardButtonMapping,
   getProjectCardPurchaseDetailsTitleMapping,
 } from 'lib/constants/shared.constants';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { getCreditsTooltip } from 'pages/Projects/AllProjects/utils/getCreditsTooltip';
 import { getIsSoldOut } from 'pages/Projects/AllProjects/utils/getIsSoldOut';
 import WithLoader from 'components/atoms/WithLoader';
@@ -31,7 +31,7 @@ import { useSectionStyles } from './ProjectCardsSection.styles';
 import { ProjectCardOnButtonClickParams } from './ProjectCardsSection.types';
 
 interface Props {
-  projects: ProjectWithOrderData[];
+  projects: NormalizeProject[];
   title?: string;
   body?: Maybe<Scalars['JSON']>;
   titleAlign?: 'center' | 'left';

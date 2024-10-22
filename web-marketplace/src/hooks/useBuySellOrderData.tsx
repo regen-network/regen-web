@@ -1,6 +1,5 @@
-import { useWallet } from 'lib/wallet/wallet';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 
 type Props = {
@@ -8,33 +7,28 @@ type Props = {
   classId?: string;
 };
 
-type ReponseType = {
+type ResponseType = {
   isBuyFlowDisabled: boolean;
-  projectsWithOrderData: ProjectWithOrderData[];
+  projectsWithOrderData: NormalizeProject[];
   loadingBuySellOrders: boolean;
 };
 
 export const useBuySellOrderData = ({
   projectId,
   classId,
-}: Props): ReponseType => {
-  const { wallet } = useWallet();
-
+}: Props): ResponseType => {
   const { projectsWithOrderData, loading: loadingProjects } =
     useProjectsWithOrders({
       projectId,
       classId,
       enableOffchainProjectsQuery: false,
+      useCommunityProjects: true,
     });
-
-  const sellOrdersAvailable = projectsWithOrderData[0]?.sellOrders.filter(
-    sellOrder => sellOrder.seller !== wallet?.address,
-  );
 
   const isBuyFlowDisabled =
     loadingProjects ||
     projectsWithOrderData?.length === 0 ||
-    sellOrdersAvailable?.length === 0;
+    projectsWithOrderData[0]?.filteredSellOrders?.length === 0;
 
   return {
     loadingBuySellOrders: loadingProjects,

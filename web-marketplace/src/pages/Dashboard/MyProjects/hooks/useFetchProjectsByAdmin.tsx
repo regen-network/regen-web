@@ -3,7 +3,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { useQuery } from '@tanstack/react-query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
@@ -14,7 +14,7 @@ import {
 import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin';
 import { getAccountProjectsByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
-import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/sanity/getAllPrefinanceProjectsQuery/getAllPrefinanceProjectsQuery';
+import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
@@ -78,27 +78,28 @@ export const useFetchProjectByAdmin = ({
         )
       : undefined;
 
-  // Sanity prefinance projects
-  const {
-    data: prefinanceProjectsData,
-    isFetching: isLoadingPrefinanceProjects,
-  } = useQuery(
-    getAllSanityPrefinanceProjectsQuery({
-      sanityClient,
-      enabled:
-        !!sanityClient &&
-        onlyOffChainProjects &&
-        onlyOffChainProjects?.length > 0,
-    }),
+  // Sanity projects
+  const sanityProjectsResults = useQueries({
+    queries:
+      onlyOffChainProjects?.map(project => {
+        const id = project?.slug || project?.id;
+        return getProjectByIdQuery({
+          id,
+          sanityClient,
+          enabled: !!sanityClient && !!id,
+        });
+      }) || [],
+  });
+  const sanityProjects = sanityProjectsResults.map(res => {
+    return res.data?.allProject?.[0];
+  });
+  const sanityProjectsLoading = sanityProjectsResults.some(
+    res => res.isLoading,
   );
 
   const onlyOffChainProjectsWithData =
-    onlyOffChainProjects?.map(project => {
-      const prefinanceProject = prefinanceProjectsData?.allProject?.find(
-        sanityProject =>
-          sanityProject.projectId === project?.id ||
-          sanityProject.projectId === project?.slug,
-      );
+    onlyOffChainProjects?.map((project, index) => {
+      const sanityProject = sanityProjects?.[index];
 
       return {
         offChain: true,
@@ -116,7 +117,7 @@ export const useFetchProjectByAdmin = ({
               project?.metadata?.['regen:creditClassId'] ??
               '',
           }),
-          projectPrefinancing: prefinanceProject?.projectPrefinancing,
+          sanityProject,
         }),
       };
     }) ?? [];
@@ -134,6 +135,6 @@ export const useFetchProjectByAdmin = ({
       isOnChainProjectsLoading ||
       isProjectsMetadataLoading ||
       isClassesMetadataLoading ||
-      isLoadingPrefinanceProjects,
+      sanityProjectsLoading,
   };
 };

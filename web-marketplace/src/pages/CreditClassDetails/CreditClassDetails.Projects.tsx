@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
@@ -6,10 +6,9 @@ import cx from 'classnames';
 
 import { useWallet } from 'lib/wallet/wallet';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow/BuySellOrderFlow';
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection';
 import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 interface Props {
   classId: string;
@@ -23,11 +22,9 @@ function ProjectsSection({ classId }: Props): JSX.Element {
     enableOffchainProjectsQuery: false,
   });
 
-  const [selectedProject, setSelectedProject] =
-    useState<ProjectWithOrderData | null>(null);
-  const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
   const { isKeplrMobileWeb } = useWallet();
   const hasProjects = projectsWithOrderData.length > 0;
+  const onBuyButtonClick = useOnBuyButtonClick();
 
   return (
     <>
@@ -44,14 +41,12 @@ function ProjectsSection({ classId }: Props): JSX.Element {
             projects={projectsWithOrderData}
             loading={loading}
             onButtonClick={({ project }) => {
-              setSelectedProject(project);
-              setIsBuyFlowStarted(true);
+              onBuyButtonClick({
+                projectId: project?.id,
+                cardSellOrders: project?.cardSellOrders,
+                loading,
+              });
             }}
-          />
-          <BuySellOrderFlow
-            isFlowStarted={isBuyFlowStarted}
-            setIsFlowStarted={setIsBuyFlowStarted}
-            projects={selectedProject && [selectedProject]}
           />
         </Box>
       )}

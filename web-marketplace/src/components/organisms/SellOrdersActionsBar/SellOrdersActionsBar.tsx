@@ -31,10 +31,10 @@ import {
 import { SellOrdersActionsBarCreatePostButton } from './SellOrdersActionsBar.CreatePostButton';
 
 type Params = {
-  isBuyButtonDisabled: boolean;
+  isBuyButtonDisabled?: boolean;
   isCommunityCredit: boolean;
   onBookCallButtonClick: () => void;
-  onBuyButtonClick: () => void;
+  onBuyButtonClick?: () => void;
   onChainProjectId?: string | null;
   offChainProjectId?: string | null;
   projectName?: string;
@@ -173,7 +173,7 @@ export const SellOrdersActionsBar = ({
                 {_(BOOK_CALL)}
               </OutlinedButton>
             )}
-            {(!!onChainProjectId || !!onChainCreditClassId) && (
+            {onBuyButtonClick && !!onChainProjectId && !!onChainCreditClassId && (
               <InfoTooltip
                 title={
                   isSoldOut

@@ -11,8 +11,9 @@ import {
 } from 'generated/graphql';
 import {
   AllCreditClassQuery,
-  AllPrefinanceProjectQuery,
   CreditClass,
+  Project as SanityProject,
+  ProjectByIdQuery,
   ProjectPrefinancing,
 } from 'generated/sanity-graphql';
 import {
@@ -20,9 +21,14 @@ import {
   CreditClassMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
+import { Wallet } from 'lib/wallet/wallet';
 
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
+import {
+  ProjectWithOrderData,
+  UISellOrderInfo,
+} from 'pages/Projects/AllProjects/AllProjects.types';
 import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
+import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 interface NormalizeProjectsWithOrderDataParams {
@@ -32,8 +38,9 @@ interface NormalizeProjectsWithOrderDataParams {
   projectPagesMetadata?: ProjectPageMetadataLD[];
   programAccounts?: Maybe<AccountFieldsFragment | undefined>[];
   sanityCreditClassData?: AllCreditClassQuery;
-  prefinanceProjectsData?: AllPrefinanceProjectQuery;
   classesMetadata?: (CreditClassMetadataLD | undefined)[];
+  sanityProjects?: (ProjectByIdQuery['allProject'][0] | undefined)[];
+  wallet?: Wallet;
 }
 
 export const normalizeProjectsWithMetadata = ({
@@ -43,8 +50,9 @@ export const normalizeProjectsWithMetadata = ({
   projectPagesMetadata,
   programAccounts,
   classesMetadata,
-  prefinanceProjectsData,
-}: NormalizeProjectsWithOrderDataParams): ProjectWithOrderData[] => {
+  sanityProjects,
+  wallet,
+}: NormalizeProjectsWithOrderDataParams): NormalizeProject[] => {
   const projectsWithMetadata = projectsWithOrderData?.map(
     (projectWithOrderData: ProjectWithOrderData, index) => {
       const projectMetadata = projectsMetadata?.[index];
@@ -52,13 +60,8 @@ export const normalizeProjectsWithMetadata = ({
       const projectPageMetadata = projectPagesMetadata?.[index];
       const programAccount = programAccounts?.[index];
       const offChainProject = offChainProjects?.[index];
+      const sanityProject = sanityProjects?.[index];
       const sanityClass = projectWithOrderData.sanityCreditClassData;
-      const prefinanceProject = prefinanceProjectsData?.allProject?.find(
-        project =>
-          project.projectId === projectWithOrderData.offChainId ||
-          project.projectId === projectWithOrderData.id || // on-chain id
-          project.projectId === projectWithOrderData.slug,
-      );
 
       return normalizeProjectWithMetadata({
         offChainProject,
@@ -68,7 +71,8 @@ export const normalizeProjectsWithMetadata = ({
         programAccount,
         classMetadata,
         sanityClass,
-        projectPrefinancing: prefinanceProject?.projectPrefinancing,
+        sanityProject,
+        wallet,
       });
     },
   );
@@ -93,6 +97,8 @@ interface NormalizeProjectWithMetadataParams {
       | 'stripePaymentLink'
     >
   >;
+  sanityProject?: ProjectByIdQuery['allProject'][0] | undefined;
+  wallet?: Wallet;
 }
 
 export type NormalizeProject = ProjectWithOrderData & {
@@ -106,7 +112,8 @@ export type NormalizeProject = ProjectWithOrderData & {
   place?: string;
   program?: Maybe<AccountFieldsFragment>;
   area?: number;
-  projectPrefinancing?: ProjectPrefinancing;
+  cardSellOrders?: Array<CardSellOrder>;
+  filteredSellOrders?: Array<UISellOrderInfo>;
 };
 export const normalizeProjectWithMetadata = ({
   offChainProject,
@@ -116,7 +123,9 @@ export const normalizeProjectWithMetadata = ({
   programAccount,
   classMetadata,
   sanityClass,
+  sanityProject,
   projectPrefinancing,
+  wallet,
 }: NormalizeProjectWithMetadataParams): NormalizeProject => {
   const creditClassImage = getClassImageWithProjectDefault({
     metadata: classMetadata,
@@ -128,6 +137,18 @@ export const normalizeProjectWithMetadata = ({
   );
 
   const projectId = projectWithOrderData?.id || offChainProject?.id;
+
+  const _projectPrefinancing =
+    projectPrefinancing || sanityProject?.projectPrefinancing;
+
+  const filteredSellOrders = (projectWithOrderData?.sellOrders || []).filter(
+    sellOrder => sellOrder.seller !== wallet?.address,
+  );
+
+  const cardSellOrders = getCardSellOrders(
+    sanityProject?.fiatSellOrders,
+    filteredSellOrders,
+  );
 
   return {
     ...projectWithOrderData,
@@ -160,17 +181,38 @@ export const normalizeProjectWithMetadata = ({
       projectWithOrderData?.areaUnit ||
       '',
     projectPrefinancing: {
-      ...projectPrefinancing,
-      price: projectPrefinancing?.price
+      ..._projectPrefinancing,
+      price: _projectPrefinancing?.price
         ? getPriceToDisplay({
-            price: projectPrefinancing?.price,
+            price: _projectPrefinancing?.price,
           })
         : undefined,
-      estimatedIssuance: projectPrefinancing?.estimatedIssuance
+      estimatedIssuance: _projectPrefinancing?.estimatedIssuance
         ? formatNumber({
-            num: projectPrefinancing?.estimatedIssuance,
+            num: _projectPrefinancing?.estimatedIssuance,
           })
         : undefined,
     },
+    cardSellOrders,
+    filteredSellOrders,
   } as NormalizeProject;
 };
+
+const getCardSellOrders = (
+  sanityFiatSellOrders: SanityProject['fiatSellOrders'],
+  sellOrders: UISellOrderInfo[],
+) =>
+  sanityFiatSellOrders
+    ?.map(fiatOrder => {
+      const sellOrder = sellOrders.find(
+        cryptoOrder => cryptoOrder.id.toString() === fiatOrder?.sellOrderId,
+      );
+      if (sellOrder) {
+        return {
+          ...fiatOrder,
+          ...sellOrder,
+        };
+      }
+      return null;
+    })
+    .filter(Boolean) || [];

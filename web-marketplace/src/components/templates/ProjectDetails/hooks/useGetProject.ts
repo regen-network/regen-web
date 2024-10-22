@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
@@ -9,22 +8,16 @@ import { getProjectByIdQuery as getOffChainProjectByIdQuery } from 'lib/queries/
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
-import { useWallet } from 'lib/wallet/wallet';
 
-import { useBuySellOrderData } from 'features/marketplace/BuySellOrderFlow/hooks/useBuySellOrderData';
+import { useBuySellOrderData } from 'hooks/useBuySellOrderData';
 
 import { client as sanityClient } from '../../../../lib/clients/sanity';
-import {
-  getCardSellOrders,
-  getIsOnChainId,
-  getIsUuid,
-} from '../ProjectDetails.utils';
+import { getIsOnChainId, getIsUuid } from '../ProjectDetails.utils';
 
 export const useGetProject = () => {
   const { projectId } = useParams();
   const graphqlClient = useApolloClient();
   const { ecocreditClient } = useLedger();
-  const { wallet } = useWallet();
 
   // First, check if projectId is an on-chain project id
   // or an off-chain project UUID.
@@ -114,18 +107,8 @@ export const useGetProject = () => {
     }),
   );
 
-  const sellOrders = useMemo(
-    () =>
-      (projectsWithOrderData?.[0]?.sellOrders || []).filter(
-        sellOrder => sellOrder.seller !== wallet?.address,
-      ),
-    [projectsWithOrderData, wallet?.address],
-  );
-
-  const cardSellOrders = useMemo(
-    () => getCardSellOrders(sanityProject?.fiatSellOrders, sellOrders),
-    [sanityProject?.fiatSellOrders, sellOrders],
-  );
+  const sellOrders = projectsWithOrderData?.[0]?.filteredSellOrders || [];
+  const cardSellOrders = projectsWithOrderData?.[0]?.cardSellOrders || [];
 
   const slug =
     offchainProjectByIdData?.data?.projectById?.slug ||

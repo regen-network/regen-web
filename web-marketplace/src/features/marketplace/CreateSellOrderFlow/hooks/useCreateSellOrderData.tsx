@@ -6,12 +6,12 @@ type Props = {
   projectId: string;
 };
 
-type ReponseType = {
+type ResponseType = {
   isSellFlowDisabled: boolean;
   credits: BatchInfoWithBalance[];
 };
 
-export const useCreateSellOrderData = ({ projectId }: Props): ReponseType => {
+export const useCreateSellOrderData = ({ projectId }: Props): ResponseType => {
   const { credits, isLoadingCredits } = useFetchEcocredits({});
   const creditsForProject = credits?.filter(
     credit => credit.projectId === projectId,

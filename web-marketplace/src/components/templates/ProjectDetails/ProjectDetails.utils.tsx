@@ -22,7 +22,6 @@ import {
   AllCreditClassQuery,
   AllProjectPageQuery,
   PrefinanceTimelineItem,
-  Project as SanityProject,
 } from 'generated/sanity-graphql';
 import { UseStateSetter } from 'types/react/use-state';
 import { onBtnClick } from 'lib/button';
@@ -251,7 +250,8 @@ type FormatOtcCardDataParams = {
   isConnected: boolean;
   orders?: UISellOrderInfo[];
   hideOtcCard?: boolean;
-  setIsBuyFlowStarted: UseStateSetter<boolean>;
+  setBuyFromProjectId: UseStateSetter<string>;
+  projectId?: string;
 };
 
 export const formatOtcCardData = ({
@@ -259,13 +259,14 @@ export const formatOtcCardData = ({
   isConnected,
   orders = [],
   hideOtcCard,
-  setIsBuyFlowStarted,
+  setBuyFromProjectId,
+  projectId,
 }: FormatOtcCardDataParams): ActionCardProps | undefined => {
   const isNoteVisible = !isConnected || orders?.length > 0;
   const noteOnClick = (e: MouseEvent<HTMLButtonElement>) => {
-    if (isConnected && orders?.length > 0) {
+    if (projectId && isConnected && orders?.length > 0) {
       e.preventDefault();
-      setIsBuyFlowStarted(true);
+      setBuyFromProjectId(projectId);
     }
   };
 
@@ -294,22 +295,3 @@ export const formatTimelineDates = (item: PrefinanceTimelineItem) =>
   `${formatDate(item.date, 'MMM YYYY')}${
     item.endDate ? ` - ${formatDate(item.endDate, 'MMM YYYY')}` : ''
   }`;
-
-export const getCardSellOrders = (
-  sanityFiatSellOrders: SanityProject['fiatSellOrders'],
-  sellOrders: UISellOrderInfo[],
-) =>
-  sanityFiatSellOrders
-    ?.map(fiatOrder => {
-      const sellOrder = sellOrders.find(
-        cryptoOrder => cryptoOrder.id.toString() === fiatOrder?.sellOrderId,
-      );
-      if (sellOrder) {
-        return {
-          ...fiatOrder,
-          ...sellOrder,
-        };
-      }
-      return null;
-    })
-    .filter(Boolean) || [];

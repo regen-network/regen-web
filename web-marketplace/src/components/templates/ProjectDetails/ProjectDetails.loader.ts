@@ -9,7 +9,6 @@ import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/ma
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
-import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/sanity/getAllPrefinanceProjectsQuery/getAllPrefinanceProjectsQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
@@ -33,10 +32,6 @@ export const projectDetailsLoader =
 
     // Queries
     const allProjectPageQuery = getAllProjectPageQuery({ sanityClient });
-    const allSanityPrefinanceProjectsQuery =
-      getAllSanityPrefinanceProjectsQuery({
-        sanityClient,
-      });
     const allCreditClassesQuery = getAllSanityCreditClassesQuery({
       sanityClient,
     });
@@ -87,10 +82,6 @@ export const projectDetailsLoader =
     });
     getFromCacheOrFetch({
       query: allCreditClassesQuery,
-      reactQueryClient: queryClient,
-    });
-    getFromCacheOrFetch({
-      query: allSanityPrefinanceProjectsQuery,
       reactQueryClient: queryClient,
     });
     getFromCacheOrFetch({

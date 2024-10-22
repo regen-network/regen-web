@@ -15,10 +15,6 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
-import {
-  connectWalletModalAtom,
-  switchWalletModalAtom,
-} from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { onBtnClick } from 'lib/button';
 import {
@@ -87,15 +83,7 @@ function ProjectDetails(): JSX.Element {
   const theme = useTheme();
   const { projectId } = useParams();
   const { ecocreditClient, dataClient } = useLedger();
-  const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
-  const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
-  const {
-    activeWalletAddr,
-    isConnected,
-    isKeplrMobileWeb,
-    wallet,
-    loginDisabled,
-  } = useWallet();
+  const { isConnected, isKeplrMobileWeb, wallet, loginDisabled } = useWallet();
 
   const location = useLocation();
   const navigate = useNavigate();

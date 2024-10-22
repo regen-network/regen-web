@@ -7,7 +7,7 @@ type Props = {
   classId?: string;
 };
 
-type ReponseType = {
+type ResponseType = {
   isBuyFlowDisabled: boolean;
   projectsWithOrderData: NormalizeProject[];
   loadingBuySellOrders: boolean;
@@ -16,7 +16,7 @@ type ReponseType = {
 export const useBuySellOrderData = ({
   projectId,
   classId,
-}: Props): ReponseType => {
+}: Props): ResponseType => {
   const { projectsWithOrderData, loading: loadingProjects } =
     useProjectsWithOrders({
       projectId,

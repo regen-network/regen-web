@@ -102,7 +102,6 @@ export const useFetchProjectsWithOrders = ({
     wallet,
   });
 
-  console.log('projectsWithMetadata', projectsWithMetadata);
   return {
     projects: projectsWithMetadata,
     isProjectsMetadataLoading,

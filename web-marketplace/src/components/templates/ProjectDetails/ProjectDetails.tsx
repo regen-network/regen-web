@@ -86,7 +86,6 @@ function ProjectDetails(): JSX.Element {
   const { isConnected, isKeplrMobileWeb, wallet, loginDisabled } = useWallet();
 
   const location = useLocation();
-  const navigate = useNavigate();
   const { activeAccount } = useAuth();
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
   const [draftPost, setDraftPost] = useState<
@@ -122,7 +121,6 @@ function ProjectDetails(): JSX.Element {
     loadingSanityProject,
     projectBySlug,
     loadingProjectBySlug,
-    projectByOnChainId,
     loadingProjectByOnChainId,
     offchainProjectByIdData,
     loadingOffchainProjectById,

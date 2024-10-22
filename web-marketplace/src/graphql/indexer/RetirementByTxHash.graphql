@@ -1,0 +1,5 @@
+query IndexerRetirementByTxHash($txHash: String!) {
+  retirementByTxHash(txHash: $txHash) {
+    ...retirementFields
+  }
+}

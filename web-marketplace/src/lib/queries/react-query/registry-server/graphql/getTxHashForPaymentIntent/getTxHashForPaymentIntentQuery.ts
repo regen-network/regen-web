@@ -10,7 +10,7 @@ import {
   ReactQueryGetTxHashForPaymentIntentResponse,
 } from './getTxHashForPaymentIntentQuery.types';
 
-export const getGetTxHashForPaymentIntentQuery = ({
+export const getTxHashForPaymentIntentQuery = ({
   paymentIntentId,
   client,
   ...params

@@ -1108,6 +1108,16 @@ export type DeleteRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
   msgIdx: Scalars['Int'];
 };
 
+/** All input for the `deleteRetirementByTxHash` mutation. */
+export type DeleteRetirementByTxHashInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  txHash: Scalars['String'];
+};
+
 /** All input for the `deleteRetirement` mutation. */
 export type DeleteRetirementInput = {
   /**
@@ -2063,6 +2073,8 @@ export type Mutation = {
   updateRetirement?: Maybe<UpdateRetirementPayload>;
   /** Updates a single `Retirement` using a unique key and a patch. */
   updateRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<UpdateRetirementPayload>;
+  /** Updates a single `Retirement` using a unique key and a patch. */
+  updateRetirementByTxHash?: Maybe<UpdateRetirementPayload>;
   /** Updates a single `Tx` using its globally unique id and a patch. */
   updateTx?: Maybe<UpdateTxPayload>;
   /** Updates a single `Tx` using a unique key and a patch. */
@@ -2113,6 +2125,8 @@ export type Mutation = {
   deleteRetirement?: Maybe<DeleteRetirementPayload>;
   /** Deletes a single `Retirement` using a unique key. */
   deleteRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<DeleteRetirementPayload>;
+  /** Deletes a single `Retirement` using a unique key. */
+  deleteRetirementByTxHash?: Maybe<DeleteRetirementPayload>;
   /** Deletes a single `Tx` using its globally unique id. */
   deleteTx?: Maybe<DeleteTxPayload>;
   /** Deletes a single `Tx` using a unique key. */
@@ -2309,6 +2323,12 @@ export type MutationUpdateRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxArg
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateRetirementByTxHashArgs = {
+  input: UpdateRetirementByTxHashInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateTxArgs = {
   input: UpdateTxInput;
 };
@@ -2455,6 +2475,12 @@ export type MutationDeleteRetirementArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
   input: DeleteRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteRetirementByTxHashArgs = {
+  input: DeleteRetirementByTxHashInput;
 };
 
 
@@ -2747,6 +2773,7 @@ export type Query = Node & {
   msgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHash?: Maybe<MsgEventAttr>;
   proposalByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Proposal>;
   retirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Retirement>;
+  retirementByTxHash?: Maybe<Retirement>;
   txByChainNumAndBlockHeightAndTxIdx?: Maybe<Tx>;
   txByHash?: Maybe<Tx>;
   voteByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Vote>;
@@ -3034,6 +3061,12 @@ export type QueryRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
   blockHeight: Scalars['BigInt'];
   txIdx: Scalars['Int'];
   msgIdx: Scalars['Int'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryRetirementByTxHashArgs = {
+  txHash: Scalars['String'];
 };
 
 
@@ -3820,6 +3853,18 @@ export type UpdateRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
   msgIdx: Scalars['Int'];
 };
 
+/** All input for the `updateRetirementByTxHash` mutation. */
+export type UpdateRetirementByTxHashInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Retirement` being updated. */
+  retirementPatch: RetirementPatch;
+  txHash: Scalars['String'];
+};
+
 /** All input for the `updateRetirement` mutation. */
 export type UpdateRetirementInput = {
   /**
@@ -4205,20 +4250,6 @@ export type IndexerIssuersByClassIdQuery = (
   )> }
 );
 
-export type IndexerLastRetirementQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type IndexerLastRetirementQuery = (
-  { __typename?: 'Query' }
-  & { allRetirements?: Maybe<(
-    { __typename?: 'RetirementsConnection' }
-    & { nodes: Array<Maybe<(
-      { __typename?: 'Retirement' }
-      & RetirementFieldsFragment
-    )>> }
-  )> }
-);
-
 export type IndexerRetirementByNodeIdQueryVariables = Exact<{
   nodeId: Scalars['ID'];
 }>;
@@ -4227,6 +4258,19 @@ export type IndexerRetirementByNodeIdQueryVariables = Exact<{
 export type IndexerRetirementByNodeIdQuery = (
   { __typename?: 'Query' }
   & { retirement?: Maybe<(
+    { __typename?: 'Retirement' }
+    & RetirementFieldsFragment
+  )> }
+);
+
+export type IndexerRetirementByTxHashQueryVariables = Exact<{
+  txHash: Scalars['String'];
+}>;
+
+
+export type IndexerRetirementByTxHashQuery = (
+  { __typename?: 'Query' }
+  & { retirementByTxHash?: Maybe<(
     { __typename?: 'Retirement' }
     & RetirementFieldsFragment
   )> }
@@ -4452,42 +4496,6 @@ export function useIndexerIssuersByClassIdLazyQuery(baseOptions?: Apollo.LazyQue
 export type IndexerIssuersByClassIdQueryHookResult = ReturnType<typeof useIndexerIssuersByClassIdQuery>;
 export type IndexerIssuersByClassIdLazyQueryHookResult = ReturnType<typeof useIndexerIssuersByClassIdLazyQuery>;
 export type IndexerIssuersByClassIdQueryResult = Apollo.QueryResult<IndexerIssuersByClassIdQuery, IndexerIssuersByClassIdQueryVariables>;
-export const IndexerLastRetirementDocument = gql`
-    query IndexerLastRetirement {
-  allRetirements(first: 1, orderBy: [TIMESTAMP_DESC]) {
-    nodes {
-      ...retirementFields
-    }
-  }
-}
-    ${RetirementFieldsFragmentDoc}`;
-
-/**
- * __useIndexerLastRetirementQuery__
- *
- * To run a query within a React component, call `useIndexerLastRetirementQuery` and pass it any options that fit your needs.
- * When your component renders, `useIndexerLastRetirementQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useIndexerLastRetirementQuery({
- *   variables: {
- *   },
- * });
- */
-export function useIndexerLastRetirementQuery(baseOptions?: Apollo.QueryHookOptions<IndexerLastRetirementQuery, IndexerLastRetirementQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<IndexerLastRetirementQuery, IndexerLastRetirementQueryVariables>(IndexerLastRetirementDocument, options);
-      }
-export function useIndexerLastRetirementLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerLastRetirementQuery, IndexerLastRetirementQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<IndexerLastRetirementQuery, IndexerLastRetirementQueryVariables>(IndexerLastRetirementDocument, options);
-        }
-export type IndexerLastRetirementQueryHookResult = ReturnType<typeof useIndexerLastRetirementQuery>;
-export type IndexerLastRetirementLazyQueryHookResult = ReturnType<typeof useIndexerLastRetirementLazyQuery>;
-export type IndexerLastRetirementQueryResult = Apollo.QueryResult<IndexerLastRetirementQuery, IndexerLastRetirementQueryVariables>;
 export const IndexerRetirementByNodeIdDocument = gql`
     query IndexerRetirementByNodeId($nodeId: ID!) {
   retirement(nodeId: $nodeId) {
@@ -4523,3 +4531,38 @@ export function useIndexerRetirementByNodeIdLazyQuery(baseOptions?: Apollo.LazyQ
 export type IndexerRetirementByNodeIdQueryHookResult = ReturnType<typeof useIndexerRetirementByNodeIdQuery>;
 export type IndexerRetirementByNodeIdLazyQueryHookResult = ReturnType<typeof useIndexerRetirementByNodeIdLazyQuery>;
 export type IndexerRetirementByNodeIdQueryResult = Apollo.QueryResult<IndexerRetirementByNodeIdQuery, IndexerRetirementByNodeIdQueryVariables>;
+export const IndexerRetirementByTxHashDocument = gql`
+    query IndexerRetirementByTxHash($txHash: String!) {
+  retirementByTxHash(txHash: $txHash) {
+    ...retirementFields
+  }
+}
+    ${RetirementFieldsFragmentDoc}`;
+
+/**
+ * __useIndexerRetirementByTxHashQuery__
+ *
+ * To run a query within a React component, call `useIndexerRetirementByTxHashQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIndexerRetirementByTxHashQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIndexerRetirementByTxHashQuery({
+ *   variables: {
+ *      txHash: // value for 'txHash'
+ *   },
+ * });
+ */
+export function useIndexerRetirementByTxHashQuery(baseOptions: Apollo.QueryHookOptions<IndexerRetirementByTxHashQuery, IndexerRetirementByTxHashQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IndexerRetirementByTxHashQuery, IndexerRetirementByTxHashQueryVariables>(IndexerRetirementByTxHashDocument, options);
+      }
+export function useIndexerRetirementByTxHashLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerRetirementByTxHashQuery, IndexerRetirementByTxHashQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IndexerRetirementByTxHashQuery, IndexerRetirementByTxHashQueryVariables>(IndexerRetirementByTxHashDocument, options);
+        }
+export type IndexerRetirementByTxHashQueryHookResult = ReturnType<typeof useIndexerRetirementByTxHashQuery>;
+export type IndexerRetirementByTxHashLazyQueryHookResult = ReturnType<typeof useIndexerRetirementByTxHashLazyQuery>;
+export type IndexerRetirementByTxHashQueryResult = Apollo.QueryResult<IndexerRetirementByTxHashQuery, IndexerRetirementByTxHashQueryVariables>;

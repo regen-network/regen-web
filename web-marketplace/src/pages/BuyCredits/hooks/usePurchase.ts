@@ -1,7 +1,5 @@
-import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useCallback, useState } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { select } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
@@ -26,7 +24,6 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { VIEW_PORTFOLIO } from 'components/organisms/BasketOverview/BasketOverview.constants';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
-import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useMsgClient } from 'hooks';
 
@@ -36,7 +33,7 @@ import {
   VIEW_CERTIFICATE,
 } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
-import { useFetchLastRetirement } from './useFetchLastRetirement';
+import { useFetchRetirementForPaymentIntent } from './useFetchRetirementForPaymentIntent';
 
 type PurchaseParams = {
   paymentOption: PaymentOptionsType;
@@ -60,7 +57,6 @@ type PurchaseParams = {
 export const usePurchase = () => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
-  const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
@@ -71,7 +67,11 @@ export const usePurchase = () => {
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const retryCsrfRequest = useRetryCsrfRequest();
   const { handleSuccess } = useMultiStep<BuyCreditsSchemaTypes>();
-  const fetchLastRetirement = useFetchLastRetirement();
+  const [paymentIntentId, setPaymentIntentId] = useState<string | undefined>();
+
+  useFetchRetirementForPaymentIntent({
+    paymentIntentId,
+  });
 
   const purchase = useCallback(
     async ({
@@ -133,16 +133,15 @@ export const usePurchase = () => {
                 // 2. Confirm payment
                 // with saved credit card
                 if (paymentMethodId) {
-                  const { error } = await stripe.confirmCardPayment(
-                    clientSecret,
-                    {
+                  const { error, paymentIntent } =
+                    await stripe.confirmCardPayment(clientSecret, {
                       payment_method: paymentMethodId,
-                    },
-                  );
+                    });
                   if (error) {
                     setErrorBannerTextAtom(String(error));
                     return;
                   }
+                  setPaymentIntentId(paymentIntent.id);
                 } else {
                   // or new credit card
                   const { error, paymentIntent } = await stripe.confirmPayment({
@@ -172,31 +171,7 @@ export const usePurchase = () => {
                       return;
                     }
                   }
-                }
-
-                const retirement = await fetchLastRetirement({
-                  batchDenoms: selectedSellOrders.map(
-                    sellOrder => sellOrder.batchDenom,
-                  ),
-                  retirementJurisdiction,
-                  retirementReason,
-                  creditsAmount,
-                });
-                if (retirement) {
-                  setTxSuccessfulModalAtom(atom => {
-                    atom.open = true;
-                    // atom.cardItems = cardItems; // TODO
-                    atom.title = _(PURCHASE_SUCCESSFUL);
-                    atom.buttonTitle = _(VIEW_CERTIFICATE);
-                    atom.onButtonClick = () =>
-                      setTxSuccessfulModalAtom(
-                        atom => void (atom.open = false),
-                      );
-                    atom.txHash = retirement.txHash;
-                    atom.keepOpenOnLocationChange = true;
-                  });
-                  handleSuccess();
-                  navigate(`/certificate/${retirement.nodeId}`);
+                  setPaymentIntentId(paymentIntent.id);
                 }
               },
             });

@@ -5,8 +5,11 @@ import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
-import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
-import { SKIPPED_CLASS_ID } from 'lib/env';
+import {
+  AnchoredProjectMetadataLD,
+  ProjectMetadataLD,
+} from 'lib/db/types/json-ld';
+import { IS_TERRASOS, SKIPPED_CLASS_ID } from 'lib/env';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
@@ -18,6 +21,10 @@ import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-ser
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/sanity/getAllPrefinanceProjectsQuery/getAllPrefinanceProjectsQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
+import {
+  getAnchoredProjectMetadata,
+  getUnanchoredProjectBaseMetadata,
+} from 'lib/rdf';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { UNREGISTERED_PATH } from 'pages/Projects/AllProjects/AllProjects.constants';
@@ -341,13 +348,17 @@ export function useProjectsWithOrders({
     project => project.projectPrefinancing?.isPrefinanceProject,
   );
 
+  const projectsFilteredByType = projectsWithMetadata.filter(project => {
+    return IS_TERRASOS ? project.type === 'TerrasosProjectInfo' : true;
+  });
+
   return {
     allProjects: projectsWithOrderData,
     prefinanceProjects,
     haveOffChainProjects: allOffChainProjects.length > 0,
     prefinanceProjectsCount: prefinanceProjects.length,
-    projectsWithOrderData: projectsWithMetadata,
-    projectsCount: projectsFilteredByCreditClass?.length,
+    projectsWithOrderData: projectsFilteredByType,
+    projectsCount: projectsFilteredByType?.length,
     loading:
       isLoadingProjects ||
       isLoadingProjectsByClass ||

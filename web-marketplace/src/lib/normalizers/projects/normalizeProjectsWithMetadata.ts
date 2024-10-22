@@ -103,6 +103,7 @@ interface NormalizeProjectWithMetadataParams {
 
 export type NormalizeProject = ProjectWithOrderData & {
   id?: string;
+  type?: string;
   offChainId?: string;
   slug?: string;
   name?: string;
@@ -153,6 +154,7 @@ export const normalizeProjectWithMetadata = ({
   return {
     ...projectWithOrderData,
     id: projectId,
+    type: projectMetadata?.['@type'],
     offChainId: offChainProject?.id,
     slug: offChainProject?.slug ?? projectWithOrderData?.slug,
     draft: !projectWithOrderData && !offChainProject?.published,

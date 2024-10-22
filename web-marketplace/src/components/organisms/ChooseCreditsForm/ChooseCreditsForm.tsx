@@ -209,11 +209,14 @@ export function ChooseCreditsForm({
   const handlePaymentOptions = useCallback(
     (option: string) => {
       setPaymentOption(option as PaymentOptionsType);
-      form.setValue(CREDIT_VINTAGE_OPTIONS, []);
-      form.setValue(
-        CURRENCY,
-        option === PAYMENT_OPTIONS.CARD ? cardCurrency : defaultCryptoCurrency,
-      );
+      form.reset({
+        ...form.getValues(),
+        [CREDIT_VINTAGE_OPTIONS]: [],
+        [CURRENCY]:
+          option === PAYMENT_OPTIONS.CARD
+            ? cardCurrency
+            : defaultCryptoCurrency,
+      });
     },
     [setPaymentOption, form, cardCurrency, defaultCryptoCurrency],
   );

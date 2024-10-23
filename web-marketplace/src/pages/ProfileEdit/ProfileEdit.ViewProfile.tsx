@@ -23,9 +23,9 @@ export const ViewProfileButton = ({ setIsWarningModalOpen }: Props) => {
     <OutlinedButton
       onClick={() => {
         if (isDirtyRef?.current) {
-          setIsWarningModalOpen('/profile');
+          setIsWarningModalOpen('/dashboard');
         } else {
-          navigate('/profile');
+          navigate('/dashboard');
         }
       }}
       startIcon={<EyeIcon />}

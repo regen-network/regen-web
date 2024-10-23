@@ -66,7 +66,7 @@ export const useOnProfileClick = () => {
 
   const onProfileClick: OnProfileClickType = useCallback(
     async (accountId: string, isSelected: boolean) => {
-      if (isSelected) navigate('/profile');
+      if (isSelected) navigate('/dashboard');
       else {
         const account = authenticatedAccounts?.find(a => a?.id === accountId);
         try {

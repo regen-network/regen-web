@@ -17,7 +17,7 @@ export const getUserMenuItemsMock = ({
     pathname,
     linkComponent,
     label: 'Portfolio',
-    href: '/profile/portfolio',
+    href: '/dashboard/portfolio',
     icon: <CreditsIcon sx={{ height: 18, width: 20 }} linearGradient />,
   },
   {
@@ -25,6 +25,6 @@ export const getUserMenuItemsMock = ({
     linkComponent,
     label: 'Bridge',
     icon: <BridgeIcon linearGradient />,
-    href: '/profile/bridge',
+    href: '/dashboard/bridge',
   },
 ];

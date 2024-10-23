@@ -191,14 +191,14 @@ function ProjectEdit(): JSX.Element {
     if (section) {
       const path = isMobile
         ? `/project-pages/${projectId}/edit`
-        : '/profile/projects';
+        : '/dashboard/projects';
       if (isFormDirty) {
         setIsWarningModalOpen(path);
       } else {
         navigate(path);
       }
     } else {
-      navigate('/profile/projects');
+      navigate('/dashboard/projects');
     }
   };
 

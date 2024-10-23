@@ -539,9 +539,7 @@ export const BuyCreditsForm = ({
       />
       {fiatModalContent.current && (
         <BuyFiatModal
-          title={fiatModalContent.current.title}
-          content={fiatModalContent.current.content}
-          buttons={fiatModalContent.current.buttons}
+          modalContent={fiatModalContent.current.modalContent}
           fiatModalState={fiatModalState}
           onClose={setFiatModalState}
           handleClick={action => {

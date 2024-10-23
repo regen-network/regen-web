@@ -11,7 +11,9 @@ interface BuyFiatModalButton {
 }
 
 export interface BuyFiatModalContent {
-  title: string;
-  content: React.ReactNode;
-  buttons: BuyFiatModalButton[];
+  modalContent: {
+    title: string;
+    content: React.ReactNode;
+    buttons: BuyFiatModalButton[];
+  };
 }

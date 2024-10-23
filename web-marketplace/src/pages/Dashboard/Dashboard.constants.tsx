@@ -85,7 +85,7 @@ export const HEADING_PROFILE = {
 
 export const MY_ORDERS = {
   label: msg`My orders`,
-  href: '/profile/edit/my-orders',
+  href: '/dashboard/admin/my-orders',
   icon: <ShoppingBagIcon linearGradient />,
   labelClassName,
   className,
@@ -93,7 +93,7 @@ export const MY_ORDERS = {
 
 export const MY_PREFINANCE_PROJECTS = {
   label: msg`My prefinance projects`,
-  href: '/profile/edit/my-prefinance-projects',
+  href: '/dashboard/admin/my-prefinance-projects',
   icon: <PrefinanceIcon linearGradient width="24" height="24" />,
   labelClassName,
   className: `${className} mb-10`,
@@ -101,7 +101,7 @@ export const MY_PREFINANCE_PROJECTS = {
 
 export const SAVED_PAYMENT_INFO = {
   label: msg`Saved payment info`,
-  href: '/profile/edit/payment-info',
+  href: '/dashboard/admin/payment-info',
   icon: <PaymentInfoIcon linearGradient />,
   labelClassName,
   className,

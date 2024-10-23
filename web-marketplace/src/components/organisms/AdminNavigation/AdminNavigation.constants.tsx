@@ -22,7 +22,7 @@ export const adminNavigationSections: AdminNavigationSection[] = [
   //     {
   //       name: i18n._(msg`My prefinance projects`),
   //       icon: <PrefinanceIcon linearGradient width="24" height="24" />,
-  //       path: 'prefinance-projects',
+  //       path: 'my-prefinance-projects',
   //     },
   //     {
   //       name: i18n._(msg`Saved payment info`),

@@ -18,13 +18,12 @@ interface BuyFiatModalProps extends BuyFiatModalContent {
 }
 
 export const BuyFiatModal = ({
-  title,
-  content,
-  buttons,
+  modalContent,
   fiatModalState,
   onClose,
   handleClick,
 }: BuyFiatModalProps) => {
+  const { title, content, buttons } = modalContent;
   return (
     <Modal
       open={fiatModalState.openModal}

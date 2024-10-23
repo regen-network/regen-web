@@ -94,6 +94,7 @@ export const TerrasosHeaderMobileMenu = ({
                         'first:rounded-t-[4px] last:rounded-b-[4px]',
                         'flex items-center px-20 py-10',
                         'text-sc-button-text-icon-dark hover:text-brand-300 bg-sc-surface-page-background-light font-medium',
+                        subItem.default && 'text-brand-300',
                       )}
                     >
                       <a href={subItem.href}>{subItem.label}</a>

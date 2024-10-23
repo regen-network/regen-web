@@ -14,7 +14,7 @@ export const getTerrasosHeaderItems = (
     href: 'https://www.terrasos.co/',
   },
   {
-    label: _(msg`About`),
+    label: _(msg`About Us`),
     href: 'https://www.terrasos.co/nosotros/',
   },
   {
@@ -32,15 +32,16 @@ export const getTerrasosHeaderItems = (
       {
         label: _(msg`Explore Banks`),
         href: 'https://www.terrasos.co/bancos-de-habitat/',
+        default: true,
       },
     ],
   },
   {
-    label: _(msg`What is TEBU`),
+    label: _(msg`What is Tebu`),
     href: 'https://www.terrasos.co/que-es-tebu/',
   },
   {
-    label: _(msg`Geo-viewer`),
+    label: _(msg`Geo-Viewer`),
     href: 'https://www.terrasos.co/geovisor/',
   },
   {

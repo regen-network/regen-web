@@ -31,7 +31,7 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
     >
       <div className="relative flex px-15 py-10 md:py-0 md:px-0 md:h-[72px] justify-between items-center md:max-w-[708px] lg:max-w-[940px] xl:max-w-[1220px] w-full mx-auto bg-brand-300 md:bg-ac-neutral-0">
         <TerrasosLogo
-          className="text-bc-neutral-0 lg:ml-[7px] md:text-brand-300 ml-[6px] pt-[2px] md:mt-[2px]"
+          className="text-bc-neutral-0 lg:ml-[7px] md:text-brand-300 ml-[7px] pt-[2px]"
           width={190}
           height={42}
         />
@@ -42,8 +42,8 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
         />
       </div>
       <nav className="justify-center items-center self-stretch bg-brand-300 hidden md:flex md:px-25 lg:px-0">
-        <div className="flex justify-between items-center max-w-[1220px] w-full">
-          <ul className="flex items-center justify-center lg:justify-start flex-wrap xl:flex-nowrap pl-0 my-0 md:mx-5">
+        <div className="flex justify-between items-center md:max-w-[708px] lg:max-w-[940px] xl:max-w-[1220px] w-full">
+          <ul className="flex items-center justify-center lg:justify-start flex-wrap xl:flex-nowrap pl-0 my-0 md:ml-5">
             {items.map((item, index) => (
               <li
                 key={index}
@@ -53,7 +53,7 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
                   'tracking-normal leading-normal',
                   '[font-feature-settings:"liga"_off,"clig"_off]',
                   'hover:bg-bc-neutral-700 group',
-                  'border-solid border-0 border-r last:border-0 border-[rgba(0,0,0,0.04)]',
+                  'after:content-[""] after:absolute after:top-0 after:right-0 after:w-[1px] after:h-full after:bg-[rgba(0,0,0,0.04)] last:after:hidden',
                   item.href === pathname && 'bg-bc-neutral-700',
                 )}
               >
@@ -65,7 +65,9 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
                   )}
                 >
                   {item.label}
-                  {item.items && <BreadcrumbIcon className="w-10 h-10 ml-10" />}
+                  {item.items && (
+                    <BreadcrumbIcon className="w-[11px] h-[11px] ml-10" />
+                  )}
                 </a>
                 {item.items && (
                   <ul className="absolute top-full left-0 bg-bc-neutral-0 hidden group-hover:block z-50 pl-0 w-full">
@@ -76,6 +78,7 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
                           'flex bg-bc-neutral-0 hover:bg-brand-300',
                           'font-montserrat text-[14px] font-medium',
                           'transition-colors group/submenu',
+                          subItem.default && 'bg-brand-300',
                         )}
                       >
                         <a
@@ -95,10 +98,10 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
             href="https://tebu.terrasos.co/"
             className={cn(
               'rounded-[3px] bg-bc-neutral-700 border-none cursor-pointer whitespace-nowrap',
-              'flex px-20 py-[10px]',
+              'flex px-20 py-10 scale-[1.1] mr-5',
               'justify-center items-center',
               'text-bc-neutral-0 hover:bg-bc-neutral-600',
-              'font-montserrat text-[13px] font-semibold uppercase',
+              'font-montserrat text-[13px] leading-[15.6px] font-semibold uppercase',
             )}
           >
             {_(msg`Act now`)}

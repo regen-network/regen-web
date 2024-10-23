@@ -1,4 +1,10 @@
-import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
@@ -346,3 +352,5 @@ export function ChooseCreditsForm({
     </Suspense>
   );
 }
+
+export const MemoizedChooseCreditsForm = React.memo(ChooseCreditsForm);

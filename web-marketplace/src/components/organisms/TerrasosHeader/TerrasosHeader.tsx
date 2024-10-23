@@ -30,11 +30,13 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
       )}
     >
       <div className="relative flex px-15 py-10 md:py-0 md:px-0 md:h-[72px] justify-between items-center md:max-w-[708px] lg:max-w-[940px] xl:max-w-[1220px] w-full mx-auto bg-brand-300 md:bg-ac-neutral-0">
-        <TerrasosLogo
-          className="text-bc-neutral-0 lg:ml-[7px] md:text-brand-300 ml-[7px] pt-[2px]"
-          width={190}
-          height={42}
-        />
+        <a href="https://www.terrasos.co/">
+          <TerrasosLogo
+            className="text-bc-neutral-0 lg:ml-[7px] md:text-brand-300 ml-[7px] pt-[2px]"
+            width={190}
+            height={42}
+          />
+        </a>
         <HamburgerIcon
           role="button"
           className="text-bc-neutral-700 m-5 mb-0 md:hidden cursor-pointer w-[21px] absolute left-[84%]"
@@ -44,55 +46,59 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
       <nav className="justify-center items-center self-stretch bg-brand-300 hidden md:flex md:px-25 lg:px-0">
         <div className="flex justify-between items-center md:max-w-[708px] lg:max-w-[940px] xl:max-w-[1220px] w-full">
           <ul className="flex items-center justify-center lg:justify-start flex-wrap xl:flex-nowrap pl-0 my-0 md:ml-5">
-            {items.map((item, index) => (
-              <li
-                key={index}
-                className={cn(
-                  'relative flex justify-center items-center transition-colors whitespace-nowrap',
-                  'font-montserrat text-[14px] font-bold uppercase',
-                  'tracking-normal leading-normal',
-                  '[font-feature-settings:"liga"_off,"clig"_off]',
-                  'hover:bg-bc-neutral-700 group',
-                  'after:content-[""] after:absolute after:top-0 after:right-0 after:w-[1px] after:h-full after:bg-[rgba(0,0,0,0.04)] last:after:hidden',
-                  item.href === pathname && 'bg-bc-neutral-700',
-                )}
-              >
-                <a
-                  href={item.href}
+            {items.map((item, index) => {
+              const isActive = item.href === pathname;
+
+              return (
+                <li
+                  key={index}
                   className={cn(
-                    'text-bc-neutral-700 group-hover:text-brand-300 flex items-center px-[28px] py-15',
-                    item.href === pathname && 'text-brand-300',
+                    'relative flex justify-center items-center transition-colors whitespace-nowrap',
+                    'font-montserrat text-[14px] font-bold uppercase',
+                    'tracking-normal leading-normal',
+                    '[font-feature-settings:"liga"_off,"clig"_off]',
+                    'hover:bg-bc-neutral-700 group',
+                    'after:content-[""] after:absolute after:top-0 after:right-0 after:w-[1px] after:h-full after:bg-[rgba(0,0,0,0.04)] last:after:hidden',
+                    isActive && 'bg-bc-neutral-700',
                   )}
                 >
-                  {item.label}
+                  <a
+                    href={item.href}
+                    className={cn(
+                      'text-bc-neutral-700 group-hover:text-brand-300 flex items-center px-[28px] py-15',
+                      isActive && 'text-brand-300',
+                    )}
+                  >
+                    {item.label}
+                    {item.items && (
+                      <BreadcrumbIcon className="w-[11px] h-[11px] ml-10" />
+                    )}
+                  </a>
                   {item.items && (
-                    <BreadcrumbIcon className="w-[11px] h-[11px] ml-10" />
-                  )}
-                </a>
-                {item.items && (
-                  <ul className="absolute top-full left-0 bg-bc-neutral-0 hidden group-hover:block z-50 pl-0 w-full">
-                    {item.items.map((subItem, subIndex) => (
-                      <li
-                        key={subIndex}
-                        className={cn(
-                          'flex bg-bc-neutral-0 hover:bg-brand-300',
-                          'font-montserrat text-[14px] font-medium',
-                          'transition-colors group/submenu',
-                          subItem.default && 'bg-brand-300',
-                        )}
-                      >
-                        <a
-                          href={subItem.href}
-                          className="text-bc-neutral-700 p-[10px_20px]"
+                    <ul className="absolute top-full left-0 bg-bc-neutral-0 hidden group-hover:block z-50 pl-0 w-full">
+                      {item.items.map((subItem, subIndex) => (
+                        <li
+                          key={subIndex}
+                          className={cn(
+                            'flex bg-bc-neutral-0 hover:bg-brand-300 transition-colors',
+                            'font-montserrat text-[14px] font-medium normal-case',
+                            'group/submenu whitespace-normal',
+                            isActive && subItem.default && 'bg-brand-300',
+                          )}
                         >
-                          {subItem.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
+                          <a
+                            href={subItem.href}
+                            className="text-bc-neutral-700 p-[10px_20px]"
+                          >
+                            {subItem.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
           </ul>
           <a
             href="https://tebu.terrasos.co/"

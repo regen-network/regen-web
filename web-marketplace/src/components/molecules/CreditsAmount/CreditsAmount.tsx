@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -222,11 +222,15 @@ export const CreditsAmount = ({
     [card, orderedSellOrders, setValue, creditTypePrecision],
   );
 
-  const displayDenom = findDisplayDenom({
-    allowedDenoms,
-    bankDenom: currency.askDenom,
-    baseDenom: currency.askBaseDenom,
-  });
+  const displayDenom = useMemo(
+    () =>
+      findDisplayDenom({
+        allowedDenoms,
+        bankDenom: currency.askDenom,
+        baseDenom: currency.askBaseDenom,
+      }),
+    [allowedDenoms, currency.askDenom, currency.askBaseDenom],
+  );
 
   return (
     <div className={`grid min-h-min`} style={{ gridAutoRows: 'min-content' }}>

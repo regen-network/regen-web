@@ -126,7 +126,7 @@ export const CurrencyInput = ({
         endAdornment={
           paymentOption === PAYMENT_OPTIONS.CARD ? (
             <DenomIconWithCurrency
-              baseDenom={currency.askBaseDenom}
+              baseDenom={currency?.askBaseDenom}
               displayDenom={displayDenom}
             />
           ) : (
@@ -149,7 +149,7 @@ export const CurrencyInput = ({
               onSelect={onHandleCurrencyChange}
               placeholderAriaLabel={selectPlaceholderAriaLabel}
               selectAriaLabel={selectAriaLabel}
-              defaultOption={currency.askDenom}
+              defaultOption={currency?.askDenom}
             />
           )
         }

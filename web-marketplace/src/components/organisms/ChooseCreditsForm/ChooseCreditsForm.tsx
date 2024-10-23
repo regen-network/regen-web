@@ -26,6 +26,7 @@ import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNex
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { microToDenom } from 'lib/denom.utils';
 
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import {
@@ -42,6 +43,7 @@ import { getCurrencyAmount } from 'components/molecules/CreditsAmount/CreditsAmo
 import { AllowedDenoms } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSummaryCard';
 
+import { useFetchUserBalance } from '../BuyCreditsModal/hooks/useFetchUserBalance';
 import { CryptoOptions } from './ChooseCreditsForm.CryptoOptions';
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
 import {
@@ -127,11 +129,14 @@ export function ChooseCreditsForm({
 
   const [spendingCap, setSpendingCap] = useState(0);
   const [creditsAvailable, setCreditsAvailable] = useState(0);
+  const [userBalance, setUserBalance] = useState(0);
 
   const form = useZodForm({
     schema: createChooseCreditsFormSchema({
       creditsAvailable,
       spendingCap,
+      userBalance,
+      paymentOption,
     }),
     defaultValues: {
       [CURRENCY_AMOUNT]: initialValues?.[CURRENCY_AMOUNT] || 0,
@@ -163,6 +168,19 @@ export function ChooseCreditsForm({
     name: CURRENCY_AMOUNT,
   });
 
+  const { isLoading, userBalance: microUserBalance } = useFetchUserBalance(
+    currency?.askDenom,
+  );
+
+  useEffect(() => {
+    const _userBalance = microToDenom(microUserBalance);
+    setUserBalance(_userBalance);
+  }, [microUserBalance]);
+
+  useEffect(() => {
+    form.trigger(CURRENCY_AMOUNT);
+  }, [userBalance, form]);
+
   const filteredCryptoSellOrders = useMemo(
     () =>
       getFilteredCryptoSellOrders({
@@ -191,11 +209,14 @@ export function ChooseCreditsForm({
   const handlePaymentOptions = useCallback(
     (option: string) => {
       setPaymentOption(option as PaymentOptionsType);
-      form.setValue(CREDIT_VINTAGE_OPTIONS, []);
-      form.setValue(
-        CURRENCY,
-        option === PAYMENT_OPTIONS.CARD ? cardCurrency : defaultCryptoCurrency,
-      );
+      form.reset({
+        ...form.getValues(),
+        [CREDIT_VINTAGE_OPTIONS]: [],
+        [CURRENCY]:
+          option === PAYMENT_OPTIONS.CARD
+            ? cardCurrency
+            : defaultCryptoCurrency,
+      });
     },
     [setPaymentOption, form, cardCurrency, defaultCryptoCurrency],
   );

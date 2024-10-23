@@ -5,7 +5,6 @@ import { useLingui } from '@lingui/react';
 import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
-import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetProject';
 import { useNavigateToSlug } from 'components/templates/ProjectDetails/hooks/useNavigateToSlug';

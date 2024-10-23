@@ -228,7 +228,7 @@ msgid "A unique identifier that tracks and verifies a specific transaction on th
 msgstr ""
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:17
-msgid "About"
+msgid "About Us"
 msgstr ""
 
 #: src/components/organisms/AccountSwitchModal/AccountSwitchModal.constants.ts:3
@@ -239,7 +239,7 @@ msgstr ""
 msgid "Acres"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:104
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:107
 msgid "Act now"
 msgstr ""
 
@@ -488,7 +488,7 @@ msgstr ""
 msgid "Are you sure you want to discard your changes?"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:55
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:56
 msgid "Articles"
 msgstr ""
 
@@ -1000,7 +1000,7 @@ msgstr ""
 msgid "Consumer/Individual/myself"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:67
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:68
 msgid "Contact"
 msgstr ""
 
@@ -1749,7 +1749,7 @@ msgstr ""
 msgid "Forestry-based credits"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:63
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:64
 msgid "Frequently Asked Questions"
 msgstr ""
 
@@ -1761,8 +1761,8 @@ msgstr ""
 msgid "Gallery photos"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:43
-msgid "Geo-viewer"
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:44
+msgid "Geo-Viewer"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:348
@@ -1896,7 +1896,7 @@ msgid "info with hand"
 msgstr ""
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:29
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:47
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:48
 msgid "Information"
 msgstr ""
 
@@ -2303,7 +2303,7 @@ msgstr ""
 msgid "new project admin"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:51
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:52
 msgid "News"
 msgstr ""
 
@@ -2924,7 +2924,7 @@ msgstr ""
 msgid "public profile tabs"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:59
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:60
 msgid "Publications"
 msgstr ""
 
@@ -4182,8 +4182,8 @@ msgstr ""
 msgid "We've just sent a confirmation email to:"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:39
-msgid "What is TEBU"
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:40
+msgid "What is Tebu"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:7

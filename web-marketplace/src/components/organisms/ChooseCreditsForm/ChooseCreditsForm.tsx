@@ -118,7 +118,7 @@ export function ChooseCreditsForm({
     },
     mode: 'onChange',
   });
-  const { isValid, isSubmitting } = useFormState({
+  const { errors, isSubmitting } = useFormState({
     control: form.control,
   });
 
@@ -249,7 +249,7 @@ export function ChooseCreditsForm({
         </Card>
         <div className="float-right pt-40">
           <PrevNextButtons
-            saveDisabled={!isValid || isSubmitting}
+            saveDisabled={Object.entries(errors).length > 0 || isSubmitting}
             saveText={_(NEXT)}
             onPrev={onPrev}
           />

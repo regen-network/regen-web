@@ -154,7 +154,7 @@ export const normalizeProjectWithMetadata = ({
   return {
     ...projectWithOrderData,
     id: projectId,
-    type: projectMetadata?.['@type'],
+    type: projectMetadata?.['@type'] ?? projectPageMetadata?.['@type'],
     offChainId: offChainProject?.id,
     slug: offChainProject?.slug ?? projectWithOrderData?.slug,
     draft: !projectWithOrderData && !offChainProject?.published,

@@ -81,79 +81,85 @@ export const getFiatModalContent = (
     creditsInAllSellOrders
   ) {
     return {
-      title: _(
-        msg`Sorry, another user has purchased all of the USD credits you selected!`,
-      ),
-      content: (
-        <>
-          <p className="uppercase font-muli text-sm font-extrabold pb-10">
-            <Trans>amount now available in usd</Trans>
-          </p>
-          <span>{creditsInRequestedSellOrders}</span>
-        </>
-      ),
-      buttons: [
-        {
-          text: _(msg`find another credit card project`),
-          action: '/projects',
-          type: 'contained',
-        },
-        {
-          text: _(msg`or, buy with crypto`),
-          action: KEPLR_LOGIN_REQUIRED,
-          type: 'outlined',
-        },
-      ],
+      modalContent: {
+        title: _(
+          msg`Sorry, another user has purchased all of the USD credits you selected!`,
+        ),
+        content: (
+          <>
+            <p className="uppercase font-muli text-sm font-extrabold pb-10">
+              <Trans>amount now available in usd</Trans>
+            </p>
+            <span>{creditsInRequestedSellOrders}</span>
+          </>
+        ),
+        buttons: [
+          {
+            text: _(msg`find another credit card project`),
+            action: '/projects',
+            type: 'contained',
+          },
+          {
+            text: _(msg`or, buy with crypto`),
+            action: KEPLR_LOGIN_REQUIRED,
+            type: 'outlined',
+          },
+        ],
+      },
     };
   } else if (!creditsInAllSellOrders) {
     // no credits available
     return {
-      title: _(
-        msg`Sorry, another user has purchased all of the available credits from this project`,
-      ),
-      content: (
-        <p className="text-lg pb-10 text-center">
-          <Trans>
-            Because we use blockchain technology, if another user purchases the
-            credits before you check out, you’ll need to choose different
-            credits.
-          </Trans>
-        </p>
-      ),
-      buttons: [
-        {
-          text: _(msg`search for new credits`),
-          action: '/projects',
-          type: 'outlined',
-        },
-      ],
+      modalContent: {
+        title: _(
+          msg`Sorry, another user has purchased all of the available credits from this project`,
+        ),
+        content: (
+          <p className="text-lg pb-10 text-center">
+            <Trans>
+              Because we use blockchain technology, if another user purchases
+              the credits before you check out, you’ll need to choose different
+              credits.
+            </Trans>
+          </p>
+        ),
+        buttons: [
+          {
+            text: _(msg`search for new credits`),
+            action: '/projects',
+            type: 'outlined',
+          },
+        ],
+      },
     };
   } else if (creditsInRequestedSellOrders >= 0) {
     // some credits available
     return {
-      title: _(
-        msg`Sorry, another user has purchased some or all of the credits you selected!`,
-      ),
-      content: (
-        <>
-          <p className="uppercase font-muli text-sm font-extrabold pb-10">
-            <Trans>amount now available in</Trans>
-            {` ${findDisplayDenom({
-              allowedDenoms: allowedDenomsData?.allowedDenoms,
-              bankDenom: data?.currency?.askDenom!,
-              baseDenom: data?.currency?.askBaseDenom!,
-            })}`}
-          </p>
-          <span>{creditsInRequestedSellOrders}</span>
-        </>
-      ),
-      buttons: [
-        {
-          text: _(msg`Choose new credits`),
-          action: null,
-          type: 'outlined',
-        },
-      ],
+      modalContent: {
+        title: _(
+          msg`Sorry, another user has purchased some or all of the credits you selected!`,
+        ),
+        content: (
+          <>
+            <p className="uppercase font-muli text-sm font-extrabold pb-10">
+              <Trans>amount now available in</Trans>
+              {` ${findDisplayDenom({
+                allowedDenoms: allowedDenomsData?.allowedDenoms,
+                bankDenom: data?.currency?.askDenom!,
+                baseDenom: data?.currency?.askBaseDenom!,
+              })}`}
+            </p>
+            <span>{creditsInRequestedSellOrders}</span>
+          </>
+        ),
+        buttons: [
+          {
+            text: _(msg`Choose new credits`),
+            action: null,
+            type: 'outlined',
+          },
+        ],
+      },
     };
   }
 };

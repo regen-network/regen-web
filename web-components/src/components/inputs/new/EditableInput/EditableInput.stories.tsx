@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { EditableInput } from './EditableInput';
@@ -15,5 +16,6 @@ export const Default: Story = {
 
 Default.args = {
   value: 5,
-  onChange: () => {},
+  maxValue: 10,
+  onChange: action('onChange'),
 };

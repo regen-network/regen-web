@@ -1,7 +1,14 @@
-import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
+import { useSetAtom } from 'jotai';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import {
   CREDIT_VINTAGE_OPTIONS,
@@ -18,11 +25,22 @@ import { Loading } from 'web-components/src/components/loading';
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
-import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import {
+  CardDetails,
+  PaymentOptionsType,
+} from 'pages/BuyCredits/BuyCredits.types';
+import { getCreditsAvailableBannerText } from 'pages/BuyCredits/BuyCredits.utils';
+import {
+  ProjectWithOrderData,
+  UISellOrderInfo,
+} from 'pages/Projects/AllProjects/AllProjects.types';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
+import { getCurrencyAmount } from 'components/molecules/CreditsAmount/CreditsAmount.utils';
 import { AllowedDenoms } from 'components/molecules/DenomLabel/DenomLabel.utils';
+import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSummaryCard';
 
 import { CryptoOptions } from './ChooseCreditsForm.CryptoOptions';
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
@@ -51,6 +69,10 @@ export type Props = {
   paymentOptionCryptoClicked: boolean;
   setPaymentOptionCryptoClicked: UseStateSetter<boolean>;
   initialPaymentOption?: PaymentOptionsType;
+  project?: ProjectWithOrderData;
+  cardDetails?: CardDetails;
+  goToPaymentInfo: () => void;
+  card: boolean;
 };
 
 export function ChooseCreditsForm({
@@ -71,8 +93,14 @@ export function ChooseCreditsForm({
   paymentOptionCryptoClicked,
   setPaymentOptionCryptoClicked,
   initialPaymentOption,
+  project,
+  cardDetails,
+  goToPaymentInfo,
+  card,
 }: Props) {
   const { _ } = useLingui();
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+
   const cryptoCurrencies = useMemo(
     () =>
       cryptoSellOrders
@@ -112,7 +140,7 @@ export function ChooseCreditsForm({
       [CREDIT_VINTAGE_OPTIONS]: initialValues?.[CREDIT_VINTAGE_OPTIONS] || [],
       [CURRENCY]: initialValues?.[CURRENCY]?.askDenom
         ? initialValues?.[CURRENCY]
-        : paymentOption === PAYMENT_OPTIONS.CARD
+        : card
         ? cardCurrency
         : defaultCryptoCurrency,
     },
@@ -126,6 +154,14 @@ export function ChooseCreditsForm({
     control: form.control,
     name: CURRENCY,
   });
+  const creditsAmount = useWatch({
+    control: form.control,
+    name: CREDITS_AMOUNT,
+  });
+  const currencyAmount = useWatch({
+    control: form.control,
+    name: CURRENCY_AMOUNT,
+  });
 
   const filteredCryptoSellOrders = useMemo(
     () =>
@@ -135,6 +171,17 @@ export function ChooseCreditsForm({
         retiring,
       }),
     [cryptoSellOrders, currency?.askDenom, retiring],
+  );
+
+  const orderedSellOrders = useMemo(
+    () =>
+      card
+        ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
+        : filteredCryptoSellOrders?.sort(
+            (a, b) => Number(a.askAmount) - Number(b.askAmount),
+          ) || [],
+
+    [card, cardSellOrders, filteredCryptoSellOrders],
   );
 
   const handleCryptoPurchaseOptions = useCallback(() => {
@@ -207,54 +254,103 @@ export function ChooseCreditsForm({
   return (
     <Suspense fallback={<Loading />}>
       <Form form={form} onSubmit={onSubmit} data-testid="choose-credits-form">
-        <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300 sm:w-[560px]">
-          <PaymentOptions
-            paymentOption={paymentOption}
-            setPaymentOption={handlePaymentOptions}
-            cardDisabled={cardDisabled}
-            isConnected={isConnected}
-            setupWalletModal={setupWalletModal}
-          />
-          {currency && (
-            <CreditsAmount
-              paymentOption={paymentOption}
-              spendingCap={spendingCap}
-              setSpendingCap={setSpendingCap}
-              creditsAvailable={creditsAvailable}
-              setCreditsAvailable={setCreditsAvailable}
-              filteredCryptoSellOrders={filteredCryptoSellOrders}
-              cardSellOrders={cardSellOrders}
-              cryptoCurrencies={cryptoCurrencies}
-              allowedDenoms={allowedDenoms}
-              creditTypePrecision={creditTypePrecision}
-              currency={currency}
-            />
-          )}
-          {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
-            <CryptoOptions
-              retiring={retiring}
-              handleCryptoPurchaseOptions={handleCryptoPurchaseOptions}
-              tradableDisabled={cryptoSellOrders.every(
-                order => order.disableAutoRetire === false,
+        <div className="flex gap-10 sm:gap-50 flex-col-reverse lg:flex-row items-center lg:items-start">
+          <div>
+            <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300 sm:w-[560px]">
+              <PaymentOptions
+                paymentOption={paymentOption}
+                setPaymentOption={handlePaymentOptions}
+                cardDisabled={cardDisabled}
+                isConnected={isConnected}
+                setupWalletModal={setupWalletModal}
+              />
+              {currency && (
+                <CreditsAmount
+                  paymentOption={paymentOption}
+                  spendingCap={spendingCap}
+                  setSpendingCap={setSpendingCap}
+                  creditsAvailable={creditsAvailable}
+                  setCreditsAvailable={setCreditsAvailable}
+                  filteredCryptoSellOrders={filteredCryptoSellOrders}
+                  cardSellOrders={cardSellOrders}
+                  cryptoCurrencies={cryptoCurrencies}
+                  allowedDenoms={allowedDenoms}
+                  creditTypePrecision={creditTypePrecision}
+                  currency={currency}
+                  card={card}
+                  orderedSellOrders={orderedSellOrders}
+                />
               )}
-            />
-          )}
-          {/* Advanced settings not enabled for MVP */}
-          {/* <AdvanceSettings
+              {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
+                <CryptoOptions
+                  retiring={retiring}
+                  handleCryptoPurchaseOptions={handleCryptoPurchaseOptions}
+                  tradableDisabled={cryptoSellOrders.every(
+                    order => order.disableAutoRetire === false,
+                  )}
+                />
+              )}
+              {/* Advanced settings not enabled for MVP */}
+              {/* <AdvanceSettings
             creditVintages={creditVintages}
             advanceSettingsOpen={advanceSettingsOpen}
             toggleAdvancedSettings={toggleAdvancedSettings}
             handleCreditVintageOptions={handleCreditVintageOptions}
           /> */}
-        </Card>
-        <div className="float-right pt-40">
-          <PrevNextButtons
-            saveDisabled={!isValid || isSubmitting}
-            saveText={_(NEXT)}
-            onPrev={onPrev}
-          />
+            </Card>
+            <div className="float-right pt-40">
+              <PrevNextButtons
+                saveDisabled={!isValid || isSubmitting}
+                saveText={_(NEXT)}
+                onPrev={onPrev}
+              />
+            </div>
+          </div>
+          {project && allowedDenoms && (
+            // We need to put this inside the form itself
+            // so we can display amounts updates in real time
+            <OrderSummaryCard
+              order={{
+                projectName: project.name,
+                prefinanceProject: false, // TODO APP-367
+                pricePerCredit: parseFloat(
+                  (currencyAmount / creditsAmount).toFixed(6),
+                ),
+                credits: creditsAmount,
+                currency,
+                image: project.imgSrc,
+                currencyAmount,
+              }}
+              cardDetails={cardDetails}
+              imageAltText={project.name}
+              paymentOption={paymentOption}
+              allowedDenoms={allowedDenoms}
+              onClickEditCard={goToPaymentInfo}
+              setCreditsAmount={(value: number) => {
+                form.setValue(CREDITS_AMOUNT, value);
+                const { currencyAmount, sellOrders } = getCurrencyAmount({
+                  currentCreditsAmount: value,
+                  card,
+                  orderedSellOrders,
+                  creditTypePrecision,
+                });
+                form.setValue(CURRENCY_AMOUNT, currencyAmount, {
+                  shouldValidate: true,
+                });
+                form.setValue(SELL_ORDERS, sellOrders);
+              }}
+              creditsAvailable={creditsAvailable}
+              onInvalidCredits={() =>
+                setErrorBannerTextAtom(
+                  getCreditsAvailableBannerText(creditsAvailable),
+                )
+              }
+            />
+          )}
         </div>
       </Form>
     </Suspense>
   );
 }
+
+export const MemoizedChooseCreditsForm = React.memo(ChooseCreditsForm);

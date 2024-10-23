@@ -18,6 +18,8 @@ describe('CreditsAmount', () => {
     filteredCryptoSellOrders: [],
     cardSellOrders,
     cryptoCurrencies,
+    card: true,
+    orderedSellOrders: cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice),
   };
 
   it('renders without crashing', () => {

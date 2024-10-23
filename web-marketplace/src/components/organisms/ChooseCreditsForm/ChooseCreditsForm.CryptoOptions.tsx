@@ -21,7 +21,7 @@ export function CryptoOptions({
       <Title variant="h2" className="text-lg font-black">
         <Trans>Crypto purchase options</Trans>
       </Title>
-      <p className="font-['Lato'] text-base m-0 text-grey-500 pb-[12px]">
+      <p className="font-sans text-base m-0 text-grey-500 pb-[12px]">
         <Trans>
           Credits purchased with crypto can be purchased in either a retired or
           tradable state.
@@ -36,12 +36,12 @@ export function CryptoOptions({
             selectedValue={retiring}
             key={_(label)}
             label={
-              <span className="block text-base font-bold font-['Lato']">
+              <span className="block text-base font-bold font-sans">
                 {_(label)}
               </span>
             }
             description={
-              <p className="text-black text-sm font-normal font-['Lato'] my-0">
+              <p className="text-black text-sm font-normal font-sans my-0">
                 {_(description)}
                 <a
                   href={linkTo}

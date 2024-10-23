@@ -143,7 +143,7 @@ export const ProfileEditMain = () => {
   const onSuccess = useCallback(() => {
     setBannerTextAtom(_(PROFILE_SAVED));
     refreshProfileData();
-    navigate('/profile');
+    navigate('/dashboard');
   }, [setBannerTextAtom, _, refreshProfileData, navigate]);
 
   const onUpload = useOnUploadCallback({

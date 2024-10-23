@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { makeStyles } from 'tss-react/mui';
 
+import { cn } from '../../utils/styles/cn';
 import Card from '../cards/Card';
 import CheckIcon from '../icons/CheckIcon';
 import InfoIconOutlined from '../icons/InfoIconOutlined';
@@ -123,7 +124,7 @@ function OverviewCard({
       >
         <Box display="flex" justifyContent="center" pt={2}>
           <Label size="sm" mobileSize="sm">
-            <CheckIcon className={styles.check} />
+            <CheckIcon className={cn('text-brand-400', styles.check)} />
             {item.title}
           </Label>
         </Box>

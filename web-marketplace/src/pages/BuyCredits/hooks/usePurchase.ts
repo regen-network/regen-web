@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useLingui } from '@lingui/react';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
@@ -33,7 +34,7 @@ import {
   VIEW_CERTIFICATE,
 } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
-import { useFetchRetirementForPaymentIntent } from './useFetchRetirementForPaymentIntent';
+import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
 
 type PurchaseParams = {
   paymentOption: PaymentOptionsType;
@@ -57,6 +58,7 @@ type PurchaseParams = {
 export const usePurchase = () => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
+  const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
@@ -68,9 +70,11 @@ export const usePurchase = () => {
   const retryCsrfRequest = useRetryCsrfRequest();
   const { handleSuccess } = useMultiStep<BuyCreditsSchemaTypes>();
   const [paymentIntentId, setPaymentIntentId] = useState<string | undefined>();
+  const [txHash, setTxHash] = useState<string | undefined>();
 
-  useFetchRetirementForPaymentIntent({
+  useFetchRetirementForPurchase({
     paymentIntentId,
+    txHash,
   });
 
   const purchase = useCallback(
@@ -205,7 +209,7 @@ export const usePurchase = () => {
               ],
               // We set gas higher than normal because if there are many sell orders to process,
               // more gas will be used.
-              // In a follow up, we could to simulate tx.
+              // In a follow up, we could simulate tx.
               // User can also update that manually from Keplr before signing.
               gas: '500000',
             },
@@ -240,14 +244,18 @@ export const usePurchase = () => {
                 atom.txHash = deliverTxResponse?.transactionHash;
                 atom.keepOpenOnLocationChange = true;
               });
+              setTxHash(deliverTxResponse?.transactionHash);
 
-              // Reload sell orders
-              await reactQueryClient.invalidateQueries({
-                queryKey: [SELL_ORDERS_EXTENTED_KEY],
-              });
+              // In case of retiring, it's handled in useFetchRetirementForPurchase
+              if (!retiring) {
+                await reactQueryClient.invalidateQueries({
+                  queryKey: [SELL_ORDERS_EXTENTED_KEY],
+                });
 
-              // Reset BuyCredits forms
-              handleSuccess();
+                // Reset BuyCredits forms
+                handleSuccess();
+                navigate(`/profile/portfolio`);
+              }
             },
           },
         );
@@ -256,6 +264,7 @@ export const usePurchase = () => {
     [
       _,
       handleSuccess,
+      navigate,
       reactQueryClient,
       retryCsrfRequest,
       setErrorBannerTextAtom,

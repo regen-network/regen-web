@@ -23,8 +23,13 @@ export const txSuccessfulModalAtom = atomWithImmer({
   cardItems: [],
   title: '',
   cardTitle: '',
-  keepOpenOnLocationChange: true,
-} as Partial<TxSuccessfulModalProps> & { keepOpenOnLocationChange?: boolean });
+} as Partial<TxSuccessfulModalProps>);
+
+export const txBuySuccessfulModalAtom = atomWithImmer({
+  cardItems: [],
+  title: '',
+  cardTitle: '',
+} as Partial<TxSuccessfulModalProps>);
 
 export const processingModalAtom = atomWithImmer({
   open: false,

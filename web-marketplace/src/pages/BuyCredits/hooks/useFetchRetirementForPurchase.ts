@@ -6,7 +6,7 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useLingui } from '@lingui/react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { timer } from 'utils/timer';
 
@@ -14,6 +14,7 @@ import {
   processingModalAtom,
   txSuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
+import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getTxHashForPaymentIntentQuery } from 'lib/queries/react-query/registry-server/graphql/getTxHashForPaymentIntent/getTxHashForPaymentIntentQuery';
 import { getRetirementByTxHash } from 'lib/queries/react-query/registry-server/graphql/indexer/getRetirementByTxHash/getRetirementByTxHash';
 
@@ -22,18 +23,21 @@ import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { PURCHASE_SUCCESSFUL, VIEW_CERTIFICATE } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes } from '../BuyCredits.types';
 
-type UseFetchRetirementForPaymentIntentParams = {
+type UseFetchRetirementForPurchaseParams = {
   paymentIntentId?: string;
+  txHash?: string;
 };
-export const useFetchRetirementForPaymentIntent = ({
+export const useFetchRetirementForPurchase = ({
   paymentIntentId,
-}: UseFetchRetirementForPaymentIntentParams) => {
+  txHash,
+}: UseFetchRetirementForPurchaseParams) => {
   const { _ } = useLingui();
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const navigate = useNavigate();
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
   const { handleSuccess } = useMultiStep<BuyCreditsSchemaTypes>();
+  const reactQueryClient = useQueryClient();
 
   const { data: txHashData, refetch: refetchTxHash } = useQuery(
     getTxHashForPaymentIntentQuery({
@@ -42,17 +46,17 @@ export const useFetchRetirementForPaymentIntent = ({
       paymentIntentId: paymentIntentId as string,
     }),
   );
-  const txHash = txHashData?.data.getTxHashForPaymentIntent;
+  const _txHash = txHash || txHashData?.data.getTxHashForPaymentIntent;
   const { data, refetch: refetchRetirement } = useQuery(
     getRetirementByTxHash({
       client: apolloClient,
-      enabled: !!txHash && !!apolloClient,
-      txHash: txHash as string,
+      enabled: !!_txHash && !!apolloClient,
+      txHash: _txHash as string,
     }),
   );
   const retirement = data?.data?.retirementByTxHash;
 
-  const fetchRetirementForPaymentIntent = useCallback(async () => {
+  const fetchRetirement = useCallback(async () => {
     setProcessingModalAtom(atom => void (atom.open = true));
     let i = 1;
     while (i < 10) {
@@ -65,7 +69,7 @@ export const useFetchRetirementForPaymentIntent = ({
       }
       await timer(1000);
     }
-    // TODO what should we do if not retirement found after 10sec?
+    // TODO what should we do if no retirement found after 10sec?
     setProcessingModalAtom(atom => void (atom.open = false));
   }, [
     refetchRetirement,
@@ -76,10 +80,10 @@ export const useFetchRetirementForPaymentIntent = ({
   ]);
 
   useEffect(() => {
-    if (paymentIntentId) fetchRetirementForPaymentIntent();
-  }, [fetchRetirementForPaymentIntent, paymentIntentId]);
+    if (paymentIntentId) fetchRetirement();
+  }, [fetchRetirement, paymentIntentId]);
 
-  useEffect(() => {
+  const onSuccess = useCallback(async () => {
     if (retirement) {
       setTxSuccessfulModalAtom(atom => {
         atom.open = true;
@@ -91,8 +95,32 @@ export const useFetchRetirementForPaymentIntent = ({
         atom.txHash = retirement.txHash;
         atom.keepOpenOnLocationChange = true;
       });
+      // Reload sell orders
+      await reactQueryClient.invalidateQueries({
+        queryKey: [SELL_ORDERS_EXTENTED_KEY],
+      });
       handleSuccess();
       navigate(`/certificate/${retirement.nodeId}`);
     }
-  }, [_, handleSuccess, navigate, retirement, setTxSuccessfulModalAtom]);
+  }, [
+    _,
+    handleSuccess,
+    navigate,
+    reactQueryClient,
+    retirement,
+    setTxSuccessfulModalAtom,
+  ]);
+
+  useEffect(() => {
+    if (retirement) {
+      onSuccess();
+    }
+  }, [
+    _,
+    handleSuccess,
+    navigate,
+    onSuccess,
+    retirement,
+    setTxSuccessfulModalAtom,
+  ]);
 };

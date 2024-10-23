@@ -52,7 +52,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
                 bottom: 12,
               }}
             >
-              <CheckIcon sx={{ width: 13, height: 13 }} />
+              <CheckIcon className="w-[13px] h-[13px] text-brand-400" />
             </Box>
           )}
         </Grid>

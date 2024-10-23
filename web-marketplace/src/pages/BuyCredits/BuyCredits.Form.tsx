@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
@@ -328,6 +328,7 @@ export const BuyCreditsForm = ({
         onModalClose={onModalClose}
         wallets={walletsUiConfig}
         modalState={modalState}
+        redirectRoute={`${projectHref.replace(/^\//, '')}/buy`}
       />
     </div>
   );

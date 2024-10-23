@@ -70,12 +70,12 @@ const ListProject = () => {
         </Body>
       )}
       <LoginFlow
-        createProject
         isConnectingRef={isConnectingRef}
         isModalOpen={isModalOpen}
         onModalClose={onModalClose}
         wallets={checkIsMobile() ? [] : [walletsUiConfig[0]]}
         modalState={modalState}
+        redirectRoute="project-pages/draft/basic-info"
       />
     </div>
   );

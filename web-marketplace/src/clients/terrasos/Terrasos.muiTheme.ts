@@ -16,12 +16,17 @@ const defaultTheme = createTheme({
 
 export const { pxToRem } = defaultTheme.typography;
 
-export const headerFontFamily = ['"Muli"', '-apple-system', 'sans-serif'].join(
-  ',',
-);
-export const defaultFontFamily = ['"Lato"', '-apple-system', 'sans-serif'].join(
-  ',',
-);
+export const headerFontFamily = [
+  '"Montserrat"',
+  '-apple-system',
+  'sans-serif',
+].join(',');
+
+export const defaultFontFamily = [
+  '"Montserrat"',
+  '-apple-system',
+  'sans-serif',
+].join(',');
 
 const headerDefaults = {
   fontWeight: 900,

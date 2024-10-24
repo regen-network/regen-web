@@ -1,3 +1,8 @@
 a {
   color: inherit;
 }
+
+body {
+  font-family: 'Montserrat', -apple-system, sans-serif !important;
+  background-color: #ffffff;
+}

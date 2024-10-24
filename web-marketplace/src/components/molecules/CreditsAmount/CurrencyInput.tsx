@@ -39,8 +39,6 @@ export const CurrencyInput = ({
   } = useFormContext<ChooseCreditsFormSchemaType>();
   const { _ } = useLingui();
 
-  const { onChange } = register(CURRENCY_AMOUNT);
-
   const currency = useWatch({
     control,
     name: CURRENCY,
@@ -48,13 +46,11 @@ export const CurrencyInput = ({
 
   const handleOnChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      // Remove zeros in non decimal values and update the value
-      const value = event.target.value;
-      if (!value.includes('.')) setValue(CURRENCY_AMOUNT, Number(value));
-      onChange(event);
+      const valueAsNumber = event.target.valueAsNumber;
+      setValue(CURRENCY_AMOUNT, valueAsNumber, { shouldValidate: true });
       handleCurrencyAmountChange(event);
     },
-    [handleCurrencyAmountChange, onChange, setValue],
+    [handleCurrencyAmountChange, setValue],
   );
 
   const onHandleCurrencyChange = useCallback(

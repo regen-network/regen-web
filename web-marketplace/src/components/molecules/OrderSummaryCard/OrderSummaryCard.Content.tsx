@@ -45,7 +45,8 @@ export function OrderSummaryContent({
 }: Props) {
   const { _ } = useLingui();
 
-  const { projectName, currency, pricePerCredit, credits } = order;
+  const { projectName, currency, pricePerCredit, credits, currencyAmount } =
+    order;
 
   const displayDenom = useMemo(
     () =>
@@ -113,7 +114,7 @@ export function OrderSummaryContent({
         <div className="flex flex-wrap">
           <span className="pt-[11px] sm:pt-5">
             <SupCurrencyAndAmount
-              price={order.currencyAmount}
+              price={currencyAmount}
               currencyCode={currency.askDenom}
               className="font-bold font-sans sm:text-[22px] mr-10"
             />

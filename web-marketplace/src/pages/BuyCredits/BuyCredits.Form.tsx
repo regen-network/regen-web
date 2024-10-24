@@ -172,7 +172,7 @@ export const BuyCreditsForm = ({
     [data, handleSaveNext, setPaymentMethodId],
   );
 
-  const purchase = usePurchase();
+  const purchase = usePurchase({ paymentOption, retiring });
   const agreePurchaseFormSubmit = useCallback(
     async (
       values: AgreePurchaseFormSchemaType,

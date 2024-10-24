@@ -12,7 +12,7 @@ import { timer } from 'utils/timer';
 
 import {
   processingModalAtom,
-  txSuccessfulModalAtom,
+  txBuySuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getTxHashForPaymentIntentQuery } from 'lib/queries/react-query/registry-server/graphql/getTxHashForPaymentIntent/getTxHashForPaymentIntentQuery';
@@ -20,22 +20,32 @@ import { getRetirementByTxHash } from 'lib/queries/react-query/registry-server/g
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
-import { PURCHASE_SUCCESSFUL, VIEW_CERTIFICATE } from '../BuyCredits.constants';
-import { BuyCreditsSchemaTypes } from '../BuyCredits.types';
+import {
+  CHOOSE_CREDITS,
+  COMPLETE,
+  PAYMENT_OPTIONS,
+  VIEW_CERTIFICATE,
+} from '../BuyCredits.constants';
+import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
+import { getStep2Name, getStep3Name } from '../BuyCredits.utils';
 
 type UseFetchRetirementForPurchaseParams = {
   paymentIntentId?: string;
   txHash?: string;
+  paymentOption: PaymentOptionsType;
+  retiring: boolean;
 };
 export const useFetchRetirementForPurchase = ({
   paymentIntentId,
   txHash,
+  paymentOption,
+  retiring,
 }: UseFetchRetirementForPurchaseParams) => {
   const { _ } = useLingui();
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const navigate = useNavigate();
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
-  const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
+  const setTxBuySuccessfulModalAtom = useSetAtom(txBuySuccessfulModalAtom);
   const { handleSuccess } = useMultiStep<BuyCreditsSchemaTypes>();
   const reactQueryClient = useQueryClient();
 
@@ -85,15 +95,19 @@ export const useFetchRetirementForPurchase = ({
 
   const onSuccess = useCallback(async () => {
     if (retirement) {
-      setTxSuccessfulModalAtom(atom => {
+      setTxBuySuccessfulModalAtom(atom => {
         atom.open = true;
         // atom.cardItems = cardItems; // TODO
-        atom.title = _(PURCHASE_SUCCESSFUL);
         atom.buttonTitle = _(VIEW_CERTIFICATE);
         atom.onButtonClick = () =>
-          setTxSuccessfulModalAtom(atom => void (atom.open = false));
+          setTxBuySuccessfulModalAtom(atom => void (atom.open = false));
         atom.txHash = retirement.txHash;
-        atom.keepOpenOnLocationChange = true;
+        atom.steps = [
+          _(CHOOSE_CREDITS),
+          getStep2Name(paymentOption === PAYMENT_OPTIONS.CARD),
+          getStep3Name(retiring),
+          _(COMPLETE),
+        ];
       });
       // Reload sell orders
       await reactQueryClient.invalidateQueries({
@@ -106,21 +120,16 @@ export const useFetchRetirementForPurchase = ({
     _,
     handleSuccess,
     navigate,
+    paymentOption,
     reactQueryClient,
     retirement,
-    setTxSuccessfulModalAtom,
+    retiring,
+    setTxBuySuccessfulModalAtom,
   ]);
 
   useEffect(() => {
     if (retirement) {
       onSuccess();
     }
-  }, [
-    _,
-    handleSuccess,
-    navigate,
-    onSuccess,
-    retirement,
-    setTxSuccessfulModalAtom,
-  ]);
+  }, [_, handleSuccess, navigate, onSuccess, retirement]);
 };

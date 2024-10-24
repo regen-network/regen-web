@@ -29,7 +29,8 @@ export const txBuySuccessfulModalAtom = atomWithImmer({
   cardItems: [],
   title: '',
   cardTitle: '',
-} as Partial<TxSuccessfulModalProps>);
+  steps: [],
+} as Partial<TxSuccessfulModalProps> & { steps: string[] });
 
 export const processingModalAtom = atomWithImmer({
   open: false,

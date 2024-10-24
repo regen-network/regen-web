@@ -16,7 +16,7 @@ import { errorBannerTextAtom, errorCodeAtom } from 'lib/atoms/error.atoms';
 import {
   errorModalAtom,
   processingModalAtom,
-  txSuccessfulModalAtom,
+  txBuySuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
@@ -55,12 +55,18 @@ type PurchaseParams = {
   creditsAmount: number;
 };
 
-export const usePurchase = () => {
+export const usePurchase = ({
+  paymentOption,
+  retiring,
+}: {
+  paymentOption: PaymentOptionsType;
+  retiring: boolean;
+}) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
   const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();
-  const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
+  const setTxBuySuccessfulModalAtom = useSetAtom(txBuySuccessfulModalAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
   const setErrorModalAtom = useSetAtom(errorModalAtom);
@@ -75,6 +81,8 @@ export const usePurchase = () => {
   useFetchRetirementForPurchase({
     paymentIntentId,
     txHash,
+    paymentOption,
+    retiring,
   });
 
   const purchase = useCallback(
@@ -227,27 +235,24 @@ export const usePurchase = () => {
             },
             onSuccess: async (deliverTxResponse?: DeliverTxResponse) => {
               setProcessingModalAtom(atom => void (atom.open = false));
-
-              // TODO https://regennetwork.atlassian.net/browse/APP-361
-              // We need to display a custom success modal here
-              // instead of the regular one
-              setTxSuccessfulModalAtom(atom => {
-                atom.open = true;
-                // atom.cardItems = cardItems; // TODO
-                atom.title = _(PURCHASE_SUCCESSFUL);
-                atom.buttonTitle = retiring
-                  ? _(VIEW_CERTIFICATE)
-                  : _(VIEW_PORTFOLIO);
-                atom.onButtonClick = () =>
-                  setTxSuccessfulModalAtom(atom => void (atom.open = false));
-                // atom.buttonLink = buttonLink;
-                atom.txHash = deliverTxResponse?.transactionHash;
-                atom.keepOpenOnLocationChange = true;
-              });
               setTxHash(deliverTxResponse?.transactionHash);
 
               // In case of retiring, it's handled in useFetchRetirementForPurchase
               if (!retiring) {
+                setTxBuySuccessfulModalAtom(atom => {
+                  atom.open = true;
+                  // atom.cardItems = cardItems; // TODO
+                  atom.buttonTitle = retiring
+                    ? _(VIEW_CERTIFICATE)
+                    : _(VIEW_PORTFOLIO);
+                  atom.onButtonClick = () =>
+                    setTxBuySuccessfulModalAtom(
+                      atom => void (atom.open = false),
+                    );
+                  atom.txHash = deliverTxResponse?.transactionHash;
+                  atom.steps = [''];
+                });
+
                 await reactQueryClient.invalidateQueries({
                   queryKey: [SELL_ORDERS_EXTENTED_KEY],
                 });

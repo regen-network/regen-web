@@ -1,14 +1,12 @@
 import { useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
-import { TxSuccessfulModal } from 'web-components/src/components/modal/TxSuccessfulModal';
+import { TxBuySuccessfulModal } from 'web-components/src/components/modal/TxBuySuccessfulModal/TxBuySuccessfulModal';
 
-import {
-  txBuySuccessfulModalAtom,
-  txSuccessfulModalAtom,
-} from 'lib/atoms/modals.atoms';
+import { txBuySuccessfulModalAtom } from 'lib/atoms/modals.atoms';
 import { getHashUrl } from 'lib/block-explorer';
 import {
   BLOCKCHAIN_RECORD,
@@ -18,14 +16,27 @@ import {
   TX_SUCCESSFUL_MODAL_TITLE,
 } from 'lib/constants/shared.constants';
 
+import {
+  PURCHASE_SUCCESSFUL,
+  VIEW_CERTIFICATE,
+} from 'pages/BuyCredits/BuyCredits.constants';
 import { Link } from 'components/atoms';
 
 export const RegistryLayoutTxBuySuccessfulModal = (): JSX.Element => {
   const { _ } = useLingui();
-  const location = useLocation();
 
   const [
-    { cardItems, title, cardTitle, open, txHash, buttonTitle, buttonLink },
+    {
+      cardItems,
+      title,
+      description,
+      cardTitle,
+      open,
+      txHash,
+      buttonTitle,
+      buttonLink,
+      steps,
+    },
     setTxBuySuccessfulModalAtom,
   ] = useAtom(txBuySuccessfulModalAtom);
   const onClose = useCallback(
@@ -36,14 +47,14 @@ export const RegistryLayoutTxBuySuccessfulModal = (): JSX.Element => {
   const txHashUrl = getHashUrl(txHash);
 
   return (
-    <TxSuccessfulModal
+    <TxBuySuccessfulModal
       seeMoreText={_(SEE_MORE)}
       seeLessText={_(SEE_LESS)}
       open={!!open}
       cardItems={cardItems}
-      title={title ?? _(TX_SUCCESSFUL_MODAL_TITLE)}
+      title={title ?? _(PURCHASE_SUCCESSFUL)}
       cardTitle={cardTitle ?? ''}
-      buttonTitle={buttonTitle ?? _(TX_MODAL_TITLE)}
+      buttonTitle={buttonTitle ?? _(VIEW_CERTIFICATE)}
       buttonLink={buttonLink}
       onClose={onClose}
       txHash={txHash ?? ''}
@@ -51,6 +62,8 @@ export const RegistryLayoutTxBuySuccessfulModal = (): JSX.Element => {
       linkComponent={Link}
       onButtonClick={onClose}
       blockchainRecordText={_(BLOCKCHAIN_RECORD)}
+      steps={steps}
+      description={description}
     />
   );
 };

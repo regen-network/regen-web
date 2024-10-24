@@ -1,9 +1,26 @@
 import { i18n } from '@lingui/core';
 import { msg, plural } from '@lingui/macro';
+import { Box } from '@mui/material';
+import { quantityFormatNumberOptions } from 'config/decimals';
 
-import { getFormattedNumber } from 'web-components/src/utils/format';
+import {
+  formatNumber,
+  getFormattedNumber,
+} from 'web-components/src/utils/format';
 
-import { PAYMENT_OPTIONS } from './BuyCredits.constants';
+import { microToDenom } from 'lib/denom.utils';
+
+import DenomIcon from 'components/molecules/DenomIcon';
+
+import {
+  AGREE_PURCHASE,
+  CHOOSE_CREDITS,
+  COMPLETE,
+  CUSTOMER_INFO,
+  PAYMENT_INFO,
+  PAYMENT_OPTIONS,
+  RETIREMENT,
+} from './BuyCredits.constants';
 import { PaymentOptionsType } from './BuyCredits.types';
 
 type GetFormModelParams = {
@@ -11,19 +28,21 @@ type GetFormModelParams = {
   retiring: boolean;
   projectId: string;
 };
+
+export const getStep2Name = (card: boolean) =>
+  card ? i18n._(PAYMENT_INFO) : i18n._(CUSTOMER_INFO);
+
+export const getStep3Name = (retiring: boolean) =>
+  retiring ? i18n._(RETIREMENT) : i18n._(AGREE_PURCHASE);
+
 export const getFormModel = ({
   paymentOption,
   retiring,
   projectId,
 }: GetFormModelParams) => {
-  const nameStep1 = i18n._(msg`Choose credits`);
-  const nameStep2 =
-    paymentOption === PAYMENT_OPTIONS.CARD
-      ? i18n._(msg`Payment info`)
-      : i18n._(msg`Customer info`);
-  const nameStep3 = retiring
-    ? i18n._(msg`Retirement`)
-    : i18n._(msg`Agree & purchase`);
+  const nameStep1 = i18n._(CHOOSE_CREDITS);
+  const nameStep2 = getStep2Name(paymentOption === PAYMENT_OPTIONS.CARD);
+  const nameStep3 = getStep3Name(retiring);
   const descriptionStep3 = retiring
     ? i18n._(
         msg`Retirement permanently removes used credits from circulation to prevent their reuse, ensuring that the environmental benefit claimed is real and not double-counted.`,
@@ -49,7 +68,7 @@ export const getFormModel = ({
         title: nameStep3,
         description: descriptionStep3,
       },
-      { id: 'complete', name: i18n._(msg`Complete`) },
+      { id: 'complete', name: i18n._(COMPLETE) },
     ],
   };
 };

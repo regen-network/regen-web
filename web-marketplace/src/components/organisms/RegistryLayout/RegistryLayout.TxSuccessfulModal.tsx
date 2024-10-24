@@ -22,16 +22,7 @@ export const RegistryLayoutTxSuccessfulModal = (): JSX.Element => {
   const location = useLocation();
 
   const [
-    {
-      cardItems,
-      title,
-      cardTitle,
-      open,
-      txHash,
-      buttonTitle,
-      buttonLink,
-      keepOpenOnLocationChange,
-    },
+    { cardItems, title, cardTitle, open, txHash, buttonTitle, buttonLink },
     setTxSuccessfulModalAtom,
   ] = useAtom(txSuccessfulModalAtom);
   const onClose = useCallback(
@@ -42,9 +33,8 @@ export const RegistryLayoutTxSuccessfulModal = (): JSX.Element => {
   const txHashUrl = getHashUrl(txHash);
 
   useEffect(() => {
-    if (!keepOpenOnLocationChange) onClose();
     // onClose();
-  }, [keepOpenOnLocationChange, location, onClose]);
+  }, [location, onClose]);
 
   return (
     <TxSuccessfulModal

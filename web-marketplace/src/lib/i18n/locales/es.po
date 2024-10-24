@@ -429,9 +429,13 @@ msgstr "Admin"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:37
 msgid "Advanced settings"
-msgstr "Configuración avanzada"
+msgstr ""
 
-#: src/pages/BatchDetails/BatchDetails.tsx:129
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:46
+msgid "Agree & purchase"
+msgstr ""
+
+#: src/pages/BatchDetails/BatchDetails.tsx:122
 msgid "All credits"
 msgstr "Todos los créditos"
 
@@ -500,7 +504,15 @@ msgstr "El monto no puede exceder"
 
 #: src/components/organisms/EcocreditsTable.tsx:104
 msgid "Amount Escrowed"
-msgstr "Monto depositado en depósito"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:161
+msgid "amount now available in"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:107
+msgid "amount now available in usd"
+msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:150
 msgid "amount of credits"
@@ -726,7 +738,7 @@ msgstr "Fecha de inicio del lote"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:52
 msgid "BATCH START DATE"
-msgstr "FECHA DE INICIO DEL LOTE"
+msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:159
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:74
@@ -1015,7 +1027,7 @@ msgstr "Elija la cesta"
 msgid "Choose credit class"
 msgstr "Elija la clase de crédito"
 
-#: src/pages/BuyCredits/BuyCredits.constants.ts:13
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:35
 msgid "Choose credits"
 msgstr "Elija créditos"
 
@@ -1025,7 +1037,11 @@ msgstr "Elige denominación"
 
 #: src/lib/constants/shared.constants.tsx:28
 msgid "Choose ecocredits batch"
-msgstr "Elige el lote de ecocréditos"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:173
+msgid "Choose new credits"
+msgstr ""
 
 #: src/components/molecules/ProjectSelect.tsx:25
 #: src/features/ecocredit/CreateBatchBySteps/hooks/useUpdateProjectOptions.ts:14
@@ -1087,7 +1103,7 @@ msgstr "Créditos comunitarios"
 msgid "Community credits are credits that have not been through the <0>Regen Registry program</0>or are not associated with another known registry. <1/><2/>To create your own credits, <3>learn more in our docs.</3>"
 msgstr "Los créditos comunitarios son créditos que no han pasado por el <0>programa Regen Registry</0> o que no están asociados con otro registro conocido. <1/><2/>Para crear sus propios créditos, <3>obtenga más información en nuestros documentos.</3>"
 
-#: src/pages/BuyCredits/BuyCredits.constants.ts:18
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:48
 msgid "Complete"
 msgstr "Completo"
 
@@ -1375,7 +1391,7 @@ msgstr "Emisión de crédito pendiente"
 msgid "credit name"
 msgstr "nombre de credito"
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:268
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:269
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr "Los precios de los créditos varían. Por defecto, se comprarán primero los créditos con el precio más bajo."
 
@@ -1549,7 +1565,7 @@ msgid "Custom url"
 msgstr "URL personalizada"
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:51
-#: src/pages/BuyCredits/BuyCredits.constants.ts:15
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:42
 msgid "Customer info"
 msgstr "Información del cliente"
 
@@ -1573,7 +1589,7 @@ msgstr "fecha"
 msgid "Date of upload"
 msgstr "Fecha de subida"
 
-#: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.SelectAccountModal.tsx:65
+#: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.SelectAccountModal.tsx:66
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:12
 msgid "default avatar"
 msgstr "avatar predeterminado"
@@ -1979,7 +1995,11 @@ msgstr "Los archivos aún se pueden compartir de forma privada a través de un e
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:8
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:48
 msgid "Filters"
-msgstr "Filtros"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:114
+msgid "find another credit card project"
+msgstr ""
 
 #: src/components/molecules/PlanStepper.tsx:18
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:40
@@ -2843,7 +2863,7 @@ msgid "payment info"
 msgstr "Información de pago"
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.PaymentInfo.tsx:45
-#: src/pages/BuyCredits/BuyCredits.constants.ts:14
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:41
 msgid "Payment info"
 msgstr "Información de pago"
 
@@ -3551,7 +3571,7 @@ msgstr "Jubilado por"
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr "Los créditos retirados han sido retirados de circulación de forma permanente y no pueden venderse a nadie más."
 
-#: src/pages/BuyCredits/BuyCredits.constants.ts:16
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:46
 msgid "Retirement"
 msgstr "Jubilación"
 
@@ -3663,7 +3683,11 @@ msgstr "Escanee con la aplicación móvil Keplr"
 #: src/components/organisms/CreditClassOverviewSection.tsx:161
 #: src/components/organisms/CreditClassOverviewSection.tsx:172
 msgid "SDGs"
-msgstr "ODS"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:144
+msgid "search for new credits"
+msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:88
 msgid "sectoral scopes"
@@ -3713,8 +3737,8 @@ msgstr "Seleccione una billetera"
 msgid "Select all"
 msgstr "Seleccionar todo"
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:252
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:253
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:254
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:255
 msgid "Select option"
 msgstr "Seleccionar opción"
 
@@ -3872,7 +3896,19 @@ msgstr "Índice social y cultural"
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
 #: src/lib/constants/shared.constants.tsx:174
 msgid "Sold Out"
-msgstr "Agotado"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:131
+msgid "Sorry, another user has purchased all of the available credits from this project"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:102
+msgid "Sorry, another user has purchased all of the USD credits you selected!"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:156
+msgid "Sorry, another user has purchased some or all of the credits you selected!"
+msgstr ""
 
 #: src/config/errors.tsx:29
 msgid "Sorry, someone has purchased this sell order!"

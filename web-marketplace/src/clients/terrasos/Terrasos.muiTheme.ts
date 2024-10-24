@@ -29,7 +29,7 @@ export const defaultFontFamily = [
 ].join(',');
 
 const headerDefaults = {
-  fontWeight: 900,
+  fontWeight: 700,
   fontFamily: headerFontFamily,
 };
 

@@ -153,9 +153,11 @@ export function useProjectsWithOrders({
     projects = projectsData?.projects;
   }
 
-  const offChainIds = allOffChainProjects.map(project => project.onChainId);
+  const onChainIdsFromOffChainProjects = allOffChainProjects.map(
+    project => project.onChainId,
+  );
   const clientProjects = projects?.filter(project =>
-    IS_TERRASOS ? offChainIds.includes(project.id) : true,
+    IS_TERRASOS ? onChainIdsFromOffChainProjects.includes(project.id) : true,
   );
 
   const skippedClassId = !classId && !projectId ? SKIPPED_CLASS_ID : undefined;

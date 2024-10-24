@@ -256,7 +256,7 @@ export const BuyCreditsForm = ({
         getSellOrdersCredits(requestedSellOrders);
 
       const sellCanProceed =
-        creditsToBuy && creditsToBuy < creditsInRequestedSellOrders;
+        creditsToBuy && creditsToBuy <= creditsInRequestedSellOrders;
 
       if (sellCanProceed) {
         const { retirementReason, country, stateProvince, postalCode } = values;
@@ -407,7 +407,7 @@ export const BuyCreditsForm = ({
         {paymentOption === PAYMENT_OPTIONS.CARD &&
         (activeStep === 1 || activeStep === 2) ? (
           <Elements options={stripeOptions} stripe={stripe}>
-            {activeStep === 1 && (
+            {activeStep === 2 && (
               <PaymentInfoFormFiat
                 paymentOption={paymentOption}
                 onSubmit={paymentInfoFormSubmit}
@@ -429,7 +429,7 @@ export const BuyCreditsForm = ({
                 setCardDetails={setCardDetails}
               />
             )}
-            {activeStep === 2 && (
+            {activeStep === 1 && (
               <AgreePurchaseFormFiat
                 retiring={retiring}
                 onSubmit={agreePurchaseFormSubmit}

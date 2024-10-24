@@ -9,7 +9,10 @@ import {
 } from 'web-components/src/utils/format';
 
 import { microToDenom } from 'lib/denom.utils';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
+import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
+import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import DenomIcon from 'components/molecules/DenomIcon';
 
 import {
@@ -86,29 +89,34 @@ export const getFormModel = ({
 type GetCardItemsParams = {
   retiring: boolean;
   creditsAmount: number;
+  currencyAmount: number;
+  project: NormalizeProject;
+  currency: Currency;
+  displayDenom: string;
 };
 export const getCardItems = ({
   retiring,
   creditsAmount,
+  currencyAmount,
+  project,
+  currency,
+  displayDenom,
 }: GetCardItemsParams) => [
   {
     label: i18n._(msg`total purchase price`),
     value: {
-      name: formatNumber({
-        num: creditCount * microToDenom(price),
-        ...quantityFormatNumberOptions,
-      }),
-      icon: (
-        <Box
-          component="span"
-          sx={{
-            mr: '4px',
-            display: 'inline-block',
-            verticalAlign: 'bottom',
-          }}
-        >
-          <DenomIcon baseDenom={baseDenom} sx={{ display: 'flex' }} />
-        </Box>
+      children: (
+        <AmountWithCurrency
+          amount={currencyAmount}
+          currency={currency}
+          displayDenom={displayDenom}
+          classes={
+            {
+              // root: 'justify-start',
+              // denom: 'pt-[8px] text-[14px] sm:text-base',
+            }
+          }
+        />
       ),
     },
   },

@@ -1,7 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useLingui } from '@lingui/react';
+import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
@@ -19,20 +20,33 @@ import {
   txBuySuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
+import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { VIEW_PORTFOLIO } from 'components/organisms/BasketOverview/BasketOverview.constants';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useMsgClient } from 'hooks';
 
-import { PAYMENT_OPTIONS, VIEW_CERTIFICATE } from '../BuyCredits.constants';
+import { EMAIL_RECEIPT, PAYMENT_OPTIONS } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
-import { getSteps } from '../BuyCredits.utils';
+import { getCardItems, getSteps } from '../BuyCredits.utils';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
 
+type UsePurchaseParams = {
+  paymentOption: PaymentOptionsType;
+  retiring: boolean;
+  project?: NormalizeProject;
+  currency?: Currency;
+  creditsAmount?: number;
+  currencyAmount?: number;
+  email?: string | null;
+  allowedDenoms?: AllowedDenom[];
+};
 type PurchaseParams = {
   selectedSellOrders: ChooseCreditsFormSchemaType['sellOrders'];
   retirementReason?: string;
@@ -48,16 +62,18 @@ type PurchaseParams = {
   stripe?: Stripe | null;
   elements?: StripeElements | null;
   confirmationTokenId?: string;
-  creditsAmount: number;
 };
 
 export const usePurchase = ({
   paymentOption,
   retiring,
-}: {
-  paymentOption: PaymentOptionsType;
-  retiring: boolean;
-}) => {
+  project,
+  currency,
+  creditsAmount,
+  currencyAmount,
+  allowedDenoms,
+  email,
+}: UsePurchaseParams) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
   const navigate = useNavigate();
@@ -74,11 +90,29 @@ export const usePurchase = ({
   const [paymentIntentId, setPaymentIntentId] = useState<string | undefined>();
   const [txHash, setTxHash] = useState<string | undefined>();
 
+  const displayDenom = useMemo(
+    () =>
+      currency?.askDenom
+        ? findDisplayDenom({
+            allowedDenoms,
+            bankDenom: currency?.askDenom,
+            baseDenom: currency?.askBaseDenom,
+          })
+        : undefined,
+    [allowedDenoms, currency?.askBaseDenom, currency?.askDenom],
+  );
+
   useFetchRetirementForPurchase({
     paymentIntentId,
     txHash,
     paymentOption,
     retiring,
+    project,
+    currency,
+    creditsAmount,
+    currencyAmount,
+    displayDenom,
+    email,
   });
 
   const purchase = useCallback(
@@ -97,8 +131,16 @@ export const usePurchase = ({
       stripe,
       elements,
       confirmationTokenId,
-      creditsAmount,
     }: PurchaseParams) => {
+      if (
+        !creditsAmount ||
+        !currencyAmount ||
+        !project ||
+        !currency ||
+        !displayDenom
+      )
+        return;
+
       const retirementJurisdiction =
         retiring && country
           ? getJurisdictionIsoCode({
@@ -229,23 +271,31 @@ export const usePurchase = ({
               );
             },
             onSuccess: async (deliverTxResponse?: DeliverTxResponse) => {
-              setProcessingModalAtom(atom => void (atom.open = false));
               setTxHash(deliverTxResponse?.transactionHash);
 
               // In case of retirement, it's handled in useFetchRetirementForPurchase
               if (!retiring) {
+                setProcessingModalAtom(atom => void (atom.open = false));
                 setTxBuySuccessfulModalAtom(atom => {
                   atom.open = true;
-                  // atom.cardItems = cardItems; // TODO
-                  atom.buttonTitle = retiring
-                    ? _(VIEW_CERTIFICATE)
-                    : _(VIEW_PORTFOLIO);
+                  atom.cardItems = getCardItems({
+                    retiring,
+                    creditsAmount,
+                    currencyAmount,
+                    project,
+                    currency,
+                    displayDenom,
+                  });
+                  atom.buttonTitle = _(VIEW_PORTFOLIO);
                   atom.onButtonClick = () =>
                     setTxBuySuccessfulModalAtom(
                       atom => void (atom.open = false),
                     );
                   atom.txHash = deliverTxResponse?.transactionHash;
                   atom.steps = getSteps(paymentOption, retiring);
+                  atom.description = email
+                    ? `${_(EMAIL_RECEIPT)} ${email}`
+                    : undefined;
                 });
 
                 await reactQueryClient.invalidateQueries({
@@ -263,9 +313,14 @@ export const usePurchase = ({
     },
     [
       _,
+      creditsAmount,
+      currency,
+      currencyAmount,
+      displayDenom,
       handleSuccess,
       navigate,
       paymentOption,
+      project,
       reactQueryClient,
       retryCsrfRequest,
       setErrorBannerTextAtom,

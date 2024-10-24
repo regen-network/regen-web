@@ -24,7 +24,7 @@ export const getRetirementByTxHash = ({
       >({
         query: IndexerRetirementByTxHashDocument,
         variables: {
-          txHash,
+          txHash: txHash.toLowerCase(),
         },
       });
 

@@ -15,15 +15,13 @@ import {
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import {
-  ProjectWithOrderData,
-  UISellOrderInfo,
-} from 'pages/Projects/AllProjects/AllProjects.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
@@ -76,7 +74,7 @@ type Props = {
   creditTypeAbbrev?: string;
   projectHref: string;
   cardDetails?: CardDetails;
-  project?: ProjectWithOrderData;
+  project?: NormalizeProject;
 };
 
 const stripe = loadStripe(stripeKey);
@@ -172,7 +170,26 @@ export const BuyCreditsForm = ({
     [data, handleSaveNext, setPaymentMethodId],
   );
 
-  const purchase = usePurchase({ paymentOption, retiring });
+  const currency = data?.[CURRENCY];
+  const creditsAmount = data?.[CREDITS_AMOUNT];
+  const currencyAmount = data?.[CURRENCY_AMOUNT];
+  const email = data?.email;
+
+  const allowedDenoms = useMemo(
+    () => allowedDenomsData?.allowedDenoms,
+    [allowedDenomsData?.allowedDenoms],
+  );
+
+  const purchase = usePurchase({
+    paymentOption,
+    retiring,
+    project,
+    currency,
+    creditsAmount,
+    currencyAmount,
+    allowedDenoms,
+    email,
+  });
   const agreePurchaseFormSubmit = useCallback(
     async (
       values: AgreePurchaseFormSchemaType,
@@ -186,7 +203,6 @@ export const BuyCreditsForm = ({
         name,
         savePaymentMethod,
         createAccount: createActiveAccount,
-        creditsAmount,
         // subscribeNewsletter, TODO
         // followProject,
       } = data;
@@ -207,10 +223,16 @@ export const BuyCreditsForm = ({
           stripe,
           elements,
           confirmationTokenId,
-          creditsAmount,
         });
     },
-    [confirmationTokenId, data, paymentMethodId, purchase, retiring],
+    [
+      confirmationTokenId,
+      creditsAmount,
+      data,
+      paymentMethodId,
+      purchase,
+      retiring,
+    ],
   );
 
   const goToPaymentInfo = useCallback(
@@ -218,14 +240,6 @@ export const BuyCreditsForm = ({
     [handleActiveStep],
   );
 
-  const allowedDenoms = useMemo(
-    () => allowedDenomsData?.allowedDenoms,
-    [allowedDenomsData?.allowedDenoms],
-  );
-
-  const currency = data?.[CURRENCY];
-  const creditsAmount = data?.[CREDITS_AMOUNT];
-  const currencyAmount = data?.[CURRENCY_AMOUNT];
   const creditTypePrecision = creditTypeData?.creditType?.precision;
 
   const card = useMemo(

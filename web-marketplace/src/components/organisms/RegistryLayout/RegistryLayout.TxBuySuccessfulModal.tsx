@@ -52,7 +52,7 @@ export const RegistryLayoutTxBuySuccessfulModal = (): JSX.Element => {
       seeLessText={_(SEE_LESS)}
       open={!!open}
       cardItems={cardItems}
-      title={title ?? _(PURCHASE_SUCCESSFUL)}
+      title={title || _(PURCHASE_SUCCESSFUL)}
       cardTitle={cardTitle ?? ''}
       buttonTitle={buttonTitle ?? _(VIEW_CERTIFICATE)}
       buttonLink={buttonLink}
@@ -64,6 +64,7 @@ export const RegistryLayoutTxBuySuccessfulModal = (): JSX.Element => {
       blockchainRecordText={_(BLOCKCHAIN_RECORD)}
       steps={steps}
       description={description}
+      bgClassName="bg-[url('/png/topography-pattern-stepper.png')]"
     />
   );
 };

@@ -36,4 +36,5 @@ Default.args = {
   buttonTitle: 'View certificate',
   blockchainRecordText: 'Blockchain record',
   steps: ['Choose credits', 'Payment info', 'Retirement', 'Complete'],
+  bgClassName: "bg-[url('./topography-pattern-stepper.png')]",
 };

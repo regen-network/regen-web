@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-23 16:15+0200\n"
+"POT-Creation-Date: 2024-10-24 11:56+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -53,7 +53,7 @@ msgstr ""
 msgid "{ADDRESS_USED_ERROR} Do you want to merge these accounts?"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.ts:46
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:55
 msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
 msgstr ""
 
@@ -227,7 +227,7 @@ msgstr ""
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:17
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:18
 msgid "About Us"
 msgstr ""
 
@@ -239,7 +239,7 @@ msgstr ""
 msgid "Acres"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:113
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:114
 msgid "Act now"
 msgstr ""
 
@@ -337,7 +337,7 @@ msgstr ""
 msgid "Advanced settings"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.ts:37
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:46
 msgid "Agree & purchase"
 msgstr ""
 
@@ -406,6 +406,14 @@ msgstr ""
 
 #: src/components/organisms/EcocreditsTable.tsx:104
 msgid "Amount Escrowed"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:161
+msgid "amount now available in"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:107
+msgid "amount now available in usd"
 msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:150
@@ -488,7 +496,7 @@ msgstr ""
 msgid "Are you sure you want to discard your changes?"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:56
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:57
 msgid "Articles"
 msgstr ""
 
@@ -614,6 +622,10 @@ msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:52
 msgid "BATCH START DATE"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:135
+msgid "Because we use blockchain technology, if another user purchases the credits before you check out, you’ll need to choose different credits."
 msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:64
@@ -879,7 +891,7 @@ msgstr ""
 msgid "Choose credit class"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.ts:26
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:35
 msgid "Choose credits"
 msgstr ""
 
@@ -889,6 +901,10 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:28
 msgid "Choose ecocredits batch"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:173
+msgid "Choose new credits"
 msgstr ""
 
 #: src/components/molecules/ProjectSelect.tsx:25
@@ -951,7 +967,7 @@ msgstr ""
 msgid "Community credits are credits that have not been through the <0>Regen Registry program</0>or are not associated with another known registry. <1/><2/>To create your own credits, <3>learn more in our docs.</3>"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.ts:39
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:48
 msgid "Complete"
 msgstr ""
 
@@ -1000,7 +1016,7 @@ msgstr ""
 msgid "Consumer/Individual/myself"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:68
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:69
 msgid "Contact"
 msgstr ""
 
@@ -1212,7 +1228,7 @@ msgstr ""
 msgid "credit name"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:259
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:269
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr ""
 
@@ -1356,7 +1372,7 @@ msgid "Custom url"
 msgstr ""
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:51
-#: src/pages/BuyCredits/BuyCredits.utils.ts:33
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:42
 msgid "Customer info"
 msgstr ""
 
@@ -1376,7 +1392,7 @@ msgstr ""
 msgid "Date of upload"
 msgstr ""
 
-#: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.SelectAccountModal.tsx:65
+#: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.SelectAccountModal.tsx:66
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:12
 msgid "default avatar"
 msgstr ""
@@ -1663,7 +1679,7 @@ msgstr ""
 msgid "Explore"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:33
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:34
 msgid "Explore Banks"
 msgstr ""
 
@@ -1722,6 +1738,10 @@ msgstr ""
 msgid "Filters"
 msgstr ""
 
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:114
+msgid "find another credit card project"
+msgstr ""
+
 #: src/components/molecules/PlanStepper.tsx:18
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:40
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:41
@@ -1749,7 +1769,7 @@ msgstr ""
 msgid "Forestry-based credits"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:64
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:65
 msgid "Frequently Asked Questions"
 msgstr ""
 
@@ -1761,7 +1781,7 @@ msgstr ""
 msgid "Gallery photos"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:44
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:45
 msgid "Geo-Viewer"
 msgstr ""
 
@@ -1777,7 +1797,7 @@ msgstr ""
 msgid "Grasslands-based credits"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:25
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:26
 msgid "Habitat banks"
 msgstr ""
 
@@ -1797,7 +1817,7 @@ msgstr ""
 msgid "High density grazing"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:13
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:14
 msgid "Home"
 msgstr ""
 
@@ -1895,8 +1915,8 @@ msgstr ""
 msgid "info with hand"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:29
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:48
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:30
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:49
 msgid "Information"
 msgstr ""
 
@@ -2303,7 +2323,7 @@ msgstr ""
 msgid "new project admin"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:52
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:53
 msgid "News"
 msgstr ""
 
@@ -2425,6 +2445,10 @@ msgstr ""
 msgid "Oops! Page not found."
 msgstr ""
 
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:119
+msgid "or, buy with crypto"
+msgstr ""
+
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:67
 msgid "or, log in with email / social"
 msgstr ""
@@ -2466,7 +2490,7 @@ msgid "payment info"
 msgstr ""
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.PaymentInfo.tsx:45
-#: src/pages/BuyCredits/BuyCredits.utils.ts:32
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:41
 msgid "Payment info"
 msgstr ""
 
@@ -2924,7 +2948,7 @@ msgstr ""
 msgid "public profile tabs"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:60
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:61
 msgid "Publications"
 msgstr ""
 
@@ -3119,7 +3143,7 @@ msgstr ""
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.ts:37
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:46
 msgid "Retirement"
 msgstr ""
 
@@ -3222,6 +3246,10 @@ msgstr ""
 msgid "SDGs"
 msgstr ""
 
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:144
+msgid "search for new credits"
+msgstr ""
+
 #: src/pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:88
 msgid "sectoral scopes"
 msgstr ""
@@ -3270,8 +3298,8 @@ msgstr ""
 msgid "Select all"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:244
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:245
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:254
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:255
 msgid "Select option"
 msgstr ""
 
@@ -3322,7 +3350,7 @@ msgstr ""
 msgid "Sender"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:21
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:22
 msgid "Services"
 msgstr ""
 
@@ -3422,6 +3450,18 @@ msgstr ""
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
 #: src/lib/constants/shared.constants.tsx:171
 msgid "Sold Out"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:131
+msgid "Sorry, another user has purchased all of the available credits from this project"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:102
+msgid "Sorry, another user has purchased all of the USD credits you selected!"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:156
+msgid "Sorry, another user has purchased some or all of the credits you selected!"
 msgstr ""
 
 #: src/config/errors.tsx:29
@@ -4182,7 +4222,7 @@ msgstr ""
 msgid "We've just sent a confirmation email to:"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:40
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:41
 msgid "What is Tebu"
 msgstr ""
 

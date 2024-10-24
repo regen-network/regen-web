@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -8,7 +8,10 @@ import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/orga
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { getCreditsAvailableBannerText } from 'pages/BuyCredits/BuyCredits.utils';
+import {
+  getCreditsAvailableBannerText,
+  getOrderedSellOrders,
+} from 'pages/BuyCredits/BuyCredits.utils';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import {
@@ -41,8 +44,6 @@ export const CreditsAmount = ({
   cryptoCurrencies,
   allowedDenoms,
   creditTypePrecision,
-  card,
-  orderedSellOrders,
 }: CreditsAmountProps) => {
   const { _ } = useLingui();
 
@@ -50,6 +51,15 @@ export const CreditsAmount = ({
   const { setValue, trigger, getValues } =
     useFormContext<ChooseCreditsFormSchemaType>();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+
+  const card = useMemo(
+    () => paymentOption === PAYMENT_OPTIONS.CARD,
+    [paymentOption],
+  );
+  const orderedSellOrders = useMemo(
+    () => getOrderedSellOrders(card, cardSellOrders, filteredCryptoSellOrders),
+    [card, cardSellOrders, filteredCryptoSellOrders],
+  );
 
   useEffect(() => {
     // Set initial credits amount to min(1, creditsAvailable)

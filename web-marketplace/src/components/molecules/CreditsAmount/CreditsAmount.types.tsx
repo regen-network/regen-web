@@ -18,7 +18,7 @@ export interface CreditsAmountProps {
   setSpendingCap: UseStateSetter<number>;
   creditsAvailable: number;
   setCreditsAvailable: UseStateSetter<number>;
-  filteredCryptoSellOrders: Array<UISellOrderInfo> | undefined;
+  filteredCryptoSellOrders: Array<UISellOrderInfo>;
   cardSellOrders: Array<CardSellOrder>;
   cryptoCurrencies: Currency[];
   allowedDenoms?: AllowedDenoms;

@@ -5,14 +5,14 @@ export function SupCurrencyAndAmount({
   currencyCode,
   className = '',
 }: {
-  price: number;
+  price: number | string;
   currencyCode: string;
   className?: string;
 }) {
   return currencyCode === USD_DENOM ? (
     <span>
       <span className="align-top text-[11px] leading-normal">$</span>
-      <span className={className}>{price.toFixed(2)}</span>
+      <span className={className}>{Number(price).toFixed(2)}</span>
     </span>
   ) : (
     <span className={className}>{price}</span>

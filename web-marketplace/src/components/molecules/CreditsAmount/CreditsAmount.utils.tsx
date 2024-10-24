@@ -167,6 +167,6 @@ export const formatSellOrder = ({
     bidPrice: !card
       ? { amount: String(price), denom: order.askDenom }
       : undefined,
-    price: card ? price * 100 : undefined, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00)
+    price: card ? parseFloat((price * 100).toFixed(2)) : undefined, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00)
   };
 };

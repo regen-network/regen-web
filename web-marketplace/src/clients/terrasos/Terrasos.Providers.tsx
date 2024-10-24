@@ -9,6 +9,7 @@ import { TerrasosRoutes } from './Terrasos.Routes';
 
 import '../../App.css';
 import './Terrasos.tailwind.css';
+import './Terrasos.base.css';
 
 export const TerrasosProvider = () => {
   return (

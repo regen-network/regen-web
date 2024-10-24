@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-23 12:37+0200\n"
+"POT-Creation-Date: 2024-10-23 16:15+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -227,12 +227,20 @@ msgstr ""
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr ""
 
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:17
+msgid "About Us"
+msgstr ""
+
 #: src/components/organisms/AccountSwitchModal/AccountSwitchModal.constants.ts:3
 msgid "Account switch detected!"
 msgstr ""
 
 #: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:197
 msgid "Acres"
+msgstr ""
+
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:113
+msgid "Act now"
 msgstr ""
 
 #: src/pages/Post/Post.constants.ts:6
@@ -478,6 +486,10 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:86
 msgid "Are you sure you want to discard your changes?"
+msgstr ""
+
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:56
+msgid "Articles"
 msgstr ""
 
 #: src/components/organisms/BasketsTable.tsx:67
@@ -986,6 +998,10 @@ msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:39
 msgid "Consumer/Individual/myself"
+msgstr ""
+
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:68
+msgid "Contact"
 msgstr ""
 
 #: src/components/atoms/WrappedStepCard.tsx:62
@@ -1647,6 +1663,10 @@ msgstr ""
 msgid "Explore"
 msgstr ""
 
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:33
+msgid "Explore Banks"
+msgstr ""
+
 #: src/pages/Faucet/hook/useRequestFunds.tsx:27
 #: src/pages/Faucet/hook/useRequestFunds.tsx:34
 msgid "Failed to request funds"
@@ -1729,12 +1749,20 @@ msgstr ""
 msgid "Forestry-based credits"
 msgstr ""
 
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:64
+msgid "Frequently Asked Questions"
+msgstr ""
+
 #: src/pages/Faucet/hook/useRequestFunds.tsx:32
 msgid "Funds successfully requested!"
 msgstr ""
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:8
 msgid "Gallery photos"
+msgstr ""
+
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:44
+msgid "Geo-Viewer"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:348
@@ -1747,6 +1775,10 @@ msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:23
 msgid "Grasslands-based credits"
+msgstr ""
+
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:25
+msgid "Habitat banks"
 msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:62
@@ -1763,6 +1795,10 @@ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:133
 msgid "High density grazing"
+msgstr ""
+
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:13
+msgid "Home"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:63
@@ -1857,6 +1893,11 @@ msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Tradable.tsx:21
 msgid "info with hand"
+msgstr ""
+
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:29
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:48
+msgid "Information"
 msgstr ""
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:76
@@ -2260,6 +2301,10 @@ msgstr ""
 
 #: src/pages/ProjectEdit/hooks/useProjectEditSubmit.tsx:103
 msgid "new project admin"
+msgstr ""
+
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:52
+msgid "News"
 msgstr ""
 
 #: src/pages/BuyCredits/BuyCredits.constants.ts:7
@@ -2879,6 +2924,10 @@ msgstr ""
 msgid "public profile tabs"
 msgstr ""
 
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:60
+msgid "Publications"
+msgstr ""
+
 #: src/components/organisms/Order/Order.Summary.tsx:181
 msgid "purchase date"
 msgstr ""
@@ -3273,6 +3322,10 @@ msgstr ""
 msgid "Sender"
 msgstr ""
 
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:21
+msgid "Services"
+msgstr ""
+
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:26
 msgid "Set max credits"
 msgstr ""
@@ -3532,6 +3585,10 @@ msgstr ""
 #: src/components/atoms/AgreeErpaCheckbox.tsx:41
 #: src/components/atoms/AgreeErpaCheckboxNew.tsx:49
 msgid "terms of service"
+msgstr ""
+
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:7
+msgid "Terrasos Logo"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:393
@@ -4123,6 +4180,10 @@ msgstr ""
 #: src/lib/constants/shared.constants.tsx:84
 #: src/pages/VerifyEmail/VerifyEmail.tsx:48
 msgid "We've just sent a confirmation email to:"
+msgstr ""
+
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:40
+msgid "What is Tebu"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:7

@@ -6,6 +6,7 @@ import { IS_TERRASOS } from 'lib/env';
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
 import { ScrollToTop } from '../../atoms';
+import TerrasosHeader from '../TerrasosHeader';
 import { RegistryLayoutAccountSwitchModal } from './RegistryLayout.AccountSwitchModal';
 import { RegistryLayoutAddWalletModalSwitchWarning } from './RegistryLayout.AddWalletModalSwitchWarning';
 import { RegistryLayoutBannerModal } from './RegistryLayout.Banner';
@@ -24,7 +25,7 @@ import { RegistryLayoutTxSuccessfulModal } from './RegistryLayout.TxSuccessfulMo
 const RegistryLayout: React.FC = () => {
   return (
     <>
-      <RegistryLayoutHeader />
+      {IS_TERRASOS ? <TerrasosHeader /> : <RegistryLayoutHeader />}
       <Outlet />
       {IS_TERRASOS ? (
         <RegistryLayoutTerrasosFooter />

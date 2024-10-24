@@ -138,6 +138,10 @@ export function useProjectsWithOrders({
       prefinanceProjectsData,
     });
 
+  const onlyOffChainProjects = allOffChainProjects.filter(
+    project => project.offChain,
+  );
+
   /* Normalization/Filtering/Sorting */
 
   let projects: ProjectInfo[] | undefined;
@@ -149,7 +153,7 @@ export function useProjectsWithOrders({
     projects = projectsData?.projects;
   }
 
-  const offChainIds = allOffChainProjects.map(project => project.id);
+  const offChainIds = allOffChainProjects.map(project => project.onChainId);
   const clientProjects = projects?.filter(project =>
     IS_TERRASOS ? offChainIds.includes(project.id) : true,
   );
@@ -214,13 +218,13 @@ export function useProjectsWithOrders({
   const allProject = useMemo(
     () =>
       creditClassFilter?.[UNREGISTERED_PATH] || useOffChainProjects
-        ? [...projectsWithOrderDataFiltered, ...allOffChainProjects]
+        ? [...projectsWithOrderDataFiltered, ...onlyOffChainProjects]
         : projectsWithOrderDataFiltered,
     [
       creditClassFilter,
       useOffChainProjects,
       projectsWithOrderDataFiltered,
-      allOffChainProjects,
+      onlyOffChainProjects,
     ],
   );
 
@@ -349,14 +353,14 @@ export function useProjectsWithOrders({
     ],
   );
 
-  const prefinanceProjects = allOffChainProjects.filter(
+  const prefinanceProjects = onlyOffChainProjects.filter(
     project => project.projectPrefinancing?.isPrefinanceProject,
   );
 
   return {
     allProjects: projectsWithOrderData,
     prefinanceProjects,
-    haveOffChainProjects: allOffChainProjects.length > 0,
+    haveOffChainProjects: onlyOffChainProjects.length > 0,
     prefinanceProjectsCount: prefinanceProjects.length,
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projectsFilteredByCreditClass?.length,

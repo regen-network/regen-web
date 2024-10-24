@@ -41,7 +41,8 @@ export const useFetchAllOffChainProjects = ({
           sanityProject.projectId === project?.slug,
       );
       return {
-        offChain: true,
+        onChainId: project?.onChainId,
+        offChain: !project?.onChainId,
         ...normalizeProjectWithMetadata({
           offChainProject: project,
           projectMetadata: project?.metadata,

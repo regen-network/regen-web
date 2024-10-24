@@ -29,11 +29,21 @@ type GetFormModelParams = {
   projectId: string;
 };
 
-export const getStep2Name = (card: boolean) =>
+const getStep2Name = (card: boolean) =>
   card ? i18n._(PAYMENT_INFO) : i18n._(CUSTOMER_INFO);
 
-export const getStep3Name = (retiring: boolean) =>
+const getStep3Name = (retiring: boolean) =>
   retiring ? i18n._(RETIREMENT) : i18n._(AGREE_PURCHASE);
+
+export const getSteps = (
+  paymentOption: PaymentOptionsType,
+  retiring: boolean,
+) => [
+  i18n._(CHOOSE_CREDITS),
+  getStep2Name(paymentOption === PAYMENT_OPTIONS.CARD),
+  getStep3Name(retiring),
+  i18n._(COMPLETE),
+];
 
 export const getFormModel = ({
   paymentOption,

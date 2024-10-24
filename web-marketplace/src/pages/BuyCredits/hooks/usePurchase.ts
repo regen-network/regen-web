@@ -28,22 +28,18 @@ import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsF
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useMsgClient } from 'hooks';
 
-import {
-  PAYMENT_OPTIONS,
-  PURCHASE_SUCCESSFUL,
-  VIEW_CERTIFICATE,
-} from '../BuyCredits.constants';
+import { PAYMENT_OPTIONS, VIEW_CERTIFICATE } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
+import { getSteps } from '../BuyCredits.utils';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
 
 type PurchaseParams = {
-  paymentOption: PaymentOptionsType;
   selectedSellOrders: ChooseCreditsFormSchemaType['sellOrders'];
   retirementReason?: string;
   country?: string;
   stateProvince?: string;
   postalCode?: string;
-  retiring?: boolean;
+  retiring: boolean;
   email?: string | null;
   name?: string;
   savePaymentMethod?: boolean;
@@ -87,7 +83,6 @@ export const usePurchase = ({
 
   const purchase = useCallback(
     async ({
-      paymentOption,
       selectedSellOrders,
       retirementReason,
       country,
@@ -237,7 +232,7 @@ export const usePurchase = ({
               setProcessingModalAtom(atom => void (atom.open = false));
               setTxHash(deliverTxResponse?.transactionHash);
 
-              // In case of retiring, it's handled in useFetchRetirementForPurchase
+              // In case of retirement, it's handled in useFetchRetirementForPurchase
               if (!retiring) {
                 setTxBuySuccessfulModalAtom(atom => {
                   atom.open = true;
@@ -250,7 +245,7 @@ export const usePurchase = ({
                       atom => void (atom.open = false),
                     );
                   atom.txHash = deliverTxResponse?.transactionHash;
-                  atom.steps = [''];
+                  atom.steps = getSteps(paymentOption, retiring);
                 });
 
                 await reactQueryClient.invalidateQueries({
@@ -270,13 +265,14 @@ export const usePurchase = ({
       _,
       handleSuccess,
       navigate,
+      paymentOption,
       reactQueryClient,
       retryCsrfRequest,
       setErrorBannerTextAtom,
       setErrorCodeAtom,
       setErrorModalAtom,
       setProcessingModalAtom,
-      setTxSuccessfulModalAtom,
+      setTxBuySuccessfulModalAtom,
       signAndBroadcast,
       token,
       wallet?.address,

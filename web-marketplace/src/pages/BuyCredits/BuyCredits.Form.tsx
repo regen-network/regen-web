@@ -193,7 +193,6 @@ export const BuyCreditsForm = ({
 
       if (selectedSellOrders && creditsAmount)
         purchase({
-          paymentOption,
           selectedSellOrders,
           retiring,
           retirementReason,
@@ -211,14 +210,7 @@ export const BuyCreditsForm = ({
           creditsAmount,
         });
     },
-    [
-      confirmationTokenId,
-      data,
-      paymentMethodId,
-      paymentOption,
-      purchase,
-      retiring,
-    ],
+    [confirmationTokenId, data, paymentMethodId, purchase, retiring],
   );
 
   const goToPaymentInfo = useCallback(

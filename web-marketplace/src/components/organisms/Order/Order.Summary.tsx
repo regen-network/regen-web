@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
@@ -10,6 +11,7 @@ import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyA
 import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
 
 import { Link } from 'components/atoms';
+import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { allowedDenoms } from 'components/organisms/Order/Order.mock';
@@ -43,14 +45,22 @@ export const OrderSummary = ({
   const isCardPayment = nameOnCard && cardLast4 && askDenom === USD_DENOM;
   const isTradable = retirementInfo.tradableCredits !== null;
   const { reason, location, tradableCredits } = retirementInfo;
-  const {
-    credits,
-    price,
-    askDenom: creditAskDenom,
-    askBaseDenom: creditAskBaseDenom,
-  } = creditsData;
+  const { credits, price } = creditsData;
 
   const totalPrice = +credits * +price;
+  const currency = {
+    askDenom,
+    askBaseDenom,
+  };
+  const displayDenom = useMemo(
+    () =>
+      findDisplayDenom({
+        allowedDenoms,
+        bankDenom: askDenom,
+        baseDenom: askBaseDenom,
+      }),
+    [askBaseDenom, askDenom],
+  );
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 gap-30">
@@ -61,22 +71,15 @@ export const OrderSummary = ({
         <OrderSummaryRow
           title={_(msg`Price per credit`)}
           value={
-            <div className="flex items-center">
-              <SupCurrencyAndAmount
-                price={+price}
-                currencyCode={creditAskDenom}
-                className="mr-10 text-base"
-              />
-              <DenomIconWithCurrency
-                baseDenom={creditAskBaseDenom}
-                displayDenom={findDisplayDenom({
-                  allowedDenoms,
-                  bankDenom: creditAskDenom,
-                  baseDenom: creditAskBaseDenom,
-                })}
-                className="mt-5"
-              />
-            </div>
+            <AmountWithCurrency
+              amount={+price}
+              currency={currency}
+              displayDenom={displayDenom}
+              classes={{
+                amount: 'text-base',
+                denom: 'mt-5',
+              }}
+            />
           }
         />
         <OrderSummaryRow
@@ -88,24 +91,15 @@ export const OrderSummary = ({
         <OrderSummaryRow
           title={_(msg`total price`)}
           value={
-            <div className="flex items-center">
-              <SupCurrencyAndAmount
-                price={totalPrice}
-                currencyCode={askDenom}
-                className="mr-10 text-lg pb-5"
-              />
-              <DenomIconWithCurrency
-                baseDenom={askBaseDenom}
-                displayDenom={findDisplayDenom({
-                  allowedDenoms,
-                  bankDenom: askDenom,
-                  baseDenom: askBaseDenom,
-                })}
-                className={`${
-                  askDenom === USD_DENOM ? 'mt-[7px]' : 'mt-[2px]'
-                }`}
-              />
-            </div>
+            <AmountWithCurrency
+              amount={totalPrice}
+              currency={currency}
+              displayDenom={displayDenom}
+              classes={{
+                amount: 'text-lg pb-5',
+                denom: `${askDenom === USD_DENOM ? 'mt-[7px]' : 'mt-[2px]'}`,
+              }}
+            />
           }
           className="items-baseline"
         />

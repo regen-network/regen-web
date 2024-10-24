@@ -27,7 +27,7 @@ import {
   VIEW_CERTIFICATE,
 } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
-import { getStep2Name, getStep3Name } from '../BuyCredits.utils';
+import { getStep2Name, getStep3Name, getSteps } from '../BuyCredits.utils';
 
 type UseFetchRetirementForPurchaseParams = {
   paymentIntentId?: string;
@@ -102,12 +102,7 @@ export const useFetchRetirementForPurchase = ({
         atom.onButtonClick = () =>
           setTxBuySuccessfulModalAtom(atom => void (atom.open = false));
         atom.txHash = retirement.txHash;
-        atom.steps = [
-          _(CHOOSE_CREDITS),
-          getStep2Name(paymentOption === PAYMENT_OPTIONS.CARD),
-          getStep3Name(retiring),
-          _(COMPLETE),
-        ];
+        atom.steps = getSteps(paymentOption, retiring);
       });
       // Reload sell orders
       await reactQueryClient.invalidateQueries({

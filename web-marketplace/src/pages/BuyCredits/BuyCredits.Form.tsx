@@ -147,7 +147,7 @@ export const BuyCreditsForm = ({
 
   const stripeOptions = useMemo(
     () => ({
-      amount: (data?.[CURRENCY_AMOUNT] || 0) * 100, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00),
+      amount: parseFloat(((data?.[CURRENCY_AMOUNT] || 0) * 100).toFixed(2)), // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00),
       currency: USD_DENOM,
       ...defaultStripeOptions,
     }),

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import useClickOutside from 'utils/hooks/useClickOutside';
 
@@ -9,6 +8,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { UseStateSetter } from 'types/react/use-state';
 
+import { TERRASOS_BASE_PATHNAME } from './TerrasosHeader.constants';
 import { TerrasosHeaderItem } from './TerrasosHeader.types';
 
 interface TerrasosHeaderMobileMenuProps {
@@ -23,7 +23,6 @@ export const TerrasosHeaderMobileMenu = ({
   setIsOpen,
 }: TerrasosHeaderMobileMenuProps) => {
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
-  const { pathname } = useLocation();
   const menuRef = useClickOutside<HTMLDivElement>(() => setIsOpen(false));
 
   return (
@@ -58,7 +57,8 @@ export const TerrasosHeaderMobileMenu = ({
             <div
               className={cn(
                 'flex items-center cursor-pointer hover:text-brand-300 px-20 py-[8px]',
-                pathname === item.href && 'text-brand-300',
+                item.href.startsWith(TERRASOS_BASE_PATHNAME) &&
+                  'text-brand-300',
               )}
               onClick={e => {
                 if (item.items && item.href === '') {

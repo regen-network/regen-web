@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
@@ -9,7 +8,10 @@ import { cn } from 'web-components/src/utils/styles/cn';
 import HamburgerIcon from 'components/atoms/HumberIconTerrasos';
 import TerrasosLogo from 'components/atoms/TerrasosLogo';
 
-import { getTerrasosHeaderItems } from './TerrasosHeader.constants';
+import {
+  getTerrasosHeaderItems,
+  TERRASOS_BASE_PATHNAME,
+} from './TerrasosHeader.constants';
 import { TerrasosHeaderMobileMenu } from './TerrasosHeader.MobileMenu';
 
 export interface Props {
@@ -18,7 +20,6 @@ export interface Props {
 
 export const TerrasosHeader = ({ className }: Props): JSX.Element => {
   const { _ } = useLingui();
-  const { pathname } = useLocation();
   const items = useMemo(() => getTerrasosHeaderItems(_), [_]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -47,7 +48,7 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
         <div className="flex justify-between items-center md:max-w-[708px] lg:max-w-[940px] xl:max-w-[1220px] w-full">
           <ul className="flex items-center justify-center lg:justify-start flex-wrap xl:flex-nowrap pl-0 my-0 md:ml-5">
             {items.map((item, index) => {
-              const isActive = item.href === pathname;
+              const isActive = item.href.startsWith(TERRASOS_BASE_PATHNAME);
 
               return (
                 <li

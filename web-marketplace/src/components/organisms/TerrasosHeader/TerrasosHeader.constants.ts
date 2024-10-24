@@ -5,6 +5,7 @@ import { TranslatorType } from 'lib/i18n/i18n.types';
 import { TerrasosHeaderItem } from './TerrasosHeader.types';
 
 export const TERRASOS_LOGO_ALT = msg`Terrasos Logo`;
+export const TERRASOS_BASE_PATHNAME = '/project';
 
 export const getTerrasosHeaderItems = (
   _: TranslatorType,

@@ -12,6 +12,7 @@ import {
   getTerrasosHeaderItems,
   TERRASOS_BASE_PATHNAME,
 } from './TerrasosHeader.constants';
+import { LanguageSwitcher } from './TerrasosHeader.LanguageSwitcher';
 import { TerrasosHeaderMobileMenu } from './TerrasosHeader.MobileMenu';
 
 export interface Props {
@@ -38,6 +39,7 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
             height={42}
           />
         </a>
+        <LanguageSwitcher className="hidden md:block" />
         <HamburgerIcon
           role="button"
           className="text-bc-neutral-700 m-5 mb-0 md:hidden cursor-pointer w-[21px] absolute left-[84%]"
@@ -46,7 +48,7 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
       </div>
       <nav className="justify-center items-center self-stretch bg-brand-300 hidden md:flex md:px-25 lg:px-0">
         <div className="flex justify-between items-center md:max-w-[708px] lg:max-w-[940px] xl:max-w-[1220px] w-full">
-          <ul className="flex items-center justify-center lg:justify-start flex-wrap xl:flex-nowrap pl-0 my-0 md:ml-5">
+          <ul className="flex items-center justify-center lg:justify-start flex-wrap 2xl:flex-nowrap pl-0 my-0 md:ml-5">
             {items.map((item, index) => {
               const isActive = item.href.startsWith(TERRASOS_BASE_PATHNAME);
 

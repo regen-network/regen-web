@@ -74,6 +74,8 @@ export type Account = Node & {
   postsByCreatorAccountId: PostsConnection;
   /** Reads and enables pagination through a set of `ProjectPartner`. */
   projectPartnersByAccountId: ProjectPartnersConnection;
+  /** Reads and enables pagination through a set of `AccountTranslation`. */
+  accountTranslationsById: AccountTranslationsConnection;
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByProjectDeveloperIdAndCreditClassId: AccountCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
@@ -201,6 +203,17 @@ export type AccountProjectPartnersByAccountIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectPartnersOrderBy>>;
   condition?: Maybe<ProjectPartnerCondition>;
+};
+
+
+export type AccountAccountTranslationsByIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AccountTranslationsOrderBy>>;
+  condition?: Maybe<AccountTranslationCondition>;
 };
 
 
@@ -850,6 +863,86 @@ export type AccountProjectsByUploadAccountIdAndProjectIdManyToManyEdgeUploadsByP
   condition?: Maybe<UploadCondition>;
 };
 
+export type AccountTranslation = Node & {
+  __typename?: 'AccountTranslation';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+  /** Reads a single `Account` that is related to this `AccountTranslation`. */
+  accountById?: Maybe<Account>;
+};
+
+/**
+ * A condition to be used against `AccountTranslation` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type AccountTranslationCondition = {
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `languageCode` field. */
+  languageCode?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `description` field. */
+  description?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `translationDate` field. */
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** An input for mutations affecting `AccountTranslation` */
+export type AccountTranslationInput = {
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** Represents an update to a `AccountTranslation`. Fields that are set will be updated. */
+export type AccountTranslationPatch = {
+  id?: Maybe<Scalars['UUID']>;
+  languageCode?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** A connection to a list of `AccountTranslation` values. */
+export type AccountTranslationsConnection = {
+  __typename?: 'AccountTranslationsConnection';
+  /** A list of `AccountTranslation` objects. */
+  nodes: Array<Maybe<AccountTranslation>>;
+  /** A list of edges which contains the `AccountTranslation` and cursor to aid in pagination. */
+  edges: Array<AccountTranslationsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `AccountTranslation` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `AccountTranslation` edge in the connection. */
+export type AccountTranslationsEdge = {
+  __typename?: 'AccountTranslationsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `AccountTranslation` at the end of the edge. */
+  node?: Maybe<AccountTranslation>;
+};
+
+/** Methods to use when ordering `AccountTranslation`. */
+export enum AccountTranslationsOrderBy {
+  Natural = 'NATURAL',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  LanguageCodeAsc = 'LANGUAGE_CODE_ASC',
+  LanguageCodeDesc = 'LANGUAGE_CODE_DESC',
+  DescriptionAsc = 'DESCRIPTION_ASC',
+  DescriptionDesc = 'DESCRIPTION_DESC',
+  TranslationDateAsc = 'TRANSLATION_DATE_ASC',
+  TranslationDateDesc = 'TRANSLATION_DATE_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
 export enum AccountType {
   User = 'USER',
   Organization = 'ORGANIZATION'
@@ -954,6 +1047,41 @@ export type CreateAccountPayload = {
 /** The output of our create `Account` mutation. */
 export type CreateAccountPayloadAccountEdgeArgs = {
   orderBy?: Maybe<Array<AccountsOrderBy>>;
+};
+
+/** All input for the create `AccountTranslation` mutation. */
+export type CreateAccountTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `AccountTranslation` to be created by this mutation. */
+  accountTranslation: AccountTranslationInput;
+};
+
+/** The output of our create `AccountTranslation` mutation. */
+export type CreateAccountTranslationPayload = {
+  __typename?: 'CreateAccountTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `AccountTranslation` that was created by this mutation. */
+  accountTranslation?: Maybe<AccountTranslation>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `AccountTranslation`. */
+  accountById?: Maybe<Account>;
+  /** An edge for our `AccountTranslation`. May be used by Relay 1. */
+  accountTranslationEdge?: Maybe<AccountTranslationsEdge>;
+};
+
+
+/** The output of our create `AccountTranslation` mutation. */
+export type CreateAccountTranslationPayloadAccountTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<AccountTranslationsOrderBy>>;
 };
 
 /** All input for the create `CreditBatch` mutation. */
@@ -1098,6 +1226,41 @@ export type CreateDocumentPayloadDocumentEdgeArgs = {
   orderBy?: Maybe<Array<DocumentsOrderBy>>;
 };
 
+/** All input for the create `DocumentTranslation` mutation. */
+export type CreateDocumentTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `DocumentTranslation` to be created by this mutation. */
+  documentTranslation: DocumentTranslationInput;
+};
+
+/** The output of our create `DocumentTranslation` mutation. */
+export type CreateDocumentTranslationPayload = {
+  __typename?: 'CreateDocumentTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `DocumentTranslation` that was created by this mutation. */
+  documentTranslation?: Maybe<DocumentTranslation>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Document` that is related to this `DocumentTranslation`. */
+  documentById?: Maybe<Document>;
+  /** An edge for our `DocumentTranslation`. May be used by Relay 1. */
+  documentTranslationEdge?: Maybe<DocumentTranslationsEdge>;
+};
+
+
+/** The output of our create `DocumentTranslation` mutation. */
+export type CreateDocumentTranslationPayloadDocumentTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<DocumentTranslationsOrderBy>>;
+};
+
 /** All input for the create `MetadataGraph` mutation. */
 export type CreateMetadataGraphInput = {
   /**
@@ -1129,6 +1292,41 @@ export type CreateMetadataGraphPayload = {
 /** The output of our create `MetadataGraph` mutation. */
 export type CreateMetadataGraphPayloadMetadataGraphEdgeArgs = {
   orderBy?: Maybe<Array<MetadataGraphsOrderBy>>;
+};
+
+/** All input for the create `MetadataGraphTranslation` mutation. */
+export type CreateMetadataGraphTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `MetadataGraphTranslation` to be created by this mutation. */
+  metadataGraphTranslation: MetadataGraphTranslationInput;
+};
+
+/** The output of our create `MetadataGraphTranslation` mutation. */
+export type CreateMetadataGraphTranslationPayload = {
+  __typename?: 'CreateMetadataGraphTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `MetadataGraphTranslation` that was created by this mutation. */
+  metadataGraphTranslation?: Maybe<MetadataGraphTranslation>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `MetadataGraph` that is related to this `MetadataGraphTranslation`. */
+  metadataGraphByIri?: Maybe<MetadataGraph>;
+  /** An edge for our `MetadataGraphTranslation`. May be used by Relay 1. */
+  metadataGraphTranslationEdge?: Maybe<MetadataGraphTranslationsEdge>;
+};
+
+
+/** The output of our create `MetadataGraphTranslation` mutation. */
+export type CreateMetadataGraphTranslationPayloadMetadataGraphTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<MetadataGraphTranslationsOrderBy>>;
 };
 
 /** All input for the create `Organization` mutation. */
@@ -1201,6 +1399,41 @@ export type CreatePostPayload = {
 /** The output of our create `Post` mutation. */
 export type CreatePostPayloadPostEdgeArgs = {
   orderBy?: Maybe<Array<PostsOrderBy>>;
+};
+
+/** All input for the create `PostTranslation` mutation. */
+export type CreatePostTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `PostTranslation` to be created by this mutation. */
+  postTranslation: PostTranslationInput;
+};
+
+/** The output of our create `PostTranslation` mutation. */
+export type CreatePostTranslationPayload = {
+  __typename?: 'CreatePostTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `PostTranslation` that was created by this mutation. */
+  postTranslation?: Maybe<PostTranslation>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Post` that is related to this `PostTranslation`. */
+  postByIri?: Maybe<Post>;
+  /** An edge for our `PostTranslation`. May be used by Relay 1. */
+  postTranslationEdge?: Maybe<PostTranslationsEdge>;
+};
+
+
+/** The output of our create `PostTranslation` mutation. */
+export type CreatePostTranslationPayloadPostTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<PostTranslationsOrderBy>>;
 };
 
 /** All input for the create `Project` mutation. */
@@ -1279,6 +1512,41 @@ export type CreateProjectPayload = {
 /** The output of our create `Project` mutation. */
 export type CreateProjectPayloadProjectEdgeArgs = {
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
+};
+
+/** All input for the create `ProjectTranslation` mutation. */
+export type CreateProjectTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ProjectTranslation` to be created by this mutation. */
+  projectTranslation: ProjectTranslationInput;
+};
+
+/** The output of our create `ProjectTranslation` mutation. */
+export type CreateProjectTranslationPayload = {
+  __typename?: 'CreateProjectTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ProjectTranslation` that was created by this mutation. */
+  projectTranslation?: Maybe<ProjectTranslation>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Project` that is related to this `ProjectTranslation`. */
+  projectById?: Maybe<Project>;
+  /** An edge for our `ProjectTranslation`. May be used by Relay 1. */
+  projectTranslationEdge?: Maybe<ProjectTranslationsEdge>;
+};
+
+
+/** The output of our create `ProjectTranslation` mutation. */
+export type CreateProjectTranslationPayloadProjectTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<ProjectTranslationsOrderBy>>;
 };
 
 /** All input for the create `S3Deletion` mutation. */
@@ -1942,6 +2210,53 @@ export type DeleteAccountPayloadAccountEdgeArgs = {
   orderBy?: Maybe<Array<AccountsOrderBy>>;
 };
 
+/** All input for the `deleteAccountTranslationByIdAndLanguageCode` mutation. */
+export type DeleteAccountTranslationByIdAndLanguageCodeInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+};
+
+/** All input for the `deleteAccountTranslation` mutation. */
+export type DeleteAccountTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `AccountTranslation` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `AccountTranslation` mutation. */
+export type DeleteAccountTranslationPayload = {
+  __typename?: 'DeleteAccountTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `AccountTranslation` that was deleted by this mutation. */
+  accountTranslation?: Maybe<AccountTranslation>;
+  deletedAccountTranslationId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `AccountTranslation`. */
+  accountById?: Maybe<Account>;
+  /** An edge for our `AccountTranslation`. May be used by Relay 1. */
+  accountTranslationEdge?: Maybe<AccountTranslationsEdge>;
+};
+
+
+/** The output of our delete `AccountTranslation` mutation. */
+export type DeleteAccountTranslationPayloadAccountTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<AccountTranslationsOrderBy>>;
+};
+
 /** All input for the `deleteCreditBatchByBatchDenom` mutation. */
 export type DeleteCreditBatchByBatchDenomInput = {
   /**
@@ -2159,6 +2474,53 @@ export type DeleteDocumentPayloadDocumentEdgeArgs = {
   orderBy?: Maybe<Array<DocumentsOrderBy>>;
 };
 
+/** All input for the `deleteDocumentTranslationByIdAndLanguageCode` mutation. */
+export type DeleteDocumentTranslationByIdAndLanguageCodeInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+};
+
+/** All input for the `deleteDocumentTranslation` mutation. */
+export type DeleteDocumentTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `DocumentTranslation` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `DocumentTranslation` mutation. */
+export type DeleteDocumentTranslationPayload = {
+  __typename?: 'DeleteDocumentTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `DocumentTranslation` that was deleted by this mutation. */
+  documentTranslation?: Maybe<DocumentTranslation>;
+  deletedDocumentTranslationId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Document` that is related to this `DocumentTranslation`. */
+  documentById?: Maybe<Document>;
+  /** An edge for our `DocumentTranslation`. May be used by Relay 1. */
+  documentTranslationEdge?: Maybe<DocumentTranslationsEdge>;
+};
+
+
+/** The output of our delete `DocumentTranslation` mutation. */
+export type DeleteDocumentTranslationPayloadDocumentTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<DocumentTranslationsOrderBy>>;
+};
+
 /** All input for the `deleteMetadataGraphByIri` mutation. */
 export type DeleteMetadataGraphByIriInput = {
   /**
@@ -2201,6 +2563,53 @@ export type DeleteMetadataGraphPayload = {
 /** The output of our delete `MetadataGraph` mutation. */
 export type DeleteMetadataGraphPayloadMetadataGraphEdgeArgs = {
   orderBy?: Maybe<Array<MetadataGraphsOrderBy>>;
+};
+
+/** All input for the `deleteMetadataGraphTranslationByIriAndLanguageCode` mutation. */
+export type DeleteMetadataGraphTranslationByIriAndLanguageCodeInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  iri: Scalars['String'];
+  languageCode: Scalars['String'];
+};
+
+/** All input for the `deleteMetadataGraphTranslation` mutation. */
+export type DeleteMetadataGraphTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `MetadataGraphTranslation` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `MetadataGraphTranslation` mutation. */
+export type DeleteMetadataGraphTranslationPayload = {
+  __typename?: 'DeleteMetadataGraphTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `MetadataGraphTranslation` that was deleted by this mutation. */
+  metadataGraphTranslation?: Maybe<MetadataGraphTranslation>;
+  deletedMetadataGraphTranslationId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `MetadataGraph` that is related to this `MetadataGraphTranslation`. */
+  metadataGraphByIri?: Maybe<MetadataGraph>;
+  /** An edge for our `MetadataGraphTranslation`. May be used by Relay 1. */
+  metadataGraphTranslationEdge?: Maybe<MetadataGraphTranslationsEdge>;
+};
+
+
+/** The output of our delete `MetadataGraphTranslation` mutation. */
+export type DeleteMetadataGraphTranslationPayloadMetadataGraphTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<MetadataGraphTranslationsOrderBy>>;
 };
 
 /** All input for the `deleteOrganizationByAccountId` mutation. */
@@ -2305,6 +2714,53 @@ export type DeletePostPayload = {
 /** The output of our delete `Post` mutation. */
 export type DeletePostPayloadPostEdgeArgs = {
   orderBy?: Maybe<Array<PostsOrderBy>>;
+};
+
+/** All input for the `deletePostTranslationByIriAndLanguageCode` mutation. */
+export type DeletePostTranslationByIriAndLanguageCodeInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  iri: Scalars['String'];
+  languageCode: Scalars['String'];
+};
+
+/** All input for the `deletePostTranslation` mutation. */
+export type DeletePostTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `PostTranslation` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `PostTranslation` mutation. */
+export type DeletePostTranslationPayload = {
+  __typename?: 'DeletePostTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `PostTranslation` that was deleted by this mutation. */
+  postTranslation?: Maybe<PostTranslation>;
+  deletedPostTranslationId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Post` that is related to this `PostTranslation`. */
+  postByIri?: Maybe<Post>;
+  /** An edge for our `PostTranslation`. May be used by Relay 1. */
+  postTranslationEdge?: Maybe<PostTranslationsEdge>;
+};
+
+
+/** The output of our delete `PostTranslation` mutation. */
+export type DeletePostTranslationPayloadPostTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<PostTranslationsOrderBy>>;
 };
 
 /** All input for the `deleteProjectById` mutation. */
@@ -2426,6 +2882,53 @@ export type DeleteProjectPayload = {
 /** The output of our delete `Project` mutation. */
 export type DeleteProjectPayloadProjectEdgeArgs = {
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
+};
+
+/** All input for the `deleteProjectTranslationByIdAndLanguageCode` mutation. */
+export type DeleteProjectTranslationByIdAndLanguageCodeInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+};
+
+/** All input for the `deleteProjectTranslation` mutation. */
+export type DeleteProjectTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `ProjectTranslation` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `ProjectTranslation` mutation. */
+export type DeleteProjectTranslationPayload = {
+  __typename?: 'DeleteProjectTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ProjectTranslation` that was deleted by this mutation. */
+  projectTranslation?: Maybe<ProjectTranslation>;
+  deletedProjectTranslationId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Project` that is related to this `ProjectTranslation`. */
+  projectById?: Maybe<Project>;
+  /** An edge for our `ProjectTranslation`. May be used by Relay 1. */
+  projectTranslationEdge?: Maybe<ProjectTranslationsEdge>;
+};
+
+
+/** The output of our delete `ProjectTranslation` mutation. */
+export type DeleteProjectTranslationPayloadProjectTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<ProjectTranslationsOrderBy>>;
 };
 
 /** All input for the `deleteS3DeletionById` mutation. */
@@ -2588,6 +3091,19 @@ export type Document = Node & {
   projectId?: Maybe<Scalars['UUID']>;
   /** Reads a single `Project` that is related to this `Document`. */
   projectByProjectId?: Maybe<Project>;
+  /** Reads and enables pagination through a set of `DocumentTranslation`. */
+  documentTranslationsById: DocumentTranslationsConnection;
+};
+
+
+export type DocumentDocumentTranslationsByIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<DocumentTranslationsOrderBy>>;
+  condition?: Maybe<DocumentTranslationCondition>;
 };
 
 /**
@@ -2636,6 +3152,93 @@ export type DocumentPatch = {
   url?: Maybe<Scalars['String']>;
   projectId?: Maybe<Scalars['UUID']>;
 };
+
+export type DocumentTranslation = Node & {
+  __typename?: 'DocumentTranslation';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+  /** Reads a single `Document` that is related to this `DocumentTranslation`. */
+  documentById?: Maybe<Document>;
+};
+
+/**
+ * A condition to be used against `DocumentTranslation` object types. All fields
+ * are tested for equality and combined with a logical ‘and.’
+ */
+export type DocumentTranslationCondition = {
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `languageCode` field. */
+  languageCode?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `type` field. */
+  type?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `translationDate` field. */
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** An input for mutations affecting `DocumentTranslation` */
+export type DocumentTranslationInput = {
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** Represents an update to a `DocumentTranslation`. Fields that are set will be updated. */
+export type DocumentTranslationPatch = {
+  id?: Maybe<Scalars['UUID']>;
+  languageCode?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** A connection to a list of `DocumentTranslation` values. */
+export type DocumentTranslationsConnection = {
+  __typename?: 'DocumentTranslationsConnection';
+  /** A list of `DocumentTranslation` objects. */
+  nodes: Array<Maybe<DocumentTranslation>>;
+  /** A list of edges which contains the `DocumentTranslation` and cursor to aid in pagination. */
+  edges: Array<DocumentTranslationsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `DocumentTranslation` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `DocumentTranslation` edge in the connection. */
+export type DocumentTranslationsEdge = {
+  __typename?: 'DocumentTranslationsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `DocumentTranslation` at the end of the edge. */
+  node?: Maybe<DocumentTranslation>;
+};
+
+/** Methods to use when ordering `DocumentTranslation`. */
+export enum DocumentTranslationsOrderBy {
+  Natural = 'NATURAL',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  LanguageCodeAsc = 'LANGUAGE_CODE_ASC',
+  LanguageCodeDesc = 'LANGUAGE_CODE_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  TypeAsc = 'TYPE_ASC',
+  TypeDesc = 'TYPE_DESC',
+  TranslationDateAsc = 'TRANSLATION_DATE_ASC',
+  TranslationDateDesc = 'TRANSLATION_DATE_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
 
 /** A connection to a list of `Document` values. */
 export type DocumentsConnection = {
@@ -2697,6 +3300,20 @@ export type MetadataGraph = Node & {
   createdAt: Scalars['Datetime'];
   updatedAt: Scalars['Datetime'];
   metadata: Scalars['JSON'];
+  /** Reads and enables pagination through a set of `MetadataGraphTranslation`. */
+  metadataGraphTranslationsByIri: MetadataGraphTranslationsConnection;
+};
+
+
+export type MetadataGraphMetadataGraphTranslationsByIriArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<MetadataGraphTranslationsOrderBy>>;
+  condition?: Maybe<MetadataGraphTranslationCondition>;
+  filter?: Maybe<MetadataGraphTranslationFilter>;
 };
 
 /**
@@ -2742,6 +3359,98 @@ export type MetadataGraphPatch = {
   metadata?: Maybe<Scalars['JSON']>;
 };
 
+export type MetadataGraphTranslation = Node & {
+  __typename?: 'MetadataGraphTranslation';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  iri: Scalars['String'];
+  languageCode: Scalars['String'];
+  metadata?: Maybe<Scalars['JSON']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+  /** Reads a single `MetadataGraph` that is related to this `MetadataGraphTranslation`. */
+  metadataGraphByIri?: Maybe<MetadataGraph>;
+};
+
+/**
+ * A condition to be used against `MetadataGraphTranslation` object types. All
+ * fields are tested for equality and combined with a logical ‘and.’
+ */
+export type MetadataGraphTranslationCondition = {
+  /** Checks for equality with the object’s `iri` field. */
+  iri?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `languageCode` field. */
+  languageCode?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `metadata` field. */
+  metadata?: Maybe<Scalars['JSON']>;
+  /** Checks for equality with the object’s `translationDate` field. */
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** A filter to be used against `MetadataGraphTranslation` object types. All fields are combined with a logical ‘and.’ */
+export type MetadataGraphTranslationFilter = {
+  /** Filter by the object’s `metadata` field. */
+  metadata?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<MetadataGraphTranslationFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<MetadataGraphTranslationFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<MetadataGraphTranslationFilter>;
+};
+
+/** An input for mutations affecting `MetadataGraphTranslation` */
+export type MetadataGraphTranslationInput = {
+  iri: Scalars['String'];
+  languageCode: Scalars['String'];
+  metadata?: Maybe<Scalars['JSON']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** Represents an update to a `MetadataGraphTranslation`. Fields that are set will be updated. */
+export type MetadataGraphTranslationPatch = {
+  iri?: Maybe<Scalars['String']>;
+  languageCode?: Maybe<Scalars['String']>;
+  metadata?: Maybe<Scalars['JSON']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** A connection to a list of `MetadataGraphTranslation` values. */
+export type MetadataGraphTranslationsConnection = {
+  __typename?: 'MetadataGraphTranslationsConnection';
+  /** A list of `MetadataGraphTranslation` objects. */
+  nodes: Array<Maybe<MetadataGraphTranslation>>;
+  /** A list of edges which contains the `MetadataGraphTranslation` and cursor to aid in pagination. */
+  edges: Array<MetadataGraphTranslationsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `MetadataGraphTranslation` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `MetadataGraphTranslation` edge in the connection. */
+export type MetadataGraphTranslationsEdge = {
+  __typename?: 'MetadataGraphTranslationsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `MetadataGraphTranslation` at the end of the edge. */
+  node?: Maybe<MetadataGraphTranslation>;
+};
+
+/** Methods to use when ordering `MetadataGraphTranslation`. */
+export enum MetadataGraphTranslationsOrderBy {
+  Natural = 'NATURAL',
+  IriAsc = 'IRI_ASC',
+  IriDesc = 'IRI_DESC',
+  LanguageCodeAsc = 'LANGUAGE_CODE_ASC',
+  LanguageCodeDesc = 'LANGUAGE_CODE_DESC',
+  MetadataAsc = 'METADATA_ASC',
+  MetadataDesc = 'METADATA_DESC',
+  TranslationDateAsc = 'TRANSLATION_DATE_ASC',
+  TranslationDateDesc = 'TRANSLATION_DATE_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
 /** A connection to a list of `MetadataGraph` values. */
 export type MetadataGraphsConnection = {
   __typename?: 'MetadataGraphsConnection';
@@ -2784,6 +3493,8 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** Creates a single `Account`. */
   createAccount?: Maybe<CreateAccountPayload>;
+  /** Creates a single `AccountTranslation`. */
+  createAccountTranslation?: Maybe<CreateAccountTranslationPayload>;
   /** Creates a single `CreditBatch`. */
   createCreditBatch?: Maybe<CreateCreditBatchPayload>;
   /** Creates a single `CreditClass`. */
@@ -2792,16 +3503,24 @@ export type Mutation = {
   createCreditClassVersion?: Maybe<CreateCreditClassVersionPayload>;
   /** Creates a single `Document`. */
   createDocument?: Maybe<CreateDocumentPayload>;
+  /** Creates a single `DocumentTranslation`. */
+  createDocumentTranslation?: Maybe<CreateDocumentTranslationPayload>;
   /** Creates a single `MetadataGraph`. */
   createMetadataGraph?: Maybe<CreateMetadataGraphPayload>;
+  /** Creates a single `MetadataGraphTranslation`. */
+  createMetadataGraphTranslation?: Maybe<CreateMetadataGraphTranslationPayload>;
   /** Creates a single `Organization`. */
   createOrganization?: Maybe<CreateOrganizationPayload>;
   /** Creates a single `Post`. */
   createPost?: Maybe<CreatePostPayload>;
+  /** Creates a single `PostTranslation`. */
+  createPostTranslation?: Maybe<CreatePostTranslationPayload>;
   /** Creates a single `Project`. */
   createProject?: Maybe<CreateProjectPayload>;
   /** Creates a single `ProjectPartner`. */
   createProjectPartner?: Maybe<CreateProjectPartnerPayload>;
+  /** Creates a single `ProjectTranslation`. */
+  createProjectTranslation?: Maybe<CreateProjectTranslationPayload>;
   /** Creates a single `S3Deletion`. */
   createS3Deletion?: Maybe<CreateS3DeletionPayload>;
   /** Creates a single `ShaclGraph`. */
@@ -2814,6 +3533,10 @@ export type Mutation = {
   updateAccountById?: Maybe<UpdateAccountPayload>;
   /** Updates a single `Account` using a unique key and a patch. */
   updateAccountByAddr?: Maybe<UpdateAccountPayload>;
+  /** Updates a single `AccountTranslation` using its globally unique id and a patch. */
+  updateAccountTranslation?: Maybe<UpdateAccountTranslationPayload>;
+  /** Updates a single `AccountTranslation` using a unique key and a patch. */
+  updateAccountTranslationByIdAndLanguageCode?: Maybe<UpdateAccountTranslationPayload>;
   /** Updates a single `CreditBatch` using its globally unique id and a patch. */
   updateCreditBatch?: Maybe<UpdateCreditBatchPayload>;
   /** Updates a single `CreditBatch` using a unique key and a patch. */
@@ -2836,10 +3559,18 @@ export type Mutation = {
   updateDocument?: Maybe<UpdateDocumentPayload>;
   /** Updates a single `Document` using a unique key and a patch. */
   updateDocumentById?: Maybe<UpdateDocumentPayload>;
+  /** Updates a single `DocumentTranslation` using its globally unique id and a patch. */
+  updateDocumentTranslation?: Maybe<UpdateDocumentTranslationPayload>;
+  /** Updates a single `DocumentTranslation` using a unique key and a patch. */
+  updateDocumentTranslationByIdAndLanguageCode?: Maybe<UpdateDocumentTranslationPayload>;
   /** Updates a single `MetadataGraph` using its globally unique id and a patch. */
   updateMetadataGraph?: Maybe<UpdateMetadataGraphPayload>;
   /** Updates a single `MetadataGraph` using a unique key and a patch. */
   updateMetadataGraphByIri?: Maybe<UpdateMetadataGraphPayload>;
+  /** Updates a single `MetadataGraphTranslation` using its globally unique id and a patch. */
+  updateMetadataGraphTranslation?: Maybe<UpdateMetadataGraphTranslationPayload>;
+  /** Updates a single `MetadataGraphTranslation` using a unique key and a patch. */
+  updateMetadataGraphTranslationByIriAndLanguageCode?: Maybe<UpdateMetadataGraphTranslationPayload>;
   /** Updates a single `Organization` using its globally unique id and a patch. */
   updateOrganization?: Maybe<UpdateOrganizationPayload>;
   /** Updates a single `Organization` using a unique key and a patch. */
@@ -2850,6 +3581,10 @@ export type Mutation = {
   updatePost?: Maybe<UpdatePostPayload>;
   /** Updates a single `Post` using a unique key and a patch. */
   updatePostByIri?: Maybe<UpdatePostPayload>;
+  /** Updates a single `PostTranslation` using its globally unique id and a patch. */
+  updatePostTranslation?: Maybe<UpdatePostTranslationPayload>;
+  /** Updates a single `PostTranslation` using a unique key and a patch. */
+  updatePostTranslationByIriAndLanguageCode?: Maybe<UpdatePostTranslationPayload>;
   /** Updates a single `Project` using its globally unique id and a patch. */
   updateProject?: Maybe<UpdateProjectPayload>;
   /** Updates a single `Project` using a unique key and a patch. */
@@ -2862,6 +3597,10 @@ export type Mutation = {
   updateProjectPartner?: Maybe<UpdateProjectPartnerPayload>;
   /** Updates a single `ProjectPartner` using a unique key and a patch. */
   updateProjectPartnerByProjectIdAndAccountId?: Maybe<UpdateProjectPartnerPayload>;
+  /** Updates a single `ProjectTranslation` using its globally unique id and a patch. */
+  updateProjectTranslation?: Maybe<UpdateProjectTranslationPayload>;
+  /** Updates a single `ProjectTranslation` using a unique key and a patch. */
+  updateProjectTranslationByIdAndLanguageCode?: Maybe<UpdateProjectTranslationPayload>;
   /** Updates a single `S3Deletion` using its globally unique id and a patch. */
   updateS3Deletion?: Maybe<UpdateS3DeletionPayload>;
   /** Updates a single `S3Deletion` using a unique key and a patch. */
@@ -2882,6 +3621,10 @@ export type Mutation = {
   deleteAccountById?: Maybe<DeleteAccountPayload>;
   /** Deletes a single `Account` using a unique key. */
   deleteAccountByAddr?: Maybe<DeleteAccountPayload>;
+  /** Deletes a single `AccountTranslation` using its globally unique id. */
+  deleteAccountTranslation?: Maybe<DeleteAccountTranslationPayload>;
+  /** Deletes a single `AccountTranslation` using a unique key. */
+  deleteAccountTranslationByIdAndLanguageCode?: Maybe<DeleteAccountTranslationPayload>;
   /** Deletes a single `CreditBatch` using its globally unique id. */
   deleteCreditBatch?: Maybe<DeleteCreditBatchPayload>;
   /** Deletes a single `CreditBatch` using a unique key. */
@@ -2904,10 +3647,18 @@ export type Mutation = {
   deleteDocument?: Maybe<DeleteDocumentPayload>;
   /** Deletes a single `Document` using a unique key. */
   deleteDocumentById?: Maybe<DeleteDocumentPayload>;
+  /** Deletes a single `DocumentTranslation` using its globally unique id. */
+  deleteDocumentTranslation?: Maybe<DeleteDocumentTranslationPayload>;
+  /** Deletes a single `DocumentTranslation` using a unique key. */
+  deleteDocumentTranslationByIdAndLanguageCode?: Maybe<DeleteDocumentTranslationPayload>;
   /** Deletes a single `MetadataGraph` using its globally unique id. */
   deleteMetadataGraph?: Maybe<DeleteMetadataGraphPayload>;
   /** Deletes a single `MetadataGraph` using a unique key. */
   deleteMetadataGraphByIri?: Maybe<DeleteMetadataGraphPayload>;
+  /** Deletes a single `MetadataGraphTranslation` using its globally unique id. */
+  deleteMetadataGraphTranslation?: Maybe<DeleteMetadataGraphTranslationPayload>;
+  /** Deletes a single `MetadataGraphTranslation` using a unique key. */
+  deleteMetadataGraphTranslationByIriAndLanguageCode?: Maybe<DeleteMetadataGraphTranslationPayload>;
   /** Deletes a single `Organization` using its globally unique id. */
   deleteOrganization?: Maybe<DeleteOrganizationPayload>;
   /** Deletes a single `Organization` using a unique key. */
@@ -2918,6 +3669,10 @@ export type Mutation = {
   deletePost?: Maybe<DeletePostPayload>;
   /** Deletes a single `Post` using a unique key. */
   deletePostByIri?: Maybe<DeletePostPayload>;
+  /** Deletes a single `PostTranslation` using its globally unique id. */
+  deletePostTranslation?: Maybe<DeletePostTranslationPayload>;
+  /** Deletes a single `PostTranslation` using a unique key. */
+  deletePostTranslationByIriAndLanguageCode?: Maybe<DeletePostTranslationPayload>;
   /** Deletes a single `Project` using its globally unique id. */
   deleteProject?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `Project` using a unique key. */
@@ -2930,6 +3685,10 @@ export type Mutation = {
   deleteProjectPartner?: Maybe<DeleteProjectPartnerPayload>;
   /** Deletes a single `ProjectPartner` using a unique key. */
   deleteProjectPartnerByProjectIdAndAccountId?: Maybe<DeleteProjectPartnerPayload>;
+  /** Deletes a single `ProjectTranslation` using its globally unique id. */
+  deleteProjectTranslation?: Maybe<DeleteProjectTranslationPayload>;
+  /** Deletes a single `ProjectTranslation` using a unique key. */
+  deleteProjectTranslationByIdAndLanguageCode?: Maybe<DeleteProjectTranslationPayload>;
   /** Deletes a single `S3Deletion` using its globally unique id. */
   deleteS3Deletion?: Maybe<DeleteS3DeletionPayload>;
   /** Deletes a single `S3Deletion` using a unique key. */
@@ -2950,6 +3709,12 @@ export type Mutation = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateAccountArgs = {
   input: CreateAccountInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateAccountTranslationArgs = {
+  input: CreateAccountTranslationInput;
 };
 
 
@@ -2978,8 +3743,20 @@ export type MutationCreateDocumentArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateDocumentTranslationArgs = {
+  input: CreateDocumentTranslationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateMetadataGraphArgs = {
   input: CreateMetadataGraphInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateMetadataGraphTranslationArgs = {
+  input: CreateMetadataGraphTranslationInput;
 };
 
 
@@ -2996,6 +3773,12 @@ export type MutationCreatePostArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreatePostTranslationArgs = {
+  input: CreatePostTranslationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateProjectArgs = {
   input: CreateProjectInput;
 };
@@ -3004,6 +3787,12 @@ export type MutationCreateProjectArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateProjectPartnerArgs = {
   input: CreateProjectPartnerInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateProjectTranslationArgs = {
+  input: CreateProjectTranslationInput;
 };
 
 
@@ -3040,6 +3829,18 @@ export type MutationUpdateAccountByIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateAccountByAddrArgs = {
   input: UpdateAccountByAddrInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateAccountTranslationArgs = {
+  input: UpdateAccountTranslationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateAccountTranslationByIdAndLanguageCodeArgs = {
+  input: UpdateAccountTranslationByIdAndLanguageCodeInput;
 };
 
 
@@ -3110,6 +3911,18 @@ export type MutationUpdateDocumentByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateDocumentTranslationArgs = {
+  input: UpdateDocumentTranslationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateDocumentTranslationByIdAndLanguageCodeArgs = {
+  input: UpdateDocumentTranslationByIdAndLanguageCodeInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateMetadataGraphArgs = {
   input: UpdateMetadataGraphInput;
 };
@@ -3118,6 +3931,18 @@ export type MutationUpdateMetadataGraphArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateMetadataGraphByIriArgs = {
   input: UpdateMetadataGraphByIriInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateMetadataGraphTranslationArgs = {
+  input: UpdateMetadataGraphTranslationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateMetadataGraphTranslationByIriAndLanguageCodeArgs = {
+  input: UpdateMetadataGraphTranslationByIriAndLanguageCodeInput;
 };
 
 
@@ -3148,6 +3973,18 @@ export type MutationUpdatePostArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdatePostByIriArgs = {
   input: UpdatePostByIriInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdatePostTranslationArgs = {
+  input: UpdatePostTranslationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdatePostTranslationByIriAndLanguageCodeArgs = {
+  input: UpdatePostTranslationByIriAndLanguageCodeInput;
 };
 
 
@@ -3184,6 +4021,18 @@ export type MutationUpdateProjectPartnerArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateProjectPartnerByProjectIdAndAccountIdArgs = {
   input: UpdateProjectPartnerByProjectIdAndAccountIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateProjectTranslationArgs = {
+  input: UpdateProjectTranslationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateProjectTranslationByIdAndLanguageCodeArgs = {
+  input: UpdateProjectTranslationByIdAndLanguageCodeInput;
 };
 
 
@@ -3244,6 +4093,18 @@ export type MutationDeleteAccountByIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteAccountByAddrArgs = {
   input: DeleteAccountByAddrInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteAccountTranslationArgs = {
+  input: DeleteAccountTranslationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteAccountTranslationByIdAndLanguageCodeArgs = {
+  input: DeleteAccountTranslationByIdAndLanguageCodeInput;
 };
 
 
@@ -3314,6 +4175,18 @@ export type MutationDeleteDocumentByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteDocumentTranslationArgs = {
+  input: DeleteDocumentTranslationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteDocumentTranslationByIdAndLanguageCodeArgs = {
+  input: DeleteDocumentTranslationByIdAndLanguageCodeInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteMetadataGraphArgs = {
   input: DeleteMetadataGraphInput;
 };
@@ -3322,6 +4195,18 @@ export type MutationDeleteMetadataGraphArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteMetadataGraphByIriArgs = {
   input: DeleteMetadataGraphByIriInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteMetadataGraphTranslationArgs = {
+  input: DeleteMetadataGraphTranslationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteMetadataGraphTranslationByIriAndLanguageCodeArgs = {
+  input: DeleteMetadataGraphTranslationByIriAndLanguageCodeInput;
 };
 
 
@@ -3352,6 +4237,18 @@ export type MutationDeletePostArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeletePostByIriArgs = {
   input: DeletePostByIriInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeletePostTranslationArgs = {
+  input: DeletePostTranslationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeletePostTranslationByIriAndLanguageCodeArgs = {
+  input: DeletePostTranslationByIriAndLanguageCodeInput;
 };
 
 
@@ -3388,6 +4285,18 @@ export type MutationDeleteProjectPartnerArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteProjectPartnerByProjectIdAndAccountIdArgs = {
   input: DeleteProjectPartnerByProjectIdAndAccountIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteProjectTranslationArgs = {
+  input: DeleteProjectTranslationInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteProjectTranslationByIdAndLanguageCodeArgs = {
+  input: DeleteProjectTranslationByIdAndLanguageCodeInput;
 };
 
 
@@ -3550,10 +4459,26 @@ export type Post = Node & {
   privacy: PostPrivacy;
   contents: Scalars['JSON'];
   published?: Maybe<Scalars['Boolean']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
   /** Reads a single `Account` that is related to this `Post`. */
   accountByCreatorAccountId?: Maybe<Account>;
   /** Reads a single `Project` that is related to this `Post`. */
   projectByProjectId?: Maybe<Project>;
+  /** Reads and enables pagination through a set of `PostTranslation`. */
+  postTranslationsByIri: PostTranslationsConnection;
+};
+
+
+/** Project posts */
+export type PostPostTranslationsByIriArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PostTranslationsOrderBy>>;
+  condition?: Maybe<PostTranslationCondition>;
+  filter?: Maybe<PostTranslationFilter>;
 };
 
 /** A condition to be used against `Post` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -3572,6 +4497,8 @@ export type PostCondition = {
   contents?: Maybe<Scalars['JSON']>;
   /** Checks for equality with the object’s `published` field. */
   published?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `updatedAt` field. */
+  updatedAt?: Maybe<Scalars['Datetime']>;
 };
 
 /** A filter to be used against `Post` object types. All fields are combined with a logical ‘and.’ */
@@ -3595,6 +4522,7 @@ export type PostInput = {
   privacy?: Maybe<PostPrivacy>;
   contents: Scalars['JSON'];
   published?: Maybe<Scalars['Boolean']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
 };
 
 /** Represents an update to a `Post`. Fields that are set will be updated. */
@@ -3606,6 +4534,7 @@ export type PostPatch = {
   privacy?: Maybe<PostPrivacy>;
   contents?: Maybe<Scalars['JSON']>;
   published?: Maybe<Scalars['Boolean']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
 };
 
 /**
@@ -3619,6 +4548,98 @@ export enum PostPrivacy {
   PrivateFiles = 'PRIVATE_FILES',
   PrivateLocations = 'PRIVATE_LOCATIONS',
   Public = 'PUBLIC'
+}
+
+export type PostTranslation = Node & {
+  __typename?: 'PostTranslation';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  iri: Scalars['String'];
+  languageCode: Scalars['String'];
+  contents?: Maybe<Scalars['JSON']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+  /** Reads a single `Post` that is related to this `PostTranslation`. */
+  postByIri?: Maybe<Post>;
+};
+
+/**
+ * A condition to be used against `PostTranslation` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type PostTranslationCondition = {
+  /** Checks for equality with the object’s `iri` field. */
+  iri?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `languageCode` field. */
+  languageCode?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `contents` field. */
+  contents?: Maybe<Scalars['JSON']>;
+  /** Checks for equality with the object’s `translationDate` field. */
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** A filter to be used against `PostTranslation` object types. All fields are combined with a logical ‘and.’ */
+export type PostTranslationFilter = {
+  /** Filter by the object’s `contents` field. */
+  contents?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<PostTranslationFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<PostTranslationFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<PostTranslationFilter>;
+};
+
+/** An input for mutations affecting `PostTranslation` */
+export type PostTranslationInput = {
+  iri: Scalars['String'];
+  languageCode: Scalars['String'];
+  contents?: Maybe<Scalars['JSON']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** Represents an update to a `PostTranslation`. Fields that are set will be updated. */
+export type PostTranslationPatch = {
+  iri?: Maybe<Scalars['String']>;
+  languageCode?: Maybe<Scalars['String']>;
+  contents?: Maybe<Scalars['JSON']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** A connection to a list of `PostTranslation` values. */
+export type PostTranslationsConnection = {
+  __typename?: 'PostTranslationsConnection';
+  /** A list of `PostTranslation` objects. */
+  nodes: Array<Maybe<PostTranslation>>;
+  /** A list of edges which contains the `PostTranslation` and cursor to aid in pagination. */
+  edges: Array<PostTranslationsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `PostTranslation` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `PostTranslation` edge in the connection. */
+export type PostTranslationsEdge = {
+  __typename?: 'PostTranslationsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `PostTranslation` at the end of the edge. */
+  node?: Maybe<PostTranslation>;
+};
+
+/** Methods to use when ordering `PostTranslation`. */
+export enum PostTranslationsOrderBy {
+  Natural = 'NATURAL',
+  IriAsc = 'IRI_ASC',
+  IriDesc = 'IRI_DESC',
+  LanguageCodeAsc = 'LANGUAGE_CODE_ASC',
+  LanguageCodeDesc = 'LANGUAGE_CODE_DESC',
+  ContentsAsc = 'CONTENTS_ASC',
+  ContentsDesc = 'CONTENTS_DESC',
+  TranslationDateAsc = 'TRANSLATION_DATE_ASC',
+  TranslationDateDesc = 'TRANSLATION_DATE_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
 /** A connection to a list of `Post` values. */
@@ -3660,6 +4681,8 @@ export enum PostsOrderBy {
   ContentsDesc = 'CONTENTS_DESC',
   PublishedAsc = 'PUBLISHED_ASC',
   PublishedDesc = 'PUBLISHED_DESC',
+  UpdatedAtAsc = 'UPDATED_AT_ASC',
+  UpdatedAtDesc = 'UPDATED_AT_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -3698,6 +4721,8 @@ export type Project = Node & {
   postsByProjectId: PostsConnection;
   /** Reads and enables pagination through a set of `ProjectPartner`. */
   projectPartnersByProjectId: ProjectPartnersConnection;
+  /** Reads and enables pagination through a set of `ProjectTranslation`. */
+  projectTranslationsById: ProjectTranslationsConnection;
   /** Reads and enables pagination through a set of `Account`. */
   accountsByUploadProjectIdAndAccountId: ProjectAccountsByUploadProjectIdAndAccountIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
@@ -3761,6 +4786,18 @@ export type ProjectProjectPartnersByProjectIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectPartnersOrderBy>>;
   condition?: Maybe<ProjectPartnerCondition>;
+};
+
+
+export type ProjectProjectTranslationsByIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectTranslationsOrderBy>>;
+  condition?: Maybe<ProjectTranslationCondition>;
+  filter?: Maybe<ProjectTranslationFilter>;
 };
 
 
@@ -4031,6 +5068,98 @@ export type ProjectPatch = {
   adminAccountId?: Maybe<Scalars['UUID']>;
 };
 
+export type ProjectTranslation = Node & {
+  __typename?: 'ProjectTranslation';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+  metadata?: Maybe<Scalars['JSON']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+  /** Reads a single `Project` that is related to this `ProjectTranslation`. */
+  projectById?: Maybe<Project>;
+};
+
+/**
+ * A condition to be used against `ProjectTranslation` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type ProjectTranslationCondition = {
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `languageCode` field. */
+  languageCode?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `metadata` field. */
+  metadata?: Maybe<Scalars['JSON']>;
+  /** Checks for equality with the object’s `translationDate` field. */
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** A filter to be used against `ProjectTranslation` object types. All fields are combined with a logical ‘and.’ */
+export type ProjectTranslationFilter = {
+  /** Filter by the object’s `metadata` field. */
+  metadata?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<ProjectTranslationFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<ProjectTranslationFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<ProjectTranslationFilter>;
+};
+
+/** An input for mutations affecting `ProjectTranslation` */
+export type ProjectTranslationInput = {
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+  metadata?: Maybe<Scalars['JSON']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** Represents an update to a `ProjectTranslation`. Fields that are set will be updated. */
+export type ProjectTranslationPatch = {
+  id?: Maybe<Scalars['UUID']>;
+  languageCode?: Maybe<Scalars['String']>;
+  metadata?: Maybe<Scalars['JSON']>;
+  translationDate?: Maybe<Scalars['Datetime']>;
+};
+
+/** A connection to a list of `ProjectTranslation` values. */
+export type ProjectTranslationsConnection = {
+  __typename?: 'ProjectTranslationsConnection';
+  /** A list of `ProjectTranslation` objects. */
+  nodes: Array<Maybe<ProjectTranslation>>;
+  /** A list of edges which contains the `ProjectTranslation` and cursor to aid in pagination. */
+  edges: Array<ProjectTranslationsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `ProjectTranslation` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `ProjectTranslation` edge in the connection. */
+export type ProjectTranslationsEdge = {
+  __typename?: 'ProjectTranslationsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `ProjectTranslation` at the end of the edge. */
+  node?: Maybe<ProjectTranslation>;
+};
+
+/** Methods to use when ordering `ProjectTranslation`. */
+export enum ProjectTranslationsOrderBy {
+  Natural = 'NATURAL',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  LanguageCodeAsc = 'LANGUAGE_CODE_ASC',
+  LanguageCodeDesc = 'LANGUAGE_CODE_DESC',
+  MetadataAsc = 'METADATA_ASC',
+  MetadataDesc = 'METADATA_DESC',
+  TranslationDateAsc = 'TRANSLATION_DATE_ASC',
+  TranslationDateDesc = 'TRANSLATION_DATE_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
 /** A connection to a list of `Project` values. */
 export type ProjectsConnection = {
   __typename?: 'ProjectsConnection';
@@ -4098,6 +5227,8 @@ export type Query = Node & {
   node?: Maybe<Node>;
   /** Reads and enables pagination through a set of `Account`. */
   allAccounts?: Maybe<AccountsConnection>;
+  /** Reads and enables pagination through a set of `AccountTranslation`. */
+  allAccountTranslations?: Maybe<AccountTranslationsConnection>;
   /** Reads and enables pagination through a set of `CreditBatch`. */
   allCreditBatches?: Maybe<CreditBatchesConnection>;
   /** Reads and enables pagination through a set of `CreditClass`. */
@@ -4106,16 +5237,24 @@ export type Query = Node & {
   allCreditClassVersions?: Maybe<CreditClassVersionsConnection>;
   /** Reads and enables pagination through a set of `Document`. */
   allDocuments?: Maybe<DocumentsConnection>;
+  /** Reads and enables pagination through a set of `DocumentTranslation`. */
+  allDocumentTranslations?: Maybe<DocumentTranslationsConnection>;
   /** Reads and enables pagination through a set of `MetadataGraph`. */
   allMetadataGraphs?: Maybe<MetadataGraphsConnection>;
+  /** Reads and enables pagination through a set of `MetadataGraphTranslation`. */
+  allMetadataGraphTranslations?: Maybe<MetadataGraphTranslationsConnection>;
   /** Reads and enables pagination through a set of `Organization`. */
   allOrganizations?: Maybe<OrganizationsConnection>;
   /** Reads and enables pagination through a set of `Post`. */
   allPosts?: Maybe<PostsConnection>;
+  /** Reads and enables pagination through a set of `PostTranslation`. */
+  allPostTranslations?: Maybe<PostTranslationsConnection>;
   /** Reads and enables pagination through a set of `Project`. */
   allProjects?: Maybe<ProjectsConnection>;
   /** Reads and enables pagination through a set of `ProjectPartner`. */
   allProjectPartners?: Maybe<ProjectPartnersConnection>;
+  /** Reads and enables pagination through a set of `ProjectTranslation`. */
+  allProjectTranslations?: Maybe<ProjectTranslationsConnection>;
   /** Reads and enables pagination through a set of `S3Deletion`. */
   allS3Deletions?: Maybe<S3DeletionsConnection>;
   /** Reads and enables pagination through a set of `ShaclGraph`. */
@@ -4124,6 +5263,7 @@ export type Query = Node & {
   allUploads?: Maybe<UploadsConnection>;
   accountById?: Maybe<Account>;
   accountByAddr?: Maybe<Account>;
+  accountTranslationByIdAndLanguageCode?: Maybe<AccountTranslation>;
   creditBatchById?: Maybe<CreditBatch>;
   creditBatchByBatchDenom?: Maybe<CreditBatch>;
   creditClassById?: Maybe<CreditClass>;
@@ -4131,14 +5271,18 @@ export type Query = Node & {
   creditClassByOnChainId?: Maybe<CreditClass>;
   creditClassVersionByIdAndCreatedAt?: Maybe<CreditClassVersion>;
   documentById?: Maybe<Document>;
+  documentTranslationByIdAndLanguageCode?: Maybe<DocumentTranslation>;
   metadataGraphByIri?: Maybe<MetadataGraph>;
+  metadataGraphTranslationByIriAndLanguageCode?: Maybe<MetadataGraphTranslation>;
   organizationById?: Maybe<Organization>;
   organizationByAccountId?: Maybe<Organization>;
   postByIri?: Maybe<Post>;
+  postTranslationByIriAndLanguageCode?: Maybe<PostTranslation>;
   projectById?: Maybe<Project>;
   projectBySlug?: Maybe<Project>;
   projectByOnChainId?: Maybe<Project>;
   projectPartnerByProjectIdAndAccountId?: Maybe<ProjectPartner>;
+  projectTranslationByIdAndLanguageCode?: Maybe<ProjectTranslation>;
   s3DeletionById?: Maybe<S3Deletion>;
   shaclGraphByUri?: Maybe<ShaclGraph>;
   uploadByUrl?: Maybe<Upload>;
@@ -4148,6 +5292,8 @@ export type Query = Node & {
   getCurrentAccount?: Maybe<Account>;
   /** Reads a single `Account` using its globally unique `ID`. */
   account?: Maybe<Account>;
+  /** Reads a single `AccountTranslation` using its globally unique `ID`. */
+  accountTranslation?: Maybe<AccountTranslation>;
   /** Reads a single `CreditBatch` using its globally unique `ID`. */
   creditBatch?: Maybe<CreditBatch>;
   /** Reads a single `CreditClass` using its globally unique `ID`. */
@@ -4156,16 +5302,24 @@ export type Query = Node & {
   creditClassVersion?: Maybe<CreditClassVersion>;
   /** Reads a single `Document` using its globally unique `ID`. */
   document?: Maybe<Document>;
+  /** Reads a single `DocumentTranslation` using its globally unique `ID`. */
+  documentTranslation?: Maybe<DocumentTranslation>;
   /** Reads a single `MetadataGraph` using its globally unique `ID`. */
   metadataGraph?: Maybe<MetadataGraph>;
+  /** Reads a single `MetadataGraphTranslation` using its globally unique `ID`. */
+  metadataGraphTranslation?: Maybe<MetadataGraphTranslation>;
   /** Reads a single `Organization` using its globally unique `ID`. */
   organization?: Maybe<Organization>;
   /** Reads a single `Post` using its globally unique `ID`. */
   post?: Maybe<Post>;
+  /** Reads a single `PostTranslation` using its globally unique `ID`. */
+  postTranslation?: Maybe<PostTranslation>;
   /** Reads a single `Project` using its globally unique `ID`. */
   project?: Maybe<Project>;
   /** Reads a single `ProjectPartner` using its globally unique `ID`. */
   projectPartner?: Maybe<ProjectPartner>;
+  /** Reads a single `ProjectTranslation` using its globally unique `ID`. */
+  projectTranslation?: Maybe<ProjectTranslation>;
   /** Reads a single `S3Deletion` using its globally unique `ID`. */
   s3Deletion?: Maybe<S3Deletion>;
   /** Reads a single `ShaclGraph` using its globally unique `ID`. */
@@ -4190,6 +5344,18 @@ export type QueryAllAccountsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AccountsOrderBy>>;
   condition?: Maybe<AccountCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllAccountTranslationsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AccountTranslationsOrderBy>>;
+  condition?: Maybe<AccountTranslationCondition>;
 };
 
 
@@ -4244,6 +5410,18 @@ export type QueryAllDocumentsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllDocumentTranslationsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<DocumentTranslationsOrderBy>>;
+  condition?: Maybe<DocumentTranslationCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllMetadataGraphsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -4253,6 +5431,19 @@ export type QueryAllMetadataGraphsArgs = {
   orderBy?: Maybe<Array<MetadataGraphsOrderBy>>;
   condition?: Maybe<MetadataGraphCondition>;
   filter?: Maybe<MetadataGraphFilter>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllMetadataGraphTranslationsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<MetadataGraphTranslationsOrderBy>>;
+  condition?: Maybe<MetadataGraphTranslationCondition>;
+  filter?: Maybe<MetadataGraphTranslationFilter>;
 };
 
 
@@ -4282,6 +5473,19 @@ export type QueryAllPostsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllPostTranslationsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PostTranslationsOrderBy>>;
+  condition?: Maybe<PostTranslationCondition>;
+  filter?: Maybe<PostTranslationFilter>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllProjectsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -4303,6 +5507,19 @@ export type QueryAllProjectPartnersArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectPartnersOrderBy>>;
   condition?: Maybe<ProjectPartnerCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllProjectTranslationsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectTranslationsOrderBy>>;
+  condition?: Maybe<ProjectTranslationCondition>;
+  filter?: Maybe<ProjectTranslationFilter>;
 };
 
 
@@ -4356,6 +5573,13 @@ export type QueryAccountByAddrArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAccountTranslationByIdAndLanguageCodeArgs = {
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryCreditBatchByIdArgs = {
   id: Scalars['UUID'];
 };
@@ -4399,8 +5623,22 @@ export type QueryDocumentByIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryDocumentTranslationByIdAndLanguageCodeArgs = {
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryMetadataGraphByIriArgs = {
   iri: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryMetadataGraphTranslationByIriAndLanguageCodeArgs = {
+  iri: Scalars['String'];
+  languageCode: Scalars['String'];
 };
 
 
@@ -4419,6 +5657,13 @@ export type QueryOrganizationByAccountIdArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryPostByIriArgs = {
   iri: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryPostTranslationByIriAndLanguageCodeArgs = {
+  iri: Scalars['String'];
+  languageCode: Scalars['String'];
 };
 
 
@@ -4444,6 +5689,13 @@ export type QueryProjectByOnChainIdArgs = {
 export type QueryProjectPartnerByProjectIdAndAccountIdArgs = {
   projectId: Scalars['UUID'];
   accountId: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryProjectTranslationByIdAndLanguageCodeArgs = {
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
 };
 
 
@@ -4489,6 +5741,12 @@ export type QueryAccountArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAccountTranslationArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryCreditBatchArgs = {
   nodeId: Scalars['ID'];
 };
@@ -4513,7 +5771,19 @@ export type QueryDocumentArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryDocumentTranslationArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryMetadataGraphArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryMetadataGraphTranslationArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -4531,6 +5801,12 @@ export type QueryPostArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryPostTranslationArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryProjectArgs = {
   nodeId: Scalars['ID'];
 };
@@ -4538,6 +5814,12 @@ export type QueryProjectArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryProjectPartnerArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryProjectTranslationArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -4790,6 +6072,56 @@ export type UpdateAccountPayloadAccountEdgeArgs = {
   orderBy?: Maybe<Array<AccountsOrderBy>>;
 };
 
+/** All input for the `updateAccountTranslationByIdAndLanguageCode` mutation. */
+export type UpdateAccountTranslationByIdAndLanguageCodeInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `AccountTranslation` being updated. */
+  accountTranslationPatch: AccountTranslationPatch;
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+};
+
+/** All input for the `updateAccountTranslation` mutation. */
+export type UpdateAccountTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `AccountTranslation` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `AccountTranslation` being updated. */
+  accountTranslationPatch: AccountTranslationPatch;
+};
+
+/** The output of our update `AccountTranslation` mutation. */
+export type UpdateAccountTranslationPayload = {
+  __typename?: 'UpdateAccountTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `AccountTranslation` that was updated by this mutation. */
+  accountTranslation?: Maybe<AccountTranslation>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Account` that is related to this `AccountTranslation`. */
+  accountById?: Maybe<Account>;
+  /** An edge for our `AccountTranslation`. May be used by Relay 1. */
+  accountTranslationEdge?: Maybe<AccountTranslationsEdge>;
+};
+
+
+/** The output of our update `AccountTranslation` mutation. */
+export type UpdateAccountTranslationPayloadAccountTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<AccountTranslationsOrderBy>>;
+};
+
 /** All input for the `updateCreditBatchByBatchDenom` mutation. */
 export type UpdateCreditBatchByBatchDenomInput = {
   /**
@@ -5025,6 +6357,56 @@ export type UpdateDocumentPayloadDocumentEdgeArgs = {
   orderBy?: Maybe<Array<DocumentsOrderBy>>;
 };
 
+/** All input for the `updateDocumentTranslationByIdAndLanguageCode` mutation. */
+export type UpdateDocumentTranslationByIdAndLanguageCodeInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `DocumentTranslation` being updated. */
+  documentTranslationPatch: DocumentTranslationPatch;
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+};
+
+/** All input for the `updateDocumentTranslation` mutation. */
+export type UpdateDocumentTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `DocumentTranslation` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `DocumentTranslation` being updated. */
+  documentTranslationPatch: DocumentTranslationPatch;
+};
+
+/** The output of our update `DocumentTranslation` mutation. */
+export type UpdateDocumentTranslationPayload = {
+  __typename?: 'UpdateDocumentTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `DocumentTranslation` that was updated by this mutation. */
+  documentTranslation?: Maybe<DocumentTranslation>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Document` that is related to this `DocumentTranslation`. */
+  documentById?: Maybe<Document>;
+  /** An edge for our `DocumentTranslation`. May be used by Relay 1. */
+  documentTranslationEdge?: Maybe<DocumentTranslationsEdge>;
+};
+
+
+/** The output of our update `DocumentTranslation` mutation. */
+export type UpdateDocumentTranslationPayloadDocumentTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<DocumentTranslationsOrderBy>>;
+};
+
 /** All input for the `updateMetadataGraphByIri` mutation. */
 export type UpdateMetadataGraphByIriInput = {
   /**
@@ -5070,6 +6452,56 @@ export type UpdateMetadataGraphPayload = {
 /** The output of our update `MetadataGraph` mutation. */
 export type UpdateMetadataGraphPayloadMetadataGraphEdgeArgs = {
   orderBy?: Maybe<Array<MetadataGraphsOrderBy>>;
+};
+
+/** All input for the `updateMetadataGraphTranslationByIriAndLanguageCode` mutation. */
+export type UpdateMetadataGraphTranslationByIriAndLanguageCodeInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `MetadataGraphTranslation` being updated. */
+  metadataGraphTranslationPatch: MetadataGraphTranslationPatch;
+  iri: Scalars['String'];
+  languageCode: Scalars['String'];
+};
+
+/** All input for the `updateMetadataGraphTranslation` mutation. */
+export type UpdateMetadataGraphTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `MetadataGraphTranslation` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `MetadataGraphTranslation` being updated. */
+  metadataGraphTranslationPatch: MetadataGraphTranslationPatch;
+};
+
+/** The output of our update `MetadataGraphTranslation` mutation. */
+export type UpdateMetadataGraphTranslationPayload = {
+  __typename?: 'UpdateMetadataGraphTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `MetadataGraphTranslation` that was updated by this mutation. */
+  metadataGraphTranslation?: Maybe<MetadataGraphTranslation>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `MetadataGraph` that is related to this `MetadataGraphTranslation`. */
+  metadataGraphByIri?: Maybe<MetadataGraph>;
+  /** An edge for our `MetadataGraphTranslation`. May be used by Relay 1. */
+  metadataGraphTranslationEdge?: Maybe<MetadataGraphTranslationsEdge>;
+};
+
+
+/** The output of our update `MetadataGraphTranslation` mutation. */
+export type UpdateMetadataGraphTranslationPayloadMetadataGraphTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<MetadataGraphTranslationsOrderBy>>;
 };
 
 /** All input for the `updateOrganizationByAccountId` mutation. */
@@ -5182,6 +6614,56 @@ export type UpdatePostPayload = {
 /** The output of our update `Post` mutation. */
 export type UpdatePostPayloadPostEdgeArgs = {
   orderBy?: Maybe<Array<PostsOrderBy>>;
+};
+
+/** All input for the `updatePostTranslationByIriAndLanguageCode` mutation. */
+export type UpdatePostTranslationByIriAndLanguageCodeInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `PostTranslation` being updated. */
+  postTranslationPatch: PostTranslationPatch;
+  iri: Scalars['String'];
+  languageCode: Scalars['String'];
+};
+
+/** All input for the `updatePostTranslation` mutation. */
+export type UpdatePostTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `PostTranslation` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `PostTranslation` being updated. */
+  postTranslationPatch: PostTranslationPatch;
+};
+
+/** The output of our update `PostTranslation` mutation. */
+export type UpdatePostTranslationPayload = {
+  __typename?: 'UpdatePostTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `PostTranslation` that was updated by this mutation. */
+  postTranslation?: Maybe<PostTranslation>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Post` that is related to this `PostTranslation`. */
+  postByIri?: Maybe<Post>;
+  /** An edge for our `PostTranslation`. May be used by Relay 1. */
+  postTranslationEdge?: Maybe<PostTranslationsEdge>;
+};
+
+
+/** The output of our update `PostTranslation` mutation. */
+export type UpdatePostTranslationPayloadPostTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<PostTranslationsOrderBy>>;
 };
 
 /** All input for the `updateProjectById` mutation. */
@@ -5313,6 +6795,56 @@ export type UpdateProjectPayload = {
 /** The output of our update `Project` mutation. */
 export type UpdateProjectPayloadProjectEdgeArgs = {
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
+};
+
+/** All input for the `updateProjectTranslationByIdAndLanguageCode` mutation. */
+export type UpdateProjectTranslationByIdAndLanguageCodeInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `ProjectTranslation` being updated. */
+  projectTranslationPatch: ProjectTranslationPatch;
+  id: Scalars['UUID'];
+  languageCode: Scalars['String'];
+};
+
+/** All input for the `updateProjectTranslation` mutation. */
+export type UpdateProjectTranslationInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `ProjectTranslation` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `ProjectTranslation` being updated. */
+  projectTranslationPatch: ProjectTranslationPatch;
+};
+
+/** The output of our update `ProjectTranslation` mutation. */
+export type UpdateProjectTranslationPayload = {
+  __typename?: 'UpdateProjectTranslationPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `ProjectTranslation` that was updated by this mutation. */
+  projectTranslation?: Maybe<ProjectTranslation>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Project` that is related to this `ProjectTranslation`. */
+  projectById?: Maybe<Project>;
+  /** An edge for our `ProjectTranslation`. May be used by Relay 1. */
+  projectTranslationEdge?: Maybe<ProjectTranslationsEdge>;
+};
+
+
+/** The output of our update `ProjectTranslation` mutation. */
+export type UpdateProjectTranslationPayloadProjectTranslationEdgeArgs = {
+  orderBy?: Maybe<Array<ProjectTranslationsOrderBy>>;
 };
 
 /** All input for the `updateS3DeletionById` mutation. */
@@ -6246,7 +7778,7 @@ export type AllCreditClassesLazyQueryHookResult = ReturnType<typeof useAllCredit
 export type AllCreditClassesQueryResult = Apollo.QueryResult<AllCreditClassesQuery, AllCreditClassesQueryVariables>;
 export const AllProjectsDocument = gql`
     query AllProjects {
-  allProjects(condition: {approved: true, published: true, onChainId: null}) {
+  allProjects(condition: {approved: true, published: true}) {
     nodes {
       id
       slug

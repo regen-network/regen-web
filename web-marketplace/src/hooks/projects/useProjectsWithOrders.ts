@@ -6,7 +6,7 @@ import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useLedger } from 'ledger';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
-import { SKIPPED_CLASS_ID } from 'lib/env';
+import { IS_TERRASOS, SKIPPED_CLASS_ID } from 'lib/env';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
@@ -138,6 +138,10 @@ export function useProjectsWithOrders({
       prefinanceProjectsData,
     });
 
+  const onlyOffChainProjects = allOffChainProjects.filter(
+    project => project.offChain,
+  );
+
   /* Normalization/Filtering/Sorting */
 
   let projects: ProjectInfo[] | undefined;
@@ -149,18 +153,32 @@ export function useProjectsWithOrders({
     projects = projectsData?.projects;
   }
 
+  const onChainIdsFromOffChainProjects = allOffChainProjects.map(
+    project => project.onChainId,
+  );
+  const clientProjects = projects?.filter(project =>
+    IS_TERRASOS ? onChainIdsFromOffChainProjects.includes(project.id) : true,
+  );
+
   const skippedClassId = !classId && !projectId ? SKIPPED_CLASS_ID : undefined;
   const selectedProjects = useMemo(
     () =>
       selectProjects({
-        projects,
+        projects: clientProjects,
         sellOrders,
         metadata,
         random,
         skippedProjectId,
         skippedClassId,
       }) ?? [],
-    [projects, sellOrders, metadata, random, skippedProjectId, skippedClassId],
+    [
+      clientProjects,
+      sellOrders,
+      metadata,
+      random,
+      skippedProjectId,
+      skippedClassId,
+    ],
   );
   const lastRandomProjects = useLastRandomProjects({
     random,
@@ -202,13 +220,13 @@ export function useProjectsWithOrders({
   const allProject = useMemo(
     () =>
       creditClassFilter?.[UNREGISTERED_PATH] || useOffChainProjects
-        ? [...projectsWithOrderDataFiltered, ...allOffChainProjects]
+        ? [...projectsWithOrderDataFiltered, ...onlyOffChainProjects]
         : projectsWithOrderDataFiltered,
     [
       creditClassFilter,
       useOffChainProjects,
       projectsWithOrderDataFiltered,
-      allOffChainProjects,
+      onlyOffChainProjects,
     ],
   );
 
@@ -337,14 +355,14 @@ export function useProjectsWithOrders({
     ],
   );
 
-  const prefinanceProjects = allOffChainProjects.filter(
+  const prefinanceProjects = onlyOffChainProjects.filter(
     project => project.projectPrefinancing?.isPrefinanceProject,
   );
 
   return {
     allProjects: projectsWithOrderData,
     prefinanceProjects,
-    haveOffChainProjects: allOffChainProjects.length > 0,
+    haveOffChainProjects: onlyOffChainProjects.length > 0,
     prefinanceProjectsCount: prefinanceProjects.length,
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projectsFilteredByCreditClass?.length,

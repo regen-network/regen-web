@@ -1,5 +1,5 @@
 query AllProjects {
-  allProjects(condition: { approved: true, published: true, onChainId: null }) {
+  allProjects(condition: { approved: true, published: true }) {
     nodes {
       id
       slug

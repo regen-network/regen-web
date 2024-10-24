@@ -9,6 +9,7 @@ import {
   AllCreditClassQuery,
   AllPrefinanceProjectQuery,
 } from 'generated/sanity-graphql';
+import { IS_TERRASOS } from 'lib/env';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getAllProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getAllProjectsQuery/getAllProjectsQuery';
 
@@ -40,7 +41,8 @@ export const useFetchAllOffChainProjects = ({
           sanityProject.projectId === project?.slug,
       );
       return {
-        offChain: true,
+        onChainId: project?.onChainId,
+        offChain: !project?.onChainId,
         ...normalizeProjectWithMetadata({
           offChainProject: project,
           projectMetadata: project?.metadata,
@@ -59,8 +61,13 @@ export const useFetchAllOffChainProjects = ({
       };
     }) ?? [];
 
+  const onlyOffChainProjectsWithDataFilteredByType =
+    onlyOffChainProjectsWithData.filter(project => {
+      return IS_TERRASOS ? project.type === 'TerrasosProjectInfo' : true;
+    });
+
   return {
-    allOffChainProjects: onlyOffChainProjectsWithData,
+    allOffChainProjects: onlyOffChainProjectsWithDataFilteredByType,
     isAllOffChainProjectsLoading: isFetching,
   };
 };

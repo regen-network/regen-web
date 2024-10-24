@@ -9,6 +9,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 import { UseStateSetter } from 'types/react/use-state';
 
 import { TERRASOS_BASE_PATHNAME } from './TerrasosHeader.constants';
+import { LanguageSwitcher } from './TerrasosHeader.LanguageSwitcher';
 import { TerrasosHeaderItem } from './TerrasosHeader.types';
 
 interface TerrasosHeaderMobileMenuProps {
@@ -51,7 +52,7 @@ export const TerrasosHeaderMobileMenu = ({
       >
         <CloseIcon className="w-[32px] h-[32px]" />
       </div>
-      <ul className="pl-0 my-0 w-full">
+      <ul className="pl-0 my-0 w-full pb-30 mb-30 border-solid border-0 border-b border-bc-neutral-500">
         {items.map((item, index) => (
           <li key={index} className={cn('flex flex-col font-bold')}>
             <div
@@ -106,6 +107,7 @@ export const TerrasosHeaderMobileMenu = ({
           </li>
         ))}
       </ul>
+      <LanguageSwitcher className="text-sc-button-text-icon-light" />
     </motion.div>
   );
 };

@@ -15,578 +15,578 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
-msgstr ""
+msgstr "- ver menos"
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:7
 msgid ". Please use a different email address."
-msgstr ""
+msgstr ". Por favor, utilice una dirección de correo electrónico diferente."
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:193
 msgid "(drag map to choose location)"
-msgstr ""
+msgstr "(arrastre el mapa para elegir la ubicación)"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:177
 msgid "(file will be associated with the project location by default)"
-msgstr ""
+msgstr "(el archivo se asociará con la ubicación del proyecto por defecto)"
 
 #: src/lib/constants/shared.constants.tsx:61
 msgid "(optional)"
-msgstr ""
+msgstr "(opcional)"
 
 #: src/lib/constants/shared.constants.tsx:60
 msgid "(preferable)"
-msgstr ""
+msgstr "(preferible)"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.tsx:183
 msgid "(required if you added a project story)"
-msgstr ""
+msgstr "(requerido si agregó una historia del proyecto)"
 
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:190
 msgid "(retirement is permanent and non-reversible)"
-msgstr ""
+msgstr "(el retiro es permanente y no reversible)"
 
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:132
 msgid "{0, plural, one {allowed credit class} other {allowed credit classes}}"
-msgstr ""
+msgstr "{0, plural, one {clase de crédito permitida} other {clases de crédito permitidas}}"
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:5
 msgid "{ADDRESS_USED_ERROR} Do you want to merge these accounts?"
-msgstr ""
+msgstr "{ADDRESS_USED_ERROR} ¿Desea fusionar estas cuentas?"
 
 #: src/pages/BuyCredits/BuyCredits.utils.ts:46
 msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
-msgstr ""
+msgstr "{creditsAvailable, plural, one {Solo {formattedCreditsAvailable} crédito disponible con esos parámetros, cantidad del pedido cambiada} other {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, cantidad del pedido cambiada}}"
 
 #: src/lib/constants/shared.constants.tsx:230
 msgid "{from}–{displayedTo} of {count}"
-msgstr ""
+msgstr "{from}–{displayedTo} de {count}"
 
 #: src/lib/constants/shared.constants.tsx:231
 msgid "{from}–{displayedTo} of more than {to}"
-msgstr ""
+msgstr "{from}–{displayedTo} de más de {to}"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:85
 msgid "{price} {displayDenom}/credit:"
-msgstr ""
+msgstr "{price} {displayDenom}/crédito:"
 
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:329
 msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} character remaining} other {{remainingCaptionCharacters} characters remaining}}"
-msgstr ""
+msgstr "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} carácter restante} other {{remainingCaptionCharacters} caracteres restantes}}"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:117
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:220
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:168
 msgid "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} character remaining} other {{remainingDescriptionCharacters} characters remaining}}"
-msgstr ""
+msgstr "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} carácter restante} other {{remainingDescriptionCharacters} caracteres restantes}}"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.tsx:170
 msgid "{remainingStoryCharacters, plural, one {{remainingStoryCharacters} character remaining} other {{remainingStoryCharacters} characters remaining}}"
-msgstr ""
+msgstr "{remainingStoryCharacters, plural, one {{remainingStoryCharacters} carácter restante} other {{remainingStoryCharacters} caracteres restantes}}"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.tsx:191
 msgid "{remainingStoryTitleCharacters, plural, one {{remainingStoryTitleCharacters} character remaining} other {{remainingStoryTitleCharacters} characters remaining}}"
-msgstr ""
+msgstr "{remainingStoryTitleCharacters, plural, one {{remainingStoryTitleCharacters} carácter restante} other {{remainingStoryTitleCharacters} caracteres restantes}}"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.tsx:147
 msgid "{remainingSummaryCharacters, plural, one {{remainingSummaryCharacters} character remaining} other {{remainingSummaryCharacters} characters remaining}}"
-msgstr ""
+msgstr "{remainingSummaryCharacters, plural, one {{remainingSummaryCharacters} carácter restante} other {{remainingSummaryCharacters} caracteres restantes}}"
 
 #: src/components/organisms/PostForm/PostForm.tsx:265
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
-msgstr ""
+msgstr "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} carácter restante} other {{remainingTitleCharacters} caracteres restantes}}"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:90
 msgid "{truncatedQuantity} credit(s) available"
-msgstr ""
+msgstr "{truncatedQuantity} crédito(s) disponible(s)"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:92
 #: src/components/organisms/Order/Order.Summary.tsx:83
 msgid "# credits"
-msgstr ""
+msgstr "# créditos"
 
 #: src/pages/CreditClassDetails/CreditClassDetails.ApprovedMethodologies.tsx:57
 msgid "+ {0} more"
-msgstr ""
+msgstr "+ {0} más"
 
 #: src/lib/constants/shared.constants.tsx:56
 msgid "+ add"
-msgstr ""
+msgstr "+ agregar"
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:86
 msgid "+ add another issuer'"
-msgstr ""
+msgstr "+ agregar otro emisor'"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:300
 msgid "+ add certification"
-msgstr ""
+msgstr "+ agregar certificación"
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.AddNewProfile.tsx:34
 msgid "+ Add New Profile"
-msgstr ""
+msgstr "+ Agregar Nuevo Perfil"
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:18
 msgid "+ Add Photo"
-msgstr ""
+msgstr "+ Agregar Foto"
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:3
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:20
 #: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:4
 msgid "+ create post"
-msgstr ""
+msgstr "+ crear publicación"
 
 #: src/lib/constants/shared.constants.tsx:97
 msgid "+ see more"
-msgstr ""
+msgstr "+ ver más"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:14
 msgid "+ view timeline"
-msgstr ""
+msgstr "+ ver línea de tiempo"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:5
 msgid "+Add recipient"
-msgstr ""
+msgstr "+Agregar destinatario"
 
 #: src/components/organisms/ListProject/ListProject.constants.ts:3
 msgid "+Create project"
-msgstr ""
+msgstr "+Crear proyecto"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:139
 msgid "<0>{0}</0> ending in {1}"
-msgstr ""
+msgstr "<0>{0}</0> terminando en {1}"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:40
 msgid "<0>Credit class admin:</0> the entity who can update a given credit class."
-msgstr ""
+msgstr "<0>Administrador de clase de crédito:</0> la entidad que puede actualizar una clase de crédito determinada."
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:52
 msgid "<0>Credit class issuer:</0> the entity who can issue credit batches under the given credit class."
-msgstr ""
+msgstr "<0>Emisor de clase de crédito:</0> la entidad que puede emitir lotes de crédito bajo la clase de crédito dada."
 
 #: src/components/atoms/DragAndDropLabel.tsx:6
 msgid "<0>drag and drop</0><1>or</1>"
-msgstr ""
+msgstr "<0>arrastrar y soltar</0><1>o</1>"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:73
 msgid "<0>Partners</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
-msgstr ""
+msgstr "<0>Los socios</0> pueden ofrecer apoyo financiero crucial o monitorear el progreso y asegurar que se cumplan los estándares ambientales."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:41
 msgid "<0>Project admin:</0> the entity who can update a given project on the blockchain."
-msgstr ""
+msgstr "<0>Administrador del proyecto:</0> la entidad que puede actualizar un proyecto dado en la blockchain."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:51
 msgid "<0>Project developer:</0> the entity that is in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
-msgstr ""
+msgstr "<0>Desarrollador del proyecto:</0> la entidad encargada de gestionar el proyecto. El desarrollador del proyecto puede ser el propietario de la tierra, el administrador de la tierra o un tercero."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:62
 msgid "<0>Verifier:</0> A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
-msgstr ""
+msgstr "<0>Verificador:</0> Un tercero que proporciona una evaluación independiente e imparcial del plan del proyecto y los informes del proyecto (que no es el monitor)."
 
 #: src/components/organisms/DetailsSection/DetailsSection.constants.ts:5
 msgid "1 credit"
-msgstr ""
+msgstr "1 crédito"
 
 #: src/components/molecules/CreditClassDetailsColumn.tsx:118
 msgid "1 Credit"
-msgstr ""
+msgstr "1 Crédito"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:17
 msgid "1 private post"
-msgstr ""
+msgstr "1 publicación privada"
 
 #: src/components/molecules/CreditClassDetailsColumn.tsx:131
 msgid "1 Ton of CO2e"
-msgstr ""
+msgstr "1 Tonelada de CO2e"
 
 #: src/components/organisms/PostForm/PostForm.tsx:292
 msgid "5MB max. Supported file types include text, spreadsheets, images, and video files."
-msgstr ""
+msgstr "5MB máximo. Los tipos de archivo admitidos incluyen texto, hojas de cálculo, imágenes y archivos de video."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:30
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:27
 msgid "A <0>program</0> involves the eligibility rules, monitoring and certification, and registration systems for credit trading and ownership tracking."
-msgstr ""
+msgstr "Un <0>programa</0> implica las reglas de elegibilidad, monitoreo y certificación, y sistemas de registro para el comercio de créditos y seguimiento de propiedad."
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.constants.ts:13
 msgid "A brief description of your ecological impact project and the property on which it is implemented. This is your elevator pitch to credit buyers."
-msgstr ""
+msgstr "Una breve descripción de su proyecto de impacto ecológico y la propiedad en la que se implementa. Esta es su presentación rápida para los compradores de créditos."
 
 #: src/components/organisms/AdditionalityForm.tsx:117
 msgid "A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
-msgstr ""
+msgstr "Un sistema de pastoreo gestionado donde el ganado se mueve con frecuencia entre divisiones de pastos o potreros según la calidad del forraje y las necesidades nutricionales del ganado. El cercado portátil permite que cada potrero descanse y vuelva a crecer hasta la siguiente rotación de pastoreo."
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:87
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
-msgstr ""
+msgstr "Un proyecto de <0>Regen Network<1/> Development, PBC</0>"
 
 #: src/components/organisms/RolesForm/RolesForm.tsx:233
 msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
-msgstr ""
+msgstr "Un tercero que proporciona una evaluación independiente e imparcial del plan del proyecto y los informes del proyecto (que no es el monitor)."
 
 #: src/components/organisms/Order/Order.Summary.tsx:192
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
-msgstr ""
+msgstr "Un identificador único que rastrea y verifica una transacción específica en la blockchain."
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:17
 msgid "About Us"
-msgstr ""
+msgstr "Sobre Nosotros"
 
 #: src/components/organisms/AccountSwitchModal/AccountSwitchModal.constants.ts:3
 msgid "Account switch detected!"
-msgstr ""
+msgstr "¡Se detectó un cambio de cuenta!"
 
 #: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:197
 msgid "Acres"
-msgstr ""
+msgstr "Acres"
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:113
 msgid "Act now"
-msgstr ""
+msgstr "Actúa ahora"
 
 #: src/pages/Post/Post.constants.ts:6
 msgid "actions"
-msgstr ""
+msgstr "acciones"
 
 #: src/lib/constants/shared.constants.tsx:106
 msgid "Actions"
-msgstr ""
+msgstr "Acciones"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:67
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:46
 #: src/pages/Activity/Activity.tsx:12
 msgid "Activity"
-msgstr ""
+msgstr "Actividad"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:24
 #: src/lib/constants/shared.constants.tsx:184
 msgid "Actual number of credits issued may be different from the estimated issuance."
-msgstr ""
+msgstr "El número real de créditos emitidos puede ser diferente de la emisión estimada."
 
 #: src/components/organisms/MediaForm/MediaFormStory.tsx:160
 msgid "Add a photo"
-msgstr ""
+msgstr "Agregar una foto"
 
 #: src/components/organisms/MediaForm/MediaFormStory.tsx:120
 msgid "Add a video"
-msgstr ""
+msgstr "Agregar un video"
 
 #: src/components/organisms/PostForm/PostForm.constants.ts:5
 msgid "add files"
-msgstr ""
+msgstr "agregar archivos"
 
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:115
 msgid "Add Profile"
-msgstr ""
+msgstr "Agregar Perfil"
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:23
 msgid "Add video url"
-msgstr ""
+msgstr "Agregar URL del video"
 
 #: src/components/organisms/Modals/AddCertificationModal/AddCertificationModal.tsx:17
 msgid "Additional Certificate"
-msgstr ""
+msgstr "Certificado Adicional"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:163
 msgid "Additional certification {index}"
-msgstr ""
+msgstr "Certificación adicional {index}"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:170
 msgid "Additional certification {index} url"
-msgstr ""
+msgstr "URL de certificación adicional {index}"
 
 #: src/components/organisms/CertificationForm/CertificationForm.tsx:62
 msgid "Additional certification name"
-msgstr ""
+msgstr "Nombre de certificación adicional"
 
 #: src/components/organisms/CertificationForm/CertificationForm.tsx:68
 msgid "Additional certification url"
-msgstr ""
+msgstr "URL de certificación adicional"
 
 #: src/components/molecules/BatchMetadata/BatchMetadata.AdditionalInfo.tsx:49
 #: src/lib/constants/shared.constants.tsx:197
 msgid "additional certifications"
-msgstr ""
+msgstr "certificaciones adicionales"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:256
 msgid "Additional Certifications"
-msgstr ""
+msgstr "Certificaciones Adicionales"
 
 #: src/components/molecules/BatchMetadata/BatchMetadata.tsx:27
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:50
 #: src/pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.config.tsx:33
 msgid "Additional Info"
-msgstr ""
+msgstr "Información Adicional"
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.ConnectField.tsx:75
 msgid "Address copied!"
-msgstr ""
+msgstr "¡Dirección copiada!"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:39
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:37
 #: src/pages/Post/Post.constants.ts:8
 msgid "admin"
-msgstr ""
+msgstr "administrador"
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:46
 #: src/components/organisms/CreditClassForms/CreditClassReview.tsx:29
 #: src/components/organisms/RolesForm/RolesForm.tsx:250
 msgid "Admin"
-msgstr ""
+msgstr "Administrador"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:37
 msgid "Advanced settings"
-msgstr ""
+msgstr "Configuración avanzada"
 
 #: src/pages/BuyCredits/BuyCredits.utils.ts:37
 msgid "Agree & purchase"
-msgstr ""
+msgstr "Aceptar y comprar"
 
 #: src/pages/BatchDetails/BatchDetails.tsx:122
 msgid "All credits"
-msgstr ""
+msgstr "Todos los créditos"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:13
 msgid "All nature based carbon credits"
-msgstr ""
+msgstr "Todos los créditos de carbono basados en la naturaleza"
 
 #: src/pages/Post/Post.constants.ts:5
 msgid "all posts"
-msgstr ""
+msgstr "todas las publicaciones"
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.constants.ts:3
 msgid "all profiles"
-msgstr ""
+msgstr "todos los perfiles"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
 #: src/pages/Projects/Projects.tsx:74
 msgid "All projects"
-msgstr ""
+msgstr "Todos los proyectos"
 
 #: src/components/organisms/PostForm/PostForm.tsx:446
 msgid "All uploaded files and their location data will be hidden from public view."
-msgstr ""
+msgstr "Todos los archivos cargados y sus datos de ubicación se ocultarán de la vista pública."
 
 #: src/features/marketplace/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:113
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:119
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:116
 msgid "amount"
-msgstr ""
+msgstr "cantidad"
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:36
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:78
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:127
 #: src/lib/constants/shared.constants.tsx:30
 msgid "Amount"
-msgstr ""
+msgstr "Cantidad"
 
 #: src/components/organisms/BasketsTable.tsx:69
 msgid "Amount available"
-msgstr ""
+msgstr "Cantidad disponible"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:34
 #: src/pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty.tsx:51
 msgid "AMOUNT AVAILABLE"
-msgstr ""
+msgstr "CANTIDAD DISPONIBLE"
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:138
 msgid "Amount Bridgable"
-msgstr ""
+msgstr "Cantidad Puente"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:155
 msgid "Amount Bridged"
-msgstr ""
+msgstr "Cantidad Puenteada"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.constants.ts:21
 msgid "Amount bridged is the same as amount cancelled in the ledger documentation"
-msgstr ""
+msgstr "La cantidad puenteada es la misma que la cantidad cancelada en la documentación del libro mayor"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:3
 msgid "Amount cannot exceed"
-msgstr ""
+msgstr "La cantidad no puede exceder"
 
 #: src/components/organisms/EcocreditsTable.tsx:104
 msgid "Amount Escrowed"
-msgstr ""
+msgstr "Cantidad en Custodia"
 
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:150
 #: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:208
 msgid "amount of credits"
-msgstr ""
+msgstr "cantidad de créditos"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:296
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:151
 msgid "Amount of credits"
-msgstr ""
+msgstr "Cantidad de créditos"
 
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:126
 #: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:209
 msgid "amount retired"
-msgstr ""
+msgstr "cantidad retirada"
 
 #: src/components/organisms/CreditRetireForm/CreditRetireForm.tsx:108
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:130
 msgid "Amount retired"
-msgstr ""
+msgstr "Cantidad retirada"
 
 #: src/components/organisms/EcocreditsTable.tsx:100
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:42
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:9
 msgid "Amount Retired"
-msgstr ""
+msgstr "Cantidad Retirada"
 
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:131
 msgid "amount sent"
-msgstr ""
+msgstr "cantidad enviada"
 
 #: src/lib/constants/shared.constants.tsx:48
 msgid "Amount to sell"
-msgstr ""
+msgstr "Cantidad para vender"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:8
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:125
 msgid "Amount tradable"
-msgstr ""
+msgstr "Cantidad negociable"
 
 #: src/components/organisms/EcocreditsTable.tsx:97
 msgid "Amount Tradable"
-msgstr ""
+msgstr "Cantidad Negociable"
 
 #: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:77
 msgid "Anchoring in progress"
-msgstr ""
+msgstr "Anclaje en progreso"
 
 #: src/components/atoms/AgreeErpaCheckboxNew.tsx:42
 msgid "and"
-msgstr ""
+msgstr "y"
 
 #: src/lib/constants/shared.constants.tsx:41
 msgid "Apply"
-msgstr ""
+msgstr "Aplicar"
 
 #: src/components/organisms/AccountConnectWalletModal/components/AccountConnectWalletModal.Mobile.constants.ts:3
 #: src/components/organisms/LoginModal/components/LoginModal.Mobile.constants.ts:3
 msgid "Approve Keplr mobile app connection request on your mobile."
-msgstr ""
+msgstr "Apruebe la solicitud de conexión de la aplicación móvil Keplr en su móvil."
 
 #: src/pages/CreditClassDetails/CreditClassDetails.ApprovedMethodologies.tsx:29
 msgid "approved methodologies"
-msgstr ""
+msgstr "metodologías aprobadas"
 
 #: src/pages/Marketplace/Storefront/Storefront.tsx:248
 msgid "Are you sure you want to cancel this sell order?"
-msgstr ""
+msgstr "¿Está seguro de que desea cancelar esta orden de venta?"
 
 #: src/components/organisms/RolesForm/components/AdminModal/AdminModal.constants.ts:4
 msgid "Are you sure you want to change this project admin?"
-msgstr ""
+msgstr "¿Está seguro de que desea cambiar este administrador del proyecto?"
 
 #: src/components/organisms/DeletePostWarningModal/DeletePostWarningModal.constants.ts:3
 msgid "Are you sure you want to delete this post?"
-msgstr ""
+msgstr "¿Está seguro de que desea eliminar esta publicación?"
 
 #: src/lib/constants/shared.constants.tsx:86
 msgid "Are you sure you want to discard your changes?"
-msgstr ""
+msgstr "¿Está seguro de que desea descartar sus cambios?"
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:56
 msgid "Articles"
-msgstr ""
+msgstr "Artículos"
 
 #: src/components/organisms/BasketsTable.tsx:67
 msgid "Asset"
-msgstr ""
+msgstr "Activo"
 
 #: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:72
 msgid "Attach a signature"
-msgstr ""
+msgstr "Adjuntar una firma"
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:107
 msgid "Attach arbitrary JSON-LD metadata to the credit batch below."
-msgstr ""
+msgstr "Adjunte metadatos JSON-LD arbitrarios al lote de crédito a continuación."
 
 #: src/components/molecules/MetadataJSONField.tsx:56
 msgid "Attach arbitrary JSON-LD metadata to the credit batch below. <0>Learn more»</0>"
-msgstr ""
+msgstr "Adjunte metadatos JSON-LD arbitrarios al lote de crédito a continuación. <0>Más información»</0>"
 
 #: src/components/organisms/MetadataForm/MetadataForm.tsx:102
 msgid "Attach arbitrary JSON-LD metadata to the project metadata below."
-msgstr ""
+msgstr "Adjunte metadatos JSON-LD arbitrarios a los metadatos del proyecto a continuación."
 
 #: src/components/organisms/PostFlow/hooks/useSign.ts:109
 msgid "Attest"
-msgstr ""
+msgstr "Atestiguar"
 
 #: src/lib/constants/shared.constants.tsx:47
 msgid "Available"
-msgstr ""
+msgstr "Disponible"
 
 #: src/lib/constants/shared.constants.tsx:172
 msgid "Avg Price"
-msgstr ""
+msgstr "Precio Promedio"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:75
 msgid "avg price per credit"
-msgstr ""
+msgstr "precio promedio por crédito"
 
 #: src/pages/ProjectEdit/ProjectEdit.tsx:250
 msgid "back to projects"
-msgstr ""
+msgstr "volver a proyectos"
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:183
 msgid "Background image"
-msgstr ""
+msgstr "Imagen de fondo"
 
 #: src/pages/ProjectEdit/ProjectEdit.Nav.tsx:23
 msgid "basic info"
-msgstr ""
+msgstr "información básica"
 
 #: src/pages/BasicInfo/BasicInfo.tsx:66
 #: src/pages/ProjectReview/ProjectReview.tsx:193
 msgid "Basic Info"
-msgstr ""
+msgstr "Información Básica"
 
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:101
 msgid "basket"
-msgstr ""
+msgstr "cesta"
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:63
 msgid "basket ecocredits table"
-msgstr ""
+msgstr "tabla de ecocréditos de cesta"
 
 #: src/components/organisms/Portfolio/Portfolio.tsx:94
 msgid "Basket Tokens"
-msgstr ""
+msgstr "Tokens de Cesta"
 
 #: src/components/organisms/BasketsTable.tsx:52
 msgid "baskets table"
-msgstr ""
+msgstr "tabla de cestas"
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:20
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:146
 msgid "batch denom"
-msgstr ""
+msgstr "denominación del lote"
 
 #: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:141
 msgid "Batch denom"
-msgstr ""
+msgstr "Denominación del lote"
 
 #: src/components/molecules/BatchInfoGrid.tsx:34
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:75
 #: src/components/organisms/EcocreditsTable.tsx:93
 msgid "Batch Denom"
-msgstr ""
+msgstr "Denominación del Lote"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:43
 msgid "BATCH DENOM"
-msgstr ""
+msgstr "DENOMINACIÓN DEL LOTE"
 
 #: src/pages/Marketplace/Storefront/Storefront.utils.ts:46
 msgid "batch denom:"
-msgstr ""
+msgstr "denominación del lote:"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:323
 msgid "Batch denom:"
-msgstr ""
+msgstr "Denominación del lote:"
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:86
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:155
@@ -594,15 +594,15 @@ msgstr ""
 #: src/components/organisms/EcocreditsTable.tsx:117
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:51
 msgid "Batch End Date"
-msgstr ""
+msgstr "Fecha de Finalización del Lote"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:56
 msgid "BATCH END DATE"
-msgstr ""
+msgstr "FECHA DE FINALIZACIÓN DEL LOTE"
 
 #: src/components/molecules/BatchInfoGrid.tsx:56
 msgid "Batch start and end date"
-msgstr ""
+msgstr "Fecha de inicio y finalización del lote"
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:83
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:150
@@ -610,496 +610,496 @@ msgstr ""
 #: src/components/organisms/EcocreditsTable.tsx:116
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:48
 msgid "Batch Start Date"
-msgstr ""
+msgstr "Fecha de Inicio del Lote"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:52
 msgid "BATCH START DATE"
-msgstr ""
+msgstr "FECHA DE INICIO DEL LOTE"
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:64
 msgid "block height"
-msgstr ""
+msgstr "altura del bloque"
 
 #: src/components/organisms/Order/Order.Summary.tsx:179
 msgid "Blockchain Details"
-msgstr ""
+msgstr "Detalles de la Blockchain"
 
 #: src/components/organisms/Order/Order.Summary.tsx:187
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:49
 #: src/lib/constants/shared.constants.tsx:94
 #: src/pages/ProjectFinished/ProjectFinished.tsx:93
 msgid "blockchain record"
-msgstr ""
+msgstr "registro de blockchain"
 
 #: src/pages/Certificate/Certificate.constants.ts:9
 msgid "Blockchain record"
-msgstr ""
+msgstr "Registro de blockchain"
 
 #: src/components/organisms/ConfirmationModal.tsx:132
 msgid "blockchain record:"
-msgstr ""
+msgstr "registro de blockchain:"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:22
 msgid "Blockchain-based actions such as buying are only possible with a wallet address. Please set up a Keplr wallet in order to continue."
-msgstr ""
+msgstr "Las acciones basadas en blockchain, como la compra, solo son posibles con una dirección de billetera. Por favor, configure una billetera Keplr para continuar."
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:8
 msgid "book a call"
-msgstr ""
+msgstr "agendar una llamada"
 
 #: src/pages/Dashboard/MyBridge/MyBridge.tsx:28
 msgid "Bridgable ecocredits"
-msgstr ""
+msgstr "Ecocréditos puente"
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:93
 msgid "bridgable ecocredits table"
-msgstr ""
+msgstr "tabla de ecocréditos puente"
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
 #: src/features/marketplace/BridgeFlow/BridgeFlow.constants.ts:4
 #: src/pages/Dashboard/Dashboard.constants.tsx:48
 msgid "Bridge"
-msgstr ""
+msgstr "Puente"
 
 #: src/components/organisms/BridgeModal/BridgeModal.constants.ts:3
 msgid "Bridge Ecocredits to Polygon"
-msgstr ""
+msgstr "Puente de Ecocréditos a Polygon"
 
 #: src/pages/Dashboard/MyBridge/MyBridge.tsx:33
 msgid "Bridged ecocredits"
-msgstr ""
+msgstr "Ecocréditos puenteados"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:98
 msgid "bridged ecocredits table"
-msgstr ""
+msgstr "tabla de ecocréditos puenteados"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.constants.ts:10
 msgid "Brief project summary"
-msgstr ""
+msgstr "Breve resumen del proyecto"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:7
 msgid "Budget"
-msgstr ""
+msgstr "Presupuesto"
 
 #: src/pages/CreditClassDetails/CreditClassDetails.BufferPoolAccounts.tsx:27
 msgid "buffer pool accounts"
-msgstr ""
+msgstr "cuentas de pool de buffer"
 
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:4
 msgid "Buy"
-msgstr ""
+msgstr "Comprar"
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:5
 msgid "BUY"
-msgstr ""
+msgstr "COMPRAR"
 
 #: src/siteMetadata.ts:5
 msgid "Buy and sell ecosystem service credits at the open marketplace for climate solutions.registry"
-msgstr ""
+msgstr "Compra y vende créditos de servicios ecosistémicos en el mercado abierto para soluciones climáticas.registro"
 
 #: src/pages/Buyers/Buyers.tsx:47
 msgid "Buy carbon credits and other ecosystem system service credits to meet your climate commitments and sustainability goals."
-msgstr ""
+msgstr "Compre créditos de carbono y otros créditos de servicios ecosistémicos para cumplir con sus compromisos climáticos y objetivos de sostenibilidad."
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:349
 msgid "buy credits"
-msgstr ""
+msgstr "comprar créditos"
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
 msgid "BUY CREDITS"
-msgstr ""
+msgstr "COMPRAR CRÉDITOS"
 
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:90
 msgid "Buy Credits Error"
-msgstr ""
+msgstr "Error al Comprar Créditos"
 
 #: src/pages/EcocreditsByAccount/CreditClassTab/CreditClassTab.constants.ts:3
 msgid "buy ecocredits"
-msgstr ""
+msgstr "comprar ecocréditos"
 
 #: src/lib/constants/shared.constants.tsx:204
 msgid "Buy ecocredits"
-msgstr ""
+msgstr "Comprar ecocréditos"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:195
 msgid "Buy Ecocredits"
-msgstr ""
+msgstr "Comprar Ecocréditos"
 
 #: src/components/organisms/BasketDetailsActionsBar/BasketDetailsActionsBar.constants.ts:4
 msgid "buy NCT"
-msgstr ""
+msgstr "comprar NCT"
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:18
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:444
 msgid "Buy tradable ecocredits"
-msgstr ""
+msgstr "Comprar ecocréditos negociables"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions.tsx:84
 msgid "Buy with credit card"
-msgstr ""
+msgstr "Comprar con tarjeta de crédito"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions.tsx:94
 msgid "Buy with crypto"
-msgstr ""
+msgstr "Comprar con criptomonedas"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:345
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:353
 msgid "Buyer"
-msgstr ""
+msgstr "Comprador"
 
 #: src/components/organisms/RegistryLayout/components/ConnectWalletModal/ConnectWalletModal.constants.ts:9
 msgid "Buying with crypto requires an account with a wallet address. Please set up a Keplr wallet in order to continue."
-msgstr ""
+msgstr "Comprar con criptomonedas requiere una cuenta con una dirección de billetera. Por favor, configure una billetera Keplr para continuar."
 
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:123
 msgid "By connecting to Regen Marketplace, you agree to our <0>Terms of Service</0> and <1>Privacy Policy</1>"
-msgstr ""
+msgstr "Al conectarte a Regen Marketplace, aceptas nuestros <0>Términos de Servicio</0> y <1>Política de Privacidad</1>"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:49
 msgid "by default the cheapest credit vintage will be purchased first"
-msgstr ""
+msgstr "por defecto, se comprará primero el crédito más barato de la cosecha"
 
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:155
-msgid "By default these credits are tradable but you may check “retire all credits upon transfer” below to automatically retire them upon sending."
-msgstr ""
+msgid "By default these credits are tradable but you may check "retire all credits upon transfer" below to automatically retire them upon sending."
+msgstr "Por defecto, estos créditos son negociables, pero puedes marcar "retirar todos los créditos al transferir" abajo para retirarlos automáticamente al enviarlos."
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:12
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:9
 msgid "cancel"
-msgstr ""
+msgstr "cancelar"
 
 #: src/lib/constants/shared.constants.tsx:42
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:9
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:40
 msgid "Cancelled credits have been removed from from the credit batch's tradable supply. Cancelling credits is permanent and implies the credits have been moved to another chain or registry."
-msgstr ""
+msgstr "Los créditos cancelados han sido eliminados del suministro negociable del lote de créditos. La cancelación de créditos es permanente e implica que los créditos han sido movidos a otra cadena o registro."
 
 #: src/components/organisms/MediaForm/hooks/useHandleUpload.ts:57
 msgid "Cannot upload file without a project id"
-msgstr ""
+msgstr "No se puede cargar el archivo sin un ID de proyecto"
 
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:307
 msgid "Caption"
-msgstr ""
+msgstr "Leyenda"
 
 #: src/components/molecules/CreditClassDetailsColumn.tsx:114
 msgid "carbon credit"
-msgstr ""
+msgstr "crédito de carbono"
 
 #: src/pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:78
 msgid "carbon offset standard"
-msgstr ""
+msgstr "estándar de compensación de carbono"
 
 #: src/components/organisms/Order/Order.Summary.tsx:152
 msgid "card info"
-msgstr ""
+msgstr "información de la tarjeta"
 
 #: src/components/organisms/Order/Order.tsx:99
 msgid "certificate"
-msgstr ""
+msgstr "certificado"
 
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:5
 msgid "certifications"
-msgstr ""
+msgstr "certificaciones"
 
 #: src/components/molecules/BatchMetadata/BatchMetadata.AdditionalInfo.tsx:55
 msgid "cfc retirement serial numbers"
-msgstr ""
+msgstr "números de serie de retiro de CFC"
 
 #: src/components/molecules/BatchMetadata/BatchMetadata.AdditionalInfo.tsx:60
 msgid "cfc vintage year"
-msgstr ""
+msgstr "año de cosecha de CFC"
 
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:105
 msgid "Chain"
-msgstr ""
+msgstr "Cadena"
 
 #: src/components/organisms/RolesForm/components/AdminModal/AdminModal.constants.ts:5
 msgid "change admin"
-msgstr ""
+msgstr "cambiar administrador"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:147
 msgid "Change payment card"
-msgstr ""
+msgstr "Cambiar tarjeta de pago"
 
 #: src/pages/ProjectEdit/ProjectEdit.tsx:282
 msgid "Changes have been saved"
-msgstr ""
+msgstr "Los cambios han sido guardados"
 
 #: src/lib/constants/shared.constants.tsx:50
 msgid "Character"
-msgstr ""
+msgstr "Carácter"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:14
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:16
 msgid "Check your wallet for a confirmation popup."
-msgstr ""
+msgstr "Revisa tu billetera para ver una ventana emergente de confirmación."
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:9
 msgid "Choose 2-10 photos for the photo gallery."
-msgstr ""
+msgstr "Elige de 2 a 10 fotos para la galería de fotos."
 
 #: src/pages/ChooseCreditClass/ChooseCreditClass.Grid.tsx:37
 msgid "Choose a credit class"
-msgstr ""
+msgstr "Elige una clase de crédito"
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:97
 msgid "Choose a credit type"
-msgstr ""
+msgstr "Elige un tipo de crédito"
 
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:47
 msgid "Choose a log in method"
-msgstr ""
+msgstr "Elige un método de inicio de sesión"
 
 #: src/components/organisms/AdditionalityForm.tsx:59
 msgid "Choose a practice start date"
-msgstr ""
+msgstr "Elige una fecha de inicio de práctica"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:166
 msgid "Choose a sell order"
-msgstr ""
+msgstr "Elige una orden de venta"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:192
 msgid "Choose a specific location on the map"
-msgstr ""
+msgstr "Elige una ubicación específica en el mapa"
 
 #: src/lib/constants/shared.constants.tsx:114
 msgid "Choose any ecocredits that are eligible for this basket.<0>Learn more»</0>"
-msgstr ""
+msgstr "Elige cualquier ecocrédito que sea elegible para esta cesta.<0>Aprende más»</0>"
 
 #: src/lib/constants/shared.constants.tsx:29
 msgid "Choose basket"
-msgstr ""
+msgstr "Elegir cesta"
 
 #: src/pages/ChooseCreditClass/ChooseCreditClass.Item.tsx:29
 msgid "Choose credit class"
-msgstr ""
+msgstr "Elegir clase de crédito"
 
 #: src/pages/BuyCredits/BuyCredits.utils.ts:26
 msgid "Choose credits"
-msgstr ""
+msgstr "Elegir créditos"
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.utils.ts:65
 msgid "Choose denom"
-msgstr ""
+msgstr "Elegir denominación"
 
 #: src/lib/constants/shared.constants.tsx:28
 msgid "Choose ecocredits batch"
-msgstr ""
+msgstr "Elegir lote de ecocréditos"
 
 #: src/components/molecules/ProjectSelect.tsx:25
 #: src/features/ecocredit/CreateBatchBySteps/hooks/useUpdateProjectOptions.ts:14
 msgid "Choose Project"
-msgstr ""
+msgstr "Elegir Proyecto"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:46
 msgid "Choose specific credit vintages"
-msgstr ""
+msgstr "Elegir cosechas de crédito específicas"
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:6
 msgid "Choose the photo that will show at the top of the project page and in project preview cards."
-msgstr ""
+msgstr "Elige la foto que se mostrará en la parte superior de la página del proyecto y en las tarjetas de vista previa del proyecto."
 
 #: src/pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:67
 msgid "class id"
-msgstr ""
+msgstr "id de clase"
 
 #: src/pages/CreditClassDetails/CreditClassDetails.constants.ts:7
 msgid "Class ID: unique identifier of the credit class on Regen Ledger."
-msgstr ""
+msgstr "ID de Clase: identificador único de la clase de crédito en Regen Ledger."
 
 #: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:176
 msgid "Clear all"
-msgstr ""
+msgstr "Borrar todo"
 
 #: src/pages/VerifyEmail/VerifyEmail.tsx:53
 msgid "Click on the confirmation link to return to Regen Network."
-msgstr ""
+msgstr "Haz clic en el enlace de confirmación para volver a Regen Network."
 
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:213
 #: src/pages/ProjectReview/ProjectReview.tsx:376
 msgid "close"
-msgstr ""
+msgstr "cerrar"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:4
 #: src/features/marketplace/BridgeFlow/BridgeFlow.tsx:209
 #: src/lib/constants/shared.constants.tsx:95
 msgid "CLOSE WINDOW"
-msgstr ""
+msgstr "CERRAR VENTANA"
 
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:9
 msgid "co-benefit"
-msgstr ""
+msgstr "co-beneficio"
 
 #: src/lib/constants/shared.constants.tsx:167
 msgid "coming soon"
-msgstr ""
+msgstr "próximamente"
 
 #: src/components/organisms/PostForm/PostForm.tsx:278
 msgid "Comment"
-msgstr ""
+msgstr "Comentario"
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:11
 msgid "Community Credits"
-msgstr ""
+msgstr "Créditos Comunitarios"
 
 #: src/pages/Projects/AllProjects/AllProjects.CommunityFilter.tsx:52
 msgid "Community credits are credits that have not been through the <0>Regen Registry program</0>or are not associated with another known registry. <1/><2/>To create your own credits, <3>learn more in our docs.</3>"
-msgstr ""
+msgstr "Los créditos comunitarios son créditos que no han pasado por el <0>programa de Registro Regen</0> o no están asociados con otro registro conocido. <1/><2/>Para crear tus propios créditos, <3>aprende más en nuestra documentación.</3>"
 
 #: src/pages/BuyCredits/BuyCredits.utils.ts:39
 msgid "Complete"
-msgstr ""
+msgstr "Completar"
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:45
 msgid "Congrats! You successfully created this post."
-msgstr ""
+msgstr "¡Felicidades! Has creado exitosamente esta publicación."
 
 #: src/features/marketplace/BridgeFlow/BridgeFlow.constants.ts:3
 msgid "Congrats! Your bridge has been initiated"
-msgstr ""
+msgstr "¡Felicidades! Tu puente ha sido iniciado"
 
 #: src/components/organisms/ConfirmationModal.tsx:90
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:3
 msgid "Congrats! Your purchase was successful."
-msgstr ""
+msgstr "¡Felicidades! Tu compra fue exitosa."
 
 #: src/lib/constants/shared.constants.tsx:93
 msgid "Congrats! Your transaction was successful."
-msgstr ""
+msgstr "¡Felicidades! Tu transacción fue exitosa."
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:87
 msgid "connect"
-msgstr ""
+msgstr "conectar"
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.ConnectField.tsx:47
 msgid "CONNECT"
-msgstr ""
+msgstr "CONECTAR"
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:155
 msgid "Connect a wallet address to be able to perform on chain tasks such as buying and selling credits, and creating projects on Regen Ledger."
-msgstr ""
+msgstr "Conecta una dirección de billetera para poder realizar tareas en cadena como comprar y vender créditos, y crear proyectos en Regen Ledger."
 
 #: src/components/organisms/CreditClassConnectSection.tsx:90
 msgid "Connect and Learn"
-msgstr ""
+msgstr "Conectar y Aprender"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:5
 msgid "connect wallet"
-msgstr ""
+msgstr "conectar billetera"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:13
 msgid "Connect wallet address"
-msgstr ""
+msgstr "Conectar dirección de billetera"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:39
 msgid "Consumer/Individual/myself"
-msgstr ""
+msgstr "Consumidor/Individuo/yo mismo"
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:68
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
 
 #: src/components/atoms/WrappedStepCard.tsx:62
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.ConnectField.tsx:74
 msgid "Copy address"
-msgstr ""
+msgstr "Copiar dirección"
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:20
 msgid "Copy and paste an embeddable video url. Supported types include: YouTube, Facebook, Vimeo, Twitch, and DailyMotion."
-msgstr ""
+msgstr "Copia y pega una URL de video incrustable. Los tipos soportados incluyen: YouTube, Facebook, Vimeo, Twitch y DailyMotion."
 
 #: src/lib/constants/shared.constants.tsx:100
 msgid "Copy link to profile"
-msgstr ""
+msgstr "Copiar enlace al perfil"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:15
 msgid "Copy link to project page"
-msgstr ""
+msgstr "Copiar enlace a la página del proyecto"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:27
 msgid "Copyright © 2024 Terrasos | All rights reserved"
-msgstr ""
+msgstr "Copyright © 2024 Terrasos | Todos los derechos reservados"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:546
 #: src/lib/constants/shared.constants.tsx:58
 #: src/lib/constants/shared.constants.tsx:157
 msgid "Country"
-msgstr ""
+msgstr "País"
 
 #: src/components/organisms/ConfirmationModal.tsx:87
 msgid "cows celebrating"
-msgstr ""
+msgstr "vacas celebrando"
 
 #: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:8
 msgid "Create a project without a credit class"
-msgstr ""
+msgstr "Crear un proyecto sin una clase de crédito"
 
 #: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.Table.tsx:72
 #: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.tsx:49
 msgid "create credit batch"
-msgstr ""
+msgstr "crear lote de créditos"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:141
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:209
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:58
 msgid "Create Credit Batch"
-msgstr ""
+msgstr "Crear Lote de Créditos"
 
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:28
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:29
 #: src/components/organisms/CreditClassForms/CreditClassFinished.tsx:28
 msgid "Create Credit Class"
-msgstr ""
+msgstr "Crear Clase de Crédito"
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:51
 msgid "Create Data Post"
-msgstr ""
+msgstr "Crear Publicación de Datos"
 
 #: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:73
 msgid "create post"
-msgstr ""
+msgstr "crear publicación"
 
 #: src/components/molecules/PlanStepper.tsx:16
 #: src/pages/ProjectFinished/ProjectFinished.tsx:66
 msgid "Create Project"
-msgstr ""
+msgstr "Crear Proyecto"
 
 #: src/components/organisms/ProjectDenied/ProjectDenied.tsx:43
 msgid "Create Project - Access Denied"
-msgstr ""
+msgstr "Crear Proyecto - Acceso Denegado"
 
 #: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:227
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
 msgid "Create Sell Order"
-msgstr ""
+msgstr "Crear Orden de Venta"
 
 #: src/pages/Post/hooks/useAttestEvents.ts:142
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:313
 msgid "credit"
-msgstr ""
+msgstr "crédito"
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:147
 msgid "credit activity table"
-msgstr ""
+msgstr "tabla de actividad de créditos"
 
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:57
 msgid "Credit Basics"
-msgstr ""
+msgstr "Fundamentos del Crédito"
 
 #: src/pages/BatchDetails/BatchDetails.tsx:99
 msgid "Credit Batch Details"
-msgstr ""
+msgstr "Detalles del Lote de Créditos"
 
 #: src/features/marketplace/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:109
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:112
@@ -1109,41 +1109,41 @@ msgstr ""
 #: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:203
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:112
 msgid "credit batch id"
-msgstr ""
+msgstr "id del lote de créditos"
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:128
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:145
 msgid "Credit Batch Id"
-msgstr ""
+msgstr "Id del Lote de Créditos"
 
 #: src/pages/Dashboard/MyEcocredits/hooks/useUpdateCardItemsTakeBasket.tsx:42
 msgid "credit batch id{0, plural, one {} other {(s)}}"
-msgstr ""
+msgstr "id del lote de créditos{0, plural, one {} other {(s)}}"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:74
 msgid "Credit Batch Info"
-msgstr ""
+msgstr "Información del Lote de Créditos"
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:126
 msgid "credit batch table"
-msgstr ""
+msgstr "tabla de lotes de créditos"
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:242
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
 #: src/pages/Dashboard/Dashboard.constants.tsx:42
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:93
 msgid "Credit Batches"
-msgstr ""
+msgstr "Lotes de Créditos"
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:19
 #: src/lib/constants/shared.constants.tsx:194
 msgid "credit class"
-msgstr ""
+msgstr "clase de crédito"
 
 #: src/pages/Certificate/Certificate.constants.ts:15
 #: src/pages/Certificate/Certificate.utils.ts:43
 msgid "Credit class"
-msgstr ""
+msgstr "Clase de crédito"
 
 #: src/components/molecules/BatchInfoGrid.tsx:47
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:80
@@ -1153,153 +1153,153 @@ msgstr ""
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:39
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:10
 msgid "Credit Class"
-msgstr ""
+msgstr "Clase de Crédito"
 
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:10
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:39
 msgid "CREDIT CLASS"
-msgstr ""
+msgstr "CLASE DE CRÉDITO"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx:173
 msgid "credit class <0/>"
-msgstr ""
+msgstr "clase de crédito <0/>"
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:114
 msgid "Credit class creation fee"
-msgstr ""
+msgstr "Tarifa de creación de clase de crédito"
 
 #: src/components/organisms/CreditClassForms/CreditClassFinished.tsx:31
 msgid "Credit Class ID"
-msgstr ""
+msgstr "ID de Clase de Crédito"
 
 #: src/components/organisms/CreditClassForms/CreditClassReview.tsx:24
 msgid "Credit Class Info"
-msgstr ""
+msgstr "Información de Clase de Crédito"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:11
 msgid "credit class status"
-msgstr ""
+msgstr "estado de clase de crédito"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:13
 msgid "Credit class timeline"
-msgstr ""
+msgstr "Línea de tiempo de clase de crédito"
 
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:13
 msgid "Credit class: the structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
-msgstr ""
+msgstr "Clase de crédito: la estructura, procedimientos y requisitos para el registro de proyectos, la cuantificación, monitoreo, reporte y verificación (MRV), y emisión de créditos relacionados con un cierto tipo de crédito."
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:28
 #: src/pages/Dashboard/Dashboard.constants.tsx:36
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:87
 #: src/pages/Home/Home.tsx:177
 msgid "Credit Classes"
-msgstr ""
+msgstr "Clases de Crédito"
 
 #: src/components/molecules/CreditClassDetailsColumn.tsx:106
 msgid "Credit Details"
-msgstr ""
+msgstr "Detalles del Crédito"
 
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:35
 #: src/pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.config.tsx:20
 msgid "Credit Issuance"
-msgstr ""
+msgstr "Emisión de Créditos"
 
 #: src/components/organisms/Order/Order.constants.ts:9
 msgid "Credit issuance pending"
-msgstr ""
+msgstr "Emisión de créditos pendiente"
 
 #: src/components/molecules/CreditClassDetailsColumn.tsx:137
 msgid "credit name"
-msgstr ""
+msgstr "nombre del crédito"
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.tsx:259
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
-msgstr ""
+msgstr "Los precios de los créditos varían. Por defecto, se comprarán primero los créditos de menor precio."
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:96
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:521
 msgid "Credit retirement location"
-msgstr ""
+msgstr "Ubicación de retiro de créditos"
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:93
 #: src/components/organisms/CreditClassForms/CreditClassReview.tsx:37
 msgid "Credit Type"
-msgstr ""
+msgstr "Tipo de Crédito"
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:98
 msgid "Credit type 1"
-msgstr ""
+msgstr "Tipo de crédito 1"
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:99
 msgid "Credit type 2"
-msgstr ""
+msgstr "Tipo de crédito 2"
 
 #: src/components/organisms/DetailsSection/DetailsSection.constants.ts:6
 msgid "Credit unit definition"
-msgstr ""
+msgstr "Definición de unidad de crédito"
 
 #: src/components/molecules/CreditsAmount/CreditsInput.tsx:59
 msgid "credits"
-msgstr ""
+msgstr "créditos"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:220
 #: src/components/organisms/Order/Order.Summary.tsx:59
 msgid "Credits"
-msgstr ""
+msgstr "Créditos"
 
 #: src/components/organisms/EcocreditsTable.tsx:110
 msgid "Credits are held in escrow when a sell order is created, and taken out of escrow when the sell order is either cancelled, updated with a reduced quantity, or processed."
-msgstr ""
+msgstr "Los créditos se mantienen en custodia cuando se crea una orden de venta, y se sacan de custodia cuando la orden de venta se cancela, se actualiza con una cantidad reducida o se procesa."
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:48
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:71
 #: src/lib/constants/shared.constants.tsx:179
 msgid "credits available"
-msgstr ""
+msgstr "créditos disponibles"
 
 #: src/pages/Projects/AllProjects/AllProjects.config.ts:18
 msgid "Credits available - high to low"
-msgstr ""
+msgstr "Créditos disponibles - de mayor a menor"
 
 #: src/pages/Projects/AllProjects/AllProjects.config.ts:14
 msgid "Credits available - low to high"
-msgstr ""
+msgstr "Créditos disponibles - de menor a mayor"
 
 #: src/components/organisms/UserCredits.tsx:182
 msgid "credits available for purchase"
-msgstr ""
+msgstr "créditos disponibles para compra"
 
 #: src/components/molecules/BatchTotalsGrid.tsx:53
 msgid "Credits Cancelled"
-msgstr ""
+msgstr "Créditos Cancelados"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:4
 msgid "Credits cannot exceed"
-msgstr ""
+msgstr "Los créditos no pueden exceder"
 
 #: src/components/organisms/Order/Order.constants.ts:8
 msgid "Credits delivered"
-msgstr ""
+msgstr "Créditos entregados"
 
 #: src/components/organisms/UserCredits.tsx:150
 msgid "Credits for"
-msgstr ""
+msgstr "Créditos para"
 
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:74
 msgid "Credits have been issued!"
-msgstr ""
+msgstr "¡Se han emitido los créditos!"
 
 #: src/components/molecules/CreditsAmount/CreditsInput.tsx:43
 msgid "Credits Input"
-msgstr ""
+msgstr "Entrada de Créditos"
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:64
 msgid "Credits issued"
-msgstr ""
+msgstr "Créditos emitidos"
 
 #: src/lib/constants/shared.constants.tsx:168
 msgid "credits purchased"
-msgstr ""
+msgstr "créditos comprados"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:25
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."

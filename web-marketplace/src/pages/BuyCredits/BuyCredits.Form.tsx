@@ -21,6 +21,7 @@ import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketpl
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { useFetchUserBalance } from 'pages/BuyCredits/hooks/useFetchUserBalance';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   CREDIT_VINTAGE_OPTIONS,
@@ -37,7 +38,7 @@ import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSum
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';
 import { AgreePurchaseFormFiat } from 'components/organisms/AgreePurchaseForm/AgreePurchaseFormFiat';
-import { MemoizedChooseCreditsForm as ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
+import { ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { getFilteredCryptoSellOrders } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.utils';
@@ -49,7 +50,10 @@ import { PaymentInfoFormSchemaType } from 'components/organisms/PaymentInfoForm/
 import { PaymentInfoFormFiat } from 'components/organisms/PaymentInfoForm/PaymentInfoFormFiat';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
-import { paymentOptionCryptoClickedAtom } from './BuyCredits.atoms';
+import {
+  buyCreditsCryptoCurrencyAtom,
+  paymentOptionCryptoClickedAtom,
+} from './BuyCredits.atoms';
 import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
 import {
   BuyCreditsSchemaTypes,
@@ -115,7 +119,7 @@ export const BuyCreditsForm = ({
   const [paymentOptionCryptoClicked, setPaymentOptionCryptoClicked] = useAtom(
     paymentOptionCryptoClickedAtom,
   );
-
+  const [currencyCryptoAtom] = useAtom(buyCreditsCryptoCurrencyAtom);
   const cardDisabled = cardSellOrders.length === 0;
 
   const { marketplaceClient, ecocreditClient } = useLedger();
@@ -234,6 +238,14 @@ export const BuyCreditsForm = ({
     [handleActiveStep],
   );
 
+  const allowedDenoms = useMemo(
+    () => allowedDenomsData?.allowedDenoms,
+    [allowedDenomsData?.allowedDenoms],
+  );
+
+  const currency = data?.[CURRENCY] || currencyCryptoAtom;
+  const creditsAmount = data?.[CREDITS_AMOUNT];
+  const currencyAmount = data?.[CURRENCY_AMOUNT];
   const creditTypePrecision = creditTypeData?.creditType?.precision;
 
   const card = useMemo(
@@ -274,6 +286,10 @@ export const BuyCreditsForm = ({
       filteredCryptoSellOrders,
       paymentOption,
     ],
+  );
+
+  const { isLoading, userBalance } = useFetchUserBalance(
+    currency?.askDenom || currencyCryptoAtom.askDenom,
   );
 
   return (
@@ -330,6 +346,8 @@ export const BuyCreditsForm = ({
             cardDetails={cardDetails}
             goToPaymentInfo={goToPaymentInfo}
             card={card}
+            isUserBalanceLoading={isLoading}
+            userBalance={userBalance}
           />
         )}
 

@@ -28,6 +28,8 @@ describe('ChooseCreditsForm', () => {
     setPaymentOptionCryptoClicked: () => {},
     goToPaymentInfo: () => {},
     card: true,
+    userBalance: 100,
+    isUserBalanceLoading: false,
   };
   it('renders without crashing', () => {
     render(<ChooseCreditsForm {...props} />);

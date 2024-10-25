@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Box } from '@mui/material';
 import { Meta, StoryFn } from '@storybook/react';
 
-import RegionIndicatorIcon from '../../icons/terassos/ColombiaRegionIcon';
-import ComplianceBadge from '../../icons/terassos/ComplianceBadge';
+import RegionIndicatorIcon from '../../icons/terrasos/ColombiaRegionIcon';
+import ComplianceBadge from '../../icons/terrasos/ComplianceBadge';
 import SvgWithSelectedColor from '../../icons/utils/SvgWithSelectedColor';
 import ProjectFilters, { Filter, FilterOptions } from './ProjectFilters';
 

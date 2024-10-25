@@ -1,5 +1,5 @@
 {
-  "version": "2.7.3",
+  "version": "2.7.4",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "packages": ["web-marketplace", "web-components", "web-storybook", "web-www"]

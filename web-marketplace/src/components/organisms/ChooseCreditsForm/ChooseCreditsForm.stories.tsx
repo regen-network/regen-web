@@ -48,4 +48,6 @@ ChooseCredits.args = {
   paymentOptionCryptoClicked: false,
   setPaymentOptionCryptoClicked: () => {},
   goToPaymentInfo: () => {},
+  userBalance: 100,
+  isUserBalanceLoading: false,
 };

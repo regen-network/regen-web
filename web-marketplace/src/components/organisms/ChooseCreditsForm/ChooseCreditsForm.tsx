@@ -203,7 +203,6 @@ export const ChooseCreditsForm = React.memo(
 
     const handlePaymentOptions = useCallback(
       (option: string) => {
-        // setPaymentOption(option as PaymentOptionsType);
         startTransition(() => {
           setPaymentOption(option as PaymentOptionsType);
         });

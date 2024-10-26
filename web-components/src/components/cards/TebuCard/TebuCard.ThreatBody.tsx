@@ -1,32 +1,27 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 
 import IucnRedCodeIcon, {
   IucnType,
 } from '../../icons/terrasos/IucnRedCodeIcon';
-import { Body } from '../../typography';
+import CommonBody from './TebuCard.CommonBody';
 
-interface ThreatBodyProps {
+export interface ThreatBodyProps {
   title: string;
   description: JSX.Element | string;
-  iucnType: IucnType;
+  type: IucnType;
 }
 
 const ThreatBody: React.FC<ThreatBodyProps> = ({
   title,
   description,
-  iucnType,
+  type,
 }) => {
   return (
-    <Box className="flex gap-[10px]">
-      <Box>
-        <IucnRedCodeIcon type={iucnType} />
-      </Box>
-      <Box>
-        <Body className="text-[16px] mt-[12px] font-bold">{title}</Body>
-        <Body className="mb-[10px]">{description}</Body>
-      </Box>
-    </Box>
+    <CommonBody
+      title={title}
+      description={description}
+      icon={<IucnRedCodeIcon type={type} />}
+    />
   );
 };
 

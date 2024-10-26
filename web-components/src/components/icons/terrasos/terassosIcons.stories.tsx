@@ -1,5 +1,4 @@
 import React from 'react';
-import { Grid } from '@mui/material';
 import { Meta } from '@storybook/react';
 
 import { LabeledIcon } from '../icons.stories';
@@ -8,6 +7,9 @@ import EcologicalConnectivityLevelIcon, {
   Level,
 } from './EcologicalConnectivityLevelIcon';
 import IucnRedCodeIcon, { IucnType } from './IucnRedCodeIcon';
+import SocialCulturalValueIcon, {
+  SocialCulturalValueType,
+} from './SocialCulturalValueIcon';
 
 export default {
   title: 'Terrasos/Icons',
@@ -80,6 +82,18 @@ export const allIcons = (): JSX.Element => (
           icon={<EcologicalConnectivityLevelIcon level={level} key={level} />}
         />
       ))}
+    </div>
+
+    <h3>SocialCulturalValueIcon</h3>
+    <div className="grid grid-cols-4 gap-4">
+      {(Object.keys(SocialCulturalValueType) as SocialCulturalValueType[]).map(
+        type => (
+          <LabeledIcon
+            label={type}
+            icon={<SocialCulturalValueIcon type={type} key={type} />}
+          />
+        ),
+      )}
     </div>
   </>
 );

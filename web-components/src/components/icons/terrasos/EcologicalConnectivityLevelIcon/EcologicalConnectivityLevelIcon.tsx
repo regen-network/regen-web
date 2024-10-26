@@ -8,40 +8,32 @@ export enum Level {
 }
 
 export interface EcologicalConnectivityLevelIconProps {
-  level: Level;
+  type: Level;
 }
 
 const config = {
   HighlySignificant: {
-    meaning: 'rfs:HighlySignificant',
-    label: 'Highly Significant',
     color: '--bc-green-500',
     rotation: '180deg',
   },
   Significant: {
-    meaning: 'rfs:Significant',
-    label: 'Significant',
     color: '--bc-green-400',
     rotation: '180deg',
   },
   Moderate: {
-    meaning: 'rfs:Moderate',
-    label: 'Moderate',
     color: '--bc-yellow-500',
     rotation: '-90deg',
   },
   ContributesMinimally: {
-    meaning: 'rfs:ContributesMinimally',
-    label: 'Contributes Minimally',
     color: '--bc-orange-400',
     rotation: '0deg',
   },
 };
 
 export const EcologicalConnectivityLevelIcon = ({
-  level,
+  type,
 }: EcologicalConnectivityLevelIconProps) => {
-  const { color, rotation } = config[level];
+  const { color, rotation } = config[type];
   return (
     <div
       style={{

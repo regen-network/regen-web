@@ -239,6 +239,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
       {projects?.map(project => {
         const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
         const isComplianceProject = project.marketType === COMPLIANCE_MARKET;
+        const projectArea = project.area ?? 0;
 
         return (
           <Box key={project?.id}>
@@ -289,7 +290,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                   </InfoTooltip>
                   {isComplianceProject && (
                     <span className="flex items-center ml-5">
-                      0
+                      {projectArea}
                       <InfoTooltip
                         arrow
                         placement="top"

@@ -267,9 +267,7 @@ export function ProjectCard({
                 />
               )}
               <>
-                {!offChain ||
-                projectPrefinancing?.isPrefinanceProject ||
-                true ? (
+                {!offChain || projectPrefinancing?.isPrefinanceProject ? (
                   <CreditPrice
                     bodyTexts={bodyTexts}
                     priceTooltip={

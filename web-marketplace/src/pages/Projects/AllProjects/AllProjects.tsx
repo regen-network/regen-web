@@ -177,17 +177,19 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
             flexWrap: { xs: 'wrap', lg: 'nowrap' },
           }}
         >
-          <SideFilter
-            creditClassFilters={creditClassFilters}
-            hasCommunityProjects={hasCommunityProjects}
-            showFiltersReset={showFiltersReset}
-            resetFilter={resetFilter}
-            sx={{
-              mb: { xs: 3.75, lg: 0 },
-              mr: { xs: 0, lg: 7.5 },
-              width: { xs: '100%', lg: 'auto' },
-            }}
-          />
+          {IS_REGEN && (
+            <SideFilter
+              creditClassFilters={creditClassFilters}
+              hasCommunityProjects={hasCommunityProjects}
+              showFiltersReset={showFiltersReset}
+              resetFilter={resetFilter}
+              sx={{
+                mb: { xs: 3.75, lg: 0 },
+                mr: { xs: 0, lg: 7.5 },
+                width: { xs: '100%', lg: 'auto' },
+              }}
+            />
+          )}
           <Flex
             sx={{
               order: { xs: 1, lg: 2 },
@@ -263,6 +265,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               purchaseDetailsTitles={purchaseDetailsTitles}
               buttons={buttons}
               useProjectCardButton={IS_REGEN}
+              hasBottomCard={IS_REGEN}
             />
           </Box>
         );

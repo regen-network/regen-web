@@ -507,7 +507,7 @@ function ProjectDetails(): JSX.Element {
 
       {managementActions && <ManagementActions actions={managementActions} />}
 
-      <MoreProjects />
+      {IS_REGEN && <MoreProjects />}
 
       {gettingStartedResourcesSection && IS_REGEN && (
         <div

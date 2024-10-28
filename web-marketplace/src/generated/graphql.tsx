@@ -3415,6 +3415,7 @@ export type FiatOrder = Node & {
   projectOnChainId: Scalars['String'];
   customerName?: Maybe<Scalars['String']>;
   anonymous: Scalars['Boolean'];
+  customerName?: Maybe<Scalars['String']>;
   /** Reads a single `Account` that is related to this `FiatOrder`. */
   accountByAccountId?: Maybe<Account>;
 };
@@ -3448,6 +3449,8 @@ export type FiatOrderCondition = {
   customerName?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `anonymous` field. */
   anonymous?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `customerName` field. */
+  customerName?: Maybe<Scalars['String']>;
 };
 
 /** An input for mutations affecting `FiatOrder` */
@@ -3464,6 +3467,7 @@ export type FiatOrderInput = {
   projectOnChainId: Scalars['String'];
   customerName?: Maybe<Scalars['String']>;
   anonymous?: Maybe<Scalars['Boolean']>;
+  customerName?: Maybe<Scalars['String']>;
 };
 
 /** Represents an update to a `FiatOrder`. Fields that are set will be updated. */
@@ -3480,6 +3484,7 @@ export type FiatOrderPatch = {
   projectOnChainId?: Maybe<Scalars['String']>;
   customerName?: Maybe<Scalars['String']>;
   anonymous?: Maybe<Scalars['Boolean']>;
+  customerName?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `FiatOrder` values. */
@@ -3531,6 +3536,8 @@ export enum FiatOrdersOrderBy {
   CustomerNameDesc = 'CUSTOMER_NAME_DESC',
   AnonymousAsc = 'ANONYMOUS_ASC',
   AnonymousDesc = 'ANONYMOUS_DESC',
+  CustomerNameAsc = 'CUSTOMER_NAME_ASC',
+  CustomerNameDesc = 'CUSTOMER_NAME_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -7570,6 +7577,19 @@ export type AccountByAddrQuery = (
   )> }
 );
 
+export type AccountByCustodialAddressQueryVariables = Exact<{
+  custodialAddress: Scalars['String'];
+}>;
+
+
+export type AccountByCustodialAddressQuery = (
+  { __typename?: 'Query' }
+  & { accountByCustodialAddress?: Maybe<(
+    { __typename?: 'Account' }
+    & AccountFieldsFragment
+  )> }
+);
+
 export type AccountByIdQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
@@ -8101,6 +8121,41 @@ export function useAccountByAddrLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type AccountByAddrQueryHookResult = ReturnType<typeof useAccountByAddrQuery>;
 export type AccountByAddrLazyQueryHookResult = ReturnType<typeof useAccountByAddrLazyQuery>;
 export type AccountByAddrQueryResult = Apollo.QueryResult<AccountByAddrQuery, AccountByAddrQueryVariables>;
+export const AccountByCustodialAddressDocument = gql`
+    query AccountByCustodialAddress($custodialAddress: String!) {
+  accountByCustodialAddress(custodialAddress: $custodialAddress) {
+    ...accountFields
+  }
+}
+    ${AccountFieldsFragmentDoc}`;
+
+/**
+ * __useAccountByCustodialAddressQuery__
+ *
+ * To run a query within a React component, call `useAccountByCustodialAddressQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAccountByCustodialAddressQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAccountByCustodialAddressQuery({
+ *   variables: {
+ *      custodialAddress: // value for 'custodialAddress'
+ *   },
+ * });
+ */
+export function useAccountByCustodialAddressQuery(baseOptions: Apollo.QueryHookOptions<AccountByCustodialAddressQuery, AccountByCustodialAddressQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AccountByCustodialAddressQuery, AccountByCustodialAddressQueryVariables>(AccountByCustodialAddressDocument, options);
+      }
+export function useAccountByCustodialAddressLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AccountByCustodialAddressQuery, AccountByCustodialAddressQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AccountByCustodialAddressQuery, AccountByCustodialAddressQueryVariables>(AccountByCustodialAddressDocument, options);
+        }
+export type AccountByCustodialAddressQueryHookResult = ReturnType<typeof useAccountByCustodialAddressQuery>;
+export type AccountByCustodialAddressLazyQueryHookResult = ReturnType<typeof useAccountByCustodialAddressLazyQuery>;
+export type AccountByCustodialAddressQueryResult = Apollo.QueryResult<AccountByCustodialAddressQuery, AccountByCustodialAddressQueryVariables>;
 export const AccountByIdDocument = gql`
     query AccountById($id: UUID!) {
   accountById(id: $id) {

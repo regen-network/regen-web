@@ -44,7 +44,6 @@ type UsePurchaseParams = {
   currency?: Currency;
   creditsAmount?: number;
   currencyAmount?: number;
-  email?: string | null;
   allowedDenoms?: AllowedDenom[];
 };
 type PurchaseParams = {
@@ -54,8 +53,6 @@ type PurchaseParams = {
   stateProvince?: string;
   postalCode?: string;
   retiring: boolean;
-  email?: string | null;
-  name?: string;
   savePaymentMethod?: boolean;
   createActiveAccount?: boolean;
   paymentMethodId?: string;
@@ -72,12 +69,15 @@ export const usePurchase = ({
   creditsAmount,
   currencyAmount,
   allowedDenoms,
-  email,
 }: UsePurchaseParams) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
   const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();
+  const { data } = useMultiStep<BuyCreditsSchemaTypes>();
+  const email = data?.email;
+  const name = data?.name;
+
   const setTxBuySuccessfulModalAtom = useSetAtom(txBuySuccessfulModalAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
@@ -112,7 +112,6 @@ export const usePurchase = ({
     creditsAmount,
     currencyAmount,
     displayDenom,
-    email,
   });
 
   const purchase = useCallback(
@@ -123,8 +122,6 @@ export const usePurchase = ({
       stateProvince,
       postalCode,
       retiring,
-      email,
-      name,
       savePaymentMethod,
       createActiveAccount,
       paymentMethodId,
@@ -317,7 +314,9 @@ export const usePurchase = ({
       currency,
       currencyAmount,
       displayDenom,
+      email,
       handleSuccess,
+      name,
       navigate,
       paymentOption,
       project,

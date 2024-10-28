@@ -173,7 +173,6 @@ export const BuyCreditsForm = ({
   const currency = data?.[CURRENCY];
   const creditsAmount = data?.[CREDITS_AMOUNT];
   const currencyAmount = data?.[CURRENCY_AMOUNT];
-  const email = data?.email;
 
   const allowedDenoms = useMemo(
     () => allowedDenomsData?.allowedDenoms,
@@ -188,7 +187,6 @@ export const BuyCreditsForm = ({
     creditsAmount,
     currencyAmount,
     allowedDenoms,
-    email,
   });
   const agreePurchaseFormSubmit = useCallback(
     async (
@@ -199,8 +197,6 @@ export const BuyCreditsForm = ({
       const { retirementReason, country, stateProvince, postalCode } = values;
       const {
         sellOrders: selectedSellOrders,
-        email,
-        name,
         savePaymentMethod,
         createAccount: createActiveAccount,
         // subscribeNewsletter, TODO
@@ -215,8 +211,6 @@ export const BuyCreditsForm = ({
           country,
           stateProvince,
           postalCode,
-          email,
-          name,
           savePaymentMethod,
           createActiveAccount,
           paymentMethodId,

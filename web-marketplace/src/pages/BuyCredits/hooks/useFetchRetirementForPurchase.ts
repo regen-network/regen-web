@@ -5,13 +5,10 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { timer } from 'utils/timer';
-import { L } from 'vitest/dist/chunks/reporters.C_zwCd4j';
 
 import {
   processingModalAtom,
@@ -39,7 +36,6 @@ type UseFetchRetirementForPurchaseParams = {
   creditsAmount?: number;
   currencyAmount?: number;
   displayDenom?: string;
-  email?: string | null;
 };
 export const useFetchRetirementForPurchase = ({
   paymentIntentId,
@@ -51,15 +47,17 @@ export const useFetchRetirementForPurchase = ({
   creditsAmount,
   currencyAmount,
   displayDenom,
-  email,
 }: UseFetchRetirementForPurchaseParams) => {
   const { _ } = useLingui();
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const navigate = useNavigate();
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setTxBuySuccessfulModalAtom = useSetAtom(txBuySuccessfulModalAtom);
-  const { handleSuccess } = useMultiStep<BuyCreditsSchemaTypes>();
+  const { handleSuccess, data: multiStepData } =
+    useMultiStep<BuyCreditsSchemaTypes>();
   const reactQueryClient = useQueryClient();
+  const email = multiStepData?.email;
+  const name = multiStepData?.name;
 
   const { data: txHashData, refetch: refetchTxHash } = useQuery(
     getTxHashForPaymentIntentQuery({
@@ -93,7 +91,6 @@ export const useFetchRetirementForPurchase = ({
   }, [refetchTxHash, setProcessingModalAtom, txHash]);
 
   const fetchRetirement = useCallback(async () => {
-    // setProcessingModalAtom(atom => void (atom.open = true));
     let i = 1;
     while (i < 10) {
       const res = await refetchRetirement();
@@ -148,7 +145,7 @@ export const useFetchRetirementForPurchase = ({
         queryKey: [SELL_ORDERS_EXTENTED_KEY],
       });
       handleSuccess();
-      navigate(`/certificate/${retirement.nodeId}`);
+      navigate(`/certificate/${retirement.nodeId}?name=${name}`);
     }
   }, [
     _,
@@ -158,6 +155,7 @@ export const useFetchRetirementForPurchase = ({
     displayDenom,
     email,
     handleSuccess,
+    name,
     navigate,
     paymentOption,
     project,

@@ -10,7 +10,6 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 
 import enFlag from 'assets/svgs/flags/en.svg';
 import esFlag from 'assets/svgs/flags/es.svg';
-import { ReactComponent as GlobeIcon } from 'assets/svgs/globe.svg';
 
 type Props = {
   className?: string;

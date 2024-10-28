@@ -3,12 +3,10 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
-import { useSetAtom } from 'jotai';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
-import { buyCreditsCryptoCurrencyAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
 
@@ -48,8 +46,6 @@ export const CurrencyInput = ({
     name: CURRENCY,
   });
 
-  const setBuyCurrency = useSetAtom(buyCreditsCryptoCurrencyAtom);
-
   const handleOnChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       // Remove zeros in non decimal values and update the value
@@ -73,9 +69,8 @@ export const CurrencyInput = ({
               )?.[0].askBaseDenom,
             };
       setValue(CURRENCY, currency);
-      setBuyCurrency(currency);
     },
-    [cryptoCurrencies, setBuyCurrency, setValue],
+    [cryptoCurrencies, setValue],
   );
 
   return (

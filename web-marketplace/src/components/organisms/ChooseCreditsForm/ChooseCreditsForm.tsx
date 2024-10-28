@@ -75,8 +75,6 @@ export type Props = {
   cardDetails?: CardDetails;
   goToPaymentInfo: () => void;
   card: boolean;
-  userBalance: number;
-  isUserBalanceLoading: boolean;
 };
 
 export const ChooseCreditsForm = React.memo(
@@ -102,8 +100,6 @@ export const ChooseCreditsForm = React.memo(
     cardDetails,
     goToPaymentInfo,
     card,
-    userBalance,
-    isUserBalanceLoading,
   }: Props) => {
     const { _ } = useLingui();
     const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
@@ -134,7 +130,7 @@ export const ChooseCreditsForm = React.memo(
 
     const [spendingCap, setSpendingCap] = useState(0);
     const [creditsAvailable, setCreditsAvailable] = useState(0);
-    // const [userBalance, setUserBalance] = useState(0);
+    const [userBalance, setUserBalance] = useState(0);
     const form = useZodForm({
       schema: createChooseCreditsFormSchema({
         creditsAvailable,
@@ -172,9 +168,18 @@ export const ChooseCreditsForm = React.memo(
       name: CURRENCY_AMOUNT,
     });
 
+    const { isLoading: isUserBalanceLoading, userBalance: _userBalance } =
+      useFetchUserBalance(currency?.askDenom);
+
     useEffect(() => {
-      form.trigger(CURRENCY_AMOUNT);
-    }, [userBalance, form]);
+      setUserBalance(_userBalance);
+    }, [_userBalance]);
+
+    useEffect(() => {
+      if (currency.askDenom !== USD_DENOM) {
+        form.trigger(CURRENCY_AMOUNT);
+      }
+    }, [userBalance, form, currency.askDenom]);
 
     const filteredCryptoSellOrders = useMemo(
       () =>

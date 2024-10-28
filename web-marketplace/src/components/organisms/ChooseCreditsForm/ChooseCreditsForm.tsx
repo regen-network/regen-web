@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
-import { USD_DENOM } from 'config/allowedBaseDenoms';
+import { REGEN_DENOM, USD_DENOM } from 'config/allowedBaseDenoms';
 import { useSetAtom } from 'jotai';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import {
@@ -26,15 +26,17 @@ import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNex
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
-import { microToDenom } from 'lib/denom.utils';
 
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import {
+  BuyCreditsSchemaTypes,
   CardDetails,
   PaymentOptionsType,
 } from 'pages/BuyCredits/BuyCredits.types';
-import { getCreditsAvailableBannerText } from 'pages/BuyCredits/BuyCredits.utils';
-import { useFetchUserBalance } from 'pages/BuyCredits/hooks/useFetchUserBalance';
+import {
+  getCreditsAvailableBannerText,
+  updateMultiStepCurrency,
+} from 'pages/BuyCredits/BuyCredits.utils';
 import {
   ProjectWithOrderData,
   UISellOrderInfo,
@@ -43,6 +45,7 @@ import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types
 import { getCurrencyAmount } from 'components/molecules/CreditsAmount/CreditsAmount.utils';
 import { AllowedDenoms } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSummaryCard';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { CryptoOptions } from './ChooseCreditsForm.CryptoOptions';
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
@@ -75,6 +78,8 @@ export type Props = {
   cardDetails?: CardDetails;
   goToPaymentInfo: () => void;
   card: boolean;
+  isUserBalanceLoading: boolean;
+  userBalance: number;
 };
 
 export const ChooseCreditsForm = React.memo(
@@ -100,9 +105,13 @@ export const ChooseCreditsForm = React.memo(
     cardDetails,
     goToPaymentInfo,
     card,
+    isUserBalanceLoading,
+    userBalance,
   }: Props) => {
     const { _ } = useLingui();
     const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+    const { data, handleSave, activeStep } =
+      useMultiStep<BuyCreditsSchemaTypes>();
 
     const cryptoCurrencies = useMemo(
       () =>
@@ -130,7 +139,6 @@ export const ChooseCreditsForm = React.memo(
 
     const [spendingCap, setSpendingCap] = useState(0);
     const [creditsAvailable, setCreditsAvailable] = useState(0);
-    const [userBalance, setUserBalance] = useState(0);
     const form = useZodForm({
       schema: createChooseCreditsFormSchema({
         creditsAvailable,
@@ -167,13 +175,6 @@ export const ChooseCreditsForm = React.memo(
       control: form.control,
       name: CURRENCY_AMOUNT,
     });
-
-    const { isLoading: isUserBalanceLoading, userBalance: _userBalance } =
-      useFetchUserBalance(currency?.askDenom);
-
-    useEffect(() => {
-      setUserBalance(_userBalance);
-    }, [_userBalance]);
 
     useEffect(() => {
       if (currency.askDenom !== USD_DENOM) {
@@ -219,8 +220,21 @@ export const ChooseCreditsForm = React.memo(
               ? cardCurrency
               : defaultCryptoCurrency,
         });
+        const currency =
+          option !== PAYMENT_OPTIONS.CARD
+            ? { askDenom: REGEN_DENOM, askBaseDenom: REGEN_DENOM }
+            : { askDenom: USD_DENOM, askBaseDenom: USD_DENOM };
+        updateMultiStepCurrency(handleSave, data, currency, activeStep);
       },
-      [setPaymentOption, form, cardCurrency, defaultCryptoCurrency],
+      [
+        form,
+        cardCurrency,
+        defaultCryptoCurrency,
+        handleSave,
+        data,
+        activeStep,
+        setPaymentOption,
+      ],
     );
 
     useEffect(() => {
@@ -229,6 +243,7 @@ export const ChooseCreditsForm = React.memo(
         setPaymentOption(PAYMENT_OPTIONS.CARD);
         form.setValue(CREDIT_VINTAGE_OPTIONS, []);
         form.setValue(CURRENCY, cardCurrency);
+        updateMultiStepCurrency(handleSave, data, cardCurrency, activeStep);
       }
     }, [cardSellOrders.length, initialPaymentOption]); // just run this once
 

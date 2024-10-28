@@ -22,7 +22,10 @@ import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchUserBalance } from 'pages/BuyCredits/hooks/useFetchUserBalance';
-import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import {
+  ProjectWithOrderData,
+  UISellOrderInfo,
+} from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,

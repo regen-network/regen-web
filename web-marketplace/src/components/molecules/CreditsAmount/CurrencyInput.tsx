@@ -8,7 +8,10 @@ import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/orga
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
+import { updateMultiStepCurrency } from 'pages/BuyCredits/BuyCredits.utils';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import { CURRENCY, CURRENCY_AMOUNT } from './CreditsAmount.constants';
@@ -38,6 +41,8 @@ export const CurrencyInput = ({
     control,
   } = useFormContext<ChooseCreditsFormSchemaType>();
   const { _ } = useLingui();
+  const { data, handleSave, activeStep } =
+    useMultiStep<BuyCreditsSchemaTypes>();
 
   const { onChange } = register(CURRENCY_AMOUNT);
 
@@ -69,8 +74,9 @@ export const CurrencyInput = ({
               )?.[0].askBaseDenom,
             };
       setValue(CURRENCY, currency);
+      updateMultiStepCurrency(handleSave, data, currency, activeStep);
     },
-    [cryptoCurrencies, setValue],
+    [activeStep, cryptoCurrencies, data, handleSave, setValue],
   );
 
   return (

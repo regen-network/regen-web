@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.4](https://github.com/regen-network/regen-web/compare/v2.7.3...v2.7.4) (2024-10-25)
+
+### Bug Fixes
+
+- install error ([544903c](https://github.com/regen-network/regen-web/commit/544903cb71499b81c34b21e9b95e6d17a4bdab1f))
+
 ## [2.7.3](https://github.com/regen-network/regen-web/compare/v2.7.2...v2.7.3) (2024-09-24)
 
 ### Bug Fixes

@@ -1,0 +1,5 @@
+query AccountByCustodialAddress($custodialAddress: String!) {
+  accountByCustodialAddress(custodialAddress: $custodialAddress) {
+    ...accountFields
+  }
+}

@@ -8,6 +8,8 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 
+import enFlag from 'assets/svgs/flags/en.svg';
+import esFlag from 'assets/svgs/flags/es.svg';
 import { ReactComponent as GlobeIcon } from 'assets/svgs/globe.svg';
 
 type Props = {
@@ -18,6 +20,8 @@ export const LanguageSwitcher = ({ className }: Props) => {
   const [selectedLanguage, setSelectedLanguage] = useAtom(selectedLanguageAtom);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const isEnglish = selectedLanguage === 'en';
+  const flagUrl = isEnglish ? enFlag : esFlag;
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -35,9 +39,13 @@ export const LanguageSwitcher = ({ className }: Props) => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <GlobeIcon className="mr-[6px] text-[14px] font-normal" />
-        {selectedLanguage === 'en' ? 'English' : 'Español'}
-        <BreadcrumbIcon className="w-[12px] h-[12px] ml-10" />
+        <img
+          src={flagUrl}
+          alt={isEnglish ? 'English' : 'Español'}
+          className="mr-[6px]"
+        />
+        {isEnglish ? 'English' : 'Español'}
+        <BreadcrumbIcon className="w-[6px] h-[6px] ml-10" />
       </ButtonBase>
       <Menu
         id="language-switcher-menu"
@@ -47,24 +55,37 @@ export const LanguageSwitcher = ({ className }: Props) => {
         MenuListProps={{
           'aria-labelledby': 'language-switcher-button',
         }}
+        sx={{
+          '& .MuiList-root': {
+            paddingY: '0',
+          },
+        }}
         className="mt-10"
       >
-        <MenuItem
-          onClick={() => {
-            handleClose();
-            setSelectedLanguage('en');
-          }}
-        >
-          English
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            handleClose();
-            setSelectedLanguage('es');
-          }}
-        >
-          Español
-        </MenuItem>
+        {!isEnglish && (
+          <MenuItem
+            onClick={() => {
+              handleClose();
+              setSelectedLanguage('en');
+            }}
+            className="flex items-center py-2"
+          >
+            <img src={enFlag} alt="English" className="mr-[6px]" /> English
+            (Inglés)
+          </MenuItem>
+        )}
+        {isEnglish && (
+          <MenuItem
+            onClick={() => {
+              handleClose();
+              setSelectedLanguage('es');
+            }}
+            className="flex items-center py-2"
+          >
+            <img src={esFlag} alt="Español" className="mr-[6px]" /> Español
+            (Spanish)
+          </MenuItem>
+        )}
       </Menu>
     </div>
   );

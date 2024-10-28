@@ -12,7 +12,11 @@ msgstr ""
 "POT-Creation-Date: 2024-10-22 13:51+0100\n"
 =======
 "POT-Creation-Date: 2024-10-23 12:22+0100\n"
+<<<<<<< HEAD
 >>>>>>> 87cf6bc37 (chore: generate .po files)
+=======
+"POT-Creation-Date: 2024-10-28 09:13+0000\n"
+>>>>>>> 9fe41830a (chore: generate .po files)
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -83,10 +87,6 @@ msgstr ""
 msgid "{from}–{displayedTo} of more than {to}"
 msgstr ""
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:85
-msgid "{price} {displayDenom}/credit:"
-msgstr ""
-
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:329
 msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} character remaining} other {{remainingCaptionCharacters} characters remaining}}"
 msgstr ""
@@ -123,6 +123,9 @@ msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:88
 #: src/components/organisms/Order/Order.Summary.tsx:85
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:93
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:93
+#: src/components/organisms/Order/Order.Summary.tsx:83
 msgid "# credits"
 msgstr ""
 
@@ -177,6 +180,8 @@ msgid "+Create project"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:131
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:140
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:140
 msgid "<0>{0}</0> ending in {1}"
 msgstr ""
 
@@ -275,6 +280,7 @@ msgstr ""
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:52
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:18
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:18
 msgid "About Us"
 msgstr ""
 
@@ -287,6 +293,8 @@ msgid "Acres"
 msgstr ""
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:118
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:114
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:114
 msgid "Act now"
 msgstr ""
 
@@ -407,6 +415,7 @@ msgstr ""
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
 #: src/pages/Projects/Projects.tsx:74
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
 #: src/pages/Projects/Projects.tsx:74
 msgid "All projects"
 msgstr ""
@@ -553,6 +562,7 @@ msgid "Area Actions"
 msgstr ""
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:57
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:57
 msgid "Articles"
 msgstr ""
 
@@ -589,6 +599,8 @@ msgid "Avg Price"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:75
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:76
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:76
 msgid "avg price per credit"
 msgstr ""
 
@@ -721,6 +733,8 @@ msgstr ""
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
 #: src/features/marketplace/BridgeFlow/BridgeFlow.constants.ts:4
 #: src/pages/Dashboard/Dashboard.constants.tsx:48
+#: src/pages/Dashboard/Dashboard.constants.tsx:48
+#: src/pages/Dashboard/Dashboard.constants.tsx:45
 msgid "Bridge"
 msgstr ""
 
@@ -753,6 +767,7 @@ msgid "Buy"
 msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:5
 msgid "BUY"
 msgstr ""
@@ -769,6 +784,7 @@ msgstr ""
 msgid "buy credits"
 msgstr ""
 
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
 msgid "BUY CREDITS"
@@ -895,6 +911,8 @@ msgid "change admin"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:139
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:148
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:148
 msgid "Change payment card"
 msgstr ""
 
@@ -933,10 +951,6 @@ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:59
 msgid "Choose a practice start date"
-msgstr ""
-
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:166
-msgid "Choose a sell order"
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:192
@@ -988,6 +1002,7 @@ msgstr ""
 msgid "Class ID: unique identifier of the credit class on Regen Ledger."
 msgstr ""
 
+#: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:176
 #: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:176
 #: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:176
 msgid "Clear all"
@@ -1094,6 +1109,7 @@ msgid "Consumer/Individual/myself"
 msgstr ""
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:73
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:69
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:69
 msgid "Contact"
 msgstr ""
@@ -1232,6 +1248,8 @@ msgstr ""
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:243
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
 #: src/pages/Dashboard/Dashboard.constants.tsx:42
+#: src/pages/Dashboard/Dashboard.constants.tsx:42
+#: src/pages/Dashboard/Dashboard.constants.tsx:39
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:93
 msgid "Credit Batches"
 msgstr ""
@@ -1291,6 +1309,8 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:28
 #: src/pages/Dashboard/Dashboard.constants.tsx:36
+#: src/pages/Dashboard/Dashboard.constants.tsx:36
+#: src/pages/Dashboard/Dashboard.constants.tsx:33
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:87
 #: src/pages/Home/Home.tsx:183
 msgid "Credit Classes"
@@ -1345,6 +1365,7 @@ msgstr ""
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:226
 #: src/components/organisms/Order/Order.Summary.tsx:68
+#: src/components/organisms/Order/Order.Summary.tsx:59
 msgid "Credits"
 msgstr ""
 
@@ -1452,6 +1473,7 @@ msgid "CURRENCY DENOM"
 msgstr ""
 
 #: src/components/molecules/CreditsAmount/CurrencyInput.tsx:95
+#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:99
 msgid "Currency Input"
 msgstr ""
 
@@ -1678,6 +1700,8 @@ msgid "edit"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:95
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:100
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:100
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:76
 #: src/lib/constants/shared.constants.tsx:22
 msgid "Edit"
@@ -1698,6 +1722,8 @@ msgstr ""
 #: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:38
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:115
 #: src/pages/Dashboard/Dashboard.constants.tsx:54
+#: src/pages/Dashboard/Dashboard.constants.tsx:54
+#: src/pages/Dashboard/Dashboard.constants.tsx:51
 msgid "Edit profile"
 msgstr ""
 
@@ -1722,6 +1748,8 @@ msgid "Edit your file"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:94
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:99
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:99
 msgid "Editable credits"
 msgstr ""
 
@@ -1803,6 +1831,7 @@ msgstr ""
 msgid "Explore"
 msgstr ""
 
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:34
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:34
 msgid "Explore Banks"
 msgstr ""
@@ -1901,6 +1930,7 @@ msgid "Forestry-based credits"
 msgstr ""
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:65
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:65
 msgid "Frequently Asked Questions"
 msgstr ""
 
@@ -1913,6 +1943,7 @@ msgid "Gallery photos"
 msgstr ""
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:68
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:45
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:45
 msgid "Geo-Viewer"
 msgstr ""
@@ -1930,6 +1961,7 @@ msgid "Grasslands-based credits"
 msgstr ""
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:60
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:26
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:26
 msgid "Habitat banks"
 msgstr ""
@@ -1958,6 +1990,7 @@ msgstr ""
 msgid "Highly significant"
 msgstr ""
 
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:14
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:14
 msgid "Home"
 msgstr ""
@@ -2060,6 +2093,8 @@ msgstr ""
 msgid "info with hand"
 msgstr ""
 
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:30
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:49
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:30
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:49
 msgid "Information"
@@ -2422,10 +2457,6 @@ msgstr ""
 msgid "Must be a date in the past"
 msgstr ""
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:248
-msgid "Must be less than or equal to the max credit(s) available ({creditAvailable})."
-msgstr ""
-
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:5
 #: src/lib/constants/shared.constants.tsx:82
 msgid "Must be positive"
@@ -2485,6 +2516,7 @@ msgstr ""
 msgid "new project admin"
 msgstr ""
 
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:53
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:53
 msgid "News"
 msgstr ""
@@ -2620,6 +2652,8 @@ msgid "or, log in with email / social"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:66
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:67
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:67
 msgid "Order Summary"
 msgstr ""
 
@@ -2652,6 +2686,8 @@ msgid "partners"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:123
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:132
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:132
 msgid "payment"
 msgstr ""
 
@@ -2776,6 +2812,8 @@ msgid "Please wait while transaction processes"
 msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:24
+#: src/pages/Dashboard/Dashboard.constants.tsx:24
+#: src/pages/Dashboard/Dashboard.constants.tsx:21
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:74
 msgid "Portfolio"
 msgstr ""
@@ -2825,6 +2863,7 @@ msgstr ""
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:49
 #: src/pages/Projects/Projects.tsx:84
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:54
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:49
 #: src/pages/Projects/Projects.tsx:84
 msgid "Prefinance projects"
 msgstr ""
@@ -2915,11 +2954,16 @@ msgid "Proceed with caution: this cannot be undone!"
 msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:81
+#: src/pages/Dashboard/Dashboard.constants.tsx:81
+#: src/pages/ProfileEdit/ProfileEdit.Nav.tsx:22
 msgid "profile"
 msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:35
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:7
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:35
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:7
+#: src/pages/ProfileEdit/ProfileEdit.constants.ts:7
 msgid "Profile"
 msgstr ""
 
@@ -2937,6 +2981,8 @@ msgid "Profile not found"
 msgstr ""
 
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:9
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:9
+#: src/pages/ProfileEdit/ProfileEdit.constants.ts:9
 msgid "Profile Saved"
 msgstr ""
 
@@ -2954,6 +3000,8 @@ msgid "Program Guide"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:69
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:70
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:70
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:124
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105
@@ -2992,11 +3040,14 @@ msgstr "<<<<<<< HEAD"
 =======
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:149
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:149
+<<<<<<< HEAD
 >>>>>>> 58e42a15a (chore: generate .po files)
 >>>>>>> 6bf7c43a7 (chore: generate .po files)
 =======
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:149
 >>>>>>> 6fe35e1ee (chore: generate .po files)
+=======
+>>>>>>> 9fe41830a (chore: generate .po files)
 msgid "Project {onChainProjectId}"
 msgstr ""
 
@@ -3148,10 +3199,17 @@ msgstr ""
 =======
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:68
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
+<<<<<<< HEAD
 >>>>>>> 6fe35e1ee (chore: generate .po files)
+=======
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:36
+>>>>>>> 9fe41830a (chore: generate .po files)
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:24
-#: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
+#: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:43
 #: src/pages/Dashboard/Dashboard.constants.tsx:30
+#: src/pages/Dashboard/Dashboard.constants.tsx:30
+#: src/pages/Dashboard/Dashboard.constants.tsx:27
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:81
 msgid "Projects"
 msgstr ""
@@ -3168,6 +3226,7 @@ msgstr ""
 msgid "public profile tabs"
 msgstr ""
 
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:61
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:61
 msgid "Publications"
 msgstr ""
@@ -3340,10 +3399,6 @@ msgstr ""
 msgid "Retirable"
 msgstr ""
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:185
-msgid "RETIRABLE ONLY"
-msgstr ""
-
 #: src/components/organisms/CreditRetireForm/CreditRetireForm.tsx:136
 #: src/components/organisms/Modals/CreditRetireModal/CreditRetireModal.constants.ts:3
 msgid "Retire"
@@ -3415,6 +3470,7 @@ msgstr ""
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:61
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:501
 #: src/components/organisms/Order/Order.Summary.tsx:118
+#: src/components/organisms/Order/Order.Summary.tsx:125
 #: src/lib/constants/shared.constants.tsx:145
 #: src/pages/Certificate/Certificate.constants.ts:17
 msgid "Retirement reason"
@@ -3462,10 +3518,6 @@ msgstr ""
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CardInfo.tsx:52
 msgid "Save my credit card info for next time"
-msgstr ""
-
-#: src/pages/Dashboard/Dashboard.constants.tsx:103
-msgid "Saved payment info"
 msgstr ""
 
 #: src/components/organisms/AccountConnectWalletModal/components/AccountConnectWalletModal.Mobile.constants.ts:4
@@ -3524,6 +3576,7 @@ msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:154
 #: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:154
+#: src/pages/Projects/AllProjects/AllProjects.SideFilter.tsx:154
 msgid "Select all"
 msgstr ""
 
@@ -3580,6 +3633,7 @@ msgid "Sender"
 msgstr ""
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:22
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:22
 msgid "Services"
 msgstr ""
 
@@ -3592,12 +3646,16 @@ msgstr ""
 msgid "set up a Keplr wallet →"
 msgstr ""
 
+#: src/pages/ProfileEdit/ProfileEdit.Nav.tsx:23
 #: src/pages/ProjectEdit/ProjectEdit.Nav.tsx:29
 msgid "settings"
 msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:43
 #: src/pages/Dashboard/Dashboard.constants.tsx:62
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:43
+#: src/pages/Dashboard/Dashboard.constants.tsx:62
+#: src/pages/Dashboard/Dashboard.constants.tsx:59
 #: src/pages/Settings/Settings.tsx:52
 msgid "Settings"
 msgstr ""
@@ -4181,6 +4239,9 @@ msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:106
 #: src/components/organisms/Order/Order.Summary.tsx:91
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:111
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:111
+#: src/components/organisms/Order/Order.Summary.tsx:89
 msgid "total price"
 msgstr ""
 
@@ -4198,10 +4259,6 @@ msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:101
 msgid "Tradable"
-msgstr ""
-
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:175
-msgid "TRADABLE AND RETIRABLE"
 msgstr ""
 
 #: src/components/organisms/Order/Order.Summary.tsx:112
@@ -4246,6 +4303,8 @@ msgstr ""
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:69
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:12
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:12
+#: src/pages/ProfileEdit/ProfileEdit.constants.ts:12
 msgid "Unnamed"
 msgstr ""
 
@@ -4258,6 +4317,8 @@ msgid "Untitled"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:96
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:101
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:101
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:68
 msgid "update"
 msgstr ""
@@ -4434,6 +4495,8 @@ msgid "view post"
 msgstr ""
 
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
+#: src/pages/ProfileEdit/ProfileEdit.constants.ts:8
 msgid "View Profile"
 msgstr ""
 
@@ -4535,6 +4598,7 @@ msgid "We've just sent a confirmation email to:"
 msgstr ""
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:64
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:41
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:41
 msgid "What is Tebu"
 msgstr ""
@@ -4650,10 +4714,6 @@ msgstr ""
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:6
 msgid "You don’t have enough"
-msgstr ""
-
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:244
-msgid "You don’t have enough {displayDenom}."
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:33

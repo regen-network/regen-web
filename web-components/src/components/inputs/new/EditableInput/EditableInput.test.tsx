@@ -41,9 +41,7 @@ describe('EditableInput', () => {
       name: 'Edit',
     });
     fireEvent.click(editButton);
-    const input = screen.getByRole('textbox', {
-      name: 'testEditableInput',
-    });
+    const input = screen.getByTestId('editable-input');
     expect(input).toBeInTheDocument();
 
     const updateButton = screen.getByRole('button', {
@@ -70,9 +68,7 @@ describe('EditableInput', () => {
     });
     fireEvent.click(editButton);
 
-    const input = screen.getByRole('textbox', {
-      name: 'testEditableInput',
-    });
+    const input = screen.getByTestId('editable-input');
     fireEvent.change(input, { target: { value: '200' } });
 
     const updateButton = screen.getByRole('button', {

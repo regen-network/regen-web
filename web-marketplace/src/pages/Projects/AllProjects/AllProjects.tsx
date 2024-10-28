@@ -14,6 +14,7 @@ import { NoProjectIcon } from 'web-components/src/components/icons/NoProjectIcon
 import SelectTextFieldBase from 'web-components/src/components/inputs/SelectTextFieldBase';
 import { Loading } from 'web-components/src/components/loading';
 import { Pagination } from 'web-components/src/components/pagination/Pagination';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Body } from 'web-components/src/components/typography';
 import { pxToRem } from 'web-components/src/theme/muiTheme';
 
@@ -51,13 +52,18 @@ import {
   sortOptions,
 } from './AllProjects.config';
 import {
+  COMPLIANCE_MARKET,
   EMPTY_PROJECTS_LABEL,
   RESET_FILTERS_LABEL,
+  VOLUNTARY_MARKET_TOOLTIP,
 } from './AllProjects.constants';
 import { normalizeCreditClassFilters } from './AllProjects.normalizers';
 import { SideFilter } from './AllProjects.SideFilter';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
 import { getIsSoldOut } from './utils/getIsSoldOut';
+
+import hectaresLogo from 'assets/pngs/logos/hectares.png';
+import tebuLogo from 'assets/pngs/logos/tebu.png';
 
 export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
@@ -232,6 +238,8 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
       )}
       {projects?.map(project => {
         const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
+        const isComplianceProject = project.marketType === COMPLIANCE_MARKET;
+
         return (
           <Box key={project?.id}>
             <ProjectCard
@@ -270,7 +278,33 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               purchaseDetailsTitles={purchaseDetailsTitles}
               buttons={buttons}
               useProjectCardButton={IS_REGEN}
-              hasBottomCard={IS_REGEN}
+              creditIcon={
+                <>
+                  <InfoTooltip
+                    arrow
+                    placement="top"
+                    title={_(VOLUNTARY_MARKET_TOOLTIP)}
+                  >
+                    <img src={tebuLogo} alt="tebu" className="ml-3" />
+                  </InfoTooltip>
+                  {isComplianceProject && (
+                    <span className="flex items-center ml-5">
+                      0
+                      <InfoTooltip
+                        arrow
+                        placement="top"
+                        title={_(VOLUNTARY_MARKET_TOOLTIP)}
+                      >
+                        <img
+                          src={hectaresLogo}
+                          alt="hectares"
+                          className="ml-[3px]"
+                        />
+                      </InfoTooltip>
+                    </span>
+                  )}
+                </>
+              }
             />
           </Box>
         );

@@ -33,6 +33,7 @@ export interface AnchoredProjectMetadataBaseLD {
     'schema:url': string;
     'schema:creditText'?: string;
   };
+  marketType?: string;
 }
 
 /** Un-anchored metadata from our DB. This is editable without a Ledger TX. */

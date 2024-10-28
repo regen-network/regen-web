@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Box, SxProps } from '@mui/material';
 
 import GradientBadge from '../../../components/gradient-badge';
@@ -19,6 +20,7 @@ type Props = {
   sx?: SxProps<Theme>;
   projectPrefinancing?: ProjectPrefinancing;
   bodyTexts: ProjectCardBodyTextsMapping;
+  creditIcon?: ReactNode;
 };
 
 export const CreditPrice = ({
@@ -28,6 +30,7 @@ export const CreditPrice = ({
   isSoldOut,
   projectPrefinancing,
   bodyTexts,
+  creditIcon,
   sx,
 }: Props) => {
   const avgPricePerTonLabel = purchaseInfo?.sellInfo?.avgPricePerTonLabel;
@@ -130,6 +133,7 @@ export const CreditPrice = ({
               {purchaseInfo?.sellInfo?.creditsAvailable ??
                 projectPrefinancing?.estimatedIssuance ??
                 '0'}
+              {creditIcon}
               {isSoldOut && (
                 <GradientBadge
                   className="ml-5"

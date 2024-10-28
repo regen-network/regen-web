@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
@@ -68,6 +68,7 @@ export interface ProjectCardProps extends MediaCardProps {
   buttons: ProjectCardButtonsMapping;
   useProjectCardButton?: boolean;
   hasBottomCard?: boolean;
+  creditIcon?: ReactNode;
 }
 
 export function ProjectCard({
@@ -107,6 +108,7 @@ export function ProjectCard({
   buttons,
   useProjectCardButton = true,
   hasBottomCard = true,
+  creditIcon,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
@@ -265,7 +267,9 @@ export function ProjectCard({
                 />
               )}
               <>
-                {!offChain || projectPrefinancing?.isPrefinanceProject ? (
+                {!offChain ||
+                projectPrefinancing?.isPrefinanceProject ||
+                true ? (
                   <CreditPrice
                     bodyTexts={bodyTexts}
                     priceTooltip={
@@ -278,6 +282,7 @@ export function ProjectCard({
                     purchaseInfo={purchaseInfo}
                     sx={{ mb: 5 }}
                     projectPrefinancing={projectPrefinancing}
+                    creditIcon={creditIcon}
                   />
                 ) : (
                   <div className="h-[68px]">

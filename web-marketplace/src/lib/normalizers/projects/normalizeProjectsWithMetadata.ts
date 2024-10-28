@@ -115,6 +115,7 @@ export type NormalizeProject = ProjectWithOrderData & {
   area?: number;
   cardSellOrders?: Array<CardSellOrder>;
   filteredSellOrders?: Array<UISellOrderInfo>;
+  marketType?: string;
 };
 export const normalizeProjectWithMetadata = ({
   offChainProject,
@@ -155,6 +156,7 @@ export const normalizeProjectWithMetadata = ({
     ...projectWithOrderData,
     id: projectId,
     type: projectMetadata?.['@type'] ?? projectPageMetadata?.['@type'],
+    marketType: projectMetadata?.['marketType'],
     offChainId: offChainProject?.id,
     slug: offChainProject?.slug ?? projectWithOrderData?.slug,
     draft: !projectWithOrderData && !offChainProject?.published,

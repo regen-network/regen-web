@@ -12,3 +12,6 @@ export const COMMUNITY_FILTER_LABEL = msg`Community Credits`;
 export const EMPTY_PROJECTS_LABEL = msg`No matching results found`;
 export const UNREGISTERED_PATH = 'unregistered';
 export const UNREGISTERED_PROJECTS = msg`Unregistered projects`;
+export const COMPLIANCE_MARKET = 'COMPLIANCE MARKET';
+export const COMPLIANCE_MARKET_TOOLTIP = msg`Compliance credits are mandatory to meet government regulations.`;
+export const VOLUNTARY_MARKET_TOOLTIP = msg`Voluntary credits are purchased for environmental responsibility without legal obligation.`;

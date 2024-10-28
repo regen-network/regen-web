@@ -33,7 +33,7 @@ export const RegistryLayoutTxSuccessfulModal = (): JSX.Element => {
   const txHashUrl = getHashUrl(txHash);
 
   useEffect(() => {
-    // onClose();
+    onClose();
   }, [location, onClose]);
 
   return (

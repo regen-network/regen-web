@@ -67,6 +67,7 @@ export interface ProjectCardProps extends MediaCardProps {
   purchaseDetailsTitles: ProjectCardTitlesMapping;
   buttons: ProjectCardButtonsMapping;
   useProjectCardButton?: boolean;
+  hasBottomCard?: boolean;
 }
 
 export function ProjectCard({
@@ -105,6 +106,7 @@ export function ProjectCard({
   purchaseDetailsTitles,
   buttons,
   useProjectCardButton = true,
+  hasBottomCard = true,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
@@ -192,10 +194,10 @@ export function ProjectCard({
           <span className={classes.comingSoonText}>{bodyTexts.comingSoon}</span>
         </div>
       )}
-      {(purchaseInfo || isPrefinanceProject || offChain) && (
+      {(purchaseInfo || isPrefinanceProject || offChain) && hasBottomCard && (
         <div className={classes.separator} />
       )}
-      {(purchaseInfo || hasButton || isPrefinanceProject) && (
+      {(purchaseInfo || hasButton || isPrefinanceProject) && hasBottomCard && (
         <div className={classes.purchaseInfo}>
           {purchaseInfo?.units && (
             <>

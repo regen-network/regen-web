@@ -32,7 +32,7 @@ export const getTerrasosHeaderItems = (
       },
       {
         label: _(msg`Explore Banks`),
-        href: 'https://www.terrasos.co/bancos-de-habitat/',
+        href: '/projects/1',
         default: true,
       },
     ],

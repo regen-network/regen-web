@@ -3415,7 +3415,6 @@ export type FiatOrder = Node & {
   projectOnChainId: Scalars['String'];
   customerName?: Maybe<Scalars['String']>;
   anonymous: Scalars['Boolean'];
-  customerName?: Maybe<Scalars['String']>;
   /** Reads a single `Account` that is related to this `FiatOrder`. */
   accountByAccountId?: Maybe<Account>;
 };
@@ -3449,8 +3448,6 @@ export type FiatOrderCondition = {
   customerName?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `anonymous` field. */
   anonymous?: Maybe<Scalars['Boolean']>;
-  /** Checks for equality with the object’s `customerName` field. */
-  customerName?: Maybe<Scalars['String']>;
 };
 
 /** An input for mutations affecting `FiatOrder` */
@@ -3467,7 +3464,6 @@ export type FiatOrderInput = {
   projectOnChainId: Scalars['String'];
   customerName?: Maybe<Scalars['String']>;
   anonymous?: Maybe<Scalars['Boolean']>;
-  customerName?: Maybe<Scalars['String']>;
 };
 
 /** Represents an update to a `FiatOrder`. Fields that are set will be updated. */
@@ -3484,7 +3480,6 @@ export type FiatOrderPatch = {
   projectOnChainId?: Maybe<Scalars['String']>;
   customerName?: Maybe<Scalars['String']>;
   anonymous?: Maybe<Scalars['Boolean']>;
-  customerName?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `FiatOrder` values. */
@@ -3536,8 +3531,6 @@ export enum FiatOrdersOrderBy {
   CustomerNameDesc = 'CUSTOMER_NAME_DESC',
   AnonymousAsc = 'ANONYMOUS_ASC',
   AnonymousDesc = 'ANONYMOUS_DESC',
-  CustomerNameAsc = 'CUSTOMER_NAME_ASC',
-  CustomerNameDesc = 'CUSTOMER_NAME_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }

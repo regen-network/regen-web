@@ -30,6 +30,7 @@ describe('OrderSummaryCard', () => {
     onClickEditCard: vi.fn(),
     setCreditsAmount: vi.fn(),
     creditsAvailable: 100,
+    userBalance: 1000,
   };
 
   it('displays the project name', () => {

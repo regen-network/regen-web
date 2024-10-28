@@ -6,13 +6,7 @@ import { microToDenom } from 'lib/denom.utils';
 import { getAllBalancesQuery } from 'lib/queries/react-query/cosmos/bank/getAllBalancesQuery/getAllBalancesQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-export const useFetchUserBalance = (
-  askDenom?: string,
-): {
-  isLoading: boolean;
-  userBalance: number;
-  microUserBalance: number;
-} => {
+export const useFetchUserBalance = (askDenom?: string) => {
   const { wallet } = useWallet();
   const { bankClient } = useLedger();
   const {

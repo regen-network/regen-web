@@ -18,6 +18,8 @@ interface EditableInputProps {
   updateButtonText: string;
   className?: string;
   onInvalidValue?: () => void;
+  onKeyDown?: (credits: number) => void;
+  hasError?: boolean;
 }
 
 export const EditableInput = ({
@@ -30,6 +32,8 @@ export const EditableInput = ({
   updateButtonText,
   className = '',
   onInvalidValue,
+  onKeyDown,
+  hasError,
 }: EditableInputProps) => {
   const [editable, setEditable] = useState(false);
   const [amount, setAmount] = useState(value);
@@ -55,7 +59,7 @@ export const EditableInput = ({
   };
 
   const handleOnUpdate = () => {
-    if (!amountValid) return;
+    if (!amountValid || hasError) return;
     onChange(+amount);
     toggleEditable();
   };
@@ -67,6 +71,10 @@ export const EditableInput = ({
       handleOnUpdate();
     }
   };
+
+  useEffect(() => {
+    onKeyDown && onKeyDown(amount);
+  }, [amount, onKeyDown]);
 
   const amountValid = useMemo(
     () => amount <= maxValue && amount > 0,
@@ -95,7 +103,7 @@ export const EditableInput = ({
           />
           <TextButton
             className={`lowercase text-[12px] mt-5 sm:mt-0 font-sans ${
-              amountValid
+              amountValid && !hasError
                 ? ''
                 : 'text-grey-300 hover:text-grey-300 cursor-default'
             }`}

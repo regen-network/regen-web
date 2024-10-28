@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
@@ -11,6 +11,7 @@ import {
   CardDetails,
   PaymentOptionsType,
 } from 'pages/BuyCredits/BuyCredits.types';
+import { NOT_ENOUGH_BALANCE } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 
 import { AmountWithCurrency } from '../AmountWithCurrency/AmountWithCurrency';
 import {
@@ -30,6 +31,7 @@ type Props = {
   setCreditsAmount: (creditsAmount: number) => void;
   creditsAvailable: number;
   onInvalidCredits?: () => void;
+  userBalance: number;
 };
 
 export function OrderSummaryContent({
@@ -41,6 +43,7 @@ export function OrderSummaryContent({
   setCreditsAmount,
   creditsAvailable,
   onInvalidCredits,
+  userBalance,
 }: Props) {
   const { _ } = useLingui();
 
@@ -55,6 +58,17 @@ export function OrderSummaryContent({
         baseDenom: currency.askBaseDenom,
       }),
     [allowedDenoms, currency.askBaseDenom, currency.askDenom],
+  );
+
+  const [hasError, setHasError] = useState(false);
+
+  const handleOnKeyDown = useCallback(
+    (credits: number) => {
+      setHasError(
+        credits * pricePerCredit > 10 && paymentOption !== PAYMENT_OPTIONS.CARD,
+      );
+    },
+    [paymentOption, pricePerCredit],
   );
 
   return (
@@ -91,12 +105,19 @@ export function OrderSummaryContent({
           value={credits}
           maxValue={creditsAvailable}
           onChange={setCreditsAmount}
+          onKeyDown={handleOnKeyDown}
           inputAriaLabel={_(msg`Editable credits`)}
           editButtonAriaLabel={_(msg`Edit`)}
           updateButtonText={_(msg`update`)}
           name="editable-credits"
           onInvalidValue={onInvalidCredits}
+          hasError={hasError}
         />
+        {hasError && (
+          <div className="pt-5 text-error-300 text-sm w-full">
+            {`${_(NOT_ENOUGH_BALANCE)} ${displayDenom}`}
+          </div>
+        )}
       </div>
       <div className="col-span-full pt-10">
         <hr className="border-t border-grey-300 border-solid border-l-0 border-r-0 border-b-0" />

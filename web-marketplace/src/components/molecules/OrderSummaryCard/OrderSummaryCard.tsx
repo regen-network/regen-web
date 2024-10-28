@@ -15,6 +15,7 @@ export const OrderSummaryCard = (orderSummary: OrderSummaryProps) => {
     setCreditsAmount,
     creditsAvailable,
     onInvalidCredits,
+    userBalance,
   } = orderSummary;
   return (
     <Card className="relative w-full max-w-[560px] lg:max-w-[330px] h-[100%] py-20 sm:py-0 flex flex-2 sm:flex-col border-grey-300">
@@ -32,6 +33,7 @@ export const OrderSummaryCard = (orderSummary: OrderSummaryProps) => {
         setCreditsAmount={setCreditsAmount}
         creditsAvailable={creditsAvailable}
         onInvalidCredits={onInvalidCredits}
+        userBalance={userBalance}
       />
     </Card>
   );

@@ -26,4 +26,5 @@ export interface OrderSummaryProps {
   setCreditsAmount: (creditsAmount: number) => void;
   creditsAvailable: number;
   onInvalidCredits?: () => void;
+  userBalance: number;
 }

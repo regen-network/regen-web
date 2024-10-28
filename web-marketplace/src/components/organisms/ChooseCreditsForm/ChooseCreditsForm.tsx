@@ -388,6 +388,7 @@ export const ChooseCreditsForm = React.memo(
                   getCreditsAvailableBannerText(creditsAvailable),
                 )
               }
+              userBalance={userBalance}
             />
           )}
         </div>

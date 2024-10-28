@@ -473,6 +473,7 @@ export const BuyCreditsForm = ({
                 getCreditsAvailableBannerText(creditsAvailable),
               )
             }
+            userBalance={userBalance}
           />
         )}
       <LoginFlow

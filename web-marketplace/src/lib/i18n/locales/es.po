@@ -4733,7 +4733,7 @@ msgstr "¡Tu acción fue exitosa!"
 
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-28 09:13+0000\n"
+"POT-Creation-Date: 2024-10-28 19:43+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4783,7 +4783,11 @@ msgstr ""
 msgid "{ADDRESS_USED_ERROR} Do you want to merge these accounts?"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:140
+=======
+#: src/pages/BuyCredits/BuyCredits.utils.ts:48
+>>>>>>> 384c421e4 (chore: generate .po files)
 msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
 msgstr ""
 
@@ -4828,7 +4832,7 @@ msgstr ""
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:93
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:107
 #: src/components/organisms/Order/Order.Summary.tsx:83
 msgid "# credits"
 msgstr ""
@@ -4879,7 +4883,7 @@ msgstr ""
 msgid "+Create project"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:140
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:161
 msgid "<0>{0}</0> ending in {1}"
 msgstr ""
 
@@ -5093,7 +5097,7 @@ msgid "Advanced settings"
 msgstr ""
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.ts:37
+#: src/pages/BuyCredits/BuyCredits.utils.ts:39
 msgid "Agree & purchase"
 msgstr ""
 
@@ -5294,7 +5298,7 @@ msgstr ""
 msgid "Avg Price"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:76
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:90
 msgid "avg price per credit"
 msgstr ""
 
@@ -5606,7 +5610,7 @@ msgstr ""
 msgid "change admin"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:148
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:169
 msgid "Change payment card"
 msgstr ""
 
@@ -5666,7 +5670,7 @@ msgstr ""
 msgid "Choose credit class"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.ts:26
+#: src/pages/BuyCredits/BuyCredits.utils.ts:28
 msgid "Choose credits"
 msgstr ""
 
@@ -5739,7 +5743,7 @@ msgstr ""
 msgid "Community credits are credits that have not been through the <0>Regen Registry program</0>or are not associated with another known registry. <1/><2/>To create your own credits, <3>learn more in our docs.</3>"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.ts:39
+#: src/pages/BuyCredits/BuyCredits.utils.ts:41
 msgid "Complete"
 msgstr ""
 
@@ -6148,7 +6152,7 @@ msgstr ""
 msgid "CURRENCY DENOM"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:99
+#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:100
 msgid "Currency Input"
 msgstr ""
 
@@ -6165,7 +6169,7 @@ msgid "Custom url"
 msgstr ""
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:51
-#: src/pages/BuyCredits/BuyCredits.utils.ts:33
+#: src/pages/BuyCredits/BuyCredits.utils.ts:35
 msgid "Customer info"
 msgstr ""
 
@@ -6374,7 +6378,7 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:100
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:115
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:76
 #: src/lib/constants/shared.constants.tsx:22
 msgid "Edit"
@@ -6418,7 +6422,7 @@ msgstr ""
 msgid "Edit your file"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:99
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:114
 msgid "Editable credits"
 msgstr ""
 
@@ -7322,7 +7326,7 @@ msgstr ""
 msgid "or, log in with email / social"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:67
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:81
 msgid "Order Summary"
 msgstr ""
 
@@ -7354,7 +7358,7 @@ msgstr ""
 msgid "partners"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:132
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:153
 msgid "payment"
 msgstr ""
 
@@ -7367,7 +7371,7 @@ msgid "payment info"
 msgstr ""
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.PaymentInfo.tsx:45
-#: src/pages/BuyCredits/BuyCredits.utils.ts:32
+#: src/pages/BuyCredits/BuyCredits.utils.ts:34
 msgid "Payment info"
 msgstr ""
 
@@ -7640,7 +7644,7 @@ msgstr ""
 msgid "Program Guide"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:70
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:84
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:124
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105
@@ -8050,7 +8054,7 @@ msgstr ""
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.ts:37
+#: src/pages/BuyCredits/BuyCredits.utils.ts:39
 msgid "Retirement"
 msgstr ""
 
@@ -8873,7 +8877,7 @@ msgstr ""
 msgid "total credits you have purchased"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:111
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:132
 #: src/components/organisms/Order/Order.Summary.tsx:89
 msgid "total price"
 msgstr ""
@@ -8957,7 +8961,7 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:101
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:116
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:68
 msgid "update"
 msgstr ""
@@ -9002,7 +9006,7 @@ msgstr ""
 msgid "Use your social account to log in to Regen Marketplace."
 msgstr ""
 
-#: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:215
+#: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:217
 msgid "useMultiStep must be used within a MultiStepProvider"
 msgstr ""
 

@@ -122,7 +122,14 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
                 )}
               </MenuItem>
             ))}
-            {websiteExtras && <MenuItem>{websiteExtras}</MenuItem>}
+            {websiteExtras && (
+              <>
+                <div className="my-30 px-20">
+                  <div className="w-full bg-bc-neutral-500 h-1" />
+                </div>
+                <MenuItem className="px-20">{websiteExtras}</MenuItem>
+              </>
+            )}
           </div>
         </MenuList>
       </Drawer>

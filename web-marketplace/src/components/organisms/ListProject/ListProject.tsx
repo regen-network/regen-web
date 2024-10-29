@@ -51,7 +51,7 @@ const ListProject = () => {
     <div>
       {!isLoadingIsIssuer && (
         <Body
-          className="text-[11px] sm:text-base font-bold bg-clip-text cursor-pointer pt-[2px] pr-10 sm:pr-50 bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)]"
+          className="text-[11px] sm:text-base font-bold bg-clip-text cursor-pointer pt-[2px] pr-10 sm:pr-25 bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)]"
           sx={{
             textFillColor: 'transparent',
           }}

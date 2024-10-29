@@ -30,12 +30,7 @@ export const BuyCredits = () => {
     sellOrders,
     cardSellOrders,
     slug,
-    offchainProjectByIdData,
-    projectByOnChainId,
-    projectBySlug,
-    loadingProjectBySlug,
-    loadingOffchainProjectById,
-    loadingProjectByOnChainId,
+    noProjectFound,
   } = useGetProject();
 
   useNavigateToSlug(slug, '/buy');
@@ -82,14 +77,6 @@ export const BuyCredits = () => {
   useEffect(() => {
     if (confirmationTokenId) summarizePayment(confirmationTokenId);
   }, [confirmationTokenId, summarizePayment]);
-
-  const noProjectFound =
-    !loadingProjectByOnChainId &&
-    !projectByOnChainId &&
-    !loadingProjectBySlug &&
-    !projectBySlug?.data?.projectBySlug &&
-    !loadingOffchainProjectById &&
-    !offchainProjectByIdData;
 
   if (noProjectFound) return <NotFoundPage />;
 

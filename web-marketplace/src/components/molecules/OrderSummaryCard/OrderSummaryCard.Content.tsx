@@ -65,10 +65,11 @@ export function OrderSummaryContent({
   const handleOnKeyDown = useCallback(
     (credits: number) => {
       setHasError(
-        credits * pricePerCredit > 10 && paymentOption !== PAYMENT_OPTIONS.CARD,
+        credits * pricePerCredit > userBalance &&
+          paymentOption !== PAYMENT_OPTIONS.CARD,
       );
     },
-    [paymentOption, pricePerCredit],
+    [paymentOption, pricePerCredit, userBalance],
   );
 
   return (
@@ -111,15 +112,13 @@ export function OrderSummaryContent({
           updateButtonText={_(msg`update`)}
           name="editable-credits"
           onInvalidValue={onInvalidCredits}
-          hasError={hasError}
+          error={{
+            hasError,
+            message: `${_(NOT_ENOUGH_BALANCE)} ${displayDenom}`,
+          }}
         />
-        {hasError && (
-          <div className="pt-5 text-error-300 text-sm w-full">
-            {`${_(NOT_ENOUGH_BALANCE)} ${displayDenom}`}
-          </div>
-        )}
       </div>
-      <div className="col-span-full pt-10">
+      <div className={`col-span-full ${hasError ? 'pt-30' : 'pt-10'}`}>
         <hr className="border-t border-grey-300 border-solid border-l-0 border-r-0 border-b-0" />
       </div>
       <div className="flex items-end col-span-full gap-5">

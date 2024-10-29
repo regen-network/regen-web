@@ -19,7 +19,10 @@ interface EditableInputProps {
   className?: string;
   onInvalidValue?: () => void;
   onKeyDown?: (credits: number) => void;
-  hasError?: boolean;
+  error?: {
+    hasError: boolean;
+    message: string;
+  };
 }
 
 export const EditableInput = ({
@@ -33,7 +36,7 @@ export const EditableInput = ({
   className = '',
   onInvalidValue,
   onKeyDown,
-  hasError,
+  error,
 }: EditableInputProps) => {
   const [editable, setEditable] = useState(false);
   const [amount, setAmount] = useState(value);
@@ -59,7 +62,7 @@ export const EditableInput = ({
   };
 
   const handleOnUpdate = () => {
-    if (!amountValid || hasError) return;
+    if (!amountValid || error?.hasError) return;
     onChange(+amount);
     toggleEditable();
   };
@@ -84,35 +87,42 @@ export const EditableInput = ({
   return (
     <>
       {editable ? (
-        <div
-          className={`flex [@media(max-width:340px)]:flex-col [@media(max-width:340px)]:mb-20 sm:flex-row items-center [@media(max-width:340px)]:items-start h-[47px] ${className}`}
-        >
-          <input
-            type="number"
-            step="0.000001"
-            min={0}
-            max={maxValue}
-            className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-50 py-20 px-15 w-[120px] border border-solid border-grey-300 text-base font-normal font-sans focus:outline-none"
-            value={amount}
-            onChange={handleOnChange}
-            onKeyDown={handleKeyDown}
-            aria-label={inputAriaLabel}
-            name={name}
-            autoFocus
-            data-testid="editable-input"
-          />
-          <TextButton
-            className={`lowercase text-[12px] mt-5 sm:mt-0 font-sans ${
-              amountValid && !hasError
-                ? ''
-                : 'text-grey-300 hover:text-grey-300 cursor-default'
-            }`}
-            onClick={handleOnUpdate}
-            aria-label={updateButtonText}
+        <>
+          <div
+            className={`relative flex [@media(max-width:340px)]:flex-col [@media(max-width:340px)]:mb-20 sm:flex-row items-center [@media(max-width:340px)]:items-start h-[47px] ${className}`}
           >
-            {updateButtonText}
-          </TextButton>
-        </div>
+            <input
+              type="number"
+              step="0.000001"
+              min={0}
+              max={maxValue}
+              className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-50 py-20 px-15 w-[120px] border border-solid border-grey-300 text-base font-normal font-sans focus:outline-none"
+              value={amount}
+              onChange={handleOnChange}
+              onKeyDown={handleKeyDown}
+              aria-label={inputAriaLabel}
+              name={name}
+              autoFocus
+              data-testid="editable-input"
+            />
+            <TextButton
+              className={`lowercase text-[12px] mt-5 sm:mt-0 font-sans ${
+                amountValid && !error?.hasError
+                  ? ''
+                  : 'text-grey-300 hover:text-grey-300 cursor-default'
+              }`}
+              onClick={handleOnUpdate}
+              aria-label={updateButtonText}
+            >
+              {updateButtonText}
+            </TextButton>
+          </div>
+          {error?.hasError && (
+            <div className="pt-5 text-error-300 text-sm w-full absolute">
+              {error?.message}
+            </div>
+          )}
+        </>
       ) : (
         <div className="flex justify-between h-[47px] items-center">
           <span>{amount}</span>

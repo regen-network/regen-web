@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
-import { REGEN_DENOM, USD_DENOM } from 'config/allowedBaseDenoms';
+import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { useSetAtom } from 'jotai';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import {

@@ -115,7 +115,8 @@ export type NormalizeProject = ProjectWithOrderData & {
   area?: number;
   cardSellOrders?: Array<CardSellOrder>;
   filteredSellOrders?: Array<UISellOrderInfo>;
-  marketType?: string;
+  marketType?: string[];
+  complianceCredits: number;
 };
 export const normalizeProjectWithMetadata = ({
   offChainProject,
@@ -199,6 +200,7 @@ export const normalizeProjectWithMetadata = ({
     },
     cardSellOrders,
     filteredSellOrders,
+    complianceCredits: sanityProject?.complianceCredits ?? 0,
   } as NormalizeProject;
 };
 

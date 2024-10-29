@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-31 17:55+0100\n"
+"POT-Creation-Date: 2024-11-04 09:28+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -967,6 +967,10 @@ msgstr ""
 
 #: src/pages/BuyCredits/BuyCredits.constants.ts:17
 msgid "Complete"
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.constants.ts:17
+msgid "Compliance credits are mandatory to meet government regulations."
 msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:45
@@ -3479,7 +3483,7 @@ msgstr ""
 msgid "Sorry, your transaction was not successful."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:216
+#: src/pages/Projects/AllProjects/AllProjects.tsx:222
 msgid "Sort by:"
 msgstr ""
 
@@ -4192,6 +4196,10 @@ msgstr ""
 
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.constants.tsx:4
 msgid "visit our homepage instead"
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.constants.ts:18
+msgid "Voluntary credits are purchased for environmental responsibility without legal obligation."
 msgstr ""
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:152

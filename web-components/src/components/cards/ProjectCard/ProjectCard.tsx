@@ -68,7 +68,7 @@ export interface ProjectCardProps extends MediaCardProps {
   buttons: ProjectCardButtonsMapping;
   useProjectCardButton?: boolean;
   hasBottomCard?: boolean;
-  creditIcon?: ReactNode;
+  creditsChildren?: ReactNode;
 }
 
 export function ProjectCard({
@@ -108,7 +108,7 @@ export function ProjectCard({
   buttons,
   useProjectCardButton = true,
   hasBottomCard = true,
-  creditIcon,
+  creditsChildren,
   ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
@@ -280,7 +280,7 @@ export function ProjectCard({
                     purchaseInfo={purchaseInfo}
                     sx={{ mb: 5 }}
                     projectPrefinancing={projectPrefinancing}
-                    creditIcon={creditIcon}
+                    creditsChildren={creditsChildren}
                   />
                 ) : (
                   <div className="h-[68px]">

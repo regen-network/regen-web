@@ -53,17 +53,17 @@ import {
 } from './AllProjects.config';
 import {
   COMPLIANCE_MARKET,
+  COMPLIANCE_MARKET_TOOLTIP,
   EMPTY_PROJECTS_LABEL,
   RESET_FILTERS_LABEL,
+  VOLUNTARY_MARKET,
   VOLUNTARY_MARKET_TOOLTIP,
 } from './AllProjects.constants';
 import { normalizeCreditClassFilters } from './AllProjects.normalizers';
 import { SideFilter } from './AllProjects.SideFilter';
+import { TerrasosCredits } from './AllProjects.TerrasosCredits';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
 import { getIsSoldOut } from './utils/getIsSoldOut';
-
-import hectaresLogo from 'assets/pngs/logos/hectares.png';
-import tebuLogo from 'assets/pngs/logos/tebu.png';
 
 export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
@@ -238,8 +238,11 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
       )}
       {projects?.map(project => {
         const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
-        const isComplianceProject = project.marketType === COMPLIANCE_MARKET;
-        const projectArea = project.area ?? 0;
+        const isComplianceProject =
+          project.marketType?.includes(COMPLIANCE_MARKET) ?? false;
+        const isVoluntaryProject =
+          project.marketType?.includes(VOLUNTARY_MARKET) ?? false;
+        const complianceCredits = project.complianceCredits;
 
         return (
           <Box key={project?.id}>
@@ -279,32 +282,15 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               purchaseDetailsTitles={purchaseDetailsTitles}
               buttons={buttons}
               useProjectCardButton={IS_REGEN}
-              creditIcon={
-                <>
-                  <InfoTooltip
-                    arrow
-                    placement="top"
-                    title={_(VOLUNTARY_MARKET_TOOLTIP)}
-                  >
-                    <img src={tebuLogo} alt="tebu" className="ml-3" />
-                  </InfoTooltip>
-                  {isComplianceProject && (
-                    <span className="flex items-center ml-5">
-                      {projectArea}
-                      <InfoTooltip
-                        arrow
-                        placement="top"
-                        title={_(VOLUNTARY_MARKET_TOOLTIP)}
-                      >
-                        <img
-                          src={hectaresLogo}
-                          alt="hectares"
-                          className="ml-[3px]"
-                        />
-                      </InfoTooltip>
-                    </span>
-                  )}
-                </>
+              creditsChildren={
+                IS_TERRASOS ? (
+                  <TerrasosCredits
+                    project={project}
+                    isVoluntaryProject={isVoluntaryProject}
+                    isComplianceProject={isComplianceProject}
+                    complianceCredits={complianceCredits}
+                  />
+                ) : null
               }
             />
           </Box>

@@ -5238,6 +5238,7 @@ export type Project = Document & {
   location?: Maybe<Scalars['String']>;
   area?: Maybe<Scalars['Float']>;
   areaUnit?: Maybe<Scalars['String']>;
+  complianceCredits?: Maybe<Scalars['Float']>;
   language?: Maybe<Scalars['String']>;
 };
 
@@ -5345,6 +5346,7 @@ export type ProjectFilter = {
   location?: Maybe<StringFilter>;
   area?: Maybe<FloatFilter>;
   areaUnit?: Maybe<StringFilter>;
+  complianceCredits?: Maybe<FloatFilter>;
   language?: Maybe<StringFilter>;
 };
 
@@ -5562,6 +5564,7 @@ export type ProjectSorting = {
   location?: Maybe<SortOrder>;
   area?: Maybe<SortOrder>;
   areaUnit?: Maybe<SortOrder>;
+  complianceCredits?: Maybe<SortOrder>;
   language?: Maybe<SortOrder>;
 };
 
@@ -9747,6 +9750,7 @@ export type ProjectByIdQuery = (
   & { allProject: Array<(
     { __typename?: 'Project' }
     & Pick<Project, 'language'>
+    & Pick<Project, 'complianceCredits'>
     & { credibilityCards?: Maybe<Array<Maybe<(
       { __typename?: 'DetailsCard' }
       & DetailsCardFieldsFragment
@@ -11880,6 +11884,7 @@ export const ProjectByIdDocument = gql`
       sellOrderId
       usdPrice
     }
+    complianceCredits
   }
 }
     ${DetailsCardFieldsFragmentDoc}

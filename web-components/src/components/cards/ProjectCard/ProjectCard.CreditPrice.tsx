@@ -20,7 +20,7 @@ type Props = {
   sx?: SxProps<Theme>;
   projectPrefinancing?: ProjectPrefinancing;
   bodyTexts: ProjectCardBodyTextsMapping;
-  creditIcon?: ReactNode;
+  creditsChildren?: ReactNode;
 };
 
 export const CreditPrice = ({
@@ -30,11 +30,15 @@ export const CreditPrice = ({
   isSoldOut,
   projectPrefinancing,
   bodyTexts,
-  creditIcon,
+  creditsChildren,
   sx,
 }: Props) => {
   const avgPricePerTonLabel = purchaseInfo?.sellInfo?.avgPricePerTonLabel;
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
+  const creditsAvailable =
+    purchaseInfo?.sellInfo?.creditsAvailable ??
+    projectPrefinancing?.estimatedIssuance ??
+    '0';
 
   return (
     <Box
@@ -130,10 +134,7 @@ export const CreditPrice = ({
             />
           ) : (
             <>
-              {purchaseInfo?.sellInfo?.creditsAvailable ??
-                projectPrefinancing?.estimatedIssuance ??
-                '0'}
-              {creditIcon}
+              {creditsChildren ? creditsChildren : creditsAvailable}
               {isSoldOut && (
                 <GradientBadge
                   className="ml-5"

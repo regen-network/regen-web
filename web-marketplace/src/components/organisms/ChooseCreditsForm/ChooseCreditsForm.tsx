@@ -212,18 +212,15 @@ export const ChooseCreditsForm = React.memo(
         startTransition(() => {
           setPaymentOption(option as PaymentOptionsType);
         });
+        const currency =
+          option === PAYMENT_OPTIONS.CARD
+            ? cardCurrency
+            : defaultCryptoCurrency;
         form.reset({
           ...form.getValues(),
           [CREDIT_VINTAGE_OPTIONS]: [],
-          [CURRENCY]:
-            option === PAYMENT_OPTIONS.CARD
-              ? cardCurrency
-              : defaultCryptoCurrency,
+          [CURRENCY]: currency,
         });
-        const currency =
-          option !== PAYMENT_OPTIONS.CARD
-            ? { askDenom: REGEN_DENOM, askBaseDenom: REGEN_DENOM }
-            : { askDenom: USD_DENOM, askBaseDenom: USD_DENOM };
         updateMultiStepCurrency(handleSave, data, currency, activeStep);
       },
       [

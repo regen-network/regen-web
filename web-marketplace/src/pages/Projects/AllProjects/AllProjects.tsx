@@ -14,7 +14,6 @@ import { NoProjectIcon } from 'web-components/src/components/icons/NoProjectIcon
 import SelectTextFieldBase from 'web-components/src/components/inputs/SelectTextFieldBase';
 import { Loading } from 'web-components/src/components/loading';
 import { Pagination } from 'web-components/src/components/pagination/Pagination';
-import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Body } from 'web-components/src/components/typography';
 import { pxToRem } from 'web-components/src/theme/muiTheme';
 
@@ -53,11 +52,9 @@ import {
 } from './AllProjects.config';
 import {
   COMPLIANCE_MARKET,
-  COMPLIANCE_MARKET_TOOLTIP,
   EMPTY_PROJECTS_LABEL,
   RESET_FILTERS_LABEL,
   VOLUNTARY_MARKET,
-  VOLUNTARY_MARKET_TOOLTIP,
 } from './AllProjects.constants';
 import { normalizeCreditClassFilters } from './AllProjects.normalizers';
 import { SideFilter } from './AllProjects.SideFilter';

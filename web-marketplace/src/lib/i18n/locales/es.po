@@ -100,7 +100,7 @@ msgid "{truncatedQuantity} credit(s) available"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:88
-#: src/components/organisms/Order/Order.Summary.tsx:86
+#: src/components/organisms/Order/Order.Summary.tsx:85
 msgid "# credits"
 msgstr ""
 
@@ -235,7 +235,7 @@ msgstr ""
 msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:186
+#: src/components/organisms/Order/Order.Summary.tsx:185
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr ""
 
@@ -417,7 +417,6 @@ msgid "Amount Escrowed"
 msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:150
-#: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:208
 msgid "amount of credits"
 msgstr ""
 
@@ -428,7 +427,6 @@ msgstr ""
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:132
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:126
-#: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:209
 msgid "amount retired"
 msgstr ""
 
@@ -633,11 +631,11 @@ msgstr ""
 msgid "block height"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:173
+#: src/components/organisms/Order/Order.Summary.tsx:172
 msgid "Blockchain Details"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:181
+#: src/components/organisms/Order/Order.Summary.tsx:180
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:49
 #: src/lib/constants/shared.constants.tsx:94
 #: src/pages/ProjectFinished/ProjectFinished.tsx:93
@@ -698,12 +696,12 @@ msgstr ""
 msgid "buffer pool accounts"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:4
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:3
 msgid "Buy"
 msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:5
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:4
 msgid "BUY"
 msgstr ""
 
@@ -783,7 +781,7 @@ msgid "cancel"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:42
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:9
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:8
 msgid "Cancel"
 msgstr ""
 
@@ -807,7 +805,7 @@ msgstr ""
 msgid "carbon offset standard"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:146
+#: src/components/organisms/Order/Order.Summary.tsx:145
 msgid "card info"
 msgstr ""
 
@@ -978,7 +976,6 @@ msgstr ""
 
 #: src/components/organisms/ConfirmationModal.tsx:90
 #: src/pages/BuyCredits/BuyCredits.constants.ts:11
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:3
 msgid "Congrats! Your purchase was successful."
 msgstr ""
 
@@ -1120,7 +1117,6 @@ msgstr ""
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:146
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:122
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:127
-#: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:203
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:112
 msgid "credit batch id"
 msgstr ""
@@ -1257,7 +1253,7 @@ msgid "credits"
 msgstr ""
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:220
-#: src/components/organisms/Order/Order.Summary.tsx:69
+#: src/components/organisms/Order/Order.Summary.tsx:68
 msgid "Credits"
 msgstr ""
 
@@ -1629,7 +1625,7 @@ msgstr ""
 msgid "End Date"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:149
+#: src/components/organisms/Order/Order.Summary.tsx:148
 msgid "ending in"
 msgstr ""
 
@@ -1840,7 +1836,7 @@ msgstr ""
 msgid "I just offset my carbon footprint on #RegenMarketplace with @regen_network. Join me in doing our part for planetary regeneration!"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:12
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:11
 msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future!"
 msgstr ""
 
@@ -2293,7 +2289,7 @@ msgstr ""
 msgid "Name of document"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:144
+#: src/components/organisms/Order/Order.Summary.tsx:143
 msgid "name on card"
 msgstr ""
 
@@ -2483,11 +2479,11 @@ msgstr ""
 msgid "payment"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:157
+#: src/components/organisms/Order/Order.Summary.tsx:156
 msgid "payment currency"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:140
+#: src/components/organisms/Order/Order.Summary.tsx:139
 msgid "payment info"
 msgstr ""
 
@@ -2692,7 +2688,7 @@ msgstr ""
 msgid "price per credit"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:72
+#: src/components/organisms/Order/Order.Summary.tsx:71
 msgid "Price per credit"
 msgstr ""
 
@@ -2770,7 +2766,6 @@ msgstr ""
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:139
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:118
-#: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:196
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:105
 msgid "project"
 msgstr ""
@@ -2955,7 +2950,7 @@ msgstr ""
 msgid "Publications"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:175
+#: src/components/organisms/Order/Order.Summary.tsx:174
 msgid "purchase date"
 msgstr ""
 
@@ -3162,7 +3157,7 @@ msgstr ""
 msgid "Retirement date"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:109
+#: src/components/organisms/Order/Order.Summary.tsx:108
 msgid "Retirement Info"
 msgstr ""
 
@@ -3171,7 +3166,7 @@ msgstr ""
 msgid "Retirement is permanent and non-reversible."
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:121
+#: src/components/organisms/Order/Order.Summary.tsx:120
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:54
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:139
 #: src/pages/Certificate/Certificate.constants.ts:18
@@ -3189,7 +3184,7 @@ msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:61
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:495
-#: src/components/organisms/Order/Order.Summary.tsx:119
+#: src/components/organisms/Order/Order.Summary.tsx:118
 #: src/lib/constants/shared.constants.tsx:145
 #: src/pages/Certificate/Certificate.constants.ts:17
 msgid "Retirement reason"
@@ -3315,7 +3310,7 @@ msgstr ""
 msgid "Sell order"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:8
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:7
 msgid "Sell Order #"
 msgstr ""
 
@@ -3875,12 +3870,11 @@ msgid "total credits you have purchased"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:106
-#: src/components/organisms/Order/Order.Summary.tsx:92
+#: src/components/organisms/Order/Order.Summary.tsx:91
 msgid "total price"
 msgstr ""
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:106
-#: src/pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit.tsx:175
 msgid "total purchase price"
 msgstr ""
 
@@ -3900,7 +3894,7 @@ msgstr ""
 msgid "TRADABLE AND RETIRABLE"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:113
+#: src/components/organisms/Order/Order.Summary.tsx:112
 msgid "Tradable Credits"
 msgstr ""
 
@@ -4067,7 +4061,7 @@ msgstr ""
 msgid "Videos"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:10
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:9
 msgid "View all sell orders"
 msgstr ""
 
@@ -4431,7 +4425,7 @@ msgstr ""
 msgid "Your retirement was successful!"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:7
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:6
 msgid "Your sell order was cancelled"
 msgstr ""
 

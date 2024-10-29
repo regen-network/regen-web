@@ -7,7 +7,6 @@ import { BlockchainIcon } from 'web-components/src/components/icons/BlockchainIc
 import CertifiedDocumentIcon from 'web-components/src/components/icons/CertifiedDocumentIcon';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
 import { PaymentInfoIcon } from 'web-components/src/components/icons/PaymentInfoIcon';
-import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
 import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
 
 import { Link } from 'components/atoms';

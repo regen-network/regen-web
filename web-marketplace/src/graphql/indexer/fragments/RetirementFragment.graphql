@@ -2,7 +2,6 @@ fragment retirementFields on Retirement {
   nodeId
   owner
   amount
-  reason
   batchDenom
   batchDenoms
   jurisdiction

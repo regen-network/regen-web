@@ -1,6 +1,4 @@
-import { useCallback, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { msg } from '@lingui/macro';
+import { useCallback } from 'react';
 import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
@@ -12,8 +10,6 @@ import {
   BLOCKCHAIN_RECORD,
   SEE_LESS,
   SEE_MORE,
-  TX_MODAL_TITLE,
-  TX_SUCCESSFUL_MODAL_TITLE,
 } from 'lib/constants/shared.constants';
 
 import {

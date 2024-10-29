@@ -107,7 +107,7 @@ export const BasketOverviewModals = ({
       atom.title = title;
       atom.cardTitle = cardTitle;
       atom.buttonTitle = _(VIEW_PORTFOLIO);
-      atom.buttonLink = '/profile/portfolio';
+      atom.buttonLink = '/dashboard/portfolio';
     });
   };
 

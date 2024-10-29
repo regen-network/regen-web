@@ -182,7 +182,7 @@ export const getRegenRoutes = ({
           // })}
         />
         <Route
-          path="profile"
+          path="dashboard"
           element={<KeplrOrAuthRoute component={Dashboard} />}
         >
           <Route
@@ -332,8 +332,8 @@ export const getRegenRoutes = ({
         />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
-      <Route path="profile">
-        <Route path="edit" element={<AuthRoute component={ProfileEdit} />}>
+      <Route path="dashboard">
+        <Route path="admin" element={<AuthRoute component={ProfileEdit} />}>
           <Route
             path="profile"
             element={<AuthRoute component={ProfileEditMain} />}

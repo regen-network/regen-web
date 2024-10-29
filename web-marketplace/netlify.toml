@@ -68,7 +68,7 @@ status = 302
 
 [[redirects]]
 from = "https://app.regen.network/ecocredits/*"
-to = "https://app.regen.network/profile/:splat"
+to = "https://app.regen.network/dashboard/:splat"
 force = true
 status = 302
 

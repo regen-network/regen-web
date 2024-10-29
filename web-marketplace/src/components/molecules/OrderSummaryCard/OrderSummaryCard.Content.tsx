@@ -8,10 +8,12 @@ import { Title } from 'web-components/src/components/typography';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import {
+  BuyCreditsSchemaTypes,
   CardDetails,
   PaymentOptionsType,
 } from 'pages/BuyCredits/BuyCredits.types';
 import { NOT_ENOUGH_BALANCE } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { AmountWithCurrency } from '../AmountWithCurrency/AmountWithCurrency';
 import {
@@ -59,6 +61,8 @@ export function OrderSummaryContent({
       }),
     [allowedDenoms, currency.askBaseDenom, currency.askDenom],
   );
+
+  const { activeStep } = useMultiStep<BuyCreditsSchemaTypes>();
 
   const [hasError, setHasError] = useState(false);
 
@@ -116,6 +120,7 @@ export function OrderSummaryContent({
             hasError,
             message: `${_(NOT_ENOUGH_BALANCE)} ${displayDenom}`,
           }}
+          isEditable={activeStep !== 0}
         />
       </div>
       <div className={`col-span-full ${hasError ? 'pt-30' : 'pt-10'}`}>

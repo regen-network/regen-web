@@ -3,6 +3,7 @@ import {
   KeyboardEvent,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
@@ -23,6 +24,7 @@ interface EditableInputProps {
     hasError: boolean;
     message: string;
   };
+  isEditable: boolean;
 }
 
 export const EditableInput = ({
@@ -37,13 +39,43 @@ export const EditableInput = ({
   onInvalidValue,
   onKeyDown,
   error,
+  isEditable,
 }: EditableInputProps) => {
   const [editable, setEditable] = useState(false);
   const [amount, setAmount] = useState(value);
+  const [initialValue, setInitialValue] = useState(value);
+  const [currentValue, setCurrentValue] = useState(value);
+  const wrapperRef = useRef(null);
 
   useEffect(() => {
-    if (!editable && value !== amount) setAmount(value);
-  }, [amount, value, editable]);
+    setInitialValue(value);
+    setCurrentValue(value);
+  }, [value]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        wrapperRef.current &&
+        !(wrapperRef.current as HTMLElement).contains(event.target as Node)
+      ) {
+        setEditable(false);
+        setCurrentValue(initialValue);
+      }
+    };
+    if (editable) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [editable, initialValue]);
+
+  useEffect(() => {
+    if (!editable && currentValue !== amount) setAmount(currentValue);
+  }, [amount, currentValue, editable]);
 
   const toggleEditable = () => {
     setEditable(!editable);
@@ -89,6 +121,7 @@ export const EditableInput = ({
       {editable ? (
         <>
           <div
+            ref={wrapperRef}
             className={`relative flex [@media(max-width:340px)]:flex-col [@media(max-width:340px)]:mb-20 sm:flex-row items-center [@media(max-width:340px)]:items-start h-[47px] ${className}`}
           >
             <input
@@ -126,10 +159,12 @@ export const EditableInput = ({
       ) : (
         <div className="flex justify-between h-[47px] items-center">
           <span>{amount}</span>
-          <EditButtonIcon
-            onClick={toggleEditable}
-            ariaLabel={editButtonAriaLabel}
-          />
+          {isEditable && (
+            <EditButtonIcon
+              onClick={toggleEditable}
+              ariaLabel={editButtonAriaLabel}
+            />
+          )}
         </div>
       )}
     </>

@@ -8,6 +8,7 @@ import {
   useInfiniteQuery,
   useQueryClient,
 } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import {
   BlockContent,
@@ -20,6 +21,7 @@ import Section from 'web-components/src/components/section';
 import { Body } from 'web-components/src/components/typography';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getPostsQuery } from 'lib/queries/react-query/registry-server/getPostsQuery/getPostsQuery';
@@ -57,6 +59,7 @@ export const DataStream = ({
   setDraftPost,
 }: Props) => {
   const { _ } = useLingui();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { activeAccountId } = useAuth();
   const [year, setYear] = useState<number | null>(null);
   const [years, setYears] = useState<Array<number>>([]);
@@ -69,6 +72,7 @@ export const DataStream = ({
     getPostsQuery({
       projectId: offChainProjectId,
       year: year && year !== years[0] ? year : undefined,
+      languageCode: selectedLanguage,
       getNextPageParam: lastPage => lastPage?.next,
     }),
   );
@@ -170,6 +174,7 @@ export const DataStream = ({
                           getPostsQueryKey({
                             projectId: offChainProjectId,
                             year: year && year !== years[0] ? year : undefined,
+                            languageCode: selectedLanguage,
                           }),
                           data => ({
                             pages: data?.pages?.slice(

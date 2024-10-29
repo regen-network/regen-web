@@ -15,4 +15,5 @@ export type ReactQueryMetadataResponse = QueryObserverOptions<
 export type ReactQueryMetadataProps = {
   iri?: string;
   dataClient?: DataQueryClientImpl;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryMetadataResponse>;

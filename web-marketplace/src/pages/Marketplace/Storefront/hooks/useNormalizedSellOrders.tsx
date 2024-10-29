@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import {
   SortCallbacksType,
@@ -8,6 +9,7 @@ import {
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getBatchQuery } from 'lib/queries/react-query/ecocredit/getBatchQuery/getBatchQuery';
@@ -41,6 +43,7 @@ type ResponseType = {
 
 export const useNormalizedSellOrders = (): ResponseType => {
   const { ecocreditClient, dataClient } = useLedger();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
@@ -112,7 +115,12 @@ export const useNormalizedSellOrders = (): ResponseType => {
   const metadataResults = useQueries({
     queries:
       projects?.map(({ metadata: iri }) =>
-        getMetadataQuery({ iri, dataClient, enabled: !!dataClient }),
+        getMetadataQuery({
+          iri,
+          dataClient,
+          enabled: !!dataClient,
+          languageCode: selectedLanguage,
+        }),
       ) ?? [],
   });
   const metadata = metadataResults.map(queryResult => queryResult.data);

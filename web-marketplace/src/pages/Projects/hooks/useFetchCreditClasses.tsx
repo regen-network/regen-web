@@ -1,7 +1,9 @@
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
@@ -20,6 +22,7 @@ type UseFetchCreditClassesResponse = {
 };
 
 export const useFetchCreditClasses = (): UseFetchCreditClassesResponse => {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { ecocreditClient, dataClient } = useLedger();
   const { data: creditClassesData, isLoading } = useQuery(
     getClassesQuery({
@@ -36,6 +39,7 @@ export const useFetchCreditClasses = (): UseFetchCreditClassesResponse => {
           iri: creditClass.metadata,
           enabled: !!dataClient,
           dataClient,
+          languageCode: selectedLanguage,
         }),
       ) ?? [],
   });

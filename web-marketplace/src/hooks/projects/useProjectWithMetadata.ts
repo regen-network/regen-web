@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import {
   ProjectByIdQuery,
@@ -9,6 +10,7 @@ import {
   ProjectPatch,
 } from 'generated/graphql';
 import { NestedPartial } from 'types/nested-partial';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import {
   AnchoredProjectMetadataLD,
@@ -86,6 +88,7 @@ export const useProjectWithMetadata = ({
   const reactQueryClient = useQueryClient();
   const { dataClient } = useLedger();
   const { activeAccount } = useAuth();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const { createOrUpdateProject } = useCreateOrUpdateProject();
   const isOnChainId = getIsOnChainId(projectId);
@@ -121,6 +124,7 @@ export const useProjectWithMetadata = ({
       enabled:
         !!onChainProject?.metadata && editOnChain && anchored && !!dataClient,
       dataClient,
+      languageCode: selectedLanguage,
     }),
   );
   const {

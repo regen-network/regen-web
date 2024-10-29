@@ -6,11 +6,13 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { useCreditClassByUriQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { openLink } from 'lib/button';
 import { client } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
@@ -47,6 +49,7 @@ function CreditClassDetails({
   isLandSteward,
 }: CreditDetailsProps): JSX.Element {
   const { dataClient, ecocreditClient } = useLedger();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { creditClassId } = useParams();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -83,6 +86,7 @@ function CreditClassDetails({
       iri: onChainClass?.metadata,
       enabled: !!dataClient && !!onChainClass?.metadata,
       dataClient,
+      languageCode: selectedLanguage,
     }),
   );
   const metadata = creditClassMetadataRes?.data as

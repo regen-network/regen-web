@@ -1,6 +1,8 @@
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getDenomMetadataQuery } from 'lib/queries/react-query/cosmos/bank/getDenomMetadataQuery/getDenomMetadataQuery';
 import { getBasketBalancesQuery } from 'lib/queries/react-query/ecocredit/basket/getBasketBalances/getBasketBalancesQuery';
 import { getBasketQuery } from 'lib/queries/react-query/ecocredit/basket/getBasketQuery/getBasketQuery';
@@ -18,6 +20,7 @@ type Params = {
 export const useFetchBasketOverview = ({
   basketDenom,
 }: Params): BasketOverviewProps => {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { basketClient, bankClient, ecocreditClient, dataClient } = useLedger();
 
   // Basket
@@ -64,6 +67,7 @@ export const useFetchBasketOverview = ({
       getMetadataQuery({
         iri: basketClass.data?.class?.metadata,
         dataClient,
+        languageCode: selectedLanguage,
         enabled: !!dataClient,
       }),
     ),

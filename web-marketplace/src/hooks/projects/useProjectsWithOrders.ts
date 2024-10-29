@@ -2,8 +2,10 @@ import { useMemo } from 'react';
 import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { IS_TERRASOS, SKIPPED_CLASS_ID } from 'lib/env';
@@ -73,7 +75,7 @@ export function useProjectsWithOrders({
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
-
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   /* Main Queries */
 
   const { data: projectData, isFetching: isLoadingProject } = useQuery(
@@ -270,6 +272,7 @@ export function useProjectsWithOrders({
         iri: project.metadata,
         dataClient,
         enabled: !!dataClient,
+        languageCode: selectedLanguage,
       }),
     ),
   });

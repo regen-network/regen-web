@@ -1,6 +1,8 @@
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeCreditClassesWithOrders } from 'lib/normalizers/creditClass/normalizeCreditClassesWithOrders/normalizeCreditClassesWithOrders';
@@ -21,6 +23,7 @@ export const useFetchCreditClassesWithOrder = ({
   userAddress,
   fetchAll = false,
 }: Props) => {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { ecocreditClient, dataClient, marketplaceClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { data: creditClassesData, isFetching: isLoadingCreditClasses } =
@@ -53,6 +56,7 @@ export const useFetchCreditClassesWithOrder = ({
           iri: creditClass.metadata,
           enabled: !!dataClient,
           dataClient,
+          languageCode: selectedLanguage,
         }),
       ) ?? [],
   });

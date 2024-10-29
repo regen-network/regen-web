@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeEcocredits } from 'lib/normalizers/ecocredits/normalizeEcocredits';
@@ -26,6 +28,7 @@ interface Props {
 }
 
 export const useFetchEcocredit = ({ batchDenom }: Props): Response => {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { ecocreditClient, dataClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
@@ -62,6 +65,7 @@ export const useFetchEcocredit = ({ batchDenom }: Props): Response => {
     iri: projectData?.project?.metadata,
     dataClient,
     enabled: !!dataClient,
+    languageCode: selectedLanguage,
   });
 
   // AllCreditClasses
@@ -86,6 +90,7 @@ export const useFetchEcocredit = ({ batchDenom }: Props): Response => {
     getMetadataQuery({
       iri: creditClassData?.class?.metadata,
       enabled: !!creditClassData?.class?.metadata,
+      languageCode: selectedLanguage,
     }),
   );
 

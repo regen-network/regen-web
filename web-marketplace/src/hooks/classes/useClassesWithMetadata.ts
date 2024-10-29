@@ -1,11 +1,14 @@
 import { useQueries } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 
 export const useClassesWithMetadata = (classIds?: (string | undefined)[]) => {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { ecocreditClient, dataClient } = useLedger();
 
   // Credit Classes
@@ -35,6 +38,7 @@ export const useClassesWithMetadata = (classIds?: (string | undefined)[]) => {
         iri: c?.class?.metadata,
         dataClient,
         enabled: !!dataClient,
+        languageCode: selectedLanguage,
       }),
     ),
   });

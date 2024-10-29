@@ -10,4 +10,5 @@ export type ReactQueryAllBasketDetailsPageQueryResponse =
 
 export type ReactQueryAllBasketDetailsQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryAllBasketDetailsPageQueryResponse>;

@@ -1,5 +1,6 @@
 query ProjectById($id: String!) {
   allProject(where: { projectId: { eq: $id } }) {
+    language
     credibilityCards {
       ...detailsCardFields
     }

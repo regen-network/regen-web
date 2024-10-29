@@ -1,5 +1,6 @@
 query allBasketDetailsPage {
   allBasketDetailsPage {
+    language
     gettingStartedResourcesCard {
       ...gettingStartedResourcesCardFields
     }

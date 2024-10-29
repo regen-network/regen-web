@@ -1,5 +1,6 @@
 query allBuyModalOptions {
   allBuyModalOptions {
+    language
     title
     cards {
       title

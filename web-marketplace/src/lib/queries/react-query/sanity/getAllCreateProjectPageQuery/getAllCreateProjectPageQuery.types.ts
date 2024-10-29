@@ -10,4 +10,5 @@ export type ReactQueryGetAllCreateProjectPageResponse =
 
 export type ReactQueryGetAllCreateProjectPageQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryGetAllCreateProjectPageResponse>;

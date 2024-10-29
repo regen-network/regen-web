@@ -10,4 +10,5 @@ export type ReactQueryAllProjectRatingQueryResponse =
 
 export type ReactQueryAllProjectRatingQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryAllProjectRatingQueryResponse>;

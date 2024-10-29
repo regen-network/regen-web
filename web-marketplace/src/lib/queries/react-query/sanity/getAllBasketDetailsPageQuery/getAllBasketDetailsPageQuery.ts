@@ -1,3 +1,5 @@
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   AllBasketDetailsPageDocument,
   AllBasketDetailsPageQuery,
@@ -10,16 +12,22 @@ import {
 
 export const getAllBasketDetailsPageQuery = ({
   sanityClient,
+  languageCode,
   ...params
 }: ReactQueryAllBasketDetailsQueryParams): ReactQueryAllBasketDetailsPageQueryResponse => ({
-  queryKey: ['allBasketDetailsPageQuery'],
+  queryKey: ['allBasketDetailsPageQuery', languageCode],
   queryFn: async () => {
     const { data: sanityCreditClassData } =
       await sanityClient.query<AllBasketDetailsPageQuery>({
         query: AllBasketDetailsPageDocument,
       });
 
-    return sanityCreditClassData;
+    return {
+      allBasketDetailsPage: getLocalizedData({
+        data: sanityCreditClassData.allBasketDetailsPage,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

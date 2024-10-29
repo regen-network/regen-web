@@ -1,3 +1,5 @@
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   EcologicalImpactByIriDocument,
   EcologicalImpactByIriQuery,
@@ -12,9 +14,10 @@ import {
 export const getEcologicalImpactByIriQuery = ({
   sanityClient,
   iris,
+  languageCode,
   ...params
 }: ReactQueryGetEcologicalImpactByIriQueryParams): ReactQueryGetEcologicalImpactByIriResponse => ({
-  queryKey: getEcologicalImpactByIriKey(iris),
+  queryKey: [getEcologicalImpactByIriKey(iris), languageCode],
   queryFn: async () => {
     const { data: ecologicalImpactByIri } =
       await sanityClient.query<EcologicalImpactByIriQuery>({
@@ -22,7 +25,12 @@ export const getEcologicalImpactByIriQuery = ({
         variables: { iris },
       });
 
-    return ecologicalImpactByIri;
+    return {
+      allEcologicalImpact: getLocalizedData({
+        data: ecologicalImpactByIri.allEcologicalImpact,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

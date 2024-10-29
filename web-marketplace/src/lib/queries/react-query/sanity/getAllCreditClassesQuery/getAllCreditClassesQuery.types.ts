@@ -10,4 +10,5 @@ export type ReactQueryGetAllCreditClassesResponse =
 
 export type ReactQueryGetAllCreditClassesParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryGetAllCreditClassesResponse>;

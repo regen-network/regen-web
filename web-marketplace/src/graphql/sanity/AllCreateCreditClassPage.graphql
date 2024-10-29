@@ -1,5 +1,6 @@
 query allCreateCreditClassPage {
   allCreateCreditClassPage {
+    language
     heroSection {
       ...heroSectionFields
     }

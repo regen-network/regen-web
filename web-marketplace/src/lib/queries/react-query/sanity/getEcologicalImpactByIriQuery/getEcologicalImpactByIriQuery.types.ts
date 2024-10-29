@@ -13,5 +13,6 @@ export type ReactQueryGetEcologicalImpactByIriResponse =
 
 export type ReactQueryGetEcologicalImpactByIriQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & EcologicalImpactByIriQueryVariables &
   ReactQueryBuilderResponse<ReactQueryGetEcologicalImpactByIriResponse>;

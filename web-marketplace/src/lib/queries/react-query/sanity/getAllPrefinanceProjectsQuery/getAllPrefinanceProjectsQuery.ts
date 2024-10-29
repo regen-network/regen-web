@@ -1,4 +1,6 @@
 /* eslint-disable lingui/no-unlocalized-strings */
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   AllPrefinanceProjectDocument,
   AllPrefinanceProjectQuery,
@@ -11,16 +13,22 @@ import {
 
 export const getAllSanityPrefinanceProjectsQuery = ({
   sanityClient,
+  languageCode,
   ...params
 }: ReactQueryGetAllPrefinanceProjectsParams): ReactQueryGetAllPrefinanceProjectsResponse => ({
-  queryKey: ['AllPrefinanceProjectQuery'],
+  queryKey: ['AllPrefinanceProjectQuery', languageCode],
   queryFn: async () => {
     const { data: sanityPrefinanceProjectData } =
       await sanityClient.query<AllPrefinanceProjectQuery>({
         query: AllPrefinanceProjectDocument,
       });
 
-    return sanityPrefinanceProjectData;
+    return {
+      allProject: getLocalizedData({
+        data: sanityPrefinanceProjectData.allProject,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

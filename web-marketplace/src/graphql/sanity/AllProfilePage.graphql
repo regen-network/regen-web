@@ -1,5 +1,6 @@
 query AllProfilePage {
   allProfilePage {
+    language
     bannerCard {
       ...bannerCardFields
     }

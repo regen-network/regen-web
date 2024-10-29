@@ -1,3 +1,5 @@
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   AllProjectRatingDocument,
   AllProjectRatingQuery,
@@ -10,15 +12,21 @@ import {
 
 export const getAllProjectRatingQuery = ({
   sanityClient,
+  languageCode,
   ...params
 }: ReactQueryAllProjectRatingQueryParams): ReactQueryAllProjectRatingQueryResponse => ({
-  queryKey: ['allProjectRatingQuery'],
+  queryKey: ['allProjectRatingQuery', languageCode],
   queryFn: async () => {
     const { data } = await sanityClient.query<AllProjectRatingQuery>({
       query: AllProjectRatingDocument,
     });
 
-    return data;
+    return {
+      allProjectRating: getLocalizedData({
+        data: data.allProjectRating,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

@@ -1,5 +1,6 @@
 query EcologicalImpactByIri($iris: [String!]) {
   allEcologicalImpact(where: { iri: { current: { in: $iris } } }) {
+    language
     name
     descriptionRaw
     image {

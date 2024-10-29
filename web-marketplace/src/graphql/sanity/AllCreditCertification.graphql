@@ -1,5 +1,6 @@
 query allCreditCertification {
   allCreditCertification {
+    language
     name
     icon {
       ...imageFields

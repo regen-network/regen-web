@@ -1,11 +1,8 @@
 query AllPrefinanceProject {
-  allProject(where: {
-    projectPrefinancing: {
-      isPrefinanceProject: {
-        eq: true
-      }
-    } 
-  }) {
+  allProject(
+    where: { projectPrefinancing: { isPrefinanceProject: { eq: true } } }
+  ) {
+    language
     projectId
     projectPrefinancing {
       isPrefinanceProject

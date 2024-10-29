@@ -10,4 +10,5 @@ export type ReactQueryGetAllPrefinanceProjectsResponse =
 
 export type ReactQueryGetAllPrefinanceProjectsParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryGetAllPrefinanceProjectsResponse>;

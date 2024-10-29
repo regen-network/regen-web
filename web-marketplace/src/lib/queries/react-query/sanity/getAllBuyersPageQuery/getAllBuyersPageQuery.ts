@@ -1,3 +1,5 @@
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   AllBuyersPageDocument,
   AllBuyersPageQuery,
@@ -10,16 +12,22 @@ import {
 
 export const getAllBuyersPageQuery = ({
   sanityClient,
+  languageCode,
   ...params
 }: ReactQueryAllBuyersQueryParams): ReactQueryAllBuyersPageQueryResponse => ({
-  queryKey: ['allBuyersPageQuery'],
+  queryKey: ['allBuyersPageQuery', languageCode],
   queryFn: async () => {
     const { data: sanityCreditClassData } =
       await sanityClient.query<AllBuyersPageQuery>({
         query: AllBuyersPageDocument,
       });
 
-    return sanityCreditClassData;
+    return {
+      allBuyersPage: getLocalizedData({
+        data: sanityCreditClassData.allBuyersPage,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

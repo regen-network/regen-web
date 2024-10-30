@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
-
-import { cn } from 'src/utils/styles/cn';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import copyTextToClipboard from '../../utils/copy';
 import Banner from '../banner';

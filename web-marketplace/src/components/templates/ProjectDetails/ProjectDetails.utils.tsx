@@ -183,28 +183,28 @@ export const getProjectGalleryPhotos = ({
 };
 
 export function getAccount(
-  party?: Maybe<AccountFieldsFragment>,
+  account?: Maybe<AccountFieldsFragment>,
 ): Account | undefined {
-  if (!party) {
+  if (!account) {
     return undefined;
   }
   // TODO: make use of getDefaultAvatar from ProfileEdit.utils.ts
   let image: string;
-  if (!!party.image) {
-    image = party.image;
-  } else if (!party.image && party.type === 'USER') {
+  if (!!account.image) {
+    image = account.image;
+  } else if (!account.image && account.type === 'USER') {
     image = DEFAULT_PROFILE_USER_AVATAR;
   } else {
     image = DEFAULT_PROFILE_COMPANY_AVATAR;
   }
 
   return {
-    name: party.name,
-    description: party.description,
-    type: party.type,
+    name: account.name,
+    description: account.description,
+    type: account.type,
     image: image,
-    address: party.addr || '',
-    link: party?.websiteLink,
+    address: account.addr || '',
+    link: account?.websiteLink,
   };
 }
 

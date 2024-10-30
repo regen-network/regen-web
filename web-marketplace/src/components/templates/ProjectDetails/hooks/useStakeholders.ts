@@ -10,7 +10,7 @@ import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import {
-  AnchoredProjectMetadataLD,
+  AnchoredProjectMetadataBaseLD,
   CreditClassMetadataLD,
 } from 'lib/db/types/json-ld';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
@@ -22,14 +22,14 @@ import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/
 import { getAccount, getDisplayAccount } from '../ProjectDetails.utils';
 
 type Params = {
-  anchoredMetadata?: AnchoredProjectMetadataLD;
+  projectMetadata?: AnchoredProjectMetadataBaseLD;
   offChainProject?: Maybe<ProjectFieldsFragment>;
   onChainProject?: ProjectInfo;
   creditClassMetadata?: CreditClassMetadataLD;
 };
 
 export const useStakeholders = ({
-  anchoredMetadata,
+  projectMetadata,
   offChainProject,
   onChainProject,
   creditClassMetadata,
@@ -38,13 +38,25 @@ export const useStakeholders = ({
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const projectDeveloper = getDisplayAccount(
-    anchoredMetadata?.['regen:projectDeveloper'],
+    projectMetadata?.['regen:projectDeveloper'],
     offChainProject?.accountByDeveloperId,
   );
 
   const projectVerifier = getDisplayAccount(
-    anchoredMetadata?.['regen:projectVerifier'],
+    projectMetadata?.['regen:projectVerifier'],
     offChainProject?.accountByVerifierId,
+  );
+
+  const projectOwner = getDisplayAccount(
+    projectMetadata?.['regen:projectOwner'],
+  );
+
+  const projectOperator = getDisplayAccount(
+    projectMetadata?.['regen:projectOperator'],
+  );
+
+  const projectMonitor = getDisplayAccount(
+    projectMetadata?.['regen:projectMonitor'],
   );
 
   const program = getDisplayAccount(
@@ -74,5 +86,8 @@ export const useStakeholders = ({
     program,
     admin,
     partners,
+    projectOwner,
+    projectOperator,
+    projectMonitor,
   };
 };

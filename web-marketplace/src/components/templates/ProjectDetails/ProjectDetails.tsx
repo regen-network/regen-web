@@ -210,13 +210,21 @@ function ProjectDetails(): JSX.Element {
     ? anchoredMetadata
     : offChainProjectMetadata;
 
-  const { projectDeveloper, projectVerifier, program, admin, partners } =
-    useStakeholders({
-      anchoredMetadata,
-      offChainProject,
-      onChainProject,
-      creditClassMetadata,
-    });
+  const {
+    projectDeveloper,
+    projectVerifier,
+    program,
+    admin,
+    partners,
+    projectOwner,
+    projectOperator,
+    projectMonitor,
+  } = useStakeholders({
+    projectMetadata,
+    offChainProject,
+    onChainProject,
+    creditClassMetadata,
+  });
   const { geojson, isGISFile } = useGeojson({
     projectMetadata,
     projectPageMetadata: offChainProjectMetadata,
@@ -473,6 +481,9 @@ function ProjectDetails(): JSX.Element {
         <ProjectDetailsStakeholders
           projectDeveloper={projectDeveloper}
           projectVerifier={projectVerifier}
+          projectOwner={projectOwner}
+          projectOperator={projectOperator}
+          projectMonitor={projectMonitor}
           program={program}
           admin={admin}
           partners={partners}

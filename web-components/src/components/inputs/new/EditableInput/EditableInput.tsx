@@ -17,6 +17,7 @@ interface EditableInputProps {
   inputAriaLabel: string;
   editButtonAriaLabel: string;
   updateButtonText: string;
+  cancelButtonText: string;
   className?: string;
   onInvalidValue?: () => void;
   onKeyDown?: (credits: number) => void;
@@ -35,6 +36,7 @@ export const EditableInput = ({
   inputAriaLabel,
   editButtonAriaLabel,
   updateButtonText,
+  cancelButtonText,
   className = '',
   onInvalidValue,
   onKeyDown,
@@ -93,6 +95,11 @@ export const EditableInput = ({
     setAmount(Math.min(newValue, maxValue));
   };
 
+  const handleOnCancel = () => {
+    setCurrentValue(initialValue);
+    toggleEditable();
+  };
+
   const handleOnUpdate = () => {
     if (!amountValid || error?.hasError) return;
     onChange(+amount);
@@ -104,6 +111,9 @@ export const EditableInput = ({
       if (isNaN(+e.currentTarget.value)) return;
       setAmount(+e.currentTarget.value);
       handleOnUpdate();
+    }
+    if (e.key === 'Escape') {
+      handleOnCancel();
     }
   };
 
@@ -129,7 +139,7 @@ export const EditableInput = ({
               step="0.000001"
               min={0}
               max={maxValue}
-              className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-50 py-20 px-15 w-[120px] border border-solid border-grey-300 text-base font-normal font-sans focus:outline-none"
+              className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-50 py-20 px-15 w-[100px] border border-solid border-grey-300 text-base font-normal font-sans focus:outline-none"
               value={amount}
               onChange={handleOnChange}
               onKeyDown={handleKeyDown}
@@ -139,7 +149,7 @@ export const EditableInput = ({
               data-testid="editable-input"
             />
             <TextButton
-              className={`lowercase text-[12px] mt-5 sm:mt-0 font-sans ${
+              className={`lowercase text-[12px] mt-5 sm:mt-0 font-sans min-w-fit ml-10 ${
                 amountValid && !error?.hasError
                   ? ''
                   : 'text-grey-300 hover:text-grey-300 cursor-default'
@@ -148,6 +158,14 @@ export const EditableInput = ({
               aria-label={updateButtonText}
             >
               {updateButtonText}
+            </TextButton>
+            <span className="text-grey-400 px-3">|</span>
+            <TextButton
+              className="lowercase text-[12px] mt-5 sm:mt-0 font-sans text-error-400 hover:text-error-200  min-w-fit"
+              onClick={handleOnCancel}
+              aria-label={cancelButtonText}
+            >
+              {cancelButtonText}
             </TextButton>
           </div>
           {error?.hasError && (

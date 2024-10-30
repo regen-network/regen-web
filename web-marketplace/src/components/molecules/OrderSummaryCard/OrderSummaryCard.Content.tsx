@@ -114,6 +114,7 @@ export function OrderSummaryContent({
           inputAriaLabel={_(msg`Editable credits`)}
           editButtonAriaLabel={_(msg`Edit`)}
           updateButtonText={_(msg`update`)}
+          cancelButtonText={_(msg`cancel`)}
           name="editable-credits"
           onInvalidValue={onInvalidCredits}
           error={{

@@ -462,7 +462,7 @@ msgstr ""
 msgid "Amount Tradable"
 msgstr ""
 
-#: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:77
+#: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:78
 msgid "Anchoring in progress"
 msgstr ""
 
@@ -636,7 +636,6 @@ msgid "Blockchain Details"
 msgstr ""
 
 #: src/components/organisms/Order/Order.Summary.tsx:180
-#: src/components/organisms/PostFlow/PostFlow.constants.ts:49
 #: src/lib/constants/shared.constants.tsx:94
 #: src/pages/ProjectFinished/ProjectFinished.tsx:93
 msgid "blockchain record"
@@ -811,6 +810,10 @@ msgstr ""
 
 #: src/components/organisms/Order/Order.tsx:99
 msgid "certificate"
+msgstr ""
+
+#: src/pages/Certificate/Certificate.tsx:60
+msgid "certificate not found"
 msgstr ""
 
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:5
@@ -1070,11 +1073,11 @@ msgstr ""
 msgid "Create Credit Class"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.constants.ts:51
+#: src/components/organisms/PostFlow/PostFlow.constants.ts:50
 msgid "Create Data Post"
 msgstr ""
 
-#: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:73
+#: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:74
 msgid "create post"
 msgstr ""
 
@@ -1151,7 +1154,7 @@ msgid "credit class"
 msgstr ""
 
 #: src/pages/Certificate/Certificate.constants.ts:15
-#: src/pages/Certificate/Certificate.utils.ts:43
+#: src/pages/Certificate/Certificate.utils.ts:44
 msgid "Credit class"
 msgstr ""
 
@@ -1454,11 +1457,11 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.constants.ts:52
+#: src/components/organisms/PostFlow/PostFlow.constants.ts:51
 msgid "Draft created!"
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.constants.ts:53
+#: src/components/organisms/PostFlow/PostFlow.constants.ts:52
 msgid "Draft saved!"
 msgstr ""
 
@@ -1849,6 +1852,10 @@ msgstr ""
 msgid "i.e. Sunnybrook Farms"
 msgstr ""
 
+#: src/pages/Certificate/Certificate.tsx:65
+msgid "If you do not see your certificate within 24 hours, please reach out to <0>support@regen.network</0>."
+msgstr ""
+
 #: src/components/organisms/MediaForm/MediaFormStory.tsx:164
 msgid "If you don’t have a video for this project, you can add a photo to enhance the story section of your project page."
 msgstr ""
@@ -2034,7 +2041,7 @@ msgstr ""
 msgid "Learn more»"
 msgstr ""
 
-#: src/pages/Certificate/Certificate.tsx:79
+#: src/pages/Certificate/Certificate.tsx:92
 msgid "Link copied to your clipboard"
 msgstr ""
 
@@ -2696,7 +2703,7 @@ msgstr ""
 msgid "primary impact"
 msgstr ""
 
-#: src/pages/Certificate/Certificate.tsx:88
+#: src/pages/Certificate/Certificate.tsx:101
 msgid "print certificate"
 msgstr ""
 
@@ -2780,7 +2787,7 @@ msgstr ""
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:183
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:79
 #: src/pages/Certificate/Certificate.constants.ts:14
-#: src/pages/Certificate/Certificate.utils.ts:36
+#: src/pages/Certificate/Certificate.utils.ts:37
 msgid "Project"
 msgstr ""
 
@@ -3133,7 +3140,7 @@ msgid "Retire credits upon transfer"
 msgstr ""
 
 #: src/pages/Certificate/Certificate.constants.ts:16
-#: src/pages/Certificate/Certificate.utils.ts:50
+#: src/pages/Certificate/Certificate.utils.ts:51
 msgid "Retired by"
 msgstr ""
 
@@ -3376,7 +3383,7 @@ msgid "share"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:105
-#: src/pages/Certificate/Certificate.tsx:74
+#: src/pages/Certificate/Certificate.tsx:87
 msgid "Share"
 msgstr ""
 
@@ -3404,7 +3411,7 @@ msgstr ""
 msgid "Sign this post"
 msgstr ""
 
-#: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:86
+#: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:87
 msgid "signature"
 msgstr ""
 
@@ -3412,7 +3419,7 @@ msgstr ""
 msgid "Signed by"
 msgstr ""
 
-#: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:90
+#: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:91
 msgid "Signing failed"
 msgstr ""
 
@@ -3729,6 +3736,10 @@ msgstr ""
 msgid "This address is already linked to another account. Remove it from that account and connect it to yours?"
 msgstr ""
 
+#: src/pages/Certificate/Certificate.tsx:62
+msgid "This certificate has not been generated yet because the credit transfer to you is still pending."
+msgstr ""
+
 #: src/components/organisms/RolesForm/components/AdminModal/AdminModal.tsx:92
 msgid "This change will only be made after you save the change and sign the transaction."
 msgstr ""
@@ -3908,6 +3919,10 @@ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:206
 msgid "Traditional grazing"
+msgstr ""
+
+#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:106
+msgid "Transfer pending"
 msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:17
@@ -4381,7 +4396,7 @@ msgstr ""
 msgid "You must log in in order to view the content of this page."
 msgstr ""
 
-#: src/components/organisms/PostFlow/PostFlow.constants.ts:50
+#: src/components/organisms/PostFlow/PostFlow.constants.ts:49
 msgid "You successfully created this post but signing failed."
 msgstr ""
 
@@ -4417,8 +4432,16 @@ msgstr ""
 msgid "your profiles"
 msgstr ""
 
+#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:112
+msgid "Your purchase was successful but the credit transfer process hasn’t been completed just yet."
+msgstr ""
+
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:7
 msgid "Your put action was successful!"
+msgstr ""
+
+#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:119
+msgid "Your retirement certificate will be generated as soon as the credits are transferred, please check later. Meanwhile, we have emailed you a receipt to {email}"
 msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:6

@@ -27,6 +27,7 @@ import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 import { PropsWithChildren } from 'types/react/children';
 import { apolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { reactQueryClient } from 'lib/clients/reactQueryClient';
+import { MARKETPLACE_CLIENT } from 'lib/env';
 import { useDefaultLocale } from 'lib/i18n/hooks/useDefaultLocale';
 
 import PageLoader from 'components/atoms/PageLoader';
@@ -87,6 +88,23 @@ type Props = PropsWithChildren<{ customTheme?: Theme }>;
 
 export const SharedProviders = ({ customTheme, children }: Props) => {
   useDefaultLocale();
+  useEffect(() => {
+    if (MARKETPLACE_CLIENT !== 'regen') {
+      const favicon = document.getElementById('favicon') as HTMLLinkElement;
+      if (favicon) {
+        favicon.href = `/${MARKETPLACE_CLIENT}-favicon.png`;
+        favicon.type = `image/png`;
+      }
+
+      const favicon32 = document.getElementById('favicon32') as HTMLLinkElement;
+      if (favicon32)
+        favicon32.href = `/${MARKETPLACE_CLIENT}-favicon-32x32.png`;
+
+      const favicon16 = document.getElementById('favicon16') as HTMLLinkElement;
+      if (favicon16)
+        favicon16.href = `/${MARKETPLACE_CLIENT}-favicon-16x16.png`;
+    }
+  }, []);
 
   return (
     <QueryClientProvider client={reactQueryClient}>

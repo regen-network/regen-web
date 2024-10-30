@@ -16,7 +16,7 @@ export const useCertificateStyles = makeStyles<{
   certificate: {
     margin: '0 auto',
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(41.25),
+      paddingTop: theme.spacing(25),
     },
     [theme.breakpoints.up('md')]: {
       paddingRight: theme.spacing(60),

@@ -9,7 +9,9 @@ import { useQuery } from '@tanstack/react-query';
 import { normalizeRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { getAccountByCustodialAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByCustodialAddressQuery/getAccountByCustodialAddressQuery';
+import { getTxHashForPaymentIntentQuery } from 'lib/queries/react-query/registry-server/graphql/getTxHashForPaymentIntent/getTxHashForPaymentIntentQuery';
 import { getRetirementByNodeId } from 'lib/queries/react-query/registry-server/graphql/indexer/getRetirementByNodeId/getRetirementByNodeId';
+import { getRetirementByTxHash } from 'lib/queries/react-query/registry-server/graphql/indexer/getRetirementByTxHash/getRetirementByTxHash';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
 import { getDataFromBatchDenomId } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
@@ -17,12 +19,13 @@ import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/
 import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
 
 import { client as sanityClient } from '../../../lib/clients/sanity';
+import { isPaymentIntentId } from '../Certificate.utils';
 
 type Params = {
-  retirementNodeId: string;
+  id: string;
 };
 
-export const useFetchRetirement = ({ retirementNodeId }: Params) => {
+export const useFetchRetirement = ({ id }: Params) => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const [searchParams] = useSearchParams();
   // This is to display customer name for visiting users,
@@ -37,15 +40,40 @@ export const useFetchRetirement = ({ retirementNodeId }: Params) => {
     getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
   );
 
-  // Get retirement
+  // Get retirement through payment intent id
+  // This can happen after successful fiat purchase but the retirement hasn't been found yet
+  const isValidPaymentIntentId = isPaymentIntentId(id);
+  const { data: txHashData, isFetching: isTxHashLoading } = useQuery(
+    getTxHashForPaymentIntentQuery({
+      client: apolloClient,
+      enabled: !!isValidPaymentIntentId && !!apolloClient,
+      paymentIntentId: id,
+    }),
+  );
+  const txHash = txHashData?.data.getTxHashForPaymentIntent;
+  const {
+    data: retirementByTxHashData,
+    isFetching: isRetirementByTxHashLoading,
+  } = useQuery(
+    getRetirementByTxHash({
+      client: apolloClient,
+      enabled: !!txHash && !!apolloClient,
+      txHash: txHash as string,
+    }),
+  );
+
+  // Get retirement through nodeId
   const { data, isLoading } = useQuery(
     getRetirementByNodeId({
       client: apolloClient,
-      nodeId: retirementNodeId,
-      enabled: !!apolloClient,
+      nodeId: id,
+      enabled: !!apolloClient && !isValidPaymentIntentId,
     }),
   );
-  const retirement = data?.data.retirement;
+
+  const retirement = isValidPaymentIntentId
+    ? retirementByTxHashData?.data.retirementByTxHash
+    : data?.data.retirement;
 
   // Extract data from batch denom id
   const retirementData = getDataFromBatchDenomId(retirement?.batchDenom);
@@ -99,6 +127,9 @@ export const useFetchRetirement = ({ retirementNodeId }: Params) => {
 
   return {
     retirement: normalizedRetirement,
-    isLoadingRetirement: isLoading || isLoadingCreditClassesSanity,
+    isLoadingRetirement:
+      (isValidPaymentIntentId
+        ? isTxHashLoading || isRetirementByTxHashLoading
+        : isLoading) || isLoadingCreditClassesSanity,
   };
 };

@@ -5,6 +5,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { msg, t } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
@@ -14,6 +15,7 @@ import {
   processingModalAtom,
   txBuySuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
+import { BLOCKCHAIN_RECORD } from 'lib/constants/shared.constants';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getTxHashForPaymentIntentQuery } from 'lib/queries/react-query/registry-server/graphql/getTxHashForPaymentIntent/getTxHashForPaymentIntentQuery';
@@ -76,33 +78,102 @@ export const useFetchRetirementForPurchase = ({
   );
   const retirement = data?.data?.retirementByTxHash;
 
+  const onPending = useCallback(() => {
+    if (
+      paymentIntentId &&
+      creditsAmount &&
+      currencyAmount &&
+      project &&
+      currency &&
+      displayDenom
+    ) {
+      setProcessingModalAtom(atom => void (atom.open = false));
+
+      setTxBuySuccessfulModalAtom(atom => {
+        atom.open = true;
+        atom.cardItems = [
+          ...getCardItems({
+            retiring,
+            creditsAmount,
+            currencyAmount,
+            project,
+            currency,
+            displayDenom,
+          }),
+          {
+            label: _(BLOCKCHAIN_RECORD),
+            value: {
+              name: _(msg`Transfer pending`),
+              className: 'text-error-400',
+            },
+          },
+        ];
+        atom.title = _(
+          msg`Your purchase was successful but the credit transfer process hasn’t been completed just yet.`,
+        );
+        atom.buttonTitle = _(VIEW_CERTIFICATE);
+        atom.onButtonClick = () =>
+          setTxBuySuccessfulModalAtom(atom => void (atom.open = false));
+        atom.steps = getSteps(paymentOption, retiring);
+        atom.description = _(
+          t`Your retirement certificate will be generated as soon as the credits are transferred, please check later. Meanwhile, we have emailed you a receipt to ${email}`,
+        );
+      });
+      handleSuccess();
+      navigate(`/certificate/${paymentIntentId}?name=${name}`);
+    }
+  }, [
+    _,
+    creditsAmount,
+    currency,
+    currencyAmount,
+    displayDenom,
+    email,
+    handleSuccess,
+    name,
+    navigate,
+    paymentIntentId,
+    paymentOption,
+    project,
+    retiring,
+    setProcessingModalAtom,
+    setTxBuySuccessfulModalAtom,
+  ]);
+
   const fetchTxHash = useCallback(async () => {
     setProcessingModalAtom(atom => void (atom.open = true));
     let i = 1;
+    let refetchedTxHash;
     while (!txHash && i < 10) {
       const res = await refetchTxHash();
-      const txHash = res.data?.data.getTxHashForPaymentIntent;
-      if (!!txHash) {
+      refetchedTxHash = res.data?.data.getTxHashForPaymentIntent;
+      if (!!refetchedTxHash) {
         break;
       }
       i++;
       await timer(1000);
     }
-  }, [refetchTxHash, setProcessingModalAtom, txHash]);
+    if (!refetchedTxHash) {
+      onPending();
+    }
+  }, [onPending, refetchTxHash, setProcessingModalAtom, txHash]);
 
   const fetchRetirement = useCallback(async () => {
     let i = 1;
+    let refetchedRetirement;
     while (i < 10) {
       const res = await refetchRetirement();
-      const retirement = res.data?.data.retirementByTxHash;
-      if (!!retirement) {
+      refetchedRetirement = res.data?.data.retirementByTxHash;
+      if (!!refetchedRetirement) {
         break;
       }
       i++;
       await timer(1000);
     }
-    // TODO what should we do if no retirement found after 10sec?
-  }, [refetchRetirement]);
+    if (!refetchedRetirement) {
+      onPending();
+    }
+  }, [onPending, refetchRetirement]);
 
   useEffect(() => {
     if (paymentIntentId) fetchTxHash();

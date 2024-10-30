@@ -27,9 +27,9 @@ function CertificatePage(): JSX.Element {
   });
   const theme = useTheme();
   const ref = useRef<HTMLDivElement>(null);
-  const { certificateId } = useParams();
+  const { id } = useParams();
   const { retirement, isLoadingRetirement } = useFetchRetirement({
-    retirementNodeId: certificateId ?? '',
+    id: id ?? '',
   });
 
   const certificateData = getCertificateData({ retirement, _ });
@@ -52,43 +52,60 @@ function CertificatePage(): JSX.Element {
             }}
           >
             <Certificate
-              {...certificateData}
+              certificateData={certificateData}
               labels={certificateLabels}
               background="/svg/topology.svg"
               linkComponent={Link as LinkComponentType}
+              certificateNotFoundSrc="/svg/certificate-not-found.svg"
+              certificateNotFoundAlt={_(msg`certificate not found`)}
+              certificateNotFoundTitle={_(
+                msg`This certificate has not been generated yet because the credit transfer to you is still pending.`,
+              )}
+              certificateNotFoundDescription={
+                <Trans>
+                  If you do not see your certificate within 24 hours, please
+                  reach out to{' '}
+                  <a href="support@regen.network">support@regen.network</a>.
+                </Trans>
+              }
             />
           </WithLoader>
         </div>
       </Box>
-      <Grid
-        container
-        className={classes.share}
-        alignItems="flex-end"
-        sx={{ displayPrint: 'none' }}
-      >
-        <Grid item xs={12} md={6} sx={{ mb: { xs: 0, sm: 2 } }}>
-          <Title
-            variant="h4"
-            sx={{ pb: 3.75, textAlign: { xs: 'center', sm: 'inherit' } }}
-          >
-            <Trans>Share</Trans>
-          </Title>
-          <ShareIcons
-            xsSize={theme.spacing(10)}
-            url={`${window.location.origin}/certificate/${certificateId}`}
-            copySuccessText={_(msg`Link copied to your clipboard`)}
-          />
+      {certificateData && (
+        <Grid
+          container
+          className={classes.share}
+          alignItems="flex-end"
+          sx={{ displayPrint: 'none' }}
+        >
+          <Grid item xs={12} md={6} sx={{ mb: { xs: 0, sm: 2 } }}>
+            <Title
+              variant="h4"
+              sx={{ pb: 3.75, textAlign: { xs: 'center', sm: 'inherit' } }}
+            >
+              <Trans>Share</Trans>
+            </Title>
+            <ShareIcons
+              xsSize={theme.spacing(10)}
+              url={`${window.location.origin}/certificate/${id}`}
+              copySuccessText={_(msg`Link copied to your clipboard`)}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <OutlinedButton
+              className={classes.printButton}
+              onClick={() => window.print()}
+            >
+              <PrintIcon className={classes.icon} />{' '}
+              <Trans>print certificate</Trans>
+            </OutlinedButton>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <OutlinedButton
-            className={classes.printButton}
-            onClick={() => window.print()}
-          >
-            <PrintIcon className={classes.icon} />{' '}
-            <Trans>print certificate</Trans>
-          </OutlinedButton>
-        </Grid>
-      </Grid>
+      )}
+      {!isLoadingRetirement && !certificateData && (
+        <div className="pb-40 sm:pb-[100px]" />
+      )}
     </div>
   );
 }

@@ -326,10 +326,7 @@ export const getRegenRoutes = ({
             queryClient: reactQueryClient,
           })}
         />
-        <Route
-          path="certificate/:certificateId"
-          element={<CertificatePage />}
-        />
+        <Route path="certificate/:id" element={<CertificatePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="dashboard">

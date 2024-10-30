@@ -60,27 +60,30 @@ export const normalizeRetirement = ({
   creditClassMetadata,
   issuer,
   owner,
-}: Props): NormalizedRetirement => ({
-  amountRetired: retirement?.amount,
-  batchStartDate: retirementData?.batchStartDate,
-  batchEndDate: retirementData?.batchEndDate,
-  batchId: retirement?.batchDenom,
-  creditClassId: retirementData?.classId,
-  creditClassName:
-    creditClassMetadata?.['schema:name'] ?? retirementData?.classId,
-  creditClassType: creditClass?.creditTypeAbbrev,
-  issuer,
-  owner,
-  nodeId: retirement?.nodeId,
-  projectId: retirementData?.projectId ?? '',
-  projectName:
-    projectMetadata?.['schema:name'] ?? retirementData?.projectId ?? '',
-  projectLocation: project?.jurisdiction,
-  retirementDate: retirement?.timestamp,
-  retirementLabel: sanityCreditClass?.retirementLabel ?? '',
-  retirementIcon: sanityCreditClass?.retirementIcon?.asset?.url ?? '',
-  retirementLocation: retirement?.jurisdiction,
-  retirementReason: retirement?.reason,
-  retiredBy: retirement?.owner,
-  txHash: retirement?.txHash,
-});
+}: Props): NormalizedRetirement | undefined =>
+  retirement
+    ? {
+        amountRetired: retirement.amount,
+        batchStartDate: retirementData?.batchStartDate,
+        batchEndDate: retirementData?.batchEndDate,
+        batchId: retirement.batchDenom,
+        creditClassId: retirementData?.classId,
+        creditClassName:
+          creditClassMetadata?.['schema:name'] ?? retirementData?.classId,
+        creditClassType: creditClass?.creditTypeAbbrev,
+        issuer,
+        owner,
+        nodeId: retirement.nodeId,
+        projectId: retirementData?.projectId ?? '',
+        projectName:
+          projectMetadata?.['schema:name'] ?? retirementData?.projectId ?? '',
+        projectLocation: project?.jurisdiction,
+        retirementDate: retirement.timestamp,
+        retirementLabel: sanityCreditClass?.retirementLabel ?? '',
+        retirementIcon: sanityCreditClass?.retirementIcon?.asset?.url ?? '',
+        retirementLocation: retirement.jurisdiction,
+        retirementReason: retirement.reason,
+        retiredBy: retirement.owner,
+        txHash: retirement.txHash,
+      }
+    : undefined;

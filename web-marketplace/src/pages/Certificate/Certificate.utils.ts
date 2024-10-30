@@ -12,54 +12,60 @@ import { CERTIFICATE_TITLE } from './Certificate.constants';
 /* getCertificateData */
 
 export type GetCertificateDataParams = {
-  retirement: NormalizedRetirement;
+  retirement?: NormalizedRetirement;
   _: TranslatorType;
 };
 
 export const getCertificateData = ({
   retirement,
   _,
-}: GetCertificateDataParams): CertificateType => {
-  return {
-    certificateTitle: `${retirement.retirementLabel} ${_(
-      CERTIFICATE_TITLE,
-    )}`.trim(),
-    certificateIcon: retirement.retirementIcon,
-    creditsUnits: Number(retirement.amountRetired),
-    creditUnitName: retirement.creditClassName,
-    equivalentTonsCO2:
-      retirement.creditClassType === 'C'
-        ? Number(retirement.amountRetired)
-        : undefined,
-    itemLinks: [
-      {
-        name: _(msg`Project`),
-        link: {
-          text: retirement.projectName,
-          href: `/project/${retirement?.projectId}`,
+}: GetCertificateDataParams): CertificateType | undefined => {
+  return retirement
+    ? {
+        certificateTitle: `${retirement.retirementLabel} ${_(
+          CERTIFICATE_TITLE,
+        )}`.trim(),
+        certificateIcon: retirement.retirementIcon,
+        creditsUnits: Number(retirement.amountRetired),
+        creditUnitName: retirement.creditClassName,
+        equivalentTonsCO2:
+          retirement.creditClassType === 'C'
+            ? Number(retirement.amountRetired)
+            : undefined,
+        itemLinks: [
+          {
+            name: _(msg`Project`),
+            link: {
+              text: retirement.projectName,
+              href: `/project/${retirement?.projectId}`,
+            },
+          },
+          {
+            name: _(msg`Credit class`),
+            link: {
+              text: retirement.creditClassName ?? '',
+              href: `/credit-classes/${retirement.creditClassId}`,
+            },
+          },
+          {
+            name: _(msg`Retired by`),
+            link: {
+              text: retirement.owner?.name ?? '',
+              href: retirement.owner?.link ?? '',
+            },
+          },
+        ],
+        retirementLocation: retirement.retirementLocation,
+        retirementReason: retirement.retirementReason,
+        txHash: {
+          text: truncate(retirement.txHash),
+          href: getHashUrl(retirement.txHash),
         },
-      },
-      {
-        name: _(msg`Credit class`),
-        link: {
-          text: retirement.creditClassName ?? '',
-          href: `/credit-classes/${retirement.creditClassId}`,
-        },
-      },
-      {
-        name: _(msg`Retired by`),
-        link: {
-          text: retirement.owner?.name ?? '',
-          href: retirement.owner?.link ?? '',
-        },
-      },
-    ],
-    retirementLocation: retirement.retirementLocation,
-    retirementReason: retirement.retirementReason,
-    txHash: {
-      text: truncate(retirement.txHash),
-      href: getHashUrl(retirement.txHash),
-    },
-    date: retirement.retirementDate,
-  };
+        date: retirement.retirementDate,
+      }
+    : undefined;
+};
+
+export const isPaymentIntentId = (id: string) => {
+  return /^pi_[a-zA-Z0-9]{24}$/.test(id);
 };

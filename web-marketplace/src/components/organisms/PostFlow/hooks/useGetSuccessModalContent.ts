@@ -6,12 +6,13 @@ import { Item, ItemValue } from 'web-components/src/components/modal/TxModal';
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getHashUrl } from 'lib/block-explorer';
+import { BLOCKCHAIN_RECORD } from 'lib/constants/shared.constants';
 import {
   Post,
   PostFile,
 } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 
-import { BLOCKCHAIN_RECORD, FILE_NAMES, PROJECT } from '../PostFlow.constants';
+import { FILE_NAMES, PROJECT } from '../PostFlow.constants';
 
 type GetSuccessModalContentParams = {
   createdPostData?: Post | null;

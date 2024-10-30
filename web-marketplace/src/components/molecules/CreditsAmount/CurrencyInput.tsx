@@ -117,10 +117,10 @@ export const CurrencyInput = ({
             },
           },
           '& .custom-select .MuiSvgIcon-root:not(.denom-icon)': {
-            width: '15px !important',
-            height: '15px !important',
+            width: '10px !important',
+            height: '10px !important',
             right: 'auto !important',
-            top: '-2px !important',
+            top: '1px !important',
             position: 'relative !important',
           },
           '& .MuiSvgIcon-root': {

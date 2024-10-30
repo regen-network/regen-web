@@ -4,14 +4,19 @@ import inject from '@rollup/plugin-inject';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import vitePluginRequire from 'vite-plugin-require';
 import svgrPlugin from 'vite-plugin-svgr';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
+import { createHtmlPlugin } from 'vite-plugin-html';
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
-
+  const env = loadEnv(mode, process.cwd());
+  const index =
+    env.VITE_MARKETPLACE_CLIENT === 'terrasos'
+      ? 'terrasos/index.html'
+      : 'index.html';
   return {
     server: {
       port: 3000,
@@ -40,6 +45,7 @@ export default defineConfig(({ mode }) => {
             outDir: 'build',
             rollupOptions: {
               plugins: [inject({ Buffer: ['buffer/', 'Buffer'] })],
+              input: path.join(__dirname, index),
             },
           }
         : undefined,
@@ -54,6 +60,9 @@ export default defineConfig(({ mode }) => {
       svgrPlugin(),
       vitePluginRequire.default(),
       visualizer(),
+      createHtmlPlugin({
+        template: index,
+      }),
     ],
     define: isDev ? { global: {} } : { 'process.env': {} },
     optimizeDeps: {

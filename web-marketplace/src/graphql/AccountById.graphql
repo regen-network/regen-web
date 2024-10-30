@@ -13,5 +13,11 @@ query AccountById($id: UUID!) {
     hideEcocredits
     hideRetirements
     custodialAddress
+    accountTranslationsById {
+      nodes {
+        languageCode
+        description
+      }
+    }
   }
 }

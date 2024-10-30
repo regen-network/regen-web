@@ -12,5 +12,6 @@ export type ReactQueryProjectByOnChainIdResponse =
 
 export type ReactQueryProjectByOnChainIdProps = {
   client: ApolloClient<unknown>;
+  languageCode: string;
 } & ProjectByOnChainIdQueryVariables &
   ReactQueryBuilderResponse<ReactQueryProjectByOnChainIdResponse>;

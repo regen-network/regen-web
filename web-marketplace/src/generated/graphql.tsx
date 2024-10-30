@@ -7567,6 +7567,13 @@ export type AccountByAddrQuery = (
   & { accountByAddr?: Maybe<(
     { __typename?: 'Account' }
     & Pick<Account, 'id' | 'addr' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'hideEcocredits' | 'hideRetirements'>
+    & { accountTranslationsById: (
+      { __typename?: 'AccountTranslationsConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'AccountTranslation' }
+        & Pick<AccountTranslation, 'languageCode' | 'description'>
+      )>> }
+    ) }
   )> }
 );
 
@@ -7593,6 +7600,13 @@ export type AccountByIdQuery = (
   & { accountById?: Maybe<(
     { __typename?: 'Account' }
     & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce' | 'hideEcocredits' | 'hideRetirements' | 'custodialAddress'>
+    & { accountTranslationsById: (
+      { __typename?: 'AccountTranslationsConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'AccountTranslation' }
+        & Pick<AccountTranslation, 'languageCode' | 'description'>
+      )>> }
+    ) }
   )> }
 );
 
@@ -7890,6 +7904,12 @@ export type ProjectFieldsFragment = (
       { __typename?: 'Document' }
       & Pick<Document, 'name' | 'type' | 'date' | 'url'>
     )>> }
+  ), projectTranslationsById: (
+    { __typename?: 'ProjectTranslationsConnection' }
+    & { nodes: Array<Maybe<(
+      { __typename?: 'ProjectTranslation' }
+      & Pick<ProjectTranslation, 'languageCode' | 'metadata'>
+    )>> }
   ) }
 );
 
@@ -8067,6 +8087,12 @@ export const ProjectFieldsFragmentDoc = gql`
       url
     }
   }
+  projectTranslationsById {
+    nodes {
+      languageCode
+      metadata
+    }
+  }
 }
     ${AccountFieldsFragmentDoc}`;
 export const AccountByAddrDocument = gql`
@@ -8083,6 +8109,12 @@ export const AccountByAddrDocument = gql`
     twitterLink
     hideEcocredits
     hideRetirements
+    accountTranslationsById {
+      nodes {
+        languageCode
+        description
+      }
+    }
   }
 }
     `;
@@ -8165,6 +8197,12 @@ export const AccountByIdDocument = gql`
     hideEcocredits
     hideRetirements
     custodialAddress
+    accountTranslationsById {
+      nodes {
+        languageCode
+        description
+      }
+    }
   }
 }
     `;

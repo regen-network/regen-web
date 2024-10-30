@@ -14,9 +14,10 @@ import {
 export const getProjectByOnChainIdQuery = ({
   onChainId,
   client,
+  languageCode,
   ...params
 }: ReactQueryProjectByOnChainIdProps): ReactQueryProjectByOnChainIdResponse => ({
-  queryKey: getProjectByOnChainIdKey(onChainId),
+  queryKey: getProjectByOnChainIdKey(onChainId, languageCode),
   queryFn: async () => {
     try {
       const projectByOnChainId = await client.query<
@@ -28,9 +29,10 @@ export const getProjectByOnChainIdQuery = ({
         fetchPolicy: 'no-cache',
       });
 
-      await jsonLdCompactProjectMetadata(
-        projectByOnChainId.data?.projectByOnChainId,
-      );
+      await jsonLdCompactProjectMetadata({
+        project: projectByOnChainId.data?.projectByOnChainId,
+        languageCode,
+      });
 
       return projectByOnChainId;
     } catch (e) {

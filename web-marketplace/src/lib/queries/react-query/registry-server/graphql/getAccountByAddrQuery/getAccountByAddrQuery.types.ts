@@ -13,5 +13,6 @@ export type ReactQueryGetAccountByAddrQueryResponse =
 
 export type ReactQueryGetAccountByAddrQueryParams = {
   client: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & AccountByAddrQueryVariables &
   ReactQueryBuilderResponse<ReactQueryGetAccountByAddrQueryResponse>;

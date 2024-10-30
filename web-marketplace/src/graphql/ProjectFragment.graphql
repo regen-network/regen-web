@@ -42,4 +42,10 @@ fragment projectFields on Project {
       url
     }
   }
+  projectTranslationsById {
+    nodes {
+      languageCode
+      metadata
+    }
+  }
 }

@@ -9,7 +9,7 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
-import { updateMultiStepCurrency } from 'pages/BuyCredits/BuyCredits.utils';
+import { updateMultiStepCurrencyAndPaymentOption } from 'pages/BuyCredits/BuyCredits.utils';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
@@ -74,9 +74,15 @@ export const CurrencyInput = ({
               )?.[0].askBaseDenom,
             };
       setValue(CURRENCY, currency);
-      updateMultiStepCurrency(handleSave, data, currency, activeStep);
+      updateMultiStepCurrencyAndPaymentOption(
+        handleSave,
+        data,
+        currency,
+        activeStep,
+        paymentOption,
+      );
     },
-    [activeStep, cryptoCurrencies, data, handleSave, setValue],
+    [activeStep, cryptoCurrencies, data, handleSave, paymentOption, setValue],
   );
 
   return (

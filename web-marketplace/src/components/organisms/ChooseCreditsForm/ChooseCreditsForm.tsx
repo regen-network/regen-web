@@ -35,7 +35,7 @@ import {
 } from 'pages/BuyCredits/BuyCredits.types';
 import {
   getCreditsAvailableBannerText,
-  updateMultiStepCurrency,
+  updateMultiStepCurrencyAndPaymentOption,
 } from 'pages/BuyCredits/BuyCredits.utils';
 import {
   ProjectWithOrderData,
@@ -177,10 +177,10 @@ export const ChooseCreditsForm = React.memo(
     });
 
     useEffect(() => {
-      if (currency.askDenom !== USD_DENOM) {
+      if (currency && currency.askDenom !== USD_DENOM) {
         form.trigger(CURRENCY_AMOUNT);
       }
-    }, [userBalance, form, currency.askDenom]);
+    }, [userBalance, form, currency]);
 
     const filteredCryptoSellOrders = useMemo(
       () =>
@@ -221,7 +221,13 @@ export const ChooseCreditsForm = React.memo(
           [CREDIT_VINTAGE_OPTIONS]: [],
           [CURRENCY]: currency,
         });
-        updateMultiStepCurrency(handleSave, data, currency, activeStep);
+        updateMultiStepCurrencyAndPaymentOption(
+          handleSave,
+          data,
+          currency,
+          activeStep,
+          option,
+        );
       },
       [
         form,
@@ -240,7 +246,13 @@ export const ChooseCreditsForm = React.memo(
         setPaymentOption(PAYMENT_OPTIONS.CARD);
         form.setValue(CREDIT_VINTAGE_OPTIONS, []);
         form.setValue(CURRENCY, cardCurrency);
-        updateMultiStepCurrency(handleSave, data, cardCurrency, activeStep);
+        updateMultiStepCurrencyAndPaymentOption(
+          handleSave,
+          data,
+          cardCurrency,
+          activeStep,
+          PAYMENT_OPTIONS.CARD,
+        );
       }
     }, [cardSellOrders.length, initialPaymentOption]); // just run this once
 

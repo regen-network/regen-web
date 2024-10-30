@@ -4,7 +4,9 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
@@ -19,11 +21,15 @@ type Props = {
 export const useCreditClasses = ({ skippedClassId }: Props) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   // All credit class from sanity
   const { data: creditClassData, isFetching: isSanityCreditClassLoading } =
     useQuery(
-      getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+      getAllSanityCreditClassesQuery({
+        sanityClient,
+        languageCode: selectedLanguage,
+      }),
     );
 
   // Filtered based on env variable

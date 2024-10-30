@@ -2,6 +2,7 @@ import { QueryClient } from '@tanstack/react-query';
 
 import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQueryClient';
 import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketplace/marketplaceQueryClient';
+import { defaultLocale } from 'lib/i18n/i18n';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
@@ -30,6 +31,7 @@ export const storefrontLoader =
     });
     const allCreditClassesQuery = getAllSanityCreditClassesQuery({
       sanityClient,
+      languageCode: defaultLocale,
     });
     const projectsQuery = getProjectsQuery({
       client: ecocreditClient,

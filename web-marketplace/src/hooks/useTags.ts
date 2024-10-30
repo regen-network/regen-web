@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { ProjectTagType } from 'web-components/src/components/molecules/ProjectTag/ProjectTag.types';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { getAllActivityQuery } from 'lib/queries/react-query/sanity/getAllActivityQuery/getAllActivityQuery';
 import { getAllEcosystemQuery } from 'lib/queries/react-query/sanity/getAllEcosystemQuery/getAllEcosystemQuery';
@@ -14,14 +16,17 @@ type Params = {
 };
 
 export const useTags = ({ activities, ecosystemTypes }: Params) => {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { data: allProjectActivityData } = useQuery(
     getAllActivityQuery({
       sanityClient,
+      languageCode: selectedLanguage,
     }),
   );
   const { data: allProjectEcosystemData } = useQuery(
     getAllEcosystemQuery({
       sanityClient,
+      languageCode: selectedLanguage,
     }),
   );
   const projectActivityIconsMapping = getIconsMapping({

@@ -2,9 +2,11 @@ import { useLocation } from 'react-router-dom';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import SEO from 'web-components/src/components/seo';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getAllBuyersPageQuery } from 'lib/queries/react-query/sanity/getAllBuyersPageQuery/getAllBuyersPageQuery';
 
 import WithLoader from 'components/atoms/WithLoader';
@@ -26,10 +28,14 @@ import { useFetchProjectsByIds } from './hooks/useFetchProjectsByIds';
 
 const BuyersPage = (): JSX.Element => {
   const { _ } = useLingui();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { classes: styles } = useBuyersStyles();
   const location = useLocation();
   const { data, isLoading: isLoadingPage } = useQuery(
-    getAllBuyersPageQuery({ sanityClient }),
+    getAllBuyersPageQuery({
+      sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
   const content = data?.allBuyersPage?.[0];
   const featuredProjectIds = content?.featuredProjectCardsSection?.cards?.map(

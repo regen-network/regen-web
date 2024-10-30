@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { OrderBy } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
@@ -9,6 +10,7 @@ import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table
 import { BridgedEcocredits } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { messageActionEquals } from 'lib/ecocredit/constants';
 import { normalizeBridgedEcocredits } from 'lib/normalizers/bridge/normalizeBridgedEcocredits';
@@ -46,6 +48,7 @@ interface Output {
 export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
   const { txClient } = useLedger();
   const statusToRefetchRef = useRef<boolean[]>([]);
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
@@ -57,7 +60,11 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
 
   // AllCreditClasses
   const { data: creditClassData } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   // TxsEvent

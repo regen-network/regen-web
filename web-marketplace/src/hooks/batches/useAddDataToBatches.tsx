@@ -30,7 +30,11 @@ export const useAddDataToBatches = ({
     data: sanityCreditClassData,
     isFetching: isLoadingSanityCreditClass,
   } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const { data: createBatchTxs, isFetching: isLoadingCreateBatchTxs } =

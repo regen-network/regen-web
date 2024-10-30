@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getBatchesByClassQuery } from 'lib/queries/react-query/ecocredit/getBatchesByClass/getBatchesByClass';
 import { getBatchesByIssuerQuery } from 'lib/queries/react-query/ecocredit/getBatchesByIssuerQuery/getBatchesByIssuerQuery';
 import { getBatchesByProjectQuery } from 'lib/queries/react-query/ecocredit/getBatchesByProjectQuery/getBatchesByProjectQuery';
@@ -37,6 +39,7 @@ export const useFetchPaginatedBatches = ({
 } => {
   const { ecocreditClient, dataClient, txClient } = useLedger();
   const reactQueryClient = useQueryClient();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { page: routePage } = useParams();
   // Page index starts at 1 for route
   // Page index starts at 0 for MUI Table
@@ -55,7 +58,11 @@ export const useFetchPaginatedBatches = ({
   };
 
   const sanityCreditClassDataResult = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   /* Default batches fetch */

@@ -1,7 +1,9 @@
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
@@ -17,6 +19,7 @@ type Params = {
 
 export const useCreditClassDetails = ({ onChainClass, metadata }: Params) => {
   const { ecocreditClient } = useLedger();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   // Credit Type
   const { data: creditTypeData } = useQuery(
@@ -31,7 +34,10 @@ export const useCreditClassDetails = ({ onChainClass, metadata }: Params) => {
 
   // Credit Type Icon
   const { data: sanityCreditTypeData } = useQuery(
-    getAllCreditTypeQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllCreditTypeQuery({
+      sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const creditTypeSanity = sanityCreditTypeData?.allCreditType?.find(
@@ -41,7 +47,10 @@ export const useCreditClassDetails = ({ onChainClass, metadata }: Params) => {
   );
   // Credit Offset Methods
   const { data: sanityOffsetMethodData } = useQuery(
-    getAllOffsetMethodQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllOffsetMethodQuery({
+      sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
   const offsetMethodIconsMapping = getIconsMapping({
     data: sanityOffsetMethodData?.allOffsetMethod,

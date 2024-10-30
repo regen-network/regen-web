@@ -96,7 +96,11 @@ function ProjectDetails(): JSX.Element {
   const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
 
   const { data: sanityProjectPageData } = useQuery(
-    getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllProjectPageQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const sanityProjectPage = sanityProjectPageData?.allProjectPage?.[0];
@@ -104,7 +108,11 @@ function ProjectDetails(): JSX.Element {
     sanityProjectPage?.gettingStartedResourcesSection;
 
   const { data: sanitySoldOutProjects } = useQuery(
-    getSoldOutProjectsQuery({ sanityClient, enabled: !!sanityClient }),
+    getSoldOutProjectsQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const soldOutProjectsIds = useAllSoldOutProjectsIds({
@@ -112,7 +120,11 @@ function ProjectDetails(): JSX.Element {
   });
 
   const { data: sanityCreditClassData } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const setBuyFromProjectId = useSetAtom(buyFromProjectIdAtom);

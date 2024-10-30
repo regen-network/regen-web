@@ -1,8 +1,10 @@
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { ProjectImpactCardProps } from 'web-components/src/components/cards/ProjectImpactCard/ProjectImpactCard';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import {
   AnchoredProjectMetadataLD,
@@ -37,6 +39,7 @@ export default function useImpact({
   const projectImpact = projectMetadata?.['regen:primaryImpact'];
   const coBenefits = creditClassMetadata?.['regen:coBenefits'];
   const projectCoBenefits = projectMetadata?.['regen:coBenefits'];
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const primaryImpactSdgIris =
     primaryImpact?.['regen:SDGs']?.map(sdg => sdg['@id']) || [];
@@ -57,6 +60,7 @@ export default function useImpact({
       iris: sdgIris,
       sanityClient,
       enabled: !!sanityClient && sdgIris.length > 0,
+      languageCode: selectedLanguage,
     }),
   );
   const sdgs = data?.allSdg;

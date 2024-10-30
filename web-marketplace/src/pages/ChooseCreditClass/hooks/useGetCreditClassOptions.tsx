@@ -4,7 +4,9 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { normalizeCreditClassItems } from 'lib/normalizers/creditClass/normalizeCreditClassItems/normalizeCreditClassItems';
@@ -27,6 +29,7 @@ function useGetCreditClassItems(): {
   creditClassItems: CreditClassItem[];
   loading: boolean;
 } {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { activeAccount } = useAuth();
@@ -48,7 +51,11 @@ function useGetCreditClassItems(): {
   );
 
   const { data: sanityCreditClasses } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const classIds = classesByIssuerData?.data.allClassIssuers?.nodes.map(

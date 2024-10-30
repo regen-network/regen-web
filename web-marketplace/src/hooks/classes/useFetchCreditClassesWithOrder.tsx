@@ -76,6 +76,7 @@ export const useFetchCreditClassesWithOrder = ({
     getAllSanityCreditClassesQuery({
       sanityClient,
       enabled: !!sanityClient,
+      languageCode: selectedLanguage,
     }),
   );
 

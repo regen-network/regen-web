@@ -1,9 +1,11 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
@@ -33,6 +35,7 @@ export const useFetchProjectsWithOrders = ({
 }: Props): Response => {
   const { marketplaceClient } = useLedger();
   const reactQueryClient = useQueryClient();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { wallet } = useWallet();
 
   const {
@@ -82,6 +85,7 @@ export const useFetchProjectsWithOrders = ({
       return getProjectByIdQuery({
         id,
         sanityClient,
+        languageCode: selectedLanguage,
         enabled: !!sanityClient && !!id,
       });
     }),

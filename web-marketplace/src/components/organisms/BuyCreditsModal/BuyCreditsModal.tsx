@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import { useQuery } from '@tanstack/react-query';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { RadioGroup } from 'formik-mui';
+import { useAtom } from 'jotai';
 
 import { Flex } from 'web-components/src/components/box';
 import Card from 'web-components/src/components/cards/Card';
@@ -31,6 +32,7 @@ import {
 } from 'web-components/src/components/typography';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client } from 'lib/clients/sanity';
 import {
   COUNTRY_LABEL,
@@ -132,6 +134,7 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     const { _ } = useLingui();
     const { classes, cx } = useBuyCreditsModalStyles();
     const theme = useTheme();
+    const [selectedLanguage] = useAtom(selectedLanguageAtom);
     const { marketplaceClient } = useLedger();
     const [selectedSellOrder, setSelectedSellOrder] = useState<
       UISellOrderInfo | undefined
@@ -141,7 +144,10 @@ const BuyCreditsModal: React.FC<React.PropsWithChildren<BuyCreditsModalProps>> =
     const location = useLocation();
 
     const { data: buyModalContent } = useQuery(
-      getBuyModalQuery({ sanityClient: client }),
+      getBuyModalQuery({
+        sanityClient: client,
+        languageCode: selectedLanguage,
+      }),
     );
 
     const userBalance = useFetchUserBalance({ selectedSellOrder });

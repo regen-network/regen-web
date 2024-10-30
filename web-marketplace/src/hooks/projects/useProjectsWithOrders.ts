@@ -118,7 +118,11 @@ export function useProjectsWithOrders({
   // Sanity credit classes
   const { data: creditClassData, isFetching: isLoadingSanityCreditClasses } =
     useQuery(
-      getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+      getAllSanityCreditClassesQuery({
+        sanityClient,
+        enabled: !!sanityClient,
+        languageCode: selectedLanguage,
+      }),
     );
 
   // Sanity prefinance projects
@@ -129,6 +133,7 @@ export function useProjectsWithOrders({
     getAllSanityPrefinanceProjectsQuery({
       sanityClient,
       enabled: !!sanityClient,
+      languageCode: selectedLanguage,
     }),
   );
 
@@ -319,6 +324,7 @@ export function useProjectsWithOrders({
         id,
         sanityClient,
         enabled: !!sanityClient && !!id,
+        languageCode: selectedLanguage,
       });
     }),
   });

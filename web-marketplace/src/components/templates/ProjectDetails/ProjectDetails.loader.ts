@@ -3,6 +3,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQueryClient';
 import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketplace/marketplaceQueryClient';
+import { defaultLocale } from 'lib/i18n/i18n';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
@@ -31,9 +32,13 @@ export const projectDetailsLoader =
     const ecocreditClient = await getEcocreditQueryClient();
 
     // Queries
-    const allProjectPageQuery = getAllProjectPageQuery({ sanityClient });
+    const allProjectPageQuery = getAllProjectPageQuery({
+      sanityClient,
+      languageCode: defaultLocale,
+    });
     const allCreditClassesQuery = getAllSanityCreditClassesQuery({
       sanityClient,
+      languageCode: defaultLocale,
     });
     const projectQuery = getProjectQuery({
       request: { projectId },

@@ -70,7 +70,11 @@ export const useFetchEcocredit = ({ batchDenom }: Props): Response => {
 
   // AllCreditClasses
   const { data: creditClassesData } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   // Credit Class

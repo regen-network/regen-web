@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 import { CardsGridContainer } from 'web-components/src/components/organisms/CardsGridContainer/CardsGridContainer';
 import Section from 'web-components/src/components/section';
 
 import { Maybe, Scalars } from 'generated/sanity-graphql';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import {
   DRAFT_TEXT,
@@ -50,8 +52,13 @@ export function ProjectCardsSection({
   const { _ } = useLingui();
   const { classes } = useSectionStyles();
   const { track } = useTracker();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { data: sanitySoldOutProjects, isFetching } = useQuery(
-    getSoldOutProjectsQuery({ sanityClient, enabled: !!sanityClient }),
+    getSoldOutProjectsQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
   const soldOutProjectsIds = useAllSoldOutProjectsIds({
     sanitySoldOutProjects,

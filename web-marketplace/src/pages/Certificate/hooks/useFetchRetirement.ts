@@ -5,7 +5,9 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { normalizeRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { getAccountByCustodialAddressQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByCustodialAddressQuery/getAccountByCustodialAddressQuery';
@@ -32,12 +34,17 @@ export const useFetchRetirement = ({ id }: Params) => {
   // because we don't store their name in the account table since the email has not been verified
   const customerName = searchParams.get('name');
 
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   // Sanity credit classes
   const {
     data: allSanityCreditClasses,
     isFetching: isLoadingCreditClassesSanity,
   } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   // Get retirement through payment intent id

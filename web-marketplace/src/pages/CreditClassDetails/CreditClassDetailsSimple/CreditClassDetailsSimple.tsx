@@ -4,6 +4,7 @@ import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
 import { CardRibbon } from 'web-components/src/components/atoms/CardRibbon/CardRibbon';
@@ -17,6 +18,7 @@ import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   ECOSYSTEM_LABEL,
   SEE_LESS,
@@ -69,6 +71,7 @@ const CreditClassDetailsSimple: React.FC<
 }) => {
   const { _ } = useLingui();
   const { classes: styles, cx } = useCreditClassDetailsSimpleStyles();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const displayName = getCreditClassDisplayName(onChainClass.id, metadata);
   const image = content?.image;
@@ -95,7 +98,11 @@ const CreditClassDetailsSimple: React.FC<
     useFetchPaginatedBatches({ creditClassId: onChainClass.id });
 
   const { data: sanityCreditClassPageData } = useQuery(
-    getAllCreditClassPageQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllCreditClassPageQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
   const sanityCreditClassPage =
     sanityCreditClassPageData?.allCreditClassPage?.[0];

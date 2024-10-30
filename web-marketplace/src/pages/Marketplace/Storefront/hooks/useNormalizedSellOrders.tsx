@@ -77,7 +77,10 @@ export const useNormalizedSellOrders = (): ResponseType => {
   );
 
   const { data: sanityCreditClassData } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   // Batch pagination

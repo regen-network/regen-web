@@ -1,11 +1,13 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { getBasketBalancesQuery } from 'lib/queries/react-query/ecocredit/basket/getBasketBalances/getBasketBalancesQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
@@ -34,6 +36,7 @@ export const useFetchBasketEcocredits = ({
 }: Params): FetchBasketEcocreditsType => {
   const { basketClient } = useLedger();
   const reactQueryClient = useQueryClient();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
       page: 0,
@@ -80,7 +83,11 @@ export const useFetchBasketEcocredits = ({
 
   // AllCreditClasses
   const { data: creditClassData } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   // Normalization

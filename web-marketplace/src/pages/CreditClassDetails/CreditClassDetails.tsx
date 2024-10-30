@@ -57,7 +57,10 @@ function CreditClassDetails({
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
 
   const { data: buyModalOptionsContent } = useQuery(
-    getBuyModalOptionsQuery({ sanityClient: client }),
+    getBuyModalOptionsQuery({
+      sanityClient: client,
+      languageCode: selectedLanguage,
+    }),
   );
   const buyModalOptions = buyModalOptionsContent?.allBuyModalOptions[0];
   const scheduleCallLink = String(

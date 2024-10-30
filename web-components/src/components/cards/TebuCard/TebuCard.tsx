@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
+import cn from 'classnames';
 
 import Card from '../../cards/Card';
 import InfoIconOutlined from '../../icons/InfoIconOutlined';
 import InfoTooltip from '../../tooltip/InfoTooltip';
-import { Body, Label } from '../../typography';
-import cn from 'classnames'
+import { Body } from '../../typography';
 
 export interface TebuCardProps {
   className?: string;
@@ -45,7 +45,9 @@ export default function TebuCard({
             footerLabels.map(({ label, value }) => (
               <Box className="flex items-center" key={label}>
                 <Body className="font-montserrat text-[12px]">{label}</Body>
-                <Body className="font-montserrat font-bold ml-3 text-[12px]">{value}</Body>
+                <Body className="font-montserrat font-bold ml-3 text-[12px]">
+                  {value}
+                </Body>
               </Box>
             ))}
         </Box>

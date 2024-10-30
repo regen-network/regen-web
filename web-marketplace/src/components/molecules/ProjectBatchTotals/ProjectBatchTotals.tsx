@@ -7,7 +7,10 @@ import { quantityFormatNumberOptions } from 'config/decimals';
 import CreditsIssuedIcon from 'web-components/src/components/icons/CreditsIssued';
 import CreditsRetiredIcon from 'web-components/src/components/icons/CreditsRetired';
 import CreditsTradeableIcon from 'web-components/src/components/icons/CreditsTradeable';
+import CreditsTradeableAltIcon from 'web-components/src/components/icons/CreditsTradeableAlt';
 import { LabeledValue } from 'web-components/src/components/text-layouts';
+
+import { IS_TERRASOS } from 'lib/env';
 
 import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { getCreditsTooltip } from 'pages/Projects/AllProjects/utils/getCreditsTooltip';
@@ -73,7 +76,9 @@ export function ProjectBatchTotals({
       </GridItem>
       <GridItem>
         <LabeledValue
-          label={_(msg`Credits Tradable`)}
+          label={
+            IS_TERRASOS ? _(msg`Credits Available`) : _(msg`Credits Tradable`)
+          }
           tooltipLabel={_(TRADEABLE_CREDITS_TOOLTIP)}
           tooltipNumber={getCreditsTooltip({
             isSoldOut,
@@ -86,7 +91,7 @@ export function ProjectBatchTotals({
             ...quantityFormatNumberOptions,
             maximumFractionDigits: MAX_FRACTION_DIGITS_PROJECT_CREDITS,
           }}
-          icon={<CreditsTradeableIcon />}
+          icon={IS_TERRASOS ? <CreditsTradeableAltIcon /> : <CreditsTradeableIcon />}
         />
       </GridItem>
       <GridItem>

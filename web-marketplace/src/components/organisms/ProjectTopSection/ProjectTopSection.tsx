@@ -37,6 +37,7 @@ import {
   MAPBOX_TOKEN,
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 import { Prefinance } from 'components/templates/ProjectDetails/ProjectDetails.Prefinance';
+import TerrasosCreditsInfo from 'components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo';
 import { useTags } from 'hooks/useTags';
 
 import { ProjectBatchTotals } from '../../molecules';
@@ -199,6 +200,9 @@ function ProjectTopSection({
     !!ratingsAndCertificationsData ||
     !!otcCard;
 
+  const isTerrasosProjectPage =
+    projectPageMetadata?.['@type'] === 'TerrasosProjectInfo';
+
   return (
     <Section classes={{ root: classes.section }}>
       <Grid
@@ -282,7 +286,28 @@ function ProjectTopSection({
                 }}
               />
             )}
+            {/* TODO: add Tebu credits table */}
+            {/* {isTerrasosProjectPage && ( */}
           </Box>
+          {true && projectPageMetadata && (
+            <TerrasosCreditsInfo
+              _={_}
+              projectPageMetadata={projectPageMetadata}
+              projectBatchTotals={
+                onChainProjectId && batchData?.totals ? (
+                  <ProjectBatchTotals
+                    projectWithOrderData={projectWithOrderData}
+                    soldOutProjectsIds={soldOutProjectsIds}
+                    totals={batchData.totals}
+                    sx={{
+                      mt: { xs: 10, sm: 12, md: 16 },
+                      mb: quote ? { xs: 10, sm: 12, md: 25 } : {},
+                    }}
+                  />
+                ) : undefined
+              }
+            />
+          )}
           {quote && (
             <div>
               <Title

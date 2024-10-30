@@ -13,7 +13,7 @@ import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import { useQuery } from '@tanstack/react-query';
 import { Feature, Point } from 'geojson';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { parse } from 'wellknown';
 
 import PostCard from 'web-components/src/components/cards/PostCard/PostCard';
@@ -35,6 +35,7 @@ import { UseStateSetter } from 'web-components/src/types/react/useState';
 import copyTextToClipboard from 'web-components/src/utils/copy';
 
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { COPY_SUCCESS } from 'lib/constants/shared.constants';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
@@ -84,6 +85,7 @@ export const DataStreamPost = ({
   openCreatePostModal,
 }: Props) => {
   const { _ } = useLingui();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const setBannerText = useSetAtom(bannerTextAtom);
@@ -102,6 +104,7 @@ export const DataStreamPost = ({
       client: graphqlClient,
       id: post.creatorAccountId,
       enabled: !!graphqlClient,
+      languageCode: selectedLanguage,
     }),
   );
   const creatorAccount = creatorAccountData?.accountById;

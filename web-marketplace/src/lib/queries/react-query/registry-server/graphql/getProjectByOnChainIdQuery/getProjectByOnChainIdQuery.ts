@@ -34,6 +34,26 @@ export const getProjectByOnChainIdQuery = ({
         languageCode,
       });
 
+      const localizedDocuments =
+        projectByOnChainId.data?.projectByOnChainId?.documentsByProjectId?.nodes.map(
+          node => {
+            const document =
+              node?.documentTranslationsById?.nodes.find(
+                translation => translation?.languageCode === languageCode,
+              ) ?? node;
+
+            return Object.assign({}, node, {
+              name: document?.name,
+            });
+          },
+        ) ?? [];
+
+      if (projectByOnChainId.data?.projectByOnChainId) {
+        projectByOnChainId.data.projectByOnChainId.documentsByProjectId = {
+          nodes: localizedDocuments,
+        };
+      }
+
       return projectByOnChainId;
     } catch (e) {
       return null;

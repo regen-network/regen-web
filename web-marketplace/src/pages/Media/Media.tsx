@@ -7,7 +7,9 @@ import {
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
 import { useNavigateNext } from 'pages/ProjectCreate/hooks/useNavigateNext';
@@ -21,6 +23,7 @@ import { useProjectEditContext } from '../ProjectEdit';
 
 const Media = (): JSX.Element => {
   const { _ } = useLingui();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
@@ -29,6 +32,7 @@ const Media = (): JSX.Element => {
   const { data } = useQuery(
     getProjectByIdQuery({
       client: graphqlClient,
+      languageCode: selectedLanguage,
       enabled: !isEdit,
       id: projectId,
     }),

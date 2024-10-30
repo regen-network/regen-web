@@ -105,6 +105,7 @@ export const useProjectWithMetadata = ({
         client: graphqlClient,
         enabled: createOrEditOffChain,
         id: projectId,
+        languageCode: selectedLanguage,
       }),
     );
   const projectById = projectByOffChainIdRes?.data?.projectById;
@@ -135,6 +136,7 @@ export const useProjectWithMetadata = ({
       client: graphqlClient,
       enabled: editOnChain,
       onChainId: projectId as string,
+      languageCode: selectedLanguage,
     }),
   );
 
@@ -161,7 +163,7 @@ export const useProjectWithMetadata = ({
     }
     if (editOnChain) {
       await reactQueryClient.invalidateQueries({
-        queryKey: getProjectByOnChainIdKey(projectId),
+        queryKey: getProjectByOnChainIdKey(projectId, selectedLanguage),
       });
       await reactQueryClient.invalidateQueries({
         queryKey: getProjectsByAdminKey({ admin: onChainProject?.admin }),
@@ -176,6 +178,7 @@ export const useProjectWithMetadata = ({
     createOrEditOffChain,
     editOnChain,
     projectId,
+    selectedLanguage,
     onChainProject?.admin,
   ]);
 

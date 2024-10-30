@@ -64,6 +64,7 @@ function Post(): JSX.Element {
   } = useQuery(
     getProjectByIdQuery({
       client: graphqlClient,
+      languageCode: selectedLanguage,
       enabled: !!projectId,
       id: projectId,
     }),
@@ -107,6 +108,7 @@ function Post(): JSX.Element {
   const { data: creatorAccountData } = useQuery(
     getAccountByIdQuery({
       client: graphqlClient,
+      languageCode: selectedLanguage,
       id: data?.creatorAccountId ?? '',
       enabled: !!data?.creatorAccountId && !!graphqlClient,
     }),

@@ -9,6 +9,7 @@ import {
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
 import { RoleField } from './RoleField';
 import {
+  accountTranslationsByIdMock,
   activeAccountId,
   allAccounts as initialAllAccounts,
   authenticatedAccountIds,
@@ -39,6 +40,7 @@ const Template: ComponentStory<typeof RoleField> = args => {
         image: profileImage,
         name,
         addr: address,
+        accountTranslationsById: accountTranslationsByIdMock,
       },
     ];
     setAllAccounts([...newAccount, ...allAccounts]);
@@ -53,6 +55,7 @@ const Template: ComponentStory<typeof RoleField> = args => {
           (p.addr &&
             p.addr.toLowerCase().indexOf(debouncedValue.toLowerCase()) > -1)),
     );
+    // @ts-ignore
     setAccounts({ getAccountsByNameOrAddr: { nodes: filteredAccounts } });
   }, [allAccounts, debouncedValue]);
 

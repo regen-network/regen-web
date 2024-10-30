@@ -44,6 +44,7 @@ export const useFetchProjectsByIds = ({ projectIds }: Props): Response => {
         client: graphqlClient,
         onChainId: project?.id ?? '',
         enabled: !!project?.id,
+        languageCode: selectedLanguage,
       }),
     ),
   });

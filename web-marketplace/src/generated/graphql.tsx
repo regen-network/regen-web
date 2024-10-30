@@ -7771,6 +7771,13 @@ export type GetAccountsByNameOrAddrQuery = (
     & { nodes: Array<Maybe<(
       { __typename?: 'Account' }
       & Pick<Account, 'id' | 'creatorId' | 'name' | 'type' | 'image' | 'description' | 'addr'>
+      & { accountTranslationsById: (
+        { __typename?: 'AccountTranslationsConnection' }
+        & { nodes: Array<Maybe<(
+          { __typename?: 'AccountTranslation' }
+          & Pick<AccountTranslation, 'languageCode' | 'description'>
+        )>> }
+      ) }
     )>> }
   )> }
 );
@@ -7903,6 +7910,13 @@ export type ProjectFieldsFragment = (
     & { nodes: Array<Maybe<(
       { __typename?: 'Document' }
       & Pick<Document, 'name' | 'type' | 'date' | 'url'>
+      & { documentTranslationsById: (
+        { __typename?: 'DocumentTranslationsConnection' }
+        & { nodes: Array<Maybe<(
+          { __typename?: 'DocumentTranslation' }
+          & Pick<DocumentTranslation, 'languageCode' | 'name' | 'type'>
+        )>> }
+      ) }
     )>> }
   ), projectTranslationsById: (
     { __typename?: 'ProjectTranslationsConnection' }
@@ -8085,6 +8099,13 @@ export const ProjectFieldsFragmentDoc = gql`
       type
       date
       url
+      documentTranslationsById {
+        nodes {
+          languageCode
+          name
+          type
+        }
+      }
     }
   }
   projectTranslationsById {
@@ -8545,6 +8566,12 @@ export const GetAccountsByNameOrAddrDocument = gql`
       image
       description
       addr
+      accountTranslationsById {
+        nodes {
+          languageCode
+          description
+        }
+      }
     }
   }
 }

@@ -294,6 +294,7 @@ export function useProjectsWithOrders({
         client: graphqlClient,
         onChainId: project.id,
         enabled: !!project.id && !project.offChain,
+        languageCode: selectedLanguage,
       }),
     ),
   });

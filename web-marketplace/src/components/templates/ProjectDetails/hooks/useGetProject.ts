@@ -46,6 +46,7 @@ export const useGetProject = () => {
         client: graphqlClient,
         slug: projectId as string,
         enabled: !!projectId && !isOnChainId && !isOffChainUuid,
+        languageCode: selectedLanguage,
       }),
     );
 
@@ -58,6 +59,7 @@ export const useGetProject = () => {
       client: graphqlClient,
       enabled: !!projectId && !!isOnChainId,
       onChainId: projectId as string,
+      languageCode: selectedLanguage,
     }),
   );
 
@@ -70,6 +72,7 @@ export const useGetProject = () => {
       client: graphqlClient,
       enabled: !!projectId && !!isOffChainUuid,
       id: projectId,
+      languageCode: selectedLanguage,
     }),
   );
 

@@ -12,5 +12,6 @@ export type ReactQueryProjectBySlugResponse =
 
 export type ReactQueryProjectBySlugProps = {
   client: ApolloClient<unknown>;
+  languageCode: string;
 } & ProjectBySlugQueryVariables &
   ReactQueryBuilderResponse<ReactQueryProjectBySlugResponse>;

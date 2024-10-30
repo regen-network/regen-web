@@ -13,12 +13,14 @@ import {
   MsgAttest,
 } from '@regen-network/api/lib/generated/regen/data/v1/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { User } from 'web-components/src/components/user/UserInfo';
 import { formatDate } from 'web-components/src/utils/format';
 
 import { AccountByIdQuery } from 'generated/graphql';
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { messageActionEquals } from 'lib/ecocredit/constants';
 import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
@@ -57,6 +59,7 @@ export const useAttestEvents = ({
 }: UseAttestEventsParams) => {
   const { _ } = useLingui();
   const { txClient } = useLedger();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
@@ -123,6 +126,7 @@ export const useAttestEvents = ({
           addr: txRes.attestor,
           client: graphqlClient,
           enabled: !!graphqlClient,
+          languageCode: selectedLanguage,
         }),
       ) || [],
   });

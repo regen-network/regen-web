@@ -48,11 +48,13 @@ export const projectDetailsLoader =
       client: apolloClientFactory.getClient(),
       enabled: !!projectId && isOnChainId,
       onChainId: projectId ?? '',
+      languageCode: defaultLocale,
     });
     const projectBySlugQuery = getProjectBySlugQuery({
       client: apolloClientFactory.getClient(),
       enabled: !!projectId && !isOnChainId,
       slug: projectId as string,
+      languageCode: defaultLocale,
     });
 
     const sellOrdersQuery = getSellOrdersExtendedQuery({

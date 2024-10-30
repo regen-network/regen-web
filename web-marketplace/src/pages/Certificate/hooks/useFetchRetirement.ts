@@ -95,6 +95,7 @@ export const useFetchRetirement = ({ id }: Params) => {
       client: apolloClient,
       addr: retirement?.owner ?? '',
       enabled: !!apolloClient && !!retirement?.owner,
+      languageCode: selectedLanguage,
     }),
   );
   const { data: ownerCustodialAccountData } = useQuery(

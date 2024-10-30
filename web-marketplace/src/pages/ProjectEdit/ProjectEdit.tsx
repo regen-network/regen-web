@@ -13,7 +13,7 @@ import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
 import { ERRORS } from 'config/errors';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { startCase } from 'lodash';
 
 import Banner from 'web-components/src/components/banner';
@@ -24,6 +24,7 @@ import type { Theme } from 'web-components/src/theme/muiTheme';
 
 import { UseStateSetter } from 'types/react/use-state';
 import { errorCodeAtom } from 'lib/atoms/error.atoms';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   errorModalAtom,
   processingModalAtom,
@@ -78,6 +79,7 @@ const ProjectEditContext = createContext<ContextType>({
 
 function ProjectEdit(): JSX.Element {
   const { _ } = useLingui();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { classes: styles } = useProjectEditStyles();
   const theme = useTheme<Theme>();
   const [saved, setSaved] = useState(false);
@@ -138,6 +140,7 @@ function ProjectEdit(): JSX.Element {
     useQuery(
       getProjectByIdQuery({
         client: graphqlClient,
+        languageCode: selectedLanguage,
         enabled: !!projectId && isOffChainUUid,
         id: projectId,
       }),

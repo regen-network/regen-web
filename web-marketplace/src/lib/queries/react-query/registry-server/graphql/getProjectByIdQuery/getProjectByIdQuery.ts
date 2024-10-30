@@ -14,9 +14,10 @@ import {
 export const getProjectByIdQuery = ({
   id,
   client,
+  languageCode,
   ...params
 }: ReactQueryProjectByIdProps): ReactQueryProjectByIdResponse => ({
-  queryKey: getProjectByIdKey(id),
+  queryKey: [...getProjectByIdKey(id), languageCode],
   queryFn: async () => {
     try {
       const projectById = await client.query<
@@ -28,10 +29,34 @@ export const getProjectByIdQuery = ({
         fetchPolicy: 'no-cache',
       });
 
+      const localizedMetadata =
+        projectById.data?.projectById?.projectTranslationsById?.nodes.find(
+          translation => translation?.languageCode === languageCode,
+        )?.metadata;
+
       if (projectById.data?.projectById?.metadata) {
         projectById.data.projectById.metadata = await jsonLdCompact(
-          projectById.data.projectById.metadata,
+          localizedMetadata ?? projectById.data.projectById.metadata,
         );
+      }
+
+      const localizedDocuments =
+        projectById.data?.projectById?.documentsByProjectId?.nodes.map(node => {
+          const document =
+            node?.documentTranslationsById?.nodes.find(
+              translation => translation?.languageCode === languageCode,
+            ) ?? node;
+
+          return Object.assign({}, node, {
+            name: document?.name,
+            type: document?.type,
+          });
+        }) ?? [];
+
+      if (projectById.data?.projectById) {
+        projectById.data.projectById.documentsByProjectId = {
+          nodes: localizedDocuments,
+        };
       }
 
       return projectById;

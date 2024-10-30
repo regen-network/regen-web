@@ -156,6 +156,7 @@ function CreditClassDetails({
       client: graphqlClient,
       addr: onChainClass?.admin ?? '',
       enabled: !!onChainClass?.admin && !!graphqlClient && !!csrfData,
+      languageCode: selectedLanguage,
     }),
   );
   const creditClassIssuersResults = useQueries({
@@ -165,6 +166,7 @@ function CreditClassDetails({
           client: graphqlClient,
           addr: issuer ?? '',
           enabled: !!graphqlClient && !!csrfData,
+          languageCode: selectedLanguage,
         }),
       ) ?? [],
   });

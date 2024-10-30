@@ -7,6 +7,7 @@ import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, Card, CardMedia, useMediaQuery, useTheme } from '@mui/material';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 import { omit } from 'lodash';
 
 import ErrorBanner from 'web-components/src/components/banner/ErrorBanner';
@@ -16,6 +17,7 @@ import { Photo } from 'web-components/src/components/cards/ReviewCard/ReviewCard
 import { ProcessingModal } from 'web-components/src/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import {
   BLOCKCHAIN_RECORD,
@@ -76,10 +78,12 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const { activeAccountId } = useAuth();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const { data, isLoading } = useQuery(
     getProjectByIdQuery({
       client: graphqlClient,
+      languageCode: selectedLanguage,
       id: projectId,
     }),
   );

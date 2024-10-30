@@ -11,6 +11,7 @@ import { getAccountsByNameOrAddrQueryKey } from './getAccountsByNameOrAddrQuery.
 
 export const getAccountsByNameOrAddrQuery = ({
   client,
+  languageCode,
   ...params
 }: ReactQueryGetAccountsByNameOrAddrQueryParams): ReactQueryGetAccountsByNameOrAddrQueryResponse => ({
   queryKey: getAccountsByNameOrAddrQueryKey(params),
@@ -21,7 +22,19 @@ export const getAccountsByNameOrAddrQuery = ({
         variables: { ...params },
       });
 
-      return data;
+      const localizedData =
+        data?.getAccountsByNameOrAddr?.nodes.map(node => {
+          const localizedDescription =
+            node?.accountTranslationsById?.nodes.find(
+              translation => translation?.languageCode === languageCode,
+            )?.description ?? node?.description;
+
+          return Object.assign({}, node, {
+            description: localizedDescription,
+          });
+        }) ?? [];
+
+      return { getAccountsByNameOrAddr: { nodes: localizedData } };
     } catch (e) {
       return null;
     }

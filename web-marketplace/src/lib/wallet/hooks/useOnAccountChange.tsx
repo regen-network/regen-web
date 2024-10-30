@@ -5,10 +5,11 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import { AccountByIdQuery } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { accountSwitchModalAtom } from 'lib/atoms/modals.atoms';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
@@ -40,6 +41,7 @@ export const useOnAccountChange = ({
   setAccountChanging,
 }: Props): void => {
   const [newWallet, setNewWallet] = useState<Wallet | undefined>();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { data: accountByAddr, isFetching } = useQuery(
@@ -47,6 +49,7 @@ export const useOnAccountChange = ({
       client: graphqlClient,
       addr: newWallet?.address ?? '',
       enabled: !!newWallet?.address && !!graphqlClient,
+      languageCode: selectedLanguage,
     }),
   );
   const { data: token } = useQuery(getCsrfTokenQuery({}));

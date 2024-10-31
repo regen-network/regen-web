@@ -25,7 +25,6 @@ describe('OrderSummaryCard', () => {
       country: 'US',
     },
     imageAltText: 'imageAltText',
-    paymentOption: 'card',
     allowedDenoms,
     onClickEditCard: vi.fn(),
     setCreditsAmount: vi.fn(),

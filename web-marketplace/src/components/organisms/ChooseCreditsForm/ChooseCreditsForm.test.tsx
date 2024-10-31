@@ -5,15 +5,13 @@ import {
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.mock';
 import { render, screen, userEvent } from 'web-marketplace/test/test-utils';
 
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 
 import { ChooseCreditsForm } from './ChooseCreditsForm';
 import { ChooseCreditsFormSchemaType } from './ChooseCreditsForm.schema';
 
 describe('ChooseCreditsForm', () => {
   const props = {
-    paymentOption: PAYMENT_OPTIONS.CARD,
-    setPaymentOption: () => {},
     retiring: true,
     setRetiring: () => {},
     onPrev: () => {},
@@ -28,21 +26,26 @@ describe('ChooseCreditsForm', () => {
     setPaymentOptionCryptoClicked: () => {},
     goToPaymentInfo: () => {},
     card: true,
-    userBalance: 100,
+    userBalance: 1000,
     isUserBalanceLoading: false,
   };
-  it('renders without crashing', () => {
-    render(<ChooseCreditsForm {...props} />);
-
-    expect(screen.getByTestId('choose-credits-form')).toBeInTheDocument();
+  it('renders without crashing', async () => {
+    render(<ChooseCreditsForm {...props} />, {
+      jotaiDefaultValues: [[paymentOptionAtom, 'card']],
+    });
+    const form = await screen.queryByTestId('choose-credits-form');
+    expect(form).toBeInTheDocument();
   });
 
   it('selects card payment option', () => {
-    render(<ChooseCreditsForm {...props} />);
-    const cardOption = screen.getByRole('radio', {
-      name: /card/i,
+    render(<ChooseCreditsForm {...props} />, {
+      jotaiDefaultValues: [[paymentOptionAtom, 'card']],
     });
-    userEvent.click(cardOption);
+
+    const cardOption = screen.getByTestId('choose-credit-card');
+    if (cardOption) {
+      userEvent.click(cardOption);
+    }
     expect(cardOption).toBeChecked();
   });
 });

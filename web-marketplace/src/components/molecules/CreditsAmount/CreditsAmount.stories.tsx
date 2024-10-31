@@ -24,10 +24,13 @@ export default {
 
 type Story = StoryObj<typeof CreditsAmount>;
 
-const CreditsWithForm = (args: CreditsAmountProps) => {
+const CreditsWithForm = ({
+  paymentOption,
+  ...args
+}: { paymentOption: string } & CreditsAmountProps) => {
   const defaultCryptoCurrency = cryptoCurrencies[0];
   const initCurrency =
-    args.paymentOption === PAYMENT_OPTIONS.CARD
+    paymentOption === PAYMENT_OPTIONS.CARD
       ? { askDenom: USD_DENOM, askBaseDenom: USD_DENOM }
       : defaultCryptoCurrency;
   const [currency] = useState<Currency>(initCurrency);
@@ -38,7 +41,7 @@ const CreditsWithForm = (args: CreditsAmountProps) => {
       creditsAvailable,
       spendingCap: 2000,
       userBalance: 1000,
-      paymentOption: args.paymentOption,
+      paymentOption,
     }),
     defaultValues: {
       [CURRENCY_AMOUNT]: 1,
@@ -49,7 +52,7 @@ const CreditsWithForm = (args: CreditsAmountProps) => {
   const filteredCryptoSellOrders = cryptoSellOrders.filter(
     order => order.askDenom === initCurrency.askDenom,
   );
-  const card = args.paymentOption === PAYMENT_OPTIONS.CARD;
+  const card = paymentOption === PAYMENT_OPTIONS.CARD;
   const orderedSellOrders = card
     ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
     : filteredCryptoSellOrders?.sort(
@@ -72,22 +75,24 @@ const CreditsWithForm = (args: CreditsAmountProps) => {
 };
 
 export const CreditsAmountCard: Story = {
-  render: args => <CreditsWithForm {...args} />,
+  render: args => (
+    <CreditsWithForm paymentOption={PAYMENT_OPTIONS.CARD} {...args} />
+  ),
 };
 
 CreditsAmountCard.args = {
-  paymentOption: PAYMENT_OPTIONS.CARD,
   cardSellOrders,
   cryptoCurrencies,
   allowedDenoms,
 };
 
 export const CreditsAmountCrypto: Story = {
-  render: args => <CreditsWithForm {...args} />,
+  render: args => (
+    <CreditsWithForm paymentOption={PAYMENT_OPTIONS.CRYPTO} {...args} />
+  ),
 };
 
 CreditsAmountCrypto.args = {
-  paymentOption: PAYMENT_OPTIONS.CRYPTO,
   cardSellOrders,
   cryptoCurrencies,
   allowedDenoms,

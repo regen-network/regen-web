@@ -2,6 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { render, screen } from 'web-marketplace/test/test-utils';
 
+import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 
 import { CreditsAmount } from './CreditsAmount';
@@ -25,6 +26,7 @@ describe('CreditsAmount', () => {
   it('renders without crashing', () => {
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
+      jotaiDefaultValues: [[paymentOptionAtom, 'card']],
     });
 
     expect(screen.getByText(/Amount/i)).toBeInTheDocument();
@@ -33,6 +35,7 @@ describe('CreditsAmount', () => {
   it('updates credits amount', async () => {
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
+      jotaiDefaultValues: [[paymentOptionAtom, 'card']],
     });
 
     const creditsInput = screen.getByLabelText(/Credits Input/i);
@@ -44,6 +47,7 @@ describe('CreditsAmount', () => {
   it('updates currency amount', async () => {
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
+      jotaiDefaultValues: [[paymentOptionAtom, 'card']],
     });
 
     const currencyInput = screen.getByLabelText(/Currency Input/i);
@@ -55,6 +59,7 @@ describe('CreditsAmount', () => {
   it('updates currency amount when credits amount changes', async () => {
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
+      jotaiDefaultValues: [[paymentOptionAtom, 'card']],
     });
 
     const creditsInput = screen.getByLabelText(/Credits Input/i);
@@ -69,6 +74,7 @@ describe('CreditsAmount', () => {
   it('updates credits amount when currency amount changes', async () => {
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
+      jotaiDefaultValues: [[paymentOptionAtom, 'card']],
     });
 
     const creditsInput = screen.getByLabelText(/Credits Input/i);
@@ -83,6 +89,7 @@ describe('CreditsAmount', () => {
   it('updates credits amount and currency amount when max credits is selected', async () => {
     render(<CreditsAmount {...formDefaultValues} />, {
       formDefaultValues,
+      jotaiDefaultValues: [[paymentOptionAtom, 'card']],
     });
 
     const maxCreditsButton = screen.getByRole('button', {

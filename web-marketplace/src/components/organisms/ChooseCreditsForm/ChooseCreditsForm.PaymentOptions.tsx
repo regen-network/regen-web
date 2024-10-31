@@ -24,6 +24,10 @@ function ChooseCreditButton({
   disabled,
   onChange,
 }: ChooseCreditButtonProps) {
+  console.log(
+    '🚀 ~ file: ChooseCreditsForm.PaymentOptions.tsx:27 ~ value:',
+    value,
+  );
   return (
     <label
       className={`block w-[138px] rounded-md px-[12px] py-10 font-extrabold text-xs font-[lato] shadow border-solid ${
@@ -42,6 +46,7 @@ function ChooseCreditButton({
         onChange={onChange}
         className="hidden"
         disabled={disabled}
+        data-testid={`choose-credit-${value}`}
       />
       <div className="flex flex-col items-start">{children}</div>
     </label>

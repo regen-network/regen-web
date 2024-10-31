@@ -223,9 +223,9 @@ function ProjectDetails(): JSX.Element {
   });
 
   // For legacy/open projects (that are not on-chain), all metadata is stored off-chain
-  const projectMetadata = !!onChainProjectId
-    ? anchoredMetadata
-    : offChainProjectMetadata;
+  const projectMetadata = (
+    !!onChainProjectId ? anchoredMetadata : offChainProjectMetadata
+  ) as ProjectMetadataLD;
 
   const {
     projectDeveloper,

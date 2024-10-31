@@ -37,9 +37,10 @@ export default function useImpact({
   const { _ } = useLingui();
   const primaryImpact = creditClassMetadata?.['regen:primaryImpact'];
   const projectImpact = projectMetadata?.['regen:primaryImpact'];
-  const coBenefits = creditClassMetadata?.['regen:coBenefits'];
   const projectCoBenefits = projectMetadata?.['regen:coBenefits'];
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
+  const coBenefits =
+    projectCoBenefits || creditClassMetadata?.['regen:coBenefits'];
 
   const primaryImpactSdgIris =
     primaryImpact?.['regen:SDGs']?.map(sdg => sdg['@id']) || [];

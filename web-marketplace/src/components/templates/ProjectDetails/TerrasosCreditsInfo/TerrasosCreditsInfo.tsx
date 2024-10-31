@@ -53,8 +53,8 @@ export default function TerrasosCreditsInfo({
     <Box sx={{ mt: 0 }}>
       <TableTabs
         sx={{
-          px: { xs: 0, sm: 0, md: 0, xl: 0 },
-          mt: { xs: 0, sm: 0, md: 0, xl: 0 },
+          px: { xs: 0, sm: 0 },
+          pt: { xs: '50px', sm: '50px' },
         }}
         tabs={tabs}
       />

@@ -302,8 +302,8 @@ function ProjectTopSection({
                     soldOutProjectsIds={soldOutProjectsIds}
                     totals={batchData.totals}
                     sx={{
-                      mt: { xs: 10, sm: 12, md: 16 },
-                      mb: { xs: 10, sm: 12, md: 25 },
+                      mt: { xs: '30px', sm: '50px' },
+                      mb: '30px',
                     }}
                   />
                 ) : undefined

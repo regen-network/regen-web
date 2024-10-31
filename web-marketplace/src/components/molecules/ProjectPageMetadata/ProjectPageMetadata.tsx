@@ -59,7 +59,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
         borderRadius: '0 0 8px 8px',
       }}
     >
-      {metadata && (
+      {onChainProjectId && (
         <Body sx={{ pb: 7 }} size="lg">
           {_(PROJECT_PAGE_METADATA_HELPER_TEXT)}
         </Body>

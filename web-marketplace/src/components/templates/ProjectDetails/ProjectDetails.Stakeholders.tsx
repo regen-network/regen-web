@@ -11,6 +11,9 @@ type Props = {
   projectVerifier?: Account;
   program?: Account;
   partners?: Account[];
+  projectOwner?: Account;
+  projectOperator?: Account;
+  projectMonitor?: Account;
 };
 
 export const ProjectDetailsStakeholders: React.FC<Props> = ({
@@ -19,6 +22,9 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
   projectDeveloper,
   projectVerifier,
   partners,
+  projectOwner,
+  projectOperator,
+  projectMonitor,
 }) => {
   const { _ } = useLingui();
 
@@ -56,6 +62,16 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       ),
     },
     {
+      accounts: projectOperator,
+      title: _(msg`operator`),
+      tooltip: (
+        <Trans>
+          A project operator is responsible for implementing and managing the
+          project, ensuring it meets sustainability and regulatory standards.
+        </Trans>
+      ),
+    },
+    {
       accounts: projectVerifier,
       title: _(msg`verifier`),
       tooltip: (
@@ -63,6 +79,26 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
           <b>Verifier:</b> A third party who provides a independent, impartial
           assessment of project plan and project reports (that is not the
           monitor).
+        </Trans>
+      ),
+    },
+    {
+      accounts: projectMonitor,
+      title: _(msg`monitor`),
+      tooltip: (
+        <Trans>
+          A monitor tracks and verifies the environmental impact and performance
+          of the project to ensure compliance and transparency.
+        </Trans>
+      ),
+    },
+    {
+      accounts: projectOwner,
+      title: _(msg`owner`),
+      tooltip: (
+        <Trans>
+          A project owner manages the area of the conservation project and the
+          associated biodiversity units.
         </Trans>
       ),
     },

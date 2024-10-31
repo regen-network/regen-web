@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-23 16:15+0200\n"
+"POT-Creation-Date: 2024-10-30 15:11+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -99,7 +99,7 @@ msgstr ""
 msgid "{truncatedQuantity} credit(s) available"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:92
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:93
 #: src/components/organisms/Order/Order.Summary.tsx:83
 msgid "# credits"
 msgstr ""
@@ -150,7 +150,7 @@ msgstr ""
 msgid "+Create project"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:139
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:140
 msgid "<0>{0}</0> ending in {1}"
 msgstr ""
 
@@ -166,19 +166,19 @@ msgstr ""
 msgid "<0>drag and drop</0><1>or</1>"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:73
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:109
 msgid "<0>Partners</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:41
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:47
 msgid "<0>Project admin:</0> the entity who can update a given project on the blockchain."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:51
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:57
 msgid "<0>Project developer:</0> the entity that is in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:62
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:78
 msgid "<0>Verifier:</0> A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr ""
 
@@ -202,7 +202,7 @@ msgstr ""
 msgid "5MB max. Supported file types include text, spreadsheets, images, and video files."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:30
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:36
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:27
 msgid "A <0>program</0> involves the eligibility rules, monitoring and certification, and registration systems for credit trading and ownership tracking."
 msgstr ""
@@ -215,8 +215,20 @@ msgstr ""
 msgid "A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
 msgstr ""
 
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:89
+msgid "A monitor tracks and verifies the environmental impact and performance of the project to ensure compliance and transparency."
+msgstr ""
+
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:87
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
+msgstr ""
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:68
+msgid "A project operator is responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
+msgstr ""
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:99
+msgid "A project owner manages the area of the conservation project and the associated biodiversity units."
 msgstr ""
 
 #: src/components/organisms/RolesForm/RolesForm.tsx:233
@@ -227,7 +239,7 @@ msgstr ""
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:17
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:18
 msgid "About Us"
 msgstr ""
 
@@ -239,7 +251,7 @@ msgstr ""
 msgid "Acres"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:113
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:114
 msgid "Act now"
 msgstr ""
 
@@ -321,7 +333,7 @@ msgstr ""
 msgid "Address copied!"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:39
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:45
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:37
 #: src/pages/Post/Post.constants.ts:8
 msgid "admin"
@@ -488,7 +500,7 @@ msgstr ""
 msgid "Are you sure you want to discard your changes?"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:56
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:57
 msgid "Articles"
 msgstr ""
 
@@ -524,7 +536,7 @@ msgstr ""
 msgid "Avg Price"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:75
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:76
 msgid "avg price per credit"
 msgstr ""
 
@@ -822,7 +834,7 @@ msgstr ""
 msgid "change admin"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:147
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:148
 msgid "Change payment card"
 msgstr ""
 
@@ -1000,7 +1012,7 @@ msgstr ""
 msgid "Consumer/Individual/myself"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:68
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:69
 msgid "Contact"
 msgstr ""
 
@@ -1541,7 +1553,7 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:99
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:100
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:76
 #: src/lib/constants/shared.constants.tsx:22
 msgid "Edit"
@@ -1585,7 +1597,7 @@ msgstr ""
 msgid "Edit your file"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:98
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:99
 msgid "Editable credits"
 msgstr ""
 
@@ -1663,7 +1675,7 @@ msgstr ""
 msgid "Explore"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:33
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:34
 msgid "Explore Banks"
 msgstr ""
 
@@ -1749,7 +1761,7 @@ msgstr ""
 msgid "Forestry-based credits"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:64
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:65
 msgid "Frequently Asked Questions"
 msgstr ""
 
@@ -1761,7 +1773,7 @@ msgstr ""
 msgid "Gallery photos"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:44
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:45
 msgid "Geo-Viewer"
 msgstr ""
 
@@ -1777,7 +1789,7 @@ msgstr ""
 msgid "Grasslands-based credits"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:25
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:26
 msgid "Habitat banks"
 msgstr ""
 
@@ -1797,7 +1809,7 @@ msgstr ""
 msgid "High density grazing"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:13
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:14
 msgid "Home"
 msgstr ""
 
@@ -1895,8 +1907,8 @@ msgstr ""
 msgid "info with hand"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:29
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:48
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:30
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:49
 msgid "Information"
 msgstr ""
 
@@ -2214,6 +2226,10 @@ msgstr ""
 msgid "Minimum of 1 recipient"
 msgstr ""
 
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:87
+msgid "monitor"
+msgstr ""
+
 #: src/components/molecules/FeaturedSection.tsx:91
 msgid "more details"
 msgstr ""
@@ -2303,7 +2319,7 @@ msgstr ""
 msgid "new project admin"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:52
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:53
 msgid "News"
 msgstr ""
 
@@ -2425,11 +2441,15 @@ msgstr ""
 msgid "Oops! Page not found."
 msgstr ""
 
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:66
+msgid "operator"
+msgstr ""
+
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:67
 msgid "or, log in with email / social"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:66
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:67
 msgid "Order Summary"
 msgstr ""
 
@@ -2449,11 +2469,15 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:71
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:97
+msgid "owner"
+msgstr ""
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:107
 msgid "partners"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:131
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:132
 msgid "payment"
 msgstr ""
 
@@ -2728,7 +2752,7 @@ msgstr ""
 msgid "Profile type"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:28
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:34
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:24
 msgid "program"
 msgstr ""
@@ -2737,7 +2761,7 @@ msgstr ""
 msgid "Program Guide"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:69
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:70
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:139
@@ -2799,7 +2823,7 @@ msgstr ""
 msgid "Project Design Document"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:49
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:55
 msgid "project developer"
 msgstr ""
 
@@ -2924,7 +2948,7 @@ msgstr ""
 msgid "public profile tabs"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:60
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:61
 msgid "Publications"
 msgstr ""
 
@@ -3322,7 +3346,7 @@ msgstr ""
 msgid "Sender"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:21
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:22
 msgid "Services"
 msgstr ""
 
@@ -3446,7 +3470,7 @@ msgstr ""
 msgid "Sorry, your transaction was not successful."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:209
+#: src/pages/Projects/AllProjects/AllProjects.tsx:211
 msgid "Sort by:"
 msgstr ""
 
@@ -3843,7 +3867,7 @@ msgstr ""
 msgid "total credits you have purchased"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:110
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:111
 #: src/components/organisms/Order/Order.Summary.tsx:89
 msgid "total price"
 msgstr ""
@@ -3917,7 +3941,7 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:100
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:101
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:68
 msgid "update"
 msgstr ""
@@ -4023,7 +4047,7 @@ msgstr ""
 msgid "verification reports"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:60
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:76
 msgid "verifier"
 msgstr ""
 
@@ -4182,7 +4206,7 @@ msgstr ""
 msgid "We've just sent a confirmation email to:"
 msgstr ""
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:40
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:41
 msgid "What is Tebu"
 msgstr ""
 

@@ -1,5 +1,5 @@
-query ProjectById($id: String!) {
-  allProject(where: { projectId: { eq: $id } }) {
+query terrasosProjectById($id: String!) {
+  allTerrasosProject(where: { projectId: { eq: $id } }) {
     language
     credibilityCards {
       ...detailsCardFields
@@ -43,6 +43,11 @@ query ProjectById($id: String!) {
     fiatSellOrders {
       sellOrderId
       usdPrice
+    }
+    complianceCredits {
+      creditsRegistered
+      creditsAvailable
+      creditsRetired
     }
   }
 }

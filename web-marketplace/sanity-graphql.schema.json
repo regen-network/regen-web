@@ -46154,18 +46154,6 @@
             "deprecationReason": null
           },
           {
-            "name": "complianceCredits",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "language",
             "description": null,
             "args": [],
@@ -47107,18 +47095,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "complianceCredits",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "FloatFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -49037,18 +49013,6 @@
           },
           {
             "name": "areaUnit",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "complianceCredits",
             "description": null,
             "type": {
               "kind": "ENUM",

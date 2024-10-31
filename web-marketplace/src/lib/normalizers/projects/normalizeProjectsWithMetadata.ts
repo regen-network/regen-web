@@ -21,6 +21,10 @@ import {
   CreditClassMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
+import {
+  isTerrasosProject,
+  ProjectByIdItemType,
+} from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery.types';
 import { Wallet } from 'lib/wallet/wallet';
 
 import {
@@ -39,7 +43,7 @@ interface NormalizeProjectsWithOrderDataParams {
   programAccounts?: Maybe<AccountFieldsFragment | undefined>[];
   sanityCreditClassData?: AllCreditClassQuery;
   classesMetadata?: (CreditClassMetadataLD | undefined)[];
-  sanityProjects?: (ProjectByIdQuery['allProject'][0] | undefined)[];
+  sanityProjects?: (ProjectByIdItemType | undefined)[];
   wallet?: Wallet;
 }
 
@@ -97,7 +101,7 @@ interface NormalizeProjectWithMetadataParams {
       | 'stripePaymentLink'
     >
   >;
-  sanityProject?: ProjectByIdQuery['allProject'][0] | undefined;
+  sanityProject?: ProjectByIdItemType;
   wallet?: Wallet;
 }
 
@@ -200,7 +204,9 @@ export const normalizeProjectWithMetadata = ({
     },
     cardSellOrders,
     filteredSellOrders,
-    complianceCredits: sanityProject?.complianceCredits ?? 0,
+    complianceCredits: isTerrasosProject(sanityProject)
+      ? sanityProject?.complianceCredits ?? 0
+      : 0,
   } as NormalizeProject;
 };
 

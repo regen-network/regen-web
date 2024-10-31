@@ -50,6 +50,14 @@ export const EditableInput = ({
   const [currentValue, setCurrentValue] = useState(value);
   const wrapperRef = useRef(null);
 
+  const amountValid = useMemo(
+    () => currentValue <= maxValue && currentValue > 0,
+    [currentValue, maxValue],
+  );
+
+  const isUpdateDisabled =
+    !amountValid || error?.hasError || initialValue === currentValue;
+
   useEffect(() => {
     setInitialValue(value);
     setCurrentValue(value);
@@ -96,7 +104,7 @@ export const EditableInput = ({
   };
 
   const handleOnUpdate = () => {
-    if (!amountValid || error?.hasError) return;
+    if (isUpdateDisabled) return;
     onChange(currentValue);
     toggleEditable();
   };
@@ -115,11 +123,6 @@ export const EditableInput = ({
   useEffect(() => {
     onKeyDown && onKeyDown(currentValue);
   }, [currentValue, onKeyDown]);
-
-  const amountValid = useMemo(
-    () => currentValue <= maxValue && currentValue > 0,
-    [currentValue, maxValue],
-  );
 
   return (
     <>
@@ -142,9 +145,9 @@ export const EditableInput = ({
             />
             <TextButton
               className={`lowercase text-[12px] mt-5 sm:mt-0 font-sans min-w-fit ml-10 ${
-                amountValid && !error?.hasError
-                  ? ''
-                  : 'text-grey-300 hover:text-grey-300 cursor-default'
+                isUpdateDisabled
+                  ? 'text-grey-400 hover:text-grey-400 cursor-default'
+                  : ''
               }`}
               onClick={handleOnUpdate}
               aria-label={updateButtonText}

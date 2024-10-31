@@ -77,6 +77,7 @@ export function useProjectsWithOrders({
   const { wallet } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   /* Main Queries */
+
   const { data: projectData, isFetching: isLoadingProject } = useQuery(
     getProjectQuery({
       enabled: !!projectId && !!ecocreditClient,

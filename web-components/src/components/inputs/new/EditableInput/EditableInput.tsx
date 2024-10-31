@@ -143,25 +143,27 @@ export const EditableInput = ({
               autoFocus
               data-testid="editable-input"
             />
-            <TextButton
-              className={`lowercase text-[12px] mt-5 sm:mt-0 font-sans min-w-fit ml-10 ${
-                isUpdateDisabled
-                  ? 'text-grey-400 hover:text-grey-400 cursor-default'
-                  : ''
-              }`}
-              onClick={handleOnUpdate}
-              aria-label={updateButtonText}
-            >
-              {updateButtonText}
-            </TextButton>
-            <span className="text-grey-400 px-3">|</span>
-            <TextButton
-              className="lowercase text-[12px] mt-5 sm:mt-0 font-sans text-error-400 hover:text-error-200  min-w-fit"
-              onClick={handleOnCancel}
-              aria-label={cancelButtonText}
-            >
-              {cancelButtonText}
-            </TextButton>
+            <div className="flex flex-row max-[450px]:flex-col max-[450px]:items-start max-[450px]:ml-15">
+              <TextButton
+                className={`lowercase text-xs max-[450px]:text-sm mt-5 sm:mt-0 font-sans min-w-fit ml-10 max-[450px]:m-0 ${
+                  isUpdateDisabled
+                    ? 'text-grey-400 hover:text-grey-400 cursor-default'
+                    : ''
+                }`}
+                onClick={handleOnUpdate}
+                aria-label={updateButtonText}
+              >
+                {updateButtonText}
+              </TextButton>
+              <span className="text-grey-400 px-3 max-[450px]:hidden">|</span>
+              <TextButton
+                className="lowercase text-xs max-[450px]:text-sm mt-5 sm:mt-0 font-sans text-error-400 hover:text-error-200  min-w-fit"
+                onClick={handleOnCancel}
+                aria-label={cancelButtonText}
+              >
+                {cancelButtonText}
+              </TextButton>
+            </div>
           </div>
           {error?.hasError && (
             <div className="pt-5 text-error-300 text-sm w-full absolute">

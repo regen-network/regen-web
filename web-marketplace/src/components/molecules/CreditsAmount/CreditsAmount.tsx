@@ -2,11 +2,12 @@ import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
+import { spendingCapAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { getCreditsAvailableBannerText } from 'pages/BuyCredits/BuyCredits.utils';
 
@@ -36,8 +37,6 @@ export const CreditsAmount = ({
   setCreditsAvailable,
   filteredCryptoSellOrders,
   cardSellOrders,
-  spendingCap,
-  setSpendingCap,
   cryptoCurrencies,
   allowedDenoms,
   creditTypePrecision,
@@ -50,6 +49,7 @@ export const CreditsAmount = ({
   const { setValue, trigger, getValues } =
     useFormContext<ChooseCreditsFormSchemaType>();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const [spendingCap, setSpendingCap] = useAtom(spendingCapAtom);
 
   useEffect(() => {
     // Set initial credits amount to min(1, creditsAvailable)

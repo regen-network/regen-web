@@ -14,8 +14,6 @@ export type Currency = {
 };
 export interface CreditsAmountProps {
   paymentOption: PaymentOptionsType;
-  spendingCap: number;
-  setSpendingCap: UseStateSetter<number>;
   creditsAvailable: number;
   setCreditsAvailable: UseStateSetter<number>;
   filteredCryptoSellOrders: Array<UISellOrderInfo> | undefined;

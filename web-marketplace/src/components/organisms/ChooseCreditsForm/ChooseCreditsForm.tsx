@@ -8,7 +8,7 @@ import React, {
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import {
   CREDIT_VINTAGE_OPTIONS,
@@ -138,7 +138,7 @@ export const ChooseCreditsForm = React.memo(
       [],
     );
 
-    const [spendingCap, setSpendingCap] = useAtom(spendingCapAtom);
+    const spendingCap = useAtomValue(spendingCapAtom);
     const [creditsAvailable, setCreditsAvailable] = useState(0);
     const form = useZodForm({
       schema: createChooseCreditsFormSchema({
@@ -318,8 +318,6 @@ export const ChooseCreditsForm = React.memo(
                   {currency && (
                     <CreditsAmount
                       paymentOption={paymentOption}
-                      spendingCap={spendingCap}
-                      setSpendingCap={setSpendingCap}
                       creditsAvailable={creditsAvailable}
                       setCreditsAvailable={setCreditsAvailable}
                       filteredCryptoSellOrders={filteredCryptoSellOrders}

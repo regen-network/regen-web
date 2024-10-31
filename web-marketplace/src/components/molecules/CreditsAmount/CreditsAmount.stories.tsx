@@ -31,13 +31,12 @@ const CreditsWithForm = (args: CreditsAmountProps) => {
       ? { askDenom: USD_DENOM, askBaseDenom: USD_DENOM }
       : defaultCryptoCurrency;
   const [currency] = useState<Currency>(initCurrency);
-  const [spendingCap, setSpendingCap] = useState(0);
   const [creditsAvailable, setCreditsAvailable] = useState(0);
 
   const form = useZodForm({
     schema: createChooseCreditsFormSchema({
       creditsAvailable,
-      spendingCap,
+      spendingCap: 2000,
       userBalance: 1000,
       paymentOption: args.paymentOption,
     }),
@@ -62,8 +61,6 @@ const CreditsWithForm = (args: CreditsAmountProps) => {
       <CreditsAmount
         {...args}
         currency={currency}
-        spendingCap={spendingCap}
-        setSpendingCap={setSpendingCap}
         creditsAvailable={creditsAvailable}
         setCreditsAvailable={setCreditsAvailable}
         filteredCryptoSellOrders={filteredCryptoSellOrders}

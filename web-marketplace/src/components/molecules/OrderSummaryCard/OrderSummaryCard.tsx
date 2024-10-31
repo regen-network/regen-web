@@ -10,7 +10,6 @@ export const OrderSummaryCard = (orderSummary: OrderSummaryProps) => {
     cardDetails,
     imageAltText,
     onClickEditCard,
-    paymentOption,
     allowedDenoms,
     setCreditsAmount,
     creditsAvailable,
@@ -28,7 +27,6 @@ export const OrderSummaryCard = (orderSummary: OrderSummaryProps) => {
         order={order}
         cardDetails={cardDetails}
         onClickEditCard={onClickEditCard}
-        paymentOption={paymentOption}
         allowedDenoms={allowedDenoms}
         setCreditsAmount={setCreditsAmount}
         creditsAvailable={creditsAvailable}

@@ -1,16 +1,17 @@
 import { useCallback, useMemo, useState } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { useAtomValue } from 'jotai';
 
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
 import { EditableInput } from 'web-components/src/components/inputs/new/EditableInput/EditableInput';
 import { Title } from 'web-components/src/components/typography';
 
+import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import {
   BuyCreditsSchemaTypes,
   CardDetails,
-  PaymentOptionsType,
 } from 'pages/BuyCredits/BuyCredits.types';
 import { NOT_ENOUGH_BALANCE } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
@@ -28,7 +29,6 @@ type Props = {
   order: OrderProps;
   cardDetails?: CardDetails;
   onClickEditCard?: () => void;
-  paymentOption: PaymentOptionsType;
   allowedDenoms: AllowedDenoms;
   setCreditsAmount: (creditsAmount: number) => void;
   creditsAvailable: number;
@@ -40,7 +40,6 @@ export function OrderSummaryContent({
   order,
   cardDetails,
   onClickEditCard = () => {},
-  paymentOption,
   allowedDenoms,
   setCreditsAmount,
   creditsAvailable,
@@ -48,7 +47,7 @@ export function OrderSummaryContent({
   userBalance,
 }: Props) {
   const { _ } = useLingui();
-
+  const paymentOption = useAtomValue(paymentOptionAtom);
   const { projectName, currency, pricePerCredit, credits, currencyAmount } =
     order;
 

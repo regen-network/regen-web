@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAtomValue } from 'jotai';
 
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -9,9 +10,9 @@ import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetProject';
 import { useNavigateToSlug } from 'components/templates/ProjectDetails/hooks/useNavigateToSlug';
 
-import { PAYMENT_OPTIONS } from './BuyCredits.constants';
+import { paymentOptionAtom } from './BuyCredits.atoms';
 import { BuyCreditsForm } from './BuyCredits.Form';
-import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
+import { CardDetails } from './BuyCredits.types';
 import { getFormModel } from './BuyCredits.utils';
 import { useSummarizePayment } from './hooks/useSummarizePayment';
 
@@ -35,9 +36,7 @@ export const BuyCredits = () => {
 
   useNavigateToSlug(slug, '/buy');
 
-  const [paymentOption, setPaymentOption] = useState<PaymentOptionsType>(
-    PAYMENT_OPTIONS.CRYPTO,
-  );
+  const paymentOption = useAtomValue(paymentOptionAtom);
   const { wallet, loaded } = useWallet();
 
   useEffect(() => {
@@ -93,8 +92,6 @@ export const BuyCredits = () => {
           classes={{ formWrap: 'max-w-[942px]' }}
         >
           <BuyCreditsForm
-            setPaymentOption={setPaymentOption}
-            paymentOption={paymentOption}
             retiring={retiring}
             setRetiring={setRetiring}
             cardSellOrders={cardSellOrders}

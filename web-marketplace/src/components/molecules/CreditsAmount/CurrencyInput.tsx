@@ -3,10 +3,12 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
+import { useAtomValue } from 'jotai';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
+import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
 import { updateMultiStepCurrencyAndPaymentOption } from 'pages/BuyCredits/BuyCredits.utils';
@@ -26,7 +28,6 @@ const CustomSelect = lazy(
 
 export const CurrencyInput = ({
   maxCurrencyAmount,
-  paymentOption,
   selectPlaceholderAriaLabel,
   selectAriaLabel,
   handleCurrencyAmountChange,
@@ -43,6 +44,7 @@ export const CurrencyInput = ({
   const { _ } = useLingui();
   const { data, handleSave, activeStep } =
     useMultiStep<BuyCreditsSchemaTypes>();
+  const paymentOption = useAtomValue(paymentOptionAtom);
 
   const { onChange } = register(CURRENCY_AMOUNT);
 

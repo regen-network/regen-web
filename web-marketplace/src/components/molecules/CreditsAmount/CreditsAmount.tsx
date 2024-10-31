@@ -2,12 +2,15 @@ import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
-import { spendingCapAtom } from 'pages/BuyCredits/BuyCredits.atoms';
+import {
+  paymentOptionAtom,
+  spendingCapAtom,
+} from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { getCreditsAvailableBannerText } from 'pages/BuyCredits/BuyCredits.utils';
 
@@ -32,7 +35,6 @@ import { CurrencyInput } from './CurrencyInput';
 
 export const CreditsAmount = ({
   currency,
-  paymentOption,
   creditsAvailable,
   setCreditsAvailable,
   filteredCryptoSellOrders,
@@ -50,6 +52,7 @@ export const CreditsAmount = ({
     useFormContext<ChooseCreditsFormSchemaType>();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const [spendingCap, setSpendingCap] = useAtom(spendingCapAtom);
+  const paymentOption = useAtomValue(paymentOptionAtom);
 
   useEffect(() => {
     // Set initial credits amount to min(1, creditsAvailable)
@@ -239,12 +242,10 @@ export const CreditsAmount = ({
         baseDenom={currency.askBaseDenom}
         creditsAvailable={creditsAvailable}
         setMaxCreditsSelected={setMaxCreditsSelected}
-        paymentOption={paymentOption}
       />
       <div className="flex justify-between min-w-full flex-wrap sm:flex-nowrap gap-10 sm:gap-0 items-start">
         <CurrencyInput
           maxCurrencyAmount={spendingCap}
-          paymentOption={paymentOption}
           selectPlaceholderAriaLabel={_(msg`Select option`)}
           selectAriaLabel={_(msg`Select option`)}
           handleCurrencyAmountChange={handleCurrencyAmountChange}

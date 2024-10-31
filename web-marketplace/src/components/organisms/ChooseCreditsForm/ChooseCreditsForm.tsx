@@ -8,7 +8,7 @@ import React, {
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import {
   CREDIT_VINTAGE_OPTIONS,
@@ -27,7 +27,10 @@ import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
-import { spendingCapAtom } from 'pages/BuyCredits/BuyCredits.atoms';
+import {
+  paymentOptionAtom,
+  spendingCapAtom,
+} from 'pages/BuyCredits/BuyCredits.atoms';
 import {
   INSUFFICIENT_BALANCE,
   NEXT,
@@ -63,8 +66,6 @@ import { CardSellOrder } from './ChooseCreditsForm.types';
 import { getFilteredCryptoSellOrders } from './ChooseCreditsForm.utils';
 
 export type Props = {
-  paymentOption: PaymentOptionsType;
-  setPaymentOption: UseStateSetter<PaymentOptionsType>;
   retiring: boolean;
   setRetiring: UseStateSetter<boolean>;
   onSubmit: (values: ChooseCreditsFormSchemaType) => Promise<void>;
@@ -90,8 +91,6 @@ export type Props = {
 
 export const ChooseCreditsForm = React.memo(
   ({
-    paymentOption,
-    setPaymentOption,
     retiring,
     setRetiring,
     onSubmit,
@@ -118,6 +117,7 @@ export const ChooseCreditsForm = React.memo(
     const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
     const { data, handleSave, activeStep } =
       useMultiStep<BuyCreditsSchemaTypes>();
+    const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
 
     const cryptoCurrencies = useMemo(
       () =>
@@ -314,15 +314,13 @@ export const ChooseCreditsForm = React.memo(
               ) : (
                 <>
                   <PaymentOptions
-                    paymentOption={paymentOption}
-                    setPaymentOption={handlePaymentOptions}
+                    handlePaymentOptions={handlePaymentOptions}
                     cardDisabled={cardDisabled}
                     isConnected={isConnected}
                     setupWalletModal={setupWalletModal}
                   />
                   {currency && (
                     <CreditsAmount
-                      paymentOption={paymentOption}
                       creditsAvailable={creditsAvailable}
                       setCreditsAvailable={setCreditsAvailable}
                       filteredCryptoSellOrders={filteredCryptoSellOrders}
@@ -383,7 +381,6 @@ export const ChooseCreditsForm = React.memo(
               }}
               cardDetails={cardDetails}
               imageAltText={project.name}
-              paymentOption={paymentOption}
               allowedDenoms={allowedDenoms}
               onClickEditCard={goToPaymentInfo}
               setCreditsAmount={(value: number) => {

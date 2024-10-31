@@ -54,21 +54,15 @@ import { PaymentInfoFormFiat } from 'components/organisms/PaymentInfoForm/Paymen
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import {
-  buyCreditsCryptoCurrencyAtom,
+  paymentOptionAtom,
   paymentOptionCryptoClickedAtom,
 } from './BuyCredits.atoms';
 import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
-import {
-  BuyCreditsSchemaTypes,
-  CardDetails,
-  PaymentOptionsType,
-} from './BuyCredits.types';
+import { BuyCreditsSchemaTypes, CardDetails } from './BuyCredits.types';
 import { getCreditsAvailableBannerText } from './BuyCredits.utils';
 import { usePurchase } from './hooks/usePurchase';
 
 type Props = {
-  paymentOption: PaymentOptionsType;
-  setPaymentOption: UseStateSetter<PaymentOptionsType>;
   retiring: boolean;
   setRetiring: UseStateSetter<boolean>;
   confirmationTokenId?: string;
@@ -87,8 +81,6 @@ type Props = {
 const stripe = loadStripe(stripeKey);
 
 export const BuyCreditsForm = ({
-  paymentOption,
-  setPaymentOption,
   retiring,
   setRetiring,
   confirmationTokenId,
@@ -107,6 +99,7 @@ export const BuyCreditsForm = ({
     useMultiStep<BuyCreditsSchemaTypes>();
   const { wallet, isConnected, activeWalletAddr } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
+  const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
   const {
     isModalOpen,
     modalState,
@@ -306,8 +299,6 @@ export const BuyCreditsForm = ({
       <div>
         {activeStep === 0 && (
           <ChooseCreditsForm
-            setPaymentOption={setPaymentOption}
-            paymentOption={paymentOption}
             retiring={retiring}
             setRetiring={setRetiring}
             cardDisabled={cardDisabled}
@@ -447,7 +438,6 @@ export const BuyCreditsForm = ({
             }}
             cardDetails={cardDetails}
             imageAltText={project.name}
-            paymentOption={paymentOption}
             allowedDenoms={allowedDenoms}
             onClickEditCard={goToPaymentInfo}
             setCreditsAmount={(creditsAmount: number) => {

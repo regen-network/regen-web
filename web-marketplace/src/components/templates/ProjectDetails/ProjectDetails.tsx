@@ -25,6 +25,7 @@ import {
 import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
+  ProjectMetadataLD,
 } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { IS_REGEN } from 'lib/env';
@@ -520,7 +521,7 @@ function ProjectDetails(): JSX.Element {
         sortedDocuments={sortedDocuments}
         sortCallbacksDocuments={sortCallbacksDocuments}
         offChainProject={offChainProject}
-        projectMetadata={projectMetadata}
+        projectMetadata={projectMetadata as ProjectMetadataLD}
         onChainProjectId={onChainProjectId}
         batchData={{
           batches: batchesWithSupply,

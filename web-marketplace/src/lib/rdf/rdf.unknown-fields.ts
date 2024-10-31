@@ -1,7 +1,6 @@
 import { ContextDefinition, ExpandedTermDefinition } from 'jsonld';
 
 import {
-  AnchoredProjectMetadataLD,
   CreditBatchMetadataIntersectionLD,
   CreditClassMetadataLD,
   ProjectMetadataLD,
@@ -97,9 +96,7 @@ const knownProjectFields: KnownProjectFields[] = [
   'regen:socialCulturalIndex',
 ];
 
-export function getProjectUnknownFields<T extends AnchoredProjectMetadataLD>(
-  data: T,
-) {
+export function getProjectUnknownFields<T extends ProjectMetadataLD>(data: T) {
   return getUnknowFields(data, knownProjectFields);
 }
 

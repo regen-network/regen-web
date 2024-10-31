@@ -6,7 +6,9 @@ import {
 } from '@apollo/client';
 import { StdSignature } from '@cosmjs/launchpad';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { useWallet } from 'lib/wallet/wallet';
@@ -30,6 +32,7 @@ export const ConnectWalletFlow = ({
   setError,
 }: ConnectWalletFlowProps) => {
   const { wallet } = useWallet();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { activeAccount, privActiveAccount } = useAuth();
   const [addressUsedModalOpen, setAddressUsedModalOpen] = useState(false);
   const [addressUsedWithEmailModalOpen, setAddressUsedWithEmailModalOpen] =
@@ -55,6 +58,7 @@ export const ConnectWalletFlow = ({
       addr: wallet?.address as string,
       client: graphqlClient,
       enabled: !!wallet?.address && !!graphqlClient,
+      languageCode: selectedLanguage,
     }),
   );
   const walletAccount = walletAccountData?.accountByAddr;

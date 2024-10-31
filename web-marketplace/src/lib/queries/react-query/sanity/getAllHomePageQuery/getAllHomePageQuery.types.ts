@@ -10,4 +10,5 @@ export type ReactQueryAllHomePageQueryResponse =
 
 export type ReactQueryAllHomePageQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryAllHomePageQueryResponse>;

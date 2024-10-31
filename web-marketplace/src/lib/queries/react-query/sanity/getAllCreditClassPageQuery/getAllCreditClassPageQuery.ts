@@ -1,3 +1,5 @@
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   AllCreditClassPageDocument,
   AllCreditClassPageQuery,
@@ -11,16 +13,22 @@ import {
 
 export const getAllCreditClassPageQuery = ({
   sanityClient,
+  languageCode,
   ...params
 }: ReactQueryGetAllCreditClassPageQueryParams): ReactQueryGetAllCreditClassPageResponse => ({
-  queryKey: [SANITY_ALL_CREDIT_CLASS_PAGE_KEY],
+  queryKey: [SANITY_ALL_CREDIT_CLASS_PAGE_KEY, languageCode],
   queryFn: async () => {
     const { data: sanityCreditClassPageData } =
       await sanityClient.query<AllCreditClassPageQuery>({
         query: AllCreditClassPageDocument,
       });
 
-    return sanityCreditClassPageData;
+    return {
+      allCreditClassPage: getLocalizedData({
+        data: sanityCreditClassPageData.allCreditClassPage,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

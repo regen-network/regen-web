@@ -37,6 +37,7 @@ import {
   fullWidthRegExp,
   LOGOUT_TEXT,
 } from './RegistryLayout.constants';
+import { LanguageSwitcher } from './RegistryLayout.LanguageSwitcher';
 import { getAddress } from './RegistryLayout.utils';
 
 const RegistryLayoutHeader: React.FC = () => {
@@ -126,9 +127,13 @@ const RegistryLayoutHeader: React.FC = () => {
         borderBottom={borderBottom}
         fullWidth={fullWidthRegExp.test(pathname)}
         pathname={pathname}
+        websiteExtras={
+          <LanguageSwitcher className="text-sc-button-text-icon-light" />
+        }
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
             {clientConfig.listProject && <ListProject />}
+            <LanguageSwitcher className="mr-25 hidden lg:block" />
             {chainId && accountOrWallet && disconnect && (
               <UserMenuItems
                 nameOrAddress={

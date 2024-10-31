@@ -5,7 +5,9 @@ import {
 } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getClassesByIssuerQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getClassesByIssuer/getClassesByIssuer';
@@ -14,6 +16,7 @@ import { useLedger } from '../ledger';
 import type { ProjectWithMetadataObj as Project } from '../types/ledger/ecocredit';
 
 export default function useQueryProjectsByIssuer(issuer?: string): Project[] {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { ecocreditClient, dataClient } = useLedger();
@@ -51,6 +54,7 @@ export default function useQueryProjectsByIssuer(issuer?: string): Project[] {
         iri: project?.metadata,
         dataClient,
         enabled: !!dataClient,
+        languageCode: selectedLanguage,
       }),
     ),
   });

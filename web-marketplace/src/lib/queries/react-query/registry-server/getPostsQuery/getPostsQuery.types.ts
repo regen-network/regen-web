@@ -15,6 +15,7 @@ export type GetPostsQueryParams = {
   projectId?: string;
   next?: string;
   year?: number | null;
+  languageCode: string;
 };
 export type ReactQueryGetPostsQueryParams = GetPostsQueryParams &
   ReactQueryBuilderResponse<ReactQueryGetPostsQueryResponse>;

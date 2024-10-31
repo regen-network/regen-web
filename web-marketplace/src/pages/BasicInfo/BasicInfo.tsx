@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getAllCreateProjectPageQuery } from 'lib/queries/react-query/sanity/getAllCreateProjectPageQuery/getAllCreateProjectPageQuery';
 
 import { useCreateProjectContext } from 'pages/ProjectCreate';
@@ -19,6 +21,7 @@ import { CreateProjectPageModal } from './BasicInfo.CreateProjectPageModal';
 
 const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { projectId } = useParams();
   const { isEdit, onChainProject, projectEditSubmit } = useProjectEditContext();
   const { navigateNext } = useNavigateNext({ step: 'location', projectId });
@@ -43,7 +46,11 @@ const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { creditClassOnChainId, hasModalBeenViewed, setHasModalBeenViewed } =
     useCreateProjectContext();
   const { data: sanityCreateProjectPageData } = useQuery(
-    getAllCreateProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllCreateProjectPageQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
   const [open, setOpen] = useState(false);
 

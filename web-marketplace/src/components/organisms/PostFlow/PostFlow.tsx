@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { ContentHash_Graph } from '@regen-network/api/lib/generated/regen/data/v1/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
 
 import Modal from 'web-components/src/components/modal';
@@ -15,6 +15,7 @@ import { deleteImage } from 'web-components/src/utils/s3';
 import { apiUri } from 'lib/apiUri';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import {
@@ -66,6 +67,7 @@ export const PostFlow = ({
   setDraftPost,
   scrollIntoDataStream,
 }: Props) => {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const fileNamesToDeleteRef = useRef<string[]>([]);
   const retryCsrfRequest = useRetryCsrfRequest();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
@@ -81,6 +83,7 @@ export const PostFlow = ({
   const { data: createdPostData, isFetching } = useQuery(
     getPostQuery({
       iri,
+      languageCode: selectedLanguage,
       enabled: !!iri,
     }),
   );
@@ -148,6 +151,7 @@ export const PostFlow = ({
               await reactQueryClient.invalidateQueries({
                 queryKey: getPostsQueryKey({
                   projectId: offChainProjectId,
+                  languageCode: selectedLanguage,
                 }),
                 refetchType: 'all',
               });
@@ -164,6 +168,7 @@ export const PostFlow = ({
       offChainProjectId,
       retryCsrfRequest,
       reactQueryClient,
+      selectedLanguage,
       setErrorBannerTextAtom,
     ],
   );

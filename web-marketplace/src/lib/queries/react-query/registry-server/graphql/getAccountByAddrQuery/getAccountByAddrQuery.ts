@@ -8,9 +8,10 @@ import { getAccountByAddrQueryKey } from './getAccountByAddrQuery.utils';
 
 export const getAccountByAddrQuery = ({
   client,
+  languageCode,
   ...params
 }: ReactQueryGetAccountByAddrQueryParams): ReactQueryGetAccountByAddrQueryResponse => ({
-  queryKey: getAccountByAddrQueryKey(params),
+  queryKey: [...getAccountByAddrQueryKey(params), languageCode],
   queryFn: async () => {
     try {
       const { data } = await client.query<AccountByAddrQuery>({
@@ -18,7 +19,19 @@ export const getAccountByAddrQuery = ({
         variables: { ...params },
       });
 
-      return data;
+      const localizedDescription =
+        data?.accountByAddr?.accountTranslationsById.nodes.find(
+          node => node?.languageCode === languageCode,
+        )?.description ?? data?.accountByAddr?.description;
+
+      const localizedData = Object.assign({}, data, {
+        accountByAddr: {
+          ...data.accountByAddr,
+          description: localizedDescription,
+        },
+      });
+
+      return localizedData;
     } catch (e) {
       return null;
     }

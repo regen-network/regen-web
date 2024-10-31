@@ -11,5 +11,11 @@ query AccountByAddr($addr: String!) {
     twitterLink
     hideEcocredits
     hideRetirements
+    accountTranslationsById {
+      nodes {
+        languageCode
+        description
+      }
+    }
   }
 }

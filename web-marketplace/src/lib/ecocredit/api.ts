@@ -114,6 +114,7 @@ type GetCreditsWithDataParams = {
   sanityCreditClassData?: AllCreditClassQuery;
   dataClient?: DataQueryClientImpl;
   ecocreditClient?: EcocreditQueryClientImpl;
+  selectedLanguage: string;
 };
 
 const getCreditsWithData = async ({
@@ -122,18 +123,20 @@ const getCreditsWithData = async ({
   sanityCreditClassData,
   dataClient,
   ecocreditClient,
+  selectedLanguage,
 }: GetCreditsWithDataParams): Promise<BatchInfoWithBalance[]> => {
   const credits: (BatchInfoWithBalance | undefined)[] = await Promise.all(
     balances.map(async balance => {
       const batch = batches.find(batch => batch.denom === balance.batchDenom);
 
       if (!batch) return undefined;
-      const classProjectInfo = await getClassProjectForBatch(
+      const classProjectInfo = await getClassProjectForBatch({
         batch,
         sanityCreditClassData,
         dataClient,
+        selectedLanguage,
         ecocreditClient,
-      );
+      });
 
       return {
         ...batch,
@@ -157,6 +160,7 @@ type GetEcocreditsForAccountParams = {
   sanityCreditClassData?: AllCreditClassQuery;
   dataClient?: DataQueryClientImpl;
   ecocreditClient?: EcocreditQueryClientImpl;
+  selectedLanguage: string;
 };
 
 export const getEcocreditsForAccount = async ({
@@ -168,6 +172,7 @@ export const getEcocreditsForAccount = async ({
   sanityCreditClassData,
   dataClient,
   ecocreditClient,
+  selectedLanguage,
 }: GetEcocreditsForAccountParams): Promise<BatchInfoWithBalance[]> => {
   try {
     if (paginationParams) {
@@ -179,6 +184,7 @@ export const getEcocreditsForAccount = async ({
         sanityCreditClassData,
         dataClient,
         ecocreditClient,
+        selectedLanguage,
       });
       return [
         ...loadedCredits.slice(0, offset),
@@ -192,6 +198,7 @@ export const getEcocreditsForAccount = async ({
         sanityCreditClassData,
         dataClient,
         ecocreditClient,
+        selectedLanguage,
       });
     }
   } catch (err) {
@@ -199,13 +206,23 @@ export const getEcocreditsForAccount = async ({
   }
 };
 
-const getClassProjectForBatch = async (
-  batch: BatchInfo,
-  sanityCreditClassData?: AllCreditClassQuery,
-  dataClient?: DataQueryClientImpl,
-  ecocreditClient?: EcocreditQueryClientImpl,
-  reactQueryClient?: QueryClient,
-): Promise<ClassProjectInfo> => {
+type GetClassProjectForBatchParams = {
+  batch: BatchInfo;
+  sanityCreditClassData?: AllCreditClassQuery;
+  dataClient?: DataQueryClientImpl;
+  ecocreditClient?: EcocreditQueryClientImpl;
+  reactQueryClient?: QueryClient;
+  selectedLanguage: string;
+};
+
+const getClassProjectForBatch = async ({
+  batch,
+  sanityCreditClassData,
+  dataClient,
+  ecocreditClient,
+  reactQueryClient,
+  selectedLanguage,
+}: GetClassProjectForBatchParams): Promise<ClassProjectInfo> => {
   let projectMetadata, projectData, classData, classMetadata;
   const { projectId } = batch;
   if (reactQueryClient) {
@@ -231,13 +248,18 @@ const getClassProjectForBatch = async (
             iri: project.metadata,
             dataClient,
             enabled: !!dataClient,
+            languageCode: selectedLanguage,
           }),
           reactQueryClient,
         });
       } else {
         // TODO Keeping the old path for retro-compatibility of the function.
         // Once all paths use the react-query one we will be able to remove it.
-        projectMetadata = await getMetadata(project.metadata, dataClient);
+        projectMetadata = await getMetadata({
+          iri: project.metadata,
+          client: dataClient,
+          languageCode: selectedLanguage,
+        });
       }
     } catch (error) {}
   }
@@ -270,13 +292,18 @@ const getClassProjectForBatch = async (
             iri: creditClass.metadata,
             dataClient,
             enabled: !!dataClient,
+            languageCode: selectedLanguage,
           }),
           reactQueryClient,
         });
       } else {
         // TODO Keeping the old path for retro-compatibility of the function.
         // Once all paths use the react-query one we will be able to remove it.
-        classMetadata = await getMetadata(creditClass.metadata, dataClient);
+        classMetadata = await getMetadata({
+          iri: creditClass.metadata,
+          client: dataClient,
+          languageCode: selectedLanguage,
+        });
       }
     } catch (error) {}
   }

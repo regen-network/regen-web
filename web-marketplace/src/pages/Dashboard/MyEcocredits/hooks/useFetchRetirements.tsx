@@ -5,6 +5,7 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 import { DEFAULT_ROWS_PER_PAGE } from 'web-components/src/components/table/Table.constants';
@@ -12,6 +13,7 @@ import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { RetirementsOrderBy } from 'generated/indexer-graphql';
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   NormalizedRetirement,
   normalizeRetirement,
@@ -39,7 +41,7 @@ export const useFetchRetirements = ({ address, hideRetirements }: Props) => {
   const { ecocreditClient } = useLedger();
   const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
   const reactQueryClient = useQueryClient();
-
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const [paginationParams, setPaginationParams] =
     useState<TablePaginationParams>({
       page: 0,
@@ -98,6 +100,7 @@ export const useFetchRetirements = ({ address, hideRetirements }: Props) => {
           client: apolloClient,
           addr: classIssuers?.issuers[0] ?? '',
           enabled: !!apolloClient && !!csrfData,
+          languageCode: selectedLanguage,
         }),
       ) ?? [],
   });

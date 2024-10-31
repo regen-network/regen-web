@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 import { useSortResultWithIris } from 'utils/sanity/useSortResultWithIris';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getEcologicalImpactByIriQuery } from 'lib/queries/react-query/sanity/getEcologicalImpactByIriQuery/getEcologicalImpactByIriQuery';
 
 import { Maybe } from '../../../generated/graphql';
@@ -14,10 +16,13 @@ interface InputProps {
 export default function useCoBenefits({
   coBenefitsIRIs,
 }: InputProps): EcologicalImpact[] {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
   const { data: coBenefitData } = useQuery(
     getEcologicalImpactByIriQuery({
       iris: coBenefitsIRIs,
       sanityClient: client,
+      languageCode: selectedLanguage,
       enabled: !!coBenefitsIRIs,
     }),
   );

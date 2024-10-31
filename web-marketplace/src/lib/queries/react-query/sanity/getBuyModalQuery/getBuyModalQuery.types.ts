@@ -9,4 +9,5 @@ export type ReactQueryBuyModalResponse = QueryObserverOptions<AllBuyModalQuery>;
 
 export type ReactQueryBuyModalQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryBuyModalResponse>;

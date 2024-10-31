@@ -5,10 +5,12 @@ import {
 } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   AnchoredProjectMetadataBaseLD,
   CreditClassMetadataLD,
@@ -34,6 +36,7 @@ export const useStakeholders = ({
   onChainProject,
   creditClassMetadata,
 }: Params) => {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
@@ -71,6 +74,7 @@ export const useStakeholders = ({
       client: graphqlClient,
       addr: adminAddr ?? '',
       enabled: !!adminAddr && !!graphqlClient && !!csrfData,
+      languageCode: selectedLanguage,
     }),
   );
   const { account } = useAccountInfo({ accountByAddr });

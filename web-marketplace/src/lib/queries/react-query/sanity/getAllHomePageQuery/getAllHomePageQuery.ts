@@ -1,3 +1,5 @@
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   AllHomePageDocument,
   AllHomePageQuery,
@@ -10,16 +12,21 @@ import {
 
 export const getAllHomePageQuery = ({
   sanityClient,
+  languageCode,
   ...params
 }: ReactQueryAllHomePageQueryParams): ReactQueryAllHomePageQueryResponse => ({
-  queryKey: ['allHomePageQuery'],
+  queryKey: ['allHomePageQuery', languageCode],
   queryFn: async () => {
-    const { data: sanityCreditClassData } =
-      await sanityClient.query<AllHomePageQuery>({
-        query: AllHomePageDocument,
-      });
+    const { data } = await sanityClient.query<AllHomePageQuery>({
+      query: AllHomePageDocument,
+    });
 
-    return sanityCreditClassData;
+    return {
+      allHomePage: getLocalizedData({
+        data: data.allHomePage,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

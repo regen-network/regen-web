@@ -127,7 +127,7 @@ export type BasketDetailsPageFilter = {
   language?: Maybe<StringFilter>;
 };
 
-export type BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTokenPageOrWalletAddressRegistrationPage = BasketDetailsPage | BridgePage | BuyModal | BuyModalOptions | BuyersPage | CaseStudiesPage | CaseStudyPage | Claim | ClassPrefinanceTimelineStatus | CommunityPage | CreateCreditClassPage | CreateMethodologyPage | CreateProjectPage | CredibilityCard | CreditCategory | CreditCertification | CreditClass | CreditClassPage | CreditType | DevelopersPage | Doc | EcologicalCreditCard | EcologicalImpact | EcologicalOutcome | Faq | FeaturedProjectCard | FeaturedSection | GettingStartedResourcesCard | GettingStartedResourcesSection | HomePage | HomePageWeb | LandManagementPractice | LandStewardsPage | MainnetPage | Media | Methodology | MethodologyReviewProcessPage | NctPage | OffsetMethod | Partner | PartnersPage | Person | PresskitPage | ProfilePage | Program | Project | ProjectActivity | ProjectEcosystem | ProjectPage | ProjectPrefinanceTimelineStatus | ProjectRating | ProjectsPage | Resource | ResourcesPage | SciencePage | Sdg | SharedSections | SoldOutProjects | StatCard | Tag | TeamPage | TebuBanner | TokenPage | WalletAddressRegistrationPage;
+export type BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage = BasketDetailsPage | BridgePage | BuyModal | BuyModalOptions | BuyersPage | CaseStudiesPage | CaseStudyPage | Claim | ClassPrefinanceTimelineStatus | CommunityPage | CreateCreditClassPage | CreateMethodologyPage | CreateProjectPage | CredibilityCard | CreditCategory | CreditCertification | CreditClass | CreditClassPage | CreditType | DevelopersPage | Doc | EcologicalCreditCard | EcologicalImpact | EcologicalOutcome | Faq | FeaturedProjectCard | FeaturedSection | GettingStartedResourcesCard | GettingStartedResourcesSection | HomePage | HomePageWeb | LandManagementPractice | LandStewardsPage | MainnetPage | Media | Methodology | MethodologyReviewProcessPage | NctPage | OffsetMethod | Partner | PartnersPage | Person | PresskitPage | ProfilePage | Program | Project | ProjectActivity | ProjectEcosystem | ProjectPage | ProjectPrefinanceTimelineStatus | ProjectRating | ProjectsPage | Resource | ResourcesPage | SciencePage | Sdg | SharedSections | SoldOutProjects | StatCard | Tag | TeamPage | TebuBanner | TerrasosProject | TokenPage | WalletAddressRegistrationPage;
 
 export type BasketDetailsPageSorting = {
   _id?: Maybe<SortOrder>;
@@ -1482,6 +1482,31 @@ export type CommunityPageSorting = {
   collectiveSection?: Maybe<CommunityCollectiveSectionSorting>;
   collaborateSection?: Maybe<CommunityCollaborateSectionSorting>;
   language?: Maybe<SortOrder>;
+};
+
+export type ComplianceCredits = {
+  __typename?: 'ComplianceCredits';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  creditsRegistered?: Maybe<Scalars['Float']>;
+  creditsAvailable?: Maybe<Scalars['Float']>;
+  creditsRetired?: Maybe<Scalars['Float']>;
+};
+
+export type ComplianceCreditsFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  creditsRegistered?: Maybe<FloatFilter>;
+  creditsAvailable?: Maybe<FloatFilter>;
+  creditsRetired?: Maybe<FloatFilter>;
+};
+
+export type ComplianceCreditsSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  creditsRegistered?: Maybe<SortOrder>;
+  creditsAvailable?: Maybe<SortOrder>;
+  creditsRetired?: Maybe<SortOrder>;
 };
 
 export type ConnectSection = {
@@ -3808,7 +3833,7 @@ export type InternationalizedArrayReferenceValue = {
   __typename?: 'InternationalizedArrayReferenceValue';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
-  value?: Maybe<BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTokenPageOrWalletAddressRegistrationPage>;
+  value?: Maybe<BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage>;
 };
 
 export type InternationalizedArrayReferenceValueFilter = {
@@ -5905,6 +5930,7 @@ export type RootQuery = {
   NctPage?: Maybe<NctPage>;
   CreditCategory?: Maybe<CreditCategory>;
   TebuBanner?: Maybe<TebuBanner>;
+  TerrasosProject?: Maybe<TerrasosProject>;
   ImageGridItem?: Maybe<ImageGridItem>;
   ContactPage?: Maybe<ContactPage>;
   FaqPage?: Maybe<FaqPage>;
@@ -5979,6 +6005,7 @@ export type RootQuery = {
   allNctPage: Array<NctPage>;
   allCreditCategory: Array<CreditCategory>;
   allTebuBanner: Array<TebuBanner>;
+  allTerrasosProject: Array<TerrasosProject>;
   allImageGridItem: Array<ImageGridItem>;
   allContactPage: Array<ContactPage>;
   allFaqPage: Array<FaqPage>;
@@ -6312,6 +6339,11 @@ export type RootQueryCreditCategoryArgs = {
 
 
 export type RootQueryTebuBannerArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryTerrasosProjectArgs = {
   id: Scalars['ID'];
 };
 
@@ -6876,6 +6908,14 @@ export type RootQueryAllCreditCategoryArgs = {
 export type RootQueryAllTebuBannerArgs = {
   where?: Maybe<TebuBannerFilter>;
   sort?: Maybe<Array<TebuBannerSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllTerrasosProjectArgs = {
+  where?: Maybe<TerrasosProjectFilter>;
+  sort?: Maybe<Array<TerrasosProjectSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -7987,6 +8027,71 @@ export type TebuBannerSorting = {
   language?: Maybe<SortOrder>;
 };
 
+export type TerrasosProject = Document & {
+  __typename?: 'TerrasosProject';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  /** Slug should be the prefered option if the project has a slug, otherwise it might result in the data below not being displayed on the project page. */
+  projectId?: Maybe<Scalars['String']>;
+  projectPrefinancing?: Maybe<ProjectPrefinancing>;
+  credibilityCards?: Maybe<Array<Maybe<DetailsCard>>>;
+  fiatSellOrders?: Maybe<Array<Maybe<SellOrderPrice>>>;
+  projectName?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
+  location?: Maybe<Scalars['String']>;
+  area?: Maybe<Scalars['Float']>;
+  areaUnit?: Maybe<Scalars['String']>;
+  complianceCredits?: Maybe<ComplianceCredits>;
+  language?: Maybe<Scalars['String']>;
+};
+
+export type TerrasosProjectFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  projectId?: Maybe<StringFilter>;
+  projectPrefinancing?: Maybe<ProjectPrefinancingFilter>;
+  projectName?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+  location?: Maybe<StringFilter>;
+  area?: Maybe<FloatFilter>;
+  areaUnit?: Maybe<StringFilter>;
+  complianceCredits?: Maybe<ComplianceCreditsFilter>;
+  language?: Maybe<StringFilter>;
+};
+
+export type TerrasosProjectSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  projectId?: Maybe<SortOrder>;
+  projectPrefinancing?: Maybe<ProjectPrefinancingSorting>;
+  projectName?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+  location?: Maybe<SortOrder>;
+  area?: Maybe<SortOrder>;
+  areaUnit?: Maybe<SortOrder>;
+  complianceCredits?: Maybe<ComplianceCreditsSorting>;
+  language?: Maybe<SortOrder>;
+};
+
 export type TimelineItem = {
   __typename?: 'TimelineItem';
   _key?: Maybe<Scalars['String']>;
@@ -8617,6 +8722,7 @@ export type AllBasketDetailsPageQuery = (
   { __typename?: 'RootQuery' }
   & { allBasketDetailsPage: Array<(
     { __typename?: 'BasketDetailsPage' }
+    & Pick<BasketDetailsPage, 'language'>
     & { gettingStartedResourcesCard?: Maybe<(
       { __typename?: 'GettingStartedResourcesCard' }
       & GettingStartedResourcesCardFieldsFragment
@@ -8631,6 +8737,7 @@ export type AllBuyModalQuery = (
   { __typename?: 'RootQuery' }
   & { allBuyModal: Array<(
     { __typename?: 'BuyModal' }
+    & Pick<BuyModal, 'language'>
     & { infoCard?: Maybe<(
       { __typename?: 'InfoCard' }
       & Pick<InfoCard, 'title' | 'descriptionRaw'>
@@ -8649,7 +8756,7 @@ export type AllBuyModalOptionsQuery = (
   { __typename?: 'RootQuery' }
   & { allBuyModalOptions: Array<(
     { __typename?: 'BuyModalOptions' }
-    & Pick<BuyModalOptions, 'title'>
+    & Pick<BuyModalOptions, 'language' | 'title'>
     & { cards?: Maybe<Array<Maybe<(
       { __typename?: 'ActionCard' }
       & Pick<ActionCard, 'title' | 'descriptionRaw' | 'noteRaw'>
@@ -8671,7 +8778,7 @@ export type AllBuyersPageQuery = (
   { __typename?: 'RootQuery' }
   & { allBuyersPage: Array<(
     { __typename?: 'BuyersPage' }
-    & Pick<BuyersPage, 'footerButtonText'>
+    & Pick<BuyersPage, 'language' | 'footerButtonText'>
     & { heroSection?: Maybe<(
       { __typename?: 'HeroSection' }
       & HeroSectionFieldsFragment
@@ -8710,7 +8817,7 @@ export type AllCreateCreditClassPageQuery = (
   { __typename?: 'RootQuery' }
   & { allCreateCreditClassPage: Array<(
     { __typename?: 'CreateCreditClassPage' }
-    & Pick<CreateCreditClassPage, 'footerLink'>
+    & Pick<CreateCreditClassPage, 'language' | 'footerLink'>
     & { heroSection?: Maybe<(
       { __typename?: 'HeroSection' }
       & HeroSectionFieldsFragment
@@ -8757,7 +8864,7 @@ export type AllCreateMethodologyPageQuery = (
   { __typename?: 'RootQuery' }
   & { allCreateMethodologyPage: Array<(
     { __typename?: 'CreateMethodologyPage' }
-    & Pick<CreateMethodologyPage, 'footerLink'>
+    & Pick<CreateMethodologyPage, 'language' | 'footerLink'>
     & { heroSection?: Maybe<(
       { __typename?: 'HeroSection' }
       & HeroSectionFieldsFragment
@@ -8797,6 +8904,7 @@ export type AllCreateProjectPageQuery = (
   { __typename?: 'RootQuery' }
   & { allCreateProjectPage: Array<(
     { __typename?: 'CreateProjectPage' }
+    & Pick<CreateProjectPage, 'language'>
     & { createProjectPagePopup?: Maybe<(
       { __typename?: 'CreateProjectPagePopup' }
       & Pick<CreateProjectPagePopup, 'title' | 'descriptionRaw' | 'guidesLinkRaw' | 'buttonLabel'>
@@ -8819,7 +8927,7 @@ export type AllCreditCertificationQuery = (
   { __typename?: 'RootQuery' }
   & { allCreditCertification: Array<(
     { __typename?: 'CreditCertification' }
-    & Pick<CreditCertification, 'name'>
+    & Pick<CreditCertification, 'language' | 'name'>
     & { icon?: Maybe<(
       { __typename?: 'Image' }
       & ImageFieldsFragment
@@ -8834,7 +8942,7 @@ export type AllCreditClassQuery = (
   { __typename?: 'RootQuery' }
   & { allCreditClass: Array<(
     { __typename?: 'CreditClass' }
-    & Pick<CreditClass, 'path' | 'nameRaw' | 'descriptionRaw' | 'shortDescriptionRaw' | 'retirementLabel'>
+    & Pick<CreditClass, 'language' | 'path' | 'nameRaw' | 'descriptionRaw' | 'shortDescriptionRaw' | 'retirementLabel'>
     & { iri?: Maybe<(
       { __typename?: 'Slug' }
       & Pick<Slug, 'current'>
@@ -8930,6 +9038,7 @@ export type AllCreditClassPageQuery = (
   { __typename?: 'RootQuery' }
   & { allCreditClassPage: Array<(
     { __typename?: 'CreditClassPage' }
+    & Pick<CreditClassPage, 'language'>
     & { creditClassDetailsSection?: Maybe<(
       { __typename?: 'DetailsSection' }
       & Pick<DetailsSection, 'label' | 'title' | 'descriptionRaw'>
@@ -8947,7 +9056,7 @@ export type AllCreditTypeQuery = (
   { __typename?: 'RootQuery' }
   & { allCreditType: Array<(
     { __typename?: 'CreditType' }
-    & Pick<CreditType, 'name' | 'unit' | 'unitDefinitionRaw'>
+    & Pick<CreditType, 'language' | 'name' | 'unit' | 'unitDefinitionRaw'>
     & { largeImage?: Maybe<(
       { __typename?: 'Image' }
       & ImageFieldsFragment
@@ -8972,6 +9081,7 @@ export type AllHomePageQuery = (
   { __typename?: 'RootQuery' }
   & { allHomePage: Array<(
     { __typename?: 'HomePage' }
+    & Pick<HomePage, 'language'>
     & { seo?: Maybe<(
       { __typename?: 'Seo' }
       & SeoFieldsFragment
@@ -9017,6 +9127,7 @@ export type AllLandStewardsPageQuery = (
   { __typename?: 'RootQuery' }
   & { allLandStewardsPage: Array<(
     { __typename?: 'LandStewardsPage' }
+    & Pick<LandStewardsPage, 'language'>
     & { heroSection?: Maybe<(
       { __typename?: 'HeroSection' }
       & HeroSectionFieldsFragment
@@ -9077,7 +9188,7 @@ export type AllMethodologyQuery = (
   { __typename?: 'RootQuery' }
   & { allMethodology: Array<(
     { __typename?: 'Methodology' }
-    & Pick<Methodology, 'path' | 'nameRaw' | 'descriptionRaw'>
+    & Pick<Methodology, 'language' | 'path' | 'nameRaw' | 'descriptionRaw'>
     & { steps?: Maybe<(
       { __typename?: 'BasicStepCardSection' }
       & BasicStepCardSectionFieldsFragment
@@ -9123,6 +9234,7 @@ export type AllMethodologyReviewProcessPageQuery = (
   { __typename?: 'RootQuery' }
   & { allMethodologyReviewProcessPage: Array<(
     { __typename?: 'MethodologyReviewProcessPage' }
+    & Pick<MethodologyReviewProcessPage, 'language'>
     & { heroSection?: Maybe<(
       { __typename?: 'HeroSection' }
       & HeroSectionFieldsFragment
@@ -9149,7 +9261,7 @@ export type AllOffsetMethodQuery = (
   { __typename?: 'RootQuery' }
   & { allOffsetMethod: Array<(
     { __typename?: 'OffsetMethod' }
-    & Pick<OffsetMethod, 'name'>
+    & Pick<OffsetMethod, 'language' | 'name'>
     & { icon?: Maybe<(
       { __typename?: 'Image' }
       & ImageFieldsFragment
@@ -9164,7 +9276,7 @@ export type AllPrefinanceProjectQuery = (
   { __typename?: 'RootQuery' }
   & { allProject: Array<(
     { __typename?: 'Project' }
-    & Pick<Project, 'projectId'>
+    & Pick<Project, 'language' | 'projectId'>
     & { projectPrefinancing?: Maybe<(
       { __typename?: 'ProjectPrefinancing' }
       & Pick<ProjectPrefinancing, 'isPrefinanceProject' | 'price' | 'estimatedIssuance' | 'stripePaymentLink'>
@@ -9179,7 +9291,7 @@ export type AllProfilePageQuery = (
   { __typename?: 'RootQuery' }
   & { allProfilePage: Array<(
     { __typename?: 'ProfilePage' }
-    & Pick<ProfilePage, 'projectCardPromptRaw'>
+    & Pick<ProfilePage, 'language' | 'projectCardPromptRaw'>
     & { bannerCard?: Maybe<(
       { __typename?: 'BannerCard' }
       & BannerCardFieldsFragment
@@ -9194,7 +9306,7 @@ export type AllProjectActivityQuery = (
   { __typename?: 'RootQuery' }
   & { allProjectActivity: Array<(
     { __typename?: 'ProjectActivity' }
-    & Pick<ProjectActivity, 'name'>
+    & Pick<ProjectActivity, 'language' | 'name'>
     & { icon?: Maybe<(
       { __typename?: 'Image' }
       & ImageFieldsFragment
@@ -9209,7 +9321,7 @@ export type AllProjectEcosystemQuery = (
   { __typename?: 'RootQuery' }
   & { allProjectEcosystem: Array<(
     { __typename?: 'ProjectEcosystem' }
-    & Pick<ProjectEcosystem, 'name'>
+    & Pick<ProjectEcosystem, 'language' | 'name'>
     & { icon?: Maybe<(
       { __typename?: 'Image' }
       & ImageFieldsFragment
@@ -9224,7 +9336,7 @@ export type AllProjectPageQuery = (
   { __typename?: 'RootQuery' }
   & { allProjectPage: Array<(
     { __typename?: 'ProjectPage' }
-    & Pick<ProjectPage, 'dataStreamAdminDescriptionRaw'>
+    & Pick<ProjectPage, 'language' | 'dataStreamAdminDescriptionRaw'>
     & { bannerCard?: Maybe<(
       { __typename?: 'BannerCard' }
       & BannerCardFieldsFragment
@@ -9255,7 +9367,7 @@ export type AllProjectRatingQuery = (
   { __typename?: 'RootQuery' }
   & { allProjectRating: Array<(
     { __typename?: 'ProjectRating' }
-    & Pick<ProjectRating, 'name'>
+    & Pick<ProjectRating, 'language' | 'name'>
     & { icon?: Maybe<(
       { __typename?: 'Image' }
       & ImageFieldsFragment
@@ -9270,6 +9382,7 @@ export type AllProjectsPageQuery = (
   { __typename?: 'RootQuery' }
   & { allProjectsPage: Array<(
     { __typename?: 'ProjectsPage' }
+    & Pick<ProjectsPage, 'language'>
     & { gettingStartedResourcesSection?: Maybe<(
       { __typename?: 'GettingStartedResourcesSection' }
       & GettingStartedResourcesSectionFieldsFragment
@@ -9287,6 +9400,7 @@ export type AllSoldOutProjectsQuery = (
   { __typename?: 'RootQuery' }
   & { allSoldOutProjects: Array<(
     { __typename?: 'SoldOutProjects' }
+    & Pick<SoldOutProjects, 'language'>
     & { soldOutProjectsList?: Maybe<Array<Maybe<(
       { __typename?: 'Project' }
       & Pick<Project, 'projectName' | 'projectId'>
@@ -9560,7 +9674,7 @@ export type EcologicalImpactByIriQuery = (
   { __typename?: 'RootQuery' }
   & { allEcologicalImpact: Array<(
     { __typename?: 'EcologicalImpact' }
-    & Pick<EcologicalImpact, 'name' | 'descriptionRaw'>
+    & Pick<EcologicalImpact, 'language' | 'name' | 'descriptionRaw'>
     & { image?: Maybe<(
       { __typename?: 'CustomImage' }
       & CustomImageFieldsFragment
@@ -9632,6 +9746,7 @@ export type ProjectByIdQuery = (
   { __typename?: 'RootQuery' }
   & { allProject: Array<(
     { __typename?: 'Project' }
+    & Pick<Project, 'language'>
     & { credibilityCards?: Maybe<Array<Maybe<(
       { __typename?: 'DetailsCard' }
       & DetailsCardFieldsFragment
@@ -9705,7 +9820,7 @@ export type SdgByIriQuery = (
   { __typename?: 'RootQuery' }
   & { allSdg: Array<(
     { __typename?: 'Sdg' }
-    & Pick<Sdg, 'title'>
+    & Pick<Sdg, 'language' | 'title'>
     & { image?: Maybe<(
       { __typename?: 'CustomImage' }
       & CustomImageFieldsFragment
@@ -9744,7 +9859,7 @@ export type TebuBannerQuery = (
   { __typename?: 'RootQuery' }
   & { allTebuBanner: Array<(
     { __typename?: 'TebuBanner' }
-    & Pick<TebuBanner, 'contentRaw'>
+    & Pick<TebuBanner, 'language' | 'contentRaw'>
     & { learnMoreLink?: Maybe<(
       { __typename?: 'LinkItem' }
       & Pick<LinkItem, 'text' | 'href'>
@@ -9782,6 +9897,7 @@ export type AllBridgePageQuery = (
   { __typename?: 'RootQuery' }
   & { allBridgePage: Array<(
     { __typename?: 'BridgePage' }
+    & Pick<BridgePage, 'language'>
     & { gettingStartedResourcesCard?: Maybe<(
       { __typename?: 'GettingStartedResourcesCard' }
       & GettingStartedResourcesCardFieldsFragment
@@ -10374,6 +10490,7 @@ export const DetailsCardFieldsFragmentDoc = gql`
 export const AllBasketDetailsPageDocument = gql`
     query allBasketDetailsPage {
   allBasketDetailsPage {
+    language
     gettingStartedResourcesCard {
       ...gettingStartedResourcesCardFields
     }
@@ -10410,6 +10527,7 @@ export type AllBasketDetailsPageQueryResult = Apollo.QueryResult<AllBasketDetail
 export const AllBuyModalDocument = gql`
     query allBuyModal {
   allBuyModal {
+    language
     infoCard {
       title
       descriptionRaw
@@ -10450,6 +10568,7 @@ export type AllBuyModalQueryResult = Apollo.QueryResult<AllBuyModalQuery, AllBuy
 export const AllBuyModalOptionsDocument = gql`
     query allBuyModalOptions {
   allBuyModalOptions {
+    language
     title
     cards {
       title
@@ -10496,6 +10615,7 @@ export type AllBuyModalOptionsQueryResult = Apollo.QueryResult<AllBuyModalOption
 export const AllBuyersPageDocument = gql`
     query allBuyersPage {
   allBuyersPage {
+    language
     heroSection {
       ...heroSectionFields
     }
@@ -10565,6 +10685,7 @@ export type AllBuyersPageQueryResult = Apollo.QueryResult<AllBuyersPageQuery, Al
 export const AllCreateCreditClassPageDocument = gql`
     query allCreateCreditClassPage {
   allCreateCreditClassPage {
+    language
     heroSection {
       ...heroSectionFields
     }
@@ -10643,6 +10764,7 @@ export type AllCreateCreditClassPageQueryResult = Apollo.QueryResult<AllCreateCr
 export const AllCreateMethodologyPageDocument = gql`
     query allCreateMethodologyPage {
   allCreateMethodologyPage {
+    language
     heroSection {
       ...heroSectionFields
     }
@@ -10710,6 +10832,7 @@ export type AllCreateMethodologyPageQueryResult = Apollo.QueryResult<AllCreateMe
 export const AllCreateProjectPageDocument = gql`
     query AllCreateProjectPage {
   allCreateProjectPage {
+    language
     createProjectPagePopup {
       title
       descriptionRaw
@@ -10756,6 +10879,7 @@ export type AllCreateProjectPageQueryResult = Apollo.QueryResult<AllCreateProjec
 export const AllCreditCertificationDocument = gql`
     query allCreditCertification {
   allCreditCertification {
+    language
     name
     icon {
       ...imageFields
@@ -10793,6 +10917,7 @@ export type AllCreditCertificationQueryResult = Apollo.QueryResult<AllCreditCert
 export const AllCreditClassDocument = gql`
     query allCreditClass {
   allCreditClass {
+    language
     path
     iri {
       current
@@ -10922,6 +11047,7 @@ export type AllCreditClassQueryResult = Apollo.QueryResult<AllCreditClassQuery, 
 export const AllCreditClassPageDocument = gql`
     query allCreditClassPage {
   allCreditClassPage {
+    language
     creditClassDetailsSection {
       label
       title
@@ -10963,6 +11089,7 @@ export type AllCreditClassPageQueryResult = Apollo.QueryResult<AllCreditClassPag
 export const AllCreditTypeDocument = gql`
     query allCreditType {
   allCreditType {
+    language
     name
     largeImage {
       ...imageFields
@@ -11011,6 +11138,7 @@ export type AllCreditTypeQueryResult = Apollo.QueryResult<AllCreditTypeQuery, Al
 export const AllHomePageDocument = gql`
     query allHomePage {
   allHomePage {
+    language
     seo {
       ...seoFields
     }
@@ -11082,6 +11210,7 @@ export type AllHomePageQueryResult = Apollo.QueryResult<AllHomePageQuery, AllHom
 export const AllLandStewardsPageDocument = gql`
     query allLandStewardsPage {
   allLandStewardsPage {
+    language
     heroSection {
       ...heroSectionFields
     }
@@ -11170,6 +11299,7 @@ export type AllLandStewardsPageQueryResult = Apollo.QueryResult<AllLandStewardsP
 export const AllMethodologyDocument = gql`
     query allMethodology {
   allMethodology {
+    language
     path
     nameRaw
     descriptionRaw
@@ -11232,6 +11362,7 @@ export type AllMethodologyQueryResult = Apollo.QueryResult<AllMethodologyQuery, 
 export const AllMethodologyReviewProcessPageDocument = gql`
     query allMethodologyReviewProcessPage {
   allMethodologyReviewProcessPage {
+    language
     heroSection {
       ...heroSectionFields
     }
@@ -11283,6 +11414,7 @@ export type AllMethodologyReviewProcessPageQueryResult = Apollo.QueryResult<AllM
 export const AllOffsetMethodDocument = gql`
     query allOffsetMethod {
   allOffsetMethod {
+    language
     name
     icon {
       ...imageFields
@@ -11320,6 +11452,7 @@ export type AllOffsetMethodQueryResult = Apollo.QueryResult<AllOffsetMethodQuery
 export const AllPrefinanceProjectDocument = gql`
     query AllPrefinanceProject {
   allProject(where: {projectPrefinancing: {isPrefinanceProject: {eq: true}}}) {
+    language
     projectId
     projectPrefinancing {
       isPrefinanceProject
@@ -11360,6 +11493,7 @@ export type AllPrefinanceProjectQueryResult = Apollo.QueryResult<AllPrefinancePr
 export const AllProfilePageDocument = gql`
     query AllProfilePage {
   allProfilePage {
+    language
     bannerCard {
       ...bannerCardFields
     }
@@ -11397,6 +11531,7 @@ export type AllProfilePageQueryResult = Apollo.QueryResult<AllProfilePageQuery, 
 export const AllProjectActivityDocument = gql`
     query allProjectActivity {
   allProjectActivity {
+    language
     name
     icon {
       ...imageFields
@@ -11434,6 +11569,7 @@ export type AllProjectActivityQueryResult = Apollo.QueryResult<AllProjectActivit
 export const AllProjectEcosystemDocument = gql`
     query allProjectEcosystem {
   allProjectEcosystem {
+    language
     name
     icon {
       ...imageFields
@@ -11471,6 +11607,7 @@ export type AllProjectEcosystemQueryResult = Apollo.QueryResult<AllProjectEcosys
 export const AllProjectPageDocument = gql`
     query allProjectPage {
   allProjectPage {
+    language
     bannerCard {
       ...bannerCardFields
     }
@@ -11530,6 +11667,7 @@ export type AllProjectPageQueryResult = Apollo.QueryResult<AllProjectPageQuery, 
 export const AllProjectRatingDocument = gql`
     query allProjectRating {
   allProjectRating {
+    language
     name
     icon {
       ...imageFields
@@ -11567,6 +11705,7 @@ export type AllProjectRatingQueryResult = Apollo.QueryResult<AllProjectRatingQue
 export const AllProjectsPageDocument = gql`
     query allProjectsPage {
   allProjectsPage {
+    language
     gettingStartedResourcesSection {
       ...gettingStartedResourcesSectionFields
     }
@@ -11607,6 +11746,7 @@ export type AllProjectsPageQueryResult = Apollo.QueryResult<AllProjectsPageQuery
 export const AllSoldOutProjectsDocument = gql`
     query allSoldOutProjects {
   allSoldOutProjects {
+    language
     soldOutProjectsList {
       projectName
       projectId
@@ -11644,6 +11784,7 @@ export type AllSoldOutProjectsQueryResult = Apollo.QueryResult<AllSoldOutProject
 export const EcologicalImpactByIriDocument = gql`
     query EcologicalImpactByIri($iris: [String!]) {
   allEcologicalImpact(where: {iri: {current: {in: $iris}}}) {
+    language
     name
     descriptionRaw
     image {
@@ -11695,6 +11836,7 @@ export type EcologicalImpactByIriQueryResult = Apollo.QueryResult<EcologicalImpa
 export const ProjectByIdDocument = gql`
     query ProjectById($id: String!) {
   allProject(where: {projectId: {eq: $id}}) {
+    language
     credibilityCards {
       ...detailsCardFields
     }
@@ -11773,6 +11915,7 @@ export type ProjectByIdQueryResult = Apollo.QueryResult<ProjectByIdQuery, Projec
 export const SdgByIriDocument = gql`
     query SdgByIri($iris: [String!]) {
   allSdg(where: {iri: {current: {in: $iris}}}) {
+    language
     title
     image {
       ...customImageFields
@@ -11814,6 +11957,7 @@ export type SdgByIriQueryResult = Apollo.QueryResult<SdgByIriQuery, SdgByIriQuer
 export const TebuBannerDocument = gql`
     query TebuBanner {
   allTebuBanner {
+    language
     contentRaw
     learnMoreLink {
       text
@@ -11855,6 +11999,7 @@ export type TebuBannerQueryResult = Apollo.QueryResult<TebuBannerQuery, TebuBann
 export const AllBridgePageDocument = gql`
     query allBridgePage {
   allBridgePage {
+    language
     gettingStartedResourcesCard {
       ...gettingStartedResourcesCardFields
     }

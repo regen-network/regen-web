@@ -10,4 +10,5 @@ export type ReactQueryAllOffsetMethodQueryResponse =
 
 export type ReactQueryAllOffsetMethodQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryAllOffsetMethodQueryResponse>;

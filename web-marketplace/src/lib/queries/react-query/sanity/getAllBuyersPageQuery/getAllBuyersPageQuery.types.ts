@@ -10,4 +10,5 @@ export type ReactQueryAllBuyersPageQueryResponse =
 
 export type ReactQueryAllBuyersQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryAllBuyersPageQueryResponse>;

@@ -2,7 +2,9 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getAllBasketDetailsPageQuery } from 'lib/queries/react-query/sanity/getAllBasketDetailsPageQuery/getAllBasketDetailsPageQuery';
 
 import { GettingStartedResourcesCardDefault } from 'components/molecules/GettingStartedResourcesCardDefault/GettingStartedResourcesCardDefault';
@@ -18,11 +20,16 @@ import useBasketDetails from './hooks/useBasketDetails';
 
 const BasketDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { basketDenom } = useParams<{ basketDenom: string }>();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { overview, basketCredits, paginationParams, setPaginationParams } =
     useBasketDetails(basketDenom);
 
   const { data: allBasketDetailsPageData } = useQuery(
-    getAllBasketDetailsPageQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllBasketDetailsPageQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
   const content = allBasketDetailsPageData?.allBasketDetailsPage?.[0];
   const gettingStartedResourcesCard = content?.gettingStartedResourcesCard;

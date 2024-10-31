@@ -7567,6 +7567,13 @@ export type AccountByAddrQuery = (
   & { accountByAddr?: Maybe<(
     { __typename?: 'Account' }
     & Pick<Account, 'id' | 'addr' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'hideEcocredits' | 'hideRetirements'>
+    & { accountTranslationsById: (
+      { __typename?: 'AccountTranslationsConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'AccountTranslation' }
+        & Pick<AccountTranslation, 'languageCode' | 'description'>
+      )>> }
+    ) }
   )> }
 );
 
@@ -7593,6 +7600,13 @@ export type AccountByIdQuery = (
   & { accountById?: Maybe<(
     { __typename?: 'Account' }
     & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce' | 'hideEcocredits' | 'hideRetirements' | 'custodialAddress'>
+    & { accountTranslationsById: (
+      { __typename?: 'AccountTranslationsConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'AccountTranslation' }
+        & Pick<AccountTranslation, 'languageCode' | 'description'>
+      )>> }
+    ) }
   )> }
 );
 
@@ -7757,6 +7771,13 @@ export type GetAccountsByNameOrAddrQuery = (
     & { nodes: Array<Maybe<(
       { __typename?: 'Account' }
       & Pick<Account, 'id' | 'creatorId' | 'name' | 'type' | 'image' | 'description' | 'addr'>
+      & { accountTranslationsById: (
+        { __typename?: 'AccountTranslationsConnection' }
+        & { nodes: Array<Maybe<(
+          { __typename?: 'AccountTranslation' }
+          & Pick<AccountTranslation, 'languageCode' | 'description'>
+        )>> }
+      ) }
     )>> }
   )> }
 );
@@ -7889,6 +7910,19 @@ export type ProjectFieldsFragment = (
     & { nodes: Array<Maybe<(
       { __typename?: 'Document' }
       & Pick<Document, 'name' | 'type' | 'date' | 'url'>
+      & { documentTranslationsById: (
+        { __typename?: 'DocumentTranslationsConnection' }
+        & { nodes: Array<Maybe<(
+          { __typename?: 'DocumentTranslation' }
+          & Pick<DocumentTranslation, 'languageCode' | 'name' | 'type'>
+        )>> }
+      ) }
+    )>> }
+  ), projectTranslationsById: (
+    { __typename?: 'ProjectTranslationsConnection' }
+    & { nodes: Array<Maybe<(
+      { __typename?: 'ProjectTranslation' }
+      & Pick<ProjectTranslation, 'languageCode' | 'metadata'>
     )>> }
   ) }
 );
@@ -8065,6 +8099,19 @@ export const ProjectFieldsFragmentDoc = gql`
       type
       date
       url
+      documentTranslationsById {
+        nodes {
+          languageCode
+          name
+          type
+        }
+      }
+    }
+  }
+  projectTranslationsById {
+    nodes {
+      languageCode
+      metadata
     }
   }
 }
@@ -8083,6 +8130,12 @@ export const AccountByAddrDocument = gql`
     twitterLink
     hideEcocredits
     hideRetirements
+    accountTranslationsById {
+      nodes {
+        languageCode
+        description
+      }
+    }
   }
 }
     `;
@@ -8165,6 +8218,12 @@ export const AccountByIdDocument = gql`
     hideEcocredits
     hideRetirements
     custodialAddress
+    accountTranslationsById {
+      nodes {
+        languageCode
+        description
+      }
+    }
   }
 }
     `;
@@ -8507,6 +8566,12 @@ export const GetAccountsByNameOrAddrDocument = gql`
       image
       description
       addr
+      accountTranslationsById {
+        nodes {
+          languageCode
+          description
+        }
+      }
     }
   }
 }

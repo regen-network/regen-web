@@ -10,4 +10,5 @@ export type ReactQueryBuyModalOptionsResponse =
 
 export type ReactQueryBuyModalOptionsQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryBuyModalOptionsResponse>;

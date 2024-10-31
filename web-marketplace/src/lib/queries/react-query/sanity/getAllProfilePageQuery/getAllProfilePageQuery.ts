@@ -1,3 +1,5 @@
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   AllProfilePageDocument,
   AllProfilePageQuery,
@@ -11,6 +13,7 @@ import {
 
 export const getAllProfilePageQuery = ({
   sanityClient,
+  languageCode,
   ...params
 }: ReactQueryGetAllProfilePageQueryParams): ReactQueryGetAllProfilePageResponse => ({
   queryKey: [SANITY_ALL_PROFILE_PAGE_KEY],
@@ -20,7 +23,12 @@ export const getAllProfilePageQuery = ({
         query: AllProfilePageDocument,
       });
 
-    return sanityProfilePageData;
+    return {
+      allProfilePage: getLocalizedData({
+        data: sanityProfilePageData.allProfilePage,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

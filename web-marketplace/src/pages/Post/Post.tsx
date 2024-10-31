@@ -9,6 +9,7 @@ import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { MAPBOX_TOKEN } from 'config/globals';
 import { Point } from 'geojson';
+import { useAtom } from 'jotai';
 import Linkify from 'linkify-react';
 import { parse } from 'wellknown';
 
@@ -17,6 +18,7 @@ import Section from 'web-components/src/components/section';
 import { Body } from 'web-components/src/components/typography';
 import { formatDate } from 'web-components/src/utils/format';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { PHOTO_CREDIT } from 'lib/constants/shared.constants';
 import { getPostQuery } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery';
@@ -40,6 +42,7 @@ import { PostTimeline } from './Post.Timeline';
 function Post(): JSX.Element {
   const { iri } = useParams();
   const { _ } = useLingui();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
   const { activeAccountId } = useAuth();
@@ -48,6 +51,7 @@ function Post(): JSX.Element {
       iri,
       token,
       enabled: !!iri,
+      languageCode: selectedLanguage,
     }),
   );
   const graphqlClient =
@@ -60,6 +64,7 @@ function Post(): JSX.Element {
   } = useQuery(
     getProjectByIdQuery({
       client: graphqlClient,
+      languageCode: selectedLanguage,
       enabled: !!projectId,
       id: projectId,
     }),
@@ -103,6 +108,7 @@ function Post(): JSX.Element {
   const { data: creatorAccountData } = useQuery(
     getAccountByIdQuery({
       client: graphqlClient,
+      languageCode: selectedLanguage,
       id: data?.creatorAccountId ?? '',
       enabled: !!data?.creatorAccountId && !!graphqlClient,
     }),

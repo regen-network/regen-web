@@ -1,3 +1,5 @@
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   AllProjectPageDocument,
   AllProjectPageQuery,
@@ -11,16 +13,22 @@ import {
 
 export const getAllProjectPageQuery = ({
   sanityClient,
+  languageCode,
   ...params
 }: ReactQueryGetAllProjectPageQueryParams): ReactQueryGetAllProjectPageResponse => ({
-  queryKey: [SANITY_ALL_PROJECT_PAGE_KEY],
+  queryKey: [SANITY_ALL_PROJECT_PAGE_KEY, languageCode],
   queryFn: async () => {
     const { data: sanityProjectPageData } =
       await sanityClient.query<AllProjectPageQuery>({
         query: AllProjectPageDocument,
       });
 
-    return sanityProjectPageData;
+    return {
+      allProjectPage: getLocalizedData({
+        data: sanityProjectPageData.allProjectPage,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

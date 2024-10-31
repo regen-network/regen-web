@@ -10,4 +10,5 @@ export type ReactQueryAllActivityQueryResponse =
 
 export type ReactQueryAllActivityQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryAllActivityQueryResponse>;

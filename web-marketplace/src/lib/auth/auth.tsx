@@ -8,6 +8,7 @@ import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
 import { AccountByIdQuery } from 'generated/graphql';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getAccountsQuery } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery';
 import { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
@@ -33,6 +34,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { data, isFetching } = useQuery(getAccountsQuery({}));
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const activeAccountId = data?.activeAccountId;
   const privAuthenticatedAccounts = data?.authenticatedAccounts;
 
@@ -43,6 +45,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
           client: graphqlClient,
           enabled: !!graphqlClient,
           id,
+          languageCode: selectedLanguage,
         }),
       ) || [],
   });

@@ -1,5 +1,6 @@
 query allProjectEcosystem {
   allProjectEcosystem {
+    language
     name
     icon {
       ...imageFields

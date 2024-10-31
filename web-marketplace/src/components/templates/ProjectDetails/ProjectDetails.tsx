@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
@@ -15,6 +15,7 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import { Project } from 'generated/graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { onBtnClick } from 'lib/button';
 import {
@@ -81,6 +82,7 @@ import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
 function ProjectDetails(): JSX.Element {
   const { _ } = useLingui();
   const theme = useTheme();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { projectId } = useParams();
   const { ecocreditClient, dataClient } = useLedger();
   const { isConnected, isKeplrMobileWeb, wallet, loginDisabled } = useWallet();
@@ -94,7 +96,11 @@ function ProjectDetails(): JSX.Element {
   const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
 
   const { data: sanityProjectPageData } = useQuery(
-    getAllProjectPageQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllProjectPageQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const sanityProjectPage = sanityProjectPageData?.allProjectPage?.[0];
@@ -102,7 +108,11 @@ function ProjectDetails(): JSX.Element {
     sanityProjectPage?.gettingStartedResourcesSection;
 
   const { data: sanitySoldOutProjects } = useQuery(
-    getSoldOutProjectsQuery({ sanityClient, enabled: !!sanityClient }),
+    getSoldOutProjectsQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const soldOutProjectsIds = useAllSoldOutProjectsIds({
@@ -110,7 +120,11 @@ function ProjectDetails(): JSX.Element {
   });
 
   const { data: sanityCreditClassData } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const setBuyFromProjectId = useSetAtom(buyFromProjectIdAtom);
@@ -172,6 +186,7 @@ function ProjectDetails(): JSX.Element {
       iri: creditClassOnChain?.class?.metadata,
       enabled: !!dataClient && !!creditClassOnChain?.class?.metadata,
       dataClient,
+      languageCode: selectedLanguage,
     }),
   );
   const creditClassMetadata = creditClassMetadataRes?.data as
@@ -184,6 +199,7 @@ function ProjectDetails(): JSX.Element {
       iri: onChainProject?.metadata,
       dataClient,
       enabled: !!dataClient,
+      languageCode: selectedLanguage,
     }),
   );
   const anchoredMetadata = data as AnchoredProjectMetadataLD | undefined;

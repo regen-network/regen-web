@@ -1,5 +1,6 @@
 query allCreateMethodologyPage {
   allCreateMethodologyPage {
+    language
     heroSection {
       ...heroSectionFields
     }

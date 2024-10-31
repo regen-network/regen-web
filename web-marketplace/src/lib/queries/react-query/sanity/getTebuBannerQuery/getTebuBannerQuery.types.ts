@@ -10,4 +10,5 @@ export type ReactQueryTebuBannerQueryResponse =
 
 export type ReactQueryTebuBannerQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryTebuBannerQueryResponse>;

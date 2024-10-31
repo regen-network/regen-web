@@ -1,5 +1,6 @@
 query allSoldOutProjects {
   allSoldOutProjects {
+    language
     soldOutProjectsList {
       projectName
       projectId

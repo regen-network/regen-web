@@ -1,5 +1,6 @@
 query allHomePage {
   allHomePage {
+    language
     seo {
       ...seoFields
     }

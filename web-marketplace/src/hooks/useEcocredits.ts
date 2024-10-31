@@ -4,11 +4,13 @@ import {
   BatchInfo,
   QueryBatchesResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { useAtom } from 'jotai';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getEcocreditsForAccount } from 'lib/ecocredit/api';
 import { ledgerRESTUri } from 'lib/ledger';
 
@@ -53,7 +55,7 @@ export default function useEcocredits({
   const [isLoadingCredits, setIsLoadingCredits] = useState(true);
   const isFetchingRef = useRef(false);
   const { dataClient, ecocreditClient } = useLedger();
-
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const batchesResponse = useEcocreditQuery<QueryBatchesResponse>({
     params: {},
     query: 'batches',
@@ -124,6 +126,7 @@ export default function useEcocredits({
         sanityCreditClassData,
         dataClient,
         ecocreditClient,
+        selectedLanguage,
       });
 
       if (newCredits) setCredits(newCredits);
@@ -142,6 +145,7 @@ export default function useEcocredits({
     sanityCreditClassData,
     dataClient,
     ecocreditClient,
+    selectedLanguage,
   ]);
 
   const reloadBalances = useCallback(async () => {

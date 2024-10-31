@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectByIdQuery as getOffChainProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
@@ -15,6 +17,7 @@ import { client as sanityClient } from '../../../../lib/clients/sanity';
 import { getIsOnChainId, getIsUuid } from '../ProjectDetails.utils';
 
 export const useGetProject = () => {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { projectId } = useParams();
   const graphqlClient = useApolloClient();
   const { ecocreditClient } = useLedger();
@@ -31,6 +34,7 @@ export const useGetProject = () => {
         id: projectId as string,
         sanityClient,
         enabled: !!sanityClient && !!projectId,
+        languageCode: selectedLanguage,
       }),
     );
   const sanityProject = sanityProjectData?.allProject?.[0];
@@ -42,6 +46,7 @@ export const useGetProject = () => {
         client: graphqlClient,
         slug: projectId as string,
         enabled: !!projectId && !isOnChainId && !isOffChainUuid,
+        languageCode: selectedLanguage,
       }),
     );
 
@@ -54,6 +59,7 @@ export const useGetProject = () => {
       client: graphqlClient,
       enabled: !!projectId && !!isOnChainId,
       onChainId: projectId as string,
+      languageCode: selectedLanguage,
     }),
   );
 
@@ -66,6 +72,7 @@ export const useGetProject = () => {
       client: graphqlClient,
       enabled: !!projectId && !!isOffChainUuid,
       id: projectId,
+      languageCode: selectedLanguage,
     }),
   );
 

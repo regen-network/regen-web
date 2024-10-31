@@ -3,6 +3,7 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, Grid, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import GlanceCard from 'web-components/src/components/cards/GlanceCard';
 import { ActionCard } from 'web-components/src/components/molecules/ActionCard/ActionCard';
@@ -13,6 +14,7 @@ import Section from 'web-components/src/components/section';
 import { Body, Label, Title } from 'web-components/src/components/typography';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import {
   ECOSYSTEM_LABEL,
@@ -77,6 +79,7 @@ function ProjectTopSection({
   const { _ } = useLingui();
   const { classes } = useProjectTopSectionStyles();
   const { ecocreditClient } = useLedger();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const {
     projectName,
@@ -102,7 +105,11 @@ function ProjectTopSection({
   );
 
   const { data: sanityCreditTypeData } = useQuery(
-    getAllCreditTypeQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllCreditTypeQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
   const creditTypeSanity = sanityCreditTypeData?.allCreditType?.find(
     creditType =>
@@ -110,17 +117,23 @@ function ProjectTopSection({
       creditTypeData?.creditType?.name?.toLowerCase(),
   );
   const { data: sanityOffsetMethodData } = useQuery(
-    getAllOffsetMethodQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllOffsetMethodQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const { data: allProjectRatingData } = useQuery(
     getAllProjectRatingQuery({
       sanityClient,
+      languageCode: selectedLanguage,
     }),
   );
   const { data: allCreditCertification } = useQuery(
     getAllCreditCertificationQuery({
       sanityClient,
+      languageCode: selectedLanguage,
     }),
   );
 

@@ -13,6 +13,7 @@ import {
   useAllProjectsPageQuery,
   useAllSoldOutProjectsQuery,
 } from 'generated/sanity-graphql';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   creditClassSelectedFiltersAtom,
   projectsSortAtom,
@@ -36,9 +37,13 @@ const Projects = (): JSX.Element => {
   const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
   const [sort] = useAtom(projectsSortAtom);
   const [creditClassSelectedFilters] = useAtom(creditClassSelectedFiltersAtom);
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const { data: allHomePageData } = useQuery(
-    getAllHomePageQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllHomePageQuery({
+      sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
   const sortPinnedIds =
     allHomePageData?.allHomePage?.[0]?.projectsSection?.projects?.map(project =>

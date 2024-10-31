@@ -1,7 +1,9 @@
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQueries } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 
@@ -9,7 +11,7 @@ import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 export const useProjectsMetadata = (projects?: (ProjectInfo | undefined)[]) => {
   const { dataClient } = useLedger();
-
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   // Project Metadata
   const projectsMetadatasResults = useQueries({
     queries:
@@ -18,6 +20,7 @@ export const useProjectsMetadata = (projects?: (ProjectInfo | undefined)[]) => {
           iri: project?.metadata,
           dataClient,
           enabled: !!dataClient,
+          languageCode: selectedLanguage,
         }),
       ) ?? [],
   });

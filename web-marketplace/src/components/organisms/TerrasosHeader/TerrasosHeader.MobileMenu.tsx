@@ -51,7 +51,7 @@ export const TerrasosHeaderMobileMenu = ({
       >
         <CloseIcon className="w-[32px] h-[32px]" />
       </div>
-      <ul className="pl-0 my-0 w-full">
+      <ul className="pl-0 my-0 w-full pb-30 mb-30">
         {items.map((item, index) => (
           <li key={index} className={cn('flex flex-col font-bold')}>
             <div

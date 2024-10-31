@@ -1,5 +1,7 @@
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { AddDataToBatchesParams } from 'lib/ecocredit/api';
 import {
@@ -23,11 +25,16 @@ export const useAddDataToBatches = ({
   dataClient,
   withAllData,
 }: Props) => {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const {
     data: sanityCreditClassData,
     isFetching: isLoadingSanityCreditClass,
   } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const { data: createBatchTxs, isFetching: isLoadingCreateBatchTxs } =
@@ -88,6 +95,7 @@ export const useAddDataToBatches = ({
         iri: project?.metadata,
         dataClient,
         enabled: !!dataClient && !!project?.metadata && withAllData,
+        languageCode: selectedLanguage,
       });
     }),
   });
@@ -114,6 +122,7 @@ export const useAddDataToBatches = ({
         iri: creditClass?.metadata,
         dataClient,
         enabled: !!dataClient && !!creditClass?.metadata && withAllData,
+        languageCode: selectedLanguage,
       });
     }),
   });

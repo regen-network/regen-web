@@ -10,4 +10,5 @@ export type ReactQueryAllEcosystemQueryResponse =
 
 export type ReactQueryAllEcosystemQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryAllEcosystemQueryResponse>;

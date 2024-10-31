@@ -9,11 +9,12 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 
 import { useCreateProjectContext } from 'pages/ProjectCreate';
@@ -40,6 +41,7 @@ export const SettingsForm: React.FC<
   React.PropsWithChildren<SettingsFormProps>
 > = ({ initialValues, submit, onPrev }) => {
   const { _ } = useLingui();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const settingsFormSchema = useMemo(() => getSettingsFormSchema(_), [_]);
   const form = useZodForm({
     schema: settingsFormSchema,
@@ -81,6 +83,7 @@ export const SettingsForm: React.FC<
       client: graphqlClient,
       enabled: !!graphqlClient && !!slugValue,
       slug: slugValue,
+      languageCode: selectedLanguage,
     }),
   );
   const isNewSlug = initialValues?.slug !== slugValue;

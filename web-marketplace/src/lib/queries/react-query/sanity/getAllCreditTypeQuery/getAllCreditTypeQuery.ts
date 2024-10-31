@@ -1,4 +1,6 @@
 /* eslint-disable lingui/no-unlocalized-strings */
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   AllCreditTypeDocument,
   AllCreditTypeQuery,
@@ -11,16 +13,22 @@ import {
 
 export const getAllCreditTypeQuery = ({
   sanityClient,
+  languageCode,
   ...params
 }: ReactQueryGetAllCreditTypeParams): ReactQueryGetAllCreditTypeResponse => ({
-  queryKey: ['AllCreditTypeQuery'],
+  queryKey: ['AllCreditTypeQuery', languageCode],
   queryFn: async () => {
     const { data: sanityCreditTypeData } =
       await sanityClient.query<AllCreditTypeQuery>({
         query: AllCreditTypeDocument,
       });
 
-    return sanityCreditTypeData;
+    return {
+      allCreditType: getLocalizedData({
+        data: sanityCreditTypeData.allCreditType,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

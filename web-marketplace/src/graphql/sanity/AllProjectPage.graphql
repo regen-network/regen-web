@@ -1,5 +1,6 @@
 query allProjectPage {
   allProjectPage {
+    language
     bannerCard {
       ...bannerCardFields
     }

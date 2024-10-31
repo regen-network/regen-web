@@ -1,5 +1,6 @@
 query allLandStewardsPage {
   allLandStewardsPage {
+    language
     heroSection {
       ...heroSectionFields
     }

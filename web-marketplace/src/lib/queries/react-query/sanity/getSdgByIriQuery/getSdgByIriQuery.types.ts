@@ -13,5 +13,6 @@ export type ReactQuerySdgByIriQueryResponse =
 
 export type ReactQuerySdgByIriQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & SdgByIriQueryVariables &
   ReactQueryBuilderResponse<ReactQuerySdgByIriQueryResponse>;

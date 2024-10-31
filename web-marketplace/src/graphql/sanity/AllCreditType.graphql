@@ -1,5 +1,6 @@
 query allCreditType {
   allCreditType {
+    language
     name
     largeImage {
       ...imageFields

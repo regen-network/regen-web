@@ -40,6 +40,19 @@ fragment projectFields on Project {
       type
       date
       url
+      documentTranslationsById {
+        nodes {
+          languageCode
+          name
+          type
+        }
+      }
+    }
+  }
+  projectTranslationsById {
+    nodes {
+      languageCode
+      metadata
     }
   }
 }

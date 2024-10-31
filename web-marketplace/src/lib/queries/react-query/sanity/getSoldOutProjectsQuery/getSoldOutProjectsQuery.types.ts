@@ -10,4 +10,5 @@ export type ReactQueryGetSoldOutProjectsResponse =
 
 export type ReactQueryGetSoldOutProjectsQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryGetSoldOutProjectsResponse>;

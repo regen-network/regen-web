@@ -1,3 +1,5 @@
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   AllProjectEcosystemDocument,
   AllProjectEcosystemQuery,
@@ -10,15 +12,21 @@ import {
 
 export const getAllEcosystemQuery = ({
   sanityClient,
+  languageCode,
   ...params
 }: ReactQueryAllEcosystemQueryParams): ReactQueryAllEcosystemQueryResponse => ({
-  queryKey: ['allEcosystemQuery'],
+  queryKey: ['allEcosystemQuery', languageCode],
   queryFn: async () => {
     const { data } = await sanityClient.query<AllProjectEcosystemQuery>({
       query: AllProjectEcosystemDocument,
     });
 
-    return data;
+    return {
+      allProjectEcosystem: getLocalizedData({
+        data: data.allProjectEcosystem,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

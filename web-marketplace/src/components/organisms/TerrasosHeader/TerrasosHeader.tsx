@@ -12,6 +12,7 @@ import {
   getTerrasosHeaderItems,
   TERRASOS_BASE_PATHNAME,
 } from './TerrasosHeader.constants';
+import { LanguageSwitcher } from './TerrasosHeader.LanguageSwitcher';
 import { TerrasosHeaderMobileMenu } from './TerrasosHeader.MobileMenu';
 
 export interface Props {
@@ -30,23 +31,26 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
         className,
       )}
     >
-      <div className="relative flex px-15 py-10 md:py-0 md:px-0 md:h-[72px] justify-between items-center md:max-w-[708px] lg:max-w-[940px] xl:max-w-[1220px] w-full mx-auto bg-brand-300 md:bg-ac-neutral-0">
+      <div className="relative flex px-15 py-10 md:py-0 md:px-0 h-[62px] md:h-[72px] justify-between items-center md:max-w-[708px] lg:max-w-[940px] xl:max-w-[1220px] w-full mx-auto bg-brand-300 md:bg-ac-neutral-0">
         <a href="https://www.terrasos.co/">
           <TerrasosLogo
-            className="text-bc-neutral-0 lg:ml-[7px] md:text-brand-300 ml-[7px] pt-[2px]"
+            className="text-bc-neutral-0 lg:ml-[7px] md:text-brand-300 ml-[7px] pt-[5px]"
             width={190}
             height={42}
           />
         </a>
-        <HamburgerIcon
-          role="button"
-          className="text-bc-neutral-700 m-5 mb-0 md:hidden cursor-pointer w-[21px] absolute left-[84%]"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        />
+        <div className="flex items-center mb-5 md:mb-0 pr-25 md:pr-0">
+          <LanguageSwitcher className="mr-5 md:mr-15" />
+          <HamburgerIcon
+            role="button"
+            className="text-bc-neutral-700 m-5 mb-0 md:hidden cursor-pointer w-[21px]"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          />
+        </div>
       </div>
       <nav className="justify-center items-center self-stretch bg-brand-300 hidden md:flex md:px-25 lg:px-0">
         <div className="flex justify-between items-center md:max-w-[708px] lg:max-w-[940px] xl:max-w-[1220px] w-full">
-          <ul className="flex items-center justify-center lg:justify-start flex-wrap xl:flex-nowrap pl-0 my-0 md:ml-5">
+          <ul className="flex items-center justify-center lg:justify-start flex-wrap 2xl:flex-nowrap pl-0 my-0 md:ml-5">
             {items.map((item, index) => {
               const isActive = item.href.startsWith(TERRASOS_BASE_PATHNAME);
 

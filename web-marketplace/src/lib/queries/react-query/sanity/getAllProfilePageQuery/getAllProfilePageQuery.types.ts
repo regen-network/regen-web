@@ -10,4 +10,5 @@ export type ReactQueryGetAllProfilePageResponse =
 
 export type ReactQueryGetAllProfilePageQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryGetAllProfilePageResponse>;

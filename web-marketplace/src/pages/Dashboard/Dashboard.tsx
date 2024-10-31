@@ -4,6 +4,7 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { Flex } from 'web-components/src/components/box';
 import { ProfileHeader } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader';
@@ -14,6 +15,7 @@ import { containerStyles } from 'web-components/src/styles/container';
 import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
 import { truncate } from 'web-components/src/utils/truncate';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getAccountUrl } from 'lib/block-explorer';
 import {
@@ -53,6 +55,7 @@ import { useProfileItems } from './hooks/useProfileItems';
 
 const Dashboard = (): JSX.Element => {
   const { _ } = useLingui();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { wallet, accountByAddr, isConnected } = useWallet();
   const {
     showCreditClasses,
@@ -63,7 +66,11 @@ const Dashboard = (): JSX.Element => {
   } = useProfileItems({});
   const location = useLocation();
   const { data: sanityProfilePageData } = useQuery(
-    getAllProfilePageQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllProfilePageQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const { activeAccount } = useAuth();

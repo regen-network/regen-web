@@ -13,5 +13,6 @@ export type ReactQueryGetProjectByIdResponse =
 
 export type ReactQueryGetProjectByIdQueryParams = {
   sanityClient: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & ProjectByIdQueryVariables &
   ReactQueryBuilderResponse<ReactQueryGetProjectByIdResponse>;

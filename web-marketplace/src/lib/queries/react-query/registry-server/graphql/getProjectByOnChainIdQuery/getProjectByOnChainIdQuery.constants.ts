@@ -1,5 +1,4 @@
-export const getProjectByOnChainIdKey = (onChainId: string): string[] => [
-  'graphql',
-  'projectByOnChainIdKey',
-  onChainId,
-];
+export const getProjectByOnChainIdKey = (
+  onChainId: string,
+  languageCode: string,
+): string[] => ['graphql', 'projectByOnChainIdKey', onChainId, languageCode];

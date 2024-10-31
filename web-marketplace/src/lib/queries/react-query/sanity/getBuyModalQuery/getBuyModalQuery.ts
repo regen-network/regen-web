@@ -1,3 +1,5 @@
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   AllBuyModalDocument,
   AllBuyModalQuery,
@@ -11,15 +13,21 @@ import {
 
 export const getBuyModalQuery = ({
   sanityClient,
+  languageCode,
   ...params
 }: ReactQueryBuyModalQueryParams): ReactQueryBuyModalResponse => ({
-  queryKey: [SANITY_BUY_MODAL_KEY],
+  queryKey: [SANITY_BUY_MODAL_KEY, languageCode],
   queryFn: async () => {
     const { data } = await sanityClient.query<AllBuyModalQuery>({
       query: AllBuyModalDocument,
     });
 
-    return data;
+    return {
+      allBuyModal: getLocalizedData({
+        data: data.allBuyModal,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

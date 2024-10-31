@@ -1,3 +1,5 @@
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   ProjectByIdDocument,
   ProjectByIdQuery,
@@ -12,16 +14,22 @@ import {
 export const getProjectByIdQuery = ({
   sanityClient,
   id,
+  languageCode,
   ...params
 }: ReactQueryGetProjectByIdQueryParams): ReactQueryGetProjectByIdResponse => ({
-  queryKey: getProjectByIdKey(id),
+  queryKey: [getProjectByIdKey(id), languageCode],
   queryFn: async () => {
     const { data: projectById } = await sanityClient.query<ProjectByIdQuery>({
       query: ProjectByIdDocument,
       variables: { id },
     });
 
-    return projectById;
+    return {
+      allProject: getLocalizedData({
+        data: projectById.allProject,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

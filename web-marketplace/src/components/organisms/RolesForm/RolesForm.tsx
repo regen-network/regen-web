@@ -9,7 +9,7 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import { Flex } from 'web-components/src/components/box';
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
@@ -18,6 +18,7 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 
 import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import {
   INVALID_REGEN_ADDRESS,
@@ -65,6 +66,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
   isOnChain,
 }) => {
   const { _ } = useLingui();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { formRef, shouldNavigateRef, isDraftRef } = useCreateProjectContext();
   const addressSchema = useMemo(
     () =>
@@ -156,6 +158,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
       addr: admin as string,
       client: graphqlClient,
       enabled: !!admin && admin !== initialValues?.admin && !!graphqlClient,
+      languageCode: selectedLanguage,
     }),
   );
 
@@ -165,6 +168,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
       client: graphqlClient,
       enabled: !!graphqlClient && !!projectDeveloperValue,
       input: projectDeveloperValue,
+      languageCode: selectedLanguage,
     }),
   );
 
@@ -174,6 +178,7 @@ const RolesForm: React.FC<React.PropsWithChildren<RolesFormProps>> = ({
       client: graphqlClient,
       enabled: !!graphqlClient && !!verifierValue,
       input: verifierValue,
+      languageCode: selectedLanguage,
     }),
   );
 

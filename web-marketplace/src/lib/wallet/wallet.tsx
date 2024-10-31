@@ -15,9 +15,11 @@ import {
 } from '@cosmos-kit/react-lite';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 import truncate from 'lodash/truncate';
 
 import { AccountByAddrQuery, Maybe } from 'generated/graphql';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
@@ -114,6 +116,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const { client: walletConnectClient } = useWalletClient(KEPLR_MOBILE);
   const { mainWallet } = useCosmosKitWallet(KEPLR_MOBILE);
   const { walletRepos } = useManager();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const address = mainWallet?.getChainWallet('regen')?.address;
   const walletStatus = walletRepos[0]?.current?.walletStatus;
@@ -203,6 +206,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
       client: graphqlClient,
       addr: wallet?.address ?? '',
       enabled: !!wallet?.address && !!graphqlClient && !!csrfData,
+      languageCode: selectedLanguage,
     }),
   );
   const accountByAddr = accountByAddrData?.accountByAddr;

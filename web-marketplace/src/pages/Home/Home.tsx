@@ -3,6 +3,7 @@ import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 import { gradients } from 'styles/gradients';
 
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -11,6 +12,7 @@ import Modal from 'web-components/src/components/modal';
 import SEO from 'web-components/src/components/seo';
 import { Body, Title } from 'web-components/src/components/typography';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { SKIPPED_CLASS_ID } from 'lib/env';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
@@ -35,12 +37,16 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>('');
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { isKeplrMobileWeb } = useWallet();
 
   const { classes, cx } = useHomeStyles();
 
   const { data: allHomePageData, isFetching: isFetchingAllHomePage } = useQuery(
-    getAllHomePageQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllHomePageQuery({
+      sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const {

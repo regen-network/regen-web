@@ -4,15 +4,25 @@ import axios from 'axios';
 import { apiUri } from 'lib/apiUri';
 import { jsonLdCompact } from 'lib/rdf';
 
-export const getMetadata = async (
-  iri?: string,
-  client?: QueryClientImpl,
-  context?: object,
-): Promise<any> => {
+type GetMetadataProps = {
+  iri?: string;
+  client?: QueryClientImpl;
+  context?: object;
+  languageCode: string;
+};
+
+export const getMetadata = async ({
+  iri,
+  client,
+  context,
+  languageCode,
+}: GetMetadataProps): Promise<any> => {
   if (!iri) return null;
   let res;
   try {
-    res = await fetch(`${apiUri}/data/v1/metadata-graph/${iri}`);
+    res = await fetch(
+      `${apiUri}/data/v1/metadata-graph/${iri}?languageCode=${languageCode}`,
+    );
     if (res.ok) {
       const data = await res.json();
       return await jsonLdCompact(data, context);

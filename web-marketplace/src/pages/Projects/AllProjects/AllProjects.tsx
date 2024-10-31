@@ -17,6 +17,7 @@ import { Pagination } from 'web-components/src/components/pagination/Pagination'
 import { Body } from 'web-components/src/components/typography';
 import { pxToRem } from 'web-components/src/theme/muiTheme';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   creditClassSelectedFiltersAtom,
   projectsSortAtom,
@@ -60,6 +61,7 @@ import { getIsSoldOut } from './utils/getIsSoldOut';
 
 export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { page: routePage } = useParams();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -90,7 +92,10 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     data: sanityCreditClassesData,
     isLoading: isSanityCreditClassesLoading,
   } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   const [sort, setSort] = useAtom(projectsSortAtom);

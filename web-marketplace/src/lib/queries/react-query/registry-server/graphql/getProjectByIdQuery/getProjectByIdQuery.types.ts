@@ -9,5 +9,6 @@ export type ReactQueryProjectByIdResponse =
 
 export type ReactQueryProjectByIdProps = {
   client: ApolloClient<object>;
+  languageCode: string;
 } & ProjectByIdQueryVariables &
   ReactQueryBuilderResponse<ReactQueryProjectByIdResponse>;

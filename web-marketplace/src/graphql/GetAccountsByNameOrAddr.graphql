@@ -8,6 +8,12 @@ query GetAccountsByNameOrAddr($input: String) {
       image
       description
       addr
+      accountTranslationsById {
+        nodes {
+          languageCode
+          description
+        }
+      }
     }
   }
 }

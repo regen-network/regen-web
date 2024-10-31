@@ -1,3 +1,5 @@
+import { getLocalizedData } from 'utils/sanity/getLocalizedData';
+
 import {
   AllCreditCertificationDocument,
   AllCreditCertificationQuery,
@@ -10,15 +12,21 @@ import {
 
 export const getAllCreditCertificationQuery = ({
   sanityClient,
+  languageCode,
   ...params
 }: ReactQueryAllCreditCertificationQueryParams): ReactQueryAllCreditCertificationQueryResponse => ({
-  queryKey: ['allCreditCertificationQuery'],
+  queryKey: ['allCreditCertificationQuery', languageCode],
   queryFn: async () => {
     const { data } = await sanityClient.query<AllCreditCertificationQuery>({
       query: AllCreditCertificationDocument,
     });
 
-    return data;
+    return {
+      allCreditCertification: getLocalizedData({
+        data: data.allCreditCertification,
+        languageCode,
+      }),
+    };
   },
   ...params,
 });

@@ -10,5 +10,6 @@ export type ReactQueryGetAccountByIdQueryResponse =
 
 export type ReactQueryGetAccountByIdQueryParams = {
   client: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & AccountByIdQueryVariables &
   ReactQueryBuilderResponse<ReactQueryGetAccountByIdQueryResponse>;

@@ -4,8 +4,10 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQueries, useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import {
   NormalizeProject,
@@ -35,7 +37,7 @@ export const useFetchProjectByAdmin = ({
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const { ecocreditClient } = useLedger();
-
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { data: accountData, isFetching: isAccountLoading } = useQuery(
     getAccountProjectsByIdQuery({
       id: adminAccountId,
@@ -55,7 +57,11 @@ export const useFetchProjectByAdmin = ({
     accountData?.accountById?.projectsByAdminAccountId?.nodes;
 
   const { data: sanityCreditClassData } = useQuery(
-    getAllSanityCreditClassesQuery({ sanityClient, enabled: !!sanityClient }),
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      enabled: !!sanityClient,
+      languageCode: selectedLanguage,
+    }),
   );
 
   // Get data for on chain projects
@@ -86,6 +92,7 @@ export const useFetchProjectByAdmin = ({
         return getProjectByIdQuery({
           id,
           sanityClient,
+          languageCode: selectedLanguage,
           enabled: !!sanityClient && !!id,
         });
       }) || [],

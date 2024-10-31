@@ -5,6 +5,7 @@ import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/system';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
@@ -13,6 +14,7 @@ import { CardItem } from 'web-components/src/components/modal/TxModal';
 import { Body, Label, Title } from 'web-components/src/components/typography';
 import { truncateHash } from 'web-components/src/utils/truncate';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   getProjectCardButtonMapping,
   SEE_LESS,
@@ -32,9 +34,11 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
   const graphqlClient = useApolloClient();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { data, isLoading } = useQuery(
     getProjectByIdQuery({
       client: graphqlClient,
+      languageCode: selectedLanguage,
       id: projectId,
     }),
   );

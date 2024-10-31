@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { Box } from '@mui/material';
+import { useAtom } from 'jotai';
 
 import { Flex } from 'web-components/src/components/box';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -11,6 +12,7 @@ import { Title } from 'web-components/src/components/typography';
 
 import { useProjectByOnChainIdQuery } from 'generated/graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getMetadata } from 'lib/db/api/metadata-graph';
 import { CreditBatchMetadataIntersectionLD } from 'lib/db/types/json-ld';
 import { getBatchWithSupplyForDenom } from 'lib/ecocredit/api';
@@ -34,6 +36,7 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [metadata, setMetadata] = useState<CreditBatchMetadataIntersectionLD>();
   const walletContext = useWallet();
   const { dataClient } = useLedger();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const accountAddress = walletContext.wallet?.address;
   const { credits: userEcocredits } = useEcocredits({
     address: accountAddress,
@@ -47,7 +50,11 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
           const batch = await getBatchWithSupplyForDenom(batchDenom);
           setBatch(batch);
           if (batch.metadata) {
-            const data = await getMetadata(batch.metadata, dataClient);
+            const data = await getMetadata({
+              iri: batch.metadata,
+              client: dataClient,
+              languageCode: selectedLanguage,
+            });
             setMetadata(data);
           }
         } catch (err) {
@@ -60,7 +67,7 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
       }
     };
     fetch();
-  }, [batchDenom, dataClient]);
+  }, [batchDenom, dataClient, selectedLanguage]);
 
   const onChainId = batch?.projectId || '';
   const {

@@ -15,9 +15,7 @@ type Props = { skippedProjectId: string };
 
 export function MoreProjects({ skippedProjectId }: Props): JSX.Element {
   const { _ } = useLingui();
-  const { projectsWithOrderData, loading } = useMoreProjects(
-    skippedProjectId as string,
-  );
+  const { projectsWithOrderData, loading } = useMoreProjects(skippedProjectId);
 
   const { isKeplrMobileWeb } = useWallet();
   const onBuyButtonClick = useOnBuyButtonClick();

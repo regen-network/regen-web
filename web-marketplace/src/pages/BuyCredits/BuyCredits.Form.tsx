@@ -22,10 +22,7 @@ import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchUserBalance } from 'pages/BuyCredits/hooks/useFetchUserBalance';
-import {
-  ProjectWithOrderData,
-  UISellOrderInfo,
-} from 'pages/Projects/AllProjects/AllProjects.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
@@ -172,14 +169,19 @@ export const BuyCreditsForm = ({
     [data, handleSaveNext, setPaymentMethodId],
   );
 
-  const currency = data?.[CURRENCY];
-  const creditsAmount = data?.[CREDITS_AMOUNT];
-  const currencyAmount = data?.[CURRENCY_AMOUNT];
-
   const allowedDenoms = useMemo(
     () => allowedDenomsData?.allowedDenoms,
     [allowedDenomsData?.allowedDenoms],
   );
+
+  const defaultCryptoCurrency = getCryptoCurrencies(cryptoSellOrders)[0];
+  const currency =
+    cardDisabled && !data?.[CURRENCY]
+      ? defaultCryptoCurrency
+      : data?.[CURRENCY];
+  const creditsAmount = data?.[CREDITS_AMOUNT];
+  const currencyAmount = data?.[CURRENCY_AMOUNT];
+  const creditTypePrecision = creditTypeData?.creditType?.precision;
 
   const purchase = usePurchase({
     paymentOption,
@@ -235,20 +237,6 @@ export const BuyCreditsForm = ({
     () => handleActiveStep(1),
     [handleActiveStep],
   );
-
-  const allowedDenoms = useMemo(
-    () => allowedDenomsData?.allowedDenoms,
-    [allowedDenomsData?.allowedDenoms],
-  );
-
-  const defaultCryptoCurrency = getCryptoCurrencies(cryptoSellOrders)[0];
-  const currency =
-    cardDisabled && !data?.[CURRENCY]
-      ? defaultCryptoCurrency
-      : data?.[CURRENCY];
-  const creditsAmount = data?.[CREDITS_AMOUNT];
-  const currencyAmount = data?.[CURRENCY_AMOUNT];
-  const creditTypePrecision = creditTypeData?.creditType?.precision;
 
   const card = useMemo(
     () => paymentOption === PAYMENT_OPTIONS.CARD,

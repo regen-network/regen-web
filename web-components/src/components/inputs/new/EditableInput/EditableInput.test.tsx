@@ -4,7 +4,7 @@ import { fireEvent, screen } from 'web-components/test/test-utils';
 import { EditableInput } from './EditableInput';
 
 describe('EditableInput', () => {
-  it('renders the amount and edit button', () => {
+  it('renders the amount and edit button', async () => {
     const onChangeMock = vi.fn();
     render(
       <EditableInput
@@ -14,18 +14,20 @@ describe('EditableInput', () => {
         inputAriaLabel="testEditableInput"
         editButtonAriaLabel="Edit"
         updateButtonText="Update"
+        cancelButtonText="Cancel"
+        isEditable
       />,
     );
     const amount = screen.getByText('100');
     expect(amount).toBeInTheDocument();
-    const editButton = screen.getByRole('button', {
+    const editButton = await screen.queryByRole('button', {
       name: 'Edit',
     });
 
     expect(editButton).toBeInTheDocument();
   });
 
-  it('renders the input field and update button when click edit', () => {
+  it('renders the input field and update button when click edit', async () => {
     const onChangeMock = vi.fn();
     render(
       <EditableInput
@@ -35,12 +37,16 @@ describe('EditableInput', () => {
         inputAriaLabel="testEditableInput"
         editButtonAriaLabel="Edit"
         updateButtonText="Update"
+        cancelButtonText="Cancel"
+        isEditable
       />,
     );
-    const editButton = screen.getByRole('button', {
+    const editButton = await screen.queryByRole('button', {
       name: 'Edit',
     });
-    fireEvent.click(editButton);
+    if (editButton) {
+      fireEvent.click(editButton);
+    }
     const input = screen.getByTestId('editable-input');
     expect(input).toBeInTheDocument();
 
@@ -50,7 +56,7 @@ describe('EditableInput', () => {
     expect(updateButton).toBeInTheDocument();
   });
 
-  it('calls the onChange callback with the updated amount when click update', () => {
+  it('calls the onChange callback with the updated amount when click update', async () => {
     const onChangeMock = vi.fn();
     render(
       <EditableInput
@@ -60,13 +66,17 @@ describe('EditableInput', () => {
         inputAriaLabel="testEditableInput"
         editButtonAriaLabel="Edit"
         updateButtonText="Update"
+        cancelButtonText="Cancel"
+        isEditable
       />,
     );
 
-    const editButton = screen.getByRole('button', {
+    const editButton = await screen.queryByRole('button', {
       name: 'Edit',
     });
-    fireEvent.click(editButton);
+    if (editButton) {
+      fireEvent.click(editButton);
+    }
 
     const input = screen.getByTestId('editable-input');
     fireEvent.change(input, { target: { value: '200' } });

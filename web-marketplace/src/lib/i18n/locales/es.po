@@ -4733,7 +4733,7 @@ msgstr "¡Tu acción fue exitosa!"
 
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-28 19:43+0000\n"
+"POT-Creation-Date: 2024-10-31 13:12+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4832,7 +4832,7 @@ msgstr ""
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:107
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:111
 #: src/components/organisms/Order/Order.Summary.tsx:83
 msgid "# credits"
 msgstr ""
@@ -4883,7 +4883,7 @@ msgstr ""
 msgid "+Create project"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:161
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:165
 msgid "<0>{0}</0> ending in {1}"
 msgstr ""
 
@@ -4899,19 +4899,19 @@ msgstr ""
 msgid "<0>drag and drop</0><1>or</1>"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:73
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:109
 msgid "<0>Partners</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:41
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:47
 msgid "<0>Project admin:</0> the entity who can update a given project on the blockchain."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:51
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:57
 msgid "<0>Project developer:</0> the entity that is in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:62
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:78
 msgid "<0>Verifier:</0> A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr ""
 
@@ -4935,7 +4935,7 @@ msgstr ""
 msgid "5MB max. Supported file types include text, spreadsheets, images, and video files."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:30
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:36
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:27
 msgid "A <0>program</0> involves the eligibility rules, monitoring and certification, and registration systems for credit trading and ownership tracking."
 msgstr ""
@@ -4954,6 +4954,10 @@ msgid "A monitor tracks and verifies the environmental impact and performance of
 msgstr ""
 =======
 >>>>>>> 9fe41830a (chore: generate .po files)
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:89
+msgid "A monitor tracks and verifies the environmental impact and performance of the project to ensure compliance and transparency."
+msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:87
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
@@ -4978,11 +4982,24 @@ msgstr ""
 =======
 >>>>>>> 9fe41830a (chore: generate .po files)
 
+<<<<<<< HEAD
 #: src/components/organisms/RolesForm/RolesForm.tsx:238
+msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
+=======
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:68
+msgid "A project operator is responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
+>>>>>>> ffdef6afe (chore: update .po files)
+msgstr ""
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:99
+msgid "A project owner manages the area of the conservation project and the associated biodiversity units."
+msgstr ""
+
+#: src/components/organisms/RolesForm/RolesForm.tsx:233
 msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:185
+#: src/components/organisms/Order/Order.Summary.tsx:192
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr ""
 
@@ -5080,7 +5097,7 @@ msgstr ""
 msgid "Address copied!"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:39
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:45
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:37
 #: src/pages/Post/Post.constants.ts:8
 msgid "admin"
@@ -5132,7 +5149,7 @@ msgstr ""
 msgid "amount"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:36
+#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:34
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:78
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:127
 #: src/lib/constants/shared.constants.tsx:30
@@ -5298,7 +5315,7 @@ msgstr ""
 msgid "Avg Price"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:90
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:94
 msgid "avg price per credit"
 msgstr ""
 
@@ -5515,11 +5532,11 @@ msgstr ""
 msgid "Buy tradable ecocredits"
 msgstr ""
 
-#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions.tsx:84
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions.tsx:86
 msgid "Buy with credit card"
 msgstr ""
 
-#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions.tsx:94
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions.tsx:96
 msgid "Buy with crypto"
 msgstr ""
 
@@ -5544,6 +5561,7 @@ msgstr ""
 msgid "By default these credits are tradable but you may check “retire all credits upon transfer” below to automatically retire them upon sending."
 msgstr ""
 
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:121
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:12
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:9
 msgid "cancel"
@@ -5610,7 +5628,7 @@ msgstr ""
 msgid "change admin"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:169
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:173
 msgid "Change payment card"
 msgstr ""
 
@@ -6020,10 +6038,7 @@ msgstr ""
 msgid "credit name"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:259
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:280
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:280
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:263
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:264
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr ""
 
@@ -6060,7 +6075,7 @@ msgstr ""
 msgid "Credits are held in escrow when a sell order is created, and taken out of escrow when the sell order is either cancelled, updated with a reduced quantity, or processed."
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:48
+#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:46
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:71
 #: src/lib/constants/shared.constants.tsx:179
 msgid "credits available"
@@ -6152,7 +6167,7 @@ msgstr ""
 msgid "CURRENCY DENOM"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:100
+#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:108
 msgid "Currency Input"
 msgstr ""
 
@@ -6378,7 +6393,7 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:115
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:119
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:76
 #: src/lib/constants/shared.constants.tsx:22
 msgid "Edit"
@@ -6422,7 +6437,7 @@ msgstr ""
 msgid "Edit your file"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:114
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:118
 msgid "Editable credits"
 msgstr ""
 
@@ -6726,7 +6741,7 @@ msgstr ""
 msgid "Impact"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:53
+#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:51
 msgid "in"
 msgstr ""
 
@@ -6765,6 +6780,13 @@ msgstr ""
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:76
 msgid "Input an email address to receive a receipt of your purchase.<0>Take note: we will email you a prompt to associate this email with your account for easier future access. This is entirely optional.</0>"
 msgstr ""
+<<<<<<< HEAD
+=======
+
+#: src/pages/BuyCredits/BuyCredits.constants.ts:8
+msgid "Insufficient balance"
+msgstr ""
+>>>>>>> ffdef6afe (chore: update .po files)
 
 #: src/lib/constants/shared.constants.tsx:70
 msgid "Invalid date"
@@ -7085,6 +7107,10 @@ msgstr ""
 =======
 >>>>>>> 9fe41830a (chore: generate .po files)
 
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:87
+msgid "monitor"
+msgstr ""
+
 #: src/components/molecules/FeaturedSection.tsx:91
 msgid "more details"
 msgstr ""
@@ -7321,12 +7347,19 @@ msgstr ""
 #: src/lib/constants/shared.constants.tsx:108
 msgid "Oops! Page not found."
 msgstr ""
+<<<<<<< HEAD
+=======
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:66
+msgid "operator"
+msgstr ""
+>>>>>>> ffdef6afe (chore: update .po files)
 
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:67
 msgid "or, log in with email / social"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:81
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:85
 msgid "Order Summary"
 msgstr ""
 
@@ -7347,18 +7380,24 @@ msgid "Overview"
 msgstr ""
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ffdef6afe (chore: update .po files)
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:97
 msgid "owner"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:107
+<<<<<<< HEAD
 =======
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:71
 >>>>>>> 9fe41830a (chore: generate .po files)
+=======
+>>>>>>> ffdef6afe (chore: update .po files)
 msgid "partners"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:153
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:157
 msgid "payment"
 msgstr ""
 
@@ -7635,7 +7674,7 @@ msgstr ""
 msgid "Profile type"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:28
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:34
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:24
 msgid "program"
 msgstr ""
@@ -7644,7 +7683,7 @@ msgstr ""
 msgid "Program Guide"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:84
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:88
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:124
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105
@@ -7712,7 +7751,7 @@ msgstr ""
 msgid "Project Design Document"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:49
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:55
 msgid "project developer"
 msgstr ""
 
@@ -8218,14 +8257,8 @@ msgstr ""
 msgid "Select all"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:244
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:245
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:265
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:266
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:265
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:266
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:248
 #: src/components/molecules/CreditsAmount/CreditsAmount.tsx:249
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:250
 msgid "Select option"
 msgstr ""
 
@@ -8877,7 +8910,7 @@ msgstr ""
 msgid "total credits you have purchased"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:132
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:136
 #: src/components/organisms/Order/Order.Summary.tsx:89
 msgid "total price"
 msgstr ""
@@ -8961,7 +8994,7 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:116
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:120
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:68
 msgid "update"
 msgstr ""
@@ -9067,7 +9100,7 @@ msgstr ""
 msgid "verification reports"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:60
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:76
 msgid "verifier"
 msgstr ""
 
@@ -9149,7 +9182,7 @@ msgstr ""
 msgid "view resource"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.constants.ts:10
+#: src/pages/BuyCredits/BuyCredits.constants.ts:11
 msgid "view retirement certificate"
 msgstr ""
 

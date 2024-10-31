@@ -127,7 +127,7 @@ export type BasketDetailsPageFilter = {
   language?: Maybe<StringFilter>;
 };
 
-export type BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTokenPageOrWalletAddressRegistrationPage = BasketDetailsPage | BridgePage | BuyModal | BuyModalOptions | BuyersPage | CaseStudiesPage | CaseStudyPage | Claim | ClassPrefinanceTimelineStatus | CommunityPage | CreateCreditClassPage | CreateMethodologyPage | CreateProjectPage | CredibilityCard | CreditCategory | CreditCertification | CreditClass | CreditClassPage | CreditType | DevelopersPage | Doc | EcologicalCreditCard | EcologicalImpact | EcologicalOutcome | Faq | FeaturedProjectCard | FeaturedSection | GettingStartedResourcesCard | GettingStartedResourcesSection | HomePage | HomePageWeb | LandManagementPractice | LandStewardsPage | MainnetPage | Media | Methodology | MethodologyReviewProcessPage | NctPage | OffsetMethod | Partner | PartnersPage | Person | PresskitPage | ProfilePage | Program | Project | ProjectActivity | ProjectEcosystem | ProjectPage | ProjectPrefinanceTimelineStatus | ProjectRating | ProjectsPage | Resource | ResourcesPage | SciencePage | Sdg | SharedSections | SoldOutProjects | StatCard | Tag | TeamPage | TebuBanner | TokenPage | WalletAddressRegistrationPage;
+export type BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage = BasketDetailsPage | BridgePage | BuyModal | BuyModalOptions | BuyersPage | CaseStudiesPage | CaseStudyPage | Claim | ClassPrefinanceTimelineStatus | CommunityPage | CreateCreditClassPage | CreateMethodologyPage | CreateProjectPage | CredibilityCard | CreditCategory | CreditCertification | CreditClass | CreditClassPage | CreditType | DevelopersPage | Doc | EcologicalCreditCard | EcologicalImpact | EcologicalOutcome | Faq | FeaturedProjectCard | FeaturedSection | GettingStartedResourcesCard | GettingStartedResourcesSection | HomePage | HomePageWeb | LandManagementPractice | LandStewardsPage | MainnetPage | Media | Methodology | MethodologyReviewProcessPage | NctPage | OffsetMethod | Partner | PartnersPage | Person | PresskitPage | ProfilePage | Program | Project | ProjectActivity | ProjectEcosystem | ProjectPage | ProjectPrefinanceTimelineStatus | ProjectRating | ProjectsPage | Resource | ResourcesPage | SciencePage | Sdg | SharedSections | SoldOutProjects | StatCard | Tag | TeamPage | TebuBanner | TerrasosProject | TokenPage | WalletAddressRegistrationPage;
 
 export type BasketDetailsPageSorting = {
   _id?: Maybe<SortOrder>;
@@ -1482,6 +1482,31 @@ export type CommunityPageSorting = {
   collectiveSection?: Maybe<CommunityCollectiveSectionSorting>;
   collaborateSection?: Maybe<CommunityCollaborateSectionSorting>;
   language?: Maybe<SortOrder>;
+};
+
+export type ComplianceCredits = {
+  __typename?: 'ComplianceCredits';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  creditsRegistered?: Maybe<Scalars['Float']>;
+  creditsAvailable?: Maybe<Scalars['Float']>;
+  creditsRetired?: Maybe<Scalars['Float']>;
+};
+
+export type ComplianceCreditsFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  creditsRegistered?: Maybe<FloatFilter>;
+  creditsAvailable?: Maybe<FloatFilter>;
+  creditsRetired?: Maybe<FloatFilter>;
+};
+
+export type ComplianceCreditsSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  creditsRegistered?: Maybe<SortOrder>;
+  creditsAvailable?: Maybe<SortOrder>;
+  creditsRetired?: Maybe<SortOrder>;
 };
 
 export type ConnectSection = {
@@ -3808,7 +3833,7 @@ export type InternationalizedArrayReferenceValue = {
   __typename?: 'InternationalizedArrayReferenceValue';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
-  value?: Maybe<BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTokenPageOrWalletAddressRegistrationPage>;
+  value?: Maybe<BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage>;
 };
 
 export type InternationalizedArrayReferenceValueFilter = {
@@ -5213,7 +5238,6 @@ export type Project = Document & {
   location?: Maybe<Scalars['String']>;
   area?: Maybe<Scalars['Float']>;
   areaUnit?: Maybe<Scalars['String']>;
-  complianceCredits?: Maybe<Scalars['Float']>;
   language?: Maybe<Scalars['String']>;
 };
 
@@ -5321,7 +5345,6 @@ export type ProjectFilter = {
   location?: Maybe<StringFilter>;
   area?: Maybe<FloatFilter>;
   areaUnit?: Maybe<StringFilter>;
-  complianceCredits?: Maybe<FloatFilter>;
   language?: Maybe<StringFilter>;
 };
 
@@ -5539,7 +5562,6 @@ export type ProjectSorting = {
   location?: Maybe<SortOrder>;
   area?: Maybe<SortOrder>;
   areaUnit?: Maybe<SortOrder>;
-  complianceCredits?: Maybe<SortOrder>;
   language?: Maybe<SortOrder>;
 };
 
@@ -5908,6 +5930,7 @@ export type RootQuery = {
   NctPage?: Maybe<NctPage>;
   CreditCategory?: Maybe<CreditCategory>;
   TebuBanner?: Maybe<TebuBanner>;
+  TerrasosProject?: Maybe<TerrasosProject>;
   ImageGridItem?: Maybe<ImageGridItem>;
   ContactPage?: Maybe<ContactPage>;
   FaqPage?: Maybe<FaqPage>;
@@ -5982,6 +6005,7 @@ export type RootQuery = {
   allNctPage: Array<NctPage>;
   allCreditCategory: Array<CreditCategory>;
   allTebuBanner: Array<TebuBanner>;
+  allTerrasosProject: Array<TerrasosProject>;
   allImageGridItem: Array<ImageGridItem>;
   allContactPage: Array<ContactPage>;
   allFaqPage: Array<FaqPage>;
@@ -6315,6 +6339,11 @@ export type RootQueryCreditCategoryArgs = {
 
 
 export type RootQueryTebuBannerArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryTerrasosProjectArgs = {
   id: Scalars['ID'];
 };
 
@@ -6879,6 +6908,14 @@ export type RootQueryAllCreditCategoryArgs = {
 export type RootQueryAllTebuBannerArgs = {
   where?: Maybe<TebuBannerFilter>;
   sort?: Maybe<Array<TebuBannerSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllTerrasosProjectArgs = {
+  where?: Maybe<TerrasosProjectFilter>;
+  sort?: Maybe<Array<TerrasosProjectSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -7987,6 +8024,71 @@ export type TebuBannerSorting = {
   _key?: Maybe<SortOrder>;
   learnMoreLink?: Maybe<LinkItemSorting>;
   logo?: Maybe<CustomImageSorting>;
+  language?: Maybe<SortOrder>;
+};
+
+export type TerrasosProject = Document & {
+  __typename?: 'TerrasosProject';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  /** Slug should be the prefered option if the project has a slug, otherwise it might result in the data below not being displayed on the project page. */
+  projectId?: Maybe<Scalars['String']>;
+  projectPrefinancing?: Maybe<ProjectPrefinancing>;
+  credibilityCards?: Maybe<Array<Maybe<DetailsCard>>>;
+  fiatSellOrders?: Maybe<Array<Maybe<SellOrderPrice>>>;
+  projectName?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
+  location?: Maybe<Scalars['String']>;
+  area?: Maybe<Scalars['Float']>;
+  areaUnit?: Maybe<Scalars['String']>;
+  complianceCredits?: Maybe<ComplianceCredits>;
+  language?: Maybe<Scalars['String']>;
+};
+
+export type TerrasosProjectFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  projectId?: Maybe<StringFilter>;
+  projectPrefinancing?: Maybe<ProjectPrefinancingFilter>;
+  projectName?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
+  location?: Maybe<StringFilter>;
+  area?: Maybe<FloatFilter>;
+  areaUnit?: Maybe<StringFilter>;
+  complianceCredits?: Maybe<ComplianceCreditsFilter>;
+  language?: Maybe<StringFilter>;
+};
+
+export type TerrasosProjectSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  projectId?: Maybe<SortOrder>;
+  projectPrefinancing?: Maybe<ProjectPrefinancingSorting>;
+  projectName?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
+  location?: Maybe<SortOrder>;
+  area?: Maybe<SortOrder>;
+  areaUnit?: Maybe<SortOrder>;
+  complianceCredits?: Maybe<ComplianceCreditsSorting>;
   language?: Maybe<SortOrder>;
 };
 

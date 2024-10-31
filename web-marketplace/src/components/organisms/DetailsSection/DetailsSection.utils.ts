@@ -8,6 +8,7 @@ import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 export const getDisplayAccountOrAddress = (
   address?: string,
   account?: Maybe<AccountFieldsFragment>,
+  customerName?: string | null,
 ): Account | undefined => {
   if (!address) return;
   const defaultAvatar = getDefaultAvatar(account);
@@ -15,7 +16,7 @@ export const getDisplayAccountOrAddress = (
     const name = account.name;
     const type = account.type;
     return {
-      name: name ? name : truncate(address),
+      name: name || customerName || truncate(address),
       type: type ? type : 'USER',
       image: account.image ? account.image : defaultAvatar,
       description: account.description?.trim(),

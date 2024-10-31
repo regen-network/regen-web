@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
 import { EditableInput } from 'web-components/src/components/inputs/new/EditableInput/EditableInput';
-import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
 import { Title } from 'web-components/src/components/typography';
 
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
@@ -13,7 +12,7 @@ import {
   PaymentOptionsType,
 } from 'pages/BuyCredits/BuyCredits.types';
 
-import { DenomIconWithCurrency } from '../DenomIconWithCurrency/DenomIconWithCurrency';
+import { AmountWithCurrency } from '../AmountWithCurrency/AmountWithCurrency';
 import {
   AllowedDenoms,
   findDisplayDenom,
@@ -74,22 +73,18 @@ export function OrderSummaryContent({
         {projectName}
       </p>
       <OrderSummmaryRowHeader text={_(msg`avg price per credit`)} />
-      <div className="justify-start items-center flex flex-wrap">
-        <span className="mr-10">
-          <SupCurrencyAndAmount
-            price={pricePerCredit || 0}
-            currencyCode={currency.askDenom}
-          />
-        </span>
-        <DenomIconWithCurrency
-          baseDenom={currency.askBaseDenom}
-          displayDenom={displayDenom}
-          className="pt-[8px] text-[14px] sm:text-base"
-          tooltipText={
-            paymentOption !== PAYMENT_OPTIONS.CARD ? _(CRYPTO_TOOLTIP_TEXT) : ''
-          }
-        />
-      </div>
+      <AmountWithCurrency
+        amount={pricePerCredit || 0}
+        currency={currency}
+        displayDenom={displayDenom}
+        classes={{
+          root: 'justify-start',
+          denom: 'pt-[8px] text-[14px] sm:text-base',
+        }}
+        tooltipText={
+          paymentOption !== PAYMENT_OPTIONS.CARD ? _(CRYPTO_TOOLTIP_TEXT) : ''
+        }
+      />
       <OrderSummmaryRowHeader text={_(msg`# credits`)} className="pt-5" />
       <div className="text-base font-normal font-sans text-[14px] sm:text-base">
         <EditableInput
@@ -111,20 +106,16 @@ export function OrderSummaryContent({
           text={_(msg`total price`)}
           className="pb-[9px]"
         />
-        <div className="flex flex-wrap">
-          <span className="pt-[11px] sm:pt-5">
-            <SupCurrencyAndAmount
-              price={currencyAmount}
-              currencyCode={currency.askDenom}
-              className="font-bold font-sans sm:text-[22px] mr-10"
-            />
-          </span>
-          <DenomIconWithCurrency
-            baseDenom={currency.askBaseDenom}
-            displayDenom={displayDenom}
-            className="pt-[12px] text-[14px] sm:text-base"
-          />
-        </div>
+        <AmountWithCurrency
+          amount={order.currencyAmount}
+          currency={currency}
+          displayDenom={displayDenom}
+          classes={{
+            amountContainer: 'pt-[11px] sm:pt-5',
+            amount: 'font-bold font-sans sm:text-[22px]',
+            denom: 'pt-[12px] text-[14px] sm:text-base',
+          }}
+        />
       </div>
       {cardDetails && (
         <div className="flex items-end col-span-full gap-5">

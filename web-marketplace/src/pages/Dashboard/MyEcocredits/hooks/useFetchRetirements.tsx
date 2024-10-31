@@ -12,7 +12,10 @@ import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { RetirementsOrderBy } from 'generated/indexer-graphql';
 import { useLedger } from 'ledger';
-import { normalizeRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
+import {
+  NormalizedRetirement,
+  normalizeRetirement,
+} from 'lib/normalizers/retirements/normalizeRetirement';
 import { getClassIssuersQuery } from 'lib/queries/react-query/ecocredit/getClassIssuersQuery/getClassIssuersQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
@@ -143,7 +146,7 @@ export const useFetchRetirements = ({ address, hideRetirements }: Props) => {
   }, [address, reactQueryClient, wallet?.address]);
 
   return {
-    retirements: normalizedRetirements,
+    retirements: normalizedRetirements as NormalizedRetirement[],
     retirementsPaginationParams,
     retirementsSetPaginationParams: setPaginationParams,
     reloadRetirements,

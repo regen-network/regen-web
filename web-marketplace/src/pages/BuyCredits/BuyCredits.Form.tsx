@@ -15,15 +15,13 @@ import {
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import {
-  ProjectWithOrderData,
-  UISellOrderInfo,
-} from 'pages/Projects/AllProjects/AllProjects.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
@@ -76,7 +74,7 @@ type Props = {
   creditTypeAbbrev?: string;
   projectHref: string;
   cardDetails?: CardDetails;
-  project?: ProjectWithOrderData;
+  project?: NormalizeProject;
 };
 
 const stripe = loadStripe(stripeKey);
@@ -172,7 +170,24 @@ export const BuyCreditsForm = ({
     [data, handleSaveNext, setPaymentMethodId],
   );
 
-  const purchase = usePurchase();
+  const currency = data?.[CURRENCY];
+  const creditsAmount = data?.[CREDITS_AMOUNT];
+  const currencyAmount = data?.[CURRENCY_AMOUNT];
+
+  const allowedDenoms = useMemo(
+    () => allowedDenomsData?.allowedDenoms,
+    [allowedDenomsData?.allowedDenoms],
+  );
+
+  const purchase = usePurchase({
+    paymentOption,
+    retiring,
+    project,
+    currency,
+    creditsAmount,
+    currencyAmount,
+    allowedDenoms,
+  });
   const agreePurchaseFormSubmit = useCallback(
     async (
       values: AgreePurchaseFormSchemaType,
@@ -182,25 +197,20 @@ export const BuyCreditsForm = ({
       const { retirementReason, country, stateProvince, postalCode } = values;
       const {
         sellOrders: selectedSellOrders,
-        email,
-        name,
         savePaymentMethod,
         createAccount: createActiveAccount,
         // subscribeNewsletter, TODO
         // followProject,
       } = data;
 
-      if (selectedSellOrders)
+      if (selectedSellOrders && creditsAmount)
         purchase({
-          paymentOption,
           selectedSellOrders,
           retiring,
           retirementReason,
           country,
           stateProvince,
           postalCode,
-          email,
-          name,
           savePaymentMethod,
           createActiveAccount,
           paymentMethodId,
@@ -211,9 +221,9 @@ export const BuyCreditsForm = ({
     },
     [
       confirmationTokenId,
+      creditsAmount,
       data,
       paymentMethodId,
-      paymentOption,
       purchase,
       retiring,
     ],
@@ -224,14 +234,6 @@ export const BuyCreditsForm = ({
     [handleActiveStep],
   );
 
-  const allowedDenoms = useMemo(
-    () => allowedDenomsData?.allowedDenoms,
-    [allowedDenomsData?.allowedDenoms],
-  );
-
-  const currency = data?.[CURRENCY];
-  const creditsAmount = data?.[CREDITS_AMOUNT];
-  const currencyAmount = data?.[CURRENCY_AMOUNT];
   const creditTypePrecision = creditTypeData?.creditType?.precision;
 
   const card = useMemo(
@@ -278,8 +280,8 @@ export const BuyCreditsForm = ({
     <div
       className={
         activeStep !== 0
-          ? 'flex gap-10 sm:gap-50 flex-col-reverse lg:flex-row items-center lg:items-start'
-          : undefined
+          ? 'flex mt-20 sm:mt-40 gap-10 sm:gap-50 flex-col-reverse lg:flex-row items-center lg:items-start'
+          : 'mt-20 sm:mt-40'
       }
     >
       <div>

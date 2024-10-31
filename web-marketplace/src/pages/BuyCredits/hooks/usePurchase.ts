@@ -1,6 +1,8 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useLingui } from '@lingui/react';
+import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
@@ -15,30 +17,42 @@ import { errorBannerTextAtom, errorCodeAtom } from 'lib/atoms/error.atoms';
 import {
   errorModalAtom,
   processingModalAtom,
-  txSuccessfulModalAtom,
+  txBuySuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
+import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
+import { VIEW_PORTFOLIO } from 'components/organisms/BasketOverview/BasketOverview.constants';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useMsgClient } from 'hooks';
 
-import { PAYMENT_OPTIONS, VIEW_CERTIFICATE } from '../BuyCredits.constants';
+import { EMAIL_RECEIPT, PAYMENT_OPTIONS } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
+import { getCardItems, getSteps } from '../BuyCredits.utils';
+import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
 
-type PurchaseParams = {
+type UsePurchaseParams = {
   paymentOption: PaymentOptionsType;
+  retiring: boolean;
+  project?: NormalizeProject;
+  currency?: Currency;
+  creditsAmount?: number;
+  currencyAmount?: number;
+  allowedDenoms?: AllowedDenom[];
+};
+type PurchaseParams = {
   selectedSellOrders: ChooseCreditsFormSchemaType['sellOrders'];
   retirementReason?: string;
   country?: string;
   stateProvince?: string;
   postalCode?: string;
-  retiring?: boolean;
-  email?: string | null;
-  name?: string;
+  retiring: boolean;
   savePaymentMethod?: boolean;
   createActiveAccount?: boolean;
   paymentMethodId?: string;
@@ -47,11 +61,24 @@ type PurchaseParams = {
   confirmationTokenId?: string;
 };
 
-export const usePurchase = () => {
+export const usePurchase = ({
+  paymentOption,
+  retiring,
+  project,
+  currency,
+  creditsAmount,
+  currencyAmount,
+  allowedDenoms,
+}: UsePurchaseParams) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
+  const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();
-  const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
+  const { data } = useMultiStep<BuyCreditsSchemaTypes>();
+  const email = data?.email;
+  const name = data?.name;
+
+  const setTxBuySuccessfulModalAtom = useSetAtom(txBuySuccessfulModalAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
   const setErrorModalAtom = useSetAtom(errorModalAtom);
@@ -60,18 +87,41 @@ export const usePurchase = () => {
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const retryCsrfRequest = useRetryCsrfRequest();
   const { handleSuccess } = useMultiStep<BuyCreditsSchemaTypes>();
+  const [paymentIntentId, setPaymentIntentId] = useState<string | undefined>();
+  const [txHash, setTxHash] = useState<string | undefined>();
+
+  const displayDenom = useMemo(
+    () =>
+      currency?.askDenom
+        ? findDisplayDenom({
+            allowedDenoms,
+            bankDenom: currency?.askDenom,
+            baseDenom: currency?.askBaseDenom,
+          })
+        : undefined,
+    [allowedDenoms, currency?.askBaseDenom, currency?.askDenom],
+  );
+
+  useFetchRetirementForPurchase({
+    paymentIntentId,
+    txHash,
+    paymentOption,
+    retiring,
+    project,
+    currency,
+    creditsAmount,
+    currencyAmount,
+    displayDenom,
+  });
 
   const purchase = useCallback(
     async ({
-      paymentOption,
       selectedSellOrders,
       retirementReason,
       country,
       stateProvince,
       postalCode,
       retiring,
-      email,
-      name,
       savePaymentMethod,
       createActiveAccount,
       paymentMethodId,
@@ -79,6 +129,15 @@ export const usePurchase = () => {
       elements,
       confirmationTokenId,
     }: PurchaseParams) => {
+      if (
+        !creditsAmount ||
+        !currencyAmount ||
+        !project ||
+        !currency ||
+        !displayDenom
+      )
+        return;
+
       const retirementJurisdiction =
         retiring && country
           ? getJurisdictionIsoCode({
@@ -120,19 +179,15 @@ export const usePurchase = () => {
                 // 2. Confirm payment
                 // with saved credit card
                 if (paymentMethodId) {
-                  const { error } = await stripe.confirmCardPayment(
-                    clientSecret,
-                    {
+                  const { error, paymentIntent } =
+                    await stripe.confirmCardPayment(clientSecret, {
                       payment_method: paymentMethodId,
-                    },
-                  );
+                    });
                   if (error) {
                     setErrorBannerTextAtom(String(error));
                     return;
                   }
-                  // this will go to the last "Complete" step, we should redirect to the certificate page APP-361
-                  // there, we need to getGetTxsEventQuery + show success modal
-                  handleSuccess();
+                  setPaymentIntentId(paymentIntent.id);
                 } else {
                   // or new credit card
                   const { error, paymentIntent } = await stripe.confirmPayment({
@@ -162,7 +217,7 @@ export const usePurchase = () => {
                       return;
                     }
                   }
-                  handleSuccess();
+                  setPaymentIntentId(paymentIntent.id);
                 }
               },
             });
@@ -196,7 +251,7 @@ export const usePurchase = () => {
               ],
               // We set gas higher than normal because if there are many sell orders to process,
               // more gas will be used.
-              // In a follow up, we could to simulate tx.
+              // In a follow up, we could simulate tx.
               // User can also update that manually from Keplr before signing.
               gas: '500000',
             },
@@ -213,27 +268,41 @@ export const usePurchase = () => {
               );
             },
             onSuccess: async (deliverTxResponse?: DeliverTxResponse) => {
-              setProcessingModalAtom(atom => void (atom.open = false));
+              setTxHash(deliverTxResponse?.transactionHash);
 
-              // TODO https://regennetwork.atlassian.net/browse/APP-361
-              // We need to display a custom success modal here
-              // instead of the regular one
-              setTxSuccessfulModalAtom(atom => {
-                atom.open = true;
-                // atom.cardItems = cardItems; // TODO
-                // atom.title = _(POST_CREATED);
-                atom.buttonTitle = _(VIEW_CERTIFICATE);
-                // atom.buttonLink = buttonLink;
-                atom.txHash = deliverTxResponse?.transactionHash;
-              });
+              // In case of retirement, it's handled in useFetchRetirementForPurchase
+              if (!retiring) {
+                setProcessingModalAtom(atom => void (atom.open = false));
+                setTxBuySuccessfulModalAtom(atom => {
+                  atom.open = true;
+                  atom.cardItems = getCardItems({
+                    retiring,
+                    creditsAmount,
+                    currencyAmount,
+                    project,
+                    currency,
+                    displayDenom,
+                  });
+                  atom.buttonTitle = _(VIEW_PORTFOLIO);
+                  atom.onButtonClick = () =>
+                    setTxBuySuccessfulModalAtom(
+                      atom => void (atom.open = false),
+                    );
+                  atom.txHash = deliverTxResponse?.transactionHash;
+                  atom.steps = getSteps(paymentOption, retiring);
+                  atom.description = email
+                    ? `${_(EMAIL_RECEIPT)} ${email}`
+                    : undefined;
+                });
 
-              // Reload sell orders
-              await reactQueryClient.invalidateQueries({
-                queryKey: [SELL_ORDERS_EXTENTED_KEY],
-              });
+                await reactQueryClient.invalidateQueries({
+                  queryKey: [SELL_ORDERS_EXTENTED_KEY],
+                });
 
-              // Reset BuyCredits forms
-              handleSuccess();
+                // Reset BuyCredits forms
+                handleSuccess();
+                navigate(`/profile/portfolio`);
+              }
             },
           },
         );
@@ -241,14 +310,23 @@ export const usePurchase = () => {
     },
     [
       _,
+      creditsAmount,
+      currency,
+      currencyAmount,
+      displayDenom,
+      email,
       handleSuccess,
+      name,
+      navigate,
+      paymentOption,
+      project,
       reactQueryClient,
       retryCsrfRequest,
       setErrorBannerTextAtom,
       setErrorCodeAtom,
       setErrorModalAtom,
       setProcessingModalAtom,
-      setTxSuccessfulModalAtom,
+      setTxBuySuccessfulModalAtom,
       signAndBroadcast,
       token,
       wallet?.address,

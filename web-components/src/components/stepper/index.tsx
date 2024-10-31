@@ -8,10 +8,18 @@ import {
 import { Theme } from '@mui/material/styles';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
+import { cn } from '../../utils/styles/cn';
 import RegenStepIcon from './StepIcon';
 
 interface StepperProps {
-  className?: string;
+  classes?: {
+    root?: string;
+    stepper?: string;
+    stepIcon?: string;
+    stepConnector?: string;
+    stepLabel?: string;
+    stepConnectorLine?: string;
+  };
   activeStep: number;
   background?: string;
   steps: string[];
@@ -90,23 +98,28 @@ const RegenStepConnector = withStyles(
 );
 
 const RegenStepper = ({
-  className,
+  classes,
   activeStep,
   steps,
   background,
   onStepClick,
   sx,
 }: StepperProps): JSX.Element => {
-  const { classes, cx } = useStyles({ background });
+  const { classes: styles, cx } = useStyles({ background });
 
   return (
-    <div className={classes.root}>
+    <div className={cn(classes?.root, styles.root)}>
       <Stepper
         sx={sx}
-        className={cx(className, classes.stepper)}
+        className={cx(classes?.stepper, styles.stepper)}
         activeStep={activeStep}
         alternativeLabel
-        connector={<RegenStepConnector />}
+        connector={
+          <RegenStepConnector
+            classes={{ line: classes?.stepConnectorLine }}
+            className={classes?.stepConnector}
+          />
+        }
       >
         {steps.map((label, index) => (
           <Step
@@ -115,10 +128,14 @@ const RegenStepper = ({
           >
             <StepLabel
               classes={{
-                alternativeLabel: cx(
-                  classes.alternativeLabel,
-                  onStepClick && classes.hover,
+                alternativeLabel: cn(
+                  styles.alternativeLabel,
+                  onStepClick && styles.hover,
+                  classes?.stepLabel,
                 ),
+                iconContainer:
+                  classes?.stepIcon ||
+                  'sm:h-[31px] sm:w-[31px] w-[21px] h-[21px]',
               }}
               StepIconComponent={RegenStepIcon}
             >

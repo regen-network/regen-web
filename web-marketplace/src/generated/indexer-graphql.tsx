@@ -419,6 +419,39 @@ export type CreateClassIssuerPayloadClassIssuerEdgeArgs = {
   orderBy?: Maybe<Array<ClassIssuersOrderBy>>;
 };
 
+/** All input for the create `FlywaySchemaHistory` mutation. */
+export type CreateFlywaySchemaHistoryInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `FlywaySchemaHistory` to be created by this mutation. */
+  flywaySchemaHistory: FlywaySchemaHistoryInput;
+};
+
+/** The output of our create `FlywaySchemaHistory` mutation. */
+export type CreateFlywaySchemaHistoryPayload = {
+  __typename?: 'CreateFlywaySchemaHistoryPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `FlywaySchemaHistory` that was created by this mutation. */
+  flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `FlywaySchemaHistory`. May be used by Relay 1. */
+  flywaySchemaHistoryEdge?: Maybe<FlywaySchemaHistoriesEdge>;
+};
+
+
+/** The output of our create `FlywaySchemaHistory` mutation. */
+export type CreateFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
+  orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
+};
+
 /** All input for the create `MsgEventAttr` mutation. */
 export type CreateMsgEventAttrInput = {
   /**
@@ -629,6 +662,41 @@ export type CreateTxPayloadTxEdgeArgs = {
   orderBy?: Maybe<Array<TxesOrderBy>>;
 };
 
+/** All input for the create `Vote` mutation. */
+export type CreateVoteInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Vote` to be created by this mutation. */
+  vote: VoteInput;
+};
+
+/** The output of our create `Vote` mutation. */
+export type CreateVotePayload = {
+  __typename?: 'CreateVotePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Vote` that was created by this mutation. */
+  vote?: Maybe<Vote>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `MsgEvent` that is related to this `Vote`. */
+  msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
+  /** An edge for our `Vote`. May be used by Relay 1. */
+  voteEdge?: Maybe<VotesEdge>;
+};
+
+
+/** The output of our create `Vote` mutation. */
+export type CreateVotePayloadVoteEdgeArgs = {
+  orderBy?: Maybe<Array<VotesOrderBy>>;
+};
+
 
 
 /** All input for the `deleteBlockByChainNumAndHeight` mutation. */
@@ -781,6 +849,50 @@ export type DeleteClassIssuerPayload = {
 /** The output of our delete `ClassIssuer` mutation. */
 export type DeleteClassIssuerPayloadClassIssuerEdgeArgs = {
   orderBy?: Maybe<Array<ClassIssuersOrderBy>>;
+};
+
+/** All input for the `deleteFlywaySchemaHistoryByInstalledRank` mutation. */
+export type DeleteFlywaySchemaHistoryByInstalledRankInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  installedRank: Scalars['Int'];
+};
+
+/** All input for the `deleteFlywaySchemaHistory` mutation. */
+export type DeleteFlywaySchemaHistoryInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `FlywaySchemaHistory` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `FlywaySchemaHistory` mutation. */
+export type DeleteFlywaySchemaHistoryPayload = {
+  __typename?: 'DeleteFlywaySchemaHistoryPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `FlywaySchemaHistory` that was deleted by this mutation. */
+  flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
+  deletedFlywaySchemaHistoryId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `FlywaySchemaHistory`. May be used by Relay 1. */
+  flywaySchemaHistoryEdge?: Maybe<FlywaySchemaHistoriesEdge>;
+};
+
+
+/** The output of our delete `FlywaySchemaHistory` mutation. */
+export type DeleteFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
+  orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
 };
 
 /** All input for the `deleteMsgByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
@@ -996,6 +1108,16 @@ export type DeleteRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
   msgIdx: Scalars['Int'];
 };
 
+/** All input for the `deleteRetirementByTxHash` mutation. */
+export type DeleteRetirementByTxHashInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  txHash: Scalars['String'];
+};
+
 /** All input for the `deleteRetirement` mutation. */
 export type DeleteRetirementInput = {
   /**
@@ -1090,6 +1212,446 @@ export type DeleteTxPayloadTxEdgeArgs = {
   orderBy?: Maybe<Array<TxesOrderBy>>;
 };
 
+/** All input for the `deleteVoteByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
+export type DeleteVoteByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  chainNum: Scalars['Int'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+};
+
+/** All input for the `deleteVoteByChainNumAndProposalIdAndVoter` mutation. */
+export type DeleteVoteByChainNumAndProposalIdAndVoterInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  chainNum: Scalars['Int'];
+  proposalId: Scalars['BigInt'];
+  voter: Scalars['String'];
+};
+
+/** All input for the `deleteVote` mutation. */
+export type DeleteVoteInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Vote` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `Vote` mutation. */
+export type DeleteVotePayload = {
+  __typename?: 'DeleteVotePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Vote` that was deleted by this mutation. */
+  vote?: Maybe<Vote>;
+  deletedVoteId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `MsgEvent` that is related to this `Vote`. */
+  msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
+  /** An edge for our `Vote`. May be used by Relay 1. */
+  voteEdge?: Maybe<VotesEdge>;
+};
+
+
+/** The output of our delete `Vote` mutation. */
+export type DeleteVotePayloadVoteEdgeArgs = {
+  orderBy?: Maybe<Array<VotesOrderBy>>;
+};
+
+export type EventRetire = {
+  __typename?: 'EventRetire';
+  chainNum?: Maybe<Scalars['Int']>;
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  txIdx?: Maybe<Scalars['Int']>;
+  msgIdx?: Maybe<Scalars['Int']>;
+  owner?: Maybe<Scalars['String']>;
+  batchDenom?: Maybe<Scalars['String']>;
+  amount?: Maybe<Scalars['String']>;
+  jurisdiction?: Maybe<Scalars['String']>;
+  reason?: Maybe<Scalars['String']>;
+  hasDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+/**
+ * A condition to be used against `EventRetire` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type EventRetireCondition = {
+  /** Checks for equality with the object’s `chainNum` field. */
+  chainNum?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `blockHeight` field. */
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `txIdx` field. */
+  txIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `msgIdx` field. */
+  msgIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `owner` field. */
+  owner?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `batchDenom` field. */
+  batchDenom?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `amount` field. */
+  amount?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `jurisdiction` field. */
+  jurisdiction?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `reason` field. */
+  reason?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `hasDuplicates` field. */
+  hasDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type EventRetireV1 = {
+  __typename?: 'EventRetireV1';
+  chainNum?: Maybe<Scalars['Int']>;
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  txIdx?: Maybe<Scalars['Int']>;
+  msgIdx?: Maybe<Scalars['Int']>;
+  owner?: Maybe<Scalars['String']>;
+  batchDenom?: Maybe<Scalars['String']>;
+  amount?: Maybe<Scalars['String']>;
+  jurisdiction?: Maybe<Scalars['String']>;
+  reason?: Maybe<Scalars['String']>;
+  hasDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+export type EventRetireV1Alpha1 = {
+  __typename?: 'EventRetireV1Alpha1';
+  chainNum?: Maybe<Scalars['Int']>;
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  txIdx?: Maybe<Scalars['Int']>;
+  msgIdx?: Maybe<Scalars['Int']>;
+  retirer?: Maybe<Scalars['String']>;
+  batchDenom?: Maybe<Scalars['String']>;
+  amount?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  hasDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+/**
+ * A condition to be used against `EventRetireV1Alpha1` object types. All fields
+ * are tested for equality and combined with a logical ‘and.’
+ */
+export type EventRetireV1Alpha1Condition = {
+  /** Checks for equality with the object’s `chainNum` field. */
+  chainNum?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `blockHeight` field. */
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `txIdx` field. */
+  txIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `msgIdx` field. */
+  msgIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `retirer` field. */
+  retirer?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `batchDenom` field. */
+  batchDenom?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `amount` field. */
+  amount?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `location` field. */
+  location?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `hasDuplicates` field. */
+  hasDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+/** A connection to a list of `EventRetireV1Alpha1` values. */
+export type EventRetireV1Alpha1SConnection = {
+  __typename?: 'EventRetireV1Alpha1SConnection';
+  /** A list of `EventRetireV1Alpha1` objects. */
+  nodes: Array<Maybe<EventRetireV1Alpha1>>;
+  /** A list of edges which contains the `EventRetireV1Alpha1` and cursor to aid in pagination. */
+  edges: Array<EventRetireV1Alpha1SEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `EventRetireV1Alpha1` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `EventRetireV1Alpha1` edge in the connection. */
+export type EventRetireV1Alpha1SEdge = {
+  __typename?: 'EventRetireV1Alpha1SEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `EventRetireV1Alpha1` at the end of the edge. */
+  node?: Maybe<EventRetireV1Alpha1>;
+};
+
+/** Methods to use when ordering `EventRetireV1Alpha1`. */
+export enum EventRetireV1Alpha1SOrderBy {
+  Natural = 'NATURAL',
+  ChainNumAsc = 'CHAIN_NUM_ASC',
+  ChainNumDesc = 'CHAIN_NUM_DESC',
+  BlockHeightAsc = 'BLOCK_HEIGHT_ASC',
+  BlockHeightDesc = 'BLOCK_HEIGHT_DESC',
+  TxIdxAsc = 'TX_IDX_ASC',
+  TxIdxDesc = 'TX_IDX_DESC',
+  MsgIdxAsc = 'MSG_IDX_ASC',
+  MsgIdxDesc = 'MSG_IDX_DESC',
+  RetirerAsc = 'RETIRER_ASC',
+  RetirerDesc = 'RETIRER_DESC',
+  BatchDenomAsc = 'BATCH_DENOM_ASC',
+  BatchDenomDesc = 'BATCH_DENOM_DESC',
+  AmountAsc = 'AMOUNT_ASC',
+  AmountDesc = 'AMOUNT_DESC',
+  LocationAsc = 'LOCATION_ASC',
+  LocationDesc = 'LOCATION_DESC',
+  HasDuplicatesAsc = 'HAS_DUPLICATES_ASC',
+  HasDuplicatesDesc = 'HAS_DUPLICATES_DESC'
+}
+
+/**
+ * A condition to be used against `EventRetireV1` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type EventRetireV1Condition = {
+  /** Checks for equality with the object’s `chainNum` field. */
+  chainNum?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `blockHeight` field. */
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `txIdx` field. */
+  txIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `msgIdx` field. */
+  msgIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `owner` field. */
+  owner?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `batchDenom` field. */
+  batchDenom?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `amount` field. */
+  amount?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `jurisdiction` field. */
+  jurisdiction?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `reason` field. */
+  reason?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `hasDuplicates` field. */
+  hasDuplicates?: Maybe<Scalars['Boolean']>;
+};
+
+/** A connection to a list of `EventRetireV1` values. */
+export type EventRetireV1SConnection = {
+  __typename?: 'EventRetireV1SConnection';
+  /** A list of `EventRetireV1` objects. */
+  nodes: Array<Maybe<EventRetireV1>>;
+  /** A list of edges which contains the `EventRetireV1` and cursor to aid in pagination. */
+  edges: Array<EventRetireV1SEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `EventRetireV1` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `EventRetireV1` edge in the connection. */
+export type EventRetireV1SEdge = {
+  __typename?: 'EventRetireV1SEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `EventRetireV1` at the end of the edge. */
+  node?: Maybe<EventRetireV1>;
+};
+
+/** Methods to use when ordering `EventRetireV1`. */
+export enum EventRetireV1SOrderBy {
+  Natural = 'NATURAL',
+  ChainNumAsc = 'CHAIN_NUM_ASC',
+  ChainNumDesc = 'CHAIN_NUM_DESC',
+  BlockHeightAsc = 'BLOCK_HEIGHT_ASC',
+  BlockHeightDesc = 'BLOCK_HEIGHT_DESC',
+  TxIdxAsc = 'TX_IDX_ASC',
+  TxIdxDesc = 'TX_IDX_DESC',
+  MsgIdxAsc = 'MSG_IDX_ASC',
+  MsgIdxDesc = 'MSG_IDX_DESC',
+  OwnerAsc = 'OWNER_ASC',
+  OwnerDesc = 'OWNER_DESC',
+  BatchDenomAsc = 'BATCH_DENOM_ASC',
+  BatchDenomDesc = 'BATCH_DENOM_DESC',
+  AmountAsc = 'AMOUNT_ASC',
+  AmountDesc = 'AMOUNT_DESC',
+  JurisdictionAsc = 'JURISDICTION_ASC',
+  JurisdictionDesc = 'JURISDICTION_DESC',
+  ReasonAsc = 'REASON_ASC',
+  ReasonDesc = 'REASON_DESC',
+  HasDuplicatesAsc = 'HAS_DUPLICATES_ASC',
+  HasDuplicatesDesc = 'HAS_DUPLICATES_DESC'
+}
+
+/** A connection to a list of `EventRetire` values. */
+export type EventRetiresConnection = {
+  __typename?: 'EventRetiresConnection';
+  /** A list of `EventRetire` objects. */
+  nodes: Array<Maybe<EventRetire>>;
+  /** A list of edges which contains the `EventRetire` and cursor to aid in pagination. */
+  edges: Array<EventRetiresEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `EventRetire` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `EventRetire` edge in the connection. */
+export type EventRetiresEdge = {
+  __typename?: 'EventRetiresEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `EventRetire` at the end of the edge. */
+  node?: Maybe<EventRetire>;
+};
+
+/** Methods to use when ordering `EventRetire`. */
+export enum EventRetiresOrderBy {
+  Natural = 'NATURAL',
+  ChainNumAsc = 'CHAIN_NUM_ASC',
+  ChainNumDesc = 'CHAIN_NUM_DESC',
+  BlockHeightAsc = 'BLOCK_HEIGHT_ASC',
+  BlockHeightDesc = 'BLOCK_HEIGHT_DESC',
+  TxIdxAsc = 'TX_IDX_ASC',
+  TxIdxDesc = 'TX_IDX_DESC',
+  MsgIdxAsc = 'MSG_IDX_ASC',
+  MsgIdxDesc = 'MSG_IDX_DESC',
+  OwnerAsc = 'OWNER_ASC',
+  OwnerDesc = 'OWNER_DESC',
+  BatchDenomAsc = 'BATCH_DENOM_ASC',
+  BatchDenomDesc = 'BATCH_DENOM_DESC',
+  AmountAsc = 'AMOUNT_ASC',
+  AmountDesc = 'AMOUNT_DESC',
+  JurisdictionAsc = 'JURISDICTION_ASC',
+  JurisdictionDesc = 'JURISDICTION_DESC',
+  ReasonAsc = 'REASON_ASC',
+  ReasonDesc = 'REASON_DESC',
+  HasDuplicatesAsc = 'HAS_DUPLICATES_ASC',
+  HasDuplicatesDesc = 'HAS_DUPLICATES_DESC'
+}
+
+/** A connection to a list of `FlywaySchemaHistory` values. */
+export type FlywaySchemaHistoriesConnection = {
+  __typename?: 'FlywaySchemaHistoriesConnection';
+  /** A list of `FlywaySchemaHistory` objects. */
+  nodes: Array<Maybe<FlywaySchemaHistory>>;
+  /** A list of edges which contains the `FlywaySchemaHistory` and cursor to aid in pagination. */
+  edges: Array<FlywaySchemaHistoriesEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `FlywaySchemaHistory` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `FlywaySchemaHistory` edge in the connection. */
+export type FlywaySchemaHistoriesEdge = {
+  __typename?: 'FlywaySchemaHistoriesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `FlywaySchemaHistory` at the end of the edge. */
+  node?: Maybe<FlywaySchemaHistory>;
+};
+
+/** Methods to use when ordering `FlywaySchemaHistory`. */
+export enum FlywaySchemaHistoriesOrderBy {
+  Natural = 'NATURAL',
+  InstalledRankAsc = 'INSTALLED_RANK_ASC',
+  InstalledRankDesc = 'INSTALLED_RANK_DESC',
+  VersionAsc = 'VERSION_ASC',
+  VersionDesc = 'VERSION_DESC',
+  DescriptionAsc = 'DESCRIPTION_ASC',
+  DescriptionDesc = 'DESCRIPTION_DESC',
+  TypeAsc = 'TYPE_ASC',
+  TypeDesc = 'TYPE_DESC',
+  ScriptAsc = 'SCRIPT_ASC',
+  ScriptDesc = 'SCRIPT_DESC',
+  ChecksumAsc = 'CHECKSUM_ASC',
+  ChecksumDesc = 'CHECKSUM_DESC',
+  InstalledByAsc = 'INSTALLED_BY_ASC',
+  InstalledByDesc = 'INSTALLED_BY_DESC',
+  InstalledOnAsc = 'INSTALLED_ON_ASC',
+  InstalledOnDesc = 'INSTALLED_ON_DESC',
+  ExecutionTimeAsc = 'EXECUTION_TIME_ASC',
+  ExecutionTimeDesc = 'EXECUTION_TIME_DESC',
+  SuccessAsc = 'SUCCESS_ASC',
+  SuccessDesc = 'SUCCESS_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
+export type FlywaySchemaHistory = Node & {
+  __typename?: 'FlywaySchemaHistory';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  installedRank: Scalars['Int'];
+  version?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
+  type: Scalars['String'];
+  script: Scalars['String'];
+  checksum?: Maybe<Scalars['Int']>;
+  installedBy: Scalars['String'];
+  installedOn: Scalars['Datetime'];
+  executionTime: Scalars['Int'];
+  success: Scalars['Boolean'];
+};
+
+/**
+ * A condition to be used against `FlywaySchemaHistory` object types. All fields
+ * are tested for equality and combined with a logical ‘and.’
+ */
+export type FlywaySchemaHistoryCondition = {
+  /** Checks for equality with the object’s `installedRank` field. */
+  installedRank?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `version` field. */
+  version?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `description` field. */
+  description?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `type` field. */
+  type?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `script` field. */
+  script?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `checksum` field. */
+  checksum?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `installedBy` field. */
+  installedBy?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `installedOn` field. */
+  installedOn?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `executionTime` field. */
+  executionTime?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `success` field. */
+  success?: Maybe<Scalars['Boolean']>;
+};
+
+/** An input for mutations affecting `FlywaySchemaHistory` */
+export type FlywaySchemaHistoryInput = {
+  installedRank: Scalars['Int'];
+  version?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
+  type: Scalars['String'];
+  script: Scalars['String'];
+  checksum?: Maybe<Scalars['Int']>;
+  installedBy: Scalars['String'];
+  installedOn?: Maybe<Scalars['Datetime']>;
+  executionTime: Scalars['Int'];
+  success: Scalars['Boolean'];
+};
+
+/** Represents an update to a `FlywaySchemaHistory`. Fields that are set will be updated. */
+export type FlywaySchemaHistoryPatch = {
+  installedRank?: Maybe<Scalars['Int']>;
+  version?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  script?: Maybe<Scalars['String']>;
+  checksum?: Maybe<Scalars['Int']>;
+  installedBy?: Maybe<Scalars['String']>;
+  installedOn?: Maybe<Scalars['Datetime']>;
+  executionTime?: Maybe<Scalars['Int']>;
+  success?: Maybe<Scalars['Boolean']>;
+};
+
 
 export type Msg = Node & {
   __typename?: 'Msg';
@@ -1102,21 +1664,10 @@ export type Msg = Node & {
   data: Scalars['JSON'];
   /** Reads a single `Tx` that is related to this `Msg`. */
   txByChainNumAndBlockHeightAndTxIdx?: Maybe<Tx>;
-  /** Reads and enables pagination through a set of `MsgEvent`. */
-  msgEventsByChainNumAndBlockHeightAndTxIdxAndMsgIdx: MsgEventsConnection;
   /** Reads and enables pagination through a set of `MsgEventAttr`. */
   msgEventAttrsByChainNumAndBlockHeightAndTxIdxAndMsgIdx: MsgEventAttrsConnection;
-};
-
-
-export type MsgMsgEventsByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<MsgEventsOrderBy>>;
-  condition?: Maybe<MsgEventCondition>;
+  /** Reads and enables pagination through a set of `MsgEvent`. */
+  msgEventsByChainNumAndBlockHeightAndTxIdxAndMsgIdx: MsgEventsConnection;
 };
 
 
@@ -1128,6 +1679,17 @@ export type MsgMsgEventAttrsByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<MsgEventAttrsOrderBy>>;
   condition?: Maybe<MsgEventAttrCondition>;
+};
+
+
+export type MsgMsgEventsByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<MsgEventsOrderBy>>;
+  condition?: Maybe<MsgEventCondition>;
 };
 
 /** A condition to be used against `Msg` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -1155,23 +1717,25 @@ export type MsgEvent = Node & {
   type: Scalars['String'];
   /** Reads a single `Msg` that is related to this `MsgEvent`. */
   msgByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Msg>;
-  /** Reads and enables pagination through a set of `Retirement`. */
-  retirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType: RetirementsConnection;
-  /** Reads and enables pagination through a set of `Proposal`. */
-  proposalsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType: ProposalsConnection;
   /** Reads and enables pagination through a set of `ClassIssuer`. */
   classIssuersByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType: ClassIssuersConnection;
+  /** Reads and enables pagination through a set of `Proposal`. */
+  proposalsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType: ProposalsConnection;
+  /** Reads and enables pagination through a set of `Retirement`. */
+  retirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType: RetirementsConnection;
+  /** Reads and enables pagination through a set of `Vote`. */
+  votesByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType: VotesConnection;
 };
 
 
-export type MsgEventRetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeArgs = {
+export type MsgEventClassIssuersByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['Cursor']>;
   after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<RetirementsOrderBy>>;
-  condition?: Maybe<RetirementCondition>;
+  orderBy?: Maybe<Array<ClassIssuersOrderBy>>;
+  condition?: Maybe<ClassIssuerCondition>;
 };
 
 
@@ -1186,14 +1750,25 @@ export type MsgEventProposalsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeArg
 };
 
 
-export type MsgEventClassIssuersByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeArgs = {
+export type MsgEventRetirementsByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['Cursor']>;
   after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ClassIssuersOrderBy>>;
-  condition?: Maybe<ClassIssuerCondition>;
+  orderBy?: Maybe<Array<RetirementsOrderBy>>;
+  condition?: Maybe<RetirementCondition>;
+};
+
+
+export type MsgEventVotesByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<VotesOrderBy>>;
+  condition?: Maybe<VoteCondition>;
 };
 
 export type MsgEventAttr = Node & {
@@ -1444,6 +2019,8 @@ export type Mutation = {
   createChain?: Maybe<CreateChainPayload>;
   /** Creates a single `ClassIssuer`. */
   createClassIssuer?: Maybe<CreateClassIssuerPayload>;
+  /** Creates a single `FlywaySchemaHistory`. */
+  createFlywaySchemaHistory?: Maybe<CreateFlywaySchemaHistoryPayload>;
   /** Creates a single `Msg`. */
   createMsg?: Maybe<CreateMsgPayload>;
   /** Creates a single `MsgEvent`. */
@@ -1456,6 +2033,8 @@ export type Mutation = {
   createRetirement?: Maybe<CreateRetirementPayload>;
   /** Creates a single `Tx`. */
   createTx?: Maybe<CreateTxPayload>;
+  /** Creates a single `Vote`. */
+  createVote?: Maybe<CreateVotePayload>;
   /** Updates a single `Block` using its globally unique id and a patch. */
   updateBlock?: Maybe<UpdateBlockPayload>;
   /** Updates a single `Block` using a unique key and a patch. */
@@ -1470,6 +2049,10 @@ export type Mutation = {
   updateClassIssuer?: Maybe<UpdateClassIssuerPayload>;
   /** Updates a single `ClassIssuer` using a unique key and a patch. */
   updateClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuer?: Maybe<UpdateClassIssuerPayload>;
+  /** Updates a single `FlywaySchemaHistory` using its globally unique id and a patch. */
+  updateFlywaySchemaHistory?: Maybe<UpdateFlywaySchemaHistoryPayload>;
+  /** Updates a single `FlywaySchemaHistory` using a unique key and a patch. */
+  updateFlywaySchemaHistoryByInstalledRank?: Maybe<UpdateFlywaySchemaHistoryPayload>;
   /** Updates a single `Msg` using its globally unique id and a patch. */
   updateMsg?: Maybe<UpdateMsgPayload>;
   /** Updates a single `Msg` using a unique key and a patch. */
@@ -1490,12 +2073,20 @@ export type Mutation = {
   updateRetirement?: Maybe<UpdateRetirementPayload>;
   /** Updates a single `Retirement` using a unique key and a patch. */
   updateRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<UpdateRetirementPayload>;
+  /** Updates a single `Retirement` using a unique key and a patch. */
+  updateRetirementByTxHash?: Maybe<UpdateRetirementPayload>;
   /** Updates a single `Tx` using its globally unique id and a patch. */
   updateTx?: Maybe<UpdateTxPayload>;
   /** Updates a single `Tx` using a unique key and a patch. */
   updateTxByChainNumAndBlockHeightAndTxIdx?: Maybe<UpdateTxPayload>;
   /** Updates a single `Tx` using a unique key and a patch. */
   updateTxByHash?: Maybe<UpdateTxPayload>;
+  /** Updates a single `Vote` using its globally unique id and a patch. */
+  updateVote?: Maybe<UpdateVotePayload>;
+  /** Updates a single `Vote` using a unique key and a patch. */
+  updateVoteByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<UpdateVotePayload>;
+  /** Updates a single `Vote` using a unique key and a patch. */
+  updateVoteByChainNumAndProposalIdAndVoter?: Maybe<UpdateVotePayload>;
   /** Deletes a single `Block` using its globally unique id. */
   deleteBlock?: Maybe<DeleteBlockPayload>;
   /** Deletes a single `Block` using a unique key. */
@@ -1510,6 +2101,10 @@ export type Mutation = {
   deleteClassIssuer?: Maybe<DeleteClassIssuerPayload>;
   /** Deletes a single `ClassIssuer` using a unique key. */
   deleteClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuer?: Maybe<DeleteClassIssuerPayload>;
+  /** Deletes a single `FlywaySchemaHistory` using its globally unique id. */
+  deleteFlywaySchemaHistory?: Maybe<DeleteFlywaySchemaHistoryPayload>;
+  /** Deletes a single `FlywaySchemaHistory` using a unique key. */
+  deleteFlywaySchemaHistoryByInstalledRank?: Maybe<DeleteFlywaySchemaHistoryPayload>;
   /** Deletes a single `Msg` using its globally unique id. */
   deleteMsg?: Maybe<DeleteMsgPayload>;
   /** Deletes a single `Msg` using a unique key. */
@@ -1530,12 +2125,20 @@ export type Mutation = {
   deleteRetirement?: Maybe<DeleteRetirementPayload>;
   /** Deletes a single `Retirement` using a unique key. */
   deleteRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<DeleteRetirementPayload>;
+  /** Deletes a single `Retirement` using a unique key. */
+  deleteRetirementByTxHash?: Maybe<DeleteRetirementPayload>;
   /** Deletes a single `Tx` using its globally unique id. */
   deleteTx?: Maybe<DeleteTxPayload>;
   /** Deletes a single `Tx` using a unique key. */
   deleteTxByChainNumAndBlockHeightAndTxIdx?: Maybe<DeleteTxPayload>;
   /** Deletes a single `Tx` using a unique key. */
   deleteTxByHash?: Maybe<DeleteTxPayload>;
+  /** Deletes a single `Vote` using its globally unique id. */
+  deleteVote?: Maybe<DeleteVotePayload>;
+  /** Deletes a single `Vote` using a unique key. */
+  deleteVoteByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<DeleteVotePayload>;
+  /** Deletes a single `Vote` using a unique key. */
+  deleteVoteByChainNumAndProposalIdAndVoter?: Maybe<DeleteVotePayload>;
 };
 
 
@@ -1554,6 +2157,12 @@ export type MutationCreateChainArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateClassIssuerArgs = {
   input: CreateClassIssuerInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateFlywaySchemaHistoryArgs = {
+  input: CreateFlywaySchemaHistoryInput;
 };
 
 
@@ -1590,6 +2199,12 @@ export type MutationCreateRetirementArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateTxArgs = {
   input: CreateTxInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateVoteArgs = {
+  input: CreateVoteInput;
 };
 
 
@@ -1632,6 +2247,18 @@ export type MutationUpdateClassIssuerArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuerArgs = {
   input: UpdateClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuerInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateFlywaySchemaHistoryArgs = {
+  input: UpdateFlywaySchemaHistoryInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateFlywaySchemaHistoryByInstalledRankArgs = {
+  input: UpdateFlywaySchemaHistoryByInstalledRankInput;
 };
 
 
@@ -1696,6 +2323,12 @@ export type MutationUpdateRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxArg
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateRetirementByTxHashArgs = {
+  input: UpdateRetirementByTxHashInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateTxArgs = {
   input: UpdateTxInput;
 };
@@ -1710,6 +2343,24 @@ export type MutationUpdateTxByChainNumAndBlockHeightAndTxIdxArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateTxByHashArgs = {
   input: UpdateTxByHashInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateVoteArgs = {
+  input: UpdateVoteInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateVoteByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
+  input: UpdateVoteByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateVoteByChainNumAndProposalIdAndVoterArgs = {
+  input: UpdateVoteByChainNumAndProposalIdAndVoterInput;
 };
 
 
@@ -1752,6 +2403,18 @@ export type MutationDeleteClassIssuerArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuerArgs = {
   input: DeleteClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuerInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteFlywaySchemaHistoryArgs = {
+  input: DeleteFlywaySchemaHistoryInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteFlywaySchemaHistoryByInstalledRankArgs = {
+  input: DeleteFlywaySchemaHistoryByInstalledRankInput;
 };
 
 
@@ -1816,6 +2479,12 @@ export type MutationDeleteRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxArg
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteRetirementByTxHashArgs = {
+  input: DeleteRetirementByTxHashInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteTxArgs = {
   input: DeleteTxInput;
 };
@@ -1830,6 +2499,24 @@ export type MutationDeleteTxByChainNumAndBlockHeightAndTxIdxArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteTxByHashArgs = {
   input: DeleteTxByHashInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteVoteArgs = {
+  input: DeleteVoteInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteVoteByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
+  input: DeleteVoteByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteVoteByChainNumAndProposalIdAndVoterArgs = {
+  input: DeleteVoteByChainNumAndProposalIdAndVoterInput;
 };
 
 /** An object with a globally unique `ID`. */
@@ -2054,6 +2741,14 @@ export type Query = Node & {
   allChains?: Maybe<ChainsConnection>;
   /** Reads and enables pagination through a set of `ClassIssuer`. */
   allClassIssuers?: Maybe<ClassIssuersConnection>;
+  /** Reads and enables pagination through a set of `EventRetire`. */
+  allEventRetires?: Maybe<EventRetiresConnection>;
+  /** Reads and enables pagination through a set of `EventRetireV1`. */
+  allEventRetireV1S?: Maybe<EventRetireV1SConnection>;
+  /** Reads and enables pagination through a set of `EventRetireV1Alpha1`. */
+  allEventRetireV1Alpha1S?: Maybe<EventRetireV1Alpha1SConnection>;
+  /** Reads and enables pagination through a set of `FlywaySchemaHistory`. */
+  allFlywaySchemaHistories?: Maybe<FlywaySchemaHistoriesConnection>;
   /** Reads and enables pagination through a set of `Msg`. */
   allMsgs?: Maybe<MsgsConnection>;
   /** Reads and enables pagination through a set of `MsgEvent`. */
@@ -2066,17 +2761,23 @@ export type Query = Node & {
   allRetirements?: Maybe<RetirementsConnection>;
   /** Reads and enables pagination through a set of `Tx`. */
   allTxes?: Maybe<TxesConnection>;
+  /** Reads and enables pagination through a set of `Vote`. */
+  allVotes?: Maybe<VotesConnection>;
   blockByChainNumAndHeight?: Maybe<Block>;
   chainByNum?: Maybe<Chain>;
   chainByChainId?: Maybe<Chain>;
   classIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdAndIssuer?: Maybe<ClassIssuer>;
+  flywaySchemaHistoryByInstalledRank?: Maybe<FlywaySchemaHistory>;
   msgByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Msg>;
   msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
   msgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHash?: Maybe<MsgEventAttr>;
   proposalByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Proposal>;
   retirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Retirement>;
+  retirementByTxHash?: Maybe<Retirement>;
   txByChainNumAndBlockHeightAndTxIdx?: Maybe<Tx>;
   txByHash?: Maybe<Tx>;
+  voteByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Vote>;
+  voteByChainNumAndProposalIdAndVoter?: Maybe<Vote>;
   /** Reads and enables pagination through a set of `Tx`. */
   allEcocreditTxes?: Maybe<TxesConnection>;
   /** Reads a single `Block` using its globally unique `ID`. */
@@ -2085,6 +2786,8 @@ export type Query = Node & {
   chain?: Maybe<Chain>;
   /** Reads a single `ClassIssuer` using its globally unique `ID`. */
   classIssuer?: Maybe<ClassIssuer>;
+  /** Reads a single `FlywaySchemaHistory` using its globally unique `ID`. */
+  flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
   /** Reads a single `Msg` using its globally unique `ID`. */
   msg?: Maybe<Msg>;
   /** Reads a single `MsgEvent` using its globally unique `ID`. */
@@ -2097,6 +2800,8 @@ export type Query = Node & {
   retirement?: Maybe<Retirement>;
   /** Reads a single `Tx` using its globally unique `ID`. */
   tx?: Maybe<Tx>;
+  /** Reads a single `Vote` using its globally unique `ID`. */
+  vote?: Maybe<Vote>;
 };
 
 
@@ -2139,6 +2844,54 @@ export type QueryAllClassIssuersArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ClassIssuersOrderBy>>;
   condition?: Maybe<ClassIssuerCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllEventRetiresArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<EventRetiresOrderBy>>;
+  condition?: Maybe<EventRetireCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllEventRetireV1SArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<EventRetireV1SOrderBy>>;
+  condition?: Maybe<EventRetireV1Condition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllEventRetireV1Alpha1SArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<EventRetireV1Alpha1SOrderBy>>;
+  condition?: Maybe<EventRetireV1Alpha1Condition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllFlywaySchemaHistoriesArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
+  condition?: Maybe<FlywaySchemaHistoryCondition>;
 };
 
 
@@ -2215,6 +2968,18 @@ export type QueryAllTxesArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllVotesArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<VotesOrderBy>>;
+  condition?: Maybe<VoteCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryBlockByChainNumAndHeightArgs = {
   chainNum: Scalars['Int'];
   height: Scalars['BigInt'];
@@ -2241,6 +3006,12 @@ export type QueryClassIssuerByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndClassIdA
   msgIdx: Scalars['Int'];
   classId: Scalars['String'];
   issuer: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryFlywaySchemaHistoryByInstalledRankArgs = {
+  installedRank: Scalars['Int'];
 };
 
 
@@ -2294,6 +3065,12 @@ export type QueryRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryRetirementByTxHashArgs = {
+  txHash: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryTxByChainNumAndBlockHeightAndTxIdxArgs = {
   chainNum: Scalars['Int'];
   blockHeight: Scalars['BigInt'];
@@ -2304,6 +3081,23 @@ export type QueryTxByChainNumAndBlockHeightAndTxIdxArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryTxByHashArgs = {
   hash: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryVoteByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
+  chainNum: Scalars['Int'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryVoteByChainNumAndProposalIdAndVoterArgs = {
+  chainNum: Scalars['Int'];
+  proposalId: Scalars['BigInt'];
+  voter: Scalars['String'];
 };
 
 
@@ -2331,6 +3125,12 @@ export type QueryChainArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryClassIssuerArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryFlywaySchemaHistoryArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -2370,13 +3170,17 @@ export type QueryTxArgs = {
   nodeId: Scalars['ID'];
 };
 
+
+/** The root query type which gives access points into the data universe. */
+export type QueryVoteArgs = {
+  nodeId: Scalars['ID'];
+};
+
 export type Retirement = Node & {
   __typename?: 'Retirement';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
   nodeId: Scalars['ID'];
   type: Scalars['String'];
-  amount: Scalars['String'];
-  batchDenom: Scalars['String'];
   jurisdiction: Scalars['String'];
   owner: Scalars['String'];
   reason: Scalars['String'];
@@ -2386,6 +3190,9 @@ export type Retirement = Node & {
   txIdx: Scalars['Int'];
   msgIdx: Scalars['Int'];
   txHash: Scalars['String'];
+  amount: Scalars['String'];
+  batchDenom: Scalars['String'];
+  batchDenoms: Array<Maybe<Scalars['String']>>;
   /** Reads a single `MsgEvent` that is related to this `Retirement`. */
   msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
 };
@@ -2397,10 +3204,6 @@ export type Retirement = Node & {
 export type RetirementCondition = {
   /** Checks for equality with the object’s `type` field. */
   type?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `amount` field. */
-  amount?: Maybe<Scalars['String']>;
-  /** Checks for equality with the object’s `batchDenom` field. */
-  batchDenom?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `jurisdiction` field. */
   jurisdiction?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `owner` field. */
@@ -2419,13 +3222,17 @@ export type RetirementCondition = {
   msgIdx?: Maybe<Scalars['Int']>;
   /** Checks for equality with the object’s `txHash` field. */
   txHash?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `amount` field. */
+  amount?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `batchDenom` field. */
+  batchDenom?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `batchDenoms` field. */
+  batchDenoms?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 /** An input for mutations affecting `Retirement` */
 export type RetirementInput = {
   type: Scalars['String'];
-  amount: Scalars['String'];
-  batchDenom: Scalars['String'];
   jurisdiction: Scalars['String'];
   owner: Scalars['String'];
   reason: Scalars['String'];
@@ -2435,13 +3242,14 @@ export type RetirementInput = {
   txIdx: Scalars['Int'];
   msgIdx: Scalars['Int'];
   txHash: Scalars['String'];
+  amount: Scalars['String'];
+  batchDenom: Scalars['String'];
+  batchDenoms?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 /** Represents an update to a `Retirement`. Fields that are set will be updated. */
 export type RetirementPatch = {
   type?: Maybe<Scalars['String']>;
-  amount?: Maybe<Scalars['String']>;
-  batchDenom?: Maybe<Scalars['String']>;
   jurisdiction?: Maybe<Scalars['String']>;
   owner?: Maybe<Scalars['String']>;
   reason?: Maybe<Scalars['String']>;
@@ -2451,6 +3259,9 @@ export type RetirementPatch = {
   txIdx?: Maybe<Scalars['Int']>;
   msgIdx?: Maybe<Scalars['Int']>;
   txHash?: Maybe<Scalars['String']>;
+  amount?: Maybe<Scalars['String']>;
+  batchDenom?: Maybe<Scalars['String']>;
+  batchDenoms?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 /** A connection to a list of `Retirement` values. */
@@ -2480,10 +3291,6 @@ export enum RetirementsOrderBy {
   Natural = 'NATURAL',
   TypeAsc = 'TYPE_ASC',
   TypeDesc = 'TYPE_DESC',
-  AmountAsc = 'AMOUNT_ASC',
-  AmountDesc = 'AMOUNT_DESC',
-  BatchDenomAsc = 'BATCH_DENOM_ASC',
-  BatchDenomDesc = 'BATCH_DENOM_DESC',
   JurisdictionAsc = 'JURISDICTION_ASC',
   JurisdictionDesc = 'JURISDICTION_DESC',
   OwnerAsc = 'OWNER_ASC',
@@ -2502,6 +3309,12 @@ export enum RetirementsOrderBy {
   MsgIdxDesc = 'MSG_IDX_DESC',
   TxHashAsc = 'TX_HASH_ASC',
   TxHashDesc = 'TX_HASH_DESC',
+  AmountAsc = 'AMOUNT_ASC',
+  AmountDesc = 'AMOUNT_DESC',
+  BatchDenomAsc = 'BATCH_DENOM_ASC',
+  BatchDenomDesc = 'BATCH_DENOM_DESC',
+  BatchDenomsAsc = 'BATCH_DENOMS_ASC',
+  BatchDenomsDesc = 'BATCH_DENOMS_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -2766,6 +3579,53 @@ export type UpdateClassIssuerPayloadClassIssuerEdgeArgs = {
   orderBy?: Maybe<Array<ClassIssuersOrderBy>>;
 };
 
+/** All input for the `updateFlywaySchemaHistoryByInstalledRank` mutation. */
+export type UpdateFlywaySchemaHistoryByInstalledRankInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `FlywaySchemaHistory` being updated. */
+  flywaySchemaHistoryPatch: FlywaySchemaHistoryPatch;
+  installedRank: Scalars['Int'];
+};
+
+/** All input for the `updateFlywaySchemaHistory` mutation. */
+export type UpdateFlywaySchemaHistoryInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `FlywaySchemaHistory` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `FlywaySchemaHistory` being updated. */
+  flywaySchemaHistoryPatch: FlywaySchemaHistoryPatch;
+};
+
+/** The output of our update `FlywaySchemaHistory` mutation. */
+export type UpdateFlywaySchemaHistoryPayload = {
+  __typename?: 'UpdateFlywaySchemaHistoryPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `FlywaySchemaHistory` that was updated by this mutation. */
+  flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `FlywaySchemaHistory`. May be used by Relay 1. */
+  flywaySchemaHistoryEdge?: Maybe<FlywaySchemaHistoriesEdge>;
+};
+
+
+/** The output of our update `FlywaySchemaHistory` mutation. */
+export type UpdateFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
+  orderBy?: Maybe<Array<FlywaySchemaHistoriesOrderBy>>;
+};
+
 /** All input for the `updateMsgByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
 export type UpdateMsgByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
   /**
@@ -2993,6 +3853,18 @@ export type UpdateRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
   msgIdx: Scalars['Int'];
 };
 
+/** All input for the `updateRetirementByTxHash` mutation. */
+export type UpdateRetirementByTxHashInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Retirement` being updated. */
+  retirementPatch: RetirementPatch;
+  txHash: Scalars['String'];
+};
+
 /** All input for the `updateRetirement` mutation. */
 export type UpdateRetirementInput = {
   /**
@@ -3093,6 +3965,205 @@ export type UpdateTxPayloadTxEdgeArgs = {
   orderBy?: Maybe<Array<TxesOrderBy>>;
 };
 
+/** All input for the `updateVoteByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
+export type UpdateVoteByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Vote` being updated. */
+  votePatch: VotePatch;
+  chainNum: Scalars['Int'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+};
+
+/** All input for the `updateVoteByChainNumAndProposalIdAndVoter` mutation. */
+export type UpdateVoteByChainNumAndProposalIdAndVoterInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Vote` being updated. */
+  votePatch: VotePatch;
+  chainNum: Scalars['Int'];
+  proposalId: Scalars['BigInt'];
+  voter: Scalars['String'];
+};
+
+/** All input for the `updateVote` mutation. */
+export type UpdateVoteInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Vote` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `Vote` being updated. */
+  votePatch: VotePatch;
+};
+
+/** The output of our update `Vote` mutation. */
+export type UpdateVotePayload = {
+  __typename?: 'UpdateVotePayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Vote` that was updated by this mutation. */
+  vote?: Maybe<Vote>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `MsgEvent` that is related to this `Vote`. */
+  msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
+  /** An edge for our `Vote`. May be used by Relay 1. */
+  voteEdge?: Maybe<VotesEdge>;
+};
+
+
+/** The output of our update `Vote` mutation. */
+export type UpdateVotePayloadVoteEdgeArgs = {
+  orderBy?: Maybe<Array<VotesOrderBy>>;
+};
+
+export type Vote = Node & {
+  __typename?: 'Vote';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  type: Scalars['String'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  chainNum: Scalars['Int'];
+  timestamp?: Maybe<Scalars['Datetime']>;
+  txHash: Scalars['String'];
+  proposalId: Scalars['BigInt'];
+  voter: Scalars['String'];
+  option: Scalars['String'];
+  metadata: Scalars['String'];
+  submitTime: Scalars['Datetime'];
+  /** Reads a single `MsgEvent` that is related to this `Vote`. */
+  msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
+};
+
+/** A condition to be used against `Vote` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type VoteCondition = {
+  /** Checks for equality with the object’s `type` field. */
+  type?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `blockHeight` field. */
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `txIdx` field. */
+  txIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `msgIdx` field. */
+  msgIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `chainNum` field. */
+  chainNum?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `timestamp` field. */
+  timestamp?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `txHash` field. */
+  txHash?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `proposalId` field. */
+  proposalId?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `voter` field. */
+  voter?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `option` field. */
+  option?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `metadata` field. */
+  metadata?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `submitTime` field. */
+  submitTime?: Maybe<Scalars['Datetime']>;
+};
+
+/** An input for mutations affecting `Vote` */
+export type VoteInput = {
+  type: Scalars['String'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  chainNum: Scalars['Int'];
+  timestamp?: Maybe<Scalars['Datetime']>;
+  txHash: Scalars['String'];
+  proposalId: Scalars['BigInt'];
+  voter: Scalars['String'];
+  option: Scalars['String'];
+  metadata: Scalars['String'];
+  submitTime: Scalars['Datetime'];
+};
+
+/** Represents an update to a `Vote`. Fields that are set will be updated. */
+export type VotePatch = {
+  type?: Maybe<Scalars['String']>;
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  txIdx?: Maybe<Scalars['Int']>;
+  msgIdx?: Maybe<Scalars['Int']>;
+  chainNum?: Maybe<Scalars['Int']>;
+  timestamp?: Maybe<Scalars['Datetime']>;
+  txHash?: Maybe<Scalars['String']>;
+  proposalId?: Maybe<Scalars['BigInt']>;
+  voter?: Maybe<Scalars['String']>;
+  option?: Maybe<Scalars['String']>;
+  metadata?: Maybe<Scalars['String']>;
+  submitTime?: Maybe<Scalars['Datetime']>;
+};
+
+/** A connection to a list of `Vote` values. */
+export type VotesConnection = {
+  __typename?: 'VotesConnection';
+  /** A list of `Vote` objects. */
+  nodes: Array<Maybe<Vote>>;
+  /** A list of edges which contains the `Vote` and cursor to aid in pagination. */
+  edges: Array<VotesEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Vote` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Vote` edge in the connection. */
+export type VotesEdge = {
+  __typename?: 'VotesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Vote` at the end of the edge. */
+  node?: Maybe<Vote>;
+};
+
+/** Methods to use when ordering `Vote`. */
+export enum VotesOrderBy {
+  Natural = 'NATURAL',
+  TypeAsc = 'TYPE_ASC',
+  TypeDesc = 'TYPE_DESC',
+  BlockHeightAsc = 'BLOCK_HEIGHT_ASC',
+  BlockHeightDesc = 'BLOCK_HEIGHT_DESC',
+  TxIdxAsc = 'TX_IDX_ASC',
+  TxIdxDesc = 'TX_IDX_DESC',
+  MsgIdxAsc = 'MSG_IDX_ASC',
+  MsgIdxDesc = 'MSG_IDX_DESC',
+  ChainNumAsc = 'CHAIN_NUM_ASC',
+  ChainNumDesc = 'CHAIN_NUM_DESC',
+  TimestampAsc = 'TIMESTAMP_ASC',
+  TimestampDesc = 'TIMESTAMP_DESC',
+  TxHashAsc = 'TX_HASH_ASC',
+  TxHashDesc = 'TX_HASH_DESC',
+  ProposalIdAsc = 'PROPOSAL_ID_ASC',
+  ProposalIdDesc = 'PROPOSAL_ID_DESC',
+  VoterAsc = 'VOTER_ASC',
+  VoterDesc = 'VOTER_DESC',
+  OptionAsc = 'OPTION_ASC',
+  OptionDesc = 'OPTION_DESC',
+  MetadataAsc = 'METADATA_ASC',
+  MetadataDesc = 'METADATA_DESC',
+  SubmitTimeAsc = 'SUBMIT_TIME_ASC',
+  SubmitTimeDesc = 'SUBMIT_TIME_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
 export type IndexerAllEcocreditTxesQueryVariables = Exact<{
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -3192,9 +4263,22 @@ export type IndexerRetirementByNodeIdQuery = (
   )> }
 );
 
+export type IndexerRetirementByTxHashQueryVariables = Exact<{
+  txHash: Scalars['String'];
+}>;
+
+
+export type IndexerRetirementByTxHashQuery = (
+  { __typename?: 'Query' }
+  & { retirementByTxHash?: Maybe<(
+    { __typename?: 'Retirement' }
+    & RetirementFieldsFragment
+  )> }
+);
+
 export type RetirementFieldsFragment = (
   { __typename?: 'Retirement' }
-  & Pick<Retirement, 'nodeId' | 'owner' | 'amount' | 'reason' | 'batchDenom' | 'jurisdiction' | 'timestamp' | 'txHash'>
+  & Pick<Retirement, 'nodeId' | 'owner' | 'amount' | 'reason' | 'batchDenom' | 'batchDenoms' | 'jurisdiction' | 'timestamp' | 'txHash'>
 );
 
 export const RetirementFieldsFragmentDoc = gql`
@@ -3204,6 +4288,7 @@ export const RetirementFieldsFragmentDoc = gql`
   amount
   reason
   batchDenom
+  batchDenoms
   jurisdiction
   timestamp
   reason
@@ -3446,3 +4531,38 @@ export function useIndexerRetirementByNodeIdLazyQuery(baseOptions?: Apollo.LazyQ
 export type IndexerRetirementByNodeIdQueryHookResult = ReturnType<typeof useIndexerRetirementByNodeIdQuery>;
 export type IndexerRetirementByNodeIdLazyQueryHookResult = ReturnType<typeof useIndexerRetirementByNodeIdLazyQuery>;
 export type IndexerRetirementByNodeIdQueryResult = Apollo.QueryResult<IndexerRetirementByNodeIdQuery, IndexerRetirementByNodeIdQueryVariables>;
+export const IndexerRetirementByTxHashDocument = gql`
+    query IndexerRetirementByTxHash($txHash: String!) {
+  retirementByTxHash(txHash: $txHash) {
+    ...retirementFields
+  }
+}
+    ${RetirementFieldsFragmentDoc}`;
+
+/**
+ * __useIndexerRetirementByTxHashQuery__
+ *
+ * To run a query within a React component, call `useIndexerRetirementByTxHashQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIndexerRetirementByTxHashQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIndexerRetirementByTxHashQuery({
+ *   variables: {
+ *      txHash: // value for 'txHash'
+ *   },
+ * });
+ */
+export function useIndexerRetirementByTxHashQuery(baseOptions: Apollo.QueryHookOptions<IndexerRetirementByTxHashQuery, IndexerRetirementByTxHashQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IndexerRetirementByTxHashQuery, IndexerRetirementByTxHashQueryVariables>(IndexerRetirementByTxHashDocument, options);
+      }
+export function useIndexerRetirementByTxHashLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerRetirementByTxHashQuery, IndexerRetirementByTxHashQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IndexerRetirementByTxHashQuery, IndexerRetirementByTxHashQueryVariables>(IndexerRetirementByTxHashDocument, options);
+        }
+export type IndexerRetirementByTxHashQueryHookResult = ReturnType<typeof useIndexerRetirementByTxHashQuery>;
+export type IndexerRetirementByTxHashLazyQueryHookResult = ReturnType<typeof useIndexerRetirementByTxHashLazyQuery>;
+export type IndexerRetirementByTxHashQueryResult = Apollo.QueryResult<IndexerRetirementByTxHashQuery, IndexerRetirementByTxHashQueryVariables>;

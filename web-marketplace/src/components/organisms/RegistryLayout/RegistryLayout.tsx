@@ -19,6 +19,7 @@ import { RegistryLayoutProcessingModal } from './RegistryLayout.ProcessingModal'
 import { RetryFailedFunctions } from './RegistryLayout.RetryFailedFunctions';
 import { RegistryLayoutSwitchWalletModal } from './RegistryLayout.SwitchWalletModal';
 import { RegistryLayoutTerrasosFooter } from './RegistryLayout.TerrasosFooter';
+import { RegistryLayoutTxBuySuccessfulModal } from './RegistryLayout.TxBuySuccessfulModal';
 import { RegistryLayoutTxErrorModal } from './RegistryLayout.TxErrorModal';
 import { RegistryLayoutTxSuccessfulModal } from './RegistryLayout.TxSuccessfulModal';
 
@@ -45,6 +46,7 @@ const RegistryLayout: React.FC = () => {
       <RegistryLayoutSwitchWalletModal />
       <RegistryLayoutAddWalletModalSwitchWarning />
       <RegistryLayoutAccountSwitchModal />
+      <RegistryLayoutTxBuySuccessfulModal />
     </>
   );
 };

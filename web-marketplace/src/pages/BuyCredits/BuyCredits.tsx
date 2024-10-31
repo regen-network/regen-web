@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useLingui } from '@lingui/react';
 
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -17,7 +16,6 @@ import { getFormModel } from './BuyCredits.utils';
 import { useSummarizePayment } from './hooks/useSummarizePayment';
 
 export const BuyCredits = () => {
-  const { _ } = useLingui();
   const { projectId } = useParams();
   const navigate = useNavigate();
 
@@ -69,7 +67,6 @@ export const BuyCredits = () => {
   const [cardDetails, setCardDetails] = useState<CardDetails | undefined>();
 
   const formModel = getFormModel({
-    _,
     paymentOption,
     retiring,
     projectId: onChainProjectId ?? offChainProject?.id,

@@ -49,7 +49,15 @@ export function StepperSection({
         activeStep={activeStep}
         onStepClick={() => null}
       />
-      <OnBoardingSection title={title} formContainer classes={classes}>
+      <OnBoardingSection
+        title={title}
+        description={steps?.[activeStep].description}
+        formContainer
+        classes={{
+          description: 'pt-10 sm:pt-20 text-sm sm:text-lg',
+          ...classes,
+        }}
+      >
         <Box minHeight="50vh">{children}</Box>
       </OnBoardingSection>
     </>

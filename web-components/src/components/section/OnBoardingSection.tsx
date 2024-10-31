@@ -14,6 +14,7 @@ export interface OnBoardingSectionProps {
     title?: string;
     titleWrap?: string;
     formWrap?: string;
+    description?: string;
   };
 }
 
@@ -72,6 +73,7 @@ const OnBoardingSection: React.FC<
         root: cx(root, !!classes && classes.root),
         title: cx(titleStyles, !!classes && classes.title),
         titleWrap: cx(titleWrap, !!classes && classes.titleWrap),
+        description: classes?.description,
       }}
       title={title}
       titleAlign={'center'}

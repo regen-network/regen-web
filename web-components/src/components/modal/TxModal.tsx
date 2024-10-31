@@ -1,10 +1,12 @@
 import React, { ReactNode } from 'react';
 import { Box } from '@mui/material';
+import { Variant } from '@mui/material/styles/createTypography';
 import { SxProps } from '@mui/system';
 import ReactHtmlParser from 'html-react-parser';
 import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from '../../theme/muiTheme';
+import { cn } from '../../utils/styles/cn';
 import { truncate } from '../../utils/truncate';
 import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';
@@ -71,6 +73,15 @@ export interface TxModalProps extends RegenModalProps {
   seeMoreText: string;
   seeLessText: string;
   shareTitle?: string;
+  classes?: {
+    root?: string;
+    title?: string;
+    description?: string;
+    content?: string;
+  };
+  titleVariant?: Variant;
+  titleMobileVariant?: Variant;
+  header?: JSX.Element;
 }
 
 interface CardItemProps extends Item {
@@ -131,89 +142,103 @@ const TxModal: React.FC<React.PropsWithChildren<TxModalProps>> = ({
   seeMoreText,
   seeLessText,
   shareTitle,
+  classes,
+  titleVariant,
+  titleMobileVariant,
+  header,
 }) => {
   const { classes: styles } = useStyles();
   const hasCardItems = !!cardItems && cardItems.length > 0;
   return (
-    <Modal open={open} onClose={onClose} className={styles.root}>
+    <Modal
+      open={open}
+      onClose={onClose}
+      className={cn(styles.root, classes?.root)}
+    >
+      {header}
       {icon}
-      <Title
-        sx={{
-          lineHeight: {
-            xs: '150%',
-            sm: '140%',
-          },
-          px: {
-            sm: 6.5,
-          },
-        }}
-        align="center"
-        variant="h3"
-      >
-        {title}
-      </Title>
-      {description && (
-        <Body
-          size="lg"
+      <div className={cn('flex items-center flex-col', classes?.content)}>
+        <Title
           sx={{
-            pt: [2.5, 5],
-            pb: [4.75, 0],
-            mb: hasCardItems ? '' : { sm: 10, xs: 7.5 },
-            textAlign: 'center',
+            lineHeight: {
+              xs: '150%',
+              sm: '140%',
+            },
+            px: {
+              sm: 6.5,
+            },
           }}
+          align="center"
+          variant={titleVariant || 'h3'}
+          mobileVariant={titleMobileVariant}
+          className={classes?.title}
         >
-          {ReactHtmlParser(description)}
-        </Body>
-      )}
-      {hasCardItems && (
-        <Card
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            flexShrink: 0,
-            width: '100%',
-            px: { sm: 7.75, xs: 5.5 },
-            py: { sm: 9, xs: 7.5 },
-            mt: { sm: 9.5, xs: 2.75 },
-            mb: { sm: 10, xs: 7.5 },
-          }}
+          {title}
+        </Title>
+        {description && (
+          <Body
+            size="lg"
+            sx={{
+              pt: [2.5, 5],
+              pb: [4.75, 0],
+              mb: hasCardItems ? '' : { sm: 10, xs: 7.5 },
+              textAlign: 'center',
+            }}
+            className={classes?.description}
+          >
+            {ReactHtmlParser(description)}
+          </Body>
+        )}
+        {hasCardItems && (
+          <Card
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              flexShrink: 0,
+              width: '100%',
+              px: { sm: 7.75, xs: 5.5 },
+              py: { sm: 9, xs: 7.5 },
+              mt: { sm: 9.5, xs: 2.75 },
+              mb: { sm: 10, xs: 7.5 },
+            }}
+          >
+            <Title variant="h5">{cardTitle}</Title>
+            {cardItems?.map((item, i) => (
+              <CardItem
+                {...item}
+                linkComponent={linkComponent}
+                key={i}
+                seeMoreText={seeMoreText}
+                seeLessText={seeLessText}
+              />
+            ))}
+            {txHash && (
+              <CardItem
+                label={blockchainRecordText}
+                value={{ name: truncate(txHash), url: txHashUrl }}
+                linkComponent={linkComponent}
+                seeMoreText={seeMoreText}
+                seeLessText={seeLessText}
+              />
+            )}
+          </Card>
+        )}
+        <OutlinedButton
+          sx={{ fontSize: { xs: 12, sm: 18 } }}
+          onClick={onButtonClick}
+          LinkComponent={linkComponent}
+          href={buttonLink}
         >
-          <Title variant="h5">{cardTitle}</Title>
-          {cardItems?.map((item, i) => (
-            <CardItem
-              {...item}
-              linkComponent={linkComponent}
-              key={i}
-              seeMoreText={seeMoreText}
-              seeLessText={seeLessText}
-            />
-          ))}
-          {txHash && (
-            <CardItem
-              label={blockchainRecordText}
-              value={{ name: truncate(txHash), url: txHashUrl }}
-              linkComponent={linkComponent}
-              seeMoreText={seeMoreText}
-              seeLessText={seeLessText}
-            />
-          )}
-        </Card>
-      )}
-      <OutlinedButton
-        sx={{ fontSize: { xs: 12, sm: 18 } }}
-        onClick={onButtonClick}
-        LinkComponent={linkComponent}
-        href={buttonLink}
-      >
-        {buttonTitle}
-      </OutlinedButton>
-      {socialItems && shareTitle && (
-        <ShareSection
-          items={socialItems}
-          sx={{ mt: 10, maxWidth: 370 }}
-          title={shareTitle}
-        />
-      )}
+          {buttonTitle}
+        </OutlinedButton>
+        {socialItems && shareTitle && (
+          <ShareSection
+            items={socialItems}
+            sx={{ mt: 10, maxWidth: 370 }}
+            title={shareTitle}
+          />
+        )}
+      </div>
     </Modal>
   );
 };

@@ -59,7 +59,10 @@ import {
 } from './BuyCredits.atoms';
 import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
 import { BuyCreditsSchemaTypes, CardDetails } from './BuyCredits.types';
-import { getCreditsAvailableBannerText } from './BuyCredits.utils';
+import {
+  getCreditsAvailableBannerText,
+  getCryptoCurrencies,
+} from './BuyCredits.utils';
 import { usePurchase } from './hooks/usePurchase';
 
 type Props = {
@@ -115,7 +118,6 @@ export const BuyCreditsForm = ({
   const [paymentOptionCryptoClicked, setPaymentOptionCryptoClicked] = useAtom(
     paymentOptionCryptoClickedAtom,
   );
-  const [currencyCryptoAtom] = useAtom(buyCreditsCryptoCurrencyAtom);
   const cardDisabled = cardSellOrders.length === 0;
 
   const { marketplaceClient, ecocreditClient } = useLedger();
@@ -239,7 +241,11 @@ export const BuyCreditsForm = ({
     [allowedDenomsData?.allowedDenoms],
   );
 
-  const currency = data?.[CURRENCY] || currencyCryptoAtom;
+  const defaultCryptoCurrency = getCryptoCurrencies(cryptoSellOrders)[0];
+  const currency =
+    cardDisabled && !data?.[CURRENCY]
+      ? defaultCryptoCurrency
+      : data?.[CURRENCY];
   const creditsAmount = data?.[CREDITS_AMOUNT];
   const currencyAmount = data?.[CURRENCY_AMOUNT];
   const creditTypePrecision = creditTypeData?.creditType?.precision;
@@ -284,9 +290,7 @@ export const BuyCreditsForm = ({
     ],
   );
 
-  const { isLoading, userBalance } = useFetchUserBalance(
-    currency?.askDenom || currencyCryptoAtom.askDenom,
-  );
+  const { isLoading, userBalance } = useFetchUserBalance(currency?.askDenom);
 
   return (
     <div

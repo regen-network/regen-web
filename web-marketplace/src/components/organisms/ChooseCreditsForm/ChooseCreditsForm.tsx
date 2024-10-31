@@ -43,6 +43,7 @@ import {
 } from 'pages/BuyCredits/BuyCredits.types';
 import {
   getCreditsAvailableBannerText,
+  getCryptoCurrencies,
   updateMultiStepCurrencyAndPaymentOption,
 } from 'pages/BuyCredits/BuyCredits.utils';
 import {
@@ -120,16 +121,7 @@ export const ChooseCreditsForm = React.memo(
     const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
 
     const cryptoCurrencies = useMemo(
-      () =>
-        cryptoSellOrders
-          .map(order => ({
-            askDenom: order.askDenom,
-            askBaseDenom: order.askBaseDenom,
-          }))
-          .filter(
-            (obj1, i, arr) =>
-              arr.findIndex(obj2 => obj2.askDenom === obj1.askDenom) === i,
-          ),
+      () => getCryptoCurrencies(cryptoSellOrders),
       [cryptoSellOrders],
     );
 

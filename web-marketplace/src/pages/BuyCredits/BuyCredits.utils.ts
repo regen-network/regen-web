@@ -3,6 +3,7 @@ import { msg, plural } from '@lingui/macro';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { HandleSaveType } from 'components/templates/MultiStepTemplate/MultiStep.context';
 
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
@@ -75,4 +76,16 @@ export function updateMultiStepCurrencyAndPaymentOption(
     },
     activeStep,
   );
+}
+
+export function getCryptoCurrencies(cryptoSellOrders: UISellOrderInfo[]) {
+  return cryptoSellOrders
+    .map(order => ({
+      askDenom: order.askDenom,
+      askBaseDenom: order.askBaseDenom,
+    }))
+    .filter(
+      (obj1, i, arr) =>
+        arr.findIndex(obj2 => obj2.askDenom === obj1.askDenom) === i,
+    );
 }

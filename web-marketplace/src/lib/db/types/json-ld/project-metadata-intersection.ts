@@ -2,6 +2,7 @@ import {
   AnchoredProjectMetadataBaseLD,
   CFCProjectMetadataLD,
   ProjectPageMetadataLD,
+  TerrasosProjectMetadataLD,
   ToucanProjectMetadataLD,
   VCSProjectMetadataLD,
 } from '.';

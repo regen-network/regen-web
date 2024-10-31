@@ -54,15 +54,14 @@ export interface ProjectPageMetadataLD {
   }[];
   'schema:creditText'?: string;
   'schema:description'?: string;
-  'regen:marketType'?: MarketType[];
+  'regen:story'?: string;
+  'regen:storyTitle'?: string;
+  'regen:storyMedia'?: ProjectStoryMedia;
 
   // Legacy project fields
   'schema:image'?: string;
   'regen:glanceText'?: string[];
   'regen:landStory'?: string;
-  'regen:story'?: string;
-  'regen:storyTitle'?: string;
-  'regen:storyMedia'?: ProjectStoryMedia;
   'regen:projectQuote'?: ProjectQuote;
   'regen:boundaries'?: string;
   'regen:landManagementActions'?: NameImageDescription[];

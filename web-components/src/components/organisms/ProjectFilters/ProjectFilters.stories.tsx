@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import { Meta, StoryFn } from '@storybook/react';
 
 import RegionIndicatorIcon from '../../icons/terrasos/ColombiaRegionIcon';
-import ComplianceBadge from '../../icons/terrasos/ComplianceBadge';
+import HectaresBadge from '../../icons/terrasos/HectaresBadge';
 import SvgWithSelectedColor from '../../icons/utils/SvgWithSelectedColor';
 import ProjectFilters, { Filter, FilterOptions } from './ProjectFilters';
 
@@ -17,8 +17,6 @@ const initialActiveFilters = [
   'TROPICAL_VERY_HUMID_FOREST',
   'VOLUNTARY',
 ];
-
-
 
 const Template: StoryFn = args => {
   const [activeFilters, setActiveFilters] =
@@ -160,7 +158,7 @@ const marketCheckboxes = [
   {
     name: 'Compliance',
     id: 'COMPLIANCE',
-    icon: <ComplianceBadge />,
+    icon: <HectaresBadge />,
   },
 ];
 

@@ -1,5 +1,6 @@
 import { useLingui } from '@lingui/react';
 
+import HectaresBadge from 'web-components/src/components/icons/terrasos/HectaresBadge';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
@@ -9,8 +10,7 @@ import {
   VOLUNTARY_MARKET_TOOLTIP,
 } from './AllProjects.constants';
 
-import hectaresLogo from 'assets/pngs/logos/hectares.png';
-import tebuLogo from 'assets/svgs/logos/tebu.png';
+import tebuLogo from 'assets/svgs/logos/tebu.svg';
 
 type Props = {
   project: NormalizeProject;
@@ -29,29 +29,31 @@ export const TerrasosCredits = ({
 
   return (
     <>
-      {!isVoluntaryProject && (
+      {isVoluntaryProject && (
         <span className="flex items-center">
-          {project.purchaseInfo?.sellInfo?.creditsAvailable ??
-            project.projectPrefinancing?.estimatedIssuance ??
-            '0'}
+          <span className="leading-[145%]">
+            {project.purchaseInfo?.sellInfo?.creditsAvailable ??
+              project.projectPrefinancing?.estimatedIssuance ??
+              '0'}
+          </span>
           <InfoTooltip
             arrow
             placement="top"
             title={_(VOLUNTARY_MARKET_TOOLTIP)}
           >
-            <img src={tebuLogo} alt="tebu" className="ml-3" />
+            <img src={tebuLogo} alt="tebu" className="ml-3 w-[25px]" />
           </InfoTooltip>
         </span>
       )}
       {!isVoluntaryProject && isComplianceProject && (
         <span className="flex items-center">
-          {complianceCredits}
+          <span className="leading-[145%]">{complianceCredits}</span>
           <InfoTooltip
             arrow
             placement="top"
             title={_(COMPLIANCE_MARKET_TOOLTIP)}
           >
-            <img src={hectaresLogo} alt="hectares" className="ml-[3px]" />
+            <HectaresBadge className="ml-[3px]" />
           </InfoTooltip>
         </span>
       )}

@@ -285,7 +285,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                     project={project}
                     isVoluntaryProject={isVoluntaryProject}
                     isComplianceProject={isComplianceProject}
-                    complianceCredits={complianceCredits}
+                    complianceCredits={complianceCredits ?? 2}
                   />
                 ) : null
               }

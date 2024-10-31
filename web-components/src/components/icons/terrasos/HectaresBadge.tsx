@@ -1,6 +1,12 @@
 import { Box } from '@mui/material';
 
-export default function ComplianceBadge() {
+import { cn } from '../../../utils/styles/cn';
+
+type Props = {
+  className?: string;
+};
+
+export default function HectaresBadge({ className }: Props) {
   return (
     <Box
       display="flex"
@@ -11,7 +17,10 @@ export default function ComplianceBadge() {
       padding="3px"
       borderRadius="50%"
       fontSize="12px"
-      className="rounded-full ml-2 border border-dashed border-sc-surface-stroke bg-sc-icon-standard-background"
+      className={cn(
+        'rounded-full ml-2 border border-dashed border-sc-surface-stroke bg-sc-icon-standard-background',
+        className,
+      )}
       fontWeight={700}
       // eslint-disable-next-line lingui/no-unlocalized-strings
     >

@@ -28,7 +28,11 @@ import { UseStateSetter } from 'web-components/src/types/react/useState';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 import { spendingCapAtom } from 'pages/BuyCredits/BuyCredits.atoms';
-import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import {
+  INSUFFICIENT_BALANCE,
+  NEXT,
+  PAYMENT_OPTIONS,
+} from 'pages/BuyCredits/BuyCredits.constants';
 import {
   BuyCreditsSchemaTypes,
   CardDetails,
@@ -48,6 +52,7 @@ import { AllowedDenoms } from 'components/molecules/DenomLabel/DenomLabel.utils'
 import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSummaryCard';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
+import { NOT_ENOUGH_BALANCE } from './ChooseCreditsForm.constants';
 import { CryptoOptions } from './ChooseCreditsForm.CryptoOptions';
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
 import {
@@ -352,7 +357,11 @@ export const ChooseCreditsForm = React.memo(
             <div className="float-right pt-40">
               <PrevNextButtons
                 saveDisabled={Object.entries(errors).length > 0 || isSubmitting}
-                saveText={_(NEXT)}
+                saveText={
+                  errors[CURRENCY_AMOUNT]?.message === _(NOT_ENOUGH_BALANCE)
+                    ? _(INSUFFICIENT_BALANCE)
+                    : _(NEXT)
+                }
                 onPrev={onPrev}
               />
             </div>

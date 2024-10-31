@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
@@ -12,11 +11,12 @@ import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import useMoreProjects from './hooks/useMoreProjects';
 
-export function MoreProjects(): JSX.Element {
+type Props = { skippedProjectId: string };
+
+export function MoreProjects({ skippedProjectId }: Props): JSX.Element {
   const { _ } = useLingui();
-  const { projectId } = useParams();
   const { projectsWithOrderData, loading } = useMoreProjects(
-    projectId as string,
+    skippedProjectId as string,
   );
 
   const { isKeplrMobileWeb } = useWallet();

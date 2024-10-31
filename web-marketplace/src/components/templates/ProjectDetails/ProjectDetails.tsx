@@ -303,9 +303,10 @@ function ProjectDetails(): JSX.Element {
     ],
   );
 
+  const onChainOrOffChainProjectId = onChainProjectId || offChainProject?.id;
   const openCreatePostModal = useCallback(() => {
-    setIsCreatePostModalOpen(onChainProjectId || offChainProject?.id);
-  }, [offChainProject?.id, onChainProjectId]);
+    setIsCreatePostModalOpen(onChainOrOffChainProjectId);
+  }, [onChainOrOffChainProjectId]);
 
   if (
     !loadingDb &&
@@ -535,7 +536,9 @@ function ProjectDetails(): JSX.Element {
 
       {managementActions && <ManagementActions actions={managementActions} />}
 
-      {IS_REGEN && <MoreProjects />}
+      {onChainOrOffChainProjectId && (
+        <MoreProjects skippedProjectId={onChainOrOffChainProjectId} />
+      )}
 
       {gettingStartedResourcesSection && IS_REGEN && (
         <div
@@ -561,7 +564,7 @@ function ProjectDetails(): JSX.Element {
             setIsCreatePostModalOpen(false);
           }}
           projectLocation={projectLocation}
-          projectId={onChainProjectId || offChainProject?.id}
+          projectId={onChainOrOffChainProjectId}
           offChainProjectId={offChainProject?.id}
           projectName={projectMetadata?.['schema:name']}
           projectSlug={slug}

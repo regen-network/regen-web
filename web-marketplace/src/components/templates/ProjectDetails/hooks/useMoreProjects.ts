@@ -1,3 +1,5 @@
+import { IS_REGEN } from 'lib/env';
+
 import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 
 const PROJECTS_LIMIT = 3;
@@ -7,7 +9,8 @@ export default function useMoreProjects(projectId: string) {
     limit: PROJECTS_LIMIT,
     random: true,
     skippedProjectId: projectId,
-    enableOffchainProjectsQuery: false,
+    useOffChainProjects: IS_REGEN ? false : true,
+    enableOffchainProjectsQuery: IS_REGEN ? false : true,
   });
 
   return { projectsWithOrderData, loading };

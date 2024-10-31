@@ -77,7 +77,6 @@ export function useProjectsWithOrders({
   const { wallet } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   /* Main Queries */
-
   const { data: projectData, isFetching: isLoadingProject } = useQuery(
     getProjectQuery({
       enabled: !!projectId && !!ecocreditClient,
@@ -146,7 +145,9 @@ export function useProjectsWithOrders({
     });
 
   const onlyOffChainProjects = allOffChainProjects.filter(
-    project => project.offChain,
+    project =>
+      project.offChain &&
+      (!skippedProjectId || skippedProjectId !== project.id),
   );
 
   /* Normalization/Filtering/Sorting */

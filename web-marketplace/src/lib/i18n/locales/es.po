@@ -538,7 +538,7 @@ msgstr "Disponible"
 msgid "Avg Price"
 msgstr "Precio promedio"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:75
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:76
 msgid "avg price per credit"
 msgstr "precio promedio por crédito"
 
@@ -1313,7 +1313,7 @@ msgstr "¡Se han emitido los créditos!"
 msgid "Credits Input"
 msgstr "Entrada de créditos"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:64
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:69
 msgid "Credits issued"
 msgstr "Créditos emitidos"
 
@@ -1326,12 +1326,12 @@ msgid "Credits purchased with crypto can be purchased in either a retired or tra
 msgstr "Los créditos comprados con criptomonedas se pueden comprar en estado retirado o negociable."
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:94
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:103
 msgid "Credits Retired"
 msgstr "Créditos Retirados"
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:76
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:83
 msgid "Credits Tradable"
 msgstr "Créditos negociables"
 
@@ -2019,6 +2019,7 @@ msgstr "Aprende más"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:52
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:10
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:94
 msgid "Learn more"
 msgstr "Más información"
 
@@ -2461,7 +2462,7 @@ msgstr "operador"
 msgid "or, log in with email / social"
 msgstr "o inicie sesión con correo electrónico / redes sociales"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:66
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:67
 msgid "Order Summary"
 msgstr "Resumen del pedido"
 
@@ -2773,7 +2774,7 @@ msgstr "programa"
 msgid "Program Guide"
 msgstr "Guía del programa"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:69
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:70
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:124
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105

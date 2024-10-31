@@ -25,9 +25,11 @@ export default function TebuCard({
   headerTooltip,
 }: TebuCardProps): JSX.Element {
   return (
-    <Card className={cn('text-sc-text-header w-[310px]', className)}>
-      <Box className="flex items-center gap-[10px] pl-[20px] pr-[5px] py-[15px] text-[12px] bg-sc-card-standard-header-background">
-        <Body className="font-montserrat tracking-[1px] text-[12px] font-montserrat uppercase font-extrabold text-sc-text-sub-header">
+    <Card
+      className={cn('text-sc-text-header w-[288px] sm:w-[310px]', className)}
+    >
+      <Box className="flex items-center gap-[10px] pl-[20px] pr-[3px] sm:pr-[5px] py-[15px] text-[12px] bg-sc-card-standard-header-background">
+        <Body className="font-montserrat tracking-[1px] text-[11px] sm:text-[12px] font-montserrat uppercase font-extrabold text-sc-text-sub-header">
           {header}
         </Body>
         {headerTooltip && (

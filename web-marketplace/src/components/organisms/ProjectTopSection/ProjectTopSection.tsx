@@ -56,6 +56,8 @@ import {
   parseProjectPageMetadata,
 } from './ProjectTopSection.utils';
 
+import { IS_TERRASOS } from 'lib/env';
+
 function ProjectTopSection({
   offChainProject,
   onChainProject,
@@ -203,6 +205,7 @@ function ProjectTopSection({
   const isTerrasosProjectPage =
     projectPageMetadata?.['@type'] === 'TerrasosProjectInfo';
 
+  console.log('ProjectTopSection.tsx', projectPageMetadata?.['regen:ecologicalConnectivityIndex']);
   return (
     <Section classes={{ root: classes.section }}>
       <Grid
@@ -275,7 +278,7 @@ function ProjectTopSection({
             program={program}
           />
           <Box>
-            {onChainProjectId && batchData?.totals && (
+            {!IS_TERRASOS && onChainProjectId && batchData?.totals && (
               <ProjectBatchTotals
                 projectWithOrderData={projectWithOrderData}
                 soldOutProjectsIds={soldOutProjectsIds}
@@ -286,12 +289,11 @@ function ProjectTopSection({
                 }}
               />
             )}
-            {/* TODO: add Tebu credits table */}
-            {/* {isTerrasosProjectPage && ( */}
           </Box>
-          {true && projectPageMetadata && (
+          {onChainProjectId && isTerrasosProjectPage && projectPageMetadata && (
             <TerrasosCreditsInfo
               _={_}
+              isOnChain={!!onChainProjectId}
               projectPageMetadata={projectPageMetadata}
               projectBatchTotals={
                 onChainProjectId && batchData?.totals ? (
@@ -301,7 +303,7 @@ function ProjectTopSection({
                     totals={batchData.totals}
                     sx={{
                       mt: { xs: 10, sm: 12, md: 16 },
-                      mb: quote ? { xs: 10, sm: 12, md: 25 } : {},
+                      mb: { xs: 10, sm: 12, md: 25 },
                     }}
                   />
                 ) : undefined

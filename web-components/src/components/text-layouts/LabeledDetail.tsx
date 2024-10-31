@@ -16,6 +16,7 @@ export const LabeledDetail: React.FC<
     sxLabel?: SxProps<Theme>;
     sxChildren?: SxProps<Theme>;
     labelSize?: LabelSize;
+    tooltipClassName?: string;
   }>
 > = ({
   label,
@@ -25,6 +26,7 @@ export const LabeledDetail: React.FC<
   sx = [],
   sxLabel = [],
   sxChildren = [],
+  tooltipClassName,
 }) => (
   <Flex col sx={{ gap: 2, ...sx }}>
     <Flex alignItems="center">
@@ -42,7 +44,12 @@ export const LabeledDetail: React.FC<
         {label}
       </Label>
       {tooltipLabel && (
-        <InfoTooltipWithIcon title={tooltipLabel} sx={{ ml: 2 }} outlined />
+        <InfoTooltipWithIcon
+          title={tooltipLabel}
+          sx={{ ml: 2 }}
+          outlined
+          className={tooltipClassName}
+        />
       )}
     </Flex>
     <Flex alignItems="center" sx={sxChildren}>

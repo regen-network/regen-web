@@ -47,6 +47,8 @@ export function ProjectBatchTotals({
     project: projectWithOrderData,
     soldOutProjectsIds,
   });
+
+  const tooltipClassName = IS_TERRASOS ? 'w-[17px] h-[17px]' : '';
   return (
     <Grid
       container
@@ -72,6 +74,7 @@ export function ProjectBatchTotals({
             maximumFractionDigits: MAX_FRACTION_DIGITS_PROJECT_CREDITS,
           }}
           icon={<CreditsIssuedIcon />}
+          tooltipClassName={tooltipClassName}
         />
       </GridItem>
       <GridItem>
@@ -92,6 +95,7 @@ export function ProjectBatchTotals({
             maximumFractionDigits: MAX_FRACTION_DIGITS_PROJECT_CREDITS,
           }}
           icon={IS_TERRASOS ? <CreditsTradeableAltIcon /> : <CreditsTradeableIcon />}
+          tooltipClassName={tooltipClassName}
         />
       </GridItem>
       <GridItem>
@@ -104,6 +108,7 @@ export function ProjectBatchTotals({
             maximumFractionDigits: MAX_FRACTION_DIGITS_PROJECT_CREDITS,
           }}
           icon={<CreditsRetiredIcon />}
+          tooltipClassName={tooltipClassName}
         />
       </GridItem>
     </Grid>

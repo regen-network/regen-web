@@ -29,8 +29,6 @@ const TebuInfo: React.FC<TebuInfoProps> = ({
   projectPageMetadata,
   _,
 }) => {
-  console.log({ projectPageMetadata });
-
   const conservationStatus = projectPageMetadata?.['regen:conservationStatus'];
   const threatCard = conservationStatus && getThreatCard(_, conservationStatus);
 
@@ -56,14 +54,17 @@ const TebuInfo: React.FC<TebuInfoProps> = ({
     restorationArea &&
     getAreaActionsCard(_, preservationArea, restorationArea);
 
+  // TODO: update data standard to use levels instead of float values
   const socialCulturalIndex =
     projectPageMetadata?.['regen:socialCulturalIndex'];
   const socialCulturalCard =
-    true && getSocialCulturalCard(_, SocialCulturalValueType.High);
+    false && getSocialCulturalCard(_, SocialCulturalValueType.High);
   return (
     <Box
       sx={{
-        p: 8,
+        px: '30px',
+        pb: '30px',
+        pt: '10px',
         backgroundColor: 'primary.main',
         border: '1px solid',
         borderColor: 'info.light',
@@ -72,19 +73,23 @@ const TebuInfo: React.FC<TebuInfoProps> = ({
     >
       {!!projectBatchTotals && projectBatchTotals}
       <div>
-        <div className="font-montserrat text-[32px] font-bold mt-[50px]">
+        <div className="font-montserrat text-[32px] font-bold gap-[10px] flex items-center">
           {_(msg`Tebu factors`)}
-          {/* TODO: Tebu icon */}
+          <img
+            src="/svg/tebu-badge.svg"
+            alt={_(msg`Tebu badge`)}
+            className="h-[50px] w-[50px]"
+          />
         </div>
-        <div>
+        <div className="my-[10px]">
           {_(
             msg`These factors are used to calculate the credits issued for this project.`,
           )}
         </div>
         <ButtonBase
-          // TODO: add href
-          href="#"
-          className="cursor-pointer font-montserrat text-sc-text-link font-extrabold text-[14px] tracking-[1px] uppercase"
+          // TODO: how to link based on locale?
+          href="//www.terrasos.co/en/what-is-tebu/"
+          className="cursor-pointer font-montserrat text-sc-text-link font-extrabold text-[14px] tracking-[1px] uppercase mb-[30px]"
         >
           {_(msg`Learn more`)}
           <SmallArrowIcon sx={{ width: '7px', ml: '4px' }} />

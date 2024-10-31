@@ -29,22 +29,28 @@ export const LanguageSwitcher = ({ className }: Props) => {
   };
 
   return (
-    <div className={cn('text-sc-text-header w-[90px]', className)}>
+    <div className={cn('text-sc-text-header w-fit md:w-[90px]', className)}>
       <ButtonBase
-        className="font-bold text-xs flex items-center"
+        className="flex items-center md:text-[15px]"
         id="language-switcher-button"
         aria-controls={open ? 'language-switcher-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+        sx={{
+          fontFamily: 'Montserrat',
+          fontWeight: '500',
+        }}
       >
         <img
           src={flagUrl}
           alt={isEnglish ? 'English' : 'Español'}
-          className="mr-[6px]"
+          className="mt-5 mr-[6px] w-[25px] md:mt-0 md:w-fit"
         />
-        {isEnglish ? 'English' : 'Español'}
-        <BreadcrumbIcon className="w-[6px] h-[6px] ml-10" />
+        <span className="hidden md:flex md:items-center">
+          {isEnglish ? 'English' : 'Español'}
+          <BreadcrumbIcon className="w-[6px] h-[6px] ml-10" />
+        </span>
       </ButtonBase>
       <Menu
         id="language-switcher-menu"
@@ -67,7 +73,7 @@ export const LanguageSwitcher = ({ className }: Props) => {
               handleClose();
               setSelectedLanguage('en');
             }}
-            className="flex items-center py-2"
+            className="flex items-center py-2 md:font-medium md:text-[15px]"
           >
             <img src={enFlag} alt="English" className="mr-[6px]" /> English
             (Inglés)
@@ -79,7 +85,7 @@ export const LanguageSwitcher = ({ className }: Props) => {
               handleClose();
               setSelectedLanguage('es');
             }}
-            className="flex items-center py-2"
+            className="flex items-center py-2 md:font-medium md:text-[15px]"
           >
             <img src={esFlag} alt="Español" className="mr-[6px]" /> Español
             (Spanish)

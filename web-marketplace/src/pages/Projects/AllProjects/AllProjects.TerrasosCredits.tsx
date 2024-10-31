@@ -10,7 +10,7 @@ import {
 } from './AllProjects.constants';
 
 import hectaresLogo from 'assets/pngs/logos/hectares.png';
-import tebuLogo from 'assets/pngs/logos/tebu.png';
+import tebuLogo from 'assets/svgs/logos/tebu.png';
 
 type Props = {
   project: NormalizeProject;

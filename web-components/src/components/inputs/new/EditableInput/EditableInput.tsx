@@ -9,6 +9,8 @@ import {
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 
+import { sanitizeValue } from './EditableInput.utils';
+
 interface EditableInputProps {
   value: number;
   maxValue: number;
@@ -44,7 +46,6 @@ export const EditableInput = ({
   isEditable,
 }: EditableInputProps) => {
   const [editable, setEditable] = useState(false);
-  const [amount, setAmount] = useState(value);
   const [initialValue, setInitialValue] = useState(value);
   const [currentValue, setCurrentValue] = useState(value);
   const wrapperRef = useRef(null);
@@ -75,10 +76,6 @@ export const EditableInput = ({
     };
   }, [editable, initialValue]);
 
-  useEffect(() => {
-    if (!editable && currentValue !== amount) setAmount(currentValue);
-  }, [amount, currentValue, editable]);
-
   const toggleEditable = () => {
     setEditable(!editable);
   };
@@ -86,13 +83,11 @@ export const EditableInput = ({
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
-    const newValue = +value;
-
-    if (isNaN(newValue)) return;
-    if (newValue > maxValue && onInvalidValue) {
+    const sanitizedValue = sanitizeValue(value);
+    if (sanitizedValue > maxValue && onInvalidValue) {
       onInvalidValue();
     }
-    setAmount(Math.min(newValue, maxValue));
+    setCurrentValue(Math.min(sanitizedValue, maxValue));
   };
 
   const handleOnCancel = () => {
@@ -102,14 +97,14 @@ export const EditableInput = ({
 
   const handleOnUpdate = () => {
     if (!amountValid || error?.hasError) return;
-    onChange(+amount);
+    onChange(currentValue);
     toggleEditable();
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      if (isNaN(+e.currentTarget.value)) return;
-      setAmount(+e.currentTarget.value);
+      const sanitizedValue = sanitizeValue(e.currentTarget.value);
+      setCurrentValue(sanitizedValue);
       handleOnUpdate();
     }
     if (e.key === 'Escape') {
@@ -118,12 +113,12 @@ export const EditableInput = ({
   };
 
   useEffect(() => {
-    onKeyDown && onKeyDown(amount);
-  }, [amount, onKeyDown]);
+    onKeyDown && onKeyDown(currentValue);
+  }, [currentValue, onKeyDown]);
 
   const amountValid = useMemo(
-    () => amount <= maxValue && amount > 0,
-    [amount, maxValue],
+    () => currentValue <= maxValue && currentValue > 0,
+    [currentValue, maxValue],
   );
 
   return (
@@ -135,12 +130,9 @@ export const EditableInput = ({
             className={`relative flex [@media(max-width:340px)]:flex-col [@media(max-width:340px)]:mb-20 sm:flex-row items-center [@media(max-width:340px)]:items-start h-[47px] ${className}`}
           >
             <input
-              type="number"
-              step="0.000001"
-              min={0}
-              max={maxValue}
+              type="text"
               className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-50 py-20 px-15 w-[100px] border border-solid border-grey-300 text-base font-normal font-sans focus:outline-none"
-              value={amount}
+              value={currentValue}
               onChange={handleOnChange}
               onKeyDown={handleKeyDown}
               aria-label={inputAriaLabel}
@@ -176,7 +168,7 @@ export const EditableInput = ({
         </>
       ) : (
         <div className="flex justify-between h-[47px] items-center">
-          <span>{amount}</span>
+          <span>{currentValue}</span>
           {isEditable && (
             <EditButtonIcon
               onClick={toggleEditable}

@@ -205,7 +205,6 @@ function ProjectTopSection({
   const isTerrasosProjectPage =
     projectPageMetadata?.['@type'] === 'TerrasosProjectInfo';
 
-  console.log('ProjectTopSection.tsx', projectPageMetadata?.['regen:ecologicalConnectivityIndex']);
   return (
     <Section classes={{ root: classes.section }}>
       <Grid

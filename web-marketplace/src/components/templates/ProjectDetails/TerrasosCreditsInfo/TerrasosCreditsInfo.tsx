@@ -55,6 +55,7 @@ export default function TerrasosCreditsInfo({
         sx={{
           px: { xs: 0, sm: 0 },
           pt: { xs: '50px', sm: '50px' },
+          pb: { xs: 0, sm: 0 },
         }}
         tabs={tabs}
       />

@@ -1,11 +1,13 @@
 import React from 'react';
 import { msg } from '@lingui/macro';
 import { Box, ButtonBase } from '@mui/material';
+import { useAtom } from 'jotai';
 
 import TebuCard from 'web-components/src/components/cards/TebuCard';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { SocialCulturalValueType } from 'web-components/src/components/icons/terrasos/SocialCulturalValueIcon';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
@@ -29,6 +31,9 @@ const TebuInfo: React.FC<TebuInfoProps> = ({
   projectPageMetadata,
   _,
 }) => {
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
+  const learnMoreLink = `//terrasos.co/${selectedLanguage}/what-is-tebu`;
+
   const conservationStatus = projectPageMetadata?.['regen:conservationStatus'];
   const threatCard = conservationStatus && getThreatCard(_, conservationStatus);
 
@@ -87,16 +92,15 @@ const TebuInfo: React.FC<TebuInfoProps> = ({
           )}
         </div>
         <ButtonBase
-          // TODO: how to link based on locale?
-          href="//www.terrasos.co/en/what-is-tebu/"
+          href={learnMoreLink}
+          target="_blank"
           className="cursor-pointer font-montserrat text-sc-text-link font-extrabold text-[14px] tracking-[1px] uppercase mb-[30px]"
         >
           {_(msg`Learn more`)}
           <SmallArrowIcon sx={{ width: '7px', ml: '4px' }} />
         </ButtonBase>
 
-        {/* TODO: tebu factors */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[20px] mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[20px] mt-4 justify-items-center sm:justify-items-start">
           {threatCard}
           {connectivityCard}
           {durationCard}

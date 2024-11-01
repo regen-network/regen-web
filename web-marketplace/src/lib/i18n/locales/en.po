@@ -105,6 +105,10 @@ msgstr ""
 msgid "{truncatedQuantity} credit(s) available"
 msgstr ""
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:115
+msgid "{years} year project duration"
+msgstr ""
+
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:88
 #: src/components/organisms/Order/Order.Summary.tsx:85
 msgid "# credits"
@@ -235,6 +239,14 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:99
 msgid "A project owner manages the area of the conservation project and the associated biodiversity units."
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:28
+msgid "A taxon is extinct in the wild when it is known only to survive in cultivation, in captivity or as a naturalized population (or populations) well outside the past range."
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:18
+msgid "A taxon is extinct when there is no reasonable doubt that the last individual has died."
 msgstr ""
 
 #: src/components/organisms/RolesForm/RolesForm.tsx:238
@@ -468,6 +480,14 @@ msgstr ""
 msgid "Amount Tradable"
 msgstr ""
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:60
+msgid "An ecosystem considered to be facing a <0>high risk of collapse</0>."
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:93
+msgid "An ecosystem has insufficient data when there is <0>no adequate information to make a direct or indirect assessment</0> of its risk of collapse."
+msgstr ""
+
 #: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:78
 msgid "Anchoring in progress"
 msgstr ""
@@ -503,6 +523,10 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:86
 msgid "Are you sure you want to discard your changes?"
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:145
+msgid "Area Actions"
 msgstr ""
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:57
@@ -541,7 +565,7 @@ msgstr ""
 msgid "Avg Price"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:76
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:75
 msgid "avg price per credit"
 msgstr ""
 
@@ -1584,6 +1608,22 @@ msgstr ""
 msgid "ecosystem type"
 msgstr ""
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:39
+msgid "Ecosystem with declining areas, severe degradation, and disrupted processes facing an <0>extremely high collapse risk</0>."
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:106
+msgid "Ecosystems that have not yet been assessed. For these cases, the Protocol proposes an alternative that allows describing the conditions of the territory."
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:83
+msgid "Ecosystems that unequivocally do not meet any of the criteria for the threat categories."
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:49
+msgid "Ecosystems where information about the levels of environmental degradation and disruption of biotic processes indicate that there is a<0>very high risk of collapse</0>."
+msgstr ""
+
 #: src/pages/ProjectFinished/ProjectFinished.tsx:125
 msgid "edit"
 msgstr ""
@@ -1859,6 +1899,10 @@ msgstr ""
 msgid "High density grazing"
 msgstr ""
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:121
+msgid "Highly significant"
+msgstr ""
+
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:14
 msgid "Home"
 msgstr ""
@@ -2061,7 +2105,7 @@ msgstr ""
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:52
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:10
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:94
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:99
 msgid "Learn more"
 msgstr ""
 
@@ -2279,6 +2323,10 @@ msgstr ""
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:4
 msgid "Minimum of 1 recipient"
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:135
+msgid "Moderate"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:87
@@ -2504,7 +2552,7 @@ msgstr ""
 msgid "or, log in with email / social"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:67
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:66
 msgid "Order Summary"
 msgstr ""
 
@@ -2824,7 +2872,7 @@ msgstr ""
 msgid "Program Guide"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:70
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:69
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:124
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105
@@ -2853,7 +2901,7 @@ msgstr ""
 msgid "PROJECT"
 msgstr ""
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:162
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:152
 msgid "Project {onChainProjectId}"
 msgstr ""
 
@@ -3001,6 +3049,10 @@ msgstr ""
 #: src/pages/Dashboard/Dashboard.constants.tsx:30
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:81
 msgid "Projects"
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:147
+msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr ""
 
 #: src/pages/Projects/Projects.tsx:132
@@ -3485,6 +3537,10 @@ msgstr ""
 msgid "Signed by"
 msgstr ""
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:128
+msgid "Significant"
+msgstr ""
+
 #: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:91
 msgid "Signing failed"
 msgstr ""
@@ -3670,7 +3726,7 @@ msgstr ""
 msgid "Take from basket"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:80
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:85
 msgid "Tebu badge"
 msgstr ""
 
@@ -3682,7 +3738,7 @@ msgstr ""
 msgid "Tebu Credits"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:77
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:82
 msgid "Tebu factors"
 msgstr ""
 
@@ -3826,7 +3882,7 @@ msgstr ""
 msgid "These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:86
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:91
 msgid "These factors are used to calculate the credits issued for this project."
 msgstr ""
 

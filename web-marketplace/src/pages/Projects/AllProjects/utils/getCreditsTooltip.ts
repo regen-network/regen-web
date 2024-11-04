@@ -1,3 +1,4 @@
+import { IS_REGEN } from 'lib/env';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
@@ -16,7 +17,7 @@ export const getCreditsTooltip = ({
 }: Params): string | undefined => {
   if (isSoldOut) return _(SOLD_OUT_TOOLTIP);
   if (
-    !project?.complianceCredits &&
+    IS_REGEN &&
     !project?.purchaseInfo?.sellInfo?.creditsAvailable &&
     !project?.projectPrefinancing?.isPrefinanceProject
   )

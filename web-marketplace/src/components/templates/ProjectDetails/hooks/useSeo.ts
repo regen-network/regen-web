@@ -7,7 +7,7 @@ import {
   AnchoredProjectMetadataBaseLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
-import { IS_REGEN, IS_TERRASOS } from 'lib/env';
+import { IS_TERRASOS } from 'lib/env';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 function getVisibleAccountName(

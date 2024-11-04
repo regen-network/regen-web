@@ -18,10 +18,16 @@ import {
   getProjectCardButtonMapping,
   getProjectCardPurchaseDetailsTitleMapping,
 } from 'lib/constants/shared.constants';
+import { IS_TERRASOS } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
+import {
+  COMPLIANCE_MARKET,
+  VOLUNTARY_MARKET,
+} from 'pages/Projects/AllProjects/AllProjects.constants';
+import { TerrasosCredits } from 'pages/Projects/AllProjects/AllProjects.TerrasosCredits';
 import { getCreditsTooltip } from 'pages/Projects/AllProjects/utils/getCreditsTooltip';
 import { getIsSoldOut } from 'pages/Projects/AllProjects/utils/getIsSoldOut';
 import WithLoader from 'components/atoms/WithLoader';
@@ -86,6 +92,12 @@ export function ProjectCardsSection({
           {projects?.map(project => {
             const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
             const href = `/project/${project.slug ?? project.id}`;
+            const isComplianceProject =
+              project.marketType?.includes(COMPLIANCE_MARKET) ?? false;
+            const isVoluntaryProject =
+              project.marketType?.includes(VOLUNTARY_MARKET) ?? false;
+            const complianceCredits = project.complianceCredits;
+
             return (
               <ProjectCard
                 buttons={buttons}
@@ -117,6 +129,16 @@ export function ProjectCardsSection({
                 draftText={_(DRAFT_TEXT)}
                 bodyTexts={bodyTexts}
                 purchaseDetailsTitles={purchaseDetailsTitles}
+                creditsChildren={
+                  IS_TERRASOS ? (
+                    <TerrasosCredits
+                      project={project}
+                      isVoluntaryProject={isVoluntaryProject}
+                      isComplianceProject={isComplianceProject}
+                      complianceCredits={complianceCredits}
+                    />
+                  ) : null
+                }
               />
             );
           })}

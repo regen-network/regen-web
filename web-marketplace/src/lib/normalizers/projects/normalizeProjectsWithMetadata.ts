@@ -85,7 +85,7 @@ export const normalizeProjectsWithMetadata = ({
 
 interface NormalizeProjectWithMetadataParams {
   offChainProject?: Maybe<Pick<Project, 'id' | 'slug' | 'published'>>;
-  projectWithOrderData?: ProjectWithOrderData;
+  projectWithOrderData?: Partial<NormalizeProject>;
   projectMetadata?: AnchoredProjectMetadataLD | undefined;
   projectPageMetadata?: ProjectPageMetadataLD;
   programAccount?: Maybe<AccountFieldsFragment | undefined>;
@@ -159,11 +159,15 @@ export const normalizeProjectWithMetadata = ({
   return {
     ...projectWithOrderData,
     id: projectId,
-    type: projectMetadata?.['@type'] ?? projectPageMetadata?.['@type'],
+    type:
+      projectMetadata?.['@type'] ??
+      projectPageMetadata?.['@type'] ??
+      projectWithOrderData?.type,
     marketType:
       projectMetadata?.['regen:marketType'] ??
-      projectPageMetadata?.['regen:marketType'],
-    offChainId: offChainProject?.id,
+      projectPageMetadata?.['regen:marketType'] ??
+      projectWithOrderData?.marketType,
+    offChainId: offChainProject?.id ?? projectWithOrderData?.offChainId,
     slug: offChainProject?.slug ?? projectWithOrderData?.slug,
     draft: !projectWithOrderData && !offChainProject?.published,
     name:

@@ -339,7 +339,6 @@ export function useProjectsWithOrders({
   );
 
   /* Final Normalization */
-
   const projectsWithMetadata = useMemo(
     () =>
       normalizeProjectsWithMetadata({

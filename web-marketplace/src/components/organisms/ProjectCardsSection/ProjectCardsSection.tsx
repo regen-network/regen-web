@@ -18,7 +18,7 @@ import {
   getProjectCardButtonMapping,
   getProjectCardPurchaseDetailsTitleMapping,
 } from 'lib/constants/shared.constants';
-import { IS_TERRASOS } from 'lib/env';
+import { IS_REGEN, IS_TERRASOS } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
@@ -139,6 +139,7 @@ export function ProjectCardsSection({
                     />
                   ) : null
                 }
+                useProjectCardButton={IS_REGEN}
               />
             );
           })}

@@ -1000,7 +1000,7 @@ msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:17
 msgid "Compliance credits are mandatory to meet government regulations."
-msgstr ""
+msgstr "Los créditos de cumplimiento son obligatorios para cumplir con las regulaciones gubernamentales."
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:45
 msgid "Congrats! You successfully created this post."
@@ -2333,7 +2333,7 @@ msgid "more details"
 msgstr ""
 
 #: src/components/organisms/MoreProjectsSection.tsx:48
-#: src/components/templates/ProjectDetails/ProjectDetails.MoreProjects.tsx:31
+#: src/components/templates/ProjectDetails/ProjectDetails.MoreProjects.tsx:29
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:203
 msgid "More Projects"
 msgstr ""
@@ -3033,7 +3033,7 @@ msgstr ""
 msgid "PROJECTED:"
 msgstr ""
 
-#: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:75
+#: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:24
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
@@ -4354,7 +4354,7 @@ msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:18
 msgid "Voluntary credits are purchased for environmental responsibility without legal obligation."
-msgstr ""
+msgstr "Los créditos voluntarios se compran por responsabilidad ambiental sin obligación legal."
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:152
 msgid "Wallet integration"

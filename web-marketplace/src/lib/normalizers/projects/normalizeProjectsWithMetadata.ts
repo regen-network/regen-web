@@ -36,7 +36,7 @@ import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDe
 
 interface NormalizeProjectsWithOrderDataParams {
   offChainProjects?: (Maybe<ProjectFieldsFragment> | undefined)[];
-  projectsWithOrderData?: ProjectWithOrderData[];
+  projectsWithOrderData?: Array<NormalizeProject | ProjectWithOrderData>;
   projectsMetadata?: (AnchoredProjectMetadataLD | undefined)[];
   projectPagesMetadata?: ProjectPageMetadataLD[];
   programAccounts?: Maybe<AccountFieldsFragment | undefined>[];
@@ -57,7 +57,7 @@ export const normalizeProjectsWithMetadata = ({
   wallet,
 }: NormalizeProjectsWithOrderDataParams): NormalizeProject[] => {
   const projectsWithMetadata = projectsWithOrderData?.map(
-    (projectWithOrderData: ProjectWithOrderData, index) => {
+    (projectWithOrderData, index) => {
       const projectMetadata = projectsMetadata?.[index];
       const classMetadata = classesMetadata?.[index];
       const projectPageMetadata = projectPagesMetadata?.[index];
@@ -85,7 +85,7 @@ export const normalizeProjectsWithMetadata = ({
 
 interface NormalizeProjectWithMetadataParams {
   offChainProject?: Maybe<Pick<Project, 'id' | 'slug' | 'published'>>;
-  projectWithOrderData?: Partial<NormalizeProject>;
+  projectWithOrderData?: NormalizeProject | ProjectWithOrderData;
   projectMetadata?: AnchoredProjectMetadataLD | undefined;
   projectPageMetadata?: ProjectPageMetadataLD;
   programAccount?: Maybe<AccountFieldsFragment | undefined>;
@@ -162,11 +162,11 @@ export const normalizeProjectWithMetadata = ({
     type:
       projectMetadata?.['@type'] ??
       projectPageMetadata?.['@type'] ??
-      projectWithOrderData?.type,
+      (projectWithOrderData as NormalizeProject)?.type,
     marketType:
       projectMetadata?.['regen:marketType'] ??
       projectPageMetadata?.['regen:marketType'] ??
-      projectWithOrderData?.marketType,
+      (projectWithOrderData as NormalizeProject)?.marketType,
     offChainId: offChainProject?.id ?? projectWithOrderData?.offChainId,
     slug: offChainProject?.slug ?? projectWithOrderData?.slug,
     draft: !projectWithOrderData && !offChainProject?.published,

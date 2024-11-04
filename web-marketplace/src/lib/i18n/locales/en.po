@@ -2338,7 +2338,7 @@ msgid "more details"
 msgstr ""
 
 #: src/components/organisms/MoreProjectsSection.tsx:48
-#: src/components/templates/ProjectDetails/ProjectDetails.MoreProjects.tsx:31
+#: src/components/templates/ProjectDetails/ProjectDetails.MoreProjects.tsx:29
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:203
 msgid "More Projects"
 msgstr ""
@@ -3042,7 +3042,7 @@ msgstr ""
 msgid "PROJECTED:"
 msgstr ""
 
-#: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:75
+#: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:24
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40

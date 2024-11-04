@@ -4,6 +4,7 @@ import { ContextDefinition } from 'jsonld';
 import { CompactedNameOptionalUrl } from 'lib/rdf/types';
 
 import { Rating } from './rating';
+import { MarketType } from './terrasos-project-metadata';
 
 /** Anchored metadata AKA "Additional Info" - Editable only with a signed Ledger TX. */
 export interface AnchoredProjectMetadataBaseLD {
@@ -33,6 +34,7 @@ export interface AnchoredProjectMetadataBaseLD {
     'schema:url': string;
     'schema:creditText'?: string;
   };
+  'regen:marketType'?: MarketType[];
 }
 
 /** Un-anchored metadata from our DB. This is editable without a Ledger TX. */
@@ -52,6 +54,7 @@ export interface ProjectPageMetadataLD {
   }[];
   'schema:creditText'?: string;
   'schema:description'?: string;
+  'regen:marketType'?: MarketType[];
 
   // Legacy project fields
   'schema:image'?: string;

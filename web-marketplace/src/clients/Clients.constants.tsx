@@ -22,7 +22,7 @@ export const CLIENTS_CONFIG_MAPPING: Record<
   },
   terrasos: {
     buySellOrderFlow: false,
-    buyButton: false,
+    buyButton: true,
     loginButton: false,
     listProject: false,
   },

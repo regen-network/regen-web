@@ -16,6 +16,9 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+msgid ""
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -971,6 +974,10 @@ msgstr "Los créditos comunitarios son créditos que no han pasado por el <0>pro
 #: src/pages/BuyCredits/BuyCredits.constants.ts:17
 msgid "Complete"
 msgstr "Completo"
+
+#: src/pages/Projects/AllProjects/AllProjects.constants.ts:17
+msgid "Compliance credits are mandatory to meet government regulations."
+msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:45
 msgid "Congrats! You successfully created this post."
@@ -3482,7 +3489,7 @@ msgstr "Lo sentimos, no tienes REGEN para cubrir las tarifas de transacción"
 msgid "Sorry, your transaction was not successful."
 msgstr "Lo sentimos, su transacción no fue exitosa."
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:216
+#: src/pages/Projects/AllProjects/AllProjects.tsx:219
 msgid "Sort by:"
 msgstr "Ordenar por:"
 
@@ -4190,12 +4197,20 @@ msgid "Visit <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a
 msgstr "Visita <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> para ver la transacción."
 
 #: src/lib/constants/shared.constants.tsx:126
+#~ msgid "Visit Our Homepage <0> Instead</0>"
+#~ msgstr "Visita nuestra página de inicio <0> En su lugar</0>"
+
+#: src/lib/constants/shared.constants.tsx:126
 msgid "Visit Our Homepage <0> Instead</0>"
-msgstr "Visita nuestra página de inicio <0> En su lugar</0>"
+msgstr ""
 
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.constants.tsx:4
 msgid "visit our homepage instead"
 msgstr "Visita nuestra página de inicio en su lugar"
+
+#: src/pages/Projects/AllProjects/AllProjects.constants.ts:18
+msgid "Voluntary credits are purchased for environmental responsibility without legal obligation."
+msgstr ""
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:152
 msgid "Wallet integration"

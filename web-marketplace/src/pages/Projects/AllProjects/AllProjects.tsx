@@ -51,11 +51,14 @@ import {
   sortOptions,
 } from './AllProjects.config';
 import {
+  COMPLIANCE_MARKET,
   EMPTY_PROJECTS_LABEL,
   RESET_FILTERS_LABEL,
+  VOLUNTARY_MARKET,
 } from './AllProjects.constants';
 import { normalizeCreditClassFilters } from './AllProjects.normalizers';
 import { SideFilter } from './AllProjects.SideFilter';
+import { TerrasosCredits } from './AllProjects.TerrasosCredits';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
 import { getIsSoldOut } from './utils/getIsSoldOut';
 
@@ -232,6 +235,13 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
       )}
       {projects?.map(project => {
         const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
+        const isComplianceProject =
+          project.marketType?.includes(COMPLIANCE_MARKET) ?? false;
+
+        const isVoluntaryProject =
+          project.marketType?.includes(VOLUNTARY_MARKET) ?? false;
+        const complianceCredits = project.complianceCredits;
+
         return (
           <Box key={project?.id}>
             <ProjectCard
@@ -270,7 +280,16 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               purchaseDetailsTitles={purchaseDetailsTitles}
               buttons={buttons}
               useProjectCardButton={IS_REGEN}
-              hasBottomCard={IS_REGEN}
+              creditsChildren={
+                IS_TERRASOS ? (
+                  <TerrasosCredits
+                    project={project}
+                    isVoluntaryProject={isVoluntaryProject}
+                    isComplianceProject={isComplianceProject}
+                    complianceCredits={complianceCredits}
+                  />
+                ) : null
+              }
             />
           </Box>
         );

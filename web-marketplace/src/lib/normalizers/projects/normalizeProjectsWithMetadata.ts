@@ -13,14 +13,17 @@ import {
   AllCreditClassQuery,
   CreditClass,
   Project as SanityProject,
-  ProjectByIdQuery,
   ProjectPrefinancing,
 } from 'generated/sanity-graphql';
 import {
-  AnchoredProjectMetadataBaseLD,
+  AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
+import {
+  isTerrasosProject,
+  ProjectByIdItemType,
+} from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery.types';
 import { Wallet } from 'lib/wallet/wallet';
 
 import {
@@ -34,12 +37,12 @@ import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDe
 interface NormalizeProjectsWithOrderDataParams {
   offChainProjects?: (Maybe<ProjectFieldsFragment> | undefined)[];
   projectsWithOrderData?: ProjectWithOrderData[];
-  projectsMetadata?: (AnchoredProjectMetadataBaseLD | undefined)[];
+  projectsMetadata?: (AnchoredProjectMetadataLD | undefined)[];
   projectPagesMetadata?: ProjectPageMetadataLD[];
   programAccounts?: Maybe<AccountFieldsFragment | undefined>[];
   sanityCreditClassData?: AllCreditClassQuery;
   classesMetadata?: (CreditClassMetadataLD | undefined)[];
-  sanityProjects?: (ProjectByIdQuery['allProject'][0] | undefined)[];
+  sanityProjects?: (ProjectByIdItemType | undefined)[];
   wallet?: Wallet;
 }
 
@@ -83,7 +86,7 @@ export const normalizeProjectsWithMetadata = ({
 interface NormalizeProjectWithMetadataParams {
   offChainProject?: Maybe<Pick<Project, 'id' | 'slug' | 'published'>>;
   projectWithOrderData?: ProjectWithOrderData;
-  projectMetadata?: AnchoredProjectMetadataBaseLD | undefined;
+  projectMetadata?: AnchoredProjectMetadataLD | undefined;
   projectPageMetadata?: ProjectPageMetadataLD;
   programAccount?: Maybe<AccountFieldsFragment | undefined>;
   classMetadata?: CreditClassMetadataLD | undefined;
@@ -97,7 +100,7 @@ interface NormalizeProjectWithMetadataParams {
       | 'stripePaymentLink'
     >
   >;
-  sanityProject?: ProjectByIdQuery['allProject'][0] | undefined;
+  sanityProject?: ProjectByIdItemType;
   wallet?: Wallet;
 }
 
@@ -115,6 +118,8 @@ export type NormalizeProject = ProjectWithOrderData & {
   area?: number;
   cardSellOrders?: Array<CardSellOrder>;
   filteredSellOrders?: Array<UISellOrderInfo>;
+  marketType?: string[];
+  complianceCredits: number;
 };
 export const normalizeProjectWithMetadata = ({
   offChainProject,
@@ -155,6 +160,9 @@ export const normalizeProjectWithMetadata = ({
     ...projectWithOrderData,
     id: projectId,
     type: projectMetadata?.['@type'] ?? projectPageMetadata?.['@type'],
+    marketType:
+      projectMetadata?.['regen:marketType'] ??
+      projectPageMetadata?.['regen:marketType'],
     offChainId: offChainProject?.id,
     slug: offChainProject?.slug ?? projectWithOrderData?.slug,
     draft: !projectWithOrderData && !offChainProject?.published,
@@ -197,6 +205,9 @@ export const normalizeProjectWithMetadata = ({
     },
     cardSellOrders,
     filteredSellOrders,
+    complianceCredits: isTerrasosProject(sanityProject)
+      ? sanityProject?.complianceCredits?.creditsAvailable ?? 0
+      : 0,
   } as NormalizeProject;
 };
 

@@ -5,5 +5,6 @@ export * from './credit-batch-intersection-ld';
 export * from './credit-class-metadata';
 export * from './project-metadata';
 export * from './project-metadata-intersection';
+export * from './terrasos-project-metadata';
 export * from './toucan-project-metadata';
 export * from './vcs-project-metadata';

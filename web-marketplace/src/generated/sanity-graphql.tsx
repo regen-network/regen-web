@@ -9870,6 +9870,59 @@ export type TebuBannerQuery = (
   )> }
 );
 
+export type TerrasosProjectByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type TerrasosProjectByIdQuery = (
+  { __typename?: 'RootQuery' }
+  & { allTerrasosProject: Array<(
+    { __typename?: 'TerrasosProject' }
+    & Pick<TerrasosProject, 'language'>
+    & { credibilityCards?: Maybe<Array<Maybe<(
+      { __typename?: 'DetailsCard' }
+      & DetailsCardFieldsFragment
+    )>>>, projectPrefinancing?: Maybe<(
+      { __typename?: 'ProjectPrefinancing' }
+      & Pick<ProjectPrefinancing, 'isPrefinanceProject' | 'price' | 'estimatedIssuance' | 'stripePaymentLink' | 'prefinanceTermsRaw' | 'purchaseAgreementLink' | 'projectedCreditDeliveryDate' | 'supportEnables'>
+      & { projectTimeline?: Maybe<Array<Maybe<(
+        { __typename?: 'ProjectPrefinanceTimelineItem' }
+        & { status?: Maybe<(
+          { __typename?: 'ProjectPrefinanceTimelineStatus' }
+          & Pick<ProjectPrefinanceTimelineStatus, 'description'>
+          & { icon?: Maybe<(
+            { __typename?: 'CustomImage' }
+            & CustomImageFieldsFragment
+          )> }
+        )>, prefinanceTimelineItem?: Maybe<(
+          { __typename?: 'PrefinanceTimelineItem' }
+          & Pick<PrefinanceTimelineItem, 'date' | 'endDate' | 'currentStatus'>
+        )> }
+      )>>>, classTimeline?: Maybe<Array<Maybe<(
+        { __typename?: 'ClassPrefinanceTimelineItem' }
+        & { status?: Maybe<(
+          { __typename?: 'ClassPrefinanceTimelineStatus' }
+          & Pick<ClassPrefinanceTimelineStatus, 'description'>
+          & { icon?: Maybe<(
+            { __typename?: 'CustomImage' }
+            & CustomImageFieldsFragment
+          )> }
+        )>, prefinanceTimelineItem?: Maybe<(
+          { __typename?: 'PrefinanceTimelineItem' }
+          & Pick<PrefinanceTimelineItem, 'date' | 'endDate' | 'currentStatus'>
+        )> }
+      )>>> }
+    )>, fiatSellOrders?: Maybe<Array<Maybe<(
+      { __typename?: 'SellOrderPrice' }
+      & Pick<SellOrderPrice, 'sellOrderId' | 'usdPrice'>
+    )>>>, complianceCredits?: Maybe<(
+      { __typename?: 'ComplianceCredits' }
+      & Pick<ComplianceCredits, 'creditsRegistered' | 'creditsAvailable' | 'creditsRetired'>
+    )> }
+  )> }
+);
+
 export type TimelineItemFieldsFragment = (
   { __typename?: 'TimelineItem' }
   & Pick<TimelineItem, 'title' | 'url'>
@@ -11996,6 +12049,90 @@ export function useTebuBannerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type TebuBannerQueryHookResult = ReturnType<typeof useTebuBannerQuery>;
 export type TebuBannerLazyQueryHookResult = ReturnType<typeof useTebuBannerLazyQuery>;
 export type TebuBannerQueryResult = Apollo.QueryResult<TebuBannerQuery, TebuBannerQueryVariables>;
+export const TerrasosProjectByIdDocument = gql`
+    query terrasosProjectById($id: String!) {
+  allTerrasosProject(where: {projectId: {eq: $id}}) {
+    language
+    credibilityCards {
+      ...detailsCardFields
+    }
+    projectPrefinancing {
+      isPrefinanceProject
+      price
+      estimatedIssuance
+      stripePaymentLink
+      prefinanceTermsRaw
+      purchaseAgreementLink
+      projectedCreditDeliveryDate
+      projectTimeline {
+        status {
+          description
+          icon {
+            ...customImageFields
+          }
+        }
+        prefinanceTimelineItem {
+          date
+          endDate
+          currentStatus
+        }
+      }
+      classTimeline {
+        status {
+          description
+          icon {
+            ...customImageFields
+          }
+        }
+        prefinanceTimelineItem {
+          date
+          endDate
+          currentStatus
+        }
+      }
+      supportEnables
+    }
+    fiatSellOrders {
+      sellOrderId
+      usdPrice
+    }
+    complianceCredits {
+      creditsRegistered
+      creditsAvailable
+      creditsRetired
+    }
+  }
+}
+    ${DetailsCardFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}`;
+
+/**
+ * __useTerrasosProjectByIdQuery__
+ *
+ * To run a query within a React component, call `useTerrasosProjectByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTerrasosProjectByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTerrasosProjectByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useTerrasosProjectByIdQuery(baseOptions: Apollo.QueryHookOptions<TerrasosProjectByIdQuery, TerrasosProjectByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TerrasosProjectByIdQuery, TerrasosProjectByIdQueryVariables>(TerrasosProjectByIdDocument, options);
+      }
+export function useTerrasosProjectByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TerrasosProjectByIdQuery, TerrasosProjectByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TerrasosProjectByIdQuery, TerrasosProjectByIdQueryVariables>(TerrasosProjectByIdDocument, options);
+        }
+export type TerrasosProjectByIdQueryHookResult = ReturnType<typeof useTerrasosProjectByIdQuery>;
+export type TerrasosProjectByIdLazyQueryHookResult = ReturnType<typeof useTerrasosProjectByIdLazyQuery>;
+export type TerrasosProjectByIdQueryResult = Apollo.QueryResult<TerrasosProjectByIdQuery, TerrasosProjectByIdQueryVariables>;
 export const AllBridgePageDocument = gql`
     query allBridgePage {
   allBridgePage {

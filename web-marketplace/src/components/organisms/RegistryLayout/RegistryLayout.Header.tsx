@@ -9,6 +9,7 @@ import { getClientConfig } from 'clients/Clients.config';
 import Header from 'web-components/src/components/header';
 import { UserMenuItems } from 'web-components/src/components/header/components/UserMenuItems';
 import { Theme } from 'web-components/src/theme/muiTheme';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import { useAuth } from 'lib/auth/auth';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
@@ -51,6 +52,7 @@ const RegistryLayoutHeader: React.FC = () => {
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
+  const isHome = pathname === '/';
   const clientConfig = getClientConfig();
 
   const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
@@ -127,13 +129,15 @@ const RegistryLayoutHeader: React.FC = () => {
         borderBottom={borderBottom}
         fullWidth={fullWidthRegExp.test(pathname)}
         pathname={pathname}
-        websiteExtras={
-          <LanguageSwitcher className="text-sc-button-text-icon-light" />
-        }
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
             {clientConfig.listProject && <ListProject />}
-            <LanguageSwitcher className="mr-25 hidden lg:block" />
+            <LanguageSwitcher
+              className={cn(
+                'mr-25 hidden lg:block',
+                isHome && 'text-sc-button-text-icon-light',
+              )}
+            />
             {chainId && accountOrWallet && disconnect && (
               <UserMenuItems
                 nameOrAddress={

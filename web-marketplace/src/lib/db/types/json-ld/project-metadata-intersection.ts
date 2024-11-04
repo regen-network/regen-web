@@ -5,6 +5,7 @@ import {
   ToucanProjectMetadataLD,
   VCSProjectMetadataLD,
 } from '.';
+import { TerrasosProjectMetadataLD } from './terrasos-project-metadata';
 
 /** A combination of existing anchored Project metadata schemas */
 export type AnchoredProjectMetadataLD = AnchoredProjectMetadataBaseLD &
@@ -14,7 +15,8 @@ export type AnchoredProjectMetadataLD = AnchoredProjectMetadataBaseLD &
 
 /** A combination of all existing Project metadata schemas, to allow more flexible UIs */
 export type ProjectMetadataLD = AnchoredProjectMetadataLD &
-  ProjectPageMetadataLD;
+  ProjectPageMetadataLD &
+  TerrasosProjectMetadataLD;
 
 /** A combination of Project metadata for legacy projects (projects that are not on-chain)
  * For these projects, all metadata is stored off-chain

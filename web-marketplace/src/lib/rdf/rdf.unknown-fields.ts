@@ -4,6 +4,7 @@ import {
   AnchoredProjectMetadataLD,
   CreditBatchMetadataIntersectionLD,
   CreditClassMetadataLD,
+  ProjectMetadataLD,
 } from 'lib/db/types/json-ld';
 
 function getUnknowFields(data: object, knownFields: string[]) {
@@ -40,7 +41,7 @@ export function getClassUnknownFields<T extends CreditClassMetadataLD>(
   return getUnknowFields(data, knownClassFields);
 }
 
-type KnownProjectFields = keyof AnchoredProjectMetadataLD;
+type KnownProjectFields = keyof ProjectMetadataLD;
 const knownProjectFields: KnownProjectFields[] = [
   'schema:name',
   'schema:location',
@@ -51,7 +52,11 @@ const knownProjectFields: KnownProjectFields[] = [
   'regen:projectStartDate',
   'regen:projectEndDate',
   'regen:projectDeveloper',
+  'regen:projectOwner',
+  'regen:projectMonitor',
+  'regen:projectOwner',
   'regen:projectVerifier',
+  'regen:projectOperator',
   'regen:landSteward',
   'regen:landOwner',
   'regen:projectOriginator',
@@ -65,6 +70,31 @@ const knownProjectFields: KnownProjectFields[] = [
   'regen:cfcProjectPage',
   'regen:offsetProtocol',
   'regen:projectDesignDocument',
+  'regen:ecosystemType',
+
+  // project page only
+  'regen:creditClassId',
+  'regen:previewPhoto',
+  'regen:galleryPhotos',
+  'schema:creditText',
+  'schema:description',
+  'regen:story',
+  'regen:storyTitle',
+  'regen:storyMedia',
+  'schema:image',
+  'regen:glanceText',
+  'regen:landStory',
+  'regen:projectQuote',
+  'regen:boundaries',
+  'regen:landManagementActions',
+
+  // terrasos
+  'regen:marketType',
+  'regen:projectDuration',
+  'regen:managementAreas',
+  'regen:conservationStatus',
+  'regen:ecologicalConnectivityIndex',
+  'regen:socialCulturalIndex',
 ];
 
 export function getProjectUnknownFields<T extends AnchoredProjectMetadataLD>(

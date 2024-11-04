@@ -13,11 +13,10 @@ import {
   AllCreditClassQuery,
   CreditClass,
   Project as SanityProject,
-  ProjectByIdQuery,
   ProjectPrefinancing,
 } from 'generated/sanity-graphql';
 import {
-  AnchoredProjectMetadataBaseLD,
+  AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
@@ -38,7 +37,7 @@ import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDe
 interface NormalizeProjectsWithOrderDataParams {
   offChainProjects?: (Maybe<ProjectFieldsFragment> | undefined)[];
   projectsWithOrderData?: ProjectWithOrderData[];
-  projectsMetadata?: (AnchoredProjectMetadataBaseLD | undefined)[];
+  projectsMetadata?: (AnchoredProjectMetadataLD | undefined)[];
   projectPagesMetadata?: ProjectPageMetadataLD[];
   programAccounts?: Maybe<AccountFieldsFragment | undefined>[];
   sanityCreditClassData?: AllCreditClassQuery;
@@ -87,7 +86,7 @@ export const normalizeProjectsWithMetadata = ({
 interface NormalizeProjectWithMetadataParams {
   offChainProject?: Maybe<Pick<Project, 'id' | 'slug' | 'published'>>;
   projectWithOrderData?: ProjectWithOrderData;
-  projectMetadata?: AnchoredProjectMetadataBaseLD | undefined;
+  projectMetadata?: AnchoredProjectMetadataLD | undefined;
   projectPageMetadata?: ProjectPageMetadataLD;
   programAccount?: Maybe<AccountFieldsFragment | undefined>;
   classMetadata?: CreditClassMetadataLD | undefined;
@@ -161,7 +160,9 @@ export const normalizeProjectWithMetadata = ({
     ...projectWithOrderData,
     id: projectId,
     type: projectMetadata?.['@type'] ?? projectPageMetadata?.['@type'],
-    marketType: projectMetadata?.['marketType'],
+    marketType:
+      projectMetadata?.['regen:marketType'] ??
+      projectPageMetadata?.['regen:marketType'],
     offChainId: offChainProject?.id,
     slug: offChainProject?.slug ?? projectWithOrderData?.slug,
     draft: !projectWithOrderData && !offChainProject?.published,

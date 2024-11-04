@@ -2,6 +2,8 @@ import { msg } from '@lingui/macro';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 
+import { getProjectUnknownFields } from 'lib/rdf/rdf.unknown-fields';
+
 import { ProjectPageMetadata } from 'components/molecules';
 import { CreditBatches } from 'components/organisms';
 import { isAnchoredProjectMetadata } from 'components/organisms/ProjectTopSection/ProjectTopSection.utils';
@@ -49,15 +51,14 @@ export const getProjectDetailsTabs = ({
     {
       label: _(msg`Additional Info`),
       content: (
-        <>
-          {isAnchoredProjectMetadata(projectMetadata, onChainProjectId) && (
-            <ProjectPageMetadata
-              metadata={projectMetadata}
-              onChainProjectId={onChainProjectId}
-            />
-          )}
-        </>
+        <ProjectPageMetadata
+          metadata={projectMetadata}
+          onChainProjectId={onChainProjectId}
+        />
       ),
-      hidden: !isAnchoredProjectMetadata(projectMetadata, onChainProjectId),
+      hidden:
+        !isAnchoredProjectMetadata(projectMetadata, onChainProjectId) &&
+        projectMetadata &&
+        getProjectUnknownFields(projectMetadata).length === 0,
     },
   ].filter(tab => tab.hidden !== true);

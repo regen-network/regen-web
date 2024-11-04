@@ -4,7 +4,10 @@ import { ContextDefinition } from 'jsonld';
 import { CompactedNameOptionalUrl } from 'lib/rdf/types';
 
 import { Rating } from './rating';
-import { MarketType } from './terrasos-project-metadata';
+import {
+  MarketType,
+  TerrasosProjectMetadataLD,
+} from './terrasos-project-metadata';
 
 /** Anchored metadata AKA "Additional Info" - Editable only with a signed Ledger TX. */
 export interface AnchoredProjectMetadataBaseLD {
@@ -38,7 +41,8 @@ export interface AnchoredProjectMetadataBaseLD {
 }
 
 /** Un-anchored metadata from our DB. This is editable without a Ledger TX. */
-export interface ProjectPageMetadataLD {
+export interface ProjectPageMetadataLD
+  extends Partial<TerrasosProjectMetadataLD> {
   '@context': ContextDefinition;
   '@type': string; // regen:Project-Page
   '@id': string;
@@ -54,15 +58,14 @@ export interface ProjectPageMetadataLD {
   }[];
   'schema:creditText'?: string;
   'schema:description'?: string;
-  'regen:marketType'?: MarketType[];
+  'regen:story'?: string;
+  'regen:storyTitle'?: string;
+  'regen:storyMedia'?: ProjectStoryMedia;
 
   // Legacy project fields
   'schema:image'?: string;
   'regen:glanceText'?: string[];
   'regen:landStory'?: string;
-  'regen:story'?: string;
-  'regen:storyTitle'?: string;
-  'regen:storyMedia'?: ProjectStoryMedia;
   'regen:projectQuote'?: ProjectQuote;
   'regen:boundaries'?: string;
   'regen:landManagementActions'?: NameImageDescription[];

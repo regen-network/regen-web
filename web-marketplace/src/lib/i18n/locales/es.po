@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-31 17:55+0100\n"
+"POT-Creation-Date: 2024-11-04 09:43+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,9 +16,6 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -87,7 +84,7 @@ msgstr "{remainingDescriptionCharacters, plural, queda un {{remainingDescription
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.tsx:170
 msgid "{remainingStoryCharacters, plural, one {{remainingStoryCharacters} character remaining} other {{remainingStoryCharacters} characters remaining}}"
-msgstr "{remainingStoryCharacters, plural, un {{remainingStoryCharacters} personaje restante} otros {{remainingStoryCharacters} personajes restantes}}"
+msgstr "{remainingStoryCharacters, plural, queda un {{remainingStoryCharacters} personaje} quedan otros {{remainingStoryCharacters} personajes}}"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.tsx:191
 msgid "{remainingStoryTitleCharacters, plural, one {{remainingStoryTitleCharacters} character remaining} other {{remainingStoryTitleCharacters} characters remaining}}"
@@ -330,7 +327,7 @@ msgid "Additional Certifications"
 msgstr "Certificaciones adicionales"
 
 #: src/components/molecules/BatchMetadata/BatchMetadata.tsx:27
-#: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:50
+#: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:52
 #: src/pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.config.tsx:33
 msgid "Additional Info"
 msgstr "Información adicional"
@@ -1222,7 +1219,7 @@ msgstr "Clases de crédito"
 msgid "Credit Details"
 msgstr "Detalles de crédito"
 
-#: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:35
+#: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:37
 #: src/pages/CreditClassDetails/tables/CreditClassDetails.TableTabs.config.tsx:20
 msgid "Credit Issuance"
 msgstr "Emisión de crédito"
@@ -1426,7 +1423,7 @@ msgstr "Descripción"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.constants.tsx:3
 msgid "Different sellers may sell the same credits at different prices. We automatically choose the lowest priced credits for you. This price is the average price of all the credits in your cart."
-msgstr "Diferentes vendedores pueden vender los mismos créditos a diferentes precios. Elegimos automáticamente los créditos con el precio más bajo para ti. Este precio es el precio promedio de todos los créditos en tu carrito."
+msgstr "Es posible que distintos vendedores vendan los mismos créditos a distintos precios. Elegimos automáticamente los créditos con el precio más bajo para ti. Este precio es el precio promedio de todos los créditos en tu carrito."
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.ConnectField.tsx:55
 msgid "DISCONNECT"
@@ -2666,7 +2663,7 @@ msgstr "Proyectos de prefinanciación"
 
 #: src/lib/constants/shared.constants.tsx:208
 msgid "prefinance this project"
-msgstr "Prefinanciar este proyecto"
+msgstr "prefinanciar este proyecto"
 
 #: src/pages/Post/Post.constants.ts:13
 msgid "prev"
@@ -2834,7 +2831,7 @@ msgstr "Banner del proyecto"
 msgid "project benefit"
 msgstr "beneficio del proyecto"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:110
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:112
 msgid "Project Design Document"
 msgstr "Documento de diseño del proyecto"
 
@@ -2847,11 +2844,11 @@ msgid "Project Developer"
 msgstr "Desarrollador de proyectos"
 
 #: src/components/templates/ProjectDetails/tables/documentation/ProjectDetails.Documentation.tsx:49
-#: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:25
+#: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:27
 msgid "Project documentation"
 msgstr "Documentación del proyecto"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:133
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:135
 msgid "project end date"
 msgstr "fecha de finalización del proyecto"
 
@@ -2859,7 +2856,7 @@ msgstr "fecha de finalización del proyecto"
 msgid "Project has been created!"
 msgstr "¡El proyecto ha sido creado!"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:72
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:73
 #: src/pages/ProjectFinished/ProjectFinished.tsx:76
 msgid "project id"
 msgstr "Identificación del proyecto"
@@ -2913,7 +2910,7 @@ msgstr "Condiciones de prefinanciación del proyecto"
 msgid "Project start and end date"
 msgstr "Fecha de inicio y finalización del proyecto"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:125
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:127
 msgid "project start date"
 msgstr "fecha de inicio del proyecto"
 
@@ -2933,7 +2930,7 @@ msgstr "Título de la historia del proyecto"
 msgid "Project timeline"
 msgstr "Cronograma del proyecto"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:102
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:104
 #: src/lib/constants/shared.constants.tsx:196
 msgid "project type"
 msgstr "tipo de proyecto"
@@ -3027,7 +3024,7 @@ msgstr "Destinatarios"
 msgid "Redwood Testnet Faucet"
 msgstr "Grifo de Redwood Testnet"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:116
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:118
 msgid "reference id (cfc project id)"
 msgstr "ID de referencia (ID del proyecto CFC)"
 
@@ -3899,7 +3896,7 @@ msgstr "Precio total"
 msgid "total purchase price"
 msgstr "Precio total de compra"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:83
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:85
 msgid "toucan project token id"
 msgstr "Identificación del token del proyecto Toucan"
 
@@ -4037,7 +4034,7 @@ msgstr "Nombre de la metodología VCS"
 msgid "VCS methodology url"
 msgstr "URL de la metodología VCS"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:92
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:94
 msgid "vcs project id"
 msgstr "Identificación del proyecto vcs"
 
@@ -4049,7 +4046,7 @@ msgstr "Identificación del proyecto VCS"
 msgid "VCS project page url"
 msgstr "URL de la página del proyecto VCS"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:102
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:104
 msgid "vcs project type"
 msgstr "tipo de proyecto vcs"
 
@@ -4202,7 +4199,7 @@ msgstr "Visita <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth<
 
 #: src/lib/constants/shared.constants.tsx:126
 msgid "Visit Our Homepage <0> Instead</0>"
-msgstr ""
+msgstr "Visita nuestra página de inicio <0> En su lugar</0>"
 
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.constants.tsx:4
 msgid "visit our homepage instead"

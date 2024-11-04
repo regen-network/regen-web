@@ -17,6 +17,7 @@ export interface TerrasosProjectMetadataLD {
   'regen:watershed'?: string;
   'regen:subWatershed'?: string;
 }
+
 export type IucnStatus =
   | 'EXTINCT'
   | 'EXTINCT_IN_WILD'
@@ -27,7 +28,9 @@ export type IucnStatus =
   | 'LEAST_CONCERN'
   | 'DATA_DEFICIENT'
   | 'NOT_EVALUATED';
+
 export type MarketType = 'COMPLIANCE_MARKET' | 'VOLUNTARY_MARKET';
+
 export type QudtValue = {
   'qudt:unit': string;
   'qudt:numericValue': number;

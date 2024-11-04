@@ -6,7 +6,7 @@ import { Box, Grid } from '@mui/material';
 import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
 import { Body, Label } from 'web-components/src/components/typography';
 
-import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 import {
   getFieldLabel,
   getFieldType,
@@ -20,7 +20,7 @@ import {
 } from './ProjectPageMetadata.constants';
 
 interface MetadataProps {
-  metadata?: AnchoredProjectMetadataLD;
+  metadata?: ProjectMetadataLD;
   onChainProjectId?: string;
 }
 
@@ -30,7 +30,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
 }) => {
   const { _ } = useLingui();
 
-  if (!onChainProjectId && !metadata) return null;
+  if (!metadata) return null;
 
   // Common
   const startDate = metadata?.['regen:projectStartDate'];
@@ -59,25 +59,27 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
         borderRadius: '0 0 8px 8px',
       }}
     >
-      {metadata && (
+      {onChainProjectId && (
         <Body sx={{ pb: 7 }} size="lg">
           {_(PROJECT_PAGE_METADATA_HELPER_TEXT)}
         </Body>
       )}
       <Box>
         <Grid container spacing={8}>
-          <Grid item xs={12} sm={6} sx={{ flexDirection: 'column' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Label size="xs" sx={{ mr: 1 }}>
-                <Trans>project id</Trans>
-              </Label>
-              <InfoTooltipWithIcon
-                title={_(PROJECT_PAGE_METADATA_ID_TOOLTIP)}
-                outlined
-              />
-            </Box>
-            <Body size="xl">{onChainProjectId}</Body>
-          </Grid>
+          {onChainProjectId && (
+            <Grid item xs={12} sm={6} sx={{ flexDirection: 'column' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Label size="xs" sx={{ mr: 1 }}>
+                  <Trans>project id</Trans>
+                </Label>
+                <InfoTooltipWithIcon
+                  title={_(PROJECT_PAGE_METADATA_ID_TOOLTIP)}
+                  outlined
+                />
+              </Box>
+              <Body size="xl">{onChainProjectId}</Body>
+            </Grid>
+          )}
 
           <MetaDetail
             label={_(msg`toucan project token id`)}

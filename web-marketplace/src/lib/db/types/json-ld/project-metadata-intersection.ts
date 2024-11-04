@@ -2,10 +2,10 @@ import {
   AnchoredProjectMetadataBaseLD,
   CFCProjectMetadataLD,
   ProjectPageMetadataLD,
+  TerrasosProjectMetadataLD,
   ToucanProjectMetadataLD,
   VCSProjectMetadataLD,
 } from '.';
-import { TerrasosProjectMetadataLD } from './terrasos-project-metadata';
 
 /** A combination of existing anchored Project metadata schemas */
 export type AnchoredProjectMetadataLD = AnchoredProjectMetadataBaseLD &

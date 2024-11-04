@@ -237,6 +237,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
         const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
         const isComplianceProject =
           project.marketType?.includes(COMPLIANCE_MARKET) ?? false;
+
         const isVoluntaryProject =
           project.marketType?.includes(VOLUNTARY_MARKET) ?? false;
         const complianceCredits = project.complianceCredits;
@@ -285,7 +286,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                     project={project}
                     isVoluntaryProject={isVoluntaryProject}
                     isComplianceProject={isComplianceProject}
-                    complianceCredits={complianceCredits ?? 2}
+                    complianceCredits={complianceCredits}
                   />
                 ) : null
               }

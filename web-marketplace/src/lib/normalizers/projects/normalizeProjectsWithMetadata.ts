@@ -206,7 +206,7 @@ export const normalizeProjectWithMetadata = ({
     cardSellOrders,
     filteredSellOrders,
     complianceCredits: isTerrasosProject(sanityProject)
-      ? sanityProject?.complianceCredits ?? 0
+      ? sanityProject?.complianceCredits?.creditsAvailable ?? 0
       : 0,
   } as NormalizeProject;
 };

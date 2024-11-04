@@ -21,8 +21,7 @@ import {
   ProjectMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
-
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
 export type ProjectTopSectionProps = {
   offChainProject?: Maybe<ProjectFieldsFragment>;
@@ -35,7 +34,7 @@ export type ProjectTopSectionProps = {
   onChainProjectId?: string;
   loading?: boolean;
   soldOutProjectsIds: string[];
-  projectWithOrderData: ProjectWithOrderData;
+  projectWithOrderData: NormalizeProject;
   batchData?: {
     batches?: BatchInfoWithSupply[];
     totals?: BatchTotalsForProject;

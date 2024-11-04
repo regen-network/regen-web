@@ -6,6 +6,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
@@ -3483,7 +3489,7 @@ msgstr ""
 msgid "Sorry, your transaction was not successful."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:222
+#: src/pages/Projects/AllProjects/AllProjects.tsx:219
 msgid "Sort by:"
 msgstr ""
 

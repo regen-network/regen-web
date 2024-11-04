@@ -7,6 +7,7 @@ import {
   AnchoredProjectMetadataBaseLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
+import { IS_REGEN, IS_TERRASOS } from 'lib/env';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 function getVisibleAccountName(
@@ -49,14 +50,22 @@ export default function useSeo({
   const projectAddress = metadataLocation?.['place_name'];
 
   const siteMetadata = {
-    title: _(msg`Regen Marketplace`),
-    description:
-      creditClassName && accountName && projectAddress
-        ? _(
-            msg`Learn about ${creditClassName} credits sourced from ${accountName} in ${projectAddress}.`,
-          )
-        : '',
-    author: _(msg`Regen Network`),
+    title: IS_TERRASOS
+      ? // eslint-disable-next-line lingui/no-unlocalized-strings
+        'Terrasos'
+      : _(msg`Regen Marketplace`),
+    description: IS_TERRASOS
+      ? // eslint-disable-next-line lingui/no-unlocalized-strings
+        'Inversiones para la Conservación de la Biodiversidad'
+      : creditClassName && accountName && projectAddress
+      ? _(
+          msg`Learn about ${creditClassName} credits sourced from ${accountName} in ${projectAddress}.`,
+        )
+      : '',
+    author: IS_TERRASOS
+      ? // eslint-disable-next-line lingui/no-unlocalized-strings
+        'Terrasos'
+      : _(msg`Regen Network`),
     siteUrl: `${window.location.origin}`,
   };
 

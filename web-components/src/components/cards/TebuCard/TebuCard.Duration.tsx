@@ -31,8 +31,8 @@ const TebuCardDuration: React.FC<TebuCardDurationProps> = ({
   return (
     <div className="mb-[10px]">
       <div className="text-[16px] font-[700] mb-[10px]">{title}</div>
-      <div className="relative w-[265px]">
-        <div className="mb-[12px] relative w-full h-[14px] bg-bc-neutral-200 rounded-full">
+      <div className="relative">
+        <div className="mb-[12px] relative h-[14px] bg-bc-neutral-200 rounded-full">
           <div
             className={cn('absolute h-full rounded-tl-full rounded-bl-full', {
               'rounded-tr-full rounded-br-full': duration >= maximumValue,

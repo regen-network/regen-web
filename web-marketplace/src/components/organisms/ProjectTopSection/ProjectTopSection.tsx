@@ -37,6 +37,7 @@ import {
   MAPBOX_TOKEN,
 } from 'components/templates/ProjectDetails/ProjectDetails.config';
 import { Prefinance } from 'components/templates/ProjectDetails/ProjectDetails.Prefinance';
+import TerrasosCreditsInfo from 'components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo';
 import { useTags } from 'hooks/useTags';
 
 import { ProjectBatchTotals } from '../../molecules';
@@ -54,6 +55,8 @@ import {
   parseProjectMetadata,
   parseProjectPageMetadata,
 } from './ProjectTopSection.utils';
+
+import { IS_TERRASOS } from 'lib/env';
 
 function ProjectTopSection({
   offChainProject,
@@ -199,6 +202,9 @@ function ProjectTopSection({
     !!ratingsAndCertificationsData ||
     !!otcCard;
 
+  const isTerrasosProjectPage =
+    projectPageMetadata?.['@type'] === 'TerrasosProjectInfo';
+
   return (
     <Section classes={{ root: classes.section }}>
       <Grid
@@ -271,7 +277,7 @@ function ProjectTopSection({
             program={program}
           />
           <Box>
-            {onChainProjectId && batchData?.totals && (
+            {!IS_TERRASOS && onChainProjectId && batchData?.totals && (
               <ProjectBatchTotals
                 projectWithOrderData={projectWithOrderData}
                 soldOutProjectsIds={soldOutProjectsIds}
@@ -283,6 +289,26 @@ function ProjectTopSection({
               />
             )}
           </Box>
+          {onChainProjectId && isTerrasosProjectPage && projectPageMetadata && (
+            <TerrasosCreditsInfo
+              _={_}
+              isOnChain={!!onChainProjectId}
+              projectPageMetadata={projectPageMetadata}
+              projectBatchTotals={
+                onChainProjectId && batchData?.totals ? (
+                  <ProjectBatchTotals
+                    projectWithOrderData={projectWithOrderData}
+                    soldOutProjectsIds={soldOutProjectsIds}
+                    totals={batchData.totals}
+                    sx={{
+                      mt: { xs: '30px', sm: '50px' },
+                      mb: '30px',
+                    }}
+                  />
+                ) : undefined
+              }
+            />
+          )}
           {quote && (
             <div>
               <Title

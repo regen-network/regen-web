@@ -20,6 +20,7 @@ type Props = {
     maximumFractionDigits?: number;
   };
   formatDateOption?: string;
+  tooltipClassName?: string;
 };
 
 /** Grey label over a rounded, formatted number */
@@ -34,6 +35,7 @@ export function LabeledValue({
   formatDateOption,
   formatNumberOptions = {},
   children,
+  tooltipClassName,
 }: React.PropsWithChildren<Props>): JSX.Element {
   return (
     <LabeledDetail
@@ -44,6 +46,7 @@ export function LabeledValue({
       }}
       sxLabel={{ width: 'fit-content' }}
       sxChildren={{ height: '100%' }}
+      tooltipClassName={tooltipClassName}
     >
       {icon && <Box sx={{ mr: 2.5, display: 'inline-flex' }}>{icon}</Box>}
       <Title
@@ -60,7 +63,12 @@ export function LabeledValue({
       {children}
       {badgeLabel && <GradientBadge label={badgeLabel} />}
       {tooltipNumber && (
-        <InfoTooltipWithIcon title={tooltipNumber} sx={{ ml: 1 }} outlined />
+        <InfoTooltipWithIcon
+          title={tooltipNumber}
+          sx={{ ml: 1 }}
+          outlined
+          className={tooltipClassName}
+        />
       )}
     </LabeledDetail>
   );

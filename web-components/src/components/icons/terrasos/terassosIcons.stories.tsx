@@ -79,7 +79,7 @@ export const allIcons = (): JSX.Element => (
       {(Object.keys(Level) as Level[]).map(level => (
         <LabeledIcon
           label={level}
-          icon={<EcologicalConnectivityLevelIcon level={level} key={level} />}
+          icon={<EcologicalConnectivityLevelIcon type={level} key={level} />}
         />
       ))}
     </div>

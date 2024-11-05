@@ -1061,11 +1061,7 @@ msgstr ""
 msgid "Complete"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:151
-msgid "Compliance"
-msgstr ""
-
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:58
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.tsx:33
 msgid "Compliance Credits"
 msgstr ""
 
@@ -1396,6 +1392,14 @@ msgstr ""
 msgid "credits available for purchase"
 msgstr ""
 
+#: src/pages/Certificate/Certificate.constants.ts:20
+msgid "Credits batch"
+msgstr ""
+
+#: src/pages/Certificate/Certificate.constants.ts:19
+msgid "Credits batches"
+msgstr ""
+
 #: src/components/molecules/BatchTotalsGrid.tsx:53
 msgid "Credits Cancelled"
 msgstr ""
@@ -1661,7 +1665,7 @@ msgstr ""
 msgid "ecocredits table"
 msgstr ""
 
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:74
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:89
 msgid "Ecocredits table"
 msgstr ""
 
@@ -2220,6 +2224,7 @@ msgid "Last Updated:"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/hooks/useSeo.ts:62
+#: src/components/templates/ProjectDetails/hooks/useSeo.ts:62
 msgid "Learn about {creditClassName} credits sourced from {accountName} in {projectAddress}."
 msgstr ""
 
@@ -2481,7 +2486,7 @@ msgstr ""
 msgid "monitor"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:112
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.SeeMore.tsx:20
 msgid "more"
 msgstr ""
 
@@ -2626,7 +2631,7 @@ msgstr ""
 msgid "No options available"
 msgstr ""
 
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:66
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:81
 msgid "No retirements to display"
 msgstr ""
 
@@ -3088,7 +3093,7 @@ msgstr ""
 msgid "PROJECT"
 msgstr ""
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:175
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:165
 msgid "Project {onChainProjectId}"
 msgstr ""
 
@@ -3134,11 +3139,11 @@ msgstr ""
 msgid "Project documentation"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:101
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:103
 msgid "Project Duration"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:144
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:135
 msgid "project end date"
 msgstr ""
 
@@ -3335,12 +3340,9 @@ msgid "Regen impact address"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/hooks/useSeo.ts:56
+#: src/components/templates/ProjectDetails/hooks/useSeo.ts:56
 #: src/siteMetadata.ts:4
 msgid "Regen Marketplace"
-msgstr ""
-
-#: src/components/organisms/DetailsSection/DetailsSection.constants.ts:8
-msgid "Regen Marketplace app."
 msgstr ""
 
 #: src/components/templates/ProjectDetails/hooks/useSeo.ts:68
@@ -4516,6 +4518,10 @@ msgstr ""
 
 #: src/pages/BatchDetails/BatchDetails.tsx:115
 msgid "view in portfolio"
+msgstr ""
+
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.SeeMore.tsx:19
+msgid "view less"
 msgstr ""
 
 #: src/components/organisms/DetailsSection/DetailsSection.constants.ts:3

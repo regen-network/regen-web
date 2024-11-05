@@ -1,54 +1,39 @@
-import { msg } from '@lingui/macro';
 import { Box } from '@mui/material';
 
-import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
-
+import { ComplianceInfoQuery } from 'generated/sanity-graphql';
 import { ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 import { TranslatorType } from 'lib/i18n/i18n.types';
+import { ReactQueryComplianceInfoQueryResponse } from 'lib/queries/react-query/sanity/getComplianceInfoQuery/getComplianceInfoQuery.types';
 
 import { TableTabs } from 'components/organisms/TableTabs';
 
-import ComplianceInfo from './TerrasosCreditsInfo.ComplianceInfo';
-import TebuInfo from './TerrasosCreditsInfo.TebuInfo';
+import { getTerrasosCreditsTabs } from './TerrasosCredits.utils';
 
-export function getTabs(
-  _: TranslatorType,
-  projectBatchTotals?: JSX.Element,
-  projectPageMetadata?: ProjectPageMetadataLD,
-  isOnChain?: boolean,
-): IconTabProps[] {
-  return [
-    {
-      label: _(msg`Tebu Credits`),
-      content: projectPageMetadata && (
-        <TebuInfo
-          projectBatchTotals={projectBatchTotals}
-          projectPageMetadata={projectPageMetadata}
-          _={_}
-        />
-      ),
-      hidden: !(projectPageMetadata && isOnChain),
-    },
-    {
-      label: _(msg`Compliance Credits`),
-      content: <ComplianceInfo />,
-      hidden: true,
-    },
-  ].filter(tab => !tab.hidden);
-}
+type Props = {
+  _: TranslatorType;
+  projectBatchTotals?: JSX.Element;
+  projectPageMetadata: ProjectPageMetadataLD;
+  isOnChain?: boolean;
+  complianceInfo?: ComplianceInfoQuery;
+  complianceCredits?: JSX.Element;
+};
 
 export default function TerrasosCreditsInfo({
   _,
   projectBatchTotals,
   projectPageMetadata,
   isOnChain,
-}: {
-  _: TranslatorType;
-  projectBatchTotals?: JSX.Element;
-  projectPageMetadata: ProjectPageMetadataLD;
-  isOnChain?: boolean;
-}) {
-  const tabs = getTabs(_, projectBatchTotals, projectPageMetadata, isOnChain);
+  complianceInfo,
+  complianceCredits,
+}: Props) {
+  const tabs = getTerrasosCreditsTabs({
+    _,
+    projectBatchTotals,
+    projectPageMetadata,
+    isOnChain,
+    complianceInfo,
+    complianceCredits,
+  });
   return tabs.length > 0 ? (
     <Box sx={{ mt: 0 }}>
       <TableTabs

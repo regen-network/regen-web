@@ -3,7 +3,6 @@ import { msg } from '@lingui/macro';
 import { Box, ButtonBase } from '@mui/material';
 import { useAtom } from 'jotai';
 
-import TebuCard from 'web-components/src/components/cards/TebuCard';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { SocialCulturalValueType } from 'web-components/src/components/icons/terrasos/SocialCulturalValueIcon';
 

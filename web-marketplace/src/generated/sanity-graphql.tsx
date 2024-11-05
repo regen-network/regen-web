@@ -127,7 +127,7 @@ export type BasketDetailsPageFilter = {
   language?: Maybe<StringFilter>;
 };
 
-export type BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage = BasketDetailsPage | BridgePage | BuyModal | BuyModalOptions | BuyersPage | CaseStudiesPage | CaseStudyPage | Claim | ClassPrefinanceTimelineStatus | CommunityPage | CreateCreditClassPage | CreateMethodologyPage | CreateProjectPage | CredibilityCard | CreditCategory | CreditCertification | CreditClass | CreditClassPage | CreditType | DevelopersPage | Doc | EcologicalCreditCard | EcologicalImpact | EcologicalOutcome | Faq | FeaturedProjectCard | FeaturedSection | GettingStartedResourcesCard | GettingStartedResourcesSection | HomePage | HomePageWeb | LandManagementPractice | LandStewardsPage | MainnetPage | Media | Methodology | MethodologyReviewProcessPage | NctPage | OffsetMethod | Partner | PartnersPage | Person | PresskitPage | ProfilePage | Program | Project | ProjectActivity | ProjectEcosystem | ProjectPage | ProjectPrefinanceTimelineStatus | ProjectRating | ProjectsPage | Resource | ResourcesPage | SciencePage | Sdg | SharedSections | SoldOutProjects | StatCard | Tag | TeamPage | TebuBanner | TerrasosProject | TokenPage | WalletAddressRegistrationPage;
+export type BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage = BasketDetailsPage | BridgePage | BuyModal | BuyModalOptions | BuyersPage | CaseStudiesPage | CaseStudyPage | Claim | ClassPrefinanceTimelineStatus | CommunityPage | ComplianceInfo | CreateCreditClassPage | CreateMethodologyPage | CreateProjectPage | CredibilityCard | CreditCategory | CreditCertification | CreditClass | CreditClassPage | CreditType | DevelopersPage | Doc | EcologicalCreditCard | EcologicalImpact | EcologicalOutcome | Faq | FeaturedProjectCard | FeaturedSection | GettingStartedResourcesCard | GettingStartedResourcesSection | HomePage | HomePageWeb | LandManagementPractice | LandStewardsPage | MainnetPage | Media | Methodology | MethodologyReviewProcessPage | NctPage | OffsetMethod | Partner | PartnersPage | Person | PresskitPage | ProfilePage | Program | Project | ProjectActivity | ProjectEcosystem | ProjectPage | ProjectPrefinanceTimelineStatus | ProjectRating | ProjectsPage | Resource | ResourcesPage | SciencePage | Sdg | SharedSections | SoldOutProjects | StatCard | Tag | TeamPage | TebuBanner | TerrasosProject | TokenPage | WalletAddressRegistrationPage;
 
 export type BasketDetailsPageSorting = {
   _id?: Maybe<SortOrder>;
@@ -1507,6 +1507,48 @@ export type ComplianceCreditsSorting = {
   creditsRegistered?: Maybe<SortOrder>;
   creditsAvailable?: Maybe<SortOrder>;
   creditsRetired?: Maybe<SortOrder>;
+};
+
+export type ComplianceInfo = Document & {
+  __typename?: 'ComplianceInfo';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  bookCallLink?: Maybe<LinkItem>;
+  language?: Maybe<Scalars['String']>;
+};
+
+export type ComplianceInfoFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  bookCallLink?: Maybe<LinkItemFilter>;
+  language?: Maybe<StringFilter>;
+};
+
+export type ComplianceInfoSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  bookCallLink?: Maybe<LinkItemSorting>;
+  language?: Maybe<SortOrder>;
 };
 
 export type ConnectSection = {
@@ -3833,7 +3875,7 @@ export type InternationalizedArrayReferenceValue = {
   __typename?: 'InternationalizedArrayReferenceValue';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
-  value?: Maybe<BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage>;
+  value?: Maybe<BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage>;
 };
 
 export type InternationalizedArrayReferenceValueFilter = {
@@ -5931,6 +5973,7 @@ export type RootQuery = {
   CreditCategory?: Maybe<CreditCategory>;
   TebuBanner?: Maybe<TebuBanner>;
   TerrasosProject?: Maybe<TerrasosProject>;
+  ComplianceInfo?: Maybe<ComplianceInfo>;
   ImageGridItem?: Maybe<ImageGridItem>;
   ContactPage?: Maybe<ContactPage>;
   FaqPage?: Maybe<FaqPage>;
@@ -6006,6 +6049,7 @@ export type RootQuery = {
   allCreditCategory: Array<CreditCategory>;
   allTebuBanner: Array<TebuBanner>;
   allTerrasosProject: Array<TerrasosProject>;
+  allComplianceInfo: Array<ComplianceInfo>;
   allImageGridItem: Array<ImageGridItem>;
   allContactPage: Array<ContactPage>;
   allFaqPage: Array<FaqPage>;
@@ -6344,6 +6388,11 @@ export type RootQueryTebuBannerArgs = {
 
 
 export type RootQueryTerrasosProjectArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryComplianceInfoArgs = {
   id: Scalars['ID'];
 };
 
@@ -6916,6 +6965,14 @@ export type RootQueryAllTebuBannerArgs = {
 export type RootQueryAllTerrasosProjectArgs = {
   where?: Maybe<TerrasosProjectFilter>;
   sort?: Maybe<Array<TerrasosProjectSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllComplianceInfoArgs = {
+  where?: Maybe<ComplianceInfoFilter>;
+  sort?: Maybe<Array<ComplianceInfoSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -9462,6 +9519,21 @@ export type CardFieldsFragment = (
   )> }
 );
 
+export type ComplianceInfoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ComplianceInfoQuery = (
+  { __typename?: 'RootQuery' }
+  & { allComplianceInfo: Array<(
+    { __typename?: 'ComplianceInfo' }
+    & Pick<ComplianceInfo, 'language' | 'descriptionRaw'>
+    & { bookCallLink?: Maybe<(
+      { __typename?: 'LinkItem' }
+      & Pick<LinkItem, 'href' | 'text'>
+    )> }
+  )> }
+);
+
 export type CustomImageFieldsFragment = (
   { __typename?: 'CustomImage' }
   & Pick<CustomImage, 'imageAlt' | 'imageHref'>
@@ -11834,6 +11906,45 @@ export function useAllSoldOutProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type AllSoldOutProjectsQueryHookResult = ReturnType<typeof useAllSoldOutProjectsQuery>;
 export type AllSoldOutProjectsLazyQueryHookResult = ReturnType<typeof useAllSoldOutProjectsLazyQuery>;
 export type AllSoldOutProjectsQueryResult = Apollo.QueryResult<AllSoldOutProjectsQuery, AllSoldOutProjectsQueryVariables>;
+export const ComplianceInfoDocument = gql`
+    query ComplianceInfo {
+  allComplianceInfo {
+    language
+    descriptionRaw
+    bookCallLink {
+      href
+      text
+    }
+  }
+}
+    `;
+
+/**
+ * __useComplianceInfoQuery__
+ *
+ * To run a query within a React component, call `useComplianceInfoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useComplianceInfoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useComplianceInfoQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useComplianceInfoQuery(baseOptions?: Apollo.QueryHookOptions<ComplianceInfoQuery, ComplianceInfoQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ComplianceInfoQuery, ComplianceInfoQueryVariables>(ComplianceInfoDocument, options);
+      }
+export function useComplianceInfoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ComplianceInfoQuery, ComplianceInfoQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ComplianceInfoQuery, ComplianceInfoQueryVariables>(ComplianceInfoDocument, options);
+        }
+export type ComplianceInfoQueryHookResult = ReturnType<typeof useComplianceInfoQuery>;
+export type ComplianceInfoLazyQueryHookResult = ReturnType<typeof useComplianceInfoLazyQuery>;
+export type ComplianceInfoQueryResult = Apollo.QueryResult<ComplianceInfoQuery, ComplianceInfoQueryVariables>;
 export const EcologicalImpactByIriDocument = gql`
     query EcologicalImpactByIri($iris: [String!]) {
   allEcologicalImpact(where: {iri: {current: {in: $iris}}}) {

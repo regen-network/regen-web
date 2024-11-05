@@ -23,6 +23,8 @@ import {
 } from 'lib/db/types/json-ld';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
+
 export type ProjectTopSectionProps = {
   offChainProject?: Maybe<ProjectFieldsFragment>;
   onChainProject?: ProjectInfo;
@@ -46,6 +48,7 @@ export type ProjectTopSectionProps = {
   program?: Account;
   projectPrefinancing?: ProjectPrefinancing | null;
   isSoldOut: boolean;
+  normalizedProject?: NormalizeProject;
 };
 
 export type SdgType = SdgByIriQuery['allSdg'][0];

@@ -37,6 +37,7 @@ import copyTextToClipboard from 'web-components/src/utils/copy';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { COPY_SUCCESS } from 'lib/constants/shared.constants';
+import { IS_REGEN, LINK_PREFIX, MARKETPLACE_APP_URL } from 'lib/env';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
@@ -51,6 +52,7 @@ import {
 } from 'pages/Post/Post.constants';
 import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+import { Link } from 'components/atoms';
 import { DeletePostWarningModal } from 'components/organisms/DeletePostWarningModal/DeletePostWarningModal';
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 
@@ -215,7 +217,7 @@ export const DataStreamPost = ({
                 type: creatorAccount?.type ?? 'USER',
                 image:
                   creatorAccount?.image || getDefaultAvatar(creatorAccount),
-                link: `/profiles/${creatorAccount?.id}`,
+                link: `${LINK_PREFIX}/profiles/${creatorAccount?.id}`,
                 timestamp: post.createdAt,
                 tag: creatorIsAdmin ? _(ADMIN) : undefined,
               }}
@@ -255,6 +257,7 @@ export const DataStreamPost = ({
                 });
                 openCreatePostModal();
               }}
+              linkComponent={Link}
             />
           )}
           {post.privacy === 'private' && !isAdmin && (

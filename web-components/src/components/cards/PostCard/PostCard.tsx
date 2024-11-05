@@ -1,10 +1,11 @@
 import React from 'react';
-import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Grid, Link, useMediaQuery, useTheme } from '@mui/material';
 import Linkify from 'linkify-react';
 
 import { defaultFontFamily } from '../../../theme/muiTheme';
 import VerifiedIcon from '../../icons/VerifiedIcon';
 import WhitepaperIcon from '../../icons/WhitepaperIcon';
+import { LinkComponentProp } from '../../modal/ConfirmModal';
 import {
   FilePreview,
   FileToPreview,
@@ -35,6 +36,7 @@ interface PostCardProps {
   file?: FileToPreview;
   preview?: string;
   draftLabel?: string;
+  linkComponent?: LinkComponentProp;
 }
 
 export default function PostCard({
@@ -54,6 +56,7 @@ export default function PostCard({
   onDelete,
   onEditDraft,
   draftLabel,
+  linkComponent = Link,
 }: PostCardProps): JSX.Element {
   const hasFile = !!file;
   const theme = useTheme();
@@ -112,6 +115,7 @@ export default function PostCard({
               title: 'text-sm truncate max-w-[120px]',
               timestamp: 'text-xs',
             }}
+            linkComponent={linkComponent}
           />
           {comment && (
             <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>

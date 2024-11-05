@@ -7,6 +7,7 @@ import { formatDate } from '../../utils/format';
 import { cn } from '../../utils/styles/cn';
 import { BlockContent, SanityBlockContent } from '../block-content';
 import { TextButton } from '../buttons/TextButton';
+import { LinkComponentProp } from '../modal/ConfirmModal';
 import { Body, Subtitle, Title } from '../typography';
 import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
 import UserAvatar from './UserAvatar';
@@ -42,6 +43,7 @@ interface UserInfoProps {
     title?: string;
     timestamp?: string;
   };
+  linkComponent?: LinkComponentProp;
 }
 export default function UserInfo({
   user,
@@ -53,6 +55,7 @@ export default function UserInfo({
   sx = [],
   nameHasPadding = true,
   classNames,
+  linkComponent: LinkComponent = Link,
 }: UserInfoProps): JSX.Element {
   const sizeVariant = getSizeVariant(size);
   const mobileSizeVariant = getSizeVariant(getMobileSize(size));
@@ -111,9 +114,12 @@ export default function UserInfo({
         <Grid container alignItems="center">
           <Grid item>
             {user.link ? (
-              <Link sx={{ color: 'primary.contrastText' }} href={user.link}>
+              <LinkComponent
+                sx={{ color: 'primary.contrastText' }}
+                href={user.link}
+              >
                 {name}
-              </Link>
+              </LinkComponent>
             ) : (
               name
             )}

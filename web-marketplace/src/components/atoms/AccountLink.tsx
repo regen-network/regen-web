@@ -1,10 +1,12 @@
 import { ReactNode } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import { Link as MuiLink, LinkProps as MuiLinkProps } from '@mui/material';
 
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
+import { LINK_PREFIX } from 'lib/env';
+
+import { Link } from './Link';
 
 interface AccountLinkProps extends MuiLinkProps {
   address: string;
@@ -38,12 +40,8 @@ export const AccountLink = ({
     );
   }
   return (
-    <MuiLink
-      {...linkProps}
-      component={RouterLink}
-      to={`/profiles/${address}/portfolio`}
-    >
+    <Link {...linkProps} href={`${LINK_PREFIX}/profiles/${address}/portfolio`}>
       {content}
-    </MuiLink>
+    </Link>
   );
 };

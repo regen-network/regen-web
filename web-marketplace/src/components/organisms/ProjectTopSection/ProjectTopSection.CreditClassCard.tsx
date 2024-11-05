@@ -9,6 +9,7 @@ import { Account } from 'web-components/src/components/user/UserInfoCard';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
+import { LINK_PREFIX } from 'lib/env';
 
 import { Link } from 'components/atoms';
 
@@ -46,7 +47,7 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
   return (creditClassSanity || creditClassMetadata) &&
     (creditClassSanity?.path || onChainCreditClassId) ? (
     <Link
-      href={`/credit-classes/${
+      href={`${LINK_PREFIX}/credit-classes/${
         creditClassSanity?.path || onChainCreditClassId
       }`}
     >

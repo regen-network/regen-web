@@ -8,6 +8,8 @@ import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
 
 import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
 
+import { Link } from 'components/atoms';
+
 export type Stakeholder = {
   accounts: Account | Account[] | undefined;
   title: string;
@@ -41,6 +43,7 @@ export const Stakeholders = ({ stakeholders }: Props) => {
                   tooltip={tooltip}
                   fontFamily={defaultFontFamily}
                   sx={{ mb: accounts.length > 1 ? { xs: 5, sm: 7.5 } : 7.5 }}
+                  linkComponent={Link}
                 />
                 {accounts.length > 1 && (
                   <CollapseList
@@ -53,6 +56,7 @@ export const Stakeholders = ({ stakeholders }: Props) => {
                         key={account?.name}
                         fontFamily={defaultFontFamily}
                         sx={{ mb: { xs: 5, sm: 7.5 } }}
+                        linkComponent={Link}
                       />
                     ))}
                   />
@@ -64,6 +68,7 @@ export const Stakeholders = ({ stakeholders }: Props) => {
                 title={title}
                 tooltip={tooltip}
                 fontFamily={defaultFontFamily}
+                linkComponent={Link}
               />
             )}
           </Grid>

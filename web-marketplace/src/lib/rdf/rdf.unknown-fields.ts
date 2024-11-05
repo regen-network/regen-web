@@ -70,6 +70,7 @@ const knownProjectFields: KnownProjectFields[] = [
   'regen:offsetProtocol',
   'regen:projectDesignDocument',
   'regen:ecosystemType',
+  'regen:coBenefits',
 
   // project page only
   'regen:creditClassId',

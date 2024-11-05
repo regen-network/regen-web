@@ -27,8 +27,8 @@ import { UseStateSetter } from 'types/react/use-state';
 import { onBtnClick } from 'lib/button';
 import {
   AnchoredProjectMetadataBaseLD,
-  LegacyProjectMetadataLD,
   NameImageDescription,
+  ProjectMetadataLD,
   ProjectPageMetadataLD,
   ProjectStakeholder,
 } from 'lib/db/types/json-ld';
@@ -72,7 +72,7 @@ export const getIsUuid = (str?: string): boolean =>
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
 
 type ParseOffChainProjectReturn = {
-  offChainProjectMetadata?: ProjectPageMetadataLD & LegacyProjectMetadataLD;
+  offChainProjectMetadata?: ProjectMetadataLD;
   managementActions?: NameImageDescription[];
   projectDocs?: Maybe<Document>[];
   creditClass?: Maybe<CreditClass>;

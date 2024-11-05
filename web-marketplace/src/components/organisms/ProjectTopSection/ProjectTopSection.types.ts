@@ -17,9 +17,8 @@ import {
   BatchTotalsForProject,
 } from 'types/ledger/ecocredit';
 import {
-  AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
-  LegacyProjectMetadataLD,
+  ProjectMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
 
@@ -28,7 +27,7 @@ import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.typ
 export type ProjectTopSectionProps = {
   offChainProject?: Maybe<ProjectFieldsFragment>;
   onChainProject?: ProjectInfo;
-  projectMetadata?: AnchoredProjectMetadataLD | LegacyProjectMetadataLD;
+  projectMetadata?: ProjectMetadataLD;
   projectPageMetadata?: ProjectPageMetadataLD;
   creditClassSanity?: AllCreditClassQuery['allCreditClass'][0];
   geojson?: any;

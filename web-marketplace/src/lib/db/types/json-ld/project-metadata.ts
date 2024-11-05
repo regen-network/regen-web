@@ -3,6 +3,10 @@ import { ContextDefinition } from 'jsonld';
 
 import { CompactedNameOptionalUrl } from 'lib/rdf/types';
 
+import {
+  MEASURED_CO_BENEFIT_IRI,
+  PROJECT_BENEFIT_IRI,
+} from './credit-class-metadata';
 import { Rating } from './rating';
 import {
   MarketType,
@@ -89,8 +93,11 @@ interface ProjectSize {
 }
 
 export interface ProjectImpact {
-  '@id': '';
-  'schema:description': '';
+  '@id': string;
+  'schema:description'?: string;
+  'schema:name'?: string;
+  'regen:SDGs'?: { '@id': string }[];
+  '@type'?: typeof MEASURED_CO_BENEFIT_IRI | typeof PROJECT_BENEFIT_IRI;
 }
 
 export const REGEN_INDIVIDUAL = 'regen:Individual';

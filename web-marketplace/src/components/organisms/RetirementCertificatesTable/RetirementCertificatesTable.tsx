@@ -26,6 +26,7 @@ import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 
 import { getRetirementCertificateHeaders } from './RetirementCertificatesTable.headers';
+import { SeeMore } from './RetirementCertificatesTable.SeeMore';
 
 type RetirementCertificatesTableProps = {
   retirements?: NormalizedRetirement[];
@@ -60,6 +61,20 @@ export const RetirementCertificatesTable: React.FC<
     [_, isIgnoreOffset, retirements?.length],
   );
 
+  const getBatchIds = (batchIds: string[]) => {
+    return batchIds.map((batchId: string, index: number) => (
+      <WithLoader isLoading={!batchId} variant="skeleton" key={index}>
+        <Link href={`/credit-batches/${batchId}`}>{batchId}</Link>
+      </WithLoader>
+    ));
+  };
+
+  const getBatchDate = (dates: string[]) => {
+    return dates.map(date => (
+      <GreyText className="whitespace-nowrap">{formatDate(date)}</GreyText>
+    ));
+  };
+
   if (!retirements?.length) {
     return (
       <NoCredits
@@ -80,7 +95,7 @@ export const RetirementCertificatesTable: React.FC<
       isIgnoreOffset={isIgnoreOffset}
       /* eslint-disable react/jsx-key */
       headerRows={retirementCertificateHeaders}
-      rows={retirements.map((row, i) => {
+      rows={retirements.map(row => {
         return [
           <GreyText>{formatDate(row.retirementDate)}</GreyText>,
           <WithLoader isLoading={row.projectId === ''} variant="skeleton">
@@ -91,9 +106,7 @@ export const RetirementCertificatesTable: React.FC<
               {row?.projectName}
             </Link>
           </WithLoader>,
-          <WithLoader isLoading={!row.batchId} variant="skeleton">
-            <Link href={`/credit-batches/${row.batchId}`}>{row.batchId}</Link>
-          </WithLoader>,
+          <SeeMore items={getBatchIds(row.batchIds)} />,
           <WithLoader isLoading={row.creditClassId === ''} variant="skeleton">
             <Link
               href={`/credit-classes/${row.creditClassId}`}
@@ -111,8 +124,8 @@ export const RetirementCertificatesTable: React.FC<
           <WithLoader isLoading={!row.issuer} variant="skeleton">
             <Link href={row.issuer?.link ?? ''}>{row.issuer?.name}</Link>
           </WithLoader>,
-          <GreyText>{formatDate(row.batchStartDate)}</GreyText>,
-          <GreyText>{formatDate(row.batchEndDate)}</GreyText>,
+          <SeeMore items={getBatchDate(row.batchStartDates || [])} />,
+          <SeeMore items={getBatchDate(row.batchEndDates || [])} />,
           <WithLoader
             isLoading={row.retirementLocation === ''}
             variant="skeleton"

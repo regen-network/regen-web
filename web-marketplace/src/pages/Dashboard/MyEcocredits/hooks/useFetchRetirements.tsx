@@ -62,13 +62,17 @@ export const useFetchRetirements = ({ address, hideRetirements }: Props) => {
   const allRetirements = data?.data.allRetirements;
 
   // Extract data from batch denom ids
-  const retirementsData = data?.data.allRetirements?.nodes.map(retirement =>
-    getDataFromBatchDenomId(retirement?.batchDenom),
+  const retirementsData = allRetirements?.nodes.map(retirement =>
+    retirement?.batchDenoms
+      .map(batchDenom =>
+        batchDenom ? getDataFromBatchDenomId(batchDenom) : undefined,
+      )
+      .filter(data => !!data),
   );
 
   // Get project and credit class metadata for each retirement
   const projectIds = retirementsData?.map(
-    retirementData => retirementData?.projectId,
+    retirementData => retirementData?.[0]?.projectId,
   );
 
   const { projects, projectsMetadata, classesMetadata } =
@@ -82,7 +86,7 @@ export const useFetchRetirements = ({ address, hideRetirements }: Props) => {
         getClassIssuersQuery({
           client: ecocreditClient,
           request: {
-            classId: retirementData?.classId,
+            classId: retirementData?.[0]?.classId,
           },
           enabled: !!ecocreditClient,
         }),

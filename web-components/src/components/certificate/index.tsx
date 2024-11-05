@@ -9,6 +9,7 @@ import { certificateFormater, certificateOptions } from './certificate.config';
 import { CertificateItem } from './certificate.Item';
 import { useCertificateStyles } from './certificate.styles';
 import { CertificateType } from './certificate.types';
+import { formatCertificateDates } from './certificate.utils';
 
 interface CertificateProps {
   certificateData?: CertificateType;
@@ -235,6 +236,32 @@ export default function Certificate({
                   }}
                 >
                   {certificateData.retirementLocation}
+                </Body>
+              </CertificateItem>
+              <CertificateItem
+                name={
+                  certificateData?.batchStartDates?.length === 1
+                    ? labels.CREDIT_BATCH
+                    : labels.CREDIT_BATCHES
+                }
+                sx={{ mb: 2.5, '@media print': { mb: 0 } }}
+              >
+                <Body
+                  sx={{
+                    '@media print': { fontSize: 9, lineHeight: 0.8 },
+                  }}
+                >
+                  {certificateData?.batchStartDates?.map((startDate, i) => (
+                    <span key={i}>
+                      {formatCertificateDates(
+                        startDate,
+                        certificateData?.batchEndDates?.[i],
+                      )}
+                      {certificateData?.batchStartDates &&
+                        i < certificateData?.batchStartDates?.length - 1 &&
+                        ', '}
+                    </span>
+                  ))}
                 </Body>
               </CertificateItem>
             </div>

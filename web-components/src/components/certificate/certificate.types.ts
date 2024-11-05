@@ -23,4 +23,6 @@ export type CertificateType = {
   itemLinks: ItemLink[];
   retirementReason?: string;
   retirementLocation?: string;
+  batchStartDates?: string[];
+  batchEndDates?: string[];
 };

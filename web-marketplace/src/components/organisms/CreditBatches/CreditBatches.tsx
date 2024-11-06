@@ -36,6 +36,7 @@ import {
   getCreditBatchesHeadCells,
 } from './CreditBatches.config';
 import { useCreditBatchesStyles } from './CreditBatches.styles';
+import { LINK_PREFIX } from 'lib/env';
 
 interface CreditBatchProps {
   creditClassId?: string | null;
@@ -170,7 +171,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
               key="classId"
             >
               <Link
-                href={`/credit-classes/${batch.classId}`}
+                href={`${LINK_PREFIX}/credit-classes/${batch.classId}`}
                 sx={tableStyles.ellipsisContentColumn}
               >
                 <BlockContent content={batch.className} />
@@ -178,7 +179,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
             </WithLoader>,
             <Link
               className={classes.noWrap}
-              href={`/credit-batches/${batch.denom}`}
+              href={`${LINK_PREFIX}/credit-batches/${batch.denom}`}
             >
               {batch.denom}
             </Link>,

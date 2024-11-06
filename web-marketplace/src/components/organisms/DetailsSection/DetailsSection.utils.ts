@@ -2,6 +2,7 @@ import { Account } from 'web-components/src/components/user/UserInfo';
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { AccountFieldsFragment, Maybe } from 'generated/graphql';
+import { LINK_PREFIX } from 'lib/env';
 
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
@@ -20,7 +21,7 @@ export const getDisplayAccountOrAddress = (
       type: type ? type : 'USER',
       image: account.image ? account.image : defaultAvatar,
       description: account.description?.trim(),
-      link: `/profiles/${address}/portfolio`,
+      link: `${LINK_PREFIX}/profiles/${address}/portfolio`,
       address,
     };
   }
@@ -28,7 +29,7 @@ export const getDisplayAccountOrAddress = (
     name: truncate(address),
     type: 'USER',
     image: defaultAvatar,
-    link: `/profiles/${address}/portfolio`,
+    link: `${LINK_PREFIX}/profiles/${address}/portfolio`,
     address,
   };
 };

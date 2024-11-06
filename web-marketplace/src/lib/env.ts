@@ -20,3 +20,5 @@ export const MARKETPLACE_CLIENT = (import.meta.env.VITE_MARKETPLACE_CLIENT ??
 export const IS_TERRASOS = MARKETPLACE_CLIENT === 'terrasos';
 export const IS_REGEN = MARKETPLACE_CLIENT === 'regen';
 export const COLOR_SCHEME: ColorScheme = IS_TERRASOS ? 'terrasos' : 'regen';
+export const MARKETPLACE_APP_URL = import.meta.env.VITE_MARKETPLACE_APP_URL;
+export const LINK_PREFIX = IS_REGEN ? '' : MARKETPLACE_APP_URL;

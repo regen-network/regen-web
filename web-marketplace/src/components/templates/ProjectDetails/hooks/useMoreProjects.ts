@@ -12,6 +12,5 @@ export default function useMoreProjects(projectId: string) {
     useOffChainProjects: IS_REGEN ? false : true,
     enableOffchainProjectsQuery: IS_REGEN ? false : true,
   });
-  console.log('projectsWithOrderData', projectsWithOrderData);
   return { projectsWithOrderData, loading };
 }

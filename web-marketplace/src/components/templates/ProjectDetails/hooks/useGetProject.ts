@@ -87,13 +87,14 @@ export const useGetProject = () => {
     ? projectId
     : projectBySlugOnChainId ?? projectByUuidOnChainId;
 
-  const { data: projectResponse } = useQuery(
-    getProjectQuery({
-      request: { projectId: onChainProjectId },
-      client: ecocreditClient,
-      enabled: !!ecocreditClient && !!onChainProjectId,
-    }),
-  );
+  const { data: projectResponse, isInitialLoading: loadingOnChainProject } =
+    useQuery(
+      getProjectQuery({
+        request: { projectId: onChainProjectId },
+        client: ecocreditClient,
+        enabled: !!ecocreditClient && !!onChainProjectId,
+      }),
+    );
 
   const onChainProject = projectResponse?.project;
 
@@ -154,8 +155,10 @@ export const useGetProject = () => {
 
   const noProjectFound =
     !loadingDb &&
+    !loadingOnChainProject &&
     !loadingAnchoredMetadata &&
     !offChainProject &&
+    !!ecocreditClient &&
     !projectResponse;
 
   return {
@@ -181,5 +184,6 @@ export const useGetProject = () => {
     anchoredMetadata,
     loadingAnchoredMetadata,
     projectResponse,
+    loadingDb,
   };
 };

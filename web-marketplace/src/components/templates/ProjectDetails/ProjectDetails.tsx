@@ -134,10 +134,7 @@ function ProjectDetails(): JSX.Element {
     sanityProject,
     loadingSanityProject,
     projectBySlug,
-    loadingProjectBySlug,
-    loadingProjectByOnChainId,
     offchainProjectByIdData,
-    loadingOffchainProjectById,
     isBuyFlowDisabled,
     projectsWithOrderData,
     loadingBuySellOrders,
@@ -151,6 +148,7 @@ function ProjectDetails(): JSX.Element {
     anchoredMetadata,
     loadingAnchoredMetadata,
     projectResponse,
+    loadingDb,
   } = useGetProject();
 
   useNavigateToSlug(slug);
@@ -245,11 +243,6 @@ function ProjectDetails(): JSX.Element {
     geojson,
     geocodingJurisdictionData,
   });
-
-  const loadingDb =
-    loadingProjectByOnChainId ||
-    loadingProjectBySlug ||
-    loadingOffchainProjectById;
 
   const { credits } = useCreateSellOrderData({
     projectId: projectsWithOrderData[0]?.id,

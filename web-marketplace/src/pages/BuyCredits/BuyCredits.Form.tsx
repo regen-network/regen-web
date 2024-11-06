@@ -44,9 +44,9 @@ import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSum
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';
 import { AgreePurchaseFormFiat } from 'components/organisms/AgreePurchaseForm/AgreePurchaseFormFiat';
-import { BuyFiatModal } from 'components/organisms/BuyFiatModal/BuyFiatModal';
-import { KEPLR_LOGIN_REQUIRED } from 'components/organisms/BuyFiatModal/BuyFiatModal.constants';
-import { BuyFiatModalContent } from 'components/organisms/BuyFiatModal/BuyFiatModal.types';
+import { BuyWarningModal } from 'components/organisms/BuyWarningModal/BuyWarningModal';
+import { KEPLR_LOGIN_REQUIRED } from 'components/organisms/BuyWarningModal/BuyWarningModal.constants';
+import { BuyWarningModalContent } from 'components/organisms/BuyWarningModal/BuyWarningModal.types';
 import { ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
@@ -72,6 +72,7 @@ import {
   getFiatModalContent,
   getOrderedSellOrders,
   getSellOrdersCredits,
+  getWarningModalContent,
 } from './BuyCredits.utils';
 import { usePurchase } from './hooks/usePurchase';
 
@@ -129,7 +130,7 @@ export const BuyCreditsForm = ({
   const [paymentOptionCryptoClicked, setPaymentOptionCryptoClicked] = useAtom(
     paymentOptionCryptoClickedAtom,
   );
-  const [fiatModalState, setFiatModalState] = useState({
+  const [warningModalState, setWarningModalState] = useState({
     openModal: false,
     creditsAvailable: 0,
   });
@@ -223,7 +224,7 @@ export const BuyCreditsForm = ({
     [cardSellOrders, filteredCryptoSellOrders, paymentOption],
   );
 
-  const fiatModalContent = useRef<BuyFiatModalContent | undefined>();
+  const warningModalContent = useRef<BuyWarningModalContent | undefined>();
 
   const isWeb2UserWithoutWallet =
     !!privActiveAccount?.email && !activeAccount?.addr;
@@ -287,11 +288,11 @@ export const BuyCreditsForm = ({
             confirmationTokenId,
           });
       } else {
-        setFiatModalState({
+        setWarningModalState({
           openModal: true,
           creditsAvailable: creditsInRequestedSellOrders,
         });
-        fiatModalContent.current = getFiatModalContent(
+        warningModalContent.current = getWarningModalContent(
           currency,
           isWeb2UserWithoutWallet,
           creditsInRequestedSellOrders,
@@ -530,23 +531,23 @@ export const BuyCreditsForm = ({
         modalState={modalState}
         redirectRoute={`${projectHref.replace(/^\//, '')}/buy`}
       />
-      {fiatModalContent.current && (
-        <BuyFiatModal
-          modalContent={fiatModalContent.current.modalContent}
-          fiatModalState={fiatModalState}
-          onClose={setFiatModalState}
+      {warningModalContent.current && (
+        <BuyWarningModal
+          modalContent={warningModalContent.current.modalContent}
+          warningModalState={warningModalState}
+          onClose={setWarningModalState}
           handleClick={action => {
             if (action === KEPLR_LOGIN_REQUIRED) {
               setSwitchWalletModalAtom(atom => void (atom.open = true));
             } else if (action) {
               navigate(action);
             } else {
-              setFiatModalState({
-                ...fiatModalState,
+              setWarningModalState({
+                ...warningModalState,
                 openModal: false,
               });
               const amounts = getCurrencyAmount({
-                currentCreditsAmount: fiatModalState.creditsAvailable,
+                currentCreditsAmount: warningModalState.creditsAvailable,
                 card: paymentOption === PAYMENT_OPTIONS.CARD,
                 orderedSellOrders,
                 creditTypePrecision: creditTypeData?.creditType?.precision,
@@ -555,7 +556,7 @@ export const BuyCreditsForm = ({
               // we need to update the form with the new credits, currency amount and sell orders.
               handleSaveNext({
                 ...data,
-                [CREDITS_AMOUNT]: fiatModalState.creditsAvailable,
+                [CREDITS_AMOUNT]: warningModalState.creditsAvailable,
                 [CURRENCY_AMOUNT]: amounts.currencyAmount,
                 [SELL_ORDERS]: amounts.sellOrders,
               });

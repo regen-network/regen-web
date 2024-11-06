@@ -9,25 +9,28 @@ import { Title } from 'web-components/src/components/typography';
 
 import { UseStateSetter } from 'types/react/use-state';
 
-import { BuyFiatModalContent, FiatModalStateType } from './BuyFiatModal.types';
+import {
+  BuyWarningModalContent,
+  BuyWarningModalStateType,
+} from './BuyWarningModal.types';
 
-interface BuyFiatModalProps extends BuyFiatModalContent {
-  fiatModalState: FiatModalStateType;
-  onClose: UseStateSetter<FiatModalStateType>;
+interface BuyWarningModalProps extends BuyWarningModalContent {
+  warningModalState: BuyWarningModalStateType;
+  onClose: UseStateSetter<BuyWarningModalStateType>;
   handleClick: (action: string | null) => void;
 }
 
-export const BuyFiatModal = ({
+export const BuyWarningModal = ({
   modalContent,
-  fiatModalState,
+  warningModalState,
   onClose,
   handleClick,
-}: BuyFiatModalProps) => {
+}: BuyWarningModalProps) => {
   const { title, content, buttons } = modalContent;
   return (
     <Modal
-      open={fiatModalState.openModal}
-      onClose={() => onClose({ ...fiatModalState, openModal: false })}
+      open={warningModalState.openModal}
+      onClose={() => onClose({ ...warningModalState, openModal: false })}
       className="w-[560px] !py-40 !px-30"
     >
       <Box className="flex flex-col items-center">

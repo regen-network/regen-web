@@ -169,7 +169,9 @@ export const CreditsAmount = ({
   useEffect(() => {
     if (maxCreditsSelected) {
       setValue(CREDITS_AMOUNT, creditsAvailable, { shouldValidate: true });
-      setValue(CURRENCY_AMOUNT, spendingCap, { shouldValidate: true });
+      setValue(CURRENCY_AMOUNT, spendingCap as number, {
+        shouldValidate: true,
+      });
       setValue(
         SELL_ORDERS,
         orderedSellOrders.map(order => {
@@ -245,7 +247,7 @@ export const CreditsAmount = ({
       />
       <div className="flex justify-between min-w-full flex-wrap sm:flex-nowrap gap-10 sm:gap-0 items-start">
         <CurrencyInput
-          maxCurrencyAmount={spendingCap}
+          maxCurrencyAmount={spendingCap as number}
           selectPlaceholderAriaLabel={_(msg`Select option`)}
           selectAriaLabel={_(msg`Select option`)}
           handleCurrencyAmountChange={handleCurrencyAmountChange}

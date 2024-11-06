@@ -24,7 +24,7 @@ export const createChooseCreditsFormSchema = ({
   paymentOption,
 }: {
   creditsAvailable: number;
-  spendingCap: number;
+  spendingCap: number | null;
   userBalance: number;
   paymentOption: string;
 }) => {
@@ -32,13 +32,15 @@ export const createChooseCreditsFormSchema = ({
     [CURRENCY_AMOUNT]: z.coerce
       .number()
       .positive(i18n._(POSITIVE_NUMBER))
-      .max(
-        spendingCap,
-        `${i18n._(MAX_AMOUNT)} ${spendingCap.toLocaleString(undefined, {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}`,
-      )
+      .refine(value => spendingCap === null || value <= spendingCap, {
+        message: `${i18n._(MAX_AMOUNT)} ${spendingCap?.toLocaleString(
+          undefined,
+          {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          },
+        )}`,
+      })
       .refine(
         value => paymentOption === PAYMENT_OPTIONS.CARD || userBalance > value,
         {

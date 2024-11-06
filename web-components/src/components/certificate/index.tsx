@@ -33,7 +33,6 @@ export default function Certificate({
   certificateNotFoundDescription,
 }: CertificateProps): JSX.Element {
   const { classes, cx } = useCertificateStyles({ background });
-
   return (
     <Box className={classes.root}>
       <div className={classes.content}>
@@ -214,18 +213,20 @@ export default function Certificate({
                   </LinkComponent>
                 </CertificateItem>
               ))}
-              <CertificateItem
-                name={labels.RETIREMENT_REASON}
-                sx={{ mb: 2.5, '@media print': { mb: 0 } }}
-              >
-                <Body
-                  sx={{
-                    '@media print': { fontSize: 9, lineHeight: 0.8 },
-                  }}
+              {certificateData.retirementReason && (
+                <CertificateItem
+                  name={labels.RETIREMENT_REASON}
+                  sx={{ mb: 2.5, '@media print': { mb: 0 } }}
                 >
-                  {certificateData.retirementReason}
-                </Body>
-              </CertificateItem>
+                  <Body
+                    sx={{
+                      '@media print': { fontSize: 9, lineHeight: 0.8 },
+                    }}
+                  >
+                    {certificateData.retirementReason}
+                  </Body>
+                </CertificateItem>
+              )}
               <CertificateItem
                 name={labels.RETIREMENT_LOCATION}
                 sx={{ mb: 2.5, '@media print': { mb: 0 } }}

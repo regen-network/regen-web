@@ -67,7 +67,9 @@ export const useFetchRetirements = ({ address, hideRetirements }: Props) => {
       .map(batchDenom =>
         batchDenom ? getDataFromBatchDenomId(batchDenom) : undefined,
       )
-      .filter(data => !!data),
+      .filter(
+        (data): data is ReturnType<typeof getDataFromBatchDenomId> => !!data,
+      ),
   );
 
   // Get project and credit class metadata for each retirement

@@ -85,7 +85,9 @@ export const useFetchRetirement = ({ id }: Params) => {
   // Extract data from batch denom id
   const retirementData = retirement?.batchDenoms
     .map(batch => (batch ? getDataFromBatchDenomId(batch) : undefined))
-    .filter(data => !!data);
+    .filter(
+      (data): data is ReturnType<typeof getDataFromBatchDenomId> => !!data,
+    );
 
   // Get project and credit class metadata
   const { projects, projectsMetadata, classes, classesMetadata } =

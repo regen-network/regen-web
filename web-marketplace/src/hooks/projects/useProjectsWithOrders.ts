@@ -9,7 +9,10 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { IS_TERRASOS, SKIPPED_CLASS_ID } from 'lib/env';
-import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import {
+  NormalizeProject,
+  normalizeProjectsWithMetadata,
+} from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';
@@ -23,6 +26,7 @@ import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectBy
 import { useWallet } from 'lib/wallet/wallet';
 
 import { UNREGISTERED_PATH } from 'pages/Projects/AllProjects/AllProjects.constants';
+import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   sortPinnedProject,
   sortProjects,
@@ -146,7 +150,9 @@ export function useProjectsWithOrders({
     });
 
   const onlyOffChainProjects = allOffChainProjects.filter(
-    project => project.offChain,
+    project =>
+      project.offChain &&
+      (!skippedProjectId || skippedProjectId !== project.id),
   );
 
   /* Normalization/Filtering/Sorting */
@@ -224,7 +230,7 @@ export function useProjectsWithOrders({
   );
 
   // Merge on-chain and off-chain projects
-  const allProject = useMemo(
+  const allProject: Array<NormalizeProject | ProjectWithOrderData> = useMemo(
     () =>
       creditClassFilter?.[UNREGISTERED_PATH] || useOffChainProjects
         ? [...projectsWithOrderDataFiltered, ...onlyOffChainProjects]
@@ -337,7 +343,6 @@ export function useProjectsWithOrders({
   );
 
   /* Final Normalization */
-
   const projectsWithMetadata = useMemo(
     () =>
       normalizeProjectsWithMetadata({

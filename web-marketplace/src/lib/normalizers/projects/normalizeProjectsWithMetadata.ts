@@ -36,7 +36,7 @@ import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDe
 
 interface NormalizeProjectsWithOrderDataParams {
   offChainProjects?: (Maybe<ProjectFieldsFragment> | undefined)[];
-  projectsWithOrderData?: ProjectWithOrderData[];
+  projectsWithOrderData?: Array<NormalizeProject | ProjectWithOrderData>;
   projectsMetadata?: (AnchoredProjectMetadataLD | undefined)[];
   projectPagesMetadata?: ProjectPageMetadataLD[];
   programAccounts?: Maybe<AccountFieldsFragment | undefined>[];
@@ -57,7 +57,7 @@ export const normalizeProjectsWithMetadata = ({
   wallet,
 }: NormalizeProjectsWithOrderDataParams): NormalizeProject[] => {
   const projectsWithMetadata = projectsWithOrderData?.map(
-    (projectWithOrderData: ProjectWithOrderData, index) => {
+    (projectWithOrderData, index) => {
       const projectMetadata = projectsMetadata?.[index];
       const classMetadata = classesMetadata?.[index];
       const projectPageMetadata = projectPagesMetadata?.[index];
@@ -85,7 +85,7 @@ export const normalizeProjectsWithMetadata = ({
 
 interface NormalizeProjectWithMetadataParams {
   offChainProject?: Maybe<Pick<Project, 'id' | 'slug' | 'published'>>;
-  projectWithOrderData?: ProjectWithOrderData;
+  projectWithOrderData?: NormalizeProject | ProjectWithOrderData;
   projectMetadata?: AnchoredProjectMetadataLD | undefined;
   projectPageMetadata?: ProjectPageMetadataLD;
   programAccount?: Maybe<AccountFieldsFragment | undefined>;
@@ -159,11 +159,15 @@ export const normalizeProjectWithMetadata = ({
   return {
     ...projectWithOrderData,
     id: projectId,
-    type: projectMetadata?.['@type'] ?? projectPageMetadata?.['@type'],
+    type:
+      projectMetadata?.['@type'] ??
+      projectPageMetadata?.['@type'] ??
+      (projectWithOrderData as NormalizeProject)?.type,
     marketType:
       projectMetadata?.['regen:marketType'] ??
-      projectPageMetadata?.['regen:marketType'],
-    offChainId: offChainProject?.id,
+      projectPageMetadata?.['regen:marketType'] ??
+      (projectWithOrderData as NormalizeProject)?.marketType,
+    offChainId: offChainProject?.id ?? projectWithOrderData?.offChainId,
     slug: offChainProject?.slug ?? projectWithOrderData?.slug,
     draft: !projectWithOrderData && !offChainProject?.published,
     name:

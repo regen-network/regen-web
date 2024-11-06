@@ -11,8 +11,8 @@ import CreditsTradeableAltIcon from 'web-components/src/components/icons/Credits
 import { LabeledValue } from 'web-components/src/components/text-layouts';
 
 import { IS_TERRASOS } from 'lib/env';
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import { getCreditsTooltip } from 'pages/Projects/AllProjects/utils/getCreditsTooltip';
 import { getIsSoldOut } from 'pages/Projects/AllProjects/utils/getIsSoldOut';
 
@@ -38,7 +38,7 @@ export function ProjectBatchTotals({
   sx = [],
 }: {
   totals: BatchTotalsForProject;
-  projectWithOrderData?: ProjectWithOrderData;
+  projectWithOrderData?: NormalizeProject;
   soldOutProjectsIds: string[];
   sx?: SxProps<Theme>;
 }): JSX.Element {
@@ -94,7 +94,9 @@ export function ProjectBatchTotals({
             ...quantityFormatNumberOptions,
             maximumFractionDigits: MAX_FRACTION_DIGITS_PROJECT_CREDITS,
           }}
-          icon={IS_TERRASOS ? <CreditsTradeableAltIcon /> : <CreditsTradeableIcon />}
+          icon={
+            IS_TERRASOS ? <CreditsTradeableAltIcon /> : <CreditsTradeableIcon />
+          }
           tooltipClassName={tooltipClassName}
         />
       </GridItem>

@@ -50,48 +50,51 @@ export const CreditPrice = ({
         ...sxToArray(sx),
       ]}
     >
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-          <Subtitle
-            size="xs"
-            mobileSize="xxs"
-            color="info.main"
-            sx={{
-              mr: 1,
-              fontWeight: 800,
-              textTransform: 'uppercase',
-            }}
-          >
-            {isPrefinanceProject ? bodyTexts.price : bodyTexts.avgPriceLabel}
-          </Subtitle>
-          {priceTooltip && (
-            <InfoTooltipWithIcon
-              title={priceTooltip}
-              sx={{ width: 20, height: 20 }}
-              outlined
-            />
-          )}
+      {!creditsChildren && (
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+            <Subtitle
+              size="xs"
+              mobileSize="xxs"
+              color="info.main"
+              sx={{
+                mr: 1,
+                fontWeight: 800,
+                textTransform: 'uppercase',
+              }}
+            >
+              {isPrefinanceProject ? bodyTexts.price : bodyTexts.avgPriceLabel}
+            </Subtitle>
+            {priceTooltip && (
+              <InfoTooltipWithIcon
+                title={priceTooltip}
+                sx={{ width: 20, height: 20 }}
+                outlined
+              />
+            )}
+          </Box>
+
+          <Box sx={{ display: 'flex' }}>
+            {purchaseInfo?.sellInfo?.denomLogo}
+            <Body
+              size="md"
+              mobileSize="sm"
+              sx={{
+                fontWeight: 700,
+                ml: purchaseInfo?.sellInfo?.denomLogo ? 2 : 0,
+                color:
+                  purchaseInfo?.sellInfo && !avgPricePerTonLabel
+                    ? 'error.dark'
+                    : 'primary.contrastText',
+              }}
+            >
+              {purchaseInfo?.sellInfo
+                ? avgPricePerTonLabel ?? bodyTexts.errorCardPrice
+                : projectPrefinancing?.price ?? '-'}
+            </Body>
+          </Box>
         </Box>
-        <Box sx={{ display: 'flex' }}>
-          {purchaseInfo?.sellInfo?.denomLogo}
-          <Body
-            size="md"
-            mobileSize="sm"
-            sx={{
-              fontWeight: 700,
-              ml: purchaseInfo?.sellInfo?.denomLogo ? 2 : 0,
-              color:
-                purchaseInfo?.sellInfo && !avgPricePerTonLabel
-                  ? 'error.dark'
-                  : 'primary.contrastText',
-            }}
-          >
-            {purchaseInfo?.sellInfo
-              ? avgPricePerTonLabel ?? bodyTexts.errorCardPrice
-              : projectPrefinancing?.price ?? '-'}
-          </Body>
-        </Box>
-      </Box>
+      )}
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, height: 20 }}>
           <Subtitle

@@ -1,34 +1,19 @@
 msgid ""
 msgstr ""
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-"POT-Creation-Date: 2024-11-04 09:43+0100\n"
-"POT-Creation-Date: 2024-10-31 17:55+0100\n"
-"POT-Creation-Date: 2024-10-23 12:37+0200\n"
-"POT-Creation-Date: 2024-10-22 09:37+0100\n"
-"POT-Creation-Date: 2024-10-16 09:16+0200\n"
-"POT-Creation-Date: 2024-10-16 15:27+0100\n"
-"POT-Creation-Date: 2024-10-21 16:20+0100\n"
-"POT-Creation-Date: 2024-10-21 16:20+0100\n"
-"POT-Creation-Date: 2024-10-22 13:51+0100\n"
-=======
-"POT-Creation-Date: 2024-10-23 12:22+0100\n"
-<<<<<<< HEAD
->>>>>>> 87cf6bc37 (chore: generate .po files)
-=======
-"POT-Creation-Date: 2024-10-28 09:13+0000\n"
->>>>>>> 9fe41830a (chore: generate .po files)
-=======
-"POT-Creation-Date: 2024-10-28 19:43+0000\n"
-<<<<<<< HEAD
->>>>>>> a0007a688 (chore: generate .po files)
-=======
-"POT-Creation-Date: 2024-10-31 13:12+0000\n"
->>>>>>> ffdef6afe (chore: update .po files)
-=======
 "POT-Creation-Date: 2024-10-31 18:46+0000\n"
->>>>>>> ac46cde8a (chore: update .po files)
+"POT-Creation-Date: 2024-10-31 18:46+0000\n"
+"POT-Creation-Date: 2024-10-31 18:46+0000\n"
+"POT-Creation-Date: 2024-10-31 18:46+0000\n"
+"POT-Creation-Date: 2024-10-31 18:46+0000\n"
+"POT-Creation-Date: 2024-10-31 18:46+0000\n"
+"POT-Creation-Date: 2024-10-31 18:46+0000\n"
+"POT-Creation-Date: 2024-10-31 18:46+0000\n"
+"POT-Creation-Date: 2024-10-31 18:46+0000\n"
+"POT-Creation-Date: 2024-10-31 18:46+0000\n"
+"POT-Creation-Date: 2024-10-31 18:46+0000\n"
+"POT-Creation-Date: 2024-10-31 18:46+0000\n"
+"POT-Creation-Date: 2024-10-31 18:46+0000\n"
+"POT-Creation-Date: 2024-10-31 18:46+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -123,21 +108,17 @@ msgstr ""
 
 #: src/components/organisms/PostForm/PostForm.tsx:265
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
-msgstr ""
+msgstr "<<<<<<< HEAD"
 
-<<<<<<< HEAD
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:90
-msgid "{truncatedQuantity} credit(s) available"
-msgstr ""
+#~ msgid "{truncatedQuantity} credit(s) available"
+#~ msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:115
 msgid "{years} year project duration"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:88
-=======
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:106
->>>>>>> ac46cde8a (chore: update .po files)
 #: src/components/organisms/Order/Order.Summary.tsx:85
 msgid "# credits"
 msgstr ""
@@ -915,10 +896,6 @@ msgstr ""
 msgid "Check your wallet for a confirmation popup."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:61
-msgid "Checkmark list"
-msgstr ""
-
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:9
 msgid "Choose 2-10 photos for the photo gallery."
 msgstr ""
@@ -1029,18 +1006,14 @@ msgstr ""
 
 #: src/pages/BuyCredits/BuyCredits.constants.ts:18
 msgid "Complete"
-msgstr "<<<<<<< HEAD"
+msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:54
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.tsx:33
 msgid "Compliance Credits"
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:17
 msgid "Compliance credits are mandatory to meet government regulations."
-msgstr ""
-
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:58
-msgid "Compliance info"
 msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:45
@@ -1350,7 +1323,7 @@ msgstr ""
 msgid "credits available"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:83
 msgid "Credits Available"
 msgstr ""
 
@@ -1391,9 +1364,6 @@ msgid "Credits Input"
 msgstr ""
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:69
-msgstr ""
-
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:64
 msgid "Credits issued"
 msgstr ""
 
@@ -1405,17 +1375,13 @@ msgstr ""
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:78
-msgid "Credits Registered"
-msgstr ""
-
 #: src/components/molecules/BatchTotalsGrid.tsx:46
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:120
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:105
 msgid "Credits Retired"
 msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:83
 msgid "Credits Tradable"
 msgstr ""
 
@@ -2155,7 +2121,7 @@ msgstr ""
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:52
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:10
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:98
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:99
 msgid "Learn more"
 msgstr ""
 
@@ -2385,15 +2351,7 @@ msgid "more details"
 msgstr ""
 
 #: src/components/organisms/MoreProjectsSection.tsx:48
-<<<<<<< HEAD
 #: src/components/templates/ProjectDetails/ProjectDetails.MoreProjects.tsx:29
-=======
-#: src/components/templates/ProjectDetails/ProjectDetails.MoreProjects.tsx:31
-<<<<<<< HEAD
-#: src/components/templates/ProjectDetails/ProjectDetails.MoreProjects.tsx:31
->>>>>>> 6fe35e1ee (chore: generate .po files)
-=======
->>>>>>> 87cf6bc37 (chore: generate .po files)
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:203
 msgid "More Projects"
 msgstr ""
@@ -2961,33 +2919,9 @@ msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:20
 msgid "PROJECT"
-msgstr "<<<<<<< HEAD"
+msgstr "<<<<<<< HEAD<<<<<<< HEAD<<<<<<< HEAD"
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:175
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:152
-=======
-<<<<<<< HEAD
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:162
-=======
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:149
-<<<<<<< HEAD
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:149
-<<<<<<< HEAD
->>>>>>> 58e42a15a (chore: generate .po files)
->>>>>>> 6bf7c43a7 (chore: generate .po files)
-=======
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:149
->>>>>>> 6fe35e1ee (chore: generate .po files)
-=======
->>>>>>> 9fe41830a (chore: generate .po files)
-=======
->>>>>>> ffdef6afe (chore: update .po files)
-=======
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:162
->>>>>>> ac46cde8a (chore: update .po files)
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:163
 msgid "Project {onChainProjectId}"
 msgstr ""
 
@@ -3130,30 +3064,10 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.PrefinanceTimeline.tsx:81
 msgid "PROJECTED:"
-msgstr ""
+msgstr "<<<<<<< HEAD<<<<<<< HEAD<<<<<<< HEAD"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:36
-=======
-#: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:68
-=======
-#: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:75
->>>>>>> ac46cde8a (chore: update .po files)
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
-<<<<<<< HEAD
->>>>>>> 6fe35e1ee (chore: generate .po files)
-=======
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:36
->>>>>>> 9fe41830a (chore: generate .po files)
-=======
-#: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:68
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
->>>>>>> ffdef6afe (chore: update .po files)
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:24
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
 #: src/pages/Dashboard/Dashboard.constants.tsx:30
@@ -3363,7 +3277,7 @@ msgstr ""
 msgid "Retired by"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr ""
 
@@ -3678,7 +3592,7 @@ msgstr ""
 msgid "Social and Cultural Index"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
 #: src/lib/constants/shared.constants.tsx:171
 msgid "Sold Out"
 msgstr ""
@@ -3703,34 +3617,9 @@ msgstr ""
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:75
 #: src/lib/constants/shared.constants.tsx:91
 msgid "Sorry, your transaction was not successful."
-msgstr ""
+msgstr "<<<<<<< HEAD<<<<<<< HEAD<<<<<<< HEAD"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 #: src/pages/Projects/AllProjects/AllProjects.tsx:219
-=======
-<<<<<<< HEAD
-#: src/pages/Projects/AllProjects/AllProjects.tsx:216
-=======
-=======
->>>>>>> 6fe35e1ee (chore: generate .po files)
-#: src/pages/Projects/AllProjects/AllProjects.tsx:211
-#: src/pages/Projects/AllProjects/AllProjects.tsx:209
-<<<<<<< HEAD
-#: src/pages/Projects/AllProjects/AllProjects.tsx:212
-#: src/pages/Projects/AllProjects/AllProjects.tsx:212
-<<<<<<< HEAD
->>>>>>> 58e42a15a (chore: generate .po files)
->>>>>>> 6bf7c43a7 (chore: generate .po files)
-=======
-#: src/pages/Projects/AllProjects/AllProjects.tsx:209
->>>>>>> 6fe35e1ee (chore: generate .po files)
-=======
->>>>>>> 87cf6bc37 (chore: generate .po files)
-=======
-#: src/pages/Projects/AllProjects/AllProjects.tsx:216
->>>>>>> ac46cde8a (chore: update .po files)
 msgid "Sort by:"
 msgstr ""
 
@@ -3849,7 +3738,7 @@ msgstr ""
 msgid "Take from basket"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:84
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:85
 msgid "Tebu badge"
 msgstr ""
 
@@ -3857,11 +3746,11 @@ msgstr ""
 msgid "Tebu banner"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:43
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.tsx:22
 msgid "Tebu Credits"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:81
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:82
 msgid "Tebu factors"
 msgstr ""
 
@@ -3980,10 +3869,6 @@ msgstr ""
 msgid "The total amount of credits that were issued to this project."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
-msgid "The total amount of credits that were registered to this project."
-msgstr ""
-
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:5
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:4
 msgid "There are currently no open sell orders for this project."
@@ -4001,7 +3886,7 @@ msgstr ""
 msgid "These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:90
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:91
 msgid "These factors are used to calculate the credits issued for this project."
 msgstr ""
 
@@ -4187,7 +4072,7 @@ msgstr ""
 msgid "Tradable Credits"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
 msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
 msgstr ""
 

@@ -189,17 +189,6 @@ function ProjectDetails(): JSX.Element {
     | CreditClassMetadataLD
     | undefined;
 
-  /** Anchored project metadata comes from IRI resolver. */
-  const { data, isInitialLoading: loadingAnchoredMetadata } = useQuery(
-    getMetadataQuery({
-      iri: onChainProject?.metadata,
-      dataClient,
-      enabled: !!dataClient,
-      languageCode: selectedLanguage,
-    }),
-  );
-  const anchoredMetadata = data as AnchoredProjectMetadataLD | undefined;
-
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     useFetchPaginatedBatches({ projectId: String(onChainProjectId) });
   const { totals: batchesTotal } = getBatchesTotal(batchesWithSupply ?? []);

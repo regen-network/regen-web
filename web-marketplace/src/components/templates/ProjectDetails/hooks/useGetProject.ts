@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
-import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -103,6 +103,7 @@ export const useGetProject = () => {
       iri: onChainProject?.metadata,
       dataClient,
       enabled: !!dataClient,
+      languageCode: selectedLanguage,
     }),
   );
 

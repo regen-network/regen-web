@@ -3,8 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useWallet } from 'lib/wallet/wallet';
 
+import NotFoundPage from 'pages/NotFound';
 import WithLoader from 'components/atoms/WithLoader';
-import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetProject';
 import { useNavigateToSlug } from 'components/templates/ProjectDetails/hooks/useNavigateToSlug';
@@ -30,6 +30,7 @@ export const BuyCredits = () => {
     sellOrders,
     cardSellOrders,
     slug,
+    noProjectFound,
   } = useGetProject();
 
   useNavigateToSlug(slug, '/buy');
@@ -76,6 +77,8 @@ export const BuyCredits = () => {
   useEffect(() => {
     if (confirmationTokenId) summarizePayment(confirmationTokenId);
   }, [confirmationTokenId, summarizePayment]);
+
+  if (noProjectFound) return <NotFoundPage />;
 
   return (
     <WithLoader

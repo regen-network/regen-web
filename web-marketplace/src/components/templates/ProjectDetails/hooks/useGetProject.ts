@@ -5,7 +5,10 @@ import { useAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
+import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
+import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByIdQuery as getOffChainProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
@@ -20,7 +23,7 @@ export const useGetProject = () => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { projectId } = useParams();
   const graphqlClient = useApolloClient();
-  const { ecocreditClient } = useLedger();
+  const { ecocreditClient, dataClient } = useLedger();
 
   // First, check if projectId is an on-chain project id
   // or an off-chain project UUID.
@@ -84,6 +87,28 @@ export const useGetProject = () => {
     ? projectId
     : projectBySlugOnChainId ?? projectByUuidOnChainId;
 
+  const { data: projectResponse } = useQuery(
+    getProjectQuery({
+      request: { projectId: onChainProjectId },
+      client: ecocreditClient,
+      enabled: !!ecocreditClient && !!onChainProjectId,
+    }),
+  );
+
+  const onChainProject = projectResponse?.project;
+
+  /** Anchored project metadata comes from IRI resolver. */
+  const { data, isInitialLoading: loadingAnchoredMetadata } = useQuery(
+    getMetadataQuery({
+      iri: onChainProject?.metadata,
+      dataClient,
+      enabled: !!dataClient,
+      languageCode: selectedLanguage,
+    }),
+  );
+
+  const anchoredMetadata = data as AnchoredProjectMetadataLD | undefined;
+
   const { isBuyFlowDisabled, projectsWithOrderData, loadingBuySellOrders } =
     useBuySellOrderData({
       projectId: onChainProjectId,
@@ -122,6 +147,17 @@ export const useGetProject = () => {
     projectByOnChainId?.data?.projectByOnChainId?.slug ||
     projectBySlug?.data.projectBySlug?.slug;
 
+  const loadingDb =
+    loadingProjectByOnChainId ||
+    loadingProjectBySlug ||
+    loadingOffchainProjectById;
+
+  const noProjectFound =
+    !loadingDb &&
+    !loadingAnchoredMetadata &&
+    !offChainProject &&
+    !projectResponse;
+
   return {
     sanityProject,
     loadingSanityProject,
@@ -141,5 +177,9 @@ export const useGetProject = () => {
     sellOrders,
     cardSellOrders,
     slug,
+    noProjectFound,
+    anchoredMetadata,
+    loadingAnchoredMetadata,
+    projectResponse,
   };
 };

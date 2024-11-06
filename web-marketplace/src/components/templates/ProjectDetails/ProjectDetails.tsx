@@ -29,7 +29,6 @@ import {
 } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { IS_REGEN } from 'lib/env';
-import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
@@ -85,7 +84,7 @@ function ProjectDetails(): JSX.Element {
   const theme = useTheme();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { projectId } = useParams();
-  const { ecocreditClient, dataClient } = useLedger();
+  const { dataClient } = useLedger();
   const { isConnected, isKeplrMobileWeb, wallet, loginDisabled } = useWallet();
 
   const location = useLocation();
@@ -148,6 +147,10 @@ function ProjectDetails(): JSX.Element {
     creditClassOnChain,
     cardSellOrders,
     slug,
+    noProjectFound,
+    anchoredMetadata,
+    loadingAnchoredMetadata,
+    projectResponse,
   } = useGetProject();
 
   useNavigateToSlug(slug);
@@ -159,14 +162,6 @@ function ProjectDetails(): JSX.Element {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   }, [element]);
-
-  const { data: projectResponse } = useQuery(
-    getProjectQuery({
-      request: { projectId: onChainProjectId },
-      client: ecocreditClient,
-      enabled: !!ecocreditClient && !!onChainProjectId,
-    }),
-  );
 
   const onChainProject = projectResponse?.project;
   const jurisdiction = onChainProject?.jurisdiction;
@@ -193,17 +188,6 @@ function ProjectDetails(): JSX.Element {
   const creditClassMetadata = creditClassMetadataRes?.data as
     | CreditClassMetadataLD
     | undefined;
-
-  /** Anchored project metadata comes from IRI resolver. */
-  const { data, isInitialLoading: loadingAnchoredMetadata } = useQuery(
-    getMetadataQuery({
-      iri: onChainProject?.metadata,
-      dataClient,
-      enabled: !!dataClient,
-      languageCode: selectedLanguage,
-    }),
-  );
-  const anchoredMetadata = data as AnchoredProjectMetadataLD | undefined;
 
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     useFetchPaginatedBatches({ projectId: String(onChainProjectId) });
@@ -308,13 +292,7 @@ function ProjectDetails(): JSX.Element {
     setIsCreatePostModalOpen(onChainOrOffChainProjectId);
   }, [onChainOrOffChainProjectId]);
 
-  if (
-    !loadingDb &&
-    !loadingAnchoredMetadata &&
-    !offChainProject &&
-    !projectResponse
-  )
-    return <NotFoundPage />;
+  if (noProjectFound) return <NotFoundPage />;
 
   const projectPhotos = getProjectGalleryPhotos({ offChainProjectMetadata });
   const hasProjectPhotos = projectPhotos.length > 0;

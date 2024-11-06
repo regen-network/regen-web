@@ -71,16 +71,7 @@ export default function ShareIcons({
 
   return (
     <>
-      <Grid
-        container
-        className={classes.root}
-        spacing={2}
-        sx={{
-          [theme.breakpoints.up('md')]: {
-            gap: theme.spacing(4),
-          },
-        }}
-      >
+      <Grid container className={cn(classes.root, 'space-x-2 lg:space-x-4')}>
         <Grid item>
           <a
             href={`https://twitter.com/intent/tweet?url=${url}&text=${twitterShare}`}

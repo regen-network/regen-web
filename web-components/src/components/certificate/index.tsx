@@ -248,19 +248,20 @@ export default function Certificate({
                 sx={{ mb: 2.5, '@media print': { mb: 0 } }}
               >
                 <Body
+                  className="flex flex-wrap justify-center"
                   sx={{
                     '@media print': { fontSize: 9, lineHeight: 0.8 },
                   }}
                 >
                   {certificateData?.batchStartDates?.map((startDate, i) => (
-                    <span key={i}>
+                    <span className="whitespace-nowrap" key={i}>
+                      {certificateData?.batchStartDates && i > 0 && (
+                        <span className="px-5">&bull;</span>
+                      )}
                       {formatCertificateDates(
                         startDate,
                         certificateData?.batchEndDates?.[i],
                       )}
-                      {certificateData?.batchStartDates &&
-                        i < certificateData?.batchStartDates?.length - 1 &&
-                        ', '}
                     </span>
                   ))}
                 </Body>

@@ -18,8 +18,8 @@ import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
-import { KEPLR_LOGIN_REQUIRED } from 'components/organisms/BuyFiatModal/BuyFiatModal.constants';
-import { BuyFiatModalContent } from 'components/organisms/BuyFiatModal/BuyFiatModal.types';
+import { KEPLR_LOGIN_REQUIRED } from 'components/organisms/BuyWarningModal/BuyWarningModal.constants';
+import { BuyWarningModalContent } from 'components/organisms/BuyWarningModal/BuyWarningModal.types';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { HandleSaveType } from 'components/templates/MultiStepTemplate/MultiStep.context';
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
@@ -65,7 +65,7 @@ export const getOrderedSellOrders = (
       ) || [];
 };
 
-export const getFiatModalContent = (
+export const getWarningModalContent = (
   currency: { askDenom: string; askBaseDenom: string } | undefined,
   isWeb2UserWithoutWallet: boolean,
   creditsInRequestedSellOrders: number,
@@ -73,7 +73,7 @@ export const getFiatModalContent = (
   allowedDenomsData: QueryAllowedDenomsResponse | undefined,
   data: BuyCreditsSchemaTypes,
   creditsInAllSellOrders: number | undefined,
-): BuyFiatModalContent | undefined => {
+): BuyWarningModalContent | undefined => {
   if (
     currency?.askDenom === USD_DENOM &&
     isWeb2UserWithoutWallet &&

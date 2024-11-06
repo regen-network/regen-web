@@ -22,11 +22,7 @@ import {
   getProjectCardBodyTextMapping,
   PHOTO_CREDIT,
 } from 'lib/constants/shared.constants';
-import {
-  AnchoredProjectMetadataLD,
-  CreditClassMetadataLD,
-  ProjectMetadataLD,
-} from 'lib/db/types/json-ld';
+import { CreditClassMetadataLD, ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { IS_REGEN } from 'lib/env';
 import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';

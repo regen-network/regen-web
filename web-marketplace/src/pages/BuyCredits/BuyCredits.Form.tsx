@@ -545,7 +545,13 @@ export const BuyCreditsForm = ({
           onClose={setWarningModalState}
           handleClick={action => {
             if (action === KEPLR_LOGIN_REQUIRED) {
-              setSwitchWalletModalAtom(atom => void (atom.open = true));
+              if (!activeWalletAddr) {
+                // no connected wallet address
+                setConnectWalletModal(atom => void (atom.open = true));
+              } else {
+                // user logged in with web2 but not connected to the wallet address associated to his/er account
+                setSwitchWalletModalAtom(atom => void (atom.open = true));
+              }
             } else if (action) {
               navigate(action);
             } else {

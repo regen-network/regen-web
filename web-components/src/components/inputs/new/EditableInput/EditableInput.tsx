@@ -145,7 +145,7 @@ export const EditableInput = ({
             />
             <div className="flex flex-row max-[450px]:flex-col max-[450px]:items-start max-[450px]:ml-15">
               <TextButton
-                className={`lowercase text-xs max-[450px]:text-sm mt-5 sm:mt-0 font-sans min-w-fit ml-10 max-[450px]:m-0 ${
+                className={`lowercase text-xs mt-5 sm:mt-0 font-sans min-w-fit ml-10 max-[450px]:m-0 ${
                   isUpdateDisabled
                     ? 'text-grey-400 hover:text-grey-400 cursor-default'
                     : ''
@@ -157,7 +157,7 @@ export const EditableInput = ({
               </TextButton>
               <span className="text-grey-400 px-3 max-[450px]:hidden">|</span>
               <TextButton
-                className="lowercase text-xs max-[450px]:text-sm mt-5 sm:mt-0 font-sans text-error-400 hover:text-error-200  min-w-fit"
+                className="lowercase text-xs mt-5 sm:mt-0 font-sans text-error-400 hover:text-error-200  min-w-fit"
                 onClick={handleOnCancel}
                 aria-label={cancelButtonText}
               >

@@ -36,7 +36,6 @@ import {
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from './BuyCredits.types';
 
 type GetFormModelParams = {
-  _: TranslatorType;
   paymentOption: PaymentOptionsType;
   retiring: boolean;
   projectId: string;

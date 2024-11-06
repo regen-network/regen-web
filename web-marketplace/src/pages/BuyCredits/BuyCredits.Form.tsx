@@ -261,8 +261,6 @@ export const BuyCreditsForm = ({
         const { retirementReason, country, stateProvince, postalCode } = values;
         const {
           sellOrders: selectedSellOrders,
-          email,
-          name,
           savePaymentMethod,
           createAccount: createActiveAccount,
           // subscribeNewsletter, TODO
@@ -271,15 +269,12 @@ export const BuyCreditsForm = ({
 
         if (selectedSellOrders && creditsAmount)
           purchase({
-            paymentOption,
             selectedSellOrders,
             retiring,
             retirementReason,
             country,
             stateProvince,
             postalCode,
-            email,
-            name,
             savePaymentMethod,
             createActiveAccount,
             paymentMethodId,

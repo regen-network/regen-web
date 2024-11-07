@@ -22,11 +22,7 @@ import {
   getProjectCardBodyTextMapping,
   PHOTO_CREDIT,
 } from 'lib/constants/shared.constants';
-import {
-  AnchoredProjectMetadataLD,
-  CreditClassMetadataLD,
-  ProjectMetadataLD,
-} from 'lib/db/types/json-ld';
+import { CreditClassMetadataLD, ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { IS_REGEN } from 'lib/env';
 import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
@@ -134,10 +130,7 @@ function ProjectDetails(): JSX.Element {
     sanityProject,
     loadingSanityProject,
     projectBySlug,
-    loadingProjectBySlug,
-    loadingProjectByOnChainId,
     offchainProjectByIdData,
-    loadingOffchainProjectById,
     isBuyFlowDisabled,
     projectsWithOrderData,
     loadingBuySellOrders,
@@ -151,6 +144,7 @@ function ProjectDetails(): JSX.Element {
     anchoredMetadata,
     loadingAnchoredMetadata,
     projectResponse,
+    loadingDb,
   } = useGetProject();
 
   useNavigateToSlug(slug);
@@ -245,11 +239,6 @@ function ProjectDetails(): JSX.Element {
     geojson,
     geocodingJurisdictionData,
   });
-
-  const loadingDb =
-    loadingProjectByOnChainId ||
-    loadingProjectBySlug ||
-    loadingOffchainProjectById;
 
   const { credits } = useCreateSellOrderData({
     projectId: projectsWithOrderData[0]?.id,

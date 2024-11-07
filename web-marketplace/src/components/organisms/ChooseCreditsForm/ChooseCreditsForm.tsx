@@ -8,7 +8,7 @@ import React, {
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import {
   CREDIT_VINTAGE_OPTIONS,
@@ -51,10 +51,7 @@ import {
   UISellOrderInfo,
 } from 'pages/Projects/AllProjects/AllProjects.types';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
-import {
-  getCurrencyAmount,
-  getSpendingCap,
-} from 'components/molecules/CreditsAmount/CreditsAmount.utils';
+import { getCurrencyAmount } from 'components/molecules/CreditsAmount/CreditsAmount.utils';
 import { AllowedDenoms } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSummaryCard';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
@@ -138,7 +135,7 @@ export const ChooseCreditsForm = React.memo(
       [],
     );
 
-    const [spendingCap, setSpendingCap] = useAtom(spendingCapAtom);
+    const spendingCap = useAtomValue(spendingCapAtom);
     const [creditsAvailable, setCreditsAvailable] = useState(0);
     const form = useZodForm({
       schema: createChooseCreditsFormSchema({

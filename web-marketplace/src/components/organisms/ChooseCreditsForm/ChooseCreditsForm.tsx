@@ -242,25 +242,6 @@ export const ChooseCreditsForm = React.memo(
     );
 
     useEffect(() => {
-      if (spendingCap === null) {
-        setSpendingCap(
-          getSpendingCap(
-            paymentOption,
-            filteredCryptoSellOrders,
-            cardSellOrders,
-          ),
-        );
-      }
-    }, [
-      cardSellOrders,
-      creditTypePrecision,
-      filteredCryptoSellOrders,
-      paymentOption,
-      setSpendingCap,
-      spendingCap,
-    ]);
-
-    useEffect(() => {
       // If there are some sell orders available for fiat purchase, default to 'card' option
       if (cardSellOrders.length > 0 && !initialPaymentOption) {
         setPaymentOption(PAYMENT_OPTIONS.CARD);

@@ -167,9 +167,9 @@ export const CreditsAmount = ({
 
   // Max credits set
   useEffect(() => {
-    if (maxCreditsSelected) {
+    if (maxCreditsSelected && spendingCap) {
       setValue(CREDITS_AMOUNT, creditsAvailable, { shouldValidate: true });
-      setValue(CURRENCY_AMOUNT, spendingCap as number, {
+      setValue(CURRENCY_AMOUNT, spendingCap, {
         shouldValidate: true,
       });
       setValue(
@@ -246,15 +246,17 @@ export const CreditsAmount = ({
         setMaxCreditsSelected={setMaxCreditsSelected}
       />
       <div className="flex justify-between min-w-full flex-wrap sm:flex-nowrap gap-10 sm:gap-0 items-start">
-        <CurrencyInput
-          maxCurrencyAmount={spendingCap as number}
-          selectPlaceholderAriaLabel={_(msg`Select option`)}
-          selectAriaLabel={_(msg`Select option`)}
-          handleCurrencyAmountChange={handleCurrencyAmountChange}
-          cryptoCurrencies={cryptoCurrencies}
-          displayDenom={displayDenom}
-          allowedDenoms={allowedDenoms}
-        />
+        {spendingCap && (
+          <CurrencyInput
+            maxCurrencyAmount={spendingCap}
+            selectPlaceholderAriaLabel={_(msg`Select option`)}
+            selectAriaLabel={_(msg`Select option`)}
+            handleCurrencyAmountChange={handleCurrencyAmountChange}
+            cryptoCurrencies={cryptoCurrencies}
+            displayDenom={displayDenom}
+            allowedDenoms={allowedDenoms}
+          />
+        )}
         <span className="p-10 sm:p-20 text-xl">=</span>
         <CreditsInput
           creditsAvailable={creditsAvailable}

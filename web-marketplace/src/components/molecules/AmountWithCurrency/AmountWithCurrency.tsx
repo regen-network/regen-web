@@ -27,12 +27,12 @@ export const AmountWithCurrency = ({
     <span className={cn(classes?.amountContainer, 'mr-10')}>
       <SupCurrencyAndAmount
         price={amount}
-        currencyCode={currency.askDenom}
+        currencyCode={currency?.askDenom}
         className={classes?.amount}
       />
     </span>
     <DenomIconWithCurrency
-      baseDenom={currency.askBaseDenom}
+      baseDenom={currency?.askBaseDenom}
       displayDenom={displayDenom}
       className={classes?.denom}
       tooltipText={tooltipText}

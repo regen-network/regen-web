@@ -10,12 +10,12 @@ export function DenomIconWithCurrency({
   className,
   tooltipText,
 }: {
-  baseDenom: string;
+  baseDenom: string | undefined;
   displayDenom: string;
   className?: string;
   tooltipText?: string;
 }) {
-  return (
+  return baseDenom ? (
     <Body size="sm" className={cn('flex gap-5', className)}>
       <DenomIcon
         baseDenom={baseDenom}
@@ -30,5 +30,5 @@ export function DenomIconWithCurrency({
         />
       )}
     </Body>
-  );
+  ) : null;
 }

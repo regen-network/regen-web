@@ -149,15 +149,15 @@ export const getUserMenuItems = ({
     {
       ...SEPARATOR,
     },
-    // {
-    //   ...HEADING_MY_ORDERS,
-    // },
-    // {
-    //   pathname,
-    //   linkComponent,
-    //   ...MY_ORDERS,
-    //   label: _(MY_ORDERS.label),
-    // },
+    {
+      ...HEADING_MY_ORDERS,
+    },
+    {
+      pathname,
+      linkComponent,
+      ...MY_ORDERS,
+      label: _(MY_ORDERS.label),
+    },
     // {
     //   pathname,
     //   linkComponent,

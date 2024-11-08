@@ -19,5 +19,19 @@ query AccountById($id: UUID!) {
         description
       }
     }
+    fiatOrdersByAccountId(orderBy: CREATED_AT_DESC) {
+      nodes {
+        createdAt
+        txHash
+        stripePaymentIntentId
+        retiredCredits
+        totalPrice
+        askDenom
+        creditsAmount
+        projectOnChainId
+        customerName
+        anonymous
+      }
+    }
   }
 }

@@ -20,7 +20,10 @@ import { pxToRem } from 'web-components/src/theme/muiTheme';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   creditClassSelectedFiltersAtom,
+  environmentTypeFiltersAtom,
+  marketTypeFiltersAtom,
   projectsSortAtom,
+  regionFiltersAtom,
   useCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
@@ -57,6 +60,13 @@ import {
   VOLUNTARY_MARKET,
 } from './AllProjects.constants';
 import { normalizeCreditClassFilters } from './AllProjects.normalizers';
+import {
+  getActiveFilterIds,
+  getResetFilters,
+  getSetActiveFilters,
+  getShowResetButton,
+} from './AllProjects.ProjectFilter.utils';
+import ProjectFilterMobile from './AllProjects.ProjectFilterMobile';
 import { SideFilter } from './AllProjects.SideFilter';
 import { TerrasosCredits } from './AllProjects.TerrasosCredits';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
@@ -85,6 +95,42 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
     creditClassSelectedFiltersAtom,
   );
+
+  const [environmentTypeFilters, setEnvironmentTypeFilters] = useAtom(
+    environmentTypeFiltersAtom,
+  );
+  const [regionFilters, setRegionFilters] = useAtom(regionFiltersAtom);
+  const [marketTypeFilters, setMarketTypeFilters] = useAtom(
+    marketTypeFiltersAtom,
+  );
+  const setActiveFilters = (filters: string[]) =>
+    getSetActiveFilters({
+      filterIds: filters,
+      setMarketTypeFilters,
+      setEnvironmentTypeFilters,
+      setRegionFilters,
+      marketTypeFilters,
+      environmentTypeFilters,
+      regionFilters,
+    });
+
+  const activeFilterIds = getActiveFilterIds({
+    marketTypeFilters,
+    environmentTypeFilters,
+    regionFilters,
+  });
+
+  const resetFilters = getResetFilters({
+    setMarketTypeFilters,
+    setEnvironmentTypeFilters,
+    setRegionFilters,
+  });
+
+  const showResetButton = getShowResetButton({
+    marketTypeFilters,
+    environmentTypeFilters,
+    regionFilters,
+  });
 
   const {
     creditClassesWithMetadata,
@@ -175,17 +221,17 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   return (
     <>
-      {IS_REGEN && (
-        <Flex flex={1} sx={{ gridColumn: '1 / -1' }} className="xl:mt-[-78px]">
-          <Flex
-            justifyContent="flex-end"
-            alignItems="center"
-            flex={1}
-            sx={{
-              pb: 5,
-              flexWrap: { xs: 'wrap', lg: 'nowrap' },
-            }}
-          >
+      <Flex flex={1} sx={{ gridColumn: '1 / -1' }} className="xl:mt-[-78px]">
+        <Flex
+          justifyContent="flex-end"
+          alignItems="center"
+          flex={1}
+          sx={{
+            pb: 5,
+            flexWrap: { xs: 'wrap', lg: 'nowrap' },
+          }}
+        >
+          {IS_REGEN && (
             <SideFilter
               creditClassFilters={creditClassFilters}
               hasCommunityProjects={hasCommunityProjects}
@@ -197,6 +243,22 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                 width: { xs: '100%', lg: 'auto' },
               }}
             />
+          )}
+          {IS_TERRASOS && (
+            <ProjectFilterMobile
+              activeFilters={activeFilterIds}
+              setActiveFilters={setActiveFilters}
+              resetFilters={resetFilters}
+              showResetButton={showResetButton}
+              sx={{
+                mb: { xs: 3.75, lg: 0 },
+                mr: { xs: 0, lg: 7.5 },
+                width: { xs: '100%', lg: 'auto' },
+              }}
+              className="lg:hidden"
+            />
+          )}
+          {IS_REGEN && (
             <Flex
               sx={{
                 order: { xs: 1, lg: 2 },
@@ -227,9 +289,9 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                 sx={{ width: 'fit-content' }}
               />
             </Flex>
-          </Flex>
+          )}
         </Flex>
-      )}
+      </Flex>
       {IS_TERRASOS && (
         <TebuBannerWrapper className="-mt-15 mb-3 sm:mt-20 sm:mb-30 col-span-full" />
       )}
@@ -307,7 +369,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           <>
             {showFiltersReset && (
               <Box
-                onClick={resetFilter}
+                onClick={IS_REGEN ? resetFilter : resetFilters}
                 sx={{
                   color: 'secondary.main',
                   cursor: 'pointer',

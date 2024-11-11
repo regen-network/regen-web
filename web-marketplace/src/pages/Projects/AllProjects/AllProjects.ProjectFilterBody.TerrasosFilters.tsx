@@ -1,0 +1,172 @@
+// import RegionIndicatorIcon from '../../icons/terrasos/ColombiaRegionIcon';
+import { msg } from '@lingui/macro';
+import { Box } from '@mui/material';
+
+import RegionIndicatorIcon from 'web-components/src/components/icons/terrasos/ColombiaRegionIcon';
+import HectaresBadge from 'web-components/src/components/icons/terrasos/HectaresBadge';
+import SvgWithSelectedColor from 'web-components/src/components/icons/utils/SvgWithSelectedColor';
+import {
+  Filter,
+  FilterOptions,
+} from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
+
+import { TranslatorType } from 'lib/i18n/i18n.types';
+
+
+const ecosystemIconSx = {
+  width: '30px',
+  height: '30px',
+  mr: 2,
+};
+
+const ecosystemTags = [
+  {
+    name: msg`Tropical very humid forest`,
+    id: 'Tropical Very Humid Forest',
+  },
+  {
+    name: msg`Tropical humid forest`,
+    id: 'Tropical Humid Forest',
+  },
+  {
+    name: msg`Tropical dry forest`,
+    id: 'Tropical Dry Forest',
+  },
+  {
+    name: msg`Premontane humid forest`,
+    id: 'Premontaine Humid Forest',
+  },
+  {
+    name: msg`Low montane very humid forest`,
+    id: 'Low Montane Very Humid Forest',
+  },
+];
+
+// export const filterEcosystemIds = [
+//   'Tropical Very Humid Forest',
+//   'Tropical Humid Forest',
+//   'Tropical Dry Forest',
+//   'Premontaine Humid Forest',
+//   'Low Montane Very Humid Forest',
+// ];
+export const filterEcosystemIds = ecosystemTags.map(({ id }) => id);
+
+export function getEcosystemTags(
+  _: TranslatorType,
+  ecosystemIcons: Record<string, string>,
+): FilterOptions[] {
+  return ecosystemTags.map(({ id, name }) => ({
+    name: _(name),
+    id: id,
+    icon: (
+      <SvgWithSelectedColor
+        src={ecosystemIcons[id]}
+        sx={ecosystemIconSx}
+        unselectedColor="rgba(var(--sc-icon-standard-disabled))"
+        selectedColor="rgba(var(--sc-icon-ecosystem-400))"
+      />
+    ),
+  }));
+}
+
+const regionTags: FilterOptions[] = [
+  {
+    name: 'Amazon',
+    id: 'Amazon',
+    icon: <RegionIndicatorIcon region="AMAZON" />,
+  },
+  {
+    name: 'Pacific',
+    id: 'Pacific',
+    icon: <RegionIndicatorIcon region="PACIFIC" />,
+  },
+  {
+    name: 'Orinoco',
+    id: 'Orinoco',
+    icon: <RegionIndicatorIcon region="ORINOCO" />,
+  },
+  {
+    name: 'Caribbean',
+    id: 'Carribean',
+    icon: <RegionIndicatorIcon region="CARIBBEAN" />,
+  },
+  {
+    name: 'Andean',
+    id: 'Andean',
+    icon: <RegionIndicatorIcon region="ANDEAN" />,
+  },
+];
+
+const marketCheckboxes = [
+  {
+    name: msg`Voluntary`,
+    id: 'VOLUNTARY',
+    icon: (
+      <Box
+        component="img"
+        sx={{ width: '24px', ml: 2 }}
+        src="/svg/tebu-badge.svg"
+        alt="Tebu"
+      />
+    ),
+  },
+  {
+    name: msg`Compliance`,
+    id: 'COMPLIANCE',
+    icon: <HectaresBadge />,
+  },
+];
+
+function getMarketCheckboxes(_: TranslatorType): FilterOptions[] {
+  return marketCheckboxes.map(({ name, id, icon }) => ({
+    name: _(name),
+    id: id,
+    icon: icon,
+  }));
+}
+
+// const filters: Filter[] = [
+//   {
+//     displayType: 'tag',
+//     title: 'Region',
+//     options: regionTags,
+//   },
+//   {
+//     displayType: 'tag',
+//     title: 'Ecosystem',
+//     options: ecosystemTags,
+//     hasCollapse: true,
+//   },
+//   {
+//     displayType: 'checkbox',
+//     title: 'Market',
+//     options: marketCheckboxes,
+//   },
+// ];
+
+// export default filters;
+
+export function getFilters(
+  _: TranslatorType,
+  ecosystemIcons: Record<string, string>,
+): Filter[] {
+  return [
+    {
+      displayType: 'tag',
+      title: _(msg`Region`),
+      options: regionTags,
+    },
+    {
+      displayType: 'tag',
+      title: _(msg`Ecosystem`),
+      // options: ecosystemTags.map(tag => ({ ...tag, name: _(tag.name) })),
+      options: getEcosystemTags(_, ecosystemIcons),
+      hasCollapse: true,
+    },
+    {
+      displayType: 'checkbox',
+      title: _(msg`Market`),
+      options: getMarketCheckboxes(_),
+    },
+  ];
+}

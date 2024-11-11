@@ -8,6 +8,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { fontSize } from '@mui/system';
 
 import { Subtitle, Title } from '../../typography';
 import TagFilter from './ProjectFilter.TagFilter';
@@ -52,21 +53,25 @@ export default function ProjectFilters({
   const handleExpand = (index: number) => {
     setIsExpanded({ ...isExpanded, [index]: !isExpanded[index] });
   };
+  console.log(activeFilterIds);
   return (
     <>
-      <Box display="flex" justifyContent="space-between" alignItems="baseline">
-        <Title variant="h4">{labels.title}</Title>
-        <Subtitle onClick={onFilterReset} sx={{ cursor: 'pointer' }}>
+      <div className="font-montserrat justify-between items-baseline flex">
+        <div className="text-[18px] font-bold">{labels.title}</div>
+        <div
+          className="cursor-pointer text-[14px] text-sc-text-link font-bold"
+          onClick={onFilterReset}
+        >
           {labels.reset}
-        </Subtitle>
-      </Box>
+        </div>
+      </div>
       <Divider sx={{ my: 5 }} />
       {filters.map((filter, index) => {
         return (
           <Box sx={{ mb: 5 }} key={filter.title}>
-            <Title variant="h5" sx={{ mb: 5 }}>
+            <div className="text-[16px] font-montserrat font-bold mb-[20px] ">
               {filter.title}
-            </Title>
+            </div>
 
             <Collapse
               in={
@@ -84,12 +89,13 @@ export default function ProjectFilters({
                       key={id}
                       isSelected={activeFilterIds.includes(id)}
                       onClick={() => onFilterChange(id)}
+                      sx={{ fontFamily: 'Montserrat' }}
                     />
                   ))}
                 </Box>
               )}
               {filter.displayType === 'checkbox' && (
-                <Box display="flex" flexDirection="column">
+                <div className="flex flex-column flex-wrap">
                   {filter.options.map(({ name, icon, id }) => (
                     <CheckboxFilter
                       isSelected={activeFilterIds.includes(id)}
@@ -99,7 +105,7 @@ export default function ProjectFilters({
                       onChange={() => onFilterChange(id)}
                     />
                   ))}
-                </Box>
+                </div>
               )}
             </Collapse>
             {filter.hasCollapse && (
@@ -107,6 +113,7 @@ export default function ProjectFilters({
                 disableRipple
                 onClick={() => handleExpand(index)}
                 sx={{ fontWeight: '700' }}
+                className="text-sc-text-link"
               >
                 {isExpanded[index] ? labels.collapse : labels.expand}
               </ButtonBase>

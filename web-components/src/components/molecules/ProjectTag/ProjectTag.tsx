@@ -9,9 +9,15 @@ export interface Props {
   tag: ProjectTagType;
   sx?: SxProps<Theme>;
   onClick?: () => void;
+  fontSize?: any;
 }
 
-const ProjectTag = ({ tag, sx = [], onClick }: Props): JSX.Element => {
+const ProjectTag = ({
+  tag,
+  sx = [],
+  onClick,
+  fontSize = { xs: 12, sm: 14 },
+}: Props): JSX.Element => {
   const { icon, name } = tag;
 
   return (
@@ -44,7 +50,7 @@ const ProjectTag = ({ tag, sx = [], onClick }: Props): JSX.Element => {
         />
       )}
       {isValidElement(icon) && icon}
-      <Box sx={{ fontWeight: 700, fontSize: { xs: 12, sm: 14 } }}>{name}</Box>
+      <Box sx={{ fontWeight: 700, fontSize }}>{name}</Box>
     </Box>
   );
 };

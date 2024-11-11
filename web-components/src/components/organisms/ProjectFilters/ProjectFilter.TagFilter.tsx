@@ -1,5 +1,7 @@
 import { cloneElement } from 'react';
+import { SxProps } from '@mui/system';
 
+import { Theme } from '../../../theme/muiTheme';
 import { ProjectTag } from '../../molecules/ProjectTag/ProjectTag';
 
 interface TagFilterProps {
@@ -7,6 +9,7 @@ interface TagFilterProps {
   name: string;
   isSelected: boolean;
   onClick?: () => void;
+  sx?: SxProps<Theme>;
 }
 
 const tagSx = {
@@ -23,12 +26,14 @@ export default function TagFilter({
   name,
   isSelected,
   onClick,
+  sx = {},
 }: TagFilterProps) {
   // add isSelected prop to icon
   const iconWithProps = cloneElement(icon, { isSelected });
   return (
     <ProjectTag
-      sx={tagSx}
+      sx={{ ...tagSx, ...sx }}
+      fontSize={12}
       tag={{
         name,
         icon: iconWithProps,

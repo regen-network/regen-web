@@ -1,9 +1,8 @@
 import { Box } from '@mui/material';
 
 import { ComplianceInfoQuery } from 'generated/sanity-graphql';
-import { ProjectPageMetadataLD } from 'lib/db/types/json-ld';
+import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 import { TranslatorType } from 'lib/i18n/i18n.types';
-import { ReactQueryComplianceInfoQueryResponse } from 'lib/queries/react-query/sanity/getComplianceInfoQuery/getComplianceInfoQuery.types';
 
 import { TableTabs } from 'components/organisms/TableTabs';
 
@@ -13,26 +12,32 @@ type Props = {
   _: TranslatorType;
   projectBatchTotals?: JSX.Element;
   projectPageMetadata: ProjectPageMetadataLD;
+  projectMetadata?: ProjectMetadataLD;
   isOnChain?: boolean;
   complianceInfo?: ComplianceInfoQuery;
   complianceCredits?: JSX.Element;
+  isComplianceProject: boolean;
 };
 
 export default function TerrasosCreditsInfo({
   _,
   projectBatchTotals,
   projectPageMetadata,
+  projectMetadata,
   isOnChain,
   complianceInfo,
   complianceCredits,
+  isComplianceProject,
 }: Props) {
   const tabs = getTerrasosCreditsTabs({
     _,
     projectBatchTotals,
     projectPageMetadata,
+    projectMetadata,
     isOnChain,
     complianceInfo,
     complianceCredits,
+    isComplianceProject,
   });
   return tabs.length > 0 ? (
     <Box sx={{ mt: 0 }}>

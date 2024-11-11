@@ -47,6 +47,11 @@ export function ProjectBatchTotals({
     project: projectWithOrderData,
     soldOutProjectsIds,
   });
+  const hasSoldOutProject = soldOutProjectsIds.length > 0;
+  const hasAvailableCredits = totals.tradableAmount > 0;
+  const terrasosIsSoldOut = hasSoldOutProject
+    ? isSoldOut
+    : !hasAvailableCredits;
 
   const tooltipClassName = IS_TERRASOS ? 'w-[17px] h-[17px]' : '';
   return (
@@ -84,8 +89,9 @@ export function ProjectBatchTotals({
           }
           tooltipLabel={_(TRADEABLE_CREDITS_TOOLTIP)}
           tooltipNumber={getCreditsTooltip({
-            isSoldOut,
+            isSoldOut: IS_TERRASOS ? terrasosIsSoldOut : isSoldOut,
             project: projectWithOrderData,
+            totals,
             _,
           })}
           number={isSoldOut ? undefined : totals.tradableAmount}

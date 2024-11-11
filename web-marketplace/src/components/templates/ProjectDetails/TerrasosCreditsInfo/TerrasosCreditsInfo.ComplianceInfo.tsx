@@ -1,6 +1,6 @@
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { Box, ButtonBase } from '@mui/material';
+import { Box, ButtonBase, Grid } from '@mui/material';
 
 import {
   BlockContent,
@@ -9,18 +9,35 @@ import {
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { LinkType } from 'web-components/src/types/shared/linkType';
 
+import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
+import {
+  getFieldLabel,
+  getFieldType,
+  getProjectUnknownFields,
+} from 'lib/rdf/rdf.unknown-fields';
+
+import { MetaDetail } from 'components/molecules';
+
+import ComplianceMarketIcon from 'assets/svgs/checkmarkList.svg';
+
 type Props = {
   learnMoreLink: LinkType;
   description: SanityBlockContent;
   complianceCredits?: JSX.Element;
+  projectPageMetadata?: ProjectPageMetadataLD;
+  projectMetadata?: ProjectMetadataLD;
 };
 
 const ComplianceInfo = ({
   learnMoreLink,
   description,
   complianceCredits,
+  projectMetadata,
 }: Props) => {
   const { _ } = useLingui();
+  const unknownFields = projectMetadata
+    ? getProjectUnknownFields(projectMetadata)
+    : [];
 
   return (
     <Box
@@ -39,8 +56,8 @@ const ComplianceInfo = ({
         <div className="font-montserrat text-[32px] font-bold gap-[10px] flex items-center">
           {_(msg`Compliance info`)}
           <img
-            src="/svg/tebu-badge.svg"
-            alt={_(msg`Tebu badge`)}
+            src={ComplianceMarketIcon}
+            alt={_(msg`Checkmark list`)}
             className="h-[50px] w-[50px]"
           />
         </div>
@@ -55,7 +72,16 @@ const ComplianceInfo = ({
           {learnMoreLink.text}
           <SmallArrowIcon sx={{ width: '7px', ml: '4px' }} />
         </ButtonBase>
-
+        <Grid container spacing={8}>
+          {unknownFields.map(([fieldName, value]) => (
+            <MetaDetail
+              key={fieldName}
+              label={getFieldLabel(fieldName)}
+              value={value}
+              rdfType={getFieldType(fieldName, projectMetadata?.['@context'])}
+            />
+          ))}
+        </Grid>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-[20px] mt-4 justify-items-center sm:justify-items-start"></div>
       </div>
     </Box>

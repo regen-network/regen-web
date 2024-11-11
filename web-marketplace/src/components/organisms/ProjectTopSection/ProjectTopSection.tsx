@@ -31,13 +31,9 @@ import { getAllCreditTypeQuery } from 'lib/queries/react-query/sanity/getAllCred
 import { getAllOffsetMethodQuery } from 'lib/queries/react-query/sanity/getAllOffsetMethodQuery/getAllOffsetMethodQuery';
 import { getAllProjectRatingQuery } from 'lib/queries/react-query/sanity/getAllProjectRatingQuery/getAllProjectRatingQuery';
 import { getComplianceInfoQuery } from 'lib/queries/react-query/sanity/getComplianceInfoQuery/getComplianceInfoQuery';
-import { isTerrasosProject } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery.types';
 
 import useImpact from 'pages/CreditClassDetails/hooks/useImpact';
-import {
-  COMPLIANCE_MARKET,
-  VOLUNTARY_MARKET,
-} from 'pages/Projects/AllProjects/AllProjects.constants';
+import { COMPLIANCE_MARKET } from 'pages/Projects/AllProjects/AllProjects.constants';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -225,6 +221,9 @@ function ProjectTopSection({
     tradableAmount: normalizedProject?.complianceCredits.creditsAvailable ?? 0,
   };
 
+  const isComplianceProject =
+    normalizedProject?.marketType?.includes(COMPLIANCE_MARKET) ?? false;
+
   return (
     <Section classes={{ root: classes.section }}>
       <Grid
@@ -309,12 +308,14 @@ function ProjectTopSection({
               />
             )}
           </Box>
-          {onChainProjectId && isTerrasosProjectPage && projectPageMetadata && (
+          {isTerrasosProjectPage && projectPageMetadata && (
             <TerrasosCreditsInfo
               _={_}
               isOnChain={!!onChainProjectId}
               projectPageMetadata={projectPageMetadata}
+              projectMetadata={projectMetadata}
               complianceInfo={allComplianceInfo}
+              isComplianceProject={isComplianceProject}
               projectBatchTotals={
                 onChainProjectId && batchData?.totals ? (
                   <ProjectBatchTotals

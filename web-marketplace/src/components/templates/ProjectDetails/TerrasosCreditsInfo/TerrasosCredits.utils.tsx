@@ -4,7 +4,7 @@ import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { LinkType } from 'web-components/src/types/shared/linkType';
 
 import { ComplianceInfoQuery } from 'generated/sanity-graphql';
-import { ProjectPageMetadataLD } from 'lib/db/types/json-ld';
+import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import ComplianceInfo from './TerrasosCreditsInfo.ComplianceInfo';
@@ -14,18 +14,22 @@ type GetTerrasosCreditsTabsProps = {
   _: TranslatorType;
   projectBatchTotals?: JSX.Element;
   projectPageMetadata?: ProjectPageMetadataLD;
+  projectMetadata?: ProjectMetadataLD;
   isOnChain?: boolean;
   complianceInfo?: ComplianceInfoQuery;
   complianceCredits?: JSX.Element;
+  isComplianceProject: boolean;
 };
 
 export function getTerrasosCreditsTabs({
   _,
   projectBatchTotals,
   projectPageMetadata,
+  projectMetadata,
   isOnChain,
   complianceInfo,
   complianceCredits,
+  isComplianceProject,
 }: GetTerrasosCreditsTabsProps): IconTabProps[] {
   const complianceInfoItem = complianceInfo?.allComplianceInfo[0];
   const learnMoreLink: LinkType = {
@@ -53,8 +57,10 @@ export function getTerrasosCreditsTabs({
           learnMoreLink={learnMoreLink}
           description={description}
           complianceCredits={complianceCredits}
+          projectMetadata={projectMetadata}
         />
       ),
+      hidden: !isComplianceProject,
     },
   ].filter(tab => !tab.hidden);
 }

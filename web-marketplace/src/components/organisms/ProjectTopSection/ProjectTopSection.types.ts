@@ -23,8 +23,6 @@ import {
 } from 'lib/db/types/json-ld';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
-
 export type ProjectTopSectionProps = {
   offChainProject?: Maybe<ProjectFieldsFragment>;
   onChainProject?: ProjectInfo;

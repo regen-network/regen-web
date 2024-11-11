@@ -91,7 +91,6 @@ export function ProjectBatchTotals({
           tooltipNumber={getCreditsTooltip({
             isSoldOut: IS_TERRASOS ? terrasosIsSoldOut : isSoldOut,
             project: projectWithOrderData,
-            totals,
             _,
           })}
           number={isSoldOut ? undefined : totals.tradableAmount}

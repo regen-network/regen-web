@@ -282,8 +282,6 @@ function ProjectDetails(): JSX.Element {
     setIsCreatePostModalOpen(onChainOrOffChainProjectId);
   }, [onChainOrOffChainProjectId]);
 
-  if (noProjectFound) return <NotFoundPage />;
-
   const projectPrefinancing = sanityProject?.projectPrefinancing;
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
 
@@ -310,14 +308,6 @@ function ProjectDetails(): JSX.Element {
       projectPrefinancing,
     ],
   );
-
-  if (
-    !loadingDb &&
-    !loadingAnchoredMetadata &&
-    !offChainProject &&
-    !projectResponse
-  )
-    return <NotFoundPage />;
 
   const projectPhotos = getProjectGalleryPhotos({ offChainProjectMetadata });
   const hasProjectPhotos = projectPhotos.length > 0;
@@ -347,6 +337,8 @@ function ProjectDetails(): JSX.Element {
     : offchainProjectByIdData?.data?.projectById?.published ||
       projectBySlug?.data.projectBySlug?.published;
   const projectLocation = projectMetadata?.['schema:location'];
+
+  if (noProjectFound) return <NotFoundPage />;
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>

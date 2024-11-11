@@ -271,7 +271,11 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               sx={{ width: 400, height: 479 }}
               track={track}
               isSoldOut={isSoldOut}
-              creditsTooltip={getCreditsTooltip({ isSoldOut, project, _ })}
+              creditsTooltip={getCreditsTooltip({
+                isSoldOut,
+                project,
+                _,
+              })}
               program={project.program}
               projectPrefinancing={project.projectPrefinancing}
               offChain={config.buyButton ? project.offChain : true}

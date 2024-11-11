@@ -16,6 +16,9 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+msgid ""
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -893,6 +896,10 @@ msgstr "Personaje"
 msgid "Check your wallet for a confirmation popup."
 msgstr "Revise su billetera para ver si aparece una ventana emergente de confirmación."
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:60
+msgid "Checkmark list"
+msgstr ""
+
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:9
 msgid "Choose 2-10 photos for the photo gallery."
 msgstr "Elija entre 2 y 10 fotografías para la galería de fotos."
@@ -1009,13 +1016,17 @@ msgstr "Los créditos comunitarios son créditos que no han pasado por el <0>pro
 msgid "Complete"
 msgstr "Completo"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.tsx:33
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:54
 msgid "Compliance Credits"
 msgstr "Créditos de cumplimiento"
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:17
 msgid "Compliance credits are mandatory to meet government regulations."
 msgstr "Los créditos de cumplimiento son obligatorios para cumplir con las regulaciones gubernamentales."
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:57
+msgid "Compliance info"
+msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:45
 msgid "Congrats! You successfully created this post."
@@ -1331,7 +1342,7 @@ msgstr "Los créditos se mantienen en depósito en garantía cuando se crea una 
 msgid "credits available"
 msgstr "créditos disponibles"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:83
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:88
 msgid "Credits Available"
 msgstr "Créditos disponibles"
 
@@ -1371,7 +1382,7 @@ msgstr "¡Se han emitido los créditos!"
 msgid "Credits Input"
 msgstr "Entrada de créditos"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:69
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:74
 msgid "Credits issued"
 msgstr "Créditos emitidos"
 
@@ -1384,12 +1395,12 @@ msgid "Credits purchased with crypto can be purchased in either a retired or tra
 msgstr "Los créditos comprados con criptomonedas se pueden comprar en estado retirado o negociable."
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:105
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:110
 msgid "Credits Retired"
 msgstr "Créditos Retirados"
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:83
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:88
 msgid "Credits Tradable"
 msgstr "Créditos negociables"
 
@@ -2126,7 +2137,7 @@ msgstr "Aprende más"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:52
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:10
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:99
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:98
 msgid "Learn more"
 msgstr "Más información"
 
@@ -2791,11 +2802,15 @@ msgstr "prefinanciar este proyecto"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
 msgid "Preservation"
-msgstr "Preservación"
+msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:155
 msgid "Preservation Factor:"
-msgstr "Factor de conservación:"
+msgstr ">>>>>>> e40f80198 (chore: update i18n messages)"
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
+#~ msgid "Preservation<<<<<<< HEAD"
+#~ msgstr "Preservación"
 
 #: src/pages/Post/Post.constants.ts:13
 msgid "prev"
@@ -2936,9 +2951,9 @@ msgstr "Proyecto"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:20
 msgid "PROJECT"
-msgstr "PROYECTO"
+msgstr "PROYECTO<<<<<<< HEAD"
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:163
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:174
 msgid "Project {onChainProjectId}"
 msgstr "Proyecto {onChainProjectId}"
 
@@ -3767,7 +3782,7 @@ msgstr "tomar de la cesta"
 msgid "Take from basket"
 msgstr "Tomar de la cesta"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:85
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:84
 msgid "Tebu badge"
 msgstr "Insignia de bastón"
 
@@ -3775,11 +3790,11 @@ msgstr "Insignia de bastón"
 msgid "Tebu banner"
 msgstr "Bandera de caña de azúcar."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.tsx:22
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:43
 msgid "Tebu Credits"
 msgstr "Créditos de caña"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:82
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:81
 msgid "Tebu factors"
 msgstr "Factores de Tebu"
 
@@ -3928,7 +3943,7 @@ msgstr "Estos créditos se retirarán al momento de la compra y no se podrán ca
 msgid "These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
 msgstr "Estos créditos se retirarán al momento de la compra y no se podrán canjear. La retirada es permanente e irreversible."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:91
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:90
 msgid "These factors are used to calculate the credits issued for this project."
 msgstr "Estos factores se utilizan para calcular los créditos emitidos para este proyecto."
 

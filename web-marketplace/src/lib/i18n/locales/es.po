@@ -16,9 +16,6 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -116,7 +113,7 @@ msgstr "# créditos"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:27
 msgid "© 2024 Terrasos SAS | All rights reserved"
-msgstr ""
+msgstr "© 2024 Terrasos SAS | Todos los derechos reservados"
 
 #: src/pages/CreditClassDetails/CreditClassDetails.ApprovedMethodologies.tsx:57
 msgid "+ {0} more"
@@ -280,7 +277,7 @@ msgstr "Actúa ahora"
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:75
 msgid "Act Now - Tebu"
-msgstr ""
+msgstr "Actúa ahora - Tebu"
 
 #: src/pages/Post/Post.constants.ts:6
 msgid "actions"
@@ -1080,7 +1077,7 @@ msgstr "Contribuye mínimamente"
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:96
 msgid "Cookies Policy"
-msgstr ""
+msgstr "Política de cookies"
 
 #: src/components/atoms/WrappedStepCard.tsx:62
 msgid "Copy"
@@ -2570,7 +2567,7 @@ msgstr "operador"
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:79
 msgid "Opportunities"
-msgstr ""
+msgstr "Oportunidades"
 
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:67
 msgid "or, log in with email / social"
@@ -2594,7 +2591,7 @@ msgstr "Otras prácticas de pastoreo regenerativo"
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:49
 msgid "Our Services"
-msgstr ""
+msgstr "Nuestros servicios"
 
 #: src/components/organisms/CreditClassOverviewSection.tsx:147
 msgid "Overview"
@@ -2773,7 +2770,7 @@ msgstr "Desarrollado por"
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:83
 msgid "PQR Request"
-msgstr ""
+msgstr "Solicitud PQR"
 
 #: src/lib/constants/shared.constants.tsx:176
 msgid "prefinance"
@@ -2790,11 +2787,11 @@ msgstr "prefinanciar este proyecto"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
 msgid "Preservation"
-msgstr ""
+msgstr "Preservación"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:155
 msgid "Preservation Factor:"
-msgstr ""
+msgstr "Factor de conservación:"
 
 #: src/pages/Post/Post.constants.ts:13
 msgid "prev"
@@ -2859,7 +2856,7 @@ msgstr "Privacidad"
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:91
 msgid "Privacy Policy"
-msgstr ""
+msgstr "política de privacidad"
 
 #: src/components/organisms/PostForm/PostForm.tsx:371
 msgid "Privacy settings"
@@ -3796,7 +3793,7 @@ msgstr "Términos"
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:87
 msgid "Terms and Conditions"
-msgstr ""
+msgstr "Términos y condiciones"
 
 #: src/components/atoms/AgreeErpaCheckbox.tsx:41
 #: src/components/atoms/AgreeErpaCheckboxNew.tsx:49
@@ -4420,7 +4417,7 @@ msgstr "ver video"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:28
 msgid "We are a company specialized in structuring and operating environmental investments."
-msgstr ""
+msgstr "Somos una empresa especializada en la estructuración y operación de inversiones ambientales."
 
 #: src/pages/BuyCredits/BuyCredits.constants.ts:18
 msgid "We have emailed you a receipt to"

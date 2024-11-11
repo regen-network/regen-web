@@ -132,6 +132,7 @@ const RegenStepper = ({
                   styles.alternativeLabel,
                   onStepClick && styles.hover,
                   classes?.stepLabel,
+                  'hover:cursor-default',
                 ),
                 iconContainer:
                   classes?.stepIcon ||

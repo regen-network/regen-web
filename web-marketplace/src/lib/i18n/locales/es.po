@@ -16,9 +16,6 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -898,7 +895,7 @@ msgstr "Revise su billetera para ver si aparece una ventana emergente de confirm
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:60
 msgid "Checkmark list"
-msgstr ""
+msgstr "Lista de marcas de verificación"
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:9
 msgid "Choose 2-10 photos for the photo gallery."
@@ -1026,7 +1023,7 @@ msgstr "Los créditos de cumplimiento son obligatorios para cumplir con las regu
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:57
 msgid "Compliance info"
-msgstr ""
+msgstr "Información de cumplimiento"
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:45
 msgid "Congrats! You successfully created this post."
@@ -2802,15 +2799,19 @@ msgstr "prefinanciar este proyecto"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
 msgid "Preservation"
-msgstr ""
+msgstr "Preservación"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:155
 msgid "Preservation Factor:"
-msgstr ">>>>>>> e40f80198 (chore: update i18n messages)"
+msgstr "Factor de conservación:"
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:155
+#~ msgid "Preservation Factor:<<<<<<< HEAD"
+#~ msgstr ">>>>>>> e40f80198 (chore: update i18n messages)"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
 #~ msgid "Preservation<<<<<<< HEAD"
-#~ msgstr "Preservación"
+#~ msgstr "Factor de conservación:>>>>>>> 82a60e8da (chore: translate new fields)"
 
 #: src/pages/Post/Post.constants.ts:13
 msgid "prev"

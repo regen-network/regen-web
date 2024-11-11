@@ -111,6 +111,10 @@ msgstr "{años} años de duración del proyecto"
 msgid "# credits"
 msgstr "# créditos"
 
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:27
+msgid "© 2024 Terrasos SAS | All rights reserved"
+msgstr "© 2024 Terrasos SAS | Todos los derechos reservados"
+
 #: src/pages/CreditClassDetails/CreditClassDetails.ApprovedMethodologies.tsx:57
 msgid "+ {0} more"
 msgstr "+ {0} más"
@@ -254,6 +258,7 @@ msgstr "Un tercero que proporciona una evaluación independiente e imparcial del
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr "Un identificador único que rastrea y verifica una transacción específica en la cadena de bloques."
 
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:45
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:18
 msgid "About Us"
 msgstr "Sobre nosotros"
@@ -269,6 +274,10 @@ msgstr "Acres"
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:118
 msgid "Act now"
 msgstr "Actúa ahora"
+
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:75
+msgid "Act Now - Tebu"
+msgstr "Actúa ahora - Tebu"
 
 #: src/pages/Post/Post.constants.ts:6
 msgid "actions"
@@ -1057,6 +1066,7 @@ msgstr "La conectividad permite el flujo de especies y procesos ecológicos que 
 msgid "Consumer/Individual/myself"
 msgstr "Consumidor/Individuo/yo mismo"
 
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:66
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:69
 msgid "Contact"
 msgstr "Contacto"
@@ -1064,6 +1074,10 @@ msgstr "Contacto"
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:142
 msgid "Contributes minimally"
 msgstr "Contribuye mínimamente"
+
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:96
+msgid "Cookies Policy"
+msgstr "Política de cookies"
 
 #: src/components/atoms/WrappedStepCard.tsx:62
 msgid "Copy"
@@ -1086,8 +1100,8 @@ msgid "Copy link to project page"
 msgstr "Copiar enlace a la página del proyecto"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:27
-msgid "Copyright © 2024 Terrasos | All rights reserved"
-msgstr "Copyright © 2024 Terrasos | Todos los derechos reservados"
+#~ msgid "Copyright © 2024 Terrasos | All rights reserved"
+#~ msgstr "Copyright © 2024 Terrasos | Todos los derechos reservados"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:552
 #: src/lib/constants/shared.constants.tsx:58
@@ -1184,11 +1198,11 @@ msgstr "id de lote de crédito{0, plural, uno {} otro {(s)}}"
 msgid "Credit Batch Info"
 msgstr "Información del lote de crédito"
 
-#: src/components/organisms/CreditBatches/CreditBatches.tsx:126
+#: src/components/organisms/CreditBatches/CreditBatches.tsx:127
 msgid "credit batch table"
 msgstr "tabla de lotes de crédito"
 
-#: src/components/organisms/CreditBatches/CreditBatches.tsx:242
+#: src/components/organisms/CreditBatches/CreditBatches.tsx:243
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
 #: src/pages/Dashboard/Dashboard.constants.tsx:42
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:93
@@ -1370,7 +1384,7 @@ msgid "Credits purchased with crypto can be purchased in either a retired or tra
 msgstr "Los créditos comprados con criptomonedas se pueden comprar en estado retirado o negociable."
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:103
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:105
 msgid "Credits Retired"
 msgstr "Créditos Retirados"
 
@@ -1864,6 +1878,7 @@ msgstr "¡Fondos solicitados exitosamente!"
 msgid "Gallery photos"
 msgstr "Fotos de la galería"
 
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:61
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:45
 msgid "Geo-Viewer"
 msgstr "Visor geográfico"
@@ -1880,6 +1895,7 @@ msgstr "Los pastizales se definen como tierras formadas por grandes áreas abier
 msgid "Grasslands-based credits"
 msgstr "Créditos basados en pastizales"
 
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:53
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:26
 msgid "Habitat banks"
 msgstr "Bancos de hábitat"
@@ -2089,7 +2105,7 @@ msgstr "Gran corporación"
 msgid "Last Updated:"
 msgstr "Última actualización:"
 
-#: src/components/templates/ProjectDetails/hooks/useSeo.ts:56
+#: src/components/templates/ProjectDetails/hooks/useSeo.ts:62
 msgid "Learn about {creditClassName} credits sourced from {accountName} in {projectAddress}."
 msgstr "Obtenga información sobre los créditos {creditClassName} provenientes de {accountName} en {projectAddress}."
 
@@ -2458,7 +2474,7 @@ msgstr "No se encontraron ecocréditos puente"
 msgid "No credit batches to display"
 msgstr "No hay lotes de créditos para mostrar"
 
-#: src/components/organisms/CreditBatches/CreditBatches.tsx:106
+#: src/components/organisms/CreditBatches/CreditBatches.tsx:107
 msgid "No credits issued"
 msgstr "No se emitieron créditos"
 
@@ -2549,6 +2565,10 @@ msgstr "¡Ups! Página no encontrada."
 msgid "operator"
 msgstr "operador"
 
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:79
+msgid "Opportunities"
+msgstr "Oportunidades"
+
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:67
 msgid "or, log in with email / social"
 msgstr "o inicie sesión con correo electrónico / redes sociales"
@@ -2568,6 +2588,10 @@ msgstr "Nombre de la organización"
 #: src/components/organisms/AdditionalityForm.tsx:179
 msgid "Other regenerative grazing practice"
 msgstr "Otras prácticas de pastoreo regenerativo"
+
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:49
+msgid "Our Services"
+msgstr "Nuestros servicios"
 
 #: src/components/organisms/CreditClassOverviewSection.tsx:147
 msgid "Overview"
@@ -2744,6 +2768,10 @@ msgstr "Código Postal"
 msgid "Powered by"
 msgstr "Desarrollado por"
 
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:83
+msgid "PQR Request"
+msgstr "Solicitud PQR"
+
 #: src/lib/constants/shared.constants.tsx:176
 msgid "prefinance"
 msgstr "prefinanciamiento"
@@ -2756,6 +2784,14 @@ msgstr "Proyectos de prefinanciación"
 #: src/lib/constants/shared.constants.tsx:208
 msgid "prefinance this project"
 msgstr "prefinanciar este proyecto"
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
+msgid "Preservation"
+msgstr "Preservación"
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:155
+msgid "Preservation Factor:"
+msgstr "Factor de conservación:"
 
 #: src/pages/Post/Post.constants.ts:13
 msgid "prev"
@@ -2817,6 +2853,10 @@ msgstr "Antes de adoptar estas prácticas regenerativas (hace 5 años) ¿cómo u
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:100
 msgid "Privacy"
 msgstr "Privacidad"
+
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:91
+msgid "Privacy Policy"
+msgstr "política de privacidad"
 
 #: src/components/organisms/PostForm/PostForm.tsx:371
 msgid "Privacy settings"
@@ -2894,7 +2934,7 @@ msgstr "Proyecto"
 msgid "PROJECT"
 msgstr "PROYECTO"
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:152
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:163
 msgid "Project {onChainProjectId}"
 msgstr "Proyecto {onChainProjectId}"
 
@@ -3140,12 +3180,12 @@ msgstr "Proveedor de datos de regeneración"
 msgid "Regen impact address"
 msgstr "Dirección de impacto de Regen"
 
-#: src/components/templates/ProjectDetails/hooks/useSeo.ts:52
+#: src/components/templates/ProjectDetails/hooks/useSeo.ts:56
 #: src/siteMetadata.ts:4
 msgid "Regen Marketplace"
 msgstr "Mercado de lluvia"
 
-#: src/components/templates/ProjectDetails/hooks/useSeo.ts:59
+#: src/components/templates/ProjectDetails/hooks/useSeo.ts:68
 #: src/siteMetadata.ts:6
 msgid "Regen Network"
 msgstr "Red de regeneración"
@@ -3751,11 +3791,16 @@ msgstr "Cuente la historia más profunda de lo que hace que este proyecto sea es
 msgid "Terms"
 msgstr "Términos"
 
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:87
+msgid "Terms and Conditions"
+msgstr "Términos y condiciones"
+
 #: src/components/atoms/AgreeErpaCheckbox.tsx:41
 #: src/components/atoms/AgreeErpaCheckboxNew.tsx:49
 msgid "terms of service"
 msgstr "Condiciones del servicio"
 
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:29
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:7
 msgid "Terrasos Logo"
 msgstr "Logotipo de Terrasos"
@@ -4370,6 +4415,10 @@ msgstr "Integración de billetera"
 msgid "watch video"
 msgstr "ver video"
 
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:28
+msgid "We are a company specialized in structuring and operating environmental investments."
+msgstr "Somos una empresa especializada en la estructuración y operación de inversiones ambientales."
+
 #: src/pages/BuyCredits/BuyCredits.constants.ts:18
 msgid "We have emailed you a receipt to"
 msgstr "Le hemos enviado un recibo por correo electrónico a"
@@ -4395,6 +4444,7 @@ msgstr "Le enviaremos su recibo a la dirección de correo electrónico que apare
 msgid "We've just sent a confirmation email to:"
 msgstr "Acabamos de enviar un correo electrónico de confirmación a:"
 
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:57
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:41
 msgid "What is Tebu"
 msgstr "¿Qué es Tebu?"

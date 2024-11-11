@@ -3,6 +3,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { Link } from 'components/atoms';
 
+import { TERRASOS_BASE_PATHNAME } from '../TerrasosHeader/TerrasosHeader.constants';
 import { TerrasosColumnItem, TerrasosSocialItem } from './Terrasos.types';
 
 import terrasosFooterLogo from 'assets/svgs/logos/terrasosFooterLogo.svg';
@@ -70,35 +71,48 @@ export const TerrasosFooter = ({
               </Link>
             </div>
           </div>
-          {columnItems?.map((columnItem, index) => (
-            <div className="md:w-[20%]" key={columnItem.title}>
+          {columnItems?.map(columnItem => (
+            <div
+              className="md:w-[20%] mt-[72px] md:mt-0"
+              key={columnItem.title}
+            >
               <div className="flex flex-col items-center md:items-start md:mx-[12px] md:mb-[40px]">
                 <h6 className="text-brand-300 text-[13px] md:text-[15px] font-bold leading-[160%] mb-30 mt-0 whitespace-nowrap uppercase">
                   {columnItem.title}
                 </h6>
                 <ul className="list-none pl-0 flex flex-col items-center md:items-start my-0">
-                  {columnItem.links?.map((item, subIndex) => (
-                    <li
-                      key={item.label ?? subIndex}
-                      className="mb-20 font-medium text-[15px] text-center md:text-left"
-                    >
-                      {item.href && (
-                        <Link
-                          href={item.href}
-                          className="block whitespace-pre-line"
-                        >
-                          {item.label}
-                        </Link>
-                      )}
-                      {item.subLinks && (
-                        <div className="flex flex-col items-center md:items-start">
-                          {item.subLinks.map(subLink => (
-                            <Link href={subLink.href}>{subLink.label}</Link>
-                          ))}
-                        </div>
-                      )}
-                    </li>
-                  ))}
+                  {columnItem.links?.map((item, subIndex) => {
+                    const isActive = item.href?.startsWith(
+                      TERRASOS_BASE_PATHNAME,
+                    );
+
+                    return (
+                      <li
+                        key={item.label ?? subIndex}
+                        className="mb-20 last:mb-0 font-medium text-[15px] text-center md:text-left"
+                      >
+                        {item.href && (
+                          <Link
+                            href={item.href}
+                            className={cn(
+                              'block whitespace-pre-line',
+                              isActive && 'text-brand-300',
+                            )}
+                            target="_self"
+                          >
+                            {item.label}
+                          </Link>
+                        )}
+                        {item.subLinks && (
+                          <div className="flex flex-col items-center md:items-start">
+                            {item.subLinks.map(subLink => (
+                              <Link href={subLink.href}>{subLink.label}</Link>
+                            ))}
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </div>

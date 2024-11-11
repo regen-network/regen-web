@@ -1,6 +1,7 @@
 /* eslint-disable lingui/no-unlocalized-strings */
 import { msg } from '@lingui/macro';
 
+import FacebookIcon from 'web-components/src/components/icons/social/FacebookIcon';
 import InstagramIcon from 'web-components/src/components/icons/social/InstagramIcon';
 import LinkedInIcon from 'web-components/src/components/icons/social/LinkedInIcon';
 import TwitterIcon from 'web-components/src/components/icons/social/TwitterIcon';
@@ -11,11 +12,6 @@ import { TranslatorType } from 'lib/i18n/i18n.types';
 import { TerrasosColumnItem, TerrasosSocialItem } from './Terrasos.types';
 
 export const terrasosFooterSocialItems: TerrasosSocialItem[] = [
-  {
-    name: 'Twitter',
-    href: 'https://x.com/TerrasosCo',
-    Icon: TwitterIcon,
-  },
   {
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/company/terrasos/',
@@ -29,9 +25,20 @@ export const terrasosFooterSocialItems: TerrasosSocialItem[] = [
     className: 'p-[3px]',
   },
   {
+    name: 'X',
+    href: 'https://x.com/TerrasosCo',
+    Icon: TwitterIcon,
+  },
+  {
     name: 'YouTube',
     href: 'https://www.youtube.com/channel/UCXMGrR3xfTDL2Z1CyMPURJg',
     Icon: YoutubeIcon,
+  },
+  {
+    name: 'Facebook',
+    href: 'https://www.facebook.com/people/Terrasos-Oficial/61550597363991/',
+    Icon: FacebookIcon,
+    className: 'p-[3px]',
   },
 ];
 

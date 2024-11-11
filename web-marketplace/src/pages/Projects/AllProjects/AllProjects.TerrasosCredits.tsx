@@ -10,6 +10,7 @@ import {
   VOLUNTARY_MARKET_TOOLTIP,
 } from './AllProjects.constants';
 
+import hectaresLogo from 'assets/svgs/logos/hectares.svg';
 import tebuLogo from 'assets/svgs/logos/tebu.svg';
 
 type Props = {
@@ -53,7 +54,7 @@ export const TerrasosCredits = ({
             placement="top"
             title={_(COMPLIANCE_MARKET_TOOLTIP)}
           >
-            <HectaresBadge className="ml-[3px]" />
+            <img src={hectaresLogo} alt="hectares" className="ml-[3px]" />
           </InfoTooltip>
         </span>
       )}

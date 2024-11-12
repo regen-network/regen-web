@@ -79,6 +79,7 @@ const ComplianceInfo = ({
               label={getFieldLabel(fieldName)}
               value={value}
               rdfType={getFieldType(fieldName, projectMetadata?.['@context'])}
+              bodySize="lg"
             />
           ))}
         </Grid>

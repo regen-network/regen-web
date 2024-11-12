@@ -258,7 +258,7 @@ msgstr "Un tercero que proporciona una evaluación independiente e imparcial del
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr "Un identificador único que rastrea y verifica una transacción específica en la cadena de bloques."
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:45
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:52
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:18
 msgid "About Us"
 msgstr "Sobre nosotros"
@@ -275,7 +275,7 @@ msgstr "Acres"
 msgid "Act now"
 msgstr "Actúa ahora"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:75
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:82
 msgid "Act Now - Tebu"
 msgstr "Actúa ahora - Tebu"
 
@@ -1066,7 +1066,7 @@ msgstr "La conectividad permite el flujo de especies y procesos ecológicos que 
 msgid "Consumer/Individual/myself"
 msgstr "Consumidor/Individuo/yo mismo"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:66
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:73
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:69
 msgid "Contact"
 msgstr "Contacto"
@@ -1075,7 +1075,7 @@ msgstr "Contacto"
 msgid "Contributes minimally"
 msgstr "Contribuye mínimamente"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:96
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:103
 msgid "Cookies Policy"
 msgstr "Política de cookies"
 
@@ -1878,7 +1878,7 @@ msgstr "¡Fondos solicitados exitosamente!"
 msgid "Gallery photos"
 msgstr "Fotos de la galería"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:61
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:68
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:45
 msgid "Geo-Viewer"
 msgstr "Visor geográfico"
@@ -1895,7 +1895,7 @@ msgstr "Los pastizales se definen como tierras formadas por grandes áreas abier
 msgid "Grasslands-based credits"
 msgstr "Créditos basados en pastizales"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:53
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:60
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:26
 msgid "Habitat banks"
 msgstr "Bancos de hábitat"
@@ -1907,6 +1907,10 @@ msgstr "picadillo"
 #: src/components/organisms/CreditClassForms/CreditClassFinished.tsx:34
 msgid "Hash"
 msgstr "Picadillo"
+
+#: src/pages/Projects/AllProjects/AllProjects.TerrasosCredits.tsx:59
+msgid "hectares"
+msgstr "hectáreas"
 
 #: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:193
 msgid "Hectares"
@@ -2565,7 +2569,7 @@ msgstr "¡Ups! Página no encontrada."
 msgid "operator"
 msgstr "operador"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:79
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:86
 msgid "Opportunities"
 msgstr "Oportunidades"
 
@@ -2589,7 +2593,7 @@ msgstr "Nombre de la organización"
 msgid "Other regenerative grazing practice"
 msgstr "Otras prácticas de pastoreo regenerativo"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:49
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:56
 msgid "Our Services"
 msgstr "Nuestros servicios"
 
@@ -2768,7 +2772,7 @@ msgstr "Código Postal"
 msgid "Powered by"
 msgstr "Desarrollado por"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:83
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:90
 msgid "PQR Request"
 msgstr "Solicitud PQR"
 
@@ -2854,7 +2858,7 @@ msgstr "Antes de adoptar estas prácticas regenerativas (hace 5 años) ¿cómo u
 msgid "Privacy"
 msgstr "Privacidad"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:91
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:98
 msgid "Privacy Policy"
 msgstr "política de privacidad"
 
@@ -3791,7 +3795,7 @@ msgstr "Cuente la historia más profunda de lo que hace que este proyecto sea es
 msgid "Terms"
 msgstr "Términos"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:87
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:94
 msgid "Terms and Conditions"
 msgstr "Términos y condiciones"
 
@@ -4444,7 +4448,7 @@ msgstr "Le enviaremos su recibo a la dirección de correo electrónico que apare
 msgid "We've just sent a confirmation email to:"
 msgstr "Acabamos de enviar un correo electrónico de confirmación a:"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:57
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:64
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:41
 msgid "What is Tebu"
 msgstr "¿Qué es Tebu?"

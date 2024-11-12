@@ -1,6 +1,6 @@
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
-import HectaresBadge from 'web-components/src/components/icons/terrasos/HectaresBadge';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
@@ -54,7 +54,11 @@ export const TerrasosCredits = ({
             placement="top"
             title={_(COMPLIANCE_MARKET_TOOLTIP)}
           >
-            <img src={hectaresLogo} alt="hectares" className="ml-[3px]" />
+            <img
+              src={hectaresLogo}
+              alt={_(msg`hectares`)}
+              className="ml-[3px]"
+            />
           </InfoTooltip>
         </span>
       )}

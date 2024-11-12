@@ -1,10 +1,12 @@
 import { msg } from '@lingui/macro';
 
+import { IS_REGEN } from 'lib/env';
+
 export const IMAGE_STORAGE_BASE_URL = import.meta.env
   .VITE_IMAGE_STORAGE_BASE_URL;
 export const API_URI = import.meta.env.VITE_API_URI;
 export const VIEW_ECOCREDITS = 'view your ecocredits';
-export const PROJECTS_PER_PAGE = 6;
+export const PROJECTS_PER_PAGE = IS_REGEN ? 6 : 9;
 
 export const sortOptions = [
   { label: msg`Featured projects`, value: 'featured-projects' },

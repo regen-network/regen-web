@@ -261,7 +261,7 @@ msgstr ""
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr ""
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:45
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:52
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:18
 msgid "About Us"
 msgstr ""
@@ -278,7 +278,7 @@ msgstr ""
 msgid "Act now"
 msgstr ""
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:75
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:82
 msgid "Act Now - Tebu"
 msgstr ""
 
@@ -1069,7 +1069,7 @@ msgstr ""
 msgid "Consumer/Individual/myself"
 msgstr ""
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:66
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:73
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:69
 msgid "Contact"
 msgstr ""
@@ -1078,7 +1078,7 @@ msgstr ""
 msgid "Contributes minimally"
 msgstr ""
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:96
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:103
 msgid "Cookies Policy"
 msgstr ""
 
@@ -1881,7 +1881,7 @@ msgstr ""
 msgid "Gallery photos"
 msgstr ""
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:61
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:68
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:45
 msgid "Geo-Viewer"
 msgstr ""
@@ -1898,7 +1898,7 @@ msgstr ""
 msgid "Grasslands-based credits"
 msgstr ""
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:53
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:60
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:26
 msgid "Habitat banks"
 msgstr ""
@@ -1909,6 +1909,10 @@ msgstr ""
 
 #: src/components/organisms/CreditClassForms/CreditClassFinished.tsx:34
 msgid "Hash"
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.TerrasosCredits.tsx:59
+msgid "hectares"
 msgstr ""
 
 #: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:193
@@ -2568,7 +2572,7 @@ msgstr ""
 msgid "operator"
 msgstr ""
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:79
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:86
 msgid "Opportunities"
 msgstr ""
 
@@ -2592,7 +2596,7 @@ msgstr ""
 msgid "Other regenerative grazing practice"
 msgstr ""
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:49
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:56
 msgid "Our Services"
 msgstr ""
 
@@ -2771,7 +2775,7 @@ msgstr ""
 msgid "Powered by"
 msgstr ""
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:83
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:90
 msgid "PQR Request"
 msgstr ""
 
@@ -2857,7 +2861,7 @@ msgstr ""
 msgid "Privacy"
 msgstr ""
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:91
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:98
 msgid "Privacy Policy"
 msgstr ""
 
@@ -3794,7 +3798,7 @@ msgstr ""
 msgid "Terms"
 msgstr ""
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:87
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:94
 msgid "Terms and Conditions"
 msgstr ""
 
@@ -4443,7 +4447,7 @@ msgstr ""
 msgid "We've just sent a confirmation email to:"
 msgstr ""
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:57
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:64
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:41
 msgid "What is Tebu"
 msgstr ""

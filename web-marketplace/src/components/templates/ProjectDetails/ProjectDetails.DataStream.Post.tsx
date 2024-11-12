@@ -37,7 +37,7 @@ import copyTextToClipboard from 'web-components/src/utils/copy';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { COPY_SUCCESS } from 'lib/constants/shared.constants';
-import { IS_REGEN, LINK_PREFIX, MARKETPLACE_APP_URL } from 'lib/env';
+import { LINK_PREFIX } from 'lib/env';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
@@ -199,7 +199,11 @@ export const DataStreamPost = ({
           {post.contents && (post.privacy !== 'private' || isAdmin) && (
             <PostCard
               draftLabel={!post.published ? _(DRAFT) : undefined}
-              onClick={() => post.published && navigate(`/post/${post.iri}`)}
+              onClick={() =>
+                post.published && LINK_PREFIX
+                  ? window.open(`${LINK_PREFIX}/post/${post.iri}`)
+                  : navigate(`/post/${post.iri}`)
+              }
               title={post.contents.title || _(UNTITLED)}
               comment={post.contents.comment}
               privacyLabel={
@@ -224,7 +228,9 @@ export const DataStreamPost = ({
               isAdmin={isAdmin}
               sharePublicLink={() => {
                 copyTextToClipboard(
-                  `${window.location.origin}/post/${post.iri}`,
+                  LINK_PREFIX
+                    ? `${LINK_PREFIX}/post/${post.iri}`
+                    : `${window.location.origin}/post/${post.iri}`,
                 );
                 setBannerText(_(COPY_SUCCESS));
               }}

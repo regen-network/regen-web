@@ -893,6 +893,10 @@ msgstr "Personaje"
 msgid "Check your wallet for a confirmation popup."
 msgstr "Revise su billetera para ver si aparece una ventana emergente de confirmación."
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:61
+msgid "Checkmark list"
+msgstr "Lista de marcas de verificación"
+
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:9
 msgid "Choose 2-10 photos for the photo gallery."
 msgstr "Elija entre 2 y 10 fotografías para la galería de fotos."
@@ -1009,13 +1013,17 @@ msgstr "Los créditos comunitarios son créditos que no han pasado por el <0>pro
 msgid "Complete"
 msgstr "Completo"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.tsx:33
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:54
 msgid "Compliance Credits"
 msgstr "Créditos de cumplimiento"
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:17
 msgid "Compliance credits are mandatory to meet government regulations."
 msgstr "Los créditos de cumplimiento son obligatorios para cumplir con las regulaciones gubernamentales."
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:58
+msgid "Compliance info"
+msgstr "Información de cumplimiento"
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:45
 msgid "Congrats! You successfully created this post."
@@ -1331,7 +1339,7 @@ msgstr "Los créditos se mantienen en depósito en garantía cuando se crea una 
 msgid "credits available"
 msgstr "créditos disponibles"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:83
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
 msgid "Credits Available"
 msgstr "Créditos disponibles"
 
@@ -1371,7 +1379,7 @@ msgstr "¡Se han emitido los créditos!"
 msgid "Credits Input"
 msgstr "Entrada de créditos"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:69
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:79
 msgid "Credits issued"
 msgstr "Créditos emitidos"
 
@@ -1383,13 +1391,17 @@ msgstr "créditos comprados"
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr "Los créditos comprados con criptomonedas se pueden comprar en estado retirado o negociable."
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:78
+msgid "Credits Registered"
+msgstr "Créditos registrados"
+
 #: src/components/molecules/BatchTotalsGrid.tsx:46
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:105
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:120
 msgid "Credits Retired"
 msgstr "Créditos Retirados"
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:83
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
 msgid "Credits Tradable"
 msgstr "Créditos negociables"
 
@@ -2126,7 +2138,7 @@ msgstr "Aprende más"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:52
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:10
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:99
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:98
 msgid "Learn more"
 msgstr "Más información"
 
@@ -2797,6 +2809,14 @@ msgstr "Preservación"
 msgid "Preservation Factor:"
 msgstr "Factor de conservación:"
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:155
+#~ msgid "Preservation Factor:<<<<<<< HEAD"
+#~ msgstr ">>>>>>> e40f80198 (chore: update i18n messages)"
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
+#~ msgid "Preservation<<<<<<< HEAD"
+#~ msgstr "Factor de conservación:>>>>>>> 82a60e8da (chore: translate new fields)"
+
 #: src/pages/Post/Post.constants.ts:13
 msgid "prev"
 msgstr "anterior"
@@ -2936,9 +2956,9 @@ msgstr "Proyecto"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:20
 msgid "PROJECT"
-msgstr "PROYECTO"
+msgstr "PROYECTO<<<<<<< HEAD"
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:163
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:175
 msgid "Project {onChainProjectId}"
 msgstr "Proyecto {onChainProjectId}"
 
@@ -3303,7 +3323,7 @@ msgstr "Retirar créditos al momento de la transferencia"
 msgid "Retired by"
 msgstr "Jubilado por"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr "Los créditos retirados han sido retirados de circulación de forma permanente y no pueden venderse a nadie más."
 
@@ -3620,7 +3640,7 @@ msgstr "Cuentas sociales"
 msgid "Social and Cultural Index"
 msgstr "Índice social y cultural"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
 #: src/lib/constants/shared.constants.tsx:171
 msgid "Sold Out"
 msgstr "Agotado"
@@ -3767,7 +3787,7 @@ msgstr "tomar de la cesta"
 msgid "Take from basket"
 msgstr "Tomar de la cesta"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:85
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:84
 msgid "Tebu badge"
 msgstr "Insignia de bastón"
 
@@ -3775,11 +3795,11 @@ msgstr "Insignia de bastón"
 msgid "Tebu banner"
 msgstr "Bandera de caña de azúcar."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.tsx:22
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:43
 msgid "Tebu Credits"
 msgstr "Créditos de caña"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:82
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:81
 msgid "Tebu factors"
 msgstr "Factores de Tebu"
 
@@ -3903,6 +3923,10 @@ msgstr "La estructura, los procedimientos y los requisitos para el registro de p
 msgid "The total amount of credits that were issued to this project."
 msgstr "Monto total de créditos que se emitieron para este proyecto."
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
+msgid "The total amount of credits that were registered to this project."
+msgstr "La cantidad total de créditos que se registraron en este proyecto."
+
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:5
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:4
 msgid "There are currently no open sell orders for this project."
@@ -3928,7 +3952,7 @@ msgstr "Estos créditos se retirarán al momento de la compra y no se podrán ca
 msgid "These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
 msgstr "Estos créditos se retirarán al momento de la compra y no se podrán canjear. La retirada es permanente e irreversible."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:91
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:90
 msgid "These factors are used to calculate the credits issued for this project."
 msgstr "Estos factores se utilizan para calcular los créditos emitidos para este proyecto."
 
@@ -4118,7 +4142,7 @@ msgstr "NEGOCIABLES Y RETIRARSE"
 msgid "Tradable Credits"
 msgstr "Créditos negociables"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
 msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
 msgstr "Los créditos negociables aún no han sido retirados y pueden conservarse, venderse o enviarse a otra parte."
 

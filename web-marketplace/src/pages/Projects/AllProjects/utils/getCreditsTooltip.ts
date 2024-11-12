@@ -16,6 +16,7 @@ export const getCreditsTooltip = ({
   _,
 }: Params): string | undefined => {
   if (isSoldOut) return _(SOLD_OUT_TOOLTIP);
+
   if (
     IS_REGEN &&
     !project?.purchaseInfo?.sellInfo?.creditsAvailable &&

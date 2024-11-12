@@ -54,12 +54,17 @@ const MetaDetailBaseValue: React.FC<Props> = ({
   return (
     <>
       {formattedValue && (
-        <Body size={bodySize} sx={sxToArray(sx)}>
+        <Body size={bodySize} sx={sxToArray(sx)} className="break-all">
           {formattedValue}
         </Body>
       )}
       {value && isCompactedNameUrlOrOptionalUrl(value) && (
-        <Body size={bodySize} styleLinks={false} sx={sxToArray(sx)}>
+        <Body
+          size={bodySize}
+          styleLinks={false}
+          sx={sxToArray(sx)}
+          className="break-all"
+        >
           <LinkWithArrow
             href={value['schema:url']}
             label={value['schema:name']}

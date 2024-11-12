@@ -12,7 +12,9 @@ import { ImpactTags } from 'web-components/src/components/organisms/ImpactTags/I
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
 import Section from 'web-components/src/components/section';
 import { Body, Label, Title } from 'web-components/src/components/typography';
+import { pxToRem } from 'web-components/src/theme/muiTheme';
 
+import { BatchTotalsForProject } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
@@ -29,8 +31,10 @@ import { getAllCreditCertificationQuery } from 'lib/queries/react-query/sanity/g
 import { getAllCreditTypeQuery } from 'lib/queries/react-query/sanity/getAllCreditTypeQuery/getAllCreditTypeQuery';
 import { getAllOffsetMethodQuery } from 'lib/queries/react-query/sanity/getAllOffsetMethodQuery/getAllOffsetMethodQuery';
 import { getAllProjectRatingQuery } from 'lib/queries/react-query/sanity/getAllProjectRatingQuery/getAllProjectRatingQuery';
+import { getComplianceInfoQuery } from 'lib/queries/react-query/sanity/getComplianceInfoQuery/getComplianceInfoQuery';
 
 import useImpact from 'pages/CreditClassDetails/hooks/useImpact';
+import { COMPLIANCE_MARKET } from 'pages/Projects/AllProjects/AllProjects.constants';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -76,6 +80,7 @@ function ProjectTopSection({
   program,
   projectPrefinancing,
   isSoldOut,
+  normalizedProject,
 }: ProjectTopSectionProps): JSX.Element {
   const { _ } = useLingui();
   const { classes } = useProjectTopSectionStyles();
@@ -133,6 +138,13 @@ function ProjectTopSection({
   );
   const { data: allCreditCertification } = useQuery(
     getAllCreditCertificationQuery({
+      sanityClient,
+      languageCode: selectedLanguage,
+    }),
+  );
+
+  const { data: allComplianceInfo } = useQuery(
+    getComplianceInfoQuery({
       sanityClient,
       languageCode: selectedLanguage,
     }),
@@ -202,6 +214,16 @@ function ProjectTopSection({
 
   const isTerrasosProjectPage =
     projectPageMetadata?.['@type'] === 'TerrasosProjectInfo';
+
+  const cancelledOrRegisteredAmount: BatchTotalsForProject = {
+    cancelledAmount:
+      normalizedProject?.complianceCredits.creditsRegistered ?? 0,
+    retiredAmount: normalizedProject?.complianceCredits.creditsRetired ?? 0,
+    tradableAmount: normalizedProject?.complianceCredits.creditsAvailable ?? 0,
+  };
+
+  const isComplianceProject =
+    normalizedProject?.marketType?.includes(COMPLIANCE_MARKET) ?? false;
 
   return (
     <Section classes={{ root: classes.section }}>
@@ -287,11 +309,14 @@ function ProjectTopSection({
               />
             )}
           </Box>
-          {onChainProjectId && isTerrasosProjectPage && projectPageMetadata && (
+          {isTerrasosProjectPage && projectPageMetadata && (
             <TerrasosCreditsInfo
               _={_}
               isOnChain={!!onChainProjectId}
               projectPageMetadata={projectPageMetadata}
+              projectMetadata={projectMetadata}
+              complianceInfo={allComplianceInfo}
+              isComplianceProject={isComplianceProject}
               projectBatchTotals={
                 onChainProjectId && batchData?.totals ? (
                   <ProjectBatchTotals
@@ -299,11 +324,21 @@ function ProjectTopSection({
                     soldOutProjectsIds={soldOutProjectsIds}
                     totals={batchData.totals}
                     sx={{
-                      mt: { xs: '30px', sm: '50px' },
-                      mb: '30px',
+                      mt: { xs: pxToRem(30), sm: pxToRem(50) },
+                      mb: pxToRem(30),
                     }}
                   />
                 ) : undefined
+              }
+              complianceCredits={
+                <ProjectBatchTotals
+                  soldOutProjectsIds={[]}
+                  totals={cancelledOrRegisteredAmount}
+                  sx={{
+                    mt: { xs: pxToRem(30), sm: pxToRem(50) },
+                    mb: pxToRem(30),
+                  }}
+                />
               }
             />
           )}

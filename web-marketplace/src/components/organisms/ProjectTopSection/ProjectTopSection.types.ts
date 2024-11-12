@@ -46,6 +46,7 @@ export type ProjectTopSectionProps = {
   program?: Account;
   projectPrefinancing?: ProjectPrefinancing | null;
   isSoldOut: boolean;
+  normalizedProject?: NormalizeProject;
 };
 
 export type SdgType = SdgByIriQuery['allSdg'][0];

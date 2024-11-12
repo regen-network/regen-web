@@ -25,6 +25,7 @@ import {
 import { CreditClassMetadataLD, ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { IS_REGEN } from 'lib/env';
+import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
@@ -281,7 +282,32 @@ function ProjectDetails(): JSX.Element {
     setIsCreatePostModalOpen(onChainOrOffChainProjectId);
   }, [onChainOrOffChainProjectId]);
 
-  if (noProjectFound) return <NotFoundPage />;
+  const projectPrefinancing = sanityProject?.projectPrefinancing;
+  const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
+
+  const normalizedProject = useMemo(
+    () =>
+      normalizeProjectWithMetadata({
+        offChainProject,
+        projectWithOrderData: projectsWithOrderData[0],
+        projectMetadata: projectMetadata,
+        projectPageMetadata: offChainProjectMetadata,
+        classMetadata: creditClassMetadata,
+        sanityClass: creditClassSanity,
+        sanityProject,
+        projectPrefinancing,
+      }),
+    [
+      offChainProject,
+      projectsWithOrderData,
+      projectMetadata,
+      offChainProjectMetadata,
+      creditClassMetadata,
+      creditClassSanity,
+      sanityProject,
+      projectPrefinancing,
+    ],
+  );
 
   const projectPhotos = getProjectGalleryPhotos({ offChainProjectMetadata });
   const hasProjectPhotos = projectPhotos.length > 0;
@@ -295,9 +321,6 @@ function ProjectDetails(): JSX.Element {
     setBuyFromProjectId,
     projectId,
   });
-
-  const projectPrefinancing = sanityProject?.projectPrefinancing;
-  const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
 
   const isAdmin =
     (!!activeAccount?.addr && onChainProject?.admin === activeAccount?.addr) ||
@@ -314,6 +337,8 @@ function ProjectDetails(): JSX.Element {
     : offchainProjectByIdData?.data?.projectById?.published ||
       projectBySlug?.data.projectBySlug?.published;
   const projectLocation = projectMetadata?.['schema:location'];
+
+  if (noProjectFound) return <NotFoundPage />;
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
@@ -442,6 +467,7 @@ function ProjectDetails(): JSX.Element {
         program={program}
         projectPrefinancing={projectPrefinancing}
         isSoldOut={isSoldOut}
+        normalizedProject={normalizedProject}
       />
 
       {hasProjectPhotos && (

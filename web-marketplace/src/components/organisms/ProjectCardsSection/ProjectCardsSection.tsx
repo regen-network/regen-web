@@ -135,7 +135,7 @@ export function ProjectCardsSection({
                       project={project}
                       isVoluntaryProject={isVoluntaryProject}
                       isComplianceProject={isComplianceProject}
-                      complianceCredits={complianceCredits}
+                      complianceCredits={complianceCredits.creditsAvailable}
                     />
                   ) : null
                 }

@@ -1280,7 +1280,7 @@ msgstr ""
 msgid "credit name"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:264
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:268
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr ""
 
@@ -3435,8 +3435,8 @@ msgstr ""
 msgid "Select all"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:249
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:250
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:252
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:253
 msgid "Select option"
 msgstr ""
 
@@ -4367,6 +4367,10 @@ msgstr ""
 
 #: src/components/organisms/MediaSection.tsx:36
 msgid "watch video"
+msgstr ""
+
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:28
+msgid "We are a company specialized in structuring and operating environmental investments."
 msgstr ""
 
 #: src/pages/BuyCredits/BuyCredits.constants.ts:19

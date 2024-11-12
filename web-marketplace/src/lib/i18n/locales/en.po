@@ -896,7 +896,7 @@ msgstr ""
 msgid "Check your wallet for a confirmation popup."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:60
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:61
 msgid "Checkmark list"
 msgstr ""
 
@@ -1024,7 +1024,7 @@ msgstr ""
 msgid "Compliance credits are mandatory to meet government regulations."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:57
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:58
 msgid "Compliance info"
 msgstr ""
 
@@ -1342,7 +1342,7 @@ msgstr ""
 msgid "credits available"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:88
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
 msgid "Credits Available"
 msgstr ""
 
@@ -1382,7 +1382,7 @@ msgstr ""
 msgid "Credits Input"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:74
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:79
 msgid "Credits issued"
 msgstr ""
 
@@ -1394,13 +1394,17 @@ msgstr ""
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr ""
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:78
+msgid "Credits Registered"
+msgstr ""
+
 #: src/components/molecules/BatchTotalsGrid.tsx:46
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:110
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:120
 msgid "Credits Retired"
 msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:88
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
 msgid "Credits Tradable"
 msgstr ""
 
@@ -2949,7 +2953,7 @@ msgstr ""
 msgid "PROJECT"
 msgstr "<<<<<<< HEAD"
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:174
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:175
 msgid "Project {onChainProjectId}"
 msgstr ""
 
@@ -3314,7 +3318,7 @@ msgstr ""
 msgid "Retired by"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr ""
 
@@ -3631,7 +3635,7 @@ msgstr ""
 msgid "Social and Cultural Index"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
 #: src/lib/constants/shared.constants.tsx:171
 msgid "Sold Out"
 msgstr ""
@@ -3914,6 +3918,10 @@ msgstr ""
 msgid "The total amount of credits that were issued to this project."
 msgstr ""
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
+msgid "The total amount of credits that were registered to this project."
+msgstr ""
+
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:5
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:4
 msgid "There are currently no open sell orders for this project."
@@ -4129,7 +4137,7 @@ msgstr ""
 msgid "Tradable Credits"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
 msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
 msgstr ""
 

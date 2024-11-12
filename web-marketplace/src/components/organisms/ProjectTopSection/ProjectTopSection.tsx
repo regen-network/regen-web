@@ -12,6 +12,7 @@ import { ImpactTags } from 'web-components/src/components/organisms/ImpactTags/I
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
 import Section from 'web-components/src/components/section';
 import { Body, Label, Title } from 'web-components/src/components/typography';
+import { pxToRem } from 'web-components/src/theme/muiTheme';
 
 import { BatchTotalsForProject } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';
@@ -214,7 +215,7 @@ function ProjectTopSection({
   const isTerrasosProjectPage =
     projectPageMetadata?.['@type'] === 'TerrasosProjectInfo';
 
-  const complianceCredits: BatchTotalsForProject = {
+  const cancelledOrRegisteredAmount: BatchTotalsForProject = {
     cancelledAmount:
       normalizedProject?.complianceCredits.creditsRegistered ?? 0,
     retiredAmount: normalizedProject?.complianceCredits.creditsRetired ?? 0,
@@ -323,8 +324,8 @@ function ProjectTopSection({
                     soldOutProjectsIds={soldOutProjectsIds}
                     totals={batchData.totals}
                     sx={{
-                      mt: { xs: '30px', sm: '50px' },
-                      mb: '30px',
+                      mt: { xs: pxToRem(30), sm: pxToRem(50) },
+                      mb: pxToRem(30),
                     }}
                   />
                 ) : undefined
@@ -332,10 +333,10 @@ function ProjectTopSection({
               complianceCredits={
                 <ProjectBatchTotals
                   soldOutProjectsIds={[]}
-                  totals={complianceCredits}
+                  totals={cancelledOrRegisteredAmount}
                   sx={{
-                    mt: { xs: '30px', sm: '50px' },
-                    mb: '30px',
+                    mt: { xs: pxToRem(30), sm: pxToRem(50) },
+                    mb: pxToRem(30),
                   }}
                 />
               }

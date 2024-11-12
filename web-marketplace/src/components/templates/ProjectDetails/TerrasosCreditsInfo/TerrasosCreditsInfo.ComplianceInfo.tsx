@@ -7,6 +7,7 @@ import {
   SanityBlockContent,
 } from 'web-components/src/components/block-content';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
+import { pxToRem } from 'web-components/src/theme/muiTheme';
 import { LinkType } from 'web-components/src/types/shared/linkType';
 
 import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
@@ -42,9 +43,9 @@ const ComplianceInfo = ({
   return (
     <Box
       sx={{
-        px: '30px',
-        pb: '30px',
-        pt: '10px',
+        px: pxToRem(30),
+        pb: pxToRem(30),
+        pt: pxToRem(10),
         backgroundColor: 'primary.main',
         border: '1px solid',
         borderColor: 'info.light',
@@ -61,7 +62,7 @@ const ComplianceInfo = ({
             className="h-[50px] w-[50px]"
           />
         </div>
-        <div className="my-[10px]">
+        <div className="my-10">
           <BlockContent content={description} />
         </div>
         <ButtonBase

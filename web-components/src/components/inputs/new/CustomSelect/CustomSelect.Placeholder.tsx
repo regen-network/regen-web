@@ -29,7 +29,7 @@ export function Placeholder({
       ) : (
         <OptionComponent />
       )}
-      <BreadcrumbIcon className="mr-1 ml-10 mt-[7px] h-10 w-10" />
+      <BreadcrumbIcon className="mr-10 ml-5 mt-[7px] h-10 w-10" />
     </button>
   );
 }

@@ -46,6 +46,8 @@ type ContextProps<T extends object> = {
   resultStatus: ResultStatus;
 };
 
+export type HandleSaveType<T extends object> = ContextProps<T>['handleSave'];
+
 const initialValues = {
   steps: undefined,
   data: {},

@@ -3,10 +3,13 @@ import {
   KeyboardEvent,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
+
+import { sanitizeValue } from './EditableInput.utils';
 
 interface EditableInputProps {
   value: number;
@@ -16,8 +19,15 @@ interface EditableInputProps {
   inputAriaLabel: string;
   editButtonAriaLabel: string;
   updateButtonText: string;
+  cancelButtonText: string;
   className?: string;
   onInvalidValue?: () => void;
+  onKeyDown?: (credits: number) => void;
+  error?: {
+    hasError: boolean;
+    message: string;
+  };
+  isEditable: boolean;
 }
 
 export const EditableInput = ({
@@ -28,15 +38,51 @@ export const EditableInput = ({
   inputAriaLabel,
   editButtonAriaLabel,
   updateButtonText,
+  cancelButtonText,
   className = '',
   onInvalidValue,
+  onKeyDown,
+  error,
+  isEditable,
 }: EditableInputProps) => {
   const [editable, setEditable] = useState(false);
-  const [amount, setAmount] = useState(value);
+  const [initialValue, setInitialValue] = useState(value);
+  const [currentValue, setCurrentValue] = useState(value);
+  const wrapperRef = useRef(null);
+
+  const amountValid = useMemo(
+    () => currentValue <= maxValue && currentValue > 0,
+    [currentValue, maxValue],
+  );
+
+  const isUpdateDisabled =
+    !amountValid || error?.hasError || initialValue === currentValue;
 
   useEffect(() => {
-    if (!editable && value !== amount) setAmount(value);
-  }, [amount, value, editable]);
+    setInitialValue(value);
+    setCurrentValue(value);
+  }, [value]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        wrapperRef.current &&
+        !(wrapperRef.current as HTMLElement).contains(event.target as Node)
+      ) {
+        setEditable(false);
+        setCurrentValue(initialValue);
+      }
+    };
+    if (editable) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [editable, initialValue]);
 
   const toggleEditable = () => {
     setEditable(!editable);
@@ -45,73 +91,95 @@ export const EditableInput = ({
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
-    const newValue = +value;
-
-    if (isNaN(newValue)) return;
-    if (newValue > maxValue && onInvalidValue) {
+    const sanitizedValue = sanitizeValue(value);
+    if (sanitizedValue > maxValue && onInvalidValue) {
       onInvalidValue();
     }
-    setAmount(Math.min(newValue, maxValue));
+    setCurrentValue(Math.min(sanitizedValue, maxValue));
+  };
+
+  const handleOnCancel = () => {
+    setCurrentValue(initialValue);
+    toggleEditable();
   };
 
   const handleOnUpdate = () => {
-    if (!amountValid) return;
-    onChange(+amount);
+    if (isUpdateDisabled) return;
+    onChange(currentValue);
     toggleEditable();
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      if (isNaN(+e.currentTarget.value)) return;
-      setAmount(+e.currentTarget.value);
+      const sanitizedValue = sanitizeValue(e.currentTarget.value);
+      setCurrentValue(sanitizedValue);
       handleOnUpdate();
+    }
+    if (e.key === 'Escape') {
+      handleOnCancel();
     }
   };
 
-  const amountValid = useMemo(
-    () => amount <= maxValue && amount > 0,
-    [amount, maxValue],
-  );
+  useEffect(() => {
+    onKeyDown && onKeyDown(currentValue);
+  }, [currentValue, onKeyDown]);
 
   return (
     <>
       {editable ? (
-        <div
-          className={`flex [@media(max-width:340px)]:flex-col [@media(max-width:340px)]:mb-20 sm:flex-row items-center [@media(max-width:340px)]:items-start h-[47px] ${className}`}
-        >
-          <input
-            type="number"
-            step="0.000001"
-            min={0}
-            max={maxValue}
-            className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-50 py-20 px-15 w-[120px] border border-solid border-grey-300 text-base font-normal font-sans focus:outline-none"
-            value={amount}
-            onChange={handleOnChange}
-            onKeyDown={handleKeyDown}
-            aria-label={inputAriaLabel}
-            name={name}
-            autoFocus
-            data-testid="editable-input"
-          />
-          <TextButton
-            className={`lowercase text-[12px] mt-5 sm:mt-0 font-sans ${
-              amountValid
-                ? ''
-                : 'text-grey-300 hover:text-grey-300 cursor-default'
-            }`}
-            onClick={handleOnUpdate}
-            aria-label={updateButtonText}
+        <>
+          <div
+            ref={wrapperRef}
+            className={`relative flex [@media(max-width:340px)]:flex-col [@media(max-width:340px)]:mb-20 sm:flex-row items-center [@media(max-width:340px)]:items-start h-[47px] ${className}`}
           >
-            {updateButtonText}
-          </TextButton>
-        </div>
+            <input
+              type="text"
+              className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-50 py-20 px-15 w-[100px] border border-solid border-grey-300 text-base font-normal font-sans focus:outline-none"
+              value={currentValue}
+              onChange={handleOnChange}
+              onKeyDown={handleKeyDown}
+              aria-label={inputAriaLabel}
+              name={name}
+              autoFocus
+              data-testid="editable-input"
+            />
+            <div className="flex flex-row max-[450px]:flex-col max-[450px]:items-start max-[450px]:ml-15">
+              <TextButton
+                className={`lowercase text-xs mt-5 sm:mt-0 font-sans min-w-fit ml-10 max-[450px]:m-0 ${
+                  isUpdateDisabled
+                    ? 'text-grey-400 hover:text-grey-400 cursor-default'
+                    : ''
+                }`}
+                onClick={handleOnUpdate}
+                aria-label={updateButtonText}
+              >
+                {updateButtonText}
+              </TextButton>
+              <span className="text-grey-400 px-3 max-[450px]:hidden">|</span>
+              <TextButton
+                className="lowercase text-xs mt-5 sm:mt-0 font-sans text-error-400 hover:text-error-200  min-w-fit"
+                onClick={handleOnCancel}
+                aria-label={cancelButtonText}
+              >
+                {cancelButtonText}
+              </TextButton>
+            </div>
+          </div>
+          {error?.hasError && (
+            <div className="pt-5 text-error-300 text-sm w-full absolute">
+              {error?.message}
+            </div>
+          )}
+        </>
       ) : (
         <div className="flex justify-between h-[47px] items-center">
-          <span>{amount}</span>
-          <EditButtonIcon
-            onClick={toggleEditable}
-            ariaLabel={editButtonAriaLabel}
-          />
+          <span>{currentValue}</span>
+          {isEditable && (
+            <EditButtonIcon
+              onClick={toggleEditable}
+              ariaLabel={editButtonAriaLabel}
+            />
+          )}
         </div>
       )}
     </>

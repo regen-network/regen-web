@@ -3,7 +3,6 @@ import { CardSellOrder } from 'web-marketplace/src/components/organisms/ChooseCr
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
-import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 import { AllowedDenoms } from '../DenomLabel/DenomLabel.utils';
@@ -13,9 +12,6 @@ export type Currency = {
   askDenom: string;
 };
 export interface CreditsAmountProps {
-  paymentOption: PaymentOptionsType;
-  spendingCap: number;
-  setSpendingCap: UseStateSetter<number>;
   creditsAvailable: number;
   setCreditsAvailable: UseStateSetter<number>;
   filteredCryptoSellOrders: Array<UISellOrderInfo> | undefined;
@@ -35,7 +31,6 @@ export interface CreditsInputProps {
 
 export interface CurrencyInputProps {
   maxCurrencyAmount: number;
-  paymentOption: PaymentOptionsType;
   selectPlaceholderAriaLabel: string;
   selectAriaLabel: string;
   handleCurrencyAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;

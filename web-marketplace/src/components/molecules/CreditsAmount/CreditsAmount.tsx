@@ -1,12 +1,16 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
+import {
+  paymentOptionAtom,
+  spendingCapAtom,
+} from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { getCreditsAvailableBannerText } from 'pages/BuyCredits/BuyCredits.utils';
 
@@ -31,13 +35,10 @@ import { CurrencyInput } from './CurrencyInput';
 
 export const CreditsAmount = ({
   currency,
-  paymentOption,
   creditsAvailable,
   setCreditsAvailable,
   filteredCryptoSellOrders,
   cardSellOrders,
-  spendingCap,
-  setSpendingCap,
   cryptoCurrencies,
   allowedDenoms,
   creditTypePrecision,
@@ -50,6 +51,8 @@ export const CreditsAmount = ({
   const { setValue, trigger, getValues } =
     useFormContext<ChooseCreditsFormSchemaType>();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const [spendingCap, setSpendingCap] = useAtom(spendingCapAtom);
+  const paymentOption = useAtomValue(paymentOptionAtom);
 
   useEffect(() => {
     // Set initial credits amount to min(1, creditsAvailable)
@@ -164,9 +167,11 @@ export const CreditsAmount = ({
 
   // Max credits set
   useEffect(() => {
-    if (maxCreditsSelected) {
+    if (maxCreditsSelected && spendingCap) {
       setValue(CREDITS_AMOUNT, creditsAvailable, { shouldValidate: true });
-      setValue(CURRENCY_AMOUNT, spendingCap, { shouldValidate: true });
+      setValue(CURRENCY_AMOUNT, spendingCap, {
+        shouldValidate: true,
+      });
       setValue(
         SELL_ORDERS,
         orderedSellOrders.map(order => {
@@ -222,11 +227,15 @@ export const CreditsAmount = ({
     [card, orderedSellOrders, setValue, creditTypePrecision],
   );
 
-  const displayDenom = findDisplayDenom({
-    allowedDenoms,
-    bankDenom: currency.askDenom,
-    baseDenom: currency.askBaseDenom,
-  });
+  const displayDenom = useMemo(
+    () =>
+      findDisplayDenom({
+        allowedDenoms,
+        bankDenom: currency.askDenom,
+        baseDenom: currency.askBaseDenom,
+      }),
+    [allowedDenoms, currency.askDenom, currency.askBaseDenom],
+  );
 
   return (
     <div className={`grid min-h-min`} style={{ gridAutoRows: 'min-content' }}>
@@ -235,19 +244,19 @@ export const CreditsAmount = ({
         baseDenom={currency.askBaseDenom}
         creditsAvailable={creditsAvailable}
         setMaxCreditsSelected={setMaxCreditsSelected}
-        paymentOption={paymentOption}
       />
       <div className="flex justify-between min-w-full flex-wrap sm:flex-nowrap gap-10 sm:gap-0 items-start">
-        <CurrencyInput
-          maxCurrencyAmount={spendingCap}
-          paymentOption={paymentOption}
-          selectPlaceholderAriaLabel={_(msg`Select option`)}
-          selectAriaLabel={_(msg`Select option`)}
-          handleCurrencyAmountChange={handleCurrencyAmountChange}
-          cryptoCurrencies={cryptoCurrencies}
-          displayDenom={displayDenom}
-          allowedDenoms={allowedDenoms}
-        />
+        {spendingCap && (
+          <CurrencyInput
+            maxCurrencyAmount={spendingCap}
+            selectPlaceholderAriaLabel={_(msg`Select option`)}
+            selectAriaLabel={_(msg`Select option`)}
+            handleCurrencyAmountChange={handleCurrencyAmountChange}
+            cryptoCurrencies={cryptoCurrencies}
+            displayDenom={displayDenom}
+            allowedDenoms={allowedDenoms}
+          />
+        )}
         <span className="p-10 sm:p-20 text-xl">=</span>
         <CreditsInput
           creditsAvailable={creditsAvailable}

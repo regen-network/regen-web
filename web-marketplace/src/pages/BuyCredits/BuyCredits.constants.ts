@@ -5,6 +5,7 @@ export const PAYMENT_OPTIONS = {
   CRYPTO: 'crypto',
 } as const;
 export const NEXT = msg`next`;
+export const INSUFFICIENT_BALANCE = msg`Insufficient balance`;
 
 export const stripeKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 export const VIEW_CERTIFICATE = msg`view retirement certificate`;

@@ -7,7 +7,6 @@ export * from './BridgableEcocreditsTable/BridgableEcocreditsTable';
 export * from './Bridge';
 export * from './BridgedEcocreditsTable/BridgedEcocreditsTable';
 export * from './BridgeModal/BridgeModal';
-export * from './BuyCreditsModal/BuyCreditsModal';
 export * from './ConfirmationModal';
 export * from './CreditActivityTable/CreditActivityTable';
 export * from './CreditBatches/CreditBatches';

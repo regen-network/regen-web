@@ -21,6 +21,7 @@ import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketpl
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { useFetchUserBalance } from 'pages/BuyCredits/hooks/useFetchUserBalance';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   CREDIT_VINTAGE_OPTIONS,
@@ -37,7 +38,7 @@ import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSum
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';
 import { AgreePurchaseFormFiat } from 'components/organisms/AgreePurchaseForm/AgreePurchaseFormFiat';
-import { MemoizedChooseCreditsForm as ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
+import { ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { getFilteredCryptoSellOrders } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.utils';
@@ -49,19 +50,19 @@ import { PaymentInfoFormSchemaType } from 'components/organisms/PaymentInfoForm/
 import { PaymentInfoFormFiat } from 'components/organisms/PaymentInfoForm/PaymentInfoFormFiat';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
-import { paymentOptionCryptoClickedAtom } from './BuyCredits.atoms';
-import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
 import {
-  BuyCreditsSchemaTypes,
-  CardDetails,
-  PaymentOptionsType,
-} from './BuyCredits.types';
-import { getCreditsAvailableBannerText } from './BuyCredits.utils';
+  paymentOptionAtom,
+  paymentOptionCryptoClickedAtom,
+} from './BuyCredits.atoms';
+import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
+import { BuyCreditsSchemaTypes, CardDetails } from './BuyCredits.types';
+import {
+  getCreditsAvailableBannerText,
+  getCryptoCurrencies,
+} from './BuyCredits.utils';
 import { usePurchase } from './hooks/usePurchase';
 
 type Props = {
-  paymentOption: PaymentOptionsType;
-  setPaymentOption: UseStateSetter<PaymentOptionsType>;
   retiring: boolean;
   setRetiring: UseStateSetter<boolean>;
   confirmationTokenId?: string;
@@ -80,8 +81,6 @@ type Props = {
 const stripe = loadStripe(stripeKey);
 
 export const BuyCreditsForm = ({
-  paymentOption,
-  setPaymentOption,
   retiring,
   setRetiring,
   confirmationTokenId,
@@ -100,6 +99,7 @@ export const BuyCreditsForm = ({
     useMultiStep<BuyCreditsSchemaTypes>();
   const { wallet, isConnected, activeWalletAddr } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
+  const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
   const {
     isModalOpen,
     modalState,
@@ -115,7 +115,6 @@ export const BuyCreditsForm = ({
   const [paymentOptionCryptoClicked, setPaymentOptionCryptoClicked] = useAtom(
     paymentOptionCryptoClickedAtom,
   );
-
   const cardDisabled = cardSellOrders.length === 0;
 
   const { marketplaceClient, ecocreditClient } = useLedger();
@@ -170,14 +169,19 @@ export const BuyCreditsForm = ({
     [data, handleSaveNext, setPaymentMethodId],
   );
 
-  const currency = data?.[CURRENCY];
-  const creditsAmount = data?.[CREDITS_AMOUNT];
-  const currencyAmount = data?.[CURRENCY_AMOUNT];
-
   const allowedDenoms = useMemo(
     () => allowedDenomsData?.allowedDenoms,
     [allowedDenomsData?.allowedDenoms],
   );
+
+  const defaultCryptoCurrency = getCryptoCurrencies(cryptoSellOrders)[0];
+  const currency =
+    cardDisabled && !data?.[CURRENCY]
+      ? defaultCryptoCurrency
+      : data?.[CURRENCY];
+  const creditsAmount = data?.[CREDITS_AMOUNT];
+  const currencyAmount = data?.[CURRENCY_AMOUNT];
+  const creditTypePrecision = creditTypeData?.creditType?.precision;
 
   const purchase = usePurchase({
     paymentOption,
@@ -234,8 +238,6 @@ export const BuyCreditsForm = ({
     [handleActiveStep],
   );
 
-  const creditTypePrecision = creditTypeData?.creditType?.precision;
-
   const card = useMemo(
     () => paymentOption === PAYMENT_OPTIONS.CARD,
     [paymentOption],
@@ -276,6 +278,8 @@ export const BuyCreditsForm = ({
     ],
   );
 
+  const { isLoading, userBalance } = useFetchUserBalance(currency?.askDenom);
+
   return (
     <div
       className={
@@ -287,8 +291,6 @@ export const BuyCreditsForm = ({
       <div>
         {activeStep === 0 && (
           <ChooseCreditsForm
-            setPaymentOption={setPaymentOption}
-            paymentOption={paymentOption}
             retiring={retiring}
             setRetiring={setRetiring}
             cardDisabled={cardDisabled}
@@ -330,6 +332,8 @@ export const BuyCreditsForm = ({
             cardDetails={cardDetails}
             goToPaymentInfo={goToPaymentInfo}
             card={card}
+            isUserBalanceLoading={isLoading}
+            userBalance={userBalance}
           />
         )}
 
@@ -426,7 +430,6 @@ export const BuyCreditsForm = ({
             }}
             cardDetails={cardDetails}
             imageAltText={project.name}
-            paymentOption={paymentOption}
             allowedDenoms={allowedDenoms}
             onClickEditCard={goToPaymentInfo}
             setCreditsAmount={(creditsAmount: number) => {
@@ -452,6 +455,7 @@ export const BuyCreditsForm = ({
                 getCreditsAvailableBannerText(creditsAvailable),
               )
             }
+            userBalance={userBalance}
           />
         )}
       <LoginFlow

@@ -1,12 +1,12 @@
 import { useFormContext } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { SetMaxButton } from 'web-components/src/components/buttons/SetMaxButton';
 import { Title } from 'web-components/src/components/typography/Title';
 
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
 
 import {
@@ -19,11 +19,9 @@ export function CreditsAmountHeader({
   setMaxCreditsSelected,
   displayDenom,
   baseDenom,
-  paymentOption,
 }: {
   creditsAvailable: number;
   setMaxCreditsSelected: (value: boolean) => void;
-  paymentOption: string;
   baseDenom: string;
   displayDenom: string;
 }) {
@@ -39,7 +37,7 @@ export function CreditsAmountHeader({
         <div className="text-sm sm:text-base pr-5 flex flex-col items-end sm:flex-row sm:items-center h-[55px]">
           <span
             className={`${
-              paymentOption === PAYMENT_OPTIONS.CARD
+              displayDenom === USD_DENOM.toUpperCase()
                 ? 'pt-[19px] sm:pt-0'
                 : 'pt-[7px] sm:pt-0'
             }`}
@@ -47,7 +45,7 @@ export function CreditsAmountHeader({
             <span className="font-bold font-sans mr-5">{creditsAvailable}</span>
             <Trans>credits available</Trans>
           </span>
-          {paymentOption === PAYMENT_OPTIONS.CRYPTO && (
+          {displayDenom !== USD_DENOM.toUpperCase() && (
             <span className="flex sm:items-center">
               <span className="px-[4px]">
                 <Trans>in</Trans>

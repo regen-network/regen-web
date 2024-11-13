@@ -25,11 +25,11 @@ describe('OrderSummaryCard', () => {
       country: 'US',
     },
     imageAltText: 'imageAltText',
-    paymentOption: 'card',
     allowedDenoms,
     onClickEditCard: vi.fn(),
     setCreditsAmount: vi.fn(),
     creditsAvailable: 100,
+    userBalance: 1000,
   };
 
   it('displays the project name', () => {

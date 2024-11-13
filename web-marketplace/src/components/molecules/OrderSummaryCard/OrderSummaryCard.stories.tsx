@@ -29,7 +29,6 @@ export const WithPaymentDetails: Story = {
 
 WithPaymentDetails.args = {
   order,
-  paymentOption: 'card',
   cardDetails: {
     brand: 'visa',
     last4: '3456',
@@ -50,7 +49,6 @@ WithPrefinanceProject.args = {
     ...order,
     prefinanceProject: true,
   },
-  paymentOption: 'card',
   cardDetails: {
     brand: 'visa',
     last4: '3456',
@@ -68,7 +66,6 @@ export const WithCrypto: Story = {
 
 WithCrypto.args = {
   order,
-  paymentOption: 'crypto',
   imageAltText: 'imageAltText',
   allowedDenoms,
   setCreditsAmount: action('setCreditsAmount'),

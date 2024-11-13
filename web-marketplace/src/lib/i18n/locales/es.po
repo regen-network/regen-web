@@ -56,7 +56,7 @@ msgstr "{0, plural, uno {clase de crédito permitida} otro {clases de crédito p
 msgid "{ADDRESS_USED_ERROR} Do you want to merge these accounts?"
 msgstr "{ADDRESS_USED_ERROR} ¿Quieres fusionar estas cuentas?"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:140
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:173
 msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
 msgstr "{créditosDisponibles, plural, uno {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido} otro {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido}}"
 
@@ -66,11 +66,11 @@ msgstr "{from}–{displayedTo} de {count}"
 
 #: src/lib/constants/shared.constants.tsx:231
 msgid "{from}–{displayedTo} of more than {to}"
-msgstr "{from}–{displayedTo} de más de {to}"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:85
-msgid "{price} {displayDenom}/credit:"
-msgstr "{precio} {displayDenom}/crédito:"
+#~ msgid "{price} {displayDenom}/credit:"
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:329
 msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} character remaining} other {{remainingCaptionCharacters} characters remaining}}"
@@ -86,6 +86,10 @@ msgstr "{remainingDescriptionCharacters, plural, queda un {{remainingDescription
 msgid "{remainingStoryCharacters, plural, one {{remainingStoryCharacters} character remaining} other {{remainingStoryCharacters} characters remaining}}"
 msgstr "{remainingStoryCharacters, plural, queda un {{remainingStoryCharacters} personaje} quedan otros {{remainingStoryCharacters} personajes}}"
 
+#: src/components/organisms/DescriptionForm/DescriptionForm.tsx:170
+#~ msgid "{remainingStoryCharacters, plural, one {{remainingStoryCharacters} character remaining} other {{remainingStoryCharacters} characters remaining}}<<<<<<< HEAD"
+#~ msgstr ">>>>>>> ac46cde8a (chore: update .po files)"
+
 #: src/components/organisms/DescriptionForm/DescriptionForm.tsx:191
 msgid "{remainingStoryTitleCharacters, plural, one {{remainingStoryTitleCharacters} character remaining} other {{remainingStoryTitleCharacters} characters remaining}}"
 msgstr "{remainingStoryTitleCharacters, plural, queda un {{remainingStoryTitleCharacters} carácter} quedan otros {{remainingStoryTitleCharacters} caracteres}}"
@@ -99,14 +103,14 @@ msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} charac
 msgstr "{remainingTitleCharacters, plural, un {{remainingTitleCharacters} carácter restante} otros {{remainingTitleCharacters} caracteres restantes}}"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:90
-msgid "{truncatedQuantity} credit(s) available"
-msgstr "{truncatedQuantity} crédito(s) disponible(s)"
+#~ msgid "{truncatedQuantity} credit(s) available"
+#~ msgstr "{truncatedQuantity} crédito(s) disponible(s)"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:115
 msgid "{years} year project duration"
 msgstr "{años} años de duración del proyecto"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:88
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:106
 #: src/components/organisms/Order/Order.Summary.tsx:85
 msgid "# credits"
 msgstr "# créditos"
@@ -161,7 +165,7 @@ msgstr "+Añadir destinatario"
 msgid "+Create project"
 msgstr "+Crear proyecto"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:131
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:156
 msgid "<0>{0}</0> ending in {1}"
 msgstr "<0>{0}</0> terminando en {1}"
 
@@ -171,7 +175,7 @@ msgstr "<0>Administrador de clase de crédito:</0> la entidad que puede actualiz
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:52
 msgid "<0>Credit class issuer:</0> the entity who can issue credit batches under the given credit class."
-msgstr "<0>Emisor de la clase de crédito:</0> entidad que puede emitir lotes de créditos bajo la clase de crédito dada."
+msgstr "<0>Emisor de la clase de crédito:</0> entidad que puede emitir lotes de créditos bajo la clase de crédito determinada."
 
 #: src/components/atoms/DragAndDropLabel.tsx:6
 msgid "<0>drag and drop</0><1>or</1>"
@@ -224,7 +228,7 @@ msgstr "Una breve descripción de su proyecto de impacto ecológico y de la prop
 
 #: src/components/organisms/AdditionalityForm.tsx:117
 msgid "A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
-msgstr "Un sistema de pastoreo controlado en el que el ganado se traslada con frecuencia entre las divisiones de pasturas o potreros en función de la calidad del forraje y las necesidades nutricionales del ganado. Las cercas portátiles permiten que cada potrero descanse y vuelva a crecer hasta la siguiente rotación de pastoreo."
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:89
 msgid "A monitor tracks and verifies the environmental impact and performance of the project to ensure compliance and transparency."
@@ -232,11 +236,15 @@ msgstr "Un monitor rastrea y verifica el impacto ambiental y el desempeño del p
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:87
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
-msgstr "Un proyecto de desarrollo de <0>Regen Network<1/>, PBC</0>"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:68
 msgid "A project operator is responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
 msgstr "Un operador de proyecto es responsable de implementar y gestionar el proyecto, garantizando que cumpla con los estándares regulatorios y de sostenibilidad."
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:68
+#~ msgid "A project operator is responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards.>>>>>>> ffdef6afe (chore: update .po files)"
+#~ msgstr "Un operador de proyecto es responsable de implementar y gestionar el proyecto, garantizando que cumpla con los estándares regulatorios y de sostenibilidad.>>>>>>> ffdef6afe (tarea: actualizar archivos .po)"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:99
 msgid "A project owner manages the area of the conservation project and the associated biodiversity units."
@@ -248,11 +256,15 @@ msgstr "Un taxón está extinto en estado silvestre cuando solo se sabe que sobr
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:18
 msgid "A taxon is extinct when there is no reasonable doubt that the last individual has died."
-msgstr "Un taxón está extinto cuando no hay duda razonable de que el último individuo ha muerto."
+msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)<<<<<<< HEAD"
 
 #: src/components/organisms/RolesForm/RolesForm.tsx:238
 msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr "Un tercero que proporciona una evaluación independiente e imparcial del plan del proyecto y de los informes del proyecto (que no es el monitor)."
+
+#: src/components/organisms/RolesForm/RolesForm.tsx:238
+#~ msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor).======="
+#~ msgstr "Un tercero que proporciona una evaluación independiente e imparcial del plan del proyecto y de los informes del proyecto (que no es el monitor).======="
 
 #: src/components/organisms/Order/Order.Summary.tsx:185
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
@@ -387,7 +399,7 @@ msgstr "Todas las publicaciones"
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.constants.ts:3
 msgid "all profiles"
-msgstr "todos los perfiles"
+msgstr "Todos los perfiles"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
 #: src/pages/Projects/Projects.tsx:79
@@ -404,7 +416,7 @@ msgstr "Todos los archivos cargados y sus datos de ubicación quedarán ocultos 
 msgid "amount"
 msgstr "cantidad"
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:36
+#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:34
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:78
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:127
 #: src/lib/constants/shared.constants.tsx:30
@@ -444,12 +456,11 @@ msgstr "Monto depositado en depósito"
 msgid "amount of credits"
 msgstr "cantidad de créditos"
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:302
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:151
 msgid "Amount of credits"
 msgstr "Cantidad de créditos"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:132
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:165
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:126
 msgid "amount retired"
 msgstr "cantidad retirada"
@@ -473,7 +484,7 @@ msgstr "cantidad enviada"
 msgid "Amount to sell"
 msgstr "Cantidad a vender"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:133
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:166
 msgid "amount tradable"
 msgstr "cantidad negociable"
 
@@ -484,7 +495,7 @@ msgstr "Cantidad negociable"
 
 #: src/components/organisms/EcocreditsTable.tsx:97
 msgid "Amount Tradable"
-msgstr "Monto negociable"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:60
 msgid "An ecosystem considered to be facing a <0>high risk of collapse</0>."
@@ -492,7 +503,7 @@ msgstr "Un ecosistema que se considera que enfrenta un <0>alto riesgo de colapso
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:93
 msgid "An ecosystem has insufficient data when there is <0>no adequate information to make a direct or indirect assessment</0> of its risk of collapse."
-msgstr "Un ecosistema tiene datos insuficientes cuando <0>no hay información adecuada para hacer una evaluación directa o indirecta</0> de su riesgo de colapso."
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:78
 msgid "Anchoring in progress"
@@ -529,11 +540,11 @@ msgstr "¿Estás seguro de que deseas eliminar esta publicación?"
 
 #: src/lib/constants/shared.constants.tsx:86
 msgid "Are you sure you want to discard your changes?"
-msgstr "¿Está seguro de que desea descartar los cambios?"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:145
 msgid "Area Actions"
-msgstr "Acciones del Área"
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:57
 msgid "Articles"
@@ -571,7 +582,7 @@ msgstr "Disponible"
 msgid "Avg Price"
 msgstr "Precio promedio"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:75
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:93
 msgid "avg price per credit"
 msgstr "precio promedio por crédito"
 
@@ -629,11 +640,11 @@ msgstr "LOTE DENOM"
 
 #: src/pages/Marketplace/Storefront/Storefront.utils.ts:46
 msgid "batch denom:"
-msgstr "nombre del lote:"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:329
-msgid "Batch denom:"
-msgstr "Nombre del lote:"
+#~ msgid "Batch denom:"
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:86
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:155
@@ -766,26 +777,25 @@ msgstr "comprar ecocréditos"
 
 #: src/lib/constants/shared.constants.tsx:204
 msgid "Buy ecocredits"
-msgstr "Comprar ecocréditos"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:201
-msgid "Buy Ecocredits"
-msgstr "Comprar Ecocréditos"
+#~ msgid "Buy Ecocredits"
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/components/organisms/BasketDetailsActionsBar/BasketDetailsActionsBar.constants.ts:4
 msgid "buy NCT"
 msgstr "comprar NCT"
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:18
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:450
 msgid "Buy tradable ecocredits"
 msgstr "Comprar ecocréditos negociables"
 
-#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions.tsx:84
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions.tsx:87
 msgid "Buy with credit card"
 msgstr "Comprar con tarjeta de crédito"
 
-#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions.tsx:94
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions.tsx:97
 msgid "Buy with crypto"
 msgstr "Comprar con criptomonedas"
 
@@ -810,6 +820,7 @@ msgstr "Por defecto, se comprará primero el crédito más barato."
 msgid "By default these credits are tradable but you may check “retire all credits upon transfer” below to automatically retire them upon sending."
 msgstr "De forma predeterminada, estos créditos son negociables, pero puedes marcar “retirar todos los créditos al transferir” a continuación para retirarlos automáticamente al enviarlos."
 
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:116
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:12
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:9
 msgid "cancel"
@@ -842,11 +853,11 @@ msgstr "Norma de compensación de carbono"
 
 #: src/components/organisms/Order/Order.Summary.tsx:145
 msgid "card info"
-msgstr "Información de la tarjeta"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:34
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
-msgstr "Las categorías de la Lista Roja de Ecosistemas de la UICN evalúan la salud y el riesgo de los ecosistemas a escala global. Tebu promueve la protección de los ecosistemas más amenazados otorgando una puntuación más alta a aquellos que presentan un riesgo mayor."
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/organisms/Order/Order.tsx:99
 msgid "certificate"
@@ -876,7 +887,7 @@ msgstr "Cadena"
 msgid "change admin"
 msgstr "cambiar administrador"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:139
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:164
 msgid "Change payment card"
 msgstr "Cambiar tarjeta de pago"
 
@@ -915,11 +926,11 @@ msgstr "Elija un método de inicio de sesión"
 
 #: src/components/organisms/AdditionalityForm.tsx:59
 msgid "Choose a practice start date"
-msgstr "Elija una fecha de inicio de práctica"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:166
-msgid "Choose a sell order"
-msgstr "Elija una orden de venta"
+#~ msgid "Choose a sell order"
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:192
 msgid "Choose a specific location on the map"
@@ -937,7 +948,7 @@ msgstr "Elija la cesta"
 msgid "Choose credit class"
 msgstr "Elija la clase de crédito"
 
-#: src/pages/BuyCredits/BuyCredits.constants.ts:12
+#: src/pages/BuyCredits/BuyCredits.constants.ts:13
 msgid "Choose credits"
 msgstr "Elija créditos"
 
@@ -1009,7 +1020,7 @@ msgstr "Créditos comunitarios"
 msgid "Community credits are credits that have not been through the <0>Regen Registry program</0>or are not associated with another known registry. <1/><2/>To create your own credits, <3>learn more in our docs.</3>"
 msgstr "Los créditos comunitarios son créditos que no han pasado por el <0>programa Regen Registry</0> o que no están asociados con otro registro conocido. <1/><2/>Para crear sus propios créditos, <3>obtenga más información en nuestros documentos.</3>"
 
-#: src/pages/BuyCredits/BuyCredits.constants.ts:17
+#: src/pages/BuyCredits/BuyCredits.constants.ts:18
 msgid "Complete"
 msgstr "Completo"
 
@@ -1034,7 +1045,7 @@ msgid "Congrats! Your bridge has been initiated"
 msgstr "¡Felicitaciones! Tu puente ha sido iniciado"
 
 #: src/components/organisms/ConfirmationModal.tsx:90
-#: src/pages/BuyCredits/BuyCredits.constants.ts:11
+#: src/pages/BuyCredits/BuyCredits.constants.ts:12
 msgid "Congrats! Your purchase was successful."
 msgstr "¡Felicitaciones! Su compra fue exitosa."
 
@@ -1064,11 +1075,11 @@ msgstr "Conectar billetera"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:13
 msgid "Connect wallet address"
-msgstr "Conectar la dirección de la billetera"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:70
 msgid "Connectivity allows the flow of species and ecological processes that support biodiversity across a larger area. Tebu promotes projects that contribute to the restoration of maintenance of the ecological connectivity at a landscape scale."
-msgstr "La conectividad permite el flujo de especies y procesos ecológicos que sustentan la biodiversidad en un área más amplia. Tebu promueve proyectos que contribuyen a la restauración y el mantenimiento de la conectividad ecológica a escala del paisaje."
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:39
 msgid "Consumer/Individual/myself"
@@ -1077,11 +1088,11 @@ msgstr "Consumidor/Individuo/yo mismo"
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:73
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:69
 msgid "Contact"
-msgstr "Contacto"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:142
 msgid "Contributes minimally"
-msgstr "Contribuye mínimamente"
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:103
 msgid "Cookies Policy"
@@ -1107,11 +1118,18 @@ msgstr "Copiar enlace al perfil"
 msgid "Copy link to project page"
 msgstr "Copiar enlace a la página del proyecto"
 
+#: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:15
+#~ msgid "Copy link to project page<<<<<<< HEAD<<<<<<< HEAD======="
+#~ msgstr "Copiar enlace a la página del proyecto<<<<<<< HEAD<<<<<<< HEAD======="
+
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:27
 #~ msgid "Copyright © 2024 Terrasos | All rights reserved"
 #~ msgstr "Copyright © 2024 Terrasos | Todos los derechos reservados"
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:552
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:27
+#~ msgid "Copyright © 2024 Terrasos | All rights reserved>>>>>>> 6bf7c43a7 (chore: generate .po files)"
+#~ msgstr "Copyright © 2024 Terrasos | Todos los derechos reservados>>>>>>> 6bf7c43a7 (tarea: generar archivos .po)"
+
 #: src/lib/constants/shared.constants.tsx:58
 #: src/lib/constants/shared.constants.tsx:157
 msgid "Country"
@@ -1166,11 +1184,11 @@ msgstr "Crear orden de venta"
 
 #: src/pages/Post/hooks/useAttestEvents.ts:146
 msgid "Created by"
-msgstr "Creado por"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:319
-msgid "credit"
-msgstr "crédito"
+#~ msgid "credit"
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:147
 msgid "credit activity table"
@@ -1294,12 +1312,11 @@ msgstr "Emisión de crédito pendiente"
 msgid "credit name"
 msgstr "nombre de credito"
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:259
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:268
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr "Los precios de los créditos varían. Por defecto, se comprarán primero los créditos con el precio más bajo."
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:96
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:527
 msgid "Credit retirement location"
 msgstr "Ubicación de retiro de crédito"
 
@@ -1324,7 +1341,6 @@ msgstr "Definición de unidad de crédito"
 msgid "credits"
 msgstr "créditos"
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:226
 #: src/components/organisms/Order/Order.Summary.tsx:68
 msgid "Credits"
 msgstr "Créditos"
@@ -1333,15 +1349,15 @@ msgstr "Créditos"
 msgid "Credits are held in escrow when a sell order is created, and taken out of escrow when the sell order is either cancelled, updated with a reduced quantity, or processed."
 msgstr "Los créditos se mantienen en depósito en garantía cuando se crea una orden de venta y se retiran del depósito en garantía cuando la orden de venta se cancela, se actualiza con una cantidad reducida o se procesa."
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:48
+#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:46
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:71
 #: src/lib/constants/shared.constants.tsx:179
 msgid "credits available"
-msgstr "créditos disponibles"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
 msgid "Credits Available"
-msgstr "Créditos disponibles"
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/pages/Projects/AllProjects/AllProjects.config.ts:18
 msgid "Credits available - high to low"
@@ -1429,7 +1445,7 @@ msgstr "Opciones de compra de criptomonedas"
 msgid "CURRENCY DENOM"
 msgstr "DENOMINACIÓN MONEDA"
 
-#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:95
+#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:108
 msgid "Currency Input"
 msgstr "Entrada de moneda"
 
@@ -1446,7 +1462,7 @@ msgid "Custom url"
 msgstr "URL personalizada"
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:51
-#: src/pages/BuyCredits/BuyCredits.constants.ts:14
+#: src/pages/BuyCredits/BuyCredits.constants.ts:15
 msgid "Customer info"
 msgstr "Información del cliente"
 
@@ -1493,7 +1509,7 @@ msgstr "Descripción"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.constants.tsx:3
 msgid "Different sellers may sell the same credits at different prices. We automatically choose the lowest priced credits for you. This price is the average price of all the credits in your cart."
-msgstr "Es posible que distintos vendedores vendan los mismos créditos a distintos precios. Elegimos automáticamente los créditos con el precio más bajo para ti. Este precio es el precio promedio de todos los créditos en tu carrito."
+msgstr "Diferentes vendedores pueden vender los mismos créditos a diferentes precios. Elegimos automáticamente los créditos con el precio más bajo para ti. Este precio es el precio promedio de todos los créditos en tu carrito."
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.ConnectField.tsx:55
 msgid "DISCONNECT"
@@ -1604,11 +1620,11 @@ msgstr "Tabla de ecocréditos"
 
 #: src/components/organisms/CreditTotals/CreditTotals.tsx:32
 msgid "ecocredits tradable"
-msgstr "ecocréditos negociables"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:68
 msgid "Ecological Connectivity Level"
-msgstr "Nivel de conectividad ecológica"
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:268
 #: src/pages/MethodologyDetails/MethodologyDetails.tsx:59
@@ -1625,15 +1641,15 @@ msgstr "Resultados ecológicos"
 
 #: src/lib/constants/shared.constants.tsx:104
 msgid "Ecosystem"
-msgstr "Ecosistema"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:70
 msgid "Ecosystem that does not qualify for Critically Endangered, Endangered, or Vulnerable, but <0>likely to qualify for a threatened category in the near future.</0>"
-msgstr "Ecosistema que no califica para En Peligro Crítico, En Peligro o Vulnerable, pero <0>es probable que califique para una categoría amenazada en el futuro cercano.</0>"
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:93
 msgid "ecosystem type"
-msgstr "tipo de ecosistema"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:39
 msgid "Ecosystem with declining areas, severe degradation, and disrupted processes facing an <0>extremely high collapse risk</0>."
@@ -1649,13 +1665,13 @@ msgstr "Ecosistemas que inequívocamente no cumplen ninguno de los criterios de 
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:49
 msgid "Ecosystems where information about the levels of environmental degradation and disruption of biotic processes indicate that there is a<0>very high risk of collapse</0>."
-msgstr "Ecosistemas donde la información sobre los niveles de degradación ambiental y alteración de los procesos bióticos indican que existe un <0>riesgo muy alto de colapso</0>."
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/pages/ProjectFinished/ProjectFinished.tsx:125
 msgid "edit"
 msgstr "editar"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:95
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:114
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:76
 #: src/lib/constants/shared.constants.tsx:22
 msgid "Edit"
@@ -1699,7 +1715,7 @@ msgstr "Editar página del proyecto"
 msgid "Edit your file"
 msgstr "Editar tu archivo"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:94
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:113
 msgid "Editable credits"
 msgstr "Créditos editables"
 
@@ -1710,11 +1726,11 @@ msgstr "Elegibilidad"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.constants.ts:3
 msgid "eligible activities"
-msgstr "actividades elegibles"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:105
 msgid "Eligible projects implement preservation and/or restoration activities in different proportion/rates. Tebu recognizes restoration activities have a higher cost by assigning a greater value to restoration actions."
-msgstr "Los proyectos elegibles implementan actividades de conservación y/o restauración en diferentes proporciones/ritmos. Tebu reconoce que las actividades de restauración tienen un costo más alto al asignar un mayor valor a las acciones de restauración."
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:97
 msgid "Email"
@@ -1772,7 +1788,6 @@ msgstr "Fecha de entrega prevista"
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:89
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:71
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:513
 #: src/lib/constants/shared.constants.tsx:149
 msgid "Explain the reason you are retiring these credits"
 msgstr "Explique el motivo por el cual está retirando estos créditos."
@@ -1783,7 +1798,7 @@ msgstr "Explorar"
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:34
 msgid "Explore Banks"
-msgstr "Explorar bancos"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:29
 msgid "factor"
@@ -1794,7 +1809,7 @@ msgstr "factor"
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:109
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:186
 msgid "Factor:"
-msgstr "Factor:"
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/pages/Faucet/hook/useRequestFunds.tsx:27
 #: src/pages/Faucet/hook/useRequestFunds.tsx:34
@@ -1930,11 +1945,11 @@ msgstr "Hectáreas"
 
 #: src/components/organisms/AdditionalityForm.tsx:133
 msgid "High density grazing"
-msgstr "Pastoreo de alta densidad"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:121
 msgid "Highly significant"
-msgstr "Altamente significativo"
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:14
 msgid "Home"
@@ -2010,7 +2025,7 @@ msgstr "Si prefiere créditos retirados, modifique su elección en la <0>pantall
 msgid "Impact"
 msgstr "Impacto"
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:53
+#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:51
 msgid "in"
 msgstr "en"
 
@@ -2028,7 +2043,7 @@ msgstr "En esta forma de pastoreo rotacional, los animales de pastoreo, con una 
 
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:12
 msgid "Incorrect code! Double-check the code and try again."
-msgstr "Código incorrecto. Verifique el código nuevamente e inténtelo nuevamente."
+msgstr "¡Código incorrecto! Verifique el código nuevamente e intente nuevamente."
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:34
 msgid "Individual"
@@ -2036,16 +2051,20 @@ msgstr "Individual"
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Tradable.tsx:21
 msgid "info with hand"
-msgstr "información con la mano"
+msgstr "<<<<<<< HEAD======="
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:30
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:49
 msgid "Information"
-msgstr "Información"
+msgstr ">>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:76
 msgid "Input an email address to receive a receipt of your purchase.<0>Take note: we will email you a prompt to associate this email with your account for easier future access. This is entirely optional.</0>"
-msgstr "Ingresa una dirección de correo electrónico para recibir un recibo de tu compra.<0>Toma nota: te enviaremos un correo electrónico con un mensaje para que asocies este correo electrónico con tu cuenta para facilitar el acceso en el futuro. Esto es completamente opcional.</0>"
+msgstr "<<<<<<< HEAD======="
+
+#: src/pages/BuyCredits/BuyCredits.constants.ts:8
+msgid "Insufficient balance"
+msgstr ">>>>>>> ffdef6afe (chore: update .po files)"
 
 #: src/lib/constants/shared.constants.tsx:70
 msgid "Invalid date"
@@ -2161,9 +2180,6 @@ msgid "Learn more about wallets in our <0>user guide.</0>"
 msgstr "Obtenga más información sobre las billeteras en nuestra <0>guía del usuario</0>."
 
 #: src/components/organisms/BasketOverview/BasketOverview.Tooltip.tsx:16
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:440
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:469
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:491
 #: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:10
 msgid "Learn more»"
 msgstr "Más información»"
@@ -2356,7 +2372,7 @@ msgstr "fecha de inicio mínima"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:4
 msgid "Minimum of 1 recipient"
-msgstr "Mínimo 1 destinatario"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:135
 msgid "Moderate"
@@ -2390,11 +2406,11 @@ msgstr "Error de MsgCreateProject"
 
 #: src/lib/constants/shared.constants.tsx:71
 msgid "Must be a date in the past"
-msgstr "Debe ser una fecha en el pasado"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:248
-msgid "Must be less than or equal to the max credit(s) available ({creditAvailable})."
-msgstr "Debe ser menor o igual al máximo de créditos disponibles ({creditAvailable})."
+#~ msgid "Must be less than or equal to the max credit(s) available ({creditAvailable})."
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:5
 #: src/lib/constants/shared.constants.tsx:82
@@ -2407,7 +2423,7 @@ msgstr "Debe tener destinatarios"
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:73
 msgid "my orders"
-msgstr "Mis ordenes"
+msgstr "<<<<<<< HEAD"
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:87
 msgid "My orders"
@@ -2453,11 +2469,11 @@ msgstr "Nueva publicación"
 
 #: src/pages/ProjectEdit/hooks/useProjectEditSubmit.tsx:103
 msgid "new project admin"
-msgstr "nuevo administrador de proyecto"
+msgstr "<<<<<<< HEAD======="
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:53
 msgid "News"
-msgstr "Noticias"
+msgstr ">>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/pages/BuyCredits/BuyCredits.constants.ts:7
 #: src/pages/Post/Post.constants.ts:14
@@ -2575,11 +2591,11 @@ msgstr "Sólo las ubicaciones de los archivos quedarán ocultas a la vista del p
 
 #: src/lib/constants/shared.constants.tsx:108
 msgid "Oops! Page not found."
-msgstr "¡Ups! Página no encontrada."
+msgstr "<<<<<<< HEAD======="
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:66
 msgid "operator"
-msgstr "operador"
+msgstr ">>>>>>> ffdef6afe (chore: update .po files)"
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:86
 msgid "Opportunities"
@@ -2589,7 +2605,7 @@ msgstr "Oportunidades"
 msgid "or, log in with email / social"
 msgstr "o inicie sesión con correo electrónico / redes sociales"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:66
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:84
 msgid "Order Summary"
 msgstr "Resumen del pedido"
 
@@ -2611,7 +2627,7 @@ msgstr "Nuestros servicios"
 
 #: src/components/organisms/CreditClassOverviewSection.tsx:147
 msgid "Overview"
-msgstr "Descripción general"
+msgstr "<<<<<<< HEAD<<<<<<< HEAD=======>>>>>>> ffdef6afe (chore: update .po files)"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:97
 msgid "owner"
@@ -2621,7 +2637,7 @@ msgstr "dueño"
 msgid "partners"
 msgstr "fogonadura"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:123
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:148
 msgid "payment"
 msgstr "pago"
 
@@ -2634,7 +2650,7 @@ msgid "payment info"
 msgstr "Información de pago"
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.PaymentInfo.tsx:45
-#: src/pages/BuyCredits/BuyCredits.constants.ts:13
+#: src/pages/BuyCredits/BuyCredits.constants.ts:14
 msgid "Payment info"
 msgstr "Información de pago"
 
@@ -2691,11 +2707,11 @@ msgstr "Por favor corrija los errores anteriores"
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:111
 #: src/lib/constants/shared.constants.tsx:155
 msgid "Please enter a location for the retirement of these credits. This prevents double counting of credits in different locations."
-msgstr "Introduzca una ubicación para la retirada de estos créditos. Esto evita el doble conteo de créditos en diferentes ubicaciones."
+msgstr "<<<<<<< HEAD"
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:536
-msgid "Please enter a location for the retirement of these credits. This prevents double counting of credits in different locations. These credits will auto-retire."
-msgstr "Ingrese una ubicación para la cancelación de estos créditos. Esto evita el doble conteo de créditos en diferentes ubicaciones. Estos créditos se cancelarán automáticamente."
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:530
+#~ msgid "Please enter a location for the retirement of these credits. This prevents double counting of credits in different locations. These credits will auto-retire."
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/lib/constants/shared.constants.tsx:68
 msgid "Please enter a valid amount"
@@ -2775,7 +2791,6 @@ msgid "Postal code"
 msgstr "Código Postal"
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:169
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:593
 #: src/lib/constants/shared.constants.tsx:159
 msgid "Postal Code"
 msgstr "Código Postal"
@@ -2799,7 +2814,11 @@ msgstr "Proyectos de prefinanciación"
 
 #: src/lib/constants/shared.constants.tsx:208
 msgid "prefinance this project"
-msgstr "prefinanciar este proyecto"
+msgstr "Prefinanciar este proyecto"
+
+#: src/lib/constants/shared.constants.tsx:208
+#~ msgid "prefinance this project<<<<<<< HEAD"
+#~ msgstr ">>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
 msgid "Preservation"
@@ -2808,14 +2827,6 @@ msgstr "Preservación"
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:155
 msgid "Preservation Factor:"
 msgstr "Factor de conservación:"
-
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:155
-#~ msgid "Preservation Factor:<<<<<<< HEAD"
-#~ msgstr ">>>>>>> e40f80198 (chore: update i18n messages)"
-
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
-#~ msgid "Preservation<<<<<<< HEAD"
-#~ msgstr "Factor de conservación:>>>>>>> 82a60e8da (chore: translate new fields)"
 
 #: src/pages/Post/Post.constants.ts:13
 msgid "prev"
@@ -2929,9 +2940,9 @@ msgstr "programa"
 msgid "Program Guide"
 msgstr "Guía del programa"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:69
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:87
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:124
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:157
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:139
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
@@ -2956,7 +2967,7 @@ msgstr "Proyecto"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:20
 msgid "PROJECT"
-msgstr "PROYECTO<<<<<<< HEAD"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:175
 msgid "Project {onChainProjectId}"
@@ -3110,11 +3121,11 @@ msgstr "PROYECTADO:"
 #: src/pages/Dashboard/Dashboard.constants.tsx:30
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:81
 msgid "Projects"
-msgstr "Proyectos"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:147
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
-msgstr "Los proyectos deben tener una duración de al menos 20 años para garantizar resultados demostrables y cuantificables en biodiversidad. Tebu promueve proyectos que duren más tiempo, asegurando procesos ecológicos a largo plazo."
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/pages/Projects/Projects.tsx:132
 msgid "projects tabs"
@@ -3134,11 +3145,11 @@ msgstr "fecha de compra"
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:128
 msgid "purchase now"
-msgstr "Compra ahora"
+msgstr "<<<<<<< HEAD"
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:416
-msgid "Purchase options"
-msgstr "Opciones de compra"
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:410
+#~ msgid "Purchase options"
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:48
 msgid "PURCHASE OPTIONS"
@@ -3282,7 +3293,7 @@ msgstr "Recursos"
 
 #: src/components/organisms/GettingStartedResourcesSection/GettingStartedResourcesSection.tsx:32
 msgid "Resources for Getting Started"
-msgstr "Recursos para empezar"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:164
 msgid "Restoration"
@@ -3290,15 +3301,15 @@ msgstr "Restauración"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:151
 msgid "Restoration Factor:"
-msgstr "Factor de restauración:"
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:108
 msgid "Retirable"
-msgstr "Retirable"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:185
-msgid "RETIRABLE ONLY"
-msgstr "SOLO RETIRARSE"
+#~ msgid "RETIRABLE ONLY"
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/components/organisms/CreditRetireForm/CreditRetireForm.tsx:136
 #: src/components/organisms/Modals/CreditRetireModal/CreditRetireModal.constants.ts:3
@@ -3310,7 +3321,6 @@ msgid "Retire all credits upon transfer"
 msgstr "Retirar todos los créditos al realizar la transferencia"
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:11
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:428
 msgid "Retire credits now"
 msgstr "Retirar créditos ahora"
 
@@ -3327,7 +3337,7 @@ msgstr "Jubilado por"
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr "Los créditos retirados han sido retirados de circulación de forma permanente y no pueden venderse a nadie más."
 
-#: src/pages/BuyCredits/BuyCredits.constants.ts:15
+#: src/pages/BuyCredits/BuyCredits.constants.ts:16
 msgid "Retirement"
 msgstr "Jubilación"
 
@@ -3364,12 +3374,11 @@ msgstr "Lugar de retiro"
 msgid "Retirement note"
 msgstr "Nota de jubilación"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:61
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:56
 msgid "Retirement permanently removes used credits from circulation to prevent their reuse, ensuring that the environmental benefit claimed is real and not double-counted."
 msgstr "La retirada elimina permanentemente de circulación los créditos usados para evitar su reutilización, garantizando así que el beneficio ambiental reclamado sea real y no se contabilice dos veces."
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:61
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:501
 #: src/components/organisms/Order/Order.Summary.tsx:118
 #: src/lib/constants/shared.constants.tsx:145
 #: src/pages/Certificate/Certificate.constants.ts:17
@@ -3419,6 +3428,10 @@ msgstr "Guardar borrador y salir"
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CardInfo.tsx:52
 msgid "Save my credit card info for next time"
 msgstr "Guarde la información de mi tarjeta de crédito para la próxima vez"
+
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CardInfo.tsx:52
+#~ msgid "Save my credit card info for next time<<<<<<< HEAD"
+#~ msgstr "Guarde la información de mi tarjeta de crédito para la próxima vez<<<<<<< HEAD"
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:103
 msgid "Saved payment info"
@@ -3482,8 +3495,8 @@ msgstr "Seleccione una billetera"
 msgid "Select all"
 msgstr "Seleccionar todo"
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:244
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:245
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:252
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:253
 msgid "Select option"
 msgstr "Seleccionar opción"
 
@@ -3491,7 +3504,6 @@ msgstr "Seleccionar opción"
 msgid "Sell"
 msgstr "Vender"
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:281
 #: src/pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty.tsx:48
 msgid "Sell order"
 msgstr "Orden de venta"
@@ -3532,11 +3544,11 @@ msgstr "Enviar créditos jubilatorios adicionales"
 
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:135
 msgid "Sender"
-msgstr "Remitente"
+msgstr "<<<<<<< HEAD======="
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:22
 msgid "Services"
-msgstr "Servicios"
+msgstr ">>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:26
 msgid "Set max credits"
@@ -3596,11 +3608,11 @@ msgstr "firma"
 
 #: src/pages/Post/hooks/useAttestEvents.ts:182
 msgid "Signed by"
-msgstr "Firmado por"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:128
 msgid "Significant"
-msgstr "Significativo"
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/organisms/PostFlow/hooks/useGetSuccessModalContent.ts:91
 msgid "Signing failed"
@@ -3633,12 +3645,12 @@ msgstr "Pequeña o mediana empresa"
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:127
 msgid "Social Accounts"
-msgstr "Cuentas sociales"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:180
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:192
 msgid "Social and Cultural Index"
-msgstr "Índice social y cultural"
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
 #: src/lib/constants/shared.constants.tsx:171
@@ -3665,7 +3677,7 @@ msgstr "Lo sentimos, no tienes REGEN para cubrir las tarifas de transacción"
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:75
 #: src/lib/constants/shared.constants.tsx:91
 msgid "Sorry, your transaction was not successful."
-msgstr "Lo sentimos, su transacción no fue exitosa."
+msgstr "<<<<<<< HEAD"
 
 #: src/pages/Projects/AllProjects/AllProjects.tsx:219
 msgid "Sort by:"
@@ -3698,7 +3710,6 @@ msgstr "Comience a escribir la ubicación"
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:144
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:129
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:574
 #: src/lib/constants/shared.constants.tsx:59
 #: src/lib/constants/shared.constants.tsx:158
 msgid "State / Region"
@@ -3785,15 +3796,15 @@ msgstr "tomar de la cesta"
 #: src/components/organisms/BasketOverview/BasketOverview.constants.ts:5
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:16
 msgid "Take from basket"
-msgstr "Tomar de la cesta"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:84
 msgid "Tebu badge"
-msgstr "Insignia de bastón"
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/molecules/TebuBanner/TebuBanner.tsx:43
 msgid "Tebu banner"
-msgstr "Bandera de caña de azúcar."
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:43
 msgid "Tebu Credits"
@@ -3801,7 +3812,7 @@ msgstr "Créditos de caña"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:81
 msgid "Tebu factors"
-msgstr "Factores de Tebu"
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:15
 msgid "Tebu logo"
@@ -3847,14 +3858,14 @@ msgstr "El monto que se puede canjear es el mismo que el monto que se puede canj
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:16
 msgid "The caption message must be under {CAPTION_CHART_LIMIT} characters."
-msgstr "El mensaje de título debe tener menos de {CAPTION_CHART_LIMIT} caracteres."
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:182
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:187
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:192
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:197
 msgid "The community has political and economic rights to the project"
-msgstr "La comunidad tiene derechos políticos y económicos sobre el proyecto."
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/lib/constants/shared.constants.tsx:35
 msgid "The creator of this basket has chosen that all credits must be retired upon take."
@@ -3874,11 +3885,11 @@ msgstr "La dirección de correo electrónico que está utilizando para iniciar s
 
 #: src/components/organisms/RolesForm/RolesForm.tsx:221
 msgid "The individual or organization that is in charge of managing the project and will appear on the project page."
-msgstr "La persona u organización que está a cargo de administrar el proyecto y aparecerá en la página del proyecto."
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:182
 msgid "The integration of local communities' knowledge, social structures, and equitable participation to ensure both ecosystem conservation and community benefits."
-msgstr "La integración del conocimiento de las comunidades locales, las estructuras sociales y la participación equitativa para garantizar tanto la conservación del ecosistema como los beneficios comunitarios."
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/lib/constants/shared.constants.tsx:109
 msgid "The page you are looking for might have been temporarily removed or had its name changed."
@@ -3906,14 +3917,13 @@ msgstr "La dirección del destinatario no puede ser la misma que la del remitent
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:105
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:100
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:531
 #: src/lib/constants/shared.constants.tsx:152
 msgid "The retirement location can be where you live or your business operates."
-msgstr "El lugar de jubilación puede ser el lugar donde usted vive o donde opera su negocio."
+msgstr "<<<<<<< HEAD"
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:477
-msgid "The seller of these credits has chosen to only allow for immediate retiring of credits. These credits cannot be purchased as a tradable asset."
-msgstr "El vendedor de estos créditos ha optado por permitir únicamente el retiro inmediato de los mismos. Estos créditos no pueden adquirirse como activos comercializables."
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:471
+#~ msgid "The seller of these credits has chosen to only allow for immediate retiring of credits. These credits cannot be purchased as a tradable asset."
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.constants.ts:4
 msgid "The structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
@@ -3934,27 +3944,27 @@ msgstr "Actualmente no hay órdenes de venta abiertas para este proyecto."
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:3
 msgid "These credits are currently sold out. More may become available in the future."
-msgstr "Estos créditos están agotados actualmente. Es posible que haya más disponibles en el futuro."
+msgstr "<<<<<<< HEAD"
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:453
-msgid "These credits will be a tradable asset. They can be retired later via Regen Marketplace."
-msgstr "Estos créditos serán un activo comercializable. Se podrán retirar más adelante a través de Regen Marketplace."
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:447
+#~ msgid "These credits will be a tradable asset. They can be retired later via Regen Marketplace."
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:19
 msgid "These credits will be a tradeable asset. They can be retired later via Regen Marketplace."
-msgstr "Estos créditos serán un activo comercializable. Se podrán retirar más adelante a través de Regen Marketplace."
+msgstr "<<<<<<< HEAD"
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:431
-msgid "These credits will be retired upon purchase and will not be tradable. Retirement is permanent and non-reversible."
-msgstr "Estos créditos se retirarán al momento de la compra y no se podrán canjear. La retirada es permanente e irreversible."
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:425
+#~ msgid "These credits will be retired upon purchase and will not be tradable. Retirement is permanent and non-reversible."
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:12
 msgid "These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
-msgstr "Estos créditos se retirarán al momento de la compra y no se podrán canjear. La retirada es permanente e irreversible."
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:90
 msgid "These factors are used to calculate the credits issued for this project."
-msgstr "Estos factores se utilizan para calcular los créditos emitidos para este proyecto."
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:15
 msgid "This address is already linked to another account. Remove it from that account and connect it to yours?"
@@ -3975,11 +3985,11 @@ msgstr "¡Este código ha expirado!"
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.constants.ts:3
 #: src/pages/CreditClassDetails/CreditClassDetails.constants.ts:5
 msgid "This data is on chain or anchored on chain via a content hash."
-msgstr "Estos datos están en cadena o anclados en la cadena a través de un hash de contenido."
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:82
 msgid "This factor is used to calculate the credits issued for this project."
-msgstr "Este factor se utiliza para calcular los créditos emitidos para este proyecto."
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/lib/constants/shared.constants.tsx:63
 msgid "This field is required"
@@ -4049,12 +4059,12 @@ msgstr "Esta URL única ya está en uso"
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:3
 msgid "This wallet address is already in use by another account."
-msgstr "Esta dirección de billetera ya está siendo utilizada por otra cuenta."
+msgstr "<<<<<<< HEAD"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:32
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:44
 msgid "Threat Category of Ecosystem"
-msgstr "Categoría de amenaza del ecosistema"
+msgstr "=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.ProjectTimeline.tsx:34
 #: src/pages/Post/Post.constants.ts:10
@@ -4113,12 +4123,12 @@ msgstr "Total de créditos emitidos"
 msgid "total credits you have purchased"
 msgstr "total de créditos que has comprado"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:106
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:131
 #: src/components/organisms/Order/Order.Summary.tsx:91
 msgid "total price"
-msgstr "Precio total"
+msgstr "<<<<<<< HEAD<<<<<<< HEAD"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:106
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:139
 msgid "total purchase price"
 msgstr "Precio total de compra"
 
@@ -4132,11 +4142,11 @@ msgstr "Identificación de token vintage de tucán"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:101
 msgid "Tradable"
-msgstr "Negociable"
+msgstr "<<<<<<< HEAD"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:175
-msgid "TRADABLE AND RETIRABLE"
-msgstr "NEGOCIABLES Y RETIRARSE"
+#~ msgid "TRADABLE AND RETIRABLE"
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/components/organisms/Order/Order.Summary.tsx:112
 msgid "Tradable Credits"
@@ -4191,7 +4201,7 @@ msgstr "Proyectos no registrados"
 msgid "Untitled"
 msgstr "Intitulado"
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:96
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:115
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:68
 msgid "update"
 msgstr "actualizar"
@@ -4236,7 +4246,7 @@ msgstr "Utilice mi tarjeta de crédito registrada que termina en {0}"
 msgid "Use your social account to log in to Regen Marketplace."
 msgstr "Utilice su cuenta social para iniciar sesión en Regen Marketplace."
 
-#: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:216
+#: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:218
 msgid "useMultiStep must be used within a MultiStepProvider"
 msgstr "useMultiStep debe usarse dentro de un MultiStepProvider"
 
@@ -4379,7 +4389,7 @@ msgstr "ver proyecto"
 msgid "view resource"
 msgstr "ver recurso"
 
-#: src/pages/BuyCredits/BuyCredits.constants.ts:10
+#: src/pages/BuyCredits/BuyCredits.constants.ts:11
 msgid "view retirement certificate"
 msgstr "ver certificado de jubilación"
 
@@ -4417,11 +4427,11 @@ msgstr "período de cosecha"
 
 #: src/features/marketplace/BridgeFlow/BridgeFlow.constants.ts:6
 msgid "Visit <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> to view the transaction."
-msgstr "Visita <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> para ver la transacción."
+msgstr "<<<<<<< HEAD"
 
 #: src/lib/constants/shared.constants.tsx:126
 #~ msgid "Visit Our Homepage <0> Instead</0>"
-#~ msgstr "Visita nuestra página de inicio <0> En su lugar</0>"
+#~ msgstr "Visita nuestra página de inicio <0> En su lugar</0>=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/lib/constants/shared.constants.tsx:126
 msgid "Visit Our Homepage <0> Instead</0>"
@@ -4429,11 +4439,11 @@ msgstr "Visita nuestra página de inicio <0> En su lugar</0>"
 
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.constants.tsx:4
 msgid "visit our homepage instead"
-msgstr "Visita nuestra página de inicio en su lugar"
+msgstr "<<<<<<< HEAD"
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:18
 msgid "Voluntary credits are purchased for environmental responsibility without legal obligation."
-msgstr "Los créditos voluntarios se compran por responsabilidad ambiental sin obligación legal."
+msgstr "Los créditos voluntarios se compran por responsabilidad ambiental sin obligación legal.=======>>>>>>> ac46cde8a (chore: update .po files)"
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:152
 msgid "Wallet integration"
@@ -4447,7 +4457,7 @@ msgstr "ver video"
 msgid "We are a company specialized in structuring and operating environmental investments."
 msgstr "Somos una empresa especializada en la estructuración y operación de inversiones ambientales."
 
-#: src/pages/BuyCredits/BuyCredits.constants.ts:18
+#: src/pages/BuyCredits/BuyCredits.constants.ts:19
 msgid "We have emailed you a receipt to"
 msgstr "Le hemos enviado un recibo por correo electrónico a"
 
@@ -4550,7 +4560,6 @@ msgid "You are not yet listed as an issuer on any credit classes"
 msgstr "Aún no figura como emisor en ninguna clase de crédito"
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:83
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:505
 msgid "You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')"
 msgstr "Puede agregar aquí el nombre de la organización o persona en cuyo nombre está retirando los créditos (es decir, 'Retirado en nombre de la Organización ABC')"
 
@@ -4586,9 +4595,13 @@ msgstr "No tienes ninguna ficha de canasta NCT."
 msgid "You do not have any tradable credits to sell from this project."
 msgstr "No tienes créditos comercializables para vender de este proyecto."
 
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:6
+msgid "You don’t have enough"
+msgstr "<<<<<<< HEAD"
+
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:244
-msgid "You don’t have enough {displayDenom}."
-msgstr "No tienes suficiente {displayDenom}."
+#~ msgid "You don’t have enough {displayDenom}."
+#~ msgstr "=======>>>>>>> 9fe41830a (chore: generate .po files)"
 
 #: src/lib/constants/shared.constants.tsx:33
 msgid "You don't have enough basket tokens"

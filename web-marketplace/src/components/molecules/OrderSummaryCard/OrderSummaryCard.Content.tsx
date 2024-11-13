@@ -1,16 +1,20 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { useAtomValue } from 'jotai';
 
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
 import { EditableInput } from 'web-components/src/components/inputs/new/EditableInput/EditableInput';
 import { Title } from 'web-components/src/components/typography';
 
+import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import {
+  BuyCreditsSchemaTypes,
   CardDetails,
-  PaymentOptionsType,
 } from 'pages/BuyCredits/BuyCredits.types';
+import { NOT_ENOUGH_BALANCE } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { AmountWithCurrency } from '../AmountWithCurrency/AmountWithCurrency';
 import {
@@ -25,25 +29,25 @@ type Props = {
   order: OrderProps;
   cardDetails?: CardDetails;
   onClickEditCard?: () => void;
-  paymentOption: PaymentOptionsType;
   allowedDenoms: AllowedDenoms;
   setCreditsAmount: (creditsAmount: number) => void;
   creditsAvailable: number;
   onInvalidCredits?: () => void;
+  userBalance: number;
 };
 
 export function OrderSummaryContent({
   order,
   cardDetails,
   onClickEditCard = () => {},
-  paymentOption,
   allowedDenoms,
   setCreditsAmount,
   creditsAvailable,
   onInvalidCredits,
+  userBalance,
 }: Props) {
   const { _ } = useLingui();
-
+  const paymentOption = useAtomValue(paymentOptionAtom);
   const { projectName, currency, pricePerCredit, credits, currencyAmount } =
     order;
 
@@ -55,6 +59,20 @@ export function OrderSummaryContent({
         baseDenom: currency.askBaseDenom,
       }),
     [allowedDenoms, currency.askBaseDenom, currency.askDenom],
+  );
+
+  const { activeStep } = useMultiStep<BuyCreditsSchemaTypes>();
+
+  const [hasError, setHasError] = useState(false);
+
+  const handleOnKeyDown = useCallback(
+    (credits: number) => {
+      setHasError(
+        credits * pricePerCredit > userBalance &&
+          paymentOption !== PAYMENT_OPTIONS.CARD,
+      );
+    },
+    [paymentOption, pricePerCredit, userBalance],
   );
 
   return (
@@ -91,14 +109,21 @@ export function OrderSummaryContent({
           value={credits}
           maxValue={creditsAvailable}
           onChange={setCreditsAmount}
+          onKeyDown={handleOnKeyDown}
           inputAriaLabel={_(msg`Editable credits`)}
           editButtonAriaLabel={_(msg`Edit`)}
           updateButtonText={_(msg`update`)}
+          cancelButtonText={_(msg`cancel`)}
           name="editable-credits"
           onInvalidValue={onInvalidCredits}
+          error={{
+            hasError,
+            message: `${_(NOT_ENOUGH_BALANCE)} ${displayDenom}`,
+          }}
+          isEditable={activeStep !== 0}
         />
       </div>
-      <div className="col-span-full pt-10">
+      <div className={`col-span-full ${hasError ? 'pt-30' : 'pt-10'}`}>
         <hr className="border-t border-grey-300 border-solid border-l-0 border-r-0 border-b-0" />
       </div>
       <div className="flex items-end col-span-full gap-5">

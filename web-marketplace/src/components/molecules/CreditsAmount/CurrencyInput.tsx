@@ -3,12 +3,17 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
+import { useAtomValue } from 'jotai';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
+import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
+import { updateMultiStepCurrencyAndPaymentOption } from 'pages/BuyCredits/BuyCredits.utils';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import { CURRENCY, CURRENCY_AMOUNT } from './CreditsAmount.constants';
@@ -23,7 +28,6 @@ const CustomSelect = lazy(
 
 export const CurrencyInput = ({
   maxCurrencyAmount,
-  paymentOption,
   selectPlaceholderAriaLabel,
   selectAriaLabel,
   handleCurrencyAmountChange,
@@ -38,6 +42,9 @@ export const CurrencyInput = ({
     control,
   } = useFormContext<ChooseCreditsFormSchemaType>();
   const { _ } = useLingui();
+  const { data, handleSave, activeStep } =
+    useMultiStep<BuyCreditsSchemaTypes>();
+  const paymentOption = useAtomValue(paymentOptionAtom);
 
   const { onChange } = register(CURRENCY_AMOUNT);
 
@@ -59,8 +66,7 @@ export const CurrencyInput = ({
 
   const onHandleCurrencyChange = useCallback(
     (askDenom: string) => {
-      setValue(
-        CURRENCY,
+      const currency =
         askDenom === USD_DENOM
           ? { askDenom: USD_DENOM, askBaseDenom: USD_DENOM }
           : {
@@ -68,10 +74,17 @@ export const CurrencyInput = ({
               askBaseDenom: cryptoCurrencies.filter(
                 cur => cur.askDenom === askDenom,
               )?.[0].askBaseDenom,
-            },
+            };
+      setValue(CURRENCY, currency);
+      updateMultiStepCurrencyAndPaymentOption(
+        handleSave,
+        data,
+        currency,
+        activeStep,
+        paymentOption,
       );
     },
-    [cryptoCurrencies, setValue],
+    [activeStep, cryptoCurrencies, data, handleSave, paymentOption, setValue],
   );
 
   return (
@@ -106,10 +119,10 @@ export const CurrencyInput = ({
             },
           },
           '& .custom-select .MuiSvgIcon-root:not(.denom-icon)': {
-            width: '15px !important',
-            height: '15px !important',
+            width: '10px !important',
+            height: '10px !important',
             right: 'auto !important',
-            top: '-2px !important',
+            top: '1px !important',
             position: 'relative !important',
           },
           '& .MuiSvgIcon-root': {
@@ -126,7 +139,7 @@ export const CurrencyInput = ({
         endAdornment={
           paymentOption === PAYMENT_OPTIONS.CARD ? (
             <DenomIconWithCurrency
-              baseDenom={currency.askBaseDenom}
+              baseDenom={currency?.askBaseDenom}
               displayDenom={displayDenom}
             />
           ) : (
@@ -149,7 +162,7 @@ export const CurrencyInput = ({
               onSelect={onHandleCurrencyChange}
               placeholderAriaLabel={selectPlaceholderAriaLabel}
               selectAriaLabel={selectAriaLabel}
-              defaultOption={currency.askDenom}
+              defaultOption={currency?.askDenom}
             />
           )
         }

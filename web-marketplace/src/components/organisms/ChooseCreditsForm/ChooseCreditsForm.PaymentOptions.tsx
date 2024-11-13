@@ -1,9 +1,11 @@
-import { ChangeEvent, ReactNode, useState } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 import { Trans } from '@lingui/macro';
+import { useAtomValue } from 'jotai';
 
 import CreditCardIcon from 'web-components/src/components/icons/CreditCardIcon';
 import CryptoIcon from 'web-components/src/components/icons/CryptoIcon';
 
+import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 
@@ -40,6 +42,7 @@ function ChooseCreditButton({
         onChange={onChange}
         className="hidden"
         disabled={disabled}
+        data-testid={`choose-credit-${value}`}
       />
       <div className="flex flex-col items-start">{children}</div>
     </label>
@@ -47,25 +50,25 @@ function ChooseCreditButton({
 }
 
 type Props = {
-  paymentOption: PaymentOptionsType;
-  setPaymentOption: (option: PaymentOptionsType) => void;
+  handlePaymentOptions: (option: PaymentOptionsType) => void;
   cardDisabled: boolean;
   isConnected: boolean;
   setupWalletModal: () => void;
 };
 export const PaymentOptions = ({
-  paymentOption,
-  setPaymentOption,
+  handlePaymentOptions,
   cardDisabled,
   isConnected,
   setupWalletModal,
 }: Props) => {
+  const paymentOption = useAtomValue(paymentOptionAtom);
+
   const handleButtonClick = (e: ChangeEvent<HTMLInputElement>) => {
     const paymentType = e.target.value as PaymentOptionsType;
     if (paymentType === PAYMENT_OPTIONS.CRYPTO && !isConnected) {
       setupWalletModal();
     } else {
-      setPaymentOption(paymentType);
+      handlePaymentOptions(paymentType);
     }
   };
 

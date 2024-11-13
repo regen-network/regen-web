@@ -66,7 +66,7 @@ describe('CustomSelect', () => {
     const dropdownButton = screen.getByRole('button');
     fireEvent.click(dropdownButton);
 
-    const optionButton = screen.getByText(/uregen/i);
+    const optionButton = screen.getByText(/regen/i);
     fireEvent.click(optionButton);
 
     expect(onSelect).toHaveBeenCalledWith('uregen');

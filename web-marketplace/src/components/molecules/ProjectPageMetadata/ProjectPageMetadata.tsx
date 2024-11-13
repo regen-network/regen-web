@@ -50,6 +50,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   // Terrasos
   const biomeType = metadata?.['regen:biomeType'];
   const bioregion = metadata?.['regen:bioregion'];
+  const region = metadata?.['regen:region'];
   const watershed = metadata?.['regen:watershed'];
   const subWatershed = metadata?.['regen:subWatershed'];
   const environmentalAuthority = metadata?.['regen:environmentalAuthority'];
@@ -147,7 +148,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
               metadata?.['@context'],
             )}
           />
-          <MetaDetail label={_(msg`region`)} value={bioregion} />
+          <MetaDetail label={_(msg`region`)} value={region} />
           <MetaDetail label={_(msg`department`)} value={department} />
           <MetaDetail
             label={_(msg`environmental authority`)}
@@ -156,6 +157,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
           <MetaDetail label={_(msg`watershed`)} value={watershed} />
           <MetaDetail label={_(msg`sub-watershed`)} value={subWatershed} />
           <MetaDetail label={_(msg`biome`)} value={biomeType} />
+          <MetaDetail label={_(msg`bioregion`)} value={bioregion} />
 
           {unknownFields.map(([fieldName, value]) => (
             <MetaDetail

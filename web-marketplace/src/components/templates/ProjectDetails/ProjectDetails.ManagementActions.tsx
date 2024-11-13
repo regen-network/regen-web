@@ -3,6 +3,7 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import cx from 'classnames';
 
+import { LESS, MORE, READ } from 'lib/constants/shared.constants';
 import { NameImageDescription } from 'lib/db/types/json-ld';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -26,6 +27,9 @@ export function ManagementActions({ actions }: InputProps): JSX.Element {
             name: action['schema:name'],
             description: action['schema:description'],
             imgSrc: action['schema:image'],
+            text: _(READ),
+            lessText: _(LESS),
+            moreText: _(MORE),
           }))}
           title={_(msg`Land Management Actions`)}
           subtitle={_(

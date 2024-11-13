@@ -107,6 +107,9 @@ export const ACTIONS_TABLE_ACTIONS_TEXT = msg`Actions`;
 export const VIEW_ON_LEDGER_TEXT = msg`view on ledger`;
 export const PAGE_NOT_FOUND_TITLE = msg`Oops! Page not found.`;
 export const PAGE_NOT_FOUND_BODY = msg`The page you are looking for might have been temporarily removed or had its name changed.`;
+export const READ = msg`read`;
+export const LESS = msg`less`;
+export const MORE = msg`more`;
 
 // Components
 

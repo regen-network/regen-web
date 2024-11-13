@@ -27,6 +27,9 @@ export interface ReadMoreProps {
   mobileSize?: TextSize;
   component?: React.ElementType<any>;
   buttonClassName?: string;
+  text: string;
+  lessText: string;
+  moreText: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -49,6 +52,9 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
   mobileSize,
   sentenceBased = true,
   component = 'p',
+  text,
+  lessText,
+  moreText,
 }) => {
   const { classes: styles, cx } = useStyles();
   const [expanded, setExpanded] = useState(false);
@@ -72,6 +78,9 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
       }}
       onClick={() => setExpanded(!expanded)}
       expanded={expanded}
+      text={text}
+      lessText={lessText}
+      moreText={moreText}
     />
   );
   const rest = useMemo(

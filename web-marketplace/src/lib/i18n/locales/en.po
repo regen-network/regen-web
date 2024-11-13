@@ -1,19 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
-"POT-Creation-Date: 2024-10-31 18:46+0000\n"
+"POT-Creation-Date: 2024-11-14 11:07+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -76,11 +63,11 @@ msgstr ""
 msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:230
+#: src/lib/constants/shared.constants.tsx:233
 msgid "{from}–{displayedTo} of {count}"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:231
+#: src/lib/constants/shared.constants.tsx:234
 msgid "{from}–{displayedTo} of more than {to}"
 msgstr ""
 
@@ -108,13 +95,9 @@ msgstr ""
 
 #: src/components/organisms/PostForm/PostForm.tsx:265
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
-msgstr "<<<<<<< HEAD"
+msgstr ""
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:90
-#~ msgid "{truncatedQuantity} credit(s) available"
-#~ msgstr ""
-
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:115
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:116
 msgid "{years} year project duration"
 msgstr ""
 
@@ -306,7 +289,7 @@ msgid "Activity"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:24
-#: src/lib/constants/shared.constants.tsx:184
+#: src/lib/constants/shared.constants.tsx:187
 msgid "Actual number of credits issued may be different from the estimated issuance."
 msgstr ""
 
@@ -351,7 +334,7 @@ msgid "Additional certification url"
 msgstr ""
 
 #: src/components/molecules/BatchMetadata/BatchMetadata.AdditionalInfo.tsx:49
-#: src/lib/constants/shared.constants.tsx:197
+#: src/lib/constants/shared.constants.tsx:200
 msgid "additional certifications"
 msgstr ""
 
@@ -542,7 +525,7 @@ msgstr ""
 msgid "Are you sure you want to discard your changes?"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:145
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:146
 msgid "Area Actions"
 msgstr ""
 
@@ -578,7 +561,7 @@ msgstr ""
 msgid "Available"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:172
+#: src/lib/constants/shared.constants.tsx:175
 msgid "Avg Price"
 msgstr ""
 
@@ -670,8 +653,13 @@ msgstr ""
 msgid "BATCH START DATE"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:158
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:159
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:88
 msgid "biome"
+msgstr ""
+
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:160
+msgid "bioregion"
 msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:64
@@ -775,7 +763,7 @@ msgstr ""
 msgid "buy ecocredits"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:204
+#: src/lib/constants/shared.constants.tsx:207
 msgid "Buy ecocredits"
 msgstr ""
 
@@ -851,7 +839,7 @@ msgstr ""
 msgid "card info"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:34
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:35
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
 msgstr ""
 
@@ -900,7 +888,7 @@ msgstr ""
 msgid "Check your wallet for a confirmation popup."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:61
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:60
 msgid "Checkmark list"
 msgstr ""
 
@@ -928,7 +916,7 @@ msgstr ""
 msgid "Choose a specific location on the map"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:114
+#: src/lib/constants/shared.constants.tsx:117
 msgid "Choose any ecocredits that are eligible for this basket.<0>Learn more»</0>"
 msgstr ""
 
@@ -996,7 +984,7 @@ msgstr ""
 msgid "co-benefit"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:167
+#: src/lib/constants/shared.constants.tsx:170
 msgid "coming soon"
 msgstr ""
 
@@ -1024,7 +1012,7 @@ msgstr ""
 msgid "Compliance credits are mandatory to meet government regulations."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:58
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:57
 msgid "Compliance info"
 msgstr ""
 
@@ -1069,7 +1057,7 @@ msgstr ""
 msgid "Connect wallet address"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:70
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:71
 msgid "Connectivity allows the flow of species and ecological processes that support biodiversity across a larger area. Tebu promotes projects that contribute to the restoration of maintenance of the ecological connectivity at a landscape scale."
 msgstr ""
 
@@ -1110,12 +1098,8 @@ msgstr ""
 msgid "Copy link to project page"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:27
-#~ msgid "Copyright © 2024 Terrasos | All rights reserved"
-#~ msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:58
-#: src/lib/constants/shared.constants.tsx:157
+#: src/lib/constants/shared.constants.tsx:160
 msgid "Country"
 msgstr ""
 
@@ -1216,7 +1200,7 @@ msgid "Credit Batches"
 msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:19
-#: src/lib/constants/shared.constants.tsx:194
+#: src/lib/constants/shared.constants.tsx:197
 msgid "credit class"
 msgstr ""
 
@@ -1240,7 +1224,7 @@ msgstr ""
 msgid "CREDIT CLASS"
 msgstr ""
 
-#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx:180
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx:183
 msgid "credit class <0/>"
 msgstr ""
 
@@ -1331,7 +1315,7 @@ msgstr ""
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:46
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:71
-#: src/lib/constants/shared.constants.tsx:179
+#: src/lib/constants/shared.constants.tsx:182
 msgid "credits available"
 msgstr ""
 
@@ -1379,7 +1363,7 @@ msgstr ""
 msgid "Credits issued"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:168
+#: src/lib/constants/shared.constants.tsx:171
 msgid "credits purchased"
 msgstr ""
 
@@ -1475,7 +1459,8 @@ msgstr ""
 msgid "Delivery dates may vary widely as this project is still in the early stages of development."
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:151
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:152
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:78
 msgid "department"
 msgstr ""
 
@@ -1606,7 +1591,7 @@ msgstr ""
 msgid "ecocredits tradable"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:68
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:69
 msgid "Ecological Connectivity Level"
 msgstr ""
 
@@ -1712,7 +1697,7 @@ msgstr ""
 msgid "eligible activities"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:105
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:106
 msgid "Eligible projects implement preservation and/or restoration activities in different proportion/rates. Tebu recognizes restoration activities have a higher cost by assigning a greater value to restoration actions."
 msgstr ""
 
@@ -1745,7 +1730,8 @@ msgstr ""
 msgid "Enter the wallet address here if this entity has a wallet address but has not yet signed up on Regen Marketplace. Make sure this is a valid wallet address."
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:153
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:154
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:83
 msgid "environmental authority"
 msgstr ""
 
@@ -1753,7 +1739,7 @@ msgstr ""
 msgid "Equivalent to"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:170
+#: src/lib/constants/shared.constants.tsx:173
 msgid "Error fetching price"
 msgstr ""
 
@@ -1762,7 +1748,7 @@ msgid "Error getting ISO string for jurisdiction. Please edit your location."
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:23
-#: src/lib/constants/shared.constants.tsx:178
+#: src/lib/constants/shared.constants.tsx:181
 msgid "estimated issuance"
 msgstr ""
 
@@ -1776,7 +1762,7 @@ msgstr ""
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:89
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:71
-#: src/lib/constants/shared.constants.tsx:149
+#: src/lib/constants/shared.constants.tsx:152
 msgid "Explain the reason you are retiring these credits"
 msgstr ""
 
@@ -1788,14 +1774,14 @@ msgstr ""
 msgid "Explore Banks"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:29
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:30
 msgid "factor"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:38
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:74
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:109
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:186
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:39
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:75
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:110
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:187
 msgid "Factor:"
 msgstr ""
 
@@ -2107,7 +2093,7 @@ msgstr ""
 msgid "Keplr Mobile"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.ManagementActions.tsx:30
+#: src/components/templates/ProjectDetails/ProjectDetails.ManagementActions.tsx:34
 msgid "Land Management Actions"
 msgstr ""
 
@@ -2172,6 +2158,10 @@ msgstr ""
 msgid "Learn more»"
 msgstr ""
 
+#: src/lib/constants/shared.constants.tsx:111
+msgid "less"
+msgstr ""
+
 #: src/pages/Certificate/Certificate.tsx:92
 msgid "Link copied to your clipboard"
 msgstr ""
@@ -2213,7 +2203,7 @@ msgid "Location data available on request"
 msgstr ""
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:101
-#: src/lib/constants/shared.constants.tsx:150
+#: src/lib/constants/shared.constants.tsx:153
 msgid "Location of retirement"
 msgstr ""
 
@@ -2285,7 +2275,7 @@ msgstr ""
 msgid "Max"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:142
+#: src/lib/constants/shared.constants.tsx:145
 msgid "Maximum {maximumFractionDigits} decimal places"
 msgstr ""
 
@@ -2330,7 +2320,7 @@ msgstr ""
 msgid "Metadata"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:195
+#: src/lib/constants/shared.constants.tsx:198
 msgid "methodology"
 msgstr ""
 
@@ -2368,6 +2358,10 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:87
 msgid "monitor"
+msgstr ""
+
+#: src/lib/constants/shared.constants.tsx:112
+msgid "more"
 msgstr ""
 
 #: src/components/molecules/FeaturedSection.tsx:91
@@ -2689,7 +2683,7 @@ msgid "Please correct the errors above"
 msgstr ""
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:111
-#: src/lib/constants/shared.constants.tsx:155
+#: src/lib/constants/shared.constants.tsx:158
 msgid "Please enter a location for the retirement of these credits. This prevents double counting of credits in different locations."
 msgstr ""
 
@@ -2771,7 +2765,7 @@ msgid "Postal code"
 msgstr ""
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:169
-#: src/lib/constants/shared.constants.tsx:159
+#: src/lib/constants/shared.constants.tsx:162
 msgid "Postal Code"
 msgstr ""
 
@@ -2783,7 +2777,7 @@ msgstr ""
 msgid "PQR Request"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:176
+#: src/lib/constants/shared.constants.tsx:179
 msgid "prefinance"
 msgstr ""
 
@@ -2792,15 +2786,15 @@ msgstr ""
 msgid "Prefinance projects"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:208
+#: src/lib/constants/shared.constants.tsx:211
 msgid "prefinance this project"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:164
 msgid "Preservation"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:155
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:156
 msgid "Preservation Factor:"
 msgstr ""
 
@@ -2812,7 +2806,7 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:177
+#: src/lib/constants/shared.constants.tsx:180
 msgid "price"
 msgstr ""
 
@@ -2832,7 +2826,7 @@ msgstr ""
 msgid "PRICE (USD)"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:181
+#: src/lib/constants/shared.constants.tsx:184
 msgid "Price of credits for prefinance projects have specific terms, please click on the project to learn more."
 msgstr ""
 
@@ -2943,7 +2937,7 @@ msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:20
 msgid "PROJECT"
-msgstr "<<<<<<< HEAD<<<<<<< HEAD<<<<<<< HEAD"
+msgstr ""
 
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:175
 msgid "Project {onChainProjectId}"
@@ -2974,7 +2968,7 @@ msgstr ""
 msgid "project benefit"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:120
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:121
 msgid "Project Design Document"
 msgstr ""
 
@@ -2991,11 +2985,11 @@ msgstr ""
 msgid "Project documentation"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:103
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:104
 msgid "Project Duration"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:143
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:144
 msgid "project end date"
 msgstr ""
 
@@ -3003,7 +2997,7 @@ msgstr ""
 msgid "Project has been created!"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:81
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:82
 #: src/pages/ProjectFinished/ProjectFinished.tsx:76
 msgid "project id"
 msgstr ""
@@ -3057,7 +3051,7 @@ msgstr ""
 msgid "Project start and end date"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:135
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:136
 msgid "project start date"
 msgstr ""
 
@@ -3077,8 +3071,8 @@ msgstr ""
 msgid "Project timeline"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:112
-#: src/lib/constants/shared.constants.tsx:196
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:113
+#: src/lib/constants/shared.constants.tsx:199
 msgid "project type"
 msgstr ""
 
@@ -3088,7 +3082,7 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.PrefinanceTimeline.tsx:81
 msgid "PROJECTED:"
-msgstr "<<<<<<< HEAD<<<<<<< HEAD<<<<<<< HEAD"
+msgstr ""
 
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
@@ -3099,7 +3093,7 @@ msgstr "<<<<<<< HEAD<<<<<<< HEAD<<<<<<< HEAD"
 msgid "Projects"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:147
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:148
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr ""
 
@@ -3141,6 +3135,10 @@ msgstr ""
 msgid "ratings"
 msgstr ""
 
+#: src/lib/constants/shared.constants.tsx:110
+msgid "read"
+msgstr ""
+
 #: src/components/organisms/MediaSection.tsx:37
 msgid "read article"
 msgstr ""
@@ -3171,7 +3169,7 @@ msgstr ""
 msgid "Redwood Testnet Faucet"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:126
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:127
 msgid "reference id (cfc project id)"
 msgstr ""
 
@@ -3205,7 +3203,8 @@ msgstr ""
 msgid "REGEN wallet address"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:150
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:151
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:76
 msgid "region"
 msgstr ""
 
@@ -3271,11 +3270,11 @@ msgstr ""
 msgid "Resources for Getting Started"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:164
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:165
 msgid "Restoration"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:151
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:152
 msgid "Restoration Factor:"
 msgstr ""
 
@@ -3352,7 +3351,7 @@ msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:61
 #: src/components/organisms/Order/Order.Summary.tsx:118
-#: src/lib/constants/shared.constants.tsx:145
+#: src/lib/constants/shared.constants.tsx:148
 #: src/pages/Certificate/Certificate.constants.ts:17
 msgid "Retirement reason"
 msgstr ""
@@ -3615,13 +3614,13 @@ msgstr ""
 msgid "Social Accounts"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:180
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:192
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:181
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:193
 msgid "Social and Cultural Index"
 msgstr ""
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
-#: src/lib/constants/shared.constants.tsx:171
+#: src/lib/constants/shared.constants.tsx:174
 msgid "Sold Out"
 msgstr ""
 
@@ -3645,7 +3644,7 @@ msgstr ""
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:75
 #: src/lib/constants/shared.constants.tsx:91
 msgid "Sorry, your transaction was not successful."
-msgstr "<<<<<<< HEAD<<<<<<< HEAD<<<<<<< HEAD"
+msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.tsx:219
 msgid "Sort by:"
@@ -3679,7 +3678,7 @@ msgstr ""
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:144
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:129
 #: src/lib/constants/shared.constants.tsx:59
-#: src/lib/constants/shared.constants.tsx:158
+#: src/lib/constants/shared.constants.tsx:161
 msgid "State / Region"
 msgstr ""
 
@@ -3704,7 +3703,7 @@ msgstr ""
 msgid "Storefront"
 msgstr ""
 
-#: src/components/organisms/ProjectStorySection/ProjectStorySection.StoryText.tsx:29
+#: src/components/organisms/ProjectStorySection/ProjectStorySection.StoryText.tsx:33
 msgid "story"
 msgstr ""
 
@@ -3721,7 +3720,8 @@ msgstr ""
 msgid "Story video or photo"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:157
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:158
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:87
 msgid "sub-watershed"
 msgstr ""
 
@@ -3859,7 +3859,7 @@ msgstr ""
 msgid "The individual or organization that is in charge of managing the project and will appear on the project page."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:182
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:183
 msgid "The integration of local communities' knowledge, social structures, and equitable participation to ensure both ecosystem conservation and community benefits."
 msgstr ""
 
@@ -3889,7 +3889,7 @@ msgstr ""
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:105
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:100
-#: src/lib/constants/shared.constants.tsx:152
+#: src/lib/constants/shared.constants.tsx:155
 msgid "The retirement location can be where you live or your business operates."
 msgstr ""
 
@@ -3947,7 +3947,7 @@ msgstr ""
 msgid "This data is on chain or anchored on chain via a content hash."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:82
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:83
 msgid "This factor is used to calculate the credits issued for this project."
 msgstr ""
 
@@ -3959,7 +3959,7 @@ msgstr ""
 msgid "This is comparable to signing a legal document and implies you believe the contents are accurate."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.ManagementActions.tsx:32
+#: src/components/templates/ProjectDetails/ProjectDetails.ManagementActions.tsx:36
 msgid "This is how the project developers are planning to achieve the primary impact."
 msgstr ""
 
@@ -3976,7 +3976,7 @@ msgid "This is the median average price for all open sell orders in this credit 
 msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:6
-#: src/lib/constants/shared.constants.tsx:174
+#: src/lib/constants/shared.constants.tsx:177
 msgid "This is the median average price of all open sell orders for this project."
 msgstr ""
 
@@ -4021,8 +4021,8 @@ msgstr ""
 msgid "This wallet address is already in use by another account."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:32
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:44
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:33
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:45
 msgid "Threat Category of Ecosystem"
 msgstr ""
 
@@ -4092,7 +4092,7 @@ msgstr ""
 msgid "total purchase price"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:93
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:94
 msgid "toucan project token id"
 msgstr ""
 
@@ -4226,7 +4226,7 @@ msgstr ""
 msgid "VCS methodology url"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:102
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:103
 msgid "vcs project id"
 msgstr ""
 
@@ -4238,7 +4238,7 @@ msgstr ""
 msgid "VCS project page url"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:112
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:113
 msgid "vcs project type"
 msgstr ""
 
@@ -4299,7 +4299,7 @@ msgstr ""
 msgid "view credit class doc"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:169
+#: src/lib/constants/shared.constants.tsx:172
 msgid "view details"
 msgstr ""
 
@@ -4337,7 +4337,7 @@ msgstr ""
 msgid "View Profile"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:214
+#: src/lib/constants/shared.constants.tsx:217
 msgid "view project"
 msgstr ""
 
@@ -4369,15 +4369,15 @@ msgstr ""
 msgid "VIEW YOUR PORTFOLIO"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:191
+#: src/lib/constants/shared.constants.tsx:194
 msgid "vintage id"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:192
+#: src/lib/constants/shared.constants.tsx:195
 msgid "vintage id (serial number)"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:193
+#: src/lib/constants/shared.constants.tsx:196
 msgid "vintage period"
 msgstr ""
 
@@ -4385,7 +4385,7 @@ msgstr ""
 msgid "Visit <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> to view the transaction."
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:126
+#: src/lib/constants/shared.constants.tsx:129
 msgid "Visit Our Homepage <0> Instead</0>"
 msgstr ""
 
@@ -4405,7 +4405,8 @@ msgstr ""
 msgid "watch video"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:156
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:157
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:86
 msgid "watershed"
 msgstr ""
 
@@ -4519,7 +4520,7 @@ msgstr ""
 msgid "You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. 'Retired on behalf of ABC Organization')"
 msgstr ""
 
-#: src/lib/constants/shared.constants.tsx:147
+#: src/lib/constants/shared.constants.tsx:150
 msgid "You can add the name of the organization or person you are retiring the credits on behalf of here (i.e. \"Retired on behalf of ABC Organization\")"
 msgstr ""
 

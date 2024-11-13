@@ -7,13 +7,17 @@ import ArrowDownIcon from '../icons/ArrowDownIcon';
 
 interface Props extends ButtonProps {
   expanded?: boolean;
-  text?: string;
+  text: string;
+  lessText: string;
+  moreText: string;
 }
 
 const ExpandButton: React.FC<React.PropsWithChildren<Props>> = ({
   expanded,
   sx,
-  text = 'read',
+  text,
+  lessText,
+  moreText,
   ...buttonProps
 }) => {
   const theme = useTheme<Theme>();
@@ -33,7 +37,7 @@ const ExpandButton: React.FC<React.PropsWithChildren<Props>> = ({
         />
       }
     >
-      {`${text} ${expanded ? 'less' : 'more'}`}
+      {`${text} ${expanded ? lessText : moreText}`}
     </OutlinedButton>
   );
 };

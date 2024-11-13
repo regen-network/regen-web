@@ -1,8 +1,10 @@
 import React, { useCallback, useRef } from 'react';
 import Slider from 'react-slick';
+import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import _ from 'lodash';
 import { makeStyles } from 'tss-react/mui';
 
 import Action, { ActionProps } from 'web-components/src/components/action';
@@ -10,6 +12,8 @@ import PrevNextButton from 'web-components/src/components/buttons/PrevNextButton
 import Section from 'web-components/src/components/section';
 import { Body } from 'web-components/src/components/typography';
 import { Theme } from 'web-components/src/theme/muiTheme';
+
+import { LESS, MORE, READ } from 'lib/constants/shared.constants';
 
 export interface LandManagementActionsProps {
   actions: ActionProps[];
@@ -78,6 +82,7 @@ function LandManagementActions({
   title,
   subtitle,
 }: LandManagementActionsProps): JSX.Element {
+  const { _ } = useLingui();
   const { classes: styles } = useStyles();
   const theme: Theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -138,6 +143,9 @@ function LandManagementActions({
                 name={action.name}
                 description={action.description}
                 imgSrc={action.imgSrc}
+                text={_(READ)}
+                lessText={_(LESS)}
+                moreText={_(MORE)}
               />
             </div>
           ))}
@@ -151,6 +159,9 @@ function LandManagementActions({
               name={action.name}
               description={action.description}
               imgSrc={action.imgSrc}
+              text={_(READ)}
+              lessText={_(LESS)}
+              moreText={_(MORE)}
             />
           ))}
         </Slider>

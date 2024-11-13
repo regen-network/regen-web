@@ -11,6 +11,9 @@ export interface ActionProps {
   description: string;
   imgSrc: string;
   className?: string;
+  text: string;
+  lessText: string;
+  moreText: string;
 }
 
 const useStyles = makeStyles()(theme => ({
@@ -38,6 +41,9 @@ export default function Action({
   description,
   imgSrc,
   className,
+  text,
+  lessText,
+  moreText,
 }: ActionProps): JSX.Element {
   const { classes, cx } = useStyles();
 
@@ -70,6 +76,9 @@ export default function Action({
                 ml: 2,
                 ':hover': { bgcolor: 'transparent !important' },
               }}
+              text={text}
+              lessText={lessText}
+              moreText={moreText}
             />
           )}
         </>

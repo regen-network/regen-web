@@ -20,7 +20,7 @@ import { formatDate } from 'web-components/src/utils/format';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { PHOTO_CREDIT } from 'lib/constants/shared.constants';
+import { LESS, MORE, PHOTO_CREDIT, READ } from 'lib/constants/shared.constants';
 import { getPostQuery } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
@@ -171,6 +171,11 @@ function Post(): JSX.Element {
                       }
                       privateFilesLabel={_(PRIVATE_FILES_LABEL)}
                       privateLocationsLabel={_(PRIVATE_LOCATIONS_LABEL)}
+                      readMoreText={{
+                        text: _(READ),
+                        lessText: _(LESS),
+                        moreText: _(MORE),
+                      }}
                     />
                     {(isAdmin || !privateFiles) && (
                       <img

@@ -12,6 +12,7 @@ export interface TerrasosProjectMetadataLD {
   }[];
   'regen:projectDuration'?: string;
   'regen:marketType'?: MarketType[];
+  'regen:region'?: string;
   'regen:bioregion'?: string[];
   'regen:biomeType'?: string[];
   'regen:watershed'?: string;

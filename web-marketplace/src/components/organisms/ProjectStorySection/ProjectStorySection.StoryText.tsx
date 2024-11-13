@@ -1,8 +1,11 @@
 import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 
 import ReadMore from 'web-components/src/components/read-more';
 import { Label, Title } from 'web-components/src/components/typography';
+
+import { LESS, MORE, READ } from 'lib/constants/shared.constants';
 
 import { useProjectStorySectionStyles } from './ProjectStorySection.styles';
 import { StoryTextProps } from './ProjectStorySection.types';
@@ -13,6 +16,7 @@ export function StoryText({
   hasMedia,
 }: StoryTextProps): JSX.Element {
   const { classes } = useProjectStorySectionStyles();
+  const { _ } = useLingui();
 
   return (
     <Grid
@@ -41,6 +45,9 @@ export function StoryText({
             ? { textContainer: classes.readMore, expanded: classes.expanded }
             : undefined
         }
+        text={_(READ)}
+        lessText={_(LESS)}
+        moreText={_(MORE)}
       >
         {story}
       </ReadMore>

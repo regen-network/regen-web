@@ -10,12 +10,7 @@ import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { pxToRem } from 'web-components/src/theme/muiTheme';
 import { LinkType } from 'web-components/src/types/shared/linkType';
 
-import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
-import {
-  getFieldLabel,
-  getFieldType,
-  getProjectUnknownFields,
-} from 'lib/rdf/rdf.unknown-fields';
+import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
 import { MetaDetail } from 'components/molecules';
 
@@ -25,7 +20,6 @@ type Props = {
   learnMoreLink: LinkType;
   description: SanityBlockContent;
   complianceCredits?: JSX.Element;
-  projectPageMetadata?: ProjectPageMetadataLD;
   projectMetadata?: ProjectMetadataLD;
 };
 
@@ -36,9 +30,14 @@ const ComplianceInfo = ({
   projectMetadata,
 }: Props) => {
   const { _ } = useLingui();
-  const unknownFields = projectMetadata
-    ? getProjectUnknownFields(projectMetadata)
-    : [];
+
+  const region = projectMetadata?.['regen:region'];
+  const department = projectMetadata?.['regen:administrativeArea'];
+  const watershed = projectMetadata?.['regen:watershed'];
+  const subWatershed = projectMetadata?.['regen:subWatershed'];
+  const environmentalAuthority =
+    projectMetadata?.['regen:environmentalAuthority'];
+  const biomeType = projectMetadata?.['regen:biomeType'];
 
   return (
     <Box
@@ -74,15 +73,19 @@ const ComplianceInfo = ({
           <SmallArrowIcon sx={{ width: '7px', ml: '4px' }} />
         </ButtonBase>
         <Grid container spacing={8}>
-          {unknownFields.map(([fieldName, value]) => (
-            <MetaDetail
-              key={fieldName}
-              label={getFieldLabel(fieldName)}
-              value={value}
-              rdfType={getFieldType(fieldName, projectMetadata?.['@context'])}
-              bodySize="lg"
-            />
-          ))}
+          <MetaDetail label={_(msg`region`)} value={region} bodySize="lg" />
+          <MetaDetail
+            label={_(msg`department`)}
+            value={department}
+            bodySize="lg"
+          />
+          <MetaDetail
+            label={_(msg`environmental authority`)}
+            value={environmentalAuthority}
+          />
+          <MetaDetail label={_(msg`watershed`)} value={watershed} />
+          <MetaDetail label={_(msg`sub-watershed`)} value={subWatershed} />
+          <MetaDetail label={_(msg`biome`)} value={biomeType} />
         </Grid>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-[20px] mt-4 justify-items-center sm:justify-items-start"></div>
       </div>

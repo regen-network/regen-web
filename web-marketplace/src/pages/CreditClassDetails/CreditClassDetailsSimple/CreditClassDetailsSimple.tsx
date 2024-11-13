@@ -21,6 +21,9 @@ import { CreditClass } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   ECOSYSTEM_LABEL,
+  LESS,
+  MORE,
+  READ,
   SEE_LESS,
   SEE_MORE,
 } from 'lib/constants/shared.constants';
@@ -217,6 +220,9 @@ const CreditClassDetailsSimple: React.FC<
                   textContainer: styles.textContainer,
                   description: styles.description,
                 }}
+                text={_(READ)}
+                lessText={_(LESS)}
+                moreText={_(MORE)}
               >
                 {metadata?.['schema:description']}
               </ReadMore>

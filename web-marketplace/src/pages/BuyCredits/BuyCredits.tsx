@@ -11,6 +11,7 @@ import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetP
 import { useNavigateToSlug } from 'components/templates/ProjectDetails/hooks/useNavigateToSlug';
 
 import { paymentOptionAtom } from './BuyCredits.atoms';
+import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsForm } from './BuyCredits.Form';
 import { CardDetails } from './BuyCredits.types';
 import { getFormModel } from './BuyCredits.utils';
@@ -76,6 +77,12 @@ export const BuyCredits = () => {
   useEffect(() => {
     if (confirmationTokenId) summarizePayment(confirmationTokenId);
   }, [confirmationTokenId, summarizePayment]);
+
+  useEffect(() => {
+    if (!retiring && paymentOption === PAYMENT_OPTIONS.CARD) {
+      setRetiring(true);
+    }
+  }, [paymentOption, retiring, setRetiring]);
 
   if (noProjectFound) return <NotFoundPage />;
 

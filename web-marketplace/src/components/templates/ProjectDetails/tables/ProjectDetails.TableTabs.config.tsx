@@ -59,6 +59,7 @@ export const getProjectDetailsTabs = ({
       hidden:
         !isAnchoredProjectMetadata(projectMetadata, onChainProjectId) &&
         projectMetadata &&
-        getProjectUnknownFields(projectMetadata).length === 0,
+        getProjectUnknownFields(projectMetadata).length === 0 &&
+        projectMetadata['@type'] !== 'TerrasosProjectInfo',
     },
   ].filter(tab => tab.hidden !== true);

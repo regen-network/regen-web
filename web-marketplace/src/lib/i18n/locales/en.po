@@ -896,6 +896,10 @@ msgstr ""
 msgid "Check your wallet for a confirmation popup."
 msgstr ""
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:61
+msgid "Checkmark list"
+msgstr ""
+
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:9
 msgid "Choose 2-10 photos for the photo gallery."
 msgstr ""
@@ -1008,12 +1012,16 @@ msgstr ""
 msgid "Complete"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.tsx:33
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:54
 msgid "Compliance Credits"
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:17
 msgid "Compliance credits are mandatory to meet government regulations."
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:58
+msgid "Compliance info"
 msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.constants.ts:45
@@ -1323,7 +1331,7 @@ msgstr ""
 msgid "credits available"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:83
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
 msgid "Credits Available"
 msgstr ""
 
@@ -1363,7 +1371,7 @@ msgstr ""
 msgid "Credits Input"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:69
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:79
 msgid "Credits issued"
 msgstr ""
 
@@ -1375,13 +1383,17 @@ msgstr ""
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr ""
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:78
+msgid "Credits Registered"
+msgstr ""
+
 #: src/components/molecules/BatchTotalsGrid.tsx:46
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:105
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:120
 msgid "Credits Retired"
 msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:83
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
 msgid "Credits Tradable"
 msgstr ""
 
@@ -2121,7 +2133,7 @@ msgstr ""
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:52
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:10
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:99
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:98
 msgid "Learn more"
 msgstr ""
 
@@ -2921,7 +2933,7 @@ msgstr ""
 msgid "PROJECT"
 msgstr "<<<<<<< HEAD<<<<<<< HEAD<<<<<<< HEAD"
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:163
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:175
 msgid "Project {onChainProjectId}"
 msgstr ""
 
@@ -3277,7 +3289,7 @@ msgstr ""
 msgid "Retired by"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr ""
 
@@ -3592,7 +3604,7 @@ msgstr ""
 msgid "Social and Cultural Index"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
 #: src/lib/constants/shared.constants.tsx:171
 msgid "Sold Out"
 msgstr ""
@@ -3738,7 +3750,7 @@ msgstr ""
 msgid "Take from basket"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:85
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:84
 msgid "Tebu badge"
 msgstr ""
 
@@ -3746,11 +3758,11 @@ msgstr ""
 msgid "Tebu banner"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.tsx:22
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:43
 msgid "Tebu Credits"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:82
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:81
 msgid "Tebu factors"
 msgstr ""
 
@@ -3869,6 +3881,10 @@ msgstr ""
 msgid "The total amount of credits that were issued to this project."
 msgstr ""
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
+msgid "The total amount of credits that were registered to this project."
+msgstr ""
+
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:5
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:4
 msgid "There are currently no open sell orders for this project."
@@ -3886,7 +3902,7 @@ msgstr ""
 msgid "These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:91
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:90
 msgid "These factors are used to calculate the credits issued for this project."
 msgstr ""
 
@@ -4072,7 +4088,7 @@ msgstr ""
 msgid "Tradable Credits"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
 msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
 msgstr ""
 

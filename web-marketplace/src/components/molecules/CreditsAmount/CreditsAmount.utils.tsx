@@ -29,10 +29,11 @@ export function getSpendingCap(
   cardSellOrders: Array<CardSellOrder>,
 ) {
   return paymentOption === PAYMENT_OPTIONS.CARD
-    ? cardSellOrders.reduce(
-        (prev, cur) => prev + Number(cur.quantity) * cur.usdPrice,
-        0,
-      )
+    ? cardSellOrders.reduce((prev, cur) => {
+        return formatCurrencyAmountTwoDecimals(
+          prev + Number(cur.quantity) * cur.usdPrice,
+        );
+      }, 0)
     : microToDenom(
         filteredCryptoSellOrders?.reduce(
           (prev, cur) => prev + Number(cur.quantity) * Number(cur.askAmount),
@@ -53,7 +54,9 @@ export const getCreditsAmount = ({
   orderedSellOrders,
   creditTypePrecision,
 }: GetCreditsAmountParams) => {
-  const currentCurrencyAmount = card ? value : denomToMicro(value);
+  const currentCurrencyAmount = card
+    ? formatCurrencyAmountTwoDecimals(value)
+    : denomToMicro(value);
   let currentCreditsAmount = 0;
   let currencyAmountLeft = currentCurrencyAmount;
   const sellOrders = [];
@@ -65,9 +68,9 @@ export const getCreditsAmount = ({
     const orderTotalAmount = quantity * price;
 
     if (currencyAmountLeft >= orderTotalAmount) {
-      currencyAmountLeft = parseFloat(
-        (currencyAmountLeft - orderTotalAmount).toFixed(6),
-      );
+      currencyAmountLeft = card
+        ? formatCurrencyAmountTwoDecimals(currencyAmountLeft - orderTotalAmount)
+        : parseFloat((currencyAmountLeft - orderTotalAmount).toFixed(6));
       currentCreditsAmount += quantity;
       sellOrders.push(formatSellOrder({ order, card, price }));
       if (currencyAmountLeft === 0) break;
@@ -138,7 +141,7 @@ export const getCurrencyAmount = ({
 
   return {
     [CURRENCY_AMOUNT]: card
-      ? parseFloat(currentCurrencyAmount.toFixed(6))
+      ? formatCurrencyAmountTwoDecimals(currentCurrencyAmount) //parseFloat(currentCurrencyAmount.toFixed(6))
       : parseFloat(microToDenom(currentCurrencyAmount).toFixed(6)),
     sellOrders,
   };
@@ -170,4 +173,21 @@ export const formatSellOrder = ({
       : undefined,
     price: card ? parseFloat((price * 100).toFixed(2)) : undefined, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00)
   };
+};
+
+const formatCurrencyAmountTwoDecimals = (value: string | number) => {
+  const numericValue = typeof value === 'string' ? parseFloat(value) : value;
+  const stringValue = value.toString();
+  const decimalPart = stringValue.split('.')?.[1];
+
+  if (isNaN(numericValue)) {
+    return 0;
+  }
+
+  // Limit decimals to two
+  if (decimalPart && decimalPart.length > 2) {
+    return parseFloat(Number(value).toFixed(2));
+  }
+
+  return parseFloat(numericValue.toFixed(2));
 };

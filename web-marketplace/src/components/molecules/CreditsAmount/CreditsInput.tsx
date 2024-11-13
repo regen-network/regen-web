@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, FocusEvent, useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -24,12 +24,36 @@ export const CreditsInput = ({
   const { onChange } = register(CREDITS_AMOUNT);
 
   const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    // Remove zeros in non decimal values and update the value
-    const value = event.target.value;
-    if (!value.includes('.')) setValue(CREDITS_AMOUNT, Number(value));
     onChange(event);
     handleCreditsAmountChange(event);
   };
+
+  const handleInput = useCallback(
+    (event: ChangeEvent<HTMLInputElement>): void => {
+      let value = event.target.value;
+      // Check if the value starts with two consecutive zeros
+      if (/^00/.test(value) || /^0[1-9]/.test(value)) {
+        // If so, remove leading zeros and set the value to a float with 2 decimals
+        // and if the value starts with a zero followed by another number, remove the leading zero
+        value = value.replace(/^0+/, '');
+        setValue(CREDITS_AMOUNT, parseFloat(Number(value).toFixed(2)), {
+          shouldValidate: true,
+        });
+      }
+    },
+    [setValue],
+  );
+
+  const handleOnBlur = useCallback(
+    (event: FocusEvent<HTMLInputElement>): void => {
+      // If the value is empty, set it to 0
+      const value = event.target.value;
+      if (value === '') {
+        setValue(CREDITS_AMOUNT, 0, { shouldValidate: true });
+      }
+    },
+    [setValue],
+  );
 
   return (
     <div className="flex-1 relative">
@@ -44,6 +68,8 @@ export const CreditsInput = ({
         }}
         {...register(CREDITS_AMOUNT)}
         onChange={onHandleChange}
+        onInput={handleInput}
+        onBlur={handleOnBlur}
         sx={{
           '& .MuiInputBase-root': {
             border: 'none',

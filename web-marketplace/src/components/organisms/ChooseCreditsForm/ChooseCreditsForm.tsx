@@ -266,6 +266,12 @@ export const ChooseCreditsForm = React.memo(
       handlePaymentOptions,
     ]);
 
+    useEffect(() => {
+      if (spendingCap) {
+        form.trigger();
+      }
+    }, [form, form.trigger, spendingCap]);
+
     // Advanced settings not enabled for MVP
     // const [advanceSettingsOpen, setAdvanceSettingsOpen] = useState(false);
     // const creditVintageOptions = useWatch({

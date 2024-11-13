@@ -267,10 +267,10 @@ export const ChooseCreditsForm = React.memo(
     ]);
 
     useEffect(() => {
-      if (spendingCap) {
+      if (spendingCap && creditsAvailable) {
         form.trigger();
       }
-    }, [form, form.trigger, spendingCap]);
+    }, [form, form.trigger, creditsAvailable, spendingCap]);
 
     // Advanced settings not enabled for MVP
     // const [advanceSettingsOpen, setAdvanceSettingsOpen] = useState(false);

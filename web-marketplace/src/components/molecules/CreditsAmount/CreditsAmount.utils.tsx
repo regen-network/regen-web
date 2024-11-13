@@ -178,7 +178,7 @@ export const formatSellOrder = ({
 const formatCurrencyAmountTwoDecimals = (value: string | number) => {
   const numericValue = typeof value === 'string' ? parseFloat(value) : value;
   const stringValue = value.toString();
-  const decimalPart = stringValue.split('.')?.[1];
+  const [integerPart, decimalPart] = stringValue.split('.');
 
   if (isNaN(numericValue)) {
     return 0;
@@ -186,7 +186,7 @@ const formatCurrencyAmountTwoDecimals = (value: string | number) => {
 
   // Limit decimals to two
   if (decimalPart && decimalPart.length > 2) {
-    return parseFloat(Number(value).toFixed(2));
+    return parseFloat(`${integerPart}.${decimalPart.slice(0, 2)}`); // parseFloat(Number(value).toFixed(2));
   }
 
   return parseFloat(numericValue.toFixed(2));

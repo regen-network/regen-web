@@ -13,8 +13,8 @@ import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import {
   MAX_AMOUNT,
   MAX_CREDITS,
-  NOT_ENOUGH_BALANCE,
   MIN_USD_AMOUNT,
+  NOT_ENOUGH_BALANCE,
   POSITIVE_NUMBER,
 } from './ChooseCreditsForm.constants';
 

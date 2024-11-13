@@ -101,6 +101,7 @@ const knownProjectFields: KnownProjectFields[] = [
   'regen:watershed',
   'regen:subWatershed',
   'regen:department',
+  'regen:environmentalAuthority',
 ];
 
 export function getProjectUnknownFields<T extends ProjectMetadataLD>(data: T) {

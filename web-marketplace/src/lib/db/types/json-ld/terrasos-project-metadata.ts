@@ -17,6 +17,7 @@ export interface TerrasosProjectMetadataLD {
   'regen:watershed'?: string;
   'regen:subWatershed'?: string;
   'regen:department'?: string;
+  'regen:environmentalAuthority'?: { 'schema:name': string };
 }
 
 export type IucnStatus =

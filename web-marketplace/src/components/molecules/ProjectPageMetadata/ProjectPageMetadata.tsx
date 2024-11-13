@@ -47,6 +47,14 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   // Toucan
   const toucanProjectTokenId = metadata?.['regen:toucanProjectTokenId'];
 
+  // Terrasos
+  const biomeType = metadata?.['regen:biomeType'];
+  const bioregion = metadata?.['regen:bioregion'];
+  const watershed = metadata?.['regen:watershed'];
+  const subWatershed = metadata?.['regen:subWatershed'];
+  const environmentalAuthority = metadata?.['regen:environmentalAuthority'];
+  const department = metadata?.['regen:department'];
+
   const unknownFields = metadata ? getProjectUnknownFields(metadata) : [];
 
   return (
@@ -139,6 +147,16 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
               metadata?.['@context'],
             )}
           />
+          <MetaDetail label={_(msg`region`)} value={bioregion} />
+          <MetaDetail label={_(msg`department`)} value={department} />
+          <MetaDetail
+            label={_(msg`environmental authority`)}
+            value={environmentalAuthority}
+          />
+          <MetaDetail label={_(msg`watershed`)} value={watershed} />
+          <MetaDetail label={_(msg`sub-watershed`)} value={subWatershed} />
+          <MetaDetail label={_(msg`biome`)} value={biomeType} />
+
           {unknownFields.map(([fieldName, value]) => (
             <MetaDetail
               key={fieldName}

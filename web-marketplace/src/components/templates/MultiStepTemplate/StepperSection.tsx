@@ -47,7 +47,6 @@ export function StepperSection({
         sx={{ mw: 240 }}
         steps={steps ? steps.map(step => _(step.name)) : []}
         activeStep={activeStep}
-        onStepClick={() => null}
       />
       <OnBoardingSection
         title={title}

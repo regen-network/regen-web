@@ -16,7 +16,10 @@ import {
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   creditClassSelectedFiltersAtom,
+  environmentTypeFiltersAtom,
+  marketTypeFiltersAtom,
   projectsSortAtom,
+  regionFiltersAtom,
   useCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
@@ -28,7 +31,13 @@ import { GettingStartedResourcesSection } from 'components/molecules';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
 import { PROJECTS_PER_PAGE } from './AllProjects/AllProjects.config';
+import {
+  getActiveFilterIds,
+  getResetFilters,
+  getSetActiveFilters,
+} from './AllProjects/AllProjects.ProjectFilter.utils';
 import ProjectFilterBody from './AllProjects/AllProjects.ProjectFilterBody';
+// import { initialActiveFilters as terrasosInitialActiveFilters } from './AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters';
 import { useProjects } from './hooks/useProjects';
 
 const Projects = (): JSX.Element => {
@@ -38,6 +47,13 @@ const Projects = (): JSX.Element => {
   const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
   const [sort] = useAtom(projectsSortAtom);
   const [creditClassSelectedFilters] = useAtom(creditClassSelectedFiltersAtom);
+  const [environmentTypeFilters, setEnvironmentTypeFilters] = useAtom(
+    environmentTypeFiltersAtom,
+  );
+  const [regionFilters, setRegionFilters] = useAtom(regionFiltersAtom);
+  const [marketTypeFilters, setMarketTypeFilters] = useAtom(
+    marketTypeFiltersAtom,
+  );
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const { data: allHomePageData } = useQuery(
@@ -69,6 +85,9 @@ const Projects = (): JSX.Element => {
     offset: page * PROJECTS_PER_PAGE,
     useCommunityProjects,
     creditClassFilter: creditClassSelectedFilters,
+    regionFilter: regionFilters,
+    environmentTypeFilter: environmentTypeFilters,
+    marketTypeFilter: marketTypeFilters,
     sortPinnedIds,
   });
 
@@ -124,6 +143,29 @@ const Projects = (): JSX.Element => {
     sanitySoldOutProjects,
   });
 
+  const setActiveFilters = (filters: string[]) =>
+    getSetActiveFilters({
+      filterIds: filters,
+      setMarketTypeFilters,
+      setEnvironmentTypeFilters,
+      setRegionFilters,
+      marketTypeFilters,
+      environmentTypeFilters,
+      regionFilters,
+    });
+
+  const activeFilterIds = getActiveFilterIds({
+    marketTypeFilters,
+    environmentTypeFilters,
+    regionFilters,
+  });
+
+  const resetFilters = getResetFilters({
+    setMarketTypeFilters,
+    setEnvironmentTypeFilters,
+    setRegionFilters,
+  });
+
   return (
     <>
       <div
@@ -133,15 +175,17 @@ const Projects = (): JSX.Element => {
             'linear-gradient(90deg, rgba(var(--ac-neutral-0)) 0%, rgba(var(--ac-neutral-0)) 50%, rgba(var(--ac-neutral-100)) 50%, rgba(var(--ac-neutral-100)) 100%)',
         }}
       >
-        <div className="w-[310px] py-[43px] px-[20px]">
-        <ProjectFilterBody
-          className="h-full bg-ac-neutral-0 hidden md:block"
-          // shadow-[0_0_4px_rgba(0,0,0,0.1)]
-          // style={{
-          //   boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)',
-          // }}
-        />
-
+        <div className="w-[310px] py-[43px] px-[20px] hidden lg:block">
+          <ProjectFilterBody
+            className="h-full bg-ac-neutral-0 hidden md:block"
+            // shadow-[0_0_4px_rgba(0,0,0,0.1)]
+            // style={{
+            //   boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)',
+            // }}
+            activeFilters={activeFilterIds}
+            setActiveFilters={setActiveFilters}
+            resetFilters={resetFilters}
+          />
         </div>
         <div className="bg-ac-neutral-100 pt-25 sm:pt-40 px-15 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid grid-cols-[repeat(auto-fill,minmax(300px,350px))] gap-[18px] justify-center lg:justify-start">
           {/* <div className="bg-ac-neutral-100 pt-25 sm:pt-40 px-15 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] m-auto grid grid-cols-[repeat(auto-fit,minmax(300px,400px))] gap-[18px] justify-center"> */}
@@ -179,7 +223,6 @@ const Projects = (): JSX.Element => {
           />
         </div>
       </div>
-      {/* </div> */}
       {gettingStartedResourcesSection && !IS_TERRASOS && (
         <GettingStartedResourcesSection
           section={gettingStartedResourcesSection}

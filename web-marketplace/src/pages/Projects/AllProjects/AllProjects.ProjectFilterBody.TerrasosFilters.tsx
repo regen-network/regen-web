@@ -12,7 +12,6 @@ import {
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
-
 const ecosystemIconSx = {
   width: '30px',
   height: '30px',
@@ -42,13 +41,6 @@ const ecosystemTags = [
   },
 ];
 
-// export const filterEcosystemIds = [
-//   'Tropical Very Humid Forest',
-//   'Tropical Humid Forest',
-//   'Tropical Dry Forest',
-//   'Premontaine Humid Forest',
-//   'Low Montane Very Humid Forest',
-// ];
 export const filterEcosystemIds = ecosystemTags.map(({ id }) => id);
 
 export function getEcosystemTags(
@@ -69,51 +61,64 @@ export function getEcosystemTags(
   }));
 }
 
-const regionTags: FilterOptions[] = [
+const regionTags = [
   {
-    name: 'Amazon',
+    name: msg`Amazon`,
     id: 'Amazon',
     icon: <RegionIndicatorIcon region="AMAZON" />,
   },
   {
-    name: 'Pacific',
+    name: msg`Pacific`,
     id: 'Pacific',
     icon: <RegionIndicatorIcon region="PACIFIC" />,
   },
   {
-    name: 'Orinoco',
+    name: msg`Orinoco`,
     id: 'Orinoco',
     icon: <RegionIndicatorIcon region="ORINOCO" />,
   },
   {
-    name: 'Caribbean',
+    name: msg`Caribbean`,
     id: 'Carribean',
     icon: <RegionIndicatorIcon region="CARIBBEAN" />,
   },
   {
-    name: 'Andean',
+    name: msg`Andean`,
     id: 'Andean',
     icon: <RegionIndicatorIcon region="ANDEAN" />,
   },
 ];
 
+export function getRegionTags(_: TranslatorType): FilterOptions[] {
+  return regionTags.map(({ name, id, icon }) => ({
+    name: _(name),
+    id: id,
+    icon: icon,
+  }));
+}
+
 const marketCheckboxes = [
   {
     name: msg`Voluntary`,
-    id: 'VOLUNTARY',
+    id: 'VOLUNTARY_MARKET',
     icon: (
       <Box
         component="img"
         sx={{ width: '24px', ml: 2 }}
         src="/svg/tebu-badge.svg"
+        // eslint-disable-next-line lingui/no-unlocalized-strings
         alt="Tebu"
       />
     ),
   },
   {
     name: msg`Compliance`,
-    id: 'COMPLIANCE',
-    icon: <HectaresBadge />,
+    id: 'COMPLIANCE_MARKET',
+    icon: (
+      <div className="ml-[8px] w-[24px]">
+        <HectaresBadge />
+      </div>
+    ),
   },
 ];
 
@@ -146,6 +151,42 @@ function getMarketCheckboxes(_: TranslatorType): FilterOptions[] {
 
 // export default filters;
 
+export const initialActiveFilterKeysByType = {
+  regionFilters: regionTags.map(({ id }) => id),
+  environmentTypeFilters: ecosystemTags.map(({ id }) => id),
+  marketTypeFilters: marketCheckboxes.map(({ id }) => id),
+};
+
+// export const initialActiveFilters = Object.fromEntries(
+//   Object.entries(initialActiveFilterKeysByType).map((k, v) => [
+//     k,
+//     Object.fromEntries(
+//       Object.entries(initialActiveFilterKeysByType).map(([k, v]) => [
+//         k,
+//         Object.fromEntries(v.map((x: string) => [x, true])),
+//       ]),
+//     ),
+//   ]),
+// );
+
+// export const initialActiveFilters = Object.fromEntries(
+//   Object.entries(initialActiveFilterKeysByType).map(
+//     ([filterType, filterKeys]) => [
+//       filterType,
+//       Object.fromEntries(filterKeys.map((key: string) => [key, true])),
+//     ],
+//   ),
+// );
+export const initialActiveFilters = {
+  regionFilters: Object.fromEntries(regionTags.map(({ id }) => [id, true])),
+  environmentTypeFilters: Object.fromEntries(
+    ecosystemTags.map(({ id }) => [id, true]),
+  ),
+  marketTypeFilters: Object.fromEntries(
+    marketCheckboxes.map(({ id }) => [id, true]),
+  ),
+};
+
 export function getFilters(
   _: TranslatorType,
   ecosystemIcons: Record<string, string>,
@@ -154,12 +195,11 @@ export function getFilters(
     {
       displayType: 'tag',
       title: _(msg`Region`),
-      options: regionTags,
+      options: getRegionTags(_),
     },
     {
       displayType: 'tag',
       title: _(msg`Ecosystem`),
-      // options: ecosystemTags.map(tag => ({ ...tag, name: _(tag.name) })),
       options: getEcosystemTags(_, ecosystemIcons),
       hasCollapse: true,
     },

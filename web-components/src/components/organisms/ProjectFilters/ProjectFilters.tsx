@@ -53,7 +53,6 @@ export default function ProjectFilters({
   const handleExpand = (index: number) => {
     setIsExpanded({ ...isExpanded, [index]: !isExpanded[index] });
   };
-  console.log(activeFilterIds);
   return (
     <>
       <div className="font-montserrat justify-between items-baseline flex">

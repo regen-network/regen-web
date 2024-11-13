@@ -124,6 +124,7 @@ export type NormalizeProject = ProjectWithOrderData & {
     creditsRetired: number;
     creditsRegistered: number;
   };
+  ecosystemType?: string[];
 };
 export const normalizeProjectWithMetadata = ({
   offChainProject,
@@ -171,6 +172,10 @@ export const normalizeProjectWithMetadata = ({
       projectMetadata?.['regen:marketType'] ??
       projectPageMetadata?.['regen:marketType'] ??
       (projectWithOrderData as NormalizeProject)?.marketType,
+    ecosystemType:
+      projectMetadata?.['regen:ecosystemType'] ??
+      projectPageMetadata?.['regen:ecosystemType'] ??
+      (projectWithOrderData as NormalizeProject)?.ecosystemType,
     offChainId: offChainProject?.id ?? projectWithOrderData?.offChainId,
     slug: offChainProject?.slug ?? projectWithOrderData?.slug,
     draft: !projectWithOrderData && !offChainProject?.published,

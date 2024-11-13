@@ -65,6 +65,7 @@ export interface ProjectPageMetadataLD
   'regen:story'?: string;
   'regen:storyTitle'?: string;
   'regen:storyMedia'?: ProjectStoryMedia;
+  'regen:ecosystemType'?: string[];
 
   // Legacy project fields
   'schema:image'?: string;

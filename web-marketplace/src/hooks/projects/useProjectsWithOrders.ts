@@ -53,6 +53,9 @@ export interface ProjectsWithOrdersProps {
   creditClassFilter?: Record<string, boolean>;
   useOffChainProjects?: boolean;
   enableOffchainProjectsQuery?: boolean;
+  regionFilter?: Record<string, boolean>;
+  environmentTypeFilter?: Record<string, boolean>;
+  marketTypeFilter?: Record<string, boolean>;
 }
 
 /**
@@ -73,6 +76,9 @@ export function useProjectsWithOrders({
   creditClassFilter = {},
   useOffChainProjects = false,
   enableOffchainProjectsQuery = true,
+  regionFilter = {},
+  environmentTypeFilter = {},
+  marketTypeFilter = {},
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
 
@@ -248,16 +254,59 @@ export function useProjectsWithOrders({
   const creditClassSelected = creditClassFilterKeys.filter(
     creditClassId => creditClassFilter[creditClassId],
   );
+  const regionFilterKeys = Object.keys(regionFilter);
+  const regionSelected = regionFilterKeys.filter(
+    region => regionFilter?.[region],
+  );
+  const environmentTypeFilterKeys = Object.keys(environmentTypeFilter);
+  const environmentTypeSelected = environmentTypeFilterKeys.filter(
+    environmentType => environmentTypeFilter?.[environmentType],
+  );
+  const marketTypeFilterKeys = Object.keys(marketTypeFilter);
+  const marketTypeSelected = marketTypeFilterKeys.filter(
+    marketType => marketTypeFilter?.[marketType],
+  );
 
   const projectsFilteredByCreditClass = useMemo(
     () =>
-      allProject.filter(project =>
-        creditClassFilterKeys.length === 0
-          ? true
-          : project.offChain ||
-            creditClassSelected.includes(project.creditClassId ?? ''),
-      ),
-    [allProject, creditClassFilterKeys, creditClassSelected],
+      allProject
+        .filter(project => {
+          return creditClassFilterKeys.length === 0
+            ? true
+            : project.offChain ||
+                creditClassSelected.includes(project.creditClassId ?? '');
+        })
+        .filter(project => {
+          // TODO: region
+          const projectHasMarketType = (project?.marketType?.length ?? 0) > 0;
+          const hasMarketType =
+            // marketTypeSelected.length > 0 && projectHasMarketType
+            //   ? marketTypeSelected.some(type =>
+            //       project.marketType?.includes(type),
+            //     )
+            //   : true;
+            marketTypeSelected.some(type => project.marketType?.includes(type));
+
+          const projectHasEnvironmentType =
+            (project?.ecosystemType?.length ?? 0) > 0;
+          const hasEnvironmentType =
+            // environmentTypeSelected.length > 0 && projectHasEnvironmentType
+            //   ? environmentTypeSelected.some(type =>
+            //       project.ecosystemType?.includes(type),
+            //     )
+            //   : true;
+            environmentTypeSelected.some(type =>
+              project.ecosystemType?.includes(type),
+            );
+          return hasMarketType || hasEnvironmentType;
+        }),
+    [
+      allProject,
+      creditClassFilterKeys,
+      creditClassSelected,
+      marketTypeSelected,
+      environmentTypeSelected,
+    ],
   );
 
   const sortedProjects = useMemo(

@@ -42,6 +42,9 @@ type Props = {
   sx?: SxProps<Theme>;
   className?: string;
   style?: React.CSSProperties;
+  activeFilters: string[];
+  setActiveFilters: (filters: string[]) => void;
+  resetFilters: () => void;
 };
 
 const ProjectFilterBody = ({
@@ -52,6 +55,9 @@ const ProjectFilterBody = ({
   sx = [],
   className = '',
   style = {},
+  activeFilters,
+  setActiveFilters,
+  resetFilters,
 }: Props) => {
   const { _ } = useLingui();
 
@@ -60,8 +66,14 @@ const ProjectFilterBody = ({
   const initialActiveFilters = filters.flatMap(filter =>
     filter.options.map(option => option.id),
   );
-  const [activeFilters, setActiveFilters] =
-    useState<string[]>(initialActiveFilters);
+  // const [activeFiltersLocal, setActiveFiltersLocal] =
+  //   useState<string[]>(initialActiveFilters);
+  // const onFilterChangeLocal = (id: string) => {
+  //   const newFilters = activeFiltersLocal.includes(id)
+  //     ? activeFiltersLocal.filter(filterId => filterId !== id)
+  //     : [...activeFiltersLocal, id];
+  //   setActiveFiltersLocal(newFilters);
+  // };
   const onFilterChange = (id: string) => {
     const newFilters = activeFilters.includes(id)
       ? activeFilters.filter(filterId => filterId !== id)

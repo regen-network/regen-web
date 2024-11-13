@@ -17,7 +17,7 @@ export function getSetActiveFilters({
   environmentTypeFilters: Record<string, boolean>;
   regionFilters: Record<string, boolean>;
 }) {
-  // group filters by type
+  // Group filter by type
   const newEnvironmentTypeFilterKeys: string[] = filterIds.filter(filter =>
     Object.keys(environmentTypeFilters).includes(filter),
   );

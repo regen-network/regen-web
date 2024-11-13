@@ -130,53 +130,12 @@ function getMarketCheckboxes(_: TranslatorType): FilterOptions[] {
   }));
 }
 
-// const filters: Filter[] = [
-//   {
-//     displayType: 'tag',
-//     title: 'Region',
-//     options: regionTags,
-//   },
-//   {
-//     displayType: 'tag',
-//     title: 'Ecosystem',
-//     options: ecosystemTags,
-//     hasCollapse: true,
-//   },
-//   {
-//     displayType: 'checkbox',
-//     title: 'Market',
-//     options: marketCheckboxes,
-//   },
-// ];
-
-// export default filters;
-
 export const initialActiveFilterKeysByType = {
   regionFilters: regionTags.map(({ id }) => id),
   environmentTypeFilters: ecosystemTags.map(({ id }) => id),
   marketTypeFilters: marketCheckboxes.map(({ id }) => id),
 };
 
-// export const initialActiveFilters = Object.fromEntries(
-//   Object.entries(initialActiveFilterKeysByType).map((k, v) => [
-//     k,
-//     Object.fromEntries(
-//       Object.entries(initialActiveFilterKeysByType).map(([k, v]) => [
-//         k,
-//         Object.fromEntries(v.map((x: string) => [x, true])),
-//       ]),
-//     ),
-//   ]),
-// );
-
-// export const initialActiveFilters = Object.fromEntries(
-//   Object.entries(initialActiveFilterKeysByType).map(
-//     ([filterType, filterKeys]) => [
-//       filterType,
-//       Object.fromEntries(filterKeys.map((key: string) => [key, true])),
-//     ],
-//   ),
-// );
 export const initialActiveFilters = {
   regionFilters: Object.fromEntries(regionTags.map(({ id }) => [id, true])),
   environmentTypeFilters: Object.fromEntries(

@@ -37,7 +37,6 @@ import {
   getSetActiveFilters,
 } from './AllProjects/AllProjects.ProjectFilter.utils';
 import ProjectFilterBody from './AllProjects/AllProjects.ProjectFilterBody';
-// import { initialActiveFilters as terrasosInitialActiveFilters } from './AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters';
 import { useProjects } from './hooks/useProjects';
 
 const Projects = (): JSX.Element => {
@@ -188,7 +187,6 @@ const Projects = (): JSX.Element => {
           />
         </div>
         <div className="bg-ac-neutral-100 pt-25 sm:pt-40 px-15 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid grid-cols-[repeat(auto-fill,minmax(300px,350px))] gap-[18px] justify-center lg:justify-start">
-          {/* <div className="bg-ac-neutral-100 pt-25 sm:pt-40 px-15 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] m-auto grid grid-cols-[repeat(auto-fit,minmax(300px,400px))] gap-[18px] justify-center"> */}
           <IconTabs
             className="col-[1/-1]"
             aria-label={_(msg`projects tabs`)}
@@ -206,7 +204,6 @@ const Projects = (): JSX.Element => {
               },
             }}
           />
-          {/* <div>hello</div> */}
           <Outlet
             context={{
               allProjects,

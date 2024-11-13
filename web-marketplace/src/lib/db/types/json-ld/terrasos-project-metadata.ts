@@ -16,7 +16,6 @@ export interface TerrasosProjectMetadataLD {
   'regen:biomeType'?: string[];
   'regen:watershed'?: string;
   'regen:subWatershed'?: string;
-  'regen:department'?: string;
   'regen:environmentalAuthority'?: { 'schema:name': string };
 }
 

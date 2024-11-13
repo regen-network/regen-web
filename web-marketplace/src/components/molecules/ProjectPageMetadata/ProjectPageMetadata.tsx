@@ -53,7 +53,7 @@ const ProjectPageMetadata: React.FC<React.PropsWithChildren<MetadataProps>> = ({
   const watershed = metadata?.['regen:watershed'];
   const subWatershed = metadata?.['regen:subWatershed'];
   const environmentalAuthority = metadata?.['regen:environmentalAuthority'];
-  const department = metadata?.['regen:department'];
+  const department = metadata?.['regen:administrativeArea'];
 
   const unknownFields = metadata ? getProjectUnknownFields(metadata) : [];
 

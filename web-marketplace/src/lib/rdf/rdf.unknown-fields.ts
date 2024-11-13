@@ -100,7 +100,6 @@ const knownProjectFields: KnownProjectFields[] = [
   'regen:biomeType',
   'regen:watershed',
   'regen:subWatershed',
-  'regen:department',
   'regen:environmentalAuthority',
 ];
 

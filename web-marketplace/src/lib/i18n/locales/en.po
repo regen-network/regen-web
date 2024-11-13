@@ -670,6 +670,10 @@ msgstr ""
 msgid "BATCH START DATE"
 msgstr ""
 
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:158
+msgid "biome"
+msgstr ""
+
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:64
 msgid "block height"
 msgstr ""
@@ -1471,6 +1475,10 @@ msgstr ""
 msgid "Delivery dates may vary widely as this project is still in the early stages of development."
 msgstr ""
 
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:151
+msgid "department"
+msgstr ""
+
 #: src/pages/ProjectEdit/ProjectEdit.Nav.tsx:26
 msgid "description"
 msgstr ""
@@ -1735,6 +1743,10 @@ msgstr ""
 
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:178
 msgid "Enter the wallet address here if this entity has a wallet address but has not yet signed up on Regen Marketplace. Make sure this is a valid wallet address."
+msgstr ""
+
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:153
+msgid "environmental authority"
 msgstr ""
 
 #: src/pages/Certificate/Certificate.constants.ts:10
@@ -2962,7 +2974,7 @@ msgstr ""
 msgid "project benefit"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:112
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:120
 msgid "Project Design Document"
 msgstr ""
 
@@ -2983,7 +2995,7 @@ msgstr ""
 msgid "Project Duration"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:135
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:143
 msgid "project end date"
 msgstr ""
 
@@ -2991,7 +3003,7 @@ msgstr ""
 msgid "Project has been created!"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:73
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:81
 #: src/pages/ProjectFinished/ProjectFinished.tsx:76
 msgid "project id"
 msgstr ""
@@ -3045,7 +3057,7 @@ msgstr ""
 msgid "Project start and end date"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:127
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:135
 msgid "project start date"
 msgstr ""
 
@@ -3065,7 +3077,7 @@ msgstr ""
 msgid "Project timeline"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:104
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:112
 #: src/lib/constants/shared.constants.tsx:196
 msgid "project type"
 msgstr ""
@@ -3159,7 +3171,7 @@ msgstr ""
 msgid "Redwood Testnet Faucet"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:118
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:126
 msgid "reference id (cfc project id)"
 msgstr ""
 
@@ -3191,6 +3203,10 @@ msgstr ""
 
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:176
 msgid "REGEN wallet address"
+msgstr ""
+
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:150
+msgid "region"
 msgstr ""
 
 #: src/pages/Post/Post.constants.ts:9
@@ -3705,6 +3721,10 @@ msgstr ""
 msgid "Story video or photo"
 msgstr ""
 
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:157
+msgid "sub-watershed"
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:26
 msgid "submit"
 msgstr ""
@@ -4072,7 +4092,7 @@ msgstr ""
 msgid "total purchase price"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:85
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:93
 msgid "toucan project token id"
 msgstr ""
 
@@ -4206,7 +4226,7 @@ msgstr ""
 msgid "VCS methodology url"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:94
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:102
 msgid "vcs project id"
 msgstr ""
 
@@ -4218,7 +4238,7 @@ msgstr ""
 msgid "VCS project page url"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:104
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:112
 msgid "vcs project type"
 msgstr ""
 
@@ -4383,6 +4403,10 @@ msgstr ""
 
 #: src/components/organisms/MediaSection.tsx:36
 msgid "watch video"
+msgstr ""
+
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:156
+msgid "watershed"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:28

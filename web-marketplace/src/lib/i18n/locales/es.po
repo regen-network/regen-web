@@ -674,6 +674,10 @@ msgstr "Fecha de inicio del lote"
 msgid "BATCH START DATE"
 msgstr "FECHA DE INICIO DEL LOTE"
 
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:158
+msgid "biome"
+msgstr "bioma"
+
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:64
 msgid "block height"
 msgstr "altura del bloque"
@@ -1495,6 +1499,10 @@ msgstr "Borrar"
 msgid "Delivery dates may vary widely as this project is still in the early stages of development."
 msgstr "Las fechas de entrega pueden variar ampliamente ya que este proyecto aún se encuentra en las primeras etapas de desarrollo."
 
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:151
+msgid "department"
+msgstr "departamento"
+
 #: src/pages/ProjectEdit/ProjectEdit.Nav.tsx:26
 msgid "description"
 msgstr "descripción"
@@ -1760,6 +1768,10 @@ msgstr "Introduzca una nueva tarjeta de crédito"
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:178
 msgid "Enter the wallet address here if this entity has a wallet address but has not yet signed up on Regen Marketplace. Make sure this is a valid wallet address."
 msgstr "Ingrese la dirección de billetera aquí si esta entidad tiene una dirección de billetera pero aún no se registró en Regen Marketplace. Asegúrese de que sea una dirección de billetera válida."
+
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:153
+msgid "environmental authority"
+msgstr "autoridad ambiental"
 
 #: src/pages/Certificate/Certificate.constants.ts:10
 msgid "Equivalent to"
@@ -2998,7 +3010,7 @@ msgstr "Banner del proyecto"
 msgid "project benefit"
 msgstr "beneficio del proyecto"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:112
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:120
 msgid "Project Design Document"
 msgstr "Documento de diseño del proyecto"
 
@@ -3019,7 +3031,7 @@ msgstr "Documentación del proyecto"
 msgid "Project Duration"
 msgstr "Duración del proyecto"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:135
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:143
 msgid "project end date"
 msgstr "fecha de finalización del proyecto"
 
@@ -3027,7 +3039,7 @@ msgstr "fecha de finalización del proyecto"
 msgid "Project has been created!"
 msgstr "¡El proyecto ha sido creado!"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:73
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:81
 #: src/pages/ProjectFinished/ProjectFinished.tsx:76
 msgid "project id"
 msgstr "Identificación del proyecto"
@@ -3081,7 +3093,7 @@ msgstr "Condiciones de prefinanciación del proyecto"
 msgid "Project start and end date"
 msgstr "Fecha de inicio y finalización del proyecto"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:127
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:135
 msgid "project start date"
 msgstr "fecha de inicio del proyecto"
 
@@ -3101,7 +3113,7 @@ msgstr "Título de la historia del proyecto"
 msgid "Project timeline"
 msgstr "Cronograma del proyecto"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:104
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:112
 #: src/lib/constants/shared.constants.tsx:196
 msgid "project type"
 msgstr "tipo de proyecto"
@@ -3199,7 +3211,7 @@ msgstr "Destinatarios"
 msgid "Redwood Testnet Faucet"
 msgstr "Grifo de Redwood Testnet"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:118
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:126
 msgid "reference id (cfc project id)"
 msgstr "ID de referencia (ID del proyecto CFC)"
 
@@ -3232,6 +3244,10 @@ msgstr "Desarrollo de la red Regen, PBC"
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:176
 msgid "REGEN wallet address"
 msgstr "Dirección de la billetera REGEN"
+
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:150
+msgid "region"
+msgstr "región"
 
 #: src/pages/Post/Post.constants.ts:9
 msgid "registry"
@@ -3753,6 +3769,10 @@ msgstr "Vídeo de la historia"
 msgid "Story video or photo"
 msgstr "Historia en video o foto"
 
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:157
+msgid "sub-watershed"
+msgstr "subcuenca"
+
 #: src/lib/constants/shared.constants.tsx:26
 msgid "submit"
 msgstr "entregar"
@@ -4132,7 +4152,7 @@ msgstr "<<<<<<< HEAD<<<<<<< HEAD"
 msgid "total purchase price"
 msgstr "Precio total de compra"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:85
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:93
 msgid "toucan project token id"
 msgstr "Identificación del token del proyecto Toucan"
 
@@ -4270,7 +4290,7 @@ msgstr "Nombre de la metodología VCS"
 msgid "VCS methodology url"
 msgstr "URL de la metodología VCS"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:94
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:102
 msgid "vcs project id"
 msgstr "Identificación del proyecto vcs"
 
@@ -4282,7 +4302,7 @@ msgstr "Identificación del proyecto VCS"
 msgid "VCS project page url"
 msgstr "URL de la página del proyecto VCS"
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:104
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:112
 msgid "vcs project type"
 msgstr "tipo de proyecto vcs"
 
@@ -4452,6 +4472,10 @@ msgstr "Integración de billetera"
 #: src/components/organisms/MediaSection.tsx:36
 msgid "watch video"
 msgstr "ver video"
+
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:156
+msgid "watershed"
+msgstr "cuenca"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:28
 msgid "We are a company specialized in structuring and operating environmental investments."

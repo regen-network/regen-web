@@ -143,8 +143,8 @@ function getMarketCheckboxes(_: TranslatorType): FilterOptions[] {
 }
 
 export const initialActiveFilterKeysByType = {
-  regionFilters: regionTags.map(({ id }) => id),
-  environmentTypeFilters: ecosystemTags.map(({ id }) => id),
+  regionFilters: [],
+  environmentTypeFilters: [],
   marketTypeFilters: marketCheckboxes.map(({ id }) => id),
 };
 

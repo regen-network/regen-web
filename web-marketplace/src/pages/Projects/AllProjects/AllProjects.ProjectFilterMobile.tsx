@@ -59,6 +59,7 @@ const ProjectFilter = ({
           activeFilters={activeFilters}
           setActiveFilters={setActiveFilters}
           resetFilters={resetFilters}
+          showResetButton={showResetButton}
         />
       </Modal>
     </>

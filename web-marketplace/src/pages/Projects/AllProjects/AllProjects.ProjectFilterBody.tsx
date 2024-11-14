@@ -34,9 +34,7 @@ const ProjectFilterBody = ({
 
   const ecosystemIcons = useEcosystemTags(filterEcosystemIds);
   const filters = getFilters(_, ecosystemIcons);
-  const initialActiveFilters = filters.flatMap(filter =>
-    filter.options.map(option => option.id),
-  );
+
   const onFilterChange = (id: string) => {
     const newFilters = activeFilters.includes(id)
       ? activeFilters.filter(filterId => filterId !== id)
@@ -50,7 +48,7 @@ const ProjectFilterBody = ({
         filters={filters}
         activeFilterIds={activeFilters}
         onFilterChange={onFilterChange}
-        onFilterReset={() => setActiveFilters(initialActiveFilters)}
+        onFilterReset={resetFilters}
         showResetButton={showResetButton}
         labels={{
           title: _(msg`Filters`),

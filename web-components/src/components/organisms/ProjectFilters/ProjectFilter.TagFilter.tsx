@@ -32,7 +32,13 @@ export default function TagFilter({
   const iconWithProps = cloneElement(icon, { isSelected });
   return (
     <ProjectTag
-      sx={{ ...tagSx, ...sx }}
+      sx={{
+        ...tagSx,
+        border: isSelected
+          ? '1px solid rgba(var(--sc-tag-filter-stroke-selected))'
+          : '1px solid rgba(var(--sc-tag-filter-stroke-unselected))',
+        ...sx,
+      }}
       fontSize={12}
       tag={{
         name,

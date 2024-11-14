@@ -20,6 +20,7 @@ export interface ProjectWithOrderData extends ProjectCardProps {
   slug?: string;
   marketType?: string[];
   ecosystemType?: string[];
+  region?: string;
 }
 
 export type FilterCommunityCreditsEvent = {

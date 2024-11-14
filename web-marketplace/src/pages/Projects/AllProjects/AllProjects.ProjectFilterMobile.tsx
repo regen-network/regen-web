@@ -15,6 +15,7 @@ type Props = {
   activeFilters: string[];
   setActiveFilters: (filters: string[]) => void;
   resetFilters: () => void;
+  className?: string;
 };
 
 const ProjectFilter = ({
@@ -22,6 +23,7 @@ const ProjectFilter = ({
   setActiveFilters,
   resetFilters,
   sx = [],
+  className = '',
 }: Props) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
@@ -45,6 +47,7 @@ const ProjectFilter = ({
           },
           ...sxToArray(sx),
         ]}
+        className={className}
       >
         {_(FILTERS_MODAL_BUTTON)}
       </OutlinedButton>

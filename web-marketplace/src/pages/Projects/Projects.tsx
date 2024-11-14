@@ -3,6 +3,7 @@ import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
+import cn from 'classnames';
 import { useAtom } from 'jotai';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
@@ -168,13 +169,25 @@ const Projects = (): JSX.Element => {
   return (
     <>
       <div
-        className="block lg:grid justify-center grid-cols-[auto_minmax(300px,750px)] xl:grid-cols-[auto_minmax(300px,1120px)]"
+        className={cn(
+          {
+            'lg:grid grid-cols-[auto_minmax(300px,750px)] xl:grid-cols-[auto_minmax(300px,1120px)]':
+              IS_TERRASOS,
+          },
+          { '': !IS_TERRASOS },
+          'block justify-center',
+        )}
         style={{
-          background:
-            'linear-gradient(90deg, rgba(var(--ac-neutral-0)) 0%, rgba(var(--ac-neutral-0)) 50%, rgba(var(--ac-neutral-100)) 50%, rgba(var(--ac-neutral-100)) 100%)',
+          background: IS_TERRASOS
+            ? 'linear-gradient(90deg, rgba(var(--ac-neutral-0)) 0%, rgba(var(--ac-neutral-0)) 50%, rgba(var(--ac-neutral-100)) 50%, rgba(var(--ac-neutral-100)) 100%)'
+            : 'rgba(var(--ac-neutral-100))',
         }}
       >
-        <div className="w-[310px] py-[43px] px-[20px] hidden lg:block">
+        <div
+          className={cn('w-[310px] py-[43px] px-[20px] hidden', {
+            'lg:block': IS_TERRASOS,
+          })}
+        >
           <ProjectFilterBody
             className="h-full bg-ac-neutral-0 hidden md:block"
             // shadow-[0_0_4px_rgba(0,0,0,0.1)]
@@ -186,7 +199,19 @@ const Projects = (): JSX.Element => {
             resetFilters={resetFilters}
           />
         </div>
-        <div className="bg-ac-neutral-100 pt-25 sm:pt-40 px-15 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid grid-cols-[repeat(auto-fill,minmax(300px,350px))] gap-[18px] justify-center lg:justify-start">
+        <div
+          className={cn(
+            'bg-ac-neutral-100 pt-25 sm:pt-40 px-15 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center',
+            {
+              'lg:justify-start grid-cols-[repeat(auto-fill,minmax(300px,350px))]':
+                IS_TERRASOS,
+            },
+            {
+              'mx-auto grid-cols-[repeat(auto-fill,minmax(300px,400px))]':
+                !IS_TERRASOS,
+            },
+          )}
+        >
           <IconTabs
             className="col-[1/-1]"
             aria-label={_(msg`projects tabs`)}

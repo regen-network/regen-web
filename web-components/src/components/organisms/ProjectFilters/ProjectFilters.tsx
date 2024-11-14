@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Trans } from '@lingui/macro';
 import {
   Box,
   ButtonBase,
@@ -8,9 +7,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import { fontSize } from '@mui/system';
 
-import { Subtitle, Title } from '../../typography';
 import TagFilter from './ProjectFilter.TagFilter';
 import CheckboxFilter from './ProjectFilters.CheckboxFilter';
 

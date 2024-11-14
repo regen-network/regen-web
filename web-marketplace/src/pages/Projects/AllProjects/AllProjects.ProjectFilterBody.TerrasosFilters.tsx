@@ -34,7 +34,7 @@ const ecosystemTags = [
   },
   {
     name: msg`Premontane humid forest`,
-    id: 'Premontaine Humid Forest',
+    id: 'Premontane Humid Forest',
   },
   {
     name: msg`Low montane very humid forest`,

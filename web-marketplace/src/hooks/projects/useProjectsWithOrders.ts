@@ -277,28 +277,16 @@ export function useProjectsWithOrders({
                 creditClassSelected.includes(project.creditClassId ?? '');
         })
         .filter(project => {
-          // TODO: region
-          const projectHasMarketType = (project?.marketType?.length ?? 0) > 0;
-          const hasMarketType =
-            // marketTypeSelected.length > 0 && projectHasMarketType
-            //   ? marketTypeSelected.some(type =>
-            //       project.marketType?.includes(type),
-            //     )
-            //   : true;
-            marketTypeSelected.some(type => project.marketType?.includes(type));
+          const hasRegion = regionSelected.includes(project?.region ?? '');
 
-          const projectHasEnvironmentType =
-            (project?.ecosystemType?.length ?? 0) > 0;
-          const hasEnvironmentType =
-            // environmentTypeSelected.length > 0 && projectHasEnvironmentType
-            //   ? environmentTypeSelected.some(type =>
-            //       project.ecosystemType?.includes(type),
-            //     )
-            //   : true;
-            environmentTypeSelected.some(type =>
-              project.ecosystemType?.includes(type),
-            );
-          return hasMarketType || hasEnvironmentType;
+          const hasMarketType = marketTypeSelected.some(type =>
+            project.marketType?.includes(type),
+          );
+
+          const hasEnvironmentType = environmentTypeSelected.some(type =>
+            project.ecosystemType?.includes(type),
+          );
+          return hasMarketType || hasEnvironmentType || hasRegion;
         }),
     [
       allProject,
@@ -306,6 +294,7 @@ export function useProjectsWithOrders({
       creditClassSelected,
       marketTypeSelected,
       environmentTypeSelected,
+      regionSelected,
     ],
   );
 

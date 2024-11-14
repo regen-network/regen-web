@@ -511,7 +511,7 @@ msgstr "y"
 
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:98
 msgid "Andean"
-msgstr "andino"
+msgstr "Andes"
 
 #: src/lib/constants/shared.constants.tsx:41
 msgid "Apply"
@@ -858,7 +858,7 @@ msgstr "Información de la tarjeta"
 
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:93
 msgid "Caribbean"
-msgstr "caribe"
+msgstr "Caribe"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:35
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."

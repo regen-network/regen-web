@@ -29,6 +29,7 @@ export type PostFilesProps = {
   adminPrivateLabel: string;
   privateLocationsLabel: string;
   privateFilesLabel: string;
+  readMoreText: { text: string; lessText: string; moreText: string };
 };
 
 const PostFiles = ({
@@ -41,6 +42,7 @@ const PostFiles = ({
   adminPrivateLabel,
   privateLocationsLabel,
   privateFilesLabel,
+  readMoreText,
 }: PostFilesProps) => {
   const isPublic = privacyType === 'public';
   const privateLocations = privacyType === 'private_locations';
@@ -81,6 +83,7 @@ const PostFiles = ({
           privateLocations={privateLocations}
           privateFiles={privateFiles}
           adminPrivateLabel={adminPrivateLabel}
+          readMoreText={readMoreText}
         />
       )}
       {!isAdmin && !hasToken && privateLocations && (

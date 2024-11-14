@@ -37,6 +37,9 @@ Default.args = {
   restMinLength: 150,
   sentenceBased: false,
   component: 'span',
+  text: 'read',
+  moreText: 'more',
+  lessText: 'less',
 };
 
 export const SentenceBased: Story = {
@@ -46,4 +49,7 @@ export const SentenceBased: Story = {
 SentenceBased.args = {
   maxLength: 700,
   restMinLength: 300,
+  text: 'read',
+  moreText: 'more',
+  lessText: 'less',
 };

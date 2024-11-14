@@ -215,7 +215,7 @@ function ProjectTopSection({
   const isTerrasosProjectPage =
     projectPageMetadata?.['@type'] === 'TerrasosProjectInfo';
 
-  const cancelledOrRegisteredAmount: BatchTotalsForProject = {
+  const batchTotals: BatchTotalsForProject = {
     cancelledAmount:
       normalizedProject?.complianceCredits.creditsRegistered ?? 0,
     retiredAmount: normalizedProject?.complianceCredits.creditsRetired ?? 0,
@@ -333,7 +333,7 @@ function ProjectTopSection({
               complianceCredits={
                 <ProjectBatchTotals
                   soldOutProjectsIds={[]}
-                  totals={cancelledOrRegisteredAmount}
+                  totals={batchTotals}
                   sx={{
                     mt: { xs: pxToRem(30), sm: pxToRem(50) },
                     mb: pxToRem(30),

@@ -17,6 +17,11 @@ type Props = {
   selectedUrl: string;
   setAnimateMarker: UseStateSetter<boolean>;
   filesPreviews: FilesPreviews;
+  readMoreText: {
+    text: string;
+    lessText: string;
+    moreText: string;
+  };
 };
 
 const PostFilesCardsMobile = ({
@@ -27,6 +32,7 @@ const PostFilesCardsMobile = ({
   selectedUrl,
   setAnimateMarker,
   filesPreviews,
+  readMoreText,
 }: Props) => {
   const { classes: styles } = useStyles();
 
@@ -54,7 +60,7 @@ const PostFilesCardsMobile = ({
           />
 
           <div className="absolute bottom-0 h-[42px] bg-grey-0 py-[2px] px-[7px]">
-            <FileBody showMediaName file={file} />
+            <FileBody showMediaName file={file} readMoreText={readMoreText} />
           </div>
           <Buttons onClose={onClose} selectedUrl={selectedUrl} />
         </div>

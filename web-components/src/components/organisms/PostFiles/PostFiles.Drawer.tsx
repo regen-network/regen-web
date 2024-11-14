@@ -31,6 +31,7 @@ type Props = {
   setSelectedUrl: UseStateSetter<string | undefined>;
   setSelectedLocation: UseStateSetter<Point | undefined>;
   filesPreviews: FilesPreviews;
+  readMoreText: { text: string; lessText: string; moreText: string };
 };
 
 const PostFilesDrawer = ({
@@ -39,6 +40,7 @@ const PostFilesDrawer = ({
   setSelectedUrl,
   setSelectedLocation,
   filesPreviews,
+  readMoreText,
 }: Props) => {
   const [open, setOpen] = useState(true);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -116,7 +118,7 @@ const PostFilesDrawer = ({
                         <PlayPauseButton className="w-[28px] h-[28px] top-[40%]" />
                       </div>
                     )}
-                    <FileBody file={file} />
+                    <FileBody file={file} readMoreText={readMoreText} />
                   </>
                 ) : (
                   <>
@@ -140,7 +142,7 @@ const PostFilesDrawer = ({
                         iconSize="40"
                       />
                     )}
-                    <FileBody file={file} />
+                    <FileBody file={file} readMoreText={readMoreText} />
                   </>
                 )}
               </div>

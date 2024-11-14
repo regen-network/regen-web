@@ -41,6 +41,7 @@ type Props = Pick<PostFilesProps, 'files' | 'mapboxToken' | 'isAdmin'> & {
   privateLocations: boolean;
   filesPreviews: FilesPreviews;
   adminPrivateLabel: string;
+  readMoreText: { text: string; lessText: string; moreText: string };
 };
 
 const PostFilesPublic = ({
@@ -51,6 +52,7 @@ const PostFilesPublic = ({
   privateLocations,
   filesPreviews,
   adminPrivateLabel,
+  readMoreText,
 }: Props) => {
   const { classes: styles } = useStyles();
   const theme = useTheme();
@@ -245,6 +247,7 @@ const PostFilesPublic = ({
                 setSelectedLocation(point);
                 setIsFilesWindowOpen(true);
               }}
+              readMoreText={readMoreText}
             />
             <div
               onClick={() => mapRef.current?.zoomOut()}
@@ -272,6 +275,7 @@ const PostFilesPublic = ({
               setSelectedLocation={setSelectedLocation}
               setAnimateMarker={setAnimateMarker}
               filesPreviews={filesPreviews}
+              readMoreText={readMoreText}
             />
           )}
           {isAdmin && (privateLocations || privateFiles) && (

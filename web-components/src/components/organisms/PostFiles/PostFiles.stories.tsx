@@ -10,6 +10,8 @@ export default {
 
 type Story = StoryObj<typeof PostFiles>;
 
+const readMoreText = { text: 'read', lessText: 'less', moreText: 'more' };
+
 export const Public: Story = {
   render: args => <PostFiles {...args} />,
 };
@@ -19,6 +21,7 @@ Public.args = {
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
   files,
   photoCredit: 'Photo credit',
+  readMoreText,
 };
 
 export const PrivateLocations: Story = {
@@ -29,6 +32,7 @@ PrivateLocations.args = {
   privacyType: 'private_locations',
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
   files: [],
+  readMoreText,
 };
 
 export const PrivateFiles: Story = {
@@ -39,6 +43,7 @@ PrivateFiles.args = {
   privacyType: 'private_files',
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
   files: [],
+  readMoreText,
 };
 
 export const PrivateLocationsAsAdmin: Story = {
@@ -50,6 +55,7 @@ PrivateLocationsAsAdmin.args = {
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
   files: [],
   isAdmin: true,
+  readMoreText,
 };
 
 export const PrivateFilesAsAdmin: Story = {
@@ -61,4 +67,5 @@ PrivateFilesAsAdmin.args = {
   mapboxToken: import.meta.env.STORYBOOK_MAPBOX_TOKEN,
   files: [],
   isAdmin: true,
+  readMoreText,
 };

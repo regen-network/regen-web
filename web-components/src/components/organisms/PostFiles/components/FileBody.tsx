@@ -7,9 +7,10 @@ type Props = {
   file: PostFile;
   className?: string;
   showMediaName?: boolean; // shows image or video file name if no description
+  readMoreText: { text: string; lessText: string; moreText: string };
 };
 
-const FileBody = ({ file, showMediaName }: Props) => {
+const FileBody = ({ file, showMediaName, readMoreText }: Props) => {
   const { mimeType, name, description } = file;
   const image = isImage(mimeType);
   const video = isVideo(mimeType);
@@ -33,6 +34,9 @@ const FileBody = ({ file, showMediaName }: Props) => {
             button: 'text-xs',
             textContainer: 'p-0 inline',
           }}
+          text={readMoreText.text}
+          lessText={readMoreText.lessText}
+          moreText={readMoreText.moreText}
         >
           {description}
         </ReadMore>

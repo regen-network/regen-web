@@ -20,7 +20,7 @@ msgstr ""
 msgid "- see less"
 msgstr "- ver menos"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:56
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:57
 msgid "- See less"
 msgstr "- Ver menos"
 
@@ -145,7 +145,7 @@ msgstr "+ crear publicación"
 msgid "+ see more"
 msgstr "+ ver más"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:55
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:56
 msgid "+ See more"
 msgstr "+ Ver más"
 
@@ -394,7 +394,7 @@ msgid "all profiles"
 msgstr "Todos los perfiles"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
-#: src/pages/Projects/Projects.tsx:98
+#: src/pages/Projects/Projects.tsx:100
 msgid "All projects"
 msgstr "Todos los proyectos"
 
@@ -402,7 +402,7 @@ msgstr "Todos los proyectos"
 msgid "All uploaded files and their location data will be hidden from public view."
 msgstr "Todos los archivos cargados y sus datos de ubicación quedarán ocultos a la vista del público."
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:66
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:78
 msgid "Amazon"
 msgstr "Amazonas"
 
@@ -509,7 +509,7 @@ msgstr "Anclaje en proceso"
 msgid "and"
 msgstr "y"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:86
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:98
 msgid "Andean"
 msgstr "andino"
 
@@ -856,7 +856,7 @@ msgstr "Norma de compensación de carbono"
 msgid "card info"
 msgstr "Información de la tarjeta"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:81
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:93
 msgid "Caribbean"
 msgstr "caribe"
 
@@ -1025,7 +1025,7 @@ msgstr "Los créditos comunitarios son créditos que no han pasado por el <0>pro
 msgid "Complete"
 msgstr "Completo"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:115
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:127
 msgid "Compliance"
 msgstr "Cumplimiento"
 
@@ -1634,7 +1634,7 @@ msgid "Ecological Outcomes"
 msgstr "Resultados ecológicos"
 
 #: src/lib/constants/shared.constants.tsx:104
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:161
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:171
 msgid "Ecosystem"
 msgstr "Ecosistema"
 
@@ -1863,7 +1863,7 @@ msgid "Files can still be shared privately via secret link."
 msgstr "Los archivos aún se pueden compartir de forma privada a través de un enlace secreto."
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:8
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:53
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:54
 msgid "Filters"
 msgstr "Filtros"
 
@@ -1943,6 +1943,10 @@ msgstr "hectáreas"
 #: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:193
 msgid "Hectares"
 msgstr "Hectáreas"
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:51
+msgid "High andean forest"
+msgstr "Bosque altoandino"
 
 #: src/components/organisms/AdditionalityForm.tsx:133
 msgid "High density grazing"
@@ -2265,7 +2269,7 @@ msgstr "Iniciar sesión Correo electrónico"
 msgid "Long-form project story"
 msgstr "Historia del proyecto en formato largo"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:39
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:39
 msgid "Low montane very humid forest"
 msgstr "Bosque muy húmedo montano bajo"
 
@@ -2301,7 +2305,7 @@ msgstr "Hacer que los datos de ubicación sean privados"
 msgid "Make your purchase anonymous. Your name will be hidden from the retirement certificate and the certificate will be hidden from your public profile."
 msgstr "Haz que tu compra sea anónima. Tu nombre quedará oculto en el certificado de jubilación y el certificado quedará oculto en tu perfil público."
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:167
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:177
 msgid "Market"
 msgstr "Mercado"
 
@@ -2630,9 +2634,13 @@ msgstr "Organización"
 msgid "Organization Name"
 msgstr "Nombre de la organización"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:76
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:88
 msgid "Orinoco"
 msgstr "Orinoco"
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:43
+msgid "Orinoco savannah"
+msgstr "Sabana del Orinoco"
 
 #: src/components/organisms/AdditionalityForm.tsx:179
 msgid "Other regenerative grazing practice"
@@ -2650,7 +2658,7 @@ msgstr "Descripción general"
 msgid "owner"
 msgstr "dueño"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:71
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:83
 msgid "Pacific"
 msgstr "Pacífico"
 
@@ -2825,7 +2833,7 @@ msgid "prefinance"
 msgstr "prefinanciamiento"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:54
-#: src/pages/Projects/Projects.tsx:108
+#: src/pages/Projects/Projects.tsx:110
 msgid "Prefinance projects"
 msgstr "Proyectos de prefinanciación"
 
@@ -2833,7 +2841,7 @@ msgstr "Proyectos de prefinanciación"
 msgid "prefinance this project"
 msgstr "Prefinanciar este proyecto"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:35
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:35
 msgid "Premontane humid forest"
 msgstr "Bosque húmedo premontano"
 
@@ -3144,7 +3152,7 @@ msgstr "Proyectos"
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr "Los proyectos deben tener una duración de al menos 20 años para garantizar resultados demostrables y cuantificables en biodiversidad. Tebu promueve proyectos que duren más tiempo, asegurando procesos ecológicos a largo plazo."
 
-#: src/pages/Projects/Projects.tsx:192
+#: src/pages/Projects/Projects.tsx:225
 msgid "projects tabs"
 msgstr "Pestañas de proyectos"
 
@@ -3255,7 +3263,7 @@ msgstr "Dirección de la billetera REGEN"
 msgid "region"
 msgstr "región"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:156
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:166
 msgid "Region"
 msgstr "Región"
 
@@ -3303,7 +3311,7 @@ msgstr "Reenviar después de {resendTimeLeft} segundos."
 msgid "Resend email."
 msgstr "Reenviar correo electrónico."
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:54
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:55
 msgid "Reset"
 msgstr "Reiniciar"
 
@@ -3419,6 +3427,10 @@ msgstr "Motivo de jubilación"
 #: src/pages/ProjectReview/ProjectReview.tsx:193
 msgid "Review"
 msgstr "Revisar"
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:47
+msgid "Riparian forest"
+msgstr "Bosque ripario"
 
 #: src/pages/Roles/Roles.tsx:85
 msgid "Roles"
@@ -3701,7 +3713,7 @@ msgstr "Lo sentimos, no tienes REGEN para cubrir las tarifas de transacción"
 msgid "Sorry, your transaction was not successful."
 msgstr "Lo sentimos, su transacción no fue exitosa."
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:270
+#: src/pages/Projects/AllProjects/AllProjects.tsx:280
 msgid "Sort by:"
 msgstr "Ordenar por:"
 
@@ -4179,15 +4191,15 @@ msgstr "Pastoreo tradicional"
 msgid "Transfer pending"
 msgstr "Transferencia pendiente"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:31
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:31
 msgid "Tropical dry forest"
 msgstr "Bosque seco tropical"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:27
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:27
 msgid "Tropical humid forest"
 msgstr "Bosque húmedo tropical"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:23
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:23
 msgid "Tropical very humid forest"
 msgstr "Bosque tropical muy húmedo"
 
@@ -4460,7 +4472,7 @@ msgstr "Visita nuestra página de inicio <0> En su lugar</0>"
 msgid "visit our homepage instead"
 msgstr "Visita nuestra página de inicio en su lugar"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:102
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:114
 msgid "Voluntary"
 msgstr "Voluntario"
 

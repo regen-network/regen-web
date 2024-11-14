@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
-import { initialActiveFilters } from 'web-marketplace/src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters';
+import { initialActiveFilters } from 'web-marketplace/src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils';
 
-import { DEFAULT_COMMUNITY_PROJECTS_FILTER, IS_TERRASOS } from 'lib/env';
+import { DEFAULT_COMMUNITY_PROJECTS_FILTER } from 'lib/env';
 
 import { sortOptions } from 'pages/Projects/AllProjects/AllProjects.config';
 

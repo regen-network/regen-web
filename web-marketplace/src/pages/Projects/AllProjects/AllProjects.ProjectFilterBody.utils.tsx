@@ -1,4 +1,3 @@
-// import RegionIndicatorIcon from '../../icons/terrasos/ColombiaRegionIcon';
 import { msg } from '@lingui/macro';
 import { Box } from '@mui/material';
 

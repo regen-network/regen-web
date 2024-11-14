@@ -216,7 +216,10 @@ export const normalizeProjectWithMetadata = ({
           })
         : undefined,
     },
-    region: projectMetadata?.['regen:region'] || projectWithOrderData?.region,
+    region:
+      projectMetadata?.['regen:region'] ||
+      projectPageMetadata?.['regen:region'] ||
+      projectWithOrderData?.region,
     cardSellOrders,
     filteredSellOrders,
     complianceCredits: isTerrasosProject(sanityProject)

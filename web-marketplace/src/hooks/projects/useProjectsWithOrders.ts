@@ -154,7 +154,7 @@ export function useProjectsWithOrders({
       enabled: enableOffchainProjectsQuery,
       prefinanceProjectsData,
     });
-
+  console.log('allOffChainProjects', allOffChainProjects);
   const onlyOffChainProjects = allOffChainProjects.filter(
     project =>
       project.offChain &&

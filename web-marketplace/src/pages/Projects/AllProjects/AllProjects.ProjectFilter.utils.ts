@@ -1,7 +1,7 @@
 import {
   initialActiveFilterKeysByType,
   initialActiveFilters,
-} from './AllProjects.ProjectFilterBody.TerrasosFilters';
+} from './AllProjects.ProjectFilterBody.utils';
 
 export function getSetActiveFilters({
   filterIds,

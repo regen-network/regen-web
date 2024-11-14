@@ -9,7 +9,7 @@ import { useEcosystemTags } from 'hooks/useEcosystemTags';
 import {
   filterEcosystemIds,
   getFilters,
-} from './AllProjects.ProjectFilterBody.TerrasosFilters';
+} from './AllProjects.ProjectFilterBody.utils';
 
 type Props = {
   sx?: SxProps<Theme>;

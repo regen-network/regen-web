@@ -18,6 +18,7 @@ const ecosystemIconSx = {
   mr: 2,
 };
 
+// TODO A more viable solution would be to get those from the actual data
 const ecosystemTags = [
   {
     name: msg`Tropical very humid forest`,
@@ -38,6 +39,18 @@ const ecosystemTags = [
   {
     name: msg`Low montane very humid forest`,
     id: 'Low Montane Very Humid Forest',
+  },
+  {
+    name: msg`Orinoco savannah`,
+    id: 'Orinoco Savannah',
+  },
+  {
+    name: msg`Riparian forest`,
+    id: 'Riparian Forest',
+  },
+  {
+    name: msg`High andean forest`,
+    id: 'High Andean Forest',
   },
 ];
 

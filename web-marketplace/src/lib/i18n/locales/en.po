@@ -1,17 +1,11 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-11-14 11:07+0100\n"
+"POT-Creation-Date: 2024-11-14 15:26+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: en\n"
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Plural-Forms: \n"
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
@@ -21,6 +15,10 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:56
+msgid "- See less"
 msgstr ""
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:7
@@ -142,6 +140,10 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:97
 msgid "+ see more"
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:55
+msgid "+ See more"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:14
@@ -305,6 +307,10 @@ msgstr ""
 msgid "add files"
 msgstr ""
 
+#: src/pages/Projects/AllProjects/AllProjects.constants.ts:19
+msgid "Add filters"
+msgstr ""
+
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:115
 msgid "Add Profile"
 msgstr ""
@@ -385,12 +391,16 @@ msgid "all profiles"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
-#: src/pages/Projects/Projects.tsx:79
+#: src/pages/Projects/Projects.tsx:98
 msgid "All projects"
 msgstr ""
 
 #: src/components/organisms/PostForm/PostForm.tsx:446
 msgid "All uploaded files and their location data will be hidden from public view."
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:66
+msgid "Amazon"
 msgstr ""
 
 #: src/features/marketplace/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:113
@@ -494,6 +504,10 @@ msgstr ""
 
 #: src/components/atoms/AgreeErpaCheckboxNew.tsx:42
 msgid "and"
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:86
+msgid "Andean"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:41
@@ -839,6 +853,10 @@ msgstr ""
 msgid "card info"
 msgstr ""
 
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:81
+msgid "Caribbean"
+msgstr ""
+
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:35
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
 msgstr ""
@@ -1002,6 +1020,10 @@ msgstr ""
 
 #: src/pages/BuyCredits/BuyCredits.constants.ts:18
 msgid "Complete"
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:115
+msgid "Compliance"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:54
@@ -1609,6 +1631,7 @@ msgid "Ecological Outcomes"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:104
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:161
 msgid "Ecosystem"
 msgstr ""
 
@@ -1837,6 +1860,7 @@ msgid "Files can still be shared privately via secret link."
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:8
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:53
 msgid "Filters"
 msgstr ""
 
@@ -2238,6 +2262,10 @@ msgstr ""
 msgid "Long-form project story"
 msgstr ""
 
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:39
+msgid "Low montane very humid forest"
+msgstr ""
+
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:5
 msgid "Main photo"
 msgstr ""
@@ -2268,6 +2296,10 @@ msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:84
 msgid "Make your purchase anonymous. Your name will be hidden from the retirement certificate and the certificate will be hidden from your public profile."
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:167
+msgid "Market"
 msgstr ""
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:27
@@ -2595,6 +2627,10 @@ msgstr ""
 msgid "Organization Name"
 msgstr ""
 
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:76
+msgid "Orinoco"
+msgstr ""
+
 #: src/components/organisms/AdditionalityForm.tsx:179
 msgid "Other regenerative grazing practice"
 msgstr ""
@@ -2609,6 +2645,10 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:97
 msgid "owner"
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:71
+msgid "Pacific"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:107
@@ -2782,12 +2822,16 @@ msgid "prefinance"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:54
-#: src/pages/Projects/Projects.tsx:89
+#: src/pages/Projects/Projects.tsx:108
 msgid "Prefinance projects"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:211
 msgid "prefinance this project"
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:35
+msgid "Premontane humid forest"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:164
@@ -3097,7 +3141,7 @@ msgstr ""
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr ""
 
-#: src/pages/Projects/Projects.tsx:132
+#: src/pages/Projects/Projects.tsx:192
 msgid "projects tabs"
 msgstr ""
 
@@ -3208,6 +3252,10 @@ msgstr ""
 msgid "region"
 msgstr ""
 
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:156
+msgid "Region"
+msgstr ""
+
 #: src/pages/Post/Post.constants.ts:9
 msgid "registry"
 msgstr ""
@@ -3250,6 +3298,10 @@ msgstr ""
 
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:8
 msgid "Resend email."
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:54
+msgid "Reset"
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:9
@@ -3646,7 +3698,7 @@ msgstr ""
 msgid "Sorry, your transaction was not successful."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:219
+#: src/pages/Projects/AllProjects/AllProjects.tsx:270
 msgid "Sort by:"
 msgstr ""
 
@@ -4124,6 +4176,18 @@ msgstr ""
 msgid "Transfer pending"
 msgstr ""
 
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:31
+msgid "Tropical dry forest"
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:27
+msgid "Tropical humid forest"
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:23
+msgid "Tropical very humid forest"
+msgstr ""
+
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:17
 msgid "tx hash"
 msgstr ""
@@ -4391,6 +4455,10 @@ msgstr ""
 
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.constants.tsx:4
 msgid "visit our homepage instead"
+msgstr ""
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.TerrasosFilters.tsx:102
+msgid "Voluntary"
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:18

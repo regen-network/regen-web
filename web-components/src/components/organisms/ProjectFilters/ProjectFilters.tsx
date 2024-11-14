@@ -54,7 +54,7 @@ export default function ProjectFilters({
   };
   return (
     <>
-      <div className="font-montserrat justify-between items-baseline flex">
+      <div className="justify-between items-baseline flex">
         <div className="text-[18px] font-bold">{labels.title}</div>
         <div
           className="cursor-pointer text-[14px] text-sc-text-link font-bold"
@@ -67,7 +67,7 @@ export default function ProjectFilters({
       {filters.map((filter, index) => {
         return (
           <Box sx={{ mb: 5 }} key={filter.title}>
-            <div className="text-[16px] font-montserrat font-bold mb-[20px] ">
+            <div className="text-[16px] font-bold mb-[20px] ">
               {filter.title}
             </div>
 
@@ -87,7 +87,7 @@ export default function ProjectFilters({
                       key={id}
                       isSelected={activeFilterIds.includes(id)}
                       onClick={() => onFilterChange(id)}
-                      sx={{ fontFamily: 'Montserrat' }}
+                      sx={{ fontFamily: theme => theme.typography.fontFamily }}
                     />
                   ))}
                 </Box>

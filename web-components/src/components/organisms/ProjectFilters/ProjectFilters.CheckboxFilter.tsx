@@ -21,7 +21,6 @@ export default function CheckboxFilter({
           {icon}
         </Box>
       }
-      className="font-montserrat"
       sx={{ mb: 2, '& .MuiFormControlLabel-label': { fontSize: '14px' } }}
     />
   );

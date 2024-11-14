@@ -79,7 +79,7 @@ export default function ProjectFilters({
               collapsedSize={isXs ? 110 : 110}
             >
               {filter.displayType === 'tag' && (
-                <Box display="flex" flexWrap="wrap" gap={2}>
+                <Box display="flex" flexWrap="wrap" gap={2} marginLeft={'2px'}>
                   {filter.options.map(({ name, icon, id }) => (
                     <TagFilter
                       name={name}

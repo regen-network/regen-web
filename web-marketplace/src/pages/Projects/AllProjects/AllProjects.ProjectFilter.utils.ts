@@ -1,4 +1,7 @@
-import { initialActiveFilters } from './AllProjects.ProjectFilterBody.TerrasosFilters';
+import {
+  initialActiveFilterKeysByType,
+  initialActiveFilters,
+} from './AllProjects.ProjectFilterBody.TerrasosFilters';
 
 export function getSetActiveFilters({
   filterIds,
@@ -102,4 +105,24 @@ export function getResetFilters({
     setEnvironmentTypeFilters(initialActiveFilters.environmentTypeFilters);
     setRegionFilters(initialActiveFilters.regionFilters);
   };
+}
+
+export function getShowResetButton({
+  marketTypeFilters,
+  environmentTypeFilters,
+  regionFilters,
+}: {
+  marketTypeFilters: Record<string, boolean>;
+  environmentTypeFilters: Record<string, boolean>;
+  regionFilters: Record<string, boolean>;
+}) {
+  const activeFilters = getActiveFilterIds({
+    marketTypeFilters,
+    environmentTypeFilters,
+    regionFilters,
+  });
+  const initialActiveFilterIds = Object.values(
+    initialActiveFilterKeysByType,
+  ).flat();
+  return activeFilters.length !== initialActiveFilterIds.length;
 }

@@ -37,12 +37,14 @@ export default function ProjectFilters({
   onFilterChange,
   onFilterReset,
   labels,
+  showResetButton = true,
 }: {
   filters: Filter[];
   activeFilterIds: string[];
   onFilterChange: (id: string) => void;
   onFilterReset: () => void;
   labels: ProjectFilterLabels;
+  showResetButton?: boolean;
 }) {
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.down('sm'));
@@ -58,7 +60,7 @@ export default function ProjectFilters({
           className="cursor-pointer text-[14px] text-sc-text-link font-bold"
           onClick={onFilterReset}
         >
-          {labels.reset}
+          {showResetButton && labels.reset}
         </div>
       </div>
       <Divider sx={{ my: 5 }} />
@@ -74,7 +76,7 @@ export default function ProjectFilters({
                 // always show expanded for filter without hasCollapse
                 !filter.hasCollapse || (filter.hasCollapse && isExpanded[index])
               }
-              collapsedSize={isXs ? 110 : 130}
+              collapsedSize={isXs ? 110 : 110}
             >
               {filter.displayType === 'tag' && (
                 <Box display="flex" flexWrap="wrap" gap={2}>

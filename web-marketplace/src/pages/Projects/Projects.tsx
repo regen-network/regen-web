@@ -36,6 +36,7 @@ import {
   getActiveFilterIds,
   getResetFilters,
   getSetActiveFilters,
+  getShowResetButton,
 } from './AllProjects/AllProjects.ProjectFilter.utils';
 import ProjectFilterBody from './AllProjects/AllProjects.ProjectFilterBody';
 import { useProjects } from './hooks/useProjects';
@@ -166,6 +167,12 @@ const Projects = (): JSX.Element => {
     setRegionFilters,
   });
 
+  const showResetButton = getShowResetButton({
+    marketTypeFilters,
+    environmentTypeFilters,
+    regionFilters,
+  });
+
   return (
     <>
       <div
@@ -197,6 +204,7 @@ const Projects = (): JSX.Element => {
             activeFilters={activeFilterIds}
             setActiveFilters={setActiveFilters}
             resetFilters={resetFilters}
+            showResetButton={showResetButton}
           />
         </div>
         <div

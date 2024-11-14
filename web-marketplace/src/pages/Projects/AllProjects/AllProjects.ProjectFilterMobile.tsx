@@ -16,6 +16,7 @@ type Props = {
   setActiveFilters: (filters: string[]) => void;
   resetFilters: () => void;
   className?: string;
+  showResetButton?: boolean;
 };
 
 const ProjectFilter = ({
@@ -24,6 +25,7 @@ const ProjectFilter = ({
   resetFilters,
   sx = [],
   className = '',
+  showResetButton = true,
 }: Props) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);

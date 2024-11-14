@@ -18,6 +18,7 @@ type Props = {
   activeFilters: string[];
   setActiveFilters: (filters: string[]) => void;
   resetFilters: () => void;
+  showResetButton?: boolean;
 };
 
 const ProjectFilterBody = ({
@@ -27,6 +28,7 @@ const ProjectFilterBody = ({
   activeFilters,
   setActiveFilters,
   resetFilters,
+  showResetButton = true,
 }: Props) => {
   const { _ } = useLingui();
 
@@ -49,6 +51,7 @@ const ProjectFilterBody = ({
         activeFilterIds={activeFilters}
         onFilterChange={onFilterChange}
         onFilterReset={() => setActiveFilters(initialActiveFilters)}
+        showResetButton={showResetButton}
         labels={{
           title: _(msg`Filters`),
           reset: _(msg`Reset`),

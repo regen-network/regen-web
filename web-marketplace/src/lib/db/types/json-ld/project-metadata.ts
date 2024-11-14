@@ -42,6 +42,7 @@ export interface AnchoredProjectMetadataBaseLD {
     'schema:creditText'?: string;
   };
   'regen:marketType'?: MarketType[];
+  'regen:region'?: string;
 }
 
 /** Un-anchored metadata from our DB. This is editable without a Ledger TX. */

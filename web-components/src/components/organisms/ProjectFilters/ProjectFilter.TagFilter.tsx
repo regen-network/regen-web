@@ -37,7 +37,7 @@ export default function TagFilter({
         border: isSelected
           ? '1px solid rgba(var(--sc-tag-filter-stroke-selected))'
           : '1px solid rgba(var(--sc-tag-filter-stroke-unselected))',
-        boxShadow: `0px 2px 2px 2px rgba(0, 0, 0, 0.20) ${
+        boxShadow: `0 1px 1px 1px rgba(0, 0, 0, 0.20) ${
           isSelected ? 'inset' : ''
         }`,
         ...sx,

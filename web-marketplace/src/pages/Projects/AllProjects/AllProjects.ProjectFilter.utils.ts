@@ -1,6 +1,8 @@
 import {
+  ecosystemTags,
   initialActiveFilterKeysByType,
   initialActiveFilters,
+  regionTags,
 } from './AllProjects.ProjectFilterBody.utils';
 
 export function getSetActiveFilters({
@@ -22,10 +24,10 @@ export function getSetActiveFilters({
 }) {
   // Group filter by type
   const newEnvironmentTypeFilterKeys: string[] = filterIds.filter(filter =>
-    Object.keys(environmentTypeFilters).includes(filter),
+    ecosystemTags.map(({ id }) => id).includes(filter),
   );
   const newRegionFilterKeys: string[] = filterIds.filter(filter =>
-    Object.keys(regionFilters).includes(filter),
+    regionTags.map(({ id }) => id).includes(filter),
   );
   const newMarketTypeFilterKeys: string[] = filterIds.filter(filter =>
     Object.keys(marketTypeFilters).includes(filter),

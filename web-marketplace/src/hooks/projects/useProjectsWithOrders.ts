@@ -86,6 +86,7 @@ export function useProjectsWithOrders({
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
   /* Main Queries */
 
   const { data: projectData, isFetching: isLoadingProject } = useQuery(
@@ -267,13 +268,13 @@ export function useProjectsWithOrders({
     creditClassId => creditClassFilter[creditClassId],
   );
   const regionFilterKeys = Object.keys(regionFilter);
-  const regionSelected = regionFilterKeys.filter(
-    region => regionFilter?.[region],
-  );
+  const regionSelected = regionFilterKeys
+    .filter(region => regionFilter?.[region])
+    .map(region => region.toLowerCase());
   const environmentTypeFilterKeys = Object.keys(environmentTypeFilter);
-  const environmentTypeSelected = environmentTypeFilterKeys.filter(
-    environmentType => environmentTypeFilter?.[environmentType],
-  );
+  const environmentTypeSelected = environmentTypeFilterKeys
+    .filter(environmentType => environmentTypeFilter?.[environmentType])
+    .map(environmentType => environmentType.toLowerCase());
   const marketTypeFilterKeys = Object.keys(marketTypeFilter);
   const marketTypeSelected = marketTypeFilterKeys.filter(
     marketType => marketTypeFilter?.[marketType],
@@ -289,16 +290,24 @@ export function useProjectsWithOrders({
                 creditClassSelected.includes(project.creditClassId ?? '');
         })
         .filter(project => {
-          const hasRegion = regionSelected.includes(project?.region ?? '');
+          const hasRegion =
+            regionSelected.length === 0
+              ? true
+              : regionSelected.includes(project?.region?.toLowerCase() ?? '');
+          const hasEnvironmentType =
+            environmentTypeSelected.length === 0
+              ? true
+              : environmentTypeSelected.some(type =>
+                  project.ecosystemType
+                    ?.map(type => type.toLowerCase())
+                    ?.includes(type),
+                );
 
           const hasMarketType = marketTypeSelected.some(type =>
             project.marketType?.includes(type),
           );
 
-          const hasEnvironmentType = environmentTypeSelected.some(type =>
-            project.ecosystemType?.includes(type),
-          );
-          return hasMarketType || hasEnvironmentType || hasRegion;
+          return hasMarketType && hasEnvironmentType && hasRegion;
         }),
     [
       allProject,

@@ -18,7 +18,7 @@ const ecosystemIconSx = {
 };
 
 // TODO A more viable solution would be to get those from the actual data
-const ecosystemTags = [
+export const ecosystemTags = [
   {
     name: msg`Tropical very humid forest`,
     id: 'Tropical Very Humid Forest',
@@ -73,7 +73,7 @@ export function getEcosystemTags(
   }));
 }
 
-const regionTags = [
+export const regionTags = [
   {
     name: msg`Amazon`,
     id: 'Amazon',
@@ -91,7 +91,7 @@ const regionTags = [
   },
   {
     name: msg`Caribbean`,
-    id: 'Carribean',
+    id: 'Caribbean',
     icon: <RegionIndicatorIcon region="CARIBBEAN" />,
   },
   {
@@ -149,10 +149,8 @@ export const initialActiveFilterKeysByType = {
 };
 
 export const initialActiveFilters = {
-  regionFilters: Object.fromEntries(regionTags.map(({ id }) => [id, true])),
-  environmentTypeFilters: Object.fromEntries(
-    ecosystemTags.map(({ id }) => [id, true]),
-  ),
+  regionFilters: {},
+  environmentTypeFilters: {},
   marketTypeFilters: Object.fromEntries(
     marketCheckboxes.map(({ id }) => [id, true]),
   ),

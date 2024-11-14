@@ -4,11 +4,13 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import {
   AllCreditClassQuery,
   AllPrefinanceProjectQuery,
 } from 'generated/sanity-graphql';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { IS_TERRASOS } from 'lib/env';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getAllProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getAllProjectsQuery/getAllProjectsQuery';
@@ -28,6 +30,7 @@ export const useFetchAllOffChainProjects = ({
 }: Props) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const { data: allProjectsData, isFetching } = useQuery(
     getAllProjectsQuery({ client: graphqlClient, enabled }),

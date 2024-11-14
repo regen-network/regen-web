@@ -154,7 +154,7 @@ export function useProjectsWithOrders({
       enabled: enableOffchainProjectsQuery,
       prefinanceProjectsData,
     });
-  console.log('allOffChainProjects', allOffChainProjects);
+
   const onlyOffChainProjects = allOffChainProjects.filter(
     project =>
       project.offChain &&
@@ -235,16 +235,28 @@ export function useProjectsWithOrders({
     [projectsWithOrderData],
   );
 
+  // Include offchain data to projectsWithOrderData because we need it for filtering
+  const projectsWithMetadataFiltered = useMemo(
+    () =>
+      projectsWithOrderDataFiltered.map(project => {
+        const offChainProject = allOffChainProjects.find(
+          offChainProject => project.id === offChainProject.onChainId,
+        );
+        return { ...offChainProject, ...project };
+      }),
+    [allOffChainProjects, projectsWithOrderDataFiltered],
+  );
+
   // Merge on-chain and off-chain projects
   const allProject: Array<NormalizeProject | ProjectWithOrderData> = useMemo(
     () =>
       creditClassFilter?.[UNREGISTERED_PATH] || useOffChainProjects
-        ? [...projectsWithOrderDataFiltered, ...onlyOffChainProjects]
-        : projectsWithOrderDataFiltered,
+        ? [...projectsWithMetadataFiltered, ...onlyOffChainProjects]
+        : projectsWithMetadataFiltered,
     [
       creditClassFilter,
       useOffChainProjects,
-      projectsWithOrderDataFiltered,
+      projectsWithMetadataFiltered,
       onlyOffChainProjects,
     ],
   );

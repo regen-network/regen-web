@@ -175,17 +175,17 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   return (
     <>
-      <Flex flex={1} sx={{ gridColumn: '1 / -1' }} className="xl:mt-[-78px]">
-        <Flex
-          justifyContent="flex-end"
-          alignItems="center"
-          flex={1}
-          sx={{
-            pb: 5,
-            flexWrap: { xs: 'wrap', lg: 'nowrap' },
-          }}
-        >
-          {IS_REGEN && (
+      {IS_REGEN && (
+        <Flex flex={1} sx={{ gridColumn: '1 / -1' }} className="xl:mt-[-78px]">
+          <Flex
+            justifyContent="flex-end"
+            alignItems="center"
+            flex={1}
+            sx={{
+              pb: 5,
+              flexWrap: { xs: 'wrap', lg: 'nowrap' },
+            }}
+          >
             <SideFilter
               creditClassFilters={creditClassFilters}
               hasCommunityProjects={hasCommunityProjects}
@@ -197,39 +197,39 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                 width: { xs: '100%', lg: 'auto' },
               }}
             />
-          )}
-          <Flex
-            sx={{
-              order: { xs: 1, lg: 2 },
-              alignItems: 'center',
-              width: { xs: '100%', lg: 'auto' },
-            }}
-          >
-            <Body
-              size="xs"
+            <Flex
               sx={{
-                width: [0, 0, 0, 43],
-                display: { xs: 'none', md: 'block' },
-                whiteSpace: 'nowrap',
-                mr: 2,
-                color: 'info.dark',
-                fontWeight: 700,
+                order: { xs: 1, lg: 2 },
+                alignItems: 'center',
+                width: { xs: '100%', lg: 'auto' },
               }}
             >
-              <Trans>Sort by:</Trans>
-            </Body>
-            <SelectTextFieldBase
-              emptyOptionText={_(EMPTY_OPTION_TEXT)}
-              className="w-[100%]"
-              defaultValue={sort}
-              options={sortOptionsTranslated}
-              defaultStyle={false}
-              onChange={handleSort}
-              sx={{ width: 'fit-content' }}
-            />
+              <Body
+                size="xs"
+                sx={{
+                  width: [0, 0, 0, 43],
+                  display: { xs: 'none', md: 'block' },
+                  whiteSpace: 'nowrap',
+                  mr: 2,
+                  color: 'info.dark',
+                  fontWeight: 700,
+                }}
+              >
+                <Trans>Sort by:</Trans>
+              </Body>
+              <SelectTextFieldBase
+                emptyOptionText={_(EMPTY_OPTION_TEXT)}
+                className="w-[100%]"
+                defaultValue={sort}
+                options={sortOptionsTranslated}
+                defaultStyle={false}
+                onChange={handleSort}
+                sx={{ width: 'fit-content' }}
+              />
+            </Flex>
           </Flex>
         </Flex>
-      </Flex>
+      )}
       {IS_TERRASOS && (
         <TebuBannerWrapper className="-mt-15 mb-3 sm:mt-20 sm:mb-30 col-span-full" />
       )}

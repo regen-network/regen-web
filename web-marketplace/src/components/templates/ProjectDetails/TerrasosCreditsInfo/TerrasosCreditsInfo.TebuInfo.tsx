@@ -22,34 +22,34 @@ import {
 interface TebuInfoProps {
   projectBatchTotals?: JSX.Element;
   _: TranslatorType;
-  projectPageMetadata: ProjectPageMetadataLD;
+  projectMetadata: ProjectPageMetadataLD;
 }
 
 const TebuInfo: React.FC<TebuInfoProps> = ({
   projectBatchTotals,
-  projectPageMetadata,
+  projectMetadata,
   _,
 }) => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const learnMoreLink = `//terrasos.co/${selectedLanguage}/what-is-tebu`;
 
-  const conservationStatus = projectPageMetadata?.['regen:conservationStatus'];
+  const conservationStatus = projectMetadata?.['regen:conservationStatus'];
   const threatCard = conservationStatus && getThreatCard(_, conservationStatus);
 
   const ecologicalConnectivityIndex =
-    projectPageMetadata?.['regen:ecologicalConnectivityIndex'];
+    projectMetadata?.['regen:ecologicalConnectivityIndex'];
   const connectivityCard =
     ecologicalConnectivityIndex &&
     getConnectivityCard(_, ecologicalConnectivityIndex);
 
-  const duration = projectPageMetadata?.['regen:projectDuration'];
+  const duration = projectMetadata?.['regen:projectDuration'];
   // TODO: set this based on methodology schema version
   const minimumDuration = 20;
   const maximumDuration = 30;
   const durationCard =
     duration && getDurationCard(_, duration, minimumDuration, maximumDuration);
 
-  const managementAreas = projectPageMetadata?.['regen:managementAreas'];
+  const managementAreas = projectMetadata?.['regen:managementAreas'];
   const { preservationArea, restorationArea } =
     getManagementAreasValues(managementAreas);
   // TODO: validate management areas
@@ -59,8 +59,7 @@ const TebuInfo: React.FC<TebuInfoProps> = ({
     getAreaActionsCard(_, preservationArea, restorationArea);
 
   // TODO: update data standard to use levels instead of float values
-  const socialCulturalIndex =
-    projectPageMetadata?.['regen:socialCulturalIndex'];
+  const socialCulturalIndex = projectMetadata?.['regen:socialCulturalIndex'];
   const socialCulturalCard =
     false && getSocialCulturalCard(_, SocialCulturalValueType.High);
   return (

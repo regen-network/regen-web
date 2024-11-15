@@ -32,9 +32,15 @@ export const useFetchAllOffChainProjects = ({
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
-  const { data: allProjectsData, isFetching } = useQuery(
-    getAllProjectsQuery({ client: graphqlClient, enabled }),
+  const { data, isFetching } = useQuery(
+    getAllProjectsQuery({
+      client: graphqlClient,
+      enabled,
+      languageCode: selectedLanguage,
+    }),
   );
+  const allProjectsData = data?.data;
+  const englishProjectsMetadata = data?.englishProjectsMetadata;
 
   const onlyOffChainProjectsWithData =
     allProjectsData?.allProjects?.nodes?.map(project => {
@@ -61,6 +67,11 @@ export const useFetchAllOffChainProjects = ({
           }),
           projectPrefinancing: prefinanceProject?.projectPrefinancing,
         }),
+        // We keep those values in english
+        // so we can filter based on their value
+        ecosystemType:
+          englishProjectsMetadata?.[project?.id]?.['regen:ecosystemType'],
+        region: englishProjectsMetadata?.[project?.id]?.['regen:region'],
       };
     }) ?? [];
 

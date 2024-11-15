@@ -82,10 +82,19 @@ const ComplianceInfo = ({
           <MetaDetail
             label={_(msg`environmental authority`)}
             value={environmentalAuthority}
+            bodySize="lg"
           />
-          <MetaDetail label={_(msg`watershed`)} value={watershed} />
-          <MetaDetail label={_(msg`sub-watershed`)} value={subWatershed} />
-          <MetaDetail label={_(msg`biome`)} value={biomeType} />
+          <MetaDetail
+            label={_(msg`watershed`)}
+            value={watershed}
+            bodySize="lg"
+          />
+          <MetaDetail
+            label={_(msg`sub-watershed`)}
+            value={subWatershed}
+            bodySize="lg"
+          />
+          <MetaDetail label={_(msg`biome`)} value={biomeType} bodySize="lg" />
         </Grid>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-[20px] mt-4 justify-items-center sm:justify-items-start"></div>
       </div>

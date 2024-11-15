@@ -1,10 +1,9 @@
 /* eslint-disable lingui/no-unlocalized-strings */
-import { NodeObject } from 'jsonld';
-
 import { AllProjectsDocument, AllProjectsQuery } from 'generated/graphql';
 import { jsonLdCompact } from 'lib/rdf';
 
 import {
+  EnglishProjectsMetadata,
   ReactQueryGetAllProjectsParams,
   ReactQueryGetAllProjectsResponse,
 } from './getAllProjectsQuery.types';
@@ -20,7 +19,7 @@ export const getAllProjectsQuery = ({
       query: AllProjectsDocument,
     });
 
-    const englishProjectsMetadata: { [id: string]: NodeObject } = {};
+    const englishProjectsMetadata: EnglishProjectsMetadata = {};
     await Promise.all(
       data?.allProjects?.nodes?.map(async project => {
         if (project?.metadata && project?.id) {

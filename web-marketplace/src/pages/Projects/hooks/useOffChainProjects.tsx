@@ -69,9 +69,12 @@ export const useFetchAllOffChainProjects = ({
         }),
         // We keep those values in english
         // so we can filter based on their value
-        ecosystemType:
-          englishProjectsMetadata?.[project?.id]?.['regen:ecosystemType'],
-        region: englishProjectsMetadata?.[project?.id]?.['regen:region'],
+        ecosystemType: englishProjectsMetadata?.[project?.id]?.[
+          'regen:ecosystemType'
+        ] as string[] | undefined,
+        region: englishProjectsMetadata?.[project?.id]?.['regen:region'] as
+          | string
+          | undefined,
       };
     }) ?? [];
 

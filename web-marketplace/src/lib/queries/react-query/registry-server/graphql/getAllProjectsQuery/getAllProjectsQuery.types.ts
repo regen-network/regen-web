@@ -6,9 +6,10 @@ import { AllProjectsQuery } from 'generated/graphql';
 
 import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
 
+export type EnglishProjectsMetadata = { [id: string]: NodeObject };
 export type ReactQueryGetAllProjectsResponse = QueryObserverOptions<{
   data: AllProjectsQuery;
-  englishProjectsMetadata: { [id: string]: NodeObject };
+  englishProjectsMetadata: EnglishProjectsMetadata;
 }>;
 
 export type ReactQueryGetAllProjectsParams = {

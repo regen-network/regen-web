@@ -8,7 +8,7 @@ import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
-import { IS_TERRASOS, SKIPPED_CLASS_ID } from 'lib/env';
+import { IS_REGEN, IS_TERRASOS, SKIPPED_CLASS_ID } from 'lib/env';
 import {
   NormalizeProject,
   normalizeProjectsWithMetadata,
@@ -25,7 +25,10 @@ import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/san
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { UNREGISTERED_PATH } from 'pages/Projects/AllProjects/AllProjects.constants';
+import {
+  UNREGISTERED_PATH,
+  VOLUNTARY_MARKET,
+} from 'pages/Projects/AllProjects/AllProjects.constants';
 import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   sortPinnedProject,
@@ -78,7 +81,7 @@ export function useProjectsWithOrders({
   enableOffchainProjectsQuery = true,
   regionFilter = {},
   environmentTypeFilter = {},
-  marketTypeFilter = {},
+  marketTypeFilter = { COMPLIANCE_MARKET: true, VOLUNTARY_MARKET: true },
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
 
@@ -290,6 +293,8 @@ export function useProjectsWithOrders({
                 creditClassSelected.includes(project.creditClassId ?? '');
         })
         .filter(project => {
+          if (IS_REGEN) return true;
+
           const hasRegion =
             regionSelected.length === 0
               ? true

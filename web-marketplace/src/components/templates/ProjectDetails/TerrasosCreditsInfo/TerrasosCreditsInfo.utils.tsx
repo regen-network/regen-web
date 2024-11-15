@@ -24,7 +24,6 @@ export function getThreatCard(
   _: TranslatorType,
   conservationStatus: IucnStatus,
 ): JSX.Element {
-  console.log('conservationStatus', conservationStatus);
   const { type, factor, description } = iucnFactors[conservationStatus];
   const factorValue =
     typeof factor === 'number' ? factor.toString() : _(msg`factor`);

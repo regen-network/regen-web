@@ -7674,7 +7674,13 @@ export type AllProjectsQuery = (
             & Pick<CreditClassVersion, 'id' | 'createdAt' | 'name' | 'metadata'>
           )>> }
         ) }
-      )> }
+      )>, projectTranslationsById: (
+        { __typename?: 'ProjectTranslationsConnection' }
+        & { nodes: Array<Maybe<(
+          { __typename?: 'ProjectTranslation' }
+          & Pick<ProjectTranslation, 'languageCode' | 'metadata'>
+        )>> }
+      ) }
     )>> }
   )> }
 );
@@ -8361,6 +8367,12 @@ export const AllProjectsDocument = gql`
             name
             metadata
           }
+        }
+      }
+      projectTranslationsById {
+        nodes {
+          languageCode
+          metadata
         }
       }
     }

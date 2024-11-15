@@ -18,6 +18,9 @@ export interface ProjectWithOrderData extends ProjectCardProps {
   published?: boolean;
   offChainId?: string;
   slug?: string;
+  marketType?: string[];
+  ecosystemType?: string[];
+  region?: string;
 }
 
 export type FilterCommunityCreditsEvent = {

@@ -26,7 +26,6 @@ export function getTerrasosCreditsTabs({
   projectBatchTotals,
   projectPageMetadata,
   projectMetadata,
-  isOnChain,
   complianceInfo,
   complianceCredits,
   isComplianceProject,
@@ -37,18 +36,21 @@ export function getTerrasosCreditsTabs({
     text: complianceInfoItem?.bookCallLink?.text ?? '',
   };
   const description = complianceInfoItem?.descriptionRaw;
+  const metadata = projectPageMetadata || projectMetadata;
 
   return [
     {
       label: _(msg`Tebu Credits`),
-      content: projectPageMetadata && (
+      content: metadata && (
         <TebuInfo
           projectBatchTotals={projectBatchTotals}
-          projectPageMetadata={projectPageMetadata}
+          projectMetadata={metadata}
           _={_}
         />
       ),
-      hidden: !(projectPageMetadata && isOnChain),
+      hidden:
+        !metadata ||
+        !projectMetadata?.['regen:marketType']?.includes('VOLUNTARY_MARKET'),
     },
     {
       label: _(msg`Compliance Credits`),

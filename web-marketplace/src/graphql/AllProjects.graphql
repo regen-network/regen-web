@@ -22,6 +22,12 @@ query AllProjects {
           }
         }
       }
+      projectTranslationsById {
+        nodes {
+          languageCode
+          metadata
+        }
+      }
     }
   }
 }

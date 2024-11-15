@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Trans } from '@lingui/macro';
 import {
   Box,
   ButtonBase,
@@ -9,7 +8,6 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { Subtitle, Title } from '../../typography';
 import TagFilter from './ProjectFilter.TagFilter';
 import CheckboxFilter from './ProjectFilters.CheckboxFilter';
 
@@ -39,12 +37,14 @@ export default function ProjectFilters({
   onFilterChange,
   onFilterReset,
   labels,
+  showResetButton = true,
 }: {
   filters: Filter[];
   activeFilterIds: string[];
   onFilterChange: (id: string) => void;
   onFilterReset: () => void;
   labels: ProjectFilterLabels;
+  showResetButton?: boolean;
 }) {
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.down('sm'));
@@ -54,29 +54,32 @@ export default function ProjectFilters({
   };
   return (
     <>
-      <Box display="flex" justifyContent="space-between" alignItems="baseline">
-        <Title variant="h4">{labels.title}</Title>
-        <Subtitle onClick={onFilterReset} sx={{ cursor: 'pointer' }}>
-          {labels.reset}
-        </Subtitle>
-      </Box>
+      <div className="justify-between items-baseline flex">
+        <div className="text-[18px] font-bold">{labels.title}</div>
+        <div
+          className="cursor-pointer text-[14px] text-sc-text-link font-bold"
+          onClick={onFilterReset}
+        >
+          {showResetButton && labels.reset}
+        </div>
+      </div>
       <Divider sx={{ my: 5 }} />
       {filters.map((filter, index) => {
         return (
           <Box sx={{ mb: 5 }} key={filter.title}>
-            <Title variant="h5" sx={{ mb: 5 }}>
+            <div className="text-[16px] font-bold mb-[20px] ">
               {filter.title}
-            </Title>
+            </div>
 
             <Collapse
               in={
                 // always show expanded for filter without hasCollapse
                 !filter.hasCollapse || (filter.hasCollapse && isExpanded[index])
               }
-              collapsedSize={isXs ? 110 : 130}
+              collapsedSize={isXs ? 110 : 110}
             >
               {filter.displayType === 'tag' && (
-                <Box display="flex" flexWrap="wrap" gap={2}>
+                <Box display="flex" flexWrap="wrap" gap={2} className="ml-1">
                   {filter.options.map(({ name, icon, id }) => (
                     <TagFilter
                       name={name}
@@ -84,12 +87,13 @@ export default function ProjectFilters({
                       key={id}
                       isSelected={activeFilterIds.includes(id)}
                       onClick={() => onFilterChange(id)}
+                      sx={{ fontFamily: theme => theme.typography.fontFamily }}
                     />
                   ))}
                 </Box>
               )}
               {filter.displayType === 'checkbox' && (
-                <Box display="flex" flexDirection="column">
+                <div className="flex flex-column flex-wrap">
                   {filter.options.map(({ name, icon, id }) => (
                     <CheckboxFilter
                       isSelected={activeFilterIds.includes(id)}
@@ -99,7 +103,7 @@ export default function ProjectFilters({
                       onChange={() => onFilterChange(id)}
                     />
                   ))}
-                </Box>
+                </div>
               )}
             </Collapse>
             {filter.hasCollapse && (
@@ -107,6 +111,7 @@ export default function ProjectFilters({
                 disableRipple
                 onClick={() => handleExpand(index)}
                 sx={{ fontWeight: '700' }}
+                className="text-sc-text-link"
               >
                 {isExpanded[index] ? labels.collapse : labels.expand}
               </ButtonBase>

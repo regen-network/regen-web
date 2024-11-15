@@ -3,6 +3,7 @@ import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
+import cn from 'classnames';
 import { useAtom } from 'jotai';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
@@ -16,7 +17,10 @@ import {
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   creditClassSelectedFiltersAtom,
+  environmentTypeFiltersAtom,
+  marketTypeFiltersAtom,
   projectsSortAtom,
+  regionFiltersAtom,
   useCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
@@ -28,6 +32,13 @@ import { GettingStartedResourcesSection } from 'components/molecules';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
 import { PROJECTS_PER_PAGE } from './AllProjects/AllProjects.config';
+import {
+  getActiveFilterIds,
+  getResetFilters,
+  getSetActiveFilters,
+  getShowResetButton,
+} from './AllProjects/AllProjects.ProjectFilter.utils';
+import ProjectFilterBody from './AllProjects/AllProjects.ProjectFilterBody';
 import { useProjects } from './hooks/useProjects';
 
 const Projects = (): JSX.Element => {
@@ -37,6 +48,13 @@ const Projects = (): JSX.Element => {
   const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
   const [sort] = useAtom(projectsSortAtom);
   const [creditClassSelectedFilters] = useAtom(creditClassSelectedFiltersAtom);
+  const [environmentTypeFilters, setEnvironmentTypeFilters] = useAtom(
+    environmentTypeFiltersAtom,
+  );
+  const [regionFilters, setRegionFilters] = useAtom(regionFiltersAtom);
+  const [marketTypeFilters, setMarketTypeFilters] = useAtom(
+    marketTypeFiltersAtom,
+  );
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const { data: allHomePageData } = useQuery(
@@ -68,6 +86,9 @@ const Projects = (): JSX.Element => {
     offset: page * PROJECTS_PER_PAGE,
     useCommunityProjects,
     creditClassFilter: creditClassSelectedFilters,
+    regionFilter: regionFilters,
+    environmentTypeFilter: environmentTypeFilters,
+    marketTypeFilter: marketTypeFilters,
     sortPinnedIds,
   });
 
@@ -123,10 +144,82 @@ const Projects = (): JSX.Element => {
     sanitySoldOutProjects,
   });
 
+  const setActiveFilters = (filters: string[]) =>
+    getSetActiveFilters({
+      filterIds: filters,
+      setMarketTypeFilters,
+      setEnvironmentTypeFilters,
+      setRegionFilters,
+      marketTypeFilters,
+      environmentTypeFilters,
+      regionFilters,
+    });
+
+  const activeFilterIds = getActiveFilterIds({
+    marketTypeFilters,
+    environmentTypeFilters,
+    regionFilters,
+  });
+
+  const resetFilters = getResetFilters({
+    setMarketTypeFilters,
+    setEnvironmentTypeFilters,
+    setRegionFilters,
+  });
+
+  const showResetButton = getShowResetButton({
+    marketTypeFilters,
+    environmentTypeFilters,
+    regionFilters,
+  });
+
   return (
     <>
-      <div className="bg-grey-100 pt-25 sm:pt-40 px-15 sm:25 pb-[80px] sm:pb-[100px]">
-        <div className="max-w-[1400px] m-auto grid grid-cols-[repeat(auto-fit,minmax(300px,400px))] gap-[18px] justify-center">
+      <div
+        className={cn(
+          {
+            'lg:grid grid-cols-[auto_minmax(300px,750px)] xl:grid-cols-[auto_minmax(300px,1120px)]':
+              IS_TERRASOS,
+          },
+          { '': !IS_TERRASOS },
+          'block justify-center',
+        )}
+        style={{
+          background: IS_TERRASOS
+            ? 'linear-gradient(90deg, rgba(var(--ac-neutral-0)) 0%, rgba(var(--ac-neutral-0)) 50%, rgba(var(--ac-neutral-100)) 50%, rgba(var(--ac-neutral-100)) 100%)'
+            : 'rgba(var(--ac-neutral-100))',
+        }}
+      >
+        <div
+          className={cn('w-[310px] py-[43px] px-[20px] hidden', {
+            'lg:block': IS_TERRASOS,
+          })}
+        >
+          <ProjectFilterBody
+            className="h-full bg-ac-neutral-0 hidden md:block"
+            // shadow-[0_0_4px_rgba(0,0,0,0.1)]
+            // style={{
+            //   boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)',
+            // }}
+            activeFilters={activeFilterIds}
+            setActiveFilters={setActiveFilters}
+            resetFilters={resetFilters}
+            showResetButton={showResetButton}
+          />
+        </div>
+        <div
+          className={cn(
+            'bg-ac-neutral-100 pt-25 sm:pt-40 px-15 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center',
+            {
+              'lg:justify-start grid-cols-[repeat(auto-fill,minmax(300px,350px))]':
+                IS_TERRASOS,
+            },
+            {
+              'mx-auto grid-cols-[repeat(auto-fill,minmax(300px,400px))]':
+                !IS_TERRASOS,
+            },
+          )}
+        >
           <IconTabs
             className="col-[1/-1]"
             aria-label={_(msg`projects tabs`)}

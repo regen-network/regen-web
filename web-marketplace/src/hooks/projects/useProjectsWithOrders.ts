@@ -8,7 +8,7 @@ import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
-import { IS_TERRASOS, SKIPPED_CLASS_ID } from 'lib/env';
+import { IS_REGEN, IS_TERRASOS, SKIPPED_CLASS_ID } from 'lib/env';
 import {
   NormalizeProject,
   normalizeProjectsWithMetadata,
@@ -25,7 +25,10 @@ import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/san
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { UNREGISTERED_PATH } from 'pages/Projects/AllProjects/AllProjects.constants';
+import {
+  UNREGISTERED_PATH,
+  VOLUNTARY_MARKET,
+} from 'pages/Projects/AllProjects/AllProjects.constants';
 import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   sortPinnedProject,
@@ -53,6 +56,9 @@ export interface ProjectsWithOrdersProps {
   creditClassFilter?: Record<string, boolean>;
   useOffChainProjects?: boolean;
   enableOffchainProjectsQuery?: boolean;
+  regionFilter?: Record<string, boolean>;
+  environmentTypeFilter?: Record<string, boolean>;
+  marketTypeFilter?: Record<string, boolean>;
 }
 
 /**
@@ -73,6 +79,9 @@ export function useProjectsWithOrders({
   creditClassFilter = {},
   useOffChainProjects = false,
   enableOffchainProjectsQuery = true,
+  regionFilter = {},
+  environmentTypeFilter = {},
+  marketTypeFilter = { COMPLIANCE_MARKET: true, VOLUNTARY_MARKET: true },
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
 
@@ -80,6 +89,7 @@ export function useProjectsWithOrders({
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
   /* Main Queries */
 
   const { data: projectData, isFetching: isLoadingProject } = useQuery(
@@ -229,16 +239,28 @@ export function useProjectsWithOrders({
     [projectsWithOrderData],
   );
 
+  // Include offchain data to projectsWithOrderData because we need it for filtering
+  const projectsWithMetadataFiltered = useMemo(
+    () =>
+      projectsWithOrderDataFiltered.map(project => {
+        const offChainProject = allOffChainProjects.find(
+          offChainProject => project.id === offChainProject.onChainId,
+        );
+        return { ...offChainProject, ...project };
+      }),
+    [allOffChainProjects, projectsWithOrderDataFiltered],
+  );
+
   // Merge on-chain and off-chain projects
   const allProject: Array<NormalizeProject | ProjectWithOrderData> = useMemo(
     () =>
       creditClassFilter?.[UNREGISTERED_PATH] || useOffChainProjects
-        ? [...projectsWithOrderDataFiltered, ...onlyOffChainProjects]
-        : projectsWithOrderDataFiltered,
+        ? [...projectsWithMetadataFiltered, ...onlyOffChainProjects]
+        : projectsWithMetadataFiltered,
     [
       creditClassFilter,
       useOffChainProjects,
-      projectsWithOrderDataFiltered,
+      projectsWithMetadataFiltered,
       onlyOffChainProjects,
     ],
   );
@@ -248,16 +270,58 @@ export function useProjectsWithOrders({
   const creditClassSelected = creditClassFilterKeys.filter(
     creditClassId => creditClassFilter[creditClassId],
   );
+  const regionFilterKeys = Object.keys(regionFilter);
+  const regionSelected = regionFilterKeys
+    .filter(region => regionFilter?.[region])
+    .map(region => region.toLowerCase());
+  const environmentTypeFilterKeys = Object.keys(environmentTypeFilter);
+  const environmentTypeSelected = environmentTypeFilterKeys
+    .filter(environmentType => environmentTypeFilter?.[environmentType])
+    .map(environmentType => environmentType.toLowerCase());
+  const marketTypeFilterKeys = Object.keys(marketTypeFilter);
+  const marketTypeSelected = marketTypeFilterKeys.filter(
+    marketType => marketTypeFilter?.[marketType],
+  );
 
   const projectsFilteredByCreditClass = useMemo(
     () =>
-      allProject.filter(project =>
-        creditClassFilterKeys.length === 0
-          ? true
-          : project.offChain ||
-            creditClassSelected.includes(project.creditClassId ?? ''),
-      ),
-    [allProject, creditClassFilterKeys, creditClassSelected],
+      allProject
+        .filter(project => {
+          return creditClassFilterKeys.length === 0
+            ? true
+            : project.offChain ||
+                creditClassSelected.includes(project.creditClassId ?? '');
+        })
+        .filter(project => {
+          if (IS_REGEN) return true;
+
+          const hasRegion =
+            regionSelected.length === 0
+              ? true
+              : regionSelected.includes(project?.region?.toLowerCase() ?? '');
+          const hasEnvironmentType =
+            environmentTypeSelected.length === 0
+              ? true
+              : environmentTypeSelected.some(type =>
+                  project.ecosystemType
+                    ?.map(type => type.toLowerCase())
+                    ?.includes(type),
+                );
+
+          const hasMarketType = marketTypeSelected.some(type =>
+            project.marketType?.includes(type),
+          );
+
+          return hasMarketType && hasEnvironmentType && hasRegion;
+        }),
+    [
+      allProject,
+      creditClassFilterKeys,
+      creditClassSelected,
+      marketTypeSelected,
+      environmentTypeSelected,
+      regionSelected,
+    ],
   );
 
   const sortedProjects = useMemo(

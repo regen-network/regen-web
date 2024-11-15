@@ -21,7 +21,7 @@ export default function CheckboxFilter({
           {icon}
         </Box>
       }
-      sx={{ mb: 2 }}
+      sx={{ mb: 2, '& .MuiFormControlLabel-label': { fontSize: '14px' } }}
     />
   );
 }

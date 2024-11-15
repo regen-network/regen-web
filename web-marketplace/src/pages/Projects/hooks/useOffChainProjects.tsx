@@ -4,11 +4,13 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import {
   AllCreditClassQuery,
   AllPrefinanceProjectQuery,
 } from 'generated/sanity-graphql';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { IS_TERRASOS } from 'lib/env';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getAllProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getAllProjectsQuery/getAllProjectsQuery';
@@ -28,10 +30,17 @@ export const useFetchAllOffChainProjects = ({
 }: Props) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
-  const { data: allProjectsData, isFetching } = useQuery(
-    getAllProjectsQuery({ client: graphqlClient, enabled }),
+  const { data, isFetching } = useQuery(
+    getAllProjectsQuery({
+      client: graphqlClient,
+      enabled,
+      languageCode: selectedLanguage,
+    }),
   );
+  const allProjectsData = data?.data;
+  const englishProjectsMetadata = data?.englishProjectsMetadata;
 
   const onlyOffChainProjectsWithData =
     allProjectsData?.allProjects?.nodes?.map(project => {
@@ -58,6 +67,14 @@ export const useFetchAllOffChainProjects = ({
           }),
           projectPrefinancing: prefinanceProject?.projectPrefinancing,
         }),
+        // We keep those values in english
+        // so we can filter based on their value
+        ecosystemType: englishProjectsMetadata?.[project?.id]?.[
+          'regen:ecosystemType'
+        ] as string[] | undefined,
+        region: englishProjectsMetadata?.[project?.id]?.['regen:region'] as
+          | string
+          | undefined,
       };
     }) ?? [];
 

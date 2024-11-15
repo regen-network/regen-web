@@ -42,6 +42,7 @@ export interface AnchoredProjectMetadataBaseLD {
     'schema:creditText'?: string;
   };
   'regen:marketType'?: MarketType[];
+  'regen:region'?: string;
 }
 
 /** Un-anchored metadata from our DB. This is editable without a Ledger TX. */
@@ -65,6 +66,7 @@ export interface ProjectPageMetadataLD
   'regen:story'?: string;
   'regen:storyTitle'?: string;
   'regen:storyMedia'?: ProjectStoryMedia;
+  'regen:ecosystemType'?: string[];
 
   // Legacy project fields
   'schema:image'?: string;
@@ -74,7 +76,6 @@ export interface ProjectPageMetadataLD
   'regen:boundaries'?: string;
   'regen:landManagementActions'?: NameImageDescription[];
 }
-
 
 export type ProjectStoryMediaType =
   | 'schema:ImageObject'

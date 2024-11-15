@@ -19,6 +19,7 @@ import {
   getProjectCardBodyTextMapping,
   getProjectCardButtonMapping,
 } from 'lib/constants/shared.constants';
+import { IS_REGEN } from 'lib/env';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { EDIT_PROJECT } from 'pages/ProjectEdit/ProjectEdit.constants';
@@ -173,47 +174,49 @@ export const SellOrdersActionsBar = ({
                 {_(BOOK_CALL)}
               </OutlinedButton>
             )}
-            {onBuyButtonClick && !!onChainProjectId && !!onChainCreditClassId && (
-              <InfoTooltip
-                title={
-                  isSoldOut
-                    ? _(SOLD_OUT_TOOLTIP)
-                    : isBuyButtonDisabled
-                    ? _(BUY_DISABLED_TOOLTIP)
-                    : ''
-                }
-                arrow
-                placement="top"
-              >
-                <span>
-                  <ContainedButton
-                    startIcon={
-                      <CurrentCreditsIcon height="18px" width="18px" />
-                    }
-                    onClick={() => {
-                      track<Buy1Event>('buy1', {
-                        url: location.pathname,
-                        buttonLocation: 'stickyNav',
-                        projectName,
-                        projectId: onChainProjectId,
-                        creditClassId: onChainCreditClassId,
-                        creditClassName,
-                      });
-                      onBuyButtonClick();
-                    }}
-                    disabled={isBuyButtonDisabled}
-                    sx={{
-                      height: '100%',
-                      backgroundImage:
-                        'linear-gradient(197deg, rgba(var(--sc-gradient-lighter-gradient-500) / 1) 14.67%, rgba(var(--sc-gradient-lighter-gradient-300) / 1) 97.14%)',
-
-                    }}
-                  >
-                    {isMobile ? _(msg`BUY`) : _(msg`BUY CREDITS`)}
-                  </ContainedButton>
-                </span>
-              </InfoTooltip>
-            )}
+            {IS_REGEN &&
+              onBuyButtonClick &&
+              !!onChainProjectId &&
+              !!onChainCreditClassId && (
+                <InfoTooltip
+                  title={
+                    isSoldOut
+                      ? _(SOLD_OUT_TOOLTIP)
+                      : isBuyButtonDisabled
+                      ? _(BUY_DISABLED_TOOLTIP)
+                      : ''
+                  }
+                  arrow
+                  placement="top"
+                >
+                  <span>
+                    <ContainedButton
+                      startIcon={
+                        <CurrentCreditsIcon height="18px" width="18px" />
+                      }
+                      onClick={() => {
+                        track<Buy1Event>('buy1', {
+                          url: location.pathname,
+                          buttonLocation: 'stickyNav',
+                          projectName,
+                          projectId: onChainProjectId,
+                          creditClassId: onChainCreditClassId,
+                          creditClassName,
+                        });
+                        onBuyButtonClick();
+                      }}
+                      disabled={isBuyButtonDisabled}
+                      sx={{
+                        height: '100%',
+                        backgroundImage:
+                          'linear-gradient(197deg, rgba(var(--sc-gradient-lighter-gradient-500) / 1) 14.67%, rgba(var(--sc-gradient-lighter-gradient-300) / 1) 97.14%)',
+                      }}
+                    >
+                      {isMobile ? _(msg`BUY`) : _(msg`BUY CREDITS`)}
+                    </ContainedButton>
+                  </span>
+                </InfoTooltip>
+              )}
           </>
         )}
         {children}

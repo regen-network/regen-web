@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2024-11-14 15:26+0100\n"
+"POT-Creation-Date: 2024-11-18 11:02+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -84,7 +84,7 @@ msgstr "{remainingDescriptionCharacters, plural, queda un {{remainingDescription
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.tsx:170
 msgid "{remainingStoryCharacters, plural, one {{remainingStoryCharacters} character remaining} other {{remainingStoryCharacters} characters remaining}}"
-msgstr "{remainingStoryCharacters, plural, un {{remainingStoryCharacters} personaje restante} otros {{remainingStoryCharacters} personajes restantes}}"
+msgstr "{remainingStoryCharacters, plural, queda un {{remainingStoryCharacters} personaje} quedan otros {{remainingStoryCharacters} personajes}}"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.tsx:191
 msgid "{remainingStoryTitleCharacters, plural, one {{remainingStoryTitleCharacters} character remaining} other {{remainingStoryTitleCharacters} characters remaining}}"
@@ -98,7 +98,7 @@ msgstr "{remainingSummaryCharacters, plural, queda un {{remainingSummaryCharacte
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
 msgstr "{remainingTitleCharacters, plural, un {{remainingTitleCharacters} carácter restante} otros {{remainingTitleCharacters} caracteres restantes}}"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:116
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:115
 msgid "{years} year project duration"
 msgstr "{años} años de duración del proyecto"
 
@@ -171,7 +171,7 @@ msgstr "<0>Administrador de clase de crédito:</0> la entidad que puede actualiz
 
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:52
 msgid "<0>Credit class issuer:</0> the entity who can issue credit batches under the given credit class."
-msgstr "<0>Emisor de la clase de crédito:</0> entidad que puede emitir lotes de créditos bajo la clase de crédito determinada."
+msgstr "<0>Emisor de la clase de crédito:</0> entidad que puede emitir lotes de créditos bajo la clase de crédito dada."
 
 #: src/components/atoms/DragAndDropLabel.tsx:6
 msgid "<0>drag and drop</0><1>or</1>"
@@ -511,7 +511,7 @@ msgstr "y"
 
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:98
 msgid "Andean"
-msgstr "Andes"
+msgstr "andino"
 
 #: src/lib/constants/shared.constants.tsx:41
 msgid "Apply"
@@ -542,7 +542,7 @@ msgstr "¿Estás seguro de que deseas eliminar esta publicación?"
 msgid "Are you sure you want to discard your changes?"
 msgstr "¿Está seguro de que desea descartar los cambios?"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:146
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:145
 msgid "Area Actions"
 msgstr "Acciones del Área"
 
@@ -671,7 +671,7 @@ msgid "BATCH START DATE"
 msgstr "FECHA DE INICIO DEL LOTE"
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:159
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:88
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:97
 msgid "biome"
 msgstr "bioma"
 
@@ -751,7 +751,7 @@ msgstr "cuentas de grupo de búfer"
 msgid "Buy"
 msgstr "Comprar"
 
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:215
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:4
 msgid "BUY"
 msgstr "COMPRAR"
@@ -768,7 +768,7 @@ msgstr "Compre créditos de carbono y otros créditos de servicios de sistemas e
 msgid "buy credits"
 msgstr "comprar créditos"
 
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:212
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:215
 msgid "BUY CREDITS"
 msgstr "COMPRAR CRÉDITOS"
 
@@ -858,9 +858,9 @@ msgstr "Información de la tarjeta"
 
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:93
 msgid "Caribbean"
-msgstr "Caribe"
+msgstr "caribe"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:35
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:34
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
 msgstr "Las categorías de la Lista Roja de Ecosistemas de la UICN evalúan la salud y el riesgo de los ecosistemas a escala global. Tebu promueve la protección de los ecosistemas más amenazados otorgando una puntuación más alta a aquellos que presentan un riesgo mayor."
 
@@ -1029,7 +1029,7 @@ msgstr "Completo"
 msgid "Compliance"
 msgstr "Cumplimiento"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:54
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:56
 msgid "Compliance Credits"
 msgstr "Créditos de cumplimiento"
 
@@ -1082,7 +1082,7 @@ msgstr "Conectar billetera"
 msgid "Connect wallet address"
 msgstr "Conectar la dirección de la billetera"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:71
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:70
 msgid "Connectivity allows the flow of species and ecological processes that support biodiversity across a larger area. Tebu promotes projects that contribute to the restoration of maintenance of the ecological connectivity at a landscape scale."
 msgstr "La conectividad permite el flujo de especies y procesos ecológicos que sustentan la biodiversidad en un área más amplia. Tebu promueve proyectos que contribuyen a la restauración y el mantenimiento de la conectividad ecológica a escala del paisaje."
 
@@ -1305,7 +1305,7 @@ msgstr "nombre de credito"
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr "Los precios de los créditos varían. Por defecto, se comprarán primero los créditos con el precio más bajo."
 
-#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:96
+#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:97
 msgid "Credit retirement location"
 msgstr "Ubicación de retiro de crédito"
 
@@ -1348,11 +1348,11 @@ msgstr "créditos disponibles"
 msgid "Credits Available"
 msgstr "Créditos disponibles"
 
-#: src/pages/Projects/AllProjects/AllProjects.config.ts:18
+#: src/pages/Projects/AllProjects/AllProjects.config.ts:20
 msgid "Credits available - high to low"
 msgstr "Créditos disponibles: de mayor a menor"
 
-#: src/pages/Projects/AllProjects/AllProjects.config.ts:14
+#: src/pages/Projects/AllProjects/AllProjects.config.ts:16
 msgid "Credits available - low to high"
 msgstr "Créditos disponibles: de bajo a alto"
 
@@ -1503,7 +1503,7 @@ msgstr "Descripción"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.constants.tsx:3
 msgid "Different sellers may sell the same credits at different prices. We automatically choose the lowest priced credits for you. This price is the average price of all the credits in your cart."
-msgstr "Diferentes vendedores pueden vender los mismos créditos a diferentes precios. Elegimos automáticamente los créditos con el precio más bajo para ti. Este precio es el precio promedio de todos los créditos en tu carrito."
+msgstr "Es posible que distintos vendedores vendan los mismos créditos a distintos precios. Elegimos automáticamente los créditos con el precio más bajo para ti. Este precio es el precio promedio de todos los créditos en tu carrito."
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.ConnectField.tsx:55
 msgid "DISCONNECT"
@@ -1616,7 +1616,7 @@ msgstr "Tabla de ecocréditos"
 msgid "ecocredits tradable"
 msgstr "ecocréditos negociables"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:69
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:68
 msgid "Ecological Connectivity Level"
 msgstr "Nivel de conectividad ecológica"
 
@@ -1723,7 +1723,7 @@ msgstr "Elegibilidad"
 msgid "eligible activities"
 msgstr "actividades elegibles"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:106
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:105
 msgid "Eligible projects implement preservation and/or restoration activities in different proportion/rates. Tebu recognizes restoration activities have a higher cost by assigning a greater value to restoration actions."
 msgstr "Los proyectos elegibles implementan actividades de conservación y/o restauración en diferentes proporciones/ritmos. Tebu reconoce que las actividades de restauración tienen un costo más alto al asignar un mayor valor a las acciones de restauración."
 
@@ -1800,14 +1800,14 @@ msgstr "Explorar"
 msgid "Explore Banks"
 msgstr "Explorar bancos"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:30
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:29
 msgid "factor"
 msgstr "factor"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:39
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:75
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:110
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:187
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:38
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:74
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:109
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:186
 msgid "Factor:"
 msgstr "Factor:"
 
@@ -1820,7 +1820,7 @@ msgstr "No se pudo solicitar fondos"
 msgid "Failed to resend passcode"
 msgstr "No se pudo reenviar la contraseña"
 
-#: src/pages/Projects/AllProjects/AllProjects.config.ts:10
+#: src/pages/Projects/AllProjects/AllProjects.config.ts:12
 msgid "Featured projects"
 msgstr "Proyectos destacados"
 
@@ -2162,7 +2162,7 @@ msgstr "Aprende más"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:52
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:10
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:98
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:97
 msgid "Learn more"
 msgstr "Más información"
 
@@ -2300,10 +2300,6 @@ msgstr "Hacer que los archivos y los datos de ubicación sean privados"
 #: src/components/organisms/PostForm/PostForm.tsx:400
 msgid "Make the location data private"
 msgstr "Hacer que los datos de ubicación sean privados"
-
-#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:84
-msgid "Make your purchase anonymous. Your name will be hidden from the retirement certificate and the certificate will be hidden from your public profile."
-msgstr "Haz que tu compra sea anónima. Tu nombre quedará oculto en el certificado de jubilación y el certificado quedará oculto en tu perfil público."
 
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:177
 msgid "Market"
@@ -2811,7 +2807,7 @@ msgstr "La publicación es privada"
 msgid "Post is public"
 msgstr "La publicación es pública"
 
-#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:150
+#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:151
 msgid "Postal code"
 msgstr "Código Postal"
 
@@ -2845,11 +2841,11 @@ msgstr "Prefinanciar este proyecto"
 msgid "Premontane humid forest"
 msgstr "Bosque húmedo premontano"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:164
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
 msgid "Preservation"
 msgstr "Preservación"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:156
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:155
 msgid "Preservation Factor:"
 msgstr "Factor de conservación:"
 
@@ -2869,11 +2865,11 @@ msgstr "precio"
 msgid "Price"
 msgstr "Precio"
 
-#: src/pages/Projects/AllProjects/AllProjects.config.ts:12
+#: src/pages/Projects/AllProjects/AllProjects.config.ts:14
 msgid "Price - high to low"
 msgstr "Precio - de alto a bajo"
 
-#: src/pages/Projects/AllProjects/AllProjects.config.ts:11
+#: src/pages/Projects/AllProjects/AllProjects.config.ts:13
 msgid "Price - low to high"
 msgstr "Precio - bajo a alto"
 
@@ -3040,7 +3036,7 @@ msgstr "Desarrollador de proyectos"
 msgid "Project documentation"
 msgstr "Documentación del proyecto"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:104
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:103
 msgid "Project Duration"
 msgstr "Duración del proyecto"
 
@@ -3148,7 +3144,7 @@ msgstr "PROYECTADO:"
 msgid "Projects"
 msgstr "Proyectos"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:148
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:147
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr "Los proyectos deben tener una duración de al menos 20 años para garantizar resultados demostrables y cuantificables en biodiversidad. Tebu promueve proyectos que duren más tiempo, asegurando procesos ecológicos a largo plazo."
 
@@ -3170,7 +3166,7 @@ msgstr "fecha de compra"
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:128
 msgid "purchase now"
-msgstr "Compra ahora"
+msgstr "Comprar ahora"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:48
 msgid "PURCHASE OPTIONS"
@@ -3196,7 +3192,7 @@ msgstr "leer"
 
 #: src/components/organisms/MediaSection.tsx:37
 msgid "read article"
-msgstr "leer el artículo"
+msgstr "leer el articulo"
 
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:115
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:141
@@ -3205,7 +3201,7 @@ msgstr "Beneficiario"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:118
 msgid "Recipient {index}"
-msgstr "Destinatario {índice}"
+msgstr "Destinatario {index}"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:7
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:122
@@ -3277,7 +3273,7 @@ msgstr "Clase de crédito relacionada"
 
 #: src/components/organisms/AdditionalityForm.tsx:231
 msgid "Relevant environmental changes within the project area. These include changes in vegetation such as clearing or planting, hydrology, soil conditions, or other."
-msgstr "Cambios ambientales relevantes dentro del área del proyecto. Estos incluyen cambios en la vegetación, como desmontes o plantaciones, hidrología, condiciones del suelo u otros."
+msgstr "Cambios ambientales relevantes dentro del área del proyecto. Estos incluyen cambios en la vegetación, como desmonte o plantación, hidrología, condiciones del suelo u otros."
 
 #: src/pages/ProjectFinished/ProjectFinished.constants.tsx:3
 msgid "Reminder: this project is stored in the Regen Marketplace database. If you want to make a project on Regen Ledger, please log in with a keplr wallet."
@@ -3333,11 +3329,11 @@ msgstr "Recursos"
 msgid "Resources for Getting Started"
 msgstr "Recursos para empezar"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:165
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:164
 msgid "Restoration"
 msgstr "Restauración"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:152
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:151
 msgid "Restoration Factor:"
 msgstr "Factor de restauración:"
 
@@ -3681,8 +3677,8 @@ msgstr "Pequeña o mediana empresa"
 msgid "Social Accounts"
 msgstr "Cuentas sociales"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:181
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:193
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:180
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:192
 msgid "Social and Cultural Index"
 msgstr "Índice social y cultural"
 
@@ -3743,7 +3739,7 @@ msgid "Start typing the location"
 msgstr "Comience a escribir la ubicación"
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:144
-#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:129
+#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:130
 #: src/lib/constants/shared.constants.tsx:59
 #: src/lib/constants/shared.constants.tsx:161
 msgid "State / Region"
@@ -3788,7 +3784,7 @@ msgid "Story video or photo"
 msgstr "Historia en video o foto"
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:158
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:87
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:93
 msgid "sub-watershed"
 msgstr "subcuenca"
 
@@ -3837,7 +3833,7 @@ msgstr "tomar de la cesta"
 msgid "Take from basket"
 msgstr "Tomar de la cesta"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:84
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:83
 msgid "Tebu badge"
 msgstr "Insignia de bastón"
 
@@ -3849,7 +3845,7 @@ msgstr "Bandera de caña de azúcar."
 msgid "Tebu Credits"
 msgstr "Créditos de caña"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:81
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:80
 msgid "Tebu factors"
 msgstr "Factores de Tebu"
 
@@ -3926,7 +3922,7 @@ msgstr "La dirección de correo electrónico que está utilizando para iniciar s
 msgid "The individual or organization that is in charge of managing the project and will appear on the project page."
 msgstr "La persona u organización que está a cargo de administrar el proyecto y aparecerá en la página del proyecto."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:183
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:182
 msgid "The integration of local communities' knowledge, social structures, and equitable participation to ensure both ecosystem conservation and community benefits."
 msgstr "La integración del conocimiento de las comunidades locales, las estructuras sociales y la participación equitativa para garantizar tanto la conservación del ecosistema como los beneficios comunitarios."
 
@@ -3955,7 +3951,7 @@ msgid "The recipient address cannot be the same as the sender address"
 msgstr "La dirección del destinatario no puede ser la misma que la del remitente"
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:105
-#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:100
+#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:101
 #: src/lib/constants/shared.constants.tsx:155
 msgid "The retirement location can be where you live or your business operates."
 msgstr "El lugar de jubilación puede ser el lugar donde usted vive o donde opera su negocio."
@@ -3989,7 +3985,7 @@ msgstr "Estos créditos serán un activo comercializable. Se podrán retirar má
 msgid "These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
 msgstr "Estos créditos se retirarán al momento de la compra y no se podrán canjear. La retirada es permanente e irreversible."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:90
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:89
 msgid "These factors are used to calculate the credits issued for this project."
 msgstr "Estos factores se utilizan para calcular los créditos emitidos para este proyecto."
 
@@ -4014,7 +4010,7 @@ msgstr "¡Este código ha expirado!"
 msgid "This data is on chain or anchored on chain via a content hash."
 msgstr "Estos datos están en cadena o anclados en la cadena a través de un hash de contenido."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:83
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:82
 msgid "This factor is used to calculate the credits issued for this project."
 msgstr "Este factor se utiliza para calcular los créditos emitidos para este proyecto."
 
@@ -4065,8 +4061,8 @@ msgid "This may take up to 15 seconds."
 msgstr "Esto puede tardar hasta 15 segundos."
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
-msgid "This name will appear on the retirement certificate unless you choose to retire anonymously in the next step. It is also your user profile name."
-msgstr "Este nombre aparecerá en el certificado de jubilación a menos que elija jubilarse de forma anónima en el siguiente paso. También es su nombre de perfil de usuario."
+msgid "This name will appear on the retirement certificate. It is also your user profile name."
+msgstr "Este nombre aparecerá en el certificado de jubilación. También es el nombre de su perfil de usuario."
 
 #: src/components/organisms/PostForm/PostForm.tsx:388
 msgid "This post and all of its files will be visible."
@@ -4088,8 +4084,8 @@ msgstr "Esta URL única ya está en uso"
 msgid "This wallet address is already in use by another account."
 msgstr "Esta dirección de billetera ya está siendo utilizada por otra cuenta."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:33
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:45
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:32
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:44
 msgid "Threat Category of Ecosystem"
 msgstr "Categoría de amenaza del ecosistema"
 
@@ -4489,7 +4485,7 @@ msgid "watch video"
 msgstr "ver video"
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:157
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:86
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:88
 msgid "watershed"
 msgstr "cuenca"
 

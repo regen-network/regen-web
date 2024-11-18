@@ -67,7 +67,7 @@ export const Retirement = ({ retiring }: Props) => {
           />
         </Title>
         <TextField
-          className="!my-20 sm:!my-30"
+          className="!mt-20 sm:!mt-30"
           label={_(msg`Explain the reason you are retiring these credits`)}
           {...register('retirementReason')}
           error={!!errors['retirementReason']}
@@ -75,7 +75,8 @@ export const Retirement = ({ retiring }: Props) => {
           labelClassName="text-sm sm:text-base font-normal"
           optional
         />
-        <CheckboxLabel
+        {/* <CheckboxLabel
+          className=" !mt-20 sm:!mt-30"
           checked={anonymousPurchase}
           optional
           optionalTextClassName="sm:after:text-sm"
@@ -89,7 +90,7 @@ export const Retirement = ({ retiring }: Props) => {
             </Body>
           }
           {...register('anonymousPurchase')}
-        />
+        /> */}
       </Card>
       <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300 my-20">
         <Title variant="h6" className="flex items-center pb-30">

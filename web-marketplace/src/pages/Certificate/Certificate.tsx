@@ -78,7 +78,7 @@ function CertificatePage(): JSX.Element {
           container
           className={cn(
             classes.share,
-            'flex justify-center min-[675px]:justify-between',
+            'flex justify-center min-[675px]:justify-between print:hidden',
           )}
         >
           <Title

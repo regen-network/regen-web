@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import copyTextToClipboard from '../../utils/copy';
 import Banner from '../banner';
@@ -70,17 +71,21 @@ export default function ShareIcons({
 
   return (
     <>
-      <Grid container className={classes.root} spacing={4}>
+      <Grid container className={cn(classes.root, 'space-x-2 lg:space-x-4')}>
         <Grid item>
           <a
             href={`https://twitter.com/intent/tweet?url=${url}&text=${twitterShare}`}
             rel="noopener noreferrer"
             target="_blank"
-            className={classes.iconContainer}
+            className={cn(
+              classes.iconContainer,
+              'flex items-center justify-center',
+            )}
           >
             <TwitterIcon
               color={theme.palette.primary.main}
               hoverColor={theme.palette.secondary.main}
+              className="!w-25 md:!w-30"
             />
           </a>
         </Grid>

@@ -11,6 +11,7 @@ import PrintIcon from 'web-components/src/components/icons/PrintIcon';
 import ShareIcons from 'web-components/src/components/icons/ShareIcons';
 import { Title } from 'web-components/src/components/typography';
 import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
@@ -75,26 +76,28 @@ function CertificatePage(): JSX.Element {
       {certificateData && (
         <Grid
           container
-          className={classes.share}
-          alignItems="flex-end"
-          sx={{ displayPrint: 'none' }}
+          className={cn(
+            classes.share,
+            'flex justify-center min-[675px]:justify-between print:hidden',
+          )}
         >
-          <Grid item xs={12} md={6} sx={{ mb: { xs: 0, sm: 2 } }}>
-            <Title
-              variant="h4"
-              sx={{ pb: 3.75, textAlign: { xs: 'center', sm: 'inherit' } }}
-            >
-              <Trans>Share</Trans>
-            </Title>
+          <Title
+            className="w-full text-center sm:text-left"
+            variant="h4"
+            sx={{ pb: 3.75 }}
+          >
+            <Trans>Share</Trans>
+          </Title>
+          <Grid item sx={{ mb: { xs: 0, sm: 2 } }}>
             <ShareIcons
               xsSize={theme.spacing(10)}
               url={`${window.location.origin}/certificate/${id}`}
               copySuccessText={_(msg`Link copied to your clipboard`)}
             />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item className="md:flex md:justify-end">
             <OutlinedButton
-              className={classes.printButton}
+              className={cn(classes.printButton, 'ml-auto mt-20 sm:mt-0')}
               onClick={() => window.print()}
             >
               <PrintIcon className={classes.icon} />{' '}

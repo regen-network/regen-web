@@ -6,12 +6,30 @@ import { SocialCulturalValueType } from 'web-components/src/components/icons/ter
 
 import { IucnStatus } from 'lib/db/types/json-ld';
 
+const titles = {
+  IucnExtinct: 'Extinct',
+  IucnExtinctInWild: 'Extinct In Wild',
+  IucnCriticallyEndangered: 'Critically Endangered',
+  IucnEndangered: 'Endangered',
+  IucnVulnerable: 'Vulnerable',
+  IucnNearThreatened: 'Near Threatened',
+  IucnLeastConcern: 'Least Concern',
+  IucnDataDeficient: 'Data Deficient',
+  IucnNotEvaluated: 'Not Evaluated',
+};
+
 export type IucnMapType = Record<
   IucnStatus,
-  { type: IucnType; factor: string | number; description: JSX.Element }
+  {
+    title: string;
+    type: IucnType;
+    factor: string | number;
+    description: JSX.Element;
+  }
 >;
 export const iucnFactors: IucnMapType = {
   EXTINCT: {
+    title: titles[IucnType.IucnExtinct],
     type: IucnType.IucnExtinct,
     factor: 'n/a',
     description: (
@@ -22,6 +40,7 @@ export const iucnFactors: IucnMapType = {
     ),
   },
   EXTINCT_IN_WILD: {
+    title: titles[IucnType.IucnExtinctInWild],
     type: IucnType.IucnExtinctInWild,
     factor: 'n/a',
     description: (
@@ -33,6 +52,7 @@ export const iucnFactors: IucnMapType = {
     ),
   },
   CRITICALLY_ENDANGERED: {
+    title: titles[IucnType.IucnCriticallyEndangered],
     type: IucnType.IucnCriticallyEndangered,
     factor: 0.2,
     description: (
@@ -43,6 +63,7 @@ export const iucnFactors: IucnMapType = {
     ),
   },
   ENDANGERED: {
+    title: titles[IucnType.IucnEndangered],
     type: IucnType.IucnEndangered,
     factor: 0.18,
     description: (
@@ -54,6 +75,7 @@ export const iucnFactors: IucnMapType = {
     ),
   },
   VULNERABLE: {
+    title: titles[IucnType.IucnVulnerable],
     type: IucnType.IucnVulnerable,
     factor: 0.16,
     description: (
@@ -64,6 +86,7 @@ export const iucnFactors: IucnMapType = {
     ),
   },
   NEAR_THREATENED: {
+    title: titles[IucnType.IucnNearThreatened],
     type: IucnType.IucnNearThreatened,
     factor: 0.12,
     description: (
@@ -77,6 +100,7 @@ export const iucnFactors: IucnMapType = {
     ),
   },
   LEAST_CONCERN: {
+    title: titles[IucnType.IucnLeastConcern],
     type: IucnType.IucnLeastConcern,
     factor: 0.12,
     description: (
@@ -87,6 +111,7 @@ export const iucnFactors: IucnMapType = {
     ),
   },
   DATA_DEFICIENT: {
+    title: titles[IucnType.IucnDataDeficient],
     type: IucnType.IucnDataDeficient,
     factor: 0.12,
     description: (
@@ -100,6 +125,7 @@ export const iucnFactors: IucnMapType = {
     ),
   },
   NOT_EVALUATED: {
+    title: titles[IucnType.IucnNotEvaluated],
     type: IucnType.IucnNotEvaluated,
     factor: 'n/a',
     description: (

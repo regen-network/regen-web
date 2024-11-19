@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import cn from 'classnames';
 
 import Card from '../../cards/Card';
@@ -27,34 +26,32 @@ export default function TebuCard({
   return (
     <Card
       className={cn(
-        'text-sc-text-header w-full min-w-[250px] max-w-[330px] sm:max-w-[310px] font-montserrat border-sc-card-standard-stroke',
+        'text-sc-text-header w-full min-w-[250px] h-[239px] font-montserrat border-sc-card-standard-stroke relative',
         className,
       )}
     >
-      <Box className="flex items-center gap-[10px] pl-[20px] pr-[3px] sm:pr-[5px] py-[15px] text-[12px] bg-sc-card-standard-header-background">
+      <div className="flex items-center gap-[10px] pl-[20px] pr-[3px] sm:pr-[5px] py-[15px] text-[12px] bg-sc-card-standard-header-background">
         <Body className="tracking-[1px] text-[11px] sm:text-[12px] uppercase font-extrabold text-sc-text-sub-header">
           {header}
         </Body>
         {headerTooltip && (
           <InfoTooltip title={headerTooltip || ''} arrow placement="top">
-            <Box className="cursor-pointer m-0">
+            <div className="cursor-pointer m-0">
               <InfoIconOutlined className="-mb-3 w-[17px] h-[17px]" />
-            </Box>
+            </div>
           </InfoTooltip>
         )}
-      </Box>
-      <Box className="p-[20px]">
-        {children}
-        <Box className="flex flex-col items-end">
-          {footerLabels?.length &&
-            footerLabels.map(({ label, value }) => (
-              <Box className="flex items-center" key={label}>
-                <Body className="text-[12px]">{label}</Body>
-                <Body className="font-bold ml-3 text-[12px]">{value}</Body>
-              </Box>
-            ))}
-        </Box>
-      </Box>
+      </div>
+      <div className="p-[20px]">{children}</div>
+      <div className="absolute bottom-20 right-20">
+        {footerLabels?.length &&
+          footerLabels.map(({ label, value }) => (
+            <div className="flex items-center" key={label}>
+              <Body className="text-[12px]">{label}</Body>
+              <Body className="font-bold ml-3 text-[12px]">{value}</Body>
+            </div>
+          ))}
+      </div>
     </Card>
   );
 }

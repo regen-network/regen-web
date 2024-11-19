@@ -135,7 +135,6 @@ export const DetailsSection: React.FC<
               title={card?.credibilityCard?.title as string}
               descriptionRaw={card?.credibilityCard?.descriptionRaw}
               icon={card?.credibilityCard?.icon?.asset?.url}
-              overrideIconColor={!IS_REGEN}
               claims={
                 card?.claims?.map(claim => ({
                   description: claim?.description as string,

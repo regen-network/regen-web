@@ -40,7 +40,7 @@ export function getThreatCard(
         },
       ]}
     >
-      <ThreatBody title={title} type={type} description={description} />
+      <ThreatBody title={_(title)} type={type} description={description} />
     </TebuCard>
   );
 }

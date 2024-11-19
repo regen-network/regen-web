@@ -1,3 +1,4 @@
+import { MessageDescriptor } from '@lingui/core';
 import { msg, Trans } from '@lingui/macro';
 
 import { Level } from 'web-components/src/components/icons/terrasos/EcologicalConnectivityLevelIcon/EcologicalConnectivityLevelIcon';
@@ -7,21 +8,21 @@ import { SocialCulturalValueType } from 'web-components/src/components/icons/ter
 import { IucnStatus } from 'lib/db/types/json-ld';
 
 const titles = {
-  IucnExtinct: 'Extinct',
-  IucnExtinctInWild: 'Extinct In Wild',
-  IucnCriticallyEndangered: 'Critically Endangered',
-  IucnEndangered: 'Endangered',
-  IucnVulnerable: 'Vulnerable',
-  IucnNearThreatened: 'Near Threatened',
-  IucnLeastConcern: 'Least Concern',
-  IucnDataDeficient: 'Data Deficient',
-  IucnNotEvaluated: 'Not Evaluated',
+  IucnExtinct: msg`Extinct`,
+  IucnExtinctInWild: msg`Extinct In Wild`,
+  IucnCriticallyEndangered: msg`Critically Endangered`,
+  IucnEndangered: msg`Endangered`,
+  IucnVulnerable: msg`Vulnerable`,
+  IucnNearThreatened: msg`Near Threatened`,
+  IucnLeastConcern: msg`Least Concern`,
+  IucnDataDeficient: msg`Data Deficient`,
+  IucnNotEvaluated: msg`Not Evaluated`,
 };
 
 export type IucnMapType = Record<
   IucnStatus,
   {
-    title: string;
+    title: MessageDescriptor;
     type: IucnType;
     factor: string | number;
     description: JSX.Element;

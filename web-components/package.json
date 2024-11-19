@@ -82,7 +82,7 @@
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "tss-react": "4.4.1",
-    "victory": "^36.6.8",
+    "victory": "^37.3.2",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz",
     "yup": "^0.32.11",
     "zxcvbn": "^4.4.2"

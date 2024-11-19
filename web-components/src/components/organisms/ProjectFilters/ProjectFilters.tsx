@@ -84,7 +84,7 @@ export default function ProjectFilters({
                 </Box>
               )}
               {filter.displayType === 'checkbox' && (
-                <div className="flex flex-column flex-wrap">
+                <div className="flex flex-col">
                   {filter.options.map(({ name, icon, id }) => (
                     <CheckboxFilter
                       isSelected={activeFilterIds.includes(id)}
@@ -107,8 +107,6 @@ export default function ProjectFilters({
                 {isExpanded[index] ? labels.collapse : labels.expand}
               </ButtonBase>
             )}
-
-            <Divider sx={{ my: 5 }} />
           </Box>
         );
       })}

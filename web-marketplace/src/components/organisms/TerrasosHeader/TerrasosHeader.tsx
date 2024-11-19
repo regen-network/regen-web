@@ -1,9 +1,12 @@
 import { useMemo, useState } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { useAtomValue } from 'jotai';
 
 import BreadcrumbIcon from 'web-components/src/components/icons/BreadcrumbIcon';
 import { cn } from 'web-components/src/utils/styles/cn';
+
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 
 import HamburgerIcon from 'components/atoms/HumberIconTerrasos';
 import TerrasosLogo from 'components/atoms/TerrasosLogo';
@@ -21,7 +24,11 @@ export interface Props {
 
 export const TerrasosHeader = ({ className }: Props): JSX.Element => {
   const { _ } = useLingui();
-  const items = useMemo(() => getTerrasosHeaderItems(_), [_]);
+  const selectedLanguage = useAtomValue(selectedLanguageAtom);
+  const items = useMemo(
+    () => getTerrasosHeaderItems({ _, selectedLanguage }),
+    [_],
+  );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (

@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import { IS_REGEN } from 'lib/env';
 
 import isString from '../../../utils/isString';
 import { BlockContent } from '../../block-content';

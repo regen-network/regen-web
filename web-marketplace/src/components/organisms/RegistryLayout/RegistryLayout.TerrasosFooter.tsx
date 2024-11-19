@@ -1,5 +1,8 @@
 import React from 'react';
 import { useLingui } from '@lingui/react';
+import { useAtomValue } from 'jotai';
+
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 
 import TerrasosFooter from '../TerrasosFooter';
 import {
@@ -16,7 +19,11 @@ import {
 const RegistryLayoutTerrasosFooter: React.FC<React.PropsWithChildren<unknown>> =
   () => {
     const { _ } = useLingui();
-    const TerrasosColumnItems = getTerrasosFooterColumns(_);
+    const selectedLanguage = useAtomValue(selectedLanguageAtom);
+    const TerrasosColumnItems = getTerrasosFooterColumns({
+      _,
+      selectedLanguage,
+    });
 
     return (
       <TerrasosFooter

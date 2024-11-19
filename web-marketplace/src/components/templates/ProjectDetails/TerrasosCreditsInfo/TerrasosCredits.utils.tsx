@@ -50,7 +50,7 @@ export function getTerrasosCreditsTabs({
       ),
       hidden:
         !metadata ||
-        !projectMetadata?.['regen:marketType']?.includes('VOLUNTARY_MARKET'),
+        !metadata?.['regen:marketType']?.includes('VOLUNTARY_MARKET'),
     },
     {
       label: _(msg`Compliance Credits`),

@@ -1,6 +1,6 @@
 import React from 'react';
 import { msg } from '@lingui/macro';
-import { Box, ButtonBase } from '@mui/material';
+import { ButtonBase } from '@mui/material';
 import { useAtom } from 'jotai';
 
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
@@ -62,20 +62,11 @@ const TebuInfo: React.FC<TebuInfoProps> = ({
   const socialCulturalIndex = projectMetadata?.['regen:socialCulturalIndex'];
   const socialCulturalCard =
     false && getSocialCulturalCard(_, SocialCulturalValueType.High);
+
   return (
-    <Box
-      sx={{
-        px: '30px',
-        pb: '30px',
-        pt: '10px',
-        backgroundColor: 'primary.main',
-        border: '1px solid',
-        borderColor: 'info.light',
-        borderRadius: '0 0 8px 8px',
-      }}
-    >
+    <div className="px-30 pb-40 border-solid border border-sc-card-standard-stroke rounded-b-[10px] bg-card-standard-background">
       {!!projectBatchTotals && projectBatchTotals}
-      <div>
+      <div className={!projectBatchTotals ? 'mt-30 sm:mt-50' : undefined}>
         <div className="font-montserrat text-[32px] font-bold gap-[10px] flex items-center">
           {_(msg`Tebu factors`)}
           <img
@@ -106,7 +97,7 @@ const TebuInfo: React.FC<TebuInfoProps> = ({
           {socialCulturalCard}
         </div>
       </div>
-    </Box>
+    </div>
   );
 };
 

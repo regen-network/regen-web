@@ -27,7 +27,7 @@ export default function TebuCard({
   return (
     <Card
       className={cn(
-        'text-sc-text-header w-full min-w-[250px] max-w-[330px] sm:max-w-[310px] font-montserrat',
+        'text-sc-text-header w-full min-w-[250px] max-w-[330px] sm:max-w-[310px] font-montserrat border-sc-card-standard-stroke',
         className,
       )}
     >

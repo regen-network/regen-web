@@ -1,13 +1,12 @@
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { Box, ButtonBase, Grid } from '@mui/material';
+import { ButtonBase, Grid } from '@mui/material';
 
 import {
   BlockContent,
   SanityBlockContent,
 } from 'web-components/src/components/block-content';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
-import { pxToRem } from 'web-components/src/theme/muiTheme';
 import { LinkType } from 'web-components/src/types/shared/linkType';
 
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
@@ -40,17 +39,7 @@ const ComplianceInfo = ({
   const biomeType = projectMetadata?.['regen:biomeType'];
 
   return (
-    <Box
-      sx={{
-        px: pxToRem(30),
-        pb: pxToRem(30),
-        pt: pxToRem(10),
-        backgroundColor: 'primary.main',
-        border: '1px solid',
-        borderColor: 'info.light',
-        borderRadius: '0 0 8px 8px',
-      }}
-    >
+    <div className="px-30 pb-40 border-solid border border-sc-card-standard-stroke rounded-b-[10px] bg-card-standard-background">
       {!!complianceCredits && complianceCredits}
       <div>
         <div className="font-montserrat text-[32px] font-bold gap-[10px] flex items-center">
@@ -98,7 +87,7 @@ const ComplianceInfo = ({
         </Grid>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-[20px] mt-4 justify-items-center sm:justify-items-start"></div>
       </div>
-    </Box>
+    </div>
   );
 };
 

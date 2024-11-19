@@ -48,6 +48,7 @@ export function StoryText({
         text={_(READ)}
         lessText={_(LESS)}
         moreText={_(MORE)}
+        className="text-sc-text-link hover:text-sc-text-link"
       >
         {story}
       </ReadMore>

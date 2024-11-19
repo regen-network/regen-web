@@ -30,6 +30,7 @@ export interface ReadMoreProps {
   text: string;
   lessText: string;
   moreText: string;
+  className?: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -55,6 +56,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
   text,
   lessText,
   moreText,
+  className,
 }) => {
   const { classes: styles, cx } = useStyles();
   const [expanded, setExpanded] = useState(false);
@@ -66,7 +68,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
   );
   const Button: React.FC<React.PropsWithChildren<unknown>> = () => (
     <ExpandButton
-      className={classes?.button}
+      className={cx(classes?.button, className)}
       sx={{
         p: [0, 0],
         background: 'transparent',

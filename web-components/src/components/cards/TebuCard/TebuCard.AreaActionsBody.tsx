@@ -39,8 +39,6 @@ export default function AreaActions({
           <LineSegment
             style={{
               stroke: '#A5A4A4',
-              strokeDasharray: 1,
-              fill: 'none',
             }}
           />
         }
@@ -48,6 +46,7 @@ export default function AreaActions({
         labelIndicatorOuterOffset={15}
         labelComponent={
           <VictoryLabel
+            backgroundPadding={[{ bottom: 5 }, {}]}
             style={[
               {
                 fontWeight: '700',

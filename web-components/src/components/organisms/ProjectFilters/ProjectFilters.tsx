@@ -102,7 +102,7 @@ export default function ProjectFilters({
                 disableRipple
                 onClick={() => handleExpand(index)}
                 sx={{ fontWeight: '700' }}
-                className="text-sc-text-link"
+                className="text-sc-text-link uppercase"
               >
                 {isExpanded[index] ? labels.collapse : labels.expand}
               </ButtonBase>

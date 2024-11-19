@@ -209,7 +209,7 @@ const Projects = (): JSX.Element => {
         </div>
         <div
           className={cn(
-            'bg-ac-neutral-100 pt-25 sm:pt-40 px-15 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center',
+            'bg-ac-neutral-100 pt-25 sm:pt-40 px-15 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center h-fit',
             {
               'lg:justify-start grid-cols-[repeat(auto-fill,minmax(300px,350px))]':
                 IS_TERRASOS,

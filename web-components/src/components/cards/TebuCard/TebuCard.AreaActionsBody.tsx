@@ -32,8 +32,8 @@ export default function AreaActions({
         width={310}
         height={160}
         colorScale={colors}
-        startAngle={-90}
-        endAngle={270}
+        startAngle={-80}
+        endAngle={280}
         labels={({ datum }) => [datum.x, `${datum.y} ha.`]}
         labelIndicator={
           <LineSegment

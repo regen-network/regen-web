@@ -332,7 +332,10 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
               apiServerUrl={API_URI}
               truncateTitle={true}
-              sx={{ width: 400, height: 479 }}
+              sx={{
+                width: { xs: '100%', md: 400 },
+                height: 479,
+              }}
               track={track}
               isSoldOut={isSoldOut}
               creditsTooltip={getCreditsTooltip({

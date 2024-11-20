@@ -51,7 +51,7 @@ export default function TerrasosCreditsInfo({
         }}
         tabs={tabs}
         // eslint-disable-next-line lingui/no-unlocalized-strings
-        tabOuterClassName="border-sc-card-standard-stroke rounded-b-t-[10px]"
+        tabOuterClassName="border-sc-card-standard-stroke rounded-b-t-10"
       />
     </Box>
   ) : null;

@@ -30,7 +30,7 @@ export default function TebuCard({
         className,
       )}
     >
-      <div className="flex items-center gap-[10px] pl-[20px] pr-[3px] sm:pr-[5px] py-[15px] text-[12px] bg-sc-card-standard-header-background">
+      <div className="flex items-center gap-10 pl-20 pr-3 sm:pr-5 py-15 text-[12px] bg-sc-card-standard-header-background">
         <Body className="tracking-[1px] text-[11px] sm:text-[12px] uppercase font-extrabold text-sc-text-sub-header">
           {header}
         </Body>
@@ -42,7 +42,7 @@ export default function TebuCard({
           </InfoTooltip>
         )}
       </div>
-      <div className="p-[20px]">{children}</div>
+      <div className="p-20">{children}</div>
       <div className="absolute bottom-20 right-20">
         {footerLabels?.length &&
           footerLabels.map(({ label, value }) => (

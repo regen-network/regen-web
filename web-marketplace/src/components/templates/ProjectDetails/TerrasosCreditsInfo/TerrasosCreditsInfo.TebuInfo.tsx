@@ -73,7 +73,7 @@ const TebuInfo: React.FC<TebuInfoProps> = ({
       )}
       learnMoreLink={{ href: learnMoreLink, text: _(msg`Learn more`) }}
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-[20px] mt-4 justify-items-center sm:justify-items-start">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-20 mt-4 justify-items-center sm:justify-items-start">
         {threatCard}
         {connectivityCard}
         {durationCard}

@@ -12,6 +12,7 @@ import {
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { ProjectWithOrderData } from './AllProjects.types';
+import { COMPLIANCE_MARKET, VOLUNTARY_MARKET } from './AllProjects.constants';
 
 const ecosystemIconSx = {
   width: '30px',
@@ -135,7 +136,7 @@ export function getRegionTags(
 const marketCheckboxes = [
   {
     name: msg`Voluntary`,
-    id: 'VOLUNTARY_MARKET',
+    id: VOLUNTARY_MARKET,
     icon: (
       <Box
         component="img"
@@ -148,7 +149,7 @@ const marketCheckboxes = [
   },
   {
     name: msg`Compliance`,
-    id: 'COMPLIANCE_MARKET',
+    id: COMPLIANCE_MARKET,
     icon: (
       <div className="ml-[8px] w-[24px]">
         <HectaresBadge />

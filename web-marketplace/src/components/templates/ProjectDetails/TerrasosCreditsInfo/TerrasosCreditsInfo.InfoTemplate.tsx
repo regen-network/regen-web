@@ -24,7 +24,7 @@ export const InfoTemplate = ({
   children,
 }: InfoTemplateProps) => {
   return (
-    <div className="sm:px-30 px-20 pb-40 border-solid border border-sc-card-standard-stroke rounded-b-[10px] bg-card-standard-background">
+    <div className="sm:px-30 px-20 pb-40 border-solid border border-sc-card-standard-stroke rounded-b-10 bg-card-standard-background">
       {!!upperContent && upperContent}
       <div className={!upperContent ? 'mt-30 sm:mt-50' : undefined}>
         <div className="gap-[10px] flex items-center">

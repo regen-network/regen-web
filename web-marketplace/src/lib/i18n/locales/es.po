@@ -1958,7 +1958,7 @@ msgstr "Altamente significativo"
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:24
 msgid "Home"
-msgstr "Hogar"
+msgstr "Inicio"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:63
 msgid "How-to Articles"

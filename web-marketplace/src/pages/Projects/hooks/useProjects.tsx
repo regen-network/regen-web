@@ -26,6 +26,7 @@ export const useProjects = ({
   // get normalized projects with sell order data
   const {
     allProjects,
+    allOnChainProjects,
     haveOffChainProjects,
     projectsWithOrderData,
     projectsCount,
@@ -49,6 +50,7 @@ export const useProjects = ({
 
   return {
     allProjects,
+    allOnChainProjects,
     haveOffChainProjects,
     projects: projectsWithOrderData,
     projectsCount,

@@ -9,8 +9,10 @@ import Modal from 'web-components/src/components/modal';
 
 import { FILTERS_MODAL_BUTTON } from './AllProjects.constants';
 import ProjectFilterBody from './AllProjects.ProjectFilterBody';
+import { ProjectWithOrderData } from './AllProjects.types';
 
 type Props = {
+  allProjects: ProjectWithOrderData[];
   sx?: SxProps<Theme>;
   activeFilters: string[];
   setActiveFilters: (filters: string[]) => void;
@@ -20,6 +22,7 @@ type Props = {
 };
 
 const ProjectFilter = ({
+  allProjects,
   activeFilters,
   setActiveFilters,
   resetFilters,
@@ -55,7 +58,7 @@ const ProjectFilter = ({
       </OutlinedButton>
       <Modal open={isOpen} onClose={() => setIsOpen(false)} className="h-full">
         <ProjectFilterBody
-          className="h-full"
+          allProjects={allProjects}
           activeFilters={activeFilters}
           setActiveFilters={setActiveFilters}
           resetFilters={resetFilters}

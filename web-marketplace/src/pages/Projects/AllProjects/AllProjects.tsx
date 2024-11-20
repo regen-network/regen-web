@@ -151,6 +151,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const {
     allProjects,
+    allOnChainProjects,
     projects,
     projectsCount,
     haveOffChainProjects,
@@ -163,7 +164,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { creditClassFilters } = normalizeCreditClassFilters({
     creditClassesWithMetadata,
     sanityCreditClassesData,
-    allProjects,
+    allOnChainProjects,
     haveOffChainProjects,
     _,
   });
@@ -246,6 +247,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           )}
           {IS_TERRASOS && (
             <ProjectFilterMobile
+              allProjects={allProjects}
               activeFilters={activeFilterIds}
               setActiveFilters={setActiveFilters}
               resetFilters={resetFilters}

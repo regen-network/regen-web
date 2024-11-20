@@ -20,7 +20,7 @@ msgstr ""
 msgid "- see less"
 msgstr "- ver menos"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:57
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:51
 msgid "- See less"
 msgstr "- Ver menos"
 
@@ -145,7 +145,7 @@ msgstr "+ crear publicación"
 msgid "+ see more"
 msgstr "+ ver más"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:56
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:50
 msgid "+ See more"
 msgstr "+ Ver más"
 
@@ -258,8 +258,8 @@ msgstr "Un tercero que proporciona una evaluación independiente e imparcial del
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr "Un identificador único que rastrea y verifica una transacción específica en la cadena de bloques."
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:52
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:18
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:65
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:28
 msgid "About Us"
 msgstr "Sobre nosotros"
 
@@ -271,11 +271,11 @@ msgstr "¡Cambio de cuenta detectado!"
 msgid "Acres"
 msgstr "Acres"
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:118
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:125
 msgid "Act now"
 msgstr "Actúa ahora"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:82
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:95
 msgid "Act Now - Tebu"
 msgstr "Actúa ahora - Tebu"
 
@@ -394,7 +394,7 @@ msgid "all profiles"
 msgstr "Todos los perfiles"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
-#: src/pages/Projects/Projects.tsx:100
+#: src/pages/Projects/Projects.tsx:101
 msgid "All projects"
 msgstr "Todos los proyectos"
 
@@ -402,7 +402,7 @@ msgstr "Todos los proyectos"
 msgid "All uploaded files and their location data will be hidden from public view."
 msgstr "Todos los archivos cargados y sus datos de ubicación quedarán ocultos a la vista del público."
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:78
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:96
 msgid "Amazon"
 msgstr "Amazonas"
 
@@ -509,7 +509,7 @@ msgstr "Anclaje en proceso"
 msgid "and"
 msgstr "y"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:98
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:116
 msgid "Andean"
 msgstr "andino"
 
@@ -546,7 +546,7 @@ msgstr "¿Está seguro de que desea descartar los cambios?"
 msgid "Area Actions"
 msgstr "Acciones del Área"
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:57
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:67
 msgid "Articles"
 msgstr "Artículos"
 
@@ -856,7 +856,7 @@ msgstr "Norma de compensación de carbono"
 msgid "card info"
 msgstr "Información de la tarjeta"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:93
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:111
 msgid "Caribbean"
 msgstr "caribe"
 
@@ -868,7 +868,7 @@ msgstr "Las categorías de la Lista Roja de Ecosistemas de la UICN evalúan la s
 msgid "certificate"
 msgstr "certificado"
 
-#: src/pages/Certificate/Certificate.tsx:60
+#: src/pages/Certificate/Certificate.tsx:61
 msgid "certificate not found"
 msgstr "certificado no encontrado"
 
@@ -1025,7 +1025,7 @@ msgstr "Los créditos comunitarios son créditos que no han pasado por el <0>pro
 msgid "Complete"
 msgstr "Completo"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:127
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:150
 msgid "Compliance"
 msgstr "Cumplimiento"
 
@@ -1090,8 +1090,8 @@ msgstr "La conectividad permite el flujo de especies y procesos ecológicos que 
 msgid "Consumer/Individual/myself"
 msgstr "Consumidor/Individuo/yo mismo"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:73
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:69
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:86
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:79
 msgid "Contact"
 msgstr "Contacto"
 
@@ -1099,7 +1099,7 @@ msgstr "Contacto"
 msgid "Contributes minimally"
 msgstr "Contribuye mínimamente"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:103
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:116
 msgid "Cookies Policy"
 msgstr "Política de cookies"
 
@@ -1634,7 +1634,7 @@ msgid "Ecological Outcomes"
 msgstr "Resultados ecológicos"
 
 #: src/lib/constants/shared.constants.tsx:104
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:171
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:233
 msgid "Ecosystem"
 msgstr "Ecosistema"
 
@@ -1796,7 +1796,7 @@ msgstr "Explique el motivo por el cual está retirando estos créditos."
 msgid "Explore"
 msgstr "Explorar"
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:34
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:44
 msgid "Explore Banks"
 msgstr "Explorar bancos"
 
@@ -1863,7 +1863,7 @@ msgid "Files can still be shared privately via secret link."
 msgstr "Los archivos aún se pueden compartir de forma privada a través de un enlace secreto."
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:8
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:54
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:48
 msgid "Filters"
 msgstr "Filtros"
 
@@ -1894,7 +1894,7 @@ msgstr "Para administradores de tierras"
 msgid "Forestry-based credits"
 msgstr "Créditos basados en la silvicultura"
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:65
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:75
 msgid "Frequently Asked Questions"
 msgstr "Preguntas frecuentes"
 
@@ -1906,8 +1906,8 @@ msgstr "¡Fondos solicitados exitosamente!"
 msgid "Gallery photos"
 msgstr "Fotos de la galería"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:68
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:45
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:81
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:55
 msgid "Geo-Viewer"
 msgstr "Visor geográfico"
 
@@ -1923,8 +1923,8 @@ msgstr "Los pastizales se definen como tierras formadas por grandes áreas abier
 msgid "Grasslands-based credits"
 msgstr "Créditos basados en pastizales"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:60
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:26
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:73
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:36
 msgid "Habitat banks"
 msgstr "Bancos de hábitat"
 
@@ -1944,7 +1944,7 @@ msgstr "hectáreas"
 msgid "Hectares"
 msgstr "Hectáreas"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:51
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:58
 msgid "High andean forest"
 msgstr "Bosque altoandino"
 
@@ -1956,7 +1956,7 @@ msgstr "Pastoreo de alta densidad"
 msgid "Highly significant"
 msgstr "Altamente significativo"
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:14
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:24
 msgid "Home"
 msgstr "Hogar"
 
@@ -1998,7 +1998,7 @@ msgstr "Verifico que estos datos son exactos según mi leal saber y entender."
 msgid "i.e. Sunnybrook Farms"
 msgstr "es decir, Sunnybrook Farms"
 
-#: src/pages/Certificate/Certificate.tsx:65
+#: src/pages/Certificate/Certificate.tsx:66
 msgid "If you do not see your certificate within 24 hours, please reach out to <0>support@regen.network</0>."
 msgstr "Si no ve su certificado dentro de las 24 horas, comuníquese con <0>support@regen.network</0>."
 
@@ -2058,8 +2058,8 @@ msgstr "Individual"
 msgid "info with hand"
 msgstr "información con la mano"
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:30
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:49
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:40
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:59
 msgid "Information"
 msgstr "Información"
 
@@ -2193,7 +2193,7 @@ msgstr "Más información»"
 msgid "less"
 msgstr "menos"
 
-#: src/pages/Certificate/Certificate.tsx:92
+#: src/pages/Certificate/Certificate.tsx:95
 msgid "Link copied to your clipboard"
 msgstr "Enlace copiado al portapapeles"
 
@@ -2269,7 +2269,7 @@ msgstr "Iniciar sesión Correo electrónico"
 msgid "Long-form project story"
 msgstr "Historia del proyecto en formato largo"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:39
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:46
 msgid "Low montane very humid forest"
 msgstr "Bosque muy húmedo montano bajo"
 
@@ -2301,7 +2301,7 @@ msgstr "Hacer que los archivos y los datos de ubicación sean privados"
 msgid "Make the location data private"
 msgstr "Hacer que los datos de ubicación sean privados"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:177
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:239
 msgid "Market"
 msgstr "Mercado"
 
@@ -2484,7 +2484,7 @@ msgstr "Nueva publicación"
 msgid "new project admin"
 msgstr "nuevo administrador de proyecto"
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:53
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:63
 msgid "News"
 msgstr "Noticias"
 
@@ -2610,7 +2610,7 @@ msgstr "¡Ups! Página no encontrada."
 msgid "operator"
 msgstr "operador"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:86
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:99
 msgid "Opportunities"
 msgstr "Oportunidades"
 
@@ -2630,11 +2630,15 @@ msgstr "Organización"
 msgid "Organization Name"
 msgstr "Nombre de la organización"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:88
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:106
 msgid "Orinoco"
 msgstr "Orinoco"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:43
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:66
+msgid "Orinoco savanna"
+msgstr "Sabana del Orinoco"
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:50
 msgid "Orinoco savannah"
 msgstr "Sabana del Orinoco"
 
@@ -2642,7 +2646,7 @@ msgstr "Sabana del Orinoco"
 msgid "Other regenerative grazing practice"
 msgstr "Otras prácticas de pastoreo regenerativo"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:56
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:69
 msgid "Our Services"
 msgstr "Nuestros servicios"
 
@@ -2654,7 +2658,7 @@ msgstr "Descripción general"
 msgid "owner"
 msgstr "dueño"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:83
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:101
 msgid "Pacific"
 msgstr "Pacífico"
 
@@ -2820,7 +2824,7 @@ msgstr "Código Postal"
 msgid "Powered by"
 msgstr "Desarrollado por"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:90
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:103
 msgid "PQR Request"
 msgstr "Solicitud PQR"
 
@@ -2829,7 +2833,7 @@ msgid "prefinance"
 msgstr "prefinanciamiento"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:54
-#: src/pages/Projects/Projects.tsx:110
+#: src/pages/Projects/Projects.tsx:111
 msgid "Prefinance projects"
 msgstr "Proyectos de prefinanciación"
 
@@ -2837,7 +2841,7 @@ msgstr "Proyectos de prefinanciación"
 msgid "prefinance this project"
 msgstr "Prefinanciar este proyecto"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:35
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:42
 msgid "Premontane humid forest"
 msgstr "Bosque húmedo premontano"
 
@@ -2894,7 +2898,7 @@ msgstr "Precio por crédito"
 msgid "primary impact"
 msgstr "impacto primario"
 
-#: src/pages/Certificate/Certificate.tsx:101
+#: src/pages/Certificate/Certificate.tsx:104
 msgid "print certificate"
 msgstr "imprimir certificado"
 
@@ -2910,7 +2914,7 @@ msgstr "Antes de adoptar estas prácticas regenerativas (hace 5 años) ¿cómo u
 msgid "Privacy"
 msgstr "Privacidad"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:98
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:111
 msgid "Privacy Policy"
 msgstr "política de privacidad"
 
@@ -3148,7 +3152,7 @@ msgstr "Proyectos"
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr "Los proyectos deben tener una duración de al menos 20 años para garantizar resultados demostrables y cuantificables en biodiversidad. Tebu promueve proyectos que duren más tiempo, asegurando procesos ecológicos a largo plazo."
 
-#: src/pages/Projects/Projects.tsx:225
+#: src/pages/Projects/Projects.tsx:222
 msgid "projects tabs"
 msgstr "Pestañas de proyectos"
 
@@ -3156,7 +3160,7 @@ msgstr "Pestañas de proyectos"
 msgid "public profile tabs"
 msgstr "pestañas de perfil público"
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:61
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:71
 msgid "Publications"
 msgstr "Publicaciones"
 
@@ -3259,7 +3263,7 @@ msgstr "Dirección de la billetera REGEN"
 msgid "region"
 msgstr "región"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:166
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:228
 msgid "Region"
 msgstr "Región"
 
@@ -3307,7 +3311,7 @@ msgstr "Reenviar después de {resendTimeLeft} segundos."
 msgid "Resend email."
 msgstr "Reenviar correo electrónico."
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:55
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:49
 msgid "Reset"
 msgstr "Reiniciar"
 
@@ -3424,7 +3428,7 @@ msgstr "Motivo de jubilación"
 msgid "Review"
 msgstr "Revisar"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:47
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:54
 msgid "Riparian forest"
 msgstr "Bosque ripario"
 
@@ -3444,6 +3448,10 @@ msgstr "Pastoreo rotacional"
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.AddressUsedWithEmailModal.tsx:25
 msgid "sad bee"
 msgstr "abeja triste"
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:62
+msgid "Savanna"
+msgstr "Sabana"
 
 #: src/components/molecules/EditProjectPageFooter.tsx:86
 #: src/components/molecules/ProjectPageFooter.tsx:43
@@ -3576,7 +3584,7 @@ msgstr "Enviar créditos jubilatorios adicionales"
 msgid "Sender"
 msgstr "Remitente"
 
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:22
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:32
 msgid "Services"
 msgstr "Servicios"
 
@@ -3604,7 +3612,7 @@ msgid "share"
 msgstr "compartir"
 
 #: src/lib/constants/shared.constants.tsx:105
-#: src/pages/Certificate/Certificate.tsx:87
+#: src/pages/Certificate/Certificate.tsx:89
 msgid "Share"
 msgstr "Compartir"
 
@@ -3861,7 +3869,7 @@ msgstr "Cuente la historia más profunda de lo que hace que este proyecto sea es
 msgid "Terms"
 msgstr "Términos"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:94
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:107
 msgid "Terms and Conditions"
 msgstr "Términos y condiciones"
 
@@ -3993,7 +4001,7 @@ msgstr "Estos factores se utilizan para calcular los créditos emitidos para est
 msgid "This address is already linked to another account. Remove it from that account and connect it to yours?"
 msgstr "Esta dirección ya está vinculada a otra cuenta. ¿Quieres eliminarla de esa cuenta y conectarla a la tuya?"
 
-#: src/pages/Certificate/Certificate.tsx:62
+#: src/pages/Certificate/Certificate.tsx:63
 msgid "This certificate has not been generated yet because the credit transfer to you is still pending."
 msgstr "Este certificado aún no se ha generado porque la transferencia del crédito hacia usted aún está pendiente."
 
@@ -4187,15 +4195,19 @@ msgstr "Pastoreo tradicional"
 msgid "Transfer pending"
 msgstr "Transferencia pendiente"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:31
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:38
 msgid "Tropical dry forest"
 msgstr "Bosque seco tropical"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:27
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:26
+msgid "Tropical forest"
+msgstr "Bosque tropical"
+
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:34
 msgid "Tropical humid forest"
 msgstr "Bosque húmedo tropical"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:23
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:30
 msgid "Tropical very humid forest"
 msgstr "Bosque tropical muy húmedo"
 
@@ -4468,7 +4480,7 @@ msgstr "Visita nuestra página de inicio <0> En su lugar</0>"
 msgid "visit our homepage instead"
 msgstr "Visita nuestra página de inicio en su lugar"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:114
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:137
 msgid "Voluntary"
 msgstr "Voluntario"
 
@@ -4518,8 +4530,8 @@ msgstr "Le enviaremos su recibo a la dirección de correo electrónico que apare
 msgid "We've just sent a confirmation email to:"
 msgstr "Acabamos de enviar un correo electrónico de confirmación a:"
 
-#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:64
-#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:41
+#: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:77
+#: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:51
 msgid "What is Tebu"
 msgstr "¿Qué es Tebu?"
 

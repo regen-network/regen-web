@@ -1,6 +1,5 @@
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { SxProps, Theme } from '@mui/material';
 
 import ProjectFilters from 'web-components/src/components/organisms/ProjectFilters';
 
@@ -10,11 +9,10 @@ import {
   filterEcosystemIds,
   getFilters,
 } from './AllProjects.ProjectFilterBody.utils';
+import { ProjectWithOrderData } from './AllProjects.types';
 
 type Props = {
-  sx?: SxProps<Theme>;
-  className?: string;
-  style?: React.CSSProperties;
+  allProjects: ProjectWithOrderData[];
   activeFilters: string[];
   setActiveFilters: (filters: string[]) => void;
   resetFilters: () => void;
@@ -22,18 +20,15 @@ type Props = {
 };
 
 const ProjectFilterBody = ({
-  sx = [],
-  className = '',
-  style = {},
+  allProjects,
   activeFilters,
   setActiveFilters,
   resetFilters,
   showResetButton = true,
 }: Props) => {
   const { _ } = useLingui();
-
   const ecosystemIcons = useEcosystemTags(filterEcosystemIds);
-  const filters = getFilters(_, ecosystemIcons);
+  const filters = getFilters(_, ecosystemIcons, allProjects);
 
   const onFilterChange = (id: string) => {
     const newFilters = activeFilters.includes(id)
@@ -43,21 +38,19 @@ const ProjectFilterBody = ({
   };
 
   return (
-    <div>
-      <ProjectFilters
-        filters={filters}
-        activeFilterIds={activeFilters}
-        onFilterChange={onFilterChange}
-        onFilterReset={resetFilters}
-        showResetButton={showResetButton}
-        labels={{
-          title: _(msg`Filters`),
-          reset: _(msg`Reset`),
-          expand: _(msg`+ See more`),
-          collapse: _(msg`- See less`),
-        }}
-      />
-    </div>
+    <ProjectFilters
+      filters={filters}
+      activeFilterIds={activeFilters}
+      onFilterChange={onFilterChange}
+      onFilterReset={resetFilters}
+      showResetButton={showResetButton}
+      labels={{
+        title: _(msg`Filters`),
+        reset: _(msg`Reset`),
+        expand: _(msg`+ See more`),
+        collapse: _(msg`- See less`),
+      }}
+    />
   );
 };
 

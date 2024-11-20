@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import {
-  Box,
-  ButtonBase,
-  Collapse,
-  Divider,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Box, ButtonBase, Collapse, Divider } from '@mui/material';
 
 import TagFilter from './ProjectFilter.TagFilter';
 import CheckboxFilter from './ProjectFilters.CheckboxFilter';
@@ -46,8 +39,6 @@ export default function ProjectFilters({
   labels: ProjectFilterLabels;
   showResetButton?: boolean;
 }) {
-  const theme = useTheme();
-  const isXs = useMediaQuery(theme.breakpoints.down('sm'));
   const [isExpanded, setIsExpanded] = useState<Record<number, boolean>>({});
   const handleExpand = (index: number) => {
     setIsExpanded({ ...isExpanded, [index]: !isExpanded[index] });
@@ -76,7 +67,7 @@ export default function ProjectFilters({
                 // always show expanded for filter without hasCollapse
                 !filter.hasCollapse || (filter.hasCollapse && isExpanded[index])
               }
-              collapsedSize={isXs ? 110 : 110}
+              collapsedSize={filter.hasCollapse ? 110 : undefined}
             >
               {filter.displayType === 'tag' && (
                 <Box display="flex" flexWrap="wrap" gap={2} className="ml-1">

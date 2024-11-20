@@ -484,22 +484,22 @@ function ProjectDetails(): JSX.Element {
         sx={{ pt: { xs: 0 } }}
       />
 
+      <ProjectDetailsStakeholders
+        projectDeveloper={projectDeveloper}
+        projectVerifier={projectVerifier}
+        projectOwner={projectOwner}
+        projectOperator={projectOperator}
+        projectMonitor={projectMonitor}
+        program={program}
+        admin={admin}
+        partners={partners}
+      />
+
       <DetailsSection
         header={sanityProjectPage?.projectDetailsSection}
         credibilityCards={sanityProject?.credibilityCards}
         sx={{ pt: { xs: 0 } }}
-      >
-        <ProjectDetailsStakeholders
-          projectDeveloper={projectDeveloper}
-          projectVerifier={projectVerifier}
-          projectOwner={projectOwner}
-          projectOperator={projectOperator}
-          projectMonitor={projectMonitor}
-          program={program}
-          admin={admin}
-          partners={partners}
-        />
-      </DetailsSection>
+      />
 
       <DataStream
         adminAddr={offChainProject?.accountByAdminAccountId?.addr}

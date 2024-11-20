@@ -388,21 +388,23 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           </>
         </EmptyState>
       )}
-      <Flex
-        sx={{
-          gridColumn: '1/-1',
-          mt: pxToRem(28),
-          justifyContent: { xs: 'center', tablet: 'end' },
-        }}
-      >
-        <Pagination
-          count={pagesCount}
-          page={Number(routePage)}
-          onChange={(event, value) => navigate(`/projects/${value}`)}
-          size={isMobile ? 'small' : 'large'}
-          colorScheme={COLOR_SCHEME}
-        />
-      </Flex>
+      {pagesCount > 1 && (
+        <Flex
+          sx={{
+            gridColumn: '1/-1',
+            mt: pxToRem(28),
+            justifyContent: { xs: 'center', tablet: 'end' },
+          }}
+        >
+          <Pagination
+            count={pagesCount}
+            page={Number(routePage)}
+            onChange={(event, value) => navigate(`/projects/${value}`)}
+            size={isMobile ? 'small' : 'large'}
+            colorScheme={COLOR_SCHEME}
+          />
+        </Flex>
+      )}
     </>
   );
 };

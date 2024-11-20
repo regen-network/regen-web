@@ -43,6 +43,7 @@ export default function ProjectFilters({
   const handleExpand = (index: number) => {
     setIsExpanded({ ...isExpanded, [index]: !isExpanded[index] });
   };
+  const filtersLength = filters.length;
   return (
     <>
       <div className="justify-between items-baseline flex">
@@ -107,6 +108,7 @@ export default function ProjectFilters({
                 {isExpanded[index] ? labels.collapse : labels.expand}
               </ButtonBase>
             )}
+            {index !== filtersLength - 1 && <Divider sx={{ my: 5 }} />}
           </Box>
         );
       })}

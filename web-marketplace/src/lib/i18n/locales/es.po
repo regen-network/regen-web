@@ -177,19 +177,19 @@ msgstr "<0>Emisor de la clase de crédito:</0> entidad que puede emitir lotes de
 msgid "<0>drag and drop</0><1>or</1>"
 msgstr "<0>arrastrar y soltar</0><1>o</1>"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:109
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:112
 msgid "<0>Partners</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
 msgstr "Los <0>socios</0> pueden ofrecer un apoyo financiero crucial o supervisar el progreso y garantizar que se cumplan los estándares ambientales."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:47
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:50
 msgid "<0>Project admin:</0> the entity who can update a given project on the blockchain."
 msgstr "<0>Administrador del proyecto:</0> la entidad que puede actualizar un proyecto determinado en la cadena de bloques."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:57
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:60
 msgid "<0>Project developer:</0> the entity that is in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
 msgstr "<0>Desarrollador del proyecto:</0> entidad que se encarga de gestionar el proyecto. El desarrollador del proyecto puede ser el propietario del terreno, el administrador del terreno o un tercero."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:78
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:81
 msgid "<0>Verifier:</0> A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr "<0>Verificador:</0> Un tercero que proporciona una evaluación independiente e imparcial del plan del proyecto y de los informes del proyecto (que no es el monitor)."
 
@@ -213,7 +213,7 @@ msgstr "1 tonelada de CO2e"
 msgid "5MB max. Supported file types include text, spreadsheets, images, and video files."
 msgstr "Máximo de 5 MB. Los tipos de archivos admitidos incluyen texto, hojas de cálculo, imágenes y archivos de video."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:36
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:39
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:27
 msgid "A <0>program</0> involves the eligibility rules, monitoring and certification, and registration systems for credit trading and ownership tracking."
 msgstr "Un <0>programa</0> implica las reglas de elegibilidad, monitoreo y certificación, y sistemas de registro para el comercio de créditos y el seguimiento de la propiedad."
@@ -226,7 +226,7 @@ msgstr "Una breve descripción de su proyecto de impacto ecológico y de la prop
 msgid "A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
 msgstr "Un sistema de pastoreo controlado en el que el ganado se traslada con frecuencia entre las divisiones de pasturas o potreros en función de la calidad del forraje y las necesidades nutricionales del ganado. Las cercas portátiles permiten que cada potrero descanse y vuelva a crecer hasta la siguiente rotación de pastoreo."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:89
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:92
 msgid "A monitor tracks and verifies the environmental impact and performance of the project to ensure compliance and transparency."
 msgstr "Un monitor rastrea y verifica el impacto ambiental y el desempeño del proyecto para garantizar el cumplimiento y la transparencia."
 
@@ -234,11 +234,11 @@ msgstr "Un monitor rastrea y verifica el impacto ambiental y el desempeño del p
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
 msgstr "Un proyecto de desarrollo de <0>Regen Network<1/>, PBC</0>"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:68
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:71
 msgid "A project operator is responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
 msgstr "El operador del proyecto es responsable de implementar y gestionar el proyecto, garantizando que cumpla con los estándares regulatorios y de sostenibilidad."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:99
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:102
 msgid "A project owner manages the area of the conservation project and the associated biodiversity units."
 msgstr "El propietario del proyecto gestiona el área del proyecto de conservación y las unidades de biodiversidad asociadas."
 
@@ -361,7 +361,7 @@ msgstr "Información adicional"
 msgid "Address copied!"
 msgstr "¡Dirección copiada!"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:45
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:48
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:37
 #: src/pages/Post/Post.constants.ts:8
 msgid "admin"
@@ -2391,7 +2391,7 @@ msgstr "Mínimo 1 destinatario"
 msgid "Moderate"
 msgstr "Moderado"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:87
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:90
 msgid "monitor"
 msgstr "monitor"
 
@@ -2606,7 +2606,7 @@ msgstr "Sólo las ubicaciones de los archivos quedarán ocultas a la vista del p
 msgid "Oops! Page not found."
 msgstr "¡Ups! Página no encontrada."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:66
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:69
 msgid "operator"
 msgstr "operador"
 
@@ -2654,7 +2654,7 @@ msgstr "Nuestros servicios"
 msgid "Overview"
 msgstr "Descripción general"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:97
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:100
 msgid "owner"
 msgstr "dueño"
 
@@ -2662,7 +2662,7 @@ msgstr "dueño"
 msgid "Pacific"
 msgstr "Pacífico"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:107
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:110
 msgid "partners"
 msgstr "fogonadura"
 
@@ -2956,7 +2956,7 @@ msgstr "Perfil guardado"
 msgid "Profile type"
 msgstr "Tipo de perfil"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:34
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:37
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:24
 msgid "program"
 msgstr "programa"
@@ -3027,7 +3027,7 @@ msgstr "beneficio del proyecto"
 msgid "Project Design Document"
 msgstr "Documento de diseño del proyecto"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:55
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:58
 msgid "project developer"
 msgstr "Desarrollador de proyectos"
 
@@ -3035,7 +3035,7 @@ msgstr "Desarrollador de proyectos"
 msgid "Project Developer"
 msgstr "Desarrollador de proyectos"
 
-#: src/components/templates/ProjectDetails/tables/documentation/ProjectDetails.Documentation.tsx:49
+#: src/components/templates/ProjectDetails/tables/documentation/ProjectDetails.Documentation.tsx:50
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:27
 msgid "Project documentation"
 msgstr "Documentación del proyecto"
@@ -3721,6 +3721,10 @@ msgstr "Lo sentimos, su transacción no fue exitosa."
 msgid "Sort by:"
 msgstr "Ordenar por:"
 
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:134
+msgid "Stakeholders"
+msgstr "Partes interesadas"
+
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:82
 msgid "Start and end date"
 msgstr "Fecha de inicio y de fin"
@@ -4350,7 +4354,7 @@ msgstr "Informe de verificación"
 msgid "verification reports"
 msgstr "informes de verificación"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:76
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:79
 msgid "verifier"
 msgstr "verificador"
 

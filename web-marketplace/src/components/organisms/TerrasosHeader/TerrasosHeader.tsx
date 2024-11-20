@@ -27,7 +27,7 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
   const selectedLanguage = useAtomValue(selectedLanguageAtom);
   const items = useMemo(
     () => getTerrasosHeaderItems({ _, selectedLanguage }),
-    [_],
+    [_, selectedLanguage],
   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

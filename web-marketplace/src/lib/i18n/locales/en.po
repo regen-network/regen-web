@@ -180,19 +180,19 @@ msgstr ""
 msgid "<0>drag and drop</0><1>or</1>"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:109
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:112
 msgid "<0>Partners</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:47
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:50
 msgid "<0>Project admin:</0> the entity who can update a given project on the blockchain."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:57
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:60
 msgid "<0>Project developer:</0> the entity that is in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:78
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:81
 msgid "<0>Verifier:</0> A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr ""
 
@@ -216,7 +216,7 @@ msgstr ""
 msgid "5MB max. Supported file types include text, spreadsheets, images, and video files."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:36
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:39
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:27
 msgid "A <0>program</0> involves the eligibility rules, monitoring and certification, and registration systems for credit trading and ownership tracking."
 msgstr ""
@@ -229,7 +229,7 @@ msgstr ""
 msgid "A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:89
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:92
 msgid "A monitor tracks and verifies the environmental impact and performance of the project to ensure compliance and transparency."
 msgstr ""
 
@@ -237,11 +237,11 @@ msgstr ""
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:68
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:71
 msgid "A project operator is responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:99
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:102
 msgid "A project owner manages the area of the conservation project and the associated biodiversity units."
 msgstr ""
 
@@ -364,7 +364,7 @@ msgstr ""
 msgid "Address copied!"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:45
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:48
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:37
 #: src/pages/Post/Post.constants.ts:8
 msgid "admin"
@@ -2394,7 +2394,7 @@ msgstr ""
 msgid "Moderate"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:87
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:90
 msgid "monitor"
 msgstr ""
 
@@ -2609,7 +2609,7 @@ msgstr ""
 msgid "Oops! Page not found."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:66
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:69
 msgid "operator"
 msgstr ""
 
@@ -2657,7 +2657,7 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:97
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:100
 msgid "owner"
 msgstr ""
 
@@ -2665,7 +2665,7 @@ msgstr ""
 msgid "Pacific"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:107
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:110
 msgid "partners"
 msgstr ""
 
@@ -2959,7 +2959,7 @@ msgstr ""
 msgid "Profile type"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:34
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:37
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:24
 msgid "program"
 msgstr ""
@@ -3030,7 +3030,7 @@ msgstr ""
 msgid "Project Design Document"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:55
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:58
 msgid "project developer"
 msgstr ""
 
@@ -3038,7 +3038,7 @@ msgstr ""
 msgid "Project Developer"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/tables/documentation/ProjectDetails.Documentation.tsx:49
+#: src/components/templates/ProjectDetails/tables/documentation/ProjectDetails.Documentation.tsx:50
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:27
 msgid "Project documentation"
 msgstr ""
@@ -3724,6 +3724,10 @@ msgstr ""
 msgid "Sort by:"
 msgstr ""
 
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:134
+msgid "Stakeholders"
+msgstr ""
+
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:82
 msgid "Start and end date"
 msgstr ""
@@ -4353,7 +4357,7 @@ msgstr ""
 msgid "verification reports"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:76
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:79
 msgid "verifier"
 msgstr ""
 

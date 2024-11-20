@@ -11,6 +11,8 @@ import {
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
+import { ProjectWithOrderData } from './AllProjects.types';
+
 const ecosystemIconSx = {
   width: '30px',
   height: '30px',
@@ -18,7 +20,12 @@ const ecosystemIconSx = {
 };
 
 // TODO A more viable solution would be to get those from the actual data
+// once we use JSON-LD @id's for identifying ecosystem types instead of simple strings
 export const ecosystemTags = [
+  {
+    name: msg`Tropical forest`,
+    id: 'Tropical Forest',
+  },
   {
     name: msg`Tropical very humid forest`,
     id: 'Tropical Very Humid Forest',
@@ -51,6 +58,14 @@ export const ecosystemTags = [
     name: msg`High andean forest`,
     id: 'High Andean Forest',
   },
+  {
+    name: msg`Savanna`,
+    id: 'Savanna',
+  },
+  {
+    name: msg`Orinoco savanna`,
+    id: 'Orinoco Savanna',
+  },
 ];
 
 export const filterEcosystemIds = ecosystemTags.map(({ id }) => id);
@@ -58,19 +73,22 @@ export const filterEcosystemIds = ecosystemTags.map(({ id }) => id);
 export function getEcosystemTags(
   _: TranslatorType,
   ecosystemIcons: Record<string, string>,
+  ecosystemTypes: string[],
 ): FilterOptions[] {
-  return ecosystemTags.map(({ id, name }) => ({
-    name: _(name),
-    id: id,
-    icon: (
-      <SvgWithSelectedColor
-        src={ecosystemIcons[id]}
-        sx={ecosystemIconSx}
-        unselectedColor="rgba(var(--sc-icon-standard-disabled))"
-        selectedColor="rgba(var(--sc-icon-ecosystem-400))"
-      />
-    ),
-  }));
+  return ecosystemTags
+    .filter(tag => ecosystemTypes.includes(tag.id.toLowerCase()))
+    .map(({ id, name }) => ({
+      name: _(name),
+      id: id,
+      icon: (
+        <SvgWithSelectedColor
+          src={ecosystemIcons[id]}
+          sx={ecosystemIconSx}
+          unselectedColor="rgba(var(--sc-icon-standard-disabled))"
+          selectedColor="rgba(var(--sc-icon-ecosystem-400))"
+        />
+      ),
+    }));
 }
 
 export const regionTags = [
@@ -101,12 +119,17 @@ export const regionTags = [
   },
 ];
 
-export function getRegionTags(_: TranslatorType): FilterOptions[] {
-  return regionTags.map(({ name, id, icon }) => ({
-    name: _(name),
-    id: id,
-    icon: icon,
-  }));
+export function getRegionTags(
+  _: TranslatorType,
+  regions: string[],
+): FilterOptions[] {
+  return regionTags
+    .filter(tag => regions.includes(tag.id.toLowerCase()))
+    .map(({ name, id, icon }) => ({
+      name: _(name),
+      id: id,
+      icon: icon,
+    }));
 }
 
 const marketCheckboxes = [
@@ -134,12 +157,17 @@ const marketCheckboxes = [
   },
 ];
 
-function getMarketCheckboxes(_: TranslatorType): FilterOptions[] {
-  return marketCheckboxes.map(({ name, id, icon }) => ({
-    name: _(name),
-    id: id,
-    icon: icon,
-  }));
+function getMarketCheckboxes(
+  _: TranslatorType,
+  marketTypes: string[],
+): FilterOptions[] {
+  return marketCheckboxes
+    .filter(marketType => marketTypes.includes(marketType.id))
+    .map(({ name, id, icon }) => ({
+      name: _(name),
+      id: id,
+      icon: icon,
+    }));
 }
 
 export const initialActiveFilterKeysByType = {
@@ -156,26 +184,60 @@ export const initialActiveFilters = {
   ),
 };
 
+const extractUniqueValues = (
+  allProjects: ProjectWithOrderData[],
+  key: keyof ProjectWithOrderData,
+  toLowerCase: boolean,
+): string[] => {
+  return [
+    ...new Set(
+      allProjects.flatMap(
+        project =>
+          (toLowerCase
+            ? project[key]?.map((value: string) => value.toLowerCase())
+            : project[key]) || [],
+      ),
+    ),
+  ];
+};
+
 export function getFilters(
   _: TranslatorType,
   ecosystemIcons: Record<string, string>,
+  allProjects: ProjectWithOrderData[],
 ): Filter[] {
+  const uniqueRegions = [
+    ...new Set(
+      allProjects.map(project => project.region?.toLowerCase()).filter(Boolean),
+    ),
+  ] as string[];
+  const uniqueEcosystemTypes = extractUniqueValues(
+    allProjects,
+    'ecosystemType',
+    true,
+  );
+  const uniqueMarketTypes = extractUniqueValues(
+    allProjects,
+    'marketType',
+    false,
+  );
+
   return [
     {
       displayType: 'tag',
       title: _(msg`Region`),
-      options: getRegionTags(_),
+      options: getRegionTags(_, uniqueRegions),
     },
     {
       displayType: 'tag',
       title: _(msg`Ecosystem`),
-      options: getEcosystemTags(_, ecosystemIcons),
+      options: getEcosystemTags(_, ecosystemIcons, uniqueEcosystemTypes),
       hasCollapse: true,
     },
     {
       displayType: 'checkbox',
       title: _(msg`Market`),
-      options: getMarketCheckboxes(_),
+      options: getMarketCheckboxes(_, uniqueMarketTypes),
     },
   ];
 }

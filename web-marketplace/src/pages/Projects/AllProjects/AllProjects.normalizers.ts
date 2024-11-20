@@ -10,7 +10,7 @@ import {
 import { CreditClassFilter, ProjectWithOrderData } from './AllProjects.types';
 
 type NormalizeCreditClassesFilterParams = {
-  allProjects: ProjectWithOrderData[];
+  allOnChainProjects: ProjectWithOrderData[];
   sanityCreditClassesData?: AllCreditClassQuery;
   creditClassesWithMetadata?: CreditClassWithMedata[];
   haveOffChainProjects: boolean;
@@ -22,7 +22,7 @@ type NormalizeCreditClassFiltersResponse = {
 };
 
 export const normalizeCreditClassFilters = ({
-  allProjects,
+  allOnChainProjects,
   creditClassesWithMetadata,
   sanityCreditClassesData,
   haveOffChainProjects,
@@ -33,7 +33,7 @@ export const normalizeCreditClassFilters = ({
   );
 
   const creditClassesIdsWithProjects = [
-    ...new Set(allProjects.map(project => project.creditClassId)),
+    ...new Set(allOnChainProjects.map(project => project.creditClassId)),
   ];
 
   const creditClassFilters: CreditClassFilter[] =

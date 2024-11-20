@@ -74,6 +74,7 @@ const Projects = (): JSX.Element => {
 
   const {
     allProjects,
+    allOnChainProjects,
     haveOffChainProjects,
     projects,
     projectsCount,
@@ -178,7 +179,7 @@ const Projects = (): JSX.Element => {
       <div
         className={cn(
           {
-            'lg:grid grid-cols-[auto_minmax(300px,750px)] xl:grid-cols-[auto_minmax(300px,1120px)]':
+            'lg:grid grid-cols-[auto_minmax(310px,750px)] xl:grid-cols-[auto_minmax(310px,1120px)]':
               IS_TERRASOS,
           },
           { '': !IS_TERRASOS },
@@ -196,11 +197,7 @@ const Projects = (): JSX.Element => {
           })}
         >
           <ProjectFilterBody
-            className="h-full bg-ac-neutral-0 hidden md:block"
-            // shadow-[0_0_4px_rgba(0,0,0,0.1)]
-            // style={{
-            //   boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)',
-            // }}
+            allProjects={allProjects}
             activeFilters={activeFilterIds}
             setActiveFilters={setActiveFilters}
             resetFilters={resetFilters}
@@ -240,6 +237,7 @@ const Projects = (): JSX.Element => {
           <Outlet
             context={{
               allProjects,
+              allOnChainProjects,
               haveOffChainProjects,
               projects,
               projectsCount,

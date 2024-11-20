@@ -7,6 +7,7 @@ import { ProjectWithOrderData } from './AllProjects/AllProjects.types';
 
 type ProjectsContextType = {
   allProjects: ProjectWithOrderData[];
+  allOnChainProjects: ProjectWithOrderData[];
   prefinanceProjects: NormalizeProject[];
   projects: NormalizeProject[];
   projectsCount?: number;

@@ -150,7 +150,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [sort, setSort] = useAtom(projectsSortAtom);
 
   const {
-    allProjects,
+    allOnChainProjects,
     projects,
     projectsCount,
     haveOffChainProjects,
@@ -163,7 +163,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { creditClassFilters } = normalizeCreditClassFilters({
     creditClassesWithMetadata,
     sanityCreditClassesData,
-    allProjects,
+    allOnChainProjects,
     haveOffChainProjects,
     _,
   });

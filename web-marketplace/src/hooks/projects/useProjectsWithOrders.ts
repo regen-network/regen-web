@@ -25,10 +25,7 @@ import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/san
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import {
-  UNREGISTERED_PATH,
-  VOLUNTARY_MARKET,
-} from 'pages/Projects/AllProjects/AllProjects.constants';
+import { UNREGISTERED_PATH } from 'pages/Projects/AllProjects/AllProjects.constants';
 import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
   sortPinnedProject,
@@ -252,7 +249,7 @@ export function useProjectsWithOrders({
   );
 
   // Merge on-chain and off-chain projects
-  const allProject: Array<NormalizeProject | ProjectWithOrderData> = useMemo(
+  const allProjects: Array<NormalizeProject | ProjectWithOrderData> = useMemo(
     () =>
       creditClassFilter?.[UNREGISTERED_PATH] || useOffChainProjects
         ? [...projectsWithMetadataFiltered, ...onlyOffChainProjects]
@@ -285,7 +282,7 @@ export function useProjectsWithOrders({
 
   const projectsFilteredByCreditClass = useMemo(
     () =>
-      allProject
+      allProjects
         .filter(project => {
           return creditClassFilterKeys.length === 0
             ? true
@@ -315,7 +312,7 @@ export function useProjectsWithOrders({
           return hasMarketType && hasEnvironmentType && hasRegion;
         }),
     [
-      allProject,
+      allProjects,
       creditClassFilterKeys,
       creditClassSelected,
       marketTypeSelected,
@@ -439,7 +436,8 @@ export function useProjectsWithOrders({
   );
 
   return {
-    allProjects: projectsWithOrderData,
+    allProjects,
+    allOnChainProjects: projectsWithOrderData,
     prefinanceProjects,
     haveOffChainProjects: onlyOffChainProjects.length > 0,
     prefinanceProjectsCount: prefinanceProjects.length,

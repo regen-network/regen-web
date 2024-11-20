@@ -261,7 +261,7 @@ msgstr "Un identificador único que rastrea y verifica una transacción específ
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:65
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:28
 msgid "About Us"
-msgstr "Sobre nosotros"
+msgstr "Nosotros"
 
 #: src/components/organisms/AccountSwitchModal/AccountSwitchModal.constants.ts:3
 msgid "Account switch detected!"
@@ -273,7 +273,7 @@ msgstr "Acres"
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:125
 msgid "Act now"
-msgstr "Actúa ahora"
+msgstr "¡Actúa!"
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:95
 msgid "Act Now - Tebu"
@@ -1909,7 +1909,7 @@ msgstr "Fotos de la galería"
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:81
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:55
 msgid "Geo-Viewer"
-msgstr "Visor geográfico"
+msgstr "GeoVisor"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:348
 msgid "get started"
@@ -4533,7 +4533,7 @@ msgstr "Acabamos de enviar un correo electrónico de confirmación a:"
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:77
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:51
 msgid "What is Tebu"
-msgstr "¿Qué es Tebu?"
+msgstr "Qué es Tebu"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:7
 msgid "What your support enables"

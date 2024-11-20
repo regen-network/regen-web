@@ -11,8 +11,8 @@ import {
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
-import { ProjectWithOrderData } from './AllProjects.types';
 import { COMPLIANCE_MARKET, VOLUNTARY_MARKET } from './AllProjects.constants';
+import { ProjectWithOrderData } from './AllProjects.types';
 
 const ecosystemIconSx = {
   width: '30px',

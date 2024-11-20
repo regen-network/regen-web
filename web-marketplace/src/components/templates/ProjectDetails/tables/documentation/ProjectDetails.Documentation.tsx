@@ -17,6 +17,7 @@ import {
   ACTIONS_TABLE_ACTIONS_TEXT,
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
+import { IS_REGEN } from 'lib/env';
 
 import { DOCUMENTATION_ROW } from './ProjectDetails.Documentation.config';
 import { DOCUMENT, VIEW } from './ProjectDetails.Documentation.constants';
@@ -51,18 +52,23 @@ export const ProjectDetailsDocumentationTable = ({
       headerRows={DOCUMENTATION_ROW}
       rows={documents.map(document => getDocumentationTableRow({ document }))}
       sortCallbacks={sortCallbacks}
+      dark={IS_REGEN}
       renderActionButtons={(i: number) => (
         <OutlinedButton
           LinkComponent={Link}
           href={documents[i]?.url}
           target="_blank"
-          startIcon={<CertifiedDocumentIcon />}
+          startIcon={
+            <CertifiedDocumentIcon className="text-sc-icon-credibility-100-blue-green-gradient-500" />
+          }
           size="small"
         >
-          <Box>{VIEW}</Box>
-          <Box
-            sx={{ ml: 1, display: { xs: 'none', sm: 'block' } }}
-          >{`${DOCUMENT}`}</Box>
+          <div className="text-sc-icon-credibility-100-blue-green-gradient-500 flex items-center">
+            <Box>{VIEW}</Box>
+            <Box
+              sx={{ ml: 1, display: { xs: 'none', sm: 'block' } }}
+            >{`${DOCUMENT}`}</Box>
+          </div>
         </OutlinedButton>
       )}
       onTableChange={onTableChange}

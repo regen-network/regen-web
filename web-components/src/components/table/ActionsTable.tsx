@@ -69,6 +69,7 @@ interface ActionsTableProps {
   isIgnoreOffset?: boolean;
   actionButtonsText: string;
   labelDisplayedRows: TablePaginationProps['labelDisplayedRows'];
+  dark?: boolean;
   sx?: {
     root?: SxProps<Theme>;
   };
@@ -85,6 +86,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   renderActionButtons,
   onTableChange,
   labelDisplayedRows,
+  dark = true,
   sx,
 }) => {
   const {
@@ -235,6 +237,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
             <TableFooter sx={{ position: 'sticky', left: 0 }}>
               <TableRow>
                 <TablePagination
+                  dark={dark}
                   rowsPerPageOptions={[5, 10]}
                   rowsPerPage={rowsPerPage}
                   onChangeRowsPerPage={onChangeRowsPerPage}

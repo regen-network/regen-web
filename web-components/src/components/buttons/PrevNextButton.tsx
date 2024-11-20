@@ -20,7 +20,9 @@ const getTextColor = (
   if (dark) {
     return disabled ? theme.palette.info.light : theme.palette.primary.main;
   } else {
-    return disabled ? theme.palette.grey[400] : theme.palette.secondary.main;
+    return disabled
+      ? theme.palette.grey[400]
+      : 'rgba(var(--sc-icon-credibility-100-blue-green-gradient-500))';
   }
 };
 
@@ -36,7 +38,7 @@ const getBorderColor = (
     ? // eslint-disable-next-line lingui/no-unlocalized-strings
       `linear-gradient(${disabledColor}, ${disabledColor})`
     : // eslint-disable-next-line lingui/no-unlocalized-strings
-      'linear-gradient(204.4deg, rgba(var(--sc-gradient-heavy-gradient-600)) 5.94%, rgba(var(--sc-gradient-heavy-gradient-500)) 51.92%, rgba(var(--sc-gradient-heavy-gradient-400)) 97.89%)'
+      'linear-gradient(204.4deg, rgba(var(--sc-gradient-heavy-gradient-600)) 5.94%, rgba(var(--sc-gradient-heavy-gradient-500)) 51.92%, rgba(var(--sc-gradient-heavy-gradient-400)) 97.89%)';
 };
 
 const getBackgroundColor = (

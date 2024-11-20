@@ -332,7 +332,10 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
               imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
               apiServerUrl={API_URI}
               truncateTitle={true}
-              sx={{ width: 400, height: 479 }}
+              sx={{
+                width: { xs: '100%', md: 400 },
+                height: 479,
+              }}
               track={track}
               isSoldOut={isSoldOut}
               creditsTooltip={getCreditsTooltip({
@@ -385,21 +388,23 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           </>
         </EmptyState>
       )}
-      <Flex
-        sx={{
-          gridColumn: '1/-1',
-          mt: pxToRem(28),
-          justifyContent: { xs: 'center', tablet: 'end' },
-        }}
-      >
-        <Pagination
-          count={pagesCount}
-          page={Number(routePage)}
-          onChange={(event, value) => navigate(`/projects/${value}`)}
-          size={isMobile ? 'small' : 'large'}
-          colorScheme={COLOR_SCHEME}
-        />
-      </Flex>
+      {pagesCount > 1 && (
+        <Flex
+          sx={{
+            gridColumn: '1/-1',
+            mt: pxToRem(28),
+            justifyContent: { xs: 'center', tablet: 'end' },
+          }}
+        >
+          <Pagination
+            count={pagesCount}
+            page={Number(routePage)}
+            onChange={(event, value) => navigate(`/projects/${value}`)}
+            size={isMobile ? 'small' : 'large'}
+            colorScheme={COLOR_SCHEME}
+          />
+        </Flex>
+      )}
     </>
   );
 };

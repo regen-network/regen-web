@@ -21,7 +21,7 @@ const useStylesAction = makeStyles()((theme: Theme) => ({
 
 const TablePaginationActions = (props: any): any => {
   const { classes } = useStylesAction();
-  const { count, page, rowsPerPage, onPageChange } = props;
+  const { count, page, rowsPerPage, onPageChange, dark = true } = props;
   const pageTotal = Math.ceil(count / rowsPerPage);
 
   const handleBackButtonClick = (
@@ -44,13 +44,13 @@ const TablePaginationActions = (props: any): any => {
       className={classes.buttonsWrapper}
     >
       <PrevNextButton
-        dark
+        dark={dark}
         direction="prev"
         onClick={handleBackButtonClick}
         disabled={page === 0}
       />
       <PrevNextButton
-        dark
+        dark={dark}
         direction="next"
         onClick={handleNextButtonClick}
         disabled={page >= pageTotal - 1}
@@ -122,6 +122,7 @@ export interface TablePaginationProps {
   count: number;
   rowsPerPage: number;
   page: number;
+  dark?: boolean;
   onPageChange: (event: unknown, newPage: number) => void;
   onChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
   labelDisplayedRows?: MuiTablePaginationProps['labelDisplayedRows'];
@@ -139,7 +140,9 @@ export const TablePagination: React.FC<
       onPageChange={props.onPageChange}
       onRowsPerPageChange={props.onChangeRowsPerPage}
       labelDisplayedRows={props.labelDisplayedRows}
-      ActionsComponent={TablePaginationActions}
+      ActionsComponent={paginationProps => (
+        <TablePaginationActions {...paginationProps} dark={props.dark} />
+      )}
     />
   );
 };

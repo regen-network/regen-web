@@ -27,7 +27,7 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
   const selectedLanguage = useAtomValue(selectedLanguageAtom);
   const items = useMemo(
     () => getTerrasosHeaderItems({ _, selectedLanguage }),
-    [_],
+    [_, selectedLanguage],
   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -41,9 +41,9 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
       <div className="relative flex px-15 py-10 md:py-0 md:px-0 h-[62px] md:h-[72px] justify-between items-center md:max-w-[708px] lg:max-w-[940px] xl:max-w-[1220px] w-full mx-auto bg-brand-300 md:bg-ac-neutral-0">
         <a href="https://www.terrasos.co/">
           <TerrasosLogo
-            className="text-bc-neutral-0 lg:ml-[7px] md:text-brand-300 ml-[7px] pt-[5px]"
+            className="text-bc-neutral-0 lg:ml-[7px] md:text-brand-300 ml-[7px] pt-[6px]"
             width={190}
-            height={42}
+            height={44}
           />
         </a>
         <div className="flex items-center mb-5 md:mb-0 pr-25 md:pr-0">

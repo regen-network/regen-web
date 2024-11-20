@@ -33,6 +33,7 @@ interface IconTabsProps {
   hideIndicator?: boolean;
   mobileFullWidth?: boolean;
   className?: string;
+  tabOuterClassName?: string;
 }
 
 const StyledTabs = styled(Tabs, {
@@ -74,6 +75,7 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
   hideIndicator = false,
   mobileFullWidth = false,
   className,
+  tabOuterClassName,
 }) => {
   const [value, setValue] = useState(activeTab);
   const hasContent = tabs.some(tab => tab.content !== undefined);
@@ -98,6 +100,7 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
           ...sxs?.tab?.outer,
           mx: mobileFullWidth ? { xs: -4, sm: -10, md: 0 } : 0,
         }}
+        className={tabOuterClassName}
       >
         <StyledTabs
           value={value}

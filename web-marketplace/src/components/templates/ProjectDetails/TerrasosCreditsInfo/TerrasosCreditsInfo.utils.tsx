@@ -24,7 +24,7 @@ export function getThreatCard(
   _: TranslatorType,
   conservationStatus: IucnStatus,
 ): JSX.Element {
-  const { type, factor, description } = iucnFactors[conservationStatus];
+  const { title, type, factor, description } = iucnFactors[conservationStatus];
   const factorValue =
     typeof factor === 'number' ? factor.toString() : _(msg`factor`);
   return (
@@ -40,11 +40,7 @@ export function getThreatCard(
         },
       ]}
     >
-      <ThreatBody
-        title={_(msg`Threat Category of Ecosystem`)}
-        type={type}
-        description={description}
-      />
+      <ThreatBody title={_(title)} type={type} description={description} />
     </TebuCard>
   );
 }

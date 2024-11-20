@@ -7,6 +7,8 @@ import { ComplianceInfoQuery } from 'generated/sanity-graphql';
 import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
+import { VOLUNTARY_MARKET } from 'pages/Projects/AllProjects/AllProjects.constants';
+
 import ComplianceInfo from './TerrasosCreditsInfo.ComplianceInfo';
 import TebuInfo from './TerrasosCreditsInfo.TebuInfo';
 
@@ -50,7 +52,7 @@ export function getTerrasosCreditsTabs({
       ),
       hidden:
         !metadata ||
-        !projectMetadata?.['regen:marketType']?.includes('VOLUNTARY_MARKET'),
+        !metadata?.['regen:marketType']?.includes(VOLUNTARY_MARKET),
     },
     {
       label: _(msg`Compliance Credits`),

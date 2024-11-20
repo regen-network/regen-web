@@ -12,9 +12,10 @@ import { Theme } from 'web-components/src/theme/muiTheme';
 type Props = {
   sx?: SxProps<Theme>;
   tabs: IconTabProps[];
+  tabOuterClassName?: string;
 };
 
-export const TableTabs = ({ tabs, sx = [] }: Props) => {
+export const TableTabs = ({ tabs, sx = [], tabOuterClassName }: Props) => {
   const theme = useTheme();
   if (tabs.length === 0) {
     return null;
@@ -50,6 +51,7 @@ export const TableTabs = ({ tabs, sx = [] }: Props) => {
           },
           panel: { inner: { p: 0 } },
         }}
+        tabOuterClassName={tabOuterClassName}
       />
     </Box>
   );

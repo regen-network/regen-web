@@ -18,7 +18,7 @@ const ThreatBody: React.FC<ThreatBodyProps> = ({
     <Box className="flex gap-[10px]">
       <Box>{icon}</Box>
       <Box>
-        <Body className="font-montserrat text-[16px] mt-[12px] font-bold">
+        <Body className="font-montserrat text-[16px] mt-[12px] font-bold mb-5">
           {title}
         </Body>
         <Body className="font-montserrat text-[12px] pmb-[10px]">

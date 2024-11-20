@@ -98,7 +98,7 @@ msgstr "{remainingSummaryCharacters, plural, queda un {{remainingSummaryCharacte
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
 msgstr "{remainingTitleCharacters, plural, un {{remainingTitleCharacters} carácter restante} otros {{remainingTitleCharacters} caracteres restantes}}"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:115
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:111
 msgid "{years} year project duration"
 msgstr "{años} años de duración del proyecto"
 
@@ -242,11 +242,11 @@ msgstr "El operador del proyecto es responsable de implementar y gestionar el pr
 msgid "A project owner manages the area of the conservation project and the associated biodiversity units."
 msgstr "El propietario del proyecto gestiona el área del proyecto de conservación y las unidades de biodiversidad asociadas."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:28
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:48
 msgid "A taxon is extinct in the wild when it is known only to survive in cultivation, in captivity or as a naturalized population (or populations) well outside the past range."
 msgstr "Un taxón está extinto en estado silvestre cuando solo se sabe que sobrevive en cultivo, en cautiverio o como población (o poblaciones) naturalizadas muy fuera de su distribución anterior."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:18
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:37
 msgid "A taxon is extinct when there is no reasonable doubt that the last individual has died."
 msgstr "Un taxón está extinto cuando no hay duda razonable de que el último individuo ha muerto."
 
@@ -493,11 +493,11 @@ msgstr "Cantidad negociable"
 msgid "Amount Tradable"
 msgstr "Monto negociable"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:60
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:83
 msgid "An ecosystem considered to be facing a <0>high risk of collapse</0>."
 msgstr "Un ecosistema que se considera que enfrenta un <0>alto riesgo de colapso</0>."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:93
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:119
 msgid "An ecosystem has insufficient data when there is <0>no adequate information to make a direct or indirect assessment</0> of its risk of collapse."
 msgstr "Un ecosistema tiene datos insuficientes cuando <0>no hay información adecuada para hacer una evaluación directa o indirecta</0> de su riesgo de colapso."
 
@@ -542,7 +542,7 @@ msgstr "¿Estás seguro de que deseas eliminar esta publicación?"
 msgid "Are you sure you want to discard your changes?"
 msgstr "¿Está seguro de que desea descartar los cambios?"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:145
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:141
 msgid "Area Actions"
 msgstr "Acciones del Área"
 
@@ -671,7 +671,8 @@ msgid "BATCH START DATE"
 msgstr "FECHA DE INICIO DEL LOTE"
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:159
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:97
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:74
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:98
 msgid "biome"
 msgstr "bioma"
 
@@ -909,7 +910,7 @@ msgstr "Personaje"
 msgid "Check your wallet for a confirmation popup."
 msgstr "Revise su billetera para ver si aparece una ventana emergente de confirmación."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:60
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:47
 msgid "Checkmark list"
 msgstr "Lista de marcas de verificación"
 
@@ -1037,7 +1038,7 @@ msgstr "Créditos de cumplimiento"
 msgid "Compliance credits are mandatory to meet government regulations."
 msgstr "Los créditos de cumplimiento son obligatorios para cumplir con las regulaciones gubernamentales."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:57
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:45
 msgid "Compliance info"
 msgstr "Información de cumplimiento"
 
@@ -1082,7 +1083,7 @@ msgstr "Conectar billetera"
 msgid "Connect wallet address"
 msgstr "Conectar la dirección de la billetera"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:70
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:66
 msgid "Connectivity allows the flow of species and ecological processes that support biodiversity across a larger area. Tebu promotes projects that contribute to the restoration of maintenance of the ecological connectivity at a landscape scale."
 msgstr "La conectividad permite el flujo de especies y procesos ecológicos que sustentan la biodiversidad en un área más amplia. Tebu promueve proyectos que contribuyen a la restauración y el mantenimiento de la conectividad ecológica a escala del paisaje."
 
@@ -1095,7 +1096,7 @@ msgstr "Consumidor/Individuo/yo mismo"
 msgid "Contact"
 msgstr "Contacto"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:142
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:169
 msgid "Contributes minimally"
 msgstr "Contribuye mínimamente"
 
@@ -1344,7 +1345,7 @@ msgstr "Los créditos se mantienen en depósito en garantía cuando se crea una 
 msgid "credits available"
 msgstr "créditos disponibles"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:101
 msgid "Credits Available"
 msgstr "Créditos disponibles"
 
@@ -1384,7 +1385,7 @@ msgstr "¡Se han emitido los créditos!"
 msgid "Credits Input"
 msgstr "Entrada de créditos"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:79
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:82
 msgid "Credits issued"
 msgstr "Créditos emitidos"
 
@@ -1396,23 +1397,27 @@ msgstr "créditos comprados"
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr "Los créditos comprados con criptomonedas se pueden comprar en estado retirado o negociable."
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:78
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:81
 msgid "Credits Registered"
 msgstr "Créditos registrados"
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:120
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:123
 msgid "Credits Retired"
 msgstr "Créditos Retirados"
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:98
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:101
 msgid "Credits Tradable"
 msgstr "Créditos negociables"
 
 #: src/components/organisms/UserCredits.tsx:167
 msgid "credits you purchased"
 msgstr "créditos que compraste"
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:13
+msgid "Critically Endangered"
+msgstr "En peligro crítico de extinción"
 
 #: src/components/organisms/AdditionalityForm.tsx:198
 msgid "Cropland"
@@ -1459,6 +1464,10 @@ msgstr "Información del cliente"
 msgid "dashboard tabs"
 msgstr "Pestañas del panel de control"
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:18
+msgid "Data Deficient"
+msgstr "Datos deficientes"
+
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:16
 msgid "Data stream"
 msgstr "Flujo de datos"
@@ -1485,7 +1494,8 @@ msgid "Delivery dates may vary widely as this project is still in the early stag
 msgstr "Las fechas de entrega pueden variar ampliamente ya que este proyecto aún se encuentra en las primeras etapas de desarrollo."
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:152
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:78
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:55
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:79
 msgid "department"
 msgstr "departamento"
 
@@ -1616,7 +1626,7 @@ msgstr "Tabla de ecocréditos"
 msgid "ecocredits tradable"
 msgstr "ecocréditos negociables"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:68
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:64
 msgid "Ecological Connectivity Level"
 msgstr "Nivel de conectividad ecológica"
 
@@ -1638,7 +1648,7 @@ msgstr "Resultados ecológicos"
 msgid "Ecosystem"
 msgstr "Ecosistema"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:70
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:94
 msgid "Ecosystem that does not qualify for Critically Endangered, Endangered, or Vulnerable, but <0>likely to qualify for a threatened category in the near future.</0>"
 msgstr "Ecosistema que no califica para En Peligro Crítico, En Peligro o Vulnerable, pero <0>es probable que califique para una categoría amenazada en el futuro cercano.</0>"
 
@@ -1646,19 +1656,19 @@ msgstr "Ecosistema que no califica para En Peligro Crítico, En Peligro o Vulner
 msgid "ecosystem type"
 msgstr "tipo de ecosistema"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:39
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:60
 msgid "Ecosystem with declining areas, severe degradation, and disrupted processes facing an <0>extremely high collapse risk</0>."
 msgstr "Ecosistema con áreas en declive, degradación severa y procesos interrumpidos que enfrenta un <0>riesgo de colapso extremadamente alto</0>."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:106
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:133
 msgid "Ecosystems that have not yet been assessed. For these cases, the Protocol proposes an alternative that allows describing the conditions of the territory."
 msgstr "Ecosistemas que aún no han sido evaluados. Para estos casos, el Protocolo propone una alternativa que permita describir las condiciones del territorio."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:83
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:108
 msgid "Ecosystems that unequivocally do not meet any of the criteria for the threat categories."
 msgstr "Ecosistemas que inequívocamente no cumplen ninguno de los criterios de las categorías de amenaza."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:49
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:71
 msgid "Ecosystems where information about the levels of environmental degradation and disruption of biotic processes indicate that there is a<0>very high risk of collapse</0>."
 msgstr "Ecosistemas donde la información sobre los niveles de degradación ambiental y alteración de los procesos bióticos indican que existe un <0>riesgo muy alto de colapso</0>."
 
@@ -1723,7 +1733,7 @@ msgstr "Elegibilidad"
 msgid "eligible activities"
 msgstr "actividades elegibles"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:105
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:101
 msgid "Eligible projects implement preservation and/or restoration activities in different proportion/rates. Tebu recognizes restoration activities have a higher cost by assigning a greater value to restoration actions."
 msgstr "Los proyectos elegibles implementan actividades de conservación y/o restauración en diferentes proporciones/ritmos. Tebu reconoce que las actividades de restauración tienen un costo más alto al asignar un mayor valor a las acciones de restauración."
 
@@ -1744,6 +1754,10 @@ msgstr "Fecha de finalización"
 msgid "End Date"
 msgstr "Fecha de finalización"
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:14
+msgid "Endangered"
+msgstr "En peligro"
+
 #: src/components/organisms/Order/Order.Summary.tsx:148
 msgid "ending in"
 msgstr "terminando en"
@@ -1757,7 +1771,8 @@ msgid "Enter the wallet address here if this entity has a wallet address but has
 msgstr "Ingrese la dirección de billetera aquí si esta entidad tiene una dirección de billetera pero aún no se registró en Regen Marketplace. Asegúrese de que sea una dirección de billetera válida."
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:154
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:83
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:60
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:84
 msgid "environmental authority"
 msgstr "autoridad ambiental"
 
@@ -1800,14 +1815,22 @@ msgstr "Explorar"
 msgid "Explore Banks"
 msgstr "Explorar bancos"
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:11
+msgid "Extinct"
+msgstr "Extinguido"
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:12
+msgid "Extinct In Wild"
+msgstr "Extinto en estado salvaje"
+
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:29
 msgid "factor"
 msgstr "factor"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:38
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:74
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:109
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:186
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:70
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:105
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:182
 msgid "Factor:"
 msgstr "Factor:"
 
@@ -1952,7 +1975,7 @@ msgstr "Bosque altoandino"
 msgid "High density grazing"
 msgstr "Pastoreo de alta densidad"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:121
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:148
 msgid "Highly significant"
 msgstr "Altamente significativo"
 
@@ -2162,7 +2185,7 @@ msgstr "Aprende más"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:52
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:10
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:97
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:74
 msgid "Learn more"
 msgstr "Más información"
 
@@ -2188,6 +2211,10 @@ msgstr "Obtenga más información sobre las billeteras en nuestra <0>guía del u
 #: src/pages/ChooseCreditClass/ChooseCreditClass.config.tsx:10
 msgid "Learn more»"
 msgstr "Más información»"
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:17
+msgid "Least Concern"
+msgstr "Preocupación menor"
 
 #: src/lib/constants/shared.constants.tsx:111
 msgid "less"
@@ -2387,7 +2414,7 @@ msgstr "fecha de inicio mínima"
 msgid "Minimum of 1 recipient"
 msgstr "Mínimo 1 destinatario"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:135
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:162
 msgid "Moderate"
 msgstr "Moderado"
 
@@ -2467,6 +2494,10 @@ msgstr "Ecosistema natural, sin gestión"
 #: src/components/organisms/BasketDetailsActionsBar/BasketDetailsActionsBar.constants.ts:3
 msgid "NCT represents the first IBC-compatible carbon token to the Interchain economy, and launches via NCT: Regen and NCT: Osmo pools on the Osmosis exchange."
 msgstr "NCT representa el primer token de carbono compatible con IBC para la economía Interchain, y se lanza a través de los pools NCT: Regen y NCT: Osmo en el intercambio Osmosis."
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:16
+msgid "Near Threatened"
+msgstr "Casi amenazado"
 
 #: src/components/organisms/RolesForm/components/AdminModal/AdminModal.tsx:80
 msgid "New admin address"
@@ -2559,6 +2590,10 @@ msgstr "No lucrativo"
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.ConnectField.tsx:41
 msgid "Not connected"
 msgstr "No conectado"
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:19
+msgid "Not Evaluated"
+msgstr "No evaluado"
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:128
 msgid "Note / Link"
@@ -2845,11 +2880,11 @@ msgstr "Prefinanciar este proyecto"
 msgid "Premontane humid forest"
 msgstr "Bosque húmedo premontano"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:159
 msgid "Preservation"
 msgstr "Preservación"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:155
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:151
 msgid "Preservation Factor:"
 msgstr "Factor de conservación:"
 
@@ -3040,7 +3075,7 @@ msgstr "Desarrollador de proyectos"
 msgid "Project documentation"
 msgstr "Documentación del proyecto"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:103
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:99
 msgid "Project Duration"
 msgstr "Duración del proyecto"
 
@@ -3148,7 +3183,7 @@ msgstr "PROYECTADO:"
 msgid "Projects"
 msgstr "Proyectos"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:147
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:143
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr "Los proyectos deben tener una duración de al menos 20 años para garantizar resultados demostrables y cuantificables en biodiversidad. Tebu promueve proyectos que duren más tiempo, asegurando procesos ecológicos a largo plazo."
 
@@ -3259,7 +3294,8 @@ msgid "REGEN wallet address"
 msgstr "Dirección de la billetera REGEN"
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:151
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:76
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:53
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:77
 msgid "region"
 msgstr "región"
 
@@ -3333,11 +3369,11 @@ msgstr "Recursos"
 msgid "Resources for Getting Started"
 msgstr "Recursos para empezar"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:164
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:160
 msgid "Restoration"
 msgstr "Restauración"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:151
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:147
 msgid "Restoration Factor:"
 msgstr "Factor de restauración:"
 
@@ -3648,7 +3684,7 @@ msgstr "firma"
 msgid "Signed by"
 msgstr "Firmado por"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:128
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:155
 msgid "Significant"
 msgstr "Significativo"
 
@@ -3685,8 +3721,8 @@ msgstr "Pequeña o mediana empresa"
 msgid "Social Accounts"
 msgstr "Cuentas sociales"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:180
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:192
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:176
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:188
 msgid "Social and Cultural Index"
 msgstr "Índice social y cultural"
 
@@ -3796,7 +3832,8 @@ msgid "Story video or photo"
 msgstr "Historia en video o foto"
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:158
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:93
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:70
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:94
 msgid "sub-watershed"
 msgstr "subcuenca"
 
@@ -3845,7 +3882,7 @@ msgstr "tomar de la cesta"
 msgid "Take from basket"
 msgstr "Tomar de la cesta"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:83
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:70
 msgid "Tebu badge"
 msgstr "Insignia de bastón"
 
@@ -3857,7 +3894,7 @@ msgstr "Bandera de caña de azúcar."
 msgid "Tebu Credits"
 msgstr "Créditos de caña"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:80
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:68
 msgid "Tebu factors"
 msgstr "Factores de Tebu"
 
@@ -3907,10 +3944,10 @@ msgstr "El monto que se puede canjear es el mismo que el monto que se puede canj
 msgid "The caption message must be under {CAPTION_CHART_LIMIT} characters."
 msgstr "El mensaje de título debe tener menos de {CAPTION_CHART_LIMIT} caracteres."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:182
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:187
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:192
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:197
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:209
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:214
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:219
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:224
 msgid "The community has political and economic rights to the project"
 msgstr "La comunidad tiene derechos políticos y económicos sobre el proyecto."
 
@@ -3934,7 +3971,7 @@ msgstr "La dirección de correo electrónico que está utilizando para iniciar s
 msgid "The individual or organization that is in charge of managing the project and will appear on the project page."
 msgstr "La persona u organización que está a cargo de administrar el proyecto y aparecerá en la página del proyecto."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:182
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:178
 msgid "The integration of local communities' knowledge, social structures, and equitable participation to ensure both ecosystem conservation and community benefits."
 msgstr "La integración del conocimiento de las comunidades locales, las estructuras sociales y la participación equitativa para garantizar tanto la conservación del ecosistema como los beneficios comunitarios."
 
@@ -3997,7 +4034,7 @@ msgstr "Estos créditos serán un activo comercializable. Se podrán retirar má
 msgid "These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
 msgstr "Estos créditos se retirarán al momento de la compra y no se podrán canjear. La retirada es permanente e irreversible."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:89
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:72
 msgid "These factors are used to calculate the credits issued for this project."
 msgstr "Estos factores se utilizan para calcular los créditos emitidos para este proyecto."
 
@@ -4022,7 +4059,7 @@ msgstr "¡Este código ha expirado!"
 msgid "This data is on chain or anchored on chain via a content hash."
 msgstr "Estos datos están en cadena o anclados en la cadena a través de un hash de contenido."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:82
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:78
 msgid "This factor is used to calculate the credits issued for this project."
 msgstr "Este factor se utiliza para calcular los créditos emitidos para este proyecto."
 
@@ -4097,7 +4134,6 @@ msgid "This wallet address is already in use by another account."
 msgstr "Esta dirección de billetera ya está siendo utilizada por otra cuenta."
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:32
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:44
 msgid "Threat Category of Ecosystem"
 msgstr "Categoría de amenaza del ecosistema"
 
@@ -4492,6 +4528,10 @@ msgstr "Voluntario"
 msgid "Voluntary credits are purchased for environmental responsibility without legal obligation."
 msgstr "Los créditos voluntarios se compran por responsabilidad ambiental sin obligación legal."
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:15
+msgid "Vulnerable"
+msgstr "Vulnerable"
+
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:152
 msgid "Wallet integration"
 msgstr "Integración de billetera"
@@ -4501,7 +4541,8 @@ msgid "watch video"
 msgstr "ver video"
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:157
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:88
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:65
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:89
 msgid "watershed"
 msgstr "cuenca"
 

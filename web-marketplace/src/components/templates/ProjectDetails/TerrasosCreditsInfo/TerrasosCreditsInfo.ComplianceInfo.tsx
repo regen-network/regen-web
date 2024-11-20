@@ -1,18 +1,18 @@
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { Box, ButtonBase, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 
 import {
   BlockContent,
   SanityBlockContent,
 } from 'web-components/src/components/block-content';
-import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
-import { pxToRem } from 'web-components/src/theme/muiTheme';
 import { LinkType } from 'web-components/src/types/shared/linkType';
 
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
 import { MetaDetail } from 'components/molecules';
+
+import { InfoTemplate } from './TerrasosCreditsInfo.InfoTemplate';
 
 import ComplianceMarketIcon from 'assets/svgs/checkmarkList.svg';
 
@@ -40,38 +40,15 @@ const ComplianceInfo = ({
   const biomeType = projectMetadata?.['regen:biomeType'];
 
   return (
-    <Box
-      sx={{
-        px: pxToRem(30),
-        pb: pxToRem(30),
-        pt: pxToRem(10),
-        backgroundColor: 'primary.main',
-        border: '1px solid',
-        borderColor: 'info.light',
-        borderRadius: '0 0 8px 8px',
-      }}
+    <InfoTemplate
+      upperContent={complianceCredits}
+      title={_(msg`Compliance info`)}
+      imgSrc={ComplianceMarketIcon}
+      imgAlt={_(msg`Checkmark list`)}
+      description={<BlockContent content={description} />}
+      learnMoreLink={learnMoreLink}
     >
-      {!!complianceCredits && complianceCredits}
-      <div>
-        <div className="font-montserrat text-[32px] font-bold gap-[10px] flex items-center">
-          {_(msg`Compliance info`)}
-          <img
-            src={ComplianceMarketIcon}
-            alt={_(msg`Checkmark list`)}
-            className="h-[50px] w-[50px]"
-          />
-        </div>
-        <div className="my-10">
-          <BlockContent content={description} />
-        </div>
-        <ButtonBase
-          href={learnMoreLink.href}
-          target="_blank"
-          className="cursor-pointer font-montserrat text-sc-text-link font-extrabold text-[14px] tracking-[1px] uppercase mb-[30px]"
-        >
-          {learnMoreLink.text}
-          <SmallArrowIcon sx={{ width: '7px', ml: '4px' }} />
-        </ButtonBase>
+      <>
         <Grid container spacing={8}>
           <MetaDetail label={_(msg`region`)} value={region} bodySize="lg" />
           <MetaDetail
@@ -96,9 +73,32 @@ const ComplianceInfo = ({
           />
           <MetaDetail label={_(msg`biome`)} value={biomeType} bodySize="lg" />
         </Grid>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[20px] mt-4 justify-items-center sm:justify-items-start"></div>
-      </div>
-    </Box>
+        <Grid container spacing={8}>
+          <MetaDetail label={_(msg`region`)} value={region} bodySize="lg" />
+          <MetaDetail
+            label={_(msg`department`)}
+            value={department}
+            bodySize="lg"
+          />
+          <MetaDetail
+            label={_(msg`environmental authority`)}
+            value={environmentalAuthority}
+            bodySize="lg"
+          />
+          <MetaDetail
+            label={_(msg`watershed`)}
+            value={watershed}
+            bodySize="lg"
+          />
+          <MetaDetail
+            label={_(msg`sub-watershed`)}
+            value={subWatershed}
+            bodySize="lg"
+          />
+          <MetaDetail label={_(msg`biome`)} value={biomeType} bodySize="lg" />
+        </Grid>
+      </>
+    </InfoTemplate>
   );
 };
 

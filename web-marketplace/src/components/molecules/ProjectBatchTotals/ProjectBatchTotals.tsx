@@ -37,11 +37,13 @@ export function ProjectBatchTotals({
   projectWithOrderData,
   soldOutProjectsIds,
   sx = [],
+  className,
 }: {
   totals: BatchTotalsForProject;
   projectWithOrderData?: NormalizeProject;
   soldOutProjectsIds: string[];
   sx?: SxProps<Theme>;
+  className?: string;
 }): JSX.Element {
   const { _ } = useLingui();
   const isSoldOut = getIsSoldOut({
@@ -70,6 +72,7 @@ export function ProjectBatchTotals({
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
+      className={className}
     >
       <GridItem>
         <LabeledValue

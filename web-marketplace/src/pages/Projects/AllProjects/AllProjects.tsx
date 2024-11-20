@@ -150,6 +150,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [sort, setSort] = useAtom(projectsSortAtom);
 
   const {
+    allProjects,
     allOnChainProjects,
     projects,
     projectsCount,
@@ -246,6 +247,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           )}
           {IS_TERRASOS && (
             <ProjectFilterMobile
+              allProjects={allProjects}
               activeFilters={activeFilterIds}
               setActiveFilters={setActiveFilters}
               resetFilters={resetFilters}

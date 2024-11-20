@@ -43,7 +43,7 @@ export const TerrasosHeader = ({ className }: Props): JSX.Element => {
           <TerrasosLogo
             className="text-bc-neutral-0 lg:ml-[7px] md:text-brand-300 ml-[7px] pt-[6px]"
             width={190}
-            height={43}
+            height={44}
           />
         </a>
         <div className="flex items-center mb-5 md:mb-0 pr-25 md:pr-0">

@@ -97,11 +97,12 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
     },
     {
       accounts: projectOwner,
-      title: _(msg`owner`),
+      title: _(msg`custodian`),
       tooltip: (
         <Trans>
-          A project owner manages the area of the conservation project and the
-          associated biodiversity units.
+          The Custodian is the project landowner and has historically managed
+          the territory. It is now part of the project stakeholders and receives
+          benefits from project success.
         </Trans>
       ),
     },

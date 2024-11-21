@@ -16,6 +16,9 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+msgid ""
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -177,7 +180,7 @@ msgstr "<0>Emisor de la clase de crédito:</0> entidad que puede emitir lotes de
 msgid "<0>drag and drop</0><1>or</1>"
 msgstr "<0>arrastrar y soltar</0><1>o</1>"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:112
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:113
 msgid "<0>Partners</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
 msgstr "Los <0>socios</0> pueden ofrecer un apoyo financiero crucial o supervisar el progreso y garantizar que se cumplan los estándares ambientales."
 
@@ -239,8 +242,8 @@ msgid "A project operator is responsible for implementing and managing the proje
 msgstr "El operador del proyecto es responsable de implementar y gestionar el proyecto, garantizando que cumpla con los estándares regulatorios y de sostenibilidad."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:102
-msgid "A project owner manages the area of the conservation project and the associated biodiversity units."
-msgstr "El propietario del proyecto gestiona el área del proyecto de conservación y las unidades de biodiversidad asociadas."
+#~ msgid "A project owner manages the area of the conservation project and the associated biodiversity units."
+#~ msgstr "El propietario del proyecto gestiona el área del proyecto de conservación y las unidades de biodiversidad asociadas."
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:48
 msgid "A taxon is extinct in the wild when it is known only to survive in cultivation, in captivity or as a naturalized population (or populations) well outside the past range."
@@ -371,7 +374,7 @@ msgstr "administración"
 #: src/components/organisms/CreditClassForms/CreditClassReview.tsx:29
 #: src/components/organisms/RolesForm/RolesForm.tsx:255
 msgid "Admin"
-msgstr "Administración"
+msgstr "Admin"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:37
 msgid "Advanced settings"
@@ -402,7 +405,7 @@ msgstr "Todos los proyectos"
 msgid "All uploaded files and their location data will be hidden from public view."
 msgstr "Todos los archivos cargados y sus datos de ubicación quedarán ocultos a la vista del público."
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:96
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:97
 msgid "Amazon"
 msgstr "Amazonas"
 
@@ -509,7 +512,7 @@ msgstr "Anclaje en proceso"
 msgid "and"
 msgstr "y"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:116
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:117
 msgid "Andean"
 msgstr "andino"
 
@@ -857,7 +860,7 @@ msgstr "Norma de compensación de carbono"
 msgid "card info"
 msgstr "Información de la tarjeta"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:111
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:112
 msgid "Caribbean"
 msgstr "caribe"
 
@@ -1026,11 +1029,11 @@ msgstr "Los créditos comunitarios son créditos que no han pasado por el <0>pro
 msgid "Complete"
 msgstr "Completo"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:150
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:151
 msgid "Compliance"
 msgstr "Cumplimiento"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:56
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:58
 msgid "Compliance Credits"
 msgstr "Créditos de cumplimiento"
 
@@ -1451,6 +1454,10 @@ msgstr "cuenta corriente"
 msgid "Current admin address"
 msgstr "Dirección de administración actual"
 
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:100
+msgid "custodian"
+msgstr "Custodio"
+
 #: src/components/organisms/SettingsForm/SettingsForm.tsx:112
 msgid "Custom url"
 msgstr "URL personalizada"
@@ -1644,7 +1651,7 @@ msgid "Ecological Outcomes"
 msgstr "Resultados ecológicos"
 
 #: src/lib/constants/shared.constants.tsx:104
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:233
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:234
 msgid "Ecosystem"
 msgstr "Ecosistema"
 
@@ -1967,7 +1974,7 @@ msgstr "hectáreas"
 msgid "Hectares"
 msgstr "Hectáreas"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:58
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:59
 msgid "High andean forest"
 msgstr "Bosque altoandino"
 
@@ -2296,7 +2303,7 @@ msgstr "Iniciar sesión Correo electrónico"
 msgid "Long-form project story"
 msgstr "Historia del proyecto en formato largo"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:46
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:47
 msgid "Low montane very humid forest"
 msgstr "Bosque muy húmedo montano bajo"
 
@@ -2328,7 +2335,7 @@ msgstr "Hacer que los archivos y los datos de ubicación sean privados"
 msgid "Make the location data private"
 msgstr "Hacer que los datos de ubicación sean privados"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:239
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:240
 msgid "Market"
 msgstr "Mercado"
 
@@ -2665,15 +2672,15 @@ msgstr "Organización"
 msgid "Organization Name"
 msgstr "Nombre de la organización"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:106
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:107
 msgid "Orinoco"
 msgstr "Orinoco"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:66
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:67
 msgid "Orinoco savanna"
 msgstr "Sabana del Orinoco"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:50
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:51
 msgid "Orinoco savannah"
 msgstr "Sabana del Orinoco"
 
@@ -2690,14 +2697,14 @@ msgid "Overview"
 msgstr "Descripción general"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:100
-msgid "owner"
-msgstr "dueño"
+#~ msgid "owner"
+#~ msgstr "dueño"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:101
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:102
 msgid "Pacific"
 msgstr "Pacífico"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:110
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:111
 msgid "partners"
 msgstr "fogonadura"
 
@@ -2876,7 +2883,7 @@ msgstr "Proyectos de prefinanciación"
 msgid "prefinance this project"
 msgstr "Prefinanciar este proyecto"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:42
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:43
 msgid "Premontane humid forest"
 msgstr "Bosque húmedo premontano"
 
@@ -3299,7 +3306,7 @@ msgstr "Dirección de la billetera REGEN"
 msgid "region"
 msgstr "región"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:228
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:229
 msgid "Region"
 msgstr "Región"
 
@@ -3464,7 +3471,7 @@ msgstr "Motivo de jubilación"
 msgid "Review"
 msgstr "Revisar"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:54
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:55
 msgid "Riparian forest"
 msgstr "Bosque ripario"
 
@@ -3485,7 +3492,7 @@ msgstr "Pastoreo rotacional"
 msgid "sad bee"
 msgstr "abeja triste"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:62
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:63
 msgid "Savanna"
 msgstr "Sabana"
 
@@ -3753,11 +3760,11 @@ msgstr "Lo sentimos, no tienes REGEN para cubrir las tarifas de transacción"
 msgid "Sorry, your transaction was not successful."
 msgstr "Lo sentimos, su transacción no fue exitosa."
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:280
+#: src/pages/Projects/AllProjects/AllProjects.tsx:282
 msgid "Sort by:"
 msgstr "Ordenar por:"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:134
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:135
 msgid "Stakeholders"
 msgstr "Partes interesadas"
 
@@ -3888,11 +3895,11 @@ msgstr "Insignia de bastón"
 
 #: src/components/molecules/TebuBanner/TebuBanner.tsx:43
 msgid "Tebu banner"
-msgstr "Bandera de caña de azúcar."
+msgstr "Bandera Tebu de azúcar."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:43
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:45
 msgid "Tebu Credits"
-msgstr "Créditos de caña"
+msgstr "Créditos Tebu"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:68
 msgid "Tebu factors"
@@ -3900,7 +3907,7 @@ msgstr "Factores de Tebu"
 
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:15
 msgid "Tebu logo"
-msgstr "Logotipo de caña de azúcar"
+msgstr "Logotipo Tebu"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.constants.ts:14
 msgid "Tell the deeper story of what makes this project special. Describe the land stewards and why they do this work, the ecological impacts (plants, animals, ecosystems), and social impacts (community, jobs, health)."
@@ -3958,6 +3965,10 @@ msgstr "El creador de esta cesta ha decidido que todos los créditos deben ser r
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:19
 msgid "The current address is already linked to your account.\\nPlease first switch wallet addresses in the Keplr app to be able to add another address to your account."
 msgstr "La dirección actual ya está vinculada a su cuenta. Primero cambie las direcciones de billetera en la aplicación Keplr para poder agregar otra dirección a su cuenta."
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:102
+msgid "The Custodian is the project landowner and has historically managed the territory. It is now part of the project stakeholders and receives benefits from project success."
+msgstr "El Custodio es el propietario del terreno del proyecto e históricamente ha administrado dicho territorio. Ahora es parte de las partes interesadas del proyecto y recibe beneficios del éxito del proyecto."
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:220
 msgid "The dates should correspond to the batch monitoring period or vintage."
@@ -4235,19 +4246,19 @@ msgstr "Pastoreo tradicional"
 msgid "Transfer pending"
 msgstr "Transferencia pendiente"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:38
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:39
 msgid "Tropical dry forest"
 msgstr "Bosque seco tropical"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:26
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:27
 msgid "Tropical forest"
 msgstr "Bosque tropical"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:34
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:35
 msgid "Tropical humid forest"
 msgstr "Bosque húmedo tropical"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:30
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:31
 msgid "Tropical very humid forest"
 msgstr "Bosque tropical muy húmedo"
 
@@ -4520,7 +4531,7 @@ msgstr "Visita nuestra página de inicio <0> En su lugar</0>"
 msgid "visit our homepage instead"
 msgstr "Visita nuestra página de inicio en su lugar"
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:137
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:138
 msgid "Voluntary"
 msgstr "Voluntario"
 

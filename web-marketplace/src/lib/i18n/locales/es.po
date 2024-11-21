@@ -16,9 +16,6 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -176,25 +173,57 @@ msgstr "<0>Administrador de clase de crédito:</0> la entidad que puede actualiz
 msgid "<0>Credit class issuer:</0> the entity who can issue credit batches under the given credit class."
 msgstr "<0>Emisor de la clase de crédito:</0> entidad que puede emitir lotes de créditos bajo la clase de crédito dada."
 
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:104
+msgid "<0>Custodian:</0> The entity, also the project landowner, who has historically managed the territory. It is now part of the project stakeholders and receives benefits from project success."
+msgstr "<0>Custodio:</0> Entidad, también propietaria del proyecto, que históricamente ha administrado dicho territorio. Ahora es parte de las partes interesadas del proyecto y recibe beneficios del éxito del proyecto."
+
 #: src/components/atoms/DragAndDropLabel.tsx:6
 msgid "<0>drag and drop</0><1>or</1>"
 msgstr "<0>arrastrar y soltar</0><1>o</1>"
 
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:93
+msgid "<0>Monitor:</0> The entity who tracks and verifies the environmental impact and performance of the project to ensure compliance and transparency."
+msgstr "<0>Monitor:</0> Entidad que da seguimiento y verifica el impacto ambiental y el desempeño del proyecto para garantizar el cumplimiento y la transparencia."
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:115
+msgid "<0>Partners:</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
+msgstr "<0>Socios:</0> pueden ofrecer apoyo financiero crucial o supervisar el progreso y garantizar que se cumplan los estándares ambientales."
+
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:113
-msgid "<0>Partners</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
-msgstr "Los <0>socios</0> pueden ofrecer un apoyo financiero crucial o supervisar el progreso y garantizar que se cumplan los estándares ambientales."
+#~ msgid "<0>Partners</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
+#~ msgstr "Los <0>socios</0> pueden ofrecer un apoyo financiero crucial o supervisar el progreso y garantizar que se cumplan los estándares ambientales."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:50
-msgid "<0>Project admin:</0> the entity who can update a given project on the blockchain."
-msgstr "<0>Administrador del proyecto:</0> la entidad que puede actualizar un proyecto determinado en la cadena de bloques."
+#~ msgid "<0>Project admin:</0> the entity who can update a given project on the blockchain."
+#~ msgstr "<0>Administrador del proyecto:</0> la entidad que puede actualizar un proyecto determinado en la cadena de bloques."
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:50
+msgid "<0>Project admin:</0> The entity who can update a given project on the blockchain."
+msgstr "<0>Administrador del proyecto:</0> La entidad que puede actualizar un proyecto determinado en la cadena de bloques."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:60
-msgid "<0>Project developer:</0> the entity that is in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
-msgstr "<0>Desarrollador del proyecto:</0> entidad que se encarga de gestionar el proyecto. El desarrollador del proyecto puede ser el propietario del terreno, el administrador del terreno o un tercero."
+msgid "<0>Project developer:</0> The entity in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
+msgstr "<0>Desarrollador del proyecto:</0> Entidad encargada de gestionar el proyecto. El desarrollador del proyecto puede ser el propietario del terreno, el administrador del terreno o un tercero."
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:60
+#~ msgid "<0>Project developer:</0> the entity that is in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
+#~ msgstr "<0>Desarrollador del proyecto:</0> entidad que se encarga de gestionar el proyecto. El desarrollador del proyecto puede ser el propietario del terreno, el administrador del terreno o un tercero."
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:71
+msgid "<0>Project operator:</0> The entity responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
+msgstr "<0>Operador del proyecto:</0> Entidad responsable de implementar y gestionar el proyecto, garantizando que cumpla con los estándares regulatorios y de sostenibilidad."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:81
-msgid "<0>Verifier:</0> A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
-msgstr "<0>Verificador:</0> Un tercero que proporciona una evaluación independiente e imparcial del plan del proyecto y de los informes del proyecto (que no es el monitor)."
+#~ msgid "<0>Verifier:</0> A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
+#~ msgstr "<0>Verificador:</0> Un tercero que proporciona una evaluación independiente e imparcial del plan del proyecto y de los informes del proyecto (que no es el monitor)."
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:82
+#~ msgid "<0>Verifier:</0> The third party eneity responsible for providing a independent, impartial assessment of project plan and project reports (that is not the monitor)."
+#~ msgstr "<0>Verificador:</0> La entidad de terceros responsable de proporcionar una evaluación independiente e imparcial del plan del proyecto y de los informes del proyecto (que no es el monitor)."
+
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:82
+msgid "<0>Verifier:</0> The third party entity responsible for providing a independent, impartial assessment of project plan and project reports (that is not the monitor)."
+msgstr "<0>Verificador:</0> La entidad de terceros responsable de proporcionar una evaluación independiente e imparcial del plan del proyecto y de los informes del proyecto (que no es el monitor)."
 
 #: src/components/organisms/DetailsSection/DetailsSection.constants.ts:5
 msgid "1 credit"
@@ -230,16 +259,16 @@ msgid "A managed grazing system where livestock are moved frequently among pastu
 msgstr "Un sistema de pastoreo controlado en el que el ganado se traslada con frecuencia entre las divisiones de pasturas o potreros en función de la calidad del forraje y las necesidades nutricionales del ganado. Las cercas portátiles permiten que cada potrero descanse y vuelva a crecer hasta la siguiente rotación de pastoreo."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:92
-msgid "A monitor tracks and verifies the environmental impact and performance of the project to ensure compliance and transparency."
-msgstr "Un monitor rastrea y verifica el impacto ambiental y el desempeño del proyecto para garantizar el cumplimiento y la transparencia."
+#~ msgid "A monitor tracks and verifies the environmental impact and performance of the project to ensure compliance and transparency."
+#~ msgstr "Un monitor rastrea y verifica el impacto ambiental y el desempeño del proyecto para garantizar el cumplimiento y la transparencia."
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:87
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
 msgstr "Un proyecto de desarrollo de <0>Regen Network<1/>, PBC</0>"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:71
-msgid "A project operator is responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
-msgstr "El operador del proyecto es responsable de implementar y gestionar el proyecto, garantizando que cumpla con los estándares regulatorios y de sostenibilidad."
+#~ msgid "A project operator is responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
+#~ msgstr "El operador del proyecto es responsable de implementar y gestionar el proyecto, garantizando que cumpla con los estándares regulatorios y de sostenibilidad."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:102
 #~ msgid "A project owner manages the area of the conservation project and the associated biodiversity units."
@@ -1454,7 +1483,7 @@ msgstr "cuenta corriente"
 msgid "Current admin address"
 msgstr "Dirección de administración actual"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:100
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:102
 msgid "custodian"
 msgstr "Custodio"
 
@@ -2425,7 +2454,7 @@ msgstr "Mínimo 1 destinatario"
 msgid "Moderate"
 msgstr "Moderado"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:90
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:91
 msgid "monitor"
 msgstr "monitor"
 
@@ -2704,7 +2733,7 @@ msgstr "Descripción general"
 msgid "Pacific"
 msgstr "Pacífico"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:111
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:113
 msgid "partners"
 msgstr "fogonadura"
 
@@ -3764,7 +3793,7 @@ msgstr "Lo sentimos, su transacción no fue exitosa."
 msgid "Sort by:"
 msgstr "Ordenar por:"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:135
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:137
 msgid "Stakeholders"
 msgstr "Partes interesadas"
 
@@ -3967,8 +3996,8 @@ msgid "The current address is already linked to your account.\\nPlease first swi
 msgstr "La dirección actual ya está vinculada a su cuenta. Primero cambie las direcciones de billetera en la aplicación Keplr para poder agregar otra dirección a su cuenta."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:102
-msgid "The Custodian is the project landowner and has historically managed the territory. It is now part of the project stakeholders and receives benefits from project success."
-msgstr "El Custodio es el propietario del terreno del proyecto e históricamente ha administrado dicho territorio. Ahora es parte de las partes interesadas del proyecto y recibe beneficios del éxito del proyecto."
+#~ msgid "The Custodian is the project landowner and has historically managed the territory. It is now part of the project stakeholders and receives benefits from project success."
+#~ msgstr "El Custodio es el propietario del terreno del proyecto e históricamente ha administrado dicho territorio. Ahora es parte de las partes interesadas del proyecto y recibe beneficios del éxito del proyecto."
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:220
 msgid "The dates should correspond to the batch monitoring period or vintage."
@@ -4401,7 +4430,7 @@ msgstr "Informe de verificación"
 msgid "verification reports"
 msgstr "informes de verificación"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:79
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:80
 msgid "verifier"
 msgstr "verificador"
 

@@ -48,7 +48,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       title: _(msg`admin`),
       tooltip: (
         <Trans>
-          <b>Project admin:</b> the entity who can update a given project on the
+          <b>Project admin:</b> The entity who can update a given project on the
           blockchain.
         </Trans>
       ),
@@ -58,7 +58,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       title: _(msg`project developer`),
       tooltip: (
         <Trans>
-          <b>Project developer:</b> the entity that is in charge of managing the
+          <b>Project developer:</b> The entity in charge of managing the
           project. The project developer can be the land owner, land steward, or
           a third party.
         </Trans>
@@ -69,8 +69,9 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       title: _(msg`operator`),
       tooltip: (
         <Trans>
-          A project operator is responsible for implementing and managing the
-          project, ensuring it meets sustainability and regulatory standards.
+          <b>Project operator:</b> The entity responsible for implementing and
+          managing the project, ensuring it meets sustainability and regulatory
+          standards.
         </Trans>
       ),
     },
@@ -79,9 +80,9 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       title: _(msg`verifier`),
       tooltip: (
         <Trans>
-          <b>Verifier:</b> A third party who provides a independent, impartial
-          assessment of project plan and project reports (that is not the
-          monitor).
+          <b>Verifier:</b> The third party entity responsible for providing a
+          independent, impartial assessment of project plan and project reports
+          (that is not the monitor).
         </Trans>
       ),
     },
@@ -90,8 +91,9 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       title: _(msg`monitor`),
       tooltip: (
         <Trans>
-          A monitor tracks and verifies the environmental impact and performance
-          of the project to ensure compliance and transparency.
+          <b>Monitor:</b> The entity who tracks and verifies the environmental
+          impact and performance of the project to ensure compliance and
+          transparency.
         </Trans>
       ),
     },
@@ -100,9 +102,9 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       title: _(msg`custodian`),
       tooltip: (
         <Trans>
-          The Custodian is the project landowner and has historically managed
-          the territory. It is now part of the project stakeholders and receives
-          benefits from project success.
+          <b>Custodian:</b> The entity, also the project landowner, who has
+          historically managed the territory. It is now part of the project
+          stakeholders and receives benefits from project success.
         </Trans>
       ),
     },
@@ -111,7 +113,7 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       title: _(msg`partners`),
       tooltip: (
         <Trans>
-          <b>Partners</b> can offer crucial financial support or monitor
+          <b>Partners:</b> can offer crucial financial support or monitor
           progress and ensure environmental standards are met.
         </Trans>
       ),

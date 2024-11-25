@@ -66,7 +66,7 @@ export const useFetchProjectsWithOrders = ({
 
   const orderedOffChainProjects = projectsWithOrderData.map(project =>
     offChainProjects?.find(
-      offchainProject => offchainProject?.onChainId === project.id,
+      offchainProject => offchainProject?.onChainId === project?.id,
     ),
   );
 
@@ -81,9 +81,9 @@ export const useFetchProjectsWithOrders = ({
   // Sanity projects
   const sanityProjectsResults = useQueries({
     queries: projectsWithOrderData?.map(project => {
-      const id = project.slug || project.id;
+      const id = project?.slug || project?.id;
       return getProjectByIdQuery({
-        id,
+        id: id as string,
         sanityClient,
         languageCode: selectedLanguage,
         enabled: !!sanityClient && !!id,

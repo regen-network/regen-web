@@ -2,26 +2,31 @@ import { USD_DENOM, USDC_DENOM } from 'config/allowedBaseDenoms';
 import { describe, expect, it } from 'vitest';
 import { render, screen } from 'web-marketplace/test/test-utils';
 
+import { ProjectPrefinancing } from 'web-components/src/components/cards/ProjectCard/ProjectCard.types';
+
 import { Order } from './Order';
 import { ORDER_STATUS } from './Order.constants';
 import {
+  allowedDenoms,
   blockchainDetails,
   credits,
   paymentInfo,
   retirementInfo,
 } from './Order.mock';
-import { OrderDataProps } from './Order.types';
+import { OrderData } from './Order.types';
 
 describe('Order Component', () => {
-  const mockOrderData: OrderDataProps = {
+  const mockOrderData: OrderData = {
     project: {
       name: 'Test Project',
-      imageSrc: 'test-image-src',
-      placeName: 'Test Place',
+      imgSrc: 'test-image-src',
+      place: 'Test Place',
       area: 1000,
       areaUnit: 'hectares',
-      date: '2023-10-01',
-      prefinance: false,
+      deliveryDate: '2023-10-01',
+      projectPrefinancing: {
+        isPrefinanceProject: false,
+      } as ProjectPrefinancing,
     },
     order: {
       retirementInfo,
@@ -33,7 +38,7 @@ describe('Order Component', () => {
   };
 
   it('renders the Order component with project details', () => {
-    render(<Order {...mockOrderData} />);
+    render(<Order orderData={mockOrderData} allowedDenoms={allowedDenoms} />);
 
     expect(screen.getByText(/test project/i)).toBeInTheDocument();
     expect(screen.getByText(/test place/i)).toBeInTheDocument();
@@ -43,17 +48,23 @@ describe('Order Component', () => {
   it('renders the Prefinance Tag if prefinance is true', () => {
     render(
       <Order
-        {...{
+        orderData={{
           ...mockOrderData,
-          project: { ...mockOrderData.project, prefinance: true },
+          project: {
+            ...mockOrderData.project,
+            projectPrefinancing: {
+              isPrefinanceProject: true,
+            } as ProjectPrefinancing,
+          },
         }}
+        allowedDenoms={allowedDenoms}
       />,
     );
     expect(screen.getByText(/prefinance/i)).toBeInTheDocument();
   });
 
   it('renders the `Expected delivery date` and `Credit issuance pending` tag if the issuance is pending', () => {
-    render(<Order {...mockOrderData} />);
+    render(<Order orderData={mockOrderData} allowedDenoms={allowedDenoms} />);
 
     expect(
       screen.getByText(/expected delivery date 2023-10-01/i),
@@ -64,13 +75,14 @@ describe('Order Component', () => {
   it('renders the date and `credits delivered` tag if the issuance is delivered', () => {
     render(
       <Order
-        {...{
+        orderData={{
           ...mockOrderData,
           order: {
             ...mockOrderData.order,
             status: ORDER_STATUS.delivered,
           },
         }}
+        allowedDenoms={allowedDenoms}
       />,
     );
 
@@ -79,7 +91,7 @@ describe('Order Component', () => {
   });
 
   it('renders the OrderSummary component with the correct headings', () => {
-    render(<Order {...mockOrderData} />);
+    render(<Order orderData={mockOrderData} allowedDenoms={allowedDenoms} />);
     expect(
       screen.getByRole('heading', { name: /retirement info/i }),
     ).toBeInTheDocument();
@@ -97,16 +109,17 @@ describe('Order Component', () => {
   it('renders the Retirement Info section with tradable row only', () => {
     render(
       <Order
-        {...{
+        orderData={{
           ...mockOrderData,
           order: {
             ...mockOrderData.order,
             retirementInfo: {
               ...mockOrderData.order.retirementInfo,
-              tradableCredits: 'yes',
+              retiredCredits: false,
             },
           },
         }}
+        allowedDenoms={allowedDenoms}
       />,
     );
     expect(screen.getByText(/tradable credits/i)).toBeInTheDocument();
@@ -117,7 +130,7 @@ describe('Order Component', () => {
   });
 
   it('renders the RetirementInfo section with `certificate` button and rows except `tradable credits`', () => {
-    render(<Order {...mockOrderData} />);
+    render(<Order orderData={mockOrderData} allowedDenoms={allowedDenoms} />);
     expect(screen.queryByText(/tradable credits/i)).not.toBeInTheDocument();
     expect(screen.getByText(/retirement reason/i)).toBeInTheDocument();
     expect(screen.getByText(/retirement location/i)).toBeInTheDocument();
@@ -127,7 +140,7 @@ describe('Order Component', () => {
   });
 
   it('renders the Blockchain Details section with correct data', () => {
-    render(<Order {...mockOrderData} />);
+    render(<Order orderData={mockOrderData} allowedDenoms={allowedDenoms} />);
     expect(screen.getByText(/dec 15, 2024/i)).toBeInTheDocument();
     expect(screen.getByText(/d6jfk121o54ded6jfk121o54de/i)).toBeInTheDocument();
   });
@@ -135,7 +148,7 @@ describe('Order Component', () => {
   it('renders the Blockchain Details section without blockchain record', () => {
     render(
       <Order
-        {...{
+        orderData={{
           ...mockOrderData,
           order: {
             ...mockOrderData.order,
@@ -145,6 +158,7 @@ describe('Order Component', () => {
             },
           },
         }}
+        allowedDenoms={allowedDenoms}
       />,
     );
     expect(screen.getByText(/dec 15, 2024/i)).toBeInTheDocument();
@@ -156,18 +170,18 @@ describe('Order Component', () => {
   it('renders the Credits section with correct data in USD', () => {
     render(
       <Order
-        {...{
+        orderData={{
           ...mockOrderData,
           order: {
             ...mockOrderData.order,
             credits: {
               ...mockOrderData.order.credits,
               credits: '2000',
-              price: '400000',
-              askDenom: USD_DENOM,
+              totalPrice: '400000',
             },
           },
         }}
+        allowedDenoms={allowedDenoms}
       />,
     );
     expect(screen.getByText(/2000/i)).toBeInTheDocument();
@@ -178,43 +192,44 @@ describe('Order Component', () => {
   it('renders the Credits section with correct data in USDC', () => {
     render(
       <Order
-        {...{
+        orderData={{
           ...mockOrderData,
           order: {
             ...mockOrderData.order,
             credits: {
               ...mockOrderData.order.credits,
               credits: '2000',
-              price: '400000',
-              askDenom: USDC_DENOM,
+              totalPrice: '4000000',
+              askDenom: 'ibc/123',
               askBaseDenom: USDC_DENOM,
             },
           },
         }}
+        allowedDenoms={allowedDenoms}
       />,
     );
 
     expect(screen.getByText(/2000/i)).toBeInTheDocument();
-    expect(screen.getByText(/400000/i)).toBeInTheDocument();
+    expect(screen.getByText(/4/i)).toBeInTheDocument();
     expect(screen.getByText(/usdc/i)).toBeInTheDocument();
   });
 
   it('renders the Payment Info section with card data', () => {
     render(
       <Order
-        {...{
+        orderData={{
           ...mockOrderData,
           order: {
             ...mockOrderData.order,
             paymentInfo: {
               ...mockOrderData.order.paymentInfo,
-              nameOnCard: 'John Doe',
               cardLast4: '1234',
               askDenom: USD_DENOM,
               askBaseDenom: USD_DENOM,
             },
           },
         }}
+        allowedDenoms={allowedDenoms}
       />,
     );
     expect(screen.getByText(/name on card/i)).toBeInTheDocument();
@@ -225,7 +240,7 @@ describe('Order Component', () => {
   it('renders the Payment Info section with crypto data', () => {
     render(
       <Order
-        {...{
+        orderData={{
           ...mockOrderData,
           order: {
             ...mockOrderData.order,
@@ -236,11 +251,12 @@ describe('Order Component', () => {
             },
           },
         }}
+        allowedDenoms={allowedDenoms}
       />,
     );
     expect(screen.queryByText(/name on card/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/card info/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/visa ending in 1234/i)).not.toBeInTheDocument();
-    expect(screen.getAllByText(/usdc/i)).toHaveLength(2);
+    expect(screen.getAllByText(/usdc/i)).toHaveLength(3);
   });
 });

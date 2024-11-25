@@ -4,15 +4,23 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
+import { msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import uniq from 'lodash/uniq';
 
 import { Flex } from 'web-components/src/components/box';
 
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
+import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
+import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
+import { getDenomTraceByHashesQuery } from 'lib/queries/react-query/ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
 import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
@@ -23,19 +31,13 @@ import { useWallet } from 'lib/wallet/wallet';
 import WithLoader from 'components/atoms/WithLoader';
 import { Order } from 'components/organisms/Order/Order';
 import { ORDER_STATUS } from 'components/organisms/Order/Order.constants';
-import {
-  blockchainDetails,
-  credits,
-  paymentInfo,
-  retirementInfo,
-} from 'components/organisms/Order/Order.mock';
-import { OrderDataProps } from 'components/organisms/Order/Order.types';
 import { JURISDICTION_REGEX } from 'components/templates/ProjectDetails/ProjectDetails.constant';
+import { IBC_DENOM_PREFIX } from 'hooks/useQuerySellOrders';
 
 export const Orders = () => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const { ecocreditClient, dataClient } = useLedger();
-  const { activeAccount } = useAuth();
+  const { ecocreditClient, dataClient, marketplaceClient } = useLedger();
+  const { activeAccount, loading } = useAuth();
   const { activeWalletAddr } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
@@ -49,7 +51,7 @@ export const Orders = () => {
     [activeAccount?.fiatOrdersByAccountId?.nodes],
   );
 
-  const { data } = useQuery(
+  const { data, isLoading: cryptoOrdersLoading } = useQuery(
     getOrdersByBuyerAddressQuery({
       client: apolloClient,
       enabled: !!activeWalletAddr && !!apolloClient,
@@ -89,6 +91,7 @@ export const Orders = () => {
       }),
     ),
   });
+  const retirementsLoading = retirementResults.some(res => res.isLoading);
 
   const offChainProjectResults = useQueries({
     queries: sortedOrders.map(order =>
@@ -103,6 +106,9 @@ export const Orders = () => {
   const offChainProjects = offChainProjectResults.map(
     res => res.data?.data?.projectByOnChainId,
   );
+  const offChainProjectsLoading = offChainProjectResults.some(
+    res => res.isLoading,
+  );
 
   const onChainProjectResults = useQueries({
     queries: sortedOrders.map(order =>
@@ -114,6 +120,12 @@ export const Orders = () => {
     ),
   });
   const onChainProjects = onChainProjectResults?.map(res => res.data?.project);
+  const normalizedOnChainProjects = normalizeProjectsWithOrderData({
+    projects: onChainProjects,
+  });
+  const onChainProjectsLoading = onChainProjectResults.some(
+    res => res.isLoading,
+  );
 
   const metadataResults = useQueries({
     queries: onChainProjects.map(project =>
@@ -125,86 +137,97 @@ export const Orders = () => {
       }),
     ),
   });
-  const projectsMetadata = metadataResults.map(res => res.data);
+  const projectsMetadata = metadataResults.map(
+    res => res.data as AnchoredProjectMetadataLD | undefined,
+  );
+  const metadataLoading = metadataResults.some(res => res.isLoading);
+
+  const ibcDenomHashes = uniq(
+    sortedOrders
+      .filter(order => order?.askDenom?.includes(IBC_DENOM_PREFIX))
+      .map(order => order?.askDenom?.replace(IBC_DENOM_PREFIX, '')),
+  );
+
+  const { data: denomTracesData, isLoading: isDenomTracesLoading } = useQuery(
+    getDenomTraceByHashesQuery({
+      hashes: ibcDenomHashes.filter(Boolean) as string[],
+    }),
+  );
+
+  const { data: allowedDenomsData } = useQuery(
+    getAllowedDenomQuery({
+      client: marketplaceClient,
+      enabled: !!marketplaceClient,
+    }),
+  );
+  const allowedDenoms = allowedDenomsData?.allowedDenoms;
+
+  const isLoading =
+    loading ||
+    cryptoOrdersLoading ||
+    retirementsLoading ||
+    offChainProjectsLoading ||
+    onChainProjectsLoading ||
+    metadataLoading ||
+    isDenomTracesLoading;
 
   const orders = useMemo(
     () =>
-      sortedOrders.map(order => {
+      sortedOrders.map((order, i) => {
+        const denomTrace = denomTracesData?.find(denomTrace =>
+          order?.askDenom?.includes(denomTrace.hash),
+        );
+        const askBaseDenom =
+          (denomTrace ? denomTrace.baseDenom : order?.askDenom) ?? '';
+        const retirement = retirementResults[i]?.data?.data?.retirementByTxHash;
+
         return {
           project: {
-            name: 'Project Name',
-            date: 'Dec 15, 2024',
-            placeName: location,
-            area: 50.4,
-            areaUnit: 'hectares',
-            imageSrc: '/jpg/default-project.jpg',
-            prefinance: false,
+            deliveryDate: order?.timestamp,
+            ...normalizeProjectWithMetadata({
+              offChainProject: offChainProjects?.[i],
+              projectPageMetadata: offChainProjects?.[i]?.metadata,
+              projectMetadata:
+                projectsMetadata[i] || offChainProjects?.[i]?.metadata,
+              projectWithOrderData: normalizedOnChainProjects[i],
+            }),
           },
           order: {
             status: ORDER_STATUS.delivered,
             retirementInfo: {
-              tradableCredits: order?.retiredCredits
-                ? null
-                : order?.creditsAmount,
-              // reason: order?
+              retiredCredits: order?.retiredCredits,
+              reason: retirement?.reason,
+              location: retirement?.jurisdiction,
+              makeAnonymous: false, // TODO APP-401
             },
             blockchainDetails: {
               purchaseDate: order?.timestamp,
               blockchainRecord: order?.txHash,
             },
-            credits,
-            paymentInfo,
+            credits: {
+              credits: order?.creditsAmount || 0,
+              totalPrice: order?.totalPrice || 0,
+              askDenom: order?.askDenom || '',
+              askBaseDenom,
+            },
+            paymentInfo: {
+              cardLast4: 'todo',
+              cardBrand: 'todo',
+              askDenom: order?.askDenom || '',
+              askBaseDenom,
+            },
           },
         };
       }),
-    [],
+    [
+      denomTracesData,
+      normalizedOnChainProjects,
+      offChainProjects,
+      projectsMetadata,
+      retirementResults,
+      sortedOrders,
+    ],
   );
-
-  // TODO: replace mock data below
-  const ordedrs: OrderDataProps[] = [
-    {
-      project: {
-        name: 'Project Name',
-        date: 'Dec 15, 2024',
-        placeName: location,
-        area: 50.4,
-        areaUnit: 'hectares',
-        imageSrc: '/jpg/default-project.jpg',
-        prefinance: false,
-      },
-      order: {
-        status: ORDER_STATUS.delivered,
-        retirementInfo: {
-          ...retirementInfo,
-          location,
-        },
-        blockchainDetails,
-        credits,
-        paymentInfo,
-      },
-    },
-    {
-      project: {
-        name: 'Project 2 Name',
-        date: 'Jan 15, 2025',
-        placeName: location,
-        area: 100.1,
-        areaUnit: 'hectares',
-        imageSrc: '/jpg/default-project.jpg',
-        prefinance: false,
-      },
-      order: {
-        status: ORDER_STATUS.pending,
-        retirementInfo: {
-          ...retirementInfo,
-          location,
-        },
-        blockchainDetails,
-        credits,
-        paymentInfo,
-      },
-    },
-  ];
 
   return (
     <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly mx-auto">
@@ -215,7 +238,7 @@ export const Orders = () => {
         }}
         className="w-full xl:w-[850px]"
       >
-        <WithLoader isLoading={false} sx={{ mx: 'auto' }}>
+        <WithLoader isLoading={isLoading} sx={{ mx: 'auto' }}>
           <div className="w-full rounded-md border border-grey-200 bg-grey-100">
             {orders.map((order, index) => (
               <Order
@@ -223,7 +246,8 @@ export const Orders = () => {
                 className={
                   orders.length > 1 && index < orders.length - 1 ? 'mb-20' : ''
                 }
-                {...order}
+                orderData={order}
+                allowedDenoms={allowedDenoms}
               />
             ))}
           </div>

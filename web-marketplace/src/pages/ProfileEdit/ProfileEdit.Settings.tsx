@@ -52,7 +52,7 @@ export const ProfileEditSettings = () => {
   });
 
   return (
-    <div className="px-10 py-40 md:p-40">
+    <div className="px-10 py-40 md:p-40 bg-bc-neutral-0 border border-solid border-bc-neutral-200">
       {(error as string) && (
         <ErrorBanner
           text={(error as string).toString()}

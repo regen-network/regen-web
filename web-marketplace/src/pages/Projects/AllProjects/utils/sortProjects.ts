@@ -4,7 +4,7 @@ export const sortProjects = (
   projects: ProjectWithOrderData[],
   sort: string,
   sortPinnedIds?: string[],
-): ProjectWithOrderData[] => {
+) => {
   switch (sort) {
     case 'featured-projects':
       return projects
@@ -12,7 +12,9 @@ export const sortProjects = (
         .sort(compareCreditsAvailable)
         .sort((a, b) => sortPinnedProject(a, b, sortPinnedIds));
     case 'price-ascending':
-      return projects.sort(comparePriceAscending).sort(compareCreditsAvailable);
+      return projects
+        ?.sort(comparePriceAscending)
+        .sort(compareCreditsAvailable);
     case 'price-descending':
       return projects.sort(comparePriceDescending);
     case 'credits-ascending':

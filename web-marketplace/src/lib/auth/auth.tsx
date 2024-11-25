@@ -86,7 +86,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     setProfileBannerCard,
     shouldSetProfileBannerCard,
   ]);
-  console.log('activeAccount', activeAccount);
+
   return (
     <AuthContext.Provider
       value={{

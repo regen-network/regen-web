@@ -212,7 +212,7 @@ export function useProjectsWithOrders({
         sellOrders,
         userAddress: wallet?.address,
         sanityCreditClassData: creditClassData,
-      }),
+      }) as ProjectWithOrderData[],
     [
       lastRandomProjects,
       sellOrders,
@@ -226,13 +226,14 @@ export function useProjectsWithOrders({
   const projectsWithOrderDataFiltered = useMemo(
     () =>
       projectsWithOrderData.filter(
-        project => !!project.sanityCreditClassData || useCommunityProjects,
+        project => !!project?.sanityCreditClassData || useCommunityProjects,
       ),
     [projectsWithOrderData, useCommunityProjects],
   );
 
   const hasCommunityProjects = useMemo(
-    () => projectsWithOrderData.some(project => !project.sanityCreditClassData),
+    () =>
+      projectsWithOrderData.some(project => !project?.sanityCreditClassData),
     [projectsWithOrderData],
   );
 
@@ -341,7 +342,7 @@ export function useProjectsWithOrders({
   const projectsMetadatasResults = useQueries({
     queries: sortedProjects.map(project =>
       getMetadataQuery({
-        iri: project.metadata,
+        iri: project?.metadata,
         dataClient,
         enabled: !!dataClient,
         languageCode: selectedLanguage,
@@ -359,8 +360,8 @@ export function useProjectsWithOrders({
     queries: sortedProjects.map(project =>
       getProjectByOnChainIdQuery({
         client: graphqlClient,
-        onChainId: project.id,
-        enabled: !!project.id && !project.offChain,
+        onChainId: project?.id as string,
+        enabled: !!project?.id && !project?.offChain,
         languageCode: selectedLanguage,
       }),
     ),
@@ -387,9 +388,9 @@ export function useProjectsWithOrders({
   // Sanity projects
   const sanityProjectsResults = useQueries({
     queries: sortedProjects?.map(project => {
-      const id = project.slug || project.id;
+      const id = project?.slug || project?.id;
       return getProjectByIdQuery({
-        id,
+        id: id as string,
         sanityClient,
         enabled: !!sanityClient && !!id,
         languageCode: selectedLanguage,

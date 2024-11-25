@@ -24,9 +24,9 @@ import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
 import { ORDER_STATUS } from './Order.constants';
 import { OrderLabel } from './Order.Label';
 import { OrderSummary } from './Order.Summary';
-import { OrderDataProps, RetirementInfoData } from './Order.types';
+import { OrderProps } from './Order.types';
 
-export const Order = (orderData: OrderDataProps) => {
+export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { _ } = useLingui();
@@ -34,18 +34,14 @@ export const Order = (orderData: OrderDataProps) => {
   const { project } = orderData;
   const { retirementInfo, blockchainDetails, credits, paymentInfo, status } =
     orderData.order;
-  const isRetirementTradable =
-    (retirementInfo as RetirementInfoData).tradableCredits !== null;
+
+  const isPrefinanceProject = project.projectPrefinancing?.isPrefinanceProject;
+
   return (
-    <Card
-      className={cn(
-        'bg-grey-100 border-[1px] border-grey-200',
-        orderData.className,
-      )}
-    >
+    <Card className={cn('bg-grey-100 border-[1px] border-grey-200', className)}>
       {isMobile && (
         <>
-          {project.prefinance && (
+          {isPrefinanceProject && (
             <PrefinanceTag
               bodyTexts={getProjectCardBodyTextMapping(_)}
               classNames={{ root: 'z-50 absolute top-35 left-[17px]' }}
@@ -53,7 +49,7 @@ export const Order = (orderData: OrderDataProps) => {
           )}
           <CardMedia
             className="h-[140px]"
-            image={project.imageSrc}
+            image={project.imgSrc}
             title={project.name}
           />
         </>
@@ -75,7 +71,7 @@ export const Order = (orderData: OrderDataProps) => {
                 },
               }}
             >
-              {project.prefinance && (
+              {isPrefinanceProject && (
                 <PrefinanceTag
                   bodyTexts={getProjectCardBodyTextMapping(_)}
                   classNames={{ root: 'z-50 absolute top-10' }}
@@ -83,7 +79,7 @@ export const Order = (orderData: OrderDataProps) => {
               )}
               <Image
                 className="z-40 w-full h-auto max-w-full max-h-full object-contain"
-                src={project.imageSrc}
+                src={project.imgSrc}
                 width={1560}
               />
             </Avatar>
@@ -93,7 +89,7 @@ export const Order = (orderData: OrderDataProps) => {
         }
         action={
           <div className="flex flex-wrap md:flex-col gap-10">
-            {!isRetirementTradable && (
+            {retirementInfo.retiredCredits && (
               <OutlinedButton size="small" className="w-full sm:w-auto">
                 <CertifiedDocumentIcon className="mr-5" />
                 <Trans>certificate</Trans>
@@ -114,7 +110,7 @@ export const Order = (orderData: OrderDataProps) => {
           <>
             <div className="flex items-center my-5">
               <ProjectPlaceInfo
-                place={project.placeName}
+                place={project.place}
                 area={project.area}
                 iconClassName="mr-5"
                 areaUnit={project.areaUnit}
@@ -132,7 +128,7 @@ export const Order = (orderData: OrderDataProps) => {
                 status === ORDER_STATUS.pending
                   ? _(msg`Expected delivery date`)
                   : ''
-              } ${project.date}`}</p>
+              } ${project.deliveryDate}`}</p>
             </div>
           </>
         }
@@ -143,6 +139,7 @@ export const Order = (orderData: OrderDataProps) => {
           blockchainDetails={blockchainDetails}
           creditsData={credits}
           paymentInfo={paymentInfo}
+          allowedDenoms={allowedDenoms}
         />
       </CardContent>
     </Card>

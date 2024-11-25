@@ -498,6 +498,7 @@ function ProjectDetails(): JSX.Element {
       <DetailsSection
         header={sanityProjectPage?.projectDetailsSection}
         credibilityCards={sanityProject?.credibilityCards}
+        projectId={projectId}
         sx={{ pt: { xs: 0 } }}
       />
 

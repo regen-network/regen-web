@@ -35,7 +35,12 @@ export default function TebuCard({
           {header}
         </Body>
         {headerTooltip && (
-          <InfoTooltip title={headerTooltip || ''} arrow placement="top">
+          <InfoTooltip
+            title={headerTooltip || ''}
+            arrow
+            placement="top"
+            sx={{ padding: 0 }}
+          >
             <div className="cursor-pointer m-0">
               <InfoIconOutlined className="-mb-3 w-[17px] h-[17px]" />
             </div>

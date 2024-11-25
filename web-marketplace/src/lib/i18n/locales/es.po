@@ -3988,7 +3988,7 @@ msgstr "El mensaje de título debe tener menos de {CAPTION_CHART_LIMIT} caracter
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:214
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:219
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:224
-msgid "The community has political and economic rights to the project"
+msgid "The community has political and economic rights to the project."
 msgstr "La comunidad tiene derechos políticos y económicos sobre el proyecto."
 
 #: src/lib/constants/shared.constants.tsx:35

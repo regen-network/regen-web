@@ -206,22 +206,22 @@ export const socialCulturalFactors = [
   {
     type: SocialCulturalValueType.VeryHigh,
     factor: 0.2,
-    description: msg`The community has political and economic rights to the project`,
+    description: msg`The community has political and economic rights to the project.`,
   },
   {
     type: SocialCulturalValueType.High,
     factor: 0.18,
-    description: msg`The community has political and economic rights to the project`,
+    description: msg`The community has political and economic rights to the project.`,
   },
   {
     type: SocialCulturalValueType.Medium,
     factor: 0.16,
-    description: msg`The community has political and economic rights to the project`,
+    description: msg`The community has political and economic rights to the project.`,
   },
   {
     type: SocialCulturalValueType.Low,
     factor: 0,
-    description: msg`The community has political and economic rights to the project`,
+    description: msg`The community has political and economic rights to the project.`,
   },
 ];
 

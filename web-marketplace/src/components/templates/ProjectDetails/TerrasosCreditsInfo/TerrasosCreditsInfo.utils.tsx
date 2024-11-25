@@ -1,3 +1,4 @@
+import { MessageDescriptor } from '@lingui/core';
 import { msg } from '@lingui/macro';
 
 import TebuCard from 'web-components/src/components/cards/TebuCard';
@@ -88,6 +89,7 @@ export function getDurationCard(
   duration: string,
   minimumDuration: number,
   maximumDuration: number,
+  tooltip: MessageDescriptor,
 ): JSX.Element {
   const years = Number(duration.match(/P(\d+)Y/)?.[1]);
   const { factor } =
@@ -97,9 +99,7 @@ export function getDurationCard(
   return (
     <TebuCard
       header={_(msg`Project Duration`)}
-      headerTooltip={_(
-        msg`Eligible projects implement preservation and/or restoration activities in different proportion/rates. Tebu recognizes restoration activities have a higher cost by assigning a greater value to restoration actions.`,
-      )}
+      headerTooltip={_(tooltip)}
       footerLabels={[
         {
           label: _(msg`Factor:`),

@@ -343,7 +343,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                 project,
                 _,
               })}
-              program={project.program}
+              program={IS_REGEN ? project.program : undefined}
               projectPrefinancing={project.projectPrefinancing}
               offChain={config.buyButton ? project.offChain : true}
               draftText={_(DRAFT_TEXT)}

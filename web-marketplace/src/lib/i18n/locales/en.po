@@ -1977,6 +1977,10 @@ msgstr ""
 msgid "Geo-Viewer"
 msgstr ""
 
+#: src/components/organisms/DetailsSection/DetailsSection.constants.ts:7
+msgid "Get even more info on this project on the"
+msgstr ""
+
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:348
 msgid "get started"
 msgstr ""
@@ -3333,6 +3337,10 @@ msgstr ""
 #: src/components/templates/ProjectDetails/hooks/useSeo.ts:56
 #: src/siteMetadata.ts:4
 msgid "Regen Marketplace"
+msgstr ""
+
+#: src/components/organisms/DetailsSection/DetailsSection.constants.ts:8
+msgid "Regen Marketplace app."
 msgstr ""
 
 #: src/components/templates/ProjectDetails/hooks/useSeo.ts:68

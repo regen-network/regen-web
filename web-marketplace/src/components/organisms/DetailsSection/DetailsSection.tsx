@@ -60,7 +60,12 @@ export const DetailsSection: React.FC<
               <Title variant="h2" py={3}>
                 {header.title}
               </Title>
-              <Body size="lg" mobileSize="md" maxWidth={718}>
+              <Body
+                size="lg"
+                mobileSize="md"
+                maxWidth={718}
+                className="relative z-10"
+              >
                 {IS_REGEN ? (
                   <BlockContent content={header.descriptionRaw} />
                 ) : (
@@ -146,7 +151,7 @@ export const DetailsSection: React.FC<
           infinite={false}
           slidesToShow={isMobile ? 1 : 2}
           padding={theme.spacing(2.5)}
-          className="-mt-[90px] pt-0"
+          className="md:-mt-[90px] pt-0"
           items={credibilityCards.map((card, index) => (
             <CredibilityCard
               index={index}

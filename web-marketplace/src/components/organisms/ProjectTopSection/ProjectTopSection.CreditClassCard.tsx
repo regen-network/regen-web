@@ -9,7 +9,7 @@ import { Account } from 'web-components/src/components/user/UserInfoCard';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
-import { LINK_PREFIX } from 'lib/env';
+import { IS_REGEN, LINK_PREFIX } from 'lib/env';
 
 import { Link } from 'components/atoms';
 
@@ -81,7 +81,7 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
           text: methodology?.['schema:name'],
           href: methodology?.['schema:url'],
         }}
-        program={program}
+        program={IS_REGEN ? program : undefined}
         sx={{ mt: [2, 4], py: [2, 6] }}
       />
     </Link>

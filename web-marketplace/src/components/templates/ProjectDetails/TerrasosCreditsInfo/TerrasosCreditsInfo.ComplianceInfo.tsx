@@ -72,8 +72,6 @@ const ComplianceInfo = ({
             bodySize="lg"
           />
           <MetaDetail label={_(msg`biome`)} value={biomeType} bodySize="lg" />
-        </Grid>
-        <Grid container spacing={8}>
           <MetaDetail label={_(msg`region`)} value={region} bodySize="lg" />
           <MetaDetail
             label={_(msg`department`)}

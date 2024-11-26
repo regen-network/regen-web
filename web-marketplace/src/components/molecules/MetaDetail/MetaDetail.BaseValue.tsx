@@ -54,7 +54,7 @@ const MetaDetailBaseValue: React.FC<Props> = ({
   return (
     <>
       {formattedValue && (
-        <Body size={bodySize} sx={sxToArray(sx)} className="break-all">
+        <Body size={bodySize} sx={sxToArray(sx)} className="break-words">
           {formattedValue}
         </Body>
       )}
@@ -63,7 +63,7 @@ const MetaDetailBaseValue: React.FC<Props> = ({
           size={bodySize}
           styleLinks={false}
           sx={sxToArray(sx)}
-          className="break-all"
+          className="break-words"
         >
           <LinkWithArrow
             href={value['schema:url']}

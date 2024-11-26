@@ -167,7 +167,7 @@ export function getSocialCulturalCard(
   _: TranslatorType,
   type: SocialCulturalValueType,
 ): JSX.Element {
-  const { factor, description } =
+  const { factor, title, description } =
     socialCulturalFactors.find(factor => factor.type === type) ||
     socialCulturalFactors[3];
 
@@ -185,7 +185,7 @@ export function getSocialCulturalCard(
       ]}
     >
       <SocialCulturalBody
-        title={_(msg`Social and Cultural Index`)}
+        title={_(title)}
         description={_(description)}
         type={type}
       />

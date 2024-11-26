@@ -1420,7 +1420,7 @@ msgstr ""
 msgid "Credits Input"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:231
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:235
 msgid "Credits issuance is calculated based on a weighted scale between 20 and 50 years."
 msgstr ""
 
@@ -1776,7 +1776,7 @@ msgstr ""
 msgid "eligible activities"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:230
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:234
 msgid "Eligible projects implement preservation and/or restoration activities in different proportion/rates. Tebu recognizes restoration activities have a higher cost by assigning a greater value to restoration actions."
 msgstr ""
 
@@ -2008,6 +2008,10 @@ msgstr ""
 
 #: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:193
 msgid "Hectares"
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:214
+msgid "High"
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:59
@@ -2339,6 +2343,10 @@ msgstr ""
 msgid "Long-form project story"
 msgstr ""
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:226
+msgid "Low"
+msgstr ""
+
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:47
 msgid "Low montane very humid forest"
 msgstr ""
@@ -2403,6 +2411,10 @@ msgstr ""
 #: src/pages/Media/Media.tsx:76
 #: src/pages/ProjectReview/ProjectReview.tsx:240
 msgid "Media"
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:220
+msgid "Medium"
 msgstr ""
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:13
@@ -3765,7 +3777,6 @@ msgid "Social Accounts"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:176
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:188
 msgid "Social and Cultural Index"
 msgstr ""
 
@@ -3987,11 +3998,16 @@ msgstr ""
 msgid "The caption message must be under {CAPTION_CHART_LIMIT} characters."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:209
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:214
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:219
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:224
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:216
+msgid "The community has economic rights to the project."
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:210
 msgid "The community has political and economic rights to the project."
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:222
+msgid "The community participates in the construction of the project's Management Plan, reflected in binding actions."
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:35
@@ -4067,6 +4083,10 @@ msgstr ""
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:5
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:4
 msgid "There are currently no open sell orders for this project."
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:228
+msgid "There is no community involvement in the construction of the project's Management Plan."
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:3
@@ -4443,6 +4463,10 @@ msgstr ""
 
 #: src/components/organisms/RolesForm/RolesForm.tsx:235
 msgid "Verifier"
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:208
+msgid "Very high"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:326

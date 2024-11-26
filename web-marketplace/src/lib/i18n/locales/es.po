@@ -1417,7 +1417,7 @@ msgstr "¡Se han emitido los créditos!"
 msgid "Credits Input"
 msgstr "Entrada de créditos"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:231
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:235
 msgid "Credits issuance is calculated based on a weighted scale between 20 and 50 years."
 msgstr "La emisión de créditos se calcula con base en una escala ponderada entre 20 y 50 años."
 
@@ -1773,7 +1773,7 @@ msgstr "Elegibilidad"
 msgid "eligible activities"
 msgstr "actividades elegibles"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:230
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:234
 msgid "Eligible projects implement preservation and/or restoration activities in different proportion/rates. Tebu recognizes restoration activities have a higher cost by assigning a greater value to restoration actions."
 msgstr "Los proyectos elegibles implementan actividades de conservación y/o restauración en diferentes proporciones/ritmos. Tebu reconoce que las actividades de restauración tienen un costo más alto al asignar un mayor valor a las acciones de restauración."
 
@@ -2006,6 +2006,10 @@ msgstr "hectáreas"
 #: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:193
 msgid "Hectares"
 msgstr "Hectáreas"
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:214
+msgid "High"
+msgstr "Alto"
 
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:59
 msgid "High andean forest"
@@ -2336,6 +2340,10 @@ msgstr "Iniciar sesión Correo electrónico"
 msgid "Long-form project story"
 msgstr "Historia del proyecto en formato largo"
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:226
+msgid "Low"
+msgstr "Bajo"
+
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:47
 msgid "Low montane very humid forest"
 msgstr "Bosque muy húmedo montano bajo"
@@ -2401,6 +2409,10 @@ msgstr "medios de comunicación"
 #: src/pages/ProjectReview/ProjectReview.tsx:240
 msgid "Media"
 msgstr "Medios de comunicación"
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:220
+msgid "Medium"
+msgstr "Medio"
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:13
 msgid "merge accounts"
@@ -3762,7 +3774,6 @@ msgid "Social Accounts"
 msgstr "Cuentas sociales"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:176
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:188
 msgid "Social and Cultural Index"
 msgstr "Índice social y cultural"
 
@@ -3984,12 +3995,17 @@ msgstr "El monto que se puede canjear es el mismo que el monto que se puede canj
 msgid "The caption message must be under {CAPTION_CHART_LIMIT} characters."
 msgstr "El mensaje de título debe tener menos de {CAPTION_CHART_LIMIT} caracteres."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:209
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:214
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:219
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:224
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:216
+msgid "The community has economic rights to the project."
+msgstr "La comunidad tiene derechos económicos sobre el proyecto."
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:210
 msgid "The community has political and economic rights to the project."
 msgstr "La comunidad tiene derechos políticos y económicos sobre el proyecto."
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:222
+msgid "The community participates in the construction of the project's Management Plan, reflected in binding actions."
+msgstr "La comunidad participa en la construcción del Plan de Gestión del proyecto, reflejándose en acciones vinculantes."
 
 #: src/lib/constants/shared.constants.tsx:35
 msgid "The creator of this basket has chosen that all credits must be retired upon take."
@@ -4065,6 +4081,10 @@ msgstr "La cantidad total de créditos que se registraron en este proyecto."
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:4
 msgid "There are currently no open sell orders for this project."
 msgstr "Actualmente no hay órdenes de venta abiertas para este proyecto."
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:228
+msgid "There is no community involvement in the construction of the project's Management Plan."
+msgstr "No hay participación de la comunidad en la construcción del Plan de Manejo del proyecto."
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:3
 msgid "These credits are currently sold out. More may become available in the future."
@@ -4441,6 +4461,10 @@ msgstr "verificador"
 #: src/components/organisms/RolesForm/RolesForm.tsx:235
 msgid "Verifier"
 msgstr "Verificador"
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:208
+msgid "Very high"
+msgstr "Muy alto"
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:326
 msgid "Videos"

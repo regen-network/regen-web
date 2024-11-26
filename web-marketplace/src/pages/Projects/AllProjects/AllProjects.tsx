@@ -222,7 +222,11 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   return (
     <>
-      <Flex flex={1} sx={{ gridColumn: '1 / -1' }} className="xl:mt-[-78px]">
+      <Flex
+        flex={1}
+        sx={{ gridColumn: '1 / -1' }}
+        className={IS_REGEN ? 'xl:mt-[-78px]' : undefined}
+      >
         <Flex
           justifyContent="flex-end"
           alignItems="center"

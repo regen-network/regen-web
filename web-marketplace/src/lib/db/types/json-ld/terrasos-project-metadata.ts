@@ -1,7 +1,7 @@
 export interface TerrasosProjectMetadataLD {
   'regen:conservationStatus'?: IucnStatus;
   'regen:ecologicalConnectivityIndex'?: number;
-  'regen:socialCulturalIndex'?: number;
+  'regen:socialCulturalIndex'?: SocialCulturalValueType;
   'regen:administrativeArea'?: {
     'schema:name': string;
     'schema:url'?: string;
@@ -30,6 +30,8 @@ export type IucnStatus =
   | 'LEAST_CONCERN'
   | 'DATA_DEFICIENT'
   | 'NOT_EVALUATED';
+
+export type SocialCulturalValueType = 'VeryHigh' | 'High' | 'Medium' | 'Low';
 
 export type MarketType = 'COMPLIANCE_MARKET' | 'VOLUNTARY_MARKET';
 

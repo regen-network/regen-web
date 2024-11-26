@@ -205,25 +205,31 @@ export const durationFactors = [
 export const socialCulturalFactors = [
   {
     type: SocialCulturalValueType.VeryHigh,
+    title: msg`Very high`,
     factor: 0.2,
-    description: msg`The community has political and economic rights to the project`,
+    description: msg`The community has political and economic rights to the project.`,
   },
   {
     type: SocialCulturalValueType.High,
+    title: msg`High`,
     factor: 0.18,
-    description: msg`The community has political and economic rights to the project`,
+    description: msg`The community has economic rights to the project.`,
   },
   {
     type: SocialCulturalValueType.Medium,
+    title: msg`Medium`,
     factor: 0.16,
-    description: msg`The community has political and economic rights to the project`,
+    description: msg`The community participates in the construction of the project's Management Plan, reflected in binding actions.`,
   },
   {
     type: SocialCulturalValueType.Low,
+    title: msg`Low`,
     factor: 0,
-    description: msg`The community has political and economic rights to the project`,
+    description: msg`There is no community involvement in the construction of the project's Management Plan.`,
   },
 ];
 
 export const PRESERVATION = 'CONSERVATION';
 export const RESTORATION = 'ECOSYSTEM_RESTORATION';
+export const DEFAULT_DURATION_TOOLTIP = msg`Eligible projects implement preservation and/or restoration activities in different proportion/rates. Tebu recognizes restoration activities have a higher cost by assigning a greater value to restoration actions.`;
+export const V4_DURATION_TOOLTIP = msg`Credits issuance is calculated based on a weighted scale between 20 and 50 years.`;

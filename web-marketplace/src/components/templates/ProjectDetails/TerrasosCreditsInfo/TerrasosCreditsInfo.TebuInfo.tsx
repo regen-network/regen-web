@@ -8,6 +8,10 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
+import {
+  DEFAULT_DURATION_TOOLTIP,
+  V4_DURATION_TOOLTIP,
+} from './TerrasosCreditsInfo.constants';
 import { InfoTemplate } from './TerrasosCreditsInfo.InfoTemplate';
 import {
   getAreaActionsCard,
@@ -34,6 +38,9 @@ const TebuInfo: React.FC<TebuInfoProps> = ({
 
   const conservationStatus = projectMetadata?.['regen:conservationStatus'];
   const threatCard = conservationStatus && getThreatCard(_, conservationStatus);
+  const socialCulturalIndex = projectMetadata?.['regen:socialCulturalIndex'] as
+    | SocialCulturalValueType
+    | undefined;
 
   const ecologicalConnectivityIndex =
     projectMetadata?.['regen:ecologicalConnectivityIndex'];
@@ -44,9 +51,13 @@ const TebuInfo: React.FC<TebuInfoProps> = ({
   const duration = projectMetadata?.['regen:projectDuration'];
   // TODO: set this based on methodology schema version
   const minimumDuration = 20;
-  const maximumDuration = 30;
+  const maximumDuration = socialCulturalIndex ? 50 : 30;
+  const tooltip = socialCulturalIndex
+    ? V4_DURATION_TOOLTIP
+    : DEFAULT_DURATION_TOOLTIP;
   const durationCard =
-    duration && getDurationCard(_, duration, minimumDuration, maximumDuration);
+    duration &&
+    getDurationCard(_, duration, minimumDuration, maximumDuration, tooltip);
 
   const managementAreas = projectMetadata?.['regen:managementAreas'];
   const { preservationArea, restorationArea } =
@@ -57,10 +68,8 @@ const TebuInfo: React.FC<TebuInfoProps> = ({
     restorationArea &&
     getAreaActionsCard(_, preservationArea, restorationArea);
 
-  // TODO: update data standard to use levels instead of float values
-  const socialCulturalIndex = projectMetadata?.['regen:socialCulturalIndex'];
   const socialCulturalCard =
-    false && getSocialCulturalCard(_, SocialCulturalValueType.High);
+    socialCulturalIndex && getSocialCulturalCard(_, socialCulturalIndex);
 
   return (
     <InfoTemplate

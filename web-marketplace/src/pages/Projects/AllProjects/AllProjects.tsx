@@ -16,6 +16,7 @@ import { Loading } from 'web-components/src/components/loading';
 import { Pagination } from 'web-components/src/components/pagination/Pagination';
 import { Body } from 'web-components/src/components/typography';
 import { pxToRem } from 'web-components/src/theme/muiTheme';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
@@ -218,7 +219,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   };
 
   if (isSanityCreditClassesLoading || isCreditClassesWithMetadataLoading)
-    return <Loading sx={{ gridColumn: '1 / -1' }} />;
+    return <Loading sx={{ gridColumn: '1 / -1', height: { sm: '50vh' } }} />;
 
   return (
     <>
@@ -235,6 +236,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
             pb: 5,
             flexWrap: { xs: 'wrap', lg: 'nowrap' },
           }}
+          className={IS_TERRASOS ? 'lg:hidden' : undefined}
         >
           {IS_REGEN && (
             <SideFilter
@@ -299,7 +301,14 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
         </Flex>
       </Flex>
       {IS_TERRASOS && (
-        <TebuBannerWrapper className="-mt-15 mb-3 sm:mt-20 sm:mb-30 col-span-full" />
+        <TebuBannerWrapper
+          className={cn(
+            '-mt-15 mb-3 col-span-full',
+            projectsCount === 0
+              ? 'sm:mt-[56px] sm:mb-[48px]'
+              : 'sm:mt-20 sm:mb-30',
+          )}
+        />
       )}
       {projects?.map(project => {
         const isSoldOut = getIsSoldOut({ project, soldOutProjectsIds });
@@ -374,6 +383,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           message={_(EMPTY_PROJECTS_LABEL)}
           icon={<NoProjectIcon sx={{ fontSize: 100 }} />}
           sx={{ gridColumn: '1 / -1', backgroundColor: 'info.light' }}
+          className={IS_TERRASOS ? 'lg:mt-[36px]' : undefined}
         >
           <>
             {showFiltersReset && (

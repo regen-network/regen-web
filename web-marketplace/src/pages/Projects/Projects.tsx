@@ -206,7 +206,7 @@ const Projects = (): JSX.Element => {
         </div>
         <div
           className={cn(
-            'bg-ac-neutral-100 pt-25 sm:pt-40 px-[16px] md:px-25 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center',
+            'bg-ac-neutral-100 pt-25 sm:pt-40 px-[16px] md:px-25 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center h-fit',
             {
               'lg:justify-start grid-cols-[repeat(auto-fit,minmax(300px,1fr))]':
                 IS_TERRASOS,

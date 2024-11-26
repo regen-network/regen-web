@@ -68,7 +68,7 @@ export default function ProjectFilters({
                 // always show expanded for filter without hasCollapse
                 !filter.hasCollapse || (filter.hasCollapse && isExpanded[index])
               }
-              collapsedSize={filter.hasCollapse ? 110 : undefined}
+              collapsedSize={filter.hasCollapse ? 105 : undefined}
             >
               {filter.displayType === 'tag' && (
                 <Box display="flex" flexWrap="wrap" gap={2} className="ml-1">

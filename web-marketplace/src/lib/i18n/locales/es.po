@@ -1974,6 +1974,10 @@ msgstr "Fotos de la galería"
 msgid "Geo-Viewer"
 msgstr "GeoVisor"
 
+#: src/components/organisms/DetailsSection/DetailsSection.constants.ts:7
+msgid "Get even more info on this project on the"
+msgstr "Obtenga aún más información sobre este proyecto en"
+
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:348
 msgid "get started"
 msgstr "Empezar"
@@ -3331,6 +3335,10 @@ msgstr "Dirección de impacto de Regen"
 #: src/siteMetadata.ts:4
 msgid "Regen Marketplace"
 msgstr "Mercado de lluvia"
+
+#: src/components/organisms/DetailsSection/DetailsSection.constants.ts:8
+msgid "Regen Marketplace app."
+msgstr "Aplicación Regen Marketplace."
 
 #: src/components/templates/ProjectDetails/hooks/useSeo.ts:68
 #: src/siteMetadata.ts:6

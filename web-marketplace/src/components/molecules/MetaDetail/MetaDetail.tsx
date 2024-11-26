@@ -42,15 +42,19 @@ const MetaDetail: React.FC<Props> = ({
         {customContent ? (
           <>{customContent}</>
         ) : isArray ? (
-          value.map((v, i) => (
-            <MetaDetailBaseValue
-              key={i}
-              value={v}
-              rdfType={rdfType}
-              bodySize={bodySize}
-              sx={{ pb: value.length > 1 ? 3 : 0 }}
-            />
-          ))
+          value.map((v, i) => {
+            const isLast = i === value.length - 1;
+
+            return (
+              <MetaDetailBaseValue
+                key={i}
+                value={v}
+                rdfType={rdfType}
+                bodySize={bodySize}
+                sx={{ pb: value.length > 1 && !isLast ? 3 : 0 }}
+              />
+            );
+          })
         ) : (
           <MetaDetailBaseValue
             value={value}

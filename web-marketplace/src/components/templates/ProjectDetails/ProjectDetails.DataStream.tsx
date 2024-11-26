@@ -98,7 +98,7 @@ export const DataStream = ({
             id="data-stream"
             title={_(DATA_STREAM)}
             titleAlign="left"
-            className="mb-50 sm:mb-[100px]"
+            className="mb-50 sm:mb-[100px] pt-0"
           >
             {isAdmin && adminDescription && projectLocation && (
               <div className="mt-15">

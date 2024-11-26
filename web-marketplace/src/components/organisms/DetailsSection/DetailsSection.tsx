@@ -43,134 +43,140 @@ export const DetailsSection: React.FC<
 
   const hasCredibilityCards = header && credibilityCards?.length;
   const hasClassInfo = header && (methodology || creditClassDoc);
+  const isSectionDisplayed = hasCredibilityCards || hasClassInfo || !!children;
 
   return (
-    <div className="overflow-x-hidden pb-[80px] sm:pb-[100px]">
-      <Section visibleOverflow sx={{ root: [...sxToArray(sx)] }}>
-        {(hasCredibilityCards || hasClassInfo) && (
-          <Grid
-            container
-            sx={{ pb: { xs: 7.5, sm: 12.5 } }}
-            wrap="nowrap"
-            flexDirection={{ xs: 'column', tablet: 'row' }}
-          >
-            <Grid item>
-              <Label size="sm" mobileSize="sm" color="info.main">
-                {header.label}
-              </Label>
-              <Title variant="h2" py={3}>
-                {header.title}
-              </Title>
-              <Body
-                size="lg"
-                mobileSize="md"
-                className={cn(
-                  'relative z-10',
-                  IS_REGEN && 'max-w-[600px] xl:max-w-[718px]',
-                  IS_TERRASOS && 'max-w-[718px]',
-                )}
+    <>
+      {isSectionDisplayed && (
+        <div className="overflow-x-hidden pb-[80px] sm:pb-[100px]">
+          <Section visibleOverflow sx={{ root: [...sxToArray(sx)] }}>
+            {(hasCredibilityCards || hasClassInfo) && (
+              <Grid
+                container
+                sx={{ pb: { xs: 7.5, sm: 12.5 } }}
+                wrap="nowrap"
+                flexDirection={{ xs: 'column', tablet: 'row' }}
               >
-                {IS_REGEN ? (
-                  <BlockContent content={header.descriptionRaw} />
-                ) : (
-                  <div>
-                    {_(TERRASOS_PROJECT_DESCRIPTION)}
-                    <Link
-                      href={`${MARKETPLACE_APP_URL}/project/${projectId}`}
-                      className="ml-3"
-                    >
-                      {_(TERRASOS_PROJECT_LINK_TEXT)}
-                    </Link>
-                  </div>
-                )}
-              </Body>
-              {hasClassInfo && (
-                <Grid
-                  container
-                  pt={5}
-                  pr={{ xs: 11.25, tablet: 0 }}
-                  spacing={3}
-                >
-                  {creditClassDoc && (
-                    <DetailsSectionButton
-                      href={creditClassDoc['schema:url']}
-                      label={_(VIEW_CREDIT_CLASS_DOC)}
-                    />
-                  )}
-                  {methodology && (
-                    <DetailsSectionButton
-                      href={methodology['schema:url']}
-                      label={_(VIEW_METHODOLOGY)}
-                    />
-                  )}
-                </Grid>
-              )}
-            </Grid>
-            {credit?.creditImage &&
-              credit?.creditTypeImage &&
-              credit?.creditTypeUnit && (
-                <Grid item pt={{ xs: 7.5, tablet: 11.25 }}>
-                  <Grid container justifyContent="space-evenly" wrap="nowrap">
-                    <DetailsSectionCredit
-                      src={credit.creditImage}
-                      label={_(CREDIT)}
-                    />
+                <Grid item>
+                  <Label size="sm" mobileSize="sm" color="info.main">
+                    {header.label}
+                  </Label>
+                  <Title variant="h2" py={3}>
+                    {header.title}
+                  </Title>
+                  <Body
+                    size="lg"
+                    mobileSize="md"
+                    className={cn(
+                      'relative z-10',
+                      IS_REGEN && 'max-w-[600px] xl:max-w-[718px]',
+                      IS_TERRASOS && 'max-w-[718px]',
+                    )}
+                  >
+                    {IS_REGEN ? (
+                      <BlockContent content={header.descriptionRaw} />
+                    ) : (
+                      <div>
+                        {_(TERRASOS_PROJECT_DESCRIPTION)}
+                        <Link
+                          href={`${MARKETPLACE_APP_URL}/project/${projectId}`}
+                          className="ml-3"
+                        >
+                          {_(TERRASOS_PROJECT_LINK_TEXT)}
+                        </Link>
+                      </div>
+                    )}
+                  </Body>
+                  {hasClassInfo && (
                     <Grid
-                      item
-                      sx={{
-                        background:
-                          // TODO: get design system colors for this gradient
-                          'linear-gradient(206deg, #7D9AA2 0%, #9AD3BE 50%, #D1E2C7 100%)',
-                        '-webkit-background-clip': 'text',
-                        '-webkit-text-fill-color': 'transparent',
-                        '-moz-background-clip': 'text',
-                        '-moz-text-fill-color': 'transparent',
-                      }}
-                      pt={{ xs: 4, sm: 4.5 }}
-                      px={7.5}
-                      fontSize={40}
-                      fontFamily={headerFontFamily}
+                      container
+                      pt={5}
+                      pr={{ xs: 11.25, tablet: 0 }}
+                      spacing={3}
                     >
-                      =
+                      {creditClassDoc && (
+                        <DetailsSectionButton
+                          href={creditClassDoc['schema:url']}
+                          label={_(VIEW_CREDIT_CLASS_DOC)}
+                        />
+                      )}
+                      {methodology && (
+                        <DetailsSectionButton
+                          href={methodology['schema:url']}
+                          label={_(VIEW_METHODOLOGY)}
+                        />
+                      )}
                     </Grid>
-                    <DetailsSectionCredit
-                      src={credit.creditTypeImage}
-                      label={credit.creditTypeUnit}
-                      learnMore={credit.creditTypeUnitDefinition}
-                    />
-                  </Grid>
+                  )}
                 </Grid>
-              )}
-          </Grid>
-        )}
-        {children}
-      </Section>
-      {hasCredibilityCards && (
-        <ResponsiveSlider
-          classes={{ headerWrap: 'align-flex-end pb-[14px] sm:pb-[34px]' }}
-          visibleOverflow
-          arrows
-          mobileItemWidth="90%"
-          itemWidth="85%"
-          infinite={false}
-          slidesToShow={isMobile ? 1 : 2}
-          padding={theme.spacing(2.5)}
-          className="md:-mt-[90px] pt-0"
-          items={credibilityCards.map((card, index) => (
-            <CredibilityCard
-              index={index}
-              title={card?.credibilityCard?.title as string}
-              descriptionRaw={card?.credibilityCard?.descriptionRaw}
-              icon={card?.credibilityCard?.icon?.asset?.url}
-              claims={
-                card?.claims?.map(claim => ({
-                  description: claim?.description as string,
-                })) || []
-              }
+                {credit?.creditImage &&
+                  credit?.creditTypeImage &&
+                  credit?.creditTypeUnit && (
+                    <Grid item pt={{ xs: 7.5, tablet: 11.25 }}>
+                      <Grid
+                        container
+                        justifyContent="space-evenly"
+                        wrap="nowrap"
+                      >
+                        <DetailsSectionCredit
+                          src={credit.creditImage}
+                          label={_(CREDIT)}
+                        />
+                        <Grid
+                          container
+                          pt={5}
+                          pr={{ xs: 11.25, tablet: 0 }}
+                          spacing={3}
+                        >
+                          {creditClassDoc && (
+                            <DetailsSectionButton
+                              href={creditClassDoc['schema:url']}
+                              label={_(VIEW_CREDIT_CLASS_DOC)}
+                            />
+                          )}
+                          {methodology && (
+                            <DetailsSectionButton
+                              href={methodology['schema:url']}
+                              label={_(VIEW_METHODOLOGY)}
+                            />
+                          )}
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  )}
+              </Grid>
+            )}
+            {children}
+          </Section>
+
+          {hasCredibilityCards && (
+            <ResponsiveSlider
+              classes={{ headerWrap: 'align-flex-end pb-[14px] sm:pb-[34px]' }}
+              visibleOverflow
+              arrows
+              mobileItemWidth="90%"
+              itemWidth="85%"
+              infinite={false}
+              slidesToShow={isMobile ? 1 : 2}
+              padding={theme.spacing(2.5)}
+              className="md:-mt-[90px] pt-0"
+              items={credibilityCards.map((card, index) => (
+                <CredibilityCard
+                  index={index}
+                  title={card?.credibilityCard?.title as string}
+                  descriptionRaw={card?.credibilityCard?.descriptionRaw}
+                  icon={card?.credibilityCard?.icon?.asset?.url}
+                  claims={
+                    card?.claims?.map(claim => ({
+                      description: claim?.description as string,
+                    })) || []
+                  }
+                />
+              ))}
             />
-          ))}
-        />
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };

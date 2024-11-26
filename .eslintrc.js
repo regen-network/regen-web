@@ -26,6 +26,7 @@ module.exports = {
           'classNames',
           'previewClassName',
           'color',
+          'buttonClassName',
         ],
         ignoreProperty: [
           'border',

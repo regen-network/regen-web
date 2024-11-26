@@ -21,6 +21,8 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
 
+import { Link } from 'components/atoms';
+
 import { ORDER_STATUS } from './Order.constants';
 import { OrderLabel } from './Order.Label';
 import { OrderSummary } from './Order.Summary';
@@ -89,11 +91,13 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
         }
         action={
           <div className="flex flex-wrap md:flex-col gap-10">
-            {retirementInfo.retiredCredits && (
-              <OutlinedButton size="small" className="w-full sm:w-auto">
-                <CertifiedDocumentIcon className="mr-5" />
-                <Trans>certificate</Trans>
-              </OutlinedButton>
+            {retirementInfo.retiredCredits && retirementInfo.certificateNodeId && (
+              <Link href={`/certificate/${retirementInfo.certificateNodeId}`}>
+                <OutlinedButton size="small" className="w-full sm:w-auto">
+                  <CertifiedDocumentIcon className="mr-5" />
+                  <Trans>certificate</Trans>
+                </OutlinedButton>
+              </Link>
             )}
             {/* TODO - implement View receipt */}
             {/* <OutlinedButton size="small" className="w-full sm:w-auto">

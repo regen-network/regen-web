@@ -41,6 +41,7 @@ export type RetirementInfoData = {
   reason?: string;
   location?: string;
   makeAnonymous: boolean;
+  certificateNodeId?: string;
 };
 
 export type BlockchainDetailsData = {

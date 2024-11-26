@@ -15,6 +15,7 @@ export const retirementInfo: RetirementInfoData = {
     'For the betterment of my children lorem ipsum. For the betterment children lorem ipsum. For the betterment of my children lorem ipsum.',
   location: 'location',
   makeAnonymous: false,
+  certificateNodeId: 'abcde',
 };
 
 export const blockchainDetails: BlockchainDetailsData = {

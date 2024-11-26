@@ -199,6 +199,7 @@ export const Orders = () => {
               reason: retirement?.reason,
               location: retirement?.jurisdiction,
               makeAnonymous: false, // TODO APP-401
+              certificateNodeId: retirement?.nodeId,
             },
             blockchainDetails: {
               purchaseDate: order?.timestamp,

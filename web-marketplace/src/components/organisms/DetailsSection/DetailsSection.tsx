@@ -8,8 +8,9 @@ import Section from 'web-components/src/components/section';
 import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
 import { Body, Label, Title } from 'web-components/src/components/typography';
 import { headerFontFamily, Theme } from 'web-components/src/theme/muiTheme';
+import { cn } from 'web-components/src/utils/styles/cn';
 
-import { IS_REGEN, MARKETPLACE_APP_URL } from 'lib/env';
+import { IS_REGEN, IS_TERRASOS, MARKETPLACE_APP_URL } from 'lib/env';
 
 import { Link } from 'components/atoms';
 
@@ -63,8 +64,11 @@ export const DetailsSection: React.FC<
               <Body
                 size="lg"
                 mobileSize="md"
-                maxWidth={718}
-                className="relative z-10"
+                className={cn(
+                  'relative z-10',
+                  IS_REGEN && 'max-w-[600px] xl:max-w-[718px]',
+                  IS_TERRASOS && 'max-w-[718px]',
+                )}
               >
                 {IS_REGEN ? (
                   <BlockContent content={header.descriptionRaw} />

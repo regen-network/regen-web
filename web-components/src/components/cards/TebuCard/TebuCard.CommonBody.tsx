@@ -3,13 +3,13 @@ import Box from '@mui/material/Box';
 
 import { Body } from '../../typography';
 
-export interface ThreatBodyProps {
+export interface CommonBodyProps {
   icon: JSX.Element;
   description: JSX.Element | string;
   title: string;
 }
 
-const ThreatBody: React.FC<ThreatBodyProps> = ({
+const CommonBody: React.FC<CommonBodyProps> = ({
   title,
   description,
   icon,
@@ -21,12 +21,10 @@ const ThreatBody: React.FC<ThreatBodyProps> = ({
         <Body className="font-montserrat text-[16px] mt-[12px] font-bold mb-5">
           {title}
         </Body>
-        <Body className="font-montserrat text-[12px] pmb-[10px]">
-          {description}
-        </Body>
+        <Body className="font-montserrat text-[12px] pb-20">{description}</Body>
       </Box>
     </Box>
   );
 };
 
-export default ThreatBody;
+export default CommonBody;

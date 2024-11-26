@@ -8,12 +8,17 @@ import Section from 'web-components/src/components/section';
 import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
 import { Body, Label, Title } from 'web-components/src/components/typography';
 import { headerFontFamily, Theme } from 'web-components/src/theme/muiTheme';
+import { cn } from 'web-components/src/utils/styles/cn';
 
-import { IS_REGEN } from 'lib/env';
+import { IS_REGEN, IS_TERRASOS, MARKETPLACE_APP_URL } from 'lib/env';
+
+import { Link } from 'components/atoms';
 
 import { DetailsSectionButton } from './DetailsSection.Button';
 import {
   CREDIT,
+  TERRASOS_PROJECT_DESCRIPTION,
+  TERRASOS_PROJECT_LINK_TEXT,
   VIEW_CREDIT_CLASS_DOC,
   VIEW_METHODOLOGY,
 } from './DetailsSection.constants';
@@ -29,6 +34,7 @@ export const DetailsSection: React.FC<
   creditClassDoc,
   credit,
   children,
+  projectId,
   sx = [],
 }) => {
   const { _ } = useLingui();
@@ -55,8 +61,28 @@ export const DetailsSection: React.FC<
               <Title variant="h2" py={3}>
                 {header.title}
               </Title>
-              <Body size="lg" mobileSize="md" maxWidth={718}>
-                <BlockContent content={header.descriptionRaw} />
+              <Body
+                size="lg"
+                mobileSize="md"
+                className={cn(
+                  'relative z-10',
+                  IS_REGEN && 'max-w-[600px] xl:max-w-[718px]',
+                  IS_TERRASOS && 'max-w-[718px]',
+                )}
+              >
+                {IS_REGEN ? (
+                  <BlockContent content={header.descriptionRaw} />
+                ) : (
+                  <div>
+                    {_(TERRASOS_PROJECT_DESCRIPTION)}
+                    <Link
+                      href={`${MARKETPLACE_APP_URL}/project/${projectId}`}
+                      className="ml-3"
+                    >
+                      {_(TERRASOS_PROJECT_LINK_TEXT)}
+                    </Link>
+                  </div>
+                )}
               </Body>
               {hasClassInfo && (
                 <Grid
@@ -129,6 +155,7 @@ export const DetailsSection: React.FC<
           infinite={false}
           slidesToShow={isMobile ? 1 : 2}
           padding={theme.spacing(2.5)}
+          className="md:-mt-[90px] pt-0"
           items={credibilityCards.map((card, index) => (
             <CredibilityCard
               index={index}

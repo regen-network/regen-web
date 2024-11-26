@@ -8,6 +8,7 @@ import { CompactedNameUrl } from 'lib/rdf/types';
 
 export interface DetailsSectionProps {
   header?: Maybe<DetailsSection>;
+  projectId?: string;
   credibilityCards?: Maybe<Array<Maybe<DetailsCard>>>;
   methodology?: CompactedNameUrl;
   creditClassDoc?: CompactedNameUrl;

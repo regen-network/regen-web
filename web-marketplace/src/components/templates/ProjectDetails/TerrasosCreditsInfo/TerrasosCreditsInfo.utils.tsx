@@ -1,5 +1,5 @@
 import { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/macro';
+import { msg, plural } from '@lingui/macro';
 
 import TebuCard from 'web-components/src/components/cards/TebuCard';
 import AreaActionsBody from 'web-components/src/components/cards/TebuCard/TebuCard.AreaActionsBody';
@@ -108,7 +108,10 @@ export function getDurationCard(
       ]}
     >
       <DurationBody
-        title={_(msg`${years} year project duration`)}
+        title={plural(years, {
+          one: `${years} year project duration`,
+          other: `${years} year project duration`,
+        })}
         minimumValue={minimumDuration}
         maximumValue={maximumDuration}
         minimumLabel="minimum"

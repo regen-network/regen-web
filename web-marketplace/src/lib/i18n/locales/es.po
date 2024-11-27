@@ -22,6 +22,9 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+msgid ""
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -60,7 +63,7 @@ msgstr "(la jubilación es permanente e irreversible)"
 
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:132
 msgid "{0, plural, one {allowed credit class} other {allowed credit classes}}"
-msgstr "{0, plural, uno {clase de crédito permitida} otro {clases de crédito permitidas}}"
+msgstr "{0, plural, one {clase de crédito permitida} other {clases de crédito permitidas}}"
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:5
 msgid "{ADDRESS_USED_ERROR} Do you want to merge these accounts?"
@@ -68,7 +71,7 @@ msgstr "{ADDRESS_USED_ERROR} ¿Quieres fusionar estas cuentas?"
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:173
 msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
-msgstr "{créditosDisponibles, plural, uno {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido} otro {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido}}"
+msgstr "{créditosDisponibles, plural, one {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido} other {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido}}"
 
 #: src/lib/constants/shared.constants.tsx:233
 msgid "{from}–{displayedTo} of {count}"
@@ -84,37 +87,37 @@ msgstr "{from}–{displayedTo} de más de {to}"
 
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:329
 msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} character remaining} other {{remainingCaptionCharacters} characters remaining}}"
-msgstr "{remainingCaptionCharacters, plural, queda un {{remainingCaptionCharacters} carácter} quedan otros {{remainingCaptionCharacters} caracteres}}"
+msgstr "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} carácter} other {{remainingCaptionCharacters} caracteres}}"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:117
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:220
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:168
 msgid "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} character remaining} other {{remainingDescriptionCharacters} characters remaining}}"
-msgstr "{remainingDescriptionCharacters, plural, queda un {{remainingDescriptionCharacters} carácter} quedan otros {{remainingDescriptionCharacters} caracteres}}"
+msgstr "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} carácter} other {{remainingDescriptionCharacters} caracteres}}"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.tsx:170
 msgid "{remainingStoryCharacters, plural, one {{remainingStoryCharacters} character remaining} other {{remainingStoryCharacters} characters remaining}}"
-msgstr "{remainingStoryCharacters, plural, queda un {{remainingStoryCharacters} personaje} quedan otros {{remainingStoryCharacters} personajes}}"
+msgstr "{remainingStoryCharacters, plural, one {{remainingStoryCharacters} personaje} other {{remainingStoryCharacters} personajes}}"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.tsx:191
 msgid "{remainingStoryTitleCharacters, plural, one {{remainingStoryTitleCharacters} character remaining} other {{remainingStoryTitleCharacters} characters remaining}}"
-msgstr "{remainingStoryTitleCharacters, plural, queda un {{remainingStoryTitleCharacters} carácter} quedan otros {{remainingStoryTitleCharacters} caracteres}}"
+msgstr "{remainingStoryTitleCharacters, plural, one {{remainingStoryTitleCharacters} carácter} other {{remainingStoryTitleCharacters} caracteres}}"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.tsx:147
 msgid "{remainingSummaryCharacters, plural, one {{remainingSummaryCharacters} character remaining} other {{remainingSummaryCharacters} characters remaining}}"
-msgstr "{remainingSummaryCharacters, plural, queda un {{remainingSummaryCharacters} carácter} quedan otros {{remainingSummaryCharacters} caracteres}}"
+msgstr "{remainingSummaryCharacters, plural, one {{remainingSummaryCharacters} carácter} other {{remainingSummaryCharacters} caracteres}}"
 
 #: src/components/organisms/PostForm/PostForm.tsx:265
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
-msgstr "{remainingTitleCharacters, plural, un {{remainingTitleCharacters} carácter restante} otros {{remainingTitleCharacters} caracteres restantes}}"
+msgstr "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} carácter restante} other {{remainingTitleCharacters} caracteres restantes}}"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:90
 #~ msgid "{truncatedQuantity} credit(s) available"
 #~ msgstr "{truncatedQuantity} crédito(s) disponible(s)"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:111
-msgid "{years} year project duration"
-msgstr "{años} años de duración del proyecto"
+msgid "{years, plural, one {{years} year project duration} other {{years} year project duration}}"
+msgstr "{years, plural, one {Duración del proyecto: {years} año} other {Duración del proyecto: {years} años}}"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:106
 #: src/components/organisms/Order/Order.Summary.tsx:85
@@ -584,7 +587,7 @@ msgstr "¿Estás seguro de que deseas eliminar esta publicación?"
 msgid "Are you sure you want to discard your changes?"
 msgstr "¿Está seguro de que desea descartar los cambios?"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:141
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:144
 msgid "Area Actions"
 msgstr "Acciones del Área"
 
@@ -1270,7 +1273,7 @@ msgstr "Id. de lote de crédito"
 
 #: src/pages/Dashboard/MyEcocredits/hooks/useUpdateCardItemsTakeBasket.tsx:42
 msgid "credit batch id{0, plural, one {} other {(s)}}"
-msgstr "id de lote de crédito{0, plural, uno {} otro {(s)}}"
+msgstr "id de lote de crédito{0, plural, one {} other {(s)}}"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:74
 msgid "Credit Batch Info"
@@ -1908,7 +1911,7 @@ msgstr "factor"
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:39
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:71
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:105
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:182
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:185
 msgid "Factor:"
 msgstr "Factor:"
 
@@ -2987,11 +2990,11 @@ msgstr "prefinanciar este proyecto"
 msgid "Premontane humid forest"
 msgstr "Bosque húmedo premontano"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:159
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:162
 msgid "Preservation"
 msgstr "Preservación"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:151
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:154
 msgid "Preservation Factor:"
 msgstr "Factor de conservación:"
 
@@ -3290,7 +3293,7 @@ msgstr "PROYECTADO:"
 msgid "Projects"
 msgstr "Proyectos"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:143
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:146
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr "Los proyectos deben tener una duración de al menos 20 años para garantizar resultados demostrables y cuantificables en biodiversidad. Tebu promueve proyectos que duren más tiempo, asegurando procesos ecológicos a largo plazo."
 
@@ -3484,11 +3487,11 @@ msgstr "Recursos"
 msgid "Resources for Getting Started"
 msgstr "Recursos para empezar"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:160
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
 msgid "Restoration"
 msgstr "Restauración"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:147
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:150
 msgid "Restoration Factor:"
 msgstr "Factor de restauración:"
 
@@ -3840,7 +3843,7 @@ msgstr "Pequeña o mediana empresa"
 msgid "Social Accounts"
 msgstr "Cuentas sociales"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:176
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:179
 msgid "Social and Cultural Index"
 msgstr "Índice social y cultural"
 
@@ -4101,7 +4104,7 @@ msgstr "La dirección de correo electrónico que está utilizando para iniciar s
 msgid "The individual or organization that is in charge of managing the project and will appear on the project page."
 msgstr "La persona u organización que está a cargo de administrar el proyecto y aparecerá en la página del proyecto."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:178
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:181
 msgid "The integration of local communities' knowledge, social structures, and equitable participation to ensure both ecosystem conservation and community benefits."
 msgstr "La integración del conocimiento de las comunidades locales, las estructuras sociales y la participación equitativa para garantizar tanto la conservación del ecosistema como los beneficios comunitarios."
 

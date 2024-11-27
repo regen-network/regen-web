@@ -286,7 +286,11 @@ export default function ProjectMedia({
           />
           {mediaAsset?.type === 'video' && (
             <div className={classes.play}>
-              <PlayIcon width="10.85px" height="10.85px" />
+              <PlayIcon
+                width="10.85px"
+                height="10.85px"
+                className="text-ac-primary-500"
+              />
             </div>
           )}
         </div>

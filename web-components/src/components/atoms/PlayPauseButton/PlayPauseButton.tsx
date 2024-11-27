@@ -22,9 +22,13 @@ export const PlayPauseButton = ({
     >
       <div className={cn(styles.button, className)}>
         {playing ? (
-          <PauseIcon width="100%" height="100%" />
+          <PauseIcon
+            width="100%"
+            height="100%"
+            className="text-ac-primary-500"
+          />
         ) : (
-          <PlayIcon width="50%" height="50%" />
+          <PlayIcon width="50%" height="50%" className="text-ac-primary-500" />
         )}
       </div>
     </button>

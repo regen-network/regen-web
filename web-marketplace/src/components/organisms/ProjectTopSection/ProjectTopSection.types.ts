@@ -11,6 +11,7 @@ import {
   AllCreditClassQuery,
   ProjectPrefinancing,
   SdgByIriQuery,
+  TerrasosBookCall,
 } from 'generated/sanity-graphql';
 import {
   BatchInfoWithSupply,
@@ -47,6 +48,7 @@ export type ProjectTopSectionProps = {
   projectPrefinancing?: ProjectPrefinancing | null;
   isSoldOut: boolean;
   normalizedProject?: NormalizeProject;
+  terrasosBookCall?: TerrasosBookCall;
 };
 
 export type SdgType = SdgByIriQuery['allSdg'][0];

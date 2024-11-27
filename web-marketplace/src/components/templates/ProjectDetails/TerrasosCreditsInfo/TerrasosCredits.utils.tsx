@@ -3,7 +3,11 @@ import { msg } from '@lingui/macro';
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { LinkType } from 'web-components/src/types/shared/linkType';
 
-import { ComplianceInfoQuery } from 'generated/sanity-graphql';
+import {
+  ComplianceInfoQuery,
+  TerrasosBookCall,
+} from 'generated/sanity-graphql';
+import { getLinkHref } from 'lib/button';
 import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
@@ -21,6 +25,7 @@ type GetTerrasosCreditsTabsProps = {
   complianceInfo?: ComplianceInfoQuery;
   complianceCredits?: JSX.Element;
   isComplianceProject: boolean;
+  bookCall?: TerrasosBookCall;
 };
 
 export function getTerrasosCreditsTabs({
@@ -31,11 +36,12 @@ export function getTerrasosCreditsTabs({
   complianceInfo,
   complianceCredits,
   isComplianceProject,
+  bookCall,
 }: GetTerrasosCreditsTabsProps): IconTabProps[] {
   const complianceInfoItem = complianceInfo?.allComplianceInfo[0];
   const learnMoreLink: LinkType = {
-    href: complianceInfoItem?.bookCallLink?.href ?? '',
-    text: complianceInfoItem?.bookCallLink?.text ?? '',
+    href: getLinkHref(bookCall?.button?.buttonLink),
+    text: bookCall?.button?.buttonText ?? '',
   };
   const description = complianceInfoItem?.descriptionRaw;
   const metadata = projectPageMetadata || projectMetadata;

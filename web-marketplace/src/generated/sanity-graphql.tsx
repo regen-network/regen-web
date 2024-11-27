@@ -50,6 +50,45 @@ export type ActionCardSorting = {
   image?: Maybe<CustomImageSorting>;
 };
 
+export type AssistInstructionContext = Document & {
+  __typename?: 'AssistInstructionContext';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  contextRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type AssistInstructionContextFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+};
+
+export type AssistInstructionContextSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+};
+
 export type BannerCard = {
   __typename?: 'BannerCard';
   _key?: Maybe<Scalars['String']>;
@@ -127,7 +166,7 @@ export type BasketDetailsPageFilter = {
   language?: Maybe<StringFilter>;
 };
 
-export type BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage = BasketDetailsPage | BridgePage | BuyModal | BuyModalOptions | BuyersPage | CaseStudiesPage | CaseStudyPage | Claim | ClassPrefinanceTimelineStatus | CommunityPage | ComplianceInfo | CreateCreditClassPage | CreateMethodologyPage | CreateProjectPage | CredibilityCard | CreditCategory | CreditCertification | CreditClass | CreditClassPage | CreditType | DevelopersPage | Doc | EcologicalCreditCard | EcologicalImpact | EcologicalOutcome | Faq | FeaturedProjectCard | FeaturedSection | GettingStartedResourcesCard | GettingStartedResourcesSection | HomePage | HomePageWeb | LandManagementPractice | LandStewardsPage | MainnetPage | Media | Methodology | MethodologyReviewProcessPage | NctPage | OffsetMethod | Partner | PartnersPage | Person | PresskitPage | ProfilePage | Program | Project | ProjectActivity | ProjectEcosystem | ProjectPage | ProjectPrefinanceTimelineStatus | ProjectRating | ProjectsPage | Resource | ResourcesPage | SciencePage | Sdg | SharedSections | SoldOutProjects | StatCard | Tag | TeamPage | TebuBanner | TerrasosProject | TokenPage | WalletAddressRegistrationPage;
+export type BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosBookCallOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage = BasketDetailsPage | BridgePage | BuyModal | BuyModalOptions | BuyersPage | CaseStudiesPage | CaseStudyPage | Claim | ClassPrefinanceTimelineStatus | CommunityPage | ComplianceInfo | CreateCreditClassPage | CreateMethodologyPage | CreateProjectPage | CredibilityCard | CreditCategory | CreditCertification | CreditClass | CreditClassPage | CreditType | DevelopersPage | Doc | EcologicalCreditCard | EcologicalImpact | EcologicalOutcome | Faq | FeaturedProjectCard | FeaturedSection | GettingStartedResourcesCard | GettingStartedResourcesSection | HomePage | HomePageWeb | LandManagementPractice | LandStewardsPage | MainnetPage | Media | Methodology | MethodologyReviewProcessPage | NctPage | OffsetMethod | Partner | PartnersPage | Person | PresskitPage | ProfilePage | Program | Project | ProjectActivity | ProjectEcosystem | ProjectPage | ProjectPrefinanceTimelineStatus | ProjectRating | ProjectsPage | Resource | ResourcesPage | SciencePage | Sdg | SharedSections | SoldOutProjects | StatCard | Tag | TeamPage | TebuBanner | TerrasosBookCall | TerrasosProject | TokenPage | WalletAddressRegistrationPage;
 
 export type BasketDetailsPageSorting = {
   _id?: Maybe<SortOrder>;
@@ -1523,7 +1562,6 @@ export type ComplianceInfo = Document & {
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
-  bookCallLink?: Maybe<LinkItem>;
   language?: Maybe<Scalars['String']>;
 };
 
@@ -1536,7 +1574,6 @@ export type ComplianceInfoFilter = {
   _updatedAt?: Maybe<DatetimeFilter>;
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
-  bookCallLink?: Maybe<LinkItemFilter>;
   language?: Maybe<StringFilter>;
 };
 
@@ -1547,7 +1584,6 @@ export type ComplianceInfoSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
-  bookCallLink?: Maybe<LinkItemSorting>;
   language?: Maybe<SortOrder>;
 };
 
@@ -3875,7 +3911,7 @@ export type InternationalizedArrayReferenceValue = {
   __typename?: 'InternationalizedArrayReferenceValue';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
-  value?: Maybe<BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage>;
+  value?: Maybe<BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosBookCallOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage>;
 };
 
 export type InternationalizedArrayReferenceValueFilter = {
@@ -5908,6 +5944,7 @@ export type ReviewSectionSorting = {
 export type RootQuery = {
   __typename?: 'RootQuery';
   TranslationMetadata?: Maybe<TranslationMetadata>;
+  AssistInstructionContext?: Maybe<AssistInstructionContext>;
   HomePage?: Maybe<HomePage>;
   HomePageWeb?: Maybe<HomePageWeb>;
   CreateCreditClassPage?: Maybe<CreateCreditClassPage>;
@@ -5974,6 +6011,7 @@ export type RootQuery = {
   TebuBanner?: Maybe<TebuBanner>;
   TerrasosProject?: Maybe<TerrasosProject>;
   ComplianceInfo?: Maybe<ComplianceInfo>;
+  TerrasosBookCall?: Maybe<TerrasosBookCall>;
   ImageGridItem?: Maybe<ImageGridItem>;
   ContactPage?: Maybe<ContactPage>;
   FaqPage?: Maybe<FaqPage>;
@@ -5984,6 +6022,7 @@ export type RootQuery = {
   SanityFileAsset?: Maybe<SanityFileAsset>;
   Document?: Maybe<Document>;
   allTranslationMetadata: Array<TranslationMetadata>;
+  allAssistInstructionContext: Array<AssistInstructionContext>;
   allHomePage: Array<HomePage>;
   allHomePageWeb: Array<HomePageWeb>;
   allCreateCreditClassPage: Array<CreateCreditClassPage>;
@@ -6050,6 +6089,7 @@ export type RootQuery = {
   allTebuBanner: Array<TebuBanner>;
   allTerrasosProject: Array<TerrasosProject>;
   allComplianceInfo: Array<ComplianceInfo>;
+  allTerrasosBookCall: Array<TerrasosBookCall>;
   allImageGridItem: Array<ImageGridItem>;
   allContactPage: Array<ContactPage>;
   allFaqPage: Array<FaqPage>;
@@ -6063,6 +6103,11 @@ export type RootQuery = {
 
 
 export type RootQueryTranslationMetadataArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type RootQueryAssistInstructionContextArgs = {
   id: Scalars['ID'];
 };
 
@@ -6397,6 +6442,11 @@ export type RootQueryComplianceInfoArgs = {
 };
 
 
+export type RootQueryTerrasosBookCallArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type RootQueryImageGridItemArgs = {
   id: Scalars['ID'];
 };
@@ -6445,6 +6495,14 @@ export type RootQueryDocumentArgs = {
 export type RootQueryAllTranslationMetadataArgs = {
   where?: Maybe<TranslationMetadataFilter>;
   sort?: Maybe<Array<TranslationMetadataSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
+export type RootQueryAllAssistInstructionContextArgs = {
+  where?: Maybe<AssistInstructionContextFilter>;
+  sort?: Maybe<Array<AssistInstructionContextSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -6978,6 +7036,14 @@ export type RootQueryAllComplianceInfoArgs = {
 };
 
 
+export type RootQueryAllTerrasosBookCallArgs = {
+  where?: Maybe<TerrasosBookCallFilter>;
+  sort?: Maybe<Array<TerrasosBookCallSorting>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+
 export type RootQueryAllImageGridItemArgs = {
   where?: Maybe<ImageGridItemFilter>;
   sort?: Maybe<Array<ImageGridItemSorting>>;
@@ -7075,6 +7141,226 @@ export type SanityAssetSourceDataSorting = {
   name?: Maybe<SortOrder>;
   id?: Maybe<SortOrder>;
   url?: Maybe<SortOrder>;
+};
+
+export type SanityAssistInstruction = {
+  __typename?: 'SanityAssistInstruction';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  promptRaw?: Maybe<Scalars['JSON']>;
+  icon?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  userId?: Maybe<Scalars['String']>;
+  createdById?: Maybe<Scalars['String']>;
+  output?: Maybe<Array<Maybe<SanityAssistOutputFieldOrSanityAssistOutputType>>>;
+};
+
+export type SanityAssistInstructionContext = {
+  __typename?: 'SanityAssistInstructionContext';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  /** The referenced context will be inserted into the instruction */
+  reference?: Maybe<AssistInstructionContext>;
+};
+
+export type SanityAssistInstructionContextFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  reference?: Maybe<AssistInstructionContextFilter>;
+};
+
+export type SanityAssistInstructionContextSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+};
+
+export type SanityAssistInstructionFieldRef = {
+  __typename?: 'SanityAssistInstructionFieldRef';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+};
+
+export type SanityAssistInstructionFieldRefFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  path?: Maybe<StringFilter>;
+};
+
+export type SanityAssistInstructionFieldRefSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  path?: Maybe<SortOrder>;
+};
+
+export type SanityAssistInstructionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  icon?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  userId?: Maybe<StringFilter>;
+  createdById?: Maybe<StringFilter>;
+};
+
+export type SanityAssistInstructionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  icon?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  userId?: Maybe<SortOrder>;
+  createdById?: Maybe<SortOrder>;
+};
+
+export type SanityAssistInstructionTask = {
+  __typename?: 'SanityAssistInstructionTask';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  instructionKey?: Maybe<Scalars['String']>;
+  started?: Maybe<Scalars['DateTime']>;
+  updated?: Maybe<Scalars['DateTime']>;
+  info?: Maybe<Scalars['String']>;
+};
+
+export type SanityAssistInstructionTaskFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  path?: Maybe<StringFilter>;
+  instructionKey?: Maybe<StringFilter>;
+  started?: Maybe<DatetimeFilter>;
+  updated?: Maybe<DatetimeFilter>;
+  info?: Maybe<StringFilter>;
+};
+
+export type SanityAssistInstructionTaskSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  path?: Maybe<SortOrder>;
+  instructionKey?: Maybe<SortOrder>;
+  started?: Maybe<SortOrder>;
+  updated?: Maybe<SortOrder>;
+  info?: Maybe<SortOrder>;
+};
+
+export type SanityAssistInstructionUserInput = {
+  __typename?: 'SanityAssistInstructionUserInput';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  /** The header above the user input text field */
+  message?: Maybe<Scalars['String']>;
+  /** The description above the user input text field */
+  description?: Maybe<Scalars['String']>;
+};
+
+export type SanityAssistInstructionUserInputFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  message?: Maybe<StringFilter>;
+  description?: Maybe<StringFilter>;
+};
+
+export type SanityAssistInstructionUserInputSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  message?: Maybe<SortOrder>;
+  description?: Maybe<SortOrder>;
+};
+
+export type SanityAssistOutputField = {
+  __typename?: 'SanityAssistOutputField';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+};
+
+export type SanityAssistOutputFieldFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  path?: Maybe<StringFilter>;
+};
+
+export type SanityAssistOutputFieldOrSanityAssistOutputType = SanityAssistOutputField | SanityAssistOutputType;
+
+export type SanityAssistOutputFieldSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  path?: Maybe<SortOrder>;
+};
+
+export type SanityAssistOutputType = {
+  __typename?: 'SanityAssistOutputType';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type SanityAssistOutputTypeFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  type?: Maybe<StringFilter>;
+};
+
+export type SanityAssistOutputTypeSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  type?: Maybe<SortOrder>;
+};
+
+export type SanityAssistSchemaTypeAnnotations = {
+  __typename?: 'SanityAssistSchemaTypeAnnotations';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  fields?: Maybe<Array<Maybe<SanityAssistSchemaTypeField>>>;
+};
+
+export type SanityAssistSchemaTypeAnnotationsFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+};
+
+export type SanityAssistSchemaTypeAnnotationsSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+};
+
+export type SanityAssistSchemaTypeField = {
+  __typename?: 'SanityAssistSchemaTypeField';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  instructions?: Maybe<Array<Maybe<SanityAssistInstruction>>>;
+};
+
+export type SanityAssistSchemaTypeFieldFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  path?: Maybe<StringFilter>;
+};
+
+export type SanityAssistSchemaTypeFieldSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  path?: Maybe<SortOrder>;
+};
+
+export type SanityAssistTaskStatus = {
+  __typename?: 'SanityAssistTaskStatus';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  tasks?: Maybe<Array<Maybe<SanityAssistInstructionTask>>>;
+};
+
+export type SanityAssistTaskStatusFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+};
+
+export type SanityAssistTaskStatusSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
 };
 
 export type SanityFileAsset = Document & {
@@ -8081,6 +8367,47 @@ export type TebuBannerSorting = {
   _key?: Maybe<SortOrder>;
   learnMoreLink?: Maybe<LinkItemSorting>;
   logo?: Maybe<CustomImageSorting>;
+  language?: Maybe<SortOrder>;
+};
+
+export type TerrasosBookCall = Document & {
+  __typename?: 'TerrasosBookCall';
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  _key?: Maybe<Scalars['String']>;
+  button?: Maybe<Button>;
+  language?: Maybe<Scalars['String']>;
+};
+
+export type TerrasosBookCallFilter = {
+  /** Apply filters on document level */
+  _?: Maybe<Sanity_DocumentFilter>;
+  _id?: Maybe<IdFilter>;
+  _type?: Maybe<StringFilter>;
+  _createdAt?: Maybe<DatetimeFilter>;
+  _updatedAt?: Maybe<DatetimeFilter>;
+  _rev?: Maybe<StringFilter>;
+  _key?: Maybe<StringFilter>;
+  button?: Maybe<ButtonFilter>;
+  language?: Maybe<StringFilter>;
+};
+
+export type TerrasosBookCallSorting = {
+  _id?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  _createdAt?: Maybe<SortOrder>;
+  _updatedAt?: Maybe<SortOrder>;
+  _rev?: Maybe<SortOrder>;
+  _key?: Maybe<SortOrder>;
+  button?: Maybe<ButtonSorting>;
   language?: Maybe<SortOrder>;
 };
 
@@ -9527,10 +9854,6 @@ export type ComplianceInfoQuery = (
   & { allComplianceInfo: Array<(
     { __typename?: 'ComplianceInfo' }
     & Pick<ComplianceInfo, 'language' | 'descriptionRaw'>
-    & { bookCallLink?: Maybe<(
-      { __typename?: 'LinkItem' }
-      & Pick<LinkItem, 'href' | 'text'>
-    )> }
   )> }
 );
 
@@ -9938,6 +10261,21 @@ export type TebuBannerQuery = (
     )>, logo?: Maybe<(
       { __typename?: 'CustomImage' }
       & CustomImageFieldsFragment
+    )> }
+  )> }
+);
+
+export type TerrasosBookCallQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TerrasosBookCallQuery = (
+  { __typename?: 'RootQuery' }
+  & { allTerrasosBookCall: Array<(
+    { __typename?: 'TerrasosBookCall' }
+    & Pick<TerrasosBookCall, 'language'>
+    & { button?: Maybe<(
+      { __typename?: 'Button' }
+      & ButtonFieldsFragment
     )> }
   )> }
 );
@@ -11911,10 +12249,6 @@ export const ComplianceInfoDocument = gql`
   allComplianceInfo {
     language
     descriptionRaw
-    bookCallLink {
-      href
-      text
-    }
   }
 }
     `;
@@ -12160,6 +12494,43 @@ export function useTebuBannerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type TebuBannerQueryHookResult = ReturnType<typeof useTebuBannerQuery>;
 export type TebuBannerLazyQueryHookResult = ReturnType<typeof useTebuBannerLazyQuery>;
 export type TebuBannerQueryResult = Apollo.QueryResult<TebuBannerQuery, TebuBannerQueryVariables>;
+export const TerrasosBookCallDocument = gql`
+    query TerrasosBookCall {
+  allTerrasosBookCall {
+    language
+    button {
+      ...buttonFields
+    }
+  }
+}
+    ${ButtonFieldsFragmentDoc}`;
+
+/**
+ * __useTerrasosBookCallQuery__
+ *
+ * To run a query within a React component, call `useTerrasosBookCallQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTerrasosBookCallQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTerrasosBookCallQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTerrasosBookCallQuery(baseOptions?: Apollo.QueryHookOptions<TerrasosBookCallQuery, TerrasosBookCallQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TerrasosBookCallQuery, TerrasosBookCallQueryVariables>(TerrasosBookCallDocument, options);
+      }
+export function useTerrasosBookCallLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TerrasosBookCallQuery, TerrasosBookCallQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TerrasosBookCallQuery, TerrasosBookCallQueryVariables>(TerrasosBookCallDocument, options);
+        }
+export type TerrasosBookCallQueryHookResult = ReturnType<typeof useTerrasosBookCallQuery>;
+export type TerrasosBookCallLazyQueryHookResult = ReturnType<typeof useTerrasosBookCallLazyQuery>;
+export type TerrasosBookCallQueryResult = Apollo.QueryResult<TerrasosBookCallQuery, TerrasosBookCallQueryVariables>;
 export const TerrasosProjectByIdDocument = gql`
     query terrasosProjectById($id: String!) {
   allTerrasosProject(where: {projectId: {eq: $id}}) {

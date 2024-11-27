@@ -1,0 +1,8 @@
+query TerrasosBookCall {
+  allTerrasosBookCall {
+    language
+    button {
+      ...buttonFields
+    }
+  }
+}

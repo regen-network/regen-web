@@ -2,7 +2,10 @@ import { Box } from '@mui/material';
 
 import { pxToRem } from 'web-components/src/theme/muiTheme';
 
-import { ComplianceInfoQuery } from 'generated/sanity-graphql';
+import {
+  ComplianceInfoQuery,
+  TerrasosBookCall,
+} from 'generated/sanity-graphql';
 import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
@@ -20,6 +23,7 @@ type Props = {
   complianceCredits?: JSX.Element;
   isComplianceProject: boolean;
   className?: string;
+  bookCall?: TerrasosBookCall;
 };
 
 export default function TerrasosCreditsInfo({
@@ -32,6 +36,7 @@ export default function TerrasosCreditsInfo({
   complianceCredits,
   isComplianceProject,
   className,
+  bookCall,
 }: Props) {
   const tabs = getTerrasosCreditsTabs({
     _,
@@ -42,6 +47,7 @@ export default function TerrasosCreditsInfo({
     complianceInfo,
     complianceCredits,
     isComplianceProject,
+    bookCall,
   });
   return tabs.length > 0 ? (
     <Box sx={{ mt: 0 }} className={className}>

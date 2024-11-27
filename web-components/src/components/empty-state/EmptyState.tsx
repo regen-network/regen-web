@@ -9,6 +9,7 @@ export interface Props {
   icon?: JSX.Element;
   sx?: SxProps<Theme>;
   children?: ReactElement;
+  className?: string;
 }
 
 /* Placeholder component that hold best practices.
@@ -18,8 +19,10 @@ const EmptyState = ({
   icon,
   children,
   sx = [],
+  className,
 }: Props): JSX.Element => (
   <Box
+    className={className}
     sx={[
       {
         display: 'flex',

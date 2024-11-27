@@ -24,7 +24,7 @@ import {
   useCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
-import { IS_TERRASOS } from 'lib/env';
+import { IS_REGEN, IS_TERRASOS } from 'lib/env';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 
 import { Link } from 'components/atoms';
@@ -206,7 +206,7 @@ const Projects = (): JSX.Element => {
         </div>
         <div
           className={cn(
-            'bg-ac-neutral-100 pt-25 sm:pt-40 px-[16px] md:px-25 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center h-fit',
+            'bg-ac-neutral-100 pt-25 sm:pt-40 px-[16px] md:px-25 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center',
             {
               'lg:justify-start grid-cols-[repeat(auto-fit,minmax(300px,1fr))]':
                 IS_TERRASOS,
@@ -215,6 +215,8 @@ const Projects = (): JSX.Element => {
               'mx-auto grid-cols-[repeat(auto-fit,minmax(300px,1fr))]':
                 !IS_TERRASOS,
             },
+            { 'lg:block': projectsCount === 0 && !IS_REGEN },
+            { 'h-fit': projectsCount !== 0 },
           )}
         >
           <IconTabs

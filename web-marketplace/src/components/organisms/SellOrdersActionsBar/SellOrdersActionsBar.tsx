@@ -51,7 +51,7 @@ type Params = {
   onClickCreatePost?: () => void;
   isCreatePostButtonDisabled?: boolean;
   tooltipText?: string;
-  isTerrasos: boolean;
+  isTerrasos?: boolean;
 };
 
 export const SellOrdersActionsBar = ({

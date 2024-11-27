@@ -48,7 +48,8 @@ export function StoryText({
         text={_(READ)}
         lessText={_(LESS)}
         moreText={_(MORE)}
-        className="text-sc-text-link hover:text-sc-text-link"
+        buttonClassName="text-sc-text-link hover:text-sc-text-link"
+        className={hasMedia ? '' : 'mb-0'}
       >
         {story}
       </ReadMore>

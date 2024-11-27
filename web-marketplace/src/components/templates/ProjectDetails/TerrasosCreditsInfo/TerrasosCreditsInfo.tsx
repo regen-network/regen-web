@@ -19,6 +19,7 @@ type Props = {
   complianceInfo?: ComplianceInfoQuery;
   complianceCredits?: JSX.Element;
   isComplianceProject: boolean;
+  className?: string;
 };
 
 export default function TerrasosCreditsInfo({
@@ -30,6 +31,7 @@ export default function TerrasosCreditsInfo({
   complianceInfo,
   complianceCredits,
   isComplianceProject,
+  className,
 }: Props) {
   const tabs = getTerrasosCreditsTabs({
     _,
@@ -42,11 +44,11 @@ export default function TerrasosCreditsInfo({
     isComplianceProject,
   });
   return tabs.length > 0 ? (
-    <Box sx={{ mt: 0 }}>
+    <Box sx={{ mt: 0 }} className={className}>
       <TableTabs
         sx={{
           px: { xs: 0, sm: 0 },
-          pt: { xs: pxToRem(50), sm: pxToRem(50) },
+          pt: { xs: pxToRem(85), sm: pxToRem(76) },
           pb: { xs: 0, sm: 0 },
         }}
         tabs={tabs}

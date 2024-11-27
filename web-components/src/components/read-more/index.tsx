@@ -57,6 +57,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
   lessText,
   moreText,
   className,
+  buttonClassName,
 }) => {
   const { classes: styles, cx } = useStyles();
   const [expanded, setExpanded] = useState(false);
@@ -68,7 +69,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
   );
   const Button: React.FC<React.PropsWithChildren<unknown>> = () => (
     <ExpandButton
-      className={cx(classes?.button, className)}
+      className={cx(classes?.button, buttonClassName)}
       sx={{
         p: [0, 0],
         background: 'transparent',
@@ -91,7 +92,7 @@ const ReadMore: React.FC<React.PropsWithChildren<ReadMoreProps>> = ({
   );
 
   return (
-    <div className={cx(styles.root, classes?.root)}>
+    <div className={cx(styles.root, classes?.root, className)}>
       <div className={cx(styles.textContainer, classes?.textContainer)}>
         <Body component={component} size={size} mobileSize={mobileSize}>
           {ReactHtmlParser(texts.truncated)}

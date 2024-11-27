@@ -71,9 +71,6 @@ const ImpactTags = ({
         <ProjectTags
           activities={activities}
           ecosystems={ecosystems}
-          sx={{
-            mb: { xs: 7.5, sm: 10 },
-          }}
           activitiesLabel={activitiesLabel}
           ecosystemLabel={ecosystemLabel}
           overrideIconColor={overrideIconColor}

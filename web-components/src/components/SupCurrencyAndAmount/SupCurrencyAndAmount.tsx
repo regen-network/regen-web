@@ -6,10 +6,10 @@ export function SupCurrencyAndAmount({
   className = '',
 }: {
   price: number | string;
-  currencyCode: string;
+  currencyCode: string | undefined;
   className?: string;
 }) {
-  return currencyCode === USD_DENOM ? (
+  return currencyCode && currencyCode === USD_DENOM ? (
     <span>
       <span className="align-top text-[11px] leading-normal">$</span>
       <span className={className}>{Number(price).toFixed(2)}</span>

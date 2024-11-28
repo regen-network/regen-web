@@ -55,10 +55,10 @@ export function OrderSummaryContent({
     () =>
       findDisplayDenom({
         allowedDenoms,
-        bankDenom: currency.askDenom,
-        baseDenom: currency.askBaseDenom,
+        bankDenom: currency?.askDenom,
+        baseDenom: currency?.askBaseDenom,
       }),
-    [allowedDenoms, currency.askBaseDenom, currency.askDenom],
+    [allowedDenoms, currency?.askBaseDenom, currency?.askDenom],
   );
 
   const { activeStep } = useMultiStep<BuyCreditsSchemaTypes>();
@@ -132,7 +132,7 @@ export function OrderSummaryContent({
           className="pb-[9px]"
         />
         <AmountWithCurrency
-          amount={order.currencyAmount}
+          amount={currencyAmount}
           currency={currency}
           displayDenom={displayDenom}
           classes={{

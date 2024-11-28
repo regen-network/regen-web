@@ -75,6 +75,14 @@ msgstr ""
 msgid "{from}–{displayedTo} of more than {to}"
 msgstr ""
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:120
+msgid "{minimumDuration, plural, one {{maxDurationPrefix}{maximumDuration} year} other {{maxDurationPrefix}{maximumDuration} years}}"
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:116
+msgid "{minimumDuration, plural, one {{minimumDuration} year minimum} other {{minimumDuration} years minimum}}"
+msgstr ""
+
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:329
 msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} character remaining} other {{remainingCaptionCharacters} characters remaining}}"
 msgstr ""
@@ -101,7 +109,7 @@ msgstr ""
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:111
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:112
 msgid "{years, plural, one {{years} year project duration} other {{years} year project duration}}"
 msgstr ""
 
@@ -581,7 +589,7 @@ msgstr ""
 msgid "Are you sure you want to discard your changes?"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:144
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:151
 msgid "Area Actions"
 msgstr ""
 
@@ -1884,8 +1892,8 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:39
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:71
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:105
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:185
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:106
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:192
 msgid "Factor:"
 msgstr ""
 
@@ -2952,11 +2960,11 @@ msgstr ""
 msgid "Premontane humid forest"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:162
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:169
 msgid "Preservation"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:154
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:161
 msgid "Preservation Factor:"
 msgstr ""
 
@@ -3147,7 +3155,7 @@ msgstr ""
 msgid "Project documentation"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:101
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:102
 msgid "Project Duration"
 msgstr ""
 
@@ -3255,7 +3263,7 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:146
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:153
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr ""
 
@@ -3445,11 +3453,11 @@ msgstr ""
 msgid "Resources for Getting Started"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:170
 msgid "Restoration"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:150
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:157
 msgid "Restoration Factor:"
 msgstr ""
 
@@ -3797,7 +3805,7 @@ msgstr ""
 msgid "Social Accounts"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:179
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:186
 msgid "Social and Cultural Index"
 msgstr ""
 
@@ -4055,7 +4063,7 @@ msgstr ""
 msgid "The individual or organization that is in charge of managing the project and will appear on the project page."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:181
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:188
 msgid "The integration of local communities' knowledge, social structures, and equitable participation to ensure both ecosystem conservation and community benefits."
 msgstr ""
 

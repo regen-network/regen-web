@@ -81,9 +81,13 @@ msgstr "{from}–{displayedTo} de {count}"
 msgid "{from}–{displayedTo} of more than {to}"
 msgstr "{from}–{displayedTo} de más de {to}"
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:85
-#~ msgid "{price} {displayDenom}/credit:"
-#~ msgstr "{precio} {displayDenom}/crédito:"
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:120
+msgid "{minimumDuration, plural, one {{maxDurationPrefix}{maximumDuration} year} other {{maxDurationPrefix}{maximumDuration} years}}"
+msgstr "{minimumDuration, plural, one {{maxDurationPrefix}{maximumDuration} año} other {{maxDurationPrefix}{maximumDuration} años}}"
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:116
+msgid "{minimumDuration, plural, one {{minimumDuration} year minimum} other {{minimumDuration} years minimum}}"
+msgstr "{minimumDuration, plural, one {{minimumDuration} año mínimo} other {{minimumDuration} años mínimo}}"
 
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:329
 msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} character remaining} other {{remainingCaptionCharacters} characters remaining}}"
@@ -111,11 +115,7 @@ msgstr "{remainingSummaryCharacters, plural, one {{remainingSummaryCharacters} c
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
 msgstr "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} carácter restante} other {{remainingTitleCharacters} caracteres restantes}}"
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:90
-#~ msgid "{truncatedQuantity} credit(s) available"
-#~ msgstr "{truncatedQuantity} crédito(s) disponible(s)"
-
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:111
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:112
 msgid "{years, plural, one {{years} year project duration} other {{years} year project duration}}"
 msgstr "{years, plural, one {Duración del proyecto: {years} año} other {Duración del proyecto: {years} años}}"
 
@@ -587,7 +587,7 @@ msgstr "¿Estás seguro de que deseas eliminar esta publicación?"
 msgid "Are you sure you want to discard your changes?"
 msgstr "¿Está seguro de que desea descartar los cambios?"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:144
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:151
 msgid "Area Actions"
 msgstr "Acciones del Área"
 
@@ -1910,8 +1910,8 @@ msgstr "factor"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:39
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:71
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:105
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:185
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:106
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:192
 msgid "Factor:"
 msgstr "Factor:"
 
@@ -2990,11 +2990,11 @@ msgstr "prefinanciar este proyecto"
 msgid "Premontane humid forest"
 msgstr "Bosque húmedo premontano"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:162
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:169
 msgid "Preservation"
 msgstr "Preservación"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:154
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:161
 msgid "Preservation Factor:"
 msgstr "Factor de conservación:"
 
@@ -3185,7 +3185,7 @@ msgstr "Desarrollador de proyectos"
 msgid "Project documentation"
 msgstr "Documentación del proyecto"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:101
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:102
 msgid "Project Duration"
 msgstr "Duración del proyecto"
 
@@ -3293,7 +3293,7 @@ msgstr "PROYECTADO:"
 msgid "Projects"
 msgstr "Proyectos"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:146
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:153
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr "Los proyectos deben tener una duración de al menos 20 años para garantizar resultados demostrables y cuantificables en biodiversidad. Tebu promueve proyectos que duren más tiempo, asegurando procesos ecológicos a largo plazo."
 
@@ -3487,11 +3487,11 @@ msgstr "Recursos"
 msgid "Resources for Getting Started"
 msgstr "Recursos para empezar"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:163
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:170
 msgid "Restoration"
 msgstr "Restauración"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:150
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:157
 msgid "Restoration Factor:"
 msgstr "Factor de restauración:"
 
@@ -3843,7 +3843,7 @@ msgstr "Pequeña o mediana empresa"
 msgid "Social Accounts"
 msgstr "Cuentas sociales"
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:179
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:186
 msgid "Social and Cultural Index"
 msgstr "Índice social y cultural"
 
@@ -4104,7 +4104,7 @@ msgstr "La dirección de correo electrónico que está utilizando para iniciar s
 msgid "The individual or organization that is in charge of managing the project and will appear on the project page."
 msgstr "La persona u organización que está a cargo de administrar el proyecto y aparecerá en la página del proyecto."
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:181
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:188
 msgid "The integration of local communities' knowledge, social structures, and equitable participation to ensure both ecosystem conservation and community benefits."
 msgstr "La integración del conocimiento de las comunidades locales, las estructuras sociales y la participación equitativa para garantizar tanto la conservación del ecosistema como los beneficios comunitarios."
 

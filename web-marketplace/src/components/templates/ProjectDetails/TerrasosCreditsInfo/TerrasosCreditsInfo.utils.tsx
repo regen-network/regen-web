@@ -95,6 +95,7 @@ export function getDurationCard(
   const { factor } =
     durationFactors.find(({ duration }) => years >= duration) ||
     durationFactors[durationFactors.length - 1];
+  const maxDurationPrefix = maximumDuration === 50 ? '>' : '';
 
   return (
     <TebuCard
@@ -112,10 +113,16 @@ export function getDurationCard(
           one: `${years} year project duration`,
           other: `${years} year project duration`,
         })}
+        minDurationLabel={plural(minimumDuration, {
+          one: `${minimumDuration} year minimum`,
+          other: `${minimumDuration} years minimum`,
+        })}
+        maxDurationLabel={plural(minimumDuration, {
+          one: `${maxDurationPrefix}${maximumDuration} year`,
+          other: `${maxDurationPrefix}${maximumDuration} years`,
+        })}
         minimumValue={minimumDuration}
         maximumValue={maximumDuration}
-        minimumLabel="minimum"
-        durationUnitLabel="years"
         duration={years}
       />
     </TebuCard>

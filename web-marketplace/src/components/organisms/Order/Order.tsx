@@ -20,6 +20,7 @@ import { Title } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
+import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import { Link } from 'components/atoms';
 
@@ -117,7 +118,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
                 place={project.place}
                 area={project.area}
                 iconClassName="mr-5"
-                areaUnit={project.areaUnit}
+                areaUnit={getAreaUnit(project.areaUnit as qudtUnit | undefined)}
                 fontSize="13px"
                 color={theme.palette.primary.contrastText}
               />

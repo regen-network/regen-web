@@ -9,6 +9,7 @@ import { certificateFormater, certificateOptions } from './certificate.config';
 import { CertificateItem } from './certificate.Item';
 import { useCertificateStyles } from './certificate.styles';
 import { CertificateType } from './certificate.types';
+import { formatCertificateDates } from './certificate.utils';
 
 interface CertificateProps {
   certificateData?: CertificateType;
@@ -32,7 +33,6 @@ export default function Certificate({
   certificateNotFoundDescription,
 }: CertificateProps): JSX.Element {
   const { classes, cx } = useCertificateStyles({ background });
-
   return (
     <Box className={classes.root}>
       <div className={classes.content}>
@@ -213,18 +213,20 @@ export default function Certificate({
                   </LinkComponent>
                 </CertificateItem>
               ))}
-              <CertificateItem
-                name={labels.RETIREMENT_REASON}
-                sx={{ mb: 2.5, '@media print': { mb: 0 } }}
-              >
-                <Body
-                  sx={{
-                    '@media print': { fontSize: 9, lineHeight: 0.8 },
-                  }}
+              {certificateData.retirementReason && (
+                <CertificateItem
+                  name={labels.RETIREMENT_REASON}
+                  sx={{ mb: 2.5, '@media print': { mb: 0 } }}
                 >
-                  {certificateData.retirementReason}
-                </Body>
-              </CertificateItem>
+                  <Body
+                    sx={{
+                      '@media print': { fontSize: 9, lineHeight: 0.8 },
+                    }}
+                  >
+                    {certificateData.retirementReason}
+                  </Body>
+                </CertificateItem>
+              )}
               <CertificateItem
                 name={labels.RETIREMENT_LOCATION}
                 sx={{ mb: 2.5, '@media print': { mb: 0 } }}
@@ -235,6 +237,33 @@ export default function Certificate({
                   }}
                 >
                   {certificateData.retirementLocation}
+                </Body>
+              </CertificateItem>
+              <CertificateItem
+                name={
+                  certificateData?.batchStartDates?.length === 1
+                    ? labels.CREDIT_BATCH
+                    : labels.CREDIT_BATCHES
+                }
+                sx={{ mb: 2.5, '@media print': { mb: 0 } }}
+              >
+                <Body
+                  className="flex flex-wrap justify-center"
+                  sx={{
+                    '@media print': { fontSize: 9, lineHeight: 0.8 },
+                  }}
+                >
+                  {certificateData?.batchStartDates?.map((startDate, i) => (
+                    <span className="whitespace-nowrap" key={i}>
+                      {certificateData?.batchStartDates && i > 0 && (
+                        <span className="px-5">&bull;</span>
+                      )}
+                      {formatCertificateDates(
+                        startDate,
+                        certificateData?.batchEndDates?.[i],
+                      )}
+                    </span>
+                  ))}
                 </Body>
               </CertificateItem>
             </div>

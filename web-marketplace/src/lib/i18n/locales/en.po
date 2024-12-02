@@ -707,7 +707,7 @@ msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:159
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:74
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:98
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:96
 msgid "biome"
 msgstr ""
 
@@ -1396,6 +1396,14 @@ msgstr ""
 msgid "credits available for purchase"
 msgstr ""
 
+#: src/pages/Certificate/Certificate.constants.ts:20
+msgid "Credits batch"
+msgstr ""
+
+#: src/pages/Certificate/Certificate.constants.ts:19
+msgid "Credits batches"
+msgstr ""
+
 #: src/components/molecules/BatchTotalsGrid.tsx:53
 msgid "Credits Cancelled"
 msgstr ""
@@ -1538,7 +1546,7 @@ msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:152
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:55
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:79
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:77
 msgid "department"
 msgstr ""
 
@@ -1661,7 +1669,7 @@ msgstr ""
 msgid "ecocredits table"
 msgstr ""
 
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:74
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:88
 msgid "Ecocredits table"
 msgstr ""
 
@@ -1815,7 +1823,7 @@ msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:154
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:60
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:84
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:82
 msgid "environmental authority"
 msgstr ""
 
@@ -2481,6 +2489,7 @@ msgstr ""
 msgid "monitor"
 msgstr ""
 
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.constants.ts:5
 #: src/lib/constants/shared.constants.tsx:112
 msgid "more"
 msgstr ""
@@ -2626,7 +2635,7 @@ msgstr ""
 msgid "No options available"
 msgstr ""
 
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:66
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:80
 msgid "No retirements to display"
 msgstr ""
 
@@ -3246,7 +3255,7 @@ msgstr ""
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr ""
 
-#: src/pages/Projects/Projects.tsx:222
+#: src/pages/Projects/Projects.tsx:224
 msgid "projects tabs"
 msgstr ""
 
@@ -3358,7 +3367,7 @@ msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:151
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:53
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:77
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:75
 msgid "region"
 msgstr ""
 
@@ -3815,7 +3824,7 @@ msgstr ""
 msgid "Sorry, your transaction was not successful."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:282
+#: src/pages/Projects/AllProjects/AllProjects.tsx:288
 msgid "Sort by:"
 msgstr ""
 
@@ -3895,7 +3904,7 @@ msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:158
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:70
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:94
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:92
 msgid "sub-watershed"
 msgstr ""
 
@@ -4518,6 +4527,10 @@ msgstr ""
 msgid "view in portfolio"
 msgstr ""
 
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.constants.ts:4
+msgid "view less"
+msgstr ""
+
 #: src/components/organisms/DetailsSection/DetailsSection.constants.ts:3
 msgid "view methodology"
 msgstr ""
@@ -4621,7 +4634,7 @@ msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:157
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:65
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:89
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:87
 msgid "watershed"
 msgstr ""
 

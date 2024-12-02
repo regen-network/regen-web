@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
@@ -12,6 +12,7 @@ import {
   RenderActionButtonsFunc,
   TablePaginationParams,
 } from 'web-components/src/components/table/ActionsTable';
+import { ViewMore } from 'web-components/src/components/view-more/ViewMore';
 import { formatDate, formatNumber } from 'web-components/src/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
@@ -25,7 +26,9 @@ import { GreyText, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 
+import { VIEW_LESS, VIEW_MORE } from './RetirementCertificatesTable.constants';
 import { getRetirementCertificateHeaders } from './RetirementCertificatesTable.headers';
+import { getBatchDate, getBatchIds } from './RetirementCertificatesTable.utils';
 
 type RetirementCertificatesTableProps = {
   retirements?: NormalizedRetirement[];
@@ -60,6 +63,17 @@ export const RetirementCertificatesTable: React.FC<
     [_, isIgnoreOffset, retirements?.length],
   );
 
+  const [viewMoreState, setViewMoreState] = useState<{
+    [key: number]: boolean;
+  }>();
+
+  const viewMoreHandleToggle = useCallback((id: number) => {
+    setViewMoreState(prevState => ({
+      ...prevState,
+      [id]: !prevState?.[id],
+    }));
+  }, []);
+
   if (!retirements?.length) {
     return (
       <NoCredits
@@ -91,9 +105,14 @@ export const RetirementCertificatesTable: React.FC<
               {row?.projectName}
             </Link>
           </WithLoader>,
-          <WithLoader isLoading={!row.batchId} variant="skeleton">
-            <Link href={`/credit-batches/${row.batchId}`}>{row.batchId}</Link>
-          </WithLoader>,
+          <ViewMore
+            id={i}
+            handleToggle={viewMoreHandleToggle}
+            isOpen={viewMoreState?.[i]}
+            items={getBatchIds(row.batchIds)}
+            viewLessText={_(VIEW_LESS)}
+            viewMoreText={_(VIEW_MORE)}
+          />,
           <WithLoader isLoading={row.creditClassId === ''} variant="skeleton">
             <Link
               href={`/credit-classes/${row.creditClassId}`}
@@ -111,8 +130,22 @@ export const RetirementCertificatesTable: React.FC<
           <WithLoader isLoading={!row.issuer} variant="skeleton">
             <Link href={row.issuer?.link ?? ''}>{row.issuer?.name}</Link>
           </WithLoader>,
-          <GreyText>{formatDate(row.batchStartDate)}</GreyText>,
-          <GreyText>{formatDate(row.batchEndDate)}</GreyText>,
+          <ViewMore
+            id={i}
+            handleToggle={viewMoreHandleToggle}
+            isOpen={viewMoreState?.[i]}
+            items={getBatchDate(row.batchStartDates || [])}
+            viewLessText={_(VIEW_LESS)}
+            viewMoreText={_(VIEW_MORE)}
+          />,
+          <ViewMore
+            id={i}
+            handleToggle={viewMoreHandleToggle}
+            isOpen={viewMoreState?.[i]}
+            items={getBatchDate(row.batchEndDates || [])}
+            viewLessText={_(VIEW_LESS)}
+            viewMoreText={_(VIEW_MORE)}
+          />,
           <WithLoader
             isLoading={row.retirementLocation === ''}
             variant="skeleton"

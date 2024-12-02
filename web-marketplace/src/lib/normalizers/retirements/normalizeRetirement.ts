@@ -17,7 +17,7 @@ import { getDataFromBatchDenomId } from 'pages/Dashboard/MyEcocredits/MyEcocredi
 
 type Props = {
   retirement?: Maybe<RetirementFieldsFragment>;
-  retirementData?: ReturnType<typeof getDataFromBatchDenomId>;
+  retirementData?: ReturnType<typeof getDataFromBatchDenomId>[];
   project?: ProjectInfo;
   projectMetadata?: AnchoredProjectMetadataLD;
   creditClass?: ClassInfo;
@@ -30,9 +30,9 @@ type Props = {
 export type NormalizedRetirement = {
   nodeId?: string;
   amountRetired?: string;
-  batchStartDate?: string;
-  batchEndDate?: string;
-  batchId?: string;
+  batchStartDates?: string[];
+  batchEndDates?: string[];
+  batchIds: string[] | [];
   retirementDate: string;
   creditClassId?: string;
   creditClassName?: string;
@@ -64,19 +64,23 @@ export const normalizeRetirement = ({
   retirement
     ? {
         amountRetired: retirement.amount,
-        batchStartDate: retirementData?.batchStartDate,
-        batchEndDate: retirementData?.batchEndDate,
-        batchId: retirement.batchDenom,
-        creditClassId: retirementData?.classId,
+        batchStartDates: retirementData?.map(data => data.batchStartDate) ?? [],
+        batchEndDates: retirementData?.map(data => data.batchEndDate) ?? [],
+        batchIds: retirement.batchDenoms.filter(
+          (id): id is string => id !== null && id !== undefined,
+        ),
+        creditClassId: retirementData?.[0]?.classId,
         creditClassName:
-          creditClassMetadata?.['schema:name'] ?? retirementData?.classId,
+          creditClassMetadata?.['schema:name'] ?? retirementData?.[0]?.classId,
         creditClassType: creditClass?.creditTypeAbbrev,
         issuer,
         owner,
         nodeId: retirement.nodeId,
-        projectId: retirementData?.projectId ?? '',
+        projectId: retirementData?.[0]?.projectId ?? '',
         projectName:
-          projectMetadata?.['schema:name'] ?? retirementData?.projectId ?? '',
+          projectMetadata?.['schema:name'] ??
+          retirementData?.[0]?.projectId ??
+          '',
         projectLocation: project?.jurisdiction,
         retirementDate: retirement.timestamp,
         retirementLabel: sanityCreditClass?.retirementLabel ?? '',

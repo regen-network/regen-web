@@ -16,4 +16,6 @@ export const getCertificateLabels = (
   RETIRED_BY: _(msg`Retired by`),
   RETIREMENT_REASON: _(msg`Retirement reason`),
   RETIREMENT_LOCATION: _(msg`Retirement location`),
+  CREDIT_BATCHES: _(msg`Credits batches`),
+  CREDIT_BATCH: _(msg`Credits batch`),
 });

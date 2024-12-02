@@ -62,6 +62,8 @@ export const getCertificateData = ({
           href: getHashUrl(retirement.txHash),
         },
         date: retirement.retirementDate,
+        batchStartDates: retirement.batchStartDates,
+        batchEndDates: retirement.batchEndDates,
       }
     : undefined;
 };

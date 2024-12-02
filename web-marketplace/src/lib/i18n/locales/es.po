@@ -12,6 +12,12 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 "Plural-Forms: \n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
@@ -72,6 +78,10 @@ msgstr "{from}–{displayedTo} de {count}"
 msgid "{from}–{displayedTo} of more than {to}"
 msgstr "{from}–{displayedTo} de más de {to}"
 
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:85
+#~ msgid "{price} {displayDenom}/credit:"
+#~ msgstr "{precio} {displayDenom}/crédito:"
+
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:329
 msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} character remaining} other {{remainingCaptionCharacters} characters remaining}}"
 msgstr "{remainingCaptionCharacters, plural, queda un {{remainingCaptionCharacters} carácter} quedan otros {{remainingCaptionCharacters} caracteres}}"
@@ -97,6 +107,10 @@ msgstr "{remainingSummaryCharacters, plural, queda un {{remainingSummaryCharacte
 #: src/components/organisms/PostForm/PostForm.tsx:265
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
 msgstr "{remainingTitleCharacters, plural, un {{remainingTitleCharacters} carácter restante} otros {{remainingTitleCharacters} caracteres restantes}}"
+
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:90
+#~ msgid "{truncatedQuantity} credit(s) available"
+#~ msgstr "{truncatedQuantity} crédito(s) disponible(s)"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:111
 msgid "{years} year project duration"
@@ -175,7 +189,7 @@ msgstr "<0>Emisor de la clase de crédito:</0> entidad que puede emitir lotes de
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:104
 msgid "<0>Custodian:</0> The entity, also the project landowner, who has historically managed the territory. It is now part of the project stakeholders and receives benefits from project success."
-msgstr "<0>Custodio:</0> Entidad, también propietaria del proyecto, que históricamente ha administrado dicho territorio. Ahora es parte de las partes interesadas del proyecto y recibe beneficios del éxito del proyecto."
+msgstr "<0>Custodio:</0> Entidad, también propietaria del proyecto, que históricamente ha gestionado el territorio. Actualmente forma parte de los interesados del proyecto y recibe los beneficios del éxito del mismo."
 
 #: src/components/atoms/DragAndDropLabel.tsx:6
 msgid "<0>drag and drop</0><1>or</1>"
@@ -189,11 +203,11 @@ msgstr "<0>Monitor:</0> Entidad que da seguimiento y verifica el impacto ambient
 msgid "<0>Partners:</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
 msgstr "<0>Socios:</0> pueden ofrecer apoyo financiero crucial o supervisar el progreso y garantizar que se cumplan los estándares ambientales."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:113
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:109
 #~ msgid "<0>Partners</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
 #~ msgstr "Los <0>socios</0> pueden ofrecer un apoyo financiero crucial o supervisar el progreso y garantizar que se cumplan los estándares ambientales."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:50
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:47
 #~ msgid "<0>Project admin:</0> the entity who can update a given project on the blockchain."
 #~ msgstr "<0>Administrador del proyecto:</0> la entidad que puede actualizar un proyecto determinado en la cadena de bloques."
 
@@ -205,7 +219,7 @@ msgstr "<0>Administrador del proyecto:</0> La entidad que puede actualizar un pr
 msgid "<0>Project developer:</0> The entity in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
 msgstr "<0>Desarrollador del proyecto:</0> Entidad encargada de gestionar el proyecto. El desarrollador del proyecto puede ser el propietario del terreno, el administrador del terreno o un tercero."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:60
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:57
 #~ msgid "<0>Project developer:</0> the entity that is in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
 #~ msgstr "<0>Desarrollador del proyecto:</0> entidad que se encarga de gestionar el proyecto. El desarrollador del proyecto puede ser el propietario del terreno, el administrador del terreno o un tercero."
 
@@ -213,13 +227,9 @@ msgstr "<0>Desarrollador del proyecto:</0> Entidad encargada de gestionar el pro
 msgid "<0>Project operator:</0> The entity responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
 msgstr "<0>Operador del proyecto:</0> Entidad responsable de implementar y gestionar el proyecto, garantizando que cumpla con los estándares regulatorios y de sostenibilidad."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:81
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:78
 #~ msgid "<0>Verifier:</0> A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 #~ msgstr "<0>Verificador:</0> Un tercero que proporciona una evaluación independiente e imparcial del plan del proyecto y de los informes del proyecto (que no es el monitor)."
-
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:82
-#~ msgid "<0>Verifier:</0> The third party eneity responsible for providing a independent, impartial assessment of project plan and project reports (that is not the monitor)."
-#~ msgstr "<0>Verificador:</0> La entidad de terceros responsable de proporcionar una evaluación independiente e imparcial del plan del proyecto y de los informes del proyecto (que no es el monitor)."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:82
 msgid "<0>Verifier:</0> The third party entity responsible for providing a independent, impartial assessment of project plan and project reports (that is not the monitor)."
@@ -258,7 +268,7 @@ msgstr "Una breve descripción de su proyecto de impacto ecológico y de la prop
 msgid "A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
 msgstr "Un sistema de pastoreo controlado en el que el ganado se traslada con frecuencia entre las divisiones de pasturas o potreros en función de la calidad del forraje y las necesidades nutricionales del ganado. Las cercas portátiles permiten que cada potrero descanse y vuelva a crecer hasta la siguiente rotación de pastoreo."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:92
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:89
 #~ msgid "A monitor tracks and verifies the environmental impact and performance of the project to ensure compliance and transparency."
 #~ msgstr "Un monitor rastrea y verifica el impacto ambiental y el desempeño del proyecto para garantizar el cumplimiento y la transparencia."
 
@@ -266,11 +276,11 @@ msgstr "Un sistema de pastoreo controlado en el que el ganado se traslada con fr
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
 msgstr "Un proyecto de desarrollo de <0>Regen Network<1/>, PBC</0>"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:71
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:68
 #~ msgid "A project operator is responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
-#~ msgstr "El operador del proyecto es responsable de implementar y gestionar el proyecto, garantizando que cumpla con los estándares regulatorios y de sostenibilidad."
+#~ msgstr "Un operador de proyecto es responsable de implementar y gestionar el proyecto, garantizando que cumpla con los estándares regulatorios y de sostenibilidad."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:102
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:99
 #~ msgid "A project owner manages the area of the conservation project and the associated biodiversity units."
 #~ msgstr "El propietario del proyecto gestiona el área del proyecto de conservación y las unidades de biodiversidad asociadas."
 
@@ -293,7 +303,7 @@ msgstr "Un identificador único que rastrea y verifica una transacción específ
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:65
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:28
 msgid "About Us"
-msgstr "Nosotros"
+msgstr "Sobre nosotros"
 
 #: src/components/organisms/AccountSwitchModal/AccountSwitchModal.constants.ts:3
 msgid "Account switch detected!"
@@ -305,7 +315,7 @@ msgstr "Acres"
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:125
 msgid "Act now"
-msgstr "¡Actúa!"
+msgstr "Actúa ahora"
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:95
 msgid "Act Now - Tebu"
@@ -403,7 +413,7 @@ msgstr "administración"
 #: src/components/organisms/CreditClassForms/CreditClassReview.tsx:29
 #: src/components/organisms/RolesForm/RolesForm.tsx:255
 msgid "Admin"
-msgstr "Admin"
+msgstr "Administración"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:37
 msgid "Advanced settings"
@@ -423,7 +433,7 @@ msgstr "Todas las publicaciones"
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.constants.ts:3
 msgid "all profiles"
-msgstr "Todos los perfiles"
+msgstr "todos los perfiles"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
 #: src/pages/Projects/Projects.tsx:101
@@ -674,6 +684,10 @@ msgstr "LOTE DENOM"
 msgid "batch denom:"
 msgstr "nombre del lote:"
 
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:329
+#~ msgid "Batch denom:"
+#~ msgstr "Nombre del lote:"
+
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:86
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:155
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:169
@@ -704,7 +718,7 @@ msgstr "FECHA DE INICIO DEL LOTE"
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:159
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:74
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:98
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:96
 msgid "biome"
 msgstr "bioma"
 
@@ -816,6 +830,10 @@ msgstr "comprar ecocréditos"
 #: src/lib/constants/shared.constants.tsx:207
 msgid "Buy ecocredits"
 msgstr "Comprar ecocréditos"
+
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:201
+#~ msgid "Buy Ecocredits"
+#~ msgstr "Comprar Ecocréditos"
 
 #: src/components/organisms/BasketDetailsActionsBar/BasketDetailsActionsBar.constants.ts:4
 msgid "buy NCT"
@@ -965,6 +983,10 @@ msgstr "Elija un método de inicio de sesión"
 #: src/components/organisms/AdditionalityForm.tsx:59
 msgid "Choose a practice start date"
 msgstr "Elija una fecha de inicio de práctica"
+
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:166
+#~ msgid "Choose a sell order"
+#~ msgstr "Elija una orden de venta"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:192
 msgid "Choose a specific location on the map"
@@ -1156,6 +1178,10 @@ msgstr "Copiar enlace al perfil"
 msgid "Copy link to project page"
 msgstr "Copiar enlace a la página del proyecto"
 
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:27
+#~ msgid "Copyright © 2024 Terrasos | All rights reserved"
+#~ msgstr "Copyright © 2024 Terrasos | Todos los derechos reservados"
+
 #: src/lib/constants/shared.constants.tsx:58
 #: src/lib/constants/shared.constants.tsx:160
 msgid "Country"
@@ -1211,6 +1237,10 @@ msgstr "Crear orden de venta"
 #: src/pages/Post/hooks/useAttestEvents.ts:146
 msgid "Created by"
 msgstr "Creado por"
+
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:319
+#~ msgid "credit"
+#~ msgstr "crédito"
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:147
 msgid "credit activity table"
@@ -1393,6 +1423,14 @@ msgstr "Créditos disponibles: de bajo a alto"
 msgid "credits available for purchase"
 msgstr "créditos disponibles para compra"
 
+#: src/pages/Certificate/Certificate.constants.ts:20
+msgid "Credits batch"
+msgstr "Lote de créditos"
+
+#: src/pages/Certificate/Certificate.constants.ts:19
+msgid "Credits batches"
+msgstr "Lotes de créditos"
+
 #: src/components/molecules/BatchTotalsGrid.tsx:53
 msgid "Credits Cancelled"
 msgstr "Créditos cancelados"
@@ -1489,7 +1527,7 @@ msgstr "Dirección de administración actual"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:102
 msgid "custodian"
-msgstr "Custodio"
+msgstr "custodio"
 
 #: src/components/organisms/SettingsForm/SettingsForm.tsx:112
 msgid "Custom url"
@@ -1535,7 +1573,7 @@ msgstr "Las fechas de entrega pueden variar ampliamente ya que este proyecto aú
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:152
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:55
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:79
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:77
 msgid "department"
 msgstr "departamento"
 
@@ -1658,7 +1696,7 @@ msgstr "ecocreditos jubilados"
 msgid "ecocredits table"
 msgstr "tabla de ecocréditos"
 
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:74
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:88
 msgid "Ecocredits table"
 msgstr "Tabla de ecocréditos"
 
@@ -1812,7 +1850,7 @@ msgstr "Ingrese la dirección de billetera aquí si esta entidad tiene una direc
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:154
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:60
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:84
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:82
 msgid "environmental authority"
 msgstr "autoridad ambiental"
 
@@ -1972,7 +2010,7 @@ msgstr "Fotos de la galería"
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:81
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:55
 msgid "Geo-Viewer"
-msgstr "GeoVisor"
+msgstr "Visor geográfico"
 
 #: src/components/organisms/DetailsSection/DetailsSection.constants.ts:7
 msgid "Get even more info on this project on the"
@@ -2029,7 +2067,7 @@ msgstr "Altamente significativo"
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:24
 msgid "Home"
-msgstr "Inicio"
+msgstr "Hogar"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:63
 msgid "How-to Articles"
@@ -2380,6 +2418,10 @@ msgstr "Hacer que los archivos y los datos de ubicación sean privados"
 msgid "Make the location data private"
 msgstr "Hacer que los datos de ubicación sean privados"
 
+#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:84
+#~ msgid "Make your purchase anonymous. Your name will be hidden from the retirement certificate and the certificate will be hidden from your public profile."
+#~ msgstr "Haz que tu compra sea anónima. Tu nombre quedará oculto en el certificado de jubilación y el certificado quedará oculto en tu perfil público."
+
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:240
 msgid "Market"
 msgstr "Mercado"
@@ -2478,6 +2520,7 @@ msgstr "Moderado"
 msgid "monitor"
 msgstr "monitor"
 
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.constants.ts:5
 #: src/lib/constants/shared.constants.tsx:112
 msgid "more"
 msgstr "más"
@@ -2507,6 +2550,10 @@ msgstr "Error de MsgCreateProject"
 #: src/lib/constants/shared.constants.tsx:71
 msgid "Must be a date in the past"
 msgstr "Debe ser una fecha en el pasado"
+
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:248
+#~ msgid "Must be less than or equal to the max credit(s) available ({creditAvailable})."
+#~ msgstr "Debe ser menor o igual al máximo de créditos disponibles ({creditAvailable})."
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:5
 #: src/lib/constants/shared.constants.tsx:82
@@ -2623,7 +2670,7 @@ msgstr "No se encontraron resultados coincidentes"
 msgid "No options available"
 msgstr "No hay opciones disponibles"
 
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:66
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:80
 msgid "No retirements to display"
 msgstr "No hay jubilaciones para mostrar"
 
@@ -2745,7 +2792,7 @@ msgstr "Nuestros servicios"
 msgid "Overview"
 msgstr "Descripción general"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:100
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:97
 #~ msgid "owner"
 #~ msgstr "dueño"
 
@@ -2828,6 +2875,10 @@ msgstr "Por favor corrija los errores anteriores"
 #: src/lib/constants/shared.constants.tsx:158
 msgid "Please enter a location for the retirement of these credits. This prevents double counting of credits in different locations."
 msgstr "Introduzca una ubicación para la retirada de estos créditos. Esto evita el doble conteo de créditos en diferentes ubicaciones."
+
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:536
+#~ msgid "Please enter a location for the retirement of these credits. This prevents double counting of credits in different locations. These credits will auto-retire."
+#~ msgstr "Ingrese una ubicación para la cancelación de estos créditos. Esto evita el doble conteo de créditos en diferentes ubicaciones. Estos créditos se cancelarán automáticamente."
 
 #: src/lib/constants/shared.constants.tsx:68
 msgid "Please enter a valid amount"
@@ -2930,7 +2981,7 @@ msgstr "Proyectos de prefinanciación"
 
 #: src/lib/constants/shared.constants.tsx:211
 msgid "prefinance this project"
-msgstr "Prefinanciar este proyecto"
+msgstr "prefinanciar este proyecto"
 
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:43
 msgid "Premontane humid forest"
@@ -3243,7 +3294,7 @@ msgstr "Proyectos"
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr "Los proyectos deben tener una duración de al menos 20 años para garantizar resultados demostrables y cuantificables en biodiversidad. Tebu promueve proyectos que duren más tiempo, asegurando procesos ecológicos a largo plazo."
 
-#: src/pages/Projects/Projects.tsx:222
+#: src/pages/Projects/Projects.tsx:224
 msgid "projects tabs"
 msgstr "Pestañas de proyectos"
 
@@ -3261,7 +3312,11 @@ msgstr "fecha de compra"
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:128
 msgid "purchase now"
-msgstr "Comprar ahora"
+msgstr "Compra ahora"
+
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:416
+#~ msgid "Purchase options"
+#~ msgstr "Opciones de compra"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:48
 msgid "PURCHASE OPTIONS"
@@ -3287,7 +3342,7 @@ msgstr "leer"
 
 #: src/components/organisms/MediaSection.tsx:37
 msgid "read article"
-msgstr "leer el articulo"
+msgstr "leer el artículo"
 
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:115
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:141
@@ -3355,7 +3410,7 @@ msgstr "Dirección de la billetera REGEN"
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:151
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:53
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:77
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:75
 msgid "region"
 msgstr "región"
 
@@ -3440,6 +3495,10 @@ msgstr "Factor de restauración:"
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:108
 msgid "Retirable"
 msgstr "Retirable"
+
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:185
+#~ msgid "RETIRABLE ONLY"
+#~ msgstr "SOLO RETIRARSE"
 
 #: src/components/organisms/CreditRetireForm/CreditRetireForm.tsx:136
 #: src/components/organisms/Modals/CreditRetireModal/CreditRetireModal.constants.ts:3
@@ -3812,7 +3871,7 @@ msgstr "Lo sentimos, no tienes REGEN para cubrir las tarifas de transacción"
 msgid "Sorry, your transaction was not successful."
 msgstr "Lo sentimos, su transacción no fue exitosa."
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:282
+#: src/pages/Projects/AllProjects/AllProjects.tsx:288
 msgid "Sort by:"
 msgstr "Ordenar por:"
 
@@ -3892,7 +3951,7 @@ msgstr "Historia en video o foto"
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:158
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:70
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:94
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:92
 msgid "sub-watershed"
 msgstr "subcuenca"
 
@@ -3947,11 +4006,11 @@ msgstr "Insignia de bastón"
 
 #: src/components/molecules/TebuBanner/TebuBanner.tsx:43
 msgid "Tebu banner"
-msgstr "Bandera Tebu de azúcar."
+msgstr "Bandera de caña de azúcar."
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:45
 msgid "Tebu Credits"
-msgstr "Créditos Tebu"
+msgstr "Créditos de caña"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:77
 msgid "Tebu factors"
@@ -3959,7 +4018,7 @@ msgstr "Factores de Tebu"
 
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:15
 msgid "Tebu logo"
-msgstr "Logotipo Tebu"
+msgstr "Logotipo de caña de azúcar"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.constants.ts:14
 msgid "Tell the deeper story of what makes this project special. Describe the land stewards and why they do this work, the ecological impacts (plants, animals, ecosystems), and social impacts (community, jobs, health)."
@@ -4007,6 +4066,13 @@ msgstr "El mensaje de título debe tener menos de {CAPTION_CHART_LIMIT} caracter
 msgid "The community has economic rights to the project."
 msgstr "La comunidad tiene derechos económicos sobre el proyecto."
 
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:182
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:187
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:192
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:197
+#~ msgid "The community has political and economic rights to the project"
+#~ msgstr "La comunidad tiene derechos políticos y económicos sobre el proyecto."
+
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:210
 msgid "The community has political and economic rights to the project."
 msgstr "La comunidad tiene derechos políticos y económicos sobre el proyecto."
@@ -4022,10 +4088,6 @@ msgstr "El creador de esta cesta ha decidido que todos los créditos deben ser r
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:19
 msgid "The current address is already linked to your account.\\nPlease first switch wallet addresses in the Keplr app to be able to add another address to your account."
 msgstr "La dirección actual ya está vinculada a su cuenta. Primero cambie las direcciones de billetera en la aplicación Keplr para poder agregar otra dirección a su cuenta."
-
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:102
-#~ msgid "The Custodian is the project landowner and has historically managed the territory. It is now part of the project stakeholders and receives benefits from project success."
-#~ msgstr "El Custodio es el propietario del terreno del proyecto e históricamente ha administrado dicho territorio. Ahora es parte de las partes interesadas del proyecto y recibe beneficios del éxito del proyecto."
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:220
 msgid "The dates should correspond to the batch monitoring period or vintage."
@@ -4073,6 +4135,10 @@ msgstr "La dirección del destinatario no puede ser la misma que la del remitent
 msgid "The retirement location can be where you live or your business operates."
 msgstr "El lugar de jubilación puede ser el lugar donde usted vive o donde opera su negocio."
 
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:477
+#~ msgid "The seller of these credits has chosen to only allow for immediate retiring of credits. These credits cannot be purchased as a tradable asset."
+#~ msgstr "El vendedor de estos créditos ha optado por permitir únicamente el retiro inmediato de los mismos. Estos créditos no pueden adquirirse como activos comercializables."
+
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.constants.ts:4
 msgid "The structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr "La estructura, los procedimientos y los requisitos para el registro de proyectos, la cuantificación, el seguimiento, el reporte y la verificación (MRV) y la emisión de créditos relacionados con un determinado tipo de crédito."
@@ -4098,9 +4164,17 @@ msgstr "No hay participación de la comunidad en la construcción del Plan de Ma
 msgid "These credits are currently sold out. More may become available in the future."
 msgstr "Estos créditos están agotados actualmente. Es posible que haya más disponibles en el futuro."
 
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:453
+#~ msgid "These credits will be a tradable asset. They can be retired later via Regen Marketplace."
+#~ msgstr "Estos créditos serán un activo comercializable. Se podrán retirar más adelante a través de Regen Marketplace."
+
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:19
 msgid "These credits will be a tradeable asset. They can be retired later via Regen Marketplace."
 msgstr "Estos créditos serán un activo comercializable. Se podrán retirar más adelante a través de Regen Marketplace."
+
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:431
+#~ msgid "These credits will be retired upon purchase and will not be tradable. Retirement is permanent and non-reversible."
+#~ msgstr "Estos créditos se retirarán al momento de la compra y no se podrán canjear. La retirada es permanente e irreversible."
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:12
 msgid "These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
@@ -4180,6 +4254,10 @@ msgstr "Esto puede llevar algún tiempo si el tamaño del archivo es grande."
 #: src/lib/constants/shared.constants.tsx:90
 msgid "This may take up to 15 seconds."
 msgstr "Esto puede tardar hasta 15 segundos."
+
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
+#~ msgid "This name will appear on the retirement certificate unless you choose to retire anonymously in the next step. It is also your user profile name."
+#~ msgstr "Este nombre aparecerá en el certificado de jubilación a menos que elija jubilarse de forma anónima en el siguiente paso. También es su nombre de perfil de usuario."
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
 msgid "This name will appear on the retirement certificate. It is also your user profile name."
@@ -4287,6 +4365,10 @@ msgstr "Identificación de token vintage de tucán"
 msgid "Tradable"
 msgstr "Negociable"
 
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:175
+#~ msgid "TRADABLE AND RETIRABLE"
+#~ msgstr "NEGOCIABLES Y RETIRARSE"
+
 #: src/components/organisms/Order/Order.Summary.tsx:112
 msgid "Tradable Credits"
 msgstr "Créditos negociables"
@@ -4341,7 +4423,7 @@ msgstr "deducciones por incertidumbre"
 
 #: src/pages/Home/Home.tsx:123
 msgid "Unlock <0>Regenerative Finances</0><1>with <2>Regen Marketplace</2></1>"
-msgstr "Desbloquea las <0>Finanzas regenerativas</0><1>con el <2>Mercado de regeneración</2></1>"
+msgstr "Desbloquea <0>Finanzas regenerativas</0><1>con <2>Mercado de regeneración</2></1>"
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:69
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:12
@@ -4515,6 +4597,10 @@ msgstr "ver documento"
 msgid "view in portfolio"
 msgstr "Ver en portafolio"
 
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.constants.ts:4
+msgid "view less"
+msgstr "ver menos"
+
 #: src/components/organisms/DetailsSection/DetailsSection.constants.ts:3
 msgid "view methodology"
 msgstr "ver metodología"
@@ -4588,6 +4674,10 @@ msgstr "período de cosecha"
 msgid "Visit <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> to view the transaction."
 msgstr "Visita <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> para ver la transacción."
 
+#: src/lib/constants/shared.constants.tsx:126
+#~ msgid "Visit Our Homepage <0> Instead</0>"
+#~ msgstr "Visita nuestra página de inicio <0> En su lugar</0>"
+
 #: src/lib/constants/shared.constants.tsx:129
 msgid "Visit Our Homepage <0> Instead</0>"
 msgstr "Visita nuestra página de inicio <0> En su lugar</0>"
@@ -4618,7 +4708,7 @@ msgstr "ver video"
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:157
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:65
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:89
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:87
 msgid "watershed"
 msgstr "cuenca"
 
@@ -4654,7 +4744,7 @@ msgstr "Acabamos de enviar un correo electrónico de confirmación a:"
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:77
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:51
 msgid "What is Tebu"
-msgstr "Qué es Tebu"
+msgstr "¿Qué es Tebu?"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:7
 msgid "What your support enables"
@@ -4768,6 +4858,10 @@ msgstr "No tienes créditos comercializables para vender de este proyecto."
 msgid "You don’t have enough"
 msgstr "No tienes suficiente"
 
+#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:244
+#~ msgid "You don’t have enough {displayDenom}."
+#~ msgstr "No tienes suficiente {displayDenom}."
+
 #: src/lib/constants/shared.constants.tsx:33
 msgid "You don't have enough basket tokens"
 msgstr "No tienes suficientes fichas de cesta"
@@ -4814,7 +4908,7 @@ msgstr "Debes conectarte a Keplr para poder ver este contenido."
 
 #: src/components/organisms/ProjectDenied/ProjectDenied.tsx:58
 msgid "You must have access to the following address:"
-msgstr "Debe tener acceso a la siguiente dirección:"
+msgstr "Debes tener acceso a la siguiente dirección:"
 
 #: src/pages/Login/Login.constants.ts:3
 msgid "You must log in in order to view the content of this page."

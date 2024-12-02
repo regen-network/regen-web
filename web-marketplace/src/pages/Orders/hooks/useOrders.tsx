@@ -54,17 +54,21 @@ export const useOrders = () => {
   );
   const cryptoOrders = data?.data?.allOrders?.nodes;
 
-  const jurisdiction = 'ES-PM';
-  const countryCodeMatch = jurisdiction?.match(JURISDICTION_REGEX);
-  const countryCode = countryCodeMatch?.[3] || countryCodeMatch?.[1];
-  const { data: geocodingJurisdictionData } = useQuery(
-    getGeocodingQuery({
-      request: { query: countryCode },
-      enabled: !!countryCode,
-    }),
-  );
-  const location =
-    geocodingJurisdictionData?.body?.features?.[0]?.place_name || '';
+  // TODO APP-511
+  // Format jurisdiction for each retirement jurisdiction
+  // Is this the right way to do this if we want to internationalize it?
+  // Can we use mapbox API language parameter?
+  // const jurisdiction = 'ES-PM';
+  // const countryCodeMatch = jurisdiction?.match(JURISDICTION_REGEX);
+  // const countryCode = countryCodeMatch?.[3] || countryCodeMatch?.[1];
+  // const { data: geocodingJurisdictionData } = useQuery(
+  //   getGeocodingQuery({
+  //     request: { query: countryCode },
+  //     enabled: !!countryCode,
+  //   }),
+  // );
+  // const location =
+  //   geocodingJurisdictionData?.body?.features?.[0]?.place_name || '';
 
   const sortedOrders = useMemo(
     () =>

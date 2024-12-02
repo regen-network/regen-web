@@ -4,13 +4,10 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { i18n } from '@lingui/core';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import uniq from 'lodash/uniq';
-
-import { Flex } from 'web-components/src/components/box';
 
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
@@ -19,7 +16,6 @@ import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
-import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getDenomTraceByHashesQuery } from 'lib/queries/react-query/ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
 import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -170,10 +166,15 @@ export const useOrders = () => {
         const askBaseDenom =
           (denomTrace ? denomTrace.baseDenom : order?.askDenom) ?? '';
         const retirement = retirementResults[i]?.data?.data?.retirementByTxHash;
+        const formattedDate = i18n.date(order?.timestamp, {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        });
 
         return {
           project: {
-            deliveryDate: order?.timestamp,
+            deliveryDate: formattedDate,
             ...normalizeProjectWithMetadata({
               offChainProject: offChainProjects?.[i],
               projectPageMetadata: offChainProjects?.[i]?.metadata,
@@ -192,7 +193,7 @@ export const useOrders = () => {
               certificateNodeId: retirement?.nodeId,
             },
             blockchainDetails: {
-              purchaseDate: order?.timestamp,
+              purchaseDate: formattedDate,
               blockchainRecord: order?.txHash,
             },
             credits: {

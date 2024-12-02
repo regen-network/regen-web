@@ -707,7 +707,7 @@ msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:159
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:74
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:98
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:96
 msgid "biome"
 msgstr ""
 
@@ -1061,7 +1061,11 @@ msgstr ""
 msgid "Complete"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.tsx:33
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:151
+msgid "Compliance"
+msgstr ""
+
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:58
 msgid "Compliance Credits"
 msgstr ""
 
@@ -1542,7 +1546,7 @@ msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:152
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:55
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:79
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:77
 msgid "department"
 msgstr ""
 
@@ -1665,7 +1669,7 @@ msgstr ""
 msgid "ecocredits table"
 msgstr ""
 
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:89
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:88
 msgid "Ecocredits table"
 msgstr ""
 
@@ -1819,7 +1823,7 @@ msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:154
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:60
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:84
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:82
 msgid "environmental authority"
 msgstr ""
 
@@ -2224,7 +2228,6 @@ msgid "Last Updated:"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/hooks/useSeo.ts:62
-#: src/components/templates/ProjectDetails/hooks/useSeo.ts:62
 msgid "Learn about {creditClassName} credits sourced from {accountName} in {projectAddress}."
 msgstr ""
 
@@ -2486,7 +2489,8 @@ msgstr ""
 msgid "monitor"
 msgstr ""
 
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.SeeMore.tsx:20
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.constants.ts:5
+#: src/lib/constants/shared.constants.tsx:112
 msgid "more"
 msgstr ""
 
@@ -2631,7 +2635,7 @@ msgstr ""
 msgid "No options available"
 msgstr ""
 
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:81
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:80
 msgid "No retirements to display"
 msgstr ""
 
@@ -3093,7 +3097,7 @@ msgstr ""
 msgid "PROJECT"
 msgstr ""
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:165
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:175
 msgid "Project {onChainProjectId}"
 msgstr ""
 
@@ -3139,11 +3143,11 @@ msgstr ""
 msgid "Project documentation"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:103
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:101
 msgid "Project Duration"
 msgstr ""
 
-#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:135
+#: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:144
 msgid "project end date"
 msgstr ""
 
@@ -3251,7 +3255,7 @@ msgstr ""
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr ""
 
-#: src/pages/Projects/Projects.tsx:222
+#: src/pages/Projects/Projects.tsx:224
 msgid "projects tabs"
 msgstr ""
 
@@ -3340,9 +3344,12 @@ msgid "Regen impact address"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/hooks/useSeo.ts:56
-#: src/components/templates/ProjectDetails/hooks/useSeo.ts:56
 #: src/siteMetadata.ts:4
 msgid "Regen Marketplace"
+msgstr ""
+
+#: src/components/organisms/DetailsSection/DetailsSection.constants.ts:8
+msgid "Regen Marketplace app."
 msgstr ""
 
 #: src/components/templates/ProjectDetails/hooks/useSeo.ts:68
@@ -3360,7 +3367,7 @@ msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:151
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:53
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:77
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:75
 msgid "region"
 msgstr ""
 
@@ -3817,7 +3824,7 @@ msgstr ""
 msgid "Sorry, your transaction was not successful."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.tsx:282
+#: src/pages/Projects/AllProjects/AllProjects.tsx:288
 msgid "Sort by:"
 msgstr ""
 
@@ -3897,7 +3904,7 @@ msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:158
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:70
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:94
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:92
 msgid "sub-watershed"
 msgstr ""
 
@@ -4520,7 +4527,7 @@ msgstr ""
 msgid "view in portfolio"
 msgstr ""
 
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.SeeMore.tsx:19
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.constants.ts:4
 msgid "view less"
 msgstr ""
 
@@ -4627,7 +4634,7 @@ msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:157
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:65
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:89
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:87
 msgid "watershed"
 msgstr ""
 

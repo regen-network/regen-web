@@ -54,7 +54,7 @@ export const ViewMore = ({
       {hiddenItemsCount > 0 && (
         <TextButton
           onClick={() => handleIsExpanded(!isExpanded)}
-          className="uppercase text-grey-400 hover:text-grey-300 text-[11px] font-lato border-l-0 border-r-0 border-t-0 border-b border-solid border-grey-400 hover:border-grey-300 leading-3"
+          className="text-grey-400 hover:text-grey-300 text-[11px] font-sans border-l-0 border-r-0 border-t-0 border-b border-solid border-grey-400 hover:border-grey-300 leading-3"
         >
           {isExpanded
             ? `- ${showLessText}`

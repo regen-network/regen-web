@@ -14,7 +14,7 @@ export const PauseIcon = (props: React.SVGProps<SVGSVGElement>) => (
         fill-rule="evenodd"
         clip-rule="evenodd"
         d="M32 20H25V50H32V20ZM45 20H38V50H45V20Z"
-        fill="#4FB573"
+        fill="currentColor"
       />
     </g>
   </svg>

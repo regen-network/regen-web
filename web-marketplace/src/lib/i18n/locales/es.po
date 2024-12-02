@@ -69,7 +69,15 @@ msgstr "{0, plural, one {clase de crédito permitida} other {clases de crédito 
 msgid "{ADDRESS_USED_ERROR} Do you want to merge these accounts?"
 msgstr "{ADDRESS_USED_ERROR} ¿Quieres fusionar estas cuentas?"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:175
+#: src/lib/rdf/rdf.ts:112
+msgid "{area, plural, one {acre} other {acres}}"
+msgstr "{area, plural, one {acre} other {acres}}"
+
+#: src/lib/rdf/rdf.ts:106
+msgid "{area, plural, one {hectare} other {hectares}}"
+msgstr "{area, plural, one {hectárea} other {hectáreas}}"
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:173
 msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
 msgstr "{créditosDisponibles, plural, one {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido} other {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido}}"
 
@@ -120,7 +128,7 @@ msgid "{years, plural, one {{years} year project duration} other {{years} year p
 msgstr "{years, plural, one {Duración del proyecto: {years} año} other {Duración del proyecto: {years} años}}"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:105
-#: src/components/organisms/Order/Order.Summary.tsx:85
+#: src/components/organisms/Order/Order.Summary.tsx:88
 msgid "# credits"
 msgstr "# créditos"
 
@@ -299,7 +307,7 @@ msgstr "Un taxón está extinto cuando no hay duda razonable de que el último i
 msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr "Un tercero que proporciona una evaluación independiente e imparcial del plan del proyecto y de los informes del proyecto (que no es el monitor)."
 
-#: src/components/organisms/Order/Order.Summary.tsx:185
+#: src/components/organisms/Order/Order.Summary.tsx:200
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr "Un identificador único que rastrea y verifica una transacción específica en la cadena de bloques."
 
@@ -732,11 +740,11 @@ msgstr "biorregión"
 msgid "block height"
 msgstr "altura del bloque"
 
-#: src/components/organisms/Order/Order.Summary.tsx:172
+#: src/components/organisms/Order/Order.Summary.tsx:187
 msgid "Blockchain Details"
 msgstr "Detalles de la cadena de bloques"
 
-#: src/components/organisms/Order/Order.Summary.tsx:180
+#: src/components/organisms/Order/Order.Summary.tsx:195
 #: src/lib/constants/shared.constants.tsx:94
 #: src/pages/ProjectFinished/ProjectFinished.tsx:97
 msgid "blockchain record"
@@ -905,7 +913,7 @@ msgstr "crédito de carbono"
 msgid "carbon offset standard"
 msgstr "Norma de compensación de carbono"
 
-#: src/components/organisms/Order/Order.Summary.tsx:145
+#: src/components/organisms/Order/Order.Summary.tsx:160
 msgid "card info"
 msgstr "Información de la tarjeta"
 
@@ -1048,7 +1056,7 @@ msgid "Click on the confirmation link to return to Regen Network."
 msgstr "Haga clic en el enlace de confirmación para regresar a Regen Network."
 
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:213
-#: src/pages/ProjectReview/ProjectReview.tsx:380
+#: src/pages/ProjectReview/ProjectReview.tsx:379
 msgid "close"
 msgstr "cerca"
 
@@ -1395,7 +1403,7 @@ msgstr "Definición de unidad de crédito"
 msgid "credits"
 msgstr "créditos"
 
-#: src/components/organisms/Order/Order.Summary.tsx:68
+#: src/components/organisms/Order/Order.Summary.tsx:71
 msgid "Credits"
 msgstr "Créditos"
 
@@ -1486,6 +1494,10 @@ msgstr "Créditos Retirados"
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:106
 msgid "Credits Tradable"
 msgstr "Créditos negociables"
+
+#: src/components/organisms/Order/Order.Summary.tsx:119
+msgid "Credits were purchased in a tradable format and were not retired"
+msgstr "Los créditos se compraron en formato comercializable y no se retiraron."
 
 #: src/components/organisms/UserCredits.tsx:167
 msgid "credits you purchased"
@@ -1586,7 +1598,7 @@ msgstr "descripción"
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:207
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/pages/Description/Description.tsx:48
-#: src/pages/ProjectReview/ProjectReview.tsx:225
+#: src/pages/ProjectReview/ProjectReview.tsx:224
 msgid "Description"
 msgstr "Descripción"
 
@@ -1837,7 +1849,7 @@ msgstr "Fecha de finalización"
 msgid "Endangered"
 msgstr "En peligro"
 
-#: src/components/organisms/Order/Order.Summary.tsx:148
+#: src/components/organisms/Order/Order.Summary.tsx:163
 msgid "ending in"
 msgstr "terminando en"
 
@@ -1875,7 +1887,7 @@ msgstr "emisión estimada"
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr "Algunos ejemplos de motivos de jubilación incluyen: “viajes de empresa en 2025”, “compensar mi huella personal” o el nombre de una persona u organización específica."
 
-#: src/components/organisms/Order/Order.tsx:133
+#: src/components/organisms/Order/Order.tsx:137
 msgid "Expected delivery date"
 msgstr "Fecha de entrega prevista"
 
@@ -2221,7 +2233,7 @@ msgstr "Emisores"
 msgid "join the community"
 msgstr "Únete a la comunidad"
 
-#: src/pages/ProjectReview/ProjectReview.tsx:222
+#: src/pages/ProjectReview/ProjectReview.tsx:221
 msgid "Jurisdiction"
 msgstr "Jurisdicción"
 
@@ -2323,7 +2335,7 @@ msgid "listen to podcast"
 msgstr "escuchar podcast"
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:24
-#: src/pages/ProjectReview/ProjectReview.tsx:282
+#: src/pages/ProjectReview/ProjectReview.tsx:281
 msgid "Loading video player..."
 msgstr "Cargando reproductor de vídeo..."
 
@@ -2338,7 +2350,7 @@ msgstr "ubicación"
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:135
 #: src/lib/constants/shared.constants.tsx:53
 #: src/pages/ProjectLocation/ProjectLocation.tsx:44
-#: src/pages/ProjectReview/ProjectReview.tsx:215
+#: src/pages/ProjectReview/ProjectReview.tsx:214
 msgid "Location"
 msgstr "Ubicación"
 
@@ -2452,7 +2464,7 @@ msgid "media"
 msgstr "medios de comunicación"
 
 #: src/pages/Media/Media.tsx:76
-#: src/pages/ProjectReview/ProjectReview.tsx:240
+#: src/pages/ProjectReview/ProjectReview.tsx:239
 msgid "Media"
 msgstr "Medios de comunicación"
 
@@ -2476,7 +2488,7 @@ msgstr "metadatos"
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:105
 #: src/components/organisms/CreditClassForms/CreditClassReview.tsx:40
 #: src/pages/ProjectMetadata/ProjectMetadata.tsx:72
-#: src/pages/ProjectReview/ProjectReview.tsx:319
+#: src/pages/ProjectReview/ProjectReview.tsx:318
 msgid "Metadata"
 msgstr "Metadatos"
 
@@ -2572,6 +2584,7 @@ msgstr "Debe tener destinatarios"
 msgid "my orders"
 msgstr "Mis ordenes"
 
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:18
 #: src/pages/Dashboard/Dashboard.constants.tsx:87
 msgid "My orders"
 msgstr "Mis pedidos"
@@ -2591,8 +2604,8 @@ msgid "Name of document"
 msgstr "Nombre del documento"
 
 #: src/components/organisms/Order/Order.Summary.tsx:143
-msgid "name on card"
-msgstr "nombre en la tarjeta"
+#~ msgid "name on card"
+#~ msgstr "nombre en la tarjeta"
 
 #: src/components/organisms/AdditionalityForm.tsx:214
 msgid "Natural ecosystem, unmanaged"
@@ -2764,6 +2777,10 @@ msgstr "o inicie sesión con correo electrónico / redes sociales"
 msgid "Order Summary"
 msgstr "Resumen del pedido"
 
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:15
+msgid "Orders"
+msgstr "Pedidos"
+
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:40
 msgid "Organization"
 msgstr "Organización"
@@ -2812,11 +2829,11 @@ msgstr "fogonadura"
 msgid "payment"
 msgstr "pago"
 
-#: src/components/organisms/Order/Order.Summary.tsx:156
+#: src/components/organisms/Order/Order.Summary.tsx:171
 msgid "payment currency"
 msgstr "Moneda de pago"
 
-#: src/components/organisms/Order/Order.Summary.tsx:139
+#: src/components/organisms/Order/Order.Summary.tsx:155
 msgid "payment info"
 msgstr "Información de pago"
 
@@ -3036,7 +3053,7 @@ msgstr "Los precios de los créditos para proyectos de prefinanciamiento tienen 
 msgid "price per credit"
 msgstr "precio por crédito"
 
-#: src/components/organisms/Order/Order.Summary.tsx:71
+#: src/components/organisms/Order/Order.Summary.tsx:74
 msgid "Price per credit"
 msgstr "Precio por crédito"
 
@@ -3310,7 +3327,7 @@ msgstr "pestañas de perfil público"
 msgid "Publications"
 msgstr "Publicaciones"
 
-#: src/components/organisms/Order/Order.Summary.tsx:174
+#: src/components/organisms/Order/Order.Summary.tsx:189
 msgid "purchase date"
 msgstr "fecha de compra"
 
@@ -3545,7 +3562,7 @@ msgstr "Certificados de jubilación"
 msgid "Retirement date"
 msgstr "Fecha de jubilación"
 
-#: src/components/organisms/Order/Order.Summary.tsx:108
+#: src/components/organisms/Order/Order.Summary.tsx:111
 msgid "Retirement Info"
 msgstr "Información sobre la jubilación"
 
@@ -3554,7 +3571,7 @@ msgstr "Información sobre la jubilación"
 msgid "Retirement is permanent and non-reversible."
 msgstr "La jubilación es permanente e irreversible."
 
-#: src/components/organisms/Order/Order.Summary.tsx:120
+#: src/components/organisms/Order/Order.Summary.tsx:135
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:54
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:139
 #: src/pages/Certificate/Certificate.constants.ts:18
@@ -3571,7 +3588,7 @@ msgid "Retirement permanently removes used credits from circulation to prevent t
 msgstr "La retirada elimina permanentemente de circulación los créditos usados para evitar su reutilización, garantizando así que el beneficio ambiental reclamado sea real y no se contabilice dos veces."
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:61
-#: src/components/organisms/Order/Order.Summary.tsx:118
+#: src/components/organisms/Order/Order.Summary.tsx:129
 #: src/lib/constants/shared.constants.tsx:148
 #: src/pages/Certificate/Certificate.constants.ts:17
 msgid "Retirement reason"
@@ -4347,7 +4364,7 @@ msgid "total credits you have purchased"
 msgstr "total de créditos que has comprado"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:130
-#: src/components/organisms/Order/Order.Summary.tsx:91
+#: src/components/organisms/Order/Order.Summary.tsx:94
 msgid "total price"
 msgstr "Precio total"
 
@@ -4367,11 +4384,7 @@ msgstr "Identificación de token vintage de tucán"
 msgid "Tradable"
 msgstr "Negociable"
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:175
-#~ msgid "TRADABLE AND RETIRABLE"
-#~ msgstr "NEGOCIABLES Y RETIRARSE"
-
-#: src/components/organisms/Order/Order.Summary.tsx:112
+#: src/components/organisms/Order/Order.Summary.tsx:115
 msgid "Tradable Credits"
 msgstr "Créditos negociables"
 

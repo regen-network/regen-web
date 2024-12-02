@@ -35,8 +35,8 @@ import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/gra
 import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import {
   getAnchoredProjectMetadata,
+  getAreaUnit,
   getUnanchoredProjectMetadata,
-  QUDT_UNIT_MAP,
   qudtUnit,
 } from 'lib/rdf';
 
@@ -204,11 +204,10 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
         </ItemDisplay>
         <ItemDisplay name={_(msg`Size`)}>
           {metadata?.['regen:projectSize']?.['qudt:numericValue'] || '-'}{' '}
-          {
-            QUDT_UNIT_MAP[
-              metadata?.['regen:projectSize']?.['qudt:unit'] as qudtUnit
-            ]
-          }
+          {getAreaUnit(
+            metadata?.['regen:projectSize']?.['qudt:unit'] as qudtUnit,
+            metadata?.['regen:projectSize']?.['qudt:numericValue'],
+          )}
         </ItemDisplay>
       </ReviewCard>
       <ReviewCard

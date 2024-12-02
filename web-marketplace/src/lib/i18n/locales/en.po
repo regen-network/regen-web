@@ -63,7 +63,15 @@ msgstr ""
 msgid "{ADDRESS_USED_ERROR} Do you want to merge these accounts?"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:175
+#: src/lib/rdf/rdf.ts:112
+msgid "{area, plural, one {acre} other {acres}}"
+msgstr ""
+
+#: src/lib/rdf/rdf.ts:106
+msgid "{area, plural, one {hectare} other {hectares}}"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:173
 msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
 msgstr ""
 
@@ -118,7 +126,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:105
-#: src/components/organisms/Order/Order.Summary.tsx:85
+#: src/components/organisms/Order/Order.Summary.tsx:88
 msgid "# credits"
 msgstr ""
 
@@ -301,7 +309,7 @@ msgstr ""
 msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:185
+#: src/components/organisms/Order/Order.Summary.tsx:200
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr ""
 
@@ -730,11 +738,11 @@ msgstr ""
 msgid "block height"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:172
+#: src/components/organisms/Order/Order.Summary.tsx:187
 msgid "Blockchain Details"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:180
+#: src/components/organisms/Order/Order.Summary.tsx:195
 #: src/lib/constants/shared.constants.tsx:94
 #: src/pages/ProjectFinished/ProjectFinished.tsx:97
 msgid "blockchain record"
@@ -899,7 +907,7 @@ msgstr ""
 msgid "carbon offset standard"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:145
+#: src/components/organisms/Order/Order.Summary.tsx:160
 msgid "card info"
 msgstr ""
 
@@ -1038,7 +1046,7 @@ msgid "Click on the confirmation link to return to Regen Network."
 msgstr ""
 
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:213
-#: src/pages/ProjectReview/ProjectReview.tsx:380
+#: src/pages/ProjectReview/ProjectReview.tsx:379
 msgid "close"
 msgstr ""
 
@@ -1377,7 +1385,7 @@ msgstr ""
 msgid "credits"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:68
+#: src/components/organisms/Order/Order.Summary.tsx:71
 msgid "Credits"
 msgstr ""
 
@@ -1467,6 +1475,10 @@ msgstr ""
 #: src/components/molecules/BatchTotalsGrid.tsx:39
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:106
 msgid "Credits Tradable"
+msgstr ""
+
+#: src/components/organisms/Order/Order.Summary.tsx:119
+msgid "Credits were purchased in a tradable format and were not retired"
 msgstr ""
 
 #: src/components/organisms/UserCredits.tsx:167
@@ -1568,7 +1580,7 @@ msgstr ""
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:207
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/pages/Description/Description.tsx:48
-#: src/pages/ProjectReview/ProjectReview.tsx:225
+#: src/pages/ProjectReview/ProjectReview.tsx:224
 msgid "Description"
 msgstr ""
 
@@ -1819,7 +1831,7 @@ msgstr ""
 msgid "Endangered"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:148
+#: src/components/organisms/Order/Order.Summary.tsx:163
 msgid "ending in"
 msgstr ""
 
@@ -1857,7 +1869,7 @@ msgstr ""
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:133
+#: src/components/organisms/Order/Order.tsx:137
 msgid "Expected delivery date"
 msgstr ""
 
@@ -2203,7 +2215,7 @@ msgstr ""
 msgid "join the community"
 msgstr ""
 
-#: src/pages/ProjectReview/ProjectReview.tsx:222
+#: src/pages/ProjectReview/ProjectReview.tsx:221
 msgid "Jurisdiction"
 msgstr ""
 
@@ -2305,7 +2317,7 @@ msgid "listen to podcast"
 msgstr ""
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:24
-#: src/pages/ProjectReview/ProjectReview.tsx:282
+#: src/pages/ProjectReview/ProjectReview.tsx:281
 msgid "Loading video player..."
 msgstr ""
 
@@ -2320,7 +2332,7 @@ msgstr ""
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:135
 #: src/lib/constants/shared.constants.tsx:53
 #: src/pages/ProjectLocation/ProjectLocation.tsx:44
-#: src/pages/ProjectReview/ProjectReview.tsx:215
+#: src/pages/ProjectReview/ProjectReview.tsx:214
 msgid "Location"
 msgstr ""
 
@@ -2430,7 +2442,7 @@ msgid "media"
 msgstr ""
 
 #: src/pages/Media/Media.tsx:76
-#: src/pages/ProjectReview/ProjectReview.tsx:240
+#: src/pages/ProjectReview/ProjectReview.tsx:239
 msgid "Media"
 msgstr ""
 
@@ -2454,7 +2466,7 @@ msgstr ""
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:105
 #: src/components/organisms/CreditClassForms/CreditClassReview.tsx:40
 #: src/pages/ProjectMetadata/ProjectMetadata.tsx:72
-#: src/pages/ProjectReview/ProjectReview.tsx:319
+#: src/pages/ProjectReview/ProjectReview.tsx:318
 msgid "Metadata"
 msgstr ""
 
@@ -2546,6 +2558,7 @@ msgstr ""
 msgid "my orders"
 msgstr ""
 
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:18
 #: src/pages/Dashboard/Dashboard.constants.tsx:87
 msgid "My orders"
 msgstr ""
@@ -2565,8 +2578,8 @@ msgid "Name of document"
 msgstr ""
 
 #: src/components/organisms/Order/Order.Summary.tsx:143
-msgid "name on card"
-msgstr ""
+#~ msgid "name on card"
+#~ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:214
 msgid "Natural ecosystem, unmanaged"
@@ -2738,6 +2751,10 @@ msgstr ""
 msgid "Order Summary"
 msgstr ""
 
+#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:15
+msgid "Orders"
+msgstr ""
+
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:40
 msgid "Organization"
 msgstr ""
@@ -2786,11 +2803,11 @@ msgstr ""
 msgid "payment"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:156
+#: src/components/organisms/Order/Order.Summary.tsx:171
 msgid "payment currency"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:139
+#: src/components/organisms/Order/Order.Summary.tsx:155
 msgid "payment info"
 msgstr ""
 
@@ -3006,7 +3023,7 @@ msgstr ""
 msgid "price per credit"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:71
+#: src/components/organisms/Order/Order.Summary.tsx:74
 msgid "Price per credit"
 msgstr ""
 
@@ -3280,7 +3297,7 @@ msgstr ""
 msgid "Publications"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:174
+#: src/components/organisms/Order/Order.Summary.tsx:189
 msgid "purchase date"
 msgstr ""
 
@@ -3507,7 +3524,7 @@ msgstr ""
 msgid "Retirement date"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:108
+#: src/components/organisms/Order/Order.Summary.tsx:111
 msgid "Retirement Info"
 msgstr ""
 
@@ -3516,7 +3533,7 @@ msgstr ""
 msgid "Retirement is permanent and non-reversible."
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:120
+#: src/components/organisms/Order/Order.Summary.tsx:135
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:54
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:139
 #: src/pages/Certificate/Certificate.constants.ts:18
@@ -3533,7 +3550,7 @@ msgid "Retirement permanently removes used credits from circulation to prevent t
 msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:61
-#: src/components/organisms/Order/Order.Summary.tsx:118
+#: src/components/organisms/Order/Order.Summary.tsx:129
 #: src/lib/constants/shared.constants.tsx:148
 #: src/pages/Certificate/Certificate.constants.ts:17
 msgid "Retirement reason"
@@ -4290,7 +4307,7 @@ msgid "total credits you have purchased"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:130
-#: src/components/organisms/Order/Order.Summary.tsx:91
+#: src/components/organisms/Order/Order.Summary.tsx:94
 msgid "total price"
 msgstr ""
 
@@ -4310,7 +4327,7 @@ msgstr ""
 msgid "Tradable"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:112
+#: src/components/organisms/Order/Order.Summary.tsx:115
 msgid "Tradable Credits"
 msgstr ""
 

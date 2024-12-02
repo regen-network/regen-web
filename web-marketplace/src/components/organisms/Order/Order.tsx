@@ -118,7 +118,10 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
                 place={project.place}
                 area={project.area}
                 iconClassName="mr-5"
-                areaUnit={getAreaUnit(project.areaUnit as qudtUnit | undefined)}
+                areaUnit={getAreaUnit(
+                  project.areaUnit as qudtUnit | undefined,
+                  project.area,
+                )}
                 fontSize="13px"
                 color={theme.palette.primary.contrastText}
               />

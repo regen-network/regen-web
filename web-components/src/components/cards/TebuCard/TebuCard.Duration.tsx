@@ -10,23 +10,19 @@ interface TebuCardDurationProps {
   title: string;
   minimumValue: number;
   maximumValue: number;
-  minimumLabel: string;
-  durationUnitLabel: string;
   tooltip?: string;
-  maximumPrefix?: string;
+  minDurationLabel: string;
+  maxDurationLabel: string;
 }
-
-
 
 const TebuCardDuration: React.FC<TebuCardDurationProps> = ({
   title,
   duration,
   minimumValue,
   maximumValue,
-  minimumLabel,
-  durationUnitLabel,
   tooltip,
-  maximumPrefix,
+  minDurationLabel,
+  maxDurationLabel,
 }) => {
   return (
     <div className="mb-[10px]">
@@ -56,21 +52,15 @@ const TebuCardDuration: React.FC<TebuCardDurationProps> = ({
         </div>
         <div className="relative w-full h-[2em] top-0">
           <div
-            className="absolute text-[12px] text-right"
+            className="absolute text-[12px] text-right max-w-[90px]"
             style={{
               right: `${(1 - minimumValue / maximumValue) * 100}%`,
             }}
           >
-            <div>
-              {minimumValue} {durationUnitLabel}
-            </div>
-            <div>{minimumLabel}</div>
+            {minDurationLabel}
           </div>
           <div className="absolute text-[12px] text-right right-0">
-            <div>
-              {maximumPrefix}
-              {maximumValue} {durationUnitLabel}
-            </div>
+            <div>{maxDurationLabel}</div>
             <div>
               {tooltip && (
                 <InfoTooltip

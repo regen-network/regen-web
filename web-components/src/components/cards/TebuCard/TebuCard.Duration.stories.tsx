@@ -19,8 +19,8 @@ DurationStory.args = {
       title="20 year project duration"
       minimumValue={20}
       maximumValue={30}
-      minimumLabel="minimum"
-      durationUnitLabel="years"
+      minDurationLabel="20 years minimum"
+      maxDurationLabel="30 years"
       duration={20}
       tooltip="Duration Tooltip"
     />
@@ -38,22 +38,29 @@ const durationValues = [
     duration: 20,
     title: '20 year project duration',
     maximumValue: 30,
+    minDurationLabel: '20 years minimum',
+    maxDurationLabel: '30 years',
   },
   {
     duration: 25,
     title: '25 year project duration',
     maximumValue: 30,
+    minDurationLabel: '20 years minimum',
+    maxDurationLabel: '30 years',
   },
   {
     duration: 50,
     title: '50 year project duration',
     maximumValue: 30,
+    minDurationLabel: '20 years minimum',
+    maxDurationLabel: '30 years',
   },
   {
     duration: 50,
     title: '50 year project duration',
     maximumValue: 50,
-    maximumPrefix: '>',
+    minDurationLabel: '20 years minimum',
+    maxDurationLabel: '>50 years',
   },
 ];
 
@@ -68,10 +75,7 @@ DurationStory.decorators = [
             children={
               <Duration
                 {...(DurationStory.args?.children?.props as any)}
-                title={values.title}
-                duration={values.duration}
-                maximumValue={values.maximumValue}
-                maximumPrefix={values.maximumPrefix}
+                {...values}
               />
             }
           />

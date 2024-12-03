@@ -72,10 +72,11 @@ export const getWarningModalContent = (
   allowedDenomsData: QueryAllowedDenomsResponse | undefined,
   data: BuyCreditsSchemaTypes,
   creditsInAllSellOrders: number | undefined,
+  isVisitingUser: boolean,
 ): BuyWarningModalContent | undefined => {
   if (
     currency?.askDenom === USD_DENOM &&
-    isWeb2UserWithoutWallet &&
+    (isWeb2UserWithoutWallet || isVisitingUser) &&
     !creditsInRequestedSellOrders &&
     creditsInAllSellOrders
   ) {

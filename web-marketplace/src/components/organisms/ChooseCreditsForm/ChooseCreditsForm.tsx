@@ -255,6 +255,9 @@ export const ChooseCreditsForm = React.memo(
           PAYMENT_OPTIONS.CARD,
         );
       }
+      if (!cardSellOrders.length && paymentOption === PAYMENT_OPTIONS.CARD) {
+        handlePaymentOptions(PAYMENT_OPTIONS.CRYPTO);
+      }
     }, [cardSellOrders.length, initialPaymentOption]); // just run this once
 
     useEffect(() => {

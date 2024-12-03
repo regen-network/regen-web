@@ -32,6 +32,7 @@ export function getSpendingCap(
     ? cardSellOrders.reduce((prev, cur) => {
         return formatCurrencyAmountTwoDecimals(
           prev + Number(cur.quantity) * cur.usdPrice,
+          true,
         );
       }, 0)
     : microToDenom(
@@ -55,7 +56,7 @@ export const getCreditsAmount = ({
   creditTypePrecision,
 }: GetCreditsAmountParams) => {
   const currentCurrencyAmount = card
-    ? formatCurrencyAmountTwoDecimals(value)
+    ? formatCurrencyAmountTwoDecimals(value, true)
     : denomToMicro(value);
   let currentCreditsAmount = 0;
   let currencyAmountLeft = currentCurrencyAmount;
@@ -141,7 +142,7 @@ export const getCurrencyAmount = ({
 
   return {
     [CURRENCY_AMOUNT]: card
-      ? formatCurrencyAmountTwoDecimals(currentCurrencyAmount) //parseFloat(currentCurrencyAmount.toFixed(6))
+      ? formatCurrencyAmountTwoDecimals(currentCurrencyAmount, true)
       : parseFloat(microToDenom(currentCurrencyAmount).toFixed(6)),
     sellOrders,
   };
@@ -175,7 +176,26 @@ export const formatSellOrder = ({
   };
 };
 
-const formatCurrencyAmountTwoDecimals = (value: string | number) => {
+/**
+ * Formats a given value to a currency amount with two decimal places.
+ *
+ * @param value - The value to format. Can be a string or a number.
+ * @param roundUpDecimal - Optional. If true, rounds the value up to the nearest two decimals. Defaults to false.
+ * @returns The formatted currency amount as a number with two decimals.
+ *
+ * @example
+ * ```typescript
+ * formatCurrencyAmountTwoDecimals(123.456); // returns 123.45
+ * formatCurrencyAmountTwoDecimals(123.456, true); // returns 123.46
+ * formatCurrencyAmountTwoDecimals('123.456'); // returns 123.45
+ * formatCurrencyAmountTwoDecimals('123.456', true); // returns 123.46
+ * formatCurrencyAmountTwoDecimals('abc'); // returns 0
+ * ```
+ */
+export const formatCurrencyAmountTwoDecimals = (
+  value: string | number,
+  roundUpDecimal = false,
+) => {
   const numericValue = typeof value === 'string' ? parseFloat(value) : value;
   const stringValue = value.toString();
   const [integerPart, decimalPart] = stringValue.split('.');
@@ -184,10 +204,11 @@ const formatCurrencyAmountTwoDecimals = (value: string | number) => {
     return 0;
   }
 
-  // Limit decimals to two
-  if (decimalPart && decimalPart.length > 2) {
-    return parseFloat(`${integerPart}.${decimalPart.slice(0, 2)}`); // parseFloat(Number(value).toFixed(2));
-  }
+  // Round to two decimals, either returning the value with
+  // the first two decimals only or rounding them up
+  const formattedValue = roundUpDecimal
+    ? Math.ceil(numericValue * 100) / 100
+    : +`${integerPart}.${decimalPart.slice(0, 2)}`;
 
-  return parseFloat(numericValue.toFixed(2));
+  return formattedValue;
 };

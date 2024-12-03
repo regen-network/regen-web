@@ -48,7 +48,8 @@ export function OrderSummaryContent({
 }: Props) {
   const { _ } = useLingui();
   const paymentOption = useAtomValue(paymentOptionAtom);
-  const { projectName, currency, pricePerCredit, credits } = order;
+  const { projectName, currency, pricePerCredit, credits, currencyAmount } =
+    order;
   const displayDenom = useMemo(
     () =>
       findDisplayDenom({

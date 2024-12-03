@@ -18,6 +18,7 @@ import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import { CURRENCY, CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import { CurrencyInputProps } from './CreditsAmount.types';
+import { formatCurrencyAmountTwoDecimals } from './CreditsAmount.utils';
 
 const CustomSelect = lazy(
   () =>
@@ -73,16 +74,24 @@ export const CurrencyInput = ({
           paymentOption === PAYMENT_OPTIONS.CARD) ||
         /^00/.test(value)
       ) {
-        // If so, remove leading zeros and set the value to a float with 2 decimals
-        setValue(CURRENCY_AMOUNT, parseFloat(Number(value).toFixed(2)), {
-          shouldValidate: true,
-        });
+        // Remove leading zeros and set the value to a number with 2 decimals.
+        setValue(
+          CURRENCY_AMOUNT,
+          formatCurrencyAmountTwoDecimals(value, false),
+          {
+            shouldValidate: true,
+          },
+        );
       } else if (/^0[1-9]/.test(value)) {
         // If the value starts with a zero followed by another number, remove the leading zero
         value = value.replace(/^0+/, '');
-        setValue(CURRENCY_AMOUNT, parseFloat(Number(value).toFixed(2)), {
-          shouldValidate: true,
-        });
+        setValue(
+          CURRENCY_AMOUNT,
+          formatCurrencyAmountTwoDecimals(value, false),
+          {
+            shouldValidate: true,
+          },
+        );
       }
     },
     [paymentOption, setValue],

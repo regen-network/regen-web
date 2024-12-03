@@ -24,13 +24,14 @@ import {
 } from 'lib/constants/shared.constants';
 import { CreditClassMetadataLD, ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
-import { IS_REGEN } from 'lib/env';
+import { IS_REGEN, IS_TERRASOS } from 'lib/env';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
+import { getTerrasosBookCallQuery } from 'lib/queries/react-query/sanity/getTerrasosBookCallQuery/getTerrasosBookCallQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
@@ -309,10 +310,22 @@ function ProjectDetails(): JSX.Element {
     ],
   );
 
+  const { data: terrasosBookCallData } = useQuery(
+    getTerrasosBookCallQuery({
+      sanityClient,
+      languageCode: selectedLanguage,
+      enabled: !!sanityClient && IS_TERRASOS,
+    }),
+  );
+  const terrasosBookCall = terrasosBookCallData?.allTerrasosBookCall?.[0];
+
   const projectPhotos = getProjectGalleryPhotos({ offChainProjectMetadata });
   const hasProjectPhotos = projectPhotos.length > 0;
   const onBookCallButtonClick = () =>
-    onBtnClick(() => void 0, sanityProjectPage?.otcCard?.button);
+    onBtnClick(
+      () => void 0,
+      IS_REGEN ? sanityProjectPage?.otcCard?.button : terrasosBookCall?.button,
+    );
   const otcCard = formatOtcCardData({
     data: sanityProjectPage?.otcCard,
     isConnected,
@@ -337,6 +350,8 @@ function ProjectDetails(): JSX.Element {
     : offchainProjectByIdData?.data?.projectById?.published ||
       projectBySlug?.data.projectBySlug?.published;
   const projectLocation = projectMetadata?.['schema:location'];
+
+  const isTerrasos = normalizedProject.type === 'TerrasosProjectInfo';
 
   if (noProjectFound) return <NotFoundPage />;
 
@@ -377,6 +392,7 @@ function ProjectDetails(): JSX.Element {
 
       {(onChainProjectId ||
         isPrefinanceProject ||
+        isTerrasos ||
         (isAdmin && !loginDisabled)) && (
         <SellOrdersActionsBar
           isBuyButtonDisabled={isBuyFlowDisabled || loadingSanityProject}
@@ -411,6 +427,7 @@ function ProjectDetails(): JSX.Element {
           onClickCreatePost={openCreatePostModal}
           isCreatePostButtonDisabled={!projectLocation || !isProjectPublished}
           tooltipText={_(CREATE_POST_DISABLED_TOOLTIP_TEXT)}
+          isTerrasos={isTerrasos}
         >
           {!isAdmin &&
             isPrefinanceProject &&
@@ -468,6 +485,7 @@ function ProjectDetails(): JSX.Element {
         projectPrefinancing={projectPrefinancing}
         isSoldOut={isSoldOut}
         normalizedProject={normalizedProject}
+        terrasosBookCall={terrasosBookCall}
       />
 
       {hasProjectPhotos && (

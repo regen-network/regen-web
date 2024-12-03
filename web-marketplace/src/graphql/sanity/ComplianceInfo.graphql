@@ -2,9 +2,5 @@ query ComplianceInfo {
   allComplianceInfo {
     language
     descriptionRaw
-    bookCallLink {
-      href
-      text
-    }
   }
 }

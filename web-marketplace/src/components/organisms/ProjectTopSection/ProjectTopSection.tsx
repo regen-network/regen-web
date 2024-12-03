@@ -81,6 +81,7 @@ function ProjectTopSection({
   projectPrefinancing,
   isSoldOut,
   normalizedProject,
+  terrasosBookCall,
 }: ProjectTopSectionProps): JSX.Element {
   const { _ } = useLingui();
   const { classes } = useProjectTopSectionStyles();
@@ -316,6 +317,7 @@ function ProjectTopSection({
               projectPageMetadata={projectPageMetadata}
               projectMetadata={projectMetadata}
               complianceInfo={allComplianceInfo}
+              bookCall={terrasosBookCall}
               isComplianceProject={isComplianceProject}
               projectBatchTotals={
                 onChainProjectId && batchData?.totals ? (

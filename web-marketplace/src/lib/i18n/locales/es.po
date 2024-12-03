@@ -306,7 +306,7 @@ msgstr "Un identificador único que rastrea y verifica una transacción específ
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:65
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:28
 msgid "About Us"
-msgstr "Sobre nosotros"
+msgstr "Nosotros"
 
 #: src/components/organisms/AccountSwitchModal/AccountSwitchModal.constants.ts:3
 msgid "Account switch detected!"
@@ -318,7 +318,7 @@ msgstr "Acres"
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.tsx:125
 msgid "Act now"
-msgstr "Actúa ahora"
+msgstr "¡Actúa!"
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:95
 msgid "Act Now - Tebu"
@@ -410,13 +410,13 @@ msgstr "¡Dirección copiada!"
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:37
 #: src/pages/Post/Post.constants.ts:8
 msgid "admin"
-msgstr "administración"
+msgstr "Admin"
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:46
 #: src/components/organisms/CreditClassForms/CreditClassReview.tsx:29
 #: src/components/organisms/RolesForm/RolesForm.tsx:255
 msgid "Admin"
-msgstr "Administración"
+msgstr "Admin"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:37
 msgid "Advanced settings"
@@ -2013,7 +2013,7 @@ msgstr "Fotos de la galería"
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:81
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:55
 msgid "Geo-Viewer"
-msgstr "Visor geográfico"
+msgstr "GeoVisor"
 
 #: src/components/organisms/DetailsSection/DetailsSection.constants.ts:7
 msgid "Get even more info on this project on the"
@@ -2070,7 +2070,7 @@ msgstr "Altamente significativo"
 
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:24
 msgid "Home"
-msgstr "Hogar"
+msgstr "Inicio"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:63
 msgid "How-to Articles"
@@ -4009,11 +4009,11 @@ msgstr "Insignia de bastón"
 
 #: src/components/molecules/TebuBanner/TebuBanner.tsx:43
 msgid "Tebu banner"
-msgstr "Bandera de caña de azúcar."
+msgstr "Bandera Tebu de azúcar."
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:45
 msgid "Tebu Credits"
-msgstr "Créditos de caña"
+msgstr "Créditos Tebu"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:77
 msgid "Tebu factors"
@@ -4021,7 +4021,7 @@ msgstr "Factores de Tebu"
 
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:15
 msgid "Tebu logo"
-msgstr "Logotipo de caña de azúcar"
+msgstr "Logotipo Tebu"
 
 #: src/components/organisms/DescriptionForm/DescriptionForm.constants.ts:14
 msgid "Tell the deeper story of what makes this project special. Describe the land stewards and why they do this work, the ecological impacts (plants, animals, ecosystems), and social impacts (community, jobs, health)."
@@ -4747,7 +4747,7 @@ msgstr "Acabamos de enviar un correo electrónico de confirmación a:"
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:77
 #: src/components/organisms/TerrasosHeader/TerrasosHeader.constants.ts:51
 msgid "What is Tebu"
-msgstr "¿Qué es Tebu?"
+msgstr "Qué es Tebu"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:7
 msgid "What your support enables"

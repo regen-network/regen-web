@@ -70,7 +70,6 @@ import {
   findMatchingSellOrders,
   getCreditsAvailableBannerText,
   getCryptoCurrencies,
-  getFiatModalContent,
   getOrderedSellOrders,
   getSellOrdersCredits,
   getWarningModalContent,

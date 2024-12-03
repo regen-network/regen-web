@@ -24,10 +24,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchUserBalance } from 'pages/BuyCredits/hooks/useFetchUserBalance';
 import { useFetchSellOrders } from 'pages/Marketplace/Storefront/hooks/useFetchSellOrders';
-import {
-  ProjectWithOrderData,
-  UISellOrderInfo,
-} from 'pages/Projects/AllProjects/AllProjects.types';
+import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import {
   CREDIT_VINTAGE_OPTIONS,
@@ -228,6 +225,8 @@ export const BuyCreditsForm = ({
   const isWeb2UserWithoutWallet =
     !!privActiveAccount?.email && !activeAccount?.addr;
 
+  const isVisitingUser = !activeAccount && !privActiveAccount;
+
   const purchase = usePurchase({
     paymentOption,
     retiring,
@@ -294,6 +293,7 @@ export const BuyCreditsForm = ({
           allowedDenomsData,
           data,
           creditsInAllSellOrders,
+          isVisitingUser,
         );
       }
     },
@@ -309,6 +309,7 @@ export const BuyCreditsForm = ({
       purchase,
       refetchSellOrders,
       retiring,
+      isVisitingUser,
     ],
   );
 

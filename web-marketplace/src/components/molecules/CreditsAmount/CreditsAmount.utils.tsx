@@ -177,20 +177,12 @@ export const formatSellOrder = ({
 };
 
 /**
- * Formats a given value to a currency amount with two decimal places.
+ * Formats a given value to a currency amount with max two decimals.
  *
  * @param value - The value to format. Can be a string or a number.
  * @param roundUpDecimal - Optional. If true, rounds the value up to the nearest two decimals. Defaults to false.
  * @returns The formatted currency amount as a number with two decimals.
  *
- * @example
- * ```typescript
- * formatCurrencyAmountTwoDecimals(123.456); // returns 123.45
- * formatCurrencyAmountTwoDecimals(123.456, true); // returns 123.46
- * formatCurrencyAmountTwoDecimals('123.456'); // returns 123.45
- * formatCurrencyAmountTwoDecimals('123.456', true); // returns 123.46
- * formatCurrencyAmountTwoDecimals('abc'); // returns 0
- * ```
  */
 export const formatCurrencyAmountTwoDecimals = (
   value: string | number,
@@ -205,10 +197,12 @@ export const formatCurrencyAmountTwoDecimals = (
   }
 
   // Round to two decimals, either returning the value with
-  // the first two decimals only or rounding them up
+  // the first two decimals only, if any, or rounding them up.
   const formattedValue = roundUpDecimal
     ? +(Math.ceil(numericValue * 100) / 100).toFixed(2)
-    : +`${integerPart}.${decimalPart.slice(0, 2)}`;
+    : decimalPart?.length > 2
+    ? +`${integerPart}.${decimalPart.slice(0, 2)}`
+    : +`${integerPart}`;
 
   return formattedValue;
 };

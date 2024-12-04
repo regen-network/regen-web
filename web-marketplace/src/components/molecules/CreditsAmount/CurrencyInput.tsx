@@ -67,23 +67,13 @@ export const CurrencyInput = ({
       let value = event.target.value;
       const decimalPart = value.split('.')?.[1];
       // Check if the value has a decimal part longer than 2 digits,
-      // or if the value starts with two consecutive zeros
+      // or if the value starts with leading zero/s
       if (
         (decimalPart &&
           decimalPart.length > 2 &&
           paymentOption === PAYMENT_OPTIONS.CARD) ||
-        /^00/.test(value)
+        /^0[0-9]/.test(value)
       ) {
-        // Remove leading zeros and set the value to a number with 2 decimals.
-        setValue(
-          CURRENCY_AMOUNT,
-          formatCurrencyAmountTwoDecimals(value, false),
-          {
-            shouldValidate: true,
-          },
-        );
-      } else if (/^0[1-9]/.test(value)) {
-        // If the value starts with a zero followed by another number, remove the leading zero
         value = value.replace(/^0+/, '');
         setValue(
           CURRENCY_AMOUNT,

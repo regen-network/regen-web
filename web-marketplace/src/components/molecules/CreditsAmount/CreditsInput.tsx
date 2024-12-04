@@ -31,10 +31,7 @@ export const CreditsInput = ({
   const handleInput = useCallback(
     (event: ChangeEvent<HTMLInputElement>): void => {
       let value = event.target.value;
-      // Check if the value starts with two consecutive zeros
-      if (/^00/.test(value) || /^0[1-9]/.test(value)) {
-        // If so, remove leading zeros and set the value to a float with 2 decimals
-        // and if the value starts with a zero followed by another number, remove the leading zero
+      if (/^0[0-9]/.test(value)) {
         value = value.replace(/^0+/, '');
         setValue(CREDITS_AMOUNT, parseFloat(Number(value).toFixed(2)), {
           shouldValidate: true,
@@ -58,7 +55,7 @@ export const CreditsInput = ({
   return (
     <div className="flex-1 relative">
       <TextField
-        className={`border border-solid border-grey-300 focus-within:border-grey-500 focus-within:border-2 border border-solid border-grey-300 flex items-center pr-10 sm:h-60`}
+        className={`focus-within:border-grey-500 focus-within:border-2 border border-solid border-grey-300 flex items-center pr-10 sm:h-60`}
         type="number"
         customInputProps={{
           step: '0.000001',

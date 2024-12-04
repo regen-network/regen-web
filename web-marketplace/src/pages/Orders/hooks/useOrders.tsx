@@ -17,7 +17,6 @@ import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalize
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getDenomTraceByHashesQuery } from 'lib/queries/react-query/ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
-import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getOrdersByBuyerAddressQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getOrdersByBuyerAddress/getOrdersByBuyerAddress';
@@ -25,7 +24,6 @@ import { getRetirementByTxHash } from 'lib/queries/react-query/registry-server/g
 import { useWallet } from 'lib/wallet/wallet';
 
 import { ORDER_STATUS } from 'components/organisms/Order/Order.constants';
-import { JURISDICTION_REGEX } from 'components/templates/ProjectDetails/ProjectDetails.constant';
 import { IBC_DENOM_PREFIX } from 'hooks/useQuerySellOrders';
 
 export const useOrders = () => {

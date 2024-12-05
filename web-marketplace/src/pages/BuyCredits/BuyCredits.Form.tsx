@@ -86,6 +86,10 @@ type Props = {
   projectHref: string;
   cardDetails?: CardDetails;
   project?: NormalizeProject;
+  projectId: string | undefined;
+  loadingSanityProject: boolean;
+  isBuyFlowDisabled: boolean;
+  loadingBuySellOrders: boolean;
 };
 
 const stripe = loadStripe(stripeKey);
@@ -104,10 +108,14 @@ export const BuyCreditsForm = ({
   projectHref,
   cardDetails,
   project,
+  projectId,
+  loadingSanityProject,
+  isBuyFlowDisabled,
+  loadingBuySellOrders,
 }: Props) => {
   const { data, activeStep, handleSaveNext, handleSave, handleActiveStep } =
     useMultiStep<BuyCreditsSchemaTypes>();
-  const { wallet, isConnected, activeWalletAddr } = useWallet();
+  const { wallet, isConnected, activeWalletAddr, loaded } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
   const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
   const {
@@ -119,7 +127,7 @@ export const BuyCreditsForm = ({
   } = useLoginData({});
   const navigate = useNavigate();
   const { _ } = useLingui();
-
+  const warningModalContent = useRef<BuyWarningModalContent | undefined>();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
@@ -176,6 +184,28 @@ export const BuyCreditsForm = ({
     setPaymentOption(prev => data?.paymentOption || prev);
   }, [data, setPaymentOption, setRetiring]);
 
+  useEffect(() => {
+    if (
+      !loadingSanityProject &&
+      !loadingBuySellOrders &&
+      cardSellOrders.length === 0 &&
+      ((loaded && !wallet?.address) || isBuyFlowDisabled) &&
+      !warningModalContent.current
+    ) {
+      // Else if there's no connected wallet address or buy disabled, redirect to project page
+      navigate(`/project/${projectId}`, { replace: true });
+    }
+  }, [
+    loadingSanityProject,
+    loadingBuySellOrders,
+    loaded,
+    wallet?.address,
+    navigate,
+    projectId,
+    cardSellOrders.length,
+    isBuyFlowDisabled,
+  ]);
+
   const paymentInfoFormSubmit = useCallback(
     async (values: PaymentInfoFormSchemaType) => {
       const { paymentMethodId, ...others } = values;
@@ -219,8 +249,6 @@ export const BuyCreditsForm = ({
       ),
     [cardSellOrders, filteredCryptoSellOrders, paymentOption],
   );
-
-  const warningModalContent = useRef<BuyWarningModalContent | undefined>();
 
   const isWeb2UserWithoutWallet =
     !!privActiveAccount?.email && !activeAccount?.addr;

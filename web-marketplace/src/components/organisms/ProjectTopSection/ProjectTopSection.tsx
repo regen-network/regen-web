@@ -14,7 +14,6 @@ import Section from 'web-components/src/components/section';
 import { Body, Label, Title } from 'web-components/src/components/typography';
 import { pxToRem } from 'web-components/src/theme/muiTheme';
 
-import { BatchTotalsForProject } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
@@ -216,8 +215,8 @@ function ProjectTopSection({
   const isTerrasosProjectPage =
     projectPageMetadata?.['@type'] === 'TerrasosProjectInfo';
 
-  const batchTotals: BatchTotalsForProject = {
-    cancelledAmount:
+  const batchTotals = {
+    registeredAmount:
       normalizedProject?.complianceCredits.creditsRegistered ?? 0,
     retiredAmount: normalizedProject?.complianceCredits.creditsRetired ?? 0,
     tradableAmount: normalizedProject?.complianceCredits.creditsAvailable ?? 0,

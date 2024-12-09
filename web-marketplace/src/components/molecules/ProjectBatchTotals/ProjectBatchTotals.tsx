@@ -39,7 +39,7 @@ export function ProjectBatchTotals({
   sx = [],
   className,
 }: {
-  totals: BatchTotalsForProject;
+  totals: BatchTotalsForProject & { registeredAmount?: number };
   projectWithOrderData?: NormalizeProject;
   soldOutProjectsIds: string[];
   sx?: SxProps<Theme>;
@@ -86,7 +86,11 @@ export function ProjectBatchTotals({
               ? _(REGISTERED_CREDITS_TOOLTIP)
               : _(ISSUED_CREDITS_TOOLTIP)
           }
-          number={totals.tradableAmount + totals.retiredAmount}
+          number={
+            isComplianceProject
+              ? totals.registeredAmount
+              : totals.tradableAmount + totals.retiredAmount
+          }
           formatNumberOptions={{
             ...quantityFormatNumberOptions,
             maximumFractionDigits: MAX_FRACTION_DIGITS_PROJECT_CREDITS,

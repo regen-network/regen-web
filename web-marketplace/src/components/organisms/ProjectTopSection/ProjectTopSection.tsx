@@ -43,7 +43,7 @@ import { Prefinance } from 'components/templates/ProjectDetails/ProjectDetails.P
 import TerrasosCreditsInfo from 'components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo';
 import { useTags } from 'hooks/useTags';
 
-import { ProjectBatchTotals } from '../../molecules';
+import { ProjectBatchTotals, ProjectBatchTotalsProps } from '../../molecules';
 import { ProjectTopSectionCreditClassCard } from './ProjectTopSection.CreditClassCard';
 import {
   ProjectTopSectionQuoteMark,
@@ -220,7 +220,7 @@ function ProjectTopSection({
       normalizedProject?.complianceCredits.creditsRegistered ?? 0,
     retiredAmount: normalizedProject?.complianceCredits.creditsRetired ?? 0,
     tradableAmount: normalizedProject?.complianceCredits.creditsAvailable ?? 0,
-  };
+  } as ProjectBatchTotalsProps['totals'];
 
   const isComplianceProject =
     normalizedProject?.marketType?.includes(COMPLIANCE_MARKET) ?? false;

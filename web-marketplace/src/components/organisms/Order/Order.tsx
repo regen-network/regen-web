@@ -1,13 +1,6 @@
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import {
-  Avatar,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { CardContent, CardHeader, useTheme } from '@mui/material';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import Card from 'web-components/src/components/cards/Card';
@@ -20,6 +13,7 @@ import { Title } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
+import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
 import { Link } from 'components/atoms';
@@ -31,7 +25,6 @@ import { OrderProps } from './Order.types';
 
 export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { _ } = useLingui();
 
   const { project } = orderData;
@@ -39,56 +32,39 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
     orderData.order;
 
   const isPrefinanceProject = project.projectPrefinancing?.isPrefinanceProject;
+  const projectHref = `/project/${project.slug ?? project.id}`;
 
   return (
-    <Card className={cn('bg-grey-100 border-[1px] border-grey-200', className)}>
-      {isMobile && (
-        <>
-          {isPrefinanceProject && (
-            <PrefinanceTag
-              bodyTexts={getProjectCardBodyTextMapping(_)}
-              classNames={{ root: 'z-50 absolute top-35 left-[17px]' }}
-            />
-          )}
-          <CardMedia
-            className="h-[140px]"
-            image={project.imgSrc}
-            title={project.name}
-          />
-        </>
+    <Card
+      className={cn(
+        'bg-grey-100 border-[1px] border-bc-neutral-300',
+        className,
       )}
+    >
       <CardHeader
-        className="flex flex-col items-start md:items-center justify-between md:flex-row p-15 sm:p-30 border-solid border-0 border-b-[1px] border-grey-200"
+        sx={{
+          '.MuiCardHeader-avatar': {
+            width: { xs: '100%', sm: 'auto' },
+          },
+        }}
+        className="w-full flex flex-col items-start sm:items-center justify-between sm:flex-row p-15 sm:p-30 border-solid border-0 border-b-[1px] border-bc-neutral-300"
         avatar={
-          !isMobile ? (
-            <Avatar
-              sx={{
-                bgcolor: 'transparent',
-                borderRadius: '10px',
-                width: '156px',
-                height: '120px',
-                position: 'relative',
-                [theme.breakpoints.down('tablet')]: {
-                  width: '100%',
-                  height: '80px',
-                },
-              }}
-            >
-              {isPrefinanceProject && (
-                <PrefinanceTag
-                  bodyTexts={getProjectCardBodyTextMapping(_)}
-                  classNames={{ root: 'z-50 absolute top-10' }}
-                />
-              )}
-              <Image
-                className="z-40 w-full h-auto max-w-full max-h-full object-contain"
-                src={project.imgSrc}
-                width={1560}
+          <div className="w-full h-[178px] sm:w-[156px] sm:h-full">
+            {isPrefinanceProject && (
+              <PrefinanceTag
+                bodyTexts={getProjectCardBodyTextMapping(_)}
+                classNames={{ root: 'z-50 absolute top-10' }}
               />
-            </Avatar>
-          ) : (
-            <></>
-          )
+            )}
+            <Link href={projectHref}>
+              <Image
+                className="z-40 w-full h-full object-cover rounded-[10px]"
+                src={project.imgSrc}
+                imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
+                apiServerUrl={API_URI}
+              />
+            </Link>
+          </div>
         }
         action={
           <div className="flex flex-wrap md:flex-col gap-10">
@@ -107,8 +83,10 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
           </div>
         }
         title={
-          <Title variant="h5" className="mb-5">
-            {project.name}
+          <Title variant="h5" className="mt-10 sm:mt-0 mb-5">
+            <Link href={projectHref} className="text-bc-neutral-700">
+              {project.name}
+            </Link>
           </Title>
         }
         subheader={
@@ -141,7 +119,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
           </>
         }
       />
-      <CardContent className="p-15 md:p-30 bg-grey-0">
+      <CardContent className="p-15 sm:p-30 bg-grey-0">
         <OrderSummary
           retirementInfo={retirementInfo}
           blockchainDetails={blockchainDetails}

@@ -56,7 +56,6 @@ export const useOrders = () => {
   const paymentMethods = paymentMethodResults.map(
     queryResult => queryResult.data?.paymentMethod,
   );
-  console.log(paymentMethods);
   const paymentMethodsLoading = paymentMethodResults.some(res => res.isLoading);
 
   const fiatOrdersWithPaymentMethods = useMemo(
@@ -113,7 +112,6 @@ export const useOrders = () => {
     retiredCredits: boolean;
     totalPrice: string | number;
   }>;
-  console.log('sortedOrders', sortedOrders);
 
   const retirementResults = useQueries({
     queries: sortedOrders.map(order =>

@@ -32,6 +32,8 @@ export type OrderProjectData = Pick<
   | 'place'
   | 'area'
   | 'areaUnit'
+  | 'id'
+  | 'slug'
 > & {
   deliveryDate: string;
 };

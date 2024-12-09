@@ -18,6 +18,8 @@ import { OrderData } from './Order.types';
 describe('Order Component', () => {
   const mockOrderData: OrderData = {
     project: {
+      id: 'C01-001',
+      slug: 'project-name',
       name: 'Test Project',
       imgSrc: 'test-image-src',
       place: 'Test Place',

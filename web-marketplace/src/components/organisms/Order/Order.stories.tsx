@@ -15,6 +15,8 @@ import {
 
 const orderData = {
   project: {
+    id: 'C01-001',
+    slug: 'project-name',
     name: 'Project Name',
     deliveryDate: 'Dec 15, 2024',
     place: 'Cabo Vírgenes, Argentina',

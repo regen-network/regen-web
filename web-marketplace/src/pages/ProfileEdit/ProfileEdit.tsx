@@ -96,7 +96,7 @@ export const ProfileEdit = () => {
             )}
           </Flex>
           <WithLoader isLoading={accountChanging || loading}>
-            <div className="rounded-md border border-grey-200 bg-grey-0 lg:mt-30">
+            <div className="rounded-md border border-grey-200 bg-grey-0 lg:mt-30 w-full">
               <Outlet />
             </div>
           </WithLoader>

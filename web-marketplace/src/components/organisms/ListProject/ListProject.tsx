@@ -12,7 +12,6 @@ import { useAuth } from 'lib/auth/auth';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
 
 import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
-import { useAuthData } from 'hooks/useAuthData';
 import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 
 import { useWallet } from '../../../lib/wallet/wallet';
@@ -24,7 +23,6 @@ const ListProject = () => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
   const { activeAccountId, activeAccount } = useAuth();
-  const { noAccountAndNoWallet } = useAuthData();
   const navigate = useNavigate();
   const isConnectingRef = useRef(false);
 
@@ -50,12 +48,10 @@ const ListProject = () => {
   );
 
   return (
-    <div>
+    <>
       {!isLoadingIsIssuer && (
         <Body
-          className={`text-[11px] sm:text-base font-bold bg-clip-text cursor-pointer ${
-            noAccountAndNoWallet ? 'pt-0' : 'pt-[5px]'
-          } pr-10 sm:pr-25 bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] text-right`}
+          className="text-[11px] sm:text-base font-bold bg-clip-text cursor-pointer mb-3 pr-10 sm:pr-25 bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] text-right"
           sx={{
             textFillColor: 'transparent',
           }}
@@ -81,7 +77,7 @@ const ListProject = () => {
         modalState={modalState}
         redirectRoute="project-pages/draft/basic-info"
       />
-    </div>
+    </>
   );
 };
 

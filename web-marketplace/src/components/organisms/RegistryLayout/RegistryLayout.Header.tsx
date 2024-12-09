@@ -133,7 +133,7 @@ const RegistryLayoutHeader: React.FC = () => {
             {clientConfig.listProject && <ListProject />}
             <LanguageSwitcher
               className={cn(
-                'mr-25 hidden lg:block',
+                'mr-25 mt-1 hidden lg:block',
                 isHome && 'text-sc-button-text-icon-light',
               )}
             />

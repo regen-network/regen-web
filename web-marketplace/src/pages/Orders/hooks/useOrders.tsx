@@ -18,6 +18,7 @@ import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normali
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getDenomTraceByHashesQuery } from 'lib/queries/react-query/ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
+import { getPaymentMethodForPaymentIntentQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodForPaymentIntentQuery/getPaymentMethodForPaymentIntentQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getOrdersByBuyerAddressQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getOrdersByBuyerAddress/getOrdersByBuyerAddress';
 import { getRetirementByTxHash } from 'lib/queries/react-query/registry-server/graphql/indexer/getRetirementByTxHash/getRetirementByTxHash';
@@ -41,6 +42,31 @@ export const useOrders = () => {
         projectId: order?.projectOnChainId,
       })),
     [activeAccount?.fiatOrdersByAccountId?.nodes],
+  );
+
+  const paymentMethodResults = useQueries({
+    queries:
+      fiatOrders?.map(order =>
+        getPaymentMethodForPaymentIntentQuery({
+          enabled: !!order?.stripePaymentIntentId,
+          paymentMethodId: order?.stripePaymentIntentId as string,
+        }),
+      ) || [],
+  });
+  const paymentMethods = paymentMethodResults.map(
+    queryResult => queryResult.data?.paymentMethod,
+  );
+  console.log(paymentMethods);
+  const paymentMethodsLoading = paymentMethodResults.some(res => res.isLoading);
+
+  const fiatOrdersWithPaymentMethods = useMemo(
+    () =>
+      fiatOrders?.map((order, index) => ({
+        ...order,
+        cardLast4: paymentMethods?.[index]?.card?.last4,
+        cardBrand: paymentMethods?.[index]?.card?.brand,
+      })),
+    [fiatOrders, paymentMethods],
   );
 
   const { data, isLoading: cryptoOrdersLoading } = useQuery(
@@ -70,13 +96,24 @@ export const useOrders = () => {
 
   const sortedOrders = useMemo(
     () =>
-      [...(fiatOrders || []), ...(cryptoOrders || [])].sort(
+      [...(fiatOrdersWithPaymentMethods || []), ...(cryptoOrders || [])].sort(
         (a, b) =>
           new Date(b?.timestamp).getTime() -
           new Date(a?.timestamp as string).getTime(),
       ),
-    [cryptoOrders, fiatOrders],
-  );
+    [cryptoOrders, fiatOrdersWithPaymentMethods],
+  ) as Array<{
+    cardLast4?: string;
+    cardBrand: string;
+    txHash: string;
+    projectId: string;
+    askDenom: string;
+    timestamp: string;
+    creditsAmount: string | number;
+    retiredCredits: boolean;
+    totalPrice: string | number;
+  }>;
+  console.log('sortedOrders', sortedOrders);
 
   const retirementResults = useQueries({
     queries: sortedOrders.map(order =>
@@ -152,6 +189,7 @@ export const useOrders = () => {
 
   const isLoading =
     loading ||
+    paymentMethodsLoading ||
     cryptoOrdersLoading ||
     retirementsLoading ||
     offChainProjectsLoading ||
@@ -205,8 +243,8 @@ export const useOrders = () => {
               askBaseDenom,
             },
             paymentInfo: {
-              cardLast4: 'todo',
-              cardBrand: 'todo',
+              cardLast4: order?.cardLast4,
+              cardBrand: order?.cardBrand,
               askDenom: order?.askDenom || '',
               askBaseDenom,
             },

@@ -160,7 +160,8 @@ export const OrderSummary = ({
               title={_(msg`card info`)}
               value={
                 <span>
-                  {cardBrand} {_(msg`ending in`)} {cardLast4}
+                  <span className="capitalize">{cardBrand}</span>{' '}
+                  {_(msg`ending in`)} {cardLast4}
                 </span>
               }
               className="items-center"

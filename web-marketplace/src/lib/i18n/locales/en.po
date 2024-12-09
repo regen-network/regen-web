@@ -63,7 +63,7 @@ msgstr ""
 msgid "{ADDRESS_USED_ERROR} Do you want to merge these accounts?"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:173
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:175
 msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
 msgstr ""
 
@@ -117,7 +117,7 @@ msgstr ""
 #~ msgid "{years, plural, one {year project duration} other {year project duration}}"
 #~ msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:106
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:105
 #: src/components/organisms/Order/Order.Summary.tsx:85
 msgid "# credits"
 msgstr ""
@@ -176,7 +176,7 @@ msgstr ""
 msgid "+Create project"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:156
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:155
 msgid "<0>{0}</0> ending in {1}"
 msgstr ""
 
@@ -629,7 +629,7 @@ msgstr ""
 msgid "Avg Price"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:93
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:92
 msgid "avg price per credit"
 msgstr ""
 
@@ -799,7 +799,7 @@ msgstr ""
 msgid "Buy"
 msgstr ""
 
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:215
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:218
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:4
 msgid "BUY"
 msgstr ""
@@ -816,7 +816,7 @@ msgstr ""
 msgid "buy credits"
 msgstr ""
 
-#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:215
+#: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:218
 msgid "BUY CREDITS"
 msgstr ""
 
@@ -869,7 +869,7 @@ msgstr ""
 msgid "By default these credits are tradable but you may check “retire all credits upon transfer” below to automatically retire them upon sending."
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:116
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:115
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:12
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:9
 msgid "cancel"
@@ -940,7 +940,7 @@ msgstr ""
 msgid "change admin"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:164
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:163
 msgid "Change payment card"
 msgstr ""
 
@@ -1077,7 +1077,7 @@ msgstr ""
 msgid "Compliance"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:58
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:64
 msgid "Compliance Credits"
 msgstr ""
 
@@ -1374,7 +1374,7 @@ msgstr ""
 msgid "Credit unit definition"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsInput.tsx:59
+#: src/components/molecules/CreditsAmount/CreditsInput.tsx:82
 msgid "credits"
 msgstr ""
 
@@ -1420,7 +1420,7 @@ msgstr ""
 msgid "Credits Cancelled"
 msgstr ""
 
-#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:4
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:5
 msgid "Credits cannot exceed"
 msgstr ""
 
@@ -1436,7 +1436,7 @@ msgstr ""
 msgid "Credits have been issued!"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsInput.tsx:43
+#: src/components/molecules/CreditsAmount/CreditsInput.tsx:64
 msgid "Credits Input"
 msgstr ""
 
@@ -1498,7 +1498,7 @@ msgstr ""
 msgid "CURRENCY DENOM"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:108
+#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:144
 msgid "Currency Input"
 msgstr ""
 
@@ -1739,7 +1739,7 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:114
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:113
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:76
 #: src/lib/constants/shared.constants.tsx:22
 msgid "Edit"
@@ -1783,7 +1783,7 @@ msgstr ""
 msgid "Edit your file"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:113
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:112
 msgid "Editable credits"
 msgstr ""
 
@@ -2532,7 +2532,11 @@ msgstr ""
 msgid "Must be a date in the past"
 msgstr ""
 
-#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:5
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:4
+msgid "Must be at least"
+msgstr ""
+
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:6
 #: src/lib/constants/shared.constants.tsx:82
 msgid "Must be positive"
 msgstr ""
@@ -2733,7 +2737,7 @@ msgstr ""
 msgid "or, log in with email / social"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:84
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:83
 msgid "Order Summary"
 msgstr ""
 
@@ -2781,7 +2785,7 @@ msgstr ""
 msgid "partners"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:148
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:147
 msgid "payment"
 msgstr ""
 
@@ -3080,7 +3084,7 @@ msgstr ""
 msgid "Program Guide"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:87
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:86
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:157
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105
@@ -3109,7 +3113,7 @@ msgstr ""
 msgid "PROJECT"
 msgstr ""
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:175
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:176
 msgid "Project {onChainProjectId}"
 msgstr ""
 
@@ -3973,7 +3977,7 @@ msgstr ""
 msgid "Tebu banner"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:45
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCredits.utils.tsx:51
 msgid "Tebu Credits"
 msgstr ""
 
@@ -4290,7 +4294,7 @@ msgstr ""
 msgid "total credits you have purchased"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:131
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:130
 #: src/components/organisms/Order/Order.Summary.tsx:91
 msgid "total price"
 msgstr ""
@@ -4380,7 +4384,7 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:115
+#: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:114
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:68
 msgid "update"
 msgstr ""
@@ -4792,7 +4796,7 @@ msgstr ""
 msgid "You do not have any tradable credits to sell from this project."
 msgstr ""
 
-#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:6
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:7
 msgid "You don’t have enough"
 msgstr ""
 

@@ -29,10 +29,12 @@ export function getSpendingCap(
   cardSellOrders: Array<CardSellOrder>,
 ) {
   return paymentOption === PAYMENT_OPTIONS.CARD
-    ? cardSellOrders.reduce(
-        (prev, cur) => prev + Number(cur.quantity) * cur.usdPrice,
-        0,
-      )
+    ? cardSellOrders.reduce((prev, cur) => {
+        return formatCurrencyAmountTwoDecimals(
+          prev + Number(cur.quantity) * cur.usdPrice,
+          true,
+        );
+      }, 0)
     : microToDenom(
         filteredCryptoSellOrders?.reduce(
           (prev, cur) => prev + Number(cur.quantity) * Number(cur.askAmount),
@@ -53,7 +55,9 @@ export const getCreditsAmount = ({
   orderedSellOrders,
   creditTypePrecision,
 }: GetCreditsAmountParams) => {
-  const currentCurrencyAmount = card ? value : denomToMicro(value);
+  const currentCurrencyAmount = card
+    ? formatCurrencyAmountTwoDecimals(value, true)
+    : denomToMicro(value);
   let currentCreditsAmount = 0;
   let currencyAmountLeft = currentCurrencyAmount;
   const sellOrders = [];
@@ -65,9 +69,9 @@ export const getCreditsAmount = ({
     const orderTotalAmount = quantity * price;
 
     if (currencyAmountLeft >= orderTotalAmount) {
-      currencyAmountLeft = parseFloat(
-        (currencyAmountLeft - orderTotalAmount).toFixed(6),
-      );
+      currencyAmountLeft = card
+        ? formatCurrencyAmountTwoDecimals(currencyAmountLeft - orderTotalAmount)
+        : parseFloat((currencyAmountLeft - orderTotalAmount).toFixed(6));
       currentCreditsAmount += quantity;
       sellOrders.push(formatSellOrder({ order, card, price }));
       if (currencyAmountLeft === 0) break;
@@ -138,7 +142,7 @@ export const getCurrencyAmount = ({
 
   return {
     [CURRENCY_AMOUNT]: card
-      ? parseFloat(currentCurrencyAmount.toFixed(6))
+      ? formatCurrencyAmountTwoDecimals(currentCurrencyAmount, true)
       : parseFloat(microToDenom(currentCurrencyAmount).toFixed(6)),
     sellOrders,
   };
@@ -170,4 +174,35 @@ export const formatSellOrder = ({
       : undefined,
     price: card ? parseFloat((price * 100).toFixed(2)) : undefined, // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00)
   };
+};
+
+/**
+ * Formats a given value to a currency amount with max two decimals.
+ *
+ * @param value - The value to format. Can be a string or a number.
+ * @param roundUpDecimal - Optional. If true, rounds the value up to the nearest two decimals. Defaults to false.
+ * @returns The formatted currency amount as a number with two decimals.
+ *
+ */
+export const formatCurrencyAmountTwoDecimals = (
+  value: string | number,
+  roundUpDecimal = false,
+) => {
+  const numericValue = typeof value === 'string' ? parseFloat(value) : value;
+  const stringValue = value.toString();
+  const [integerPart, decimalPart] = stringValue.split('.');
+
+  if (isNaN(numericValue)) {
+    return 0;
+  }
+
+  // Round to two decimals, either returning the value with
+  // the first two decimals only, if any, or rounding them up.
+  const formattedValue = roundUpDecimal
+    ? +(Math.ceil(numericValue * 100) / 100).toFixed(2)
+    : decimalPart?.length > 2
+    ? +`${integerPart}.${decimalPart.slice(0, 2)}`
+    : +`${integerPart}`;
+
+  return formattedValue;
 };

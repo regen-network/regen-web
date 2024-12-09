@@ -1,4 +1,4 @@
-import { ChangeEvent, lazy, useCallback } from 'react';
+import { ChangeEvent, FocusEvent, lazy, useCallback } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -18,6 +18,7 @@ import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import { CURRENCY, CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import { CurrencyInputProps } from './CreditsAmount.types';
+import { formatCurrencyAmountTwoDecimals } from './CreditsAmount.utils';
 
 const CustomSelect = lazy(
   () =>
@@ -45,7 +46,7 @@ export const CurrencyInput = ({
   const { data, handleSave, activeStep } =
     useMultiStep<BuyCreditsSchemaTypes>();
   const paymentOption = useAtomValue(paymentOptionAtom);
-
+  const card = paymentOption === PAYMENT_OPTIONS.CARD;
   const { onChange } = register(CURRENCY_AMOUNT);
 
   const currency = useWatch({
@@ -55,13 +56,46 @@ export const CurrencyInput = ({
 
   const handleOnChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      // Remove zeros in non decimal values and update the value
-      const value = event.target.value;
-      if (!value.includes('.')) setValue(CURRENCY_AMOUNT, Number(value));
       onChange(event);
       handleCurrencyAmountChange(event);
     },
-    [handleCurrencyAmountChange, onChange, setValue],
+    [handleCurrencyAmountChange, onChange],
+  );
+
+  const handleInput = useCallback(
+    (event: ChangeEvent<HTMLInputElement>): void => {
+      let value = event.target.value;
+      const decimalPart = value.split('.')?.[1];
+      // Check if the value has a decimal part longer than 2 digits,
+      // or if the value starts with leading zero/s
+      if (
+        (decimalPart &&
+          decimalPart.length > 2 &&
+          paymentOption === PAYMENT_OPTIONS.CARD) ||
+        /^0[0-9]/.test(value)
+      ) {
+        value = value.replace(/^0+/, '');
+        setValue(
+          CURRENCY_AMOUNT,
+          formatCurrencyAmountTwoDecimals(value, false),
+          {
+            shouldValidate: true,
+          },
+        );
+      }
+    },
+    [paymentOption, setValue],
+  );
+
+  const handleOnBlur = useCallback(
+    (event: FocusEvent<HTMLInputElement>): void => {
+      // If the value is empty, set it to 0
+      const value = event.target.value;
+      if (value === '') {
+        setValue(CURRENCY_AMOUNT, 0, { shouldValidate: true });
+      }
+    },
+    [setValue],
   );
 
   const onHandleCurrencyChange = useCallback(
@@ -89,7 +123,7 @@ export const CurrencyInput = ({
 
   return (
     <div className="grow sm:flex-1 w-full sm:w-auto relative">
-      {paymentOption === PAYMENT_OPTIONS.CARD && (
+      {card && (
         <span className="text-xs sm:text-sm absolute top-[13px] left-[9px] sm:top-[18px] sm:left-10 z-50">
           $
         </span>
@@ -97,21 +131,22 @@ export const CurrencyInput = ({
       <TextField
         {...register(CURRENCY_AMOUNT)}
         onChange={handleOnChange}
+        onInput={handleInput}
+        onBlur={handleOnBlur}
         type="number"
         className={`border border-solid border-grey-300 focus-within:border-grey-500 focus-within:border-2 ${
-          paymentOption === PAYMENT_OPTIONS.CARD ? 'pl-5' : ''
+          card ? 'pl-5' : ''
         } w-full sm:w-auto flex justify-start relative sm:h-60 rounded-sm items-center`}
         customInputProps={{
           max: maxCurrencyAmount,
-          min: 0,
-          step: '0.000001',
+          min: card ? 0.5 : 0,
+          step: card ? '0.01' : '0.000001',
           'aria-label': _(msg`Currency Input`),
         }}
         sx={{
           '& .MuiInputBase-root': {
             border: 'none',
-            paddingRight: theme =>
-              paymentOption === PAYMENT_OPTIONS.CARD ? theme.spacing(5) : 0,
+            paddingRight: theme => (card ? theme.spacing(5) : 0),
             '& input': {
               overflow: 'hidden',
               textOverflow: 'ellipsis',
@@ -137,7 +172,7 @@ export const CurrencyInput = ({
           },
         }}
         endAdornment={
-          paymentOption === PAYMENT_OPTIONS.CARD ? (
+          card ? (
             <DenomIconWithCurrency
               baseDenom={currency?.askBaseDenom}
               displayDenom={displayDenom}

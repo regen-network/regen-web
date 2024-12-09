@@ -13,6 +13,7 @@ import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import {
   MAX_AMOUNT,
   MAX_CREDITS,
+  MIN_USD_AMOUNT,
   NOT_ENOUGH_BALANCE,
   POSITIVE_NUMBER,
 } from './ChooseCreditsForm.constants';
@@ -45,6 +46,12 @@ export const createChooseCreditsFormSchema = ({
         value => paymentOption === PAYMENT_OPTIONS.CARD || userBalance > value,
         {
           message: `${i18n._(NOT_ENOUGH_BALANCE)}`,
+        },
+      )
+      .refine(
+        value => paymentOption === PAYMENT_OPTIONS.CRYPTO || value >= 0.5,
+        {
+          message: `${i18n._(MIN_USD_AMOUNT)} 0.5`,
         },
       ),
     [CREDITS_AMOUNT]: z.coerce

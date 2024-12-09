@@ -50,7 +50,6 @@ export function OrderSummaryContent({
   const paymentOption = useAtomValue(paymentOptionAtom);
   const { projectName, currency, pricePerCredit, credits, currencyAmount } =
     order;
-
   const displayDenom = useMemo(
     () =>
       findDisplayDenom({

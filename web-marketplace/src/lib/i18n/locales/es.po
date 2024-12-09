@@ -22,9 +22,6 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -2556,7 +2553,7 @@ msgstr "Debe ser una fecha en el pasado"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants.tsx:4
 msgid "Must be at least"
-msgstr ""
+msgstr "Debe ser al menos"
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:248
 #~ msgid "Must be less than or equal to the max credit(s) available ({creditAvailable})."

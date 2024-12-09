@@ -52,7 +52,7 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
           onClick={handleOpen}
           width="29px"
           height="22px"
-          sx={{ ml: 4 }}
+          sx={{ ml: { xs: 0, sm: 4 } }}
         />
       </Center>
       <Drawer

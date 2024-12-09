@@ -20,6 +20,7 @@ type Props = {
   extras?: JSX.Element;
   linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
   websiteExtras?: JSX.Element;
+  isUserLoggedIn?: boolean;
 };
 
 const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
@@ -29,7 +30,7 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
   extras,
   websiteExtras,
   linkComponent: Link,
-  ...props
+  isUserLoggedIn,
 }) => {
   const { classes: styles, cx } = useMobileMenuStyles();
   const theme = useTheme();
@@ -52,7 +53,7 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
           onClick={handleOpen}
           width="29px"
           height="22px"
-          sx={{ ml: { xs: 0, sm: 4 } }}
+          sx={{ ml: { xs: isUserLoggedIn ? 0 : 2, sm: 4 } }}
         />
       </Center>
       <Drawer

@@ -71,7 +71,7 @@ msgstr ""
 msgid "{area, plural, one {hectare} other {hectares}}"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:173
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:175
 msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
 msgstr ""
 
@@ -309,7 +309,7 @@ msgstr ""
 msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:200
+#: src/components/organisms/Order/Order.Summary.tsx:201
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr ""
 
@@ -738,11 +738,11 @@ msgstr ""
 msgid "block height"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:187
+#: src/components/organisms/Order/Order.Summary.tsx:188
 msgid "Blockchain Details"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:195
+#: src/components/organisms/Order/Order.Summary.tsx:196
 #: src/lib/constants/shared.constants.tsx:94
 #: src/pages/ProjectFinished/ProjectFinished.tsx:97
 msgid "blockchain record"
@@ -919,7 +919,7 @@ msgstr ""
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:99
+#: src/components/organisms/Order/Order.tsx:75
 msgid "certificate"
 msgstr ""
 
@@ -1831,7 +1831,7 @@ msgstr ""
 msgid "Endangered"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:163
+#: src/components/organisms/Order/Order.Summary.tsx:164
 msgid "ending in"
 msgstr ""
 
@@ -1869,7 +1869,7 @@ msgstr ""
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:137
+#: src/components/organisms/Order/Order.tsx:115
 msgid "Expected delivery date"
 msgstr ""
 
@@ -2803,7 +2803,7 @@ msgstr ""
 msgid "payment"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:171
+#: src/components/organisms/Order/Order.Summary.tsx:172
 msgid "payment currency"
 msgstr ""
 
@@ -3297,7 +3297,7 @@ msgstr ""
 msgid "Publications"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:189
+#: src/components/organisms/Order/Order.Summary.tsx:190
 msgid "purchase date"
 msgstr ""
 

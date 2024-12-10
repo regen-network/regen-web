@@ -77,7 +77,7 @@ msgstr "{area, plural, one {acre} other {acres}}"
 msgid "{area, plural, one {hectare} other {hectares}}"
 msgstr "{area, plural, one {hectárea} other {hectáreas}}"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:173
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:175
 msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
 msgstr "{créditosDisponibles, plural, one {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido} other {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido}}"
 
@@ -307,7 +307,7 @@ msgstr "Un taxón está extinto cuando no hay duda razonable de que el último i
 msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr "Un tercero que proporciona una evaluación independiente e imparcial del plan del proyecto y de los informes del proyecto (que no es el monitor)."
 
-#: src/components/organisms/Order/Order.Summary.tsx:200
+#: src/components/organisms/Order/Order.Summary.tsx:201
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr "Un identificador único que rastrea y verifica una transacción específica en la cadena de bloques."
 
@@ -740,11 +740,11 @@ msgstr "biorregión"
 msgid "block height"
 msgstr "altura del bloque"
 
-#: src/components/organisms/Order/Order.Summary.tsx:187
+#: src/components/organisms/Order/Order.Summary.tsx:188
 msgid "Blockchain Details"
 msgstr "Detalles de la cadena de bloques"
 
-#: src/components/organisms/Order/Order.Summary.tsx:195
+#: src/components/organisms/Order/Order.Summary.tsx:196
 #: src/lib/constants/shared.constants.tsx:94
 #: src/pages/ProjectFinished/ProjectFinished.tsx:97
 msgid "blockchain record"
@@ -925,7 +925,7 @@ msgstr "Caribe"
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
 msgstr "Las categorías de la Lista Roja de Ecosistemas de la UICN evalúan la salud y el riesgo de los ecosistemas a escala global. Tebu promueve la protección de los ecosistemas más amenazados otorgando una puntuación más alta a aquellos que presentan un riesgo mayor."
 
-#: src/components/organisms/Order/Order.tsx:99
+#: src/components/organisms/Order/Order.tsx:75
 msgid "certificate"
 msgstr "certificado"
 
@@ -1849,7 +1849,7 @@ msgstr "Fecha de finalización"
 msgid "Endangered"
 msgstr "En peligro"
 
-#: src/components/organisms/Order/Order.Summary.tsx:163
+#: src/components/organisms/Order/Order.Summary.tsx:164
 msgid "ending in"
 msgstr "terminando en"
 
@@ -1887,7 +1887,7 @@ msgstr "emisión estimada"
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr "Algunos ejemplos de motivos de jubilación incluyen: “viajes de empresa en 2025”, “compensar mi huella personal” o el nombre de una persona u organización específica."
 
-#: src/components/organisms/Order/Order.tsx:137
+#: src/components/organisms/Order/Order.tsx:115
 msgid "Expected delivery date"
 msgstr "Fecha de entrega prevista"
 
@@ -2829,7 +2829,7 @@ msgstr "fogonadura"
 msgid "payment"
 msgstr "pago"
 
-#: src/components/organisms/Order/Order.Summary.tsx:171
+#: src/components/organisms/Order/Order.Summary.tsx:172
 msgid "payment currency"
 msgstr "Moneda de pago"
 
@@ -3327,7 +3327,7 @@ msgstr "pestañas de perfil público"
 msgid "Publications"
 msgstr "Publicaciones"
 
-#: src/components/organisms/Order/Order.Summary.tsx:189
+#: src/components/organisms/Order/Order.Summary.tsx:190
 msgid "purchase date"
 msgstr "fecha de compra"
 

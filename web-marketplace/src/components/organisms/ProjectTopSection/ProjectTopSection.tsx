@@ -14,7 +14,6 @@ import Section from 'web-components/src/components/section';
 import { Body, Label, Title } from 'web-components/src/components/typography';
 import { pxToRem } from 'web-components/src/theme/muiTheme';
 
-import { BatchTotalsForProject } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
@@ -44,7 +43,7 @@ import { Prefinance } from 'components/templates/ProjectDetails/ProjectDetails.P
 import TerrasosCreditsInfo from 'components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo';
 import { useTags } from 'hooks/useTags';
 
-import { ProjectBatchTotals } from '../../molecules';
+import { ProjectBatchTotals, ProjectBatchTotalsProps } from '../../molecules';
 import { ProjectTopSectionCreditClassCard } from './ProjectTopSection.CreditClassCard';
 import {
   ProjectTopSectionQuoteMark,
@@ -216,12 +215,12 @@ function ProjectTopSection({
   const isTerrasosProjectPage =
     projectPageMetadata?.['@type'] === 'TerrasosProjectInfo';
 
-  const batchTotals: BatchTotalsForProject = {
-    cancelledAmount:
+  const batchTotals = {
+    registeredAmount:
       normalizedProject?.complianceCredits.creditsRegistered ?? 0,
     retiredAmount: normalizedProject?.complianceCredits.creditsRetired ?? 0,
     tradableAmount: normalizedProject?.complianceCredits.creditsAvailable ?? 0,
-  };
+  } as ProjectBatchTotalsProps['totals'];
 
   const isComplianceProject =
     normalizedProject?.marketType?.includes(COMPLIANCE_MARKET) ?? false;

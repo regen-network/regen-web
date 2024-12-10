@@ -31,6 +31,13 @@ const GridItem: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => (
     {children}
   </Grid>
 );
+export type ProjectBatchTotalsProps = {
+  totals: BatchTotalsForProject & { registeredAmount?: number };
+  projectWithOrderData?: NormalizeProject;
+  soldOutProjectsIds: string[];
+  sx?: SxProps<Theme>;
+  className?: string;
+};
 
 export function ProjectBatchTotals({
   totals,
@@ -38,13 +45,7 @@ export function ProjectBatchTotals({
   soldOutProjectsIds,
   sx = [],
   className,
-}: {
-  totals: BatchTotalsForProject;
-  projectWithOrderData?: NormalizeProject;
-  soldOutProjectsIds: string[];
-  sx?: SxProps<Theme>;
-  className?: string;
-}): JSX.Element {
+}: ProjectBatchTotalsProps): JSX.Element {
   const { _ } = useLingui();
   const isSoldOut = getIsSoldOut({
     project: projectWithOrderData,
@@ -86,7 +87,11 @@ export function ProjectBatchTotals({
               ? _(REGISTERED_CREDITS_TOOLTIP)
               : _(ISSUED_CREDITS_TOOLTIP)
           }
-          number={totals.tradableAmount + totals.retiredAmount}
+          number={
+            isComplianceProject
+              ? totals.registeredAmount
+              : totals.tradableAmount + totals.retiredAmount
+          }
           formatNumberOptions={{
             ...quantityFormatNumberOptions,
             maximumFractionDigits: MAX_FRACTION_DIGITS_PROJECT_CREDITS,

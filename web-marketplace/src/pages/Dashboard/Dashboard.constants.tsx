@@ -77,7 +77,7 @@ export const HEADING_MY_ORDERS = {
 
 export const HEADING_PROFILE = {
   children: (
-    <div className="text-xs text-grey-400 uppercase font-extrabold pl-20 tracking-wider">
+    <div className="text-xs text-grey-400 uppercase font-extrabold pl-20 tracking-wider pt-20">
       <Trans>profile</Trans>
     </div>
   ),

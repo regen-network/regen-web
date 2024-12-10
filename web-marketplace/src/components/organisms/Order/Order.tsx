@@ -67,7 +67,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
           </div>
         }
         action={
-          <div className="flex flex-wrap md:flex-col gap-10">
+          <div className="flex flex-wrap md:flex-col gap-10 pb-5">
             {retirementInfo.retiredCredits && retirementInfo.certificateNodeId && (
               <Link href={`/certificate/${retirementInfo.certificateNodeId}`}>
                 <OutlinedButton size="small" className="w-full sm:w-auto">
@@ -119,7 +119,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
           </>
         }
       />
-      <CardContent className="p-15 sm:p-30 bg-grey-0">
+      <CardContent className="p-15 pt-40 sm:p-30 bg-grey-0">
         <OrderSummary
           retirementInfo={retirementInfo}
           blockchainDetails={blockchainDetails}

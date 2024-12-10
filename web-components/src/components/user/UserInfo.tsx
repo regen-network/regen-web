@@ -90,7 +90,7 @@ export default function UserInfo({
       direction={direction}
       wrap="nowrap"
       sx={sx}
-      alignItems="center"
+      alignItems="top"
     >
       <Grid item>
         <UserAvatar

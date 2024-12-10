@@ -22,6 +22,12 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -432,10 +438,10 @@ msgid "Advanced settings"
 msgstr ""
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:46
-msgid "Agree & purchase"
-msgstr ""
+#~ msgid "Agree & purchase"
+#~ msgstr ""
 
-#: src/pages/BatchDetails/BatchDetails.tsx:122
+#: src/pages/BatchDetails/BatchDetails.tsx:129
 msgid "All credits"
 msgstr "Todos los créditos"
 
@@ -506,11 +512,11 @@ msgstr "El monto no puede exceder"
 msgid "Amount Escrowed"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:161
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:145
 msgid "amount now available in"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:107
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:91
 msgid "amount now available in usd"
 msgstr ""
 
@@ -522,7 +528,7 @@ msgstr "cantidad de créditos"
 msgid "Amount of credits"
 msgstr "Cantidad de créditos"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:165
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:310
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:126
 msgid "amount retired"
 msgstr "cantidad retirada"
@@ -546,7 +552,7 @@ msgstr "cantidad enviada"
 msgid "Amount to sell"
 msgstr "Cantidad a vender"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:166
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:311
 msgid "amount tradable"
 msgstr "cantidad negociable"
 
@@ -738,6 +744,10 @@ msgstr "Fecha de inicio del lote"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:52
 msgid "BATCH START DATE"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:119
+msgid "Because we use blockchain technology, if another user purchases the credits before you check out, you’ll need to choose different credits."
 msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:159
@@ -1027,7 +1037,7 @@ msgstr "Elija la cesta"
 msgid "Choose credit class"
 msgstr "Elija la clase de crédito"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:35
+#: src/pages/BuyCredits/BuyCredits.constants.ts:13
 msgid "Choose credits"
 msgstr "Elija créditos"
 
@@ -1039,7 +1049,7 @@ msgstr "Elige denominación"
 msgid "Choose ecocredits batch"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:173
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:157
 msgid "Choose new credits"
 msgstr ""
 
@@ -1103,7 +1113,7 @@ msgstr "Créditos comunitarios"
 msgid "Community credits are credits that have not been through the <0>Regen Registry program</0>or are not associated with another known registry. <1/><2/>To create your own credits, <3>learn more in our docs.</3>"
 msgstr "Los créditos comunitarios son créditos que no han pasado por el <0>programa Regen Registry</0> o que no están asociados con otro registro conocido. <1/><2/>Para crear sus propios créditos, <3>obtenga más información en nuestros documentos.</3>"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:48
+#: src/pages/BuyCredits/BuyCredits.constants.ts:18
 msgid "Complete"
 msgstr "Completo"
 
@@ -1391,7 +1401,7 @@ msgstr "Emisión de crédito pendiente"
 msgid "credit name"
 msgstr "nombre de credito"
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:269
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:278
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr "Los precios de los créditos varían. Por defecto, se comprarán primero los créditos con el precio más bajo."
 
@@ -1434,6 +1444,7 @@ msgstr "Los créditos se mantienen en depósito en garantía cuando se crea una 
 msgid "credits available"
 msgstr "créditos disponibles"
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:106
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:106
 msgid "Credits Available"
 msgstr "Créditos disponibles"
@@ -1487,6 +1498,7 @@ msgid "Credits issuance is calculated based on a weighted scale between 20 and 5
 msgstr "La emisión de créditos se calcula con base en una escala ponderada entre 20 y 50 años."
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:83
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:83
 msgid "Credits issued"
 msgstr "Créditos emitidos"
 
@@ -1499,15 +1511,18 @@ msgid "Credits purchased with crypto can be purchased in either a retired or tra
 msgstr "Los créditos comprados con criptomonedas se pueden comprar en estado retirado o negociable."
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:82
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:82
 msgid "Credits Registered"
 msgstr "Créditos registrados"
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:128
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:128
 msgid "Credits Retired"
 msgstr "Créditos Retirados"
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:106
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:106
 msgid "Credits Tradable"
 msgstr "Créditos negociables"
@@ -1565,7 +1580,7 @@ msgid "Custom url"
 msgstr "URL personalizada"
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:51
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:42
+#: src/pages/BuyCredits/BuyCredits.constants.ts:15
 msgid "Customer info"
 msgstr "Información del cliente"
 
@@ -1997,7 +2012,7 @@ msgstr "Los archivos aún se pueden compartir de forma privada a través de un e
 msgid "Filters"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:114
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:98
 msgid "find another credit card project"
 msgstr ""
 
@@ -2790,6 +2805,10 @@ msgstr "operador"
 msgid "Opportunities"
 msgstr "Oportunidades"
 
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:103
+msgid "or, buy with crypto"
+msgstr ""
+
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:67
 msgid "or, log in with email / social"
 msgstr "o inicie sesión con correo electrónico / redes sociales"
@@ -2863,7 +2882,7 @@ msgid "payment info"
 msgstr "Información de pago"
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.PaymentInfo.tsx:45
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:41
+#: src/pages/BuyCredits/BuyCredits.constants.ts:14
 msgid "Payment info"
 msgstr "Información de pago"
 
@@ -3155,7 +3174,7 @@ msgstr "Guía del programa"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:86
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:157
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:302
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:139
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
@@ -3182,6 +3201,7 @@ msgstr "Proyecto"
 msgid "PROJECT"
 msgstr "PROYECTO"
 
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:175
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:175
 msgid "Project {onChainProjectId}"
 msgstr "Proyecto {onChainProjectId}"
@@ -3571,7 +3591,7 @@ msgstr "Jubilado por"
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr "Los créditos retirados han sido retirados de circulación de forma permanente y no pueden venderse a nadie más."
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:46
+#: src/pages/BuyCredits/BuyCredits.constants.ts:16
 msgid "Retirement"
 msgstr "Jubilación"
 
@@ -3608,7 +3628,7 @@ msgstr "Lugar de retiro"
 msgid "Retirement note"
 msgstr "Nota de jubilación"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:56
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:201
 msgid "Retirement permanently removes used credits from circulation to prevent their reuse, ensuring that the environmental benefit claimed is real and not double-counted."
 msgstr "La retirada elimina permanentemente de circulación los créditos usados para evitar su reutilización, garantizando así que el beneficio ambiental reclamado sea real y no se contabilice dos veces."
 
@@ -3685,7 +3705,7 @@ msgstr "Escanee con la aplicación móvil Keplr"
 msgid "SDGs"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:144
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:128
 msgid "search for new credits"
 msgstr ""
 
@@ -3737,8 +3757,8 @@ msgstr "Seleccione una billetera"
 msgid "Select all"
 msgstr "Seleccionar todo"
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:254
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:255
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:262
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:263
 msgid "Select option"
 msgstr "Seleccionar opción"
 
@@ -3898,15 +3918,15 @@ msgstr "Índice social y cultural"
 msgid "Sold Out"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:131
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:115
 msgid "Sorry, another user has purchased all of the available credits from this project"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:102
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:86
 msgid "Sorry, another user has purchased all of the USD credits you selected!"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:156
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:140
 msgid "Sorry, another user has purchased some or all of the credits you selected!"
 msgstr ""
 
@@ -4409,7 +4429,7 @@ msgstr "total de créditos que has comprado"
 msgid "total price"
 msgstr "Precio total"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:139
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:284
 msgid "total purchase price"
 msgstr "Precio total de compra"
 

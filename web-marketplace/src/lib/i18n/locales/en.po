@@ -919,7 +919,7 @@ msgstr ""
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:75
+#: src/components/organisms/Order/Order.tsx:81
 msgid "certificate"
 msgstr ""
 
@@ -1869,7 +1869,7 @@ msgstr ""
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:115
+#: src/components/organisms/Order/Order.tsx:125
 msgid "Expected delivery date"
 msgstr ""
 
@@ -4586,6 +4586,10 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:217
 msgid "view project"
+msgstr ""
+
+#: src/components/organisms/Order/Order.tsx:89
+msgid "View Receipt"
 msgstr ""
 
 #: src/components/atoms/WrappedResourcesCard.tsx:33

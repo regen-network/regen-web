@@ -20,6 +20,7 @@ export interface OrderData {
     blockchainDetails: BlockchainDetailsData;
     credits: CreditsData;
     paymentInfo: PaymentInfoData;
+    receiptUrl?: string;
   };
 }
 

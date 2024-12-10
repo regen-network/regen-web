@@ -30,6 +30,7 @@ const orderData = {
     blockchainDetails,
     credits,
     paymentInfo,
+    receiptUrl: 'http://lorem.ipsum',
   },
 };
 

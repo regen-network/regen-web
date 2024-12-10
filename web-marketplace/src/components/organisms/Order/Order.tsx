@@ -5,7 +5,7 @@ import { CardContent, CardHeader, useTheme } from '@mui/material';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import Card from 'web-components/src/components/cards/Card';
 import CertifiedDocumentIcon from 'web-components/src/components/icons/CertifiedDocumentIcon';
-// import ReceiptIcon from 'web-components/src/components/icons/ReceiptIcon';
+import ReceiptIcon from 'web-components/src/components/icons/ReceiptIcon';
 import { Image } from 'web-components/src/components/image';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
 import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
@@ -28,8 +28,14 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
   const { _ } = useLingui();
 
   const { project } = orderData;
-  const { retirementInfo, blockchainDetails, credits, paymentInfo, status } =
-    orderData.order;
+  const {
+    retirementInfo,
+    blockchainDetails,
+    credits,
+    paymentInfo,
+    status,
+    receiptUrl,
+  } = orderData.order;
 
   const isPrefinanceProject = project.projectPrefinancing?.isPrefinanceProject;
   const projectHref = `/project/${project.slug ?? project.id}`;
@@ -70,16 +76,20 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
           <div className="flex flex-wrap md:flex-col gap-10 pb-5">
             {retirementInfo.retiredCredits && retirementInfo.certificateNodeId && (
               <Link href={`/certificate/${retirementInfo.certificateNodeId}`}>
-                <OutlinedButton size="small" className="w-full sm:w-auto">
+                <OutlinedButton size="small" className="w-full">
                   <CertifiedDocumentIcon className="mr-5" />
                   <Trans>certificate</Trans>
                 </OutlinedButton>
               </Link>
             )}
-            {/* TODO - implement View receipt */}
-            {/* <OutlinedButton size="small" className="w-full sm:w-auto">
-              <ReceiptIcon className="mr-5" /> <Trans>View Receipt</Trans>
-            </OutlinedButton> */}
+            {receiptUrl && (
+              <Link href={receiptUrl}>
+                <OutlinedButton size="small" className="w-full">
+                  <ReceiptIcon className="mr-5" />
+                  <Trans>View Receipt</Trans>
+                </OutlinedButton>
+              </Link>
+            )}
           </div>
         }
         title={

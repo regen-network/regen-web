@@ -18,7 +18,7 @@ import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normali
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getDenomTraceByHashesQuery } from 'lib/queries/react-query/ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
-import { getPaymentMethodForPaymentIntentQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodForPaymentIntentQuery/getPaymentMethodForPaymentIntentQuery';
+import { getPaymentIntentQuery } from 'lib/queries/react-query/registry-server/getPaymentIntentQuery/getPaymentIntentQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getOrdersByBuyerAddressQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getOrdersByBuyerAddress/getOrdersByBuyerAddress';
 import { getRetirementByTxHash } from 'lib/queries/react-query/registry-server/graphql/indexer/getRetirementByTxHash/getRetirementByTxHash';
@@ -26,6 +26,8 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { ORDER_STATUS } from 'components/organisms/Order/Order.constants';
 import { IBC_DENOM_PREFIX } from 'hooks/useQuerySellOrders';
+
+import { Order } from '../Orders.types';
 
 export const useOrders = () => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -47,25 +49,31 @@ export const useOrders = () => {
   const paymentMethodResults = useQueries({
     queries:
       fiatOrders?.map(order =>
-        getPaymentMethodForPaymentIntentQuery({
+        getPaymentIntentQuery({
           enabled: !!order?.stripePaymentIntentId,
           paymentMethodId: order?.stripePaymentIntentId as string,
         }),
       ) || [],
   });
+
   const paymentMethods = paymentMethodResults.map(
     queryResult => queryResult.data?.paymentMethod,
   );
+  const receiptUrls = paymentMethodResults.map(
+    queryResult => queryResult.data?.receiptUrl,
+  );
+
   const paymentMethodsLoading = paymentMethodResults.some(res => res.isLoading);
 
-  const fiatOrdersWithPaymentMethods = useMemo(
+  const fiatOrdersWithStripeInfo = useMemo(
     () =>
       fiatOrders?.map((order, index) => ({
         ...order,
         cardLast4: paymentMethods?.[index]?.card?.last4,
         cardBrand: paymentMethods?.[index]?.card?.brand,
+        receiptUrl: receiptUrls?.[index],
       })),
-    [fiatOrders, paymentMethods],
+    [fiatOrders, paymentMethods, receiptUrls],
   );
 
   const { data, isLoading: cryptoOrdersLoading } = useQuery(
@@ -95,23 +103,13 @@ export const useOrders = () => {
 
   const sortedOrders = useMemo(
     () =>
-      [...(fiatOrdersWithPaymentMethods || []), ...(cryptoOrders || [])].sort(
+      [...(fiatOrdersWithStripeInfo || []), ...(cryptoOrders || [])].sort(
         (a, b) =>
           new Date(b?.timestamp).getTime() -
           new Date(a?.timestamp as string).getTime(),
       ),
-    [cryptoOrders, fiatOrdersWithPaymentMethods],
-  ) as Array<{
-    cardLast4?: string;
-    cardBrand: string;
-    txHash: string;
-    projectId: string;
-    askDenom: string;
-    timestamp: string;
-    creditsAmount: string | number;
-    retiredCredits: boolean;
-    totalPrice: string | number;
-  }>;
+    [cryptoOrders, fiatOrdersWithStripeInfo],
+  ) as Array<Order>;
 
   const retirementResults = useQueries({
     queries: sortedOrders.map(order =>
@@ -246,6 +244,7 @@ export const useOrders = () => {
               askDenom: order?.askDenom || '',
               askBaseDenom,
             },
+            receiptUrl: order?.receiptUrl,
           },
         };
       }),

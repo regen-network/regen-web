@@ -36,6 +36,7 @@ describe('Order Component', () => {
       credits,
       paymentInfo,
       status: ORDER_STATUS.pending,
+      receiptUrl: 'http://lorem.ipsum',
     },
   };
 

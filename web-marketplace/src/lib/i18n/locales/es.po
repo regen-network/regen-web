@@ -22,9 +22,6 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -925,7 +922,7 @@ msgstr "Caribe"
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
 msgstr "Las categorías de la Lista Roja de Ecosistemas de la UICN evalúan la salud y el riesgo de los ecosistemas a escala global. Tebu promueve la protección de los ecosistemas más amenazados otorgando una puntuación más alta a aquellos que presentan un riesgo mayor."
 
-#: src/components/organisms/Order/Order.tsx:75
+#: src/components/organisms/Order/Order.tsx:81
 msgid "certificate"
 msgstr "certificado"
 
@@ -1887,7 +1884,7 @@ msgstr "emisión estimada"
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr "Algunos ejemplos de motivos de jubilación incluyen: “viajes de empresa en 2025”, “compensar mi huella personal” o el nombre de una persona u organización específica."
 
-#: src/components/organisms/Order/Order.tsx:115
+#: src/components/organisms/Order/Order.tsx:125
 msgid "Expected delivery date"
 msgstr "Fecha de entrega prevista"
 
@@ -4644,6 +4641,10 @@ msgstr "Ver perfil"
 #: src/lib/constants/shared.constants.tsx:217
 msgid "view project"
 msgstr "ver proyecto"
+
+#: src/components/organisms/Order/Order.tsx:89
+msgid "View Receipt"
+msgstr "Ver recibo"
 
 #: src/components/atoms/WrappedResourcesCard.tsx:33
 msgid "view resource"

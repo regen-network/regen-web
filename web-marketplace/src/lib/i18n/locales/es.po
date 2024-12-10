@@ -435,11 +435,11 @@ msgstr "Admin"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:37
 msgid "Advanced settings"
-msgstr ""
+msgstr "Configuración avanzada"
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:46
 #~ msgid "Agree & purchase"
-#~ msgstr ""
+#~ msgstr "Aceptar y comprar"
 
 #: src/pages/BatchDetails/BatchDetails.tsx:129
 msgid "All credits"
@@ -510,15 +510,15 @@ msgstr "El monto no puede exceder"
 
 #: src/components/organisms/EcocreditsTable.tsx:104
 msgid "Amount Escrowed"
-msgstr ""
+msgstr "Monto depositado en depósito"
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:145
 msgid "amount now available in"
-msgstr ""
+msgstr "Cantidad ahora disponible en"
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:91
 msgid "amount now available in usd"
-msgstr ""
+msgstr "Cantidad ahora disponible en USD"
 
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:150
 msgid "amount of credits"
@@ -744,11 +744,11 @@ msgstr "Fecha de inicio del lote"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:52
 msgid "BATCH START DATE"
-msgstr ""
+msgstr "FECHA DE INICIO DEL LOTE"
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:119
 msgid "Because we use blockchain technology, if another user purchases the credits before you check out, you’ll need to choose different credits."
-msgstr ""
+msgstr "Debido a que utilizamos tecnología blockchain, si otro usuario compra los créditos antes de realizar el pago, deberá elegir créditos diferentes."
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:159
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:74
@@ -1047,11 +1047,11 @@ msgstr "Elige denominación"
 
 #: src/lib/constants/shared.constants.tsx:28
 msgid "Choose ecocredits batch"
-msgstr ""
+msgstr "Elige el lote de ecocréditos"
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:157
 msgid "Choose new credits"
-msgstr ""
+msgstr "Elige nuevos créditos"
 
 #: src/components/molecules/ProjectSelect.tsx:25
 #: src/features/ecocredit/CreateBatchBySteps/hooks/useUpdateProjectOptions.ts:14
@@ -2010,11 +2010,11 @@ msgstr "Los archivos aún se pueden compartir de forma privada a través de un e
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:8
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:48
 msgid "Filters"
-msgstr ""
+msgstr "Filtros"
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:98
 msgid "find another credit card project"
-msgstr ""
+msgstr "Encuentra otro proyecto de tarjeta de crédito"
 
 #: src/components/molecules/PlanStepper.tsx:18
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:40
@@ -2807,7 +2807,7 @@ msgstr "Oportunidades"
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:103
 msgid "or, buy with crypto"
-msgstr ""
+msgstr "o comprar con criptomonedas"
 
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:67
 msgid "or, log in with email / social"
@@ -3703,11 +3703,11 @@ msgstr "Escanee con la aplicación móvil Keplr"
 #: src/components/organisms/CreditClassOverviewSection.tsx:161
 #: src/components/organisms/CreditClassOverviewSection.tsx:172
 msgid "SDGs"
-msgstr ""
+msgstr "ODS"
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:128
 msgid "search for new credits"
-msgstr ""
+msgstr "buscar nuevos creditos"
 
 #: src/pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:88
 msgid "sectoral scopes"
@@ -3916,19 +3916,19 @@ msgstr "Índice social y cultural"
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
 #: src/lib/constants/shared.constants.tsx:174
 msgid "Sold Out"
-msgstr ""
+msgstr "Agotado"
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:115
 msgid "Sorry, another user has purchased all of the available credits from this project"
-msgstr ""
+msgstr "Lo sentimos, otro usuario ha comprado todos los créditos disponibles de este proyecto."
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:86
 msgid "Sorry, another user has purchased all of the USD credits you selected!"
-msgstr ""
+msgstr "Lo sentimos, ¡otro usuario ha comprado todos los créditos USD que seleccionaste!"
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:140
 msgid "Sorry, another user has purchased some or all of the credits you selected!"
-msgstr ""
+msgstr "Lo sentimos, otro usuario ha comprado algunos o todos los créditos que seleccionaste."
 
 #: src/config/errors.tsx:29
 msgid "Sorry, someone has purchased this sell order!"

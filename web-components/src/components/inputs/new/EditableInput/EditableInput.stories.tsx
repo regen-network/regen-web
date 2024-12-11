@@ -11,7 +11,7 @@ export default {
 type Story = StoryObj<typeof EditableInput>;
 
 const args = {
-  value: 5,
+  value: '5',
   maxValue: 10,
   onChange: action('onChange'),
   inputAriaLabel: 'Editable credits',

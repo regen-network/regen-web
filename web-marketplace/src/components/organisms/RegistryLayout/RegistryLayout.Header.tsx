@@ -45,9 +45,8 @@ const RegistryLayoutHeader: React.FC = () => {
   const { _ } = useLingui();
   const { pathname } = useLocation();
   const { activeAccount, privActiveAccount } = useAuth();
-
   const { wallet, disconnect, isConnected, loginDisabled } = useWallet();
-  const { accountOrWallet } = useAuthData();
+  const { accountOrWallet, noAccountAndNoWallet } = useAuthData();
   const theme = useTheme<Theme>();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
@@ -134,7 +133,7 @@ const RegistryLayoutHeader: React.FC = () => {
             {clientConfig.listProject && <ListProject />}
             <LanguageSwitcher
               className={cn(
-                'mr-25 hidden lg:block',
+                'mr-25 mt-1 hidden lg:block',
                 isHome && 'text-sc-button-text-icon-light',
               )}
             />
@@ -161,6 +160,7 @@ const RegistryLayoutHeader: React.FC = () => {
             {clientConfig.loginButton && <LoginButton />}
           </Box>
         }
+        isUserLoggedIn={!noAccountAndNoWallet}
       />
     </>
   );

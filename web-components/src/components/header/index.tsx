@@ -33,6 +33,7 @@ export interface HeaderProps {
   websiteExtras?: JSX.Element;
   pathname?: string;
   transparent?: boolean;
+  isUserLoggedIn?: boolean;
 }
 
 export default function Header({
@@ -48,6 +49,7 @@ export default function Header({
   pathname = '/',
   extras,
   websiteExtras,
+  isUserLoggedIn,
 }: HeaderProps): JSX.Element {
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
@@ -107,6 +109,7 @@ export default function Header({
                 menuItems={menuItems}
                 extras={extras}
                 websiteExtras={websiteExtras}
+                isUserLoggedIn={isUserLoggedIn}
               />
             </Box>
           </Box>

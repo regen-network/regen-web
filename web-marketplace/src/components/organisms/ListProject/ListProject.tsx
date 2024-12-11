@@ -48,10 +48,10 @@ const ListProject = () => {
   );
 
   return (
-    <div>
+    <>
       {!isLoadingIsIssuer && (
         <Body
-          className="text-[11px] sm:text-base font-bold bg-clip-text cursor-pointer pt-[2px] pr-10 sm:pr-25 bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)]"
+          className="text-[11px] sm:text-base font-bold bg-clip-text cursor-pointer mb-3 pr-10 sm:pr-25 bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] text-right"
           sx={{
             textFillColor: 'transparent',
           }}
@@ -77,7 +77,7 @@ const ListProject = () => {
         modalState={modalState}
         redirectRoute="project-pages/draft/basic-info"
       />
-    </div>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import { isValidElement } from 'react';
 import { Link, SxProps } from '@mui/material';
-import Grid, { GridDirection } from '@mui/material/Grid';
+import Grid, { GridDirection, GridProps } from '@mui/material/Grid';
 
 import { headerFontFamily, Theme } from '../../theme/muiTheme';
 import { formatDate } from '../../utils/format';
@@ -44,6 +44,7 @@ interface UserInfoProps {
     timestamp?: string;
   };
   linkComponent?: LinkComponentProp;
+  alignItems?: GridProps['alignItems'];
 }
 export default function UserInfo({
   user,
@@ -56,6 +57,7 @@ export default function UserInfo({
   nameHasPadding = true,
   classNames,
   linkComponent: LinkComponent = Link,
+  alignItems = 'center',
 }: UserInfoProps): JSX.Element {
   const sizeVariant = getSizeVariant(size);
   const mobileSizeVariant = getSizeVariant(getMobileSize(size));
@@ -90,7 +92,7 @@ export default function UserInfo({
       direction={direction}
       wrap="nowrap"
       sx={sx}
-      alignItems="center"
+      alignItems={alignItems}
     >
       <Grid item>
         <UserAvatar

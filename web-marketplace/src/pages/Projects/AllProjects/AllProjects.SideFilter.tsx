@@ -24,7 +24,6 @@ import {
   useCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
-import { COLOR_SCHEME, IS_TERRASOS } from 'lib/env';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { CommunityFilter } from './AllProjects.CommunityFilter';

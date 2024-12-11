@@ -12,9 +12,11 @@ export interface FilterOptions {
 
 export interface Filter {
   title: string;
-  displayType: 'tag' | 'checkbox';
+  displayType: 'tag' | 'checkbox' | 'children';
   options: FilterOptions[];
   hasCollapse?: boolean;
+  children?: JSX.Element;
+  hidden?: boolean;
 }
 
 export interface ProjectFilterLabels {
@@ -57,6 +59,9 @@ export default function ProjectFilters({
       </div>
       <Divider sx={{ my: 5 }} />
       {filters.map((filter, index) => {
+        if (filter.hasCollapse) {
+          return null;
+        }
         return (
           <Box sx={{ mb: 5 }} key={filter.title}>
             <div className="text-[16px] font-bold mb-[20px] ">
@@ -97,6 +102,7 @@ export default function ProjectFilters({
                   ))}
                 </div>
               )}
+              {filter.displayType === 'children' && filter.children}
             </Collapse>
             {filter.hasCollapse && (
               <ButtonBase

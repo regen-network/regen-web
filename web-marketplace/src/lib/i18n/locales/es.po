@@ -2578,15 +2578,15 @@ msgid "Must have recipients"
 msgstr "Debe tener destinatarios"
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:73
-msgid "my orders"
-msgstr "Mis ordenes"
+#~ msgid "my orders"
+#~ msgstr "Mis ordenes"
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:18
-#: src/pages/Dashboard/Dashboard.constants.tsx:87
+#: src/pages/Dashboard/Dashboard.constants.tsx:79
 msgid "My orders"
 msgstr "Mis pedidos"
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:95
+#: src/pages/Dashboard/Dashboard.constants.tsx:87
 msgid "My prefinance projects"
 msgstr "Mis proyectos de prefinanciamiento"
 
@@ -2773,6 +2773,10 @@ msgstr "o inicie sesión con correo electrónico / redes sociales"
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:83
 msgid "Order Summary"
 msgstr "Resumen del pedido"
+
+#: src/pages/Dashboard/Dashboard.constants.tsx:73
+msgid "orders"
+msgstr "órdenes"
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:15
 msgid "Orders"
@@ -3086,7 +3090,7 @@ msgstr "Configuración de privacidad"
 msgid "Proceed with caution: this cannot be undone!"
 msgstr "Proceda con precaución: ¡esto no se puede deshacer!"
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:81
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:183
 msgid "profile"
 msgstr "perfil"
 
@@ -3643,7 +3647,7 @@ msgstr "Guardar borrador y salir"
 msgid "Save my credit card info for next time"
 msgstr "Guarde la información de mi tarjeta de crédito para la próxima vez"
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:103
+#: src/pages/Dashboard/Dashboard.constants.tsx:95
 msgid "Saved payment info"
 msgstr "Información de pago guardada"
 

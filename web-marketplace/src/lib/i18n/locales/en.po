@@ -2555,15 +2555,15 @@ msgid "Must have recipients"
 msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:73
-msgid "my orders"
-msgstr ""
+#~ msgid "my orders"
+#~ msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:18
-#: src/pages/Dashboard/Dashboard.constants.tsx:87
+#: src/pages/Dashboard/Dashboard.constants.tsx:79
 msgid "My orders"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:95
+#: src/pages/Dashboard/Dashboard.constants.tsx:87
 msgid "My prefinance projects"
 msgstr ""
 
@@ -2749,6 +2749,10 @@ msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:83
 msgid "Order Summary"
+msgstr ""
+
+#: src/pages/Dashboard/Dashboard.constants.tsx:73
+msgid "orders"
 msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:15
@@ -3059,7 +3063,7 @@ msgstr ""
 msgid "Proceed with caution: this cannot be undone!"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:81
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:183
 msgid "profile"
 msgstr ""
 
@@ -3608,7 +3612,7 @@ msgstr ""
 msgid "Save my credit card info for next time"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:103
+#: src/pages/Dashboard/Dashboard.constants.tsx:95
 msgid "Saved payment info"
 msgstr ""
 

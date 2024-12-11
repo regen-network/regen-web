@@ -86,9 +86,7 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
                 areaUnit={project?.areaUnit}
                 purchaseInfo={project.purchaseInfo || {}}
                 onClick={() =>
-                  navigate(
-                    `/project/${project.slug}` ?? `/project/${project.id}`,
-                  )
+                  navigate(`/project/${project.slug ?? project.id}`)
                 }
                 imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                 apiServerUrl={API_URI}

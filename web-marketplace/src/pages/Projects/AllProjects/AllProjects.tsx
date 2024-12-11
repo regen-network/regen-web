@@ -179,29 +179,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     [_],
   );
 
-  useEffect(() => {
-    // Check all the credit class filters by default
-    if (
-      Object.keys(creditClassSelectedFilters).length !==
-      creditClassFilters.length
-    )
-      setCreditClassSelectedFilters(
-        creditClassFilters.reduce((acc, creditClassFilter) => {
-          return {
-            ...acc,
-            [creditClassFilter.path]: CREDIT_CLASS_FILTERS_TO_DESELECT.includes(
-              creditClassFilter.path,
-            )
-              ? false
-              : true,
-          };
-        }, {}),
-      );
-  }, [
-    creditClassFilters,
-    creditClassSelectedFilters,
-    setCreditClassSelectedFilters,
-  ]);
+
 
   const onBuyButtonClick = useOnBuyButtonClick();
 
@@ -223,11 +201,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   return (
     <>
-      <Flex
-        flex={1}
-        sx={{ gridColumn: '1 / -1' }}
-        className={IS_REGEN ? 'xl:mt-[-78px]' : undefined}
-      >
+      <Flex flex={1} sx={{ gridColumn: '1 / -1' }}>
         <Flex
           justifyContent="flex-end"
           alignItems="center"
@@ -235,37 +209,19 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           sx={{
             pb: 5,
             flexWrap: { xs: 'wrap', lg: 'nowrap' },
+            mt: { lg: '-77px' },
           }}
-          className={IS_TERRASOS ? 'lg:hidden' : undefined}
         >
-          {IS_REGEN && (
-            <SideFilter
-              creditClassFilters={creditClassFilters}
-              hasCommunityProjects={hasCommunityProjects}
-              showFiltersReset={showFiltersReset}
-              resetFilter={resetFilter}
-              sx={{
-                mb: { xs: 3.75, lg: 0 },
-                mr: { xs: 0, lg: 7.5 },
-                width: { xs: '100%', lg: 'auto' },
-              }}
-            />
-          )}
-          {IS_TERRASOS && (
-            <ProjectFilterMobile
-              allProjects={allProjects}
-              activeFilters={activeFilterIds}
-              setActiveFilters={setActiveFilters}
-              resetFilters={resetFilters}
-              showResetButton={showResetButton}
-              sx={{
-                mb: { xs: 3.75, lg: 0 },
-                mr: { xs: 0, lg: 7.5 },
-                width: { xs: '100%', lg: 'auto' },
-              }}
-              className="lg:hidden"
-            />
-          )}
+          <ProjectFilterMobile
+            allProjects={allProjects}
+            activeFilters={activeFilterIds}
+            setActiveFilters={setActiveFilters}
+            resetFilters={resetFilters}
+            showResetButton={showResetButton}
+            className="lg:hidden w-full mb-15 mr-0"
+            hasCommunityProjects={hasCommunityProjects}
+          />
+
           {IS_REGEN && (
             <Flex
               sx={{
@@ -383,7 +339,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           message={_(EMPTY_PROJECTS_LABEL)}
           icon={<NoProjectIcon sx={{ fontSize: 100 }} />}
           sx={{ gridColumn: '1 / -1', backgroundColor: 'info.light' }}
-          className={IS_TERRASOS ? 'lg:mt-[36px]' : undefined}
+          className="lg:mt-[36px]"
         >
           <>
             {showFiltersReset && (

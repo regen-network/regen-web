@@ -9,6 +9,7 @@ import {
   FilterOptions,
 } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
+import { IS_TERRASOS } from 'lib/env';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { COMPLIANCE_MARKET, VOLUNTARY_MARKET } from './AllProjects.constants';
@@ -202,43 +203,48 @@ const extractUniqueValues = (
   ];
 };
 
-export function getFilters(
+export function getClientFilters(
   _: TranslatorType,
   ecosystemIcons: Record<string, string>,
   allProjects: ProjectWithOrderData[],
 ): Filter[] {
-  const uniqueRegions = [
-    ...new Set(
-      allProjects.map(project => project.region?.toLowerCase()).filter(Boolean),
-    ),
-  ] as string[];
-  const uniqueEcosystemTypes = extractUniqueValues(
-    allProjects,
-    'ecosystemType',
-    true,
-  );
-  const uniqueMarketTypes = extractUniqueValues(
-    allProjects,
-    'marketType',
-    false,
-  );
+  if (IS_TERRASOS) {
+    const uniqueRegions = [
+      ...new Set(
+        allProjects
+          .map(project => project.region?.toLowerCase())
+          .filter(Boolean),
+      ),
+    ] as string[];
+    const uniqueEcosystemTypes = extractUniqueValues(
+      allProjects,
+      'ecosystemType',
+      true,
+    );
+    const uniqueMarketTypes = extractUniqueValues(
+      allProjects,
+      'marketType',
+      false,
+    );
 
-  return [
-    {
-      displayType: 'tag',
-      title: _(msg`Region`),
-      options: getRegionTags(_, uniqueRegions),
-    },
-    {
-      displayType: 'tag',
-      title: _(msg`Ecosystem`),
-      options: getEcosystemTags(_, ecosystemIcons, uniqueEcosystemTypes),
-      hasCollapse: true,
-    },
-    {
-      displayType: 'checkbox',
-      title: _(msg`Market`),
-      options: getMarketCheckboxes(_, uniqueMarketTypes),
-    },
-  ];
+    return [
+      {
+        displayType: 'tag',
+        title: _(msg`Region`),
+        options: getRegionTags(_, uniqueRegions),
+      },
+      {
+        displayType: 'tag',
+        title: _(msg`Ecosystem`),
+        options: getEcosystemTags(_, ecosystemIcons, uniqueEcosystemTypes),
+        hasCollapse: true,
+      },
+      {
+        displayType: 'checkbox',
+        title: _(msg`Market`),
+        options: getMarketCheckboxes(_, uniqueMarketTypes),
+      },
+    ];
+  }
+  return [];
 }

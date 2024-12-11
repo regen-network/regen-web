@@ -19,6 +19,7 @@ type Props = {
   resetFilters: () => void;
   className?: string;
   showResetButton?: boolean;
+  hasCommunityProjects: boolean;
 };
 
 const ProjectFilter = ({
@@ -29,6 +30,7 @@ const ProjectFilter = ({
   sx = [],
   className = '',
   showResetButton = true,
+  hasCommunityProjects,
 }: Props) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
@@ -63,6 +65,7 @@ const ProjectFilter = ({
           setActiveFilters={setActiveFilters}
           resetFilters={resetFilters}
           showResetButton={showResetButton}
+          hasCommunityProjects={hasCommunityProjects}
         />
       </Modal>
     </>

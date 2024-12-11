@@ -105,7 +105,7 @@ export function OrderSummaryContent({
       <OrderSummmaryRowHeader text={_(msg`# credits`)} className="pt-5" />
       <div className="text-base font-normal font-sans text-[14px] sm:text-base">
         <EditableInput
-          value={credits}
+          value={credits.toString()}
           maxValue={creditsAvailable}
           onChange={setCreditsAmount}
           onKeyDown={handleOnKeyDown}

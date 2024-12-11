@@ -48,6 +48,7 @@ export default function UserInfoWithTitle({
           border={border}
           titleComponent="subtitle"
           linkComponent={linkComponent}
+          alignItems={'start'}
         />
       )}
     </Box>

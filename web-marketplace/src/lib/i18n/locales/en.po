@@ -1767,7 +1767,7 @@ msgstr ""
 msgid "edit profile"
 msgstr ""
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:38
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:23
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:115
 #: src/pages/Dashboard/Dashboard.constants.tsx:54
 msgid "Edit profile"
@@ -2558,7 +2558,7 @@ msgstr ""
 #~ msgid "my orders"
 #~ msgstr ""
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:18
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:46
 #: src/pages/Dashboard/Dashboard.constants.tsx:79
 msgid "My orders"
 msgstr ""
@@ -2755,7 +2755,7 @@ msgstr ""
 msgid "orders"
 msgstr ""
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:15
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:43
 msgid "Orders"
 msgstr ""
 
@@ -3067,7 +3067,7 @@ msgstr ""
 msgid "profile"
 msgstr ""
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:35
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:20
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:7
 msgid "Profile"
 msgstr ""
@@ -3742,7 +3742,7 @@ msgstr ""
 msgid "settings"
 msgstr ""
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.constants.tsx:43
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:28
 #: src/pages/Dashboard/Dashboard.constants.tsx:62
 #: src/pages/Settings/Settings.tsx:52
 msgid "Settings"

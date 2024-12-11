@@ -1,10 +1,10 @@
 import { fireEvent, render, screen } from 'web-marketplace/test/test-utils';
 
 import { AdminNavigation } from './AdminNavigation';
-import { adminNavigationSections } from './AdminNavigation.constants';
+import { getAdminNavigationSections } from './AdminNavigation.utils';
 
 describe('AdminNavigation', () => {
-  const sections = adminNavigationSections;
+  const sections = getAdminNavigationSections({ showOrders: true });
   const item = sections[0].items[0];
   const onNavClick = vi.fn();
   it('renders navigation sections and items', () => {

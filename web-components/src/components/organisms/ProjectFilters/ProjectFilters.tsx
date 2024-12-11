@@ -59,7 +59,7 @@ export default function ProjectFilters({
       </div>
       <Divider sx={{ my: 5 }} />
       {filters.map((filter, index) => {
-        if (filter.hasCollapse) {
+        if (filter.hidden) {
           return null;
         }
         return (

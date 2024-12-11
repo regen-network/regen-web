@@ -9,7 +9,7 @@ import Modal from 'web-components/src/components/modal';
 
 import { FILTERS_MODAL_BUTTON } from './AllProjects.constants';
 import ProjectFilterBody from './AllProjects.ProjectFilterBody';
-import { ProjectWithOrderData } from './AllProjects.types';
+import { CreditClassFilter, ProjectWithOrderData } from './AllProjects.types';
 
 type Props = {
   allProjects: ProjectWithOrderData[];
@@ -20,9 +20,10 @@ type Props = {
   className?: string;
   showResetButton?: boolean;
   hasCommunityProjects: boolean;
+  creditClassFilters?: CreditClassFilter[];
 };
 
-const ProjectFilter = ({
+const ProjectFilterMobile = ({
   allProjects,
   activeFilters,
   setActiveFilters,
@@ -31,6 +32,7 @@ const ProjectFilter = ({
   className = '',
   showResetButton = true,
   hasCommunityProjects,
+  creditClassFilters = [],
 }: Props) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
@@ -61,6 +63,7 @@ const ProjectFilter = ({
       <Modal open={isOpen} onClose={() => setIsOpen(false)} className="h-full">
         <ProjectFilterBody
           allProjects={allProjects}
+          creditClassFilters={creditClassFilters}
           activeFilters={activeFilters}
           setActiveFilters={setActiveFilters}
           resetFilters={resetFilters}
@@ -72,4 +75,4 @@ const ProjectFilter = ({
   );
 };
 
-export default ProjectFilter;
+export default ProjectFilterMobile;

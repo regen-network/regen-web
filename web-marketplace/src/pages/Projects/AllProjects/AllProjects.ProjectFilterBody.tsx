@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
@@ -50,14 +51,15 @@ const ProjectFilterBody = ({
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
     creditClassSelectedFiltersAtom,
   );
-  console.log('hasCommunityProjects', hasCommunityProjects);
-
+  const location = useLocation();
   const onFilterChange = (id: string) => {
     const newFilters = activeFilters.includes(id)
       ? activeFilters.filter(filterId => filterId !== id)
       : [...activeFilters, id];
     setActiveFilters(newFilters);
   };
+
+  const prefinance = location.pathname.includes('prefinance');
 
   return (
     <ProjectFilters
@@ -69,13 +71,14 @@ const ProjectFilterBody = ({
           title: _(CREDIT_CLASS_FILTER_LABEL),
           displayType: 'children',
           options: [],
+          hidden: prefinance,
         },
         {
           children: <CommunityFilter />,
           title: _(COMMUNITY_FILTER_LABEL),
           displayType: 'children',
           options: [],
-          hidden: !hasCommunityProjects,
+          hidden: !hasCommunityProjects || prefinance,
         },
         ...clientFilters,
       ]}

@@ -72,28 +72,6 @@ const ComplianceInfo = ({
             bodySize="lg"
           />
           <MetaDetail label={_(msg`biome`)} value={biomeType} bodySize="lg" />
-          <MetaDetail label={_(msg`region`)} value={region} bodySize="lg" />
-          <MetaDetail
-            label={_(msg`department`)}
-            value={department}
-            bodySize="lg"
-          />
-          <MetaDetail
-            label={_(msg`environmental authority`)}
-            value={environmentalAuthority}
-            bodySize="lg"
-          />
-          <MetaDetail
-            label={_(msg`watershed`)}
-            value={watershed}
-            bodySize="lg"
-          />
-          <MetaDetail
-            label={_(msg`sub-watershed`)}
-            value={subWatershed}
-            bodySize="lg"
-          />
-          <MetaDetail label={_(msg`biome`)} value={biomeType} bodySize="lg" />
         </Grid>
       </>
     </InfoTemplate>

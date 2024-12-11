@@ -1,5 +1,10 @@
 import React, { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
@@ -13,6 +18,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { useAuth } from 'lib/auth/auth';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
+import { getOrdersByBuyerAddressQuery } from 'lib/queries/react-query/registry-server/graphql/indexer/getOrdersByBuyerAddress/getOrdersByBuyerAddress';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { getWalletAddress } from 'pages/Dashboard/Dashboard.utils';
@@ -44,8 +50,11 @@ import { getAddress } from './RegistryLayout.utils';
 const RegistryLayoutHeader: React.FC = () => {
   const { _ } = useLingui();
   const { pathname } = useLocation();
-  const { activeAccount, privActiveAccount } = useAuth();
-  const { wallet, disconnect, isConnected, loginDisabled } = useWallet();
+  const { activeAccount, privActiveAccount, loading } = useAuth();
+  const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
+
+  const { wallet, disconnect, isConnected, loginDisabled, activeWalletAddr } =
+    useWallet();
   const { accountOrWallet, noAccountAndNoWallet } = useAuthData();
   const theme = useTheme<Theme>();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
@@ -57,6 +66,21 @@ const RegistryLayoutHeader: React.FC = () => {
   const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
   const menuItems = useMemo(() => getMenuItems(pathname, _), [pathname, _]);
   const onProfileClick = useOnProfileClick();
+
+  const fiatOrders = activeAccount?.fiatOrdersByAccountId?.nodes;
+  const { data, isLoading: cryptoOrdersLoading } = useQuery(
+    getOrdersByBuyerAddressQuery({
+      client: apolloClient,
+      enabled: !!activeWalletAddr && !!apolloClient,
+      buyerAddress: activeWalletAddr as string,
+    }),
+  );
+  const cryptoOrders = data?.data?.allOrders?.nodes;
+  const ordersLoading = loading || cryptoOrdersLoading;
+  const showOrders =
+    !ordersLoading &&
+    ((fiatOrders && fiatOrders.length > 0) ||
+      (cryptoOrders && cryptoOrders.length > 0));
 
   const { data: paymentMethodData } = useQuery(
     getPaymentMethodsQuery({
@@ -78,6 +102,7 @@ const RegistryLayoutHeader: React.FC = () => {
         loginDisabled,
         onProfileClick,
         savedPaymentInfo,
+        showOrders,
         profile: activeAccount
           ? {
               id: activeAccount.id,
@@ -103,6 +128,7 @@ const RegistryLayoutHeader: React.FC = () => {
       loginDisabled,
       onProfileClick,
       savedPaymentInfo,
+      showOrders,
       activeAccount,
       _,
       privActiveAccount?.email,

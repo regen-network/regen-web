@@ -50,10 +50,12 @@ describe('CreditsAmount', () => {
       jotaiDefaultValues: [[paymentOptionAtom, 'card']],
     });
 
-    const currencyInput = screen.getByLabelText(/Currency Input/i);
-    userEvent.clear(currencyInput);
-    await userEvent.type(currencyInput, '50');
-    expect(currencyInput).toHaveValue(50);
+    const currencyInput = await screen.findByLabelText(/Currency Input/i);
+    if (currencyInput) {
+      userEvent.clear(currencyInput);
+      await userEvent.type(currencyInput, '50');
+      expect(currencyInput).toHaveValue(50);
+    }
   });
 
   it('updates currency amount when credits amount changes', async () => {
@@ -63,7 +65,7 @@ describe('CreditsAmount', () => {
     });
 
     const creditsInput = screen.getByLabelText(/Credits Input/i);
-    const currencyInput = screen.getByLabelText(/Currency Input/i);
+    const currencyInput = await screen.findByLabelText(/Currency Input/i);
 
     userEvent.clear(creditsInput);
     await userEvent.type(creditsInput, '101');
@@ -78,7 +80,7 @@ describe('CreditsAmount', () => {
     });
 
     const creditsInput = screen.getByLabelText(/Credits Input/i);
-    const currencyInput = screen.getByLabelText(/Currency Input/i);
+    const currencyInput = await screen.findByLabelText(/Currency Input/i);
 
     userEvent.clear(currencyInput);
     await userEvent.type(currencyInput, '102');
@@ -96,7 +98,7 @@ describe('CreditsAmount', () => {
       name: /Max Credits/i,
     });
     const creditsInput = screen.getByLabelText(/Credits Input/i);
-    const currencyInput = screen.getByLabelText(/Currency Input/i);
+    const currencyInput = await screen.findByLabelText(/Currency Input/i);
 
     await userEvent.click(maxCreditsButton);
 

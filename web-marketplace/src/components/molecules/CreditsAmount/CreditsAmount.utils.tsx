@@ -200,7 +200,7 @@ export const formatCurrencyAmount = (
   // the first two decimals only, if any, or rounding them up.
   const formattedValue = roundUpDecimal
     ? +(Math.ceil(numericValue * 100) / 100).toFixed(2)
-    : decimalPart?.length > 2
+    : decimalPart
     ? +`${integerPart}.${decimalPart.slice(0, 2)}`
     : +`${integerPart}`;
 

@@ -140,6 +140,7 @@ export const EditableInput = ({
               autoFocus
               data-testid="editable-input"
               placeholder="0"
+              inputMode="decimal"
             />
             <div className="flex flex-row max-[450px]:flex-col max-[450px]:items-start max-[450px]:ml-15">
               <TextButton

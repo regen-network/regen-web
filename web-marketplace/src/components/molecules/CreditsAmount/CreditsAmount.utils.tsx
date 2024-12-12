@@ -30,7 +30,7 @@ export function getSpendingCap(
 ) {
   return paymentOption === PAYMENT_OPTIONS.CARD
     ? cardSellOrders.reduce((prev, cur) => {
-        return formatCurrencyAmountTwoDecimals(
+        return formatCurrencyAmount(
           prev + Number(cur.quantity) * cur.usdPrice,
           true,
         );
@@ -56,7 +56,7 @@ export const getCreditsAmount = ({
   creditTypePrecision,
 }: GetCreditsAmountParams) => {
   const currentCurrencyAmount = card
-    ? formatCurrencyAmountTwoDecimals(value, true)
+    ? formatCurrencyAmount(value, true)
     : denomToMicro(value);
   let currentCreditsAmount = 0;
   let currencyAmountLeft = currentCurrencyAmount;
@@ -70,7 +70,7 @@ export const getCreditsAmount = ({
 
     if (currencyAmountLeft >= orderTotalAmount) {
       currencyAmountLeft = card
-        ? formatCurrencyAmountTwoDecimals(currencyAmountLeft - orderTotalAmount)
+        ? formatCurrencyAmount(currencyAmountLeft - orderTotalAmount)
         : parseFloat((currencyAmountLeft - orderTotalAmount).toFixed(6));
       currentCreditsAmount += quantity;
       sellOrders.push(formatSellOrder({ order, card, price }));
@@ -142,7 +142,7 @@ export const getCurrencyAmount = ({
 
   return {
     [CURRENCY_AMOUNT]: card
-      ? formatCurrencyAmountTwoDecimals(currentCurrencyAmount, true)
+      ? formatCurrencyAmount(currentCurrencyAmount, true)
       : parseFloat(microToDenom(currentCurrencyAmount).toFixed(6)),
     sellOrders,
   };
@@ -184,7 +184,7 @@ export const formatSellOrder = ({
  * @returns The formatted currency amount as a number with two decimals.
  *
  */
-export const formatCurrencyAmountTwoDecimals = (
+export const formatCurrencyAmount = (
   value: string | number,
   roundUpDecimal = false,
 ) => {

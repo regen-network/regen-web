@@ -18,7 +18,7 @@ import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import { CURRENCY, CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import { CurrencyInputProps } from './CreditsAmount.types';
-import { formatCurrencyAmountTwoDecimals } from './CreditsAmount.utils';
+import { formatCurrencyAmount } from './CreditsAmount.utils';
 
 const CustomSelect = lazy(
   () =>
@@ -66,6 +66,13 @@ export const CurrencyInput = ({
     (event: ChangeEvent<HTMLInputElement>): void => {
       let value = event.target.value;
       const decimalPart = value.split('.')?.[1];
+
+      // Check if the value starts with a decimal point and add a leading zero
+      if (/^\.[0-9]/.test(value)) {
+        setValue(CURRENCY_AMOUNT, +`0${value}`, {
+          shouldValidate: true,
+        });
+      }
       // Check if the value has a decimal part longer than 2 digits,
       // or if the value starts with leading zero/s
       if (
@@ -74,14 +81,12 @@ export const CurrencyInput = ({
           paymentOption === PAYMENT_OPTIONS.CARD) ||
         /^0[0-9]/.test(value)
       ) {
+        // remove extra leading zeros
         value = value.replace(/^0+/, '');
-        setValue(
-          CURRENCY_AMOUNT,
-          formatCurrencyAmountTwoDecimals(value, false),
-          {
-            shouldValidate: true,
-          },
-        );
+
+        setValue(CURRENCY_AMOUNT, formatCurrencyAmount(value, false), {
+          shouldValidate: true,
+        });
       }
     },
     [paymentOption, setValue],
@@ -134,6 +139,7 @@ export const CurrencyInput = ({
         onInput={handleInput}
         onBlur={handleOnBlur}
         type="number"
+        placeholder="0"
         className={`border border-solid border-grey-300 focus-within:border-grey-500 focus-within:border-2 ${
           card ? 'pl-5' : ''
         } w-full sm:w-auto flex justify-start relative sm:h-60 rounded-sm items-center`}

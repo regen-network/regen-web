@@ -272,73 +272,82 @@ export const BuyCreditsForm = ({
       stripe?: Stripe | null,
       elements?: StripeElements | null,
     ) => {
-      const sellOrders = await refetchSellOrders();
-      const creditsInAllSellOrders = getSellOrdersCredits(sellOrders);
-      const creditsToBuy = data?.creditsAmount;
-      const requestedSellOrders = findMatchingSellOrders(
-        data,
-        sellOrders?.map(normalizeToUISellOrderInfo),
-      );
-      const creditsInRequestedSellOrders =
-        getSellOrdersCredits(requestedSellOrders);
-
-      const sellCanProceed =
-        creditsToBuy && creditsToBuy <= creditsInRequestedSellOrders;
-
-      if (sellCanProceed) {
-        const { retirementReason, country, stateProvince, postalCode } = values;
-        const {
-          sellOrders: selectedSellOrders,
-          savePaymentMethod,
-          createAccount: createActiveAccount,
-          // subscribeNewsletter, TODO
-          // followProject,
-        } = data;
-
-        if (selectedSellOrders && creditsAmount)
-          purchase({
-            selectedSellOrders,
-            retiring,
-            retirementReason,
-            country,
-            stateProvince,
-            postalCode,
-            savePaymentMethod,
-            createActiveAccount,
-            paymentMethodId,
-            stripe,
-            elements,
-            confirmationTokenId,
-          });
-      } else {
-        setWarningModalState({
-          openModal: true,
-          creditsAvailable: creditsInRequestedSellOrders,
-        });
-        warningModalContent.current = getWarningModalContent(
-          currency,
-          isWeb2UserWithoutWallet,
-          creditsInRequestedSellOrders,
-          _,
-          allowedDenomsData,
-          data,
-          creditsInAllSellOrders,
-          isVisitingUser,
+      if (project) {
+        const sellOrders = await refetchSellOrders();
+        const creditsInAllSellOrders = getSellOrdersCredits(
+          sellOrders,
+          project.id,
         );
+        const creditsToBuy = data?.creditsAmount;
+        const requestedSellOrders = findMatchingSellOrders(
+          data,
+          sellOrders?.map(normalizeToUISellOrderInfo),
+        );
+        const creditsInRequestedSellOrders = getSellOrdersCredits(
+          requestedSellOrders,
+          project.id,
+        );
+
+        const sellCanProceed =
+          creditsToBuy && creditsToBuy <= creditsInRequestedSellOrders;
+
+        if (sellCanProceed) {
+          const { retirementReason, country, stateProvince, postalCode } =
+            values;
+          const {
+            sellOrders: selectedSellOrders,
+            savePaymentMethod,
+            createAccount: createActiveAccount,
+            // subscribeNewsletter, TODO
+            // followProject,
+          } = data;
+
+          if (selectedSellOrders && creditsAmount)
+            purchase({
+              selectedSellOrders,
+              retiring,
+              retirementReason,
+              country,
+              stateProvince,
+              postalCode,
+              savePaymentMethod,
+              createActiveAccount,
+              paymentMethodId,
+              stripe,
+              elements,
+              confirmationTokenId,
+            });
+        } else {
+          setWarningModalState({
+            openModal: true,
+            creditsAvailable: creditsInRequestedSellOrders,
+          });
+          warningModalContent.current = getWarningModalContent(
+            currency,
+            isWeb2UserWithoutWallet,
+            creditsInRequestedSellOrders,
+            _,
+            allowedDenomsData,
+            data,
+            creditsInAllSellOrders,
+            isVisitingUser,
+          );
+        }
       }
     },
     [
-      _,
-      allowedDenomsData,
+      project,
+      refetchSellOrders,
+      data,
+      creditsAmount,
+      purchase,
+      retiring,
+      paymentMethodId,
       confirmationTokenId,
       currency,
-      creditsAmount,
-      data,
       isWeb2UserWithoutWallet,
-      paymentMethodId,
-      purchase,
-      refetchSellOrders,
-      retiring,
+      _,
+      allowedDenomsData,
       isVisitingUser,
     ],
   );

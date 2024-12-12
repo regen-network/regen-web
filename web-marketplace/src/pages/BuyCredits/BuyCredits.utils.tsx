@@ -166,11 +166,17 @@ export const getWarningModalContent = (
 
 export const getSellOrdersCredits = (
   sellOrders: UISellOrderInfo[] | SellOrderInfoExtented[] | undefined,
-) =>
-  sellOrders?.reduce(
-    (credits, sellOrder) => credits + Number(sellOrder.quantity),
-    0,
-  ) || 0;
+  projectId: string,
+) => {
+  return (
+    sellOrders
+      ?.filter(sellOrder => sellOrder?.batchDenom?.startsWith(projectId))
+      .reduce(
+        (credits, sellOrder) => credits + Number(sellOrder.quantity),
+        0,
+      ) || 0
+  );
+};
 
 const getStep2Name = (card: boolean) =>
   card ? i18n._(PAYMENT_INFO) : i18n._(CUSTOMER_INFO);

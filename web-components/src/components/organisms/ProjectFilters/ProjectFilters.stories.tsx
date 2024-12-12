@@ -31,8 +31,6 @@ const Template: StoryFn = args => {
     <ProjectFilters
       {...args}
       filters={args.filters}
-      activeFilterIds={activeFilters}
-      onFilterChange={onFilterChange}
       onFilterReset={() => setActiveFilters([])}
       labels={{
         title: 'Filters',

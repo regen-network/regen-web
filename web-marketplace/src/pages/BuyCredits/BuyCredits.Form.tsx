@@ -250,11 +250,6 @@ export const BuyCreditsForm = ({
     [cardSellOrders, filteredCryptoSellOrders, paymentOption],
   );
 
-  const isWeb2UserWithoutWallet =
-    !!privActiveAccount?.email && !activeAccount?.addr;
-
-  const isVisitingUser = !activeAccount && !privActiveAccount;
-
   const purchase = usePurchase({
     paymentOption,
     retiring,
@@ -322,13 +317,11 @@ export const BuyCreditsForm = ({
           });
           warningModalContent.current = getWarningModalContent(
             currency,
-            isWeb2UserWithoutWallet,
             creditsInRequestedSellOrders,
             _,
             allowedDenomsData,
             data,
             creditsInAllSellOrders,
-            isVisitingUser,
           );
         }
       }
@@ -343,10 +336,8 @@ export const BuyCreditsForm = ({
       paymentMethodId,
       confirmationTokenId,
       currency,
-      isWeb2UserWithoutWallet,
       _,
       allowedDenomsData,
-      isVisitingUser,
     ],
   );
 

@@ -21,7 +21,9 @@ import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
 } from '../AllProjects/AllProjects.config';
+import ProjectFilterMobile from '../AllProjects/AllProjects.ProjectFilterMobile';
 import { getIsSoldOut } from '../AllProjects/utils/getIsSoldOut';
+import { useResetFilters } from '../hooks/useResetFilters';
 import { useProjectsContext } from '../Projects.context';
 
 export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
@@ -33,6 +35,8 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
       prefinanceProjects,
       prefinanceProjectsContent,
       soldOutProjectsIds,
+      allProjects,
+      hasCommunityProjects,
     } = useProjectsContext();
 
     const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
@@ -41,9 +45,17 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
       [_],
     );
     const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
-
+    const { resetFilters, showResetButton } = useResetFilters();
     return (
       <>
+        <ProjectFilterMobile
+          allProjects={allProjects}
+          resetFilters={resetFilters}
+          showResetButton={showResetButton}
+          className="lg:hidden w-full mb-15 mr-0"
+          hasCommunityProjects={hasCommunityProjects}
+          creditClassFilters={[]}
+        />
         {prefinanceProjectsContent && (
           <div className="flex items-start sm:items-center max-w-[696px] col-[1/-1] pt-[7px] sm:pt-[12px] pb-25 sm:pb-30">
             <img

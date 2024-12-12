@@ -11,6 +11,8 @@ export interface FilterOptions {
 }
 
 export interface Filter {
+  selectedFilters?: Record<string, boolean>;
+  onFilterChange?: (id: string) => void;
   title: string;
   displayType: 'tag' | 'checkbox' | 'children';
   options: FilterOptions[];
@@ -28,15 +30,11 @@ export interface ProjectFilterLabels {
 
 export default function ProjectFilters({
   filters,
-  activeFilterIds,
-  onFilterChange,
   onFilterReset,
   labels,
   showResetButton = true,
 }: {
   filters: Filter[];
-  activeFilterIds: string[];
-  onFilterChange: (id: string) => void;
   onFilterReset: () => void;
   labels: ProjectFilterLabels;
   showResetButton?: boolean;
@@ -45,23 +43,24 @@ export default function ProjectFilters({
   const handleExpand = (index: number) => {
     setIsExpanded({ ...isExpanded, [index]: !isExpanded[index] });
   };
-  const filtersLength = filters.length;
+  const displayedFilters = filters.filter(filter => !filter.hidden);
+  const filtersLength = displayedFilters.length;
+
   return (
     <>
       <div className="justify-between items-baseline flex">
         <div className="text-[18px] font-bold">{labels.title}</div>
-        <div
-          className="cursor-pointer text-[14px] text-sc-text-link font-bold"
-          onClick={onFilterReset}
-        >
-          {showResetButton && labels.reset}
-        </div>
+        {showResetButton && (
+          <div
+            className="cursor-pointer text-[14px] text-sc-text-link font-bold"
+            onClick={onFilterReset}
+          >
+            {labels.reset}
+          </div>
+        )}
       </div>
       <Divider sx={{ my: 5 }} />
-      {filters.map((filter, index) => {
-        if (filter.hidden) {
-          return null;
-        }
+      {displayedFilters.map((filter, index) => {
         return (
           <Box sx={{ mb: 5 }} key={filter.title}>
             <div className="text-[16px] font-bold mb-[20px] ">
@@ -82,8 +81,10 @@ export default function ProjectFilters({
                       name={name}
                       icon={icon}
                       key={id}
-                      isSelected={activeFilterIds.includes(id)}
-                      onClick={() => onFilterChange(id)}
+                      isSelected={filter.selectedFilters?.[id] ?? false}
+                      onClick={() =>
+                        filter.onFilterChange && filter.onFilterChange(id)
+                      }
                       sx={{ fontFamily: theme => theme.typography.fontFamily }}
                     />
                   ))}
@@ -93,11 +94,13 @@ export default function ProjectFilters({
                 <div className="flex flex-col">
                   {filter.options.map(({ name, icon, id }) => (
                     <CheckboxFilter
-                      isSelected={activeFilterIds.includes(id)}
+                      isSelected={filter.selectedFilters?.[id] ?? false}
                       name={name}
                       icon={icon}
                       key={id}
-                      onChange={() => onFilterChange(id)}
+                      onChange={() =>
+                        filter.onFilterChange && filter.onFilterChange(id)
+                      }
                     />
                   ))}
                 </div>

@@ -16,6 +16,7 @@ import {
 } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
+  creditClassInitialFiltersAtom,
   creditClassSelectedFiltersAtom,
   environmentTypeFiltersAtom,
   marketTypeFiltersAtom,
@@ -34,24 +35,24 @@ import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSecti
 
 import { PROJECTS_PER_PAGE } from './AllProjects/AllProjects.config';
 import { normalizeCreditClassFilters } from './AllProjects/AllProjects.normalizers';
-import {
-  getActiveFilterIds,
-  getResetFilters,
-  getSetActiveFilters,
-  getShowResetButton,
-} from './AllProjects/AllProjects.ProjectFilter.utils';
 import ProjectFilterBody from './AllProjects/AllProjects.ProjectFilterBody';
 import { useFetchCreditClasses } from './hooks/useFetchCreditClasses';
 import { useProjects } from './hooks/useProjects';
+import { useResetFilters } from './hooks/useResetFilters';
 
 const Projects = (): JSX.Element => {
   const { _ } = useLingui();
   const { page: routePage } = useParams();
   const location = useLocation();
-  const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
+  const [useCommunityProjects, setUseCommunityProjects] = useAtom(
+    useCommunityProjectsAtom,
+  );
   const [sort] = useAtom(projectsSortAtom);
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
     creditClassSelectedFiltersAtom,
+  );
+  const [creditClassInitialFilters, setCreditClassInitialFilters] = useAtom(
+    creditClassInitialFiltersAtom,
   );
   const [environmentTypeFilters, setEnvironmentTypeFilters] = useAtom(
     environmentTypeFiltersAtom,
@@ -150,34 +151,7 @@ const Projects = (): JSX.Element => {
     sanitySoldOutProjects,
   });
 
-  const setActiveFilters = (filters: string[]) =>
-    getSetActiveFilters({
-      filterIds: filters,
-      setMarketTypeFilters,
-      setEnvironmentTypeFilters,
-      setRegionFilters,
-      marketTypeFilters,
-      environmentTypeFilters,
-      regionFilters,
-    });
-
-  const activeFilterIds = getActiveFilterIds({
-    marketTypeFilters,
-    environmentTypeFilters,
-    regionFilters,
-  });
-
-  const resetFilters = getResetFilters({
-    setMarketTypeFilters,
-    setEnvironmentTypeFilters,
-    setRegionFilters,
-  });
-
-  const showResetButton = getShowResetButton({
-    marketTypeFilters,
-    environmentTypeFilters,
-    regionFilters,
-  });
+  const { resetFilters, showResetButton } = useResetFilters();
 
   const {
     creditClassesWithMetadata,
@@ -207,9 +181,9 @@ const Projects = (): JSX.Element => {
     if (
       Object.keys(creditClassSelectedFilters).length !==
       creditClassFilters.length
-    )
-      setCreditClassSelectedFilters(
-        creditClassFilters.reduce((acc, creditClassFilter) => {
+    ) {
+      const _creditClassInitialFilters = creditClassFilters.reduce(
+        (acc, creditClassFilter) => {
           return {
             ...acc,
             [creditClassFilter.path]: CREDIT_CLASS_FILTERS_TO_DESELECT.includes(
@@ -218,11 +192,16 @@ const Projects = (): JSX.Element => {
               ? false
               : true,
           };
-        }, {}),
+        },
+        {},
       );
+      setCreditClassInitialFilters(_creditClassInitialFilters);
+      setCreditClassSelectedFilters(_creditClassInitialFilters);
+    }
   }, [
     creditClassFilters,
     creditClassSelectedFilters,
+    setCreditClassInitialFilters,
     setCreditClassSelectedFilters,
   ]);
 
@@ -239,8 +218,6 @@ const Projects = (): JSX.Element => {
         <div className="w-[310px] py-[43px] px-[20px] hidden lg:block">
           <ProjectFilterBody
             allProjects={allProjects}
-            activeFilters={activeFilterIds}
-            setActiveFilters={setActiveFilters}
             resetFilters={resetFilters}
             showResetButton={showResetButton}
             hasCommunityProjects={hasCommunityProjects}

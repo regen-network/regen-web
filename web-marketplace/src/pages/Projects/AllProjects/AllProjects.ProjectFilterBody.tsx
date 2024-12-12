@@ -9,27 +9,20 @@ import {
   creditClassSelectedFiltersAtom,
   useCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
+import { IS_REGEN } from 'lib/env';
 
-import { useEcosystemTags } from 'hooks/useEcosystemTags';
-
+import { useClientFilters } from '../hooks/useClientFilters';
 import { CommunityFilter } from './AllProjects.CommunityFilter';
 import {
   COMMUNITY_FILTER_LABEL,
   CREDIT_CLASS_FILTER_LABEL,
-  UNREGISTERED_PATH,
 } from './AllProjects.constants';
 import { CreditClassFilters } from './AllProjects.CreditClassFilters';
-import {
-  filterEcosystemIds,
-  getClientFilters,
-} from './AllProjects.ProjectFilterBody.utils';
 import { CreditClassFilter, ProjectWithOrderData } from './AllProjects.types';
 
 type Props = {
   allProjects: ProjectWithOrderData[];
   creditClassFilters?: CreditClassFilter[];
-  activeFilters: string[];
-  setActiveFilters: (filters: string[]) => void;
   resetFilters: () => void;
   showResetButton?: boolean;
   hasCommunityProjects: boolean;
@@ -38,26 +31,21 @@ type Props = {
 const ProjectFilterBody = ({
   allProjects,
   creditClassFilters = [],
-  activeFilters,
-  setActiveFilters,
   resetFilters,
   showResetButton = true,
   hasCommunityProjects,
 }: Props) => {
   const { _ } = useLingui();
-  const ecosystemIcons = useEcosystemTags(filterEcosystemIds);
-  const clientFilters = getClientFilters(_, ecosystemIcons, allProjects);
+
+  const clientFilters = useClientFilters({
+    allProjects,
+  });
+
   const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
     creditClassSelectedFiltersAtom,
   );
   const location = useLocation();
-  const onFilterChange = (id: string) => {
-    const newFilters = activeFilters.includes(id)
-      ? activeFilters.filter(filterId => filterId !== id)
-      : [...activeFilters, id];
-    setActiveFilters(newFilters);
-  };
 
   const prefinance = location.pathname.includes('prefinance');
 
@@ -71,19 +59,17 @@ const ProjectFilterBody = ({
           title: _(CREDIT_CLASS_FILTER_LABEL),
           displayType: 'children',
           options: [],
-          hidden: prefinance,
+          hidden: prefinance || !IS_REGEN,
         },
         {
           children: <CommunityFilter />,
           title: _(COMMUNITY_FILTER_LABEL),
           displayType: 'children',
           options: [],
-          hidden: !hasCommunityProjects || prefinance,
+          hidden: !hasCommunityProjects || prefinance || !IS_REGEN,
         },
         ...clientFilters,
       ]}
-      activeFilterIds={activeFilters}
-      onFilterChange={onFilterChange}
       onFilterReset={resetFilters}
       showResetButton={showResetButton}
       labels={{

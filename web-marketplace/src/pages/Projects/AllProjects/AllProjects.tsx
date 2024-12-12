@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -19,14 +19,7 @@ import { pxToRem } from 'web-components/src/theme/muiTheme';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import {
-  creditClassSelectedFiltersAtom,
-  environmentTypeFiltersAtom,
-  marketTypeFiltersAtom,
-  projectsSortAtom,
-  regionFiltersAtom,
-  useCommunityProjectsAtom,
-} from 'lib/atoms/projects.atoms';
+import { projectsSortAtom } from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import {
   DRAFT_TEXT,
@@ -35,12 +28,7 @@ import {
   getProjectCardButtonMapping,
   getProjectCardPurchaseDetailsTitleMapping,
 } from 'lib/constants/shared.constants';
-import {
-  COLOR_SCHEME,
-  CREDIT_CLASS_FILTERS_TO_DESELECT,
-  IS_REGEN,
-  IS_TERRASOS,
-} from 'lib/env';
+import { COLOR_SCHEME, IS_REGEN, IS_TERRASOS } from 'lib/env';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -48,6 +36,7 @@ import { TebuBannerWrapper } from 'components/organisms/TebuBannerWrapper/TebuBa
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import { useFetchCreditClasses } from '../hooks/useFetchCreditClasses';
+import { useResetFilters } from '../hooks/useResetFilters';
 import { useProjectsContext } from '../Projects.context';
 import {
   API_URI,
@@ -61,14 +50,7 @@ import {
   VOLUNTARY_MARKET,
 } from './AllProjects.constants';
 import { normalizeCreditClassFilters } from './AllProjects.normalizers';
-import {
-  getActiveFilterIds,
-  getResetFilters,
-  getSetActiveFilters,
-  getShowResetButton,
-} from './AllProjects.ProjectFilter.utils';
 import ProjectFilterMobile from './AllProjects.ProjectFilterMobile';
-import { SideFilter } from './AllProjects.SideFilter';
 import { TerrasosCredits } from './AllProjects.TerrasosCredits';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
 import { getIsSoldOut } from './utils/getIsSoldOut';
@@ -90,48 +72,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   );
   const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
 
-  const [useCommunityProjects, setUseCommunityProjects] = useAtom(
-    useCommunityProjectsAtom,
-  );
-  const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
-    creditClassSelectedFiltersAtom,
-  );
-
-  const [environmentTypeFilters, setEnvironmentTypeFilters] = useAtom(
-    environmentTypeFiltersAtom,
-  );
-  const [regionFilters, setRegionFilters] = useAtom(regionFiltersAtom);
-  const [marketTypeFilters, setMarketTypeFilters] = useAtom(
-    marketTypeFiltersAtom,
-  );
-  const setActiveFilters = (filters: string[]) =>
-    getSetActiveFilters({
-      filterIds: filters,
-      setMarketTypeFilters,
-      setEnvironmentTypeFilters,
-      setRegionFilters,
-      marketTypeFilters,
-      environmentTypeFilters,
-      regionFilters,
-    });
-
-  const activeFilterIds = getActiveFilterIds({
-    marketTypeFilters,
-    environmentTypeFilters,
-    regionFilters,
-  });
-
-  const resetFilters = getResetFilters({
-    setMarketTypeFilters,
-    setEnvironmentTypeFilters,
-    setRegionFilters,
-  });
-
-  const showResetButton = getShowResetButton({
-    marketTypeFilters,
-    environmentTypeFilters,
-    regionFilters,
-  });
+  const { showResetButton, resetFilters } = useResetFilters();
 
   const {
     creditClassesWithMetadata,
@@ -179,21 +120,10 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     [_],
   );
 
-
-
   const onBuyButtonClick = useOnBuyButtonClick();
 
   const handleSort = (event: SelectChangeEvent<unknown>): void => {
     setSort(event.target.value as string);
-  };
-
-  const showFiltersReset =
-    useCommunityProjects !== undefined ||
-    Object.keys(creditClassSelectedFilters).length > 0;
-
-  const resetFilter = () => {
-    setCreditClassSelectedFilters({});
-    setUseCommunityProjects(undefined);
   };
 
   if (isSanityCreditClassesLoading || isCreditClassesWithMetadataLoading)
@@ -214,12 +144,11 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
         >
           <ProjectFilterMobile
             allProjects={allProjects}
-            activeFilters={activeFilterIds}
-            setActiveFilters={setActiveFilters}
             resetFilters={resetFilters}
             showResetButton={showResetButton}
             className="lg:hidden w-full mb-15 mr-0"
             hasCommunityProjects={hasCommunityProjects}
+            creditClassFilters={creditClassFilters}
           />
 
           {IS_REGEN && (
@@ -342,9 +271,9 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           className="lg:mt-[36px]"
         >
           <>
-            {showFiltersReset && (
+            {showResetButton && (
               <Box
-                onClick={IS_REGEN ? resetFilter : resetFilters}
+                onClick={resetFilters}
                 sx={{
                   color: 'secondary.main',
                   cursor: 'pointer',

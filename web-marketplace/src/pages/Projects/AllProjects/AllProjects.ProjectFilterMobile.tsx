@@ -14,8 +14,6 @@ import { CreditClassFilter, ProjectWithOrderData } from './AllProjects.types';
 type Props = {
   allProjects: ProjectWithOrderData[];
   sx?: SxProps<Theme>;
-  activeFilters: string[];
-  setActiveFilters: (filters: string[]) => void;
   resetFilters: () => void;
   className?: string;
   showResetButton?: boolean;
@@ -25,8 +23,6 @@ type Props = {
 
 const ProjectFilterMobile = ({
   allProjects,
-  activeFilters,
-  setActiveFilters,
   resetFilters,
   sx = [],
   className = '',
@@ -64,8 +60,6 @@ const ProjectFilterMobile = ({
         <ProjectFilterBody
           allProjects={allProjects}
           creditClassFilters={creditClassFilters}
-          activeFilters={activeFilters}
-          setActiveFilters={setActiveFilters}
           resetFilters={resetFilters}
           showResetButton={showResetButton}
           hasCommunityProjects={hasCommunityProjects}

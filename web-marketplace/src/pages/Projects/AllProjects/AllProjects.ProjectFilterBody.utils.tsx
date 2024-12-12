@@ -9,6 +9,7 @@ import {
   FilterOptions,
 } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
+import { UseStateSetter } from 'types/react/use-state';
 import { IS_TERRASOS } from 'lib/env';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
@@ -159,7 +160,7 @@ const marketCheckboxes = [
   },
 ];
 
-function getMarketCheckboxes(
+export function getMarketCheckboxes(
   _: TranslatorType,
   marketTypes: string[],
 ): FilterOptions[] {
@@ -172,12 +173,6 @@ function getMarketCheckboxes(
     }));
 }
 
-export const initialActiveFilterKeysByType = {
-  regionFilters: [],
-  environmentTypeFilters: [],
-  marketTypeFilters: marketCheckboxes.map(({ id }) => id),
-};
-
 export const initialActiveFilters = {
   regionFilters: {},
   environmentTypeFilters: {},
@@ -186,7 +181,7 @@ export const initialActiveFilters = {
   ),
 };
 
-const extractUniqueValues = (
+export const extractUniqueValues = (
   allProjects: ProjectWithOrderData[],
   key: keyof ProjectWithOrderData,
   toLowerCase: boolean,
@@ -203,11 +198,22 @@ const extractUniqueValues = (
   ];
 };
 
-export function getClientFilters(
-  _: TranslatorType,
-  ecosystemIcons: Record<string, string>,
-  allProjects: ProjectWithOrderData[],
-): Filter[] {
+type GetClientFiltersParams = {
+  _: TranslatorType;
+  ecosystemIcons: Record<string, string>;
+  allProjects: ProjectWithOrderData[];
+  setEnvironmentTypeFilters: UseStateSetter<Record<string, boolean>>;
+  setRegionFilters: UseStateSetter<Record<string, boolean>>;
+  setMarketTypeFilters: UseStateSetter<Record<string, boolean>>;
+};
+export function getClientFilters({
+  _,
+  ecosystemIcons,
+  allProjects,
+  setEnvironmentTypeFilters,
+  setRegionFilters,
+  setMarketTypeFilters,
+}: GetClientFiltersParams): Filter[] {
   if (IS_TERRASOS) {
     const uniqueRegions = [
       ...new Set(
@@ -232,17 +238,26 @@ export function getClientFilters(
         displayType: 'tag',
         title: _(msg`Region`),
         options: getRegionTags(_, uniqueRegions),
+        onFilterChange: (id: string) => {
+          setRegionFilters(prev => ({ ...prev, [id]: !prev[id] }));
+        },
       },
       {
         displayType: 'tag',
         title: _(msg`Ecosystem`),
         options: getEcosystemTags(_, ecosystemIcons, uniqueEcosystemTypes),
         hasCollapse: true,
+        onFilterChange: (id: string) => {
+          setEnvironmentTypeFilters(prev => ({ ...prev, [id]: !prev[id] }));
+        },
       },
       {
         displayType: 'checkbox',
         title: _(msg`Market`),
         options: getMarketCheckboxes(_, uniqueMarketTypes),
+        onFilterChange: (id: string) => {
+          setMarketTypeFilters(prev => ({ ...prev, [id]: !prev[id] }));
+        },
       },
     ];
   }

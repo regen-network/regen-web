@@ -4,13 +4,8 @@ import { Box } from '@mui/material';
 import RegionIndicatorIcon from 'web-components/src/components/icons/terrasos/ColombiaRegionIcon';
 import HectaresBadge from 'web-components/src/components/icons/terrasos/HectaresBadge';
 import SvgWithSelectedColor from 'web-components/src/components/icons/utils/SvgWithSelectedColor';
-import {
-  Filter,
-  FilterOptions,
-} from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
+import { FilterOptions } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
-import { UseStateSetter } from 'types/react/use-state';
-import { IS_TERRASOS } from 'lib/env';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { COMPLIANCE_MARKET, VOLUNTARY_MARKET } from './AllProjects.constants';
@@ -197,69 +192,3 @@ export const extractUniqueValues = (
     ),
   ];
 };
-
-type GetClientFiltersParams = {
-  _: TranslatorType;
-  ecosystemIcons: Record<string, string>;
-  allProjects: ProjectWithOrderData[];
-  setEnvironmentTypeFilters: UseStateSetter<Record<string, boolean>>;
-  setRegionFilters: UseStateSetter<Record<string, boolean>>;
-  setMarketTypeFilters: UseStateSetter<Record<string, boolean>>;
-};
-export function getClientFilters({
-  _,
-  ecosystemIcons,
-  allProjects,
-  setEnvironmentTypeFilters,
-  setRegionFilters,
-  setMarketTypeFilters,
-}: GetClientFiltersParams): Filter[] {
-  if (IS_TERRASOS) {
-    const uniqueRegions = [
-      ...new Set(
-        allProjects
-          .map(project => project.region?.toLowerCase())
-          .filter(Boolean),
-      ),
-    ] as string[];
-    const uniqueEcosystemTypes = extractUniqueValues(
-      allProjects,
-      'ecosystemType',
-      true,
-    );
-    const uniqueMarketTypes = extractUniqueValues(
-      allProjects,
-      'marketType',
-      false,
-    );
-
-    return [
-      {
-        displayType: 'tag',
-        title: _(msg`Region`),
-        options: getRegionTags(_, uniqueRegions),
-        onFilterChange: (id: string) => {
-          setRegionFilters(prev => ({ ...prev, [id]: !prev[id] }));
-        },
-      },
-      {
-        displayType: 'tag',
-        title: _(msg`Ecosystem`),
-        options: getEcosystemTags(_, ecosystemIcons, uniqueEcosystemTypes),
-        hasCollapse: true,
-        onFilterChange: (id: string) => {
-          setEnvironmentTypeFilters(prev => ({ ...prev, [id]: !prev[id] }));
-        },
-      },
-      {
-        displayType: 'checkbox',
-        title: _(msg`Market`),
-        options: getMarketCheckboxes(_, uniqueMarketTypes),
-        onFilterChange: (id: string) => {
-          setMarketTypeFilters(prev => ({ ...prev, [id]: !prev[id] }));
-        },
-      },
-    ];
-  }
-  return [];
-}

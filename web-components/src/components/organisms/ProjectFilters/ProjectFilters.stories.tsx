@@ -6,32 +6,69 @@ import RegionIndicatorIcon from '../../icons/terrasos/ColombiaRegionIcon';
 import HectaresBadge from '../../icons/terrasos/HectaresBadge';
 import SvgWithSelectedColor from '../../icons/utils/SvgWithSelectedColor';
 import ProjectFilters, { Filter, FilterOptions } from './ProjectFilters';
+import { hasChangedFilters } from './ProjectFilters.utils';
 
+const INITIAL_FILTERS = {};
+const INITIAL_MARKET_FILTERS = {
+  COMPLIANCE: true,
+  VOLUNTARY: true,
+};
 export default {
   title: 'Organisms/ProjectFilters',
   component: ProjectFilters,
 } as Meta;
 
-const initialActiveFilters = [
-  'AMAZON',
-  'TROPICAL_VERY_HUMID_FOREST',
-  'VOLUNTARY',
-];
-
 const Template: StoryFn = args => {
-  const [activeFilters, setActiveFilters] =
-    useState<string[]>(initialActiveFilters);
-  const onFilterChange = (id: string) => {
-    const newFilters = activeFilters.includes(id)
-      ? activeFilters.filter(filterId => filterId !== id)
-      : [...activeFilters, id];
-    setActiveFilters(newFilters);
-  };
+  const [regionFilters, setRegionFilters] =
+    useState<Record<string, boolean>>(INITIAL_FILTERS);
+  const [ecosystemFilters, setEcosystemFilters] =
+    useState<Record<string, boolean>>(INITIAL_FILTERS);
+  const [marketFilters, setMarketFilters] = useState<Record<string, boolean>>(
+    INITIAL_MARKET_FILTERS,
+  );
+
   return (
     <ProjectFilters
-      {...args}
-      filters={args.filters}
-      onFilterReset={() => setActiveFilters([])}
+      filters={[
+        {
+          displayType: 'tag',
+          title: 'Region',
+          options: regionTags,
+          selectedFilters: regionFilters,
+          onFilterChange: id => {
+            setRegionFilters(prev => ({ ...prev, [id]: !prev[id] }));
+          },
+        },
+        {
+          displayType: 'tag',
+          title: 'Ecosystem',
+          options: ecosystemTags,
+          hasCollapse: true,
+          selectedFilters: ecosystemFilters,
+          onFilterChange: id => {
+            setEcosystemFilters(prev => ({ ...prev, [id]: !prev[id] }));
+          },
+        },
+        {
+          displayType: 'checkbox',
+          title: 'Market',
+          options: marketCheckboxes,
+          selectedFilters: marketFilters,
+          onFilterChange: id => {
+            setMarketFilters(prev => ({ ...prev, [id]: !prev[id] }));
+          },
+        },
+      ]}
+      showResetButton={
+        hasChangedFilters(regionFilters, INITIAL_FILTERS) ||
+        hasChangedFilters(ecosystemFilters, INITIAL_FILTERS) ||
+        hasChangedFilters(marketFilters, INITIAL_MARKET_FILTERS)
+      }
+      onFilterReset={() => {
+        setRegionFilters(INITIAL_FILTERS);
+        setEcosystemFilters(INITIAL_FILTERS);
+        setMarketFilters(INITIAL_MARKET_FILTERS);
+      }}
       labels={{
         title: 'Filters',
         reset: 'Reset',
@@ -41,7 +78,6 @@ const Template: StoryFn = args => {
     />
   );
 };
-// add another component
 
 const ecosystemIconSx = {
   width: '30px',
@@ -160,26 +196,5 @@ const marketCheckboxes = [
   },
 ];
 
-const filters: Filter[] = [
-  {
-    displayType: 'tag',
-    title: 'Region',
-    options: regionTags,
-  },
-  {
-    displayType: 'tag',
-    title: 'Ecosystem',
-    options: ecosystemTags,
-    hasCollapse: true,
-  },
-  {
-    displayType: 'checkbox',
-    title: 'Market',
-    options: marketCheckboxes,
-  },
-];
-
 export const Default = Template.bind({});
-Default.args = {
-  filters: filters,
-};
+Default.args = {};

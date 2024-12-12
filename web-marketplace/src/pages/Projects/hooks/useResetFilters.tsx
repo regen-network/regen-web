@@ -1,6 +1,8 @@
 import { useCallback, useMemo } from 'react';
 import { useAtom } from 'jotai';
 
+import { hasChangedFilters } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters.utils';
+
 import {
   creditClassInitialFiltersAtom,
   creditClassSelectedFiltersAtom,
@@ -43,21 +45,22 @@ export const useResetFilters = () => {
     setRegionFilters,
     setUseCommunityProjects,
   ]);
-  console.log('creditClassSelectedFilters', creditClassSelectedFilters);
-  console.log('creditClassInitialFilters', creditClassInitialFilters);
+
   const showResetButton = useMemo(
     () =>
-      Object.entries(marketTypeFilters).filter(([_, value]) => value).length !==
-        Object.entries(initialActiveFilters.marketTypeFilters).length ||
-      Object.entries(environmentTypeFilters).filter(([_, value]) => value)
-        .length !==
-        Object.entries(initialActiveFilters.environmentTypeFilters).length ||
-      Object.entries(regionFilters).filter(([_, value]) => value).length !==
-        Object.entries(initialActiveFilters.regionFilters).length ||
-      Object.entries(creditClassSelectedFilters).filter(([_, value]) => value)
-        .length !==
-        Object.entries(creditClassInitialFilters).filter(([_, value]) => value)
-          .length ||
+      hasChangedFilters(
+        marketTypeFilters,
+        initialActiveFilters.marketTypeFilters,
+      ) ||
+      hasChangedFilters(
+        environmentTypeFilters,
+        initialActiveFilters.environmentTypeFilters,
+      ) ||
+      hasChangedFilters(regionFilters, initialActiveFilters.regionFilters) ||
+      hasChangedFilters(
+        creditClassSelectedFilters,
+        creditClassInitialFilters,
+      ) ||
       useCommunityProjects !== DEFAULT_COMMUNITY_PROJECTS_FILTER,
     [
       creditClassInitialFilters,

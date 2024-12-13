@@ -5,7 +5,7 @@ import TagFilter from './ProjectFilter.TagFilter';
 import CheckboxFilter from './ProjectFilters.CheckboxFilter';
 
 export interface FilterOptions {
-  name: string;
+  name: string | JSX.Element;
   icon: JSX.Element;
   id: string;
 }

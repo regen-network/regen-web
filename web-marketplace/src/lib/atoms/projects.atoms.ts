@@ -10,6 +10,7 @@ export const useCommunityProjectsAtom = atom<boolean | undefined>(
 );
 export const creditClassSelectedFiltersAtom = atom<Record<string, boolean>>({});
 export const creditClassInitialFiltersAtom = atom<Record<string, boolean>>({});
+export const buyingOptionsFiltersAtom = atom<Record<string, boolean>>({});
 export const projectsSortAtom = atom(sortOptions[0].value);
 
 export const environmentTypeFiltersAtom = atom<Record<string, boolean>>(

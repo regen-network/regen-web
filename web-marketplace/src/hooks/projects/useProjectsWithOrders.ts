@@ -21,7 +21,7 @@ import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/ma
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
-import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/sanity/getAllPrefinanceProjectsQuery/getAllPrefinanceProjectsQuery';
+import { getAllSanityProjectsQuery } from 'lib/queries/react-query/sanity/getAllProjectsQuery/getAllProjectsQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -136,24 +136,22 @@ export function useProjectsWithOrders({
       }),
     );
 
-  // Sanity prefinance projects
-  const {
-    data: prefinanceProjectsData,
-    isFetching: isLoadingPrefinanceProjects,
-  } = useQuery(
-    getAllSanityPrefinanceProjectsQuery({
-      sanityClient,
-      enabled: !!sanityClient,
-      languageCode: selectedLanguage,
-    }),
-  );
+  // Sanity projects
+  const { data: sanityProjectsData, isFetching: isLoadingSanityProjects } =
+    useQuery(
+      getAllSanityProjectsQuery({
+        sanityClient,
+        enabled: !!sanityClient,
+        languageCode: selectedLanguage,
+      }),
+    );
 
   // OffChainProjects
   const { allOffChainProjects, isAllOffChainProjectsLoading } =
     useFetchAllOffChainProjects({
       sanityCreditClassesData: creditClassData,
       enabled: enableOffchainProjectsQuery,
-      prefinanceProjectsData,
+      sanityProjectsData,
     });
 
   const onlyOffChainProjects = allOffChainProjects.filter(
@@ -450,7 +448,7 @@ export function useProjectsWithOrders({
       isLoadingSellOrders ||
       !marketplaceClient ||
       isLoadingSanityCreditClasses ||
-      isLoadingPrefinanceProjects ||
+      isLoadingSanityProjects ||
       sanityProjectsLoading ||
       isLoadingProject ||
       isClassesMetadataLoading ||

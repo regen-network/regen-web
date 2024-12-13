@@ -8,7 +8,7 @@ export default function CheckboxFilter({
   onChange,
 }: {
   icon: JSX.Element;
-  name: string;
+  name: string | JSX.Element;
   isSelected: boolean;
   onChange?: () => void;
 }) {

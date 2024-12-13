@@ -6,7 +6,7 @@ import { ProjectTag } from '../../molecules/ProjectTag/ProjectTag';
 
 interface TagFilterProps {
   icon: JSX.Element;
-  name: string;
+  name: string | JSX.Element;
   isSelected: boolean;
   onClick?: () => void;
   sx?: SxProps<Theme>;

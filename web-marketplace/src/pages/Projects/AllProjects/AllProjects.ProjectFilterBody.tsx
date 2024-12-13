@@ -5,10 +5,7 @@ import { useAtom } from 'jotai';
 
 import ProjectFilters from 'web-components/src/components/organisms/ProjectFilters';
 
-import {
-  creditClassSelectedFiltersAtom,
-  useCommunityProjectsAtom,
-} from 'lib/atoms/projects.atoms';
+import { buyingOptionsFiltersAtom } from 'lib/atoms/projects.atoms';
 import { IS_REGEN } from 'lib/env';
 
 import { useClientFilters } from '../hooks/useClientFilters';
@@ -18,6 +15,7 @@ import {
   CREDIT_CLASS_FILTER_LABEL,
 } from './AllProjects.constants';
 import { CreditClassFilters } from './AllProjects.CreditClassFilters';
+import { getRegionTags } from './AllProjects.ProjectFilterBody.utils';
 import { CreditClassFilter, ProjectWithOrderData } from './AllProjects.types';
 
 type Props = {
@@ -41,17 +39,27 @@ const ProjectFilterBody = ({
     allProjects,
   });
 
-  const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
-  const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
-    creditClassSelectedFiltersAtom,
-  );
   const location = useLocation();
 
   const prefinance = location.pathname.includes('prefinance');
 
+  const [buyingOptionsFilters, setBuyingOptionsFilterAtom] = useAtom(
+    buyingOptionsFiltersAtom,
+  );
+
   return (
     <ProjectFilters
       filters={[
+        {
+          selectedFilters: buyingOptionsFilters,
+          displayType: 'checkbox',
+          title: _(msg`Buying options`),
+          options: [],
+          onFilterChange: (id: string) => {
+            setBuyingOptionsFilterAtom(prev => ({ ...prev, [id]: !prev[id] }));
+          },
+          hidden: !IS_REGEN,
+        },
         {
           children: (
             <CreditClassFilters creditClassFilters={creditClassFilters} />

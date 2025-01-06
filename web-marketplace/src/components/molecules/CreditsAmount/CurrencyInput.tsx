@@ -56,10 +56,22 @@ export const CurrencyInput = ({
 
   const handleOnChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
+      // Allow only two decimals when they are all zeros
+      const value = event.target.value;
+      const decimalPart = value.split('.')?.[1];
+      if (
+        decimalPart &&
+        decimalPart.length > 2 &&
+        decimalPart.startsWith('00') &&
+        paymentOption === PAYMENT_OPTIONS.CARD
+      ) {
+        event.target.value = value.slice(0, -1);
+      }
+
       onChange(event);
       handleCurrencyAmountChange(event);
     },
-    [handleCurrencyAmountChange, onChange],
+    [handleCurrencyAmountChange, onChange, paymentOption],
   );
 
   const handleInput = useCallback(
@@ -78,6 +90,7 @@ export const CurrencyInput = ({
       if (
         (decimalPart &&
           decimalPart.length > 2 &&
+          !decimalPart.startsWith('00') &&
           paymentOption === PAYMENT_OPTIONS.CARD) ||
         /^0[0-9]/.test(value)
       ) {

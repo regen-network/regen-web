@@ -1,5 +1,4 @@
 import { USD_DENOM, USDC_DENOM } from 'config/allowedBaseDenoms';
-import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from 'web-marketplace/test/test-utils';
 
 import { ProjectPrefinancing } from 'web-components/src/components/cards/ProjectCard/ProjectCard.types';

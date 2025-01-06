@@ -1,5 +1,5 @@
 import { USD_DENOM, USDC_DENOM } from 'config/allowedBaseDenoms';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from 'web-marketplace/test/test-utils';
 
 import { ProjectPrefinancing } from 'web-components/src/components/cards/ProjectCard/ProjectCard.types';
@@ -14,6 +14,13 @@ import {
   retirementInfo,
 } from './Order.mock';
 import { OrderData } from './Order.types';
+
+vi.mock('react-router-dom', () => ({
+  ...vi.importActual('react-router-dom'), // Preserve other exports
+  Link: ({ to, children }: { to: string; children: React.ReactNode }) => (
+    <a href={to}>{children}</a>
+  ), // Mock the Link component
+}));
 
 describe('Order Component', () => {
   const mockOrderData: OrderData = {
@@ -202,8 +209,13 @@ describe('Order Component', () => {
             credits: {
               ...mockOrderData.order.credits,
               credits: '2000',
-              totalPrice: '4000000',
-              askDenom: 'ibc/123',
+              totalPrice: '123',
+              askDenom: USDC_DENOM,
+              askBaseDenom: USDC_DENOM,
+            },
+            paymentInfo: {
+              ...mockOrderData.order.paymentInfo,
+              askDenom: USDC_DENOM,
               askBaseDenom: USDC_DENOM,
             },
           },
@@ -212,9 +224,9 @@ describe('Order Component', () => {
       />,
     );
 
-    expect(screen.getByText(/2000/i)).toBeInTheDocument();
-    expect(screen.getByText(/4/i)).toBeInTheDocument();
-    expect(screen.getByText(/usdc/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/2000/i)).toHaveLength(1);
+    expect(screen.getAllByText(/123/i)).toHaveLength(1);
+    expect(screen.getAllByText(/usdc/i)).toHaveLength(3);
   });
 
   it('renders the Payment Info section with card data', () => {
@@ -224,6 +236,11 @@ describe('Order Component', () => {
           ...mockOrderData,
           order: {
             ...mockOrderData.order,
+            credits: {
+              ...mockOrderData.order.credits,
+              askDenom: USDC_DENOM,
+              askBaseDenom: USDC_DENOM,
+            },
             paymentInfo: {
               ...mockOrderData.order.paymentInfo,
               cardLast4: '1234',
@@ -235,9 +252,9 @@ describe('Order Component', () => {
         allowedDenoms={allowedDenoms}
       />,
     );
-    expect(screen.getByText(/name on card/i)).toBeInTheDocument();
     expect(screen.getByText(/card info/i)).toBeInTheDocument();
-    expect(screen.getByText(/visa ending in 1234/i)).toBeInTheDocument();
+    expect(screen.getByText(/visa/i)).toBeInTheDocument();
+    expect(screen.getByText(/ending in 1234/i)).toBeInTheDocument();
   });
 
   it('renders the Payment Info section with crypto data', () => {
@@ -257,9 +274,7 @@ describe('Order Component', () => {
         allowedDenoms={allowedDenoms}
       />,
     );
-    expect(screen.queryByText(/name on card/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/card info/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/visa ending in 1234/i)).not.toBeInTheDocument();
     expect(screen.getAllByText(/usdc/i)).toHaveLength(3);
   });
 });

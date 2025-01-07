@@ -34,6 +34,8 @@ export const useProjects = ({
     hasCommunityProjects,
     prefinanceProjectsCount,
     prefinanceProjects,
+    filteredSellOrders,
+    sanityProjects,
   } = useProjectsWithOrders({
     limit: PROJECTS_PER_PAGE,
     offset,
@@ -59,5 +61,7 @@ export const useProjects = ({
     hasCommunityProjects,
     prefinanceProjectsCount,
     prefinanceProjects,
+    filteredSellOrders,
+    sanityProjects,
   };
 };

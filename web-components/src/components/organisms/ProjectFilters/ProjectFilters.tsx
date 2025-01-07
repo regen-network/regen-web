@@ -8,6 +8,7 @@ export interface FilterOptions {
   name: string | JSX.Element;
   icon: JSX.Element;
   id: string;
+  disabled?: string;
 }
 
 export interface Filter {

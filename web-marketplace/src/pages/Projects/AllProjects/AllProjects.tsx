@@ -93,23 +93,14 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const {
     allProjects,
-    allOnChainProjects,
     projects,
     projectsCount,
-    haveOffChainProjects,
     hasCommunityProjects,
     pagesCount,
     soldOutProjectsIds,
     loading,
+    creditClassFilters,
   } = useProjectsContext();
-
-  const { creditClassFilters } = normalizeCreditClassFilters({
-    creditClassesWithMetadata,
-    sanityCreditClassesData,
-    allOnChainProjects,
-    haveOffChainProjects,
-    _,
-  });
 
   const sortOptionsTranslated = useMemo(
     () =>

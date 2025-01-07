@@ -61,7 +61,6 @@ export const CreditsInput = ({
   );
   const handleOnFocus = useCallback(
     (event: FocusEvent<HTMLInputElement>): void => {
-      // If the value is 0, set it to '
       const value = event.target.value;
       if (value === '0') {
         setValue(CREDITS_AMOUNT, 0, { shouldValidate: true });

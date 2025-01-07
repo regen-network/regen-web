@@ -206,3 +206,20 @@ export const formatCurrencyAmount = (
 
   return formattedValue;
 };
+
+export const shouldFormatValue = (
+  decimalPart: string | undefined,
+  paymentOption: string,
+  value: string,
+): boolean => {
+  const isDecimalPartValid = decimalPart && decimalPart.length > 2;
+  const startsWithZero = decimalPart && decimalPart.startsWith('00');
+  const isCardPayment = paymentOption === PAYMENT_OPTIONS.CARD;
+
+  const condition1 = isDecimalPartValid && startsWithZero && isCardPayment;
+  const condition2 =
+    (isDecimalPartValid && !startsWithZero && isCardPayment) ||
+    /^0[0-9]/.test(value);
+
+  return condition1 || condition2;
+};

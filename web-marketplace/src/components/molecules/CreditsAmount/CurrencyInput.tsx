@@ -18,7 +18,7 @@ import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import { CURRENCY, CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import { CurrencyInputProps } from './CreditsAmount.types';
-import { formatCurrencyAmount } from './CreditsAmount.utils';
+import { formatCurrencyAmount, shouldFormatValue } from './CreditsAmount.utils';
 
 const CustomSelect = lazy(
   () =>
@@ -56,18 +56,11 @@ export const CurrencyInput = ({
 
   const handleOnChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      // Allow only two decimals when they are all zeros
       const value = event.target.value;
       const decimalPart = value.split('.')?.[1];
-      if (
-        decimalPart &&
-        decimalPart.length > 2 &&
-        decimalPart.startsWith('00') &&
-        paymentOption === PAYMENT_OPTIONS.CARD
-      ) {
+      if (shouldFormatValue(decimalPart, paymentOption, value)) {
         event.target.value = value.slice(0, -1);
       }
-
       onChange(event);
       handleCurrencyAmountChange(event);
     },
@@ -85,15 +78,8 @@ export const CurrencyInput = ({
           shouldValidate: true,
         });
       }
-      // Check if the value has a decimal part longer than 2 digits,
-      // or if the value starts with leading zero/s
-      if (
-        (decimalPart &&
-          decimalPart.length > 2 &&
-          !decimalPart.startsWith('00') &&
-          paymentOption === PAYMENT_OPTIONS.CARD) ||
-        /^0[0-9]/.test(value)
-      ) {
+
+      if (shouldFormatValue(decimalPart, paymentOption, value)) {
         // remove extra leading zeros
         value = value.replace(/^0+/, '');
 

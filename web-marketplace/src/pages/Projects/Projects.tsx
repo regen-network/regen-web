@@ -261,6 +261,7 @@ const Projects = (): JSX.Element => {
               prefinanceProjects,
               prefinanceProjectsContent,
               soldOutProjectsIds,
+              creditClassFilters,
             }}
           />
         </div>

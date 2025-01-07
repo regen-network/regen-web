@@ -1,3 +1,4 @@
+import { plural } from '@lingui/macro';
 import Parser from '@rdfjs/parser-jsonld';
 import factory from 'rdf-ext';
 import DatasetExt from 'rdf-ext/lib/Dataset';
@@ -99,9 +100,21 @@ export function getProjectBaseData(
 
 export type qudtUnit = 'unit:HA' | 'unit:AC';
 
-export const getAreaUnit = (value?: qudtUnit): string => {
-  if (!value) return '';
-  return QUDT_UNIT_MAP[value] || '';
+export const getAreaUnit = (value?: qudtUnit, area?: number): string => {
+  if (!value || !area) return '';
+  if (value === 'unit:HA') {
+    return plural(area, {
+      one: 'hectare',
+      other: 'hectares',
+    });
+  }
+  if (value === 'unit:AC') {
+    return plural(area, {
+      one: 'acre',
+      other: 'acres',
+    });
+  }
+  return value;
 };
 
 export function getProjectShapeIri(creditClassId: string): string {

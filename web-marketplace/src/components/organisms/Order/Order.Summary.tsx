@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
 
 import { BlockchainIcon } from 'web-components/src/components/icons/BlockchainIcon';
@@ -13,7 +14,6 @@ import { Link } from 'components/atoms';
 import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
-import { allowedDenoms } from 'components/organisms/Order/Order.mock';
 
 import { OrderSummarySection } from './Order.Summary.Section';
 import { OrderSummaryRow } from './Order.SummaryRow';
@@ -29,6 +29,7 @@ interface OrderSummaryProps {
   blockchainDetails: BlockchainDetailsData;
   creditsData: CreditsData;
   paymentInfo: PaymentInfoData;
+  allowedDenoms?: AllowedDenom[];
 }
 
 export const OrderSummary = ({
@@ -36,17 +37,19 @@ export const OrderSummary = ({
   retirementInfo,
   blockchainDetails,
   paymentInfo,
+  allowedDenoms,
 }: OrderSummaryProps) => {
   const { _ } = useLingui();
   const { purchaseDate, blockchainRecord } = blockchainDetails;
-  const { nameOnCard, askDenom, askBaseDenom, cardLast4, cardBrand } =
-    paymentInfo;
-  const isCardPayment = nameOnCard && cardLast4 && askDenom === USD_DENOM;
-  const isTradable = retirementInfo.tradableCredits !== null;
-  const { reason, location, tradableCredits } = retirementInfo;
-  const { credits, price } = creditsData;
+  const { askDenom, askBaseDenom, cardLast4, cardBrand } = paymentInfo;
+  const isCardPayment = cardLast4 && askDenom === USD_DENOM;
+  const { reason, location, retiredCredits } = retirementInfo;
+  const { credits, totalPrice } = creditsData;
 
-  const totalPrice = +credits * +price;
+  const denom = allowedDenoms?.find(denom => denom.bankDenom === askDenom);
+  const displayTotalPrice = denom
+    ? +totalPrice * Math.pow(10, -denom.exponent)
+    : +totalPrice;
   const currency = {
     askDenom,
     askBaseDenom,
@@ -58,7 +61,7 @@ export const OrderSummary = ({
         bankDenom: askDenom,
         baseDenom: askBaseDenom,
       }),
-    [askBaseDenom, askDenom],
+    [allowedDenoms, askBaseDenom, askDenom],
   );
 
   return (
@@ -71,7 +74,7 @@ export const OrderSummary = ({
           title={_(msg`Price per credit`)}
           value={
             <AmountWithCurrency
-              amount={+price}
+              amount={+displayTotalPrice / +credits}
               currency={currency}
               displayDenom={displayDenom}
               classes={{
@@ -91,7 +94,7 @@ export const OrderSummary = ({
           title={_(msg`total price`)}
           value={
             <AmountWithCurrency
-              amount={totalPrice}
+              amount={displayTotalPrice}
               currency={currency}
               displayDenom={displayDenom}
               classes={{
@@ -107,19 +110,32 @@ export const OrderSummary = ({
         icon={<CertifiedDocumentIcon className="text-grey-500" />}
         title={_(msg`Retirement Info`)}
       >
-        {isTradable ? (
+        {!retiredCredits ? (
           <OrderSummaryRow
             title={_(msg`Tradable Credits`)}
-            value={<span className="italic">{tradableCredits}</span>}
+            value={
+              <span className="italic">
+                {_(
+                  msg`Credits were purchased in a tradable format and were not retired`,
+                )}
+              </span>
+            }
             clampDescription={false}
           />
         ) : (
           <>
-            <OrderSummaryRow title={_(msg`Retirement reason`)} value={reason} />
-            <OrderSummaryRow
-              title={_(msg`Retirement location`)}
-              value={location}
-            />
+            {reason && (
+              <OrderSummaryRow
+                title={_(msg`Retirement reason`)}
+                value={reason}
+              />
+            )}
+            {location && (
+              <OrderSummaryRow
+                title={_(msg`Retirement location`)}
+                value={location}
+              />
+            )}
             {/* <OrderSummaryRow
               title="Make anonymous"
               value={
@@ -140,12 +156,12 @@ export const OrderSummary = ({
       >
         {isCardPayment ? (
           <>
-            <OrderSummaryRow title={_(msg`name on card`)} value={nameOnCard} />
             <OrderSummaryRow
               title={_(msg`card info`)}
               value={
                 <span>
-                  {cardBrand} {_(msg`ending in`)} {cardLast4}
+                  <span className="capitalize">{cardBrand}</span>{' '}
+                  {_(msg`ending in`)} {cardLast4}
                 </span>
               }
               className="items-center"

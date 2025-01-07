@@ -557,6 +557,39 @@ export type CreateMsgPayloadMsgEdgeArgs = {
   orderBy?: Maybe<Array<MsgsOrderBy>>;
 };
 
+/** All input for the create `Order` mutation. */
+export type CreateOrderInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Order` to be created by this mutation. */
+  order: OrderInput;
+};
+
+/** The output of our create `Order` mutation. */
+export type CreateOrderPayload = {
+  __typename?: 'CreateOrderPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Order` that was created by this mutation. */
+  order?: Maybe<Order>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `Order`. May be used by Relay 1. */
+  orderEdge?: Maybe<OrdersEdge>;
+};
+
+
+/** The output of our create `Order` mutation. */
+export type CreateOrderPayloadOrderEdgeArgs = {
+  orderBy?: Maybe<Array<OrdersOrderBy>>;
+};
+
 /** All input for the create `Proposal` mutation. */
 export type CreateProposalInput = {
   /**
@@ -1044,6 +1077,55 @@ export type DeleteMsgPayload = {
 /** The output of our delete `Msg` mutation. */
 export type DeleteMsgPayloadMsgEdgeArgs = {
   orderBy?: Maybe<Array<MsgsOrderBy>>;
+};
+
+/** All input for the `deleteOrderByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndProjectIdAndAskDenom` mutation. */
+export type DeleteOrderByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndProjectIdAndAskDenomInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  chainNum: Scalars['Int'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  projectId: Scalars['String'];
+  askDenom: Scalars['String'];
+};
+
+/** All input for the `deleteOrder` mutation. */
+export type DeleteOrderInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Order` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `Order` mutation. */
+export type DeleteOrderPayload = {
+  __typename?: 'DeleteOrderPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Order` that was deleted by this mutation. */
+  order?: Maybe<Order>;
+  deletedOrderId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `Order`. May be used by Relay 1. */
+  orderEdge?: Maybe<OrdersEdge>;
+};
+
+
+/** The output of our delete `Order` mutation. */
+export type DeleteOrderPayloadOrderEdgeArgs = {
+  orderBy?: Maybe<Array<OrdersOrderBy>>;
 };
 
 /** All input for the `deleteProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
@@ -2027,6 +2109,8 @@ export type Mutation = {
   createMsgEvent?: Maybe<CreateMsgEventPayload>;
   /** Creates a single `MsgEventAttr`. */
   createMsgEventAttr?: Maybe<CreateMsgEventAttrPayload>;
+  /** Creates a single `Order`. */
+  createOrder?: Maybe<CreateOrderPayload>;
   /** Creates a single `Proposal`. */
   createProposal?: Maybe<CreateProposalPayload>;
   /** Creates a single `Retirement`. */
@@ -2065,6 +2149,10 @@ export type Mutation = {
   updateMsgEventAttr?: Maybe<UpdateMsgEventAttrPayload>;
   /** Updates a single `MsgEventAttr` using a unique key and a patch. */
   updateMsgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHash?: Maybe<UpdateMsgEventAttrPayload>;
+  /** Updates a single `Order` using its globally unique id and a patch. */
+  updateOrder?: Maybe<UpdateOrderPayload>;
+  /** Updates a single `Order` using a unique key and a patch. */
+  updateOrderByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndProjectIdAndAskDenom?: Maybe<UpdateOrderPayload>;
   /** Updates a single `Proposal` using its globally unique id and a patch. */
   updateProposal?: Maybe<UpdateProposalPayload>;
   /** Updates a single `Proposal` using a unique key and a patch. */
@@ -2117,6 +2205,10 @@ export type Mutation = {
   deleteMsgEventAttr?: Maybe<DeleteMsgEventAttrPayload>;
   /** Deletes a single `MsgEventAttr` using a unique key. */
   deleteMsgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHash?: Maybe<DeleteMsgEventAttrPayload>;
+  /** Deletes a single `Order` using its globally unique id. */
+  deleteOrder?: Maybe<DeleteOrderPayload>;
+  /** Deletes a single `Order` using a unique key. */
+  deleteOrderByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndProjectIdAndAskDenom?: Maybe<DeleteOrderPayload>;
   /** Deletes a single `Proposal` using its globally unique id. */
   deleteProposal?: Maybe<DeleteProposalPayload>;
   /** Deletes a single `Proposal` using a unique key. */
@@ -2181,6 +2273,12 @@ export type MutationCreateMsgEventArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateMsgEventAttrArgs = {
   input: CreateMsgEventAttrInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateOrderArgs = {
+  input: CreateOrderInput;
 };
 
 
@@ -2295,6 +2393,18 @@ export type MutationUpdateMsgEventAttrArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateMsgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHashArgs = {
   input: UpdateMsgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHashInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateOrderArgs = {
+  input: UpdateOrderInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateOrderByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndProjectIdAndAskDenomArgs = {
+  input: UpdateOrderByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndProjectIdAndAskDenomInput;
 };
 
 
@@ -2455,6 +2565,18 @@ export type MutationDeleteMsgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxA
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteOrderArgs = {
+  input: DeleteOrderInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteOrderByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndProjectIdAndAskDenomArgs = {
+  input: DeleteOrderByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndProjectIdAndAskDenomInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteProposalArgs = {
   input: DeleteProposalInput;
 };
@@ -2524,6 +2646,158 @@ export type Node = {
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
   nodeId: Scalars['ID'];
 };
+
+export type Order = Node & {
+  __typename?: 'Order';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  timestamp?: Maybe<Scalars['Datetime']>;
+  type: Scalars['String'];
+  creditsAmount: Scalars['String'];
+  projectId: Scalars['String'];
+  buyerAddress: Scalars['String'];
+  totalPrice: Scalars['String'];
+  askDenom: Scalars['String'];
+  retiredCredits: Scalars['Boolean'];
+  retirementReason?: Maybe<Scalars['String']>;
+  retirementJurisdiction?: Maybe<Scalars['String']>;
+  blockHeight: Scalars['BigInt'];
+  chainNum: Scalars['Int'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  txHash: Scalars['String'];
+};
+
+/** A condition to be used against `Order` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type OrderCondition = {
+  /** Checks for equality with the object’s `timestamp` field. */
+  timestamp?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `type` field. */
+  type?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `creditsAmount` field. */
+  creditsAmount?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `projectId` field. */
+  projectId?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `buyerAddress` field. */
+  buyerAddress?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `totalPrice` field. */
+  totalPrice?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `askDenom` field. */
+  askDenom?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `retiredCredits` field. */
+  retiredCredits?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `retirementReason` field. */
+  retirementReason?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `retirementJurisdiction` field. */
+  retirementJurisdiction?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `blockHeight` field. */
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  /** Checks for equality with the object’s `chainNum` field. */
+  chainNum?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `txIdx` field. */
+  txIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `msgIdx` field. */
+  msgIdx?: Maybe<Scalars['Int']>;
+  /** Checks for equality with the object’s `txHash` field. */
+  txHash?: Maybe<Scalars['String']>;
+};
+
+/** An input for mutations affecting `Order` */
+export type OrderInput = {
+  timestamp?: Maybe<Scalars['Datetime']>;
+  type: Scalars['String'];
+  creditsAmount: Scalars['String'];
+  projectId: Scalars['String'];
+  buyerAddress: Scalars['String'];
+  totalPrice: Scalars['String'];
+  askDenom: Scalars['String'];
+  retiredCredits: Scalars['Boolean'];
+  retirementReason?: Maybe<Scalars['String']>;
+  retirementJurisdiction?: Maybe<Scalars['String']>;
+  blockHeight: Scalars['BigInt'];
+  chainNum: Scalars['Int'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  txHash: Scalars['String'];
+};
+
+/** Represents an update to a `Order`. Fields that are set will be updated. */
+export type OrderPatch = {
+  timestamp?: Maybe<Scalars['Datetime']>;
+  type?: Maybe<Scalars['String']>;
+  creditsAmount?: Maybe<Scalars['String']>;
+  projectId?: Maybe<Scalars['String']>;
+  buyerAddress?: Maybe<Scalars['String']>;
+  totalPrice?: Maybe<Scalars['String']>;
+  askDenom?: Maybe<Scalars['String']>;
+  retiredCredits?: Maybe<Scalars['Boolean']>;
+  retirementReason?: Maybe<Scalars['String']>;
+  retirementJurisdiction?: Maybe<Scalars['String']>;
+  blockHeight?: Maybe<Scalars['BigInt']>;
+  chainNum?: Maybe<Scalars['Int']>;
+  txIdx?: Maybe<Scalars['Int']>;
+  msgIdx?: Maybe<Scalars['Int']>;
+  txHash?: Maybe<Scalars['String']>;
+};
+
+/** A connection to a list of `Order` values. */
+export type OrdersConnection = {
+  __typename?: 'OrdersConnection';
+  /** A list of `Order` objects. */
+  nodes: Array<Maybe<Order>>;
+  /** A list of edges which contains the `Order` and cursor to aid in pagination. */
+  edges: Array<OrdersEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Order` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Order` edge in the connection. */
+export type OrdersEdge = {
+  __typename?: 'OrdersEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Order` at the end of the edge. */
+  node?: Maybe<Order>;
+};
+
+/** Methods to use when ordering `Order`. */
+export enum OrdersOrderBy {
+  Natural = 'NATURAL',
+  TimestampAsc = 'TIMESTAMP_ASC',
+  TimestampDesc = 'TIMESTAMP_DESC',
+  TypeAsc = 'TYPE_ASC',
+  TypeDesc = 'TYPE_DESC',
+  CreditsAmountAsc = 'CREDITS_AMOUNT_ASC',
+  CreditsAmountDesc = 'CREDITS_AMOUNT_DESC',
+  ProjectIdAsc = 'PROJECT_ID_ASC',
+  ProjectIdDesc = 'PROJECT_ID_DESC',
+  BuyerAddressAsc = 'BUYER_ADDRESS_ASC',
+  BuyerAddressDesc = 'BUYER_ADDRESS_DESC',
+  TotalPriceAsc = 'TOTAL_PRICE_ASC',
+  TotalPriceDesc = 'TOTAL_PRICE_DESC',
+  AskDenomAsc = 'ASK_DENOM_ASC',
+  AskDenomDesc = 'ASK_DENOM_DESC',
+  RetiredCreditsAsc = 'RETIRED_CREDITS_ASC',
+  RetiredCreditsDesc = 'RETIRED_CREDITS_DESC',
+  RetirementReasonAsc = 'RETIREMENT_REASON_ASC',
+  RetirementReasonDesc = 'RETIREMENT_REASON_DESC',
+  RetirementJurisdictionAsc = 'RETIREMENT_JURISDICTION_ASC',
+  RetirementJurisdictionDesc = 'RETIREMENT_JURISDICTION_DESC',
+  BlockHeightAsc = 'BLOCK_HEIGHT_ASC',
+  BlockHeightDesc = 'BLOCK_HEIGHT_DESC',
+  ChainNumAsc = 'CHAIN_NUM_ASC',
+  ChainNumDesc = 'CHAIN_NUM_DESC',
+  TxIdxAsc = 'TX_IDX_ASC',
+  TxIdxDesc = 'TX_IDX_DESC',
+  MsgIdxAsc = 'MSG_IDX_ASC',
+  MsgIdxDesc = 'MSG_IDX_DESC',
+  TxHashAsc = 'TX_HASH_ASC',
+  TxHashDesc = 'TX_HASH_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
 
 /** Information about pagination in a connection. */
 export type PageInfo = {
@@ -2755,6 +3029,8 @@ export type Query = Node & {
   allMsgEvents?: Maybe<MsgEventsConnection>;
   /** Reads and enables pagination through a set of `MsgEventAttr`. */
   allMsgEventAttrs?: Maybe<MsgEventAttrsConnection>;
+  /** Reads and enables pagination through a set of `Order`. */
+  allOrders?: Maybe<OrdersConnection>;
   /** Reads and enables pagination through a set of `Proposal`. */
   allProposals?: Maybe<ProposalsConnection>;
   /** Reads and enables pagination through a set of `Retirement`. */
@@ -2771,6 +3047,7 @@ export type Query = Node & {
   msgByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Msg>;
   msgEventByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndType?: Maybe<MsgEvent>;
   msgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAndKeyAndValueHash?: Maybe<MsgEventAttr>;
+  orderByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndProjectIdAndAskDenom?: Maybe<Order>;
   proposalByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Proposal>;
   retirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Retirement>;
   retirementByTxHash?: Maybe<Retirement>;
@@ -2794,6 +3071,8 @@ export type Query = Node & {
   msgEvent?: Maybe<MsgEvent>;
   /** Reads a single `MsgEventAttr` using its globally unique `ID`. */
   msgEventAttr?: Maybe<MsgEventAttr>;
+  /** Reads a single `Order` using its globally unique `ID`. */
+  order?: Maybe<Order>;
   /** Reads a single `Proposal` using its globally unique `ID`. */
   proposal?: Maybe<Proposal>;
   /** Reads a single `Retirement` using its globally unique `ID`. */
@@ -2932,6 +3211,18 @@ export type QueryAllMsgEventAttrsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllOrdersArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<OrdersOrderBy>>;
+  condition?: Maybe<OrderCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllProposalsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -3047,6 +3338,17 @@ export type QueryMsgEventAttrByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndTypeAnd
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryOrderByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndProjectIdAndAskDenomArgs = {
+  chainNum: Scalars['Int'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  projectId: Scalars['String'];
+  askDenom: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
   chainNum: Scalars['Int'];
   blockHeight: Scalars['BigInt'];
@@ -3149,6 +3451,12 @@ export type QueryMsgEventArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryMsgEventAttrArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryOrderArgs = {
   nodeId: Scalars['ID'];
 };
 
@@ -3786,6 +4094,58 @@ export type UpdateMsgPayloadMsgEdgeArgs = {
   orderBy?: Maybe<Array<MsgsOrderBy>>;
 };
 
+/** All input for the `updateOrderByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndProjectIdAndAskDenom` mutation. */
+export type UpdateOrderByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndProjectIdAndAskDenomInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Order` being updated. */
+  orderPatch: OrderPatch;
+  chainNum: Scalars['Int'];
+  blockHeight: Scalars['BigInt'];
+  txIdx: Scalars['Int'];
+  msgIdx: Scalars['Int'];
+  projectId: Scalars['String'];
+  askDenom: Scalars['String'];
+};
+
+/** All input for the `updateOrder` mutation. */
+export type UpdateOrderInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Order` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `Order` being updated. */
+  orderPatch: OrderPatch;
+};
+
+/** The output of our update `Order` mutation. */
+export type UpdateOrderPayload = {
+  __typename?: 'UpdateOrderPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Order` that was updated by this mutation. */
+  order?: Maybe<Order>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `Order`. May be used by Relay 1. */
+  orderEdge?: Maybe<OrdersEdge>;
+};
+
+
+/** The output of our update `Order` mutation. */
+export type UpdateOrderPayloadOrderEdgeArgs = {
+  orderBy?: Maybe<Array<OrdersOrderBy>>;
+};
+
 /** All input for the `updateProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdx` mutation. */
 export type UpdateProposalByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
   /**
@@ -4250,6 +4610,22 @@ export type IndexerIssuersByClassIdQuery = (
   )> }
 );
 
+export type IndexerOrdersByBuyerAddressQueryVariables = Exact<{
+  buyerAddress: Scalars['String'];
+}>;
+
+
+export type IndexerOrdersByBuyerAddressQuery = (
+  { __typename?: 'Query' }
+  & { allOrders?: Maybe<(
+    { __typename?: 'OrdersConnection' }
+    & { nodes: Array<Maybe<(
+      { __typename?: 'Order' }
+      & Pick<Order, 'timestamp' | 'creditsAmount' | 'projectId' | 'totalPrice' | 'askDenom' | 'retiredCredits' | 'retirementReason' | 'retirementJurisdiction' | 'txHash'>
+    )>> }
+  )> }
+);
+
 export type IndexerRetirementByNodeIdQueryVariables = Exact<{
   nodeId: Scalars['ID'];
 }>;
@@ -4278,7 +4654,7 @@ export type IndexerRetirementByTxHashQuery = (
 
 export type RetirementFieldsFragment = (
   { __typename?: 'Retirement' }
-  & Pick<Retirement, 'nodeId' | 'owner' | 'amount' | 'reason' | 'batchDenom' | 'batchDenoms' | 'jurisdiction' | 'timestamp' | 'txHash'>
+  & Pick<Retirement, 'nodeId' | 'owner' | 'amount' | 'batchDenom' | 'batchDenoms' | 'jurisdiction' | 'timestamp' | 'reason' | 'txHash'>
 );
 
 export const RetirementFieldsFragmentDoc = gql`
@@ -4286,7 +4662,6 @@ export const RetirementFieldsFragmentDoc = gql`
   nodeId
   owner
   amount
-  reason
   batchDenom
   batchDenoms
   jurisdiction
@@ -4496,6 +4871,51 @@ export function useIndexerIssuersByClassIdLazyQuery(baseOptions?: Apollo.LazyQue
 export type IndexerIssuersByClassIdQueryHookResult = ReturnType<typeof useIndexerIssuersByClassIdQuery>;
 export type IndexerIssuersByClassIdLazyQueryHookResult = ReturnType<typeof useIndexerIssuersByClassIdLazyQuery>;
 export type IndexerIssuersByClassIdQueryResult = Apollo.QueryResult<IndexerIssuersByClassIdQuery, IndexerIssuersByClassIdQueryVariables>;
+export const IndexerOrdersByBuyerAddressDocument = gql`
+    query IndexerOrdersByBuyerAddress($buyerAddress: String!) {
+  allOrders(condition: {buyerAddress: $buyerAddress}, orderBy: TIMESTAMP_DESC) {
+    nodes {
+      timestamp
+      creditsAmount
+      projectId
+      totalPrice
+      askDenom
+      retiredCredits
+      retirementReason
+      retirementJurisdiction
+      txHash
+    }
+  }
+}
+    `;
+
+/**
+ * __useIndexerOrdersByBuyerAddressQuery__
+ *
+ * To run a query within a React component, call `useIndexerOrdersByBuyerAddressQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIndexerOrdersByBuyerAddressQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIndexerOrdersByBuyerAddressQuery({
+ *   variables: {
+ *      buyerAddress: // value for 'buyerAddress'
+ *   },
+ * });
+ */
+export function useIndexerOrdersByBuyerAddressQuery(baseOptions: Apollo.QueryHookOptions<IndexerOrdersByBuyerAddressQuery, IndexerOrdersByBuyerAddressQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IndexerOrdersByBuyerAddressQuery, IndexerOrdersByBuyerAddressQueryVariables>(IndexerOrdersByBuyerAddressDocument, options);
+      }
+export function useIndexerOrdersByBuyerAddressLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IndexerOrdersByBuyerAddressQuery, IndexerOrdersByBuyerAddressQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IndexerOrdersByBuyerAddressQuery, IndexerOrdersByBuyerAddressQueryVariables>(IndexerOrdersByBuyerAddressDocument, options);
+        }
+export type IndexerOrdersByBuyerAddressQueryHookResult = ReturnType<typeof useIndexerOrdersByBuyerAddressQuery>;
+export type IndexerOrdersByBuyerAddressLazyQueryHookResult = ReturnType<typeof useIndexerOrdersByBuyerAddressLazyQuery>;
+export type IndexerOrdersByBuyerAddressQueryResult = Apollo.QueryResult<IndexerOrdersByBuyerAddressQuery, IndexerOrdersByBuyerAddressQueryVariables>;
 export const IndexerRetirementByNodeIdDocument = gql`
     query IndexerRetirementByNodeId($nodeId: ID!) {
   retirement(nodeId: $nodeId) {

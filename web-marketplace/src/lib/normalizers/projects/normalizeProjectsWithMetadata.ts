@@ -36,7 +36,9 @@ import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDe
 
 interface NormalizeProjectsWithOrderDataParams {
   offChainProjects?: (Maybe<ProjectFieldsFragment> | undefined)[];
-  projectsWithOrderData?: Array<NormalizeProject | ProjectWithOrderData>;
+  projectsWithOrderData?: Array<
+    NormalizeProject | ProjectWithOrderData | undefined
+  >;
   projectsMetadata?: (AnchoredProjectMetadataLD | undefined)[];
   projectPagesMetadata?: ProjectPageMetadataLD[];
   programAccounts?: Maybe<AccountFieldsFragment | undefined>[];
@@ -64,7 +66,7 @@ export const normalizeProjectsWithMetadata = ({
       const programAccount = programAccounts?.[index];
       const offChainProject = offChainProjects?.[index];
       const sanityProject = sanityProjects?.[index];
-      const sanityClass = projectWithOrderData.sanityCreditClassData;
+      const sanityClass = projectWithOrderData?.sanityCreditClassData;
 
       return normalizeProjectWithMetadata({
         offChainProject,

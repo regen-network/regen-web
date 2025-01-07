@@ -16,7 +16,7 @@ import {
   getProjectCardButtonMapping,
   getProjectCardPurchaseDetailsTitleMapping,
 } from 'lib/constants/shared.constants';
-import { QUDT_UNIT_MAP, qudtUnit } from 'lib/rdf';
+import { getAreaUnit, qudtUnit } from 'lib/rdf';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { Maybe, MoreProjectFieldsFragment } from '../../generated/graphql';
@@ -106,11 +106,10 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
       apiServerUrl={apiServerUrl}
       place={project.metadata?.['schema:location']?.place_name}
       area={project.metadata?.['regen:projectSize']?.['qudt:numericValue']}
-      areaUnit={
-        QUDT_UNIT_MAP[
-          project.metadata?.['regen:projectSize']?.['qudt:unit'] as qudtUnit
-        ]
-      }
+      areaUnit={getAreaUnit(
+        project.metadata?.['regen:projectSize']?.['qudt:unit'] as qudtUnit,
+        project.metadata?.['regen:projectSize']?.['qudt:numericValue'],
+      )}
       track={track}
       pathname={location.pathname}
       draftText={_(DRAFT_TEXT)}

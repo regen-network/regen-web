@@ -3,30 +3,34 @@ import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { Order } from 'web-marketplace/src/components/organisms/Order/Order';
 import { ORDER_STATUS } from 'web-marketplace/src/components/organisms/Order/Order.constants';
 
+import { ProjectPrefinancing } from 'web-components/src/components/cards/ProjectCard/ProjectCard.types';
+
 import {
+  allowedDenoms,
   blockchainDetails,
   credits,
   paymentInfo,
   retirementInfo,
 } from './Order.mock';
 
-const args = {
+const orderData = {
   project: {
+    id: 'C01-001',
+    slug: 'project-name',
     name: 'Project Name',
-    date: 'Dec 15, 2024',
-    placeName: 'Cabo Vírgenes, Argentina',
+    deliveryDate: 'Dec 15, 2024',
+    place: 'Cabo Vírgenes, Argentina',
     area: 50.4,
     areaUnit: 'hectares',
-    imageSrc: 'coorong.png',
-    prefinance: false,
+    imgSrc: 'coorong.png',
   },
   order: {
     status: ORDER_STATUS.delivered,
-    cardData: '**** **** **** 1234',
     retirementInfo,
     blockchainDetails,
     credits,
     paymentInfo,
+    receiptUrl: 'http://lorem.ipsum',
   },
 };
 
@@ -46,11 +50,8 @@ export const Default: Story = {
 };
 
 Default.args = {
-  ...args,
-  project: {
-    ...args.project,
-    prefinance: false,
-  },
+  orderData,
+  allowedDenoms,
 };
 
 export const Crypto: Story = {
@@ -62,24 +63,23 @@ export const Crypto: Story = {
 };
 
 Crypto.args = {
-  ...args,
-  project: {
-    ...args.project,
-    prefinance: false,
-  },
-  order: {
-    ...args.order,
-    credits: {
-      ...args.order.credits,
-      askDenom: REGEN_DENOM,
-      askBaseDenom: REGEN_DENOM,
-    },
-    paymentInfo: {
-      ...args.order.paymentInfo,
-      askDenom: REGEN_DENOM,
-      askBaseDenom: REGEN_DENOM,
+  orderData: {
+    ...orderData,
+    order: {
+      ...orderData.order,
+      credits: {
+        ...orderData.order.credits,
+        askDenom: REGEN_DENOM,
+        askBaseDenom: REGEN_DENOM,
+      },
+      paymentInfo: {
+        ...orderData.order.paymentInfo,
+        askDenom: REGEN_DENOM,
+        askBaseDenom: REGEN_DENOM,
+      },
     },
   },
+  allowedDenoms,
 };
 
 export const Prefinance: Story = {
@@ -91,11 +91,14 @@ export const Prefinance: Story = {
 };
 
 Prefinance.args = {
-  ...args,
-  project: {
-    ...args.project,
-    prefinance: true,
+  orderData: {
+    ...orderData,
+    project: {
+      ...orderData.project,
+      projectPrefinancing: { isPrefinanceProject: true } as ProjectPrefinancing,
+    },
   },
+  allowedDenoms,
 };
 
 export const PendingOrder: Story = {
@@ -107,18 +110,18 @@ export const PendingOrder: Story = {
 };
 
 PendingOrder.args = {
-  ...args,
-  project: {
-    ...args.project,
-  },
-  order: {
-    ...args.order,
-    status: ORDER_STATUS.pending,
-    blockchainDetails: {
-      ...args.order.blockchainDetails,
-      blockchainRecord: '',
+  orderData: {
+    ...orderData,
+    order: {
+      ...orderData.order,
+      status: ORDER_STATUS.pending,
+      blockchainDetails: {
+        ...orderData.order.blockchainDetails,
+        blockchainRecord: '',
+      },
     },
   },
+  allowedDenoms,
 };
 
 export const TradableOrder: Story = {
@@ -130,26 +133,26 @@ export const TradableOrder: Story = {
 };
 
 TradableOrder.args = {
-  ...args,
-  project: {
-    ...args.project,
+  orderData: {
+    ...orderData,
+    order: {
+      ...orderData.order,
+      credits: {
+        ...orderData.order.credits,
+        askDenom: REGEN_DENOM,
+        askBaseDenom: REGEN_DENOM,
+        totalPrice: +orderData.order.credits.totalPrice * Math.pow(10, 6),
+      },
+      retirementInfo: {
+        ...orderData.order.retirementInfo,
+        retiredCredits: false,
+      },
+      paymentInfo: {
+        ...orderData.order.paymentInfo,
+        askDenom: REGEN_DENOM,
+        askBaseDenom: REGEN_DENOM,
+      },
+    },
   },
-  order: {
-    ...args.order,
-    credits: {
-      ...args.order.credits,
-      askDenom: REGEN_DENOM,
-      askBaseDenom: REGEN_DENOM,
-    },
-    retirementInfo: {
-      ...args.order.retirementInfo,
-      tradableCredits:
-        'Credits were purchased in a tradable format and were not retired',
-    },
-    paymentInfo: {
-      ...args.order.paymentInfo,
-      askDenom: REGEN_DENOM,
-      askBaseDenom: REGEN_DENOM,
-    },
-  },
+  allowedDenoms,
 };

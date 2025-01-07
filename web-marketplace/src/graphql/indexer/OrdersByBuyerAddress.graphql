@@ -1,0 +1,15 @@
+query IndexerOrdersByBuyerAddress($buyerAddress: String!) {
+  allOrders(condition: {buyerAddress: $buyerAddress}, orderBy: TIMESTAMP_DESC) {
+    nodes {
+      timestamp
+      creditsAmount
+      projectId
+      totalPrice
+      askDenom
+      retiredCredits
+      retirementReason
+      retirementJurisdiction
+      txHash
+    }
+  }
+}

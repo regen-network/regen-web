@@ -26,6 +26,7 @@ import { RegistryIconLink, RegistryNavLink } from '../../atoms';
 import { ListProject } from '../ListProject/ListProject';
 import { LoginButton } from '../LoginButton/LoginButton';
 import { useOnProfileClick } from './hooks/useOnProfileClick';
+import { useShowOrders } from './hooks/useShowOrders';
 import {
   getBorderBottom,
   getHeaderColors,
@@ -45,6 +46,7 @@ const RegistryLayoutHeader: React.FC = () => {
   const { _ } = useLingui();
   const { pathname } = useLocation();
   const { activeAccount, privActiveAccount } = useAuth();
+
   const { wallet, disconnect, isConnected, loginDisabled } = useWallet();
   const { accountOrWallet, noAccountAndNoWallet } = useAuthData();
   const theme = useTheme<Theme>();
@@ -57,6 +59,8 @@ const RegistryLayoutHeader: React.FC = () => {
   const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
   const menuItems = useMemo(() => getMenuItems(pathname, _), [pathname, _]);
   const onProfileClick = useOnProfileClick();
+
+  const showOrders = useShowOrders();
 
   const { data: paymentMethodData } = useQuery(
     getPaymentMethodsQuery({
@@ -78,6 +82,7 @@ const RegistryLayoutHeader: React.FC = () => {
         loginDisabled,
         onProfileClick,
         savedPaymentInfo,
+        showOrders,
         profile: activeAccount
           ? {
               id: activeAccount.id,
@@ -103,6 +108,7 @@ const RegistryLayoutHeader: React.FC = () => {
       loginDisabled,
       onProfileClick,
       savedPaymentInfo,
+      showOrders,
       activeAccount,
       _,
       privActiveAccount?.email,

@@ -7606,6 +7606,12 @@ export type AccountByIdQuery = (
         { __typename?: 'AccountTranslation' }
         & Pick<AccountTranslation, 'languageCode' | 'description'>
       )>> }
+    ), fiatOrdersByAccountId: (
+      { __typename?: 'FiatOrdersConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'FiatOrder' }
+        & Pick<FiatOrder, 'createdAt' | 'txHash' | 'stripePaymentIntentId' | 'retiredCredits' | 'totalPrice' | 'askDenom' | 'creditsAmount' | 'projectOnChainId' | 'customerName' | 'anonymous'>
+      )>> }
     ) }
   )> }
 );
@@ -8228,6 +8234,20 @@ export const AccountByIdDocument = gql`
       nodes {
         languageCode
         description
+      }
+    }
+    fiatOrdersByAccountId(orderBy: CREATED_AT_DESC) {
+      nodes {
+        createdAt
+        txHash
+        stripePaymentIntentId
+        retiredCredits
+        totalPrice
+        askDenom
+        creditsAmount
+        projectOnChainId
+        customerName
+        anonymous
       }
     }
   }

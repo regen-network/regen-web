@@ -1,8 +1,18 @@
+import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
+
+import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+
 import { ORDER_STATUS } from './Order.constants';
 
 export type OrderStatus = keyof typeof ORDER_STATUS;
 
-export interface OrderDataProps {
+export type OrderProps = {
+  orderData: OrderData;
+  allowedDenoms?: AllowedDenom[];
+  className?: string;
+};
+
+export interface OrderData {
   project: OrderProjectData;
   order: {
     status: OrderStatus;
@@ -10,43 +20,48 @@ export interface OrderDataProps {
     blockchainDetails: BlockchainDetailsData;
     credits: CreditsData;
     paymentInfo: PaymentInfoData;
+    receiptUrl?: string;
   };
-  className?: string;
 }
 
-export type OrderProjectData = {
-  name: string;
-  date: string;
-  placeName: string;
-  area: number;
-  areaUnit: string;
-  imageSrc: string;
-  prefinance: boolean;
+export type OrderProjectData = Pick<
+  NormalizeProject,
+  | 'name'
+  | 'location'
+  | 'imgSrc'
+  | 'projectPrefinancing'
+  | 'place'
+  | 'area'
+  | 'areaUnit'
+  | 'id'
+  | 'slug'
+> & {
+  deliveryDate: string;
 };
 
 export type RetirementInfoData = {
-  tradableCredits: string | null;
-  reason: string;
-  location: string;
+  retiredCredits?: boolean;
+  reason?: string;
+  location?: string;
   makeAnonymous: boolean;
+  certificateNodeId?: string;
 };
 
 export type BlockchainDetailsData = {
   purchaseDate: string;
-  blockchainRecord: string;
+  blockchainRecord?: string;
 };
 
 export type CreditsData = {
-  credits: string;
-  price: string;
+  credits: string | number;
+  totalPrice: string | number;
   askDenom: string;
   askBaseDenom: string;
 };
 
 export type PaymentInfoData = {
-  nameOnCard: string;
-  cardLast4: string;
-  cardBrand: string;
+  cardLast4?: string;
+  cardBrand?: string;
   askDenom: string;
   askBaseDenom: string;
 };

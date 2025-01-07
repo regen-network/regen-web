@@ -1,8 +1,8 @@
 import { ContextDefinition } from 'jsonld';
 
 export const QUDT_UNIT_MAP = {
-  'unit:HA': 'hectares',
-  'unit:AC': 'acres',
+  one: { 'unit:HA': 'hectare', 'unit:AC': 'acre' },
+  other: { 'unit:HA': 'hectares', 'unit:AC': 'acres' },
 };
 
 export const DEFAULT_PROJECT_CONTEXT: { [key: string]: string } = {

@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg, Trans } from '@lingui/macro';
 import { Theme } from '@mui/material';
 
 import { HeaderColors } from 'web-components/src/components/header';
@@ -11,6 +11,7 @@ import {
 } from 'web-components/src/components/header/components/UserMenuItem.Profile';
 import { OnProfileClickType } from 'web-components/src/components/header/components/UserMenuItem.types';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { isBridgeEnabled } from 'lib/ledger';
@@ -21,7 +22,6 @@ import {
   CREDIT_CLASSES,
   EDIT_PROFILE,
   HEADING_MY_ORDERS,
-  HEADING_PROFILE,
   MY_ORDERS,
   MY_PREFINANCE_PROJECTS,
   PORTFOLIO,
@@ -86,6 +86,7 @@ interface GetUserMenuItemsParams {
   showCreditClasses?: boolean;
   isIssuer?: boolean;
   showProjects?: boolean;
+  showOrders?: boolean;
   isWalletConnected: boolean;
   loginDisabled: boolean;
   profile?: UserMenuItemProfileProps;
@@ -100,6 +101,7 @@ export const getUserMenuItems = ({
   showCreditClasses,
   isIssuer,
   showProjects,
+  showOrders,
   isWalletConnected,
   loginDisabled,
   profile,
@@ -149,15 +151,15 @@ export const getUserMenuItems = ({
     {
       ...SEPARATOR,
     },
-    // {
-    //   ...HEADING_MY_ORDERS,
-    // },
-    // {
-    //   pathname,
-    //   linkComponent,
-    //   ...MY_ORDERS,
-    //   label: _(MY_ORDERS.label),
-    // },
+    showOrders && {
+      ...HEADING_MY_ORDERS,
+    },
+    showOrders && {
+      pathname,
+      linkComponent,
+      ...MY_ORDERS,
+      label: _(MY_ORDERS.label),
+    },
     // {
     //   pathname,
     //   linkComponent,
@@ -171,7 +173,16 @@ export const getUserMenuItems = ({
     //   label: _(SAVED_PAYMENT_INFO.label),
     // },
     {
-      ...HEADING_PROFILE,
+      children: (
+        <div
+          className={cn(
+            'text-xs text-grey-400 uppercase font-extrabold pl-20 tracking-wider',
+            { 'pt-20': showOrders },
+          )}
+        >
+          <Trans>profile</Trans>
+        </div>
+      ),
     },
     !loginDisabled && {
       pathname,

@@ -86,7 +86,7 @@ export const parseProjectMetadata = (
   const projectSize = projectMetadata?.['regen:projectSize'];
   const area = projectSize?.['qudt:numericValue'];
   const unit = projectSize?.['qudt:unit'];
-  const areaUnit = getAreaUnit(unit as qudtUnit);
+  const areaUnit = getAreaUnit(unit as qudtUnit, area);
   const placeName = projectMetadata?.['schema:location']?.['place_name'];
   let projectMethodology;
   let ratings;

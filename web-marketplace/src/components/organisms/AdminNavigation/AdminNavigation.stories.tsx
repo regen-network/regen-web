@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { Meta, StoryObj } from '@storybook/react';
 
 import { AdminNavigation, AdminNavigationProps } from './AdminNavigation';
-import { adminNavigationSections } from './AdminNavigation.constants';
+import { getAdminNavigationSections } from './AdminNavigation.utils';
 
 export default {
   title: 'Marketplace/Organisms/AdminNavigation',
@@ -24,7 +24,7 @@ export const Default: Story = (args: AdminNavigationProps) => {
     <div className="max-w-[240px]">
       <AdminNavigation
         {...args}
-        sections={adminNavigationSections}
+        sections={getAdminNavigationSections({ showOrders: true })}
         currentPath={currentPath}
         onNavItemClick={handleNavItemClick}
         savedPaymentInfo={true}

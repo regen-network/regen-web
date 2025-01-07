@@ -12,7 +12,7 @@ import { findSanityCreditClass } from 'components/templates/ProjectDetails/Proje
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 interface NormalizeProjectsWithOrderDataParams {
-  projects?: ProjectInfo[];
+  projects?: (ProjectInfo | undefined)[];
   sellOrders?: SellOrderInfoExtented[];
   userAddress?: string;
   sanityCreditClassData?: AllCreditClassQuery;
@@ -23,8 +23,12 @@ export const normalizeProjectsWithOrderData = ({
   sellOrders = [],
   userAddress,
   sanityCreditClassData,
-}: NormalizeProjectsWithOrderDataParams): ProjectWithOrderData[] => {
-  const projectsWithOrderData = projects?.map((project: ProjectInfo, index) => {
+}: NormalizeProjectsWithOrderDataParams): (
+  | ProjectWithOrderData
+  | undefined
+)[] => {
+  const projectsWithOrderData = projects?.map((project, index) => {
+    if (!project) return undefined;
     const sellOrdersNormalized = sellOrders
       .filter(sellOrder => sellOrder?.batchDenom?.startsWith(project.id))
       .map(normalizeToUISellOrderInfo);

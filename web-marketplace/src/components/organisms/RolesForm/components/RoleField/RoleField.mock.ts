@@ -13,6 +13,7 @@ export const authenticatedAccounts = [
     addr: 'regen1rrhtznv5fzfy6gecwhkq6ggh4t95zxykz9vuwu',
     nonce: '6ce95c9d37012f7b7c008c5b82ce9c3f',
     accountTranslationsById: accountTranslationsByIdMock,
+    fiatOrdersByAccountId: { nodes: [] },
   },
 ];
 export const authenticatedAccountIds = [activeAccountId];

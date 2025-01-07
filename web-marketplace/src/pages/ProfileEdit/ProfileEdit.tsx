@@ -18,7 +18,8 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
 import { AdminNavigation } from 'components/organisms/AdminNavigation/AdminNavigation';
-import { adminNavigationSections } from 'components/organisms/AdminNavigation/AdminNavigation.constants';
+import { getAdminNavigationSections } from 'components/organisms/AdminNavigation/AdminNavigation.utils';
+import { useShowOrders } from 'components/organisms/RegistryLayout/hooks/useShowOrders';
 
 import {
   DISCARD_CHANGES_BODY,
@@ -31,6 +32,8 @@ export const ProfileEdit = () => {
   const { _ } = useLingui();
   const { accountChanging } = useWallet();
   const { loading } = useAuth();
+  const showOrders = useShowOrders();
+
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
     string | undefined
   >(undefined);
@@ -67,7 +70,7 @@ export const ProfileEdit = () => {
       <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly max-w-[1150px] mx-auto p-10 lg:py-50 lg:px-15 lg:min-h-screen">
         <AdminNavigation
           className="hidden lg:block min-w-[235px]"
-          sections={adminNavigationSections}
+          sections={getAdminNavigationSections({ showOrders })}
           onNavItemClick={onNavClick}
           currentPath={pathname}
           savedPaymentInfo={
@@ -96,7 +99,7 @@ export const ProfileEdit = () => {
             )}
           </Flex>
           <WithLoader isLoading={accountChanging || loading}>
-            <div className="rounded-md border border-grey-200 bg-grey-0 lg:mt-30">
+            <div className="rounded-md border border-grey-200 bg-grey-0 lg:mt-30 w-full">
               <Outlet />
             </div>
           </WithLoader>

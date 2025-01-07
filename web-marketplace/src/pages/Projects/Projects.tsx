@@ -16,6 +16,7 @@ import {
 } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
+  buyingOptionsFiltersAtom,
   creditClassInitialFiltersAtom,
   creditClassSelectedFiltersAtom,
   environmentTypeFiltersAtom,
@@ -39,6 +40,7 @@ import ProjectFilterBody from './AllProjects/AllProjects.ProjectFilterBody';
 import { useFetchCreditClasses } from './hooks/useFetchCreditClasses';
 import { useProjects } from './hooks/useProjects';
 import { useResetFilters } from './hooks/useResetFilters';
+import { normalizeBuyingOptionsFilter } from './Projects.normalizers';
 
 const Projects = (): JSX.Element => {
   const { _ } = useLingui();
@@ -60,6 +62,9 @@ const Projects = (): JSX.Element => {
   const [regionFilters, setRegionFilters] = useAtom(regionFiltersAtom);
   const [marketTypeFilters, setMarketTypeFilters] = useAtom(
     marketTypeFiltersAtom,
+  );
+  const [buyingOptionsFilters, setBuyingOptionsFilterAtom] = useAtom(
+    buyingOptionsFiltersAtom,
   );
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
@@ -88,6 +93,8 @@ const Projects = (): JSX.Element => {
     hasCommunityProjects,
     prefinanceProjectsCount,
     prefinanceProjects,
+    filteredSellOrders,
+    sanityProjects,
   } = useProjects({
     sort,
     offset: page * PROJECTS_PER_PAGE,
@@ -175,6 +182,12 @@ const Projects = (): JSX.Element => {
     haveOffChainProjects,
     _,
   });
+  const buyingOptionsFilterOptions = normalizeBuyingOptionsFilter({
+    filteredSellOrders,
+    sanityProjects,
+    _,
+  });
+  console.log('buyingOptionsFilterOptions', buyingOptionsFilterOptions);
 
   useEffect(() => {
     // Check all the credit class filters by default

@@ -442,6 +442,11 @@ export function useProjectsWithOrders({
     prefinanceProjectsCount: prefinanceProjects.length,
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projectsFilteredByCreditClass?.length,
+    filteredSellOrders: projectsFilteredByCreditClass
+      .map(project => project.sellOrders)
+      .flat()
+      .filter(order => order?.seller !== wallet?.address),
+    sanityProjects: sanityProjectsData?.allProject,
     loading:
       isLoadingProjects ||
       isLoadingProjectsByClass ||

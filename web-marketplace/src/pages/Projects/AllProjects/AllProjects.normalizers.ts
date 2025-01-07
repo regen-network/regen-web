@@ -28,6 +28,7 @@ export const normalizeCreditClassFilters = ({
   haveOffChainProjects,
   _,
 }: NormalizeCreditClassesFilterParams): NormalizeCreditClassFiltersResponse => {
+  console.log('normalizeCreditClassFilters');
   const sanityCreditClassIds = sanityCreditClassesData?.allCreditClass.map(
     sanityCreditClass => sanityCreditClass.path,
   );

@@ -256,14 +256,11 @@ export function useProjectsWithOrders({
             sanityProject.projectId === offChainProject?.slug,
         );
 
-        // const filteredSellOrders = (project?.sellOrders || []).filter(
-        //   sellOrder => sellOrder.seller !== wallet?.address,
-        // );
-        const cardSellOrders = getCardSellOrders(
+        const allCardSellOrders = getCardSellOrders(
           sanityProject?.fiatSellOrders,
-          project?.sellOrders, // TODO use filteredSellOrders?
+          project?.sellOrders,
         );
-        return { ...offChainProject, ...project, cardSellOrders };
+        return { ...offChainProject, ...project, allCardSellOrders };
       }),
     [
       allOffChainProjects,
@@ -319,7 +316,8 @@ export function useProjectsWithOrders({
             buyingOptionsFiltersKeys.length === 0
               ? true
               : (buyingOptionsFilters[CREDIT_CARD_BUYING_OPTION_ID]
-                  ? project.cardSellOrders && project.cardSellOrders.length > 0
+                  ? project.allCardSellOrders &&
+                    project.allCardSellOrders.length > 0
                   : true) &&
                 (buyingOptionsFilters[CRYPTO_BUYING_OPTION_ID]
                   ? !project.offChain
@@ -482,10 +480,7 @@ export function useProjectsWithOrders({
     prefinanceProjectsCount: prefinanceProjects.length,
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projectsFilteredByCreditClass?.length,
-    sellOrders: allOnChainProjects
-      .map(project => project.sellOrders)
-      .flat()
-      .filter(order => order?.seller !== wallet?.address), // keep or remove?
+    sellOrders,
     sanityProjects: sanityProjectsData?.allProject,
     loading:
       isLoadingProjects ||

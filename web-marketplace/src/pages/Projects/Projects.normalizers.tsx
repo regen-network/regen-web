@@ -5,10 +5,9 @@ import { FilterOptions } from 'web-components/src/components/organisms/ProjectFi
 import { Project } from 'generated/sanity-graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
-import {
-  ProjectWithOrderData,
-  UISellOrderInfo,
-} from './AllProjects/AllProjects.types';
+import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
+
+import { ProjectWithOrderData } from './AllProjects/AllProjects.types';
 import {
   CREDIT_CARD_BUYING_OPTION_ID,
   CREDIT_CARD_BUYING_OPTION_NAME,
@@ -17,7 +16,7 @@ import {
 } from './Projects.constants';
 
 type NormalizeBuyingOptionsFilterParams = {
-  sellOrders?: UISellOrderInfo[];
+  sellOrders?: SellOrderInfoExtented[];
   allOnChainProjects?: ProjectWithOrderData[];
 
   sanityProjects?: Array<Pick<Project, 'fiatSellOrders'>>;
@@ -40,7 +39,7 @@ export const normalizeBuyingOptionsFilter = ({
     });
   }
 
-  const allSellOrdersIds = sellOrders?.map(order => order?.id);
+  const allSellOrdersIds = sellOrders?.map(order => order?.id.toString());
   const someFiatSellOrders = sanityProjects?.some(project => {
     const fiatSellOrderIds = project?.fiatSellOrders?.map(
       order => order?.sellOrderId,

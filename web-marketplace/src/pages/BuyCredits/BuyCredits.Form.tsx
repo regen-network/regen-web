@@ -566,9 +566,16 @@ export const BuyCreditsForm = ({
               if (!activeWalletAddr) {
                 // no connected wallet address
                 setConnectWalletModal(atom => void (atom.open = true));
-              } else {
+              } else if (!isConnected) {
                 // user logged in with web2 but not connected to the wallet address associated to his/er account
                 setSwitchWalletModalAtom(atom => void (atom.open = true));
+              } else {
+                // web3 account connected
+                handleSave(
+                  { ...data, paymentOption: PAYMENT_OPTIONS.CRYPTO },
+                  activeStep,
+                );
+                handleActiveStep(0);
               }
             } else if (action) {
               navigate(action);

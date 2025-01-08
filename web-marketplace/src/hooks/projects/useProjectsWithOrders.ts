@@ -307,7 +307,6 @@ export function useProjectsWithOrders({
     () =>
       allProjects
         .filter(project => {
-          console.log(project.id, project.offChain);
           const isFromSelectedCreditClasses =
             creditClassFilterKeys.length === 0
               ? true

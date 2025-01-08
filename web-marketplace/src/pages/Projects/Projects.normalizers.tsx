@@ -1,4 +1,5 @@
 import CreditCardIcon from 'web-components/src/components/icons/CreditCardIcon';
+import CryptoIcon from 'web-components/src/components/icons/CryptoIcon';
 import { FilterOptions } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
 import { Project } from 'generated/sanity-graphql';
@@ -34,7 +35,7 @@ export const normalizeBuyingOptionsFilter = ({
   if (allOnChainProjects && allOnChainProjects.length > 0) {
     buyingOptionsFilterOptions.push({
       name: _(CRYPTO_BUYING_OPTION_NAME),
-      startIcon: <></>, //TODO
+      startIcon: <CryptoIcon className="" />,
       id: CRYPTO_BUYING_OPTION_ID,
     });
   }

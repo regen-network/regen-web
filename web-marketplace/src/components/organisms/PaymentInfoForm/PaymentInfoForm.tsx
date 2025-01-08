@@ -55,7 +55,12 @@ export const PaymentInfoForm = ({
   setCardDetails,
 }: PaymentInfoFormProps) => {
   const { _ } = useLingui();
-  const { handleBack } = useMultiStep();
+  const {
+    handleBack,
+    handleSave: updateMultiStepData,
+    activeStep,
+    data,
+  } = useMultiStep();
   const [paymentInfoValid, setPaymentInfoValid] = useState(false);
 
   const form = useZodForm({
@@ -89,6 +94,18 @@ export const PaymentInfoForm = ({
     () => paymentOption === PAYMENT_OPTIONS.CARD,
     [paymentOption],
   );
+
+  const handleOnBlur = () => {
+    updateMultiStepData(
+      {
+        ...data,
+        name: form.watch('name'),
+        email: form.watch('email'),
+      },
+      activeStep,
+    );
+  };
+
   return (
     <Form
       form={form}
@@ -142,6 +159,7 @@ export const PaymentInfoForm = ({
         }
         onSubmit(values);
       }}
+      onBlur={handleOnBlur}
     >
       <div className="flex flex-col gap-10 sm:gap-20 max-w-[560px]">
         <CustomerInfo

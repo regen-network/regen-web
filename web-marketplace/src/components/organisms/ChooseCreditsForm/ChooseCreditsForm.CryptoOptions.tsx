@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { cryptoOptions } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
@@ -12,7 +13,7 @@ export function CryptoOptions({
   tradableDisabled = false,
 }: {
   retiring: boolean;
-  handleCryptoPurchaseOptions: () => void;
+  handleCryptoPurchaseOptions: (event: ChangeEvent<HTMLInputElement>) => void;
   tradableDisabled?: boolean;
 }) {
   const { _ } = useLingui();

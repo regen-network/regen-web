@@ -3,7 +3,7 @@ import { Trans } from '@lingui/macro';
 import { useAtomValue } from 'jotai';
 
 import CreditCardIcon from 'web-components/src/components/icons/CreditCardIcon';
-import CryptoIcon from 'web-components/src/components/icons/CryptoIcon';
+import CryptoRegenIcon from 'web-components/src/components/icons/CryptoRegenIcon';
 
 import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
@@ -92,7 +92,7 @@ export const PaymentOptions = ({
         isChecked={paymentOption === PAYMENT_OPTIONS.CRYPTO}
         onChange={handleButtonClick}
       >
-        <CryptoIcon />
+        <CryptoRegenIcon />
         <div>
           <Trans>Buy with crypto</Trans>
         </div>

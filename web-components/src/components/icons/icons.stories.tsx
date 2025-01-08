@@ -38,6 +38,7 @@ import CreditsIssuedIcon from './CreditsIssued';
 import CreditsRetiredIcon from './CreditsRetired';
 import CreditsTradeableIcon from './CreditsTradeable';
 import CryptoIcon from './CryptoIcon';
+import CryptoRegenIcon from './CryptoRegenIcon';
 import CurrentCreditsIcon from './CurrentCreditsIcon';
 import DocumentIcon from './DocumentIcon';
 import { DraftDocumentIcon } from './DraftDocumentIcon';
@@ -395,6 +396,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<USFlagIcon />} label="USFlagIcon" />
     <LabeledIcon icon={<CreditCardIcon />} label="CreditCardIcon" />
     <LabeledIcon icon={<CryptoIcon />} label="CryptoIcon" />
+    <LabeledIcon icon={<CryptoRegenIcon />} label="CryptoRegenIcon" />
     <LabeledIcon icon={<PaymentInfoIcon />} label="PaymentInfoIcon" />
     <LabeledIcon icon={<ShoppingBagIcon />} label="ShoppingBagIcon" />
     <LabeledIcon icon={<ReceiptIcon />} label="ReceiptIcon" />

@@ -4,7 +4,7 @@ import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import cn from 'classnames';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
@@ -46,26 +46,18 @@ const Projects = (): JSX.Element => {
   const { _ } = useLingui();
   const { page: routePage } = useParams();
   const location = useLocation();
-  const [useCommunityProjects, setUseCommunityProjects] = useAtom(
-    useCommunityProjectsAtom,
-  );
+  const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
   const [sort] = useAtom(projectsSortAtom);
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
     creditClassSelectedFiltersAtom,
   );
-  const [creditClassInitialFilters, setCreditClassInitialFilters] = useAtom(
+  const setCreditClassInitialFilters = useSetAtom(
     creditClassInitialFiltersAtom,
   );
-  const [environmentTypeFilters, setEnvironmentTypeFilters] = useAtom(
-    environmentTypeFiltersAtom,
-  );
-  const [regionFilters, setRegionFilters] = useAtom(regionFiltersAtom);
-  const [marketTypeFilters, setMarketTypeFilters] = useAtom(
-    marketTypeFiltersAtom,
-  );
-  const [buyingOptionsFilters, setBuyingOptionsFilters] = useAtom(
-    buyingOptionsFiltersAtom,
-  );
+  const [environmentTypeFilters] = useAtom(environmentTypeFiltersAtom);
+  const [regionFilters] = useAtom(regionFiltersAtom);
+  const [marketTypeFilters] = useAtom(marketTypeFiltersAtom);
+  const [buyingOptionsFilters] = useAtom(buyingOptionsFiltersAtom);
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const { data: allHomePageData } = useQuery(
@@ -94,7 +86,6 @@ const Projects = (): JSX.Element => {
     prefinanceProjectsCount,
     prefinanceProjects,
     sanityProjects,
-    loading,
     sellOrders,
   } = useProjects({
     sort,
@@ -162,15 +153,9 @@ const Projects = (): JSX.Element => {
 
   const { resetFilters, showResetButton } = useResetFilters();
 
-  const {
-    creditClassesWithMetadata,
-    isLoading: isCreditClassesWithMetadataLoading,
-  } = useFetchCreditClasses();
+  const { creditClassesWithMetadata } = useFetchCreditClasses();
 
-  const {
-    data: sanityCreditClassesData,
-    isLoading: isSanityCreditClassesLoading,
-  } = useQuery(
+  const { data: sanityCreditClassesData } = useQuery(
     getAllSanityCreditClassesQuery({
       sanityClient,
       languageCode: selectedLanguage,
@@ -186,15 +171,13 @@ const Projects = (): JSX.Element => {
   });
   const buyingOptionsFilterOptions = useMemo(
     () =>
-      loading
-        ? []
-        : normalizeBuyingOptionsFilter({
-            sellOrders,
-            allOnChainProjects,
-            sanityProjects,
-            _,
-          }),
-    [_, sellOrders, allOnChainProjects, loading, sanityProjects],
+      normalizeBuyingOptionsFilter({
+        sellOrders,
+        allOnChainProjects,
+        sanityProjects,
+        _,
+      }),
+    [_, sellOrders, allOnChainProjects, sanityProjects],
   );
 
   useEffect(() => {

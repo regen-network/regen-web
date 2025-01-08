@@ -163,15 +163,12 @@ export const getWarningModalContent = (
 
 export const getSellOrdersCredits = (
   sellOrders: UISellOrderInfo[] | SellOrderInfoExtented[] | undefined,
-  projectId: string,
 ) => {
   return (
-    sellOrders
-      ?.filter(sellOrder => sellOrder?.batchDenom?.startsWith(projectId))
-      .reduce(
-        (credits, sellOrder) => credits + Number(sellOrder.quantity),
-        0,
-      ) || 0
+    sellOrders?.reduce(
+      (credits, sellOrder) => credits + Number(sellOrder.quantity),
+      0,
+    ) || 0
   );
 };
 

@@ -269,19 +269,14 @@ export const BuyCreditsForm = ({
     ) => {
       if (project) {
         const sellOrders = await refetchSellOrders();
-        const creditsInAllSellOrders = getSellOrdersCredits(
-          sellOrders,
-          project.id,
-        );
+        const creditsInAllSellOrders = getSellOrdersCredits(sellOrders);
         const creditsToBuy = data?.creditsAmount;
         const requestedSellOrders = findMatchingSellOrders(
           data,
           sellOrders?.map(normalizeToUISellOrderInfo),
         );
-        const creditsInRequestedSellOrders = getSellOrdersCredits(
-          requestedSellOrders,
-          project.id,
-        );
+        const creditsInRequestedSellOrders =
+          getSellOrdersCredits(requestedSellOrders);
 
         const sellCanProceed =
           creditsToBuy && creditsToBuy <= creditsInRequestedSellOrders;

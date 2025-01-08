@@ -5,6 +5,7 @@ import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
 type Props = {
   projectId?: string;
   classId?: string;
+  isOffChainProject?: boolean;
 };
 
 type ResponseType = {
@@ -16,6 +17,7 @@ type ResponseType = {
 export const useBuySellOrderData = ({
   projectId,
   classId,
+  isOffChainProject = false,
 }: Props): ResponseType => {
   const { projectsWithOrderData, loading: loadingProjects } =
     useProjectsWithOrders({
@@ -23,6 +25,7 @@ export const useBuySellOrderData = ({
       classId,
       enableOffchainProjectsQuery: false,
       useCommunityProjects: true,
+      isOffChainProject,
     });
 
   const isBuyFlowDisabled =

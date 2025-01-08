@@ -62,6 +62,7 @@ export interface ProjectsWithOrdersProps {
   environmentTypeFilter?: Record<string, boolean>;
   marketTypeFilter?: Record<string, boolean>;
   buyingOptionsFilters?: Record<string, boolean>;
+  isOffChainProject?: boolean;
 }
 
 /**
@@ -86,6 +87,7 @@ export function useProjectsWithOrders({
   environmentTypeFilter = {},
   marketTypeFilter = { COMPLIANCE_MARKET: true, VOLUNTARY_MARKET: true },
   buyingOptionsFilters = {},
+  isOffChainProject = false,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
   const graphqlClient = useApolloClient();
@@ -108,7 +110,8 @@ export function useProjectsWithOrders({
 
   const { data: projectsData, isFetching: isLoadingProjects } = useQuery(
     getProjectsQuery({
-      enabled: !classId && !projectId && !!ecocreditClient,
+      enabled:
+        !isOffChainProject && !classId && !projectId && !!ecocreditClient,
       client: ecocreditClient,
       request: {},
     }),
@@ -125,7 +128,7 @@ export function useProjectsWithOrders({
 
   const { data: sellOrders, isLoading: isLoadingSellOrders } = useQuery(
     getSellOrdersExtendedQuery({
-      enabled: !!marketplaceClient,
+      enabled: !isOffChainProject && !!marketplaceClient,
       client: marketplaceClient,
       reactQueryClient,
       request: {},
@@ -137,7 +140,7 @@ export function useProjectsWithOrders({
     useQuery(
       getAllSanityCreditClassesQuery({
         sanityClient,
-        enabled: !!sanityClient,
+        enabled: !isOffChainProject && !!sanityClient,
         languageCode: selectedLanguage,
       }),
     );
@@ -147,7 +150,7 @@ export function useProjectsWithOrders({
     useQuery(
       getAllSanityProjectsQuery({
         sanityClient,
-        enabled: !!sanityClient,
+        enabled: !isOffChainProject && !!sanityClient,
         languageCode: selectedLanguage,
       }),
     );
@@ -240,7 +243,7 @@ export function useProjectsWithOrders({
     [allOnChainProjects],
   );
 
-  // Include offchain data and sanity fiatSellOrders data to allOnChainProjects because we need it for filtering
+  // Include offchain data and cardSellOrders from sanity data to allOnChainProjects because we need it for filtering
   const projectsWithMetadataFiltered = useMemo(
     () =>
       projectsWithOrderDataFiltered.map(project => {

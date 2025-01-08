@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import _ from 'lodash';
 
 // type Params<T> = [T, React.Dispatch<T>];
 interface StorageApi<T> {
@@ -26,12 +27,15 @@ export default function useStorage<T>(
 
   useEffect(() => {
     if (withLocalStorage && data) {
-      // TODO: if (_.isEqual(data, initialValues)) return;
-      try {
-        localStorage.setItem(key, JSON.stringify(data));
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
+      const storedValue = localStorage.getItem(key);
+      const currentValue = storedValue ? JSON.parse(storedValue) : {};
+      if (!_.isEqual(data, currentValue)) {
+        try {
+          localStorage.setItem(key, JSON.stringify(data));
+        } catch (err) {
+          // eslint-disable-next-line no-console
+          console.log(err);
+        }
       }
     }
   }, [data, key, withLocalStorage]);

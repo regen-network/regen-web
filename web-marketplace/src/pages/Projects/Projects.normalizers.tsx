@@ -18,6 +18,7 @@ import {
 type NormalizeBuyingOptionsFilterParams = {
   sellOrders?: SellOrderInfoExtented[];
   allOnChainProjects?: ProjectWithOrderData[];
+  prefinance: boolean;
 
   sanityProjects?: Array<Pick<Project, 'fiatSellOrders'>>;
   _: TranslatorType;
@@ -27,14 +28,15 @@ export const normalizeBuyingOptionsFilter = ({
   sellOrders,
   allOnChainProjects,
   sanityProjects,
+  prefinance,
   _,
 }: NormalizeBuyingOptionsFilterParams): FilterOptions[] => {
   const buyingOptionsFilterOptions = [];
 
-  if (allOnChainProjects && allOnChainProjects.length > 0) {
+  if (!prefinance && allOnChainProjects && allOnChainProjects.length > 0) {
     buyingOptionsFilterOptions.push({
       name: _(CRYPTO_BUYING_OPTION_NAME),
-      startIcon: <CryptoIcon className="" />,
+      startIcon: <CryptoIcon />,
       id: CRYPTO_BUYING_OPTION_ID,
     });
   }
@@ -46,11 +48,14 @@ export const normalizeBuyingOptionsFilter = ({
     );
     return fiatSellOrderIds?.some(id => id && allSellOrdersIds?.includes(id));
   });
-  if (someFiatSellOrders) {
+  if (prefinance || someFiatSellOrders) {
     buyingOptionsFilterOptions.push({
       name: _(CREDIT_CARD_BUYING_OPTION_NAME),
-      startIcon: <CreditCardIcon className="text-brand-400" />,
+      startIcon: (
+        <CreditCardIcon className={prefinance ? '' : 'text-brand-400'} />
+      ),
       id: CREDIT_CARD_BUYING_OPTION_ID,
+      disabled: prefinance,
     });
   }
 

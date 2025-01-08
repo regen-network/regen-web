@@ -316,8 +316,9 @@ export function useProjectsWithOrders({
             buyingOptionsFiltersKeys.length === 0
               ? true
               : (buyingOptionsFilters[CREDIT_CARD_BUYING_OPTION_ID]
-                  ? project.allCardSellOrders &&
-                    project.allCardSellOrders.length > 0
+                  ? (project.allCardSellOrders &&
+                      project.allCardSellOrders.length > 0) ||
+                    project.projectPrefinancing?.isPrefinanceProject
                   : true) &&
                 (buyingOptionsFilters[CRYPTO_BUYING_OPTION_ID]
                   ? !project.offChain

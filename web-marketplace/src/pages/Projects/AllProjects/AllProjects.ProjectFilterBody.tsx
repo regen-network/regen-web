@@ -10,6 +10,7 @@ import { buyingOptionsFiltersAtom } from 'lib/atoms/projects.atoms';
 import { IS_REGEN } from 'lib/env';
 
 import { useClientFilters } from '../hooks/useClientFilters';
+import { CREDIT_CARD_BUYING_OPTION_ID } from '../Projects.constants';
 import { CommunityFilter } from './AllProjects.CommunityFilter';
 import {
   COMMUNITY_FILTER_LABEL,
@@ -53,7 +54,10 @@ const ProjectFilterBody = ({
     <ProjectFilters
       filters={[
         {
-          selectedFilters: buyingOptionsFilters,
+          selectedFilters: prefinance
+            ? // Show credit card option as checked by default from prefinance tab
+              { ...buyingOptionsFilters, [CREDIT_CARD_BUYING_OPTION_ID]: true }
+            : buyingOptionsFilters,
           displayType: 'checkbox',
           title: _(msg`Buying options`),
           options: buyingOptionsFilterOptions,

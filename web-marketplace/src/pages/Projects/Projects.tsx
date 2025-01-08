@@ -60,6 +60,8 @@ const Projects = (): JSX.Element => {
   const [buyingOptionsFilters] = useAtom(buyingOptionsFiltersAtom);
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
+  const prefinance = location.pathname.includes('prefinance');
+
   const { data: allHomePageData } = useQuery(
     getAllHomePageQuery({
       sanityClient,
@@ -87,6 +89,7 @@ const Projects = (): JSX.Element => {
     prefinanceProjects,
     sanityProjects,
     sellOrders,
+    loading,
   } = useProjects({
     sort,
     offset: page * PROJECTS_PER_PAGE,
@@ -153,9 +156,15 @@ const Projects = (): JSX.Element => {
 
   const { resetFilters, showResetButton } = useResetFilters();
 
-  const { creditClassesWithMetadata } = useFetchCreditClasses();
+  const {
+    creditClassesWithMetadata,
+    isLoading: isCreditClassesWithMetadataLoading,
+  } = useFetchCreditClasses();
 
-  const { data: sanityCreditClassesData } = useQuery(
+  const {
+    data: sanityCreditClassesData,
+    isLoading: isSanityCreditClassesLoading,
+  } = useQuery(
     getAllSanityCreditClassesQuery({
       sanityClient,
       languageCode: selectedLanguage,
@@ -175,9 +184,10 @@ const Projects = (): JSX.Element => {
         sellOrders,
         allOnChainProjects,
         sanityProjects,
+        prefinance,
         _,
       }),
-    [_, sellOrders, allOnChainProjects, sanityProjects],
+    [sellOrders, allOnChainProjects, sanityProjects, prefinance, _],
   );
 
   useEffect(() => {
@@ -268,6 +278,10 @@ const Projects = (): JSX.Element => {
               soldOutProjectsIds,
               creditClassFilters,
               buyingOptionsFilterOptions,
+              loading:
+                loading ||
+                isCreditClassesWithMetadataLoading ||
+                isSanityCreditClassesLoading,
             }}
           />
         </div>

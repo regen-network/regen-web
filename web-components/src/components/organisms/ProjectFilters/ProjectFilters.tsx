@@ -9,7 +9,7 @@ export interface FilterOptions {
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
   id: string;
-  disabled?: string;
+  disabled?: boolean;
 }
 
 export interface Filter {
@@ -94,18 +94,21 @@ export default function ProjectFilters({
               )}
               {filter.displayType === 'checkbox' && (
                 <div className="flex flex-col">
-                  {filter.options.map(({ name, startIcon, endIcon, id }) => (
-                    <CheckboxFilter
-                      isSelected={filter.selectedFilters?.[id] ?? false}
-                      name={name}
-                      startIcon={startIcon}
-                      endIcon={endIcon}
-                      key={id}
-                      onChange={() =>
-                        filter.onFilterChange && filter.onFilterChange(id)
-                      }
-                    />
-                  ))}
+                  {filter.options.map(
+                    ({ name, startIcon, endIcon, id, disabled }) => (
+                      <CheckboxFilter
+                        isSelected={filter.selectedFilters?.[id] ?? false}
+                        name={name}
+                        startIcon={startIcon}
+                        endIcon={endIcon}
+                        key={id}
+                        disabled={disabled}
+                        onChange={() =>
+                          filter.onFilterChange && filter.onFilterChange(id)
+                        }
+                      />
+                    ),
+                  )}
                 </div>
               )}
               {filter.displayType === 'children' && filter.children}

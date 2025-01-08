@@ -123,12 +123,12 @@ export const CreditClassFilters = ({ creditClassFilters = [] }: Props) => {
                 sx={{
                   mb: 2,
                   ml: 0,
-                  fontSize: 14,
                   '& > span': {
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     width: 250,
+                    fontSize: 14,
                   },
                 }}
               />

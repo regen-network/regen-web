@@ -4,6 +4,7 @@ import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
 import ProjectFilters from 'web-components/src/components/organisms/ProjectFilters';
+import { FilterOptions } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
 import { buyingOptionsFiltersAtom } from 'lib/atoms/projects.atoms';
 import { IS_REGEN } from 'lib/env';
@@ -15,7 +16,6 @@ import {
   CREDIT_CLASS_FILTER_LABEL,
 } from './AllProjects.constants';
 import { CreditClassFilters } from './AllProjects.CreditClassFilters';
-import { getRegionTags } from './AllProjects.ProjectFilterBody.utils';
 import { CreditClassFilter, ProjectWithOrderData } from './AllProjects.types';
 
 type Props = {
@@ -24,6 +24,7 @@ type Props = {
   resetFilters: () => void;
   showResetButton?: boolean;
   hasCommunityProjects: boolean;
+  buyingOptionsFilterOptions: FilterOptions[];
 };
 
 const ProjectFilterBody = ({
@@ -32,6 +33,7 @@ const ProjectFilterBody = ({
   resetFilters,
   showResetButton = true,
   hasCommunityProjects,
+  buyingOptionsFilterOptions,
 }: Props) => {
   const { _ } = useLingui();
 
@@ -54,7 +56,7 @@ const ProjectFilterBody = ({
           selectedFilters: buyingOptionsFilters,
           displayType: 'checkbox',
           title: _(msg`Buying options`),
-          options: [],
+          options: buyingOptionsFilterOptions,
           onFilterChange: (id: string) => {
             setBuyingOptionsFilterAtom(prev => ({ ...prev, [id]: !prev[id] }));
           },

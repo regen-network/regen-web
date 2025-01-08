@@ -63,7 +63,7 @@ const Projects = (): JSX.Element => {
   const [marketTypeFilters, setMarketTypeFilters] = useAtom(
     marketTypeFiltersAtom,
   );
-  const [buyingOptionsFilters, setBuyingOptionsFilterAtom] = useAtom(
+  const [buyingOptionsFilters, setBuyingOptionsFilters] = useAtom(
     buyingOptionsFiltersAtom,
   );
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -93,8 +93,9 @@ const Projects = (): JSX.Element => {
     hasCommunityProjects,
     prefinanceProjectsCount,
     prefinanceProjects,
-    filteredSellOrders,
     sanityProjects,
+    loading,
+    sellOrders,
   } = useProjects({
     sort,
     offset: page * PROJECTS_PER_PAGE,
@@ -104,6 +105,7 @@ const Projects = (): JSX.Element => {
     environmentTypeFilter: environmentTypeFilters,
     marketTypeFilter: marketTypeFilters,
     sortPinnedIds,
+    buyingOptionsFilters,
   });
 
   const tabs: IconTabProps[] = useMemo(
@@ -182,12 +184,18 @@ const Projects = (): JSX.Element => {
     haveOffChainProjects,
     _,
   });
-  const buyingOptionsFilterOptions = normalizeBuyingOptionsFilter({
-    filteredSellOrders,
-    sanityProjects,
-    _,
-  });
-  console.log('buyingOptionsFilterOptions', buyingOptionsFilterOptions);
+  const buyingOptionsFilterOptions = useMemo(
+    () =>
+      loading
+        ? []
+        : normalizeBuyingOptionsFilter({
+            sellOrders,
+            allOnChainProjects,
+            sanityProjects,
+            _,
+          }),
+    [_, sellOrders, allOnChainProjects, loading, sanityProjects],
+  );
 
   useEffect(() => {
     // Check all the credit class filters by default
@@ -235,6 +243,7 @@ const Projects = (): JSX.Element => {
             showResetButton={showResetButton}
             hasCommunityProjects={hasCommunityProjects}
             creditClassFilters={creditClassFilters}
+            buyingOptionsFilterOptions={buyingOptionsFilterOptions}
           />
         </div>
         <div
@@ -275,6 +284,7 @@ const Projects = (): JSX.Element => {
               prefinanceProjectsContent,
               soldOutProjectsIds,
               creditClassFilters,
+              buyingOptionsFilterOptions,
             }}
           />
         </div>

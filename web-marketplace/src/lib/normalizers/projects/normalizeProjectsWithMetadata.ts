@@ -239,11 +239,11 @@ export const normalizeProjectWithMetadata = ({
   } as NormalizeProject;
 };
 
-const getCardSellOrders = (
+export const getCardSellOrders = (
   sanityFiatSellOrders: SanityProject['fiatSellOrders'],
   sellOrders: UISellOrderInfo[],
 ) =>
-  sanityFiatSellOrders
+  (sanityFiatSellOrders
     ?.map(fiatOrder => {
       const sellOrder = sellOrders.find(
         cryptoOrder => cryptoOrder.id.toString() === fiatOrder?.sellOrderId,
@@ -256,4 +256,4 @@ const getCardSellOrders = (
       }
       return null;
     })
-    .filter(Boolean) || [];
+    .filter(Boolean) || []) as CardSellOrder[];

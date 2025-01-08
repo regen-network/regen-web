@@ -100,6 +100,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     soldOutProjectsIds,
     loading,
     creditClassFilters,
+    buyingOptionsFilterOptions,
   } = useProjectsContext();
 
   const sortOptionsTranslated = useMemo(
@@ -140,6 +141,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
             className="lg:hidden w-full mb-15 mr-0"
             hasCommunityProjects={hasCommunityProjects}
             creditClassFilters={creditClassFilters}
+            buyingOptionsFilterOptions={buyingOptionsFilterOptions}
           />
 
           {IS_REGEN && (

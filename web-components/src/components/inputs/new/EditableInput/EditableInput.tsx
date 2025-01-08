@@ -1,18 +1,11 @@
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 
 import { sanitizeValue } from './EditableInput.utils';
 
 interface EditableInputProps {
-  value: number;
+  value: string;
   maxValue: number;
   onChange: (amount: number) => void;
   name?: string;
@@ -46,17 +39,14 @@ export const EditableInput = ({
   isEditable,
 }: EditableInputProps) => {
   const [editable, setEditable] = useState(false);
-  const [initialValue, setInitialValue] = useState(value);
+  const [initialValue, setInitialValue] = useState(value.toString());
   const [currentValue, setCurrentValue] = useState(value);
   const wrapperRef = useRef(null);
 
-  const amountValid = useMemo(
-    () => currentValue <= maxValue && currentValue > 0,
-    [currentValue, maxValue],
-  );
+  const amountValid = +currentValue <= maxValue && +currentValue > 0;
 
   const isUpdateDisabled =
-    !amountValid || error?.hasError || initialValue === currentValue;
+    !amountValid || error?.hasError || +initialValue === +currentValue;
 
   useEffect(() => {
     setInitialValue(value);
@@ -85,6 +75,11 @@ export const EditableInput = ({
   }, [editable, initialValue]);
 
   const toggleEditable = () => {
+    // If the value is '0', clear the input field when it becomes editable
+    // so the user can start typing a new value with the cursor before the '0' (placeholder)
+    if (!editable && currentValue === '0') {
+      setCurrentValue('');
+    }
     setEditable(!editable);
   };
 
@@ -92,10 +87,12 @@ export const EditableInput = ({
     e.preventDefault();
     const value = e.target.value;
     const sanitizedValue = sanitizeValue(value);
-    if (sanitizedValue > maxValue && onInvalidValue) {
+    if (+sanitizedValue > maxValue && onInvalidValue) {
       onInvalidValue();
+      setCurrentValue(maxValue.toString());
+    } else {
+      setCurrentValue(sanitizedValue);
     }
-    setCurrentValue(Math.min(sanitizedValue, maxValue));
   };
 
   const handleOnCancel = () => {
@@ -105,7 +102,7 @@ export const EditableInput = ({
 
   const handleOnUpdate = () => {
     if (isUpdateDisabled) return;
-    onChange(currentValue);
+    onChange(+currentValue);
     toggleEditable();
   };
 
@@ -121,7 +118,7 @@ export const EditableInput = ({
   };
 
   useEffect(() => {
-    onKeyDown && onKeyDown(currentValue);
+    onKeyDown && onKeyDown(+currentValue);
   }, [currentValue, onKeyDown]);
 
   return (
@@ -134,7 +131,7 @@ export const EditableInput = ({
           >
             <input
               type="text"
-              className="[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-50 py-20 px-15 w-[100px] border border-solid border-grey-300 text-base font-normal font-sans focus:outline-none"
+              className="h-50 py-20 px-15 w-[100px] border border-solid border-grey-300 text-base font-normal font-sans focus:outline-none"
               value={currentValue}
               onChange={handleOnChange}
               onKeyDown={handleKeyDown}
@@ -142,6 +139,8 @@ export const EditableInput = ({
               name={name}
               autoFocus
               data-testid="editable-input"
+              placeholder="0"
+              inputMode="decimal"
             />
             <div className="flex flex-row max-[450px]:flex-col max-[450px]:items-start max-[450px]:ml-15">
               <TextButton

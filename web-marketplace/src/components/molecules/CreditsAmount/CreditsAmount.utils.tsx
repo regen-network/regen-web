@@ -30,7 +30,7 @@ export function getSpendingCap(
 ) {
   return paymentOption === PAYMENT_OPTIONS.CARD
     ? cardSellOrders.reduce((prev, cur) => {
-        return formatCurrencyAmountTwoDecimals(
+        return formatCurrencyAmount(
           prev + Number(cur.quantity) * cur.usdPrice,
           true,
         );
@@ -56,7 +56,7 @@ export const getCreditsAmount = ({
   creditTypePrecision,
 }: GetCreditsAmountParams) => {
   const currentCurrencyAmount = card
-    ? formatCurrencyAmountTwoDecimals(value, true)
+    ? formatCurrencyAmount(value, true)
     : denomToMicro(value);
   let currentCreditsAmount = 0;
   let currencyAmountLeft = currentCurrencyAmount;
@@ -70,7 +70,7 @@ export const getCreditsAmount = ({
 
     if (currencyAmountLeft >= orderTotalAmount) {
       currencyAmountLeft = card
-        ? formatCurrencyAmountTwoDecimals(currencyAmountLeft - orderTotalAmount)
+        ? formatCurrencyAmount(currencyAmountLeft - orderTotalAmount)
         : parseFloat((currencyAmountLeft - orderTotalAmount).toFixed(6));
       currentCreditsAmount += quantity;
       sellOrders.push(formatSellOrder({ order, card, price }));
@@ -142,7 +142,7 @@ export const getCurrencyAmount = ({
 
   return {
     [CURRENCY_AMOUNT]: card
-      ? formatCurrencyAmountTwoDecimals(currentCurrencyAmount, true)
+      ? formatCurrencyAmount(currentCurrencyAmount, true)
       : parseFloat(microToDenom(currentCurrencyAmount).toFixed(6)),
     sellOrders,
   };
@@ -184,7 +184,7 @@ export const formatSellOrder = ({
  * @returns The formatted currency amount as a number with two decimals.
  *
  */
-export const formatCurrencyAmountTwoDecimals = (
+export const formatCurrencyAmount = (
   value: string | number,
   roundUpDecimal = false,
 ) => {
@@ -200,9 +200,26 @@ export const formatCurrencyAmountTwoDecimals = (
   // the first two decimals only, if any, or rounding them up.
   const formattedValue = roundUpDecimal
     ? +(Math.ceil(numericValue * 100) / 100).toFixed(2)
-    : decimalPart?.length > 2
+    : decimalPart
     ? +`${integerPart}.${decimalPart.slice(0, 2)}`
     : +`${integerPart}`;
 
   return formattedValue;
+};
+
+export const shouldFormatValue = (
+  decimalPart: string | undefined,
+  paymentOption: string,
+  value: string,
+): boolean => {
+  const isDecimalPartValid = decimalPart && decimalPart.length > 2;
+  const startsWithZero = decimalPart && decimalPart.startsWith('00');
+  const isCardPayment = paymentOption === PAYMENT_OPTIONS.CARD;
+
+  const condition1 = isDecimalPartValid && startsWithZero && isCardPayment;
+  const condition2 =
+    (isDecimalPartValid && !startsWithZero && isCardPayment) ||
+    /^0[0-9]/.test(value);
+
+  return condition1 || condition2;
 };

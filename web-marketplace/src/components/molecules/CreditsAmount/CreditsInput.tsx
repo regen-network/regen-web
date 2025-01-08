@@ -31,7 +31,15 @@ export const CreditsInput = ({
   const handleInput = useCallback(
     (event: ChangeEvent<HTMLInputElement>): void => {
       let value = event.target.value;
+
+      // Check if the value starts with a dot and add a leading zero
+      if (/^\.[0-9]/.test(value)) {
+        setValue(CREDITS_AMOUNT, +`0${value}`, {
+          shouldValidate: true,
+        });
+      }
       if (/^0[0-9]/.test(value)) {
+        // remove extra leading zeros
         value = value.replace(/^0+/, '');
         setValue(CREDITS_AMOUNT, parseFloat(Number(value).toFixed(2)), {
           shouldValidate: true,
@@ -46,6 +54,15 @@ export const CreditsInput = ({
       // If the value is empty, set it to 0
       const value = event.target.value;
       if (value === '') {
+        setValue(CREDITS_AMOUNT, 0, { shouldValidate: true });
+      }
+    },
+    [setValue],
+  );
+  const handleOnFocus = useCallback(
+    (event: FocusEvent<HTMLInputElement>): void => {
+      const value = event.target.value;
+      if (value === '0') {
         setValue(CREDITS_AMOUNT, 0, { shouldValidate: true });
       }
     },
@@ -67,6 +84,8 @@ export const CreditsInput = ({
         onChange={onHandleChange}
         onInput={handleInput}
         onBlur={handleOnBlur}
+        onFocus={handleOnFocus}
+        placeholder="0"
         sx={{
           '& .MuiInputBase-root': {
             border: 'none',

@@ -20,7 +20,7 @@ const CustomSelect = ({
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>(defaultOption);
   const [OptionComponent, setOptionComponent] = useState<ComponentType>(
-    () => options[0].component?.element as ComponentType,
+    () => options?.[0]?.component?.element as ComponentType,
   );
 
   const handleSelect = (option: string) => {

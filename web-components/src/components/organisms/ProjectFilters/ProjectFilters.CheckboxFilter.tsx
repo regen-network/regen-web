@@ -7,15 +7,18 @@ export default function CheckboxFilter({
   name,
   isSelected,
   onChange,
+  disabled,
 }: {
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
   name: string | JSX.Element;
   isSelected: boolean;
   onChange?: () => void;
+  disabled?: boolean;
 }) {
   return (
     <FormControlLabel
+      disabled={disabled}
       className="ml-0 mb-[12px]"
       control={
         <Checkbox

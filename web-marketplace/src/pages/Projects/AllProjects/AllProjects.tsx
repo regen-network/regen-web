@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
 import { getClientConfig } from 'clients/Clients.config';
 import { useAtom } from 'jotai';
 
@@ -18,9 +17,7 @@ import { Body } from 'web-components/src/components/typography';
 import { pxToRem } from 'web-components/src/theme/muiTheme';
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { projectsSortAtom } from 'lib/atoms/projects.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
 import {
   DRAFT_TEXT,
   EMPTY_OPTION_TEXT,
@@ -29,13 +26,11 @@ import {
   getProjectCardPurchaseDetailsTitleMapping,
 } from 'lib/constants/shared.constants';
 import { COLOR_SCHEME, IS_REGEN, IS_TERRASOS } from 'lib/env';
-import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { TebuBannerWrapper } from 'components/organisms/TebuBannerWrapper/TebuBannerWrapper';
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
-import { useFetchCreditClasses } from '../hooks/useFetchCreditClasses';
 import { useResetFilters } from '../hooks/useResetFilters';
 import { useProjectsContext } from '../Projects.context';
 import {
@@ -49,7 +44,6 @@ import {
   RESET_FILTERS_LABEL,
   VOLUNTARY_MARKET,
 } from './AllProjects.constants';
-import { normalizeCreditClassFilters } from './AllProjects.normalizers';
 import ProjectFilterMobile from './AllProjects.ProjectFilterMobile';
 import { TerrasosCredits } from './AllProjects.TerrasosCredits';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
@@ -57,7 +51,6 @@ import { getIsSoldOut } from './utils/getIsSoldOut';
 
 export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
-  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { page: routePage } = useParams();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -73,21 +66,6 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
 
   const { showResetButton, resetFilters } = useResetFilters();
-
-  const {
-    creditClassesWithMetadata,
-    isLoading: isCreditClassesWithMetadataLoading,
-  } = useFetchCreditClasses();
-
-  const {
-    data: sanityCreditClassesData,
-    isLoading: isSanityCreditClassesLoading,
-  } = useQuery(
-    getAllSanityCreditClassesQuery({
-      sanityClient,
-      languageCode: selectedLanguage,
-    }),
-  );
 
   const [sort, setSort] = useAtom(projectsSortAtom);
 
@@ -118,7 +96,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     setSort(event.target.value as string);
   };
 
-  if (isSanityCreditClassesLoading || isCreditClassesWithMetadataLoading)
+  if (loading)
     return <Loading sx={{ gridColumn: '1 / -1', height: { sm: '50vh' } }} />;
 
   return (

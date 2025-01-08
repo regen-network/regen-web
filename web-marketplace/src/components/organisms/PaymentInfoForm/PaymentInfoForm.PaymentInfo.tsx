@@ -9,6 +9,8 @@ import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';
 import { Title } from 'web-components/src/components/typography';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
+
 import { CardInfo } from './PaymentInfoForm.CardInfo';
 import { PaymentInfoFormSchemaType } from './PaymentInfoForm.schema';
 
@@ -25,7 +27,7 @@ export const PaymentInfo = ({
   const { _ } = useLingui();
   const ctx = useFormContext<PaymentInfoFormSchemaType>();
   const { register, control, setValue } = ctx;
-
+  const { handleSave: updateMultiStepData, activeStep, data } = useMultiStep();
   const createAccount = useWatch({
     control: control,
     name: 'createAccount',
@@ -37,7 +39,18 @@ export const PaymentInfo = ({
 
   useEffect(() => {
     setValue('savePaymentMethod', createAccount);
-  }, [createAccount, setValue]);
+    updateMultiStepData(
+      {
+        ...data,
+        savePaymentMethod: createAccount,
+        createAccount,
+      },
+      activeStep,
+    );
+    // Intentionally omit `updateMultiStepData` and `data` from the dependency array
+    // because including them trigger unnecessary renders.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeStep, createAccount, setValue]);
 
   return (
     <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300">

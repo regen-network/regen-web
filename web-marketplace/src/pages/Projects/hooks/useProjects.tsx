@@ -11,6 +11,7 @@ type Props = {
   regionFilter?: Record<string, boolean>;
   environmentTypeFilter?: Record<string, boolean>;
   marketTypeFilter?: Record<string, boolean>;
+  buyingOptionsFilters?: Record<string, boolean>;
 };
 
 export const useProjects = ({
@@ -22,6 +23,7 @@ export const useProjects = ({
   regionFilter,
   environmentTypeFilter,
   marketTypeFilter,
+  buyingOptionsFilters = {},
 }: Props) => {
   // get normalized projects with sell order data
   const {
@@ -34,7 +36,7 @@ export const useProjects = ({
     hasCommunityProjects,
     prefinanceProjectsCount,
     prefinanceProjects,
-    filteredSellOrders,
+    sellOrders,
     sanityProjects,
   } = useProjectsWithOrders({
     limit: PROJECTS_PER_PAGE,
@@ -46,6 +48,7 @@ export const useProjects = ({
     regionFilter,
     environmentTypeFilter,
     marketTypeFilter,
+    buyingOptionsFilters,
   });
 
   const pagesCount = Math.ceil((projectsCount ?? 0) / PROJECTS_PER_PAGE);
@@ -61,7 +64,7 @@ export const useProjects = ({
     hasCommunityProjects,
     prefinanceProjectsCount,
     prefinanceProjects,
-    filteredSellOrders,
+    sellOrders,
     sanityProjects,
   };
 };

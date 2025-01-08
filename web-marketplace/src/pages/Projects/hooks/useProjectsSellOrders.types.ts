@@ -16,6 +16,6 @@ export interface ProjectsSellOrders {
   hasCommunityProjects: boolean;
   haveOffChainProjects: boolean;
   prefinanceProjectsCount?: number;
-  filteredSellOrders?: UISellOrderInfo[];
+  sellOrders?: UISellOrderInfo[];
   sanityProjects?: Array<Pick<Project, 'fiatSellOrders'>>;
 }

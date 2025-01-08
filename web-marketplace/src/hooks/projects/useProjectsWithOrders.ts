@@ -10,6 +10,7 @@ import { client as sanityClient } from 'lib/clients/sanity';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { IS_REGEN, IS_TERRASOS, SKIPPED_CLASS_ID } from 'lib/env';
 import {
+  getCardSellOrders,
   NormalizeProject,
   normalizeProjectsWithMetadata,
 } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
@@ -33,6 +34,10 @@ import {
 } from 'pages/Projects/AllProjects/utils/sortProjects';
 import { useFetchAllOffChainProjects } from 'pages/Projects/hooks/useOffChainProjects';
 import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders.types';
+import {
+  CREDIT_CARD_BUYING_OPTION_ID,
+  CRYPTO_BUYING_OPTION_ID,
+} from 'pages/Projects/Projects.constants';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 import { useLastRandomProjects } from './useLastRandomProjects';
@@ -56,6 +61,7 @@ export interface ProjectsWithOrdersProps {
   regionFilter?: Record<string, boolean>;
   environmentTypeFilter?: Record<string, boolean>;
   marketTypeFilter?: Record<string, boolean>;
+  buyingOptionsFilters?: Record<string, boolean>;
 }
 
 /**
@@ -79,9 +85,9 @@ export function useProjectsWithOrders({
   regionFilter = {},
   environmentTypeFilter = {},
   marketTypeFilter = { COMPLIANCE_MARKET: true, VOLUNTARY_MARKET: true },
+  buyingOptionsFilters = {},
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
-
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
@@ -203,7 +209,7 @@ export function useProjectsWithOrders({
     selectedProjects,
   });
 
-  const projectsWithOrderData = useMemo(
+  const allOnChainProjects = useMemo(
     () =>
       normalizeProjectsWithOrderData({
         projects: lastRandomProjects ?? selectedProjects,
@@ -223,28 +229,44 @@ export function useProjectsWithOrders({
   // Exclude community projects based on sanity credit class data
   const projectsWithOrderDataFiltered = useMemo(
     () =>
-      projectsWithOrderData.filter(
+      allOnChainProjects.filter(
         project => !!project?.sanityCreditClassData || useCommunityProjects,
       ),
-    [projectsWithOrderData, useCommunityProjects],
+    [allOnChainProjects, useCommunityProjects],
   );
 
   const hasCommunityProjects = useMemo(
-    () =>
-      projectsWithOrderData.some(project => !project?.sanityCreditClassData),
-    [projectsWithOrderData],
+    () => allOnChainProjects.some(project => !project?.sanityCreditClassData),
+    [allOnChainProjects],
   );
 
-  // Include offchain data to projectsWithOrderData because we need it for filtering
+  // Include offchain data and sanity fiatSellOrders data to allOnChainProjects because we need it for filtering
   const projectsWithMetadataFiltered = useMemo(
     () =>
       projectsWithOrderDataFiltered.map(project => {
         const offChainProject = allOffChainProjects.find(
           offChainProject => project.id === offChainProject.onChainId,
         );
-        return { ...offChainProject, ...project };
+        const sanityProject = sanityProjectsData?.allProject?.find(
+          sanityProject =>
+            sanityProject.projectId === project?.id ||
+            sanityProject.projectId === offChainProject?.slug,
+        );
+
+        // const filteredSellOrders = (project?.sellOrders || []).filter(
+        //   sellOrder => sellOrder.seller !== wallet?.address,
+        // );
+        const cardSellOrders = getCardSellOrders(
+          sanityProject?.fiatSellOrders,
+          project?.sellOrders, // TODO use filteredSellOrders?
+        );
+        return { ...offChainProject, ...project, cardSellOrders };
       }),
-    [allOffChainProjects, projectsWithOrderDataFiltered],
+    [
+      allOffChainProjects,
+      projectsWithOrderDataFiltered,
+      sanityProjectsData?.allProject,
+    ],
   );
 
   // Merge on-chain and off-chain projects
@@ -261,11 +283,13 @@ export function useProjectsWithOrders({
     ],
   );
 
-  // Filter projects by class ID
+  // Filter projects by class ID, buying option, etc.
   const creditClassFilterKeys = Object.keys(creditClassFilter);
   const creditClassSelected = creditClassFilterKeys.filter(
     creditClassId => creditClassFilter[creditClassId],
   );
+  const buyingOptionsFiltersKeys = Object.keys(buyingOptionsFilters);
+
   const regionFilterKeys = Object.keys(regionFilter);
   const regionSelected = regionFilterKeys
     .filter(region => regionFilter?.[region])
@@ -283,10 +307,22 @@ export function useProjectsWithOrders({
     () =>
       allProjects
         .filter(project => {
-          return creditClassFilterKeys.length === 0
-            ? true
-            : project.offChain ||
+          console.log(project.id, project.offChain);
+          const isFromSelectedCreditClasses =
+            creditClassFilterKeys.length === 0
+              ? true
+              : project.offChain ||
                 creditClassSelected.includes(project.creditClassId ?? '');
+          const hasSelectedBuyingOptions =
+            buyingOptionsFiltersKeys.length === 0
+              ? true
+              : (buyingOptionsFilters[CREDIT_CARD_BUYING_OPTION_ID]
+                  ? project.cardSellOrders && project.cardSellOrders.length > 0
+                  : true) &&
+                (buyingOptionsFilters[CRYPTO_BUYING_OPTION_ID]
+                  ? !project.offChain
+                  : true);
+          return isFromSelectedCreditClasses && hasSelectedBuyingOptions;
         })
         .filter(project => {
           if (IS_REGEN) return true;
@@ -312,11 +348,13 @@ export function useProjectsWithOrders({
         }),
     [
       allProjects,
-      creditClassFilterKeys,
+      creditClassFilterKeys.length,
       creditClassSelected,
-      marketTypeSelected,
-      environmentTypeSelected,
+      buyingOptionsFiltersKeys.length,
+      buyingOptionsFilters,
       regionSelected,
+      environmentTypeSelected,
+      marketTypeSelected,
     ],
   );
 
@@ -436,16 +474,16 @@ export function useProjectsWithOrders({
 
   return {
     allProjects,
-    allOnChainProjects: projectsWithOrderData,
+    allOnChainProjects,
     prefinanceProjects,
     haveOffChainProjects: onlyOffChainProjects.length > 0,
     prefinanceProjectsCount: prefinanceProjects.length,
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projectsFilteredByCreditClass?.length,
-    filteredSellOrders: projectsFilteredByCreditClass
+    sellOrders: allOnChainProjects
       .map(project => project.sellOrders)
       .flat()
-      .filter(order => order?.seller !== wallet?.address),
+      .filter(order => order?.seller !== wallet?.address), // keep or remove?
     sanityProjects: sanityProjectsData?.allProject,
     loading:
       isLoadingProjects ||

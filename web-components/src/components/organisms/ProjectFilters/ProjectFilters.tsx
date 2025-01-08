@@ -5,8 +5,9 @@ import TagFilter from './ProjectFilter.TagFilter';
 import CheckboxFilter from './ProjectFilters.CheckboxFilter';
 
 export interface FilterOptions {
-  name: string | JSX.Element;
-  icon: JSX.Element;
+  name: string;
+  startIcon?: JSX.Element;
+  endIcon?: JSX.Element;
   id: string;
   disabled?: string;
 }
@@ -77,10 +78,10 @@ export default function ProjectFilters({
             >
               {filter.displayType === 'tag' && (
                 <Box display="flex" flexWrap="wrap" gap={2} className="ml-1">
-                  {filter.options.map(({ name, icon, id }) => (
+                  {filter.options.map(({ name, startIcon, id }) => (
                     <TagFilter
                       name={name}
-                      icon={icon}
+                      icon={startIcon}
                       key={id}
                       isSelected={filter.selectedFilters?.[id] ?? false}
                       onClick={() =>
@@ -93,11 +94,12 @@ export default function ProjectFilters({
               )}
               {filter.displayType === 'checkbox' && (
                 <div className="flex flex-col">
-                  {filter.options.map(({ name, icon, id }) => (
+                  {filter.options.map(({ name, startIcon, endIcon, id }) => (
                     <CheckboxFilter
                       isSelected={filter.selectedFilters?.[id] ?? false}
                       name={name}
-                      icon={icon}
+                      startIcon={startIcon}
+                      endIcon={endIcon}
                       key={id}
                       onChange={() =>
                         filter.onFilterChange && filter.onFilterChange(id)

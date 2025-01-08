@@ -44,7 +44,12 @@ export const CommunityFilter = ({ sx }: CommunityFilterProps) => {
           />
         }
         label={_(COMMUNITY_FILTER)}
-        sx={{ whiteSpace: 'nowrap', mr: 1, ml: 0, fontSize: 14 }}
+        sx={{
+          whiteSpace: 'nowrap',
+          mr: 1,
+          ml: 0,
+          '& .MuiFormControlLabel-label': { fontSize: '14px' },
+        }}
       />
       <InfoTooltipWithIcon
         title={

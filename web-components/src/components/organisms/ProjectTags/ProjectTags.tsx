@@ -94,7 +94,9 @@ const ProjectTags = ({
                 tag={{
                   ...ecosystem,
                   icon:
-                    overrideIconColor && isImageType(ecosystem.icon) ? (
+                    overrideIconColor &&
+                    ecosystem.icon &&
+                    isImageType(ecosystem.icon) ? (
                       <SvgColorOverride
                         src={ecosystem.icon.src}
                         color="rgba(var(--sc-icon-ecosystem-600))"

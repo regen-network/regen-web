@@ -4,6 +4,8 @@ import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCar
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 
+import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
+
 export interface UISellOrderInfo extends Omit<SellOrderInfo, 'id' | '$type'> {
   id: string;
   askBaseDenom: string;
@@ -21,6 +23,7 @@ export interface ProjectWithOrderData extends ProjectCardProps {
   marketType?: string[];
   ecosystemType?: string[];
   region?: string;
+  cardSellOrders?: Array<CardSellOrder>;
 }
 
 export type FilterCommunityCreditsEvent = {

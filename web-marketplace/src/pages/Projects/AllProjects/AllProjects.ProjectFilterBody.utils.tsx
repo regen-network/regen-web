@@ -137,7 +137,7 @@ const marketCheckboxes = [
     icon: (
       <Box
         component="img"
-        sx={{ width: '24px', ml: 2 }}
+        sx={{ width: '24px' }}
         src="/svg/tebu-badge.svg"
         // eslint-disable-next-line lingui/no-unlocalized-strings
         alt="Tebu"
@@ -148,7 +148,7 @@ const marketCheckboxes = [
     name: msg`Compliance`,
     id: COMPLIANCE_MARKET,
     icon: (
-      <div className="ml-[8px] w-[24px]">
+      <div className="w-[24px]">
         <HectaresBadge />
       </div>
     ),
@@ -164,7 +164,7 @@ export function getMarketCheckboxes(
     .map(({ name, id, icon }) => ({
       name: _(name),
       id: id,
-      icon: icon,
+      endIcon: icon,
     }));
 }
 

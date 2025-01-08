@@ -37,6 +37,8 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
       soldOutProjectsIds,
       allProjects,
       hasCommunityProjects,
+      creditClassFilters,
+      buyingOptionsFilterOptions,
     } = useProjectsContext();
 
     const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
@@ -54,7 +56,8 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
           showResetButton={showResetButton}
           className="lg:hidden w-full mb-15 mr-0"
           hasCommunityProjects={hasCommunityProjects}
-          creditClassFilters={[]}
+          creditClassFilters={creditClassFilters}
+          buyingOptionsFilterOptions={buyingOptionsFilterOptions}
         />
         {prefinanceProjectsContent && (
           <div className="flex items-start sm:items-center max-w-[696px] col-[1/-1] pt-[7px] sm:pt-[12px] pb-25 sm:pb-30">

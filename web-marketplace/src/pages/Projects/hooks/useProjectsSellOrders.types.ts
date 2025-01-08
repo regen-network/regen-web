@@ -1,10 +1,9 @@
 import { Project } from 'generated/sanity-graphql';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
-import {
-  ProjectWithOrderData,
-  UISellOrderInfo,
-} from '../AllProjects/AllProjects.types';
+import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
+
+import { ProjectWithOrderData } from '../AllProjects/AllProjects.types';
 
 export interface ProjectsSellOrders {
   allProjects: ProjectWithOrderData[];
@@ -16,6 +15,6 @@ export interface ProjectsSellOrders {
   hasCommunityProjects: boolean;
   haveOffChainProjects: boolean;
   prefinanceProjectsCount?: number;
-  sellOrders?: UISellOrderInfo[];
+  sellOrders?: SellOrderInfoExtented[];
   sanityProjects?: Array<Pick<Project, 'fiatSellOrders'>>;
 }

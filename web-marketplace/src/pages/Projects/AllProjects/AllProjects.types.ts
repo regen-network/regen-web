@@ -23,7 +23,7 @@ export interface ProjectWithOrderData extends ProjectCardProps {
   marketType?: string[];
   ecosystemType?: string[];
   region?: string;
-  cardSellOrders?: Array<CardSellOrder>;
+  allCardSellOrders?: Array<CardSellOrder>;
 }
 
 export type FilterCommunityCreditsEvent = {

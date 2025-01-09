@@ -99,8 +99,8 @@ export const PaymentInfoForm = ({
     updateMultiStepData(
       {
         ...data,
-        name: form.watch('name'),
-        email: form.watch('email'),
+        name: form.getValues('name'),
+        email: form.getValues('email'),
       },
       activeStep,
     );

@@ -4,6 +4,7 @@ import { useAtom } from 'jotai';
 import { hasChangedFilters } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters.utils';
 
 import {
+  buyingOptionsFiltersAtom,
   creditClassInitialFiltersAtom,
   creditClassSelectedFiltersAtom,
   environmentTypeFiltersAtom,
@@ -30,6 +31,9 @@ export const useResetFilters = () => {
   const [marketTypeFilters, setMarketTypeFilters] = useAtom(
     marketTypeFiltersAtom,
   );
+  const [buyingOptionsFilters, setBuyingOptionsFilters] = useAtom(
+    buyingOptionsFiltersAtom,
+  );
 
   const resetFilters = useCallback(() => {
     setMarketTypeFilters(initialActiveFilters.marketTypeFilters);
@@ -37,8 +41,10 @@ export const useResetFilters = () => {
     setRegionFilters(initialActiveFilters.regionFilters);
     setUseCommunityProjects(DEFAULT_COMMUNITY_PROJECTS_FILTER);
     setCreditClassSelectedFilters(creditClassInitialFilters);
+    setBuyingOptionsFilters(initialActiveFilters.buyingOptionsFilters);
   }, [
     creditClassInitialFilters,
+    setBuyingOptionsFilters,
     setCreditClassSelectedFilters,
     setEnvironmentTypeFilters,
     setMarketTypeFilters,
@@ -58,11 +64,16 @@ export const useResetFilters = () => {
       ) ||
       hasChangedFilters(regionFilters, initialActiveFilters.regionFilters) ||
       hasChangedFilters(
+        buyingOptionsFilters,
+        initialActiveFilters.buyingOptionsFilters,
+      ) ||
+      hasChangedFilters(
         creditClassSelectedFilters,
         creditClassInitialFilters,
       ) ||
       useCommunityProjects !== DEFAULT_COMMUNITY_PROJECTS_FILTER,
     [
+      buyingOptionsFilters,
       creditClassInitialFilters,
       creditClassSelectedFilters,
       environmentTypeFilters,

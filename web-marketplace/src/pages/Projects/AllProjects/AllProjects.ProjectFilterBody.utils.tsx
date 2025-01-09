@@ -6,6 +6,7 @@ import HectaresBadge from 'web-components/src/components/icons/terrasos/Hectares
 import SvgWithSelectedColor from 'web-components/src/components/icons/utils/SvgWithSelectedColor';
 import { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
+import { buyingOptionsFiltersAtom } from 'lib/atoms/projects.atoms';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { COMPLIANCE_MARKET, VOLUNTARY_MARKET } from './AllProjects.constants';
@@ -169,6 +170,7 @@ export function getMarketCheckboxes(
 }
 
 export const initialActiveFilters = {
+  buyingOptionsFilters: {},
   regionFilters: {},
   environmentTypeFilters: {},
   marketTypeFilters: Object.fromEntries(

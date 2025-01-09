@@ -99,18 +99,9 @@ export const CurrencyInput = ({
       const value = event.target.value;
       if (value === '') {
         setValue(CURRENCY_AMOUNT, 0, { shouldValidate: true });
-        updateMultiStepData(
-          {
-            ...data,
-            currency,
-            paymentOption,
-            currencyAmount: 0,
-          },
-          activeStep,
-        );
       }
     },
-    [activeStep, currency, data, paymentOption, setValue, updateMultiStepData],
+    [setValue],
   );
 
   const onHandleCurrencyChange = useCallback(

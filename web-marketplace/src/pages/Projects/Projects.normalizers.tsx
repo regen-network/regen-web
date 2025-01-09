@@ -7,6 +7,7 @@ import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
+import { UNREGISTERED_PATH } from './AllProjects/AllProjects.constants';
 import { ProjectWithOrderData } from './AllProjects/AllProjects.types';
 import {
   CREDIT_CARD_BUYING_OPTION_ID,
@@ -19,21 +20,35 @@ type NormalizeBuyingOptionsFilterParams = {
   sellOrders?: SellOrderInfoExtented[];
   allOnChainProjects?: ProjectWithOrderData[];
   prefinance: boolean;
-
+  creditClassSelectedFilters: Record<string, boolean>;
   sanityProjects?: Array<Pick<Project, 'fiatSellOrders'>>;
   _: TranslatorType;
+  allProjects: ProjectWithOrderData[];
 };
 
 export const normalizeBuyingOptionsFilter = ({
-  sellOrders,
   allOnChainProjects,
-  sanityProjects,
   prefinance,
+  creditClassSelectedFilters,
+  allProjects,
   _,
 }: NormalizeBuyingOptionsFilterParams): FilterOption[] => {
   const buyingOptionsFilterOptions = [];
 
-  if (!prefinance && allOnChainProjects && allOnChainProjects.length > 0) {
+  const onlyUnregisteredProjects = isOnlyOneFilterActive(
+    creditClassSelectedFilters,
+    UNREGISTERED_PATH,
+  );
+  const selectedCreditClasses = Object.keys(creditClassSelectedFilters).filter(
+    key => creditClassSelectedFilters[key],
+  );
+
+  if (
+    !onlyUnregisteredProjects &&
+    !prefinance &&
+    allOnChainProjects &&
+    allOnChainProjects.length > 0
+  ) {
     buyingOptionsFilterOptions.push({
       name: _(CRYPTO_BUYING_OPTION_NAME),
       startIcon: <CryptoIcon />,
@@ -41,12 +56,24 @@ export const normalizeBuyingOptionsFilter = ({
     });
   }
 
-  const allSellOrdersIds = sellOrders?.map(order => order?.id.toString());
-  const someFiatSellOrders = sanityProjects?.some(project => {
-    const fiatSellOrderIds = project?.fiatSellOrders?.map(
-      order => order?.sellOrderId,
+  const someFiatSellOrders = allProjects?.some(project => {
+    const allCardSellOrders = project?.allCardSellOrders?.map(
+      order => order?.id,
     );
-    return fiatSellOrderIds?.some(id => id && allSellOrdersIds?.includes(id));
+    const hasCardSellOrders = allCardSellOrders && allCardSellOrders.length > 0;
+    const isPartOfSelectedCreditClasses =
+      project.creditClassId &&
+      selectedCreditClasses.includes(project.creditClassId);
+
+    const isPrefinanceProject =
+      project?.projectPrefinancing?.isPrefinanceProject;
+    const unregisteredProjectsSelected =
+      creditClassSelectedFilters[UNREGISTERED_PATH] === true;
+
+    return (
+      (hasCardSellOrders && isPartOfSelectedCreditClasses) ||
+      (isPrefinanceProject && unregisteredProjectsSelected)
+    );
   });
   if (prefinance || someFiatSellOrders) {
     buyingOptionsFilterOptions.push({
@@ -61,3 +88,20 @@ export const normalizeBuyingOptionsFilter = ({
 
   return buyingOptionsFilterOptions;
 };
+
+// Function to check if only one specific filter is true
+function isOnlyOneFilterActive(
+  filters: Record<string, boolean>,
+  targetKey: string,
+) {
+  let activeCount = 0;
+
+  for (const [key, value] of Object.entries(filters)) {
+    if (value) activeCount++;
+    // Stop early if more than one true value is found
+    if (activeCount > 1) return false;
+  }
+
+  // Ensure the target key is the only one set to true
+  return activeCount === 1 && filters[targetKey] === true;
+}

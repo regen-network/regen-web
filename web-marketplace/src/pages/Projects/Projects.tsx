@@ -87,8 +87,6 @@ const Projects = (): JSX.Element => {
     hasCommunityProjects,
     prefinanceProjectsCount,
     prefinanceProjects,
-    sanityProjects,
-    sellOrders,
     loading,
   } = useProjects({
     sort,
@@ -195,20 +193,28 @@ const Projects = (): JSX.Element => {
   const buyingOptionsFilterOptions = useMemo(
     () =>
       normalizeBuyingOptionsFilter({
-        sellOrders,
         allOnChainProjects,
-        sanityProjects,
         prefinance,
+        creditClassSelectedFilters,
+        allProjects,
         _,
       }),
-    [sellOrders, allOnChainProjects, sanityProjects, prefinance, _],
+    [
+      allOnChainProjects,
+      prefinance,
+      creditClassSelectedFilters,
+      allProjects,
+      _,
+    ],
   );
 
   useEffect(() => {
     // Check all the credit class filters by default
     if (
-      Object.keys(creditClassSelectedFilters).length !==
-      creditClassFilters.length
+      !loading &&
+      !isCreditClassesWithMetadataLoading &&
+      !isSanityCreditClassesLoading &&
+      Object.keys(creditClassSelectedFilters).length === 0
     ) {
       const _creditClassInitialFilters = creditClassFilters.reduce(
         (acc, creditClassFilter) => {
@@ -229,6 +235,9 @@ const Projects = (): JSX.Element => {
   }, [
     creditClassFilters,
     creditClassSelectedFilters,
+    isCreditClassesWithMetadataLoading,
+    isSanityCreditClassesLoading,
+    loading,
     setCreditClassInitialFilters,
     setCreditClassSelectedFilters,
   ]);

@@ -1,6 +1,6 @@
 import { useOutletContext } from 'react-router-dom';
 
-import { FilterOptions } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
+import { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
 import { Maybe, PrefinanceProjects } from 'generated/sanity-graphql';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
@@ -24,7 +24,7 @@ type ProjectsContextType = {
   pagesCount: number;
   soldOutProjectsIds: string[];
   creditClassFilters: CreditClassFilter[];
-  buyingOptionsFilterOptions: FilterOptions[];
+  buyingOptionsFilterOptions: FilterOption[];
 };
 
 export const useProjectsContext = (): ProjectsContextType => {

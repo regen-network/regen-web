@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
 import ProjectFilters from 'web-components/src/components/organisms/ProjectFilters';
-import { FilterOptions } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
+import { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
 import { buyingOptionsFiltersAtom } from 'lib/atoms/projects.atoms';
 import { IS_REGEN } from 'lib/env';
@@ -25,7 +25,7 @@ type Props = {
   resetFilters: () => void;
   showResetButton?: boolean;
   hasCommunityProjects: boolean;
-  buyingOptionsFilterOptions: FilterOptions[];
+  buyingOptionsFilterOptions: FilterOption[];
 };
 
 const ProjectFilterBody = ({

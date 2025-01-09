@@ -9653,21 +9653,6 @@ export type AllOffsetMethodQuery = (
   )> }
 );
 
-export type AllPrefinanceProjectQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllPrefinanceProjectQuery = (
-  { __typename?: 'RootQuery' }
-  & { allProject: Array<(
-    { __typename?: 'Project' }
-    & Pick<Project, 'language' | 'projectId'>
-    & { projectPrefinancing?: Maybe<(
-      { __typename?: 'ProjectPrefinancing' }
-      & Pick<ProjectPrefinancing, 'isPrefinanceProject' | 'price' | 'estimatedIssuance' | 'stripePaymentLink'>
-    )> }
-  )> }
-);
-
 export type AllProfilePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -9756,6 +9741,24 @@ export type AllProjectRatingQuery = (
       { __typename?: 'Image' }
       & ImageFieldsFragment
     )> }
+  )> }
+);
+
+export type AllProjectsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllProjectsQuery = (
+  { __typename?: 'RootQuery' }
+  & { allProject: Array<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'language' | 'projectId'>
+    & { projectPrefinancing?: Maybe<(
+      { __typename?: 'ProjectPrefinancing' }
+      & Pick<ProjectPrefinancing, 'isPrefinanceProject' | 'price' | 'estimatedIssuance' | 'stripePaymentLink'>
+    )>, fiatSellOrders?: Maybe<Array<Maybe<(
+      { __typename?: 'SellOrderPrice' }
+      & Pick<SellOrderPrice, 'sellOrderId'>
+    )>>> }
   )> }
 );
 
@@ -11912,47 +11915,6 @@ export function useAllOffsetMethodLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type AllOffsetMethodQueryHookResult = ReturnType<typeof useAllOffsetMethodQuery>;
 export type AllOffsetMethodLazyQueryHookResult = ReturnType<typeof useAllOffsetMethodLazyQuery>;
 export type AllOffsetMethodQueryResult = Apollo.QueryResult<AllOffsetMethodQuery, AllOffsetMethodQueryVariables>;
-export const AllPrefinanceProjectDocument = gql`
-    query AllPrefinanceProject {
-  allProject(where: {projectPrefinancing: {isPrefinanceProject: {eq: true}}}) {
-    language
-    projectId
-    projectPrefinancing {
-      isPrefinanceProject
-      price
-      estimatedIssuance
-      stripePaymentLink
-    }
-  }
-}
-    `;
-
-/**
- * __useAllPrefinanceProjectQuery__
- *
- * To run a query within a React component, call `useAllPrefinanceProjectQuery` and pass it any options that fit your needs.
- * When your component renders, `useAllPrefinanceProjectQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAllPrefinanceProjectQuery({
- *   variables: {
- *   },
- * });
- */
-export function useAllPrefinanceProjectQuery(baseOptions?: Apollo.QueryHookOptions<AllPrefinanceProjectQuery, AllPrefinanceProjectQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AllPrefinanceProjectQuery, AllPrefinanceProjectQueryVariables>(AllPrefinanceProjectDocument, options);
-      }
-export function useAllPrefinanceProjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllPrefinanceProjectQuery, AllPrefinanceProjectQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AllPrefinanceProjectQuery, AllPrefinanceProjectQueryVariables>(AllPrefinanceProjectDocument, options);
-        }
-export type AllPrefinanceProjectQueryHookResult = ReturnType<typeof useAllPrefinanceProjectQuery>;
-export type AllPrefinanceProjectLazyQueryHookResult = ReturnType<typeof useAllPrefinanceProjectLazyQuery>;
-export type AllPrefinanceProjectQueryResult = Apollo.QueryResult<AllPrefinanceProjectQuery, AllPrefinanceProjectQueryVariables>;
 export const AllProfilePageDocument = gql`
     query AllProfilePage {
   allProfilePage {
@@ -12165,6 +12127,50 @@ export function useAllProjectRatingLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type AllProjectRatingQueryHookResult = ReturnType<typeof useAllProjectRatingQuery>;
 export type AllProjectRatingLazyQueryHookResult = ReturnType<typeof useAllProjectRatingLazyQuery>;
 export type AllProjectRatingQueryResult = Apollo.QueryResult<AllProjectRatingQuery, AllProjectRatingQueryVariables>;
+export const AllProjectsDocument = gql`
+    query AllProjects {
+  allProject {
+    language
+    projectId
+    projectPrefinancing {
+      isPrefinanceProject
+      price
+      estimatedIssuance
+      stripePaymentLink
+    }
+    fiatSellOrders {
+      sellOrderId
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllProjectsQuery__
+ *
+ * To run a query within a React component, call `useAllProjectsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllProjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllProjectsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllProjectsQuery(baseOptions?: Apollo.QueryHookOptions<AllProjectsQuery, AllProjectsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllProjectsQuery, AllProjectsQueryVariables>(AllProjectsDocument, options);
+      }
+export function useAllProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllProjectsQuery, AllProjectsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllProjectsQuery, AllProjectsQueryVariables>(AllProjectsDocument, options);
+        }
+export type AllProjectsQueryHookResult = ReturnType<typeof useAllProjectsQuery>;
+export type AllProjectsLazyQueryHookResult = ReturnType<typeof useAllProjectsLazyQuery>;
+export type AllProjectsQueryResult = Apollo.QueryResult<AllProjectsQuery, AllProjectsQueryVariables>;
 export const AllProjectsPageDocument = gql`
     query allProjectsPage {
   allProjectsPage {

@@ -113,6 +113,7 @@ export const useGetProject = () => {
   const { isBuyFlowDisabled, projectsWithOrderData, loadingBuySellOrders } =
     useBuySellOrderData({
       projectId: onChainProjectId,
+      isOffChainProject: !onChainProjectId,
     });
 
   const offChainProjectById = offchainProjectByIdData?.data.projectById;

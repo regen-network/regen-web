@@ -481,8 +481,6 @@ export function useProjectsWithOrders({
     prefinanceProjectsCount: prefinanceProjects.length,
     projectsWithOrderData: projectsWithMetadata,
     projectsCount: projectsFilteredByCreditClass?.length,
-    sellOrders,
-    sanityProjects: sanityProjectsData?.allProject,
     loading:
       isLoadingProjects ||
       isLoadingProjectsByClass ||

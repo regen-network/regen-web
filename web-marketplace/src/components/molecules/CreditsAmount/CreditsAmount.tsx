@@ -133,13 +133,11 @@ export const CreditsAmount = ({
       if (currentCreditsAmount > _creditsAvailable) {
         setValue(CREDITS_AMOUNT, _creditsAvailable);
         setValue(CURRENCY_AMOUNT, _spendingCap);
-        setValue(
-          SELL_ORDERS,
-          orderedSellOrders.map(order => {
-            const price = getSellOrderPrice({ order, card });
-            return formatSellOrder({ order, card, price });
-          }),
-        );
+        const sellOrders = orderedSellOrders.map(order => {
+          const price = getSellOrderPrice({ order, card });
+          return formatSellOrder({ order, card, price });
+        });
+        setValue(SELL_ORDERS, sellOrders);
         setErrorBannerTextAtom(
           getCreditsAvailableBannerText(_creditsAvailable),
         );
@@ -149,7 +147,7 @@ export const CreditsAmount = ({
             ...data,
             creditsAmount: _creditsAvailable,
             currencyAmount: _spendingCap,
-            sellOrders: orderedSellOrders,
+            sellOrders,
           },
           activeStep,
         );
@@ -213,7 +211,7 @@ export const CreditsAmount = ({
           ...data,
           creditsAmount: creditsAvailable,
           currencyAmount: spendingCap,
-          sellOrders: sellOrders,
+          sellOrders,
         },
         activeStep,
       );
@@ -250,6 +248,7 @@ export const CreditsAmount = ({
           ...data,
           creditsAmount: currentCreditsAmount,
           currencyAmount: currencyAmount,
+          sellOrders,
         },
         activeStep,
       );
@@ -277,6 +276,7 @@ export const CreditsAmount = ({
           ...data,
           creditsAmount: currentCreditsAmount,
           currencyAmount: isNaN(value) ? 0 : value,
+          sellOrders,
         },
         activeStep,
       );

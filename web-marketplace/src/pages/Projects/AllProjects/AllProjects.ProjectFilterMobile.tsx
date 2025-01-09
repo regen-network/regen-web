@@ -6,7 +6,7 @@ import { sxToArray } from 'utils/mui/sxToArray';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import FilterIcon from 'web-components/src/components/icons/FilterIcon';
 import Modal from 'web-components/src/components/modal';
-import { FilterOptions } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
+import { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
 import { FILTERS_MODAL_BUTTON } from './AllProjects.constants';
 import ProjectFilterBody from './AllProjects.ProjectFilterBody';
@@ -20,7 +20,7 @@ type Props = {
   showResetButton?: boolean;
   hasCommunityProjects: boolean;
   creditClassFilters?: CreditClassFilter[];
-  buyingOptionsFilterOptions: FilterOptions[];
+  buyingOptionsFilterOptions: FilterOption[];
 };
 
 const ProjectFilterMobile = ({

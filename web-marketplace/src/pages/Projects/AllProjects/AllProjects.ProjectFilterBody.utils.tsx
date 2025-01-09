@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import RegionIndicatorIcon from 'web-components/src/components/icons/terrasos/ColombiaRegionIcon';
 import HectaresBadge from 'web-components/src/components/icons/terrasos/HectaresBadge';
 import SvgWithSelectedColor from 'web-components/src/components/icons/utils/SvgWithSelectedColor';
-import { FilterOptions } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
+import { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
@@ -72,7 +72,7 @@ export function getEcosystemTags(
   _: TranslatorType,
   ecosystemIcons: Record<string, string>,
   ecosystemTypes: string[],
-): FilterOptions[] {
+): FilterOption[] {
   return ecosystemTags
     .filter(tag => ecosystemTypes.includes(tag.id.toLowerCase()))
     .map(({ id, name }) => ({
@@ -120,7 +120,7 @@ export const regionTags = [
 export function getRegionTags(
   _: TranslatorType,
   regions: string[],
-): FilterOptions[] {
+): FilterOption[] {
   return regionTags
     .filter(tag => regions.includes(tag.id.toLowerCase()))
     .map(({ name, id, icon }) => ({
@@ -158,7 +158,7 @@ const marketCheckboxes = [
 export function getMarketCheckboxes(
   _: TranslatorType,
   marketTypes: string[],
-): FilterOptions[] {
+): FilterOption[] {
   return marketCheckboxes
     .filter(marketType => marketTypes.includes(marketType.id))
     .map(({ name, id, icon }) => ({

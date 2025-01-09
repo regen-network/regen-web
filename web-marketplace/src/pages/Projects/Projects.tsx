@@ -171,13 +171,27 @@ const Projects = (): JSX.Element => {
     }),
   );
 
-  const { creditClassFilters } = normalizeCreditClassFilters({
-    creditClassesWithMetadata,
-    sanityCreditClassesData,
-    allOnChainProjects,
-    haveOffChainProjects,
-    _,
-  });
+  const { creditClassFilters } = useMemo(
+    () =>
+      normalizeCreditClassFilters({
+        creditClassesWithMetadata,
+        sanityCreditClassesData,
+        allOnChainProjects,
+        haveOffChainProjects,
+        buyingOptionsFilters,
+        allProjects,
+        _,
+      }),
+    [
+      _,
+      allOnChainProjects,
+      allProjects,
+      buyingOptionsFilters,
+      creditClassesWithMetadata,
+      haveOffChainProjects,
+      sanityCreditClassesData,
+    ],
+  );
   const buyingOptionsFilterOptions = useMemo(
     () =>
       normalizeBuyingOptionsFilter({

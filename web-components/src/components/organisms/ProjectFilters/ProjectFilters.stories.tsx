@@ -5,7 +5,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import RegionIndicatorIcon from '../../icons/terrasos/ColombiaRegionIcon';
 import HectaresBadge from '../../icons/terrasos/HectaresBadge';
 import SvgWithSelectedColor from '../../icons/utils/SvgWithSelectedColor';
-import ProjectFilters, { Filter, FilterOptions } from './ProjectFilters';
+import ProjectFilters, { Filter, FilterOption } from './ProjectFilters';
 import { hasChangedFilters } from './ProjectFilters.utils';
 
 const INITIAL_FILTERS = {};
@@ -85,7 +85,7 @@ const ecosystemIconSx = {
   mr: 2,
 };
 
-const ecosystemTags: FilterOptions[] = [
+const ecosystemTags: FilterOption[] = [
   {
     name: 'Tropical very humid forest',
     id: 'TROPICAL_VERY_HUMID_FOREST',
@@ -148,7 +148,7 @@ const ecosystemTags: FilterOptions[] = [
   },
 ];
 
-const regionTags: FilterOptions[] = [
+const regionTags: FilterOption[] = [
   {
     name: 'Amazon',
     id: 'AMAZON',

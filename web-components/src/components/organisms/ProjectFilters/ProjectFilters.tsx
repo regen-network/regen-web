@@ -4,7 +4,7 @@ import { Box, ButtonBase, Collapse, Divider } from '@mui/material';
 import TagFilter from './ProjectFilter.TagFilter';
 import CheckboxFilter from './ProjectFilters.CheckboxFilter';
 
-export interface FilterOptions {
+export interface FilterOption {
   name: string;
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
@@ -17,7 +17,7 @@ export interface Filter {
   onFilterChange?: (id: string) => void;
   title: string;
   displayType: 'tag' | 'checkbox' | 'children';
-  options: FilterOptions[];
+  options: FilterOption[];
   hasCollapse?: boolean;
   children?: JSX.Element;
   hidden?: boolean;

@@ -1,6 +1,6 @@
 import CreditCardIcon from 'web-components/src/components/icons/CreditCardIcon';
 import CryptoIcon from 'web-components/src/components/icons/CryptoIcon';
-import { FilterOptions } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
+import { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
 import { Project } from 'generated/sanity-graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
@@ -30,7 +30,7 @@ export const normalizeBuyingOptionsFilter = ({
   sanityProjects,
   prefinance,
   _,
-}: NormalizeBuyingOptionsFilterParams): FilterOptions[] => {
+}: NormalizeBuyingOptionsFilterParams): FilterOption[] => {
   const buyingOptionsFilterOptions = [];
 
   if (!prefinance && allOnChainProjects && allOnChainProjects.length > 0) {

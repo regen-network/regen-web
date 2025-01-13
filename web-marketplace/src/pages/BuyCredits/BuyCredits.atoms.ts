@@ -9,3 +9,4 @@ export const spendingCapAtom = atom<number | null>(null);
 export const paymentOptionAtom = atom<PaymentOptionsType>(
   PAYMENT_OPTIONS.CRYPTO,
 );
+export const cardDetailsMissingAtom = atom(true);

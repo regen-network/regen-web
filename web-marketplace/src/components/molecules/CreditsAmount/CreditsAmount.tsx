@@ -12,7 +12,9 @@ import {
   spendingCapAtom,
 } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
 import { getCreditsAvailableBannerText } from 'pages/BuyCredits/BuyCredits.utils';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import {
@@ -53,6 +55,11 @@ export const CreditsAmount = ({
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const [spendingCap, setSpendingCap] = useAtom(spendingCapAtom);
   const paymentOption = useAtomValue(paymentOptionAtom);
+  const {
+    data,
+    handleSave: updateMultiStepData,
+    activeStep,
+  } = useMultiStep<BuyCreditsSchemaTypes>();
 
   useEffect(() => {
     // Set initial credits amount to min(1, creditsAvailable)
@@ -126,15 +133,23 @@ export const CreditsAmount = ({
       if (currentCreditsAmount > _creditsAvailable) {
         setValue(CREDITS_AMOUNT, _creditsAvailable);
         setValue(CURRENCY_AMOUNT, _spendingCap);
-        setValue(
-          SELL_ORDERS,
-          orderedSellOrders.map(order => {
-            const price = getSellOrderPrice({ order, card });
-            return formatSellOrder({ order, card, price });
-          }),
-        );
+        const sellOrders = orderedSellOrders.map(order => {
+          const price = getSellOrderPrice({ order, card });
+          return formatSellOrder({ order, card, price });
+        });
+        setValue(SELL_ORDERS, sellOrders);
         setErrorBannerTextAtom(
           getCreditsAvailableBannerText(_creditsAvailable),
+        );
+        // Udates the currency amount in multistep data when payment option is changed
+        updateMultiStepData(
+          {
+            ...data,
+            creditsAmount: _creditsAvailable,
+            currencyAmount: _spendingCap,
+            sellOrders,
+          },
+          activeStep,
         );
       } else {
         // Else we keep the same amount of credits
@@ -148,8 +163,21 @@ export const CreditsAmount = ({
         });
         setValue(CURRENCY_AMOUNT, currencyAmount);
         setValue(SELL_ORDERS, sellOrders);
+        // Updates the currency amount in multistep data when payment option is changed
+        updateMultiStepData(
+          {
+            ...data,
+            creditsAmount: currentCreditsAmount,
+            currencyAmount: currencyAmount,
+            sellOrders: sellOrders,
+          },
+          activeStep,
+        );
       }
     }
+    // Intentionally omit `updateMultiStepData` and `data` from the dependency array
+    // because including them trigger unnecessary renders.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     cardSellOrders,
     filteredCryptoSellOrders,
@@ -163,6 +191,7 @@ export const CreditsAmount = ({
     card,
     setErrorBannerTextAtom,
     _,
+    activeStep,
   ]);
 
   // Max credits set
@@ -172,26 +201,35 @@ export const CreditsAmount = ({
       setValue(CURRENCY_AMOUNT, spendingCap, {
         shouldValidate: true,
       });
-      setValue(
-        SELL_ORDERS,
-        orderedSellOrders.map(order => {
-          const price = getSellOrderPrice({ order, card });
-          return formatSellOrder({ order, card, price });
-        }),
+      const sellOrders = orderedSellOrders.map(order => {
+        const price = getSellOrderPrice({ order, card });
+        return formatSellOrder({ order, card, price });
+      });
+      setValue(SELL_ORDERS, sellOrders);
+      updateMultiStepData(
+        {
+          ...data,
+          creditsAmount: creditsAvailable,
+          currencyAmount: spendingCap,
+          sellOrders,
+        },
+        activeStep,
       );
       setMaxCreditsSelected(false);
     }
   }, [
+    activeStep,
     card,
     creditsAvailable,
+    data,
     maxCreditsSelected,
     orderedSellOrders,
     paymentOption,
     setValue,
     spendingCap,
+    updateMultiStepData,
   ]);
 
-  // Credits amount change
   const handleCreditsAmountChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       // Set currency amount according to credits quantity,
@@ -205,11 +243,22 @@ export const CreditsAmount = ({
       });
       setValue(CURRENCY_AMOUNT, currencyAmount, { shouldValidate: true });
       setValue(SELL_ORDERS, sellOrders);
+      updateMultiStepData(
+        {
+          ...data,
+          creditsAmount: currentCreditsAmount,
+          currencyAmount: currencyAmount,
+          sellOrders,
+        },
+        activeStep,
+      );
     },
-    [card, orderedSellOrders, setValue, creditTypePrecision],
+    // Intentionally omit `updateMultiStepData` and `data` from the dependency array
+    // because including them trigger unnecessary renders.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [card, orderedSellOrders, creditTypePrecision, setValue, activeStep],
   );
 
-  // Currency amount change
   const handleCurrencyAmountChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       // Set credits quantity according to currency amount,
@@ -221,10 +270,23 @@ export const CreditsAmount = ({
         orderedSellOrders,
         creditTypePrecision,
       });
+
+      updateMultiStepData(
+        {
+          ...data,
+          creditsAmount: currentCreditsAmount,
+          currencyAmount: isNaN(value) ? 0 : value,
+          sellOrders,
+        },
+        activeStep,
+      );
       setValue(CREDITS_AMOUNT, currentCreditsAmount, { shouldValidate: true });
       setValue(SELL_ORDERS, sellOrders);
     },
-    [card, orderedSellOrders, setValue, creditTypePrecision],
+    // Intentionally omit `updateMultiStepData` and `data` from the dependency array
+    // because including them trigger unnecessary renders.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [card, orderedSellOrders, creditTypePrecision, setValue],
   );
 
   const displayDenom = useMemo(

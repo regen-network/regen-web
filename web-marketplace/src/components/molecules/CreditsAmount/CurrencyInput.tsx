@@ -11,7 +11,6 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
-import { updateMultiStepCurrencyAndPaymentOption } from 'pages/BuyCredits/BuyCredits.utils';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
@@ -43,8 +42,11 @@ export const CurrencyInput = ({
     control,
   } = useFormContext<ChooseCreditsFormSchemaType>();
   const { _ } = useLingui();
-  const { data, handleSave, activeStep } =
-    useMultiStep<BuyCreditsSchemaTypes>();
+  const {
+    data,
+    handleSave: updateMultiStepData,
+    activeStep,
+  } = useMultiStep<BuyCreditsSchemaTypes>();
   const paymentOption = useAtomValue(paymentOptionAtom);
   const card = paymentOption === PAYMENT_OPTIONS.CARD;
   const { onChange } = register(CURRENCY_AMOUNT);
@@ -114,15 +116,23 @@ export const CurrencyInput = ({
               )?.[0].askBaseDenom,
             };
       setValue(CURRENCY, currency);
-      updateMultiStepCurrencyAndPaymentOption(
-        handleSave,
-        data,
-        currency,
+      updateMultiStepData(
+        {
+          ...data,
+          currency,
+          paymentOption,
+        },
         activeStep,
-        paymentOption,
       );
     },
-    [activeStep, cryptoCurrencies, data, handleSave, paymentOption, setValue],
+    [
+      cryptoCurrencies,
+      setValue,
+      updateMultiStepData,
+      data,
+      paymentOption,
+      activeStep,
+    ],
   );
 
   return (

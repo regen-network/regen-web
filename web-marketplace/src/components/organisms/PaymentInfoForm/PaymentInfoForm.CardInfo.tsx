@@ -7,6 +7,8 @@ import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabe
 import { Body } from 'web-components/src/components/typography';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
+
 import { paymentElementOptions } from './PaymentInfoForm.constants';
 import { PaymentInfoFormSchemaType } from './PaymentInfoForm.schema';
 
@@ -22,6 +24,7 @@ export const CardInfo = ({
 }: CardInfoProps) => {
   const ctx = useFormContext<PaymentInfoFormSchemaType>();
   const { register, control, setValue } = ctx;
+  const { handleSave: updateMultiStepData, activeStep, data } = useMultiStep();
 
   const createAccount = useWatch({
     control: control,
@@ -35,6 +38,19 @@ export const CardInfo = ({
   useEffect(() => {
     setValue('savePaymentMethod', createAccount);
   }, [createAccount, setValue]);
+
+  useEffect(() => {
+    updateMultiStepData(
+      {
+        ...data,
+        savePaymentMethod,
+      },
+      activeStep,
+    );
+    // Intentionally omit `updateMultiStepData` and `data` from the dependency array
+    // because including them trigger unnecessary renders.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [savePaymentMethod, activeStep]);
 
   return (
     <div className={className}>

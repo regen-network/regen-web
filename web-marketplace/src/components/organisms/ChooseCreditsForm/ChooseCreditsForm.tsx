@@ -1,4 +1,5 @@
 import React, {
+  ChangeEvent,
   startTransition,
   useCallback,
   useEffect,
@@ -44,7 +45,6 @@ import {
 import {
   getCreditsAvailableBannerText,
   getCryptoCurrencies,
-  updateMultiStepCurrencyAndPaymentOption,
 } from 'pages/BuyCredits/BuyCredits.utils';
 import {
   ProjectWithOrderData,
@@ -116,8 +116,11 @@ export const ChooseCreditsForm = React.memo(
   }: Props) => {
     const { _ } = useLingui();
     const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
-    const { data, handleSave, activeStep } =
-      useMultiStep<BuyCreditsSchemaTypes>();
+    const {
+      data,
+      handleSave: updateMultiStepData,
+      activeStep,
+    } = useMultiStep<BuyCreditsSchemaTypes>();
     const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
 
     const cryptoCurrencies = useMemo(
@@ -201,9 +204,19 @@ export const ChooseCreditsForm = React.memo(
       [card, cardSellOrders, filteredCryptoSellOrders],
     );
 
-    const handleCryptoPurchaseOptions = useCallback(() => {
-      setRetiring(prev => !prev);
-    }, [setRetiring]);
+    const handleCryptoPurchaseOptions = useCallback(
+      (event: ChangeEvent<HTMLInputElement>) => {
+        setRetiring(prev => !prev);
+        updateMultiStepData(
+          {
+            ...data,
+            retiring: event.target.value === 'true',
+          },
+          activeStep,
+        );
+      },
+      [activeStep, data, setRetiring, updateMultiStepData],
+    );
 
     const handlePaymentOptions = useCallback(
       (option: string) => {
@@ -219,22 +232,23 @@ export const ChooseCreditsForm = React.memo(
           [CREDIT_VINTAGE_OPTIONS]: [],
           [CURRENCY]: currency,
         });
-        updateMultiStepCurrencyAndPaymentOption(
-          handleSave,
-          data,
-          currency,
+        updateMultiStepData(
+          {
+            ...data,
+            currency,
+            paymentOption: option as PaymentOptionsType,
+          },
           activeStep,
-          option,
         );
       },
       [
-        form,
-        cardCurrency,
-        defaultCryptoCurrency,
-        handleSave,
-        data,
         activeStep,
+        cardCurrency,
+        data,
+        defaultCryptoCurrency,
+        form,
         setPaymentOption,
+        updateMultiStepData,
       ],
     );
 
@@ -244,12 +258,13 @@ export const ChooseCreditsForm = React.memo(
         setPaymentOption(PAYMENT_OPTIONS.CARD);
         form.setValue(CREDIT_VINTAGE_OPTIONS, []);
         form.setValue(CURRENCY, cardCurrency);
-        updateMultiStepCurrencyAndPaymentOption(
-          handleSave,
-          data,
-          cardCurrency,
+        updateMultiStepData(
+          {
+            ...data,
+            currency: cardCurrency,
+            paymentOption: PAYMENT_OPTIONS.CARD,
+          },
           activeStep,
-          PAYMENT_OPTIONS.CARD,
         );
       }
     }, [cardSellOrders.length, initialPaymentOption]); // just run this once

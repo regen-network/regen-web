@@ -8,7 +8,6 @@ import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWith
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
-import { HandleSaveType } from 'components/templates/MultiStepTemplate/MultiStep.context';
 
 import {
   AGREE_PURCHASE,
@@ -19,7 +18,7 @@ import {
   PAYMENT_OPTIONS,
   RETIREMENT,
 } from './BuyCredits.constants';
-import { BuyCreditsSchemaTypes, PaymentOptionsType } from './BuyCredits.types';
+import { PaymentOptionsType } from './BuyCredits.types';
 
 type GetFormModelParams = {
   paymentOption: PaymentOptionsType;
@@ -80,32 +79,6 @@ export const getFormModel = ({
     ],
   };
 };
-
-/*
- * Uses `handleSave` to update `useMultiStep`'s `data.currency` and `data.paymentOption`,
- * ensuring consistent access to the selected currency and payment option in `BuyCredits.Form`.
- * This enables `BuyCredits.Form` to fetch and pass the correct `userBalance` to `ChooseCredits.Form`
- * and `OrderSummary.Card` and to keep data.paymentOption sync.
- *
- * This approach is necessary because we currently don’t have access to the updated `useMultiStep`'s `data`
- * until users reach step 2 of the buy credits flow.
- */
-export function updateMultiStepCurrencyAndPaymentOption(
-  handleSave: HandleSaveType<BuyCreditsSchemaTypes>,
-  data: BuyCreditsSchemaTypes,
-  currency: { askDenom: string; askBaseDenom: string },
-  activeStep: number,
-  option: string,
-) {
-  handleSave(
-    {
-      ...data,
-      paymentOption: option,
-      currency,
-    },
-    activeStep,
-  );
-}
 
 export function getCryptoCurrencies(cryptoSellOrders: UISellOrderInfo[]) {
   return cryptoSellOrders

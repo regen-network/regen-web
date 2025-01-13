@@ -89,6 +89,7 @@ export type ProviderProps<T extends object> = {
   steps: Step[];
   children?: JSX.Element | JSX.Element[];
   withLocalStorage?: boolean;
+  forceStep?: number;
 };
 
 export function MultiStepProvider<T extends object>({
@@ -97,18 +98,19 @@ export function MultiStepProvider<T extends object>({
   steps,
   children,
   withLocalStorage = true,
-}: React.PropsWithChildren<ProviderProps<T>>): JSX.Element {
+  forceStep,
+}: React.PropsWithChildren<ProviderProps<T>>): JSX.Element | null {
   // we don't pass initialValues to localStorage
   // to avoid persist the initial empty data structure.
   // So initially, data (from storage) is `undefined` or
   // previously persisted data.
   // If undefined, then we return the initialValues
-  const { data, saveData, removeData } = useStorage<FormData<T>>(
+  const { data, saveData, removeData, isLoading } = useStorage<FormData<T>>(
     formId,
     withLocalStorage,
   );
 
-  const maxAllowedStep = data?.maxAllowedStep || 0;
+  const maxAllowedStep = forceStep || data?.maxAllowedStep || 0;
 
   const {
     activeStep,
@@ -118,17 +120,9 @@ export function MultiStepProvider<T extends object>({
     handleActiveStep,
     goNext,
     goBack,
-  } = useSteps(steps.length);
+  } = useSteps(steps.length, maxAllowedStep);
 
   const [resultStatus, setResultStatus] = React.useState<ResultStatus>();
-
-  // initial step on mount
-  React.useEffect(() => {
-    if (data?.maxAllowedStep) {
-      handleActiveStep(data?.maxAllowedStep);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleNext = (): void => {
     goNext();
@@ -202,6 +196,11 @@ export function MultiStepProvider<T extends object>({
     resultStatus,
   };
 
+  // Wait to check local storage before rendering component
+  if (isLoading) {
+    return null;
+  }
+
   return (
     <MultiStepContext.Provider value={value}>
       {children}
@@ -245,8 +244,8 @@ function calculatePercentComplete(
   return (activeStep * 100) / numSteps;
 }
 
-function useSteps(numSteps: number): StepManagement {
-  const [activeStep, setActiveStep] = React.useState(0);
+function useSteps(numSteps: number, startStep?: number): StepManagement {
+  const [activeStep, setActiveStep] = React.useState(startStep || 0);
 
   // derived states from activeStep
   const isLastStep = activeStep === numSteps - 1;

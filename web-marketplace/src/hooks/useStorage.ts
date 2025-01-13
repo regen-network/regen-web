@@ -6,6 +6,7 @@ interface StorageApi<T> {
   data: T | undefined;
   saveData: React.Dispatch<T>;
   removeData: () => void;
+  isLoading: boolean;
 }
 
 export default function useStorage<T>(
@@ -13,6 +14,7 @@ export default function useStorage<T>(
   withLocalStorage: boolean,
   initialValue?: T,
 ): StorageApi<T> {
+  const [isLoading, setIsLoading] = useState(true);
   const [data, saveData] = useState<T | undefined>(() => {
     // this way, as a fn, this initialization happens just once
     if (withLocalStorage) {
@@ -26,6 +28,7 @@ export default function useStorage<T>(
   });
 
   useEffect(() => {
+    setIsLoading(false);
     if (withLocalStorage && data) {
       const storedValue = localStorage.getItem(key);
       const currentValue = storedValue ? JSON.parse(storedValue) : {};
@@ -52,5 +55,5 @@ export default function useStorage<T>(
     }
   };
 
-  return { data, saveData, removeData };
+  return { data, saveData, removeData, isLoading };
 }

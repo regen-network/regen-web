@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useAtomValue } from 'jotai';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAtom, useAtomValue } from 'jotai';
 
 import NotFoundPage from 'pages/NotFound';
 import WithLoader from 'components/atoms/WithLoader';
@@ -8,10 +8,10 @@ import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetProject';
 import { useNavigateToSlug } from 'components/templates/ProjectDetails/hooks/useNavigateToSlug';
 
-import { paymentOptionAtom } from './BuyCredits.atoms';
+import { cardDetailsMissingAtom, paymentOptionAtom } from './BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsForm } from './BuyCredits.Form';
-import { CardDetails } from './BuyCredits.types';
+import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
 import { getFormModel } from './BuyCredits.utils';
 import { useSummarizePayment } from './hooks/useSummarizePayment';
 
@@ -34,7 +34,8 @@ export const BuyCredits = () => {
 
   useNavigateToSlug(slug, '/buy');
 
-  const paymentOption = useAtomValue(paymentOptionAtom);
+  const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
+  const cardDetailsMissing = useAtomValue(cardDetailsMissingAtom);
 
   const [retiring, setRetiring] = useState<boolean>(true);
   const [confirmationTokenId, setConfirmationTokenId] = useState<
@@ -48,6 +49,16 @@ export const BuyCredits = () => {
     retiring,
     projectId: onChainProjectId ?? offChainProject?.id,
   });
+
+  // update payment option from local storage data
+  useEffect(() => {
+    const savedPaymentOption = localStorage.getItem(formModel.formId);
+    if (savedPaymentOption) {
+      const paymentOption =
+        JSON.parse(savedPaymentOption).formValues.paymentOption;
+      setPaymentOption(paymentOption as PaymentOptionsType);
+    }
+  }, [formModel?.formId, setPaymentOption]);
 
   const summarizePayment = useSummarizePayment(setCardDetails);
   useEffect(() => {
@@ -73,6 +84,11 @@ export const BuyCredits = () => {
           steps={formModel.steps}
           initialValues={{}}
           classes={{ formWrap: 'max-w-[942px]' }}
+          forceStep={
+            paymentOption === PAYMENT_OPTIONS.CARD && cardDetailsMissing
+              ? 1
+              : undefined
+          }
         >
           <BuyCreditsForm
             retiring={retiring}

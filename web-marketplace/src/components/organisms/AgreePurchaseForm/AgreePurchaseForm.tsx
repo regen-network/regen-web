@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
-import { useFormState, useWatch } from 'react-hook-form';
+import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
+import { useAtom } from 'jotai';
 
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { Body } from 'web-components/src/components/typography/Body';
 
+import { cardDetailsMissingAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -32,6 +34,8 @@ export type AgreePurchaseFormProps = {
   elements?: StripeElements | null;
   email?: string | null;
   isNewsletterSubscribed?: boolean;
+  initialValues?: DefaultValues<AgreePurchaseFormSchemaType>;
+  isCardPayment?: boolean;
 } & TradableProps;
 
 export const AgreePurchaseForm = ({
@@ -44,19 +48,17 @@ export const AgreePurchaseForm = ({
   imgSrc,
   email,
   isNewsletterSubscribed,
+  initialValues,
+  isCardPayment,
 }: AgreePurchaseFormProps) => {
   const { _ } = useLingui();
-  const { handleBack } = useMultiStep();
-
+  const { handleBack, handleActiveStep } = useMultiStep();
+  const [cardDetailsMissing, setCardDetailsMissing] = useAtom(
+    cardDetailsMissingAtom,
+  );
   const form = useZodForm({
     schema: agreePurchaseFormSchema(retiring),
-    defaultValues: {
-      country,
-      anonymousPurchase: false,
-      followProject: false,
-      subscribeNewsletter: false,
-      agreeErpa: false,
-    },
+    defaultValues: initialValues,
     mode: 'onBlur',
   });
   const { errors, isValid, isSubmitting } = useFormState({
@@ -79,6 +81,24 @@ export const AgreePurchaseForm = ({
   useEffect(() => {
     form.setValue('country', country);
   }, [country, form]);
+
+  useEffect(() => {
+    if (isCardPayment && cardDetailsMissing) {
+      handleActiveStep(1);
+    }
+  }, [
+    handleActiveStep,
+    isCardPayment,
+    cardDetailsMissing,
+    setCardDetailsMissing,
+  ]);
+
+  // reset cardDetailsMissing on unmount
+  useEffect(() => {
+    return () => {
+      setCardDetailsMissing(true);
+    };
+  }, [setCardDetailsMissing]);
 
   return (
     <Form

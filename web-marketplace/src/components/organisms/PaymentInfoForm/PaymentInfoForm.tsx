@@ -2,10 +2,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
+import { useSetAtom } from 'jotai';
 
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import { cardDetailsMissingAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import {
   CardDetails,
@@ -62,7 +64,7 @@ export const PaymentInfoForm = ({
     data,
   } = useMultiStep();
   const [paymentInfoValid, setPaymentInfoValid] = useState(false);
-
+  const setCardDetailsMissing = useSetAtom(cardDetailsMissingAtom);
   const form = useZodForm({
     schema: paymentInfoFormSchema(paymentOption),
     defaultValues: {
@@ -110,6 +112,7 @@ export const PaymentInfoForm = ({
     <Form
       form={form}
       onSubmit={async (values: PaymentInfoFormSchemaType) => {
+        setCardDetailsMissing(false);
         const card = paymentOption === PAYMENT_OPTIONS.CARD;
         if (card && !stripe) {
           return;

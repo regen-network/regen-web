@@ -5,6 +5,7 @@ import { StepperSection } from './StepperSection';
 
 type MultiStepProps<T extends object> = ProviderProps<T> & {
   children: JSX.Element;
+  forceStep?: number;
 } & Pick<OnBoardingSectionProps, 'classes'>;
 
 export function MultiStepTemplate<T extends object>({
@@ -14,6 +15,7 @@ export function MultiStepTemplate<T extends object>({
   children,
   withLocalStorage,
   classes,
+  forceStep,
 }: MultiStepProps<T>): JSX.Element {
   return (
     <MultiStepProvider
@@ -21,6 +23,7 @@ export function MultiStepTemplate<T extends object>({
       steps={steps}
       initialValues={initialValues}
       withLocalStorage={withLocalStorage}
+      forceStep={forceStep}
     >
       <StepperSection classes={classes}>{children}</StepperSection>
     </MultiStepProvider>

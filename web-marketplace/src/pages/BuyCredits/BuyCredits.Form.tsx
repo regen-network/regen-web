@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery } from '@tanstack/react-query';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
@@ -51,6 +51,7 @@ import { PaymentInfoFormFiat } from 'components/organisms/PaymentInfoForm/Paymen
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import {
+  cardDetailsMissingAtom,
   paymentOptionAtom,
   paymentOptionCryptoClickedAtom,
 } from './BuyCredits.atoms';
@@ -100,6 +101,7 @@ export const BuyCreditsForm = ({
   const { wallet, isConnected, activeWalletAddr } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
   const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
+  const cardDetailsMissing = useAtomValue(cardDetailsMissingAtom);
   const {
     isModalOpen,
     modalState,
@@ -157,6 +159,22 @@ export const BuyCreditsForm = ({
     );
     setPaymentOption(prev => data?.paymentOption || prev);
   }, [data, setPaymentOption, setRetiring]);
+
+  useEffect(() => {
+    if (
+      paymentOption === PAYMENT_OPTIONS.CARD &&
+      cardDetailsMissing &&
+      activeStep === 2
+    ) {
+      handleActiveStep(1);
+    }
+  }, [
+    handleActiveStep,
+    cardDetails,
+    paymentOption,
+    activeStep,
+    cardDetailsMissing,
+  ]);
 
   const paymentInfoFormSubmit = useCallback(
     async (values: PaymentInfoFormSchemaType) => {
@@ -362,13 +380,23 @@ export const BuyCreditsForm = ({
                 setCardDetails={setCardDetails}
               />
             )}
-            {activeStep === 2 && (
+            {activeStep === 2 && !cardDetailsMissing && (
               <AgreePurchaseFormFiat
                 retiring={retiring}
                 onSubmit={agreePurchaseFormSubmit}
                 goToChooseCredits={() => handleActiveStep(0)}
                 imgSrc="/svg/info-with-hand.svg"
                 country={cardDetails?.country || 'US'}
+                initialValues={{
+                  country: data?.country || cardDetails?.country || 'US',
+                  stateProvince: data?.stateProvince || '',
+                  postalCode: data?.postalCode || '',
+                  retirementReason: data?.retirementReason || '',
+                  anonymousPurchase: data?.anonymousPurchase || false,
+                  followProject: data?.followProject || false,
+                  subscribeNewsletter: data?.subscribeNewsletter || false,
+                  agreeErpa: data?.agreeErpa || false,
+                }}
               />
             )}
           </Elements>
@@ -403,6 +431,16 @@ export const BuyCreditsForm = ({
                 goToChooseCredits={() => handleActiveStep(0)}
                 imgSrc="/svg/info-with-hand.svg"
                 country={cardDetails?.country || 'US'}
+                initialValues={{
+                  country: data?.country || 'US',
+                  stateProvince: data?.stateProvince || '',
+                  postalCode: data?.postalCode || '',
+                  retirementReason: data?.retirementReason || '',
+                  anonymousPurchase: data?.anonymousPurchase || false,
+                  followProject: data?.followProject || false,
+                  subscribeNewsletter: data?.subscribeNewsletter || false,
+                  agreeErpa: data?.agreeErpa || false,
+                }}
               />
             )}
           </>

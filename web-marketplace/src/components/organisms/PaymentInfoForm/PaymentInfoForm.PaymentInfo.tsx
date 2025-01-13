@@ -60,7 +60,7 @@ export const PaymentInfo = ({
       {paymentMethods && paymentMethods.length > 0 ? (
         <>
           {paymentMethods.map(paymentMethod => (
-            <div className="mb-20">
+            <div className="mb-20" key={paymentMethod.id}>
               <Radio
                 label={_(
                   msg`Use my credit card on file ending in ${paymentMethod.card?.last4}`,

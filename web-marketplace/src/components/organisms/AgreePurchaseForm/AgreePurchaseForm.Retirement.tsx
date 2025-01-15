@@ -41,7 +41,7 @@ type Props = { retiring: boolean };
 export const Retirement = ({ retiring }: Props) => {
   const { _ } = useLingui();
   const ctx = useFormContext<AgreePurchaseFormSchemaType>();
-  const { register, formState, control, getValues } = ctx;
+  const { register, formState, control } = ctx;
   const { errors } = formState;
   const {
     data,
@@ -49,29 +49,32 @@ export const Retirement = ({ retiring }: Props) => {
     activeStep,
   } = useMultiStep<BuyCreditsSchemaTypes>();
 
-  // const anonymousPurchase = useWatch({
-  //   control: control,
-  //   name: 'anonymousPurchase',
-  // });
-  const country = useWatch({
-    control: control,
-    name: 'country',
-  });
-  const stateProvince = useWatch({
-    control: control,
-    name: 'stateProvince',
-  });
-  const retirementReason = useWatch({
-    control: control,
-    name: 'retirementReason',
-  });
-  const postalCode = useWatch({
-    control: control,
-    name: 'postalCode',
+  const fieldNames: (keyof AgreePurchaseFormSchemaType)[] = [
+    'country',
+    'stateProvince',
+    'retirementReason',
+    'postalCode',
+    'followProject',
+    'subscribeNewsletter',
+    'agreeErpa',
+    // 'anonymousPurchase',
+  ];
+
+  const watchedFields = useWatch({
+    control,
+    name: fieldNames,
   });
 
-  const { anonymousPurchase, followProject, subscribeNewsletter, agreeErpa } =
-    getValues();
+  const [
+    country,
+    stateProvince,
+    retirementReason,
+    postalCode,
+    followProject,
+    subscribeNewsletter,
+    agreeErpa,
+    // anonymousPurchase
+  ] = watchedFields;
 
   useEffect(() => {
     debounce(() => {
@@ -95,7 +98,7 @@ export const Retirement = ({ retiring }: Props) => {
         ...data,
         country,
         stateProvince,
-        anonymousPurchase,
+        // anonymousPurchase,
         followProject,
         subscribeNewsletter,
         agreeErpa,
@@ -108,11 +111,11 @@ export const Retirement = ({ retiring }: Props) => {
   }, [
     country,
     stateProvince,
-    anonymousPurchase,
+    // anonymousPurchase
+    activeStep,
     followProject,
     subscribeNewsletter,
     agreeErpa,
-    activeStep,
   ]);
 
   return (
@@ -181,7 +184,7 @@ export const Retirement = ({ retiring }: Props) => {
                 exclude
                 error={!!errors['country']}
                 helperText={errors['country']?.message}
-                value={country}
+                value={country as string | undefined}
                 {...register('country')}
               />
             </Suspense>
@@ -203,7 +206,7 @@ export const Retirement = ({ retiring }: Props) => {
                 country={country as string}
                 error={!!errors['stateProvince']}
                 helperText={errors['stateProvince']?.message}
-                value={stateProvince}
+                value={stateProvince as string | undefined}
                 {...register('stateProvince')}
               />
             </Suspense>

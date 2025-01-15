@@ -35,26 +35,9 @@ export const normalizeBuyingOptionsFilter = ({
 }: NormalizeBuyingOptionsFilterParams): FilterOption[] => {
   const buyingOptionsFilterOptions = [];
 
-  const onlyUnregisteredProjects = isOnlyOneFilterActive(
-    creditClassSelectedFilters,
-    UNREGISTERED_PATH,
-  );
   const selectedCreditClasses = Object.keys(creditClassSelectedFilters).filter(
     key => creditClassSelectedFilters[key],
   );
-
-  if (
-    !onlyUnregisteredProjects &&
-    !prefinance &&
-    allOnChainProjects &&
-    allOnChainProjects.length > 0
-  ) {
-    buyingOptionsFilterOptions.push({
-      name: _(CRYPTO_BUYING_OPTION_NAME),
-      startIcon: <CryptoIcon />,
-      id: CRYPTO_BUYING_OPTION_ID,
-    });
-  }
 
   const someFiatSellOrders = allProjects?.some(project => {
     const allCardSellOrders = project?.allCardSellOrders?.map(
@@ -83,6 +66,24 @@ export const normalizeBuyingOptionsFilter = ({
       ),
       id: CREDIT_CARD_BUYING_OPTION_ID,
       disabled: prefinance,
+    });
+  }
+
+  const onlyUnregisteredProjects = isOnlyOneFilterActive(
+    creditClassSelectedFilters,
+    UNREGISTERED_PATH,
+  );
+
+  if (
+    !onlyUnregisteredProjects &&
+    !prefinance &&
+    allOnChainProjects &&
+    allOnChainProjects.length > 0
+  ) {
+    buyingOptionsFilterOptions.push({
+      name: _(CRYPTO_BUYING_OPTION_NAME),
+      startIcon: <CryptoIcon />,
+      id: CRYPTO_BUYING_OPTION_ID,
     });
   }
 

@@ -78,7 +78,7 @@ export function getEcosystemTags(
     .map(({ id, name }) => ({
       name: _(name),
       id: id,
-      icon: (
+      startIcon: (
         <SvgWithSelectedColor
           src={ecosystemIcons[id]}
           sx={ecosystemIconSx}

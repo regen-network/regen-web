@@ -5,7 +5,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import RegionIndicatorIcon from '../../icons/terrasos/ColombiaRegionIcon';
 import HectaresBadge from '../../icons/terrasos/HectaresBadge';
 import SvgWithSelectedColor from '../../icons/utils/SvgWithSelectedColor';
-import ProjectFilters, { Filter, FilterOption } from './ProjectFilters';
+import ProjectFilters, { FilterOption } from './ProjectFilters';
 import { hasChangedFilters } from './ProjectFilters.utils';
 
 const INITIAL_FILTERS = {};
@@ -89,7 +89,7 @@ const ecosystemTags: FilterOption[] = [
   {
     name: 'Tropical very humid forest',
     id: 'TROPICAL_VERY_HUMID_FOREST',
-    icon: (
+    startIcon: (
       <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
@@ -101,7 +101,7 @@ const ecosystemTags: FilterOption[] = [
   {
     name: 'Tropical humid forest',
     id: 'TROPICAL_HUMID_FOREST',
-    icon: (
+    startIcon: (
       <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
@@ -113,7 +113,7 @@ const ecosystemTags: FilterOption[] = [
   {
     name: 'Tropical dry forest',
     id: 'TROPICAL_DRY_FOREST',
-    icon: (
+    startIcon: (
       <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
@@ -125,7 +125,7 @@ const ecosystemTags: FilterOption[] = [
   {
     name: 'Premontane humid forest',
     id: 'PREMONTANE_HUMID_FOREST',
-    icon: (
+    startIcon: (
       <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
@@ -137,7 +137,7 @@ const ecosystemTags: FilterOption[] = [
   {
     name: 'Low montane very humid forest',
     id: 'LOW_MONTANE_VERY_HUMID_FOREST',
-    icon: (
+    startIcon: (
       <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
@@ -152,35 +152,35 @@ const regionTags: FilterOption[] = [
   {
     name: 'Amazon',
     id: 'AMAZON',
-    icon: <RegionIndicatorIcon region="AMAZON" />,
+    startIcon: <RegionIndicatorIcon region="AMAZON" />,
   },
   {
     name: 'Pacific',
     id: 'PACIFIC',
-    icon: <RegionIndicatorIcon region="PACIFIC" />,
+    startIcon: <RegionIndicatorIcon region="PACIFIC" />,
   },
   {
     name: 'Orinoco',
     id: 'ORINOCO',
-    icon: <RegionIndicatorIcon region="ORINOCO" />,
+    startIcon: <RegionIndicatorIcon region="ORINOCO" />,
   },
   {
     name: 'Caribbean',
     id: 'CARIBBEAN',
-    icon: <RegionIndicatorIcon region="CARIBBEAN" />,
+    startIcon: <RegionIndicatorIcon region="CARIBBEAN" />,
   },
   {
     name: 'Andean',
     id: 'ANDEAN',
-    icon: <RegionIndicatorIcon region="ANDEAN" />,
+    startIcon: <RegionIndicatorIcon region="ANDEAN" />,
   },
 ];
 
-const marketCheckboxes = [
+const marketCheckboxes: FilterOption[] = [
   {
     name: 'Voluntary',
     id: 'VOLUNTARY',
-    icon: (
+    endIcon: (
       <Box
         component="img"
         sx={{ width: '24px', ml: 2 }}
@@ -192,7 +192,7 @@ const marketCheckboxes = [
   {
     name: 'Compliance',
     id: 'COMPLIANCE',
-    icon: <HectaresBadge />,
+    endIcon: <HectaresBadge />,
   },
 ];
 

@@ -6,7 +6,7 @@ import { sxToArray } from 'utils/mui/sxToArray';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import FilterIcon from 'web-components/src/components/icons/FilterIcon';
 import Modal from 'web-components/src/components/modal';
-import { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
+import type { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
 import { FILTERS_MODAL_BUTTON } from './AllProjects.constants';
 import ProjectFilterBody from './AllProjects.ProjectFilterBody';

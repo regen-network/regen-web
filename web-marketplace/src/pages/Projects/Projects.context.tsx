@@ -1,6 +1,6 @@
 import { useOutletContext } from 'react-router-dom';
 
-import { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
+import type { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
 import { Maybe, PrefinanceProjects } from 'generated/sanity-graphql';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';

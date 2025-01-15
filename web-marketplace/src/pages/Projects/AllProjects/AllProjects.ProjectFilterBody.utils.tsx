@@ -4,9 +4,8 @@ import { Box } from '@mui/material';
 import RegionIndicatorIcon from 'web-components/src/components/icons/terrasos/ColombiaRegionIcon';
 import HectaresBadge from 'web-components/src/components/icons/terrasos/HectaresBadge';
 import SvgWithSelectedColor from 'web-components/src/components/icons/utils/SvgWithSelectedColor';
-import { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
+import type { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
-import { buyingOptionsFiltersAtom } from 'lib/atoms/projects.atoms';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { COMPLIANCE_MARKET, VOLUNTARY_MARKET } from './AllProjects.constants';
@@ -94,27 +93,27 @@ export const regionTags = [
   {
     name: msg`Amazon`,
     id: 'Amazon',
-    icon: <RegionIndicatorIcon region="AMAZON" />,
+    startIcon: <RegionIndicatorIcon region="AMAZON" />,
   },
   {
     name: msg`Pacific`,
     id: 'Pacific',
-    icon: <RegionIndicatorIcon region="PACIFIC" />,
+    startIcon: <RegionIndicatorIcon region="PACIFIC" />,
   },
   {
     name: msg`Orinoco`,
     id: 'Orinoco',
-    icon: <RegionIndicatorIcon region="ORINOCO" />,
+    startIcon: <RegionIndicatorIcon region="ORINOCO" />,
   },
   {
     name: msg`Caribbean`,
     id: 'Caribbean',
-    icon: <RegionIndicatorIcon region="CARIBBEAN" />,
+    startIcon: <RegionIndicatorIcon region="CARIBBEAN" />,
   },
   {
     name: msg`Andean`,
     id: 'Andean',
-    icon: <RegionIndicatorIcon region="ANDEAN" />,
+    startIcon: <RegionIndicatorIcon region="ANDEAN" />,
   },
 ];
 
@@ -124,10 +123,10 @@ export function getRegionTags(
 ): FilterOption[] {
   return regionTags
     .filter(tag => regions.includes(tag.id.toLowerCase()))
-    .map(({ name, id, icon }) => ({
+    .map(({ name, id, startIcon }) => ({
       name: _(name),
-      id: id,
-      icon: icon,
+      id,
+      startIcon,
     }));
 }
 
@@ -135,7 +134,7 @@ const marketCheckboxes = [
   {
     name: msg`Voluntary`,
     id: VOLUNTARY_MARKET,
-    icon: (
+    endIcon: (
       <Box
         component="img"
         sx={{ width: '24px' }}
@@ -148,7 +147,7 @@ const marketCheckboxes = [
   {
     name: msg`Compliance`,
     id: COMPLIANCE_MARKET,
-    icon: (
+    endIcon: (
       <div className="w-[24px]">
         <HectaresBadge />
       </div>
@@ -162,10 +161,10 @@ export function getMarketCheckboxes(
 ): FilterOption[] {
   return marketCheckboxes
     .filter(marketType => marketTypes.includes(marketType.id))
-    .map(({ name, id, icon }) => ({
+    .map(({ name, id, endIcon }) => ({
       name: _(name),
-      id: id,
-      endIcon: icon,
+      id,
+      endIcon,
     }));
 }
 

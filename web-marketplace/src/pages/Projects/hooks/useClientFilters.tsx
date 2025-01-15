@@ -1,9 +1,8 @@
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
-import _ from 'lodash';
 
-import { Filter } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
+import type { Filter } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
 import {
   environmentTypeFiltersAtom,

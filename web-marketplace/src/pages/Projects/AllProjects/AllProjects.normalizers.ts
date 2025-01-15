@@ -1,5 +1,3 @@
-import { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
-
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { SKIPPED_CLASS_ID } from 'lib/env';
 import { TranslatorType } from 'lib/i18n/i18n.types';

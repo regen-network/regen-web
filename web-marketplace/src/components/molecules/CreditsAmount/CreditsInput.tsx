@@ -2,17 +2,24 @@ import { ChangeEvent, FocusEvent, useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { useAtomValue } from 'jotai';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { LeafIcon } from 'web-components/src/components/icons/LeafIcon';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
-import { CREDITS_AMOUNT } from './CreditsAmount.constants';
+import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
+import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+
+import { CREDITS_AMOUNT, CURRENCY_AMOUNT } from './CreditsAmount.constants';
 import { CreditsInputProps } from './CreditsAmount.types';
+import { getCurrencyAmount } from './CreditsAmount.utils';
 
 export const CreditsInput = ({
   creditsAvailable,
   handleCreditsAmountChange,
+  orderedSellOrders,
+  creditTypePrecision,
 }: CreditsInputProps) => {
   const { _ } = useLingui();
 
@@ -22,6 +29,7 @@ export const CreditsInput = ({
     setValue,
   } = useFormContext<ChooseCreditsFormSchemaType>();
   const { onChange } = register(CREDITS_AMOUNT);
+  const paymentOption = useAtomValue(paymentOptionAtom);
 
   const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event);
@@ -53,11 +61,18 @@ export const CreditsInput = ({
     (event: FocusEvent<HTMLInputElement>): void => {
       // If the value is empty, set it to 0
       const value = event.target.value;
-      if (value === '') {
-        setValue(CREDITS_AMOUNT, 0, { shouldValidate: true });
+      if (value === '' || parseFloat(value) === 0) {
+        const { currencyAmount } = getCurrencyAmount({
+          currentCreditsAmount: 1,
+          card: paymentOption === PAYMENT_OPTIONS.CARD,
+          orderedSellOrders,
+          creditTypePrecision,
+        });
+        setValue(CREDITS_AMOUNT, 1, { shouldValidate: true });
+        setValue(CURRENCY_AMOUNT, currencyAmount, { shouldValidate: true });
       }
     },
-    [setValue],
+    [creditTypePrecision, orderedSellOrders, paymentOption, setValue],
   );
   const handleOnFocus = useCallback(
     (event: FocusEvent<HTMLInputElement>): void => {

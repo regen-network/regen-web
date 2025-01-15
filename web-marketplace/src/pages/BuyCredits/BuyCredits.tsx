@@ -85,7 +85,9 @@ export const BuyCredits = () => {
           initialValues={{}}
           classes={{ formWrap: 'max-w-[942px]' }}
           forceStep={
-            paymentOption === PAYMENT_OPTIONS.CARD && cardDetailsMissing
+            paymentOption === PAYMENT_OPTIONS.CARD &&
+            cardDetailsMissing &&
+            cardDetailsMissing !== null
               ? 1
               : undefined
           }

@@ -331,12 +331,16 @@ export const CreditsAmount = ({
             cryptoCurrencies={cryptoCurrencies}
             displayDenom={displayDenom}
             allowedDenoms={allowedDenoms}
+            orderedSellOrders={orderedSellOrders}
+            creditTypePrecision={creditTypePrecision}
           />
         )}
         <span className="p-10 sm:p-20 text-xl">=</span>
         <CreditsInput
           creditsAvailable={creditsAvailable}
           handleCreditsAmountChange={handleCreditsAmountChange}
+          orderedSellOrders={orderedSellOrders}
+          creditTypePrecision={creditTypePrecision}
         />
       </div>
       {paymentOption === PAYMENT_OPTIONS.CRYPTO && (

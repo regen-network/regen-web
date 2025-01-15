@@ -21,8 +21,8 @@ import { apiServerUrl } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
-import { getSubscribersStatusQuery } from 'lib/queries/react-query/registry-server/getSubscribersStatusQuery/getSubscribersStatusQuery';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
+import { getSubscribersStatusQuery } from 'lib/queries/react-query/registry-server/getSubscribersStatusQuery/getSubscribersStatusQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchUserBalance } from 'pages/BuyCredits/hooks/useFetchUserBalance';
@@ -179,15 +179,6 @@ export const BuyCreditsForm = ({
     getSubscribersStatusQuery({
       enabled: !!activeAccount,
     }),
-  );
-
-  const stripeOptions = useMemo(
-    () => ({
-      amount: parseFloat(((data?.[CURRENCY_AMOUNT] || 0) * 100).toFixed(2)), // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00),
-      currency: USD_DENOM,
-      ...defaultStripeOptions,
-    }),
-    [data],
   );
 
   useEffect(() => {
@@ -407,6 +398,24 @@ export const BuyCreditsForm = ({
     ],
   );
 
+  const stripeAmount =
+    data?.[CURRENCY_AMOUNT] ||
+    getCurrencyAmount({
+      currentCreditsAmount: 1,
+      card: paymentOption === PAYMENT_OPTIONS.CARD,
+      orderedSellOrders: cardSellOrders,
+      creditTypePrecision: creditTypeData?.creditType?.precision,
+    }).currencyAmount;
+
+  const stripeOptions = useMemo(
+    () => ({
+      amount: parseFloat((stripeAmount * 100).toFixed(2)), // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00),
+      currency: USD_DENOM,
+      ...defaultStripeOptions,
+    }),
+    [stripeAmount],
+  );
+
   const { isLoading, userBalance } = useFetchUserBalance(currency?.askDenom);
 
   return (
@@ -438,7 +447,7 @@ export const BuyCreditsForm = ({
             onPrev={() => navigate(projectHref)}
             initialValues={{
               [CURRENCY_AMOUNT]: data?.[CURRENCY_AMOUNT],
-              [CREDITS_AMOUNT]: data?.[CREDITS_AMOUNT],
+              [CREDITS_AMOUNT]: data?.[CREDITS_AMOUNT] || 1,
               [SELL_ORDERS]: data?.[SELL_ORDERS],
               [CREDIT_VINTAGE_OPTIONS]: data?.[CREDIT_VINTAGE_OPTIONS],
               [CURRENCY]: data?.[CURRENCY],

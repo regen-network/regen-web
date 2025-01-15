@@ -15,9 +15,17 @@ import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrenc
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
-import { CURRENCY, CURRENCY_AMOUNT } from './CreditsAmount.constants';
+import {
+  CREDITS_AMOUNT,
+  CURRENCY,
+  CURRENCY_AMOUNT,
+} from './CreditsAmount.constants';
 import { CurrencyInputProps } from './CreditsAmount.types';
-import { formatCurrencyAmount, shouldFormatValue } from './CreditsAmount.utils';
+import {
+  formatCurrencyAmount,
+  getCurrencyAmount,
+  shouldFormatValue,
+} from './CreditsAmount.utils';
 
 const CustomSelect = lazy(
   () =>
@@ -34,6 +42,8 @@ export const CurrencyInput = ({
   cryptoCurrencies,
   displayDenom,
   allowedDenoms,
+  orderedSellOrders,
+  creditTypePrecision,
 }: CurrencyInputProps) => {
   const {
     register,
@@ -97,11 +107,18 @@ export const CurrencyInput = ({
     (event: FocusEvent<HTMLInputElement>): void => {
       // If the value is empty, set it to 0
       const value = event.target.value;
-      if (value === '') {
-        setValue(CURRENCY_AMOUNT, 0, { shouldValidate: true });
+      if (value === '' || parseFloat(value) === 0) {
+        const { currencyAmount } = getCurrencyAmount({
+          currentCreditsAmount: 1,
+          card: paymentOption === PAYMENT_OPTIONS.CARD,
+          orderedSellOrders,
+          creditTypePrecision,
+        });
+        setValue(CURRENCY_AMOUNT, currencyAmount, { shouldValidate: true });
+        setValue(CREDITS_AMOUNT, 1, { shouldValidate: true });
       }
     },
-    [setValue],
+    [creditTypePrecision, orderedSellOrders, paymentOption, setValue],
   );
 
   const onHandleCurrencyChange = useCallback(

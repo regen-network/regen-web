@@ -27,6 +27,8 @@ export interface CreditsAmountProps {
 export interface CreditsInputProps {
   creditsAvailable: number;
   handleCreditsAmountChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  orderedSellOrders: UISellOrderInfo[];
+  creditTypePrecision?: number | null;
 }
 
 export interface CurrencyInputProps {
@@ -37,4 +39,6 @@ export interface CurrencyInputProps {
   cryptoCurrencies: Currency[];
   allowedDenoms?: AllowedDenoms;
   displayDenom: string;
+  orderedSellOrders: UISellOrderInfo[];
+  creditTypePrecision?: number | null;
 }

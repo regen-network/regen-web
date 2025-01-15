@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
@@ -153,6 +153,24 @@ const Projects = (): JSX.Element => {
   });
 
   const { resetFilters, showResetButton } = useResetFilters();
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    // As soon as a filter changes, we navigate back to page 1 if on all projects page
+    if (routePage && Number(routePage) > 1) {
+      navigate('/projects/1');
+    }
+    // routePage is not part of the dep array because we don't want this triggered on every page change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    environmentTypeFilters,
+    regionFilters,
+    marketTypeFilters,
+    buyingOptionsFilters,
+    creditClassSelectedFilters,
+    useCommunityProjects,
+    navigate,
+  ]);
 
   const {
     creditClassesWithMetadata,

@@ -13,7 +13,7 @@ import './Terrasos.tailwind.css';
 export const TerrasosProvider = () => {
   return (
     <SharedProviders customTheme={terrasosMuiTheme}>
-      <LedgerProvider>
+      <LedgerProvider walletLoaded>
         <TerrasosRoutes
           reactQueryClient={reactQueryClient}
           apolloClientFactory={apolloClientFactory}

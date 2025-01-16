@@ -19,6 +19,7 @@ import {
   CREDITS_AMOUNT,
   CURRENCY,
   CURRENCY_AMOUNT,
+  SELL_ORDERS,
 } from './CreditsAmount.constants';
 import { CurrencyInputProps } from './CreditsAmount.types';
 import {
@@ -108,7 +109,7 @@ export const CurrencyInput = ({
       // If the value is empty, set it to 0
       const value = event.target.value;
       if (value === '' || parseFloat(value) === 0) {
-        const { currencyAmount } = getCurrencyAmount({
+        const { currencyAmount, sellOrders } = getCurrencyAmount({
           currentCreditsAmount: 1,
           card: paymentOption === PAYMENT_OPTIONS.CARD,
           orderedSellOrders,
@@ -116,9 +117,17 @@ export const CurrencyInput = ({
         });
         setValue(CURRENCY_AMOUNT, currencyAmount, { shouldValidate: true });
         setValue(CREDITS_AMOUNT, 1, { shouldValidate: true });
+        setValue(SELL_ORDERS, sellOrders);
+        handleOnChange(event);
       }
     },
-    [creditTypePrecision, orderedSellOrders, paymentOption, setValue],
+    [
+      creditTypePrecision,
+      handleOnChange,
+      orderedSellOrders,
+      paymentOption,
+      setValue,
+    ],
   );
 
   const onHandleCurrencyChange = useCallback(

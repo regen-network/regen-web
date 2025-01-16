@@ -11,7 +11,11 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 
-import { CREDITS_AMOUNT, CURRENCY_AMOUNT } from './CreditsAmount.constants';
+import {
+  CREDITS_AMOUNT,
+  CURRENCY_AMOUNT,
+  SELL_ORDERS,
+} from './CreditsAmount.constants';
 import { CreditsInputProps } from './CreditsAmount.types';
 import { getCurrencyAmount } from './CreditsAmount.utils';
 
@@ -62,7 +66,7 @@ export const CreditsInput = ({
       // If the value is empty, set it to 0
       const value = event.target.value;
       if (value === '' || parseFloat(value) === 0) {
-        const { currencyAmount } = getCurrencyAmount({
+        const { currencyAmount, sellOrders } = getCurrencyAmount({
           currentCreditsAmount: 1,
           card: paymentOption === PAYMENT_OPTIONS.CARD,
           orderedSellOrders,
@@ -70,18 +74,17 @@ export const CreditsInput = ({
         });
         setValue(CREDITS_AMOUNT, 1, { shouldValidate: true });
         setValue(CURRENCY_AMOUNT, currencyAmount, { shouldValidate: true });
+        setValue(SELL_ORDERS, sellOrders);
+        onHandleChange(event);
       }
     },
-    [creditTypePrecision, orderedSellOrders, paymentOption, setValue],
-  );
-  const handleOnFocus = useCallback(
-    (event: FocusEvent<HTMLInputElement>): void => {
-      const value = event.target.value;
-      if (value === '0') {
-        setValue(CREDITS_AMOUNT, 0, { shouldValidate: true });
-      }
-    },
-    [setValue],
+    [
+      creditTypePrecision,
+      onHandleChange,
+      orderedSellOrders,
+      paymentOption,
+      setValue,
+    ],
   );
 
   return (
@@ -99,7 +102,6 @@ export const CreditsInput = ({
         onChange={onHandleChange}
         onInput={handleInput}
         onBlur={handleOnBlur}
-        onFocus={handleOnFocus}
         placeholder="0"
         sx={{
           '& .MuiInputBase-root': {

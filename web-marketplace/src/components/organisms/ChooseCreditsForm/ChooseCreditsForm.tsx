@@ -52,7 +52,10 @@ import {
 } from 'pages/Projects/AllProjects/AllProjects.types';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { getCurrencyAmount } from 'components/molecules/CreditsAmount/CreditsAmount.utils';
-import { AllowedDenoms } from 'components/molecules/DenomLabel/DenomLabel.utils';
+import {
+  AllowedDenoms,
+  findDisplayDenom,
+} from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSummaryCard';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
@@ -395,11 +398,16 @@ export const ChooseCreditsForm = React.memo(
                 form.setValue(SELL_ORDERS, sellOrders);
               }}
               creditsAvailable={creditsAvailable}
-              onInvalidCredits={() =>
+              onInvalidCredits={() => {
+                const displayDenom = findDisplayDenom({
+                  allowedDenoms,
+                  bankDenom: currency.askDenom,
+                  baseDenom: currency.askBaseDenom,
+                });
                 setErrorBannerTextAtom(
-                  getCreditsAvailableBannerText(creditsAvailable),
-                )
-              }
+                  getCreditsAvailableBannerText(creditsAvailable, displayDenom),
+                );
+              }}
               userBalance={userBalance}
             />
           )}

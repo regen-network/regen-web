@@ -168,12 +168,15 @@ export const getCardItems = ({
   },
 ];
 
-export const getCreditsAvailableBannerText = (creditsAvailable: number) => {
+export const getCreditsAvailableBannerText = (
+  creditsAvailable: number,
+  displayDenom: string,
+) => {
   const formattedCreditsAvailable = i18n.number(creditsAvailable, {
     maximumFractionDigits: 6,
   });
   return plural(creditsAvailable, {
-    one: `Only ${formattedCreditsAvailable} credit available with those paramaters, order quantity changed`,
-    other: `Only ${formattedCreditsAvailable} credits available with those paramaters, order quantity changed`,
+    one: `Credit amount adjusted: Only ${formattedCreditsAvailable} credit available in ${displayDenom}`,
+    other: `Credit amount adjusted: Only ${formattedCreditsAvailable} credits available in ${displayDenom}`,
   });
 };

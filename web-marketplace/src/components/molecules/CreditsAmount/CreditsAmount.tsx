@@ -134,7 +134,7 @@ export const CreditsAmount = ({
           }),
         );
         setErrorBannerTextAtom(
-          getCreditsAvailableBannerText(_creditsAvailable),
+          getCreditsAvailableBannerText(_creditsAvailable, displayDenom),
         );
       } else {
         // Else we keep the same amount of credits

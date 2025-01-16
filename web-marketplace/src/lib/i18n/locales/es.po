@@ -22,9 +22,6 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -77,9 +74,13 @@ msgstr "{area, plural, one {acre} other {acres}}"
 msgid "{area, plural, one {hectare} other {hectares}}"
 msgstr "{area, plural, one {hectárea} other {hectáreas}}"
 
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:178
+msgid "{creditsAvailable, plural, one {Credit amount adjusted: Only {formattedCreditsAvailable} credit available in {displayDenom}} other {Credit amount adjusted: Only {formattedCreditsAvailable} credits available in {displayDenom}}}"
+msgstr "{créditosDisponibles, plural, one {Monto de crédito ajustado: Solo {formattedCreditsAvailable} créditos disponibles en {displayDenom}} other {Monto de crédito ajustado: Solo {formattedCreditsAvailable} créditos disponibles en {displayDenom}}}"
+
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:175
-msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
-msgstr "{créditosDisponibles, plural, one {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido} other {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido}}"
+#~ msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
+#~ msgstr "{créditosDisponibles, plural, one {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido} other {Solo {formattedCreditsAvailable} créditos disponibles con esos parámetros, se modificó la cantidad del pedido}}"
 
 #: src/lib/constants/shared.constants.tsx:233
 msgid "{from}–{displayedTo} of {count}"
@@ -1399,7 +1400,7 @@ msgstr "Tipo de crédito 2"
 msgid "Credit unit definition"
 msgstr "Definición de unidad de crédito"
 
-#: src/components/molecules/CreditsAmount/CreditsInput.tsx:82
+#: src/components/molecules/CreditsAmount/CreditsInput.tsx:101
 msgid "credits"
 msgstr "créditos"
 
@@ -1461,7 +1462,7 @@ msgstr "Créditos por"
 msgid "Credits have been issued!"
 msgstr "¡Se han emitido los créditos!"
 
-#: src/components/molecules/CreditsAmount/CreditsInput.tsx:64
+#: src/components/molecules/CreditsAmount/CreditsInput.tsx:81
 msgid "Credits Input"
 msgstr "Entrada de créditos"
 
@@ -1527,7 +1528,7 @@ msgstr "Opciones de compra de criptomonedas"
 msgid "CURRENCY DENOM"
 msgstr "DENOMINACIÓN MONEDA"
 
-#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:144
+#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:149
 msgid "Currency Input"
 msgstr "Entrada de moneda"
 

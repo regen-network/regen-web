@@ -874,6 +874,10 @@ msgstr "comprar NCT"
 msgid "Buy tradable ecocredits"
 msgstr "Comprar ecocréditos negociables"
 
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.constants.ts:4
+msgid "Buy using crypto"
+msgstr "Comprar usando criptomonedas"
+
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions.tsx:87
 msgid "Buy with credit card"
 msgstr "Comprar con tarjeta de crédito"
@@ -890,6 +894,10 @@ msgstr "Comprador"
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:62
 msgid "Buying options"
 msgstr "Opciones de compra"
+
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.tsx:52
+msgid "Buying with crypto requires a <0>Keplr wallet</0>."
+msgstr "Para comprar con criptomonedas se requiere una <0>billetera Keplr</0>."
 
 #: src/components/organisms/RegistryLayout/components/ConnectWalletModal/ConnectWalletModal.constants.ts:9
 msgid "Buying with crypto requires an account with a wallet address. Please set up a Keplr wallet in order to continue."
@@ -1055,6 +1063,10 @@ msgstr "Elige el lote de ecocréditos"
 msgid "Choose new credits"
 msgstr "Elige nuevos créditos"
 
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.constants.ts:3
+msgid "Choose how to purchase credits"
+msgstr "Elige cómo comprar créditos"
+
 #: src/components/molecules/ProjectSelect.tsx:25
 #: src/features/ecocredit/CreateBatchBySteps/hooks/useUpdateProjectOptions.ts:14
 msgid "Choose Project"
@@ -1175,6 +1187,10 @@ msgstr "Conectar billetera"
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:13
 msgid "Connect wallet address"
 msgstr "Conectar la dirección de la billetera"
+
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.constants.ts:6
+msgid "connect wallet to buy"
+msgstr "Conectar billetera para comprar"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:67
 msgid "Connectivity allows the flow of species and ecological processes that support biodiversity across a larger area. Tebu promotes projects that contribute to the restoration of maintenance of the ecological connectivity at a landscape scale."
@@ -1329,6 +1345,10 @@ msgstr "Lotes de crédito"
 #: src/pages/Projects/Projects.constants.ts:6
 msgid "Credit card"
 msgstr "Tarjeta de crédito"
+
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.constants.ts:5
+msgid "Credit card not available for this project"
+msgstr "Tarjeta de crédito no disponible para este proyecto"
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:19
 #: src/lib/constants/shared.constants.tsx:197
@@ -2290,6 +2310,10 @@ msgstr "Extensión Keplr para Chrome"
 msgid "Keplr Mobile"
 msgstr "Keplr Móvil"
 
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.tsx:78
+msgid "keplr wallet"
+msgstr "billetera keplr"
+
 #: src/components/templates/ProjectDetails/ProjectDetails.ManagementActions.tsx:34
 msgid "Land Management Actions"
 msgstr "Acciones de Gestión Territorial"
@@ -2414,7 +2438,7 @@ msgid "Locations are private"
 msgstr "Las ubicaciones son privadas"
 
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:10
-#: src/components/organisms/LoginButton/LoginButton.tsx:53
+#: src/components/organisms/LoginButton/LoginButton.tsx:79
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:108
 msgid "log in"
 msgstr "acceso"
@@ -2817,6 +2841,10 @@ msgstr "Oportunidades"
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:100
 msgid "or, buy with crypto"
 msgstr "o comprar con criptomonedas"
+
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.constants.ts:7
+msgid "or, find credit card projects"
+msgstr "o busque proyectos de tarjetas de crédito"
 
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:67
 msgid "or, log in with email / social"

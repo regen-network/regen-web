@@ -879,6 +879,10 @@ msgstr ""
 msgid "Buy tradable ecocredits"
 msgstr ""
 
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.constants.ts:4
+msgid "Buy using crypto"
+msgstr ""
+
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.PaymentOptions.tsx:87
 msgid "Buy with credit card"
 msgstr ""
@@ -894,6 +898,10 @@ msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:62
 msgid "Buying options"
+msgstr ""
+
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.tsx:52
+msgid "Buying with crypto requires a <0>Keplr wallet</0>."
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/components/ConnectWalletModal/ConnectWalletModal.constants.ts:9
@@ -1060,6 +1068,10 @@ msgstr ""
 msgid "Choose new credits"
 msgstr ""
 
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.constants.ts:3
+msgid "Choose how to purchase credits"
+msgstr ""
+
 #: src/components/molecules/ProjectSelect.tsx:25
 #: src/features/ecocredit/CreateBatchBySteps/hooks/useUpdateProjectOptions.ts:14
 msgid "Choose Project"
@@ -1179,6 +1191,10 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:13
 msgid "Connect wallet address"
+msgstr ""
+
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.constants.ts:6
+msgid "connect wallet to buy"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:67
@@ -1329,6 +1345,10 @@ msgstr ""
 
 #: src/pages/Projects/Projects.constants.ts:6
 msgid "Credit card"
+msgstr ""
+
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.constants.ts:5
+msgid "Credit card not available for this project"
 msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:19
@@ -2291,6 +2311,10 @@ msgstr ""
 msgid "Keplr Mobile"
 msgstr ""
 
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.tsx:78
+msgid "keplr wallet"
+msgstr ""
+
 #: src/components/templates/ProjectDetails/ProjectDetails.ManagementActions.tsx:34
 msgid "Land Management Actions"
 msgstr ""
@@ -2415,7 +2439,7 @@ msgid "Locations are private"
 msgstr ""
 
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:10
-#: src/components/organisms/LoginButton/LoginButton.tsx:53
+#: src/components/organisms/LoginButton/LoginButton.tsx:79
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:108
 msgid "log in"
 msgstr ""
@@ -2809,6 +2833,10 @@ msgstr ""
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:100
 msgid "or, buy with crypto"
+msgstr ""
+
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.constants.ts:7
+msgid "or, find credit card projects"
 msgstr ""
 
 #: src/components/organisms/LoginModal/components/LoginModal.Select.tsx:67

@@ -398,14 +398,22 @@ export const BuyCreditsForm = ({
     ],
   );
 
-  const stripeAmount =
-    data?.[CURRENCY_AMOUNT] ||
-    getCurrencyAmount({
-      currentCreditsAmount: 1,
-      card: paymentOption === PAYMENT_OPTIONS.CARD,
-      orderedSellOrders: cardSellOrders,
-      creditTypePrecision: creditTypeData?.creditType?.precision,
-    }).currencyAmount;
+  const stripeAmount = useMemo(() => {
+    return (
+      data?.[CURRENCY_AMOUNT] ||
+      getCurrencyAmount({
+        currentCreditsAmount: 1,
+        card: paymentOption === PAYMENT_OPTIONS.CARD,
+        orderedSellOrders: cardSellOrders,
+        creditTypePrecision: creditTypeData?.creditType?.precision,
+      }).currencyAmount
+    );
+  }, [
+    data,
+    paymentOption,
+    cardSellOrders,
+    creditTypeData?.creditType?.precision,
+  ]);
 
   const stripeOptions = useMemo(
     () => ({

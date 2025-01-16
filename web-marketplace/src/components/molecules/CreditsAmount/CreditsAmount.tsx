@@ -5,7 +5,7 @@ import { useLingui } from '@lingui/react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { warningBannerTextAtom } from 'lib/atoms/banner.atoms';
 
 import {
   paymentOptionAtom,
@@ -50,9 +50,19 @@ export const CreditsAmount = ({
   const [maxCreditsSelected, setMaxCreditsSelected] = useState(false);
   const { setValue, trigger, getValues } =
     useFormContext<ChooseCreditsFormSchemaType>();
-  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const setWarningBannerTextAtom = useSetAtom(warningBannerTextAtom);
   const [spendingCap, setSpendingCap] = useAtom(spendingCapAtom);
   const paymentOption = useAtomValue(paymentOptionAtom);
+
+  const displayDenom = useMemo(
+    () =>
+      findDisplayDenom({
+        allowedDenoms,
+        bankDenom: currency.askDenom,
+        baseDenom: currency.askBaseDenom,
+      }),
+    [allowedDenoms, currency.askDenom, currency.askBaseDenom],
+  );
 
   useEffect(() => {
     // Set initial credits amount to min(1, creditsAvailable)
@@ -133,7 +143,7 @@ export const CreditsAmount = ({
             return formatSellOrder({ order, card, price });
           }),
         );
-        setErrorBannerTextAtom(
+        setWarningBannerTextAtom(
           getCreditsAvailableBannerText(_creditsAvailable, displayDenom),
         );
       } else {
@@ -161,8 +171,9 @@ export const CreditsAmount = ({
     setValue,
     orderedSellOrders,
     card,
-    setErrorBannerTextAtom,
+    setWarningBannerTextAtom,
     _,
+    displayDenom,
   ]);
 
   // Max credits set
@@ -225,16 +236,6 @@ export const CreditsAmount = ({
       setValue(SELL_ORDERS, sellOrders);
     },
     [card, orderedSellOrders, setValue, creditTypePrecision],
-  );
-
-  const displayDenom = useMemo(
-    () =>
-      findDisplayDenom({
-        allowedDenoms,
-        bankDenom: currency.askDenom,
-        baseDenom: currency.askBaseDenom,
-      }),
-    [allowedDenoms, currency.askDenom, currency.askBaseDenom],
   );
 
   return (

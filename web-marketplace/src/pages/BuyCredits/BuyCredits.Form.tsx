@@ -9,6 +9,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { useLedger } from 'ledger';
+import { warningBannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import {
   connectWalletModalAtom,
@@ -111,6 +112,7 @@ export const BuyCreditsForm = ({
   const navigate = useNavigate();
 
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const setWarningBannerTextAtom = useSetAtom(warningBannerTextAtom);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const [paymentOptionCryptoClicked, setPaymentOptionCryptoClicked] = useAtom(
@@ -457,7 +459,7 @@ export const BuyCreditsForm = ({
                 bankDenom: currency.askDenom,
                 baseDenom: currency.askBaseDenom,
               });
-              setErrorBannerTextAtom(
+              setWarningBannerTextAtom(
                 getCreditsAvailableBannerText(creditsAvailable, displayDenom),
               );
             }}

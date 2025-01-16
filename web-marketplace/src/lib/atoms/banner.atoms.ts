@@ -6,3 +6,4 @@ export const isTebuBannerVisibleAtom = atomWithStorage(
   'isTebuBannerVisible',
   true,
 );
+export const warningBannerTextAtom = atom('');

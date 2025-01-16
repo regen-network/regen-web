@@ -25,7 +25,7 @@ import { Loading } from 'web-components/src/components/loading';
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { warningBannerTextAtom } from 'lib/atoms/banner.atoms';
 
 import {
   paymentOptionAtom,
@@ -118,7 +118,7 @@ export const ChooseCreditsForm = React.memo(
     userBalance,
   }: Props) => {
     const { _ } = useLingui();
-    const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+    const setWarningBannerTextAtom = useSetAtom(warningBannerTextAtom);
     const { data, handleSave, activeStep } =
       useMultiStep<BuyCreditsSchemaTypes>();
     const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
@@ -404,7 +404,7 @@ export const ChooseCreditsForm = React.memo(
                   bankDenom: currency.askDenom,
                   baseDenom: currency.askBaseDenom,
                 });
-                setErrorBannerTextAtom(
+                setWarningBannerTextAtom(
                   getCreditsAvailableBannerText(creditsAvailable, displayDenom),
                 );
               }}

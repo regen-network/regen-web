@@ -93,13 +93,6 @@ export const AgreePurchaseForm = ({
     setCardDetailsMissing,
   ]);
 
-  // reset cardDetailsMissing on unmount
-  useEffect(() => {
-    return () => {
-      setCardDetailsMissing(true);
-    };
-  }, [setCardDetailsMissing]);
-
   return (
     <Form
       form={form}
@@ -157,6 +150,7 @@ export const AgreePurchaseForm = ({
           saveDisabled={!isValid || isSubmitting}
           saveText={_(msg`purchase now`)}
           onPrev={handleBack}
+          onSave={() => setCardDetailsMissing(null)}
         />
       </div>
     </Form>

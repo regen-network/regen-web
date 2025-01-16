@@ -573,8 +573,13 @@ export const BuyCreditsForm = ({
                 // web3 account connected
                 handleSave(
                   { ...data, paymentOption: PAYMENT_OPTIONS.CRYPTO },
-                  activeStep,
+                  0,
                 );
+                setWarningModalState({
+                  ...warningModalState,
+                  openModal: false,
+                });
+                window.scrollTo(0, 0);
                 handleActiveStep(0);
               }
             } else if (action) {
@@ -592,12 +597,15 @@ export const BuyCreditsForm = ({
               });
               // After a purchase attempt where there's partial credits availability,
               // we need to update the form with the new credits, currency amount and sell orders.
-              handleSaveNext({
-                ...data,
-                [CREDITS_AMOUNT]: warningModalState.creditsAvailable,
-                [CURRENCY_AMOUNT]: amounts.currencyAmount,
-                [SELL_ORDERS]: amounts.sellOrders,
-              });
+              handleSave(
+                {
+                  ...data,
+                  [CREDITS_AMOUNT]: warningModalState.creditsAvailable,
+                  [CURRENCY_AMOUNT]: amounts.currencyAmount,
+                  [SELL_ORDERS]: amounts.sellOrders,
+                },
+                0,
+              );
               window.scrollTo(0, 0);
               handleActiveStep(0);
             }

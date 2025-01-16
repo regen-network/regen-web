@@ -74,7 +74,7 @@ export const ChooseHowToPurchaseModal = ({
             {_(CARD_BUTTON)}
           </OutlinedButton>
         </div>
-        <div className="self-end -mt-30 md:mt-0 md:-ml-30">
+        <div className="self-end -mt-50 md:mt-0 md:-ml-30">
           <img src="/svg/keplr-wallet.svg" alt={_(msg`keplr wallet`)} />
         </div>
       </Card>

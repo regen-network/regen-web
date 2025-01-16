@@ -4340,12 +4340,16 @@ msgid "This may take up to 15 seconds."
 msgstr "Esto puede tardar hasta 15 segundos."
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
+msgid "This name will appear on the retirement certificate unless you choose to retire anonymously in the next step."
+msgstr "Este nombre aparecerá en el certificado de jubilación a menos que elija jubilarse anónimamente en el siguiente paso."
+
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
 #~ msgid "This name will appear on the retirement certificate unless you choose to retire anonymously in the next step. It is also your user profile name."
 #~ msgstr "Este nombre aparecerá en el certificado de jubilación a menos que elija jubilarse de forma anónima en el siguiente paso. También es su nombre de perfil de usuario."
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
-msgid "This name will appear on the retirement certificate. It is also your user profile name."
-msgstr "Este nombre aparecerá en el certificado de jubilación. También es el nombre de su perfil de usuario."
+#~ msgid "This name will appear on the retirement certificate. It is also your user profile name."
+#~ msgstr "Este nombre aparecerá en el certificado de jubilación. También es el nombre de su perfil de usuario."
 
 #: src/components/organisms/PostForm/PostForm.tsx:388
 msgid "This post and all of its files will be visible."

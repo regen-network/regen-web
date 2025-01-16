@@ -4330,8 +4330,12 @@ msgid "This may take up to 15 seconds."
 msgstr ""
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
-msgid "This name will appear on the retirement certificate. It is also your user profile name."
+msgid "This name will appear on the retirement certificate unless you choose to retire anonymously in the next step."
 msgstr ""
+
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
+#~ msgid "This name will appear on the retirement certificate. It is also your user profile name."
+#~ msgstr ""
 
 #: src/components/organisms/PostForm/PostForm.tsx:388
 msgid "This post and all of its files will be visible."

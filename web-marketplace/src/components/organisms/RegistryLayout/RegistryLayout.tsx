@@ -10,6 +10,7 @@ import TerrasosHeader from '../TerrasosHeader';
 import { RegistryLayoutAccountSwitchModal } from './RegistryLayout.AccountSwitchModal';
 import { RegistryLayoutAddWalletModalSwitchWarning } from './RegistryLayout.AddWalletModalSwitchWarning';
 import { RegistryLayoutBannerModal } from './RegistryLayout.Banner';
+import { RegistryLayoutChooseHowToPurchaseModal } from './RegistryLayout.ChooseHowToPurchaseModal';
 import { RegistryLayoutConnectWalletModal } from './RegistryLayout.ConnectWalletModal';
 import { RegistryLayoutCookiesTopBanner } from './RegistryLayout.CookiesTopBanner';
 import { RegistryLayoutErrorBannerModal } from './RegistryLayout.ErrorBanner';
@@ -49,6 +50,7 @@ const RegistryLayout: React.FC = () => {
       <RegistryLayoutAccountSwitchModal />
       <RegistryLayoutTxBuySuccessfulModal />
       <RegistryLayoutWarningBannerModal />
+      <RegistryLayoutChooseHowToPurchaseModal />
     </>
   );
 };

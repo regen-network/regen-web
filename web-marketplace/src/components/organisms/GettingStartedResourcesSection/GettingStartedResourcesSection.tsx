@@ -26,7 +26,7 @@ const GettingStartedResourcesSection: React.FC<
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <div className="overflow-x-hidden pb-[80px] sm:pb-[120px]">
+    <div className="overflow-x-hidden pb-[80px] sm:pb-[120px] border-t border-solid border-bc-neutral-300 border-l-0 border-r-0 border-b-0">
       <Root>
         <Title className="text-left sm:text-center" variant="h2" align="center">
           {section.header || _(msg`Resources for Getting Started`)}

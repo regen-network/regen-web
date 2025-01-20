@@ -5,7 +5,7 @@ import { Theme } from '../../../theme/muiTheme';
 import { ProjectTag } from '../../molecules/ProjectTag/ProjectTag';
 
 interface TagFilterProps {
-  icon: JSX.Element;
+  icon?: JSX.Element;
   name: string;
   isSelected: boolean;
   onClick?: () => void;
@@ -29,7 +29,7 @@ export default function TagFilter({
   sx = {},
 }: TagFilterProps) {
   // add isSelected prop to icon
-  const iconWithProps = cloneElement(icon, { isSelected });
+  const iconWithProps = icon && cloneElement(icon, { isSelected });
   return (
     <ProjectTag
       sx={{

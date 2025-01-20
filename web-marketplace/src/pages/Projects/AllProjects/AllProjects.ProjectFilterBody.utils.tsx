@@ -4,10 +4,7 @@ import { Box } from '@mui/material';
 import RegionIndicatorIcon from 'web-components/src/components/icons/terrasos/ColombiaRegionIcon';
 import HectaresBadge from 'web-components/src/components/icons/terrasos/HectaresBadge';
 import SvgWithSelectedColor from 'web-components/src/components/icons/utils/SvgWithSelectedColor';
-import {
-  Filter,
-  FilterOptions,
-} from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
+import type { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
@@ -75,13 +72,13 @@ export function getEcosystemTags(
   _: TranslatorType,
   ecosystemIcons: Record<string, string>,
   ecosystemTypes: string[],
-): FilterOptions[] {
+): FilterOption[] {
   return ecosystemTags
     .filter(tag => ecosystemTypes.includes(tag.id.toLowerCase()))
     .map(({ id, name }) => ({
       name: _(name),
       id: id,
-      icon: (
+      startIcon: (
         <SvgWithSelectedColor
           src={ecosystemIcons[id]}
           sx={ecosystemIconSx}
@@ -96,40 +93,40 @@ export const regionTags = [
   {
     name: msg`Amazon`,
     id: 'Amazon',
-    icon: <RegionIndicatorIcon region="AMAZON" />,
+    startIcon: <RegionIndicatorIcon region="AMAZON" />,
   },
   {
     name: msg`Pacific`,
     id: 'Pacific',
-    icon: <RegionIndicatorIcon region="PACIFIC" />,
+    startIcon: <RegionIndicatorIcon region="PACIFIC" />,
   },
   {
     name: msg`Orinoco`,
     id: 'Orinoco',
-    icon: <RegionIndicatorIcon region="ORINOCO" />,
+    startIcon: <RegionIndicatorIcon region="ORINOCO" />,
   },
   {
     name: msg`Caribbean`,
     id: 'Caribbean',
-    icon: <RegionIndicatorIcon region="CARIBBEAN" />,
+    startIcon: <RegionIndicatorIcon region="CARIBBEAN" />,
   },
   {
     name: msg`Andean`,
     id: 'Andean',
-    icon: <RegionIndicatorIcon region="ANDEAN" />,
+    startIcon: <RegionIndicatorIcon region="ANDEAN" />,
   },
 ];
 
 export function getRegionTags(
   _: TranslatorType,
   regions: string[],
-): FilterOptions[] {
+): FilterOption[] {
   return regionTags
     .filter(tag => regions.includes(tag.id.toLowerCase()))
-    .map(({ name, id, icon }) => ({
+    .map(({ name, id, startIcon }) => ({
       name: _(name),
-      id: id,
-      icon: icon,
+      id,
+      startIcon,
     }));
 }
 
@@ -137,10 +134,10 @@ const marketCheckboxes = [
   {
     name: msg`Voluntary`,
     id: VOLUNTARY_MARKET,
-    icon: (
+    endIcon: (
       <Box
         component="img"
-        sx={{ width: '24px', ml: 2 }}
+        sx={{ width: '24px' }}
         src="/svg/tebu-badge.svg"
         // eslint-disable-next-line lingui/no-unlocalized-strings
         alt="Tebu"
@@ -150,34 +147,29 @@ const marketCheckboxes = [
   {
     name: msg`Compliance`,
     id: COMPLIANCE_MARKET,
-    icon: (
-      <div className="ml-[8px] w-[24px]">
+    endIcon: (
+      <div className="w-[24px]">
         <HectaresBadge />
       </div>
     ),
   },
 ];
 
-function getMarketCheckboxes(
+export function getMarketCheckboxes(
   _: TranslatorType,
   marketTypes: string[],
-): FilterOptions[] {
+): FilterOption[] {
   return marketCheckboxes
     .filter(marketType => marketTypes.includes(marketType.id))
-    .map(({ name, id, icon }) => ({
+    .map(({ name, id, endIcon }) => ({
       name: _(name),
-      id: id,
-      icon: icon,
+      id,
+      endIcon,
     }));
 }
 
-export const initialActiveFilterKeysByType = {
-  regionFilters: [],
-  environmentTypeFilters: [],
-  marketTypeFilters: marketCheckboxes.map(({ id }) => id),
-};
-
 export const initialActiveFilters = {
+  buyingOptionsFilters: {},
   regionFilters: {},
   environmentTypeFilters: {},
   marketTypeFilters: Object.fromEntries(
@@ -185,7 +177,7 @@ export const initialActiveFilters = {
   ),
 };
 
-const extractUniqueValues = (
+export const extractUniqueValues = (
   allProjects: ProjectWithOrderData[],
   key: keyof ProjectWithOrderData,
   toLowerCase: boolean,
@@ -201,44 +193,3 @@ const extractUniqueValues = (
     ),
   ];
 };
-
-export function getFilters(
-  _: TranslatorType,
-  ecosystemIcons: Record<string, string>,
-  allProjects: ProjectWithOrderData[],
-): Filter[] {
-  const uniqueRegions = [
-    ...new Set(
-      allProjects.map(project => project.region?.toLowerCase()).filter(Boolean),
-    ),
-  ] as string[];
-  const uniqueEcosystemTypes = extractUniqueValues(
-    allProjects,
-    'ecosystemType',
-    true,
-  );
-  const uniqueMarketTypes = extractUniqueValues(
-    allProjects,
-    'marketType',
-    false,
-  );
-
-  return [
-    {
-      displayType: 'tag',
-      title: _(msg`Region`),
-      options: getRegionTags(_, uniqueRegions),
-    },
-    {
-      displayType: 'tag',
-      title: _(msg`Ecosystem`),
-      options: getEcosystemTags(_, ecosystemIcons, uniqueEcosystemTypes),
-      hasCollapse: true,
-    },
-    {
-      displayType: 'checkbox',
-      title: _(msg`Market`),
-      options: getMarketCheckboxes(_, uniqueMarketTypes),
-    },
-  ];
-}

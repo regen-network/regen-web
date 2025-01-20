@@ -1,10 +1,10 @@
-import { useMemo } from 'react';
-import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import cn from 'classnames';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
@@ -16,15 +16,18 @@ import {
 } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
+  buyingOptionsFiltersAtom,
+  creditClassInitialFiltersAtom,
   creditClassSelectedFiltersAtom,
   environmentTypeFiltersAtom,
   marketTypeFiltersAtom,
   projectsSortAtom,
   regionFiltersAtom,
-  useCommunityProjectsAtom,
+  showCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
-import { IS_REGEN, IS_TERRASOS } from 'lib/env';
+import { CREDIT_CLASS_FILTERS_TO_DESELECT, IS_REGEN } from 'lib/env';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 
 import { Link } from 'components/atoms';
@@ -32,30 +35,32 @@ import { GettingStartedResourcesSection } from 'components/molecules';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 
 import { PROJECTS_PER_PAGE } from './AllProjects/AllProjects.config';
-import {
-  getActiveFilterIds,
-  getResetFilters,
-  getSetActiveFilters,
-  getShowResetButton,
-} from './AllProjects/AllProjects.ProjectFilter.utils';
+import { normalizeCreditClassFilters } from './AllProjects/AllProjects.normalizers';
 import ProjectFilterBody from './AllProjects/AllProjects.ProjectFilterBody';
+import { useFetchCreditClasses } from './hooks/useFetchCreditClasses';
 import { useProjects } from './hooks/useProjects';
+import { useResetFilters } from './hooks/useResetFilters';
+import { normalizeBuyingOptionsFilter } from './Projects.normalizers';
 
 const Projects = (): JSX.Element => {
   const { _ } = useLingui();
   const { page: routePage } = useParams();
   const location = useLocation();
-  const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
+  const [showCommunityProjects] = useAtom(showCommunityProjectsAtom);
   const [sort] = useAtom(projectsSortAtom);
-  const [creditClassSelectedFilters] = useAtom(creditClassSelectedFiltersAtom);
-  const [environmentTypeFilters, setEnvironmentTypeFilters] = useAtom(
-    environmentTypeFiltersAtom,
+  const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
+    creditClassSelectedFiltersAtom,
   );
-  const [regionFilters, setRegionFilters] = useAtom(regionFiltersAtom);
-  const [marketTypeFilters, setMarketTypeFilters] = useAtom(
-    marketTypeFiltersAtom,
+  const setCreditClassInitialFilters = useSetAtom(
+    creditClassInitialFiltersAtom,
   );
+  const [environmentTypeFilters] = useAtom(environmentTypeFiltersAtom);
+  const [regionFilters] = useAtom(regionFiltersAtom);
+  const [marketTypeFilters] = useAtom(marketTypeFiltersAtom);
+  const [buyingOptionsFilters] = useAtom(buyingOptionsFiltersAtom);
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
+  const prefinance = location.pathname.includes('prefinance');
 
   const { data: allHomePageData } = useQuery(
     getAllHomePageQuery({
@@ -82,15 +87,17 @@ const Projects = (): JSX.Element => {
     hasCommunityProjects,
     prefinanceProjectsCount,
     prefinanceProjects,
+    loading,
   } = useProjects({
     sort,
     offset: page * PROJECTS_PER_PAGE,
-    useCommunityProjects,
+    showCommunityProjects,
     creditClassFilter: creditClassSelectedFilters,
     regionFilter: regionFilters,
     environmentTypeFilter: environmentTypeFilters,
     marketTypeFilter: marketTypeFilters,
     sortPinnedIds,
+    buyingOptionsFilters,
   });
 
   const tabs: IconTabProps[] = useMemo(
@@ -145,77 +152,138 @@ const Projects = (): JSX.Element => {
     sanitySoldOutProjects,
   });
 
-  const setActiveFilters = (filters: string[]) =>
-    getSetActiveFilters({
-      filterIds: filters,
-      setMarketTypeFilters,
-      setEnvironmentTypeFilters,
-      setRegionFilters,
-      marketTypeFilters,
-      environmentTypeFilters,
-      regionFilters,
-    });
+  const { resetFilters, showResetButton } = useResetFilters();
 
-  const activeFilterIds = getActiveFilterIds({
-    marketTypeFilters,
+  const navigate = useNavigate();
+  useEffect(() => {
+    // As soon as a filter changes, we navigate back to page 1 if on all projects page
+    if (routePage && Number(routePage) > 1) {
+      navigate('/projects/1');
+    }
+    // routePage is not part of the dep array because we don't want this triggered on every page change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
     environmentTypeFilters,
     regionFilters,
-  });
-
-  const resetFilters = getResetFilters({
-    setMarketTypeFilters,
-    setEnvironmentTypeFilters,
-    setRegionFilters,
-  });
-
-  const showResetButton = getShowResetButton({
     marketTypeFilters,
-    environmentTypeFilters,
-    regionFilters,
-  });
+    buyingOptionsFilters,
+    creditClassSelectedFilters,
+    showCommunityProjects,
+    navigate,
+  ]);
+
+  const {
+    creditClassesWithMetadata,
+    isLoading: isCreditClassesWithMetadataLoading,
+  } = useFetchCreditClasses();
+
+  const {
+    data: sanityCreditClassesData,
+    isLoading: isSanityCreditClassesLoading,
+  } = useQuery(
+    getAllSanityCreditClassesQuery({
+      sanityClient,
+      languageCode: selectedLanguage,
+    }),
+  );
+
+  const { creditClassFilters } = useMemo(
+    () =>
+      normalizeCreditClassFilters({
+        creditClassesWithMetadata,
+        sanityCreditClassesData,
+        allOnChainProjects,
+        haveOffChainProjects,
+        buyingOptionsFilters,
+        allProjects,
+        _,
+      }),
+    [
+      _,
+      allOnChainProjects,
+      allProjects,
+      buyingOptionsFilters,
+      creditClassesWithMetadata,
+      haveOffChainProjects,
+      sanityCreditClassesData,
+    ],
+  );
+  const buyingOptionsFilterOptions = useMemo(
+    () =>
+      normalizeBuyingOptionsFilter({
+        allOnChainProjects,
+        prefinance,
+        creditClassSelectedFilters,
+        allProjects,
+        _,
+      }),
+    [
+      allOnChainProjects,
+      prefinance,
+      creditClassSelectedFilters,
+      allProjects,
+      _,
+    ],
+  );
+
+  useEffect(() => {
+    // Check all the credit class filters by default
+    if (
+      !loading &&
+      !isCreditClassesWithMetadataLoading &&
+      !isSanityCreditClassesLoading &&
+      Object.keys(creditClassSelectedFilters).length === 0
+    ) {
+      const _creditClassInitialFilters = creditClassFilters.reduce(
+        (acc, creditClassFilter) => {
+          return {
+            ...acc,
+            [creditClassFilter.path]: CREDIT_CLASS_FILTERS_TO_DESELECT.includes(
+              creditClassFilter.path,
+            )
+              ? false
+              : true,
+          };
+        },
+        {},
+      );
+      setCreditClassInitialFilters(_creditClassInitialFilters);
+      setCreditClassSelectedFilters(_creditClassInitialFilters);
+    }
+  }, [
+    creditClassFilters,
+    creditClassSelectedFilters,
+    isCreditClassesWithMetadataLoading,
+    isSanityCreditClassesLoading,
+    loading,
+    setCreditClassInitialFilters,
+    setCreditClassSelectedFilters,
+  ]);
 
   return (
     <>
       <div
-        className={cn(
-          {
-            'lg:grid grid-cols-[auto_minmax(310px,750px)] xl:grid-cols-[auto_minmax(310px,1120px)]':
-              IS_TERRASOS,
-          },
-          { '': !IS_TERRASOS },
-          'block justify-center',
-        )}
+        className="lg:grid grid-cols-[auto_minmax(310px,750px)] xl:grid-cols-[auto_minmax(310px,1120px)] block justify-center"
         style={{
-          background: IS_TERRASOS
-            ? 'linear-gradient(90deg, rgba(var(--ac-neutral-0)) 0%, rgba(var(--ac-neutral-0)) 50%, rgba(var(--ac-neutral-100)) 50%, rgba(var(--ac-neutral-100)) 100%)'
-            : 'rgba(var(--ac-neutral-100))',
+          background:
+            'linear-gradient(90deg, rgba(var(--ac-neutral-0)) 0%, rgba(var(--ac-neutral-0)) 50%, rgba(var(--ac-neutral-100)) 50%, rgba(var(--ac-neutral-100)) 100%)',
+          //'rgba(var(--ac-neutral-100))',
         }}
       >
-        <div
-          className={cn('w-[310px] py-[43px] px-[20px] hidden', {
-            'lg:block': IS_TERRASOS,
-          })}
-        >
+        <div className="w-[310px] py-[43px] px-[20px] hidden lg:block">
           <ProjectFilterBody
             allProjects={allProjects}
-            activeFilters={activeFilterIds}
-            setActiveFilters={setActiveFilters}
             resetFilters={resetFilters}
             showResetButton={showResetButton}
+            hasCommunityProjects={hasCommunityProjects}
+            creditClassFilters={creditClassFilters}
+            buyingOptionsFilterOptions={buyingOptionsFilterOptions}
           />
         </div>
         <div
           className={cn(
-            'bg-ac-neutral-100 pt-25 sm:pt-40 px-[16px] md:px-25 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center',
-            {
-              'lg:justify-start grid-cols-[repeat(auto-fit,minmax(300px,1fr))]':
-                IS_TERRASOS,
-            },
-            {
-              'mx-auto grid-cols-[repeat(auto-fit,minmax(300px,1fr))]':
-                !IS_TERRASOS,
-            },
-            { 'lg:block': projectsCount === 0 && !IS_REGEN },
+            'bg-ac-neutral-100 pt-25 sm:pt-40 px-[16px] md:px-25 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center lg:justify-start grid-cols-[repeat(auto-fit,minmax(300px,1fr))]',
+            { 'lg:block': projectsCount === 0 },
             { 'h-fit': projectsCount !== 0 },
           )}
         >
@@ -249,11 +317,17 @@ const Projects = (): JSX.Element => {
               prefinanceProjects,
               prefinanceProjectsContent,
               soldOutProjectsIds,
+              creditClassFilters,
+              buyingOptionsFilterOptions,
+              loading:
+                loading ||
+                isCreditClassesWithMetadataLoading ||
+                isSanityCreditClassesLoading,
             }}
           />
         </div>
       </div>
-      {gettingStartedResourcesSection && !IS_TERRASOS && (
+      {gettingStartedResourcesSection && IS_REGEN && (
         <GettingStartedResourcesSection
           section={gettingStartedResourcesSection}
         />

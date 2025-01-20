@@ -5,35 +5,70 @@ import { Meta, StoryFn } from '@storybook/react';
 import RegionIndicatorIcon from '../../icons/terrasos/ColombiaRegionIcon';
 import HectaresBadge from '../../icons/terrasos/HectaresBadge';
 import SvgWithSelectedColor from '../../icons/utils/SvgWithSelectedColor';
-import ProjectFilters, { Filter, FilterOptions } from './ProjectFilters';
+import ProjectFilters, { FilterOption } from './ProjectFilters';
+import { hasChangedFilters } from './ProjectFilters.utils';
 
+const INITIAL_FILTERS = {};
+const INITIAL_MARKET_FILTERS = {
+  COMPLIANCE: true,
+  VOLUNTARY: true,
+};
 export default {
   title: 'Organisms/ProjectFilters',
   component: ProjectFilters,
 } as Meta;
 
-const initialActiveFilters = [
-  'AMAZON',
-  'TROPICAL_VERY_HUMID_FOREST',
-  'VOLUNTARY',
-];
-
 const Template: StoryFn = args => {
-  const [activeFilters, setActiveFilters] =
-    useState<string[]>(initialActiveFilters);
-  const onFilterChange = (id: string) => {
-    const newFilters = activeFilters.includes(id)
-      ? activeFilters.filter(filterId => filterId !== id)
-      : [...activeFilters, id];
-    setActiveFilters(newFilters);
-  };
+  const [regionFilters, setRegionFilters] =
+    useState<Record<string, boolean>>(INITIAL_FILTERS);
+  const [ecosystemFilters, setEcosystemFilters] =
+    useState<Record<string, boolean>>(INITIAL_FILTERS);
+  const [marketFilters, setMarketFilters] = useState<Record<string, boolean>>(
+    INITIAL_MARKET_FILTERS,
+  );
+
   return (
     <ProjectFilters
-      {...args}
-      filters={args.filters}
-      activeFilterIds={activeFilters}
-      onFilterChange={onFilterChange}
-      onFilterReset={() => setActiveFilters([])}
+      filters={[
+        {
+          displayType: 'tag',
+          title: 'Region',
+          options: regionTags,
+          selectedFilters: regionFilters,
+          onFilterChange: id => {
+            setRegionFilters(prev => ({ ...prev, [id]: !prev[id] }));
+          },
+        },
+        {
+          displayType: 'tag',
+          title: 'Ecosystem',
+          options: ecosystemTags,
+          hasCollapse: true,
+          selectedFilters: ecosystemFilters,
+          onFilterChange: id => {
+            setEcosystemFilters(prev => ({ ...prev, [id]: !prev[id] }));
+          },
+        },
+        {
+          displayType: 'checkbox',
+          title: 'Market',
+          options: marketCheckboxes,
+          selectedFilters: marketFilters,
+          onFilterChange: id => {
+            setMarketFilters(prev => ({ ...prev, [id]: !prev[id] }));
+          },
+        },
+      ]}
+      showResetButton={
+        hasChangedFilters(regionFilters, INITIAL_FILTERS) ||
+        hasChangedFilters(ecosystemFilters, INITIAL_FILTERS) ||
+        hasChangedFilters(marketFilters, INITIAL_MARKET_FILTERS)
+      }
+      onFilterReset={() => {
+        setRegionFilters(INITIAL_FILTERS);
+        setEcosystemFilters(INITIAL_FILTERS);
+        setMarketFilters(INITIAL_MARKET_FILTERS);
+      }}
       labels={{
         title: 'Filters',
         reset: 'Reset',
@@ -43,7 +78,6 @@ const Template: StoryFn = args => {
     />
   );
 };
-// add another component
 
 const ecosystemIconSx = {
   width: '30px',
@@ -51,11 +85,11 @@ const ecosystemIconSx = {
   mr: 2,
 };
 
-const ecosystemTags: FilterOptions[] = [
+const ecosystemTags: FilterOption[] = [
   {
     name: 'Tropical very humid forest',
     id: 'TROPICAL_VERY_HUMID_FOREST',
-    icon: (
+    startIcon: (
       <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
@@ -67,7 +101,7 @@ const ecosystemTags: FilterOptions[] = [
   {
     name: 'Tropical humid forest',
     id: 'TROPICAL_HUMID_FOREST',
-    icon: (
+    startIcon: (
       <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
@@ -79,7 +113,7 @@ const ecosystemTags: FilterOptions[] = [
   {
     name: 'Tropical dry forest',
     id: 'TROPICAL_DRY_FOREST',
-    icon: (
+    startIcon: (
       <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
@@ -91,7 +125,7 @@ const ecosystemTags: FilterOptions[] = [
   {
     name: 'Premontane humid forest',
     id: 'PREMONTANE_HUMID_FOREST',
-    icon: (
+    startIcon: (
       <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
@@ -103,7 +137,7 @@ const ecosystemTags: FilterOptions[] = [
   {
     name: 'Low montane very humid forest',
     id: 'LOW_MONTANE_VERY_HUMID_FOREST',
-    icon: (
+    startIcon: (
       <SvgWithSelectedColor
         src="/tag/forest.svg"
         sx={ecosystemIconSx}
@@ -114,39 +148,39 @@ const ecosystemTags: FilterOptions[] = [
   },
 ];
 
-const regionTags: FilterOptions[] = [
+const regionTags: FilterOption[] = [
   {
     name: 'Amazon',
     id: 'AMAZON',
-    icon: <RegionIndicatorIcon region="AMAZON" />,
+    startIcon: <RegionIndicatorIcon region="AMAZON" />,
   },
   {
     name: 'Pacific',
     id: 'PACIFIC',
-    icon: <RegionIndicatorIcon region="PACIFIC" />,
+    startIcon: <RegionIndicatorIcon region="PACIFIC" />,
   },
   {
     name: 'Orinoco',
     id: 'ORINOCO',
-    icon: <RegionIndicatorIcon region="ORINOCO" />,
+    startIcon: <RegionIndicatorIcon region="ORINOCO" />,
   },
   {
     name: 'Caribbean',
     id: 'CARIBBEAN',
-    icon: <RegionIndicatorIcon region="CARIBBEAN" />,
+    startIcon: <RegionIndicatorIcon region="CARIBBEAN" />,
   },
   {
     name: 'Andean',
     id: 'ANDEAN',
-    icon: <RegionIndicatorIcon region="ANDEAN" />,
+    startIcon: <RegionIndicatorIcon region="ANDEAN" />,
   },
 ];
 
-const marketCheckboxes = [
+const marketCheckboxes: FilterOption[] = [
   {
     name: 'Voluntary',
     id: 'VOLUNTARY',
-    icon: (
+    endIcon: (
       <Box
         component="img"
         sx={{ width: '24px', ml: 2 }}
@@ -158,30 +192,9 @@ const marketCheckboxes = [
   {
     name: 'Compliance',
     id: 'COMPLIANCE',
-    icon: <HectaresBadge />,
-  },
-];
-
-const filters: Filter[] = [
-  {
-    displayType: 'tag',
-    title: 'Region',
-    options: regionTags,
-  },
-  {
-    displayType: 'tag',
-    title: 'Ecosystem',
-    options: ecosystemTags,
-    hasCollapse: true,
-  },
-  {
-    displayType: 'checkbox',
-    title: 'Market',
-    options: marketCheckboxes,
+    endIcon: <HectaresBadge />,
   },
 ];
 
 export const Default = Template.bind({});
-Default.args = {
-  filters: filters,
-};
+Default.args = {};

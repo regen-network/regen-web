@@ -8,7 +8,7 @@ import { useAtom } from 'jotai';
 
 import {
   AllCreditClassQuery,
-  AllPrefinanceProjectQuery,
+  AllProjectsQuery,
 } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { IS_TERRASOS } from 'lib/env';
@@ -20,13 +20,13 @@ import { findSanityCreditClass } from 'components/templates/ProjectDetails/Proje
 type Props = {
   sanityCreditClassesData?: AllCreditClassQuery;
   enabled?: boolean;
-  prefinanceProjectsData?: AllPrefinanceProjectQuery;
+  sanityProjectsData?: AllProjectsQuery;
 };
 
 export const useFetchAllOffChainProjects = ({
   sanityCreditClassesData,
   enabled = true,
-  prefinanceProjectsData,
+  sanityProjectsData,
 }: Props) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -44,7 +44,7 @@ export const useFetchAllOffChainProjects = ({
 
   const onlyOffChainProjectsWithData =
     allProjectsData?.allProjects?.nodes?.map(project => {
-      const prefinanceProject = prefinanceProjectsData?.allProject?.find(
+      const sanityProject = sanityProjectsData?.allProject?.find(
         sanityProject =>
           sanityProject.projectId === project?.id ||
           sanityProject.projectId === project?.slug,
@@ -65,7 +65,7 @@ export const useFetchAllOffChainProjects = ({
               project?.metadata?.['regen:creditClassId'] ??
               '',
           }),
-          projectPrefinancing: prefinanceProject?.projectPrefinancing,
+          projectPrefinancing: sanityProject?.projectPrefinancing,
         }),
         // We keep those values in english
         // so we can filter based on their value

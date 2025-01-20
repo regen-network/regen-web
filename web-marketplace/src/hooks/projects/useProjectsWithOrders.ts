@@ -10,6 +10,7 @@ import { client as sanityClient } from 'lib/clients/sanity';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { IS_REGEN, IS_TERRASOS, SKIPPED_CLASS_ID } from 'lib/env';
 import {
+  getCardSellOrders,
   NormalizeProject,
   normalizeProjectsWithMetadata,
 } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
@@ -21,7 +22,7 @@ import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/ma
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
-import { getAllSanityPrefinanceProjectsQuery } from 'lib/queries/react-query/sanity/getAllPrefinanceProjectsQuery/getAllPrefinanceProjectsQuery';
+import { getAllSanityProjectsQuery } from 'lib/queries/react-query/sanity/getAllProjectsQuery/getAllProjectsQuery';
 import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -33,6 +34,10 @@ import {
 } from 'pages/Projects/AllProjects/utils/sortProjects';
 import { useFetchAllOffChainProjects } from 'pages/Projects/hooks/useOffChainProjects';
 import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders.types';
+import {
+  CREDIT_CARD_BUYING_OPTION_ID,
+  CRYPTO_BUYING_OPTION_ID,
+} from 'pages/Projects/Projects.constants';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 import { useLastRandomProjects } from './useLastRandomProjects';
@@ -43,7 +48,7 @@ export interface ProjectsWithOrdersProps {
   offset?: number;
   metadata?: boolean; // to discard projects without metadata prop
   random?: boolean; // to shuffle the projects (along with limit allows a random subselection)
-  useCommunityProjects?: boolean; // to show community projects
+  showCommunityProjects?: boolean; // to show community projects
   projectId?: string; // to filter by project
   skippedProjectId?: string; // to discard a specific project
   classId?: string; // to filter by class
@@ -56,6 +61,8 @@ export interface ProjectsWithOrdersProps {
   regionFilter?: Record<string, boolean>;
   environmentTypeFilter?: Record<string, boolean>;
   marketTypeFilter?: Record<string, boolean>;
+  buyingOptionsFilters?: Record<string, boolean>;
+  isOffChainProject?: boolean;
 }
 
 /**
@@ -66,7 +73,7 @@ export function useProjectsWithOrders({
   offset = 0,
   metadata = false,
   random = false,
-  useCommunityProjects = false,
+  showCommunityProjects = false,
   skippedProjectId,
   classId,
   pinnedIds,
@@ -79,9 +86,10 @@ export function useProjectsWithOrders({
   regionFilter = {},
   environmentTypeFilter = {},
   marketTypeFilter = { COMPLIANCE_MARKET: true, VOLUNTARY_MARKET: true },
+  buyingOptionsFilters = {},
+  isOffChainProject = false,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
-
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
@@ -102,7 +110,8 @@ export function useProjectsWithOrders({
 
   const { data: projectsData, isFetching: isLoadingProjects } = useQuery(
     getProjectsQuery({
-      enabled: !classId && !projectId && !!ecocreditClient,
+      enabled:
+        !isOffChainProject && !classId && !projectId && !!ecocreditClient,
       client: ecocreditClient,
       request: {},
     }),
@@ -119,7 +128,7 @@ export function useProjectsWithOrders({
 
   const { data: sellOrders, isLoading: isLoadingSellOrders } = useQuery(
     getSellOrdersExtendedQuery({
-      enabled: !!marketplaceClient,
+      enabled: !isOffChainProject && !!marketplaceClient,
       client: marketplaceClient,
       reactQueryClient,
       request: {},
@@ -131,29 +140,27 @@ export function useProjectsWithOrders({
     useQuery(
       getAllSanityCreditClassesQuery({
         sanityClient,
-        enabled: !!sanityClient,
+        enabled: !isOffChainProject && !!sanityClient,
         languageCode: selectedLanguage,
       }),
     );
 
-  // Sanity prefinance projects
-  const {
-    data: prefinanceProjectsData,
-    isFetching: isLoadingPrefinanceProjects,
-  } = useQuery(
-    getAllSanityPrefinanceProjectsQuery({
-      sanityClient,
-      enabled: !!sanityClient,
-      languageCode: selectedLanguage,
-    }),
-  );
+  // Sanity projects
+  const { data: sanityProjectsData, isFetching: isLoadingSanityProjects } =
+    useQuery(
+      getAllSanityProjectsQuery({
+        sanityClient,
+        enabled: !isOffChainProject && !!sanityClient,
+        languageCode: selectedLanguage,
+      }),
+    );
 
   // OffChainProjects
   const { allOffChainProjects, isAllOffChainProjectsLoading } =
     useFetchAllOffChainProjects({
       sanityCreditClassesData: creditClassData,
       enabled: enableOffchainProjectsQuery,
-      prefinanceProjectsData,
+      sanityProjectsData,
     });
 
   const onlyOffChainProjects = allOffChainProjects.filter(
@@ -205,7 +212,7 @@ export function useProjectsWithOrders({
     selectedProjects,
   });
 
-  const projectsWithOrderData = useMemo(
+  const allOnChainProjects = useMemo(
     () =>
       normalizeProjectsWithOrderData({
         projects: lastRandomProjects ?? selectedProjects,
@@ -225,28 +232,41 @@ export function useProjectsWithOrders({
   // Exclude community projects based on sanity credit class data
   const projectsWithOrderDataFiltered = useMemo(
     () =>
-      projectsWithOrderData.filter(
-        project => !!project?.sanityCreditClassData || useCommunityProjects,
+      allOnChainProjects.filter(
+        project => !!project?.sanityCreditClassData || showCommunityProjects,
       ),
-    [projectsWithOrderData, useCommunityProjects],
+    [allOnChainProjects, showCommunityProjects],
   );
 
   const hasCommunityProjects = useMemo(
-    () =>
-      projectsWithOrderData.some(project => !project?.sanityCreditClassData),
-    [projectsWithOrderData],
+    () => allOnChainProjects.some(project => !project?.sanityCreditClassData),
+    [allOnChainProjects],
   );
 
-  // Include offchain data to projectsWithOrderData because we need it for filtering
+  // Include offchain data and cardSellOrders from sanity data to allOnChainProjects because we need it for filtering
   const projectsWithMetadataFiltered = useMemo(
     () =>
       projectsWithOrderDataFiltered.map(project => {
         const offChainProject = allOffChainProjects.find(
           offChainProject => project.id === offChainProject.onChainId,
         );
-        return { ...offChainProject, ...project };
+        const sanityProject = sanityProjectsData?.allProject?.find(
+          sanityProject =>
+            sanityProject.projectId === project?.id ||
+            sanityProject.projectId === offChainProject?.slug,
+        );
+
+        const allCardSellOrders = getCardSellOrders(
+          sanityProject?.fiatSellOrders,
+          project?.sellOrders,
+        );
+        return { ...offChainProject, ...project, allCardSellOrders };
       }),
-    [allOffChainProjects, projectsWithOrderDataFiltered],
+    [
+      allOffChainProjects,
+      projectsWithOrderDataFiltered,
+      sanityProjectsData?.allProject,
+    ],
   );
 
   // Merge on-chain and off-chain projects
@@ -263,11 +283,13 @@ export function useProjectsWithOrders({
     ],
   );
 
-  // Filter projects by class ID
+  // Filter projects by class ID, buying option, etc.
   const creditClassFilterKeys = Object.keys(creditClassFilter);
   const creditClassSelected = creditClassFilterKeys.filter(
     creditClassId => creditClassFilter[creditClassId],
   );
+  const buyingOptionsFiltersKeys = Object.keys(buyingOptionsFilters);
+
   const regionFilterKeys = Object.keys(regionFilter);
   const regionSelected = regionFilterKeys
     .filter(region => regionFilter?.[region])
@@ -285,10 +307,23 @@ export function useProjectsWithOrders({
     () =>
       allProjects
         .filter(project => {
-          return creditClassFilterKeys.length === 0
-            ? true
-            : project.offChain ||
+          const isFromSelectedCreditClasses =
+            creditClassFilterKeys.length === 0
+              ? true
+              : project.offChain ||
                 creditClassSelected.includes(project.creditClassId ?? '');
+          const hasSelectedBuyingOptions =
+            buyingOptionsFiltersKeys.length === 0
+              ? true
+              : (buyingOptionsFilters[CREDIT_CARD_BUYING_OPTION_ID]
+                  ? (project.allCardSellOrders &&
+                      project.allCardSellOrders.length > 0) ||
+                    project.projectPrefinancing?.isPrefinanceProject
+                  : true) &&
+                (buyingOptionsFilters[CRYPTO_BUYING_OPTION_ID]
+                  ? !project.offChain
+                  : true);
+          return isFromSelectedCreditClasses && hasSelectedBuyingOptions;
         })
         .filter(project => {
           if (IS_REGEN) return true;
@@ -314,11 +349,13 @@ export function useProjectsWithOrders({
         }),
     [
       allProjects,
-      creditClassFilterKeys,
+      creditClassFilterKeys.length,
       creditClassSelected,
-      marketTypeSelected,
-      environmentTypeSelected,
+      buyingOptionsFiltersKeys.length,
+      buyingOptionsFilters,
       regionSelected,
+      environmentTypeSelected,
+      marketTypeSelected,
     ],
   );
 
@@ -438,7 +475,7 @@ export function useProjectsWithOrders({
 
   return {
     allProjects,
-    allOnChainProjects: projectsWithOrderData,
+    allOnChainProjects,
     prefinanceProjects,
     haveOffChainProjects: onlyOffChainProjects.length > 0,
     prefinanceProjectsCount: prefinanceProjects.length,
@@ -450,7 +487,7 @@ export function useProjectsWithOrders({
       isLoadingSellOrders ||
       !marketplaceClient ||
       isLoadingSanityCreditClasses ||
-      isLoadingPrefinanceProjects ||
+      isLoadingSanityProjects ||
       sanityProjectsLoading ||
       isLoadingProject ||
       isClassesMetadataLoading ||

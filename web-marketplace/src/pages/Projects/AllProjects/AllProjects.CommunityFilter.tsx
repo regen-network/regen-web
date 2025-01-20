@@ -7,7 +7,7 @@ import { Flex } from 'web-components/src/components/box';
 import Checkbox from 'web-components/src/components/inputs/new/CheckBox/Checkbox';
 import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
 
-import { useCommunityProjectsAtom } from 'lib/atoms/projects.atoms';
+import { showCommunityProjectsAtom } from 'lib/atoms/projects.atoms';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { COMMUNITY_FILTER } from './AllProjects.constants';
@@ -21,8 +21,8 @@ type CommunityFilterProps = {
 export const CommunityFilter = ({ sx }: CommunityFilterProps) => {
   const { _ } = useLingui();
   const { track } = useTracker();
-  const [useCommunityProjects, setUseCommunityProjects] = useAtom(
-    useCommunityProjectsAtom,
+  const [showCommunityProjects, setShowCommunityProjects] = useAtom(
+    showCommunityProjectsAtom,
   );
 
   return (
@@ -31,9 +31,9 @@ export const CommunityFilter = ({ sx }: CommunityFilterProps) => {
         control={
           <Checkbox
             sx={{ p: 0, mr: 3 }}
-            checked={useCommunityProjects}
+            checked={showCommunityProjects}
             onChange={event => {
-              setUseCommunityProjects(event.target.checked);
+              setShowCommunityProjects(event.target.checked);
               track<FilterCommunityCreditsEvent>(
                 'filterPermissionlessCredits',
                 {
@@ -44,7 +44,12 @@ export const CommunityFilter = ({ sx }: CommunityFilterProps) => {
           />
         }
         label={_(COMMUNITY_FILTER)}
-        sx={{ whiteSpace: 'nowrap', mr: 1, ml: 0, fontSize: 14 }}
+        sx={{
+          whiteSpace: 'nowrap',
+          mr: 1,
+          ml: 0,
+          '& .MuiFormControlLabel-label': { fontSize: '14px' },
+        }}
       />
       <InfoTooltipWithIcon
         title={

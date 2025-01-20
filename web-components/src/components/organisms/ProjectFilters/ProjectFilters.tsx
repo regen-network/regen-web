@@ -4,17 +4,23 @@ import { Box, ButtonBase, Collapse, Divider } from '@mui/material';
 import TagFilter from './ProjectFilter.TagFilter';
 import CheckboxFilter from './ProjectFilters.CheckboxFilter';
 
-export interface FilterOptions {
+export interface FilterOption {
   name: string;
-  icon: JSX.Element;
+  startIcon?: JSX.Element;
+  endIcon?: JSX.Element;
   id: string;
+  disabled?: boolean;
 }
 
 export interface Filter {
+  selectedFilters?: Record<string, boolean>;
+  onFilterChange?: (id: string) => void;
   title: string;
-  displayType: 'tag' | 'checkbox';
-  options: FilterOptions[];
+  displayType: 'tag' | 'checkbox' | 'children';
+  options: FilterOption[];
   hasCollapse?: boolean;
+  children?: JSX.Element;
+  hidden?: boolean;
 }
 
 export interface ProjectFilterLabels {
@@ -26,15 +32,11 @@ export interface ProjectFilterLabels {
 
 export default function ProjectFilters({
   filters,
-  activeFilterIds,
-  onFilterChange,
   onFilterReset,
   labels,
   showResetButton = true,
 }: {
   filters: Filter[];
-  activeFilterIds: string[];
-  onFilterChange: (id: string) => void;
   onFilterReset: () => void;
   labels: ProjectFilterLabels;
   showResetButton?: boolean;
@@ -43,20 +45,24 @@ export default function ProjectFilters({
   const handleExpand = (index: number) => {
     setIsExpanded({ ...isExpanded, [index]: !isExpanded[index] });
   };
-  const filtersLength = filters.length;
+  const displayedFilters = filters.filter(filter => !filter.hidden);
+  const filtersLength = displayedFilters.length;
+
   return (
     <>
       <div className="justify-between items-baseline flex">
         <div className="text-[18px] font-bold">{labels.title}</div>
-        <div
-          className="cursor-pointer text-[14px] text-sc-text-link font-bold"
-          onClick={onFilterReset}
-        >
-          {showResetButton && labels.reset}
-        </div>
+        {showResetButton && (
+          <div
+            className="cursor-pointer text-[14px] text-sc-text-link font-bold"
+            onClick={onFilterReset}
+          >
+            {labels.reset}
+          </div>
+        )}
       </div>
       <Divider sx={{ my: 5 }} />
-      {filters.map((filter, index) => {
+      {displayedFilters.map((filter, index) => {
         return (
           <Box sx={{ mb: 5 }} key={filter.title}>
             <div className="text-[16px] font-bold mb-[20px] ">
@@ -72,13 +78,15 @@ export default function ProjectFilters({
             >
               {filter.displayType === 'tag' && (
                 <Box display="flex" flexWrap="wrap" gap={2} className="ml-1">
-                  {filter.options.map(({ name, icon, id }) => (
+                  {filter.options.map(({ name, startIcon, id }) => (
                     <TagFilter
                       name={name}
-                      icon={icon}
+                      icon={startIcon}
                       key={id}
-                      isSelected={activeFilterIds.includes(id)}
-                      onClick={() => onFilterChange(id)}
+                      isSelected={filter.selectedFilters?.[id] ?? false}
+                      onClick={() =>
+                        filter.onFilterChange && filter.onFilterChange(id)
+                      }
                       sx={{ fontFamily: theme => theme.typography.fontFamily }}
                     />
                   ))}
@@ -86,17 +94,24 @@ export default function ProjectFilters({
               )}
               {filter.displayType === 'checkbox' && (
                 <div className="flex flex-col">
-                  {filter.options.map(({ name, icon, id }) => (
-                    <CheckboxFilter
-                      isSelected={activeFilterIds.includes(id)}
-                      name={name}
-                      icon={icon}
-                      key={id}
-                      onChange={() => onFilterChange(id)}
-                    />
-                  ))}
+                  {filter.options.map(
+                    ({ name, startIcon, endIcon, id, disabled }) => (
+                      <CheckboxFilter
+                        isSelected={filter.selectedFilters?.[id] ?? false}
+                        name={name}
+                        startIcon={startIcon}
+                        endIcon={endIcon}
+                        key={id}
+                        disabled={disabled}
+                        onChange={() =>
+                          filter.onFilterChange && filter.onFilterChange(id)
+                        }
+                      />
+                    ),
+                  )}
                 </div>
               )}
+              {filter.displayType === 'children' && filter.children}
             </Collapse>
             {filter.hasCollapse && (
               <ButtonBase

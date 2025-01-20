@@ -6,29 +6,32 @@ import { sxToArray } from 'utils/mui/sxToArray';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import FilterIcon from 'web-components/src/components/icons/FilterIcon';
 import Modal from 'web-components/src/components/modal';
+import type { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
 import { FILTERS_MODAL_BUTTON } from './AllProjects.constants';
 import ProjectFilterBody from './AllProjects.ProjectFilterBody';
-import { ProjectWithOrderData } from './AllProjects.types';
+import { CreditClassFilter, ProjectWithOrderData } from './AllProjects.types';
 
 type Props = {
   allProjects: ProjectWithOrderData[];
   sx?: SxProps<Theme>;
-  activeFilters: string[];
-  setActiveFilters: (filters: string[]) => void;
   resetFilters: () => void;
   className?: string;
   showResetButton?: boolean;
+  hasCommunityProjects: boolean;
+  creditClassFilters?: CreditClassFilter[];
+  buyingOptionsFilterOptions: FilterOption[];
 };
 
-const ProjectFilter = ({
+const ProjectFilterMobile = ({
   allProjects,
-  activeFilters,
-  setActiveFilters,
   resetFilters,
   sx = [],
   className = '',
   showResetButton = true,
+  hasCommunityProjects,
+  creditClassFilters = [],
+  buyingOptionsFilterOptions,
 }: Props) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
@@ -59,14 +62,15 @@ const ProjectFilter = ({
       <Modal open={isOpen} onClose={() => setIsOpen(false)} className="h-full">
         <ProjectFilterBody
           allProjects={allProjects}
-          activeFilters={activeFilters}
-          setActiveFilters={setActiveFilters}
+          creditClassFilters={creditClassFilters}
           resetFilters={resetFilters}
           showResetButton={showResetButton}
+          hasCommunityProjects={hasCommunityProjects}
+          buyingOptionsFilterOptions={buyingOptionsFilterOptions}
         />
       </Modal>
     </>
   );
 };
 
-export default ProjectFilter;
+export default ProjectFilterMobile;

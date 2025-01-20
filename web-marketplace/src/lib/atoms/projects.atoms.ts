@@ -5,10 +5,12 @@ import { DEFAULT_COMMUNITY_PROJECTS_FILTER } from 'lib/env';
 
 import { sortOptions } from 'pages/Projects/AllProjects/AllProjects.config';
 
-export const useCommunityProjectsAtom = atom<boolean | undefined>(
+export const showCommunityProjectsAtom = atom<boolean | undefined>(
   DEFAULT_COMMUNITY_PROJECTS_FILTER,
 );
 export const creditClassSelectedFiltersAtom = atom<Record<string, boolean>>({});
+export const creditClassInitialFiltersAtom = atom<Record<string, boolean>>({});
+export const buyingOptionsFiltersAtom = atom<Record<string, boolean>>({});
 export const projectsSortAtom = atom(sortOptions[0].value);
 
 export const environmentTypeFiltersAtom = atom<Record<string, boolean>>(

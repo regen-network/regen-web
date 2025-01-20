@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
 import { getClientConfig } from 'clients/Clients.config';
 import { useAtom } from 'jotai';
 
@@ -18,16 +17,7 @@ import { Body } from 'web-components/src/components/typography';
 import { pxToRem } from 'web-components/src/theme/muiTheme';
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import {
-  creditClassSelectedFiltersAtom,
-  environmentTypeFiltersAtom,
-  marketTypeFiltersAtom,
-  projectsSortAtom,
-  regionFiltersAtom,
-  useCommunityProjectsAtom,
-} from 'lib/atoms/projects.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { projectsSortAtom } from 'lib/atoms/projects.atoms';
 import {
   DRAFT_TEXT,
   EMPTY_OPTION_TEXT,
@@ -35,19 +25,13 @@ import {
   getProjectCardButtonMapping,
   getProjectCardPurchaseDetailsTitleMapping,
 } from 'lib/constants/shared.constants';
-import {
-  COLOR_SCHEME,
-  CREDIT_CLASS_FILTERS_TO_DESELECT,
-  IS_REGEN,
-  IS_TERRASOS,
-} from 'lib/env';
-import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { COLOR_SCHEME, IS_REGEN, IS_TERRASOS } from 'lib/env';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { TebuBannerWrapper } from 'components/organisms/TebuBannerWrapper/TebuBannerWrapper';
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
-import { useFetchCreditClasses } from '../hooks/useFetchCreditClasses';
+import { useResetFilters } from '../hooks/useResetFilters';
 import { useProjectsContext } from '../Projects.context';
 import {
   API_URI,
@@ -60,22 +44,13 @@ import {
   RESET_FILTERS_LABEL,
   VOLUNTARY_MARKET,
 } from './AllProjects.constants';
-import { normalizeCreditClassFilters } from './AllProjects.normalizers';
-import {
-  getActiveFilterIds,
-  getResetFilters,
-  getSetActiveFilters,
-  getShowResetButton,
-} from './AllProjects.ProjectFilter.utils';
 import ProjectFilterMobile from './AllProjects.ProjectFilterMobile';
-import { SideFilter } from './AllProjects.SideFilter';
 import { TerrasosCredits } from './AllProjects.TerrasosCredits';
 import { getCreditsTooltip } from './utils/getCreditsTooltip';
 import { getIsSoldOut } from './utils/getIsSoldOut';
 
 export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
-  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { page: routePage } = useParams();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -90,85 +65,21 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   );
   const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
 
-  const [useCommunityProjects, setUseCommunityProjects] = useAtom(
-    useCommunityProjectsAtom,
-  );
-  const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
-    creditClassSelectedFiltersAtom,
-  );
-
-  const [environmentTypeFilters, setEnvironmentTypeFilters] = useAtom(
-    environmentTypeFiltersAtom,
-  );
-  const [regionFilters, setRegionFilters] = useAtom(regionFiltersAtom);
-  const [marketTypeFilters, setMarketTypeFilters] = useAtom(
-    marketTypeFiltersAtom,
-  );
-  const setActiveFilters = (filters: string[]) =>
-    getSetActiveFilters({
-      filterIds: filters,
-      setMarketTypeFilters,
-      setEnvironmentTypeFilters,
-      setRegionFilters,
-      marketTypeFilters,
-      environmentTypeFilters,
-      regionFilters,
-    });
-
-  const activeFilterIds = getActiveFilterIds({
-    marketTypeFilters,
-    environmentTypeFilters,
-    regionFilters,
-  });
-
-  const resetFilters = getResetFilters({
-    setMarketTypeFilters,
-    setEnvironmentTypeFilters,
-    setRegionFilters,
-  });
-
-  const showResetButton = getShowResetButton({
-    marketTypeFilters,
-    environmentTypeFilters,
-    regionFilters,
-  });
-
-  const {
-    creditClassesWithMetadata,
-    isLoading: isCreditClassesWithMetadataLoading,
-  } = useFetchCreditClasses();
-
-  const {
-    data: sanityCreditClassesData,
-    isLoading: isSanityCreditClassesLoading,
-  } = useQuery(
-    getAllSanityCreditClassesQuery({
-      sanityClient,
-      languageCode: selectedLanguage,
-    }),
-  );
+  const { showResetButton, resetFilters } = useResetFilters();
 
   const [sort, setSort] = useAtom(projectsSortAtom);
 
   const {
     allProjects,
-    allOnChainProjects,
     projects,
     projectsCount,
-    haveOffChainProjects,
     hasCommunityProjects,
     pagesCount,
     soldOutProjectsIds,
     loading,
+    creditClassFilters,
+    buyingOptionsFilterOptions,
   } = useProjectsContext();
-
-  const { creditClassFilters } = normalizeCreditClassFilters({
-    creditClassesWithMetadata,
-    sanityCreditClassesData,
-    allOnChainProjects,
-    haveOffChainProjects,
-    _,
-  });
 
   const sortOptionsTranslated = useMemo(
     () =>
@@ -179,55 +90,18 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     [_],
   );
 
-  useEffect(() => {
-    // Check all the credit class filters by default
-    if (
-      Object.keys(creditClassSelectedFilters).length !==
-      creditClassFilters.length
-    )
-      setCreditClassSelectedFilters(
-        creditClassFilters.reduce((acc, creditClassFilter) => {
-          return {
-            ...acc,
-            [creditClassFilter.path]: CREDIT_CLASS_FILTERS_TO_DESELECT.includes(
-              creditClassFilter.path,
-            )
-              ? false
-              : true,
-          };
-        }, {}),
-      );
-  }, [
-    creditClassFilters,
-    creditClassSelectedFilters,
-    setCreditClassSelectedFilters,
-  ]);
-
   const onBuyButtonClick = useOnBuyButtonClick();
 
   const handleSort = (event: SelectChangeEvent<unknown>): void => {
     setSort(event.target.value as string);
   };
 
-  const showFiltersReset =
-    useCommunityProjects !== undefined ||
-    Object.keys(creditClassSelectedFilters).length > 0;
-
-  const resetFilter = () => {
-    setCreditClassSelectedFilters({});
-    setUseCommunityProjects(undefined);
-  };
-
-  if (isSanityCreditClassesLoading || isCreditClassesWithMetadataLoading)
+  if (loading)
     return <Loading sx={{ gridColumn: '1 / -1', height: { sm: '50vh' } }} />;
 
   return (
     <>
-      <Flex
-        flex={1}
-        sx={{ gridColumn: '1 / -1' }}
-        className={IS_REGEN ? 'xl:mt-[-78px]' : undefined}
-      >
+      <Flex flex={1} sx={{ gridColumn: '1 / -1' }}>
         <Flex
           justifyContent="flex-end"
           alignItems="center"
@@ -235,37 +109,19 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           sx={{
             pb: 5,
             flexWrap: { xs: 'wrap', lg: 'nowrap' },
+            mt: { lg: '-77px' },
           }}
-          className={IS_TERRASOS ? 'lg:hidden' : undefined}
         >
-          {IS_REGEN && (
-            <SideFilter
-              creditClassFilters={creditClassFilters}
-              hasCommunityProjects={hasCommunityProjects}
-              showFiltersReset={showFiltersReset}
-              resetFilter={resetFilter}
-              sx={{
-                mb: { xs: 3.75, lg: 0 },
-                mr: { xs: 0, lg: 7.5 },
-                width: { xs: '100%', lg: 'auto' },
-              }}
-            />
-          )}
-          {IS_TERRASOS && (
-            <ProjectFilterMobile
-              allProjects={allProjects}
-              activeFilters={activeFilterIds}
-              setActiveFilters={setActiveFilters}
-              resetFilters={resetFilters}
-              showResetButton={showResetButton}
-              sx={{
-                mb: { xs: 3.75, lg: 0 },
-                mr: { xs: 0, lg: 7.5 },
-                width: { xs: '100%', lg: 'auto' },
-              }}
-              className="lg:hidden"
-            />
-          )}
+          <ProjectFilterMobile
+            allProjects={allProjects}
+            resetFilters={resetFilters}
+            showResetButton={showResetButton}
+            className="lg:hidden w-full mb-15 mr-0"
+            hasCommunityProjects={hasCommunityProjects}
+            creditClassFilters={creditClassFilters}
+            buyingOptionsFilterOptions={buyingOptionsFilterOptions}
+          />
+
           {IS_REGEN && (
             <Flex
               sx={{
@@ -383,12 +239,12 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           message={_(EMPTY_PROJECTS_LABEL)}
           icon={<NoProjectIcon sx={{ fontSize: 100 }} />}
           sx={{ gridColumn: '1 / -1', backgroundColor: 'info.light' }}
-          className={IS_TERRASOS ? 'lg:mt-[36px]' : undefined}
+          className="lg:mt-[36px]"
         >
           <>
-            {showFiltersReset && (
+            {showResetButton && (
               <Box
-                onClick={IS_REGEN ? resetFilter : resetFilters}
+                onClick={resetFilters}
                 sx={{
                   color: 'secondary.main',
                   cursor: 'pointer',

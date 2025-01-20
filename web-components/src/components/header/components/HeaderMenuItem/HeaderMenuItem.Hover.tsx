@@ -94,6 +94,8 @@ const HeaderMenuItemHover = ({
         }}
         slotProps={{
           paper: {
+            onMouseEnter: handlePopoverOpen,
+            onMouseLeave: handlePopoverClose,
             onClick: handlePopoverClose,
           },
         }}

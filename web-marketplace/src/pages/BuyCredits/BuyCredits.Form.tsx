@@ -38,6 +38,7 @@ import {
   getCreditsAvailablePerCurrency,
   getCurrencyAmount,
 } from 'components/molecules/CreditsAmount/CreditsAmount.utils';
+import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSummaryCard';
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';

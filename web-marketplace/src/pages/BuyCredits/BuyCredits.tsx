@@ -37,6 +37,7 @@ export const BuyCredits = () => {
   const paymentOption = useAtomValue(paymentOptionAtom);
 
   const [retiring, setRetiring] = useState<boolean>(true);
+
   const [confirmationTokenId, setConfirmationTokenId] = useState<
     string | undefined
   >();

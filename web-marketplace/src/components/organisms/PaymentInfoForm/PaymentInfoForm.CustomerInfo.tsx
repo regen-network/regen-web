@@ -95,7 +95,7 @@ export const CustomerInfo = ({
         error={!!errors['email']}
         helperText={errors['email']?.message}
         disabled={!!accountEmail}
-        optional={!!wallet?.address}
+        optional={paymentOption === PAYMENT_OPTIONS.CRYPTO}
       />
       {!accountId && !wallet?.address && (
         <CheckboxLabel

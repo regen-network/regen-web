@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLingui } from '@lingui/react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery } from '@tanstack/react-query';
@@ -23,7 +24,9 @@ import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchUserBalance } from 'pages/BuyCredits/hooks/useFetchUserBalance';
+import { useFetchSellOrders } from 'pages/Marketplace/Storefront/hooks/useFetchSellOrders';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
@@ -40,6 +43,9 @@ import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSum
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';
 import { AgreePurchaseFormFiat } from 'components/organisms/AgreePurchaseForm/AgreePurchaseFormFiat';
+import { BuyWarningModal } from 'components/organisms/BuyWarningModal/BuyWarningModal';
+import { KEPLR_LOGIN_REQUIRED } from 'components/organisms/BuyWarningModal/BuyWarningModal.constants';
+import { BuyWarningModalContent } from 'components/organisms/BuyWarningModal/BuyWarningModal.types';
 import { ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
@@ -59,8 +65,12 @@ import {
 import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
 import { BuyCreditsSchemaTypes, CardDetails } from './BuyCredits.types';
 import {
+  findMatchingSellOrders,
   getCreditsAvailableBannerText,
   getCryptoCurrencies,
+  getOrderedSellOrders,
+  getSellOrdersCredits,
+  getWarningModalContent,
 } from './BuyCredits.utils';
 import { usePurchase } from './hooks/usePurchase';
 
@@ -78,6 +88,10 @@ type Props = {
   projectHref: string;
   cardDetails?: CardDetails;
   project?: NormalizeProject;
+  projectId: string | undefined;
+  loadingSanityProject: boolean;
+  isBuyFlowDisabled: boolean;
+  loadingBuySellOrders: boolean;
 };
 
 const stripe = loadStripe(stripeKey);
@@ -96,10 +110,14 @@ export const BuyCreditsForm = ({
   projectHref,
   cardDetails,
   project,
+  projectId,
+  loadingSanityProject,
+  isBuyFlowDisabled,
+  loadingBuySellOrders,
 }: Props) => {
   const { data, activeStep, handleSaveNext, handleSave, handleActiveStep } =
     useMultiStep<BuyCreditsSchemaTypes>();
-  const { wallet, isConnected, activeWalletAddr } = useWallet();
+  const { wallet, isConnected, activeWalletAddr, loaded } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
   const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
   const {
@@ -110,7 +128,8 @@ export const BuyCreditsForm = ({
     onButtonClick,
   } = useLoginData({});
   const navigate = useNavigate();
-
+  const { _ } = useLingui();
+  const warningModalContent = useRef<BuyWarningModalContent | undefined>();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const setWarningBannerTextAtom = useSetAtom(warningBannerTextAtom);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
@@ -118,6 +137,13 @@ export const BuyCreditsForm = ({
   const [paymentOptionCryptoClicked, setPaymentOptionCryptoClicked] = useAtom(
     paymentOptionCryptoClickedAtom,
   );
+  const [warningModalState, setWarningModalState] = useState({
+    openModal: false,
+    creditsAvailable: 0,
+  });
+
+  const { refetchSellOrders } = useFetchSellOrders();
+
   const cardDisabled = cardSellOrders.length === 0;
 
   const { marketplaceClient, ecocreditClient } = useLedger();
@@ -161,6 +187,28 @@ export const BuyCreditsForm = ({
     setPaymentOption(prev => data?.paymentOption || prev);
   }, [data, setPaymentOption, setRetiring]);
 
+  useEffect(() => {
+    if (
+      !loadingSanityProject &&
+      !loadingBuySellOrders &&
+      cardSellOrders.length === 0 &&
+      ((loaded && !wallet?.address) || isBuyFlowDisabled) &&
+      !warningModalContent.current
+    ) {
+      // Else if there's no connected wallet address or buy disabled, redirect to project page
+      navigate(`/project/${projectId}`, { replace: true });
+    }
+  }, [
+    loadingSanityProject,
+    loadingBuySellOrders,
+    loaded,
+    wallet?.address,
+    navigate,
+    projectId,
+    cardSellOrders.length,
+    isBuyFlowDisabled,
+  ]);
+
   const paymentInfoFormSubmit = useCallback(
     async (values: PaymentInfoFormSchemaType) => {
       const { paymentMethodId, ...others } = values;
@@ -186,6 +234,25 @@ export const BuyCreditsForm = ({
   const currencyAmount = data?.[CURRENCY_AMOUNT];
   const creditTypePrecision = creditTypeData?.creditType?.precision;
 
+  const filteredCryptoSellOrders = useMemo(
+    () =>
+      getFilteredCryptoSellOrders({
+        askDenom: currency?.askDenom,
+        cryptoSellOrders,
+        retiring,
+      }),
+    [cryptoSellOrders, currency?.askDenom, retiring],
+  );
+  const orderedSellOrders = useMemo(
+    () =>
+      getOrderedSellOrders(
+        paymentOption === PAYMENT_OPTIONS.CARD,
+        cardSellOrders,
+        filteredCryptoSellOrders,
+      ),
+    [cardSellOrders, filteredCryptoSellOrders, paymentOption],
+  );
+
   const purchase = usePurchase({
     paymentOption,
     retiring,
@@ -201,38 +268,74 @@ export const BuyCreditsForm = ({
       stripe?: Stripe | null,
       elements?: StripeElements | null,
     ) => {
-      const { retirementReason, country, stateProvince, postalCode } = values;
-      const {
-        sellOrders: selectedSellOrders,
-        savePaymentMethod,
-        createAccount: createActiveAccount,
-        // subscribeNewsletter, TODO
-        // followProject,
-      } = data;
+      if (project) {
+        const sellOrders = await refetchSellOrders();
+        const creditsInAllSellOrders = getSellOrdersCredits(sellOrders);
+        const creditsToBuy = data?.creditsAmount;
+        const requestedSellOrders = findMatchingSellOrders(
+          data,
+          sellOrders?.map(normalizeToUISellOrderInfo),
+        );
+        const creditsInRequestedSellOrders =
+          getSellOrdersCredits(requestedSellOrders);
 
-      if (selectedSellOrders && creditsAmount)
-        purchase({
-          selectedSellOrders,
-          retiring,
-          retirementReason,
-          country,
-          stateProvince,
-          postalCode,
-          savePaymentMethod,
-          createActiveAccount,
-          paymentMethodId,
-          stripe,
-          elements,
-          confirmationTokenId,
-        });
+        const sellCanProceed =
+          creditsToBuy && creditsToBuy <= creditsInRequestedSellOrders;
+
+        if (sellCanProceed) {
+          const { retirementReason, country, stateProvince, postalCode } =
+            values;
+          const {
+            sellOrders: selectedSellOrders,
+            savePaymentMethod,
+            createAccount: createActiveAccount,
+            // subscribeNewsletter, TODO
+            // followProject,
+          } = data;
+
+          if (selectedSellOrders && creditsAmount)
+            purchase({
+              selectedSellOrders,
+              retiring,
+              retirementReason,
+              country,
+              stateProvince,
+              postalCode,
+              savePaymentMethod,
+              createActiveAccount,
+              paymentMethodId,
+              stripe,
+              elements,
+              confirmationTokenId,
+            });
+        } else {
+          setWarningModalState({
+            openModal: true,
+            creditsAvailable: creditsInRequestedSellOrders,
+          });
+          warningModalContent.current = getWarningModalContent(
+            currency,
+            creditsInRequestedSellOrders,
+            _,
+            allowedDenomsData,
+            data,
+            creditsInAllSellOrders,
+          );
+        }
+      }
     },
     [
-      confirmationTokenId,
-      creditsAmount,
+      project,
+      refetchSellOrders,
       data,
-      paymentMethodId,
+      creditsAmount,
       purchase,
       retiring,
+      paymentMethodId,
+      confirmationTokenId,
+      currency,
+      _,
+      allowedDenomsData,
     ],
   );
 
@@ -244,25 +347,6 @@ export const BuyCreditsForm = ({
   const card = useMemo(
     () => paymentOption === PAYMENT_OPTIONS.CARD,
     [paymentOption],
-  );
-  const filteredCryptoSellOrders = useMemo(
-    () =>
-      getFilteredCryptoSellOrders({
-        askDenom: currency?.askDenom,
-        cryptoSellOrders,
-        retiring,
-      }),
-    [cryptoSellOrders, currency?.askDenom, retiring],
-  );
-  const orderedSellOrders = useMemo(
-    () =>
-      card
-        ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
-        : filteredCryptoSellOrders?.sort(
-            (a, b) => Number(a.askAmount) - Number(b.askAmount),
-          ) || [],
-
-    [card, cardSellOrders, filteredCryptoSellOrders],
   );
 
   const creditsAvailable = useMemo(
@@ -473,6 +557,62 @@ export const BuyCreditsForm = ({
         modalState={modalState}
         redirectRoute={`${projectHref.replace(/^\//, '')}/buy`}
       />
+      {warningModalContent.current && (
+        <BuyWarningModal
+          modalContent={warningModalContent.current.modalContent}
+          warningModalState={warningModalState}
+          onClose={setWarningModalState}
+          handleClick={action => {
+            if (action === KEPLR_LOGIN_REQUIRED) {
+              if (!activeWalletAddr) {
+                // no connected wallet address
+                setConnectWalletModal(atom => void (atom.open = true));
+              } else if (!isConnected) {
+                // user logged in with web2 but not connected to the wallet address associated to his/er account
+                setSwitchWalletModalAtom(atom => void (atom.open = true));
+              } else {
+                // web3 account connected
+                handleSave(
+                  { ...data, paymentOption: PAYMENT_OPTIONS.CRYPTO },
+                  0,
+                );
+                setWarningModalState({
+                  ...warningModalState,
+                  openModal: false,
+                });
+                window.scrollTo(0, 0);
+                handleActiveStep(0);
+              }
+            } else if (action) {
+              navigate(action);
+            } else {
+              setWarningModalState({
+                ...warningModalState,
+                openModal: false,
+              });
+              const amounts = getCurrencyAmount({
+                currentCreditsAmount: warningModalState.creditsAvailable,
+                card: paymentOption === PAYMENT_OPTIONS.CARD,
+                orderedSellOrders,
+                creditTypePrecision: creditTypeData?.creditType?.precision,
+              });
+              // After a purchase attempt where there's partial credits availability,
+              // we need to update the form with the new credits, currency amount and sell orders.
+              handleSave(
+                {
+                  ...data,
+                  [CREDITS_AMOUNT]: warningModalState.creditsAvailable,
+                  [CURRENCY_AMOUNT]: amounts.currencyAmount,
+                  [SELL_ORDERS]: amounts.sellOrders,
+                },
+                0,
+              );
+              window.scrollTo(0, 0);
+              handleActiveStep(0);
+            }
+          }}
+        />
+      )}
     </div>
   );
 };

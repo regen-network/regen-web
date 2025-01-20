@@ -12,7 +12,10 @@ import {
   spendingCapAtom,
 } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { getCreditsAvailableBannerText } from 'pages/BuyCredits/BuyCredits.utils';
+import {
+  getCreditsAvailableBannerText,
+  getOrderedSellOrders,
+} from 'pages/BuyCredits/BuyCredits.utils';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import {
@@ -42,8 +45,6 @@ export const CreditsAmount = ({
   cryptoCurrencies,
   allowedDenoms,
   creditTypePrecision,
-  card,
-  orderedSellOrders,
 }: CreditsAmountProps) => {
   const { _ } = useLingui();
 
@@ -53,6 +54,15 @@ export const CreditsAmount = ({
   const setWarningBannerTextAtom = useSetAtom(warningBannerTextAtom);
   const [spendingCap, setSpendingCap] = useAtom(spendingCapAtom);
   const paymentOption = useAtomValue(paymentOptionAtom);
+
+  const card = useMemo(
+    () => paymentOption === PAYMENT_OPTIONS.CARD,
+    [paymentOption],
+  );
+  const orderedSellOrders = useMemo(
+    () => getOrderedSellOrders(card, cardSellOrders, filteredCryptoSellOrders),
+    [card, cardSellOrders, filteredCryptoSellOrders],
+  );
 
   const displayDenom = useMemo(
     () =>

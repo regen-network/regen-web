@@ -453,7 +453,7 @@ msgstr ""
 msgid "All uploaded files and their location data will be hidden from public view."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:95
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:94
 msgid "Amazon"
 msgstr ""
 
@@ -569,7 +569,7 @@ msgstr ""
 msgid "and"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:115
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:114
 msgid "Andean"
 msgstr ""
 
@@ -930,7 +930,7 @@ msgstr ""
 msgid "card info"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:110
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:109
 msgid "Caribbean"
 msgstr ""
 
@@ -1107,7 +1107,7 @@ msgstr ""
 msgid "Complete"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:149
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:148
 msgid "Compliance"
 msgstr ""
 
@@ -1755,7 +1755,7 @@ msgid "Ecological Outcomes"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:104
-#: src/pages/Projects/hooks/useClientFilters.tsx:74
+#: src/pages/Projects/hooks/useClientFilters.tsx:73
 msgid "Ecosystem"
 msgstr ""
 
@@ -2086,7 +2086,7 @@ msgstr ""
 msgid "High"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:57
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:56
 msgid "High andean forest"
 msgstr ""
 
@@ -2418,7 +2418,7 @@ msgstr ""
 msgid "Low"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:45
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:44
 msgid "Low montane very humid forest"
 msgstr ""
 
@@ -2450,7 +2450,7 @@ msgstr ""
 msgid "Make the location data private"
 msgstr ""
 
-#: src/pages/Projects/hooks/useClientFilters.tsx:84
+#: src/pages/Projects/hooks/useClientFilters.tsx:83
 msgid "Market"
 msgstr ""
 
@@ -2796,15 +2796,15 @@ msgstr ""
 msgid "Organization Name"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:105
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:104
 msgid "Orinoco"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:65
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:64
 msgid "Orinoco savanna"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:49
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:48
 msgid "Orinoco savannah"
 msgstr ""
 
@@ -2824,7 +2824,7 @@ msgstr ""
 #~ msgid "owner"
 #~ msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:100
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:99
 msgid "Pacific"
 msgstr ""
 
@@ -3011,7 +3011,7 @@ msgstr ""
 msgid "prefinance this project"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:41
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:40
 msgid "Premontane humid forest"
 msgstr ""
 
@@ -3324,7 +3324,7 @@ msgstr ""
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr ""
 
-#: src/pages/Projects/Projects.tsx:274
+#: src/pages/Projects/Projects.tsx:292
 msgid "projects tabs"
 msgstr ""
 
@@ -3444,7 +3444,7 @@ msgstr ""
 msgid "region"
 msgstr ""
 
-#: src/pages/Projects/hooks/useClientFilters.tsx:65
+#: src/pages/Projects/hooks/useClientFilters.tsx:64
 msgid "Region"
 msgstr ""
 
@@ -3615,7 +3615,7 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:53
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:52
 msgid "Riparian forest"
 msgstr ""
 
@@ -3636,7 +3636,7 @@ msgstr ""
 msgid "sad bee"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:61
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:60
 msgid "Savanna"
 msgstr ""
 
@@ -4427,19 +4427,19 @@ msgstr ""
 msgid "Transfer pending"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:37
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:36
 msgid "Tropical dry forest"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:25
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:24
 msgid "Tropical forest"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:33
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:32
 msgid "Tropical humid forest"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:29
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:28
 msgid "Tropical very humid forest"
 msgstr ""
 
@@ -4720,7 +4720,7 @@ msgstr ""
 msgid "visit our homepage instead"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:136
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:135
 msgid "Voluntary"
 msgstr ""
 

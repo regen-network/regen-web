@@ -2,10 +2,7 @@ import CreditCardIcon from 'web-components/src/components/icons/CreditCardIcon';
 import CryptoIcon from 'web-components/src/components/icons/CryptoIcon';
 import type { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
-import { Project } from 'generated/sanity-graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
-
-import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { UNREGISTERED_PATH } from './AllProjects/AllProjects.constants';
 import { ProjectWithOrderData } from './AllProjects/AllProjects.types';
@@ -17,11 +14,9 @@ import {
 } from './Projects.constants';
 
 type NormalizeBuyingOptionsFilterParams = {
-  sellOrders?: SellOrderInfoExtented[];
   allOnChainProjects?: ProjectWithOrderData[];
   prefinance: boolean;
   creditClassSelectedFilters: Record<string, boolean>;
-  sanityProjects?: Array<Pick<Project, 'fiatSellOrders'>>;
   _: TranslatorType;
   allProjects: ProjectWithOrderData[];
 };
@@ -39,7 +34,7 @@ export const normalizeBuyingOptionsFilter = ({
     key => creditClassSelectedFilters[key],
   );
 
-  const someFiatSellOrders = allProjects?.some(project => {
+  const showCreditCardBuyingOption = allProjects?.some(project => {
     const allCardSellOrders = project?.allCardSellOrders?.map(
       order => order?.id,
     );
@@ -58,7 +53,7 @@ export const normalizeBuyingOptionsFilter = ({
       (isPrefinanceProject && unregisteredProjectsSelected)
     );
   });
-  if (prefinance || someFiatSellOrders) {
+  if (prefinance || showCreditCardBuyingOption) {
     buyingOptionsFilterOptions.push({
       name: _(CREDIT_CARD_BUYING_OPTION_NAME),
       startIcon: (
@@ -97,7 +92,7 @@ function isOnlyOneFilterActive(
 ) {
   let activeCount = 0;
 
-  for (const [key, value] of Object.entries(filters)) {
+  for (const value of Object.values(filters)) {
     if (value) activeCount++;
     // Stop early if more than one true value is found
     if (activeCount > 1) return false;

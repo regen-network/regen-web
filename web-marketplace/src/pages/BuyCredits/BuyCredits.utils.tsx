@@ -33,7 +33,7 @@ import {
   PAYMENT_OPTIONS,
   RETIREMENT,
 } from './BuyCredits.constants';
-import { PaymentOptionsType } from './BuyCredits.types';
+import { BuyCreditsSchemaTypes, PaymentOptionsType } from './BuyCredits.types';
 
 type GetFormModelParams = {
   paymentOption: PaymentOptionsType;

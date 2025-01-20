@@ -4,7 +4,6 @@ import { useAtom } from 'jotai';
 import { hasChangedFilters } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters.utils';
 
 import {
-  buyingOptionsFiltersAtom,
   creditClassInitialFiltersAtom,
   creditClassSelectedFiltersAtom,
   environmentTypeFiltersAtom,
@@ -15,6 +14,7 @@ import {
 import { DEFAULT_COMMUNITY_PROJECTS_FILTER } from 'lib/env';
 
 import { initialActiveFilters } from '../AllProjects/AllProjects.ProjectFilterBody.utils';
+import { useBuyingOptionsFilters } from './useBuyingOptionsFilters';
 
 export const useResetFilters = () => {
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
@@ -31,9 +31,8 @@ export const useResetFilters = () => {
   const [marketTypeFilters, setMarketTypeFilters] = useAtom(
     marketTypeFiltersAtom,
   );
-  const [buyingOptionsFilters, setBuyingOptionsFilters] = useAtom(
-    buyingOptionsFiltersAtom,
-  );
+  const [buyingOptionsFilters, setBuyingOptionsFilters] =
+    useBuyingOptionsFilters();
 
   const resetFilters = useCallback(() => {
     setMarketTypeFilters(initialActiveFilters.marketTypeFilters);

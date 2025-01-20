@@ -23,6 +23,10 @@ import {
   CRYPTO_SUBTITLE,
   TITLE,
 } from './ChooseHowToPurchaseModal.constants';
+import {
+  BUYINGS_OPTIONS_FILTERS_PARAM,
+  CREDIT_CARD_BUYING_OPTION_ID,
+} from 'pages/Projects/Projects.constants';
 
 export type ChooseHowToPurchaseModalProps = {
   projectId: string;
@@ -67,8 +71,11 @@ export const ChooseHowToPurchaseModal = ({
             className="w-full text-xs"
             size="small"
             onClick={() => {
-              // TODO select credit card filter
-              navigate('/projects/1');
+              onClose();
+              navigate(
+                `/projects/1?${BUYINGS_OPTIONS_FILTERS_PARAM}=${CREDIT_CARD_BUYING_OPTION_ID}`,
+                {},
+              );
             }}
           >
             {_(CARD_BUTTON)}

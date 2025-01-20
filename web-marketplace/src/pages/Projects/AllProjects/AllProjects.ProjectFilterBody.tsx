@@ -1,14 +1,13 @@
 import { useLocation } from 'react-router-dom';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { useAtom } from 'jotai';
 
 import ProjectFilters from 'web-components/src/components/organisms/ProjectFilters';
 import type { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
-import { buyingOptionsFiltersAtom } from 'lib/atoms/projects.atoms';
 import { IS_REGEN } from 'lib/env';
 
+import { useBuyingOptionsFilters } from '../hooks/useBuyingOptionsFilters';
 import { useClientFilters } from '../hooks/useClientFilters';
 import { CREDIT_CARD_BUYING_OPTION_ID } from '../Projects.constants';
 import { CommunityFilter } from './AllProjects.CommunityFilter';
@@ -46,9 +45,8 @@ const ProjectFilterBody = ({
 
   const prefinance = location.pathname.includes('prefinance');
 
-  const [buyingOptionsFilters, setBuyingOptionsFilterAtom] = useAtom(
-    buyingOptionsFiltersAtom,
-  );
+  const [buyingOptionsFilters, setBuyingOptionsFilters] =
+    useBuyingOptionsFilters();
 
   return (
     <ProjectFilters
@@ -62,7 +60,7 @@ const ProjectFilterBody = ({
           title: _(msg`Buying options`),
           options: buyingOptionsFilterOptions,
           onFilterChange: (id: string) => {
-            setBuyingOptionsFilterAtom(prev => ({ ...prev, [id]: !prev[id] }));
+            setBuyingOptionsFilters(prev => ({ ...prev, [id]: !prev[id] }));
           },
           hidden: !IS_REGEN,
         },

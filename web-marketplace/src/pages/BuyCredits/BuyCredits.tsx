@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAtom, useAtomValue } from 'jotai';
 
+import { useWallet } from 'lib/wallet/wallet';
+
 import NotFoundPage from 'pages/NotFound';
 import WithLoader from 'components/atoms/WithLoader';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
@@ -17,6 +19,7 @@ import { useSummarizePayment } from './hooks/useSummarizePayment';
 
 export const BuyCredits = () => {
   const { projectId } = useParams();
+  const navigate = useNavigate();
 
   const {
     loadingSanityProject,
@@ -36,6 +39,28 @@ export const BuyCredits = () => {
 
   const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
   const cardDetailsMissing = useAtomValue(cardDetailsMissingAtom);
+  const [maxAllowedStep, setMaxAllowedStep] = useState(0);
+  const { wallet, loaded } = useWallet();
+
+  useEffect(() => {
+    if (
+      !loadingSanityProject &&
+      !loadingBuySellOrders &&
+      cardSellOrders.length === 0 &&
+      ((loaded && !wallet?.address) || isBuyFlowDisabled)
+    )
+      // Else if there's no connected wallet address or buy disabled, redirect to project page
+      navigate(`/project/${projectId}`, { replace: true });
+  }, [
+    loadingSanityProject,
+    loadingBuySellOrders,
+    loaded,
+    wallet?.address,
+    navigate,
+    projectId,
+    cardSellOrders.length,
+    isBuyFlowDisabled,
+  ]);
 
   const [retiring, setRetiring] = useState<boolean>(true);
   const [confirmationTokenId, setConfirmationTokenId] = useState<
@@ -52,10 +77,14 @@ export const BuyCredits = () => {
 
   // update payment option from local storage data
   useEffect(() => {
-    const savedPaymentOption = localStorage.getItem(formModel.formId);
-    if (savedPaymentOption) {
-      const paymentOption =
-        JSON.parse(savedPaymentOption).formValues.paymentOption;
+    const localStorageData = localStorage.getItem(formModel.formId);
+    if (localStorageData) {
+      const jsonData = JSON.parse(localStorageData);
+      const paymentOption = jsonData.formValues.paymentOption;
+      const maxStep = jsonData.maxAllowedStep;
+      if (maxStep !== 0) {
+        setMaxAllowedStep(maxStep);
+      }
       setPaymentOption(paymentOption as PaymentOptionsType);
     }
   }, [formModel?.formId, setPaymentOption]);
@@ -87,7 +116,7 @@ export const BuyCredits = () => {
           forceStep={
             paymentOption === PAYMENT_OPTIONS.CARD &&
             cardDetailsMissing &&
-            cardDetailsMissing !== null
+            maxAllowedStep === 2
               ? 1
               : undefined
           }

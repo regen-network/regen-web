@@ -135,6 +135,7 @@ export const BuyCreditsForm = ({
   const { _ } = useLingui();
   const warningModalContent = useRef<BuyWarningModalContent | undefined>();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+
   const setWarningBannerTextAtom = useSetAtom(warningBannerTextAtom);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);

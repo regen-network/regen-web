@@ -36,7 +36,9 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
-  const handleOpen = (): void => setOpen(true);
+  const handleToggle = () => {
+    setOpen(open => !open);
+  };
   const handleClose = (): void => setOpen(false);
 
   // close drawer if route changes
@@ -50,7 +52,8 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
         {isRegistry && extras}
         <HamburgerIcon
           className={cx(styles.hamburger, styles.icon)}
-          onClick={handleOpen}
+          onClick={handleToggle}
+          onMouseLeave={handleClose}
           width="29px"
           height="22px"
           sx={{ ml: { xs: isUserLoggedIn ? 0 : 2, sm: 4 } }}

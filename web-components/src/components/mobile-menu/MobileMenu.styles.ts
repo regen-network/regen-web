@@ -8,6 +8,7 @@ export const useMobileMenuStyles = makeStyles()((theme: Theme) => ({
     alignItems: 'unset',
   },
   drawer: {
+    top: theme.spacing(15),
     '& .MuiDrawer-paper': {
       backgroundColor: theme.palette.primary.light,
       width: '85%',

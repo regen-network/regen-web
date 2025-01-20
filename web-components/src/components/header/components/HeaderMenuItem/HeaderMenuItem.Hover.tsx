@@ -1,5 +1,11 @@
 import React, { useRef } from 'react';
-import { MenuList, Paper, Popover } from '@mui/material';
+import {
+  MenuList,
+  Paper,
+  Popover,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import cx from 'clsx';
 
 import DropdownIcon from '../../../icons/DropdownIcon';
@@ -32,9 +38,14 @@ const HeaderMenuItemHover = ({
   children,
 }: Props): JSX.Element => {
   const { classes: styles } = useMenuHoverStyles();
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const popoverAnchor = useRef(null);
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+
+  const handlePopoverToggle = () => {
+    setAnchorEl(el => (el ? null : popoverAnchor.current));
+  };
 
   const handlePopoverOpen = () => {
     setAnchorEl(popoverAnchor.current);
@@ -52,9 +63,9 @@ const HeaderMenuItemHover = ({
         ref={popoverAnchor}
         aria-owns={open ? 'mouse-over-popover' : undefined}
         aria-haspopup="true"
-        onMouseEnter={handlePopoverOpen}
+        onMouseEnter={isMobile ? undefined : handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
-        onClick={handlePopoverOpen}
+        onClick={isMobile ? handlePopoverToggle : undefined}
       >
         {title && (
           <span className={classes?.title}>
@@ -81,9 +92,10 @@ const HeaderMenuItemHover = ({
           vertical: 'top',
           horizontal: 'right',
         }}
-        PaperProps={{
-          onMouseEnter: handlePopoverOpen,
-          onMouseLeave: handlePopoverClose,
+        slotProps={{
+          paper: {
+            onClick: handlePopoverClose,
+          },
         }}
         onClose={handlePopoverClose}
         disableScrollLock={true}

@@ -11,7 +11,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import {
   creditClassSelectedFiltersAtom,
-  useCommunityProjectsAtom,
+  showCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
 import { useTracker } from 'lib/tracker/useTracker';
@@ -29,7 +29,7 @@ type Props = {
 
 export const CreditClassFilters = ({ creditClassFilters = [] }: Props) => {
   const { _ } = useLingui();
-  const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
+  const [showCommunityProjects] = useAtom(showCommunityProjectsAtom);
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
     creditClassSelectedFiltersAtom,
   );
@@ -40,10 +40,10 @@ export const CreditClassFilters = ({ creditClassFilters = [] }: Props) => {
       creditClassFilters.filter(
         ({ isCommunity, path }) =>
           path === UNREGISTERED_PATH ||
-          useCommunityProjects ||
-          (!useCommunityProjects && !isCommunity),
+          showCommunityProjects ||
+          (!showCommunityProjects && !isCommunity),
       ),
-    [creditClassFilters, useCommunityProjects],
+    [creditClassFilters, showCommunityProjects],
   );
 
   const values = Object.values(creditClassSelectedFilters);

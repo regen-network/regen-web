@@ -48,7 +48,7 @@ export interface ProjectsWithOrdersProps {
   offset?: number;
   metadata?: boolean; // to discard projects without metadata prop
   random?: boolean; // to shuffle the projects (along with limit allows a random subselection)
-  useCommunityProjects?: boolean; // to show community projects
+  showCommunityProjects?: boolean; // to show community projects
   projectId?: string; // to filter by project
   skippedProjectId?: string; // to discard a specific project
   classId?: string; // to filter by class
@@ -73,7 +73,7 @@ export function useProjectsWithOrders({
   offset = 0,
   metadata = false,
   random = false,
-  useCommunityProjects = false,
+  showCommunityProjects = false,
   skippedProjectId,
   classId,
   pinnedIds,
@@ -233,9 +233,9 @@ export function useProjectsWithOrders({
   const projectsWithOrderDataFiltered = useMemo(
     () =>
       allOnChainProjects.filter(
-        project => !!project?.sanityCreditClassData || useCommunityProjects,
+        project => !!project?.sanityCreditClassData || showCommunityProjects,
       ),
-    [allOnChainProjects, useCommunityProjects],
+    [allOnChainProjects, showCommunityProjects],
   );
 
   const hasCommunityProjects = useMemo(

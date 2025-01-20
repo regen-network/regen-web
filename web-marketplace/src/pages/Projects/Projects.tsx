@@ -23,7 +23,7 @@ import {
   marketTypeFiltersAtom,
   projectsSortAtom,
   regionFiltersAtom,
-  useCommunityProjectsAtom,
+  showCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { CREDIT_CLASS_FILTERS_TO_DESELECT, IS_REGEN } from 'lib/env';
@@ -46,7 +46,7 @@ const Projects = (): JSX.Element => {
   const { _ } = useLingui();
   const { page: routePage } = useParams();
   const location = useLocation();
-  const [useCommunityProjects] = useAtom(useCommunityProjectsAtom);
+  const [showCommunityProjects] = useAtom(showCommunityProjectsAtom);
   const [sort] = useAtom(projectsSortAtom);
   const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
     creditClassSelectedFiltersAtom,
@@ -91,7 +91,7 @@ const Projects = (): JSX.Element => {
   } = useProjects({
     sort,
     offset: page * PROJECTS_PER_PAGE,
-    useCommunityProjects,
+    showCommunityProjects,
     creditClassFilter: creditClassSelectedFilters,
     regionFilter: regionFilters,
     environmentTypeFilter: environmentTypeFilters,
@@ -168,7 +168,7 @@ const Projects = (): JSX.Element => {
     marketTypeFilters,
     buyingOptionsFilters,
     creditClassSelectedFilters,
-    useCommunityProjects,
+    showCommunityProjects,
     navigate,
   ]);
 

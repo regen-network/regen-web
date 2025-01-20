@@ -24,7 +24,7 @@ export const useBuySellOrderData = ({
       projectId,
       classId,
       enableOffchainProjectsQuery: false,
-      useCommunityProjects: true,
+      showCommunityProjects: true,
       isOffChainProject,
     });
 

@@ -10,7 +10,7 @@ import {
   environmentTypeFiltersAtom,
   marketTypeFiltersAtom,
   regionFiltersAtom,
-  useCommunityProjectsAtom,
+  showCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { DEFAULT_COMMUNITY_PROJECTS_FILTER } from 'lib/env';
 
@@ -21,8 +21,8 @@ export const useResetFilters = () => {
     creditClassSelectedFiltersAtom,
   );
   const [creditClassInitialFilters] = useAtom(creditClassInitialFiltersAtom);
-  const [useCommunityProjects, setUseCommunityProjects] = useAtom(
-    useCommunityProjectsAtom,
+  const [showCommunityProjects, setShowCommunityProjects] = useAtom(
+    showCommunityProjectsAtom,
   );
   const [environmentTypeFilters, setEnvironmentTypeFilters] = useAtom(
     environmentTypeFiltersAtom,
@@ -39,7 +39,7 @@ export const useResetFilters = () => {
     setMarketTypeFilters(initialActiveFilters.marketTypeFilters);
     setEnvironmentTypeFilters(initialActiveFilters.environmentTypeFilters);
     setRegionFilters(initialActiveFilters.regionFilters);
-    setUseCommunityProjects(DEFAULT_COMMUNITY_PROJECTS_FILTER);
+    setShowCommunityProjects(DEFAULT_COMMUNITY_PROJECTS_FILTER);
     setCreditClassSelectedFilters(creditClassInitialFilters);
     setBuyingOptionsFilters(initialActiveFilters.buyingOptionsFilters);
   }, [
@@ -49,7 +49,7 @@ export const useResetFilters = () => {
     setEnvironmentTypeFilters,
     setMarketTypeFilters,
     setRegionFilters,
-    setUseCommunityProjects,
+    setShowCommunityProjects,
   ]);
 
   const showResetButton = useMemo(
@@ -71,7 +71,7 @@ export const useResetFilters = () => {
         creditClassSelectedFilters,
         creditClassInitialFilters,
       ) ||
-      useCommunityProjects !== DEFAULT_COMMUNITY_PROJECTS_FILTER,
+      showCommunityProjects !== DEFAULT_COMMUNITY_PROJECTS_FILTER,
     [
       buyingOptionsFilters,
       creditClassInitialFilters,
@@ -79,7 +79,7 @@ export const useResetFilters = () => {
       environmentTypeFilters,
       marketTypeFilters,
       regionFilters,
-      useCommunityProjects,
+      showCommunityProjects,
     ],
   );
 

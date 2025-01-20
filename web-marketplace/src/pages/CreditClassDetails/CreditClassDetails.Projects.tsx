@@ -18,7 +18,7 @@ function ProjectsSection({ classId }: Props): JSX.Element {
   const { _ } = useLingui();
   const { projectsWithOrderData, loading } = useProjectsWithOrders({
     classId,
-    useCommunityProjects: true,
+    showCommunityProjects: true,
     enableOffchainProjectsQuery: false,
   });
 

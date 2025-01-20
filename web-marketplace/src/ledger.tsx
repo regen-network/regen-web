@@ -83,36 +83,22 @@ const getApi = async (
 
 export const LedgerProviderWithWallet: React.FC<React.PropsWithChildren<{}>> =
   ({ children }) => {
-    const { wallet, loaded } = useWallet();
+    const { wallet } = useWallet();
 
-    return (
-      <LedgerProvider wallet={wallet} walletLoaded={loaded}>
-        {children}
-      </LedgerProvider>
-    );
+    return <LedgerProvider wallet={wallet}>{children}</LedgerProvider>;
   };
 
 export const LedgerProvider: React.FC<
-  React.PropsWithChildren<{ wallet?: Wallet; walletLoaded: boolean }>
-> = ({ walletLoaded, wallet, children }) => {
+  React.PropsWithChildren<{ wallet?: Wallet }>
+> = ({ wallet, children }) => {
   const [api, setApi] = useState<RegenApi | undefined>(undefined);
-  const [apiUpdatedWithOfflineSigner, setApiUpdatedWithOfflineSigner] =
-    useState(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<unknown>(undefined);
 
-  // Get API even if wallet is not loaded to unblock data fetching.
   useEffect(() => {
-    if (!api) getApi(setApi, setLoading, setError, wallet?.offlineSigner);
-  }, [api, setApi, setLoading, setError, wallet?.offlineSigner]);
-
-  // Update API when the wallet is loaded.
-  useEffect(() => {
-    if (api && !apiUpdatedWithOfflineSigner && walletLoaded) {
-      setApiUpdatedWithOfflineSigner(true);
+    if (!api || (!!wallet?.offlineSigner && !api.msgClient))
       getApi(setApi, setLoading, setError, wallet?.offlineSigner);
-    }
-  }, [api, apiUpdatedWithOfflineSigner, wallet?.offlineSigner, walletLoaded]);
+  }, [api, setApi, setLoading, setError, wallet?.offlineSigner]);
 
   return (
     <LedgerContext.Provider value={{ error, loading, api }}>

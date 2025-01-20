@@ -25,9 +25,6 @@ msgstr ""
 msgid ""
 msgstr ""
 
-msgid ""
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"

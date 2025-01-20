@@ -2,10 +2,13 @@ import { useState } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import { makeStyles } from 'tss-react/mui';
 
+import { cn } from '../../utils/styles/cn';
+
 export interface BannerBaseProps {
   text: string;
   duration?: number;
   onClose?: () => void;
+  className?: string;
 }
 
 interface StyleProps {
@@ -45,6 +48,7 @@ export default function Banner({
   color,
   duration = 5000,
   onClose,
+  className,
 }: BannerProps): JSX.Element {
   const { classes } = useStyles({ color });
   const [open, setOpen] = useState(true);
@@ -52,7 +56,7 @@ export default function Banner({
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-      className={classes.root}
+      className={cn(classes.root, className)}
       open={open}
       onClose={() => {
         setOpen(false);

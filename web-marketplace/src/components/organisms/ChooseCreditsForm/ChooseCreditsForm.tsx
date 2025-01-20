@@ -25,7 +25,7 @@ import { Loading } from 'web-components/src/components/loading';
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { warningBannerTextAtom } from 'lib/atoms/banner.atoms';
 
 import {
   paymentOptionAtom,
@@ -52,7 +52,10 @@ import {
 } from 'pages/Projects/AllProjects/AllProjects.types';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { getCurrencyAmount } from 'components/molecules/CreditsAmount/CreditsAmount.utils';
-import { AllowedDenoms } from 'components/molecules/DenomLabel/DenomLabel.utils';
+import {
+  AllowedDenoms,
+  findDisplayDenom,
+} from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSummaryCard';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
@@ -115,7 +118,7 @@ export const ChooseCreditsForm = React.memo(
     userBalance,
   }: Props) => {
     const { _ } = useLingui();
-    const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+    const setWarningBannerTextAtom = useSetAtom(warningBannerTextAtom);
     const { data, handleSave, activeStep } =
       useMultiStep<BuyCreditsSchemaTypes>();
     const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
@@ -395,11 +398,16 @@ export const ChooseCreditsForm = React.memo(
                 form.setValue(SELL_ORDERS, sellOrders);
               }}
               creditsAvailable={creditsAvailable}
-              onInvalidCredits={() =>
-                setErrorBannerTextAtom(
-                  getCreditsAvailableBannerText(creditsAvailable),
-                )
-              }
+              onInvalidCredits={() => {
+                const displayDenom = findDisplayDenom({
+                  allowedDenoms,
+                  bankDenom: currency.askDenom,
+                  baseDenom: currency.askBaseDenom,
+                });
+                setWarningBannerTextAtom(
+                  getCreditsAvailableBannerText(creditsAvailable, displayDenom),
+                );
+              }}
               userBalance={userBalance}
             />
           )}

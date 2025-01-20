@@ -22,6 +22,7 @@ import { RegistryLayoutTerrasosFooter } from './RegistryLayout.TerrasosFooter';
 import { RegistryLayoutTxBuySuccessfulModal } from './RegistryLayout.TxBuySuccessfulModal';
 import { RegistryLayoutTxErrorModal } from './RegistryLayout.TxErrorModal';
 import { RegistryLayoutTxSuccessfulModal } from './RegistryLayout.TxSuccessfulModal';
+import { RegistryLayoutWarningBannerModal } from './RegistryLayout.WarningBanner';
 
 const RegistryLayout: React.FC = () => {
   return (
@@ -47,6 +48,7 @@ const RegistryLayout: React.FC = () => {
       <RegistryLayoutAddWalletModalSwitchWarning />
       <RegistryLayoutAccountSwitchModal />
       <RegistryLayoutTxBuySuccessfulModal />
+      <RegistryLayoutWarningBannerModal />
     </>
   );
 };

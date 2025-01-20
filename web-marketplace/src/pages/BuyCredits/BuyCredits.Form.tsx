@@ -9,6 +9,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { useLedger } from 'ledger';
+import { warningBannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import {
   connectWalletModalAtom,
@@ -34,6 +35,7 @@ import {
   getCreditsAvailablePerCurrency,
   getCurrencyAmount,
 } from 'components/molecules/CreditsAmount/CreditsAmount.utils';
+import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSummaryCard';
 import { AgreePurchaseForm } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm';
 import { AgreePurchaseFormSchemaType } from 'components/organisms/AgreePurchaseForm/AgreePurchaseForm.schema';
@@ -110,6 +112,7 @@ export const BuyCreditsForm = ({
   const navigate = useNavigate();
 
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const setWarningBannerTextAtom = useSetAtom(warningBannerTextAtom);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const [paymentOptionCryptoClicked, setPaymentOptionCryptoClicked] = useAtom(
@@ -450,11 +453,16 @@ export const BuyCreditsForm = ({
               );
             }}
             creditsAvailable={creditsAvailable}
-            onInvalidCredits={() =>
-              setErrorBannerTextAtom(
-                getCreditsAvailableBannerText(creditsAvailable),
-              )
-            }
+            onInvalidCredits={() => {
+              const displayDenom = findDisplayDenom({
+                allowedDenoms,
+                bankDenom: currency.askDenom,
+                baseDenom: currency.askBaseDenom,
+              });
+              setWarningBannerTextAtom(
+                getCreditsAvailableBannerText(creditsAvailable, displayDenom),
+              );
+            }}
             userBalance={userBalance}
           />
         )}

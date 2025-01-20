@@ -71,9 +71,13 @@ msgstr ""
 msgid "{area, plural, one {hectare} other {hectares}}"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:175
-msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:178
+msgid "{creditsAvailable, plural, one {Credit amount adjusted: Only {formattedCreditsAvailable} credit available in {displayDenom}} other {Credit amount adjusted: Only {formattedCreditsAvailable} credits available in {displayDenom}}}"
 msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:175
+#~ msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
+#~ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:233
 msgid "{from}–{displayedTo} of {count}"
@@ -1381,7 +1385,7 @@ msgstr ""
 msgid "Credit unit definition"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsInput.tsx:82
+#: src/components/molecules/CreditsAmount/CreditsInput.tsx:101
 msgid "credits"
 msgstr ""
 
@@ -1443,7 +1447,7 @@ msgstr ""
 msgid "Credits have been issued!"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsInput.tsx:64
+#: src/components/molecules/CreditsAmount/CreditsInput.tsx:81
 msgid "Credits Input"
 msgstr ""
 
@@ -1509,7 +1513,7 @@ msgstr ""
 msgid "CURRENCY DENOM"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:144
+#: src/components/molecules/CreditsAmount/CurrencyInput.tsx:149
 msgid "Currency Input"
 msgstr ""
 

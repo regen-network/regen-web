@@ -273,10 +273,15 @@ export const CreditsAmount = ({
         activeStep,
       );
     },
-    // Intentionally omit `updateMultiStepData` and `data` from the dependency array
-    // because including them trigger unnecessary renders.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [card, orderedSellOrders, creditTypePrecision, setValue, activeStep],
+    [
+      card,
+      orderedSellOrders,
+      creditTypePrecision,
+      setValue,
+      updateMultiStepData,
+      data,
+      activeStep,
+    ],
   );
 
   const handleCurrencyAmountChange = useCallback(

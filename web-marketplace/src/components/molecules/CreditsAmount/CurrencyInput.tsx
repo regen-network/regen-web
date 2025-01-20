@@ -106,8 +106,9 @@ export const CurrencyInput = ({
 
   const handleOnBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>): void => {
-      // If the value is empty, set it to 0
       const value = event.target.value;
+      // If the value is empty or 0, set it to 1 and update the
+      // form state and multiStep data.
       if (value === '' || parseFloat(value) === 0) {
         const { currencyAmount, sellOrders } = getCurrencyAmount({
           currentCreditsAmount: 1,
@@ -115,18 +116,29 @@ export const CurrencyInput = ({
           orderedSellOrders,
           creditTypePrecision,
         });
+        const NEW_CREDITS_AMOUNT = 1;
         setValue(CURRENCY_AMOUNT, currencyAmount, { shouldValidate: true });
-        setValue(CREDITS_AMOUNT, 1, { shouldValidate: true });
+        setValue(CREDITS_AMOUNT, NEW_CREDITS_AMOUNT, { shouldValidate: true });
         setValue(SELL_ORDERS, sellOrders);
-        handleOnChange(event);
+        updateMultiStepData(
+          {
+            ...data,
+            creditsAmount: NEW_CREDITS_AMOUNT,
+            currencyAmount,
+            sellOrders,
+          },
+          activeStep,
+        );
       }
     },
     [
+      activeStep,
       creditTypePrecision,
-      handleOnChange,
+      data,
       orderedSellOrders,
       paymentOption,
       setValue,
+      updateMultiStepData,
     ],
   );
 

@@ -10,6 +10,8 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 
 import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import {
   CREDITS_AMOUNT,
@@ -34,6 +36,11 @@ export const CreditsInput = ({
   } = useFormContext<ChooseCreditsFormSchemaType>();
   const { onChange } = register(CREDITS_AMOUNT);
   const paymentOption = useAtomValue(paymentOptionAtom);
+  const {
+    data,
+    handleSave: updateMultiStepData,
+    activeStep,
+  } = useMultiStep<BuyCreditsSchemaTypes>();
 
   const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event);
@@ -63,7 +70,8 @@ export const CreditsInput = ({
 
   const handleOnBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>): void => {
-      // If the value is empty, set it to 0
+      // If the value is empty or 0, set it to 1 and update
+      // form state and multiStep data.
       const value = event.target.value;
       if (value === '' || parseFloat(value) === 0) {
         const { currencyAmount, sellOrders } = getCurrencyAmount({
@@ -72,18 +80,29 @@ export const CreditsInput = ({
           orderedSellOrders,
           creditTypePrecision,
         });
-        setValue(CREDITS_AMOUNT, 1, { shouldValidate: true });
+        const NEW_CREDITS_AMOUNT = 1;
+        setValue(CREDITS_AMOUNT, NEW_CREDITS_AMOUNT, { shouldValidate: true });
         setValue(CURRENCY_AMOUNT, currencyAmount, { shouldValidate: true });
         setValue(SELL_ORDERS, sellOrders);
-        onHandleChange(event);
+        updateMultiStepData(
+          {
+            ...data,
+            creditsAmount: NEW_CREDITS_AMOUNT,
+            currencyAmount,
+            sellOrders,
+          },
+          activeStep,
+        );
       }
     },
     [
+      activeStep,
       creditTypePrecision,
-      onHandleChange,
+      data,
       orderedSellOrders,
       paymentOption,
       setValue,
+      updateMultiStepData,
     ],
   );
 

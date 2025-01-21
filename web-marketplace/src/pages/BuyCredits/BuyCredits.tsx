@@ -50,7 +50,10 @@ export const BuyCredits = () => {
     projectId: onChainProjectId ?? offChainProject?.id,
   });
 
-  // update payment option from local storage data
+  // On form load, update `paymentOption` and `maxAllowedStep` from localStorage to prevent a visual
+  // jump between step 1 (Payment info) and step 2  (Retirement) when resuming the form left at step 2.
+  // These values are needed to calculate the `forceStep` prop in `MultiStepTemplate`, which redirects,
+  // if necessary, the user to step 1 to re-enter payment details.
   useEffect(() => {
     const localStorageData = localStorage.getItem(formModel.formId);
     if (localStorageData) {

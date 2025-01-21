@@ -30,7 +30,6 @@ import { MetadataJSONField } from '../../../../components/molecules';
 import useQueryProjectsByIssuer from '../../../../hooks/useQueryProjectsByIssuer';
 import { useWallet } from '../../../../lib/wallet/wallet';
 import useSaveProjectSelectedOption from '../hooks/useSaveProjectSelectedOption';
-import useUpdateProjectClass from '../hooks/useUpdateProjectClass';
 import useUpdateProjectOptions from '../hooks/useUpdateProjectOptions';
 
 export interface CreditBasicsFormValues {
@@ -163,13 +162,15 @@ export default function CreditBasics({
 
   const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
   const { projectId } = values;
-  const { classId, isVCS } = useUpdateProjectClass(projectId);
+
+  const classId = projectId.split('-')[0];
+  const isVCS = classId === 'C01';
+
   const projectOptions = useUpdateProjectOptions(projects);
 
   useSaveProjectSelectedOption({
     projectId,
     projectOptions,
-    projects,
     saveProjectOptionSelected,
   });
 

@@ -8,7 +8,6 @@ import InputLabel from 'web-components/src/components/inputs/InputLabel';
 import { Body } from 'web-components/src/components/typography';
 
 import { CreditBasicsFormValues } from '../../features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics';
-import { ClassID } from '../../types/ledger/ecocredit';
 
 // TODO
 // Make this component more generic, so that it doesn't depend
@@ -17,7 +16,7 @@ import { ClassID } from '../../types/ledger/ecocredit';
 interface FieldProps {
   name?: string;
   required?: boolean;
-  classId: ClassID;
+  classId: string;
 }
 
 export function MetadataJSONField({

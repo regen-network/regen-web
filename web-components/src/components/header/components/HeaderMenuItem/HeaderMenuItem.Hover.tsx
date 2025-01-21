@@ -1,11 +1,5 @@
 import React, { useRef } from 'react';
-import {
-  MenuList,
-  Paper,
-  Popover,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { MenuList, Paper, Popover, useMediaQuery } from '@mui/material';
 import cx from 'clsx';
 
 import DropdownIcon from '../../../icons/DropdownIcon';
@@ -38,8 +32,8 @@ const HeaderMenuItemHover = ({
   children,
 }: Props): JSX.Element => {
   const { classes: styles } = useMenuHoverStyles();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  // eslint-disable-next-line lingui/no-unlocalized-strings
+  const isTouchScreen = useMediaQuery('(pointer: coarse)');
   const popoverAnchor = useRef(null);
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
@@ -63,9 +57,9 @@ const HeaderMenuItemHover = ({
         ref={popoverAnchor}
         aria-owns={open ? 'mouse-over-popover' : undefined}
         aria-haspopup="true"
-        onMouseEnter={isMobile ? undefined : handlePopoverOpen}
+        onMouseEnter={isTouchScreen ? undefined : handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
-        onClick={isMobile ? handlePopoverToggle : undefined}
+        onClick={isTouchScreen ? handlePopoverToggle : undefined}
       >
         {title && (
           <span className={classes?.title}>

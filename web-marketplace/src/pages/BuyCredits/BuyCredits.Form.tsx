@@ -191,22 +191,6 @@ export const BuyCreditsForm = ({
 
   useEffect(() => {
     if (
-      paymentOption === PAYMENT_OPTIONS.CARD &&
-      cardDetailsMissing &&
-      activeStep === 2
-    ) {
-      handleActiveStep(1);
-    }
-  }, [
-    handleActiveStep,
-    cardDetails,
-    paymentOption,
-    activeStep,
-    cardDetailsMissing,
-  ]);
-
-  useEffect(() => {
-    if (
       !loadingSanityProject &&
       !loadingBuySellOrders &&
       cardSellOrders.length === 0 &&

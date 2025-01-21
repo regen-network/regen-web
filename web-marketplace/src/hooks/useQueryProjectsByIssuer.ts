@@ -34,13 +34,13 @@ export default function useQueryProjectsByIssuer(issuer?: string): Project[] {
 
   const projectsResults = useQueries({
     queries:
-      classIds?.map(classId => {
-        return getProjectsByClassQuery({
+      classIds?.map(classId =>
+        getProjectsByClassQuery({
           enabled: !!classId && !!ecocreditClient,
           client: ecocreditClient,
           request: { classId },
-        });
-      }) || [],
+        }),
+      ) || [],
   });
 
   const projects = projectsResults

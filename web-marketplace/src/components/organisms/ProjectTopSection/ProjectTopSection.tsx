@@ -379,11 +379,14 @@ function ProjectTopSection({
               activitiesLabel={_(PROJECT_ACTIVITY_LABEL)}
               ecosystemLabel={_(ECOSYSTEM_LABEL)}
               overrideIconColor={!IS_REGEN}
+              classes={{
+                root: ratingsAndCertificationsData ? '' : 'mb-30 sm:mb-40',
+              }}
             />
             {ratingsAndCertificationsData && (
               <RoundLogoItemsList
                 {...ratingsAndCertificationsData}
-                sx={{ mb: { xs: 7.5, sm: 10 } }}
+                className="mb-30 sm:mb-40"
               />
             )}
             {otcCard && IS_REGEN && (

@@ -26,6 +26,7 @@ export interface Props {
 }
 
 const ImpactTags = ({
+  classes,
   activities,
   ecosystems,
   impact,
@@ -47,6 +48,7 @@ const ImpactTags = ({
         },
         ...sxToArray(sx),
       ]}
+      className={classes?.root}
     >
       <Box sx={{ mb: isImpactCollapsed ? { xs: 7.5, sm: 10 } : 0 }}>
         <CollapseList

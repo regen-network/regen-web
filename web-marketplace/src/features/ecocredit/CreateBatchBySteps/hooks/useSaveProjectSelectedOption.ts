@@ -19,7 +19,7 @@ export default function useSaveProjectSelectedOption({
 }: Props): void {
   useEffect(() => {
     if (!projectId || !projects.length) return;
-
+    console.log('projectOptions', projectOptions);
     const isFound = projectOptions?.find(
       item => item.value.toString() === projectId.toString(),
     );

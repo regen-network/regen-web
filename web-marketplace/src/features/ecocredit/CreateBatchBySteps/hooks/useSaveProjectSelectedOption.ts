@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 
 import type { Option } from 'web-components/src/components/inputs/SelectTextField';
 
@@ -13,10 +13,9 @@ export default function useSaveProjectSelectedOption({
   projectOptions,
   saveProjectOptionSelected,
 }: Props): void {
-  const memProjectOptions = useMemo(() => projectOptions, [projectOptions]);
   useEffect(() => {
     if (!projectId) return;
-    const isFound = memProjectOptions?.find(
+    const isFound = projectOptions?.find(
       item => item.value.toString() === projectId.toString(),
     );
     if (isFound) saveProjectOptionSelected(isFound);

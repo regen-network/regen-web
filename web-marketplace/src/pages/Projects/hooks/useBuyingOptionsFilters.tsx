@@ -29,7 +29,7 @@ export const useBuyingOptionsFilters = (): [
       const params: ParamKeyValuePair[] = [];
       const newBuyingOptionsFilters =
         typeof setter === 'function' ? setter(buyingOptionsFilters) : setter;
-      console.log('buyingOptionsFiltersRef.current', buyingOptionsFilters);
+
       if (newBuyingOptionsFilters[CREDIT_CARD_BUYING_OPTION_ID]) {
         params.push([
           BUYINGS_OPTIONS_FILTERS_PARAM,

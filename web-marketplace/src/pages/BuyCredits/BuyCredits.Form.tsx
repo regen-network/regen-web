@@ -187,7 +187,7 @@ export const BuyCreditsForm = ({
       typeof data?.retiring === 'undefined' ? prev : data?.retiring,
     );
     setPaymentOption(prev => data?.paymentOption || prev);
-  }, [data, setPaymentOption, setRetiring]);
+  }, [data.retiring, data?.paymentOption, setPaymentOption, setRetiring]);
 
   useEffect(() => {
     if (

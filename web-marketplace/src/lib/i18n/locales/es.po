@@ -56,7 +56,7 @@ msgstr "(obligatorio si agregó una historia de proyecto)"
 
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:190
 msgid "(retirement is permanent and non-reversible)"
-msgstr "(la jubilación es permanente e irreversible)"
+msgstr "(la retirada es permanente e irreversible)"
 
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:132
 msgid "{0, plural, one {allowed credit class} other {allowed credit classes}}"
@@ -1918,7 +1918,7 @@ msgstr "emisión estimada"
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:65
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
-msgstr "Algunos ejemplos de motivos de jubilación incluyen: “viajes de empresa en 2025”, “compensar mi huella personal” o el nombre de una persona u organización específica."
+msgstr "Algunos ejemplos de motivos de retirada incluyen: “viajes de empresa en 2025”, “compensar mi impacto ambiental” o el nombre de una persona u organización específica."
 
 #: src/components/organisms/Order/Order.tsx:125
 msgid "Expected delivery date"
@@ -2473,7 +2473,7 @@ msgstr "Hacer que los datos de ubicación sean privados"
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:84
 #~ msgid "Make your purchase anonymous. Your name will be hidden from the retirement certificate and the certificate will be hidden from your public profile."
-#~ msgstr "Haz que tu compra sea anónima. Tu nombre quedará oculto en el certificado de jubilación y el certificado quedará oculto en tu perfil público."
+#~ msgstr "Haz que tu compra sea anónima. Tu nombre quedará oculto en el certificado de retirada y el certificado quedará oculto en tu perfil público."
 
 #: src/pages/Projects/hooks/useClientFilters.tsx:83
 msgid "Market"
@@ -2730,7 +2730,7 @@ msgstr "No hay opciones disponibles"
 
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:80
 msgid "No retirements to display"
-msgstr "No hay jubilaciones para mostrar"
+msgstr "No hay retiros que mostrar"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:66
 msgid "No sell orders found"
@@ -3589,7 +3589,7 @@ msgstr "Retirar créditos al momento de la transferencia"
 #: src/pages/Certificate/Certificate.constants.ts:16
 #: src/pages/Certificate/Certificate.utils.ts:51
 msgid "Retired by"
-msgstr "Jubilado por"
+msgstr "Retirado por"
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
@@ -3597,28 +3597,28 @@ msgstr "Los créditos retirados han sido retirados de circulación de forma perm
 
 #: src/pages/BuyCredits/BuyCredits.constants.ts:16
 msgid "Retirement"
-msgstr "Jubilación"
+msgstr "Retirada"
 
 #: src/pages/Certificate/Certificate.constants.ts:5
 msgid "Retirement Certificate"
-msgstr "Certificado de jubilación"
+msgstr "Certificado de retirada"
 
 #: src/components/organisms/Portfolio/Portfolio.tsx:76
 msgid "Retirement Certificates"
-msgstr "Certificados de jubilación"
+msgstr "Certificados de retirada"
 
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:15
 msgid "Retirement date"
-msgstr "Fecha de jubilación"
+msgstr "Fecha de retirada"
 
 #: src/components/organisms/Order/Order.Summary.tsx:111
 msgid "Retirement Info"
-msgstr "Información sobre la jubilación"
+msgstr "Información sobre la retirada"
 
 #: src/components/organisms/CreditRetireForm/CreditRetireForm.RetirementReminder.tsx:14
 #: src/lib/constants/shared.constants.tsx:40
 msgid "Retirement is permanent and non-reversible."
-msgstr "La jubilación es permanente e irreversible."
+msgstr "La retirada es permanente e irreversible."
 
 #: src/components/organisms/Order/Order.Summary.tsx:135
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:54
@@ -3630,7 +3630,7 @@ msgstr "Lugar de retiro"
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:79
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:134
 msgid "Retirement note"
-msgstr "Nota de jubilación"
+msgstr "Nota de retirada"
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:201
 msgid "Retirement permanently removes used credits from circulation to prevent their reuse, ensuring that the environmental benefit claimed is real and not double-counted."
@@ -3641,7 +3641,7 @@ msgstr "La retirada elimina permanentemente de circulación los créditos usados
 #: src/lib/constants/shared.constants.tsx:148
 #: src/pages/Certificate/Certificate.constants.ts:17
 msgid "Retirement reason"
-msgstr "Motivo de jubilación"
+msgstr "Motivo de la retirada"
 
 #: src/components/molecules/PlanStepper.tsx:17
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:35
@@ -4217,7 +4217,7 @@ msgstr "La dirección del destinatario no puede ser la misma que la del remitent
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:101
 #: src/lib/constants/shared.constants.tsx:155
 msgid "The retirement location can be where you live or your business operates."
-msgstr "El lugar de jubilación puede ser el lugar donde usted vive o donde opera su negocio."
+msgstr "El lugar de la retirada puede ser el lugar donde usted vive o donde opera su negocio."
 
 #: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:477
 #~ msgid "The seller of these credits has chosen to only allow for immediate retiring of credits. These credits cannot be purchased as a tradable asset."
@@ -4340,12 +4340,20 @@ msgid "This may take up to 15 seconds."
 msgstr "Esto puede tardar hasta 15 segundos."
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
-#~ msgid "This name will appear on the retirement certificate unless you choose to retire anonymously in the next step. It is also your user profile name."
-#~ msgstr "Este nombre aparecerá en el certificado de jubilación a menos que elija jubilarse de forma anónima en el siguiente paso. También es su nombre de perfil de usuario."
+#~ msgid "This name will appear on the retirement certificate unless you choose to retire anonymously in the next step."
+#~ msgstr "Este nombre aparecerá en el certificado de retirada a menos que elija jubilarse anónimamente en el siguiente paso."
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
-msgid "This name will appear on the retirement certificate. It is also your user profile name."
-msgstr "Este nombre aparecerá en el certificado de jubilación. También es el nombre de su perfil de usuario."
+#~ msgid "This name will appear on the retirement certificate unless you choose to retire anonymously in the next step. It is also your user profile name."
+#~ msgstr "Este nombre aparecerá en el certificado de retirada a menos que elija jubilarse de forma anónima en el siguiente paso. También es su nombre de perfil de usuario."
+
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
+msgid "This name will appear on the retirement certificate."
+msgstr "Este nombre aparecerá en el certificado de retirada."
+
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
+#~ msgid "This name will appear on the retirement certificate. It is also your user profile name."
+#~ msgstr "Este nombre aparecerá en el certificado de retirada. También es el nombre de su perfil de usuario."
 
 #: src/components/organisms/PostForm/PostForm.tsx:388
 msgid "This post and all of its files will be visible."
@@ -4720,11 +4728,11 @@ msgstr "ver recurso"
 
 #: src/pages/BuyCredits/BuyCredits.constants.ts:11
 msgid "view retirement certificate"
-msgstr "ver certificado de jubilación"
+msgstr "ver certificado de retirada"
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:13
 msgid "view retirement certificates"
-msgstr "ver certificados de jubilación"
+msgstr "ver certificados de retirada"
 
 #: src/components/organisms/MediaForm/MediaForm.constants.ts:21
 msgid "View the complete list of support videos»"
@@ -4891,7 +4899,7 @@ msgstr "Sí, mi proyecto incluye pastizales."
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:105
 msgid "Yes, please create an account for me so I can easily see my purchase details and retirement certificate when I log in"
-msgstr "Sí, por favor crea una cuenta para mí para que pueda ver fácilmente los detalles de mi compra y mi certificado de jubilación cuando inicie sesión."
+msgstr "Sí, por favor crea una cuenta para mí para que pueda ver fácilmente los detalles de mi compra y mi certificado de retirada cuando inicie sesión."
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:17
 msgid "yes, remove & connect"
@@ -4955,7 +4963,7 @@ msgstr "Usted ingresó:"
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Tradable.tsx:25
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
-msgstr "Ha elegido comprar créditos negociables, por lo que no recibirá un certificado de jubilación."
+msgstr "Ha elegido comprar créditos negociables, por lo que no recibirá un certificado de retirada."
 
 #: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.constants.ts:3
 msgid "You have not issued any credit batches yet"
@@ -5043,11 +5051,11 @@ msgstr "¡Su acción de colocación fue exitosa!"
 
 #: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:119
 msgid "Your retirement certificate will be generated as soon as the credits are transferred, please check later. Meanwhile, we have emailed you a receipt to {email}"
-msgstr "Tu certificado de jubilación se generará tan pronto como se transfieran los créditos, por favor, compruébalo más tarde. Mientras tanto, te hemos enviado un recibo por correo electrónico a {email}"
+msgstr "Tu certificado de retirada se generará tan pronto como se transfieran los créditos, por favor, compruébalo más tarde. Mientras tanto, te hemos enviado un recibo por correo electrónico a {email}"
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:6
 msgid "Your retirement was successful!"
-msgstr "¡Su jubilación fue un éxito!"
+msgstr "¡Retirada realizada con éxito!"
 
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:6
 msgid "Your sell order was cancelled"

@@ -76,9 +76,9 @@ export const CustomerInfo = ({
             <Trans>
               Input an email address to receive a receipt of your purchase.
               <i>
-                Take note: we will email you a prompt to associate this email
-                with your account for easier future access. This is entirely
-                optional.
+                Note: You will receive an email with instructions to link this
+                email to your account, allowing for easier access going forward,
+                if desired.
               </i>
             </Trans>
           ) : paymentOption === PAYMENT_OPTIONS.CARD ? (
@@ -95,7 +95,7 @@ export const CustomerInfo = ({
         error={!!errors['email']}
         helperText={errors['email']?.message}
         disabled={!!accountEmail}
-        optional={!!wallet?.address}
+        optional={paymentOption === PAYMENT_OPTIONS.CRYPTO}
       />
       {!accountId && !wallet?.address && (
         <CheckboxLabel

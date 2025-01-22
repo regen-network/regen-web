@@ -59,7 +59,7 @@ export const PaymentInfoForm = ({
   const [paymentInfoValid, setPaymentInfoValid] = useState(false);
 
   const form = useZodForm({
-    schema: paymentInfoFormSchema(paymentOption, wallet),
+    schema: paymentInfoFormSchema(paymentOption),
     defaultValues: {
       email: initialValues?.email || accountEmail,
       name: initialValues?.name || accountName,

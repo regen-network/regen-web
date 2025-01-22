@@ -1,6 +1,5 @@
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { Grid } from '@mui/material';
 
 import Section from 'web-components/src/components/section';
 import { Title } from 'web-components/src/components/typography';

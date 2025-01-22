@@ -38,6 +38,7 @@ import {
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
+import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 import {
@@ -295,3 +296,7 @@ export const formatTimelineDates = (item: PrefinanceTimelineItem) =>
   `${formatDate(item.date, 'MMM YYYY')}${
     item.endDate ? ` - ${formatDate(item.endDate, 'MMM YYYY')}` : ''
   }`;
+
+export const getAccountInfo = (account?: AccountFieldsFragment | null) => {
+  return { account, defaultAvatar: getDefaultAvatar(account) };
+};

@@ -22,9 +22,6 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -2225,8 +2222,12 @@ msgid "Information"
 msgstr "Información"
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:76
-msgid "Input an email address to receive a receipt of your purchase.<0>Take note: we will email you a prompt to associate this email with your account for easier future access. This is entirely optional.</0>"
-msgstr "Ingresa una dirección de correo electrónico para recibir un recibo de tu compra.<0>Toma nota: te enviaremos un correo electrónico con un mensaje para que asocies este correo electrónico con tu cuenta para facilitar el acceso en el futuro. Esto es completamente opcional.</0>"
+msgid "Input an email address to receive a receipt of your purchase.<0>Note: You will receive an email with instructions to link this email to your account, allowing for easier access going forward, if desired.</0>"
+msgstr "Ingrese una dirección de correo electrónico para recibir un recibo de su compra.<0>Nota: Recibirá un correo electrónico con instrucciones para vincular este correo electrónico a su cuenta, lo que permitirá un acceso más fácil en el futuro, si lo desea.</0>"
+
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:76
+#~ msgid "Input an email address to receive a receipt of your purchase.<0>Take note: we will email you a prompt to associate this email with your account for easier future access. This is entirely optional.</0>"
+#~ msgstr "Ingresa una dirección de correo electrónico para recibir un recibo de tu compra.<0>Toma nota: te enviaremos un correo electrónico con un mensaje para que asocies este correo electrónico con tu cuenta para facilitar el acceso en el futuro. Esto es completamente opcional.</0>"
 
 #: src/pages/BuyCredits/BuyCredits.constants.ts:8
 msgid "Insufficient balance"

@@ -60,7 +60,7 @@ export const CustomerInfo = ({
         <TextField
           label={_(msg`Your name`)}
           description={_(
-            msg`This name will appear on the retirement certificate unless you choose to retire anonymously in the next step.`,
+            msg`This name will appear on the retirement certificate.`,
           )}
           {...register('name')}
           error={!!errors['name']}

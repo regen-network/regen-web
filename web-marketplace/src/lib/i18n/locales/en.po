@@ -200,7 +200,7 @@ msgstr ""
 msgid "<0>Credit class issuer:</0> the entity who can issue credit batches under the given credit class."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:104
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:103
 msgid "<0>Custodian:</0> The entity, also the project landowner, who has historically managed the territory. It is now part of the project stakeholders and receives benefits from project success."
 msgstr ""
 
@@ -208,11 +208,11 @@ msgstr ""
 msgid "<0>drag and drop</0><1>or</1>"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:93
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:92
 msgid "<0>Monitor:</0> The entity who tracks and verifies the environmental impact and performance of the project to ensure compliance and transparency."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:115
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:114
 msgid "<0>Partners:</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
 msgstr ""
 
@@ -224,11 +224,11 @@ msgstr ""
 #~ msgid "<0>Project admin:</0> the entity who can update a given project on the blockchain."
 #~ msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:50
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:49
 msgid "<0>Project admin:</0> The entity who can update a given project on the blockchain."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:60
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:59
 msgid "<0>Project developer:</0> The entity in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
 msgstr ""
 
@@ -236,7 +236,7 @@ msgstr ""
 #~ msgid "<0>Project developer:</0> the entity that is in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
 #~ msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:71
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:70
 msgid "<0>Project operator:</0> The entity responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
 msgstr ""
 
@@ -248,7 +248,7 @@ msgstr ""
 #~ msgid "<0>Verifier:</0> The third party eneity responsible for providing a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 #~ msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:82
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:81
 msgid "<0>Verifier:</0> The third party entity responsible for providing a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr ""
 
@@ -272,7 +272,7 @@ msgstr ""
 msgid "5MB max. Supported file types include text, spreadsheets, images, and video files."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:39
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:38
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:27
 msgid "A <0>program</0> involves the eligibility rules, monitoring and certification, and registration systems for credit trading and ownership tracking."
 msgstr ""
@@ -420,7 +420,7 @@ msgstr ""
 msgid "Address copied!"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:48
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:47
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:37
 #: src/pages/Post/Post.constants.ts:8
 msgid "admin"
@@ -1573,7 +1573,7 @@ msgstr ""
 msgid "Current admin address"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:102
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:101
 msgid "custodian"
 msgstr ""
 
@@ -2566,7 +2566,7 @@ msgstr ""
 msgid "Moderate"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:91
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:90
 msgid "monitor"
 msgstr ""
 
@@ -2795,7 +2795,7 @@ msgstr ""
 msgid "Oops! Page not found."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:69
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:68
 msgid "operator"
 msgstr ""
 
@@ -2863,7 +2863,7 @@ msgstr ""
 msgid "Pacific"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:113
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:112
 msgid "partners"
 msgstr ""
 
@@ -3161,7 +3161,7 @@ msgstr ""
 msgid "Profile type"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:37
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:36
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:24
 msgid "program"
 msgstr ""
@@ -3232,7 +3232,7 @@ msgstr ""
 msgid "Project Design Document"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:58
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:57
 msgid "project developer"
 msgstr ""
 
@@ -3953,7 +3953,7 @@ msgstr ""
 msgid "Sort by:"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:137
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:136
 msgid "Stakeholders"
 msgstr ""
 
@@ -4622,7 +4622,7 @@ msgstr ""
 msgid "verification reports"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:80
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:79
 msgid "verifier"
 msgstr ""
 

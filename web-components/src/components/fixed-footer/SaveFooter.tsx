@@ -1,8 +1,6 @@
 import React from 'react';
-import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import LinearProgress from '@mui/material/LinearProgress';
-import { Theme } from '@mui/material/styles';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
 import { TextButton } from '../buttons/TextButton';
@@ -68,7 +66,6 @@ const SaveFooter: React.FC<React.PropsWithChildren<Props>> = ({
   ...props
 }) => {
   const { classes } = useStyles({ hideProgress });
-  const theme: Theme = useTheme();
 
   return (
     <FixedFooter>

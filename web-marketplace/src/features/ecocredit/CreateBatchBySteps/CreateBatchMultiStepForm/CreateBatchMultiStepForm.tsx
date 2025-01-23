@@ -24,6 +24,7 @@ import {
   REQUIRED_MESSAGE,
   RETIREMENT_INFO_TEXT,
   SAVE_EXIT_TEXT,
+  SAVE_TEXT,
   SUBMIT_TEXT,
 } from 'lib/constants/shared.constants';
 
@@ -216,7 +217,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
               <SaveFooter
                 onPrev={activeStep > 0 ? handleBack : undefined}
                 onSave={submitForm}
-                saveText={activeStep === 2 ? _(SUBMIT_TEXT) : ''}
+                saveText={activeStep === 2 ? _(SUBMIT_TEXT) : _(SAVE_TEXT)}
                 saveExitText={activeStep === 2 ? _(SAVE_EXIT_TEXT) : ''}
                 saveDisabled={!isValid || isSubmitting}
                 percentComplete={percentComplete}

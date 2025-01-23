@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { startCase } from 'lodash';
@@ -16,25 +16,28 @@ const getDefaultProjectOption = (_: TranslatorType) => ({
 
 export default function useUpdateProjectOptions(projects: Project[]): Option[] {
   const { _ } = useLingui();
-  const [projectOptions, setProjectOptions] = useState<Option[]>([]);
   const defaultProjectOption = useMemo(() => getDefaultProjectOption(_), [_]);
 
-  useEffect(() => {
-    if (!projects.length) return;
-
-    const options =
-      projects.map((project: Project) => {
-        const projectId = project.id;
-        const projectName = startCase(project?.metadata?.['schema:name'] || '');
-        const projectNameWithId = `${projectName} (${projectId})`;
-        return {
-          label: projectName ? projectNameWithId : projectId,
-          value: projectId,
-        };
-      }) || [];
-
-    setProjectOptions([defaultProjectOption, ...options]);
-  }, [defaultProjectOption, projects, setProjectOptions]);
+  const projectOptions = useMemo(
+    () =>
+      projects.length
+        ? [
+            defaultProjectOption,
+            ...(projects.map((project: Project) => {
+              const projectId = project.id;
+              const projectName = startCase(
+                project?.metadata?.['schema:name'] || '',
+              );
+              const projectNameWithId = `${projectName} (${projectId})`;
+              return {
+                label: projectName ? projectNameWithId : projectId,
+                value: projectId,
+              };
+            }) || []),
+          ]
+        : [],
+    [defaultProjectOption, projects],
+  );
 
   return projectOptions;
 }

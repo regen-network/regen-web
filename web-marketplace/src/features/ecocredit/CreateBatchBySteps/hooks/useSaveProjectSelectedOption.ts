@@ -2,27 +2,25 @@ import { useEffect } from 'react';
 
 import type { Option } from 'web-components/src/components/inputs/SelectTextField';
 
-import type { ProjectWithMetadataObj as Project } from '../../../../types/ledger/ecocredit';
-
 interface Props {
   projectId: string;
   projectOptions: Option[];
-  projects: Project[];
   saveProjectOptionSelected: (isFound: Option) => void;
 }
 
 export default function useSaveProjectSelectedOption({
   projectId,
   projectOptions,
-  projects,
   saveProjectOptionSelected,
 }: Props): void {
   useEffect(() => {
-    if (!projectId || !projects.length) return;
-
+    if (!projectId) return;
     const isFound = projectOptions?.find(
       item => item.value.toString() === projectId.toString(),
     );
     if (isFound) saveProjectOptionSelected(isFound);
-  }, [projectId, projectOptions, projects, saveProjectOptionSelected]);
+    // adding projectOptions to dep array would cause infinite re-renders because it's an array,
+    // it's ok since at the time projectId changes, projectOptions has became stable
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectId, saveProjectOptionSelected]);
 }

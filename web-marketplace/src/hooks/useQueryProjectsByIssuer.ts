@@ -42,11 +42,13 @@ export default function useQueryProjectsByIssuer(issuer?: string): Project[] {
         }),
       ) || [],
   });
+
   const projects = projectsResults
     .map(res => {
       return res.data?.projects;
     })
     .flat();
+  const projectsLoading = projectsResults.some(res => res.isLoading);
 
   const projectsMetadatasResults = useQueries({
     queries: projects.map(project =>
@@ -62,8 +64,10 @@ export default function useQueryProjectsByIssuer(issuer?: string): Project[] {
     queryResult => queryResult.data,
   );
 
-  return projects.map((project, i) => ({
-    ...(project as ProjectInfo),
-    metadata: projectsMetadata[i],
-  }));
+  return projectsLoading
+    ? []
+    : projects.map((project, i) => ({
+        ...(project as ProjectInfo),
+        metadata: projectsMetadata[i],
+      }));
 }

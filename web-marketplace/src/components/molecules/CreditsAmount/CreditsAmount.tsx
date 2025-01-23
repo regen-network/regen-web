@@ -16,6 +16,7 @@ import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
 import {
   getCreditsAvailableBannerText,
   getOrderedSellOrders,
+  resetCurrencyAndCredits,
 } from 'pages/BuyCredits/BuyCredits.utils';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
@@ -149,49 +150,32 @@ export const CreditsAmount = ({
       // This can happen when the user switches payment option, currency,
       // or to only buy tradable credits,
       // but the amount set is above the amount of newly available credits
-      const currentCreditsAmount = getValues(CREDITS_AMOUNT);
+      let currentCreditsAmount = getValues(CREDITS_AMOUNT);
       if (currentCreditsAmount > _creditsAvailable) {
-        setValue(CREDITS_AMOUNT, _creditsAvailable);
-        setValue(CURRENCY_AMOUNT, _spendingCap);
-        const sellOrders = orderedSellOrders.map(order => {
-          const price = getSellOrderPrice({ order, card });
-          return formatSellOrder({ order, card, price });
-        });
-        setValue(SELL_ORDERS, sellOrders);
         setWarningBannerTextAtom(
           getCreditsAvailableBannerText(_creditsAvailable, displayDenom),
         );
-        // Udates the currency amount in multistep data when payment option is changed
-        updateMultiStepData(
-          {
-            ...data,
-            creditsAmount: _creditsAvailable,
-            currencyAmount: _spendingCap,
-            sellOrders,
-          },
+        resetCurrencyAndCredits(
+          paymentOption,
+          orderedSellOrders,
+          creditTypePrecision,
+          setValue,
+          updateMultiStepData,
+          data,
           activeStep,
+          _creditsAvailable,
         );
       } else {
         // Else we keep the same amount of credits
-        // but we still need to update currency amount and sell orders
-        // (because pricing and sell orders can be different)
-        const { currencyAmount, sellOrders } = getCurrencyAmount({
-          currentCreditsAmount,
-          card,
+        resetCurrencyAndCredits(
+          paymentOption,
           orderedSellOrders,
           creditTypePrecision,
-        });
-        setValue(CURRENCY_AMOUNT, currencyAmount);
-        setValue(SELL_ORDERS, sellOrders);
-        // Updates the currency amount in multistep data when payment option is changed
-        updateMultiStepData(
-          {
-            ...data,
-            creditsAmount: currentCreditsAmount,
-            currencyAmount: currencyAmount,
-            sellOrders: sellOrders,
-          },
+          setValue,
+          updateMultiStepData,
+          data,
           activeStep,
+          currentCreditsAmount,
         );
       }
     }
@@ -269,6 +253,7 @@ export const CreditsAmount = ({
           ...data,
           creditsAmount: currentCreditsAmount,
           currencyAmount: currencyAmount,
+          sellOrders,
         },
         activeStep,
       );
@@ -301,6 +286,7 @@ export const CreditsAmount = ({
           ...data,
           creditsAmount: currentCreditsAmount,
           currencyAmount: isNaN(value) ? 0 : value,
+          sellOrders,
         },
         activeStep,
       );

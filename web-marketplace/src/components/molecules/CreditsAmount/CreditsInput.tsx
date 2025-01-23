@@ -9,17 +9,12 @@ import { LeafIcon } from 'web-components/src/components/icons/LeafIcon';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
 import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
+import { resetCurrencyAndCredits } from 'pages/BuyCredits/BuyCredits.utils';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
-import {
-  CREDITS_AMOUNT,
-  CURRENCY_AMOUNT,
-  SELL_ORDERS,
-} from './CreditsAmount.constants';
+import { CREDITS_AMOUNT } from './CreditsAmount.constants';
 import { CreditsInputProps } from './CreditsAmount.types';
-import { getCurrencyAmount } from './CreditsAmount.utils';
 
 export const CreditsInput = ({
   creditsAvailable,
@@ -70,27 +65,16 @@ export const CreditsInput = ({
 
   const handleOnBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>): void => {
-      // If the value is empty or 0, set it to 1 and update
-      // form state and multiStep data.
+      // If the value is empty or 0 reset the currency and credit fields.
       const value = event.target.value;
       if (value === '' || parseFloat(value) === 0) {
-        const { currencyAmount, sellOrders } = getCurrencyAmount({
-          currentCreditsAmount: 1,
-          card: paymentOption === PAYMENT_OPTIONS.CARD,
+        resetCurrencyAndCredits(
+          paymentOption,
           orderedSellOrders,
           creditTypePrecision,
-        });
-        const NEW_CREDITS_AMOUNT = 1;
-        setValue(CREDITS_AMOUNT, NEW_CREDITS_AMOUNT, { shouldValidate: true });
-        setValue(CURRENCY_AMOUNT, currencyAmount, { shouldValidate: true });
-        setValue(SELL_ORDERS, sellOrders);
-        updateMultiStepData(
-          {
-            ...data,
-            creditsAmount: NEW_CREDITS_AMOUNT,
-            currencyAmount,
-            sellOrders,
-          },
+          setValue,
+          updateMultiStepData,
+          data,
           activeStep,
         );
       }

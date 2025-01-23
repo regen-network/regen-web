@@ -11,22 +11,18 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
+import { resetCurrencyAndCredits } from 'pages/BuyCredits/BuyCredits.utils';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import {
-  CREDITS_AMOUNT,
   CURRENCY,
   CURRENCY_AMOUNT,
-  SELL_ORDERS,
+  MIN_USD_CURRENCY_AMOUNT,
 } from './CreditsAmount.constants';
 import { CurrencyInputProps } from './CreditsAmount.types';
-import {
-  formatCurrencyAmount,
-  getCurrencyAmount,
-  shouldFormatValue,
-} from './CreditsAmount.utils';
+import { formatCurrencyAmount, shouldFormatValue } from './CreditsAmount.utils';
 
 const CustomSelect = lazy(
   () =>
@@ -107,26 +103,15 @@ export const CurrencyInput = ({
   const handleOnBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>): void => {
       const value = event.target.value;
-      // If the value is empty or 0, set it to 1 and update the
-      // form state and multiStep data.
+      // If the value is empty or 0 reset the currency and credit fields.
       if (value === '' || parseFloat(value) === 0) {
-        const { currencyAmount, sellOrders } = getCurrencyAmount({
-          currentCreditsAmount: 1,
-          card: paymentOption === PAYMENT_OPTIONS.CARD,
+        resetCurrencyAndCredits(
+          paymentOption,
           orderedSellOrders,
           creditTypePrecision,
-        });
-        const NEW_CREDITS_AMOUNT = 1;
-        setValue(CURRENCY_AMOUNT, currencyAmount, { shouldValidate: true });
-        setValue(CREDITS_AMOUNT, NEW_CREDITS_AMOUNT, { shouldValidate: true });
-        setValue(SELL_ORDERS, sellOrders);
-        updateMultiStepData(
-          {
-            ...data,
-            creditsAmount: NEW_CREDITS_AMOUNT,
-            currencyAmount,
-            sellOrders,
-          },
+          setValue,
+          updateMultiStepData,
+          data,
           activeStep,
         );
       }
@@ -192,7 +177,7 @@ export const CurrencyInput = ({
         } w-full sm:w-auto flex justify-start relative sm:h-60 rounded-sm items-center`}
         customInputProps={{
           max: maxCurrencyAmount,
-          min: card ? 0.5 : 0,
+          min: card ? MIN_USD_CURRENCY_AMOUNT : 0,
           step: card ? '0.01' : '0.000001',
           'aria-label': _(msg`Currency Input`),
         }}

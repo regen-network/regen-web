@@ -91,7 +91,9 @@ export const ProfileEdit = () => {
             justifyContent="space-between"
             className="my-10 md:mb-25 w-full h-50"
           >
-            <Title variant="h3">{startCase(section)}</Title>
+            <Title variant="h1" className="text-[32px] leading-[1.4]">
+              {startCase(section)}
+            </Title>
             {section === 'profile' && (
               <ViewProfileButton
                 setIsWarningModalOpen={setIsWarningModalOpen}

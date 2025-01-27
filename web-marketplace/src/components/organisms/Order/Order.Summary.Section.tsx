@@ -18,7 +18,7 @@ export const OrderSummarySection = ({
       <OrderDetailsIcon icon={icon} />
       <div className="w-full">
         <Title
-          variant="h5"
+          variant="h3"
           className="text-xs text-grey-600 uppercase font-extrabold mb-15 tracking-[1px]"
         >
           {title}

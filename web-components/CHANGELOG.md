@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.5](https://github.com/regen-network/regen-web/compare/v2.7.3...v2.7.5) (2025-01-27)
+
+### Bug Fixes
+
+- remove canvas as a dev dependency ([e9201ea](https://github.com/regen-network/regen-web/commit/e9201eaabb56dd5192286f9daf48addec70332a6))
+
 # [2.7.0](https://github.com/regen-network/regen-web/compare/v2.6.5...v2.7.0) (2024-09-11)
 
 ### Bug Fixes

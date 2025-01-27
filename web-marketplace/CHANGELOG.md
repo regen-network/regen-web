@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.5](https://github.com/regen-network/regen-web/compare/v2.7.3...v2.7.5) (2025-01-27)
+
+### Bug Fixes
+
+- remove walletLoaded in Terrasos.Providers ([b0afb16](https://github.com/regen-network/regen-web/commit/b0afb16e70c6fd0bd1de94373e569c7b8de03ea8))
+- remove walletLoaded prop from LedgerProvider ([9f0eebf](https://github.com/regen-network/regen-web/commit/9f0eebfae93ee4cc114ca98038d56e87fd04f28f))
+- remove walletLoaded prop from LedgerProvider and simplify API fetching logic ([7ef4f3f](https://github.com/regen-network/regen-web/commit/7ef4f3fe8e1e9babec19b49816137235c7ae5ece))
+- update API when wallet is loaded ([ebc2096](https://github.com/regen-network/regen-web/commit/ebc209645bfd393e0ae56592b9650610d167c29d))
+
 ## [2.7.4](https://github.com/regen-network/regen-web/compare/v2.7.3...v2.7.4) (2024-10-25)
 
 **Note:** Version bump only for package web-marketplace

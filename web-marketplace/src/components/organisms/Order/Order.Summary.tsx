@@ -1,7 +1,5 @@
-import { useMemo } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
 
 import { BlockchainIcon } from 'web-components/src/components/icons/BlockchainIcon';
@@ -13,7 +11,6 @@ import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionM
 import { Link } from 'components/atoms';
 import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
-import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 
 import { OrderSummarySection } from './Order.Summary.Section';
 import { OrderSummaryRow } from './Order.SummaryRow';
@@ -29,7 +26,12 @@ interface OrderSummaryProps {
   blockchainDetails: BlockchainDetailsData;
   creditsData: CreditsData;
   paymentInfo: PaymentInfoData;
-  allowedDenoms?: AllowedDenom[];
+  displayTotalPrice: number;
+  displayDenom: string;
+  currency: {
+    askDenom: string;
+    askBaseDenom: string;
+  };
 }
 
 export const OrderSummary = ({
@@ -37,32 +39,16 @@ export const OrderSummary = ({
   retirementInfo,
   blockchainDetails,
   paymentInfo,
-  allowedDenoms,
+  displayTotalPrice,
+  displayDenom,
+  currency,
 }: OrderSummaryProps) => {
   const { _ } = useLingui();
   const { purchaseDate, blockchainRecord } = blockchainDetails;
   const { askDenom, askBaseDenom, cardLast4, cardBrand } = paymentInfo;
   const isCardPayment = cardLast4 && askDenom === USD_DENOM;
   const { reason, location, retiredCredits } = retirementInfo;
-  const { credits, totalPrice } = creditsData;
-
-  const denom = allowedDenoms?.find(denom => denom.bankDenom === askDenom);
-  const displayTotalPrice = denom
-    ? +totalPrice * Math.pow(10, -denom.exponent)
-    : +totalPrice;
-  const currency = {
-    askDenom,
-    askBaseDenom,
-  };
-  const displayDenom = useMemo(
-    () =>
-      findDisplayDenom({
-        allowedDenoms,
-        bankDenom: askDenom,
-        baseDenom: askBaseDenom,
-      }),
-    [allowedDenoms, askBaseDenom, askDenom],
-  );
+  const { credits } = creditsData;
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 gap-30">
@@ -173,11 +159,7 @@ export const OrderSummary = ({
             value={
               <DenomIconWithCurrency
                 baseDenom={askBaseDenom}
-                displayDenom={findDisplayDenom({
-                  allowedDenoms,
-                  bankDenom: askDenom,
-                  baseDenom: askBaseDenom,
-                })}
+                displayDenom={displayDenom}
               />
             }
           />

@@ -149,7 +149,7 @@ msgstr "+ añadir"
 msgid "+ add another issuer'"
 msgstr "+ añadir otro emisor'"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:300
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:301
 msgid "+ add certification"
 msgstr "+ añadir certificación"
 
@@ -219,13 +219,17 @@ msgstr "<0>Socios:</0> pueden ofrecer apoyo financiero crucial o supervisar el p
 #~ msgid "<0>Partners</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
 #~ msgstr "Los <0>socios</0> pueden ofrecer un apoyo financiero crucial o supervisar el progreso y garantizar que se cumplan los estándares ambientales."
 
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:49
+msgid "<0>Project admin:</0> The entity responsible for technical management, content editing, and managing participant access for contributions."
+msgstr "<0>Administrador del proyecto:</0> La entidad responsable de la gestión técnica, la edición de contenidos y la gestión del acceso de los participantes para las contribuciones."
+
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:47
 #~ msgid "<0>Project admin:</0> the entity who can update a given project on the blockchain."
 #~ msgstr "<0>Administrador del proyecto:</0> la entidad que puede actualizar un proyecto determinado en la cadena de bloques."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:49
-msgid "<0>Project admin:</0> The entity who can update a given project on the blockchain."
-msgstr "<0>Administrador del proyecto:</0> La entidad que puede actualizar un proyecto determinado en la cadena de bloques."
+#~ msgid "<0>Project admin:</0> The entity who can update a given project on the blockchain."
+#~ msgstr "<0>Administrador del proyecto:</0> La entidad que puede actualizar un proyecto determinado en la cadena de bloques."
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:59
 msgid "<0>Project developer:</0> The entity in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
@@ -401,7 +405,7 @@ msgstr "URL de certificación adicional"
 msgid "additional certifications"
 msgstr "certificaciones adicionales"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:256
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:257
 msgid "Additional Certifications"
 msgstr "Certificaciones adicionales"
 
@@ -628,7 +632,7 @@ msgstr "Adjuntar una firma"
 msgid "Attach arbitrary JSON-LD metadata to the credit batch below."
 msgstr "Adjunte metadatos JSON-LD arbitrarios al lote de créditos a continuación."
 
-#: src/components/molecules/MetadataJSONField.tsx:56
+#: src/components/molecules/MetadataJSONField.tsx:35
 msgid "Attach arbitrary JSON-LD metadata to the credit batch below. <0>Learn more»</0>"
 msgstr "Adjunte metadatos JSON-LD arbitrarios al lote de créditos a continuación. <0>Más información»</0>"
 
@@ -1873,8 +1877,8 @@ msgstr "¡Correo electrónico reenviado! Por favor, revise su bandeja de entrada
 msgid "end date"
 msgstr "Fecha de finalización"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:209
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:210
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:211
 msgid "End Date"
 msgstr "Fecha de finalización"
 
@@ -2525,7 +2529,7 @@ msgstr "mensajes"
 msgid "metadata"
 msgstr "metadatos"
 
-#: src/components/molecules/MetadataJSONField.tsx:53
+#: src/components/molecules/MetadataJSONField.tsx:32
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:105
 #: src/components/organisms/CreditClassForms/CreditClassReview.tsx:40
 #: src/pages/ProjectMetadata/ProjectMetadata.tsx:72
@@ -3195,7 +3199,7 @@ msgstr "proyecto"
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:132
 #: src/components/organisms/EcocreditsTable.tsx:82
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:18
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:183
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:184
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:79
 #: src/pages/Certificate/Certificate.constants.ts:14
 #: src/pages/Certificate/Certificate.utils.ts:37
@@ -3972,8 +3976,8 @@ msgstr "Fecha de inicio y de fin"
 msgid "start date"
 msgstr "Fecha de inicio"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:199
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:200
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:201
 msgid "Start Date"
 msgstr "Fecha de inicio"
 
@@ -4173,7 +4177,7 @@ msgstr "El creador de esta cesta ha decidido que todos los créditos deben ser r
 msgid "The current address is already linked to your account.\\nPlease first switch wallet addresses in the Keplr app to be able to add another address to your account."
 msgstr "La dirección actual ya está vinculada a su cuenta. Primero cambie las direcciones de billetera en la aplicación Keplr para poder agregar otra dirección a su cuenta."
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:220
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:221
 msgid "The dates should correspond to the batch monitoring period or vintage."
 msgstr "Las fechas deben corresponder al período de seguimiento del lote o añada."
 
@@ -4615,7 +4619,7 @@ msgstr "tipo de proyecto vcs"
 msgid "vcs retirement serial number"
 msgstr "Número de serie de retiro de VCS"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:228
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:229
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:86
 msgid "VCS retirement serial number"
 msgstr "Número de serie de retiro de VCS"

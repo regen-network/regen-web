@@ -150,7 +150,7 @@ msgstr ""
 msgid "+ add another issuer'"
 msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:300
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:301
 msgid "+ add certification"
 msgstr ""
 
@@ -220,13 +220,17 @@ msgstr ""
 #~ msgid "<0>Partners</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
 #~ msgstr ""
 
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:49
+msgid "<0>Project admin:</0> The entity responsible for technical management, content editing, and managing participant access for contributions."
+msgstr ""
+
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:50
 #~ msgid "<0>Project admin:</0> the entity who can update a given project on the blockchain."
 #~ msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:49
-msgid "<0>Project admin:</0> The entity who can update a given project on the blockchain."
-msgstr ""
+#~ msgid "<0>Project admin:</0> The entity who can update a given project on the blockchain."
+#~ msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:59
 msgid "<0>Project developer:</0> The entity in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
@@ -406,7 +410,7 @@ msgstr ""
 msgid "additional certifications"
 msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:256
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:257
 msgid "Additional Certifications"
 msgstr ""
 
@@ -633,7 +637,7 @@ msgstr ""
 msgid "Attach arbitrary JSON-LD metadata to the credit batch below."
 msgstr ""
 
-#: src/components/molecules/MetadataJSONField.tsx:56
+#: src/components/molecules/MetadataJSONField.tsx:35
 msgid "Attach arbitrary JSON-LD metadata to the credit batch below. <0>Learn more»</0>"
 msgstr ""
 
@@ -1874,8 +1878,8 @@ msgstr ""
 msgid "end date"
 msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:209
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:210
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:211
 msgid "End Date"
 msgstr ""
 
@@ -2522,7 +2526,7 @@ msgstr ""
 msgid "metadata"
 msgstr ""
 
-#: src/components/molecules/MetadataJSONField.tsx:53
+#: src/components/molecules/MetadataJSONField.tsx:32
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:105
 #: src/components/organisms/CreditClassForms/CreditClassReview.tsx:40
 #: src/pages/ProjectMetadata/ProjectMetadata.tsx:72
@@ -3188,7 +3192,7 @@ msgstr ""
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:132
 #: src/components/organisms/EcocreditsTable.tsx:82
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:18
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:183
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:184
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:79
 #: src/pages/Certificate/Certificate.constants.ts:14
 #: src/pages/Certificate/Certificate.utils.ts:37
@@ -3965,8 +3969,8 @@ msgstr ""
 msgid "start date"
 msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:199
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:200
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:201
 msgid "Start Date"
 msgstr ""
 
@@ -4163,7 +4167,7 @@ msgstr ""
 #~ msgid "The Custodian is the project landowner and has historically managed the territory. It is now part of the project stakeholders and receives benefits from project success."
 #~ msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:220
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:221
 msgid "The dates should correspond to the batch monitoring period or vintage."
 msgstr ""
 
@@ -4605,7 +4609,7 @@ msgstr ""
 msgid "vcs retirement serial number"
 msgstr ""
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:228
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:229
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:86
 msgid "VCS retirement serial number"
 msgstr ""

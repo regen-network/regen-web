@@ -43,7 +43,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
 
   const [cryptoReceiptModalState, setCryptoReceiptModalState] =
     useState<OrderCryptoReceiptModalStateType>({
-      open: true,
+      open: false,
       type: 'retired',
     });
 

@@ -137,9 +137,9 @@ export const EcocreditsByAccount = (): JSX.Element => {
               infos={{
                 addressLink: {
                   href: address
-                    ? getAccountUrl(accountAddressOrId, true)
+                    ? getAccountUrl(address, true)
                     : `/profiles/${accountAddressOrId}/portfolio`,
-                  text: address ? truncate(accountAddressOrId) : '',
+                  text: address ? truncate(address) : '',
                 },
                 description: account?.description?.trimEnd() ?? '',
                 socialsLinks,

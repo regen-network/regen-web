@@ -7888,7 +7888,7 @@ export type ProjectFieldsFragment = (
   & Pick<Project, 'id' | 'adminAccountId' | 'onChainId' | 'metadata' | 'approved' | 'published' | 'slug'>
   & { accountByAdminAccountId?: Maybe<(
     { __typename?: 'Account' }
-    & Pick<Account, 'addr'>
+    & AccountFieldsFragment
   )>, creditClassByCreditClassId?: Maybe<(
     { __typename?: 'CreditClass' }
     & Pick<CreditClass, 'onChainId'>
@@ -8073,7 +8073,7 @@ export const ProjectFieldsFragmentDoc = gql`
   id
   adminAccountId
   accountByAdminAccountId {
-    addr
+    ...accountFields
   }
   onChainId
   metadata

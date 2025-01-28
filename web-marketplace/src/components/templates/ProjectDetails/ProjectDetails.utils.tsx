@@ -1,4 +1,5 @@
 import { MouseEvent } from 'react';
+import { i18n } from '@lingui/core';
 import { MapiResponse } from '@mapbox/mapbox-sdk/lib/classes/mapi-response';
 import { GeocodeResponse } from '@mapbox/mapbox-sdk/services/geocoding';
 import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
@@ -35,9 +36,11 @@ import {
 import { getSanityImgSrc } from 'lib/imgSrc';
 
 import {
+  DEFAULT_NAME,
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,
 } from 'pages/ProfileEdit/ProfileEdit.constants';
+import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 import {
@@ -199,12 +202,12 @@ export function getAccount(
   }
 
   return {
-    name: account.name,
+    name: account.name || i18n._(DEFAULT_NAME),
     description: account.description,
     type: account.type,
     image: image,
     address: account.addr || '',
-    link: account?.websiteLink,
+    link: account?.websiteLink || `/profiles/${account.id}`,
   };
 }
 
@@ -295,3 +298,7 @@ export const formatTimelineDates = (item: PrefinanceTimelineItem) =>
   `${formatDate(item.date, 'MMM YYYY')}${
     item.endDate ? ` - ${formatDate(item.endDate, 'MMM YYYY')}` : ''
   }`;
+
+export const getAccountInfo = (account?: AccountFieldsFragment | null) => {
+  return { account, defaultAvatar: getDefaultAvatar(account) };
+};

@@ -1,6 +1,5 @@
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { Grid } from '@mui/material';
 
 import Section from 'web-components/src/components/section';
 import { Title } from 'web-components/src/components/typography';
@@ -48,8 +47,8 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
       title: _(msg`admin`),
       tooltip: (
         <Trans>
-          <b>Project admin:</b> The entity who can update a given project on the
-          blockchain.
+          <b>Project admin:</b> The entity responsible for technical management,
+          content editing, and managing participant access for contributions.
         </Trans>
       ),
     },

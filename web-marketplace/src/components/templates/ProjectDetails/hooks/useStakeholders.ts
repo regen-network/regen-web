@@ -18,10 +18,13 @@ import {
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
-import { useAccountInfo } from 'pages/ProfileEdit/hooks/useAccountInfo';
 import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 
-import { getAccount, getDisplayAccount } from '../ProjectDetails.utils';
+import {
+  getAccount,
+  getAccountInfo,
+  getDisplayAccount,
+} from '../ProjectDetails.utils';
 
 type Params = {
   projectMetadata?: AnchoredProjectMetadataBaseLD;
@@ -67,6 +70,8 @@ export const useStakeholders = ({
     offChainProject?.creditClassByCreditClassId?.accountByRegistryId,
   );
 
+  const offChainAdmin = getAccount(offChainProject?.accountByAdminAccountId);
+
   const adminAddr = onChainProject?.admin;
   const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
   const { data: accountByAddr } = useQuery(
@@ -77,8 +82,8 @@ export const useStakeholders = ({
       languageCode: selectedLanguage,
     }),
   );
-  const { account } = useAccountInfo({ accountByAddr });
-  const admin = getDisplayAccountOrAddress(adminAddr, account);
+  const { account } = getAccountInfo(accountByAddr?.accountByAddr);
+  const admin = getDisplayAccountOrAddress(adminAddr, account) || offChainAdmin;
 
   const partners = offChainProject?.projectPartnersByProjectId?.nodes?.map(
     partner => getAccount(partner?.accountByAccountId),

@@ -1,9 +1,18 @@
 import { useEffect, useMemo } from 'react';
-import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import {
+  createSearchParams,
+  generatePath,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import cn from 'classnames';
+import { url } from 'inspector';
 import { useAtom, useSetAtom } from 'jotai';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
@@ -154,12 +163,19 @@ const Projects = (): JSX.Element => {
   });
 
   const { resetFilters, showResetButton } = useResetFilters();
+  const [searchParams] = useSearchParams();
 
   const navigate = useNavigate();
   useEffect(() => {
     // As soon as a filter changes, we navigate back to page 1 if on all projects page
     if (routePage && Number(routePage) > 1) {
-      navigate('/projects/1');
+      navigate(
+        {
+          pathname: '/projects/1',
+          search: searchParams.toString(),
+        },
+        { replace: true },
+      );
     }
     // routePage is not part of the dep array because we don't want this triggered on every page change
     // eslint-disable-next-line react-hooks/exhaustive-deps

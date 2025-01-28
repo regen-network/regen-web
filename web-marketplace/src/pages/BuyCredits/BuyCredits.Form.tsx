@@ -17,6 +17,7 @@ import {
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { apiServerUrl } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
@@ -283,15 +284,31 @@ export const BuyCreditsForm = ({
           creditsToBuy && creditsToBuy <= creditsInRequestedSellOrders;
 
         if (sellCanProceed) {
-          const { retirementReason, country, stateProvince, postalCode } =
-            values;
+          const {
+            retirementReason,
+            country,
+            stateProvince,
+            postalCode,
+            subscribeNewsletter,
+            // followProject,
+          } = values;
           const {
             sellOrders: selectedSellOrders,
             savePaymentMethod,
             createAccount: createActiveAccount,
-            // subscribeNewsletter, TODO
-            // followProject,
+            email,
           } = data;
+
+          if (email && subscribeNewsletter) {
+            await fetch(`${apiServerUrl}/website/v1/mailerlite`, {
+              method: 'POST',
+              headers: new Headers({
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+              }),
+              body: JSON.stringify({ email }),
+            });
+          }
 
           if (selectedSellOrders && creditsAmount)
             purchase({
@@ -485,6 +502,7 @@ export const BuyCreditsForm = ({
             )}
             {activeStep === 2 && (
               <AgreePurchaseForm
+                email={data?.email}
                 retiring={retiring}
                 onSubmit={agreePurchaseFormSubmit}
                 goToChooseCredits={() => handleActiveStep(0)}

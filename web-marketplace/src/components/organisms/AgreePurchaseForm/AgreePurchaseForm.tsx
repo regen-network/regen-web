@@ -30,6 +30,7 @@ export type AgreePurchaseFormProps = {
   country?: string;
   stripe?: Stripe | null;
   elements?: StripeElements | null;
+  email?: string | null;
 } & TradableProps;
 
 export const AgreePurchaseForm = ({
@@ -40,6 +41,7 @@ export const AgreePurchaseForm = ({
   elements,
   goToChooseCredits,
   imgSrc,
+  email,
 }: AgreePurchaseFormProps) => {
   const { _ } = useLingui();
   const { handleBack } = useMultiStep();
@@ -90,29 +92,35 @@ export const AgreePurchaseForm = ({
       )}
 
       <div className="flex flex-col gap-20 py-20 px-20 sm:pl-40 sm:pr-0">
-        <CheckboxLabel
-          checked={followProject}
-          optional
-          label={
-            <Body className="text-grey-700" size="md" as="span">
-              <Trans>Follow this project get project update to my inbox</Trans>
-            </Body>
-          }
-          {...form.register('followProject')}
-        />
-        <CheckboxLabel
-          checked={subscribeNewsletter}
-          optional
-          label={
-            <Body className="text-grey-700" size="md" as="span">
-              <Trans>
-                Subscribe to Regen Network newsletter, which includes product
-                updates and new and exciting projects
-              </Trans>
-            </Body>
-          }
-          {...form.register('subscribeNewsletter')}
-        />
+        {email && (
+          <CheckboxLabel
+            checked={followProject}
+            optional
+            label={
+              <Body className="text-grey-700" size="md" as="span">
+                <Trans>
+                  Follow this project get project update to my inbox
+                </Trans>
+              </Body>
+            }
+            {...form.register('followProject')}
+          />
+        )}
+        {email && (
+          <CheckboxLabel
+            checked={subscribeNewsletter}
+            optional
+            label={
+              <Body className="text-grey-700" size="md" as="span">
+                <Trans>
+                  Subscribe to Regen Network newsletter, which includes product
+                  updates and new and exciting projects
+                </Trans>
+              </Body>
+            }
+            {...form.register('subscribeNewsletter')}
+          />
+        )}
         <AgreeErpaCheckbox
           checked={agreeErpa}
           labelSize="md"

@@ -7,6 +7,7 @@ import { Item } from 'web-components/src/components/modal/TxModal';
 import { TxSuccessfulModalProps } from 'web-components/src/components/modal/TxSuccessfulModal';
 
 import { AccountSwitchModalProps } from 'components/organisms/AccountSwitchModal/AccountSwitchModal';
+import { ChooseHowToPurchaseModalProps } from 'components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal';
 
 export const errorModalAtom = atomWithImmer({
   title: '',
@@ -56,3 +57,8 @@ export const accountSwitchModalAtom = atomWithImmer({
   open: false,
   prevAddr: '',
 } as Partial<AccountSwitchModalProps>);
+
+export const chooseHowToPurchaseModalAtom = atomWithImmer({
+  open: false,
+  projectId: '',
+} as Partial<ChooseHowToPurchaseModalProps>);

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAtom, useSetAtom } from 'jotai';
 
 import {
-  connectWalletModalAtom,
+  chooseHowToPurchaseModalAtom,
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useWallet } from 'lib/wallet/wallet';
@@ -19,8 +19,9 @@ type OnBuyButtonClickParams = {
 export const useOnBuyButtonClick = () => {
   const navigate = useNavigate();
 
-  const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
+  const setChooseHowToPurchaseModal = useSetAtom(chooseHowToPurchaseModalAtom);
+
   const [buyFromProjectId, setBuyFromProjectIdAtom] =
     useAtom(buyFromProjectIdAtom);
   const { activeWalletAddr, isConnected } = useWallet();
@@ -40,8 +41,10 @@ export const useOnBuyButtonClick = () => {
       } else {
         if (!activeWalletAddr) {
           // no connected wallet address
-          setBuyFromProjectIdAtom(projectId);
-          setConnectWalletModal(atom => void (atom.open = true));
+          setChooseHowToPurchaseModal(atom => {
+            atom.open = true;
+            atom.projectId = projectId;
+          });
         } else {
           if (isConnected) {
             navigate(`/project/${projectId}/buy`);
@@ -58,7 +61,7 @@ export const useOnBuyButtonClick = () => {
       isConnected,
       navigate,
       setBuyFromProjectIdAtom,
-      setConnectWalletModal,
+      setChooseHowToPurchaseModal,
       setSwitchWalletModalAtom,
     ],
   );

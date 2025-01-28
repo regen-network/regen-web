@@ -21,6 +21,7 @@ import { apiServerUrl } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
+import { getMailerliteStatusQuery } from 'lib/queries/react-query/registry-server/getMailerliteStatusQuery/getMailerliteStatusQuery';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -168,6 +169,12 @@ export const BuyCreditsForm = ({
 
   const { data: paymentMethodData } = useQuery(
     getPaymentMethodsQuery({
+      enabled: !!activeAccount,
+    }),
+  );
+
+  const { data: mailerliteStatusData } = useQuery(
+    getMailerliteStatusQuery({
       enabled: !!activeAccount,
     }),
   );
@@ -508,6 +515,7 @@ export const BuyCreditsForm = ({
                 goToChooseCredits={() => handleActiveStep(0)}
                 imgSrc="/svg/info-with-hand.svg"
                 country={cardDetails?.country || 'US'}
+                isNewsletterSubscribed={mailerliteStatusData?.subscribed}
               />
             )}
           </>

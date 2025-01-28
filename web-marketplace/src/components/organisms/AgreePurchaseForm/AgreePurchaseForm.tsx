@@ -31,6 +31,7 @@ export type AgreePurchaseFormProps = {
   stripe?: Stripe | null;
   elements?: StripeElements | null;
   email?: string | null;
+  isNewsletterSubscribed?: boolean;
 } & TradableProps;
 
 export const AgreePurchaseForm = ({
@@ -42,6 +43,7 @@ export const AgreePurchaseForm = ({
   goToChooseCredits,
   imgSrc,
   email,
+  isNewsletterSubscribed,
 }: AgreePurchaseFormProps) => {
   const { _ } = useLingui();
   const { handleBack } = useMultiStep();
@@ -106,7 +108,7 @@ export const AgreePurchaseForm = ({
             {...form.register('followProject')}
           />
         )}
-        {email && (
+        {email && !isNewsletterSubscribed && (
           <CheckboxLabel
             checked={subscribeNewsletter}
             optional

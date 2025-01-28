@@ -23,7 +23,7 @@ msgstr ""
 msgid "- see less"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:93
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:91
 msgid "- See less"
 msgstr ""
 
@@ -75,10 +75,6 @@ msgstr ""
 msgid "{creditsAvailable, plural, one {Credit amount adjusted: Only {formattedCreditsAvailable} credit available in {displayDenom}} other {Credit amount adjusted: Only {formattedCreditsAvailable} credits available in {displayDenom}}}"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:175
-#~ msgid "{creditsAvailable, plural, one {Only {formattedCreditsAvailable} credit available with those paramaters, order quantity changed} other {Only {formattedCreditsAvailable} credits available with those paramaters, order quantity changed}}"
-#~ msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:233
 msgid "{from}–{displayedTo} of {count}"
 msgstr ""
@@ -125,10 +121,6 @@ msgstr ""
 msgid "{years, plural, one {{years} year project duration} other {{years} year project duration}}"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:111
-#~ msgid "{years, plural, one {year project duration} other {year project duration}}"
-#~ msgstr ""
-
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:105
 #: src/components/organisms/Order/Order.Summary.tsx:88
 msgid "# credits"
@@ -172,7 +164,7 @@ msgstr ""
 msgid "+ see more"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:92
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:90
 msgid "+ See more"
 msgstr ""
 
@@ -216,41 +208,17 @@ msgstr ""
 msgid "<0>Partners:</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:113
-#~ msgid "<0>Partners</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
-#~ msgstr ""
-
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:49
 msgid "<0>Project admin:</0> The entity responsible for technical management, content editing, and managing participant access for contributions."
 msgstr ""
-
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:50
-#~ msgid "<0>Project admin:</0> the entity who can update a given project on the blockchain."
-#~ msgstr ""
-
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:49
-#~ msgid "<0>Project admin:</0> The entity who can update a given project on the blockchain."
-#~ msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:59
 msgid "<0>Project developer:</0> The entity in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:60
-#~ msgid "<0>Project developer:</0> the entity that is in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
-#~ msgstr ""
-
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:70
 msgid "<0>Project operator:</0> The entity responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
 msgstr ""
-
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:81
-#~ msgid "<0>Verifier:</0> A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
-#~ msgstr ""
-
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:82
-#~ msgid "<0>Verifier:</0> The third party eneity responsible for providing a independent, impartial assessment of project plan and project reports (that is not the monitor)."
-#~ msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:81
 msgid "<0>Verifier:</0> The third party entity responsible for providing a independent, impartial assessment of project plan and project reports (that is not the monitor)."
@@ -289,21 +257,9 @@ msgstr ""
 msgid "A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:92
-#~ msgid "A monitor tracks and verifies the environmental impact and performance of the project to ensure compliance and transparency."
-#~ msgstr ""
-
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:87
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
 msgstr ""
-
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:71
-#~ msgid "A project operator is responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
-#~ msgstr ""
-
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:102
-#~ msgid "A project owner manages the area of the conservation project and the associated biodiversity units."
-#~ msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:48
 msgid "A taxon is extinct in the wild when it is known only to survive in cultivation, in captivity or as a naturalized population (or populations) well outside the past range."
@@ -440,10 +396,6 @@ msgstr ""
 msgid "Advanced settings"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:46
-#~ msgid "Agree & purchase"
-#~ msgstr ""
-
 #: src/pages/BatchDetails/BatchDetails.tsx:129
 msgid "All credits"
 msgstr ""
@@ -461,7 +413,7 @@ msgid "all profiles"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
-#: src/pages/Projects/Projects.tsx:108
+#: src/pages/Projects/Projects.tsx:116
 msgid "All projects"
 msgstr ""
 
@@ -717,10 +669,6 @@ msgstr ""
 msgid "batch denom:"
 msgstr ""
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:329
-#~ msgid "Batch denom:"
-#~ msgstr ""
-
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:86
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:155
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:169
@@ -867,10 +815,6 @@ msgstr ""
 msgid "Buy ecocredits"
 msgstr ""
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:201
-#~ msgid "Buy Ecocredits"
-#~ msgstr ""
-
 #: src/components/organisms/BasketDetailsActionsBar/BasketDetailsActionsBar.constants.ts:4
 msgid "buy NCT"
 msgstr ""
@@ -896,11 +840,11 @@ msgstr ""
 msgid "Buyer"
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:62
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:60
 msgid "Buying options"
 msgstr ""
 
-#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.tsx:52
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.tsx:56
 msgid "Buying with crypto requires a <0>Keplr wallet</0>."
 msgstr ""
 
@@ -1032,10 +976,6 @@ msgstr ""
 msgid "Choose a practice start date"
 msgstr ""
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:166
-#~ msgid "Choose a sell order"
-#~ msgstr ""
-
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:192
 msgid "Choose a specific location on the map"
 msgstr ""
@@ -1064,12 +1004,12 @@ msgstr ""
 msgid "Choose ecocredits batch"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:154
-msgid "Choose new credits"
-msgstr ""
-
 #: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.constants.ts:3
 msgid "Choose how to purchase credits"
+msgstr ""
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:154
+msgid "Choose new credits"
 msgstr ""
 
 #: src/components/molecules/ProjectSelect.tsx:25
@@ -1293,10 +1233,6 @@ msgstr ""
 #: src/pages/Post/hooks/useAttestEvents.ts:146
 msgid "Created by"
 msgstr ""
-
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:319
-#~ msgid "credit"
-#~ msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:147
 msgid "credit activity table"
@@ -2034,7 +1970,7 @@ msgid "Files can still be shared privately via secret link."
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.constants.ts:8
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:90
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:88
 msgid "Filters"
 msgstr ""
 
@@ -2250,10 +2186,6 @@ msgstr ""
 msgid "Input an email address to receive a receipt of your purchase.<0>Note: You will receive an email with instructions to link this email to your account, allowing for easier access going forward, if desired.</0>"
 msgstr ""
 
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:76
-#~ msgid "Input an email address to receive a receipt of your purchase.<0>Take note: we will email you a prompt to associate this email with your account for easier future access. This is entirely optional.</0>"
-#~ msgstr ""
-
 #: src/pages/BuyCredits/BuyCredits.constants.ts:8
 msgid "Insufficient balance"
 msgstr ""
@@ -2309,10 +2241,6 @@ msgstr ""
 
 #: src/components/organisms/LoginButton/LoginButton.config.ts:28
 msgid "Keplr Mobile"
-msgstr ""
-
-#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.tsx:78
-msgid "keplr wallet"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.ManagementActions.tsx:34
@@ -2642,10 +2570,6 @@ msgstr ""
 msgid "Must have recipients"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:73
-#~ msgid "my orders"
-#~ msgstr ""
-
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:46
 #: src/pages/Dashboard/Dashboard.constants.tsx:79
 msgid "My orders"
@@ -2664,10 +2588,6 @@ msgstr ""
 #: src/components/organisms/Documentation/Documentation.constants.ts:8
 msgid "Name of document"
 msgstr ""
-
-#: src/components/organisms/Order/Order.Summary.tsx:143
-#~ msgid "name on card"
-#~ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:214
 msgid "Natural ecosystem, unmanaged"
@@ -2887,10 +2807,6 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:100
-#~ msgid "owner"
-#~ msgstr ""
-
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:99
 msgid "Pacific"
 msgstr ""
@@ -2970,10 +2886,6 @@ msgstr ""
 #: src/lib/constants/shared.constants.tsx:158
 msgid "Please enter a location for the retirement of these credits. This prevents double counting of credits in different locations."
 msgstr ""
-
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:536
-#~ msgid "Please enter a location for the retirement of these credits. This prevents double counting of credits in different locations. These credits will auto-retire."
-#~ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:68
 msgid "Please enter a valid amount"
@@ -3070,7 +2982,7 @@ msgid "prefinance"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:54
-#: src/pages/Projects/Projects.tsx:118
+#: src/pages/Projects/Projects.tsx:126
 msgid "Prefinance projects"
 msgstr ""
 
@@ -3389,7 +3301,7 @@ msgstr ""
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr ""
 
-#: src/pages/Projects/Projects.tsx:292
+#: src/pages/Projects/Projects.tsx:300
 msgid "projects tabs"
 msgstr ""
 
@@ -3408,10 +3320,6 @@ msgstr ""
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:128
 msgid "purchase now"
 msgstr ""
-
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:416
-#~ msgid "Purchase options"
-#~ msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:48
 msgid "PURCHASE OPTIONS"
@@ -3556,7 +3464,7 @@ msgstr ""
 msgid "Resend email."
 msgstr ""
 
-#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:91
+#: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.tsx:89
 msgid "Reset"
 msgstr ""
 
@@ -3589,10 +3497,6 @@ msgstr ""
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:108
 msgid "Retirable"
 msgstr ""
-
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:185
-#~ msgid "RETIRABLE ONLY"
-#~ msgstr ""
 
 #: src/components/organisms/CreditRetireForm/CreditRetireForm.tsx:136
 #: src/components/organisms/Modals/CreditRetireModal/CreditRetireModal.constants.ts:3
@@ -4191,10 +4095,6 @@ msgstr ""
 msgid "The current address is already linked to your account.\\nPlease first switch wallet addresses in the Keplr app to be able to add another address to your account."
 msgstr ""
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:102
-#~ msgid "The Custodian is the project landowner and has historically managed the territory. It is now part of the project stakeholders and receives benefits from project success."
-#~ msgstr ""
-
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:221
 msgid "The dates should correspond to the batch monitoring period or vintage."
 msgstr ""
@@ -4241,10 +4141,6 @@ msgstr ""
 msgid "The retirement location can be where you live or your business operates."
 msgstr ""
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:477
-#~ msgid "The seller of these credits has chosen to only allow for immediate retiring of credits. These credits cannot be purchased as a tradable asset."
-#~ msgstr ""
-
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.constants.ts:4
 msgid "The structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr ""
@@ -4270,17 +4166,9 @@ msgstr ""
 msgid "These credits are currently sold out. More may become available in the future."
 msgstr ""
 
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:453
-#~ msgid "These credits will be a tradable asset. They can be retired later via Regen Marketplace."
-#~ msgstr ""
-
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:19
 msgid "These credits will be a tradeable asset. They can be retired later via Regen Marketplace."
 msgstr ""
-
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx:431
-#~ msgid "These credits will be retired upon purchase and will not be tradable. Retirement is permanent and non-reversible."
-#~ msgstr ""
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.constants.ts:12
 msgid "These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
@@ -4362,16 +4250,8 @@ msgid "This may take up to 15 seconds."
 msgstr ""
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
-#~ msgid "This name will appear on the retirement certificate unless you choose to retire anonymously in the next step."
-#~ msgstr ""
-
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
 msgid "This name will appear on the retirement certificate."
 msgstr ""
-
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
-#~ msgid "This name will appear on the retirement certificate. It is also your user profile name."
-#~ msgstr ""
 
 #: src/components/organisms/PostForm/PostForm.tsx:388
 msgid "This post and all of its files will be visible."
@@ -4474,10 +4354,6 @@ msgstr ""
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:101
 msgid "Tradable"
 msgstr ""
-
-#: src/components/organisms/BuyCreditsModal/BuyCreditsModal.utils.tsx:175
-#~ msgid "TRADABLE AND RETIRABLE"
-#~ msgstr ""
 
 #: src/components/organisms/Order/Order.Summary.tsx:115
 msgid "Tradable Credits"

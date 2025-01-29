@@ -65,6 +65,7 @@ const CreditClassCard = ({
       >
         {type && (
           <CardRibbon
+            className="max-w-[80%] sm:max-w-[200px]"
             icon={type.icon}
             label={type.name}
             labelSize="xs"
@@ -127,7 +128,11 @@ const CreditClassCard = ({
               <CreditClassCardItem
                 label={offsetGenerationMethodLabel}
                 items={generationMethods}
-                sx={{ maxWidth: { sm: 195 }, mr: 5, mb: { xs: 5, sm: 0 } }}
+                sx={{
+                  maxWidth: { sm: methodology ? 195 : undefined },
+                  mr: 5,
+                  mb: { xs: 5, sm: 0 },
+                }}
                 sxListContainer={{
                   flexDirection: 'column',
                   alignItems: 'flex-start',
@@ -139,7 +144,7 @@ const CreditClassCard = ({
               <CreditClassCardItem
                 label={methodologyLabel}
                 link={methodology}
-                sx={{ maxWidth: { sm: 195 } }}
+                sx={{ maxWidth: { sm: generationMethods ? 195 : undefined } }}
               />
             )}
           </Flex>

@@ -96,7 +96,7 @@ export default function Header({
               </MenuList>
               <Box className={styles.mobile}>
                 <MobileMenu
-                  linkComponent={linkComponent}getMuen
+                  linkComponent={linkComponent}
                   pathname={pathname}
                   menuItems={menuItems}
                   websiteExtras={websiteExtras}

@@ -408,6 +408,36 @@ module.exports = {
           },
         },
       },
+      keyframes: {
+        menuOpen: {
+          '0%': {
+            opacity: '0',
+            transform: 'scale(0.60) translateY(0px)',
+            transformOrigin: 'top right',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'scale(1) translateY(0px)',
+            transformOrigin: 'top right',
+          },
+        },
+        menuClose: {
+          '0%': {
+            opacity: '1',
+            transform: 'scale(1) translateY(20px)',
+            transformOrigin: 'top right',
+          },
+          '100%': {
+            opacity: '0',
+            transform: 'scale(0.60) translateY(0px)',
+            transformOrigin: 'top right',
+          },
+        },
+      },
+      animation: {
+        menuOpen: 'menuOpen 0.2s ease-out',
+        menuClose: 'menuClose 0.2s ease-out',
+      },
     },
   },
   plugins: [],

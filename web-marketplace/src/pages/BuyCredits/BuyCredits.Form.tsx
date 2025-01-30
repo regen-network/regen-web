@@ -21,7 +21,7 @@ import { apiServerUrl } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
-import { getMailerliteStatusQuery } from 'lib/queries/react-query/registry-server/getMailerliteStatusQuery/getMailerliteStatusQuery';
+import { getSubscribersStatusQuery } from 'lib/queries/react-query/registry-server/getSubscribersStatusQuery/getSubscribersStatusQuery';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -173,11 +173,11 @@ export const BuyCreditsForm = ({
     }),
   );
 
-  const { data: mailerliteStatusData } = useQuery(
-    getMailerliteStatusQuery({
+  const { data: subscribersStatusData } = useQuery(
+    getSubscribersStatusQuery({
       enabled: !!activeAccount,
     }),
-  );
+  );console.log('subscribersStatusData',subscribersStatusData)
 
   const stripeOptions = useMemo(
     () => ({
@@ -307,7 +307,7 @@ export const BuyCreditsForm = ({
           } = data;
 
           if (email && subscribeNewsletter) {
-            await fetch(`${apiServerUrl}/website/v1/mailerlite`, {
+            await fetch(`${apiServerUrl}/subscribers/v1/add`, {
               method: 'POST',
               headers: new Headers({
                 Accept: 'application/json',
@@ -515,7 +515,7 @@ export const BuyCreditsForm = ({
                 goToChooseCredits={() => handleActiveStep(0)}
                 imgSrc="/svg/info-with-hand.svg"
                 country={cardDetails?.country || 'US'}
-                isNewsletterSubscribed={mailerliteStatusData?.subscribed}
+                isNewsletterSubscribed={subscribersStatusData?.subscribed}
               />
             )}
           </>

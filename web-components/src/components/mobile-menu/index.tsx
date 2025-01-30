@@ -15,9 +15,7 @@ import { useMobileMenuStyles } from './MobileMenu.styles';
 
 type Props = {
   menuItems?: Item[];
-  isRegistry?: boolean;
   pathname: string;
-  extras?: JSX.Element;
   linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
   websiteExtras?: JSX.Element;
   isUserLoggedIn?: boolean;
@@ -26,8 +24,6 @@ type Props = {
 const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
   menuItems,
   pathname,
-  isRegistry,
-  extras,
   websiteExtras,
   linkComponent: Link,
   isUserLoggedIn,
@@ -51,7 +47,6 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
   return (
     <div className={styles.root}>
       <Center>
-        {isRegistry && extras}
         <HamburgerIcon
           className={cx(styles.hamburger, styles.icon)}
           onClick={handleToggle}

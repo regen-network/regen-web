@@ -76,7 +76,6 @@ import {
   getWarningModalContent,
 } from './BuyCredits.utils';
 import { usePurchase } from './hooks/usePurchase';
-import { postData } from 'utils/fetch/postData';
 
 type Props = {
   retiring: boolean;

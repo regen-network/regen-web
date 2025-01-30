@@ -49,6 +49,7 @@ export const postData = async ({
   };
 
   const response = await postRequest(token);
+
   if (response.error === CSRF_ERROR && retryCsrfRequest) {
     retryCsrfRequest(postRequest);
   }

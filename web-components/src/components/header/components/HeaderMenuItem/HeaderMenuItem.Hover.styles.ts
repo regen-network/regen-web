@@ -6,7 +6,7 @@ export const useMenuHoverStyles = makeStyles()((theme: Theme) => ({
     '& li.MuiMenuItem-root:hover': {
       backgroundColor: 'transparent',
     },
-    '& li > a': {
+    '& ul > li > a': {
       fontFamily: 'lato',
       color: '#000',
       textDecoration: 'none',

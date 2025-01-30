@@ -2,8 +2,12 @@ import { Title } from 'web-components/src/components/typography';
 
 import { ReceiptSectionData as ReceiptSectionProps } from './OrderCryptoReceiptModal.types';
 
-export const ReceiptSection = ({ title, body }: ReceiptSectionProps) => (
-  <section className="mb-20">
+export const ReceiptSection = ({
+  title,
+  body,
+  classNames,
+}: ReceiptSectionProps) => (
+  <section className={classNames}>
     <Title
       variant="h3"
       className={

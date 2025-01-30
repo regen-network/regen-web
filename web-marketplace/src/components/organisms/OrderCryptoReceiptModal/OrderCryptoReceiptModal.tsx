@@ -2,9 +2,9 @@ import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
 
-// import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import Card from 'web-components/src/components/cards/Card';
-// import PrintIcon from 'web-components/src/components/icons/PrintIcon';
+import PrintIcon from 'web-components/src/components/icons/PrintIcon';
 import Modal from 'web-components/src/components/modal';
 import { Title } from 'web-components/src/components/typography';
 
@@ -14,7 +14,7 @@ import { Link } from 'components/atoms/Link';
 import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
 
 import {
-  // ORDER_RECEIPT_BUTTON_TEXT,
+  ORDER_RECEIPT_BUTTON_TEXT,
   ORDER_RECEIPT_MODAL_CREDITS_RETIRED,
   ORDER_RECEIPT_MODAL_CREDITS_TRADABLE,
   ORDER_RECEIPT_MODAL_DATE,
@@ -25,12 +25,11 @@ import {
 import { ReceiptSection } from './OrderCryptoReceiptModal.Section';
 import {
   OrderCryptoReceiptModalContent,
-  OrderCryptoReceiptModalStateType,
   ReceiptSectionData,
 } from './OrderCryptoReceiptModal.types';
 
 interface OrderCryptoReceiptModalProps extends OrderCryptoReceiptModalContent {
-  onClose: UseStateSetter<OrderCryptoReceiptModalStateType>;
+  onClose: UseStateSetter<boolean>;
   open: boolean;
 }
 
@@ -40,8 +39,15 @@ export const OrderCryptoReceiptModal = ({
   onClose,
 }: OrderCryptoReceiptModalProps) => {
   const { _ } = useLingui();
-  const { price, project, currency, displayDenom, amount, date, txType } =
-    modalContent;
+  const {
+    price,
+    project,
+    currency,
+    displayDenom,
+    amount,
+    date,
+    retiredCredits,
+  } = modalContent;
 
   const receiptSections: ReceiptSectionData[] = [
     {
@@ -72,10 +78,9 @@ export const OrderCryptoReceiptModal = ({
       ),
     },
     {
-      title:
-        txType === 'retired'
-          ? _(ORDER_RECEIPT_MODAL_CREDITS_RETIRED)
-          : _(ORDER_RECEIPT_MODAL_CREDITS_TRADABLE),
+      title: retiredCredits
+        ? _(ORDER_RECEIPT_MODAL_CREDITS_RETIRED)
+        : _(ORDER_RECEIPT_MODAL_CREDITS_TRADABLE),
       body: <p>{amount}</p>,
     },
     {
@@ -87,7 +92,7 @@ export const OrderCryptoReceiptModal = ({
   return (
     <Modal
       open={open}
-      onClose={() => onClose({ open: false, type: null })}
+      onClose={() => onClose(false)}
       className="w-[560px] !py-40 !px-30"
     >
       <Box className="flex flex-col items-center">
@@ -100,15 +105,21 @@ export const OrderCryptoReceiptModal = ({
         <Card className="text-left w-full py-40 px-30 my-40">
           <div className={'flex flex-col'}>
             {receiptSections.map(({ title, body }, index) => (
-              <ReceiptSection key={index} title={title} body={body} />
+              <ReceiptSection
+                key={index}
+                title={title}
+                body={body}
+                classNames={`${
+                  receiptSections.length - 1 !== index ? 'mb-20' : ''
+                }`}
+              />
             ))}
           </div>
         </Card>
-        {/* TODO: Implement print functionality */}
-        {/* <OutlinedButton onClick={() => {}}>
+        <OutlinedButton onClick={() => {}}>
           <PrintIcon className={'mr-10'} />
           {_(ORDER_RECEIPT_BUTTON_TEXT)}
-        </OutlinedButton> */}
+        </OutlinedButton>
       </Box>
     </Modal>
   );

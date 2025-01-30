@@ -7,7 +7,7 @@ export interface OrderCryptoReceiptModalContent {
     };
     amount: string | number;
     date: string;
-    txType: 'retired' | 'tradable' | null;
+    retiredCredits: boolean | undefined;
     currency: {
       askDenom: string;
       askBaseDenom: string;
@@ -16,12 +16,8 @@ export interface OrderCryptoReceiptModalContent {
   };
 }
 
-export interface OrderCryptoReceiptModalStateType {
-  open: boolean;
-  type: OrderCryptoReceiptModalContent['modalContent']['txType'];
-}
-
 export interface ReceiptSectionData {
   title: string;
   body: React.ReactNode;
+  classNames?: string;
 }

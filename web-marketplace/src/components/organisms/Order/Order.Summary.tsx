@@ -24,7 +24,7 @@ import {
 interface OrderSummaryProps {
   retirementInfo: RetirementInfoData;
   blockchainDetails: BlockchainDetailsData;
-  creditsData: CreditsData;
+  credits: CreditsData['credits'];
   paymentInfo: PaymentInfoData;
   displayTotalPrice: number;
   displayDenom: string;
@@ -35,7 +35,7 @@ interface OrderSummaryProps {
 }
 
 export const OrderSummary = ({
-  creditsData,
+  credits,
   retirementInfo,
   blockchainDetails,
   paymentInfo,
@@ -48,7 +48,6 @@ export const OrderSummary = ({
   const { askDenom, askBaseDenom, cardLast4, cardBrand } = paymentInfo;
   const isCardPayment = cardLast4 && askDenom === USD_DENOM;
   const { reason, location, retiredCredits } = retirementInfo;
-  const { credits } = creditsData;
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 gap-30">

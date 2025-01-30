@@ -21,7 +21,6 @@ import { Link } from 'components/atoms';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 
 import { OrderCryptoReceiptModal } from '../OrderCryptoReceiptModal/OrderCryptoReceiptModal';
-import { OrderCryptoReceiptModalStateType } from '../OrderCryptoReceiptModal/OrderCryptoReceiptModal.types';
 import { ORDER_STATUS } from './Order.constants';
 import { OrderLabel } from './Order.Label';
 import { OrderSummary } from './Order.Summary';
@@ -41,11 +40,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
     receiptUrl,
   } = orderData.order;
 
-  const [cryptoReceiptModalState, setCryptoReceiptModalState] =
-    useState<OrderCryptoReceiptModalStateType>({
-      open: false,
-      type: 'retired',
-    });
+  const [cryptoReceiptModalOpen, setCryptoReceiptModalOpen] = useState(false);
 
   const isPrefinanceProject = project.projectPrefinancing?.isPrefinanceProject;
   const projectHref = `/project/${project.slug ?? project.id}`;
@@ -126,20 +121,17 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
                   </OutlinedButton>
                 </Link>
               ) : (
-                <OutlinedButton
-                  size="small"
-                  onClick={() => {
-                    setCryptoReceiptModalState({
-                      open: true,
-                      type: retirementInfo?.retiredCredits
-                        ? 'retired'
-                        : 'tradable',
-                    });
-                  }}
-                >
-                  <ReceiptIcon className="mr-5" />
-                  <Trans>View Receipt</Trans>
-                </OutlinedButton>
+                // TODO - implement View receipt & Print receipt
+                // <OutlinedButton
+                //   size="small"
+                //   onClick={() => {
+                //     setCryptoReceiptModalOpen(true);
+                //   }}
+                // >
+                //   <ReceiptIcon className="mr-5" />
+                //   <Trans>View Receipt</Trans>
+                // </OutlinedButton>
+                <></>
               )}
             </div>
           }
@@ -187,7 +179,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
           <OrderSummary
             retirementInfo={retirementInfo}
             blockchainDetails={blockchainDetails}
-            creditsData={credits}
+            credits={credits.credits}
             paymentInfo={paymentInfo}
             displayDenom={displayDenom}
             displayTotalPrice={displayTotalPrice}
@@ -195,10 +187,10 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
           />
         </CardContent>
       </Card>
-      {cryptoReceiptModalState.open && (
+      {cryptoReceiptModalOpen && (
         <OrderCryptoReceiptModal
-          onClose={setCryptoReceiptModalState}
-          open={cryptoReceiptModalState.open}
+          onClose={setCryptoReceiptModalOpen}
+          open={cryptoReceiptModalOpen}
           modalContent={{
             displayDenom,
             currency,
@@ -209,7 +201,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
             },
             amount: credits.credits,
             date: blockchainDetails.purchaseDate,
-            txType: cryptoReceiptModalState.type,
+            retiredCredits: retirementInfo.retiredCredits,
           }}
         />
       )}

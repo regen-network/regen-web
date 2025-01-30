@@ -122,7 +122,7 @@ msgid "{years, plural, one {{years} year project duration} other {{years} year p
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:105
-#: src/components/organisms/Order/Order.Summary.tsx:88
+#: src/components/organisms/Order/Order.Summary.tsx:74
 msgid "# credits"
 msgstr ""
 
@@ -273,7 +273,7 @@ msgstr ""
 msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:201
+#: src/components/organisms/Order/Order.Summary.tsx:183
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr ""
 
@@ -483,6 +483,7 @@ msgstr ""
 msgid "Amount of credits"
 msgstr ""
 
+#: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:6
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:310
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:126
 msgid "amount retired"
@@ -507,6 +508,7 @@ msgstr ""
 msgid "Amount to sell"
 msgstr ""
 
+#: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:7
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:311
 msgid "amount tradable"
 msgstr ""
@@ -714,11 +716,11 @@ msgstr ""
 msgid "block height"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:188
+#: src/components/organisms/Order/Order.Summary.tsx:170
 msgid "Blockchain Details"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:196
+#: src/components/organisms/Order/Order.Summary.tsx:178
 #: src/lib/constants/shared.constants.tsx:94
 #: src/pages/ProjectFinished/ProjectFinished.tsx:97
 msgid "blockchain record"
@@ -895,7 +897,7 @@ msgstr ""
 msgid "carbon offset standard"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:160
+#: src/components/organisms/Order/Order.Summary.tsx:146
 msgid "card info"
 msgstr ""
 
@@ -907,7 +909,7 @@ msgstr ""
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:81
+#: src/components/organisms/Order/Order.tsx:117
 msgid "certificate"
 msgstr ""
 
@@ -1393,7 +1395,7 @@ msgstr ""
 msgid "credits"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:71
+#: src/components/organisms/Order/Order.Summary.tsx:57
 msgid "Credits"
 msgstr ""
 
@@ -1485,7 +1487,7 @@ msgstr ""
 msgid "Credits Tradable"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:119
+#: src/components/organisms/Order/Order.Summary.tsx:105
 msgid "Credits were purchased in a tradable format and were not retired"
 msgstr ""
 
@@ -1559,6 +1561,7 @@ msgid "Data stream"
 msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:61
+#: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:8
 msgid "date"
 msgstr ""
 
@@ -1843,7 +1846,7 @@ msgstr ""
 msgid "Endangered"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:164
+#: src/components/organisms/Order/Order.Summary.tsx:150
 msgid "ending in"
 msgstr ""
 
@@ -1881,7 +1884,7 @@ msgstr ""
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:125
+#: src/components/organisms/Order/Order.tsx:179
 msgid "Expected delivery date"
 msgstr ""
 
@@ -2819,11 +2822,11 @@ msgstr ""
 msgid "payment"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:172
+#: src/components/organisms/Order/Order.Summary.tsx:158
 msgid "payment currency"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:155
+#: src/components/organisms/Order/Order.Summary.tsx:141
 msgid "payment info"
 msgstr ""
 
@@ -3039,7 +3042,7 @@ msgstr ""
 msgid "price per credit"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:74
+#: src/components/organisms/Order/Order.Summary.tsx:60
 msgid "Price per credit"
 msgstr ""
 
@@ -3049,6 +3052,10 @@ msgstr ""
 
 #: src/pages/Certificate/Certificate.tsx:104
 msgid "print certificate"
+msgstr ""
+
+#: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:9
+msgid "print receipt"
 msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:226
@@ -3116,6 +3123,7 @@ msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:86
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
+#: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:5
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:302
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:139
@@ -3313,7 +3321,7 @@ msgstr ""
 msgid "Publications"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:190
+#: src/components/organisms/Order/Order.Summary.tsx:172
 msgid "purchase date"
 msgstr ""
 
@@ -3345,6 +3353,10 @@ msgstr ""
 
 #: src/components/organisms/MediaSection.tsx:37
 msgid "read article"
+msgstr ""
+
+#: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:3
+msgid "receipt"
 msgstr ""
 
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:115
@@ -3540,7 +3552,7 @@ msgstr ""
 msgid "Retirement date"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:111
+#: src/components/organisms/Order/Order.Summary.tsx:97
 msgid "Retirement Info"
 msgstr ""
 
@@ -3549,7 +3561,7 @@ msgstr ""
 msgid "Retirement is permanent and non-reversible."
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:135
+#: src/components/organisms/Order/Order.Summary.tsx:121
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:54
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:139
 #: src/pages/Certificate/Certificate.constants.ts:18
@@ -3566,7 +3578,7 @@ msgid "Retirement permanently removes used credits from circulation to prevent t
 msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:61
-#: src/components/organisms/Order/Order.Summary.tsx:129
+#: src/components/organisms/Order/Order.Summary.tsx:115
 #: src/lib/constants/shared.constants.tsx:148
 #: src/pages/Certificate/Certificate.constants.ts:17
 msgid "Retirement reason"
@@ -4335,10 +4347,11 @@ msgid "total credits you have purchased"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:130
-#: src/components/organisms/Order/Order.Summary.tsx:94
+#: src/components/organisms/Order/Order.Summary.tsx:80
 msgid "total price"
 msgstr ""
 
+#: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:4
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:284
 msgid "total purchase price"
 msgstr ""
@@ -4616,7 +4629,8 @@ msgstr ""
 msgid "view project"
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:89
+#: src/components/organisms/Order/Order.tsx:125
+#: src/components/organisms/Order/Order.tsx:141
 msgid "View Receipt"
 msgstr ""
 

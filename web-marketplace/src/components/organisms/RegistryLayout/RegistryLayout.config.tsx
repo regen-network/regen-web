@@ -23,11 +23,11 @@ import {
   EDIT_PROFILE,
   HEADING_MY_ORDERS,
   MY_ORDERS,
-  MY_PREFINANCE_PROJECTS,
+  // MY_PREFINANCE_PROJECTS,
   PORTFOLIO,
   PROFILE_SETTINGS,
   PROJECTS,
-  SAVED_PAYMENT_INFO,
+  // SAVED_PAYMENT_INFO,
   SEPARATOR,
 } from 'pages/Dashboard/Dashboard.constants';
 import { Link } from 'components/atoms';
@@ -106,8 +106,8 @@ export const getUserMenuItems = ({
   loginDisabled,
   profile,
   _,
+  // savedPaymentInfo,
   onProfileClick,
-  savedPaymentInfo,
 }: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
   [
     profile && {

@@ -63,10 +63,10 @@ export const AgreePurchaseForm = ({
     control: form.control,
   });
 
-  const followProject = useWatch({
-    control: form.control,
-    name: 'followProject',
-  });
+  // const followProject = useWatch({
+  //   control: form.control,
+  //   name: 'followProject',
+  // });
   const subscribeNewsletter = useWatch({
     control: form.control,
     name: 'subscribeNewsletter',
@@ -94,7 +94,7 @@ export const AgreePurchaseForm = ({
       )}
 
       <div className="flex flex-col gap-20 py-20 px-20 sm:pl-40 sm:pr-0">
-        {email && (
+        {/* {email && (
           <CheckboxLabel
             checked={followProject}
             optional
@@ -107,7 +107,7 @@ export const AgreePurchaseForm = ({
             }
             {...form.register('followProject')}
           />
-        )}
+        )} */}
         {email && !isNewsletterSubscribed && (
           <CheckboxLabel
             checked={subscribeNewsletter}

@@ -177,7 +177,7 @@ export const BuyCreditsForm = ({
     getSubscribersStatusQuery({
       enabled: !!activeAccount,
     }),
-  );console.log('subscribersStatusData',subscribersStatusData)
+  );
 
   const stripeOptions = useMemo(
     () => ({
@@ -390,7 +390,7 @@ export const BuyCreditsForm = ({
   );
 
   const { isLoading, userBalance } = useFetchUserBalance(currency?.askDenom);
-
+  console.log(data);
   return (
     <div
       className={
@@ -475,6 +475,7 @@ export const BuyCreditsForm = ({
             )}
             {activeStep === 2 && (
               <AgreePurchaseFormFiat
+                email={data?.email}
                 retiring={retiring}
                 onSubmit={agreePurchaseFormSubmit}
                 goToChooseCredits={() => handleActiveStep(0)}

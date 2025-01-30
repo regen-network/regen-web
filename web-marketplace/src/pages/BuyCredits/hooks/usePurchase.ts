@@ -36,6 +36,7 @@ import { EMAIL_RECEIPT, PAYMENT_OPTIONS } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
 import { getCardItems, getSteps } from '../BuyCredits.utils';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
+import { useAuth } from 'lib/auth/auth';
 
 type UsePurchaseParams = {
   paymentOption: PaymentOptionsType;
@@ -72,6 +73,7 @@ export const usePurchase = ({
 }: UsePurchaseParams) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
+  const { activeAccount, privActiveAccount } = useAuth();
   const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();
   const { data } = useMultiStep<BuyCreditsSchemaTypes>();
@@ -137,6 +139,19 @@ export const usePurchase = ({
         !displayDenom
       )
         return;
+
+      // If a logged in user with no email address (web3 account) provides one,
+      // we send a confirmation email
+      if (!!activeAccount && !privActiveAccount?.email && data?.email && token) {
+        await postData({
+          url: `${apiUri}/marketplace/v1/auth/email/create-token`,
+              data: {
+                email,
+              },
+              token,
+              retryCsrfRequest,
+        });
+      }
 
       const retirementJurisdiction =
         retiring && country

@@ -316,7 +316,7 @@ export const getCreditsAvailableBannerText = (
  */
 export function resetCurrencyAndCredits(
   paymentOption: string,
-  orderedSellOrders: UISellOrderInfo[],
+  orderedSellOrders: UISellOrderInfo[] | CardSellOrder[],
   creditTypePrecision: number | null | undefined,
   setValue: UseFormSetValue<any>,
   updateMultiStepData: (
@@ -342,7 +342,10 @@ export function resetCurrencyAndCredits(
     newCurrencyAmount < MIN_USD_CURRENCY_AMOUNT &&
     paymentOption === PAYMENT_OPTIONS.CARD
   ) {
-    newCreditsAmount = MIN_USD_CURRENCY_AMOUNT / currencyAmount;
+    newCreditsAmount = calculateCredits(
+      orderedSellOrders as CardSellOrder[],
+      MIN_USD_CURRENCY_AMOUNT,
+    );
     newCurrencyAmount = MIN_USD_CURRENCY_AMOUNT;
   }
 
@@ -361,4 +364,46 @@ export function resetCurrencyAndCredits(
     },
     activeStep,
   );
+}
+
+/**
+ * Calculates the maximum number of credits that can be bought
+ * for an exact target amount by iterating ordered sell orders.
+ *
+ * @param orderedSellOrders - List of available sell orders by ascending price
+ * @param targetAmount - Exact max amount to spend
+ * @returns Total credits purchasable, rounded to 2 decimals
+ */
+function calculateCredits(
+  orderedSellOrders: CardSellOrder[],
+  targetAmount: number,
+) {
+  let totalCost = 0;
+  let totalCredits = 0;
+
+  for (const order of orderedSellOrders) {
+    const pricePerCredit = order.usdPrice;
+    const availableCredits = Number(order.quantity);
+
+    // Calculate remaining budget for this iteration
+    const remainingBudget = targetAmount - totalCost;
+    if (remainingBudget <= 0) break;
+
+    // Calculate how many credits we can buy with remaining budget
+    const creditsNeeded = remainingBudget / pricePerCredit;
+    // Take either all credits needed or all available, whichever is less
+    const creditsToTake = Math.min(creditsNeeded, availableCredits);
+
+    totalCredits += creditsToTake;
+    totalCost += creditsToTake * pricePerCredit;
+
+    // Check if we've hit our target amount exactly
+    // Using small epsilon (0.000001) to handle floating point precision issues
+    // Example: 0.1 + 0.2 might be 0.30000000000000004 instead of 0.3
+    // This check ensures we stop when we're "close enough" to the target
+    if (Math.abs(totalCost - targetAmount) < 0.000001) break;
+  }
+
+  // Round to 2 decimal places to avoid floating point artifacts
+  return Number(totalCredits.toFixed(2));
 }

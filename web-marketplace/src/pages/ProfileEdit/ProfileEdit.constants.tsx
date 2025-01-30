@@ -1,3 +1,4 @@
+import { MessageDescriptor } from '@lingui/core';
 import { msg } from '@lingui/macro';
 
 import { ProfileVariant } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.types';
@@ -26,3 +27,10 @@ export const profileVariantMapping: Record<AccountType, ProfileVariant> = {
   ORGANIZATION: 'organization',
   USER: 'individual',
 };
+
+export const DEFAULT_TOKEN_ERROR = msg`Failed to validate token`;
+export const TOKEN_ERROR_MSGS: Record<string, MessageDescriptor> = {
+  'token.invalid': msg`Invalid token`,
+  'token.expired': msg`Token expired`,
+};
+export const EMAIL_ADDED = msg`Log in email successfully added`;

@@ -13,6 +13,7 @@ const UserMenuItem: React.FC<React.PropsWithChildren<UserMenuItemProps>> = ({
     <HeaderMenuItem
       classes={{ root: styles.userMenuItem, paper: classes?.paper }}
       component="div"
+      isUserMenu
       {...props}
     />
   );

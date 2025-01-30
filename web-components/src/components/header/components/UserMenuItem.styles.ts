@@ -2,13 +2,13 @@ import { makeStyles } from '@mui/styles';
 
 export const useUserMenuItemStyles = makeStyles(theme => ({
   userMenuItem: {
-    padding: theme.spacing(2.5),
-    paddingRight: 0,
+    padding: 0,
     borderRadius: '2px',
     border: `1px solid ${theme.palette.grey[100]}`,
     position: 'relative',
     backgroundColor: `${theme.palette.primary.main} !important`,
     color: `${theme.palette.primary.contrastText} !important`,
+    height: 'auto',
     '&:hover': {
       '&:after': {
         background: theme.palette.secondary.main,

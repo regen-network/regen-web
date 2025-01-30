@@ -1,9 +1,8 @@
-import React, { useRef } from 'react';
-import { MenuList, Paper, Popover, useMediaQuery } from '@mui/material';
-import cx from 'clsx';
+import { MenuList } from '@mui/material';
 
 import DropdownIcon from '../../../icons/DropdownIcon';
 import { useMenuHoverStyles } from './HeaderMenuItem.Hover.styles';
+import { useMenuState } from './hooks/useMenuState';
 
 export interface MenuTitle {
   title?: string;
@@ -18,6 +17,7 @@ interface Props extends MenuTitle {
   children: React.ReactNode;
   textColor?: string;
   dropdownColor?: string;
+  isUserMenu?: boolean;
 }
 
 /**
@@ -30,36 +30,30 @@ const HeaderMenuItemHover = ({
   classes,
   dropdownColor,
   children,
+  isUserMenu,
 }: Props): JSX.Element => {
   const { classes: styles } = useMenuHoverStyles();
-  // eslint-disable-next-line lingui/no-unlocalized-strings
-  const isTouchScreen = useMediaQuery('(pointer: coarse)');
-  const popoverAnchor = useRef(null);
-  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
-  const handlePopoverToggle = () => {
-    setAnchorEl(el => (el ? null : popoverAnchor.current));
-  };
-
-  const handlePopoverOpen = () => {
-    setAnchorEl(popoverAnchor.current);
-  };
-
-  const handlePopoverClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
+  const {
+    isMenuOpen,
+    hasInteracted,
+    isTouchScreen,
+    openMenu,
+    closeMenu,
+    toggleMenu,
+  } = useMenuState();
 
   return (
-    <div>
+    <div
+      className="relative p-10"
+      onMouseEnter={isTouchScreen ? undefined : openMenu}
+      onMouseLeave={closeMenu}
+    >
       <span
-        ref={popoverAnchor}
-        aria-owns={open ? 'mouse-over-popover' : undefined}
+        className="relative"
+        aria-owns={isMenuOpen ? 'mouse-over-menu' : undefined}
         aria-haspopup="true"
-        onMouseEnter={isTouchScreen ? undefined : handlePopoverOpen}
-        onMouseLeave={handlePopoverClose}
-        onClick={isTouchScreen ? handlePopoverToggle : undefined}
+        onClick={isTouchScreen ? toggleMenu : undefined}
       >
         {title && (
           <span className={classes?.title}>
@@ -69,43 +63,29 @@ const HeaderMenuItemHover = ({
         )}
         {renderTitle && renderTitle()}
       </span>
-      <Popover
-        disableRestoreFocus
-        id="mouse-over-popover"
-        className={styles.popover}
-        classes={{
-          paper: styles.popoverContent,
-        }}
-        open={open}
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        slotProps={{
-          paper: {
-            onMouseEnter: handlePopoverOpen,
-            onMouseLeave: handlePopoverClose,
-            onClick: handlePopoverClose,
-          },
-        }}
-        onClose={handlePopoverClose}
-        disableScrollLock={true}
-        sx={{ position: 'absolute' }}
+      <nav
+        id="mouse-over-menu"
+        className={`absolute top-15 ${
+          isUserMenu ? 'pt-35' : 'top-full'
+        } right-0 z-50 ${
+          isMenuOpen
+            ? 'block opacity-100' + (hasInteracted ? ' animate-menuOpen' : '')
+            : 'opacity-0' +
+              (hasInteracted
+                ? ' animate-menuClose pointer-events-none'
+                : ' hidden')
+        }`}
+        onClick={closeMenu}
       >
-        <Paper className={cx(classes?.paper, styles.paper)} elevation={5}>
-          <MenuList
-            classes={{ root: styles.text, padding: styles.noOutline }}
-            disablePadding
-          >
-            {children}
-          </MenuList>
-        </Paper>
-      </Popover>
+        <MenuList
+          className="bg-grey-0 rounded-[4px] border border-solid border-grey-300 shadow-[0px_5px_5px_-3px_rgba(0,0,0,0.2),_0px_8px_10px_1px_rgba(0,0,0,0.14),_0px_3px_14px_2px_rgba(0,0,0,0.12)]"
+          classes={{ root: styles.text, padding: styles.noOutline }}
+          disablePadding
+          component="div"
+        >
+          {children}
+        </MenuList>
+      </nav>
     </div>
   );
 };

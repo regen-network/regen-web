@@ -56,6 +56,7 @@ export const HeaderDropdownItem: React.FC<
       alignItems="center"
       className={cn(styles.item, className)}
       onMouseEnter={onHover}
+      component="li"
     >
       {SVG && (
         <Box className="mr-[18px] flex items-center">

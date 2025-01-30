@@ -16,11 +16,16 @@ const HeaderDropdown: React.FC<
     items: HeaderDropdownItemProps[];
     linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
     title?: string;
+    isUserMenu?: boolean;
   }>
 > = props => {
   const { classes: styles } = useStyles();
   return (
-    <Box display="flex" flexDirection="column">
+    <Box
+      display="flex"
+      flexDirection="column"
+      className={`${props.isUserMenu ? 'pt-10' : 'p-25'}`}
+    >
       {props.title && (
         <Box mb={2}>
           <Title variant="h4" className={styles.label}>
@@ -28,13 +33,15 @@ const HeaderDropdown: React.FC<
           </Title>
         </Box>
       )}
-      {props.items.map((link, i) => (
-        <HeaderDropdownItem
-          key={i}
-          {...link}
-          linkComponent={props.linkComponent}
-        />
-      ))}
+      <Box component="ul">
+        {props.items.map((link, i) => (
+          <HeaderDropdownItem
+            key={i}
+            {...link}
+            linkComponent={props.linkComponent}
+          />
+        ))}
+      </Box>
     </Box>
   );
 };

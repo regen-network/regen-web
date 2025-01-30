@@ -26,7 +26,9 @@ export const useMenuState = () => {
 
   // Toggle needed for touch devices where hover isn't available
   const toggleMenu = () => {
-    setIsMenuOpen(prev => !prev);
+    requestAnimationFrame(() => {
+      setIsMenuOpen(prev => !prev);
+    });
   };
 
   // Reset on route change prevents ghost menus when navigating

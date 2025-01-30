@@ -14,6 +14,7 @@ export interface Props {
   labelMobileSize?: LabelSize;
   sx?: SxProps<Theme>;
   sxIcon?: SxProps<Theme>;
+  className?: string;
 }
 const CardRibbon = ({
   icon,
@@ -22,9 +23,11 @@ const CardRibbon = ({
   labelMobileSize = 'xs',
   sx = [],
   sxIcon = [],
+  className,
 }: Props): JSX.Element => {
   return (
     <Flex
+      className={className}
       sx={[
         {
           background:

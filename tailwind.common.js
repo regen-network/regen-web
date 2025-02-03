@@ -435,8 +435,8 @@ module.exports = {
         },
       },
       animation: {
-        menuOpen: 'menuOpen 0.2s ease-out',
-        menuClose: 'menuClose 0.2s ease-out',
+        menuOpen: 'menuOpen 225ms ease-in-out',
+        menuClose: 'menuClose 195ms ease-in-out',
       },
     },
   },

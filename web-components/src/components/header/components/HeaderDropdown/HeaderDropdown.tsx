@@ -33,7 +33,7 @@ const HeaderDropdown: React.FC<
           </Title>
         </Box>
       )}
-      <Box component="ul">
+      <Box component="ul" className="p-0">
         {props.items.map((link, i) => (
           <HeaderDropdownItem
             key={i}

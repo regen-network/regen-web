@@ -390,7 +390,7 @@ export const BuyCreditsForm = ({
   );
 
   const { isLoading, userBalance } = useFetchUserBalance(currency?.askDenom);
-  console.log(data);
+
   return (
     <div
       className={

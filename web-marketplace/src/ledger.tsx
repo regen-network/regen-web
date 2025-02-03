@@ -85,31 +85,22 @@ const getApi = async (
 
 export const LedgerProviderWithWallet: React.FC<React.PropsWithChildren<{}>> =
   ({ children }) => {
-    const { wallet, loaded } = useWallet();
+    const { wallet } = useWallet();
 
-    // Prevent rendering until wallet is loaded
-    if (!loaded) {
-      return <Loading className="h-screen" />;
-    }
-
-    return (
-      <LedgerProvider wallet={wallet} walletLoaded={loaded}>
-        {children}
-      </LedgerProvider>
-    );
+    return <LedgerProvider wallet={wallet}>{children}</LedgerProvider>;
   };
 
 export const LedgerProvider: React.FC<
-  React.PropsWithChildren<{ wallet?: Wallet; walletLoaded: boolean }>
-> = ({ walletLoaded, wallet, children }) => {
+  React.PropsWithChildren<{ wallet?: Wallet }>
+> = ({ wallet, children }) => {
   const [api, setApi] = useState<RegenApi | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<unknown>(undefined);
 
   useEffect(() => {
-    if (walletLoaded && !api)
+    if (!api || (!!wallet?.offlineSigner && !api.msgClient))
       getApi(setApi, setLoading, setError, wallet?.offlineSigner);
-  }, [api, setApi, setLoading, setError, wallet?.offlineSigner, walletLoaded]);
+  }, [api, setApi, setLoading, setError, wallet?.offlineSigner]);
 
   return (
     <LedgerContext.Provider value={{ error, loading, api }}>

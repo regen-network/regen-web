@@ -14,7 +14,7 @@ import './Terrasos.base.css';
 export const TerrasosProvider = () => {
   return (
     <SharedProviders customTheme={terrasosMuiTheme}>
-      <LedgerProvider walletLoaded>
+      <LedgerProvider>
         <TerrasosRoutes
           reactQueryClient={reactQueryClient}
           apolloClientFactory={apolloClientFactory}

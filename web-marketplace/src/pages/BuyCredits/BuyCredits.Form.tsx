@@ -17,9 +17,11 @@ import {
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { apiServerUrl } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
+import { getSubscribersStatusQuery } from 'lib/queries/react-query/registry-server/getSubscribersStatusQuery/getSubscribersStatusQuery';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -171,6 +173,12 @@ export const BuyCreditsForm = ({
     }),
   );
 
+  const { data: subscribersStatusData } = useQuery(
+    getSubscribersStatusQuery({
+      enabled: !!activeAccount,
+    }),
+  );
+
   const stripeOptions = useMemo(
     () => ({
       amount: parseFloat(((data?.[CURRENCY_AMOUNT] || 0) * 100).toFixed(2)), // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00),
@@ -283,15 +291,31 @@ export const BuyCreditsForm = ({
           creditsToBuy && creditsToBuy <= creditsInRequestedSellOrders;
 
         if (sellCanProceed) {
-          const { retirementReason, country, stateProvince, postalCode } =
-            values;
+          const {
+            retirementReason,
+            country,
+            stateProvince,
+            postalCode,
+            subscribeNewsletter,
+            // followProject,
+          } = values;
           const {
             sellOrders: selectedSellOrders,
             savePaymentMethod,
             createAccount: createActiveAccount,
-            // subscribeNewsletter, TODO
-            // followProject,
+            email,
           } = data;
+
+          if (email && subscribeNewsletter) {
+            await fetch(`${apiServerUrl}/subscribers/v1/add`, {
+              method: 'POST',
+              headers: new Headers({
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+              }),
+              body: JSON.stringify({ email }),
+            });
+          }
 
           if (selectedSellOrders && creditsAmount)
             purchase({
@@ -451,6 +475,7 @@ export const BuyCreditsForm = ({
             )}
             {activeStep === 2 && (
               <AgreePurchaseFormFiat
+                email={data?.email}
                 retiring={retiring}
                 onSubmit={agreePurchaseFormSubmit}
                 goToChooseCredits={() => handleActiveStep(0)}
@@ -485,11 +510,13 @@ export const BuyCreditsForm = ({
             )}
             {activeStep === 2 && (
               <AgreePurchaseForm
+                email={data?.email}
                 retiring={retiring}
                 onSubmit={agreePurchaseFormSubmit}
                 goToChooseCredits={() => handleActiveStep(0)}
                 imgSrc="/svg/info-with-hand.svg"
                 country={cardDetails?.country || 'US'}
+                isNewsletterSubscribed={subscribersStatusData?.subscribed}
               />
             )}
           </>

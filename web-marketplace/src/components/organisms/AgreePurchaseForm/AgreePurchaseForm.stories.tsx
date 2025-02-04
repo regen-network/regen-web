@@ -19,6 +19,7 @@ Retirement.args = {
   country: 'US',
   goToChooseCredits: action('goToChooseCredits'),
   imgSrc: './info-with-hand.svg',
+  email: 'john@doe.com',
 };
 
 export const NoRetirement: Story = {
@@ -29,4 +30,17 @@ NoRetirement.args = {
   retiring: false,
   goToChooseCredits: action('goToChooseCredits'),
   imgSrc: './info-with-hand.svg',
+};
+
+export const AlreadySubscribedToNewsletter: Story = {
+  render: args => <AgreePurchaseForm {...args} />,
+};
+
+Retirement.args = {
+  retiring: true,
+  country: 'US',
+  goToChooseCredits: action('goToChooseCredits'),
+  imgSrc: './info-with-hand.svg',
+  email: 'john@doe.com',
+  isNewsletterSubscribed: true,
 };

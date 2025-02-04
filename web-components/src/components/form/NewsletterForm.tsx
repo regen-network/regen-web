@@ -128,7 +128,7 @@ export default function NewsletterForm({
       onSubmit={({ email }, { setSubmitting, setStatus }) => {
         setSubmitting(true);
         axios
-          .post(`${apiUri}/website/v1/mailerlite`, {
+          .post(`${apiUri}/subscribers/v1/add`, {
             email,
           })
           .then(resp => {

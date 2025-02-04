@@ -15,6 +15,7 @@ import { getJurisdictionIsoCode } from 'web-components/src/utils/locationStandar
 import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom, errorCodeAtom } from 'lib/atoms/error.atoms';
 import {
+  connectedEmailErrorModalAtom,
   errorModalAtom,
   processingModalAtom,
   txBuySuccessfulModalAtom,
@@ -37,6 +38,7 @@ import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
 import { getCardItems, getSteps } from '../BuyCredits.utils';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
 import { useAuth } from 'lib/auth/auth';
+import { CONNECTED_EMAIL_ERROR } from 'components/organisms/RegistryLayout/RegistryLayout.constants';
 
 type UsePurchaseParams = {
   paymentOption: PaymentOptionsType;
@@ -85,6 +87,10 @@ export const usePurchase = ({
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
   const setErrorModalAtom = useSetAtom(errorModalAtom);
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const setConnectedEmailErrorModalAtom = useSetAtom(
+    connectedEmailErrorModalAtom,
+  );
+
   const reactQueryClient = useQueryClient();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
   const retryCsrfRequest = useRetryCsrfRequest();
@@ -142,15 +148,33 @@ export const usePurchase = ({
 
       // If a logged in user with no email address (web3 account) provides one,
       // we send a confirmation email
-      if (!!activeAccount && !privActiveAccount?.email && data?.email && token) {
-        await postData({
-          url: `${apiUri}/marketplace/v1/auth/email/create-token`,
-              data: {
-                email,
-              },
-              token,
-              retryCsrfRequest,
-        });
+      if (
+        !!activeAccount &&
+        !privActiveAccount?.email &&
+        data?.email &&
+        token
+      ) {
+        try {
+          const response: { error?: string } = await postData({
+            url: `${apiUri}/marketplace/v1/auth/email/create-token`,
+            data: {
+              email,
+            },
+            token,
+            retryCsrfRequest,
+          });
+          if (response.error) {
+            if (response.error === CONNECTED_EMAIL_ERROR) {
+              setConnectedEmailErrorModalAtom(atom => {
+                atom.open = true;
+                atom.email = data?.email as string;
+              });
+              return;
+            }
+          }
+        } catch (e) {
+          setErrorBannerTextAtom(String(e));
+        }
       }
 
       const retirementJurisdiction =

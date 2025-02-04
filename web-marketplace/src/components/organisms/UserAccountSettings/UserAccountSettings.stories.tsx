@@ -49,10 +49,6 @@ const args = {
       action('email submit')({ email, callback });
       return Promise.resolve();
     },
-    isConnectedEmailErrorModalOpen: false,
-    onConnectedEmailErrorModalClose: action(
-      'close connected email error modal',
-    ),
   },
 };
 

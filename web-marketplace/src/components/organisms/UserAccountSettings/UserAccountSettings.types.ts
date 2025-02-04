@@ -42,8 +42,6 @@ export interface UserAccountSettingsProps {
     | 'onMailCodeChange'
     | 'onResendPasscode'
     | 'onEmailSubmit'
-    | 'isConnectedEmailErrorModalOpen'
-    | 'onConnectedEmailErrorModalClose'
   >;
 }
 

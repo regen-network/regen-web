@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
 
 import { apiUri } from 'lib/apiUri';
@@ -18,7 +18,6 @@ import { onPostData } from 'components/organisms/LoginButton/hooks/onLoginPostDa
 import { useTimer } from 'components/organisms/LoginButton/hooks/useTimer';
 import { getEmailModalError } from 'components/organisms/LoginButton/utils/getEmailModalError';
 import { EmailFormSchemaType } from 'components/organisms/LoginModal/LoginModal.schema';
-import { CONNECTED_EMAIL_ERROR } from 'components/organisms/UserAccountSettings/UserAccountSettings.constants';
 
 import {
   DEFAULT_RESEND_ERROR,
@@ -27,6 +26,8 @@ import {
   RESEND_SUCCES,
   RESEND_TIMER,
 } from '../../LoginButton/LoginButton.constants';
+import { CONNECTED_EMAIL_ERROR } from 'components/organisms/RegistryLayout/RegistryLayout.constants';
+import { connectedEmailErrorModalAtom } from 'lib/atoms/modals.atoms';
 
 type EmailConfirmationDataParams = {
   emailConfirmationText?: string;
@@ -40,8 +41,9 @@ export const useEmailConfirmationData = ({
   const { _ } = useLingui();
   const reactQueryClient = useQueryClient();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
-  const [isConnectedEmailErrorModalOpen, setIsConnectedEmailErrorModalOpen] =
-    useState(false);
+  const setConnectedEmailErrorModalAtom = useSetAtom(
+    connectedEmailErrorModalAtom,
+  );
   const [emailModalErrorCode, setEmailModalErrorCode] = useState('');
   const [email, setEmail] = useState('');
   const { privActiveAccount, activeAccount } = useAuth();
@@ -58,8 +60,7 @@ export const useEmailConfirmationData = ({
   const { track } = useTracker();
 
   const onConfirmationModalClose = () => setIsConfirmationModalOpen(false);
-  const onConnectedEmailErrorModalClose = () =>
-    setIsConnectedEmailErrorModalOpen(false);
+
   const onResendPasscode = async () => {
     if (token && resendTimeLeft === null) {
       startTimer();
@@ -156,7 +157,10 @@ export const useEmailConfirmationData = ({
         });
         if (response.error) {
           if (response.error === CONNECTED_EMAIL_ERROR) {
-            setIsConnectedEmailErrorModalOpen(true);
+            setConnectedEmailErrorModalAtom(atom => {
+              atom.open = true;
+              atom.email = email;
+            });
           }
         }
       } catch (e) {
@@ -176,8 +180,6 @@ export const useEmailConfirmationData = ({
     onResendPasscode,
     setIsConfirmationModalOpen,
     onEmailSubmit,
-    isConnectedEmailErrorModalOpen,
-    onConnectedEmailErrorModalClose,
     retryCsrfRequest,
   };
 };

@@ -52,8 +52,6 @@ export const UserAccountSettings = ({
     onMailCodeChange,
     onResendPasscode,
     onEmailSubmit,
-    isConnectedEmailErrorModalOpen,
-    onConnectedEmailErrorModalClose,
   } = emailConfirmationData;
 
   const form = useZodForm({
@@ -115,11 +113,6 @@ export const UserAccountSettings = ({
         open={isConfirmationModalOpen}
         error={emailModalError}
         onCodeChange={onMailCodeChange}
-      />
-      <ConnectedEmailErrorModal
-        open={isConnectedEmailErrorModalOpen}
-        onClose={onConnectedEmailErrorModalClose}
-        email={email}
       />
       <div className="flex flex-col gap-30">
         <div className="flex flex-col gap-10">

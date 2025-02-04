@@ -22,9 +22,6 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -128,7 +125,7 @@ msgid "{years, plural, one {{years} year project duration} other {{years} year p
 msgstr "{years, plural, one {Duración del proyecto: {years} año} other {Duración del proyecto: {years} años}}"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:105
-#: src/components/organisms/Order/Order.Summary.tsx:74
+#: src/components/organisms/Order/Order.Summary.tsx:73
 msgid "# credits"
 msgstr "# créditos"
 
@@ -279,7 +276,7 @@ msgstr "Un taxón está extinto cuando no hay duda razonable de que el último i
 msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr "Un tercero que proporciona una evaluación independiente e imparcial del plan del proyecto y de los informes del proyecto (que no es el monitor)."
 
-#: src/components/organisms/Order/Order.Summary.tsx:183
+#: src/components/organisms/Order/Order.Summary.tsx:182
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr "Un identificador único que rastrea y verifica una transacción específica en la cadena de bloques."
 
@@ -419,7 +416,7 @@ msgid "all profiles"
 msgstr "todos los perfiles"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
-#: src/pages/Projects/Projects.tsx:116
+#: src/pages/Projects/Projects.tsx:118
 msgid "All projects"
 msgstr "Todos los proyectos"
 
@@ -722,11 +719,11 @@ msgstr "biorregión"
 msgid "block height"
 msgstr "altura del bloque"
 
-#: src/components/organisms/Order/Order.Summary.tsx:170
+#: src/components/organisms/Order/Order.Summary.tsx:169
 msgid "Blockchain Details"
 msgstr "Detalles de la cadena de bloques"
 
-#: src/components/organisms/Order/Order.Summary.tsx:178
+#: src/components/organisms/Order/Order.Summary.tsx:177
 #: src/lib/constants/shared.constants.tsx:94
 #: src/pages/ProjectFinished/ProjectFinished.tsx:97
 msgid "blockchain record"
@@ -903,7 +900,7 @@ msgstr "crédito de carbono"
 msgid "carbon offset standard"
 msgstr "Norma de compensación de carbono"
 
-#: src/components/organisms/Order/Order.Summary.tsx:146
+#: src/components/organisms/Order/Order.Summary.tsx:145
 msgid "card info"
 msgstr "Información de la tarjeta"
 
@@ -915,7 +912,7 @@ msgstr "Caribe"
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
 msgstr "Las categorías de la Lista Roja de Ecosistemas de la UICN evalúan la salud y el riesgo de los ecosistemas a escala global. Tebu promueve la protección de los ecosistemas más amenazados otorgando una puntuación más alta a aquellos que presentan un riesgo mayor."
 
-#: src/components/organisms/Order/Order.tsx:117
+#: src/components/organisms/Order/Order.tsx:112
 msgid "certificate"
 msgstr "certificado"
 
@@ -1401,7 +1398,7 @@ msgstr "Definición de unidad de crédito"
 msgid "credits"
 msgstr "créditos"
 
-#: src/components/organisms/Order/Order.Summary.tsx:57
+#: src/components/organisms/Order/Order.Summary.tsx:56
 msgid "Credits"
 msgstr "Créditos"
 
@@ -1493,7 +1490,7 @@ msgstr "Créditos Retirados"
 msgid "Credits Tradable"
 msgstr "Créditos negociables"
 
-#: src/components/organisms/Order/Order.Summary.tsx:105
+#: src/components/organisms/Order/Order.Summary.tsx:104
 msgid "Credits were purchased in a tradable format and were not retired"
 msgstr "Los créditos se compraron en formato comercializable y no se retiraron."
 
@@ -1852,7 +1849,7 @@ msgstr "Fecha de finalización"
 msgid "Endangered"
 msgstr "En peligro"
 
-#: src/components/organisms/Order/Order.Summary.tsx:150
+#: src/components/organisms/Order/Order.Summary.tsx:149
 msgid "ending in"
 msgstr "terminando en"
 
@@ -1890,7 +1887,7 @@ msgstr "emisión estimada"
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr "Algunos ejemplos de motivos de retirada incluyen: “viajes de empresa en 2025”, “compensar mi impacto ambiental” o el nombre de una persona u organización específica."
 
-#: src/components/organisms/Order/Order.tsx:179
+#: src/components/organisms/Order/Order.tsx:171
 msgid "Expected delivery date"
 msgstr "Fecha de entrega prevista"
 
@@ -1935,6 +1932,10 @@ msgstr "No se pudo solicitar fondos"
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:14
 msgid "Failed to resend passcode"
 msgstr "No se pudo reenviar la contraseña"
+
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:31
+msgid "Failed to validate token"
+msgstr "No se pudo validar el token"
 
 #: src/pages/Projects/AllProjects/AllProjects.config.ts:12
 msgid "Featured projects"
@@ -2211,6 +2212,10 @@ msgstr "Dirección de polígono no válida"
 msgid "Invalid regen address"
 msgstr "Dirección de regeneración no válida"
 
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:33
+msgid "Invalid token"
+msgstr "Token no válido"
+
 #: src/pages/LandStewards/LandStewards.tsx:103
 msgid "Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship."
 msgstr "Emite y vende créditos de servicios ecosistémicos a compradores de todo el mundo: recibe un pago por tu gestión ecológica."
@@ -2382,6 +2387,7 @@ msgid "log in"
 msgstr "acceso"
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:8
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:36
 msgid "Log in email successfully added"
 msgstr "El correo electrónico de inicio de sesión se agregó correctamente"
 
@@ -2828,11 +2834,11 @@ msgstr "fogonadura"
 msgid "payment"
 msgstr "pago"
 
-#: src/components/organisms/Order/Order.Summary.tsx:158
+#: src/components/organisms/Order/Order.Summary.tsx:157
 msgid "payment currency"
 msgstr "Moneda de pago"
 
-#: src/components/organisms/Order/Order.Summary.tsx:141
+#: src/components/organisms/Order/Order.Summary.tsx:140
 msgid "payment info"
 msgstr "Información de pago"
 
@@ -2991,7 +2997,7 @@ msgid "prefinance"
 msgstr "prefinanciamiento"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:54
-#: src/pages/Projects/Projects.tsx:126
+#: src/pages/Projects/Projects.tsx:128
 msgid "Prefinance projects"
 msgstr "Proyectos de prefinanciación"
 
@@ -3048,7 +3054,7 @@ msgstr "Los precios de los créditos para proyectos de prefinanciamiento tienen 
 msgid "price per credit"
 msgstr "precio por crédito"
 
-#: src/components/organisms/Order/Order.Summary.tsx:60
+#: src/components/organisms/Order/Order.Summary.tsx:59
 msgid "Price per credit"
 msgstr "Precio por crédito"
 
@@ -3093,7 +3099,7 @@ msgid "profile"
 msgstr "perfil"
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:20
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:7
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
 msgid "Profile"
 msgstr "Perfil"
 
@@ -3110,7 +3116,7 @@ msgstr "Imagen de perfil"
 msgid "Profile not found"
 msgstr "Perfil no encontrado"
 
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:9
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:10
 msgid "Profile Saved"
 msgstr "Perfil guardado"
 
@@ -3315,7 +3321,7 @@ msgstr "Proyectos"
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr "Los proyectos deben tener una duración de al menos 20 años para garantizar resultados demostrables y cuantificables en biodiversidad. Tebu promueve proyectos que duren más tiempo, asegurando procesos ecológicos a largo plazo."
 
-#: src/pages/Projects/Projects.tsx:300
+#: src/pages/Projects/Projects.tsx:309
 msgid "projects tabs"
 msgstr "Pestañas de proyectos"
 
@@ -3327,7 +3333,7 @@ msgstr "pestañas de perfil público"
 msgid "Publications"
 msgstr "Publicaciones"
 
-#: src/components/organisms/Order/Order.Summary.tsx:172
+#: src/components/organisms/Order/Order.Summary.tsx:171
 msgid "purchase date"
 msgstr "fecha de compra"
 
@@ -3558,7 +3564,7 @@ msgstr "Certificados de retirada"
 msgid "Retirement date"
 msgstr "Fecha de retirada"
 
-#: src/components/organisms/Order/Order.Summary.tsx:97
+#: src/components/organisms/Order/Order.Summary.tsx:96
 msgid "Retirement Info"
 msgstr "Información sobre la retirada"
 
@@ -3567,7 +3573,7 @@ msgstr "Información sobre la retirada"
 msgid "Retirement is permanent and non-reversible."
 msgstr "La retirada es permanente e irreversible."
 
-#: src/components/organisms/Order/Order.Summary.tsx:121
+#: src/components/organisms/Order/Order.Summary.tsx:120
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:54
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:139
 #: src/pages/Certificate/Certificate.constants.ts:18
@@ -3584,7 +3590,7 @@ msgid "Retirement permanently removes used credits from circulation to prevent t
 msgstr "La retirada elimina permanentemente de circulación los créditos usados para evitar su reutilización, garantizando así que el beneficio ambiental reclamado sea real y no se contabilice dos veces."
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:61
-#: src/components/organisms/Order/Order.Summary.tsx:115
+#: src/components/organisms/Order/Order.Summary.tsx:114
 #: src/lib/constants/shared.constants.tsx:148
 #: src/pages/Certificate/Certificate.constants.ts:17
 msgid "Retirement reason"
@@ -4308,6 +4314,10 @@ msgstr "Marca de tiempo"
 msgid "Title"
 msgstr "Título"
 
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:34
+msgid "Token expired"
+msgstr "Token caducado"
+
 #: src/pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:90
 msgid "Tokenization Source"
 msgstr "Fuente de tokenización"
@@ -4353,7 +4363,7 @@ msgid "total credits you have purchased"
 msgstr "total de créditos que has comprado"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:130
-#: src/components/organisms/Order/Order.Summary.tsx:80
+#: src/components/organisms/Order/Order.Summary.tsx:79
 msgid "total price"
 msgstr "Precio total"
 
@@ -4374,7 +4384,7 @@ msgstr "Identificación de token vintage de tucán"
 msgid "Tradable"
 msgstr "Negociable"
 
-#: src/components/organisms/Order/Order.Summary.tsx:101
+#: src/components/organisms/Order/Order.Summary.tsx:100
 msgid "Tradable Credits"
 msgstr "Créditos negociables"
 
@@ -4431,7 +4441,7 @@ msgid "Unlock <0>Regenerative Finances</0><1>with <2>Regen Marketplace</2></1>"
 msgstr "Desbloquea <0>Finanzas regenerativas</0><1>con <2>Mercado de regeneración</2></1>"
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:69
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:12
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:13
 msgid "Unnamed"
 msgstr "Sin nombre"
 
@@ -4627,7 +4637,7 @@ msgstr "Ver portafolio"
 msgid "view post"
 msgstr "ver publicación"
 
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:9
 msgid "View Profile"
 msgstr "Ver perfil"
 
@@ -4635,8 +4645,7 @@ msgstr "Ver perfil"
 msgid "view project"
 msgstr "ver proyecto"
 
-#: src/components/organisms/Order/Order.tsx:125
-#: src/components/organisms/Order/Order.tsx:141
+#: src/components/organisms/Order/Order.tsx:120
 msgid "View Receipt"
 msgstr "Ver recibo"
 

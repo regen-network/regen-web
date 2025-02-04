@@ -122,7 +122,7 @@ msgid "{years, plural, one {{years} year project duration} other {{years} year p
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:105
-#: src/components/organisms/Order/Order.Summary.tsx:74
+#: src/components/organisms/Order/Order.Summary.tsx:73
 msgid "# credits"
 msgstr ""
 
@@ -273,7 +273,7 @@ msgstr ""
 msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:183
+#: src/components/organisms/Order/Order.Summary.tsx:182
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr ""
 
@@ -413,7 +413,7 @@ msgid "all profiles"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
-#: src/pages/Projects/Projects.tsx:116
+#: src/pages/Projects/Projects.tsx:118
 msgid "All projects"
 msgstr ""
 
@@ -716,11 +716,11 @@ msgstr ""
 msgid "block height"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:170
+#: src/components/organisms/Order/Order.Summary.tsx:169
 msgid "Blockchain Details"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:178
+#: src/components/organisms/Order/Order.Summary.tsx:177
 #: src/lib/constants/shared.constants.tsx:94
 #: src/pages/ProjectFinished/ProjectFinished.tsx:97
 msgid "blockchain record"
@@ -897,7 +897,7 @@ msgstr ""
 msgid "carbon offset standard"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:146
+#: src/components/organisms/Order/Order.Summary.tsx:145
 msgid "card info"
 msgstr ""
 
@@ -909,7 +909,7 @@ msgstr ""
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:117
+#: src/components/organisms/Order/Order.tsx:112
 msgid "certificate"
 msgstr ""
 
@@ -1395,7 +1395,7 @@ msgstr ""
 msgid "credits"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:57
+#: src/components/organisms/Order/Order.Summary.tsx:56
 msgid "Credits"
 msgstr ""
 
@@ -1487,7 +1487,7 @@ msgstr ""
 msgid "Credits Tradable"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:105
+#: src/components/organisms/Order/Order.Summary.tsx:104
 msgid "Credits were purchased in a tradable format and were not retired"
 msgstr ""
 
@@ -1846,7 +1846,7 @@ msgstr ""
 msgid "Endangered"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:150
+#: src/components/organisms/Order/Order.Summary.tsx:149
 msgid "ending in"
 msgstr ""
 
@@ -1884,7 +1884,7 @@ msgstr ""
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:179
+#: src/components/organisms/Order/Order.tsx:171
 msgid "Expected delivery date"
 msgstr ""
 
@@ -1928,6 +1928,10 @@ msgstr ""
 
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:14
 msgid "Failed to resend passcode"
+msgstr ""
+
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:31
+msgid "Failed to validate token"
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.config.ts:12
@@ -2205,6 +2209,10 @@ msgstr ""
 msgid "Invalid regen address"
 msgstr ""
 
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:33
+msgid "Invalid token"
+msgstr ""
+
 #: src/pages/LandStewards/LandStewards.tsx:103
 msgid "Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship."
 msgstr ""
@@ -2376,6 +2384,7 @@ msgid "log in"
 msgstr ""
 
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:8
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:36
 msgid "Log in email successfully added"
 msgstr ""
 
@@ -2822,11 +2831,11 @@ msgstr ""
 msgid "payment"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:158
+#: src/components/organisms/Order/Order.Summary.tsx:157
 msgid "payment currency"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:141
+#: src/components/organisms/Order/Order.Summary.tsx:140
 msgid "payment info"
 msgstr ""
 
@@ -2985,7 +2994,7 @@ msgid "prefinance"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:54
-#: src/pages/Projects/Projects.tsx:126
+#: src/pages/Projects/Projects.tsx:128
 msgid "Prefinance projects"
 msgstr ""
 
@@ -3042,7 +3051,7 @@ msgstr ""
 msgid "price per credit"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:60
+#: src/components/organisms/Order/Order.Summary.tsx:59
 msgid "Price per credit"
 msgstr ""
 
@@ -3087,7 +3096,7 @@ msgid "profile"
 msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:20
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:7
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
 msgid "Profile"
 msgstr ""
 
@@ -3104,7 +3113,7 @@ msgstr ""
 msgid "Profile not found"
 msgstr ""
 
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:9
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:10
 msgid "Profile Saved"
 msgstr ""
 
@@ -3309,7 +3318,7 @@ msgstr ""
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr ""
 
-#: src/pages/Projects/Projects.tsx:300
+#: src/pages/Projects/Projects.tsx:309
 msgid "projects tabs"
 msgstr ""
 
@@ -3321,7 +3330,7 @@ msgstr ""
 msgid "Publications"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:172
+#: src/components/organisms/Order/Order.Summary.tsx:171
 msgid "purchase date"
 msgstr ""
 
@@ -3552,7 +3561,7 @@ msgstr ""
 msgid "Retirement date"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:97
+#: src/components/organisms/Order/Order.Summary.tsx:96
 msgid "Retirement Info"
 msgstr ""
 
@@ -3561,7 +3570,7 @@ msgstr ""
 msgid "Retirement is permanent and non-reversible."
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:121
+#: src/components/organisms/Order/Order.Summary.tsx:120
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:54
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:139
 #: src/pages/Certificate/Certificate.constants.ts:18
@@ -3578,7 +3587,7 @@ msgid "Retirement permanently removes used credits from circulation to prevent t
 msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:61
-#: src/components/organisms/Order/Order.Summary.tsx:115
+#: src/components/organisms/Order/Order.Summary.tsx:114
 #: src/lib/constants/shared.constants.tsx:148
 #: src/pages/Certificate/Certificate.constants.ts:17
 msgid "Retirement reason"
@@ -4302,6 +4311,10 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:34
+msgid "Token expired"
+msgstr ""
+
 #: src/pages/CreditClassDetails/CreditClassDetails.AdditionalInfo.tsx:90
 msgid "Tokenization Source"
 msgstr ""
@@ -4347,7 +4360,7 @@ msgid "total credits you have purchased"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:130
-#: src/components/organisms/Order/Order.Summary.tsx:80
+#: src/components/organisms/Order/Order.Summary.tsx:79
 msgid "total price"
 msgstr ""
 
@@ -4368,7 +4381,7 @@ msgstr ""
 msgid "Tradable"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:115
+#: src/components/organisms/Order/Order.Summary.tsx:100
 msgid "Tradable Credits"
 msgstr ""
 
@@ -4425,7 +4438,7 @@ msgid "Unlock <0>Regenerative Finances</0><1>with <2>Regen Marketplace</2></1>"
 msgstr ""
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:69
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:12
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:13
 msgid "Unnamed"
 msgstr ""
 
@@ -4621,7 +4634,7 @@ msgstr ""
 msgid "view post"
 msgstr ""
 
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
+#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:9
 msgid "View Profile"
 msgstr ""
 
@@ -4629,8 +4642,7 @@ msgstr ""
 msgid "view project"
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:125
-#: src/components/organisms/Order/Order.tsx:141
+#: src/components/organisms/Order/Order.tsx:120
 msgid "View Receipt"
 msgstr ""
 

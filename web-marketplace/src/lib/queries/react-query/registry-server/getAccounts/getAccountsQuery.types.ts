@@ -9,7 +9,7 @@ export type PrivateAccount = {
   google_email: string | null;
 };
 
-type Accounts = {
+export type Accounts = {
   activeAccountId: string;
   authenticatedAccounts?: Array<PrivateAccount>;
 };

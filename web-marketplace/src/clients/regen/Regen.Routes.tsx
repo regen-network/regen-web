@@ -15,6 +15,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { buyCreditsLoader } from 'pages/BuyCredits/BuyCredits.loader';
 import { CertificatePage } from 'pages/Certificate/Certificate';
 import MyBridge from 'pages/Dashboard/MyBridge';
 import { MyBridgableEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
@@ -171,7 +172,14 @@ export const getRegenRoutes = ({
             })}
           ></Route>
         </Route>
-        <Route path="project/:projectId/buy" element={<BuyCredits />} />
+        <Route
+          path="project/:projectId/buy"
+          element={<BuyCredits />}
+          loader={buyCreditsLoader({
+            queryClient: reactQueryClient,
+            apolloClientFactory,
+          })}
+        />
         <Route
           path="post/:iri"
           element={<Post />}

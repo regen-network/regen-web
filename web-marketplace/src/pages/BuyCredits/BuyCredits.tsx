@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { useAtom, useAtomValue } from 'jotai';
 
 import NotFoundPage from 'pages/NotFound';
@@ -17,6 +17,14 @@ import { useSummarizePayment } from './hooks/useSummarizePayment';
 
 export const BuyCredits = () => {
   const { projectId } = useParams();
+  const navigate = useNavigate();
+  const accountCanBuy = useLoaderData();
+
+  useEffect(() => {
+    if (!accountCanBuy) {
+      navigate(`/project/${projectId}`, { replace: true });
+    }
+  }, [navigate, projectId, accountCanBuy]);
 
   const {
     loadingSanityProject,

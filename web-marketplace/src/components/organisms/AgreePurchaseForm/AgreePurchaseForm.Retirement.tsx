@@ -1,14 +1,14 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { debounce } from 'lodash';
 
 import Card from 'web-components/src/components/cards/Card';
-import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import SelectTextField from 'web-components/src/components/inputs/new/SelectTextField/SelectTextField';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
-import { Body, Title } from 'web-components/src/components/typography';
+import { Title } from 'web-components/src/components/typography';
 
 import {
   COUNTRY_LABEL,
@@ -17,6 +17,9 @@ import {
   LOCATION_STATE_PLACEHOLDER_LABEL,
   STATE_LABEL,
 } from 'lib/constants/shared.constants';
+
+import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { AgreePurchaseFormSchemaType } from './AgreePurchaseForm.schema';
 
@@ -40,19 +43,80 @@ export const Retirement = ({ retiring }: Props) => {
   const ctx = useFormContext<AgreePurchaseFormSchemaType>();
   const { register, formState, control } = ctx;
   const { errors } = formState;
+  const {
+    data,
+    handleSave: updateMultiStepData,
+    activeStep,
+  } = useMultiStep<BuyCreditsSchemaTypes>();
 
-  const anonymousPurchase = useWatch({
-    control: control,
-    name: 'anonymousPurchase',
+  const fieldNames: (keyof AgreePurchaseFormSchemaType)[] = [
+    'country',
+    'stateProvince',
+    'retirementReason',
+    'postalCode',
+    'followProject',
+    'subscribeNewsletter',
+    'agreeErpa',
+    // 'anonymousPurchase',
+  ];
+
+  const watchedFields = useWatch({
+    control,
+    name: fieldNames,
   });
-  const country = useWatch({
-    control: control,
-    name: 'country',
-  });
-  const stateProvince = useWatch({
-    control: control,
-    name: 'stateProvince',
-  });
+
+  const [
+    country,
+    stateProvince,
+    retirementReason,
+    postalCode,
+    followProject,
+    subscribeNewsletter,
+    agreeErpa,
+    // anonymousPurchase
+  ] = watchedFields;
+
+  useEffect(() => {
+    debounce(() => {
+      updateMultiStepData(
+        {
+          ...data,
+          retirementReason,
+          postalCode,
+        },
+        activeStep,
+      );
+    }, 500)();
+    // Intentionally omit `updateMultiStepData` and `data` from the dependency array
+    // because including them trigger unnecessary renders.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [retirementReason, postalCode, activeStep]);
+
+  useEffect(() => {
+    updateMultiStepData(
+      {
+        ...data,
+        country,
+        stateProvince,
+        // anonymousPurchase,
+        followProject,
+        subscribeNewsletter,
+        agreeErpa,
+      },
+      activeStep,
+    );
+    // Intentionally omit `updateMultiStepData` and `data` from the dependency array
+    // because including them trigger unnecessary renders.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    country,
+    stateProvince,
+    // anonymousPurchase
+    activeStep,
+    followProject,
+    subscribeNewsletter,
+    agreeErpa,
+  ]);
 
   return (
     <div className={retiring ? '' : 'hidden'}>
@@ -120,7 +184,7 @@ export const Retirement = ({ retiring }: Props) => {
                 exclude
                 error={!!errors['country']}
                 helperText={errors['country']?.message}
-                value={country}
+                value={country as string | undefined}
                 {...register('country')}
               />
             </Suspense>
@@ -142,7 +206,7 @@ export const Retirement = ({ retiring }: Props) => {
                 country={country as string}
                 error={!!errors['stateProvince']}
                 helperText={errors['stateProvince']?.message}
-                value={stateProvince}
+                value={stateProvince as string | undefined}
                 {...register('stateProvince')}
               />
             </Suspense>

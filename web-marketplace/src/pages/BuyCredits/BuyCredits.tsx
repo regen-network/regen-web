@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 
 import NotFoundPage from 'pages/NotFound';
 import WithLoader from 'components/atoms/WithLoader';
@@ -8,10 +8,10 @@ import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetProject';
 import { useNavigateToSlug } from 'components/templates/ProjectDetails/hooks/useNavigateToSlug';
 
-import { paymentOptionAtom } from './BuyCredits.atoms';
+import { cardDetailsMissingAtom, paymentOptionAtom } from './BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsForm } from './BuyCredits.Form';
-import { CardDetails } from './BuyCredits.types';
+import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
 import { getFormModel } from './BuyCredits.utils';
 import { useSummarizePayment } from './hooks/useSummarizePayment';
 
@@ -34,8 +34,9 @@ export const BuyCredits = () => {
 
   useNavigateToSlug(slug, '/buy');
 
-  const paymentOption = useAtomValue(paymentOptionAtom);
-
+  const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
+  const cardDetailsMissing = useAtomValue(cardDetailsMissingAtom);
+  const [maxAllowedStep, setMaxAllowedStep] = useState(0);
   const [retiring, setRetiring] = useState<boolean>(true);
   const [confirmationTokenId, setConfirmationTokenId] = useState<
     string | undefined
@@ -48,6 +49,23 @@ export const BuyCredits = () => {
     retiring,
     projectId: onChainProjectId ?? offChainProject?.id,
   });
+
+  // On form load, update `paymentOption` and `maxAllowedStep` from localStorage to prevent a visual
+  // jump between step 1 (Payment info) and step 2  (Retirement) when resuming the form left at step 2.
+  // These values are needed to calculate the `forceStep` prop in `MultiStepTemplate`, which redirects,
+  // if necessary, the user to step 1 to re-enter payment details.
+  useEffect(() => {
+    const localStorageData = localStorage.getItem(formModel.formId);
+    if (localStorageData) {
+      const jsonData = JSON.parse(localStorageData);
+      const paymentOption = jsonData.formValues.paymentOption;
+      const maxStep = jsonData.maxAllowedStep;
+      if (maxStep !== 0) {
+        setMaxAllowedStep(maxStep);
+      }
+      setPaymentOption(paymentOption as PaymentOptionsType);
+    }
+  }, [formModel?.formId, setPaymentOption]);
 
   const summarizePayment = useSummarizePayment(setCardDetails);
   useEffect(() => {
@@ -73,6 +91,13 @@ export const BuyCredits = () => {
           steps={formModel.steps}
           initialValues={{}}
           classes={{ formWrap: 'max-w-[942px]' }}
+          forceStep={
+            paymentOption === PAYMENT_OPTIONS.CARD &&
+            cardDetailsMissing &&
+            maxAllowedStep === 2
+              ? 1
+              : undefined
+          }
         >
           <BuyCreditsForm
             retiring={retiring}

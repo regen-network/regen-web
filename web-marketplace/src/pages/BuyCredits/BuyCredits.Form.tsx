@@ -5,7 +5,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery } from '@tanstack/react-query';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
@@ -21,8 +21,8 @@ import { apiServerUrl } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
-import { getSubscribersStatusQuery } from 'lib/queries/react-query/registry-server/getSubscribersStatusQuery/getSubscribersStatusQuery';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
+import { getSubscribersStatusQuery } from 'lib/queries/react-query/registry-server/getSubscribersStatusQuery/getSubscribersStatusQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchUserBalance } from 'pages/BuyCredits/hooks/useFetchUserBalance';
@@ -61,6 +61,7 @@ import { PaymentInfoFormFiat } from 'components/organisms/PaymentInfoForm/Paymen
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import {
+  cardDetailsMissingAtom,
   paymentOptionAtom,
   paymentOptionCryptoClickedAtom,
 } from './BuyCredits.atoms';
@@ -122,6 +123,7 @@ export const BuyCreditsForm = ({
   const { wallet, isConnected, activeWalletAddr, loaded } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
   const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
+  const cardDetailsMissing = useAtomValue(cardDetailsMissingAtom);
   const {
     isModalOpen,
     modalState,
@@ -133,6 +135,7 @@ export const BuyCreditsForm = ({
   const { _ } = useLingui();
   const warningModalContent = useRef<BuyWarningModalContent | undefined>();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+
   const setWarningBannerTextAtom = useSetAtom(warningBannerTextAtom);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
@@ -179,21 +182,12 @@ export const BuyCreditsForm = ({
     }),
   );
 
-  const stripeOptions = useMemo(
-    () => ({
-      amount: parseFloat(((data?.[CURRENCY_AMOUNT] || 0) * 100).toFixed(2)), // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00),
-      currency: USD_DENOM,
-      ...defaultStripeOptions,
-    }),
-    [data],
-  );
-
   useEffect(() => {
     setRetiring(prev =>
       typeof data?.retiring === 'undefined' ? prev : data?.retiring,
     );
     setPaymentOption(prev => data?.paymentOption || prev);
-  }, [data, setPaymentOption, setRetiring]);
+  }, [data.retiring, data?.paymentOption, setPaymentOption, setRetiring]);
 
   useEffect(() => {
     if (
@@ -389,6 +383,32 @@ export const BuyCreditsForm = ({
     ],
   );
 
+  const stripeAmount = useMemo(() => {
+    return (
+      data?.[CURRENCY_AMOUNT] ||
+      getCurrencyAmount({
+        currentCreditsAmount: 1,
+        card: paymentOption === PAYMENT_OPTIONS.CARD,
+        orderedSellOrders: cardSellOrders,
+        creditTypePrecision: creditTypeData?.creditType?.precision,
+      }).currencyAmount
+    );
+  }, [
+    data,
+    paymentOption,
+    cardSellOrders,
+    creditTypeData?.creditType?.precision,
+  ]);
+
+  const stripeOptions = useMemo(
+    () => ({
+      amount: parseFloat((stripeAmount * 100).toFixed(2)), // stripe amounts should be in the smallest currency unit (e.g., 100 cents to charge $1.00),
+      currency: USD_DENOM,
+      ...defaultStripeOptions,
+    }),
+    [stripeAmount],
+  );
+
   const { isLoading, userBalance } = useFetchUserBalance(currency?.askDenom);
 
   return (
@@ -420,7 +440,7 @@ export const BuyCreditsForm = ({
             onPrev={() => navigate(projectHref)}
             initialValues={{
               [CURRENCY_AMOUNT]: data?.[CURRENCY_AMOUNT],
-              [CREDITS_AMOUNT]: data?.[CREDITS_AMOUNT],
+              [CREDITS_AMOUNT]: data?.[CREDITS_AMOUNT] || 1,
               [SELL_ORDERS]: data?.[SELL_ORDERS],
               [CREDIT_VINTAGE_OPTIONS]: data?.[CREDIT_VINTAGE_OPTIONS],
               [CURRENCY]: data?.[CURRENCY],
@@ -473,7 +493,7 @@ export const BuyCreditsForm = ({
                 setCardDetails={setCardDetails}
               />
             )}
-            {activeStep === 2 && (
+            {activeStep === 2 && !cardDetailsMissing && (
               <AgreePurchaseFormFiat
                 email={data?.email}
                 retiring={retiring}
@@ -481,6 +501,16 @@ export const BuyCreditsForm = ({
                 goToChooseCredits={() => handleActiveStep(0)}
                 imgSrc="/svg/info-with-hand.svg"
                 country={cardDetails?.country || 'US'}
+                initialValues={{
+                  country: data?.country || cardDetails?.country || 'US',
+                  stateProvince: data?.stateProvince || '',
+                  postalCode: data?.postalCode || '',
+                  retirementReason: data?.retirementReason || '',
+                  anonymousPurchase: data?.anonymousPurchase || false,
+                  followProject: data?.followProject || false,
+                  subscribeNewsletter: data?.subscribeNewsletter || false,
+                  agreeErpa: data?.agreeErpa || false,
+                }}
               />
             )}
           </Elements>
@@ -516,6 +546,16 @@ export const BuyCreditsForm = ({
                 goToChooseCredits={() => handleActiveStep(0)}
                 imgSrc="/svg/info-with-hand.svg"
                 country={cardDetails?.country || 'US'}
+                initialValues={{
+                  country: data?.country || 'US',
+                  stateProvince: data?.stateProvince || '',
+                  postalCode: data?.postalCode || '',
+                  retirementReason: data?.retirementReason || '',
+                  anonymousPurchase: data?.anonymousPurchase || false,
+                  followProject: data?.followProject || false,
+                  subscribeNewsletter: data?.subscribeNewsletter || false,
+                  agreeErpa: data?.agreeErpa || false,
+                }}
                 isNewsletterSubscribed={subscribersStatusData?.subscribed}
               />
             )}

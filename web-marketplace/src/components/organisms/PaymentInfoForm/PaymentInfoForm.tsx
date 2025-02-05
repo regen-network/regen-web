@@ -2,10 +2,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
+import { useSetAtom } from 'jotai';
 
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import { cardDetailsMissingAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import {
   CardDetails,
@@ -55,9 +57,14 @@ export const PaymentInfoForm = ({
   setCardDetails,
 }: PaymentInfoFormProps) => {
   const { _ } = useLingui();
-  const { handleBack } = useMultiStep();
+  const {
+    handleBack,
+    handleSave: updateMultiStepData,
+    activeStep,
+    data,
+  } = useMultiStep();
   const [paymentInfoValid, setPaymentInfoValid] = useState(false);
-
+  const setCardDetailsMissing = useSetAtom(cardDetailsMissingAtom);
   const form = useZodForm({
     schema: paymentInfoFormSchema(paymentOption),
     defaultValues: {
@@ -89,10 +96,23 @@ export const PaymentInfoForm = ({
     () => paymentOption === PAYMENT_OPTIONS.CARD,
     [paymentOption],
   );
+
+  const handleOnBlur = () => {
+    updateMultiStepData(
+      {
+        ...data,
+        name: form.getValues('name'),
+        email: form.getValues('email'),
+      },
+      activeStep,
+    );
+  };
+
   return (
     <Form
       form={form}
       onSubmit={async (values: PaymentInfoFormSchemaType) => {
+        setCardDetailsMissing(false);
         const card = paymentOption === PAYMENT_OPTIONS.CARD;
         if (card && !stripe) {
           return;
@@ -142,6 +162,7 @@ export const PaymentInfoForm = ({
         }
         onSubmit(values);
       }}
+      onBlur={handleOnBlur}
     >
       <div className="flex flex-col gap-10 sm:gap-20 max-w-[560px]">
         <CustomerInfo

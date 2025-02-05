@@ -7,5 +7,12 @@ export const AgreePurchaseFormFiat = (props: Props) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  return <AgreePurchaseForm {...props} stripe={stripe} elements={elements} />;
+  return (
+    <AgreePurchaseForm
+      {...props}
+      stripe={stripe}
+      elements={elements}
+      isCardPayment
+    />
+  );
 };

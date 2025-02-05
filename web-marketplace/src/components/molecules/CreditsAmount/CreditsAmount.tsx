@@ -12,10 +12,13 @@ import {
   spendingCapAtom,
 } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
 import {
   getCreditsAvailableBannerText,
   getOrderedSellOrders,
+  resetCurrencyAndCredits,
 } from 'pages/BuyCredits/BuyCredits.utils';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
 import {
@@ -54,6 +57,11 @@ export const CreditsAmount = ({
   const setWarningBannerTextAtom = useSetAtom(warningBannerTextAtom);
   const [spendingCap, setSpendingCap] = useAtom(spendingCapAtom);
   const paymentOption = useAtomValue(paymentOptionAtom);
+  const {
+    data,
+    handleSave: updateMultiStepData,
+    activeStep,
+  } = useMultiStep<BuyCreditsSchemaTypes>();
 
   const card = useMemo(
     () => paymentOption === PAYMENT_OPTIONS.CARD,
@@ -142,34 +150,38 @@ export const CreditsAmount = ({
       // This can happen when the user switches payment option, currency,
       // or to only buy tradable credits,
       // but the amount set is above the amount of newly available credits
-      const currentCreditsAmount = getValues(CREDITS_AMOUNT);
+      let currentCreditsAmount = getValues(CREDITS_AMOUNT);
       if (currentCreditsAmount > _creditsAvailable) {
-        setValue(CREDITS_AMOUNT, _creditsAvailable);
-        setValue(CURRENCY_AMOUNT, _spendingCap);
-        setValue(
-          SELL_ORDERS,
-          orderedSellOrders.map(order => {
-            const price = getSellOrderPrice({ order, card });
-            return formatSellOrder({ order, card, price });
-          }),
-        );
         setWarningBannerTextAtom(
           getCreditsAvailableBannerText(_creditsAvailable, displayDenom),
         );
-      } else {
-        // Else we keep the same amount of credits
-        // but we still need to update currency amount and sell orders
-        // (because pricing and sell orders can be different)
-        const { currencyAmount, sellOrders } = getCurrencyAmount({
-          currentCreditsAmount,
-          card,
+        resetCurrencyAndCredits(
+          paymentOption,
           orderedSellOrders,
           creditTypePrecision,
-        });
-        setValue(CURRENCY_AMOUNT, currencyAmount);
-        setValue(SELL_ORDERS, sellOrders);
+          setValue,
+          updateMultiStepData,
+          data,
+          activeStep,
+          _creditsAvailable,
+        );
+      } else {
+        // Else we keep the same amount of credits
+        resetCurrencyAndCredits(
+          paymentOption,
+          orderedSellOrders,
+          creditTypePrecision,
+          setValue,
+          updateMultiStepData,
+          data,
+          activeStep,
+          currentCreditsAmount,
+        );
       }
     }
+    // Intentionally omit `updateMultiStepData` and `data` from the dependency array
+    // because including them trigger unnecessary renders.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     cardSellOrders,
     filteredCryptoSellOrders,
@@ -183,6 +195,7 @@ export const CreditsAmount = ({
     card,
     setWarningBannerTextAtom,
     _,
+    activeStep,
     displayDenom,
   ]);
 
@@ -193,26 +206,35 @@ export const CreditsAmount = ({
       setValue(CURRENCY_AMOUNT, spendingCap, {
         shouldValidate: true,
       });
-      setValue(
-        SELL_ORDERS,
-        orderedSellOrders.map(order => {
-          const price = getSellOrderPrice({ order, card });
-          return formatSellOrder({ order, card, price });
-        }),
+      const sellOrders = orderedSellOrders.map(order => {
+        const price = getSellOrderPrice({ order, card });
+        return formatSellOrder({ order, card, price });
+      });
+      setValue(SELL_ORDERS, sellOrders);
+      updateMultiStepData(
+        {
+          ...data,
+          creditsAmount: creditsAvailable,
+          currencyAmount: spendingCap,
+          sellOrders: sellOrders,
+        },
+        activeStep,
       );
       setMaxCreditsSelected(false);
     }
   }, [
+    activeStep,
     card,
     creditsAvailable,
+    data,
     maxCreditsSelected,
     orderedSellOrders,
     paymentOption,
     setValue,
     spendingCap,
+    updateMultiStepData,
   ]);
 
-  // Credits amount change
   const handleCreditsAmountChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       // Set currency amount according to credits quantity,
@@ -226,11 +248,27 @@ export const CreditsAmount = ({
       });
       setValue(CURRENCY_AMOUNT, currencyAmount, { shouldValidate: true });
       setValue(SELL_ORDERS, sellOrders);
+      updateMultiStepData(
+        {
+          ...data,
+          creditsAmount: currentCreditsAmount,
+          currencyAmount: currencyAmount,
+          sellOrders,
+        },
+        activeStep,
+      );
     },
-    [card, orderedSellOrders, setValue, creditTypePrecision],
+    [
+      card,
+      orderedSellOrders,
+      creditTypePrecision,
+      setValue,
+      updateMultiStepData,
+      data,
+      activeStep,
+    ],
   );
 
-  // Currency amount change
   const handleCurrencyAmountChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       // Set credits quantity according to currency amount,
@@ -242,10 +280,28 @@ export const CreditsAmount = ({
         orderedSellOrders,
         creditTypePrecision,
       });
+
+      updateMultiStepData(
+        {
+          ...data,
+          creditsAmount: currentCreditsAmount,
+          currencyAmount: isNaN(value) ? 0 : value,
+          sellOrders,
+        },
+        activeStep,
+      );
       setValue(CREDITS_AMOUNT, currentCreditsAmount, { shouldValidate: true });
       setValue(SELL_ORDERS, sellOrders);
     },
-    [card, orderedSellOrders, setValue, creditTypePrecision],
+    [
+      card,
+      orderedSellOrders,
+      creditTypePrecision,
+      updateMultiStepData,
+      data,
+      activeStep,
+      setValue,
+    ],
   );
 
   return (
@@ -266,12 +322,16 @@ export const CreditsAmount = ({
             cryptoCurrencies={cryptoCurrencies}
             displayDenom={displayDenom}
             allowedDenoms={allowedDenoms}
+            orderedSellOrders={orderedSellOrders}
+            creditTypePrecision={creditTypePrecision}
           />
         )}
         <span className="p-10 sm:p-20 text-xl">=</span>
         <CreditsInput
           creditsAvailable={creditsAvailable}
           handleCreditsAmountChange={handleCreditsAmountChange}
+          orderedSellOrders={orderedSellOrders}
+          creditTypePrecision={creditTypePrecision}
         />
       </div>
       {paymentOption === PAYMENT_OPTIONS.CRYPTO && (

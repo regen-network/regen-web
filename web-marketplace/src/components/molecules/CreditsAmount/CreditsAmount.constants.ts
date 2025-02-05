@@ -5,6 +5,7 @@ export const CURRENCY_AMOUNT = 'currencyAmount';
 export const CURRENCY = 'currency';
 export const CREDIT_VINTAGE_OPTIONS = 'creditVintageOptions';
 export const SELL_ORDERS = 'sellOrders';
+export const MIN_USD_CURRENCY_AMOUNT = 0.5;
 
 export const cryptoOptions = [
   {

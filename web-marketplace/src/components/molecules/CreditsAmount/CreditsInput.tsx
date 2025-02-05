@@ -2,10 +2,16 @@ import { ChangeEvent, FocusEvent, useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { useAtomValue } from 'jotai';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { LeafIcon } from 'web-components/src/components/icons/LeafIcon';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+
+import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
+import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
+import { resetCurrencyAndCredits } from 'pages/BuyCredits/BuyCredits.utils';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { CREDITS_AMOUNT } from './CreditsAmount.constants';
 import { CreditsInputProps } from './CreditsAmount.types';
@@ -13,6 +19,8 @@ import { CreditsInputProps } from './CreditsAmount.types';
 export const CreditsInput = ({
   creditsAvailable,
   handleCreditsAmountChange,
+  orderedSellOrders,
+  creditTypePrecision,
 }: CreditsInputProps) => {
   const { _ } = useLingui();
 
@@ -22,6 +30,12 @@ export const CreditsInput = ({
     setValue,
   } = useFormContext<ChooseCreditsFormSchemaType>();
   const { onChange } = register(CREDITS_AMOUNT);
+  const paymentOption = useAtomValue(paymentOptionAtom);
+  const {
+    data,
+    handleSave: updateMultiStepData,
+    activeStep,
+  } = useMultiStep<BuyCreditsSchemaTypes>();
 
   const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event);
@@ -51,22 +65,29 @@ export const CreditsInput = ({
 
   const handleOnBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>): void => {
-      // If the value is empty, set it to 0
+      // If the value is empty or 0 reset the currency and credit fields.
       const value = event.target.value;
-      if (value === '') {
-        setValue(CREDITS_AMOUNT, 0, { shouldValidate: true });
+      if (value === '' || parseFloat(value) === 0) {
+        resetCurrencyAndCredits(
+          paymentOption,
+          orderedSellOrders,
+          creditTypePrecision,
+          setValue,
+          updateMultiStepData,
+          data,
+          activeStep,
+        );
       }
     },
-    [setValue],
-  );
-  const handleOnFocus = useCallback(
-    (event: FocusEvent<HTMLInputElement>): void => {
-      const value = event.target.value;
-      if (value === '0') {
-        setValue(CREDITS_AMOUNT, 0, { shouldValidate: true });
-      }
-    },
-    [setValue],
+    [
+      activeStep,
+      creditTypePrecision,
+      data,
+      orderedSellOrders,
+      paymentOption,
+      setValue,
+      updateMultiStepData,
+    ],
   );
 
   return (
@@ -84,7 +105,6 @@ export const CreditsInput = ({
         onChange={onHandleChange}
         onInput={handleInput}
         onBlur={handleOnBlur}
-        onFocus={handleOnFocus}
         placeholder="0"
         sx={{
           '& .MuiInputBase-root': {

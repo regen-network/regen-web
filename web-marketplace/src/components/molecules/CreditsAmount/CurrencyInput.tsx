@@ -11,12 +11,16 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
-import { updateMultiStepCurrencyAndPaymentOption } from 'pages/BuyCredits/BuyCredits.utils';
+import { resetCurrencyAndCredits } from 'pages/BuyCredits/BuyCredits.utils';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';
-import { CURRENCY, CURRENCY_AMOUNT } from './CreditsAmount.constants';
+import {
+  CURRENCY,
+  CURRENCY_AMOUNT,
+  MIN_USD_CURRENCY_AMOUNT,
+} from './CreditsAmount.constants';
 import { CurrencyInputProps } from './CreditsAmount.types';
 import { formatCurrencyAmount, shouldFormatValue } from './CreditsAmount.utils';
 
@@ -35,6 +39,8 @@ export const CurrencyInput = ({
   cryptoCurrencies,
   displayDenom,
   allowedDenoms,
+  orderedSellOrders,
+  creditTypePrecision,
 }: CurrencyInputProps) => {
   const {
     register,
@@ -43,8 +49,11 @@ export const CurrencyInput = ({
     control,
   } = useFormContext<ChooseCreditsFormSchemaType>();
   const { _ } = useLingui();
-  const { data, handleSave, activeStep } =
-    useMultiStep<BuyCreditsSchemaTypes>();
+  const {
+    data,
+    handleSave: updateMultiStepData,
+    activeStep,
+  } = useMultiStep<BuyCreditsSchemaTypes>();
   const paymentOption = useAtomValue(paymentOptionAtom);
   const card = paymentOption === PAYMENT_OPTIONS.CARD;
   const { onChange } = register(CURRENCY_AMOUNT);
@@ -93,13 +102,29 @@ export const CurrencyInput = ({
 
   const handleOnBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>): void => {
-      // If the value is empty, set it to 0
       const value = event.target.value;
-      if (value === '') {
-        setValue(CURRENCY_AMOUNT, 0, { shouldValidate: true });
+      // If the value is empty or 0 reset the currency and credit fields.
+      if (value === '' || parseFloat(value) === 0) {
+        resetCurrencyAndCredits(
+          paymentOption,
+          orderedSellOrders,
+          creditTypePrecision,
+          setValue,
+          updateMultiStepData,
+          data,
+          activeStep,
+        );
       }
     },
-    [setValue],
+    [
+      activeStep,
+      creditTypePrecision,
+      data,
+      orderedSellOrders,
+      paymentOption,
+      setValue,
+      updateMultiStepData,
+    ],
   );
 
   const onHandleCurrencyChange = useCallback(
@@ -114,15 +139,23 @@ export const CurrencyInput = ({
               )?.[0].askBaseDenom,
             };
       setValue(CURRENCY, currency);
-      updateMultiStepCurrencyAndPaymentOption(
-        handleSave,
-        data,
-        currency,
+      updateMultiStepData(
+        {
+          ...data,
+          currency,
+          paymentOption,
+        },
         activeStep,
-        paymentOption,
       );
     },
-    [activeStep, cryptoCurrencies, data, handleSave, paymentOption, setValue],
+    [
+      cryptoCurrencies,
+      setValue,
+      updateMultiStepData,
+      data,
+      paymentOption,
+      activeStep,
+    ],
   );
 
   return (
@@ -144,7 +177,7 @@ export const CurrencyInput = ({
         } w-full sm:w-auto flex justify-start relative sm:h-60 rounded-sm items-center`}
         customInputProps={{
           max: maxCurrencyAmount,
-          min: card ? 0.5 : 0,
+          min: card ? MIN_USD_CURRENCY_AMOUNT : 0,
           step: card ? '0.01' : '0.000001',
           'aria-label': _(msg`Currency Input`),
         }}

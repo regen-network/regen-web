@@ -412,31 +412,31 @@ module.exports = {
         menuOpen: {
           '0%': {
             opacity: '0',
-            transform: 'scale(0.60) translateY(0px)',
+            transform: 'scale(0.60)',
             transformOrigin: 'top right',
           },
           '100%': {
             opacity: '1',
-            transform: 'scale(1) translateY(0px)',
+            transform: 'scale(1)',
             transformOrigin: 'top right',
           },
         },
         menuClose: {
           '0%': {
             opacity: '1',
-            transform: 'scale(1) translateY(20px)',
+            transform: 'scale(1)',
             transformOrigin: 'top right',
           },
           '100%': {
             opacity: '0',
-            transform: 'scale(0.60) translateY(0px)',
+            transform: 'scale(0.60)',
             transformOrigin: 'top right',
           },
         },
       },
       animation: {
-        menuOpen: 'menuOpen 225ms ease-in-out',
-        menuClose: 'menuClose 195ms ease-in-out',
+        menuOpen: 'menuOpen 300ms ease-in-out',
+        menuClose: 'menuClose 225ms ease-in-out',
       },
     },
   },

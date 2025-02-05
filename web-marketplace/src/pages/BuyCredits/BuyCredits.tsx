@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { useAtom, useAtomValue } from 'jotai';
 
+import { Loading } from 'web-components/src/components/loading';
+
 import NotFoundPage from 'pages/NotFound';
 import WithLoader from 'components/atoms/WithLoader';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
@@ -85,6 +87,8 @@ export const BuyCredits = () => {
       setRetiring(true);
     }
   }, [paymentOption, retiring, setRetiring]);
+
+  if (!accountCanBuy) return <Loading />;
 
   if (noProjectFound) return <NotFoundPage />;
 

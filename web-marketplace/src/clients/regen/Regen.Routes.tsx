@@ -178,6 +178,7 @@ export const getRegenRoutes = ({
           loader={buyCreditsLoader({
             queryClient: reactQueryClient,
             apolloClientFactory,
+            address,
           })}
         />
         <Route

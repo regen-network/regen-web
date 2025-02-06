@@ -147,8 +147,6 @@ export const AgreePurchaseForm = ({
           checked={agreeErpa}
           labelSize="md"
           labelClassName="font-normal"
-          error={!!errors.agreeErpa}
-          helperText={errors.agreeErpa?.message}
           {...form.register('agreeErpa')}
         />
       </div>

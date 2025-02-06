@@ -158,7 +158,7 @@ const ProjectFilterBody = ({
         ...clientFilters,
       ]}
       onFilterReset={mobile ? tempResetFilters : resetFilters}
-      showResetButton={mobile ? showResetButton : showTempResetButton}
+      showResetButton={mobile ? showTempResetButton : showResetButton}
       labels={{
         title: _(msg`Filters`),
         reset: _(msg`Reset`),

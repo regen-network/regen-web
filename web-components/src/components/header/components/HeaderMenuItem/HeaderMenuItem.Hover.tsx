@@ -75,7 +75,7 @@ const HeaderMenuItemHover = ({
                 ? ' animate-menuClose pointer-events-none'
                 : ' hidden')
         }`}
-        onClick={closeMenu}
+        onClick={isTouchScreen ? closeMenu : undefined}
       >
         <MenuList
           className="bg-grey-0 rounded-[4px] border border-solid border-grey-300 shadow-[0px_5px_5px_-3px_rgba(0,0,0,0.2),_0px_8px_10px_1px_rgba(0,0,0,0.14),_0px_3px_14px_2px_rgba(0,0,0,0.12)]"

@@ -9,7 +9,7 @@ export const agreePurchaseFormSchema = (retiring: boolean) =>
     postalCode: z.string(),
     followProject: z.boolean(),
     subscribeNewsletter: z.boolean(),
-    agreeErpa: z.literal(true),
+    agreeErpa: z.boolean().refine(value => value),
   });
 
 export type AgreePurchaseFormSchemaType = z.infer<

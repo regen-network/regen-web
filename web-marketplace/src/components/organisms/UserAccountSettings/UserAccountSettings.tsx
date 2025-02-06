@@ -25,7 +25,6 @@ import {
 import { getResendCodeButtonLink } from '../LoginButton/utils/getResendCodeButtonLink';
 import { getResendCodeLabel } from '../LoginButton/utils/getResendCodeLabel';
 import { emailFormSchema } from '../LoginModal/LoginModal.schema';
-import { ConnectedEmailErrorModal } from './UserAccountSettings.ConnectedEmailErrorModal';
 import { ConnectField } from './UserAccountSettings.ConnectField';
 import { UserAccountSettingsProps } from './UserAccountSettings.types';
 

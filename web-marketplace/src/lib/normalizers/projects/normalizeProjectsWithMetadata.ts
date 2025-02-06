@@ -32,7 +32,6 @@ import {
 } from 'pages/Projects/AllProjects/AllProjects.types';
 import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { MIN_USD_CURRENCY_AMOUNT } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
-import { MIN_USD_AMOUNT } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 

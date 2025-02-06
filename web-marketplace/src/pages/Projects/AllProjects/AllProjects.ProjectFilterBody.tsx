@@ -4,6 +4,7 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useAtom, useAtomValue } from 'jotai';
 
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import ProjectFilters from 'web-components/src/components/organisms/ProjectFilters';
 import type { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 import { hasChangedFilters } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters.utils';
@@ -35,6 +36,7 @@ type Props = {
   hasCommunityProjects: boolean;
   buyingOptionsFilterOptions: FilterOption[];
   mobile?: boolean;
+  onCloseFilterModal?: () => void;
 };
 
 const ProjectFilterBody = ({
@@ -45,6 +47,7 @@ const ProjectFilterBody = ({
   hasCommunityProjects,
   buyingOptionsFilterOptions,
   mobile, // on mobile, filters are only applied after clicking "apply filters" button
+  onCloseFilterModal,
 }: Props) => {
   const { _ } = useLingui();
 
@@ -52,6 +55,7 @@ const ProjectFilterBody = ({
     clientFilters,
     resetTempClientFilters,
     showResetButtonForTempClientFilters,
+    setClientFilters,
   } = useClientFilters({
     allProjects,
     mobile,
@@ -69,12 +73,16 @@ const ProjectFilterBody = ({
     () => (mobile ? tempBuyingOptionsFilters : buyingOptionsFilters),
     [buyingOptionsFilters, mobile, tempBuyingOptionsFilters],
   );
-  const creditClassFilters = useAtomValue(creditClassFiltersAtom);
+  const [creditClassFilters, setCreditClassFilters] = useAtom(
+    creditClassFiltersAtom,
+  );
   const creditClassInitialFilters = useAtomValue(creditClassInitialFiltersAtom);
   const [tempCreditClassFilters, setTempCreditClassFilters] =
     useState(creditClassFilters);
 
-  const showCommunityProjects = useAtomValue(showCommunityProjectsAtom);
+  const [showCommunityProjects, setShowCommunityProjects] = useAtom(
+    showCommunityProjectsAtom,
+  );
   const [tempShowCommunityProjects, setTempShowCommunityProjects] = useState(
     showCommunityProjects,
   );
@@ -86,6 +94,8 @@ const ProjectFilterBody = ({
     setTempBuyingOptionsFilters(initialActiveFilters.buyingOptionsFilters);
   }, [creditClassInitialFilters, resetTempClientFilters]);
 
+  const numberOfSelectedFilters = 1;
+  // TODO replace showTempResetButton with numberOfSelectedFilters
   const showTempResetButton = useMemo(
     () =>
       showResetButtonForTempClientFilters ||
@@ -105,67 +115,89 @@ const ProjectFilterBody = ({
   );
 
   return (
-    <ProjectFilters
-      filters={[
-        {
-          selectedFilters: prefinance
-            ? // Show credit card option as checked by default from prefinance tab
-              {
-                ...selectedBuyingOptionFilters,
-                [CREDIT_CARD_BUYING_OPTION_ID]: true,
-              }
-            : selectedBuyingOptionFilters,
-          displayType: 'checkbox',
-          title: _(msg`Buying options`),
-          options: buyingOptionsFilterOptions,
-          onFilterChange: (id: string) => {
-            mobile
-              ? setTempBuyingOptionsFilters(prev => ({
-                  ...prev,
-                  [id]: !prev[id],
-                }))
-              : setBuyingOptionsFilters(prev => ({ ...prev, [id]: !prev[id] }));
+    <>
+      <ProjectFilters
+        filters={[
+          {
+            selectedFilters: prefinance
+              ? // Show credit card option as checked by default from prefinance tab
+                {
+                  ...selectedBuyingOptionFilters,
+                  [CREDIT_CARD_BUYING_OPTION_ID]: true,
+                }
+              : selectedBuyingOptionFilters,
+            displayType: 'checkbox',
+            title: _(msg`Buying options`),
+            options: buyingOptionsFilterOptions,
+            onFilterChange: (id: string) => {
+              mobile
+                ? setTempBuyingOptionsFilters(prev => ({
+                    ...prev,
+                    [id]: !prev[id],
+                  }))
+                : setBuyingOptionsFilters(prev => ({
+                    ...prev,
+                    [id]: !prev[id],
+                  }));
+            },
+            hidden: !IS_REGEN,
           },
-          hidden: !IS_REGEN,
-        },
-        {
-          children: (
-            <CreditClassFilters
-              creditClassFilterOptions={creditClassFilterOptions}
-              tempCreditClassFilters={tempCreditClassFilters}
-              setTempCreditClassFilters={setTempCreditClassFilters}
-              mobile={mobile}
-            />
-          ),
-          title: _(CREDIT_CLASS_FILTER_LABEL),
-          displayType: 'children',
-          options: [],
-          hidden: prefinance || !IS_REGEN,
-        },
-        {
-          children: (
-            <CommunityFilter
-              tempShowCommunityProjects={tempShowCommunityProjects}
-              setTempShowCommunityProjects={setTempShowCommunityProjects}
-              mobile={mobile}
-            />
-          ),
-          title: _(COMMUNITY_FILTER_LABEL),
-          displayType: 'children',
-          options: [],
-          hidden: !hasCommunityProjects || prefinance || !IS_REGEN,
-        },
-        ...clientFilters,
-      ]}
-      onFilterReset={mobile ? tempResetFilters : resetFilters}
-      showResetButton={mobile ? showTempResetButton : showResetButton}
-      labels={{
-        title: _(msg`Filters`),
-        reset: _(msg`Reset`),
-        expand: _(msg`+ See more`),
-        collapse: _(msg`- See less`),
-      }}
-    />
+          {
+            children: (
+              <CreditClassFilters
+                creditClassFilterOptions={creditClassFilterOptions}
+                tempCreditClassFilters={tempCreditClassFilters}
+                setTempCreditClassFilters={setTempCreditClassFilters}
+                mobile={mobile}
+              />
+            ),
+            title: _(CREDIT_CLASS_FILTER_LABEL),
+            displayType: 'children',
+            options: [],
+            hidden: prefinance || !IS_REGEN,
+          },
+          {
+            children: (
+              <CommunityFilter
+                tempShowCommunityProjects={tempShowCommunityProjects}
+                setTempShowCommunityProjects={setTempShowCommunityProjects}
+                mobile={mobile}
+              />
+            ),
+            title: _(COMMUNITY_FILTER_LABEL),
+            displayType: 'children',
+            options: [],
+            hidden: !hasCommunityProjects || prefinance || !IS_REGEN,
+          },
+          ...clientFilters,
+        ]}
+        onFilterReset={mobile ? tempResetFilters : resetFilters}
+        showResetButton={mobile ? showTempResetButton : showResetButton}
+        labels={{
+          title: _(msg`Filters`),
+          reset: _(msg`Reset`),
+          expand: _(msg`+ See more`),
+          collapse: _(msg`- See less`),
+        }}
+      />
+      {mobile && (
+        <div className="shadow-[0_-4px_10px_0_rgba(0,0,0,0.10)] fixed bottom-0 left-0 w-full border-0 border-solid border-t border-sc-surface-stroke flex justify-end h-[62px] py-10 px-20 bg-sc-surface-page-background-light">
+          <ContainedButton
+            onClick={() => {
+              setClientFilters();
+              setCreditClassFilters(tempCreditClassFilters);
+              setBuyingOptionsFilters(tempBuyingOptionsFilters);
+              setShowCommunityProjects(tempShowCommunityProjects);
+              onCloseFilterModal && onCloseFilterModal();
+            }}
+          >
+            {showTempResetButton
+              ? `${_(msg`apply filters`)} (${numberOfSelectedFilters})`
+              : _(msg`show all projects`)}
+          </ContainedButton>{' '}
+        </div>
+      )}
+    </>
   );
 };
 

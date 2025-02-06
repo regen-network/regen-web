@@ -38,6 +38,7 @@ export const useClientFilters = ({
   clientFilters: Filter[];
   resetTempClientFilters: () => void;
   showResetButtonForTempClientFilters: boolean;
+  setClientFilters: () => void;
 } => {
   const { _ } = useLingui();
   const ecosystemIcons = useEcosystemTags(filterEcosystemIds);
@@ -61,6 +62,18 @@ export const useClientFilters = ({
     setTempEnvironmentTypeFilters(initialActiveFilters.environmentTypeFilters);
     setTempRegionFilters(initialActiveFilters.regionFilters);
   }, []);
+
+  const setClientFilters = useCallback(() => {
+    setMarketTypeFilters(tempMarketTypeFilters);
+    setEnvironmentTypeFilters(tempEnvironmentTypeFilters);
+    setRegionFilters(tempEnvironmentTypeFilters);
+  }, [
+    setEnvironmentTypeFilters,
+    setMarketTypeFilters,
+    setRegionFilters,
+    tempEnvironmentTypeFilters,
+    tempMarketTypeFilters,
+  ]);
 
   const showResetButtonForTempClientFilters = useMemo(
     () =>
@@ -139,5 +152,6 @@ export const useClientFilters = ({
     clientFilters,
     resetTempClientFilters,
     showResetButtonForTempClientFilters,
+    setClientFilters,
   };
 };

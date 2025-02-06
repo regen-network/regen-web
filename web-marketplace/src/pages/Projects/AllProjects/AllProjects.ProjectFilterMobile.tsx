@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { SxProps, Theme } from '@mui/material';
 import { sxToArray } from 'utils/mui/sxToArray';
 
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import FilterIcon from 'web-components/src/components/icons/FilterIcon';
 import Modal from 'web-components/src/components/modal';
@@ -36,6 +35,7 @@ const ProjectFilterMobile = ({
 }: Props) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
+  const onClose = () => setIsOpen(false);
 
   return (
     <>
@@ -60,7 +60,7 @@ const ProjectFilterMobile = ({
       >
         {_(FILTERS_MODAL_BUTTON)}
       </OutlinedButton>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)} className="h-full">
+      <Modal open={isOpen} onClose={onClose} className="h-full">
         <ProjectFilterBody
           allProjects={allProjects}
           creditClassFilterOptions={creditClassFilterOptions}
@@ -68,6 +68,7 @@ const ProjectFilterMobile = ({
           showResetButton={showResetButton}
           hasCommunityProjects={hasCommunityProjects}
           buyingOptionsFilterOptions={buyingOptionsFilterOptions}
+          onCloseFilterModal={onClose}
           mobile
         />
       </Modal>

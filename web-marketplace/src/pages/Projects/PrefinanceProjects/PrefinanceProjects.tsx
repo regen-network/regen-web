@@ -37,7 +37,7 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
       soldOutProjectsIds,
       allProjects,
       hasCommunityProjects,
-      creditClassFilters,
+      creditClassFilterOptions,
       buyingOptionsFilterOptions,
     } = useProjectsContext();
 
@@ -56,7 +56,7 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
           showResetButton={showResetButton}
           className="lg:hidden w-full mb-15 mr-0"
           hasCommunityProjects={hasCommunityProjects}
-          creditClassFilters={creditClassFilters}
+          creditClassFilterOptions={creditClassFilterOptions}
           buyingOptionsFilterOptions={buyingOptionsFilterOptions}
         />
         {prefinanceProjectsContent && (

@@ -77,7 +77,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     pagesCount,
     soldOutProjectsIds,
     loading,
-    creditClassFilters,
+    creditClassFilterOptions,
     buyingOptionsFilterOptions,
   } = useProjectsContext();
 
@@ -118,7 +118,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
             showResetButton={showResetButton}
             className="lg:hidden w-full mb-15 mr-0"
             hasCommunityProjects={hasCommunityProjects}
-            creditClassFilters={creditClassFilters}
+            creditClassFilterOptions={creditClassFilterOptions}
             buyingOptionsFilterOptions={buyingOptionsFilterOptions}
           />
 

@@ -7,6 +7,7 @@ import { Flex } from 'web-components/src/components/box';
 import Checkbox from 'web-components/src/components/inputs/new/CheckBox/Checkbox';
 import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
 
+import { UseStateSetter } from 'types/react/use-state';
 import { showCommunityProjectsAtom } from 'lib/atoms/projects.atoms';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -16,9 +17,17 @@ import { getFilterSelected } from './AllProjects.utils';
 
 type CommunityFilterProps = {
   sx?: SxProps<Theme>;
+  tempShowCommunityProjects: boolean | undefined;
+  setTempShowCommunityProjects: UseStateSetter<boolean | undefined>;
+  mobile?: boolean;
 };
 
-export const CommunityFilter = ({ sx }: CommunityFilterProps) => {
+export const CommunityFilter = ({
+  sx,
+  tempShowCommunityProjects,
+  setTempShowCommunityProjects,
+  mobile,
+}: CommunityFilterProps) => {
   const { _ } = useLingui();
   const { track } = useTracker();
   const [showCommunityProjects, setShowCommunityProjects] = useAtom(
@@ -31,13 +40,16 @@ export const CommunityFilter = ({ sx }: CommunityFilterProps) => {
         control={
           <Checkbox
             sx={{ p: 0, mr: 3 }}
-            checked={showCommunityProjects}
+            checked={mobile ? tempShowCommunityProjects : showCommunityProjects}
             onChange={event => {
-              setShowCommunityProjects(event.target.checked);
+              const checked = event.target.checked;
+              if (mobile) {
+                setTempShowCommunityProjects(checked);
+              } else setShowCommunityProjects(checked);
               track<FilterCommunityCreditsEvent>(
                 'filterPermissionlessCredits',
                 {
-                  selected: getFilterSelected(event.target.checked),
+                  selected: getFilterSelected(checked),
                 },
               );
             }}

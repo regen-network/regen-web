@@ -35,10 +35,10 @@ export const getCreditClassesMapping = ({
 export const getFilterSelected = (checked: boolean) =>
   checked ? 'selected' : 'unselected';
 
-export const getCreditClassSelectedFilters = (
-  creditClassSelectedFilters: Record<string, boolean>,
+export const getCreditClassFilters = (
+  creditClassFilters: Record<string, boolean>,
   value: boolean,
 ) =>
-  Object.keys(creditClassSelectedFilters).reduce((accumulator, key) => {
+  Object.keys(creditClassFilters).reduce((accumulator, key) => {
     return { ...accumulator, [key]: value };
   }, {});

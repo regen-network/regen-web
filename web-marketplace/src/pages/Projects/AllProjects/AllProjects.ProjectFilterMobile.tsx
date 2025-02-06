@@ -3,6 +3,7 @@ import { useLingui } from '@lingui/react';
 import { SxProps, Theme } from '@mui/material';
 import { sxToArray } from 'utils/mui/sxToArray';
 
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import FilterIcon from 'web-components/src/components/icons/FilterIcon';
 import Modal from 'web-components/src/components/modal';
@@ -19,7 +20,7 @@ type Props = {
   className?: string;
   showResetButton?: boolean;
   hasCommunityProjects: boolean;
-  creditClassFilters?: CreditClassFilter[];
+  creditClassFilterOptions?: CreditClassFilter[];
   buyingOptionsFilterOptions: FilterOption[];
 };
 
@@ -30,7 +31,7 @@ const ProjectFilterMobile = ({
   className = '',
   showResetButton = true,
   hasCommunityProjects,
-  creditClassFilters = [],
+  creditClassFilterOptions = [],
   buyingOptionsFilterOptions,
 }: Props) => {
   const { _ } = useLingui();
@@ -62,11 +63,12 @@ const ProjectFilterMobile = ({
       <Modal open={isOpen} onClose={() => setIsOpen(false)} className="h-full">
         <ProjectFilterBody
           allProjects={allProjects}
-          creditClassFilters={creditClassFilters}
+          creditClassFilterOptions={creditClassFilterOptions}
           resetFilters={resetFilters}
           showResetButton={showResetButton}
           hasCommunityProjects={hasCommunityProjects}
           buyingOptionsFilterOptions={buyingOptionsFilterOptions}
+          mobile
         />
       </Modal>
     </>

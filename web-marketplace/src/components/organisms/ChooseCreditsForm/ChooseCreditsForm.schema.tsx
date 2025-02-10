@@ -4,6 +4,7 @@ import {
   CREDITS_AMOUNT,
   CURRENCY,
   CURRENCY_AMOUNT,
+  MIN_USD_CURRENCY_AMOUNT,
   SELL_ORDERS,
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 import { z } from 'zod';
@@ -49,9 +50,13 @@ export const createChooseCreditsFormSchema = ({
         },
       )
       .refine(
-        value => paymentOption === PAYMENT_OPTIONS.CRYPTO || value >= 0.5,
+        value =>
+          paymentOption === PAYMENT_OPTIONS.CRYPTO ||
+          value >= MIN_USD_CURRENCY_AMOUNT,
         {
-          message: `${i18n._(MIN_USD_AMOUNT)} 0.5`,
+          message: `${i18n._(
+            MIN_USD_AMOUNT,
+          )} ${MIN_USD_CURRENCY_AMOUNT.toLocaleString()}`,
         },
       ),
     [CREDITS_AMOUNT]: z.coerce

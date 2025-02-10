@@ -62,7 +62,7 @@ export const getOrderedSellOrders = (
   filteredCryptoSellOrders: UISellOrderInfo[],
 ): UISellOrderInfo[] => {
   return isCard
-    ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
+    ? cardSellOrders // already sorted in getCardSellOrders
     : filteredCryptoSellOrders?.sort(
         (a, b) => Number(a.askAmount) - Number(b.askAmount),
       ) || [];

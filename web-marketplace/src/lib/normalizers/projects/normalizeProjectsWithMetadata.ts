@@ -31,6 +31,7 @@ import {
   UISellOrderInfo,
 } from 'pages/Projects/AllProjects/AllProjects.types';
 import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
+import { MIN_USD_CURRENCY_AMOUNT } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
@@ -242,18 +243,33 @@ export const normalizeProjectWithMetadata = ({
 export const getCardSellOrders = (
   sanityFiatSellOrders: SanityProject['fiatSellOrders'],
   sellOrders: UISellOrderInfo[],
-) =>
-  (sanityFiatSellOrders
-    ?.map(fiatOrder => {
-      const sellOrder = sellOrders.find(
-        cryptoOrder => cryptoOrder.id.toString() === fiatOrder?.sellOrderId,
-      );
-      if (sellOrder) {
-        return {
-          ...fiatOrder,
-          ...sellOrder,
-        };
-      }
-      return null;
-    })
-    .filter(Boolean) || []) as CardSellOrder[];
+) => {
+  const cardSellOrders = (
+    sanityFiatSellOrders
+      ? sanityFiatSellOrders.reduce((acc: CardSellOrder[], fiatOrder) => {
+          const sellOrder = sellOrders.find(
+            cryptoOrder => cryptoOrder.id.toString() === fiatOrder?.sellOrderId,
+          );
+          if (sellOrder) {
+            acc.push({ ...fiatOrder, ...sellOrder } as CardSellOrder);
+          }
+          return acc;
+        }, [])
+      : []
+  ).sort((a, b) => a.usdPrice - b.usdPrice);
+
+  let hasMinUsdAmount = false;
+  let currentSum = 0;
+
+  for (const order of cardSellOrders) {
+    currentSum = Number(
+      (currentSum + order.usdPrice * Number(order.quantity)).toFixed(2),
+    );
+    if (currentSum >= MIN_USD_CURRENCY_AMOUNT) {
+      hasMinUsdAmount = true;
+      break;
+    }
+  }
+
+  return hasMinUsdAmount ? cardSellOrders : [];
+};

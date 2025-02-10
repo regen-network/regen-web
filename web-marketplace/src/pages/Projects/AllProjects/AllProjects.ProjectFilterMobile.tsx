@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { SxProps, Theme } from '@mui/material';
 import { sxToArray } from 'utils/mui/sxToArray';
-import { number } from 'zod';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import FilterIcon from 'web-components/src/components/icons/FilterIcon';

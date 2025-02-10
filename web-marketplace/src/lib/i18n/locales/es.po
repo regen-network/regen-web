@@ -2541,6 +2541,10 @@ msgstr "Mínimo 1 destinatario"
 msgid "Moderate"
 msgstr "Moderado"
 
+#: src/pages/Projects/AllProjects/AllProjects.constants.ts:20
+msgid "Modify filters"
+msgstr "Modificar filtros"
+
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:90
 msgid "monitor"
 msgstr "monitor"

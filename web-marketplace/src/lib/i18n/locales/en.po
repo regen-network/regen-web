@@ -2538,6 +2538,10 @@ msgstr ""
 msgid "Moderate"
 msgstr ""
 
+#: src/pages/Projects/AllProjects/AllProjects.constants.ts:20
+msgid "Modify filters"
+msgstr ""
+
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:90
 msgid "monitor"
 msgstr ""

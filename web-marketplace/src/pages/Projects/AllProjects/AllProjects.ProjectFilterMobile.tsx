@@ -8,7 +8,10 @@ import FilterIcon from 'web-components/src/components/icons/FilterIcon';
 import Modal from 'web-components/src/components/modal';
 import type { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
-import { FILTERS_MODAL_BUTTON } from './AllProjects.constants';
+import {
+  ADD_FILTERS_MODAL_BUTTON,
+  MODIFY_FILTERS_MODAL_BUTTON,
+} from './AllProjects.constants';
 import ProjectFilterBody from './AllProjects.ProjectFilterBody';
 import { CreditClassFilter, ProjectWithOrderData } from './AllProjects.types';
 
@@ -60,7 +63,9 @@ const ProjectFilterMobile = ({
         ]}
         className={className}
       >
-        {_(FILTERS_MODAL_BUTTON)}
+        {numberOfSelectedFilters
+          ? _(MODIFY_FILTERS_MODAL_BUTTON)
+          : _(ADD_FILTERS_MODAL_BUTTON)}
         {numberOfSelectedFilters ? ` (${numberOfSelectedFilters})` : ''}
       </OutlinedButton>
       <Modal open={isOpen} onClose={onClose} className="h-full">

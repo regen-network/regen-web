@@ -16,4 +16,5 @@ export const COMPLIANCE_MARKET = 'COMPLIANCE_MARKET';
 export const VOLUNTARY_MARKET = 'VOLUNTARY_MARKET';
 export const COMPLIANCE_MARKET_TOOLTIP = msg`Compliance credits are mandatory to meet government regulations.`;
 export const VOLUNTARY_MARKET_TOOLTIP = msg`Voluntary credits are purchased for environmental responsibility without legal obligation.`;
-export const FILTERS_MODAL_BUTTON = msg`Add filters`;
+export const ADD_FILTERS_MODAL_BUTTON = msg`Add filters`;
+export const MODIFY_FILTERS_MODAL_BUTTON = msg`Modify filters`;

@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
 import type { Filter } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
-import { hasChangedFilters } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters.utils';
+import { countChangedFilters } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters.utils';
 
 import {
   environmentTypeFiltersAtom,
@@ -37,7 +37,7 @@ export const useClientFilters = ({
 }: Params): {
   clientFilters: Filter[];
   resetTempClientFilters: () => void;
-  showResetButtonForTempClientFilters: boolean;
+  numberOfTempFilters: number;
   setClientFilters: () => void;
 } => {
   const { _ } = useLingui();
@@ -50,6 +50,8 @@ export const useClientFilters = ({
   const [marketTypeFilters, setMarketTypeFilters] = useAtom(
     marketTypeFiltersAtom,
   );
+
+  // Temporary filters used for handling filters states in the mobile filter modal
   const [tempEnvironmentTypeFilters, setTempEnvironmentTypeFilters] = useState(
     environmentTypeFilters,
   );
@@ -75,17 +77,20 @@ export const useClientFilters = ({
     tempMarketTypeFilters,
   ]);
 
-  const showResetButtonForTempClientFilters = useMemo(
+  const numberOfTempFilters = useMemo(
     () =>
-      hasChangedFilters(
+      countChangedFilters(
         tempMarketTypeFilters,
         initialActiveFilters.marketTypeFilters,
-      ) ||
-      hasChangedFilters(
+      ) +
+      countChangedFilters(
         tempEnvironmentTypeFilters,
         initialActiveFilters.environmentTypeFilters,
-      ) ||
-      hasChangedFilters(tempRegionFilters, initialActiveFilters.regionFilters),
+      ) +
+      countChangedFilters(
+        tempRegionFilters,
+        initialActiveFilters.regionFilters,
+      ),
     [tempEnvironmentTypeFilters, tempMarketTypeFilters, tempRegionFilters],
   );
   let clientFilters: Filter[] = [];
@@ -151,7 +156,7 @@ export const useClientFilters = ({
   return {
     clientFilters,
     resetTempClientFilters,
-    showResetButtonForTempClientFilters,
+    numberOfTempFilters,
     setClientFilters,
   };
 };

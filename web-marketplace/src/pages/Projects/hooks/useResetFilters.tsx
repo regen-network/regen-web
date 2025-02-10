@@ -1,7 +1,10 @@
 import { useCallback, useMemo } from 'react';
 import { useAtom } from 'jotai';
 
-import { hasChangedFilters } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters.utils';
+import {
+  countChangedBoolFilters,
+  countChangedFilters,
+} from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters.utils';
 
 import {
   creditClassFiltersAtom,
@@ -51,23 +54,26 @@ export const useResetFilters = () => {
     setShowCommunityProjects,
   ]);
 
-  const showResetButton = useMemo(
+  const numberOfSelectedFilters = useMemo(
     () =>
-      hasChangedFilters(
+      countChangedFilters(
         marketTypeFilters,
         initialActiveFilters.marketTypeFilters,
-      ) ||
-      hasChangedFilters(
+      ) +
+      countChangedFilters(
         environmentTypeFilters,
         initialActiveFilters.environmentTypeFilters,
-      ) ||
-      hasChangedFilters(regionFilters, initialActiveFilters.regionFilters) ||
-      hasChangedFilters(
+      ) +
+      countChangedFilters(regionFilters, initialActiveFilters.regionFilters) +
+      countChangedFilters(
         buyingOptionsFilters,
         initialActiveFilters.buyingOptionsFilters,
-      ) ||
-      hasChangedFilters(creditClassFilters, creditClassInitialFilters) ||
-      showCommunityProjects !== DEFAULT_COMMUNITY_PROJECTS_FILTER,
+      ) +
+      countChangedFilters(creditClassFilters, creditClassInitialFilters) +
+      countChangedBoolFilters(
+        showCommunityProjects,
+        DEFAULT_COMMUNITY_PROJECTS_FILTER,
+      ),
     [
       buyingOptionsFilters,
       creditClassInitialFilters,
@@ -78,6 +84,7 @@ export const useResetFilters = () => {
       showCommunityProjects,
     ],
   );
+  const showResetButton = !!numberOfSelectedFilters;
 
-  return { resetFilters, showResetButton };
+  return { resetFilters, showResetButton, numberOfSelectedFilters };
 };

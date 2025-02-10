@@ -7,7 +7,10 @@ import { useAtom, useAtomValue } from 'jotai';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import ProjectFilters from 'web-components/src/components/organisms/ProjectFilters';
 import type { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
-import { hasChangedFilters } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters.utils';
+import {
+  countChangedBoolFilters,
+  countChangedFilters,
+} from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters.utils';
 
 import {
   creditClassFiltersAtom,
@@ -54,7 +57,7 @@ const ProjectFilterBody = ({
   const {
     clientFilters,
     resetTempClientFilters,
-    showResetButtonForTempClientFilters,
+    numberOfTempFilters,
     setClientFilters,
   } = useClientFilters({
     allProjects,
@@ -94,19 +97,20 @@ const ProjectFilterBody = ({
     setTempBuyingOptionsFilters(initialActiveFilters.buyingOptionsFilters);
   }, [creditClassInitialFilters, resetTempClientFilters]);
 
-  const numberOfSelectedFilters = 1;
-  // TODO replace showTempResetButton with numberOfSelectedFilters
-  const showTempResetButton = useMemo(
+  const numberOfTempSelectedFilters = useMemo(
     () =>
-      showResetButtonForTempClientFilters ||
-      hasChangedFilters(
+      numberOfTempFilters +
+      countChangedFilters(
         tempBuyingOptionsFilters,
         initialActiveFilters.buyingOptionsFilters,
-      ) ||
-      hasChangedFilters(tempCreditClassFilters, creditClassInitialFilters) ||
-      tempShowCommunityProjects !== DEFAULT_COMMUNITY_PROJECTS_FILTER,
+      ) +
+      countChangedFilters(tempCreditClassFilters, creditClassInitialFilters) +
+      countChangedBoolFilters(
+        tempShowCommunityProjects,
+        DEFAULT_COMMUNITY_PROJECTS_FILTER,
+      ),
     [
-      showResetButtonForTempClientFilters,
+      numberOfTempFilters,
       tempBuyingOptionsFilters,
       tempCreditClassFilters,
       creditClassInitialFilters,
@@ -172,7 +176,9 @@ const ProjectFilterBody = ({
           ...clientFilters,
         ]}
         onFilterReset={mobile ? tempResetFilters : resetFilters}
-        showResetButton={mobile ? showTempResetButton : showResetButton}
+        showResetButton={
+          mobile ? !!numberOfTempSelectedFilters : showResetButton
+        }
         labels={{
           title: _(msg`Filters`),
           reset: _(msg`Reset`),
@@ -191,8 +197,8 @@ const ProjectFilterBody = ({
               onCloseFilterModal && onCloseFilterModal();
             }}
           >
-            {showTempResetButton
-              ? `${_(msg`apply filters`)} (${numberOfSelectedFilters})`
+            {numberOfTempSelectedFilters
+              ? `${_(msg`apply filters`)} (${numberOfTempSelectedFilters})`
               : _(msg`show all projects`)}
           </ContainedButton>{' '}
         </div>

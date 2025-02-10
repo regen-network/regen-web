@@ -1,7 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { SxProps, Theme } from '@mui/material';
 import { sxToArray } from 'utils/mui/sxToArray';
+import { number } from 'zod';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import FilterIcon from 'web-components/src/components/icons/FilterIcon';
@@ -21,6 +22,7 @@ type Props = {
   hasCommunityProjects: boolean;
   creditClassFilterOptions?: CreditClassFilter[];
   buyingOptionsFilterOptions: FilterOption[];
+  numberOfSelectedFilters: number;
 };
 
 const ProjectFilterMobile = ({
@@ -32,6 +34,7 @@ const ProjectFilterMobile = ({
   hasCommunityProjects,
   creditClassFilterOptions = [],
   buyingOptionsFilterOptions,
+  numberOfSelectedFilters,
 }: Props) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
@@ -59,6 +62,7 @@ const ProjectFilterMobile = ({
         className={className}
       >
         {_(FILTERS_MODAL_BUTTON)}
+        {numberOfSelectedFilters ? ` (${numberOfSelectedFilters})` : ''}
       </OutlinedButton>
       <Modal open={isOpen} onClose={onClose} className="h-full">
         <ProjectFilterBody

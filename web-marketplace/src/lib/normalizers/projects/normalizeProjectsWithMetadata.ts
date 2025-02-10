@@ -245,23 +245,17 @@ export const getCardSellOrders = (
   sellOrders: UISellOrderInfo[],
 ) => {
   const cardSellOrders = (
-    (sanityFiatSellOrders
-      ? sanityFiatSellOrders
-          .map(fiatOrder => {
-            const sellOrder = sellOrders.find(
-              cryptoOrder =>
-                cryptoOrder.id.toString() === fiatOrder?.sellOrderId,
-            );
-            if (sellOrder) {
-              return {
-                ...fiatOrder,
-                ...sellOrder,
-              };
-            }
-            return null;
-          })
-          .filter(Boolean)
-      : []) as CardSellOrder[]
+    sanityFiatSellOrders
+      ? sanityFiatSellOrders.reduce((acc: CardSellOrder[], fiatOrder) => {
+          const sellOrder = sellOrders.find(
+            cryptoOrder => cryptoOrder.id.toString() === fiatOrder?.sellOrderId,
+          );
+          if (sellOrder) {
+            acc.push({ ...fiatOrder, ...sellOrder } as CardSellOrder);
+          }
+          return acc;
+        }, [])
+      : []
   ).sort((a, b) => a.usdPrice - b.usdPrice);
 
   let hasMinUsdAmount = false;

@@ -9,6 +9,7 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
+import { useUpdateAccountByIdMutation } from 'generated/graphql';
 import { useLedger } from 'ledger';
 import { warningBannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
@@ -59,6 +60,7 @@ import { defaultStripeOptions } from 'components/organisms/PaymentInfoForm/Payme
 import { PaymentInfoFormSchemaType } from 'components/organisms/PaymentInfoForm/PaymentInfoForm.schema';
 import { PaymentInfoFormFiat } from 'components/organisms/PaymentInfoForm/PaymentInfoFormFiat';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
+import { useAuthData } from 'hooks/useAuthData';
 
 import {
   cardDetailsMissingAtom,
@@ -122,6 +124,8 @@ export const BuyCreditsForm = ({
     useMultiStep<BuyCreditsSchemaTypes>();
   const { wallet, isConnected, activeWalletAddr, loaded } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
+  const { noAccountAndNoWallet } = useAuthData();
+  const [updateAccountById] = useUpdateAccountByIdMutation();
   const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
   const cardDetailsMissing = useAtomValue(cardDetailsMissingAtom);
   const {
@@ -298,6 +302,7 @@ export const BuyCreditsForm = ({
             savePaymentMethod,
             createAccount: createActiveAccount,
             email,
+            name,
           } = data;
 
           if (email && subscribeNewsletter) {
@@ -308,6 +313,19 @@ export const BuyCreditsForm = ({
                 'Content-Type': 'application/json',
               }),
               body: JSON.stringify({ email }),
+            });
+          }
+
+          if (name && !activeAccount?.name && !noAccountAndNoWallet) {
+            updateAccountById({
+              variables: {
+                input: {
+                  id: activeAccount?.id,
+                  accountPatch: {
+                    name,
+                  },
+                },
+              },
             });
           }
 
@@ -346,11 +364,15 @@ export const BuyCreditsForm = ({
       project,
       refetchSellOrders,
       data,
+      activeAccount?.name,
+      activeAccount?.id,
+      noAccountAndNoWallet,
       creditsAmount,
       purchase,
       retiring,
       paymentMethodId,
       confirmationTokenId,
+      updateAccountById,
       currency,
       _,
       allowedDenomsData,

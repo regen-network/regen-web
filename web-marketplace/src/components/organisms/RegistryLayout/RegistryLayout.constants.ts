@@ -27,3 +27,9 @@ export const TERRAOS_POWERED_BY = msg`Powered by`;
 export const TERRAOS_COPYRIGHT = msg`© 2024 Terrasos SAS | All rights reserved`;
 export const TERRASOS_COMPANY_DESCRIPTION = msg`We are a company specialized in structuring and operating environmental investments.`;
 export const TERRASOS_LOGO_ALT = msg`Terrasos Logo`;
+
+export const CONNECTED_EMAIL_ERROR = 'email.already_connected';
+export const CONNECTED_EMAIL_ERROR_TITLE = msg`Sorry, this email is already connected to another account`;
+export const CONNECTED_EMAIL_ERROR_DESCRIPTION_START = msg`You entered: `;
+export const CONNECTED_EMAIL_ERROR_DESCRIPTION_END = msg`. Please use a different email address.`;
+export const EMAIL_ADDED = msg`Log in email successfully added`;

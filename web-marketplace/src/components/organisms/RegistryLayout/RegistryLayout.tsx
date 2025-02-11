@@ -24,6 +24,7 @@ import { RegistryLayoutTxBuySuccessfulModal } from './RegistryLayout.TxBuySucces
 import { RegistryLayoutTxErrorModal } from './RegistryLayout.TxErrorModal';
 import { RegistryLayoutTxSuccessfulModal } from './RegistryLayout.TxSuccessfulModal';
 import { RegistryLayoutWarningBannerModal } from './RegistryLayout.WarningBanner';
+import { RegistryLayoutConnectedEmailErrorModal } from './RegistryLayout.ConnectedEmailErrorModal';
 
 const RegistryLayout: React.FC = () => {
   return (
@@ -51,6 +52,7 @@ const RegistryLayout: React.FC = () => {
       <RegistryLayoutTxBuySuccessfulModal />
       <RegistryLayoutWarningBannerModal />
       <RegistryLayoutChooseHowToPurchaseModal />
+      <RegistryLayoutConnectedEmailErrorModal />
     </>
   );
 };

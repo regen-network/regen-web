@@ -8,6 +8,7 @@ import { TxSuccessfulModalProps } from 'web-components/src/components/modal/TxSu
 
 import { AccountSwitchModalProps } from 'components/organisms/AccountSwitchModal/AccountSwitchModal';
 import { ChooseHowToPurchaseModalProps } from 'components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal';
+import { ConnectedEmailErrorModalProps } from 'components/organisms/RegistryLayout/RegistryLayout.ConnectedEmailErrorModal';
 
 export const errorModalAtom = atomWithImmer({
   title: '',
@@ -62,3 +63,11 @@ export const chooseHowToPurchaseModalAtom = atomWithImmer({
   open: false,
   projectId: '',
 } as Partial<ChooseHowToPurchaseModalProps>);
+
+type ConnectedEmailErrorModal = RegenModalProps & {
+  email: string;
+};
+export const connectedEmailErrorModalAtom = atomWithImmer({
+  open: false,
+  email: '',
+} as Partial<ConnectedEmailErrorModal>);

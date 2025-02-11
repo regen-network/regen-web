@@ -25,7 +25,6 @@ import {
 import { getResendCodeButtonLink } from '../LoginButton/utils/getResendCodeButtonLink';
 import { getResendCodeLabel } from '../LoginButton/utils/getResendCodeLabel';
 import { emailFormSchema } from '../LoginModal/LoginModal.schema';
-import { ConnectedEmailErrorModal } from './UserAccountSettings.ConnectedEmailErrorModal';
 import { ConnectField } from './UserAccountSettings.ConnectField';
 import { UserAccountSettingsProps } from './UserAccountSettings.types';
 
@@ -52,8 +51,6 @@ export const UserAccountSettings = ({
     onMailCodeChange,
     onResendPasscode,
     onEmailSubmit,
-    isConnectedEmailErrorModalOpen,
-    onConnectedEmailErrorModalClose,
   } = emailConfirmationData;
 
   const form = useZodForm({
@@ -115,11 +112,6 @@ export const UserAccountSettings = ({
         open={isConfirmationModalOpen}
         error={emailModalError}
         onCodeChange={onMailCodeChange}
-      />
-      <ConnectedEmailErrorModal
-        open={isConnectedEmailErrorModalOpen}
-        onClose={onConnectedEmailErrorModalClose}
-        email={email}
       />
       <div className="flex flex-col gap-30">
         <div className="flex flex-col gap-10">

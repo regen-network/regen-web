@@ -60,7 +60,6 @@ import { defaultStripeOptions } from 'components/organisms/PaymentInfoForm/Payme
 import { PaymentInfoFormSchemaType } from 'components/organisms/PaymentInfoForm/PaymentInfoForm.schema';
 import { PaymentInfoFormFiat } from 'components/organisms/PaymentInfoForm/PaymentInfoFormFiat';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
-import { useAuthData } from 'hooks/useAuthData';
 
 import {
   cardDetailsMissingAtom,
@@ -124,7 +123,6 @@ export const BuyCreditsForm = ({
     useMultiStep<BuyCreditsSchemaTypes>();
   const { wallet, isConnected, activeWalletAddr, loaded } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
-  const { noAccountAndNoWallet } = useAuthData();
   const [updateAccountById] = useUpdateAccountByIdMutation();
   const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
   const cardDetailsMissing = useAtomValue(cardDetailsMissingAtom);
@@ -316,7 +314,7 @@ export const BuyCreditsForm = ({
             });
           }
 
-          if (name && !activeAccount?.name && !noAccountAndNoWallet) {
+          if (name && activeAccount?.id && !activeAccount?.name) {
             updateAccountById({
               variables: {
                 input: {
@@ -366,7 +364,6 @@ export const BuyCreditsForm = ({
       data,
       activeAccount?.name,
       activeAccount?.id,
-      noAccountAndNoWallet,
       creditsAmount,
       purchase,
       retiring,

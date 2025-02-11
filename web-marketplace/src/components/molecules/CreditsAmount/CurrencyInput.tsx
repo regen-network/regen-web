@@ -184,7 +184,8 @@ export const CurrencyInput = ({
         sx={{
           '& .MuiInputBase-root': {
             border: 'none',
-            paddingRight: theme => (card ? theme.spacing(5) : 0),
+            paddingRight: theme =>
+              card || cryptoCurrencies.length === 1 ? theme.spacing(5) : 0,
             '& input': {
               overflow: 'hidden',
               textOverflow: 'ellipsis',
@@ -210,7 +211,7 @@ export const CurrencyInput = ({
           },
         }}
         endAdornment={
-          card ? (
+          card || cryptoCurrencies.length === 1 ? (
             <DenomIconWithCurrency
               baseDenom={currency?.askBaseDenom}
               displayDenom={displayDenom}

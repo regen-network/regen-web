@@ -361,11 +361,12 @@ export const getRegenRoutes = ({
 export const getRegenRouter = ({
   reactQueryClient,
   apolloClientFactory,
+  address,
 }: RouterParams): Router => {
   const sentryCreateBrowserRouter =
     Sentry.wrapCreateBrowserRouter(createBrowserRouter);
   return sentryCreateBrowserRouter(
-    getRegenRoutes({ reactQueryClient, apolloClientFactory }),
+    getRegenRoutes({ reactQueryClient, apolloClientFactory, address }),
     {
       basename: import.meta.env.PUBLIC_URL,
     },

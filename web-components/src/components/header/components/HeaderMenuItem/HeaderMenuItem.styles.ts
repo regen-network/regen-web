@@ -5,8 +5,6 @@ export const useHeaderMenuHoverStyles = makeStyles()(theme => ({
     boxSizing: 'border-box',
     height: '100%',
     lineHeight: theme.spacing(6),
-    paddingRight: theme.spacing(7.375),
-    paddingLeft: theme.spacing(7.375),
     backgroundColor: 'inherit',
     '& > a': {
       borderBottom: '2px solid transparent',

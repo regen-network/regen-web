@@ -1,5 +1,10 @@
-import React from 'react';
-import { BoxProps, MenuItem, SxProps } from '@mui/material';
+import {
+  BoxProps,
+  MenuItem,
+  SxProps,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import cx from 'clsx';
 
 import { Theme } from '../../../../theme/muiTheme';
@@ -30,6 +35,7 @@ export interface HeaderMenuItemBase {
 
 export interface MenuItemProps extends HeaderMenuItemBase {
   item: Item;
+  isUserMenu?: boolean;
 }
 
 const HeaderMenuItem: React.FC<MenuItemProps> = ({
@@ -39,15 +45,18 @@ const HeaderMenuItem: React.FC<MenuItemProps> = ({
   classes,
   sx,
   component = 'li',
+  isUserMenu,
 }) => {
   const { classes: styles } = useHeaderMenuHoverStyles();
-
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
   return (
     <MenuItem
       className={cx(
         classes?.root,
         styles.menuItem,
         pathname === item.href && styles.currentMenuItem,
+        isTablet && !isUserMenu ? '!hidden' : '',
       )}
       sx={[...sxToArray(sx)]}
       component={component}
@@ -57,6 +66,7 @@ const HeaderMenuItem: React.FC<MenuItemProps> = ({
         linkComponent={linkComponent}
         pathname={pathname}
         classes={{ paper: classes?.paper }}
+        isUserMenu={isUserMenu}
       />
     </MenuItem>
   );

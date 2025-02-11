@@ -13,6 +13,7 @@ type Props = {
   classes?: {
     paper?: string;
   };
+  isUserMenu?: boolean;
 };
 
 export const HeaderMenuItemContent = ({
@@ -20,6 +21,7 @@ export const HeaderMenuItemContent = ({
   linkComponent: LinkComponent,
   pathname,
   classes,
+  isUserMenu,
 }: Props): JSX.Element => {
   const theme = useTheme();
   const { classes: styles } = useHeaderMenuHoverStyles();
@@ -41,12 +43,14 @@ export const HeaderMenuItemContent = ({
       title={item.title}
       renderTitle={item.renderTitle}
       classes={{ title: styles.title, paper: classes?.paper }}
+      isUserMenu={isUserMenu}
     >
       {/* `render` overrides default dropdown */}
       {item.dropdownItems && !item.renderDropdownItems && (
         <HeaderDropdown
           items={item.dropdownItems}
           linkComponent={LinkComponent}
+          isUserMenu={isUserMenu}
         />
       )}
       {item.renderDropdownItems && item.renderDropdownItems()}

@@ -102,14 +102,6 @@ export const useHeaderStyles = makeStyles<StyleProps>()(
       // BEGIN HACK setting jss styles (duplicated from mui components built-in emotion styles)
       // so it's initially rendered on gatsby build
       // Remove once migrations from mui jss to emotion and to latest gatsby done
-      desktop: {
-        [theme.breakpoints.down('md')]: {
-          display: 'none',
-        },
-        [theme.breakpoints.up('md')]: {
-          display: 'block',
-        },
-      },
       mobile: {
         [theme.breakpoints.down('md')]: {
           display: 'block',

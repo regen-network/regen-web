@@ -78,10 +78,7 @@ export default function Header({
             <HomeLink
               color={isTablet ? theme.palette.primary.contrastText : color}
             />
-            <Box
-              className={styles.desktop}
-              display={{ xs: 'none', md: 'block' }}
-            >
+            <Box className="flex items-center">
               <MenuList className={styles.menuList}>
                 {menuItems?.map((item, index) => {
                   return (
@@ -97,20 +94,15 @@ export default function Header({
                 {isRegistry && extras}
                 {websiteExtras}
               </MenuList>
-            </Box>
-            <Box
-              className={styles.mobile}
-              display={{ xs: 'block', md: 'none' }}
-            >
-              <MobileMenu
-                linkComponent={linkComponent}
-                isRegistry={isRegistry}
-                pathname={pathname}
-                menuItems={menuItems}
-                extras={extras}
-                websiteExtras={websiteExtras}
-                isUserLoggedIn={isUserLoggedIn}
-              />
+              <Box className={styles.mobile}>
+                <MobileMenu
+                  linkComponent={linkComponent}
+                  pathname={pathname}
+                  menuItems={menuItems}
+                  websiteExtras={websiteExtras}
+                  isUserLoggedIn={isUserLoggedIn}
+                />
+              </Box>
             </Box>
           </Box>
         </Container>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import MenuItem from '@mui/material/MenuItem';
@@ -15,9 +15,7 @@ import { useMobileMenuStyles } from './MobileMenu.styles';
 
 type Props = {
   menuItems?: Item[];
-  isRegistry?: boolean;
   pathname: string;
-  extras?: JSX.Element;
   linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
   websiteExtras?: JSX.Element;
   isUserLoggedIn?: boolean;
@@ -26,17 +24,19 @@ type Props = {
 const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
   menuItems,
   pathname,
-  isRegistry,
-  extras,
   websiteExtras,
   linkComponent: Link,
   isUserLoggedIn,
 }) => {
   const { classes: styles, cx } = useMobileMenuStyles();
   const theme = useTheme();
+  // eslint-disable-next-line lingui/no-unlocalized-strings
+  const isTouchScreen = useMediaQuery('(pointer: coarse)');
   const [open, setOpen] = useState(false);
 
-  const handleOpen = (): void => setOpen(true);
+  const handleToggle = () => {
+    setOpen(open => !open);
+  };
   const handleClose = (): void => setOpen(false);
 
   // close drawer if route changes
@@ -47,10 +47,10 @@ const MobileMenu: React.FC<React.PropsWithChildren<Props>> = ({
   return (
     <div className={styles.root}>
       <Center>
-        {isRegistry && extras}
         <HamburgerIcon
           className={cx(styles.hamburger, styles.icon)}
-          onClick={handleOpen}
+          onClick={handleToggle}
+          onMouseLeave={isTouchScreen ? handleClose : undefined}
           width="29px"
           height="22px"
           sx={{ ml: { xs: isUserLoggedIn ? 0 : 2, sm: 4 } }}

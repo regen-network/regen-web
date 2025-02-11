@@ -36,7 +36,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
       className="w-full"
       onClick={() => onProfileClick && onProfileClick(id, selected)}
     >
-      <Grid container>
+      <Grid container wrap="nowrap">
         <Grid item mr={3} position="relative">
           <UserAvatar size="medium" src={profileImage} />
           {selected && (

@@ -78,12 +78,12 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
         <CardHeader
           sx={{
             '.MuiCardHeader-avatar': {
-              width: { xs: '100%', sm: 'auto' },
+              width: { xs: '100%', tablet: 'auto' },
             },
           }}
-          className="w-full flex flex-col items-start sm:items-center justify-between sm:flex-row p-15 sm:p-30 border-solid border-0 border-b-[1px] border-bc-neutral-300"
+          className="w-full flex flex-col items-start md:items-center justify-between md:flex-row p-15 sm:p-30 border-solid border-0 border-b-[1px] border-bc-neutral-300"
           avatar={
-            <div className="w-full h-[178px] sm:w-[156px] sm:h-full">
+            <div className="w-full h-[178px] md:w-[156px] md:h-full">
               {isPrefinanceProject && (
                 <PrefinanceTag
                   bodyTexts={getProjectCardBodyTextMapping(_)}
@@ -101,7 +101,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
             </div>
           }
           action={
-            <div className="flex flex-wrap md:flex-col gap-10 pb-5">
+            <div className="flex flex-wrap sm:flex-col gap-10 pb-5">
               {retirementInfo.retiredCredits &&
                 retirementInfo.certificateNodeId && (
                   <Link
@@ -138,7 +138,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
           title={
             <Title
               variant="h2"
-              className="mt-10 sm:mt-0 mb-5 text-[21px] leading-[1.5]"
+              className="mt-10 md:mt-0 mb-5 text-[21px] leading-[1.5]"
             >
               <Link href={projectHref} className="text-bc-neutral-700">
                 {project.name}

@@ -12,6 +12,7 @@ import { Router } from '@remix-run/router';
 import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
 
+import { Maybe } from 'generated/graphql';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -101,13 +102,13 @@ export const RegenRoutes = ({
   reactQueryClient,
   apolloClientFactory,
 }: RouterProps) => {
-  const { wallet } = useWallet();
+  const { activeWalletAddr } = useWallet();
   return (
     <RouterProvider
       router={getRegenRouter({
         reactQueryClient,
         apolloClientFactory,
-        address: wallet?.address,
+        address: activeWalletAddr,
       })}
       fallbackElement={<PageLoader />}
     />
@@ -117,7 +118,7 @@ export const RegenRoutes = ({
 type RouterParams = {
   reactQueryClient: QueryClient;
   apolloClientFactory: ApolloClientFactory;
-  address?: string;
+  address?: Maybe<string>;
 };
 
 export const getRegenRoutes = ({

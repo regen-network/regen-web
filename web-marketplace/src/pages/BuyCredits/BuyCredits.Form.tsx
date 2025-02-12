@@ -18,12 +18,14 @@ import {
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
+import { reactQueryClient } from 'lib/clients/reactQueryClient';
 import { apiServerUrl } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { getSubscribersStatusQuery } from 'lib/queries/react-query/registry-server/getSubscribersStatusQuery/getSubscribersStatusQuery';
+import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchUserBalance } from 'pages/BuyCredits/hooks/useFetchUserBalance';
@@ -224,6 +226,14 @@ export const BuyCreditsForm = ({
     [data, handleSaveNext, setPaymentMethodId],
   );
 
+  const refreshProfileData = useCallback(async () => {
+    if (activeAccount) {
+      await reactQueryClient.invalidateQueries({
+        queryKey: getAccountByIdQueryKey({ id: activeAccount.id }),
+      });
+    }
+  }, [activeAccount]);
+
   const allowedDenoms = useMemo(
     () => allowedDenomsData?.allowedDenoms,
     [allowedDenomsData?.allowedDenoms],
@@ -325,6 +335,7 @@ export const BuyCreditsForm = ({
                 },
               },
             });
+            refreshProfileData();
           }
 
           if (selectedSellOrders && creditsAmount)
@@ -362,14 +373,15 @@ export const BuyCreditsForm = ({
       project,
       refetchSellOrders,
       data,
-      activeAccount?.name,
       activeAccount?.id,
+      activeAccount?.name,
       creditsAmount,
       purchase,
       retiring,
       paymentMethodId,
       confirmationTokenId,
       updateAccountById,
+      refreshProfileData,
       currency,
       _,
       allowedDenomsData,

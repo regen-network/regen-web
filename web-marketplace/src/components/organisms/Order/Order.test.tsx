@@ -194,7 +194,7 @@ describe('Order Component', () => {
       />,
     );
     expect(screen.getByText(/2000/i)).toBeInTheDocument();
-    expect(screen.getByText(/400000/i)).toBeInTheDocument();
+    expect(screen.getByText(/400,000.00/i)).toBeInTheDocument();
     expect(screen.getAllByText(/usd/i)).toHaveLength(2);
   });
 

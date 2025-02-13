@@ -27,7 +27,7 @@ msgstr ""
 msgid "- See less"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:7
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:34
 msgid ". Please use a different email address."
 msgstr ""
 
@@ -1115,7 +1115,7 @@ msgstr ""
 msgid "Congrats! Your transaction was successful."
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:87
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:84
 msgid "connect"
 msgstr ""
 
@@ -1123,7 +1123,7 @@ msgstr ""
 msgid "CONNECT"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:155
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:147
 msgid "Connect a wallet address to be able to perform on chain tasks such as buying and selling credits, and creating projects on Regen Ledger."
 msgstr ""
 
@@ -2168,7 +2168,7 @@ msgstr ""
 msgid "In one sentence, summarize the story above."
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:175
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:167
 msgid "In order to buy and retire ecocredits using credit card payment, we may generate a dedicated hosted wallet address to use as the recipient of the retired blockchain credits. Please do not send funds or tradable credits to this address, as you will not have the ability to initiate transactions from this account.<0>Learn more»</0>"
 msgstr ""
 
@@ -2387,7 +2387,8 @@ msgstr ""
 msgid "log in"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:8
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:35
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:3
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:36
 msgid "Log in email successfully added"
 msgstr ""
@@ -2400,7 +2401,7 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:75
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:72
 msgid "Login Email"
 msgstr ""
 
@@ -3326,7 +3327,7 @@ msgstr ""
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr ""
 
-#: src/pages/Projects/Projects.tsx:309
+#: src/pages/Projects/Projects.tsx:300
 msgid "projects tabs"
 msgstr ""
 
@@ -3342,7 +3343,7 @@ msgstr ""
 msgid "purchase date"
 msgstr ""
 
-#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:158
+#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:156
 msgid "purchase now"
 msgstr ""
 
@@ -3414,7 +3415,7 @@ msgstr ""
 msgid "Regen Data Provider"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:172
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:164
 msgid "Regen impact address"
 msgstr ""
 
@@ -3871,7 +3872,7 @@ msgstr ""
 msgid "Small or Medium Sized Business"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:127
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:119
 msgid "Social Accounts"
 msgstr ""
 
@@ -3904,7 +3905,7 @@ msgstr ""
 msgid "Sorry, something went wrong!"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:5
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:32
 msgid "Sorry, this email is already connected to another account"
 msgstr ""
 
@@ -4503,7 +4504,7 @@ msgstr ""
 msgid "Use my credit card on file ending in {0}"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:130
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:122
 msgid "Use your social account to log in to Regen Marketplace."
 msgstr ""
 
@@ -4722,7 +4723,7 @@ msgstr ""
 msgid "Vulnerable"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:152
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:144
 msgid "Wallet integration"
 msgstr ""
 
@@ -4885,7 +4886,7 @@ msgstr ""
 msgid "You don't have enough basket tokens"
 msgstr ""
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:6
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:33
 msgid "You entered:"
 msgstr ""
 

@@ -22,6 +22,9 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+msgid ""
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -30,7 +33,7 @@ msgstr "- ver menos"
 msgid "- See less"
 msgstr "- Ver menos"
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:7
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:34
 msgid ". Please use a different email address."
 msgstr "Utilice una dirección de correo electrónico diferente."
 
@@ -1118,7 +1121,7 @@ msgstr "¡Felicitaciones! Su compra fue exitosa."
 msgid "Congrats! Your transaction was successful."
 msgstr "¡Felicitaciones! Su transacción fue exitosa."
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:87
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:84
 msgid "connect"
 msgstr "conectar"
 
@@ -1126,7 +1129,7 @@ msgstr "conectar"
 msgid "CONNECT"
 msgstr "CONECTAR"
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:155
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:147
 msgid "Connect a wallet address to be able to perform on chain tasks such as buying and selling credits, and creating projects on Regen Ledger."
 msgstr "Conecte una dirección de billetera para poder realizar tareas en cadena como comprar y vender créditos y crear proyectos en Regen Ledger."
 
@@ -2171,7 +2174,7 @@ msgstr "en"
 msgid "In one sentence, summarize the story above."
 msgstr "En una frase, resuma la historia anterior."
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:175
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:167
 msgid "In order to buy and retire ecocredits using credit card payment, we may generate a dedicated hosted wallet address to use as the recipient of the retired blockchain credits. Please do not send funds or tradable credits to this address, as you will not have the ability to initiate transactions from this account.<0>Learn more»</0>"
 msgstr "Para comprar y retirar ecocréditos mediante pago con tarjeta de crédito, podemos generar una dirección de billetera alojada dedicada para usar como destinatario de los créditos de blockchain retirados. No envíe fondos ni créditos comercializables a esta dirección, ya que no podrá iniciar transacciones desde esta cuenta.<0>Más información»</0>"
 
@@ -2390,7 +2393,8 @@ msgstr "Las ubicaciones son privadas"
 msgid "log in"
 msgstr "acceso"
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:8
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:35
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:3
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:36
 msgid "Log in email successfully added"
 msgstr "El correo electrónico de inicio de sesión se agregó correctamente"
@@ -2403,7 +2407,7 @@ msgstr "Inicie sesión para realizar un pago más rápido"
 msgid "Log out"
 msgstr "Finalizar la sesión"
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:75
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:72
 msgid "Login Email"
 msgstr "Iniciar sesión Correo electrónico"
 
@@ -3329,7 +3333,7 @@ msgstr "Proyectos"
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr "Los proyectos deben tener una duración de al menos 20 años para garantizar resultados demostrables y cuantificables en biodiversidad. Tebu promueve proyectos que duren más tiempo, asegurando procesos ecológicos a largo plazo."
 
-#: src/pages/Projects/Projects.tsx:309
+#: src/pages/Projects/Projects.tsx:300
 msgid "projects tabs"
 msgstr "Pestañas de proyectos"
 
@@ -3345,7 +3349,7 @@ msgstr "Publicaciones"
 msgid "purchase date"
 msgstr "fecha de compra"
 
-#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:158
+#: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.tsx:156
 msgid "purchase now"
 msgstr "Compra ahora"
 
@@ -3417,7 +3421,7 @@ msgstr "Regen - Ecocréditos"
 msgid "Regen Data Provider"
 msgstr "Proveedor de datos de regeneración"
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:172
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:164
 msgid "Regen impact address"
 msgstr "Dirección de impacto de Regen"
 
@@ -3874,7 +3878,7 @@ msgstr "Slug no se puede configurar como un ID de proyecto en cadena"
 msgid "Small or Medium Sized Business"
 msgstr "Pequeña o mediana empresa"
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:127
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:119
 msgid "Social Accounts"
 msgstr "Cuentas sociales"
 
@@ -3907,7 +3911,7 @@ msgstr "Lo sentimos, ¡alguien ha comprado esta orden de venta!"
 msgid "Sorry, something went wrong!"
 msgstr "Lo sentimos, algo salió mal!"
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:5
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:32
 msgid "Sorry, this email is already connected to another account"
 msgstr "Lo sentimos, este correo electrónico ya está conectado a otra cuenta."
 
@@ -4506,7 +4510,7 @@ msgstr "Utilizar geolocalización de archivos"
 msgid "Use my credit card on file ending in {0}"
 msgstr "Utilice mi tarjeta de crédito registrada que termina en {0}"
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:130
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:122
 msgid "Use your social account to log in to Regen Marketplace."
 msgstr "Utilice su cuenta social para iniciar sesión en Regen Marketplace."
 
@@ -4725,7 +4729,7 @@ msgstr "Los créditos voluntarios se compran por responsabilidad ambiental sin o
 msgid "Vulnerable"
 msgstr "Vulnerable"
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:152
+#: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:144
 msgid "Wallet integration"
 msgstr "Integración de billetera"
 
@@ -4888,7 +4892,7 @@ msgstr "No tienes suficiente"
 msgid "You don't have enough basket tokens"
 msgstr "No tienes suficientes fichas de cesta"
 
-#: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:6
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:33
 msgid "You entered:"
 msgstr "Usted ingresó:"
 

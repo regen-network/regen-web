@@ -20,7 +20,8 @@ type LoaderType = {
 };
 /**
  * Loader function for the Buy Credits page that checks if there are available
- * sell orders in a given project for a given account address
+ * sell orders in a given project where the current account address is not the seller.
+ * Returns true if at least one sell order exists from a different seller.
  */
 export const buyCreditsLoader =
   ({ queryClient, apolloClientFactory, address }: LoaderType) =>

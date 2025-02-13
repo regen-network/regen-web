@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
@@ -11,6 +12,7 @@ import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
 
 import { getJurisdictionIsoCode } from 'web-components/src/utils/locationStandard';
+import { truncate } from 'web-components/src/utils/truncate';
 
 import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom, errorCodeAtom } from 'lib/atoms/error.atoms';
@@ -20,6 +22,8 @@ import {
   processingModalAtom,
   txBuySuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
+import { useAuth } from 'lib/auth/auth';
+import { getHashUrl } from 'lib/block-explorer';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
@@ -30,6 +34,7 @@ import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { VIEW_PORTFOLIO } from 'components/organisms/BasketOverview/BasketOverview.constants';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
+import { CONNECTED_EMAIL_ERROR } from 'components/organisms/RegistryLayout/RegistryLayout.constants';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useMsgClient } from 'hooks';
 
@@ -37,8 +42,6 @@ import { EMAIL_RECEIPT, PAYMENT_OPTIONS } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
 import { getCardItems, getSteps } from '../BuyCredits.utils';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
-import { useAuth } from 'lib/auth/auth';
-import { CONNECTED_EMAIL_ERROR } from 'components/organisms/RegistryLayout/RegistryLayout.constants';
 
 type UsePurchaseParams = {
   paymentOption: PaymentOptionsType;
@@ -148,12 +151,7 @@ export const usePurchase = ({
 
       // If a logged in user with no email address (web3 account) provides one,
       // we send a confirmation email
-      if (
-        !!activeAccount &&
-        !privActiveAccount?.email &&
-        data?.email &&
-        token
-      ) {
+      if (!!activeAccount && !privActiveAccount?.email && email && token) {
         try {
           const response: { error?: string } = await postData({
             url: `${apiUri}/marketplace/v1/auth/email/create-token`,
@@ -167,7 +165,7 @@ export const usePurchase = ({
             if (response.error === CONNECTED_EMAIL_ERROR) {
               setConnectedEmailErrorModalAtom(atom => {
                 atom.open = true;
-                atom.email = data?.email as string;
+                atom.email = email as string;
               });
               return;
             }
@@ -307,7 +305,8 @@ export const usePurchase = ({
               );
             },
             onSuccess: async (deliverTxResponse?: DeliverTxResponse) => {
-              setTxHash(deliverTxResponse?.transactionHash);
+              const _txHash = deliverTxResponse?.transactionHash;
+              setTxHash(_txHash);
 
               // In case of retirement, it's handled in useFetchRetirementForPurchase
               if (!retiring) {
@@ -327,7 +326,7 @@ export const usePurchase = ({
                     setTxBuySuccessfulModalAtom(
                       atom => void (atom.open = false),
                     );
-                  atom.txHash = deliverTxResponse?.transactionHash;
+                  atom.txHash = _txHash;
                   atom.steps = getSteps(paymentOption, retiring);
                   atom.description = email
                     ? `${_(EMAIL_RECEIPT)} ${email}`
@@ -340,6 +339,30 @@ export const usePurchase = ({
 
                 // Reset BuyCredits forms
                 handleSuccess();
+
+                // Send purchase confirmation if email provided
+                if (email && token) {
+                  let currencyIconSrc;
+                  await postData({
+                    url: `${apiUri}/marketplace/v1/confirm-crypto-order`,
+                    data: {
+                      email,
+                      currencyAmount,
+                      currencyIconSrc,
+                      displayDenom,
+                      projectName,
+                      amountLabel: retiring
+                        ? _(msg`amount retired`)
+                        : _(msg`amount tradable`),
+                      creditsAmount,
+                      txHref: getHashUrl(_txHash),
+                      txHash: truncate(_txHash),
+                    },
+                    token,
+                    retryCsrfRequest,
+                  });
+                }
+
                 navigate(`/profile/portfolio`);
               }
             },
@@ -349,6 +372,7 @@ export const usePurchase = ({
     },
     [
       _,
+      activeAccount,
       creditsAmount,
       currency,
       currencyAmount,
@@ -358,9 +382,11 @@ export const usePurchase = ({
       name,
       navigate,
       paymentOption,
+      privActiveAccount?.email,
       project,
       reactQueryClient,
       retryCsrfRequest,
+      setConnectedEmailErrorModalAtom,
       setErrorBannerTextAtom,
       setErrorCodeAtom,
       setErrorModalAtom,

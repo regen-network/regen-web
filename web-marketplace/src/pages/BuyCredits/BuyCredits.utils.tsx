@@ -8,6 +8,7 @@ import { getFormattedNumber } from 'web-components/src/utils/format';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
 
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
@@ -26,7 +27,6 @@ import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.uti
 import { KEPLR_LOGIN_REQUIRED } from 'components/organisms/BuyWarningModal/BuyWarningModal.constants';
 import { BuyWarningModalContent } from 'components/organisms/BuyWarningModal/BuyWarningModal.types';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
-import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import {
   AGREE_PURCHASE,

@@ -3,22 +3,21 @@ import {
   SellOrderInfo,
 } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import uniq from 'lodash/uniq';
+import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
 
 import { FetchSimplePriceResponse } from 'lib/coingecko';
 import { DenomTraceWithHash } from 'lib/ibc/transfer/api';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 
 import { getAskUsdAmount } from 'pages/Marketplace/Storefront/Storefront.utils';
-import { IBC_DENOM_PREFIX } from 'hooks/useQuerySellOrders';
 
 import { getDenomTraceByHashesQuery } from '../../../ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
 import { getFromCacheOrFetch } from '../../../utils/getFromCacheOrFetch';
+import { SELL_ORDERS_EXTENTED_KEY } from './getSellOrdersExtendedQuery.constants';
 import {
   ReactQuerySellOrdersExtentedProps,
   ReactQuerySellOrdersExtentedResponse,
 } from './getSellOrdersExtendedQuery.types';
-
-export const SELL_ORDERS_EXTENTED_KEY = 'sellOrdersExtented';
 
 export const getSellOrdersExtendedQuery = ({
   client,
@@ -57,6 +56,8 @@ export const getSellOrdersExtendedQuery = ({
       query: denomTracesQuery,
       reactQueryClient,
     });
+    console.log('ibcDenomHashes', ibcDenomHashes);
+    console.log('denomTraces', denomTraces);
 
     // get prices to compute AskUsdAmount
     const simplePriceData =

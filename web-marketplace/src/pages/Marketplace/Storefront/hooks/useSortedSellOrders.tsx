@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { SortCallbacksType } from 'web-components/src/components/table/ActionsTable';
 import { Order } from 'web-components/src/components/table/Table.utils';
 
+import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
+
 import { SELL_ORDERS_MAPPING } from 'components/organisms/SellOrdersTable/SellOrdersTable.constants';
-import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import { SellOrdersSortType, sortSellOrders } from '../Storefront.sort';
 

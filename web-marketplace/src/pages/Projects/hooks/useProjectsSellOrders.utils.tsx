@@ -7,7 +7,7 @@ import { computeMedianPrice } from 'utils/price/computeMedianPrice';
 import { PurchaseInfo } from 'web-components/src/components/cards/ProjectCard/ProjectCard.types';
 import { formatNumber } from 'web-components/src/utils/format';
 
-import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
+import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
 
 import { UISellOrderInfo } from '../AllProjects/AllProjects.types';
 

@@ -138,7 +138,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
           title={
             <Title
               variant="h2"
-              className="mt-10 md:mt-0 mb-5 text-[21px] leading-[1.5]"
+              className="mt-10 md:mt-0 mb-5 text-[21px] leading-[1.5] md:pr-10"
             >
               <Link href={projectHref} className="text-bc-neutral-700">
                 {project.name}
@@ -147,7 +147,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
           }
           subheader={
             <>
-              <div className="flex items-center my-5">
+              <div className="flex items-center my-5 md:pr-10">
                 <ProjectPlaceInfo
                   place={project.place}
                   area={project.area}

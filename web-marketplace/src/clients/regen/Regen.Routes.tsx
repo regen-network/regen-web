@@ -12,9 +12,11 @@ import { Router } from '@remix-run/router';
 import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
 
+import { Maybe } from 'generated/graphql';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { buyCreditsLoader } from 'pages/BuyCredits/BuyCredits.loader';
 import { CertificatePage } from 'pages/Certificate/Certificate';
 import MyBridge from 'pages/Dashboard/MyBridge';
 import { MyBridgableEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
@@ -100,13 +102,13 @@ export const RegenRoutes = ({
   reactQueryClient,
   apolloClientFactory,
 }: RouterProps) => {
-  const { wallet } = useWallet();
+  const { activeWalletAddr } = useWallet();
   return (
     <RouterProvider
       router={getRegenRouter({
         reactQueryClient,
         apolloClientFactory,
-        address: wallet?.address,
+        address: activeWalletAddr,
       })}
       fallbackElement={<PageLoader />}
     />
@@ -116,7 +118,7 @@ export const RegenRoutes = ({
 type RouterParams = {
   reactQueryClient: QueryClient;
   apolloClientFactory: ApolloClientFactory;
-  address?: string;
+  address?: Maybe<string>;
 };
 
 export const getRegenRoutes = ({
@@ -171,7 +173,15 @@ export const getRegenRoutes = ({
             })}
           ></Route>
         </Route>
-        <Route path="project/:projectId/buy" element={<BuyCredits />} />
+        <Route
+          path="project/:projectId/buy"
+          element={<BuyCredits />}
+          loader={buyCreditsLoader({
+            queryClient: reactQueryClient,
+            apolloClientFactory,
+            address,
+          })}
+        />
         <Route
           path="post/:iri"
           element={<Post />}
@@ -352,11 +362,12 @@ export const getRegenRoutes = ({
 export const getRegenRouter = ({
   reactQueryClient,
   apolloClientFactory,
+  address,
 }: RouterParams): Router => {
   const sentryCreateBrowserRouter =
     Sentry.wrapCreateBrowserRouter(createBrowserRouter);
   return sentryCreateBrowserRouter(
-    getRegenRoutes({ reactQueryClient, apolloClientFactory }),
+    getRegenRoutes({ reactQueryClient, apolloClientFactory, address }),
     {
       basename: import.meta.env.PUBLIC_URL,
     },

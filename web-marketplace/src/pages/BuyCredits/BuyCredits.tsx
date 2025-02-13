@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { useAtom, useAtomValue } from 'jotai';
+
+import { Loading } from 'web-components/src/components/loading';
 
 import NotFoundPage from 'pages/NotFound';
 import WithLoader from 'components/atoms/WithLoader';
@@ -17,6 +19,14 @@ import { useSummarizePayment } from './hooks/useSummarizePayment';
 
 export const BuyCredits = () => {
   const { projectId } = useParams();
+  const navigate = useNavigate();
+  const accountCanBuy = useLoaderData();
+
+  useEffect(() => {
+    if (!accountCanBuy) {
+      navigate(`/project/${projectId}`, { replace: true });
+    }
+  }, [navigate, projectId, accountCanBuy]);
 
   const {
     loadingSanityProject,
@@ -77,6 +87,8 @@ export const BuyCredits = () => {
       setRetiring(true);
     }
   }, [paymentOption, retiring, setRetiring]);
+
+  if (!accountCanBuy) return <Loading />;
 
   if (noProjectFound) return <NotFoundPage />;
 

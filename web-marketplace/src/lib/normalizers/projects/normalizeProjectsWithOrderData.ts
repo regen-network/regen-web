@@ -2,6 +2,7 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { IS_TERRASOS } from 'lib/env';
+import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
 
 import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
 import {
@@ -9,7 +10,6 @@ import {
   normalizeToUISellOrderInfo,
 } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
-import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 interface NormalizeProjectsWithOrderDataParams {
   projects?: (ProjectInfo | undefined)[];

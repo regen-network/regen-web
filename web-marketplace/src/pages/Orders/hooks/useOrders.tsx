@@ -8,6 +8,7 @@ import { i18n } from '@lingui/core';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import uniq from 'lodash/uniq';
+import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
 
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
@@ -25,7 +26,6 @@ import { getRetirementByTxHash } from 'lib/queries/react-query/registry-server/g
 import { useWallet } from 'lib/wallet/wallet';
 
 import { ORDER_STATUS } from 'components/organisms/Order/Order.constants';
-import { IBC_DENOM_PREFIX } from 'hooks/useQuerySellOrders';
 
 import { Order } from '../Orders.types';
 

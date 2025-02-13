@@ -24,7 +24,7 @@ type NormalizeCreditClassesFilterParams = {
 };
 
 type NormalizeCreditClassFiltersResponse = {
-  creditClassFilters: CreditClassFilter[];
+  creditClassFilterOptions: CreditClassFilter[];
 };
 
 export const normalizeCreditClassFilters = ({
@@ -44,7 +44,7 @@ export const normalizeCreditClassFilters = ({
     ...new Set(allOnChainProjects.map(project => project.creditClassId)),
   ];
 
-  const creditClassFilters: CreditClassFilter[] =
+  const creditClassFilterOptions: CreditClassFilter[] =
     creditClassesWithMetadata
       ?.filter(({ creditClass }) => {
         const projectsFromCreditClass = allProjects.filter(
@@ -74,10 +74,10 @@ export const normalizeCreditClassFilters = ({
       }) ?? [];
 
   if (!buyingOptionsFilters[CRYPTO_BUYING_OPTION_ID] && haveOffChainProjects)
-    creditClassFilters.push({
+    creditClassFilterOptions.push({
       name: _(UNREGISTERED_PROJECTS),
       path: UNREGISTERED_PATH,
     });
 
-  return { creditClassFilters };
+  return { creditClassFilterOptions };
 };

@@ -1,8 +1,10 @@
+import { useCallback, useMemo, useState } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
 import type { Filter } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
+import { countChangedFilters } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters.utils';
 
 import {
   environmentTypeFiltersAtom,
@@ -19,14 +21,25 @@ import {
   getEcosystemTags,
   getMarketCheckboxes,
   getRegionTags,
+  initialActiveFilters,
 } from '../AllProjects/AllProjects.ProjectFilterBody.utils';
 import { ProjectWithOrderData } from '../AllProjects/AllProjects.types';
+import { toggleFilter } from '../Projects.utils';
 
 type Params = {
   allProjects: ProjectWithOrderData[];
+  mobile?: boolean;
 };
 
-export const useClientFilters = ({ allProjects }: Params): Filter[] => {
+export const useClientFilters = ({
+  allProjects,
+  mobile,
+}: Params): {
+  clientFilters: Filter[];
+  resetTempClientFilters: () => void;
+  numberOfTempFilters: number;
+  setClientFilters: () => void;
+} => {
   const { _ } = useLingui();
   const ecosystemIcons = useEcosystemTags(filterEcosystemIds);
 
@@ -37,6 +50,50 @@ export const useClientFilters = ({ allProjects }: Params): Filter[] => {
   const [marketTypeFilters, setMarketTypeFilters] = useAtom(
     marketTypeFiltersAtom,
   );
+
+  // Temporary filters used for handling filters states in the mobile filter modal
+  const [tempEnvironmentTypeFilters, setTempEnvironmentTypeFilters] = useState(
+    environmentTypeFilters,
+  );
+  const [tempRegionFilters, setTempRegionFilters] = useState(regionFilters);
+  const [tempMarketTypeFilters, setTempMarketTypeFilters] =
+    useState(marketTypeFilters);
+
+  const resetTempClientFilters = useCallback(() => {
+    setTempMarketTypeFilters(initialActiveFilters.marketTypeFilters);
+    setTempEnvironmentTypeFilters(initialActiveFilters.environmentTypeFilters);
+    setTempRegionFilters(initialActiveFilters.regionFilters);
+  }, []);
+
+  const setClientFilters = useCallback(() => {
+    setMarketTypeFilters(tempMarketTypeFilters);
+    setEnvironmentTypeFilters(tempEnvironmentTypeFilters);
+    setRegionFilters(tempEnvironmentTypeFilters);
+  }, [
+    setEnvironmentTypeFilters,
+    setMarketTypeFilters,
+    setRegionFilters,
+    tempEnvironmentTypeFilters,
+    tempMarketTypeFilters,
+  ]);
+
+  const numberOfTempFilters = useMemo(
+    () =>
+      countChangedFilters(
+        tempMarketTypeFilters,
+        initialActiveFilters.marketTypeFilters,
+      ) +
+      countChangedFilters(
+        tempEnvironmentTypeFilters,
+        initialActiveFilters.environmentTypeFilters,
+      ) +
+      countChangedFilters(
+        tempRegionFilters,
+        initialActiveFilters.regionFilters,
+      ),
+    [tempEnvironmentTypeFilters, tempMarketTypeFilters, tempRegionFilters],
+  );
+  let clientFilters: Filter[] = [];
 
   if (IS_TERRASOS) {
     const uniqueRegions = [
@@ -57,36 +114,49 @@ export const useClientFilters = ({ allProjects }: Params): Filter[] => {
       false,
     );
 
-    return [
+    clientFilters = [
       {
-        selectedFilters: regionFilters,
+        selectedFilters: mobile ? tempRegionFilters : regionFilters,
         displayType: 'tag',
         title: _(msg`Region`),
         options: getRegionTags(_, uniqueRegions),
         onFilterChange: (id: string) => {
-          setRegionFilters(prev => ({ ...prev, [id]: !prev[id] }));
+          mobile
+            ? setTempRegionFilters(toggleFilter(id))
+            : setRegionFilters(toggleFilter(id));
         },
       },
       {
-        selectedFilters: environmentTypeFilters,
+        selectedFilters: mobile
+          ? tempEnvironmentTypeFilters
+          : environmentTypeFilters,
         displayType: 'tag',
         title: _(msg`Ecosystem`),
         options: getEcosystemTags(_, ecosystemIcons, uniqueEcosystemTypes),
         hasCollapse: true,
         onFilterChange: (id: string) => {
-          setEnvironmentTypeFilters(prev => ({ ...prev, [id]: !prev[id] }));
+          mobile
+            ? setTempEnvironmentTypeFilters(toggleFilter(id))
+            : setEnvironmentTypeFilters(toggleFilter(id));
         },
       },
       {
-        selectedFilters: marketTypeFilters,
+        selectedFilters: mobile ? tempMarketTypeFilters : marketTypeFilters,
         displayType: 'checkbox',
         title: _(msg`Market`),
         options: getMarketCheckboxes(_, uniqueMarketTypes),
         onFilterChange: (id: string) => {
-          setMarketTypeFilters(prev => ({ ...prev, [id]: !prev[id] }));
+          mobile
+            ? setTempMarketTypeFilters(toggleFilter(id))
+            : setMarketTypeFilters(toggleFilter(id));
         },
       },
     ];
   }
-  return [];
+  return {
+    clientFilters,
+    resetTempClientFilters,
+    numberOfTempFilters,
+    setClientFilters,
+  };
 };

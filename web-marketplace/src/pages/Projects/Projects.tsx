@@ -1,7 +1,5 @@
 import { useEffect, useMemo } from 'react';
 import {
-  createSearchParams,
-  generatePath,
   Outlet,
   useLocation,
   useNavigate,
@@ -12,7 +10,6 @@ import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import cn from 'classnames';
-import { url } from 'inspector';
 import { useAtom, useSetAtom } from 'jotai';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
@@ -25,8 +22,8 @@ import {
 } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
+  creditClassFiltersAtom,
   creditClassInitialFiltersAtom,
-  creditClassSelectedFiltersAtom,
   environmentTypeFiltersAtom,
   marketTypeFiltersAtom,
   projectsSortAtom,
@@ -57,8 +54,8 @@ const Projects = (): JSX.Element => {
   const location = useLocation();
   const [showCommunityProjects] = useAtom(showCommunityProjectsAtom);
   const [sort] = useAtom(projectsSortAtom);
-  const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
-    creditClassSelectedFiltersAtom,
+  const [creditClassFilters, setCreditClassFilters] = useAtom(
+    creditClassFiltersAtom,
   );
   const setCreditClassInitialFilters = useSetAtom(
     creditClassInitialFiltersAtom,
@@ -102,7 +99,7 @@ const Projects = (): JSX.Element => {
     sort,
     offset: page * PROJECTS_PER_PAGE,
     showCommunityProjects,
-    creditClassFilter: creditClassSelectedFilters,
+    creditClassFilter: creditClassFilters,
     regionFilter: regionFilters,
     environmentTypeFilter: environmentTypeFilters,
     marketTypeFilter: marketTypeFilters,
@@ -184,7 +181,7 @@ const Projects = (): JSX.Element => {
     regionFilters,
     marketTypeFilters,
     buyingOptionsFilters,
-    creditClassSelectedFilters,
+    creditClassFilters,
     showCommunityProjects,
     navigate,
   ]);
@@ -204,7 +201,7 @@ const Projects = (): JSX.Element => {
     }),
   );
 
-  const { creditClassFilters } = useMemo(
+  const { creditClassFilterOptions } = useMemo(
     () =>
       normalizeCreditClassFilters({
         creditClassesWithMetadata,
@@ -230,17 +227,11 @@ const Projects = (): JSX.Element => {
       normalizeBuyingOptionsFilter({
         allOnChainProjects,
         prefinance,
-        creditClassSelectedFilters,
+        creditClassFilters,
         allProjects,
         _,
       }),
-    [
-      allOnChainProjects,
-      prefinance,
-      creditClassSelectedFilters,
-      allProjects,
-      _,
-    ],
+    [allOnChainProjects, prefinance, creditClassFilters, allProjects, _],
   );
 
   useEffect(() => {
@@ -249,9 +240,9 @@ const Projects = (): JSX.Element => {
       !loading &&
       !isCreditClassesWithMetadataLoading &&
       !isSanityCreditClassesLoading &&
-      Object.keys(creditClassSelectedFilters).length === 0
+      Object.keys(creditClassFilters).length === 0
     ) {
-      const _creditClassInitialFilters = creditClassFilters.reduce(
+      const _creditClassInitialFilters = creditClassFilterOptions.reduce(
         (acc, creditClassFilter) => {
           return {
             ...acc,
@@ -265,16 +256,16 @@ const Projects = (): JSX.Element => {
         {},
       );
       setCreditClassInitialFilters(_creditClassInitialFilters);
-      setCreditClassSelectedFilters(_creditClassInitialFilters);
+      setCreditClassFilters(_creditClassInitialFilters);
     }
   }, [
+    creditClassFilterOptions,
     creditClassFilters,
-    creditClassSelectedFilters,
     isCreditClassesWithMetadataLoading,
     isSanityCreditClassesLoading,
     loading,
     setCreditClassInitialFilters,
-    setCreditClassSelectedFilters,
+    setCreditClassFilters,
   ]);
 
   return (
@@ -293,7 +284,7 @@ const Projects = (): JSX.Element => {
             resetFilters={resetFilters}
             showResetButton={showResetButton}
             hasCommunityProjects={hasCommunityProjects}
-            creditClassFilters={creditClassFilters}
+            creditClassFilterOptions={creditClassFilterOptions}
             buyingOptionsFilterOptions={buyingOptionsFilterOptions}
           />
         </div>
@@ -334,7 +325,7 @@ const Projects = (): JSX.Element => {
               prefinanceProjects,
               prefinanceProjectsContent,
               soldOutProjectsIds,
-              creditClassFilters,
+              creditClassFilterOptions,
               buyingOptionsFilterOptions,
               loading:
                 loading ||

@@ -23,7 +23,7 @@ type ProjectsContextType = {
   prefinanceProjectsContent?: Maybe<PrefinanceProjects>;
   pagesCount: number;
   soldOutProjectsIds: string[];
-  creditClassFilters: CreditClassFilter[];
+  creditClassFilterOptions: CreditClassFilter[];
   buyingOptionsFilterOptions: FilterOption[];
 };
 

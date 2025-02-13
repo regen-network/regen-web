@@ -16,7 +16,7 @@ import {
 type NormalizeBuyingOptionsFilterParams = {
   allOnChainProjects?: ProjectWithOrderData[];
   prefinance: boolean;
-  creditClassSelectedFilters: Record<string, boolean>;
+  creditClassFilters: Record<string, boolean>;
   _: TranslatorType;
   allProjects: ProjectWithOrderData[];
 };
@@ -24,14 +24,14 @@ type NormalizeBuyingOptionsFilterParams = {
 export const normalizeBuyingOptionsFilter = ({
   allOnChainProjects,
   prefinance,
-  creditClassSelectedFilters,
+  creditClassFilters,
   allProjects,
   _,
 }: NormalizeBuyingOptionsFilterParams): FilterOption[] => {
   const buyingOptionsFilterOptions = [];
 
-  const selectedCreditClasses = Object.keys(creditClassSelectedFilters).filter(
-    key => creditClassSelectedFilters[key],
+  const selectedCreditClasses = Object.keys(creditClassFilters).filter(
+    key => creditClassFilters[key],
   );
 
   const showCreditCardBuyingOption = allProjects?.some(project => {
@@ -46,7 +46,7 @@ export const normalizeBuyingOptionsFilter = ({
     const isPrefinanceProject =
       project?.projectPrefinancing?.isPrefinanceProject;
     const unregisteredProjectsSelected =
-      creditClassSelectedFilters[UNREGISTERED_PATH] === true;
+      creditClassFilters[UNREGISTERED_PATH] === true;
 
     return (
       (hasCardSellOrders && isPartOfSelectedCreditClasses) ||
@@ -65,7 +65,7 @@ export const normalizeBuyingOptionsFilter = ({
   }
 
   const onlyUnregisteredProjects = isOnlyOneFilterActive(
-    creditClassSelectedFilters,
+    creditClassFilters,
     UNREGISTERED_PATH,
   );
 

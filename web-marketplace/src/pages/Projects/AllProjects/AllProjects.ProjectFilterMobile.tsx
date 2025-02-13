@@ -8,7 +8,10 @@ import FilterIcon from 'web-components/src/components/icons/FilterIcon';
 import Modal from 'web-components/src/components/modal';
 import type { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
-import { FILTERS_MODAL_BUTTON } from './AllProjects.constants';
+import {
+  ADD_FILTERS_MODAL_BUTTON,
+  MODIFY_FILTERS_MODAL_BUTTON,
+} from './AllProjects.constants';
 import ProjectFilterBody from './AllProjects.ProjectFilterBody';
 import { CreditClassFilter, ProjectWithOrderData } from './AllProjects.types';
 
@@ -19,8 +22,9 @@ type Props = {
   className?: string;
   showResetButton?: boolean;
   hasCommunityProjects: boolean;
-  creditClassFilters?: CreditClassFilter[];
+  creditClassFilterOptions?: CreditClassFilter[];
   buyingOptionsFilterOptions: FilterOption[];
+  numberOfSelectedFilters: number;
 };
 
 const ProjectFilterMobile = ({
@@ -30,11 +34,13 @@ const ProjectFilterMobile = ({
   className = '',
   showResetButton = true,
   hasCommunityProjects,
-  creditClassFilters = [],
+  creditClassFilterOptions = [],
   buyingOptionsFilterOptions,
+  numberOfSelectedFilters,
 }: Props) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
+  const onClose = () => setIsOpen(false);
 
   return (
     <>
@@ -57,16 +63,21 @@ const ProjectFilterMobile = ({
         ]}
         className={className}
       >
-        {_(FILTERS_MODAL_BUTTON)}
+        {numberOfSelectedFilters
+          ? _(MODIFY_FILTERS_MODAL_BUTTON)
+          : _(ADD_FILTERS_MODAL_BUTTON)}
+        {numberOfSelectedFilters ? ` (${numberOfSelectedFilters})` : ''}
       </OutlinedButton>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)} className="h-full">
+      <Modal open={isOpen} onClose={onClose} className="h-full">
         <ProjectFilterBody
           allProjects={allProjects}
-          creditClassFilters={creditClassFilters}
+          creditClassFilterOptions={creditClassFilterOptions}
           resetFilters={resetFilters}
           showResetButton={showResetButton}
           hasCommunityProjects={hasCommunityProjects}
           buyingOptionsFilterOptions={buyingOptionsFilterOptions}
+          onCloseFilterModal={onClose}
+          mobile
         />
       </Modal>
     </>

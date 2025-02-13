@@ -9,8 +9,9 @@ import { CollapseList } from 'web-components/src/components/organisms/CollapseLi
 import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { UseStateSetter } from 'types/react/use-state';
 import {
-  creditClassSelectedFiltersAtom,
+  creditClassFiltersAtom,
   showCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
 import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
@@ -18,32 +19,42 @@ import { useTracker } from 'lib/tracker/useTracker';
 
 import { UNREGISTERED_PATH } from './AllProjects.constants';
 import { CreditClassFilter, FilterCreditClassEvent } from './AllProjects.types';
-import {
-  getCreditClassSelectedFilters,
-  getFilterSelected,
-} from './AllProjects.utils';
+import { getCreditClassFilters, getFilterSelected } from './AllProjects.utils';
 
 type Props = {
-  creditClassFilters?: CreditClassFilter[];
+  creditClassFilterOptions?: CreditClassFilter[];
+  tempCreditClassFilters: Record<string, boolean>;
+  setTempCreditClassFilters: UseStateSetter<Record<string, boolean>>;
+  mobile?: boolean;
 };
 
-export const CreditClassFilters = ({ creditClassFilters = [] }: Props) => {
+export const CreditClassFilters = ({
+  creditClassFilterOptions = [],
+  tempCreditClassFilters,
+  setTempCreditClassFilters,
+  mobile,
+}: Props) => {
   const { _ } = useLingui();
   const [showCommunityProjects] = useAtom(showCommunityProjectsAtom);
-  const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
-    creditClassSelectedFiltersAtom,
+  const [creditClassFilters, setCreditClassFilters] = useAtom(
+    creditClassFiltersAtom,
   );
   const { track } = useTracker();
 
   const filteredCreditClassFilters = useMemo(
     () =>
-      creditClassFilters.filter(
+      creditClassFilterOptions.filter(
         ({ isCommunity, path }) =>
           path === UNREGISTERED_PATH ||
           showCommunityProjects ||
           (!showCommunityProjects && !isCommunity),
       ),
-    [creditClassFilters, showCommunityProjects],
+    [creditClassFilterOptions, showCommunityProjects],
+  );
+
+  const creditClassSelectedFilters = useMemo(
+    () => (mobile ? tempCreditClassFilters : creditClassFilters),
+    [creditClassFilters, mobile, tempCreditClassFilters],
   );
 
   const values = Object.values(creditClassSelectedFilters);
@@ -63,10 +74,16 @@ export const CreditClassFilters = ({ creditClassFilters = [] }: Props) => {
             'pr-10',
           )}
           onClick={() => {
-            if (selectAllEnabled)
-              setCreditClassSelectedFilters(
-                getCreditClassSelectedFilters(creditClassSelectedFilters, true),
-              );
+            if (selectAllEnabled) {
+              if (mobile) {
+                setTempCreditClassFilters(
+                  getCreditClassFilters(creditClassSelectedFilters, true),
+                );
+              } else
+                setCreditClassFilters(
+                  getCreditClassFilters(creditClassSelectedFilters, true),
+                );
+            }
           }}
         >
           <Trans>Select all</Trans>
@@ -80,13 +97,16 @@ export const CreditClassFilters = ({ creditClassFilters = [] }: Props) => {
             'pl-10',
           )}
           onClick={() => {
-            if (clearAllEnabled)
-              setCreditClassSelectedFilters(
-                getCreditClassSelectedFilters(
-                  creditClassSelectedFilters,
-                  false,
-                ),
-              );
+            if (clearAllEnabled) {
+              if (mobile) {
+                setTempCreditClassFilters(
+                  getCreditClassFilters(creditClassSelectedFilters, false),
+                );
+              } else
+                setCreditClassFilters(
+                  getCreditClassFilters(creditClassSelectedFilters, false),
+                );
+            }
           }}
         >
           <Trans>Clear all</Trans>
@@ -106,10 +126,17 @@ export const CreditClassFilters = ({ creditClassFilters = [] }: Props) => {
                       sx={{ p: 0, mr: 3 }}
                       checked={creditClassSelectedFilters?.[path] ?? false}
                       onChange={event => {
-                        setCreditClassSelectedFilters({
-                          ...creditClassSelectedFilters,
-                          [path]: event.target.checked,
-                        });
+                        if (mobile) {
+                          setTempCreditClassFilters({
+                            ...creditClassSelectedFilters,
+                            [path]: event.target.checked,
+                          });
+                        } else {
+                          setCreditClassFilters({
+                            ...creditClassSelectedFilters,
+                            [path]: event.target.checked,
+                          });
+                        }
                         if (path !== UNREGISTERED_PATH)
                           track<FilterCreditClassEvent>('filterCreditClass', {
                             creditClassId: path,

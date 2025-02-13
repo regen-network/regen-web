@@ -1,11 +1,14 @@
 import { useCallback, useMemo } from 'react';
 import { useAtom } from 'jotai';
 
-import { hasChangedFilters } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters.utils';
+import {
+  countChangedBoolFilters,
+  countChangedFilters,
+} from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters.utils';
 
 import {
+  creditClassFiltersAtom,
   creditClassInitialFiltersAtom,
-  creditClassSelectedFiltersAtom,
   environmentTypeFiltersAtom,
   marketTypeFiltersAtom,
   regionFiltersAtom,
@@ -17,8 +20,8 @@ import { initialActiveFilters } from '../AllProjects/AllProjects.ProjectFilterBo
 import { useBuyingOptionsFilters } from './useBuyingOptionsFilters';
 
 export const useResetFilters = () => {
-  const [creditClassSelectedFilters, setCreditClassSelectedFilters] = useAtom(
-    creditClassSelectedFiltersAtom,
+  const [creditClassFilters, setCreditClassFilters] = useAtom(
+    creditClassFiltersAtom,
   );
   const [creditClassInitialFilters] = useAtom(creditClassInitialFiltersAtom);
   const [showCommunityProjects, setShowCommunityProjects] = useAtom(
@@ -39,48 +42,49 @@ export const useResetFilters = () => {
     setEnvironmentTypeFilters(initialActiveFilters.environmentTypeFilters);
     setRegionFilters(initialActiveFilters.regionFilters);
     setShowCommunityProjects(DEFAULT_COMMUNITY_PROJECTS_FILTER);
-    setCreditClassSelectedFilters(creditClassInitialFilters);
+    setCreditClassFilters(creditClassInitialFilters);
     setBuyingOptionsFilters(initialActiveFilters.buyingOptionsFilters);
   }, [
     creditClassInitialFilters,
     setBuyingOptionsFilters,
-    setCreditClassSelectedFilters,
+    setCreditClassFilters,
     setEnvironmentTypeFilters,
     setMarketTypeFilters,
     setRegionFilters,
     setShowCommunityProjects,
   ]);
 
-  const showResetButton = useMemo(
+  const numberOfSelectedFilters = useMemo(
     () =>
-      hasChangedFilters(
+      countChangedFilters(
         marketTypeFilters,
         initialActiveFilters.marketTypeFilters,
-      ) ||
-      hasChangedFilters(
+      ) +
+      countChangedFilters(
         environmentTypeFilters,
         initialActiveFilters.environmentTypeFilters,
-      ) ||
-      hasChangedFilters(regionFilters, initialActiveFilters.regionFilters) ||
-      hasChangedFilters(
+      ) +
+      countChangedFilters(regionFilters, initialActiveFilters.regionFilters) +
+      countChangedFilters(
         buyingOptionsFilters,
         initialActiveFilters.buyingOptionsFilters,
-      ) ||
-      hasChangedFilters(
-        creditClassSelectedFilters,
-        creditClassInitialFilters,
-      ) ||
-      showCommunityProjects !== DEFAULT_COMMUNITY_PROJECTS_FILTER,
+      ) +
+      countChangedFilters(creditClassFilters, creditClassInitialFilters) +
+      countChangedBoolFilters(
+        showCommunityProjects,
+        DEFAULT_COMMUNITY_PROJECTS_FILTER,
+      ),
     [
       buyingOptionsFilters,
       creditClassInitialFilters,
-      creditClassSelectedFilters,
+      creditClassFilters,
       environmentTypeFilters,
       marketTypeFilters,
       regionFilters,
       showCommunityProjects,
     ],
   );
+  const showResetButton = !!numberOfSelectedFilters;
 
-  return { resetFilters, showResetButton };
+  return { resetFilters, showResetButton, numberOfSelectedFilters };
 };

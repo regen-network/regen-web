@@ -65,7 +65,8 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   );
   const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
 
-  const { showResetButton, resetFilters } = useResetFilters();
+  const { showResetButton, resetFilters, numberOfSelectedFilters } =
+    useResetFilters();
 
   const [sort, setSort] = useAtom(projectsSortAtom);
 
@@ -77,7 +78,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
     pagesCount,
     soldOutProjectsIds,
     loading,
-    creditClassFilters,
+    creditClassFilterOptions,
     buyingOptionsFilterOptions,
   } = useProjectsContext();
 
@@ -116,9 +117,10 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
             allProjects={allProjects}
             resetFilters={resetFilters}
             showResetButton={showResetButton}
+            numberOfSelectedFilters={numberOfSelectedFilters}
             className="lg:hidden w-full mb-15 mr-0"
             hasCommunityProjects={hasCommunityProjects}
-            creditClassFilters={creditClassFilters}
+            creditClassFilterOptions={creditClassFilterOptions}
             buyingOptionsFilterOptions={buyingOptionsFilterOptions}
           />
 

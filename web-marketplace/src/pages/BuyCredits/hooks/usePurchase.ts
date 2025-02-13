@@ -26,7 +26,7 @@ import { useAuth } from 'lib/auth/auth';
 import { getHashUrl } from 'lib/block-explorer';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
-import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
+import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { useWallet } from 'lib/wallet/wallet';
 

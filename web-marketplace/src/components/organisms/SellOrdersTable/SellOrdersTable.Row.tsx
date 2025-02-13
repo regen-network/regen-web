@@ -61,6 +61,7 @@ const getSellOrdersTableRow = ({
   <Box sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}>
     <DenomIcon
       baseDenom={askBaseDenom}
+      bankDenom={askDenom}
       sx={{ mr: 2.5, display: 'flex', alignItems: 'center' }}
       iconSx={{ fontSize: '30px' }}
     />

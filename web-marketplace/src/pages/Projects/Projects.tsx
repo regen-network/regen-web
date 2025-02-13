@@ -278,7 +278,7 @@ const Projects = (): JSX.Element => {
           //'rgba(var(--ac-neutral-100))',
         }}
       >
-        <aside className="w-[310px] py-[43px] px-[20px] hidden lg:block sticky top-0 max-h-screen">
+        <aside className="w-[310px] py-[43px] px-[20px] hidden lg:block sticky top-0 max-h-screen shadow-[6px_0px_10px_-4px_rgba(0,0,0,0.10)]">
           <ProjectFilterBody
             allProjects={allProjects}
             resetFilters={resetFilters}
@@ -290,7 +290,7 @@ const Projects = (): JSX.Element => {
         </aside>
         <div
           className={cn(
-            'bg-ac-neutral-100 pt-25 sm:pt-40 px-[16px] md:px-25 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center lg:justify-start grid-cols-[repeat(auto-fit,minmax(300px,1fr))]',
+            'bg-ac-neutral-100 pt-25 sm:pt-40 px-[16px] md:pr-25 md:pl-35 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center lg:justify-start grid-cols-[repeat(auto-fit,minmax(300px,1fr))]',
             { 'lg:block': projectsCount === 0 },
             { 'h-fit': projectsCount !== 0 },
           )}

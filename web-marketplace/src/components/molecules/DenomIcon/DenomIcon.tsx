@@ -42,7 +42,7 @@ const DenomIcon = ({
         <GravUsdcIcon sx={iconSx} className={className} />
       )}
       {baseDenom === AXELAR_USDC_DENOM &&
-        // On mainnet, AXELAR_USDC_DENOM and USDC_DENOM baseDenom have the same value: uusd
+        // On mainnet, AXELAR_USDC_DENOM and USDC_DENOM have the same value: uusd
         // so we also use the bank denom to check whether it's USDC.axl (IBC) or native USDC
         ibcDenom && <AxlUsdcIcon sx={iconSx} className={className} />}
       {baseDenom === EEUR_DENOM && (

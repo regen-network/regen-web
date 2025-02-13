@@ -72,7 +72,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
   const pricePerCredits = +displayTotalPrice / +credits.credits;
 
   return (
-    <>
+    <div id={blockchainDetails.blockchainRecord}>
       <Card
         className={cn(
           'bg-grey-100 border-[1px] border-bc-neutral-300',
@@ -212,6 +212,6 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
           }}
         />
       )}
-    </>
+    </div>
   );
 };

@@ -56,8 +56,6 @@ export const getSellOrdersExtendedQuery = ({
       query: denomTracesQuery,
       reactQueryClient,
     });
-    console.log('ibcDenomHashes', ibcDenomHashes);
-    console.log('denomTraces', denomTraces);
 
     // get prices to compute AskUsdAmount
     const simplePriceData =

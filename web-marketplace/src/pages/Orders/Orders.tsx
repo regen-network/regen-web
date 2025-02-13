@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { Flex } from 'web-components/src/components/box';
@@ -11,8 +13,9 @@ import { Order } from 'components/organisms/Order/Order';
 import { useOrders } from './hooks/useOrders';
 
 export const Orders = () => {
-  const { marketplaceClient } = useLedger();
+  const location = useLocation();
 
+  const { marketplaceClient } = useLedger();
   const { orders, isLoading } = useOrders();
 
   const { data: allowedDenomsData } = useQuery(
@@ -22,6 +25,13 @@ export const Orders = () => {
     }),
   );
   const allowedDenoms = allowedDenomsData?.allowedDenoms;
+
+  useEffect(() => {
+    if (!isLoading) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [isLoading, location.hash]);
 
   return (
     <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly mx-auto">

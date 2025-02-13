@@ -40,7 +40,11 @@ import { useMsgClient } from 'hooks';
 
 import { EMAIL_RECEIPT, PAYMENT_OPTIONS } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
-import { getCardItems, getSteps } from '../BuyCredits.utils';
+import {
+  getCardItems,
+  getCryptoCurrencyIconSrc,
+  getSteps,
+} from '../BuyCredits.utils';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
 
 type UsePurchaseParams = {
@@ -308,6 +312,37 @@ export const usePurchase = ({
               const _txHash = deliverTxResponse?.transactionHash;
               setTxHash(_txHash);
 
+              // Send purchase confirmation if email provided
+              if (email && token) {
+                const currencyIconSrc = getCryptoCurrencyIconSrc(
+                  currency.askBaseDenom,
+                  currency.askDenom,
+                );
+                const amountLabel = retiring
+                  ? _(msg`amount retired`)
+                  : _(msg`amount tradable`);
+
+                await postData({
+                  url: `${apiUri}/marketplace/v1/confirm-crypto-order`,
+                  data: {
+                    email,
+                    currencyAmount,
+                    currencyIconSrc,
+                    displayDenom,
+                    projectName: project?.name,
+                    amountLabel,
+                    creditsAmount,
+                    txHref: getHashUrl(_txHash),
+                    txHash: truncate(_txHash),
+                    orderHref: `${
+                      window.location.origin
+                    }/dashboard/admin/my-orders#${_txHash?.toLowerCase()}`,
+                  },
+                  token,
+                  retryCsrfRequest,
+                });
+              }
+
               // In case of retirement, it's handled in useFetchRetirementForPurchase
               if (!retiring) {
                 setProcessingModalAtom(atom => void (atom.open = false));
@@ -339,31 +374,7 @@ export const usePurchase = ({
 
                 // Reset BuyCredits forms
                 handleSuccess();
-
-                // Send purchase confirmation if email provided
-                if (email && token) {
-                  let currencyIconSrc;
-                  await postData({
-                    url: `${apiUri}/marketplace/v1/confirm-crypto-order`,
-                    data: {
-                      email,
-                      currencyAmount,
-                      currencyIconSrc,
-                      displayDenom,
-                      projectName,
-                      amountLabel: retiring
-                        ? _(msg`amount retired`)
-                        : _(msg`amount tradable`),
-                      creditsAmount,
-                      txHref: getHashUrl(_txHash),
-                      txHash: truncate(_txHash),
-                    },
-                    token,
-                    retryCsrfRequest,
-                  });
-                }
-
-                navigate(`/profile/portfolio`);
+                navigate(`/dashboard/portfolio`);
               }
             },
           },

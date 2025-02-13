@@ -2,7 +2,16 @@ import { UseFormSetValue } from 'react-hook-form';
 import { i18n } from '@lingui/core';
 import { msg, plural, Trans } from '@lingui/macro';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import { USD_DENOM } from 'config/allowedBaseDenoms';
+import {
+  AXELAR_USDC_DENOM,
+  EEUR_DENOM,
+  EVMOS_DENOM,
+  GRAVITY_USDC_DENOM,
+  REGEN_DENOM,
+  USD_DENOM,
+  USDC_DENOM,
+} from 'config/allowedBaseDenoms';
+import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
 
 import { getFormattedNumber } from 'web-components/src/utils/format';
 
@@ -373,3 +382,27 @@ export function resetCurrencyAndCredits(
     activeStep,
   );
 }
+
+export const getCryptoCurrencyIconSrc = (
+  baseDenom: string,
+  bankDenom: string,
+) => {
+  const ibcDenom = bankDenom?.includes(IBC_DENOM_PREFIX);
+
+  let href = '';
+  if (baseDenom === GRAVITY_USDC_DENOM)
+    href = 'https://regen-registry.s3.us-east-1.amazonaws.com/usdc.grv.png';
+  // On mainnet, AXELAR_USDC_DENOM and USDC_DENOM base denoms have the same value: uusd
+  // so we also use the bank denom to check whether it's USDC.axl (IBC) or native USDC
+  if (baseDenom === AXELAR_USDC_DENOM && ibcDenom)
+    href = 'https://regen-registry.s3.us-east-1.amazonaws.com/usdc.axl.png';
+  if (baseDenom === USDC_DENOM && !ibcDenom)
+    href = 'https://regen-registry.s3.us-east-1.amazonaws.com/uusdc.png';
+  if (baseDenom === EEUR_DENOM)
+    href = 'https://regen-registry.s3.us-east-1.amazonaws.com/eeur.png';
+  if (baseDenom === REGEN_DENOM)
+    href = 'https://regen-registry.s3.us-east-1.amazonaws.com/regen.png';
+  if (baseDenom === EVMOS_DENOM)
+    href = 'https://regen-registry.s3.us-east-1.amazonaws.com/evmos.png';
+  return href;
+};

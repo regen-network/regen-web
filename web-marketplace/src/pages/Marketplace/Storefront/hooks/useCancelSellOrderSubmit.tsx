@@ -96,7 +96,11 @@ const useCancelSellOrderSubmit = ({
                 verticalAlign: 'bottom',
               }}
             >
-              <DenomIcon baseDenom={baseDenom} sx={{ display: 'flex' }} />
+              <DenomIcon
+                baseDenom={baseDenom}
+                bankDenom={askDenom}
+                sx={{ display: 'flex' }}
+              />
             </Box>
           ),
         },

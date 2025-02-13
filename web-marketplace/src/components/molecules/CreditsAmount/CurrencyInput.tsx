@@ -214,6 +214,7 @@ export const CurrencyInput = ({
           card || cryptoCurrencies.length === 1 ? (
             <DenomIconWithCurrency
               baseDenom={currency?.askBaseDenom}
+              bankDenom={currency?.askDenom}
               displayDenom={displayDenom}
             />
           ) : (
@@ -224,6 +225,7 @@ export const CurrencyInput = ({
                   element: () => (
                     <DenomIconWithCurrency
                       baseDenom={cur.askBaseDenom}
+                      bankDenom={cur.askDenom}
                       displayDenom={findDisplayDenom({
                         allowedDenoms,
                         bankDenom: cur.askDenom,

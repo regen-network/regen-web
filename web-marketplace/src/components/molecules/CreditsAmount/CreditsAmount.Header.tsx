@@ -19,11 +19,13 @@ export function CreditsAmountHeader({
   setMaxCreditsSelected,
   displayDenom,
   baseDenom,
+  bankDenom,
 }: {
   creditsAvailable: number;
   setMaxCreditsSelected: (value: boolean) => void;
   baseDenom: string;
   displayDenom: string;
+  bankDenom: string;
 }) {
   const { _ } = useLingui();
 
@@ -53,6 +55,7 @@ export function CreditsAmountHeader({
               <DenomIconWithCurrency
                 displayDenom={displayDenom}
                 baseDenom={baseDenom}
+                bankDenom={bankDenom}
                 className="sm:pt-5"
               />
             </span>

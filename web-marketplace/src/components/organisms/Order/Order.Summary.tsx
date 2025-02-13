@@ -160,6 +160,7 @@ export const OrderSummary = ({
             value={
               <DenomIconWithCurrency
                 baseDenom={askBaseDenom}
+                bankDenom={askDenom}
                 displayDenom={displayDenom}
               />
             }

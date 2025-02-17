@@ -25,14 +25,14 @@ export const OrderSummaryRow = ({
       >
         {title}
       </Title>
-      <p
+      <div
         className={cn(
           'text-grey-700 m-0 ml-5 p-0 text-sm',
           clampDescription ? 'line-clamp-2' : '',
         )}
       >
         {value}
-      </p>
+      </div>
     </div>
   );
 };

@@ -69,7 +69,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
     [allowedDenoms, paymentInfo.askBaseDenom, paymentInfo.askDenom],
   );
 
-  const pricePerCredits = +displayTotalPrice / +credits;
+  const pricePerCredits = +displayTotalPrice / +credits.credits;
 
   return (
     <>

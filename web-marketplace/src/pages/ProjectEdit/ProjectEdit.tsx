@@ -80,7 +80,6 @@ const ProjectEditContext = createContext<ContextType>({
 
 function ProjectEdit(): JSX.Element {
   const { _ } = useLingui();
-
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { classes: styles } = useProjectEditStyles();
   const theme = useTheme<Theme>();

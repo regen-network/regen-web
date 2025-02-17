@@ -32,6 +32,7 @@ interface OrderSummaryProps {
     askDenom: string;
     askBaseDenom: string;
   };
+  pricePerCredits: number;
 }
 
 export const OrderSummary = ({
@@ -42,6 +43,7 @@ export const OrderSummary = ({
   displayTotalPrice,
   displayDenom,
   currency,
+  pricePerCredits,
 }: OrderSummaryProps) => {
   const { _ } = useLingui();
   const { purchaseDate, blockchainRecord } = blockchainDetails;
@@ -59,7 +61,7 @@ export const OrderSummary = ({
           title={_(msg`Price per credit`)}
           value={
             <AmountWithCurrency
-              amount={+displayTotalPrice / +credits}
+              amount={pricePerCredits}
               currency={currency}
               displayDenom={displayDenom}
               classes={{

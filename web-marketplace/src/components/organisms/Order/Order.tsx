@@ -49,7 +49,9 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
     denom => denom.bankDenom === paymentInfo.askDenom,
   );
   const displayTotalPrice = denom
-    ? +credits.totalPrice * Math.pow(10, -denom.exponent)
+    ? +(+credits.totalPrice * Math.pow(10, -denom.exponent)).toFixed(
+        denom.exponent,
+      )
     : +credits.totalPrice;
 
   const currency = {
@@ -66,6 +68,8 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
       }),
     [allowedDenoms, paymentInfo.askBaseDenom, paymentInfo.askDenom],
   );
+
+  const pricePerCredits = +displayTotalPrice / +credits;
 
   return (
     <>
@@ -184,6 +188,9 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
             displayDenom={displayDenom}
             displayTotalPrice={displayTotalPrice}
             currency={currency}
+            pricePerCredits={
+              denom ? +pricePerCredits.toFixed(denom.exponent) : pricePerCredits
+            }
           />
         </CardContent>
       </Card>

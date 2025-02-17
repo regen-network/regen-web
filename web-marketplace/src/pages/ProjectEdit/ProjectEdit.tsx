@@ -23,6 +23,7 @@ import { Label, Title } from 'web-components/src/components/typography';
 import type { Theme } from 'web-components/src/theme/muiTheme';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { useLedger } from 'ledger';
 import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
@@ -79,6 +80,7 @@ const ProjectEditContext = createContext<ContextType>({
 
 function ProjectEdit(): JSX.Element {
   const { _ } = useLingui();
+
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { classes: styles } = useProjectEditStyles();
   const theme = useTheme<Theme>();
@@ -93,6 +95,7 @@ function ProjectEdit(): JSX.Element {
   >(undefined);
   const navigate = useNavigate();
   const graphqlClient = useApolloClient();
+  const { ecocreditClient } = useLedger();
 
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
@@ -132,7 +135,8 @@ function ProjectEdit(): JSX.Element {
       request: {
         projectId,
       },
-      enabled: !!projectId && isOnChainId,
+      enabled: !!projectId && isOnChainId && !!ecocreditClient,
+      client: ecocreditClient,
     }),
   );
   const onChainProject = projectRes?.project;

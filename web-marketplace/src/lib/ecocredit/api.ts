@@ -230,7 +230,7 @@ const getClassProjectForBatch = async ({
       query: getProjectQuery({
         request: { projectId },
         client: ecocreditClient,
-        enabled: !!ecocreditClient,
+        enabled: !!ecocreditClient && !!projectId,
       }),
       reactQueryClient,
     });

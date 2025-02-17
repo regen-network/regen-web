@@ -128,8 +128,13 @@ function ProjectEdit(): JSX.Element {
 
   const { signAndBroadcast } = useMsgClient();
   const isOnChainId = getIsOnChainId(projectId);
+
   const isOffChainUUid = getIsUuid(projectId);
-  const { data: projectRes, isFetching: isFetchingProject } = useQuery(
+  const {
+    data: projectRes,
+    isFetching: isFetchingProject,
+    isLoading: isLoadingProject,
+  } = useQuery(
     getProjectQuery({
       request: {
         projectId,
@@ -148,8 +153,10 @@ function ProjectEdit(): JSX.Element {
         id: projectId,
       }),
     );
+
   const offChainProject = projectByOffChainIdRes?.data?.projectById;
-  const isLoading = isFetchingProject || isFetchingProjectById;
+  const isLoading =
+    isFetchingProject || isFetchingProjectById || isLoadingProject;
 
   const isNotAdmin =
     ((onChainProject?.admin && wallet?.address !== onChainProject.admin) ||

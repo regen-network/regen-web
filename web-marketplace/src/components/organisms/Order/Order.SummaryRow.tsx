@@ -15,7 +15,7 @@ export const OrderSummaryRow = ({
   titleClassName?: string;
 }) => {
   return (
-    <div className={cn('grid grid-cols-[105px_auto] mb-5 sm:mb-10', className)}>
+    <div className={cn('grid grid-cols-[110px_auto] mb-5 sm:mb-10', className)}>
       <Title
         variant="h6"
         className={cn(
@@ -25,14 +25,14 @@ export const OrderSummaryRow = ({
       >
         {title}
       </Title>
-      <p
+      <div
         className={cn(
           'text-grey-700 m-0 ml-5 p-0 text-sm',
           clampDescription ? 'line-clamp-2' : '',
         )}
       >
         {value}
-      </p>
+      </div>
     </div>
   );
 };

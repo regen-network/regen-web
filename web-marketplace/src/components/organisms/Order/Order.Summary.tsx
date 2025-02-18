@@ -32,6 +32,7 @@ interface OrderSummaryProps {
     askDenom: string;
     askBaseDenom: string;
   };
+  pricePerCredits: number;
 }
 
 export const OrderSummary = ({
@@ -42,6 +43,7 @@ export const OrderSummary = ({
   displayTotalPrice,
   displayDenom,
   currency,
+  pricePerCredits,
 }: OrderSummaryProps) => {
   const { _ } = useLingui();
   const { purchaseDate, blockchainRecord } = blockchainDetails;
@@ -59,7 +61,7 @@ export const OrderSummary = ({
           title={_(msg`Price per credit`)}
           value={
             <AmountWithCurrency
-              amount={+displayTotalPrice / +credits}
+              amount={pricePerCredits}
               currency={currency}
               displayDenom={displayDenom}
               classes={{
@@ -172,12 +174,13 @@ export const OrderSummary = ({
         {blockchainRecord && (
           <OrderSummaryRow
             title={
-              <div className="relative">
-                <span className="inline">
+              <div className="flex">
+                <span className="inline max-w-[85px]">
                   <Trans>blockchain record</Trans>
                 </span>
                 <QuestionMarkTooltip
-                  className="absolute bottom-0 right-20"
+                  size="lg"
+                  className="pl-1 pb-1 w-[24px] h-[24px] flex justify-center items-center"
                   title={_(
                     msg`A unique identifier that tracks and verifies a specific transaction on the blockchain.`,
                   )}

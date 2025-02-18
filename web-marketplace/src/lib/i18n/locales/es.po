@@ -22,9 +22,6 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -2199,9 +2196,13 @@ msgstr "información con la mano"
 msgid "Information"
 msgstr "Información"
 
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:76
-msgid "Input an email address to receive a receipt of your purchase.<0>Note: You will receive an email with instructions to link this email to your account, allowing for easier access going forward, if desired.</0>"
-msgstr "Ingrese una dirección de correo electrónico para recibir un recibo de su compra.<0>Nota: Recibirá un correo electrónico con instrucciones para vincular este correo electrónico a su cuenta, lo que permitirá un acceso más fácil en el futuro, si lo desea.</0>"
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:80
+msgid "Input an email address to receive a receipt of your purchase. <0>Note: You will receive an email with instructions to link this email to your account, allowing for easier access going forward, if desired.</0>"
+msgstr "Ingresa una dirección de correo electrónico para recibir un recibo de tu compra. <0>Nota: Recibirás un correo electrónico con instrucciones para vincular este correo electrónico a tu cuenta, lo que te permitirá un acceso más fácil en el futuro, si así lo deseas.</0>"
+
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:80
+#~ msgid "Input an email address to receive a receipt of your purchase.<0>Note: You will receive an email with instructions to link this email to your account, allowing for easier access going forward, if desired.</0>"
+#~ msgstr "Ingrese una dirección de correo electrónico para recibir un recibo de su compra.<0>Nota: Recibirá un correo electrónico con instrucciones para vincular este correo electrónico a su cuenta, lo que permitirá un acceso más fácil en el futuro, si lo desea.</0>"
 
 #: src/pages/BuyCredits/BuyCredits.constants.ts:8
 msgid "Insufficient balance"
@@ -4289,7 +4290,11 @@ msgstr "Esto puede llevar algún tiempo si el tamaño del archivo es grande."
 msgid "This may take up to 15 seconds."
 msgstr "Esto puede tardar hasta 15 segundos."
 
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:65
+msgid "This name will appear on the retirement certificate, and is your user account name."
+msgstr "Este nombre aparecerá en el certificado de jubilación y es el nombre de su cuenta de usuario."
+
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:67
 msgid "This name will appear on the retirement certificate."
 msgstr "Este nombre aparecerá en el certificado de retirada."
 
@@ -4750,7 +4755,7 @@ msgstr "Somos una empresa especializada en la estructuración y operación de in
 msgid "We have emailed you a receipt to"
 msgstr "Le hemos enviado un recibo por correo electrónico a"
 
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:86
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:90
 msgid "We need an email address to send you a receipt of your purchase."
 msgstr "Necesitamos una dirección de correo electrónico para enviarle un recibo de su compra."
 
@@ -4762,7 +4767,7 @@ msgstr "Recomendamos elegir una clase de crédito y crear un proyecto en cadena 
 msgid "We use cookies to provide you with a great user experience. By using this site, you accept our use of <0>cookies policy</0> and agree to our <1>platform terms of service</1>."
 msgstr "Utilizamos cookies para brindarle una excelente experiencia de usuario. Al utilizar este sitio, acepta nuestro uso de la <0>política de cookies</0> y acepta nuestros <1>términos de servicio de la plataforma</1>."
 
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:90
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:94
 msgid "We will send your receipt to the email address below, which is already linked to your account."
 msgstr "Le enviaremos su recibo a la dirección de correo electrónico que aparece a continuación, que ya está vinculada a su cuenta."
 
@@ -4836,7 +4841,7 @@ msgstr "Sí, fusionar"
 msgid "Yes, my project includes grasslands"
 msgstr "Sí, mi proyecto incluye pastizales."
 
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:105
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:109
 msgid "Yes, please create an account for me so I can easily see my purchase details and retirement certificate when I log in"
 msgstr "Sí, por favor crea una cuenta para mí para que pueda ver fácilmente los detalles de mi compra y mi certificado de retirada cuando inicie sesión."
 
@@ -4956,7 +4961,7 @@ msgstr "No podrás emitir créditos con esta opción a menos que posteriormente 
 msgid "You will receive one ecocredit for every basket token you redeem. Oldest batches will be pulled first."
 msgstr "Recibirás un ecocrédito por cada ficha de cesta que canjees. Los lotes más antiguos se retirarán primero."
 
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:73
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:77
 msgid "Your email"
 msgstr "Tu correo electrónico"
 

@@ -59,9 +59,13 @@ export const CustomerInfo = ({
       {retiring && (
         <TextField
           label={_(msg`Your name`)}
-          description={_(
-            msg`This name will appear on the retirement certificate.`,
-          )}
+          description={
+            accountId || createAccount
+              ? _(
+                  msg`This name will appear on the retirement certificate, and is your user account name.`,
+                )
+              : _(msg`This name will appear on the retirement certificate.`)
+          }
           {...register('name')}
           error={!!errors['name']}
           helperText={errors['name']?.message}
@@ -74,7 +78,7 @@ export const CustomerInfo = ({
         description={
           !!wallet?.address && !accountEmail ? (
             <Trans>
-              Input an email address to receive a receipt of your purchase.
+              Input an email address to receive a receipt of your purchase.{' '}
               <i>
                 Note: You will receive an email with instructions to link this
                 email to your account, allowing for easier access going forward,

@@ -2193,9 +2193,13 @@ msgstr ""
 msgid "Information"
 msgstr ""
 
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:76
-msgid "Input an email address to receive a receipt of your purchase.<0>Note: You will receive an email with instructions to link this email to your account, allowing for easier access going forward, if desired.</0>"
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:80
+msgid "Input an email address to receive a receipt of your purchase. <0>Note: You will receive an email with instructions to link this email to your account, allowing for easier access going forward, if desired.</0>"
 msgstr ""
+
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:80
+#~ msgid "Input an email address to receive a receipt of your purchase.<0>Note: You will receive an email with instructions to link this email to your account, allowing for easier access going forward, if desired.</0>"
+#~ msgstr ""
 
 #: src/pages/BuyCredits/BuyCredits.constants.ts:8
 msgid "Insufficient balance"
@@ -4283,7 +4287,11 @@ msgstr ""
 msgid "This may take up to 15 seconds."
 msgstr ""
 
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:63
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:65
+msgid "This name will appear on the retirement certificate, and is your user account name."
+msgstr ""
+
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:67
 msgid "This name will appear on the retirement certificate."
 msgstr ""
 
@@ -4744,7 +4752,7 @@ msgstr ""
 msgid "We have emailed you a receipt to"
 msgstr ""
 
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:86
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:90
 msgid "We need an email address to send you a receipt of your purchase."
 msgstr ""
 
@@ -4756,7 +4764,7 @@ msgstr ""
 msgid "We use cookies to provide you with a great user experience. By using this site, you accept our use of <0>cookies policy</0> and agree to our <1>platform terms of service</1>."
 msgstr ""
 
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:90
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:94
 msgid "We will send your receipt to the email address below, which is already linked to your account."
 msgstr ""
 
@@ -4830,7 +4838,7 @@ msgstr ""
 msgid "Yes, my project includes grasslands"
 msgstr ""
 
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:105
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:109
 msgid "Yes, please create an account for me so I can easily see my purchase details and retirement certificate when I log in"
 msgstr ""
 
@@ -4950,7 +4958,7 @@ msgstr ""
 msgid "You will receive one ecocredit for every basket token you redeem. Oldest batches will be pulled first."
 msgstr ""
 
-#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:73
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:77
 msgid "Your email"
 msgstr ""
 

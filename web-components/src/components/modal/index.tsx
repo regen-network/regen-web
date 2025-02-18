@@ -8,7 +8,7 @@ import CloseIcon from '../icons/CloseIcon';
 
 export interface RegenModalProps {
   open: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   className?: string;
   closeIconColor?: string;
   isIFrame?: boolean;
@@ -123,9 +123,11 @@ const RegenModal: React.FC<React.PropsWithChildren<RegenModalProps>> = ({
           )}
         >
           {children}
-          <div className={styles.closeIcon} onClick={onClose}>
-            <CloseIcon svgColor={closeIconColor} />
-          </div>
+          {onClose && (
+            <div className={styles.closeIcon} onClick={onClose}>
+              <CloseIcon svgColor={closeIconColor} />
+            </div>
+          )}
         </div>
       </RemoveScroll>
     </Modal>

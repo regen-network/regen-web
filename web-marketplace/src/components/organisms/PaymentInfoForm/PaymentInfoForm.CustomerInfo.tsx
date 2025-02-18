@@ -59,9 +59,13 @@ export const CustomerInfo = ({
       {retiring && (
         <TextField
           label={_(msg`Your name`)}
-          description={_(
-            msg`This name will appear on the retirement certificate.`,
-          )}
+          description={
+            accountId || createAccount
+              ? _(
+                  msg`This name will appear on the retirement certificate, and is your user account name.`,
+                )
+              : _(msg`This name will appear on the retirement certificate.`)
+          }
           {...register('name')}
           error={!!errors['name']}
           helperText={errors['name']?.message}

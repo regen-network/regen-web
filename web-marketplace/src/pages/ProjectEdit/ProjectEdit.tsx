@@ -23,6 +23,7 @@ import { Label, Title } from 'web-components/src/components/typography';
 import type { Theme } from 'web-components/src/theme/muiTheme';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { useLedger } from 'ledger';
 import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
@@ -93,6 +94,7 @@ function ProjectEdit(): JSX.Element {
   >(undefined);
   const navigate = useNavigate();
   const graphqlClient = useApolloClient();
+  const { ecocreditClient } = useLedger();
 
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
@@ -126,13 +128,19 @@ function ProjectEdit(): JSX.Element {
 
   const { signAndBroadcast } = useMsgClient();
   const isOnChainId = getIsOnChainId(projectId);
+
   const isOffChainUUid = getIsUuid(projectId);
-  const { data: projectRes, isFetching: isFetchingProject } = useQuery(
+  const {
+    data: projectRes,
+    isFetching: isFetchingProject,
+    isLoading: isLoadingProject,
+  } = useQuery(
     getProjectQuery({
       request: {
         projectId,
       },
-      enabled: !!projectId && isOnChainId,
+      enabled: !!projectId && isOnChainId && !!ecocreditClient,
+      client: ecocreditClient,
     }),
   );
   const onChainProject = projectRes?.project;
@@ -145,8 +153,10 @@ function ProjectEdit(): JSX.Element {
         id: projectId,
       }),
     );
+
   const offChainProject = projectByOffChainIdRes?.data?.projectById;
-  const isLoading = isFetchingProject || isFetchingProjectById;
+  const isLoading =
+    isFetchingProject || isFetchingProjectById || isLoadingProject;
 
   const isNotAdmin =
     ((onChainProject?.admin && wallet?.address !== onChainProject.admin) ||

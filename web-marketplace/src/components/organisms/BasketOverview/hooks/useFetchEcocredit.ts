@@ -57,6 +57,8 @@ export const useFetchEcocredit = ({ batchDenom }: Props): Response => {
   const { data: projectData } = useQuery(
     getProjectQuery({
       request: { projectId: batchData?.batch?.projectId },
+      client: ecocreditClient,
+      enabled: !!batchData?.batch?.projectId && !!ecocreditClient,
     }),
   );
 

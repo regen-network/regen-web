@@ -78,7 +78,7 @@ export const CustomerInfo = ({
         description={
           !!wallet?.address && !accountEmail ? (
             <Trans>
-              Input an email address to receive a receipt of your purchase.
+              Input an email address to receive a receipt of your purchase.{' '}
               <i>
                 Note: You will receive an email with instructions to link this
                 email to your account, allowing for easier access going forward,

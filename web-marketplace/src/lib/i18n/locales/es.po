@@ -2197,8 +2197,12 @@ msgid "Information"
 msgstr "Información"
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:80
-msgid "Input an email address to receive a receipt of your purchase.<0>Note: You will receive an email with instructions to link this email to your account, allowing for easier access going forward, if desired.</0>"
-msgstr "Ingrese una dirección de correo electrónico para recibir un recibo de su compra.<0>Nota: Recibirá un correo electrónico con instrucciones para vincular este correo electrónico a su cuenta, lo que permitirá un acceso más fácil en el futuro, si lo desea.</0>"
+msgid "Input an email address to receive a receipt of your purchase. <0>Note: You will receive an email with instructions to link this email to your account, allowing for easier access going forward, if desired.</0>"
+msgstr "Ingresa una dirección de correo electrónico para recibir un recibo de tu compra. <0>Nota: Recibirás un correo electrónico con instrucciones para vincular este correo electrónico a tu cuenta, lo que te permitirá un acceso más fácil en el futuro, si así lo deseas.</0>"
+
+#: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:80
+#~ msgid "Input an email address to receive a receipt of your purchase.<0>Note: You will receive an email with instructions to link this email to your account, allowing for easier access going forward, if desired.</0>"
+#~ msgstr "Ingrese una dirección de correo electrónico para recibir un recibo de su compra.<0>Nota: Recibirá un correo electrónico con instrucciones para vincular este correo electrónico a su cuenta, lo que permitirá un acceso más fácil en el futuro, si lo desea.</0>"
 
 #: src/pages/BuyCredits/BuyCredits.constants.ts:8
 msgid "Insufficient balance"

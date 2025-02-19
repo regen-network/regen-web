@@ -3,8 +3,8 @@ import { useLingui } from '@lingui/react';
 import { Flex } from 'web-components/src/components/box/Box';
 import RegenNetworkIcon from 'web-components/src/components/icons/RegenNetworkIcon';
 import ToucanIcon from 'web-components/src/components/icons/ToucanIcon';
-import { RegenModalProps } from 'web-components/src/components/modal';
 import { FormModalTemplate } from 'web-components/src/components/modal/FormModalTemplate';
+import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 
@@ -18,7 +18,7 @@ import {
   BRIDGE_MODAL_TITLE,
 } from './BridgeModal.constants';
 
-interface BridgeModalProps extends RegenModalProps {
+interface BridgeModalProps extends RegenModalPropsWithOnClose {
   batch?: BatchInfoWithBalance;
   maxLabel: string;
   availableLabel: string;

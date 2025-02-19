@@ -1,13 +1,15 @@
 import React from 'react';
 
+import { RegenModalPropsWithOnClose } from '../../types/shared/modalPropsWithOnClose';
 import {
   BasketPutForm,
   BasketPutProps,
 } from '../form/BasketPutForm/BasketPutForm';
-import { RegenModalProps } from '../modal';
 import { FormModalTemplate } from './FormModalTemplate';
 
-interface BasketPutModalProps extends RegenModalProps, BasketPutProps {
+interface BasketPutModalProps
+  extends RegenModalPropsWithOnClose,
+    BasketPutProps {
   title: string;
   maxLabel: string;
   availableLabel: string;

@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { RegenModalPropsWithOnClose } from '../../types/shared/modalPropsWithOnClose';
 import { BasketTakeForm, BasketTakeProps } from '../form/BasketTakeForm';
 import { FormModalTemplate } from './FormModalTemplate';
-import { RegenModalProps } from './index';
 
-export interface TakeModalProps extends RegenModalProps, BasketTakeProps {
+export interface TakeModalProps
+  extends RegenModalPropsWithOnClose,
+    BasketTakeProps {
   title: string;
   subtitle: string;
   maxLabel: string;

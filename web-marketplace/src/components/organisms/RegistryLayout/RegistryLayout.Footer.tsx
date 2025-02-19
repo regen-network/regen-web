@@ -37,6 +37,10 @@ const RegistryLayoutFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
           title: _(msg`Storefront`),
           href: `/storefront`,
         },
+        {
+          title: 'NCT',
+          href: '/baskets/eco.uC.NCT',
+        },
       ],
     },
     {

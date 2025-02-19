@@ -34,10 +34,6 @@ import { Link } from 'components/atoms';
 
 export const getMenuItems = (pathname: string, _: TranslatorType): Item[] => [
   {
-    title: 'NCT',
-    href: '/baskets/eco.uC.NCT',
-  },
-  {
     title: _(msg`Projects`),
     dropdownItems: [
       {

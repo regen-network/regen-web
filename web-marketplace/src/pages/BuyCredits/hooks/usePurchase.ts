@@ -387,6 +387,7 @@ export const usePurchase = ({
       creditsAmount,
       currency,
       currencyAmount,
+      data?.email,
       displayDenom,
       email,
       handleSuccess,

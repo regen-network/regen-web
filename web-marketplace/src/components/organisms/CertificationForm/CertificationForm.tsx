@@ -7,7 +7,7 @@ import { AnyObjectSchema, object, string } from 'yup';
 
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
 import Submit from 'web-components/src/components/form/Submit';
-import { RegenModalProps } from 'web-components/src/components/modal';
+import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import {
   INVALID_URL,
@@ -21,7 +21,7 @@ export interface CertificationProps {
 }
 
 interface FormProps extends CertificationProps {
-  onClose: RegenModalProps['onClose'];
+  onClose: RegenModalPropsWithOnClose['onClose'];
 }
 
 const CertificationForm: React.FC<React.PropsWithChildren<FormProps>> = ({

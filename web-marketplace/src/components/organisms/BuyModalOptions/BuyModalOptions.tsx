@@ -39,7 +39,7 @@ export const BuyModalOptions = ({
   const { trackBuyScheduleCall, trackBuyKeplr } = useBuyModalOptionsTracker();
 
   useEffect(() => {
-    if (loaded && isConnected) onClose();
+    if (loaded && isConnected && onClose) onClose();
   }, [isConnected, loaded, onClose]);
 
   return (

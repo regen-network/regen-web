@@ -1,18 +1,23 @@
 import { useNavigate } from 'react-router-dom';
-import { msg, Trans } from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import Card from 'web-components/src/components/cards/Card';
-import Modal, { RegenModalProps } from 'web-components/src/components/modal';
+import Modal from 'web-components/src/components/modal';
 import {
   Body,
   Subtitle,
   Title,
 } from 'web-components/src/components/typography';
+import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import { buyFromProjectIdAtom } from 'pages/BuyCredits/BuyCredits.atoms';
+import {
+  BUYINGS_OPTIONS_FILTERS_PARAM,
+  CREDIT_CARD_BUYING_OPTION_ID,
+} from 'pages/Projects/Projects.constants';
 import { Link } from 'components/atoms';
 import { LoginButton } from 'components/organisms/LoginButton/LoginButton';
 
@@ -23,14 +28,10 @@ import {
   CRYPTO_SUBTITLE,
   TITLE,
 } from './ChooseHowToPurchaseModal.constants';
-import {
-  BUYINGS_OPTIONS_FILTERS_PARAM,
-  CREDIT_CARD_BUYING_OPTION_ID,
-} from 'pages/Projects/Projects.constants';
 
 export type ChooseHowToPurchaseModalProps = {
   projectId: string;
-} & RegenModalProps;
+} & RegenModalPropsWithOnClose;
 
 export const ChooseHowToPurchaseModal = ({
   open,

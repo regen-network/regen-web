@@ -8,7 +8,6 @@ import { TxSuccessfulModalProps } from 'web-components/src/components/modal/TxSu
 
 import { AccountSwitchModalProps } from 'components/organisms/AccountSwitchModal/AccountSwitchModal';
 import { ChooseHowToPurchaseModalProps } from 'components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal';
-import { ConnectedEmailErrorModalProps } from 'components/organisms/RegistryLayout/RegistryLayout.ConnectedEmailErrorModal';
 
 export const errorModalAtom = atomWithImmer({
   title: '',

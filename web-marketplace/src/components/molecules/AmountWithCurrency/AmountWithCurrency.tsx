@@ -33,6 +33,7 @@ export const AmountWithCurrency = ({
     </span>
     <DenomIconWithCurrency
       baseDenom={currency?.askBaseDenom}
+      bankDenom={currency?.askDenom}
       displayDenom={displayDenom}
       className={classes?.denom}
       tooltipText={tooltipText}

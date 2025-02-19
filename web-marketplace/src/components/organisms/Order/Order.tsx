@@ -74,6 +74,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
   return (
     <>
       <Card
+        id={blockchainDetails.blockchainRecord}
         className={cn(
           'bg-grey-100 border-[1px] border-bc-neutral-300',
           className,

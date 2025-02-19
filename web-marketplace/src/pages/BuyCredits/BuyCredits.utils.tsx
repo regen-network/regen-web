@@ -2,12 +2,22 @@ import { UseFormSetValue } from 'react-hook-form';
 import { i18n } from '@lingui/core';
 import { msg, plural, Trans } from '@lingui/macro';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import { USD_DENOM } from 'config/allowedBaseDenoms';
+import {
+  AXELAR_USDC_DENOM,
+  EEUR_DENOM,
+  EVMOS_DENOM,
+  GRAVITY_USDC_DENOM,
+  REGEN_DENOM,
+  USD_DENOM,
+  USDC_DENOM,
+} from 'config/allowedBaseDenoms';
+import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
 
 import { getFormattedNumber } from 'web-components/src/utils/format';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
 
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
@@ -26,7 +36,6 @@ import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.uti
 import { KEPLR_LOGIN_REQUIRED } from 'components/organisms/BuyWarningModal/BuyWarningModal.constants';
 import { BuyWarningModalContent } from 'components/organisms/BuyWarningModal/BuyWarningModal.types';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
-import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import {
   AGREE_PURCHASE,
@@ -373,3 +382,33 @@ export function resetCurrencyAndCredits(
     activeStep,
   );
 }
+
+export const getCryptoCurrencyIconSrc = (
+  baseDenom: string,
+  bankDenom: string,
+) => {
+  const ibcDenom = bankDenom?.includes(IBC_DENOM_PREFIX);
+
+  let href = '';
+  if (baseDenom === GRAVITY_USDC_DENOM)
+    href =
+      'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/usdc.grv.png';
+  // On mainnet, AXELAR_USDC_DENOM and USDC_DENOM base denoms have the same value: uusd
+  // so we also use the bank denom to check whether it's USDC.axl (IBC) or native USDC
+  if (baseDenom === AXELAR_USDC_DENOM && ibcDenom)
+    href =
+      'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/usdc.axl.png';
+  if (baseDenom === USDC_DENOM && !ibcDenom)
+    href =
+      'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/uusdc.png';
+  if (baseDenom === EEUR_DENOM)
+    href =
+      'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/eeur.png';
+  if (baseDenom === REGEN_DENOM)
+    href =
+      'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/regen.png';
+  if (baseDenom === EVMOS_DENOM)
+    href =
+      'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/evmos.png';
+  return href;
+};

@@ -6,11 +6,13 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 export function DenomIconWithCurrency({
   baseDenom,
+  bankDenom,
   displayDenom,
   className,
   tooltipText,
 }: {
   baseDenom: string | undefined;
+  bankDenom: string | undefined;
   displayDenom: string;
   className?: string;
   tooltipText?: string;
@@ -19,6 +21,7 @@ export function DenomIconWithCurrency({
     <Body size="sm" className={cn('flex gap-5', className)}>
       <DenomIcon
         baseDenom={baseDenom}
+        bankDenom={bankDenom}
         className="h-[24px] inline-block denom-icon"
       />
       <span className="pb-5 pt-3 text-sm">{displayDenom}</span>

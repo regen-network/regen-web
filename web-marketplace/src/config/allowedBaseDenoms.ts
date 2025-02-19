@@ -8,10 +8,9 @@ export const EEUR_DENOM = 'eeur';
 export const REGEN_DENOM = 'uregen';
 export const EVMOS_DENOM = 'atevmos';
 export const USD_DENOM = 'usd';
-export const USDC_DENOM = 'usdc';
-export const USDCAXL_DENOM = 'usdcaxl';
+export const USDC_DENOM = 'uusdc';
 
-export const USD_DENOMS = [GRAVITY_USDC_DENOM, AXELAR_USDC_DENOM];
+export const USD_DENOMS = [GRAVITY_USDC_DENOM, AXELAR_USDC_DENOM, USDC_DENOM];
 export const EUR_DENOMS = [EEUR_DENOM];
 export const UPPERCASE_DENOM = [
   REGEN_DENOM,

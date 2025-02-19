@@ -7,6 +7,7 @@ import { apiUri } from 'lib/apiUri';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getPaymentMethodsQueryKey } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery.utils';
 import { AccountEvent, Track } from 'lib/tracker/types';
 import { LoginParams, SignArbitraryType } from 'lib/wallet/wallet';
 
@@ -70,10 +71,15 @@ export const useLogin = ({
               data: { signature },
               token,
               retryCsrfRequest,
-              onSuccess: async () =>
+              onSuccess: async () => {
                 await reactQueryClient.invalidateQueries({
                   queryKey: [GET_ACCOUNTS_QUERY_KEY],
-                }),
+                });
+                await reactQueryClient.invalidateQueries({
+                  queryKey: getPaymentMethodsQueryKey(),
+                  refetchType: 'all',
+                });
+              },
             });
 
             if (res?.user?.accountId && track) {

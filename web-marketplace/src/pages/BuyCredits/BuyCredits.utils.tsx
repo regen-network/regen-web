@@ -391,18 +391,24 @@ export const getCryptoCurrencyIconSrc = (
 
   let href = '';
   if (baseDenom === GRAVITY_USDC_DENOM)
-    href = 'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/usdc.grv.png';
+    href =
+      'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/usdc.grv.png';
   // On mainnet, AXELAR_USDC_DENOM and USDC_DENOM base denoms have the same value: uusd
   // so we also use the bank denom to check whether it's USDC.axl (IBC) or native USDC
   if (baseDenom === AXELAR_USDC_DENOM && ibcDenom)
-    href = 'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/usdc.axl.png';
+    href =
+      'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/usdc.axl.png';
   if (baseDenom === USDC_DENOM && !ibcDenom)
-    href = 'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/uusdc.png';
+    href =
+      'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/uusdc.png';
   if (baseDenom === EEUR_DENOM)
-    href = 'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/eeur.png';
+    href =
+      'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/eeur.png';
   if (baseDenom === REGEN_DENOM)
-    href = 'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/regen.png';
+    href =
+      'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/regen.png';
   if (baseDenom === EVMOS_DENOM)
-    href = 'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/evmos.png';
+    href =
+      'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/evmos.png';
   return href;
 };

@@ -3,10 +3,11 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
-import Modal, { RegenModalProps } from 'web-components/src/components/modal';
+import Modal from 'web-components/src/components/modal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Body, Title } from 'web-components/src/components/typography';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
+import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { Account } from 'generated/graphql';
@@ -29,7 +30,7 @@ type MergeAccount = Array<
     email?: string | null;
   }
 >;
-interface Props extends RegenModalProps {
+interface Props extends RegenModalPropsWithOnClose {
   merge: (params: MergeAccountsParams) => Promise<void>;
   accounts: MergeAccount;
 }

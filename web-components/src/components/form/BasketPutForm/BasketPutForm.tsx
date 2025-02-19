@@ -2,10 +2,10 @@ import React, { ReactNode } from 'react';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import { Body } from '../../../components/typography';
+import { RegenModalPropsWithOnClose } from '../../../types/shared/modalPropsWithOnClose';
 import AmountField from '../../inputs/AmountField';
 import SelectTextField, { Option } from '../../inputs/SelectTextField';
 import { validateAmount } from '../../inputs/validation';
-import { RegenModalProps } from '../../modal';
 import Submit from '../Submit';
 import { BasketPutFormOnChange } from './BasketPutForm.OnChange';
 
@@ -30,7 +30,7 @@ export interface BasketPutProps {
 interface FormProps extends BasketPutProps {
   maxLabel: string;
   availableLabel: string;
-  onClose: RegenModalProps['onClose'];
+  onClose: RegenModalPropsWithOnClose['onClose'];
 }
 
 export interface FormValues {

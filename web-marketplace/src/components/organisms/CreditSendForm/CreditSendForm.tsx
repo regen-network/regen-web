@@ -11,10 +11,10 @@ import InfoIcon from 'web-components/src/components/icons/InfoIcon';
 import AmountField from 'web-components/src/components/inputs/new/AmountField/AmountField';
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
-import { RegenModalProps } from 'web-components/src/components/modal';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 import { Theme } from 'web-components/src/theme/muiTheme';
+import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import {
   AVAILABLE_LABEL,
@@ -58,7 +58,7 @@ export interface CreditSendFormProps {
   availableTradableAmount: number;
   onSubmit: (values: CreditSendFormSchemaType) => Promise<void>;
   addressPrefix?: string;
-  onClose: RegenModalProps['onClose'];
+  onClose: RegenModalPropsWithOnClose['onClose'];
   mapboxToken: string;
 }
 

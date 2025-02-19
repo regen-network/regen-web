@@ -1,9 +1,10 @@
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
-import Modal, { RegenModalProps } from 'web-components/src/components/modal';
+import Modal from 'web-components/src/components/modal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Body, Title } from 'web-components/src/components/typography';
+import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import {
   ADDRESS_USED_CANCEL,
@@ -12,7 +13,7 @@ import {
   ADDRESS_USED_TITLE,
 } from './ConnectWalletFlow.constants';
 
-interface Props extends RegenModalProps {
+interface Props extends RegenModalPropsWithOnClose {
   next: () => void;
 }
 

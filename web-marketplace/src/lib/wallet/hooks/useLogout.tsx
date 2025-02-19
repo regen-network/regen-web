@@ -7,6 +7,7 @@ import { CSRF_ERROR } from 'lib/errors/apiErrors';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getPaymentMethodsQueryKey } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery.utils';
 
 type Params = {
   setError: UseStateSetter<unknown>;
@@ -33,8 +34,12 @@ export const useLogout = ({ setError }: Params) => {
           );
           const bodyResponse = await response.json();
           if (!bodyResponse.error) {
-            reactQueryClient.invalidateQueries({
+            await reactQueryClient.invalidateQueries({
               queryKey: [GET_ACCOUNTS_QUERY_KEY],
+            });
+            await reactQueryClient.invalidateQueries({
+              queryKey: getPaymentMethodsQueryKey(),
+              refetchType: 'all',
             });
           }
 

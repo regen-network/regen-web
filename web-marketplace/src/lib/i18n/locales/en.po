@@ -71,7 +71,7 @@ msgstr ""
 msgid "{area, plural, one {hectare} other {hectares}}"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:301
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:310
 msgid "{creditsAvailable, plural, one {Credit amount adjusted: Only {formattedCreditsAvailable} credit available in {displayDenom}} other {Credit amount adjusted: Only {formattedCreditsAvailable} credits available in {displayDenom}}}"
 msgstr ""
 
@@ -122,7 +122,7 @@ msgid "{years, plural, one {{years} year project duration} other {{years} year p
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:105
-#: src/components/organisms/Order/Order.Summary.tsx:73
+#: src/components/organisms/Order/Order.Summary.tsx:75
 msgid "# credits"
 msgstr ""
 
@@ -273,7 +273,7 @@ msgstr ""
 msgid "A third party who provides a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:182
+#: src/components/organisms/Order/Order.Summary.tsx:186
 msgid "A unique identifier that tracks and verifies a specific transaction on the blockchain."
 msgstr ""
 
@@ -427,11 +427,11 @@ msgstr ""
 
 #: src/features/marketplace/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:113
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:119
-#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:116
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:120
 msgid "amount"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:34
+#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:36
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:78
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:127
 #: src/lib/constants/shared.constants.tsx:30
@@ -467,15 +467,15 @@ msgstr ""
 msgid "Amount Escrowed"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:146
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:155
 msgid "amount now available in"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:92
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:101
 msgid "amount now available in usd"
 msgstr ""
 
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:150
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:154
 msgid "amount of credits"
 msgstr ""
 
@@ -484,7 +484,8 @@ msgid "Amount of credits"
 msgstr ""
 
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:6
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:288
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:297
+#: src/pages/BuyCredits/hooks/usePurchase.ts:322
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:126
 msgid "amount retired"
 msgstr ""
@@ -509,7 +510,8 @@ msgid "Amount to sell"
 msgstr ""
 
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:7
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:289
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:298
+#: src/pages/BuyCredits/hooks/usePurchase.ts:323
 msgid "amount tradable"
 msgstr ""
 
@@ -619,7 +621,7 @@ msgstr ""
 msgid "avg price per credit"
 msgstr ""
 
-#: src/pages/ProjectEdit/ProjectEdit.tsx:253
+#: src/pages/ProjectEdit/ProjectEdit.tsx:263
 msgid "back to projects"
 msgstr ""
 
@@ -703,7 +705,7 @@ msgstr ""
 msgid "BATCH START DATE"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:120
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:129
 msgid "Because we use blockchain technology, if another user purchases the credits before you check out, you’ll need to choose different credits."
 msgstr ""
 
@@ -720,11 +722,11 @@ msgstr ""
 msgid "block height"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:169
+#: src/components/organisms/Order/Order.Summary.tsx:172
 msgid "Blockchain Details"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:177
+#: src/components/organisms/Order/Order.Summary.tsx:180
 #: src/lib/constants/shared.constants.tsx:94
 #: src/pages/ProjectFinished/ProjectFinished.tsx:97
 msgid "blockchain record"
@@ -901,7 +903,7 @@ msgstr ""
 msgid "carbon offset standard"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:145
+#: src/components/organisms/Order/Order.Summary.tsx:147
 msgid "card info"
 msgstr ""
 
@@ -913,7 +915,7 @@ msgstr ""
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:112
+#: src/components/organisms/Order/Order.tsx:116
 msgid "certificate"
 msgstr ""
 
@@ -945,7 +947,7 @@ msgstr ""
 msgid "Change payment card"
 msgstr ""
 
-#: src/pages/ProjectEdit/ProjectEdit.tsx:285
+#: src/pages/ProjectEdit/ProjectEdit.tsx:295
 msgid "Changes have been saved"
 msgstr ""
 
@@ -1014,7 +1016,7 @@ msgstr ""
 msgid "Choose how to purchase credits"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:158
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:167
 msgid "Choose new credits"
 msgstr ""
 
@@ -1254,10 +1256,10 @@ msgstr ""
 
 #: src/features/marketplace/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:109
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:112
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:146
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:150
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:122
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:127
-#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:112
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:116
 msgid "credit batch id"
 msgstr ""
 
@@ -1370,7 +1372,7 @@ msgstr ""
 msgid "credit name"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:339
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:340
 msgid "Credit prices vary. By default the lowest priced credits will be purchased first."
 msgstr ""
 
@@ -1399,7 +1401,7 @@ msgstr ""
 msgid "credits"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:56
+#: src/components/organisms/Order/Order.Summary.tsx:58
 msgid "Credits"
 msgstr ""
 
@@ -1407,7 +1409,7 @@ msgstr ""
 msgid "Credits are held in escrow when a sell order is created, and taken out of escrow when the sell order is either cancelled, updated with a reduced quantity, or processed."
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:46
+#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:48
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:71
 #: src/lib/constants/shared.constants.tsx:182
 msgid "credits available"
@@ -1491,7 +1493,7 @@ msgstr ""
 msgid "Credits Tradable"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:104
+#: src/components/organisms/Order/Order.Summary.tsx:106
 msgid "Credits were purchased in a tradable format and were not retired"
 msgstr ""
 
@@ -1804,7 +1806,7 @@ msgstr ""
 msgid "Edit Project - Access Denied"
 msgstr ""
 
-#: src/pages/ProjectEdit/ProjectEdit.tsx:271
+#: src/pages/ProjectEdit/ProjectEdit.tsx:281
 msgid "Edit Project Page"
 msgstr ""
 
@@ -1850,7 +1852,7 @@ msgstr ""
 msgid "Endangered"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:149
+#: src/components/organisms/Order/Order.Summary.tsx:151
 msgid "ending in"
 msgstr ""
 
@@ -1888,7 +1890,7 @@ msgstr ""
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:171
+#: src/components/organisms/Order/Order.tsx:175
 msgid "Expected delivery date"
 msgstr ""
 
@@ -1985,7 +1987,7 @@ msgstr ""
 msgid "Filters"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:99
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:108
 msgid "find another credit card project"
 msgstr ""
 
@@ -2160,7 +2162,7 @@ msgstr ""
 msgid "Impact"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:51
+#: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:53
 msgid "in"
 msgstr ""
 
@@ -2776,7 +2778,7 @@ msgstr ""
 msgid "Opportunities"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:104
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:113
 msgid "or, buy with crypto"
 msgstr ""
 
@@ -2844,11 +2846,11 @@ msgstr ""
 msgid "payment"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:157
+#: src/components/organisms/Order/Order.Summary.tsx:159
 msgid "payment currency"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:140
+#: src/components/organisms/Order/Order.Summary.tsx:142
 msgid "payment info"
 msgstr ""
 
@@ -3064,7 +3066,7 @@ msgstr ""
 msgid "price per credit"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:59
+#: src/components/organisms/Order/Order.Summary.tsx:61
 msgid "Price per credit"
 msgstr ""
 
@@ -3146,12 +3148,12 @@ msgstr ""
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:86
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:5
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:280
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:289
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:139
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:143
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:118
-#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:105
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:109
 msgid "project"
 msgstr ""
 
@@ -3343,7 +3345,7 @@ msgstr ""
 msgid "Publications"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:171
+#: src/components/organisms/Order/Order.Summary.tsx:174
 msgid "purchase date"
 msgstr ""
 
@@ -3528,7 +3530,7 @@ msgstr ""
 msgid "Restoration Factor:"
 msgstr ""
 
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:108
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:109
 msgid "Retirable"
 msgstr ""
 
@@ -3574,7 +3576,7 @@ msgstr ""
 msgid "Retirement date"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:96
+#: src/components/organisms/Order/Order.Summary.tsx:98
 msgid "Retirement Info"
 msgstr ""
 
@@ -3583,7 +3585,7 @@ msgstr ""
 msgid "Retirement is permanent and non-reversible."
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:120
+#: src/components/organisms/Order/Order.Summary.tsx:122
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:54
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:139
 #: src/pages/Certificate/Certificate.constants.ts:18
@@ -3595,12 +3597,12 @@ msgstr ""
 msgid "Retirement note"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:205
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:214
 msgid "Retirement permanently removes used credits from circulation to prevent their reuse, ensuring that the environmental benefit claimed is real and not double-counted."
 msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:125
-#: src/components/organisms/Order/Order.Summary.tsx:114
+#: src/components/organisms/Order/Order.Summary.tsx:116
 #: src/lib/constants/shared.constants.tsx:148
 #: src/pages/Certificate/Certificate.constants.ts:17
 msgid "Retirement reason"
@@ -3672,7 +3674,7 @@ msgstr ""
 msgid "SDGs"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:129
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:138
 msgid "search for new credits"
 msgstr ""
 
@@ -3724,8 +3726,8 @@ msgstr ""
 msgid "Select all"
 msgstr ""
 
-#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:319
 #: src/components/molecules/CreditsAmount/CreditsAmount.tsx:320
+#: src/components/molecules/CreditsAmount/CreditsAmount.tsx:321
 msgid "Select option"
 msgstr ""
 
@@ -3889,15 +3891,15 @@ msgstr ""
 msgid "Sold Out"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:116
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:125
 msgid "Sorry, another user has purchased all of the available credits from this project"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:87
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:96
 msgid "Sorry, another user has purchased all of the USD credits you selected!"
 msgstr ""
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:141
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:150
 msgid "Sorry, another user has purchased some or all of the credits you selected!"
 msgstr ""
 
@@ -4381,12 +4383,12 @@ msgid "total credits you have purchased"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:130
-#: src/components/organisms/Order/Order.Summary.tsx:79
+#: src/components/organisms/Order/Order.Summary.tsx:81
 msgid "total price"
 msgstr ""
 
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:4
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:262
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:271
 msgid "total purchase price"
 msgstr ""
 
@@ -4398,11 +4400,11 @@ msgstr ""
 msgid "Toucan Vintage Token Id"
 msgstr ""
 
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:101
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:102
 msgid "Tradable"
 msgstr ""
 
-#: src/components/organisms/Order/Order.Summary.tsx:100
+#: src/components/organisms/Order/Order.Summary.tsx:102
 msgid "Tradable Credits"
 msgstr ""
 
@@ -4663,7 +4665,7 @@ msgstr ""
 msgid "view project"
 msgstr ""
 
-#: src/components/organisms/Order/Order.tsx:120
+#: src/components/organisms/Order/Order.tsx:124
 msgid "View Receipt"
 msgstr ""
 

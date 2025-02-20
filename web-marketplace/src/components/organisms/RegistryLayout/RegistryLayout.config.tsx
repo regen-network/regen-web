@@ -180,7 +180,7 @@ export const getUserMenuItems = ({
         </div>
       ),
     },
-    !loginDisabled && {
+    {
       pathname,
       linkComponent,
       ...EDIT_PROFILE,

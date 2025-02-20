@@ -48,7 +48,7 @@ export const ProfileEditMain = () => {
 
   const initialValues: EditProfileFormSchemaType = useMemo(
     () => ({
-      name: String(activeAccount?.name ? activeAccount?.name : DEFAULT_NAME),
+      name: String(activeAccount?.name ? activeAccount?.name : _(DEFAULT_NAME)),
       description: String(activeAccount?.description?.trimEnd() ?? ''),
       profileImage: String(
         activeAccount?.image ? activeAccount?.image : defaultAvatar,
@@ -60,7 +60,17 @@ export const ProfileEditMain = () => {
       twitterLink: String(activeAccount?.twitterLink ?? ''),
       websiteLink: String(activeAccount?.websiteLink ?? ''),
     }),
-    [activeAccount, defaultAvatar],
+    [
+      _,
+      activeAccount?.bgImage,
+      activeAccount?.description,
+      activeAccount?.image,
+      activeAccount?.name,
+      activeAccount?.twitterLink,
+      activeAccount?.type,
+      activeAccount?.websiteLink,
+      defaultAvatar,
+    ],
   );
 
   /* callbacks */

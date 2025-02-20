@@ -4,6 +4,7 @@ import { Field, Form, Formik, FormikErrors, useFormikContext } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from '../../theme/muiTheme';
+import { RegenModalPropsWithOnClose } from '../../types/shared/modalPropsWithOnClose';
 import { getJurisdictionIsoCode } from '../../utils/locationStandard';
 import { Flex } from '../box';
 import AmountField from '../inputs/AmountField';
@@ -11,7 +12,6 @@ import ControlledTextField from '../inputs/ControlledTextField';
 import SelectFieldFallback from '../inputs/SelectFieldFallback';
 import TextField from '../inputs/TextField';
 import { validateAmount, validateMemoLength } from '../inputs/validation';
-import { RegenModalProps } from '../modal';
 import InfoTooltipWithIcon from '../tooltip/InfoTooltipWithIcon';
 import { Body, Title } from '../typography';
 import Submit from './Submit';
@@ -83,7 +83,7 @@ interface FormProps extends CreditRetireProps {
   insufficientCredits: string;
   invalidDecimalCount: string;
   onSubmit: (values: RetireFormValues) => void;
-  onClose: RegenModalProps['onClose'];
+  onClose: RegenModalPropsWithOnClose['onClose'];
 }
 
 export interface MetaRetireFormValues {

@@ -11,7 +11,7 @@ import {
   validateAmount,
   validatePolygonAddress,
 } from 'web-components/src/components/inputs/validation';
-import { RegenModalProps } from 'web-components/src/components/modal';
+import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import {
   INSUFFICIENT_CREDITS,
@@ -37,7 +37,7 @@ export interface BridgeProps {
 interface FormProps extends BridgeProps {
   maxLabel: string;
   availableLabel: string;
-  onClose: RegenModalProps['onClose'];
+  onClose: RegenModalPropsWithOnClose['onClose'];
 }
 
 export interface BridgeFormValues {

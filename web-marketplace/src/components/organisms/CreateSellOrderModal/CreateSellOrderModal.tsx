@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 
-import { RegenModalProps } from 'web-components/src/components/modal';
 import { FormModalTemplate } from 'web-components/src/components/modal/FormModalTemplate';
+import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import {
   CreateSellOrderForm,
@@ -9,7 +9,7 @@ import {
 } from '../CreateSellOrderForm/CreateSellOrderForm';
 
 interface CreateSellOrderModalProps
-  extends RegenModalProps,
+  extends RegenModalPropsWithOnClose,
     CreateSellOrderProps {
   title: string;
 }

@@ -44,6 +44,7 @@ import {
   getCardItems,
   getCryptoCurrencyIconSrc,
   getSteps,
+  updateAccountData,
 } from '../BuyCredits.utils';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
 
@@ -81,7 +82,7 @@ export const usePurchase = ({
   allowedDenoms,
 }: UsePurchaseParams) => {
   const { _ } = useLingui();
-  const { wallet } = useWallet();
+  const { wallet, activeWalletAddr } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
   const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();
@@ -259,6 +260,8 @@ export const usePurchase = ({
                     }
                   }
                   setPaymentIntentId(paymentIntent.id);
+
+                  // await updateAccountData(reactQueryClient, selectedLanguage);
                 }
               },
             });
@@ -376,6 +379,12 @@ export const usePurchase = ({
                 handleSuccess();
                 navigate(`/dashboard/portfolio`);
               }
+              // if (activeWalletAddr) {
+              //   // Invalidate queries to refetch orders
+              //   reactQueryClient.invalidateQueries(
+              //     getOrdersByBuyerAddressKey(activeWalletAddr),
+              //   );
+              // }
             },
           },
         );
@@ -384,6 +393,7 @@ export const usePurchase = ({
     [
       _,
       activeAccount,
+      // activeWalletAddr,
       creditsAmount,
       currency,
       currencyAmount,

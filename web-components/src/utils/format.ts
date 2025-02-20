@@ -22,7 +22,9 @@ export function getFormattedNumber(
   number: number,
   options?: Intl.NumberFormatOptions | undefined,
 ): string {
-  return new Intl.NumberFormat('en-US', options).format(number);
+  return new Intl.NumberFormat(navigator.language || 'en-US', options).format(
+    number,
+  );
 }
 
 export function getFormattedPeriod(start: string, end: string | Date): string {

@@ -2,7 +2,7 @@ import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 
-import { sanitizeValue } from './EditableInput.utils';
+import { localizeNumber, sanitizeValue } from './EditableInput.utils';
 
 interface EditableInputProps {
   value: string;
@@ -41,12 +41,17 @@ export const EditableInput = ({
   const [editable, setEditable] = useState(false);
   const [initialValue, setInitialValue] = useState(value.toString());
   const [currentValue, setCurrentValue] = useState(value);
+  const [decimalSeparator, setDecimalSeparator] = useState('.');
   const wrapperRef = useRef(null);
 
-  const amountValid = +currentValue <= maxValue && +currentValue > 0;
+  const amountValid =
+    +currentValue.replace(/,/g, '.') <= maxValue &&
+    +currentValue.replace(/,/g, '.') > 0;
 
   const isUpdateDisabled =
-    !amountValid || error?.hasError || +initialValue === +currentValue;
+    !amountValid ||
+    error?.hasError ||
+    +initialValue === +currentValue.replace(/,/g, '.');
 
   useEffect(() => {
     setInitialValue(value);
@@ -86,6 +91,11 @@ export const EditableInput = ({
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
+    if (value.includes(',')) {
+      setDecimalSeparator(',');
+    } else {
+      setDecimalSeparator('.');
+    }
     const sanitizedValue = sanitizeValue(value);
     if (+sanitizedValue > maxValue && onInvalidValue) {
       onInvalidValue();
@@ -102,7 +112,7 @@ export const EditableInput = ({
 
   const handleOnUpdate = () => {
     if (isUpdateDisabled) return;
-    onChange(+currentValue);
+    onChange(+currentValue.replace(/,/g, '.'));
     toggleEditable();
   };
 
@@ -132,7 +142,11 @@ export const EditableInput = ({
             <input
               type="text"
               className="h-50 py-20 px-15 w-[100px] border border-solid border-grey-300 text-base font-normal font-sans focus:outline-none"
-              value={currentValue}
+              value={
+                decimalSeparator === ','
+                  ? currentValue.replace('.', ',')
+                  : currentValue
+              }
               onChange={handleOnChange}
               onKeyDown={handleKeyDown}
               aria-label={inputAriaLabel}
@@ -172,7 +186,7 @@ export const EditableInput = ({
         </>
       ) : (
         <div className="flex justify-between h-[47px] items-center">
-          <span>{currentValue}</span>
+          <span>{localizeNumber(+currentValue)}</span>
           {isEditable && (
             <EditButtonIcon
               onClick={toggleEditable}

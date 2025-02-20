@@ -130,6 +130,7 @@ export function MultiStepProvider<T extends object>({
 
   const handleBack = (): void => {
     goBack();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSave = (

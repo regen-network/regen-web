@@ -12,7 +12,7 @@ import { getFormattedNumber } from 'web-components/src/utils/format';
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { denomToMicro } from 'lib/denom.utils';
-import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
+import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { SellFailureEvent, SellSuccessEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -130,7 +130,11 @@ const useCreateSellOrderSubmit = ({
                     verticalAlign: 'bottom',
                   }}
                 >
-                  <DenomIcon baseDenom={baseDenom} sx={{ display: 'flex' }} />
+                  <DenomIcon
+                    baseDenom={baseDenom}
+                    bankDenom={askDenom}
+                    sx={{ display: 'flex' }}
+                  />
                 </Box>
               ),
             },

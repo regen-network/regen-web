@@ -309,6 +309,7 @@ export const CreditsAmount = ({
       <CreditsAmountHeader
         displayDenom={displayDenom}
         baseDenom={currency.askBaseDenom}
+        bankDenom={currency.askDenom}
         creditsAvailable={creditsAvailable}
         setMaxCreditsSelected={setMaxCreditsSelected}
       />

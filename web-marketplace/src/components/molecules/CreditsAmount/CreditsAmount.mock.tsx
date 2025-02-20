@@ -3,7 +3,7 @@ import {
   EVMOS_DENOM,
   REGEN_DENOM,
   USDC_DENOM,
-  USDCAXL_DENOM,
+  AXELAR_USDC_DENOM,
 } from 'config/allowedBaseDenoms';
 
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
@@ -41,7 +41,7 @@ export const cryptoSellOrders = [
   },
   {
     id: '4',
-    askBaseDenom: USDCAXL_DENOM,
+    askBaseDenom: AXELAR_USDC_DENOM,
     askDenom: 'ibc/456',
     askAmount: '3000000',
     quantity: '10',
@@ -69,7 +69,7 @@ export const cardSellOrders = cryptoSellOrders.map((order, i) => ({
 export const cryptoCurrencies = [
   { askDenom: REGEN_DENOM, askBaseDenom: REGEN_DENOM },
   { askDenom: 'ibc/123', askBaseDenom: USDC_DENOM },
-  { askDenom: 'ibc/456', askBaseDenom: USDCAXL_DENOM },
+  { askDenom: 'ibc/456', askBaseDenom: AXELAR_USDC_DENOM },
   { askDenom: 'ibc/789', askBaseDenom: EVMOS_DENOM },
 ];
 

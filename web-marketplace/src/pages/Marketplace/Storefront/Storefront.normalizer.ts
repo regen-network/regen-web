@@ -2,9 +2,9 @@ import { BatchInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/q
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
+import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
-import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 import {
   NormalizedSellOrder,

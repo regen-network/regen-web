@@ -1,10 +1,9 @@
+import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
 import {
   createAscSortHandler,
   createDescSortHandler,
 } from 'lib/sort/createSortHandler';
 import { transformToNum } from 'lib/sort/transforms';
-
-import { SellOrderInfoExtented } from 'hooks/useQuerySellOrders';
 
 export type SellOrdersSortType =
   | 'default'

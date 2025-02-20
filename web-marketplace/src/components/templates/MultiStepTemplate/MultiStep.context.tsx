@@ -151,6 +151,7 @@ export function MultiStepProvider<T extends object>({
     const maxAllowed = Math.max(nextStep, maxAllowedStep);
     handleSave(formValues, maxAllowed, dataDisplay);
     handleNext();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // this reset does not clean the stored data, it simply forces the form to start

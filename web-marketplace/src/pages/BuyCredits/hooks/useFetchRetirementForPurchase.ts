@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ApolloClient,
@@ -8,9 +8,10 @@ import {
 import { msg, t } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { timer } from 'utils/timer';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   processingModalAtom,
   txBuySuccessfulModalAtom,
@@ -26,7 +27,7 @@ import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { EMAIL_RECEIPT, VIEW_CERTIFICATE } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
-import { getCardItems, getSteps } from '../BuyCredits.utils';
+import { getCardItems, getSteps, updateAccountData } from '../BuyCredits.utils';
 
 type UseFetchRetirementForPurchaseParams = {
   paymentIntentId?: string;
@@ -55,6 +56,7 @@ export const useFetchRetirementForPurchase = ({
   const navigate = useNavigate();
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setTxBuySuccessfulModalAtom = useSetAtom(txBuySuccessfulModalAtom);
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { handleSuccess, data: multiStepData } =
     useMultiStep<BuyCreditsSchemaTypes>();
   const reactQueryClient = useQueryClient();
@@ -78,7 +80,7 @@ export const useFetchRetirementForPurchase = ({
   );
   const retirement = data?.data?.retirementByTxHash;
 
-  const onPending = useCallback(() => {
+  const onPending = useCallback(async () => {
     if (
       paymentIntentId &&
       creditsAmount &&
@@ -119,6 +121,12 @@ export const useFetchRetirementForPurchase = ({
           t`Your retirement certificate will be generated as soon as the credits are transferred, please check later. Meanwhile, we have emailed you a receipt to ${email}`,
         );
       });
+      // Reload account data
+      try {
+        await updateAccountData(reactQueryClient, selectedLanguage);
+      } finally {
+        setProcessingModalAtom(atom => void (atom.open = false));
+      }
       handleSuccess();
       navigate(`/certificate/${paymentIntentId}?name=${name}`);
     }
@@ -135,12 +143,16 @@ export const useFetchRetirementForPurchase = ({
     paymentIntentId,
     paymentOption,
     project,
+    reactQueryClient,
     retiring,
+    selectedLanguage,
     setProcessingModalAtom,
     setTxBuySuccessfulModalAtom,
   ]);
-
+  // const [isFetchingTxHash, setIsFetchingTxHash] = useState(false);
   const fetchTxHash = useCallback(async () => {
+    // if (isFetchingTxHash) return;
+    // setIsFetchingTxHash(true);
     setProcessingModalAtom(atom => void (atom.open = true));
     let i = 1;
     let refetchedTxHash;
@@ -156,7 +168,14 @@ export const useFetchRetirementForPurchase = ({
     if (!refetchedTxHash) {
       onPending();
     }
-  }, [onPending, refetchTxHash, setProcessingModalAtom, txHash]);
+    // setIsFetchingTxHash(false);
+  }, [
+    // isFetchingTxHash,
+    onPending,
+    refetchTxHash,
+    setProcessingModalAtom,
+    txHash,
+  ]);
 
   const fetchRetirement = useCallback(async () => {
     let i = 1;
@@ -215,6 +234,12 @@ export const useFetchRetirementForPurchase = ({
       await reactQueryClient.invalidateQueries({
         queryKey: [SELL_ORDERS_EXTENTED_KEY],
       });
+      // Reload account data
+      try {
+        await updateAccountData(reactQueryClient, selectedLanguage);
+      } finally {
+        setProcessingModalAtom(atom => void (atom.open = false));
+      }
       handleSuccess();
       navigate(`/certificate/${retirement.nodeId}?name=${name}`);
     }
@@ -233,6 +258,7 @@ export const useFetchRetirementForPurchase = ({
     reactQueryClient,
     retirement,
     retiring,
+    selectedLanguage,
     setProcessingModalAtom,
     setTxBuySuccessfulModalAtom,
   ]);

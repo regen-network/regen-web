@@ -14,7 +14,13 @@ export const useShowOrders = () => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const { activeWalletAddr } = useWallet();
+
   const fiatOrders = activeAccount?.fiatOrdersByAccountId?.nodes;
+  console.log(
+    '🚀 ~ useShowOrders.tsx:19 ~ useShowOrders ~ fiatOrders:',
+    fiatOrders,
+  );
+
   const { data, isLoading: cryptoOrdersLoading } = useQuery(
     getOrdersByBuyerAddressQuery({
       client: apolloClient,
@@ -23,10 +29,8 @@ export const useShowOrders = () => {
     }),
   );
   const cryptoOrders = data?.data?.allOrders?.nodes;
-  const ordersLoading = loading || cryptoOrdersLoading;
   return (
-    !ordersLoading &&
-    ((fiatOrders && fiatOrders.length > 0) ||
-      (cryptoOrders && cryptoOrders.length > 0))
+    (!loading && fiatOrders && fiatOrders.length > 0) ||
+    (!cryptoOrdersLoading && cryptoOrders && cryptoOrders.length > 0)
   );
 };

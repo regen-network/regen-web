@@ -32,7 +32,7 @@ import { Order } from '../Orders.types';
 export const useOrders = () => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { ecocreditClient, dataClient } = useLedger();
-  const { activeAccount, loading } = useAuth();
+  const { activeAccount, loading, privActiveAccount } = useAuth();
   const { activeWalletAddr } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
@@ -183,10 +183,13 @@ export const useOrders = () => {
     }),
   );
 
+  const isWeb2UserWithoutWallet =
+    !!privActiveAccount?.email && !activeAccount?.addr;
+
   const isLoading =
     loading ||
     paymentMethodsLoading ||
-    cryptoOrdersLoading ||
+    (cryptoOrdersLoading && !isWeb2UserWithoutWallet) ||
     retirementsLoading ||
     offChainProjectsLoading ||
     onChainProjectsLoading ||

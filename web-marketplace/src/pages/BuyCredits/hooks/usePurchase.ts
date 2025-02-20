@@ -20,6 +20,7 @@ import {
   processingModalAtom,
   txBuySuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
@@ -30,6 +31,7 @@ import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { VIEW_PORTFOLIO } from 'components/organisms/BasketOverview/BasketOverview.constants';
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
+import { CONNECTED_EMAIL_ERROR } from 'components/organisms/RegistryLayout/RegistryLayout.constants';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useMsgClient } from 'hooks';
 
@@ -37,8 +39,6 @@ import { EMAIL_RECEIPT, PAYMENT_OPTIONS } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
 import { getCardItems, getSteps } from '../BuyCredits.utils';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
-import { useAuth } from 'lib/auth/auth';
-import { CONNECTED_EMAIL_ERROR } from 'components/organisms/RegistryLayout/RegistryLayout.constants';
 
 type UsePurchaseParams = {
   paymentOption: PaymentOptionsType;
@@ -337,10 +337,13 @@ export const usePurchase = ({
                 await reactQueryClient.invalidateQueries({
                   queryKey: [SELL_ORDERS_EXTENTED_KEY],
                 });
+                await reactQueryClient.invalidateQueries({
+                  queryKey: ['balances', wallet?.address], // invalidate all query pages
+                });
 
                 // Reset BuyCredits forms
                 handleSuccess();
-                navigate(`/profile/portfolio`);
+                navigate(`/dashboard/portfolio`);
               }
             },
           },
@@ -349,18 +352,22 @@ export const usePurchase = ({
     },
     [
       _,
+      activeAccount,
       creditsAmount,
       currency,
       currencyAmount,
+      data?.email,
       displayDenom,
       email,
       handleSuccess,
       name,
       navigate,
       paymentOption,
+      privActiveAccount?.email,
       project,
       reactQueryClient,
       retryCsrfRequest,
+      setConnectedEmailErrorModalAtom,
       setErrorBannerTextAtom,
       setErrorCodeAtom,
       setErrorModalAtom,

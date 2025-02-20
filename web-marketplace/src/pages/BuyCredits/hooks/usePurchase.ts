@@ -371,6 +371,9 @@ export const usePurchase = ({
                 await reactQueryClient.invalidateQueries({
                   queryKey: [SELL_ORDERS_EXTENTED_KEY],
                 });
+                await reactQueryClient.invalidateQueries({
+                  queryKey: ['balances', wallet?.address], // invalidate all query pages
+                });
 
                 // Reset BuyCredits forms
                 handleSuccess();

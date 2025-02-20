@@ -60,8 +60,8 @@ export const ProfileEditMain = () => {
     return {
       name: name ? name : _(DEFAULT_NAME),
       description: description?.trimEnd() ?? '',
-      profileImage: image ?? defaultAvatar,
-      backgroundImage: bgImage ?? DEFAULT_PROFILE_BG,
+      profileImage: image ? image : defaultAvatar,
+      backgroundImage: bgImage ? bgImage : DEFAULT_PROFILE_BG,
       profileType: type ?? DEFAULT_PROFILE_TYPE,
       twitterLink: twitterLink ?? '',
       websiteLink: websiteLink ?? '',

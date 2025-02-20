@@ -31,7 +31,6 @@ import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import {
-  getEditProfileFormInitialValues,
   getRadioCardItems,
   LINKS_LABEL,
   PROFILE_AVATAR_FILE_NAME,
@@ -58,14 +57,7 @@ export interface EditProfileFormProps {
   onUpload?: (imageFile: File) => Promise<{ url: string }>;
 }
 const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
-  ({
-    children,
-    initialValues = getEditProfileFormInitialValues,
-    isDirtyRef,
-    onSubmit,
-    onSuccess,
-    onUpload,
-  }) => {
+  ({ children, initialValues, isDirtyRef, onSubmit, onSuccess, onUpload }) => {
     const { _ } = useLingui();
     const form = useZodForm({
       schema: editProfileFormSchema,

@@ -20,6 +20,7 @@ import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWith
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { getTxHashForPaymentIntentQuery } from 'lib/queries/react-query/registry-server/graphql/getTxHashForPaymentIntent/getTxHashForPaymentIntentQuery';
 import { getRetirementByTxHash } from 'lib/queries/react-query/registry-server/graphql/indexer/getRetirementByTxHash/getRetirementByTxHash';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
@@ -58,6 +59,8 @@ export const useFetchRetirementForPurchase = ({
   const { handleSuccess, data: multiStepData } =
     useMultiStep<BuyCreditsSchemaTypes>();
   const reactQueryClient = useQueryClient();
+  const { wallet } = useWallet();
+
   const email = multiStepData?.email;
   const name = multiStepData?.name;
 
@@ -215,6 +218,10 @@ export const useFetchRetirementForPurchase = ({
       await reactQueryClient.invalidateQueries({
         queryKey: [SELL_ORDERS_EXTENTED_KEY],
       });
+      if (wallet)
+        await reactQueryClient.invalidateQueries({
+          queryKey: ['balances', wallet?.address], // invalidate all query pages
+        });
       handleSuccess();
       navigate(`/certificate/${retirement.nodeId}?name=${name}`);
     }
@@ -235,6 +242,7 @@ export const useFetchRetirementForPurchase = ({
     retiring,
     setProcessingModalAtom,
     setTxBuySuccessfulModalAtom,
+    wallet,
   ]);
 
   useEffect(() => {

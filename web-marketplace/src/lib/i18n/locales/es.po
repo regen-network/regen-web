@@ -22,6 +22,9 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+msgid ""
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -260,7 +263,7 @@ msgstr "Una breve descripción de su proyecto de impacto ecológico y de la prop
 msgid "A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
 msgstr "Un sistema de pastoreo controlado en el que el ganado se traslada con frecuencia entre las divisiones de pasturas o potreros en función de la calidad del forraje y las necesidades nutricionales del ganado. Las cercas portátiles permiten que cada potrero descanse y vuelva a crecer hasta la siguiente rotación de pastoreo."
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:87
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:91
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
 msgstr "Un proyecto de desarrollo de <0>Regen Network<1/>, PBC</0>"
 
@@ -309,8 +312,8 @@ msgstr "comportamiento"
 msgid "Actions"
 msgstr "Comportamiento"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:67
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:46
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:63
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:50
 #: src/pages/Activity/Activity.tsx:12
 msgid "Activity"
 msgstr "Actividad"
@@ -415,7 +418,7 @@ msgstr "Todas las publicaciones"
 msgid "all profiles"
 msgstr "todos los perfiles"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:46
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:42
 #: src/pages/Projects/Projects.tsx:115
 msgid "All projects"
 msgstr "Todos los proyectos"
@@ -855,7 +858,7 @@ msgstr "Comprador"
 msgid "Buying options"
 msgstr "Opciones de compra"
 
-#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.tsx:56
+#: src/components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal.tsx:57
 msgid "Buying with crypto requires a <0>Keplr wallet</0>."
 msgstr "Para comprar con criptomonedas se requiere una <0>billetera Keplr</0>."
 
@@ -918,7 +921,7 @@ msgstr "Caribe"
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
 msgstr "Las categorías de la Lista Roja de Ecosistemas de la UICN evalúan la salud y el riesgo de los ecosistemas a escala global. Tebu promueve la protección de los ecosistemas más amenazados otorgando una puntuación más alta a aquellos que presentan un riesgo mayor."
 
-#: src/components/organisms/Order/Order.tsx:116
+#: src/components/organisms/Order/Order.tsx:117
 msgid "certificate"
 msgstr "certificado"
 
@@ -1578,7 +1581,7 @@ msgstr "fecha"
 msgid "Date of upload"
 msgstr "Fecha de subida"
 
-#: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.SelectAccountModal.tsx:66
+#: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.SelectAccountModal.tsx:67
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:12
 msgid "default avatar"
 msgstr "avatar predeterminado"
@@ -1680,8 +1683,8 @@ msgstr "eco-crédito"
 msgid "Ecocredit batch ID"
 msgstr "Identificación del lote de ecocrédito"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:74
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:50
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:70
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:54
 msgid "Ecocredit batches"
 msgstr "Lotes de ecocrédito"
 
@@ -1893,7 +1896,7 @@ msgstr "emisión estimada"
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr "Algunos ejemplos de motivos de retirada incluyen: “viajes de empresa en 2025”, “compensar mi impacto ambiental” o el nombre de una persona u organización específica."
 
-#: src/components/organisms/Order/Order.tsx:175
+#: src/components/organisms/Order/Order.tsx:176
 msgid "Expected delivery date"
 msgstr "Fecha de entrega prevista"
 
@@ -2095,11 +2098,11 @@ msgstr "Altamente significativo"
 msgid "Home"
 msgstr "Inicio"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:63
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:67
 msgid "How-to Articles"
 msgstr "Artículos instructivos"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:67
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:71
 msgid "How-to Videos"
 msgstr "Videos instructivos"
 
@@ -2251,7 +2254,7 @@ msgstr "emisores"
 msgid "Issuers"
 msgstr "Emisores"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:101
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:105
 msgid "join the community"
 msgstr "Únete a la comunidad"
 
@@ -2309,7 +2312,7 @@ msgstr "Aprende más"
 msgid "Learn more"
 msgstr "Más información"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:56
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:60
 #: src/pages/Home/Home.tsx:202
 msgid "Learn More"
 msgstr "Más información"
@@ -3011,7 +3014,7 @@ msgstr "Solicitud PQR"
 msgid "prefinance"
 msgstr "prefinanciamiento"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:54
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:50
 #: src/pages/Projects/Projects.tsx:125
 msgid "Prefinance projects"
 msgstr "Proyectos de prefinanciación"
@@ -3093,7 +3096,7 @@ msgstr "Condiciones ambientales previas"
 msgid "Prior to adopting these regenerative practices (going back 5 years prior) how were you using the land?"
 msgstr "Antes de adoptar estas prácticas regenerativas (hace 5 años) ¿cómo utilizabas la tierra?"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:100
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:104
 msgid "Privacy"
 msgstr "Privacidad"
 
@@ -3109,7 +3112,7 @@ msgstr "Configuración de privacidad"
 msgid "Proceed with caution: this cannot be undone!"
 msgstr "Proceda con precaución: ¡esto no se puede deshacer!"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:183
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:179
 msgid "profile"
 msgstr "perfil"
 
@@ -3144,7 +3147,7 @@ msgstr "Tipo de perfil"
 msgid "program"
 msgstr "programa"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:59
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:63
 msgid "Program Guide"
 msgstr "Guía del programa"
 
@@ -3324,7 +3327,7 @@ msgid "PROJECTED:"
 msgstr "PROYECTADO:"
 
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:41
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:37
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:24
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
 #: src/pages/Dashboard/Dashboard.constants.tsx:30
@@ -3420,7 +3423,7 @@ msgstr "ID de referencia (ID del proyecto CFC)"
 msgid "Regen - Ecocredits"
 msgstr "Regen - Ecocréditos"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:98
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:102
 msgid "Regen Data Provider"
 msgstr "Proveedor de datos de regeneración"
 
@@ -3637,7 +3640,7 @@ msgid "Rotational grazing"
 msgstr "Pastoreo rotacional"
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.AddressUsedModal.tsx:17
-#: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.AddressUsedWithEmailModal.tsx:25
+#: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.AddressUsedWithEmailModal.tsx:26
 msgid "sad bee"
 msgstr "abeja triste"
 
@@ -3968,8 +3971,8 @@ msgstr "Comience a escribir la ubicación"
 msgid "State / Region"
 msgstr "Estado / Región"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:62
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:43
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:58
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:47
 msgid "Stats"
 msgstr "Estadísticas"
 
@@ -4039,7 +4042,7 @@ msgstr "Lotes de créditos emitidos con éxito"
 msgid "Summarize this update."
 msgstr "Resuma esta actualización."
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:71
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:75
 msgid "Support"
 msgstr "Apoyo"
 
@@ -4080,7 +4083,7 @@ msgstr "Logotipo Tebu"
 msgid "Tell the deeper story of what makes this project special. Describe the land stewards and why they do this work, the ecological impacts (plants, animals, ecosystems), and social impacts (community, jobs, health)."
 msgstr "Cuente la historia más profunda de lo que hace que este proyecto sea especial. Describa a los administradores de la tierra y por qué hacen este trabajo, los impactos ecológicos (plantas, animales, ecosistemas) y sociales (comunidad, empleos, salud)."
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:99
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:103
 msgid "Terms"
 msgstr "Términos"
 
@@ -4423,7 +4426,7 @@ msgstr "Comercio"
 msgid "Traditional grazing"
 msgstr "Pastoreo tradicional"
 
-#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:106
+#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:109
 msgid "Transfer pending"
 msgstr "Transferencia pendiente"
 
@@ -4668,7 +4671,7 @@ msgstr "Ver perfil"
 msgid "view project"
 msgstr "ver proyecto"
 
-#: src/components/organisms/Order/Order.tsx:124
+#: src/components/organisms/Order/Order.tsx:125
 msgid "View Receipt"
 msgstr "Ver recibo"
 
@@ -4983,7 +4986,7 @@ msgstr "Su nombre"
 msgid "your profiles"
 msgstr "Tus perfiles"
 
-#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:112
+#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:115
 msgid "Your purchase was successful but the credit transfer process hasn’t been completed just yet."
 msgstr "Su compra fue exitosa pero el proceso de transferencia de crédito aún no se ha completado."
 
@@ -4991,7 +4994,7 @@ msgstr "Su compra fue exitosa pero el proceso de transferencia de crédito aún 
 msgid "Your put action was successful!"
 msgstr "¡Su acción de colocación fue exitosa!"
 
-#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:119
+#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:122
 msgid "Your retirement certificate will be generated as soon as the credits are transferred, please check later. Meanwhile, we have emailed you a receipt to {email}"
 msgstr "Tu certificado de retirada se generará tan pronto como se transfieran los créditos, por favor, compruébalo más tarde. Mientras tanto, te hemos enviado un recibo por correo electrónico a {email}"
 

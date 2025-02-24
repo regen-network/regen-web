@@ -7,7 +7,7 @@ import { Box } from '@mui/system';
 import { RetirementReminder } from 'web-components/src/components/form/CreditRetireForm';
 import Submit from 'web-components/src/components/form/Submit';
 import AmountField from 'web-components/src/components/inputs/new/AmountField/AmountField';
-import { RegenModalProps } from 'web-components/src/components/modal';
+import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import {
   AVAILABLE_LABEL,
@@ -37,7 +37,7 @@ export interface CreditRetireFormProps {
   batchDenom: string;
   availableTradableAmount: number;
   onSubmit: (values: CreditRetireFormSchemaType) => Promise<void>;
-  onClose: RegenModalProps['onClose'];
+  onClose: RegenModalPropsWithOnClose['onClose'];
   mapboxToken: string;
   retirementInfoText: string;
 }

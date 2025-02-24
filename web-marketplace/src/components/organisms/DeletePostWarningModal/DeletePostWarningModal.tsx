@@ -1,9 +1,9 @@
 import { useLingui } from '@lingui/react';
 
-import { RegenModalProps } from 'web-components/src/components/modal';
 import { SadBeeModal } from 'web-components/src/components/modal/SadBeeModal/SadBeeModal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Body, Title } from 'web-components/src/components/typography';
+import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import {
   BODY,
@@ -12,7 +12,9 @@ import {
   TITLE,
 } from './DeletePostWarningModal.constants';
 
-type DeletePostWarningModalProps = { onDelete: () => void } & RegenModalProps;
+type DeletePostWarningModalProps = {
+  onDelete: () => void;
+} & RegenModalPropsWithOnClose;
 export const DeletePostWarningModal = ({
   open,
   onClose,

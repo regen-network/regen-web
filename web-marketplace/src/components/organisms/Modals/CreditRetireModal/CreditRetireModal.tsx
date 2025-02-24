@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLingui } from '@lingui/react';
 
-import { RegenModalProps } from 'web-components/src/components/modal';
 import { FormModalTemplate } from 'web-components/src/components/modal/FormModalTemplate';
+import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import { RETIREMENT_INFO_TEXT } from 'lib/constants/shared.constants';
 
@@ -14,7 +14,7 @@ import {
 import { CREDIT_RETIRE_TITLE } from './CreditRetireModal.constants';
 
 interface CreditRetireModalProps
-  extends RegenModalProps,
+  extends RegenModalPropsWithOnClose,
     CreditRetireFormProps {}
 
 const CreditRetireModal: React.FC<CreditRetireModalProps> = ({

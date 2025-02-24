@@ -2,8 +2,8 @@ import React from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
-import { RegenModalProps } from 'web-components/src/components/modal';
 import { FormModalTemplate } from 'web-components/src/components/modal/FormModalTemplate';
+import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import {
   CertificationForm,
@@ -11,7 +11,7 @@ import {
 } from 'components/organisms/CertificationForm/CertificationForm';
 
 interface AddCertificationModalProps
-  extends RegenModalProps,
+  extends RegenModalPropsWithOnClose,
     CertificationProps {}
 
 export const title = msg`Additional Certificate`;

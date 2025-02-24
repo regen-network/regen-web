@@ -5,11 +5,11 @@ import { Field, Form, Formik, FormikErrors } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 
 import type { Theme } from '../../theme/muiTheme';
+import { RegenModalPropsWithOnClose } from '../../types/shared/modalPropsWithOnClose';
 import QuestionIconOutlined from '../icons/QuestionIconOutlined';
 import AmountField from '../inputs/AmountField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import { validateAmount } from '../inputs/validation';
-import type { RegenModalProps } from '../modal';
 import InfoTooltip from '../tooltip/InfoTooltip';
 import { Subtitle } from '../typography';
 import {
@@ -80,7 +80,7 @@ interface FormProps extends BasketTakeProps {
   invalidDecimalCount: string;
   maxLabel: string;
   availableLabel: string;
-  onClose: RegenModalProps['onClose'];
+  onClose: RegenModalPropsWithOnClose['onClose'];
 }
 
 const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({

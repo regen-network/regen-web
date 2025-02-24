@@ -37,7 +37,7 @@ const ProcessingModal: React.FC<React.PropsWithChildren<ProcessingModalProps>> =
     const { classes: styles, cx } = useStyles();
 
     return (
-      <Modal className={styles.root} open={open} onClose={onClose}>
+      <Modal className={styles.root} open={open}>
         <Spinner className={cx(styles.verticalSpacing, styles.spinner)} />
         <Title align="center" variant="h3" mb={6}>
           {title}

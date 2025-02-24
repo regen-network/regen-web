@@ -15,9 +15,9 @@ import SelectTextField, {
 } from 'web-components/src/components/inputs/new/SelectTextField/SelectTextField';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 import { MAX_FRACTION_DIGITS } from 'web-components/src/components/inputs/validation';
-import { RegenModalProps } from 'web-components/src/components/modal';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
+import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import {
@@ -51,7 +51,7 @@ export interface Props {
   availableAmountByBatch: { [batchDenom: string]: number };
   onSubmit: (values: CreateSellOrderFormSchemaType) => Promise<void>;
   initialValues?: CreateSellOrderFormSchemaType;
-  onClose: RegenModalProps['onClose'];
+  onClose: RegenModalPropsWithOnClose['onClose'];
 }
 
 const CreateSellOrderForm: React.FC<Props> = ({

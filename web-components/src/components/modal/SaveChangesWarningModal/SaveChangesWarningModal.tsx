@@ -1,9 +1,10 @@
-import { RegenModalProps } from 'web-components/src/components/modal';
 import { SadBeeModal } from 'web-components/src/components/modal/SadBeeModal/SadBeeModal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Body, Title } from 'web-components/src/components/typography';
 
-interface Props extends RegenModalProps {
+import { RegenModalPropsWithOnClose } from '../../../types/shared/modalPropsWithOnClose';
+
+interface Props extends RegenModalPropsWithOnClose {
   title: string;
   bodyText: string;
   buttonText: string;

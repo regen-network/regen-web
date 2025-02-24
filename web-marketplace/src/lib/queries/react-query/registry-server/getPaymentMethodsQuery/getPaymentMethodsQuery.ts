@@ -1,16 +1,16 @@
 import { apiUri } from 'lib/apiUri';
 
-import { GET_PAYMENT_METHODS_QUERY_KEY } from './getPaymentMethodsQuery.constants';
 import {
   ReactQueryGetPaymentMethodsQueryParams,
   ReactQueryGetPaymentMethodsQueryResponse,
 } from './getPaymentMethodsQuery.types';
+import { getPaymentMethodsQueryKey } from './getPaymentMethodsQuery.utils';
 
 export const getPaymentMethodsQuery = ({
   limit,
   ...params
 }: ReactQueryGetPaymentMethodsQueryParams): ReactQueryGetPaymentMethodsQueryResponse => ({
-  queryKey: [GET_PAYMENT_METHODS_QUERY_KEY, limit],
+  queryKey: getPaymentMethodsQueryKey(limit),
   queryFn: async () => {
     try {
       const resp = await fetch(

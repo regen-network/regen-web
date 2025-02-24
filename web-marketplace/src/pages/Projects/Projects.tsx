@@ -270,27 +270,23 @@ const Projects = (): JSX.Element => {
 
   return (
     <>
-      <div
-        className="lg:grid grid-cols-[auto_minmax(310px,750px)] xl:grid-cols-[auto_minmax(310px,1120px)] block justify-center"
-        style={{
-          background:
-            'linear-gradient(90deg, rgba(var(--ac-neutral-0)) 0%, rgba(var(--ac-neutral-0)) 50%, rgba(var(--ac-neutral-100)) 50%, rgba(var(--ac-neutral-100)) 100%)',
-          //'rgba(var(--ac-neutral-100))',
-        }}
-      >
-        <div className="w-[310px] py-[43px] px-[20px] hidden lg:block">
-          <ProjectFilterBody
-            allProjects={allProjects}
-            resetFilters={resetFilters}
-            showResetButton={showResetButton}
-            hasCommunityProjects={hasCommunityProjects}
-            creditClassFilterOptions={creditClassFilterOptions}
-            buyingOptionsFilterOptions={buyingOptionsFilterOptions}
-          />
+      <div className="lg:grid grid-cols-[1fr_auto_minmax(310px,750px)_1fr] xl:grid-cols-[1fr_auto_minmax(310px,1120px)_1fr] block justify-center">
+        <div className="bg-grey-0"></div>
+        <div className="z-50 h-full bg-grey-0 shadow-[6px_0px_10px_-4px_rgba(0,0,0,0.10)] ">
+          <aside className="self-start w-[310px] py-[43px] px-[20px] hidden lg:block sticky top-0">
+            <ProjectFilterBody
+              allProjects={allProjects}
+              resetFilters={resetFilters}
+              showResetButton={showResetButton}
+              hasCommunityProjects={hasCommunityProjects}
+              creditClassFilterOptions={creditClassFilterOptions}
+              buyingOptionsFilterOptions={buyingOptionsFilterOptions}
+            />
+          </aside>
         </div>
         <div
           className={cn(
-            'bg-ac-neutral-100 pt-25 sm:pt-40 px-[16px] md:px-25 sm:25 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center lg:justify-start grid-cols-[repeat(auto-fit,minmax(300px,1fr))]',
+            'bg-ac-neutral-100 pt-25 sm:pt-40 px-[16px] md:pr-25 md:pl-35 pb-[80px] sm:pb-[100px] max-w-[1400px] grid gap-[18px] justify-center lg:justify-start grid-cols-[repeat(auto-fit,minmax(300px,1fr))]',
             { 'lg:block': projectsCount === 0 },
             { 'h-fit': projectsCount !== 0 },
           )}
@@ -334,6 +330,7 @@ const Projects = (): JSX.Element => {
             }}
           />
         </div>
+        <div className="bg-bc-neutral-100"></div>
       </div>
       {gettingStartedResourcesSection && IS_REGEN && (
         <GettingStartedResourcesSection

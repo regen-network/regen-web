@@ -46,22 +46,27 @@ export const ProfileEditMain = () => {
   );
   const fileNamesToDeleteRef = useRef<string[]>([]);
 
-  const initialValues: EditProfileFormSchemaType = useMemo(
-    () => ({
-      name: String(activeAccount?.name ? activeAccount?.name : DEFAULT_NAME),
-      description: String(activeAccount?.description?.trimEnd() ?? ''),
-      profileImage: String(
-        activeAccount?.image ? activeAccount?.image : defaultAvatar,
-      ),
-      backgroundImage: String(
-        activeAccount?.bgImage ? activeAccount?.bgImage : DEFAULT_PROFILE_BG,
-      ),
-      profileType: activeAccount?.type ?? DEFAULT_PROFILE_TYPE,
-      twitterLink: String(activeAccount?.twitterLink ?? ''),
-      websiteLink: String(activeAccount?.websiteLink ?? ''),
-    }),
-    [activeAccount, defaultAvatar],
-  );
+  const initialValues: EditProfileFormSchemaType = useMemo(() => {
+    const {
+      name,
+      description,
+      image,
+      bgImage,
+      type,
+      twitterLink,
+      websiteLink,
+    } = activeAccount ?? {};
+
+    return {
+      name: name ? name : _(DEFAULT_NAME),
+      description: description?.trimEnd() ?? '',
+      profileImage: image ? image : defaultAvatar,
+      backgroundImage: bgImage ? bgImage : DEFAULT_PROFILE_BG,
+      profileType: type ?? DEFAULT_PROFILE_TYPE,
+      twitterLink: twitterLink ?? '',
+      websiteLink: websiteLink ?? '',
+    };
+  }, [_, activeAccount, defaultAvatar]);
 
   /* callbacks */
   const onSubmit = useCallback(

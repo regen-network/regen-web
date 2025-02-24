@@ -7,27 +7,6 @@ import UserIcon from 'web-components/src/components/icons/UserIcon';
 import { AccountType } from 'generated/graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
-import {
-  DEFAULT_NAME,
-  DEFAULT_PROFILE_BG,
-  DEFAULT_PROFILE_TYPE,
-  DEFAULT_PROFILE_USER_AVATAR,
-} from 'pages/ProfileEdit/ProfileEdit.constants';
-
-import { EditProfileFormSchemaType } from './EditProfileForm.schema';
-
-export const getEditProfileFormInitialValues = (
-  _: TranslatorType,
-): EditProfileFormSchemaType => ({
-  profileType: DEFAULT_PROFILE_TYPE,
-  name: _(DEFAULT_NAME),
-  profileImage: DEFAULT_PROFILE_USER_AVATAR,
-  backgroundImage: DEFAULT_PROFILE_BG,
-  description: '',
-  twitterLink: '',
-  websiteLink: '',
-});
-
 export const getRadioCardItems = (_: TranslatorType): RadioCardItem[] => [
   {
     id: 'individual',

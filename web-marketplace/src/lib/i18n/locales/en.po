@@ -4270,8 +4270,12 @@ msgid "This is not a valid video url"
 msgstr ""
 
 #: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:6
-msgid "This is not yet supported by Wallet Connect and Keplr mobile. Please log in using Keplr browser extension on desktop."
+msgid "This is not yet supported by Wallet Connect and Keplr mobile. Please log in using Keplr browser extension on desktop or via email or Google login."
 msgstr ""
+
+#: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:6
+#~ msgid "This is not yet supported by Wallet Connect and Keplr mobile. Please log in using Keplr browser extension on desktop."
+#~ msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:7
 msgid "This is the median average price for all open sell orders in this credit class."

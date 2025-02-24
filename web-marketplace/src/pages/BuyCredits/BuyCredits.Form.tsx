@@ -325,7 +325,7 @@ export const BuyCreditsForm = ({
           }
 
           if (name && activeAccount?.id && !activeAccount?.name) {
-            updateAccountById({
+            await updateAccountById({
               variables: {
                 input: {
                   id: activeAccount?.id,

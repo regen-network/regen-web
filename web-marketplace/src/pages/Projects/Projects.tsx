@@ -270,7 +270,8 @@ const Projects = (): JSX.Element => {
 
   return (
     <>
-      <div className="lg:grid grid-cols-[auto_minmax(310px,750px)] xl:grid-cols-[auto_minmax(310px,1120px)] block justify-center bg-bc-neutral-100">
+      <div className="lg:grid grid-cols-[1fr_auto_minmax(310px,750px)_1fr] xl:grid-cols-[1fr_auto_minmax(310px,1120px)_1fr] block justify-center">
+        <div className="bg-grey-0"></div>
         <div className="z-50 h-full bg-grey-0 shadow-[6px_0px_10px_-4px_rgba(0,0,0,0.10)] ">
           <aside className="self-start w-[310px] py-[43px] px-[20px] hidden lg:block sticky top-0">
             <ProjectFilterBody
@@ -329,6 +330,7 @@ const Projects = (): JSX.Element => {
             }}
           />
         </div>
+        <div className="bg-bc-neutral-100"></div>
       </div>
       {gettingStartedResourcesSection && IS_REGEN && (
         <GettingStartedResourcesSection

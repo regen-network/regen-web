@@ -15,6 +15,7 @@ import { useAuth } from 'lib/auth/auth';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { BUY_CREDITS_FORM_PREFIX } from 'pages/BuyCredits/BuyCredits.constants';
 import { getWalletAddress } from 'pages/Dashboard/Dashboard.utils';
 import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
@@ -113,6 +114,15 @@ const RegistryLayoutHeader: React.FC = () => {
     ? headerColors[pathname]
     : theme.palette.primary.light;
 
+  const onLogOut = () => {
+    disconnect && disconnect();
+
+    // Remove all localStorage items related with the buy credits flow
+    Object.keys(localStorage)
+      .filter(key => key.startsWith(BUY_CREDITS_FORM_PREFIX))
+      .forEach(key => localStorage.removeItem(key));
+  };
+
   return (
     <>
       <Header
@@ -148,7 +158,7 @@ const RegistryLayoutHeader: React.FC = () => {
                 avatar={
                   activeAccount?.image ? activeAccount?.image : defaultAvatar
                 }
-                disconnect={disconnect}
+                disconnect={onLogOut}
                 pathname={pathname}
                 linkComponent={RegistryNavLink}
                 userMenuItems={userMenuItems}

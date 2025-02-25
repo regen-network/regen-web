@@ -43,15 +43,12 @@ export const EditableInput = ({
   const [currentValue, setCurrentValue] = useState(value);
   const [decimalSeparator, setDecimalSeparator] = useState('.');
   const wrapperRef = useRef(null);
+  const formattedValue = +currentValue.replace('.', ',');
 
-  const amountValid =
-    +currentValue.replace(/,/g, '.') <= maxValue &&
-    +currentValue.replace(/,/g, '.') > 0;
+  const amountValid = formattedValue <= maxValue && formattedValue > 0;
 
   const isUpdateDisabled =
-    !amountValid ||
-    error?.hasError ||
-    +initialValue === +currentValue.replace(/,/g, '.');
+    !amountValid || error?.hasError || +initialValue === formattedValue;
 
   useEffect(() => {
     setInitialValue(value);
@@ -112,7 +109,7 @@ export const EditableInput = ({
 
   const handleOnUpdate = () => {
     if (isUpdateDisabled) return;
-    onChange(+currentValue.replace(/,/g, '.'));
+    onChange(formattedValue);
     toggleEditable();
   };
 

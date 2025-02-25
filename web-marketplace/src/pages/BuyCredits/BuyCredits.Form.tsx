@@ -319,8 +319,6 @@ export const BuyCreditsForm = ({
             });
           }
 
-          const shouldRefreshProfileData =
-            name && activeAccount?.id && !activeAccount?.name;
           if (shouldRefreshProfileData) {
             await updateAccountById({
               variables: {
@@ -369,14 +367,14 @@ export const BuyCreditsForm = ({
       project,
       refetchSellOrders,
       data,
-      activeAccount?.id,
-      activeAccount?.name,
+      shouldRefreshProfileData,
       creditsAmount,
       purchase,
       retiring,
       paymentMethodId,
       confirmationTokenId,
       updateAccountById,
+      activeAccount?.id,
       currency,
       _,
       allowedDenomsData,

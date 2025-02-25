@@ -9,8 +9,8 @@ import { getClientConfig } from 'clients/Clients.config';
 import Header from 'web-components/src/components/header';
 import { UserMenuItems } from 'web-components/src/components/header/components/UserMenuItems';
 import { Theme } from 'web-components/src/theme/muiTheme';
-import { cn } from 'web-components/src/utils/styles/cn';
 
+// import { cn } from 'web-components/src/utils/styles/cn';
 import { useAuth } from 'lib/auth/auth';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
@@ -39,7 +39,7 @@ import {
   fullWidthRegExp,
   LOGOUT_TEXT,
 } from './RegistryLayout.constants';
-import { LanguageSwitcher } from './RegistryLayout.LanguageSwitcher';
+// import { LanguageSwitcher } from './RegistryLayout.LanguageSwitcher';
 import { getAddress } from './RegistryLayout.utils';
 
 const RegistryLayoutHeader: React.FC = () => {
@@ -53,7 +53,7 @@ const RegistryLayoutHeader: React.FC = () => {
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
-  const isHome = pathname === '/';
+  // const isHome = pathname === '/';
   const clientConfig = getClientConfig();
 
   const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});

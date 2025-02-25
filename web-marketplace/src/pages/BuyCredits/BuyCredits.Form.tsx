@@ -226,13 +226,8 @@ export const BuyCreditsForm = ({
     [data, handleSaveNext, setPaymentMethodId],
   );
 
-  const refreshProfileData = useCallback(async () => {
-    if (activeAccount) {
-      await reactQueryClient.invalidateQueries({
-        queryKey: getAccountByIdQueryKey({ id: activeAccount.id }),
-      });
-    }
-  }, [activeAccount]);
+  const shouldRefreshProfileData =
+    data.name && activeAccount?.id && !activeAccount?.name;
 
   const allowedDenoms = useMemo(
     () => allowedDenomsData?.allowedDenoms,
@@ -275,6 +270,7 @@ export const BuyCreditsForm = ({
     creditsAmount,
     currencyAmount,
     allowedDenoms,
+    shouldRefreshProfileData,
   });
   const agreePurchaseFormSubmit = useCallback(
     async (
@@ -295,7 +291,6 @@ export const BuyCreditsForm = ({
 
         const sellCanProceed =
           creditsToBuy && creditsToBuy <= creditsInRequestedSellOrders;
-
         if (sellCanProceed) {
           const {
             retirementReason,
@@ -324,7 +319,9 @@ export const BuyCreditsForm = ({
             });
           }
 
-          if (name && activeAccount?.id && !activeAccount?.name) {
+          const shouldRefreshProfileData =
+            name && activeAccount?.id && !activeAccount?.name;
+          if (shouldRefreshProfileData) {
             await updateAccountById({
               variables: {
                 input: {
@@ -335,7 +332,6 @@ export const BuyCreditsForm = ({
                 },
               },
             });
-            refreshProfileData();
           }
 
           if (selectedSellOrders && creditsAmount)
@@ -381,7 +377,6 @@ export const BuyCreditsForm = ({
       paymentMethodId,
       confirmationTokenId,
       updateAccountById,
-      refreshProfileData,
       currency,
       _,
       allowedDenomsData,

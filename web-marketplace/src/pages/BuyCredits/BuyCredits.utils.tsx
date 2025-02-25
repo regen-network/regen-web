@@ -2,7 +2,6 @@ import { UseFormSetValue } from 'react-hook-form';
 import { i18n } from '@lingui/core';
 import { msg, plural, Trans } from '@lingui/macro';
 import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import { QueryClient } from '@tanstack/react-query';
 import {
   AXELAR_USDC_DENOM,
   EEUR_DENOM,
@@ -19,9 +18,6 @@ import { getFormattedNumber } from 'web-components/src/utils/format';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
-import { getAccountsQuery } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery';
-import { ACCOUNT_BY_ID_QUERY_KEY } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.constants';
-import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
@@ -415,17 +411,4 @@ export const getCryptoCurrencyIconSrc = (
     href =
       'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/evmos.png';
   return href;
-};
-
-export const updateAccountData = async (reactQueryClient: QueryClient) => {
-  const accountsData = await getFromCacheOrFetch({
-    query: getAccountsQuery({}),
-    reactQueryClient,
-  });
-  if (accountsData?.activeAccountId) {
-    await reactQueryClient.invalidateQueries({
-      queryKey: [ACCOUNT_BY_ID_QUERY_KEY, accountsData.activeAccountId],
-      refetchType: 'all',
-    });
-  }
 };

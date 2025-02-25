@@ -15,9 +15,11 @@ import {
   processingModalAtom,
   txBuySuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
+import { useAuth } from 'lib/auth/auth';
 import { BLOCKCHAIN_RECORD } from 'lib/constants/shared.constants';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
+import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { getTxHashForPaymentIntentQuery } from 'lib/queries/react-query/registry-server/graphql/getTxHashForPaymentIntent/getTxHashForPaymentIntentQuery';
 import { getOrdersByBuyerAddressKey } from 'lib/queries/react-query/registry-server/graphql/indexer/getOrdersByBuyerAddress/getOrdersByBuyerAddress.constants';
 import { getRetirementByTxHash } from 'lib/queries/react-query/registry-server/graphql/indexer/getRetirementByTxHash/getRetirementByTxHash';
@@ -44,6 +46,7 @@ type UseFetchRetirementForPurchaseParams = {
   creditsAmount?: number;
   currencyAmount?: number;
   displayDenom?: string;
+  shouldRefreshProfileData: boolean;
 };
 export const useFetchRetirementForPurchase = ({
   paymentIntentId,
@@ -55,6 +58,7 @@ export const useFetchRetirementForPurchase = ({
   creditsAmount,
   currencyAmount,
   displayDenom,
+  shouldRefreshProfileData,
 }: UseFetchRetirementForPurchaseParams) => {
   const { _ } = useLingui();
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -65,6 +69,8 @@ export const useFetchRetirementForPurchase = ({
     useMultiStep<BuyCreditsSchemaTypes>();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
+  const { activeAccount } = useAuth();
+
   const email = multiStepData?.email;
   const name = multiStepData?.name;
 
@@ -233,17 +239,23 @@ export const useFetchRetirementForPurchase = ({
           queryKey: ['balances', wallet?.address], // invalidate all query pages
         });
       }
-
       handleSuccess();
       navigate(`/certificate/${retirement.nodeId}?name=${name}`);
 
-      // Reload account data with fiat orders
+      // Reload account data with fiat orders or new name
       // Doing it after navigating otherwise can cause the page to reload before
-      if (paymentOption === PAYMENT_OPTIONS.CARD)
-        await updateAccountData(reactQueryClient);
+      // since the app header depends on the account data
+      if (
+        activeAccount?.id &&
+        (paymentOption === PAYMENT_OPTIONS.CARD || shouldRefreshProfileData)
+      )
+        await reactQueryClient.invalidateQueries({
+          queryKey: getAccountByIdQueryKey({ id: activeAccount?.id }),
+        });
     }
   }, [
     _,
+    activeAccount?.id,
     creditsAmount,
     currency,
     currencyAmount,
@@ -259,6 +271,7 @@ export const useFetchRetirementForPurchase = ({
     retiring,
     setProcessingModalAtom,
     setTxBuySuccessfulModalAtom,
+    shouldRefreshProfileData,
     wallet?.address,
   ]);
 

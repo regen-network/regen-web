@@ -28,6 +28,7 @@ import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { getOrdersByBuyerAddressKey } from 'lib/queries/react-query/registry-server/graphql/indexer/getOrdersByBuyerAddress/getOrdersByBuyerAddress.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -56,6 +57,7 @@ type UsePurchaseParams = {
   creditsAmount?: number;
   currencyAmount?: number;
   allowedDenoms?: AllowedDenom[];
+  shouldRefreshProfileData: boolean;
 };
 type PurchaseParams = {
   selectedSellOrders: ChooseCreditsFormSchemaType['sellOrders'];
@@ -80,6 +82,7 @@ export const usePurchase = ({
   creditsAmount,
   currencyAmount,
   allowedDenoms,
+  shouldRefreshProfileData,
 }: UsePurchaseParams) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
@@ -128,6 +131,7 @@ export const usePurchase = ({
     creditsAmount,
     currencyAmount,
     displayDenom,
+    shouldRefreshProfileData,
   });
 
   const purchase = useCallback(
@@ -385,6 +389,12 @@ export const usePurchase = ({
                 // Reset BuyCredits forms
                 handleSuccess();
                 navigate(`/dashboard/portfolio`);
+
+                if (shouldRefreshProfileData) {
+                  await reactQueryClient.invalidateQueries({
+                    queryKey: getAccountByIdQueryKey({ id: activeAccount?.id }),
+                  });
+                }
               }
             },
           },
@@ -413,6 +423,7 @@ export const usePurchase = ({
       setErrorModalAtom,
       setProcessingModalAtom,
       setTxBuySuccessfulModalAtom,
+      shouldRefreshProfileData,
       signAndBroadcast,
       token,
       wallet?.address,

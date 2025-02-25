@@ -79,7 +79,7 @@ export type Props = {
   allowedDenoms?: AllowedDenoms;
   creditTypePrecision?: number | null;
   initialValues?: DefaultValues<ChooseCreditsFormSchemaType>;
-  onPrev: () => void;
+  onPrev?: () => void;
   isConnected: boolean;
   setupWalletModal: () => void;
   paymentOptionCryptoClicked: boolean;

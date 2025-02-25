@@ -468,7 +468,11 @@ export const BuyCreditsForm = ({
             }}
             allowedDenoms={allowedDenoms}
             creditTypePrecision={creditTypePrecision}
-            onPrev={() => navigate(projectHref)}
+            onPrev={
+              window.history.state && window.history.state.idx > 0
+                ? () => navigate(-1)
+                : undefined
+            }
             initialValues={{
               [CURRENCY_AMOUNT]: data?.[CURRENCY_AMOUNT],
               [CREDITS_AMOUNT]: data?.[CREDITS_AMOUNT] || 1,

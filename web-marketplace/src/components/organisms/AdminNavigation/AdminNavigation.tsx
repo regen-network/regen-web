@@ -1,20 +1,11 @@
 import { Fragment } from 'react';
 import { useLingui } from '@lingui/react';
-import {
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  ListSubheader,
-} from '@mui/material';
+import { List, ListSubheader } from '@mui/material';
 
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
-import { cn } from 'web-components/src/utils/styles/cn';
 
 import { AdminNavigationListItem } from './AdminNavigation.ListItem';
 import { AdminNavigationSection } from './AdminNavigation.types';
-import { isSelected } from './AdminNavigation.utils';
 
 export type AdminNavigationProps = {
   className?: string;

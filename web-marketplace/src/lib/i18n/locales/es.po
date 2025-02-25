@@ -22,9 +22,6 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -102,7 +99,7 @@ msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} ch
 msgstr "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} carácter} other {{remainingCaptionCharacters} caracteres}}"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:117
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:220
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:212
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:168
 msgid "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} character remaining} other {{remainingDescriptionCharacters} characters remaining}}"
 msgstr "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} carácter} other {{remainingDescriptionCharacters} caracteres}}"
@@ -631,7 +628,7 @@ msgstr "precio promedio por crédito"
 msgid "back to projects"
 msgstr "volver a proyectos"
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:183
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:175
 msgid "Background image"
 msgstr "Imagen de fondo"
 
@@ -1604,7 +1601,7 @@ msgid "description"
 msgstr "descripción"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:104
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:207
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:199
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/pages/Description/Description.tsx:48
 #: src/pages/ProjectReview/ProjectReview.tsx:224
@@ -2188,7 +2185,7 @@ msgstr "En esta forma de pastoreo rotacional, los animales de pastoreo, con una 
 msgid "Incorrect code! Double-check the code and try again."
 msgstr "¡Código incorrecto! Verifique el código nuevamente e intente nuevamente."
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:34
+#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:13
 msgid "Individual"
 msgstr "Individual"
 
@@ -2351,7 +2348,7 @@ msgstr "Enlace copiado al portapapeles"
 msgid "Link copied!"
 msgstr "¡Enlace copiado!"
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:50
+#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:29
 msgid "Links"
 msgstr "Campo de golf"
 
@@ -2612,7 +2609,7 @@ msgstr "Mis pedidos"
 msgid "My prefinance projects"
 msgstr "Mis proyectos de prefinanciamiento"
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:159
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:151
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/pages/ProjectReview/ProjectReview.tsx:202
 msgid "Name"
@@ -2808,7 +2805,7 @@ msgstr "órdenes"
 msgid "Orders"
 msgstr "Pedidos"
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:40
+#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:19
 msgid "Organization"
 msgstr "Organización"
 
@@ -3125,7 +3122,7 @@ msgstr "Perfil"
 msgid "profile banner"
 msgstr "Banner de perfil"
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:165
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:157
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:137
 msgid "Profile image"
 msgstr "Imagen de perfil"
@@ -3138,7 +3135,7 @@ msgstr "Perfil no encontrado"
 msgid "Profile Saved"
 msgstr "Perfil guardado"
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:46
+#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:25
 msgid "Profile type"
 msgstr "Tipo de perfil"
 
@@ -3339,7 +3336,7 @@ msgstr "Proyectos"
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr "Los proyectos deben tener una duración de al menos 20 años para garantizar resultados demostrables y cuantificables en biodiversidad. Tebu promueve proyectos que duren más tiempo, asegurando procesos ecológicos a largo plazo."
 
-#: src/pages/Projects/Projects.tsx:300
+#: src/pages/Projects/Projects.tsx:296
 msgid "projects tabs"
 msgstr "Pestañas de proyectos"
 
@@ -3650,7 +3647,7 @@ msgstr "Sabana"
 
 #: src/components/molecules/EditProjectPageFooter.tsx:86
 #: src/components/molecules/ProjectPageFooter.tsx:43
-#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:48
+#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:27
 msgid "Save"
 msgstr "Ahorrar"
 
@@ -4496,7 +4493,7 @@ msgstr "Actualizar detalles de la imagen"
 msgid "Update project metadata"
 msgstr "Actualizar metadatos del proyecto"
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:47
+#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:26
 msgid "Upload image"
 msgstr "Subir imagen"
 
@@ -4524,7 +4521,7 @@ msgstr "Utilice mi tarjeta de crédito registrada que termina en {0}"
 msgid "Use your social account to log in to Regen Marketplace."
 msgstr "Utilice su cuenta social para iniciar sesión en Regen Marketplace."
 
-#: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:217
+#: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:219
 msgid "useMultiStep must be used within a MultiStepProvider"
 msgstr "useMultiStep debe usarse dentro de un MultiStepProvider"
 

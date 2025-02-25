@@ -96,7 +96,7 @@ msgid "{remainingCaptionCharacters, plural, one {{remainingCaptionCharacters} ch
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:117
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:220
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:212
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:168
 msgid "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} character remaining} other {{remainingDescriptionCharacters} characters remaining}}"
 msgstr ""
@@ -625,7 +625,7 @@ msgstr ""
 msgid "back to projects"
 msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:183
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:175
 msgid "Background image"
 msgstr ""
 
@@ -1598,7 +1598,7 @@ msgid "description"
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:104
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:207
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:199
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/pages/Description/Description.tsx:48
 #: src/pages/ProjectReview/ProjectReview.tsx:224
@@ -2182,7 +2182,7 @@ msgstr ""
 msgid "Incorrect code! Double-check the code and try again."
 msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:34
+#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:13
 msgid "Individual"
 msgstr ""
 
@@ -2345,7 +2345,7 @@ msgstr ""
 msgid "Link copied!"
 msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:50
+#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:29
 msgid "Links"
 msgstr ""
 
@@ -2606,7 +2606,7 @@ msgstr ""
 msgid "My prefinance projects"
 msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:159
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:151
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/pages/ProjectReview/ProjectReview.tsx:202
 msgid "Name"
@@ -2802,7 +2802,7 @@ msgstr ""
 msgid "Orders"
 msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:40
+#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:19
 msgid "Organization"
 msgstr ""
 
@@ -3119,7 +3119,7 @@ msgstr ""
 msgid "profile banner"
 msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:165
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:157
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:137
 msgid "Profile image"
 msgstr ""
@@ -3132,7 +3132,7 @@ msgstr ""
 msgid "Profile Saved"
 msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:46
+#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:25
 msgid "Profile type"
 msgstr ""
 
@@ -3333,7 +3333,7 @@ msgstr ""
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr ""
 
-#: src/pages/Projects/Projects.tsx:300
+#: src/pages/Projects/Projects.tsx:296
 msgid "projects tabs"
 msgstr ""
 
@@ -3644,7 +3644,7 @@ msgstr ""
 
 #: src/components/molecules/EditProjectPageFooter.tsx:86
 #: src/components/molecules/ProjectPageFooter.tsx:43
-#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:48
+#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:27
 msgid "Save"
 msgstr ""
 
@@ -4490,7 +4490,7 @@ msgstr ""
 msgid "Update project metadata"
 msgstr ""
 
-#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:47
+#: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:26
 msgid "Upload image"
 msgstr ""
 
@@ -4518,7 +4518,7 @@ msgstr ""
 msgid "Use your social account to log in to Regen Marketplace."
 msgstr ""
 
-#: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:217
+#: src/components/templates/MultiStepTemplate/MultiStep.context.tsx:219
 msgid "useMultiStep must be used within a MultiStepProvider"
 msgstr ""
 

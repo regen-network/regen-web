@@ -64,25 +64,27 @@ export const getCreditsAmount = ({
   const creditPrecision = creditTypePrecision || 6;
 
   for (const order of orderedSellOrders) {
-    const price = getSellOrderPrice({ order, card });
-    const quantity = Number(order.quantity);
-    const orderTotalAmount = quantity * price;
+    const pricePerCredit = getSellOrderPrice({ order, card });
+    const totalCreditsAvailable = Number(order.quantity);
+    const totalOrderPrice = totalCreditsAvailable * pricePerCredit;
 
-    if (currencyAmountLeft >= orderTotalAmount) {
+    if (currencyAmountLeft >= totalOrderPrice) {
       currencyAmountLeft = card
-        ? formatCurrencyAmount(currencyAmountLeft - orderTotalAmount)
-        : parseFloat((currencyAmountLeft - orderTotalAmount).toFixed(6));
-      currentCreditsAmount += quantity;
-      sellOrders.push(formatSellOrder({ order, card, price }));
+        ? formatCurrencyAmount(currencyAmountLeft - totalOrderPrice)
+        : parseFloat((currencyAmountLeft - totalOrderPrice).toFixed(6));
+      currentCreditsAmount += totalCreditsAvailable;
+      sellOrders.push(formatSellOrder({ order, card, price: pricePerCredit }));
       if (currencyAmountLeft === 0) break;
     } else {
-      currentCreditsAmount += currencyAmountLeft / price;
+      currentCreditsAmount += currencyAmountLeft / pricePerCredit;
       sellOrders.push(
         formatSellOrder({
           order,
           card,
-          price,
-          quantity: (currencyAmountLeft / price).toFixed(creditPrecision),
+          price: pricePerCredit,
+          quantity: (currencyAmountLeft / pricePerCredit).toFixed(
+            creditPrecision,
+          ),
         }),
       );
       break;
@@ -199,7 +201,12 @@ export const formatCurrencyAmount = (
   // Round to two decimals, either returning the value with
   // the first two decimals only, if any, or rounding them up.
   const formattedValue = roundUpDecimal
-    ? +(Math.ceil(numericValue * 100) / 100).toFixed(2)
+    ? // JavaScript numbers are stored as 64-bit floating-point numbers.
+      // These numbers have 52 bits for the fraction, which corresponds to about 15–17 decimal digits.
+      // Using .toPrecision(15) reduces floating-point precision errors that occur when performing arithmetic operations like multiplication and division.
+      +(Math.ceil(Number((numericValue * 100).toPrecision(15))) / 100).toFixed(
+        decimalPart ? decimalPart.length : 2,
+      )
     : decimalPart
     ? +`${integerPart}.${decimalPart.slice(0, 2)}`
     : +`${integerPart}`;

@@ -3216,6 +3216,7 @@ msgid "project developer"
 msgstr "Desarrollador de proyectos"
 
 #: src/components/organisms/RolesForm/RolesForm.tsx:218
+#: src/pages/ProjectReview/ProjectReview.tsx:307
 msgid "Project Developer"
 msgstr "Desarrollador de proyectos"
 
@@ -3624,6 +3625,11 @@ msgstr "Revisar"
 msgid "Riparian forest"
 msgstr "Bosque ripario"
 
+#: src/pages/ProjectEdit/ProjectEdit.Nav.tsx:25
+msgid "roles"
+msgstr "roles"
+
+#: src/pages/ProjectReview/ProjectReview.tsx:301
 #: src/pages/Roles/Roles.tsx:85
 msgid "Roles"
 msgstr "Roles"

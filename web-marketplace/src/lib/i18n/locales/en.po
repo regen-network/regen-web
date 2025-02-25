@@ -3213,6 +3213,7 @@ msgid "project developer"
 msgstr ""
 
 #: src/components/organisms/RolesForm/RolesForm.tsx:218
+#: src/pages/ProjectReview/ProjectReview.tsx:307
 msgid "Project Developer"
 msgstr ""
 
@@ -3621,6 +3622,11 @@ msgstr ""
 msgid "Riparian forest"
 msgstr ""
 
+#: src/pages/ProjectEdit/ProjectEdit.Nav.tsx:25
+msgid "roles"
+msgstr ""
+
+#: src/pages/ProjectReview/ProjectReview.tsx:301
 #: src/pages/Roles/Roles.tsx:85
 msgid "Roles"
 msgstr ""

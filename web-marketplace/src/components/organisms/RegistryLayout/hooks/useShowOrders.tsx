@@ -16,10 +16,6 @@ export const useShowOrders = () => {
   const { activeWalletAddr } = useWallet();
 
   const fiatOrders = activeAccount?.fiatOrdersByAccountId?.nodes;
-  console.log(
-    '🚀 ~ useShowOrders.tsx:19 ~ useShowOrders ~ fiatOrders:',
-    fiatOrders,
-  );
 
   const { data, isLoading: cryptoOrdersLoading } = useQuery(
     getOrdersByBuyerAddressQuery({
@@ -29,6 +25,7 @@ export const useShowOrders = () => {
     }),
   );
   const cryptoOrders = data?.data?.allOrders?.nodes;
+
   return (
     (!loading && fiatOrders && fiatOrders.length > 0) ||
     (!cryptoOrdersLoading && cryptoOrders && cryptoOrders.length > 0)

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ApolloClient,
@@ -8,10 +8,9 @@ import {
 import { msg, t } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useAtom, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { timer } from 'utils/timer';
 
-import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import {
   processingModalAtom,
   txBuySuccessfulModalAtom,
@@ -20,13 +19,18 @@ import { BLOCKCHAIN_RECORD } from 'lib/constants/shared.constants';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { getTxHashForPaymentIntentQuery } from 'lib/queries/react-query/registry-server/graphql/getTxHashForPaymentIntent/getTxHashForPaymentIntentQuery';
+import { getOrdersByBuyerAddressKey } from 'lib/queries/react-query/registry-server/graphql/indexer/getOrdersByBuyerAddress/getOrdersByBuyerAddress.constants';
 import { getRetirementByTxHash } from 'lib/queries/react-query/registry-server/graphql/indexer/getRetirementByTxHash/getRetirementByTxHash';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
-import { EMAIL_RECEIPT, VIEW_CERTIFICATE } from '../BuyCredits.constants';
+import {
+  EMAIL_RECEIPT,
+  PAYMENT_OPTIONS,
+  VIEW_CERTIFICATE,
+} from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
 import { getCardItems, getSteps, updateAccountData } from '../BuyCredits.utils';
 
@@ -57,12 +61,10 @@ export const useFetchRetirementForPurchase = ({
   const navigate = useNavigate();
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setTxBuySuccessfulModalAtom = useSetAtom(txBuySuccessfulModalAtom);
-  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { handleSuccess, data: multiStepData } =
     useMultiStep<BuyCreditsSchemaTypes>();
   const reactQueryClient = useQueryClient();
-  const { wallet } = useWallet();
-
+  const { activeWalletAddr } = useWallet();
   const email = multiStepData?.email;
   const name = multiStepData?.name;
 
@@ -124,12 +126,6 @@ export const useFetchRetirementForPurchase = ({
           t`Your retirement certificate will be generated as soon as the credits are transferred, please check later. Meanwhile, we have emailed you a receipt to ${email}`,
         );
       });
-      // Reload account data
-      try {
-        await updateAccountData(reactQueryClient, selectedLanguage);
-      } finally {
-        setProcessingModalAtom(atom => void (atom.open = false));
-      }
       handleSuccess();
       navigate(`/certificate/${paymentIntentId}?name=${name}`);
     }
@@ -146,16 +142,11 @@ export const useFetchRetirementForPurchase = ({
     paymentIntentId,
     paymentOption,
     project,
-    reactQueryClient,
     retiring,
-    selectedLanguage,
     setProcessingModalAtom,
     setTxBuySuccessfulModalAtom,
   ]);
-  // const [isFetchingTxHash, setIsFetchingTxHash] = useState(false);
   const fetchTxHash = useCallback(async () => {
-    // if (isFetchingTxHash) return;
-    // setIsFetchingTxHash(true);
     setProcessingModalAtom(atom => void (atom.open = true));
     let i = 1;
     let refetchedTxHash;
@@ -171,14 +162,7 @@ export const useFetchRetirementForPurchase = ({
     if (!refetchedTxHash) {
       onPending();
     }
-    // setIsFetchingTxHash(false);
-  }, [
-    // isFetchingTxHash,
-    onPending,
-    refetchTxHash,
-    setProcessingModalAtom,
-    txHash,
-  ]);
+  }, [onPending, refetchTxHash, setProcessingModalAtom, txHash]);
 
   const fetchRetirement = useCallback(async () => {
     let i = 1;
@@ -233,19 +217,29 @@ export const useFetchRetirementForPurchase = ({
         atom.steps = getSteps(paymentOption, retiring);
         atom.description = email ? `${_(EMAIL_RECEIPT)} ${email}` : undefined;
       });
+
       // Reload sell orders
       await reactQueryClient.invalidateQueries({
         queryKey: [SELL_ORDERS_EXTENTED_KEY],
       });
-      if (wallet)
+      // Reload account data with fiat orders
+      if (paymentOption === PAYMENT_OPTIONS.CARD)
+        await updateAccountData(reactQueryClient);
+      // Reload crypto orders
+      if (activeWalletAddr && paymentOption === PAYMENT_OPTIONS.CRYPTO){
+        await reactQueryClient.invalidateQueries(
+          getOrdersByBuyerAddressKey(activeWalletAddr),
+        );
         await reactQueryClient.invalidateQueries({
           queryKey: ['balances', wallet?.address], // invalidate all query pages
-        });
+        });}
+
       handleSuccess();
       navigate(`/certificate/${retirement.nodeId}?name=${name}`);
     }
   }, [
     _,
+    activeWalletAddr,
     creditsAmount,
     currency,
     currencyAmount,

@@ -28,6 +28,7 @@ import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getOrdersByBuyerAddressKey } from 'lib/queries/react-query/registry-server/graphql/indexer/getOrdersByBuyerAddress/getOrdersByBuyerAddress.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
@@ -260,8 +261,6 @@ export const usePurchase = ({
                     }
                   }
                   setPaymentIntentId(paymentIntent.id);
-
-                  // await updateAccountData(reactQueryClient, selectedLanguage);
                 }
               },
             });
@@ -374,20 +373,19 @@ export const usePurchase = ({
                 await reactQueryClient.invalidateQueries({
                   queryKey: [SELL_ORDERS_EXTENTED_KEY],
                 });
-                await reactQueryClient.invalidateQueries({
-                  queryKey: ['balances', wallet?.address], // invalidate all query pages
-                });
+                if (activeWalletAddr) {
+                  await reactQueryClient.invalidateQueries(
+                    getOrdersByBuyerAddressKey(activeWalletAddr),
+                  );
+                  await reactQueryClient.invalidateQueries({
+                    queryKey: ['balances', wallet?.address], // invalidate all query pages
+                  });
+                }
 
                 // Reset BuyCredits forms
                 handleSuccess();
                 navigate(`/dashboard/portfolio`);
               }
-              // if (activeWalletAddr) {
-              //   // Invalidate queries to refetch orders
-              //   reactQueryClient.invalidateQueries(
-              //     getOrdersByBuyerAddressKey(activeWalletAddr),
-              //   );
-              // }
             },
           },
         );
@@ -396,11 +394,10 @@ export const usePurchase = ({
     [
       _,
       activeAccount,
-      // activeWalletAddr,
+      activeWalletAddr,
       creditsAmount,
       currency,
       currencyAmount,
-      data?.email,
       displayDenom,
       email,
       handleSuccess,

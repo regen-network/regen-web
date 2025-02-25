@@ -30,7 +30,7 @@ import { ViewProfileButton } from './ProfileEdit.ViewProfile';
 
 export const ProfileEdit = () => {
   const { _ } = useLingui();
-  const { accountChanging } = useWallet();
+  const { accountChanging, loginDisabled } = useWallet();
   const { loading } = useAuth();
   const showOrders = useShowOrders();
 
@@ -70,7 +70,7 @@ export const ProfileEdit = () => {
       <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly max-w-[1150px] mx-auto p-10 lg:py-50 lg:px-15 lg:min-h-screen">
         <AdminNavigation
           className="hidden lg:block min-w-[235px]"
-          sections={getAdminNavigationSections({ showOrders })}
+          sections={getAdminNavigationSections({ showOrders, loginDisabled })}
           onNavItemClick={onNavClick}
           currentPath={pathname}
           savedPaymentInfo={

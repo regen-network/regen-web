@@ -5,7 +5,6 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-import _ from 'lodash';
 
 import { cn } from 'web-components/src/utils/styles/cn';
 

@@ -3,8 +3,10 @@ export type AdminNavigationSection = {
   items: AdminNavigationItem[];
 };
 
-type AdminNavigationItem = {
+export type AdminNavigationItem = {
   name: string;
   icon: JSX.Element;
   path: string;
+  disabledTooltipText?: string | undefined;
+  disabled?: boolean | undefined;
 };

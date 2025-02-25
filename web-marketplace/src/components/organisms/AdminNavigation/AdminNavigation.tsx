@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { useLingui } from '@lingui/react';
 import {
   List,
@@ -8,6 +9,10 @@ import {
   ListSubheader,
 } from '@mui/material';
 
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
+import { cn } from 'web-components/src/utils/styles/cn';
+
+import { AdminNavigationListItem } from './AdminNavigation.ListItem';
 import { AdminNavigationSection } from './AdminNavigation.types';
 import { isSelected } from './AdminNavigation.utils';
 
@@ -45,7 +50,7 @@ export const AdminNavigation = ({
           subheader={
             <ListSubheader
               id={`${_(section.heading).toLowerCase()}-list-subheader`}
-              className="bg-transparent text-gray-700 uppercase font-extrabold tracking-wider font-muli"
+              className="bg-transparent text-bc-neutral-400 uppercase font-extrabold tracking-wider font-muli"
               component="div"
               disableSticky
             >
@@ -55,29 +60,25 @@ export const AdminNavigation = ({
           className="mb-15"
         >
           {section.items.map(item => (
-            <ListItem key={_(item.name)} disablePadding className="pb-1">
-              <ListItemButton
-                disableRipple
-                className="flex p-2 cursor-pointer"
-                onClick={() => onNavItemClick(item.path)}
-                selected={isSelected(item.path, currentPath)}
-                sx={theme => ({
-                  '&.Mui-selected, &.Mui-selected:hover': {
-                    backgroundColor: theme.palette.info.light,
-                    borderRadius: '5px',
-                  },
-                  '&:hover': {
-                    backgroundColor: theme.palette.info.light,
-                    borderRadius: '5px',
-                  },
-                })}
-              >
-                <ListItemIcon className="min-w-[40px]">
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText className="w-full">{_(item.name)}</ListItemText>
-              </ListItemButton>
-            </ListItem>
+            <Fragment key={item.name}>
+              {item.disabled ? (
+                <InfoTooltip title={item.disabledTooltipText} arrow>
+                  <div>
+                    <AdminNavigationListItem
+                      onNavItemClick={onNavItemClick}
+                      currentPath={currentPath}
+                      item={item}
+                    />
+                  </div>
+                </InfoTooltip>
+              ) : (
+                <AdminNavigationListItem
+                  onNavItemClick={onNavItemClick}
+                  currentPath={currentPath}
+                  item={item}
+                />
+              )}
+            </Fragment>
           ))}
         </List>
       ))}

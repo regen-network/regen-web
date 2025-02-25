@@ -1,7 +1,7 @@
 export const PROJECT_CREATION_STEPS = [
   'basic-info',
   'location',
-  // 'roles',
+  'roles',
   'description',
   'media',
   'metadata',

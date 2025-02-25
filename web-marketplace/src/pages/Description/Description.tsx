@@ -39,7 +39,7 @@ const Description: React.FC<React.PropsWithChildren<unknown>> = () => {
   );
 
   function navigatePrev(): void {
-    navigate(`/project-pages/${projectId}/location`);
+    navigate(`/project-pages/${projectId}/roles`);
   }
 
   return (

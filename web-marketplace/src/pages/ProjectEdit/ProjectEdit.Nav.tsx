@@ -22,7 +22,7 @@ export const ProjectEditNav = ({ section, onNavClick, isOnChain }: Props) => {
         // eslint-disable-next-line lingui/no-unlocalized-strings
         { label: _(msg`basic info`), value: 'basic info' },
         { label: _(msg`location`), value: 'location' },
-        // 'roles',
+        { label: _(msg`roles`), value: 'roles' },
         { label: _(msg`description`), value: 'description' },
         { label: _(msg`media`), value: 'media' },
         isOnChain ? { label: _(msg`metadata`), value: 'metadata' } : undefined,

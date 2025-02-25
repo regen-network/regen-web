@@ -417,21 +417,14 @@ export const getCryptoCurrencyIconSrc = (
   return href;
 };
 
-export const updateAccountData = async (
-  reactQueryClient: QueryClient,
-  selectedLanguage: string,
-) => {
+export const updateAccountData = async (reactQueryClient: QueryClient) => {
   const accountsData = await getFromCacheOrFetch({
     query: getAccountsQuery({}),
     reactQueryClient,
   });
   if (accountsData?.activeAccountId) {
     await reactQueryClient.invalidateQueries({
-      queryKey: [
-        ACCOUNT_BY_ID_QUERY_KEY,
-        accountsData.activeAccountId,
-        selectedLanguage,
-      ],
+      queryKey: [ACCOUNT_BY_ID_QUERY_KEY, accountsData.activeAccountId],
       refetchType: 'all',
     });
   }

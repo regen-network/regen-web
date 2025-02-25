@@ -64,7 +64,7 @@ export const useFetchRetirementForPurchase = ({
   const { handleSuccess, data: multiStepData } =
     useMultiStep<BuyCreditsSchemaTypes>();
   const reactQueryClient = useQueryClient();
-  const { activeWalletAddr } = useWallet();
+  const { wallet } = useWallet();
   const email = multiStepData?.email;
   const name = multiStepData?.name;
 
@@ -85,7 +85,7 @@ export const useFetchRetirementForPurchase = ({
   );
   const retirement = data?.data?.retirementByTxHash;
 
-  const onPending = useCallback(async () => {
+  const onPending = useCallback(() => {
     if (
       paymentIntentId &&
       creditsAmount &&
@@ -146,6 +146,7 @@ export const useFetchRetirementForPurchase = ({
     setProcessingModalAtom,
     setTxBuySuccessfulModalAtom,
   ]);
+
   const fetchTxHash = useCallback(async () => {
     setProcessingModalAtom(atom => void (atom.open = true));
     let i = 1;
@@ -226,12 +227,12 @@ export const useFetchRetirementForPurchase = ({
       if (paymentOption === PAYMENT_OPTIONS.CARD)
         await updateAccountData(reactQueryClient);
       // Reload crypto orders and balances
-      if (activeWalletAddr && paymentOption === PAYMENT_OPTIONS.CRYPTO) {
+      if (wallet?.address && paymentOption === PAYMENT_OPTIONS.CRYPTO) {
         await reactQueryClient.invalidateQueries(
-          getOrdersByBuyerAddressKey(activeWalletAddr),
+          getOrdersByBuyerAddressKey(wallet?.address),
         );
         await reactQueryClient.invalidateQueries({
-          queryKey: ['balances', activeWalletAddr], // invalidate all query pages
+          queryKey: ['balances', wallet?.address], // invalidate all query pages
         });
       }
 
@@ -240,7 +241,6 @@ export const useFetchRetirementForPurchase = ({
     }
   }, [
     _,
-    activeWalletAddr,
     creditsAmount,
     currency,
     currencyAmount,
@@ -256,6 +256,7 @@ export const useFetchRetirementForPurchase = ({
     retiring,
     setProcessingModalAtom,
     setTxBuySuccessfulModalAtom,
+    wallet?.address,
   ]);
 
   useEffect(() => {

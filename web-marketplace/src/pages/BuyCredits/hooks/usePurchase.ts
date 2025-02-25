@@ -45,7 +45,6 @@ import {
   getCardItems,
   getCryptoCurrencyIconSrc,
   getSteps,
-  updateAccountData,
 } from '../BuyCredits.utils';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
 
@@ -83,7 +82,7 @@ export const usePurchase = ({
   allowedDenoms,
 }: UsePurchaseParams) => {
   const { _ } = useLingui();
-  const { wallet, activeWalletAddr } = useWallet();
+  const { wallet } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
   const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();
@@ -374,12 +373,12 @@ export const usePurchase = ({
                   queryKey: [SELL_ORDERS_EXTENTED_KEY],
                 });
                 // Reload crypto orders and balances
-                if (activeWalletAddr) {
+                if (wallet?.address) {
                   await reactQueryClient.invalidateQueries(
-                    getOrdersByBuyerAddressKey(activeWalletAddr),
+                    getOrdersByBuyerAddressKey(wallet?.address),
                   );
                   await reactQueryClient.invalidateQueries({
-                    queryKey: ['balances', activeWalletAddr], // invalidate all query pages
+                    queryKey: ['balances', wallet?.address], // invalidate all query pages
                   });
                 }
 
@@ -395,7 +394,6 @@ export const usePurchase = ({
     [
       _,
       activeAccount,
-      activeWalletAddr,
       creditsAmount,
       currency,
       currencyAmount,

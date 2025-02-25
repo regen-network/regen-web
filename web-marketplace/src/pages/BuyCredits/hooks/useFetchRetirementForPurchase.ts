@@ -223,9 +223,7 @@ export const useFetchRetirementForPurchase = ({
       await reactQueryClient.invalidateQueries({
         queryKey: [SELL_ORDERS_EXTENTED_KEY],
       });
-      // Reload account data with fiat orders
-      if (paymentOption === PAYMENT_OPTIONS.CARD)
-        await updateAccountData(reactQueryClient);
+
       // Reload crypto orders and balances
       if (wallet?.address && paymentOption === PAYMENT_OPTIONS.CRYPTO) {
         await reactQueryClient.invalidateQueries(
@@ -238,6 +236,11 @@ export const useFetchRetirementForPurchase = ({
 
       handleSuccess();
       navigate(`/certificate/${retirement.nodeId}?name=${name}`);
+
+      // Reload account data with fiat orders
+      // Doing it after navigating otherwise can cause the page to reload before
+      if (paymentOption === PAYMENT_OPTIONS.CARD)
+        await updateAccountData(reactQueryClient);
     }
   }, [
     _,

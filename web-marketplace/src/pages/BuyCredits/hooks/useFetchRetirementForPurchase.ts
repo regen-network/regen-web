@@ -225,14 +225,15 @@ export const useFetchRetirementForPurchase = ({
       // Reload account data with fiat orders
       if (paymentOption === PAYMENT_OPTIONS.CARD)
         await updateAccountData(reactQueryClient);
-      // Reload crypto orders
-      if (activeWalletAddr && paymentOption === PAYMENT_OPTIONS.CRYPTO){
+      // Reload crypto orders and balances
+      if (activeWalletAddr && paymentOption === PAYMENT_OPTIONS.CRYPTO) {
         await reactQueryClient.invalidateQueries(
           getOrdersByBuyerAddressKey(activeWalletAddr),
         );
         await reactQueryClient.invalidateQueries({
-          queryKey: ['balances', wallet?.address], // invalidate all query pages
-        });}
+          queryKey: ['balances', activeWalletAddr], // invalidate all query pages
+        });
+      }
 
       handleSuccess();
       navigate(`/certificate/${retirement.nodeId}?name=${name}`);
@@ -255,7 +256,6 @@ export const useFetchRetirementForPurchase = ({
     retiring,
     setProcessingModalAtom,
     setTxBuySuccessfulModalAtom,
-    wallet,
   ]);
 
   useEffect(() => {

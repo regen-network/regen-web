@@ -14,9 +14,7 @@ export const useShowOrders = () => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const { activeWalletAddr } = useWallet();
-
   const fiatOrders = activeAccount?.fiatOrdersByAccountId?.nodes;
-
   const { data, isLoading: cryptoOrdersLoading } = useQuery(
     getOrdersByBuyerAddressQuery({
       client: apolloClient,

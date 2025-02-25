@@ -137,12 +137,13 @@ const RegistryLayoutHeader: React.FC = () => {
         extras={
           <Box display="flex" justifyContent="center" alignItems="center">
             {clientConfig.listProject && <ListProject />}
+            {/* // Commenting out temporarily until content translations completed
             <LanguageSwitcher
               className={cn(
                 'mr-25 mt-1 hidden lg:block',
                 isHome && 'text-sc-button-text-icon-light',
               )}
-            />
+            /> */}
             {chainId && accountOrWallet && disconnect && (
               <UserMenuItems
                 nameOrAddress={

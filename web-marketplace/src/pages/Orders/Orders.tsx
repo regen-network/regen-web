@@ -34,7 +34,7 @@ export const Orders = () => {
   }, [isLoading, location.hash]);
 
   return (
-    <div className="flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly mx-auto">
+    <div className="min-h-[500px] bg-grey-100 flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly mx-auto">
       <Flex
         sx={{
           flexDirection: 'column',

@@ -297,14 +297,14 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
           </ItemDisplay>
         )}
       </ReviewCard>
-      {/* <ReviewCard
-        title="Roles"
+      <ReviewCard
+        title={_(msg`Roles`)}
         editText={_(EDIT_TEXT)}
         onEditClick={() => navigate(`${editPath}/roles`)}
       >
         {metadata?.['regen:projectDeveloper'] && (
           <>
-            <ItemDisplay name="Project Developer">
+            <ItemDisplay name={_(msg`Project Developer`)}>
               {metadata?.['regen:projectDeveloper']?.['schema:name']}
             </ItemDisplay>
             <ItemDisplay>
@@ -312,7 +312,7 @@ export const ProjectReview: React.FC<React.PropsWithChildren<unknown>> = () => {
             </ItemDisplay>
           </>
         )}
-      </ReviewCard> */}
+      </ReviewCard>
       {!!creditClassId && (
         <ReviewCard
           title={_(msg`Metadata`)}

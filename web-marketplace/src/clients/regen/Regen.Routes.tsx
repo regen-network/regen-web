@@ -83,7 +83,7 @@ const ProjectCreate = lazy(() => import('../../pages/ProjectCreate'));
 const ProjectFinished = lazy(() => import('../../pages/ProjectFinished'));
 const ProjectLocation = lazy(() => import('../../pages/ProjectLocation'));
 const ProjectReview = lazy(() => import('../../pages/ProjectReview'));
-// const Roles = lazy(() => import('../../pages/Roles'));
+const Roles = lazy(() => import('../../pages/Roles'));
 const VerifyEmail = lazy(() => import('../../pages/VerifyEmail'));
 const ProjectEdit = lazy(() => import('../../pages/ProjectEdit'));
 const Activity = lazy(() => import('../../pages/Activity'));
@@ -267,7 +267,7 @@ export const getRegenRoutes = ({
               path="metadata"
               element={<KeplrRoute component={ProjectMetadata} />}
             />
-            {/* <Route path="roles" element={<AuthRoute component={Roles} />} /> */}
+            <Route path="roles" element={<AuthRoute component={Roles} />} />
             <Route
               path="review"
               element={<AuthRoute component={ProjectReview} />}
@@ -290,7 +290,7 @@ export const getRegenRoutes = ({
                 element={<AuthRoute component={Description} />}
               />
               <Route path="media" element={<AuthRoute component={Media} />} />
-              {/* <Route path="roles" element={<AuthRoute component={Roles} />} /> */}
+              <Route path="roles" element={<AuthRoute component={Roles} />} />
               <Route
                 path="metadata"
                 element={<KeplrRoute component={ProjectMetadata} />}

@@ -47,7 +47,7 @@ describe('OrderSummaryCard', () => {
   it('displays the number of credits', () => {
     render(<OrderSummaryCard {...orderSummary} />);
 
-    const numberOfCredits = screen.getByText('5');
+    const numberOfCredits = screen.getByText('5.00');
     expect(numberOfCredits).toBeInTheDocument();
   });
 

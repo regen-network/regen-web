@@ -132,7 +132,7 @@ const ProfileHeader = ({
             },
             mb: { xs: 2.5 },
             border: theme => `5px solid ${theme.palette.grey[50]}`,
-            mr: 4,
+            mr: { sm: 4 },
             width: {
               xs: PROFILE_AVATAR_SIZE_MOBILE,
               sm: PROFILE_AVATAR_SIZE_TABLET,

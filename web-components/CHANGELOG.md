@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/regen-network/regen-web/compare/v2.7.5...v2.8.0) (2025-02-26)
+
+### Bug Fixes
+
+- adjust spacing on project page ([#2560](https://github.com/regen-network/regen-web/issues/2560)) ([aa05ad6](https://github.com/regen-network/regen-web/commit/aa05ad65d9e7525db5b58a32e08ca176f314a2f9))
+- APP-353 stakeholders style ([#2570](https://github.com/regen-network/regen-web/issues/2570)) ([8608078](https://github.com/regen-network/regen-web/commit/860807854311c261c767fe9235e027a8fb58974e))
+- APP-383 align create project button ([#2568](https://github.com/regen-network/regen-web/issues/2568)) ([d0457d3](https://github.com/regen-network/regen-web/commit/d0457d308998f9192be1e5acb866f08c53e4193a))
+- APP-404 update field and trigger validation instead of using onChange ([#2514](https://github.com/regen-network/regen-web/issues/2514)) ([e06bd1e](https://github.com/regen-network/regen-web/commit/e06bd1e6b6d0d30946458d5091d3d9913500ed59))
+- APP-434 include offchain projects to more projects section for terrasos ([#2526](https://github.com/regen-network/regen-web/issues/2526)) ([a2e84ae](https://github.com/regen-network/regen-web/commit/a2e84aed17faf20aa5ee5cdcebeb4eff3a19a045))
+- APP-450 handle undefined errors in buy page when seller is logged in ([#2536](https://github.com/regen-network/regen-web/issues/2536)) ([0854102](https://github.com/regen-network/regen-web/commit/08541023c0dac90b2633b1f0f3d037a8a2ae8901))
+- APP-474 tebu factors UI ([#2548](https://github.com/regen-network/regen-web/issues/2548)) ([150bd0f](https://github.com/regen-network/regen-web/commit/150bd0ff7b4a514d78e5b6a6f41c715e39b5d527))
+- APP-477 various Terrasos design tweaks ([#2551](https://github.com/regen-network/regen-web/issues/2551)) ([772f925](https://github.com/regen-network/regen-web/commit/772f925e92e2fc2a97648b945fce89b6b51ebc67))
+- APP-478 remove color override for credibility cards on terrasos ([#2547](https://github.com/regen-network/regen-web/issues/2547)) ([bf002dc](https://github.com/regen-network/regen-web/commit/bf002dc2e3b7b435a522e51b8a1c2dbc165e6edf))
+- APP-482 hide filters with no projects at all ([#2550](https://github.com/regen-network/regen-web/issues/2550)) ([83be5d3](https://github.com/regen-network/regen-web/commit/83be5d3afb9b9a149f733f9eced7974628f4b8a4))
+- APP-493 white box at the bottom of the projects page ([#2559](https://github.com/regen-network/regen-web/issues/2559)) ([abfaa46](https://github.com/regen-network/regen-web/commit/abfaa4614239a85dc41adbb5fbc73d5a07d91e4c))
+- APP-494 tebu factors card grid display ([#2557](https://github.com/regen-network/regen-web/issues/2557)) ([4373e31](https://github.com/regen-network/regen-web/commit/4373e31af8f06b0d586e6405603468cc13308ab3))
+- APP-497 project filters overflow ([#2562](https://github.com/regen-network/regen-web/issues/2562)) ([a1ad892](https://github.com/regen-network/regen-web/commit/a1ad8929b39f741b6c1c937a6ac7c2997c712e15))
+- APP-502 tebu factors small UI issues ([#2563](https://github.com/regen-network/regen-web/issues/2563)) ([f97c1c7](https://github.com/regen-network/regen-web/commit/f97c1c73679ef8ba0dd9aacc4ff687008cdcf0af))
+- APP-506 update play/pause button color ([#2564](https://github.com/regen-network/regen-web/issues/2564)) ([dacdc85](https://github.com/regen-network/regen-web/commit/dacdc857b37fbec3a7b14aeefb67b9dfd59785d5))
+- APP-530 spacing in Project top section ([#2582](https://github.com/regen-network/regen-web/issues/2582)) ([28eb55b](https://github.com/regen-network/regen-web/commit/28eb55bf2cf9ccd2b2cc53219330b3b8bb3723e6))
+- APP-531 create batch form button label missing and other bugs ([#2583](https://github.com/regen-network/regen-web/issues/2583)) ([f1394ca](https://github.com/regen-network/regen-web/commit/f1394ca141e6b601a468ef072b40799b9f7cd119))
+- APP-533 credit class type and methodology layout ([#2589](https://github.com/regen-network/regen-web/issues/2589)) ([ea9cf7c](https://github.com/regen-network/regen-web/commit/ea9cf7c0fd2a13aeeab9562320a5cdd727deb055))
+- APP-556 orders UI ([#2597](https://github.com/regen-network/regen-web/issues/2597)) ([277b269](https://github.com/regen-network/regen-web/commit/277b269eaadd4e9c88777645275fdaa90235b50c))
+- APP-584 adjust margin for ProfileHeader avatar ([#2617](https://github.com/regen-network/regen-web/issues/2617)) ([afa9589](https://github.com/regen-network/regen-web/commit/afa9589b580c9b66a3dd6089aaf7f80135952dbb))
+- improve tooltip click zone on tebu factors ([#2556](https://github.com/regen-network/regen-web/issues/2556)) ([acba7a0](https://github.com/regen-network/regen-web/commit/acba7a06562c2da3490162463bdc8f8ffa618432))
+- terrasos additional info ([#2543](https://github.com/regen-network/regen-web/issues/2543)) ([db1d003](https://github.com/regen-network/regen-web/commit/db1d00334f92ccf44c3a4d91dbc07dcebdc56240))
+- WWW-6 update newsletter subscription url ([#2502](https://github.com/regen-network/regen-web/issues/2502)) ([c4a9ae3](https://github.com/regen-network/regen-web/commit/c4a9ae3b46550c7ccd401ec3c185433d613d78ed))
+
+### Features
+
+- add tebu and hectares tag ([#2520](https://github.com/regen-network/regen-web/issues/2520)) ([3f61f7c](https://github.com/regen-network/regen-web/commit/3f61f7c025750f6a0ff1031c1ada252d3ed49f97))
+- add Terrasos Header ([#2508](https://github.com/regen-network/regen-web/issues/2508)) ([089a1e0](https://github.com/regen-network/regen-web/commit/089a1e0efdd298c876a389e2e785f1cb6d758293))
+- APP-204 buy credits ([#2477](https://github.com/regen-network/regen-web/issues/2477)) ([9a5fb65](https://github.com/regen-network/regen-web/commit/9a5fb654e27cea626f338b16e536b5542068d321))
+- APP-267 accounts orders page ([#2483](https://github.com/regen-network/regen-web/issues/2483)) ([4a295a8](https://github.com/regen-network/regen-web/commit/4a295a88a3286920c5d1578a6ecce8332668ce1c))
+- APP-269 update user menu and profile edit sidebar with orders ([#2486](https://github.com/regen-network/regen-web/issues/2486)) ([7984e39](https://github.com/regen-network/regen-web/commit/7984e399913ee12452e7e94275dabf40fa3e73d4))
+- APP-305 update projects page color ([#2504](https://github.com/regen-network/regen-web/issues/2504)) ([d6bdecb](https://github.com/regen-network/regen-web/commit/d6bdecbcf6e9b6103d406aedd455782596620f7d))
+- APP-321 APP-389 add language switcher ([#2515](https://github.com/regen-network/regen-web/issues/2515)) ([abb031e](https://github.com/regen-network/regen-web/commit/abb031e14485b188add9466603f78866ca51f024))
+- APP-322 terassos project filters UI ([#2487](https://github.com/regen-network/regen-web/issues/2487)) ([b883f3e](https://github.com/regen-network/regen-web/commit/b883f3ec77136e099d25debf593231dfa0a823eb))
+- APP-324 Tebu Banner ([#2485](https://github.com/regen-network/regen-web/issues/2485)) ([61ba690](https://github.com/regen-network/regen-web/commit/61ba6908ad885cc7c9112f4483091dd9aff19d8e))
+- APP-326 project page tebu factors UI ([#2516](https://github.com/regen-network/regen-web/issues/2516)) ([012fba2](https://github.com/regen-network/regen-web/commit/012fba2b90629e2892ccae6145e3caa77e9a5940))
+- APP-330 disable "edit profile" and "settings" user menu items if using … ([#2475](https://github.com/regen-network/regen-web/issues/2475)) ([7699a01](https://github.com/regen-network/regen-web/commit/7699a01dfd31907c9c9e2d5d2f9dacc9df311433))
+- APP-342 user profile certificate multiple denom ([#2533](https://github.com/regen-network/regen-web/issues/2533)) ([16eed46](https://github.com/regen-network/regen-web/commit/16eed465582b7292cb7f64354ded2d3446a19210))
+- APP-352 buying options filter ([#2575](https://github.com/regen-network/regen-web/issues/2575)) ([7e52853](https://github.com/regen-network/regen-web/commit/7e528539589ae32af0a22bbc452f11c06ddfbcb1))
+- APP-361 buy success ([#2519](https://github.com/regen-network/regen-web/issues/2519)) ([bbb9cc7](https://github.com/regen-network/regen-web/commit/bbb9cc763eb9f2c6f8f24489a1ce4b8c398c439c))
+- APP-364 order summary card ([#2498](https://github.com/regen-network/regen-web/issues/2498)) ([01f2590](https://github.com/regen-network/regen-web/commit/01f259017bfdb7ac357c5019483b03a3c4e7ced9))
+- APP-365 use new buy credits flow on Project cards ([#2503](https://github.com/regen-network/regen-web/issues/2503)) ([082e8aa](https://github.com/regen-network/regen-web/commit/082e8aac781a4bfac40f0a7e356a20ffbffaeb2f))
+- APP-368 add user balance error in buy credits form ([#2501](https://github.com/regen-network/regen-web/issues/2501)) ([9965e6c](https://github.com/regen-network/regen-web/commit/9965e6c51cc2fa2059d7b960963d62f23b40b076))
+- APP-374 header navigation toggle ([#2581](https://github.com/regen-network/regen-web/issues/2581)) ([77cf40a](https://github.com/regen-network/regen-web/commit/77cf40a9194dd09864ba0af089e907aac4ac5d02))
+- APP-375 update /profile routes to be under /dashboard and /dashboard/admin ([#2505](https://github.com/regen-network/regen-web/issues/2505)) ([91d5a6d](https://github.com/regen-network/regen-web/commit/91d5a6d7fb0c033f68795355093abcb6a55a27ef))
+- APP-444 Navigate to Regen marketplace app for certain internal links from Terrasos app ([#2531](https://github.com/regen-network/regen-web/issues/2531)) ([edf7c8f](https://github.com/regen-network/regen-web/commit/edf7c8ffb53a6822098b9814239e049879fb71c5))
+- APP-526 buy flow newsletter checkbox ([#2588](https://github.com/regen-network/regen-web/issues/2588)) ([2d4fdcb](https://github.com/regen-network/regen-web/commit/2d4fdcbe0f390dd75879d5470d09c31dfc62dbeb))
+- APP-545 mobile projects filters ([#2595](https://github.com/regen-network/regen-web/issues/2595)) ([56601df](https://github.com/regen-network/regen-web/commit/56601df47ef9ce3e233f1041e628b6690bf8368f))
+- APP-551 crypto purchase email ([#2599](https://github.com/regen-network/regen-web/issues/2599)) ([c820042](https://github.com/regen-network/regen-web/commit/c820042db60ada0552ecc1529e7a40b12274350f))
+- handle remaining translations ([#2478](https://github.com/regen-network/regen-web/issues/2478)) ([7679e9d](https://github.com/regen-network/regen-web/commit/7679e9d328ede43c13dd231ab571a37adfeb1a75))
+- hide unused elements ([#2518](https://github.com/regen-network/regen-web/issues/2518)) ([4e96f56](https://github.com/regen-network/regen-web/commit/4e96f56bfbb60f524a5a39ba3d75964d49e461fc))
+- translate web-components from header to inputs ([#2468](https://github.com/regen-network/regen-web/issues/2468)) ([1813741](https://github.com/regen-network/regen-web/commit/181374134d5afd983c7577cf037dec8ec6605765))
+- translate web-components from map to views ([#2476](https://github.com/regen-network/regen-web/issues/2476)) ([5f4f26d](https://github.com/regen-network/regen-web/commit/5f4f26dc7edb6081c106ce50bd1e47a5cb0dfe2d))
+
 ## [2.7.5](https://github.com/regen-network/regen-web/compare/v2.7.3...v2.7.5) (2025-01-27)
 
 ### Bug Fixes

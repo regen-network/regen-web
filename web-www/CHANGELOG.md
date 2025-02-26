@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/regen-network/regen-web/compare/v2.7.5...v2.8.0) (2025-02-26)
+
+### Features
+
+- handle remaining translations ([#2478](https://github.com/regen-network/regen-web/issues/2478)) ([7679e9d](https://github.com/regen-network/regen-web/commit/7679e9d328ede43c13dd231ab571a37adfeb1a75))
+- translate web-components from header to inputs ([#2468](https://github.com/regen-network/regen-web/issues/2468)) ([1813741](https://github.com/regen-network/regen-web/commit/181374134d5afd983c7577cf037dec8ec6605765))
+- translate web-components from map to views ([#2476](https://github.com/regen-network/regen-web/issues/2476)) ([5f4f26d](https://github.com/regen-network/regen-web/commit/5f4f26dc7edb6081c106ce50bd1e47a5cb0dfe2d))
+
 ## [2.7.5](https://github.com/regen-network/regen-web/compare/v2.7.3...v2.7.5) (2025-01-27)
 
 **Note:** Version bump only for package web-www

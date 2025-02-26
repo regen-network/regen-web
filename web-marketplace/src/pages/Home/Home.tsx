@@ -119,20 +119,17 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
                 lineHeight: { xs: '140%', sm: '130%' },
               }}
             >
-              <Box sx={{ display: 'inline-block' }}>
+              <Box sx={{ display: 'inline-block', maxWidth: '494px' }}>
                 <Trans>
-                  Unlock{' '}
+                  Connect{' '}
                   <Box sx={{ display: 'inline-block', ...gradients.blueGreen }}>
-                    Regenerative Finances
-                  </Box>
-                  <Box sx={{ display: { xs: 'none', md: 'inline-block' } }}>
-                    with{' '}
-                    <Box
-                      sx={{ display: 'inline-block', ...gradients.blueGreen }}
-                    >
-                      Regen Marketplace
-                    </Box>
-                  </Box>
+                    Capital
+                  </Box>{' '}
+                  to{' '}
+                  <Box sx={{ display: 'inline-block', ...gradients.blueGreen }}>
+                    Ecological
+                  </Box>{' '}
+                  Outcomes
                 </Trans>
               </Box>
             </Title>

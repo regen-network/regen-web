@@ -34,7 +34,7 @@ import {
   VIEW_CERTIFICATE,
 } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
-import { getCardItems, getSteps, updateAccountData } from '../BuyCredits.utils';
+import { getCardItems, getSteps } from '../BuyCredits.utils';
 
 type UseFetchRetirementForPurchaseParams = {
   paymentIntentId?: string;

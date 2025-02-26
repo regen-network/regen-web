@@ -18,14 +18,12 @@ import {
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { reactQueryClient } from 'lib/clients/reactQueryClient';
 import { apiServerUrl } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { getSubscribersStatusQuery } from 'lib/queries/react-query/registry-server/getSubscribersStatusQuery/getSubscribersStatusQuery';
-import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchUserBalance } from 'pages/BuyCredits/hooks/useFetchUserBalance';
@@ -226,13 +224,8 @@ export const BuyCreditsForm = ({
     [data, handleSaveNext, setPaymentMethodId],
   );
 
-  const refreshProfileData = useCallback(async () => {
-    if (activeAccount) {
-      await reactQueryClient.invalidateQueries({
-        queryKey: getAccountByIdQueryKey({ id: activeAccount.id }),
-      });
-    }
-  }, [activeAccount]);
+  const shouldRefreshProfileData =
+    data.name && activeAccount?.id && !activeAccount?.name;
 
   const allowedDenoms = useMemo(
     () => allowedDenomsData?.allowedDenoms,
@@ -275,6 +268,7 @@ export const BuyCreditsForm = ({
     creditsAmount,
     currencyAmount,
     allowedDenoms,
+    shouldRefreshProfileData,
   });
   const agreePurchaseFormSubmit = useCallback(
     async (
@@ -295,7 +289,6 @@ export const BuyCreditsForm = ({
 
         const sellCanProceed =
           creditsToBuy && creditsToBuy <= creditsInRequestedSellOrders;
-
         if (sellCanProceed) {
           const {
             retirementReason,
@@ -324,7 +317,7 @@ export const BuyCreditsForm = ({
             });
           }
 
-          if (name && activeAccount?.id && !activeAccount?.name) {
+          if (shouldRefreshProfileData) {
             await updateAccountById({
               variables: {
                 input: {
@@ -335,7 +328,6 @@ export const BuyCreditsForm = ({
                 },
               },
             });
-            refreshProfileData();
           }
 
           if (selectedSellOrders && creditsAmount)
@@ -373,15 +365,14 @@ export const BuyCreditsForm = ({
       project,
       refetchSellOrders,
       data,
-      activeAccount?.id,
-      activeAccount?.name,
+      shouldRefreshProfileData,
       creditsAmount,
       purchase,
       retiring,
       paymentMethodId,
       confirmationTokenId,
       updateAccountById,
-      refreshProfileData,
+      activeAccount?.id,
       currency,
       _,
       allowedDenomsData,

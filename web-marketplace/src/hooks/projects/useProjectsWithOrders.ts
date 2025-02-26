@@ -252,8 +252,7 @@ export function useProjectsWithOrders({
         );
         const sanityProject = sanityProjectsData?.allProject?.find(
           sanityProject =>
-            sanityProject.projectId === project?.id ||
-            sanityProject.projectId === offChainProject?.slug,
+            sanityProject.projectId === (offChainProject?.slug ?? project?.id),
         );
 
         const allCardSellOrders = getCardSellOrders(

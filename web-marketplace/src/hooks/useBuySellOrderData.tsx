@@ -25,7 +25,7 @@ export const useBuySellOrderData = ({
     useProjectsWithOrders({
       projectId,
       classId,
-      enableOffchainProjectsQuery: projectSlugOrId ? false : true,
+      enableOffchainProjectsQuery: !projectSlugOrId,
       showCommunityProjects: true,
       isOffChainProject,
       projectSlugOrId,

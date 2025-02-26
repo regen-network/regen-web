@@ -31,17 +31,6 @@ export const useGetProject = () => {
   const isOnChainId = getIsOnChainId(projectId);
   const isOffChainUuid = getIsUuid(projectId);
 
-  const { data: sanityProjectData, isInitialLoading: loadingSanityProject } =
-    useQuery(
-      getProjectByIdQuery({
-        id: projectId as string,
-        sanityClient,
-        enabled: !!sanityClient && !!projectId,
-        languageCode: selectedLanguage,
-      }),
-    );
-  const sanityProject = sanityProjectData?.allProject?.[0];
-
   // if projectId is slug, query project by slug
   const { data: projectBySlug, isInitialLoading: loadingProjectBySlug } =
     useQuery(
@@ -110,12 +99,6 @@ export const useGetProject = () => {
 
   const anchoredMetadata = data as AnchoredProjectMetadataLD | undefined;
 
-  const { isBuyFlowDisabled, projectsWithOrderData, loadingBuySellOrders } =
-    useBuySellOrderData({
-      projectId: onChainProjectId,
-      isOffChainProject: !onChainProjectId,
-    });
-
   const offChainProjectById = offchainProjectByIdData?.data.projectById;
   const publishedOffchainProjectById = offChainProjectById?.published
     ? offChainProjectById
@@ -141,13 +124,33 @@ export const useGetProject = () => {
     }),
   );
 
-  const sellOrders = projectsWithOrderData?.[0]?.filteredSellOrders || [];
-  const cardSellOrders = projectsWithOrderData?.[0]?.cardSellOrders || [];
-
   const slug =
     offchainProjectByIdData?.data?.projectById?.slug ||
     projectByOnChainId?.data?.projectByOnChainId?.slug ||
     projectBySlug?.data.projectBySlug?.slug;
+
+  const slugOrId = slug || onChainProjectId || offChainProject?.id;
+
+  const { isBuyFlowDisabled, projectsWithOrderData, loadingBuySellOrders } =
+    useBuySellOrderData({
+      projectId: onChainProjectId,
+      projectSlugOrId: slugOrId,
+      isOffChainProject: !onChainProjectId,
+    });
+
+  const sellOrders = projectsWithOrderData?.[0]?.filteredSellOrders || [];
+  const cardSellOrders = projectsWithOrderData?.[0]?.cardSellOrders || [];
+
+  const { data: sanityProjectData, isInitialLoading: loadingSanityProject } =
+    useQuery(
+      getProjectByIdQuery({
+        id: slugOrId as string,
+        sanityClient,
+        enabled: !!sanityClient && !!slugOrId,
+        languageCode: selectedLanguage,
+      }),
+    );
+  const sanityProject = sanityProjectData?.allProject?.[0];
 
   const loadingDb =
     loadingProjectByOnChainId ||

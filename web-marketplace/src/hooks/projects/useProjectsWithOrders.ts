@@ -63,6 +63,7 @@ export interface ProjectsWithOrdersProps {
   marketTypeFilter?: Record<string, boolean>;
   buyingOptionsFilters?: Record<string, boolean>;
   isOffChainProject?: boolean;
+  projectSlugOrId?: string;
 }
 
 /**
@@ -88,6 +89,9 @@ export function useProjectsWithOrders({
   marketTypeFilter = { COMPLIANCE_MARKET: true, VOLUNTARY_MARKET: true },
   buyingOptionsFilters = {},
   isOffChainProject = false,
+  // projectSlugOrId is provided from useGetProject which already fetches the individual off-chain project,
+  // so we don't have to fetch all off chain projects to find the project slug in this hook
+  projectSlugOrId,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
   const graphqlClient = useApolloClient();
@@ -252,8 +256,7 @@ export function useProjectsWithOrders({
         );
         const sanityProject = sanityProjectsData?.allProject?.find(
           sanityProject =>
-            sanityProject.projectId === project?.id ||
-            sanityProject.projectId === offChainProject?.slug,
+            sanityProject.projectId === (offChainProject?.slug ?? project?.id),
         );
 
         const allCardSellOrders = getCardSellOrders(
@@ -425,7 +428,7 @@ export function useProjectsWithOrders({
   // Sanity projects
   const sanityProjectsResults = useQueries({
     queries: sortedProjects?.map(project => {
-      const id = project?.slug || project?.id;
+      const id = projectSlugOrId || project?.slug || project?.id;
       return getProjectByIdQuery({
         id: id as string,
         sanityClient,

@@ -6,6 +6,7 @@ type Props = {
   projectId?: string;
   classId?: string;
   isOffChainProject?: boolean;
+  projectSlugOrId?: string;
 };
 
 type ResponseType = {
@@ -18,14 +19,16 @@ export const useBuySellOrderData = ({
   projectId,
   classId,
   isOffChainProject = false,
+  projectSlugOrId,
 }: Props): ResponseType => {
   const { projectsWithOrderData, loading: loadingProjects } =
     useProjectsWithOrders({
       projectId,
       classId,
-      enableOffchainProjectsQuery: false,
+      enableOffchainProjectsQuery: !projectSlugOrId,
       showCommunityProjects: true,
       isOffChainProject,
+      projectSlugOrId,
     });
 
   const isBuyFlowDisabled =

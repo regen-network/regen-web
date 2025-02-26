@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/regen-network/regen-web/compare/v2.7.5...v2.8.0) (2025-02-26)
+
+### Features
+
+- add Terrasos Header ([#2508](https://github.com/regen-network/regen-web/issues/2508)) ([089a1e0](https://github.com/regen-network/regen-web/commit/089a1e0efdd298c876a389e2e785f1cb6d758293))
+- APP-322 terassos project filters UI ([#2487](https://github.com/regen-network/regen-web/issues/2487)) ([b883f3e](https://github.com/regen-network/regen-web/commit/b883f3ec77136e099d25debf593231dfa0a823eb))
+- APP-324 Tebu Banner ([#2485](https://github.com/regen-network/regen-web/issues/2485)) ([61ba690](https://github.com/regen-network/regen-web/commit/61ba6908ad885cc7c9112f4483091dd9aff19d8e))
+- APP-361 buy success ([#2519](https://github.com/regen-network/regen-web/issues/2519)) ([bbb9cc7](https://github.com/regen-network/regen-web/commit/bbb9cc763eb9f2c6f8f24489a1ce4b8c398c439c))
+
 # [2.7.0](https://github.com/regen-network/regen-web/compare/v2.6.5...v2.7.0) (2024-09-11)
 
 ### Bug Fixes

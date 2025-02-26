@@ -68,7 +68,11 @@ const ProjectFilterMobile = ({
           : _(ADD_FILTERS_MODAL_BUTTON)}
         {numberOfSelectedFilters ? ` (${numberOfSelectedFilters})` : ''}
       </OutlinedButton>
-      <Modal open={isOpen} onClose={onClose} className="h-full">
+      <Modal
+        open={isOpen}
+        onClose={onClose}
+        className="!pb-0 !pl-0 !pr-0 flex flex-col h-full"
+      >
         <ProjectFilterBody
           allProjects={allProjects}
           creditClassFilterOptions={creditClassFilterOptions}
@@ -78,6 +82,7 @@ const ProjectFilterMobile = ({
           buyingOptionsFilterOptions={buyingOptionsFilterOptions}
           onCloseFilterModal={onClose}
           mobile
+          classNames="pl-[43px] pr-[43px] overflow-auto h-full"
         />
       </Modal>
     </>

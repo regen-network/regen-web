@@ -28,6 +28,7 @@ import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
+import { getOrdersByBuyerAddressKey } from 'lib/queries/react-query/registry-server/graphql/indexer/getOrdersByBuyerAddress/getOrdersByBuyerAddress.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
@@ -371,9 +372,15 @@ export const usePurchase = ({
                 await reactQueryClient.invalidateQueries({
                   queryKey: [SELL_ORDERS_EXTENTED_KEY],
                 });
-                await reactQueryClient.invalidateQueries({
-                  queryKey: ['balances', wallet?.address], // invalidate all query pages
-                });
+                // Reload crypto orders and balances
+                if (wallet?.address) {
+                  await reactQueryClient.invalidateQueries(
+                    getOrdersByBuyerAddressKey(wallet?.address),
+                  );
+                  await reactQueryClient.invalidateQueries({
+                    queryKey: ['balances', wallet?.address], // invalidate all query pages
+                  });
+                }
 
                 // Reset BuyCredits forms
                 handleSuccess();
@@ -390,7 +397,6 @@ export const usePurchase = ({
       creditsAmount,
       currency,
       currencyAmount,
-      data?.email,
       displayDenom,
       email,
       handleSuccess,

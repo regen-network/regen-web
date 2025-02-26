@@ -23,10 +23,9 @@ export const useShowOrders = () => {
     }),
   );
   const cryptoOrders = data?.data?.allOrders?.nodes;
-  const ordersLoading = loading || cryptoOrdersLoading;
+
   return (
-    !ordersLoading &&
-    ((fiatOrders && fiatOrders.length > 0) ||
-      (cryptoOrders && cryptoOrders.length > 0))
+    (!loading && fiatOrders && fiatOrders.length > 0) ||
+    (!cryptoOrdersLoading && cryptoOrders && cryptoOrders.length > 0)
   );
 };

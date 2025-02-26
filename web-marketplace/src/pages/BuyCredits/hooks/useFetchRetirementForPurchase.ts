@@ -19,15 +19,20 @@ import { BLOCKCHAIN_RECORD } from 'lib/constants/shared.constants';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { getTxHashForPaymentIntentQuery } from 'lib/queries/react-query/registry-server/graphql/getTxHashForPaymentIntent/getTxHashForPaymentIntentQuery';
+import { getOrdersByBuyerAddressKey } from 'lib/queries/react-query/registry-server/graphql/indexer/getOrdersByBuyerAddress/getOrdersByBuyerAddress.constants';
 import { getRetirementByTxHash } from 'lib/queries/react-query/registry-server/graphql/indexer/getRetirementByTxHash/getRetirementByTxHash';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
-import { EMAIL_RECEIPT, VIEW_CERTIFICATE } from '../BuyCredits.constants';
+import {
+  EMAIL_RECEIPT,
+  PAYMENT_OPTIONS,
+  VIEW_CERTIFICATE,
+} from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
-import { getCardItems, getSteps } from '../BuyCredits.utils';
+import { getCardItems, getSteps, updateAccountData } from '../BuyCredits.utils';
 
 type UseFetchRetirementForPurchaseParams = {
   paymentIntentId?: string;
@@ -60,7 +65,6 @@ export const useFetchRetirementForPurchase = ({
     useMultiStep<BuyCreditsSchemaTypes>();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
-
   const email = multiStepData?.email;
   const name = multiStepData?.name;
 
@@ -214,16 +218,29 @@ export const useFetchRetirementForPurchase = ({
         atom.steps = getSteps(paymentOption, retiring);
         atom.description = email ? `${_(EMAIL_RECEIPT)} ${email}` : undefined;
       });
+
       // Reload sell orders
       await reactQueryClient.invalidateQueries({
         queryKey: [SELL_ORDERS_EXTENTED_KEY],
       });
-      if (wallet)
+
+      // Reload crypto orders and balances
+      if (wallet?.address && paymentOption === PAYMENT_OPTIONS.CRYPTO) {
+        await reactQueryClient.invalidateQueries(
+          getOrdersByBuyerAddressKey(wallet?.address),
+        );
         await reactQueryClient.invalidateQueries({
           queryKey: ['balances', wallet?.address], // invalidate all query pages
         });
+      }
+
       handleSuccess();
       navigate(`/certificate/${retirement.nodeId}?name=${name}`);
+
+      // Reload account data with fiat orders
+      // Doing it after navigating otherwise can cause the page to reload before
+      if (paymentOption === PAYMENT_OPTIONS.CARD)
+        await updateAccountData(reactQueryClient);
     }
   }, [
     _,
@@ -242,7 +259,7 @@ export const useFetchRetirementForPurchase = ({
     retiring,
     setProcessingModalAtom,
     setTxBuySuccessfulModalAtom,
-    wallet,
+    wallet?.address,
   ]);
 
   useEffect(() => {

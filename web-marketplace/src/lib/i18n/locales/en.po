@@ -485,7 +485,7 @@ msgstr ""
 
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:6
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:297
-#: src/pages/BuyCredits/hooks/usePurchase.ts:322
+#: src/pages/BuyCredits/hooks/usePurchase.ts:327
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:126
 msgid "amount retired"
 msgstr ""
@@ -511,7 +511,7 @@ msgstr ""
 
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:7
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:298
-#: src/pages/BuyCredits/hooks/usePurchase.ts:323
+#: src/pages/BuyCredits/hooks/usePurchase.ts:328
 msgid "amount tradable"
 msgstr ""
 
@@ -1125,6 +1125,10 @@ msgstr ""
 msgid "CONNECT"
 msgstr ""
 
+#: src/pages/Home/Home.tsx:123
+msgid "Connect <0>Capital</0> to <1>Ecological</1> Outcomes"
+msgstr ""
+
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.tsx:147
 msgid "Connect a wallet address to be able to perform on chain tasks such as buying and selling credits, and creating projects on Regen Ledger."
 msgstr ""
@@ -1351,7 +1355,7 @@ msgstr ""
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:28
 #: src/pages/Dashboard/Dashboard.constants.tsx:36
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:87
-#: src/pages/Home/Home.tsx:183
+#: src/pages/Home/Home.tsx:180
 msgid "Credit Classes"
 msgstr ""
 
@@ -1945,7 +1949,7 @@ msgid "Featured projects"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:181
-#: src/pages/Home/Home.tsx:171
+#: src/pages/Home/Home.tsx:168
 msgid "Featured Projects"
 msgstr ""
 
@@ -2307,7 +2311,7 @@ msgid "Learn more"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:60
-#: src/pages/Home/Home.tsx:202
+#: src/pages/Home/Home.tsx:199
 msgid "Learn More"
 msgstr ""
 
@@ -4426,7 +4430,7 @@ msgstr ""
 msgid "Traditional grazing"
 msgstr ""
 
-#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:109
+#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:119
 msgid "Transfer pending"
 msgstr ""
 
@@ -4463,8 +4467,8 @@ msgid "uncertainty deductions"
 msgstr ""
 
 #: src/pages/Home/Home.tsx:123
-msgid "Unlock <0>Regenerative Finances</0><1>with <2>Regen Marketplace</2></1>"
-msgstr ""
+#~ msgid "Unlock <0>Regenerative Finances</0><1>with <2>Regen Marketplace</2></1>"
+#~ msgstr ""
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:69
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:13
@@ -4986,7 +4990,7 @@ msgstr ""
 msgid "your profiles"
 msgstr ""
 
-#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:115
+#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:125
 msgid "Your purchase was successful but the credit transfer process hasn’t been completed just yet."
 msgstr ""
 
@@ -4994,7 +4998,7 @@ msgstr ""
 msgid "Your put action was successful!"
 msgstr ""
 
-#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:122
+#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:132
 msgid "Your retirement certificate will be generated as soon as the credits are transferred, please check later. Meanwhile, we have emailed you a receipt to {email}"
 msgstr ""
 

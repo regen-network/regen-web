@@ -10,6 +10,7 @@ query AllProjects {
     }
     fiatSellOrders {
       sellOrderId
+      usdPrice
     }
   }
 }

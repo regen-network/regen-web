@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
@@ -53,6 +53,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
   const { page: routePage } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { track } = useTracker();
@@ -271,7 +272,9 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           <Pagination
             count={pagesCount}
             page={Number(routePage)}
-            onChange={(event, value) => navigate(`/projects/${value}`)}
+            onChange={(event, value) =>
+              navigate(`/projects/${value}${location.search}`)
+            }
             size={isMobile ? 'small' : 'large'}
             colorScheme={COLOR_SCHEME}
           />

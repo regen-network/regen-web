@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useAtom, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
 
 import { apiUri } from 'lib/apiUri';
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { connectedEmailErrorModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { GET_ACCOUNTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.constants';
@@ -18,6 +19,7 @@ import { onPostData } from 'components/organisms/LoginButton/hooks/onLoginPostDa
 import { useTimer } from 'components/organisms/LoginButton/hooks/useTimer';
 import { getEmailModalError } from 'components/organisms/LoginButton/utils/getEmailModalError';
 import { EmailFormSchemaType } from 'components/organisms/LoginModal/LoginModal.schema';
+import { CONNECTED_EMAIL_ERROR } from 'components/organisms/RegistryLayout/RegistryLayout.constants';
 
 import {
   DEFAULT_RESEND_ERROR,
@@ -26,8 +28,6 @@ import {
   RESEND_SUCCES,
   RESEND_TIMER,
 } from '../../LoginButton/LoginButton.constants';
-import { CONNECTED_EMAIL_ERROR } from 'components/organisms/RegistryLayout/RegistryLayout.constants';
-import { connectedEmailErrorModalAtom } from 'lib/atoms/modals.atoms';
 
 type EmailConfirmationDataParams = {
   emailConfirmationText?: string;

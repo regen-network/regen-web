@@ -174,6 +174,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     walletConfigRef,
     logout,
     walletConnect,
+    setWalletConnect,
   });
 
   useAutoConnect({

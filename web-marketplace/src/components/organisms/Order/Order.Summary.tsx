@@ -8,6 +8,8 @@ import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
 import { PaymentInfoIcon } from 'web-components/src/components/icons/PaymentInfoIcon';
 import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
 
+import { getHashUrl } from 'lib/block-explorer';
+
 import { Link } from 'components/atoms';
 import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
@@ -190,9 +192,7 @@ export const OrderSummary = ({
             }
             value={
               <Link
-                href={`${
-                  import.meta.env.VITE_BLOCK_EXPLORER
-                }/txs/${blockchainRecord}`}
+                href={getHashUrl(blockchainRecord)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-grey-700 inline-block text-ellipsis w-[100px] overflow-hidden border-0 border-b-[1px] border-solid leading-5"

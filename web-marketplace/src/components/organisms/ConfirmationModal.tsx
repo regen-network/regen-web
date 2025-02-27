@@ -8,6 +8,8 @@ import Card from 'web-components/src/components/cards/Card';
 import Modal, { RegenModalProps } from 'web-components/src/components/modal';
 import { Body, Label, Title } from 'web-components/src/components/typography';
 
+import { getHashUrl } from 'lib/block-explorer';
+
 import CowIllustration from '../../assets/cow-illustration.png';
 import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
 
@@ -134,9 +136,7 @@ const ConfirmationModal: React.FC<React.PropsWithChildren<Props>> = ({
             <Link
               color="secondary.main"
               fontWeight={700}
-              href={`${
-                import.meta.env.VITE_BLOCK_EXPLORER
-              }/txs/${transactionHash}`}
+              href={getHashUrl(transactionHash)}
               target="_blank"
               rel="noopener noreferrer"
             >

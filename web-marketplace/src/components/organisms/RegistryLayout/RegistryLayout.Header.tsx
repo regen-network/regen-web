@@ -122,8 +122,8 @@ const RegistryLayoutHeader: React.FC = () => {
     ? headerColors[pathname]
     : theme.palette.primary.light;
 
-  const onLogOut = () => {
-    disconnect && disconnect();
+  const onLogOut = async () => {
+    await disconnect();
 
     // Remove all localStorage items related with the buy credits flow
     Object.keys(localStorage)
@@ -154,7 +154,7 @@ const RegistryLayoutHeader: React.FC = () => {
                 isHome && 'text-sc-button-text-icon-light',
               )}
             /> */}
-            {chainId && accountOrWallet && disconnect && (
+            {chainId && accountOrWallet && (
               <UserMenuItems
                 nameOrAddress={
                   activeAccount?.name ||

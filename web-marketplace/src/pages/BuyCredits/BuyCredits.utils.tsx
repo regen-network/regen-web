@@ -39,6 +39,7 @@ import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCred
 
 import {
   AGREE_PURCHASE,
+  BUY_CREDITS_FORM_PREFIX,
   CHOOSE_CREDITS,
   COMPLETE,
   CUSTOMER_INFO,
@@ -216,7 +217,7 @@ export const getFormModel = ({
     : undefined;
 
   return {
-    formId: `buy-credits-${projectId}`,
+    formId: `${BUY_CREDITS_FORM_PREFIX}${projectId}`,
     steps: [
       {
         id: 'choose-credits',

@@ -73,7 +73,7 @@ export type WalletContextType = {
   loaded: boolean;
   connect?: (params: ConnectParams) => Promise<void>;
   connectWallet?: ConnectWalletType;
-  disconnect?: () => void;
+  disconnect: () => Promise<void>;
   handleAddAddress?: () => Promise<void>;
   connectionType?: string;
   error?: unknown;
@@ -90,6 +90,7 @@ const WalletContext = createContext<WalletContextType>({
   accountChanging: false,
   isKeplrMobileWeb: false,
   loginDisabled: false,
+  disconnect: async () => {},
 });
 
 export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({

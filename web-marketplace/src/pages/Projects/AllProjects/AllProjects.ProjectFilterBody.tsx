@@ -40,7 +40,7 @@ type Props = {
   buyingOptionsFilterOptions: FilterOption[];
   mobile?: boolean;
   onCloseFilterModal?: () => void;
-  classNames?: string;
+  className?: string;
 };
 
 const ProjectFilterBody = ({
@@ -52,7 +52,7 @@ const ProjectFilterBody = ({
   buyingOptionsFilterOptions,
   mobile, // on mobile, filters are only applied after clicking "apply filters" button
   onCloseFilterModal,
-  classNames,
+  className,
 }: Props) => {
   const { _ } = useLingui();
 
@@ -123,7 +123,7 @@ const ProjectFilterBody = ({
   return (
     <>
       <ProjectFilters
-        classNames={classNames}
+        className={className}
         filters={[
           {
             selectedFilters: prefinance

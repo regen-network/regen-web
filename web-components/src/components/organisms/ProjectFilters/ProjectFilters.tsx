@@ -35,13 +35,13 @@ export default function ProjectFilters({
   onFilterReset,
   labels,
   showResetButton = true,
-  classNames,
+  className,
 }: {
   filters: Filter[];
   onFilterReset: () => void;
   labels: ProjectFilterLabels;
   showResetButton?: boolean;
-  classNames?: string;
+  className?: string;
 }) {
   const [isExpanded, setIsExpanded] = useState<Record<number, boolean>>({});
   const handleExpand = (index: number) => {
@@ -51,7 +51,7 @@ export default function ProjectFilters({
   const filtersLength = displayedFilters.length;
 
   return (
-    <div className={classNames}>
+    <div className={className}>
       <div className="justify-between items-baseline flex">
         <div className="text-[18px] font-bold">{labels.title}</div>
         {showResetButton && (

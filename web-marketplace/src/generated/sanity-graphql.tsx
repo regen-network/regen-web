@@ -9757,7 +9757,7 @@ export type AllProjectsQuery = (
       & Pick<ProjectPrefinancing, 'isPrefinanceProject' | 'price' | 'estimatedIssuance' | 'stripePaymentLink'>
     )>, fiatSellOrders?: Maybe<Array<Maybe<(
       { __typename?: 'SellOrderPrice' }
-      & Pick<SellOrderPrice, 'sellOrderId'>
+      & Pick<SellOrderPrice, 'sellOrderId' | 'usdPrice'>
     )>>> }
   )> }
 );
@@ -12140,6 +12140,7 @@ export const AllProjectsDocument = gql`
     }
     fiatSellOrders {
       sellOrderId
+      usdPrice
     }
   }
 }

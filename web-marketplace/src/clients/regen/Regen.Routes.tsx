@@ -340,7 +340,7 @@ export const getRegenRoutes = ({
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="dashboard">
-        <Route path="admin" element={<AuthRoute component={ProfileEdit} />}>
+        <Route path="admin" element={<ProfileEdit />}>
           <Route
             path="profile"
             element={<AuthRoute component={ProfileEditMain} />}
@@ -349,7 +349,7 @@ export const getRegenRoutes = ({
             path="settings"
             element={<AuthRoute component={ProfileEditSettings} />}
           />
-          <Route path="my-orders" element={<AuthRoute component={Orders} />} />
+          <Route path="my-orders" element={<Orders />} />
         </Route>
       </Route>
       <Route path="connect-wallet" element={<ConnectWalletPage />} />

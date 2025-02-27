@@ -18,6 +18,7 @@ type Props = {
   setConnectionType: UseStateSetter<string | undefined>;
   walletConfigRef: MutableRefObject<WalletConfig | undefined>;
   logout?: () => Promise<void>;
+  setWalletConnect: UseStateSetter<boolean>;
 };
 
 export type DisconnectType = () => Promise<void>;
@@ -28,12 +29,14 @@ export const useDisconnect = ({
   setWallet,
   walletConfigRef,
   logout,
+  setWalletConnect,
 }: Props): DisconnectType => {
   const { mainWallet } = useWallet(KEPLR_MOBILE);
 
   const disconnect = useCallback(async (): Promise<void> => {
     if (walletConnect && mainWallet) {
       await mainWallet.disconnect(true);
+      setWalletConnect(false);
     }
 
     setWallet(emptySender);
@@ -47,11 +50,12 @@ export const useDisconnect = ({
     if (!walletConnect && logout) await logout();
   }, [
     walletConnect,
+    mainWallet,
     setWallet,
     setConnectionType,
     walletConfigRef,
     logout,
-    mainWallet,
+    setWalletConnect,
   ]);
 
   return disconnect;

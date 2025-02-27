@@ -6,17 +6,20 @@ import { Flex } from 'web-components/src/components/box';
 
 import { useLedger } from 'ledger';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
+import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
 import { Order } from 'components/organisms/Order/Order';
 
 import { useOrders } from './hooks/useOrders';
+import { CreditCardHidden } from './Orders.CreditCardHidden';
 
 export const Orders = () => {
   const location = useLocation();
 
   const { marketplaceClient } = useLedger();
   const { orders, isLoading } = useOrders();
+  const { loginDisabled } = useWallet();
 
   const { data: allowedDenomsData } = useQuery(
     getAllowedDenomQuery({
@@ -44,6 +47,7 @@ export const Orders = () => {
       >
         <WithLoader isLoading={isLoading} sx={{ mx: 'auto' }}>
           <div className="w-full rounded-md border border-grey-200 bg-grey-100">
+            {loginDisabled && <CreditCardHidden />}
             {orders.map((order, index) => (
               <Order
                 key={`${order.project.name}-${index}`}

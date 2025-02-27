@@ -1302,6 +1302,10 @@ msgstr "Tarjeta de crédito"
 msgid "Credit card not available for this project"
 msgstr "Tarjeta de crédito no disponible para este proyecto"
 
+#: src/pages/Orders/Orders.CreditCardHidden.tsx:8
+msgid "Credit card orders are hidden"
+msgstr "Los pedidos con tarjeta de crédito están ocultos"
+
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:19
 #: src/lib/constants/shared.constants.tsx:197
 msgid "credit class"
@@ -1795,7 +1799,7 @@ msgstr "Editar filtros"
 msgid "edit profile"
 msgstr "editar perfil"
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:23
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:30
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:115
 #: src/pages/Dashboard/Dashboard.constants.tsx:54
 msgid "Edit profile"
@@ -2604,7 +2608,7 @@ msgstr "Debe ser positivo"
 msgid "Must have recipients"
 msgstr "Debe tener destinatarios"
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:46
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:57
 #: src/pages/Dashboard/Dashboard.constants.tsx:79
 msgid "My orders"
 msgstr "Mis pedidos"
@@ -2805,7 +2809,7 @@ msgstr "Resumen del pedido"
 msgid "orders"
 msgstr "órdenes"
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:43
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:54
 msgid "Orders"
 msgstr "Pedidos"
 
@@ -3117,7 +3121,7 @@ msgstr "Proceda con precaución: ¡esto no se puede deshacer!"
 msgid "profile"
 msgstr "perfil"
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:20
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:27
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
 msgid "Profile"
 msgstr "Perfil"
@@ -3807,7 +3811,7 @@ msgstr "Configurar una billetera Keplr →"
 msgid "settings"
 msgstr "ajustes"
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:28
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:37
 #: src/pages/Dashboard/Dashboard.constants.tsx:62
 #: src/pages/Settings/Settings.tsx:52
 msgid "Settings"
@@ -4256,6 +4260,10 @@ msgstr "Estos datos están en cadena o anclados en la cadena a través de un has
 msgid "This factor is used to calculate the credits issued for this project."
 msgstr "Este factor se utiliza para calcular los créditos emitidos para este proyecto."
 
+#: src/pages/Orders/Orders.CreditCardHidden.tsx:11
+msgid "This feature is not yet supported by Wallet Connect and Keplr mobile. Please log in using Keplr browser extension on desktop or via email or Google login."
+msgstr "Esta función aún no es compatible con Wallet Connect y Keplr Mobile. Inicie sesión con la extensión de navegador de Keplr en su computadora de escritorio o a través de correo electrónico o inicio de sesión de Google."
+
 #: src/lib/constants/shared.constants.tsx:63
 msgid "This field is required"
 msgstr "Este campo es obligatorio"
@@ -4273,8 +4281,12 @@ msgid "This is not a valid video url"
 msgstr "Esta no es una URL de video válida"
 
 #: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:6
-msgid "This is not yet supported by Wallet Connect and Keplr mobile. Please log in using Keplr browser extension on desktop."
-msgstr "Esta función aún no es compatible con Wallet Connect y Keplr Mobile. Inicie sesión con la extensión de navegador de Keplr en su computadora de escritorio."
+msgid "This is not yet supported by Wallet Connect and Keplr mobile. Please log in using Keplr browser extension on desktop or via email or Google login."
+msgstr "Esta función aún no es compatible con Wallet Connect y Keplr para dispositivos móviles. Inicie sesión con la extensión de navegador de Keplr en su computadora de escritorio o a través de correo electrónico o inicio de sesión de Google."
+
+#: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:6
+#~ msgid "This is not yet supported by Wallet Connect and Keplr mobile. Please log in using Keplr browser extension on desktop."
+#~ msgstr "Esta función aún no es compatible con Wallet Connect y Keplr Mobile. Inicie sesión con la extensión de navegador de Keplr en su computadora de escritorio."
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:7
 msgid "This is the median average price for all open sell orders in this credit class."

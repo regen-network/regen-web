@@ -8,12 +8,19 @@ import { ShoppingBagIcon } from 'web-components/src/components/icons/ShoppingBag
 // import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
 import { UserMenuIcon } from 'web-components/src/components/icons/UserMenuIcon';
 
-import { AdminNavigationSection } from './AdminNavigation.types';
+import { NOT_SUPPORTED_TOOLTIP_TEXT } from 'pages/Dashboard/MyProjects/MyProjects.constants';
+
+import {
+  AdminNavigationItem,
+  AdminNavigationSection,
+} from './AdminNavigation.types';
 
 export const getAdminNavigationSections = ({
   showOrders,
+  loginDisabled,
 }: {
   showOrders?: boolean;
+  loginDisabled?: boolean;
 }): AdminNavigationSection[] => {
   const sections = [
     {
@@ -21,20 +28,24 @@ export const getAdminNavigationSections = ({
       items: [
         {
           name: i18n._(msg`Edit profile`),
-          icon: <UserMenuIcon linearGradient />,
+          icon: <UserMenuIcon linearGradient disabled={loginDisabled} />,
           path: 'profile',
+          disabled: loginDisabled,
+          disabledTooltipText: i18n._(NOT_SUPPORTED_TOOLTIP_TEXT),
         },
         {
           name: i18n._(msg`Settings`),
-          icon: <CogIcon linearGradient />,
+          icon: <CogIcon linearGradient disabled={loginDisabled} />,
           path: 'settings',
+          disabled: loginDisabled,
+          disabledTooltipText: i18n._(NOT_SUPPORTED_TOOLTIP_TEXT),
         },
         // {
         //   name: i18n._(msg`Email updates`),
         //   icon: <EnvelopeIcon linearGradient />,
         //   path: 'email-updates',
         // },
-      ],
+      ] as AdminNavigationItem[],
     },
   ];
 

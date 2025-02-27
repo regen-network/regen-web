@@ -17,7 +17,6 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { getWalletAddress } from 'pages/Dashboard/Dashboard.utils';
 import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
-import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { useAuthData } from 'hooks/useAuthData';
 
@@ -40,14 +39,15 @@ import {
   LOGOUT_TEXT,
 } from './RegistryLayout.constants';
 // import { LanguageSwitcher } from './RegistryLayout.LanguageSwitcher';
-import { getAddress } from './RegistryLayout.utils';
+import { getAddress, getProfile } from './RegistryLayout.utils';
 
 const RegistryLayoutHeader: React.FC = () => {
   const { _ } = useLingui();
   const { pathname } = useLocation();
   const { activeAccount, privActiveAccount } = useAuth();
 
-  const { wallet, disconnect, isConnected, loginDisabled } = useWallet();
+  const { wallet, disconnect, isConnected, loginDisabled, accountByAddr } =
+    useWallet();
   const { accountOrWallet, noAccountAndNoWallet } = useAuthData();
   const theme = useTheme<Theme>();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
@@ -83,20 +83,11 @@ const RegistryLayoutHeader: React.FC = () => {
         onProfileClick,
         savedPaymentInfo,
         showOrders,
-        profile: activeAccount
-          ? {
-              id: activeAccount.id,
-              name: activeAccount.name ? activeAccount.name : _(DEFAULT_NAME),
-              profileImage: activeAccount.image
-                ? activeAccount.image
-                : getDefaultAvatar(activeAccount),
-              address: getAddress({
-                walletAddress: activeAccount.addr,
-                email: privActiveAccount?.email,
-              }),
-              selected: true,
-            }
-          : undefined,
+        profile: getProfile({
+          account: activeAccount ?? accountByAddr,
+          privActiveAccount,
+          _,
+        }),
         _,
       }),
     [
@@ -110,8 +101,9 @@ const RegistryLayoutHeader: React.FC = () => {
       savedPaymentInfo,
       showOrders,
       activeAccount,
+      accountByAddr,
+      privActiveAccount,
       _,
-      privActiveAccount?.email,
     ],
   );
 

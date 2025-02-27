@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/regen-network/regen-web/compare/v2.8.0...v2.8.1) (2025-02-27)
+
+### Bug Fixes
+
+- query usdPrice so getCardSellOrders does not return empty array ([5d949fd](https://github.com/regen-network/regen-web/commit/5d949fd9b8b1f73584f3dbc3450949aeac32465c))
+- use location search params when navigate to different pages ([02a7a10](https://github.com/regen-network/regen-web/commit/02a7a10eaf689865695ba658f2aaf365f2524b27))
+
 # [2.8.0](https://github.com/regen-network/regen-web/compare/v2.7.5...v2.8.0) (2025-02-26)
 
 ### Bug Fixes

@@ -82,7 +82,7 @@ const ProjectFilterMobile = ({
           buyingOptionsFilterOptions={buyingOptionsFilterOptions}
           onCloseFilterModal={onClose}
           mobile
-          classNames="pl-[43px] pr-[43px] overflow-auto h-full"
+          className="pl-20 pr-20 overflow-auto h-full"
         />
       </Modal>
     </>

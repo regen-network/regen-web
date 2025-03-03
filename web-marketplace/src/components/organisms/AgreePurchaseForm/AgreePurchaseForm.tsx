@@ -179,13 +179,12 @@ export const AgreePurchaseForm = ({
           {...form.register('agreeErpa')}
         />
       </div>
-      <div className="float-right pt-40">
-        <PrevNextButtons
-          saveDisabled={!isValid || isSubmitting}
-          saveText={_(msg`purchase now`)}
-          onPrev={handleBack}
-        />
-      </div>
+      <PrevNextButtons
+        saveDisabled={!isValid || isSubmitting}
+        saveText={_(msg`purchase now`)}
+        onPrev={handleBack}
+        className="float-right pt-40 mr-20 sm:mr-40 md:mr-0"
+      />
     </Form>
   );
 };

@@ -14,7 +14,7 @@ export function SetMaxButton({
       type="button"
       onClick={onClick}
       aria-label={ariaLabel}
-      className="ml-3 sm:ml-10 border-none w-[46px] h-[30px] py-[5px] bg-grey-500 hover:bg-grey-400 rounded text-grey-0 text-sm font-bold font-sans hover:cursor-pointer"
+      className="ml-3 sm:ml-10 border-none min-w-[46px] h-[30px] px-5 py-[5px] bg-grey-500 hover:bg-grey-400 rounded text-grey-0 text-sm font-bold font-sans hover:cursor-pointer"
     >
       {buttonText}
     </button>

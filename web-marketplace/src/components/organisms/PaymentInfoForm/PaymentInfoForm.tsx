@@ -223,18 +223,17 @@ export const PaymentInfoForm = ({
           />
         )}
       </div>
-      <div className="float-right pt-40">
-        <PrevNextButtons
-          saveDisabled={
-            !isValid ||
-            isSubmitting ||
-            (!stripe && card) ||
-            (card && !paymentMethodId && !paymentInfoValid)
-          }
-          saveText={_(NEXT)}
-          onPrev={handleBack}
-        />
-      </div>
+      <PrevNextButtons
+        saveDisabled={
+          !isValid ||
+          isSubmitting ||
+          (!stripe && card) ||
+          (card && !paymentMethodId && !paymentInfoValid)
+        }
+        saveText={_(NEXT)}
+        onPrev={handleBack}
+        className="float-right pt-40 mr-20 sm:mr-40 md:mr-0"
+      />
     </Form>
   );
 };

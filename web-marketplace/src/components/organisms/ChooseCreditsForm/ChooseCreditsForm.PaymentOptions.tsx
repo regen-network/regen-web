@@ -88,7 +88,7 @@ export const PaymentOptions = ({
   };
 
   return (
-    <div className="flex space-x-4 gap-10">
+    <div className="flex gap-15">
       <ChooseCreditButton
         value={PAYMENT_OPTIONS.CARD}
         isChecked={paymentOption === PAYMENT_OPTIONS.CARD}

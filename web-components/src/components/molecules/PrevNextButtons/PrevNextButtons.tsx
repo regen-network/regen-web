@@ -9,16 +9,18 @@ type Props = {
   onSave?: () => void;
   saveDisabled: boolean;
   saveText: string;
+  className?: string;
 };
 export const PrevNextButtons = ({
   onPrev,
   onSave,
   saveDisabled,
   saveText,
+  className = '',
 }: Props) => {
   const { classes } = useStyles();
   return (
-    <>
+    <div className={className}>
       {onPrev && (
         <OutlinedButton
           className={cn(classes.btn, 'mr-10 sm:mr-20')}
@@ -39,6 +41,6 @@ export const PrevNextButtons = ({
       >
         {saveText}
       </ContainedButton>
-    </>
+    </div>
   );
 };

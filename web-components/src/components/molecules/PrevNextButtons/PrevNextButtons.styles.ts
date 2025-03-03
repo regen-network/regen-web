@@ -2,7 +2,7 @@ import { makeStyles } from 'tss-react/mui';
 
 export const useStyles = makeStyles()(theme => ({
   btn: {
-    padding: theme.spacing(2, 4),
+    padding: `${theme.spacing(3)} !important`,
     minWidth: 0,
     height: '100%',
     [theme.breakpoints.up('sm')]: {

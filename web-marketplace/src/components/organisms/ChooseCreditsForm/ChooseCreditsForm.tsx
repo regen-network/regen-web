@@ -396,17 +396,16 @@ export const ChooseCreditsForm = React.memo(
                 </>
               )}
             </Card>
-            <div className="float-right pt-40">
-              <PrevNextButtons
-                saveDisabled={Object.entries(errors).length > 0 || isSubmitting}
-                saveText={
-                  errors[CURRENCY_AMOUNT]?.message === _(NOT_ENOUGH_BALANCE)
-                    ? _(INSUFFICIENT_BALANCE)
-                    : _(NEXT)
-                }
-                onPrev={onPrev}
-              />
-            </div>
+            <PrevNextButtons
+              saveDisabled={Object.entries(errors).length > 0 || isSubmitting}
+              saveText={
+                errors[CURRENCY_AMOUNT]?.message === _(NOT_ENOUGH_BALANCE)
+                  ? _(INSUFFICIENT_BALANCE)
+                  : _(NEXT)
+              }
+              onPrev={onPrev}
+              className="float-right pt-40 mr-20 sm:mr-40 md:mr-0"
+            />
           </div>
           {project && allowedDenoms && (
             // We need to put this inside the form itself

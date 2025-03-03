@@ -3,6 +3,8 @@ import { useWallet } from '@cosmos-kit/react-lite';
 
 import { UseStateSetter } from 'types/react/use-state';
 
+import { BUY_CREDITS_FORM_PREFIX } from 'pages/BuyCredits/BuyCredits.constants';
+
 import { Wallet } from '../wallet';
 import {
   AUTO_CONNECT_WALLET_KEY,
@@ -44,6 +46,11 @@ export const useDisconnect = ({
     walletConfigRef.current = undefined;
     localStorage.removeItem(AUTO_CONNECT_WALLET_KEY);
     localStorage.removeItem(WALLET_CONNECT_KEY);
+
+    // Remove all localStorage items related with the buy credits flow
+    Object.keys(localStorage)
+      .filter(key => key.startsWith(BUY_CREDITS_FORM_PREFIX))
+      .forEach(key => localStorage.removeItem(key));
 
     // signArbitrary (used in login) not yet supported by @keplr-wallet/wc-client
     // https://github.com/chainapsis/keplr-wallet/issues/664

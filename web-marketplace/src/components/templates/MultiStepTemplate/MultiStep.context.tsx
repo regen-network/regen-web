@@ -43,6 +43,7 @@ type ContextProps<T extends object> = {
   handleResetReview: () => void;
   handleSuccess: () => void;
   handleError: () => void;
+  handleResetData: () => void;
   resultStatus: ResultStatus;
 };
 
@@ -65,6 +66,7 @@ const initialValues = {
   handleResetReview: () => {},
   handleSuccess: () => {},
   handleError: () => {},
+  handleResetData: () => {},
 };
 
 const MultiStepContext = React.createContext<ContextProps<{}>>(initialValues);
@@ -195,6 +197,7 @@ export function MultiStepProvider<T extends object>({
     handleResetReview,
     handleSuccess,
     handleError,
+    handleResetData,
     resultStatus,
   };
 

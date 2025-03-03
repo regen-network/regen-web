@@ -40,6 +40,7 @@ type Props = {
   buyingOptionsFilterOptions: FilterOption[];
   mobile?: boolean;
   onCloseFilterModal?: () => void;
+  className?: string;
 };
 
 const ProjectFilterBody = ({
@@ -51,6 +52,7 @@ const ProjectFilterBody = ({
   buyingOptionsFilterOptions,
   mobile, // on mobile, filters are only applied after clicking "apply filters" button
   onCloseFilterModal,
+  className,
 }: Props) => {
   const { _ } = useLingui();
 
@@ -121,6 +123,7 @@ const ProjectFilterBody = ({
   return (
     <>
       <ProjectFilters
+        className={className}
         filters={[
           {
             selectedFilters: prefinance
@@ -187,7 +190,7 @@ const ProjectFilterBody = ({
         }}
       />
       {mobile && (
-        <div className="shadow-[0_-4px_10px_0_rgba(0,0,0,0.10)] fixed bottom-0 left-0 w-full border-0 border-solid border-t border-sc-surface-stroke flex justify-end h-[62px] py-10 px-20 bg-sc-surface-page-background-light">
+        <div className="shadow-[0_-4px_10px_0_rgba(0,0,0,0.10)] sticky bottom-0 left-0 w-full border-0 border-solid border-t border-sc-surface-stroke flex justify-end h-[62px] py-10 px-20 bg-sc-surface-page-background-light">
           <ContainedButton
             onClick={() => {
               setClientFilters();

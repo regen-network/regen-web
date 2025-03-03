@@ -1299,6 +1299,10 @@ msgstr ""
 msgid "Credit card not available for this project"
 msgstr ""
 
+#: src/pages/Orders/Orders.CreditCardHidden.tsx:8
+msgid "Credit card orders are hidden"
+msgstr ""
+
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:19
 #: src/lib/constants/shared.constants.tsx:197
 msgid "credit class"
@@ -1792,7 +1796,7 @@ msgstr ""
 msgid "edit profile"
 msgstr ""
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:23
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:30
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:115
 #: src/pages/Dashboard/Dashboard.constants.tsx:54
 msgid "Edit profile"
@@ -2601,7 +2605,7 @@ msgstr ""
 msgid "Must have recipients"
 msgstr ""
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:46
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:57
 #: src/pages/Dashboard/Dashboard.constants.tsx:79
 msgid "My orders"
 msgstr ""
@@ -2802,7 +2806,7 @@ msgstr ""
 msgid "orders"
 msgstr ""
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:43
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:54
 msgid "Orders"
 msgstr ""
 
@@ -3114,7 +3118,7 @@ msgstr ""
 msgid "profile"
 msgstr ""
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:20
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:27
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
 msgid "Profile"
 msgstr ""
@@ -3804,7 +3808,7 @@ msgstr ""
 msgid "settings"
 msgstr ""
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:28
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:37
 #: src/pages/Dashboard/Dashboard.constants.tsx:62
 #: src/pages/Settings/Settings.tsx:52
 msgid "Settings"
@@ -4253,6 +4257,10 @@ msgstr ""
 msgid "This factor is used to calculate the credits issued for this project."
 msgstr ""
 
+#: src/pages/Orders/Orders.CreditCardHidden.tsx:11
+msgid "This feature is not yet supported by Wallet Connect and Keplr mobile. Please log in using Keplr browser extension on desktop or via email or Google login."
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:63
 msgid "This field is required"
 msgstr ""
@@ -4270,8 +4278,12 @@ msgid "This is not a valid video url"
 msgstr ""
 
 #: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:6
-msgid "This is not yet supported by Wallet Connect and Keplr mobile. Please log in using Keplr browser extension on desktop."
+msgid "This is not yet supported by Wallet Connect and Keplr mobile. Please log in using Keplr browser extension on desktop or via email or Google login."
 msgstr ""
+
+#: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:6
+#~ msgid "This is not yet supported by Wallet Connect and Keplr mobile. Please log in using Keplr browser extension on desktop."
+#~ msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.constants.ts:7
 msgid "This is the median average price for all open sell orders in this credit class."

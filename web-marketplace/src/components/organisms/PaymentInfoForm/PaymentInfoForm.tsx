@@ -2,12 +2,15 @@ import { useEffect, useMemo, useState } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
-import { cardDetailsMissingAtom } from 'pages/BuyCredits/BuyCredits.atoms';
+import {
+  cardDetailsMissingAtom,
+  resetBuyCreditsFormAtom,
+} from 'pages/BuyCredits/BuyCredits.atoms';
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import {
   CardDetails,
@@ -62,9 +65,14 @@ export const PaymentInfoForm = ({
     handleSave: updateMultiStepData,
     activeStep,
     data,
+    handleResetData: removeMultiStepFormData,
   } = useMultiStep();
   const [paymentInfoValid, setPaymentInfoValid] = useState(false);
   const setCardDetailsMissing = useSetAtom(cardDetailsMissingAtom);
+  const [shouldResetForm, setShouldResetForm] = useAtom(
+    resetBuyCreditsFormAtom,
+  );
+  const [paymentElementKey, setPaymentElementKey] = useState(0);
   const form = useZodForm({
     schema: paymentInfoFormSchema(paymentOption),
     defaultValues: {
@@ -87,6 +95,34 @@ export const PaymentInfoForm = ({
     if (paymentMethods)
       form.setValue('paymentMethodId', paymentMethods?.[0]?.id);
   }, [accountEmail, accountName, form, paymentMethods]);
+
+  // Reset form on log out
+  useEffect(() => {
+    if (shouldResetForm) {
+      setShouldResetForm(false);
+      // On form reset, remove multi-step form data,
+      // reset Stripe card form and reset the current form fields
+      removeMultiStepFormData();
+      form.reset({
+        email: '',
+        name: '',
+        createAccount: true,
+        savePaymentMethod: true,
+        paymentMethodId: '',
+      });
+
+      // force Stripe Elements to re-render
+      setPaymentElementKey(prev => prev + 1);
+    }
+  }, [
+    shouldResetForm,
+    form,
+    removeMultiStepFormData,
+    accountEmail,
+    accountName,
+    paymentMethods,
+    setShouldResetForm,
+  ]);
 
   const paymentMethodId = useWatch({
     control: form.control,
@@ -176,6 +212,7 @@ export const PaymentInfoForm = ({
         />
         {card && (
           <PaymentInfo
+            key={paymentElementKey}
             paymentMethods={paymentMethods}
             accountId={accountId}
             setPaymentInfoValid={setPaymentInfoValid}

@@ -30,6 +30,7 @@ import { warningBannerTextAtom } from 'lib/atoms/banner.atoms';
 
 import {
   paymentOptionAtom,
+  resetBuyCreditsFormAtom,
   spendingCapAtom,
 } from 'pages/BuyCredits/BuyCredits.atoms';
 import {
@@ -123,9 +124,12 @@ export const ChooseCreditsForm = React.memo(
       data,
       handleSave: updateMultiStepData,
       activeStep,
+      handleResetData: removeMultiStepFormData,
     } = useMultiStep<BuyCreditsSchemaTypes>();
     const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
-
+    const [shouldResetForm, setShouldResetForm] = useAtom(
+      resetBuyCreditsFormAtom,
+    );
     const cryptoCurrencies = useMemo(
       () => getCryptoCurrencies(cryptoSellOrders),
       [cryptoSellOrders],
@@ -292,6 +296,17 @@ export const ChooseCreditsForm = React.memo(
         form.trigger();
       }
     }, [form, form.trigger, creditsAvailable, spendingCap]);
+
+    // Reset form on log out
+    useEffect(() => {
+      if (shouldResetForm) {
+        setShouldResetForm(false);
+        // On form reset, remove multi-step form data,
+        // and reset the current form fields
+        removeMultiStepFormData();
+        form.reset();
+      }
+    }, [shouldResetForm, form, removeMultiStepFormData, setShouldResetForm]);
 
     // Advanced settings not enabled for MVP
     // const [advanceSettingsOpen, setAdvanceSettingsOpen] = useState(false);

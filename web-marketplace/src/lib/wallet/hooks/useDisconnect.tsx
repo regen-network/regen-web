@@ -1,8 +1,10 @@
 import { MutableRefObject, useCallback } from 'react';
 import { useWallet } from '@cosmos-kit/react-lite';
+import { useSetAtom } from 'jotai';
 
 import { UseStateSetter } from 'types/react/use-state';
 
+import { resetBuyCreditsFormAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { BUY_CREDITS_FORM_PREFIX } from 'pages/BuyCredits/BuyCredits.constants';
 
 import { Wallet } from '../wallet';
@@ -34,6 +36,7 @@ export const useDisconnect = ({
   setWalletConnect,
 }: Props): DisconnectType => {
   const { mainWallet } = useWallet(KEPLR_MOBILE);
+  const setShouldResetBuyCreditsForm = useSetAtom(resetBuyCreditsFormAtom);
 
   const disconnect = useCallback(async (): Promise<void> => {
     if (walletConnect && mainWallet) {
@@ -46,6 +49,8 @@ export const useDisconnect = ({
     walletConfigRef.current = undefined;
     localStorage.removeItem(AUTO_CONNECT_WALLET_KEY);
     localStorage.removeItem(WALLET_CONNECT_KEY);
+
+    setShouldResetBuyCreditsForm(true);
 
     // Remove all localStorage items related with the buy credits flow
     Object.keys(localStorage)
@@ -61,6 +66,7 @@ export const useDisconnect = ({
     setWallet,
     setConnectionType,
     walletConfigRef,
+    setShouldResetBuyCreditsForm,
     logout,
     setWalletConnect,
   ]);

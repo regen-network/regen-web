@@ -60,6 +60,7 @@ export const useConnectWallet = ({
       }
 
       if (isKeplr) {
+        alert(`isKeplr: ${isKeplr}`);
         const wallet = await finalizeConnection({
           setWallet,
           walletClient,

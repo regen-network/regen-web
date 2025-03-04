@@ -20,6 +20,7 @@ export const useAutoConnect = ({
   connectWallet,
   activeAccountHasAddr,
 }: Props): void => {
+  alert(`activeAccountHasAddr: ${activeAccountHasAddr}`);
   useEffect(() => {
     const autoConnectWalletType = localStorage.getItem(AUTO_CONNECT_WALLET_KEY);
     const tryConnectWallet = async (): Promise<void> => {

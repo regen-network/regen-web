@@ -120,6 +120,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
   const address = mainWallet?.getChainWallet('regen')?.address;
   const walletStatus = walletRepos[0]?.current?.walletStatus;
+  alert(`walletStatus: ${walletStatus}`);
 
   useEffect(() => {
     if (
@@ -129,6 +130,8 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     ) {
       const offlineSigner =
         walletConnectClient?.getOfflineSignerAmino?.('regen-1');
+      alert(`offlineSigner: ${thisIsAChange}`);
+
       if (offlineSigner) {
         closeView();
         setWallet({

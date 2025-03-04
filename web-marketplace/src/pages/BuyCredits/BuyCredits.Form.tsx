@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useLingui } from '@lingui/react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery } from '@tanstack/react-query';
@@ -9,7 +8,6 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
-import { useUpdateAccountByIdMutation } from 'generated/graphql';
 import { useLedger } from 'ledger';
 import { warningBannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
@@ -18,7 +16,6 @@ import {
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { apiServerUrl } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
@@ -29,9 +26,7 @@ import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchUserBalance } from 'pages/BuyCredits/hooks/useFetchUserBalance';
-import { useFetchSellOrders } from 'pages/Marketplace/Storefront/hooks/useFetchSellOrders';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
-import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
@@ -71,12 +66,9 @@ import {
 import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
 import { BuyCreditsSchemaTypes, CardDetails } from './BuyCredits.types';
 import {
-  findMatchingSellOrders,
   getCreditsAvailableBannerText,
   getCryptoCurrencies,
   getOrderedSellOrders,
-  getSellOrdersCredits,
-  getWarningModalContent,
 } from './BuyCredits.utils';
 import { usePurchase } from './hooks/usePurchase';
 
@@ -151,8 +143,6 @@ export const BuyCreditsForm = ({
     creditsAvailable: 0,
   });
 
-  const { refetchSellOrders } = useFetchSellOrders();
-
   const cardDisabled = cardSellOrders.length === 0;
 
   const { marketplaceClient, ecocreditClient } = useLedger();
@@ -223,6 +213,11 @@ export const BuyCreditsForm = ({
       : undefined;
   }, [creditsAmount, currencyAmount]);
 
+  const card = useMemo(
+    () => paymentOption === PAYMENT_OPTIONS.CARD,
+    [paymentOption],
+  );
+
   const paymentInfoFormSubmit = useCallback(
     async (values: PaymentInfoFormSchemaType) => {
       track<BuyExtendedEvent>('buy3', {
@@ -245,10 +240,10 @@ export const BuyCreditsForm = ({
       setPaymentMethodId(paymentMethodId);
     },
     [
+      card,
       data,
       handleSaveNext,
       location.pathname,
-      paymentOption,
       pricePerCredit,
       project?.creditClassId,
       project?.id,
@@ -303,7 +298,6 @@ export const BuyCreditsForm = ({
     allowedDenoms,
     shouldRefreshProfileData,
     setWarningModalState,
-    allowedDenomsData,
     warningModalContent,
     pricePerCredit,
   });
@@ -340,11 +334,6 @@ export const BuyCreditsForm = ({
   const goToPaymentInfo = useCallback(
     () => handleActiveStep(1),
     [handleActiveStep],
-  );
-
-  const card = useMemo(
-    () => paymentOption === PAYMENT_OPTIONS.CARD,
-    [paymentOption],
   );
 
   const creditsAvailable = useMemo(

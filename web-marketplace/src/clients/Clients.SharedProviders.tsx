@@ -72,7 +72,7 @@ const analytics = Analytics({
     }),
     googleAnalytics({
       measurementIds: [import.meta.env.VITE_GA_MEASUREMENT_ID],
-      enabled: true,
+      enabled: false,
       gtagConfig: {
         anonymize_ip: true,
       },

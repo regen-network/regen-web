@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
@@ -73,7 +72,6 @@ type UsePurchaseParams = {
     openModal: boolean;
     creditsAvailable: number;
   }>;
-  allowedDenomsData?: QueryAllowedDenomsResponse;
   warningModalContent: React.MutableRefObject<
     BuyWarningModalContent | undefined
   >;
@@ -103,7 +101,6 @@ export const usePurchase = ({
   allowedDenoms,
   shouldRefreshProfileData,
   setWarningModalState,
-  allowedDenomsData,
   warningModalContent,
   pricePerCredit,
 }: UsePurchaseParams) => {
@@ -320,9 +317,15 @@ export const usePurchase = ({
                           payment_method: paymentMethodId,
                         });
                       if (error) {
-                        setErrorBannerTextAtom(String(error));
+                        const errorMessage = String(error.message);
+                        setErrorBannerTextAtom(errorMessage);
+                        track<BuyFailureEvent>('buyFailure', {
+                          ...trackingEvent,
+                          errorMessage,
+                        });
                         return;
                       }
+                      track<BuyExtendedEvent>('buySuccess', trackingEvent);
                       setPaymentIntentId(paymentIntent.id);
                     } else {
                       // or new credit card
@@ -366,8 +369,8 @@ export const usePurchase = ({
                           return;
                         }
                       }
-                      setPaymentIntentId(paymentIntent.id);
                       track<BuyExtendedEvent>('buySuccess', trackingEvent);
+                      setPaymentIntentId(paymentIntent.id);
                     }
                   },
                 });
@@ -527,9 +530,9 @@ export const usePurchase = ({
             currency,
             creditsInRequestedSellOrders,
             _,
-            allowedDenomsData,
             data,
             creditsInAllSellOrders,
+            allowedDenoms,
           );
         }
       }
@@ -537,7 +540,7 @@ export const usePurchase = ({
     [
       _,
       activeAccount,
-      allowedDenomsData,
+      allowedDenoms,
       batchDenoms,
       creditsAmount,
       currency,

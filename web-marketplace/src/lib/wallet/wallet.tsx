@@ -130,7 +130,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     ) {
       const offlineSigner =
         walletConnectClient?.getOfflineSignerAmino?.('regen-1');
-      alert(`offlineSigner: ${thisIsAChange}`);
+      alert(`offlineSigner: ${offlineSigner}`);
 
       if (offlineSigner) {
         closeView();

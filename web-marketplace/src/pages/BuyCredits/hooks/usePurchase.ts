@@ -1,8 +1,9 @@
 import { useCallback, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
@@ -14,6 +15,8 @@ import { postData } from 'utils/fetch/postData';
 import { getJurisdictionIsoCode } from 'web-components/src/utils/locationStandard';
 import { truncate } from 'web-components/src/utils/truncate';
 
+import { useUpdateAccountByIdMutation } from 'generated/graphql';
+import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom, errorCodeAtom } from 'lib/atoms/error.atoms';
 import {
@@ -24,18 +27,23 @@ import {
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getHashUrl } from 'lib/block-explorer';
+import { apiServerUrl } from 'lib/env';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { getOrdersByBuyerAddressKey } from 'lib/queries/react-query/registry-server/graphql/indexer/getOrdersByBuyerAddress/getOrdersByBuyerAddress.constants';
+import { BuyExtendedEvent, BuyFailureEvent } from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { useFetchSellOrders } from 'pages/Marketplace/Storefront/hooks/useFetchSellOrders';
+import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { VIEW_PORTFOLIO } from 'components/organisms/BasketOverview/BasketOverview.constants';
-import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
+import { BuyWarningModalContent } from 'components/organisms/BuyWarningModal/BuyWarningModal.types';
 import { CONNECTED_EMAIL_ERROR } from 'components/organisms/RegistryLayout/RegistryLayout.constants';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useMsgClient } from 'hooks';
@@ -43,9 +51,12 @@ import { useMsgClient } from 'hooks';
 import { EMAIL_RECEIPT, PAYMENT_OPTIONS } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
 import {
+  findMatchingSellOrders,
   getCardItems,
   getCryptoCurrencyIconSrc,
+  getSellOrdersCredits,
   getSteps,
+  getWarningModalContent,
 } from '../BuyCredits.utils';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
 
@@ -58,20 +69,28 @@ type UsePurchaseParams = {
   currencyAmount?: number;
   allowedDenoms?: AllowedDenom[];
   shouldRefreshProfileData: boolean;
+  setWarningModalState: UseStateSetter<{
+    openModal: boolean;
+    creditsAvailable: number;
+  }>;
+  allowedDenomsData?: QueryAllowedDenomsResponse;
+  warningModalContent: React.MutableRefObject<
+    BuyWarningModalContent | undefined
+  >;
+  pricePerCredit?: number;
 };
+
 type PurchaseParams = {
-  selectedSellOrders: ChooseCreditsFormSchemaType['sellOrders'];
   retirementReason?: string;
   country?: string;
   stateProvince?: string;
   postalCode?: string;
   retiring: boolean;
-  savePaymentMethod?: boolean;
-  createActiveAccount?: boolean;
   paymentMethodId?: string;
   stripe?: Stripe | null;
   elements?: StripeElements | null;
   confirmationTokenId?: string;
+  subscribeNewsletter?: boolean;
 };
 
 export const usePurchase = ({
@@ -83,15 +102,20 @@ export const usePurchase = ({
   currencyAmount,
   allowedDenoms,
   shouldRefreshProfileData,
+  setWarningModalState,
+  allowedDenomsData,
+  warningModalContent,
+  pricePerCredit,
 }: UsePurchaseParams) => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
+  const { track } = useTracker();
+  const location = useLocation();
+
   const { activeAccount, privActiveAccount } = useAuth();
   const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();
   const { data } = useMultiStep<BuyCreditsSchemaTypes>();
-  const email = data?.email;
-  const name = data?.name;
 
   const setTxBuySuccessfulModalAtom = useSetAtom(txBuySuccessfulModalAtom);
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
@@ -134,16 +158,21 @@ export const usePurchase = ({
     shouldRefreshProfileData,
   });
 
+  const { refetchSellOrders } = useFetchSellOrders();
+  const [updateAccountById] = useUpdateAccountByIdMutation();
+  const batchDenoms = useMemo(
+    () => data?.sellOrders?.map(order => order.batchDenom),
+    [data?.sellOrders],
+  );
+
   const purchase = useCallback(
     async ({
-      selectedSellOrders,
       retirementReason,
       country,
       stateProvince,
       postalCode,
       retiring,
-      savePaymentMethod,
-      createActiveAccount,
+      subscribeNewsletter,
       paymentMethodId,
       stripe,
       elements,
@@ -158,264 +187,372 @@ export const usePurchase = ({
       )
         return;
 
-      // If a logged in user with no email address (web3 account) provides one,
-      // we send a confirmation email
-      if (!!activeAccount && !privActiveAccount?.email && email && token) {
-        try {
-          const response: { error?: string } = await postData({
-            url: `${apiUri}/marketplace/v1/auth/email/create-token`,
-            data: {
-              email,
-            },
-            token,
-            retryCsrfRequest,
+      const trackingEvent = {
+        url: location.pathname,
+        projectName: project?.name,
+        projectId: project?.id,
+        creditClassId: project?.creditClassId,
+        crypto: paymentOption === PAYMENT_OPTIONS.CRYPTO,
+        batchDenoms,
+        retiring,
+        currencyDenom: data?.currency?.askBaseDenom,
+        quantity: data?.creditsAmount,
+        pricePerCredit,
+      };
+
+      track<BuyExtendedEvent>('buy4', trackingEvent);
+
+      const sellOrders = await refetchSellOrders();
+      const creditsInAllSellOrders = getSellOrdersCredits(sellOrders);
+      const creditsToBuy = data?.creditsAmount;
+      const requestedSellOrders = findMatchingSellOrders(
+        data,
+        sellOrders?.map(normalizeToUISellOrderInfo),
+      );
+      const creditsInRequestedSellOrders =
+        getSellOrdersCredits(requestedSellOrders);
+
+      const sellCanProceed =
+        creditsToBuy && creditsToBuy <= creditsInRequestedSellOrders;
+      if (sellCanProceed) {
+        const {
+          sellOrders: selectedSellOrders,
+          savePaymentMethod,
+          createAccount: createActiveAccount,
+          email,
+          name,
+        } = data;
+
+        if (email && subscribeNewsletter) {
+          await fetch(`${apiServerUrl}/subscribers/v1/add`, {
+            method: 'POST',
+            headers: new Headers({
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            }),
+            body: JSON.stringify({ email }),
           });
-          if (response.error) {
-            if (response.error === CONNECTED_EMAIL_ERROR) {
-              setConnectedEmailErrorModalAtom(atom => {
-                atom.open = true;
-                atom.email = email as string;
+        }
+
+        if (shouldRefreshProfileData) {
+          await updateAccountById({
+            variables: {
+              input: {
+                id: activeAccount?.id,
+                accountPatch: {
+                  name,
+                },
+              },
+            },
+          });
+        }
+
+        if (selectedSellOrders && creditsAmount) {
+          // If a logged in user with no email address (web3 account) provides one,
+          // we send a confirmation email
+          if (!!activeAccount && !privActiveAccount?.email && email && token) {
+            try {
+              const response: { error?: string } = await postData({
+                url: `${apiUri}/marketplace/v1/auth/email/create-token`,
+                data: {
+                  email,
+                },
+                token,
+                retryCsrfRequest,
               });
-              return;
+              if (response.error) {
+                if (response.error === CONNECTED_EMAIL_ERROR) {
+                  setConnectedEmailErrorModalAtom(atom => {
+                    atom.open = true;
+                    atom.email = email as string;
+                  });
+                  return;
+                }
+              }
+            } catch (e) {
+              setErrorBannerTextAtom(String(e));
             }
           }
-        } catch (e) {
-          setErrorBannerTextAtom(String(e));
-        }
-      }
 
-      const retirementJurisdiction =
-        retiring && country
-          ? getJurisdictionIsoCode({
-              country,
-              stateProvince,
-              postalCode,
-            })
-          : '';
+          const retirementJurisdiction =
+            retiring && country
+              ? getJurisdictionIsoCode({
+                  country,
+                  stateProvince,
+                  postalCode,
+                })
+              : '';
 
-      // Fiat payment
-      if (paymentOption === PAYMENT_OPTIONS.CARD && stripe && elements) {
-        // 1. Create payment intent
-        if (!paymentMethodId) {
-          const submitRes = await elements.submit();
-          if (submitRes?.error?.message) {
-            setErrorBannerTextAtom(submitRes?.error?.message);
-            return;
-          }
-        }
+          // Fiat payment
+          if (paymentOption === PAYMENT_OPTIONS.CARD && stripe && elements) {
+            // 1. Create payment intent
+            if (!paymentMethodId) {
+              const submitRes = await elements.submit();
+              if (submitRes?.error?.message) {
+                setErrorBannerTextAtom(submitRes?.error?.message);
+                return;
+              }
+            }
 
-        try {
-          if (token) {
-            await postData({
-              url: `${apiUri}/marketplace/v1/stripe/create-payment-intent`,
-              data: {
-                items: selectedSellOrders,
-                email,
-                name,
-                savePaymentMethod,
-                createActiveAccount,
-                paymentMethodId,
-                retirementJurisdiction,
-                retirementReason,
-              },
-              token,
-              retryCsrfRequest,
-              onSuccess: async res => {
-                const { clientSecret } = res;
-                // 2. Confirm payment
-                // with saved credit card
-                if (paymentMethodId) {
-                  const { error, paymentIntent } =
-                    await stripe.confirmCardPayment(clientSecret, {
-                      payment_method: paymentMethodId,
-                    });
-                  if (error) {
-                    setErrorBannerTextAtom(String(error));
-                    return;
-                  }
-                  setPaymentIntentId(paymentIntent.id);
-                } else {
-                  // or new credit card
-                  const { error, paymentIntent } = await stripe.confirmPayment({
-                    clientSecret,
-                    confirmParams: {
-                      confirmation_token: confirmationTokenId,
-                    },
-                    redirect: 'if_required',
-                  });
-                  if (error) {
-                    // This point is only reached if there's an immediate error when
-                    // confirming the payment. Show the error to your customer (for example, payment details incomplete)
-                    setErrorBannerTextAtom(String(error.message));
-                    return;
-                  }
-                  if (
-                    paymentIntent?.client_secret &&
-                    paymentIntent?.status === 'requires_action'
-                  ) {
-                    // If action is required (e.g., 3D Secure), handle it manually
-                    const { error: actionError } =
-                      await stripe.handleCardAction(
-                        paymentIntent.client_secret,
-                      );
-                    if (actionError) {
-                      setErrorBannerTextAtom(String(actionError.message));
-                      return;
-                    }
-                  }
-                  setPaymentIntentId(paymentIntent.id);
-                }
-              },
-            });
-          }
-        } catch (error) {
-          setErrorBannerTextAtom(String(error));
-        }
-      } else {
-        // Crypto payment
-        const msgBuyDirect = MsgBuyDirect.fromPartial({
-          buyer: wallet?.address,
-          orders: selectedSellOrders.map(order => ({
-            sellOrderId: order.sellOrderId,
-            bidPrice: order.bidPrice,
-            disableAutoRetire: !retiring,
-            quantity: String(order.quantity),
-            retirementReason: retirementReason,
-            retirementJurisdiction,
-          })),
-        });
-
-        await signAndBroadcast(
-          {
-            msgs: [msgBuyDirect],
-            fee: {
-              amount: [
-                {
-                  denom: 'uregen',
-                  amount: '5000',
-                },
-              ],
-              // We set gas higher than normal because if there are many sell orders to process,
-              // more gas will be used.
-              // In a follow up, we could simulate tx.
-              // User can also update that manually from Keplr before signing.
-              gas: '500000',
-            },
-          },
-          (): void => {
-            setProcessingModalAtom(atom => void (atom.open = true));
-          },
-          {
-            onError: async (error?: Error) => {
-              setProcessingModalAtom(atom => void (atom.open = false));
-              setErrorCodeAtom(ERRORS.DEFAULT);
-              setErrorModalAtom(
-                atom => void (atom.description = String(error)),
-              );
-            },
-            onSuccess: async (deliverTxResponse?: DeliverTxResponse) => {
-              const _txHash = deliverTxResponse?.transactionHash;
-              setTxHash(_txHash);
-
-              // Send purchase confirmation if email provided
-              if (email && token) {
-                const currencyIconSrc = getCryptoCurrencyIconSrc(
-                  currency.askBaseDenom,
-                  currency.askDenom,
-                );
-                const amountLabel = retiring
-                  ? _(msg`amount retired`)
-                  : _(msg`amount tradable`);
-
+            try {
+              if (token) {
                 await postData({
-                  url: `${apiUri}/marketplace/v1/confirm-crypto-order`,
+                  url: `${apiUri}/marketplace/v1/stripe/create-payment-intent`,
                   data: {
+                    items: selectedSellOrders,
                     email,
-                    currencyAmount,
-                    currencyIconSrc,
-                    displayDenom,
-                    projectName: project?.name,
-                    amountLabel,
-                    creditsAmount,
-                    txHref: getHashUrl(_txHash),
-                    txHash: truncate(_txHash),
-                    orderHref: `${
-                      window.location.origin
-                    }/dashboard/admin/my-orders#${_txHash?.toLowerCase()}`,
+                    name,
+                    savePaymentMethod,
+                    createActiveAccount,
+                    paymentMethodId,
+                    retirementJurisdiction,
+                    retirementReason,
                   },
                   token,
                   retryCsrfRequest,
+                  onSuccess: async res => {
+                    const { clientSecret } = res;
+                    // 2. Confirm payment
+                    // with saved credit card
+                    if (paymentMethodId) {
+                      const { error, paymentIntent } =
+                        await stripe.confirmCardPayment(clientSecret, {
+                          payment_method: paymentMethodId,
+                        });
+                      if (error) {
+                        setErrorBannerTextAtom(String(error));
+                        return;
+                      }
+                      setPaymentIntentId(paymentIntent.id);
+                    } else {
+                      // or new credit card
+                      const { error, paymentIntent } =
+                        await stripe.confirmPayment({
+                          clientSecret,
+                          confirmParams: {
+                            confirmation_token: confirmationTokenId,
+                          },
+                          redirect: 'if_required',
+                        });
+                      if (error) {
+                        // This point is only reached if there's an immediate error when
+                        // confirming the payment. Show the error to your customer (for example, payment details incomplete)
+                        const errorMessage = String(error.message);
+                        setErrorBannerTextAtom(errorMessage);
+                        track<BuyFailureEvent>('buyFailure', {
+                          ...trackingEvent,
+                          errorMessage,
+                        });
+                        return;
+                      }
+                      if (
+                        paymentIntent?.client_secret &&
+                        paymentIntent?.status === 'requires_action'
+                      ) {
+                        // If action is required (e.g., 3D Secure), handle it manually
+                        const { error: actionError } =
+                          await stripe.handleCardAction(
+                            paymentIntent.client_secret,
+                          );
+                        if (actionError) {
+                          const actionErrorMessage = String(
+                            actionError.message,
+                          );
+                          setErrorBannerTextAtom(actionErrorMessage);
+                          track<BuyFailureEvent>('buyFailure', {
+                            ...trackingEvent,
+                            errorMessage: actionErrorMessage,
+                          });
+                          return;
+                        }
+                      }
+                      setPaymentIntentId(paymentIntent.id);
+                      track<BuyExtendedEvent>('buySuccess', trackingEvent);
+                    }
+                  },
                 });
               }
+            } catch (error) {
+              const errorMessage = String(error);
+              setErrorBannerTextAtom(errorMessage);
+              track<BuyFailureEvent>('buyFailure', {
+                ...trackingEvent,
+                errorMessage,
+              });
+            }
+          } else {
+            // Crypto payment
+            const msgBuyDirect = MsgBuyDirect.fromPartial({
+              buyer: wallet?.address,
+              orders: selectedSellOrders.map(order => ({
+                sellOrderId: order.sellOrderId,
+                bidPrice: order.bidPrice,
+                disableAutoRetire: !retiring,
+                quantity: String(order.quantity),
+                retirementReason: retirementReason,
+                retirementJurisdiction,
+              })),
+            });
 
-              // In case of retirement, it's handled in useFetchRetirementForPurchase
-              if (!retiring) {
-                setProcessingModalAtom(atom => void (atom.open = false));
-                setTxBuySuccessfulModalAtom(atom => {
-                  atom.open = true;
-                  atom.cardItems = getCardItems({
-                    retiring,
-                    creditsAmount,
-                    currencyAmount,
-                    project,
-                    currency,
-                    displayDenom,
-                  });
-                  atom.buttonTitle = _(VIEW_PORTFOLIO);
-                  atom.onButtonClick = () =>
-                    setTxBuySuccessfulModalAtom(
-                      atom => void (atom.open = false),
-                    );
-                  atom.txHash = _txHash;
-                  atom.steps = getSteps(paymentOption, retiring);
-                  atom.description = email
-                    ? `${_(EMAIL_RECEIPT)} ${email}`
-                    : undefined;
-                });
-
-                await reactQueryClient.invalidateQueries({
-                  queryKey: [SELL_ORDERS_EXTENTED_KEY],
-                });
-                // Reload crypto orders and balances
-                if (wallet?.address) {
-                  await reactQueryClient.invalidateQueries(
-                    getOrdersByBuyerAddressKey(wallet?.address),
+            await signAndBroadcast(
+              {
+                msgs: [msgBuyDirect],
+                fee: {
+                  amount: [
+                    {
+                      denom: 'uregen',
+                      amount: '5000',
+                    },
+                  ],
+                  // We set gas higher than normal because if there are many sell orders to process,
+                  // more gas will be used.
+                  // In a follow up, we could simulate tx.
+                  // User can also update that manually from Keplr before signing.
+                  gas: '500000',
+                },
+              },
+              (): void => {
+                setProcessingModalAtom(atom => void (atom.open = true));
+              },
+              {
+                onError: async (error?: Error) => {
+                  setProcessingModalAtom(atom => void (atom.open = false));
+                  setErrorCodeAtom(ERRORS.DEFAULT);
+                  const errorMessage = String(error);
+                  setErrorModalAtom(
+                    atom => void (atom.description = errorMessage),
                   );
-                  await reactQueryClient.invalidateQueries({
-                    queryKey: ['balances', wallet?.address], // invalidate all query pages
+                  track<BuyFailureEvent>('buyFailure', {
+                    ...trackingEvent,
+                    errorMessage,
                   });
-                }
+                },
+                onSuccess: async (deliverTxResponse?: DeliverTxResponse) => {
+                  const _txHash = deliverTxResponse?.transactionHash;
+                  setTxHash(_txHash);
 
-                // Reset BuyCredits forms
-                handleSuccess();
-                navigate(`/dashboard/portfolio`);
+                  track<BuyExtendedEvent>('buySuccess', trackingEvent);
 
-                if (shouldRefreshProfileData) {
-                  await reactQueryClient.invalidateQueries({
-                    queryKey: getAccountByIdQueryKey({ id: activeAccount?.id }),
-                  });
-                }
-              }
-            },
-          },
-        );
+                  // Send purchase confirmation if email provided
+                  if (email && token) {
+                    const currencyIconSrc = getCryptoCurrencyIconSrc(
+                      currency.askBaseDenom,
+                      currency.askDenom,
+                    );
+                    const amountLabel = retiring
+                      ? _(msg`amount retired`)
+                      : _(msg`amount tradable`);
+
+                    await postData({
+                      url: `${apiUri}/marketplace/v1/confirm-crypto-order`,
+                      data: {
+                        email,
+                        currencyAmount,
+                        currencyIconSrc,
+                        displayDenom,
+                        projectName: project?.name,
+                        amountLabel,
+                        creditsAmount,
+                        txHref: getHashUrl(_txHash),
+                        txHash: truncate(_txHash),
+                        orderHref: `${
+                          window.location.origin
+                        }/dashboard/admin/my-orders#${_txHash?.toLowerCase()}`,
+                      },
+                      token,
+                      retryCsrfRequest,
+                    });
+                  }
+
+                  // In case of retirement, it's handled in useFetchRetirementForPurchase
+                  if (!retiring) {
+                    setProcessingModalAtom(atom => void (atom.open = false));
+                    setTxBuySuccessfulModalAtom(atom => {
+                      atom.open = true;
+                      atom.cardItems = getCardItems({
+                        retiring,
+                        creditsAmount,
+                        currencyAmount,
+                        project,
+                        currency,
+                        displayDenom,
+                      });
+                      atom.buttonTitle = _(VIEW_PORTFOLIO);
+                      atom.onButtonClick = () =>
+                        setTxBuySuccessfulModalAtom(
+                          atom => void (atom.open = false),
+                        );
+                      atom.txHash = _txHash;
+                      atom.steps = getSteps(paymentOption, retiring);
+                      atom.description = email
+                        ? `${_(EMAIL_RECEIPT)} ${email}`
+                        : undefined;
+                    });
+
+                    await reactQueryClient.invalidateQueries({
+                      queryKey: [SELL_ORDERS_EXTENTED_KEY],
+                    });
+                    // Reload crypto orders and balances
+                    if (wallet?.address) {
+                      await reactQueryClient.invalidateQueries(
+                        getOrdersByBuyerAddressKey(wallet?.address),
+                      );
+                      await reactQueryClient.invalidateQueries({
+                        queryKey: ['balances', wallet?.address], // invalidate all query pages
+                      });
+                    }
+
+                    // Reset BuyCredits forms
+                    handleSuccess();
+                    navigate(`/dashboard/portfolio`);
+
+                    if (shouldRefreshProfileData) {
+                      await reactQueryClient.invalidateQueries({
+                        queryKey: getAccountByIdQueryKey({
+                          id: activeAccount?.id,
+                        }),
+                      });
+                    }
+                  }
+                },
+              },
+            );
+          }
+        } else {
+          setWarningModalState({
+            openModal: true,
+            creditsAvailable: creditsInRequestedSellOrders,
+          });
+          warningModalContent.current = getWarningModalContent(
+            currency,
+            creditsInRequestedSellOrders,
+            _,
+            allowedDenomsData,
+            data,
+            creditsInAllSellOrders,
+          );
+        }
       }
     },
     [
       _,
       activeAccount,
+      allowedDenomsData,
+      batchDenoms,
       creditsAmount,
       currency,
       currencyAmount,
+      data,
       displayDenom,
-      email,
       handleSuccess,
-      name,
+      location.pathname,
       navigate,
       paymentOption,
+      pricePerCredit,
       privActiveAccount?.email,
       project,
       reactQueryClient,
+      refetchSellOrders,
       retryCsrfRequest,
       setConnectedEmailErrorModalAtom,
       setErrorBannerTextAtom,
@@ -423,10 +560,14 @@ export const usePurchase = ({
       setErrorModalAtom,
       setProcessingModalAtom,
       setTxBuySuccessfulModalAtom,
+      setWarningModalState,
       shouldRefreshProfileData,
       signAndBroadcast,
       token,
+      track,
+      updateAccountById,
       wallet?.address,
+      warningModalContent,
     ],
   );
   return purchase;

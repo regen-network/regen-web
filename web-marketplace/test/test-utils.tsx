@@ -9,8 +9,10 @@ import {
 } from '@testing-library/react';
 import { PrimitiveAtom, Provider as JotaiProvider } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
+import { AnalyticsProvider } from 'use-analytics';
 
 import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
+import { Analytics } from 'analytics';
 
 // Custom hook to setup react hook form context
 export function useCustomForm(
@@ -102,17 +104,19 @@ const CombinedProviders = ({
   jotaiDefaultValues,
 }: CombinedProvidersProps) => (
   <LinguiProvider>
-    <JotaiTestProvider
-      initialValues={jotaiDefaultValues ? jotaiDefaultValues : []}
-    >
-      {formDefaultValues ? (
-        <FormContextProvider formDefaultValues={formDefaultValues}>
-          {children}
-        </FormContextProvider>
-      ) : (
-        children
-      )}
-    </JotaiTestProvider>
+    <AnalyticsProvider instance={Analytics({})}>
+      <JotaiTestProvider
+        initialValues={jotaiDefaultValues ? jotaiDefaultValues : []}
+      >
+        {formDefaultValues ? (
+          <FormContextProvider formDefaultValues={formDefaultValues}>
+            {children}
+          </FormContextProvider>
+        ) : (
+          children
+        )}
+      </JotaiTestProvider>
+    </AnalyticsProvider>
   </LinguiProvider>
 );
 

@@ -58,6 +58,7 @@
     "history": "^5.3.0",
     "immer": "^9.0.19",
     "install": "^0.13.0",
+    "is-network-error": "^1.1.0",
     "jotai": "^2.0.1",
     "jotai-immer": "^0.2.0",
     "jsonld": "5.2.0",

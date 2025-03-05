@@ -11,6 +11,7 @@ import {
 import { Router } from '@remix-run/router';
 import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
+import { safeLazy } from 'utils/safeLazy';
 
 import { Maybe } from 'generated/graphql';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
@@ -46,52 +47,63 @@ import { projectDetailsLoader } from 'components/templates/ProjectDetails/Projec
 import { KeplrRoute } from '../../components/atoms';
 import { ProjectMetadata } from '../../pages/ProjectMetadata/ProjectMetadata';
 
-const Additionality = lazy(() => import('../../pages/Additionality'));
-const AllProjects = lazy(() => import('../../pages/Projects/AllProjects'));
-const BasicInfo = lazy(() => import('../../pages/BasicInfo'));
-const BatchDetails = lazy(() => import('../../pages/BatchDetails'));
-const BasketDetails = lazy(() => import('../../pages/BasketDetails'));
-const BuyCredits = lazy(() => import('../../pages/BuyCredits'));
-const ChooseCreditClassPage = lazy(
+const Additionality = safeLazy(() => import('../../pages/Additionality'));
+const AllProjects = safeLazy(() => import('../../pages/Projects/AllProjects'));
+const BasicInfo = safeLazy(() => import('../../pages/BasicInfo'));
+const BatchDetails = safeLazy(() => import('../../pages/BatchDetails'));
+const BasketDetails = safeLazy(() => import('../../pages/BasketDetails'));
+const BuyCredits = safeLazy(() => import('../../pages/BuyCredits'));
+const ChooseCreditClassPage = safeLazy(
   () => import('../../pages/ChooseCreditClass'),
 );
-const CreateCreditClassInfo = lazy(
+const CreateCreditClassInfo = safeLazy(
   () => import('../../pages/CreateCreditClassInfo'),
 );
-const CreateCreditClass = lazy(() => import('../../pages/CreateCreditClass'));
-const CreditClassDetails = lazy(() => import('../../pages/CreditClassDetails'));
-const Dashboard = lazy(() => import('../../pages/Dashboard'));
-const Description = lazy(() => import('../../pages/Description'));
-const EcocreditBatches = lazy(() => import('../../pages/EcocreditBatches'));
-const EcocreditsByAccount = lazy(
+const CreateCreditClass = safeLazy(
+  () => import('../../pages/CreateCreditClass'),
+);
+const CreditClassDetails = safeLazy(
+  () => import('../../pages/CreditClassDetails'),
+);
+const Dashboard = safeLazy(() => import('../../pages/Dashboard'));
+const Description = safeLazy(() => import('../../pages/Description'));
+const EcocreditBatches = safeLazy(() => import('../../pages/EcocreditBatches'));
+const EcocreditsByAccount = safeLazy(
   () => import('../../pages/EcocreditsByAccount'),
 );
+
+// ErrorPage cannot use safeLazy because it could create a circular dependency
+// since safeLazy itself uses ErrorPage as its fallback component when imports fail.
 const ErrorPage = lazy(() => import('../../pages/ErrorPage'));
-const Home = lazy(() => import('../../pages/Home'));
-const LandStewards = lazy(() => import('../../pages/LandStewards'));
-const LoginPage = lazy(() => import('../../pages/Login'));
-const Media = lazy(() => import('../../pages/Media'));
-const MethodologyDetails = lazy(() => import('../../pages/MethodologyDetails'));
-const NotFoundPage = lazy(() => import('../../pages/NotFound'));
-const Post = lazy(() => import('../../pages/Post'));
-const PrefinanceProjects = lazy(
+const Home = safeLazy(() => import('../../pages/Home'));
+const LandStewards = safeLazy(() => import('../../pages/LandStewards'));
+const LoginPage = safeLazy(() => import('../../pages/Login'));
+const Media = safeLazy(() => import('../../pages/Media'));
+const MethodologyDetails = safeLazy(
+  () => import('../../pages/MethodologyDetails'),
+);
+const NotFoundPage = safeLazy(() => import('../../pages/NotFound'));
+const Post = safeLazy(() => import('../../pages/Post'));
+const PrefinanceProjects = safeLazy(
   () => import('../../pages/Projects/PrefinanceProjects'),
 );
-const Project = lazy(() => import('../../pages/Project'));
-const Projects = lazy(() => import('../../pages/Projects'));
-const ProjectCreate = lazy(() => import('../../pages/ProjectCreate'));
-const ProjectFinished = lazy(() => import('../../pages/ProjectFinished'));
-const ProjectLocation = lazy(() => import('../../pages/ProjectLocation'));
-const ProjectReview = lazy(() => import('../../pages/ProjectReview'));
-const Roles = lazy(() => import('../../pages/Roles'));
-const VerifyEmail = lazy(() => import('../../pages/VerifyEmail'));
-const ProjectEdit = lazy(() => import('../../pages/ProjectEdit'));
-const Activity = lazy(() => import('../../pages/Activity'));
-const CreateBatch = lazy(() => import('../../pages/CreateBatch'));
-const Storefront = lazy(() => import('../../pages/Marketplace/Storefront'));
-const ConnectWalletPage = lazy(() => import('../../pages/ConnectWalletPage'));
-const ProfileEdit = lazy(() => import('../../pages/ProfileEdit'));
-const Orders = lazy(() => import('../../pages/Orders'));
+const Project = safeLazy(() => import('../../pages/Project'));
+const Projects = safeLazy(() => import('../../pages/Projects'));
+const ProjectCreate = safeLazy(() => import('../../pages/ProjectCreate'));
+const ProjectFinished = safeLazy(() => import('../../pages/ProjectFinished'));
+const ProjectLocation = safeLazy(() => import('../../pages/ProjectLocation'));
+const ProjectReview = safeLazy(() => import('../../pages/ProjectReview'));
+const Roles = safeLazy(() => import('../../pages/Roles'));
+const VerifyEmail = safeLazy(() => import('../../pages/VerifyEmail'));
+const ProjectEdit = safeLazy(() => import('../../pages/ProjectEdit'));
+const Activity = safeLazy(() => import('../../pages/Activity'));
+const CreateBatch = safeLazy(() => import('../../pages/CreateBatch'));
+const Storefront = safeLazy(() => import('../../pages/Marketplace/Storefront'));
+const ConnectWalletPage = safeLazy(
+  () => import('../../pages/ConnectWalletPage'),
+);
+const ProfileEdit = safeLazy(() => import('../../pages/ProfileEdit'));
+const Orders = safeLazy(() => import('../../pages/Orders'));
 
 type RouterProps = {
   reactQueryClient: QueryClient;

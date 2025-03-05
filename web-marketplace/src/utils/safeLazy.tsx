@@ -1,4 +1,4 @@
-import { ComponentType, lazy } from 'react';
+import { ComponentType, lazy, ReactNode } from 'react';
 
 import ErrorPage from 'pages/ErrorPage';
 
@@ -6,6 +6,7 @@ type SafeLazyOptions = {
   retries?: number;
   retryDelay?: number;
   onError?: (error: Error) => void;
+  fallback?: ReactNode;
 };
 
 /**
@@ -24,6 +25,7 @@ export function safeLazy<T extends ComponentType<any>>(
   const {
     retries = 2,
     retryDelay = 1000,
+    fallback,
     // eslint-disable-next-line no-console, lingui/no-unlocalized-strings
     onError = error => console.error('Lazy import failed:', error),
   } = options;
@@ -48,7 +50,8 @@ export function safeLazy<T extends ComponentType<any>>(
     return {
       // React's lazy() function expects the Promise to resolve to an object
       // with a 'default' property that contains the component.
-      default: () => <ErrorPage importError={lastError} />,
+      default: () =>
+        fallback ? fallback : <ErrorPage importError={lastError} />,
     };
   });
 }

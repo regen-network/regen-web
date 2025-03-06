@@ -1,5 +1,5 @@
-query allBuyModal {
-  allBuyModal {
+query allBuyFlowChooseCreditsCard {
+  allBuyFlowChooseCreditsCard {
     language
     infoCard {
       title

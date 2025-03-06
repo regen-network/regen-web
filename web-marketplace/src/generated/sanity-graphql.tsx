@@ -166,7 +166,7 @@ export type BasketDetailsPageFilter = {
   language?: Maybe<StringFilter>;
 };
 
-export type BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosBookCallOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage = BasketDetailsPage | BridgePage | BuyModal | BuyModalOptions | BuyersPage | CaseStudiesPage | CaseStudyPage | Claim | ClassPrefinanceTimelineStatus | CommunityPage | ComplianceInfo | CreateCreditClassPage | CreateMethodologyPage | CreateProjectPage | CredibilityCard | CreditCategory | CreditCertification | CreditClass | CreditClassPage | CreditType | DevelopersPage | Doc | EcologicalCreditCard | EcologicalImpact | EcologicalOutcome | Faq | FeaturedProjectCard | FeaturedSection | GettingStartedResourcesCard | GettingStartedResourcesSection | HomePage | HomePageWeb | LandManagementPractice | LandStewardsPage | MainnetPage | Media | Methodology | MethodologyReviewProcessPage | NctPage | OffsetMethod | Partner | PartnersPage | Person | PresskitPage | ProfilePage | Program | Project | ProjectActivity | ProjectEcosystem | ProjectPage | ProjectPrefinanceTimelineStatus | ProjectRating | ProjectsPage | Resource | ResourcesPage | SciencePage | Sdg | SharedSections | SoldOutProjects | StatCard | Tag | TeamPage | TebuBanner | TerrasosBookCall | TerrasosProject | TokenPage | WalletAddressRegistrationPage;
+export type BasketDetailsPageOrBridgePageOrBuyFlowChooseCreditsCardOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosBookCallOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage = BasketDetailsPage | BridgePage | BuyFlowChooseCreditsCard | BuyersPage | CaseStudiesPage | CaseStudyPage | Claim | ClassPrefinanceTimelineStatus | CommunityPage | ComplianceInfo | CreateCreditClassPage | CreateMethodologyPage | CreateProjectPage | CredibilityCard | CreditCategory | CreditCertification | CreditClass | CreditClassPage | CreditType | DevelopersPage | Doc | EcologicalCreditCard | EcologicalImpact | EcologicalOutcome | Faq | FeaturedProjectCard | FeaturedSection | GettingStartedResourcesCard | GettingStartedResourcesSection | HomePage | HomePageWeb | LandManagementPractice | LandStewardsPage | MainnetPage | Media | Methodology | MethodologyReviewProcessPage | NctPage | OffsetMethod | Partner | PartnersPage | Person | PresskitPage | ProfilePage | Program | Project | ProjectActivity | ProjectEcosystem | ProjectPage | ProjectPrefinanceTimelineStatus | ProjectRating | ProjectsPage | Resource | ResourcesPage | SciencePage | Sdg | SharedSections | SoldOutProjects | StatCard | Tag | TeamPage | TebuBanner | TerrasosBookCall | TerrasosProject | TokenPage | WalletAddressRegistrationPage;
 
 export type BasketDetailsPageSorting = {
   _id?: Maybe<SortOrder>;
@@ -369,8 +369,8 @@ export type ButtonSorting = {
   buttonBlankTarget?: Maybe<SortOrder>;
 };
 
-export type BuyModal = Document & {
-  __typename?: 'BuyModal';
+export type BuyFlowChooseCreditsCard = Document & {
+  __typename?: 'BuyFlowChooseCreditsCard';
   /** Document ID */
   _id?: Maybe<Scalars['ID']>;
   /** Document type */
@@ -386,7 +386,7 @@ export type BuyModal = Document & {
   language?: Maybe<Scalars['String']>;
 };
 
-export type BuyModalFilter = {
+export type BuyFlowChooseCreditsCardFilter = {
   /** Apply filters on document level */
   _?: Maybe<Sanity_DocumentFilter>;
   _id?: Maybe<IdFilter>;
@@ -399,49 +399,7 @@ export type BuyModalFilter = {
   language?: Maybe<StringFilter>;
 };
 
-export type BuyModalOptions = Document & {
-  __typename?: 'BuyModalOptions';
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  _key?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  cards?: Maybe<Array<Maybe<ActionCard>>>;
-  language?: Maybe<Scalars['String']>;
-};
-
-export type BuyModalOptionsFilter = {
-  /** Apply filters on document level */
-  _?: Maybe<Sanity_DocumentFilter>;
-  _id?: Maybe<IdFilter>;
-  _type?: Maybe<StringFilter>;
-  _createdAt?: Maybe<DatetimeFilter>;
-  _updatedAt?: Maybe<DatetimeFilter>;
-  _rev?: Maybe<StringFilter>;
-  _key?: Maybe<StringFilter>;
-  title?: Maybe<StringFilter>;
-  language?: Maybe<StringFilter>;
-};
-
-export type BuyModalOptionsSorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
-  _key?: Maybe<SortOrder>;
-  title?: Maybe<SortOrder>;
-  language?: Maybe<SortOrder>;
-};
-
-export type BuyModalSorting = {
+export type BuyFlowChooseCreditsCardSorting = {
   _id?: Maybe<SortOrder>;
   _type?: Maybe<SortOrder>;
   _createdAt?: Maybe<SortOrder>;
@@ -2101,6 +2059,7 @@ export type CreditClassPage = Document & {
   _key?: Maybe<Scalars['String']>;
   creditClassDetailsSection?: Maybe<DetailsSection>;
   creditImage?: Maybe<Image>;
+  bookCallLink?: Maybe<Link>;
   language?: Maybe<Scalars['String']>;
 };
 
@@ -2115,6 +2074,7 @@ export type CreditClassPageFilter = {
   _key?: Maybe<StringFilter>;
   creditClassDetailsSection?: Maybe<DetailsSectionFilter>;
   creditImage?: Maybe<ImageFilter>;
+  bookCallLink?: Maybe<LinkFilter>;
   language?: Maybe<StringFilter>;
 };
 
@@ -2127,6 +2087,7 @@ export type CreditClassPageSorting = {
   _key?: Maybe<SortOrder>;
   creditClassDetailsSection?: Maybe<DetailsSectionSorting>;
   creditImage?: Maybe<ImageSorting>;
+  bookCallLink?: Maybe<LinkSorting>;
   language?: Maybe<SortOrder>;
 };
 
@@ -3911,7 +3872,7 @@ export type InternationalizedArrayReferenceValue = {
   __typename?: 'InternationalizedArrayReferenceValue';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
-  value?: Maybe<BasketDetailsPageOrBridgePageOrBuyModalOrBuyModalOptionsOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosBookCallOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage>;
+  value?: Maybe<BasketDetailsPageOrBridgePageOrBuyFlowChooseCreditsCardOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosBookCallOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage>;
 };
 
 export type InternationalizedArrayReferenceValueFilter = {
@@ -5963,8 +5924,7 @@ export type RootQuery = {
   ProjectPage?: Maybe<ProjectPage>;
   BridgePage?: Maybe<BridgePage>;
   BasketDetailsPage?: Maybe<BasketDetailsPage>;
-  BuyModal?: Maybe<BuyModal>;
-  BuyModalOptions?: Maybe<BuyModalOptions>;
+  BuyFlowChooseCreditsCard?: Maybe<BuyFlowChooseCreditsCard>;
   Resource?: Maybe<Resource>;
   Faq?: Maybe<Faq>;
   Doc?: Maybe<Doc>;
@@ -6041,8 +6001,7 @@ export type RootQuery = {
   allProjectPage: Array<ProjectPage>;
   allBridgePage: Array<BridgePage>;
   allBasketDetailsPage: Array<BasketDetailsPage>;
-  allBuyModal: Array<BuyModal>;
-  allBuyModalOptions: Array<BuyModalOptions>;
+  allBuyFlowChooseCreditsCard: Array<BuyFlowChooseCreditsCard>;
   allResource: Array<Resource>;
   allFaq: Array<Faq>;
   allDoc: Array<Doc>;
@@ -6202,12 +6161,7 @@ export type RootQueryBasketDetailsPageArgs = {
 };
 
 
-export type RootQueryBuyModalArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type RootQueryBuyModalOptionsArgs = {
+export type RootQueryBuyFlowChooseCreditsCardArgs = {
   id: Scalars['ID'];
 };
 
@@ -6652,17 +6606,9 @@ export type RootQueryAllBasketDetailsPageArgs = {
 };
 
 
-export type RootQueryAllBuyModalArgs = {
-  where?: Maybe<BuyModalFilter>;
-  sort?: Maybe<Array<BuyModalSorting>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-};
-
-
-export type RootQueryAllBuyModalOptionsArgs = {
-  where?: Maybe<BuyModalOptionsFilter>;
-  sort?: Maybe<Array<BuyModalOptionsSorting>>;
+export type RootQueryAllBuyFlowChooseCreditsCardArgs = {
+  where?: Maybe<BuyFlowChooseCreditsCardFilter>;
+  sort?: Maybe<Array<BuyFlowChooseCreditsCardSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -9114,14 +9060,14 @@ export type AllBasketDetailsPageQuery = (
   )> }
 );
 
-export type AllBuyModalQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllBuyFlowChooseCreditsCardQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllBuyModalQuery = (
+export type AllBuyFlowChooseCreditsCardQuery = (
   { __typename?: 'RootQuery' }
-  & { allBuyModal: Array<(
-    { __typename?: 'BuyModal' }
-    & Pick<BuyModal, 'language'>
+  & { allBuyFlowChooseCreditsCard: Array<(
+    { __typename?: 'BuyFlowChooseCreditsCard' }
+    & Pick<BuyFlowChooseCreditsCard, 'language'>
     & { infoCard?: Maybe<(
       { __typename?: 'InfoCard' }
       & Pick<InfoCard, 'title' | 'descriptionRaw'>
@@ -9130,28 +9076,6 @@ export type AllBuyModalQuery = (
         & CustomImageFieldsFragment
       )> }
     )> }
-  )> }
-);
-
-export type AllBuyModalOptionsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllBuyModalOptionsQuery = (
-  { __typename?: 'RootQuery' }
-  & { allBuyModalOptions: Array<(
-    { __typename?: 'BuyModalOptions' }
-    & Pick<BuyModalOptions, 'language' | 'title'>
-    & { cards?: Maybe<Array<Maybe<(
-      { __typename?: 'ActionCard' }
-      & Pick<ActionCard, 'title' | 'descriptionRaw' | 'noteRaw'>
-      & { button?: Maybe<(
-        { __typename?: 'Button' }
-        & ButtonFieldsFragment
-      )>, image?: Maybe<(
-        { __typename?: 'CustomImage' }
-        & CustomImageFieldsFragment
-      )> }
-    )>>> }
   )> }
 );
 
@@ -9429,6 +9353,9 @@ export type AllCreditClassPageQuery = (
     )>, creditImage?: Maybe<(
       { __typename?: 'Image' }
       & ImageFieldsFragment
+    )>, bookCallLink?: Maybe<(
+      { __typename?: 'Link' }
+      & LinkFieldsFragment
     )> }
   )> }
 );
@@ -10990,9 +10917,9 @@ export function useAllBasketDetailsPageLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type AllBasketDetailsPageQueryHookResult = ReturnType<typeof useAllBasketDetailsPageQuery>;
 export type AllBasketDetailsPageLazyQueryHookResult = ReturnType<typeof useAllBasketDetailsPageLazyQuery>;
 export type AllBasketDetailsPageQueryResult = Apollo.QueryResult<AllBasketDetailsPageQuery, AllBasketDetailsPageQueryVariables>;
-export const AllBuyModalDocument = gql`
-    query allBuyModal {
-  allBuyModal {
+export const AllBuyFlowChooseCreditsCardDocument = gql`
+    query allBuyFlowChooseCreditsCard {
+  allBuyFlowChooseCreditsCard {
     language
     infoCard {
       title
@@ -11006,78 +10933,31 @@ export const AllBuyModalDocument = gql`
     ${CustomImageFieldsFragmentDoc}`;
 
 /**
- * __useAllBuyModalQuery__
+ * __useAllBuyFlowChooseCreditsCardQuery__
  *
- * To run a query within a React component, call `useAllBuyModalQuery` and pass it any options that fit your needs.
- * When your component renders, `useAllBuyModalQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useAllBuyFlowChooseCreditsCardQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllBuyFlowChooseCreditsCardQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useAllBuyModalQuery({
+ * const { data, loading, error } = useAllBuyFlowChooseCreditsCardQuery({
  *   variables: {
  *   },
  * });
  */
-export function useAllBuyModalQuery(baseOptions?: Apollo.QueryHookOptions<AllBuyModalQuery, AllBuyModalQueryVariables>) {
+export function useAllBuyFlowChooseCreditsCardQuery(baseOptions?: Apollo.QueryHookOptions<AllBuyFlowChooseCreditsCardQuery, AllBuyFlowChooseCreditsCardQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AllBuyModalQuery, AllBuyModalQueryVariables>(AllBuyModalDocument, options);
+        return Apollo.useQuery<AllBuyFlowChooseCreditsCardQuery, AllBuyFlowChooseCreditsCardQueryVariables>(AllBuyFlowChooseCreditsCardDocument, options);
       }
-export function useAllBuyModalLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllBuyModalQuery, AllBuyModalQueryVariables>) {
+export function useAllBuyFlowChooseCreditsCardLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllBuyFlowChooseCreditsCardQuery, AllBuyFlowChooseCreditsCardQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AllBuyModalQuery, AllBuyModalQueryVariables>(AllBuyModalDocument, options);
+          return Apollo.useLazyQuery<AllBuyFlowChooseCreditsCardQuery, AllBuyFlowChooseCreditsCardQueryVariables>(AllBuyFlowChooseCreditsCardDocument, options);
         }
-export type AllBuyModalQueryHookResult = ReturnType<typeof useAllBuyModalQuery>;
-export type AllBuyModalLazyQueryHookResult = ReturnType<typeof useAllBuyModalLazyQuery>;
-export type AllBuyModalQueryResult = Apollo.QueryResult<AllBuyModalQuery, AllBuyModalQueryVariables>;
-export const AllBuyModalOptionsDocument = gql`
-    query allBuyModalOptions {
-  allBuyModalOptions {
-    language
-    title
-    cards {
-      title
-      descriptionRaw
-      button {
-        ...buttonFields
-      }
-      noteRaw
-      image {
-        ...customImageFields
-      }
-    }
-  }
-}
-    ${ButtonFieldsFragmentDoc}
-${CustomImageFieldsFragmentDoc}`;
-
-/**
- * __useAllBuyModalOptionsQuery__
- *
- * To run a query within a React component, call `useAllBuyModalOptionsQuery` and pass it any options that fit your needs.
- * When your component renders, `useAllBuyModalOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAllBuyModalOptionsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useAllBuyModalOptionsQuery(baseOptions?: Apollo.QueryHookOptions<AllBuyModalOptionsQuery, AllBuyModalOptionsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AllBuyModalOptionsQuery, AllBuyModalOptionsQueryVariables>(AllBuyModalOptionsDocument, options);
-      }
-export function useAllBuyModalOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllBuyModalOptionsQuery, AllBuyModalOptionsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AllBuyModalOptionsQuery, AllBuyModalOptionsQueryVariables>(AllBuyModalOptionsDocument, options);
-        }
-export type AllBuyModalOptionsQueryHookResult = ReturnType<typeof useAllBuyModalOptionsQuery>;
-export type AllBuyModalOptionsLazyQueryHookResult = ReturnType<typeof useAllBuyModalOptionsLazyQuery>;
-export type AllBuyModalOptionsQueryResult = Apollo.QueryResult<AllBuyModalOptionsQuery, AllBuyModalOptionsQueryVariables>;
+export type AllBuyFlowChooseCreditsCardQueryHookResult = ReturnType<typeof useAllBuyFlowChooseCreditsCardQuery>;
+export type AllBuyFlowChooseCreditsCardLazyQueryHookResult = ReturnType<typeof useAllBuyFlowChooseCreditsCardLazyQuery>;
+export type AllBuyFlowChooseCreditsCardQueryResult = Apollo.QueryResult<AllBuyFlowChooseCreditsCardQuery, AllBuyFlowChooseCreditsCardQueryVariables>;
 export const AllBuyersPageDocument = gql`
     query allBuyersPage {
   allBuyersPage {
@@ -11522,9 +11402,13 @@ export const AllCreditClassPageDocument = gql`
     creditImage {
       ...imageFields
     }
+    bookCallLink {
+      ...linkFields
+    }
   }
 }
-    ${ImageFieldsFragmentDoc}`;
+    ${ImageFieldsFragmentDoc}
+${LinkFieldsFragmentDoc}`;
 
 /**
  * __useAllCreditClassPageQuery__

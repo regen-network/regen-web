@@ -14,7 +14,9 @@ import { Link, RegistryIconLink } from 'components/atoms';
 const RegistryLayoutFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
   const { pathname } = useLocation();
-  const isHidden = ['/project-pages'].some(route => pathname.startsWith(route));
+  const isHidden =
+    /^\/project-pages$/.test(pathname) ||
+    /^\/project\/[^\/]+\/buy$/.test(pathname);
 
   const footerItems: [FooterItem, FooterItem, FooterItem, FooterItem] = [
     {

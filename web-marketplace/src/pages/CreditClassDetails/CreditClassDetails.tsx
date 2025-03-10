@@ -14,7 +14,7 @@ import { useCreditClassByUriQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getLinkHref, openLink } from 'lib/button';
-import { client, client as sanityClient } from 'lib/clients/sanity';
+import { client } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { queryClassIssuers } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
@@ -58,8 +58,8 @@ function CreditClassDetails({
 
   const { data: sanityCreditClassPageData } = useQuery(
     getAllCreditClassPageQuery({
-      sanityClient,
-      enabled: !!sanityClient,
+      sanityClient: client,
+      enabled: !!client,
       languageCode: selectedLanguage,
     }),
   );

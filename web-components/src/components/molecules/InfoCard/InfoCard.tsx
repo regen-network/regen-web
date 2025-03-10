@@ -12,6 +12,7 @@ export interface Props {
   image?: ImageType;
   description: string | JSX.Element;
   sx?: SxProps<Theme>;
+  className?: string;
 }
 
 const InfoCard = ({
@@ -19,12 +20,13 @@ const InfoCard = ({
   image,
   description,
   sx = [],
+  className,
 }: Props): JSX.Element => {
   return (
     <Box
+      className={className}
       sx={[
         {
-          maxWidth: 500,
           borderRadius: '5px',
           background: image
             ? `url(${image.src}), linear-gradient(204.4deg, #EEF1F3 5.94%, #F1F9F6 51.92%, #F9FBF8 97.89%);`

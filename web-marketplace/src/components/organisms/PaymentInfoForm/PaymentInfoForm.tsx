@@ -66,6 +66,7 @@ export const PaymentInfoForm = ({
     activeStep,
     data,
     handleResetData: removeMultiStepFormData,
+    handleActiveStep,
   } = useMultiStep();
   const [paymentInfoValid, setPaymentInfoValid] = useState(false);
   const setCardDetailsMissing = useSetAtom(cardDetailsMissingAtom);
@@ -113,6 +114,8 @@ export const PaymentInfoForm = ({
 
       // force Stripe Elements to re-render
       setPaymentElementKey(prev => prev + 1);
+
+      handleActiveStep(0);
     }
   }, [
     shouldResetForm,
@@ -122,6 +125,7 @@ export const PaymentInfoForm = ({
     accountName,
     paymentMethods,
     setShouldResetForm,
+    handleActiveStep,
   ]);
 
   const paymentMethodId = useWatch({

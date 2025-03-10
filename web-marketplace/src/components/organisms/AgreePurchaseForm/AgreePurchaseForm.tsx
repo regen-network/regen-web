@@ -119,8 +119,15 @@ export const AgreePurchaseForm = ({
       // and reset the current form fields
       removeMultiStepFormData();
       form.reset();
+      handleActiveStep(0);
     }
-  }, [shouldResetForm, form, removeMultiStepFormData, setShouldResetForm]);
+  }, [
+    shouldResetForm,
+    form,
+    removeMultiStepFormData,
+    setShouldResetForm,
+    handleActiveStep,
+  ]);
 
   return (
     <Form

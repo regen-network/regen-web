@@ -125,6 +125,7 @@ export const ChooseCreditsForm = React.memo(
       handleSave: updateMultiStepData,
       activeStep,
       handleResetData: removeMultiStepFormData,
+      handleActiveStep,
     } = useMultiStep<BuyCreditsSchemaTypes>();
     const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
     const [shouldResetForm, setShouldResetForm] = useAtom(
@@ -305,8 +306,16 @@ export const ChooseCreditsForm = React.memo(
         // and reset the current form fields
         removeMultiStepFormData();
         form.reset();
+
+        handleActiveStep(0);
       }
-    }, [shouldResetForm, form, removeMultiStepFormData, setShouldResetForm]);
+    }, [
+      shouldResetForm,
+      form,
+      removeMultiStepFormData,
+      setShouldResetForm,
+      handleActiveStep,
+    ]);
 
     // Advanced settings not enabled for MVP
     // const [advanceSettingsOpen, setAdvanceSettingsOpen] = useState(false);

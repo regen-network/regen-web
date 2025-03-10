@@ -68,11 +68,7 @@ const FilePreview = ({
       {video && url ? (
         <VideoPreview url={url} />
       ) : isPdf(mimeType) ? (
-        <PdfPreview
-          file={url}
-          pageHeight={pdfPageHeight}
-          className="px-[65px] h-[100%]"
-        />
+        <PdfPreview file={url} pageHeight={pdfPageHeight} />
       ) : (
         !isImage(mimeType) && (
           <TextOrIconFilePreview

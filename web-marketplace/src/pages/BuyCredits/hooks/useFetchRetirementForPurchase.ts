@@ -133,7 +133,11 @@ export const useFetchRetirementForPurchase = ({
         );
       });
       handleSuccess();
-      navigate(`/certificate/${paymentIntentId}?name=${name}`);
+      navigate(
+        `/certificate/${paymentIntentId}?name=${encodeURIComponent(
+          name || '',
+        )}`,
+      );
     }
   }, [
     _,
@@ -240,7 +244,11 @@ export const useFetchRetirementForPurchase = ({
         });
       }
       handleSuccess();
-      navigate(`/certificate/${retirement.nodeId}?name=${name}`);
+      navigate(
+        `/certificate/${retirement.nodeId}?name=${encodeURIComponent(
+          name || '',
+        )}`,
+      );
 
       // Reload account data with fiat orders or new name
       // Doing it after navigating otherwise can cause the page to reload before

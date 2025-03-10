@@ -10,3 +10,5 @@ export const paymentOptionAtom = atom<PaymentOptionsType>(
   PAYMENT_OPTIONS.CRYPTO,
 );
 export const cardDetailsMissingAtom = atom(true);
+
+export const resetBuyCreditsFormAtom = atom(false);

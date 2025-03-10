@@ -136,7 +136,7 @@ const RegistryLayoutHeader: React.FC = () => {
                 isHome && 'text-sc-button-text-icon-light',
               )}
             /> */}
-            {chainId && accountOrWallet && disconnect && (
+            {chainId && accountOrWallet && (
               <UserMenuItems
                 nameOrAddress={
                   activeAccount?.name ||

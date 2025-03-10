@@ -9,7 +9,10 @@ import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabe
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { Body } from 'web-components/src/components/typography/Body';
 
-import { cardDetailsMissingAtom } from 'pages/BuyCredits/BuyCredits.atoms';
+import {
+  cardDetailsMissingAtom,
+  resetBuyCreditsFormAtom,
+} from 'pages/BuyCredits/BuyCredits.atoms';
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -52,16 +55,24 @@ export const AgreePurchaseForm = ({
   isCardPayment,
 }: AgreePurchaseFormProps) => {
   const { _ } = useLingui();
-  const { handleBack, handleActiveStep } = useMultiStep();
+  const {
+    handleBack,
+    handleActiveStep,
+    handleResetData: removeMultiStepFormData,
+  } = useMultiStep();
   const [cardDetailsMissing, setCardDetailsMissing] = useAtom(
     cardDetailsMissingAtom,
   );
+  const [shouldResetForm, setShouldResetForm] = useAtom(
+    resetBuyCreditsFormAtom,
+  );
+
   const form = useZodForm({
     schema: agreePurchaseFormSchema(retiring),
     defaultValues: initialValues,
     mode: 'onBlur',
   });
-  const { errors, isValid, isSubmitting } = useFormState({
+  const { isValid, isSubmitting } = useFormState({
     control: form.control,
   });
 
@@ -99,6 +110,24 @@ export const AgreePurchaseForm = ({
       setCardDetailsMissing(true);
     };
   }, [setCardDetailsMissing]);
+
+  // Reset form on log out
+  useEffect(() => {
+    if (shouldResetForm) {
+      setShouldResetForm(false);
+      // On form reset, remove multi-step form data,
+      // and reset the current form fields
+      removeMultiStepFormData();
+      form.reset();
+      handleActiveStep(0);
+    }
+  }, [
+    shouldResetForm,
+    form,
+    removeMultiStepFormData,
+    setShouldResetForm,
+    handleActiveStep,
+  ]);
 
   return (
     <Form

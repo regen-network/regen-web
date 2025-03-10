@@ -182,7 +182,7 @@ export const EditableInput = ({
           )}
         </>
       ) : (
-        <div className="flex justify-between h-[47px] items-center">
+        <div className="flex justify-between h-25 items-center">
           <span>{localizeNumber(+currentValue)}</span>
           {isEditable && (
             <EditButtonIcon

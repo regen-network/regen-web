@@ -12,6 +12,7 @@ import {
 import { Router } from '@remix-run/router';
 import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
+import { safeLazy } from 'utils/safeLazy';
 
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 
@@ -20,10 +21,10 @@ import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
-const AllProjects = lazy(() => import('../../pages/Projects/AllProjects'));
+const AllProjects = safeLazy(() => import('../../pages/Projects/AllProjects'));
 const ErrorPage = lazy(() => import('../../pages/ErrorPage'));
-const Project = lazy(() => import('../../pages/Project'));
-const Projects = lazy(() => import('../../pages/Projects'));
+const Project = safeLazy(() => import('../../pages/Project'));
+const Projects = safeLazy(() => import('../../pages/Projects'));
 
 type RouterProps = {
   reactQueryClient: QueryClient;

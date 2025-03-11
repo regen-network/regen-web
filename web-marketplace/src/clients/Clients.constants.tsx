@@ -1,9 +1,12 @@
-import { lazy, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { safeLazy } from 'utils/safeLazy';
 
 import { CLIENT_CONFIG, MARKETPLACE_CLIENT_TYPE } from './Clients.types';
 
-const RegenProvider = lazy(() => import('./regen/Regen.Providers'));
-const TerrasosProvider = lazy(() => import('./terrasos/Terrasos.Providers'));
+const RegenProvider = safeLazy(() => import('./regen/Regen.Providers'));
+const TerrasosProvider = safeLazy(
+  () => import('./terrasos/Terrasos.Providers'),
+);
 
 export const PROVIDERS_MAPPING: Record<MARKETPLACE_CLIENT_TYPE, ReactNode> = {
   regen: <RegenProvider />,

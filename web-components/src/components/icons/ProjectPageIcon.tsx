@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 import { useGradientId } from './hooks/useGradientId';

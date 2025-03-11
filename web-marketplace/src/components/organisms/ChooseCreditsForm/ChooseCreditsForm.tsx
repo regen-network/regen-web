@@ -407,7 +407,7 @@ export const ChooseCreditsForm = React.memo(
                   : _(NEXT)
               }
               onPrev={onPrev}
-              className="float-right pt-40 mr-20 sm:mr-40 md:mr-0"
+              className="float-right pt-40 sm:pt-60 mr-20 sm:mr-40 md:mr-0"
             />
           </div>
           {project && allowedDenoms && (

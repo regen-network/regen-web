@@ -32,27 +32,30 @@ const InfoCard = ({
             ? `url(${image.src}), linear-gradient(204.4deg, #EEF1F3 5.94%, #F1F9F6 51.92%, #F9FBF8 97.89%);`
             : 'none',
           backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'bottom 0 right 0',
-          boxShadow: '0px 2px 0px rgba(0, 0, 0, 0.15)',
+          backgroundPosition: 'bottom 20% right 0',
           border: theme => `1px solid ${theme.palette.grey[100]}`,
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
     >
-      <Box sx={{ p: 5, paddingBottom: 3.75 }}>
-        <Box sx={{ maxWidth: 300 }}>
+      <div className="p-20">
+        <div className="max-w-[265px] sm:max-w-[300px]">
           <Subtitle size="lg" sx={{ mb: 2 }}>
             {parseText(title)}
           </Subtitle>
-          <Body as="div" sx={{ mt: 1.75 }}>
+          <Body
+            className="max-w-[210px] sm:max-w-[275px]"
+            as="div"
+            sx={{ mt: 1.75 }}
+          >
             {isValidElement(description) ? (
               description
             ) : (
               <BlockContent content={description} />
             )}
           </Body>
-        </Box>
-      </Box>
+        </div>
+      </div>
     </Box>
   );
 };

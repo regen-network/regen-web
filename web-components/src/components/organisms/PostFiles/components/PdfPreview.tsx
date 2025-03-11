@@ -3,6 +3,7 @@ import {
   Suspense,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -33,6 +34,21 @@ export const PdfPreview = ({ file, pageHeight, className }: Props) => {
   const [pdfHeight, setPdfHeight] = useState<number | undefined>(undefined);
   const [pdfWidth, setPdfWidth] = useState<number | undefined>(undefined);
 
+  /**
+   * Updates the dimensions of the PDF based on container and canvas dimensions.
+   *
+   * This function adjusts the PDF display size by:
+   * 1. Getting current container (PDF wrapper) width and height from containerRef
+   * 2. Getting current canvas (PDF) dimensions from canvasRef if available
+   * 3. Setting PDF dimensions based on aspect ratio (check whether PDF is portrait or landscape):
+   *    - For portrait orientation (height > width): sets height and clears width
+   *    - For landscape orientation: sets width to container width and clears height
+   *
+   * @returns {void}
+   * @depends containerRef - React ref for the container element
+   * @depends canvasRef - React ref for the canvas element
+   * @depends pageHeight - Height of PDF page
+   */
   const updatePdfDimensions = useCallback(() => {
     if (containerRef.current) {
       const currentContainerWidth = containerRef.current.clientWidth;
@@ -59,10 +75,10 @@ export const PdfPreview = ({ file, pageHeight, className }: Props) => {
   }, [pageHeight]);
 
   // Debounced updatePdfDimensions function
-  const debouncedUpdateDimensions = useCallback(() => {
-    const debouncedFn = debounce(updatePdfDimensions, 100);
-    debouncedFn();
-  }, [updatePdfDimensions]);
+  const debouncedUpdateDimensions = useMemo(
+    () => debounce(updatePdfDimensions, 100),
+    [updatePdfDimensions],
+  );
 
   useEffect(() => {
     // Update on resize

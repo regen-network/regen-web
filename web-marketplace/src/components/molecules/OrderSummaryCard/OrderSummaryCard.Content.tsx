@@ -129,7 +129,7 @@ export function OrderSummaryContent({
         />
       </div>
       <div className={`col-span-full ${hasError ? 'pt-30' : 'pt-10'}`}>
-        <hr className="border-t border-grey-300 border-solid border-l-0 border-r-0 border-b-0" />
+        <hr className="border-t border-grey-300 border-solid border-l-0 border-r-0 border-b-0 mt-0 mb-0" />
       </div>
       <div className="flex items-end col-span-full gap-5">
         <OrderSummmaryRowHeader

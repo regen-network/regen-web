@@ -60,7 +60,7 @@ function CertificatePage(): JSX.Element {
               certificateNotFoundSrc="/svg/certificate-not-found.svg"
               certificateNotFoundAlt={_(msg`certificate not found`)}
               certificateNotFoundTitle={_(
-                msg`This certificate has not been generated yet because the credit transfer to you is still pending.`,
+                msg`This certificate has not been generated yet because the credit transfer to you is still pending. Please refresh the page in a few moments.`,
               )}
               certificateNotFoundDescription={
                 <Trans>

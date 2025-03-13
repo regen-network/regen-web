@@ -396,6 +396,10 @@ msgstr ""
 msgid "Advanced settings"
 msgstr ""
 
+#: src/pages/Certificate/Certificate.tsx:66
+msgid "After refreshing the page several times, if you do not see your certificate within 24 hours, please reach out to <0>support@regen.network</0>."
+msgstr ""
+
 #: src/pages/BatchDetails/BatchDetails.tsx:129
 msgid "All credits"
 msgstr ""
@@ -2139,8 +2143,8 @@ msgid "i.e. Sunnybrook Farms"
 msgstr ""
 
 #: src/pages/Certificate/Certificate.tsx:66
-msgid "If you do not see your certificate within 24 hours, please reach out to <0>support@regen.network</0>."
-msgstr ""
+#~ msgid "If you do not see your certificate within 24 hours, please reach out to <0>support@regen.network</0>."
+#~ msgstr ""
 
 #: src/components/organisms/MediaForm/MediaFormStory.tsx:164
 msgid "If you don’t have a video for this project, you can add a photo to enhance the story section of your project page."

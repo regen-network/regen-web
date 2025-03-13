@@ -75,7 +75,7 @@ export function OrderSummaryContent({
   );
 
   return (
-    <div className="grid grid-cols-[75px_1fr] sm:grid-cols-[90px_1fr] max-w-full w-full pr-15 sm:px-[20px] pb-[30px] items-center sm:max-w-[330px]">
+    <div className="grid gap-5 grid-cols-[75px_1fr] sm:grid-cols-[90px_1fr] max-w-full w-full pr-15 sm:px-[20px] items-center sm:max-w-[330px]">
       <Title
         variant="h5"
         className="col-span-2 text-base mt-0 sm:mt-[30px] mb-5 sm:mb-[15px]"
@@ -84,25 +84,31 @@ export function OrderSummaryContent({
       </Title>
       <OrderSummmaryRowHeader
         text={_(msg`project`)}
-        className="self-start mt-5"
+        className="self-start mt-[4px] sm:mt-[6px]"
       />
       <p className="text-[14px] sm:text-base sm:font-normal font-sans self-start m-0">
         {projectName}
       </p>
-      <OrderSummmaryRowHeader text={_(msg`avg price per credit`)} />
+      <OrderSummmaryRowHeader
+        text={_(msg`avg price per credit`)}
+        className="leading-[14px] sm:leading-4"
+      />
       <AmountWithCurrency
         amount={pricePerCredit || 0}
         currency={currency}
         displayDenom={displayDenom}
         classes={{
           root: 'justify-start',
-          denom: 'pt-[8px] text-[14px] sm:text-base',
+          denom: 'pt-5 sm:pt-[8px] text-[14px] sm:text-base',
         }}
         tooltipText={
           paymentOption !== PAYMENT_OPTIONS.CARD ? _(CRYPTO_TOOLTIP_TEXT) : ''
         }
       />
-      <OrderSummmaryRowHeader text={_(msg`# credits`)} className="pt-5" />
+      <OrderSummmaryRowHeader
+        text={_(msg`# credits`)}
+        className="pt-[4px] sm:pt-5"
+      />
       <div className="text-base font-normal font-sans text-[14px] sm:text-base">
         <EditableInput
           value={credits.toString()}
@@ -123,12 +129,12 @@ export function OrderSummaryContent({
         />
       </div>
       <div className={`col-span-full ${hasError ? 'pt-30' : 'pt-10'}`}>
-        <hr className="border-t border-grey-300 border-solid border-l-0 border-r-0 border-b-0" />
+        <hr className="border-t border-grey-300 border-solid border-l-0 border-r-0 border-b-0 mt-0 mb-0" />
       </div>
       <div className="flex items-end col-span-full gap-5">
         <OrderSummmaryRowHeader
           text={_(msg`total price`)}
-          className="pb-[9px]"
+          className="pb-[6px] sm:pb-[7px]"
         />
         <AmountWithCurrency
           amount={currencyAmount}
@@ -137,7 +143,7 @@ export function OrderSummaryContent({
           classes={{
             amountContainer: 'pt-[11px] sm:pt-5',
             amount: 'font-bold font-sans sm:text-[22px]',
-            denom: 'pt-[12px] text-[14px] sm:text-base',
+            denom: 'pt-15 sm:pt-[14px] text-[14px] sm:text-base',
           }}
         />
       </div>

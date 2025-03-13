@@ -17,7 +17,7 @@ export const OrderSummaryCard = (orderSummary: OrderSummaryProps) => {
     userBalance,
   } = orderSummary;
   return (
-    <Card className="relative w-full max-w-[560px] lg:max-w-[330px] h-[100%] py-20 sm:py-0 flex flex-2 sm:flex-col border-grey-300">
+    <Card className="relative w-full max-w-[560px] lg:max-w-[330px] h-[100%] pb-[15px] sm:pb-[30px] pt-20 sm:pt-0 flex flex-2 sm:flex-col border-grey-300">
       <OrderSummaryImage
         src={order.image}
         prefinanceProject={order.prefinanceProject}

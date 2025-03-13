@@ -31,7 +31,7 @@ export function CreditsAmountHeader({
 
   const { clearErrors } = useFormContext<ChooseCreditsFormSchemaType>();
   return (
-    <div className="flex justify-between items-center my-15 sm:mt-30">
+    <div className="flex justify-between items-center mt-15 sm:mt-30">
       <Title variant="h2" className="text-lg font-black">
         <Trans>Amount</Trans>
       </Title>

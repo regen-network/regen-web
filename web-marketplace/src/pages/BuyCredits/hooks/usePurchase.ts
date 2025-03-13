@@ -175,6 +175,12 @@ export const usePurchase = ({
       elements,
       confirmationTokenId,
     }: PurchaseParams) => {
+      console.log('creditsAmount', creditsAmount);
+      console.log('currencyAmount', currencyAmount);
+      console.log('project', project);
+      console.log('currency', currency);
+      console.log('displayDenom', displayDenom);
+
       if (
         !creditsAmount ||
         !currencyAmount ||
@@ -197,7 +203,7 @@ export const usePurchase = ({
         pricePerCredit,
       };
 
-      track<BuyExtendedEvent>('buy4', trackingEvent);
+      await track<BuyExtendedEvent>('buy4', trackingEvent);
 
       const sellOrders = await refetchSellOrders();
       const creditsInAllSellOrders = getSellOrdersCredits(sellOrders);

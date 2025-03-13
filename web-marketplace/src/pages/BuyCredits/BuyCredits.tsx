@@ -102,7 +102,7 @@ export const BuyCredits = () => {
           formId={formModel.formId}
           steps={formModel.steps}
           initialValues={{}}
-          classes={{ formWrap: 'max-w-[942px]', root: 'pb-0 sm:pb-50' }}
+          classes={{ formWrap: 'max-w-[942px]', root: 'pb-0 sm:pb-[200px]' }}
           forceStep={
             paymentOption === PAYMENT_OPTIONS.CARD &&
             cardDetailsMissing &&

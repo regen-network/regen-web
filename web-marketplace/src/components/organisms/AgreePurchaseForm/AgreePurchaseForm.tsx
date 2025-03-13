@@ -183,7 +183,7 @@ export const AgreePurchaseForm = ({
         saveDisabled={!isValid || isSubmitting}
         saveText={_(msg`purchase now`)}
         onPrev={handleBack}
-        className="float-right pt-40 sm:pt-60 mr-20 sm:mr-40 md:mr-0"
+        className="flex justify-end pt-40 sm:pt-60 mr-20 sm:mr-40 md:mr-0"
       />
     </Form>
   );

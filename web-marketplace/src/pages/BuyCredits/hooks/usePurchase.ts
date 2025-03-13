@@ -175,12 +175,6 @@ export const usePurchase = ({
       elements,
       confirmationTokenId,
     }: PurchaseParams) => {
-      console.log('creditsAmount', creditsAmount);
-      console.log('currencyAmount', currencyAmount);
-      console.log('project', project);
-      console.log('currency', currency);
-      console.log('displayDenom', displayDenom);
-
       if (
         !creditsAmount ||
         !currencyAmount ||
@@ -527,20 +521,20 @@ export const usePurchase = ({
               },
             );
           }
-        } else {
-          setWarningModalState({
-            openModal: true,
-            creditsAvailable: creditsInRequestedSellOrders,
-          });
-          warningModalContent.current = getWarningModalContent(
-            currency,
-            creditsInRequestedSellOrders,
-            _,
-            data,
-            creditsInAllSellOrders,
-            allowedDenoms,
-          );
         }
+      } else {
+        setWarningModalState({
+          openModal: true,
+          creditsAvailable: creditsInRequestedSellOrders,
+        });
+        warningModalContent.current = getWarningModalContent(
+          currency,
+          creditsInRequestedSellOrders,
+          _,
+          data,
+          creditsInAllSellOrders,
+          allowedDenoms,
+        );
       }
     },
     [

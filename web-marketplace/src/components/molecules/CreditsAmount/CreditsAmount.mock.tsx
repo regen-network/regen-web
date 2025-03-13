@@ -1,9 +1,9 @@
 /* eslint-disable lingui/no-unlocalized-strings */
 import {
+  AXELAR_USDC_DENOM,
   EVMOS_DENOM,
   REGEN_DENOM,
   USDC_DENOM,
-  AXELAR_USDC_DENOM,
 } from 'config/allowedBaseDenoms';
 
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';

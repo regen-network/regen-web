@@ -10,6 +10,13 @@ import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { ChooseCreditsForm } from './ChooseCreditsForm';
 import { ChooseCreditsFormSchemaType } from './ChooseCreditsForm.schema';
 
+vi.mock('react-router-dom', () => ({
+  ...vi.importActual('react-router-dom'),
+  useLocation: vi.fn(() => ({
+    state: { from: '/project/test/buy' },
+  })),
+}));
+
 describe('ChooseCreditsForm', () => {
   const props = {
     retiring: true,

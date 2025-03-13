@@ -29,7 +29,7 @@ export interface GoogleLoginEvent {
 
 // Buy tracking event metadata specification
 
-interface BuyBaseEvent {
+export interface BuyBaseEvent {
   creditClassId?: string | null;
   projectId?: string | null;
   projectName?: string | null;
@@ -42,28 +42,16 @@ export interface Buy1Event extends BuyBaseEvent {
   creditClassName?: string;
 }
 
-export interface Buy2Event extends BuyBaseEvent {
-  batchDenom?: string;
+export interface BuyExtendedEvent extends BuyBaseEvent {
+  batchDenoms?: string[];
   currencyDenom?: string;
-  price?: string;
+  pricePerCredit?: number;
   quantity?: number;
-  retirementAction?: string;
+  retiring: boolean;
+  crypto: boolean;
 }
 
-interface BuyOutcomeBaseEvent {
-  batchDenom?: string;
-  currencyDenom?: string;
-  price?: string;
-  projectId?: string | null;
-  projectName?: string | null;
-  quantity: number;
-  retirementAction?: string;
-  url: string;
-}
-
-export interface BuySuccessEvent extends BuyOutcomeBaseEvent {}
-
-export interface BuyFailureEvent extends BuyOutcomeBaseEvent {
+export interface BuyFailureEvent extends BuyExtendedEvent {
   errorMessage?: string;
 }
 

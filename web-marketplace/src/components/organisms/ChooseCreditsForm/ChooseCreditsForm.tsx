@@ -361,6 +361,7 @@ export const ChooseCreditsForm = React.memo(
                     cardDisabled={cardDisabled}
                     isConnected={isConnected}
                     setupWalletModal={setupWalletModal}
+                    project={project}
                   />
                   {currency && (
                     <CreditsAmount

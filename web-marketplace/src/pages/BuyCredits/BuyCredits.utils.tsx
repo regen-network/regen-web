@@ -1,7 +1,7 @@
 import { UseFormSetValue } from 'react-hook-form';
 import { i18n } from '@lingui/core';
 import { msg, plural, Trans } from '@lingui/macro';
-import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import {
   AXELAR_USDC_DENOM,
   EEUR_DENOM,
@@ -82,9 +82,9 @@ export const getWarningModalContent = (
   currency: { askDenom: string; askBaseDenom: string } | undefined,
   creditsInRequestedSellOrders: number,
   _: TranslatorType,
-  allowedDenomsData: QueryAllowedDenomsResponse | undefined,
   data: BuyCreditsSchemaTypes,
   creditsInAllSellOrders: number | undefined,
+  allowedDenoms?: AllowedDenom[],
 ): BuyWarningModalContent | undefined => {
   if (
     currency?.askDenom === USD_DENOM &&
@@ -155,7 +155,7 @@ export const getWarningModalContent = (
             <p className="uppercase font-muli text-sm font-extrabold pb-10">
               <Trans>amount now available in</Trans>
               {` ${findDisplayDenom({
-                allowedDenoms: allowedDenomsData?.allowedDenoms,
+                allowedDenoms: allowedDenoms,
                 bankDenom: data?.currency?.askDenom!,
                 baseDenom: data?.currency?.askBaseDenom!,
               })}`}

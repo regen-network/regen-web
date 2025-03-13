@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useLingui } from '@lingui/react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery } from '@tanstack/react-query';
@@ -9,7 +8,6 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
-import { useUpdateAccountByIdMutation } from 'generated/graphql';
 import { useLedger } from 'ledger';
 import { warningBannerTextAtom } from 'lib/atoms/banner.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
@@ -18,18 +16,17 @@ import {
   switchWalletModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { apiServerUrl } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { getSubscribersStatusQuery } from 'lib/queries/react-query/registry-server/getSubscribersStatusQuery/getSubscribersStatusQuery';
+import { BuyExtendedEvent } from 'lib/tracker/types';
+import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchUserBalance } from 'pages/BuyCredits/hooks/useFetchUserBalance';
-import { useFetchSellOrders } from 'pages/Marketplace/Storefront/hooks/useFetchSellOrders';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
-import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
@@ -69,12 +66,9 @@ import {
 import { PAYMENT_OPTIONS, stripeKey } from './BuyCredits.constants';
 import { BuyCreditsSchemaTypes, CardDetails } from './BuyCredits.types';
 import {
-  findMatchingSellOrders,
   getCreditsAvailableBannerText,
   getCryptoCurrencies,
   getOrderedSellOrders,
-  getSellOrdersCredits,
-  getWarningModalContent,
 } from './BuyCredits.utils';
 import { usePurchase } from './hooks/usePurchase';
 
@@ -123,7 +117,6 @@ export const BuyCreditsForm = ({
     useMultiStep<BuyCreditsSchemaTypes>();
   const { wallet, isConnected, activeWalletAddr, loaded } = useWallet();
   const { activeAccount, privActiveAccount } = useAuth();
-  const [updateAccountById] = useUpdateAccountByIdMutation();
   const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
   const cardDetailsMissing = useAtomValue(cardDetailsMissingAtom);
   const {
@@ -134,7 +127,8 @@ export const BuyCreditsForm = ({
     onButtonClick,
   } = useLoginData({});
   const navigate = useNavigate();
-  const { _ } = useLingui();
+  const { track } = useTracker();
+  const location = useLocation();
   const warningModalContent = useRef<BuyWarningModalContent | undefined>();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
@@ -148,8 +142,6 @@ export const BuyCreditsForm = ({
     openModal: false,
     creditsAvailable: 0,
   });
-
-  const { refetchSellOrders } = useFetchSellOrders();
 
   const cardDisabled = cardSellOrders.length === 0;
 
@@ -213,15 +205,53 @@ export const BuyCreditsForm = ({
     isBuyFlowDisabled,
   ]);
 
+  const creditsAmount = data?.[CREDITS_AMOUNT];
+  const currencyAmount = data?.[CURRENCY_AMOUNT];
+  const pricePerCredit = useMemo(() => {
+    return currencyAmount && creditsAmount
+      ? parseFloat((currencyAmount / creditsAmount).toFixed(6))
+      : undefined;
+  }, [creditsAmount, currencyAmount]);
+
+  const card = useMemo(
+    () => paymentOption === PAYMENT_OPTIONS.CARD,
+    [paymentOption],
+  );
+
   const paymentInfoFormSubmit = useCallback(
     async (values: PaymentInfoFormSchemaType) => {
+      track<BuyExtendedEvent>('buy3', {
+        url: location.pathname,
+        projectName: project?.name,
+        projectId: project?.id,
+        creditClassId: project?.creditClassId,
+        crypto: !card,
+        batchDenoms: data?.sellOrders?.map(order => order.batchDenom),
+        retiring,
+        currencyDenom: data?.currency?.askBaseDenom,
+        quantity: data?.creditsAmount,
+        pricePerCredit,
+      });
+
       const { paymentMethodId, ...others } = values;
       // we don't store paymentMethodId in local storage for security reasons,
       // only in current state
       handleSaveNext({ ...data, ...others });
       setPaymentMethodId(paymentMethodId);
     },
-    [data, handleSaveNext, setPaymentMethodId],
+    [
+      card,
+      data,
+      handleSaveNext,
+      location.pathname,
+      pricePerCredit,
+      project?.creditClassId,
+      project?.id,
+      project?.name,
+      retiring,
+      setPaymentMethodId,
+      track,
+    ],
   );
 
   const shouldRefreshProfileData =
@@ -237,8 +267,6 @@ export const BuyCreditsForm = ({
     cardDisabled && !data?.[CURRENCY]
       ? defaultCryptoCurrency
       : data?.[CURRENCY];
-  const creditsAmount = data?.[CREDITS_AMOUNT];
-  const currencyAmount = data?.[CURRENCY_AMOUNT];
   const creditTypePrecision = creditTypeData?.creditType?.precision;
 
   const filteredCryptoSellOrders = useMemo(
@@ -269,6 +297,9 @@ export const BuyCreditsForm = ({
     currencyAmount,
     allowedDenoms,
     shouldRefreshProfileData,
+    setWarningModalState,
+    warningModalContent,
+    pricePerCredit,
   });
   const agreePurchaseFormSubmit = useCallback(
     async (
@@ -276,117 +307,33 @@ export const BuyCreditsForm = ({
       stripe?: Stripe | null,
       elements?: StripeElements | null,
     ) => {
-      if (project) {
-        const sellOrders = await refetchSellOrders();
-        const creditsInAllSellOrders = getSellOrdersCredits(sellOrders);
-        const creditsToBuy = data?.creditsAmount;
-        const requestedSellOrders = findMatchingSellOrders(
-          data,
-          sellOrders?.map(normalizeToUISellOrderInfo),
-        );
-        const creditsInRequestedSellOrders =
-          getSellOrdersCredits(requestedSellOrders);
-
-        const sellCanProceed =
-          creditsToBuy && creditsToBuy <= creditsInRequestedSellOrders;
-        if (sellCanProceed) {
-          const {
-            retirementReason,
-            country,
-            stateProvince,
-            postalCode,
-            subscribeNewsletter,
-            // followProject,
-          } = values;
-          const {
-            sellOrders: selectedSellOrders,
-            savePaymentMethod,
-            createAccount: createActiveAccount,
-            email,
-            name,
-          } = data;
-
-          if (email && subscribeNewsletter) {
-            await fetch(`${apiServerUrl}/subscribers/v1/add`, {
-              method: 'POST',
-              headers: new Headers({
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-              }),
-              body: JSON.stringify({ email }),
-            });
-          }
-
-          if (shouldRefreshProfileData) {
-            await updateAccountById({
-              variables: {
-                input: {
-                  id: activeAccount?.id,
-                  accountPatch: {
-                    name,
-                  },
-                },
-              },
-            });
-          }
-
-          if (selectedSellOrders && creditsAmount)
-            purchase({
-              selectedSellOrders,
-              retiring,
-              retirementReason,
-              country,
-              stateProvince,
-              postalCode,
-              savePaymentMethod,
-              createActiveAccount,
-              paymentMethodId,
-              stripe,
-              elements,
-              confirmationTokenId,
-            });
-        } else {
-          setWarningModalState({
-            openModal: true,
-            creditsAvailable: creditsInRequestedSellOrders,
-          });
-          warningModalContent.current = getWarningModalContent(
-            currency,
-            creditsInRequestedSellOrders,
-            _,
-            allowedDenomsData,
-            data,
-            creditsInAllSellOrders,
-          );
-        }
-      }
+      const {
+        retirementReason,
+        country,
+        stateProvince,
+        postalCode,
+        subscribeNewsletter,
+        // followProject,
+      } = values;
+      purchase({
+        retiring,
+        retirementReason,
+        country,
+        stateProvince,
+        postalCode,
+        paymentMethodId,
+        stripe,
+        elements,
+        confirmationTokenId,
+        subscribeNewsletter,
+      });
     },
-    [
-      project,
-      refetchSellOrders,
-      data,
-      shouldRefreshProfileData,
-      creditsAmount,
-      purchase,
-      retiring,
-      paymentMethodId,
-      confirmationTokenId,
-      updateAccountById,
-      activeAccount?.id,
-      currency,
-      _,
-      allowedDenomsData,
-    ],
+    [purchase, retiring, paymentMethodId, confirmationTokenId],
   );
 
   const goToPaymentInfo = useCallback(
     () => handleActiveStep(1),
     [handleActiveStep],
-  );
-
-  const card = useMemo(
-    () => paymentOption === PAYMENT_OPTIONS.CARD,
-    [paymentOption],
   );
 
   const creditsAvailable = useMemo(
@@ -450,6 +397,20 @@ export const BuyCreditsForm = ({
             cardSellOrders={cardSellOrders}
             cryptoSellOrders={cryptoSellOrders}
             onSubmit={async (values: ChooseCreditsFormSchemaType) => {
+              track<BuyExtendedEvent>('buy2', {
+                url: location.pathname,
+                projectName: project?.name,
+                projectId: project?.id,
+                creditClassId: project?.creditClassId,
+                crypto: !card,
+                batchDenoms: values.sellOrders.map(order => order.batchDenom),
+                retiring,
+                currencyDenom: values.currency.askBaseDenom,
+                quantity: values.creditsAmount,
+                pricePerCredit: parseFloat(
+                  (values.currencyAmount / values.creditsAmount).toFixed(6),
+                ),
+              });
               handleSaveNext({
                 ...data,
                 ...values,
@@ -593,16 +554,15 @@ export const BuyCreditsForm = ({
         activeStep !== 0 &&
         currency &&
         creditsAmount &&
-        currencyAmount && (
+        currencyAmount &&
+        pricePerCredit && (
           // We need to put this inside the form itself
           // so we can display amounts updates in real time
           <OrderSummaryCard
             order={{
               projectName: project.name,
               prefinanceProject: false, // TODO APP-367
-              pricePerCredit: parseFloat(
-                (currencyAmount / creditsAmount).toFixed(6),
-              ),
+              pricePerCredit,
               credits: creditsAmount,
               currency,
               image: project.imgSrc,

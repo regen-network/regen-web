@@ -25,15 +25,11 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
 }) => {
   return (
     <Card
-      borderColor={selected ? undefined : 'transparent'}
-      sx={{
-        mx: 2.5,
-        p: 2.5,
-        mb: 2.5,
-        backgroundColor: selected ? 'grey.50' : 'primary.main',
-        cursor: 'pointer',
-      }}
-      className="w-full"
+      className={`${
+        selected
+          ? 'border-grey-300 bg-grey-100'
+          : 'border-transparent bg-grey-0'
+      } w-full shadow-none cursor-pointer mx-10 p-10 mb-10`}
       onClick={() => onProfileClick && onProfileClick(id, selected)}
     >
       <Grid container wrap="nowrap">

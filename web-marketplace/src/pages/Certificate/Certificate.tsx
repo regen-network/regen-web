@@ -64,8 +64,8 @@ function CertificatePage(): JSX.Element {
               )}
               certificateNotFoundDescription={
                 <Trans>
-                  If you do not see your certificate within 24 hours, please
-                  reach out to{' '}
+                  After refreshing the page several times, if you do not see
+                  your certificate within 24 hours, please reach out to{' '}
                   <a href="support@regen.network">support@regen.network</a>.
                 </Trans>
               }

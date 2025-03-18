@@ -1,7 +1,7 @@
-import { QueryBatchesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { QueryBatchesResponse } from '@regen-network/api/regen/ecocredit/v1/query';
 import { QueryClient } from '@tanstack/react-query';
 
-import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQueryClient';
+import { getRPCQueryClient } from 'ledger';
 import { getBatchesQuery } from 'lib/queries/react-query/ecocredit/getBatchesQuery/getBatchesQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
@@ -14,16 +14,18 @@ type LoaderType = {
 export const ecocreditBatchesLoader =
   ({ queryClient }: LoaderType) =>
   async ({ params }: { params: any }) => {
-    const ecocreditClient = await getEcocreditQueryClient();
+    const rpcQueryClient = await getRPCQueryClient();
     const page = Number(params.page) - 1;
 
     const batchesQuery = getBatchesQuery({
-      client: ecocreditClient,
+      client: rpcQueryClient,
       request: {
         pagination: {
-          offset: page * PAGINATED_BATCHES_ROWS_PER_PAGE,
-          limit: PAGINATED_BATCHES_ROWS_PER_PAGE,
+          offset: BigInt(page * PAGINATED_BATCHES_ROWS_PER_PAGE),
+          limit: BigInt(PAGINATED_BATCHES_ROWS_PER_PAGE),
           countTotal: true,
+          reverse: false,
+          key: new Uint8Array(),
         },
       },
     });

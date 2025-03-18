@@ -14,10 +14,9 @@ import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { BasketTokens } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { NormalizedRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
-
-import { BasketTokens } from 'hooks/useBasketTokens';
 
 import { BasketsTable, EcocreditsTable } from '..';
 import { RetirementCertificatesTable } from '../RetirementCertificatesTable/RetirementCertificatesTable';

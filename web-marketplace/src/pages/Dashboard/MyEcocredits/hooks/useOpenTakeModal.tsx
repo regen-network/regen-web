@@ -1,11 +1,10 @@
 import { useCallback } from 'react';
-import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import { QueryBasketResponse } from '@regen-network/api/regen/ecocredit/basket/v1/query';
 
+import { BasketTokens } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
 import { TakeFromBasket1 } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
-
-import type { BasketTokens } from 'hooks/useBasketTokens';
 
 type Props = {
   basketTokens: BasketTokens[];

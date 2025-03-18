@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
-import { OrderBy } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
+import { MsgBridge } from '@regen-network/api/regen/ecocredit/v1/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
@@ -46,7 +46,7 @@ interface Output {
 }
 
 export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
-  const { txClient } = useLedger();
+  const { queryClient } = useLedger();
   const statusToRefetchRef = useRef<boolean[]>([]);
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
@@ -70,11 +70,11 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
   // TxsEvent
   const { data: txsEventData, isLoading } = useQuery(
     getGetTxsEventQuery({
-      client: txClient,
-      enabled: !!txClient,
+      client: queryClient,
+      enabled: !!queryClient,
       request: {
         events: [
-          `${messageActionEquals}'/${MsgBridge.$type}'`,
+          `${messageActionEquals}'${MsgBridge.typeUrl}'`,
           `message.sender='${address}'`,
         ],
         orderBy: OrderBy.ORDER_BY_DESC,
@@ -130,9 +130,7 @@ export const useFetchBridgedEcocredits = ({ address }: Props): Output => {
   const txMessages = txsWithResponse
     .map((tx, index) => ({
       txIndex: index,
-      messages: tx.body?.messages.filter(
-        m => m.typeUrl === `/${MsgBridge.$type}`,
-      ),
+      messages: tx.body?.messages.filter(m => m.typeUrl === MsgBridge.typeUrl),
     }))
     .filter(hasMessages);
 

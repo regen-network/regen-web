@@ -1,8 +1,8 @@
-import { BasketBalanceInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import { BasketBalanceInfo } from '@regen-network/api/regen/ecocredit/basket/v1/query';
 import {
   BatchInfo,
   ProjectInfo,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+} from '@regen-network/api/regen/ecocredit/v1/query';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { ClassProjectInfo } from 'types/ledger/ecocredit';

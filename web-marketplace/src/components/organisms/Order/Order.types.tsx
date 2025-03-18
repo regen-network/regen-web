@@ -1,4 +1,4 @@
-import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
+import { AllowedDenom } from '@regen-network/api/regen/ecocredit/marketplace/v1/state';
 
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 

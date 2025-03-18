@@ -25,12 +25,12 @@ const DenomLabel = ({
   size,
   sx = [],
 }: Props): JSX.Element => {
-  const { marketplaceClient } = useLedger();
+  const { queryClient } = useLedger();
   const { data: allowedDenomsData, isLoading: isLoadingAllowedDenoms } =
     useQuery(
       getAllowedDenomQuery({
-        client: marketplaceClient,
-        enabled: !!marketplaceClient,
+        client: queryClient,
+        enabled: !!queryClient,
       }),
     );
 

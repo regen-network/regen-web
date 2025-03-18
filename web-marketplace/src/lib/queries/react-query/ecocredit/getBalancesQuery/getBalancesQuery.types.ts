@@ -1,4 +1,4 @@
-import { QueryBalancesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { QueryBalancesResponse } from '@regen-network/api/regen/ecocredit/v1/query';
 import { QueryObserverOptions } from '@tanstack/react-query';
 
 import { QueryBalancesProps } from 'lib/ecocredit/api';

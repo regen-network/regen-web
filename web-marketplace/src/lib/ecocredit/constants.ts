@@ -1,17 +1,17 @@
 /* eslint-disable lingui/no-unlocalized-strings */
-import { MsgSend as MsgSendCosmos } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/tx';
-import { MsgUpdateClient } from '@regen-network/api/lib/generated/ibc/core/client/v1/tx';
+import { MsgSend as MsgSendCosmos } from '@regen-network/api/cosmos/bank/v1beta1/tx';
+import { MsgUpdateClient } from '@regen-network/api/ibc/core/client/v1/tx';
 import {
   MsgCreate,
   MsgPut,
   MsgTake,
-} from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
+} from '@regen-network/api/regen/ecocredit/basket/v1/tx';
 import {
   MsgBuyDirect,
   MsgCancelSellOrder,
   MsgSell,
   MsgUpdateSellOrders,
-} from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+} from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
 import {
   MsgBridge,
   MsgBridgeReceive,
@@ -26,7 +26,7 @@ import {
   MsgUpdateClassMetadata,
   MsgUpdateProjectAdmin,
   MsgUpdateProjectMetadata,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+} from '@regen-network/api/regen/ecocredit/v1/tx';
 import {
   MsgCancel as MsgCancelAlpha,
   MsgCreateBatch as MsgCreateBatchAlpha,
@@ -36,130 +36,130 @@ import {
   MsgUpdateClassAdmin as MsgUpdateClassAdminAlpha,
   MsgUpdateClassIssuers as MsgUpdateClassIssuersAlpha,
   MsgUpdateClassMetadata as MsgUpdateClassMetadataAlpha,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
+} from '@regen-network/api/regen/ecocredit/v1alpha1/tx';
 
 export const messageActionEquals = 'message.action=';
 
 /* An allowlist of event and/or message types we query for in Activity table */
 export const ECOCREDIT_MESSAGE_TYPES = {
   CANCEL: {
-    message: `/${MsgCancel.$type}`,
+    message: MsgCancel.typeUrl,
     readable: 'cancel',
   },
   CREATE_BATCH: {
-    message: `/${MsgCreateBatch.$type}`,
+    message: MsgCreateBatch.typeUrl,
     readable: 'create batch',
   },
   CREATE_CLASS: {
-    message: `/${MsgCreateClass.$type}`,
+    message: MsgCreateClass.typeUrl,
     readable: 'create class',
   },
   RETIRE: {
-    message: `/${MsgRetire.$type}`,
+    message: MsgRetire.typeUrl,
     readable: 'retire',
   },
   SEND: {
-    message: `/${MsgSend.$type}`,
+    message: MsgSend.typeUrl,
     readable: 'send',
   },
   SEND_COSMOS: {
-    message: `/${MsgSendCosmos.$type}`,
+    message: MsgSendCosmos.typeUrl,
     readable: 'send',
   },
   UPDATE_CLASS_ADMIN: {
-    message: `/${MsgUpdateClassAdmin.$type}`,
+    message: MsgUpdateClassAdmin.typeUrl,
     readable: 'update class admin',
   },
   UPDATE_CLASS_ISSUERS: {
-    message: `/${MsgUpdateClassIssuers.$type}`,
+    message: MsgUpdateClassIssuers.typeUrl,
     readable: 'update class issuers',
   },
   UPDATE_CLASS_META: {
-    message: `/${MsgUpdateClassMetadata.$type}`,
+    message: MsgUpdateClassMetadata.typeUrl,
     readable: 'update class metadata',
   },
   CANCEL_ALPHA: {
-    message: `/${MsgCancelAlpha.$type}`,
+    message: MsgCancelAlpha.typeUrl,
     readable: 'cancel',
   },
   CREATE_BATCH_ALPHA: {
-    message: `/${MsgCreateBatchAlpha.$type}`,
+    message: MsgCreateBatchAlpha.typeUrl,
     readable: 'create batch',
   },
   CREATE_CLASS_ALPHA: {
-    message: `/${MsgCreateClassAlpha.$type}`,
+    message: MsgCreateClassAlpha.typeUrl,
     readable: 'create class',
   },
   RETIRE_ALPHA: {
-    message: `/${MsgRetireAlpha.$type}`,
+    message: MsgRetireAlpha.typeUrl,
     readable: 'retire',
   },
   SEND_ALPHA: {
-    message: `/${MsgSendAlpha.$type}`,
+    message: MsgSendAlpha.typeUrl,
     readable: 'send',
   },
   UPDATE_CLASS_ADMIN_ALPHA: {
-    message: `/${MsgUpdateClassAdminAlpha.$type}`,
+    message: MsgUpdateClassAdminAlpha.typeUrl,
     readable: 'update class admin',
   },
   UPDATE_CLASS_ISSUERS_ALPHA: {
-    message: `/${MsgUpdateClassIssuersAlpha.$type}`,
+    message: MsgUpdateClassIssuersAlpha.typeUrl,
     readable: 'update class issuers',
   },
   UPDATE_CLASS_META_ALPHA: {
-    message: `/${MsgUpdateClassMetadataAlpha.$type}`,
+    message: MsgUpdateClassMetadataAlpha.typeUrl,
     readable: 'update class metadata',
   },
   UPDATE_CLIENT: {
-    message: `/${MsgUpdateClient.$type}`,
+    message: MsgUpdateClient.typeUrl,
     readable: 'update client',
   },
   CREATE_BASKET: {
-    message: `/${MsgCreate.$type}`,
+    message: MsgCreate.typeUrl,
     readable: 'create basket',
   },
   PUT_IN_BASKET: {
-    message: `/${MsgPut.$type}`,
+    message: MsgPut.typeUrl,
     readable: 'put in basket',
   },
   TAKE_FROM_BASKET: {
-    message: `/${MsgTake.$type}`,
+    message: MsgTake.typeUrl,
     readable: 'take from basket',
   },
   CREATE_PROJECT: {
-    message: `/${MsgCreateProject.$type}`,
+    message: MsgCreateProject.typeUrl,
     readable: 'create project',
   },
   BUY_DIRECT: {
-    message: `/${MsgBuyDirect.$type}`,
+    message: MsgBuyDirect.typeUrl,
     readable: 'buy sell order',
   },
   ISSUE_SELL_ORDER: {
-    message: `/${MsgSell.$type}`,
+    message: MsgSell.typeUrl,
     readable: 'issue sell order',
   },
   CANCEL_SELL_ORDER: {
-    message: `/${MsgCancelSellOrder.$type}`,
+    message: MsgCancelSellOrder.typeUrl,
     readable: 'cancel sell order',
   },
   UPDATE_SELL_ORDER: {
-    message: `/${MsgUpdateSellOrders.$type}`,
+    message: MsgUpdateSellOrders.typeUrl,
     readable: 'update sell order',
   },
   BRIDGE: {
-    message: `/${MsgBridge.$type}`,
+    message: MsgBridge.typeUrl,
     readable: 'bridge',
   },
   BRIDGE_RECEIVE: {
-    message: `/${MsgBridgeReceive.$type}`,
+    message: MsgBridgeReceive.typeUrl,
     readable: 'bridge receive',
   },
   UPDATE_PROJECT_METADATA: {
-    message: `/${MsgUpdateProjectMetadata.$type}`,
+    message: MsgUpdateProjectMetadata.typeUrl,
     readable: 'update project metadata',
   },
   UPDATE_PROJECT_ADMIN: {
-    message: `/${MsgUpdateProjectAdmin.$type}`,
+    message: MsgUpdateProjectAdmin.typeUrl,
     readable: 'update project admin',
   },
 };

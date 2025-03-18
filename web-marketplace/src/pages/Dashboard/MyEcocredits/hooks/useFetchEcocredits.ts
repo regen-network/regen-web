@@ -38,7 +38,7 @@ export const useFetchEcocredits = ({
   isPaginatedQuery = true,
   hideEcocredits,
 }: Props): Response => {
-  const { ecocreditClient } = useLedger();
+  const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -51,27 +51,29 @@ export const useFetchEcocredits = ({
   const { page, rowsPerPage } = paginationParams;
 
   // Balances
+  const reqAddress = address ?? wallet?.address;
   const balancesQuery = useMemo(
     () =>
       getBalancesQuery({
-        enabled: !!ecocreditClient && !hideEcocredits,
-        client: ecocreditClient,
+        enabled: !!queryClient && !hideEcocredits && !!reqAddress,
+        client: queryClient,
         request: {
-          address: address ?? wallet?.address,
+          address: reqAddress as string,
           pagination: isPaginatedQuery
             ? {
-                offset: page * rowsPerPage,
-                limit: rowsPerPage,
+                offset: BigInt(page * rowsPerPage),
+                limit: BigInt(rowsPerPage),
                 countTotal: true,
+                reverse: false,
+                key: new Uint8Array(),
               }
             : undefined,
         },
       }),
     [
-      ecocreditClient,
+      queryClient,
       hideEcocredits,
-      address,
-      wallet?.address,
+      reqAddress,
       isPaginatedQuery,
       page,
       rowsPerPage,

@@ -1,9 +1,6 @@
-import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import ReactHtmlParser from 'html-react-parser';
 import { makeStyles } from 'tss-react/mui';
 
-import ContainedButton from '../buttons/ContainedButton';
-import ShieldIcon from '../icons/ShieldIcon';
 import { Title } from '../typography';
 import { Event } from './';
 
@@ -12,10 +9,6 @@ interface TimelineItemProps extends Event {
   barColor: string;
   odd: boolean;
   last: boolean;
-  txClient?: ServiceClientImpl;
-  viewLedgerText: string;
-  onViewOnLedger: (creditVintage: any) => void;
-  creditVintage?: any;
 }
 
 interface StyleProps {
@@ -163,14 +156,10 @@ export default function TimelineItem({
   date,
   summary,
   description,
-  creditVintage,
   circleColor,
   barColor,
   odd,
   last,
-  txClient,
-  viewLedgerText,
-  onViewOnLedger,
 }: TimelineItemProps): JSX.Element {
   const { classes } = useStyles({ circleColor, barColor, odd, last });
   return (
@@ -183,15 +172,6 @@ export default function TimelineItem({
         <div className={classes.description}>
           {ReactHtmlParser(description)}
         </div>
-      )}
-      {creditVintage && txClient && (
-        <ContainedButton
-          className={classes.ledgerBtn}
-          onClick={() => onViewOnLedger(creditVintage)}
-          startIcon={<ShieldIcon />}
-        >
-          {viewLedgerText}
-        </ContainedButton>
       )}
       <span className={classes.circle} />
       <div className={classes.bar} />

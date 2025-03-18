@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
-import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
+import { MsgCreateBatch } from '@regen-network/api/regen/ecocredit/v1/tx';
+import { BatchIssuance } from '@regen-network/api/regen/ecocredit/v1/types';
 
-import { useLedger } from 'ledger';
 import { generateIri, IriFromMetadataSuccess } from 'lib/db/api/metadata-graph';
 import type {
   CFCBatchMetadataLD,
@@ -145,7 +144,6 @@ type Return = {
  *
  */
 export default function useCreateBatchSubmit(): Return {
-  const { api } = useLedger();
   const { wallet, signAndBroadcast, deliverTxResponse, error, setError } =
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const accountAddress = wallet?.address;
@@ -173,7 +171,7 @@ export default function useCreateBatchSubmit(): Return {
   }
 
   const createBatch = async (data: CreateBatchFormValues): Promise<void> => {
-    if (!api?.msgClient?.broadcast || !accountAddress) return Promise.reject();
+    if (!accountAddress) return Promise.reject();
     if (!data.startDate || !data.endDate) return Promise.reject();
 
     let message: Partial<MsgCreateBatch> | undefined;

@@ -2,12 +2,9 @@ import { useCallback } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { OrderBy } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-import {
-  MsgAnchor,
-  MsgAttest,
-} from '@regen-network/api/lib/generated/regen/data/v1/tx';
-import { ContentHash_Graph } from '@regen-network/api/lib/generated/regen/data/v1/types';
+import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
+import { MsgAnchor, MsgAttest } from '@regen-network/api/regen/data/v2/tx';
+import { ContentHash_Graph } from '@regen-network/api/regen/data/v2/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
@@ -50,16 +47,17 @@ export const useSign = ({
   const { _ } = useLingui();
   const getSuccessModalContent = useGetSuccessModalContent();
 
-  const { txClient } = useLedger();
+  const { queryClient } = useLedger();
   const { wallet } = useWallet();
   const { refetch } = useQuery(
     getGetTxsEventQuery({
-      client: txClient,
+      client: queryClient,
       enabled: false,
       request: {
-        events: [`${messageActionEquals}'/${MsgAnchor.$type}'`],
+        events: [`${messageActionEquals}'${MsgAnchor.typeUrl}'`],
         orderBy: OrderBy.ORDER_BY_DESC,
-        pagination: { limit: 1 },
+        page: 1n,
+        limit: 1n,
       },
     }),
   );
@@ -123,7 +121,7 @@ export const useSign = ({
             await reactQueryClient.invalidateQueries({
               queryKey: getTxsEventQueryKey({
                 request: {
-                  events: [`${messageActionEquals}'/${MsgAttest.$type}'`],
+                  events: [`${messageActionEquals}'${MsgAttest.typeUrl}'`],
                   orderBy: OrderBy.ORDER_BY_DESC,
                 },
               }),

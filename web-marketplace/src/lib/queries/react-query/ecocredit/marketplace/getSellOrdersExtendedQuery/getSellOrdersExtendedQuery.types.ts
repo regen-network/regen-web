@@ -1,8 +1,10 @@
-import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import {
+  QuerySellOrdersRequest,
+  SellOrderInfo,
+} from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
 import { QueryClient, QueryObserverOptions } from '@tanstack/react-query';
 
-import { QuerySellOrdersProps } from 'lib/ecocredit/marketplace/marketplace';
-import { MarketplaceQueryClient } from 'lib/ecocredit/marketplace/marketplace.types';
+import { QueryClient as RPCQueryClient } from 'ledger';
 
 import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
 
@@ -15,10 +17,8 @@ export type ReactQuerySellOrdersExtentedResponse = QueryObserverOptions<
   SellOrderInfoExtented[] | undefined
 >;
 
-export type ReactQuerySellOrdersExtentedProps = Omit<
-  QuerySellOrdersProps,
-  'client'
-> & {
-  client?: MarketplaceQueryClient;
+export type ReactQuerySellOrdersExtentedProps = {
+  request: QuerySellOrdersRequest;
+  client: RPCQueryClient;
   reactQueryClient?: QueryClient;
 } & ReactQueryBuilderResponse<ReactQuerySellOrdersExtentedResponse>;

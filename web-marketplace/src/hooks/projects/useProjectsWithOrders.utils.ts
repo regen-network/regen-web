@@ -1,5 +1,5 @@
-import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { SellOrderInfo } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
+import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import shuffle from 'lodash/shuffle';
 
 import { ProjectsWithOrdersProps } from './useProjectsWithOrders';

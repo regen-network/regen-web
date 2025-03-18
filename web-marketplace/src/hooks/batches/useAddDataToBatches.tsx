@@ -1,9 +1,11 @@
-import { useQueries, useQuery } from '@tanstack/react-query';
+import { BatchInfo } from '@regen-network/api/regen/ecocredit/v1/query';
+import { QueryClient, useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
+import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import { QueryClient as RPCQueryClient } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
-import { AddDataToBatchesParams } from 'lib/ecocredit/api';
 import {
   ECOCREDIT_MESSAGE_TYPES,
   messageActionEquals,
@@ -16,13 +18,17 @@ import { getSupplyQuery } from 'lib/queries/react-query/ecocredit/getSupplyQuery
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-type Props = AddDataToBatchesParams;
+type Props = {
+  batches: BatchInfo[];
+  sanityCreditClassData?: AllCreditClassQuery;
+  withAllData?: boolean;
+  client?: RPCQueryClient;
+  reactQueryClient?: QueryClient;
+};
 
 export const useAddDataToBatches = ({
-  txClient,
   batches,
-  ecocreditClient,
-  dataClient,
+  client,
   withAllData,
 }: Props) => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -40,8 +46,8 @@ export const useAddDataToBatches = ({
   const { data: createBatchTxs, isFetching: isLoadingCreateBatchTxs } =
     useQuery(
       getGetTxsEventQuery({
-        client: txClient,
-        enabled: !!txClient,
+        client,
+        enabled: !!client,
         request: {
           events: [
             `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH.message}'`,
@@ -54,8 +60,8 @@ export const useAddDataToBatches = ({
     isFetching: isLoadingCreateBatchAlphaTxs,
   } = useQuery(
     getGetTxsEventQuery({
-      client: txClient,
-      enabled: !!txClient,
+      client,
+      enabled: !!client,
       request: {
         events: [
           `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH_ALPHA.message}'`,
@@ -68,6 +74,8 @@ export const useAddDataToBatches = ({
     queries: batches.map(batch =>
       getSupplyQuery({
         request: { batchDenom: batch.denom },
+        client,
+        enabled: !!client,
       }),
     ),
   });
@@ -79,8 +87,8 @@ export const useAddDataToBatches = ({
     queries: batches.map(batch =>
       getProjectQuery({
         request: { projectId: batch.projectId },
-        client: ecocreditClient,
-        enabled: !!ecocreditClient && withAllData,
+        client,
+        enabled: !!client && withAllData,
       }),
     ),
   });
@@ -93,8 +101,8 @@ export const useAddDataToBatches = ({
       const project = batchesProjectResult?.[index].data?.project;
       return getMetadataQuery({
         iri: project?.metadata,
-        dataClient,
-        enabled: !!dataClient && !!project?.metadata && withAllData,
+        client,
+        enabled: !!client && !!project?.metadata && withAllData,
         languageCode: selectedLanguage,
       });
     }),
@@ -107,9 +115,9 @@ export const useAddDataToBatches = ({
     queries: batches.map((batch, index) => {
       const project = batchesProjectResult?.[index].data?.project;
       return getClassQuery({
-        request: { classId: project?.classId },
-        client: ecocreditClient,
-        enabled: !!ecocreditClient && !!project?.classId && withAllData,
+        request: { classId: project?.classId as string },
+        client,
+        enabled: !!client && !!project?.classId && withAllData,
       });
     }),
   });
@@ -120,8 +128,8 @@ export const useAddDataToBatches = ({
 
       return getMetadataQuery({
         iri: creditClass?.metadata,
-        dataClient,
-        enabled: !!dataClient && !!creditClass?.metadata && withAllData,
+        client,
+        enabled: !!client && !!creditClass?.metadata && withAllData,
         languageCode: selectedLanguage,
       });
     }),

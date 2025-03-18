@@ -84,7 +84,7 @@ function ProjectTopSection({
 }: ProjectTopSectionProps): JSX.Element {
   const { _ } = useLingui();
   const { classes } = useProjectTopSectionStyles();
-  const { ecocreditClient } = useLedger();
+  const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const {
@@ -101,12 +101,11 @@ function ProjectTopSection({
 
   const { data: creditTypeData } = useQuery(
     getCreditTypeQuery({
-      client: ecocreditClient,
+      client: queryClient,
       request: {
-        abbreviation: creditClassOnChain?.class?.creditTypeAbbrev,
+        abbreviation: creditClassOnChain?.class?.creditTypeAbbrev as string,
       },
-      enabled:
-        !!ecocreditClient && !!creditClassOnChain?.class?.creditTypeAbbrev,
+      enabled: !!queryClient && !!creditClassOnChain?.class?.creditTypeAbbrev,
     }),
   );
 

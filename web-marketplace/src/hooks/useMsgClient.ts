@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { DeliverTxResponse, StdFee } from '@cosmjs/stargate';
-import { QueryBalanceResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import { QueryBalanceResponse } from '@regen-network/api/cosmos/bank/v1beta1/query';
+import { TxRaw } from '@regen-network/api/cosmos/tx/v1beta1/tx';
 import { useQueryClient } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { ERRORS } from 'config/errors';
@@ -39,7 +40,7 @@ interface OptionalCallbacks {
 export type SignAndBroadcastType = (
   message: TxData,
   onBroadcast?: () => void, // an optional callback that gets called between sign and broadcast
-  { onError, onSuccess }?: OptionalCallbacks,
+  callbacks?: OptionalCallbacks,
 ) => Promise<void | string>;
 
 type MsgClientType = {
@@ -56,7 +57,7 @@ export default function useMsgClient(
   handleTxDelivered?: (deliverTxResponse: DeliverTxResponse) => void,
   handleError?: () => void,
 ): MsgClientType {
-  const { api } = useLedger();
+  const { signingClient } = useLedger();
   const { wallet } = useWallet();
   const [error, setError] = useState<string | undefined>();
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
@@ -70,7 +71,7 @@ export default function useMsgClient(
 
   const sign = useCallback(
     async (tx: TxData): Promise<Uint8Array | undefined> => {
-      if (!api?.msgClient || !wallet?.address) return;
+      if (!signingClient || !wallet?.address) return;
       const { msgs, fee: txFee, memo } = tx;
 
       const fee = txFee ?? defaultFee;
@@ -94,19 +95,18 @@ export default function useMsgClient(
 
       setIsWaitingForSigning(true);
 
-      const txBytes = await api.msgClient.sign(
+      const txRaw = await signingClient.sign(
         wallet.address,
         msgs,
         fee,
         memo || '',
       );
-
       setIsWaitingForSigning(false);
-
+      const txBytes = TxRaw.encode(txRaw).finish();
       return txBytes;
     },
     [
-      api?.msgClient,
+      signingClient,
       wallet?.address,
       reactQueryClient,
       setIsWaitingForSigning,
@@ -116,9 +116,9 @@ export default function useMsgClient(
 
   const broadcast = useCallback(
     async (txBytes: Uint8Array): Promise<DeliverTxResponse | undefined> => {
-      if (!api?.msgClient || !txBytes) return;
+      if (!signingClient || !txBytes) return;
       handleTxQueued && handleTxQueued();
-      const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
+      const _deliverTxResponse = await signingClient.broadcastTx(txBytes);
       // The transaction succeeded iff code is 0.
       // TODO: this can give false positives. Some errors return code 0.
       if (_deliverTxResponse.code !== 0) {
@@ -133,7 +133,7 @@ export default function useMsgClient(
       }
     },
     [
-      api?.msgClient,
+      signingClient,
       handleTxQueued,
       handleTxDelivered,
       setTxSuccessfulModalAtom,

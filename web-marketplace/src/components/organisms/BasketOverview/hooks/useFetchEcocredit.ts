@@ -29,17 +29,17 @@ interface Props {
 
 export const useFetchEcocredit = ({ batchDenom }: Props): Response => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { ecocreditClient, dataClient } = useLedger();
+  const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
 
   // Balance
   const { data: balanceData, isLoading: isLoadingCredit } = useQuery(
     getBalanceQuery({
-      enabled: !!ecocreditClient,
-      client: ecocreditClient,
+      client: queryClient,
+      enabled: !!queryClient && !!wallet?.address,
       request: {
-        address: wallet?.address,
+        address: wallet?.address as string,
         batchDenom,
       },
     }),
@@ -48,7 +48,7 @@ export const useFetchEcocredit = ({ batchDenom }: Props): Response => {
   // Batch
   const { data: batchData } = useQuery(
     getBatchQuery({
-      client: ecocreditClient,
+      client: queryClient,
       request: { batchDenom: batchDenom },
     }),
   );
@@ -56,17 +56,17 @@ export const useFetchEcocredit = ({ batchDenom }: Props): Response => {
   // Project
   const { data: projectData } = useQuery(
     getProjectQuery({
-      request: { projectId: batchData?.batch?.projectId },
-      client: ecocreditClient,
-      enabled: !!batchData?.batch?.projectId && !!ecocreditClient,
+      request: { projectId: batchData?.batch?.projectId as string },
+      client: queryClient,
+      enabled: !!batchData?.batch?.projectId && !!queryClient,
     }),
   );
 
   // Project Metadata
   const projectMetadata = getMetadataQuery({
     iri: projectData?.project?.metadata,
-    dataClient,
-    enabled: !!dataClient,
+    client: queryClient,
+    enabled: !!queryClient,
     languageCode: selectedLanguage,
   });
 
@@ -83,11 +83,11 @@ export const useFetchEcocredit = ({ batchDenom }: Props): Response => {
   const classId = projectData?.project?.classId;
   const { data: creditClassData } = useQuery(
     getClassQuery({
-      client: ecocreditClient,
+      client: queryClient,
       request: {
-        classId,
+        classId: classId as string,
       },
-      enabled: !!ecocreditClient && !!classId,
+      enabled: !!queryClient && !!classId,
     }),
   );
 

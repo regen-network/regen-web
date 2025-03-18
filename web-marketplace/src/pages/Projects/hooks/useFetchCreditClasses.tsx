@@ -1,4 +1,4 @@
-import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ClassInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
@@ -23,11 +23,11 @@ type UseFetchCreditClassesResponse = {
 
 export const useFetchCreditClasses = (): UseFetchCreditClassesResponse => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { ecocreditClient, dataClient } = useLedger();
+  const { queryClient } = useLedger();
   const { data: creditClassesData, isLoading } = useQuery(
     getClassesQuery({
-      client: ecocreditClient,
-      enabled: !!ecocreditClient,
+      client: queryClient,
+      enabled: !!queryClient,
     }),
   );
   const creditClasses = creditClassesData?.classes;
@@ -37,8 +37,8 @@ export const useFetchCreditClasses = (): UseFetchCreditClassesResponse => {
       creditClasses?.map(creditClass =>
         getMetadataQuery({
           iri: creditClass.metadata,
-          enabled: !!dataClient,
-          dataClient,
+          enabled: !!queryClient,
+          client: queryClient,
           languageCode: selectedLanguage,
         }),
       ) ?? [],

@@ -14,13 +14,13 @@ type Params = {
 };
 
 export const useFetchCreditBatches = ({ withAllData }: Params) => {
-  const { ecocreditClient, dataClient } = useLedger();
+  const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { data: batchesData, isFetching: isLoadingBatches } = useQuery(
     getBatchesQuery({
-      enabled: !!ecocreditClient,
-      client: ecocreditClient,
+      enabled: !!queryClient,
+      client: queryClient,
       request: {},
     }),
   );
@@ -39,8 +39,7 @@ export const useFetchCreditBatches = ({ withAllData }: Params) => {
     batches,
     sanityCreditClassData: sanityCreditClassDataResult.data,
     reactQueryClient,
-    dataClient,
-    ecocreditClient,
+    client: queryClient,
     withAllData,
   });
 

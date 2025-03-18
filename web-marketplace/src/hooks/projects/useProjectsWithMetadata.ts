@@ -9,7 +9,7 @@ import { useProjectsMetadata } from './useProjectsMetadata';
 export const useProjectsWithMetadata = (
   projectIds?: (string | undefined)[],
 ) => {
-  const { ecocreditClient } = useLedger();
+  const { queryClient } = useLedger();
 
   // Projects
   const projectsResults = useQueries({
@@ -17,9 +17,10 @@ export const useProjectsWithMetadata = (
       projectIds?.map(projectId =>
         getProjectQuery({
           request: {
-            projectId,
+            projectId: projectId as string,
           },
-          client: ecocreditClient,
+          client: queryClient,
+          enabled: !!queryClient && !!projectId,
         }),
       ) ?? [],
   });

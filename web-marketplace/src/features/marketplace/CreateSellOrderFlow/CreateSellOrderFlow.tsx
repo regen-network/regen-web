@@ -80,7 +80,7 @@ export const CreateSellOrderFlow = ({
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
 
   // Services access
-  const { marketplaceClient } = useLedger();
+  const { queryClient } = useLedger();
   const { isConnected } = useWallet();
   const navigate = useNavigate();
 
@@ -153,8 +153,8 @@ export const CreateSellOrderFlow = ({
 
   const { data: allowedDenomsData } = useQuery(
     getAllowedDenomQuery({
-      client: marketplaceClient,
-      enabled: !!marketplaceClient,
+      client: queryClient,
+      enabled: !!queryClient,
     }),
   );
 

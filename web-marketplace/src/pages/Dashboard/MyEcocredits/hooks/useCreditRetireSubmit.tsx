@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { MsgRetire } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import { MsgRetire } from '@regen-network/api/regen/ecocredit/v1/tx';
 
 import type { Item } from 'web-components/src/components/modal/TxModal';
 

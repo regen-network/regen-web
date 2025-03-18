@@ -38,7 +38,7 @@ type Props = {
 export const useFetchRetirements = ({ address, hideRetirements }: Props) => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { wallet } = useWallet();
-  const { ecocreditClient } = useLedger();
+  const { queryClient } = useLedger();
   const { data: csrfData } = useQuery(getCsrfTokenQuery({}));
   const reactQueryClient = useQueryClient();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -86,11 +86,11 @@ export const useFetchRetirements = ({ address, hideRetirements }: Props) => {
     queries:
       retirementsData?.map(retirementData =>
         getClassIssuersQuery({
-          client: ecocreditClient,
+          client: queryClient,
           request: {
-            classId: retirementData?.[0]?.classId,
+            classId: retirementData?.[0]?.classId as string,
           },
-          enabled: !!ecocreditClient,
+          enabled: !!queryClient && !!retirementData?.[0]?.classId,
         }),
       ) ?? [],
   });

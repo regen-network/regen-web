@@ -1,4 +1,4 @@
-import { QueryClassResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { QueryClassResponse } from '@regen-network/api/regen/ecocredit/v1/query';
 import { UseQueryResult } from '@tanstack/react-query';
 
 export type AllowedCreditClasses = {

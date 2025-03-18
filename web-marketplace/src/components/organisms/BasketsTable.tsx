@@ -11,13 +11,13 @@ import {
 } from 'web-components/src/components/table/ActionsTable';
 import { formatNumber } from 'web-components/src/utils/format';
 
+import { BasketTokens } from 'types/ledger/ecocredit';
 import {
   ACTIONS_TABLE_ACTIONS_TEXT,
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
 
 import { ReactComponent as BasketIcon } from '../../assets/svgs/rNCT.svg';
-import { BasketTokens } from '../../hooks/useBasketTokens';
 import { NoCredits } from '../molecules';
 
 type BasketTableProps = {

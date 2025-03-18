@@ -1,15 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import {
-  DeepPartial,
   QueryBalancesRequest,
   QueryBalancesResponse,
-  QueryClientImpl,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+} from '@regen-network/api/regen/ecocredit/v1/query';
 
 import { useLedger } from '../ledger';
 
 type FetchBalances = (
-  request: DeepPartial<QueryBalancesRequest>,
+  request: QueryBalancesRequest,
 ) => Promise<QueryBalancesResponse | undefined>;
 
 type Params = {
@@ -20,17 +18,18 @@ export default function useQueryBalances({ address }: Params): {
   balancesResponse: QueryBalancesResponse | undefined;
   fetchBalances: FetchBalances;
 } {
-  const { api } = useLedger();
+  const { queryClient } = useLedger();
   const [balancesResponse, setBalancesResponse] = useState<
     QueryBalancesResponse | undefined
   >();
-  const [queryClient, setQueryClient] = useState<QueryClientImpl | undefined>();
 
   const fetchBalances = useCallback(async () => {
-    if (!queryClient) return;
+    if (!queryClient || !address) return;
 
     try {
-      const balances = await queryClient.Balances({ address });
+      const balances = await queryClient.regen.ecocredit.v1.balances({
+        address,
+      });
       return balances;
     } catch (err) {
       console.error(err); // eslint-disable-line no-console
@@ -38,12 +37,6 @@ export default function useQueryBalances({ address }: Params): {
 
     return;
   }, [queryClient, address]);
-
-  useEffect(() => {
-    if (!api?.queryClient) return;
-    if (queryClient) return;
-    setQueryClient(new QueryClientImpl(api.queryClient));
-  }, [api?.queryClient, queryClient]);
 
   useEffect(() => {
     if (!queryClient) return;

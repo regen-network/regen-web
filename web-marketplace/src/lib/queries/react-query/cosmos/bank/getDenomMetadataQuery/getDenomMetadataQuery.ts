@@ -11,7 +11,7 @@ export const getDenomMetadataQuery = ({
   queryKey: ['denomMetadata', request.denom],
   queryFn: async () => {
     if (!client || !request.denom) return null;
-    return await client.DenomMetadata(request);
+    return await client.cosmos.bank.v1beta1.denomMetadata(request);
   },
   ...params,
 });

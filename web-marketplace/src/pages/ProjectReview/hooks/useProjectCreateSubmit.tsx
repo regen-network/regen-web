@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { MsgCreateProject } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import { MsgCreateProject } from '@regen-network/api/regen/ecocredit/v1/tx';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { useUpdateProjectByIdMutation } from 'generated/graphql';

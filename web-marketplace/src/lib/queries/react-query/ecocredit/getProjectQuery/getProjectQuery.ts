@@ -1,4 +1,3 @@
-import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQueryClient';
 import { queryProject } from 'lib/ecocredit/api';
 
 import { getProjectKey } from './getProjectQuery.constants';
@@ -14,11 +13,11 @@ export const getProjectQuery = ({
 }: ReactQueryProjectProps): ReactQueryProjectResponse => ({
   queryKey: getProjectKey(request.projectId),
   queryFn: async () => {
-    const clientInstance = client ?? (await getEcocreditQueryClient());
+    if (!client) return null;
     try {
       return await queryProject({
         request,
-        client: clientInstance,
+        client,
       });
     } catch (e) {
       return null;

@@ -1,6 +1,6 @@
 import { msg } from '@lingui/macro';
-import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
-import { BatchBalanceInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { AllowedDenom } from '@regen-network/api/regen/ecocredit/marketplace/v1/state';
+import { BatchBalanceInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 
 import { Option } from 'web-components/src/components/inputs/SelectTextField';
 

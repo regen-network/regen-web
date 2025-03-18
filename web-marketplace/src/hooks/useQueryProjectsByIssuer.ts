@@ -3,7 +3,7 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
@@ -19,7 +19,7 @@ export default function useQueryProjectsByIssuer(issuer?: string): Project[] {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const { ecocreditClient, dataClient } = useLedger();
+  const { queryClient } = useLedger();
 
   const { data: classesByIssuerData } = useQuery(
     getClassesByIssuerQuery({
@@ -36,9 +36,9 @@ export default function useQueryProjectsByIssuer(issuer?: string): Project[] {
     queries:
       classIds?.map(classId =>
         getProjectsByClassQuery({
-          enabled: !!classId && !!ecocreditClient,
-          client: ecocreditClient,
-          request: { classId },
+          enabled: !!classId && !!queryClient,
+          client: queryClient,
+          request: { classId: classId as string },
         }),
       ) || [],
   });
@@ -54,8 +54,8 @@ export default function useQueryProjectsByIssuer(issuer?: string): Project[] {
     queries: projects.map(project =>
       getMetadataQuery({
         iri: project?.metadata,
-        dataClient,
-        enabled: !!dataClient,
+        client: queryClient,
+        enabled: !!queryClient,
         languageCode: selectedLanguage,
       }),
     ),

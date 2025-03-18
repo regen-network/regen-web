@@ -1,4 +1,4 @@
-import { TxBody } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/tx';
+import { TxBody } from '@regen-network/api/cosmos/tx/v1beta1/tx';
 import dayjs from 'dayjs';
 
 import { TxMessages } from './BridgedEcocreditsTable.types';

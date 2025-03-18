@@ -36,7 +36,7 @@ export const useFetchProjectByAdmin = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  const { ecocreditClient } = useLedger();
+  const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { data: accountData, isFetching: isAccountLoading } = useQuery(
     getAccountProjectsByIdQuery({
@@ -49,8 +49,8 @@ export const useFetchProjectByAdmin = ({
 
   const { data: projectsData, isFetching: isOnChainProjectsLoading } = useQuery(
     getProjectsByAdminQuery({
-      enabled: !!adminAddress && !!ecocreditClient,
-      client: ecocreditClient,
+      enabled: !!adminAddress && !!queryClient,
+      client: queryClient,
       request: { admin: adminAddress as string },
     }),
   );

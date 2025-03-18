@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useLingui } from '@lingui/react';
-import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
+import { BasketInfo } from '@regen-network/api/regen/ecocredit/basket/v1/query';
+import { MsgTake } from '@regen-network/api/regen/ecocredit/basket/v1/tx';
 
 import type { MsgTakeValues } from 'web-components/src/components/form/BasketTakeForm';
 

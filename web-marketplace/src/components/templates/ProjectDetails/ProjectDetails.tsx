@@ -82,7 +82,7 @@ function ProjectDetails(): JSX.Element {
   const theme = useTheme();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { projectId } = useParams();
-  const { dataClient } = useLedger();
+  const { queryClient } = useLedger();
   const { isConnected, isKeplrMobileWeb, wallet, loginDisabled } = useWallet();
 
   const location = useLocation();
@@ -176,8 +176,8 @@ function ProjectDetails(): JSX.Element {
   const creditClassMetadataRes = useQuery(
     getMetadataQuery({
       iri: creditClassOnChain?.class?.metadata,
-      enabled: !!dataClient && !!creditClassOnChain?.class?.metadata,
-      dataClient,
+      enabled: !!queryClient && !!creditClassOnChain?.class?.metadata,
+      client: queryClient,
       languageCode: selectedLanguage,
     }),
   );

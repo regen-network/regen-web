@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import { BasketInfo } from '@regen-network/api/regen/ecocredit/basket/v1/query';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
@@ -24,7 +24,7 @@ export type BasketPutData = {
 };
 
 export const useBasketPutData = (): BasketPutData => {
-  const { ecocreditClient, basketClient } = useLedger();
+  const { queryClient } = useLedger();
   const { wallet } = useWallet();
   const { basketDenom } = useParams<{ basketDenom: string }>();
   const [{ creditBatchDenom }] = useAtom(basketDetailAtom);
@@ -33,19 +33,19 @@ export const useBasketPutData = (): BasketPutData => {
 
   const { data: balancesData, isLoading: isLoadingBalances } = useQuery(
     getBalancesQuery({
-      enabled: !!ecocreditClient,
-      client: ecocreditClient,
+      enabled: !!queryClient && !!wallet?.address,
+      client: queryClient,
       request: {
-        address: wallet?.address,
+        address: wallet?.address as string,
       },
     }),
   );
 
   const { data: basketData, isLoading: isLoadingBasket } = useQuery(
     getBasketQuery({
-      enabled: !!basketClient,
-      client: basketClient,
-      request: { basketDenom: basketDenom },
+      enabled: !!queryClient && !!basketDenom,
+      client: queryClient,
+      request: { basketDenom: basketDenom as string },
     }),
   );
 

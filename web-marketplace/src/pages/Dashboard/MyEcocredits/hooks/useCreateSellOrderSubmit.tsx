@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
-import { MsgSell } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+import { MsgSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
 import { useQueryClient } from '@tanstack/react-query';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
@@ -11,6 +11,7 @@ import { getFormattedNumber } from 'web-components/src/utils/format';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
+import { useLedger } from 'ledger';
 import { denomToMicro } from 'lib/denom.utils';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { SellFailureEvent, SellSuccessEvent } from 'lib/tracker/types';
@@ -49,6 +50,8 @@ const useCreateSellOrderSubmit = ({
   const { _ } = useLingui();
   const { track } = useTracker();
   const reactQueryClient = useQueryClient();
+  const { queryClient } = useLedger();
+
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormSchemaType): Promise<void> => {
       if (!accountAddress) return Promise.reject();
@@ -109,7 +112,7 @@ const useCreateSellOrderSubmit = ({
       signAndBroadcast(tx, onTxBroadcast, { onError, onSuccess });
 
       if (batchDenom && amount && askDenom && credits) {
-        const baseDenom = await getDenomtrace({ denom: askDenom });
+        const baseDenom = await getDenomtrace({ denom: askDenom, queryClient });
 
         const batchInfo = credits.find(batch => batch.denom === batchDenom);
         const projectId =

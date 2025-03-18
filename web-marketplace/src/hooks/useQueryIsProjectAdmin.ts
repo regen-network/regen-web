@@ -19,7 +19,7 @@ type Props = {
 };
 
 export function useQueryIsProjectAdmin({ address, accountId }: Props) {
-  const { ecocreditClient } = useLedger();
+  const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const graphqlClient =
@@ -33,9 +33,9 @@ export function useQueryIsProjectAdmin({ address, accountId }: Props) {
   // Admin of on chain projects
   const { data: projectsByAdmin, isFetching } = useQuery(
     getProjectsByAdminQuery({
-      enabled: !!activeAddress && !!ecocreditClient,
-      client: ecocreditClient,
-      request: { admin: activeAddress },
+      enabled: !!activeAddress && !!queryClient,
+      client: queryClient,
+      request: { admin: activeAddress as string },
     }),
   );
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
-import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ClassInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';

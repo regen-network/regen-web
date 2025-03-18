@@ -14,7 +14,7 @@ export const getCreditTypeQuery = ({
   }),
   queryFn: async () => {
     if (!client) return null;
-    return await client.CreditType(request);
+    return await client.regen.ecocredit.v1.creditType(request);
   },
   ...params,
 });

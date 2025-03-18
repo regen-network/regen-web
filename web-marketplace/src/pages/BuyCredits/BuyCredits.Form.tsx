@@ -145,22 +145,22 @@ export const BuyCreditsForm = ({
 
   const cardDisabled = cardSellOrders.length === 0;
 
-  const { marketplaceClient, ecocreditClient } = useLedger();
+  const { queryClient } = useLedger();
 
   const { data: allowedDenomsData } = useQuery(
     getAllowedDenomQuery({
-      client: marketplaceClient,
-      enabled: !!marketplaceClient,
+      client: queryClient,
+      enabled: !!queryClient,
     }),
   );
 
   const { data: creditTypeData } = useQuery(
     getCreditTypeQuery({
-      client: ecocreditClient,
+      client: queryClient,
       request: {
-        abbreviation: creditTypeAbbrev,
+        abbreviation: creditTypeAbbrev as string,
       },
-      enabled: !!ecocreditClient && !!creditTypeAbbrev,
+      enabled: !!queryClient && !!creditTypeAbbrev,
     }),
   );
 

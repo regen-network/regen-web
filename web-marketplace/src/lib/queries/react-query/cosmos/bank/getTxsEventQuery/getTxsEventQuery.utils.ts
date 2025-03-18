@@ -11,6 +11,6 @@ export const getTxsEventQueryKey = ({ request }: GetTxsEventQueryKeyParams) => [
   GET_TXS_EVENT_KEY,
   getEventsKey(request.events),
   String(request.page),
-  String(request.pagination?.limit),
+  String(request.limit),
   request.orderBy,
 ];

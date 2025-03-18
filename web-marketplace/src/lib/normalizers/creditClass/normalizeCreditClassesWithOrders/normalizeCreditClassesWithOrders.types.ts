@@ -1,4 +1,4 @@
-import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ClassInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 
 import { PurchaseInfo } from 'web-components/src/components/cards/ProjectCard/ProjectCard.types';
 

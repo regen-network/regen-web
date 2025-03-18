@@ -20,6 +20,7 @@ import { Item } from 'web-components/src/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/src/components/modal/TxSuccessfulModal';
 import type { Theme } from 'web-components/src/theme/muiTheme';
 
+import { BasketTokens } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';
 import { getHashUrl } from 'lib/block-explorer';
 import {
@@ -71,7 +72,6 @@ import { CREDIT_RETIRE_TITLE } from 'components/organisms/Modals/CreditRetireMod
 import { CreditSendModal } from 'components/organisms/Modals/CreditSendModal/CreditSendModal';
 import { Portfolio } from 'components/organisms/Portfolio/Portfolio';
 import { useMsgClient } from 'hooks';
-import type { BasketTokens } from 'hooks/useBasketTokens';
 
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
@@ -125,7 +125,7 @@ export const MyEcocredits = (): JSX.Element => {
 
   const navigate = useNavigate();
   const { track } = useTracker();
-  const { marketplaceClient } = useLedger();
+  const { queryClient } = useLedger();
   const bottomFieldsTextMapping = useMemo(
     () => getBottomFieldsTextMapping(_),
     [_],
@@ -228,8 +228,8 @@ export const MyEcocredits = (): JSX.Element => {
 
   const { data: allowedDenomsData } = useQuery(
     getAllowedDenomQuery({
-      client: marketplaceClient,
-      enabled: !!marketplaceClient,
+      client: queryClient,
+      enabled: !!queryClient,
     }),
   );
 

@@ -1,4 +1,4 @@
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 
 export type SellOrderStatus =
   | 'Not yet filled'

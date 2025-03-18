@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
-import { MsgCancelSellOrder } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+import { MsgCancelSellOrder } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
@@ -12,6 +12,7 @@ import {
 } from 'web-components/src/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { useLedger } from 'ledger';
 import { microToDenom } from 'lib/denom.utils';
 
 import DenomIcon from 'components/molecules/DenomIcon';
@@ -50,6 +51,7 @@ const useCancelSellOrderSubmit = ({
   setIsProcessingModalOpen,
 }: Props): Return => {
   const { _ } = useLingui();
+  const { queryClient } = useLedger();
 
   const cancelSellOrderSubmit = useCallback(async (): Promise<void> => {
     if (!accountAddress) return Promise.reject();
@@ -61,7 +63,7 @@ const useCancelSellOrderSubmit = ({
 
     const msgCancelSellOrder = MsgCancelSellOrder.fromPartial({
       seller: accountAddress,
-      sellOrderId: selectedSellOrder.id,
+      sellOrderId: BigInt(selectedSellOrder.id),
     });
 
     const tx = {
@@ -73,7 +75,7 @@ const useCancelSellOrderSubmit = ({
     signAndBroadcast(tx, () => setSelectedSellOrder(null));
     setIsProcessingModalOpen(false);
 
-    const baseDenom = await getDenomtrace({ denom: askDenom });
+    const baseDenom = await getDenomtrace({ denom: askDenom, queryClient });
 
     const projectId =
       selectedSellOrder.project?.id ??

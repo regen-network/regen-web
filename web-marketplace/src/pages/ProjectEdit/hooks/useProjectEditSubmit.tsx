@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react';
 import {
   MsgUpdateProjectAdmin,
   MsgUpdateProjectMetadata,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+} from '@regen-network/api/regen/ecocredit/v1/tx';
 
 import { NestedPartial } from 'types/nested-partial';
 import { generateIri } from 'lib/db/api/metadata-graph';

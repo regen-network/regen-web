@@ -9,18 +9,18 @@ import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMet
 
 export const useClassesWithMetadata = (classIds?: (string | undefined)[]) => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { ecocreditClient, dataClient } = useLedger();
+  const { queryClient } = useLedger();
 
   // Credit Classes
   const classResults = useQueries({
     queries:
       classIds?.map(classId =>
         getClassQuery({
-          client: ecocreditClient,
+          client: queryClient,
           request: {
-            classId,
+            classId: classId as string,
           },
-          enabled: !!ecocreditClient && !!classId,
+          enabled: !!queryClient && !!classId,
         }),
       ) ?? [],
   });
@@ -36,8 +36,8 @@ export const useClassesWithMetadata = (classIds?: (string | undefined)[]) => {
     queries: classes.map(c =>
       getMetadataQuery({
         iri: c?.class?.metadata,
-        dataClient,
-        enabled: !!dataClient,
+        client: queryClient,
+        enabled: !!queryClient,
         languageCode: selectedLanguage,
       }),
     ),

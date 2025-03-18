@@ -42,7 +42,7 @@ type ResponseType = {
 };
 
 export const useNormalizedSellOrders = (): ResponseType => {
-  const { ecocreditClient, dataClient } = useLedger();
+  const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const [paginationParams, setPaginationParams] =
@@ -70,8 +70,8 @@ export const useNormalizedSellOrders = (): ResponseType => {
   // On-chain stored Projects
   const { data: onChainProjects } = useQuery(
     getProjectsQuery({
-      client: ecocreditClient,
-      enabled: !!ecocreditClient,
+      client: queryClient,
+      enabled: !!queryClient,
       request: {},
     }),
   );
@@ -92,8 +92,8 @@ export const useNormalizedSellOrders = (): ResponseType => {
     queries:
       batchDenoms?.map(batchDenom =>
         getBatchQuery({
-          client: ecocreditClient,
-          enabled: !!ecocreditClient,
+          client: queryClient,
+          enabled: !!queryClient,
           request: { batchDenom },
         }),
       ) ?? [],
@@ -120,8 +120,8 @@ export const useNormalizedSellOrders = (): ResponseType => {
       projects?.map(({ metadata: iri }) =>
         getMetadataQuery({
           iri,
-          dataClient,
-          enabled: !!dataClient,
+          client: queryClient,
+          enabled: !!queryClient,
           languageCode: selectedLanguage,
         }),
       ) ?? [],

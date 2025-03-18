@@ -2,8 +2,8 @@ import { useCallback, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useLingui } from '@lingui/react';
-import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
-import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+import { AllowedDenom } from '@regen-network/api/regen/ecocredit/marketplace/v1/state';
+import { MsgBuyDirect } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ERRORS } from 'config/errors';
@@ -403,11 +403,11 @@ export const usePurchase = ({
             const msgBuyDirect = MsgBuyDirect.fromPartial({
               buyer: wallet?.address,
               orders: selectedSellOrders.map(order => ({
-                sellOrderId: order.sellOrderId,
+                sellOrderId: BigInt(order.sellOrderId),
                 bidPrice: order.bidPrice,
                 disableAutoRetire: !retiring,
                 quantity: String(order.quantity),
-                retirementReason: retirementReason,
+                retirementReason: retirementReason || '',
                 retirementJurisdiction,
               })),
             });

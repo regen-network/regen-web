@@ -2,7 +2,6 @@ import React from 'react';
 import LazyLoad from 'react-lazyload';
 import { useTheme } from '@mui/material';
 import { Theme } from '@mui/material/styles';
-import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { makeStyles } from 'tss-react/mui';
 
 import TimelineItem from './TimelineItem';
@@ -16,10 +15,7 @@ export interface Event {
 
 interface TimelineProps {
   events: Event[];
-  txClient?: ServiceClientImpl;
   completedItemIndex?: number;
-  viewLedgerText: string;
-  onViewOnLedger: (creditVintage: any) => void;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -49,9 +45,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
 export default function Timeline({
   events,
   completedItemIndex,
-  txClient,
-  viewLedgerText,
-  onViewOnLedger,
 }: TimelineProps): JSX.Element {
   const { classes } = useStyles();
   const theme = useTheme();
@@ -95,14 +88,10 @@ export default function Timeline({
                 date={event.date}
                 summary={event.summary}
                 description={event.description}
-                creditVintage={event.creditVintage}
                 circleColor={circleColor}
                 barColor={barColor}
                 odd={index % 2 !== 0}
                 last={index === events.length - 1}
-                txClient={txClient}
-                viewLedgerText={viewLedgerText}
-                onViewOnLedger={onViewOnLedger}
               />
             </div>
           );

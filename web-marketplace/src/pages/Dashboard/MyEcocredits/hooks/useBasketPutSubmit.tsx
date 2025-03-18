@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import type { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
+import type { BasketInfo } from '@regen-network/api/regen/ecocredit/basket/v1/query';
+import { MsgPut } from '@regen-network/api/regen/ecocredit/basket/v1/tx';
 
 import type { FormValues as BasketPutFormValues } from 'web-components/src/components/form/BasketPutForm/BasketPutForm';
 
@@ -52,6 +52,8 @@ const useBasketPutSubmit = ({
   const basketPutSubmit = useCallback(
     async (values: BasketPutFormValues): Promise<void> => {
       const amount = values.amount?.toString();
+      if (!amount) return;
+
       const basket = baskets?.find(
         basketInfo => basketInfo.basketDenom === values.basketDenom,
       );

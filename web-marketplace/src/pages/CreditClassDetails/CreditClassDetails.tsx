@@ -48,7 +48,7 @@ interface CreditDetailsProps {
 function CreditClassDetails({
   isLandSteward,
 }: CreditDetailsProps): JSX.Element {
-  const { dataClient, ecocreditClient } = useLedger();
+  const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { creditClassId } = useParams();
   const graphqlClient =
@@ -75,11 +75,11 @@ function CreditClassDetails({
 
   const { data: creditClassOnChain } = useQuery(
     getClassQuery({
-      client: ecocreditClient,
+      client: queryClient,
       request: {
         classId: creditClassId ?? '',
       },
-      enabled: !!ecocreditClient && !!creditClassId,
+      enabled: !!queryClient && !!creditClassId,
     }),
   );
   const onChainClass = creditClassOnChain?.class;
@@ -87,8 +87,8 @@ function CreditClassDetails({
   const creditClassMetadataRes = useQuery(
     getMetadataQuery({
       iri: onChainClass?.metadata,
-      enabled: !!dataClient && !!onChainClass?.metadata,
-      dataClient,
+      enabled: !!queryClient && !!onChainClass?.metadata,
+      client: queryClient,
       languageCode: selectedLanguage,
     }),
   );
@@ -191,9 +191,12 @@ function CreditClassDetails({
 
   useEffect(() => {
     const fetch = async (): Promise<void> => {
-      if (creditClassId && isOnChainClassId) {
+      if (creditClassId && isOnChainClassId && queryClient) {
         try {
-          const { issuers } = await queryClassIssuers(creditClassId);
+          const { issuers } = await queryClassIssuers(
+            creditClassId,
+            queryClient,
+          );
           if (issuers) setIssuers(issuers);
         } catch (err) {
           // eslint-disable-next-line
@@ -202,7 +205,7 @@ function CreditClassDetails({
       }
     };
     fetch();
-  }, [creditClassId, isOnChainClassId]);
+  }, [creditClassId, isOnChainClassId, queryClient]);
 
   return (
     <>

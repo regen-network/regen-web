@@ -48,7 +48,11 @@ export default defineConfig(({ mode }) => {
               input: path.join(__dirname, index),
             },
           }
-        : undefined,
+        : {
+            commonjsOptions: {
+              include: [/node_modules/, '@regen-network/api'], // Ensure linked package is transpiled
+            },
+          },
     plugins: [
       react({
         babel: {
@@ -66,7 +70,9 @@ export default defineConfig(({ mode }) => {
     ],
     define: isDev ? { global: {} } : { 'process.env': {} },
     optimizeDeps: {
+      include: ['@regen-network/api'],
       esbuildOptions: {
+        format: 'esm', // Ensure CommonJS dependencies get converted to ESM
         plugins:
           mode === 'development'
             ? [

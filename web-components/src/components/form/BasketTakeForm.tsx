@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Collapse } from '@mui/material';
-import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import { BasketInfo } from '@regen-network/api/regen/ecocredit/basket/v1/query';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 

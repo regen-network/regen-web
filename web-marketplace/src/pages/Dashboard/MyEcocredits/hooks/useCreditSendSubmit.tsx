@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import { MsgSend } from '@regen-network/api/regen/ecocredit/v1/tx';
 
 import type { Item } from 'web-components/src/components/modal/TxModal';
 
@@ -70,8 +70,8 @@ const useCreditSendSubmit = ({
             batchDenom,
             tradableAmount: withRetire ? '' : amount.toString(),
             retiredAmount: withRetire ? amount.toString() : '',
-            retirementJurisdiction: retirementJurisdiction,
-            retirementReason: note,
+            retirementJurisdiction: retirementJurisdiction || '',
+            retirementReason: note || '',
           },
         ],
       });

@@ -1,4 +1,4 @@
-import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { SellOrderInfo } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
 
 import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCard';
 

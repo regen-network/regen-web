@@ -5,51 +5,7 @@ import TableRow from '@mui/material/TableRow';
 
 import { TableActionButtons } from '../buttons/TableActionButtons';
 import { ActionsTable } from './ActionsTable';
-import {
-  DocumentationTable,
-  DocumentRowData,
-} from './DocumentationTable/DocumentationTable';
-import { DOCUMENTATION_HEAD_CELLS } from './DocumentationTable/DocumentationTable.mock';
 import { TablePagination } from './Table.TablePagination';
-
-export default {
-  title: 'Table',
-  component: DocumentationTable,
-};
-
-const data: DocumentRowData[] = [
-  {
-    name: 'Monitoring',
-    type: 'Monitoring',
-    date: '2020-03-15T00:00:00.000Z',
-    url: 'test',
-    ledger: 'test',
-  },
-  {
-    name: 'Issuance Documents',
-    type: 'Issuance',
-    date: '2020-03-15T00:00:00.000Z',
-    url: 'test',
-    ledger: 'test',
-  },
-  {
-    name: 'Project Review',
-    type: 'Project Review',
-    date: '2020-03-15T00:00:00.000Z',
-    url: 'test',
-    ledger: 'test',
-  },
-];
-
-export const documentationTable = (): JSX.Element => (
-  <DocumentationTable
-    rows={data}
-    headCells={DOCUMENTATION_HEAD_CELLS}
-    tableAriaLabel="Documentation Table"
-    viewLedgerText="View on ledger"
-    viewDocumentText="View document"
-  />
-);
 
 export const tablePagination = (): JSX.Element => (
   <Table>

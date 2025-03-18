@@ -20,7 +20,7 @@ export const getBasketBalancesQuery = ({
   ],
   queryFn: async () => {
     if (!client) return null;
-    return await client.BasketBalances(request);
+    return await client.regen.ecocredit.basket.v1.basketBalances(request);
   },
   ...params,
 });

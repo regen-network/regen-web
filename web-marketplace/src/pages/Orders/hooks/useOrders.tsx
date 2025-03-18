@@ -10,7 +10,7 @@ import { useAtom } from 'jotai';
 import uniq from 'lodash/uniq';
 import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
 
-import { useLedger } from 'ledger';
+import { QueryClient, useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
@@ -31,7 +31,7 @@ import { Order } from '../Orders.types';
 
 export const useOrders = () => {
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
-  const { ecocreditClient, dataClient } = useLedger();
+  const { queryClient } = useLedger();
   const { activeAccount, loading, privActiveAccount } = useAuth();
   const { activeWalletAddr } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -143,8 +143,8 @@ export const useOrders = () => {
     queries: sortedOrders.map(order =>
       getProjectQuery({
         request: { projectId: order?.projectId },
-        client: ecocreditClient,
-        enabled: !!ecocreditClient && !!order?.projectId,
+        client: queryClient,
+        enabled: !!queryClient && !!order?.projectId,
       }),
     ),
   });
@@ -160,8 +160,8 @@ export const useOrders = () => {
     queries: onChainProjects.map(project =>
       getMetadataQuery({
         iri: project?.metadata,
-        dataClient,
-        enabled: !!dataClient && !!project?.metadata,
+        client: queryClient,
+        enabled: !!queryClient && !!project?.metadata,
         languageCode: selectedLanguage,
       }),
     ),
@@ -179,7 +179,9 @@ export const useOrders = () => {
 
   const { data: denomTracesData, isLoading: isDenomTracesLoading } = useQuery(
     getDenomTraceByHashesQuery({
+      enabled: !!queryClient,
       hashes: ibcDenomHashes.filter(Boolean) as string[],
+      queryClient: queryClient as QueryClient,
     }),
   );
 

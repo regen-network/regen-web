@@ -34,7 +34,7 @@ export interface FetchBasketEcocreditsType {
 export const useFetchBasketEcocredits = ({
   basketDenom,
 }: Params): FetchBasketEcocreditsType => {
-  const { basketClient } = useLedger();
+  const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const [paginationParams, setPaginationParams] =
@@ -50,19 +50,21 @@ export const useFetchBasketEcocredits = ({
   const balancesQuery = useMemo(
     () =>
       getBasketBalancesQuery({
-        enabled: !!basketClient,
-        client: basketClient,
+        enabled: !!queryClient && !!basketDenom,
+        client: queryClient,
         request: {
-          basketDenom,
+          basketDenom: basketDenom as string,
           pagination: {
-            offset: page * rowsPerPage,
-            limit: rowsPerPage,
+            offset: BigInt(page * rowsPerPage),
+            limit: BigInt(rowsPerPage),
             countTotal: true,
+            reverse: false,
+            key: new Uint8Array(),
           },
         },
         keepPreviousData: true,
       }),
-    [basketClient, page, rowsPerPage, basketDenom],
+    [queryClient, page, rowsPerPage, basketDenom],
   );
   const { data: balancesData, isLoading: isLoadingCredits } =
     useQuery(balancesQuery);

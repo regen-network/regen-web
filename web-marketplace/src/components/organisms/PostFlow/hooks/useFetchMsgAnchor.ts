@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useLingui } from '@lingui/react';
 import { TxResponse } from '@regen-network/api/cosmos/base/abci/v1beta1/abci';
 import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
-import { MsgAnchor } from '@regen-network/api/regen/data/v2/tx';
+import { MsgAnchor } from '@regen-network/api/regen/data/v1/tx';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { timer } from 'utils/timer';

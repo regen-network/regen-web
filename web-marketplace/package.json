@@ -25,7 +25,7 @@
     "@mui/material": "^5.10.10",
     "@mui/styles": "^5.10.10",
     "@rdfjs/parser-jsonld": "^2.1.0",
-    "@regen-network/api": "0.7.1",
+    "@regen-network/api": "v1.0.0-alpha6",
     "@sentry/react": "^7.53.0",
     "@sentry/tracing": "^7.53.0",
     "@stripe/react-stripe-js": "^2.7.3",

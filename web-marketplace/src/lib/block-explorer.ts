@@ -22,14 +22,18 @@ export const getAccountUrl = (
   return '';
 };
 
-export const getHashUrl = (txHash: string | undefined): string => {
-  if (!txHash) return '';
+export const getBaseTransactionUrl = (): string => {
   if (isAneka) {
-    return `${explorer}/txs/${txHash}`;
+    return `${explorer}/txs/`;
   } else if (isMintscan) {
-    return `${explorer}/regen/txs/${txHash}`;
+    return `${explorer}/regen/txs/`;
   } else if (isAtomscan) {
-    return `${explorer}/regen-network/transactions/${txHash}`;
+    return `${explorer}/regen-network/transactions/`;
   }
   return '';
+};
+
+export const getHashUrl = (txHash: string | undefined | ''): string => {
+  if (!txHash) return '';
+  return `${getBaseTransactionUrl()}${txHash}`;
 };

@@ -388,7 +388,7 @@ export const BuyCreditsForm = ({
           : 'mt-20 sm:mt-40'
       }
     >
-      <div>
+      <div className="w-full flex justify-center">
         {activeStep === 0 && (
           <ChooseCreditsForm
             retiring={retiring}

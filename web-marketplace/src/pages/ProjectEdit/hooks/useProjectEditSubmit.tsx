@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { regen } from '@regen-network/api';
 import {
   MsgUpdateProjectAdmin,
   MsgUpdateProjectMetadata,
@@ -62,72 +63,79 @@ const useProjectEditSubmit = ({
         getAnchoredProjectBaseMetadata(metadata, creditClassId),
       );
       if (!iriResponse) return;
-      const msgs: Array<MsgUpdateProjectMetadata | MsgUpdateProjectAdmin> = [];
+      const msgs: Array<
+        | { typeUrl: string; value: MsgUpdateProjectMetadata }
+        | { typeUrl: string; value: MsgUpdateProjectAdmin }
+      > = [];
 
-      if (doUpdateMetadata)
-        msgs.push(
-          MsgUpdateProjectMetadata.fromPartial({
-            projectId,
-            admin,
-            newMetadata: iriResponse.iri,
-          }),
-        );
+      const { updateProjectMetadata, updateProjectAdmin } =
+        regen.ecocredit.v1.MessageComposer.withTypeUrl;
+      if (projectId && admin) {
+        if (doUpdateMetadata)
+          msgs.push(
+            updateProjectMetadata({
+              projectId,
+              admin,
+              newMetadata: iriResponse.iri,
+            }),
+          );
 
-      if (doUpdateAdmin && newAdmin)
-        msgs.push(
-          MsgUpdateProjectAdmin.fromPartial({
-            projectId,
-            admin,
-            newAdmin,
-          }),
-        );
+        if (doUpdateAdmin && newAdmin)
+          msgs.push(
+            updateProjectAdmin({
+              projectId,
+              admin,
+              newAdmin,
+            }),
+          );
 
-      const onError = (err?: Error): void => {
-        onErrorCallback && onErrorCallback(err);
-      };
-      const onSuccess = (): void => {
-        if (projectId && metadata) {
-          const cardItems = [
-            {
-              label: 'project',
-              value: {
-                name: metadata['schema:name'] || '',
-                url: `/project/${projectId}`,
-              },
-            },
-          ];
-
-          if (doUpdateAdmin && admin && newAdmin) {
-            cardItems.push(
+        const onError = (err?: Error): void => {
+          onErrorCallback && onErrorCallback(err);
+        };
+        const onSuccess = (): void => {
+          if (projectId && metadata) {
+            const cardItems = [
               {
-                label: _(msg`new project admin`),
+                label: 'project',
                 value: {
-                  name: newAdmin,
-                  url: `/profiles/${newAdmin}/portfolio`,
+                  name: metadata['schema:name'] || '',
+                  url: `/project/${projectId}`,
                 },
               },
-              {
-                label: _(msg`old project admin`),
-                value: {
-                  name: admin,
-                  url: `/profiles/${admin}/portfolio`,
+            ];
+
+            if (doUpdateAdmin && admin && newAdmin) {
+              cardItems.push(
+                {
+                  label: _(msg`new project admin`),
+                  value: {
+                    name: newAdmin,
+                    url: `/profiles/${newAdmin}/portfolio`,
+                  },
                 },
-              },
-            );
+                {
+                  label: _(msg`old project admin`),
+                  value: {
+                    name: admin,
+                    url: `/profiles/${admin}/portfolio`,
+                  },
+                },
+              );
+            }
+
+            onTxSuccessful({
+              cardItems,
+              title: _(PROJECT_UPDATED_METADATA_HEADER),
+              cardTitle: _(PROJECT_UPDATE_METADATA_LABEL),
+            });
           }
+        };
 
-          onTxSuccessful({
-            cardItems,
-            title: _(PROJECT_UPDATED_METADATA_HEADER),
-            cardTitle: _(PROJECT_UPDATE_METADATA_LABEL),
-          });
-        }
-      };
-
-      await signAndBroadcast({ msgs }, () => onBroadcast(), {
-        onError,
-        onSuccess,
-      });
+        await signAndBroadcast({ msgs }, () => onBroadcast(), {
+          onError,
+          onSuccess,
+        });
+      }
     },
     [
       creditClassId,

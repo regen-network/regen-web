@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
-import { MsgCancelSellOrder } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
+import { regen } from '@regen-network/api';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
@@ -61,10 +61,13 @@ const useCancelSellOrderSubmit = ({
     setIsProcessingModalOpen(true);
     setSelectedSellOrder(null);
 
-    const msgCancelSellOrder = MsgCancelSellOrder.fromPartial({
-      seller: accountAddress,
-      sellOrderId: BigInt(selectedSellOrder.id),
-    });
+    const msgCancelSellOrder =
+      regen.ecocredit.marketplace.v1.MessageComposer.withTypeUrl.cancelSellOrder(
+        {
+          seller: accountAddress,
+          sellOrderId: BigInt(selectedSellOrder.id),
+        },
+      );
 
     const tx = {
       msgs: [msgCancelSellOrder],

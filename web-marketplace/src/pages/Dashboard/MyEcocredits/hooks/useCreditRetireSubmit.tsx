@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { MsgRetire } from '@regen-network/api/regen/ecocredit/v1/tx';
+import { regen } from '@regen-network/api';
 
 import type { Item } from 'web-components/src/components/modal/TxModal';
 
@@ -67,16 +67,16 @@ const useCreditRetireSubmit = ({
       const { amount: amountValue, retireFields } = values;
       const { retirementJurisdiction, note } = retireFields?.[0] || {};
       const amount = values.amount.toString();
-      const msgRetire = MsgRetire.fromPartial({
+      const msgRetire = regen.ecocredit.v1.MessageComposer.withTypeUrl.retire({
         owner: accountAddress,
-        jurisdiction: retirementJurisdiction,
+        jurisdiction: retirementJurisdiction || '',
         credits: [
           {
             batchDenom,
             amount,
           },
         ],
-        reason: note,
+        reason: note || '',
       });
 
       const tx = {

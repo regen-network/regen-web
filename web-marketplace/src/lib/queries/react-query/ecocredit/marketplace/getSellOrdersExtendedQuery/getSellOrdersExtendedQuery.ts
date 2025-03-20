@@ -1,4 +1,3 @@
-import { PageRequest } from '@regen-network/api/cosmos/base/query/v1beta1/pagination';
 import {
   QuerySellOrdersResponse,
   SellOrderInfo,
@@ -38,7 +37,11 @@ export const getSellOrdersExtendedQuery = ({
       if (response?.pagination?.nextKey?.length) {
         _request.pagination = {
           key: response.pagination.nextKey,
-        } as PageRequest;
+          countTotal: false,
+          offset: 0n,
+          limit: 100n,
+          reverse: false,
+        };
       }
       response = await client.regen.ecocredit.marketplace.v1.sellOrders(
         _request,

@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { regen } from '@regen-network/api';
 import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
 import { MsgAnchor, MsgAttest } from '@regen-network/api/regen/data/v1/tx';
 import { ContentHash_Graph } from '@regen-network/api/regen/data/v1/types';
@@ -73,7 +74,7 @@ export const useSign = ({
       await signAndBroadcast(
         {
           msgs: [
-            MsgAttest.fromPartial({
+            regen.data.v1.MessageComposer.withTypeUrl.attest({
               attestor: wallet?.address,
               contentHashes: [contentHash],
             }),

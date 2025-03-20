@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { SigningStargateClient } from '@cosmjs/stargate';
-import { getSigningCosmosClient, ibc, regen } from '@regen-network/api';
+import { getSigningRegenClient, ibc, regen } from '@regen-network/api';
 import { chains } from 'chain-registry';
 
 import { UseStateSetter } from 'types/react/use-state';
@@ -43,7 +43,7 @@ export async function setupSigningClient(
   if (chain && ledgerRPCUri) {
     setLoading(true);
     try {
-      const signingClient = (await getSigningCosmosClient({
+      const signingClient = (await getSigningRegenClient({
         rpcEndpoint: ledgerRPCUri,
         signer,
       })) as unknown as SigningStargateClient;

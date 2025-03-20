@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
-import { MsgSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx';
+import { regen } from '@regen-network/api';
 import { useQueryClient } from '@tanstack/react-query';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
@@ -59,17 +59,18 @@ const useCreateSellOrderSubmit = ({
 
       // convert to udenom
       const priceInMicro = price ? String(denomToMicro(price)) : ''; // TODO: When other currencies, check for micro denom before converting
-      const msgSell = MsgSell.fromPartial({
-        seller: accountAddress,
-        orders: [
-          {
-            batchDenom,
-            quantity: String(amount),
-            askPrice: { denom: askDenom, amount: priceInMicro },
-            disableAutoRetire: !enableAutoRetire,
-          },
-        ],
-      });
+      const msgSell =
+        regen.ecocredit.marketplace.v1.MessageComposer.withTypeUrl.sell({
+          seller: accountAddress,
+          orders: [
+            {
+              batchDenom,
+              quantity: String(amount),
+              askPrice: { denom: askDenom, amount: priceInMicro },
+              disableAutoRetire: !enableAutoRetire,
+            },
+          ],
+        });
 
       const tx = {
         msgs: [msgSell],

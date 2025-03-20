@@ -1,6 +1,5 @@
 /* eslint-disable lingui/no-unlocalized-strings */
 import { TxResponse } from '@regen-network/api/cosmos/base/abci/v1beta1/abci';
-import { PageRequest } from '@regen-network/api/cosmos/base/query/v1beta1/pagination';
 import {
   BatchBalanceInfo,
   BatchInfo,
@@ -402,7 +401,11 @@ export const queryProjectsByClass = async ({
       if (response?.pagination?.nextKey?.length) {
         request.pagination = {
           key: response.pagination.nextKey,
-        } as PageRequest;
+          countTotal: false,
+          offset: 0n,
+          limit: 100n,
+          reverse: false,
+        };
       }
       response = await client.regen.ecocredit.v1.projectsByClass(request);
       projects.push(...response.projects);
@@ -614,7 +617,11 @@ export const queryClasses = async ({
       if (response?.pagination?.nextKey?.length) {
         request.pagination = {
           key: response.pagination.nextKey,
-        } as PageRequest;
+          countTotal: false,
+          offset: 0n,
+          limit: 100n,
+          reverse: false,
+        };
       }
       response = await client.regen.ecocredit.v1.classes(request);
       classes.push(...response.classes);
@@ -665,7 +672,11 @@ export const queryProjects = async ({
       if (response?.pagination?.nextKey?.length) {
         request.pagination = {
           key: response.pagination.nextKey,
-        } as PageRequest;
+          countTotal: false,
+          offset: 0n,
+          limit: 100n,
+          reverse: false,
+        };
       }
       response = await client.regen.ecocredit.v1.projects(request);
       projects.push(...response.projects);
@@ -697,7 +708,11 @@ export const queryProjectsByAdmin = async ({
       if (response?.pagination?.nextKey?.length) {
         request.pagination = {
           key: response.pagination.nextKey,
-        } as PageRequest;
+          countTotal: false,
+          offset: 0n,
+          limit: 100n,
+          reverse: false,
+        };
       }
       response = await client.regen.ecocredit.v1.projectsByAdmin(request);
       projects.push(...response.projects);

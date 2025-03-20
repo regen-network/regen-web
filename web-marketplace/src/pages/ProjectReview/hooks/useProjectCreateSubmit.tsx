@@ -15,7 +15,7 @@ interface MsgCreateProjectValues {
   admin: string;
   metadata: Partial<ProjectMetadataLD>;
   jurisdiction: string;
-  referenceId?: string;
+  referenceId: string;
 }
 
 interface Props {

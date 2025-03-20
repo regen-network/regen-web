@@ -1,6 +1,7 @@
 import {
   GetTxsEventRequest,
   GetTxsEventResponse,
+  OrderBy,
 } from '@regen-network/api/cosmos/tx/v1beta1/service';
 import { QueryObserverOptions } from '@tanstack/react-query';
 
@@ -16,7 +17,11 @@ export type ReactQueryGetTxsEventResponse =
   QueryObserverOptions<GetTxsEventQueryResponse | null>;
 
 export type ReactQueryGetTxsEventProps = {
-  request: GetTxsEventRequest;
+  request: Omit<GetTxsEventRequest, 'page' | 'limit' | 'orderBy'> & {
+    page?: bigint;
+    limit?: bigint;
+    orderBy?: OrderBy;
+  };
 } & {
   client?: QueryClient;
 } & ReactQueryBuilderResponse<ReactQueryGetTxsEventResponse>;

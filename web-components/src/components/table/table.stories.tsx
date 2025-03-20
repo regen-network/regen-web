@@ -1,28 +1,9 @@
 import { LabelDisplayedRowsArgs } from '@mui/material';
-import Table from '@mui/material/Table';
-import TableFooter from '@mui/material/TableFooter';
-import TableRow from '@mui/material/TableRow';
+import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { TableActionButtons } from '../buttons/TableActionButtons';
 import { ActionsTable } from './ActionsTable';
-import { TablePagination } from './Table.TablePagination';
-
-export const tablePagination = (): JSX.Element => (
-  <Table>
-    <TableFooter>
-      <TableRow>
-        <TablePagination
-          rowsPerPageOptions={[5, 10]}
-          count={6}
-          rowsPerPage={5}
-          page={0}
-          onPageChange={(e, newPage) => {}}
-          onChangeRowsPerPage={e => {}}
-        />
-      </TableRow>
-    </TableFooter>
-  </Table>
-);
 
 const isIgnoreOffset = false;
 const rows = [

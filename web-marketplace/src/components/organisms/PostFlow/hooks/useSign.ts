@@ -4,7 +4,6 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
-import { MsgAnchor, MsgAttest } from '@regen-network/api/regen/data/v1/tx';
 import { ContentHash_Graph } from '@regen-network/api/regen/data/v1/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
@@ -55,7 +54,7 @@ export const useSign = ({
       client: queryClient,
       enabled: false,
       request: {
-        events: [`${messageActionEquals}'${MsgAnchor.typeUrl}'`],
+        events: [`${messageActionEquals}'/regen.data.v1.MsgAnchor'`],
         orderBy: OrderBy.ORDER_BY_DESC,
         page: 1n,
         limit: 1n,
@@ -122,7 +121,7 @@ export const useSign = ({
             await reactQueryClient.invalidateQueries({
               queryKey: getTxsEventQueryKey({
                 request: {
-                  events: [`${messageActionEquals}'${MsgAttest.typeUrl}'`],
+                  events: [`${messageActionEquals}'/regen.data.v1.MsgAttest'`],
                   orderBy: OrderBy.ORDER_BY_DESC,
                 },
               }),

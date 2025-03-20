@@ -8,7 +8,6 @@ import { useLingui } from '@lingui/react';
 import { TxResponse } from '@regen-network/api/cosmos/base/abci/v1beta1/abci';
 import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
 import { EventAttest } from '@regen-network/api/regen/data/v1/events';
-import { MsgAnchor, MsgAttest } from '@regen-network/api/regen/data/v1/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
@@ -65,7 +64,7 @@ export const useAttestEvents = ({
       client: queryClient,
       enabled: !!queryClient && !onlyAttestEvents,
       request: {
-        events: [`${messageActionEquals}'${MsgAnchor.typeUrl}'`],
+        events: [`${messageActionEquals}'/regen.data.v1.MsgAnchor'`],
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
@@ -76,7 +75,7 @@ export const useAttestEvents = ({
       client: queryClient,
       enabled: !!queryClient,
       request: {
-        events: [`${messageActionEquals}'${MsgAttest.typeUrl}'`],
+        events: [`${messageActionEquals}'/regen.data.v1.MsgAttest'`],
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),

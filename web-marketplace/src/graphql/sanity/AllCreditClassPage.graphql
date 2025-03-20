@@ -9,5 +9,8 @@ query allCreditClassPage {
     creditImage {
       ...imageFields
     }
+    bookCallLink {
+      ...linkFields
+    }
   }
 }

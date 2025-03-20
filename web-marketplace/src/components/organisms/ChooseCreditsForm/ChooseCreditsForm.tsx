@@ -60,6 +60,7 @@ import {
 import { OrderSummaryCard } from 'components/molecules/OrderSummaryCard/OrderSummaryCard';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
+import { ChooseCreditsFormCard } from './ChooseCreditsForm.Card';
 import { NOT_ENOUGH_BALANCE } from './ChooseCreditsForm.constants';
 import { CryptoOptions } from './ChooseCreditsForm.CryptoOptions';
 import { PaymentOptions } from './ChooseCreditsForm.PaymentOptions';
@@ -350,6 +351,7 @@ export const ChooseCreditsForm = React.memo(
     return (
       <Form form={form} onSubmit={onSubmit} data-testid="choose-credits-form">
         <div className="flex gap-10 sm:gap-50 flex-col-reverse lg:flex-row items-center lg:items-start">
+          <ChooseCreditsFormCard className="sm:hidden mt-50 w-[calc(100%+1.25rem)] border-x-0 border-b-0 rounded-none" />
           <div>
             <Card className="py-30 px-20 sm:py-50 sm:px-40 border-grey-300 sm:w-[560px]">
               {isUserBalanceLoading ? (
@@ -396,6 +398,7 @@ export const ChooseCreditsForm = React.memo(
                 </>
               )}
             </Card>
+            <ChooseCreditsFormCard className="hidden sm:block mt-20 w-[560px]" />
             <PrevNextButtons
               saveDisabled={Object.entries(errors).length > 0 || isSubmitting}
               saveText={
@@ -404,7 +407,7 @@ export const ChooseCreditsForm = React.memo(
                   : _(NEXT)
               }
               onPrev={onPrev}
-              className="float-right pt-40 mr-20 sm:mr-40 md:mr-0"
+              className="flex justify-end pt-40 sm:pt-60 mr-20 sm:mr-40 md:mr-0"
             />
           </div>
           {project && allowedDenoms && (

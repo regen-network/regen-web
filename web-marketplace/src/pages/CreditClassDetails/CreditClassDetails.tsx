@@ -13,7 +13,7 @@ import { Account } from 'web-components/src/components/user/UserInfo';
 import { useCreditClassByUriQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { openLink } from 'lib/button';
+import { getLinkHref, openLink } from 'lib/button';
 import { client } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { queryClassIssuers } from 'lib/ecocredit/api';
@@ -23,7 +23,7 @@ import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCs
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
-import { getBuyModalOptionsQuery } from 'lib/queries/react-query/sanity/getBuyModalOptionsQuery/getBuyModalOptionsQuery';
+import { getAllCreditClassPageQuery } from 'lib/queries/react-query/sanity/getAllCreditClassPageQuery/getAllCreditClassPageQuery';
 
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
@@ -56,15 +56,15 @@ function CreditClassDetails({
   const [issuers, setIssuers] = useState<string[] | undefined>(undefined);
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
 
-  const { data: buyModalOptionsContent } = useQuery(
-    getBuyModalOptionsQuery({
+  const { data: sanityCreditClassPageData } = useQuery(
+    getAllCreditClassPageQuery({
       sanityClient: client,
+      enabled: !!client,
       languageCode: selectedLanguage,
     }),
   );
-  const buyModalOptions = buyModalOptionsContent?.allBuyModalOptions[0];
-  const scheduleCallLink = String(
-    buyModalOptions?.cards?.[0]?.button?.buttonLink?.buttonHref,
+  const scheduleCallLink = getLinkHref(
+    sanityCreditClassPageData?.allCreditClassPage?.[0]?.bookCallLink,
   );
 
   const { data: contentData } = useAllCreditClassQuery({ client });

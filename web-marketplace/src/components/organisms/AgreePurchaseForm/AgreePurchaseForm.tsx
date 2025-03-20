@@ -135,7 +135,7 @@ export const AgreePurchaseForm = ({
       onSubmit={(values: AgreePurchaseFormSchemaType) =>
         onSubmit(values, stripe, elements)
       }
-      className="max-w-[560px]"
+      className="max-w-[560px] w-full"
     >
       <Retirement retiring={retiring} />
       {!retiring && (
@@ -183,7 +183,7 @@ export const AgreePurchaseForm = ({
         saveDisabled={!isValid || isSubmitting}
         saveText={_(msg`purchase now`)}
         onPrev={handleBack}
-        className="float-right pt-40 mr-20 sm:mr-40 md:mr-0"
+        className="flex justify-end pt-40 sm:pt-60 mr-20 sm:mr-40 md:mr-0 pb-50 sm:pb-0"
       />
     </Form>
   );

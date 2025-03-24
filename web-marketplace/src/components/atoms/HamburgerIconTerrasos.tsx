@@ -6,6 +6,9 @@ type Props = SVGProps<SVGSVGElement> & {
   className?: string;
 };
 
+/**
+ * Mobile menu icon used in Terrasos app
+ */
 export default function HamburgerIcon({
   className,
   ...props

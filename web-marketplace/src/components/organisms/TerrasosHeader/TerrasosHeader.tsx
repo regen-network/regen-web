@@ -8,7 +8,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 
-import HamburgerIcon from 'components/atoms/HumberIconTerrasos';
+import HamburgerIcon from 'components/atoms/HamburgerIconTerrasos';
 import TerrasosLogo from 'components/atoms/TerrasosLogo';
 
 import {

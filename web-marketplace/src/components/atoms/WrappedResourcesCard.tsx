@@ -15,7 +15,6 @@ import { getSanityImgSrc } from '../../lib/imgSrc';
 
 /**
  * ResourcesCard wrapping content from Sanity
- * TODO: once we migrate website content, this can be deleted
  */
 const WrappedResourcesCard: React.FC<
   React.PropsWithChildren<{

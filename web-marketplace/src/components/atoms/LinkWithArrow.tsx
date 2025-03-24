@@ -17,6 +17,10 @@ export interface LinkWithArrowProps {
   target?: '_blank' | '_self';
 }
 
+/**
+ * @returns a Link component with an arrow icon at the end.
+ * If no href is provided, it just returns the styled text label.
+ */
 const LinkWithArrow: React.FC<React.PropsWithChildren<LinkWithArrowProps>> = ({
   sx,
   href,

@@ -430,20 +430,20 @@ export const getAmountLabel = (retiring: boolean) => {
 };
 
 /**
- * Sends an purchase confirmation email after a successful credit purchase.
+ * Sends an order confirmation email after a successful FIAT credits purchase.
  *
- * @param {Object} params.currency - The currency object containing askBaseDenom and askDenom
- * @param {boolean} params.retiring - Whether the credits are being retired or kept tradable
- * @param {Function} params._ - Translation function from i18n
- * @param {string} params.email - Recipient's email address
- * @param {number} params.currencyAmount - The amount paid in the transaction currency
- * @param {string} params.displayDenom - Display denomination of the currency
- * @param {string} params.projectName - Name of the project credits are purchased from
- * @param {number} params.creditsAmount - Amount of credits purchased
- * @param {string} params.txHash - Transaction hash
- * @param {string} params.token - Authentication CSRF token
- * @param {Function} params.retryCsrfRequest - Function to retry request if CSRF token is invalid
- * @param {string} [params.certificateHref] - Optional URL to the retirement certificate
+ * @param {Object} currency - The currency object containing askBaseDenom and askDenom
+ * @param {boolean} retiring - Whether the credits are being retired or kept tradable
+ * @param {Function} _ - Translation function from i18n
+ * @param {string} email - Recipient's email address
+ * @param {number} currencyAmount - The amount paid in the transaction currency
+ * @param {string} displayDenom - Display denomination of the currency
+ * @param {string} projectName - Name of the project credits are purchased from
+//  * @param {number} creditsAmount - Amount of credits purchased
+ * @param {string} txHash - Transaction hash
+ * @param {string} token - Authentication CSRF token
+ * @param {Function} retryCsrfRequest - Function to retry request if CSRF token is invalid
+ * @param {string} [certificateHref] - Optional URL to the retirement certificate
  *
  * @returns {Promise<void>} A promise that resolves when the email is sent
  */

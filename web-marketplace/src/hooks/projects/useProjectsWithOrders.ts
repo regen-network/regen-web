@@ -4,6 +4,8 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
+import { Account } from 'web-components/src/components/user/UserInfo';
+
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
@@ -16,6 +18,7 @@ import {
 } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
+import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin';
 import { getProjectsByClassQuery } from 'lib/queries/react-query/ecocredit/getProjectsByClass/getProjectsByClassQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
@@ -64,6 +67,7 @@ export interface ProjectsWithOrdersProps {
   buyingOptionsFilters?: Record<string, boolean>;
   isOffChainProject?: boolean;
   projectSlugOrId?: string;
+  projectAdmin?: Account;
 }
 
 /**
@@ -92,6 +96,7 @@ export function useProjectsWithOrders({
   // projectSlugOrId is provided from useGetProject which already fetches the individual off-chain project,
   // so we don't have to fetch all off chain projects to find the project slug in this hook
   projectSlugOrId,
+  projectAdmin,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
   const graphqlClient = useApolloClient();
@@ -99,7 +104,22 @@ export function useProjectsWithOrders({
   const { wallet } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
+  const adminAddr = projectAdmin?.address;
+  const adminId = projectAdmin?.id;
+
   /* Main Queries */
+
+  const { data: projectsByAdminData, isFetching: isLoadingProjectsByAdmin } =
+    useQuery(
+      getProjectsByAdminQuery({
+        enabled: !!adminAddr && !!ecocreditClient,
+        client: ecocreditClient,
+        request: { admin: adminAddr },
+      }),
+    );
+  const projectsByAdmin = projectsByAdminData?.projects;
+  const enoughProjectsByAdmin =
+    !!projectsByAdmin && !!limit && projectsByAdmin.length >= limit;
 
   const { data: projectData, isFetching: isLoadingProject } = useQuery(
     getProjectQuery({
@@ -115,7 +135,12 @@ export function useProjectsWithOrders({
   const { data: projectsData, isFetching: isLoadingProjects } = useQuery(
     getProjectsQuery({
       enabled:
-        !isOffChainProject && !classId && !projectId && !!ecocreditClient,
+        !isOffChainProject &&
+        !classId &&
+        !projectId &&
+        !!ecocreditClient &&
+        // if we've found enough projects by given admin, we do not need to fetch for other projects
+        !enoughProjectsByAdmin,
       client: ecocreditClient,
       request: {},
     }),
@@ -163,7 +188,7 @@ export function useProjectsWithOrders({
   const { allOffChainProjects, isAllOffChainProjectsLoading } =
     useFetchAllOffChainProjects({
       sanityCreditClassesData: creditClassData,
-      enabled: enableOffchainProjectsQuery,
+      enabled: enableOffchainProjectsQuery && !enoughProjectsByAdmin,
       sanityProjectsData,
     });
 
@@ -180,6 +205,8 @@ export function useProjectsWithOrders({
     projects = projectArray;
   } else if (classId) {
     projects = projectsByClassData?.projects;
+  } else if (adminAddr && enoughProjectsByAdmin) {
+    projects = projectsByAdmin;
   } else {
     projects = projectsData?.projects;
   }
@@ -201,6 +228,9 @@ export function useProjectsWithOrders({
         random,
         skippedProjectId,
         skippedClassId,
+        adminAddr,
+        enoughProjectsByAdmin,
+        limit,
       }) ?? [],
     [
       clientProjects,
@@ -209,6 +239,9 @@ export function useProjectsWithOrders({
       random,
       skippedProjectId,
       skippedClassId,
+      adminAddr,
+      enoughProjectsByAdmin,
+      limit,
     ],
   );
   const lastRandomProjects = useLastRandomProjects({
@@ -237,9 +270,12 @@ export function useProjectsWithOrders({
   const projectsWithOrderDataFiltered = useMemo(
     () =>
       allOnChainProjects.filter(
-        project => !!project?.sanityCreditClassData || showCommunityProjects,
+        project =>
+          !!project?.sanityCreditClassData ||
+          showCommunityProjects ||
+          !!projectAdmin,
       ),
-    [allOnChainProjects, showCommunityProjects],
+    [allOnChainProjects, showCommunityProjects, projectAdmin],
   );
 
   const hasCommunityProjects = useMemo(

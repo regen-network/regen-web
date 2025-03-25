@@ -208,6 +208,7 @@ export function getAccount(
     image: image,
     address: account.addr || '',
     link: account?.websiteLink || `/profiles/${account.id}`,
+    id: account.id,
   };
 }
 

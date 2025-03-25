@@ -23,6 +23,7 @@ export const getDisplayAccountOrAddress = (
       description: account.description?.trim(),
       link: `${LINK_PREFIX}/profiles/${address}/portfolio`,
       address,
+      id: account.id,
     };
   }
   return {

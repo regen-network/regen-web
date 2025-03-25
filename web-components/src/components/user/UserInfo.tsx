@@ -27,6 +27,7 @@ export interface User {
 
 export interface Account extends User {
   address: string;
+  id?: string;
 }
 
 interface UserInfoProps {

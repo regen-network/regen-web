@@ -74,7 +74,7 @@ msgstr "{area, plural, one {acre} other {acres}}"
 msgid "{area, plural, one {hectare} other {hectares}}"
 msgstr "{area, plural, one {hectárea} other {hectáreas}}"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:311
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:320
 msgid "{creditsAvailable, plural, one {Credit amount adjusted: Only {formattedCreditsAvailable} credit available in {displayDenom}} other {Credit amount adjusted: Only {formattedCreditsAvailable} credits available in {displayDenom}}}"
 msgstr "{créditosDisponibles, plural, one {Monto de crédito ajustado: Solo {formattedCreditsAvailable} créditos disponibles en {displayDenom}} other {Monto de crédito ajustado: Solo {formattedCreditsAvailable} créditos disponibles en {displayDenom}}}"
 
@@ -260,7 +260,7 @@ msgstr "Una breve descripción de su proyecto de impacto ecológico y de la prop
 msgid "A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
 msgstr "Un sistema de pastoreo controlado en el que el ganado se traslada con frecuencia entre las divisiones de pasturas o potreros en función de la calidad del forraje y las necesidades nutricionales del ganado. Las cercas portátiles permiten que cada potrero descanse y vuelva a crecer hasta la siguiente rotación de pastoreo."
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:91
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:93
 msgid "A project of <0>Regen Network<1/> Development, PBC</0>"
 msgstr "Un proyecto de desarrollo de <0>Regen Network<1/>, PBC</0>"
 
@@ -310,7 +310,7 @@ msgid "Actions"
 msgstr "Comportamiento"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:63
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:50
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:52
 #: src/pages/Activity/Activity.tsx:12
 msgid "Activity"
 msgstr "Actividad"
@@ -474,11 +474,11 @@ msgstr "El monto no puede exceder"
 msgid "Amount Escrowed"
 msgstr "Monto depositado en depósito"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:156
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:165
 msgid "amount now available in"
 msgstr "Cantidad ahora disponible en"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:102
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:111
 msgid "amount now available in usd"
 msgstr "Cantidad ahora disponible en USD"
 
@@ -491,8 +491,8 @@ msgid "Amount of credits"
 msgstr "Cantidad de créditos"
 
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:6
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:298
-#: src/pages/BuyCredits/hooks/usePurchase.ts:446
+#: src/pages/BuyCredits/BuyCredits.constants.ts:23
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:307
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:126
 msgid "amount retired"
 msgstr "cantidad retirada"
@@ -517,8 +517,8 @@ msgid "Amount to sell"
 msgstr "Cantidad a vender"
 
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:7
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:299
-#: src/pages/BuyCredits/hooks/usePurchase.ts:447
+#: src/pages/BuyCredits/BuyCredits.constants.ts:24
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:308
 msgid "amount tradable"
 msgstr "cantidad negociable"
 
@@ -712,9 +712,13 @@ msgstr "Fecha de inicio del lote"
 msgid "BATCH START DATE"
 msgstr "FECHA DE INICIO DEL LOTE"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:130
-msgid "Because we use blockchain technology, if another user purchases the credits before you check out, you’ll need to choose different credits."
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:139
+msgid "Because we use blockchain technology, if another user purchases the credits before you check out, you'll need to choose different credits."
 msgstr "Debido a que utilizamos tecnología blockchain, si otro usuario compra los créditos antes de realizar el pago, deberá elegir créditos diferentes."
+
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:130
+#~ msgid "Because we use blockchain technology, if another user purchases the credits before you check out, you’ll need to choose different credits."
+#~ msgstr "Debido a que utilizamos tecnología blockchain, si otro usuario compra los créditos antes de realizar el pago, deberá elegir créditos diferentes."
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:159
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:74
@@ -1023,7 +1027,7 @@ msgstr "Elige el lote de ecocréditos"
 msgid "Choose how to purchase credits"
 msgstr "Elige cómo comprar créditos"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:168
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:177
 msgid "Choose new credits"
 msgstr "Elige nuevos créditos"
 
@@ -1363,7 +1367,7 @@ msgstr "Cronología de clases de créditos"
 msgid "Credit class: the structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr "Clase de crédito: la estructura, procedimientos y requisitos para el registro de proyectos, la cuantificación, seguimiento, reporte y verificación (MRV), y la emisión de créditos relacionados con un determinado tipo de crédito."
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:28
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
 #: src/pages/Dashboard/Dashboard.constants.tsx:36
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:87
 #: src/pages/Home/Home.tsx:180
@@ -1693,7 +1697,7 @@ msgid "Ecocredit batch ID"
 msgstr "Identificación del lote de ecocrédito"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:70
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:54
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:56
 msgid "Ecocredit batches"
 msgstr "Lotes de ecocrédito"
 
@@ -1915,7 +1919,7 @@ msgstr "Fecha de entrega prevista"
 msgid "Explain the reason you are retiring these credits"
 msgstr "Explique el motivo por el cual está retirando estos créditos."
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:21
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:23
 msgid "Explore"
 msgstr "Explorar"
 
@@ -2002,7 +2006,7 @@ msgstr "Los archivos aún se pueden compartir de forma privada a través de un e
 msgid "Filters"
 msgstr "Filtros"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:109
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:118
 msgid "find another credit card project"
 msgstr "Encuentra otro proyecto de tarjeta de crédito"
 
@@ -2107,11 +2111,11 @@ msgstr "Altamente significativo"
 msgid "Home"
 msgstr "Inicio"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:67
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:69
 msgid "How-to Articles"
 msgstr "Artículos instructivos"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:71
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:73
 msgid "How-to Videos"
 msgstr "Videos instructivos"
 
@@ -2263,7 +2267,7 @@ msgstr "emisores"
 msgid "Issuers"
 msgstr "Emisores"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:105
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:107
 msgid "join the community"
 msgstr "Únete a la comunidad"
 
@@ -2321,7 +2325,7 @@ msgstr "Aprende más"
 msgid "Learn more"
 msgstr "Más información"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:60
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:62
 #: src/pages/Home/Home.tsx:199
 msgid "Learn More"
 msgstr "Más información"
@@ -2793,7 +2797,7 @@ msgstr "operador"
 msgid "Opportunities"
 msgstr "Oportunidades"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:114
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:123
 msgid "or, buy with crypto"
 msgstr "o comprar con criptomonedas"
 
@@ -3105,7 +3109,7 @@ msgstr "Condiciones ambientales previas"
 msgid "Prior to adopting these regenerative practices (going back 5 years prior) how were you using the land?"
 msgstr "Antes de adoptar estas prácticas regenerativas (hace 5 años) ¿cómo utilizabas la tierra?"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:104
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:106
 msgid "Privacy"
 msgstr "Privacidad"
 
@@ -3156,14 +3160,14 @@ msgstr "Tipo de perfil"
 msgid "program"
 msgstr "programa"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:63
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:65
 msgid "Program Guide"
 msgstr "Guía del programa"
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:86
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:5
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:290
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:299
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:143
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
@@ -3338,7 +3342,7 @@ msgstr "PROYECTADO:"
 
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:37
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:24
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
 #: src/pages/Dashboard/Dashboard.constants.tsx:30
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:81
@@ -3433,7 +3437,7 @@ msgstr "ID de referencia (ID del proyecto CFC)"
 msgid "Regen - Ecocredits"
 msgstr "Regen - Ecocréditos"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:102
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:104
 msgid "Regen Data Provider"
 msgstr "Proveedor de datos de regeneración"
 
@@ -3613,7 +3617,7 @@ msgstr "Lugar de retiro"
 msgid "Retirement note"
 msgstr "Nota de retirada"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:215
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:224
 msgid "Retirement permanently removes used credits from circulation to prevent their reuse, ensuring that the environmental benefit claimed is real and not double-counted."
 msgstr "La retirada elimina permanentemente de circulación los créditos usados para evitar su reutilización, garantizando así que el beneficio ambiental reclamado sea real y no se contabilice dos veces."
 
@@ -3695,7 +3699,7 @@ msgstr "Escanee con la aplicación móvil Keplr"
 msgid "SDGs"
 msgstr "ODS"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:139
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:148
 msgid "search for new credits"
 msgstr "buscar nuevos creditos"
 
@@ -3912,15 +3916,15 @@ msgstr "Índice social y cultural"
 msgid "Sold Out"
 msgstr "Agotado"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:126
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:135
 msgid "Sorry, another user has purchased all of the available credits from this project"
 msgstr "Lo sentimos, otro usuario ha comprado todos los créditos disponibles de este proyecto."
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:97
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:106
 msgid "Sorry, another user has purchased all of the USD credits you selected!"
 msgstr "Lo sentimos, ¡otro usuario ha comprado todos los créditos USD que seleccionaste!"
 
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:151
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:160
 msgid "Sorry, another user has purchased some or all of the credits you selected!"
 msgstr "Lo sentimos, otro usuario ha comprado algunos o todos los créditos que seleccionaste."
 
@@ -3987,7 +3991,7 @@ msgid "State / Region"
 msgstr "Estado / Región"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:58
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:47
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:49
 msgid "Stats"
 msgstr "Estadísticas"
 
@@ -4003,7 +4007,7 @@ msgstr "El estado se actualiza automáticamente una vez cada 10 segundos si est�
 msgid "step"
 msgstr "paso"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:37
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:39
 msgid "Storefront"
 msgstr "Escaparate"
 
@@ -4057,7 +4061,7 @@ msgstr "Lotes de créditos emitidos con éxito"
 msgid "Summarize this update."
 msgstr "Resuma esta actualización."
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:75
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:77
 msgid "Support"
 msgstr "Apoyo"
 
@@ -4098,7 +4102,7 @@ msgstr "Logotipo Tebu"
 msgid "Tell the deeper story of what makes this project special. Describe the land stewards and why they do this work, the ecological impacts (plants, animals, ecosystems), and social impacts (community, jobs, health)."
 msgstr "Cuente la historia más profunda de lo que hace que este proyecto sea especial. Describa a los administradores de la tierra y por qué hacen este trabajo, los impactos ecológicos (plantas, animales, ecosistemas) y sociales (comunidad, empleos, salud)."
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:103
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:105
 msgid "Terms"
 msgstr "Términos"
 
@@ -4421,7 +4425,7 @@ msgid "total price"
 msgstr "Precio total"
 
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:4
-#: src/pages/BuyCredits/BuyCredits.utils.tsx:272
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:281
 msgid "total purchase price"
 msgstr "Precio total de compra"
 
@@ -4445,7 +4449,7 @@ msgstr "Créditos negociables"
 msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
 msgstr "Los créditos negociables aún no han sido retirados y pueden conservarse, venderse o enviarse a otra parte."
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:34
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:36
 msgid "Trade"
 msgstr "Comercio"
 
@@ -4453,7 +4457,7 @@ msgstr "Comercio"
 msgid "Traditional grazing"
 msgstr "Pastoreo tradicional"
 
-#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:119
+#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:129
 msgid "Transfer pending"
 msgstr "Transferencia pendiente"
 
@@ -5013,7 +5017,7 @@ msgstr "Su nombre"
 msgid "your profiles"
 msgstr "Tus perfiles"
 
-#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:125
+#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:135
 msgid "Your purchase was successful but the credit transfer process hasn’t been completed just yet."
 msgstr "Su compra fue exitosa pero el proceso de transferencia de crédito aún no se ha completado."
 
@@ -5021,7 +5025,7 @@ msgstr "Su compra fue exitosa pero el proceso de transferencia de crédito aún 
 msgid "Your put action was successful!"
 msgstr "¡Su acción de colocación fue exitosa!"
 
-#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:132
+#: src/pages/BuyCredits/hooks/useFetchRetirementForPurchase.ts:142
 msgid "Your retirement certificate will be generated as soon as the credits are transferred, please check later. Meanwhile, we have emailed you a receipt to {email}"
 msgstr "Tu certificado de retirada se generará tan pronto como se transfieran los créditos, por favor, compruébalo más tarde. Mientras tanto, te hemos enviado un recibo por correo electrónico a {email}"
 

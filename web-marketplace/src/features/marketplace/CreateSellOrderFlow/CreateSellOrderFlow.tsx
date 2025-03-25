@@ -50,20 +50,36 @@ type Props = {
   credits?: BatchInfoWithBalance[];
 };
 
+/**
+ * This component handles the flow of creating a sell order,
+ * - Modal display for order creation
+ * - Wallet connection verification
+ * - Transaction submission
+ * - Success/failure states and user feedback
+ *
+ * The flow is triggered externally by setting isFlowStarted to true.
+ */
 export const CreateSellOrderFlow = ({
   isFlowStarted,
   setIsFlowStarted,
   credits = [],
 }: Props): JSX.Element => {
   const { _ } = useLingui();
+  // Modal visibility states
   const [isCreateSellOrderOpen, setIsCreateSellOrderOpen] = useState(false);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
+
+  // Transaction result display states
   const [txModalTitle, setTxModalTitle] = useState<string>('');
   const [txButtonTitle, setTxButtonTitle] = useState<string>();
   const [txModalHeader, setTxModalHeader] = useState<string>();
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
+
+  // Global state access for wallet connection modals
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
+
+  // Services access
   const { marketplaceClient } = useLedger();
   const { isConnected } = useWallet();
   const navigate = useNavigate();
@@ -77,6 +93,8 @@ export const CreateSellOrderFlow = ({
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
   };
+
+  // Clean up all transaction state when modal is closed
   const handleTxModalClose = (): void => {
     setCardItems(undefined);
     setTxModalTitle('');
@@ -85,16 +103,20 @@ export const CreateSellOrderFlow = ({
     setError(undefined);
     setIsFlowStarted(false);
   };
+
   const handleError = (): void => {
     closeProcessingModal();
     setTxModalTitle(_(msg`Buy Credits Error`));
   };
+
   const handleTxDelivered = async (
     _deliverTxResponse: DeliverTxResponse,
   ): Promise<void> => {
     closeProcessingModal();
     closeCreateModal();
   };
+
+  // Navigate to portfolio after successful transaction
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
     navigate('/dashboard/portfolio');
@@ -141,6 +163,7 @@ export const CreateSellOrderFlow = ({
     _,
   });
 
+  // Wallet connection and create sell order flow initialization effect
   useEffect(() => {
     if (isFlowStarted && accountAddress) {
       if (isConnected) {

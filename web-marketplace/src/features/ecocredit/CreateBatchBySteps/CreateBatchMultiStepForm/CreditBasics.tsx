@@ -104,6 +104,8 @@ export const getCreditBasicsValidationSchemaFields = ({
     .required(requiredMessage)
     .typeError(invalidDate)
     .test({ ...isPastDateTest }),
+  // Verified Carbon Standard (VCS) credits (the ones starting with C01) require a specific schema
+  // different than the one for all other projects
   metadata: Yup.object().when('projectId', {
     is: (val: string) => val?.startsWith('C01'),
     then: schema => vcsMetadataSchema,
@@ -150,6 +152,11 @@ type Props = {
   saveProjectOptionSelected: (project: Option) => void;
 };
 
+/**
+ * Handles the initial step of the credit creation flow,
+ * collecting project, date and metadata information.
+ */
+
 export default function CreditBasics({
   saveProjectOptionSelected,
 }: Props): React.ReactElement {
@@ -168,6 +175,8 @@ export default function CreditBasics({
 
   const projectOptions = useUpdateProjectOptions(projects);
 
+  // The selected project needs to be updated in parent's state
+  // by passing the parent's state updater (received via props) to the hook
   useSaveProjectSelectedOption({
     projectId,
     projectOptions,

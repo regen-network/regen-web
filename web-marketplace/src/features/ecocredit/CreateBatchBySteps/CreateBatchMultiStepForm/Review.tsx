@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Link } from '@mui/material';
@@ -23,6 +23,10 @@ import { RecipientFormValues } from './Recipients';
 
 // TODO: Only covers case C01
 
+/**
+ * Handles the review step of the credit batch creation flow
+ * displaying the collected information for the user to confirm before submission.
+ */
 export default function Review(): JSX.Element {
   const { values, validateForm, isValid } =
     useFormikContext<CreateBatchFormValues>();
@@ -61,6 +65,7 @@ type CreditBatchInfoProps = {
   };
 };
 
+// Displays credit batch information for review
 function CreditBatchInfo({
   data,
   dataDisplay,
@@ -110,6 +115,7 @@ type RecipientInfoProps = {
   index: number;
 };
 
+// Displays recipient information for review
 function RecipientInfo({ data, index }: RecipientInfoProps): JSX.Element {
   const { _ } = useLingui();
   const { handleActiveStep } = useMultiStep();
@@ -152,6 +158,7 @@ type AdditionalCertificationDisplayProps = {
   index?: string;
 };
 
+// Displays additional certification details, including name and URL
 function AdditionalCertificationDisplay({
   name,
   url,

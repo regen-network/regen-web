@@ -38,6 +38,36 @@ type Props = {
 
 type Params = (values: BridgeFormValues) => Promise<void>;
 
+/**
+ * Creates a callback that processes bridging ecocredits to other blockchains.
+ *
+ * @param accountAddress - The user's wallet address
+ * @param creditBridgeBatch - The credit batch information being bridged
+ * @param signAndBroadcast - Function to sign and broadcast the transaction
+ * @param setCreditBridgeOpen - State setter to control the bridge modal
+ * @param setCardItems - State setter for the transaction details card
+ * @param setTxModalHeader - State setter for the transaction modal header
+ * @param setTxModalTitle - State setter for the transaction modal title
+ * @param setTxButtonTitle - State setter for the transaction button text
+ * @param setTxModalDescription - State setter for the transaction description
+ * @returns A callback function that processes bridge form submissions
+ *
+ * @example
+ * const bridgeSubmit = useCreditBridgeSubmit({
+ *   accountAddress,
+ *   creditBridgeBatch,
+ *   signAndBroadcast,
+ *   setCreditBridgeOpen,
+ *   setCardItems,
+ *   setTxModalHeader,
+ *   setTxModalTitle,
+ *   setTxButtonTitle,
+ *   setTxModalDescription,
+ * });
+ *
+ * // Later in the component:
+ * <BridgeForm onSubmit={bridgeSubmit} />
+ */
 const useCreditBridgeSubmit = ({
   accountAddress,
   creditBridgeBatch,

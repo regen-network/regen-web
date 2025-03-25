@@ -50,9 +50,14 @@ import Recipients, { RecipientsFormValues } from './Recipients';
 import Result from './Result';
 import Review from './Review';
 
+export type CreateBatchFormValues = CreditBasicsFormValues &
+  RecipientsFormValues;
+
 /**
  *
- * Create Batch Multi-Step Form
+ * Core form component for the create credit batches flow.
+ * Handles the multi-step flow: credit basics, recipients,
+ * and final review/submission.
  *
  * The form component, responsabilities:
  *     - Formik instance (context)
@@ -61,11 +66,14 @@ import Review from './Review';
  *     - Apply the corresponding validation schema
  */
 
-export type CreateBatchFormValues = CreditBasicsFormValues &
-  RecipientsFormValues;
-
 export default function CreateBatchMultiStepForm(): React.ReactElement {
   const { _ } = useLingui();
+
+  /**
+   * TODO: We should consider refactoring this to get isPastDateTest, vcsMetadataSchema,
+   * JSONSchema and potentially formModel as props from the parent component (CreateBatchBySteps).
+   * This will reduce redundancy and ensure a single source of truth for these values.
+   */
   const isPastDateTest = useMemo(
     () =>
       getIsPastDateTest({
@@ -73,6 +81,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
       }),
     [_],
   );
+
   const vcsMetadataSchema = useMemo(
     () =>
       getVcsMetadataSchema({
@@ -81,6 +90,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
       }),
     [_],
   );
+
   const JSONSchema = useMemo(
     () =>
       getJSONSchema({
@@ -88,6 +98,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
       }),
     [_],
   );
+
   const formModel = useMemo(
     () =>
       getFormModel({
@@ -105,7 +116,6 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     [isPastDateTest, vcsMetadataSchema, JSONSchema, _],
   );
 
-  // state for fill-the-form flow
   const {
     data,
     activeStep,
@@ -119,7 +129,6 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     resultStatus,
   } = useMultiStep<CreateBatchFormValues>();
 
-  // state for submit flow
   const {
     status: submitStatus,
     deliverTxResponse,
@@ -130,11 +139,12 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
   } = useCreateBatchSubmit();
 
   const currentValidationSchema = isReviewStep
-    ? Yup.object(formModel.validationSchemaFields) // all fields
+    ? Yup.object(formModel.validationSchemaFields)
     : formModel.validationSchema[activeStep];
 
   const [projectOptionSelected, setProjectOptionSelected] = useState<Option>();
 
+  // Provides localized form text
   const bottomFieldsTextMapping = useMemo(
     () => getBottomFieldsTextMapping(_),
     [_],
@@ -152,6 +162,8 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     if (isReviewStep) {
       createBatch(values);
     } else {
+      // We need to update the multi-step context to ensure data accuracy for the review step,
+      // where batch creation depends on the accumulated input from all previous steps
       let dataDisplay;
       if (projectOptionSelected) {
         dataDisplay = {

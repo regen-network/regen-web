@@ -14,8 +14,7 @@ import { useMsgClient } from 'hooks';
 
 import { CreateBatchFormValues } from '../CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
-// TODO
-// Right now, just cases C01 (VCS) and C02 (CFC)
+// TODO: Right now, just cases C01 (VCS) and C02 (CFC)
 
 function prepareVCSMetadata(
   projectId: string,
@@ -49,7 +48,8 @@ async function prepareMsg(
   data: CreateBatchFormValues,
 ): Promise<Partial<MsgCreateBatch> | undefined> {
   if (!data.metadata) return;
-  // First, complete the metadata
+
+  // Complete the metadata for the batch creation
   let metadata:
     | Partial<VCSBatchMetadataLD>
     | Partial<CFCBatchMetadataLD>
@@ -57,10 +57,11 @@ async function prepareMsg(
     data.projectId,
     data.metadata as Partial<VCSBatchMetadataLD>,
   );
+
   if (!metadata) metadata = JSON.parse(data.metadata);
   if (!metadata) return;
 
-  // generate IRI
+  // Generate IRI for the metadata
   let iriResponse:
     | IriFromMetadataSuccess<
         Partial<VCSBatchMetadataLD> | Partial<CFCBatchMetadataLD>
@@ -74,7 +75,7 @@ async function prepareMsg(
     throw new Error(err as string);
   }
 
-  // finally, build Msg for Tx
+  // Build the message for the transaction
   const issuance: BatchIssuance[] = data.recipients.map(recipient => {
     let issuanceRecipient: Partial<BatchIssuance> = {
       recipient: recipient.recipient,
@@ -121,6 +122,26 @@ type Return = {
   closeSubmitModal: () => void;
 };
 
+/**
+ * Manages the process of creating credit batches on the blockchain
+ *
+ * @returns Object containing:
+ *   - status: The current status of the submission process
+ *   - deliverTxResponse: The blockchain response after successful transaction
+ *   - error: Any error that occurred during submission
+ *   - isSubmitModalOpen: Whether the submission modal should be displayed
+ *   - createBatch: Function to initiate the batch creation process
+ *   - closeSubmitModal: Function to close the submission modal
+ *
+ * @example
+ * const {
+ *   createBatch,
+ *   status,
+ *   isSubmitModalOpen,
+ *   closeSubmitModal
+ * } = useCreateBatchSubmit();
+ *
+ */
 export default function useCreateBatchSubmit(): Return {
   const { api } = useLedger();
   const { wallet, signAndBroadcast, deliverTxResponse, error, setError } =
@@ -155,7 +176,7 @@ export default function useCreateBatchSubmit(): Return {
 
     let message: Partial<MsgCreateBatch> | undefined;
 
-    // this check is to bypass if status is `sign` or `broadcast`
+    // This check is to bypass if status is `sign` or `broadcast`
     if (status === 'idle' || status === 'message') {
       try {
         setStatus('message');

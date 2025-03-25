@@ -8,6 +8,14 @@ interface Props {
   saveProjectOptionSelected: (isFound: Option) => void;
 }
 
+/**
+ * Triggers a callback whenever a selected ID matches an option from a list.
+ *
+ * @param projectId - ID to match against options
+ * @param projectOptions - List of available options to search through
+ * @param saveProjectOptionSelected - Callback triggered when a match is found
+ * @returns {void}
+ */
 export default function useSaveProjectSelectedOption({
   projectId,
   projectOptions,

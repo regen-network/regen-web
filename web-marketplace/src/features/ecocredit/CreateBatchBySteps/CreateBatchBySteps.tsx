@@ -30,6 +30,8 @@ import getFormModel from './form-model';
 
 function CreateBatchBySteps(): React.ReactElement {
   const { _ } = useLingui();
+
+  // We need to ensure batches are not created with dates in the past
   const isPastDateTest = useMemo(
     () =>
       getIsPastDateTest({
@@ -37,6 +39,8 @@ function CreateBatchBySteps(): React.ReactElement {
       }),
     [_],
   );
+
+  // Schema for Verified Carbon Standard projects
   const vcsMetadataSchema = useMemo(
     () =>
       getVcsMetadataSchema({
@@ -45,6 +49,8 @@ function CreateBatchBySteps(): React.ReactElement {
       }),
     [_],
   );
+
+  // Schema for all other projects
   const JSONSchema = useMemo(
     () =>
       getJSONSchema({
@@ -52,6 +58,7 @@ function CreateBatchBySteps(): React.ReactElement {
       }),
     [_],
   );
+
   const formModel = useMemo(
     () =>
       getFormModel({

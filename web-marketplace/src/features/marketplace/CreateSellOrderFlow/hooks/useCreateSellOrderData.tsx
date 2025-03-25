@@ -11,8 +11,20 @@ type ResponseType = {
   credits: BatchInfoWithBalance[];
 };
 
+/**
+ * Prepares data for creating sell orders by filtering tradable credits from a given project.
+ *
+ * @param props.projectId The ID of the project whose credits should be available for sale
+ * @returns Object containing:
+ *   - `isSellFlowDisabled`: Whether the sell flow should be disabled
+ *   - `credits`: Array of credits that are tradable for the specified project
+ *
+ * @example
+ * const { isSellFlowDisabled, credits } = useCreateSellOrderData({ projectId: 'C01' });
+ */
 export const useCreateSellOrderData = ({ projectId }: Props): ResponseType => {
   const { credits, isLoadingCredits } = useFetchEcocredits({});
+
   const creditsForProject = credits?.filter(
     credit => credit.projectId === projectId,
   );

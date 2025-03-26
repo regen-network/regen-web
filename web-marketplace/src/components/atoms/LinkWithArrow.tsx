@@ -18,7 +18,7 @@ export interface LinkWithArrowProps {
 }
 
 /**
- * @returns a Link component with an arrow icon at the end.
+ * Renders a Link component with an arrow icon at the end.
  * If no href is provided, it just returns the styled text label.
  */
 const LinkWithArrow: React.FC<React.PropsWithChildren<LinkWithArrowProps>> = ({

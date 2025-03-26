@@ -16,7 +16,7 @@ interface AccountLinkProps extends MuiLinkProps {
 /** Takes an address and returns a link to either the ecocredits account page, or
  * appropriate block explorer.
  *
- * @returns a `ReactRouterLink` for - Regen accounts, `MuiLink` for other addresses
+ * Renders a `ReactRouterLink` for - Regen accounts, `MuiLink` for other addresses
  *
  * `children` are optional. If not passed, the address is truncated.
  */

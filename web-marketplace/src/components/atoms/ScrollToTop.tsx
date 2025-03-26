@@ -8,7 +8,7 @@ const whitelist = ['ecocredit-batches'];
  * Automatically scrolls the page to the top when navigating to a new route,
  * except for routes that contain certain whitelisted segments.
  *
- * @returns {null} This component does not render anything.
+ * This component does not render anything.
  */
 function ScrollToTop(): null {
   const { pathname } = useLocation();

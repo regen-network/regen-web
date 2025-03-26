@@ -11,6 +11,10 @@ interface Props {
   label?: string;
 }
 
+/**
+ * Displays a label with an associated icon based on the provided status.
+ * The label is either the status text or the custom label passed as a prop.
+ */
 const StatusLabel = ({ status, label }: Props): JSX.Element => {
   const renderIcon = (variant: string): JSX.Element | undefined => {
     switch (variant) {

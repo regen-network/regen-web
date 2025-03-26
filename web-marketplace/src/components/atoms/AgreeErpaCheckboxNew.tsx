@@ -17,6 +17,12 @@ type Props = {
   labelSize?: TextSize;
 } & Omit<CheckboxLabelProps, 'label'>;
 
+/**
+ * Checkbox input to agree to Ecocredit Sales Agreement and Terms of Service
+ * in the context of credits purchase
+ * We forward a ref to enable the parent to interact with the input through
+ * react-hook-form register
+ */
 const AgreeErpaCheckbox = forwardRef<HTMLButtonElement, Props>(
   ({ sx, labelClassName, labelSize, ...props }, ref) => {
     return (

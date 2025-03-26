@@ -8,7 +8,7 @@ interface LinkProps extends MuiLinkProps, PropsWithChildren {
 }
 
 /**
- * @returns a Material UI `Link` - will use React Router for local links.
+ * Renders a Material UI `Link` - will use React Router for local links.
  * Defaults to `target='_blank'` for external links.
  */
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(

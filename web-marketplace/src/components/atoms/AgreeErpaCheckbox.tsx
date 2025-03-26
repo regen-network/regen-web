@@ -11,6 +11,12 @@ interface Props {
   sx?: SxProps<Theme>;
 }
 
+/**
+ * Deprecated
+ * Formik-based AgreeErpaCheckbox, use AgreeErpaCheckboxNew instead
+ * Checkbox input to agree to Ecocredit Sales Agreement and Terms of Service
+ * in the context of credits purchase
+ */
 const AgreeErpaCheckbox: React.FC<React.PropsWithChildren<Props>> = ({
   sx,
 }: Props) => {

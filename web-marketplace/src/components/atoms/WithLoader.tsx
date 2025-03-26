@@ -11,6 +11,10 @@ type Props = {
   className?: string;
 };
 
+/**
+ * Displays a loading indicator (either circular or skeleton) while the content is loading.
+ * Once loading is complete, it renders the provided children.
+ */
 const WithLoader = ({
   isLoading,
   children,

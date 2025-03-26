@@ -9,7 +9,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 import { Link } from './Link';
 
 /**
- * @returns a registry `Link` with the navlink styles applied.
+ * Renders a registry `Link` with the navlink styles applied.
  */
 export const RegistryNavLink: React.FC<React.PropsWithChildren<NavLinkProps>> =
   ({ children, href, overrideClassname, className, disabled }) => {

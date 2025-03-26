@@ -1,10 +1,11 @@
-import { forwardRef } from 'react';
+import { forwardRef, useMemo, useRef } from 'react';
 import { Box } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import MuiTextField from '@mui/material/TextField';
 
 import { sxToArray } from '../../../../utils/mui/sxToArray';
 import { Body } from '../../../typography';
+import usePreventWheelScroll from '../../hooks/usePreventWheelScroll';
 import { useInputLabelStyles } from '../InputLabel/InputLabel.styles';
 import { useTextFieldStyles } from './TextField.styles';
 import { RegenTextFieldProps } from './TextField.types';
@@ -27,6 +28,12 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
     },
     ref,
   ) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+    const isTypeNumber = useMemo(() => props?.type === 'number', [props?.type]);
+
+    // Prevents the wheel scroll for input fields type=number
+    usePreventWheelScroll(inputRef, isTypeNumber);
+
     const { classes: styles } = useTextFieldStyles({
       error,
       label,
@@ -55,6 +62,7 @@ const TextField = forwardRef<HTMLDivElement, RegenTextFieldProps>(
             <InputAdornment position="end">{endAdornment}</InputAdornment>
           ) : null,
           inputProps: { ...customInputProps },
+          inputRef,
         }}
         label={
           hasLabelOrDescription ? (

@@ -168,7 +168,6 @@ export const useFetchRetirementForPurchase = ({
   ]);
 
   const fetchTxHash = useCallback(async () => {
-    setProcessingModalAtom(atom => void (atom.open = true));
     let i = 1;
     let refetchedTxHash;
     while (!txHash && i < 10) {
@@ -183,7 +182,7 @@ export const useFetchRetirementForPurchase = ({
     if (!refetchedTxHash) {
       onPending();
     }
-  }, [onPending, refetchTxHash, setProcessingModalAtom, txHash]);
+  }, [onPending, refetchTxHash, txHash]);
 
   const fetchRetirement = useCallback(async () => {
     let i = 1;
@@ -203,8 +202,11 @@ export const useFetchRetirementForPurchase = ({
   }, [onPending, refetchRetirement]);
 
   useEffect(() => {
-    if (paymentIntentId) fetchTxHash();
-  }, [fetchTxHash, paymentIntentId]);
+    if (paymentIntentId && !retirement) {
+      setProcessingModalAtom(atom => void (atom.open = true));
+      fetchTxHash();
+    }
+  }, [fetchTxHash, paymentIntentId, retirement, setProcessingModalAtom]);
 
   useEffect(() => {
     if (txHash) fetchRetirement();

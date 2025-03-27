@@ -14,10 +14,12 @@ type ResponseType = {
 /**
  * Prepares data for creating sell orders by filtering tradable credits from a given project.
  *
- * @param props.projectId The ID of the project whose credits should be available for sale
+ * @param props See {@link Props}
  * @returns Object containing:
  *   - `isSellFlowDisabled`: Whether the sell flow should be disabled
  *   - `credits`: Array of credits that are tradable for the specified project
+ *
+ * See {@link ResponseType}
  *
  * @example
  * const { isSellFlowDisabled, credits } = useCreateSellOrderData({ projectId: 'C01' });

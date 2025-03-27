@@ -21,6 +21,7 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
     - [- Running tests](#--running-tests)
     - [- Writing tests](#--writing-tests)
   - [Code style](#code-style)
+  - [Code documentation](#code-documentation)
   - [i18n](#i18n)
     - [Important notes](#important-notes)
     - [web-components](#web-components)
@@ -175,6 +176,79 @@ bun run format-and-fix
 If you are using VsCode, there are suggested workspace settings in `.vscode/settings.json.suggested` - copy those over to your workspace `settings.json` and things should format automatically.
 
 Note: You'll need the VsCode extensions for [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) and [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+## Code documentation
+
+Write self explanatory code, and **add comments only when necessary** to explain **why** a part of the code exists, to **explain complex logic** or when the purpose of the code isn't immediately clear.
+
+- Use [TSDoc](https://tsdoc.org/) when writing documentation.
+- Components should have a short comment explaining their role in the overall codebase.
+- For hooks, utilities, and other code elements, add documentation only when necessary to clarify their purpose or behavior, especially if their functionality is not immediately obvious.
+- If a _Type_ requires clarification, use a **block** comment to describe its purpose. This will help provide context in the IntelliSense tooltip.
+
+### Examples:
+
+#### Type documentation
+When needed, explain the purpose of the type's properties
+```ts
+/**
+ * Props for the useSaveProjectSelectedOption hook.
+ */
+interface Props {
+  /** The ID of the project to be matched. */
+  projectId: string;
+  /** The list of available project options to search through. */
+  projectOptions: Option[];
+  /** Callback function to be triggered when a matching option is found. */
+  saveProjectOptionSelected: (isFound: Option) => void;
+}
+```
+
+#### Hook/Utilities documentation
+Explain the code's role, parameters, and return values adding links to the types.
+```ts
+/**
+ * Triggers a callback whenever a selected ID matches an option from a list.
+ *
+ * @param props - See {@link Props}
+ * @returns {void}
+ */
+export default function useSaveProjectSelectedOption({
+  projectId,
+  projectOptions,
+  saveProjectOptionSelected,
+}: Props): void {
+  ...
+};
+```
+#### Complex Logic Explanation
+```ts
+// We're using a timeout here because the animation needs to complete
+// before we can safely remove the element from the DOM
+setTimeout(() => {
+  setIsVisible(false);
+}, 300);
+```
+
+#### TODOs
+Use `// TODO:` to mark incomplete implementations, temporary solutions, or areas that need improvement.
+
+```ts
+// TODO: find a better solution than this hack.
+somethingHacky();
+```
+
+#### What NOT to do
+```ts
+// user
+const x = getIt(id)
+```
+Do this instead - code is self explanatory and doesn't need a comment
+```ts
+const user = getUserById(id);
+```
+
+
 
 ## i18n
 

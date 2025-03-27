@@ -133,6 +133,8 @@ type Return = {
  *   - createBatch: Function to initiate the batch creation process
  *   - closeSubmitModal: Function to close the submission modal
  *
+ * See {@link Return}
+ *
  * @example
  * const {
  *   createBatch,

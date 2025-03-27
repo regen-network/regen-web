@@ -58,7 +58,9 @@ export default function Review(): JSX.Element {
 }
 
 type CreditBatchInfoProps = {
+  /** Data from the credit basics form. See {@link CreditBasicsFormValues} */
   data: CreditBasicsFormValues;
+  /** Complementary data to display in review step. See {@link Option}*/
   dataDisplay: {
     creditClass: Option;
     project: Option;

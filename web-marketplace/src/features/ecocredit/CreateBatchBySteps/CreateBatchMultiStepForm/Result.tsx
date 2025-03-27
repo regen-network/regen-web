@@ -244,6 +244,7 @@ type LinkItem = {
 
 type CardItemListProps = {
   label: string;
+  /** List of recipients. See {@link LinkItem} */
   values: LinkItem[];
 };
 

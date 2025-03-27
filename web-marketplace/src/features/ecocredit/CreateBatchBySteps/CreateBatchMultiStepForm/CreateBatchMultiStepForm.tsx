@@ -60,10 +60,10 @@ export type CreateBatchFormValues = CreditBasicsFormValues &
  * and final review/submission.
  *
  * The form component, responsabilities:
- *     - Formik instance (context)
- *     - Render the corresponding step (view with fields)
- *     - Handle partial submits
- *     - Apply the corresponding validation schema
+ * - Formik instance (context)
+ * - Render the corresponding step (view with fields)
+ * - Handle partial submits
+ * - Apply the corresponding validation schema
  */
 
 export default function CreateBatchMultiStepForm(): React.ReactElement {
@@ -162,8 +162,8 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     if (isReviewStep) {
       createBatch(values);
     } else {
-      // We need to update the multi-step context to ensure data accuracy for the review step,
-      // where batch creation depends on the accumulated input from all previous steps
+      // We need to update the multi-step context with
+      // additional data for the review step.
       let dataDisplay;
       if (projectOptionSelected) {
         dataDisplay = {

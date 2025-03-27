@@ -1,7 +1,7 @@
-query AccountProjectsById($id: UUID!) {
+query AccountProjectsById($id: UUID!, $condition: ProjectCondition) {
   accountById(id: $id) {
     id
-    projectsByAdminAccountId {
+    projectsByAdminAccountId(condition: $condition) {
       nodes {
         ...projectFields
       }

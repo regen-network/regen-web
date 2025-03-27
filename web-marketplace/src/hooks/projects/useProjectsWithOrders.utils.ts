@@ -16,8 +16,6 @@ interface SelectProjectsParams extends ProjectsWithOrdersProps {
   sellOrders: SellOrderInfo[] | undefined;
   skippedClassId?: string;
   adminAddr?: string;
-  enoughProjectsByAdmin: boolean;
-  limit?: number;
 }
 
 export function selectProjects({
@@ -28,8 +26,6 @@ export function selectProjects({
   skippedProjectId,
   skippedClassId,
   adminAddr,
-  enoughProjectsByAdmin,
-  limit,
 }: SelectProjectsParams): ProjectInfo[] | undefined {
   if (!projects || !sellOrders) return;
 
@@ -43,29 +39,10 @@ export function selectProjects({
     _projects = _projects.filter(p => p.classId !== skippedClassId);
 
   if (random) {
-    if (adminAddr && limit) {
-      // In the case where we want to filter by projects admin
-      // but the number of projects by this admin is under the provided limit,
-      // we need to fill in the rest from other admins' projects
-      if (!enoughProjectsByAdmin) {
-        const adminProjects = _projects.filter(
-          project => project.admin === adminAddr,
-        );
-
-        const otherProjects = _projects.filter(
-          project => project.admin !== adminAddr,
-        );
-        const shuffledOthers = shuffle(otherProjects).filter(hasMetadata);
-
-        const needed = limit - adminProjects.length;
-        return [...adminProjects, ...shuffledOthers.slice(0, needed)];
-      } else {
-        // If we have enough projects by the admin,
-        // we just shuffle without filtering those without metadata
-        return shuffle(_projects);
-      }
-    }
-    return shuffle(_projects).filter(hasMetadata);
+    return shuffle(_projects).filter(
+      project =>
+        !!project.metadata || (adminAddr && adminAddr === project.admin),
+    );
   }
   if (metadata) return _projects.filter(hasMetadata);
 

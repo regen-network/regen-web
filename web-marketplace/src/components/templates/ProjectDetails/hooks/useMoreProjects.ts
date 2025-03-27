@@ -12,8 +12,10 @@ export default function useMoreProjects(
     limit: PROJECTS_LIMIT,
     random: true,
     skippedProjectId: projectId,
-    useOffChainProjects: true,
+    showOffChainProjects: true,
     projectAdmin,
+    showCommunityProjects: true,
+    sort: 'admin',
   });
   return { projectsWithOrderData, loading };
 }

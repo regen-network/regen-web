@@ -43,6 +43,7 @@ export const useFetchProjectByAdmin = ({
       id: adminAccountId,
       client: graphqlClient,
       enabled: adminAccountId !== undefined,
+      languageCode: selectedLanguage,
     }),
   );
 
@@ -54,7 +55,7 @@ export const useFetchProjectByAdmin = ({
     }),
   );
   const offChainProjects =
-    accountData?.accountById?.projectsByAdminAccountId?.nodes;
+    accountData?.data?.accountById?.projectsByAdminAccountId?.nodes;
 
   const { data: sanityCreditClassData } = useQuery(
     getAllSanityCreditClassesQuery({
@@ -77,7 +78,7 @@ export const useFetchProjectByAdmin = ({
 
   // Get data for projects that are only off chain
   const onlyOffChainProjects =
-    adminAccountId === accountData?.accountById?.id
+    adminAccountId === accountData?.data?.accountById?.id
       ? offChainProjects?.filter(
           project =>
             !project?.onChainId && (project?.published || keepUnpublished),

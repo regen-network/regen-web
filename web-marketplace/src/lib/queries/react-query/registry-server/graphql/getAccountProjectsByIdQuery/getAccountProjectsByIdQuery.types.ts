@@ -7,11 +7,16 @@ import {
 } from 'generated/graphql';
 
 import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
+import { EnglishProjectsMetadata } from '../getAllProjectsQuery/getAllProjectsQuery.types';
 
 export type ReactQueryGetAccountProjectsByIdQueryResponse =
-  QueryObserverOptions<AccountProjectsByIdQuery | null>;
+  QueryObserverOptions<{
+    data: AccountProjectsByIdQuery;
+    englishProjectsMetadata: EnglishProjectsMetadata;
+  } | null>;
 
 export type ReactQueryGetAccountProjectsByIdQueryParams = {
   client: ApolloClient<NormalizedCacheObject>;
+  languageCode: string;
 } & AccountProjectsByIdQueryVariables &
   ReactQueryBuilderResponse<ReactQueryGetAccountProjectsByIdQueryResponse>;

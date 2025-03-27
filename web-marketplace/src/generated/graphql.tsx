@@ -7618,6 +7618,7 @@ export type AccountByIdQuery = (
 
 export type AccountProjectsByIdQueryVariables = Exact<{
   id: Scalars['UUID'];
+  condition?: Maybe<ProjectCondition>;
 }>;
 
 
@@ -7666,7 +7667,7 @@ export type AllProjectsQuery = (
     { __typename?: 'ProjectsConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'slug' | 'metadata' | 'onChainId' | 'approved' | 'published'>
+      & Pick<Project, 'id' | 'slug' | 'metadata' | 'onChainId' | 'approved' | 'published' | 'adminAccountId'>
       & { creditClassByCreditClassId?: Maybe<(
         { __typename?: 'CreditClass' }
         & Pick<CreditClass, 'id' | 'onChainId'>
@@ -8282,10 +8283,10 @@ export type AccountByIdQueryHookResult = ReturnType<typeof useAccountByIdQuery>;
 export type AccountByIdLazyQueryHookResult = ReturnType<typeof useAccountByIdLazyQuery>;
 export type AccountByIdQueryResult = Apollo.QueryResult<AccountByIdQuery, AccountByIdQueryVariables>;
 export const AccountProjectsByIdDocument = gql`
-    query AccountProjectsById($id: UUID!) {
+    query AccountProjectsById($id: UUID!, $condition: ProjectCondition) {
   accountById(id: $id) {
     id
-    projectsByAdminAccountId {
+    projectsByAdminAccountId(condition: $condition) {
       nodes {
         ...projectFields
       }
@@ -8307,6 +8308,7 @@ export const AccountProjectsByIdDocument = gql`
  * const { data, loading, error } = useAccountProjectsByIdQuery({
  *   variables: {
  *      id: // value for 'id'
+ *      condition: // value for 'condition'
  *   },
  * });
  */
@@ -8374,6 +8376,7 @@ export const AllProjectsDocument = gql`
       onChainId
       approved
       published
+      adminAccountId
       creditClassByCreditClassId {
         id
         onChainId

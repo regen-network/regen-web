@@ -2,6 +2,7 @@ query AllProjects {
   allProjects(condition: { approved: true, published: true }) {
     nodes {
       id
+      adminAccountId
       slug
       metadata
       onChainId

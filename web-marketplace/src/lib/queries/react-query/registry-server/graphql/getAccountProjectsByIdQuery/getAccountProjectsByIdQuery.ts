@@ -2,7 +2,9 @@ import {
   AccountProjectsByIdDocument,
   AccountProjectsByIdQuery,
 } from 'generated/graphql';
+import { jsonLdCompact } from 'lib/rdf';
 
+import { EnglishProjectsMetadata } from '../getAllProjectsQuery/getAllProjectsQuery.types';
 import {
   ReactQueryGetAccountProjectsByIdQueryParams,
   ReactQueryGetAccountProjectsByIdQueryResponse,
@@ -11,6 +13,7 @@ import { getAccountProjectsByIdQueryKey } from './getAccountProjectsByIdQuery.ut
 
 export const getAccountProjectsByIdQuery = ({
   client,
+  languageCode,
   ...params
 }: ReactQueryGetAccountProjectsByIdQueryParams): ReactQueryGetAccountProjectsByIdQueryResponse => ({
   queryKey: getAccountProjectsByIdQueryKey(params),
@@ -20,8 +23,30 @@ export const getAccountProjectsByIdQuery = ({
         query: AccountProjectsByIdDocument,
         variables: { ...params },
       });
+      const englishProjectsMetadata: EnglishProjectsMetadata = {};
+      await Promise.all(
+        data?.accountById?.projectsByAdminAccountId?.nodes?.map(
+          async project => {
+            if (project?.metadata && project?.id) {
+              englishProjectsMetadata[project?.id] = await jsonLdCompact(
+                project.metadata,
+              );
+            }
+            const localizedMetadata =
+              project?.projectTranslationsById?.nodes.find(
+                translation => translation?.languageCode === languageCode,
+              )?.metadata;
 
-      return data;
+            if (localizedMetadata || project?.metadata) {
+              project.metadata = await jsonLdCompact(
+                localizedMetadata ?? project?.metadata,
+              );
+            }
+          },
+        ) || [],
+      );
+
+      return { data, englishProjectsMetadata };
     } catch (e) {
       return null;
     }

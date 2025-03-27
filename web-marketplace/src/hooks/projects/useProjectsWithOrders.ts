@@ -35,7 +35,7 @@ import {
   sortPinnedProject,
   sortProjects,
 } from 'pages/Projects/AllProjects/utils/sortProjects';
-import { useFetchAllOffChainProjects } from 'pages/Projects/hooks/useOffChainProjects';
+import { useOffChainProjects } from 'pages/Projects/hooks/useOffChainProjects';
 import { ProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders.types';
 import {
   CREDIT_CARD_BUYING_OPTION_ID,
@@ -59,7 +59,7 @@ export interface ProjectsWithOrdersProps {
   pinnedIds?: string[]; // list of on-chain id, uuid or slug to pinned at the top
   sort?: string;
   creditClassFilter?: Record<string, boolean>;
-  useOffChainProjects?: boolean;
+  showOffChainProjects?: boolean;
   enableOffchainProjectsQuery?: boolean;
   regionFilter?: Record<string, boolean>;
   environmentTypeFilter?: Record<string, boolean>;
@@ -86,7 +86,7 @@ export function useProjectsWithOrders({
   sort = '',
   projectId,
   creditClassFilter = {},
-  useOffChainProjects = false,
+  showOffChainProjects = false,
   enableOffchainProjectsQuery = true,
   regionFilter = {},
   environmentTypeFilter = {},
@@ -117,7 +117,9 @@ export function useProjectsWithOrders({
         request: { admin: adminAddr },
       }),
     );
-  const projectsByAdmin = projectsByAdminData?.projects;
+  const projectsByAdmin = projectsByAdminData?.projects?.filter(
+    project => !skippedProjectId || project.id !== skippedProjectId,
+  );
   const enoughProjectsByAdmin =
     !!projectsByAdmin && !!limit && projectsByAdmin.length >= limit;
 
@@ -185,11 +187,20 @@ export function useProjectsWithOrders({
     );
 
   // OffChainProjects
+  const limitOffChainProjects = limit
+    ? projectsByAdmin
+      ? limit - projectsByAdmin.length
+      : limit
+    : undefined;
   const { allOffChainProjects, isAllOffChainProjectsLoading } =
-    useFetchAllOffChainProjects({
+    useOffChainProjects({
       sanityCreditClassesData: creditClassData,
       enabled: enableOffchainProjectsQuery && !enoughProjectsByAdmin,
       sanityProjectsData,
+      adminId,
+      limitOffChainProjects,
+      random,
+      skippedProjectId,
     });
 
   const onlyOffChainProjects = allOffChainProjects.filter(
@@ -229,7 +240,6 @@ export function useProjectsWithOrders({
         skippedProjectId,
         skippedClassId,
         adminAddr,
-        enoughProjectsByAdmin,
         limit,
       }) ?? [],
     [
@@ -240,7 +250,6 @@ export function useProjectsWithOrders({
       skippedProjectId,
       skippedClassId,
       adminAddr,
-      enoughProjectsByAdmin,
       limit,
     ],
   );
@@ -256,6 +265,7 @@ export function useProjectsWithOrders({
         sellOrders,
         userAddress: wallet?.address,
         sanityCreditClassData: creditClassData,
+        adminAddr,
       }) as ProjectWithOrderData[],
     [
       lastRandomProjects,
@@ -263,6 +273,7 @@ export function useProjectsWithOrders({
       selectedProjects,
       wallet?.address,
       creditClassData,
+      adminAddr,
     ],
   );
 
@@ -311,16 +322,17 @@ export function useProjectsWithOrders({
   // Merge on-chain and off-chain projects
   const allProjects: Array<NormalizeProject | ProjectWithOrderData> = useMemo(
     () =>
-      creditClassFilter?.[UNREGISTERED_PATH] || useOffChainProjects
+      creditClassFilter?.[UNREGISTERED_PATH] || showOffChainProjects
         ? [...projectsWithMetadataFiltered, ...onlyOffChainProjects]
         : projectsWithMetadataFiltered,
     [
       creditClassFilter,
-      useOffChainProjects,
+      showOffChainProjects,
       projectsWithMetadataFiltered,
       onlyOffChainProjects,
     ],
   );
+  console.log(allProjects);
 
   // Filter projects by class ID, buying option, etc.
   const creditClassFilterKeys = Object.keys(creditClassFilter);
@@ -523,6 +535,7 @@ export function useProjectsWithOrders({
     loading:
       isLoadingProjects ||
       isLoadingProjectsByClass ||
+      isLoadingProjectsByAdmin ||
       isLoadingSellOrders ||
       !marketplaceClient ||
       isLoadingSanityCreditClasses ||

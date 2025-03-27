@@ -1,6 +1,6 @@
 import React from 'react';
-import { styled, useTheme } from '@mui/styles';
-import { Field, FieldArray, Form, Formik, useFormikContext } from 'formik';
+import { useTheme } from '@mui/styles';
+import { Field, FieldArray, useFormikContext } from 'formik';
 import { makeStyles } from 'tss-react/mui';
 import * as Yup from 'yup';
 
@@ -155,71 +155,6 @@ const recipientInitialValues = {
 export const initialValues = {
   recipients: [{ ...recipientInitialValues }],
 };
-
-export const RecipientsForm: React.FC<React.PropsWithChildren<FormProps>> = ({
-  addressPrefix,
-  mapboxToken,
-  bottomTextMapping,
-  retirementInfoText,
-  deleteButtonText,
-  addButtonText,
-  recipientLabel,
-  amountTradableLabel,
-  amountRetiredLabel,
-  withRetireLabel,
-  submitButtonText,
-  requiredError,
-  minimumError,
-  requiredMessage,
-  invalidRegenAddress,
-  invalidAmount,
-  onSubmit,
-}) => {
-  return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={getValidationSchema({
-        requiredMessage,
-        invalidRegenAddress,
-        invalidAmount,
-        addressPrefix,
-        requiredError,
-        minimumError,
-      })}
-      onSubmit={onSubmit}
-    >
-      {() => (
-        <Form>
-          <RecipientsFieldArray
-            deleteButtonText={deleteButtonText}
-            addButtonText={addButtonText}
-            recipientLabel={recipientLabel}
-            amountTradableLabel={amountTradableLabel}
-            amountRetiredLabel={amountRetiredLabel}
-            withRetireLabel={withRetireLabel}
-            retirementInfoText={retirementInfoText}
-            mapboxToken={mapboxToken}
-            bottomTextMapping={bottomTextMapping}
-          />
-          <Card>
-            <OutlinedButton type="submit">{submitButtonText}</OutlinedButton>
-          </Card>
-        </Form>
-      )}
-    </Formik>
-  );
-};
-
-const Card = styled('div')(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  padding: theme.spacing(10),
-  marginBottom: theme.spacing(10),
-  border: `1px solid ${theme.palette.grey[100]}`,
-  borderRadius: '5px',
-  backgroundColor: theme.palette.primary.main,
-}));
 
 interface ButtonProps {
   buttonText: string;

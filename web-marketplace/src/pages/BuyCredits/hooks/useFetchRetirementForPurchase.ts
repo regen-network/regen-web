@@ -11,6 +11,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { timer } from 'utils/timer';
 
+import { FailedFnType } from 'lib/atoms/error.atoms';
 import {
   processingModalAtom,
   txBuySuccessfulModalAtom,
@@ -34,7 +35,12 @@ import {
   VIEW_CERTIFICATE,
 } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
-import { getCardItems, getSteps } from '../BuyCredits.utils';
+import {
+  getCardItems,
+  getCertificateHref,
+  getSteps,
+  sendPurchaseConfirmationEmail,
+} from '../BuyCredits.utils';
 
 type UseFetchRetirementForPurchaseParams = {
   paymentIntentId?: string;
@@ -47,6 +53,8 @@ type UseFetchRetirementForPurchaseParams = {
   currencyAmount?: number;
   displayDenom?: string;
   shouldRefreshProfileData: boolean;
+  token: string | undefined;
+  retryCsrfRequest: (failedFunction: FailedFnType) => Promise<void>;
 };
 export const useFetchRetirementForPurchase = ({
   paymentIntentId,
@@ -59,6 +67,8 @@ export const useFetchRetirementForPurchase = ({
   currencyAmount,
   displayDenom,
   shouldRefreshProfileData,
+  token,
+  retryCsrfRequest,
 }: UseFetchRetirementForPurchaseParams) => {
   const { _ } = useLingui();
   const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
@@ -158,7 +168,6 @@ export const useFetchRetirementForPurchase = ({
   ]);
 
   const fetchTxHash = useCallback(async () => {
-    setProcessingModalAtom(atom => void (atom.open = true));
     let i = 1;
     let refetchedTxHash;
     while (!txHash && i < 10) {
@@ -173,7 +182,7 @@ export const useFetchRetirementForPurchase = ({
     if (!refetchedTxHash) {
       onPending();
     }
-  }, [onPending, refetchTxHash, setProcessingModalAtom, txHash]);
+  }, [onPending, refetchTxHash, txHash]);
 
   const fetchRetirement = useCallback(async () => {
     let i = 1;
@@ -193,8 +202,11 @@ export const useFetchRetirementForPurchase = ({
   }, [onPending, refetchRetirement]);
 
   useEffect(() => {
-    if (paymentIntentId) fetchTxHash();
-  }, [fetchTxHash, paymentIntentId]);
+    if (paymentIntentId && !retirement) {
+      setProcessingModalAtom(atom => void (atom.open = true));
+      fetchTxHash();
+    }
+  }, [fetchTxHash, paymentIntentId, retirement, setProcessingModalAtom]);
 
   useEffect(() => {
     if (txHash) fetchRetirement();
@@ -256,13 +268,37 @@ export const useFetchRetirementForPurchase = ({
       if (
         activeAccount?.id &&
         (paymentOption === PAYMENT_OPTIONS.CARD || shouldRefreshProfileData)
-      )
+      ) {
         await reactQueryClient.invalidateQueries({
           queryKey: getAccountByIdQueryKey({ id: activeAccount?.id }),
         });
+      }
+
+      if (
+        email &&
+        token &&
+        paymentOption !== PAYMENT_OPTIONS.CARD &&
+        _txHash &&
+        retiring
+      ) {
+        await sendPurchaseConfirmationEmail({
+          currency,
+          retiring,
+          email,
+          currencyAmount,
+          displayDenom,
+          projectName: project?.name,
+          creditsAmount,
+          txHash: _txHash,
+          token,
+          retryCsrfRequest,
+          certificateHref: getCertificateHref(retirement.nodeId, name),
+        });
+      }
     }
   }, [
     _,
+    _txHash,
     activeAccount?.id,
     creditsAmount,
     currency,
@@ -277,9 +313,11 @@ export const useFetchRetirementForPurchase = ({
     reactQueryClient,
     retirement,
     retiring,
+    retryCsrfRequest,
     setProcessingModalAtom,
     setTxBuySuccessfulModalAtom,
     shouldRefreshProfileData,
+    token,
     wallet?.address,
   ]);
 
@@ -287,5 +325,8 @@ export const useFetchRetirementForPurchase = ({
     if (retirement) {
       onSuccess();
     }
-  }, [_, handleSuccess, navigate, onSuccess, retirement]);
+    // Excluding onSuccess from deps to avoid unnecessary calls when its reference changes.
+    // We only need to run it once when retirement is available.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [retirement]);
 };

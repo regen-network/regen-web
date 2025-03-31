@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
@@ -12,7 +11,6 @@ import { useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';
 
 import { getJurisdictionIsoCode } from 'web-components/src/utils/locationStandard';
-import { truncate } from 'web-components/src/utils/truncate';
 
 import { useUpdateAccountByIdMutation } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';
@@ -25,7 +23,7 @@ import {
   txBuySuccessfulModalAtom,
 } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { getHashUrl } from 'lib/block-explorer';
+import { getBaseTransactionUrl } from 'lib/block-explorer';
 import { apiServerUrl } from 'lib/env';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
@@ -51,11 +49,15 @@ import { EMAIL_RECEIPT, PAYMENT_OPTIONS } from '../BuyCredits.constants';
 import { BuyCreditsSchemaTypes, PaymentOptionsType } from '../BuyCredits.types';
 import {
   findMatchingSellOrders,
+  getAmountLabel,
+  getBaseCertificateUrl,
+  getBaseOrderUrl,
   getCardItems,
   getCryptoCurrencyIconSrc,
   getSellOrdersCredits,
   getSteps,
   getWarningModalContent,
+  sendPurchaseConfirmationEmail,
 } from '../BuyCredits.utils';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
 
@@ -153,6 +155,8 @@ export const usePurchase = ({
     currencyAmount,
     displayDenom,
     shouldRefreshProfileData,
+    token,
+    retryCsrfRequest,
   });
 
   const { refetchSellOrders } = useFetchSellOrders();
@@ -304,6 +308,17 @@ export const usePurchase = ({
                     paymentMethodId,
                     retirementJurisdiction,
                     retirementReason,
+                    creditsAmount,
+                    displayDenom,
+                    amountLabel: getAmountLabel(retiring),
+                    currencyIconSrc: getCryptoCurrencyIconSrc(
+                      currency.askBaseDenom,
+                      currency.askDenom,
+                    ),
+                    projectName: project.name,
+                    baseTransactionHref: getBaseTransactionUrl(),
+                    certificateBaseHref: getBaseCertificateUrl(),
+                    baseOrderHref: getBaseOrderUrl(),
                   },
                   token,
                   retryCsrfRequest,
@@ -436,39 +451,25 @@ export const usePurchase = ({
 
                   track<BuyExtendedEvent>('buySuccess', trackingEvent);
 
-                  // Send purchase confirmation if email provided
-                  if (email && token) {
-                    const currencyIconSrc = getCryptoCurrencyIconSrc(
-                      currency.askBaseDenom,
-                      currency.askDenom,
-                    );
-                    const amountLabel = retiring
-                      ? _(msg`amount retired`)
-                      : _(msg`amount tradable`);
-
-                    await postData({
-                      url: `${apiUri}/marketplace/v1/confirm-crypto-order`,
-                      data: {
-                        email,
-                        currencyAmount,
-                        currencyIconSrc,
-                        displayDenom,
-                        projectName: project?.name,
-                        amountLabel,
-                        creditsAmount,
-                        txHref: getHashUrl(_txHash),
-                        txHash: truncate(_txHash),
-                        orderHref: `${
-                          window.location.origin
-                        }/dashboard/admin/my-orders#${_txHash?.toLowerCase()}`,
-                      },
-                      token,
-                      retryCsrfRequest,
-                    });
-                  }
-
                   // In case of retirement, it's handled in useFetchRetirementForPurchase
                   if (!retiring) {
+                    // Send purchase confirmation if email provided
+                    if (email && token && _txHash) {
+                      await sendPurchaseConfirmationEmail({
+                        currency,
+                        retiring,
+                        email,
+                        currencyAmount,
+                        displayDenom,
+                        projectName: project.name,
+                        creditsAmount,
+                        txHash: _txHash,
+                        token,
+                        retryCsrfRequest,
+                        certificateHref: '',
+                      });
+                    }
+
                     setProcessingModalAtom(atom => void (atom.open = false));
                     setTxBuySuccessfulModalAtom(atom => {
                       atom.open = true;

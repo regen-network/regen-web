@@ -18,3 +18,8 @@ export const AGREE_PURCHASE = `Agree & purchase`;
 export const COMPLETE = msg`Complete`;
 export const EMAIL_RECEIPT = msg`We have emailed you a receipt to`;
 export const BUY_CREDITS_FORM_PREFIX = 'buy-credits-';
+
+export const AMOUNT_LABELS = {
+  RETIRED: msg`amount retired`,
+  TRADABLE: msg`amount tradable`,
+} as const;

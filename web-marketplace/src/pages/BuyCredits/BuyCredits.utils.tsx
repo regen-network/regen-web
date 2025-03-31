@@ -11,10 +11,14 @@ import {
   USD_DENOM,
   USDC_DENOM,
 } from 'config/allowedBaseDenoms';
+import { postData } from 'utils/fetch/postData';
 import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
 
 import { getFormattedNumber } from 'web-components/src/utils/format';
+import { truncate } from 'web-components/src/utils/truncate';
 
+import { apiUri } from 'lib/apiUri';
+import { getHashUrl } from 'lib/block-explorer';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
@@ -39,6 +43,7 @@ import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCred
 
 import {
   AGREE_PURCHASE,
+  AMOUNT_LABELS,
   BUY_CREDITS_FORM_PREFIX,
   CHOOSE_CREDITS,
   COMPLETE,
@@ -47,7 +52,11 @@ import {
   PAYMENT_OPTIONS,
   RETIREMENT,
 } from './BuyCredits.constants';
-import { BuyCreditsSchemaTypes, PaymentOptionsType } from './BuyCredits.types';
+import {
+  BuyCreditsSchemaTypes,
+  PaymentOptionsType,
+  SendOrderConfirmationEmailParams,
+} from './BuyCredits.types';
 
 type GetFormModelParams = {
   paymentOption: PaymentOptionsType;
@@ -129,7 +138,7 @@ export const getWarningModalContent = (
           <p className="text-lg pb-10 text-center">
             <Trans>
               Because we use blockchain technology, if another user purchases
-              the credits before you check out, you’ll need to choose different
+              the credits before you check out, you'll need to choose different
               credits.
             </Trans>
           </p>
@@ -412,4 +421,76 @@ export const getCryptoCurrencyIconSrc = (
     href =
       'https://regen-registry.s3.us-east-1.amazonaws.com/assets/icons/evmos.png';
   return href;
+};
+
+export const getAmountLabel = (retiring: boolean) => {
+  return retiring
+    ? i18n._(AMOUNT_LABELS.RETIRED)
+    : i18n._(AMOUNT_LABELS.TRADABLE);
+};
+
+/**
+ * Sends an order confirmation email after a successful CRYPTO credits purchase.
+ *
+ * For FIAT purchases, the email handling is managed on the back-end.
+ *
+ * @param props. See {@link SendOrderConfirmationEmailParams} for details.
+ *
+ * @returns {Promise<void>} A promise that resolves when the email is sent
+ */
+export async function sendPurchaseConfirmationEmail({
+  currency,
+  retiring,
+  email,
+  currencyAmount,
+  displayDenom,
+  projectName,
+  creditsAmount,
+  txHash,
+  token,
+  retryCsrfRequest,
+  certificateHref,
+}: SendOrderConfirmationEmailParams) {
+  const currencyIconSrc = getCryptoCurrencyIconSrc(
+    currency.askBaseDenom,
+    currency.askDenom,
+  );
+
+  const amountLabel = getAmountLabel(retiring);
+
+  await postData({
+    url: `${apiUri}/marketplace/v1/confirm-crypto-order`,
+    data: {
+      email,
+      currencyAmount,
+      currencyIconSrc,
+      displayDenom,
+      projectName,
+      amountLabel,
+      creditsAmount,
+      txHref: getHashUrl(txHash),
+      txHash: truncate(txHash),
+      orderHref: `${getBaseOrderUrl()}${txHash?.toLowerCase()}`,
+      certificateHref,
+    },
+    token,
+    retryCsrfRequest,
+  });
+}
+
+export const getBaseCertificateUrl = (): string => {
+  return `${window.location.origin}/certificate/`;
+};
+
+export const getCertificateHref = (
+  retirementId: string,
+  name: string | undefined,
+) => {
+  const baseUrl = getBaseCertificateUrl();
+  const nameParam = name ? `?name=${encodeURIComponent(name)}` : '';
+  return `${baseUrl}${retirementId}${nameParam}`;
+};
+
+export const getBaseOrderUrl = (): string => {
+  return `${window.location.origin}/dashboard/admin/my-orders#`;
 };

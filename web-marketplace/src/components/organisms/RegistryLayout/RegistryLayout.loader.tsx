@@ -15,7 +15,7 @@ type LoaderType = {
 
 export const registryLayoutLoader =
   ({ queryClient, apolloClientFactory }: LoaderType) =>
-  async ({ params }: { params: any }) => {
+  async () => {
     // Queries
     const allSanityProjectsQuery = getAllSanityProjectsQuery({
       sanityClient,

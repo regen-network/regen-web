@@ -37,30 +37,31 @@ export const getMenuItems = (
   _: TranslatorType,
   hasPrefinanceProjects: boolean,
 ): Item[] => {
-  const projectsDropdown = [
-    {
-      pathname,
-      href: '/projects/1',
-      label: _(msg`All projects`),
-      linkComponent: Link,
-      importCallback: (): Promise<any> =>
-        import('../../../pages/Projects/AllProjects'),
-    },
-  ];
-
-  if (hasPrefinanceProjects)
-    projectsDropdown.push({
-      pathname,
-      href: '/projects/prefinance',
-      label: _(msg`Prefinance projects`),
-      linkComponent: Link,
-      importCallback: (): Promise<any> =>
-        import('../../../pages/Projects/PrefinanceProjects'),
-    });
+  const projectsDropdown = hasPrefinanceProjects
+    ? [
+        {
+          pathname,
+          href: '/projects/1',
+          label: _(msg`All projects`),
+          linkComponent: Link,
+          importCallback: (): Promise<any> =>
+            import('../../../pages/Projects/AllProjects'),
+        },
+        {
+          pathname,
+          href: '/projects/prefinance',
+          label: _(msg`Prefinance projects`),
+          linkComponent: Link,
+          importCallback: (): Promise<any> =>
+            import('../../../pages/Projects/PrefinanceProjects'),
+        },
+      ]
+    : undefined;
 
   return [
     {
       title: _(msg`Projects`),
+      href: hasPrefinanceProjects ? undefined : '/projects/1',
       dropdownItems: projectsDropdown,
     },
     {

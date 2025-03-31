@@ -18,7 +18,8 @@ describe('EditableInput', () => {
         isEditable
       />,
     );
-    const amount = screen.getByText('100');
+
+    const amount = screen.getByText('100.00');
     expect(amount).toBeInTheDocument();
     const editButton = await screen.queryByRole('button', {
       name: 'Edit',
@@ -149,7 +150,7 @@ describe('EditableInput', () => {
     });
     fireEvent.click(cancelButton);
 
-    const amount = screen.getByText('100');
+    const amount = screen.getByText('100.00');
     expect(amount).toBeInTheDocument();
     expect(input).not.toBeInTheDocument();
   });
@@ -185,7 +186,7 @@ describe('EditableInput', () => {
     fireEvent.change(input, { target: { value: '300' } });
     fireEvent.keyDown(input, { key: 'Escape', code: 'Escape' });
 
-    const amount = screen.getByText('200');
+    const amount = screen.getByText('200.00');
     expect(amount).toBeInTheDocument();
     expect(input).not.toBeInTheDocument();
   });

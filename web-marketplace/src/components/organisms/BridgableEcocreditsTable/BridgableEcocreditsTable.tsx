@@ -26,7 +26,7 @@ import {
 import { Bridge1Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { BridgeFlow } from 'features/marketplace/BridgeFlow/BridgeFlow';
+import { BridgeFlow } from 'features/ecocredit/BridgeFlow/BridgeFlow';
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import {
   AccountLink,

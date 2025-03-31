@@ -52,6 +52,15 @@ type Props = {
   selectedBatch: BatchInfoWithBalance | undefined;
 };
 
+/**
+ * BridgeFlow component handles the user flow for bridging ecocredits.
+ * It manages the UI state and interactions for:
+ * - Initiating the bridge process
+ * - Displaying modals for transaction processing and success/error states
+ * - Handling wallet connection requirements
+ * - Redirecting the user to the appropriate dashboard view on completion
+ */
+
 export const BridgeFlow = ({
   selectedBatch,
   isFlowStarted,
@@ -88,6 +97,7 @@ export const BridgeFlow = ({
   const handleTxDelivered = async (
     _deliverTxResponse: DeliverTxResponse,
   ): Promise<void> => {
+    // Invalidate queries to refresh UI with updated credit balance data
     reactQueryClient.invalidateQueries({
       queryKey: [
         GET_TXS_EVENT_KEY,
@@ -108,6 +118,7 @@ export const BridgeFlow = ({
     setDeliverTxResponse,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
 
+  // Resets all UI state after transaction modal is closed
   const handleTxModalClose = (): void => {
     setCardItems(undefined);
     setTxModalHeader(undefined);
@@ -140,11 +151,15 @@ export const BridgeFlow = ({
     setTxModalDescription,
   });
 
+  // Effect to handle wallet connection when the bridge flow starts.
+  // Shows appropriate modals based on wallet connection state.
   useEffect(() => {
     if (selectedBatch && isFlowStarted) {
       if (!accountAddress) {
+        // Prompt user to connect wallet if not connected
         setConnectWalletModalAtom(atom => void (atom.open = true));
       } else if (!isConnected) {
+        // Prompt user to switch to connected wallet
         setSwitchWalletModalAtom(atom => {
           atom.open = true;
           atom.onClose = () => resetIsFlowStarted();

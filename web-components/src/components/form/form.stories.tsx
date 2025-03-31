@@ -7,7 +7,6 @@ import { BasketTakeForm } from './BasketTakeForm';
 import { bottomTextMapping } from './form.mock';
 import MoreInfoForm from './MoreInfoForm';
 import NewsletterForm from './NewsletterForm';
-import { FormValues, RecipientsForm } from './RecipientsForm';
 
 const MAPBOX_TOKEN = import.meta.env.STORYBOOK_MAPBOX_TOKEN || '';
 
@@ -81,30 +80,6 @@ export const basketTakeForm = (): JSX.Element => (
     maxLabel="Max"
     availableLabel="Available"
     invalidMemoLength="Invalid memo length"
-  />
-);
-
-export const creditBatchRecipientsForm = (): JSX.Element => (
-  <RecipientsForm
-    requiredError="Must have recipients"
-    minimumError="Minimum of 1 recipient"
-    addButtonText="+Add recipient"
-    deleteButtonText="Delete"
-    recipientLabel="Recipient address"
-    amountTradableLabel="Amount tradable"
-    amountRetiredLabel="Amount Retired"
-    withRetireLabel="Send additional retired credits"
-    submitButtonText="Next"
-    addressPrefix={'regen'}
-    mapboxToken={MAPBOX_TOKEN}
-    onSubmit={async (values: FormValues) =>
-      alert('submit' + JSON.stringify(values, null, 2))
-    }
-    bottomTextMapping={bottomTextMapping}
-    retirementInfoText="Retirement is permanent and non-reversible."
-    requiredMessage="Required"
-    invalidRegenAddress="Invalid Regen address"
-    invalidAmount="Invalid amount"
   />
 );
 

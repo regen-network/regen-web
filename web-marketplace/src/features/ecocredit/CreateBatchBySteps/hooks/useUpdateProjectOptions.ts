@@ -14,6 +14,23 @@ const getDefaultProjectOption = (_: TranslatorType) => ({
   label: _(msg`Choose Project`),
 });
 
+/**
+ * Creates a list of project options that can be used in a dropdown
+ * or select input. It includes a default option for choosing a project and
+ * options for each project in the provided list.
+ *
+ * @param projects - Array of project objects to create options from. See {@link Project}
+ * @returns Array of Option objects with label and value properties for each project. See {@link Option}
+ *
+ * @example
+ * const projectOptions = useUpdateProjectOptions(availableProjects);
+ * return (
+ *   <SelectTextField
+ *     options={projectOptions}
+ *     ...
+ *   />
+ * );
+ */
 export default function useUpdateProjectOptions(projects: Project[]): Option[] {
   const { _ } = useLingui();
   const defaultProjectOption = useMemo(() => getDefaultProjectOption(_), [_]);

@@ -3,11 +3,20 @@ import { useEffect } from 'react';
 import type { Option } from 'web-components/src/components/inputs/SelectTextField';
 
 interface Props {
+  /** The ID of the project to be matched. */
   projectId: string;
+  /** The list of available project options to search through. */
   projectOptions: Option[];
+  /** Callback function to be triggered when a matching option is found. */
   saveProjectOptionSelected: (isFound: Option) => void;
 }
 
+/**
+ * Triggers a callback whenever a selected ID matches an option from a list.
+ *
+ * @param props - See {@link Props}
+ * @returns {void}
+ */
 export default function useSaveProjectSelectedOption({
   projectId,
   projectOptions,

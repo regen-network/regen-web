@@ -20,6 +20,8 @@ import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
 
 import { Link } from 'components/atoms';
 
+// We need to extract batch denom and recipients from the
+// transaction response logs for displaying results
 function parseSuccessResponseLog(
   responseLogEvents: [any],
 ): Omit<SuccessProps, 'txHash'> {
@@ -71,6 +73,11 @@ type ResultProps = {
   error?: string;
 };
 
+/**
+ * Handles the final step of the credit creation flow, processing
+ * the transaction response and displaying either success details
+ * or error information.
+ */
 export default function Result({
   response,
   error,
@@ -127,6 +134,8 @@ type SuccessProps = {
   txHash: string;
 };
 
+// Displays successful transaction details including batch denom,
+// recipients, and transaction hash.
 const SuccessResult = ({
   batchDenom,
   recipients,
@@ -178,6 +187,8 @@ type ErrorResultProps = {
   error: string;
 };
 
+// Shows error details when credit batch creation fails,
+// allowing users to navigate back
 const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
   const { _ } = useLingui();
 
@@ -233,9 +244,11 @@ type LinkItem = {
 
 type CardItemListProps = {
   label: string;
+  /** List of recipients. See {@link LinkItem} */
   values: LinkItem[];
 };
 
+// Displays a list of recipients
 const CardItemList: React.FC<React.PropsWithChildren<CardItemListProps>> = ({
   label,
   values,

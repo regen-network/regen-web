@@ -21,6 +21,15 @@ import {
 export type RecipientsFormValues = FormValues;
 export type RecipientFormValues = Recipient;
 
+/**
+ * Recipients component gathers recipients' information for credit distribution.
+ * This component is used in the CreateBatchMultiStepForm.
+ *
+ * It allows users to:
+ * - Add multiple recipients
+ * - Specify tradable and retired amounts for each recipient
+ *
+ */
 export default function Recipients({
   bottomTextMapping,
   retirementInfoText,

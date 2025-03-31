@@ -36,10 +36,15 @@ export const CreditPrice = ({
 }: Props) => {
   const avgPricePerTonLabel = purchaseInfo?.sellInfo?.avgPricePerTonLabel;
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
-  const creditsAvailable =
+  const creditsAvailableRaw =
     purchaseInfo?.sellInfo?.creditsAvailable ??
     projectPrefinancing?.estimatedIssuance ??
     '0';
+  // Remove decimals and round to the closest whole number
+  const creditsAvailable =
+    typeof creditsAvailableRaw === 'string'
+      ? Math.round(parseFloat(creditsAvailableRaw)).toString()
+      : Math.round(Number(creditsAvailableRaw)).toString();
 
   return (
     <Box

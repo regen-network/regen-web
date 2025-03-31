@@ -1,4 +1,4 @@
-import { formatNumber } from './format';
+import { formatNumber, roundToClosestWholeNumber } from './format';
 
 describe('formatNumber', () => {
   test('Should format 4 to 4.00', () => {
@@ -63,6 +63,30 @@ describe('formatNumber', () => {
     });
 
     // Then
+    expect(result).toEqual(expectedResult);
+  });
+
+  test('Should round 4.6 to 5', () => {
+    const num = 4.6;
+    const expectedResult = '5';
+
+    const result = roundToClosestWholeNumber(num);
+    expect(result).toEqual(expectedResult);
+  });
+
+  test('Should round 4.4 to 4', () => {
+    const num = 4.4;
+    const expectedResult = '4';
+
+    const result = roundToClosestWholeNumber(num);
+    expect(result).toEqual(expectedResult);
+  });
+
+  test('Should round "4.5" to 5', () => {
+    const num = '4.5';
+    const expectedResult = '5';
+
+    const result = roundToClosestWholeNumber(num);
     expect(result).toEqual(expectedResult);
   });
 });

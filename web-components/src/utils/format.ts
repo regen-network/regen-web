@@ -90,3 +90,19 @@ export function formatDuration(seconds: number): string {
   const textPart = condition ? durationArr[1].slice(0, -1) : durationArr[1];
   return `${durationArr[0]}-${textPart}`;
 }
+
+/**
+ * Rounds a number to the nearest whole number and returns it as a string.
+ * Can handle both string and number inputs.
+ *
+ * @param value - The value to round (string or number)
+ * @returns The rounded number
+ */
+export const roundToClosestWholeNumber = (value: string | number): string => {
+  if (value === undefined || value === null) return '0';
+
+  const numericValue =
+    typeof value === 'string' ? parseFloat(value) : Number(value);
+
+  return Math.round(numericValue).toString();
+};

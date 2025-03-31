@@ -42,6 +42,7 @@ import { AuthRoute } from 'components/atoms/AuthRoute';
 import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
+import { registryLayoutLoader } from 'components/organisms/RegistryLayout/RegistryLayout.loader';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
 import { KeplrRoute } from '../../components/atoms';
@@ -139,7 +140,13 @@ export const getRegenRoutes = ({
   address,
 }: RouterParams): RouteObject[] => {
   return createRoutesFromElements(
-    <Route element={<RegistryLayout />}>
+    <Route
+      element={<RegistryLayout />}
+      loader={registryLayoutLoader({
+        queryClient: reactQueryClient,
+        apolloClientFactory,
+      })}
+    >
       <Route path="/" element={<Outlet />} errorElement={<ErrorPage />}>
         <Route
           index

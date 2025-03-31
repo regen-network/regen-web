@@ -19,15 +19,26 @@ export type BuyCreditsSchemaTypes = {
   Partial<AgreePurchaseFormSchemaType>;
 
 export type SendOrderConfirmationEmailParams = {
+  /** The currency used for the transaction */
   currency: Currency;
+  /** Whether the credits are being retired or kept tradable */
   retiring: boolean;
+  /** Recipient's email address */
   email: string;
+  /** The amount paid in the transaction currency */
   currencyAmount: number;
+  /** Display denomination of the currency */
   displayDenom: string;
+  /** Name of the project credits are purchased from */
   projectName: string;
+  /** Amount of credits purchased */
   creditsAmount: number;
+  /** Transaction hash */
   txHash: string;
+  /** Authentication CSRF token */
   token: string;
+  /** Function to retry request if CSRF token is invalid */
   retryCsrfRequest: (failedFunction: FailedFnType) => Promise<void>;
+  /** The URL to the retirement certificate */
   certificateHref: string;
 };

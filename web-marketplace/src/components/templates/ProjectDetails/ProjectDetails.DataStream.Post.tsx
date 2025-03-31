@@ -120,7 +120,6 @@ export const DataStreamPost = ({
     onlyAttestEvents: true,
     adminAddr,
   });
-  console.log('events', events);
 
   useEffect(() => {
     async function parseFileAndSetPreview() {

@@ -5,19 +5,24 @@ import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 import { useQuery } from '@tanstack/react-query';
 import { getClientConfig } from 'clients/Clients.config';
+import { useAtom } from 'jotai';
 
 import Header from 'web-components/src/components/header';
 import { UserMenuItems } from 'web-components/src/components/header/components/UserMenuItems';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 // import { cn } from 'web-components/src/utils/styles/cn';
 import { useAuth } from 'lib/auth/auth';
+import { client as sanityClient } from 'lib/clients/sanity';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
+import { getAllSanityProjectsQuery } from 'lib/queries/react-query/sanity/getAllProjectsQuery/getAllProjectsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { getWalletAddress } from 'pages/Dashboard/Dashboard.utils';
 import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+import { useFetchAllOffChainProjects } from 'pages/Projects/hooks/useOffChainProjects';
 import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../../lib/ledger';
@@ -45,6 +50,7 @@ const RegistryLayoutHeader: React.FC = () => {
   const { _ } = useLingui();
   const { pathname } = useLocation();
   const { activeAccount, privActiveAccount } = useAuth();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
   const { wallet, disconnect, isConnected, loginDisabled, accountByAddr } =
     useWallet();
@@ -57,7 +63,35 @@ const RegistryLayoutHeader: React.FC = () => {
   const clientConfig = getClientConfig();
 
   const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
-  const menuItems = useMemo(() => getMenuItems(pathname, _), [pathname, _]);
+
+  // Sanity projects
+  const { data: sanityProjectsData, isFetching: isLoadingSanityProjects } =
+    useQuery(
+      getAllSanityProjectsQuery({
+        sanityClient,
+        enabled: !!sanityClient,
+        languageCode: selectedLanguage,
+      }),
+    );
+
+  // OffChainProjects
+  const { allOffChainProjects, isAllOffChainProjectsLoading } =
+    useFetchAllOffChainProjects({
+      sanityProjectsData,
+    });
+
+  const prefinanceProjects = allOffChainProjects.filter(
+    project => project.projectPrefinancing?.isPrefinanceProject,
+  );
+  const hasPrefinanceProjects =
+    !isLoadingSanityProjects &&
+    !isAllOffChainProjectsLoading &&
+    prefinanceProjects.length > 0;
+
+  const menuItems = useMemo(
+    () => getMenuItems(pathname, _, hasPrefinanceProjects),
+    [pathname, _, hasPrefinanceProjects],
+  );
   const onProfileClick = useOnProfileClick();
 
   const showOrders = useShowOrders();

@@ -32,49 +32,59 @@ import {
 } from 'pages/Dashboard/Dashboard.constants';
 import { Link } from 'components/atoms';
 
-export const getMenuItems = (pathname: string, _: TranslatorType): Item[] => [
-  {
-    title: _(msg`Projects`),
-    dropdownItems: [
-      {
-        pathname,
-        href: '/projects/1',
-        label: _(msg`All projects`),
-        linkComponent: Link,
-        importCallback: (): Promise<any> =>
-          import('../../../pages/Projects/AllProjects'),
-      },
-      {
-        pathname,
-        href: '/projects/prefinance',
-        label: _(msg`Prefinance projects`),
-        linkComponent: Link,
-        importCallback: (): Promise<any> =>
-          import('../../../pages/Projects/PrefinanceProjects'),
-      },
-    ],
-  },
-  {
-    title: _(msg`Stats`),
-    dropdownItems: [
-      {
-        pathname,
-        href: '/stats/activity',
-        label: _(msg`Activity`),
-        linkComponent: Link,
-        importCallback: (): Promise<any> => import('../../../pages/Activity'),
-      },
-      {
-        pathname,
-        href: '/ecocredit-batches/1',
-        label: _(msg`Ecocredit batches`),
-        linkComponent: Link,
-        importCallback: (): Promise<any> =>
-          import('../../../pages/EcocreditBatches'),
-      },
-    ],
-  },
-];
+export const getMenuItems = (
+  pathname: string,
+  _: TranslatorType,
+  hasPrefinanceProjects: boolean,
+): Item[] => {
+  const projectsDropdown = [
+    {
+      pathname,
+      href: '/projects/1',
+      label: _(msg`All projects`),
+      linkComponent: Link,
+      importCallback: (): Promise<any> =>
+        import('../../../pages/Projects/AllProjects'),
+    },
+  ];
+
+  if (hasPrefinanceProjects)
+    projectsDropdown.push({
+      pathname,
+      href: '/projects/prefinance',
+      label: _(msg`Prefinance projects`),
+      linkComponent: Link,
+      importCallback: (): Promise<any> =>
+        import('../../../pages/Projects/PrefinanceProjects'),
+    });
+
+  return [
+    {
+      title: _(msg`Projects`),
+      dropdownItems: projectsDropdown,
+    },
+    {
+      title: _(msg`Stats`),
+      dropdownItems: [
+        {
+          pathname,
+          href: '/stats/activity',
+          label: _(msg`Activity`),
+          linkComponent: Link,
+          importCallback: (): Promise<any> => import('../../../pages/Activity'),
+        },
+        {
+          pathname,
+          href: '/ecocredit-batches/1',
+          label: _(msg`Ecocredit batches`),
+          linkComponent: Link,
+          importCallback: (): Promise<any> =>
+            import('../../../pages/EcocreditBatches'),
+        },
+      ],
+    },
+  ];
+};
 
 interface GetUserMenuItemsParams {
   pathname: string;

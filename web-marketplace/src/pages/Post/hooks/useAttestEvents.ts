@@ -98,16 +98,14 @@ export const useAttestEvents = ({
       ?.filter(txRes => txRes.rawLog.includes(iri))
       ?.map(txRes => {
         const events = txRes.logs[0].events.filter(event => {
-          return event.type.includes(EventAttest.typeUrl);
+          return EventAttest.typeUrl.includes(event.type);
         });
-
         const attestors = events.map(event => {
           const attributes = event.attributes
             .filter(attr => attr.key === 'attestor')
             .map(attr => attr.value);
           return attributes;
         });
-
         const attestor = attestors[0]?.[0]?.replace(/['"]+/g, '');
         const { timestamp, txhash } = txRes;
 

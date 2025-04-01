@@ -65,7 +65,9 @@ describe('formatNumber', () => {
     // Then
     expect(result).toEqual(expectedResult);
   });
+});
 
+describe('roundToClosestWholeNumber', () => {
   test('Should round 4.6 to 5', () => {
     const num = 4.6;
     const expectedResult = '5';

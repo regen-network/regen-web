@@ -5,6 +5,7 @@ import Link from '@mui/material/Link';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { Theme } from '@mui/material/styles';
+import NextLink from 'next/link';
 import { makeStyles } from 'tss-react/mui';
 
 import NewsletterForm from '../form/NewsletterForm';
@@ -92,6 +93,7 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
             key={index}
           >
             <Link
+              component={NextLink}
               href={item.href}
               rel="noopener noreferrer"
               target={item.target}

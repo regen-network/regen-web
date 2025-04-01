@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from '@mui/material/Link';
+import NextLink from 'next/link';
 import { makeStyles } from 'tss-react/mui';
 
 import { cn } from '../../../utils/styles/cn';
@@ -52,6 +53,7 @@ export const NavLink: React.FC<React.PropsWithChildren<NavLinkProps>> = ({
   const { classes: styles } = useNavLinkStyles({ isActive: pathname === href });
   return (
     <Link
+      component={NextLink}
       className={overrideClassname ?? cn(styles.navLink, className)}
       href={href}
     >

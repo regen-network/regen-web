@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useMemo, useRef } from 'react';
 import { Box } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import MuiTextField, {
@@ -10,6 +10,7 @@ import { makeStyles } from 'tss-react/mui';
 
 import { Body } from '../typography';
 import { DefaultStyleProps } from './FieldFormControl';
+import usePreventWheelScroll from './hooks/usePreventWheelScroll';
 import InputLabel from './InputLabel';
 
 // TODO: create styled component as described in issue: regen-network/regen-web/issues/955
@@ -157,6 +158,12 @@ function TriggerTextField({
     form: { setFieldValue },
     field: { name },
   } = props;
+  const inputRef = useRef<HTMLInputElement>(null);
+  const isTypeNumber = useMemo(() => props?.type === 'number', [props?.type]);
+
+  // Prevents the wheel scroll for input fields type=number
+  usePreventWheelScroll(inputRef, isTypeNumber);
+
   const onChange = async (event: any): Promise<void> => {
     const { value } = event.target;
     if (triggerOnChange) {
@@ -168,6 +175,7 @@ function TriggerTextField({
     <MuiTextField
       {...(fieldToTextField(props) as MuiTextFieldProps)}
       onChange={onChange}
+      inputRef={inputRef}
     />
   );
 }

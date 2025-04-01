@@ -5,6 +5,7 @@ import { RefObject, useEffect } from 'react';
  * for the provided element reference when it's focused
  *
  * @param elementRef - A React ref object pointing to a DOM element
+ * @param shouldPreventScroll - A boolean indicating whether to prevent scroll or not
  */
 export default function usePreventWheelScroll(
   elementRef: RefObject<HTMLElement>,

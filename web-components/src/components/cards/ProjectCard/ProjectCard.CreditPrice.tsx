@@ -1,13 +1,14 @@
 import { ReactNode } from 'react';
 import { Box, SxProps } from '@mui/material';
 
-import { roundToClosestWholeNumber } from 'src/utils/format';
-
 import GradientBadge from '../../../components/gradient-badge';
 import InfoTooltipWithIcon from '../../../components/tooltip/InfoTooltipWithIcon';
 import { Body, Subtitle } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
-import { getFormattedNumber } from '../../../utils/format';
+import {
+  getFormattedNumber,
+  roundToClosestWholeNumber,
+} from '../../../utils/format';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import {
   ProjectCardBodyTextsMapping,

@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import { Box, SxProps } from '@mui/material';
 
+import { roundToClosestWholeNumber } from 'src/utils/format';
+
 import GradientBadge from '../../../components/gradient-badge';
 import InfoTooltipWithIcon from '../../../components/tooltip/InfoTooltipWithIcon';
 import { Body, Subtitle } from '../../../components/typography';
@@ -36,15 +38,11 @@ export const CreditPrice = ({
 }: Props) => {
   const avgPricePerTonLabel = purchaseInfo?.sellInfo?.avgPricePerTonLabel;
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
-  const creditsAvailableRaw =
+  const creditsAvailable = roundToClosestWholeNumber(
     purchaseInfo?.sellInfo?.creditsAvailable ??
-    projectPrefinancing?.estimatedIssuance ??
-    '0';
-  // Remove decimals and round to the closest whole number
-  const creditsAvailable =
-    typeof creditsAvailableRaw === 'string'
-      ? Math.round(parseFloat(creditsAvailableRaw)).toString()
-      : Math.round(Number(creditsAvailableRaw)).toString();
+      projectPrefinancing?.estimatedIssuance ??
+      '0',
+  );
 
   return (
     <Box

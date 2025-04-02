@@ -3,7 +3,6 @@ import { QueryClient } from '@tanstack/react-query';
 
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { client as sanityClient } from 'lib/clients/sanity';
-import { defaultLocale } from 'lib/i18n/i18n';
 import { getAllProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getAllProjectsQuery/getAllProjectsQuery';
 import { getAllSanityProjectsQuery } from 'lib/queries/react-query/sanity/getAllProjectsQuery/getAllProjectsQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
@@ -25,14 +24,14 @@ export const registryLayoutLoader =
     // Queries
     const allSanityProjectsQuery = getAllSanityProjectsQuery({
       sanityClient,
-      languageCode: languageCode || defaultLocale,
+      languageCode,
     });
 
     const allProjectsQuery = getAllProjectsQuery({
       client:
         apolloClientFactory.getClient() as ApolloClient<NormalizedCacheObject>,
       enabled: true,
-      languageCode: languageCode || defaultLocale,
+      languageCode,
     });
 
     // Fetch or Cache

@@ -1,11 +1,20 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
+import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
+import { postData } from 'utils/fetch/postData';
 
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
+
+import { apiUri } from 'lib/apiUri';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
+import { connectedEmailErrorModalAtom } from 'lib/atoms/modals.atoms';
+import { useAuth } from 'lib/auth/auth';
+import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
+import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
 import {
   cardDetailsMissingAtom,
@@ -13,6 +22,7 @@ import {
 } from 'pages/BuyCredits/BuyCredits.atoms';
 import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 import {
+  BuyCreditsSchemaTypes,
   CardDetails,
   PaymentOptionsType,
 } from 'pages/BuyCredits/BuyCredits.types';
@@ -20,6 +30,7 @@ import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
+import { CONNECTED_EMAIL_ERROR } from '../RegistryLayout/RegistryLayout.constants';
 import {
   CustomerInfo,
   CustomerInfoProps,
@@ -60,6 +71,10 @@ export const PaymentInfoForm = ({
   setCardDetails,
 }: PaymentInfoFormProps) => {
   const { _ } = useLingui();
+  const { activeAccount, privActiveAccount } = useAuth();
+  const { data: token } = useQuery(getCsrfTokenQuery({}));
+  const retryCsrfRequest = useRetryCsrfRequest();
+
   const {
     handleBack,
     handleSave: updateMultiStepData,
@@ -67,11 +82,16 @@ export const PaymentInfoForm = ({
     data,
     handleResetData: removeMultiStepFormData,
     handleActiveStep,
-  } = useMultiStep();
+  } = useMultiStep<BuyCreditsSchemaTypes>();
   const [paymentInfoValid, setPaymentInfoValid] = useState(false);
+
   const setCardDetailsMissing = useSetAtom(cardDetailsMissingAtom);
   const [shouldResetForm, setShouldResetForm] = useAtom(
     resetBuyCreditsFormAtom,
+  );
+  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const setConnectedEmailErrorModalAtom = useSetAtom(
+    connectedEmailErrorModalAtom,
   );
   const [paymentElementKey, setPaymentElementKey] = useState(0);
   const form = useZodForm({
@@ -148,62 +168,108 @@ export const PaymentInfoForm = ({
     );
   };
 
-  return (
-    <Form
-      form={form}
-      onSubmit={async (values: PaymentInfoFormSchemaType) => {
-        setCardDetailsMissing(false);
-        const card = paymentOption === PAYMENT_OPTIONS.CARD;
-        if (card && !stripe) {
+  const handleOnSubmit = useCallback(
+    async (values: PaymentInfoFormSchemaType) => {
+      // If a logged in user with no email address (web3 account) provides one,
+      // we send a confirmation email.
+      if (
+        !!activeAccount &&
+        !privActiveAccount?.email &&
+        data?.email &&
+        token
+      ) {
+        try {
+          const response = await postData({
+            url: `${apiUri}/marketplace/v1/auth/email/create-token`,
+            data: { email: data?.email },
+            token,
+            retryCsrfRequest,
+          });
+          // If the email is already connected to another account, we show a modal
+          // with the error message.
+          if (response.error === CONNECTED_EMAIL_ERROR) {
+            setConnectedEmailErrorModalAtom(atom => {
+              atom.open = true;
+              atom.email = data?.email!;
+            });
+            return;
+          }
+        } catch (e) {
+          setErrorBannerTextAtom(String(e));
+        }
+      }
+
+      setCardDetailsMissing(false);
+      const card = paymentOption === PAYMENT_OPTIONS.CARD;
+
+      if (card && !stripe) return;
+
+      if (card && stripe && elements && !values.paymentMethodId) {
+        const submitRes = await elements.submit();
+        if (submitRes?.error?.message) {
+          setError(submitRes?.error?.message);
           return;
         }
-        if (card && stripe && elements && !values.paymentMethodId) {
-          const submitRes = await elements.submit();
-          if (submitRes?.error?.message) {
-            setError(submitRes?.error?.message);
-            return;
-          }
-          // Create the ConfirmationToken using the details collected by the Payment Element
-          if (values.savePaymentMethod)
-            elements.update({ setupFutureUsage: 'on_session' });
-          const { error, confirmationToken } =
-            await stripe.createConfirmationToken({
-              elements,
-              params: {
-                payment_method_data: {
-                  billing_details: {
-                    name: values.name,
-                    email: values.email,
-                  },
+        if (values.savePaymentMethod)
+          elements.update({ setupFutureUsage: 'on_session' });
+
+        const { error, confirmationToken } =
+          await stripe.createConfirmationToken({
+            elements,
+            params: {
+              payment_method_data: {
+                billing_details: {
+                  name: values.name,
+                  email: values.email,
                 },
               },
-            });
-          if (error?.message) {
-            setError(error?.message);
-            return;
-          }
-          setConfirmationTokenId(confirmationToken?.id);
+            },
+          });
+
+        if (error?.message) {
+          setError(error?.message);
+          return;
         }
-        if (
-          card &&
-          paymentMethods &&
-          paymentMethods.length > 0 &&
-          values.paymentMethodId
-        ) {
-          const paymentMethod = paymentMethods.find(
-            method => method.id === values.paymentMethodId,
-          );
-          if (paymentMethod?.card)
-            setCardDetails({
-              last4: paymentMethod.card.last4,
-              country: paymentMethod.card.country,
-              brand: paymentMethod.card.brand,
-            });
+        setConfirmationTokenId(confirmationToken?.id);
+      }
+
+      if (card && paymentMethods?.length && values.paymentMethodId) {
+        const paymentMethod = paymentMethods.find(
+          method => method.id === values.paymentMethodId,
+        );
+        if (paymentMethod?.card) {
+          setCardDetails({
+            last4: paymentMethod.card.last4,
+            country: paymentMethod.card.country,
+            brand: paymentMethod.card.brand,
+          });
         }
-        onSubmit(values);
-      }}
-      onBlur={handleOnBlur}
-    >
+      }
+
+      onSubmit(values);
+    },
+    [
+      paymentOption,
+      stripe,
+      elements,
+      setError,
+      setConfirmationTokenId,
+      paymentMethods,
+      setCardDetails,
+      activeAccount,
+      privActiveAccount,
+      data,
+      token,
+      retryCsrfRequest,
+      setConnectedEmailErrorModalAtom,
+      setErrorBannerTextAtom,
+      onSubmit,
+      setCardDetailsMissing,
+    ],
+  );
+
+  return (
+    <Form form={form} onSubmit={handleOnSubmit} onBlur={handleOnBlur}>
       <div className="flex flex-col gap-10 sm:gap-20 max-w-[560px]">
         <CustomerInfo
           paymentOption={paymentOption}

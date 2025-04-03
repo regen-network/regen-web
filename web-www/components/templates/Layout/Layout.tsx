@@ -1,4 +1,5 @@
 import React from 'react';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 
 import Footer from 'web-components/src/components/footer';
@@ -55,6 +56,7 @@ const Layout = ({ children }: Props) => {
           }
           requiredMessage={REQUIRED_MESSAGE}
           invalidEmailMessage={INVALID_EMAIL_MESSAGE}
+          linkComponent={NextLink}
         />
       </footer>
     </>

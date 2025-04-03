@@ -14,7 +14,7 @@ import { useStyles } from './HeaderDropdown.styles';
 const HeaderDropdown: React.FC<
   React.PropsWithChildren<{
     items: HeaderDropdownItemProps[];
-    linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
+    linkComponent: React.ElementType<NavLinkProps>;
     title?: string;
     isUserMenu?: boolean;
   }>

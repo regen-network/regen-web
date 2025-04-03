@@ -22,14 +22,21 @@ const useStyles = makeStyles()(theme => {
   };
 });
 
-export const HeaderLogoLink: React.FC<
-  React.PropsWithChildren<{ color: string }>
-> = ({ color }) => {
+interface HeaderLogoLinkProps {
+  color: string;
+  linkComponent?: React.ElementType;
+}
+
+export const HeaderLogoLink = ({
+  color,
+  linkComponent,
+}: HeaderLogoLinkProps): JSX.Element => {
   const { classes: styles } = useStyles();
 
+  const LinkComponent = linkComponent ? linkComponent : 'a';
   return (
-    <NextLink href="/">
+    <LinkComponent href="/">
       <RegenIcon className={styles.icon} color={color} />
-    </NextLink>
+    </LinkComponent>
   );
 };

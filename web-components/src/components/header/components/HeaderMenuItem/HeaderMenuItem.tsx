@@ -24,7 +24,7 @@ export interface Item extends MenuTitle {
 
 export interface HeaderMenuItemBase {
   pathname: string;
-  linkComponent: React.FC<NavLinkProps>;
+  linkComponent: React.ElementType<NavLinkProps>;
   classes?: {
     root?: string;
     paper?: string;

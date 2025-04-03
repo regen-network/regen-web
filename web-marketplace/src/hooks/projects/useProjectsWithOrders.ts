@@ -332,7 +332,6 @@ export function useProjectsWithOrders({
       onlyOffChainProjects,
     ],
   );
-  console.log(allProjects);
 
   // Filter projects by class ID, buying option, etc.
   const creditClassFilterKeys = Object.keys(creditClassFilter);

@@ -47,7 +47,7 @@ export const RegistryLayoutConnectedEmailErrorModal = () => {
       </Body>
       <div className="flex justify-center mt-[45px]">
         <OutlinedButton
-          href={'//TODO-URL-HERE'}
+          href="https://guides.regen.network/guides/regen-marketplace-buyers-guides/logging-in-buyers"
           target="_blank"
           rel="noopener noreferrer"
           variant="outlined"

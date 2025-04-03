@@ -23,6 +23,8 @@ export const sortProjects = (
         .sort(compareCreditsAvailable);
     case 'credits-descending':
       return projects.sort(compareQuantityDescending);
+    case 'admin':
+      return projects.sort(compareAdminOrder);
     default:
       return projects;
   }
@@ -126,6 +128,34 @@ export function sortPinnedProject(
     return aIndex < bIndex ? -1 : 1;
   }
 
+  return 0;
+}
+
+/**
+ * Compares two projects based on their `adminOrder` property.
+ * On chain projects by a given admin will show up first, then
+ * off chain projects by the given admin, finally
+ * on chain projects and off chain projects.
+ *
+ * @param {ProjectWithOrderData} a - The first project to compare.
+ * @param {ProjectWithOrderData} b - The second project to compare.
+ * @returns {number} A negative value if `a` should be sorted before `b`,
+ *                   a positive value if `a` should be sorted after `b`,
+ *                   or zero if they are equal.
+ */
+function compareAdminOrder(
+  a: ProjectWithOrderData,
+  b: ProjectWithOrderData,
+): number {
+  const aAdminOrder = a.adminOrder || 0;
+  const bAdminOrder = b.adminOrder || 0;
+
+  if (aAdminOrder > bAdminOrder) {
+    return 1; // sort a after b
+  }
+  if (aAdminOrder < bAdminOrder) {
+    return -1; // sort a before b
+  }
   return 0;
 }
 

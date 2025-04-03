@@ -4,8 +4,10 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { getProjectsByAdminQuery } from 'lib/queries/react-query/ecocredit/getProjectsByAdmin/getProjectsByAdmin';
 import { getAccountProjectsByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery';
@@ -18,6 +20,8 @@ type Props = {
 
 export function useQueryIsProjectAdmin({ address, accountId }: Props) {
   const { ecocreditClient } = useLedger();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const { wallet } = useWallet();
@@ -41,13 +45,14 @@ export function useQueryIsProjectAdmin({ address, accountId }: Props) {
       id: activeAccountId,
       client: graphqlClient,
       enabled: activeAccountId !== undefined,
+      languageCode: selectedLanguage,
     }),
   );
 
   const isProjectAdmin =
     (projectsByAdmin?.projects?.length ?? 0) > 0 ||
-    (accountData?.accountById?.projectsByAdminAccountId?.nodes?.length ?? 0) >
-      0;
+    (accountData?.data?.accountById?.projectsByAdminAccountId?.nodes?.length ??
+      0) > 0;
 
   return {
     isProjectAdmin,

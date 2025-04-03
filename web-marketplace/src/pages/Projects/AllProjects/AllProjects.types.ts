@@ -24,6 +24,7 @@ export interface ProjectWithOrderData extends ProjectCardProps {
   ecosystemType?: string[];
   region?: string;
   allCardSellOrders?: Array<CardSellOrder>;
+  adminOrder?: number;
 }
 
 export type FilterCommunityCreditsEvent = {

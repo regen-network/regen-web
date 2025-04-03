@@ -15,6 +15,7 @@ interface SelectProjectsParams extends ProjectsWithOrdersProps {
   projects: ProjectInfo[] | undefined;
   sellOrders: SellOrderInfo[] | undefined;
   skippedClassId?: string;
+  adminAddr?: string;
 }
 
 export function selectProjects({
@@ -24,6 +25,7 @@ export function selectProjects({
   random = false,
   skippedProjectId,
   skippedClassId,
+  adminAddr,
 }: SelectProjectsParams): ProjectInfo[] | undefined {
   if (!projects || !sellOrders) return;
 
@@ -36,7 +38,12 @@ export function selectProjects({
   if (skippedClassId)
     _projects = _projects.filter(p => p.classId !== skippedClassId);
 
-  if (random) return shuffle(_projects).filter(hasMetadata);
+  if (random) {
+    return shuffle(_projects).filter(
+      project =>
+        !!project.metadata || (adminAddr && adminAddr === project.admin),
+    );
+  }
   if (metadata) return _projects.filter(hasMetadata);
 
   return _projects;

@@ -9,6 +9,10 @@ import {
   getPurchaseInfo,
   normalizeToUISellOrderInfo,
 } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
+import {
+  ADMIN_ON_CHAIN_PROJECTS,
+  ON_CHAIN_PROJECTS,
+} from 'components/templates/ProjectDetails/hooks/useMoreProjects.constants';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 interface NormalizeProjectsWithOrderDataParams {
@@ -16,6 +20,7 @@ interface NormalizeProjectsWithOrderDataParams {
   sellOrders?: SellOrderInfoExtented[];
   userAddress?: string;
   sanityCreditClassData?: AllCreditClassQuery;
+  adminAddr?: string;
 }
 
 export const normalizeProjectsWithOrderData = ({
@@ -23,6 +28,7 @@ export const normalizeProjectsWithOrderData = ({
   sellOrders = [],
   userAddress,
   sanityCreditClassData,
+  adminAddr,
 }: NormalizeProjectsWithOrderDataParams): (
   | ProjectWithOrderData
   | undefined
@@ -60,6 +66,10 @@ export const normalizeProjectsWithOrderData = ({
       metadata: project.metadata,
       creditClassId: project.classId,
       sanityCreditClassData: creditClass,
+      adminOrder:
+        adminAddr && adminAddr === project.admin
+          ? ADMIN_ON_CHAIN_PROJECTS
+          : ON_CHAIN_PROJECTS,
     } as ProjectWithOrderData;
   });
 

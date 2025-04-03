@@ -5,6 +5,7 @@ import {
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import shuffle from 'lodash/shuffle';
 
 import {
   AllCreditClassQuery,
@@ -13,45 +14,95 @@ import {
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { IS_TERRASOS } from 'lib/env';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
+import { getAccountProjectsByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery';
 import { getAllProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getAllProjectsQuery/getAllProjectsQuery';
 
+import {
+  ADMIN_OFF_CHAIN_PROJECTS,
+  OFF_CHAIN_PROJECTS,
+} from 'components/templates/ProjectDetails/hooks/useMoreProjects.constants';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 type Props = {
   sanityCreditClassesData?: AllCreditClassQuery;
   enabled?: boolean;
   sanityProjectsData?: AllProjectsQuery;
+  adminId?: string;
+  limitOffChainProjects?: number;
+  random?: boolean;
+  skippedProjectId?: string;
 };
 
-export const useFetchAllOffChainProjects = ({
+export const useOffChainProjects = ({
   sanityCreditClassesData,
   enabled = true,
   sanityProjectsData,
+  adminId,
+  limitOffChainProjects,
+  random,
+  skippedProjectId,
 }: Props) => {
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
-  const { data, isFetching } = useQuery(
-    getAllProjectsQuery({
+  // Offchain only projects by admin
+  const { data: accountData, isFetching: isAccountLoading } = useQuery(
+    getAccountProjectsByIdQuery({
+      id: adminId,
+      condition: {
+        id: { not: skippedProjectId },
+        onChainId: null,
+        published: true,
+        approved: true,
+      },
       client: graphqlClient,
-      enabled,
+      enabled: enabled && !!adminId,
       languageCode: selectedLanguage,
     }),
   );
-  const allProjectsData = data?.data;
-  const englishProjectsMetadata = data?.englishProjectsMetadata;
+  const offChainProjectsByAdmin =
+    accountData?.data?.accountById?.projectsByAdminAccountId?.nodes;
 
-  const onlyOffChainProjectsWithData =
-    allProjectsData?.allProjects?.nodes?.map(project => {
+  const enoughOffChainProjectsByAdmin =
+    !!offChainProjectsByAdmin &&
+    !!limitOffChainProjects &&
+    offChainProjectsByAdmin.length >= limitOffChainProjects;
+
+  const { data, isFetching } = useQuery(
+    getAllProjectsQuery({
+      client: graphqlClient,
+      enabled: enabled && !enoughOffChainProjectsByAdmin,
+      languageCode: selectedLanguage,
+    }),
+  );
+
+  const allProjects = data?.data?.allProjects?.nodes;
+  let projects =
+    adminId && enoughOffChainProjectsByAdmin
+      ? offChainProjectsByAdmin
+      : allProjects;
+  const englishProjectsMetadata =
+    adminId && enoughOffChainProjectsByAdmin
+      ? accountData?.englishProjectsMetadata
+      : data?.englishProjectsMetadata;
+
+  const offChainProjectsWithData =
+    projects?.map(project => {
       const sanityProject = sanityProjectsData?.allProject?.find(
         sanityProject =>
           sanityProject.projectId === project?.id ||
           sanityProject.projectId === project?.slug,
       );
+      const offChain = !project?.onChainId;
       return {
+        adminOrder: offChain
+          ? adminId && adminId === project?.adminAccountId
+            ? ADMIN_OFF_CHAIN_PROJECTS
+            : OFF_CHAIN_PROJECTS
+          : undefined,
         onChainId: project?.onChainId,
-        offChain: !project?.onChainId,
+        offChain,
         ...normalizeProjectWithMetadata({
           offChainProject: project,
           projectMetadata: project?.metadata,
@@ -78,13 +129,15 @@ export const useFetchAllOffChainProjects = ({
       };
     }) ?? [];
 
-  const onlyOffChainProjectsWithDataFilteredByType =
-    onlyOffChainProjectsWithData.filter(project => {
+  const offChainProjectsWithDataFilteredByType =
+    offChainProjectsWithData.filter(project => {
       return IS_TERRASOS ? project.type === 'TerrasosProjectInfo' : true;
     });
 
   return {
-    allOffChainProjects: onlyOffChainProjectsWithDataFilteredByType,
-    isAllOffChainProjectsLoading: isFetching,
+    allOffChainProjects: random
+      ? shuffle(offChainProjectsWithDataFilteredByType)
+      : offChainProjectsWithDataFilteredByType,
+    isAllOffChainProjectsLoading: isFetching || isAccountLoading,
   };
 };

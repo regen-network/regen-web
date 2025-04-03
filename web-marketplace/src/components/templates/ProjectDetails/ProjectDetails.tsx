@@ -222,6 +222,7 @@ function ProjectDetails(): JSX.Element {
     onChainProject,
     creditClassMetadata,
   });
+
   const { geojson, isGISFile } = useGeojson({
     projectMetadata,
     projectPageMetadata: offChainProjectMetadata,
@@ -549,7 +550,10 @@ function ProjectDetails(): JSX.Element {
       {managementActions && <ManagementActions actions={managementActions} />}
 
       {onChainOrOffChainProjectId && (
-        <MoreProjects skippedProjectId={onChainOrOffChainProjectId} />
+        <MoreProjects
+          skippedProjectId={onChainOrOffChainProjectId}
+          projectAdmin={admin}
+        />
       )}
 
       {gettingStartedResourcesSection && IS_REGEN && (

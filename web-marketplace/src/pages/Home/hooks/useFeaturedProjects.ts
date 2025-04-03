@@ -18,7 +18,7 @@ export function useFeaturedProjects({ pinnedIds }: Props): {
     metadata: true, // to discard projects without metadata prop
     sort: PROJECTS_SORT,
     pinnedIds,
-    useOffChainProjects: true,
+    showOffChainProjects: true,
   });
   return {
     featuredProjects: projectsWithOrderData,

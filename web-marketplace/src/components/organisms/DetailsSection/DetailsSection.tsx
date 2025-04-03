@@ -123,24 +123,27 @@ export const DetailsSection: React.FC<
                           label={_(CREDIT)}
                         />
                         <Grid
-                          container
-                          pt={5}
-                          pr={{ xs: 11.25, tablet: 0 }}
-                          spacing={3}
+                          item
+                          sx={{
+                            background:
+                              'linear-gradient(206deg, #7D9AA2 0%, #9AD3BE 50%, #D1E2C7 100%)',
+                            '-webkit-background-clip': 'text',
+                            '-webkit-text-fill-color': 'transparent',
+                            '-moz-background-clip': 'text',
+                            '-moz-text-fill-color': 'transparent',
+                          }}
+                          pt={{ xs: 4, sm: 4.5 }}
+                          px={7.5}
+                          fontSize={40}
+                          fontFamily={headerFontFamily}
                         >
-                          {creditClassDoc && (
-                            <DetailsSectionButton
-                              href={creditClassDoc['schema:url']}
-                              label={_(VIEW_CREDIT_CLASS_DOC)}
-                            />
-                          )}
-                          {methodology && (
-                            <DetailsSectionButton
-                              href={methodology['schema:url']}
-                              label={_(VIEW_METHODOLOGY)}
-                            />
-                          )}
+                          =
                         </Grid>
+                        <DetailsSectionCredit
+                          src={credit.creditTypeImage}
+                          label={credit.creditTypeUnit}
+                          learnMore={credit.creditTypeUnitDefinition}
+                        />
                       </Grid>
                     </Grid>
                   )}

@@ -1,6 +1,7 @@
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
+import Section from 'web-components/src/components/section';
 import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { Stakeholders } from 'components/organisms/Stakeholders/Stakeholders';
@@ -58,5 +59,9 @@ export const CreditClassDetailsStakeholders = ({
     },
   ];
 
-  return <Stakeholders stakeholders={stakeholders} />;
+  return (
+    <div className="pt-[80px] sm:pt-[100px]">
+      <Stakeholders className="mb-0 sm:mb-0" stakeholders={stakeholders} />
+    </div>
+  );
 };

@@ -92,6 +92,7 @@ function CreditClassDetails({
       languageCode: selectedLanguage,
     }),
   );
+
   const metadata = creditClassMetadataRes?.data as
     | CreditClassMetadataLD
     | undefined;

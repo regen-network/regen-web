@@ -114,7 +114,8 @@ const CreditClassDetailsSimple: React.FC<
     methodologies: metadata?.['regen:approvedMethodologies'],
     _,
   });
-
+  console.log(sanityCreditClassPage);
+  console.log('metadata', metadata);
   return (
     <Box
       sx={{
@@ -239,6 +240,11 @@ const CreditClassDetailsSimple: React.FC<
           />
         </Box>
       </EcocreditsSection>
+      <CreditClassDetailsStakeholders
+        admin={admin}
+        issuers={issuers}
+        program={program}
+      />
       <DetailsSection
         header={sanityCreditClassPage?.creditClassDetailsSection}
         credibilityCards={content?.credibilityCards}
@@ -252,13 +258,7 @@ const CreditClassDetailsSimple: React.FC<
             creditTypeSanity?.category?.largeImage?.asset?.url,
           creditTypeUnitDefinition: creditTypeSanity?.unitDefinitionRaw,
         }}
-      >
-        <CreditClassDetailsStakeholders
-          admin={admin}
-          issuers={issuers}
-          program={program}
-        />
-      </DetailsSection>
+      ></DetailsSection>
 
       <Projects classId={onChainClass.id} />
       <div

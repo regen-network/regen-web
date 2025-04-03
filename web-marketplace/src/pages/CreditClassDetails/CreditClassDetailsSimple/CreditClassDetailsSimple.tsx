@@ -114,8 +114,7 @@ const CreditClassDetailsSimple: React.FC<
     methodologies: metadata?.['regen:approvedMethodologies'],
     _,
   });
-  console.log(sanityCreditClassPage);
-  console.log('metadata', metadata);
+
   return (
     <Box
       sx={{

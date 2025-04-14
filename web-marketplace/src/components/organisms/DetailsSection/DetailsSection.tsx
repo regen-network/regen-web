@@ -162,7 +162,7 @@ export const DetailsSection: React.FC<
               infinite={false}
               slidesToShow={isMobile ? 1 : 2}
               padding={theme.spacing(2.5)}
-              className="md:-mt-[90px] pt-0"
+              className={`${projectId ? 'md:-mt-[90px]' : ''} pt-0`}
               items={credibilityCards.map((card, index) => (
                 <CredibilityCard
                   index={index}

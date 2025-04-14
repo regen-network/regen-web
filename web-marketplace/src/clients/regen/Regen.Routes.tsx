@@ -207,6 +207,7 @@ export const getRegenRoutes = ({
             queryClient: reactQueryClient,
             apolloClientFactory,
             address,
+            languageCode,
           })}
         />
         <Route

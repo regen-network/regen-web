@@ -10,7 +10,6 @@ import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNex
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { apiUri } from 'lib/apiUri';
-import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { connectedEmailErrorModalAtom } from 'lib/atoms/modals.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
@@ -89,7 +88,6 @@ export const PaymentInfoForm = ({
   const [shouldResetForm, setShouldResetForm] = useAtom(
     resetBuyCreditsFormAtom,
   );
-  const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const setConnectedEmailErrorModalAtom = useSetAtom(
     connectedEmailErrorModalAtom,
   );
@@ -195,7 +193,7 @@ export const PaymentInfoForm = ({
             return;
           }
         } catch (e) {
-          setErrorBannerTextAtom(String(e));
+          setError(String(e));
         }
       }
 
@@ -262,7 +260,6 @@ export const PaymentInfoForm = ({
       token,
       retryCsrfRequest,
       setConnectedEmailErrorModalAtom,
-      setErrorBannerTextAtom,
       onSubmit,
       setCardDetailsMissing,
     ],

@@ -377,7 +377,10 @@ export const getRegenRoutes = ({
             path="settings"
             element={<AuthRoute component={ProfileEditSettings} />}
           />
-          <Route path="my-orders" element={<Orders />} />
+          <Route
+            path="my-orders"
+            element={<KeplrOrAuthRoute component={Orders} />}
+          />
         </Route>
       </Route>
       <Route path="connect-wallet" element={<ConnectWalletPage />} />

@@ -1,10 +1,8 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { QueryClient } from '@tanstack/react-query';
-import { getDefaultStore } from 'jotai';
 
 import { Maybe } from 'generated/graphql';
-import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketplace/marketplaceQueryClient';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
@@ -17,6 +15,7 @@ type LoaderType = {
   queryClient: QueryClient;
   apolloClientFactory: ApolloClientFactory;
   address?: Maybe<string>;
+  languageCode: string;
 };
 /**
  * Loader function for the Buy Credits page that checks if there are available
@@ -24,7 +23,7 @@ type LoaderType = {
  * Returns true if at least one sell order exists from a different seller.
  */
 export const buyCreditsLoader =
-  ({ queryClient, apolloClientFactory, address }: LoaderType) =>
+  ({ queryClient, apolloClientFactory, address, languageCode }: LoaderType) =>
   async ({
     params: { projectId: projectIdParam },
   }: {
@@ -34,8 +33,6 @@ export const buyCreditsLoader =
     const apolloClient =
       apolloClientFactory.getClient() as ApolloClient<NormalizedCacheObject>;
     const marketplaceClient = await getMarketplaceQueryClient();
-    const atomStore = getDefaultStore();
-    const selectedLanguage = atomStore.get(selectedLanguageAtom);
 
     const sellOrdersQuery = getSellOrdersExtendedQuery({
       client: marketplaceClient,
@@ -52,7 +49,7 @@ export const buyCreditsLoader =
       client: apolloClient,
       enabled: !!projectIdParam && !isOnChainId,
       slug: projectIdParam as string,
-      languageCode: selectedLanguage,
+      languageCode,
     });
 
     const projectBySlug = await getFromCacheOrFetch({

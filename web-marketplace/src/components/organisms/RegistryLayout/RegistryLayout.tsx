@@ -11,6 +11,7 @@ import { RegistryLayoutAccountSwitchModal } from './RegistryLayout.AccountSwitch
 import { RegistryLayoutAddWalletModalSwitchWarning } from './RegistryLayout.AddWalletModalSwitchWarning';
 import { RegistryLayoutBannerModal } from './RegistryLayout.Banner';
 import { RegistryLayoutChooseHowToPurchaseModal } from './RegistryLayout.ChooseHowToPurchaseModal';
+import { RegistryLayoutConnectedEmailErrorModal } from './RegistryLayout.ConnectedEmailErrorModal';
 import { RegistryLayoutConnectWalletModal } from './RegistryLayout.ConnectWalletModal';
 import { RegistryLayoutCookiesTopBanner } from './RegistryLayout.CookiesTopBanner';
 import { RegistryLayoutErrorBannerModal } from './RegistryLayout.ErrorBanner';
@@ -24,7 +25,6 @@ import { RegistryLayoutTxBuySuccessfulModal } from './RegistryLayout.TxBuySucces
 import { RegistryLayoutTxErrorModal } from './RegistryLayout.TxErrorModal';
 import { RegistryLayoutTxSuccessfulModal } from './RegistryLayout.TxSuccessfulModal';
 import { RegistryLayoutWarningBannerModal } from './RegistryLayout.WarningBanner';
-import { RegistryLayoutConnectedEmailErrorModal } from './RegistryLayout.ConnectedEmailErrorModal';
 
 const RegistryLayout: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLoaderData, useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
@@ -57,7 +57,13 @@ const RegistryLayoutHeader: React.FC = () => {
   const clientConfig = getClientConfig();
 
   const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
-  const menuItems = useMemo(() => getMenuItems(pathname, _), [pathname, _]);
+
+  const hasPrefinanceProjects = useLoaderData();
+
+  const menuItems = useMemo(
+    () => getMenuItems(pathname, _, hasPrefinanceProjects as boolean),
+    [pathname, _, hasPrefinanceProjects],
+  );
   const onProfileClick = useOnProfileClick();
 
   const showOrders = useShowOrders();

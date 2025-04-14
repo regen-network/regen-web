@@ -11,9 +11,11 @@ import {
 import { Router } from '@remix-run/router';
 import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 import { safeLazy } from 'utils/safeLazy';
 
 import { Maybe } from 'generated/graphql';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -42,6 +44,7 @@ import { AuthRoute } from 'components/atoms/AuthRoute';
 import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
+import { registryLayoutLoader } from 'components/organisms/RegistryLayout/RegistryLayout.loader';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
 import { KeplrRoute } from '../../components/atoms';
@@ -115,12 +118,15 @@ export const RegenRoutes = ({
   apolloClientFactory,
 }: RouterProps) => {
   const { activeWalletAddr } = useWallet();
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
   return (
     <RouterProvider
       router={getRegenRouter({
         reactQueryClient,
         apolloClientFactory,
         address: activeWalletAddr,
+        languageCode: selectedLanguage,
       })}
       fallbackElement={<PageLoader />}
     />
@@ -131,15 +137,24 @@ type RouterParams = {
   reactQueryClient: QueryClient;
   apolloClientFactory: ApolloClientFactory;
   address?: Maybe<string>;
+  languageCode: string;
 };
 
 export const getRegenRoutes = ({
   reactQueryClient,
   apolloClientFactory,
   address,
+  languageCode,
 }: RouterParams): RouteObject[] => {
   return createRoutesFromElements(
-    <Route element={<RegistryLayout />}>
+    <Route
+      element={<RegistryLayout />}
+      loader={registryLayoutLoader({
+        queryClient: reactQueryClient,
+        apolloClientFactory,
+        languageCode,
+      })}
+    >
       <Route path="/" element={<Outlet />} errorElement={<ErrorPage />}>
         <Route
           index
@@ -192,6 +207,7 @@ export const getRegenRoutes = ({
             queryClient: reactQueryClient,
             apolloClientFactory,
             address,
+            languageCode,
           })}
         />
         <Route
@@ -375,11 +391,17 @@ export const getRegenRouter = ({
   reactQueryClient,
   apolloClientFactory,
   address,
+  languageCode,
 }: RouterParams): Router => {
   const sentryCreateBrowserRouter =
     Sentry.wrapCreateBrowserRouter(createBrowserRouter);
   return sentryCreateBrowserRouter(
-    getRegenRoutes({ reactQueryClient, apolloClientFactory, address }),
+    getRegenRoutes({
+      reactQueryClient,
+      apolloClientFactory,
+      address,
+      languageCode,
+    }),
     {
       basename: import.meta.env.PUBLIC_URL,
     },

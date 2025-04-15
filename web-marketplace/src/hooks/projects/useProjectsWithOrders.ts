@@ -6,7 +6,7 @@ import { useAtom } from 'jotai';
 
 import { Account } from 'web-components/src/components/user/UserInfo';
 
-import { useLedger } from 'ledger';
+import { QueryClient, useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
@@ -114,7 +114,7 @@ export function useProjectsWithOrders({
       getProjectsByAdminQuery({
         enabled: !!adminAddr && !!queryClient,
         client: queryClient,
-        request: { admin: adminAddr },
+        request: { admin: adminAddr as string },
       }),
     );
   const projectsByAdmin = projectsByAdminData?.projects?.filter(
@@ -160,7 +160,7 @@ export function useProjectsWithOrders({
   const { data: sellOrders, isLoading: isLoadingSellOrders } = useQuery(
     getSellOrdersExtendedQuery({
       enabled: !isOffChainProject && !!queryClient,
-      client: queryClient,
+      client: queryClient as QueryClient,
       reactQueryClient,
       request: {},
     }),

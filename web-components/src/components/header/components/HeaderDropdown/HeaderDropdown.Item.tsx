@@ -11,7 +11,7 @@ export type HeaderDropdownItemProps = {
   label: string;
   href: string;
   pathname: string;
-  linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
+  linkComponent: React.ElementType<NavLinkProps>;
   importCallback?: () => Promise<any>;
   svg?: React.FunctionComponent<
     React.PropsWithChildren<React.SVGProps<SVGSVGElement>>

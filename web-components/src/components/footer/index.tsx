@@ -15,6 +15,7 @@ import { SocialLinks } from './SocialLinks';
 export interface FooterItemProps {
   title: string;
   items: { title: string; href: string; target?: string }[];
+  linkComponent?: React.ElementType;
 }
 
 interface FooterProps {
@@ -37,6 +38,7 @@ interface FooterProps {
   newsletterInputPlaceholder: string;
   requiredMessage: string;
   invalidEmailMessage: string;
+  linkComponent?: React.ElementType;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -73,7 +75,11 @@ const sxs = {
   } as SxProps,
 };
 
-const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
+const FooterItem = ({
+  title,
+  items,
+  linkComponent,
+}: FooterItemProps): JSX.Element => {
   const { classes } = useStyles();
   return (
     <div className={classes.footerItem}>
@@ -92,6 +98,7 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
             key={index}
           >
             <Link
+              {...(linkComponent ? { component: linkComponent } : {})}
               href={item.href}
               rel="noopener noreferrer"
               target={item.target}
@@ -121,6 +128,7 @@ export default function Footer({
   requiredMessage,
   invalidEmailMessage,
   apiUri = 'http://localhost:5000',
+  linkComponent,
 }: FooterProps): JSX.Element {
   const { classes } = useStyles();
 
@@ -140,30 +148,15 @@ export default function Footer({
     >
       <Section>
         <Grid container>
-          <Grid item xs={12} md={2}>
-            <FooterItem
-              title={footerItems[0].title}
-              items={footerItems[0].items}
-            />
-          </Grid>
-          <Grid item xs={12} md={2}>
-            <FooterItem
-              title={footerItems[1].title}
-              items={footerItems[1].items}
-            />
-          </Grid>
-          <Grid item xs={12} md={2}>
-            <FooterItem
-              title={footerItems[2].title}
-              items={footerItems[2].items}
-            />
-          </Grid>
-          <Grid item xs={12} md={2}>
-            <FooterItem
-              title={footerItems[3].title}
-              items={footerItems[3].items}
-            />
-          </Grid>
+          {footerItems.map(item => (
+            <Grid item xs={12} md={2} key={item.title}>
+              <FooterItem
+                title={item.title}
+                items={item.items}
+                linkComponent={linkComponent}
+              />
+            </Grid>
+          ))}
           <Grid item xs={12} md={4} className={classes.footerItem}>
             <Label size="lg" sx={sxs.text}>
               {subscribeText}

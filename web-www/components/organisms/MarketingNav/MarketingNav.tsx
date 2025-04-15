@@ -1,8 +1,10 @@
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/styles';
+import NextLink from 'next/link';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import Header from 'web-components/src/components/header';
+import { HeaderLogoLink } from 'web-components/src/components/header/components/HeaderLogoLink';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
 import {
@@ -23,6 +25,10 @@ const MarketingNav = ({ location }: Props) => {
   const desktopColor: string =
     headerColors[location.pathname] ?? theme.palette.primary.light;
   const transparent: boolean = headerTransparent[location.pathname] ?? true;
+
+  const HomeLink = (props: { color: string }) => {
+    return <HeaderLogoLink {...props} linkComponent={NextLink} />;
+  };
 
   return (
     <>
@@ -49,6 +55,8 @@ const MarketingNav = ({ location }: Props) => {
             </ContainedButton>
           </Box>
         }
+        linkComponent={NextLink}
+        homeLink={HomeLink}
       />
     </>
   );

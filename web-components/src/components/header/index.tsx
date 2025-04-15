@@ -26,8 +26,8 @@ export interface HeaderProps {
   color: string;
   fullWidth?: boolean;
   menuItems?: Item[];
-  linkComponent?: React.FC<React.PropsWithChildren<NavLinkProps>>;
-  homeLink?: React.FC<React.PropsWithChildren<{ color: string }>>;
+  linkComponent?: React.ElementType;
+  homeLink?: React.ElementType;
   isRegistry?: boolean;
   extras?: JSX.Element;
   websiteExtras?: JSX.Element;

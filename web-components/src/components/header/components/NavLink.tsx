@@ -40,6 +40,7 @@ export type NavLinkProps = {
   overrideClassname?: string;
   className?: string;
   disabled?: boolean;
+  linkComponent?: React.ElementType;
 };
 
 export const NavLink: React.FC<React.PropsWithChildren<NavLinkProps>> = ({
@@ -48,11 +49,13 @@ export const NavLink: React.FC<React.PropsWithChildren<NavLinkProps>> = ({
   pathname,
   overrideClassname,
   className,
+  linkComponent,
 }) => {
   const { classes: styles } = useNavLinkStyles({ isActive: pathname === href });
   return (
     <Link
-      className={overrideClassname ?? cn(styles.navLink, className)}
+      {...(linkComponent ? { component: linkComponent } : {})}
+      className={overrideClassname ?? cn(styles.navLink, className, 'yoo')}
       href={href}
     >
       {children}

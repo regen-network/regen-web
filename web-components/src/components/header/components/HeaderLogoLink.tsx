@@ -1,4 +1,5 @@
 import React from 'react';
+import NextLink from 'next/link';
 import { makeStyles } from 'tss-react/mui';
 
 import RegenIcon from '../../icons/RegenIcon';
@@ -21,14 +22,21 @@ const useStyles = makeStyles()(theme => {
   };
 });
 
-export const HeaderLogoLink: React.FC<
-  React.PropsWithChildren<{ color: string }>
-> = ({ color }) => {
+interface HeaderLogoLinkProps {
+  color: string;
+  linkComponent?: React.ElementType;
+}
+
+export const HeaderLogoLink = ({
+  color,
+  linkComponent,
+}: HeaderLogoLinkProps): JSX.Element => {
   const { classes: styles } = useStyles();
 
+  const LinkComponent = linkComponent ? linkComponent : 'a';
   return (
-    <a href="/">
+    <LinkComponent href="/">
       <RegenIcon className={styles.icon} color={color} />
-    </a>
+    </LinkComponent>
   );
 };

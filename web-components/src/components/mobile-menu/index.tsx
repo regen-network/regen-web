@@ -16,7 +16,7 @@ import { useMobileMenuStyles } from './MobileMenu.styles';
 type Props = {
   menuItems?: Item[];
   pathname: string;
-  linkComponent: React.FC<React.PropsWithChildren<NavLinkProps>>;
+  linkComponent: React.ElementType<NavLinkProps>;
   websiteExtras?: JSX.Element;
   isUserLoggedIn?: boolean;
 };

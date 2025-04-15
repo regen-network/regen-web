@@ -56,6 +56,7 @@ export const DetailsSection: React.FC<
                 sx={{ pb: { xs: 7.5, sm: 12.5 } }}
                 wrap="nowrap"
                 flexDirection={{ xs: 'column', tablet: 'row' }}
+                justifyContent="space-between"
               >
                 <Grid item>
                   <Label size="sm" mobileSize="sm" color="info.main">
@@ -123,24 +124,16 @@ export const DetailsSection: React.FC<
                           label={_(CREDIT)}
                         />
                         <Grid
-                          container
-                          pt={5}
-                          pr={{ xs: 11.25, tablet: 0 }}
-                          spacing={3}
+                          item
+                          className="pt-[16px] sm:pt-[18px] px-30 text-[40px] font-muli bg-clip-text text-[transparent] bg-[linear-gradient(206deg,#7D9AA2_0%,#9AD3BE_50%,#D1E2C7_100%)]"
                         >
-                          {creditClassDoc && (
-                            <DetailsSectionButton
-                              href={creditClassDoc['schema:url']}
-                              label={_(VIEW_CREDIT_CLASS_DOC)}
-                            />
-                          )}
-                          {methodology && (
-                            <DetailsSectionButton
-                              href={methodology['schema:url']}
-                              label={_(VIEW_METHODOLOGY)}
-                            />
-                          )}
+                          =
                         </Grid>
+                        <DetailsSectionCredit
+                          src={credit.creditTypeImage}
+                          label={credit.creditTypeUnit}
+                          learnMore={credit.creditTypeUnitDefinition}
+                        />
                       </Grid>
                     </Grid>
                   )}
@@ -159,7 +152,7 @@ export const DetailsSection: React.FC<
               infinite={false}
               slidesToShow={isMobile ? 1 : 2}
               padding={theme.spacing(2.5)}
-              className="md:-mt-[90px] pt-0"
+              className={`${projectId ? 'md:-mt-[90px]' : ''} pt-0`}
               items={credibilityCards.map((card, index) => (
                 <CredibilityCard
                   index={index}

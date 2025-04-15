@@ -1,8 +1,6 @@
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
-import Section from 'web-components/src/components/section';
-import { Title } from 'web-components/src/components/typography';
 import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { Stakeholders } from 'components/organisms/Stakeholders/Stakeholders';
@@ -119,26 +117,5 @@ export const ProjectDetailsStakeholders: React.FC<Props> = ({
     },
   ];
 
-  const hasStakeholders = stakeholders.some(
-    stakeholder =>
-      stakeholder.accounts &&
-      (Array.isArray(stakeholder.accounts)
-        ? stakeholder.accounts.length > 0
-        : Boolean(stakeholder.accounts)),
-  );
-
-  return (
-    <>
-      {hasStakeholders && (
-        <Section className="pt-0 mb-[80px] sm:mb-[100px]">
-          <div className="flex flex-col">
-            <Title variant="h2" py={3} className="mb-30 sm:mb-50 py-0">
-              {_(msg`Stakeholders`)}
-            </Title>
-            <Stakeholders stakeholders={stakeholders} />
-          </div>
-        </Section>
-      )}
-    </>
-  );
+  return <Stakeholders stakeholders={stakeholders} />;
 };

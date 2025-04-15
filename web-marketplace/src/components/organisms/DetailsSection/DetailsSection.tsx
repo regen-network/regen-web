@@ -56,6 +56,7 @@ export const DetailsSection: React.FC<
                 sx={{ pb: { xs: 7.5, sm: 12.5 } }}
                 wrap="nowrap"
                 flexDirection={{ xs: 'column', tablet: 'row' }}
+                justifyContent="space-between"
               >
                 <Grid item>
                   <Label size="sm" mobileSize="sm" color="info.main">
@@ -124,18 +125,7 @@ export const DetailsSection: React.FC<
                         />
                         <Grid
                           item
-                          sx={{
-                            background:
-                              'linear-gradient(206deg, #7D9AA2 0%, #9AD3BE 50%, #D1E2C7 100%)',
-                            '-webkit-background-clip': 'text',
-                            '-webkit-text-fill-color': 'transparent',
-                            '-moz-background-clip': 'text',
-                            '-moz-text-fill-color': 'transparent',
-                          }}
-                          pt={{ xs: 4, sm: 4.5 }}
-                          px={7.5}
-                          fontSize={40}
-                          fontFamily={headerFontFamily}
+                          className="pt-[16px] sm:pt-[18px] px-30 text-[40px] font-muli bg-clip-text text-[transparent] bg-[linear-gradient(206deg,#7D9AA2_0%,#9AD3BE_50%,#D1E2C7_100%)]"
                         >
                           =
                         </Grid>

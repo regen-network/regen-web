@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Grid, TooltipProps } from '@mui/material';
@@ -33,12 +34,16 @@ export const Stakeholders = ({ stakeholders, className }: Props) => {
   );
   const sm = filtered.length === 4 ? 3 : 4;
 
-  const hasStakeholders = stakeholders.some(
-    stakeholder =>
-      stakeholder.accounts &&
-      (Array.isArray(stakeholder.accounts)
-        ? stakeholder.accounts.length > 0
-        : Boolean(stakeholder.accounts)),
+  const hasStakeholders = useMemo(
+    () =>
+      stakeholders.some(
+        stakeholder =>
+          stakeholder.accounts &&
+          (Array.isArray(stakeholder.accounts)
+            ? stakeholder.accounts.length > 0
+            : Boolean(stakeholder.accounts)),
+      ),
+    [stakeholders],
   );
 
   return (

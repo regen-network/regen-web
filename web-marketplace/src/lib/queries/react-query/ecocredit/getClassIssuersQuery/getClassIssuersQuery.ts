@@ -12,7 +12,7 @@ export const getClassIssuersQuery = ({
   queryKey: getClassIssuersKey(request?.classId),
   queryFn: async () => {
     if (!client) return null;
-    return await client.ClassIssuers(request);
+    return await client.regen.ecocredit.v1.classIssuers(request);
   },
   ...params,
 });

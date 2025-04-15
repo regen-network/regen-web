@@ -2,8 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   BatchBalanceInfo,
   BatchInfo,
-  QueryBatchesResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+} from '@regen-network/api/regen/ecocredit/v1/query';
+import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
@@ -13,10 +13,10 @@ import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getEcocreditsForAccount } from 'lib/ecocredit/api';
 import { ledgerRESTUri } from 'lib/ledger';
+import { getBatchesQuery } from 'lib/queries/react-query/ecocredit/getBatchesQuery/getBatchesQuery';
 
 import { useLedger } from '../ledger';
 import { client as sanityClient } from '../lib/clients/sanity';
-import useEcocreditQuery from './useEcocreditQuery';
 import useQueryBalances from './useQueryBalances';
 
 const hasBatchBalance = (batchWithBalance: BatchInfoWithBalance): boolean => {
@@ -54,12 +54,15 @@ export default function useEcocredits({
   const [credits, setCredits] = useState<BatchInfoWithBalance[]>();
   const [isLoadingCredits, setIsLoadingCredits] = useState(true);
   const isFetchingRef = useRef(false);
-  const { dataClient, ecocreditClient } = useLedger();
+  const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const batchesResponse = useEcocreditQuery<QueryBatchesResponse>({
-    params: {},
-    query: 'batches',
-  });
+  const { data: batchesData } = useQuery(
+    getBatchesQuery({
+      enabled: !!queryClient,
+      client: queryClient,
+      request: {},
+    }),
+  );
 
   const { balancesResponse, fetchBalances } = useQueryBalances({
     address,
@@ -73,14 +76,14 @@ export default function useEcocredits({
     // Initialize credits with empty classId and projectLocation to render components consuming data right away
     if (
       balancesResponse?.balances &&
-      batchesResponse.data &&
+      batchesData &&
       sanityCreditClassData &&
       !credits
     ) {
       const initialCredits = balancesResponse?.balances
         .filter(isOfCreditClass(creditClassId))
         .map(balance => {
-          const batch = batchesResponse?.data?.batches.find(
+          const batch = batchesData?.batches.find(
             batch => batch.denom === balance.batchDenom,
           ) as BatchInfo;
 
@@ -102,14 +105,14 @@ export default function useEcocredits({
     }
   }, [
     balancesResponse,
-    batchesResponse,
+    batchesData,
     creditClassId,
     credits,
     sanityCreditClassData,
   ]);
 
   const fetchCredits = useCallback(async (): Promise<void> => {
-    if (!address || isFetchingRef.current) {
+    if (!address || isFetchingRef.current || !queryClient) {
       return;
     }
 
@@ -122,10 +125,9 @@ export default function useEcocredits({
         balances: balancesResponse?.balances.filter(
           isOfCreditClass(creditClassId),
         ),
-        batches: batchesResponse?.data?.batches,
+        batches: batchesData?.batches,
         sanityCreditClassData,
-        dataClient,
-        ecocreditClient,
+        client: queryClient,
         selectedLanguage,
       });
 
@@ -141,14 +143,15 @@ export default function useEcocredits({
     credits,
     balancesResponse?.balances,
     creditClassId,
-    batchesResponse?.data?.batches,
+    batchesData?.batches,
     sanityCreditClassData,
-    dataClient,
-    ecocreditClient,
+    queryClient,
     selectedLanguage,
   ]);
 
   const reloadBalances = useCallback(async () => {
+    if (!address) return;
+
     const newBalancesReponse = await fetchBalances({ address });
     const updatedCredits = credits?.map(credit => {
       if (credit.balance) {

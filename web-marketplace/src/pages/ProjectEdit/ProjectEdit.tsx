@@ -10,7 +10,7 @@ import { useApolloClient } from '@apollo/client';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
 import { ERRORS } from 'config/errors';
 import { useAtom, useSetAtom } from 'jotai';
@@ -94,7 +94,7 @@ function ProjectEdit(): JSX.Element {
   >(undefined);
   const navigate = useNavigate();
   const graphqlClient = useApolloClient();
-  const { ecocreditClient } = useLedger();
+  const { queryClient } = useLedger();
 
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
@@ -137,10 +137,10 @@ function ProjectEdit(): JSX.Element {
   } = useQuery(
     getProjectQuery({
       request: {
-        projectId,
+        projectId: projectId as string,
       },
-      enabled: !!projectId && isOnChainId && !!ecocreditClient,
-      client: ecocreditClient,
+      enabled: !!projectId && isOnChainId && !!queryClient,
+      client: queryClient,
     }),
   );
   const onChainProject = projectRes?.project;

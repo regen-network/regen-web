@@ -2,11 +2,9 @@ import { BlockContent } from 'web-components/src/components/block-content';
 import type { ArticleCardProps } from 'web-components/src/components/cards/ArticleCard/ArticleCard';
 import { ArticleType } from 'web-components/src/components/cards/ArticleCard/ArticleCard.types';
 import type { ResourcesCardProps } from 'web-components/src/components/cards/ResourcesCard';
-import { Document } from 'web-components/src/components/table/DocumentationTable/DocumentationTable';
 import { formatDate } from 'web-components/src/utils/format';
 
 import {
-  Doc,
   Maybe,
   MediaFieldsFragment,
   Resource,
@@ -37,23 +35,6 @@ export function sanityResourcesToCardProps(
       buttonText: card?.button?.buttonText,
       updated: card?.lastUpdated,
     } as ResourcesCardProps;
-  });
-}
-
-/**
- *
- * @param docs array of sanity docs
- * @returns props for our <Table /> component
- */
-export function sanityDocsToDocuments(docs: Doc[]): Document[] {
-  return (docs || []).map(doc => {
-    return {
-      date: doc?.date,
-      ledger: doc?.type,
-      type: doc?.type,
-      name: doc?.name,
-      url: doc?.href,
-    } as Document;
   });
 }
 

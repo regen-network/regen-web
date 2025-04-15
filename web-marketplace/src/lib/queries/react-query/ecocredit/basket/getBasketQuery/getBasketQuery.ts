@@ -11,7 +11,7 @@ export const getBasketQuery = ({
   queryKey: ['basket', request.basketDenom],
   queryFn: async () => {
     if (!client) return undefined;
-    return await client.Basket(request);
+    return await client.regen.ecocredit.basket.v1.basket(request);
   },
   ...params,
 });

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useAtom } from 'jotai';
 
 import Banner from 'web-components/src/components/banner';

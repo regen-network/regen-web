@@ -7,14 +7,14 @@ import {
 
 export const getMetadataQuery = ({
   iri,
-  dataClient,
+  client,
   languageCode,
   ...params
 }: ReactQueryMetadataProps): ReactQueryMetadataResponse => ({
   queryKey: ['metadata', iri ?? '', languageCode],
   queryFn: async () => {
     try {
-      return await getMetadata({ iri, client: dataClient, languageCode });
+      return await getMetadata({ iri, client, languageCode });
     } catch {
       return null;
     }

@@ -1,10 +1,11 @@
 import {
-  DeepPartial,
   GetTxsEventRequest,
   GetTxsEventResponse,
-  ServiceClientImpl as TxServiceClientImpl,
-} from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+  OrderBy,
+} from '@regen-network/api/cosmos/tx/v1beta1/service';
 import { QueryObserverOptions } from '@tanstack/react-query';
+
+import { QueryClient } from 'ledger';
 
 import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
 
@@ -16,7 +17,11 @@ export type ReactQueryGetTxsEventResponse =
   QueryObserverOptions<GetTxsEventQueryResponse | null>;
 
 export type ReactQueryGetTxsEventProps = {
-  request: DeepPartial<GetTxsEventRequest>;
+  request: Omit<GetTxsEventRequest, 'page' | 'limit' | 'orderBy'> & {
+    page?: bigint;
+    limit?: bigint;
+    orderBy?: OrderBy;
+  };
 } & {
-  client?: TxServiceClientImpl;
+  client?: QueryClient;
 } & ReactQueryBuilderResponse<ReactQueryGetTxsEventResponse>;

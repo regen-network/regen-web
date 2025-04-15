@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
-import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
+import { regen } from '@regen-network/api';
+import { MsgCreateBatch } from '@regen-network/api/regen/ecocredit/v1/tx';
+import { BatchIssuance } from '@regen-network/api/regen/ecocredit/v1/types';
 
-import { useLedger } from 'ledger';
 import { generateIri, IriFromMetadataSuccess } from 'lib/db/api/metadata-graph';
 import type {
   CFCBatchMetadataLD,
@@ -43,10 +43,7 @@ function prepareVCSMetadata(
   return metadata;
 }
 
-async function prepareMsg(
-  issuer: string,
-  data: CreateBatchFormValues,
-): Promise<Partial<MsgCreateBatch> | undefined> {
+async function prepareMsg(issuer: string, data: CreateBatchFormValues) {
   if (!data.metadata) return;
 
   // Complete the metadata for the batch creation
@@ -92,14 +89,15 @@ async function prepareMsg(
     }
     return issuanceRecipient as BatchIssuance;
   });
-
-  return MsgCreateBatch.fromPartial({
+  console.log(iriResponse);
+  return regen.ecocredit.v1.MessageComposer.withTypeUrl.createBatch({
     issuer,
     projectId: data.projectId,
     issuance: issuance,
     metadata: iriResponse.iri,
     startDate: new Date(data.startDate as Date),
     endDate: new Date(data.endDate as Date),
+    open: false,
   });
 }
 
@@ -145,7 +143,6 @@ type Return = {
  *
  */
 export default function useCreateBatchSubmit(): Return {
-  const { api } = useLedger();
   const { wallet, signAndBroadcast, deliverTxResponse, error, setError } =
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const accountAddress = wallet?.address;
@@ -173,10 +170,15 @@ export default function useCreateBatchSubmit(): Return {
   }
 
   const createBatch = async (data: CreateBatchFormValues): Promise<void> => {
-    if (!api?.msgClient?.broadcast || !accountAddress) return Promise.reject();
+    if (!accountAddress) return Promise.reject();
     if (!data.startDate || !data.endDate) return Promise.reject();
 
-    let message: Partial<MsgCreateBatch> | undefined;
+    let message:
+      | {
+          typeUrl: string;
+          value: MsgCreateBatch;
+        }
+      | undefined;
 
     // This check is to bypass if status is `sign` or `broadcast`
     if (status === 'idle' || status === 'message') {

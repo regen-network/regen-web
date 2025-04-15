@@ -1,9 +1,8 @@
-import { longify } from '@cosmjs/stargate/build/queries/utils';
-import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { SellOrderInfo } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
 
 export const sellOrdersMock: SellOrderInfo[] = [
   {
-    id: longify('1'),
+    id: BigInt(1),
     seller: 'regen1qwa9xy0997j5mrc4dxn7jrcvvkpm3uwuldkrmg',
     batchDenom: 'C02-001-19930101-20031031-001',
     quantity: '4.2',
@@ -11,10 +10,9 @@ export const sellOrdersMock: SellOrderInfo[] = [
     askAmount: '17',
     disableAutoRetire: false,
     expiration: new Date('1970-01-01T00:00:00Z'),
-    $type: 'regen.ecocredit.marketplace.v1.SellOrderInfo',
   },
   {
-    id: longify('2'),
+    id: BigInt(2),
     seller: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
     batchDenom: 'C02-001-19930101-20031031-001',
     quantity: '100',
@@ -22,10 +20,9 @@ export const sellOrdersMock: SellOrderInfo[] = [
     askAmount: '20',
     disableAutoRetire: false,
     expiration: new Date('2023-12-31T00:00:00Z'),
-    $type: 'regen.ecocredit.marketplace.v1.SellOrderInfo',
   },
   {
-    id: longify('3'),
+    id: BigInt(3),
     seller: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
     batchDenom: 'C02-001-19930101-20031031-001',
     quantity: '200',
@@ -33,10 +30,9 @@ export const sellOrdersMock: SellOrderInfo[] = [
     askAmount: '10',
     disableAutoRetire: true,
     expiration: new Date('2024-12-31T00:00:00Z'),
-    $type: 'regen.ecocredit.marketplace.v1.SellOrderInfo',
   },
   {
-    id: longify('4'),
+    id: BigInt(4),
     seller: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
     batchDenom: 'C02-001-19930101-20031031-001',
     quantity: '300',
@@ -44,10 +40,9 @@ export const sellOrdersMock: SellOrderInfo[] = [
     askAmount: '15',
     disableAutoRetire: false,
     expiration: new Date('2024-01-01T00:00:00Z'),
-    $type: 'regen.ecocredit.marketplace.v1.SellOrderInfo',
   },
   {
-    id: longify('5'),
+    id: BigInt(5),
     seller: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
     batchDenom: 'C02-001-19930101-20031031-001',
     quantity: '100',
@@ -55,10 +50,9 @@ export const sellOrdersMock: SellOrderInfo[] = [
     askAmount: '11',
     disableAutoRetire: false,
     expiration: new Date('2023-12-31T00:00:00Z'),
-    $type: 'regen.ecocredit.marketplace.v1.SellOrderInfo',
   },
   {
-    id: longify('6'),
+    id: BigInt(6),
     seller: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
     batchDenom: 'C02-001-19930101-20031031-001',
     quantity: '200',
@@ -66,10 +60,9 @@ export const sellOrdersMock: SellOrderInfo[] = [
     askAmount: '8',
     disableAutoRetire: true,
     expiration: new Date('2024-12-31T00:00:00Z'),
-    $type: 'regen.ecocredit.marketplace.v1.SellOrderInfo',
   },
   {
-    id: longify('7'),
+    id: BigInt(7),
     seller: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
     batchDenom: 'C02-001-19930101-20031031-001',
     quantity: '300',
@@ -77,7 +70,6 @@ export const sellOrdersMock: SellOrderInfo[] = [
     askAmount: '7',
     disableAutoRetire: false,
     expiration: new Date('2024-01-01T00:00:00Z'),
-    $type: 'regen.ecocredit.marketplace.v1.SellOrderInfo',
   },
 ];
 

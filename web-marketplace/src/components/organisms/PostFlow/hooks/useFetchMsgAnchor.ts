@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import { useLingui } from '@lingui/react';
-import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
-import { OrderBy } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-import { MsgAnchor } from '@regen-network/api/lib/generated/regen/data/v1/tx';
+import { TxResponse } from '@regen-network/api/cosmos/base/abci/v1beta1/abci';
+import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
+import { timer } from 'utils/timer';
 
 import { useLedger } from 'ledger';
 import {
@@ -21,7 +21,6 @@ import {
   VIEW_POST,
 } from '../PostFlow.constants';
 import { useGetSuccessModalContent } from './useGetSuccessModalContent';
-import { timer } from 'utils/timer';
 
 export type FetchMsgAnchorParams = {
   iri: string;
@@ -42,18 +41,19 @@ export const useFetchMsgAnchor = ({
   projectName,
   onModalClose,
 }: UseFetchMsgAnchorParams) => {
-  const { txClient } = useLedger();
+  const { queryClient } = useLedger();
   const { _ } = useLingui();
   const getSuccessModalContent = useGetSuccessModalContent();
 
   const { refetch } = useQuery(
     getGetTxsEventQuery({
-      client: txClient,
+      client: queryClient,
       enabled: false,
       request: {
-        events: [`${messageActionEquals}'/${MsgAnchor.$type}'`],
+        events: [`${messageActionEquals}'/regen.data.v1.MsgAnchor'`],
         orderBy: OrderBy.ORDER_BY_DESC,
-        pagination: { limit: 1 },
+        limit: 1n,
+        page: 1n,
       },
     }),
   );

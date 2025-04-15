@@ -1,9 +1,9 @@
-import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import { QueryDenomMetadataResponse } from '@regen-network/api/cosmos/bank/v1beta1/query';
 import {
   QueryBasketBalancesResponse,
   QueryBasketResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { QueryClassResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+} from '@regen-network/api/regen/ecocredit/basket/v1/query';
+import { QueryClassResponse } from '@regen-network/api/regen/ecocredit/v1/query';
 import { UseQueryResult } from '@tanstack/react-query';
 
 import { formatDuration } from 'web-components/src/utils/format';
@@ -44,7 +44,7 @@ export const normalizeBasketOverview = ({
 
   const startDateWindow = basketData?.basketInfo?.dateCriteria?.startDateWindow;
   const startDateWindowField = startDateWindow
-    ? { startDateWindow: formatDuration(startDateWindow?.seconds?.toNumber()) }
+    ? { startDateWindow: formatDuration(Number(startDateWindow?.seconds)) }
     : {};
 
   const overviewFields: BasketOverviewProps = {

@@ -10,7 +10,7 @@ export const getAllowedDenomQuery = ({
   queryKey: ['allowedDenom'],
   queryFn: async () => {
     if (!client) return undefined;
-    return await client.AllowedDenoms({});
+    return await client.regen.ecocredit.marketplace.v1.allowedDenoms({});
   },
   keepPreviousData: true,
   ...params,

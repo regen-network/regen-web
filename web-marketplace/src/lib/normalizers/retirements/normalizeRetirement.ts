@@ -1,7 +1,7 @@
 import {
   ClassInfo,
   ProjectInfo,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+} from '@regen-network/api/regen/ecocredit/v1/query';
 
 import { Account } from 'web-components/src/components/user/UserInfo';
 

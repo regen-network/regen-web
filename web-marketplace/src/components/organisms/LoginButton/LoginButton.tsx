@@ -50,14 +50,14 @@ const LoginButton = ({
     onButtonClick,
   } = useLoginData({});
   const { noAccountAndNoWallet } = useAuthData();
-  const { bankClient } = useLedger();
+  const { queryClient } = useLedger();
 
   // Populate cache with user balance once connected
   useQuery(
     getBalanceQuery({
-      request: { address: wallet?.address, denom: REGEN_DENOM },
-      client: bankClient,
-      enabled: !!bankClient && !!wallet?.address,
+      request: { address: wallet?.address as string, denom: REGEN_DENOM },
+      client: queryClient,
+      enabled: !!queryClient && !!wallet?.address,
     }),
   );
 

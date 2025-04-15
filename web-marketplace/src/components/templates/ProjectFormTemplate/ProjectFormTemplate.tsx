@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 
 import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';

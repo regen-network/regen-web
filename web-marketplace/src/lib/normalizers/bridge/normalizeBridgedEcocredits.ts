@@ -1,8 +1,8 @@
-import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
+import { TxResponse } from '@regen-network/api/cosmos/base/abci/v1beta1/abci';
 import {
   BatchInfo,
   ProjectInfo,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+} from '@regen-network/api/regen/ecocredit/v1/query';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { BridgedEcocredits } from 'types/ledger/ecocredit';

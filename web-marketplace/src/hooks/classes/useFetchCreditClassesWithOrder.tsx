@@ -1,7 +1,7 @@
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
-import { useLedger } from 'ledger';
+import { QueryClient, useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
@@ -24,13 +24,13 @@ export const useFetchCreditClassesWithOrder = ({
   fetchAll = false,
 }: Props) => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { ecocreditClient, dataClient, marketplaceClient } = useLedger();
+  const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { data: creditClassesData, isFetching: isLoadingCreditClasses } =
     useQuery(
       getClassesQuery({
-        client: ecocreditClient,
-        enabled: !!ecocreditClient && !admin && fetchAll,
+        client: queryClient,
+        enabled: !!queryClient && !admin && fetchAll,
       }),
     );
   const allCreditClasses = creditClassesData?.classes;
@@ -40,8 +40,8 @@ export const useFetchCreditClassesWithOrder = ({
     isFetching: isLoadingCreditClassesByAdmin,
   } = useQuery(
     getClassesByAdminQuery({
-      client: ecocreditClient,
-      enabled: !!ecocreditClient && !!admin,
+      client: queryClient,
+      enabled: !!queryClient && !!admin,
       request: { admin: admin as string },
     }),
   );
@@ -54,8 +54,8 @@ export const useFetchCreditClassesWithOrder = ({
       creditClasses?.map(creditClass =>
         getMetadataQuery({
           iri: creditClass.metadata,
-          enabled: !!dataClient,
-          dataClient,
+          enabled: !!queryClient,
+          client: queryClient,
           languageCode: selectedLanguage,
         }),
       ) ?? [],
@@ -82,8 +82,8 @@ export const useFetchCreditClassesWithOrder = ({
 
   const { data: sellOrders, isLoading: isLoadingSellOrders } = useQuery(
     getSellOrdersExtendedQuery({
-      enabled: !!marketplaceClient,
-      client: marketplaceClient,
+      enabled: !!queryClient,
+      client: queryClient as QueryClient,
       reactQueryClient,
       request: {},
     }),

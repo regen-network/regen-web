@@ -1,10 +1,10 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import { SellOrderInfo } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
 import { QueryClient } from '@tanstack/react-query';
 
 import { Maybe } from 'generated/graphql';
+import { getRPCQueryClient } from 'ledger';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
-import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketplace/marketplaceQueryClient';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
@@ -32,10 +32,10 @@ export const buyCreditsLoader =
     const isOnChainId = getIsOnChainId(projectIdParam);
     const apolloClient =
       apolloClientFactory.getClient() as ApolloClient<NormalizedCacheObject>;
-    const marketplaceClient = await getMarketplaceQueryClient();
+    const rpcQueryClient = await getRPCQueryClient();
 
     const sellOrdersQuery = getSellOrdersExtendedQuery({
-      client: marketplaceClient,
+      client: rpcQueryClient,
       reactQueryClient: queryClient,
       request: {},
     });

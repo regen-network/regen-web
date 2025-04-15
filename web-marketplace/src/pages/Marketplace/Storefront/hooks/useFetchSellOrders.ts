@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { useLedger } from 'ledger';
+import { QueryClient, useLedger } from 'ledger';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
@@ -13,19 +13,19 @@ type UseFetchSellOrdersResponse = {
 };
 
 export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
-  const { marketplaceClient } = useLedger();
+  const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
 
   // Query
   const sellOrdersQuery = useMemo(
     () =>
       getSellOrdersExtendedQuery({
-        enabled: !!marketplaceClient,
-        client: marketplaceClient,
+        enabled: !!queryClient,
+        client: queryClient as QueryClient,
         reactQueryClient,
         request: {},
       }),
-    [marketplaceClient, reactQueryClient],
+    [queryClient, reactQueryClient],
   );
 
   // Fetch

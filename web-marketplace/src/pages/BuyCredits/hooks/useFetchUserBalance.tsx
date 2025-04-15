@@ -8,16 +8,16 @@ import { useWallet } from 'lib/wallet/wallet';
 
 export const useFetchUserBalance = (askDenom?: string) => {
   const { wallet } = useWallet();
-  const { bankClient } = useLedger();
+  const { queryClient } = useLedger();
   const {
     data: allBalancesData,
     isLoading,
     isFetching,
   } = useQuery(
     getAllBalancesQuery({
-      request: { address: wallet?.address },
-      client: bankClient,
-      enabled: !!bankClient && !!wallet?.address,
+      request: { address: wallet?.address as string },
+      client: queryClient,
+      enabled: !!queryClient && !!wallet?.address,
     }),
   );
 

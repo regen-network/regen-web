@@ -14,7 +14,7 @@ export const convertIRIToHashQuery = ({
   }),
   queryFn: async () => {
     if (!client) return null;
-    return await client.ConvertIRIToHash(request);
+    return await client.regen.data.v1.convertIRIToHash(request);
   },
   ...params,
 });

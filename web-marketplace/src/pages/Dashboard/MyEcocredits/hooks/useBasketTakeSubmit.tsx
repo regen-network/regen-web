@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useLingui } from '@lingui/react';
-import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
+import { regen } from '@regen-network/api';
+import { BasketInfo } from '@regen-network/api/regen/ecocredit/basket/v1/query';
+import { MsgTake } from '@regen-network/api/regen/ecocredit/basket/v1/tx';
 
 import type { MsgTakeValues } from 'web-components/src/components/form/BasketTakeForm';
 
@@ -61,14 +62,14 @@ const useBasketTakeSubmit = ({
         retireOnTake: values.retireOnTake,
       });
 
-      const msg = MsgTake.fromPartial({
+      const msg = regen.ecocredit.basket.v1.MessageComposer.withTypeUrl.take({
         owner: accountAddress,
         basketDenom: values.basketDenom,
         amount,
         retireOnTake: values.retireOnTake || false,
-        retirementJurisdiction: values.retirementJurisdiction,
-        retirementReason: values?.retirementReason,
-      });
+        retirementJurisdiction: values.retirementJurisdiction || '',
+        retirementReason: values?.retirementReason || '',
+      } as MsgTake); // retirementLocation is set as required by MsgTake but deprecated (in favor of retirementJurisdiction)
 
       const tx = {
         msgs: [msg],

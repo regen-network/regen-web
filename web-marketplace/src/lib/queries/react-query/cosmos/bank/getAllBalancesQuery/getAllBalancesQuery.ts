@@ -12,7 +12,7 @@ export const getAllBalancesQuery = ({
   queryKey: [BANK_ALL_BALANCES_KEY, request.address],
   queryFn: async () => {
     if (!client) return undefined;
-    return await client.AllBalances(request);
+    return await client.cosmos.bank.v1beta1.allBalances(request);
   },
   ...params,
 });

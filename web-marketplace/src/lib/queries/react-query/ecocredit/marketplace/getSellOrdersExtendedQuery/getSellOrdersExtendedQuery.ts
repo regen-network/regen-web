@@ -1,7 +1,7 @@
 import {
   QuerySellOrdersResponse,
   SellOrderInfo,
-} from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+} from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
 import uniq from 'lodash/uniq';
 import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
 
@@ -35,9 +35,17 @@ export const getSellOrdersExtendedQuery = ({
     let response: QuerySellOrdersResponse | undefined;
     while (!response || response.pagination?.nextKey?.length) {
       if (response?.pagination?.nextKey?.length) {
-        _request.pagination = { key: response.pagination.nextKey };
+        _request.pagination = {
+          key: response.pagination.nextKey,
+          countTotal: false,
+          offset: 0n,
+          limit: 100n,
+          reverse: false,
+        };
       }
-      response = await client.SellOrders(_request);
+      response = await client.regen.ecocredit.marketplace.v1.sellOrders(
+        _request,
+      );
       sellOrders.push(...response.sellOrders);
     }
 
@@ -51,6 +59,7 @@ export const getSellOrdersExtendedQuery = ({
     // Call DenomsTrace on each ibc denom hash
     const denomTracesQuery = getDenomTraceByHashesQuery({
       hashes: ibcDenomHashes,
+      queryClient: client,
     });
     const denomTraces = await getFromCacheOrFetch<DenomTraceWithHash[] | void>({
       query: denomTracesQuery,

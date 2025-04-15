@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';

@@ -239,7 +239,6 @@ export const basketTakeModal = (): JSX.Element => (
     basketDisplayDenom="eco.C.rNCT"
     basket={{
       curator: 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4',
-      $type: 'regen.ecocredit.basket.v1.BasketInfo',
       name: 'rNCT',
       basketDenom: 'eco.uC.rNCT',
       creditTypeAbbrev: 'C',

@@ -1,11 +1,6 @@
 import CreditDetails, { CreditInfoProps } from '../credits/CreditDetails';
 import CoBenefitsIcon from '../icons/CoBenefitsIcon';
 import { ProjectPageIcon } from '../icons/ProjectPageIcon';
-import {
-  DocumentationTable,
-  DocumentRowData,
-} from '../table/DocumentationTable/DocumentationTable';
-import { DOCUMENTATION_HEAD_CELLS } from '../table/DocumentationTable/DocumentationTable.mock';
 import Tabs, { RegenTab } from '.';
 import { IconTabProps } from './IconTab';
 import { IconTabs } from './IconTabs';
@@ -32,30 +27,6 @@ const details: CreditInfoProps = {
   ],
 };
 
-const data: DocumentRowData[] = [
-  {
-    name: 'Monitoring',
-    type: 'Monitoring',
-    date: '2020-03-15T00:00:00.000Z',
-    url: 'test',
-    ledger: 'test',
-  },
-  {
-    name: 'Issuance Documents',
-    type: 'Issuance',
-    date: '2020-03-15T00:00:00.000Z',
-    url: 'test',
-    ledger: 'test',
-  },
-  {
-    name: 'Project Review',
-    type: 'Project Review',
-    date: '2020-03-15T00:00:00.000Z',
-    url: 'test',
-    ledger: 'test',
-  },
-];
-
 const creditDetailsTab: RegenTab = {
   label: 'Overview',
   content: (
@@ -67,20 +38,7 @@ const creditDetailsTab: RegenTab = {
   ),
 };
 
-const documentationTab: RegenTab = {
-  label: 'Documentation',
-  content: (
-    <DocumentationTable
-      rows={data}
-      headCells={DOCUMENTATION_HEAD_CELLS}
-      tableAriaLabel="Documentation Table"
-      viewLedgerText="View on ledger"
-      viewDocumentText="View document"
-    />
-  ),
-};
-
-const tabs: RegenTab[] = [creditDetailsTab, documentationTab];
+const tabs: RegenTab[] = [creditDetailsTab];
 
 export const mrvTabs = (): JSX.Element => (
   <Tabs background="./background.jpg" tabs={tabs} />

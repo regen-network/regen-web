@@ -37,7 +37,7 @@ export const useFetchPaginatedBatches = ({
   setPaginationParams: UseStateSetter<TablePaginationParams>;
   paginationParams: TablePaginationParams;
 } => {
-  const { ecocreditClient, dataClient, txClient } = useLedger();
+  const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { page: routePage } = useParams();
@@ -52,9 +52,11 @@ export const useFetchPaginatedBatches = ({
     });
   const { rowsPerPage, page } = paginationParams;
   const paginationRequest = {
-    offset: page * rowsPerPage,
-    limit: rowsPerPage,
+    offset: BigInt(page * rowsPerPage),
+    limit: BigInt(rowsPerPage),
     countTotal: true,
+    key: new Uint8Array(),
+    reverse: false,
   };
 
   const sanityCreditClassDataResult = useQuery(
@@ -68,51 +70,51 @@ export const useFetchPaginatedBatches = ({
   /* Default batches fetch */
   const batchesResult = useQuery(
     getBatchesQuery({
-      client: ecocreditClient,
+      client: queryClient,
       request: {
         pagination: paginationRequest,
       },
       keepPreviousData: true,
-      enabled: !!ecocreditClient && !projectId && !address && !creditClassId,
+      enabled: !!queryClient && !projectId && !address && !creditClassId,
     }),
   );
 
   /* By Issuer batches fetch */
   const batchesByIssuerResult = useQuery(
     getBatchesByIssuerQuery({
-      client: ecocreditClient,
+      client: queryClient,
       request: {
         pagination: paginationRequest,
         issuer: address as string,
       },
       keepPreviousData: true,
-      enabled: !!ecocreditClient && !!address,
+      enabled: !!queryClient && !!address,
     }),
   );
 
   /* By Project batches fetch */
   const batchesByProjectResult = useQuery(
     getBatchesByProjectQuery({
-      client: ecocreditClient,
+      client: queryClient,
       request: {
         pagination: paginationRequest,
-        projectId,
+        projectId: projectId as string,
       },
       keepPreviousData: true,
-      enabled: !!ecocreditClient && !!projectId,
+      enabled: !!queryClient && !!projectId,
     }),
   );
 
   /* By Class batches fetch */
   const batchesByClassResult = useQuery(
     getBatchesByClassQuery({
-      client: ecocreditClient,
+      client: queryClient,
       request: {
         pagination: paginationRequest,
-        classId: creditClassId ?? undefined,
+        classId: creditClassId as string,
       },
       keepPreviousData: true,
-      enabled: !!ecocreditClient && !!creditClassId,
+      enabled: !!queryClient && !!creditClassId,
     }),
   );
 
@@ -128,9 +130,7 @@ export const useFetchPaginatedBatches = ({
     batches,
     sanityCreditClassData: sanityCreditClassDataResult.data,
     reactQueryClient,
-    dataClient,
-    ecocreditClient,
-    txClient,
+    client: queryClient,
     withAllData,
   });
 

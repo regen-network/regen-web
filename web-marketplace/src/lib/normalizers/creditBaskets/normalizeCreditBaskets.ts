@@ -1,4 +1,4 @@
-import type { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import type { QueryBasketResponse } from '@regen-network/api/regen/ecocredit/basket/v1/query';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 

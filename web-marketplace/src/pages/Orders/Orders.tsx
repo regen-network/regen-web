@@ -17,14 +17,14 @@ import { CreditCardHidden } from './Orders.CreditCardHidden';
 export const Orders = () => {
   const location = useLocation();
 
-  const { marketplaceClient } = useLedger();
+  const { queryClient } = useLedger();
   const { orders, isLoading } = useOrders();
   const { loginDisabled } = useWallet();
 
   const { data: allowedDenomsData } = useQuery(
     getAllowedDenomQuery({
-      client: marketplaceClient,
-      enabled: !!marketplaceClient,
+      client: queryClient,
+      enabled: !!queryClient,
     }),
   );
   const allowedDenoms = allowedDenomsData?.allowedDenoms;

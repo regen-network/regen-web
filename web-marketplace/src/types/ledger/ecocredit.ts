@@ -1,18 +1,23 @@
 import {
+  QueryBalanceResponse as BankQueryBalanceResponse,
+  QueryDenomMetadataResponse,
+} from '@regen-network/api/cosmos/bank/v1beta1/query';
+import { BasketInfo } from '@regen-network/api/regen/ecocredit/basket/v1/query';
+import {
   BatchInfo,
   ProjectInfo,
   QueryBalanceResponse,
   QuerySupplyResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+} from '@regen-network/api/regen/ecocredit/v1/query';
 
 /** Map keys from another type to values of number type */
 type MapToNumber<T> = { [K in keyof T]: number };
 
 /** `QuerySupplyResponse`  */
 export interface BatchTotalsForProject
-  extends MapToNumber<Omit<QuerySupplyResponse, '$type'>> {}
+  extends MapToNumber<QuerySupplyResponse> {}
 
-export interface IBatchInfo extends Omit<BatchInfo, '$type'> {}
+export interface IBatchInfo extends BatchInfo {}
 
 export interface ClassProjectInfo {
   classId?: string;
@@ -29,12 +34,12 @@ export interface IBatchInfoWithClassProject
 // /** combines the ledger `BatchInfo` with ledger `QueryBalanceResponse` */
 export interface BatchInfoWithBalance
   extends IBatchInfoWithClassProject,
-    Omit<QueryBalanceResponse, '$type'> {}
+    QueryBalanceResponse {}
 
 // /** combines the ledger `BatchInfo` with ledger `QuerySupplyResponse` */
 export interface BatchInfoWithSupply
   extends IBatchInfoWithClassProject,
-    Omit<QuerySupplyResponse, '$type'> {
+    QuerySupplyResponse {
   txhash?: string;
 }
 
@@ -57,4 +62,10 @@ export interface BridgedEcocredits extends IBatchInfoWithClassProject {
   destinationTxHash?: string;
   txHash?: string;
   txTimestamp?: string;
+}
+
+export interface BasketTokens {
+  basket?: BasketInfo;
+  balance?: BankQueryBalanceResponse;
+  metadata?: QueryDenomMetadataResponse;
 }

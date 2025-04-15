@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
+import { useLedger } from 'ledger';
 import { queryParams } from 'lib/ecocredit/api';
-
-import { useWallet } from '../lib/wallet/wallet';
+import { useWallet } from 'lib/wallet/wallet';
 
 type Props = {
   address?: string | null;
@@ -11,6 +11,7 @@ type Props = {
 export function useQueryIfCreditClassCreator({ address }: Props): boolean {
   const [isCreator, setIsCreator] = useState(false);
   const { wallet } = useWallet();
+  const { queryClient } = useLedger();
   const walletAddress = wallet?.address;
   const activeAddress = address ?? walletAddress;
 
@@ -18,9 +19,9 @@ export function useQueryIfCreditClassCreator({ address }: Props): boolean {
     const queryIfCreator = async (): Promise<void> => {
       if (!activeAddress) {
         setIsCreator(false);
-      } else {
+      } else if (queryClient) {
         try {
-          const result = await queryParams({});
+          const result = await queryParams({ client: queryClient });
           const allowlistEnabled = result.params?.allowlistEnabled;
           if (allowlistEnabled) {
             const _isCreator =
@@ -38,6 +39,6 @@ export function useQueryIfCreditClassCreator({ address }: Props): boolean {
     };
 
     queryIfCreator();
-  }, [activeAddress]);
+  }, [activeAddress, queryClient]);
   return isCreator;
 }

@@ -1,6 +1,6 @@
-import { QueryClientImpl as DataQueryClientImpl } from '@regen-network/api/lib/generated/regen/data/v1/query';
 import { QueryObserverOptions } from '@tanstack/react-query';
 
+import { QueryClient } from 'ledger';
 import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
@@ -14,6 +14,6 @@ export type ReactQueryMetadataResponse = QueryObserverOptions<
 
 export type ReactQueryMetadataProps = {
   iri?: string;
-  dataClient?: DataQueryClientImpl;
+  client?: QueryClient;
   languageCode: string;
 } & ReactQueryBuilderResponse<ReactQueryMetadataResponse>;

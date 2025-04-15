@@ -1,7 +1,7 @@
 import { UseFormSetValue } from 'react-hook-form';
 import { i18n } from '@lingui/core';
 import { msg, plural, Trans } from '@lingui/macro';
-import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
+import { AllowedDenom } from '@regen-network/api/regen/ecocredit/marketplace/v1/state';
 import {
   AXELAR_USDC_DENOM,
   EEUR_DENOM,

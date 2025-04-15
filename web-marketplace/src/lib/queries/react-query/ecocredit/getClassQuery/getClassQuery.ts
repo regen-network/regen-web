@@ -14,7 +14,7 @@ export const getClassQuery = ({
   }),
   queryFn: async () => {
     if (!client) return null;
-    return await client.Class(request);
+    return await client.regen.ecocredit.v1.class(request);
   },
   ...params,
 });

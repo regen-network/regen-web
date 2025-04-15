@@ -21,14 +21,14 @@ export const useFetchBasketOverview = ({
   basketDenom,
 }: Params): BasketOverviewProps => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { basketClient, bankClient, ecocreditClient, dataClient } = useLedger();
+  const { queryClient } = useLedger();
 
   // Basket
   const { data: basketData } = useQuery(
     getBasketQuery({
-      enabled: !!basketClient,
-      client: basketClient,
-      request: { basketDenom },
+      enabled: !!queryClient && !!basketDenom,
+      client: queryClient,
+      request: { basketDenom: basketDenom as string },
     }),
   );
   const basketClasses = basketData?.classes ?? [];
@@ -36,18 +36,18 @@ export const useFetchBasketOverview = ({
   // Basket Denom Metadata
   const { data: basketDenomMetadata } = useQuery(
     getDenomMetadataQuery({
-      enabled: !!bankClient,
-      client: bankClient,
-      request: { denom: basketDenom },
+      enabled: !!queryClient && !!basketDenom,
+      client: queryClient,
+      request: { denom: basketDenom as string },
     }),
   );
 
   // Basket Balances
   const { data: basketBalancesData } = useQuery(
     getBasketBalancesQuery({
-      enabled: !!basketClient,
-      client: basketClient,
-      request: { basketDenom },
+      enabled: !!queryClient && !!basketDenom,
+      client: queryClient,
+      request: { basketDenom: basketDenom as string },
     }),
   );
 
@@ -55,7 +55,7 @@ export const useFetchBasketOverview = ({
   const basketClassResults = useQueries({
     queries: basketClasses.map(basketClass =>
       getClassQuery({
-        client: ecocreditClient,
+        client: queryClient,
         request: { classId: basketClass },
       }),
     ),
@@ -66,9 +66,9 @@ export const useFetchBasketOverview = ({
     queries: basketClassResults.map(basketClass =>
       getMetadataQuery({
         iri: basketClass.data?.class?.metadata,
-        dataClient,
+        client: queryClient,
         languageCode: selectedLanguage,
-        enabled: !!dataClient,
+        enabled: !!queryClient,
       }),
     ),
   });

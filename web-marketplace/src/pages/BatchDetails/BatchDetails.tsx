@@ -35,7 +35,7 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [batch, setBatch] = useState<BatchInfoWithSupply>();
   const [metadata, setMetadata] = useState<CreditBatchMetadataIntersectionLD>();
   const walletContext = useWallet();
-  const { dataClient } = useLedger();
+  const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const accountAddress = walletContext.wallet?.address;
   const { credits: userEcocredits } = useEcocredits({
@@ -45,14 +45,17 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   useEffect(() => {
     const fetch = async (): Promise<void> => {
-      if (batchDenom) {
+      if (batchDenom && queryClient) {
         try {
-          const batch = await getBatchWithSupplyForDenom(batchDenom);
+          const batch = await getBatchWithSupplyForDenom(
+            batchDenom,
+            queryClient,
+          );
           setBatch(batch);
           if (batch.metadata) {
             const data = await getMetadata({
               iri: batch.metadata,
-              client: dataClient,
+              client: queryClient,
               languageCode: selectedLanguage,
             });
             setMetadata(data);
@@ -67,7 +70,7 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
       }
     };
     fetch();
-  }, [batchDenom, dataClient, selectedLanguage]);
+  }, [batchDenom, queryClient, selectedLanguage]);
 
   const onChainId = batch?.projectId || '';
   const {

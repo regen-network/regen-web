@@ -1,6 +1,6 @@
 import { useFormState, useWatch } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
-import { ContentHash_Graph } from '@regen-network/api/lib/generated/regen/data/v1/types';
+import { ContentHash_Graph } from '@regen-network/api/regen/data/v1/types';
 import { useQuery } from '@tanstack/react-query';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
@@ -51,12 +51,12 @@ export const SignModal = ({
     control: form.control,
     name: 'verified',
   });
-  const { dataClient } = useLedger();
+  const { queryClient } = useLedger();
   const { data } = useQuery(
     convertIRIToHashQuery({
-      client: dataClient,
-      request: { iri },
-      enabled: !!dataClient && !!iri && published && hasAddress,
+      client: queryClient,
+      request: { iri: iri as string },
+      enabled: !!queryClient && !!iri && published && hasAddress,
     }),
   );
 

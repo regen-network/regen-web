@@ -2,10 +2,10 @@ import { useCallback } from 'react';
 import {
   QueryBasketResponse,
   QueryBasketsResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+} from '@regen-network/api/regen/ecocredit/basket/v1/query';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { BasketTokens, BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';
 import normalizeCreditBaskets from 'lib/normalizers/creditBaskets/normalizeCreditBaskets';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
@@ -14,8 +14,6 @@ import { getDenomMetadataQuery } from 'lib/queries/react-query/cosmos/bank/getDe
 import { getBasketQuery } from 'lib/queries/react-query/ecocredit/basket/getBasketQuery/getBasketQuery';
 import { getBasketsQuery } from 'lib/queries/react-query/ecocredit/basket/getBasketsQuery/getBasketsQuery';
 import { useWallet } from 'lib/wallet/wallet';
-
-import { BasketTokens } from 'hooks/useBasketTokens';
 
 interface Params {
   credits: BatchInfoWithBalance[];
@@ -36,15 +34,15 @@ export const useFetchBaskets = ({
   address,
   hideEcocredits,
 }: Params): Response => {
-  const { basketClient, bankClient } = useLedger();
+  const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
 
   // Baskets
   const { data: basketsData } = useQuery(
     getBasketsQuery({
-      enabled: !!basketClient && !hideEcocredits,
-      client: basketClient,
+      enabled: !!queryClient && !hideEcocredits,
+      client: queryClient,
       request: {},
     }),
   );
@@ -54,20 +52,22 @@ export const useFetchBaskets = ({
   const basketResults = useQueries({
     queries: basketsInfo.map(basketInfo =>
       getBasketQuery({
-        client: basketClient,
+        client: queryClient,
         request: { basketDenom: basketInfo.basketDenom },
       }),
     ),
   });
   const basketDatas = basketResults.map(basketResult => basketResult.data);
 
+  const reqAddress = address ?? wallet?.address;
   // Balance({address, denom})
   const balanceResults = useQueries({
     queries: basketsInfo.map(basketInfo =>
       getBalanceQuery({
-        client: bankClient,
+        enabled: !!queryClient && !!reqAddress,
+        client: queryClient,
         request: {
-          address: address ?? wallet?.address,
+          address: reqAddress as string,
           denom: basketInfo.basketDenom,
         },
       }),
@@ -79,7 +79,7 @@ export const useFetchBaskets = ({
   const denomMetadataResults = useQueries({
     queries: basketsInfo.map(basketInfo =>
       getDenomMetadataQuery({
-        client: bankClient,
+        client: queryClient,
         request: { denom: basketInfo.basketDenom },
       }),
     ),

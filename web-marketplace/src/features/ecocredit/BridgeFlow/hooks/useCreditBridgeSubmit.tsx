@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { MsgBridge } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import { regen } from '@regen-network/api';
 
 import type { Item } from 'web-components/src/components/modal/TxModal';
 
@@ -94,10 +94,10 @@ const useCreditBridgeSubmit = ({
         recipient: values.recipient,
       });
 
-      if (!accountAddress) return Promise.reject();
+      if (!accountAddress || !batchDenom) return Promise.reject();
       const { recipient, amount, target } = values;
 
-      const msgBridge = MsgBridge.fromPartial({
+      const msgBridge = regen.ecocredit.v1.MessageComposer.withTypeUrl.bridge({
         owner: accountAddress,
         target,
         recipient,

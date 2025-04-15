@@ -10,13 +10,13 @@ export const useFetchBatchesWithMetadata = (
     batchDenom: string;
   }[],
 ) => {
-  const { ecocreditClient } = useLedger();
+  const { queryClient } = useLedger();
 
   // Batches
   const batchesResult = useQueries({
     queries: credits.map(credit =>
       getBatchQuery({
-        client: ecocreditClient,
+        client: queryClient,
         request: { batchDenom: credit.batchDenom },
       }),
     ),

@@ -1,4 +1,4 @@
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
 import { ProjectCardProps } from 'web-components/src/components/cards/ProjectCard';

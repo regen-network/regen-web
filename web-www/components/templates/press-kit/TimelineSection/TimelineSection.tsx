@@ -31,10 +31,8 @@ const TimelineSection = ({ timelineSectionData }: Props): JSX.Element => {
         {timelineSectionData?.description}
       </Body>
       <Timeline
-        onViewOnLedger={() => null}
         events={timelineSectionData?.items as any[]}
         completedItemIndex={timelineSectionData?.completedItemIndex || 0}
-        viewLedgerText="view on Ledger"
       />
     </Section>
   );

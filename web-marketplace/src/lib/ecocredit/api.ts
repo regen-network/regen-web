@@ -1,16 +1,9 @@
 /* eslint-disable lingui/no-unlocalized-strings */
-import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
-import {
-  GetTxsEventRequest,
-  GetTxsEventResponse,
-  ServiceClientImpl,
-} from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-import { QueryClientImpl as DataQueryClientImpl } from '@regen-network/api/lib/generated/regen/data/v1/query';
+import { TxResponse } from '@regen-network/api/cosmos/base/abci/v1beta1/abci';
 import {
   BatchBalanceInfo,
   BatchInfo,
   ClassInfo,
-  DeepPartial,
   ProjectInfo,
   QueryBalanceRequest,
   QueryBalanceResponse,
@@ -31,8 +24,6 @@ import {
   QueryClassIssuersResponse,
   QueryClassRequest,
   QueryClassResponse,
-  QueryClientImpl as EcocreditQueryClientImpl,
-  QueryClientImpl,
   QueryCreditTypesRequest,
   QueryCreditTypesResponse,
   QueryParamsRequest,
@@ -47,13 +38,14 @@ import {
   QueryProjectsResponse,
   QuerySupplyRequest,
   QuerySupplyResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+} from '@regen-network/api/regen/ecocredit/v1/query';
 import { QueryClient } from '@tanstack/react-query';
 import { uniq } from 'lodash';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
+import { QueryClient as RPCQueryClient } from 'ledger';
 import { getMetadata } from 'lib/db/api/metadata-graph';
 import { getClassQuery } from 'lib/queries/react-query/ecocredit/getClassQuery/getClassQuery';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
@@ -62,7 +54,6 @@ import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheO
 
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
-import { connect as connectToApi } from '../../ledger';
 import type {
   BatchInfoWithBalance,
   BatchInfoWithSupply,
@@ -70,18 +61,6 @@ import type {
   ClassProjectInfo,
 } from '../../types/ledger/ecocredit';
 import { ECOCREDIT_MESSAGE_TYPES } from './constants';
-
-const getCosmosServiceClient = async (): Promise<ServiceClientImpl> => {
-  const api = await connectToApi();
-  if (!api || !api?.queryClient) return Promise.reject();
-  return new ServiceClientImpl(api.queryClient);
-};
-
-const getQueryClient = async (): Promise<QueryClientImpl> => {
-  const api = await connectToApi();
-  if (!api || !api?.queryClient) return Promise.reject();
-  return new QueryClientImpl(api.queryClient);
-};
 
 export const getBatchesTotal = (
   batches: BatchInfoWithSupply[],
@@ -112,8 +91,7 @@ type GetCreditsWithDataParams = {
   balances: BatchBalanceInfo[];
   batches: BatchInfo[];
   sanityCreditClassData?: AllCreditClassQuery;
-  dataClient?: DataQueryClientImpl;
-  ecocreditClient?: EcocreditQueryClientImpl;
+  client: RPCQueryClient;
   selectedLanguage: string;
 };
 
@@ -121,8 +99,7 @@ const getCreditsWithData = async ({
   balances,
   batches,
   sanityCreditClassData,
-  dataClient,
-  ecocreditClient,
+  client,
   selectedLanguage,
 }: GetCreditsWithDataParams): Promise<BatchInfoWithBalance[]> => {
   const credits: (BatchInfoWithBalance | undefined)[] = await Promise.all(
@@ -133,9 +110,8 @@ const getCreditsWithData = async ({
       const classProjectInfo = await getClassProjectForBatch({
         batch,
         sanityCreditClassData,
-        dataClient,
+        client,
         selectedLanguage,
-        ecocreditClient,
       });
 
       return {
@@ -158,8 +134,7 @@ type GetEcocreditsForAccountParams = {
   balances?: BatchBalanceInfo[];
   batches?: BatchInfo[];
   sanityCreditClassData?: AllCreditClassQuery;
-  dataClient?: DataQueryClientImpl;
-  ecocreditClient?: EcocreditQueryClientImpl;
+  client: RPCQueryClient;
   selectedLanguage: string;
 };
 
@@ -170,8 +145,7 @@ export const getEcocreditsForAccount = async ({
   loadedCredits,
   paginationParams,
   sanityCreditClassData,
-  dataClient,
-  ecocreditClient,
+  client,
   selectedLanguage,
 }: GetEcocreditsForAccountParams): Promise<BatchInfoWithBalance[]> => {
   try {
@@ -182,8 +156,7 @@ export const getEcocreditsForAccount = async ({
         balances: displayedBalances,
         batches,
         sanityCreditClassData,
-        dataClient,
-        ecocreditClient,
+        client,
         selectedLanguage,
       });
       return [
@@ -196,8 +169,7 @@ export const getEcocreditsForAccount = async ({
         balances,
         batches,
         sanityCreditClassData,
-        dataClient,
-        ecocreditClient,
+        client,
         selectedLanguage,
       });
     }
@@ -209,8 +181,7 @@ export const getEcocreditsForAccount = async ({
 type GetClassProjectForBatchParams = {
   batch: BatchInfo;
   sanityCreditClassData?: AllCreditClassQuery;
-  dataClient?: DataQueryClientImpl;
-  ecocreditClient?: EcocreditQueryClientImpl;
+  client: RPCQueryClient;
   reactQueryClient?: QueryClient;
   selectedLanguage: string;
 };
@@ -218,8 +189,7 @@ type GetClassProjectForBatchParams = {
 const getClassProjectForBatch = async ({
   batch,
   sanityCreditClassData,
-  dataClient,
-  ecocreditClient,
+  client,
   reactQueryClient,
   selectedLanguage,
 }: GetClassProjectForBatchParams): Promise<ClassProjectInfo> => {
@@ -229,15 +199,15 @@ const getClassProjectForBatch = async ({
     projectData = await getFromCacheOrFetch({
       query: getProjectQuery({
         request: { projectId },
-        client: ecocreditClient,
-        enabled: !!ecocreditClient && !!projectId,
+        client,
+        enabled: !!client && !!projectId,
       }),
       reactQueryClient,
     });
   } else {
     // TODO Keeping the old path for retro-compatibility of the function.
     // Once all paths use the react-query one we will be able to remove it.
-    projectData = await getProject(projectId, ecocreditClient);
+    projectData = await queryProject({ client, request: { projectId } });
   }
   const project = projectData?.project;
   if (project?.metadata.length) {
@@ -246,8 +216,8 @@ const getClassProjectForBatch = async ({
         projectMetadata = await getFromCacheOrFetch({
           query: getMetadataQuery({
             iri: project.metadata,
-            dataClient,
-            enabled: !!dataClient,
+            client,
+            enabled: !!client,
             languageCode: selectedLanguage,
           }),
           reactQueryClient,
@@ -257,7 +227,7 @@ const getClassProjectForBatch = async ({
         // Once all paths use the react-query one we will be able to remove it.
         projectMetadata = await getMetadata({
           iri: project.metadata,
-          client: dataClient,
+          client,
           languageCode: selectedLanguage,
         });
       }
@@ -270,18 +240,20 @@ const getClassProjectForBatch = async ({
   });
 
   const classId = project?.classId;
-  if (reactQueryClient) {
-    classData = await getFromCacheOrFetch({
-      query: getClassQuery({
-        request: { classId },
-        client: ecocreditClient,
-      }),
-      reactQueryClient,
-    });
-  } else {
-    // TODO Keeping the old path for retro-compatibility of the function.
-    // Once all paths use the react-query one we will be able to remove it.
-    classData = await ecocreditClient?.Class({ classId });
+  if (classId) {
+    if (reactQueryClient) {
+      classData = await getFromCacheOrFetch({
+        query: getClassQuery({
+          request: { classId },
+          client,
+        }),
+        reactQueryClient,
+      });
+    } else {
+      // TODO Keeping the old path for retro-compatibility of the function.
+      // Once all paths use the react-query one we will be able to remove it.
+      classData = await client.regen.ecocredit.v1.class({ classId });
+    }
   }
   const creditClass = classData?.class;
   if (creditClass?.metadata.length) {
@@ -290,8 +262,8 @@ const getClassProjectForBatch = async ({
         classMetadata = await getFromCacheOrFetch({
           query: getMetadataQuery({
             iri: creditClass.metadata,
-            dataClient,
-            enabled: !!dataClient,
+            client,
+            enabled: !!client,
             languageCode: selectedLanguage,
           }),
           reactQueryClient,
@@ -301,7 +273,7 @@ const getClassProjectForBatch = async ({
         // Once all paths use the react-query one we will be able to remove it.
         classMetadata = await getMetadata({
           iri: creditClass.metadata,
-          client: dataClient,
+          client,
           languageCode: selectedLanguage,
         });
       }
@@ -314,16 +286,6 @@ const getClassProjectForBatch = async ({
     projectName: projectMetadata?.['schema:name'] ?? batch.projectId,
     projectLocation: project?.jurisdiction,
   };
-};
-
-export type AddDataToBatchesParams = {
-  batches: BatchInfo[];
-  sanityCreditClassData?: AllCreditClassQuery;
-  withAllData?: boolean;
-  dataClient?: DataQueryClientImpl;
-  ecocreditClient?: EcocreditQueryClientImpl;
-  txClient?: ServiceClientImpl;
-  reactQueryClient?: QueryClient;
 };
 
 export const getTxHashForBatch = (
@@ -340,10 +302,11 @@ const getClassIdForBatch = (batch?: BatchInfo): string | undefined => {
 
 export const getBatchWithSupplyForDenom = async (
   denom: string,
+  client: RPCQueryClient,
 ): Promise<BatchInfoWithSupply> => {
   try {
-    const { batch } = await queryEcoBatchInfo(denom);
-    const supply = await queryEcoBatchSupply(denom);
+    const { batch } = await queryEcoBatchInfo(denom, client);
+    const supply = await queryEcoBatchSupply(denom, client);
     const batchWithSupply: BatchInfoWithSupply = {
       ...batch,
       ...supply,
@@ -386,64 +349,45 @@ const getReadableName = (eventType?: string): string | undefined => {
   )?.readable;
 };
 
-export const queryEcoClasses = async (): Promise<QueryClassesResponse> => {
-  const client = await getQueryClient();
-  return client.Classes({});
-};
-
 export const queryEcoBatchInfo = async (
   denom: string,
+  client: RPCQueryClient,
 ): Promise<QueryBatchResponse> => {
-  const client = await getQueryClient();
   try {
-    return client.Batch({ batchDenom: denom });
+    return client.regen.ecocredit.v1.batch({ batchDenom: denom });
   } catch (err) {
     throw new Error(`Error fetching batch by denom: ${denom}, err: ${err}`);
   }
 };
 
-export interface QuerySupplyProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QuerySupplyRequest>;
+export interface QuerySupplyProps extends RPCQueryClientProps {
+  request: QuerySupplyRequest;
 }
 
 export const queryEcoBatchSupply = async (
   batchDenom: string,
+  client: RPCQueryClient,
 ): Promise<QuerySupplyResponse> => {
-  const client = await getQueryClient();
   try {
-    return client.Supply({ batchDenom });
+    return client.regen.ecocredit.v1.supply({ batchDenom });
   } catch (err) {
     throw new Error(`Error fetching batch supply: ${err}`);
   }
 };
 
-export const getTxsByEvent = async (
-  request: DeepPartial<GetTxsEventRequest>,
-): Promise<GetTxsEventResponse> => {
-  const serviceClient = await getCosmosServiceClient();
-  if (!serviceClient) return Promise.reject();
-
-  try {
-    return serviceClient.GetTxsEvent(request);
-  } catch (err) {
-    console.error(err); // eslint-disable-line no-console
-    return Promise.reject();
-  }
-};
-
 export const queryClassIssuers = async (
   classId: string,
+  client: RPCQueryClient,
 ): Promise<QueryClassIssuersResponse> => {
-  const client = await getQueryClient();
   try {
-    return client.ClassIssuers({ classId });
+    return client.regen.ecocredit.v1.classIssuers({ classId });
   } catch (err) {
     throw new Error(`Error fetching issuer info: ${err}`);
   }
 };
 
-export interface QueryProjectsByClassProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryProjectsByClassRequest>;
+export interface QueryProjectsByClassProps extends RPCQueryClientProps {
+  request: QueryProjectsByClassRequest;
 }
 
 export const queryProjectsByClass = async ({
@@ -455,13 +399,18 @@ export const queryProjectsByClass = async ({
     let response: QueryProjectsByClassResponse | undefined;
     while (!response || response.pagination?.nextKey?.length) {
       if (response?.pagination?.nextKey?.length) {
-        request.pagination = { key: response.pagination.nextKey };
+        request.pagination = {
+          key: response.pagination.nextKey,
+          countTotal: false,
+          offset: 0n,
+          limit: 100n,
+          reverse: false,
+        };
       }
-      response = await client.ProjectsByClass(request);
+      response = await client.regen.ecocredit.v1.projectsByClass(request);
       projects.push(...response.projects);
     }
     return {
-      $type: response.$type,
       projects,
     };
   } catch (err) {
@@ -469,163 +418,9 @@ export const queryProjectsByClass = async ({
   }
 };
 
-export const getProject = async (
-  projectId: string,
-  ecocreditClient?: EcocreditQueryClientImpl,
-): Promise<QueryProjectResponse> => {
-  const client = ecocreditClient ?? (await getQueryClient());
-  try {
-    return client.Project({ projectId });
-  } catch (err) {
-    throw new Error(`Error fetching project: ${err}`);
-  }
-};
-
-// helpers for combining ledger queries
-// into UI data structures
-
-/**
- *
- * ECOCREDIT MODULE QUERIES
- * ---------------------
- *  - Balance
- *  - BatchInfo
- *  - Batches
- *  - ClassInfo
- *  - Classes
- *  - CreditTypes
- *  - Params
- *  - Supply        (TODO)
- *
- */
-
-/**
- *
- * QUERY TYPES
- *
- */
-
-// typing the query client
-
-export type EcocreditQueryClient = QueryClientImpl;
-
-interface EcocreditQueryClientProps {
-  client: EcocreditQueryClient;
+interface RPCQueryClientProps {
+  client: RPCQueryClient;
 }
-
-// typing and linking query names and corresponding input params
-
-type BalanceParams = {
-  query: 'balance';
-  params: DeepPartial<QueryBalanceRequest>;
-};
-
-type BalancesParams = {
-  query: 'balances';
-  params?: DeepPartial<QueryBalancesRequest>;
-};
-
-type BatchInfoParams = {
-  query: 'batchInfo';
-  params: DeepPartial<QueryBatchRequest>;
-};
-
-type BatchesParams = {
-  query: 'batches';
-  params: DeepPartial<QueryBatchesRequest>;
-};
-
-type BatchesByClassParams = {
-  query: 'batchesByClass';
-  params: DeepPartial<QueryBatchesByClassRequest>;
-};
-
-type BatchesByProjectParams = {
-  query: 'batchesByProject';
-  params?: DeepPartial<QueryBatchesByProjectRequest>;
-};
-
-type BatchesByIssuerParams = {
-  query: 'batchesByIssuer';
-  params: DeepPartial<QueryBatchesByIssuerRequest>;
-};
-
-type ClassInfoParams = {
-  query: 'classInfo';
-  params: DeepPartial<QueryBatchRequest>;
-};
-
-type ClassesParams = {
-  query: 'classes';
-  params: DeepPartial<QueryClassesRequest>;
-};
-
-type CreditTypesParams = {
-  query: 'creditTypes';
-  params: DeepPartial<QueryCreditTypesRequest>;
-};
-
-type ParamsParams = {
-  query: 'params';
-  params: DeepPartial<QueryParamsRequest>;
-};
-
-type ProjectsParams = {
-  query: 'projects';
-  params: DeepPartial<QueryProjectsRequest>;
-};
-
-type ProjectsByAdminParams = {
-  query: 'projectsByAdmin';
-  params: DeepPartial<QueryProjectsByAdminRequest>;
-};
-
-type ProjectsByClassParams = {
-  query: 'projectsByClass';
-  params: DeepPartial<QueryProjectsByClassRequest>;
-};
-
-type ProjectParams = {
-  query: 'project';
-  params: DeepPartial<QueryProjectRequest>;
-};
-
-export type EcocreditQueryProps =
-  | BalanceParams
-  | BalancesParams
-  | BatchInfoParams
-  | BatchesParams
-  | BatchesByClassParams
-  | BatchesByProjectParams
-  | BatchesByIssuerParams
-  | ClassInfoParams
-  | ClassesParams
-  | ParamsParams
-  | CreditTypesParams
-  | ProjectsParams
-  | ProjectsByAdminParams
-  | ProjectsByClassParams
-  | ProjectParams;
-
-// typing the response
-
-export type EcocreditQueryResponse =
-  | QueryBalanceResponse
-  | QueryBalancesResponse
-  | QueryBatchResponse
-  | QueryBatchesResponse
-  | QueryBatchesByClassResponse
-  | QueryBatchesByProjectResponse
-  | QueryBatchesByIssuerResponse
-  | QueryClassResponse
-  | QueryClassesResponse
-  | QueryCreditTypesResponse
-  | QueryParamsResponse
-  | QueryProjectsResponse
-  | QueryProjectsByClassResponse
-  | QueryProjectsByAdminResponse
-  | QueryProjectsByClassResponse
-  | QueryProjectResponse;
 
 /**
  *
@@ -635,8 +430,8 @@ export type EcocreditQueryResponse =
 
 // Balance
 
-export interface QueryBalanceProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryBalanceRequest>;
+export interface QueryBalanceProps extends RPCQueryClientProps {
+  request: QueryBalanceRequest;
 }
 
 export const queryBalance = async ({
@@ -644,7 +439,7 @@ export const queryBalance = async ({
   request,
 }: QueryBalanceProps): Promise<QueryBalanceResponse> => {
   try {
-    return await client.Balance({
+    return await client.regen.ecocredit.v1.balance({
       address: request.address,
       batchDenom: request.batchDenom,
     });
@@ -657,8 +452,8 @@ export const queryBalance = async ({
 
 // Balances
 
-export interface QueryBalancesProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryBalancesRequest>;
+export interface QueryBalancesProps extends RPCQueryClientProps {
+  request: QueryBalancesRequest;
 }
 
 export const queryBalances = async ({
@@ -666,7 +461,7 @@ export const queryBalances = async ({
   request,
 }: QueryBalancesProps): Promise<QueryBalancesResponse> => {
   try {
-    return await client.Balances({
+    return await client.regen.ecocredit.v1.balances({
       ...request,
     });
   } catch (err) {
@@ -678,8 +473,8 @@ export const queryBalances = async ({
 
 // Batch info
 
-export interface QueryBatchInfoProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryBatchRequest>;
+export interface QueryBatchInfoProps extends RPCQueryClientProps {
+  request: QueryBatchRequest;
 }
 
 export const queryBatchInfo = async ({
@@ -687,7 +482,7 @@ export const queryBatchInfo = async ({
   request,
 }: QueryBatchInfoProps): Promise<QueryBatchResponse> => {
   try {
-    return await client.Batch({
+    return await client.regen.ecocredit.v1.batch({
       batchDenom: request.batchDenom,
     });
   } catch (err) {
@@ -699,8 +494,8 @@ export const queryBatchInfo = async ({
 
 // Batches
 
-export interface QueryBatchesProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryBatchesRequest>;
+export interface QueryBatchesProps extends RPCQueryClientProps {
+  request: QueryBatchesRequest;
 }
 
 export const queryBatches = async ({
@@ -708,7 +503,9 @@ export const queryBatches = async ({
   request,
 }: QueryBatchesProps): Promise<QueryBatchesResponse> => {
   try {
-    return await client.Batches({ pagination: request?.pagination });
+    return await client.regen.ecocredit.v1.batches({
+      pagination: request?.pagination,
+    });
   } catch (err) {
     throw new Error(
       `Error in the Batches query of the ledger ecocredit module: ${err}`,
@@ -718,8 +515,8 @@ export const queryBatches = async ({
 
 // BatchesByClass
 
-export interface QueryBatchesByClassProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryBatchesByClassRequest>;
+export interface QueryBatchesByClassProps extends RPCQueryClientProps {
+  request: QueryBatchesByClassRequest;
 }
 
 export const queryBatchesByClass = async ({
@@ -727,7 +524,7 @@ export const queryBatchesByClass = async ({
   request,
 }: QueryBatchesByClassProps): Promise<QueryBatchesByClassResponse> => {
   try {
-    return await client.BatchesByClass({
+    return await client.regen.ecocredit.v1.batchesByClass({
       classId: request.classId,
       pagination: request.pagination,
     });
@@ -740,8 +537,8 @@ export const queryBatchesByClass = async ({
 
 // BatchesByIssuer
 
-export interface QueryBatchesByIssuerProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryBatchesByIssuerRequest>;
+export interface QueryBatchesByIssuerProps extends RPCQueryClientProps {
+  request: QueryBatchesByIssuerRequest;
 }
 
 export const queryBatchesByIssuer = async ({
@@ -749,7 +546,7 @@ export const queryBatchesByIssuer = async ({
   request,
 }: QueryBatchesByIssuerProps): Promise<QueryBatchesByIssuerResponse> => {
   try {
-    return await client.BatchesByIssuer({
+    return await client.regen.ecocredit.v1.batchesByIssuer({
       issuer: request.issuer,
       pagination: request.pagination,
     });
@@ -762,8 +559,8 @@ export const queryBatchesByIssuer = async ({
 
 // BatchesByProject
 
-export interface QueryBatchesByProjectProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryBatchesByProjectRequest>;
+export interface QueryBatchesByProjectProps extends RPCQueryClientProps {
+  request: QueryBatchesByProjectRequest;
 }
 
 export const queryBatchesByProject = async ({
@@ -771,7 +568,7 @@ export const queryBatchesByProject = async ({
   request,
 }: QueryBatchesByProjectProps): Promise<QueryBatchesByProjectResponse> => {
   try {
-    return await client.BatchesByProject({
+    return await client.regen.ecocredit.v1.batchesByProject({
       projectId: request.projectId,
       pagination: request.pagination,
     });
@@ -784,8 +581,8 @@ export const queryBatchesByProject = async ({
 
 // Class info
 
-interface QueryClassInfoProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryClassRequest>;
+interface QueryClassInfoProps extends RPCQueryClientProps {
+  request: QueryClassRequest;
 }
 
 export const queryClassInfo = async ({
@@ -793,7 +590,7 @@ export const queryClassInfo = async ({
   request,
 }: QueryClassInfoProps): Promise<QueryClassResponse> => {
   try {
-    return await client.Class({
+    return await client.regen.ecocredit.v1.class({
       classId: request.classId,
     });
   } catch (err) {
@@ -805,8 +602,8 @@ export const queryClassInfo = async ({
 
 // Classes
 
-interface QueryClassesProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryClassesRequest>;
+interface QueryClassesProps extends RPCQueryClientProps {
+  request: QueryClassesRequest;
 }
 
 export const queryClasses = async ({
@@ -818,13 +615,18 @@ export const queryClasses = async ({
     let response: QueryClassesResponse | undefined;
     while (!response || response.pagination?.nextKey?.length) {
       if (response?.pagination?.nextKey?.length) {
-        request.pagination = { key: response.pagination.nextKey };
+        request.pagination = {
+          key: response.pagination.nextKey,
+          countTotal: false,
+          offset: 0n,
+          limit: 100n,
+          reverse: false,
+        };
       }
-      response = await client.Classes(request);
+      response = await client.regen.ecocredit.v1.classes(request);
       classes.push(...response.classes);
     }
     return {
-      $type: response.$type,
       classes,
     };
   } catch (err) {
@@ -836,8 +638,8 @@ export const queryClasses = async ({
 
 // CreditTypes
 
-interface QueryCreditTypesProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryCreditTypesRequest>;
+interface QueryCreditTypesProps extends RPCQueryClientProps {
+  request: QueryCreditTypesRequest;
 }
 
 export const queryCreditTypes = async ({
@@ -845,7 +647,7 @@ export const queryCreditTypes = async ({
   request,
 }: QueryCreditTypesProps): Promise<QueryCreditTypesResponse> => {
   try {
-    return await client.CreditTypes(request);
+    return await client.regen.ecocredit.v1.creditTypes(request);
   } catch (err) {
     throw new Error(
       `Error in the CreditTypes query of the ledger ecocredit module: ${err}`,
@@ -855,8 +657,8 @@ export const queryCreditTypes = async ({
 
 // Projects
 
-export interface QueryProjectsProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryProjectsRequest>;
+export interface QueryProjectsProps extends RPCQueryClientProps {
+  request: QueryProjectsRequest;
 }
 
 export const queryProjects = async ({
@@ -868,13 +670,18 @@ export const queryProjects = async ({
     let response: QueryProjectsResponse | undefined;
     while (!response || response.pagination?.nextKey?.length) {
       if (response?.pagination?.nextKey?.length) {
-        request.pagination = { key: response.pagination.nextKey };
+        request.pagination = {
+          key: response.pagination.nextKey,
+          countTotal: false,
+          offset: 0n,
+          limit: 100n,
+          reverse: false,
+        };
       }
-      response = await client.Projects(request);
+      response = await client.regen.ecocredit.v1.projects(request);
       projects.push(...response.projects);
     }
     return {
-      $type: response.$type,
       projects,
     };
   } catch (err) {
@@ -886,8 +693,8 @@ export const queryProjects = async ({
 
 // ProjectsByAdmin
 
-interface QueryProjectsByAdminProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryProjectsByAdminRequest>;
+interface QueryProjectsByAdminProps extends RPCQueryClientProps {
+  request: QueryProjectsByAdminRequest;
 }
 
 export const queryProjectsByAdmin = async ({
@@ -899,13 +706,18 @@ export const queryProjectsByAdmin = async ({
     let response: QueryProjectsByAdminResponse | undefined;
     while (!response || response.pagination?.nextKey?.length) {
       if (response?.pagination?.nextKey?.length) {
-        request.pagination = { key: response.pagination.nextKey };
+        request.pagination = {
+          key: response.pagination.nextKey,
+          countTotal: false,
+          offset: 0n,
+          limit: 100n,
+          reverse: false,
+        };
       }
-      response = await client.ProjectsByAdmin(request);
+      response = await client.regen.ecocredit.v1.projectsByAdmin(request);
       projects.push(...response.projects);
     }
     return {
-      $type: response.$type,
       projects,
     };
   } catch (err) {
@@ -917,8 +729,8 @@ export const queryProjectsByAdmin = async ({
 
 // Project (by id)
 
-export interface QueryProjectProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryProjectRequest>;
+export interface QueryProjectProps extends RPCQueryClientProps {
+  request: QueryProjectRequest;
 }
 
 export const queryProject = async ({
@@ -926,7 +738,7 @@ export const queryProject = async ({
   request,
 }: QueryProjectProps): Promise<QueryProjectResponse> => {
   try {
-    return await client.Project(request);
+    return await client.regen.ecocredit.v1.project(request);
   } catch (err) {
     throw new Error(
       `Error in the Project query of the ledger ecocredit module: ${err}`,
@@ -936,16 +748,16 @@ export const queryProject = async ({
 
 // Params
 
-interface QueryParamsProps {
-  request?: DeepPartial<QueryParamsRequest>;
+interface QueryParamsProps extends RPCQueryClientProps {
+  request?: QueryParamsRequest;
 }
 
 export const queryParams = async ({
   request = {},
+  client,
 }: QueryParamsProps): Promise<QueryParamsResponse> => {
-  const client = await getQueryClient();
   try {
-    return await client.Params(request);
+    return await client.regen.ecocredit.v1.params(request);
   } catch (err) {
     throw new Error(
       `Error in the Params query of the ledger ecocredit module: ${err}`,

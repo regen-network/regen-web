@@ -1,17 +1,18 @@
-import {
-  QueryDenomTraceResponse,
-  QueryDenomTracesResponse,
-} from '@regen-network/api/lib/generated/ibc/applications/transfer/v1/query';
-import { DenomTrace } from '@regen-network/api/lib/generated/ibc/applications/transfer/v1/transfer';
+import { QueryDenomTraceResponse } from '@regen-network/api/ibc/applications/transfer/v1/query';
+import { DenomTrace } from '@regen-network/api/ibc/applications/transfer/v1/transfer';
 
-import { getTransferQueryClient } from 'lib/clients/ibc/applications/transfer/transferQueryClient';
+import { QueryClient } from 'ledger';
 
-export const queryDenomTrace = async (
-  hash: string,
-): Promise<QueryDenomTraceResponse> => {
-  const client = await getTransferQueryClient();
+type QueryDenomTraceByHashParams = {
+  queryClient: QueryClient;
+  hash: string;
+};
+export const queryDenomTrace = async ({
+  hash,
+  queryClient,
+}: QueryDenomTraceByHashParams): Promise<QueryDenomTraceResponse> => {
   try {
-    return client.DenomTrace({ hash });
+    return queryClient.ibc.applications.transfer.v1.denomTrace({ hash });
   } catch (err) {
     throw new Error(
       // eslint-disable-next-line lingui/no-unlocalized-strings
@@ -20,27 +21,19 @@ export const queryDenomTrace = async (
   }
 };
 
-export const queryDenomTraces = async (): Promise<QueryDenomTracesResponse> => {
-  const client = await getTransferQueryClient();
-  try {
-    return client.DenomTraces({});
-  } catch (err) {
-    // eslint-disable-next-line lingui/no-unlocalized-strings
-    throw new Error(`Error fetching denom traces, err: ${err}`);
-  }
-};
-
 export type QueryDenomTraceByHashesParams = {
+  queryClient: QueryClient;
   hashes: string[];
 };
 export type DenomTraceWithHash = DenomTrace & { hash: string };
 
 export const queryDenomTraceByHashes = async ({
+  queryClient,
   hashes,
 }: QueryDenomTraceByHashesParams): Promise<DenomTraceWithHash[]> => {
   const denomTraces = await Promise.all(
     hashes.map(async hash => {
-      const { denomTrace } = await queryDenomTrace(hash);
+      const { denomTrace } = await queryDenomTrace({ queryClient, hash });
 
       return denomTrace ? { ...denomTrace, hash } : undefined;
     }),

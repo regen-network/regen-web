@@ -2,8 +2,8 @@ import { useCallback, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useLingui } from '@lingui/react';
-import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
-import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+import { regen } from '@regen-network/api';
+import { AllowedDenom } from '@regen-network/api/regen/ecocredit/marketplace/v1/state';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ERRORS } from 'config/errors';
@@ -398,19 +398,22 @@ export const usePurchase = ({
                 errorMessage,
               });
             }
-          } else {
+          } else if (wallet?.address) {
             // Crypto payment
-            const msgBuyDirect = MsgBuyDirect.fromPartial({
-              buyer: wallet?.address,
-              orders: selectedSellOrders.map(order => ({
-                sellOrderId: order.sellOrderId,
-                bidPrice: order.bidPrice,
-                disableAutoRetire: !retiring,
-                quantity: String(order.quantity),
-                retirementReason: retirementReason,
-                retirementJurisdiction,
-              })),
-            });
+            const msgBuyDirect =
+              regen.ecocredit.marketplace.v1.MessageComposer.withTypeUrl.buyDirect(
+                {
+                  buyer: wallet?.address,
+                  orders: selectedSellOrders.map(order => ({
+                    sellOrderId: BigInt(order.sellOrderId),
+                    bidPrice: order.bidPrice,
+                    disableAutoRetire: !retiring,
+                    quantity: String(order.quantity),
+                    retirementReason: retirementReason || '',
+                    retirementJurisdiction,
+                  })),
+                },
+              );
 
             await signAndBroadcast(
               {

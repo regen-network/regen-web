@@ -6,13 +6,13 @@ import {
 
 export const getClassesByAdminQuery = ({
   client,
-  request = {},
+  request,
   ...params
 }: ReactQueryClassesByAdminProps): ReactQueryClassesByAdminResponse => ({
   queryKey: getClassesByAdminKey({ admin: request.admin }),
   queryFn: async () => {
     if (!client) return null;
-    return await client.ClassesByAdmin(request);
+    return await client.regen.ecocredit.v1.classesByAdmin(request);
   },
   ...params,
 });

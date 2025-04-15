@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { useApolloClient } from '@apollo/client';
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
 import { Account } from 'web-components/src/components/user/UserInfo';
 
-import { useLedger } from 'ledger';
+import { QueryClient, useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
@@ -98,7 +98,7 @@ export function useProjectsWithOrders({
   projectSlugOrId,
   projectAdmin,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
-  const { ecocreditClient, marketplaceClient, dataClient } = useLedger();
+  const { queryClient } = useLedger();
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
   const { wallet } = useWallet();
@@ -112,9 +112,9 @@ export function useProjectsWithOrders({
   const { data: projectsByAdminData, isFetching: isLoadingProjectsByAdmin } =
     useQuery(
       getProjectsByAdminQuery({
-        enabled: !!adminAddr && !!ecocreditClient,
-        client: ecocreditClient,
-        request: { admin: adminAddr },
+        enabled: !!adminAddr && !!queryClient,
+        client: queryClient,
+        request: { admin: adminAddr as string },
       }),
     );
   const projectsByAdmin = projectsByAdminData?.projects?.filter(
@@ -125,9 +125,9 @@ export function useProjectsWithOrders({
 
   const { data: projectData, isFetching: isLoadingProject } = useQuery(
     getProjectQuery({
-      enabled: !!projectId && !!ecocreditClient,
-      client: ecocreditClient,
-      request: { projectId },
+      enabled: !!projectId && !!queryClient,
+      client: queryClient,
+      request: { projectId: projectId as string },
     }),
   );
   const projectArray = projectData?.project
@@ -140,10 +140,10 @@ export function useProjectsWithOrders({
         !isOffChainProject &&
         !classId &&
         !projectId &&
-        !!ecocreditClient &&
+        !!queryClient &&
         // if we've found enough projects by given admin, we do not need to fetch for other projects
         !enoughProjectsByAdmin,
-      client: ecocreditClient,
+      client: queryClient,
       request: {},
     }),
   );
@@ -151,16 +151,16 @@ export function useProjectsWithOrders({
   const { data: projectsByClassData, isFetching: isLoadingProjectsByClass } =
     useQuery(
       getProjectsByClassQuery({
-        enabled: !!classId && !!ecocreditClient,
-        client: ecocreditClient,
-        request: { classId },
+        enabled: !!classId && !!queryClient,
+        client: queryClient,
+        request: { classId: classId as string },
       }),
     );
 
   const { data: sellOrders, isLoading: isLoadingSellOrders } = useQuery(
     getSellOrdersExtendedQuery({
-      enabled: !isOffChainProject && !!marketplaceClient,
-      client: marketplaceClient,
+      enabled: !isOffChainProject && !!queryClient,
+      client: queryClient as QueryClient,
       reactQueryClient,
       request: {},
     }),
@@ -431,8 +431,8 @@ export function useProjectsWithOrders({
     queries: sortedProjects.map(project =>
       getMetadataQuery({
         iri: project?.metadata,
-        dataClient,
-        enabled: !!dataClient,
+        client: queryClient,
+        enabled: !!queryClient,
         languageCode: selectedLanguage,
       }),
     ),
@@ -537,7 +537,7 @@ export function useProjectsWithOrders({
       isLoadingProjectsByClass ||
       isLoadingProjectsByAdmin ||
       isLoadingSellOrders ||
-      !marketplaceClient ||
+      !queryClient ||
       isLoadingSanityCreditClasses ||
       isLoadingSanityProjects ||
       sanityProjectsLoading ||

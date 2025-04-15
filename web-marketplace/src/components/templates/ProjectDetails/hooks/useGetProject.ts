@@ -23,7 +23,7 @@ export const useGetProject = () => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { projectId } = useParams();
   const graphqlClient = useApolloClient();
-  const { ecocreditClient, dataClient } = useLedger();
+  const { queryClient } = useLedger();
 
   // First, check if projectId is an on-chain project id
   // or an off-chain project UUID.
@@ -79,9 +79,9 @@ export const useGetProject = () => {
   const { data: projectResponse, isInitialLoading: loadingOnChainProject } =
     useQuery(
       getProjectQuery({
-        request: { projectId: onChainProjectId },
-        client: ecocreditClient,
-        enabled: !!ecocreditClient && !!onChainProjectId,
+        request: { projectId: onChainProjectId as string },
+        client: queryClient,
+        enabled: !!queryClient && !!onChainProjectId,
       }),
     );
 
@@ -91,8 +91,8 @@ export const useGetProject = () => {
   const { data, isInitialLoading: loadingAnchoredMetadata } = useQuery(
     getMetadataQuery({
       iri: onChainProject?.metadata,
-      dataClient,
-      enabled: !!dataClient,
+      client: queryClient,
+      enabled: !!queryClient,
       languageCode: selectedLanguage,
     }),
   );
@@ -116,11 +116,11 @@ export const useGetProject = () => {
     onChainProjectId?.split('-')?.[0];
   const { data: creditClassOnChain } = useQuery(
     getClassQuery({
-      client: ecocreditClient,
+      client: queryClient,
       request: {
         classId: onChainCreditClassId ?? '',
       },
-      enabled: !!ecocreditClient && !!onChainCreditClassId,
+      enabled: !!queryClient && !!onChainCreditClassId,
     }),
   );
 
@@ -162,7 +162,7 @@ export const useGetProject = () => {
     !loadingOnChainProject &&
     !loadingAnchoredMetadata &&
     !offChainProject &&
-    !!ecocreditClient &&
+    !!queryClient &&
     !projectResponse;
 
   return {

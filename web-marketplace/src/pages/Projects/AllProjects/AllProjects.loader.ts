@@ -1,7 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 
-import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQueryClient';
-import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketplace/marketplaceQueryClient';
+import { getRPCQueryClient } from 'ledger';
 import { defaultLocale } from 'lib/i18n/i18n';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
@@ -18,17 +17,16 @@ type LoaderType = {
 export const projectsLoader =
   ({ queryClient }: LoaderType) =>
   async ({ params }: { params: any }) => {
-    // Clients
-    const ecocreditClient = await getEcocreditQueryClient();
-    const marketplaceClient = await getMarketplaceQueryClient();
+    // Query client
+    const rpcQueryClient = await getRPCQueryClient();
 
     // Queries
     const projectsQuery = getProjectsQuery({
-      client: ecocreditClient,
+      client: rpcQueryClient,
       request: {},
     });
     const sellOrdersQuery = getSellOrdersExtendedQuery({
-      client: marketplaceClient,
+      client: rpcQueryClient,
       reactQueryClient: queryClient,
       request: {},
     });

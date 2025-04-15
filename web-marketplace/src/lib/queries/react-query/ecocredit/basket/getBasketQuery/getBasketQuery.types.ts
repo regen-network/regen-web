@@ -1,10 +1,10 @@
 import {
-  DeepPartial,
   QueryBasketRequest,
   QueryBasketResponse,
-  QueryClientImpl as BasketQueryClientImpl,
-} from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+} from '@regen-network/api/regen/ecocredit/basket/v1/query';
 import { QueryObserverOptions } from '@tanstack/react-query';
+
+import { QueryClient } from 'ledger';
 
 import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
 
@@ -13,7 +13,7 @@ export type ReactQueryBasketResponse = QueryObserverOptions<
 >;
 
 export type ReactQueryBasketProps = {
-  request: DeepPartial<QueryBasketRequest>;
+  request: QueryBasketRequest;
 } & {
-  client?: BasketQueryClientImpl;
+  client?: QueryClient;
 } & ReactQueryBuilderResponse<ReactQueryBasketResponse>;

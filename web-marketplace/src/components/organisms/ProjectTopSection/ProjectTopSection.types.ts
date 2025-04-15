@@ -1,7 +1,7 @@
 import {
   ProjectInfo,
   QueryClassResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+} from '@regen-network/api/regen/ecocredit/v1/query';
 
 import { Props as ActionCardProps } from 'web-components/src/components/molecules/ActionCard/ActionCard';
 import { Account } from 'web-components/src/components/user/UserInfoCard';

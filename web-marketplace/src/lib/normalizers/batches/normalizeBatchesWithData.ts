@@ -2,7 +2,7 @@ import {
   BatchInfo,
   QueryProjectResponse,
   QuerySupplyResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+} from '@regen-network/api/regen/ecocredit/v1/query';
 import { UseQueryResult } from '@tanstack/react-query';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
@@ -21,7 +21,7 @@ type Props = {
   batches: BatchInfo[];
   createBatchTxs?: GetTxsEventQueryResponse | null;
   createBatchAlphaTxs?: GetTxsEventQueryResponse | null;
-  batchesSupplyResult?: UseQueryResult<QuerySupplyResponse>[];
+  batchesSupplyResult?: UseQueryResult<QuerySupplyResponse | null>[];
   batchesProjectResult?: UseQueryResult<QueryProjectResponse | null>[];
   batchesProjectMetadataResult?: UseQueryResult<
     AnchoredProjectMetadataLD | CreditClassMetadataLD

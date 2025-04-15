@@ -1,8 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 
+import { getRPCQueryClient } from 'ledger';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
-import { getEcocreditQueryClient } from 'lib/clients/regen/ecocredit/ecocreditQueryClient';
-import { getMarketplaceQueryClient } from 'lib/clients/regen/ecocredit/marketplace/marketplaceQueryClient';
 import { defaultLocale } from 'lib/i18n/i18n';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
@@ -27,9 +26,8 @@ export const projectDetailsLoader =
     // Params
     const isOnChainId = getIsOnChainId(projectId);
 
-    // Clients
-    const marketplaceClient = await getMarketplaceQueryClient();
-    const ecocreditClient = await getEcocreditQueryClient();
+    // Query client
+    const rpcQueryClient = await getRPCQueryClient();
 
     // Queries
     const allProjectPageQuery = getAllProjectPageQuery({
@@ -41,8 +39,9 @@ export const projectDetailsLoader =
       languageCode: defaultLocale,
     });
     const projectQuery = getProjectQuery({
-      request: { projectId },
-      client: ecocreditClient,
+      enabled: !!projectId && !!queryClient,
+      request: { projectId: projectId as string },
+      client: rpcQueryClient,
     });
     const projectByOnChainIdQuery = getProjectByOnChainIdQuery({
       client: apolloClientFactory.getClient(),
@@ -58,12 +57,12 @@ export const projectDetailsLoader =
     });
 
     const sellOrdersQuery = getSellOrdersExtendedQuery({
-      client: marketplaceClient,
+      client: rpcQueryClient,
       reactQueryClient: queryClient,
       request: {},
     });
     const allowedDenomQuery = getAllowedDenomQuery({
-      client: marketplaceClient,
+      client: rpcQueryClient,
     });
 
     // Fetch or Cache

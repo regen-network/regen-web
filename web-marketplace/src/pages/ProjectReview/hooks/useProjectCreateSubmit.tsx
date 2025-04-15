@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { MsgCreateProject } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import { regen } from '@regen-network/api';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { useUpdateProjectByIdMutation } from 'generated/graphql';
@@ -15,7 +15,7 @@ interface MsgCreateProjectValues {
   admin: string;
   metadata: Partial<ProjectMetadataLD>;
   jurisdiction: string;
-  referenceId?: string;
+  referenceId: string;
 }
 
 interface Props {
@@ -72,13 +72,14 @@ const useProjectCreateSubmit = ({ signAndBroadcast }: Props): Return => {
           throw new Error(err as string);
         }
 
-        const msg = MsgCreateProject.fromPartial({
-          classId,
-          admin,
-          metadata: iriResponse.iri,
-          jurisdiction,
-          referenceId,
-        });
+        const msg =
+          regen.ecocredit.v1.MessageComposer.withTypeUrl.createProject({
+            classId,
+            admin,
+            metadata: iriResponse.iri,
+            jurisdiction,
+            referenceId,
+          });
 
         const tx = {
           msgs: [msg],

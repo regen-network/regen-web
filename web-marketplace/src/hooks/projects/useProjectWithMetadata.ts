@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useApolloClient } from '@apollo/client';
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
@@ -86,7 +86,7 @@ export const useProjectWithMetadata = ({
   let offChainProject: OffChainProject | undefined;
   const graphqlClient = useApolloClient();
   const reactQueryClient = useQueryClient();
-  const { dataClient } = useLedger();
+  const { queryClient } = useLedger();
   const { activeAccount } = useAuth();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
@@ -123,8 +123,8 @@ export const useProjectWithMetadata = ({
     getMetadataQuery({
       iri: onChainProject?.metadata,
       enabled:
-        !!onChainProject?.metadata && editOnChain && anchored && !!dataClient,
-      dataClient,
+        !!onChainProject?.metadata && editOnChain && anchored && !!queryClient,
+      client: queryClient,
       languageCode: selectedLanguage,
     }),
   );

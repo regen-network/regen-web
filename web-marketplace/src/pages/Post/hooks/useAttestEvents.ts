@@ -5,13 +5,9 @@ import {
 } from '@apollo/client';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
-import { OrderBy } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-import { EventAttest } from '@regen-network/api/lib/generated/regen/data/v1/events';
-import {
-  MsgAnchor,
-  MsgAttest,
-} from '@regen-network/api/lib/generated/regen/data/v1/tx';
+import { TxResponse } from '@regen-network/api/cosmos/base/abci/v1beta1/abci';
+import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
+import { EventAttest } from '@regen-network/api/regen/data/v1/events';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
@@ -58,17 +54,17 @@ export const useAttestEvents = ({
   onlyAttestEvents,
 }: UseAttestEventsParams) => {
   const { _ } = useLingui();
-  const { txClient } = useLedger();
+  const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
   const { data: anchorTxsEventData } = useQuery(
     getGetTxsEventQuery({
-      client: txClient,
-      enabled: !!txClient && !onlyAttestEvents,
+      client: queryClient,
+      enabled: !!queryClient && !onlyAttestEvents,
       request: {
-        events: [`${messageActionEquals}'/${MsgAnchor.$type}'`],
+        events: [`${messageActionEquals}'/regen.data.v1.MsgAnchor'`],
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
@@ -76,10 +72,10 @@ export const useAttestEvents = ({
 
   const { data: attestTxsEventData } = useQuery(
     getGetTxsEventQuery({
-      client: txClient,
-      enabled: !!txClient,
+      client: queryClient,
+      enabled: !!queryClient,
       request: {
-        events: [`${messageActionEquals}'/${MsgAttest.$type}'`],
+        events: [`${messageActionEquals}'/regen.data.v1.MsgAttest'`],
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
@@ -102,16 +98,14 @@ export const useAttestEvents = ({
       ?.filter(txRes => txRes.rawLog.includes(iri))
       ?.map(txRes => {
         const events = txRes.logs[0].events.filter(event => {
-          return event.type.includes(EventAttest.$type);
+          return EventAttest.typeUrl.includes(event.type);
         });
-
         const attestors = events.map(event => {
           const attributes = event.attributes
             .filter(attr => attr.key === 'attestor')
             .map(attr => attr.value);
           return attributes;
         });
-
         const attestor = attestors[0]?.[0]?.replace(/['"]+/g, '');
         const { timestamp, txhash } = txRes;
 

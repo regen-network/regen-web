@@ -49,6 +49,7 @@ export type Account = Node & {
   stripeCustomerId?: Maybe<Scalars['String']>;
   custodialAddress?: Maybe<Scalars['String']>;
   active?: Maybe<Scalars['Boolean']>;
+  stripeConnectedAccountId?: Maybe<Scalars['String']>;
   /** Reads a single `Account` that is related to this `Account`. */
   accountByCreatorId?: Maybe<Account>;
   /** Reads and enables pagination through a set of `CreditClass`. */
@@ -624,6 +625,8 @@ export type AccountCondition = {
   custodialAddress?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `active` field. */
   active?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `stripeConnectedAccountId` field. */
+  stripeConnectedAccountId?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -757,6 +760,7 @@ export type AccountInput = {
   stripeCustomerId?: Maybe<Scalars['String']>;
   custodialAddress?: Maybe<Scalars['String']>;
   active?: Maybe<Scalars['Boolean']>;
+  stripeConnectedAccountId?: Maybe<Scalars['String']>;
 };
 
 /** Represents an update to a `Account`. Fields that are set will be updated. */
@@ -779,6 +783,7 @@ export type AccountPatch = {
   stripeCustomerId?: Maybe<Scalars['String']>;
   custodialAddress?: Maybe<Scalars['String']>;
   active?: Maybe<Scalars['Boolean']>;
+  stripeConnectedAccountId?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `Project` values, with data from `Post`. */
@@ -1022,6 +1027,8 @@ export enum AccountsOrderBy {
   CustodialAddressDesc = 'CUSTODIAL_ADDRESS_DESC',
   ActiveAsc = 'ACTIVE_ASC',
   ActiveDesc = 'ACTIVE_DESC',
+  StripeConnectedAccountIdAsc = 'STRIPE_CONNECTED_ACCOUNT_ID_ASC',
+  StripeConnectedAccountIdDesc = 'STRIPE_CONNECTED_ACCOUNT_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -7599,7 +7606,7 @@ export type AccountByIdQuery = (
   { __typename?: 'Query' }
   & { accountById?: Maybe<(
     { __typename?: 'Account' }
-    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce' | 'hideEcocredits' | 'hideRetirements' | 'custodialAddress'>
+    & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'bgImage' | 'description' | 'websiteLink' | 'twitterLink' | 'addr' | 'nonce' | 'hideEcocredits' | 'hideRetirements' | 'custodialAddress' | 'stripeConnectedAccountId'>
     & { accountTranslationsById: (
       { __typename?: 'AccountTranslationsConnection' }
       & { nodes: Array<Maybe<(
@@ -7667,7 +7674,7 @@ export type AllProjectsQuery = (
     { __typename?: 'ProjectsConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'slug' | 'metadata' | 'onChainId' | 'approved' | 'published' | 'adminAccountId'>
+      & Pick<Project, 'id' | 'adminAccountId' | 'slug' | 'metadata' | 'onChainId' | 'approved' | 'published'>
       & { creditClassByCreditClassId?: Maybe<(
         { __typename?: 'CreditClass' }
         & Pick<CreditClass, 'id' | 'onChainId'>
@@ -8231,6 +8238,7 @@ export const AccountByIdDocument = gql`
     hideEcocredits
     hideRetirements
     custodialAddress
+    stripeConnectedAccountId
     accountTranslationsById {
       nodes {
         languageCode
@@ -8371,12 +8379,12 @@ export const AllProjectsDocument = gql`
   allProjects(condition: {approved: true, published: true}) {
     nodes {
       id
+      adminAccountId
       slug
       metadata
       onChainId
       approved
       published
-      adminAccountId
       creditClassByCreditClassId {
         id
         onChainId

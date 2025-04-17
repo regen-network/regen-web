@@ -107,6 +107,9 @@ const ConnectWalletPage = safeLazy(
 );
 const ProfileEdit = safeLazy(() => import('../../pages/ProfileEdit'));
 const Orders = safeLazy(() => import('../../pages/Orders'));
+const SellerSetupAccount = safeLazy(
+  () => import('../../pages/SellerSetupAccount'),
+);
 
 type RouterProps = {
   reactQueryClient: QueryClient;
@@ -380,6 +383,10 @@ export const getRegenRoutes = ({
           <Route
             path="my-orders"
             element={<KeplrOrAuthRoute component={Orders} />}
+          />
+          <Route
+            path="seller"
+            element={<AuthRoute component={SellerSetupAccount} />}
           />
         </Route>
       </Route>

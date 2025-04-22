@@ -41,7 +41,6 @@ import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { VIEW_PORTFOLIO } from 'components/organisms/BasketOverview/BasketOverview.constants';
 import { BuyWarningModalContent } from 'components/organisms/BuyWarningModal/BuyWarningModal.types';
-import { CONNECTED_EMAIL_ERROR } from 'components/organisms/RegistryLayout/RegistryLayout.constants';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useMsgClient } from 'hooks';
 
@@ -249,32 +248,6 @@ export const usePurchase = ({
         }
 
         if (selectedSellOrders && creditsAmount) {
-          // If a logged in user with no email address (web3 account) provides one,
-          // we send a confirmation email
-          if (!!activeAccount && !privActiveAccount?.email && email && token) {
-            try {
-              const response: { error?: string } = await postData({
-                url: `${apiUri}/marketplace/v1/auth/email/create-token`,
-                data: {
-                  email,
-                },
-                token,
-                retryCsrfRequest,
-              });
-              if (response.error) {
-                if (response.error === CONNECTED_EMAIL_ERROR) {
-                  setConnectedEmailErrorModalAtom(atom => {
-                    atom.open = true;
-                    atom.email = email as string;
-                  });
-                  return;
-                }
-              }
-            } catch (e) {
-              setErrorBannerTextAtom(String(e));
-            }
-          }
-
           const retirementJurisdiction =
             retiring && country
               ? getJurisdictionIsoCode({

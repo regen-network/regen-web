@@ -5,7 +5,7 @@ type Props = React.PropsWithChildren<RegenModalProps>;
 
 export const SadBeeModal = ({ open, onClose, children }: Props) => {
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={onClose} className="!p-50">
       <div className="flex justify-center">
         <SadBeeIcon />
       </div>

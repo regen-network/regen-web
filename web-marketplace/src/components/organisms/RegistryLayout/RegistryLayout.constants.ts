@@ -32,4 +32,5 @@ export const CONNECTED_EMAIL_ERROR = 'email.already_connected';
 export const CONNECTED_EMAIL_ERROR_TITLE = msg`Sorry, this email is already connected to another account`;
 export const CONNECTED_EMAIL_ERROR_DESCRIPTION_START = msg`You entered: `;
 export const CONNECTED_EMAIL_ERROR_DESCRIPTION_END = msg`. Please use a different email address.`;
+export const CONNECTED_EMAIL_ERROR_NOTE = msg`Please note: you can merge these accounts by logging in with your email account and connecting your Regen address to that account.`;
 export const EMAIL_ADDED = msg`Log in email successfully added`;

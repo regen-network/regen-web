@@ -145,7 +145,7 @@ msgstr "+ añadir"
 msgid "+ add another issuer'"
 msgstr "+ añadir otro emisor'"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:301
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:310
 msgid "+ add certification"
 msgstr "+ añadir certificación"
 
@@ -199,7 +199,7 @@ msgstr "<0>Emisor de la clase de crédito:</0> entidad que puede emitir lotes de
 msgid "<0>Custodian:</0> The entity, also the project landowner, who has historically managed the territory. It is now part of the project stakeholders and receives benefits from project success."
 msgstr "<0>Custodio:</0> Entidad, también propietaria del proyecto, que históricamente ha gestionado el territorio. Actualmente forma parte de los interesados del proyecto y recibe los beneficios del éxito del mismo."
 
-#: src/components/atoms/DragAndDropLabel.tsx:6
+#: src/components/atoms/DragAndDropLabel.tsx:9
 msgid "<0>drag and drop</0><1>or</1>"
 msgstr "<0>arrastrar y soltar</0><1>o</1>"
 
@@ -348,11 +348,11 @@ msgstr "Añadir URL de vídeo"
 msgid "Additional Certificate"
 msgstr "Certificado adicional"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:163
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:172
 msgid "Additional certification {index}"
 msgstr "Certificación adicional {index}"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:170
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:179
 msgid "Additional certification {index} url"
 msgstr "Certificación adicional {index} url"
 
@@ -369,7 +369,7 @@ msgstr "URL de certificación adicional"
 msgid "additional certifications"
 msgstr "certificaciones adicionales"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:257
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:266
 msgid "Additional Certifications"
 msgstr "Certificaciones adicionales"
 
@@ -432,7 +432,7 @@ msgstr "Todos los archivos cargados y sus datos de ubicación quedarán ocultos 
 msgid "Amazon"
 msgstr "Amazonas"
 
-#: src/features/marketplace/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:113
+#: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:144
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:119
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:120
 msgid "amount"
@@ -498,7 +498,7 @@ msgid "amount retired"
 msgstr "cantidad retirada"
 
 #: src/components/organisms/CreditRetireForm/CreditRetireForm.tsx:108
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:130
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:138
 msgid "Amount retired"
 msgstr "Monto retirado"
 
@@ -523,7 +523,7 @@ msgid "amount tradable"
 msgstr "cantidad negociable"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:8
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:125
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:133
 msgid "Amount tradable"
 msgstr "Cantidad negociable"
 
@@ -543,7 +543,7 @@ msgstr "Un ecosistema tiene datos insuficientes cuando <0>no hay información ad
 msgid "Anchoring in progress"
 msgstr "Anclaje en proceso"
 
-#: src/components/atoms/AgreeErpaCheckboxNew.tsx:42
+#: src/components/atoms/AgreeErpaCheckboxNew.tsx:48
 msgid "and"
 msgstr "y"
 
@@ -662,7 +662,7 @@ msgid "baskets table"
 msgstr "mesa de cestas"
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:20
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:146
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:155
 msgid "batch denom"
 msgstr "nombre del lote"
 
@@ -768,7 +768,7 @@ msgid "bridgable ecocredits table"
 msgstr "Tabla de ecocréditos puenteables"
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
-#: src/features/marketplace/BridgeFlow/BridgeFlow.constants.ts:4
+#: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:4
 #: src/pages/Dashboard/Dashboard.constants.tsx:48
 msgid "Bridge"
 msgstr "Puente"
@@ -822,7 +822,7 @@ msgstr "comprar créditos"
 msgid "BUY CREDITS"
 msgstr "COMPRAR CRÉDITOS"
 
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:90
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:109
 msgid "Buy Credits Error"
 msgstr "Error al comprar créditos"
 
@@ -1060,13 +1060,13 @@ msgstr "Limpiar todo"
 msgid "Click on the confirmation link to return to Regen Network."
 msgstr "Haga clic en el enlace de confirmación para regresar a Regen Network."
 
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:213
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:236
 #: src/pages/ProjectReview/ProjectReview.tsx:379
 msgid "close"
 msgstr "cerca"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:4
-#: src/features/marketplace/BridgeFlow/BridgeFlow.tsx:209
+#: src/features/ecocredit/BridgeFlow/BridgeFlow.tsx:224
 #: src/lib/constants/shared.constants.tsx:95
 msgid "CLOSE WINDOW"
 msgstr "CERRAR VENTANA"
@@ -1115,7 +1115,7 @@ msgstr "Información de cumplimiento"
 msgid "Congrats! You successfully created this post."
 msgstr "¡Felicitaciones! Creaste esta publicación exitosamente."
 
-#: src/features/marketplace/BridgeFlow/BridgeFlow.constants.ts:3
+#: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:3
 msgid "Congrats! Your bridge has been initiated"
 msgstr "¡Felicitaciones! Tu puente ha sido iniciado"
 
@@ -1219,8 +1219,8 @@ msgstr "Crear un proyecto sin una clase de crédito"
 msgid "create credit batch"
 msgstr "crear lote de credito"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:141
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:209
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:150
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:220
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:58
 msgid "Create Credit Batch"
 msgstr "Crear lote de créditos"
@@ -1269,7 +1269,7 @@ msgstr "Conceptos básicos de crédito"
 msgid "Credit Batch Details"
 msgstr "Detalles del lote de crédito"
 
-#: src/features/marketplace/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:109
+#: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:140
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:112
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:150
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:122
@@ -1287,7 +1287,7 @@ msgstr "Id. de lote de crédito"
 msgid "credit batch id{0, plural, one {} other {(s)}}"
 msgstr "id de lote de crédito{0, plural, one {} other {(s)}}"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:74
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:81
 msgid "Credit Batch Info"
 msgstr "Información del lote de crédito"
 
@@ -1705,8 +1705,8 @@ msgstr "Lotes de ecocrédito"
 msgid "Ecocredit Batches"
 msgstr "Lotes de ecocrédito"
 
-#: src/components/atoms/AgreeErpaCheckbox.tsx:31
-#: src/components/atoms/AgreeErpaCheckboxNew.tsx:40
+#: src/components/atoms/AgreeErpaCheckbox.tsx:37
+#: src/components/atoms/AgreeErpaCheckboxNew.tsx:46
 msgid "Ecocredit Sales Agreement"
 msgstr "Acuerdo de venta de Ecocredit"
 
@@ -1862,8 +1862,8 @@ msgstr "¡Correo electrónico reenviado! Por favor, revise su bandeja de entrada
 msgid "end date"
 msgstr "Fecha de finalización"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:210
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:211
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:219
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:220
 msgid "End Date"
 msgstr "Fecha de finalización"
 
@@ -2119,8 +2119,8 @@ msgstr "Artículos instructivos"
 msgid "How-to Videos"
 msgstr "Videos instructivos"
 
-#: src/components/atoms/AgreeErpaCheckbox.tsx:23
-#: src/components/atoms/AgreeErpaCheckboxNew.tsx:33
+#: src/components/atoms/AgreeErpaCheckbox.tsx:29
+#: src/components/atoms/AgreeErpaCheckboxNew.tsx:39
 msgid "I agree to the"
 msgstr "Estoy de acuerdo con el"
 
@@ -2300,7 +2300,7 @@ msgstr "Administrador de tierras"
 msgid "Large Corporation"
 msgstr "Gran corporación"
 
-#: src/components/atoms/WrappedResourcesCard.tsx:34
+#: src/components/atoms/WrappedResourcesCard.tsx:33
 msgid "Last Updated:"
 msgstr "Última actualización:"
 
@@ -2325,6 +2325,7 @@ msgstr "Aprende más"
 msgid "Learn more"
 msgstr "Más información"
 
+#: src/components/organisms/RegistryLayout/RegistryLayout.ConnectedEmailErrorModal.tsx:56
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:62
 #: src/pages/Home/Home.tsx:199
 msgid "Learn More"
@@ -2412,7 +2413,7 @@ msgstr "Las ubicaciones son privadas"
 msgid "log in"
 msgstr "acceso"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:35
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:36
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:3
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:36
 msgid "Log in email successfully added"
@@ -2879,8 +2880,8 @@ msgid "Payment info"
 msgstr "Información de pago"
 
 #: src/components/atoms/PeerReviewed.tsx:22
-msgid "Peer <0/>Reviewed"
-msgstr "Revisado por pares"
+#~ msgid "Peer <0/>Reviewed"
+#~ msgstr "Revisado por pares"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:127
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:221
@@ -2956,6 +2957,10 @@ msgstr "Por favor, introduzca el código de ese correo electrónico:"
 #: src/lib/constants/shared.constants.tsx:76
 msgid "Please enter valid JSON-LD"
 msgstr "Por favor ingrese un JSON-LD válido"
+
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:35
+msgid "Please note: you can merge these accounts by logging in with your email account and connecting your Regen address to that account."
+msgstr "Tenga en cuenta: puede fusionar estas cuentas iniciando sesión con su cuenta de correo electrónico y conectando su dirección de Regen a esa cuenta."
 
 #: src/config/errors.tsx:34
 msgid "Please purchase some REGEN to cover the transaction fees for this action."
@@ -3183,8 +3188,8 @@ msgstr "proyecto"
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:132
 #: src/components/organisms/EcocreditsTable.tsx:82
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:18
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:184
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:79
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:193
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:86
 #: src/pages/Certificate/Certificate.constants.ts:14
 #: src/pages/Certificate/Certificate.utils.ts:37
 msgid "Project"
@@ -3408,12 +3413,12 @@ msgstr "recibo"
 msgid "Recipient"
 msgstr "Beneficiario"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:118
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:126
 msgid "Recipient {index}"
 msgstr "Destinatario {index}"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:7
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:122
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:130
 msgid "Recipient address"
 msgstr "Dirección del destinatario"
 
@@ -3607,13 +3612,13 @@ msgstr "La retirada es permanente e irreversible."
 
 #: src/components/organisms/Order/Order.Summary.tsx:124
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:54
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:139
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:147
 #: src/pages/Certificate/Certificate.constants.ts:18
 msgid "Retirement location"
 msgstr "Lugar de retiro"
 
 #: src/components/molecules/BottomCreditRetireFields/BottomCreditRetireFields.tsx:79
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:134
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:142
 msgid "Retirement note"
 msgstr "Nota de retirada"
 
@@ -3707,7 +3712,7 @@ msgstr "buscar nuevos creditos"
 msgid "sectoral scopes"
 msgstr "ámbitos sectoriales"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:222
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:233
 msgid "SEE ALL CREDIT BATCHES"
 msgstr "VER TODOS LOS LOTES DE CRÉDITO"
 
@@ -3719,7 +3724,7 @@ msgstr "Ver todas las metodologías"
 msgid "See an example»"
 msgstr "Ver un ejemplo»"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:170
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:179
 msgid "SEE CREDIT BATCH"
 msgstr "VER LOTE DE CRÉDITOS"
 
@@ -3944,7 +3949,7 @@ msgstr "Lo sentimos, este correo electrónico ya está conectado a otra cuenta."
 msgid "Sorry, you don’t have any REGEN to cover transaction fees"
 msgstr "Lo sentimos, no tienes REGEN para cubrir las tarifas de transacción"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:204
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:215
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:75
 #: src/lib/constants/shared.constants.tsx:91
 msgid "Sorry, your transaction was not successful."
@@ -3958,7 +3963,7 @@ msgstr "Ordenar por:"
 msgid "Stakeholders"
 msgstr "Partes interesadas"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:82
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:89
 msgid "Start and end date"
 msgstr "Fecha de inicio y de fin"
 
@@ -3966,8 +3971,8 @@ msgstr "Fecha de inicio y de fin"
 msgid "start date"
 msgstr "Fecha de inicio"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:200
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:201
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:209
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:210
 msgid "Start Date"
 msgstr "Fecha de inicio"
 
@@ -4110,8 +4115,8 @@ msgstr "Términos"
 msgid "Terms and Conditions"
 msgstr "Términos y condiciones"
 
-#: src/components/atoms/AgreeErpaCheckbox.tsx:41
-#: src/components/atoms/AgreeErpaCheckboxNew.tsx:49
+#: src/components/atoms/AgreeErpaCheckbox.tsx:47
+#: src/components/atoms/AgreeErpaCheckboxNew.tsx:55
 msgid "terms of service"
 msgstr "Condiciones del servicio"
 
@@ -4160,7 +4165,7 @@ msgstr "El creador de esta cesta ha decidido que todos los créditos deben ser r
 msgid "The current address is already linked to your account.\\nPlease first switch wallet addresses in the Keplr app to be able to add another address to your account."
 msgstr "La dirección actual ya está vinculada a su cuenta. Primero cambie las direcciones de billetera en la aplicación Keplr para poder agregar otra dirección a su cuenta."
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:221
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:230
 msgid "The dates should correspond to the batch monitoring period or vintage."
 msgstr "Las fechas deben corresponder al período de seguimiento del lote o añada."
 
@@ -4599,8 +4604,8 @@ msgstr "tipo de proyecto vcs"
 msgid "vcs retirement serial number"
 msgstr "Número de serie de retiro de VCS"
 
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:229
-#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:86
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:238
+#: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:93
 msgid "VCS retirement serial number"
 msgstr "Número de serie de retiro de VCS"
 
@@ -4682,7 +4687,7 @@ msgstr "ver metodología"
 msgid "view on ledger"
 msgstr "Ver en el libro mayor"
 
-#: src/features/marketplace/BridgeFlow/BridgeFlow.constants.ts:5
+#: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:5
 msgid "view pending bridged credits"
 msgstr "ver créditos puente pendientes"
 
@@ -4706,7 +4711,7 @@ msgstr "ver proyecto"
 msgid "View Receipt"
 msgstr "Ver recibo"
 
-#: src/components/atoms/WrappedResourcesCard.tsx:33
+#: src/components/atoms/WrappedResourcesCard.tsx:32
 msgid "view resource"
 msgstr "ver recurso"
 
@@ -4746,7 +4751,7 @@ msgstr "identificación de la época (número de serie)"
 msgid "vintage period"
 msgstr "período de cosecha"
 
-#: src/features/marketplace/BridgeFlow/BridgeFlow.constants.ts:6
+#: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:6
 msgid "Visit <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> to view the transaction."
 msgstr "Visita <a href=\"https://toucan.earth/\" target=\"_blank\">toucan.earth</a> para ver la transacción."
 

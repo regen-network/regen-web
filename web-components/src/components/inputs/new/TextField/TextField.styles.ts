@@ -93,6 +93,7 @@ export const useTextFieldStyles = makeStyles<UseStylesParams>()(
         },
       },
       '& input[type=number]': {
+        '-moz-appearance': 'textfield',
         '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
           WebkitAppearance: 'none',
           margin: 0,

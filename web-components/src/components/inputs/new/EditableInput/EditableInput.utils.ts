@@ -9,6 +9,8 @@
  * sanitizeValue('00')   // returns '0'
  */
 
+import { getFormattedNumber } from 'src/utils/format';
+
 export const sanitizeValue = (value: string): string => {
   // Convert a leading '.' or ',' to '0.' or '0,'
   if (value.startsWith('.')) {
@@ -57,15 +59,10 @@ export const sanitizeValue = (value: string): string => {
   return sanitized ? sanitized : '';
 };
 
-export const localizeNumber = (
-  input: number,
-  locale = navigator.language || 'en-US',
-) => {
+export const localizeNumber = (input: number) => {
   const number = Number(input);
 
-  // Format the number for the given locale
-  return new Intl.NumberFormat(locale, {
-    useGrouping: true,
+  return getFormattedNumber(number, {
     minimumFractionDigits: 2,
-  }).format(number);
+  });
 };

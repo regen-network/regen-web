@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import { Box, SxProps } from '@mui/material';
 
+import { getFormattedNumber } from 'src/utils/format';
+
 import GradientBadge from '../../../components/gradient-badge';
 import InfoTooltipWithIcon from '../../../components/tooltip/InfoTooltipWithIcon';
 import { Body, Subtitle } from '../../../components/typography';
@@ -137,7 +139,13 @@ export const CreditPrice = ({
             />
           ) : (
             <>
-              {creditsChildren ? creditsChildren : creditsAvailable}
+              {creditsChildren
+                ? creditsChildren
+                : getFormattedNumber(
+                    typeof creditsAvailable === 'string'
+                      ? parseFloat(creditsAvailable)
+                      : creditsAvailable,
+                  )}
               {isSoldOut && (
                 <GradientBadge
                   className="ml-5"

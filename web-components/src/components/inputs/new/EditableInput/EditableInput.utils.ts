@@ -9,7 +9,7 @@
  * sanitizeValue('00')   // returns '0'
  */
 
-import { getFormattedNumber } from 'src/utils/format';
+import { getFormattedNumber } from '../../../../utils/format';
 
 export const sanitizeValue = (value: string): string => {
   // Convert a leading '.' or ',' to '0.' or '0,'

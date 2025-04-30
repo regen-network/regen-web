@@ -40,6 +40,22 @@ type Props = {
   creditClassId?: string;
 };
 
+/**
+ * A custom React hook that manages ecocredit-related data and functionality
+ * for a specified user address and optional credit class ID.
+ *
+ * @param address - The user's address for which ecocredit data is accessed.
+ * @param paginationParams - Pagination parameters for querying ecocredit data.
+ * @param creditClassId - A credit class ID used to filter fetched ecocredits.
+ *
+ * See {@link Props} for more details.
+ *
+ * @returns An object containing:
+ * - credits: A list of ecocredit batches with their balances.
+ * - fetchCredits: A function to manually refetch the ecocredit data.
+ * - reloadBalances: A function to reload balances and invalidate the current query.
+ * - isLoadingCredits: A boolean indicating whether the ecocredit data is currently being fetched.
+ */
 export default function useEcocredits({
   address,
   paginationParams,

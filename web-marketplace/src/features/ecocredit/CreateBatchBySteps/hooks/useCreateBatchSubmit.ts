@@ -89,7 +89,7 @@ async function prepareMsg(issuer: string, data: CreateBatchFormValues) {
     }
     return issuanceRecipient as BatchIssuance;
   });
-  console.log(iriResponse);
+
   return regen.ecocredit.v1.MessageComposer.withTypeUrl.createBatch({
     issuer,
     projectId: data.projectId,

@@ -20,7 +20,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
-#: src/components/organisms/Documentation/Documentation.constants.ts:11
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
@@ -187,15 +186,15 @@ msgstr "+Crear proyecto"
 msgid "<0>{0}</0> ending in {1}"
 msgstr "<0>{0}</0> terminando en {1}"
 
-#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:40
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:41
 msgid "<0>Credit class admin:</0> the entity who can update a given credit class."
 msgstr "<0>Administrador de clase de crédito:</0> la entidad que puede actualizar una clase de crédito determinada."
 
-#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:52
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:53
 msgid "<0>Credit class issuer:</0> the entity who can issue credit batches under the given credit class."
 msgstr "<0>Emisor de la clase de crédito:</0> entidad que puede emitir lotes de créditos bajo la clase de crédito dada."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:103
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:101
 msgid "<0>Custodian:</0> The entity, also the project landowner, who has historically managed the territory. It is now part of the project stakeholders and receives benefits from project success."
 msgstr "<0>Custodio:</0> Entidad, también propietaria del proyecto, que históricamente ha gestionado el territorio. Actualmente forma parte de los interesados del proyecto y recibe los beneficios del éxito del mismo."
 
@@ -203,27 +202,27 @@ msgstr "<0>Custodio:</0> Entidad, también propietaria del proyecto, que histór
 msgid "<0>drag and drop</0><1>or</1>"
 msgstr "<0>arrastrar y soltar</0><1>o</1>"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:92
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:90
 msgid "<0>Monitor:</0> The entity who tracks and verifies the environmental impact and performance of the project to ensure compliance and transparency."
 msgstr "<0>Monitor:</0> Entidad que da seguimiento y verifica el impacto ambiental y el desempeño del proyecto para garantizar el cumplimiento y la transparencia."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:114
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:112
 msgid "<0>Partners:</0> can offer crucial financial support or monitor progress and ensure environmental standards are met."
 msgstr "<0>Socios:</0> pueden ofrecer apoyo financiero crucial o supervisar el progreso y garantizar que se cumplan los estándares ambientales."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:49
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:47
 msgid "<0>Project admin:</0> The entity responsible for technical management, content editing, and managing participant access for contributions."
 msgstr "<0>Administrador del proyecto:</0> La entidad responsable de la gestión técnica, la edición de contenidos y la gestión del acceso de los participantes para las contribuciones."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:59
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:57
 msgid "<0>Project developer:</0> The entity in charge of managing the project. The project developer can be the land owner, land steward, or a third party."
 msgstr "<0>Desarrollador del proyecto:</0> Entidad encargada de gestionar el proyecto. El desarrollador del proyecto puede ser el propietario del terreno, el administrador del terreno o un tercero."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:70
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:68
 msgid "<0>Project operator:</0> The entity responsible for implementing and managing the project, ensuring it meets sustainability and regulatory standards."
 msgstr "<0>Operador del proyecto:</0> Entidad responsable de implementar y gestionar el proyecto, garantizando que cumpla con los estándares regulatorios y de sostenibilidad."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:81
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:79
 msgid "<0>Verifier:</0> The third party entity responsible for providing a independent, impartial assessment of project plan and project reports (that is not the monitor)."
 msgstr "<0>Verificador:</0> La entidad de terceros responsable de proporcionar una evaluación independiente e imparcial del plan del proyecto y de los informes del proyecto (que no es el monitor)."
 
@@ -247,8 +246,8 @@ msgstr "1 tonelada de CO2e"
 msgid "5MB max. Supported file types include text, spreadsheets, images, and video files."
 msgstr "Máximo de 5 MB. Los tipos de archivos admitidos incluyen texto, hojas de cálculo, imágenes y archivos de video."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:38
-#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:27
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:36
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:28
 msgid "A <0>program</0> involves the eligibility rules, monitoring and certification, and registration systems for credit trading and ownership tracking."
 msgstr "Un <0>programa</0> implica las reglas de elegibilidad, monitoreo y certificación, y sistemas de registro para el comercio de créditos y el seguimiento de la propiedad."
 
@@ -309,7 +308,7 @@ msgstr "comportamiento"
 msgid "Actions"
 msgstr "Comportamiento"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:63
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:73
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:52
 #: src/pages/Activity/Activity.tsx:12
 msgid "Activity"
@@ -383,8 +382,8 @@ msgstr "Información adicional"
 msgid "Address copied!"
 msgstr "¡Dirección copiada!"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:47
-#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:37
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:45
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:38
 #: src/pages/Post/Post.constants.ts:8
 msgid "admin"
 msgstr "Admin"
@@ -403,7 +402,7 @@ msgstr "Configuración avanzada"
 msgid "After refreshing the page several times, if you do not see your certificate within 24 hours, please reach out to <0>support@regen.network</0>."
 msgstr "Después de actualizar la página varias veces, si no ve su certificado dentro de 24 horas, comuníquese con <0>support@regen.network</0>."
 
-#: src/pages/BatchDetails/BatchDetails.tsx:129
+#: src/pages/BatchDetails/BatchDetails.tsx:132
 msgid "All credits"
 msgstr "Todos los créditos"
 
@@ -419,7 +418,7 @@ msgstr "Todas las publicaciones"
 msgid "all profiles"
 msgstr "todos los perfiles"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:42
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:45
 #: src/pages/Projects/Projects.tsx:115
 msgid "All projects"
 msgstr "Todos los proyectos"
@@ -433,8 +432,8 @@ msgid "Amazon"
 msgstr "Amazonas"
 
 #: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:144
-#: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:119
-#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:120
+#: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:121
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:125
 msgid "amount"
 msgstr "cantidad"
 
@@ -482,7 +481,7 @@ msgstr "Cantidad ahora disponible en"
 msgid "amount now available in usd"
 msgstr "Cantidad ahora disponible en USD"
 
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:154
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:158
 msgid "amount of credits"
 msgstr "cantidad de créditos"
 
@@ -508,7 +507,7 @@ msgstr "Monto retirado"
 msgid "Amount Retired"
 msgstr "Monto retirado"
 
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:131
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:133
 msgid "amount sent"
 msgstr "cantidad enviada"
 
@@ -612,7 +611,7 @@ msgstr "Adjunte metadatos JSON-LD arbitrarios al lote de créditos a continuaci�
 msgid "Attach arbitrary JSON-LD metadata to the project metadata below."
 msgstr "Adjunte metadatos JSON-LD arbitrarios a los metadatos del proyecto a continuación."
 
-#: src/components/organisms/PostFlow/hooks/useSign.ts:109
+#: src/components/organisms/PostFlow/hooks/useSign.ts:107
 msgid "Attest"
 msgstr "Dar fe"
 
@@ -645,7 +644,7 @@ msgstr "Información básica"
 msgid "Basic Info"
 msgstr "Información básica"
 
-#: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:101
+#: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:103
 msgid "basket"
 msgstr "cesta"
 
@@ -653,7 +652,7 @@ msgstr "cesta"
 msgid "basket ecocredits table"
 msgstr "tabla de ecocréditos de la cesta"
 
-#: src/components/organisms/Portfolio/Portfolio.tsx:94
+#: src/components/organisms/Portfolio/Portfolio.tsx:93
 msgid "Basket Tokens"
 msgstr "Fichas de cesta"
 
@@ -1253,7 +1252,7 @@ msgstr "Crear proyecto - Acceso denegado"
 msgid "Create Sell Order"
 msgstr "Crear orden de venta"
 
-#: src/pages/Post/hooks/useAttestEvents.ts:146
+#: src/pages/Post/hooks/useAttestEvents.ts:140
 msgid "Created by"
 msgstr "Creado por"
 
@@ -1265,16 +1264,16 @@ msgstr "tabla de actividad crediticia"
 msgid "Credit Basics"
 msgstr "Conceptos básicos de crédito"
 
-#: src/pages/BatchDetails/BatchDetails.tsx:106
+#: src/pages/BatchDetails/BatchDetails.tsx:109
 msgid "Credit Batch Details"
 msgstr "Detalles del lote de crédito"
 
 #: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:140
-#: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:112
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:150
+#: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:114
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:154
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:122
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:127
-#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:116
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:129
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:121
 msgid "credit batch id"
 msgstr "Identificación del lote de crédito"
 
@@ -1560,7 +1559,7 @@ msgstr "cuenta corriente"
 msgid "Current admin address"
 msgstr "Dirección de administración actual"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:101
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:99
 msgid "custodian"
 msgstr "custodio"
 
@@ -1591,8 +1590,8 @@ msgid "date"
 msgstr "fecha"
 
 #: src/components/organisms/Documentation/Documentation.constants.ts:10
-msgid "Date of upload"
-msgstr "Fecha de subida"
+#~ msgid "Date of upload"
+#~ msgstr "Fecha de subida"
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.SelectAccountModal.tsx:67
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:12
@@ -1637,17 +1636,16 @@ msgid "DISCOVER PROJECTS"
 msgstr "DESCUBRE PROYECTOS"
 
 #: src/components/organisms/Documentation/Documentation.constants.ts:9
-msgid "Document type"
-msgstr "Tipo de documento"
+#~ msgid "Document type"
+#~ msgstr "Tipo de documento"
 
-#: src/components/organisms/Documentation/Documentation.tsx:59
 #: src/components/organisms/MethodologyDocumentationSection.tsx:79
 msgid "Documentation"
 msgstr "Documentación"
 
 #: src/components/organisms/Documentation/Documentation.constants.ts:14
-msgid "documentation table"
-msgstr "tabla de documentación"
+#~ msgid "documentation table"
+#~ msgstr "tabla de documentación"
 
 #: src/components/organisms/IncludesGrasslandsForm.tsx:65
 msgid "Does your project include grasslands?"
@@ -1696,7 +1694,7 @@ msgstr "eco-crédito"
 msgid "Ecocredit batch ID"
 msgstr "Identificación del lote de ecocrédito"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:70
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:80
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:56
 msgid "Ecocredit batches"
 msgstr "Lotes de ecocrédito"
@@ -1710,7 +1708,7 @@ msgstr "Lotes de ecocrédito"
 msgid "Ecocredit Sales Agreement"
 msgstr "Acuerdo de venta de Ecocredit"
 
-#: src/components/organisms/Portfolio/Portfolio.tsx:63
+#: src/components/organisms/Portfolio/Portfolio.tsx:62
 #: src/pages/BasketDetails/BasketDetails.SectionLayout.tsx:14
 msgid "Ecocredits"
 msgstr "Ecocréditos"
@@ -2258,7 +2256,7 @@ msgstr "editor"
 msgid "Issuer"
 msgstr "Editor"
 
-#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:49
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:50
 msgid "issuers"
 msgstr "emisores"
 
@@ -2569,7 +2567,7 @@ msgstr "Moderado"
 msgid "Modify filters"
 msgstr "Modificar filtros"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:90
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:88
 msgid "monitor"
 msgstr "monitor"
 
@@ -2583,7 +2581,7 @@ msgid "more details"
 msgstr "Más detalles"
 
 #: src/components/organisms/MoreProjectsSection.tsx:48
-#: src/components/templates/ProjectDetails/ProjectDetails.MoreProjects.tsx:29
+#: src/components/templates/ProjectDetails/ProjectDetails.MoreProjects.tsx:37
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.tsx:203
 msgid "More Projects"
 msgstr "Más proyectos"
@@ -2633,8 +2631,8 @@ msgid "Name"
 msgstr "Nombre"
 
 #: src/components/organisms/Documentation/Documentation.constants.ts:8
-msgid "Name of document"
-msgstr "Nombre del documento"
+#~ msgid "Name of document"
+#~ msgstr "Nombre del documento"
 
 #: src/components/organisms/AdditionalityForm.tsx:214
 msgid "Natural ecosystem, unmanaged"
@@ -2660,7 +2658,7 @@ msgstr "Nuevo código de confirmación enviado"
 msgid "New post"
 msgstr "Nueva publicación"
 
-#: src/pages/ProjectEdit/hooks/useProjectEditSubmit.tsx:103
+#: src/pages/ProjectEdit/hooks/useProjectEditSubmit.tsx:110
 msgid "new project admin"
 msgstr "nuevo administrador de proyecto"
 
@@ -2778,7 +2776,7 @@ msgstr "método de generación de compensación"
 msgid "Offset generation method"
 msgstr "Método de generación de compensación"
 
-#: src/pages/ProjectEdit/hooks/useProjectEditSubmit.tsx:110
+#: src/pages/ProjectEdit/hooks/useProjectEditSubmit.tsx:117
 msgid "old project admin"
 msgstr "antiguo administrador del proyecto"
 
@@ -2790,7 +2788,7 @@ msgstr "Sólo las ubicaciones de los archivos quedarán ocultas a la vista del p
 msgid "Oops! Page not found."
 msgstr "¡Ups! Página no encontrada."
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:68
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:66
 msgid "operator"
 msgstr "operador"
 
@@ -2858,7 +2856,7 @@ msgstr "Descripción general"
 msgid "Pacific"
 msgstr "Pacífico"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:112
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:110
 msgid "partners"
 msgstr "fogonadura"
 
@@ -3032,7 +3030,7 @@ msgstr "Solicitud PQR"
 msgid "prefinance"
 msgstr "prefinanciamiento"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:50
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:53
 #: src/pages/Projects/Projects.tsx:125
 msgid "Prefinance projects"
 msgstr "Proyectos de prefinanciación"
@@ -3085,8 +3083,8 @@ msgstr "PRECIO (USD)"
 msgid "Price of credits for prefinance projects have specific terms, please click on the project to learn more."
 msgstr "Los precios de los créditos para proyectos de prefinanciamiento tienen términos específicos, haga clic en el proyecto para obtener más información."
 
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:122
-#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:84
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:126
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:89
 msgid "price per credit"
 msgstr "precio por crédito"
 
@@ -3130,7 +3128,7 @@ msgstr "Configuración de privacidad"
 msgid "Proceed with caution: this cannot be undone!"
 msgstr "Proceda con precaución: ¡esto no se puede deshacer!"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:179
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:190
 msgid "profile"
 msgstr "perfil"
 
@@ -3160,8 +3158,8 @@ msgstr "Perfil guardado"
 msgid "Profile type"
 msgstr "Tipo de perfil"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:36
-#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:24
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:34
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:25
 msgid "program"
 msgstr "programa"
 
@@ -3173,11 +3171,11 @@ msgstr "Guía del programa"
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:5
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:299
-#: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:105
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:143
+#: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:107
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:147
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:118
-#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:109
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:120
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:114
 msgid "project"
 msgstr "proyecto"
 
@@ -3199,7 +3197,7 @@ msgstr "Proyecto"
 msgid "PROJECT"
 msgstr "PROYECTO"
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:175
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:174
 msgid "Project {onChainProjectId}"
 msgstr "Proyecto {onChainProjectId}"
 
@@ -3232,7 +3230,7 @@ msgstr "beneficio del proyecto"
 msgid "Project Design Document"
 msgstr "Documento de diseño del proyecto"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:57
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:55
 msgid "project developer"
 msgstr "Desarrollador de proyectos"
 
@@ -3346,7 +3344,7 @@ msgid "PROJECTED:"
 msgstr "PROYECTADO:"
 
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:37
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:63
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
 #: src/pages/Dashboard/Dashboard.constants.tsx:30
@@ -3593,7 +3591,7 @@ msgstr "Retirada"
 msgid "Retirement Certificate"
 msgstr "Certificado de retirada"
 
-#: src/components/organisms/Portfolio/Portfolio.tsx:76
+#: src/components/organisms/Portfolio/Portfolio.tsx:75
 msgid "Retirement Certificates"
 msgstr "Certificados de retirada"
 
@@ -3820,6 +3818,10 @@ msgstr "Establecer créditos máximos"
 msgid "set up a Keplr wallet →"
 msgstr "Configurar una billetera Keplr →"
 
+#: src/pages/SellerSetupAccount/SellerSetupAccount.tsx:22
+msgid "set up account"
+msgstr "configurar cuenta"
+
 #: src/pages/ProjectEdit/ProjectEdit.Nav.tsx:29
 msgid "settings"
 msgstr "ajustes"
@@ -3871,7 +3873,7 @@ msgstr "Firma este post"
 msgid "signature"
 msgstr "firma"
 
-#: src/pages/Post/hooks/useAttestEvents.ts:182
+#: src/pages/Post/hooks/useAttestEvents.ts:176
 msgid "Signed by"
 msgstr "Firmado por"
 
@@ -3959,7 +3961,7 @@ msgstr "Lo sentimos, su transacción no fue exitosa."
 msgid "Sort by:"
 msgstr "Ordenar por:"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:136
+#: src/components/organisms/Stakeholders/Stakeholders.tsx:55
 msgid "Stakeholders"
 msgstr "Partes interesadas"
 
@@ -3995,7 +3997,7 @@ msgstr "Comience a escribir la ubicación"
 msgid "State / Region"
 msgstr "Estado / Región"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:58
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:68
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:49
 msgid "Stats"
 msgstr "Estadísticas"
@@ -4363,7 +4365,6 @@ msgstr "Esta dirección de billetera ya está siendo utilizada por otra cuenta."
 msgid "Threat Category of Ecosystem"
 msgstr "Categoría de amenaza del ecosistema"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.ProjectTimeline.tsx:34
 #: src/pages/Post/Post.constants.ts:10
 msgid "Timeline"
 msgstr "Cronología"
@@ -4621,7 +4622,7 @@ msgstr "Informe de verificación"
 msgid "verification reports"
 msgstr "informes de verificación"
 
-#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:79
+#: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:77
 msgid "verifier"
 msgstr "verificador"
 
@@ -4665,12 +4666,11 @@ msgstr "ver documento de clase de crédito"
 msgid "view details"
 msgstr "Ver detalles"
 
-#: src/components/organisms/Documentation/Documentation.constants.ts:16
 #: src/components/organisms/MethodologyDocumentationSection.tsx:86
 msgid "view document"
 msgstr "ver documento"
 
-#: src/pages/BatchDetails/BatchDetails.tsx:115
+#: src/pages/BatchDetails/BatchDetails.tsx:118
 msgid "view in portfolio"
 msgstr "Ver en portafolio"
 
@@ -4682,7 +4682,6 @@ msgstr "ver menos"
 msgid "view methodology"
 msgstr "ver metodología"
 
-#: src/components/organisms/Documentation/Documentation.constants.ts:15
 #: src/lib/constants/shared.constants.tsx:107
 msgid "view on ledger"
 msgstr "Ver en el libro mayor"
@@ -4730,6 +4729,10 @@ msgstr "Ver la lista completa de videos de soporte»"
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:201
 msgid "view transaction"
 msgstr "ver transacción"
+
+#: src/pages/SellerSetupAccount/SellerSetupAccount.tsx:18
+msgid "view transactions"
+msgstr "ver transacciones"
 
 #: src/lib/constants/shared.constants.tsx:92
 msgid "view your portfolio"

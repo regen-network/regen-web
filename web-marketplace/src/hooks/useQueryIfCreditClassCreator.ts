@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
 import { queryParams } from 'lib/ecocredit/api';
@@ -8,37 +8,38 @@ type Props = {
   address?: string | null;
 };
 
+/**
+ * A custom hook that checks if the provided address (or the connected wallet address)
+ * is in the list of allowed class creators. If the allowlist feature is disabled, it
+ * always returns true.
+ *
+ * @param address - Optional address to check if it is a credit class creator. If not
+ * provided, the connected wallet address will be used. See {@link Props} for more details.
+ *
+ * @returns A boolean indicating whether the active address can create credit classes.
+ */
 export function useQueryIfCreditClassCreator({ address }: Props): boolean {
-  const [isCreator, setIsCreator] = useState(false);
   const { wallet } = useWallet();
   const { queryClient } = useLedger();
   const walletAddress = wallet?.address;
   const activeAddress = address ?? walletAddress;
 
-  useEffect(() => {
-    const queryIfCreator = async (): Promise<void> => {
-      if (!activeAddress) {
-        setIsCreator(false);
-      } else if (queryClient) {
-        try {
-          const result = await queryParams({ client: queryClient });
-          const allowlistEnabled = result.params?.allowlistEnabled;
-          if (allowlistEnabled) {
-            const _isCreator =
-              result.params?.allowedClassCreators.includes(activeAddress) ===
-              true;
-            setIsCreator(_isCreator);
-          } else {
-            // if the allowlist is not enabled, anyone can create a credit class
-            setIsCreator(true);
-          }
-        } catch (err) {
-          setIsCreator(false);
-        }
+  const { data: isCreator = false } = useQuery({
+    queryKey: ['creditClassCreator', activeAddress],
+    queryFn: () => queryParams({ client: queryClient! }),
+    enabled: !!activeAddress && !!queryClient,
+    select: ({ params }) => {
+      if (!params?.allowlistEnabled) {
+        return true;
       }
-    };
+      return params?.allowedClassCreators.includes(activeAddress!);
+    },
+    // never refetch automatically
+    staleTime: Infinity,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+  });
 
-    queryIfCreator();
-  }, [activeAddress, queryClient]);
   return isCreator;
 }

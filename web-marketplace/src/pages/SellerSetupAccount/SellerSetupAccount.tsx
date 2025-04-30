@@ -14,14 +14,9 @@ const SellerSetupAccount = () => {
   return (
     <div className="bg-grey-100 h-[500px]">
       {activeAccount?.stripeConnectedAccountId ? (
-        <div className="flex flex-col sm:flex-row gap-20 ">
-          <ContainedButton onClick={openLoginLink}>
-            <Trans>view payouts</Trans>
-          </ContainedButton>
-          <OutlinedButton>
-            <Trans>view stripe account</Trans>
-          </OutlinedButton>
-        </div>
+        <ContainedButton onClick={openLoginLink}>
+          <Trans>view transactions</Trans>
+        </ContainedButton>
       ) : (
         <ContainedButton onClick={setupAccount}>
           <Trans>set up account</Trans>

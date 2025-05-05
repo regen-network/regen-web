@@ -1,5 +1,5 @@
 import LazyLoad from 'react-lazyload';
-import { msg } from '@lingui/macro';
+import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, Grid, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
@@ -12,7 +12,6 @@ import { ImpactTags } from 'web-components/src/components/organisms/ImpactTags/I
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
 import Section from 'web-components/src/components/section';
 import { Body, Label, Title } from 'web-components/src/components/typography';
-import { pxToRem } from 'web-components/src/theme/muiTheme';
 
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
@@ -297,15 +296,20 @@ function ProjectTopSection({
           />
           <Box>
             {!IS_TERRASOS && onChainProjectId && batchData?.totals && (
-              <ProjectBatchTotals
-                projectWithOrderData={projectWithOrderData}
-                soldOutProjectsIds={soldOutProjectsIds}
-                totals={batchData.totals}
-                sx={{
-                  mt: { xs: 10, sm: 12, md: 16 },
-                  mb: quote ? { xs: 10, sm: 12, md: 25 } : {},
-                }}
-              />
+              <div className={`mt-50 ${quote ? 'mb-50' : ''}`}>
+                <Title
+                  variant="h4"
+                  mobileVariant="h4"
+                  className="pb-30 sm:pb-40"
+                >
+                  <Trans>Credits</Trans>
+                </Title>
+                <ProjectBatchTotals
+                  projectWithOrderData={projectWithOrderData}
+                  soldOutProjectsIds={soldOutProjectsIds}
+                  totals={batchData.totals}
+                />
+              </div>
             )}
           </Box>
           {isTerrasosProjectPage && projectPageMetadata && (
@@ -331,10 +335,7 @@ function ProjectTopSection({
                 <ProjectBatchTotals
                   soldOutProjectsIds={[]}
                   totals={batchTotals}
-                  sx={{
-                    mt: { xs: pxToRem(30), sm: pxToRem(50) },
-                    mb: pxToRem(30),
-                  }}
+                  className="mt-30 sm:mt-50 mb-30"
                 />
               }
             />

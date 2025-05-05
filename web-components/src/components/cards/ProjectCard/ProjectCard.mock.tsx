@@ -20,7 +20,7 @@ export const projectCardBodyTextMapping: ProjectCardBodyTextsMapping = {
   prefinance: 'prefinance',
   price: 'price',
   estimatedIssuance: 'estimated issuance',
-  creditsAvailable: 'credits available',
+  creditsAvailable: 'credits for sale',
   prefinancePriceTooltip:
     'Price of credits for prefinance projects have specific terms, please click on the project to learn more.',
   estimatedIssuanceTooltip:

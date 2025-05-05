@@ -64,6 +64,7 @@ import { ECOCREDIT_MESSAGE_TYPES } from './constants';
 
 export const getBatchesTotal = (
   batches: BatchInfoWithSupply[],
+  creditsForSale?: number,
 ): {
   totals: BatchTotalsForProject;
 } => {

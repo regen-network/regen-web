@@ -187,7 +187,10 @@ function ProjectDetails(): JSX.Element {
 
   const { batchesWithSupply, setPaginationParams, paginationParams } =
     useFetchPaginatedBatches({ projectId: String(onChainProjectId) });
-  const { totals: batchesTotal } = getBatchesTotal(batchesWithSupply ?? []);
+  const { totals: batchesTotal } = getBatchesTotal(
+    batchesWithSupply ?? [],
+    projectsWithOrderData[0]?.purchaseInfo?.sellInfo?.creditsAvailable,
+  );
 
   const {
     offChainProjectMetadata,

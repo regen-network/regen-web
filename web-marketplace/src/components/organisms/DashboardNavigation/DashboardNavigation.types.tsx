@@ -1,3 +1,17 @@
+export type AccountOption = {
+  id: string;
+  name: string;
+  address: string;
+  avatarSrc?: string;
+  type: 'user' | 'org';
+};
+
+export type DashboardNavHeaderData = {
+  activeAccount: AccountOption;
+  accounts: AccountOption[];
+  onAccountSelect?: (id: string) => void;
+};
+
 export type DashboardNavigationItem = {
   label: string;
   path: string;
@@ -13,14 +27,8 @@ export type DashboardNavigationSection = {
 
 export type DashboardNavigationProps = {
   className?: string;
+  header: DashboardNavHeaderData;
   sections: DashboardNavigationSection[];
   currentPath: string;
   onNavItemClick: (path: string) => void;
-  header: DashboardNavHeaderData;
-};
-
-export type DashboardNavHeaderData = {
-  name: string;
-  address: string;
-  avatarSrc?: string;
 };

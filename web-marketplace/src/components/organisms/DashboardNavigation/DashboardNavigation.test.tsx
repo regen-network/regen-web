@@ -14,12 +14,26 @@ describe('DashboardNavigation', () => {
     render(
       <DashboardNavigation
         sections={sections}
-        currentPath="/none" // nothing active yet
+        currentPath="/none"
         onNavItemClick={onNavClick}
         header={{
-          name: 'Test User',
-          address: '0x1234567890abcdef1234567890abcdef12345678',
-          avatarSrc: 'https://example.com/avatar.png',
+          activeAccount: {
+            id: 'user-1',
+            name: 'Test User',
+            address: '0x1234567890abcdef1234567890abcdef12345678',
+            avatarSrc: 'https://example.com/avatar.png',
+            type: 'user',
+          },
+          accounts: [
+            {
+              id: 'user-1',
+              name: 'Test User',
+              address: '0x1234567890abcdef1234567890abcdef12345678',
+              avatarSrc: 'https://example.com/avatar.png',
+              type: 'user',
+            },
+          ],
+          onAccountSelect: vi.fn(),
         }}
       />,
     );
@@ -41,9 +55,23 @@ describe('DashboardNavigation', () => {
         currentPath="/none"
         onNavItemClick={onNavClick}
         header={{
-          name: 'Test User',
-          address: '0x1234567890abcdef1234567890abcdef12345678',
-          avatarSrc: 'https://example.com/avatar.png',
+          activeAccount: {
+            id: 'user-1',
+            name: 'Test User',
+            address: '0x1234567890abcdef1234567890abcdef12345678',
+            avatarSrc: 'https://example.com/avatar.png',
+            type: 'user',
+          },
+          accounts: [
+            {
+              id: 'user-1',
+              name: 'Test User',
+              address: '0x1234567890abcdef1234567890abcdef12345678',
+              avatarSrc: 'https://example.com/avatar.png',
+              type: 'user',
+            },
+          ],
+          onAccountSelect: vi.fn(),
         }}
       />,
     );
@@ -56,12 +84,26 @@ describe('DashboardNavigation', () => {
     render(
       <DashboardNavigation
         sections={sections}
-        currentPath={firstItem.path}
+        currentPath="/none"
         onNavItemClick={onNavClick}
         header={{
-          name: 'Test User',
-          address: '0x1234567890abcdef1234567890abcdef12345678',
-          avatarSrc: 'https://example.com/avatar.png',
+          activeAccount: {
+            id: 'user-1',
+            name: 'Test User',
+            address: '0x1234567890abcdef1234567890abcdef12345678',
+            avatarSrc: 'https://example.com/avatar.png',
+            type: 'user',
+          },
+          accounts: [
+            {
+              id: 'user-1',
+              name: 'Test User',
+              address: '0x1234567890abcdef1234567890abcdef12345678',
+              avatarSrc: 'https://example.com/avatar.png',
+              type: 'user',
+            },
+          ],
+          onAccountSelect: vi.fn(),
         }}
       />,
     );
@@ -76,12 +118,26 @@ describe('DashboardNavigation', () => {
     render(
       <DashboardNavigation
         sections={sections}
-        currentPath={firstItem.path}
+        currentPath="/none"
         onNavItemClick={onNavClick}
         header={{
-          name: 'Test User',
-          address: '0x1234567890abcdef1234567890abcdef12345678',
-          avatarSrc: 'https://example.com/avatar.png',
+          activeAccount: {
+            id: 'user-1',
+            name: 'Test User',
+            address: '0x1234567890abcdef1234567890abcdef12345678',
+            avatarSrc: 'https://example.com/avatar.png',
+            type: 'user',
+          },
+          accounts: [
+            {
+              id: 'user-1',
+              name: 'Test User',
+              address: '0x1234567890abcdef1234567890abcdef12345678',
+              avatarSrc: 'https://example.com/avatar.png',
+              type: 'user',
+            },
+          ],
+          onAccountSelect: vi.fn(),
         }}
       />,
     );

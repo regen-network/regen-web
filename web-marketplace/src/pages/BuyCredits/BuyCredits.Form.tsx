@@ -315,7 +315,7 @@ export const BuyCreditsForm = ({
         subscribeNewsletter,
         // followProject,
       } = values;
-      purchase({
+      await purchase({
         retiring,
         retirementReason,
         country,

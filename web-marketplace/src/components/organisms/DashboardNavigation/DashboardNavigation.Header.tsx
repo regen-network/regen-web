@@ -71,7 +71,7 @@ export const DashboardNavHeader: React.FC<DashboardNavHeaderData> = ({
             {short}
           </Body>
           <span className="inline-flex origin-center scale-[0.6]">
-            <CopyButton content={address} tooltipText="" toastText="Copied" />
+            <CopyButton content={address} tooltipText="" toastText="Copied!" />
           </span>
         </div>
 

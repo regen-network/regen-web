@@ -16,4 +16,11 @@ export type DashboardNavigationProps = {
   sections: DashboardNavigationSection[];
   currentPath: string;
   onNavItemClick: (path: string) => void;
+  header: DashboardNavHeaderData;
+};
+
+export type DashboardNavHeaderData = {
+  name: string;
+  address: string;
+  avatarSrc?: string;
 };

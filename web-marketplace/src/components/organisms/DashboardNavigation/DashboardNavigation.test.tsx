@@ -16,6 +16,11 @@ describe('DashboardNavigation', () => {
         sections={sections}
         currentPath="/none" // nothing active yet
         onNavItemClick={onNavClick}
+        header={{
+          name: 'Test User',
+          address: '0x1234567890abcdef1234567890abcdef12345678',
+          avatarSrc: 'https://example.com/avatar.png',
+        }}
       />,
     );
 
@@ -35,6 +40,11 @@ describe('DashboardNavigation', () => {
         sections={sections}
         currentPath="/none"
         onNavItemClick={onNavClick}
+        header={{
+          name: 'Test User',
+          address: '0x1234567890abcdef1234567890abcdef12345678',
+          avatarSrc: 'https://example.com/avatar.png',
+        }}
       />,
     );
 
@@ -48,6 +58,11 @@ describe('DashboardNavigation', () => {
         sections={sections}
         currentPath={firstItem.path}
         onNavItemClick={onNavClick}
+        header={{
+          name: 'Test User',
+          address: '0x1234567890abcdef1234567890abcdef12345678',
+          avatarSrc: 'https://example.com/avatar.png',
+        }}
       />,
     );
 
@@ -63,6 +78,11 @@ describe('DashboardNavigation', () => {
         sections={sections}
         currentPath={firstItem.path}
         onNavItemClick={onNavClick}
+        header={{
+          name: 'Test User',
+          address: '0x1234567890abcdef1234567890abcdef12345678',
+          avatarSrc: 'https://example.com/avatar.png',
+        }}
       />,
     );
 

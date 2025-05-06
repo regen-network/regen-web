@@ -4,37 +4,46 @@ import clsx from 'clsx';
 
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
+import { DashboardNavHeader } from './DashboardNavigation.Header';
 import { DashboardNavigationListItem } from './DashboardNavigation.ListItem';
 import { DashboardNavigationProps } from './DashboardNavigation.types';
 
-export const DashboardNavigation = ({
-  className = '',
+export const DashboardNavigation: React.FC<DashboardNavigationProps> = ({
+  className = 'p-25',
+  header,
   sections,
   currentPath,
   onNavItemClick,
-}: DashboardNavigationProps) => {
+}) => {
   const { _ } = useLingui();
 
   return (
     <nav
+      // eslint-disable-next-line lingui/no-unlocalized-strings
       aria-label="Dashboard side navigation"
       className={clsx(
         'relative flex w-[240px] flex-col overflow-y-auto border-r border-bc-neutral-100 bg-white',
         className,
       )}
     >
+      <DashboardNavHeader
+        name={header.name}
+        address={header.address}
+        avatarSrc={header.avatarSrc}
+      />
+
       {sections.map(section => (
-        <div key={section.heading} className="mb-6">
-          <h3 className="pb-2 text-xs font-extrabold uppercase tracking-wider text-bc-neutral-400">
+        <div key={section.heading}>
+          <h3 className="text-[12px] font-extrabold uppercase tracking-wider text-bc-neutral-400 my-3">
             {_(section.heading)}
           </h3>
 
-          <ul className="list-none flex flex-col gap-1 px-0">
+          <ul className="flex flex-col gap-1 list-none px-0 mt-0">
             {section.items.map(item => (
               <Fragment key={item.label}>
                 {item.disabled ? (
                   <InfoTooltip title={item.disabledTooltipText} arrow>
-                    <li>
+                    <li className="text-[12px]">
                       <DashboardNavigationListItem
                         item={item}
                         currentPath={currentPath}

@@ -20,17 +20,15 @@ export const DashboardNavigationListItem = ({
       type="button"
       onClick={() => onClick(item.path)}
       className={clsx(
-        /* layout */
-        'group flex w-full items-center h-48 gap-3 px-3 py-2 text-sm font-medium bg-transparent border-none transition-colors',
+        'group flex w-full items-center h-50 gap-3 pl-10 px-3 py-2 text-[14px] border-none transition-colors rounded-md',
 
-        /* colours */
         isActive
-          ? 'bg-bc-primary-100 text-bc-primary-900'
-          : 'text-bc-neutral-700 hover:bg-bc-neutral-200 hover:cursor-pointer',
+          ? 'bg-bc-neutral-200 text-bc-neutral-900 font-bold' // selected
+          : 'bg-transparent text-bc-neutral-700 font-medium hover:bg-bc-neutral-200 hover:cursor-pointer', // default
       )}
     >
       {item.icon && (
-        <span className="flex h-50 w-50 shrink-0 items-center justify-center">
+        <span className="flex h-6 w-6 shrink-0 items-center justify-center">
           {item.icon}
         </span>
       )}

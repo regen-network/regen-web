@@ -18,6 +18,11 @@ export const Default: StoryFn<typeof DashboardNavigation> = () => {
       sections={getDashboardNavigationSections({ showOrders: true })}
       currentPath={path}
       onNavItemClick={setPath}
+      header={{
+        name: 'Test User',
+        address: 'regen2324fghjklqwertyuiopasdfghjklqwertyuiop',
+        avatarSrc: 'https://i.pravatar.cc/300',
+      }}
     />
   );
 };

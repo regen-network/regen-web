@@ -27,6 +27,7 @@ import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
 
 import { getAccountUrl } from '../../../lib/block-explorer';
 import { OptimizedImage } from '../../atoms/OptimizedImage';
+import { MAXIMUM_FRACTION_DIGITS } from '../SellOrdersTable/SellOrdersTable.constants';
 import {
   PUT_BASKET_HREF,
   PUT_BASKET_LABEL,
@@ -121,7 +122,10 @@ export const BasketOverview: React.FC<
                 >
                   <BasketItem
                     label={_(msg`total amount`)}
-                    data={formatNumber({ num: totalAmount })}
+                    data={formatNumber({
+                      num: totalAmount,
+                      maximumFractionDigits: MAXIMUM_FRACTION_DIGITS,
+                    })}
                   />
                   <BasketItem
                     label="curator"

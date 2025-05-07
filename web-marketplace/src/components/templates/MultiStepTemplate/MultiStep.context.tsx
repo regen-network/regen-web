@@ -1,4 +1,12 @@
-import React from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
@@ -122,7 +130,7 @@ export function MultiStepProvider<T extends object>({
     handleActiveStep,
     goNext,
     goBack,
-  } = useSteps(steps.length, maxAllowedStep);
+  } = useSteps(steps, maxAllowedStep);
 
   const [resultStatus, setResultStatus] = React.useState<ResultStatus>();
 
@@ -249,8 +257,13 @@ function calculatePercentComplete(
   return (activeStep * 100) / numSteps;
 }
 
-function useSteps(numSteps: number, startStep?: number): StepManagement {
+function useSteps(steps: Step[], startStep?: number): StepManagement {
+  const numSteps = steps.length;
   const [activeStep, setActiveStep] = React.useState(startStep || 0);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const hasInitialized = useRef(false);
+  const lastStepFromUrl = useRef<number | null>(null);
 
   // derived states from activeStep
   const isLastStep = activeStep === numSteps - 1;
@@ -258,20 +271,102 @@ function useSteps(numSteps: number, startStep?: number): StepManagement {
   const percentComplete = calculatePercentComplete(numSteps, activeStep + 1);
 
   const handleActiveStep = (step: number): void => {
-    if (step > numSteps) return;
-    if (step < 0) return;
+    if (step > numSteps || step < 0) return;
     setActiveStep(step);
   };
 
-  const goNext = (): void => {
+  const goNext = useCallback((): void => {
     if (isLastStep) return;
     setActiveStep(prev => prev + 1);
-  };
+  }, [isLastStep]);
 
-  const goBack = (): void => {
+  const goBack = useCallback((): void => {
     if (activeStep === 0) return;
     setActiveStep(prev => prev - 1);
-  };
+  }, [activeStep]);
+
+  const getBasePath = useCallback(() => {
+    const path = location.pathname;
+
+    // Check if the current path contains any step ID and removes it if found
+    // to allow direct navigation to the different steps.
+    const stepMatch = steps.find(step => path.endsWith(`/${step.id}`));
+    if (stepMatch) {
+      return path.replace(new RegExp(`(/${stepMatch.id})$`), '');
+    }
+
+    return path;
+  }, [location.pathname, steps]);
+
+  const getStepPath = useCallback(
+    (stepIndex: number): string => {
+      const step = steps[stepIndex];
+      const path = getBasePath();
+
+      // Check if the current path already includes the step ID
+      if (step?.id && location.pathname.endsWith(`/${step.id}`)) {
+        return location.pathname;
+      }
+
+      // Append the step ID or step index to the base path
+      return `${path}/${step.id}`;
+    },
+    [steps, getBasePath, location.pathname],
+  );
+
+  // On mount, force‑redirect to initialStep
+  useLayoutEffect(() => {
+    if (!hasInitialized.current && startStep !== undefined) {
+      const path = getStepPath(startStep);
+      navigate(path, { replace: true });
+      hasInitialized.current = true;
+    }
+  }, [startStep, navigate, getStepPath]);
+
+  const { browserNavDirection, setBrowserNavDirection } =
+    useBrowserNavDirection();
+
+  // Sync state => URL on internal navigation
+  const pathToNavigate = useMemo(() => {
+    if (activeStep !== undefined) {
+      return getStepPath(activeStep);
+    }
+    return null;
+  }, [activeStep, getStepPath]);
+
+  useLayoutEffect(() => {
+    if (browserNavDirection.back || browserNavDirection.forward) {
+      // mark as handled so next UI nav still works
+      lastStepFromUrl.current = activeStep;
+      return;
+    }
+
+    if (
+      lastStepFromUrl.current !== activeStep &&
+      activeStep !== undefined &&
+      pathToNavigate
+    ) {
+      navigate(pathToNavigate, { replace: false });
+      lastStepFromUrl.current = activeStep;
+    }
+  }, [
+    navigate,
+    activeStep,
+    pathToNavigate,
+    browserNavDirection.back,
+    browserNavDirection.forward,
+  ]);
+
+  useEffect(() => {
+    if (browserNavDirection.back) {
+      goBack();
+      setBrowserNavDirection({ back: false, forward: false });
+    }
+    if (browserNavDirection.forward) {
+      goNext();
+      setBrowserNavDirection({ back: false, forward: false });
+    }
+  }, [goBack, goNext, browserNavDirection, setBrowserNavDirection]);
 
   return {
     activeStep,
@@ -282,4 +377,77 @@ function useSteps(numSteps: number, startStep?: number): StepManagement {
     goNext,
     goBack,
   };
+}
+
+/**
+ * useBrowserNavDirection
+ *
+ * Custom hook to detect browser back and forward button navigation.
+ * - Starts with both flags false on mount
+ * - Clears flags on any UI-driven navigation (pushState/replaceState)
+ * - Sets { back: true } or { forward: true } on popstate (back/forward button)
+ *
+ * @returns {{ back: boolean; forward: boolean }} Navigation direction flags
+ */
+export function useBrowserNavDirection() {
+  const [browserNavDirection, setBrowserNavDirection] = useState({
+    back: false,
+    forward: false,
+  });
+  const idxRef = useRef(0);
+
+  useEffect(() => {
+    const originalPush = window.history.pushState;
+    const originalReplace = window.history.replaceState;
+
+    // Initialize history index to 0
+    window.history.replaceState({ idx: 0 }, document.title);
+    idxRef.current = 0;
+
+    // Override pushState: clear flags and increment index
+    window.history.pushState = function (state, title, url) {
+      setBrowserNavDirection({ back: false, forward: false });
+      const newIdx = idxRef.current + 1;
+      idxRef.current = newIdx;
+      const newState = { ...(state || {}), idx: newIdx };
+      return originalPush.call(window.history, newState, title, url);
+    };
+
+    // Override replaceState: clear flags, preserve index
+    window.history.replaceState = function (state, title, url) {
+      setBrowserNavDirection({ back: false, forward: false });
+      const newState = { ...(state || {}), idx: idxRef.current };
+      return originalReplace.call(window.history, newState, title, url);
+    };
+
+    interface HistoryState {
+      idx: number;
+    }
+
+    const onPopState = (event: PopStateEvent): void => {
+      const state = event.state as HistoryState | null;
+      if (state && typeof state.idx === 'number') {
+        const newIdx = state.idx;
+        if (newIdx < idxRef.current) {
+          setBrowserNavDirection({ back: true, forward: false });
+        } else if (newIdx > idxRef.current) {
+          setBrowserNavDirection({ back: false, forward: true });
+        }
+        idxRef.current = newIdx;
+      } else {
+        // Treat unknown popstate as UI navigation
+        setBrowserNavDirection({ back: false, forward: false });
+      }
+    };
+
+    window.addEventListener('popstate', onPopState);
+
+    return () => {
+      window.removeEventListener('popstate', onPopState);
+      window.history.pushState = originalPush;
+      window.history.replaceState = originalReplace;
+    };
+  }, []);
+
+  return { browserNavDirection, setBrowserNavDirection };
 }

@@ -131,6 +131,7 @@ export const BuyCreditsForm = ({
   const location = useLocation();
   const warningModalContent = useRef<BuyWarningModalContent | undefined>();
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
+  const referrerRef = useRef<string | undefined>(location.state?.referrer);
 
   const setWarningBannerTextAtom = useSetAtom(warningBannerTextAtom);
   const setConnectWalletModal = useSetAtom(connectWalletModalAtom);
@@ -421,8 +422,8 @@ export const BuyCreditsForm = ({
             allowedDenoms={allowedDenoms}
             creditTypePrecision={creditTypePrecision}
             onPrev={
-              window.history.state && window.history.state.idx > 0
-                ? () => navigate(-1)
+              referrerRef.current
+                ? () => navigate(referrerRef.current!)
                 : undefined
             }
             initialValues={{

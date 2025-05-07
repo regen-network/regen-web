@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAtom, useSetAtom } from 'jotai';
 
 import {
@@ -18,6 +18,7 @@ type OnBuyButtonClickParams = {
 };
 export const useOnBuyButtonClick = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const setChooseHowToPurchaseModal = useSetAtom(chooseHowToPurchaseModalAtom);
@@ -37,7 +38,11 @@ export const useOnBuyButtonClick = () => {
       ) {
         // so we can always go to the buy page,
         // no matter if the user is logged in/connected to a wallet or not
-        navigate(`/project/${projectId}/buy`);
+        navigate(`/project/${projectId}/buy`, {
+          state: {
+            referrer: location.pathname + location.search,
+          },
+        });
       } else {
         if (!activeWalletAddr) {
           // no connected wallet address
@@ -47,7 +52,11 @@ export const useOnBuyButtonClick = () => {
           });
         } else {
           if (isConnected) {
-            navigate(`/project/${projectId}/buy`);
+            navigate(`/project/${projectId}/buy`, {
+              state: {
+                referrer: location.pathname + location.search,
+              },
+            });
           } else {
             // user logged in with web2 but not connected to the wallet address associated to his/er account
             setBuyFromProjectIdAtom(projectId);
@@ -59,6 +68,8 @@ export const useOnBuyButtonClick = () => {
     [
       activeWalletAddr,
       isConnected,
+      location.pathname,
+      location.search,
       navigate,
       setBuyFromProjectIdAtom,
       setChooseHowToPurchaseModal,

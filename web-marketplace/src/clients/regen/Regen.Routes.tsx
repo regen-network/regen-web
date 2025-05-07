@@ -168,6 +168,7 @@ export const getRegenRoutes = ({
         />
         <Route path="verify-email" element={<VerifyEmail />} />
         <Route path="add" element={<Additionality />} />
+        {/* TODO: should this route be deleted? */}
         <Route
           path="create-methodology"
           element={<Navigate to="/" replace />}
@@ -178,6 +179,7 @@ export const getRegenRoutes = ({
           element={<CreateCreditClassInfo />}
         />
         <Route path="project-developers" element={<LandStewards />} />
+        {/* TODO: should this route be deleted? */}
         <Route
           path="methodology-review-process"
           element={<Navigate to="/" replace />}
@@ -201,18 +203,28 @@ export const getRegenRoutes = ({
               queryClient: reactQueryClient,
               apolloClientFactory,
             })}
-          ></Route>
+          />
+          <Route
+            path=":projectId/buy"
+            element={<BuyCredits />}
+            loader={buyCreditsLoader({
+              queryClient: reactQueryClient,
+              apolloClientFactory,
+              address,
+              languageCode,
+            })}
+          />
+          <Route
+            path=":projectId/buy/:stepId"
+            element={<BuyCredits />}
+            loader={buyCreditsLoader({
+              queryClient: reactQueryClient,
+              apolloClientFactory,
+              address,
+              languageCode,
+            })}
+          />
         </Route>
-        <Route
-          path="project/:projectId/buy"
-          element={<BuyCredits />}
-          loader={buyCreditsLoader({
-            queryClient: reactQueryClient,
-            apolloClientFactory,
-            address,
-            languageCode,
-          })}
-        />
         <Route
           path="post/:iri"
           element={<Post />}
@@ -272,7 +284,12 @@ export const getRegenRoutes = ({
         <Route
           path="ecocredits/create-batch"
           element={<KeplrRoute component={CreateBatch} />}
-        />
+        >
+          <Route
+            path=":step"
+            element={<KeplrRoute component={CreateBatch} />}
+          />
+        </Route>
         <Route path="baskets/:basketDenom" element={<BasketDetails />} />
         <Route path="credit-batches/:batchDenom" element={<BatchDetails />} />
         <Route path="project-pages">

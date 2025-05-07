@@ -42,7 +42,7 @@ export const BuyCredits = () => {
     noProjectFound,
   } = useGetProject();
 
-  useNavigateToSlug(slug, '/buy');
+  const isRedirectingToSlug = useNavigateToSlug(slug, '/buy');
 
   const [paymentOption, setPaymentOption] = useAtom(paymentOptionAtom);
   const cardDetailsMissing = useAtomValue(cardDetailsMissingAtom);
@@ -94,48 +94,53 @@ export const BuyCredits = () => {
 
   return (
     <WithLoader
-      isLoading={loadingBuySellOrders || loadingSanityProject}
+      isLoading={
+        loadingBuySellOrders ||
+        loadingSanityProject ||
+        // If there is a slug we need to wait for the redirection to finish before
+        // rendering the MultiStepTemplate, otherwise its navigation uses the
+        // projectId instead of the slug.
+        isRedirectingToSlug
+      }
       className="flex w-full items-center justify-center h-[500px]"
     >
-      <>
-        <MultiStepTemplate
-          formId={formModel.formId}
-          steps={formModel.steps}
-          initialValues={{}}
-          classes={{ formWrap: 'max-w-[942px]', root: 'pb-0 sm:pb-[200px]' }}
-          forceStep={
-            paymentOption === PAYMENT_OPTIONS.CARD &&
-            cardDetailsMissing &&
-            maxAllowedStep === 2
-              ? 1
-              : undefined
-          }
-        >
-          <BuyCreditsForm
-            retiring={retiring}
-            setRetiring={setRetiring}
-            cardSellOrders={cardSellOrders}
-            cryptoSellOrders={sellOrders}
-            creditTypeAbbrev={creditClassOnChain?.class?.creditTypeAbbrev}
-            projectHref={`/project/${
-              offChainProject?.slug ??
-              offChainProject?.onChainId ??
-              onChainProjectId
-            }`}
-            confirmationTokenId={confirmationTokenId}
-            setConfirmationTokenId={setConfirmationTokenId}
-            paymentMethodId={paymentMethodId}
-            setPaymentMethodId={setPaymentMethodId}
-            setCardDetails={setCardDetails}
-            cardDetails={cardDetails}
-            project={projectsWithOrderData[0]}
-            projectId={projectId}
-            loadingSanityProject={loadingSanityProject}
-            isBuyFlowDisabled={isBuyFlowDisabled}
-            loadingBuySellOrders={loadingBuySellOrders}
-          />
-        </MultiStepTemplate>
-      </>
+      <MultiStepTemplate
+        formId={formModel.formId}
+        steps={formModel.steps}
+        initialValues={{}}
+        classes={{ formWrap: 'max-w-[942px]', root: 'pb-0 sm:pb-[200px]' }}
+        forceStep={
+          paymentOption === PAYMENT_OPTIONS.CARD &&
+          cardDetailsMissing &&
+          maxAllowedStep === 2
+            ? 1
+            : undefined
+        }
+      >
+        <BuyCreditsForm
+          retiring={retiring}
+          setRetiring={setRetiring}
+          cardSellOrders={cardSellOrders}
+          cryptoSellOrders={sellOrders}
+          creditTypeAbbrev={creditClassOnChain?.class?.creditTypeAbbrev}
+          projectHref={`/project/${
+            offChainProject?.slug ??
+            offChainProject?.onChainId ??
+            onChainProjectId
+          }`}
+          confirmationTokenId={confirmationTokenId}
+          setConfirmationTokenId={setConfirmationTokenId}
+          paymentMethodId={paymentMethodId}
+          setPaymentMethodId={setPaymentMethodId}
+          setCardDetails={setCardDetails}
+          cardDetails={cardDetails}
+          project={projectsWithOrderData[0]}
+          projectId={projectId}
+          loadingSanityProject={loadingSanityProject}
+          isBuyFlowDisabled={isBuyFlowDisabled}
+          loadingBuySellOrders={loadingBuySellOrders}
+        />
+      </MultiStepTemplate>
     </WithLoader>
   );
 };

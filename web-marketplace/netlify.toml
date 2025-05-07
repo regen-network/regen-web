@@ -10,7 +10,7 @@ VITE_BRIDGE_CREDIT_CLASS_ID = "C03"
 VITE_GA_MEASUREMENT_ID = "G-6ZGJM8JXYN"
 VITE_TOUCAN_LINK = "https://toucan.earth/overview?chainId=137"
 VITE_SKIPPED_CLASS_ID = "C01"
-VITE_NODE_ENV = "production"
+VITE_DEPLOY_CONTEXT = "production"
 
 [context.dev.environment]
 VITE_SANITY_TAG = "default"
@@ -26,7 +26,7 @@ VITE_BRIDGE_API_URI = "https://toucan-bridge-staging.herokuapp.com"
 VITE_BRIDGE_CREDIT_CLASS_ID = "C56"
 VITE_BRIDGE = "true"
 VITE_SKIPPED_CLASS_ID = ""
-VITE_NODE_ENV = "development"
+VITE_DEPLOY_CONTEXT = "development"
 
 [context.deploy-preview.environment]
 VITE_SANITY_DATASET = "staging"
@@ -42,7 +42,7 @@ VITE_BRIDGE_CREDIT_CLASS_ID = "C56"
 VITE_BRIDGE = "true"
 VITE_SKIPPED_CLASS_ID = ""
 VITE_ANALYTICS_ENABLED = "true"
-VITE_NODE_ENV = "development"
+VITE_DEPLOY_CONTEXT = "development"
 
 [build.environment]
 NODE_OPTIONS = "--max-old-space-size=10216"

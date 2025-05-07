@@ -30,16 +30,11 @@ type Params = {
  */
 export default function useQueryBalances({ address }: Params): {
   balancesResponse: QueryBalancesResponse | undefined | void;
-  fetchBalances: FetchBalances;
   isLoadingBalances: boolean;
 } {
   const { queryClient } = useLedger();
 
-  const {
-    data: balancesResponse,
-    refetch,
-    isFetching: isLoadingBalances,
-  } = useQuery(
+  const { data: balancesResponse, isFetching: isLoadingBalances } = useQuery(
     getBalancesQuery({
       client: queryClient,
       request: {
@@ -50,11 +45,5 @@ export default function useQueryBalances({ address }: Params): {
     }),
   );
 
-  const fetchBalances = async (): Promise<
-    QueryBalancesResponse | undefined | void
-  > => {
-    await refetch();
-  };
-
-  return { balancesResponse, fetchBalances, isLoadingBalances };
+  return { balancesResponse, isLoadingBalances };
 }

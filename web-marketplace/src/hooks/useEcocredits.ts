@@ -11,8 +11,10 @@ import { TablePaginationParams } from 'web-components/src/components/table/Actio
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { getBalancesQueryKey } from 'lib/queries/react-query/ecocredit/getBalancesQuery/getBalancesQuery.utils';
 import { getBatchesQuery } from 'lib/queries/react-query/ecocredit/getBatchesQuery/getBatchesQuery';
 import { getEcocreditsQuery } from 'lib/queries/react-query/ecocredit/getEcocreditsQuery/getEcocreditsQuery';
+import { getEcocreditsQueryKey } from 'lib/queries/react-query/ecocredit/getEcocreditsQuery/getEcocreditsQuery.utils';
 
 import { useLedger } from '../ledger';
 import { client as sanityClient } from '../lib/clients/sanity';
@@ -77,7 +79,7 @@ export default function useEcocredits({
     }),
   );
 
-  const { balancesResponse, fetchBalances } = useQueryBalances({
+  const { balancesResponse } = useQueryBalances({
     address,
   });
 
@@ -113,8 +115,6 @@ export default function useEcocredits({
     sanityCreditClassData,
     creditClassId,
   ]);
-
-  const queryKey = ['ecocredits', address, paginationParams, creditClassId];
 
   const ecocreditsQuery = useMemo(
     () =>
@@ -154,8 +154,20 @@ export default function useEcocredits({
 
   const reloadBalances = async (): Promise<void> => {
     if (!address) return;
-    await fetchBalances({ address });
-    await reactQueryClient.invalidateQueries(queryKey);
+    await reactQueryClient.invalidateQueries(
+      getBalancesQueryKey(
+        address,
+        paginationParams?.offset ?? 0,
+        paginationParams?.rowsPerPage ?? 0,
+      ),
+    );
+    await reactQueryClient.invalidateQueries(
+      getEcocreditsQueryKey({
+        address,
+        paginationParams,
+        creditClassId,
+      }),
+    );
   };
 
   return {

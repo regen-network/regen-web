@@ -10,7 +10,7 @@
       "../node_modules/@types/",
       "../node_modules"
     ],
-    "allowJs": false,
+    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -22,16 +22,25 @@
     "isolatedModules": true,
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "baseUrl": "./src",
     "paths": {
       "test/*": ["../test/*"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "incremental": true
   },
   "include": [
     "test",
     "src",
     "types/url-search-params-polyfill.d.ts",
-    "lib/rdf/types/rdf-validate-shacl/index.d.ts"
-  ]
+    "lib/rdf/types/rdf-validate-shacl/index.d.ts",
+    "./dist/types/**/*.ts",
+    "./next-env.d.ts"
+  ],
+  "exclude": ["node_modules"]
 }

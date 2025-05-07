@@ -1,7 +1,6 @@
 import { Trans } from '@lingui/macro';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
-import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 
 import { useAuth } from 'lib/auth/auth';
 

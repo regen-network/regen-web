@@ -32,6 +32,7 @@ import { homeLoader } from 'legacy-pages/Home/Home.loader';
 import { storefrontLoader } from 'legacy-pages/Marketplace/Storefront/Storefront.loader';
 import { ProfileEditMain } from 'legacy-pages/ProfileEdit/ProfileEdit.Main';
 import { ProfileEditSettings } from 'legacy-pages/ProfileEdit/ProfileEdit.Settings';
+import { ProjectMetadata } from 'legacy-pages/ProjectMetadata/ProjectMetadata';
 import { projectsLoader } from 'legacy-pages/Projects/AllProjects/AllProjects.loader';
 import Settings from 'legacy-pages/Settings';
 import { safeLazy } from 'utils/safeLazy';
@@ -42,15 +43,13 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { KeplrRoute } from 'components/atoms';
 import { AuthRoute } from 'components/atoms/AuthRoute';
 import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { registryLayoutLoader } from 'components/organisms/RegistryLayout/RegistryLayout.loader';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
-
-import { KeplrRoute } from '../../components/atoms';
-import { ProjectMetadata } from '../../legacy-pages/ProjectMetadata/ProjectMetadata';
 
 const Additionality = safeLazy(
   () => import('../../legacy-pages/Additionality'),

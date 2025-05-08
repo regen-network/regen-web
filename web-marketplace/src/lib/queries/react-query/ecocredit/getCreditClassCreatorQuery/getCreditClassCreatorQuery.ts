@@ -20,10 +20,5 @@ export const getCreditClassCreatorQuery = ({
     }
     return apiParams.allowedClassCreators.includes(request.activeAddress!);
   },
-  // never refetch automatically
-  staleTime: Infinity,
-  refetchOnMount: false,
-  refetchOnWindowFocus: false,
-  refetchOnReconnect: false,
   ...params,
 });

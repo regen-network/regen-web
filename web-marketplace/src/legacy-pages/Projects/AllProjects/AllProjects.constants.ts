@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const SOLD_OUT_TOOLTIP = msg`These credits are currently sold out. More may become available in the future.`;
 export const NO_CREDITS_TOOLTIP = msg`There are currently no open sell orders for this project.`;

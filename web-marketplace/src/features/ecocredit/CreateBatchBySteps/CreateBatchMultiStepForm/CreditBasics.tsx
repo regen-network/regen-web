@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { msg, Trans, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box, IconButton, Link } from '@mui/material';
 import { isPast } from 'date-fns';
 import { Field, FieldArray, useFormikContext } from 'formik';

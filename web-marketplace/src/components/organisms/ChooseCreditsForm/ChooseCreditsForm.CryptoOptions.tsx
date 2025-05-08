@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useLingui } from '@lingui/react';
 import { cryptoOptions } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 

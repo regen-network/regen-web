@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';

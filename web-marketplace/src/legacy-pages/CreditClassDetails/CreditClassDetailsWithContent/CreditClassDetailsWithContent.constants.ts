@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const CREDIT_CLASS_TITLE = msg`Yes, I'm interested in buying credits for myself or my organization!`;
 export const CREDIT_CLASS_NAME_LABEL = msg`Your full name`;

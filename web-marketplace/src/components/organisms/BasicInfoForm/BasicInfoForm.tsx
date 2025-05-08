@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-import { msg, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';

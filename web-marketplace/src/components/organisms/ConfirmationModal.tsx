@@ -1,5 +1,7 @@
 import React from 'react';
-import { msg, Trans, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Avatar, Box, Link } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 

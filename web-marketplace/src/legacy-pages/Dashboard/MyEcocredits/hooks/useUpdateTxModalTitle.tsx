@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
 import { UseStateSetter } from 'types/react/use-state';

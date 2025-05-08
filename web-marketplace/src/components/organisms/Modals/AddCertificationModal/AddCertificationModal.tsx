@@ -1,5 +1,6 @@
 import React from 'react';
-import { msg, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 
 import { FormModalTemplate } from 'web-components/src/components/modal/FormModalTemplate';
 import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';

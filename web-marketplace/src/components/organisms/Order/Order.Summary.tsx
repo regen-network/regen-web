@@ -1,4 +1,6 @@
-import { msg, Trans, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
 
 import { BlockchainIcon } from 'web-components/src/components/icons/BlockchainIcon';

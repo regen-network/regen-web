@@ -1,5 +1,5 @@
 import { i18n } from '@lingui/core';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { NOT_SUPPORTED_TOOLTIP_TEXT } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';

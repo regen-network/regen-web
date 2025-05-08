@@ -1,8 +1,10 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { msg, Trans, useLingui } from '@lingui/react';
-import { debounce } from 'lodash';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { BuyCreditsSchemaTypes } from 'legacy-pages/BuyCredits/BuyCredits.types';
+import { debounce } from 'lodash';
 
 import Card from 'web-components/src/components/cards/Card';
 import SelectTextField from 'web-components/src/components/inputs/new/SelectTextField/SelectTextField';

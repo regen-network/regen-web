@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useLingui } from '@lingui/react';
 import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
 import { getClientConfig } from 'clients/Clients.config';

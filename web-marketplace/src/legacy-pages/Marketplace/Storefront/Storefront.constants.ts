@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const BUY_SELL_ORDER_TITLE = msg`Buy`;
 export const BUY_SELL_ORDER_ACTION = msg`BUY`;

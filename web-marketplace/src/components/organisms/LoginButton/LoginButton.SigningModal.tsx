@@ -1,4 +1,4 @@
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 
 import { Center } from 'web-components/src/components/box';
 import RegenModal from 'web-components/src/components/modal';

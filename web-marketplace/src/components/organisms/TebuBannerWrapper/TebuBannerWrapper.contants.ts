@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 import { LinkType } from 'web-components/src/types/shared/linkType';
 

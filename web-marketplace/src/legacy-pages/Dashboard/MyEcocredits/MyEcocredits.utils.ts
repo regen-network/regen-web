@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { AllowedDenom } from '@regen-network/api/regen/ecocredit/marketplace/v1/state';
 import { BatchBalanceInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 

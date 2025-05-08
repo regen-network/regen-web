@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const ERROR_TIMEOUT = 5000;
 export const CHOOSE_CREDIT_CLASS_DESCRIPTION = msg`We recommend choosing a credit class and creating an on chain project if possible.`;

@@ -1,6 +1,7 @@
 import { ChangeEvent, FocusEvent, lazy, useCallback } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { msg, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { useAtomValue } from 'jotai';
 import { paymentOptionAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';

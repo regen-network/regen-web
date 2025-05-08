@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/material';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';

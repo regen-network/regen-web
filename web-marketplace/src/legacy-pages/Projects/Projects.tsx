@@ -6,7 +6,9 @@ import {
   useParams,
   useSearchParams,
 } from 'react-router-dom';
-import { msg, Trans, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
 import cn from 'classnames';
 import { useAtom, useSetAtom } from 'jotai';

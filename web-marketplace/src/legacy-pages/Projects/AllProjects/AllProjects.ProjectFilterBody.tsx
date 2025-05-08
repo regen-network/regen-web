@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { msg, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { useAtom, useAtomValue } from 'jotai';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';

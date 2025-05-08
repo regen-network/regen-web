@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
-import { msg, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { Grid, TooltipProps } from '@mui/material';
 
 import { CollapseList } from 'web-components/src/components/organisms/CollapseList/CollapseList';

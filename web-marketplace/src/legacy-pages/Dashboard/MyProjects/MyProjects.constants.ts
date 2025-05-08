@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const DRAFT_ID = 'draft';
 export const CREATE_POST = msg`+ create post`;

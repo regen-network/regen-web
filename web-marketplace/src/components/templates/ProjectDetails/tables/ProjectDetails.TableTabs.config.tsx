@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 

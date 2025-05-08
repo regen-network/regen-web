@@ -1,5 +1,5 @@
 import { isValidElement } from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 

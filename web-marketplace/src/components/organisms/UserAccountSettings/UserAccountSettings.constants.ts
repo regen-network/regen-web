@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const EMAIL_ADDED = msg`Log in email successfully added`;
 export const COPY_ADDRESS = msg`Copy address`;

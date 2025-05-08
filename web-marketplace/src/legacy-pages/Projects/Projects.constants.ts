@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const CRYPTO_BUYING_OPTION_ID = 'crypto';
 export const CRYPTO_BUYING_OPTION_NAME = msg`Crypto`;

@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { sortOptions } from 'legacy-pages/Projects/AllProjects/AllProjects.config';
-import { initialActiveFilters } from 'web-marketplace/src/old-pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils';
+import { initialActiveFilters } from 'web-marketplace/src/legacy-pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils';
 
 import { DEFAULT_COMMUNITY_PROJECTS_FILTER } from 'lib/env';
 

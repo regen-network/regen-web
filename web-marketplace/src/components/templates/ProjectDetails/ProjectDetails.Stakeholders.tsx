@@ -1,4 +1,6 @@
-import { msg, Trans, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 
 import { Account } from 'web-components/src/components/user/UserInfo';
 

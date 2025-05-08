@@ -1,4 +1,5 @@
-import { msg, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 
 import { SliderSection } from 'web-components/src/components/section/SliderSection';
 

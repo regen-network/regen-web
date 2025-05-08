@@ -1,6 +1,6 @@
 import { ChangeEvent, ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { useAtomValue } from 'jotai';
 
 import CreditCardIcon from 'web-components/src/components/icons/CreditCardIcon';

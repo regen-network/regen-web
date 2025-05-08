@@ -1,5 +1,6 @@
+import React from 'react';
 import { useLoaderData } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/material';
 import { NotFoundPage } from 'legacy-pages/NotFound/NotFound';
 

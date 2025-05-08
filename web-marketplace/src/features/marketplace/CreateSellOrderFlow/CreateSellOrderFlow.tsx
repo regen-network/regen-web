@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { msg, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import useCreateSellOrderSubmit from 'legacy-pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit';

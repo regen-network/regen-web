@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
-import { msg, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { regen } from '@regen-network/api';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';

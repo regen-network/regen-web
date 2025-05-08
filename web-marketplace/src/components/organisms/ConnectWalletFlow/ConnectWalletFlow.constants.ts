@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const ADDRESS_USED_ERROR = msg`This wallet address is already in use by another account.`;
 export const ADDRESS_USED_WITH_EMAIL_ERROR = msg`You cannot connect your account to this wallet address. This wallet address is already associated with another email address.`;

@@ -1,6 +1,6 @@
 import { MutableRefObject } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { msg, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 
 import { useStorage } from 'hooks';
 

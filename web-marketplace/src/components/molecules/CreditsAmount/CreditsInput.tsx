@@ -1,6 +1,8 @@
 import { ChangeEvent, FocusEvent, useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { msg, Trans, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { useAtomValue } from 'jotai';
 import { paymentOptionAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
 import { BuyCreditsSchemaTypes } from 'legacy-pages/BuyCredits/BuyCredits.types';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { msg, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { getProjectCreationPercentage } from 'legacy-pages/ProjectCreate/ProjectCreate.utils';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';

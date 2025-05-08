@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const PRIVATE_POST_TITLE = msg`This post has been made private by the project administrator.`;
 export const PRIVATE_POST_BODY = msg`Please contact the project admin to request access.`;

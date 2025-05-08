@@ -1,6 +1,8 @@
 import { useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { msg, Trans, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 

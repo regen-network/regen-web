@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { msg, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { useNavigateNext } from 'legacy-pages/ProjectCreate/hooks/useNavigateNext';
 import { useProjectEditContext } from 'legacy-pages/ProjectEdit';
 

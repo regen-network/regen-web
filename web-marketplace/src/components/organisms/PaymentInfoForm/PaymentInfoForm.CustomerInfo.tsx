@@ -1,5 +1,7 @@
 import { useFormContext, useWatch } from 'react-hook-form';
-import { msg, Trans, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { PAYMENT_OPTIONS } from 'legacy-pages/BuyCredits/BuyCredits.constants';
 import { PaymentOptionsType } from 'legacy-pages/BuyCredits/BuyCredits.types';
 

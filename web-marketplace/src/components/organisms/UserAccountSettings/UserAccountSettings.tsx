@@ -1,5 +1,7 @@
 import { useFormState } from 'react-hook-form';
-import { msg, Trans, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';

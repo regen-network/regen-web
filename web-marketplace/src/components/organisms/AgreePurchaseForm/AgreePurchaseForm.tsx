@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
-import { msg, Trans, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
 import { useAtom } from 'jotai';
 import {

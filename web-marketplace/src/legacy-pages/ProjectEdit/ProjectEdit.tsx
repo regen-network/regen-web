@@ -7,7 +7,9 @@ import {
 } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
-import { msg, Trans, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';

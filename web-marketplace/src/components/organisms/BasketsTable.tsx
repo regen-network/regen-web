@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
-import { msg, Trans, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box, Grid } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 

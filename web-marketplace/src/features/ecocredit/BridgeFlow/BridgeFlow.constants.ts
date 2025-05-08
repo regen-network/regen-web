@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const BRIDGE_HEADER = msg`Congrats! Your bridge has been initiated`;
 export const BRIDGE_TITLE = msg`Bridge`;

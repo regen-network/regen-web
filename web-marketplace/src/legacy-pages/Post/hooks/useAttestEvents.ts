@@ -3,7 +3,8 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { msg, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { TxResponse } from '@regen-network/api/cosmos/base/abci/v1beta1/abci';
 import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
 import {

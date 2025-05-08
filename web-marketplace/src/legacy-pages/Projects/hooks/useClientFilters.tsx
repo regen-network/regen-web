@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
-import { msg, useLingui } from '@lingui/react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
 import type { Filter } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';

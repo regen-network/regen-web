@@ -1,4 +1,4 @@
-import { plural } from '@lingui/react';
+import { plural } from '@lingui/core/macro';
 import Parser from '@rdfjs/parser-jsonld';
 import factory from 'rdf-ext';
 import DatasetExt from 'rdf-ext/lib/Dataset';
@@ -14,7 +14,6 @@ import {
 import {
   ANCHORED_PROJECT_CONTEXT,
   DEFAULT_PROJECT_CONTEXT,
-  QUDT_UNIT_MAP,
   UNANCHORED_PROJECT_CONTEXT,
   UNANCHORED_PROJECT_KEYS,
 } from './rdf.constants';

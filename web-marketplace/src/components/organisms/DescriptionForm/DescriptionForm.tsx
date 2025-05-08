@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
-import { msg, plural, useLingui } from '@lingui/react';
+import { msg, plural } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';

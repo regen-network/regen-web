@@ -1,5 +1,6 @@
+import { Trans } from "@lingui/react/macro";
+import { msg } from "@lingui/core/macro";
 import React from 'react';
-import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Avatar } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';

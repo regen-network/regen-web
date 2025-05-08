@@ -1,5 +1,6 @@
+import { Trans } from "@lingui/react/macro";
+import { msg } from "@lingui/core/macro";
 import { useMemo } from 'react';
-import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, CircularProgress } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';

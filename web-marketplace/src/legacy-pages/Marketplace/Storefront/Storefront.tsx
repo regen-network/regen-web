@@ -1,6 +1,7 @@
+import { Trans } from "@lingui/react/macro";
+import { msg } from "@lingui/core/macro";
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';

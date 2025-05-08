@@ -1,5 +1,6 @@
 import React from 'react';
-import { msg, plural, useLingui } from '@lingui/react';
+import { msg, plural } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 import { useAtom, useSetAtom } from 'jotai';
 import { basketDetailAtom } from 'legacy-pages/BasketDetails/BasketDetails.store';

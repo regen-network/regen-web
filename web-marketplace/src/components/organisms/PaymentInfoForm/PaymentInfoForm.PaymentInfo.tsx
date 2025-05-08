@@ -1,6 +1,7 @@
+import { Trans } from "@lingui/react/macro";
+import { msg } from "@lingui/core/macro";
 import { useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { PaymentMethod } from '@stripe/stripe-js';
 

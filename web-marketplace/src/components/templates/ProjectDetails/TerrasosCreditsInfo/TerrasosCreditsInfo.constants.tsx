@@ -1,5 +1,6 @@
+import { Trans } from "@lingui/react/macro";
+import { msg } from "@lingui/core/macro";
 import { MessageDescriptor } from '@lingui/core';
-import { msg, Trans } from '@lingui/macro';
 
 import { Level } from 'web-components/src/components/icons/terrasos/EcologicalConnectivityLevelIcon/EcologicalConnectivityLevelIcon';
 import { IucnType } from 'web-components/src/components/icons/terrasos/IucnRedCodeIcon';

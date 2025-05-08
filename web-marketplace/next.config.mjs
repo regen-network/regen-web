@@ -12,6 +12,7 @@ const nextConfig = {
         resourceRegExp: /^electron$/,
       }),
     );
+    config.externals.push('pino-pretty', 'lokijs', 'encoding');
     config.module.rules.push({
       test: /\.po$/,
       use: '@lingui/loader',

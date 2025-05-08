@@ -1,7 +1,8 @@
 import { MutableRefObject, useEffect, useMemo, useState } from 'react';
 import { SubmitHandler, useFieldArray, useWatch } from 'react-hook-form';
-import { msg, plural, Trans } from '@lingui/react';
+import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { MAPBOX_TOKEN } from 'config/globals';
 import { Feature, Point } from 'geojson';

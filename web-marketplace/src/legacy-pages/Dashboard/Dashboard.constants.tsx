@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from "@lingui/core/macro";
 
 import BridgeIcon from 'web-components/src/components/icons/BridgeIcon';
 import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';

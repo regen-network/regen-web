@@ -1,6 +1,7 @@
+import { Trans } from "@lingui/react/macro";
+import { msg } from "@lingui/core/macro";
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from 'tss-react/mui';

@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { Theme } from '@mui/material';
 
 import { HeaderColors } from 'web-components/src/components/header';

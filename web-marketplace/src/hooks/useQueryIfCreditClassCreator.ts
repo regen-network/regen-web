@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { useLedger } from 'ledger';
-import { queryParams } from 'lib/ecocredit/api';
+import { getCreditClassCreatorQuery } from 'lib/queries/react-query/ecocredit/getCreditClassCreatorQuery/getCreditClassCreatorQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 type Props = {
@@ -24,22 +24,13 @@ export function useQueryIfCreditClassCreator({ address }: Props): boolean {
   const walletAddress = wallet?.address;
   const activeAddress = address ?? walletAddress;
 
-  const { data: isCreator = false } = useQuery({
-    queryKey: ['creditClassCreator', activeAddress],
-    queryFn: () => queryParams({ client: queryClient! }),
-    enabled: !!activeAddress && !!queryClient,
-    select: ({ params }) => {
-      if (!params?.allowlistEnabled) {
-        return true;
-      }
-      return params?.allowedClassCreators.includes(activeAddress!);
-    },
-    // never refetch automatically
-    staleTime: Infinity,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-  });
+  const { data: isCreator = false } = useQuery(
+    getCreditClassCreatorQuery({
+      enabled: !!activeAddress && !!queryClient,
+      client: queryClient!,
+      request: { activeAddress: activeAddress as string },
+    }),
+  );
 
   return isCreator;
 }

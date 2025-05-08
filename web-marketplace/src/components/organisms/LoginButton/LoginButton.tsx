@@ -1,5 +1,4 @@
-import { msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 

@@ -7,12 +7,12 @@ import { EditButtonIcon } from 'web-components/src/components/buttons/EditButton
 import { EditableInput } from 'web-components/src/components/inputs/new/EditableInput/EditableInput';
 import { Title } from 'web-components/src/components/typography';
 
-import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
+import { paymentOptionAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import { PAYMENT_OPTIONS } from 'legacy-pages/BuyCredits/BuyCredits.constants';
 import {
   BuyCreditsSchemaTypes,
   CardDetails,
-} from 'pages/BuyCredits/BuyCredits.types';
+} from 'legacy-pages/BuyCredits/BuyCredits.types';
 import { NOT_ENOUGH_BALANCE } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.constants';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 

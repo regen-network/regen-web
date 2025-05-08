@@ -32,7 +32,7 @@ import {
 } from 'lib/constants/shared.constants';
 import { IMAGE_STORAGE_BASE_URL } from 'lib/env';
 
-import { useProjectEditContext } from 'pages';
+import { useProjectEditContext } from 'legacy-pages';
 import { DragAndDropLabel } from 'components/atoms/DragAndDropLabel';
 
 import { UPLOAD_IMAGE } from '../EditProfileForm/EditProfileForm.constants';

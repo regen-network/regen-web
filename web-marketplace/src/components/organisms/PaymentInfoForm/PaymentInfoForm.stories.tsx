@@ -13,7 +13,7 @@ export default {
 
 type Story = StoryObj<typeof PaymentInfoForm>;
 
-const stripeKey = import.meta.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY;
+const stripeKey = process.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY;
 
 const WrappedPaymentInfoForm = (args: PaymentInfoFormProps) => {
   const options = { amount: 1000, currency: 'usd', ...defaultStripeOptions };

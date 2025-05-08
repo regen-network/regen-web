@@ -1,5 +1,4 @@
-import { msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, useLingui } from '@lingui/react';
 import { Formik } from 'formik';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';

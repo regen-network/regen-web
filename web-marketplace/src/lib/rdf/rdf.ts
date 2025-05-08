@@ -1,4 +1,4 @@
-import { plural } from '@lingui/macro';
+import { plural } from '@lingui/react';
 import Parser from '@rdfjs/parser-jsonld';
 import factory from 'rdf-ext';
 import DatasetExt from 'rdf-ext/lib/Dataset';

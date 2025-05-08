@@ -1,23 +1,22 @@
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, Trans, useLingui } from '@lingui/react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
-
-import { warningBannerTextAtom } from 'lib/atoms/banner.atoms';
-
 import {
   paymentOptionAtom,
   spendingCapAtom,
-} from 'pages/BuyCredits/BuyCredits.atoms';
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
+} from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import { PAYMENT_OPTIONS } from 'legacy-pages/BuyCredits/BuyCredits.constants';
+import { BuyCreditsSchemaTypes } from 'legacy-pages/BuyCredits/BuyCredits.types';
 import {
   getCreditsAvailableBannerText,
   getOrderedSellOrders,
   resetCurrencyAndCredits,
-} from 'pages/BuyCredits/BuyCredits.utils';
+} from 'legacy-pages/BuyCredits/BuyCredits.utils';
+import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
+
+import { warningBannerTextAtom } from 'lib/atoms/banner.atoms';
+
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { findDisplayDenom } from '../DenomLabel/DenomLabel.utils';

@@ -6,7 +6,7 @@ import { Label } from 'web-components/src/components/typography';
 import { AccountType } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';
 
-import { DEFAULT_PROFILE_USER_AVATAR } from 'pages/ProfileEdit/ProfileEdit.constants';
+import { DEFAULT_PROFILE_USER_AVATAR } from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
 
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
 

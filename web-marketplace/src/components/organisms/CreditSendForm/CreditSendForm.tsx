@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useFieldArray, useFormState, useWatch } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, Trans, useLingui } from '@lingui/react';
 import { Box } from '@mui/system';
 import { makeStyles } from 'tss-react/mui';
 

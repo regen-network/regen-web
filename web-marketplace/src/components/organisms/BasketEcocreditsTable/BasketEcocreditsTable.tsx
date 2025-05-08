@@ -19,7 +19,7 @@ import {
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
 
-import { BasketBatchInfoWithBalance } from 'pages/BasketDetails/utils/normalizeBasketEcocredits';
+import { BasketBatchInfoWithBalance } from 'legacy-pages/BasketDetails/utils/normalizeBasketEcocredits';
 import { BreakText, GreyText, Link } from 'components/atoms';
 import { AccountLink } from 'components/atoms/AccountLink';
 import WithLoader from 'components/atoms/WithLoader';

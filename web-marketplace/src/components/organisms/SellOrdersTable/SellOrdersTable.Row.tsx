@@ -15,7 +15,7 @@ import DenomIcon from 'components/molecules/DenomIcon';
 import DenomLabel from 'components/molecules/DenomLabel';
 
 import { getAccountUrl } from '../../../lib/block-explorer';
-import { NormalizedSellOrder } from '../../../pages/Marketplace/Storefront/Storefront.types';
+import { NormalizedSellOrder } from '../../../legacy-pages/Marketplace/Storefront/Storefront.types';
 import { Link } from '../../atoms';
 import WithLoader from '../../atoms/WithLoader';
 import {

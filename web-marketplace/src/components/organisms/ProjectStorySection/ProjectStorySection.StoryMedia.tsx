@@ -1,4 +1,4 @@
-import ReactPlayer from 'react-player/es6';
+import ReactPlayer from 'react-player';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box, Grid } from '@mui/material';

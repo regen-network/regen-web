@@ -31,7 +31,7 @@ export const RegenProvider = () => {
           walletModal={LoginModalMobile}
           walletConnectOptions={{
             signClient: {
-              projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
+              projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
               relayUrl: WALLET_CONNECT_RELAY_URL,
               metadata: walletConnectClientMeta,
             },

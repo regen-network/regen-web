@@ -13,7 +13,7 @@ import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { getProjectCardButtonMapping } from 'lib/constants/shared.constants';
 
-import { useProjectEditContext } from 'pages';
+import { useProjectEditContext } from 'legacy-pages';
 
 interface Props {
   onSave?: () => void;

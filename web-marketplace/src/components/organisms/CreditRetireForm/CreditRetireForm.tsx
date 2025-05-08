@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useFieldArray, useFormState } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, Trans, useLingui } from '@lingui/react';
 import { Box } from '@mui/system';
 
 import { RetirementReminder } from 'web-components/src/components/form/CreditRetireForm';

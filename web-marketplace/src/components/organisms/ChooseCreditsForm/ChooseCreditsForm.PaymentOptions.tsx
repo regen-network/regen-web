@@ -9,10 +9,10 @@ import CryptoRegenIcon from 'web-components/src/components/icons/CryptoRegenIcon
 import { BuyBaseEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
+import { paymentOptionAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import { PAYMENT_OPTIONS } from 'legacy-pages/BuyCredits/BuyCredits.constants';
+import { PaymentOptionsType } from 'legacy-pages/BuyCredits/BuyCredits.types';
+import { ProjectWithOrderData } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 
 interface ChooseCreditButtonProps {
   children: ReactNode;

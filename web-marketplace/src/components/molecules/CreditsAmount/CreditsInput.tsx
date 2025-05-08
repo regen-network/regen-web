@@ -1,16 +1,15 @@
 import { ChangeEvent, FocusEvent, useCallback } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, Trans, useLingui } from '@lingui/react';
 import { useAtomValue } from 'jotai';
+import { paymentOptionAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import { BuyCreditsSchemaTypes } from 'legacy-pages/BuyCredits/BuyCredits.types';
+import { resetCurrencyAndCredits } from 'legacy-pages/BuyCredits/BuyCredits.utils';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import { LeafIcon } from 'web-components/src/components/icons/LeafIcon';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
-import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
-import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
-import { resetCurrencyAndCredits } from 'pages/BuyCredits/BuyCredits.utils';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { CREDITS_AMOUNT } from './CreditsAmount.constants';

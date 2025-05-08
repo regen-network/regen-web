@@ -10,9 +10,9 @@ import { deleteImage } from 'web-components/src/utils/s3';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { apiServerUrl } from 'lib/env';
 
-import { useCreateProjectContext } from 'pages/ProjectCreate';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
-import { useProjectEditContext } from 'pages/ProjectEdit';
+import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
+import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
+import { useProjectEditContext } from 'legacy-pages/ProjectEdit';
 import { ProjectPageFooter } from 'components/molecules';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';

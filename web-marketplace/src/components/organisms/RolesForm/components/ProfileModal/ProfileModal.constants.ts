@@ -4,7 +4,7 @@ import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_TYPE,
   DEFAULT_PROFILE_USER_AVATAR,
-} from 'pages/ProfileEdit/ProfileEdit.constants';
+} from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
 
 import { ProfileModalSchemaType } from './ProfileModal.schema';
 

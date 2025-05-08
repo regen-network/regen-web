@@ -1,7 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { Trans, useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
+import { buyFromProjectIdAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import {
+  BUYINGS_OPTIONS_FILTERS_PARAM,
+  CREDIT_CARD_BUYING_OPTION_ID,
+} from 'legacy-pages/Projects/Projects.constants';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import Card from 'web-components/src/components/cards/Card';
@@ -13,11 +17,6 @@ import {
 } from 'web-components/src/components/typography';
 import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
-import { buyFromProjectIdAtom } from 'pages/BuyCredits/BuyCredits.atoms';
-import {
-  BUYINGS_OPTIONS_FILTERS_PARAM,
-  CREDIT_CARD_BUYING_OPTION_ID,
-} from 'pages/Projects/Projects.constants';
 import { Link } from 'components/atoms';
 import { LoginButton } from 'components/organisms/LoginButton/LoginButton';
 

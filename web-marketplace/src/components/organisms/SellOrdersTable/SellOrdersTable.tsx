@@ -19,7 +19,7 @@ import {
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
 
-import { NormalizedSellOrder } from '../../../pages/Marketplace/Storefront/Storefront.types';
+import { NormalizedSellOrder } from '../../../legacy-pages/Marketplace/Storefront/Storefront.types';
 import { getSellOrdersRow } from './SellOrdersTable.config';
 import getSellOrdersTableRow from './SellOrdersTable.Row';
 

@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { tabsStyles } from 'styles/tabs';
 

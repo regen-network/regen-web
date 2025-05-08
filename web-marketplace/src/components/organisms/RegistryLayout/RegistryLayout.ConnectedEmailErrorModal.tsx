@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
-import { Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { Trans, useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';

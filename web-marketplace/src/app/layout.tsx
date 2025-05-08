@@ -1,8 +1,11 @@
-import type { Metadata } from 'next'
- 
+import type { Metadata } from 'next';
+
+import '../App.css';
+
+// TODO migrate rest of meta data from html bellow
 export const metadata: Metadata = {
   title: 'Regen Marketplace',
-}
+};
 
 export default function RootLayout({
   children,
@@ -16,7 +19,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
         {/* manifest.json provides metadata used when your web app is installed on a */}
         {/* user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/ */}
-        <link rel="manifest" href="/manifest.json" /> */}
+        <link rel="manifest" href="/manifest.json" />
 
         <link
           rel="stylesheet"

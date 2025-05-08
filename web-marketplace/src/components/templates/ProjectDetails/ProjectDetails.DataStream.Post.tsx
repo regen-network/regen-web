@@ -14,6 +14,17 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import { useQuery } from '@tanstack/react-query';
 import { Feature, Point } from 'geojson';
 import { useAtom, useSetAtom } from 'jotai';
+import { useAttestEvents } from 'legacy-pages/Post/hooks/useAttestEvents';
+import { useDelete } from 'legacy-pages/Post/hooks/useDelete';
+import { useSharePrivateLink } from 'legacy-pages/Post/hooks/useSharePrivateLink';
+import {
+  ADMIN,
+  DRAFT,
+  POST_IS_PRIVATE,
+  UNTITLED,
+} from 'legacy-pages/Post/Post.constants';
+import { DEFAULT_NAME } from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
+import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
 import { parse } from 'wellknown';
 
 import PostCard from 'web-components/src/components/cards/PostCard/PostCard';
@@ -41,17 +52,6 @@ import { LINK_PREFIX } from 'lib/env';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
-import { useAttestEvents } from 'pages/Post/hooks/useAttestEvents';
-import { useDelete } from 'pages/Post/hooks/useDelete';
-import { useSharePrivateLink } from 'pages/Post/hooks/useSharePrivateLink';
-import {
-  ADMIN,
-  DRAFT,
-  POST_IS_PRIVATE,
-  UNTITLED,
-} from 'pages/Post/Post.constants';
-import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { Link } from 'components/atoms';
 import { DeletePostWarningModal } from 'components/organisms/DeletePostWarningModal/DeletePostWarningModal';
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';

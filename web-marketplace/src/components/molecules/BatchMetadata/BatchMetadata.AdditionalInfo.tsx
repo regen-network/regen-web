@@ -1,5 +1,4 @@
-import { msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, useLingui } from '@lingui/react';
 
 import { CreditBatchMetadataIntersectionLD } from 'lib/db/types/json-ld';
 import {

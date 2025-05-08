@@ -4,6 +4,7 @@ import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
+import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 
 import { Body } from 'web-components/src/components/typography';
 
@@ -11,7 +12,6 @@ import { useLedger } from 'ledger';
 import { useAuth } from 'lib/auth/auth';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
 
-import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 
 import { useWallet } from '../../../lib/wallet/wallet';

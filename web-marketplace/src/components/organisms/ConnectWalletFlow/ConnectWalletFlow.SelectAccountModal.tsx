@@ -12,8 +12,8 @@ import { truncate } from 'web-components/src/utils/truncate';
 
 import { Account } from 'generated/graphql';
 
-import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+import { DEFAULT_NAME } from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
+import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
 
 import {
   CURRENT_ACCOUNT,

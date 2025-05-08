@@ -26,10 +26,10 @@ import { useTracker } from 'lib/tracker/useTracker';
 import {
   COMPLIANCE_MARKET,
   VOLUNTARY_MARKET,
-} from 'pages/Projects/AllProjects/AllProjects.constants';
-import { TerrasosCredits } from 'pages/Projects/AllProjects/AllProjects.TerrasosCredits';
-import { getCreditsTooltip } from 'pages/Projects/AllProjects/utils/getCreditsTooltip';
-import { getIsSoldOut } from 'pages/Projects/AllProjects/utils/getIsSoldOut';
+} from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
+import { TerrasosCredits } from 'legacy-pages/Projects/AllProjects/AllProjects.TerrasosCredits';
+import { getCreditsTooltip } from 'legacy-pages/Projects/AllProjects/utils/getCreditsTooltip';
+import { getIsSoldOut } from 'legacy-pages/Projects/AllProjects/utils/getIsSoldOut';
 import WithLoader from 'components/atoms/WithLoader';
 import BlockContentBody from 'components/molecules/BlockContentBody';
 

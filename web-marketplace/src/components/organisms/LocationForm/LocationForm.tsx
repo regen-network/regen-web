@@ -11,9 +11,9 @@ import { isGeocodingFeature } from 'web-components/src/components/inputs/new/Loc
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { REQUIRED_MESSAGE } from 'lib/constants/shared.constants';
 
-import { useProjectEditContext } from 'pages';
-import { useCreateProjectContext } from 'pages/ProjectCreate';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
+import { useProjectEditContext } from 'legacy-pages';
+import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
+import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';

@@ -1,6 +1,6 @@
 import { Location } from 'react-router-dom';
 
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
+import { ProjectWithOrderData } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 
 import { BuyModalEvent, Track } from './types';
 

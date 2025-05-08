@@ -16,9 +16,9 @@ export const Note: React.FC<
 > = ({ status, txHash }) => {
   switch (BRIDGED_STATUSES[status]) {
     case STATUS_COMPLETE:
-      return import.meta.env.VITE_TOUCAN_LINK ? (
+      return process.env.NEXT_PUBLIC_TOUCAN_LINK ? (
         // eslint-disable-next-line lingui/no-unlocalized-strings
-        <Link href={import.meta.env.VITE_TOUCAN_LINK}>{'toucan.earth'}</Link>
+        <Link href={process.env.NEXT_PUBLIC_TOUCAN_LINK}>{'toucan.earth'}</Link>
       ) : null;
     case STATUS_ERROR:
       return (

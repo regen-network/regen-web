@@ -1,18 +1,17 @@
 import { useEffect } from 'react';
 import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, Trans, useLingui } from '@lingui/react';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
 import { useAtom } from 'jotai';
+import {
+  cardDetailsMissingAtom,
+  resetBuyCreditsFormAtom,
+} from 'legacy-pages/BuyCredits/BuyCredits.atoms';
 
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
 import { Body } from 'web-components/src/components/typography/Body';
 
-import {
-  cardDetailsMissingAtom,
-  resetBuyCreditsFormAtom,
-} from 'pages/BuyCredits/BuyCredits.atoms';
 import AgreeErpaCheckbox from 'components/atoms/AgreeErpaCheckboxNew';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';

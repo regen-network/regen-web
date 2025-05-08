@@ -5,11 +5,12 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useAtom, useSetAtom } from 'jotai';
+import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
+import { SettingsSubmitProps } from 'legacy-pages/Settings/hooks/useSettingsSubmit';
 
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
 
@@ -17,13 +18,11 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 
-import { useCreateProjectContext } from 'pages/ProjectCreate';
-import { SettingsSubmitProps } from 'pages/Settings/hooks/useSettingsSubmit';
 import { DebouncedField } from 'components/molecules/Form/fields/DebouncedField';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
-import { useProjectEditContext } from '../../../pages/ProjectEdit';
+import { useProjectEditContext } from '../../../legacy-pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
 import { SLUG_DESCRIPTION, SLUG_TAKEN_ERROR } from './SettingsForm.constants';
 import {

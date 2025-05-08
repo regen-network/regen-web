@@ -2,14 +2,13 @@ import {
   QuerySellOrdersResponse,
   SellOrderInfo,
 } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
+import { getAskUsdAmount } from 'legacy-pages/Marketplace/Storefront/Storefront.utils';
 import uniq from 'lodash/uniq';
 import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
 
 import { FetchSimplePriceResponse } from 'lib/coingecko';
 import { DenomTraceWithHash } from 'lib/ibc/transfer/api';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
-
-import { getAskUsdAmount } from 'pages/Marketplace/Storefront/Storefront.utils';
 
 import { getDenomTraceByHashesQuery } from '../../../ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
 import { getFromCacheOrFetch } from '../../../utils/getFromCacheOrFetch';

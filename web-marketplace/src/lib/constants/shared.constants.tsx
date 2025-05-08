@@ -1,4 +1,4 @@
-import { msg, plural, Trans } from '@lingui/macro';
+import { msg, plural, Trans } from '@lingui/react';
 import { Box, LabelDisplayedRowsArgs, Link } from '@mui/material';
 
 import {

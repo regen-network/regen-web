@@ -4,6 +4,8 @@ import { useLingui } from '@lingui/react';
 import { Box, Grid, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import useImpact from 'legacy-pages/CreditClassDetails/hooks/useImpact';
+import { COMPLIANCE_MARKET } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
 
 import GlanceCard from 'web-components/src/components/cards/GlanceCard';
 import { ActionCard } from 'web-components/src/components/molecules/ActionCard/ActionCard';
@@ -31,8 +33,6 @@ import { getAllOffsetMethodQuery } from 'lib/queries/react-query/sanity/getAllOf
 import { getAllProjectRatingQuery } from 'lib/queries/react-query/sanity/getAllProjectRatingQuery/getAllProjectRatingQuery';
 import { getComplianceInfoQuery } from 'lib/queries/react-query/sanity/getComplianceInfoQuery/getComplianceInfoQuery';
 
-import useImpact from 'pages/CreditClassDetails/hooks/useImpact';
-import { COMPLIANCE_MARKET } from 'pages/Projects/AllProjects/AllProjects.constants';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,

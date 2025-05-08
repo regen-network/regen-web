@@ -1,5 +1,6 @@
 import { i18n } from '@lingui/core';
 import { msg } from '@lingui/macro';
+import { NOT_SUPPORTED_TOOLTIP_TEXT } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import { ShoppingBagIcon } from 'web-components/src/components/icons/ShoppingBagIcon';
@@ -7,8 +8,6 @@ import { ShoppingBagIcon } from 'web-components/src/components/icons/ShoppingBag
 // import { PaymentInfoIcon } from 'web-components/src/components/icons/PaymentInfoIcon';
 // import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
 import { UserMenuIcon } from 'web-components/src/components/icons/UserMenuIcon';
-
-import { NOT_SUPPORTED_TOOLTIP_TEXT } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 
 import {
   AdminNavigationItem,

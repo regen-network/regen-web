@@ -5,8 +5,8 @@ import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
-import { NotFoundPage } from 'pages/NotFound/NotFound';
+import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
+import { NotFoundPage } from 'legacy-pages/NotFound/NotFound';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 import { ProjectDenied } from '../../organisms/ProjectDenied/ProjectDenied';

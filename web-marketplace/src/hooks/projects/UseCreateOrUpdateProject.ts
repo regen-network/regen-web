@@ -16,7 +16,7 @@ import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { getUnanchoredProjectBaseMetadata } from 'lib/rdf';
 
-import { useProjectEditContext } from 'pages/ProjectEdit';
+import { useProjectEditContext } from 'legacy-pages/ProjectEdit';
 
 type CreateOrUpdateProjectParams = {
   offChainProjectId?: string;

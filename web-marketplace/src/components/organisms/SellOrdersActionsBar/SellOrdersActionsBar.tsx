@@ -1,8 +1,9 @@
 import { ReactNode, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, useLingui } from '@lingui/react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
+import { EDIT_PROJECT } from 'legacy-pages/ProjectEdit/ProjectEdit.constants';
+import { SOLD_OUT_TOOLTIP } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
 import { Buy1Event } from 'web-marketplace/src/lib/tracker/types';
 import { useTracker } from 'web-marketplace/src/lib/tracker/useTracker';
 
@@ -21,9 +22,6 @@ import {
 } from 'lib/constants/shared.constants';
 import { IS_REGEN } from 'lib/env';
 import { useWallet } from 'lib/wallet/wallet';
-
-import { EDIT_PROJECT } from 'pages/ProjectEdit/ProjectEdit.constants';
-import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constants';
 
 import {
   BOOK_CALL,

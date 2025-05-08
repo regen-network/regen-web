@@ -3,7 +3,7 @@ import { CardSellOrder } from 'web-marketplace/src/components/organisms/ChooseCr
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
-import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
+import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 
 import { AllowedDenoms } from '../DenomLabel/DenomLabel.utils';
 

@@ -13,7 +13,7 @@ import {
   CreditClassMetadataLD,
 } from 'lib/db/types/json-ld';
 
-import { getDataFromBatchDenomId } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
+import { getDataFromBatchDenomId } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 
 type Props = {
   retirement?: Maybe<RetirementFieldsFragment>;

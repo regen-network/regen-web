@@ -1,5 +1,4 @@
-import { msg, Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, Trans, useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { Field, FieldArray, Form, useFormikContext } from 'formik';
 

@@ -1,11 +1,10 @@
 import { MutableRefObject, useCallback } from 'react';
 import { useWallet } from '@cosmos-kit/react-lite';
 import { useSetAtom } from 'jotai';
+import { resetBuyCreditsFormAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import { BUY_CREDITS_FORM_PREFIX } from 'legacy-pages/BuyCredits/BuyCredits.constants';
 
 import { UseStateSetter } from 'types/react/use-state';
-
-import { resetBuyCreditsFormAtom } from 'pages/BuyCredits/BuyCredits.atoms';
-import { BUY_CREDITS_FORM_PREFIX } from 'pages/BuyCredits/BuyCredits.constants';
 
 import { Wallet } from '../wallet';
 import {

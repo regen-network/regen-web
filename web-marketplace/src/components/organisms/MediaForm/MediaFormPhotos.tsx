@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect, useMemo } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
-import { msg, plural, Trans } from '@lingui/macro';
+import { msg, plural, Trans } from '@lingui/react';
 import { useLingui } from '@lingui/react';
 import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
@@ -28,7 +28,7 @@ import {
   UPDATE,
 } from 'lib/constants/shared.constants';
 
-import { useProjectEditContext } from 'pages';
+import { useProjectEditContext } from 'legacy-pages';
 import { DragAndDropLabel } from 'components/atoms/DragAndDropLabel';
 
 import { apiUri } from '../../../lib/apiUri';

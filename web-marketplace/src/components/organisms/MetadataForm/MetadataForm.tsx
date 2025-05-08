@@ -1,9 +1,11 @@
 import React, { useEffect, useMemo } from 'react';
 import { useFormState } from 'react-hook-form';
-import { Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { Trans, useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
+import { useProjectEditContext } from 'legacy-pages';
+import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
+import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
 import ControlledFormLabel from 'web-components/src/components/form/ControlledFormLabel';
@@ -14,9 +16,6 @@ import { ShaclGraphByUriQuery } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { INVALID_JSON, REQUIRED_MESSAGE } from 'lib/constants/shared.constants';
 
-import { useProjectEditContext } from 'pages';
-import { useCreateProjectContext } from 'pages/ProjectCreate';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 

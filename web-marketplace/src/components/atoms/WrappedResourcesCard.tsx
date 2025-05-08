@@ -1,6 +1,5 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, useLingui } from '@lingui/react';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import ResourcesCard from 'web-components/src/components/cards/ResourcesCard';

@@ -1,17 +1,16 @@
 import { ChangeEvent, FocusEvent, lazy, useCallback } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { msg, useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { useAtomValue } from 'jotai';
+import { paymentOptionAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import { PAYMENT_OPTIONS } from 'legacy-pages/BuyCredits/BuyCredits.constants';
+import { BuyCreditsSchemaTypes } from 'legacy-pages/BuyCredits/BuyCredits.types';
+import { resetCurrencyAndCredits } from 'legacy-pages/BuyCredits/BuyCredits.utils';
 import { ChooseCreditsFormSchemaType } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
-import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
-import { resetCurrencyAndCredits } from 'pages/BuyCredits/BuyCredits.utils';
 import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 

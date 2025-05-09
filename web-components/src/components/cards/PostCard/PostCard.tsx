@@ -78,13 +78,6 @@ export default function PostCard({
         onEditDraft={onEditDraft}
         publicPost={publicPost}
       />
-      {!hasFile && (
-        <div className="absolute lg:right-[90px] top-[18px] lg:top-[26px]">
-          {!draftLabel && privacyLabel && <PrivateBadge label={privacyLabel} />}
-          {draftLabel && <DraftBadge label={draftLabel} />}
-        </div>
-      )}
-
       <Grid
         container
         sx={{
@@ -229,6 +222,22 @@ export default function PostCard({
                   <WhitepaperIcon className="h-[24px] w-[24px] ml-[7px]" />
                 </Box>
               )}
+            </Box>
+          </Grid>
+        )}
+        {!hasFile && (
+          <Grid item xs="auto">
+            <Box
+              sx={{
+                height: { xs: '5px', md: '40px' },
+                position: 'relative',
+                marginRight: '40px',
+              }}
+            >
+              {!draftLabel && privacyLabel && (
+                <PrivateBadge label={privacyLabel} />
+              )}
+              {draftLabel && <DraftBadge label={draftLabel} />}
             </Box>
           </Grid>
         )}

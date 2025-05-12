@@ -37,9 +37,6 @@ export const DashboardNavHeader: React.FC<DashboardNavHeaderData> = ({
     return () => document.removeEventListener('mousedown', close);
   }, [open]);
 
-  const profileText =
-    // eslint-disable-next-line lingui/no-unlocalized-strings
-    type === 'org' ? 'View org profile' : 'View personal profile';
   const profileHref =
     type === 'org'
       ? `/dashboard/org/${activeAccount.id}`
@@ -66,13 +63,11 @@ export const DashboardNavHeader: React.FC<DashboardNavHeaderData> = ({
           )}
         </button>
 
-        <div className="flex items-center">
+        <div className="flex items-center gap-5">
           <Body className="text-neutral-600 font-medium text-[12px]">
             {short}
           </Body>
-          <span className="inline-flex origin-center scale-[0.6]">
-            <CopyButton content={address} tooltipText="" toastText="Copied!" />
-          </span>
+            <CopyButton content={address} tooltipText="" toastText="Copied!" size={20} />
         </div>
 
         <Link
@@ -87,7 +82,7 @@ export const DashboardNavHeader: React.FC<DashboardNavHeaderData> = ({
             gap: '4px',
           }}
         >
-          {profileText}
+          View public profile
           <SmallArrowIcon className="h-12 w-12" />
         </Link>
       </div>

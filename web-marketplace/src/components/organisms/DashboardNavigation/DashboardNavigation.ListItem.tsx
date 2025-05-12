@@ -20,7 +20,7 @@ export const DashboardNavigationListItem = ({
       type="button"
       onClick={() => onClick(item.path)}
       className={clsx(
-        'group flex w-full items-center h-50 gap-3 pl-10 px-3 py-2 text-[14px] border-none transition-colors rounded-md',
+        'group flex w-full items-center h-50 gap-10 pl-10 px-3 py-2 text-[14px] border-none transition-colors rounded-md',
 
         isActive
           ? 'bg-bc-neutral-200 text-bc-neutral-900 font-bold' // selected

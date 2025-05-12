@@ -27,8 +27,13 @@ export type DashboardNavigationSection = {
 
 export type DashboardNavigationProps = {
   className?: string;
-  header: DashboardNavHeaderData;
-  sections: DashboardNavigationSection[];
+  header: {
+    activeAccount: AccountOption;
+    accounts: AccountOption[];
+    onAccountSelect: (id: string) => void;
+  };
   currentPath: string;
   onNavItemClick: (path: string) => void;
+  onLogout?: () => void;
 };
+

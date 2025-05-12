@@ -17,11 +17,13 @@ import { DashboardNavigationSection } from './DashboardNavigation.types';
 
 export function getDashboardNavigationSections(
   accountType: 'user' | 'org',
-  loginDisabled = false
+  loginDisabled = false,
+  collapsed = false // Add collapsed parameter
 ): DashboardNavigationSection[] {
   const baseSections: DashboardNavigationSection[] = [
     {
-      heading: i18n._(msg`Manage credits`),
+      // Use shortened heading when collapsed
+      heading: collapsed ? i18n._(msg`Credits`) : i18n._(msg`Manage credits`),
       items: [
         {
           label: i18n._(msg`Portfolio`),
@@ -48,7 +50,8 @@ export function getDashboardNavigationSections(
       ],
     },
     {
-      heading: i18n._(msg`Manage projects`),
+      // Use shortened heading when collapsed
+      heading: collapsed ? i18n._(msg`Projects`) : i18n._(msg`Manage projects`),
       items: [
         {
           label: i18n._(msg`Projects`),
@@ -104,7 +107,8 @@ export function getDashboardNavigationSections(
     sections = [
       ...baseSections,
       {
-        heading: i18n._(msg`Manage organization`),
+        // Use shortened heading when collapsed
+        heading: collapsed ? i18n._(msg`Org`) : i18n._(msg`Manage organization`),
         items: [
           {
             label: i18n._(msg`Edit org profile`),

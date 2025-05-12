@@ -1,3 +1,4 @@
+// src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -7,14 +8,18 @@ import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Body } from 'web-components/src/components/typography/Body';
 import { Subtitle } from 'web-components/src/components/typography/Subtitle';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
+import clsx from 'clsx';
 
 import { AccountSwitcherDropdown } from './DashboardNavigation.Dropdown';
 import { DashboardNavHeaderData } from './DashboardNavigation.types';
 
-export const DashboardNavHeader: React.FC<DashboardNavHeaderData> = ({
+export const DashboardNavHeader: React.FC<DashboardNavHeaderData & {
+  collapsed?: boolean;
+}> = ({
   activeAccount,
   accounts,
   onAccountSelect,
+  collapsed = false
 }) => {
   const { name, address, avatarSrc, type } = activeAccount;
   const short = `${address.slice(0, 8)}…${address.slice(-5)}`;
@@ -24,7 +29,7 @@ export const DashboardNavHeader: React.FC<DashboardNavHeaderData> = ({
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const close = (e: MouseEvent) => {
+    const handleClickOutside = (e: MouseEvent) => {
       if (
         open &&
         rootRef.current &&
@@ -33,8 +38,8 @@ export const DashboardNavHeader: React.FC<DashboardNavHeaderData> = ({
         setOpen(false);
       }
     };
-    document.addEventListener('mousedown', close);
-    return () => document.removeEventListener('mousedown', close);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [open]);
 
   const profileHref =
@@ -45,48 +50,64 @@ export const DashboardNavHeader: React.FC<DashboardNavHeaderData> = ({
   return (
     <div
       ref={rootRef}
-      className="relative flex items-start gap-15 px-3 py-4 mb-20"
+      className={clsx(
+        "relative flex items-start",
+        collapsed ? "justify-center mb-[64px]" : "gap-15 px-3 py-4 mb-[20px]"
+      )}
     >
-      <UserAvatar src={avatarSrc} size="project" alt={name} />
+      <UserAvatar 
+        src={avatarSrc} 
+        alt={name} 
+      />
+      
+      {/* Only show detail content when not collapsed */}
+      {!collapsed && (
+        <div className="flex flex-col">
+          <button
+            type="button"
+            className={clsx(
+              'flex items-center gap-10 bg-transparent border-none pl-0',
+              canSwitch ? 'cursor-pointer' : 'cursor-default'
+            )}
+            onClick={() => canSwitch && setOpen(o => !o)}
+          >
+            <Subtitle className="text-[16px] text-bc-neutral-900 pt-5">
+              {name}
+            </Subtitle>
+            {canSwitch && (
+              <BreadcrumbIcon className="h-[15px] w-[15px] pt-5 text-bc-neutral-400" />
+            )}
+          </button>
 
-      <div className="flex flex-col">
-        <button
-          type="button"
-          className="flex items-center gap-10 bg-transparent border-none cursor-pointer pl-0"
-          onClick={() => canSwitch && setOpen(o => !o)}
-        >
-          <Subtitle className="text-[16px] text-bc-neutral-900 pt-5">
-            {name}
-          </Subtitle>
-          {canSwitch && (
-            <BreadcrumbIcon className="h-[15px] w-[15px] pt-5 text-bc-neutral-400" />
-          )}
-        </button>
+          <div className="flex items-center gap-5">
+            <Body className="text-neutral-600 font-medium text-[12px]">
+              {short}
+            </Body>
+            <CopyButton
+              content={address}
+              tooltipText=""
+              toastText="Copied!"
+              size={20}
+            />
+          </div>
 
-        <div className="flex items-center gap-5">
-          <Body className="text-neutral-600 font-medium text-[12px]">
-            {short}
-          </Body>
-            <CopyButton content={address} tooltipText="" toastText="Copied!" size={20} />
+          <Link
+            to={profileHref}
+            className="mt-2 flex items-center gap-[3px] text-[12px] font-bold text-bc-neutral-400"
+          >
+            <span style={{ 
+              textDecoration: 'underline', 
+              textDecorationColor: '#8F959E',
+              textUnderlineOffset: '2px'
+            }}>
+              View public profile
+            </span>
+            <SmallArrowIcon className="h-[12px] w-[12px]" />
+          </Link>
         </div>
+      )}
 
-        <Link
-          to={profileHref}
-          style={{
-            textDecoration: 'underline',
-            color: '#8F8F8F',
-            fontSize: '12px',
-            fontWeight: 700,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-          }}
-        >
-          View public profile
-          <SmallArrowIcon className="h-12 w-12" />
-        </Link>
-      </div>
-
+      {/* Account switcher dropdown */}
       {open && (
         <AccountSwitcherDropdown
           accounts={accounts}
@@ -102,3 +123,5 @@ export const DashboardNavHeader: React.FC<DashboardNavHeaderData> = ({
 };
 
 export default DashboardNavHeader;
+
+

@@ -6,12 +6,14 @@ type Props = {
   item: DashboardNavigationItem;
   currentPath: string;
   onClick: (path: string) => void;
+  collapsed?: boolean;
 };
 
 export const DashboardNavigationListItem = ({
   item,
   currentPath,
   onClick,
+  collapsed = false,
 }: Props) => {
   const isActive = currentPath === item.path;
 
@@ -20,7 +22,12 @@ export const DashboardNavigationListItem = ({
       type="button"
       onClick={() => onClick(item.path)}
       className={clsx(
-        'group flex w-full items-center h-50 gap-10 pl-10 px-3 py-2 text-[14px] border-none transition-colors rounded-md',
+        'group flex items-center border-none transition-colors rounded-md',
+        
+        // Adjust layout based on collapsed state
+        collapsed 
+          ? 'w-[40%] mx-auto justify-center h-40 px-1 py-2' 
+          : 'w-full h-50 gap-10 pl-10 px-3 py-2 text-[14px]',
 
         isActive
           ? 'bg-bc-neutral-200 text-bc-neutral-900 font-bold' // selected
@@ -33,7 +40,8 @@ export const DashboardNavigationListItem = ({
         </span>
       )}
 
-      <span>{item.label}</span>
+      {/* Only show text when not collapsed */}
+      {!collapsed && <span>{item.label}</span>}
     </button>
   );
 };

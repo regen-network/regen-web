@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { OfflineSigner } from '@cosmjs/proto-signing';
-import { SigningStargateClient } from '@cosmjs/stargate';
-import { getSigningRegenClient, ibc, regen } from '@regen-network/api';
+import { OfflineSigner, Registry } from '@cosmjs/proto-signing';
+import { AminoTypes, SigningStargateClient } from '@cosmjs/stargate';
+import {
+  cosmosAminoConverters,
+  cosmosProtoRegistry,
+  ibc,
+  ibcAminoConverters,
+  ibcProtoRegistry,
+  regen,
+  regenAminoConverters,
+  regenProtoRegistry,
+} from '@regen-network/api';
 import { chains } from 'chain-registry';
 
 import { UseStateSetter } from 'types/react/use-state';
@@ -41,12 +50,31 @@ export async function setupSigningClient(
   signer: OfflineSigner,
 ) {
   if (chain && ledgerRPCUri) {
+    const protoRegistry = [
+      ...cosmosProtoRegistry,
+      ...ibcProtoRegistry,
+      ...regenProtoRegistry,
+    ];
+
+    const aminoConverters = {
+      ...cosmosAminoConverters,
+      ...ibcAminoConverters,
+      ...regenAminoConverters,
+    };
+
+    const registry = new Registry(protoRegistry);
+    const aminoTypes = new AminoTypes(aminoConverters);
+
     setLoading(true);
     try {
-      const signingClient = (await getSigningRegenClient({
-        rpcEndpoint: ledgerRPCUri,
+      const signingClient = await SigningStargateClient.connectWithSigner(
+        ledgerRPCUri,
         signer,
-      })) as unknown as SigningStargateClient;
+        {
+          registry,
+          aminoTypes,
+        },
+      );
       setSigningClient(signingClient);
       setLoading(false);
     } catch (e) {

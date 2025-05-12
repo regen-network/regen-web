@@ -13,6 +13,7 @@ query AccountById($id: UUID!) {
     hideEcocredits
     hideRetirements
     custodialAddress
+    stripeConnectedAccountId
     accountTranslationsById {
       nodes {
         languageCode

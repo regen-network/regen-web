@@ -15,7 +15,7 @@ export const BatchMetadataAdditionalInfo = <
 >({
   data,
 }: {
-  data?: T;
+  data?: T | null;
 }): JSX.Element | null => {
   const { _ } = useLingui();
   if (!data) return null;

@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { Box } from '@mui/material';
-import { useAtom } from 'jotai';
 
 import { Flex } from 'web-components/src/components/box';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -12,10 +10,7 @@ import { Title } from 'web-components/src/components/typography';
 
 import { useProjectByOnChainIdQuery } from 'generated/graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
-import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { getMetadata } from 'lib/db/api/metadata-graph';
-import { CreditBatchMetadataIntersectionLD } from 'lib/db/types/json-ld';
-import { getBatchWithSupplyForDenom } from 'lib/ecocredit/api';
+import type { CreditBatchMetadataIntersectionLD } from 'lib/db/types/json-ld';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { NotFoundPage } from 'pages/NotFound/NotFound';
@@ -27,50 +22,17 @@ import {
 } from 'components/molecules';
 import { useEcocredits } from 'hooks';
 
-import { useLedger } from '../../ledger';
-
-export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const { batchDenom } = useParams();
-  const [ledgerLoading, setLedgerLoading] = useState(true);
-  const [batch, setBatch] = useState<BatchInfoWithSupply>();
-  const [metadata, setMetadata] = useState<CreditBatchMetadataIntersectionLD>();
+export const BatchDetails: React.FC = () => {
+  const { batch, metadata } = useLoaderData() as {
+    batch: BatchInfoWithSupply;
+    metadata: CreditBatchMetadataIntersectionLD | null;
+  };
   const walletContext = useWallet();
-  const { queryClient } = useLedger();
-  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const accountAddress = walletContext.wallet?.address;
   const { credits: userEcocredits } = useEcocredits({
     address: accountAddress,
   });
-  const isUserBatch = userEcocredits.some(c => c.denom === batchDenom);
-
-  useEffect(() => {
-    const fetch = async (): Promise<void> => {
-      if (batchDenom && queryClient) {
-        try {
-          const batch = await getBatchWithSupplyForDenom(
-            batchDenom,
-            queryClient,
-          );
-          setBatch(batch);
-          if (batch.metadata) {
-            const data = await getMetadata({
-              iri: batch.metadata,
-              client: queryClient,
-              languageCode: selectedLanguage,
-            });
-            setMetadata(data);
-          }
-        } catch (err) {
-          console.error(err); // eslint-disable-line no-console
-        } finally {
-          setLedgerLoading(false);
-        }
-      } else {
-        setLedgerLoading(false);
-      }
-    };
-    fetch();
-  }, [batchDenom, queryClient, selectedLanguage]);
+  const isUserBatch = userEcocredits.some(c => c.denom === batch.denom);
 
   const onChainId = batch?.projectId || '';
   const {
@@ -85,12 +47,11 @@ export const BatchDetails: React.FC<React.PropsWithChildren<unknown>> = () => {
   });
 
   const project = offchainData?.projectByOnChainId;
-  const loading = ledgerLoading || dbLoading;
 
-  if (loading) return <Loading />;
+  if (dbLoading) return <Loading />;
 
   // TODO placeholder until we have a more descriptive not found graphic
-  if (!loading && (!batch || error)) return <NotFoundPage />;
+  if (!dbLoading && (!batch || error)) return <NotFoundPage />;
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>

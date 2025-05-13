@@ -135,3 +135,5 @@ export const DashboardNavigation = ({
     </nav>
   );
 };
+
+export default DashboardNavigation;

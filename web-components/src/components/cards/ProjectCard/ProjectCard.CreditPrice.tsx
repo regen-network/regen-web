@@ -5,7 +5,10 @@ import GradientBadge from '../../../components/gradient-badge';
 import InfoTooltipWithIcon from '../../../components/tooltip/InfoTooltipWithIcon';
 import { Body, Subtitle } from '../../../components/typography';
 import { Theme } from '../../../theme/muiTheme';
-import { getFormattedNumber } from '../../../utils/format';
+import {
+  getFormattedNumber,
+  roundToClosestWholeNumber,
+} from '../../../utils/format';
 import { sxToArray } from '../../../utils/mui/sxToArray';
 import {
   ProjectCardBodyTextsMapping,
@@ -36,10 +39,11 @@ export const CreditPrice = ({
 }: Props) => {
   const avgPricePerTonLabel = purchaseInfo?.sellInfo?.avgPricePerTonLabel;
   const isPrefinanceProject = projectPrefinancing?.isPrefinanceProject;
-  const creditsAvailable =
+  const creditsAvailable = roundToClosestWholeNumber(
     purchaseInfo?.sellInfo?.creditsAvailable ??
-    projectPrefinancing?.estimatedIssuance ??
-    '0';
+      projectPrefinancing?.estimatedIssuance ??
+      '0',
+  );
 
   return (
     <Box

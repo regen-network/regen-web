@@ -80,7 +80,7 @@ const analytics = Analytics({
   ],
   // see here for debugging tools:
   // https://getanalytics.io/debugging/
-  debug: import.meta.env.NODE_ENV === 'development',
+  debug: process.env.NODE_ENV === 'development',
 });
 
 type Props = PropsWithChildren<{ customTheme?: Theme }>;

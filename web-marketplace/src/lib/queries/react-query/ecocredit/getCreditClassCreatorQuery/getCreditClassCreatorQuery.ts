@@ -1,6 +1,6 @@
 import { queryParams } from 'lib/ecocredit/api';
 
-import { getCreditClassCreatorKey } from './getCreditClassCreatorKey';
+import { getCreditClassCreatorKey } from './getCreditClassCreatorKey.utils';
 import {
   ReactQueryCreditClassCreatorProps,
   ReactQueryCreditClassCreatorResponse,

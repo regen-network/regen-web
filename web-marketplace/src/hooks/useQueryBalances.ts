@@ -25,7 +25,6 @@ type Params = {
  *
  * @returns {Object} An object containing:
  * - balancesResponse: The fetched balances data.
- * - fetchBalances: A function to initiate a refetch of balances.
  * - isLoadingBalances: A boolean indicating whether the fetch operation is in progress.
  */
 export default function useQueryBalances({ address }: Params): {

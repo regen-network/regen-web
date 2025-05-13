@@ -23,13 +23,6 @@ const MOCK_ACCOUNTS: AccountOption[] = [
   },
 ];
 
-// Define reusable action creators
-const createNavigationActions = () => ({
-  onCloseMobile: action('mobile-menu-closed'),
-  onViewPublicProfile: action('view-public-profile-clicked'),
-  onGoToHomePage: action('navigate-to-home-clicked')
-});
-
 const meta: Meta<typeof DashboardNavigation> = {
   title: 'Marketplace/Organisms/DashboardNavigation',
   component: DashboardNavigation,
@@ -44,19 +37,11 @@ export const Default: StoryFn<typeof DashboardNavigation> = () => {
   
   // Find the active account
   const activeAccount = MOCK_ACCOUNTS.find(a => a.id === activeAccountId) || MOCK_ACCOUNTS[0];
-  
-  // Create action handlers
-  const navigationActions = createNavigationActions();
 
-  // Handle navigation item clicks
+  // Simple navigation handler that updates state and logs path
   const handleNavItemClick = (path: string) => {
-    action('nav-item-click')(path);
+    action('navigation')(path); // Log all navigation paths consistently
     setCurrentPath(path);
-    
-    // Special case for home navigation
-    if (path === 'home') {
-      navigationActions.onGoToHomePage();
-    }
   };
   
   // Handle account selection
@@ -69,14 +54,14 @@ export const Default: StoryFn<typeof DashboardNavigation> = () => {
     <DashboardNavigation
       currentPath={currentPath}
       onNavItemClick={handleNavItemClick}
-      onLogout={action('logout-clicked')}
-      onCloseMobile={navigationActions.onCloseMobile}
-      onExitClick={() => navigationActions.onGoToHomePage('/')}
+      onLogout={() => action('navigation')('logout')}
+      onCloseMobile={() => action('navigation')('close-mobile')}
+      onExitClick={() => action('navigation')('homepage')}
       header={{
         activeAccount,
         accounts: MOCK_ACCOUNTS,
         onAccountSelect: handleAccountSelect,
-        onViewProfileClick: navigationActions.onViewPublicProfile
+        onViewProfileClick: (path) => action('navigation')(`view-profile: ${path}`)
       }}
     />
   );

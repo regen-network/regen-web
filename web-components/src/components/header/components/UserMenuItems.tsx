@@ -57,7 +57,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
               size="sm"
               mobileSize="sm"
               onClick={disconnect}
-              className="text-grey-700 pl-[18px]"
+              className="text-sc-text-sub-header pl-[18px]"
             >
               {logoutText}
             </Body>

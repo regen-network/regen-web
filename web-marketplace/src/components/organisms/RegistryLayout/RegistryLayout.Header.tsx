@@ -3,7 +3,6 @@ import { useLoaderData, useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
-import { useQuery } from '@tanstack/react-query';
 import { getClientConfig } from 'clients/Clients.config';
 
 import Header from 'web-components/src/components/header';
@@ -12,11 +11,9 @@ import { Theme } from 'web-components/src/theme/muiTheme';
 
 // import { cn } from 'web-components/src/utils/styles/cn';
 import { useAuth } from 'lib/auth/auth';
-import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { getWalletAddress } from 'pages/Dashboard/Dashboard.utils';
-import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { useAuthData } from 'hooks/useAuthData';
 
@@ -25,7 +22,6 @@ import { RegistryIconLink, RegistryNavLink } from '../../atoms';
 import { ListProject } from '../ListProject/ListProject';
 import { LoginButton } from '../LoginButton/LoginButton';
 import { useOnProfileClick } from './hooks/useOnProfileClick';
-import { useShowOrders } from './hooks/useShowOrders';
 import {
   getBorderBottom,
   getHeaderColors,
@@ -46,8 +42,7 @@ const RegistryLayoutHeader: React.FC = () => {
   const { pathname } = useLocation();
   const { activeAccount, privActiveAccount } = useAuth();
 
-  const { wallet, disconnect, isConnected, loginDisabled, accountByAddr } =
-    useWallet();
+  const { wallet, disconnect, accountByAddr } = useWallet();
   const { accountOrWallet, noAccountAndNoWallet } = useAuthData();
   const theme = useTheme<Theme>();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
@@ -55,8 +50,6 @@ const RegistryLayoutHeader: React.FC = () => {
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
   // const isHome = pathname === '/';
   const clientConfig = getClientConfig();
-
-  const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
 
   const hasPrefinanceProjects = useLoaderData();
 
@@ -66,29 +59,12 @@ const RegistryLayoutHeader: React.FC = () => {
   );
   const onProfileClick = useOnProfileClick();
 
-  const showOrders = useShowOrders();
-
-  const { data: paymentMethodData } = useQuery(
-    getPaymentMethodsQuery({
-      enabled: !!activeAccount,
-    }),
-  );
-
-  const savedPaymentInfo = (paymentMethodData?.paymentMethods?.length ?? 0) > 0;
-
   const userMenuItems = useMemo(
     () =>
       getUserMenuItems({
         linkComponent: RegistryNavLink,
         pathname,
-        showCreditClasses,
-        isIssuer,
-        showProjects,
-        isWalletConnected: isConnected,
-        loginDisabled,
         onProfileClick,
-        savedPaymentInfo,
-        showOrders,
         profile: getProfile({
           account: activeAccount ?? accountByAddr,
           privActiveAccount,
@@ -98,14 +74,7 @@ const RegistryLayoutHeader: React.FC = () => {
       }),
     [
       pathname,
-      showCreditClasses,
-      isIssuer,
-      showProjects,
-      isConnected,
-      loginDisabled,
       onProfileClick,
-      savedPaymentInfo,
-      showOrders,
       activeAccount,
       accountByAddr,
       privActiveAccount,

@@ -34,6 +34,5 @@ export const getProfile = ({
           walletAddress: account.addr,
           email: privActiveAccount?.email,
         }),
-        selected: true,
       }
     : undefined;

@@ -7,6 +7,7 @@ import { getClientConfig } from 'clients/Clients.config';
 
 import Header from 'web-components/src/components/header';
 import { UserMenuItems } from 'web-components/src/components/header/components/UserMenuItems';
+import { getUserMenuItems } from 'web-components/src/components/header/components/UserMenuItems.utils';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
 // import { cn } from 'web-components/src/utils/styles/cn';
@@ -18,21 +19,30 @@ import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../../lib/ledger';
-import { RegistryIconLink, RegistryNavLink } from '../../atoms';
+import { Link, RegistryIconLink, RegistryNavLink } from '../../atoms';
 import { ListProject } from '../ListProject/ListProject';
 import { LoginButton } from '../LoginButton/LoginButton';
-import { useOnProfileClick } from './hooks/useOnProfileClick';
+import {
+  ADDRESS_COPIED,
+  COPY_ADDRESS,
+} from '../UserAccountSettings/UserAccountSettings.constants';
 import {
   getBorderBottom,
   getHeaderColors,
   getIsTransparent,
   getMenuItems,
-  getUserMenuItems,
 } from './RegistryLayout.config';
 import {
   AVATAR_ALT,
+  CREATE_ORG,
+  FINISH_ORG_CREATION,
   fullWidthRegExp,
   LOGOUT_TEXT,
+  ORGANIZATION,
+  ORGANIZATION_DASHBOARD,
+  PERSONAL_DASHBOARD,
+  PUBLIC_PROFILE,
+  SIGNED_IN_AS,
 } from './RegistryLayout.constants';
 // import { LanguageSwitcher } from './RegistryLayout.LanguageSwitcher';
 import { getAddress, getProfile } from './RegistryLayout.utils';
@@ -57,29 +67,37 @@ const RegistryLayoutHeader: React.FC = () => {
     () => getMenuItems(pathname, _, hasPrefinanceProjects as boolean),
     [pathname, _, hasPrefinanceProjects],
   );
-  const onProfileClick = useOnProfileClick();
 
   const userMenuItems = useMemo(
     () =>
       getUserMenuItems({
-        linkComponent: RegistryNavLink,
+        linkComponent: Link,
+        navLinkComponent: RegistryNavLink,
         pathname,
-        onProfileClick,
         profile: getProfile({
           account: activeAccount ?? accountByAddr,
           privActiveAccount,
           _,
+          profileLink: '/dashboard', // TODO APP-670 update to merged profile link
+          // TODO APP-670 should go /dashboard/admin/portfolio or /dashboard/admin/projects
+          // APP-697 then to /dashboard/portfolio or /dashboard/projects
+          dashboardLink: '/dashboard/admin/profile',
         }),
-        _,
+        textContent: {
+          signedInAs: _(SIGNED_IN_AS),
+          copyText: {
+            tooltipText: _(COPY_ADDRESS),
+            toastText: _(ADDRESS_COPIED),
+          },
+          publicProfile: _(PUBLIC_PROFILE),
+          personalDashboard: _(PERSONAL_DASHBOARD),
+          organizationDashboard: _(ORGANIZATION_DASHBOARD),
+          organization: _(ORGANIZATION),
+          createOrganization: _(CREATE_ORG),
+          finishOrgCreation: _(FINISH_ORG_CREATION),
+        },
       }),
-    [
-      pathname,
-      onProfileClick,
-      activeAccount,
-      accountByAddr,
-      privActiveAccount,
-      _,
-    ],
+    [pathname, activeAccount, accountByAddr, privActiveAccount, _],
   );
 
   const defaultAvatar = getDefaultAvatar(activeAccount);

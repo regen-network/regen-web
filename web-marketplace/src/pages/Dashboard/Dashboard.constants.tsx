@@ -10,10 +10,6 @@ import { ProjectPageIcon } from 'web-components/src/components/icons/ProjectPage
 const className = 'pl-20';
 const labelClassName = 'text-sm';
 
-export const SEPARATOR = {
-  children: <div className="h-1 bg-grey-300 w-full my-[14px]" />,
-};
-
 export const PORTFOLIO = {
   label: msg`Portfolio`,
   href: '/dashboard/portfolio',
@@ -43,13 +39,4 @@ export const BRIDGE = {
   href: '/dashboard/bridge',
   icon: <BridgeIcon linearGradient />,
   className,
-};
-
-export const PUBLIC_PROFILE = msg`public profile`;
-
-export const PERSONAL_DASHBOARD = {
-  label: msg`Personal dashboard`,
-  labelClassName,
-  className,
-  icon: <CogIcon linearGradient />,
 };

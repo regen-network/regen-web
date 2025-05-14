@@ -19,10 +19,14 @@ type GetProfileParams = {
   account?: Maybe<Pick<Account, 'id' | 'name' | 'image' | 'addr' | 'type'>>;
   privActiveAccount?: PrivateAccount;
   _: TranslatorType;
+  profileLink: string;
+  dashboardLink: string;
 };
 export const getProfile = ({
   account,
   privActiveAccount,
+  profileLink,
+  dashboardLink,
   _,
 }: GetProfileParams) =>
   account
@@ -30,9 +34,12 @@ export const getProfile = ({
         id: account.id,
         name: account.name ? account.name : _(DEFAULT_NAME),
         profileImage: account.image ? account.image : getDefaultAvatar(account),
-        address: getAddress({
+        truncatedAddress: getAddress({
           walletAddress: account.addr,
           email: privActiveAccount?.email,
         }),
+        address: account.addr ?? privActiveAccount?.email,
+        profileLink,
+        dashboardLink,
       }
     : undefined;

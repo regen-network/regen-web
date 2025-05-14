@@ -36,7 +36,7 @@ export const useNavLinkStyles = makeStyles<UseNavLinkStylesParams>()(
 export type NavLinkProps = {
   href: string;
   /** replaces default styles with passed styles */
-  pathname: string;
+  pathname?: string;
   overrideClassname?: string;
   className?: string;
   disabled?: boolean;

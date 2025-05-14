@@ -112,11 +112,11 @@ export const getUserMenuItems = ({
       finishOrgCreation && {
         children: (
           <TextButton
-            className="pl-20 text-[11px] hover:text-brand-200 bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] bg-clip-text text-[transparent]"
+            className="group pl-20 text-[11px] bg-[linear-gradient(202deg,#4FB573_14.67%,#B9E1C7_97.14%)] bg-clip-text text-[transparent]"
             onClick={finishOrgCreation}
           >
             {textContent.finishOrgCreation}
-            <SmallArrowIcon className="text-brand-400  h-[8px] ml-3" />
+            <SmallArrowIcon className="text-brand-400 group-hover:text-brand-200 h-[8px] ml-3" />
           </TextButton>
         ),
       },

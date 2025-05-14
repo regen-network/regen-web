@@ -11,7 +11,6 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import Box from '@mui/material/Box';
 import { useQuery } from '@tanstack/react-query';
 import { Feature, Point } from 'geojson';
 import { useAtom, useSetAtom } from 'jotai';

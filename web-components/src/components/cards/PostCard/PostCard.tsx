@@ -81,13 +81,35 @@ export default function PostCard({
       <Grid
         container
         sx={{
-          flexWrap: { xs: 'wrap-reverse', md: 'nowrap' },
+          flexWrap: {
+            xs: 'wrap-reverse',
+            md: `${hasFile ? 'nowrap' : 'wrap-reverse'}`,
+          },
           position: 'relative',
         }}
       >
+        {comment && !hasFile && (
+          <Grid xs={12} md={12} item>
+            <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
+              <Body
+                onClick={e => e.stopPropagation()}
+                size="md"
+                sx={{ pb: 1.5 }}
+                className="line-clamp-2 overflow-hidden"
+              >
+                <Linkify
+                  // eslint-disable-next-line lingui/no-unlocalized-strings
+                  options={{ target: '_blank', rel: 'noopener noreferrer' }}
+                >
+                  {comment}
+                </Linkify>
+              </Body>
+            </Box>
+          </Grid>
+        )}
         <Grid
           xs={12}
-          md={hasFile ? 7 : 12}
+          md={hasFile ? 7 : 9}
           item
           sx={{
             pb: { xs: 4.5, md: 0 },
@@ -110,7 +132,7 @@ export default function PostCard({
             }}
             linkComponent={linkComponent}
           />
-          {comment && (
+          {comment && hasFile && (
             <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
               <Body
                 onClick={e => e.stopPropagation()}
@@ -226,19 +248,19 @@ export default function PostCard({
           </Grid>
         )}
         {!hasFile && (
-          <Grid item xs="auto">
-            <Box
-              sx={{
-                height: { xs: '5px', md: '40px' },
-                position: 'relative',
-                marginRight: '40px',
-              }}
-            >
-              {!draftLabel && privacyLabel && (
-                <PrivateBadge label={privacyLabel} />
-              )}
-              {draftLabel && <DraftBadge label={draftLabel} />}
-            </Box>
+          <Grid
+            item
+            xs="auto"
+            sx={{
+              flexShrink: 0,
+              marginRight: '10px',
+              marginBottom: { xs: '0px', md: '20px', xlg: '0px' },
+            }}
+          >
+            {!draftLabel && privacyLabel && (
+              <PrivateBadge label={privacyLabel} />
+            )}
+            {draftLabel && <DraftBadge label={draftLabel} />}
           </Grid>
         )}
       </Grid>

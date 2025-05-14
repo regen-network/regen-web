@@ -11,6 +11,7 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import Box from '@mui/material/Box';
 import { useQuery } from '@tanstack/react-query';
 import { Feature, Point } from 'geojson';
 import { useAtom, useSetAtom } from 'jotai';
@@ -178,11 +179,9 @@ export const DataStreamPost = ({
 
   return (
     <>
-      <TimelineItem>
+      <TimelineItem className="gap-10 md:gap-20 lg:gap-50">
         <TimelineSeparator
-          className={`pr-10 sm:pr-40 ${
-            index === postsLength - 1 ? 'pb-35' : ''
-          }`}
+          className={`${index === postsLength - 1 ? 'pb-35' : ''}`}
         >
           <div
             className="text-grey-0 rounded-[50%] h-[28px] w-[28px] flex items-center justify-center color"
@@ -195,7 +194,7 @@ export const DataStreamPost = ({
           </div>
           <TimelineConnector className="bg-grey-300 w-1" />
         </TimelineSeparator>
-        <TimelineContent className="mt-[-30px] mb-30 pr-0">
+        <TimelineContent className="-mt-30 mb-30 pr-0 pl-0">
           {post.contents && (post.privacy !== 'private' || isAdmin) && (
             <PostCard
               draftLabel={!post.published ? _(DRAFT) : undefined}

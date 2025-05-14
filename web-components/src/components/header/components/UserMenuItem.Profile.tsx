@@ -41,7 +41,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
     [address],
   );
   return (
-    <Card className="hover:border-grey-300 hover:bg-grey-100 border-[transparent] bg-grey-0 w-full shadow-none mx-10 p-5 max-w-[290px]">
+    <Card className="hover:border-grey-300 hover:bg-grey-100 border-[transparent] bg-grey-0 w-full shadow-none p-5">
       <Grid container wrap="nowrap" alignItems="center">
         <Grid item mr={3} position="relative">
           <UserAvatar size="medium" src={profileImage} />
@@ -62,10 +62,10 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
         </Grid>
         <Grid item>
           <Subtitle size="md">{name}</Subtitle>
-          <div className="flex flex-row items-baseline gap-[25px]">
+          <div className="flex flex-row items-baseline gap-15">
             {address && (
               <div className="flex flex-row items-center gap-3 hover:underline">
-                <Body className="truncate" size="xs">
+                <Body className="truncate max-w-[137px]" size="xs">
                   {truncatedAddress}
                 </Body>
                 {validWalletAddress && (

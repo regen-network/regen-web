@@ -51,12 +51,14 @@ export const getUserMenuItems = ({
           <div className="text-[11px] text-grey-400 uppercase font-extrabold pl-15 tracking-wider font-extrabold">
             {textContent.signedInAs}
           </div>
-          <UserMenuItemProfile
-            {...profile}
-            publicProfileText={textContent.publicProfile}
-            copyText={textContent.copyText}
-            linkComponent={linkComponent}
-          />
+          <div className="px-10">
+            <UserMenuItemProfile
+              {...profile}
+              publicProfileText={textContent.publicProfile}
+              copyText={textContent.copyText}
+              linkComponent={linkComponent}
+            />
+          </div>
         </div>
       ),
     },
@@ -78,12 +80,14 @@ export const getUserMenuItems = ({
           <div className="text-[11px] text-grey-400 uppercase font-extrabold pl-15 tracking-wider font-extrabold">
             {textContent.organization}
           </div>
-          <UserMenuItemProfile
-            {...organizationProfile}
-            publicProfileText={textContent.publicProfile}
-            copyText={textContent.copyText}
-            linkComponent={linkComponent}
-          />
+          <div className="px-10">
+            <UserMenuItemProfile
+              {...organizationProfile}
+              publicProfileText={textContent.publicProfile}
+              copyText={textContent.copyText}
+              linkComponent={linkComponent}
+            />
+          </div>
         </div>
       ),
     },

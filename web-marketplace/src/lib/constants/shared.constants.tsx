@@ -179,7 +179,7 @@ export const getProjectCardBodyTextMapping = (
   prefinance: _(msg`prefinance`),
   price: _(msg`price`),
   estimatedIssuance: _(msg`estimated issuance`),
-  creditsAvailable: _(msg`credits available`),
+  creditsAvailable: _(msg`credits for sale`),
   prefinancePriceTooltip: _(
     msg`Price of credits for prefinance projects have specific terms, please click on the project to learn more.`,
   ),

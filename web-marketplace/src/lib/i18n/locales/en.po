@@ -1417,6 +1417,7 @@ msgid "credits"
 msgstr ""
 
 #: src/components/organisms/Order/Order.Summary.tsx:60
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:305
 msgid "Credits"
 msgstr ""
 
@@ -1426,11 +1427,10 @@ msgstr ""
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:48
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:71
-#: src/lib/constants/shared.constants.tsx:182
 msgid "credits available"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:106
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:115
 msgid "Credits Available"
 msgstr ""
 
@@ -1462,12 +1462,20 @@ msgstr ""
 msgid "Credits cannot exceed"
 msgstr ""
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
+msgid "Credits currently available for purchase with fiat or cryptocurrency on Regen Marketplace."
+msgstr ""
+
 #: src/components/organisms/Order/Order.constants.ts:8
 msgid "Credits delivered"
 msgstr ""
 
 #: src/components/organisms/UserCredits.tsx:150
 msgid "Credits for"
+msgstr ""
+
+#: src/lib/constants/shared.constants.tsx:182
+msgid "credits for sale"
 msgstr ""
 
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:74
@@ -1482,7 +1490,7 @@ msgstr ""
 msgid "Credits issuance is calculated based on a weighted scale between 20 and 50 years."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:83
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:69
 msgid "Credits issued"
 msgstr ""
 
@@ -1494,17 +1502,17 @@ msgstr ""
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:82
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:68
 msgid "Credits Registered"
 msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:128
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:136
 msgid "Credits Retired"
 msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:106
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:115
 msgid "Credits Tradable"
 msgstr ""
 
@@ -2026,6 +2034,10 @@ msgstr ""
 
 #: src/pages/LandStewards/LandStewards.tsx:99
 msgid "For Land Stewards"
+msgstr ""
+
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:94
+msgid "For sale"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:18
@@ -3194,7 +3206,7 @@ msgstr ""
 msgid "PROJECT"
 msgstr ""
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:174
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:173
 msgid "Project {onChainProjectId}"
 msgstr ""
 
@@ -3915,7 +3927,7 @@ msgstr ""
 msgid "Social and Cultural Index"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:8
 #: src/lib/constants/shared.constants.tsx:174
 msgid "Sold Out"
 msgstr ""
@@ -4449,7 +4461,11 @@ msgid "Tradable Credits"
 msgstr ""
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
-msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
+#~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
+#~ msgstr ""
+
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
+msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:36

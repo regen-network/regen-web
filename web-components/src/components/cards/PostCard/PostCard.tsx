@@ -109,7 +109,7 @@ export default function PostCard({
         )}
         <Grid
           xs={12}
-          md={hasFile ? 7 : 9}
+          xl={hasFile ? 7 : 9}
           item
           sx={{
             pb: { xs: 4.5, md: 0 },

@@ -420,7 +420,7 @@ export const queryProjectsByClass = async ({
   }
 };
 
-interface RPCQueryClientProps {
+export interface RPCQueryClientProps {
   client: RPCQueryClient;
 }
 

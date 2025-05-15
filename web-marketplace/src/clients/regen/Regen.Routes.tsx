@@ -15,10 +15,12 @@ import { useAtom } from 'jotai';
 import { safeLazy } from 'utils/safeLazy';
 
 import { Maybe } from 'generated/graphql';
+import { QueryClient as RPCQueryClient, useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { batchDetailsLoader } from 'pages/BatchDetails/BatchDetails.loader';
 import { buyCreditsLoader } from 'pages/BuyCredits/BuyCredits.loader';
 import { CertificatePage } from 'pages/Certificate/Certificate';
 import MyBridge from 'pages/Dashboard/MyBridge';
@@ -122,12 +124,14 @@ export const RegenRoutes = ({
 }: RouterProps) => {
   const { activeWalletAddr } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
+  const { queryClient: rpcQueryClient } = useLedger();
 
   return (
     <RouterProvider
       router={getRegenRouter({
         reactQueryClient,
         apolloClientFactory,
+        rpcQueryClient,
         address: activeWalletAddr,
         languageCode: selectedLanguage,
       })}
@@ -136,9 +140,10 @@ export const RegenRoutes = ({
   );
 };
 
-type RouterParams = {
+export type RouterParams = {
   reactQueryClient: QueryClient;
   apolloClientFactory: ApolloClientFactory;
+  rpcQueryClient: RPCQueryClient | undefined;
   address?: Maybe<string>;
   languageCode: string;
 };
@@ -146,6 +151,7 @@ type RouterParams = {
 export const getRegenRoutes = ({
   reactQueryClient,
   apolloClientFactory,
+  rpcQueryClient,
   address,
   languageCode,
 }: RouterParams): RouteObject[] => {
@@ -274,7 +280,15 @@ export const getRegenRoutes = ({
           element={<KeplrRoute component={CreateBatch} />}
         />
         <Route path="baskets/:basketDenom" element={<BasketDetails />} />
-        <Route path="credit-batches/:batchDenom" element={<BatchDetails />} />
+        <Route
+          path="credit-batches/:batchDenom"
+          element={<BatchDetails />}
+          loader={batchDetailsLoader({
+            reactQueryClient,
+            rpcQueryClient,
+            languageCode,
+          })}
+        />
         <Route path="project-pages">
           <Route path=":projectId" element={<ProjectCreate />}>
             <Route
@@ -400,6 +414,7 @@ export const getRegenRoutes = ({
 export const getRegenRouter = ({
   reactQueryClient,
   apolloClientFactory,
+  rpcQueryClient,
   address,
   languageCode,
 }: RouterParams): Router => {
@@ -409,6 +424,7 @@ export const getRegenRouter = ({
     getRegenRoutes({
       reactQueryClient,
       apolloClientFactory,
+      rpcQueryClient,
       address,
       languageCode,
     }),

@@ -114,7 +114,7 @@ export default function PostCard({
           sx={{
             pb: { xs: 4.5, md: 0 },
             pr: { xs: 0, md: 2 },
-            pt: { xs: hasFile ? 0 : 11, md: 0 },
+            pt: { xs: hasFile ? 0 : 5, md: 0 },
           }}
         >
           <Subtitle className="group-hover:text-grey-500" size="lg" mb={2.75}>

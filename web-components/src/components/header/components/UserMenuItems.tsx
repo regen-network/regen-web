@@ -52,7 +52,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
         ),
         extras: (
           <div className="flex text-grey-400 cursor-pointer pl-20 py-[6px] items-center pb-20">
-            <LogOutIcon className="text-brand-400" />
+            <LogOutIcon linearGradient />
             <Body
               size="sm"
               mobileSize="sm"

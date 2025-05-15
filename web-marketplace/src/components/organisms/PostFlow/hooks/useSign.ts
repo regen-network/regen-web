@@ -4,7 +4,7 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
-import { ContentHash_Graph } from '@regen-network/api/regen/data/v1/types';
+import { ContentHash_Graph } from '@regen-network/api/regen/data/v2/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 

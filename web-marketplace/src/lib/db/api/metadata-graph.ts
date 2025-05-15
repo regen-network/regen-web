@@ -21,7 +21,7 @@ export const getMetadata = async ({
   let res;
   try {
     res = await fetch(
-      `${apiUri}/data/v1/metadata-graph/${iri}?languageCode=${languageCode}`,
+      `${apiUri}/data/v2/metadata-graph/${iri}?languageCode=${languageCode}`,
     );
     if (res.ok) {
       const data = await res.json();
@@ -63,7 +63,7 @@ export const getMetadata = async ({
  * Generate IRI
  */
 
-const iriUrl = '/data/v1/iri-gen';
+const iriUrl = '/data/v2/iri-gen';
 
 type IriSuccessProp = {
   iri: string;

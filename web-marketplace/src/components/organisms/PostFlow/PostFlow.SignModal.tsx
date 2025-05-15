@@ -1,6 +1,6 @@
 import { useFormState, useWatch } from 'react-hook-form';
 import { Trans } from '@lingui/macro';
-import { ContentHash_Graph } from '@regen-network/api/regen/data/v1/types';
+import { ContentHash_Graph } from '@regen-network/api/regen/data/v2/types';
 import { useQuery } from '@tanstack/react-query';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';

@@ -24,6 +24,7 @@ export type UserMenuItemProfileProps = UserMenuProfile & {
   publicProfileText: string;
   copyText: Pick<CopyButtonProps, 'tooltipText' | 'toastText'>;
   linkComponent: LinkComponentProp;
+  showCheckIcon?: boolean;
 };
 
 const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
@@ -35,6 +36,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
   linkComponent: LinkComponent,
   publicProfileText,
   copyText,
+  showCheckIcon,
 }) => {
   const validWalletAddress = useMemo(
     () => address && isValidAddress(address),
@@ -45,9 +47,11 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
       <Grid container wrap="nowrap" alignItems="center">
         <Grid item mr={3} position="relative">
           <UserAvatar className="w-30 h-30" src={profileImage} />
-          <div className="flex items-center justify-center w-15 h-15 absolute rounded-[50%] bg-bc-green-200 right-0 bottom-0">
-            <CheckIcon className="w-[13px] h-[13px] text-brand-400" />
-          </div>
+          {showCheckIcon && (
+            <div className="flex items-center justify-center w-15 h-15 absolute rounded-[50%] bg-bc-green-200 right-0 bottom-0">
+              <CheckIcon className="w-[13px] h-[13px] text-brand-400" />
+            </div>
+          )}
         </Grid>
         <Grid item>
           <Subtitle size="md">{name}</Subtitle>

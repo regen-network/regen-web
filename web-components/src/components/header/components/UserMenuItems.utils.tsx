@@ -57,6 +57,7 @@ export const getUserMenuItems = ({
               publicProfileText={textContent.publicProfile}
               copyText={textContent.copyText}
               linkComponent={linkComponent}
+              showCheckIcon
             />
           </div>
         </div>

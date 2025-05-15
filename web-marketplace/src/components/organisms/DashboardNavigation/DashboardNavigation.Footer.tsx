@@ -19,12 +19,11 @@ export const DashboardNavFooter = ({
 
     {/* Exit to homepage link */}
     <button
-      className="text-[14px] text-black! font-normal flex items-center gap-1 no-underline bg-transparent border-none p-0 cursor-pointer"
-      style={{ color: 'black' }}
+      className="text-[14px] text-bc-neutral-700 font-normal flex items-center gap-1 no-underline bg-transparent border-none p-0 cursor-pointer hover:underline group"
       onClick={() => onExitClick?.('homepage')}
     >
       <Trans> Exit to homepage </Trans>
-      <SmallArrowIcon className="h-12 w-12" />
+      <SmallArrowIcon className="h-12 w-12 ml-3 transition-transform group-hover:translate-x-1" />
     </button>
   </div>
 );

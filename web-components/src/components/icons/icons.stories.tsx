@@ -65,7 +65,6 @@ import { LocationIcon } from './LocationIcon';
 import LocationSearchIcon from './LocationSearchIcon';
 import { LockIcon } from './LockIcon';
 import { LogOutIcon } from './LogOutIcon';
-import { LogoutIconGreen } from './LogoutIconGreen';
 import { MembersIcon } from './MembersIcon';
 import MinusIcon from './MinusIcon';
 import NoBasketTokensIcon from './NoBasketTokensIcon';
@@ -306,7 +305,6 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<LocationSearchIcon />} label="LocationSearchIcon" />
     <LabeledIcon icon={<LockIcon />} label="LockIcon" />
     <LabeledIcon icon={<LogOutIcon />} label="LogOutIcon" />
-    <LabeledIcon icon={<LogoutIconGreen />} label="LogoutIconGreen" />
     <LabeledIcon icon={<MembersIcon />} label="MembersIcon" />
     <LabeledIcon icon={<MediumIcon color="grey" />} label="MediumIcon" />
     <LabeledIcon icon={<MinusIcon />} label="MinusIcon" />

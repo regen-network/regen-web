@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react'; // Add useMemo import
 import { useLingui } from '@lingui/react';
 
+import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 import DoubleBreadcrumbLeftIcon from 'web-components/src/components/icons/DoubleBreadcrumbLeftIcon';
 import { cn } from 'web-components/src/utils/styles/cn';
@@ -19,7 +20,7 @@ const COLLAPSE_BUTTON_CLASSES =
   'hidden sm:flex items-center justify-center w-[25px] h-[25px] absolute z-10 right-[-12px] top-[35px] p-0 rounded-[5px] border border-[1px] border-[#D2D5D9] bg-[#FFFFFF] shadow-[0_4px_10px_rgba(0,0,0,0.1)] cursor-pointer';
 
 const SECTION_HEADING_BASE =
-  'my-3 font-extrabold uppercase tracking-wider text-bc-neutral-400';
+  'my-3 uppercase text-sc-text-sub-header cursor-default pointer-events-none';
 
 export const DashboardNavigation = ({
   className = 'px-30 pt-30 pb-20',
@@ -32,13 +33,11 @@ export const DashboardNavigation = ({
 }: DashboardNavigationProps) => {
   const { _ } = useLingui();
   const [collapsed, setCollapsed] = useState(false);
-  const sections = getDashboardNavigationSections(
-    activeAccount.type,
-    false,
-    collapsed,
-  );
 
-  // Handle navigation item clicks
+  const sections = useMemo(() => {
+    return getDashboardNavigationSections(activeAccount.type, false, collapsed);
+  }, [activeAccount.type, collapsed]);
+
   const handleItemClick = (path: string) => {
     if (path === 'logout') {
       onLogout?.();
@@ -72,6 +71,7 @@ export const DashboardNavigation = ({
         onClick={() => setCollapsed(!collapsed)}
         className={COLLAPSE_BUTTON_CLASSES}
         aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        aria-pressed={collapsed}
       >
         <DoubleBreadcrumbLeftIcon
           className={cn(
@@ -99,16 +99,17 @@ export const DashboardNavigation = ({
             <div key={idx} className={collapsed ? 'px-0' : ''}>
               {/* Section heading */}
               {!isLogoutSection && (
-                <h3
+                <TextButton
                   className={cn(
                     SECTION_HEADING_BASE,
                     collapsed
-                      ? 'text-center text-[10px] leading-tight px-1 mx-auto'
+                      ? 'text-center text-[10px] leading-tight px-1 mx-auto block w-full'
                       : 'text-[12px]',
                   )}
+                  textSize="xs"
                 >
                   {_(section.heading)}
-                </h3>
+                </TextButton>
               )}
 
               {/* Divider for logout section */}

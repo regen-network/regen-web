@@ -1,5 +1,6 @@
 // src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx
 import React, { useState } from 'react';
+import { Trans } from '@lingui/macro';
 
 import { CopyButton } from 'web-components/src/components/buttons/CopyButton';
 import BreadcrumbIcon from 'web-components/src/components/icons/BreadcrumbIcon';
@@ -30,8 +31,6 @@ export const DashboardNavHeader: React.FC<
   const canSwitch = accounts.length > 1;
 
   const [open, setOpen] = useState(false);
-  // useClickOutside will call setOpen(false) whenever
-  // you click/touch outside the returned ref
   const rootRef = useClickOutside<HTMLDivElement>(() => {
     if (open) setOpen(false);
   });
@@ -71,33 +70,32 @@ export const DashboardNavHeader: React.FC<
             )}
           </button>
 
-          <div className="flex items-center gap-5">
-            <Body className="text-neutral-400 font-medium text-[12px]">
+          <CopyButton
+            className="group flex flex-row items-center gap-3 hover:underline cursor-pointer"
+            content={address}
+            toastText="Copied!"
+            // Using theme color instead of hardcoded hex
+            iconClassName="h-[14px] w-[14px] hover:text-ac-success-400 hover:stroke-none text-bc-neutral-500"
+            tooltipText={''}
+          >
+            <Body
+              // Updated text color to match theme
+              className="text-sc-text-paragraph"
+              size="xs"
+            >
               {short}
             </Body>
-            <CopyButton
-              content={address}
-              tooltipText=""
-              toastText="Copied!"
-              iconClassName="h-[14px] w-[14px] hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
-            />
-          </div>
+          </CopyButton>
 
           <button
             type="button"
-            className="mt-[4px] mb-[4px] flex items-center gap-[4px] text-[12px] font-bold text-bc-neutral-400 bg-transparent border-none p-0 text-left cursor-pointer"
+            className="mt-[4px] mb-[4px] flex items-center gap-[4px] text-[12px] bg-transparent border-none p-0 text-left cursor-pointer group hover:text-sc-text-paragraph"
             onClick={() => onViewProfileClick?.(profileHref)}
           >
-            <span
-              style={{
-                textDecoration: 'underline',
-                textDecorationColor: '#8F8F8F',
-                textUnderlineOffset: '1px',
-              }}
-            >
-              View public profile
-            </span>
-            <SmallArrowIcon className="h-[12px] w-[12px]" />
+            <Subtitle className="underline text-[12px] text-bc-neutral-400 group-hover:text-sc-text-paragraph transition-colors">
+              <Trans>View public profile</Trans>
+              <SmallArrowIcon className="h-[8px] ml-3 transition-transform group-hover:translate-x-1" />
+            </Subtitle>
           </button>
         </div>
       )}
@@ -115,5 +113,3 @@ export const DashboardNavHeader: React.FC<
     </div>
   );
 };
-
-export default DashboardNavHeader;

@@ -3,7 +3,7 @@ import { msg } from '@lingui/macro';
 
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
-import { LogoutIconGreen } from 'web-components/src/components/icons/LogoutIconGreen';
+import { LogOutIcon } from 'web-components/src/components/icons/LogOutIcon';
 import { MembersIcon } from 'web-components/src/components/icons/MembersIcon';
 import { OrgProfileIcon } from 'web-components/src/components/icons/OrgProfileIcon';
 import { ProjectsIcon } from 'web-components/src/components/icons/ProjectsIcon';
@@ -133,7 +133,7 @@ const getLogoutSection = (): DashboardNavigationSection => ({
       label: i18n._(msg`Log out`),
       icon: (
         <span className="flex h-30 w-30 shrink-0 items-center justify-center">
-          <LogoutIconGreen className="h-full w-full" />
+          <LogOutIcon linearGradient />
         </span>
       ),
       path: 'logout',

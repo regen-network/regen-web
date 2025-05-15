@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useGradientId } from './hooks/useGradientId';
+
 type Props = {
   /** use the green gradient when true */
   linearGradient?: boolean;
@@ -7,16 +9,12 @@ type Props = {
   disabled?: boolean;
 } & React.SVGProps<SVGSVGElement>;
 
-const MembersIcon: React.FC<Props> = ({
+export const MembersIcon: React.FC<Props> = ({
   linearGradient,
   disabled,
   ...props
 }) => {
-  // unique gradient-id so it never conflicts if you render multiple
-  const gradientId = React.useMemo(
-    () => `members_gradient_${Math.random().toString(36).slice(2)}`,
-    []
-  );
+  const gradientId = useGradientId('members_icon_green');
 
   return (
     <svg
@@ -37,7 +35,10 @@ const MembersIcon: React.FC<Props> = ({
             y2="25.156"
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="0.00458717" stopColor={disabled ? '#8F8F8F' : '#7BC796'} />
+            <stop
+              offset="0.00458717"
+              stopColor={disabled ? '#8F8F8F' : '#7BC796'}
+            />
             <stop offset="1" stopColor={disabled ? '#EFEFEF' : '#C5E6D1'} />
           </linearGradient>
         </defs>
@@ -58,5 +59,3 @@ const MembersIcon: React.FC<Props> = ({
     </svg>
   );
 };
-
-export default MembersIcon;

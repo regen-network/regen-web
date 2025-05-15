@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useGradientId } from './hooks/useGradientId';
+
 type Props = {
   /** use the green gradient when true */
   linearGradient?: boolean;
@@ -8,11 +10,7 @@ type Props = {
 } & React.SVGProps<SVGSVGElement>;
 
 export const ProjectsIcon = ({ linearGradient, disabled, ...props }: Props) => {
-  // generate a unique gradient‑id so multiple icons don’t clash
-  const gradientId = React.useMemo(
-    () => `projects_gradient_${Math.random().toString(36).slice(2)}`,
-    [],
-  );
+  const gradientId = useGradientId('projects_icon');
 
   return (
     <svg

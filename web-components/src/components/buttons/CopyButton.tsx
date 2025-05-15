@@ -40,13 +40,6 @@ export const CopyButton = ({
   children,
 }: CopyButtonProps) => {
   const [copied, setCopied] = useState(false);
-  
-  const handleCopy = () => {
-    copyTextToClipboard(content).then(() => {
-      setCopied(true);
-    });
-  };
-  
   return (
     <button
       onClick={() => {

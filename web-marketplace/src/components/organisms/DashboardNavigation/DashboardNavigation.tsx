@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { useLingui } from '@lingui/react';
-import clsx from 'clsx';
 
 import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 import DoubleBreadcrumbLeftIcon from 'web-components/src/components/icons/DoubleBreadcrumbLeftIcon';
+import { cn } from 'web-components/src/utils/styles/cn';
+
+import { DashboardNavFooter } from './DashboardNavigation.Footer';
 import { DashboardNavHeader } from './DashboardNavigation.Header';
 import { DashboardNavigationListItem } from './DashboardNavigation.ListItem';
-import { DashboardNavFooter } from './DashboardNavigation.Footer';
-import { getDashboardNavigationSections } from './DashboardNavigation.utils';
 import { DashboardNavigationProps } from './DashboardNavigation.types';
+import { getDashboardNavigationSections } from './DashboardNavigation.utils';
 
 // Component class constants
 const NAV_BASE_CLASSES =
@@ -31,7 +32,11 @@ export const DashboardNavigation = ({
 }: DashboardNavigationProps) => {
   const { _ } = useLingui();
   const [collapsed, setCollapsed] = useState(false);
-  const sections = getDashboardNavigationSections(activeAccount.type, false, collapsed);
+  const sections = getDashboardNavigationSections(
+    activeAccount.type,
+    false,
+    collapsed,
+  );
 
   // Handle navigation item clicks
   const handleItemClick = (path: string) => {
@@ -45,10 +50,10 @@ export const DashboardNavigation = ({
   return (
     <nav
       aria-label="Dashboard side navigation"
-      className={clsx(
+      className={cn(
         NAV_BASE_CLASSES,
         collapsed ? 'w-[100px] px-2 pt-[27px] pb-20' : 'w-[263px]',
-        !collapsed && className
+        !collapsed && className,
       )}
     >
       {/* Mobile close button */}
@@ -66,12 +71,12 @@ export const DashboardNavigation = ({
         type="button"
         onClick={() => setCollapsed(!collapsed)}
         className={COLLAPSE_BUTTON_CLASSES}
-        aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
       >
         <DoubleBreadcrumbLeftIcon
-          className={clsx(
-            "text-bc-neutral-400 w-[15px] h-[15px]",
-            collapsed && "transform -scale-x-100" // Flip horizontally when collapsed
+          className={cn(
+            'text-bc-neutral-400 w-[15px] h-[15px]',
+            collapsed && 'transform -scale-x-100', // Flip horizontally when collapsed
           )}
         />
       </button>
@@ -91,25 +96,29 @@ export const DashboardNavigation = ({
           const isLogoutSection = section.heading === '';
 
           return (
-            <div key={idx} className={collapsed ? "px-0" : ""}>
+            <div key={idx} className={collapsed ? 'px-0' : ''}>
               {/* Section heading */}
               {!isLogoutSection && (
-                <h3 className={clsx(
-                  SECTION_HEADING_BASE,
-                  collapsed
-                    ? "text-center text-[10px] leading-tight px-1 mx-auto"
-                    : "text-[12px]"
-                )}>
+                <h3
+                  className={cn(
+                    SECTION_HEADING_BASE,
+                    collapsed
+                      ? 'text-center text-[10px] leading-tight px-1 mx-auto'
+                      : 'text-[12px]',
+                  )}
+                >
                   {_(section.heading)}
                 </h3>
               )}
 
               {/* Divider for logout section */}
               {isLogoutSection && (
-                <hr className={clsx(
-                  "border-0 border-t border-solid border-t-bc-neutral-300 mx-auto my-2",
-                  collapsed ? "w-[65%]" : "w-full"
-                )} />
+                <hr
+                  className={cn(
+                    'border-0 border-t border-solid border-t-bc-neutral-300 mx-auto my-2',
+                    collapsed ? 'w-[65%]' : 'w-full',
+                  )}
+                />
               )}
 
               {/* Navigation items */}

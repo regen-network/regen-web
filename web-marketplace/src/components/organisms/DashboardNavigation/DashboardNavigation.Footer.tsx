@@ -1,9 +1,13 @@
+import { Trans } from '@lingui/macro';
+
 import RegistryIcon from 'web-components/src/components/icons/RegistryIcon';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
+
 import { DashboardNavFooterProps } from './DashboardNavigation.types';
 
-
-export const DashboardNavFooter = ({ onExitClick }: DashboardNavFooterProps) => (
+export const DashboardNavFooter = ({
+  onExitClick,
+}: DashboardNavFooterProps) => (
   <div className="flex flex-col gap-10 items-center justify-between px-3 py-4">
     {/* Logo area */}
     <div className="flex items-center gap-2">
@@ -19,7 +23,7 @@ export const DashboardNavFooter = ({ onExitClick }: DashboardNavFooterProps) => 
       style={{ color: 'black' }}
       onClick={() => onExitClick?.('homepage')}
     >
-      Exit to homepage
+      <Trans> Exit to homepage </Trans>
       <SmallArrowIcon className="h-12 w-12" />
     </button>
   </div>

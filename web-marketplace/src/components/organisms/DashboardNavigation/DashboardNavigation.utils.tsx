@@ -3,20 +3,28 @@ import { msg } from '@lingui/macro';
 
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
+import { LogoutIconGreen } from 'web-components/src/components/icons/LogoutIconGreen';
+import { MembersIcon } from 'web-components/src/components/icons/MembersIcon';
+import { OrgProfileIcon } from 'web-components/src/components/icons/OrgProfileIcon';
 import { ProjectsIcon } from 'web-components/src/components/icons/ProjectsIcon';
 import { ShoppingBagIcon } from 'web-components/src/components/icons/ShoppingBagIcon';
 import { ShoppingCartIcon } from 'web-components/src/components/icons/ShoppingCartIcon';
 import { UserMenuIcon } from 'web-components/src/components/icons/UserMenuIcon';
-import MembersIcon from 'web-components/src/components/icons/MembersIcon';
-import OrgProfile from 'web-components/src/components/icons/OrgProfile';
-import LogoutIconGreen from 'web-components/src/components/icons/LogoutIconGreen';
 
 import { NOT_SUPPORTED_TOOLTIP_TEXT } from 'pages/Dashboard/MyProjects/MyProjects.constants';
+
 import { DashboardNavigationSection } from './DashboardNavigation.types';
 
 // Helper function to create responsive section headings
-const getResponsiveHeading = (fullHeading: string, shortHeading: string, collapsed: boolean): string => {
-  return collapsed ? i18n._(msg`${shortHeading}`) : i18n._(msg`${fullHeading}`);
+const getResponsiveHeading = (
+  fullHeadingId: string,
+  shortHeadingId: string,
+  collapsed: boolean,
+): string => {
+  // Use pre-translated text based on IDs
+  return collapsed
+    ? i18n._(msg`${shortHeadingId}`)
+    : i18n._(msg`${fullHeadingId}`);
 };
 
 // Helper to wrap icons consistently
@@ -27,7 +35,10 @@ const wrapIcon = (Icon: React.FC<any>, props: any = {}) => (
 );
 
 // Get credits section
-const getCreditsSection = (loginDisabled: boolean, collapsed: boolean): DashboardNavigationSection => ({
+const getCreditsSection = (
+  loginDisabled: boolean,
+  collapsed: boolean,
+): DashboardNavigationSection => ({
   heading: getResponsiveHeading('Manage credits', 'Credits', collapsed),
   items: [
     {
@@ -46,7 +57,10 @@ const getCreditsSection = (loginDisabled: boolean, collapsed: boolean): Dashboar
 });
 
 // Get projects section
-const getProjectsSection = (loginDisabled: boolean, collapsed: boolean): DashboardNavigationSection => ({
+const getProjectsSection = (
+  loginDisabled: boolean,
+  collapsed: boolean,
+): DashboardNavigationSection => ({
   heading: getResponsiveHeading('Manage projects', 'Projects', collapsed),
   items: [
     {
@@ -60,7 +74,9 @@ const getProjectsSection = (loginDisabled: boolean, collapsed: boolean): Dashboa
 });
 
 // Get user-specific sections
-const getUserSections = (loginDisabled: boolean): DashboardNavigationSection[] => [
+const getUserSections = (
+  loginDisabled: boolean,
+): DashboardNavigationSection[] => [
   {
     heading: i18n._(msg`Orders`),
     items: [
@@ -98,7 +114,7 @@ const getOrgSection = (collapsed: boolean): DashboardNavigationSection => ({
   items: [
     {
       label: i18n._(msg`Edit org profile`),
-      icon: <OrgProfile linearGradient />,
+      icon: <OrgProfileIcon linearGradient />,
       path: 'profile',
     },
     {
@@ -129,12 +145,12 @@ const getLogoutSection = (): DashboardNavigationSection => ({
 export function getDashboardNavigationSections(
   accountType: 'user' | 'org',
   loginDisabled = false,
-  collapsed = false
+  collapsed = false,
 ): DashboardNavigationSection[] {
   // Common sections for both user and org
   const sections = [
     getCreditsSection(loginDisabled, collapsed),
-    getProjectsSection(loginDisabled, collapsed)
+    getProjectsSection(loginDisabled, collapsed),
   ];
 
   // Add account-specific sections

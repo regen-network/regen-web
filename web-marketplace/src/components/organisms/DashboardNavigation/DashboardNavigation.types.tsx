@@ -14,7 +14,6 @@ export type DashboardNavHeaderData = {
   onViewProfileClick?: (href: string) => void;
 };
 
-
 export interface DashboardNavigationItem {
   label: string;
   path: string;

@@ -1,6 +1,5 @@
 // src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx
-import React, { useEffect, useRef, useState } from 'react';
-import clsx from 'clsx';
+import React, { useState } from 'react';
 
 import { CopyButton } from 'web-components/src/components/buttons/CopyButton';
 import BreadcrumbIcon from 'web-components/src/components/icons/BreadcrumbIcon';
@@ -8,14 +7,18 @@ import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Body } from 'web-components/src/components/typography/Body';
 import { Subtitle } from 'web-components/src/components/typography/Subtitle';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
+import { cn } from 'web-components/src/utils/styles/cn';
 
+import useClickOutside from '../../../utils/hooks/useClickOutside';
 import { AccountSwitcherDropdown } from './DashboardNavigation.Dropdown';
 import { DashboardNavHeaderData } from './DashboardNavigation.types';
 
-export const DashboardNavHeader: React.FC<DashboardNavHeaderData & {
-  collapsed?: boolean;
-  onViewProfileClick?: (href: string) => void;
-}> = ({
+export const DashboardNavHeader: React.FC<
+  DashboardNavHeaderData & {
+    collapsed?: boolean;
+    onViewProfileClick?: (href: string) => void;
+  }
+> = ({
   activeAccount,
   accounts,
   onAccountSelect,
@@ -27,46 +30,36 @@ export const DashboardNavHeader: React.FC<DashboardNavHeaderData & {
   const canSwitch = accounts.length > 1;
 
   const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
+  // useClickOutside will call setOpen(false) whenever
+  // you click/touch outside the returned ref
+  const rootRef = useClickOutside<HTMLDivElement>(() => {
+    if (open) setOpen(false);
+  });
 
-  // Handle clicks outside the dropdown
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        open &&
-        rootRef.current &&
-        !rootRef.current.contains(e.target as Node)
-      ) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [open]);
+  const profileHref =
+    type === 'org'
+      ? `/dashboard/org/${activeAccount.id}`
+      : '/dashboard/profile';
 
   return (
     <div
       ref={rootRef}
-      className={clsx(
-        "relative flex items-start",
-        collapsed ? "justify-center mb-[64px]" : "gap-15 px-3 py-4 mb-[20px]"
+      className={cn(
+        'relative flex items-start',
+        collapsed ? 'justify-center mb-[64px]' : 'gap-15 px-3 py-4 mb-[20px]',
       )}
     >
-      <UserAvatar 
-        src={avatarSrc} 
-        alt={name} 
-      />
-      
-      {/* Only show detail content when not collapsed */}
+      <UserAvatar src={avatarSrc} alt={name} />
+
       {!collapsed && (
         <div className="flex flex-col">
           <button
             type="button"
-            className={clsx(
+            className={cn(
               'flex items-center gap-10 bg-transparent border-none pl-0',
-              canSwitch ? 'cursor-pointer' : 'cursor-default'
+              canSwitch ? 'cursor-pointer' : 'cursor-default',
             )}
-            onClick={() => canSwitch && setOpen(!open)}
+            onClick={() => canSwitch && setOpen(o => !o)}
             aria-expanded={open}
             aria-haspopup="true"
           >
@@ -86,20 +79,22 @@ export const DashboardNavHeader: React.FC<DashboardNavHeaderData & {
               content={address}
               tooltipText=""
               toastText="Copied!"
-              size={20}
+              iconClassName="h-[14px] w-[14px] hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
             />
           </div>
 
           <button
             type="button"
             className="mt-[4px] mb-[4px] flex items-center gap-[4px] text-[12px] font-bold text-bc-neutral-400 bg-transparent border-none p-0 text-left cursor-pointer"
-            onClick={() => onViewProfileClick?.('dashboard')}
+            onClick={() => onViewProfileClick?.(profileHref)}
           >
-            <span style={{ 
-              textDecoration: 'underline', 
-              textDecorationColor: '#8F8F8F',
-              textUnderlineOffset: '1px'
-            }}>
+            <span
+              style={{
+                textDecoration: 'underline',
+                textDecorationColor: '#8F8F8F',
+                textUnderlineOffset: '1px',
+              }}
+            >
               View public profile
             </span>
             <SmallArrowIcon className="h-[12px] w-[12px]" />
@@ -107,7 +102,6 @@ export const DashboardNavHeader: React.FC<DashboardNavHeaderData & {
         </div>
       )}
 
-      {/* Account switcher dropdown */}
       {open && (
         <AccountSwitcherDropdown
           accounts={accounts}
@@ -123,5 +117,3 @@ export const DashboardNavHeader: React.FC<DashboardNavHeaderData & {
 };
 
 export default DashboardNavHeader;
-
-

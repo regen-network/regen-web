@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useGradientId } from './hooks/useGradientId';
+
 type Props = {
   /** use the green gradient when true */
   linearGradient?: boolean;
@@ -7,16 +9,14 @@ type Props = {
   disabled?: boolean;
 } & React.SVGProps<SVGSVGElement>;
 
-export const OrgProfile: React.FC<Props> = ({
+export const OrgProfileIcon: React.FC<Props> = ({
   linearGradient,
   disabled,
   ...props
 }) => {
-  // unique gradient-id so it never collides
-  const gradientId = React.useMemo(
-    () => `dashboard_layout_gradient_${Math.random().toString(36).slice(2)}`,
-    []
-  );
+  const gradientId = useGradientId('logout_icon_green');
+
+  // unique ID so gradients don’t collide
 
   return (
     <svg
@@ -37,16 +37,19 @@ export const OrgProfile: React.FC<Props> = ({
             y2="26.2612"
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="0.00458717" stopColor={disabled ? '#8F8F8F' : '#7BC796'} />
+            <stop
+              offset="0.00458717"
+              stopColor={disabled ? '#8F8F8F' : '#7BC796'}
+            />
             <stop offset="1" stopColor={disabled ? '#EFEFEF' : '#C5E6D1'} />
           </linearGradient>
         </defs>
       )}
 
       {/**
-         * Each of these <path> blocks originally used a different
-         * gradient id; here we reuse the single gradientId for all.
-         */}
+       * Each of these <path> blocks originally used a different
+       * gradient id; here we reuse the single gradientId for all.
+       */}
       <path
         d="M7 8.25C7 8.11193 7.11193 8 7.25 8H8.75C8.88807 8 9 8.11193 9 8.25V9.75C9 9.88807 8.88807 10 8.75 10H7.25C7.11193 10 7 9.88807 7 9.75V8.25Z"
         fill={
@@ -166,5 +169,3 @@ export const OrgProfile: React.FC<Props> = ({
     </svg>
   );
 };
-
-export default OrgProfile;

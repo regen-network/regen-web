@@ -1,7 +1,7 @@
-import clsx from 'clsx';
-
 import CheckIcon from 'web-components/src/components/icons/CheckIcon';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
+import { cn } from 'web-components/src/utils/styles/cn';
+
 import { AccountSwitcherDropdownProps } from './DashboardNavigation.types';
 
 export const AccountSwitcherDropdown = ({
@@ -10,13 +10,13 @@ export const AccountSwitcherDropdown = ({
   onSelect,
 }: AccountSwitcherDropdownProps) => (
   <ul
-    className={clsx(
+    className={cn(
       // Position and sizing
       'absolute top-[25%] -left-[15px] w-[256px]',
       // Visual styling
       'shadow-[0_0_20px_rgba(0,0,0,0.25)] z-10',
       // Reset list styles
-      'list-none p-0 m-0'
+      'list-none p-0 m-0',
     )}
     role="listbox"
     aria-label="Account switcher"
@@ -29,7 +29,7 @@ export const AccountSwitcherDropdown = ({
           <button
             type="button"
             onClick={() => onSelect(account.id)}
-            className={clsx(
+            className={cn(
               // Layout
               'flex w-full items-center gap-10 px-10 h-[55px]',
               // Interactivity
@@ -37,21 +37,21 @@ export const AccountSwitcherDropdown = ({
               // Color based on selection state
               isSelected
                 ? 'bg-bc-neutral-200' // active row
-                : 'bg-bc-neutral-100 hover:bg-bc-neutral-200' // inactive rows
+                : 'bg-bc-neutral-100 hover:bg-bc-neutral-200', // inactive rows
             )}
           >
-            <UserAvatar 
-              src={account.avatarSrc} 
-              size="small" 
-              alt={account.name} 
+            <UserAvatar
+              src={account.avatarSrc}
+              size="small"
+              alt={account.name}
             />
             <span className="ml-3 mr-auto truncate text-left">
               {account.name}
             </span>
             {isSelected && (
-              <CheckIcon 
-                className="h-[18px] w-[18px] text-brand-400" 
-                aria-hidden="true" 
+              <CheckIcon
+                className="h-[18px] w-[18px] text-brand-400"
+                aria-hidden="true"
               />
             )}
           </button>

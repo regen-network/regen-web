@@ -90,6 +90,10 @@ async function prepareMsg(issuer: string, data: CreateBatchFormValues) {
     return issuanceRecipient as BatchIssuance;
   });
 
+  // TODO get class id from project data
+  // once Regen Ledger upgrade includes https://github.com/regen-network/regen-ledger/pull/2167
+  const classId = data.projectId.split('-')[0];
+
   return regen.ecocredit.v1.MessageComposer.withTypeUrl.createBatch({
     issuer,
     projectId: data.projectId,
@@ -98,6 +102,7 @@ async function prepareMsg(issuer: string, data: CreateBatchFormValues) {
     startDate: new Date(data.startDate as Date),
     endDate: new Date(data.endDate as Date),
     open: false,
+    classId,
   });
 }
 

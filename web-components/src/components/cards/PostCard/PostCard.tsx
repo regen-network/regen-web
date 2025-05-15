@@ -78,28 +78,43 @@ export default function PostCard({
         onEditDraft={onEditDraft}
         publicPost={publicPost}
       />
-      {!hasFile && (
-        <div className="absolute lg:right-[90px] top-[18px] lg:top-[26px]">
-          {!draftLabel && privacyLabel && <PrivateBadge label={privacyLabel} />}
-          {draftLabel && <DraftBadge label={draftLabel} />}
-        </div>
-      )}
-
       <Grid
         container
         sx={{
-          flexWrap: { xs: 'wrap-reverse', md: 'nowrap' },
+          flexWrap: {
+            xs: 'wrap-reverse',
+            md: `${hasFile ? 'nowrap' : 'wrap-reverse'}`,
+          },
           position: 'relative',
         }}
       >
+        {comment && !hasFile && (
+          <Grid xs={12} md={12} item>
+            <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
+              <Body
+                onClick={e => e.stopPropagation()}
+                size="md"
+                sx={{ pb: 1.5 }}
+                className="line-clamp-2 overflow-hidden"
+              >
+                <Linkify
+                  // eslint-disable-next-line lingui/no-unlocalized-strings
+                  options={{ target: '_blank', rel: 'noopener noreferrer' }}
+                >
+                  {comment}
+                </Linkify>
+              </Body>
+            </Box>
+          </Grid>
+        )}
         <Grid
           xs={12}
-          md={hasFile ? 7 : 12}
+          xl={hasFile ? 7 : 9}
           item
           sx={{
             pb: { xs: 4.5, md: 0 },
             pr: { xs: 0, md: 2 },
-            pt: { xs: hasFile ? 0 : 11, md: 0 },
+            pt: { xs: hasFile ? 0 : 5, md: 0 },
           }}
         >
           <Subtitle className="group-hover:text-grey-500" size="lg" mb={2.75}>
@@ -117,7 +132,7 @@ export default function PostCard({
             }}
             linkComponent={linkComponent}
           />
-          {comment && (
+          {comment && hasFile && (
             <Box sx={{ paddingInlineEnd: 2, paddingBlockStart: 4.5 }}>
               <Body
                 onClick={e => e.stopPropagation()}
@@ -230,6 +245,22 @@ export default function PostCard({
                 </Box>
               )}
             </Box>
+          </Grid>
+        )}
+        {!hasFile && (
+          <Grid
+            item
+            xs="auto"
+            sx={{
+              flexShrink: 0,
+              marginRight: '10px',
+              marginBottom: { xs: '0px', md: '20px', xlg: '0px' },
+            }}
+          >
+            {!draftLabel && privacyLabel && (
+              <PrivateBadge label={privacyLabel} />
+            )}
+            {draftLabel && <DraftBadge label={draftLabel} />}
           </Grid>
         )}
       </Grid>

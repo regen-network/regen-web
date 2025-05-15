@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import Timeline from '@mui/lab/Timeline';
+import { timelineContentClasses } from '@mui/lab/TimelineContent';
 import { timelineItemClasses } from '@mui/lab/TimelineItem';
 import {
   InfiniteData,
@@ -112,7 +113,7 @@ export const DataStream = ({
             )}
             <div className="flex mt-50">
               <Navigation
-                className="hidden sm:block w-[250px] mr-50"
+                className="hidden sm:block md:w-[150px] xl:w-[250px]"
                 classes={{
                   listItem:
                     '!border-0 font-sans text-lg font-normal !rounded-[5px] p-10',
@@ -127,13 +128,17 @@ export const DataStream = ({
                 }}
               />
               {!isLoading && projectLocation && posts && posts.length > 0 && (
-                <div className="w-[100%]">
+                <div className="flex-1 min-w-0">
                   <Timeline
                     sx={{
                       padding: 0,
                       [`& .${timelineItemClasses.root}:before`]: {
                         flex: 0,
                         padding: 0,
+                      },
+                      // force TimelineContent to be shrinkable, otherwise it overflows in some screen sizes
+                      [`& .${timelineContentClasses.root}`]: {
+                        minWidth: 0,
                       },
                     }}
                   >

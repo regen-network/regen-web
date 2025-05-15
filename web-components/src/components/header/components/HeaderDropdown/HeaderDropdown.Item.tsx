@@ -59,12 +59,12 @@ export const HeaderDropdownItem: React.FC<
       component="li"
     >
       {SVG && (
-        <Box className="mr-[18px] flex items-center">
+        <Box className="mr-[14px] flex items-center">
           <SVG />
         </Box>
       )}
       {iconElement && (
-        <Box className="mr-[18px] flex items-center">{iconElement}</Box>
+        <Box className="mr-[14px] flex items-center">{iconElement}</Box>
       )}
       {props.pathname &&
         (props.disabled ? (

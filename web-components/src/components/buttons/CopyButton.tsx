@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import copyTextToClipboard from '../../utils/copy';
 import { cn } from '../../utils/styles/cn';
@@ -17,8 +17,14 @@ export interface CopyButtonProps {
   /** The text to be displayed in the toast banner */
   toastText: string;
 
+  /** Optional className applied to the root element */
+  className?: string;
+
   /** Optional className applied to CopyIcon */
   iconClassName?: string;
+
+  /** Optional content rendered inside the component, placed before the CopyIcon */
+  children?: ReactNode;
 }
 
 /** CopyButton is a component for copying text to the clipboard. It
@@ -29,18 +35,23 @@ export const CopyButton = ({
   content,
   tooltipText,
   toastText,
+  className,
   iconClassName,
+  children,
 }: CopyButtonProps) => {
   const [copied, setCopied] = useState(false);
   return (
-    <div>
+    <div
+      onClick={() => {
+        copyTextToClipboard(content).then(() => {
+          setCopied(true);
+        });
+      }}
+      className={className}
+    >
+      {children}
       <InfoTooltip title={tooltipText} arrow placement="top">
         <CopyIcon
-          onClick={() => {
-            copyTextToClipboard(content).then(() => {
-              setCopied(true);
-            });
-          }}
           className={cn('cursor-pointer hover:stroke-grey-400', iconClassName)}
         />
       </InfoTooltip>

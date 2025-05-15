@@ -3392,7 +3392,11 @@ msgid "projects tabs"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:40
-msgid "public profile"
+#~ msgid "public profile"
+#~ msgstr ""
+
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:40
+msgid "Public profile"
 msgstr ""
 
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:164

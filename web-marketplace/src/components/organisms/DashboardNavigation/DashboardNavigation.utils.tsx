@@ -15,18 +15,6 @@ import { NOT_SUPPORTED_TOOLTIP_TEXT } from 'pages/Dashboard/MyProjects/MyProject
 
 import { DashboardNavigationSection } from './DashboardNavigation.types';
 
-// Helper function to create responsive section headings
-const getResponsiveHeading = (
-  fullHeadingId: string,
-  shortHeadingId: string,
-  collapsed: boolean,
-): string => {
-  // Use pre-translated text based on IDs
-  return collapsed
-    ? i18n._(msg`${shortHeadingId}`)
-    : i18n._(msg`${fullHeadingId}`);
-};
-
 // Helper to wrap icons consistently
 const wrapIcon = (Icon: React.FC<any>, props: any = {}) => (
   <span className="text-[24px] leading-none">
@@ -39,7 +27,8 @@ const getCreditsSection = (
   loginDisabled: boolean,
   collapsed: boolean,
 ): DashboardNavigationSection => ({
-  heading: getResponsiveHeading('Manage credits', 'Credits', collapsed),
+  // Direct translation for headings
+  heading: collapsed ? i18n._(msg`Credits`) : i18n._(msg`Manage credits`),
   items: [
     {
       label: i18n._(msg`Portfolio`),
@@ -61,7 +50,7 @@ const getProjectsSection = (
   loginDisabled: boolean,
   collapsed: boolean,
 ): DashboardNavigationSection => ({
-  heading: getResponsiveHeading('Manage projects', 'Projects', collapsed),
+  heading: collapsed ? i18n._(msg`Projects`) : i18n._(msg`Manage projects`),
   items: [
     {
       label: i18n._(msg`Projects`),
@@ -110,7 +99,8 @@ const getUserSections = (
 
 // Get org-specific sections
 const getOrgSection = (collapsed: boolean): DashboardNavigationSection => ({
-  heading: getResponsiveHeading('Manage organization', 'Org', collapsed),
+  // Direct translation instead of using getResponsiveHeading
+  heading: collapsed ? i18n._(msg`Org`) : i18n._(msg`Manage organization`),
   items: [
     {
       label: i18n._(msg`Edit org profile`),
@@ -127,7 +117,7 @@ const getOrgSection = (collapsed: boolean): DashboardNavigationSection => ({
 
 // Get logout section (always the same)
 const getLogoutSection = (): DashboardNavigationSection => ({
-  heading: '',
+  heading: '', // Empty heading doesn't need translation
   items: [
     {
       label: i18n._(msg`Log out`),
@@ -147,20 +137,17 @@ export function getDashboardNavigationSections(
   loginDisabled = false,
   collapsed = false,
 ): DashboardNavigationSection[] {
-  // Common sections for both user and org
   const sections = [
     getCreditsSection(loginDisabled, collapsed),
     getProjectsSection(loginDisabled, collapsed),
   ];
 
-  // Add account-specific sections
   if (accountType === 'user') {
     sections.push(...getUserSections(loginDisabled));
   } else {
     sections.push(getOrgSection(collapsed));
   }
 
-  // Add logout section
   sections.push(getLogoutSection());
 
   return sections;

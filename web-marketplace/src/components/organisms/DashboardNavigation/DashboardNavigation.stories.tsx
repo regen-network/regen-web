@@ -31,21 +31,17 @@ const meta: Meta<typeof DashboardNavigation> = {
 export default meta;
 
 export const Default: StoryFn<typeof DashboardNavigation> = () => {
-  // State management
   const [activeAccountId, setActiveAccountId] = useState(MOCK_ACCOUNTS[0].id);
   const [currentPath, setCurrentPath] = useState('portfolio');
 
-  // Find the active account
   const activeAccount =
     MOCK_ACCOUNTS.find(a => a.id === activeAccountId) || MOCK_ACCOUNTS[0];
 
-  // Simple navigation handler that updates state and logs path
   const handleNavItemClick = (path: string) => {
-    action('navigation')(path); // Log all navigation paths consistently
+    action('navigation')(path);
     setCurrentPath(path);
   };
 
-  // Handle account selection
   const handleAccountSelect = (id: string) => {
     action('account-select')(id);
     setActiveAccountId(id);

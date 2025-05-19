@@ -11,11 +11,8 @@ export const AccountSwitcherDropdown = ({
 }: AccountSwitcherDropdownProps) => (
   <ul
     className={cn(
-      // Position and sizing
-      'absolute top-[25%] -left-[15px] w-[256px]',
-      // Visual styling
+      'absolute top-[32px] left-[-15px] w-[256px]',
       'shadow-[0_0_20px_rgba(0,0,0,0.25)] z-10',
-      // Reset list styles
       'list-none p-0 m-0',
     )}
     role="listbox"
@@ -30,11 +27,8 @@ export const AccountSwitcherDropdown = ({
             type="button"
             onClick={() => onSelect(account.id)}
             className={cn(
-              // Layout
               'flex w-full items-center gap-10 px-10 h-[55px]',
-              // Interactivity
               'hover:cursor-pointer border-none',
-              // Color based on selection state
               isSelected
                 ? 'bg-bc-neutral-200' // active row
                 : 'bg-bc-neutral-100 hover:bg-bc-neutral-200', // inactive rows

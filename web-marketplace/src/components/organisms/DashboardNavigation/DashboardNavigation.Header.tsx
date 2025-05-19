@@ -45,7 +45,7 @@ export const DashboardNavHeader: React.FC<
       ref={rootRef}
       className={cn(
         'relative flex items-start',
-        collapsed ? 'justify-center mb-[64px]' : 'gap-15 px-3 py-4 mb-[20px]',
+        collapsed ? 'justify-center mb-[64px]' : 'gap-15 px-3 py-4 mb-20',
       )}
     >
       <UserAvatar src={avatarSrc} alt={name} />
@@ -70,22 +70,23 @@ export const DashboardNavHeader: React.FC<
             )}
           </button>
 
-          <CopyButton
-            className="group flex flex-row items-center gap-3 hover:underline cursor-pointer"
-            content={address}
-            toastText="Copied!"
-            // Using theme color instead of hardcoded hex
-            iconClassName="h-[14px] w-[14px] hover:text-ac-success-400 hover:stroke-none text-bc-neutral-500"
-            tooltipText={''}
-          >
-            <Body
-              // Updated text color to match theme
-              className="text-sc-text-paragraph"
-              size="xs"
+          <div className="group flex items-center gap-3">
+            <CopyButton
+              className="group/copy flex items-center gap-3"
+              content={address}
+              toastText="Copied!"
+              iconClassName="h-[14px] w-[14px] text-bc-neutral-500 group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
+              tooltipText={''}
             >
-              {short}
-            </Body>
-          </CopyButton>
+              <Body
+                size="xs"
+                className="text-sc-text-sub-header group-hover:text-sc-text-paragraph group-hover:underline group-hover/copy:text-sc-text-paragraph group-hover/copy:underline cursor-pointer"
+                onClick={() => navigator.clipboard.writeText(address)}
+              >
+                {short}
+              </Body>
+            </CopyButton>
+          </div>
 
           <button
             type="button"

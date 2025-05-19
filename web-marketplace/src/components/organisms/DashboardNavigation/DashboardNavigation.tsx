@@ -17,13 +17,12 @@ const NAV_BASE_CLASSES =
   'relative flex flex-col justify-between h-screen overflow-visible transition-all duration-300 border-0 border-r border-solid border-r-[#D2D5D9] bg-white';
 
 const COLLAPSE_BUTTON_CLASSES =
-  'hidden sm:flex items-center justify-center w-[25px] h-[25px] absolute z-10 right-[-12px] top-[35px] p-0 rounded-[5px] border border-[1px] border-[#D2D5D9] bg-[#FFFFFF] shadow-[0_4px_10px_rgba(0,0,0,0.1)] cursor-pointer';
+  'group hidden sm:flex items-center justify-center w-[25px] h-[25px] absolute z-10 right-[-12px] top-[35px] p-0 rounded-[5px] border border-[1px] border-[#D2D5D9] bg-[#FFFFFF] shadow-[0_4px_10px_rgba(0,0,0,0.1)] cursor-pointer hover:bg-bc-green-600 hover:text-bc-neutral-100';
 
 const SECTION_HEADING_BASE =
-  'my-3 uppercase text-sc-text-sub-header cursor-default pointer-events-none';
+  'uppercase text-sc-text-sub-header cursor-default pointer-events-none';
 
 export const DashboardNavigation = ({
-  className = 'px-30 pt-30 pb-20',
   header: { activeAccount, accounts, onAccountSelect, onViewProfileClick },
   currentPath,
   onNavItemClick,
@@ -52,7 +51,7 @@ export const DashboardNavigation = ({
       className={cn(
         NAV_BASE_CLASSES,
         collapsed ? 'w-[100px] px-2 pt-[27px] pb-20' : 'w-[263px]',
-        !collapsed && className,
+        !collapsed && 'px-20 md:px-30 pt-30 pb-20',
       )}
     >
       {/* Mobile close button */}
@@ -75,8 +74,9 @@ export const DashboardNavigation = ({
       >
         <DoubleBreadcrumbLeftIcon
           className={cn(
-            'text-bc-neutral-400 w-[15px] h-[15px]',
+            'text-bc-neutral-400 w-[15px] h-[15px] transition-colors',
             collapsed && 'transform -scale-x-100', // Flip horizontally when collapsed
+            'group-hover:text-bc-neutral-100',
           )}
         />
       </button>
@@ -104,7 +104,7 @@ export const DashboardNavigation = ({
                     SECTION_HEADING_BASE,
                     collapsed
                       ? 'text-center text-[10px] leading-tight px-1 mx-auto block w-full'
-                      : 'text-[12px]',
+                      : 'text-left text-[12px] w-full',
                   )}
                   textSize="xs"
                 >
@@ -123,7 +123,7 @@ export const DashboardNavigation = ({
               )}
 
               {/* Navigation items */}
-              <ul className="flex flex-col gap-1 list-none px-0 mt-0">
+              <ul className="flex flex-col gap-[3px] list-none px-0 mt-5 mb-[10px] md:mb-[15px]">
                 {section.items.map(item => (
                   <li key={item.label}>
                     <DashboardNavigationListItem

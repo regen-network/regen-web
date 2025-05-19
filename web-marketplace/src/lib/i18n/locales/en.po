@@ -55,6 +55,7 @@ msgid "(retirement is permanent and non-reversible)"
 msgstr ""
 
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:136
+#: src/components/organisms/BasketOverview/BasketOverview.tsx:136
 msgid "{0, plural, one {allowed credit class} other {allowed credit classes}}"
 msgstr ""
 
@@ -1424,6 +1425,7 @@ msgstr ""
 msgid "credits"
 msgstr ""
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:31
 #: src/components/organisms/Order/Order.Summary.tsx:60
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:305
 msgid "Credits"
@@ -1814,6 +1816,14 @@ msgstr ""
 msgid "Edit filters"
 msgstr ""
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:106
+msgid "Edit org profile"
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:83
+msgid "Edit personal profile"
+msgstr ""
+
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.tsx:220
 msgid "edit profile"
 msgstr ""
@@ -1917,6 +1927,10 @@ msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:129
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:25
+msgid "Exit to homepage"
 msgstr ""
 
 #: src/components/organisms/Order/Order.tsx:176
@@ -2441,6 +2455,7 @@ msgstr ""
 msgid "log in for faster checkout"
 msgstr ""
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:123
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:11
 msgid "Log out"
 msgstr ""
@@ -2489,6 +2504,18 @@ msgstr ""
 msgid "Make the location data private"
 msgstr ""
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:31
+msgid "Manage credits"
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:103
+msgid "Manage organization"
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:53
+msgid "Manage projects"
+msgstr ""
+
 #: src/pages/Projects/hooks/useClientFilters.tsx:146
 msgid "Market"
 msgstr ""
@@ -2525,6 +2552,10 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:220
 msgid "Medium"
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:111
+msgid "Members"
 msgstr ""
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:13
@@ -2636,6 +2667,7 @@ msgid "Must have recipients"
 msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:57
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:73
 msgid "My orders"
 msgstr ""
 
@@ -2836,7 +2868,12 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:54
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:70
 msgid "Orders"
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:103
+msgid "Org"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:43
@@ -3015,6 +3052,7 @@ msgstr ""
 msgid "Please wait while transaction processes"
 msgstr ""
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:34
 #: src/pages/Dashboard/Dashboard.constants.tsx:14
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:74
 msgid "Portfolio"
@@ -3164,6 +3202,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:27
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:80
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
 msgid "Profile"
 msgstr ""
@@ -3374,6 +3413,8 @@ msgstr ""
 msgid "PROJECTED:"
 msgstr ""
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:53
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:56
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:39
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
@@ -3798,6 +3839,7 @@ msgstr ""
 msgid "Select option"
 msgstr ""
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:39
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:11
 msgid "Sell"
 msgstr ""
@@ -3866,6 +3908,7 @@ msgid "settings"
 msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:37
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:90
 #: src/pages/Settings/Settings.tsx:52
 msgid "Settings"
 msgstr ""
@@ -4750,6 +4793,10 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:217
 msgid "view project"
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:97
+msgid "View public profile"
 msgstr ""
 
 #: src/components/organisms/Order/Order.tsx:125

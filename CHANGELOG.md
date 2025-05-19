@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/regen-network/regen-web/compare/v2.8.1...v2.9.0) (2025-05-19)
+
+### Bug Fixes
+
+- AP-617 network errors handling ([#2630](https://github.com/regen-network/regen-web/issues/2630)) ([7ad3837](https://github.com/regen-network/regen-web/commit/7ad383741e3be73af932e311d859b54d429373f6))
+- APP-540 add support for commas in editable input ([#2598](https://github.com/regen-network/regen-web/issues/2598)) ([232e4cc](https://github.com/regen-network/regen-web/commit/232e4cc4376e0bd5409dfa885240e2728624d4a6))
+- APP-582 User dropdown and "my orders" using Wallet Connect ([#2610](https://github.com/regen-network/regen-web/issues/2610)) ([a0c760f](https://github.com/regen-network/regen-web/commit/a0c760f9f256ad72d6c7016fb660976202d73710))
+- APP-585 one time password input ([#2624](https://github.com/regen-network/regen-web/issues/2624)) ([f7e9d44](https://github.com/regen-network/regen-web/commit/f7e9d441a868f4f5aabb092fcb669229bb50e2e3))
+- APP-588 layout alignment improvements ([#2627](https://github.com/regen-network/regen-web/issues/2627)) ([02690d3](https://github.com/regen-network/regen-web/commit/02690d3f2a2bb7cf33d53de9150ff7af5eb670f3))
+- APP-594 clear localStorage items related to buy credits on logout ([#2615](https://github.com/regen-network/regen-web/issues/2615)) ([25ae3e0](https://github.com/regen-network/regen-web/commit/25ae3e04ea0872ff1bd9e43ea02b418d85173f87))
+- APP-598 filters 'apply' and 'close' buttons position on mobile ([#2622](https://github.com/regen-network/regen-web/issues/2622)) ([a34b833](https://github.com/regen-network/regen-web/commit/a34b8338ed9a529821cd2b04e69174b10bd1f4e1))
+- APP-609 dashboard tab icons not visible ([#2634](https://github.com/regen-network/regen-web/issues/2634)) ([d8520d4](https://github.com/regen-network/regen-web/commit/d8520d4d69f893ecf76c80c14436a3c3147b4fd5))
+- APP-618 encode name parameter in certificate navigation URLs ([#2631](https://github.com/regen-network/regen-web/issues/2631)) ([4750d67](https://github.com/regen-network/regen-web/commit/4750d67aee5dd8ce82987c7dbca5cf9573738f6b))
+- APP-621 update UserMenuItem user box avatar style ([#2635](https://github.com/regen-network/regen-web/issues/2635)) ([84b9cc7](https://github.com/regen-network/regen-web/commit/84b9cc743e6e6a2b8fbe42005f516503cfc933a8))
+- APP-624 use getHashUrl for blockchain record link ([#2626](https://github.com/regen-network/regen-web/issues/2626)) ([59347c2](https://github.com/regen-network/regen-web/commit/59347c25d3a4188477ffee23273d2fe34c339322))
+- APP-633 credit batch creation amounts shift ([#2641](https://github.com/regen-network/regen-web/issues/2641)) ([e271d88](https://github.com/regen-network/regen-web/commit/e271d88a15adbdf0eacd8f351175512d702334c2))
+- APP-634 hide prefinance projects from menu if none ([#2643](https://github.com/regen-network/regen-web/issues/2643)) ([10f66db](https://github.com/regen-network/regen-web/commit/10f66db518d6ad59c40c603b84ec5dece00c6760))
+- APP-641 make orders page only accessible when logged in or connected to keplr ([#2648](https://github.com/regen-network/regen-web/issues/2648)) ([b3c77d9](https://github.com/regen-network/regen-web/commit/b3c77d9652584bc85a59a233ee77bb4dd21697e7))
+- APP-644 credit class page UI issues ([#2647](https://github.com/regen-network/regen-web/issues/2647)) ([93b785e](https://github.com/regen-network/regen-web/commit/93b785e795d188bdb59518001b2a704f157e5c2a))
+- APP-648 purchase button multiple submissions ([#2651](https://github.com/regen-network/regen-web/issues/2651)) ([b19a637](https://github.com/regen-network/regen-web/commit/b19a637c9fc6c72c739964dec34533b8b158d65d))
+- APP-682 update PrivateBadge positioning in PostCard component ([#2656](https://github.com/regen-network/regen-web/issues/2656)) ([cb268e0](https://github.com/regen-network/regen-web/commit/cb268e0881a022308bdf0147d8b2bdff42be1699))
+- WWW-9 use NextLink where MUI Link and <a> tags are used ([#2645](https://github.com/regen-network/regen-web/issues/2645)) ([1495f3b](https://github.com/regen-network/regen-web/commit/1495f3b13ca56551304afc775b61fc9a2f022bbc))
+
+### Features
+
+- APP-578 regen api upgrade ([#2638](https://github.com/regen-network/regen-web/issues/2638)) ([d3299e1](https://github.com/regen-network/regen-web/commit/d3299e1afd350e8e8ae6af52dd9b9f7b20f07f0a))
+- APP-579 add new buy events ([#2629](https://github.com/regen-network/regen-web/issues/2629)) ([5af4d13](https://github.com/regen-network/regen-web/commit/5af4d13adbcf50a2039aff53d4281796fb1a5484))
+- APP-587 "looking for over the counter sales" card on buy choose credits page ([#2632](https://github.com/regen-network/regen-web/issues/2632)) ([fda064a](https://github.com/regen-network/regen-web/commit/fda064a5330712dcc986b4ed283a85119f9cd6ad))
+- APP-610 move checking email to payment info step ([#2646](https://github.com/regen-network/regen-web/issues/2646)) ([a3d19f9](https://github.com/regen-network/regen-web/commit/a3d19f9871b64c77fe2885ee9d61dcaae00ef42c))
+- APP-611 standardise number formats ([#2652](https://github.com/regen-network/regen-web/issues/2652)) ([d93e468](https://github.com/regen-network/regen-web/commit/d93e468ef3311ea81a0cd0ccee7b93301e65392b))
+- APP-626 retirement certificate wording update ([#2636](https://github.com/regen-network/regen-web/issues/2636)) ([76df5da](https://github.com/regen-network/regen-web/commit/76df5dafb017c152842f3e9c779a84e90d2fec2a))
+- APP-627 order email confirmation for retiring crypto + pass metadata to… ([#2637](https://github.com/regen-network/regen-web/issues/2637)) ([8f11514](https://github.com/regen-network/regen-web/commit/8f1151445d83bc36a32bde7c881aa341b51ef3d2))
+- APP-631 more projects by admin ([#2642](https://github.com/regen-network/regen-web/issues/2642)) ([c3b75f5](https://github.com/regen-network/regen-web/commit/c3b75f54750e5b53917c8821c0db5f836829a631))
+- APP-635 remove decimals from credits amounts ([#2644](https://github.com/regen-network/regen-web/issues/2644)) ([06d4f59](https://github.com/regen-network/regen-web/commit/06d4f59d141ec09fc0a0d302bb9e011388580b2a))
+- APP-636 add seller dashboard for on boarding/viewing stripe connected accounts ([#2649](https://github.com/regen-network/regen-web/issues/2649)) ([49f9aba](https://github.com/regen-network/regen-web/commit/49f9aba73cbf4c67aa882004cdfd9098985b42f6))
+- APP-659 Add "for sale" to the project page credits and change "credits available" to "credits for sale" on project card ([#2653](https://github.com/regen-network/regen-web/issues/2653)) ([8535be6](https://github.com/regen-network/regen-web/commit/8535be61cfb43c72a0200242c514c4e065bbc5fd))
+
 ## [2.8.1](https://github.com/regen-network/regen-web/compare/v2.8.0...v2.8.1) (2025-02-27)
 
 ### Bug Fixes

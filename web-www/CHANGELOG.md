@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/regen-network/regen-web/compare/v2.8.1...v2.9.0) (2025-05-19)
+
+### Bug Fixes
+
+- WWW-9 use NextLink where MUI Link and <a> tags are used ([#2645](https://github.com/regen-network/regen-web/issues/2645)) ([1495f3b](https://github.com/regen-network/regen-web/commit/1495f3b13ca56551304afc775b61fc9a2f022bbc))
+
+### Features
+
+- APP-578 regen api upgrade ([#2638](https://github.com/regen-network/regen-web/issues/2638)) ([d3299e1](https://github.com/regen-network/regen-web/commit/d3299e1afd350e8e8ae6af52dd9b9f7b20f07f0a))
+
 # [2.8.0](https://github.com/regen-network/regen-web/compare/v2.7.5...v2.8.0) (2025-02-26)
 
 ### Features

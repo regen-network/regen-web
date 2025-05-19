@@ -1,6 +1,6 @@
 import React, { MutableRefObject, useEffect, useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
-import { msg, plural } from '@lingui/react';
+import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';

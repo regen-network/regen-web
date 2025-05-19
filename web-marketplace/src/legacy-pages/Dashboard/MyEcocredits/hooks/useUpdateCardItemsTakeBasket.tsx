@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { msg, plural } from '@lingui/react';
+import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
 import { Item } from 'web-components/src/components/modal/TxModal';

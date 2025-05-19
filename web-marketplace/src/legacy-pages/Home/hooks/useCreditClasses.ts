@@ -15,7 +15,7 @@ import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDe
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 type Props = {
-  skippedClassId: string;
+  skippedClassId?: string;
 };
 
 export const useCreditClasses = ({ skippedClassId }: Props) => {

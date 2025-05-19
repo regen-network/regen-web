@@ -17,6 +17,11 @@ const nextConfig = {
       test: /\.po$/,
       use: '@lingui/loader',
     });
+    // https://github.com/digitalbazaar/jsonld.js/issues/567#issuecomment-2823923356
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'rdf-canonize-native': false,
+    };
 
     return config;
   },

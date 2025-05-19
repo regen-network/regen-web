@@ -6,6 +6,7 @@ import {
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import { getDataFromBatchDenomId } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { normalizeRetirement } from 'lib/normalizers/retirements/normalizeRetirement';
@@ -16,7 +17,6 @@ import { getRetirementByNodeId } from 'lib/queries/react-query/registry-server/g
 import { getRetirementByTxHash } from 'lib/queries/react-query/registry-server/graphql/indexer/getRetirementByTxHash/getRetirementByTxHash';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-import { getDataFromBatchDenomId } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
 

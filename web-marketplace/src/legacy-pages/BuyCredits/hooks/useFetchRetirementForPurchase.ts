@@ -5,7 +5,8 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { msg, t, useLingui } from '@lingui/react';
+import { msg, t } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 import { timer } from 'utils/timer';

@@ -57,7 +57,7 @@ const UserMenuItems: React.FC<React.PropsWithChildren<UserMenuItemsProps>> = ({
               size="sm"
               mobileSize="sm"
               onClick={disconnect}
-              className="text-sc-text-sub-header pl-[14px]"
+              className="text-sc-text-sub-header pl-[14px] hover:underline hover:text-sc-text-header"
             >
               {logoutText}
             </Body>

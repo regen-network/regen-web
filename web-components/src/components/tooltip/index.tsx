@@ -26,13 +26,13 @@ function arrowGenerator(): any {
     },
     '&[data-popper-placement*="right"] .MuiTooltip-arrow': {
       left: 0,
-      marginLeft: '-1.42em',
-      height: '1em',
-      width: '1.42em',
-      marginTop: 4,
-      marginBottom: 4,
+      marginLeft: '-1.5em',
+      height: '2em',
+      width: '1.5em',
+      marginTop: -0.5,
+      marginBottom: 5,
       '&::before': {
-        transformOrigin: '100% 100%',
+        transformOrigin: '100% 120%',
       },
     },
     '&[data-popper-placement*="left"] .MuiTooltip-arrow': {

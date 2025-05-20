@@ -17,7 +17,7 @@ const NAV_BASE_CLASSES =
   'relative flex flex-col justify-between h-screen overflow-visible transition-all duration-300 border-0 border-r border-solid border-r-[#D2D5D9] bg-white';
 
 const COLLAPSE_BUTTON_CLASSES =
-  'group hidden sm:flex items-center justify-center w-[25px] h-[25px] absolute z-10 right-[-12px] top-[35px] p-0 rounded-[5px] border border-[1px] border-[#D2D5D9] bg-[#FFFFFF] shadow-[0_4px_10px_rgba(0,0,0,0.1)] cursor-pointer hover:bg-bc-green-600 hover:text-bc-neutral-100';
+  'group hidden sm:flex items-center justify-center w-[25px] h-[25px] absolute z-10 right-[-12.5px] top-[35px] p-0 rounded-[5px] border border-solid border-[#D2D5D9] bg-[#FFFFFF] shadow-[0_0_8px_rgba(0,0,0,0.15)] cursor-pointer hover:bg-bc-green-600 hover:text-bc-neutral-100';
 
 const SECTION_HEADING_BASE =
   'uppercase text-sc-text-sub-header cursor-default pointer-events-none';

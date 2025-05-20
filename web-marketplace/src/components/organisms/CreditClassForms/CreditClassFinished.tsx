@@ -1,6 +1,6 @@
-import { Trans } from "@lingui/react/macro";
-import { msg } from "@lingui/core/macro";
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Link, SxProps } from '@mui/material';
 import { truncate } from 'lodash';
 

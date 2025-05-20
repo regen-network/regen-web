@@ -1,5 +1,5 @@
-import { msg, plural } from "@lingui/core/macro";
 import { MessageDescriptor } from '@lingui/core';
+import { msg, plural } from '@lingui/core/macro';
 
 import TebuCard from 'web-components/src/components/cards/TebuCard';
 import AreaActionsBody from 'web-components/src/components/cards/TebuCard/TebuCard.AreaActionsBody';

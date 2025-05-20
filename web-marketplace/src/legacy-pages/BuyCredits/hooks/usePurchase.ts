@@ -19,7 +19,6 @@ import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom, errorCodeAtom } from 'lib/atoms/error.atoms';
 import {
-  connectedEmailErrorModalAtom,
   errorModalAtom,
   processingModalAtom,
   txBuySuccessfulModalAtom,
@@ -110,7 +109,7 @@ export const usePurchase = ({
   const { track } = useTracker();
   const location = useLocation();
 
-  const { activeAccount, privActiveAccount } = useAuth();
+  const { activeAccount } = useAuth();
   const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();
   const { data } = useMultiStep<BuyCreditsSchemaTypes>();
@@ -120,9 +119,6 @@ export const usePurchase = ({
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
   const setErrorModalAtom = useSetAtom(errorModalAtom);
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
-  const setConnectedEmailErrorModalAtom = useSetAtom(
-    connectedEmailErrorModalAtom,
-  );
 
   const reactQueryClient = useQueryClient();
   const { data: token } = useQuery(getCsrfTokenQuery({}));

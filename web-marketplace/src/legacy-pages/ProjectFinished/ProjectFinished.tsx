@@ -1,9 +1,9 @@
-import { Trans } from "@lingui/react/macro";
-import { msg } from "@lingui/core/macro";
 import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/system';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';

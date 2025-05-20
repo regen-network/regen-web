@@ -2,10 +2,10 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Trans } from '@lingui/react/macro';
 import { Grid } from '@mui/material';
+import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
 
 import { useAuth } from 'lib/auth/auth';
 
-import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
 import { ProjectFormAccessTemplate } from 'components/templates/ProjectFormTemplate/ProjectFormAccessTemplate';
 
 import { ChooseCreditClassGrid } from './ChooseCreditClass.Grid';

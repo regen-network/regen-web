@@ -1,5 +1,5 @@
-import { Trans } from '@lingui/react/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Grid } from '@mui/material';
 
 import ReadMore from 'web-components/src/components/read-more';

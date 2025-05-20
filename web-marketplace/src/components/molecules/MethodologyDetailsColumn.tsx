@@ -1,7 +1,7 @@
-import { Trans } from "@lingui/react/macro";
-import { msg } from "@lingui/core/macro";
 import React from 'react';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { makeStyles } from 'tss-react/mui';
 
 import { BlockContent } from 'web-components/src/components/block-content';

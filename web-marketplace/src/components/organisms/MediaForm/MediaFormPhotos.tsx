@@ -209,7 +209,7 @@ export const MediaFormPhotos = ({
             onClose={onClose}
             onSubmit={onSubmit}
             initialImage={initialFile}
-            fixedCrop={cropAspectMediaForm}
+            aspect={cropAspectMediaForm}
             isIgnoreCrop={!!value}
             uploadText={_(UPLOAD_IMAGE)}
             updateText={_(UPDATE)}
@@ -298,7 +298,7 @@ export const MediaFormPhotos = ({
                   onClose={onClose}
                   onSubmit={onSubmit}
                   initialImage={initialFile}
-                  fixedCrop={cropAspectMediaForm}
+                  aspect={cropAspectMediaForm}
                   isCropSubmitDisabled={hasFieldError}
                   isIgnoreCrop={!!value}
                   {...cropImageModalText}

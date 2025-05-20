@@ -1,6 +1,6 @@
-import { Trans } from "@lingui/react/macro";
-import { msg } from "@lingui/core/macro";
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box, Grid } from '@mui/material';
 
 import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';

@@ -4,7 +4,6 @@ import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import _ from 'lodash';
 import { makeStyles } from 'tss-react/mui';
 
 import Action, { ActionProps } from 'web-components/src/components/action';

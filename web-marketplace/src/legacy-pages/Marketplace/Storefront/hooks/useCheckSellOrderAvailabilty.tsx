@@ -2,12 +2,11 @@ import { MutableRefObject, useEffect } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
+import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
 
 import { UseStateSetter } from 'types/react/use-state';
-
-import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 
 import { checkIsBuyOrderInvalid } from '../Storefront.utils';
 

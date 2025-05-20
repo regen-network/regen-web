@@ -1,5 +1,6 @@
 import { forwardRef, useEffect, useMemo, useState } from 'react';
-import { Trans, useLingui } from '@lingui/react';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Autocomplete, TextField } from '@mui/material';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';

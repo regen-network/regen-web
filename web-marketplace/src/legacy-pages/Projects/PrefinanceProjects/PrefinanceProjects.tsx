@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Trans, useLingui } from '@lingui/react';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';

@@ -184,9 +184,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
             label: { width: '100%' },
             button: { width: '100%' },
           }}
-          fixedCrop={{
-            aspect: PROFILE_BG_ASPECT_RATIO,
-          }}
+          aspect={PROFILE_BG_ASPECT_RATIO}
           {...form.register('backgroundImage')}
           name="bg-image"
           onUpload={onUpload}

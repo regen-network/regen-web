@@ -1,5 +1,5 @@
-import { Trans } from '@lingui/react/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box, FormControlLabel, Link, SxProps, Theme } from '@mui/material';
 import { useAtom } from 'jotai';
 

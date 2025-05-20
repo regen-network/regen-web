@@ -1,3 +1,5 @@
+import { DEFAULT_PROFILE_BG } from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
+import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
 import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
 import TwitterIcon from 'web-components/src/components/icons/social/TwitterIcon';
@@ -6,9 +8,6 @@ import { SocialLink } from 'web-components/src/components/organisms/ProfileHeade
 
 import { Account, AccountByIdQuery } from 'generated/graphql';
 import { Wallet } from 'lib/wallet/wallet';
-
-import { DEFAULT_PROFILE_BG } from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
 
 /* getSocialsLinks */
 

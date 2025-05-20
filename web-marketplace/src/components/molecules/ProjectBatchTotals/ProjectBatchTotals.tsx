@@ -50,6 +50,7 @@ export function ProjectBatchTotals({
     ? isSoldOut
     : !hasAvailableCredits;
 
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   const tooltipClassName = IS_TERRASOS ? 'w-[17px] h-[17px]' : '';
   return (
     <div

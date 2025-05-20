@@ -279,6 +279,7 @@ export const ChooseCreditsForm = React.memo(
       if (!cardSellOrders.length && paymentOption === PAYMENT_OPTIONS.CARD) {
         handlePaymentOptions(PAYMENT_OPTIONS.CRYPTO);
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cardSellOrders.length, initialPaymentOption]); // just run this once
 
     useEffect(() => {

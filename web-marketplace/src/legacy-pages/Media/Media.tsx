@@ -8,11 +8,11 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import { useNavigateNext } from 'legacy-pages/ProjectCreate/hooks/useNavigateNext';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 
-import { useNavigateNext } from 'legacy-pages/ProjectCreate/hooks/useNavigateNext';
 import WithLoader from 'components/atoms/WithLoader';
 import { MediaFormSchemaType } from 'components/organisms/MediaForm/MediaForm.schema';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';

@@ -4,6 +4,7 @@ import '../App.css';
 
 // TODO migrate rest of meta data from html bellow
 export const metadata: Metadata = {
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   title: 'Regen Marketplace',
 };
 

@@ -1,5 +1,3 @@
-import { Trans } from "@lingui/react/macro";
-import { msg } from "@lingui/core/macro";
 import React, { useEffect, useState } from 'react';
 import {
   ApolloClient,
@@ -7,7 +5,9 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { MessageDescriptor } from '@lingui/core';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';

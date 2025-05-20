@@ -1,5 +1,6 @@
 import { msg } from '@lingui/core/macro';
 import { SellOrderInfo } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
+import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 
 import { Item } from 'web-components/src/components/modal/ConfirmModal';
 
@@ -9,8 +10,6 @@ import {
 } from 'lib/coingecko';
 import { microToDenom } from 'lib/denom.utils';
 import { TranslatorType } from 'lib/i18n/i18n.types';
-
-import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 
 import { NormalizedSellOrder } from './Storefront.types';
 

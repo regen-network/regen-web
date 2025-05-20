@@ -1,7 +1,7 @@
-import { Trans } from "@lingui/react/macro";
-import { msg } from "@lingui/core/macro";
 import { useParams } from 'react-router-dom';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from 'web-components/src/theme/muiTheme';

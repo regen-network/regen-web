@@ -1,4 +1,4 @@
-import { SetStateAction, useCallback, useMemo, useRef } from 'react';
+import { SetStateAction, useCallback, useMemo } from 'react';
 import { ParamKeyValuePair, useSearchParams } from 'react-router-dom';
 
 import {

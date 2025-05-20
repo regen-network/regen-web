@@ -4,13 +4,13 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
+import { useNavigateNext } from 'legacy-pages/ProjectCreate/hooks/useNavigateNext';
+import { useProjectEditContext } from 'legacy-pages/ProjectEdit';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getAllCreateProjectPageQuery } from 'lib/queries/react-query/sanity/getAllCreateProjectPageQuery/getAllCreateProjectPageQuery';
 
-import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
-import { useNavigateNext } from 'legacy-pages/ProjectCreate/hooks/useNavigateNext';
-import { useProjectEditContext } from 'legacy-pages/ProjectEdit';
 import { BasicInfoForm } from 'components/organisms';
 import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/BasicInfoForm.schema';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';

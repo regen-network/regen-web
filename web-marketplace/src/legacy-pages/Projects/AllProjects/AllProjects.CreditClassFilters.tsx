@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
-import { Trans, useLingui } from '@lingui/react';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box, FormControlLabel, Grid } from '@mui/material';
 import { useAtom } from 'jotai';
 

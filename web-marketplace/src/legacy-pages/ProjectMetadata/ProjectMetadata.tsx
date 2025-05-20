@@ -4,14 +4,14 @@ import { useApolloClient } from '@apollo/client';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
+import { NotFoundPage } from 'legacy-pages/NotFound/NotFound';
+import { useNavigateNext } from 'legacy-pages/ProjectCreate/hooks/useNavigateNext';
 import { omit } from 'lodash';
 
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getShaclGraphByUriQuery } from 'lib/queries/react-query/registry-server/graphql/getShaclGraphByUriQuery/getShaclGraphByUriQuery';
 import { getProjectShapeIri } from 'lib/rdf';
 
-import { NotFoundPage } from 'legacy-pages/NotFound/NotFound';
-import { useNavigateNext } from 'legacy-pages/ProjectCreate/hooks/useNavigateNext';
 import { MetadataForm } from 'components/organisms/MetadataForm/MetadataForm';
 import { ProjectFormTemplate } from 'components/templates/ProjectFormTemplate';
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';

@@ -1,3 +1,5 @@
+import { ProjectWithOrderData } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
+import { getPriceToDisplay } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
 import { computeMedianPrice, Order } from 'utils/price/computeMedianPrice';
 
 import { CreditClassByOnChainIdQuery, Maybe } from 'generated/graphql';
@@ -15,8 +17,6 @@ import { microToDenom } from 'lib/denom.utils';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { getSanityImgSrc } from 'lib/imgSrc';
 
-import { ProjectWithOrderData } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
-import { getPriceToDisplay } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
 import {
   CO_BENEFIT,
   MEASURED_CO_BENEFIT,

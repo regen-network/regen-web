@@ -132,11 +132,12 @@ const useCancelSellOrderSubmit = ({
   }, [
     accountAddress,
     selectedSellOrder,
-    _,
     setIsProcessingModalOpen,
     setSelectedSellOrder,
     signAndBroadcast,
+    queryClient,
     setCardItems,
+    _,
     setTxModalHeader,
     setTxModalTitle,
     setTxButtonTitle,

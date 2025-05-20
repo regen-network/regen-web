@@ -4,6 +4,10 @@ import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Grid } from '@mui/material';
 import { useAtom, useSetAtom } from 'jotai';
+import {
+  projectsCurrentStepAtom,
+  projectsDraftState,
+} from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 
 import { CreateProjectCard } from 'web-components/src/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
@@ -12,10 +16,6 @@ import { useAuth } from 'lib/auth/auth';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
-import {
-  projectsCurrentStepAtom,
-  projectsDraftState,
-} from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 import WithLoader from 'components/atoms/WithLoader';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 

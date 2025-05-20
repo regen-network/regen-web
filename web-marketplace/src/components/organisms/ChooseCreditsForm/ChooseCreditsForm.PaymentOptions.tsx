@@ -2,17 +2,16 @@ import { ChangeEvent, ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Trans } from '@lingui/react/macro';
 import { useAtomValue } from 'jotai';
+import { paymentOptionAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import { PAYMENT_OPTIONS } from 'legacy-pages/BuyCredits/BuyCredits.constants';
+import { PaymentOptionsType } from 'legacy-pages/BuyCredits/BuyCredits.types';
+import { ProjectWithOrderData } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 
 import CreditCardIcon from 'web-components/src/components/icons/CreditCardIcon';
 import CryptoRegenIcon from 'web-components/src/components/icons/CryptoRegenIcon';
 
 import { BuyBaseEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
-
-import { paymentOptionAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
-import { PAYMENT_OPTIONS } from 'legacy-pages/BuyCredits/BuyCredits.constants';
-import { PaymentOptionsType } from 'legacy-pages/BuyCredits/BuyCredits.types';
-import { ProjectWithOrderData } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 
 interface ChooseCreditButtonProps {
   children: ReactNode;

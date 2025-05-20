@@ -2,7 +2,6 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
-import Section from 'web-components/src/components/section';
 import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { Stakeholders } from 'components/organisms/Stakeholders/Stakeholders';

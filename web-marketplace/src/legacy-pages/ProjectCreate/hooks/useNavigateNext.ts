@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
-
 import { projectsCurrentStepAtom } from 'legacy-pages/ProjectCreate/ProjectCreate.store';
 
 type Params = {

@@ -3,6 +3,9 @@ import { useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
+import { useProjectEditContext } from 'legacy-pages';
+import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
+import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
 
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
 import LocationField from 'web-components/src/components/inputs/new/LocationField/LocationField';
@@ -11,9 +14,6 @@ import { isGeocodingFeature } from 'web-components/src/components/inputs/new/Loc
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { REQUIRED_MESSAGE } from 'lib/constants/shared.constants';
 
-import { useProjectEditContext } from 'legacy-pages';
-import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
-import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';

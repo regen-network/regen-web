@@ -1,13 +1,12 @@
 import { isValidElement } from 'react';
 import { msg } from '@lingui/core/macro';
+import { DEFAULT_NAME } from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
+import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { AccountFieldsFragment, AccountType, Maybe } from 'generated/graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
-
-import { DEFAULT_NAME } from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
 
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
 import { AddNewProfile } from './RoleField.AddNewProfile';

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
+import { DEFAULT_NAME } from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
+import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
 
 import Banner from 'web-components/src/components/banner';
 import { PostAdminButton } from 'web-components/src/components/buttons/PostAdminButton/PostAdminButton';
@@ -18,8 +20,6 @@ import copyTextToClipboard from 'web-components/src/utils/copy';
 import { AccountByIdQuery } from 'generated/graphql';
 import { COPY_SUCCESS } from 'lib/constants/shared.constants';
 
-import { DEFAULT_NAME } from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
 import { Link } from 'components/atoms';
 import { DeletePostWarningModal } from 'components/organisms/DeletePostWarningModal/DeletePostWarningModal';
 

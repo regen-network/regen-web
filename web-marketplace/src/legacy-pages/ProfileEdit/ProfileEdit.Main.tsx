@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
+import { profileBannerCardAtom } from 'legacy-pages/Dashboard/Dashboard.store';
 
 import { deleteImage } from 'web-components/src/utils/s3';
 
@@ -15,7 +16,6 @@ import { getAccountByAddrQueryKey } from 'lib/queries/react-query/registry-serve
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { profileBannerCardAtom } from 'legacy-pages/Dashboard/Dashboard.store';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';

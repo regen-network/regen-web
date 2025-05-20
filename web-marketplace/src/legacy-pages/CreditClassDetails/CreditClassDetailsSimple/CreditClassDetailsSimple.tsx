@@ -1,5 +1,6 @@
 import React from 'react';
-import { Trans, useLingui } from '@lingui/react';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';

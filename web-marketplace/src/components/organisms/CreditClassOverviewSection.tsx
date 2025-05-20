@@ -1,7 +1,7 @@
-import { Trans } from "@lingui/react/macro";
-import { msg } from "@lingui/core/macro";
 import React from 'react';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';

@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-
 import { useNavigateNext } from 'legacy-pages/ProjectCreate/hooks/useNavigateNext';
+
 import WithLoader from 'components/atoms/WithLoader';
 import { SettingsForm } from 'components/organisms/SettingsForm/SettingsForm';
 import { SettingsFormSchemaType } from 'components/organisms/SettingsForm/SettingsForm.schema';

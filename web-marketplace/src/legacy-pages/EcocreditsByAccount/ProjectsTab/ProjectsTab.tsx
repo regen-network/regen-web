@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
+import { useFetchProjectByAdmin } from 'legacy-pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 
@@ -13,7 +14,6 @@ import {
 import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { useFetchProjectByAdmin } from 'legacy-pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 import WithLoader from 'components/atoms/WithLoader';
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 

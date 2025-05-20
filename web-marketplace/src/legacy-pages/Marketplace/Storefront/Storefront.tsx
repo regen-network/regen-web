@@ -1,8 +1,8 @@
-import { Trans } from "@lingui/react/macro";
-import { msg } from "@lingui/core/macro";
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/material';
 import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';

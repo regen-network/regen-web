@@ -1,5 +1,6 @@
 import { useLingui } from '@lingui/react';
 import { Box, CardMedia } from '@mui/material';
+import { useCreditClasses } from 'legacy-pages/Home/hooks/useCreditClasses';
 
 import { ProgramImageChildren } from 'web-components/src/components/cards/ProjectCard/ProjectCard.ImageChildren';
 import EcologicalCreditCard from 'web-components/src/components/molecules/EcologicalCreditCard';
@@ -8,7 +9,6 @@ import Section from 'web-components/src/components/organisms/Section';
 import { AllBuyersPageQuery } from 'generated/sanity-graphql';
 import { SKIPPED_CLASS_ID } from 'lib/env';
 
-import { useCreditClasses } from 'legacy-pages/Home/hooks/useCreditClasses';
 import { Link } from 'components/atoms';
 
 import { normalizeEcologicalCreditCards } from './normalizers/normalizeEcologicalCreditCards';

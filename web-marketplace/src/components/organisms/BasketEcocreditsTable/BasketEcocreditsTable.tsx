@@ -1,9 +1,10 @@
-import { Trans } from "@lingui/react/macro";
-import { msg } from "@lingui/core/macro";
 import React, { useMemo } from 'react';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
+import { BasketBatchInfoWithBalance } from 'legacy-pages/BasketDetails/utils/normalizeBasketEcocredits';
 import { tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -20,7 +21,6 @@ import {
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
 
-import { BasketBatchInfoWithBalance } from 'legacy-pages/BasketDetails/utils/normalizeBasketEcocredits';
 import { BreakText, GreyText, Link } from 'components/atoms';
 import { AccountLink } from 'components/atoms/AccountLink';
 import WithLoader from 'components/atoms/WithLoader';

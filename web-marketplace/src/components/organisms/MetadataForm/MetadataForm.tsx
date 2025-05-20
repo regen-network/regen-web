@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { useFormState } from 'react-hook-form';
-import { Trans, useLingui } from '@lingui/react';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 import { useProjectEditContext } from 'legacy-pages';

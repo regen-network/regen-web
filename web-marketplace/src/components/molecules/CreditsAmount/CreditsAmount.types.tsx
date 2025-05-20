@@ -1,9 +1,8 @@
 import { ChangeEvent } from 'react';
+import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 import { CardSellOrder } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
-
-import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 
 import { AllowedDenoms } from '../DenomLabel/DenomLabel.utils';
 

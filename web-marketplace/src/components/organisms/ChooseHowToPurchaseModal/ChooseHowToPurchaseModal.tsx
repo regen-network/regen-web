@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { Trans, useLingui } from '@lingui/react';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { useSetAtom } from 'jotai';
 import { buyFromProjectIdAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
 import {
@@ -82,6 +83,7 @@ export const ChooseHowToPurchaseModal = ({
           </OutlinedButton>
         </div>
         <div className="self-end -mt-50 md:mt-0 md:-ml-30">
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <img src="/svg/keplr-wallet.svg" />
         </div>
       </Card>

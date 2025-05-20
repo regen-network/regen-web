@@ -1,7 +1,7 @@
 import { msg } from '@lingui/core/macro';
 
 export const PHOTO_COUNT = 4;
-export const cropAspectMediaForm = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
+export const cropAspectMediaForm = 322 / 211; // px values pulled from mockups (width / height)
 export const MAIN_PHOTO = msg`Main photo`;
 export const MAIN_PHOTO_DESCRIPTION = msg`Choose the photo that will show at the top of the project page and in project preview cards.`;
 export const STORY_PHOTO = msg`Story photo`;

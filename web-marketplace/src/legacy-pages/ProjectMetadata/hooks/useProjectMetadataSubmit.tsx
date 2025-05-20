@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
+import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
 import { merge, pick } from 'lodash';
 
 import { NestedPartial } from 'types/nested-partial';
 import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
-import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
 import { MetadataFormSchemaType } from 'components/organisms/MetadataForm/MetadataForm.schema';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';
 

@@ -48,7 +48,7 @@ export const DashboardNavHeader: React.FC<
         collapsed ? 'justify-center mb-[64px]' : 'gap-15 px-3 py-4 mb-20',
       )}
     >
-      <UserAvatar src={avatarSrc} alt={name} />
+      <UserAvatar src={avatarSrc} alt={name} size="md" />
 
       {!collapsed && (
         <div className="flex flex-col">

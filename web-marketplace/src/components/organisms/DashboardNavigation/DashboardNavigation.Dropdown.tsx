@@ -1,4 +1,5 @@
 import CheckIcon from 'web-components/src/components/icons/CheckIcon';
+import { Body } from 'web-components/src/components/typography';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
 
@@ -39,9 +40,12 @@ export const AccountSwitcherDropdown = ({
               size="small"
               alt={account.name}
             />
-            <span className="ml-3 mr-auto truncate text-left">
+            <Body
+              size="sm"
+              className="ml-3 mr-auto truncate text-left text-bc-neutral-700 font-bold"
+            >
               {account.name}
-            </span>
+            </Body>
             {isSelected && (
               <CheckIcon
                 className="h-[18px] w-[18px] text-brand-400"

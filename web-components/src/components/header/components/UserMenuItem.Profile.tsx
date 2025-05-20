@@ -57,7 +57,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
           <Subtitle size="md">{name}</Subtitle>
           <div className="flex flex-row items-baseline gap-15">
             {address && (
-              <div>
+              <>
                 {validWalletAddress ? (
                   <CopyButton
                     className="group flex flex-row items-center gap-3 hover:underline"
@@ -67,7 +67,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
                     iconClassName="h-[14px] w-[14px] group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
                   >
                     <Body
-                      className="truncate max-w-[137px] text-sc-text-sub-header group-hover/card:text-sc-text-paragraph"
+                      className="cursor-pointer truncate max-w-[137px] text-sc-text-sub-header group-hover/card:text-sc-text-paragraph"
                       size="xs"
                     >
                       {truncatedAddress}
@@ -81,7 +81,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
                     {truncatedAddress}
                   </Body>
                 )}
-              </div>
+              </>
             )}
             {profileLink && (
               <LinkComponent

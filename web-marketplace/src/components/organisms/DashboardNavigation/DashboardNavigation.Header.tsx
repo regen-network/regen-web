@@ -55,14 +55,14 @@ export const DashboardNavHeader: React.FC<
           <button
             type="button"
             className={cn(
-              'flex items-center gap-10 bg-transparent border-none pl-0',
+              'flex items-center gap-10 bg-transparent border-none pl-0 py-5 md:pt-0',
               canSwitch ? 'cursor-pointer' : 'cursor-default',
             )}
             onClick={() => canSwitch && setOpen(o => !o)}
             aria-expanded={open}
             aria-haspopup="true"
           >
-            <Subtitle className="text-[16px] text-bc-neutral-900 pt-5">
+            <Subtitle className="text-bc-neutral-900 pt-5" size="md">
               {name}
             </Subtitle>
             {canSwitch && (

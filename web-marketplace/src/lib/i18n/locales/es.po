@@ -406,7 +406,7 @@ msgstr "Configuración avanzada"
 msgid "After refreshing the page several times, if you do not see your certificate within 24 hours, please reach out to <0>support@regen.network</0>."
 msgstr "Después de actualizar la página varias veces, si no ve su certificado dentro de 24 horas, comuníquese con <0>support@regen.network</0>."
 
-#: src/pages/BatchDetails/BatchDetails.tsx:132
+#: src/pages/BatchDetails/BatchDetails.tsx:93
 msgid "All credits"
 msgstr "Todos los créditos"
 
@@ -571,6 +571,7 @@ msgstr "Apruebe la solicitud de conexión de la aplicación móvil Keplr en su m
 msgid "approved methodologies"
 msgstr "metodologías aprobadas"
 
+#: src/hooks/useCancelSellOrder.ts:92
 #: src/pages/Marketplace/Storefront/Storefront.tsx:248
 msgid "Are you sure you want to cancel this sell order?"
 msgstr "¿Está seguro de que desea cancelar esta orden de venta?"
@@ -669,7 +670,7 @@ msgstr "mesa de cestas"
 msgid "batch denom"
 msgstr "nombre del lote"
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:141
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:143
 msgid "Batch denom"
 msgstr "Nombre del lote"
 
@@ -825,7 +826,7 @@ msgstr "comprar créditos"
 msgid "BUY CREDITS"
 msgstr "COMPRAR CRÉDITOS"
 
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:109
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:111
 msgid "Buy Credits Error"
 msgstr "Error al comprar créditos"
 
@@ -1063,7 +1064,7 @@ msgstr "Limpiar todo"
 msgid "Click on the confirmation link to return to Regen Network."
 msgstr "Haga clic en el enlace de confirmación para regresar a Regen Network."
 
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:236
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:239
 #: src/pages/ProjectReview/ProjectReview.tsx:379
 msgid "close"
 msgstr "cerca"
@@ -1255,7 +1256,8 @@ msgstr "Crear proyecto"
 msgid "Create Project - Access Denied"
 msgstr "Crear proyecto - Acceso denegado"
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:227
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:230
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:41
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
 msgid "Create Sell Order"
 msgstr "Crear orden de venta"
@@ -1272,7 +1274,7 @@ msgstr "tabla de actividad crediticia"
 msgid "Credit Basics"
 msgstr "Conceptos básicos de crédito"
 
-#: src/pages/BatchDetails/BatchDetails.tsx:109
+#: src/pages/BatchDetails/BatchDetails.tsx:70
 msgid "Credit Batch Details"
 msgstr "Detalles del lote de crédito"
 
@@ -1442,7 +1444,7 @@ msgstr "Los créditos se mantienen en depósito en garantía cuando se crea una 
 msgid "credits available"
 msgstr "créditos disponibles"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:115
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:103
 msgid "Credits Available"
 msgstr "Créditos disponibles"
 
@@ -1474,7 +1476,7 @@ msgstr "Créditos cancelados"
 msgid "Credits cannot exceed"
 msgstr "Los créditos no pueden exceder"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:8
 msgid "Credits currently available for purchase with fiat or cryptocurrency on Regen Marketplace."
 msgstr "Créditos actualmente disponibles para comprar con moneda fiduciaria o criptomoneda en Regen Marketplace."
 
@@ -1502,7 +1504,7 @@ msgstr "Entrada de créditos"
 msgid "Credits issuance is calculated based on a weighted scale between 20 and 50 years."
 msgstr "La emisión de créditos se calcula con base en una escala ponderada entre 20 y 50 años."
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:69
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:67
 msgid "Credits issued"
 msgstr "Créditos emitidos"
 
@@ -1514,17 +1516,17 @@ msgstr "créditos comprados"
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr "Los créditos comprados con criptomonedas se pueden comprar en estado retirado o negociable."
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:68
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:66
 msgid "Credits Registered"
 msgstr "Créditos registrados"
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:136
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:119
 msgid "Credits Retired"
 msgstr "Créditos Retirados"
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:115
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:103
 msgid "Credits Tradable"
 msgstr "Créditos negociables"
 
@@ -2063,7 +2065,7 @@ msgstr "Para obtener ayuda para resolver un problema, comuníquese con support@r
 msgid "For Land Stewards"
 msgstr "Para administradores de tierras"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:94
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:87
 msgid "For sale"
 msgstr "En venta"
 
@@ -2203,7 +2205,7 @@ msgstr "Si continúa, perderá todos los cambios que no haya guardado. Esta acci
 msgid "If you select one of the following options, you will still be able to share the post, files, or location data privately via a secret link."
 msgstr "Si selecciona una de las siguientes opciones, aún podrá compartir la publicación, los archivos o los datos de ubicación de forma privada a través de un enlace secreto."
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:206
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:209
 msgid "If you uncheck this option, buyers will be able to choose to keep the credits tradable"
 msgstr "Si desmarca esta opción, los compradores podrán optar por mantener los créditos negociables."
 
@@ -2763,6 +2765,10 @@ msgstr "No hay ecocréditos para mostrar"
 msgid "No matching results found"
 msgstr "No se encontraron resultados coincidentes"
 
+#: src/components/organisms/UserSellOrders/UserSellOrders.NoOrdersCard.tsx:16
+msgid "No open sell orders"
+msgstr "No hay órdenes de venta abiertas"
+
 #: src/lib/constants/shared.constants.tsx:62
 msgid "No options available"
 msgstr "No hay opciones disponibles"
@@ -2771,7 +2777,7 @@ msgstr "No hay opciones disponibles"
 msgid "No retirements to display"
 msgstr "No hay retiros que mostrar"
 
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:66
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:80
 msgid "No sell orders found"
 msgstr "No se encontraron órdenes de venta"
 
@@ -3134,7 +3140,7 @@ msgstr "Anterior"
 msgid "price"
 msgstr "precio"
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:166
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:169
 msgid "Price"
 msgstr "Precio"
 
@@ -3581,7 +3587,7 @@ msgstr "Recordatorio: este proyecto se almacena en la base de datos de Regen Mar
 msgid "Request fund"
 msgstr "Solicitar fondos"
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:202
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:205
 msgid "Require that credits are retired upon purchase"
 msgstr "Exigir que los créditos se retiren al momento de la compra"
 
@@ -3661,7 +3667,7 @@ msgstr "Retirar créditos al momento de la transferencia"
 msgid "Retired by"
 msgstr "Retirado por"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr "Los créditos retirados han sido retirados de circulación de forma permanente y no pueden venderse a nadie más."
 
@@ -3866,7 +3872,8 @@ msgstr "ID DE ORDEN DE VENTA"
 msgid "sell order id:"
 msgstr "ID de orden de venta:"
 
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:52
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:33
 #: src/pages/Marketplace/Storefront/Storefront.tsx:154
 msgid "Sell orders"
 msgstr "Órdenes de venta"
@@ -3901,6 +3908,10 @@ msgstr "Establecer créditos máximos"
 msgid "set up a Keplr wallet →"
 msgstr "Configurar una billetera Keplr →"
 
+<<<<<<< HEAD
+=======
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:21
+>>>>>>> ead11d1fb (chore: update .po translations)
 #: src/pages/SellerSetupAccount/SellerSetupAccount.tsx:21
 msgid "set up account"
 msgstr "configurar cuenta"
@@ -4005,7 +4016,7 @@ msgstr "Cuentas sociales"
 msgid "Social and Cultural Index"
 msgstr "Índice social y cultural"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:8
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:9
 #: src/lib/constants/shared.constants.tsx:174
 msgid "Sold Out"
 msgstr "Agotado"
@@ -4304,11 +4315,11 @@ msgstr "El lugar de la retirada puede ser el lugar donde usted vive o donde oper
 msgid "The structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr "La estructura, los procedimientos y los requisitos para el registro de proyectos, la cuantificación, el seguimiento, el reporte y la verificación (MRV) y la emisión de créditos relacionados con un determinado tipo de crédito."
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:3
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
 msgid "The total amount of credits that were issued to this project."
 msgstr "Monto total de créditos que se emitieron para este proyecto."
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
 msgid "The total amount of credits that were registered to this project."
 msgstr "La cantidad total de créditos que se registraron en este proyecto."
 
@@ -4542,7 +4553,7 @@ msgstr "Créditos negociables"
 #~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
 #~ msgstr "Los créditos negociables aún no han sido retirados y pueden conservarse, venderse o enviarse a otra parte."
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
 msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
 msgstr "Los créditos negociables aún no se han retirado y pueden conservarse, venderse o transferirse a un tercero. Excluye los créditos en depósito."
 
@@ -4761,7 +4772,7 @@ msgstr "Ver detalles"
 msgid "view document"
 msgstr "ver documento"
 
-#: src/pages/BatchDetails/BatchDetails.tsx:118
+#: src/pages/BatchDetails/BatchDetails.tsx:79
 msgid "view in portfolio"
 msgstr "Ver en portafolio"
 
@@ -4825,6 +4836,10 @@ msgstr "Ver la lista completa de videos de soporte»"
 msgid "view transaction"
 msgstr "ver transacción"
 
+<<<<<<< HEAD
+=======
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:17
+>>>>>>> ead11d1fb (chore: update .po translations)
 #: src/pages/SellerSetupAccount/SellerSetupAccount.tsx:17
 msgid "view transactions"
 msgstr "ver transacciones"
@@ -4936,6 +4951,7 @@ msgstr "¿En qué tipos de proyectos de créditos de carbono está interesado?"
 msgid "whoops, cancel"
 msgstr "ups, cancelar"
 
+#: src/hooks/useCancelSellOrder.ts:91
 #: src/pages/Marketplace/Storefront/Storefront.tsx:247
 msgid "WHOOPS, EXIT"
 msgstr "UPOPS, SALIDA"
@@ -4956,6 +4972,7 @@ msgstr "Escriba un comentario breve o una actualización más larga del proyecto
 msgid "Yes"
 msgstr "Sí"
 
+#: src/hooks/useCancelSellOrder.ts:90
 #: src/pages/Marketplace/Storefront/Storefront.tsx:246
 msgid "Yes, cancel sell order"
 msgstr "Sí, cancelar orden de venta"

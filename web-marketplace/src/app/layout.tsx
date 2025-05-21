@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from 'next';
 import { IS_TERRASOS } from 'lib/env';
 
 import '../App.css';
+import '../../../tailwind.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 

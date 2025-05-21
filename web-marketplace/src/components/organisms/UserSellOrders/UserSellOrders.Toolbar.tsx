@@ -34,10 +34,7 @@ export const UserSellOrdersToolbar = ({
         </Subtitle>
         <div className="flex-none pt-15 pr-15">
           {/* TODO:  If the member is an Editor or Viewer, this button should be hidden */}
-          <ContainedButton
-            onClick={() => setIsSellFlowStarted(true)}
-            disabled={isLoadingCredits || tradableCredits.length === 0}
-          >
+          <ContainedButton onClick={() => setIsSellFlowStarted(true)}>
             <Trans>Create Sell Order</Trans>
           </ContainedButton>
         </div>

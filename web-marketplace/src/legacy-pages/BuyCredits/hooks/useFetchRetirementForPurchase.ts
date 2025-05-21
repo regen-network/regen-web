@@ -108,7 +108,8 @@ export const useFetchRetirementForPurchase = ({
       currencyAmount &&
       project &&
       currency &&
-      displayDenom
+      displayDenom &&
+      email
     ) {
       setProcessingModalAtom(atom => void (atom.open = false));
 

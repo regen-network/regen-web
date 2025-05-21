@@ -49,7 +49,7 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import { EditFileFormSchemaType } from '../EditFileForm/EditFileForm.schema';
 import { EditFileModal } from '../EditFileModal/EditFileModal';
-import { cropAspectMediaForm, DEFAULT } from '../MediaForm/MediaForm.constants';
+import { DEFAULT } from '../MediaForm/MediaForm.constants';
 import { getHandleDelete } from '../MediaForm/MediaForm.utils';
 import { useMediaFormStyles } from '../MediaForm/useMediaFormStyles';
 import { useMetadataFormStyles } from '../MetadataForm/MetadataForm.styles';
@@ -114,7 +114,6 @@ export const PostForm = ({
   const imageDropCommonProps: Partial<FileDropProps> = {
     classes: { main: classes.fullSizeMedia },
     buttonText: _(FILE_UPLOAD_BUTTON_LABEL),
-    fixedCrop: cropAspectMediaForm,
   };
 
   const title = useWatch({ control: form.control, name: 'title' });

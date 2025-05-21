@@ -17,7 +17,7 @@ const stripeKey = process.env.STORYBOOK_STRIPE_PUBLISHABLE_KEY;
 
 const WrappedPaymentInfoForm = (args: PaymentInfoFormProps) => {
   const options = { amount: 1000, currency: 'usd', ...defaultStripeOptions };
-  const stripePromise = loadStripe(stripeKey);
+  const stripePromise = loadStripe(stripeKey || '');
 
   return (
     <Elements options={options} stripe={stripePromise}>

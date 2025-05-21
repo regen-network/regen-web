@@ -122,7 +122,7 @@ const LandStewards = (): JSX.Element => {
         isBanner
         title={content?.heroSection?.title}
         descriptionRaw={content?.heroSection?.descriptionRaw}
-        img={landStewardsHero}
+        img={landStewardsHero.src}
         linearGradient="linear-gradient(209.83deg, rgba(250, 235, 209, 0.8) 11.05%, rgba(125, 201, 191, 0.8) 43.17%, rgba(81, 93, 137, 0.8) 75.29%)"
       />
       {content?.designedForFarmersSection && (

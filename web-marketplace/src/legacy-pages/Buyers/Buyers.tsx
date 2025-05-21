@@ -85,7 +85,7 @@ const BuyersPage = (): JSX.Element => {
             img={
               content?.heroSection?.backgroundImage?.image?.asset?.url ||
               content?.heroSection?.backgroundImage?.imageHref ||
-              buyersHero
+              buyersHero.src
             }
             linearGradient="linear-gradient(209.5deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)"
           />

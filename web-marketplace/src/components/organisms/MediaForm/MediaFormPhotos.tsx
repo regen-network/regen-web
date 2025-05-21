@@ -84,7 +84,6 @@ export const MediaFormPhotos = ({
   const imageDropCommonProps: Partial<FileDropProps> = {
     classes: { main: classes.fullSizeMedia },
     buttonText: _(IMAGE_UPLOAD_BUTTON_LABEL),
-    fixedCrop: cropAspectMediaForm,
   };
 
   const { fields, append, remove, move } = useFieldArray({

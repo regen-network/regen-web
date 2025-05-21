@@ -75,7 +75,7 @@ function CreditClassConnectSection({ connectSection }: Props): JSX.Element {
 
   return (
     <BackgroundImgSection
-      img={creditClassConnectImg}
+      img={creditClassConnectImg.src}
       classes={{
         root: styles.connectRoot,
         main: styles.main,

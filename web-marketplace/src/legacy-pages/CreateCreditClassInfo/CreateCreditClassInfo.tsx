@@ -89,7 +89,7 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
       <div className={classes.root}>
         <HeroTitle
           isBanner
-          img={writingOnPaperImg}
+          img={writingOnPaperImg.src}
           title={content?.heroSection?.title}
           descriptionRaw={content?.heroSection?.descriptionRaw}
           classes={{ main: classes.heroMain }}
@@ -114,7 +114,7 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
           </Box>
         </Section>
 
-        <CardMedia image={topographyImg} className={classes.topoSection}>
+        <CardMedia image={topographyImg.src} className={classes.topoSection}>
           <Section
             title={content?.creditTypeSection?.title || ''}
             titleAlign={isMobile ? 'left' : 'center'}
@@ -163,7 +163,7 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
           />
         </Section>
 
-        <CardMedia image={topographyImg} className={classes.topoSection}>
+        <CardMedia image={topographyImg.src} className={classes.topoSection}>
           <Section withSlider className={classes.padBottom}>
             <ResponsiveSlider
               infinite={false}
@@ -191,7 +191,7 @@ const CreateCreditClassInfo: React.FC<React.PropsWithChildren<unknown>> =
         <HeroAction
           isBanner
           classes={{ main: classes.bottomSection }}
-          img={fernImg}
+          img={fernImg.src}
           bottomBanner={content?.bottomBanner}
           openModal={openModal}
         />

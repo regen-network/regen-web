@@ -61,16 +61,20 @@ export const PaymentInfo = ({
       {paymentMethods && paymentMethods.length > 0 ? (
         <>
           {paymentMethods.map(paymentMethod => (
-            <div className="mb-20" key={paymentMethod.id}>
-              <Radio
-                label={_(
-                  msg`Use my credit card on file ending in ${paymentMethod.card?.last4}`,
-                )}
-                value={paymentMethod.id}
-                selectedValue={paymentMethodId}
-                {...register(`paymentMethodId`)}
-              />
-            </div>
+            <>
+              {paymentMethod.card && (
+                <div className="mb-20" key={paymentMethod.id}>
+                  <Radio
+                    label={_(
+                      msg`Use my credit card on file ending in ${paymentMethod.card?.last4}`,
+                    )}
+                    value={paymentMethod.id}
+                    selectedValue={paymentMethodId}
+                    {...register(`paymentMethodId`)}
+                  />
+                </div>
+              )}
+            </>
           ))}
           <Radio
             label={_(msg`Enter a new credit card`)}

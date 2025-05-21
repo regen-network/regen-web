@@ -20,7 +20,7 @@ export const LanguageSwitcher = ({ className }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const isEnglish = selectedLanguage === 'en';
-  const flagUrl = isEnglish ? enFlag : esFlag;
+  const flagImg = isEnglish ? enFlag : esFlag;
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -43,7 +43,7 @@ export const LanguageSwitcher = ({ className }: Props) => {
         }}
       >
         <img
-          src={flagUrl.src}
+          src={flagImg.src}
           alt={isEnglish ? 'English' : 'Español'}
           className="mt-5 mr-[6px] w-[25px] md:mt-0 md:w-fit"
         />

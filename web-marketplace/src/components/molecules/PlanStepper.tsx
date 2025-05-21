@@ -29,7 +29,7 @@ const PlanStepper: React.FC<React.PropsWithChildren<PlanStepperProps>> = ({
       sx={{ mw: 240 }}
       activeStep={activeStep}
       steps={steps}
-      background={background}
+      background={background.src}
     />
   );
 };

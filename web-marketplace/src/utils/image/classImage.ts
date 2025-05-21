@@ -18,7 +18,7 @@ export const getClassImageWithGreenDefault = (params: Params) =>
   getClassImage(params) || defaultCreditClassGreen.src;
 
 export const getClassImageWithGreyDefault = (params: Params) =>
-  getClassImage(params) || defaultCreditClassGrey.grey;
+  getClassImage(params) || defaultCreditClassGrey.src;
 
 export const getClassImageWithProjectDefault = (params: Params) =>
   getClassImage(params) || defaultProject.src;

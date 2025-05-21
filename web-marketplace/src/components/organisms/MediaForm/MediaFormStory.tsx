@@ -71,7 +71,6 @@ export const MediaFormStory = ({
   const imageDropCommonProps: Partial<FileDropProps> = {
     classes: { main: classes.fullSizeMedia },
     buttonText: _(IMAGE_UPLOAD_BUTTON_LABEL),
-    fixedCrop: cropAspectMediaForm,
   };
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 

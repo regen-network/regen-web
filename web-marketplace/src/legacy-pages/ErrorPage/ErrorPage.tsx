@@ -30,7 +30,7 @@ const ErrorPage = ({ importError }: ErrorPageProps): JSX.Element => {
         isNetworkError(error) ? (
           <SadBeeIcon />
         ) : (
-          <img alt="error" src={UnhappyBee} />
+          <img alt="error" src={UnhappyBee.src} />
         )
       }
       home={process.env.NEXT_PUBLIC_WEBSITE_URL}

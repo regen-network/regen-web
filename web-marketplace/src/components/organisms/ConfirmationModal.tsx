@@ -86,7 +86,7 @@ const ConfirmationModal: React.FC<React.PropsWithChildren<Props>> = ({
     <Modal className={styles.root} open={open} onClose={onClose}>
       <img
         className={cx(styles.cows, styles.verticalSpacing)}
-        src={CowIllustration}
+        src={CowIllustration.src}
         alt={_(msg`cows celebrating`)}
       />
       <Title align="center" variant="h3" sx={{ pb: [6, 0] }}>
@@ -96,7 +96,7 @@ const ConfirmationModal: React.FC<React.PropsWithChildren<Props>> = ({
         <Avatar className={styles.iconContainer}>
           <img
             className={styles.icon}
-            src={CarbonCreditFruit}
+            src={CarbonCreditFruit.src}
             alt={_(msg`eco-credit`)}
           />
         </Avatar>

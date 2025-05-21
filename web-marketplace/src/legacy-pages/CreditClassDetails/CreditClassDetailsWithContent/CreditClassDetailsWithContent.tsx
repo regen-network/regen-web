@@ -233,7 +233,7 @@ const CreditClassDetailsWithContent: React.FC<
     <div className={styles.root}>
       <HeroTitle
         isBanner
-        img={hero}
+        img={hero.src}
         title={
           isLandSteward
             ? content.landSteward?.heroSection?.title

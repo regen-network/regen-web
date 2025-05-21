@@ -26,7 +26,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     background: theme.palette.primary.main,
   },
   topoBackground: {
-    backgroundImage: `url(${topoBackground})`,
+    backgroundImage: `url(${topoBackground.src})`,
   },
 }));
 

@@ -80,7 +80,7 @@ export function getSellOrdersBySellerQuery(queryConfig: {
         while (!response || response?.pagination?.nextKey?.length) {
           if (response?.pagination?.nextKey?.length) {
             request.pagination = {
-              key: response.pagination.nextKey,
+              key: response?.pagination.nextKey,
               countTotal: false,
               offset: 0n,
               limit: 100n,
@@ -128,7 +128,7 @@ export function getSellOrdersBySellerQuery(queryConfig: {
           ...order,
           askBaseDenom,
           askUsdAmount,
-          totalSellOrders: Number(response.pagination?.total ?? 0),
+          totalSellOrders: Number(response?.pagination?.total ?? 0),
         };
       });
     },

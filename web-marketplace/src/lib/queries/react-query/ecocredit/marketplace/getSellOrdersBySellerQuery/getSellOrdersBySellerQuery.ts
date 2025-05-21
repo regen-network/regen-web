@@ -24,7 +24,7 @@ export function getSellOrdersBySellerQuery(queryConfig: {
   sellerAddress: string;
   offset: bigint;
   limit: bigint;
-  // Currently ledger queries do not support sorting so for
+  // Currently Regen Ledger queries do not support sorting - for
   // cases where we need sorting functionality we fetch all sell orders.
   serverPagination?: boolean;
 }) {
@@ -54,7 +54,7 @@ export function getSellOrdersBySellerQuery(queryConfig: {
         const request: QuerySellOrdersBySellerRequest = {
           seller: sellerAddress,
           pagination: {
-            key: new Uint8Array(), // mandatory field but not used as we do pagination here using offset
+            key: new Uint8Array(), // mandatory field but not used as we do pagination using offset in this case
             offset,
             limit,
             countTotal: true,
@@ -135,5 +135,6 @@ export function getSellOrdersBySellerQuery(queryConfig: {
     },
     keepPreviousData: true,
     enabled: !!client,
+    initialData: undefined,
   };
 }

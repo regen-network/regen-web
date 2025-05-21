@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import SellOrderNotFoundIcon from 'web-components/src/components/icons/SellOrderNotFoundIcon';
 import { Title } from 'web-components/src/components/typography';
 
-import { UserSellOrdersToolbar } from './UserSellOrders.toolbar';
+import { UserSellOrdersToolbar } from './UserSellOrders.Toolbar';
 
 export const NoUserSellOrdersCard = () => {
   return (

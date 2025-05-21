@@ -75,36 +75,3 @@ export const useFetchSellOrders = (
     isLoadingSellOrders,
   };
 };
-// Query
-//   const sellOrdersQuery = useMemo(
-// () =>
-// getSellOrdersExtendedQuery({
-//   enabled: !!queryClient,
-//   client: queryClient as QueryClient,
-//   reactQueryClient,
-//   request: {},
-// }),
-//     [queryClient, reactQueryClient],
-//   );
-
-//   // Fetch
-//   const { data: sellOrders, isLoading: isLoadingSellOrders } =
-//     useQuery(sellOrdersQuery);
-
-// // Refetch callback
-// const refetchSellOrders = useCallback(async (): Promise<
-//   SellOrderInfoExtented[] | undefined
-// > => {
-//   // Here invalidating the cache will automatically run again all query using this key.
-//   // Below we're returning the new result from the cache because this callback needs to return the new value
-//   // but in most cases it's enough for reload callbacks to just invalidate a key for refreshing the data and the UI.
-//   await reactQueryClient.invalidateQueries({
-//     queryKey: sellOrdersQuery.queryKey,
-//   });
-//   return reactQueryClient.getQueryData(
-//     sellOrdersQuery.queryKey ?? [SELL_ORDERS_EXTENTED_KEY],
-//   );
-// }, [reactQueryClient, sellOrdersQuery]);
-
-//   return { sellOrders, refetchSellOrders, isLoadingSellOrders };
-// };

@@ -1,6 +1,5 @@
 import {
   QuerySellOrdersBySellerRequest,
-  QuerySellOrdersBySellerResponse,
   QuerySellOrdersResponse,
   SellOrderInfo,
 } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';

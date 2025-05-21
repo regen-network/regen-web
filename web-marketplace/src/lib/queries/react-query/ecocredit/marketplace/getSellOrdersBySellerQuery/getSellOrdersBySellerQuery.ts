@@ -65,7 +65,7 @@ export function getSellOrdersBySellerQuery(queryConfig: {
           await client.regen.ecocredit.marketplace.v1.sellOrdersBySeller(
             request,
           );
-        sellOrders = response.sellOrders ?? [];
+        sellOrders = response?.sellOrders ?? [];
       } else {
         // fetch all sellOrdersBySeller
         let request: QuerySellOrdersBySellerRequest = {
@@ -78,7 +78,7 @@ export function getSellOrdersBySellerQuery(queryConfig: {
             reverse: false,
           },
         };
-        while (!response || response.pagination?.nextKey?.length) {
+        while (!response || response?.pagination?.nextKey?.length) {
           if (response?.pagination?.nextKey?.length) {
             request.pagination = {
               key: response.pagination.nextKey,

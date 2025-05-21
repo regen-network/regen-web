@@ -92,7 +92,7 @@ export function getSellOrdersBySellerQuery(queryConfig: {
             await client.regen.ecocredit.marketplace.v1.sellOrdersBySeller(
               request,
             );
-          sellOrders.push(...response.sellOrders);
+          sellOrders.push(...response?.sellOrders);
         }
       }
 

@@ -46,6 +46,7 @@ export const UserSellOrdersToolbar = ({
         isFlowStarted={isSellFlowStarted}
         setIsFlowStarted={setIsSellFlowStarted}
         credits={tradableCredits}
+        placeholderText="Choose batch"
       />
     </>
   );

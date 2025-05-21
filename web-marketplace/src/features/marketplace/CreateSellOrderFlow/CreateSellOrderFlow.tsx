@@ -48,6 +48,7 @@ type Props = {
   isFlowStarted: boolean;
   setIsFlowStarted: UseStateSetter<boolean>;
   credits?: BatchInfoWithBalance[];
+  placeholderText?: string;
 };
 
 /**
@@ -63,6 +64,7 @@ export const CreateSellOrderFlow = ({
   isFlowStarted,
   setIsFlowStarted,
   credits = [],
+  placeholderText,
 }: Props): JSX.Element => {
   const { _ } = useLingui();
   // Modal visibility states
@@ -199,6 +201,7 @@ export const CreateSellOrderFlow = ({
         onSubmit={createSellOrderSubmit}
         title={_(CREATE_SELL_ORDER_TITLE)}
         allowedDenoms={allowedDenomOptions}
+        placeholderText={placeholderText}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

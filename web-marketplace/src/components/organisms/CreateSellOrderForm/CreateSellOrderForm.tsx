@@ -52,6 +52,7 @@ export interface Props {
   onSubmit: (values: CreateSellOrderFormSchemaType) => Promise<void>;
   initialValues?: CreateSellOrderFormSchemaType;
   onClose: RegenModalPropsWithOnClose['onClose'];
+  placeholderText?: string;
 }
 
 const CreateSellOrderForm: React.FC<Props> = ({
@@ -61,6 +62,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
   availableAmountByBatch,
   onSubmit,
   onClose,
+  placeholderText,
 }) => {
   const { _ } = useLingui();
   const [options, setOptions] = useState<Option[]>([]);
@@ -144,6 +146,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
         disabled={options.length === 1}
         sx={{ mb: 10.5 }}
         native={false}
+        placeholderText={placeholderText}
         {...form.register('batchDenom')}
       />
       <Box

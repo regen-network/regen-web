@@ -43,7 +43,7 @@ export const LanguageSwitcher = ({ className }: Props) => {
         }}
       >
         <img
-          src={flagUrl}
+          src={flagUrl.src}
           alt={isEnglish ? 'English' : 'Español'}
           className="mt-5 mr-[6px] w-[25px] md:mt-0 md:w-fit"
         />
@@ -75,7 +75,7 @@ export const LanguageSwitcher = ({ className }: Props) => {
             }}
             className="flex items-center py-2 md:font-medium md:text-[15px]"
           >
-            <img src={enFlag} alt="English" className="mr-[6px]" /> English
+            <img src={enFlag.src} alt="English" className="mr-[6px]" /> English
             (Inglés)
           </MenuItem>
         )}
@@ -87,7 +87,7 @@ export const LanguageSwitcher = ({ className }: Props) => {
             }}
             className="flex items-center py-2 md:font-medium md:text-[15px]"
           >
-            <img src={esFlag} alt="Español" className="mr-[6px]" /> Español
+            <img src={esFlag.src} alt="Español" className="mr-[6px]" /> Español
             (Spanish)
           </MenuItem>
         )}

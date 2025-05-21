@@ -1,11 +1,71 @@
-import type { Metadata } from 'next';
+/* eslint-disable lingui/no-unlocalized-strings */
+import type { Metadata, Viewport } from 'next';
 
 import '../App.css';
+import '../../../tailwind.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-// TODO migrate rest of meta data from html bellow
-export const metadata: Metadata = {
-  // eslint-disable-next-line lingui/no-unlocalized-strings
-  title: 'Regen Marketplace',
+export const metadata: Metadata =
+  process.env.NEXT_PUBLIC_MARKETPLACE_CLIENT === 'terrasos'
+    ? {
+        title:
+          'Terrasos – Inversiones para la Conservación de la Biodiversidad',
+        description: 'Inversiones para la Conservación de la Biodiversidad',
+        manifest: '/manifest.json',
+        openGraph: {
+          type: 'website',
+          title:
+            'Terrasos – Inversiones para la Conservación de la Biodiversidad',
+          description: 'Inversiones para la Conservación de la Biodiversidad',
+          url: new URL('https://terrasos.app.regen.network/'),
+        },
+        icons: {
+          icon: [
+            {
+              url: 'terrasos-favicon-16x16.png',
+              sizes: '16x16',
+              type: 'image/png',
+            },
+            {
+              url: 'terrasos-favicon-32x32.png',
+              sizes: '32x32',
+              type: 'image/png',
+            },
+          ],
+          shortcut: 'terrasos-favicon.png',
+        },
+      }
+    : {
+        title: 'Regen Marketplace',
+        description:
+          'Regen Marketplace, the place to buy, sell, and retire on-chain carbon and ecological assets.',
+        manifest: '/manifest.json',
+        icons: {
+          icon: [
+            { url: 'favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+            { url: 'favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+          ],
+          shortcut: 'favicon.ico',
+        },
+        openGraph: {
+          type: 'website',
+          title: 'Regen Marketplace',
+          description:
+            'Regen Marketplace, the place to buy, sell, and retire on-chain carbon and ecological assets.',
+          url: new URL('https://app.regen.network/'),
+          images: [
+            new URL(
+              'https://regen-registry.s3.amazonaws.com/preview-image.jpg',
+            ),
+          ],
+        },
+      };
+
+export const viewport: Viewport = {
+  themeColor: '#000000',
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -15,36 +75,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        {/* <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        {/* manifest.json provides metadata used when your web app is installed on a */}
-        {/* user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/ */}
-        <link rel="manifest" href="/manifest.json" />
-
-        <link
-          rel="stylesheet"
-          type="text/css"
-          charSet="UTF-8"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Regen Marketplace" />
-        <meta
-          property="og:description"
-          content="Regen Marketplace, the place to buy, sell, and retire on-chain carbon and ecological assets."
-        />
-        <meta property="og:url" content="https://app.regen.network/" />
-        <meta
-          property="og:image"
-          content="https://regen-registry.s3.amazonaws.com/preview-image.jpg"
-        />
-      </head>
       <body>
         <div id="root">{children}</div>
       </body>

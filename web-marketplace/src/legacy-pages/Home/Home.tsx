@@ -218,7 +218,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
           main: classes.bottomSectionWidth,
           section: classes.bottomSection,
         }}
-        img={horsesImg}
+        img={horsesImg.src}
         openModal={(href: string): void => {
           setModalLink(href);
           setOpen(true);

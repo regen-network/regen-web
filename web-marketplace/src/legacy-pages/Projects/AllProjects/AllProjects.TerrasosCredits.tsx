@@ -42,7 +42,7 @@ export const TerrasosCredits = ({
             placement="top"
             title={_(VOLUNTARY_MARKET_TOOLTIP)}
           >
-            <img src={tebuLogo} alt="tebu" className="ml-3 w-[25px]" />
+            <img src={tebuLogo.src} alt="tebu" className="ml-3 w-[25px]" />
           </InfoTooltip>
         </span>
       )}
@@ -55,7 +55,7 @@ export const TerrasosCredits = ({
             title={_(COMPLIANCE_MARKET_TOOLTIP)}
           >
             <img
-              src={hectaresLogo}
+              src={hectaresLogo.src}
               alt={_(msg`hectares`)}
               className="ml-[3px]"
             />

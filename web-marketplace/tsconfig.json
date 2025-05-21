@@ -36,11 +36,11 @@
   },
   "include": [
     "test",
-    "src",
+    "./src",
     "types/url-search-params-polyfill.d.ts",
     "lib/rdf/types/rdf-validate-shacl/index.d.ts",
     "./dist/types/**/*.ts",
     "./next-env.d.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["./node_modules"]
 }

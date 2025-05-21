@@ -92,7 +92,7 @@ type Props = {
   loadingBuySellOrders: boolean;
 };
 
-const stripe = loadStripe(stripeKey);
+const stripe = loadStripe(stripeKey || '');
 
 export const BuyCreditsForm = ({
   retiring,

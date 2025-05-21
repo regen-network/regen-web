@@ -39,9 +39,13 @@ type ResponseType = {
   >;
   isLoadingSellOrders: boolean;
   sortCallbacks: SortCallbacksType;
+  totalSellOrders?: number;
+  paginationParams?: TablePaginationParams;
 };
 
-export const useNormalizedSellOrders = (): ResponseType => {
+export const useNormalizedSellOrders = ({
+  sellerAddress,
+}: { sellerAddress?: string } = {}): ResponseType => {
   const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
 
@@ -55,7 +59,10 @@ export const useNormalizedSellOrders = (): ResponseType => {
   useQuery(getSimplePriceQuery({}));
 
   const { sellOrders, refetchSellOrders, isLoadingSellOrders } =
-    useFetchSellOrders();
+    useFetchSellOrders(sellerAddress, {
+      offset,
+      limit: rowsPerPage,
+    });
 
   // Sorting
   const { sortCallbacks, sortedSellOrders } = useSortedSellOrders({
@@ -84,9 +91,15 @@ export const useNormalizedSellOrders = (): ResponseType => {
   );
 
   // Batch pagination
-  const batchDenoms = sortedSellOrders
-    .slice(offset, offset + rowsPerPage)
-    .map(sellOrder => sellOrder.batchDenom);
+  // If we have used server pagination we don't need to slice it
+  const paginatedSellOrders =
+    sortedSellOrders.length > rowsPerPage
+      ? sortedSellOrders.slice(offset, offset + rowsPerPage)
+      : sortedSellOrders;
+
+  const batchDenoms = paginatedSellOrders.map(
+    sellOrder => sellOrder.batchDenom,
+  );
 
   const batchesResult = useQueries({
     queries:
@@ -167,5 +180,7 @@ export const useNormalizedSellOrders = (): ResponseType => {
     setPaginationParams,
     isLoadingSellOrders,
     sortCallbacks,
+    totalSellOrders: sellOrders?.[0]?.totalSellOrders,
+    paginationParams,
   };
 };

@@ -30,7 +30,9 @@ const AuthRoute = ({ component: Component }: Props): JSX.Element => {
   return (
     // Show loader while auth is loading
     <WithLoader isLoading={loading} sx={loaderStyles.withLoaderBlock}>
-      <div className="min-h-[500px]">{activeAccountId && <Component />}</div>
+      <div className="min-h-[500px] bg-transparent">
+        {activeAccountId && <Component />}
+      </div>
     </WithLoader>
   );
 };

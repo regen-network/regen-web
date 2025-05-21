@@ -11,6 +11,8 @@ import { ReactQueryBuilderResponse } from '../../../types/react-query.types';
 export type SellOrderInfoExtented = SellOrderInfo & {
   askBaseDenom: string;
   askUsdAmount: number;
+} & {
+  totalSellOrders?: number;
 };
 
 export type ReactQuerySellOrdersExtentedResponse = QueryObserverOptions<

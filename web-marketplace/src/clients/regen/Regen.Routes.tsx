@@ -52,6 +52,8 @@ import { projectDetailsLoader } from 'components/templates/ProjectDetails/Projec
 import { KeplrRoute } from '../../components/atoms';
 import { ProjectMetadata } from '../../pages/ProjectMetadata/ProjectMetadata';
 
+const SellOrders = safeLazy(() => import('../../pages/SellOrders/SellOrders'));
+
 const Additionality = safeLazy(() => import('../../pages/Additionality'));
 const AllProjects = safeLazy(() => import('../../pages/Projects/AllProjects'));
 const BasicInfo = safeLazy(() => import('../../pages/BasicInfo'));
@@ -109,9 +111,6 @@ const ConnectWalletPage = safeLazy(
 );
 const ProfileEdit = safeLazy(() => import('../../pages/ProfileEdit'));
 const Orders = safeLazy(() => import('../../pages/Orders'));
-const SellerSetupAccount = safeLazy(
-  () => import('../../pages/SellerSetupAccount'),
-);
 
 type RouterProps = {
   reactQueryClient: QueryClient;
@@ -398,10 +397,7 @@ export const getRegenRoutes = ({
             path="my-orders"
             element={<KeplrOrAuthRoute component={Orders} />}
           />
-          <Route
-            path="seller"
-            element={<AuthRoute component={SellerSetupAccount} />}
-          />
+          <Route path="seller" element={<AuthRoute component={SellOrders} />} />
         </Route>
       </Route>
       <Route path="connect-wallet" element={<ConnectWalletPage />} />

@@ -3,7 +3,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useCallback,
-  useEffect,
+  useMemo,
   useState,
 } from 'react';
 import {
@@ -16,6 +16,7 @@ import {
   TableHead,
   TablePaginationProps,
   TableRow,
+  Toolbar,
 } from '@mui/material';
 
 import type { Theme } from '../../theme/muiTheme';
@@ -48,6 +49,8 @@ const BorderLeft = styled('div')(({ theme }) => ({
  *  */
 export type RenderActionButtonsFunc = (i: number) => React.ReactNode;
 
+export type RenderToolbarContentFunc = () => React.ReactNode;
+
 export type TablePaginationParams = {
   page: number;
   rowsPerPage: number;
@@ -63,6 +66,7 @@ interface ActionsTableProps {
   headerRows: React.ReactNode[];
   rows: React.ReactNode[][];
   renderActionButtons?: RenderActionButtonsFunc;
+  renderToolbarContentFunc?: RenderToolbarContentFunc;
   onTableChange?: Dispatch<SetStateAction<TablePaginationParams>>;
   initialPaginationParams?: TablePaginationParams;
   sortCallbacks?: SortCallbacksType;
@@ -84,6 +88,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   isIgnoreOffset = false,
   actionButtonsText,
   renderActionButtons,
+  renderToolbarContentFunc,
   onTableChange,
   labelDisplayedRows,
   dark = true,
@@ -97,7 +102,6 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   const [page, setPage] = useState(initialPage);
   const [offset, setOffset] = useState(initialOffset);
   const [rowsPerPage, setRowsPerPage] = useState(initialRowsPerPage);
-  const [displayRows, setDisplayRows] = useState<React.ReactNode[][]>(rows);
   const maxCount = Math.max(initialPaginationParams?.count ?? 0, rows.length);
   const [sortOrder, setSortOrder] = useState<Order>('asc');
   const [sortBy, setSortBy] = useState<number | undefined>();
@@ -145,9 +149,14 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
     [onTableChange, rowsPerPage, isIgnoreOffset, initialPaginationParams],
   );
 
-  useEffect(() => {
-    setDisplayRows(rows.slice(offset, offset + rowsPerPage));
-  }, [offset, rowsPerPage, rows]);
+  const displayRows = useMemo<React.ReactNode[][]>(() => {
+    // if we've fetched rowsPerPage on the server, just show them
+    if (rows.length <= rowsPerPage) {
+      return rows;
+    }
+    // otherwise slice client-side
+    return rows.slice(offset, offset + rowsPerPage);
+  }, [rows, offset, rowsPerPage]);
 
   return (
     <Box
@@ -170,8 +179,16 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
                 rowsPerPage,
                 displayRows.length,
               ) * 25,
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
+          {renderToolbarContentFunc && (
+            <Toolbar className="sticky top-0 left-0 w-full p-0">
+              {renderToolbarContentFunc()}
+            </Toolbar>
+          )}
           <Table aria-label={tableLabel}>
             <TableHead>
               <TableRow>

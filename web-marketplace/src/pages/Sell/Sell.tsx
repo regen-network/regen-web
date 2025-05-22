@@ -1,7 +1,7 @@
 import { SellerSetupAccount } from 'components/organisms/SellerSetupAccount/SellerSetupAccount';
 import { UserSellOrders } from 'components/organisms/UserSellOrders/UserSellOrders';
 
-const SellOrders = () => {
+const Sell = () => {
   return (
     <section className="overflow-x-auto bg-transparent">
       {/* TODO:  If the member is an Editor or Viewer, <SellerSetupAccount /> should be hidden */}
@@ -11,4 +11,4 @@ const SellOrders = () => {
   );
 };
 
-export default SellOrders;
+export default Sell;

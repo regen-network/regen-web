@@ -9,11 +9,13 @@ import { cn } from 'web-components/src/utils/styles/cn';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
+interface UserSellOrdersToolbarProps {
+  wrapperClassName?: string;
+}
+
 export const UserSellOrdersToolbar = ({
   wrapperClassName,
-}: {
-  wrapperClassName?: string;
-}) => {
+}: UserSellOrdersToolbarProps) => {
   const { _ } = useLingui();
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
   const { credits } = useFetchEcocredits({});

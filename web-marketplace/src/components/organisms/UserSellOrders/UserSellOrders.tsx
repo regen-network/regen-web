@@ -38,8 +38,10 @@ export const UserSellOrders = () => {
   );
 
   // Callback to store the openCancelModal function from the child component
-  const handleOpenCancelModal = (openFunc: (index: number) => void) => {
-    openCancelModalRef.current = openFunc;
+  const handleOpenCancelModal = (
+    onOpenCancelModalFunc: (index: number) => void,
+  ) => {
+    openCancelModalRef.current = onOpenCancelModalFunc;
   };
 
   if (isLoadingSellOrders) {

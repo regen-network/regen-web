@@ -89,7 +89,7 @@ export const ProfileEdit = () => {
         >
           <Flex
             justifyContent="space-between"
-            className="my-10 md:mb-25 w-full h-50"
+            className="my-10 md:mb-20 w-full h-50"
           >
             <Title variant="h1" className="text-[32px] leading-[1.4]">
               {startCase(section)}
@@ -101,7 +101,7 @@ export const ProfileEdit = () => {
             )}
           </Flex>
           <WithLoader isLoading={accountChanging || loading}>
-            <div className="rounded-md border border-grey-200 bg-grey-0 lg:mt-30 w-full">
+            <div className="rounded-md border border-grey-200 bg-grey-0 w-full">
               <Outlet />
             </div>
           </WithLoader>

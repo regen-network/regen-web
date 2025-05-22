@@ -10,7 +10,7 @@ import { useWallet } from 'lib/wallet/wallet';
 import { useNormalizedSellOrders } from 'pages/Marketplace/Storefront/hooks/useNormalizedSellOrders';
 import { CANCEL_SELL_ORDER_ACTION } from 'pages/Marketplace/Storefront/Storefront.constants';
 
-import { CancelSellOrderFlow } from './CancelSellOrderFlow';
+import { CancelSellOrderFlow } from '../../../features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow';
 import { NoUserSellOrdersCard } from './UserSellOrders.NoOrdersCard';
 import { UserSellOrdersToolbar } from './UserSellOrders.Toolbar';
 

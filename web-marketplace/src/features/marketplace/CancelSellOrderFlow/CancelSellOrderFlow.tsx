@@ -18,8 +18,8 @@ import {
   TX_ERROR_MODAL_TITLE,
 } from 'lib/constants/shared.constants';
 
+import { useCancelSellOrder } from 'features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder';
 import { Link } from 'components/atoms';
-import { useCancelSellOrder } from 'hooks/useCancelSellOrder';
 
 interface CancelSellOrderFlowProps {
   normalizedSellOrders: any[];

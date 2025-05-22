@@ -21,6 +21,9 @@ msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+msgid ""
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -571,7 +574,7 @@ msgstr "Apruebe la solicitud de conexión de la aplicación móvil Keplr en su m
 msgid "approved methodologies"
 msgstr "metodologías aprobadas"
 
-#: src/hooks/useCancelSellOrder.ts:92
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:112
 #: src/pages/Marketplace/Storefront/Storefront.tsx:248
 msgid "Are you sure you want to cancel this sell order?"
 msgstr "¿Está seguro de que desea cancelar esta orden de venta?"
@@ -1011,6 +1014,10 @@ msgstr "Elige los ecocréditos que sean elegibles para esta cesta.<0>Más inform
 msgid "Choose basket"
 msgstr "Elija la cesta"
 
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:47
+msgid "Choose batch"
+msgstr ""
+
 #: src/pages/ChooseCreditClass/ChooseCreditClass.Item.tsx:29
 msgid "Choose credit class"
 msgstr "Elija la clase de crédito"
@@ -1257,7 +1264,7 @@ msgid "Create Project - Access Denied"
 msgstr "Crear proyecto - Acceso denegado"
 
 #: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:230
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:41
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:39
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
 msgid "Create Sell Order"
 msgstr "Crear orden de venta"
@@ -3873,7 +3880,7 @@ msgid "sell order id:"
 msgstr "ID de orden de venta:"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:33
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:34
 #: src/pages/Marketplace/Storefront/Storefront.tsx:154
 msgid "Sell orders"
 msgstr "Órdenes de venta"
@@ -4951,7 +4958,7 @@ msgstr "¿En qué tipos de proyectos de créditos de carbono está interesado?"
 msgid "whoops, cancel"
 msgstr "ups, cancelar"
 
-#: src/hooks/useCancelSellOrder.ts:91
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:111
 #: src/pages/Marketplace/Storefront/Storefront.tsx:247
 msgid "WHOOPS, EXIT"
 msgstr "UPOPS, SALIDA"
@@ -4972,7 +4979,7 @@ msgstr "Escriba un comentario breve o una actualización más larga del proyecto
 msgid "Yes"
 msgstr "Sí"
 
-#: src/hooks/useCancelSellOrder.ts:90
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:110
 #: src/pages/Marketplace/Storefront/Storefront.tsx:246
 msgid "Yes, cancel sell order"
 msgstr "Sí, cancelar orden de venta"

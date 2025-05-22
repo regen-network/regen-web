@@ -569,7 +569,7 @@ msgstr ""
 msgid "approved methodologies"
 msgstr ""
 
-#: src/hooks/useCancelSellOrder.ts:92
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:112
 #: src/pages/Marketplace/Storefront/Storefront.tsx:248
 msgid "Are you sure you want to cancel this sell order?"
 msgstr ""
@@ -1009,6 +1009,10 @@ msgstr ""
 msgid "Choose basket"
 msgstr ""
 
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:47
+msgid "Choose batch"
+msgstr ""
+
 #: src/pages/ChooseCreditClass/ChooseCreditClass.Item.tsx:29
 msgid "Choose credit class"
 msgstr ""
@@ -1255,7 +1259,7 @@ msgid "Create Project - Access Denied"
 msgstr ""
 
 #: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:230
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:41
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:39
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
 msgid "Create Sell Order"
 msgstr ""
@@ -3871,7 +3875,7 @@ msgid "sell order id:"
 msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:33
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:34
 #: src/pages/Marketplace/Storefront/Storefront.tsx:154
 msgid "Sell orders"
 msgstr ""
@@ -4949,7 +4953,7 @@ msgstr ""
 msgid "whoops, cancel"
 msgstr ""
 
-#: src/hooks/useCancelSellOrder.ts:91
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:111
 #: src/pages/Marketplace/Storefront/Storefront.tsx:247
 msgid "WHOOPS, EXIT"
 msgstr ""
@@ -4970,7 +4974,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: src/hooks/useCancelSellOrder.ts:90
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:110
 #: src/pages/Marketplace/Storefront/Storefront.tsx:246
 msgid "Yes, cancel sell order"
 msgstr ""

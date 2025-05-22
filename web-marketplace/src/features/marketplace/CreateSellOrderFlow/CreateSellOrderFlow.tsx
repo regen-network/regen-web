@@ -49,7 +49,7 @@ type CreateSellOrderFlowProps = {
   setIsFlowStarted: UseStateSetter<boolean>;
   credits?: BatchInfoWithBalance[];
   placeholderText?: string;
-  refetchSellOrders: () => void;
+  refetchSellOrders?: () => void;
 };
 
 /**
@@ -118,7 +118,7 @@ export const CreateSellOrderFlow = ({
   ): Promise<void> => {
     closeProcessingModal();
     closeCreateModal();
-    refetchSellOrders();
+    refetchSellOrders && refetchSellOrders();
   };
 
   // Navigate to portfolio after successful transaction

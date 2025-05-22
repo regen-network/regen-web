@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { msg, Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { Subtitle } from 'web-components/src/components/typography';
@@ -13,11 +14,9 @@ export const UserSellOrdersToolbar = ({
 }: {
   wrapperClassName?: string;
 }) => {
+  const { _ } = useLingui();
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
-
-  // User ecocredits
-  const { credits, isLoadingCredits } = useFetchEcocredits({});
-
+  const { credits } = useFetchEcocredits({});
   const tradableCredits =
     credits?.filter(credit => Number(credit.balance?.tradableAmount) > 0) || [];
 
@@ -25,17 +24,17 @@ export const UserSellOrdersToolbar = ({
     <>
       <div
         className={cn(
-          'p-0 flex justify-between w-full rounded-tl-xl rounded-tr-xl bg-grey-0 border-b-[1px] border-grey-300 border-solid border-t-0 border-r-0 border-l-0',
+          'p-15 sm:p-20 md:p-30 flex justify-between items-center w-full rounded-tl-xl rounded-tr-xl bg-grey-0 border-b-[1px] border-grey-300 border-solid border-t-0 border-r-0 border-l-0',
           wrapperClassName,
         )}
       >
-        <Subtitle size="xl" className="p-30">
+        <Subtitle size="xl" className="text-base sm:text-[22px]">
           <Trans>Sell orders</Trans>
         </Subtitle>
-        <div className="flex-none pt-15 pr-15">
+        <div className="flex-none flex items-center">
           {/* TODO:  If the member is an Editor or Viewer, this button should be hidden */}
           <ContainedButton onClick={() => setIsSellFlowStarted(true)}>
-            <Trans>Create Sell Order</Trans>
+            + <Trans>Create Sell Order</Trans>
           </ContainedButton>
         </div>
       </div>
@@ -43,7 +42,7 @@ export const UserSellOrdersToolbar = ({
         isFlowStarted={isSellFlowStarted}
         setIsFlowStarted={setIsSellFlowStarted}
         credits={tradableCredits}
-        placeholderText="Choose batch"
+        placeholderText={_(msg`Choose batch`)}
       />
     </>
   );

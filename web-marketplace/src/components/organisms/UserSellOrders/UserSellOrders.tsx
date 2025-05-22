@@ -1,31 +1,16 @@
+import { useRef } from 'react';
 import { useLingui } from '@lingui/react';
-import CircularProgress from '@mui/material/CircularProgress';
-import { errorsMapping, findErrorByCodeEnum } from 'config/errors';
 import { safeLazy } from 'utils/safeLazy';
 
 import { TableActionButtons } from 'web-components/src/components/buttons/TableActionButtons';
-import { ConfirmModal as CancelConfirmModal } from 'web-components/src/components/modal/ConfirmModal';
-import { ProcessingModal } from 'web-components/src/components/modal/ProcessingModal';
-import { TxErrorModal } from 'web-components/src/components/modal/TxErrorModal';
-import { TxSuccessfulModal } from 'web-components/src/components/modal/TxSuccessfulModal';
+import { Loading } from 'web-components/src/components/loading';
 
-import { getHashUrl } from 'lib/block-explorer';
-import {
-  BLOCKCHAIN_RECORD,
-  CLOSE_BUTTON_TEXT,
-  PROCESSING_MODAL_BODY,
-  PROCESSING_MODAL_TITLE,
-  SEE_LESS,
-  SEE_MORE,
-  TX_ERROR_MODAL_TITLE,
-} from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useNormalizedSellOrders } from 'pages/Marketplace/Storefront/hooks/useNormalizedSellOrders';
 import { CANCEL_SELL_ORDER_ACTION } from 'pages/Marketplace/Storefront/Storefront.constants';
-import { Link } from 'components/atoms';
-import { useCancelSellOrder } from 'hooks/useCancelSellOrder';
 
+import { CancelSellOrderFlow } from './CancelSellOrderFlow';
 import { NoUserSellOrdersCard } from './UserSellOrders.NoOrdersCard';
 import { UserSellOrdersToolbar } from './UserSellOrders.Toolbar';
 
@@ -36,6 +21,7 @@ const SellOrdersTable = safeLazy(
 export const UserSellOrders = () => {
   const { wallet } = useWallet();
   const { _ } = useLingui();
+  const openCancelModalRef = useRef<((index: number) => void) | null>(null);
 
   const {
     normalizedSellOrders,
@@ -51,33 +37,16 @@ export const UserSellOrders = () => {
     (sellOrder: any) => sellOrder.seller === wallet?.address,
   );
 
-  const {
-    openCancelModal,
-    getCancelModalProps,
-    getProcessingModalProps,
-    getSuccessModalProps,
-    getErrorModalProps,
-    deliverTxResponse,
-    error,
-  } = useCancelSellOrder({
-    normalizedSellOrders: userSellOrders || [],
-    refetchSellOrders,
-  });
-
-  const txHash = deliverTxResponse?.transactionHash;
-  const txHashUrl = getHashUrl(txHash);
-  const errorEnum = findErrorByCodeEnum({ errorCode: error });
-  const ErrorIcon = error ? errorsMapping[errorEnum].icon : undefined;
+  // Callback to store the openCancelModal function from the child component
+  const handleOpenCancelModal = (openFunc: (index: number) => void) => {
+    openCancelModalRef.current = openFunc;
+  };
 
   if (isLoadingSellOrders) {
-    return (
-      <div className="flex justify-center items-center w-full h-full">
-        <CircularProgress color="secondary" />
-      </div>
-    );
+    return <Loading />;
   }
 
-  if (userSellOrders?.length === 0) {
+  if (!userSellOrders?.length) {
     return <NoUserSellOrdersCard />;
   }
 
@@ -93,7 +62,9 @@ export const UserSellOrders = () => {
               {
                 label: _(CANCEL_SELL_ORDER_ACTION),
                 onClick: () => {
-                  openCancelModal(i);
+                  if (openCancelModalRef.current) {
+                    openCancelModalRef.current(i);
+                  }
                 },
               },
             ]}
@@ -104,46 +75,10 @@ export const UserSellOrders = () => {
         totalSellOrders={totalSellOrders}
         paginationParams={paginationParams}
       />
-      <CancelConfirmModal {...getCancelModalProps()} linkComponent={Link} />
-      <ProcessingModal
-        open={getProcessingModalProps().open}
-        onClose={getProcessingModalProps().onClose}
-        title={_(PROCESSING_MODAL_TITLE)}
-        bodyText={_(PROCESSING_MODAL_BODY)}
-      />
-      <TxSuccessfulModal
-        open={!!txHash && !error}
-        txHash={deliverTxResponse?.transactionHash || ''}
-        txHashUrl={txHashUrl}
-        linkComponent={Link}
-        onButtonClick={getSuccessModalProps().onClose}
-        onClose={getSuccessModalProps().onClose}
-        blockchainRecordText={_(BLOCKCHAIN_RECORD)}
-        buttonTitle={
-          getSuccessModalProps().txButtonTitle || _(CLOSE_BUTTON_TEXT)
-        }
-        cardTitle={getSuccessModalProps().txModalTitle}
-        title={getSuccessModalProps().txModalHeader}
-        cardItems={getSuccessModalProps().cardItems}
-        seeMoreText={_(SEE_MORE)}
-        seeLessText={_(SEE_LESS)}
-      />
-      <TxErrorModal
-        open={!!error}
-        error={error || ''}
-        txHash={deliverTxResponse?.transactionHash || ''}
-        txHashUrl={txHashUrl}
-        linkComponent={Link}
-        onButtonClick={getErrorModalProps().onClose}
-        onClose={getErrorModalProps().onClose}
-        blockchainRecordText={_(BLOCKCHAIN_RECORD)}
-        buttonTitle={_(CLOSE_BUTTON_TEXT)}
-        cardTitle={getErrorModalProps().txModalTitle}
-        title={getErrorModalProps().txModalHeader || _(TX_ERROR_MODAL_TITLE)}
-        cardItems={getErrorModalProps().cardItems}
-        seeMoreText={_(SEE_MORE)}
-        seeLessText={_(SEE_LESS)}
-        icon={ErrorIcon && <ErrorIcon sx={{ fontSize: 100 }} />}
+      <CancelSellOrderFlow
+        normalizedSellOrders={userSellOrders || []}
+        refetchSellOrders={refetchSellOrders}
+        onOpenCancelModal={handleOpenCancelModal}
       />
     </section>
   );

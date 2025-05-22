@@ -20,7 +20,7 @@ export const UserSellOrdersToolbar = ({
 }: UserSellOrdersToolbarProps) => {
   const { _ } = useLingui();
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
-  const { credits } = useFetchEcocredits({});
+  const { credits } = useFetchEcocredits({ isPaginatedQuery: false });
   const tradableCredits =
     credits?.filter(credit => Number(credit.balance?.tradableAmount) > 0) || [];
 

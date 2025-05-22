@@ -11,10 +11,12 @@ import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchE
 
 interface UserSellOrdersToolbarProps {
   wrapperClassName?: string;
+  refetchSellOrders: () => void;
 }
 
 export const UserSellOrdersToolbar = ({
   wrapperClassName,
+  refetchSellOrders,
 }: UserSellOrdersToolbarProps) => {
   const { _ } = useLingui();
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
@@ -45,6 +47,7 @@ export const UserSellOrdersToolbar = ({
         setIsFlowStarted={setIsSellFlowStarted}
         credits={tradableCredits}
         placeholderText={_(msg`Choose batch`)}
+        refetchSellOrders={refetchSellOrders}
       />
     </>
   );

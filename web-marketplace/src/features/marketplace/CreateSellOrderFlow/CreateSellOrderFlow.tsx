@@ -44,11 +44,12 @@ import { Link } from 'components/atoms';
 import { CreateSellOrderModal } from 'components/organisms/CreateSellOrderModal/CreateSellOrderModal';
 import { useMsgClient } from 'hooks';
 
-type Props = {
+type CreateSellOrderFlowProps = {
   isFlowStarted: boolean;
   setIsFlowStarted: UseStateSetter<boolean>;
   credits?: BatchInfoWithBalance[];
   placeholderText?: string;
+  refetchSellOrders: () => void;
 };
 
 /**
@@ -65,7 +66,8 @@ export const CreateSellOrderFlow = ({
   setIsFlowStarted,
   credits = [],
   placeholderText,
-}: Props): JSX.Element => {
+  refetchSellOrders,
+}: CreateSellOrderFlowProps): JSX.Element => {
   const { _ } = useLingui();
   // Modal visibility states
   const [isCreateSellOrderOpen, setIsCreateSellOrderOpen] = useState(false);
@@ -116,6 +118,7 @@ export const CreateSellOrderFlow = ({
   ): Promise<void> => {
     closeProcessingModal();
     closeCreateModal();
+    refetchSellOrders();
   };
 
   // Navigate to portfolio after successful transaction
@@ -134,6 +137,7 @@ export const CreateSellOrderFlow = ({
     error,
     setError,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+
   const accountAddress = wallet?.address;
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);

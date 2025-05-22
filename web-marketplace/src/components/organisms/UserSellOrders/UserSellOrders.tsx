@@ -49,7 +49,7 @@ export const UserSellOrders = () => {
   }
 
   if (!userSellOrders?.length) {
-    return <NoUserSellOrdersCard />;
+    return <NoUserSellOrdersCard refetchSellOrders={refetchSellOrders} />;
   }
 
   return (
@@ -73,7 +73,9 @@ export const UserSellOrders = () => {
             sx={{ width: '100%' }}
           />
         )}
-        renderToolbarContentFunc={() => <UserSellOrdersToolbar />}
+        renderToolbarContentFunc={() => (
+          <UserSellOrdersToolbar refetchSellOrders={refetchSellOrders} />
+        )}
         totalSellOrders={totalSellOrders}
         paginationParams={paginationParams}
       />

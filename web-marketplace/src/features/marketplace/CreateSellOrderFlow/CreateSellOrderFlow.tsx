@@ -50,6 +50,7 @@ type CreateSellOrderFlowProps = {
   credits?: BatchInfoWithBalance[];
   placeholderText?: string;
   refetchSellOrders?: () => void;
+  redirectOnSuccess?: boolean;
 };
 
 /**
@@ -67,6 +68,7 @@ export const CreateSellOrderFlow = ({
   credits = [],
   placeholderText,
   refetchSellOrders,
+  redirectOnSuccess = true,
 }: CreateSellOrderFlowProps): JSX.Element => {
   const { _ } = useLingui();
   // Modal visibility states
@@ -124,7 +126,11 @@ export const CreateSellOrderFlow = ({
   // Navigate to portfolio after successful transaction
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
-    navigate('/dashboard/portfolio');
+    if (redirectOnSuccess) {
+      navigate('/dashboard/portfolio');
+    } else {
+      handleTxModalClose();
+    }
   };
 
   const onTxBroadcast = (): void => setIsCreateSellOrderOpen(false);

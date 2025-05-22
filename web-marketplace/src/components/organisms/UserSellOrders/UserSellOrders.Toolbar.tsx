@@ -48,6 +48,7 @@ export const UserSellOrdersToolbar = ({
         credits={tradableCredits}
         placeholderText={_(msg`Choose batch`)}
         refetchSellOrders={refetchSellOrders}
+        redirectOnSuccess={false}
       />
     </>
   );

@@ -1,5 +1,4 @@
-// src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Trans } from '@lingui/macro';
 
 import { CopyButton } from 'web-components/src/components/buttons/CopyButton';
@@ -14,18 +13,18 @@ import useClickOutside from '../../../utils/hooks/useClickOutside';
 import { AccountSwitcherDropdown } from './DashboardNavigation.Dropdown';
 import { DashboardNavHeaderData } from './DashboardNavigation.types';
 
-export const DashboardNavHeader: React.FC<
-  DashboardNavHeaderData & {
-    collapsed?: boolean;
-    onViewProfileClick?: (href: string) => void;
-  }
-> = ({
+type Props = DashboardNavHeaderData & {
+  collapsed?: boolean;
+  onViewProfileClick?: (href: string) => void;
+};
+
+export const DashboardNavHeader = ({
   activeAccount,
   accounts,
   onAccountSelect,
   collapsed = false,
   onViewProfileClick,
-}) => {
+}: Props) => {
   const { name, address, avatarSrc, type } = activeAccount;
   const short = `${address.slice(0, 9)}…${address.slice(-6)}`;
   const canSwitch = accounts.length > 1;

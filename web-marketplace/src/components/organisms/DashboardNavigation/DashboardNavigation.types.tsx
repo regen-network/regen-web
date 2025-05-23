@@ -53,3 +53,8 @@ export interface AccountSwitcherDropdownProps {
   activeId: string;
   onSelect: (id: string) => void;
 }
+
+export interface GradientProps {
+  fontSize?: string;
+  linearGradient?: boolean;
+}

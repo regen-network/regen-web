@@ -1,4 +1,4 @@
-import { i18n } from '@lingui/core';
+import type { ComponentType, ReactElement, SVGProps } from 'react';
 import { msg } from '@lingui/macro';
 
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
@@ -11,116 +11,126 @@ import { ShoppingBagIcon } from 'web-components/src/components/icons/ShoppingBag
 import { ShoppingCartIcon } from 'web-components/src/components/icons/ShoppingCartIcon';
 import { UserMenuIcon } from 'web-components/src/components/icons/UserMenuIcon';
 
+import { TranslatorType } from 'lib/i18n/i18n.types';
+
 import { NOT_SUPPORTED_TOOLTIP_TEXT } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 
-import { DashboardNavigationSection } from './DashboardNavigation.types';
+import {
+  DashboardNavigationSection,
+  GradientProps,
+} from './DashboardNavigation.types';
 
-// Helper to wrap icons consistently
-const wrapIcon = (Icon: React.FC<any>, props: any = {}) => (
-  <span className="text-[24px] leading-none">
-    <Icon fontSize="inherit" linearGradient {...props} />
-  </span>
-);
+export function wrapIcon<
+  P extends SVGProps<SVGSVGElement> = SVGProps<SVGSVGElement>,
+>(
+  Icon: ComponentType<P & GradientProps>,
+  props?: Omit<P, keyof GradientProps>,
+): ReactElement {
+  return (
+    <span className="text-[24px] leading-none">
+      <Icon fontSize="inherit" linearGradient {...(props as P)} />
+    </span>
+  );
+}
 
-// Get credits section
 const getCreditsSection = (
+  _: TranslatorType,
   loginDisabled: boolean,
   collapsed: boolean,
 ): DashboardNavigationSection => ({
-  // Direct translation for headings
-  heading: collapsed ? i18n._(msg`Credits`) : i18n._(msg`Manage credits`),
+  heading: collapsed ? _(msg`Credits`) : _(msg`Manage credits`),
   items: [
     {
-      label: i18n._(msg`Portfolio`),
+      label: _(msg`Portfolio`),
       icon: wrapIcon(CreditsIcon, { disabled: loginDisabled }),
       path: 'portfolio',
     },
     {
-      label: i18n._(msg`Sell`),
+      label: _(msg`Sell`),
       icon: <ShoppingCartIcon linearGradient disabled={loginDisabled} />,
       path: 'sell',
       disabled: loginDisabled,
-      disabledTooltipText: i18n._(NOT_SUPPORTED_TOOLTIP_TEXT),
+      disabledTooltipText: _(NOT_SUPPORTED_TOOLTIP_TEXT),
     },
   ],
 });
 
-// Get projects section
 const getProjectsSection = (
+  _: TranslatorType,
   loginDisabled: boolean,
   collapsed: boolean,
 ): DashboardNavigationSection => ({
-  heading: collapsed ? i18n._(msg`Projects`) : i18n._(msg`Manage projects`),
+  heading: collapsed ? _(msg`Projects`) : _(msg`Manage projects`),
   items: [
     {
-      label: i18n._(msg`Projects`),
+      label: _(msg`Projects`),
       icon: <ProjectsIcon linearGradient disabled={loginDisabled} />,
       path: 'projects',
       disabled: loginDisabled,
-      disabledTooltipText: i18n._(NOT_SUPPORTED_TOOLTIP_TEXT),
+      disabledTooltipText: _(NOT_SUPPORTED_TOOLTIP_TEXT),
     },
   ],
 });
 
-// Get user-specific sections
 const getUserSections = (
+  _: TranslatorType,
   loginDisabled: boolean,
 ): DashboardNavigationSection[] => [
   {
-    heading: i18n._(msg`Orders`),
+    heading: _(msg`Orders`),
     items: [
       {
-        label: i18n._(msg`My orders`),
+        label: _(msg`My orders`),
         icon: <ShoppingBagIcon linearGradient />,
         path: 'orders',
       },
     ],
   },
   {
-    heading: i18n._(msg`Profile`),
+    heading: _(msg`Profile`),
     items: [
       {
-        label: i18n._(msg`Edit personal profile`),
+        label: _(msg`Edit personal profile`),
         icon: <UserMenuIcon linearGradient disabled={loginDisabled} />,
         path: 'profile',
         disabled: loginDisabled,
-        disabledTooltipText: i18n._(NOT_SUPPORTED_TOOLTIP_TEXT),
+        disabledTooltipText: _(NOT_SUPPORTED_TOOLTIP_TEXT),
       },
       {
-        label: i18n._(msg`Settings`),
+        label: _(msg`Settings`),
         icon: <CogIcon linearGradient disabled={loginDisabled} />,
         path: 'settings',
         disabled: loginDisabled,
-        disabledTooltipText: i18n._(NOT_SUPPORTED_TOOLTIP_TEXT),
+        disabledTooltipText: _(NOT_SUPPORTED_TOOLTIP_TEXT),
       },
     ],
   },
 ];
 
-// Get org-specific sections
-const getOrgSection = (collapsed: boolean): DashboardNavigationSection => ({
-  // Direct translation instead of using getResponsiveHeading
-  heading: collapsed ? i18n._(msg`Org`) : i18n._(msg`Manage organization`),
+const getOrgSection = (
+  _: TranslatorType,
+  collapsed: boolean,
+): DashboardNavigationSection => ({
+  heading: collapsed ? _(msg`Org`) : _(msg`Manage organization`),
   items: [
     {
-      label: i18n._(msg`Edit org profile`),
+      label: _(msg`Edit org profile`),
       icon: <OrgProfileIcon linearGradient />,
       path: 'profile',
     },
     {
-      label: i18n._(msg`Members`),
+      label: _(msg`Members`),
       icon: <MembersIcon linearGradient />,
       path: 'members',
     },
   ],
 });
 
-// Get logout section (always the same)
-const getLogoutSection = (): DashboardNavigationSection => ({
-  heading: '', // Empty heading doesn't need translation
+const getLogoutSection = (_: TranslatorType): DashboardNavigationSection => ({
+  heading: '',
   items: [
     {
-      label: i18n._(msg`Log out`),
+      label: _(msg`Log out`),
       icon: (
         <span className="flex h-30 w-30 shrink-0 items-center justify-center">
           <LogOutIcon linearGradient />
@@ -131,24 +141,24 @@ const getLogoutSection = (): DashboardNavigationSection => ({
   ],
 });
 
-// Main export function
 export function getDashboardNavigationSections(
+  _: TranslatorType,
   accountType: 'user' | 'org',
   loginDisabled = false,
   collapsed = false,
 ): DashboardNavigationSection[] {
   const sections = [
-    getCreditsSection(loginDisabled, collapsed),
-    getProjectsSection(loginDisabled, collapsed),
+    getCreditsSection(_, loginDisabled, collapsed),
+    getProjectsSection(_, loginDisabled, collapsed),
   ];
 
   if (accountType === 'user') {
-    sections.push(...getUserSections(loginDisabled));
+    sections.push(...getUserSections(_, loginDisabled));
   } else {
-    sections.push(getOrgSection(collapsed));
+    sections.push(getOrgSection(_, collapsed));
   }
 
-  sections.push(getLogoutSection());
+  sections.push(getLogoutSection(_));
 
   return sections;
 }

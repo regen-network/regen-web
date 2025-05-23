@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'; // Add useMemo import
+import { useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -6,21 +6,16 @@ import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 import DoubleBreadcrumbLeftIcon from 'web-components/src/components/icons/DoubleBreadcrumbLeftIcon';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import {
+  COLLAPSE_BUTTON_CLASSES,
+  NAV_BASE_CLASSES,
+  SECTION_HEADING_BASE,
+} from './DashboardNavigation.constants';
 import { DashboardNavFooter } from './DashboardNavigation.Footer';
 import { DashboardNavHeader } from './DashboardNavigation.Header';
 import { DashboardNavigationListItem } from './DashboardNavigation.ListItem';
 import { DashboardNavigationProps } from './DashboardNavigation.types';
 import { getDashboardNavigationSections } from './DashboardNavigation.utils';
-
-// Component class constants
-const NAV_BASE_CLASSES =
-  'relative flex flex-col justify-between h-screen overflow-visible transition-all duration-300 border-0 border-r border-solid border-r-[#D2D5D9] bg-white';
-
-const COLLAPSE_BUTTON_CLASSES =
-  'group hidden sm:flex items-center justify-center w-[25px] h-[25px] absolute z-10 right-[-12.5px] top-[35px] p-0 rounded-[5px] border border-solid border-[#D2D5D9] bg-[#FFFFFF] shadow-[0_0_8px_rgba(0,0,0,0.15)] cursor-pointer hover:bg-bc-green-600 hover:text-bc-neutral-100';
-
-const SECTION_HEADING_BASE =
-  'uppercase text-sc-text-sub-header cursor-default pointer-events-none';
 
 export const DashboardNavigation = ({
   header: { activeAccount, accounts, onAccountSelect, onViewProfileClick },
@@ -33,9 +28,15 @@ export const DashboardNavigation = ({
   const { _ } = useLingui();
   const [collapsed, setCollapsed] = useState(false);
 
+  // Pass the translator function as the first parameter and include it in dependencies
   const sections = useMemo(() => {
-    return getDashboardNavigationSections(activeAccount.type, false, collapsed);
-  }, [activeAccount.type, collapsed]);
+    return getDashboardNavigationSections(
+      _,
+      activeAccount.type,
+      false,
+      collapsed,
+    );
+  }, [_, activeAccount.type, collapsed]);
 
   const handleItemClick = (path: string) => {
     if (path === 'logout') {
@@ -108,7 +109,8 @@ export const DashboardNavigation = ({
                   )}
                   textSize="xs"
                 >
-                  {_(section.heading)}
+                  {section.heading}{' '}
+                  {/* Section heading is already translated */}
                 </TextButton>
               )}
 

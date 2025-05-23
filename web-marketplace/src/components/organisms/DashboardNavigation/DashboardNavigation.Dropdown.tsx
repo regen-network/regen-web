@@ -31,8 +31,8 @@ export const AccountSwitcherDropdown = ({
               'flex w-full items-center gap-10 px-10 h-[55px]',
               'hover:cursor-pointer border-none',
               isSelected
-                ? 'bg-bc-neutral-200' // active row
-                : 'bg-bc-neutral-100 hover:bg-bc-neutral-200', // inactive rows
+                ? 'bg-bc-neutral-200'
+                : 'bg-bc-neutral-100 hover:bg-bc-neutral-200',
             )}
           >
             <UserAvatar

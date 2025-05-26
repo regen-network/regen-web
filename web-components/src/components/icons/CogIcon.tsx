@@ -55,10 +55,7 @@ export const CogIcon = ({ linearGradient, ...props }: Props) => {
             offset="0.00458717"
             stopColor={props.disabled ? '#8F8F8F' : '#7BC796'}
           />
-          <stop
-            offset="1"
-            stopColor={props.disabled ? '#EFEFEF' : '#C5E6D1'}
-          />
+          <stop offset="1" stopColor={props.disabled ? '#EFEFEF' : '#C5E6D1'} />
         </linearGradient>
         <linearGradient
           id={gradientId2}
@@ -72,10 +69,7 @@ export const CogIcon = ({ linearGradient, ...props }: Props) => {
             offset="0.00458717"
             stopColor={props.disabled ? '#8F8F8F' : '#7BC796'}
           />
-          <stop
-            offset="1"
-            stopColor={props.disabled ? '#EFEFEF' : '#C5E6D1'}
-          />
+          <stop offset="1" stopColor={props.disabled ? '#EFEFEF' : '#C5E6D1'} />
         </linearGradient>
       </defs>
     </svg>

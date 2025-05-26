@@ -1,60 +1,99 @@
-import { Box, Grid } from '@mui/material';
+import { useMemo } from 'react';
+import { Grid } from '@mui/material';
 
+import { CopyButton, CopyButtonProps } from '../../buttons/CopyButton';
 import Card from '../../cards/Card';
 import CheckIcon from '../../icons/CheckIcon';
+import SmallArrowIcon from '../../icons/SmallArrowIcon';
+import { isValidAddress } from '../../inputs/validation';
+import { LinkComponentProp } from '../../modal/ConfirmModal';
 import { Body, Subtitle } from '../../typography';
 import UserAvatar from '../../user/UserAvatar';
-import { OnProfileClickType } from './UserMenuItem.types';
 
-export type UserMenuItemProfileProps = {
-  id: string;
+export type UserMenuProfile = {
+  id?: string;
   profileImage: string;
   name: string;
   address?: string | null;
-  selected?: boolean;
-  onProfileClick?: OnProfileClickType;
+  truncatedAddress?: string | null;
+  profileLink?: string;
+};
+export type UserMenuItemProfileProps = UserMenuProfile & {
+  profileLink?: string;
+  publicProfileText: string;
+  copyText: Pick<CopyButtonProps, 'tooltipText' | 'toastText'>;
+  linkComponent: LinkComponentProp;
+  showCheckIcon?: boolean;
 };
 
 const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
-  id,
   profileImage,
   name,
   address,
-  selected = false,
-  onProfileClick,
+  truncatedAddress,
+  profileLink,
+  linkComponent: LinkComponent,
+  publicProfileText,
+  copyText,
+  showCheckIcon,
 }) => {
+  const validWalletAddress = useMemo(
+    () => address && isValidAddress(address),
+    [address],
+  );
   return (
-    <Card
-      className={`${
-        selected
-          ? 'border-grey-300 bg-grey-100'
-          : 'border-transparent bg-grey-0'
-      } w-full shadow-none cursor-pointer mx-10 p-10 mb-10`}
-      onClick={() => onProfileClick && onProfileClick(id, selected)}
-    >
-      <Grid container wrap="nowrap">
+    <Card className="group/card hover:border-grey-300 hover:bg-grey-100 border-[transparent] bg-grey-0 w-full shadow-none p-5">
+      <Grid container wrap="nowrap" alignItems="center">
         <Grid item mr={3} position="relative">
-          <UserAvatar size="medium" src={profileImage} />
-          {selected && (
-            <Box
-              sx={{
-                width: 13,
-                height: 13,
-                borderRadius: '50%',
-                backgroundColor: 'secondary.light',
-                display: 'flex',
-                position: 'absolute',
-                right: 0,
-                bottom: 12,
-              }}
-            >
+          <UserAvatar className="w-30 h-30" src={profileImage} />
+          {showCheckIcon && (
+            <div className="flex items-center justify-center w-15 h-15 absolute rounded-[50%] bg-bc-green-200 right-0 bottom-0">
               <CheckIcon className="w-[13px] h-[13px] text-brand-400" />
-            </Box>
+            </div>
           )}
         </Grid>
         <Grid item>
-          <Subtitle size="lg">{name}</Subtitle>
-          <Body size="sm">{address}</Body>
+          <Subtitle size="md">{name}</Subtitle>
+          <div className="flex flex-row items-baseline gap-15">
+            {address &&
+              (validWalletAddress ? (
+                <CopyButton
+                  className="group flex flex-row items-center gap-3 hover:underline"
+                  content={address}
+                  {...copyText}
+                  // eslint-disable-next-line lingui/no-unlocalized-strings
+                  iconClassName="h-[14px] w-[14px] group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
+                >
+                  <Body
+                    className="cursor-pointer truncate max-w-[137px] text-sc-text-sub-header group-hover/card:text-sc-text-paragraph"
+                    size="xs"
+                  >
+                    {truncatedAddress}
+                  </Body>
+                </CopyButton>
+              ) : (
+                <Body
+                  className="truncate max-w-[137px] text-sc-text-sub-header group-hover/card:text-sc-text-paragraph"
+                  size="xs"
+                >
+                  {truncatedAddress}
+                </Body>
+              ))}
+            {profileLink && (
+              <LinkComponent
+                href={profileLink}
+                className="no-underline opacity-0 group-hover/card:opacity-100"
+              >
+                <Subtitle
+                  className="underline text-sc-text-sub-header hover:text-sc-text-paragraph"
+                  size="xs"
+                >
+                  {publicProfileText}
+                  <SmallArrowIcon className="h-[8px] ml-3" />
+                </Subtitle>
+              </LinkComponent>
+            )}
+          </div>
         </Grid>
       </Grid>
     </Card>

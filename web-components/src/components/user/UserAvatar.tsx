@@ -2,6 +2,7 @@ import { Avatar, SxProps } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from '../../theme/muiTheme';
+import { cn } from '../../utils/styles/cn';
 
 interface UserAvatarProps {
   alt?: string;
@@ -91,17 +92,28 @@ export default function UserAvatar({
   href,
   icon,
   sx,
+  className,
 }: UserAvatarProps): JSX.Element {
   const spacing: Sizes = getSize(size);
   // TODO: is fallback icon when src not provided ok? what about the bg color?
   const { classes } = useStyles({ spacing, border });
   const avatar =
     !src || icon ? (
-      <Avatar sx={sx} className={classes.root} alt={alt} src={icon}>
+      <Avatar
+        sx={sx}
+        className={cn(classes.root, className)}
+        alt={alt}
+        src={icon}
+      >
         {icon}
       </Avatar>
     ) : (
-      <Avatar sx={sx} className={classes.root} alt={alt} src={src} />
+      <Avatar
+        sx={sx}
+        className={cn(classes.root, className)}
+        alt={alt}
+        src={src}
+      />
     );
 
   if (href) {

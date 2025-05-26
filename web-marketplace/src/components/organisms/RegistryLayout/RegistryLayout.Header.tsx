@@ -3,40 +3,46 @@ import { useLoaderData, useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
-import { useQuery } from '@tanstack/react-query';
 import { getClientConfig } from 'clients/Clients.config';
 
 import Header from 'web-components/src/components/header';
 import { UserMenuItems } from 'web-components/src/components/header/components/UserMenuItems';
+import { getUserMenuItems } from 'web-components/src/components/header/components/UserMenuItems.utils';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
 // import { cn } from 'web-components/src/utils/styles/cn';
 import { useAuth } from 'lib/auth/auth';
-import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import { getWalletAddress } from 'pages/Dashboard/Dashboard.utils';
-import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../../lib/ledger';
-import { RegistryIconLink, RegistryNavLink } from '../../atoms';
+import { Link, RegistryIconLink, RegistryNavLink } from '../../atoms';
 import { ListProject } from '../ListProject/ListProject';
 import { LoginButton } from '../LoginButton/LoginButton';
-import { useOnProfileClick } from './hooks/useOnProfileClick';
-import { useShowOrders } from './hooks/useShowOrders';
+import {
+  ADDRESS_COPIED,
+  COPY_ADDRESS,
+} from '../UserAccountSettings/UserAccountSettings.constants';
 import {
   getBorderBottom,
   getHeaderColors,
   getIsTransparent,
   getMenuItems,
-  getUserMenuItems,
 } from './RegistryLayout.config';
 import {
   AVATAR_ALT,
+  CREATE_ORG,
+  FINISH_ORG_CREATION,
   fullWidthRegExp,
   LOGOUT_TEXT,
+  ORGANIZATION,
+  ORGANIZATION_DASHBOARD,
+  PERSONAL_DASHBOARD,
+  PUBLIC_PROFILE,
+  SIGNED_IN_AS,
 } from './RegistryLayout.constants';
 // import { LanguageSwitcher } from './RegistryLayout.LanguageSwitcher';
 import { getAddress, getProfile } from './RegistryLayout.utils';
@@ -46,8 +52,7 @@ const RegistryLayoutHeader: React.FC = () => {
   const { pathname } = useLocation();
   const { activeAccount, privActiveAccount } = useAuth();
 
-  const { wallet, disconnect, isConnected, loginDisabled, accountByAddr } =
-    useWallet();
+  const { wallet, disconnect, accountByAddr } = useWallet();
   const { accountOrWallet, noAccountAndNoWallet } = useAuthData();
   const theme = useTheme<Theme>();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
@@ -56,61 +61,43 @@ const RegistryLayoutHeader: React.FC = () => {
   // const isHome = pathname === '/';
   const clientConfig = getClientConfig();
 
-  const { showProjects, showCreditClasses, isIssuer } = useProfileItems({});
-
   const hasPrefinanceProjects = useLoaderData();
 
   const menuItems = useMemo(
-    () => getMenuItems(pathname, _, hasPrefinanceProjects as boolean),
+    () => getMenuItems(pathname, _, !!hasPrefinanceProjects),
     [pathname, _, hasPrefinanceProjects],
   );
-  const onProfileClick = useOnProfileClick();
-
-  const showOrders = useShowOrders();
-
-  const { data: paymentMethodData } = useQuery(
-    getPaymentMethodsQuery({
-      enabled: !!activeAccount,
-    }),
-  );
-
-  const savedPaymentInfo = (paymentMethodData?.paymentMethods?.length ?? 0) > 0;
 
   const userMenuItems = useMemo(
     () =>
       getUserMenuItems({
-        linkComponent: RegistryNavLink,
+        linkComponent: Link,
+        navLinkComponent: RegistryNavLink,
         pathname,
-        showCreditClasses,
-        isIssuer,
-        showProjects,
-        isWalletConnected: isConnected,
-        loginDisabled,
-        onProfileClick,
-        savedPaymentInfo,
-        showOrders,
         profile: getProfile({
           account: activeAccount ?? accountByAddr,
           privActiveAccount,
           _,
+          profileLink: '/dashboard', // TODO APP-670 update to merged profile link
+          // TODO APP-670 should go /dashboard/admin/portfolio or /dashboard/admin/projects
+          // APP-697 then to /dashboard/portfolio or /dashboard/projects
+          dashboardLink: '/dashboard/admin/profile',
         }),
-        _,
+        textContent: {
+          signedInAs: _(SIGNED_IN_AS),
+          copyText: {
+            tooltipText: _(COPY_ADDRESS),
+            toastText: _(ADDRESS_COPIED),
+          },
+          publicProfile: _(PUBLIC_PROFILE),
+          personalDashboard: _(PERSONAL_DASHBOARD),
+          organizationDashboard: _(ORGANIZATION_DASHBOARD),
+          organization: _(ORGANIZATION),
+          createOrganization: _(CREATE_ORG),
+          finishOrgCreation: _(FINISH_ORG_CREATION),
+        },
       }),
-    [
-      pathname,
-      showCreditClasses,
-      isIssuer,
-      showProjects,
-      isConnected,
-      loginDisabled,
-      onProfileClick,
-      savedPaymentInfo,
-      showOrders,
-      activeAccount,
-      accountByAddr,
-      privActiveAccount,
-      _,
-    ],
+    [pathname, activeAccount, accountByAddr, privActiveAccount, _],
   );
 
   const defaultAvatar = getDefaultAvatar(activeAccount);

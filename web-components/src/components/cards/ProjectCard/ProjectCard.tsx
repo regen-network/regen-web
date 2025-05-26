@@ -8,6 +8,7 @@ import { Track } from 'web-marketplace/src/lib/tracker/types';
 import { ButtonType } from '../../../types/shared/buttonType';
 import { formatStandardInfo } from '../../../utils/format';
 import { cn } from '../../../utils/styles/cn';
+import Separator from '../../atoms/Separator';
 import { BlockContent, SanityBlockContent } from '../../block-content';
 import ContainedButton from '../../buttons/ContainedButton';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
@@ -197,7 +198,7 @@ export function ProjectCard({
         </div>
       )}
       {(purchaseInfo || isPrefinanceProject || offChain) && hasBottomCard && (
-        <div className={classes.separator} />
+        <Separator className="my-0 mx-[18px] sm:mx-[21px]" />
       )}
       {(purchaseInfo || hasButton || isPrefinanceProject) && hasBottomCard && (
         <div className={classes.purchaseInfo}>

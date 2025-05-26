@@ -24,7 +24,7 @@ const HeaderDropdown: React.FC<
     <Box
       display="flex"
       flexDirection="column"
-      className={`${props.isUserMenu ? 'pt-10' : 'p-25'}`}
+      className={`cursor-default ${props.isUserMenu ? 'pt-10' : 'p-25'}`}
     >
       {props.title && (
         <Box mb={2}>

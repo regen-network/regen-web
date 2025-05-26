@@ -1,4 +1,4 @@
-import { msg, Trans } from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
@@ -7,6 +7,7 @@ import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton
 import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 import { Body } from 'web-components/src/components/typography';
 
+import { ADDRESS_COPIED, COPY_ADDRESS } from './UserAccountSettings.constants';
 import { SocialProviderInfo } from './UserAccountSettings.types';
 
 type Props = Omit<SocialProviderInfo, 'name'> & {
@@ -71,8 +72,8 @@ const AddressWidget = ({ address }: { address: string }) => {
       <Body size="sm">{address}</Body>
       <CopyButton
         content={address}
-        tooltipText={_(msg`Copy address`)}
-        toastText={_(msg`Address copied!`)}
+        tooltipText={_(COPY_ADDRESS)}
+        toastText={_(ADDRESS_COPIED)}
       />
     </div>
   );

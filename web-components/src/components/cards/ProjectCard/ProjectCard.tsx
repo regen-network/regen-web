@@ -198,7 +198,7 @@ export function ProjectCard({
         </div>
       )}
       {(purchaseInfo || isPrefinanceProject || offChain) && hasBottomCard && (
-        <Separator className="mx-[18px] sm:mx-[21px]" />
+        <Separator className="my-0 mx-[18px] sm:mx-[21px]" />
       )}
       {(purchaseInfo || hasButton || isPrefinanceProject) && hasBottomCard && (
         <div className={classes.purchaseInfo}>

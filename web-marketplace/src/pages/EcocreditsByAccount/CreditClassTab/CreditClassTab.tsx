@@ -1,49 +1,63 @@
 import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
-import { Grid } from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
 
-import { CreditClassGridCard } from 'web-components/src/components/molecules/CreditClassGridCard/CreditClassGridCard';
-import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
+import { SKIPPED_CLASS_ID } from 'lib/env';
 
-import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
-import { useWallet } from 'lib/wallet/wallet';
-
-import { Link } from 'components/atoms';
+import { useCreditClasses } from 'pages/Home/hooks/useCreditClasses';
 import WithLoader from 'components/atoms/WithLoader';
-import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
+import { CreditClassCards } from 'components/organisms';
 
-import { useProfileData } from '../hooks/useProfileData';
+const useStyles = makeStyles()(() => ({
+  truncatedCard: {
+    '& .MuiCardContent-root p': {
+      display: '-webkit-box',
+      WebkitLineClamp: 3,
+      WebkitBoxOrient: 'vertical',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+    },
+    // Hide any button elements if they still appear
+    '& .MuiButton-root': {
+      display: 'none !important',
+    },
+    // Add hover effect to indicate clickability
+    '&:hover': {
+      transform: 'translateY(-2px)',
+      boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+      transition: 'all 0.2s ease-in-out',
+      cursor: 'pointer',
+    },
+  },
+}));
 
 export const CreditClassTab = () => {
   const { _ } = useLingui();
-  const { wallet } = useWallet();
-  const { address } = useProfileData();
-  const { creditClasses, isLoadingCreditClasses } =
-    useFetchCreditClassesWithOrder({
-      admin: address,
-      userAddress: wallet?.address,
-    });
-  const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
+  const { classes } = useStyles();
+
+  const {
+    creditClasses,
+    creditClassesPrograms,
+    loading: creditClassesLoading,
+  } = useCreditClasses({
+    skippedClassId: SKIPPED_CLASS_ID,
+  });
+  console.log('Credit Classes:', creditClasses);
 
   return (
-    <>
-      <WithLoader
-        isLoading={isLoadingCreditClasses}
-        sx={{ display: 'flex', justifyContent: 'center' }}
-      >
-        <Grid container spacing={8}>
-          {creditClasses.map(creditClass => (
-            <Grid item xs={12} md={6} lg={4}>
-              <CreditClassGridCard
-                bodyTexts={bodyTexts}
-                {...creditClass}
-                href={`/credit-classes/${creditClass.id}`}
-                LinkComponent={Link as LinkComponentType}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </WithLoader>
-    </>
+    <WithLoader
+      isLoading={creditClassesLoading}
+      sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+    >
+      <CreditClassCards
+        justifyContent={['center', 'center', 'flex-start']}
+        creditClassesContent={creditClasses}
+        creditClassesProgram={creditClassesPrograms}
+        btnText="" // Empty string should hide the button
+        classes={{
+          card: classes.truncatedCard,
+        }}
+      />
+    </WithLoader>
   );
 };

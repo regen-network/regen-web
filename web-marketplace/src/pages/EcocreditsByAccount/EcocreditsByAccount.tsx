@@ -5,6 +5,8 @@ import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 
 import { Flex } from 'web-components/src/components/box';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';
 import { CreditClassIcon } from 'web-components/src/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
@@ -116,6 +118,29 @@ export const EcocreditsByAccount = (): JSX.Element => {
     0,
   );
 
+  const manageButtonConfig = [
+    {
+      label: _(msg`Manage Portfolio`),
+      show: activeTab === 0,
+      link: '/dashboard/admin/portfolio',
+    },
+    {
+      label: _(msg`Manage Projects`),
+      show: activeTab === 1,
+      link: '/dashboard/admin/projects',
+    },
+    {
+      label: _(msg`Manage Credit Classes`),
+      show: activeTab === 2,
+      link: '/dashboard/admin/credit-classes',
+    },
+    {
+      label: _(msg`Manage Credit Batches`),
+      show: activeTab === 3,
+      link: '/dashboard/admin/credit-batches',
+    },
+  ];
+
   return (
     <WithLoader
       isLoading={isLoading}
@@ -144,7 +169,13 @@ export const EcocreditsByAccount = (): JSX.Element => {
                 description: account?.description?.trimEnd() ?? '',
                 socialsLinks,
               }}
-              editLink=""
+              editLink={
+                wallet?.address &&
+                address &&
+                wallet.address.toLowerCase() === address.toLowerCase()
+                  ? '/dashboard/admin/profile'
+                  : ''
+              }
               profileLink={profileLink}
               variant={
                 account?.type
@@ -160,13 +191,42 @@ export const EcocreditsByAccount = (): JSX.Element => {
             />
             <Box sx={{ backgroundColor: 'grey.50' }}>
               <Section sx={{ root: { pt: { xs: 15 } } }}>
-                <IconTabs
-                  aria-label={_(msg`public profile tabs`)}
-                  tabs={tabs}
-                  linkComponent={Link}
-                  activeTab={activeTab}
-                  mobileFullWidth
-                />
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    mb: 3,
+                  }}
+                >
+                  <IconTabs
+                    aria-label={_(msg`public profile tabs`)}
+                    tabs={tabs}
+                    linkComponent={Link}
+                    activeTab={activeTab}
+                    mobileFullWidth
+                  />
+                  {manageButtonConfig.map(
+                    btn =>
+                      btn.show &&
+                      wallet?.address &&
+                      address &&
+                      wallet.address.toLowerCase() ===
+                        address.toLowerCase() && (
+                        <OutlinedButton
+                          key={btn.label}
+                          variant="contained"
+                          color="primary"
+                          component={Link}
+                          href={btn.link}
+                          className="text-[14px] py-[9px] px-[25px]"
+                        >
+                          <CogIcon className="mr-10" />
+                          {btn.label}
+                        </OutlinedButton>
+                      ),
+                  )}
+                </Box>
                 <Flex sx={{ ...ecocreditsByAccountStyles.padding }}>
                   <Box sx={{ width: '100%' }}>
                     <Outlet />

@@ -1,11 +1,11 @@
 /* eslint-disable lingui/no-unlocalized-strings */
+import Separator from '../../atoms/Separator';
 import { CopyButtonProps } from '../../buttons/CopyButton';
 import { TextButton } from '../../buttons/TextButton';
 import { CogIcon } from '../../icons/CogIcon';
 import SmallArrowIcon from '../../icons/SmallArrowIcon';
 import { LinkComponentProp } from '../../modal/ConfirmModal';
 import { HeaderDropdownItemProps } from './HeaderDropdown/HeaderDropdown.Item';
-import { SEPARATOR } from './UserMenuItem.constants';
 import { UserMenuItemProfile, UserMenuProfile } from './UserMenuItem.Profile';
 
 type TextContent = {
@@ -18,12 +18,16 @@ type TextContent = {
   createOrganization: string;
   finishOrgCreation: string;
 };
+
+export type ExtendedUserMenuProfile = UserMenuProfile & {
+  dashboardLink: string;
+};
 interface GetUserMenuItemsParams {
   pathname: string;
   linkComponent: LinkComponentProp;
   navLinkComponent: LinkComponentProp;
-  profile?: UserMenuProfile;
-  organizationProfile?: UserMenuProfile;
+  profile?: ExtendedUserMenuProfile;
+  organizationProfile?: ExtendedUserMenuProfile;
   createOrganization?: () => void;
   finishOrgCreation?: () => void;
   unfinalizedOrgCreation?: boolean;
@@ -73,7 +77,7 @@ export const getUserMenuItems = ({
       label: textContent.personalDashboard,
     },
     createOrganization && {
-      ...SEPARATOR,
+      children: <Separator className="w-full my-[14px]" />,
     },
     organizationProfile && {
       children: (
@@ -126,6 +130,6 @@ export const getUserMenuItems = ({
         ),
       },
     {
-      ...SEPARATOR,
+      children: <Separator className="w-full my-[14px]" />,
     },
   ].filter(Boolean) as HeaderDropdownItemProps[];

@@ -1,14 +1,12 @@
 import { msg } from '@lingui/macro';
 
 import BridgeIcon from 'web-components/src/components/icons/BridgeIcon';
-import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';
 import { CreditClassIcon } from 'web-components/src/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/src/components/icons/ProjectPageIcon';
 
 const className = 'pl-20';
-const labelClassName = 'text-sm';
 
 export const PORTFOLIO = {
   label: msg`Portfolio`,

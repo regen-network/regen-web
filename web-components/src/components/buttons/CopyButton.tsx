@@ -41,13 +41,14 @@ export const CopyButton = ({
 }: CopyButtonProps) => {
   const [copied, setCopied] = useState(false);
   return (
-    <div
+    <button
       onClick={() => {
         copyTextToClipboard(content).then(() => {
           setCopied(true);
         });
       }}
-      className={className}
+      className={cn('border-none bg-[transparent] p-0', className)}
+      aria-label={tooltipText}
     >
       {children}
       <InfoTooltip title={tooltipText} arrow placement="top">
@@ -62,6 +63,6 @@ export const CopyButton = ({
           onClose={() => setCopied(false)}
         />
       )}
-    </div>
+    </button>
   );
 };

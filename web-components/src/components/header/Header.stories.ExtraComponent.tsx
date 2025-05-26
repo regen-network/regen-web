@@ -4,17 +4,19 @@ import { Box, Link } from '@mui/material';
 
 import ContainedButton from '../buttons/ContainedButton';
 import { NavLink } from './components/NavLink';
-import { UserMenuProfile } from './components/UserMenuItem.Profile';
 import { UserMenuItems } from './components/UserMenuItems';
-import { getUserMenuItems } from './components/UserMenuItems.utils';
+import {
+  ExtendedUserMenuProfile,
+  getUserMenuItems,
+} from './components/UserMenuItems.utils';
 import { REGEN_TEST_ADDRESS } from './Header.mock';
 
 type Props = {
   loginText: string;
   logoutText: string;
   avatarAlt: string;
-  profile?: UserMenuProfile;
-  organizationProfile?: UserMenuProfile;
+  profile?: ExtendedUserMenuProfile;
+  organizationProfile?: ExtendedUserMenuProfile;
   createOrganization?: () => void;
   unfinalizedOrgCreation?: boolean;
   finishOrgCreation?: () => void;

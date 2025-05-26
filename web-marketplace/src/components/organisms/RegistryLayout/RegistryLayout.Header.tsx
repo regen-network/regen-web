@@ -64,7 +64,7 @@ const RegistryLayoutHeader: React.FC = () => {
   const hasPrefinanceProjects = useLoaderData();
 
   const menuItems = useMemo(
-    () => getMenuItems(pathname, _, hasPrefinanceProjects as boolean),
+    () => getMenuItems(pathname, _, !!hasPrefinanceProjects),
     [pathname, _, hasPrefinanceProjects],
   );
 

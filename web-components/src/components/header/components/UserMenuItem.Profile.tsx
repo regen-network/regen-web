@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 
 import { CopyButton, CopyButtonProps } from '../../buttons/CopyButton';
 import Card from '../../cards/Card';
@@ -17,7 +17,6 @@ export type UserMenuProfile = {
   address?: string | null;
   truncatedAddress?: string | null;
   profileLink?: string;
-  dashboardLink: string;
 };
 export type UserMenuItemProfileProps = UserMenuProfile & {
   profileLink?: string;
@@ -56,33 +55,30 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
         <Grid item>
           <Subtitle size="md">{name}</Subtitle>
           <div className="flex flex-row items-baseline gap-15">
-            {address && (
-              <>
-                {validWalletAddress ? (
-                  <CopyButton
-                    className="group flex flex-row items-center gap-3 hover:underline"
-                    content={address}
-                    {...copyText}
-                    // eslint-disable-next-line lingui/no-unlocalized-strings
-                    iconClassName="h-[14px] w-[14px] group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
-                  >
-                    <Body
-                      className="cursor-pointer truncate max-w-[137px] text-sc-text-sub-header group-hover/card:text-sc-text-paragraph"
-                      size="xs"
-                    >
-                      {truncatedAddress}
-                    </Body>
-                  </CopyButton>
-                ) : (
+            {address &&
+              (validWalletAddress ? (
+                <CopyButton
+                  className="group flex flex-row items-center gap-3 hover:underline"
+                  content={address}
+                  {...copyText}
+                  // eslint-disable-next-line lingui/no-unlocalized-strings
+                  iconClassName="h-[14px] w-[14px] group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
+                >
                   <Body
-                    className="truncate max-w-[137px] text-sc-text-sub-header group-hover/card:text-sc-text-paragraph"
+                    className="cursor-pointer truncate max-w-[137px] text-sc-text-sub-header group-hover/card:text-sc-text-paragraph"
                     size="xs"
                   >
                     {truncatedAddress}
                   </Body>
-                )}
-              </>
-            )}
+                </CopyButton>
+              ) : (
+                <Body
+                  className="truncate max-w-[137px] text-sc-text-sub-header group-hover/card:text-sc-text-paragraph"
+                  size="xs"
+                >
+                  {truncatedAddress}
+                </Body>
+              ))}
             {profileLink && (
               <LinkComponent
                 href={profileLink}

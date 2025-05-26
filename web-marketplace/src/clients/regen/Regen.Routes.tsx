@@ -215,7 +215,7 @@ export const getRegenRoutes = ({
           />
           <Route path="prefinance" element={<PrefinanceProjects />} />
         </Route>
-        <Route path="project">
+        {/* <Route path="project">
           <Route
             path=":projectId"
             element={<Project />}
@@ -234,7 +234,7 @@ export const getRegenRoutes = ({
             address,
             languageCode,
           })}
-        />
+        /> */}
         <Route
           path="post/:iri"
           element={<Post />}

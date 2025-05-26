@@ -130,6 +130,6 @@ export const getUserMenuItems = ({
         ),
       },
     {
-      children: <Separator className="w-full my-[14px]" />,
+      children: <Separator className="h-1 w-full my-[14px]" />,
     },
   ].filter(Boolean) as HeaderDropdownItemProps[];

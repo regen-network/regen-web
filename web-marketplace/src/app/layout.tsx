@@ -1,7 +1,10 @@
 /* eslint-disable lingui/no-unlocalized-strings */
+import { SharedProviders } from 'clients/Clients.SharedProviders';
 import type { Metadata, Viewport } from 'next';
 
 import { IS_TERRASOS } from 'lib/env';
+
+import Providers from './providers';
 
 import '../App.css';
 import '../../../tailwind.css';
@@ -86,7 +89,9 @@ export default async function RootLayout({
   return (
     <html lang="en" className={fontClassNames}>
       <body>
-        <div id="root">{children}</div>
+        <Providers>
+          <div id="root">{children}</div>
+        </Providers>
       </body>
     </html>
   );

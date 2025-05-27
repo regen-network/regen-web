@@ -21,9 +21,6 @@ msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
-msgstr ""
-
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -776,7 +773,7 @@ msgstr "Tabla de ecocréditos puenteables"
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:4
-#: src/pages/Dashboard/Dashboard.constants.tsx:38
+#: src/pages/Dashboard/Dashboard.constants.tsx:36
 msgid "Bridge"
 msgstr "Puente"
 
@@ -829,7 +826,7 @@ msgstr "comprar créditos"
 msgid "BUY CREDITS"
 msgstr "COMPRAR CRÉDITOS"
 
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:111
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:115
 msgid "Buy Credits Error"
 msgstr "Error al comprar créditos"
 
@@ -1014,9 +1011,9 @@ msgstr "Elige los ecocréditos que sean elegibles para esta cesta.<0>Más inform
 msgid "Choose basket"
 msgstr "Elija la cesta"
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:47
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:49
 msgid "Choose batch"
-msgstr ""
+msgstr "Seleccione lote"
 
 #: src/pages/ChooseCreditClass/ChooseCreditClass.Item.tsx:29
 msgid "Choose credit class"
@@ -1071,7 +1068,7 @@ msgstr "Limpiar todo"
 msgid "Click on the confirmation link to return to Regen Network."
 msgstr "Haga clic en el enlace de confirmación para regresar a Regen Network."
 
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:239
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:249
 #: src/pages/ProjectReview/ProjectReview.tsx:379
 msgid "close"
 msgstr "cerca"
@@ -1264,7 +1261,7 @@ msgid "Create Project - Access Denied"
 msgstr "Crear proyecto - Acceso denegado"
 
 #: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:230
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:39
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:41
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
 msgid "Create Sell Order"
 msgstr "Crear orden de venta"
@@ -1313,7 +1310,7 @@ msgstr "tabla de lotes de crédito"
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:243
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/pages/Dashboard/Dashboard.constants.tsx:32
+#: src/pages/Dashboard/Dashboard.constants.tsx:30
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:93
 msgid "Credit Batches"
 msgstr "Lotes de crédito"
@@ -1384,7 +1381,7 @@ msgid "Credit class: the structure, procedures and requirements for project regi
 msgstr "Clase de crédito: la estructura, procedimientos y requisitos para el registro de proyectos, la cuantificación, seguimiento, reporte y verificación (MRV), y la emisión de créditos relacionados con un determinado tipo de crédito."
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
-#: src/pages/Dashboard/Dashboard.constants.tsx:26
+#: src/pages/Dashboard/Dashboard.constants.tsx:24
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:87
 #: src/pages/Home/Home.tsx:180
 msgid "Credit Classes"
@@ -2772,7 +2769,7 @@ msgstr "No hay ecocréditos para mostrar"
 msgid "No matching results found"
 msgstr "No se encontraron resultados coincidentes"
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.NoOrdersCard.tsx:16
+#: src/components/organisms/UserSellOrders/UserSellOrders.NoOrdersCard.tsx:20
 msgid "No open sell orders"
 msgstr "No hay órdenes de venta abiertas"
 
@@ -3067,7 +3064,6 @@ msgstr "Cambie a esta dirección en Keplr para acceder a este perfil."
 msgid "Please wait while transaction processes"
 msgstr "Por favor espere mientras se procesa la transacción"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:34
 #: src/pages/Dashboard/Dashboard.constants.tsx:14
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:74
 msgid "Portfolio"
@@ -3434,7 +3430,7 @@ msgstr "PROYECTADO:"
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:39
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/pages/Dashboard/Dashboard.constants.tsx:20
+#: src/pages/Dashboard/Dashboard.constants.tsx:18
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:81
 msgid "Projects"
 msgstr "Proyectos"
@@ -3880,7 +3876,7 @@ msgid "sell order id:"
 msgstr "ID de orden de venta:"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:34
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:36
 #: src/pages/Marketplace/Storefront/Storefront.tsx:154
 msgid "Sell orders"
 msgstr "Órdenes de venta"
@@ -3915,11 +3911,7 @@ msgstr "Establecer créditos máximos"
 msgid "set up a Keplr wallet →"
 msgstr "Configurar una billetera Keplr →"
 
-<<<<<<< HEAD
-=======
 #: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:21
->>>>>>> ead11d1fb (chore: update .po translations)
-#: src/pages/SellerSetupAccount/SellerSetupAccount.tsx:21
 msgid "set up account"
 msgstr "configurar cuenta"
 
@@ -4843,11 +4835,7 @@ msgstr "Ver la lista completa de videos de soporte»"
 msgid "view transaction"
 msgstr "ver transacción"
 
-<<<<<<< HEAD
-=======
 #: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:17
->>>>>>> ead11d1fb (chore: update .po translations)
-#: src/pages/SellerSetupAccount/SellerSetupAccount.tsx:17
 msgid "view transactions"
 msgstr "ver transacciones"
 

@@ -771,7 +771,7 @@ msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:4
-#: src/pages/Dashboard/Dashboard.constants.tsx:38
+#: src/pages/Dashboard/Dashboard.constants.tsx:36
 msgid "Bridge"
 msgstr ""
 
@@ -824,7 +824,7 @@ msgstr ""
 msgid "BUY CREDITS"
 msgstr ""
 
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:111
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:115
 msgid "Buy Credits Error"
 msgstr ""
 
@@ -1009,7 +1009,7 @@ msgstr ""
 msgid "Choose basket"
 msgstr ""
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:47
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:49
 msgid "Choose batch"
 msgstr ""
 
@@ -1066,7 +1066,7 @@ msgstr ""
 msgid "Click on the confirmation link to return to Regen Network."
 msgstr ""
 
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:239
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:249
 #: src/pages/ProjectReview/ProjectReview.tsx:379
 msgid "close"
 msgstr ""
@@ -1259,7 +1259,7 @@ msgid "Create Project - Access Denied"
 msgstr ""
 
 #: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:230
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:39
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:41
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
 msgid "Create Sell Order"
 msgstr ""
@@ -1308,7 +1308,7 @@ msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:243
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/pages/Dashboard/Dashboard.constants.tsx:32
+#: src/pages/Dashboard/Dashboard.constants.tsx:30
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:93
 msgid "Credit Batches"
 msgstr ""
@@ -1379,7 +1379,7 @@ msgid "Credit class: the structure, procedures and requirements for project regi
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
-#: src/pages/Dashboard/Dashboard.constants.tsx:26
+#: src/pages/Dashboard/Dashboard.constants.tsx:24
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:87
 #: src/pages/Home/Home.tsx:180
 msgid "Credit Classes"
@@ -2767,7 +2767,7 @@ msgstr ""
 msgid "No matching results found"
 msgstr ""
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.NoOrdersCard.tsx:16
+#: src/components/organisms/UserSellOrders/UserSellOrders.NoOrdersCard.tsx:20
 msgid "No open sell orders"
 msgstr ""
 
@@ -3062,7 +3062,6 @@ msgstr ""
 msgid "Please wait while transaction processes"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:34
 #: src/pages/Dashboard/Dashboard.constants.tsx:14
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:74
 msgid "Portfolio"
@@ -3429,7 +3428,7 @@ msgstr ""
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:39
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/pages/Dashboard/Dashboard.constants.tsx:20
+#: src/pages/Dashboard/Dashboard.constants.tsx:18
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:81
 msgid "Projects"
 msgstr ""
@@ -3875,7 +3874,7 @@ msgid "sell order id:"
 msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:34
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:36
 #: src/pages/Marketplace/Storefront/Storefront.tsx:154
 msgid "Sell orders"
 msgstr ""
@@ -3910,11 +3909,7 @@ msgstr ""
 msgid "set up a Keplr wallet →"
 msgstr ""
 
-<<<<<<< HEAD
-=======
 #: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:21
->>>>>>> ead11d1fb (chore: update .po translations)
-#: src/pages/SellerSetupAccount/SellerSetupAccount.tsx:21
 msgid "set up account"
 msgstr ""
 
@@ -4838,11 +4833,7 @@ msgstr ""
 msgid "view transaction"
 msgstr ""
 
-<<<<<<< HEAD
-=======
 #: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:17
->>>>>>> ead11d1fb (chore: update .po translations)
-#: src/pages/SellerSetupAccount/SellerSetupAccount.tsx:17
 msgid "view transactions"
 msgstr ""
 

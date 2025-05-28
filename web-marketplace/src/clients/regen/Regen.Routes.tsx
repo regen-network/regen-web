@@ -224,7 +224,7 @@ export const getRegenRoutes = ({
               apolloClientFactory,
             })}
           ></Route>
-        </Route>
+        </Route>*/}
         <Route
           path="project/:projectId/buy"
           element={<BuyCredits />}
@@ -234,7 +234,7 @@ export const getRegenRoutes = ({
             address,
             languageCode,
           })}
-        /> */}
+        />
         <Route
           path="post/:iri"
           element={<Post />}

@@ -18,7 +18,7 @@ export const Note: React.FC<
     case STATUS_COMPLETE:
       return process.env.NEXT_PUBLIC_TOUCAN_LINK ? (
         // eslint-disable-next-line lingui/no-unlocalized-strings
-        <Link href={process.env.NEXT_PUBLIC_TOUCAN_LINK}>{'toucan.earth'}</Link>
+        (<Link href={process.env.NEXT_PUBLIC_TOUCAN_LINK}>{'toucan.earth'}</Link>)
       ) : null;
     case STATUS_ERROR:
       return (

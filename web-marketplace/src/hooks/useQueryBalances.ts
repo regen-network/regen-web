@@ -2,7 +2,7 @@ import {
   QueryBalancesRequest,
   QueryBalancesResponse,
 } from '@regen-network/api/regen/ecocredit/v1/query';
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 
 import { useLedger } from '../ledger';
 import { getBalancesQuery } from './../lib/queries/react-query/ecocredit/getBalancesQuery/getBalancesQuery';
@@ -36,7 +36,7 @@ export default function useQueryBalances({ address }: Params): {
         address: address ?? '',
       },
       enabled: !!queryClient && !!address,
-      keepPreviousData: true,
+      placeholderData: keepPreviousData,
     }),
   );
 

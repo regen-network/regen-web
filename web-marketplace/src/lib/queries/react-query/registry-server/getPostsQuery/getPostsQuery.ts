@@ -2,8 +2,8 @@ import { apiUri } from 'lib/apiUri';
 
 import { DATA_STREAM_LIMIT } from './getPostsQuery.constants';
 import {
+  PostsQueryResponse,
   ReactQueryGetPostsQueryParams,
-  ReactQueryGetPostsQueryResponse,
 } from './getPostsQuery.types';
 import { getPostsQueryKey } from './getPostsQuery.utils';
 
@@ -11,10 +11,9 @@ export const getPostsQuery = ({
   projectId,
   year,
   languageCode,
-  ...params
-}: ReactQueryGetPostsQueryParams): ReactQueryGetPostsQueryResponse => ({
+}: ReactQueryGetPostsQueryParams) => ({
   queryKey: getPostsQueryKey({ projectId, year, languageCode }),
-  queryFn: async ({ pageParam }) => {
+  queryFn: async ({ pageParam }: { pageParam: string }) => {
     try {
       const resp = await fetch(
         `${apiUri}/marketplace/v1/posts/project/${projectId}?limit=${DATA_STREAM_LIMIT}&languageCode=${languageCode}${
@@ -34,5 +33,6 @@ export const getPostsQuery = ({
       return null;
     }
   },
-  ...params,
+  getNextPageParam: (lastPage: PostsQueryResponse) => lastPage?.next,
+  initialPageParam: new Date().toString(),
 });

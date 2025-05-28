@@ -74,7 +74,6 @@ export const DataStream = ({
       projectId: offChainProjectId,
       year: year && year !== years[0] ? year : undefined,
       languageCode: selectedLanguage,
-      getNextPageParam: lastPage => lastPage?.next,
     }),
   );
 

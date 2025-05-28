@@ -1427,6 +1427,7 @@ msgstr "Definición de unidad de crédito"
 msgid "credits"
 msgstr "créditos"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:31
 #: src/components/organisms/Order/Order.Summary.tsx:60
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:305
 msgid "Credits"
@@ -1817,6 +1818,14 @@ msgstr "editar clase de credito"
 msgid "Edit filters"
 msgstr "Editar filtros"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:106
+msgid "Edit org profile"
+msgstr "Editar el perfil de la organización"
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:83
+msgid "Edit personal profile"
+msgstr "Editar perfil personal"
+
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.tsx:220
 msgid "edit profile"
 msgstr "editar perfil"
@@ -1921,6 +1930,10 @@ msgstr "emisión estimada"
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:129
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr "Algunos ejemplos de motivos de retirada incluyen: “viajes de empresa en 2025”, “compensar mi impacto ambiental” o el nombre de una persona u organización específica."
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:25
+msgid "Exit to homepage"
+msgstr "Salir a la página de inicio"
 
 #: src/components/organisms/Order/Order.tsx:176
 msgid "Expected delivery date"
@@ -2444,6 +2457,7 @@ msgstr "El correo electrónico de inicio de sesión se agregó correctamente"
 msgid "log in for faster checkout"
 msgstr "Inicie sesión para realizar un pago más rápido"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:123
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:11
 msgid "Log out"
 msgstr "Finalizar la sesión"
@@ -2492,6 +2506,18 @@ msgstr "Hacer que los archivos y los datos de ubicación sean privados"
 msgid "Make the location data private"
 msgstr "Hacer que los datos de ubicación sean privados"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:31
+msgid "Manage credits"
+msgstr "Administrar créditos"
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:103
+msgid "Manage organization"
+msgstr "Gestionar la organización"
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:53
+msgid "Manage projects"
+msgstr "Gestionar proyectos"
+
 #: src/pages/Projects/hooks/useClientFilters.tsx:146
 msgid "Market"
 msgstr "Mercado"
@@ -2529,6 +2555,10 @@ msgstr "Medios de comunicación"
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:220
 msgid "Medium"
 msgstr "Medio"
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:111
+msgid "Members"
+msgstr "Miembros"
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants.ts:13
 msgid "merge accounts"
@@ -2639,6 +2669,7 @@ msgid "Must have recipients"
 msgstr "Debe tener destinatarios"
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:57
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:73
 msgid "My orders"
 msgstr "Mis pedidos"
 
@@ -2839,8 +2870,13 @@ msgstr "Resumen del pedido"
 #~ msgstr "órdenes"
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:54
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:70
 msgid "Orders"
 msgstr "Pedidos"
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:103
+msgid "Org"
+msgstr "Organización"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:43
 msgid "organization"
@@ -3018,6 +3054,7 @@ msgstr "Cambie a esta dirección en Keplr para acceder a este perfil."
 msgid "Please wait while transaction processes"
 msgstr "Por favor espere mientras se procesa la transacción"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:34
 #: src/pages/Dashboard/Dashboard.constants.tsx:14
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:74
 msgid "Portfolio"
@@ -3167,6 +3204,7 @@ msgstr "Proceda con precaución: ¡esto no se puede deshacer!"
 #~ msgstr "perfil"
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:27
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:80
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
 msgid "Profile"
 msgstr "Perfil"
@@ -3377,6 +3415,8 @@ msgstr "fecha de entrega de crédito proyectada"
 msgid "PROJECTED:"
 msgstr "PROYECTADO:"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:53
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:56
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:39
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
@@ -3801,6 +3841,7 @@ msgstr "Seleccionar todo"
 msgid "Select option"
 msgstr "Seleccionar opción"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:39
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:11
 msgid "Sell"
 msgstr "Vender"
@@ -3869,6 +3910,7 @@ msgid "settings"
 msgstr "ajustes"
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:37
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:90
 #: src/pages/Settings/Settings.tsx:52
 msgid "Settings"
 msgstr "Ajustes"
@@ -4754,6 +4796,10 @@ msgstr "Ver perfil"
 #: src/lib/constants/shared.constants.tsx:217
 msgid "view project"
 msgstr "ver proyecto"
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:97
+msgid "View public profile"
+msgstr "Ver perfil público"
 
 #: src/components/organisms/Order/Order.tsx:125
 msgid "View Receipt"

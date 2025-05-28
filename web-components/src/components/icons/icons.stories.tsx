@@ -41,6 +41,7 @@ import CryptoIcon from './CryptoIcon';
 import CryptoRegenIcon from './CryptoRegenIcon';
 import CurrentCreditsIcon from './CurrentCreditsIcon';
 import DocumentIcon from './DocumentIcon';
+import { DoubleBreadcrumbLeftIcon } from './DoubleBreadcrumbLeftIcon';
 import { DraftDocumentIcon } from './DraftDocumentIcon';
 import { DraftIcon } from './DraftIcon';
 import { DragIcon } from './DragIcon';
@@ -64,6 +65,7 @@ import { LocationIcon } from './LocationIcon';
 import LocationSearchIcon from './LocationSearchIcon';
 import { LockIcon } from './LockIcon';
 import { LogOutIcon } from './LogOutIcon';
+import { MembersIcon } from './MembersIcon';
 import MinusIcon from './MinusIcon';
 import NoBasketTokensIcon from './NoBasketTokensIcon';
 import NoEcocreditsIcon from './NoEcocreditsIcon';
@@ -71,6 +73,7 @@ import { NoProjectIcon } from './NoProjectIcon';
 import NoRetirementCertificatesIcon from './NoRetirementCertificatesIcon';
 import { OpenInNewIcon } from './OpenInNewIcon';
 import OrganizationIcon from './OrganizationIcon';
+import { OrgProfileIcon } from './OrgProfileIcon';
 import { OtherDocumentsIcon } from './OtherDocumentsIcon';
 import OutlinedCheckIcon from './OutlinedCheckIcon';
 import { PauseIcon } from './PauseIcon';
@@ -109,6 +112,7 @@ import ShadedCreditsIcon from './ShadedCreditsIcon';
 import ShareIcon from './ShareIcon';
 import ShieldIcon from './ShieldIcon';
 import { ShoppingBagIcon } from './ShoppingBagIcon';
+import { ShoppingCartIcon } from './ShoppingCartIcon';
 import SmallArrowIcon from './SmallArrowIcon';
 import { SmallDotsIcon } from './SmallDotsIcon';
 import DiscordIcon from './social/DiscordIcon';
@@ -176,11 +180,15 @@ export function LabeledIcon(props: {
 export const allIcons = (): JSX.Element => (
   <Grid container gap={4}>
     <LabeledIcon
-      icon={<ArrowLeftIcon sx={{ color: 'secondary.main' }} />}
+      icon={
+        <ArrowLeftIcon sx={{ color: 'secondary.main' }} isDisabled={false} />
+      }
       label="ArrowLeftIcon"
     />
     <LabeledIcon
-      icon={<ArrowRightIcon sx={{ color: 'secondary.main' }} />}
+      icon={
+        <ArrowRightIcon sx={{ color: 'secondary.main' }} isDisabled={false} />
+      }
       label="ArrowRightIcon"
     />
     <LabeledIcon
@@ -253,6 +261,10 @@ export const allIcons = (): JSX.Element => (
     />
     <LabeledIcon icon={<DiscordIcon color="blue" />} label="DiscordIcon" />
     <LabeledIcon icon={<DocumentIcon />} label="DocumentIcon" />
+    <LabeledIcon
+      icon={<DoubleBreadcrumbLeftIcon direction="down" />}
+      label="DoubleBreadcrumbLeftIcon"
+    />
     <LabeledIcon icon={<DraftDocumentIcon />} label="DraftDocumentIcon" />
     <LabeledIcon icon={<DraftIcon />} label="DraftIcon" />
     <LabeledIcon icon={<DragIcon />} label="DragIcon" />
@@ -293,6 +305,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<LocationSearchIcon />} label="LocationSearchIcon" />
     <LabeledIcon icon={<LockIcon />} label="LockIcon" />
     <LabeledIcon icon={<LogOutIcon />} label="LogOutIcon" />
+    <LabeledIcon icon={<MembersIcon />} label="MembersIcon" />
     <LabeledIcon icon={<MediumIcon color="grey" />} label="MediumIcon" />
     <LabeledIcon icon={<MinusIcon />} label="MinusIcon" />
     <LabeledIcon icon={<NoBasketTokensIcon />} label="NoBasketTokensIcon" />
@@ -305,6 +318,7 @@ export const allIcons = (): JSX.Element => (
 
     <LabeledIcon icon={<OpenInNewIcon />} label="OpenInNewIcon" />
     <LabeledIcon icon={<OrganizationIcon />} label="OrganizationIcon" />
+    <LabeledIcon icon={<OrgProfileIcon />} label="OrgProfileIcon" />
 
     <LabeledIcon icon={<OtherDocumentsIcon />} label="OtherDocumentsIcon" />
     <LabeledIcon icon={<OutlinedCheckIcon />} label="OutlinedCheckIcon" />
@@ -399,6 +413,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<CryptoRegenIcon />} label="CryptoRegenIcon" />
     <LabeledIcon icon={<PaymentInfoIcon />} label="PaymentInfoIcon" />
     <LabeledIcon icon={<ShoppingBagIcon />} label="ShoppingBagIcon" />
+    <LabeledIcon icon={<ShoppingCartIcon />} label="ShoppingCartIcon" />
     <LabeledIcon icon={<ReceiptIcon />} label="ReceiptIcon" />
   </Grid>
 );

@@ -122,22 +122,22 @@ export const EcocreditsByAccount = (): JSX.Element => {
     {
       label: _(msg`Manage Portfolio`),
       show: activeTab === 0,
-      link: '/dashboard/admin/portfolio',
+      link: '/dashboard/portfolio',
     },
     {
       label: _(msg`Manage Projects`),
       show: activeTab === 1,
-      link: '/dashboard/admin/projects',
+      link: '/dashboard/projects',
     },
     {
       label: _(msg`Manage Credit Classes`),
       show: activeTab === 2,
-      link: '/dashboard/admin/credit-classes',
+      link: '/dashboard/credit-classes',
     },
     {
       label: _(msg`Manage Credit Batches`),
       show: activeTab === 3,
-      link: '/dashboard/admin/credit-batches',
+      link: '/dashboard/credit-batches',
     },
   ];
 

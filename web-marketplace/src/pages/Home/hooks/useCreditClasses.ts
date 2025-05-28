@@ -15,7 +15,7 @@ import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDe
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 type Props = {
-  skippedClassId: string;
+  skippedClassId?: string;
 };
 
 export const useCreditClasses = ({ skippedClassId }: Props) => {
@@ -32,9 +32,9 @@ export const useCreditClasses = ({ skippedClassId }: Props) => {
       }),
     );
 
-  // Filtered based on env variable
+  // Filtered based on env variable (only filter if skippedClassId is provided)
   const creditClassesFiltered = creditClassData?.allCreditClass?.filter(
-    c => c.path !== skippedClassId,
+    c => !skippedClassId || c.path !== skippedClassId,
   );
 
   // Credit Classes metadata
@@ -43,7 +43,6 @@ export const useCreditClasses = ({ skippedClassId }: Props) => {
       creditClass.path === null ? undefined : creditClass.path,
     ),
   );
-
   // Credit Classes data
   const dbDataByOnChainIdDataResults = useQueries({
     queries:
@@ -67,7 +66,6 @@ export const useCreditClasses = ({ skippedClassId }: Props) => {
         ?.accountByRegistryId,
     ),
   );
-
   return {
     creditClasses: creditClassesFiltered,
     creditClassesPrograms,

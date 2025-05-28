@@ -442,7 +442,7 @@ export const getRegenRouter = ({
       languageCode,
     }),
     {
-      basename: import.meta.env.PUBLIC_URL,
+      basename: process.env.PUBLIC_URL,
     },
   );
 };

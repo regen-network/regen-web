@@ -1,5 +1,4 @@
 import { Trans } from '@lingui/macro';
-import Box from '@mui/material/Box';
 
 import SellOrderNotFoundIcon from 'web-components/src/components/icons/SellOrderNotFoundIcon';
 import { Title } from 'web-components/src/components/typography';
@@ -12,7 +11,7 @@ export const NoUserSellOrdersCard = ({
   refetchSellOrders: () => void;
 }) => {
   return (
-    <Box className="rounded-xl overflow-hidden border-[1px] border-grey-300 border-solid">
+    <div className="rounded-xl overflow-hidden border-[1px] border-grey-300 border-solid">
       <UserSellOrdersToolbar refetchSellOrders={refetchSellOrders} />
       <div className="min-w-full bg-grey-200 flex flex-col items-center justify-center p-40">
         <SellOrderNotFoundIcon className="w-[100px] h-[100px] text-brand-400" />
@@ -20,6 +19,6 @@ export const NoUserSellOrdersCard = ({
           <Trans>No open sell orders</Trans>
         </Title>
       </div>
-    </Box>
+    </div>
   );
 };

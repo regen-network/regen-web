@@ -66,8 +66,9 @@ async function prepareMsg(issuer: string, data: CreateBatchFormValues) {
     | undefined;
 
   try {
-    iriResponse = await generateIri(metadata);
-    if (!iriResponse) return;
+    if (Object.keys(metadata).length !== 0) {
+      iriResponse = await generateIri(metadata);
+    }
   } catch (err) {
     throw new Error(err as string);
   }
@@ -94,7 +95,7 @@ async function prepareMsg(issuer: string, data: CreateBatchFormValues) {
     issuer,
     projectId: data.projectId,
     issuance: issuance,
-    metadata: iriResponse.iri,
+    metadata: iriResponse?.iri || '{}',
     startDate: new Date(data.startDate as Date),
     endDate: new Date(data.endDate as Date),
     open: false,
@@ -173,39 +174,6 @@ export default function useCreateBatchSubmit(): Return {
     if (!accountAddress) return Promise.reject();
     if (!data.startDate || !data.endDate) return Promise.reject();
 
-    const baseMetadata = {
-      '@context': {
-        schema: 'http://schema.org/',
-        regen: 'https://schema.regen.network#',
-        'regen:additionalCertifications': { '@container': '@list' },
-      },
-      '@type': `regen:${data.projectId.split('-')[0]}-CreditBatch`,
-    };
-
-    let parsedMetadata = {};
-    if (data.metadata) {
-      try {
-        if (typeof data.metadata === 'string') {
-          parsedMetadata = JSON.parse(data.metadata);
-        } else {
-          parsedMetadata = data.metadata;
-        }
-      } catch (err) {
-        // eslint-disable-next-line lingui/no-unlocalized-strings
-        console.error('Error parsing metadata:', err);
-      }
-    }
-
-    const metadata = {
-      ...baseMetadata,
-      ...parsedMetadata,
-    };
-
-    const batchData = {
-      ...data,
-      metadata: JSON.stringify(metadata),
-    };
-
     let message:
       | {
           typeUrl: string;
@@ -217,7 +185,7 @@ export default function useCreateBatchSubmit(): Return {
     if (status === 'idle' || status === 'message') {
       try {
         setStatus('message');
-        message = await prepareMsg(accountAddress, batchData);
+        message = await prepareMsg(accountAddress, data);
         if (!message) return;
       } catch (err) {
         setError(err as string);

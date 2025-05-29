@@ -70,7 +70,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
   const { track } = useTracker();
 
   const defaultInitialValues = {
-    batchDenom: batchDenoms[0]?.value ?? '',
+    batchDenom: placeholderText ? '' : batchDenoms[0]?.value ?? '',
     price: undefined,
     askDenom: undefined,
     amount: undefined,
@@ -110,6 +110,14 @@ const CreateSellOrderForm: React.FC<Props> = ({
     name: 'enableAutoRetire',
   });
   const availableAmount = availableAmountByBatch[batchDenom ?? ''];
+  console.log(
+    '🚀 ~ :113 ~ availableAmountByBatch:',
+    availableAmountByBatch,
+    batchDenom,
+    availableAmountByBatch[batchDenom ?? ''],
+    availableAmountByBatch[''],
+    availableAmount,
+  );
   const { setValue } = form;
   const onMaxClick = () =>
     setValue('amount', availableAmount, {

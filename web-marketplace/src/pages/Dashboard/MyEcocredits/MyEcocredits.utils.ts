@@ -39,13 +39,15 @@ export const getAvailableAmountByBatch = ({
 }: getAvailableAmountByBatchProps): {
   [key: string]: number;
 } =>
-  credits.reduce(
-    (acc, credit) => ({
-      ...acc,
-      [credit.denom]: Number(credit.balance?.tradableAmount),
-    }),
-    {} as { [key: string]: number },
-  );
+  credits
+    .filter(credit => credit.denom)
+    .reduce(
+      (acc, credit) => ({
+        ...acc,
+        [credit.denom]: Number(credit.balance?.tradableAmount),
+      }),
+      {} as { [key: string]: number },
+    );
 
 type GetDenomAllowedOptionsParams = {
   allowedDenoms?: AllowedDenom[];

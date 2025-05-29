@@ -1,9 +1,12 @@
 /* eslint-disable lingui/no-unlocalized-strings */
+import { setI18n } from '@lingui/react/server';
 import { SharedProviders } from 'clients/Clients.SharedProviders';
 import type { Metadata, Viewport } from 'next';
 
 import { IS_TERRASOS } from 'lib/env';
 
+import { getI18nInstance } from './appRouterI18n';
+import { LinguiClientProvider } from './LinguiClientProvider';
 import Providers from './providers';
 
 import '../App.css';
@@ -86,11 +89,19 @@ export default async function RootLayout({
     .map(font => font.variable)
     .join(' ');
 
+  const i18n = getI18nInstance('en'); // get a ready-made i18n instance for the given locale
+  setI18n(i18n);
+
   return (
     <html lang="en" className={fontClassNames}>
       <body>
         <Providers>
-          <div id="root">{children}</div>
+          <LinguiClientProvider
+            initialLocale={'en'}
+            initialMessages={i18n.messages}
+          >
+            <div id="root">{children}</div>
+          </LinguiClientProvider>
         </Providers>
       </body>
     </html>

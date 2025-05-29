@@ -37,7 +37,7 @@
     "@mui/system": "^5.16.12",
     "@mui/x-date-pickers": "^5.0.0-alpha.2",
     "@sanity/block-content-to-react": "^3.0.0",
-    "@turf/bbox": "^6.0.1",
+    "@turf/bbox": "^7.2.0",
     "@turf/invariant": "^6.1.2",
     "@types/iso-3166-2": "^1.0.0",
     "@types/js-cookie": "^2.2.6",

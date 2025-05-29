@@ -40,7 +40,7 @@ export const BuyCredits = () => {
     cardSellOrders,
     slug,
     noProjectFound,
-  } = useGetProject();
+  } = useGetProject({ projectId });
 
   useNavigateToSlug(slug, '/buy');
 

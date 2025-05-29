@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Box, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
@@ -11,6 +10,7 @@ import { buyFromProjectIdAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
 import { CREATE_POST_DISABLED_TOOLTIP_TEXT } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 import { SOLD_OUT_TOOLTIP } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
 import { getPriceToDisplay } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
+import { useParams } from 'next/navigation';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
@@ -83,11 +83,10 @@ function ProjectDetails(): JSX.Element {
   const { _ } = useLingui();
   const theme = useTheme();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { projectId } = useParams();
+  const { id: projectId } = useParams<{ id: string }>();
   const { queryClient } = useLedger();
   const { isConnected, isKeplrMobileWeb, wallet, loginDisabled } = useWallet();
 
-  const location = useLocation();
   const { activeAccount } = useAuth();
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
   const [draftPost, setDraftPost] = useState<
@@ -149,17 +148,17 @@ function ProjectDetails(): JSX.Element {
     loadingAnchoredMetadata,
     projectResponse,
     loadingDb,
-  } = useGetProject();
+  } = useGetProject({ projectId });
 
   useNavigateToSlug(slug);
   const onBuyButtonClick = useOnBuyButtonClick();
 
-  const element = document.getElementById(location.hash.substring(1));
-  useEffect(() => {
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [element]);
+  // const element = document.getElementById(location.hash.substring(1));
+  // useEffect(() => {
+  //   if (element) {
+  //     element.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // }, [element]);
 
   const onChainProject = projectResponse?.project;
   const jurisdiction = onChainProject?.jurisdiction;
@@ -598,11 +597,11 @@ function ProjectDetails(): JSX.Element {
             published: draftPost?.published || true,
           }}
           setDraftPost={setDraftPost}
-          scrollIntoDataStream={() => {
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth' });
-            }
-          }}
+          // scrollIntoDataStream={() => {
+          //   if (element) {
+          //     element.scrollIntoView({ behavior: 'smooth' });
+          //   }
+          // }}
         />
       )}
     </Box>

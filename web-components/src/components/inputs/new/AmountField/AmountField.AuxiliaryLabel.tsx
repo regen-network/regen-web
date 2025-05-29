@@ -1,8 +1,7 @@
 import { Box } from '@mui/material';
 
-import { cn } from 'src/utils/styles/cn';
-
 import { getFormattedNumber } from '../../../../utils/format';
+import { cn } from '../../../../utils/styles/cn';
 import { useAmountFieldStyles } from './AmountField.styles';
 
 interface AuxiliaryLabelProps {

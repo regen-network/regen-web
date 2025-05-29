@@ -68,7 +68,6 @@ export type CreateBatchFormValues = CreditBasicsFormValues &
 
 export default function CreateBatchMultiStepForm(): React.ReactElement {
   const { _ } = useLingui();
-  const [isSubmittingBatch, setIsSubmittingBatch] = useState(false);
 
   /**
    * TODO: We should consider refactoring this to get isPastDateTest, vcsMetadataSchema,
@@ -160,10 +159,8 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     values: CreateBatchFormValues,
     formikHelpers: FormikHelpers<CreateBatchFormValues>,
   ): void {
-    if (isSubmittingBatch && isReviewStep) return;
-    setIsSubmittingBatch(true);
     if (isReviewStep) {
-      createBatch(values).finally(() => setIsSubmittingBatch(false));
+      createBatch(values);
     } else {
       // We need to update the multi-step context with
       // additional data for the review step.
@@ -227,6 +224,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
         {({ submitForm, isValid, isSubmitting }) => (
           <Form id={formModel.formId}>
             {renderStep(activeStep)}
+            {/* TODO ? - Move to: MultiStepTemplate > StepperSection > StepperControls */}
             {!isLastStep && (
               <SaveFooter
                 onPrev={activeStep > 0 ? handleBack : undefined}

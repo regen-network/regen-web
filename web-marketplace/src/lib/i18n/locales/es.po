@@ -1311,7 +1311,7 @@ msgstr "tabla de lotes de crédito"
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:243
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
 #: src/pages/Dashboard/Dashboard.constants.tsx:30
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:93
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:95
 msgid "Credit Batches"
 msgstr "Lotes de crédito"
 
@@ -1382,7 +1382,7 @@ msgstr "Clase de crédito: la estructura, procedimientos y requisitos para el re
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
 #: src/pages/Dashboard/Dashboard.constants.tsx:24
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:87
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:89
 #: src/pages/Home/Home.tsx:180
 msgid "Credit Classes"
 msgstr "Clases de crédito"
@@ -2512,7 +2512,23 @@ msgstr "Hacer que los archivos y los datos de ubicación sean privados"
 msgid "Make the location data private"
 msgstr "Hacer que los datos de ubicación sean privados"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:41
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:138
+msgid "Manage Credit Batches"
+msgstr "Administrar lotes de crédito"
+
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:133
+msgid "Manage Credit Classes"
+msgstr "Administrar clases de crédito"
+
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:123
+msgid "Manage Portfolio"
+msgstr "Administrar cartera"
+
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:128
+msgid "Manage Projects"
+msgstr "Administrar proyectos"
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:31
 msgid "Manage credits"
 msgstr "Administrar créditos"
 
@@ -3070,7 +3086,7 @@ msgstr "Por favor espere mientras se procesa la transacción"
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:44
 #: src/pages/Dashboard/Dashboard.constants.tsx:12
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:74
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:76
 msgid "Portfolio"
 msgstr "Cartera"
 
@@ -3436,7 +3452,7 @@ msgstr "PROYECTADO:"
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
 #: src/pages/Dashboard/Dashboard.constants.tsx:18
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:81
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:83
 msgid "Projects"
 msgstr "Proyectos"
 

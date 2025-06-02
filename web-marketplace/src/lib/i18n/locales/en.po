@@ -1308,7 +1308,7 @@ msgstr ""
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:243
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
 #: src/pages/Dashboard/Dashboard.constants.tsx:30
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:93
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:95
 msgid "Credit Batches"
 msgstr ""
 
@@ -1379,7 +1379,7 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
 #: src/pages/Dashboard/Dashboard.constants.tsx:24
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:87
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:89
 #: src/pages/Home/Home.tsx:180
 msgid "Credit Classes"
 msgstr ""
@@ -2509,7 +2509,23 @@ msgstr ""
 msgid "Make the location data private"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:41
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:138
+msgid "Manage Credit Batches"
+msgstr ""
+
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:133
+msgid "Manage Credit Classes"
+msgstr ""
+
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:123
+msgid "Manage Portfolio"
+msgstr ""
+
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:128
+msgid "Manage Projects"
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:31
 msgid "Manage credits"
 msgstr ""
 
@@ -3067,7 +3083,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:44
 #: src/pages/Dashboard/Dashboard.constants.tsx:12
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:74
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:76
 msgid "Portfolio"
 msgstr ""
 
@@ -3433,7 +3449,7 @@ msgstr ""
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
 #: src/pages/Dashboard/Dashboard.constants.tsx:18
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:81
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:83
 msgid "Projects"
 msgstr ""
 

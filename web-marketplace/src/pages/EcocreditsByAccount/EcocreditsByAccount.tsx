@@ -191,41 +191,40 @@ export const EcocreditsByAccount = (): JSX.Element => {
             />
             <Box sx={{ backgroundColor: 'grey.50' }}>
               <Section sx={{ root: { pt: { xs: 15 } } }}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    mb: 3,
-                  }}
-                >
-                  <IconTabs
-                    aria-label={_(msg`public profile tabs`)}
-                    tabs={tabs}
-                    linkComponent={Link}
-                    activeTab={activeTab}
-                    mobileFullWidth
-                  />
-                  {manageButtonConfig.map(
-                    btn =>
-                      btn.show &&
-                      wallet?.address &&
-                      address &&
-                      wallet.address.toLowerCase() ===
-                        address.toLowerCase() && (
-                        <OutlinedButton
-                          key={btn.label}
-                          variant="contained"
-                          color="primary"
-                          component={Link}
-                          href={btn.link}
-                          className="text-[14px] py-[9px] px-[25px]"
-                        >
-                          <CogIcon className="mr-10" />
-                          {btn.label}
-                        </OutlinedButton>
-                      ),
-                  )}
+                <Box>
+                  {' '}
+                  {/* Reduced mobile padding */}
+                  <div className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
+                    <IconTabs
+                      aria-label={_(msg`public profile tabs`)}
+                      tabs={tabs}
+                      linkComponent={Link}
+                      activeTab={activeTab}
+                      mobileFullWidth
+                    />
+                    <div className="justify-center flex">
+                      {manageButtonConfig.map(
+                        btn =>
+                          btn.show &&
+                          wallet?.address &&
+                          address &&
+                          wallet.address.toLowerCase() ===
+                            address.toLowerCase() && (
+                            <OutlinedButton
+                              key={btn.label}
+                              variant="contained"
+                              color="primary"
+                              component={Link}
+                              href={btn.link}
+                              className="text-[14px] py-[9px] px-[25px]"
+                            >
+                              <CogIcon className="mr-10" />
+                              {btn.label}
+                            </OutlinedButton>
+                          ),
+                      )}
+                    </div>
+                  </div>
                 </Box>
                 <Flex sx={{ ...ecocreditsByAccountStyles.padding }}>
                   <Box sx={{ width: '100%' }}>

@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
-import { Grid } from '@mui/material';
 
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 
@@ -29,33 +28,33 @@ const ProjectsTab = (): JSX.Element => {
     adminAddress: address,
   });
 
-  const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
-  const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
+  const cardProps = useMemo(
+    () => ({
+      buttons: getProjectCardButtonMapping(_),
+      bodyTexts: getProjectCardBodyTextMapping(_),
+      track,
+      pathname: location.pathname,
+      imageStorageBaseUrl: IMAGE_STORAGE_BASE_URL,
+      apiServerUrl: API_URI,
+      purchaseInfo: undefined,
+    }),
+    [_, location.pathname, track],
+  );
 
   return (
-    <>
-      <Grid container spacing={8}>
-        {adminProjects?.map((project, i) => {
-          return (
-            <Grid key={i} item xs={12} md={6} lg={4}>
-              <WithLoader isLoading={isLoadingAdminProjects} variant="skeleton">
-                <ProjectCard
-                  {...project}
-                  onClick={() => project.href && navigate(project.href)}
-                  track={track}
-                  pathname={location.pathname}
-                  imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
-                  apiServerUrl={API_URI}
-                  buttons={buttons}
-                  bodyTexts={bodyTexts}
-                  purchaseInfo={undefined}
-                />
-              </WithLoader>
-            </Grid>
-          );
-        })}
-      </Grid>
-    </>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-30">
+      {adminProjects?.map((project, index) => (
+        <div key={project.id || index}>
+          <WithLoader isLoading={isLoadingAdminProjects} variant="skeleton">
+            <ProjectCard
+              {...project}
+              {...cardProps}
+              onClick={() => project.href && navigate(project.href)}
+            />
+          </WithLoader>
+        </div>
+      ))}
+    </div>
   );
 };
 

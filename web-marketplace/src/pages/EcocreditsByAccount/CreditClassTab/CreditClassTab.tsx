@@ -21,24 +21,17 @@ const useStyles = makeStyles()(() => ({
 export const CreditClassTab = () => {
   const { classes } = useStyles();
   const { accountAddressOrId } = useParams();
-
-  // Use our custom hook for all data fetching and merging
   const { creditClasses, programs, loading } =
     useMergedCreditClasses(accountAddressOrId);
 
   return (
-    <WithLoader
-      isLoading={loading}
-      sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
-    >
+    <WithLoader isLoading={loading} className="w-full flex justify-center">
       <CreditClassCards
         justifyContent={['center', 'center', 'flex-start']}
         creditClassesContent={creditClasses}
         creditClassesProgram={programs}
         btnText="Learn More"
-        classes={{
-          card: classes.truncatedCard,
-        }}
+        classes={{ card: classes.truncatedCard }}
       />
     </WithLoader>
   );

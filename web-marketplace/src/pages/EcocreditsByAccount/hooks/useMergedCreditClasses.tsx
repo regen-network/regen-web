@@ -10,15 +10,14 @@ export const useMergedCreditClasses = (adminId?: string) => {
   const {
     creditClasses: adminClasses,
     isLoadingCreditClasses: adminClassesLoading,
-  } = useFetchCreditClassesWithOrder({
-    admin: adminId,
-  });
+  } = useFetchCreditClassesWithOrder({ admin: adminId });
 
   const {
     creditClasses: sanityCreditClasses,
     creditClassesPrograms,
     loading: sanityCreditClassesLoading,
   } = useCreditClasses({});
+
   const classesMissingSanityData = useMemo(() => {
     if (!adminClasses?.length) return [];
     return adminClasses.filter(
@@ -26,13 +25,23 @@ export const useMergedCreditClasses = (adminId?: string) => {
     );
   }, [adminClasses, sanityCreditClasses]);
 
-  const metadataClassIds = useMemo(
-    () => classesMissingSanityData.map(c => c.id),
-    [classesMissingSanityData],
+  const { classesMetadata, isClassesMetadataLoading } = useClassesWithMetadata(
+    classesMissingSanityData.map(c => c.id),
   );
 
-  const { classesMetadata, isClassesMetadataLoading } =
-    useClassesWithMetadata(metadataClassIds);
+  const metadataByClassId = useMemo(() => {
+    const map = new Map();
+    classesMissingSanityData.forEach((missingClass, index) => {
+      if (classesMetadata?.[index]) {
+        map.set(missingClass.id, classesMetadata[index]);
+      }
+    });
+    return map;
+  }, [classesMissingSanityData, classesMetadata]);
+
+  // Helper function to determine if sanity class has content
+  const hasSanityContent = (sanityClass: any) =>
+    sanityClass?.shortDescriptionRaw || sanityClass?.descriptionRaw;
 
   const mergedCreditClasses = useMemo(() => {
     if (!adminClasses?.length) return [];
@@ -42,24 +51,17 @@ export const useMergedCreditClasses = (adminId?: string) => {
         sc => sc.path === adminClass.id,
       );
 
-      if (
-        matchingSanityClass &&
-        (matchingSanityClass.shortDescriptionRaw ||
-          matchingSanityClass.descriptionRaw)
-      ) {
+      // Use sanity class if it has content, otherwise create from metadata
+      if (matchingSanityClass && hasSanityContent(matchingSanityClass)) {
         return matchingSanityClass;
-      } else {
-        const metadataIndex = metadataClassIds.findIndex(
-          id => id === adminClass.id,
-        );
-        const metadata =
-          metadataIndex >= 0 ? classesMetadata?.[metadataIndex] : undefined;
-        return createCreditClassFromMetadata(adminClass, metadata);
       }
-    });
-  }, [adminClasses, sanityCreditClasses, metadataClassIds, classesMetadata]);
 
-  // Create programs array that's aligned with mergedCreditClasses
+      const metadata = metadataByClassId.get(adminClass.id);
+      return createCreditClassFromMetadata(adminClass, metadata);
+    });
+  }, [adminClasses, sanityCreditClasses, metadataByClassId]);
+
+  // Create aligned programs array
   const alignedPrograms = useMemo(() => {
     if (!mergedCreditClasses?.length) return [];
 
@@ -68,17 +70,16 @@ export const useMergedCreditClasses = (adminId?: string) => {
         sc => sc.path === creditClass.path,
       );
 
-      if (originalIndex !== -1 && originalIndex !== undefined) {
-        return creditClassesPrograms?.[originalIndex];
-      }
-      return undefined;
+      return originalIndex !== -1 && originalIndex !== undefined
+        ? creditClassesPrograms?.[originalIndex]
+        : undefined;
     });
   }, [mergedCreditClasses, sanityCreditClasses, creditClassesPrograms]);
 
   const loading =
     adminClassesLoading ||
     sanityCreditClassesLoading ||
-    (metadataClassIds.length > 0 && isClassesMetadataLoading);
+    (classesMissingSanityData.length > 0 && isClassesMetadataLoading);
 
   return {
     creditClasses: mergedCreditClasses,

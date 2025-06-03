@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useState } from 'react';
 import { OfflineSigner, Registry } from '@cosmjs/proto-signing';
 import { AminoTypes, SigningStargateClient } from '@cosmjs/stargate';

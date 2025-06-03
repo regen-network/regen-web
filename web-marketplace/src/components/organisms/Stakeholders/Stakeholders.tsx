@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Grid, TooltipProps } from '@mui/material';
+import Link from 'next/link';
 
 import { CollapseList } from 'web-components/src/components/organisms/CollapseList/CollapseList';
 import Section from 'web-components/src/components/section';
@@ -12,8 +13,6 @@ import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
-
-import { Link } from 'components/atoms';
 
 export type Stakeholder = {
   accounts: Account | Account[] | undefined;

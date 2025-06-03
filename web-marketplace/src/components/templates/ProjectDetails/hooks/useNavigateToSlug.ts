@@ -1,14 +1,18 @@
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { usePathname, useRouter } from 'next/navigation';
 
 export const useNavigateToSlug = (slug?: string | null, path?: string) => {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!!slug) {
-      const hash = location.hash || '';
-      navigate(`/project/${slug}${path || ''}${hash}`, { replace: true });
+      // Preserve the hash if it exists in the current URL
+      const hash = typeof window !== 'undefined' ? window.location.hash : '';
+      const targetPath = `/project/${slug}${path || ''}${hash}`;
+      if (pathname !== targetPath) {
+        router.replace(targetPath);
+      }
     }
-  }, [slug, navigate, location.hash, path]);
+  }, [slug, path, pathname, router]);
 };

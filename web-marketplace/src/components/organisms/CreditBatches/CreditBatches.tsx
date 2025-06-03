@@ -5,6 +5,7 @@ import { SxProps } from '@mui/material';
 import Box from '@mui/material/Box';
 import cx from 'clsx';
 import { quantityFormatNumberOptions } from 'config/decimals';
+import Link from 'next/link';
 import { tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -28,7 +29,7 @@ import {
 } from 'lib/constants/shared.constants';
 import { LINK_PREFIX } from 'lib/env';
 
-import { AccountLink, Link } from 'components/atoms';
+import { AccountLink } from 'components/atoms/AccountLink';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 
@@ -160,7 +161,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
             <WithLoader isLoading={!batch.projectName} variant="skeleton">
               <Link
                 href={`/project/${batch?.projectId}`}
-                sx={tableStyles.ellipsisColumn}
+                className="block truncate max-w-[125px]"
               >
                 {batch?.projectName}
               </Link>
@@ -172,7 +173,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
             >
               <Link
                 href={`${LINK_PREFIX}/credit-classes/${batch.classId}`}
-                sx={tableStyles.ellipsisContentColumn}
+                className="block truncate max-w-[125px]"
               >
                 <BlockContent content={batch.className} />
               </Link>

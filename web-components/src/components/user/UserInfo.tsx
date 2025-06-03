@@ -7,7 +7,6 @@ import { formatDate } from '../../utils/format';
 import { cn } from '../../utils/styles/cn';
 import { BlockContent, SanityBlockContent } from '../block-content';
 import { TextButton } from '../buttons/TextButton';
-import { LinkComponentProp } from '../modal/ConfirmModal';
 import { Body, Subtitle, Title } from '../typography';
 import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
 import UserAvatar from './UserAvatar';
@@ -44,7 +43,7 @@ interface UserInfoProps {
     title?: string;
     timestamp?: string;
   };
-  linkComponent?: LinkComponentProp;
+  linkComponent?: React.ElementType;
   alignItems?: GridProps['alignItems'];
 }
 export default function UserInfo({

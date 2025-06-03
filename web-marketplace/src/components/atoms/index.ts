@@ -1,4 +1,4 @@
-export * from './AccountLink';
+export * from './AccountLink.legacy';
 export * from './BreakText';
 export * from './BreakTextEnd';
 export * from './GreyText';

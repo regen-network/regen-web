@@ -60,7 +60,6 @@ import { ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';
 import { useGetProject } from './hooks/useGetProject';
 import { useNavigateToSlug } from './hooks/useNavigateToSlug';
-import useSeo from './hooks/useSeo';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { useStakeholders } from './hooks/useStakeholders';
 import { ProjectDetailsBannerCard } from './ProjectDetails.BannerCard';
@@ -232,14 +231,6 @@ function ProjectDetails(): JSX.Element {
     projectPageMetadata: offChainProjectMetadata,
   });
 
-  const seoData = useSeo({
-    projectMetadata,
-    projectPageMetadata: offChainProjectMetadata,
-    projectDeveloper,
-    creditClassName,
-    _,
-  });
-
   const mediaData = parseMedia({
     onChainProjectMetadata: projectMetadata,
     offChainProjectMetadata,
@@ -362,13 +353,6 @@ function ProjectDetails(): JSX.Element {
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
-      <SEO
-        location={seoData.location}
-        siteMetadata={seoData.siteMetadata}
-        title={seoData.title}
-        imageUrl={seoData.imageUrl}
-      />
-
       <ProjectDetailsBannerCard
         offChainProject={offChainProject}
         onChainProject={onChainProject}
@@ -553,12 +537,12 @@ function ProjectDetails(): JSX.Element {
 
       {managementActions && <ManagementActions actions={managementActions} />}
 
-      {onChainOrOffChainProjectId && (
+      {/* {onChainOrOffChainProjectId && (
         <MoreProjects
           skippedProjectId={onChainOrOffChainProjectId}
           projectAdmin={admin}
         />
-      )}
+      )} */}
 
       {gettingStartedResourcesSection && IS_REGEN && (
         <div

@@ -1,4 +1,5 @@
 import { useLingui } from '@lingui/react';
+import Link from 'next/link';
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -10,8 +11,6 @@ import { Account } from 'web-components/src/components/user/UserInfoCard';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { IS_REGEN, LINK_PREFIX } from 'lib/env';
-
-import { Link } from 'components/atoms';
 
 import {
   CREDIT_CLASS_SUBTITLE,

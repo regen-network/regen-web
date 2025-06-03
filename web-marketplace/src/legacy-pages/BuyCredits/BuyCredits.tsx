@@ -8,7 +8,6 @@ import { Loading } from 'web-components/src/components/loading';
 import WithLoader from 'components/atoms/WithLoader';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetProject';
-import { useNavigateToSlug } from 'components/templates/ProjectDetails/hooks/useNavigateToSlug';
 
 import { cardDetailsMissingAtom, paymentOptionAtom } from './BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
@@ -16,6 +15,7 @@ import { BuyCreditsForm } from './BuyCredits.Form';
 import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
 import { getFormModel } from './BuyCredits.utils';
 import { useSummarizePayment } from './hooks/useSummarizePayment';
+import { useNavigateToSlug } from './hooks/useNavigateToSlug';
 
 export const BuyCredits = () => {
   const { projectId } = useParams();

@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
@@ -10,7 +11,6 @@ import {
 import { TerrasosCredits } from 'legacy-pages/Projects/AllProjects/AllProjects.TerrasosCredits';
 import { getCreditsTooltip } from 'legacy-pages/Projects/AllProjects/utils/getCreditsTooltip';
 import { getIsSoldOut } from 'legacy-pages/Projects/AllProjects/utils/getIsSoldOut';
-import { useRouter } from 'next/navigation';
 
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 import { CardsGridContainer } from 'web-components/src/components/organisms/CardsGridContainer/CardsGridContainer';
@@ -69,7 +69,7 @@ export function ProjectCardsSection({
   const soldOutProjectsIds = useAllSoldOutProjectsIds({
     sanitySoldOutProjects,
   });
-  const router = useRouter();
+  const navigate = useNavigate();
   const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
   const purchaseDetailsTitles = useMemo(
     () => getProjectCardPurchaseDetailsTitleMapping(_),
@@ -114,7 +114,7 @@ export function ProjectCardsSection({
                 }
                 purchaseInfo={project.purchaseInfo}
                 href={href}
-                onClick={() => router.push(href)}
+                onClick={() => navigate(href)}
                 target={'_self'}
                 imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                 apiServerUrl={API_URI}

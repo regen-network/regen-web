@@ -1,13 +1,22 @@
 /* eslint-disable lingui/no-unlocalized-strings */
+
 import { setI18n } from '@lingui/react/server';
-import { SharedProviders } from 'clients/Clients.SharedProviders';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import type { Metadata, Viewport } from 'next';
 
-import { IS_TERRASOS } from 'lib/env';
+import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 
+import { LedgerProviderWithWallet } from 'ledger';
+import { AuthProvider } from 'lib/auth/auth';
+import { IS_TERRASOS } from 'lib/env';
+import { WalletProvider } from 'lib/wallet/wallet';
+
+import { AnalyticsWrapper } from './AnalyticsWrapper';
+import { ApolloWrapper } from './ApolloWrapper';
 import { getI18nInstance } from './appRouterI18n';
+import { ChainWrapper } from './ChainWrapper';
 import { LinguiClientProvider } from './LinguiClientProvider';
-import Providers from './providers';
+import QueryClientWrapper from './QueryClientWrapper';
 
 import '../App.css';
 import '../../../tailwind.css';
@@ -95,14 +104,30 @@ export default async function RootLayout({
   return (
     <html lang="en" className={fontClassNames}>
       <body>
-        <Providers>
-          <LinguiClientProvider
-            initialLocale={'en'}
-            initialMessages={i18n.messages}
-          >
-            <div id="root">{children}</div>
-          </LinguiClientProvider>
-        </Providers>
+        <AppRouterCacheProvider>
+          <QueryClientWrapper>
+            <ApolloWrapper>
+              <LinguiClientProvider
+                initialLocale={'en'}
+                initialMessages={i18n.messages}
+              >
+                <AnalyticsWrapper>
+                  <ThemeProvider>
+                    <AuthProvider>
+                      <ChainWrapper>
+                        <WalletProvider>
+                          <LedgerProviderWithWallet>
+                            <div id="root">{children}</div>
+                          </LedgerProviderWithWallet>
+                        </WalletProvider>
+                      </ChainWrapper>
+                    </AuthProvider>
+                  </ThemeProvider>
+                </AnalyticsWrapper>
+              </LinguiClientProvider>
+            </ApolloWrapper>
+          </QueryClientWrapper>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

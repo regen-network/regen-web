@@ -13,8 +13,7 @@ import {
   walletConnectClientMeta,
 } from 'lib/wallet/wallet.constants';
 
-import { LoginModalMobile } from 'components/organisms/LoginModal/components/LoginModal.Mobile';
-
+// import { LoginModalMobile } from 'components/organisms/LoginModal/components/LoginModal.Mobile';
 import { RegenRoutes } from './Regen.Routes';
 
 import '../../../../tailwind.css';
@@ -27,7 +26,7 @@ export const RegenProvider = () => {
           chains={chains.filter(chain => chain.chain_name === 'regen')}
           assetLists={assets.filter(chain => chain.chain_name === 'regen')}
           wallets={wallets}
-          walletModal={LoginModalMobile}
+          // walletModal={LoginModalMobile}
           walletConnectOptions={{
             signClient: {
               projectId:

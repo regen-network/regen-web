@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAtom, useSetAtom } from 'jotai';
 import { buyFromProjectIdAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
-import { useRouter } from 'next/navigation';
 
 import {
   chooseHowToPurchaseModalAtom,
@@ -17,7 +17,7 @@ type OnBuyButtonClickParams = {
   cardSellOrders?: CardSellOrder[];
 };
 export const useOnBuyButtonClick = () => {
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
   const setChooseHowToPurchaseModal = useSetAtom(chooseHowToPurchaseModalAtom);
@@ -37,7 +37,7 @@ export const useOnBuyButtonClick = () => {
       ) {
         // so we can always go to the buy page,
         // no matter if the user is logged in/connected to a wallet or not
-        router.push(`/project/${projectId}/buy`);
+        navigate(`/project/${projectId}/buy`);
       } else {
         if (!activeWalletAddr) {
           // no connected wallet address
@@ -47,7 +47,7 @@ export const useOnBuyButtonClick = () => {
           });
         } else {
           if (isConnected) {
-            router.push(`/project/${projectId}/buy`);
+            navigate(`/project/${projectId}/buy`);
           } else {
             // user logged in with web2 but not connected to the wallet address associated to his/er account
             setBuyFromProjectIdAtom(projectId);
@@ -59,10 +59,10 @@ export const useOnBuyButtonClick = () => {
     [
       activeWalletAddr,
       isConnected,
+      navigate,
       setBuyFromProjectIdAtom,
       setChooseHowToPurchaseModal,
       setSwitchWalletModalAtom,
-      router,
     ],
   );
 
@@ -70,10 +70,10 @@ export const useOnBuyButtonClick = () => {
     // As soon as user connects to the right wallet address,
     // we navigate to the buy page
     if (buyFromProjectId && isConnected) {
-      router.push(`/project/${buyFromProjectId}/buy`);
+      navigate(`/project/${buyFromProjectId}/buy`);
       setBuyFromProjectIdAtom('');
     }
-  }, [buyFromProjectId, isConnected, router, setBuyFromProjectIdAtom]);
+  }, [buyFromProjectId, isConnected, navigate, setBuyFromProjectIdAtom]);
 
   return onBuyButtonClick;
 };

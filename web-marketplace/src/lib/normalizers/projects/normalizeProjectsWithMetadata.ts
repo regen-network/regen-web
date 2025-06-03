@@ -213,11 +213,6 @@ export const normalizeProjectWithMetadata = ({
             price: _projectPrefinancing?.price,
           })
         : undefined,
-      estimatedIssuance: _projectPrefinancing?.estimatedIssuance
-        ? formatNumber({
-            num: _projectPrefinancing?.estimatedIssuance,
-          })
-        : undefined,
     },
     region:
       projectMetadata?.['regen:region'] ||

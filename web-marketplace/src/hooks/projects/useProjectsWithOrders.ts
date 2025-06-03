@@ -487,6 +487,7 @@ export function useProjectsWithOrders({
   const sanityProjects = sanityProjectsResults.map(res => {
     return res.data?.allProject?.[0];
   });
+
   const sanityProjectsLoading = sanityProjectsResults.some(
     res => res.isFetching,
   );

@@ -29,7 +29,7 @@ export interface PurchaseInfo {
 export type ProjectPrefinancing = {
   isPrefinanceProject: boolean;
   price: string;
-  estimatedIssuance: string;
+  estimatedIssuance: number | undefined | null;
   stripePaymentLink: string;
 };
 

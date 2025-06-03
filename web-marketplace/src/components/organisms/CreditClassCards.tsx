@@ -36,7 +36,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   card: {
     [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(3, 0),
+      padding: theme.spacing(2, 0),
     },
   },
 }));
@@ -52,14 +52,14 @@ const CreditClassCards: React.FC<React.PropsWithChildren<Props>> = ({
   const navigate = useNavigate();
   const { classes: styles, cx } = useStyles();
   const theme = useTheme<Theme>();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isBelowMd = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <Grid
       container
       justifyContent={justifyContent}
       className={cx(styles.root, classes && classes.root)}
-      spacing={isMobile ? 0 : 5}
+      spacing={isBelowMd ? 5 : 5}
     >
       {creditClassesContent?.map((c, i) => {
         const title = <BlockContent content={c?.nameRaw} />;
@@ -69,7 +69,8 @@ const CreditClassCards: React.FC<React.PropsWithChildren<Props>> = ({
             item
             xs={12}
             sm={6}
-            md={4}
+            md={6}
+            lg={4}
             key={i}
             className={cx(styles.card, classes && classes.card)}
           >
@@ -79,10 +80,8 @@ const CreditClassCards: React.FC<React.PropsWithChildren<Props>> = ({
               description={<BlockContent content={c?.shortDescriptionRaw} />}
               imgSrc={getSanityImgSrc(c?.image)}
               onClick={() => {
-                const path = c?.path && `/credit-classes/${c?.path}`;
-                if (path) {
-                  navigate(path);
-                }
+                const path = c?.path ? `/credit-classes/${c.path}` : undefined;
+                if (path) navigate(path);
               }}
               title={title}
               imageChildren={

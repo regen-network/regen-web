@@ -6,7 +6,7 @@ import { CreditClassCards } from 'components/organisms';
 
 import { useMergedCreditClasses } from '../hooks/useMergedCreditClasses';
 
-const useStyles = makeStyles()(() => ({
+const useStyles = makeStyles()(theme => ({
   truncatedCard: {
     '& .MuiCardContent-root p': {
       display: '-webkit-box',
@@ -25,13 +25,14 @@ export const CreditClassTab = () => {
     useMergedCreditClasses(accountAddressOrId);
 
   return (
-    <WithLoader isLoading={loading} className="w-full flex justify-center">
+    <WithLoader isLoading={loading}>
       <CreditClassCards
-        justifyContent={['center', 'center', 'flex-start']}
         creditClassesContent={creditClasses}
         creditClassesProgram={programs}
         btnText="Learn More"
-        classes={{ card: classes.truncatedCard }}
+        classes={{
+          card: classes.truncatedCard,
+        }}
       />
     </WithLoader>
   );

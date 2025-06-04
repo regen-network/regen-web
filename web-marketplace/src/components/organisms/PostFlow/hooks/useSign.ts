@@ -69,6 +69,17 @@ export const useSign = ({
   const { signAndBroadcast } = useMsgClient();
   const reactQueryClient = useQueryClient();
 
+  const fetchAnchorTxHash = useCallback(
+    async ({ iri }: { iri: string }) => {
+      const { data: anchorTxsData } = await refetch();
+      const txResponses = anchorTxsData?.txResponses?.filter(
+        txRes => iri && txRes.rawLog.includes(iri),
+      );
+      return txResponses?.[0]?.txhash;
+    },
+    [refetch],
+  );
+
   const sign = useCallback(
     async ({ contentHash, iri, createdPostData }: SignParams) => {
       if (wallet?.address)
@@ -86,11 +97,7 @@ export const useSign = ({
           },
           {
             onError: async (error?: Error) => {
-              const { data: anchorTxsData } = await refetch();
-              const txResponses = anchorTxsData?.txResponses?.filter(
-                txRes => iri && txRes.rawLog.includes(iri),
-              );
-              const anchorTxHash = txResponses?.[0]?.txhash;
+              const anchorTxHash = await fetchAnchorTxHash({ iri });
 
               setProcessingModalAtom(atom => void (atom.open = false));
               const { cardItems, buttonLink } = getSuccessModalContent({
@@ -114,11 +121,7 @@ export const useSign = ({
               onModalClose();
             },
             onSuccess: async (deliverTxResponse?: DeliverTxResponse) => {
-              const { data: anchorTxsData } = await refetch();
-              const txResponses = anchorTxsData?.txResponses?.filter(
-                txRes => iri && txRes.rawLog.includes(iri),
-              );
-              const anchorTxHash = txResponses?.[0]?.txhash;
+              const anchorTxHash = await fetchAnchorTxHash({ iri });
 
               await reactQueryClient.invalidateQueries({
                 queryKey: getTxsEventQueryKey({
@@ -157,6 +160,7 @@ export const useSign = ({
     },
     [
       _,
+      fetchAnchorTxHash,
       getSuccessModalContent,
       offChainProjectId,
       onModalClose,
@@ -164,7 +168,6 @@ export const useSign = ({
       projectName,
       projectSlug,
       reactQueryClient,
-      refetch,
       setProcessingModalAtom,
       setTxSuccessfulModalAtom,
       signAndBroadcast,

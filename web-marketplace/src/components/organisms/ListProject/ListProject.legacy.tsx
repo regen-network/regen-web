@@ -1,10 +1,10 @@
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
-import { useRouter } from 'next/navigation';
 
 import { Body } from 'web-components/src/components/typography';
 
@@ -15,7 +15,7 @@ import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQ
 import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 
 import { useWallet } from '../../../lib/wallet/wallet';
-import { useLoginData } from '../LoginButton/hooks/useLoginData';
+import { useLoginData } from '../LoginButton/hooks/useLoginData.legacy';
 import { LoginFlow } from '../LoginFlow/LoginFlow';
 import { CREATE_PROJECT } from './ListProject.constants';
 
@@ -23,7 +23,7 @@ const ListProject = () => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
   const { activeAccountId, activeAccount } = useAuth();
-  const router = useRouter();
+  const navigate = useNavigate();
   const isConnectingRef = useRef(false);
 
   const {
@@ -58,7 +58,7 @@ const ListProject = () => {
           onClick={
             activeAccountId
               ? () =>
-                  router.push(
+                  navigate(
                     `/project-pages/${DRAFT_ID}/${
                       isIssuer ? 'choose-credit-class' : 'basic-info'
                     }`,

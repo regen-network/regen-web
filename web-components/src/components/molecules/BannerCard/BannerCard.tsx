@@ -43,7 +43,7 @@ const BannerCard = ({
       />
       <div className="pl-20 sm:pl-30">
         <Title variant="h6">{title}</Title>
-        <Body className="pt-5 pb-10 sm:pt-[8px] sm:pb-20">
+        <Body className="pt-5 pb-10 sm:pt-[8px] sm:pb-20" component="div">
           {typeof description === 'string' ? (
             description
           ) : (

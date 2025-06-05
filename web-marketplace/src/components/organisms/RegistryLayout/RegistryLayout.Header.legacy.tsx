@@ -1,12 +1,11 @@
-'use client';
 import React, { useMemo } from 'react';
+import { useLoaderData, useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 import { getClientConfig } from 'clients/Clients.config';
 import { getWalletAddress } from 'legacy-pages/Dashboard/Dashboard.utils';
 import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
-import { usePathname } from 'next/navigation';
 
 import Header from 'web-components/src/components/header';
 import { UserMenuItems } from 'web-components/src/components/header/components/UserMenuItems';
@@ -50,7 +49,7 @@ import { getAddress, getProfile } from './RegistryLayout.utils';
 
 const RegistryLayoutHeader: React.FC = () => {
   const { _ } = useLingui();
-  const pathname = usePathname();
+  const { pathname } = useLocation();
   const { activeAccount, privActiveAccount } = useAuth();
 
   const { wallet, disconnect, accountByAddr } = useWallet();
@@ -62,8 +61,7 @@ const RegistryLayoutHeader: React.FC = () => {
   // const isHome = pathname === '/';
   const clientConfig = getClientConfig();
 
-  // TODO
-  const hasPrefinanceProjects = false;
+  const hasPrefinanceProjects = useLoaderData();
 
   const menuItems = useMemo(
     () => getMenuItems(pathname, _, !!hasPrefinanceProjects),

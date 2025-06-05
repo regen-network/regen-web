@@ -33,12 +33,10 @@ const RegenThemeProvider = ({
     injectStyles();
   }
   return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={customTheme ?? theme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
-    </StyledEngineProvider>
+    <ThemeProvider theme={customTheme ?? theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
   );
 };
 

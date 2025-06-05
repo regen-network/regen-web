@@ -5,5 +5,6 @@ export function generateStaticParams() {
 }
 
 export default function Page() {
-  return <ClientOnly />;
+  // return <ClientOnly />;
+  return <></>;
 }

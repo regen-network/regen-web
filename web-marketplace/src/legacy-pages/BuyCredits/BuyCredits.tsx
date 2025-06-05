@@ -14,8 +14,8 @@ import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsForm } from './BuyCredits.Form';
 import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
 import { getFormModel } from './BuyCredits.utils';
-import { useSummarizePayment } from './hooks/useSummarizePayment';
 import { useNavigateToSlug } from './hooks/useNavigateToSlug';
+import { useSummarizePayment } from './hooks/useSummarizePayment';
 
 export const BuyCredits = () => {
   const { projectId } = useParams();

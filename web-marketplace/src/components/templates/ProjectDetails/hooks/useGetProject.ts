@@ -28,7 +28,7 @@ export const useGetProject = ({ projectId }: { projectId?: string }) => {
   // If neither of those, it's a project slug.
   const isOnChainId = getIsOnChainId(projectId);
   const isOffChainUuid = getIsUuid(projectId);
-
+  console.log('enabled', !!projectId && !isOnChainId && !isOffChainUuid);
   // if projectId is slug, query project by slug
   const { data: projectBySlug, isLoading: loadingProjectBySlug } = useQuery(
     getProjectBySlugQuery({
@@ -80,7 +80,6 @@ export const useGetProject = ({ projectId }: { projectId?: string }) => {
   );
 
   const onChainProject = projectResponse?.project;
-
   /** Anchored project metadata comes from IRI resolver. */
   const { data, isLoading: loadingAnchoredMetadata } = useQuery(
     getMetadataQuery({
@@ -90,7 +89,6 @@ export const useGetProject = ({ projectId }: { projectId?: string }) => {
       languageCode: selectedLanguage,
     }),
   );
-
   const anchoredMetadata = data as AnchoredProjectMetadataLD | undefined;
 
   const offChainProjectById = offchainProjectByIdData?.data.projectById;
@@ -101,6 +99,7 @@ export const useGetProject = ({ projectId }: { projectId?: string }) => {
     ?.published
     ? projectBySlug?.data?.projectBySlug
     : undefined;
+  console.log('projectBySlug', projectBySlug);
   const offChainProject = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
     : publishedOffchainProjectById ?? publishedOffchainProjectBySlug;

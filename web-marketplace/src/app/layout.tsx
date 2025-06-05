@@ -122,6 +122,7 @@ export default async function RootLayout({
     .map(font => font.variable)
     .join(' ');
 
+  // TODO get user default local
   const i18n = getI18nInstance('en'); // get a ready-made i18n instance for the given locale
   setI18n(i18n);
 
@@ -141,11 +142,11 @@ export default async function RootLayout({
                       <ChainWrapper>
                         <WalletProvider>
                           <LedgerProviderWithWallet>
-                            {IS_TERRASOS ? (
+                            {/* {IS_TERRASOS ? (
                               <TerrasosHeader />
                             ) : (
                               <RegistryLayoutHeader />
-                            )}
+                            )} */}
                             {children}
                             {/* {IS_TERRASOS ? (
                               <RegistryLayoutTerrasosFooter />

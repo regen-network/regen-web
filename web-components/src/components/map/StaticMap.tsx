@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 // import { Marker } from 'react-map-gl';
 import { CircularProgress } from '@mui/material';

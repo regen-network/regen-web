@@ -57,6 +57,8 @@ export const getProjectBySlugQuery = ({
 
       return ProjectBySlug;
     } catch (e) {
+      console.log('e', e);
+
       return null;
     }
   },

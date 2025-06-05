@@ -152,6 +152,7 @@ function ProjectDetails(): JSX.Element {
   useNavigateToSlug(slug);
   const onBuyButtonClick = useOnBuyButtonClick();
 
+  // TODO
   // const element = document.getElementById(location.hash.substring(1));
   // useEffect(() => {
   //   if (element) {

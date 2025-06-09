@@ -2,7 +2,7 @@ export interface AccountOption {
   id: string;
   name: string;
   address: string;
-  avatarSrc?: string;
+  image: string;
   type: 'user' | 'org';
 }
 

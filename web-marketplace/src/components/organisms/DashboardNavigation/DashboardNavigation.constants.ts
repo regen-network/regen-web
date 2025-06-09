@@ -1,5 +1,5 @@
 export const NAV_BASE_CLASSES =
-  'relative flex flex-col justify-between h-screen overflow-visible transition-all duration-300 border-0 border-r border-solid border-r-[#D2D5D9] bg-white';
+  'relative flex flex-col justify-between h-screen overflow-visible transition-all duration-300 border-0 border-r border-solid border-r-[#D2D5D9] bg-bc-neutral-0';
 
 export const COLLAPSE_BUTTON_CLASSES =
   'group hidden sm:flex items-center justify-center w-[25px] h-[25px] absolute z-10 right-[-12.5px] top-[35px] p-0 rounded-[5px] border border-solid border-[#D2D5D9] bg-[#FFFFFF] shadow-[0_0_8px_rgba(0,0,0,0.15)] cursor-pointer hover:bg-bc-green-600 hover:text-bc-neutral-100';

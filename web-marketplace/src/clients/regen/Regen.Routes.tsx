@@ -13,6 +13,10 @@ import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { safeLazy } from 'utils/safeLazy';
+import { CreditBatchesTab } from 'web-marketplace/src/pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab';
+import { CreditClassTab } from 'web-marketplace/src/pages/EcocreditsByAccount/CreditClassTab/CreditClassTab';
+import { PortfolioTab } from 'web-marketplace/src/pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
+import ProjectsTab from 'web-marketplace/src/pages/EcocreditsByAccount/ProjectsTab';
 
 import { Maybe } from 'generated/graphql';
 import { QueryClient as RPCQueryClient, useLedger } from 'ledger';
@@ -31,10 +35,6 @@ import MyCreditClasses from 'pages/Dashboard/MyCreditClasses';
 import MyEcocredits from 'pages/Dashboard/MyEcocredits';
 import MyProjects from 'pages/Dashboard/MyProjects';
 import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
-import { CreditBatchesTab } from 'pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab';
-import { CreditClassTab } from 'pages/EcocreditsByAccount/CreditClassTab/CreditClassTab';
-import { PortfolioTab } from 'pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
-import ProjectsTab from 'pages/EcocreditsByAccount/ProjectsTab';
 import Faucet from 'pages/Faucet';
 import { homeLoader } from 'pages/Home/Home.loader';
 import { storefrontLoader } from 'pages/Marketplace/Storefront/Storefront.loader';
@@ -72,7 +72,7 @@ const CreateCreditClass = safeLazy(
 const CreditClassDetails = safeLazy(
   () => import('../../pages/CreditClassDetails'),
 );
-const Dashboard = safeLazy(() => import('../../pages/Dashboard'));
+const Dashboard = safeLazy(() => import('../../pages/ProfileEdit'));
 const Description = safeLazy(() => import('../../pages/Description'));
 const EcocreditBatches = safeLazy(() => import('../../pages/EcocreditBatches'));
 const EcocreditsByAccount = safeLazy(
@@ -155,172 +155,117 @@ export const getRegenRoutes = ({
   languageCode,
 }: RouterParams): RouteObject[] => {
   return createRoutesFromElements(
-    <Route
-      element={<RegistryLayout />}
-      loader={registryLayoutLoader({
-        queryClient: reactQueryClient,
-        apolloClientFactory,
-        languageCode,
-      })}
-    >
-      <Route path="/" element={<Outlet />} errorElement={<ErrorPage />}>
-        <Route
-          index
-          element={<Home />}
-          loader={homeLoader({
-            queryClient: reactQueryClient,
-          })}
-        />
-        <Route path="verify-email" element={<VerifyEmail />} />
-        <Route path="add" element={<Additionality />} />
-        <Route
-          path="create-methodology"
-          element={<Navigate to="/" replace />}
-        />
-        <Route
-          // TODO: thould this route be moved to /credit-classes?
-          path="create-credit-class"
-          element={<CreateCreditClassInfo />}
-        />
-        <Route path="project-developers" element={<LandStewards />} />
-        <Route
-          path="methodology-review-process"
-          element={<Navigate to="/" replace />}
-        />
-        <Route path="projects" element={<Projects />}>
-          <Route index element={<Navigate to="1" />} />
-          <Route
-            path=":page"
-            element={<AllProjects />}
-            loader={projectsLoader({
-              queryClient: reactQueryClient,
-            })}
-          />
-          <Route path="prefinance" element={<PrefinanceProjects />} />
-        </Route>
-        <Route path="project">
-          <Route
-            path=":projectId"
-            element={<Project />}
-            loader={projectDetailsLoader({
-              queryClient: reactQueryClient,
-              apolloClientFactory,
-            })}
-          ></Route>
-        </Route>
-        <Route
-          path="project/:projectId/buy"
-          element={<BuyCredits />}
-          loader={buyCreditsLoader({
-            queryClient: reactQueryClient,
-            apolloClientFactory,
-            address,
-            languageCode,
-          })}
-        />
-        <Route
-          path="post/:iri"
-          element={<Post />}
-          // TODO
-          // loader={postLoader({
-          //   queryClient: reactQueryClient,
-          //   apolloClientFactory,
-          // })}
-        />
-        <Route
-          path="dashboard"
-          element={<KeplrOrAuthRoute component={Dashboard} />}
-        >
+    <>
+      {/* Main routes WITH header/footer */}
+      <Route
+        element={<RegistryLayout />}
+        loader={registryLayoutLoader({
+          queryClient: reactQueryClient,
+          apolloClientFactory,
+          languageCode,
+        })}
+      >
+        <Route path="/" element={<Outlet />} errorElement={<ErrorPage />}>
           <Route
             index
-            element={<Navigate to={address ? 'portfolio' : 'projects'} />}
+            element={<Home />}
+            loader={homeLoader({
+              queryClient: reactQueryClient,
+            })}
+          />
+          <Route path="verify-email" element={<VerifyEmail />} />
+          <Route path="add" element={<Additionality />} />
+          <Route
+            path="create-methodology"
+            element={<Navigate to="/" replace />}
           />
           <Route
-            path="portfolio"
-            element={<KeplrRoute component={MyEcocredits} />}
+            // TODO: thould this route be moved to /credit-classes?
+            path="create-credit-class"
+            element={<CreateCreditClassInfo />}
           />
+          <Route path="project-developers" element={<LandStewards />} />
           <Route
-            path="projects"
-            element={<KeplrOrAuthRoute component={MyProjects} />}
+            path="methodology-review-process"
+            element={<Navigate to="/" replace />}
           />
-          <Route
-            path="credit-classes"
-            element={<KeplrRoute component={MyCreditClasses} />}
-          />
-          <Route
-            path="credit-batches"
-            element={<KeplrRoute component={MyCreditBatches} />}
-          />
-          <Route path="bridge" element={<KeplrRoute component={MyBridge} />}>
-            <Route index element={<MyBridgableEcocreditsTable />} />
-            <Route path="bridgable" element={<MyBridgableEcocreditsTable />} />
-            <Route path="bridged" element={<MyBridgedEcocreditsTable />} />
+          <Route path="projects" element={<Projects />}>
+            <Route index element={<Navigate to="1" />} />
+            <Route
+              path=":page"
+              element={<AllProjects />}
+              loader={projectsLoader({
+                queryClient: reactQueryClient,
+              })}
+            />
+            <Route path="prefinance" element={<PrefinanceProjects />} />
           </Route>
-        </Route>
-        <Route
-          path="profiles/:accountAddressOrId"
-          element={<EcocreditsByAccount />}
-        >
-          <Route index element={<Navigate to="portfolio" />} />
-          <Route path="portfolio" element={<PortfolioTab />} />
-          <Route path="projects" element={<ProjectsTab />} />
-          <Route path="credit-classes" element={<CreditClassTab />} />
-          <Route path="credit-batches" element={<CreditBatchesTab />} />
-        </Route>
-        <Route
-          path="ecocredit-batches/:page"
-          element={<EcocreditBatches />}
-          loader={ecocreditBatchesLoader({
-            queryClient: reactQueryClient,
-          })}
-        />
-        <Route
-          path="ecocredits/create-batch"
-          element={<KeplrRoute component={CreateBatch} />}
-        />
-        <Route path="baskets/:basketDenom" element={<BasketDetails />} />
-        <Route
-          path="credit-batches/:batchDenom"
-          element={<BatchDetails />}
-          loader={batchDetailsLoader({
-            reactQueryClient,
-            rpcQueryClient,
-            languageCode,
-          })}
-        />
-        <Route path="project-pages">
-          <Route path=":projectId" element={<ProjectCreate />}>
+          <Route path="project">
             <Route
-              path="choose-credit-class"
-              element={<KeplrRoute component={ChooseCreditClassPage} />}
-            />
-            <Route
-              path="basic-info"
-              element={<AuthRoute component={BasicInfo} />}
-            />
-            <Route
-              path="location"
-              element={<AuthRoute component={ProjectLocation} />}
-            />
-            <Route
-              path="description"
-              element={<AuthRoute component={Description} />}
-            />
-            <Route path="media" element={<AuthRoute component={Media} />} />
-            <Route
-              path="metadata"
-              element={<KeplrRoute component={ProjectMetadata} />}
-            />
-            <Route path="roles" element={<AuthRoute component={Roles} />} />
-            <Route
-              path="review"
-              element={<AuthRoute component={ProjectReview} />}
-            />
-            <Route
-              path="finished"
-              element={<AuthRoute component={ProjectFinished} />}
-            />
-            <Route path="edit" element={<AuthRoute component={ProjectEdit} />}>
+              path=":projectId"
+              element={<Project />}
+              loader={projectDetailsLoader({
+                queryClient: reactQueryClient,
+                apolloClientFactory,
+              })}
+            ></Route>
+          </Route>
+          <Route
+            path="project/:projectId/buy"
+            element={<BuyCredits />}
+            loader={buyCreditsLoader({
+              queryClient: reactQueryClient,
+              apolloClientFactory,
+              address,
+              languageCode,
+            })}
+          />
+          <Route
+            path="post/:iri"
+            element={<Post />}
+            // TODO
+            // loader={postLoader({
+            //   queryClient: reactQueryClient,
+            //   apolloClientFactory,
+            // })}
+          />
+          <Route
+            path="profiles/:accountAddressOrId"
+            element={<EcocreditsByAccount />}
+          >
+            <Route index element={<Navigate to="portfolio" />} />
+            <Route path="portfolio" element={<PortfolioTab />} />
+            <Route path="projects" element={<ProjectsTab />} />
+            <Route path="credit-classes" element={<CreditClassTab />} />
+            <Route path="credit-batches" element={<CreditBatchesTab />} />
+          </Route>
+          <Route
+            path="ecocredit-batches/:page"
+            element={<EcocreditBatches />}
+            loader={ecocreditBatchesLoader({
+              queryClient: reactQueryClient,
+            })}
+          />
+          <Route
+            path="ecocredits/create-batch"
+            element={<KeplrRoute component={CreateBatch} />}
+          />
+          <Route path="baskets/:basketDenom" element={<BasketDetails />} />
+          <Route
+            path="credit-batches/:batchDenom"
+            element={<BatchDetails />}
+            loader={batchDetailsLoader({
+              reactQueryClient,
+              rpcQueryClient,
+              languageCode,
+            })}
+          />
+          <Route path="project-pages">
+            <Route path=":projectId" element={<ProjectCreate />}>
+              <Route
+                path="choose-credit-class"
+                element={<KeplrRoute component={ChooseCreditClassPage} />}
+              />
               <Route
                 path="basic-info"
                 element={<AuthRoute component={BasicInfo} />}
@@ -334,76 +279,144 @@ export const getRegenRoutes = ({
                 element={<AuthRoute component={Description} />}
               />
               <Route path="media" element={<AuthRoute component={Media} />} />
-              <Route path="roles" element={<AuthRoute component={Roles} />} />
               <Route
                 path="metadata"
                 element={<KeplrRoute component={ProjectMetadata} />}
               />
+              <Route path="roles" element={<AuthRoute component={Roles} />} />
               <Route
-                path="settings"
-                element={<AuthRoute component={Settings} />}
+                path="review"
+                element={<AuthRoute component={ProjectReview} />}
               />
+              <Route
+                path="finished"
+                element={<AuthRoute component={ProjectFinished} />}
+              />
+              <Route
+                path="edit"
+                element={<AuthRoute component={ProjectEdit} />}
+              >
+                <Route
+                  path="basic-info"
+                  element={<AuthRoute component={BasicInfo} />}
+                />
+                <Route
+                  path="location"
+                  element={<AuthRoute component={ProjectLocation} />}
+                />
+                <Route
+                  path="description"
+                  element={<AuthRoute component={Description} />}
+                />
+                <Route path="media" element={<AuthRoute component={Media} />} />
+                <Route path="roles" element={<AuthRoute component={Roles} />} />
+                <Route
+                  path="metadata"
+                  element={<KeplrRoute component={ProjectMetadata} />}
+                />
+                <Route
+                  path="settings"
+                  element={<AuthRoute component={Settings} />}
+                />
+              </Route>
             </Route>
           </Route>
-        </Route>
-        <Route
-          path="methodologies/:methodologyId"
-          element={<MethodologyDetails />}
-        />
-        <Route path="credit-classes">
-          {/* TODO: Index route is same as /create-credit-class for now */}
-          <Route index element={<CreateCreditClassInfo />} />
-          <Route path=":creditClassId/*">
+          <Route
+            path="methodologies/:methodologyId"
+            element={<MethodologyDetails />}
+          />
+          <Route path="credit-classes">
+            {/* TODO: Index route is same as /create-credit-class for now */}
+            <Route index element={<CreateCreditClassInfo />} />
+            <Route path=":creditClassId/*">
+              <Route
+                index
+                element={<CreditClassDetails isLandSteward={true} />}
+              />
+              <Route
+                path="buyer"
+                element={<CreditClassDetails isLandSteward={false} />}
+              />
+              <Route
+                path="land-steward"
+                element={<CreditClassDetails isLandSteward={true} />}
+              />
+            </Route>
             <Route
-              index
-              element={<CreditClassDetails isLandSteward={true} />}
-            />
-            <Route
-              path="buyer"
-              element={<CreditClassDetails isLandSteward={false} />}
-            />
-            <Route
-              path="land-steward"
-              element={<CreditClassDetails isLandSteward={true} />}
+              path="create"
+              element={<KeplrRoute component={CreateCreditClass} />}
             />
           </Route>
+          <Route path="stats/activity" element={<Activity />} />
           <Route
-            path="create"
-            element={<KeplrRoute component={CreateCreditClass} />}
+            path="storefront"
+            element={<Storefront />}
+            loader={storefrontLoader({
+              queryClient: reactQueryClient,
+            })}
           />
+          <Route path="certificate/:id" element={<CertificatePage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
-        <Route path="stats/activity" element={<Activity />} />
+        <Route path="connect-wallet" element={<ConnectWalletPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="faucet" element={<Faucet />} />
+      </Route>
+
+      {/* Dashboard routes WITHOUT header/footer */}
+      <Route
+        path="dashboard"
+        element={<KeplrOrAuthRoute component={ProfileEdit} />}
+        errorElement={<ErrorPage />}
+      >
         <Route
-          path="storefront"
-          element={<Storefront />}
-          loader={storefrontLoader({
-            queryClient: reactQueryClient,
-          })}
+          index
+          element={<Navigate to={address ? 'portfolio' : 'projects'} />}
         />
-        <Route path="certificate/:id" element={<CertificatePage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-      <Route path="dashboard">
-        <Route path="admin" element={<ProfileEdit />}>
-          <Route
-            path="profile"
-            element={<AuthRoute component={ProfileEditMain} />}
-          />
-          <Route
-            path="settings"
-            element={<AuthRoute component={ProfileEditSettings} />}
-          />
-          <Route
-            path="my-orders"
-            element={<KeplrOrAuthRoute component={Orders} />}
-          />
-          <Route path="sell" element={<AuthRoute component={Sell} />} />
+        {/* Dashboard sections */}
+        <Route
+          path="portfolio"
+          element={<KeplrRoute component={MyEcocredits} />}
+        />
+        <Route
+          path="portfolio/bridge"
+          element={<KeplrRoute component={MyBridge} />}
+        >
+          <Route index element={<MyBridgableEcocreditsTable />} />
+          <Route path="bridgable" element={<MyBridgableEcocreditsTable />} />
+          <Route path="bridged" element={<MyBridgedEcocreditsTable />} />
         </Route>
+        <Route
+          path="projects"
+          element={<KeplrOrAuthRoute component={MyProjects} />}
+        />
+        <Route
+          path="credit-classes"
+          element={<KeplrRoute component={MyCreditClasses} />}
+        />
+        <Route
+          path="credit-batches"
+          element={<KeplrRoute component={MyCreditBatches} />}
+        />
+        {/* Profile sections */}
+        <Route
+          path="profile"
+          element={<AuthRoute component={ProfileEditMain} />}
+        />
+        <Route
+          path="settings"
+          element={<AuthRoute component={ProfileEditSettings} />}
+        />
+        <Route
+          path="my-orders"
+          element={<KeplrOrAuthRoute component={Orders} />}
+        />
+        <Route
+          path="seller"
+          element={<AuthRoute component={SellerSetupAccount} />}
+        />
       </Route>
-      <Route path="connect-wallet" element={<ConnectWalletPage />} />
-      <Route path="login" element={<LoginPage />} />
-      <Route path="faucet" element={<Faucet />} />
-    </Route>,
+    </>,
   );
 };
 

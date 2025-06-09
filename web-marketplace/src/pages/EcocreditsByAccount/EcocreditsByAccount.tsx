@@ -190,7 +190,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
             />
             <Box sx={{ backgroundColor: 'grey.50' }}>
               <Section sx={{ root: { pt: { xs: 15 } } }}>
-                <Box>
+                <div>
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-2">
                     <IconTabs
                       aria-label={_(msg`public profile tabs`)}
@@ -222,7 +222,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
                       )}
                     </div>
                   </div>
-                </Box>
+                </div>
                 <div className="pt-[30px] md:pt-[40px] pb-[85px] md:pb-[113px] w-full">
                   <Outlet />
                 </div>

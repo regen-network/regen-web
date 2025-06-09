@@ -47,6 +47,13 @@ import {
 // import { LanguageSwitcher } from './RegistryLayout.LanguageSwitcher';
 import { getAddress, getProfile } from './RegistryLayout.utils';
 
+const getProfileLink = (activeAccount: any, wallet: any): string => {
+  if (wallet?.address) return `/profiles/${wallet.address}`;
+  if (activeAccount?.id) return `/profiles/${activeAccount.id}`;
+
+  return '/profiles/';
+};
+
 const RegistryLayoutHeader: React.FC = () => {
   const { _ } = useLingui();
   const { pathname } = useLocation();
@@ -78,7 +85,7 @@ const RegistryLayoutHeader: React.FC = () => {
           account: activeAccount ?? accountByAddr,
           privActiveAccount,
           _,
-          profileLink: '/dashboard', // TODO APP-670 update to merged profile link
+          profileLink: getProfileLink(activeAccount, wallet),
           // TODO APP-670 should go /dashboard/admin/portfolio or /dashboard/admin/projects
           // APP-697 then to /dashboard/portfolio or /dashboard/projects
           dashboardLink: '/dashboard/admin/profile',
@@ -97,7 +104,7 @@ const RegistryLayoutHeader: React.FC = () => {
           finishOrgCreation: _(FINISH_ORG_CREATION),
         },
       }),
-    [pathname, activeAccount, accountByAddr, privActiveAccount, _],
+    [pathname, activeAccount, accountByAddr, privActiveAccount, wallet, _],
   );
 
   const defaultAvatar = getDefaultAvatar(activeAccount);

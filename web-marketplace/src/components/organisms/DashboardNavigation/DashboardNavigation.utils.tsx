@@ -82,7 +82,7 @@ const getUserSections = (
       {
         label: _(msg`My orders`),
         icon: <ShoppingBagIcon linearGradient />,
-        path: 'orders',
+        path: 'my-orders',
       },
     ],
   },

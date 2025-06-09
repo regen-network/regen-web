@@ -9,6 +9,8 @@ import { Subtitle } from 'web-components/src/components/typography/Subtitle';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+
 import useClickOutside from '../../../utils/hooks/useClickOutside';
 import { AccountSwitcherDropdown } from './DashboardNavigation.Dropdown';
 import { DashboardNavHeaderData } from './DashboardNavigation.types';
@@ -25,7 +27,8 @@ export const DashboardNavHeader = ({
   collapsed = false,
   onViewProfileClick,
 }: Props) => {
-  const { name, address, avatarSrc, type } = activeAccount;
+  const { name, address, image } = activeAccount;
+  const avatarSrc = image || getDefaultAvatar(activeAccount);
   const short = `${address.slice(0, 9)}…${address.slice(-6)}`;
   const canSwitch = accounts.length > 1;
 
@@ -33,11 +36,6 @@ export const DashboardNavHeader = ({
   const rootRef = useClickOutside<HTMLDivElement>(() => {
     if (open) setOpen(false);
   });
-
-  const profileHref =
-    type === 'org'
-      ? `/dashboard/org/${activeAccount.id}`
-      : '/dashboard/profile';
 
   return (
     <div
@@ -90,7 +88,9 @@ export const DashboardNavHeader = ({
           <button
             type="button"
             className="mt-[4px] mb-[4px] flex items-center gap-[4px] text-[12px] bg-transparent border-none p-0 text-left cursor-pointer group hover:text-sc-text-paragraph"
-            onClick={() => onViewProfileClick?.(profileHref)}
+            onClick={() =>
+              onViewProfileClick?.('/profiles/' + (address || activeAccount.id))
+            }
           >
             <Subtitle className="underline text-[12px] text-bc-neutral-400 group-hover:text-sc-text-paragraph transition-colors">
               <Trans>View public profile</Trans>

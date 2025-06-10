@@ -110,14 +110,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
     name: 'enableAutoRetire',
   });
   const availableAmount = availableAmountByBatch[batchDenom ?? ''];
-  console.log(
-    '🚀 ~ :113 ~ availableAmountByBatch:',
-    availableAmountByBatch,
-    batchDenom,
-    availableAmountByBatch[batchDenom ?? ''],
-    availableAmountByBatch[''],
-    availableAmount,
-  );
+
   const { setValue } = form;
   const onMaxClick = () =>
     setValue('amount', availableAmount, {
@@ -151,7 +144,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
         label={_(msg`Batch denom`)}
         options={options}
         emptyOptionText={_(EMPTY_OPTION_TEXT)}
-        disabled={options.length === 1}
+        disabled={!placeholderText && options.length === 1}
         sx={{ mb: 10.5 }}
         native={false}
         placeholderText={placeholderText}

@@ -774,6 +774,7 @@ msgstr "Tabla de ecocréditos puenteables"
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:4
 #: src/pages/Dashboard/Dashboard.constants.tsx:36
+#: src/pages/Dashboard/Dashboard.constants.tsx:36
 msgid "Bridge"
 msgstr "Puente"
 
@@ -1311,7 +1312,7 @@ msgstr "tabla de lotes de crédito"
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:243
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
 #: src/pages/Dashboard/Dashboard.constants.tsx:30
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:95
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:94
 msgid "Credit Batches"
 msgstr "Lotes de crédito"
 
@@ -1382,7 +1383,7 @@ msgstr "Clase de crédito: la estructura, procedimientos y requisitos para el re
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
 #: src/pages/Dashboard/Dashboard.constants.tsx:24
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:89
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:88
 #: src/pages/Home/Home.tsx:180
 msgid "Credit Classes"
 msgstr "Clases de crédito"
@@ -2355,6 +2356,7 @@ msgstr "Aprenda cómo"
 
 #: src/components/organisms/DetailsSection/DetailsSection.Credit.tsx:54
 #: src/components/organisms/MethodologyDocumentationSection.tsx:102
+#: src/pages/EcocreditsByAccount/CreditClassTab/CreditClassTab.constants.ts:4
 #: src/pages/Projects/PrefinanceProjects/PrefinanceProjects.tsx:85
 msgid "learn more"
 msgstr "Aprende más"
@@ -2512,23 +2514,15 @@ msgstr "Hacer que los archivos y los datos de ubicación sean privados"
 msgid "Make the location data private"
 msgstr "Hacer que los datos de ubicación sean privados"
 
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:138
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:137
 msgid "Manage Credit Batches"
 msgstr "Administrar lotes de crédito"
 
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:133
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:132
 msgid "Manage Credit Classes"
 msgstr "Administrar clases de crédito"
 
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:123
-msgid "Manage Portfolio"
-msgstr "Administrar cartera"
-
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:128
-msgid "Manage Projects"
-msgstr "Administrar proyectos"
-
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:31
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:41
 msgid "Manage credits"
 msgstr "Administrar créditos"
 
@@ -2536,9 +2530,17 @@ msgstr "Administrar créditos"
 msgid "Manage organization"
 msgstr "Gestionar la organización"
 
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:122
+msgid "Manage Portfolio"
+msgstr "Administrar cartera"
+
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:63
 msgid "Manage projects"
 msgstr "Gestionar proyectos"
+
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:127
+msgid "Manage Projects"
+msgstr "Administrar proyectos"
 
 #: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:19
 msgid "Manage your Stripe account for fiat purchases"
@@ -3086,7 +3088,7 @@ msgstr "Por favor espere mientras se procesa la transacción"
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:44
 #: src/pages/Dashboard/Dashboard.constants.tsx:12
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:76
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:75
 msgid "Portfolio"
 msgstr "Cartera"
 
@@ -3452,7 +3454,7 @@ msgstr "PROYECTADO:"
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
 #: src/pages/Dashboard/Dashboard.constants.tsx:18
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:83
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:82
 msgid "Projects"
 msgstr "Proyectos"
 
@@ -3472,7 +3474,7 @@ msgstr "Pestañas de proyectos"
 msgid "Public profile"
 msgstr "Perfil público"
 
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:164
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:196
 msgid "public profile tabs"
 msgstr "pestañas de perfil público"
 

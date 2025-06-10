@@ -4,8 +4,6 @@ import { useCreditClasses } from 'pages/Home/hooks/useCreditClasses';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
-import { createCreditClassFromMetadata } from '../CreditClassTab/utilis/createCreditClassFromMetadata';
-
 export const useMergedCreditClasses = (adminId?: string) => {
   const {
     creditClasses: adminClasses,
@@ -39,7 +37,6 @@ export const useMergedCreditClasses = (adminId?: string) => {
     return map;
   }, [classesMissingSanityData, classesMetadata]);
 
-  // Helper function to determine if sanity class has content
   const hasSanityContent = (sanityClass: any) =>
     sanityClass?.shortDescriptionRaw || sanityClass?.descriptionRaw;
 
@@ -51,17 +48,22 @@ export const useMergedCreditClasses = (adminId?: string) => {
         sc => sc.path === adminClass.id,
       );
 
-      // Use sanity class if it has content, otherwise create from metadata
       if (matchingSanityClass && hasSanityContent(matchingSanityClass)) {
         return matchingSanityClass;
       }
-
       const metadata = metadataByClassId.get(adminClass.id);
-      return createCreditClassFromMetadata(adminClass, metadata);
+
+      return {
+        path: adminClass.id,
+        id: adminClass.id,
+        name: adminClass.name,
+        description: metadata?.['schema:description'],
+        imageSrc: adminClass.imgSrc,
+        isMetadataOnly: true,
+      };
     });
   }, [adminClasses, sanityCreditClasses, metadataByClassId]);
 
-  // Create aligned programs array
   const alignedPrograms = useMemo(() => {
     if (!mergedCreditClasses?.length) return [];
 

@@ -35,11 +35,7 @@ export const AccountSwitcherDropdown = ({
                 : 'bg-bc-neutral-100 hover:bg-bc-neutral-200',
             )}
           >
-            <UserAvatar
-              src={account.avatarSrc}
-              size="small"
-              alt={account.name}
-            />
+            <UserAvatar src={account.image} size="small" alt={account.name} />
             <Body
               size="sm"
               className="ml-3 mr-auto truncate text-left text-bc-neutral-700 font-bold"

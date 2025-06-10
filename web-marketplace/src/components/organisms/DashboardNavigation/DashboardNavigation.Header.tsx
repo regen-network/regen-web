@@ -28,7 +28,15 @@ export const DashboardNavHeader = ({
   onViewProfileClick,
 }: Props) => {
   const { name, address, image } = activeAccount;
-  const avatarSrc = image || getDefaultAvatar(activeAccount);
+  const avatarSrc =
+    image ||
+    getDefaultAvatar({
+      ...activeAccount,
+      type:
+        activeAccount.type === 'user'
+          ? (window as any).AccountType?.User || 'USER'
+          : (window as any).AccountType?.Org || 'ORG',
+    });
   const short = `${address.slice(0, 9)}…${address.slice(-6)}`;
   const canSwitch = accounts.length > 1;
 

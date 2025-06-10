@@ -30,11 +30,11 @@ export interface DashboardNavigationSection {
 export interface DashboardNavigationProps {
   header: DashboardNavHeaderData;
   currentPath: string;
-  className?: string;
   onNavItemClick: (path: string) => void;
   onLogout?: () => void;
   onCloseMobile?: () => void;
   onExitClick?: () => void;
+  isIssuer?: boolean; // Add this prop
 }
 
 export interface NavigationListItemProps {

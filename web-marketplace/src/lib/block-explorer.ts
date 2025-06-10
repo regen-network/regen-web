@@ -3,6 +3,7 @@ export const explorer = import.meta.env.VITE_BLOCK_EXPLORER;
 const isMintscan = explorer?.includes('mintscan');
 const isAtomscan = explorer?.includes('atomscan');
 const isAneka = explorer?.includes('aneka');
+const isVitwit = explorer?.includes('upgrade.vitwit');
 
 export const getAccountUrl = (
   address: string | undefined | null,
@@ -18,6 +19,8 @@ export const getAccountUrl = (
     return `${explorer}/regen/account/${address}`;
   } else if (isAtomscan) {
     return `${explorer}/regen-network/accounts/${address}`;
+  } else if (isVitwit) {
+    return `${explorer}/regen-upgrade/account/${address}`;
   }
   return '';
 };
@@ -29,6 +32,8 @@ export const getBaseTransactionUrl = (): string => {
     return `${explorer}/regen/txs/`;
   } else if (isAtomscan) {
     return `${explorer}/regen-network/transactions/`;
+  } else if (isVitwit) {
+    return `${explorer}/regen-upgrade/tx/`;
   }
   return '';
 };

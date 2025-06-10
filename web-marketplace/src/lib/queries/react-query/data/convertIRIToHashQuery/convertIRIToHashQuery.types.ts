@@ -1,7 +1,7 @@
 import {
   ConvertIRIToHashRequest,
   ConvertIRIToHashResponse,
-} from '@regen-network/api/regen/data/v1/query';
+} from '@regen-network/api/regen/data/v2/query';
 import { QueryObserverOptions } from '@tanstack/react-query';
 
 import { QueryClient } from 'ledger';

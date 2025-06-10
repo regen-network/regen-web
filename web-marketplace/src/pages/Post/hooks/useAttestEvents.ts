@@ -7,7 +7,15 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { TxResponse } from '@regen-network/api/cosmos/base/abci/v1beta1/abci';
 import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';
-import { EventAttest } from '@regen-network/api/regen/data/v1/events';
+import {
+  MsgAnchor as MsgAnchorV1,
+  MsgAttest as MsgAttestV1,
+} from '@regen-network/api/regen/data/v1/tx';
+import { EventAttest } from '@regen-network/api/regen/data/v2/events';
+import {
+  MsgAnchor as MsgAnchorV2,
+  MsgAttest as MsgAttestV2,
+} from '@regen-network/api/regen/data/v2/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
@@ -59,23 +67,45 @@ export const useAttestEvents = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  const { data: anchorTxsEventData } = useQuery(
+  const { data: anchorV1TxsEventData } = useQuery(
     getGetTxsEventQuery({
       client: queryClient,
       enabled: !!queryClient && !onlyAttestEvents,
       request: {
-        events: [`${messageActionEquals}'/regen.data.v1.MsgAnchor'`],
+        events: [`${messageActionEquals}'${MsgAnchorV1.typeUrl}'`],
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
   );
 
-  const { data: attestTxsEventData } = useQuery(
+  const { data: anchorV2TxsEventData } = useQuery(
+    getGetTxsEventQuery({
+      client: queryClient,
+      enabled: !!queryClient && !onlyAttestEvents,
+      request: {
+        events: [`${messageActionEquals}'${MsgAnchorV2.typeUrl}'`],
+        orderBy: OrderBy.ORDER_BY_DESC,
+      },
+    }),
+  );
+
+  const { data: attestV1TxsEventData } = useQuery(
     getGetTxsEventQuery({
       client: queryClient,
       enabled: !!queryClient,
       request: {
-        events: [`${messageActionEquals}'/regen.data.v1.MsgAttest'`],
+        events: [`${messageActionEquals}'${MsgAttestV1.typeUrl}'`],
+        orderBy: OrderBy.ORDER_BY_DESC,
+      },
+    }),
+  );
+
+  const { data: attestV2TxsEventData } = useQuery(
+    getGetTxsEventQuery({
+      client: queryClient,
+      enabled: !!queryClient,
+      request: {
+        events: [`${messageActionEquals}'${MsgAttestV2.typeUrl}'`],
         orderBy: OrderBy.ORDER_BY_DESC,
       },
     }),
@@ -90,12 +120,16 @@ export const useAttestEvents = ({
       }[]
     | undefined;
   if (iri) {
-    anchorTx = anchorTxsEventData?.txResponses?.filter(txRes =>
-      txRes.rawLog.includes(iri),
-    )?.[0];
+    anchorTx = [
+      ...(anchorV1TxsEventData?.txResponses ?? []),
+      ...(anchorV2TxsEventData?.txResponses ?? []),
+    ].filter(txRes => txRes.rawLog.includes(iri))?.[0];
 
-    attestTxResponses = attestTxsEventData?.txResponses
-      ?.filter(txRes => txRes.rawLog.includes(iri))
+    attestTxResponses = [
+      ...(attestV1TxsEventData?.txResponses ?? []),
+      ...(attestV2TxsEventData?.txResponses ?? []),
+    ]
+      .filter(txRes => txRes.rawLog.includes(iri))
       ?.map(txRes => {
         const events = txRes.logs[0].events.filter(event => {
           return EventAttest.typeUrl.includes(event.type);

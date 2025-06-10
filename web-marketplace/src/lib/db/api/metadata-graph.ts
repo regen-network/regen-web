@@ -21,7 +21,7 @@ export const getMetadata = async ({
   let res;
   try {
     res = await fetch(
-      `${apiUri}/data/v1/metadata-graph/${iri}?languageCode=${languageCode}`,
+      `${apiUri}/data/v2/metadata-graph/${iri}?languageCode=${languageCode}`,
     );
     if (res.ok) {
       const data = await res.json();
@@ -35,7 +35,7 @@ export const getMetadata = async ({
   // (fetch API doesn't throw any error on 404)
   if (res.status === 404 && client) {
     try {
-      const resolversRes = await client.regen.data.v1.resolversByIRI({ iri });
+      const resolversRes = await client.regen.data.v2.resolversByIRI({ iri });
       const resolversLen = resolversRes.resolvers.length;
       for (let i = 0; i < resolversLen; i++) {
         const resolverUrl = resolversRes.resolvers[i].url;
@@ -63,7 +63,7 @@ export const getMetadata = async ({
  * Generate IRI
  */
 
-const iriUrl = '/data/v1/iri-gen';
+const iriUrl = '/data/v2/iri-gen';
 
 type IriSuccessProp = {
   iri: string;

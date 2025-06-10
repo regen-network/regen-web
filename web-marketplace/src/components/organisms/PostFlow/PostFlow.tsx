@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import { ContentHash_Graph } from '@regen-network/api/regen/data/v1/types';
+import { ContentHash_Graph } from '@regen-network/api/regen/data/v2/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { postData } from 'utils/fetch/postData';

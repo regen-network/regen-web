@@ -94,7 +94,7 @@ const RegistryLayoutHeader: React.FC = () => {
               : '/profiles/',
           // TODO APP-670 should go /dashboard/admin/portfolio or /dashboard/admin/projects
           // APP-697 then to /dashboard/portfolio or /dashboard/projects
-          dashboardLink: '/dashboard/admin/profile',
+          dashboardLink: '/dashboard',
         }),
         textContent: {
           signedInAs: _(SIGNED_IN_AS),

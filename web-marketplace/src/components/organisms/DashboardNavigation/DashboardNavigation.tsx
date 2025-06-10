@@ -24,19 +24,22 @@ export const DashboardNavigation = ({
   onLogout,
   onCloseMobile,
   onExitClick,
+  isIssuer = false, // Add this prop with default
 }: DashboardNavigationProps) => {
-  const { _ } = useLingui();
   const [collapsed, setCollapsed] = useState(false);
+  const { _ } = useLingui();
 
-  // Pass the translator function as the first parameter and include it in dependencies
-  const sections = useMemo(() => {
-    return getDashboardNavigationSections(
-      _,
-      activeAccount.type,
-      false,
-      collapsed,
-    );
-  }, [_, activeAccount.type, collapsed]);
+  const sections = useMemo(
+    () =>
+      getDashboardNavigationSections(
+        _,
+        activeAccount.type,
+        false, // loginDisabled
+        collapsed,
+        isIssuer, // Pass isIssuer to the utility function
+      ),
+    [_, activeAccount.type, collapsed, isIssuer], // Add isIssuer to dependencies
+  );
 
   const handleItemClick = (path: string) => {
     if (path === 'logout') {

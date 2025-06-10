@@ -145,6 +145,7 @@ export const ProfileEdit = () => {
               <DashboardNavigation
                 currentPath={pathname}
                 onNavItemClick={onNavClick}
+                isIssuer={isIssuer}
                 onLogout={() => {
                   setIsWarningModalOpen(undefined);
                   navigate('/logout');

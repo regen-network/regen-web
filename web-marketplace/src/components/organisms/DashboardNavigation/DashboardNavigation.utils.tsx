@@ -2,6 +2,8 @@ import type { ComponentType, ReactElement, SVGProps } from 'react';
 import { msg } from '@lingui/macro';
 
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
+import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';
+import { CreditClassIcon } from 'web-components/src/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
 import { LogOutIcon } from 'web-components/src/components/icons/LogOutIcon';
 import { MembersIcon } from 'web-components/src/components/icons/MembersIcon';
@@ -141,16 +143,46 @@ const getLogoutSection = (_: TranslatorType): DashboardNavigationSection => ({
   ],
 });
 
+const getCreditIssuanceSection = (
+  _: TranslatorType,
+  loginDisabled: boolean,
+  collapsed: boolean,
+): DashboardNavigationSection => ({
+  heading: collapsed ? _(msg`Issuance`) : _(msg`Credit issuance`),
+  items: [
+    {
+      label: _(msg`Issued credit batches`),
+      icon: <CreditBatchIcon linearGradient disabled={loginDisabled} />,
+      path: 'credit-batches',
+      disabled: loginDisabled,
+      disabledTooltipText: _(NOT_SUPPORTED_TOOLTIP_TEXT),
+    },
+    {
+      label: _(msg`Credit classes`),
+      icon: <CreditClassIcon linearGradient disabled={loginDisabled} />,
+      path: 'credit-classes',
+      disabled: loginDisabled,
+      disabledTooltipText: _(NOT_SUPPORTED_TOOLTIP_TEXT),
+    },
+  ],
+});
+
 export function getDashboardNavigationSections(
   _: TranslatorType,
   accountType: 'user' | 'org',
   loginDisabled = false,
   collapsed = false,
+  isIssuer = false, // Add this parameter
 ): DashboardNavigationSection[] {
   const sections = [
     getCreditsSection(_, loginDisabled, collapsed),
     getProjectsSection(_, loginDisabled, collapsed),
   ];
+
+  // Add credit issuance section if user is an issuer
+  if (isIssuer) {
+    sections.push(getCreditIssuanceSection(_, loginDisabled, collapsed));
+  }
 
   if (accountType === 'user') {
     sections.push(...getUserSections(_, loginDisabled));

@@ -6,36 +6,35 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { Metadata, Viewport } from 'next';
 
-import regenTheme from 'web-components/src/theme/muiTheme';
+// import regenTheme from 'web-components/src/theme/muiTheme';
 import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 
 import { LedgerProviderWithWallet } from 'ledger';
 import { AuthProvider } from 'lib/auth/auth';
-import { IS_TERRASOS } from 'lib/env';
+// import { IS_TERRASOS } from 'lib/env';
 import { WalletProvider } from 'lib/wallet/wallet';
 
-import { ScrollToTop } from 'components/atoms';
-import { PageViewTracking } from 'components/molecules/PageViewTracking';
-import { RegistryLayoutAccountSwitchModal } from 'components/organisms/RegistryLayout/RegistryLayout.AccountSwitchModal';
-import { RegistryLayoutAddWalletModalSwitchWarning } from 'components/organisms/RegistryLayout/RegistryLayout.AddWalletModalSwitchWarning';
-import { RegistryLayoutBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.Banner';
-import { RegistryLayoutChooseHowToPurchaseModal } from 'components/organisms/RegistryLayout/RegistryLayout.ChooseHowToPurchaseModal';
-import { RegistryLayoutConnectedEmailErrorModal } from 'components/organisms/RegistryLayout/RegistryLayout.ConnectedEmailErrorModal';
-import { RegistryLayoutConnectWalletModal } from 'components/organisms/RegistryLayout/RegistryLayout.ConnectWalletModal';
-import { RegistryLayoutCookiesTopBanner } from 'components/organisms/RegistryLayout/RegistryLayout.CookiesTopBanner';
-import { RegistryLayoutErrorBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.ErrorBanner';
-import { RegistryLayoutFooter } from 'components/organisms/RegistryLayout/RegistryLayout.Footer';
-import { RegistryLayoutHeader } from 'components/organisms/RegistryLayout/RegistryLayout.Header';
-import { RegistryLayoutProcessingModal } from 'components/organisms/RegistryLayout/RegistryLayout.ProcessingModal';
-import { RetryFailedFunctions } from 'components/organisms/RegistryLayout/RegistryLayout.RetryFailedFunctions';
-import { RegistryLayoutSwitchWalletModal } from 'components/organisms/RegistryLayout/RegistryLayout.SwitchWalletModal';
-import { RegistryLayoutTerrasosFooter } from 'components/organisms/RegistryLayout/RegistryLayout.TerrasosFooter';
-import { RegistryLayoutTxBuySuccessfulModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxBuySuccessfulModal';
-import { RegistryLayoutTxErrorModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxErrorModal';
-import { RegistryLayoutTxSuccessfulModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxSuccessfulModal';
-import { RegistryLayoutWarningBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.WarningBanner';
-import TerrasosHeader from 'components/organisms/TerrasosHeader';
-
+// import { ScrollToTop } from 'components/atoms';
+// import { PageViewTracking } from 'components/molecules/PageViewTracking';
+// import { RegistryLayoutAccountSwitchModal } from 'components/organisms/RegistryLayout/RegistryLayout.AccountSwitchModal';
+// import { RegistryLayoutAddWalletModalSwitchWarning } from 'components/organisms/RegistryLayout/RegistryLayout.AddWalletModalSwitchWarning';
+// import { RegistryLayoutBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.Banner';
+// import { RegistryLayoutChooseHowToPurchaseModal } from 'components/organisms/RegistryLayout/RegistryLayout.ChooseHowToPurchaseModal';
+// import { RegistryLayoutConnectedEmailErrorModal } from 'components/organisms/RegistryLayout/RegistryLayout.ConnectedEmailErrorModal';
+// import { RegistryLayoutConnectWalletModal } from 'components/organisms/RegistryLayout/RegistryLayout.ConnectWalletModal';
+// import { RegistryLayoutCookiesTopBanner } from 'components/organisms/RegistryLayout/RegistryLayout.CookiesTopBanner';
+// import { RegistryLayoutErrorBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.ErrorBanner';
+// import { RegistryLayoutFooter } from 'components/organisms/RegistryLayout/RegistryLayout.Footer';
+// import { RegistryLayoutHeader } from 'components/organisms/RegistryLayout/RegistryLayout.Header';
+// import { RegistryLayoutProcessingModal } from 'components/organisms/RegistryLayout/RegistryLayout.ProcessingModal';
+// import { RetryFailedFunctions } from 'components/organisms/RegistryLayout/RegistryLayout.RetryFailedFunctions';
+// import { RegistryLayoutSwitchWalletModal } from 'components/organisms/RegistryLayout/RegistryLayout.SwitchWalletModal';
+// import { RegistryLayoutTerrasosFooter } from 'components/organisms/RegistryLayout/RegistryLayout.TerrasosFooter';
+// import { RegistryLayoutTxBuySuccessfulModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxBuySuccessfulModal';
+// import { RegistryLayoutTxErrorModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxErrorModal';
+// import { RegistryLayoutTxSuccessfulModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxSuccessfulModal';
+// import { RegistryLayoutWarningBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.WarningBanner';
+// import TerrasosHeader from 'components/organisms/TerrasosHeader';
 import { AnalyticsWrapper } from './AnalyticsWrapper';
 import { ApolloWrapper } from './ApolloWrapper';
 import { getI18nInstance } from './appRouterI18n';
@@ -86,7 +85,7 @@ export const metadata: Metadata =
         icons: {
           icon: [
             { url: 'favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-            { url: 'favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+            // { url: 'favicon-32x32.png', sizes: '32x32', type: 'image/png' },
           ],
           shortcut: 'favicon.ico',
         },

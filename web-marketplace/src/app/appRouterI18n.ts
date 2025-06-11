@@ -39,6 +39,7 @@ export const allI18nInstances: AllI18nInstances = locales.reduce(
 
 export const getI18nInstance = (locale: SupportedLocales): I18n => {
   if (!allI18nInstances[locale]) {
+    // eslint-disable-next-line lingui/no-unlocalized-strings, no-console
     console.warn(`No i18n instance found for locale "${locale}"`);
   }
   return allI18nInstances[locale]! || allI18nInstances['en']!;

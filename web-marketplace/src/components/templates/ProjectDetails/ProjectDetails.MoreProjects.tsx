@@ -13,14 +13,13 @@ import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import useMoreProjects from './hooks/useMoreProjects';
 
-type Props = { skippedProjectId: string; projectAdmin?: Account };
+type Props = { skippedProjectId: string; projectAdmin: Account };
 
 export function MoreProjects({
   skippedProjectId,
   projectAdmin,
 }: Props): JSX.Element {
   const { _ } = useLingui();
-  console.log('more projects');
   const { projectsWithOrderData, loading } = useMoreProjects(
     skippedProjectId,
     projectAdmin,

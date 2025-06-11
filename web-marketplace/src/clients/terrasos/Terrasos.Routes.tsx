@@ -24,7 +24,6 @@ const AllProjects = safeLazy(
   () => import('../../legacy-pages/Projects/AllProjects'),
 );
 const ErrorPage = lazy(() => import('../../legacy-pages/ErrorPage'));
-const Project = safeLazy(() => import('../../legacy-pages/Project'));
 const Projects = safeLazy(() => import('../../legacy-pages/Projects'));
 
 type RouterProps = {

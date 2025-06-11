@@ -15,7 +15,7 @@ export default function useMoreProjects(
     showOffChainProjects: true,
     projectAdmin,
     showCommunityProjects: true,
-    // sort: 'admin',
+    sort: 'admin',
   });
   return { projectsWithOrderData, loading };
 }

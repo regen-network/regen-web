@@ -1,8 +1,5 @@
 'use client';
 
-import { ApolloNextAppProvider } from '@apollo/client-integration-nextjs';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-
 import {
   ApolloLink,
   DefaultOptions,
@@ -13,8 +10,12 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
-import { ApolloClient, InMemoryCache } from '@apollo/client-integration-nextjs';
-import { QueryClient } from '@tanstack/react-query';
+import {
+  ApolloClient,
+  ApolloNextAppProvider,
+  InMemoryCache,
+} from '@apollo/client-integration-nextjs';
+import { QueryClient, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { apiUri, indexerApiUri } from 'lib/apiUri';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';

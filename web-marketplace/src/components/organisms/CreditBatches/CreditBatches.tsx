@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import cx from 'clsx';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import Link from 'next/link';
-import { tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import NoEcocreditsIcon from 'web-components/src/components/icons/NoEcocreditsIcon';

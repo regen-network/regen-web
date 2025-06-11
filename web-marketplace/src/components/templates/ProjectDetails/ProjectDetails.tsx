@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { Box, CircularProgress, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
@@ -65,7 +65,6 @@ import { ProjectDetailsBannerCard } from './ProjectDetails.BannerCard';
 import { JURISDICTION_REGEX } from './ProjectDetails.constant';
 import { DataStream } from './ProjectDetails.DataStream';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
-import { MoreProjects } from './ProjectDetails.MoreProjects';
 import { ProjectDetailsStakeholders } from './ProjectDetails.Stakeholders';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
@@ -77,9 +76,12 @@ import {
 } from './ProjectDetails.utils';
 import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
 
-// const MoreProjects = dynamic(() => import('./ProjectDetails.MoreProjects'), {
-//   loading: () => <CircularProgress color="secondary" />,
-// });
+const MoreProjects = dynamic(
+  () => import('./ProjectDetails.MoreProjects').then(mod => mod.MoreProjects),
+  {
+    loading: () => <CircularProgress color="secondary" />,
+  },
+);
 
 function ProjectDetails(): JSX.Element {
   const { _ } = useLingui();
@@ -200,7 +202,7 @@ function ProjectDetails(): JSX.Element {
     managementActions,
     projectDocs,
     creditClass,
-    creditClassName,
+    // creditClassName,
     creditClassVersion,
   } = parseOffChainProject(offChainProject as Maybe<Project>);
 
@@ -540,7 +542,7 @@ function ProjectDetails(): JSX.Element {
 
       {managementActions && <ManagementActions actions={managementActions} />}
 
-      {onChainOrOffChainProjectId && (
+      {onChainOrOffChainProjectId && admin && (
         <MoreProjects
           skippedProjectId={onChainOrOffChainProjectId}
           projectAdmin={admin}

@@ -99,7 +99,6 @@ const Post = safeLazy(() => import('../../legacy-pages/Post'));
 const PrefinanceProjects = safeLazy(
   () => import('../../legacy-pages/Projects/PrefinanceProjects'),
 );
-const Project = safeLazy(() => import('../../legacy-pages/Project'));
 const Projects = safeLazy(() => import('../../legacy-pages/Projects'));
 const ProjectCreate = safeLazy(
   () => import('../../legacy-pages/ProjectCreate'),

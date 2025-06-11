@@ -199,7 +199,6 @@ export function useProjectsWithOrders({
       sanityProjectsData,
       adminId,
       limitOffChainProjects,
-      random,
       skippedProjectId,
     });
 

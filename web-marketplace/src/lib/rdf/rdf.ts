@@ -1,4 +1,3 @@
-import { i18n } from '@lingui/core';
 import { msg, plural } from '@lingui/core/macro';
 import Parser from '@rdfjs/parser-jsonld';
 import factory from 'rdf-ext';

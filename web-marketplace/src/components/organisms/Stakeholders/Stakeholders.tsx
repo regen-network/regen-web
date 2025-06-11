@@ -48,7 +48,7 @@ export const Stakeholders = ({ stakeholders, className }: Props) => {
   return (
     <>
       {hasStakeholders && (
-        <Section className={cn('pt-0 mb-[80px] sm:mb-[100px]', className)}>
+        <Section className={cn('pt-0 !mb-[80px] sm:!mb-[100px]', className)}>
           <div className="flex flex-col">
             <Title variant="h2" py={3} className="mb-30 sm:mb-50 py-0">
               {_(msg`Stakeholders`)}

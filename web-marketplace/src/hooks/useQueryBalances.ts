@@ -1,7 +1,4 @@
-import {
-  QueryBalancesRequest,
-  QueryBalancesResponse,
-} from '@regen-network/api/regen/ecocredit/v1/query';
+import { QueryBalancesResponse } from '@regen-network/api/regen/ecocredit/v1/query';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 
 import { useLedger } from '../ledger';

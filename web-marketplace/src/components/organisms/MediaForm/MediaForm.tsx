@@ -72,7 +72,8 @@ export const MediaForm = ({
           const filteredData = {
             'regen:previewPhoto': data['regen:previewPhoto'],
             'regen:galleryPhotos': data['regen:galleryPhotos']?.filter(
-              photo => photo['schema:url'] !== DEFAULT,
+              (photo: MediaFormSchemaType['regen:galleryPhotos'][0]) =>
+                photo['schema:url'] !== DEFAULT,
             ),
             'regen:storyMedia': data?.['regen:storyMedia'],
           };

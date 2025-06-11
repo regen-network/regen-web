@@ -7,11 +7,8 @@ import { getClient, getSanityClient } from 'app/ApolloClient';
 import { getRPCQueryClient } from 'app/makeRPCQueryClient';
 import { redirect } from 'next/navigation';
 
-import { apiUri } from 'lib/apiUri';
-import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
-import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByIdQuery as getOffChainProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
@@ -26,7 +23,7 @@ import {
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 interface ProjectPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {

@@ -36,11 +36,13 @@ const BannerCard = ({
         className="cursor-pointer absolute top-5 right-5"
         onClick={onClose}
       />
-      <img
-        className="w-50 h-50 sm:w-[80px] sm:h-[80px]"
-        src={image.src}
-        alt={image.alt}
-      />
+      {image.src && (
+        <img
+          className="w-50 h-50 sm:w-[80px] sm:h-[80px]"
+          src={image.src}
+          alt={image.alt}
+        />
+      )}
       <div className="pl-20 sm:pl-30">
         <Title variant="h6">{title}</Title>
         <Body className="pt-5 pb-10 sm:pt-[8px] sm:pb-20" component="div">

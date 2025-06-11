@@ -2,7 +2,7 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import type { MapRef } from 'react-map-gl';
 import { CircularProgress, useMediaQuery, useTheme } from '@mui/material';
 import bbox from '@turf/bbox';
-import { Point } from 'geojson';
+import type { FeatureCollection, Point } from 'geojson';
 import dynamic from 'next/dynamic';
 import { VideoIcon } from 'web-components/src/components/icons/VideoIcon';
 
@@ -89,15 +89,13 @@ const PostFilesPublic = ({
     [files],
   );
 
-  const locations = {
-    type: 'FeatureCollection' as const,
-    features: Object.values(groupByLocation)
-      .filter(groupedFiles => !!groupedFiles[0].location)
-      .map(files => ({
-        type: 'Feature' as const,
-        geometry: files[0].location!,
-        properties: [],
-      })),
+  const locations: FeatureCollection = {
+    type: 'FeatureCollection',
+    features: Object.values(groupByLocation).map(files => ({
+      type: 'Feature',
+      geometry: files[0].location as Point,
+      properties: [],
+    })),
   };
 
   const onLoad = (): void => {

@@ -1,8 +1,8 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
-import { Box, Skeleton, useTheme } from '@mui/material';
+import { Box, CircularProgress, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
 import { useAtom, useSetAtom } from 'jotai';
@@ -10,12 +10,12 @@ import { buyFromProjectIdAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
 import { CREATE_POST_DISABLED_TOOLTIP_TEXT } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 import { SOLD_OUT_TOOLTIP } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
 import { getPriceToDisplay } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
+import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
-import SEO from 'web-components/src/components/seo';
 import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
@@ -59,14 +59,13 @@ import { GettingStartedResourcesSection } from '../../molecules';
 import { ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';
 import { useGetProject } from './hooks/useGetProject';
-import { useNavigateToSlug } from './hooks/useNavigateToSlug';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { useStakeholders } from './hooks/useStakeholders';
 import { ProjectDetailsBannerCard } from './ProjectDetails.BannerCard';
 import { JURISDICTION_REGEX } from './ProjectDetails.constant';
 import { DataStream } from './ProjectDetails.DataStream';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
-import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
+import { MoreProjects } from './ProjectDetails.MoreProjects';
 import { ProjectDetailsStakeholders } from './ProjectDetails.Stakeholders';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
@@ -77,6 +76,10 @@ import {
   parseOffChainProject,
 } from './ProjectDetails.utils';
 import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
+
+// const MoreProjects = dynamic(() => import('./ProjectDetails.MoreProjects'), {
+//   loading: () => <CircularProgress color="secondary" />,
+// });
 
 function ProjectDetails(): JSX.Element {
   const { _ } = useLingui();
@@ -149,7 +152,6 @@ function ProjectDetails(): JSX.Element {
     loadingDb,
   } = useGetProject({ projectId });
 
-  useNavigateToSlug(slug);
   const onBuyButtonClick = useOnBuyButtonClick();
 
   // TODO
@@ -538,12 +540,12 @@ function ProjectDetails(): JSX.Element {
 
       {managementActions && <ManagementActions actions={managementActions} />}
 
-      {/* {onChainOrOffChainProjectId && (
+      {onChainOrOffChainProjectId && (
         <MoreProjects
           skippedProjectId={onChainOrOffChainProjectId}
           projectAdmin={admin}
         />
-      )} */}
+      )}
 
       {gettingStartedResourcesSection && IS_REGEN && (
         <div

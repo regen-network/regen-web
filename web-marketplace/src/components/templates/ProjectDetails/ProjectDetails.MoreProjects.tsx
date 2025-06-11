@@ -20,6 +20,7 @@ export function MoreProjects({
   projectAdmin,
 }: Props): JSX.Element {
   const { _ } = useLingui();
+  console.log('more projects');
   const { projectsWithOrderData, loading } = useMoreProjects(
     skippedProjectId,
     projectAdmin,

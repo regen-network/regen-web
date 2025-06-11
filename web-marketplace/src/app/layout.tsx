@@ -3,6 +3,7 @@
 import { setI18n } from '@lingui/react/server';
 // import { ThemeProvider } from '@mui/material/styles';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { Metadata, Viewport } from 'next';
 
 import regenTheme from 'web-components/src/theme/muiTheme';
@@ -132,6 +133,9 @@ export default async function RootLayout({
         <AppRouterCacheProvider>
           <QueryClientWrapper>
             <ApolloWrapper>
+              <div className="print:hidden">
+                <ReactQueryDevtools initialIsOpen={false} />
+              </div>
               <LinguiClientProvider
                 initialLocale={'en'}
                 initialMessages={i18n.messages}

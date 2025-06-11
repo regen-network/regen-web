@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-// import { Marker } from 'react-map-gl';
 import { CircularProgress } from '@mui/material';
 import bbox from '@turf/bbox';
 import { FeatureCollection } from 'geojson';

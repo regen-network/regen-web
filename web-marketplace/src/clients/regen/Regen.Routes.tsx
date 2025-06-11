@@ -47,7 +47,6 @@ import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { registryLayoutLoader } from 'components/organisms/RegistryLayout/RegistryLayout.loader';
-import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
 import { KeplrRoute } from '../../components/atoms';
 import { ProjectMetadata } from '../../legacy-pages/ProjectMetadata/ProjectMetadata';
@@ -215,16 +214,6 @@ export const getRegenRoutes = ({
           />
           <Route path="prefinance" element={<PrefinanceProjects />} />
         </Route>
-        {/* <Route path="project-legacy">
-          <Route
-            path=":projectId"
-            element={<Project />}
-            loader={projectDetailsLoader({
-              queryClient: reactQueryClient,
-              apolloClientFactory,
-            })}
-          ></Route>
-        </Route>*/}
         <Route
           path="project/:projectId/buy"
           element={<BuyCredits />}

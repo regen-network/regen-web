@@ -15,8 +15,6 @@ export const getCsrfTokenQuery = ({
       method: 'GET',
       credentials: 'include',
     });
-    const cookie = resp.headers.get('set-cookie');
-    console.log('cookie', cookie);
     const { token } = await resp.json();
     return token;
   },

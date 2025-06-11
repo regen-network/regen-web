@@ -19,7 +19,6 @@ import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 
 import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
-import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
 const AllProjects = safeLazy(
   () => import('../../legacy-pages/Projects/AllProjects'),
@@ -77,14 +76,6 @@ export const getTerrasosRoutes = ({
             })}
           />
         </Route>
-        <Route
-          path="project/:projectId"
-          element={<Project />}
-          loader={projectDetailsLoader({
-            queryClient: reactQueryClient,
-            apolloClientFactory,
-          })}
-        />
       </Route>
     </Route>,
   );

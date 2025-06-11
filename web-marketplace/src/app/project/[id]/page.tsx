@@ -1,22 +1,23 @@
-import { HttpLink } from '@apollo/client';
-import {
-  ApolloClient,
-  InMemoryCache,
-  registerApolloClient,
-} from '@apollo/client-integration-nextjs';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { makeClient } from 'app/makeApolloClient';
+import { getClient, getSanityClient } from 'app/ApolloClient';
+import { getRPCQueryClient } from 'app/makeRPCQueryClient';
+import { redirect } from 'next/navigation';
 
 import { apiUri } from 'lib/apiUri';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
+import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getProjectByIdQuery as getOffChainProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
+import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
+import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 
 import { ProjectDetails } from 'components/templates/ProjectDetails';
 import {
@@ -28,79 +29,97 @@ interface ProjectPageProps {
   params: { id: string };
 }
 
-export async function makeServerClient() {
-  const resp = await fetch(`${apiUri}/marketplace/v1/csrfToken`, {
-    method: 'GET',
-    credentials: 'include',
-  });
-  const csrfCookie = resp.headers.get('set-cookie');
-  const { token: csrfToken } = await resp.json();
-
-  const httpLink = new HttpLink({
-    uri: `${apiUri}/marketplace/v1/graphql`,
-    headers: {
-      'X-CSRF-TOKEN': csrfToken,
-      Cookie: csrfCookie ?? '', // pass along the CSRF cookie manually
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include', // required if your backend checks for cookie presence
-    fetch,
-  });
-
-  return new ApolloClient({
-    link: httpLink,
-    cache: new InMemoryCache(),
-    defaultOptions: {
-      watchQuery: {
-        fetchPolicy: 'no-cache',
-        errorPolicy: 'ignore',
-      },
-      query: {
-        fetchPolicy: 'no-cache',
-        errorPolicy: 'all',
-      },
-    },
-  });
-}
-
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { id } = await params;
   const isOnChainId = getIsOnChainId(id);
   const isOffChainUuid = getIsUuid(id);
 
   const queryClient = new QueryClient();
-  const apolloClient = await makeServerClient();
+  const apolloClient = await getClient();
+  const sanityClient = await getSanityClient();
+  const rpcQueryClient = await getRPCQueryClient();
 
-  // if (isOnChainId) {
-  //   await queryClient.prefetchQuery(
-  //     getProjectByOnChainIdQuery({
-  //       client: apolloClient,
-  //       onChainId: id,
-  //       languageCode: 'en',
-  //     }),
-  //   );
-  // } else if (isOffChainUuid)
-  //   await queryClient.prefetchQuery(
-  //     getOffChainProjectByIdQuery({
-  //       client: apolloClient,
-  //       id,
-  //       languageCode: 'en',
-  //     }),
-  //   );
-  // else {
-  const res = await queryClient.fetchQuery(
-    getProjectBySlugQuery({
-      client: apolloClient,
-      slug: id,
+  let onChainProjectId;
+  let slug;
+  if (isOnChainId) {
+    const offChainProjectByIdData = await queryClient.fetchQuery(
+      getProjectByOnChainIdQuery({
+        client: apolloClient,
+        onChainId: id,
+        languageCode: 'en', // TODO get language code
+      }),
+    );
+    onChainProjectId = isOnChainId;
+    slug = offChainProjectByIdData?.data?.projectByOnChainId?.slug;
+  } else if (isOffChainUuid) {
+    const offChainProjectByIdData = await queryClient.fetchQuery(
+      getOffChainProjectByIdQuery({
+        client: apolloClient,
+        id,
+        languageCode: 'en',
+      }),
+    );
+    onChainProjectId = offChainProjectByIdData?.data.projectById?.onChainId;
+    slug = offChainProjectByIdData?.data?.projectById?.slug;
+  } else {
+    const projectBySlug = await queryClient.fetchQuery(
+      getProjectBySlugQuery({
+        client: apolloClient,
+        slug: id,
+        languageCode: 'en',
+      }),
+    );
+    onChainProjectId = projectBySlug?.data.projectBySlug?.onChainId;
+  }
+
+  if (slug) {
+    // TODO preserve hash it exists
+    redirect(`/project/${slug}`);
+  }
+
+  const projectResponse = await queryClient.fetchQuery(
+    getProjectQuery({
+      request: { projectId: onChainProjectId as string },
+      client: rpcQueryClient,
+      enabled: !!rpcQueryClient && !!onChainProjectId,
+    }),
+  );
+  const onChainProject = projectResponse?.project;
+
+  await queryClient.prefetchQuery(
+    getMetadataQuery({
+      iri: onChainProject?.metadata,
+      client: rpcQueryClient,
+      enabled: !!rpcQueryClient,
       languageCode: 'en',
     }),
   );
-  console.log('res', res);
-  // }
+
+  // https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#streaming-with-server-components
+  queryClient.prefetchQuery(
+    getAllProjectPageQuery({
+      sanityClient: sanityClient,
+      languageCode: 'en',
+    }),
+  );
+
+  queryClient.prefetchQuery(
+    getAllSanityCreditClassesQuery({
+      sanityClient: sanityClient,
+      languageCode: 'en',
+    }),
+  );
+
+  queryClient.prefetchQuery(
+    getSellOrdersExtendedQuery({
+      client: rpcQueryClient,
+      reactQueryClient: queryClient,
+      request: {},
+    }),
+  );
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div>{id}</div>
       <ProjectDetails />
     </HydrationBoundary>
   );

@@ -1,5 +1,5 @@
 import { useLingui } from '@lingui/react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -42,13 +42,18 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
   program,
 }) => {
   const { _ } = useLingui();
+  const router = useRouter();
 
   return (creditClassSanity || creditClassMetadata) &&
     (creditClassSanity?.path || onChainCreditClassId) ? (
-    <Link
-      href={`${LINK_PREFIX}/credit-classes/${
-        creditClassSanity?.path || onChainCreditClassId
-      }`}
+    <div
+      onClick={() =>
+        router.push(
+          `${LINK_PREFIX}/credit-classes/${
+            creditClassSanity?.path || onChainCreditClassId
+          }`,
+        )
+      }
     >
       <CreditClassCard
         title={
@@ -83,6 +88,6 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
         program={IS_REGEN ? program : undefined}
         sx={{ mt: [2, 4], py: [2, 6] }}
       />
-    </Link>
+    </div>
   ) : null;
 };

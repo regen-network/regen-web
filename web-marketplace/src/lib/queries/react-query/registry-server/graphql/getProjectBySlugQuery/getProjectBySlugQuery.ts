@@ -20,7 +20,6 @@ export const getProjectBySlugQuery = ({
   queryKey: [...getProjectBySlugKey(slug), languageCode],
   queryFn: async () => {
     try {
-      console.log('slug', slug);
       const ProjectBySlug = await client.query<
         ProjectBySlugQuery,
         ProjectBySlugQueryVariables

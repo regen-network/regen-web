@@ -98,7 +98,7 @@ const nextConfig = {
       },
       {
         source: '/token',
-        destination: 'https://token.regen.network/',
+        destination: 'https://coin.regen.network',
         permanent: false,
       },
     ];

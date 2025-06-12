@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import {
   dehydrate,
   HydrationBoundary,
@@ -26,18 +27,18 @@ interface ProjectPageProps {
   params: Promise<{ id: string }>;
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { id } = await params;
+const queryClient = new QueryClient();
+
+// getProject will be used twice, but execute only once
+export const getProject = cache(async (id: string) => {
   const isOnChainId = getIsOnChainId(id);
   const isOffChainUuid = getIsUuid(id);
 
-  const queryClient = new QueryClient();
   const apolloClient = await getClient();
-  const sanityClient = await getSanityClient();
   const rpcQueryClient = await getRPCQueryClient();
 
   let onChainProjectId;
-  let slug;
+  let offChainProject;
   if (isOnChainId) {
     const offChainProjectByIdData = await queryClient.fetchQuery(
       getProjectByOnChainIdQuery({
@@ -47,7 +48,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       }),
     );
     onChainProjectId = isOnChainId;
-    slug = offChainProjectByIdData?.data?.projectByOnChainId?.slug;
+    offChainProject = offChainProjectByIdData?.data?.projectByOnChainId;
   } else if (isOffChainUuid) {
     const offChainProjectByIdData = await queryClient.fetchQuery(
       getOffChainProjectByIdQuery({
@@ -56,8 +57,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         languageCode: 'en',
       }),
     );
-    onChainProjectId = offChainProjectByIdData?.data.projectById?.onChainId;
-    slug = offChainProjectByIdData?.data?.projectById?.slug;
+    offChainProject = offChainProjectByIdData?.data?.projectById;
+    onChainProjectId = offChainProject?.onChainId;
   } else {
     const projectBySlug = await queryClient.fetchQuery(
       getProjectBySlugQuery({
@@ -66,13 +67,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         languageCode: 'en',
       }),
     );
-    onChainProjectId = projectBySlug?.data.projectBySlug?.onChainId;
+    offChainProject = projectBySlug?.data.projectBySlug;
+    onChainProjectId = offChainProject?.onChainId;
   }
 
-  if (slug) {
-    // TODO preserve hash it exists
-    redirect(`/project/${slug}`);
-  }
+  const slug = offChainProject?.slug;
 
   const projectResponse = await queryClient.fetchQuery(
     getProjectQuery({
@@ -83,7 +82,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   );
   const onChainProject = projectResponse?.project;
 
-  await queryClient.prefetchQuery(
+  const metadataResponse = await queryClient.fetchQuery(
     getMetadataQuery({
       iri: onChainProject?.metadata,
       client: rpcQueryClient,
@@ -91,6 +90,50 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       languageCode: 'en',
     }),
   );
+
+  return {
+    projectMetadata: metadataResponse,
+    projectPageMetadata: offChainProject?.metadata,
+    slug,
+    rpcQueryClient,
+  };
+});
+
+export async function generateMetadata({ params }: ProjectPageProps) {
+  const { id } = await params;
+
+  const { projectMetadata, projectPageMetadata, slug } = await getProject(id);
+
+  if (slug) {
+    // TODO preserve hash it exists
+    redirect(`/project/${slug}`);
+  }
+
+  const title =
+    projectMetadata?.['schema:name'] || projectPageMetadata?.['schema:name'];
+  const description = 'TODO';
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [
+        new URL(
+          projectPageMetadata?.['schema:image'] ||
+            projectPageMetadata?.['regen:previewPhoto']?.['schema:url'],
+        ),
+      ],
+    },
+  };
+}
+
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { id } = await params;
+
+  const sanityClient = await getSanityClient();
+  const { rpcQueryClient } = await getProject(id);
 
   // https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#streaming-with-server-components
   queryClient.prefetchQuery(

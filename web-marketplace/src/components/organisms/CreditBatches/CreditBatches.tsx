@@ -174,7 +174,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
                 href={`${LINK_PREFIX}/credit-classes/${batch.classId}`}
                 className="block truncate max-w-[125px]"
               >
-                <BlockContent content={batch.className} />
+                <BlockContent className="truncate" content={batch.className} />
               </Link>
             </WithLoader>,
             <Link

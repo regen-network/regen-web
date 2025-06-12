@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import { Suspense, useCallback, useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { Box, CircularProgress, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
@@ -16,7 +16,7 @@ import { useParams } from 'next/navigation';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
-import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
+// import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import { Project } from 'generated/graphql';
@@ -78,6 +78,12 @@ import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
 
 const MoreProjects = dynamic(
   () => import('./ProjectDetails.MoreProjects').then(mod => mod.MoreProjects),
+  {
+    loading: () => <CircularProgress color="secondary" />,
+  },
+);
+const ProjectMedia = dynamic(
+  () => import('web-components/src/components/sliders/ProjectMedia'),
   {
     loading: () => <CircularProgress color="secondary" />,
   },
@@ -365,11 +371,8 @@ function ProjectDetails(): JSX.Element {
         slug={slug}
       />
 
-      {mediaData.assets.length === 0 && loadingDb && (
-        <Skeleton sx={getMediaBoxStyles(theme)} />
-      )}
-
       {mediaData.assets.length > 0 && (
+        // <Suspense fallback={<Skeleton sx={getMediaBoxStyles(theme)} />}>
         <Box sx={{ pt: { xs: 0, sm: 12.5 } }}>
           <ProjectMedia
             bodyTexts={bodyTexts}
@@ -382,6 +385,7 @@ function ProjectDetails(): JSX.Element {
             isPrefinanceProject={isPrefinanceProject}
           />
         </Box>
+        // </Suspense>
       )}
 
       {(onChainProjectId ||

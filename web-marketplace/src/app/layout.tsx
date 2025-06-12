@@ -1,5 +1,6 @@
 /* eslint-disable lingui/no-unlocalized-strings */
 
+import { Suspense } from 'react';
 import { setI18n } from '@lingui/react/server';
 // import { ThemeProvider } from '@mui/material/styles';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
@@ -13,6 +14,8 @@ import { LedgerProviderWithWallet } from 'ledger';
 import { AuthProvider } from 'lib/auth/auth';
 // import { IS_TERRASOS } from 'lib/env';
 import { WalletProvider } from 'lib/wallet/wallet';
+
+import PageLoader from 'components/atoms/PageLoader';
 
 // import { ScrollToTop } from 'components/atoms';
 // import { PageViewTracking } from 'components/molecules/PageViewTracking';
@@ -85,7 +88,7 @@ export const metadata: Metadata =
         icons: {
           icon: [
             { url: 'favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-            // { url: 'favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+            { url: 'favicon-32x32.png', sizes: '32x32', type: 'image/png' },
           ],
           shortcut: 'favicon.ico',
         },
@@ -139,24 +142,25 @@ export default async function RootLayout({
                 initialLocale={'en'}
                 initialMessages={i18n.messages}
               >
-                <AnalyticsWrapper>
-                  <ThemeProvider>
-                    <AuthProvider>
-                      <ChainWrapper>
-                        <WalletProvider>
-                          <LedgerProviderWithWallet>
-                            {/* {IS_TERRASOS ? (
+                <ThemeProvider>
+                  <Suspense fallback={<PageLoader />}>
+                    <AnalyticsWrapper>
+                      <AuthProvider>
+                        <ChainWrapper>
+                          <WalletProvider>
+                            <LedgerProviderWithWallet>
+                              {/* {IS_TERRASOS ? (
                               <TerrasosHeader />
                             ) : (
                               <RegistryLayoutHeader />
                             )} */}
-                            {children}
-                            {/* {IS_TERRASOS ? (
+                              {children}
+                              {/* {IS_TERRASOS ? (
                               <RegistryLayoutTerrasosFooter />
                             ) : (
                               <RegistryLayoutFooter />
                             )} */}
-                            {/* <PageViewTracking />
+                              {/* <PageViewTracking />
                              <ScrollToTop />
                             <RetryFailedFunctions />
                             <RegistryLayoutCookiesTopBanner />
@@ -173,12 +177,13 @@ export default async function RootLayout({
                             <RegistryLayoutWarningBannerModal />
                             <RegistryLayoutChooseHowToPurchaseModal />
                             <RegistryLayoutConnectedEmailErrorModal /> */}
-                          </LedgerProviderWithWallet>
-                        </WalletProvider>
-                      </ChainWrapper>
-                    </AuthProvider>
-                  </ThemeProvider>
-                </AnalyticsWrapper>
+                            </LedgerProviderWithWallet>
+                          </WalletProvider>
+                        </ChainWrapper>
+                      </AuthProvider>
+                    </AnalyticsWrapper>
+                  </Suspense>
+                </ThemeProvider>
               </LinguiClientProvider>
             </ApolloWrapper>
           </QueryClientWrapper>

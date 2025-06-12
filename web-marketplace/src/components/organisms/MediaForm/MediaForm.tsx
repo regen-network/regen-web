@@ -66,14 +66,13 @@ export const MediaForm = ({
       formRef={formRef}
       isDraftRef={isDraftRef}
       form={form}
-      onSubmit={async data => {
+      onSubmit={async (data: MediaFormSchemaType) => {
         try {
           // Remove the placeholder input
           const filteredData = {
             'regen:previewPhoto': data['regen:previewPhoto'],
             'regen:galleryPhotos': data['regen:galleryPhotos']?.filter(
-              (photo: MediaFormSchemaType['regen:galleryPhotos'][0]) =>
-                photo['schema:url'] !== DEFAULT,
+              photo => photo['schema:url'] !== DEFAULT,
             ),
             'regen:storyMedia': data?.['regen:storyMedia'],
           };

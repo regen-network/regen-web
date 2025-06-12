@@ -96,6 +96,11 @@ const nextConfig = {
         destination: '/',
         permanent: false,
       },
+      {
+        source: '/token',
+        destination: 'https://token.regen.network/',
+        permanent: false,
+      },
     ];
   },
 };

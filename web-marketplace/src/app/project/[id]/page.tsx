@@ -27,18 +27,18 @@ interface ProjectPageProps {
   params: Promise<{ id: string }>;
 }
 
-const queryClient = new QueryClient();
-
 // getProject will be used twice, but execute only once
-export const getProject = cache(async (id: string) => {
+const getProject = cache(async (id: string) => {
   const isOnChainId = getIsOnChainId(id);
   const isOffChainUuid = getIsUuid(id);
 
+  const queryClient = new QueryClient();
   const apolloClient = await getClient();
   const rpcQueryClient = await getRPCQueryClient();
 
   let onChainProjectId;
   let offChainProject;
+  let slug;
   if (isOnChainId) {
     const offChainProjectByIdData = await queryClient.fetchQuery(
       getProjectByOnChainIdQuery({
@@ -49,6 +49,7 @@ export const getProject = cache(async (id: string) => {
     );
     onChainProjectId = isOnChainId;
     offChainProject = offChainProjectByIdData?.data?.projectByOnChainId;
+    slug = offChainProject?.slug;
   } else if (isOffChainUuid) {
     const offChainProjectByIdData = await queryClient.fetchQuery(
       getOffChainProjectByIdQuery({
@@ -59,6 +60,7 @@ export const getProject = cache(async (id: string) => {
     );
     offChainProject = offChainProjectByIdData?.data?.projectById;
     onChainProjectId = offChainProject?.onChainId;
+    slug = offChainProject?.slug;
   } else {
     const projectBySlug = await queryClient.fetchQuery(
       getProjectBySlugQuery({
@@ -70,8 +72,6 @@ export const getProject = cache(async (id: string) => {
     offChainProject = projectBySlug?.data.projectBySlug;
     onChainProjectId = offChainProject?.onChainId;
   }
-
-  const slug = offChainProject?.slug;
 
   const projectResponse = await queryClient.fetchQuery(
     getProjectQuery({
@@ -96,18 +96,14 @@ export const getProject = cache(async (id: string) => {
     projectPageMetadata: offChainProject?.metadata,
     slug,
     rpcQueryClient,
+    queryClient,
   };
 });
 
 export async function generateMetadata({ params }: ProjectPageProps) {
   const { id } = await params;
 
-  const { projectMetadata, projectPageMetadata, slug } = await getProject(id);
-
-  if (slug) {
-    // TODO preserve hash it exists
-    redirect(`/project/${slug}`);
-  }
+  const { projectMetadata, projectPageMetadata } = await getProject(id);
 
   const title =
     projectMetadata?.['schema:name'] || projectPageMetadata?.['schema:name'];
@@ -119,12 +115,12 @@ export async function generateMetadata({ params }: ProjectPageProps) {
     openGraph: {
       title,
       description,
-      images: [
-        new URL(
-          projectPageMetadata?.['schema:image'] ||
-            projectPageMetadata?.['regen:previewPhoto']?.['schema:url'],
-        ),
-      ],
+      // images: [
+      //   new URL(
+      //     projectPageMetadata?.['schema:image'] ||
+      //       projectPageMetadata?.['regen:previewPhoto']?.['schema:url'],
+      //   ),
+      // ],
     },
   };
 }
@@ -133,7 +129,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const { id } = await params;
 
   const sanityClient = await getSanityClient();
-  const { rpcQueryClient } = await getProject(id);
+  const { rpcQueryClient, queryClient, slug } = await getProject(id);
+  if (slug) {
+    // TODO preserve hash it exists
+    redirect(`/project/${slug}`);
+  }
 
   // https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#streaming-with-server-components
   queryClient.prefetchQuery(

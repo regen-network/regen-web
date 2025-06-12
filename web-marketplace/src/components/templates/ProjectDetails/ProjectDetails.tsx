@@ -1,8 +1,8 @@
 'use client';
 
-import { Suspense, useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
-import { Box, CircularProgress, Skeleton, useTheme } from '@mui/material';
+import { Box, CircularProgress, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
 import { useAtom, useSetAtom } from 'jotai';
@@ -66,7 +66,7 @@ import { JURISDICTION_REGEX } from './ProjectDetails.constant';
 import { DataStream } from './ProjectDetails.DataStream';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { ProjectDetailsStakeholders } from './ProjectDetails.Stakeholders';
-import { getMediaBoxStyles } from './ProjectDetails.styles';
+// import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   findSanityCreditClass,
   formatOtcCardData,

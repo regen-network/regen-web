@@ -14,7 +14,7 @@ const SellerSetupAccount = () => {
 
   return (
     privActiveAccount?.can_use_stripe_connect && (
-      <Card className="border-sc-card-standard-stroke shadow-none p-20 sm:p-30 relative">
+      <Card className="border-sc-card-standard-stroke shadow-none p-20 sm:p-30 relative mb-20">
         <Title variant="h5" className="pb-20 relative z-1">
           <Trans>Manage your Stripe account for fiat purchases</Trans>
         </Title>

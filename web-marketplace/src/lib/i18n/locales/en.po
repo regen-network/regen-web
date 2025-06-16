@@ -613,7 +613,7 @@ msgstr ""
 msgid "Attach arbitrary JSON-LD metadata to the project metadata below."
 msgstr ""
 
-#: src/components/organisms/PostFlow/hooks/useSign.ts:107
+#: src/components/organisms/PostFlow/hooks/useSign.ts:116
 msgid "Attest"
 msgstr ""
 
@@ -629,7 +629,7 @@ msgstr ""
 msgid "avg price per credit"
 msgstr ""
 
-#: src/pages/ProjectEdit/ProjectEdit.tsx:263
+#: src/pages/ProjectEdit/ProjectEdit.tsx:259
 msgid "back to projects"
 msgstr ""
 
@@ -667,7 +667,7 @@ msgstr ""
 msgid "batch denom"
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:143
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:144
 msgid "Batch denom"
 msgstr ""
 
@@ -959,7 +959,7 @@ msgstr ""
 msgid "Change payment card"
 msgstr ""
 
-#: src/pages/ProjectEdit/ProjectEdit.tsx:295
+#: src/pages/ProjectEdit/ProjectEdit.tsx:291
 msgid "Changes have been saved"
 msgstr ""
 
@@ -1020,7 +1020,7 @@ msgstr ""
 msgid "Choose credits"
 msgstr ""
 
-#: src/pages/Dashboard/MyEcocredits/MyEcocredits.utils.ts:65
+#: src/pages/Dashboard/MyEcocredits/MyEcocredits.utils.ts:67
 msgid "Choose denom"
 msgstr ""
 
@@ -1257,13 +1257,13 @@ msgstr ""
 msgid "Create Project - Access Denied"
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:230
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:231
 #: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:41
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
 msgid "Create Sell Order"
 msgstr ""
 
-#: src/pages/Post/hooks/useAttestEvents.ts:140
+#: src/pages/Post/hooks/useAttestEvents.ts:174
 msgid "Created by"
 msgstr ""
 
@@ -1850,7 +1850,7 @@ msgstr ""
 msgid "Edit Project - Access Denied"
 msgstr ""
 
-#: src/pages/ProjectEdit/ProjectEdit.tsx:281
+#: src/pages/ProjectEdit/ProjectEdit.tsx:277
 msgid "Edit Project Page"
 msgstr ""
 
@@ -2206,7 +2206,7 @@ msgstr ""
 msgid "If you select one of the following options, you will still be able to share the post, files, or location data privately via a secret link."
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:209
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:210
 msgid "If you uncheck this option, buyers will be able to choose to keep the credits tradable"
 msgstr ""
 
@@ -2521,6 +2521,10 @@ msgstr ""
 msgid "Manage projects"
 msgstr ""
 
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:19
+msgid "Manage your Stripe account for fiat purchases"
+msgstr ""
+
 #: src/pages/Projects/hooks/useClientFilters.tsx:146
 msgid "Market"
 msgstr ""
@@ -2766,7 +2770,7 @@ msgstr ""
 msgid "No matching results found"
 msgstr ""
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.NoOrdersCard.tsx:20
+#: src/components/organisms/UserSellOrders/UserSellOrders.NoOrdersCard.tsx:19
 msgid "No open sell orders"
 msgstr ""
 
@@ -3141,7 +3145,7 @@ msgstr ""
 msgid "price"
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:169
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:170
 msgid "Price"
 msgstr ""
 
@@ -3588,7 +3592,7 @@ msgstr ""
 msgid "Request fund"
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:205
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:206
 msgid "Require that credits are retired upon purchase"
 msgstr ""
 
@@ -3909,7 +3913,7 @@ msgstr ""
 msgid "set up a Keplr wallet →"
 msgstr ""
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:21
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:28
 msgid "set up account"
 msgstr ""
 
@@ -3964,7 +3968,7 @@ msgstr ""
 msgid "signature"
 msgstr ""
 
-#: src/pages/Post/hooks/useAttestEvents.ts:176
+#: src/pages/Post/hooks/useAttestEvents.ts:210
 msgid "Signed by"
 msgstr ""
 
@@ -4833,7 +4837,7 @@ msgstr ""
 msgid "view transaction"
 msgstr ""
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:17
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:24
 msgid "view transactions"
 msgstr ""
 

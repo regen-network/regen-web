@@ -1445,7 +1445,15 @@ msgstr ""
 msgid "credits available"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:103
+=======
+<<<<<<< HEAD
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:115
+=======
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:100
+>>>>>>> 970b7b177 (chore: update .po files)
+>>>>>>> 05dbbaaf6 (merge .po files)
 msgid "Credits Available"
 msgstr ""
 
@@ -1505,9 +1513,19 @@ msgstr ""
 msgid "Credits issuance is calculated based on a weighted scale between 20 and 50 years."
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:67
+=======
+<<<<<<< HEAD
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:69
+>>>>>>> 05dbbaaf6 (merge .po files)
 msgid "Credits issued"
 msgstr ""
+=======
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:67
+#~ msgid "Credits issued"
+#~ msgstr ""
+>>>>>>> 970b7b177 (chore: update .po files)
 
 #: src/lib/constants/shared.constants.tsx:171
 msgid "credits purchased"
@@ -1517,17 +1535,39 @@ msgstr ""
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:66
+=======
+<<<<<<< HEAD
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:68
+=======
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:65
+>>>>>>> 970b7b177 (chore: update .po files)
+>>>>>>> 05dbbaaf6 (merge .po files)
 msgid "Credits Registered"
 msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
+<<<<<<< HEAD
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:119
+=======
+<<<<<<< HEAD
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:136
+=======
+>>>>>>> 970b7b177 (chore: update .po files)
+>>>>>>> 05dbbaaf6 (merge .po files)
 msgid "Credits Retired"
 msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
+<<<<<<< HEAD
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:103
+=======
+<<<<<<< HEAD
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:115
+=======
+>>>>>>> 970b7b177 (chore: update .po files)
+>>>>>>> 05dbbaaf6 (merge .po files)
 msgid "Credits Tradable"
 msgstr ""
 
@@ -2066,7 +2106,15 @@ msgstr ""
 msgid "For Land Stewards"
 msgstr ""
 
+<<<<<<< HEAD
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:87
+=======
+<<<<<<< HEAD
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:94
+=======
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:85
+>>>>>>> 970b7b177 (chore: update .po files)
+>>>>>>> 05dbbaaf6 (merge .po files)
 msgid "For sale"
 msgstr ""
 
@@ -2281,6 +2329,10 @@ msgstr ""
 
 #: src/pages/LandStewards/LandStewards.tsx:103
 msgid "Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship."
+msgstr ""
+
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:65
+msgid "Issued"
 msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:21
@@ -3684,6 +3736,10 @@ msgstr ""
 msgid "Retire credits upon transfer"
 msgstr ""
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:115
+msgid "Retired"
+msgstr ""
+
 #: src/pages/Certificate/Certificate.constants.ts:16
 #: src/pages/Certificate/Certificate.utils.ts:51
 msgid "Retired by"
@@ -4559,6 +4615,7 @@ msgstr ""
 msgid "Toucan Vintage Token Id"
 msgstr ""
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:100
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:102
 msgid "Tradable"
 msgstr ""
@@ -4571,8 +4628,21 @@ msgstr ""
 #~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
 #~ msgstr ""
 
+<<<<<<< HEAD
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+=======
+<<<<<<< HEAD
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
+>>>>>>> 05dbbaaf6 (merge .po files)
 msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
+=======
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+#~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
+#~ msgstr ""
+
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Includes escrowed credits."
+>>>>>>> 970b7b177 (chore: update .po files)
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:36

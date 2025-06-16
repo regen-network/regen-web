@@ -1,4 +1,4 @@
-import { MergedCreditClass } from './creditClassTab.types';
+import { MergedCreditClass } from './CreditClassTab.types';
 
 export const extractTitle = (creditClass: MergedCreditClass) => {
   return 'nameRaw' in creditClass

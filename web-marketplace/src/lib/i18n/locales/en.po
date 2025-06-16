@@ -55,7 +55,6 @@ msgid "(retirement is permanent and non-reversible)"
 msgstr ""
 
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:136
-#: src/components/organisms/BasketOverview/BasketOverview.tsx:136
 msgid "{0, plural, one {allowed credit class} other {allowed credit classes}}"
 msgstr ""
 
@@ -404,7 +403,7 @@ msgstr ""
 msgid "After refreshing the page several times, if you do not see your certificate within 24 hours, please reach out to <0>support@regen.network</0>."
 msgstr ""
 
-#: src/pages/BatchDetails/BatchDetails.tsx:132
+#: src/pages/BatchDetails/BatchDetails.tsx:93
 msgid "All credits"
 msgstr ""
 
@@ -569,6 +568,7 @@ msgstr ""
 msgid "approved methodologies"
 msgstr ""
 
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:112
 #: src/pages/Marketplace/Storefront/Storefront.tsx:248
 msgid "Are you sure you want to cancel this sell order?"
 msgstr ""
@@ -667,7 +667,7 @@ msgstr ""
 msgid "batch denom"
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:141
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:143
 msgid "Batch denom"
 msgstr ""
 
@@ -770,7 +770,7 @@ msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:4
-#: src/pages/Dashboard/Dashboard.constants.tsx:38
+#: src/pages/Dashboard/Dashboard.constants.tsx:36
 msgid "Bridge"
 msgstr ""
 
@@ -823,7 +823,7 @@ msgstr ""
 msgid "BUY CREDITS"
 msgstr ""
 
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:109
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:115
 msgid "Buy Credits Error"
 msgstr ""
 
@@ -1008,6 +1008,10 @@ msgstr ""
 msgid "Choose basket"
 msgstr ""
 
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:49
+msgid "Choose batch"
+msgstr ""
+
 #: src/pages/ChooseCreditClass/ChooseCreditClass.Item.tsx:29
 msgid "Choose credit class"
 msgstr ""
@@ -1061,7 +1065,7 @@ msgstr ""
 msgid "Click on the confirmation link to return to Regen Network."
 msgstr ""
 
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:236
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:249
 #: src/pages/ProjectReview/ProjectReview.tsx:379
 msgid "close"
 msgstr ""
@@ -1253,7 +1257,8 @@ msgstr ""
 msgid "Create Project - Access Denied"
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:227
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:230
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:41
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
 msgid "Create Sell Order"
 msgstr ""
@@ -1270,7 +1275,7 @@ msgstr ""
 msgid "Credit Basics"
 msgstr ""
 
-#: src/pages/BatchDetails/BatchDetails.tsx:109
+#: src/pages/BatchDetails/BatchDetails.tsx:70
 msgid "Credit Batch Details"
 msgstr ""
 
@@ -1302,7 +1307,7 @@ msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:243
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/pages/Dashboard/Dashboard.constants.tsx:32
+#: src/pages/Dashboard/Dashboard.constants.tsx:30
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:93
 msgid "Credit Batches"
 msgstr ""
@@ -1373,7 +1378,7 @@ msgid "Credit class: the structure, procedures and requirements for project regi
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
-#: src/pages/Dashboard/Dashboard.constants.tsx:26
+#: src/pages/Dashboard/Dashboard.constants.tsx:24
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:87
 #: src/pages/Home/Home.tsx:180
 msgid "Credit Classes"
@@ -1425,7 +1430,7 @@ msgstr ""
 msgid "credits"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:31
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:41
 #: src/components/organisms/Order/Order.Summary.tsx:60
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:305
 msgid "Credits"
@@ -1440,7 +1445,7 @@ msgstr ""
 msgid "credits available"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:115
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:103
 msgid "Credits Available"
 msgstr ""
 
@@ -1472,7 +1477,7 @@ msgstr ""
 msgid "Credits cannot exceed"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:8
 msgid "Credits currently available for purchase with fiat or cryptocurrency on Regen Marketplace."
 msgstr ""
 
@@ -1500,7 +1505,7 @@ msgstr ""
 msgid "Credits issuance is calculated based on a weighted scale between 20 and 50 years."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:69
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:67
 msgid "Credits issued"
 msgstr ""
 
@@ -1512,17 +1517,17 @@ msgstr ""
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:68
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:66
 msgid "Credits Registered"
 msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:136
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:119
 msgid "Credits Retired"
 msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:115
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:103
 msgid "Credits Tradable"
 msgstr ""
 
@@ -1816,11 +1821,11 @@ msgstr ""
 msgid "Edit filters"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:106
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:117
 msgid "Edit org profile"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:83
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:93
 msgid "Edit personal profile"
 msgstr ""
 
@@ -1929,7 +1934,7 @@ msgstr ""
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:25
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 msgid "Exit to homepage"
 msgstr ""
 
@@ -2061,7 +2066,7 @@ msgstr ""
 msgid "For Land Stewards"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:94
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:87
 msgid "For sale"
 msgstr ""
 
@@ -2201,7 +2206,7 @@ msgstr ""
 msgid "If you select one of the following options, you will still be able to share the post, files, or location data privately via a secret link."
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:206
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:209
 msgid "If you uncheck this option, buyers will be able to choose to keep the credits tradable"
 msgstr ""
 
@@ -2455,7 +2460,7 @@ msgstr ""
 msgid "log in for faster checkout"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:123
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:133
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:11
 msgid "Log out"
 msgstr ""
@@ -2504,15 +2509,15 @@ msgstr ""
 msgid "Make the location data private"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:31
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:41
 msgid "Manage credits"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:103
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:114
 msgid "Manage organization"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:53
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:63
 msgid "Manage projects"
 msgstr ""
 
@@ -2554,7 +2559,7 @@ msgstr ""
 msgid "Medium"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:111
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:122
 msgid "Members"
 msgstr ""
 
@@ -2667,7 +2672,7 @@ msgid "Must have recipients"
 msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:57
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:73
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:83
 msgid "My orders"
 msgstr ""
 
@@ -2761,6 +2766,10 @@ msgstr ""
 msgid "No matching results found"
 msgstr ""
 
+#: src/components/organisms/UserSellOrders/UserSellOrders.NoOrdersCard.tsx:20
+msgid "No open sell orders"
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:62
 msgid "No options available"
 msgstr ""
@@ -2769,7 +2778,7 @@ msgstr ""
 msgid "No retirements to display"
 msgstr ""
 
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:66
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:80
 msgid "No sell orders found"
 msgstr ""
 
@@ -2868,11 +2877,11 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:54
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:70
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:80
 msgid "Orders"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:103
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:114
 msgid "Org"
 msgstr ""
 
@@ -3052,8 +3061,8 @@ msgstr ""
 msgid "Please wait while transaction processes"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:34
-#: src/pages/Dashboard/Dashboard.constants.tsx:14
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:44
+#: src/pages/Dashboard/Dashboard.constants.tsx:12
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:74
 msgid "Portfolio"
 msgstr ""
@@ -3132,7 +3141,7 @@ msgstr ""
 msgid "price"
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:166
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:169
 msgid "Price"
 msgstr ""
 
@@ -3202,7 +3211,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:27
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:80
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:90
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
 msgid "Profile"
 msgstr ""
@@ -3413,13 +3422,13 @@ msgstr ""
 msgid "PROJECTED:"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:53
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:56
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:63
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:66
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:39
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/pages/Dashboard/Dashboard.constants.tsx:20
+#: src/pages/Dashboard/Dashboard.constants.tsx:18
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:81
 msgid "Projects"
 msgstr ""
@@ -3579,7 +3588,7 @@ msgstr ""
 msgid "Request fund"
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:202
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:205
 msgid "Require that credits are retired upon purchase"
 msgstr ""
 
@@ -3659,7 +3668,7 @@ msgstr ""
 msgid "Retired by"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr ""
 
@@ -3839,7 +3848,7 @@ msgstr ""
 msgid "Select option"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:39
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:49
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:11
 msgid "Sell"
 msgstr ""
@@ -3864,7 +3873,8 @@ msgstr ""
 msgid "sell order id:"
 msgstr ""
 
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:52
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:36
 #: src/pages/Marketplace/Storefront/Storefront.tsx:154
 msgid "Sell orders"
 msgstr ""
@@ -3899,7 +3909,7 @@ msgstr ""
 msgid "set up a Keplr wallet →"
 msgstr ""
 
-#: src/pages/SellerSetupAccount/SellerSetupAccount.tsx:21
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:21
 msgid "set up account"
 msgstr ""
 
@@ -3908,7 +3918,7 @@ msgid "settings"
 msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:37
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:90
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:100
 #: src/pages/Settings/Settings.tsx:52
 msgid "Settings"
 msgstr ""
@@ -4003,7 +4013,7 @@ msgstr ""
 msgid "Social and Cultural Index"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:8
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:9
 #: src/lib/constants/shared.constants.tsx:174
 msgid "Sold Out"
 msgstr ""
@@ -4302,11 +4312,11 @@ msgstr ""
 msgid "The structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:3
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
 msgid "The total amount of credits that were issued to this project."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:4
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
 msgid "The total amount of credits that were registered to this project."
 msgstr ""
 
@@ -4540,7 +4550,7 @@ msgstr ""
 #~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
 #~ msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
 msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
 msgstr ""
 
@@ -4759,7 +4769,7 @@ msgstr ""
 msgid "view document"
 msgstr ""
 
-#: src/pages/BatchDetails/BatchDetails.tsx:118
+#: src/pages/BatchDetails/BatchDetails.tsx:79
 msgid "view in portfolio"
 msgstr ""
 
@@ -4795,7 +4805,7 @@ msgstr ""
 msgid "view project"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:97
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:96
 msgid "View public profile"
 msgstr ""
 
@@ -4823,7 +4833,7 @@ msgstr ""
 msgid "view transaction"
 msgstr ""
 
-#: src/pages/SellerSetupAccount/SellerSetupAccount.tsx:17
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:17
 msgid "view transactions"
 msgstr ""
 
@@ -4934,6 +4944,7 @@ msgstr ""
 msgid "whoops, cancel"
 msgstr ""
 
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:111
 #: src/pages/Marketplace/Storefront/Storefront.tsx:247
 msgid "WHOOPS, EXIT"
 msgstr ""
@@ -4954,6 +4965,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:110
 #: src/pages/Marketplace/Storefront/Storefront.tsx:246
 msgid "Yes, cancel sell order"
 msgstr ""

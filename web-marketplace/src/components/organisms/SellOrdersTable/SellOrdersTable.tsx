@@ -7,9 +7,11 @@ import EmptyCartIcon from 'web-components/src/components/icons/EmptyCartIcon';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
+  RenderToolbarContentFunc,
   SortCallbacksType,
   TablePaginationParams,
 } from 'web-components/src/components/table/ActionsTable';
+import { DEFAULT_TABLE_PAGINATION_PARAMS } from 'web-components/src/components/table/Table.constants';
 
 import { UseStateSetter } from 'types/react/use-state';
 import {
@@ -25,14 +27,20 @@ type Props = {
   sellOrders: NormalizedSellOrder[];
   sortCallbacks?: SortCallbacksType;
   renderActionButtonsFunc?: RenderActionButtonsFunc;
+  renderToolbarContentFunc?: RenderToolbarContentFunc;
   onTableChange?: UseStateSetter<TablePaginationParams>;
+  totalSellOrders?: number;
+  paginationParams?: TablePaginationParams | {};
 };
 
 const SellOrdersTable = ({
   sellOrders,
   sortCallbacks = [],
   renderActionButtonsFunc,
+  renderToolbarContentFunc,
   onTableChange,
+  totalSellOrders,
+  paginationParams = {},
 }: Props): JSX.Element => {
   const { _ } = useLingui();
   const labelDisplayedRows = useMemo(
@@ -58,7 +66,13 @@ const SellOrdersTable = ({
           )}
           sortCallbacks={sortCallbacks}
           renderActionButtons={renderActionButtonsFunc}
+          renderToolbarContentFunc={renderToolbarContentFunc}
           onTableChange={onTableChange}
+          initialPaginationParams={{
+            ...DEFAULT_TABLE_PAGINATION_PARAMS,
+            ...paginationParams,
+            count: totalSellOrders,
+          }}
         />
       )}
       {!hasSellOrders && (

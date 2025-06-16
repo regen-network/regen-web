@@ -2,6 +2,7 @@ import { useCallback, useMemo } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { QueryClient, useLedger } from 'ledger';
+import { getSellOrdersBySellerQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersBySellerQuery/getSellOrdersBySellerQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
@@ -12,23 +13,44 @@ type UseFetchSellOrdersResponse = {
   isLoadingSellOrders: boolean;
 };
 
-export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
+export const useFetchSellOrders = (
+  sellerAddress?: string,
+  pagination?: { offset: number; limit: number },
+): UseFetchSellOrdersResponse => {
   const { queryClient } = useLedger();
   const reactQueryClient = useQueryClient();
-
-  // Query
-  const sellOrdersQuery = useMemo(
-    () =>
-      getSellOrdersExtendedQuery({
-        enabled: !!queryClient,
+  const sellOrdersQuery = useMemo(() => {
+    if (sellerAddress) {
+      return getSellOrdersBySellerQuery({
         client: queryClient as QueryClient,
         reactQueryClient,
-        request: {},
-      }),
-    [queryClient, reactQueryClient],
-  );
+        sellerAddress: sellerAddress,
+        offset: BigInt(pagination?.offset ?? 0),
+        limit: BigInt(pagination?.limit ?? 100),
+      });
+    }
+    return getSellOrdersExtendedQuery({
+      enabled: !!queryClient,
+      client: queryClient as QueryClient,
+      reactQueryClient,
+      request: {
+        pagination: {
+          key: new Uint8Array(),
+          offset: BigInt(pagination?.offset ?? 0),
+          limit: BigInt(pagination?.limit ?? 100),
+          countTotal: false,
+          reverse: false,
+        },
+      },
+    });
+  }, [
+    sellerAddress,
+    pagination?.offset,
+    pagination?.limit,
+    queryClient,
+    reactQueryClient,
+  ]);
 
-  // Fetch
   const { data: sellOrders, isLoading: isLoadingSellOrders } =
     useQuery(sellOrdersQuery);
 
@@ -47,5 +69,9 @@ export const useFetchSellOrders = (): UseFetchSellOrdersResponse => {
     );
   }, [reactQueryClient, sellOrdersQuery]);
 
-  return { sellOrders, refetchSellOrders, isLoadingSellOrders };
+  return {
+    sellOrders,
+    refetchSellOrders,
+    isLoadingSellOrders,
+  };
 };

@@ -25,6 +25,7 @@ export interface SelectTextFieldProps extends DefaultStyleProps {
   helperText?: string;
   className?: string;
   sx?: SxProps<Theme>;
+  placeholderText?: string;
 }
 
 const SelectTextField = forwardRef<HTMLDivElement, SelectTextFieldProps>(
@@ -37,6 +38,7 @@ const SelectTextField = forwardRef<HTMLDivElement, SelectTextFieldProps>(
       label,
       className,
       emptyOptionText,
+      placeholderText,
       ...props
     },
     ref,
@@ -61,6 +63,11 @@ const SelectTextField = forwardRef<HTMLDivElement, SelectTextFieldProps>(
           renderValue: native
             ? undefined
             : (selected: unknown) => {
+                if (!selected) {
+                  return (
+                    <span className="text-grey-400">{placeholderText}</span>
+                  );
+                }
                 const selectedOption = options?.find(
                   option => option.value === selected,
                 );

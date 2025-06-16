@@ -11,7 +11,7 @@ const SellerSetupAccount = () => {
   const { setupAccount, openLoginLink } = useStripeAccount();
 
   return (
-    <div className="bg-grey-100 h-[500px]">
+    <div className="bg-grey-100 h-[150px]">
       {activeAccount?.stripeConnectedAccountId ? (
         <ContainedButton onClick={openLoginLink}>
           <Trans>view transactions</Trans>

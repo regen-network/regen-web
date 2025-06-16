@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 
 import { getFormattedNumber } from '../../../../utils/format';
+import { cn } from '../../../../utils/styles/cn';
 import { useAmountFieldStyles } from './AmountField.styles';
 
 interface AuxiliaryLabelProps {
@@ -20,7 +21,7 @@ export const AuxiliaryLabel = ({
 }: AuxiliaryLabelProps): JSX.Element => {
   const { classes: styles } = useAmountFieldStyles();
   return (
-    <Box className={className} component="span" sx={{ flexGrow: 1 }}>
+    <Box className={className} component="div" sx={{ flexGrow: 1 }}>
       <Box
         sx={{
           display: 'flex',
@@ -30,13 +31,15 @@ export const AuxiliaryLabel = ({
         {auxiliaryLabel && (
           <span className={styles.availableLabel}>{auxiliaryLabel}</span>
         )}
-        <span>
-          <span className={styles.availableLabel}>{availableLabel}:</span>&nbsp;
-          <span className={styles.availableAmount}>
-            {getFormattedNumber(availableAmount)}
-          </span>
-          <span className={styles.denom}>{denom}</span>
-        </span>
+        {!isNaN(availableAmount) && (
+          <p className={cn('m-0 block', styles.availableLabel)}>
+            {availableLabel}:
+            <strong className={styles.availableAmount}>
+              {getFormattedNumber(availableAmount)}
+            </strong>
+            <span className={styles.denom}>{denom}</span>
+          </p>
+        )}
       </Box>
     </Box>
   );

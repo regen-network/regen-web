@@ -8,6 +8,11 @@ import WithLoader from 'components/atoms/WithLoader';
 
 import { useMergedCreditClasses } from '../hooks/useMergedCreditClasses';
 import { LEARN_MORE_BUTTON } from './CreditClassTab.constants';
+import {
+  extractDescription,
+  extractImageSrc,
+  extractTitle,
+} from './CreditClassTab.utils';
 
 export const CreditClassTab = () => {
   const navigate = useNavigate();
@@ -16,25 +21,6 @@ export const CreditClassTab = () => {
 
   const { creditClasses, programs, loading } =
     useMergedCreditClasses(accountAddressOrId);
-
-  const extractTitle = (creditClass: any) => {
-    return 'nameRaw' in creditClass
-      ? creditClass.nameRaw?.[0]?.children?.[0]?.text
-      : creditClass.name;
-  };
-
-  const extractDescription = (creditClass: any) => {
-    return 'shortDescriptionRaw' in creditClass
-      ? creditClass.shortDescriptionRaw?.[0]?.children?.[0]?.text ||
-          creditClass.descriptionRaw?.[0]?.children?.[0]?.text
-      : creditClass.description;
-  };
-
-  const extractImageSrc = (creditClass: any) => {
-    return 'image' in creditClass
-      ? creditClass.image?.imageHref || creditClass.image?.image?.asset?.url
-      : creditClass.imageSrc;
-  };
 
   return (
     <WithLoader isLoading={loading}>
@@ -56,7 +42,7 @@ export const CreditClassTab = () => {
                       {description}
                     </div>
                   }
-                  imgSrc={imageSrc}
+                  imgSrc={imageSrc ?? ''}
                   onClick={() =>
                     navigate(`/credit-classes/${creditClass.path}`)
                   }

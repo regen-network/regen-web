@@ -10,9 +10,9 @@ import { UserMenuItems } from 'web-components/src/components/header/components/U
 import { getUserMenuItems } from 'web-components/src/components/header/components/UserMenuItems.utils';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
-// import { cn } from 'web-components/src/utils/styles/cn';
+import { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
-import { useWallet } from 'lib/wallet/wallet';
+import { useWallet, Wallet } from 'lib/wallet/wallet';
 
 import { getWalletAddress } from 'pages/Dashboard/Dashboard.utils';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
@@ -47,8 +47,11 @@ import {
 // import { LanguageSwitcher } from './RegistryLayout.LanguageSwitcher';
 import { getAddress, getProfile } from './RegistryLayout.utils';
 
-const getProfileLink = (activeAccount: any, wallet: any): string => {
-  if (wallet?.address) return `/profiles/${wallet.address}`;
+const getProfileLink = (
+  activeAccount: Maybe<AccountFieldsFragment>,
+  wallet: Wallet,
+): string => {
+  if (wallet.address) return `/profiles/${wallet.address}`;
   if (activeAccount?.id) return `/profiles/${activeAccount.id}`;
 
   return '/profiles/';
@@ -85,7 +88,10 @@ const RegistryLayoutHeader: React.FC = () => {
           account: activeAccount ?? accountByAddr,
           privActiveAccount,
           _,
-          profileLink: getProfileLink(activeAccount, wallet),
+          profileLink:
+            activeAccount && wallet
+              ? getProfileLink(activeAccount, wallet)
+              : '/profiles/',
           // TODO APP-670 should go /dashboard/admin/portfolio or /dashboard/admin/projects
           // APP-697 then to /dashboard/portfolio or /dashboard/projects
           dashboardLink: '/dashboard/admin/profile',

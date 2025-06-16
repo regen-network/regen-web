@@ -45,7 +45,6 @@ export default function UserInfoWithTitle({
           size={size}
           fontFamily={fontFamily}
           border={border}
-          titleComponent="subtitle"
           linkComponent={linkComponent}
           alignItems={'start'}
         />

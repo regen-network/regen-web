@@ -132,7 +132,12 @@ export default async function RootLayout({
   return (
     <html lang="en" className={fontClassNames}>
       <body>
-        <AppRouterCacheProvider>
+        <AppRouterCacheProvider
+          options={{
+            enableCssLayer:
+              true /* https://mui.com/material-ui/integrations/nextjs/#using-other-styling-solutions */,
+          }}
+        >
           <QueryClientWrapper>
             <ApolloWrapper>
               <div className="print:hidden">

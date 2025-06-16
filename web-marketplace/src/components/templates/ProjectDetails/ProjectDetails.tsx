@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
-import { Box, CircularProgress, useTheme } from '@mui/material';
+import { Box, CircularProgress, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
 import { useAtom, useSetAtom } from 'jotai';
@@ -16,7 +16,6 @@ import { useParams } from 'next/navigation';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
-// import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import { Project } from 'generated/graphql';
@@ -85,7 +84,7 @@ const MoreProjects = dynamic(
 const ProjectMedia = dynamic(
   () => import('web-components/src/components/sliders/ProjectMedia'),
   {
-    loading: () => <CircularProgress color="secondary" />,
+    loading: () => <Skeleton className="h-[224px] sm:h-[400px]" />,
   },
 );
 
@@ -371,8 +370,7 @@ function ProjectDetails(): JSX.Element {
         slug={slug}
       />
 
-      {mediaData.assets.length > 0 && (
-        // <Suspense fallback={<Skeleton sx={getMediaBoxStyles(theme)} />}>
+      {/* {mediaData.assets.length > 0 && (
         <Box sx={{ pt: { xs: 0, sm: 12.5 } }}>
           <ProjectMedia
             bodyTexts={bodyTexts}
@@ -385,8 +383,7 @@ function ProjectDetails(): JSX.Element {
             isPrefinanceProject={isPrefinanceProject}
           />
         </Box>
-        // </Suspense>
-      )}
+      )} */}
 
       {(onChainProjectId ||
         isPrefinanceProject ||
@@ -546,12 +543,12 @@ function ProjectDetails(): JSX.Element {
 
       {managementActions && <ManagementActions actions={managementActions} />}
 
-      {onChainOrOffChainProjectId && admin && (
+      {/* {onChainOrOffChainProjectId && admin && (
         <MoreProjects
           skippedProjectId={onChainOrOffChainProjectId}
           projectAdmin={admin}
         />
-      )}
+      )} */}
 
       {gettingStartedResourcesSection && IS_REGEN && (
         <div

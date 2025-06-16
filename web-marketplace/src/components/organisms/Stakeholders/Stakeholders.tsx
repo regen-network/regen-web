@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Grid, TooltipProps } from '@mui/material';
-import Link from 'next/link';
 
 import { CollapseList } from 'web-components/src/components/organisms/CollapseList/CollapseList';
 import Section from 'web-components/src/components/section';
@@ -13,6 +12,8 @@ import { defaultFontFamily } from 'web-components/src/theme/muiTheme';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
+
+import { Link } from 'components/atoms/Link';
 
 export type Stakeholder = {
   accounts: Account | Account[] | undefined;
@@ -48,7 +49,7 @@ export const Stakeholders = ({ stakeholders, className }: Props) => {
   return (
     <>
       {hasStakeholders && (
-        <Section className={cn('pt-0 !mb-[80px] sm:!mb-[100px]', className)}>
+        <Section className={cn('pt-0 mb-[80px] sm:mb-[100px]', className)}>
           <div className="flex flex-col">
             <Title variant="h2" py={3} className="mb-30 sm:mb-50 py-0">
               {_(msg`Stakeholders`)}

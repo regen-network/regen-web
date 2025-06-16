@@ -102,7 +102,7 @@ export const DataStream = ({
           >
             {isAdmin && adminDescription && projectLocation && (
               <div className="mt-15">
-                <Body className="mb-15 max-w-[683px]" size="lg">
+                <Body className="mb-15 max-w-[683px]" size="lg" component="div">
                   <BlockContent content={adminDescription} />
                 </Body>
                 <ContainedButton onClick={openCreatePostModal}>

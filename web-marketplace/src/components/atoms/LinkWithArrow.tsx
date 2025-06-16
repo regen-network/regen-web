@@ -1,16 +1,13 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { SxProps } from '@mui/system';
 import { sxToArray } from 'utils/mui/sxToArray';
 
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
-import { Theme } from 'web-components/src/theme/muiTheme';
 import { parseText } from 'web-components/src/utils/textParser';
 
 import { Link } from './Link';
 
 export interface LinkWithArrowProps {
-  sx?: SxProps<Theme>;
   href?: string | null;
   label: string | JSX.Element;
   className?: string;
@@ -22,7 +19,6 @@ export interface LinkWithArrowProps {
  * If no href is provided, it just returns the styled text label.
  */
 const LinkWithArrow: React.FC<React.PropsWithChildren<LinkWithArrowProps>> = ({
-  sx,
   href,
   label,
   className,
@@ -39,7 +35,6 @@ const LinkWithArrow: React.FC<React.PropsWithChildren<LinkWithArrowProps>> = ({
         <Link
           href={href}
           className={className}
-          sx={sxToArray(sx)}
           target={target || defaultTarget}
           rel="noreferrer"
         >
@@ -50,9 +45,7 @@ const LinkWithArrow: React.FC<React.PropsWithChildren<LinkWithArrowProps>> = ({
           />
         </Link>
       ) : (
-        <Box className={className} sx={sxToArray(sx)}>
-          {parseText(label)}
-        </Box>
+        <Box className={className}>{parseText(label)}</Box>
       )}
     </>
   );

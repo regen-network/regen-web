@@ -37,15 +37,9 @@ export const Orders = () => {
   }, [isLoading, location.hash]);
 
   return (
-    <div className="min-h-[500px] bg-grey-100 flex flex-col justify-start items-center lg:items-start lg:flex-row lg:justify-evenly mx-auto">
-      <Flex
-        sx={{
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-        className="w-full xl:w-[850px]"
-      >
-        <WithLoader isLoading={isLoading} sx={{ mx: 'auto' }}>
+    <div className="min-h-[500px] bg-grey-100">
+      <div className="max-w-[1400px] mx-auto px-8">
+        <WithLoader isLoading={isLoading}>
           <div className="w-full rounded-md border border-grey-200 bg-grey-100">
             {loginDisabled && <CreditCardHidden />}
             {orders.map((order, index) => (
@@ -60,7 +54,7 @@ export const Orders = () => {
             ))}
           </div>
         </WithLoader>
-      </Flex>
+      </div>
     </div>
   );
 };

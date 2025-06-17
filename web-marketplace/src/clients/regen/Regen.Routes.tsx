@@ -51,6 +51,7 @@ import { projectDetailsLoader } from 'components/templates/ProjectDetails/Projec
 
 import { KeplrRoute } from '../../components/atoms';
 import { ProjectMetadata } from '../../pages/ProjectMetadata/ProjectMetadata';
+import { SellerSetupAccount } from 'web-marketplace/src/components/organisms/SellerSetupAccount/SellerSetupAccount';
 
 const Sell = safeLazy(() => import('../../pages/Sell/Sell'));
 

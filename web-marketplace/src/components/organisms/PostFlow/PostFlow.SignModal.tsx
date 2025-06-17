@@ -1,5 +1,5 @@
 import { useFormState, useWatch } from 'react-hook-form';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { ContentHash_Graph } from '@regen-network/api/regen/data/v2/types';
 import { useQuery } from '@tanstack/react-query';
 

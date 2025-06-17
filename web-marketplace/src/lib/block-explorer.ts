@@ -1,4 +1,4 @@
-export const explorer = import.meta.env.VITE_BLOCK_EXPLORER;
+export const explorer = process.env.NEXT_PUBLIC_BLOCK_EXPLORER;
 
 const isMintscan = explorer?.includes('mintscan');
 const isAtomscan = explorer?.includes('atomscan');

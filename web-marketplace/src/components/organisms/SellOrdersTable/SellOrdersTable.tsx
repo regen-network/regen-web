@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
 import EmptyState from 'web-components/src/components/empty-state';
@@ -19,7 +19,7 @@ import {
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
 
-import { NormalizedSellOrder } from '../../../pages/Marketplace/Storefront/Storefront.types';
+import { NormalizedSellOrder } from '../../../legacy-pages/Marketplace/Storefront/Storefront.types';
 import { getSellOrdersRow } from './SellOrdersTable.config';
 import getSellOrdersTableRow from './SellOrdersTable.Row';
 

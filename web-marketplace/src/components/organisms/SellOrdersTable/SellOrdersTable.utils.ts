@@ -1,6 +1,6 @@
 import { EUR_DENOMS, USD_DENOMS } from 'config/allowedBaseDenoms';
 
-import { SellOrderStatus } from '../../../pages/Marketplace/Storefront/Storefront.types';
+import { SellOrderStatus } from '../../../legacy-pages/Marketplace/Storefront/Storefront.types';
 
 type getSellOrderColorProps = {
   sellOrderStatus?: SellOrderStatus;

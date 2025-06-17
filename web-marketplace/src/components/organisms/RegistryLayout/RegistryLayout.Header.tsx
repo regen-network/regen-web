@@ -4,6 +4,10 @@ import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 import { getClientConfig } from 'clients/Clients.config';
+import {
+  getDefaultAvatar,
+  getWalletAddress,
+} from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import Header from 'web-components/src/components/header';
 import { UserMenuItems } from 'web-components/src/components/header/components/UserMenuItems';
@@ -14,10 +18,6 @@ import { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet, Wallet } from 'lib/wallet/wallet';
 
-import {
-  getDefaultAvatar,
-  getWalletAddress,
-} from 'pages/Dashboard/Dashboard.utils';
 import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../../lib/ledger';

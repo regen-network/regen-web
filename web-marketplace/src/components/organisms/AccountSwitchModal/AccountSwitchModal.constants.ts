@@ -1,3 +1,3 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const TITLE = msg`Account switch detected! `;

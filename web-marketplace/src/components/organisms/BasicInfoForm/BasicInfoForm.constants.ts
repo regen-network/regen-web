@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const BASIC_INFO_NAME_LABEL = msg`Project name`;
 export const BASIC_INFO_NAME_DESCRIPTION = msg`This is the name of the farm, ranch, property, or conservation project.`;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { makeStyles } from 'tss-react/mui';
 
@@ -75,7 +75,7 @@ function CreditClassConnectSection({ connectSection }: Props): JSX.Element {
 
   return (
     <BackgroundImgSection
-      img={creditClassConnectImg}
+      img={creditClassConnectImg.src}
       classes={{
         root: styles.connectRoot,
         main: styles.main,

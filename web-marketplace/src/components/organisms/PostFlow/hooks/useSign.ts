@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { regen } from '@regen-network/api';
 import { OrderBy } from '@regen-network/api/cosmos/tx/v1beta1/service';

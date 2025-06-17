@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';

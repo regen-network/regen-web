@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Link as LinkExt } from '@mui/material';
 import {
   URL_REGISTRY_MARKETPLACE_LEGAL,

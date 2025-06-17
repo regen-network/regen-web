@@ -34,7 +34,7 @@ export interface FileDropProps extends Partial<FieldFormControlProps> {
   description?: ReactNode;
   optional?: boolean | string;
   buttonText: string;
-  fixedCrop?: Partial<Crop>;
+  aspect?: number;
   hideDragText?: boolean;
   fieldIndex?: number;
   dropZoneOption?: DropzoneOptions;
@@ -81,7 +81,7 @@ const FileDrop = forwardRef<HTMLInputElement, FileDropProps>(
       description,
       optional,
       buttonText,
-      fixedCrop,
+      aspect,
       hideDragText,
       value,
       caption,

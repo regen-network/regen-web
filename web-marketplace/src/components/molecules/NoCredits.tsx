@@ -1,12 +1,13 @@
 import React from 'react';
 import { Box, SxProps } from '@mui/material';
+import Image from 'next/image';
 import { sxToArray } from 'utils/mui/sxToArray';
 
 import { StyledTableContainer } from 'web-components/src/components/table';
 import { Title } from 'web-components/src/components/typography';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
-import { ReactComponent as CloudData } from '../../assets/svgs/cloud-data.svg';
+import cloudData from '../../assets/svgs/cloud-data.svg';
 
 const NoCredits: React.FC<
   React.PropsWithChildren<{
@@ -31,7 +32,7 @@ const NoCredits: React.FC<
           ...sxToArray(sx),
         ]}
       >
-        {icon ?? <CloudData />}
+        {icon ?? <Image src={cloudData} alt="" />}
         <Title variant="h4" sx={{ mt: 5 }}>
           {title}
         </Title>

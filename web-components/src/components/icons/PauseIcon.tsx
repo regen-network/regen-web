@@ -12,7 +12,7 @@ export const PauseIcon = (props: React.SVGProps<SVGSVGElement>) => (
       <path
         id="Union"
         fill-rule="evenodd"
-        clip-rule="evenodd"
+        clipRule="evenodd"
         d="M32 20H25V50H32V20ZM45 20H38V50H45V20Z"
         fill="currentColor"
       />

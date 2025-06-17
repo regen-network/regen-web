@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react';
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
+import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import { loaderStyles } from 'styles/loader';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
@@ -27,7 +29,6 @@ import { Bridge1Event } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { BridgeFlow } from 'features/ecocredit/BridgeFlow/BridgeFlow';
-import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import {
   AccountLink,
   BreakText,
@@ -61,7 +62,7 @@ export const BridgableEcocreditsTable = ({
 
   const { credits: bridgableCredits, isLoadingCredits } = useFetchEcocredits({
     address: accountAddress,
-    creditClassId: import.meta.env.VITE_BRIDGE_CREDIT_CLASS_ID,
+    creditClassId: process.env.NEXT_PUBLIC_BRIDGE_CREDIT_CLASS_ID,
     isPaginatedQuery: false,
   });
 

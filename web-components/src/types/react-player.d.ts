@@ -1,1 +1,1 @@
-declare module 'react-player/es6';
+declare module 'react-player';

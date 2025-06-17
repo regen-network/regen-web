@@ -12,19 +12,21 @@ import {
 import { Router } from '@remix-run/router';
 import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
+import { projectsLoader } from 'legacy-pages/Projects/AllProjects/AllProjects.loader';
 import { safeLazy } from 'utils/safeLazy';
 
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 
-import { projectsLoader } from 'pages/Projects/AllProjects/AllProjects.loader';
 import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
-const AllProjects = safeLazy(() => import('../../pages/Projects/AllProjects'));
-const ErrorPage = lazy(() => import('../../pages/ErrorPage'));
-const Project = safeLazy(() => import('../../pages/Project'));
-const Projects = safeLazy(() => import('../../pages/Projects'));
+const AllProjects = safeLazy(
+  () => import('../../legacy-pages/Projects/AllProjects'),
+);
+const ErrorPage = lazy(() => import('../../legacy-pages/ErrorPage'));
+const Project = safeLazy(() => import('../../legacy-pages/Project'));
+const Projects = safeLazy(() => import('../../legacy-pages/Projects'));
 
 type RouterProps = {
   reactQueryClient: QueryClient;
@@ -97,7 +99,7 @@ export const getRouter = ({
   return sentryCreateBrowserRouter(
     getTerrasosRoutes({ reactQueryClient, apolloClientFactory }),
     {
-      basename: import.meta.env.PUBLIC_URL,
+      basename: process.env.PUBLIC_URL,
     },
   );
 };

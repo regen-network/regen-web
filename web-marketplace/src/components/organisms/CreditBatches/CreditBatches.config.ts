@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { TranslatorType } from 'lib/i18n/i18n.types';

@@ -7,6 +7,7 @@ export type PrivateAccount = {
   email: string | null;
   google: string | null;
   google_email: string | null;
+  can_use_stripe_connect: boolean;
 };
 
 export type Accounts = {

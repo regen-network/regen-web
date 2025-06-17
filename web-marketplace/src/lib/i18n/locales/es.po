@@ -616,7 +616,7 @@ msgstr "Adjunte metadatos JSON-LD arbitrarios al lote de créditos a continuaci�
 msgid "Attach arbitrary JSON-LD metadata to the project metadata below."
 msgstr "Adjunte metadatos JSON-LD arbitrarios a los metadatos del proyecto a continuación."
 
-#: src/components/organisms/PostFlow/hooks/useSign.ts:107
+#: src/components/organisms/PostFlow/hooks/useSign.ts:116
 msgid "Attest"
 msgstr "Dar fe"
 
@@ -632,7 +632,7 @@ msgstr "Precio promedio"
 msgid "avg price per credit"
 msgstr "precio promedio por crédito"
 
-#: src/pages/ProjectEdit/ProjectEdit.tsx:263
+#: src/pages/ProjectEdit/ProjectEdit.tsx:259
 msgid "back to projects"
 msgstr "volver a proyectos"
 
@@ -670,7 +670,7 @@ msgstr "mesa de cestas"
 msgid "batch denom"
 msgstr "nombre del lote"
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:143
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:144
 msgid "Batch denom"
 msgstr "Nombre del lote"
 
@@ -962,7 +962,7 @@ msgstr "cambiar administrador"
 msgid "Change payment card"
 msgstr "Cambiar tarjeta de pago"
 
-#: src/pages/ProjectEdit/ProjectEdit.tsx:295
+#: src/pages/ProjectEdit/ProjectEdit.tsx:291
 msgid "Changes have been saved"
 msgstr "Los cambios se han guardado"
 
@@ -1023,7 +1023,7 @@ msgstr "Elija la clase de crédito"
 msgid "Choose credits"
 msgstr "Elija créditos"
 
-#: src/pages/Dashboard/MyEcocredits/MyEcocredits.utils.ts:65
+#: src/pages/Dashboard/MyEcocredits/MyEcocredits.utils.ts:67
 msgid "Choose denom"
 msgstr "Elige denominación"
 
@@ -1260,13 +1260,13 @@ msgstr "Crear proyecto"
 msgid "Create Project - Access Denied"
 msgstr "Crear proyecto - Acceso denegado"
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:230
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:231
 #: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:41
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
 msgid "Create Sell Order"
 msgstr "Crear orden de venta"
 
-#: src/pages/Post/hooks/useAttestEvents.ts:140
+#: src/pages/Post/hooks/useAttestEvents.ts:174
 msgid "Created by"
 msgstr "Creado por"
 
@@ -1853,7 +1853,7 @@ msgstr "editar proyecto"
 msgid "Edit Project - Access Denied"
 msgstr "Editar proyecto - Acceso denegado"
 
-#: src/pages/ProjectEdit/ProjectEdit.tsx:281
+#: src/pages/ProjectEdit/ProjectEdit.tsx:277
 msgid "Edit Project Page"
 msgstr "Editar página del proyecto"
 
@@ -2209,7 +2209,7 @@ msgstr "Si continúa, perderá todos los cambios que no haya guardado. Esta acci
 msgid "If you select one of the following options, you will still be able to share the post, files, or location data privately via a secret link."
 msgstr "Si selecciona una de las siguientes opciones, aún podrá compartir la publicación, los archivos o los datos de ubicación de forma privada a través de un enlace secreto."
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:209
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:210
 msgid "If you uncheck this option, buyers will be able to choose to keep the credits tradable"
 msgstr "Si desmarca esta opción, los compradores podrán optar por mantener los créditos negociables."
 
@@ -2524,6 +2524,10 @@ msgstr "Gestionar la organización"
 msgid "Manage projects"
 msgstr "Gestionar proyectos"
 
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:19
+msgid "Manage your Stripe account for fiat purchases"
+msgstr "Administra tu cuenta de Stripe para compras con moneda fiduciaria"
+
 #: src/pages/Projects/hooks/useClientFilters.tsx:146
 msgid "Market"
 msgstr "Mercado"
@@ -2769,7 +2773,7 @@ msgstr "No hay ecocréditos para mostrar"
 msgid "No matching results found"
 msgstr "No se encontraron resultados coincidentes"
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.NoOrdersCard.tsx:20
+#: src/components/organisms/UserSellOrders/UserSellOrders.NoOrdersCard.tsx:19
 msgid "No open sell orders"
 msgstr "No hay órdenes de venta abiertas"
 
@@ -3144,7 +3148,7 @@ msgstr "Anterior"
 msgid "price"
 msgstr "precio"
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:169
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:170
 msgid "Price"
 msgstr "Precio"
 
@@ -3591,7 +3595,7 @@ msgstr "Recordatorio: este proyecto se almacena en la base de datos de Regen Mar
 msgid "Request fund"
 msgstr "Solicitar fondos"
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:205
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:206
 msgid "Require that credits are retired upon purchase"
 msgstr "Exigir que los créditos se retiren al momento de la compra"
 
@@ -3912,7 +3916,7 @@ msgstr "Establecer créditos máximos"
 msgid "set up a Keplr wallet →"
 msgstr "Configurar una billetera Keplr →"
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:21
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:28
 msgid "set up account"
 msgstr "configurar cuenta"
 
@@ -3967,7 +3971,7 @@ msgstr "Firma este post"
 msgid "signature"
 msgstr "firma"
 
-#: src/pages/Post/hooks/useAttestEvents.ts:176
+#: src/pages/Post/hooks/useAttestEvents.ts:210
 msgid "Signed by"
 msgstr "Firmado por"
 
@@ -4836,7 +4840,7 @@ msgstr "Ver la lista completa de videos de soporte»"
 msgid "view transaction"
 msgstr "ver transacción"
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:17
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:24
 msgid "view transactions"
 msgstr "ver transacciones"
 

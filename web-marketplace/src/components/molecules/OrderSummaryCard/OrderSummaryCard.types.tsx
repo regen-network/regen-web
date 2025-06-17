@@ -1,4 +1,4 @@
-import { CardDetails } from 'pages/BuyCredits/BuyCredits.types';
+import { CardDetails } from 'legacy-pages/BuyCredits/BuyCredits.types';
 
 import { Currency } from '../CreditsAmount/CreditsAmount.types';
 import { AllowedDenoms } from '../DenomLabel/DenomLabel.utils';

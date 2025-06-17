@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 import { Account } from 'web-components/src/components/user/UserInfo';
 

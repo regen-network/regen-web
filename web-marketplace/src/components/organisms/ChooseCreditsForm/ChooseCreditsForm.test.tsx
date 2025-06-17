@@ -1,11 +1,10 @@
+import { paymentOptionAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
 import {
   allowedDenoms,
   cardSellOrders,
   cryptoSellOrders,
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.mock';
 import { render, screen, userEvent } from 'web-marketplace/test/test-utils';
-
-import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 
 import { ChooseCreditsForm } from './ChooseCreditsForm';
 import { ChooseCreditsFormSchemaType } from './ChooseCreditsForm.schema';

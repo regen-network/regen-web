@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import useCancelSellOrderSubmit from 'legacy-pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit';
+import { NormalizedSellOrder } from 'legacy-pages/Marketplace/Storefront/Storefront.types';
+import { getCancelCardItems } from 'legacy-pages/Marketplace/Storefront/Storefront.utils';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
 
 import { useWallet } from 'lib/wallet/wallet';
 
-import useCancelSellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit';
-import { NormalizedSellOrder } from 'pages/Marketplace/Storefront/Storefront.types';
-import { getCancelCardItems } from 'pages/Marketplace/Storefront/Storefront.utils';
 import useMsgClient from 'hooks/useMsgClient';
 
 type UseCancelSellOrderProps = {

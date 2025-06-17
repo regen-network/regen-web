@@ -193,7 +193,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
             withRetireLabel={_(CREATE_BATCH_FORM_WITH_RETIRE_LABEL)}
             retirementInfoText={_(RETIREMENT_INFO_TEXT)}
             bottomTextMapping={bottomFieldsTextMapping}
-            mapboxToken={import.meta.env.VITE_MAPBOX_TOKEN || ''}
+            mapboxToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN || ''}
           />
         );
       case 2:

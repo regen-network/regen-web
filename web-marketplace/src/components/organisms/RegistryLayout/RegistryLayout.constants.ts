@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
 export const TX_ERROR_MODAL_BUTTON = msg`CLOSE WINDOW`;

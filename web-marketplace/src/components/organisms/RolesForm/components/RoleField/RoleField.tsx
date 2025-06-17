@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useMemo, useState } from 'react';
-import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Autocomplete, TextField } from '@mui/material';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -14,7 +14,7 @@ import {
   AccountByIdQuery,
   GetAccountsByNameOrAddrQuery,
 } from '../../../../../generated/graphql';
-import { DEFAULT_PROFILE_TYPE } from '../../../../../pages/ProfileEdit/ProfileEdit.constants';
+import { DEFAULT_PROFILE_TYPE } from '../../../../../legacy-pages/ProfileEdit/ProfileEdit.constants';
 import { ProfileModal } from '../ProfileModal/ProfileModal';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
 import { ALL_PROFILES, PLACEHOLDER } from './RoleField.constants';

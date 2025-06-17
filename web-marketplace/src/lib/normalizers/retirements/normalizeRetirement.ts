@@ -2,6 +2,7 @@ import {
   ClassInfo,
   ProjectInfo,
 } from '@regen-network/api/regen/ecocredit/v1/query';
+import { getDataFromBatchDenomId } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 
 import { Account } from 'web-components/src/components/user/UserInfo';
 
@@ -12,8 +13,6 @@ import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,
 } from 'lib/db/types/json-ld';
-
-import { getDataFromBatchDenomId } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 
 type Props = {
   retirement?: Maybe<RetirementFieldsFragment>;

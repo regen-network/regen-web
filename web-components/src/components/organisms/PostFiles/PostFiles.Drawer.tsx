@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import ReactPlayer from 'react-player/es6';
+import ReactPlayer from 'react-player';
 import { Slide } from '@mui/material';
 import { Point } from 'geojson';
 import { PlayPauseButton } from 'web-components/src/components/atoms/PlayPauseButton/PlayPauseButton';

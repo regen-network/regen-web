@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { z } from 'zod';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';

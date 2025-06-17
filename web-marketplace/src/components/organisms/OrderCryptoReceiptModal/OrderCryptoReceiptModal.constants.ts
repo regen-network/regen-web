@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const ORDER_RECEIPT_MODAL_HEADING = msg`receipt`;
 export const ORDER_RECEIPT_MODAL_PRICE = msg`total purchase price`;

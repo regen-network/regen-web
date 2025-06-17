@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const SEE_ALL_METHODOLOGIES = msg`See all methodologies`;
 export const RATINGS = msg`ratings`;

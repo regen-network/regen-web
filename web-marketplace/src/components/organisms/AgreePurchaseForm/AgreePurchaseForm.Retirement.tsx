@@ -1,7 +1,9 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
+import { BuyCreditsSchemaTypes } from 'legacy-pages/BuyCredits/BuyCredits.types';
 import { debounce } from 'lodash';
 
 import Card from 'web-components/src/components/cards/Card';
@@ -18,7 +20,6 @@ import {
   STATE_LABEL,
 } from 'lib/constants/shared.constants';
 
-import { BuyCreditsSchemaTypes } from 'pages/BuyCredits/BuyCredits.types';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import { AgreePurchaseFormSchemaType } from './AgreePurchaseForm.schema';

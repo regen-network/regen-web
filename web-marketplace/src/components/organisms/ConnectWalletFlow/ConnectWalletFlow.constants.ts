@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const ADDRESS_USED_ERROR_RAW =
   'This wallet address is already in use by another account.';

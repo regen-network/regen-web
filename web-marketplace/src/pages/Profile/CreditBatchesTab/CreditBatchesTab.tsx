@@ -1,6 +1,6 @@
 import { Box } from '@mui/system';
+import { MyCreditBatchesTable } from 'legacy-pages/Dashboard/MyCreditBatches/MyCreditBatches.Table';
 
-import { MyCreditBatchesTable } from 'pages/Dashboard/MyCreditBatches/MyCreditBatches.Table';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 
 import { useProfileData } from '../hooks/useProfileData';

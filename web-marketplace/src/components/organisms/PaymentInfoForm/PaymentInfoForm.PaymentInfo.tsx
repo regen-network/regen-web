@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { PaymentMethod } from '@stripe/stripe-js';
 
 import Card from 'web-components/src/components/cards/Card';
@@ -60,16 +61,20 @@ export const PaymentInfo = ({
       {paymentMethods && paymentMethods.length > 0 ? (
         <>
           {paymentMethods.map(paymentMethod => (
-            <div className="mb-20" key={paymentMethod.id}>
-              <Radio
-                label={_(
-                  msg`Use my credit card on file ending in ${paymentMethod.card?.last4}`,
-                )}
-                value={paymentMethod.id}
-                selectedValue={paymentMethodId}
-                {...register(`paymentMethodId`)}
-              />
-            </div>
+            <>
+              {paymentMethod.card && (
+                <div className="mb-20" key={paymentMethod.id}>
+                  <Radio
+                    label={_(
+                      msg`Use my credit card on file ending in ${paymentMethod.card?.last4}`,
+                    )}
+                    value={paymentMethod.id}
+                    selectedValue={paymentMethodId}
+                    {...register(`paymentMethodId`)}
+                  />
+                </div>
+              )}
+            </>
           ))}
           <Radio
             label={_(msg`Enter a new credit card`)}

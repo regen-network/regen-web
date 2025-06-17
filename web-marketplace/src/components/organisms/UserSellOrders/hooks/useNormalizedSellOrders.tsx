@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
+import { normalizeToUISellOrderInfo } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
 
 import {
   SortCallbacksType,
@@ -18,8 +20,6 @@ import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketp
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 
-import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
-import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 
 import {

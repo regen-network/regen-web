@@ -13,7 +13,7 @@ export interface CropImageModalProps {
   onSubmit: (image: HTMLImageElement) => Promise<void>;
   circularCrop?: boolean;
   initialImage: string;
-  fixedCrop?: Partial<Crop>;
+  aspect?: number;
   isCropSubmitDisabled?: boolean;
   isIgnoreCrop?: boolean;
   children?: React.ReactNode;
@@ -64,7 +64,7 @@ export default function CropImageModal({
   onSubmit,
   circularCrop,
   initialImage,
-  fixedCrop = {},
+  aspect,
   isCropSubmitDisabled = false,
   isIgnoreCrop = false,
   children,
@@ -87,7 +87,7 @@ export default function CropImageModal({
           onCropSubmit={onSubmit}
           onCancel={onClose}
           circularCrop={circularCrop}
-          fixedCrop={fixedCrop}
+          aspect={aspect}
           isCropSubmitDisabled={isCropSubmitDisabled}
           isIgnoreCrop={isIgnoreCrop}
           uploadText={uploadText}

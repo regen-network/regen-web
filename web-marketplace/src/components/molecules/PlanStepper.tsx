@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
 import Stepper from 'web-components/src/components/stepper';
@@ -29,7 +29,7 @@ const PlanStepper: React.FC<React.PropsWithChildren<PlanStepperProps>> = ({
       sx={{ mw: 240 }}
       activeStep={activeStep}
       steps={steps}
-      background={background}
+      background={background.src}
     />
   );
 };

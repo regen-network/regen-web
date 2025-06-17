@@ -1,5 +1,5 @@
 import { UseFormReturn } from 'react-hook-form';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 import {
   isValidAddress,

@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const basePostContent = {
   // eslint-disable-next-line lingui/no-unlocalized-strings

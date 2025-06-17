@@ -1,7 +1,9 @@
 import { MutableRefObject, useEffect, useMemo } from 'react';
 import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
-import { msg, plural, Trans } from '@lingui/macro';
+import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
+import { useProjectEditContext } from 'legacy-pages';
 import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
 import {
@@ -28,7 +30,6 @@ import {
   UPDATE,
 } from 'lib/constants/shared.constants';
 
-import { useProjectEditContext } from 'pages';
 import { DragAndDropLabel } from 'components/atoms/DragAndDropLabel';
 
 import { apiUri } from '../../../lib/apiUri';
@@ -83,7 +84,6 @@ export const MediaFormPhotos = ({
   const imageDropCommonProps: Partial<FileDropProps> = {
     classes: { main: classes.fullSizeMedia },
     buttonText: _(IMAGE_UPLOAD_BUTTON_LABEL),
-    fixedCrop: cropAspectMediaForm,
   };
 
   const { fields, append, remove, move } = useFieldArray({
@@ -208,7 +208,7 @@ export const MediaFormPhotos = ({
             onClose={onClose}
             onSubmit={onSubmit}
             initialImage={initialFile}
-            fixedCrop={cropAspectMediaForm}
+            aspect={cropAspectMediaForm}
             isIgnoreCrop={!!value}
             uploadText={_(UPLOAD_IMAGE)}
             updateText={_(UPDATE)}
@@ -297,7 +297,7 @@ export const MediaFormPhotos = ({
                   onClose={onClose}
                   onSubmit={onSubmit}
                   initialImage={initialFile}
-                  fixedCrop={cropAspectMediaForm}
+                  aspect={cropAspectMediaForm}
                   isCropSubmitDisabled={hasFieldError}
                   isIgnoreCrop={!!value}
                   {...cropImageModalText}

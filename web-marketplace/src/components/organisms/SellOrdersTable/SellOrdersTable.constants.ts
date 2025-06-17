@@ -1,5 +1,5 @@
 import { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 import { SELL_ORDERS_HEADERS } from './SellOrdersTable.types';
 

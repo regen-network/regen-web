@@ -2,6 +2,7 @@ import {
   QuerySellOrdersResponse,
   SellOrderInfo,
 } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
+import { getAskUsdAmount } from 'legacy-pages/Marketplace/Storefront/Storefront.utils';
 import uniq from 'lodash/uniq';
 import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
 

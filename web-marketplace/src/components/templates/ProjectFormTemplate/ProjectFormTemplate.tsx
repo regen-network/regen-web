@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
+import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 
-import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { OffChainProject } from 'hooks/projects/useProjectWithMetadata';
 
 import { EditFormTemplate } from './EditFormTemplate';

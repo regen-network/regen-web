@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const EMPTY_STORY_TITLE_ERROR_MSG = msg`Required since you added a project story`;
 export const EMPTY_STORY_ERROR_MSG = msg`Required since you added a project story title`;

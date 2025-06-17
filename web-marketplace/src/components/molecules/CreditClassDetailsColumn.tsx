@@ -1,6 +1,7 @@
 import React from 'react';
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Avatar } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
@@ -110,7 +111,7 @@ function CreditClassDetailsColumn({
             <Avatar className={styles.iconContainer}>
               <img
                 className={styles.icon}
-                src={CarbonCreditFruit}
+                src={CarbonCreditFruit.src}
                 alt={_(msg`carbon credit`)}
               />
             </Avatar>
@@ -123,7 +124,7 @@ function CreditClassDetailsColumn({
             <Avatar className={styles.iconContainer}>
               <img
                 className={styles.icon}
-                src={Sequestration}
+                src={Sequestration.src}
                 alt={_(msg`ton of carbon`)}
               />
             </Avatar>

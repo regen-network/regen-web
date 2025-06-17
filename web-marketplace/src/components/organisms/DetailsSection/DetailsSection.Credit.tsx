@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box, Grid } from '@mui/material';
 
 import {

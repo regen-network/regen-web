@@ -5,6 +5,7 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useProjectEditContext } from 'legacy-pages/ProjectEdit';
 
 import {
   ProjectPatch,
@@ -15,8 +16,6 @@ import { useAuth } from 'lib/auth/auth';
 import { getAccountProjectsByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountProjectsByIdQuery/getAccountProjectsByIdQuery.utils';
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { getUnanchoredProjectBaseMetadata } from 'lib/rdf';
-
-import { useProjectEditContext } from 'pages/ProjectEdit';
 
 type CreateOrUpdateProjectParams = {
   offChainProjectId?: string;

@@ -1,8 +1,9 @@
 import React from 'react';
-import { msg, plural } from '@lingui/macro';
+import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 import { useAtom, useSetAtom } from 'jotai';
+import { basketDetailAtom } from 'legacy-pages/BasketDetails/BasketDetails.store';
 
 import { Flex } from 'web-components/src/components/box';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -23,8 +24,7 @@ import {
 } from 'lib/atoms/modals.atoms';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
-
+import toucanBasket from '../../../../public/png/toucan-basket.png';
 import { getAccountUrl } from '../../../lib/block-explorer';
 import { OptimizedImage } from '../../atoms/OptimizedImage';
 import { MAXIMUM_FRACTION_DIGITS } from '../SellOrdersTable/SellOrdersTable.constants';
@@ -100,7 +100,7 @@ export const BasketOverview: React.FC<
             <BasketImageContainer item xs={12} sm={5}>
               <OptimizedImage
                 className={styles.image}
-                src="/png/toucan-basket.png"
+                src={toucanBasket.src}
                 alt={name}
               />
             </BasketImageContainer>

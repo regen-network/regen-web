@@ -1,11 +1,15 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
+import { useProjectEditContext } from 'legacy-pages';
+import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
+import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
+import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import slugify from 'slug';
 
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
@@ -20,10 +24,6 @@ import {
   REQUIRED_MESSAGE,
 } from 'lib/constants/shared.constants';
 
-import { useProjectEditContext } from 'pages';
-import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
-import { useCreateProjectContext } from 'pages/ProjectCreate';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';

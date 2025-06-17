@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const CREATE_BATCH_FORM_REQUIRED_ERROR = msg`Must have recipients`;
 export const CREATE_BATCH_FORM_MINIMUM_ERROR = msg`Minimum of 1 recipient`;

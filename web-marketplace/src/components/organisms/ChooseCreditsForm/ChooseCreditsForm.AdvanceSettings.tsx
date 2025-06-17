@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { Link } from 'web-marketplace/src/components/atoms';
 import { CREDIT_VINTAGE_OPTIONS } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 

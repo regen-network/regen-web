@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAtom, useSetAtom } from 'jotai';
+import { buyFromProjectIdAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
 
 import {
   chooseHowToPurchaseModalAtom,
@@ -8,7 +9,6 @@ import {
 } from 'lib/atoms/modals.atoms';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { buyFromProjectIdAtom } from 'pages/BuyCredits/BuyCredits.atoms';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
 type OnBuyButtonClickParams = {

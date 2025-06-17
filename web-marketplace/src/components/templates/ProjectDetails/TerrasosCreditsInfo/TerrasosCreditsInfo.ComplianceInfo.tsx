@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 
@@ -43,7 +43,7 @@ const ComplianceInfo = ({
     <InfoTemplate
       upperContent={complianceCredits}
       title={_(msg`Compliance info`)}
-      imgSrc={ComplianceMarketIcon}
+      imgSrc={ComplianceMarketIcon.src}
       imgAlt={_(msg`Checkmark list`)}
       description={<BlockContent content={description} />}
       learnMoreLink={learnMoreLink}

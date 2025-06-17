@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { DEFAULT_NAME } from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
 import Modal from 'web-components/src/components/modal';
@@ -11,9 +13,6 @@ import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/moda
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { Account } from 'generated/graphql';
-
-import { DEFAULT_NAME } from 'pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 
 import {
   CURRENT_ACCOUNT,

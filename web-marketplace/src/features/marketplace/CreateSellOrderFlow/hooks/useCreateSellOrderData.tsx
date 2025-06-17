@@ -1,6 +1,6 @@
-import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
-import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
+import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 
 type Props = {
   projectId: string;

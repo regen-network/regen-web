@@ -68,8 +68,6 @@ const BasketDetails = safeLazy(
   () => import('../../legacy-pages/BasketDetails'),
 );
 const BuyCredits = safeLazy(() => import('../../legacy-pages/BuyCredits'));
-const Sell = safeLazy(() => import('../../legacy-pages/Sell/Sell'));
-
 const ChooseCreditClassPage = safeLazy(
   () => import('../../legacy-pages/ChooseCreditClass'),
 );
@@ -118,6 +116,7 @@ const ProjectReview = safeLazy(
   () => import('../../legacy-pages/ProjectReview'),
 );
 const Roles = safeLazy(() => import('../../legacy-pages/Roles'));
+const Sell = safeLazy(() => import('../../legacy-pages/Sell/Sell'));
 const VerifyEmail = safeLazy(() => import('../../legacy-pages/VerifyEmail'));
 const ProjectEdit = safeLazy(() => import('../../legacy-pages/ProjectEdit'));
 const Activity = safeLazy(() => import('../../legacy-pages/Activity'));

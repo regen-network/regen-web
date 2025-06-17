@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const TITLE = msg`Choose how to purchase credits`;
 export const CRYPTO_SUBTITLE = msg`Buy using crypto`;

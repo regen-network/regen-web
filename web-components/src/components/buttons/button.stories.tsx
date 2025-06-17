@@ -1,7 +1,7 @@
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { Box } from '@mui/material';
 
 import { Flex } from '../box';
+import ArrowDownIcon from '../icons/ArrowDownIcon';
 import ContainedButton from './ContainedButton';
 import { CopyButton } from './CopyButton';
 import { EditButton } from './EditButton';
@@ -21,8 +21,8 @@ export default {
 
 export const outlinedButton = (): JSX.Element => (
   <Flex sx={{ gap: 4 }}>
-    <OutlinedButton startIcon={<ArrowDownwardIcon />}>read more</OutlinedButton>
-    <OutlinedButton disabled startIcon={<ArrowDownwardIcon />}>
+    <OutlinedButton startIcon={<ArrowDownIcon />}>read more</OutlinedButton>
+    <OutlinedButton disabled startIcon={<ArrowDownIcon />}>
       disabled
     </OutlinedButton>
   </Flex>

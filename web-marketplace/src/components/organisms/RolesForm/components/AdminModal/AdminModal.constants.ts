@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const DIFFERENT_ADDRESSES_ERROR_MSG = msg`The address should be different from the current address`;
 export const TITLE = msg`Are you sure you want to change this project admin?`;

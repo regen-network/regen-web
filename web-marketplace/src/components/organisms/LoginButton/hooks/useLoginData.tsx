@@ -2,11 +2,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useManager } from '@cosmos-kit/react-lite';
 import { useLingui } from '@lingui/react';
+import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { DRAFT_ID } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 import { LoginModalState } from 'components/organisms/LoginModal/LoginModal.types';
 import { useQueryIsIssuer } from 'hooks/useQueryIsIssuer';
 

@@ -1,6 +1,9 @@
 import { useFormContext, useWatch } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
+import { PAYMENT_OPTIONS } from 'legacy-pages/BuyCredits/BuyCredits.constants';
+import { PaymentOptionsType } from 'legacy-pages/BuyCredits/BuyCredits.types';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import Card from 'web-components/src/components/cards/Card';
@@ -9,9 +12,6 @@ import TextField from 'web-components/src/components/inputs/new/TextField/TextFi
 import { Body, Title } from 'web-components/src/components/typography';
 
 import { Wallet } from 'lib/wallet/wallet';
-
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 
 import { PaymentInfoFormSchemaType } from './PaymentInfoForm.schema';
 

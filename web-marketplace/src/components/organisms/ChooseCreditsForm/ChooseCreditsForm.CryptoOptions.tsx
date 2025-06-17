@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
-import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { cryptoOptions } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 
 import { Radio } from 'web-components/src/components/inputs/new/Radio/Radio';

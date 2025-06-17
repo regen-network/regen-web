@@ -1,10 +1,9 @@
+import { getPurchaseInfo } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
 import { getClassImageWithGreenDefault } from 'utils/image/classImage';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
-
-import { getPurchaseInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 
 import {
   CreditClassWithMedata,

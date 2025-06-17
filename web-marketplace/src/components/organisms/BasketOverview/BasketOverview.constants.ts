@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const PUT_BASKET_LABEL = msg`Put in basket`;
 export const PUT_BASKET_TOOLTIP = msg`You do not have any ecocredits that are elligible for this basket.`;

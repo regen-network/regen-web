@@ -1,9 +1,12 @@
 import { useEffect, useMemo } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
-import { msg, plural } from '@lingui/macro';
+import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
+import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
+import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
+import { useProjectEditContext } from 'legacy-pages/ProjectEdit';
 import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
@@ -12,9 +15,6 @@ import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/
 
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
-import { useCreateProjectContext } from 'pages/ProjectCreate';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
-import { useProjectEditContext } from 'pages/ProjectEdit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { MetadataSubmitProps } from 'hooks/projects/useProjectWithMetadata';

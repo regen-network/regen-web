@@ -1,11 +1,11 @@
+import { DEFAULT_NAME } from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
+
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { Account, Maybe } from 'generated/graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
-
-import { DEFAULT_NAME } from 'pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 
 type GetAddressParams = {
   walletAddress?: string | null;

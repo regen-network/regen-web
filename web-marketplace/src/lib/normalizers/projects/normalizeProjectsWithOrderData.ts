@@ -1,19 +1,22 @@
 import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
+import { ProjectWithOrderData } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
+import {
+  getPurchaseInfo,
+  normalizeToUISellOrderInfo,
+} from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
 
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { IS_TERRASOS } from 'lib/env';
 import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
 
-import { ProjectWithOrderData } from 'pages/Projects/AllProjects/AllProjects.types';
-import {
-  getPurchaseInfo,
-  normalizeToUISellOrderInfo,
-} from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import {
   ADMIN_ON_CHAIN_PROJECTS,
   ON_CHAIN_PROJECTS,
 } from 'components/templates/ProjectDetails/hooks/useMoreProjects.constants';
 import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+
+import defaultProject from '../../../../public/jpg/default-project.jpg';
+import defaultProject2 from '../../../../public/jpg/default-project2.jpg';
 
 interface NormalizeProjectsWithOrderDataParams {
   projects?: (ProjectInfo | undefined)[];
@@ -50,8 +53,8 @@ export const normalizeProjectsWithOrderData = ({
     });
 
     const defaultProjectImage = IS_TERRASOS
-      ? '/jpg/default-project2.jpg'
-      : '/jpg/default-project.jpg';
+      ? defaultProject2.src
+      : defaultProject.src;
 
     return {
       id: project.id,

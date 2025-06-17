@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 import { RadioCardItem } from 'web-components/src/components/atoms/RadioCard/RadioCard.types';
 import OrganizationIcon from 'web-components/src/components/icons/OrganizationIcon';

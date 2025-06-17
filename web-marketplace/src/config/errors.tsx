@@ -1,5 +1,5 @@
 import { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 import { BrokenLinkIcon } from 'web-components/src/components/icons/BrokenLinkIcon';
 import RegenNotFoundIcon from 'web-components/src/components/icons/RegenNotFoundIcon';

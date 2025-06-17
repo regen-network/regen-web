@@ -1,15 +1,14 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { getProjectCreationPercentage } from 'legacy-pages/ProjectCreate/ProjectCreate.utils';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
 
 import { SAVE_EXIT_TEXT } from 'lib/constants/shared.constants';
 
-import { getProjectCreationPercentage } from 'pages/ProjectCreate/ProjectCreate.utils';
-
-import { useProjectEditContext } from '../../pages/ProjectEdit';
+import { useProjectEditContext } from '../../legacy-pages/ProjectEdit';
 import { EditProjectPageFooter } from './EditProjectPageFooter';
 
 interface Props {

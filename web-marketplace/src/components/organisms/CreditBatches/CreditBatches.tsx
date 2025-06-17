@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { SxProps } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -26,6 +26,7 @@ import {
   ACTIONS_TABLE_ACTIONS_TEXT,
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
+import { LINK_PREFIX } from 'lib/env';
 
 import { AccountLink, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
@@ -36,7 +37,6 @@ import {
   getCreditBatchesHeadCells,
 } from './CreditBatches.config';
 import { useCreditBatchesStyles } from './CreditBatches.styles';
-import { LINK_PREFIX } from 'lib/env';
 
 interface CreditBatchProps {
   creditClassId?: string | null;

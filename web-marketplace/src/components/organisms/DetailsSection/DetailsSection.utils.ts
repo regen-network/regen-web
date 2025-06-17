@@ -1,10 +1,10 @@
+import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
+
 import { Account } from 'web-components/src/components/user/UserInfo';
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { LINK_PREFIX } from 'lib/env';
-
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
 export const getDisplayAccountOrAddress = (
   address?: string,

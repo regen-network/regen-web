@@ -1,10 +1,10 @@
-import { TranslatorType } from 'lib/i18n/i18n.types';
-
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_TYPE,
   DEFAULT_PROFILE_USER_AVATAR,
-} from 'pages/ProfileEdit/ProfileEdit.constants';
+} from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
+
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { ProfileModalSchemaType } from './ProfileModal.schema';
 

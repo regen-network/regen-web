@@ -5,11 +5,14 @@ import {
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useAtom, useSetAtom } from 'jotai';
+import { useCreateProjectContext } from 'legacy-pages/ProjectCreate';
+import { useProjectSaveAndExit } from 'legacy-pages/ProjectCreate/hooks/useProjectSaveAndExit';
+import { RoleSubmitProps } from 'legacy-pages/Roles/hooks/useRolesSubmit';
 
 import { Flex } from 'web-components/src/components/box';
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
@@ -26,14 +29,11 @@ import {
 } from 'lib/constants/shared.constants';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
-import { useCreateProjectContext } from 'pages/ProjectCreate';
-import { useProjectSaveAndExit } from 'pages/ProjectCreate/hooks/useProjectSaveAndExit';
-import { RoleSubmitProps } from 'pages/Roles/hooks/useRolesSubmit';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
+import { useProjectEditContext } from '../../../legacy-pages/ProjectEdit';
 import { getAccountsByNameOrAddrQuery } from '../../../lib/queries/react-query/registry-server/graphql/getAccountsByNameOrAddr/getAccountsByNameOrAddrQuery';
-import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
 import { useHandleUpload } from '../MediaForm/hooks/useHandleUpload';
 import { AdminModal } from './components/AdminModal/AdminModal';

@@ -1,5 +1,8 @@
-import { msg } from '@lingui/macro';
+import React from 'react';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { getCreditsTooltip } from 'legacy-pages/Projects/AllProjects/utils/getCreditsTooltip';
+import { getIsSoldOut } from 'legacy-pages/Projects/AllProjects/utils/getIsSoldOut';
 
 import CreditsIssuedIcon from 'web-components/src/components/icons/CreditsIssued';
 import CreditsRetiredIcon from 'web-components/src/components/icons/CreditsRetired';
@@ -10,9 +13,6 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { IS_TERRASOS } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
-
-import { getCreditsTooltip } from 'pages/Projects/AllProjects/utils/getCreditsTooltip';
-import { getIsSoldOut } from 'pages/Projects/AllProjects/utils/getIsSoldOut';
 
 import type { BatchTotalsForProject } from '../../../types/ledger/ecocredit';
 import {
@@ -50,6 +50,7 @@ export function ProjectBatchTotals({
     ? isSoldOut
     : !hasAvailableCredits;
 
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   const tooltipClassName = IS_TERRASOS ? 'w-[17px] h-[17px]' : '';
   return (
     <div

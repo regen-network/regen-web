@@ -273,7 +273,7 @@ Regen codebase use [lingui](https://lingui.dev/) Internationalization Framework.
   - If the constant is an object:
 ```
 import { i18n } from '@lingui/core';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 const myObject = {
   myKey: i18n._(msg`MyValue`)

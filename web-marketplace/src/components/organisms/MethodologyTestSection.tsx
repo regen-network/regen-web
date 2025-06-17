@@ -41,7 +41,7 @@ function MethodologyTestSection({ title, descriptionRaw }: Props): JSX.Element {
 
   return (
     <BackgroundImgSection
-      img={testMethodologyImg}
+      img={testMethodologyImg.src}
       classes={{ main: styles.main, section: styles.section }}
     >
       {title && (

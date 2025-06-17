@@ -1,4 +1,4 @@
-export const IMAGE_STORAGE_BASE_URL = import.meta.env
-  .VITE_IMAGE_STORAGE_BASE_URL;
+export const IMAGE_STORAGE_BASE_URL =
+  process.env.NEXT_PUBLIC_IMAGE_STORAGE_BASE_URL;
 
-export const API_URI = import.meta.env.VITE_API_URI;
+export const API_URI = process.env.NEXT_PUBLIC_API_URI;

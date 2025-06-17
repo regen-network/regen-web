@@ -1,5 +1,6 @@
 import type { ComponentType, ReactElement, SVGProps } from 'react';
 import { msg } from '@lingui/macro';
+import { NOT_SUPPORTED_TOOLTIP_TEXT } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';
@@ -14,8 +15,6 @@ import { ShoppingCartIcon } from 'web-components/src/components/icons/ShoppingCa
 import { UserMenuIcon } from 'web-components/src/components/icons/UserMenuIcon';
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
-
-import { NOT_SUPPORTED_TOOLTIP_TEXT } from 'pages/Dashboard/MyProjects/MyProjects.constants';
 
 import {
   DashboardNavigationSection,

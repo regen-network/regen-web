@@ -31,7 +31,6 @@ const RegenThemeProvider = ({
   if (injectStyles) {
     injectStyles();
   }
-
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={customTheme ?? theme}>

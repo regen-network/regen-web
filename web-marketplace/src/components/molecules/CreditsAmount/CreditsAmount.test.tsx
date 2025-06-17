@@ -1,9 +1,8 @@
 import userEvent from '@testing-library/user-event';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
+import { paymentOptionAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import { PAYMENT_OPTIONS } from 'legacy-pages/BuyCredits/BuyCredits.constants';
 import { render, screen } from 'web-marketplace/test/test-utils';
-
-import { paymentOptionAtom } from 'pages/BuyCredits/BuyCredits.atoms';
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 
 import { CreditsAmount } from './CreditsAmount';
 import { cardSellOrders, cryptoCurrencies } from './CreditsAmount.mock';

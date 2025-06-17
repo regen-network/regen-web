@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const MAX_AMOUNT = msg`Amount cannot exceed`;
 export const MIN_USD_AMOUNT = msg`Must be at least`;

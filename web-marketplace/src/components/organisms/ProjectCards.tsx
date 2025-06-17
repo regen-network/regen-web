@@ -19,6 +19,7 @@ import {
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 import { useTracker } from 'lib/tracker/useTracker';
 
+import defaultProject from '../../../public/jpg/default-project.jpg';
 import { Maybe, MoreProjectFieldsFragment } from '../../generated/graphql';
 
 type Props = {
@@ -76,8 +77,8 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
   const { classes: styles, cx } = useStyles();
   const theme: Theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const imageStorageBaseUrl = import.meta.env.VITE_IMAGE_STORAGE_BASE_URL;
-  const apiServerUrl = import.meta.env.VITE_API_URI;
+  const imageStorageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_STORAGE_BASE_URL;
+  const apiServerUrl = process.env.NEXT_PUBLIC_API_URI;
   const { track } = useTracker();
   const location = useLocation();
   const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
@@ -100,7 +101,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
       name={project.metadata?.['schema:name']}
       imgSrc={
         project.metadata?.['regen:previewPhoto']?.['schema:url'] ||
-        '/jpg/default-project.jpg'
+        defaultProject.src
       }
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}

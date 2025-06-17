@@ -1,7 +1,8 @@
 import { MutableRefObject, useEffect, useMemo, useState } from 'react';
 import { SubmitHandler, useFieldArray, useWatch } from 'react-hook-form';
-import { msg, plural, Trans } from '@lingui/macro';
+import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { MAPBOX_TOKEN } from 'config/globals';
 import { Feature, Point } from 'geojson';
@@ -48,7 +49,7 @@ import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 
 import { EditFileFormSchemaType } from '../EditFileForm/EditFileForm.schema';
 import { EditFileModal } from '../EditFileModal/EditFileModal';
-import { cropAspectMediaForm, DEFAULT } from '../MediaForm/MediaForm.constants';
+import { DEFAULT } from '../MediaForm/MediaForm.constants';
 import { getHandleDelete } from '../MediaForm/MediaForm.utils';
 import { useMediaFormStyles } from '../MediaForm/useMediaFormStyles';
 import { useMetadataFormStyles } from '../MetadataForm/MetadataForm.styles';
@@ -113,7 +114,6 @@ export const PostForm = ({
   const imageDropCommonProps: Partial<FileDropProps> = {
     classes: { main: classes.fullSizeMedia },
     buttonText: _(FILE_UPLOAD_BUTTON_LABEL),
-    fixedCrop: cropAspectMediaForm,
   };
 
   const title = useWatch({ control: form.control, name: 'title' });

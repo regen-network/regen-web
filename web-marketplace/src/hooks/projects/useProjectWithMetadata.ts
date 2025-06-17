@@ -3,6 +3,7 @@ import { useApolloClient } from '@apollo/client';
 import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import { UseProjectEditSubmitParams } from 'legacy-pages/ProjectEdit/hooks/useProjectEditSubmit';
 
 import {
   ProjectByIdQuery,
@@ -25,7 +26,6 @@ import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graph
 import { getProjectByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery';
 import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
 
-import { UseProjectEditSubmitParams } from 'pages/ProjectEdit/hooks/useProjectEditSubmit';
 import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/BasicInfoForm.schema';
 import { DescriptionSchemaType } from 'components/organisms/DescriptionForm/DescriptionForm.schema';
 import { LocationFormSchemaType } from 'components/organisms/LocationForm/LocationForm.schema';

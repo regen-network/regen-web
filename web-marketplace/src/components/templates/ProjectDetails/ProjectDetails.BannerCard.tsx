@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { ProjectInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useAtom } from 'jotai';

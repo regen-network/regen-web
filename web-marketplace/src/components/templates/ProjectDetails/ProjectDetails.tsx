@@ -5,6 +5,10 @@ import { Box, Skeleton, useTheme } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
 import { useAtom, useSetAtom } from 'jotai';
+import { buyFromProjectIdAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import { CREATE_POST_DISABLED_TOOLTIP_TEXT } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
+import { SOLD_OUT_TOOLTIP } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
+import { getPriceToDisplay } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
@@ -36,10 +40,6 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
-import { buyFromProjectIdAtom } from 'pages/BuyCredits/BuyCredits.atoms';
-import { CREATE_POST_DISABLED_TOOLTIP_TEXT } from 'pages/Dashboard/MyProjects/MyProjects.constants';
-import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constants';
-import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
@@ -51,8 +51,8 @@ import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import { useLedger } from '../../../ledger';
+import { NotFoundPage } from '../../../legacy-pages/NotFound/NotFound';
 import { client as sanityClient } from '../../../lib/clients/sanity';
-import { NotFoundPage } from '../../../pages/NotFound/NotFound';
 import { GettingStartedResourcesSection } from '../../molecules';
 import { ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';

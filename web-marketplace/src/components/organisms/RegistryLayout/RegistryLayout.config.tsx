@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { Theme } from '@mui/material';
 
 import { HeaderColors } from 'web-components/src/components/header';
@@ -21,7 +21,7 @@ export const getMenuItems = (
           label: _(msg`All projects`),
           linkComponent: Link,
           importCallback: (): Promise<any> =>
-            import('../../../pages/Projects/AllProjects'),
+            import('../../../legacy-pages/Projects/AllProjects'),
         },
         {
           pathname,
@@ -29,7 +29,7 @@ export const getMenuItems = (
           label: _(msg`Prefinance projects`),
           linkComponent: Link,
           importCallback: (): Promise<any> =>
-            import('../../../pages/Projects/PrefinanceProjects'),
+            import('../../../legacy-pages/Projects/PrefinanceProjects'),
         },
       ]
     : undefined;
@@ -48,7 +48,8 @@ export const getMenuItems = (
           href: '/stats/activity',
           label: _(msg`Activity`),
           linkComponent: Link,
-          importCallback: (): Promise<any> => import('../../../pages/Activity'),
+          importCallback: (): Promise<any> =>
+            import('../../../legacy-pages/Activity'),
         },
         {
           pathname,
@@ -56,7 +57,7 @@ export const getMenuItems = (
           label: _(msg`Ecocredit batches`),
           linkComponent: Link,
           importCallback: (): Promise<any> =>
-            import('../../../pages/EcocreditBatches'),
+            import('../../../legacy-pages/EcocreditBatches'),
         },
       ],
     },

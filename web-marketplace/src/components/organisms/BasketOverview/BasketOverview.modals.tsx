@@ -2,6 +2,14 @@ import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
 import { ERRORS } from 'config/errors';
 import { useAtom, useSetAtom } from 'jotai';
+import { basketDetailAtom } from 'legacy-pages/BasketDetails/BasketDetails.store';
+import useBasketPutSubmit from 'legacy-pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit';
+import useBasketTakeSubmit from 'legacy-pages/Dashboard/MyEcocredits/hooks/useBasketTakeSubmit';
+import {
+  BASKET_TAKE_SUBTITLE,
+  BASKET_TAKE_TITLE,
+} from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.constants';
+import { OnTxSuccessfulProps } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.types';
 
 import { BasketPutModal } from 'web-components/src/components/modal/BasketPutModal';
 import { BasketTakeModal } from 'web-components/src/components/modal/BasketTakeModal';
@@ -35,14 +43,6 @@ import {
 } from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
-import useBasketPutSubmit from 'pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit';
-import useBasketTakeSubmit from 'pages/Dashboard/MyEcocredits/hooks/useBasketTakeSubmit';
-import {
-  BASKET_TAKE_SUBTITLE,
-  BASKET_TAKE_TITLE,
-} from 'pages/Dashboard/MyEcocredits/MyEcocredits.constants';
-import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.types';
 import { useMsgClient } from 'hooks';
 
 import { AVAILABLE_LABEL } from '../../../lib/constants/shared.constants';
@@ -72,7 +72,7 @@ export const BasketOverviewModals = ({
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
   const { wallet } = useWallet();
   const accountAddress = wallet?.address ?? '';
-  const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN || '';
+  const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
   const bottomFieldsTextMapping = useMemo(
     () => getBottomFieldsTextMapping(_),
     [_],

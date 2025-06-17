@@ -4,6 +4,19 @@ import { useLingui } from '@lingui/react';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
+import {
+  cardDetailsMissingAtom,
+  resetBuyCreditsFormAtom,
+} from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import {
+  NEXT,
+  PAYMENT_OPTIONS,
+} from 'legacy-pages/BuyCredits/BuyCredits.constants';
+import {
+  BuyCreditsSchemaTypes,
+  CardDetails,
+  PaymentOptionsType,
+} from 'legacy-pages/BuyCredits/BuyCredits.types';
 import { postData } from 'utils/fetch/postData';
 
 import { PrevNextButtons } from 'web-components/src/components/molecules/PrevNextButtons/PrevNextButtons';
@@ -15,16 +28,6 @@ import { useAuth } from 'lib/auth/auth';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 
-import {
-  cardDetailsMissingAtom,
-  resetBuyCreditsFormAtom,
-} from 'pages/BuyCredits/BuyCredits.atoms';
-import { NEXT, PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import {
-  BuyCreditsSchemaTypes,
-  CardDetails,
-  PaymentOptionsType,
-} from 'pages/BuyCredits/BuyCredits.types';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';

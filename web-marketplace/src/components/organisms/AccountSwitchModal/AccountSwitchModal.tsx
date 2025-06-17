@@ -1,5 +1,5 @@
-import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 
 import Modal, { RegenModalProps } from 'web-components/src/components/modal';
 import { Body, Title } from 'web-components/src/components/typography';

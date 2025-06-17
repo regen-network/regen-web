@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { BasketInfo } from '@regen-network/api/regen/ecocredit/basket/v1/query';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import { basketDetailAtom } from 'legacy-pages/BasketDetails/BasketDetails.store';
 
 import { Option } from 'web-components/src/components/inputs/SelectTextField';
 
@@ -10,8 +11,6 @@ import { useLedger } from 'ledger';
 import { getBasketQuery } from 'lib/queries/react-query/ecocredit/basket/getBasketQuery/getBasketQuery';
 import { getBalancesQuery } from 'lib/queries/react-query/ecocredit/getBalancesQuery/getBalancesQuery';
 import { useWallet } from 'lib/wallet/wallet';
-
-import { basketDetailAtom } from 'pages/BasketDetails/BasketDetails.store';
 
 import { useFetchEcocredit } from './useFetchEcocredit';
 

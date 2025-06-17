@@ -1,4 +1,5 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
+import { VOLUNTARY_MARKET } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
 
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { LinkType } from 'web-components/src/types/shared/linkType';
@@ -10,8 +11,6 @@ import {
 import { getLinkHref } from 'lib/button';
 import { ProjectMetadataLD, ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 import { TranslatorType } from 'lib/i18n/i18n.types';
-
-import { VOLUNTARY_MARKET } from 'pages/Projects/AllProjects/AllProjects.constants';
 
 import ComplianceInfo from './TerrasosCreditsInfo.ComplianceInfo';
 import TebuInfo from './TerrasosCreditsInfo.TebuInfo';

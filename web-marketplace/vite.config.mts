@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
   const env = loadEnv(mode, process.cwd());
   const index =
-    env.VITE_MARKETPLACE_CLIENT === 'terrasos'
+    env.NEXT_PUBLIC_MARKETPLACE_CLIENT === 'terrasos'
       ? 'terrasos/index.html'
       : 'index.html';
   return {

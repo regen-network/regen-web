@@ -1,5 +1,5 @@
 import React, { forwardRef, useState } from 'react';
-import ReactPlayer from 'react-player/es6';
+import ReactPlayer from 'react-player';
 import {
   CardMedia,
   Collapse,

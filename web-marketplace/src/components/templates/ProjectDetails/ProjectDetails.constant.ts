@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const JURISDICTION_REGEX = /([A-Z]{2})(-([A-Z]{2}))?/;
 

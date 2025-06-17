@@ -39,7 +39,7 @@ export const TerrasosFooter = ({
           <div className="max-w-[300px] md:max-w-none md:w-[40%] md:pl-[12px]">
             <div className="flex flex-col items-center md:items-start gap-30 md:pr-[10%]">
               <img
-                src={terrasosFooterLogo}
+                src={terrasosFooterLogo.src}
                 alt={logoAlt}
                 className="w-[226px]"
               />

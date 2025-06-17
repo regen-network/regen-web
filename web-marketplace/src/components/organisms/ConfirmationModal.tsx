@@ -1,6 +1,7 @@
 import React from 'react';
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Avatar, Box, Link } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
@@ -85,7 +86,7 @@ const ConfirmationModal: React.FC<React.PropsWithChildren<Props>> = ({
     <Modal className={styles.root} open={open} onClose={onClose}>
       <img
         className={cx(styles.cows, styles.verticalSpacing)}
-        src={CowIllustration}
+        src={CowIllustration.src}
         alt={_(msg`cows celebrating`)}
       />
       <Title align="center" variant="h3" sx={{ pb: [6, 0] }}>
@@ -95,7 +96,7 @@ const ConfirmationModal: React.FC<React.PropsWithChildren<Props>> = ({
         <Avatar className={styles.iconContainer}>
           <img
             className={styles.icon}
-            src={CarbonCreditFruit}
+            src={CarbonCreditFruit.src}
             alt={_(msg`eco-credit`)}
           />
         </Avatar>

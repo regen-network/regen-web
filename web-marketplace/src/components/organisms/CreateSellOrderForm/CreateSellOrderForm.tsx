@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useFormState, useWatch } from 'react-hook-form';
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/material';
 import { USD_DENOM, USDC_DENOM } from 'config/allowedBaseDenoms';
 import { ERRORS, errorsMapping } from 'config/errors';

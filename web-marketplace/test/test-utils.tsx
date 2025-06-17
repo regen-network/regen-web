@@ -7,12 +7,11 @@ import {
   render as rtlRender,
   RenderOptions,
 } from '@testing-library/react';
+import { Analytics } from 'analytics';
 import { PrimitiveAtom, Provider as JotaiProvider } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
+import { PaymentOptionsType } from 'legacy-pages/BuyCredits/BuyCredits.types';
 import { AnalyticsProvider } from 'use-analytics';
-
-import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
-import { Analytics } from 'analytics';
 
 // Custom hook to setup react hook form context
 export function useCustomForm(

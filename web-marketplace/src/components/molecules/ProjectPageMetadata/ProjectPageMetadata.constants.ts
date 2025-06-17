@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const PROJECT_PAGE_METADATA_HELPER_TEXT = msg`This data is on chain or anchored on chain via a content hash.`;
 

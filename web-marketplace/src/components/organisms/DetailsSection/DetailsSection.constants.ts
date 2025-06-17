@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const VIEW_METHODOLOGY = msg`view methodology`;
 export const VIEW_CREDIT_CLASS_DOC = msg`view credit class doc`;

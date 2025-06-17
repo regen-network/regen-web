@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import { Box, Grid } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
+import Image from 'next/image';
 
 import NoBasketTokensIcon from 'web-components/src/components/icons/NoBasketTokensIcon';
 import {
@@ -17,7 +19,7 @@ import {
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
 
-import { ReactComponent as BasketIcon } from '../../assets/svgs/rNCT.svg';
+import basketIcon from '../../assets/svgs/rNCT.svg';
 import { NoCredits } from '../molecules';
 
 type BasketTableProps = {
@@ -72,7 +74,7 @@ export const BasketsTable: React.FC<React.PropsWithChildren<BasketTableProps>> =
           return [
             <Grid container wrap="nowrap">
               <Grid item>
-                <BasketIcon />
+                <Image src={basketIcon} alt="" />
               </Grid>
               <Grid
                 item

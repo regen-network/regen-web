@@ -2,6 +2,13 @@ import { MouseEvent } from 'react';
 import { i18n } from '@lingui/core';
 import { MapiResponse } from '@mapbox/mapbox-sdk/lib/classes/mapi-response';
 import { GeocodeResponse } from '@mapbox/mapbox-sdk/services/geocoding';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_COMPANY_AVATAR,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
+import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 import { getResizedImageUrl } from 'utils/image/getResizedImageUrl';
 
 import PhoneIcon from 'web-components/src/components/icons/PhoneIcon';
@@ -34,14 +41,6 @@ import {
   ProjectStakeholder,
 } from 'lib/db/types/json-ld';
 import { getSanityImgSrc } from 'lib/imgSrc';
-
-import {
-  DEFAULT_NAME,
-  DEFAULT_PROFILE_COMPANY_AVATAR,
-  DEFAULT_PROFILE_USER_AVATAR,
-} from 'pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
-import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 import {
   API_URI,

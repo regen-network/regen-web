@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
+import { SOLD_OUT_TOOLTIP } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -10,8 +11,6 @@ import { Body, Title } from 'web-components/src/components/typography';
 
 import { ProjectPrefinancing } from 'generated/sanity-graphql';
 import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
-
-import { SOLD_OUT_TOOLTIP } from 'pages/Projects/AllProjects/AllProjects.constants';
 
 import {
   CLASS_STATUS,

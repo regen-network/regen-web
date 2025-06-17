@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { i18n } from '@lingui/core';
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
+import { Trans } from '@lingui/react/macro';
 
 import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';

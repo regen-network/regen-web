@@ -1,6 +1,10 @@
 import { useCallback } from 'react';
 import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
+import {
+  PURCHASE_SUCCESSFUL,
+  VIEW_CERTIFICATE,
+} from 'legacy-pages/BuyCredits/BuyCredits.constants';
 
 import { TxBuySuccessfulModal } from 'web-components/src/components/modal/TxBuySuccessfulModal/TxBuySuccessfulModal';
 
@@ -12,11 +16,9 @@ import {
   SEE_MORE,
 } from 'lib/constants/shared.constants';
 
-import {
-  PURCHASE_SUCCESSFUL,
-  VIEW_CERTIFICATE,
-} from 'pages/BuyCredits/BuyCredits.constants';
 import { Link } from 'components/atoms';
+
+// import topographyPatternStepper from '../../../../public/png/topography-pattern-stepper.png';
 
 export const RegistryLayoutTxBuySuccessfulModal = (): JSX.Element => {
   const { _ } = useLingui();
@@ -60,7 +62,7 @@ export const RegistryLayoutTxBuySuccessfulModal = (): JSX.Element => {
       blockchainRecordText={_(BLOCKCHAIN_RECORD)}
       steps={steps}
       description={description}
-      bgClassName="bg-[url('/png/topography-pattern-stepper.png')]"
+      bgClassName=""
     />
   );
 };

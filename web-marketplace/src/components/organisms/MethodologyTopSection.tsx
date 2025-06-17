@@ -21,7 +21,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
-    backgroundImage: `url(${topoBackground})`,
+    backgroundImage: `url(${topoBackground.src})`,
   },
   content: {
     display: 'flex',

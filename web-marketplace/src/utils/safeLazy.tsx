@@ -1,6 +1,5 @@
 import { ComponentType, lazy, ReactNode } from 'react';
-
-import ErrorPage from 'pages/ErrorPage';
+import ErrorPage from 'legacy-pages/ErrorPage';
 
 type SafeLazyOptions = {
   retries?: number;

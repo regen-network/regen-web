@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { PaymentElement } from '@stripe/react-stripe-js';
 
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';

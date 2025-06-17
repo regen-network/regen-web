@@ -1,4 +1,9 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import {
+  ProjectWithOrderData,
+  UISellOrderInfo,
+} from 'legacy-pages/Projects/AllProjects/AllProjects.types';
+import { getPriceToDisplay } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
 import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
 import {
@@ -21,11 +26,6 @@ import {
 import { ProjectByIdItemType } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery.types';
 import { Wallet } from 'lib/wallet/wallet';
 
-import {
-  ProjectWithOrderData,
-  UISellOrderInfo,
-} from 'pages/Projects/AllProjects/AllProjects.types';
-import { getPriceToDisplay } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { MIN_USD_CURRENCY_AMOUNT } from 'components/molecules/CreditsAmount/CreditsAmount.constants';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';

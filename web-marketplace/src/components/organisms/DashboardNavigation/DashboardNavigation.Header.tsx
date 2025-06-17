@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { CopyButton } from 'web-components/src/components/buttons/CopyButton';
 import BreadcrumbIcon from 'web-components/src/components/icons/BreadcrumbIcon';
@@ -12,6 +13,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 
 import useClickOutside from '../../../utils/hooks/useClickOutside';
+import { COPIED, UNNAMED } from './DashboardNavigation.constants';
 import { AccountSwitcherDropdown } from './DashboardNavigation.Dropdown';
 import { DashboardNavHeaderData } from './DashboardNavigation.types';
 
@@ -39,6 +41,7 @@ export const DashboardNavHeader = ({
     });
   const short = `${address.slice(0, 9)}…${address.slice(-6)}`;
   const canSwitch = accounts.length > 1;
+  const { _ } = useLingui();
 
   const [open, setOpen] = useState(false);
   const rootRef = useClickOutside<HTMLDivElement>(() => {
@@ -68,7 +71,7 @@ export const DashboardNavHeader = ({
             aria-haspopup="true"
           >
             <Subtitle className="text-bc-neutral-900 pt-5" size="md">
-              {name}
+              {name || _(UNNAMED)}
             </Subtitle>
             {canSwitch && (
               <BreadcrumbIcon className="h-[15px] w-[15px] pt-5 text-bc-neutral-400" />
@@ -79,7 +82,7 @@ export const DashboardNavHeader = ({
             <CopyButton
               className="group/copy flex items-center gap-3"
               content={address}
-              toastText="Copied!"
+              toastText={_(COPIED)}
               iconClassName="h-[14px] w-[14px] text-bc-neutral-500 group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
               tooltipText={''}
             >

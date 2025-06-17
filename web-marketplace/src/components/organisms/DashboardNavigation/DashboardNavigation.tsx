@@ -24,8 +24,9 @@ export const DashboardNavigation = ({
   onLogout,
   onCloseMobile,
   onExitClick,
-  isIssuer = false, // Add this prop with default
-}: DashboardNavigationProps) => {
+  isIssuer = false,
+  mobileMenuOpen = false,
+}: DashboardNavigationProps & { mobileMenuOpen?: boolean }) => {
   const [collapsed, setCollapsed] = useState(false);
   const { _ } = useLingui();
 
@@ -34,11 +35,11 @@ export const DashboardNavigation = ({
       getDashboardNavigationSections(
         _,
         activeAccount.type,
-        false, // loginDisabled
+        false,
         collapsed,
-        isIssuer, // Pass isIssuer to the utility function
+        isIssuer,
       ),
-    [_, activeAccount.type, collapsed, isIssuer], // Add isIssuer to dependencies
+    [_, activeAccount.type, collapsed, isIssuer],
   );
 
   const handleItemClick = (path: string) => {
@@ -47,6 +48,7 @@ export const DashboardNavigation = ({
     } else {
       onNavItemClick(path);
     }
+    onCloseMobile?.();
   };
 
   return (
@@ -56,6 +58,10 @@ export const DashboardNavigation = ({
         NAV_BASE_CLASSES,
         collapsed ? 'w-[100px] px-2 pt-[27px] pb-20' : 'w-[263px]',
         !collapsed && 'px-20 md:px-30 pt-30 pb-20',
+        'md:block',
+        'fixed md:relative top-0 left-0 h-full z-50 transform transition-transform duration-300 ease-in-out',
+        mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0',
+        '!flex !flex-col !h-full',
       )}
     >
       {/* Mobile close button */}
@@ -72,14 +78,14 @@ export const DashboardNavigation = ({
       <button
         type="button"
         onClick={() => setCollapsed(!collapsed)}
-        className={COLLAPSE_BUTTON_CLASSES}
+        className={cn(COLLAPSE_BUTTON_CLASSES)}
         aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         aria-pressed={collapsed}
       >
         <DoubleBreadcrumbLeftIcon
           className={cn(
             'text-bc-neutral-400 w-[15px] h-[15px] transition-colors',
-            collapsed && 'transform -scale-x-100', // Flip horizontally when collapsed
+            collapsed && 'transform -scale-x-100',
             'group-hover:text-bc-neutral-100',
           )}
         />
@@ -94,14 +100,24 @@ export const DashboardNavigation = ({
         onViewProfileClick={onViewProfileClick}
       />
 
-      {/* Navigation sections */}
-      <div className="flex-1 overflow-y-auto">
+      {/* Navigation sections - grows to fill space */}
+      <div
+        className="flex-1 overflow-y-auto min-h-0"
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+        }}
+        css={{
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        }}
+      >
         {sections.map((section, idx) => {
           const isLogoutSection = section.heading === '';
 
           return (
             <div key={idx} className={collapsed ? 'px-0' : ''}>
-              {/* Section heading */}
               {!isLogoutSection && (
                 <TextButton
                   className={cn(
@@ -112,12 +128,10 @@ export const DashboardNavigation = ({
                   )}
                   textSize="xs"
                 >
-                  {section.heading}{' '}
-                  {/* Section heading is already translated */}
+                  {section.heading}
                 </TextButton>
               )}
 
-              {/* Divider for logout section */}
               {isLogoutSection && (
                 <hr
                   className={cn(
@@ -127,7 +141,6 @@ export const DashboardNavigation = ({
                 />
               )}
 
-              {/* Navigation items */}
               <ul className="flex flex-col gap-[3px] list-none px-0 mt-5 mb-[10px] md:mb-[15px]">
                 {section.items.map(item => (
                   <li key={item.label}>
@@ -145,7 +158,7 @@ export const DashboardNavigation = ({
         })}
       </div>
 
-      {/* Footer (only when expanded) */}
+      {/* Footer - should now stick to bottom */}
       {!collapsed && <DashboardNavFooter onExitClick={onExitClick} />}
     </nav>
   );

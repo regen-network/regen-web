@@ -50,7 +50,7 @@ const getCreditsSection = (
     {
       label: _(msg`Sell`),
       icon: <ShoppingCartIcon linearGradient disabled={loginDisabled} />,
-      path: 'sell',
+      path: 'seller',
       disabled: loginDisabled,
       disabledTooltipText: _(NOT_SUPPORTED_TOOLTIP_TEXT),
     },

@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { quantityFormatNumberOptions } from 'config/decimals';
 
 export const ISSUED_CREDITS_TOOLTIP = msg`The total amount of credits that were issued to this project.`;

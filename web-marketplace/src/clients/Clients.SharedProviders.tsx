@@ -33,16 +33,16 @@ import PageLoader from 'components/atoms/PageLoader';
 
 import { AuthApolloProvider } from '../apollo';
 
-const intercomId = import.meta.env.VITE_INTERCOM_APP_ID || '';
+const intercomId = process.env.NEXT_PUBLIC_INTERCOM_APP_ID || '';
 
 // by default do not enable sentry unless the flag is set.
 // this reduces our monthly usage which can quickly run out if this is not set.
 // you can set this flag in local environments if testing changes to sentry.
 // currently we only want this flag set for the production environment.
-if (import.meta.env.VITE_SENTRY_ENABLED) {
+if (process.env.NEXT_PUBLIC_SENTRY_ENABLED) {
   const defaultSampleRate = '0.2';
   const tracesSampleRate = parseFloat(
-    import.meta.env.VITE_SENTRY_TRACES_SAMPLE_RATE || defaultSampleRate,
+    process.env.NEXT_PUBLIC_SENTRY_TRACES_SAMPLE_RATE || defaultSampleRate,
   );
   Sentry.init({
     dsn: 'https://f5279ac3b8724af88ffb4cdfad92a2d4@o1377530.ingest.sentry.io/6688446',
@@ -58,7 +58,7 @@ if (import.meta.env.VITE_SENTRY_ENABLED) {
       }),
     ],
     tracesSampleRate,
-    environment: import.meta.env.VITE_SENTRY_ENVIRONMENT || 'development',
+    environment: process.env.NEXT_PUBLIC_SENTRY_ENVIRONMENT || 'development',
   });
 }
 
@@ -66,12 +66,12 @@ const analytics = Analytics({
   plugins: [
     doNotTrack(),
     amplitudePlugin({
-      apiKey: import.meta.env.VITE_AMPLITUDE_API_KEY,
+      apiKey: process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY,
       // by default we will not track users, they must opt-in.
       enabled: false,
     }),
     googleAnalytics({
-      measurementIds: [import.meta.env.VITE_GA_MEASUREMENT_ID],
+      measurementIds: [process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID],
       enabled: false,
       gtagConfig: {
         anonymize_ip: true,

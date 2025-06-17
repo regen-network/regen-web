@@ -43,7 +43,7 @@ export const BasketSectionContainer = styled('div')(({ theme }) => ({
   justifyContent: 'center',
   borderBottom: `1px solid ${theme.palette.grey[100]}`,
   backgroundColor: theme.palette.grey[50],
-  backgroundImage: `url(${topoImg})`,
+  backgroundImage: `url(${topoImg.src})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
 }));

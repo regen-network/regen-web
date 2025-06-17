@@ -1,10 +1,9 @@
+import { PAYMENT_OPTIONS } from 'legacy-pages/BuyCredits/BuyCredits.constants';
+import { PaymentOptionsType } from 'legacy-pages/BuyCredits/BuyCredits.types';
+import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 import { CardSellOrder } from 'web-marketplace/src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 
 import { denomToMicro, microToDenom } from 'lib/denom.utils';
-
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
-import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 import { CURRENCY_AMOUNT } from './CreditsAmount.constants';
 

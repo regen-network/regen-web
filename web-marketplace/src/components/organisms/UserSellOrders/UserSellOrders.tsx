@@ -1,14 +1,13 @@
 import { useRef } from 'react';
 import { useLingui } from '@lingui/react';
+import { useNormalizedSellOrders } from 'legacy-pages/Marketplace/Storefront/hooks/useNormalizedSellOrders';
+import { CANCEL_SELL_ORDER_ACTION } from 'legacy-pages/Marketplace/Storefront/Storefront.constants';
 import { safeLazy } from 'utils/safeLazy';
 
 import { TableActionButtons } from 'web-components/src/components/buttons/TableActionButtons';
 import { Loading } from 'web-components/src/components/loading';
 
 import { useWallet } from 'lib/wallet/wallet';
-
-import { useNormalizedSellOrders } from 'pages/Marketplace/Storefront/hooks/useNormalizedSellOrders';
-import { CANCEL_SELL_ORDER_ACTION } from 'pages/Marketplace/Storefront/Storefront.constants';
 
 import { CancelSellOrderFlow } from '../../../features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow';
 import { NoUserSellOrdersCard } from './UserSellOrders.NoOrdersCard';

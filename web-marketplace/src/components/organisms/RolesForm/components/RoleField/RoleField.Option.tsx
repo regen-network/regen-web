@@ -3,7 +3,7 @@ import { truncate } from 'lodash';
 
 import { Body } from 'web-components/src/components/typography';
 
-import { DEFAULT_NAME } from '../../../../../pages/Dashboard/Dashboard.constants';
+import { DEFAULT_NAME } from '../../../../../legacy-pages/Dashboard/Dashboard.constants';
 import { OptionType } from './RoleField.types';
 import { isProfile } from './RoleField.utils';
 

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useFetchBaskets } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchBaskets';
+import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
+import { useFetchRetirements } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchRetirements';
 
-import { useFetchBaskets } from 'pages/Dashboard/MyEcocredits/hooks/useFetchBaskets';
-import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
-import { useFetchRetirements } from 'pages/Dashboard/MyEcocredits/hooks/useFetchRetirements';
 import { Portfolio } from 'components/organisms';
 
 import { useProfileData } from '../hooks/useProfileData';

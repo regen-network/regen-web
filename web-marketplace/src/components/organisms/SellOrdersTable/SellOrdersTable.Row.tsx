@@ -1,5 +1,5 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { Box } from '@mui/material';
 import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
@@ -14,8 +14,8 @@ import { TranslatorType } from 'lib/i18n/i18n.types';
 import DenomIcon from 'components/molecules/DenomIcon';
 import DenomLabel from 'components/molecules/DenomLabel';
 
+import { NormalizedSellOrder } from '../../../legacy-pages/Marketplace/Storefront/Storefront.types';
 import { getAccountUrl } from '../../../lib/block-explorer';
-import { NormalizedSellOrder } from '../../../pages/Marketplace/Storefront/Storefront.types';
 import { Link } from '../../atoms';
 import WithLoader from '../../atoms/WithLoader';
 import {

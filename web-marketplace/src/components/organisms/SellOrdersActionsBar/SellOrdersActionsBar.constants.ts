@@ -1,4 +1,4 @@
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 export const CREATE_POST = msg`+ create post`;
 export const SELL_DISABLED_TOOLTIP = msg`You do not have any tradable credits to sell from this project.`;

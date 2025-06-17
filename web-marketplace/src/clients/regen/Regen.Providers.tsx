@@ -18,7 +18,6 @@ import { LoginModalMobile } from 'components/organisms/LoginModal/components/Log
 import { RegenRoutes } from './Regen.Routes';
 
 import '../../../../tailwind.css';
-import '../../App.css';
 
 export const RegenProvider = () => {
   return (

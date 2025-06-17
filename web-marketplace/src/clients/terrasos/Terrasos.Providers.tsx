@@ -7,7 +7,6 @@ import { reactQueryClient } from 'lib/clients/reactQueryClient';
 import terrasosMuiTheme from './Terrasos.muiTheme';
 import { TerrasosRoutes } from './Terrasos.Routes';
 
-import '../../App.css';
 import './Terrasos.tailwind.css';
 import './Terrasos.base.css';
 

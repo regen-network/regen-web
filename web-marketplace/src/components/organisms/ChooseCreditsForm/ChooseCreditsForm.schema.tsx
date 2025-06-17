@@ -1,4 +1,5 @@
 import { i18n } from '@lingui/core';
+import { PAYMENT_OPTIONS } from 'legacy-pages/BuyCredits/BuyCredits.constants';
 import {
   CREDIT_VINTAGE_OPTIONS,
   CREDITS_AMOUNT,
@@ -8,8 +9,6 @@ import {
   SELL_ORDERS,
 } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount.constants';
 import { z } from 'zod';
-
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
 
 import {
   MAX_AMOUNT,

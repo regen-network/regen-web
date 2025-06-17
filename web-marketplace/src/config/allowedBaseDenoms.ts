@@ -1,4 +1,4 @@
-const isRedwood = import.meta.env.VITE_LEDGER_CHAIN_ID === 'regen-redwood-1';
+const isRedwood = process.env.NEXT_PUBLIC_LEDGER_CHAIN_ID === 'regen-redwood-1';
 
 export const GRAVITY_USDC_DENOM = isRedwood
   ? 'eco.uC.NCT'

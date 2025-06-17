@@ -1,13 +1,11 @@
 import React, {
-  forwardRef,
   MutableRefObject,
-  useCallback,
   useEffect,
-  useImperativeHandle,
   useMemo,
+  useCallback,
 } from 'react';
-import { FieldErrors, useFormState, useWatch } from 'react-hook-form';
-import { msg, plural } from '@lingui/macro';
+import { useFormState, useWatch } from 'react-hook-form';
+import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { ERRORS, errorsMapping } from 'config/errors';
@@ -276,9 +274,7 @@ const EditProfileForm = ({
           label: { width: '100%' },
           button: { width: '100%' },
         }}
-        fixedCrop={{
-          aspect: PROFILE_BG_ASPECT_RATIO,
-        }}
+        aspect={PROFILE_BG_ASPECT_RATIO}
         {...form.register('backgroundImage')}
         name="bg-image"
         onUpload={onUpload}

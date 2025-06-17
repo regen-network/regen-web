@@ -11,6 +11,7 @@ import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
+import keplrWalletExtension from '../../../../public/png/wallets/keplr-wallet-extension.png';
 import { ConnectWalletFlow } from '../ConnectWalletFlow/ConnectWalletFlow';
 import { ConnectWalletModal } from './components/ConnectWalletModal/ConnectWalletModal';
 import {
@@ -70,7 +71,7 @@ export const RegistryLayoutConnectWalletModal = (): JSX.Element => {
             startIcon: (
               <Box
                 component="img"
-                src={'/png/wallets/keplr-wallet-extension.png'}
+                src={keplrWalletExtension.src}
                 alt="keplr"
                 sx={{ width: 21, mr: 2 }}
               />

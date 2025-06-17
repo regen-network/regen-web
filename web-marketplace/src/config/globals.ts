@@ -9,4 +9,4 @@ export const URL_REGISTRY_MARKETPLACE_LEGAL =
   'https://regennetwork.notion.site/Regen-Marketplace-Contracts-7bc2b0075ee64c1a957463bb5eddcead';
 
 // Env vars
-export const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || '';
+export const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';

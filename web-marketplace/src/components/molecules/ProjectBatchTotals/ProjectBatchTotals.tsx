@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import { getCreditsTooltip } from 'legacy-pages/Projects/AllProjects/utils/getCreditsTooltip';
+import { getIsSoldOut } from 'legacy-pages/Projects/AllProjects/utils/getIsSoldOut';
 
 import CreditsIssuedIcon from 'web-components/src/components/icons/CreditsIssued';
 import CreditsRetiredIcon from 'web-components/src/components/icons/CreditsRetired';
@@ -11,9 +13,6 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { IS_TERRASOS } from 'lib/env';
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
-
-import { getCreditsTooltip } from 'pages/Projects/AllProjects/utils/getCreditsTooltip';
-import { getIsSoldOut } from 'pages/Projects/AllProjects/utils/getIsSoldOut';
 
 import type { BatchTotalsForProject } from '../../../types/ledger/ecocredit';
 import {

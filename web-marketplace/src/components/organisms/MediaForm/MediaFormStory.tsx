@@ -1,8 +1,9 @@
 import { MutableRefObject } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
+import { useProjectEditContext } from 'legacy-pages';
 
 import {
   FileDrop,
@@ -32,7 +33,6 @@ import {
 } from 'lib/constants/shared.constants';
 import { IMAGE_STORAGE_BASE_URL } from 'lib/env';
 
-import { useProjectEditContext } from 'pages';
 import { DragAndDropLabel } from 'components/atoms/DragAndDropLabel';
 
 import { UPLOAD_IMAGE } from '../EditProfileForm/EditProfileForm.constants';
@@ -71,7 +71,6 @@ export const MediaFormStory = ({
   const imageDropCommonProps: Partial<FileDropProps> = {
     classes: { main: classes.fullSizeMedia },
     buttonText: _(IMAGE_UPLOAD_BUTTON_LABEL),
-    fixedCrop: cropAspectMediaForm,
   };
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
 
@@ -196,7 +195,7 @@ export const MediaFormStory = ({
                   onClose={onClose}
                   onSubmit={onSubmit}
                   initialImage={initialFile}
-                  fixedCrop={cropAspectMediaForm}
+                  aspect={cropAspectMediaForm}
                   isIgnoreCrop={!!value}
                   uploadText={_(UPLOAD_IMAGE)}
                   updateText={_(UPDATE)}

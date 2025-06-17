@@ -7,7 +7,7 @@ import { CredibilityCard } from 'web-components/src/components/cards/Credibility
 import Section from 'web-components/src/components/section';
 import ResponsiveSlider from 'web-components/src/components/sliders/ResponsiveSlider';
 import { Body, Label, Title } from 'web-components/src/components/typography';
-import { headerFontFamily, Theme } from 'web-components/src/theme/muiTheme';
+import { Theme } from 'web-components/src/theme/muiTheme';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { IS_REGEN, IS_TERRASOS, MARKETPLACE_APP_URL } from 'lib/env';

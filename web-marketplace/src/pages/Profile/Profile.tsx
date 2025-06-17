@@ -1,8 +1,18 @@
 import { useMemo } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
+import {
+  DEFAULT_NAME,
+  profileVariantMapping,
+} from 'legacy-pages/Dashboard/Dashboard.constants';
+import {
+  getSocialsLinks,
+  getUserImages,
+} from 'legacy-pages/Dashboard/Dashboard.utils';
+import { useProfileItems } from 'legacy-pages/Dashboard/hooks/useProfileItems';
+import { useFetchProjectByAdmin } from 'legacy-pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
@@ -29,16 +39,6 @@ import {
 import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
-import {
-  DEFAULT_NAME,
-  profileVariantMapping,
-} from 'pages/Dashboard/Dashboard.constants';
-import {
-  getSocialsLinks,
-  getUserImages,
-} from 'pages/Dashboard/Dashboard.utils';
-import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
-import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';

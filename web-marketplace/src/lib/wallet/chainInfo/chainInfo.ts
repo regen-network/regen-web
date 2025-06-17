@@ -1,6 +1,6 @@
 import { chainId, ledgerRESTUri, ledgerRPCUri } from '../../ledger';
 
-const chainName = import.meta.env.VITE_LEDGER_CHAIN_NAME;
+const chainName = process.env.NEXT_PUBLIC_LEDGER_CHAIN_NAME;
 
 export const chainInfo = {
   // Chain-id of the Regen chain.

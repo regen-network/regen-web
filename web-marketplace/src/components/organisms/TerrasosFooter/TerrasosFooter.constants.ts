@@ -1,5 +1,5 @@
 /* eslint-disable lingui/no-unlocalized-strings */
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 
 import FacebookIcon from 'web-components/src/components/icons/social/FacebookIcon';
 import InstagramIcon from 'web-components/src/components/icons/social/InstagramIcon';

@@ -15,7 +15,7 @@ export interface ImageCropProps {
   circularCrop?: boolean;
   onCropSubmit: (blob: HTMLImageElement) => Promise<void>;
   onCancel: () => void;
-  fixedCrop: Partial<Crop>;
+  aspect?: number;
   isCropSubmitDisabled?: boolean;
   isIgnoreCrop?: boolean;
   uploadText: string;
@@ -75,7 +75,7 @@ export default function ImageCrop({
   circularCrop,
   onCropSubmit,
   onCancel,
-  fixedCrop,
+  aspect = 1,
   isCropSubmitDisabled,
   isIgnoreCrop = false,
   uploadText,
@@ -85,7 +85,7 @@ export default function ImageCrop({
 }: ImageCropProps): JSX.Element {
   const { classes } = useStyles();
   const imgRef = useRef<any>(null);
-  const [crop, setCrop] = useState<Partial<Crop>>(fixedCrop);
+  const [crop, setCrop] = useState<Crop>();
   const [loading, setLoading] = useState<boolean>(false);
   const [completedCrop, setCompletedCrop] = useState<Crop | undefined>(
     undefined,
@@ -113,11 +113,10 @@ export default function ImageCrop({
    * @returns {boolean} - Returns false to indicate that the crop state is set in this function.
    */
   const onLoad = useCallback(
-    (img: HTMLImageElement) => {
-      imgRef.current = img;
-      const imgWidth = img.width;
-      const imgHeight = img.height;
-      const aspect = crop?.aspect || 1;
+    (e: React.SyntheticEvent<HTMLImageElement>) => {
+      imgRef.current = e.currentTarget;
+      const imgWidth = e.currentTarget.width;
+      const imgHeight = e.currentTarget.height;
       const isPortrait = imgWidth / aspect < imgHeight * aspect;
       const isLandscape = imgWidth / aspect > imgHeight * aspect;
       const width = isPortrait ? 90 : ((imgHeight * aspect) / imgWidth) * 90;
@@ -126,7 +125,6 @@ export default function ImageCrop({
       const x = (100 - width) / 2;
 
       const percentCrop: Crop = {
-        aspect,
         unit: '%',
         width,
         height,
@@ -141,7 +139,6 @@ export default function ImageCrop({
       const pxX = (imgWidth - pxWidth) / 2;
       const pxY = (imgHeight - pxHeight) / 2;
       const pxCrop: Crop = {
-        aspect,
         unit: 'px',
         width: pxWidth,
         height: pxHeight,
@@ -152,7 +149,7 @@ export default function ImageCrop({
 
       return false; // Return false if you set crop state in here.
     },
-    [crop],
+    [aspect],
   );
 
   return (
@@ -160,15 +157,20 @@ export default function ImageCrop({
       <div className={classes.root}>
         <div className={classes.container}>
           <ReactCrop
-            src={image}
+            aspect={aspect}
             crop={crop}
-            onImageLoaded={onLoad}
             onChange={setCrop}
             onComplete={setCompletedCrop}
             circularCrop={circularCrop}
-            crossorigin="anonymous"
-            imageStyle={{ width: '100%', maxHeight: mobileMatches ? 380 : 500 }}
-          />
+          >
+            <img
+              src={image}
+              alt="crop"
+              onLoad={onLoad}
+              crossOrigin="anonymous"
+              style={{ width: '100%', maxHeight: mobileMatches ? 380 : 500 }}
+            />
+          </ReactCrop>
         </div>
         <div className={classes.container}>
           {children}

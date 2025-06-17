@@ -10,6 +10,29 @@ import { DefaultValues, useFormState, useWatch } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import {
+  paymentOptionAtom,
+  resetBuyCreditsFormAtom,
+  spendingCapAtom,
+} from 'legacy-pages/BuyCredits/BuyCredits.atoms';
+import {
+  INSUFFICIENT_BALANCE,
+  NEXT,
+  PAYMENT_OPTIONS,
+} from 'legacy-pages/BuyCredits/BuyCredits.constants';
+import {
+  BuyCreditsSchemaTypes,
+  CardDetails,
+  PaymentOptionsType,
+} from 'legacy-pages/BuyCredits/BuyCredits.types';
+import {
+  getCreditsAvailableBannerText,
+  getCryptoCurrencies,
+} from 'legacy-pages/BuyCredits/BuyCredits.utils';
+import {
+  ProjectWithOrderData,
+  UISellOrderInfo,
+} from 'legacy-pages/Projects/AllProjects/AllProjects.types';
 import { CreditsAmount } from 'web-marketplace/src/components/molecules/CreditsAmount/CreditsAmount';
 import {
   CREDIT_VINTAGE_OPTIONS,
@@ -28,29 +51,6 @@ import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 import { warningBannerTextAtom } from 'lib/atoms/banner.atoms';
 
-import {
-  paymentOptionAtom,
-  resetBuyCreditsFormAtom,
-  spendingCapAtom,
-} from 'pages/BuyCredits/BuyCredits.atoms';
-import {
-  INSUFFICIENT_BALANCE,
-  NEXT,
-  PAYMENT_OPTIONS,
-} from 'pages/BuyCredits/BuyCredits.constants';
-import {
-  BuyCreditsSchemaTypes,
-  CardDetails,
-  PaymentOptionsType,
-} from 'pages/BuyCredits/BuyCredits.types';
-import {
-  getCreditsAvailableBannerText,
-  getCryptoCurrencies,
-} from 'pages/BuyCredits/BuyCredits.utils';
-import {
-  ProjectWithOrderData,
-  UISellOrderInfo,
-} from 'pages/Projects/AllProjects/AllProjects.types';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { getCurrencyAmount } from 'components/molecules/CreditsAmount/CreditsAmount.utils';
 import {
@@ -279,6 +279,7 @@ export const ChooseCreditsForm = React.memo(
       if (!cardSellOrders.length && paymentOption === PAYMENT_OPTIONS.CARD) {
         handlePaymentOptions(PAYMENT_OPTIONS.CRYPTO);
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cardSellOrders.length, initialPaymentOption]); // just run this once
 
     useEffect(() => {

@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { msg } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import Grid from '@mui/material/Grid';
+import { useProjectEditContext } from 'legacy-pages';
 import { makeStyles } from 'tss-react/mui';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -12,8 +13,6 @@ import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
 import { getProjectCardButtonMapping } from 'lib/constants/shared.constants';
-
-import { useProjectEditContext } from 'pages';
 
 interface Props {
   onSave?: () => void;

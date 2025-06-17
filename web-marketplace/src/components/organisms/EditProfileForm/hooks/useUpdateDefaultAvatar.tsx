@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 
-import { AccountType } from 'generated/graphql';
-
 import {
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,
-} from 'pages/Dashboard/Dashboard.constants';
+} from 'legacy-pages/Dashboard/Dashboard.constants';
+
+import { AccountType } from 'generated/graphql';
 
 type Params = {
   profileType?: AccountType;

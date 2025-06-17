@@ -1,7 +1,6 @@
+import { PAYMENT_OPTIONS } from 'legacy-pages/BuyCredits/BuyCredits.constants';
+import { PaymentOptionsType } from 'legacy-pages/BuyCredits/BuyCredits.types';
 import { z } from 'zod';
-
-import { PAYMENT_OPTIONS } from 'pages/BuyCredits/BuyCredits.constants';
-import { PaymentOptionsType } from 'pages/BuyCredits/BuyCredits.types';
 
 export const paymentInfoFormSchema = (paymentOption: PaymentOptionsType) =>
   z.object({

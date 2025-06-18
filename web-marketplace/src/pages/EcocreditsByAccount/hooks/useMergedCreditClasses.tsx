@@ -37,9 +37,6 @@ export const useMergedCreditClasses = (adminId?: string) => {
     return map;
   }, [classesMissingSanityData, classesMetadata]);
 
-  const hasSanityContent = (sanityClass: any) =>
-    sanityClass?.shortDescriptionRaw || sanityClass?.descriptionRaw;
-
   const mergedCreditClasses = useMemo(() => {
     if (!adminClasses?.length) return [];
 
@@ -48,9 +45,15 @@ export const useMergedCreditClasses = (adminId?: string) => {
         sc => sc.path === adminClass.id,
       );
 
-      if (matchingSanityClass && hasSanityContent(matchingSanityClass)) {
+      // Inline the check instead of separate function
+      if (
+        matchingSanityClass &&
+        (matchingSanityClass.shortDescriptionRaw ||
+          matchingSanityClass.descriptionRaw)
+      ) {
         return matchingSanityClass;
       }
+
       const metadata = metadataByClassId.get(adminClass.id);
 
       return {

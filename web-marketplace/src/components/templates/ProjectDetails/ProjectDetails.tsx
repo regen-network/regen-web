@@ -42,7 +42,6 @@ import { useWallet } from 'lib/wallet/wallet';
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
-import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
@@ -79,6 +78,14 @@ const MoreProjects = dynamic(
   () => import('./ProjectDetails.MoreProjects').then(mod => mod.MoreProjects),
   {
     loading: () => <CircularProgress color="secondary" />,
+  },
+);
+const PostFlow = dynamic(
+  () =>
+    import('components/organisms/PostFlow/PostFlow').then(mod => mod.PostFlow),
+  {
+    loading: () => <CircularProgress color="secondary" />,
+    ssr: false,
   },
 );
 const ProjectMedia = dynamic(
@@ -370,7 +377,7 @@ function ProjectDetails(): JSX.Element {
         slug={slug}
       />
 
-      {/* {mediaData.assets.length > 0 && (
+      {mediaData.assets.length > 0 && (
         <Box sx={{ pt: { xs: 0, sm: 12.5 } }}>
           <ProjectMedia
             bodyTexts={bodyTexts}
@@ -383,7 +390,7 @@ function ProjectDetails(): JSX.Element {
             isPrefinanceProject={isPrefinanceProject}
           />
         </Box>
-      )} */}
+      )}
 
       {(onChainProjectId ||
         isPrefinanceProject ||
@@ -543,12 +550,12 @@ function ProjectDetails(): JSX.Element {
 
       {managementActions && <ManagementActions actions={managementActions} />}
 
-      {/* {onChainOrOffChainProjectId && admin && (
+      {onChainOrOffChainProjectId && admin && (
         <MoreProjects
           skippedProjectId={onChainOrOffChainProjectId}
           projectAdmin={admin}
         />
-      )} */}
+      )}
 
       {gettingStartedResourcesSection && IS_REGEN && (
         <div
@@ -562,11 +569,6 @@ function ProjectDetails(): JSX.Element {
           />
         </div>
       )}
-      <CreateSellOrderFlow
-        isFlowStarted={isSellFlowStarted}
-        setIsFlowStarted={setIsSellFlowStarted}
-        credits={creditsWithProjectName}
-      />
 
       {isCreatePostModalOpen && projectLocation && (
         <PostFlow

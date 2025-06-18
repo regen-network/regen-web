@@ -92,7 +92,7 @@
     "vite-plugin-require": "^1.1.10",
     "web-components": "workspace:*",
     "wellknown": "^0.5.0",
-    "zod": "^3.20.2"
+    "zod": "^3.25.67"
   },
   "scripts": {
     "dev": "next dev --turbopack",

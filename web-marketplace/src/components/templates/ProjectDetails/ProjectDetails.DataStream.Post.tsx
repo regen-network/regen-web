@@ -5,7 +5,7 @@ import {
   useApolloClient,
 } from '@apollo/client';
 import { useLingui } from '@lingui/react';
-import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import type { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineItem from '@mui/lab/TimelineItem';

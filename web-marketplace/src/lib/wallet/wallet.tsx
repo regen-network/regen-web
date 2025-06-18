@@ -1,12 +1,9 @@
 'use client';
 import React, { createContext, useEffect, useRef, useState } from 'react';
-import {
-  ApolloClient,
-  NormalizedCacheObject,
-  useApolloClient,
-} from '@apollo/client';
-import { StdSignature } from '@cosmjs/launchpad';
-import { OfflineSigner } from '@cosmjs/proto-signing';
+import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import { useApolloClient } from '@apollo/client';
+import type { StdSignature } from '@cosmjs/launchpad';
+import type { OfflineSigner } from '@cosmjs/proto-signing';
 import { WalletStatus } from '@cosmos-kit/core';
 import {
   useChain,

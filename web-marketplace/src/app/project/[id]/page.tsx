@@ -107,7 +107,7 @@ export async function generateMetadata({ params }: ProjectPageProps) {
 
   const title =
     projectMetadata?.['schema:name'] || projectPageMetadata?.['schema:name'];
-  const description = 'TODO';
+  const description = projectPageMetadata?.['schema:description'];
 
   return {
     title,
@@ -115,12 +115,12 @@ export async function generateMetadata({ params }: ProjectPageProps) {
     openGraph: {
       title,
       description,
-      // images: [
-      //   new URL(
-      //     projectPageMetadata?.['schema:image'] ||
-      //       projectPageMetadata?.['regen:previewPhoto']?.['schema:url'],
-      //   ),
-      // ],
+      images: [
+        new URL(
+          projectPageMetadata?.['schema:image'] ||
+            projectPageMetadata?.['regen:previewPhoto']?.['schema:url'],
+        ),
+      ],
     },
   };
 }

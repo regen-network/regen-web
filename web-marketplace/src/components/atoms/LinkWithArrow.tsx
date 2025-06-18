@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { sxToArray } from 'utils/mui/sxToArray';
 
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { parseText } from 'web-components/src/utils/textParser';

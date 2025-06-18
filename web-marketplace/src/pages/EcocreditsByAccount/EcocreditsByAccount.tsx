@@ -5,6 +5,8 @@ import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 
 import { Flex } from 'web-components/src/components/box';
+import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';
 import { CreditClassIcon } from 'web-components/src/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
@@ -41,7 +43,6 @@ import WithLoader from 'components/atoms/WithLoader';
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
 import { ProfileNotFound } from './EcocreditsByAccount.NotFound';
-import { ecocreditsByAccountStyles } from './EcocreditsByAccount.styles';
 import { useProfileData } from './hooks/useProfileData';
 
 export const EcocreditsByAccount = (): JSX.Element => {
@@ -116,6 +117,29 @@ export const EcocreditsByAccount = (): JSX.Element => {
     0,
   );
 
+  const manageButtonConfig = [
+    {
+      label: _(msg`Manage Portfolio`),
+      show: activeTab === 0,
+      link: '/dashboard/portfolio',
+    },
+    {
+      label: _(msg`Manage Projects`),
+      show: activeTab === 1,
+      link: '/dashboard/projects',
+    },
+    {
+      label: _(msg`Manage Credit Classes`),
+      show: activeTab === 2,
+      link: '/dashboard/credit-classes',
+    },
+    {
+      label: _(msg`Manage Credit Batches`),
+      show: activeTab === 3,
+      link: '/dashboard/credit-batches',
+    },
+  ];
+
   return (
     <WithLoader
       isLoading={isLoading}
@@ -144,7 +168,13 @@ export const EcocreditsByAccount = (): JSX.Element => {
                 description: account?.description?.trimEnd() ?? '',
                 socialsLinks,
               }}
-              editLink=""
+              editLink={
+                wallet?.address &&
+                address &&
+                wallet.address.toLowerCase() === address.toLowerCase()
+                  ? '/dashboard/admin/profile'
+                  : ''
+              }
               profileLink={profileLink}
               variant={
                 account?.type
@@ -160,18 +190,42 @@ export const EcocreditsByAccount = (): JSX.Element => {
             />
             <Box sx={{ backgroundColor: 'grey.50' }}>
               <Section sx={{ root: { pt: { xs: 15 } } }}>
-                <IconTabs
-                  aria-label={_(msg`public profile tabs`)}
-                  tabs={tabs}
-                  linkComponent={Link}
-                  activeTab={activeTab}
-                  mobileFullWidth
-                />
-                <Flex sx={{ ...ecocreditsByAccountStyles.padding }}>
-                  <Box sx={{ width: '100%' }}>
-                    <Outlet />
-                  </Box>
-                </Flex>
+                <div>
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-2">
+                    <IconTabs
+                      aria-label={_(msg`public profile tabs`)}
+                      tabs={tabs}
+                      linkComponent={Link}
+                      activeTab={activeTab}
+                      mobileFullWidth
+                    />
+                    <div className="flex w-full md:w-auto mt-[30px] mb-7.5 md:mt-0 md:mb-0">
+                      {manageButtonConfig.map(
+                        btn =>
+                          btn.show &&
+                          wallet?.address &&
+                          address &&
+                          wallet.address.toLowerCase() ===
+                            address.toLowerCase() && (
+                            <OutlinedButton
+                              key={btn.label}
+                              variant="contained"
+                              color="primary"
+                              component={Link}
+                              href={btn.link}
+                              className="text-[12px] md:text-[14px] py-[6px] px-[20px] md:py-[9px] md:px-[25px] whitespace-nowrap w-full md:w-auto"
+                            >
+                              <CogIcon className="mr-10" />
+                              {btn.label}
+                            </OutlinedButton>
+                          ),
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="pt-[30px] md:pt-[40px] pb-[85px] md:pb-[113px] w-full">
+                  <Outlet />
+                </div>
               </Section>
             </Box>
           </>

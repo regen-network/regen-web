@@ -1,49 +1,62 @@
-import { useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
-import { Grid } from '@mui/material';
 
-import { CreditClassGridCard } from 'web-components/src/components/molecules/CreditClassGridCard/CreditClassGridCard';
-import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
+import { ImageActionCard } from 'web-components/src/components/cards/ImageActionCard';
+import { ProgramImageChildren } from 'web-components/src/components/cards/ProjectCard/ProjectCard.ImageChildren';
 
-import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
-import { useWallet } from 'lib/wallet/wallet';
-
-import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
-import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
-import { useProfileData } from '../hooks/useProfileData';
+import { useMergedCreditClasses } from '../hooks/useMergedCreditClasses';
+import { LEARN_MORE_BUTTON } from './CreditClassTab.constants';
+import {
+  extractDescription,
+  extractImageSrc,
+  extractTitle,
+} from './CreditClassTab.utils';
 
 export const CreditClassTab = () => {
-  const { _ } = useLingui();
-  const { wallet } = useWallet();
-  const { address } = useProfileData();
-  const { creditClasses, isLoadingCreditClasses } =
-    useFetchCreditClassesWithOrder({
-      admin: address,
-      userAddress: wallet?.address,
-    });
-  const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
+  const navigate = useNavigate();
+  const { accountAddressOrId } = useParams();
+  const { i18n } = useLingui();
+
+  const { creditClasses, programs, loading } =
+    useMergedCreditClasses(accountAddressOrId);
 
   return (
-    <>
-      <WithLoader
-        isLoading={isLoadingCreditClasses}
-        sx={{ display: 'flex', justifyContent: 'center' }}
-      >
-        <Grid container spacing={8}>
-          {creditClasses.map(creditClass => (
-            <Grid item xs={12} md={6} lg={4}>
-              <CreditClassGridCard
-                bodyTexts={bodyTexts}
-                {...creditClass}
-                href={`/credit-classes/${creditClass.id}`}
-                LinkComponent={Link as LinkComponentType}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </WithLoader>
-    </>
+    <WithLoader isLoading={loading}>
+      <>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-20">
+          {creditClasses?.map((creditClass, index) => {
+            const title = extractTitle(creditClass);
+            const description = extractDescription(creditClass);
+            const imageSrc = extractImageSrc(creditClass);
+            const program = programs?.[index];
+
+            return (
+              <div key={creditClass.path} className="w-full">
+                <ImageActionCard
+                  btnText={i18n._(LEARN_MORE_BUTTON)}
+                  title={title}
+                  description={
+                    <div className="line-clamp-3 text-sm leading-relaxed overflow-hidden">
+                      {description}
+                    </div>
+                  }
+                  imgSrc={imageSrc ?? ''}
+                  onClick={() =>
+                    navigate(`/credit-classes/${creditClass.path}`)
+                  }
+                  {...(program && {
+                    imageChildren: <ProgramImageChildren program={program} />,
+                  })}
+                  className="h-full"
+                  draftText=""
+                />
+              </div>
+            );
+          })}
+        </div>
+      </>
+    </WithLoader>
   );
 };

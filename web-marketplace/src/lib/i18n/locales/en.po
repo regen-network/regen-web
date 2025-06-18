@@ -1308,7 +1308,7 @@ msgstr ""
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:243
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
 #: src/pages/Dashboard/Dashboard.constants.tsx:30
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:93
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:94
 msgid "Credit Batches"
 msgstr ""
 
@@ -1379,7 +1379,7 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
 #: src/pages/Dashboard/Dashboard.constants.tsx:24
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:87
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:88
 #: src/pages/Home/Home.tsx:180
 msgid "Credit Classes"
 msgstr ""
@@ -2352,6 +2352,7 @@ msgstr ""
 
 #: src/components/organisms/DetailsSection/DetailsSection.Credit.tsx:54
 #: src/components/organisms/MethodologyDocumentationSection.tsx:102
+#: src/pages/EcocreditsByAccount/CreditClassTab/CreditClassTab.constants.ts:4
 #: src/pages/Projects/PrefinanceProjects/PrefinanceProjects.tsx:85
 msgid "learn more"
 msgstr ""
@@ -2509,6 +2510,14 @@ msgstr ""
 msgid "Make the location data private"
 msgstr ""
 
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:137
+msgid "Manage Credit Batches"
+msgstr ""
+
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:132
+msgid "Manage Credit Classes"
+msgstr ""
+
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:41
 msgid "Manage credits"
 msgstr ""
@@ -2517,8 +2526,16 @@ msgstr ""
 msgid "Manage organization"
 msgstr ""
 
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:122
+msgid "Manage Portfolio"
+msgstr ""
+
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:63
 msgid "Manage projects"
+msgstr ""
+
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:127
+msgid "Manage Projects"
 msgstr ""
 
 #: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:19
@@ -3067,7 +3084,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:44
 #: src/pages/Dashboard/Dashboard.constants.tsx:12
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:74
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:75
 msgid "Portfolio"
 msgstr ""
 
@@ -3433,7 +3450,7 @@ msgstr ""
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
 #: src/pages/Dashboard/Dashboard.constants.tsx:18
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:81
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:82
 msgid "Projects"
 msgstr ""
 
@@ -3453,7 +3470,7 @@ msgstr ""
 msgid "Public profile"
 msgstr ""
 
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:164
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:196
 msgid "public profile tabs"
 msgstr ""
 

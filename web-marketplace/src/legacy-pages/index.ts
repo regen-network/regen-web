@@ -19,7 +19,6 @@ export * from './Media';
 export * from './MethodologiesList';
 export * from './MethodologyDetails';
 export * from './NotFound';
-export * from './Project';
 export * from './ProjectEdit';
 export * from './ProjectLocation';
 export * from './Roles';

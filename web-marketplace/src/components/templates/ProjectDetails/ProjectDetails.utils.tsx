@@ -39,8 +39,8 @@ import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,
-} from 'pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+} from 'pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 import { UISellOrderInfo } from 'pages/Projects/AllProjects/AllProjects.types';
 
 import {

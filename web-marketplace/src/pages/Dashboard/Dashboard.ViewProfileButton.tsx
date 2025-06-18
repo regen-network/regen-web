@@ -8,8 +8,12 @@ import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { UseStateSetter } from 'types/react/use-state';
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 
-import { VIEW_PROFILE, VIEW_PUBLIC_PROFILE } from './ProfileEdit.constants';
-import { getProfileUrl } from './ProfileEdit.utils';
+import {
+  NO_ACTIVE_ACCOUNT,
+  VIEW_PROFILE,
+  VIEW_PUBLIC_PROFILE,
+} from './Dashboard.constants';
+import { getProfileUrl } from './Dashboard.utils';
 
 type Props = {
   setIsWarningModalOpen: UseStateSetter<string | undefined>;
@@ -28,7 +32,7 @@ export const ViewProfileButton = ({
 
   const handleViewProfile = () => {
     if (!activeAccount) {
-      console.warn('No active account available');
+      console.warn(NO_ACTIVE_ACCOUNT);
       return;
     }
 

@@ -29,8 +29,8 @@ import { messageActionEquals } from 'lib/ecocredit/constants';
 import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
-import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+import { DEFAULT_NAME } from 'pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 
 import { ADMIN, REGISTRY } from '../Post.constants';
 

@@ -20,7 +20,6 @@ import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfil
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
-import { useOnUploadCallback } from './hooks/useOnUploadCallback';
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_AVATARS,
@@ -28,10 +27,11 @@ import {
   DEFAULT_PROFILE_TYPE,
   PROFILE_S3_PATH,
   PROFILE_SAVED,
-} from './ProfileEdit.constants';
-import { getDefaultAvatar } from './ProfileEdit.utils';
+} from './Dashboard.constants';
+import { getDefaultAvatar } from './Dashboard.utils';
+import { useOnUploadCallback } from './hooks/useOnUploadCallback';
 
-export const ProfileEditMain = () => {
+export const DashboardEditMain = () => {
   const { _ } = useLingui();
   const [isDirtyRef] = useAtom(isProfileEditDirtyRef);
   const setBannerTextAtom = useSetAtom(bannerTextAtom);

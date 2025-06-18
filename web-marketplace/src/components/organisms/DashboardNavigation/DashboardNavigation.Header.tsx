@@ -10,7 +10,7 @@ import { Subtitle } from 'web-components/src/components/typography/Subtitle';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 
 import useClickOutside from '../../../utils/hooks/useClickOutside';
 import { COPIED, UNNAMED } from './DashboardNavigation.constants';

@@ -1,8 +1,8 @@
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import { AccountFieldsFragment, Maybe } from '../../generated/graphql';
-import { DEFAULT_NAME } from '../ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from '../ProfileEdit/ProfileEdit.utils';
+import { DEFAULT_NAME } from '../Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from '../Dashboard/Dashboard.utils';
 
 export const getProjectStakeholderInitialValues = (
   _: TranslatorType,

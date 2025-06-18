@@ -4,7 +4,7 @@ import { truncate } from 'web-components/src/utils/truncate';
 import { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { LINK_PREFIX } from 'lib/env';
 
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 
 export const getDisplayAccountOrAddress = (
   address?: string,

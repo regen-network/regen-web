@@ -1,70 +1,66 @@
-import { useMemo } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
-import { msg } from '@lingui/macro';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
-import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
+import { startCase } from 'lodash';
 
 import { Flex } from 'web-components/src/components/box';
-import { ProfileHeader } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader';
-import { SocialLink } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.types';
+import BridgeIcon from 'web-components/src/components/icons/BridgeIcon';
+import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
+import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
 import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
-import { containerStyles } from 'web-components/src/styles/container';
-import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
-import { truncate } from 'web-components/src/utils/truncate';
+import { Title } from 'web-components/src/components/typography';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { getAccountUrl } from 'lib/block-explorer';
-import {
-  ALT_PROFILE_AVATAR,
-  ALT_PROFILE_BACKGROUND_IMAGE,
-  COPY_PROFILE_TEXT,
-  COPY_SUCCESS,
-  EDIT_PROFILE_TEXT,
-} from 'lib/constants/shared.constants';
-import { isBridgeEnabled } from 'lib/ledger';
-import { getProfileLink } from 'lib/profileLink';
+import { client as sanityClient } from 'lib/clients/sanity';
+import { DISCARD_CHANGES_TITLE } from 'lib/constants/shared.constants';
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import {
-  DEFAULT_NAME,
-  profileVariantMapping,
-} from 'pages/ProfileEdit/ProfileEdit.constants';
+import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import { Link } from 'components/atoms';
+import WithLoader from 'components/atoms/WithLoader';
+import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
+import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
 
-import { client as sanityClient } from '../../lib/clients/sanity';
-import { DashboardBannerCard } from './Dashboard.BannerCard';
+import {
+  DISCARD_CHANGES_BODY,
+  DISCARD_CHANGES_BUTTON,
+} from '../../lib/constants/shared.constants';
 import {
   BRIDGE,
-  CREDIT_BATCHES,
-  CREDIT_CLASSES,
+  PERSONAL_ACCOUNT,
+  PERSONAL_DASHBOARD,
   PORTFOLIO,
-  PROJECTS,
+  PORTFOLIO_TABS_ARIA_LABEL,
 } from './Dashboard.constants';
-import { dashBoardStyles } from './Dashboard.styles';
-import {
-  getSocialsLinks,
-  getUserImages,
-  getWalletAddress,
-} from './Dashboard.utils';
-import { useProfileItems } from './hooks/useProfileItems';
+import { ViewProfileButton } from './Dashboard.ViewProfileButton';
+import { usePathSection } from './hooks/usePathSection';
 
-const Dashboard = (): JSX.Element => {
+export const Dashboard = () => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { wallet, accountByAddr, isConnected } = useWallet();
-  const {
-    showCreditClasses,
-    isCreditClassCreator,
-    isProjectAdmin,
-    isIssuer,
-    showProjects,
-  } = useProfileItems({});
-  const location = useLocation();
+  const { accountChanging, disconnect } = useWallet();
+  const { loading, activeAccount, authenticatedAccounts } = useAuth();
+
+  const [isWarningModalOpen, setIsWarningModalOpen] = useState<
+    string | undefined
+  >(undefined);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const setIsProfileEditDirtyref = useSetAtom(isProfileEditDirtyRef);
+  const isDirtyRef = useRef<boolean>(false);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const section = usePathSection();
+  const { isCreditClassCreator, isProjectAdmin, isIssuer } = useProfileItems(
+    {},
+  );
+
   const { data: sanityProfilePageData } = useQuery(
     getAllProfilePageQuery({
       sanityClient,
@@ -73,107 +69,261 @@ const Dashboard = (): JSX.Element => {
     }),
   );
 
-  const { activeAccount } = useAuth();
+  const onNavClick = (sectionName: string): void => {
+    const isFormDirty = isDirtyRef.current;
+    const path = `/dashboard/${sectionName.replace(' ', '-')}`;
+    if (isFormDirty) {
+      setIsWarningModalOpen(path);
+    } else {
+      navigate(path);
+    }
+  };
 
-  const account = activeAccount ?? accountByAddr;
+  useEffect(() => {
+    if (isDirtyRef && setIsProfileEditDirtyref) {
+      setIsProfileEditDirtyref(isDirtyRef);
+    }
+  }, [isDirtyRef, setIsProfileEditDirtyref]);
 
-  const { avatarImage, backgroundImage } = getUserImages({
-    account,
-  });
+  // Placeholder function for account selection logic
+  // This should be replaced with actual logic to handle
+  // account selection when Org functionality is implemented
+  function onAccountSelect(id: string) {
+    throw new Error('Function not implemented.');
+  }
 
-  const socialsLinks: SocialLink[] = useMemo(
-    () => getSocialsLinks({ account }),
-    [account],
+  const dashboardContextValue = useMemo(
+    () => ({
+      isCreditClassCreator,
+      isProjectAdmin,
+      isIssuer,
+      sanityProfilePageData,
+    }),
+    [isCreditClassCreator, isProjectAdmin, isIssuer, sanityProfilePageData],
   );
 
-  const tabs: IconTabProps[] = useMemo(
+  const portfolioTabs: IconTabProps[] = useMemo(
     () => [
-      { hidden: !isConnected, ...PORTFOLIO, label: _(PORTFOLIO.label) },
-      { hidden: !showProjects, ...PROJECTS, label: _(PROJECTS.label) },
       {
-        hidden: !showCreditClasses,
-        ...CREDIT_CLASSES,
-        label: _(CREDIT_CLASSES.label),
+        label: _(PORTFOLIO),
+        href: '/dashboard/portfolio',
+        icon: <CreditsIcon fontSize="small" linearGradient />,
       },
       {
-        hidden: !isIssuer,
-        ...CREDIT_BATCHES,
-        label: _(CREDIT_BATCHES.label),
-      },
-      {
-        hidden: !isBridgeEnabled || !isConnected,
-        ...BRIDGE,
-        label: _(BRIDGE.label),
+        label: _(BRIDGE),
+        href: '/dashboard/portfolio/bridge',
+        icon: <BridgeIcon linearGradient />,
       },
     ],
-    [_, isConnected, isIssuer, showCreditClasses, showProjects],
+    [_],
   );
 
-  const activeTab = Math.max(
-    tabs
-      .filter(tab => !tab.hidden)
-      .findIndex(tab => location.pathname.includes(tab.href ?? '')),
+  const activePortfolioTab = Math.max(
+    portfolioTabs.findIndex(tab => {
+      if (tab.href === '/dashboard/portfolio/bridge') {
+        return pathname.includes('/dashboard/portfolio/bridge');
+      }
+      if (tab.href === '/dashboard/portfolio') {
+        return pathname === '/dashboard/portfolio';
+      }
+      return false;
+    }),
     0,
   );
 
-  const profileLink = getProfileLink(
-    activeAccount?.addr || activeAccount?.id || wallet?.address,
-  );
-  const walletAddress = getWalletAddress({ activeAccount, wallet });
+  const handleLogout = async () => {
+    try {
+      await disconnect();
+      setMobileMenuOpen(false);
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+      navigate('/');
+    }
+  };
 
   return (
-    <>
-      <ProfileHeader
-        name={account?.name ? account.name : _(DEFAULT_NAME)}
-        backgroundImage={backgroundImage}
-        avatar={avatarImage}
-        infos={{
-          addressLink: {
-            href: getAccountUrl(walletAddress, true),
-            text: walletAddress ? truncate(walletAddress) : '',
-          },
-          description: account?.description?.trimEnd() ?? '',
-          socialsLinks,
-        }}
-        editLink={activeAccount?.id ? '/dashboard/admin/profile' : ''}
-        profileLink={profileLink}
-        variant={
-          account?.type ? profileVariantMapping[account.type] : 'individual'
-        }
-        LinkComponent={Link as LinkComponentType}
-        copyProfileText={_(COPY_PROFILE_TEXT)}
-        editProfileText={_(EDIT_PROFILE_TEXT)}
-        copySuccessText={_(COPY_SUCCESS)}
-        altBackgroundImage={_(ALT_PROFILE_BACKGROUND_IMAGE)}
-        altAvatar={_(ALT_PROFILE_AVATAR)}
-      />
-
-      <Box sx={{ bgcolor: 'grey.50' }}>
-        <Box sx={{ pt: 15, ...containerStyles, px: { xs: 5, sm: 10 } }}>
-          <DashboardBannerCard sanityProfilePageData={sanityProfilePageData} />
-          <IconTabs
-            aria-label={_(msg`dashboard tabs`)}
-            tabs={tabs}
-            activeTab={activeTab}
-            linkComponent={Link}
-            mobileFullWidth
+    <div className="bg-grey-100">
+      <div className="relative md:flex md:min-h-screen">
+        {/* Mobile Header */}
+        {activeAccount && (
+          <DashboardNavigationMobileHeader
+            activeAccount={{
+              ...activeAccount,
+              address: activeAccount.addr ?? '',
+              type: activeAccount.type === 'USER' ? 'user' : 'org',
+              image: activeAccount.image || '',
+            }}
+            onMenuClick={() => setMobileMenuOpen(true)}
+            mobileMenuOpen={mobileMenuOpen}
           />
-          <Flex sx={{ ...dashBoardStyles.padTop }}>
-            <Box sx={{ width: '100%' }}>
-              <Outlet
-                context={{
-                  isCreditClassCreator,
-                  isProjectAdmin,
-                  isIssuer,
-                  sanityProfilePageData,
-                }}
-              />
-            </Box>
-          </Flex>
-        </Box>
-      </Box>
-    </>
+        )}
+
+        {/* Mobile overlay with blur */}
+        {mobileMenuOpen && (
+          <div
+            className="md:hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-30"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
+
+        {/* Left sidebar navigation */}
+        {activeAccount && (
+          <div className="md:sticky md:top-0 md:h-screen">
+            <DashboardNavigation
+              currentPath={pathname}
+              onNavItemClick={onNavClick}
+              isIssuer={isIssuer}
+              mobileMenuOpen={mobileMenuOpen}
+              onLogout={handleLogout}
+              onCloseMobile={() => setMobileMenuOpen(false)}
+              onExitClick={() => {
+                setIsWarningModalOpen(undefined);
+                navigate('/');
+                setMobileMenuOpen(false);
+              }}
+              header={{
+                activeAccount: {
+                  ...activeAccount,
+                  address: activeAccount.addr ?? '',
+                  type: activeAccount.type === 'USER' ? 'user' : 'org',
+                  image: activeAccount.image || '',
+                },
+                accounts: (authenticatedAccounts || []).map(account => ({
+                  id: account?.id,
+                  name: account?.name || '',
+                  address: account?.addr || '',
+                  type: account?.type === 'USER' ? 'user' : 'org',
+                  image: account?.image || '',
+                })),
+                onAccountSelect: (id: string) => {
+                  setIsWarningModalOpen(undefined);
+                  onAccountSelect(id);
+                  setMobileMenuOpen(false);
+                },
+                onViewProfileClick: (path: string) => {
+                  setIsWarningModalOpen(undefined);
+                  navigate(`${path}`);
+                  setMobileMenuOpen(false);
+                },
+              }}
+            />
+          </div>
+        )}
+
+        {/* Content area */}
+        <div
+          className={cn(
+            'flex-1 min-w-0 w-full md:w-auto md:pt-0 pt-[25px] transition-all duration-300',
+            mobileMenuOpen && 'md:blur-0 blur-sm',
+          )}
+        >
+          <div
+            className={cn(
+              'px-10 py-25 md:py-40 md:px-30 2xl:mx-auto',
+              section === 'profile' || section === 'settings'
+                ? 'max-w-[767px]'
+                : 'max-w-[1400px]',
+            )}
+          >
+            <Flex
+              sx={{
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+              className={cn('w-full', section ? 'flex' : 'hidden')}
+            >
+              <Flex
+                justifyContent="space-between"
+                alignContent="center"
+                className="w-full h-50 my-25 md:my-0"
+              >
+                <div className="flex flex-col">
+                  {/* Mobile-only subtitle */}
+                  <div className="block md:hidden mb-2">
+                    <span
+                      style={{
+                        fontFamily: 'Primary',
+                        fontWeight: 800,
+                        fontSize: '10px',
+                        lineHeight: '100%',
+                        letterSpacing: '1px',
+                        textTransform: 'uppercase',
+                      }}
+                      className="text-sc-text-sub-header"
+                    >
+                      {section === 'settings'
+                        ? _(PERSONAL_ACCOUNT)
+                        : _(PERSONAL_DASHBOARD)}
+                    </span>
+                  </div>
+
+                  {/* Main title */}
+                  <Title
+                    variant="h1"
+                    className="text-[21px] md:text-[32px] leading-[1.4]"
+                  >
+                    {pathname.includes('/portfolio')
+                      ? _(PORTFOLIO)
+                      : startCase(section)}
+                  </Title>
+                </div>
+
+                {(section === 'credit-classes' ||
+                  section === 'projects' ||
+                  section === 'portfolio' ||
+                  section === 'profile') && (
+                  <ViewProfileButton
+                    setIsWarningModalOpen={setIsWarningModalOpen}
+                    section={section}
+                    activeAccount={
+                      activeAccount
+                        ? {
+                            ...activeAccount,
+                            addr: activeAccount.addr ?? undefined,
+                          }
+                        : undefined
+                    }
+                  />
+                )}
+              </Flex>
+
+              {(section === 'portfolio' ||
+                pathname.includes('/portfolio/bridge')) && (
+                <div className="w-full mb-20 md:mb-8 lg:mb-0">
+                  <IconTabs
+                    aria-label={_(PORTFOLIO_TABS_ARIA_LABEL)}
+                    tabs={portfolioTabs}
+                    activeTab={activePortfolioTab}
+                    linkComponent={Link}
+                    mobileFullWidth
+                  />
+                </div>
+              )}
+
+              <WithLoader isLoading={accountChanging || loading}>
+                <div className="rounded-md border border-grey-200 bg-grey-0 lg:mt-30 w-full">
+                  <Outlet context={dashboardContextValue} />
+                </div>
+              </WithLoader>
+            </Flex>
+          </div>
+        </div>
+      </div>
+
+      <SaveChangesWarningModal
+        open={!!isWarningModalOpen}
+        title={_(DISCARD_CHANGES_TITLE)}
+        bodyText={_(DISCARD_CHANGES_BODY)}
+        buttonText={_(DISCARD_CHANGES_BUTTON)}
+        navigate={() => {
+          if (isWarningModalOpen) navigate(isWarningModalOpen);
+          isDirtyRef.current = false;
+        }}
+        onClose={() => {
+          setIsWarningModalOpen(undefined);
+        }}
+      />
+    </div>
   );
 };
-
-export { Dashboard };

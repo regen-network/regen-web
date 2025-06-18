@@ -8,6 +8,8 @@ import { cn } from 'web-components/src/utils/styles/cn';
 import {
   LIST_ACTIVE_CLASSES,
   LIST_BASE_CLASSES,
+  LIST_COLLAPSED_CLASSES,
+  LIST_EXPANDED_CLASSES,
   LIST_INACTIVE_CLASSES,
 } from './DashboardNavigation.constants';
 import { NavigationListItemProps } from './DashboardNavigation.types';
@@ -22,8 +24,8 @@ export const DashboardNavigationListItem: React.FC<NavigationListItemProps> = ({
   const isLogout = item.path === 'logout';
 
   const LIST_LAYOUT_CLASSES = collapsed
-    ? 'w-[40%] mx-auto justify-center h-40 px-1 py-2'
-    : 'w-full h-35 md:h-45 gap-10';
+    ? LIST_COLLAPSED_CLASSES
+    : LIST_EXPANDED_CLASSES;
 
   const LIST_STATE_CLASSES = isActive
     ? LIST_ACTIVE_CLASSES

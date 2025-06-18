@@ -30,14 +30,14 @@ import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
 import {
+  DEFAULT_NAME,
+  profileVariantMapping,
+} from 'pages/Dashboard/Dashboard.constants';
+import {
   getSocialsLinks,
   getUserImages,
 } from 'pages/Dashboard/Dashboard.utils';
 import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
-import {
-  DEFAULT_NAME,
-  profileVariantMapping,
-} from 'pages/ProfileEdit/ProfileEdit.constants';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';

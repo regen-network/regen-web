@@ -4,8 +4,8 @@ import { Account, Maybe } from 'generated/graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 
-import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+import { DEFAULT_NAME } from 'pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 
 type GetAddressParams = {
   walletAddress?: string | null;

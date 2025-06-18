@@ -41,6 +41,8 @@ import { LINK_PREFIX } from 'lib/env';
 import { Post } from 'lib/queries/react-query/registry-server/getPostQuery/getPostQuery.types';
 import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
+import { DEFAULT_NAME } from 'pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 import { useAttestEvents } from 'pages/Post/hooks/useAttestEvents';
 import { useDelete } from 'pages/Post/hooks/useDelete';
 import { useSharePrivateLink } from 'pages/Post/hooks/useSharePrivateLink';
@@ -50,8 +52,6 @@ import {
   POST_IS_PRIVATE,
   UNTITLED,
 } from 'pages/Post/Post.constants';
-import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
 import { Link } from 'components/atoms';
 import { DeletePostWarningModal } from 'components/organisms/DeletePostWarningModal/DeletePostWarningModal';
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';

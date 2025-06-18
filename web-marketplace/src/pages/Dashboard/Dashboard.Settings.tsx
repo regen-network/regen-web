@@ -18,7 +18,7 @@ import { WalletProviderInfo } from 'components/organisms/UserAccountSettings/Use
 import { useSocialProviders } from './hooks/useSocialProviders';
 import { useVerifyToken } from './hooks/useVerifyToken';
 
-export const ProfileEditSettings = () => {
+export const DashboardEditSettings = () => {
   const { _ } = useLingui();
   const [error, setError] = useState<unknown>(undefined);
   const { activeAccount, privActiveAccount } = useAuth();
@@ -36,9 +36,15 @@ export const ProfileEditSettings = () => {
   const socialProviders = useSocialProviders();
   const _socialProviders = socialProviders.map(provider => ({
     name: provider.name,
-    email: privActiveAccount?.[`${provider.id}_email`],
-    connect: privActiveAccount?.[provider.id] ? undefined : provider.connect,
-    disconnect: privActiveAccount?.[provider.id]
+    email: privActiveAccount?.[
+      `${provider.id}_email` as keyof typeof privActiveAccount
+    ] as string | undefined,
+    connect: privActiveAccount?.[provider.id as keyof typeof privActiveAccount]
+      ? undefined
+      : provider.connect,
+    disconnect: privActiveAccount?.[
+      provider.id as keyof typeof privActiveAccount
+    ]
       ? provider.disconnect
       : undefined,
   }));

@@ -14,7 +14,7 @@ import {
   AccountByIdQuery,
   GetAccountsByNameOrAddrQuery,
 } from '../../../../../generated/graphql';
-import { DEFAULT_PROFILE_TYPE } from '../../../../../pages/ProfileEdit/ProfileEdit.constants';
+import { DEFAULT_PROFILE_TYPE } from '../../../../../pages/Dashboard/Dashboard.constants';
 import { ProfileModal } from '../ProfileModal/ProfileModal';
 import { ProfileModalSchemaType } from '../ProfileModal/ProfileModal.schema';
 import { ALL_PROFILES, PLACEHOLDER } from './RoleField.constants';

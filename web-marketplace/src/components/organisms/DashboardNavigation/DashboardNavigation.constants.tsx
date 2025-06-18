@@ -18,6 +18,15 @@ export const LIST_ACTIVE_CLASSES =
 export const LIST_INACTIVE_CLASSES =
   'bg-transparent text-bc-neutral-700 hover:bg-bc-neutral-200 hover:cursor-pointer';
 
+export const LIST_COLLAPSED_CLASSES =
+  'w-[40%] mx-auto justify-center h-40 px-1 py-2';
+export const LIST_EXPANDED_CLASSES = 'w-full h-35 md:h-45 gap-10';
+
 export const UNNAMED = msg`Unnamed`;
 
 export const COPIED = msg`Copied!`;
+
+export const DASHBOARD_NAVIGATION_ARIA_LABEL = msg`Dashboard side navigation`;
+export const CLOSE_MENU = msg`Close menu`;
+export const EXPAND_SIDEBAR = msg`Expand sidebar`;
+export const COLLAPSE_SIDEBAR = msg`Collapse sidebar`;

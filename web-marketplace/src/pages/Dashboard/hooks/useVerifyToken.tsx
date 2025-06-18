@@ -17,7 +17,7 @@ import {
   DEFAULT_TOKEN_ERROR,
   EMAIL_ADDED,
   TOKEN_ERROR_MSGS,
-} from '../ProfileEdit.constants';
+} from '../Dashboard.constants';
 
 export const useVerifyToken = () => {
   const { _ } = useLingui();

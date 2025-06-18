@@ -7,7 +7,11 @@ import DoubleBreadcrumbLeftIcon from 'web-components/src/components/icons/Double
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import {
+  CLOSE_MENU,
   COLLAPSE_BUTTON_CLASSES,
+  COLLAPSE_SIDEBAR,
+  DASHBOARD_NAVIGATION_ARIA_LABEL,
+  EXPAND_SIDEBAR,
   NAV_BASE_CLASSES,
   SECTION_HEADING_BASE,
 } from './DashboardNavigation.constants';
@@ -53,7 +57,7 @@ export const DashboardNavigation = ({
 
   return (
     <nav
-      aria-label="Dashboard side navigation"
+      aria-label={_(DASHBOARD_NAVIGATION_ARIA_LABEL)}
       className={cn(
         NAV_BASE_CLASSES,
         collapsed ? 'w-[100px] px-2 pt-[27px] pb-20' : 'w-[263px]',
@@ -69,7 +73,7 @@ export const DashboardNavigation = ({
         type="button"
         onClick={onCloseMobile}
         className="absolute top-[6px] right-3 block md:hidden p-1 bg-transparent border-none rounded-full hover:bg-bc-neutral-200 cursor-pointer"
-        aria-label="Close menu"
+        aria-label={_(CLOSE_MENU)}
       >
         <CloseIcon className="h-6 w-6 text-bc-neutral-500" />
       </button>
@@ -79,7 +83,7 @@ export const DashboardNavigation = ({
         type="button"
         onClick={() => setCollapsed(!collapsed)}
         className={cn(COLLAPSE_BUTTON_CLASSES)}
-        aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        aria-label={collapsed ? _(EXPAND_SIDEBAR) : _(COLLAPSE_SIDEBAR)}
         aria-pressed={collapsed}
       >
         <DoubleBreadcrumbLeftIcon
@@ -106,11 +110,6 @@ export const DashboardNavigation = ({
         style={{
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
-        }}
-        css={{
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
         }}
       >
         {sections.map((section, idx) => {

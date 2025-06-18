@@ -14,8 +14,10 @@ import { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet, Wallet } from 'lib/wallet/wallet';
 
-import { getWalletAddress } from 'pages/Dashboard/Dashboard.utils';
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+import {
+  getDefaultAvatar,
+  getWalletAddress,
+} from 'pages/Dashboard/Dashboard.utils';
 import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../../lib/ledger';

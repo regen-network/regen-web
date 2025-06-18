@@ -13,6 +13,7 @@ import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { safeLazy } from 'utils/safeLazy';
+import { SellerSetupAccount } from 'web-marketplace/src/components/organisms/SellerSetupAccount/SellerSetupAccount';
 import { CreditBatchesTab } from 'web-marketplace/src/pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab';
 import { CreditClassTab } from 'web-marketplace/src/pages/EcocreditsByAccount/CreditClassTab/CreditClassTab';
 import { PortfolioTab } from 'web-marketplace/src/pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
@@ -27,6 +28,8 @@ import { useWallet } from 'lib/wallet/wallet';
 import { batchDetailsLoader } from 'pages/BatchDetails/BatchDetails.loader';
 import { buyCreditsLoader } from 'pages/BuyCredits/BuyCredits.loader';
 import { CertificatePage } from 'pages/Certificate/Certificate';
+import { DashboardEditMain } from 'pages/Dashboard/Dashboard.Main';
+import { DashboardEditSettings } from 'pages/Dashboard/Dashboard.Settings';
 import MyBridge from 'pages/Dashboard/MyBridge';
 import { MyBridgableEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
 import { MyBridgedEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgedEcocreditsTable';
@@ -38,8 +41,6 @@ import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.
 import Faucet from 'pages/Faucet';
 import { homeLoader } from 'pages/Home/Home.loader';
 import { storefrontLoader } from 'pages/Marketplace/Storefront/Storefront.loader';
-import { ProfileEditMain } from 'pages/ProfileEdit/ProfileEdit.Main';
-import { ProfileEditSettings } from 'pages/ProfileEdit/ProfileEdit.Settings';
 import { projectsLoader } from 'pages/Projects/AllProjects/AllProjects.loader';
 import Settings from 'pages/Settings';
 import { AuthRoute } from 'components/atoms/AuthRoute';
@@ -51,9 +52,6 @@ import { projectDetailsLoader } from 'components/templates/ProjectDetails/Projec
 
 import { KeplrRoute } from '../../components/atoms';
 import { ProjectMetadata } from '../../pages/ProjectMetadata/ProjectMetadata';
-import { SellerSetupAccount } from 'web-marketplace/src/components/organisms/SellerSetupAccount/SellerSetupAccount';
-
-const Sell = safeLazy(() => import('../../pages/Sell/Sell'));
 
 const Additionality = safeLazy(() => import('../../pages/Additionality'));
 const AllProjects = safeLazy(() => import('../../pages/Projects/AllProjects'));
@@ -73,7 +71,6 @@ const CreateCreditClass = safeLazy(
 const CreditClassDetails = safeLazy(
   () => import('../../pages/CreditClassDetails'),
 );
-const Dashboard = safeLazy(() => import('../../pages/ProfileEdit'));
 const Description = safeLazy(() => import('../../pages/Description'));
 const EcocreditBatches = safeLazy(() => import('../../pages/EcocreditBatches'));
 const EcocreditsByAccount = safeLazy(
@@ -110,7 +107,7 @@ const Storefront = safeLazy(() => import('../../pages/Marketplace/Storefront'));
 const ConnectWalletPage = safeLazy(
   () => import('../../pages/ConnectWalletPage'),
 );
-const ProfileEdit = safeLazy(() => import('../../pages/ProfileEdit'));
+const Dashboard = safeLazy(() => import('../../pages/Dashboard'));
 const Orders = safeLazy(() => import('../../pages/Orders'));
 
 type RouterProps = {
@@ -367,7 +364,7 @@ export const getRegenRoutes = ({
       {/* Dashboard routes WITHOUT header/footer */}
       <Route
         path="dashboard"
-        element={<KeplrOrAuthRoute component={ProfileEdit} />}
+        element={<KeplrOrAuthRoute component={Dashboard} />}
         errorElement={<ErrorPage />}
       >
         <Route
@@ -402,11 +399,11 @@ export const getRegenRoutes = ({
         {/* Profile sections */}
         <Route
           path="profile"
-          element={<AuthRoute component={ProfileEditMain} />}
+          element={<AuthRoute component={DashboardEditMain} />}
         />
         <Route
           path="settings"
-          element={<AuthRoute component={ProfileEditSettings} />}
+          element={<AuthRoute component={DashboardEditSettings} />}
         />
         <Route
           path="my-orders"

@@ -12,7 +12,7 @@ const CustomSelect = ({
   placeholderAriaLabel,
 }: {
   options: Option[];
-  onSelect: (currency: string) => void;
+  onSelect: (option: string) => void;
   defaultOption: string;
   selectAriaLabel: string;
   placeholderAriaLabel: string;

@@ -52,7 +52,6 @@ export interface Props {
   onSubmit: (values: CreateSellOrderFormSchemaType) => Promise<void>;
   initialValues?: CreateSellOrderFormSchemaType;
   onClose: RegenModalPropsWithOnClose['onClose'];
-  placeholderText?: string;
 }
 
 const CreateSellOrderForm: React.FC<Props> = ({
@@ -62,7 +61,6 @@ const CreateSellOrderForm: React.FC<Props> = ({
   availableAmountByBatch,
   onSubmit,
   onClose,
-  placeholderText,
 }) => {
   const { _ } = useLingui();
   const [options, setOptions] = useState<Option[]>([]);
@@ -70,7 +68,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
   const { track } = useTracker();
 
   const defaultInitialValues = {
-    batchDenom: placeholderText ? '' : batchDenoms[0]?.value ?? '',
+    batchDenom: batchDenoms.length === 1 ? batchDenoms[0]?.value : undefined,
     price: undefined,
     askDenom: undefined,
     amount: undefined,
@@ -144,10 +142,10 @@ const CreateSellOrderForm: React.FC<Props> = ({
         label={_(msg`Batch denom`)}
         options={options}
         emptyOptionText={_(EMPTY_OPTION_TEXT)}
-        disabled={!placeholderText && options.length === 1}
+        disabled={options.length === 1}
         sx={{ mb: 10.5 }}
         native={false}
-        placeholderText={placeholderText}
+        placeholderText={_(msg`Choose batch`)}
         {...form.register('batchDenom')}
       />
       <Box
@@ -183,6 +181,8 @@ const CreateSellOrderForm: React.FC<Props> = ({
             error={!!errors['askDenom']}
             helperText={errors['askDenom']?.message}
             emptyOptionText={_(EMPTY_OPTION_TEXT)}
+            placeholderText={_(msg`Choose denom`)}
+            native={false}
             {...form.register('askDenom')}
           />
         </Box>

@@ -28,7 +28,7 @@ export const useHeaderMenuHoverStyles = makeStyles()(theme => ({
   title: {
     fontSize: theme.spacing(3.25),
     letterSpacing: '1px',
-    fontFamily: 'Muli',
+    fontFamily: 'var(--font-muli)',
     textTransform: 'uppercase',
   },
 }));

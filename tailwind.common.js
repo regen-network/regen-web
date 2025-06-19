@@ -4,13 +4,21 @@
 
 // colors generated from Figma design tokens are under extend.colors as bc (base colors), ac (alias colors), and sc (semantic colors)
 // prefer using semantic colors over alias colors, and only use base colors as a last resort
+
+import { IS_TERRASOS } from './web-marketplace/src/lib/env';
+
+const fontFamily = IS_TERRASOS
+  ? {
+      sans: ['var(--font-montserrat)', '-apple-system', 'sans-serif'],
+    }
+  : {
+      sans: ['var(--font-sans)', '-apple-system', 'sans-serif'],
+      muli: ['var(--font-muli)', '-apple-system', 'sans-serif'],
+    };
+
 module.exports = {
   theme: {
-    fontFamily: {
-      sans: ['"Lato"', '-apple-system', 'sans-serif'],
-      muli: ['"Muli"', '-apple-system', 'sans-serif'],
-      montserrat: ['"Montserrat"', '-apple-system', 'sans-serif'],
-    },
+    fontFamily,
     colors: {
       // Make sure these guidelines are followed when adding new colors: https://tailwindcss.com/docs/customizing-colors#using-css-variables
       // Color variables should be added to tailwind.css.
@@ -99,6 +107,7 @@ module.exports = {
         sm: '0px 4px 10px 0px rgba(0, 0, 0, 0.05)',
         md: '0px 4px 10px 0px rgba(0, 0, 0, 0.05), 0px 0px 10px 0px rgba(250, 250, 216, 0.80)',
       },
+      // fontFamily,
       fontWeight: {
         inherit: 'inherit',
       },

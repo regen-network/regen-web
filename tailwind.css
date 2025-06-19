@@ -218,7 +218,7 @@
     --sc-text-link: var(--ac-primary-500);
     --sc-text-header: var(--ac-neutral-700);
     --sc-text-paragraph: var(--ac-neutral-500);
-  }
+}
 
   .dark {
     --brand-400: 123 199 150;
@@ -344,6 +344,10 @@
     --sc-text-link: var(--ac-primary-500);
     --sc-text-header: var(--ac-neutral-0);
     --sc-text-paragraph: var(--ac-neutral-200);
+  }
+
+  body {
+    font-family: var(--font-sans);
   }
 
   /* 

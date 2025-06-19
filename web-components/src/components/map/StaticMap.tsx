@@ -11,9 +11,11 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 const Map = dynamic(() => import('react-map-gl'), {
   loading: () => <CircularProgress color="secondary" />,
+  ssr: false,
 });
 const Marker = dynamic(() => import('react-map-gl').then(mod => mod.Marker), {
   loading: () => <CircularProgress color="secondary" />,
+  ssr: false,
 });
 
 export interface MapProps {

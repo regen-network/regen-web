@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
-import { Box, CircularProgress, Skeleton, useTheme } from '@mui/material';
+import { Box, CircularProgress, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
 import { useAtom, useSetAtom } from 'jotai';
@@ -31,7 +31,6 @@ import { CreditClassMetadataLD, ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { IS_REGEN, IS_TERRASOS } from 'lib/env';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
-import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
@@ -39,8 +38,6 @@ import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldO
 import { getTerrasosBookCallQuery } from 'lib/queries/react-query/sanity/getTerrasosBookCallQuery/getTerrasosBookCallQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
-import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
@@ -60,16 +57,13 @@ import { useGetProject } from './hooks/useGetProject';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { useStakeholders } from './hooks/useStakeholders';
 import { ProjectDetailsBannerCard } from './ProjectDetails.BannerCard';
-import { JURISDICTION_REGEX } from './ProjectDetails.constant';
 import { DataStream } from './ProjectDetails.DataStream';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { ProjectDetailsStakeholders } from './ProjectDetails.Stakeholders';
-// import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   findSanityCreditClass,
   formatOtcCardData,
   getProjectGalleryPhotos,
-  parseMedia,
   parseOffChainProject,
 } from './ProjectDetails.utils';
 import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
@@ -88,8 +82,8 @@ const PostFlow = dynamic(
     ssr: false,
   },
 );
-const ProjectMedia = dynamic(
-  () => import('web-components/src/components/sliders/ProjectMedia'),
+const Media = dynamic(
+  () => import('./ProjectDetails.Media').then(mod => mod.Media),
   {
     loading: () => <Skeleton className="h-[224px] sm:h-[400px]" />,
   },
@@ -97,7 +91,6 @@ const ProjectMedia = dynamic(
 
 function ProjectDetails(): JSX.Element {
   const { _ } = useLingui();
-  const theme = useTheme();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { id: projectId } = useParams<{ id: string }>();
   const { queryClient } = useLedger();
@@ -143,7 +136,6 @@ function ProjectDetails(): JSX.Element {
   );
 
   const setBuyFromProjectId = useSetAtom(buyFromProjectIdAtom);
-  const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
 
   const {
     sanityProject,
@@ -178,15 +170,6 @@ function ProjectDetails(): JSX.Element {
 
   const onChainProject = projectResponse?.project;
   const jurisdiction = onChainProject?.jurisdiction;
-  const countryCodeMatch = jurisdiction?.match(JURISDICTION_REGEX);
-  const countryCode = countryCodeMatch?.[3] || countryCodeMatch?.[1];
-
-  const { data: geocodingJurisdictionData } = useQuery(
-    getGeocodingQuery({
-      request: { query: countryCode },
-      enabled: !!countryCode,
-    }),
-  );
 
   /* Credit class */
 
@@ -248,17 +231,6 @@ function ProjectDetails(): JSX.Element {
     projectPageMetadata: offChainProjectMetadata,
   });
 
-  const mediaData = parseMedia({
-    onChainProjectMetadata: projectMetadata,
-    offChainProjectMetadata,
-    geojson,
-    geocodingJurisdictionData,
-  });
-
-  const { credits } = useCreateSellOrderData({
-    projectId: projectsWithOrderData[0]?.id,
-  });
-
   const creditClassSanity = findSanityCreditClass({
     sanityCreditClassData,
     creditClassIdOrUrl:
@@ -267,14 +239,6 @@ function ProjectDetails(): JSX.Element {
       onChainProjectId?.split('-')?.[0], // if no offChain credit class
   });
   const isCommunityCredit = !creditClassSanity;
-
-  const creditsWithProjectName = useMemo(() => {
-    if (!credits || credits.length === 0 || !projectsWithOrderData[0]) return;
-    return credits.map(batch => ({
-      ...batch,
-      projectName: projectsWithOrderData[0]?.name,
-    }));
-  }, [credits, projectsWithOrderData]);
 
   const isSoldOut = useMemo(
     () =>
@@ -377,20 +341,14 @@ function ProjectDetails(): JSX.Element {
         slug={slug}
       />
 
-      {mediaData.assets.length > 0 && (
-        <Box sx={{ pt: { xs: 0, sm: 12.5 } }}>
-          <ProjectMedia
-            bodyTexts={bodyTexts}
-            gridView
-            assets={mediaData.assets}
-            apiServerUrl={mediaData.apiServerUrl}
-            imageStorageBaseUrl={mediaData.imageStorageBaseUrl}
-            imageCredits={mediaData.imageCredits}
-            mobileHeight={theme.spacing(78.75)}
-            isPrefinanceProject={isPrefinanceProject}
-          />
-        </Box>
-      )}
+      <Media
+        isPrefinanceProject={isPrefinanceProject}
+        bodyTexts={bodyTexts}
+        geojson={geojson}
+        jurisdiction={jurisdiction}
+        onChainProjectMetadata={projectMetadata}
+        offChainProjectMetadata={offChainProjectMetadata}
+      />
 
       {(onChainProjectId ||
         isPrefinanceProject ||

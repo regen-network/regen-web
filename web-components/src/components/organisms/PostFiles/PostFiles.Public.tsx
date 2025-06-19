@@ -35,12 +35,15 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 const Map = dynamic(() => import('react-map-gl'), {
   loading: () => <CircularProgress color="secondary" />,
+  ssr: false,
 });
 const Marker = dynamic(() => import('react-map-gl').then(mod => mod.Marker), {
   loading: () => <CircularProgress color="secondary" />,
+  ssr: false,
 });
 const Popup = dynamic(() => import('react-map-gl').then(mod => mod.Popup), {
   loading: () => <CircularProgress color="secondary" />,
+  ssr: false,
 });
 
 type Props = Pick<PostFilesProps, 'files' | 'mapboxToken' | 'isAdmin'> & {

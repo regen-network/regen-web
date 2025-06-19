@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-query';
 import { getClient, getSanityClient } from 'app/ApolloClient';
 import { getRPCQueryClient } from 'app/makeRPCQueryClient';
+import dynamic from 'next/dynamic';
 import { redirect } from 'next/navigation';
 
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
@@ -17,11 +18,21 @@ import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/g
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
 
-import { ProjectDetails } from 'components/templates/ProjectDetails';
+// import { ProjectDetails } from 'components/templates/ProjectDetails';
 import {
   getIsOnChainId,
   getIsUuid,
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+
+const ProjectDetails = dynamic(
+  () =>
+    import('components/templates/ProjectDetails').then(
+      mod => mod.ProjectDetails,
+    ),
+  {
+    // loading: () => <CircularProgress color="secondary" />,
+  },
+);
 
 interface ProjectPageProps {
   params: Promise<{ id: string }>;

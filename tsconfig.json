@@ -19,5 +19,13 @@
     "strict": true,
     "target": "es6",
     "typeRoots": ["./node_modules/@types"]
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    ".next",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
 }

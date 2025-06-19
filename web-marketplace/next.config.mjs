@@ -4,6 +4,32 @@ const nextConfig = {
   distDir: './dist', // Changes the build output directory to `./dist/`.
   experimental: {
     swcPlugins: [['@lingui/swc-plugin', {}]],
+    optimizePackageImports: [
+      '@mui/material',
+      '@mui/lab',
+      '@lingui/macro',
+      'lodash',
+    ],
+  },
+  serverExternalPackages: ['electron', 'pino-pretty', 'lokijs', 'encoding'],
+  turbopack: {
+    rules: {
+      '*.po': {
+        loaders: [
+          {
+            loader: '@lingui/loader',
+            options: {
+              cache: true,
+              compact: true,
+            },
+          },
+        ],
+        as: '*.js',
+      },
+    },
+    resolveAlias: {
+      'rdf-canonize-native': './empty-shim.js',
+    },
   },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // https://github.com/sindresorhus/got/issues/345
@@ -12,7 +38,6 @@ const nextConfig = {
         resourceRegExp: /^electron$/,
       }),
     );
-    config.externals.push('pino-pretty', 'lokijs', 'encoding');
     config.module.rules.push({
       test: /\.po$/,
       use: '@lingui/loader',

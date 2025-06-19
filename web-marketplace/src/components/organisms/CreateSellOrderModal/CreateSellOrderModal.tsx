@@ -12,7 +12,6 @@ interface CreateSellOrderModalProps
   extends RegenModalPropsWithOnClose,
     CreateSellOrderProps {
   title: string;
-  placeholderText?: string;
 }
 
 const CreateSellOrderModal = ({
@@ -24,7 +23,6 @@ const CreateSellOrderModal = ({
   title,
   onClose,
   onSubmit,
-  placeholderText,
 }: PropsWithChildren<CreateSellOrderModalProps>) => (
   <FormModalTemplate title={title} open={open} onClose={onClose}>
     <CreateSellOrderForm
@@ -34,7 +32,6 @@ const CreateSellOrderModal = ({
       availableAmountByBatch={availableAmountByBatch}
       onClose={onClose}
       onSubmit={onSubmit}
-      placeholderText={placeholderText}
     />
   </FormModalTemplate>
 );

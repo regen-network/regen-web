@@ -10,14 +10,14 @@ const MOCK_ACCOUNTS: AccountOption[] = [
     id: 'user-1',
     name: 'Test User',
     address: 'regen1q88…qwerty',
-    avatarSrc: 'https://i.pravatar.cc/300',
+    image: 'https://i.pravatar.cc/300',
     type: 'user',
   },
   {
     id: 'org-1',
     name: 'CarbonCorp',
     address: 'regen1abcd…carbon',
-    avatarSrc: 'https://i.pravatar.cc/2',
+    image: 'https://i.pravatar.cc/2',
     type: 'org',
   },
 ];
@@ -27,7 +27,7 @@ const SINGLE_USER_ACCOUNT: AccountOption[] = [
     id: 'user-1',
     name: 'Test User',
     address: 'regen1q88…qwerty',
-    avatarSrc: 'https://i.pravatar.cc/300',
+    image: 'https://i.pravatar.cc/300',
     type: 'user',
   },
 ];

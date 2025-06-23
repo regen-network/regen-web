@@ -770,7 +770,7 @@ msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:4
-#: src/pages/Dashboard/Dashboard.constants.tsx:36
+#: src/pages/Dashboard/Dashboard.constants.tsx:12
 msgid "Bridge"
 msgstr ""
 
@@ -827,7 +827,7 @@ msgstr ""
 msgid "Buy Credits Error"
 msgstr ""
 
-#: src/pages/EcocreditsByAccount/CreditClassTab/CreditClassTab.constants.ts:3
+#: src/pages/Profile/CreditClassTab/CreditClassTab.constants.ts:3
 msgid "buy ecocredits"
 msgstr ""
 
@@ -1070,6 +1070,11 @@ msgstr ""
 msgid "close"
 msgstr ""
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:30
+#: src/pages/Dashboard/Dashboard.constants.tsx:21
+msgid "Close menu"
+msgstr ""
+
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:4
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.tsx:224
 #: src/lib/constants/shared.constants.tsx:95
@@ -1078,6 +1083,10 @@ msgstr ""
 
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:9
 msgid "co-benefit"
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:32
+msgid "Collapse sidebar"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:170
@@ -1184,6 +1193,10 @@ msgstr ""
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:116
 msgid "Cookies Policy"
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:27
+msgid "Copied!"
 msgstr ""
 
 #: src/components/atoms/WrappedStepCard.tsx:62
@@ -1307,8 +1320,7 @@ msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:243
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/pages/Dashboard/Dashboard.constants.tsx:30
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:94
+#: src/pages/Profile/Profile.tsx:93
 msgid "Credit Batches"
 msgstr ""
 
@@ -1377,15 +1389,22 @@ msgstr ""
 msgid "Credit class: the structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr ""
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:161
+msgid "Credit classes"
+msgstr ""
+
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
-#: src/pages/Dashboard/Dashboard.constants.tsx:24
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:88
 #: src/pages/Home/Home.tsx:180
+#: src/pages/Profile/Profile.tsx:87
 msgid "Credit Classes"
 msgstr ""
 
 #: src/components/molecules/CreditClassDetailsColumn.tsx:106
 msgid "Credit Details"
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:151
+msgid "Credit issuance"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/tables/ProjectDetails.TableTabs.config.tsx:37
@@ -1430,7 +1449,7 @@ msgstr ""
 msgid "credits"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:41
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:43
 #: src/components/organisms/Order/Order.Summary.tsx:60
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:305
 msgid "Credits"
@@ -1592,9 +1611,14 @@ msgstr ""
 msgid "Customer info"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.tsx:155
-msgid "dashboard tabs"
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:29
+#: src/pages/Dashboard/Dashboard.constants.tsx:22
+msgid "Dashboard side navigation"
 msgstr ""
+
+#: src/pages/Dashboard/Dashboard.tsx:155
+#~ msgid "dashboard tabs"
+#~ msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:18
 msgid "Data Deficient"
@@ -1821,11 +1845,11 @@ msgstr ""
 msgid "Edit filters"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:117
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:119
 msgid "Edit org profile"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:93
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:95
 msgid "Edit personal profile"
 msgstr ""
 
@@ -1938,6 +1962,10 @@ msgstr ""
 msgid "Exit to homepage"
 msgstr ""
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:31
+msgid "Expand sidebar"
+msgstr ""
+
 #: src/components/organisms/Order/Order.tsx:176
 msgid "Expected delivery date"
 msgstr ""
@@ -1984,7 +2012,7 @@ msgstr ""
 msgid "Failed to resend passcode"
 msgstr ""
 
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:31
+#: src/pages/Dashboard/Dashboard.constants.tsx:43
 msgid "Failed to validate token"
 msgstr ""
 
@@ -2275,12 +2303,20 @@ msgstr ""
 msgid "Invalid regen address"
 msgstr ""
 
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:33
+#: src/pages/Dashboard/Dashboard.constants.tsx:45
 msgid "Invalid token"
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:151
+msgid "Issuance"
 msgstr ""
 
 #: src/pages/LandStewards/LandStewards.tsx:103
 msgid "Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship."
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:154
+msgid "Issued credit batches"
 msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:21
@@ -2352,7 +2388,7 @@ msgstr ""
 
 #: src/components/organisms/DetailsSection/DetailsSection.Credit.tsx:54
 #: src/components/organisms/MethodologyDocumentationSection.tsx:102
-#: src/pages/EcocreditsByAccount/CreditClassTab/CreditClassTab.constants.ts:4
+#: src/pages/Profile/CreditClassTab/CreditClassTab.constants.ts:4
 #: src/pages/Projects/PrefinanceProjects/PrefinanceProjects.tsx:85
 msgid "learn more"
 msgstr ""
@@ -2453,7 +2489,7 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:36
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:3
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:36
+#: src/pages/Dashboard/Dashboard.constants.tsx:48
 msgid "Log in email successfully added"
 msgstr ""
 
@@ -2461,7 +2497,7 @@ msgstr ""
 msgid "log in for faster checkout"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:133
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:135
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:11
 msgid "Log out"
 msgstr ""
@@ -2510,31 +2546,31 @@ msgstr ""
 msgid "Make the location data private"
 msgstr ""
 
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:137
+#: src/pages/Profile/Profile.tsx:136
 msgid "Manage Credit Batches"
 msgstr ""
 
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:132
+#: src/pages/Profile/Profile.tsx:131
 msgid "Manage Credit Classes"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:41
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:43
 msgid "Manage credits"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:114
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:116
 msgid "Manage organization"
 msgstr ""
 
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:122
+#: src/pages/Profile/Profile.tsx:121
 msgid "Manage Portfolio"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:63
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:65
 msgid "Manage projects"
 msgstr ""
 
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:127
+#: src/pages/Profile/Profile.tsx:126
 msgid "Manage Projects"
 msgstr ""
 
@@ -2580,7 +2616,7 @@ msgstr ""
 msgid "Medium"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:122
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:124
 msgid "Members"
 msgstr ""
 
@@ -2693,7 +2729,7 @@ msgid "Must have recipients"
 msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:57
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:83
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:85
 msgid "My orders"
 msgstr ""
 
@@ -2758,6 +2794,10 @@ msgstr ""
 msgid "No"
 msgstr ""
 
+#: src/pages/Dashboard/Dashboard.constants.tsx:16
+msgid "No active account"
+msgstr ""
+
 #: src/components/organisms/BasketsTable.tsx:44
 msgid "No basket tokens to display"
 msgstr ""
@@ -2770,7 +2810,7 @@ msgstr ""
 msgid "No bridged ecocredits found"
 msgstr ""
 
-#: src/pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab.constants.ts:3
+#: src/pages/Profile/CreditBatchesTab/CreditBatchesTab.constants.ts:3
 msgid "No credit batches to display"
 msgstr ""
 
@@ -2869,6 +2909,10 @@ msgstr ""
 msgid "Oops! Page not found."
 msgstr ""
 
+#: src/pages/Dashboard/Dashboard.constants.tsx:20
+msgid "Open menu"
+msgstr ""
+
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:66
 msgid "operator"
 msgstr ""
@@ -2898,11 +2942,11 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:54
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:80
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:82
 msgid "Orders"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:114
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:116
 msgid "Org"
 msgstr ""
 
@@ -2975,8 +3019,16 @@ msgstr ""
 #~ msgid "Peer <0/>Reviewed"
 #~ msgstr ""
 
+#: src/pages/Dashboard/Dashboard.constants.tsx:14
+msgid "Personal Account"
+msgstr ""
+
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:41
 msgid "Personal dashboard"
+msgstr ""
+
+#: src/pages/Dashboard/Dashboard.constants.tsx:15
+msgid "Personal Dashboard"
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:127
@@ -3082,10 +3134,14 @@ msgstr ""
 msgid "Please wait while transaction processes"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:44
-#: src/pages/Dashboard/Dashboard.constants.tsx:12
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:75
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:46
+#: src/pages/Dashboard/Dashboard.constants.tsx:13
+#: src/pages/Profile/Profile.tsx:74
 msgid "Portfolio"
+msgstr ""
+
+#: src/pages/Dashboard/Dashboard.constants.tsx:19
+msgid "Portfolio tabs"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:46
@@ -3232,25 +3288,25 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:27
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:90
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:92
+#: src/pages/Dashboard/Dashboard.constants.tsx:8
 msgid "Profile"
 msgstr ""
 
 #: src/pages/Dashboard/Dashboard.BannerCard.tsx:35
-msgid "profile banner"
-msgstr ""
+#~ msgid "profile banner"
+#~ msgstr ""
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:157
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:137
 msgid "Profile image"
 msgstr ""
 
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.constants.tsx:3
+#: src/pages/Profile/Profile.constants.tsx:3
 msgid "Profile not found"
 msgstr ""
 
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:10
+#: src/pages/Dashboard/Dashboard.constants.tsx:11
 msgid "Profile Saved"
 msgstr ""
 
@@ -3443,14 +3499,13 @@ msgstr ""
 msgid "PROJECTED:"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:63
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:66
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:65
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:68
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:39
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/pages/Dashboard/Dashboard.constants.tsx:18
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:82
+#: src/pages/Profile/Profile.tsx:81
 msgid "Projects"
 msgstr ""
 
@@ -3470,7 +3525,7 @@ msgstr ""
 msgid "Public profile"
 msgstr ""
 
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:196
+#: src/pages/Profile/Profile.tsx:195
 msgid "public profile tabs"
 msgstr ""
 
@@ -3869,7 +3924,7 @@ msgstr ""
 msgid "Select option"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:49
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:51
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:11
 msgid "Sell"
 msgstr ""
@@ -3939,7 +3994,7 @@ msgid "settings"
 msgstr ""
 
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:37
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:100
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:102
 #: src/pages/Settings/Settings.tsx:52
 msgid "Settings"
 msgstr ""
@@ -4493,7 +4548,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:34
+#: src/pages/Dashboard/Dashboard.constants.tsx:46
 msgid "Token expired"
 msgstr ""
 
@@ -4623,8 +4678,9 @@ msgstr ""
 #~ msgid "Unlock <0>Regenerative Finances</0><1>with <2>Regen Marketplace</2></1>"
 #~ msgstr ""
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:25
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:69
-#: src/pages/ProfileEdit/ProfileEdit.constants.tsx:13
+#: src/pages/Dashboard/Dashboard.constants.tsx:25
 msgid "Unnamed"
 msgstr ""
 
@@ -4806,6 +4862,10 @@ msgstr ""
 msgid "view on ledger"
 msgstr ""
 
+#: src/pages/Dashboard/Dashboard.constants.tsx:10
+msgid "View On Personal Profile"
+msgstr ""
+
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:5
 msgid "view pending bridged credits"
 msgstr ""
@@ -4819,15 +4879,19 @@ msgid "view post"
 msgstr ""
 
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:9
-msgid "View Profile"
-msgstr ""
+#~ msgid "View Profile"
+#~ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:217
 msgid "view project"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:96
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:107
 msgid "View public profile"
+msgstr ""
+
+#: src/pages/Dashboard/Dashboard.constants.tsx:9
+msgid "View Public Profile"
 msgstr ""
 
 #: src/components/organisms/Order/Order.tsx:125
@@ -4886,7 +4950,7 @@ msgstr ""
 msgid "Visit Our Homepage <0> Instead</0>"
 msgstr ""
 
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.constants.tsx:4
+#: src/pages/Profile/Profile.constants.tsx:4
 msgid "visit our homepage instead"
 msgstr ""
 

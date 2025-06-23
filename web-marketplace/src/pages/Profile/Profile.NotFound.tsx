@@ -10,7 +10,7 @@ import { Theme } from 'web-components/src/theme/muiTheme';
 import {
   PROFILE_NOT_FOUND_BUTTON,
   PROFILE_NOT_FOUND_MESSAGE,
-} from './EcocreditsByAccount.constants';
+} from './Profile.constants';
 
 export interface Props {
   sx?: SxProps<Theme>;

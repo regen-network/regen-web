@@ -28,8 +28,9 @@ export const DashboardNavigation = ({
   onLogout,
   onCloseMobile,
   onExitClick,
-  isIssuer = false,
-  mobileMenuOpen = false,
+  isIssuer,
+  loginDisabled,
+  mobileMenuOpen,
 }: DashboardNavigationProps & { mobileMenuOpen?: boolean }) => {
   const [collapsed, setCollapsed] = useState(false);
   const { _ } = useLingui();
@@ -39,11 +40,11 @@ export const DashboardNavigation = ({
       getDashboardNavigationSections(
         _,
         activeAccount.type,
-        false,
+        loginDisabled || false,
         collapsed,
-        isIssuer,
+        isIssuer || false,
       ),
-    [_, activeAccount.type, collapsed, isIssuer],
+    [_, activeAccount.type, collapsed, isIssuer, loginDisabled],
   );
 
   const handleItemClick = (path: string) => {
@@ -64,7 +65,9 @@ export const DashboardNavigation = ({
         !collapsed && 'px-20 md:px-30 pt-30 pb-20',
         'md:block',
         'fixed md:relative top-0 left-0 h-full z-50 transform transition-transform duration-300 ease-in-out',
-        mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0',
+        mobileMenuOpen || false
+          ? 'translate-x-0'
+          : '-translate-x-full md:translate-x-0',
         '!flex !flex-col !h-full',
       )}
     >
@@ -104,7 +107,7 @@ export const DashboardNavigation = ({
         onViewProfileClick={onViewProfileClick}
       />
 
-      {/* Navigation sections - grows to fill space */}
+      {/* Navigation sections */}
       <div
         className="flex-1 overflow-y-auto min-h-0"
         style={{

@@ -43,7 +43,7 @@ import { usePathSection } from './hooks/usePathSection';
 export const Dashboard = () => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { accountChanging, disconnect } = useWallet();
+  const { accountChanging, disconnect, loginDisabled } = useWallet();
   const { loading, activeAccount, authenticatedAccounts } = useAuth();
 
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
@@ -156,6 +156,7 @@ export const Dashboard = () => {
             currentPath={pathname}
             onNavItemClick={onNavClick}
             isIssuer={isIssuer}
+            loginDisabled={loginDisabled} // Add this prop
             mobileMenuOpen={mobileMenuOpen}
             onLogout={handleLogout}
             onCloseMobile={() => setMobileMenuOpen(false)}

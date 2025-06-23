@@ -24,7 +24,7 @@ export const LIST_EXPANDED_CLASSES = 'w-full h-35 md:h-45 gap-10';
 
 export const UNNAMED = msg`Unnamed`;
 
-export const COPIED = msg`Copied!`;
+export const COPIED = msg`Address copied!`;
 
 export const DASHBOARD_NAVIGATION_ARIA_LABEL = msg`Dashboard side navigation`;
 export const CLOSE_MENU = msg`Close menu`;

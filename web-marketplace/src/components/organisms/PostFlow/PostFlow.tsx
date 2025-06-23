@@ -54,6 +54,7 @@ type Props = {
   offChainProjectId?: string;
   setDraftPost?: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
   scrollIntoDataStream?: () => void;
+  disableScrollLock?: boolean;
 };
 
 export const PostFlow = ({
@@ -66,6 +67,7 @@ export const PostFlow = ({
   offChainProjectId: _offChainProjectId,
   setDraftPost,
   scrollIntoDataStream,
+  disableScrollLock = false,
 }: Props) => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const fileNamesToDeleteRef = useRef<string[]>([]);
@@ -264,6 +266,7 @@ export const PostFlow = ({
       <Modal
         open={!!projectId && isFormModalOpen}
         onClose={() => onClose(isFormDirty)}
+        disableScrollLock={disableScrollLock}
       >
         {projectId && (
           <PostForm

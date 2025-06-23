@@ -31,13 +31,32 @@ export const DashboardNavigationListItem: React.FC<NavigationListItemProps> = ({
     ? LIST_ACTIVE_CLASSES
     : LIST_INACTIVE_CLASSES;
 
+  const handleClick = (e: React.MouseEvent) => {
+    if (item.disabled) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    onClick(item.path);
+  };
+
   const button = (
     <button
       type="button"
-      onClick={() => onClick(item.path)}
-      className={cn(LIST_BASE_CLASSES, LIST_LAYOUT_CLASSES, LIST_STATE_CLASSES)}
+      onClick={handleClick}
+      className={cn(
+        LIST_BASE_CLASSES,
+        LIST_LAYOUT_CLASSES,
+        !item.disabled && LIST_STATE_CLASSES,
+        item.disabled && [
+          'cursor-default opacity-50',
+          'transition-none',
+          'bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent',
+        ],
+      )}
       aria-current={isActive ? 'page' : undefined}
       data-testid={`nav-item-${item.path.replace(/\//g, '-')}`}
+      disabled={item.disabled}
     >
       {item.icon && (
         <span className="flex h-6 w-6 shrink-0 items-center justify-center">
@@ -51,14 +70,15 @@ export const DashboardNavigationListItem: React.FC<NavigationListItemProps> = ({
             size="sm"
             className={cn(
               isLogout ? 'text-sc-text-sub-header' : '',
-              'group-hover:font-bold transition-all',
+              !item.disabled && 'group-hover:font-bold transition-all',
+              item.disabled && 'group-hover:underline',
             )}
-            sx={{ fontWeight: isActive ? 700 : 400 }}
+            sx={{ fontWeight: isActive && !item.disabled ? 700 : 400 }}
           >
             {item.label}
           </Subtitle>
 
-          {!isActive && (
+          {!isActive && !item.disabled && (
             <BreadcrumbIcon
               className={cn(
                 'h-[15px] w-[15px] transform rotate-[-90deg] text-bc-neutral-400 ml-2 transition-opacity',
@@ -71,19 +91,36 @@ export const DashboardNavigationListItem: React.FC<NavigationListItemProps> = ({
     </button>
   );
 
-  if (!collapsed) return button;
+  if (item.disabled && item.disabledTooltipText) {
+    return (
+      <InfoTooltip
+        title={item.disabledTooltipText}
+        arrow
+        placement={collapsed ? 'right' : 'top'}
+        classes={{
+          tooltip: 'ml-10',
+        }}
+      >
+        {button}
+      </InfoTooltip>
+    );
+  }
 
-  return (
-    <InfoTooltip
-      title={item.label}
-      arrow
-      placement="right"
-      classes={{
-        tooltip: 'bg-bc-neutral-700 text-bc-neutral-100',
-        arrow: 'text-bc-neutral-700',
-      }}
-    >
-      {button}
-    </InfoTooltip>
-  );
+  if (collapsed && !item.disabled) {
+    return (
+      <InfoTooltip
+        title={item.label}
+        arrow
+        placement="right"
+        classes={{
+          tooltip: 'bg-bc-neutral-700 text-bc-neutral-100',
+          arrow: 'text-bc-neutral-700',
+        }}
+      >
+        {button}
+      </InfoTooltip>
+    );
+  }
+
+  return button;
 };

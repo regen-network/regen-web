@@ -37,39 +37,33 @@ export function wrapIcon<
 
 const getCreditsSection = (
   _: TranslatorType,
-  loginDisabled: boolean,
   collapsed: boolean,
 ): DashboardNavigationSection => ({
   heading: collapsed ? _(msg`Credits`) : _(msg`Manage credits`),
   items: [
     {
       label: _(msg`Portfolio`),
-      icon: wrapIcon(CreditsIcon, { disabled: loginDisabled }),
+      icon: wrapIcon(CreditsIcon),
       path: 'portfolio',
     },
     {
       label: _(msg`Sell`),
-      icon: <ShoppingCartIcon linearGradient disabled={loginDisabled} />,
+      icon: <ShoppingCartIcon linearGradient />,
       path: 'sell',
-      disabled: loginDisabled,
-      disabledTooltipText: _(NOT_SUPPORTED_TOOLTIP_TEXT),
     },
   ],
 });
 
 const getProjectsSection = (
   _: TranslatorType,
-  loginDisabled: boolean,
   collapsed: boolean,
 ): DashboardNavigationSection => ({
   heading: collapsed ? _(msg`Projects`) : _(msg`Manage projects`),
   items: [
     {
       label: _(msg`Projects`),
-      icon: <ProjectsIcon linearGradient disabled={loginDisabled} />,
+      icon: <ProjectsIcon linearGradient />,
       path: 'projects',
-      disabled: loginDisabled,
-      disabledTooltipText: _(NOT_SUPPORTED_TOOLTIP_TEXT),
     },
   ],
 });
@@ -145,24 +139,19 @@ const getLogoutSection = (_: TranslatorType): DashboardNavigationSection => ({
 
 const getCreditIssuanceSection = (
   _: TranslatorType,
-  loginDisabled: boolean,
   collapsed: boolean,
 ): DashboardNavigationSection => ({
   heading: collapsed ? _(msg`Issuance`) : _(msg`Credit issuance`),
   items: [
     {
       label: _(msg`Issued credit batches`),
-      icon: <CreditBatchIcon linearGradient disabled={loginDisabled} />,
+      icon: <CreditBatchIcon linearGradient />,
       path: 'credit-batches',
-      disabled: loginDisabled,
-      disabledTooltipText: _(NOT_SUPPORTED_TOOLTIP_TEXT),
     },
     {
       label: _(msg`Credit classes`),
-      icon: <CreditClassIcon linearGradient disabled={loginDisabled} />,
+      icon: <CreditClassIcon linearGradient />,
       path: 'credit-classes',
-      disabled: loginDisabled,
-      disabledTooltipText: _(NOT_SUPPORTED_TOOLTIP_TEXT),
     },
   ],
 });
@@ -170,18 +159,18 @@ const getCreditIssuanceSection = (
 export function getDashboardNavigationSections(
   _: TranslatorType,
   accountType: 'user' | 'org',
-  loginDisabled = false,
+  loginDisabled: boolean,
   collapsed = false,
-  isIssuer = false, // Add this parameter
+  isIssuer = false, //
 ): DashboardNavigationSection[] {
   const sections = [
-    getCreditsSection(_, loginDisabled, collapsed),
-    getProjectsSection(_, loginDisabled, collapsed),
+    getCreditsSection(_, collapsed),
+    getProjectsSection(_, collapsed),
   ];
 
   // Add credit issuance section if user is an issuer
   if (isIssuer) {
-    sections.push(getCreditIssuanceSection(_, loginDisabled, collapsed));
+    sections.push(getCreditIssuanceSection(_, collapsed));
   }
 
   if (accountType === 'user') {

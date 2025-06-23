@@ -20,6 +20,7 @@ import { TxSuccessfulModal } from 'web-components/src/components/modal/TxSuccess
 import type { Theme } from 'web-components/src/theme/muiTheme';
 
 import { BasketTokens } from 'types/ledger/ecocredit';
+import { useAuth } from 'lib/auth/auth';
 import { getHashUrl } from 'lib/block-explorer';
 import {
   AMOUNT_LABEL,
@@ -119,6 +120,7 @@ export const MyEcocredits = (): JSX.Element => {
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
   const lastRetiredProjectIdRef = useRef('');
   const [activePortfolioTab, setActivePortfolioTab] = useState(0);
+  const { privActiveAccount, activeAccount } = useAuth();
 
   const navigate = useNavigate();
   const { track } = useTracker();
@@ -526,6 +528,10 @@ export const MyEcocredits = (): JSX.Element => {
           onClose={() => setSellOrderCreateOpen(-1)}
           onSubmit={createSellOrderSubmit}
           title={_(CREATE_SELL_ORDER_TITLE)}
+          canCreateFiatOrder={
+            !!privActiveAccount?.can_use_stripe_connect &&
+            !!activeAccount?.stripeConnectedAccountId
+          }
         />
       )}
       <ProcessingModal

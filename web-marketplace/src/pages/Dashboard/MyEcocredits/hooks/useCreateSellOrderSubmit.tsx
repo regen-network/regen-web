@@ -1,19 +1,26 @@
 import { useCallback } from 'react';
+import { useApolloClient } from '@apollo/client';
+import type { DeliverTxResponse } from '@cosmjs/stargate';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
-import { regen } from '@regen-network/api';
+import { EventSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/events';
+import { MessageComposer } from '@regen-network/api/regen/ecocredit/marketplace/v1/tx.registry';
 import { useQueryClient } from '@tanstack/react-query';
+import { USD_DENOM, USDC_DENOM } from 'config/allowedBaseDenoms';
 import { getDenomtrace } from 'utils/ibc/getDenomTrace';
 
 import { Item } from 'web-components/src/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/src/utils/format';
 
+import { useCreateSellOrderMutation } from 'generated/graphql';
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
+import { useAuth } from 'lib/auth/auth';
 import { denomToMicro } from 'lib/denom.utils';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
+import { getProjectIdByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectIdByOnChainIdQuery/getProjectIdByOnChainIdQuery';
 import { SellFailureEvent, SellSuccessEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
@@ -51,32 +58,43 @@ const useCreateSellOrderSubmit = ({
   const { track } = useTracker();
   const reactQueryClient = useQueryClient();
   const { queryClient } = useLedger();
+  const [createSellOrder] = useCreateSellOrderMutation();
+  const { activeAccountId } = useAuth();
+  const graphqlClient = useApolloClient();
 
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormSchemaType): Promise<void> => {
       if (!accountAddress) return Promise.reject();
       const { amount, batchDenom, price, enableAutoRetire, askDenom } = values;
+      const cryptoDenom = askDenom === USD_DENOM ? USDC_DENOM : askDenom;
 
       // convert to udenom
       const priceInMicro = price ? String(denomToMicro(price)) : ''; // TODO: When other currencies, check for micro denom before converting
-      const msgSell =
-        regen.ecocredit.marketplace.v1.MessageComposer.withTypeUrl.sell({
-          seller: accountAddress,
-          orders: [
-            {
-              batchDenom,
-              quantity: String(amount),
-              askPrice: { denom: askDenom, amount: priceInMicro },
-              disableAutoRetire: !enableAutoRetire,
+      const msgSell = MessageComposer.withTypeUrl.sell({
+        seller: accountAddress,
+        orders: [
+          {
+            batchDenom,
+            quantity: String(amount),
+            askPrice: {
+              denom: cryptoDenom,
+              amount: priceInMicro,
             },
-          ],
-        });
+            disableAutoRetire: !enableAutoRetire,
+          },
+        ],
+      });
 
       const tx = {
         msgs: [msgSell],
         fee: undefined,
         memo: undefined,
       };
+
+      const batchInfo = credits?.find(batch => batch.denom === batchDenom);
+      const projectId =
+        batchInfo?.projectId ||
+        batchDenom.substring(0, batchDenom.indexOf('-', 4));
 
       const onError = (err?: Error): void => {
         const batchInfo = credits?.find(batch => batch.denom === batchDenom);
@@ -93,8 +111,39 @@ const useCreateSellOrderSubmit = ({
           errorMessage: err?.message,
         });
       };
-      const onSuccess = (): void => {
-        const batchInfo = credits?.find(batch => batch.denom === batchDenom);
+      const onSuccess = async (
+        deliverTxResponse?: DeliverTxResponse,
+      ): Promise<void> => {
+        if (askDenom === USD_DENOM && activeAccountId) {
+          const data = await reactQueryClient.fetchQuery(
+            getProjectIdByOnChainIdQuery({
+              client: graphqlClient,
+              enabled: !!projectId,
+              onChainId: projectId as string,
+            }),
+          );
+          const offChainProjectId = data?.data?.projectByOnChainId?.id;
+
+          const sellOrderId = deliverTxResponse?.events
+            .find(event => event.type === EventSell.typeUrl.replace('/', ''))
+            ?.attributes?.find(attr => attr.key === 'sell_order_id')
+            ?.value.replace(/"/g, '');
+
+          if (sellOrderId)
+            await createSellOrder({
+              variables: {
+                input: {
+                  sellOrder: {
+                    onChainId: sellOrderId,
+                    projectId: offChainProjectId,
+                    sellerAccountId: activeAccountId,
+                    price,
+                  },
+                },
+              },
+            });
+        }
+
         track<SellSuccessEvent>('sellSuccess', {
           batchDenom,
           projectId: batchInfo?.projectId,
@@ -110,15 +159,15 @@ const useCreateSellOrderSubmit = ({
           queryKey: [SELL_ORDERS_EXTENTED_KEY],
         });
       };
+
       signAndBroadcast(tx, onTxBroadcast, { onError, onSuccess });
 
-      if (batchDenom && amount && askDenom && credits) {
-        const baseDenom = await getDenomtrace({ denom: askDenom, queryClient });
+      if (batchDenom && amount && cryptoDenom && credits) {
+        const baseDenom = await getDenomtrace({
+          denom: cryptoDenom,
+          queryClient,
+        });
 
-        const batchInfo = credits.find(batch => batch.denom === batchDenom);
-        const projectId =
-          batchInfo?.projectId ||
-          batchDenom.substring(0, batchDenom.indexOf('-', 4));
         const projectName = batchInfo?.projectName;
 
         setCardItems([
@@ -136,7 +185,7 @@ const useCreateSellOrderSubmit = ({
                 >
                   <DenomIcon
                     baseDenom={baseDenom}
-                    bankDenom={askDenom}
+                    bankDenom={cryptoDenom}
                     sx={{ display: 'flex' }}
                   />
                 </Box>
@@ -165,11 +214,14 @@ const useCreateSellOrderSubmit = ({
     },
     [
       accountAddress,
+      credits,
       signAndBroadcast,
       onTxBroadcast,
-      credits,
       track,
+      activeAccountId,
       reactQueryClient,
+      graphqlClient,
+      createSellOrder,
       queryClient,
       setCardItems,
       _,

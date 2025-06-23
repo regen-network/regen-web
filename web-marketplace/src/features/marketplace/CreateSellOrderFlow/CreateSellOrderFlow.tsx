@@ -196,6 +196,7 @@ export const CreateSellOrderFlow = ({
         onSubmit={createSellOrderSubmit}
         title={_(CREATE_SELL_ORDER_TITLE)}
         allowedDenoms={allowedDenomOptions}
+        canCreateFiatOrder={canCreateFiatOrder}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

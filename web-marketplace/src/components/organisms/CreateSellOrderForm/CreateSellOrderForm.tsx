@@ -3,11 +3,11 @@ import { useFormState, useWatch } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
+import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
 import Submit from 'web-components/src/components/form/Submit';
-import InfoIcon from 'web-components/src/components/icons/InfoIcon';
 import AmountField from 'web-components/src/components/inputs/new/AmountField/AmountField';
 import CheckboxLabel from 'web-components/src/components/inputs/new/CheckboxLabel/CheckboxLabel';
 import SelectTextField, {
@@ -15,7 +15,7 @@ import SelectTextField, {
 } from 'web-components/src/components/inputs/new/SelectTextField/SelectTextField';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 import { MAX_FRACTION_DIGITS } from 'web-components/src/components/inputs/validation';
-import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
+import InfoTooltipWithIcon from 'web-components/src/components/tooltip/InfoTooltipWithIcon';
 import { Subtitle } from 'web-components/src/components/typography';
 import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
@@ -52,6 +52,7 @@ export interface Props {
   onSubmit: (values: CreateSellOrderFormSchemaType) => Promise<void>;
   initialValues?: CreateSellOrderFormSchemaType;
   onClose: RegenModalPropsWithOnClose['onClose'];
+  canCreateFiatOrder?: boolean;
 }
 
 const CreateSellOrderForm: React.FC<Props> = ({
@@ -61,14 +62,18 @@ const CreateSellOrderForm: React.FC<Props> = ({
   availableAmountByBatch,
   onSubmit,
   onClose,
+  canCreateFiatOrder,
 }) => {
   const { _ } = useLingui();
   const [options, setOptions] = useState<Option[]>([]);
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
   const { track } = useTracker();
 
+  const defaultBatchDenom =
+    batchDenoms.length === 1 ? batchDenoms[0]?.value : undefined;
+
   const defaultInitialValues = {
-    batchDenom: batchDenoms.length === 1 ? batchDenoms[0]?.value : undefined,
+    batchDenom: defaultBatchDenom,
     price: undefined,
     askDenom: undefined,
     amount: undefined,
@@ -103,6 +108,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
     control: form.control,
   });
   const batchDenom = useWatch({ control: form.control, name: 'batchDenom' });
+  const askDenom = useWatch({ control: form.control, name: 'askDenom' });
   const enableAutoRetire = useWatch({
     control: form.control,
     name: 'enableAutoRetire',
@@ -118,6 +124,14 @@ const CreateSellOrderForm: React.FC<Props> = ({
   useEffect(() => {
     setOptions(batchDenoms);
   }, [batchDenoms]);
+
+  const usdDenom = askDenom === USD_DENOM;
+
+  useEffect(() => {
+    if (usdDenom) {
+      setValue('enableAutoRetire', true);
+    }
+  }, [usdDenom, setValue]);
 
   return (
     <Form
@@ -146,6 +160,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
         sx={{ mb: 10.5 }}
         native={false}
         placeholderText={_(msg`Choose batch`)}
+        defaultValue={defaultBatchDenom}
         {...form.register('batchDenom')}
       />
       <Box
@@ -185,6 +200,22 @@ const CreateSellOrderForm: React.FC<Props> = ({
             native={false}
             {...form.register('askDenom')}
           />
+          {canCreateFiatOrder && (
+            <div className="absolute pt-5">
+              <InfoTooltipWithIcon
+                // eslint-disable-next-line lingui/no-unlocalized-strings
+                containerClassName="items-center gap-5"
+                title={_(
+                  msg`Please note: US dollar sell orders will be created in USDC on the ledger, so crypto buyers may purchase in USDC.`,
+                )}
+                outlined
+              >
+                <Subtitle className="text-sc-text-paragraph" size="sm">
+                  <Trans>Learn more</Trans>
+                </Subtitle>
+              </InfoTooltipWithIcon>
+            </div>
+          )}
         </Box>
       </Box>
       <AmountField
@@ -199,23 +230,31 @@ const CreateSellOrderForm: React.FC<Props> = ({
         {...form.register('amount')}
       />
       <CheckboxLabel
+        disabled={usdDenom}
         checked={enableAutoRetire}
         label={
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Subtitle size="lg" color="primary.contrastText" sx={{ mr: 2 }}>
+            <Subtitle
+              size="lg"
+              className={
+                usdDenom ? 'text-sc-text-disabled' : 'text-sc-text-header'
+              }
+              sx={{ mr: 2 }}
+            >
               <Trans>Require that credits are retired upon purchase</Trans>
             </Subtitle>
-            <InfoTooltip
-              title={_(
-                msg`If you uncheck this option, buyers will be able to choose to keep the credits tradable`,
-              )}
-              arrow
-              placement="top"
-            >
-              <span>
-                <InfoIcon />
-              </span>
-            </InfoTooltip>
+            <InfoTooltipWithIcon
+              title={
+                !usdDenom
+                  ? _(
+                      msg`If you uncheck this option, buyers will be able to choose to keep the credits tradable`,
+                    )
+                  : _(
+                      msg`Credits sold in USD cannot be sold in a tradable form.`,
+                    )
+              }
+              outlined
+            />
           </Box>
         }
         sx={{ mt: 12, mr: 2 }}

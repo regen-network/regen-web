@@ -15,8 +15,6 @@ export const findDisplayDenom = ({
   bankDenom,
   baseDenom,
 }: Params): string => {
-  console.log('bankDenom', bankDenom);
-  console.log('baseDenom', baseDenom);
   const allowedDenom = allowedDenoms?.find(
     allowedDenom => allowedDenom.bankDenom === bankDenom,
   );

@@ -84,6 +84,8 @@ export const getDenomAllowedOptions = ({
                 ? denom.displayDenom.toUpperCase()
                 : denom.displayDenom
             }
+            // eslint-disable-next-line lingui/no-unlocalized-strings
+            textClassName="text-sc-text-header text-base"
           />
         ),
         value: denom.bankDenom,
@@ -98,6 +100,8 @@ export const getDenomAllowedOptions = ({
           baseDenom={USD_DENOM}
           bankDenom={USD_DENOM}
           displayDenom={USD_DENOM.toUpperCase()}
+          // eslint-disable-next-line lingui/no-unlocalized-strings
+          textClassName="text-sc-text-header text-base"
         />
       ),
     });

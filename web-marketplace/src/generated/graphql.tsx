@@ -79,6 +79,8 @@ export type Account = Node & {
   accountTranslationsById: AccountTranslationsConnection;
   /** Reads and enables pagination through a set of `FiatOrder`. */
   fiatOrdersByAccountId: FiatOrdersConnection;
+  /** Reads and enables pagination through a set of `SellOrder`. */
+  sellOrdersBySellerAccountId: SellOrdersConnection;
   /** Reads and enables pagination through a set of `CreditClass`. */
   creditClassesByProjectDeveloperIdAndCreditClassId: AccountCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
@@ -103,6 +105,8 @@ export type Account = Node & {
   projectsByPostCreatorAccountIdAndProjectId: AccountProjectsByPostCreatorAccountIdAndProjectIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Project`. */
   projectsByProjectPartnerAccountIdAndProjectId: AccountProjectsByProjectPartnerAccountIdAndProjectIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsBySellOrderSellerAccountIdAndProjectId: AccountProjectsBySellOrderSellerAccountIdAndProjectIdManyToManyConnection;
 };
 
 
@@ -231,6 +235,17 @@ export type AccountFiatOrdersByAccountIdArgs = {
 };
 
 
+export type AccountSellOrdersBySellerAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<SellOrdersOrderBy>>;
+  condition?: Maybe<SellOrderCondition>;
+};
+
+
 export type AccountCreditClassesByProjectDeveloperIdAndCreditClassIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -355,6 +370,18 @@ export type AccountProjectsByPostCreatorAccountIdAndProjectIdArgs = {
 
 
 export type AccountProjectsByProjectPartnerAccountIdAndProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
+};
+
+
+export type AccountProjectsBySellOrderSellerAccountIdAndProjectIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -843,6 +870,42 @@ export type AccountProjectsByProjectPartnerAccountIdAndProjectIdManyToManyEdge =
   cursor?: Maybe<Scalars['Cursor']>;
   /** The `Project` at the end of the edge. */
   node?: Maybe<Project>;
+};
+
+/** A connection to a list of `Project` values, with data from `SellOrder`. */
+export type AccountProjectsBySellOrderSellerAccountIdAndProjectIdManyToManyConnection = {
+  __typename?: 'AccountProjectsBySellOrderSellerAccountIdAndProjectIdManyToManyConnection';
+  /** A list of `Project` objects. */
+  nodes: Array<Maybe<Project>>;
+  /** A list of edges which contains the `Project`, info from the `SellOrder`, and the cursor to aid in pagination. */
+  edges: Array<AccountProjectsBySellOrderSellerAccountIdAndProjectIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Project` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Project` edge in the connection, with data from `SellOrder`. */
+export type AccountProjectsBySellOrderSellerAccountIdAndProjectIdManyToManyEdge = {
+  __typename?: 'AccountProjectsBySellOrderSellerAccountIdAndProjectIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Project` at the end of the edge. */
+  node?: Maybe<Project>;
+  /** Reads and enables pagination through a set of `SellOrder`. */
+  sellOrdersByProjectId: SellOrdersConnection;
+};
+
+
+/** A `Project` edge in the connection, with data from `SellOrder`. */
+export type AccountProjectsBySellOrderSellerAccountIdAndProjectIdManyToManyEdgeSellOrdersByProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<SellOrdersOrderBy>>;
+  condition?: Maybe<SellOrderCondition>;
 };
 
 /** A connection to a list of `Project` values, with data from `Upload`. */
@@ -1635,6 +1698,43 @@ export type CreateS3DeletionPayload = {
 /** The output of our create `S3Deletion` mutation. */
 export type CreateS3DeletionPayloadS3DeletionEdgeArgs = {
   orderBy?: Maybe<Array<S3DeletionsOrderBy>>;
+};
+
+/** All input for the create `SellOrder` mutation. */
+export type CreateSellOrderInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `SellOrder` to be created by this mutation. */
+  sellOrder: SellOrderInput;
+};
+
+/** The output of our create `SellOrder` mutation. */
+export type CreateSellOrderPayload = {
+  __typename?: 'CreateSellOrderPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `SellOrder` that was created by this mutation. */
+  sellOrder?: Maybe<SellOrder>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Project` that is related to this `SellOrder`. */
+  projectByProjectId?: Maybe<Project>;
+  /** Reads a single `Account` that is related to this `SellOrder`. */
+  accountBySellerAccountId?: Maybe<Account>;
+  /** An edge for our `SellOrder`. May be used by Relay 1. */
+  sellOrderEdge?: Maybe<SellOrdersEdge>;
+};
+
+
+/** The output of our create `SellOrder` mutation. */
+export type CreateSellOrderPayloadSellOrderEdgeArgs = {
+  orderBy?: Maybe<Array<SellOrdersOrderBy>>;
 };
 
 /** All input for the create `ShaclGraph` mutation. */
@@ -3096,6 +3196,54 @@ export type DeleteS3DeletionPayloadS3DeletionEdgeArgs = {
   orderBy?: Maybe<Array<S3DeletionsOrderBy>>;
 };
 
+/** All input for the `deleteSellOrderByOnChainId` mutation. */
+export type DeleteSellOrderByOnChainIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  onChainId: Scalars['String'];
+};
+
+/** All input for the `deleteSellOrder` mutation. */
+export type DeleteSellOrderInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `SellOrder` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `SellOrder` mutation. */
+export type DeleteSellOrderPayload = {
+  __typename?: 'DeleteSellOrderPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `SellOrder` that was deleted by this mutation. */
+  sellOrder?: Maybe<SellOrder>;
+  deletedSellOrderId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Project` that is related to this `SellOrder`. */
+  projectByProjectId?: Maybe<Project>;
+  /** Reads a single `Account` that is related to this `SellOrder`. */
+  accountBySellerAccountId?: Maybe<Account>;
+  /** An edge for our `SellOrder`. May be used by Relay 1. */
+  sellOrderEdge?: Maybe<SellOrdersEdge>;
+};
+
+
+/** The output of our delete `SellOrder` mutation. */
+export type DeleteSellOrderPayloadSellOrderEdgeArgs = {
+  orderBy?: Maybe<Array<SellOrdersOrderBy>>;
+};
+
 /** All input for the `deleteShaclGraphByUri` mutation. */
 export type DeleteShaclGraphByUriInput = {
   /**
@@ -3782,6 +3930,8 @@ export type Mutation = {
   createProjectTranslation?: Maybe<CreateProjectTranslationPayload>;
   /** Creates a single `S3Deletion`. */
   createS3Deletion?: Maybe<CreateS3DeletionPayload>;
+  /** Creates a single `SellOrder`. */
+  createSellOrder?: Maybe<CreateSellOrderPayload>;
   /** Creates a single `ShaclGraph`. */
   createShaclGraph?: Maybe<CreateShaclGraphPayload>;
   /** Creates a single `Upload`. */
@@ -3872,6 +4022,10 @@ export type Mutation = {
   updateS3Deletion?: Maybe<UpdateS3DeletionPayload>;
   /** Updates a single `S3Deletion` using a unique key and a patch. */
   updateS3DeletionById?: Maybe<UpdateS3DeletionPayload>;
+  /** Updates a single `SellOrder` using its globally unique id and a patch. */
+  updateSellOrder?: Maybe<UpdateSellOrderPayload>;
+  /** Updates a single `SellOrder` using a unique key and a patch. */
+  updateSellOrderByOnChainId?: Maybe<UpdateSellOrderPayload>;
   /** Updates a single `ShaclGraph` using its globally unique id and a patch. */
   updateShaclGraph?: Maybe<UpdateShaclGraphPayload>;
   /** Updates a single `ShaclGraph` using a unique key and a patch. */
@@ -3968,6 +4122,10 @@ export type Mutation = {
   deleteS3Deletion?: Maybe<DeleteS3DeletionPayload>;
   /** Deletes a single `S3Deletion` using a unique key. */
   deleteS3DeletionById?: Maybe<DeleteS3DeletionPayload>;
+  /** Deletes a single `SellOrder` using its globally unique id. */
+  deleteSellOrder?: Maybe<DeleteSellOrderPayload>;
+  /** Deletes a single `SellOrder` using a unique key. */
+  deleteSellOrderByOnChainId?: Maybe<DeleteSellOrderPayload>;
   /** Deletes a single `ShaclGraph` using its globally unique id. */
   deleteShaclGraph?: Maybe<DeleteShaclGraphPayload>;
   /** Deletes a single `ShaclGraph` using a unique key. */
@@ -4080,6 +4238,12 @@ export type MutationCreateProjectTranslationArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateS3DeletionArgs = {
   input: CreateS3DeletionInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateSellOrderArgs = {
+  input: CreateSellOrderInput;
 };
 
 
@@ -4350,6 +4514,18 @@ export type MutationUpdateS3DeletionArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateS3DeletionByIdArgs = {
   input: UpdateS3DeletionByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateSellOrderArgs = {
+  input: UpdateSellOrderInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateSellOrderByOnChainIdArgs = {
+  input: UpdateSellOrderByOnChainIdInput;
 };
 
 
@@ -4638,6 +4814,18 @@ export type MutationDeleteS3DeletionArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteS3DeletionByIdArgs = {
   input: DeleteS3DeletionByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteSellOrderArgs = {
+  input: DeleteSellOrderInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteSellOrderByOnChainIdArgs = {
+  input: DeleteSellOrderByOnChainIdInput;
 };
 
 
@@ -5052,12 +5240,16 @@ export type Project = Node & {
   projectPartnersByProjectId: ProjectPartnersConnection;
   /** Reads and enables pagination through a set of `ProjectTranslation`. */
   projectTranslationsById: ProjectTranslationsConnection;
+  /** Reads and enables pagination through a set of `SellOrder`. */
+  sellOrdersByProjectId: SellOrdersConnection;
   /** Reads and enables pagination through a set of `Account`. */
   accountsByUploadProjectIdAndAccountId: ProjectAccountsByUploadProjectIdAndAccountIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
   accountsByPostProjectIdAndCreatorAccountId: ProjectAccountsByPostProjectIdAndCreatorAccountIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Account`. */
   accountsByProjectPartnerProjectIdAndAccountId: ProjectAccountsByProjectPartnerProjectIdAndAccountIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Account`. */
+  accountsBySellOrderProjectIdAndSellerAccountId: ProjectAccountsBySellOrderProjectIdAndSellerAccountIdManyToManyConnection;
 };
 
 
@@ -5130,6 +5322,17 @@ export type ProjectProjectTranslationsByIdArgs = {
 };
 
 
+export type ProjectSellOrdersByProjectIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<SellOrdersOrderBy>>;
+  condition?: Maybe<SellOrderCondition>;
+};
+
+
 export type ProjectAccountsByUploadProjectIdAndAccountIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -5153,6 +5356,17 @@ export type ProjectAccountsByPostProjectIdAndCreatorAccountIdArgs = {
 
 
 export type ProjectAccountsByProjectPartnerProjectIdAndAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+  condition?: Maybe<AccountCondition>;
+};
+
+
+export type ProjectAccountsBySellOrderProjectIdAndSellerAccountIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -5219,6 +5433,42 @@ export type ProjectAccountsByProjectPartnerProjectIdAndAccountIdManyToManyEdge =
   cursor?: Maybe<Scalars['Cursor']>;
   /** The `Account` at the end of the edge. */
   node?: Maybe<Account>;
+};
+
+/** A connection to a list of `Account` values, with data from `SellOrder`. */
+export type ProjectAccountsBySellOrderProjectIdAndSellerAccountIdManyToManyConnection = {
+  __typename?: 'ProjectAccountsBySellOrderProjectIdAndSellerAccountIdManyToManyConnection';
+  /** A list of `Account` objects. */
+  nodes: Array<Maybe<Account>>;
+  /** A list of edges which contains the `Account`, info from the `SellOrder`, and the cursor to aid in pagination. */
+  edges: Array<ProjectAccountsBySellOrderProjectIdAndSellerAccountIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Account` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Account` edge in the connection, with data from `SellOrder`. */
+export type ProjectAccountsBySellOrderProjectIdAndSellerAccountIdManyToManyEdge = {
+  __typename?: 'ProjectAccountsBySellOrderProjectIdAndSellerAccountIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Account` at the end of the edge. */
+  node?: Maybe<Account>;
+  /** Reads and enables pagination through a set of `SellOrder`. */
+  sellOrdersBySellerAccountId: SellOrdersConnection;
+};
+
+
+/** A `Account` edge in the connection, with data from `SellOrder`. */
+export type ProjectAccountsBySellOrderProjectIdAndSellerAccountIdManyToManyEdgeSellOrdersBySellerAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<SellOrdersOrderBy>>;
+  condition?: Maybe<SellOrderCondition>;
 };
 
 /** A connection to a list of `Account` values, with data from `Upload`. */
@@ -5588,6 +5838,8 @@ export type Query = Node & {
   allProjectTranslations?: Maybe<ProjectTranslationsConnection>;
   /** Reads and enables pagination through a set of `S3Deletion`. */
   allS3Deletions?: Maybe<S3DeletionsConnection>;
+  /** Reads and enables pagination through a set of `SellOrder`. */
+  allSellOrders?: Maybe<SellOrdersConnection>;
   /** Reads and enables pagination through a set of `ShaclGraph`. */
   allShaclGraphs?: Maybe<ShaclGraphsConnection>;
   /** Reads and enables pagination through a set of `Upload`. */
@@ -5618,6 +5870,7 @@ export type Query = Node & {
   projectPartnerByProjectIdAndAccountId?: Maybe<ProjectPartner>;
   projectTranslationByIdAndLanguageCode?: Maybe<ProjectTranslation>;
   s3DeletionById?: Maybe<S3Deletion>;
+  sellOrderByOnChainId?: Maybe<SellOrder>;
   shaclGraphByUri?: Maybe<ShaclGraph>;
   uploadByUrl?: Maybe<Upload>;
   uploadById?: Maybe<Upload>;
@@ -5625,6 +5878,7 @@ export type Query = Node & {
   getAccountsByNameOrAddr?: Maybe<AccountsConnection>;
   getCurrentAccount?: Maybe<Account>;
   getTxHashForPaymentIntent?: Maybe<Scalars['String']>;
+  userCanStripeConnect?: Maybe<Scalars['Boolean']>;
   /** Reads a single `Account` using its globally unique `ID`. */
   account?: Maybe<Account>;
   /** Reads a single `AccountTranslation` using its globally unique `ID`. */
@@ -5659,6 +5913,8 @@ export type Query = Node & {
   projectTranslation?: Maybe<ProjectTranslation>;
   /** Reads a single `S3Deletion` using its globally unique `ID`. */
   s3Deletion?: Maybe<S3Deletion>;
+  /** Reads a single `SellOrder` using its globally unique `ID`. */
+  sellOrder?: Maybe<SellOrder>;
   /** Reads a single `ShaclGraph` using its globally unique `ID`. */
   shaclGraph?: Maybe<ShaclGraph>;
   /** Reads a single `Upload` using its globally unique `ID`. */
@@ -5885,6 +6141,18 @@ export type QueryAllS3DeletionsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllSellOrdersArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<SellOrdersOrderBy>>;
+  condition?: Maybe<SellOrderCondition>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllShaclGraphsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -6073,6 +6341,12 @@ export type QueryS3DeletionByIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QuerySellOrderByOnChainIdArgs = {
+  onChainId: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryShaclGraphByUriArgs = {
   uri: Scalars['String'];
 };
@@ -6104,6 +6378,12 @@ export type QueryGetAccountsByNameOrAddrArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryGetTxHashForPaymentIntentArgs = {
   paymentIntentId?: Maybe<Scalars['String']>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryUserCanStripeConnectArgs = {
+  acc?: Maybe<Scalars['UUID']>;
 };
 
 
@@ -6210,6 +6490,12 @@ export type QueryS3DeletionArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QuerySellOrderArgs = {
+  nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryShaclGraphArgs = {
   nodeId: Scalars['ID'];
 };
@@ -6295,6 +6581,102 @@ export enum S3DeletionsOrderBy {
   BucketDesc = 'BUCKET_DESC',
   KeyAsc = 'KEY_ASC',
   KeyDesc = 'KEY_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
+export type SellOrder = Node & {
+  __typename?: 'SellOrder';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  onChainId: Scalars['String'];
+  projectId: Scalars['UUID'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+  sellerAccountId: Scalars['UUID'];
+  price: Scalars['BigFloat'];
+  currency: Scalars['String'];
+  /** Reads a single `Project` that is related to this `SellOrder`. */
+  projectByProjectId?: Maybe<Project>;
+  /** Reads a single `Account` that is related to this `SellOrder`. */
+  accountBySellerAccountId?: Maybe<Account>;
+};
+
+/**
+ * A condition to be used against `SellOrder` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type SellOrderCondition = {
+  /** Checks for equality with the object’s `onChainId` field. */
+  onChainId?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `projectId` field. */
+  projectId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `createdAt` field. */
+  createdAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `sellerAccountId` field. */
+  sellerAccountId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `price` field. */
+  price?: Maybe<Scalars['BigFloat']>;
+  /** Checks for equality with the object’s `currency` field. */
+  currency?: Maybe<Scalars['String']>;
+};
+
+/** An input for mutations affecting `SellOrder` */
+export type SellOrderInput = {
+  onChainId: Scalars['String'];
+  projectId: Scalars['UUID'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+  sellerAccountId: Scalars['UUID'];
+  price: Scalars['BigFloat'];
+  currency?: Maybe<Scalars['String']>;
+};
+
+/** Represents an update to a `SellOrder`. Fields that are set will be updated. */
+export type SellOrderPatch = {
+  onChainId?: Maybe<Scalars['String']>;
+  projectId?: Maybe<Scalars['UUID']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+  sellerAccountId?: Maybe<Scalars['UUID']>;
+  price?: Maybe<Scalars['BigFloat']>;
+  currency?: Maybe<Scalars['String']>;
+};
+
+/** A connection to a list of `SellOrder` values. */
+export type SellOrdersConnection = {
+  __typename?: 'SellOrdersConnection';
+  /** A list of `SellOrder` objects. */
+  nodes: Array<Maybe<SellOrder>>;
+  /** A list of edges which contains the `SellOrder` and cursor to aid in pagination. */
+  edges: Array<SellOrdersEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `SellOrder` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `SellOrder` edge in the connection. */
+export type SellOrdersEdge = {
+  __typename?: 'SellOrdersEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `SellOrder` at the end of the edge. */
+  node?: Maybe<SellOrder>;
+};
+
+/** Methods to use when ordering `SellOrder`. */
+export enum SellOrdersOrderBy {
+  Natural = 'NATURAL',
+  OnChainIdAsc = 'ON_CHAIN_ID_ASC',
+  OnChainIdDesc = 'ON_CHAIN_ID_DESC',
+  ProjectIdAsc = 'PROJECT_ID_ASC',
+  ProjectIdDesc = 'PROJECT_ID_DESC',
+  CreatedAtAsc = 'CREATED_AT_ASC',
+  CreatedAtDesc = 'CREATED_AT_DESC',
+  SellerAccountIdAsc = 'SELLER_ACCOUNT_ID_ASC',
+  SellerAccountIdDesc = 'SELLER_ACCOUNT_ID_DESC',
+  PriceAsc = 'PRICE_ASC',
+  PriceDesc = 'PRICE_DESC',
+  CurrencyAsc = 'CURRENCY_ASC',
+  CurrencyDesc = 'CURRENCY_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -7346,6 +7728,57 @@ export type UpdateS3DeletionPayloadS3DeletionEdgeArgs = {
   orderBy?: Maybe<Array<S3DeletionsOrderBy>>;
 };
 
+/** All input for the `updateSellOrderByOnChainId` mutation. */
+export type UpdateSellOrderByOnChainIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `SellOrder` being updated. */
+  sellOrderPatch: SellOrderPatch;
+  onChainId: Scalars['String'];
+};
+
+/** All input for the `updateSellOrder` mutation. */
+export type UpdateSellOrderInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `SellOrder` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `SellOrder` being updated. */
+  sellOrderPatch: SellOrderPatch;
+};
+
+/** The output of our update `SellOrder` mutation. */
+export type UpdateSellOrderPayload = {
+  __typename?: 'UpdateSellOrderPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `SellOrder` that was updated by this mutation. */
+  sellOrder?: Maybe<SellOrder>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Project` that is related to this `SellOrder`. */
+  projectByProjectId?: Maybe<Project>;
+  /** Reads a single `Account` that is related to this `SellOrder`. */
+  accountBySellerAccountId?: Maybe<Account>;
+  /** An edge for our `SellOrder`. May be used by Relay 1. */
+  sellOrderEdge?: Maybe<SellOrdersEdge>;
+};
+
+
+/** The output of our update `SellOrder` mutation. */
+export type UpdateSellOrderPayloadSellOrderEdgeArgs = {
+  orderBy?: Maybe<Array<SellOrdersOrderBy>>;
+};
+
 /** All input for the `updateShaclGraphByUri` mutation. */
 export type UpdateShaclGraphByUriInput = {
   /**
@@ -7731,6 +8164,22 @@ export type CreateProjectMutation = (
   )> }
 );
 
+export type CreateSellOrderMutationVariables = Exact<{
+  input: CreateSellOrderInput;
+}>;
+
+
+export type CreateSellOrderMutation = (
+  { __typename?: 'Mutation' }
+  & { createSellOrder?: Maybe<(
+    { __typename?: 'CreateSellOrderPayload' }
+    & { sellOrder?: Maybe<(
+      { __typename?: 'SellOrder' }
+      & Pick<SellOrder, 'onChainId'>
+    )> }
+  )> }
+);
+
 export type CreditClassByOnChainIdQueryVariables = Exact<{
   onChainId: Scalars['String'];
 }>;
@@ -7945,6 +8394,19 @@ export type ProjectFieldsFragment = (
       & Pick<ProjectTranslation, 'languageCode' | 'metadata'>
     )>> }
   ) }
+);
+
+export type ProjectIdByOnChainIdQueryVariables = Exact<{
+  onChainId: Scalars['String'];
+}>;
+
+
+export type ProjectIdByOnChainIdQuery = (
+  { __typename?: 'Query' }
+  & { projectByOnChainId?: Maybe<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'id'>
+  )> }
 );
 
 export type ProjectsByMetadataQueryVariables = Exact<{
@@ -8507,6 +8969,41 @@ export function useCreateProjectMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateProjectMutationHookResult = ReturnType<typeof useCreateProjectMutation>;
 export type CreateProjectMutationResult = Apollo.MutationResult<CreateProjectMutation>;
 export type CreateProjectMutationOptions = Apollo.BaseMutationOptions<CreateProjectMutation, CreateProjectMutationVariables>;
+export const CreateSellOrderDocument = gql`
+    mutation CreateSellOrder($input: CreateSellOrderInput!) {
+  createSellOrder(input: $input) {
+    sellOrder {
+      onChainId
+    }
+  }
+}
+    `;
+export type CreateSellOrderMutationFn = Apollo.MutationFunction<CreateSellOrderMutation, CreateSellOrderMutationVariables>;
+
+/**
+ * __useCreateSellOrderMutation__
+ *
+ * To run a mutation, you first call `useCreateSellOrderMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateSellOrderMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createSellOrderMutation, { data, loading, error }] = useCreateSellOrderMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateSellOrderMutation(baseOptions?: Apollo.MutationHookOptions<CreateSellOrderMutation, CreateSellOrderMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateSellOrderMutation, CreateSellOrderMutationVariables>(CreateSellOrderDocument, options);
+      }
+export type CreateSellOrderMutationHookResult = ReturnType<typeof useCreateSellOrderMutation>;
+export type CreateSellOrderMutationResult = Apollo.MutationResult<CreateSellOrderMutation>;
+export type CreateSellOrderMutationOptions = Apollo.BaseMutationOptions<CreateSellOrderMutation, CreateSellOrderMutationVariables>;
 export const CreditClassByOnChainIdDocument = gql`
     query CreditClassByOnChainId($onChainId: String!) {
   creditClassByOnChainId(onChainId: $onChainId) {
@@ -8821,6 +9318,41 @@ export function useProjectBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type ProjectBySlugQueryHookResult = ReturnType<typeof useProjectBySlugQuery>;
 export type ProjectBySlugLazyQueryHookResult = ReturnType<typeof useProjectBySlugLazyQuery>;
 export type ProjectBySlugQueryResult = Apollo.QueryResult<ProjectBySlugQuery, ProjectBySlugQueryVariables>;
+export const ProjectIdByOnChainIdDocument = gql`
+    query ProjectIdByOnChainId($onChainId: String!) {
+  projectByOnChainId(onChainId: $onChainId) {
+    id
+  }
+}
+    `;
+
+/**
+ * __useProjectIdByOnChainIdQuery__
+ *
+ * To run a query within a React component, call `useProjectIdByOnChainIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProjectIdByOnChainIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProjectIdByOnChainIdQuery({
+ *   variables: {
+ *      onChainId: // value for 'onChainId'
+ *   },
+ * });
+ */
+export function useProjectIdByOnChainIdQuery(baseOptions: Apollo.QueryHookOptions<ProjectIdByOnChainIdQuery, ProjectIdByOnChainIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProjectIdByOnChainIdQuery, ProjectIdByOnChainIdQueryVariables>(ProjectIdByOnChainIdDocument, options);
+      }
+export function useProjectIdByOnChainIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectIdByOnChainIdQuery, ProjectIdByOnChainIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProjectIdByOnChainIdQuery, ProjectIdByOnChainIdQueryVariables>(ProjectIdByOnChainIdDocument, options);
+        }
+export type ProjectIdByOnChainIdQueryHookResult = ReturnType<typeof useProjectIdByOnChainIdQuery>;
+export type ProjectIdByOnChainIdLazyQueryHookResult = ReturnType<typeof useProjectIdByOnChainIdLazyQuery>;
+export type ProjectIdByOnChainIdQueryResult = Apollo.QueryResult<ProjectIdByOnChainIdQuery, ProjectIdByOnChainIdQueryVariables>;
 export const ProjectsByMetadataDocument = gql`
     query ProjectsByMetadata($metadata: JSON) {
   allProjects(filter: {metadata: {contains: $metadata}}) {

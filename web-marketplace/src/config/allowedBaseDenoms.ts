@@ -17,4 +17,5 @@ export const UPPERCASE_DENOM = [
   EEUR_DENOM,
   EVMOS_DENOM,
   USD_DENOM,
+  USDC_DENOM,
 ];

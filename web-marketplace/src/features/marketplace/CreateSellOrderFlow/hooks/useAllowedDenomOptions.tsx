@@ -27,7 +27,7 @@ export const useAllowedDenomOptions = (canCreateFiatOrder?: boolean) => {
       .map(denom => denom?.bankDenom?.replace(IBC_DENOM_PREFIX, '')),
   );
 
-  const { data: denomTracesData, isLoading: isDenomTracesLoading } = useQuery(
+  const { data: denomTracesData } = useQuery(
     getDenomTraceByHashesQuery({
       enabled: !!queryClient,
       hashes: ibcDenomHashes.filter(Boolean) as string[],

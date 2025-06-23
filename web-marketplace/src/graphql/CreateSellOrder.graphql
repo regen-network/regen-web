@@ -1,0 +1,7 @@
+mutation CreateSellOrder($input: CreateSellOrderInput!) {
+  createSellOrder(input: $input) {
+    sellOrder {
+      onChainId
+    }
+  }
+}

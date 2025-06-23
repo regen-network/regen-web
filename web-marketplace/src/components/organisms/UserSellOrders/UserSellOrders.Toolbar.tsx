@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { msg, Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/macro';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { Subtitle } from 'web-components/src/components/typography';
@@ -20,7 +19,6 @@ export const UserSellOrdersToolbar = ({
   wrapperClassName,
   refetchSellOrders,
 }: UserSellOrdersToolbarProps) => {
-  const { _ } = useLingui();
   const { privActiveAccount, activeAccount } = useAuth();
 
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);

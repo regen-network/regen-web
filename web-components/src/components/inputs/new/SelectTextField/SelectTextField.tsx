@@ -26,6 +26,7 @@ export interface SelectTextFieldProps extends DefaultStyleProps {
   className?: string;
   sx?: SxProps<Theme>;
   placeholderText?: string;
+  defaultValue?: string;
 }
 
 const SelectTextField = forwardRef<HTMLDivElement, SelectTextFieldProps>(

@@ -94,8 +94,6 @@ const RegistryLayoutHeader: React.FC = () => {
             activeAccount && wallet
               ? getProfileLink(activeAccount, wallet)
               : '/profiles/',
-          // TODO APP-670 should go /dashboard/admin/portfolio or /dashboard/admin/projects
-          // APP-697 then to /dashboard/portfolio or /dashboard/projects
           dashboardLink: '/dashboard',
         }),
         textContent: {

@@ -13,11 +13,10 @@ import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { safeLazy } from 'utils/safeLazy';
-import { SellerSetupAccount } from 'web-marketplace/src/components/organisms/SellerSetupAccount/SellerSetupAccount';
-import { CreditBatchesTab } from 'web-marketplace/src/pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab';
-import { CreditClassTab } from 'web-marketplace/src/pages/EcocreditsByAccount/CreditClassTab/CreditClassTab';
-import { PortfolioTab } from 'web-marketplace/src/pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
-import ProjectsTab from 'web-marketplace/src/pages/EcocreditsByAccount/ProjectsTab';
+import { CreditBatchesTab } from 'web-marketplace/src/pages/Profile/CreditBatchesTab/CreditBatchesTab';
+import { CreditClassTab } from 'web-marketplace/src/pages/Profile/CreditClassTab/CreditClassTab';
+import { PortfolioTab } from 'web-marketplace/src/pages/Profile/PortfolioTab/Profile.PortfolioTab';
+import ProjectsTab from 'web-marketplace/src/pages/Profile/ProjectsTab';
 
 import { Maybe } from 'generated/graphql';
 import { QueryClient as RPCQueryClient, useLedger } from 'ledger';
@@ -59,6 +58,7 @@ const BasicInfo = safeLazy(() => import('../../pages/BasicInfo'));
 const BatchDetails = safeLazy(() => import('../../pages/BatchDetails'));
 const BasketDetails = safeLazy(() => import('../../pages/BasketDetails'));
 const BuyCredits = safeLazy(() => import('../../pages/BuyCredits'));
+const Sell = safeLazy(() => import('../../pages/Sell/Sell'));
 const ChooseCreditClassPage = safeLazy(
   () => import('../../pages/ChooseCreditClass'),
 );
@@ -73,9 +73,7 @@ const CreditClassDetails = safeLazy(
 );
 const Description = safeLazy(() => import('../../pages/Description'));
 const EcocreditBatches = safeLazy(() => import('../../pages/EcocreditBatches'));
-const EcocreditsByAccount = safeLazy(
-  () => import('../../pages/EcocreditsByAccount'),
-);
+const Profile = safeLazy(() => import('../../pages/Profile'));
 
 // ErrorPage cannot use safeLazy because it could create a circular dependency
 // since safeLazy itself uses ErrorPage as its fallback component when imports fail.
@@ -227,10 +225,7 @@ export const getRegenRoutes = ({
             //   apolloClientFactory,
             // })}
           />
-          <Route
-            path="profiles/:accountAddressOrId"
-            element={<EcocreditsByAccount />}
-          >
+          <Route path="profiles/:accountAddressOrId" element={<Profile />}>
             <Route index element={<Navigate to="portfolio" />} />
             <Route path="portfolio" element={<PortfolioTab />} />
             <Route path="projects" element={<ProjectsTab />} />
@@ -409,10 +404,7 @@ export const getRegenRoutes = ({
           path="my-orders"
           element={<KeplrOrAuthRoute component={Orders} />}
         />
-        <Route
-          path="seller"
-          element={<AuthRoute component={SellerSetupAccount} />}
-        />
+        <Route path="seller" element={<AuthRoute component={Sell} />} />
       </Route>
     </>,
   );

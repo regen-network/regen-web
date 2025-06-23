@@ -170,9 +170,10 @@ const useCreateSellOrderSubmit = ({
       credits,
       track,
       reactQueryClient,
+      queryClient,
       setCardItems,
-      setTxModalHeader,
       _,
+      setTxModalHeader,
       setTxButtonTitle,
     ],
   );

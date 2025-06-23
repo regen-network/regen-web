@@ -42,10 +42,10 @@ import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
-import { ProfileNotFound } from './EcocreditsByAccount.NotFound';
 import { useProfileData } from './hooks/useProfileData';
+import { ProfileNotFound } from './Profile.NotFound';
 
-export const EcocreditsByAccount = (): JSX.Element => {
+export const Profile = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
   const { wallet } = useWallet();
   const location = useLocation();
@@ -172,7 +172,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
                 wallet?.address &&
                 address &&
                 wallet.address.toLowerCase() === address.toLowerCase()
-                  ? '/dashboard/admin/profile'
+                  ? '/dashboard/profile'
                   : ''
               }
               profileLink={profileLink}

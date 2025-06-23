@@ -492,5 +492,5 @@ export const getCertificateHref = (
 };
 
 export const getBaseOrderUrl = (): string => {
-  return `${window.location.origin}/dashboard/admin/my-orders#`;
+  return `${window.location.origin}/dashboard/my-orders#`;
 };

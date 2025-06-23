@@ -404,7 +404,7 @@ export const getRegenRoutes = ({
           path="my-orders"
           element={<KeplrOrAuthRoute component={Orders} />}
         />
-        <Route path="seller" element={<AuthRoute component={Sell} />} />
+        <Route path="sell" element={<AuthRoute component={Sell} />} />
       </Route>
     </>,
   );

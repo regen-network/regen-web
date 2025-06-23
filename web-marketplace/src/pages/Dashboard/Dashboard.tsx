@@ -6,10 +6,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { startCase } from 'lodash';
 
 import { Flex } from 'web-components/src/components/box';
-import BridgeIcon from 'web-components/src/components/icons/BridgeIcon';
-import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
-import { IconTabProps } from 'web-components/src/components/tabs/IconTab';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { Title } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
@@ -18,7 +15,11 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { client as sanityClient } from 'lib/clients/sanity';
-import { DISCARD_CHANGES_TITLE } from 'lib/constants/shared.constants';
+import {
+  DISCARD_CHANGES_BODY,
+  DISCARD_CHANGES_BUTTON,
+  DISCARD_CHANGES_TITLE,
+} from 'lib/constants/shared.constants';
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -29,16 +30,13 @@ import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
 import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
 
 import {
-  DISCARD_CHANGES_BODY,
-  DISCARD_CHANGES_BUTTON,
-} from '../../lib/constants/shared.constants';
-import {
   BRIDGE,
   PERSONAL_ACCOUNT,
   PERSONAL_DASHBOARD,
   PORTFOLIO,
   PORTFOLIO_TABS_ARIA_LABEL,
 } from './Dashboard.constants';
+import { getActivePortfolioTab, getPortfolioTabs } from './Dashboard.utils';
 import { ViewProfileButton } from './Dashboard.ViewProfileButton';
 import { usePathSection } from './hooks/usePathSection';
 
@@ -57,6 +55,7 @@ export const Dashboard = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const section = usePathSection();
+
   const { isCreditClassCreator, isProjectAdmin, isIssuer } = useProfileItems(
     {},
   );
@@ -69,67 +68,11 @@ export const Dashboard = () => {
     }),
   );
 
-  const onNavClick = (sectionName: string): void => {
-    const isFormDirty = isDirtyRef.current;
-    const path = `/dashboard/${sectionName.replace(' ', '-')}`;
-    if (isFormDirty) {
-      setIsWarningModalOpen(path);
-    } else {
-      navigate(path);
-    }
-  };
-
   useEffect(() => {
     if (isDirtyRef && setIsProfileEditDirtyref) {
       setIsProfileEditDirtyref(isDirtyRef);
     }
   }, [isDirtyRef, setIsProfileEditDirtyref]);
-
-  // Placeholder function for account selection logic
-  // This should be replaced with actual logic to handle
-  // account selection when Org functionality is implemented
-  function onAccountSelect(id: string) {
-    throw new Error('Function not implemented.');
-  }
-
-  const dashboardContextValue = useMemo(
-    () => ({
-      isCreditClassCreator,
-      isProjectAdmin,
-      isIssuer,
-      sanityProfilePageData,
-    }),
-    [isCreditClassCreator, isProjectAdmin, isIssuer, sanityProfilePageData],
-  );
-
-  const portfolioTabs: IconTabProps[] = useMemo(
-    () => [
-      {
-        label: _(PORTFOLIO),
-        href: '/dashboard/portfolio',
-        icon: <CreditsIcon fontSize="small" linearGradient />,
-      },
-      {
-        label: _(BRIDGE),
-        href: '/dashboard/portfolio/bridge',
-        icon: <BridgeIcon linearGradient />,
-      },
-    ],
-    [_],
-  );
-
-  const activePortfolioTab = Math.max(
-    portfolioTabs.findIndex(tab => {
-      if (tab.href === '/dashboard/portfolio/bridge') {
-        return pathname.includes('/dashboard/portfolio/bridge');
-      }
-      if (tab.href === '/dashboard/portfolio') {
-        return pathname === '/dashboard/portfolio';
-      }
-      return false;
-    }),
-    0,
-  );
 
   const handleLogout = async () => {
     try {
@@ -142,22 +85,62 @@ export const Dashboard = () => {
     }
   };
 
+  const onNavClick = (sectionName: string): void => {
+    const isFormDirty = isDirtyRef.current;
+    const path = `/dashboard/${sectionName.replace(' ', '-')}`;
+    if (isFormDirty) {
+      setIsWarningModalOpen(path);
+    } else {
+      navigate(path);
+    }
+  };
+  // Placeholder function for account selection logic
+  // This should be replaced with actual logic to handle
+  // account selection when Org functionality is implemented
+  const onAccountSelect = (id: string) => {
+    throw new Error('Function not implemented.');
+  };
+
+  const dashboardContextValue = useMemo(
+    () => ({
+      isCreditClassCreator,
+      isProjectAdmin,
+      isIssuer,
+      sanityProfilePageData,
+    }),
+    [isCreditClassCreator, isProjectAdmin, isIssuer, sanityProfilePageData],
+  );
+
+  const portfolioTabs = useMemo(
+    () =>
+      getPortfolioTabs({
+        portfolioLabel: _(PORTFOLIO),
+        bridgeLabel: _(BRIDGE),
+      }),
+    [_],
+  );
+
+  const activePortfolioTab = useMemo(
+    () => getActivePortfolioTab(portfolioTabs, pathname),
+    [portfolioTabs, pathname],
+  );
+
+  if (!activeAccount) return null;
+
   return (
     <div className="bg-grey-100">
       <div className="relative md:flex md:min-h-screen">
         {/* Mobile Header */}
-        {activeAccount && (
-          <DashboardNavigationMobileHeader
-            activeAccount={{
-              ...activeAccount,
-              address: activeAccount.addr ?? '',
-              type: activeAccount.type === 'USER' ? 'user' : 'org',
-              image: activeAccount.image || '',
-            }}
-            onMenuClick={() => setMobileMenuOpen(true)}
-            mobileMenuOpen={mobileMenuOpen}
-          />
-        )}
+        <DashboardNavigationMobileHeader
+          activeAccount={{
+            ...activeAccount,
+            address: activeAccount.addr ?? '',
+            type: activeAccount.type === 'USER' ? 'user' : 'org',
+            image: activeAccount.image || '',
+          }}
+          onMenuClick={() => setMobileMenuOpen(true)}
+          mobileMenuOpen={mobileMenuOpen}
+        />
 
         {/* Mobile overlay with blur */}
         {mobileMenuOpen && (
@@ -168,48 +151,46 @@ export const Dashboard = () => {
         )}
 
         {/* Left sidebar navigation */}
-        {activeAccount && (
-          <div className="md:sticky md:top-0 md:h-screen">
-            <DashboardNavigation
-              currentPath={pathname}
-              onNavItemClick={onNavClick}
-              isIssuer={isIssuer}
-              mobileMenuOpen={mobileMenuOpen}
-              onLogout={handleLogout}
-              onCloseMobile={() => setMobileMenuOpen(false)}
-              onExitClick={() => {
+        <div className="md:sticky md:top-0 md:h-screen">
+          <DashboardNavigation
+            currentPath={pathname}
+            onNavItemClick={onNavClick}
+            isIssuer={isIssuer}
+            mobileMenuOpen={mobileMenuOpen}
+            onLogout={handleLogout}
+            onCloseMobile={() => setMobileMenuOpen(false)}
+            onExitClick={() => {
+              setIsWarningModalOpen(undefined);
+              navigate('/');
+              setMobileMenuOpen(false);
+            }}
+            header={{
+              activeAccount: {
+                ...activeAccount,
+                address: activeAccount.addr ?? '',
+                type: activeAccount.type === 'USER' ? 'user' : 'org',
+                image: activeAccount.image || '',
+              },
+              accounts: (authenticatedAccounts || []).map(account => ({
+                id: account?.id,
+                name: account?.name || '',
+                address: account?.addr || '',
+                type: account?.type === 'USER' ? 'user' : 'org',
+                image: account?.image || '',
+              })),
+              onAccountSelect: (id: string) => {
                 setIsWarningModalOpen(undefined);
-                navigate('/');
+                onAccountSelect(id);
                 setMobileMenuOpen(false);
-              }}
-              header={{
-                activeAccount: {
-                  ...activeAccount,
-                  address: activeAccount.addr ?? '',
-                  type: activeAccount.type === 'USER' ? 'user' : 'org',
-                  image: activeAccount.image || '',
-                },
-                accounts: (authenticatedAccounts || []).map(account => ({
-                  id: account?.id,
-                  name: account?.name || '',
-                  address: account?.addr || '',
-                  type: account?.type === 'USER' ? 'user' : 'org',
-                  image: account?.image || '',
-                })),
-                onAccountSelect: (id: string) => {
-                  setIsWarningModalOpen(undefined);
-                  onAccountSelect(id);
-                  setMobileMenuOpen(false);
-                },
-                onViewProfileClick: (path: string) => {
-                  setIsWarningModalOpen(undefined);
-                  navigate(`${path}`);
-                  setMobileMenuOpen(false);
-                },
-              }}
-            />
-          </div>
-        )}
+              },
+              onViewProfileClick: (path: string) => {
+                setIsWarningModalOpen(undefined);
+                navigate(path);
+                setMobileMenuOpen(false);
+              },
+            }}
+          />
+        </div>
 
         {/* Content area */}
         <div
@@ -288,6 +269,7 @@ export const Dashboard = () => {
                 )}
               </Flex>
 
+              {/* Portfolio tabs section */}
               {(section === 'portfolio' ||
                 pathname.includes('/portfolio/bridge')) && (
                 <div className="w-full mb-20 md:mb-8 lg:mb-0">

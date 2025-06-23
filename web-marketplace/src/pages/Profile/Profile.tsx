@@ -4,7 +4,6 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 
-import { Flex } from 'web-components/src/components/box';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';

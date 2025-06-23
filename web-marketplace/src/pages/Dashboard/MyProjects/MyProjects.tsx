@@ -170,6 +170,7 @@ const MyProjects = (): JSX.Element => {
             privacyType: 'public',
             published: true,
           }}
+          disableScrollLock={true}
         />
       )}
     </>

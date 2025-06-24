@@ -1,7 +1,11 @@
 import { msg } from '@lingui/macro';
 import { AllowedDenom } from '@regen-network/api/regen/ecocredit/marketplace/v1/state';
 import { BatchBalanceInfo } from '@regen-network/api/regen/ecocredit/v1/query';
-import { UPPERCASE_DENOM, USD_DENOM } from 'config/allowedBaseDenoms';
+import {
+  GRAVITY_USDC_DENOM,
+  UPPERCASE_DENOM,
+  USD_DENOM,
+} from 'config/allowedBaseDenoms';
 
 import { Option } from 'web-components/src/components/inputs/SelectTextField';
 
@@ -66,31 +70,36 @@ export const getDenomAllowedOptions = ({
   canCreateFiatOrder,
   denomTracesData,
 }: GetDenomAllowedOptionsParams): Option[] => {
-  const allowedDenomsOptions: Option[] =
-    allowedDenoms?.map(denom => {
-      const denomTrace = denomTracesData?.find(denomTrace =>
-        denom?.bankDenom?.includes(denomTrace.hash),
-      );
-      const baseDenom =
-        (denomTrace ? denomTrace.baseDenom : denom?.bankDenom) ?? '';
+  const allowedDenomsOptions =
+    allowedDenoms
+      ?.map(denom => {
+        const denomTrace = denomTracesData?.find(denomTrace =>
+          denom?.bankDenom?.includes(denomTrace.hash),
+        );
+        const baseDenom =
+          (denomTrace ? denomTrace.baseDenom : denom?.bankDenom) ?? '';
 
-      return {
-        label: (
-          <DenomIconWithCurrency
-            baseDenom={baseDenom}
-            bankDenom={denom.bankDenom}
-            displayDenom={
-              UPPERCASE_DENOM.includes(denom.bankDenom)
-                ? denom.displayDenom.toUpperCase()
-                : denom.displayDenom
-            }
-            // eslint-disable-next-line lingui/no-unlocalized-strings
-            textClassName="text-sc-text-header text-base"
-          />
-        ),
-        value: denom.bankDenom,
-      };
-    }) ?? [];
+        // Do not display USDC.grv
+        if (baseDenom === GRAVITY_USDC_DENOM) return null;
+
+        return {
+          label: (
+            <DenomIconWithCurrency
+              baseDenom={baseDenom}
+              bankDenom={denom.bankDenom}
+              displayDenom={
+                UPPERCASE_DENOM.includes(denom.bankDenom)
+                  ? denom.displayDenom.toUpperCase()
+                  : denom.displayDenom
+              }
+              // eslint-disable-next-line lingui/no-unlocalized-strings
+              textClassName="text-sc-text-header text-base"
+            />
+          ),
+          value: denom.bankDenom,
+        };
+      })
+      .filter(Boolean) ?? ([] as Option[]);
 
   if (canCreateFiatOrder) {
     allowedDenomsOptions.unshift({

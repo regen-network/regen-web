@@ -13,7 +13,7 @@ export interface RegenModalProps {
   closeIconColor?: string;
   isIFrame?: boolean;
   isFullscreenMobile?: boolean;
-  disableScrollLock?: boolean; // Add this prop
+  disableScrollLock?: boolean;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -108,7 +108,7 @@ const RegenModal: React.FC<React.PropsWithChildren<RegenModalProps>> = ({
   closeIconColor,
   isIFrame,
   isFullscreenMobile = true,
-  disableScrollLock = false, // Add this prop with default false
+  disableScrollLock = false,
 }) => {
   const { classes: styles, cx } = useStyles();
 

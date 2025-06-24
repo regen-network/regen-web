@@ -38,7 +38,6 @@ export const ViewProfileButton = ({
 
     let profileUrl: string;
 
-    // Generate URL based on current section
     switch (section) {
       case 'credit-classes':
         profileUrl = `${getProfileUrl(activeAccount)}/credit-classes`;

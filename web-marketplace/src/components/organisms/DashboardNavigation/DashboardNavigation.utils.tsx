@@ -161,14 +161,13 @@ export function getDashboardNavigationSections(
   accountType: 'user' | 'org',
   loginDisabled: boolean,
   collapsed = false,
-  isIssuer = false, //
+  isIssuer = false,
 ): DashboardNavigationSection[] {
   const sections = [
     getCreditsSection(_, collapsed),
     getProjectsSection(_, collapsed),
   ];
 
-  // Add credit issuance section if user is an issuer
   if (isIssuer) {
     sections.push(getCreditIssuanceSection(_, collapsed));
   }

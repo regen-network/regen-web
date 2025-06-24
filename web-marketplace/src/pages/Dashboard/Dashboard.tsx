@@ -160,7 +160,7 @@ export const Dashboard = () => {
             currentPath={section ?? ''}
             onNavItemClick={onNavClick}
             isIssuer={isIssuer}
-            loginDisabled={loginDisabled} // Add this prop
+            loginDisabled={loginDisabled}
             mobileMenuOpen={mobileMenuOpen}
             onLogout={handleLogout}
             onCloseMobile={() => setMobileMenuOpen(false)}

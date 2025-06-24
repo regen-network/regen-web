@@ -125,6 +125,10 @@ export const Dashboard = () => {
     [portfolioTabs, pathname],
   );
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname]);
+
   if (!activeAccount) return null;
 
   return (
@@ -153,7 +157,7 @@ export const Dashboard = () => {
         {/* Left sidebar navigation */}
         <div className="md:sticky md:top-0 md:h-screen">
           <DashboardNavigation
-            currentPath={pathname}
+            currentPath={section ?? ''}
             onNavItemClick={onNavClick}
             isIssuer={isIssuer}
             loginDisabled={loginDisabled} // Add this prop
@@ -225,7 +229,7 @@ export const Dashboard = () => {
                   <div className="block md:hidden mb-2">
                     <span
                       style={{
-                        fontFamily: 'Primary',
+                        fontFamily: 'Mulish',
                         fontWeight: 800,
                         fontSize: '10px',
                         lineHeight: '100%',
@@ -254,6 +258,7 @@ export const Dashboard = () => {
                 {(section === 'credit-classes' ||
                   section === 'projects' ||
                   section === 'portfolio' ||
+                  section === 'credit-batches' || // Add this line
                   section === 'profile') && (
                   <ViewProfileButton
                     setIsWarningModalOpen={setIsWarningModalOpen}

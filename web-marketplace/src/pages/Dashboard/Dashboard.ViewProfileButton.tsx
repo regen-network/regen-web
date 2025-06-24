@@ -36,7 +36,29 @@ export const ViewProfileButton = ({
       return;
     }
 
-    const profileUrl = getProfileUrl(activeAccount);
+    let profileUrl: string;
+
+    // Generate URL based on current section
+    switch (section) {
+      case 'credit-classes':
+        profileUrl = `${getProfileUrl(activeAccount)}/credit-classes`;
+        break;
+      case 'projects':
+        profileUrl = `${getProfileUrl(activeAccount)}/projects`;
+        break;
+      case 'credit-batches':
+        profileUrl = `${getProfileUrl(activeAccount)}/credit-batches`;
+        break;
+      case 'portfolio':
+        profileUrl = `${getProfileUrl(activeAccount)}/portfolio`;
+        break;
+      case 'profile':
+        profileUrl = `${getProfileUrl(activeAccount)}/portfolio`;
+        break;
+      default:
+        profileUrl = getProfileUrl(activeAccount);
+        break;
+    }
 
     if (isDirtyRef?.current) {
       setIsWarningModalOpen(profileUrl);
@@ -59,7 +81,8 @@ export const ViewProfileButton = ({
       >
         {section === 'portfolio' ||
         section === 'credit-classes' ||
-        section === 'projects'
+        section === 'projects' ||
+        section === 'credit-batches'
           ? _(VIEW_PUBLIC_PROFILE)
           : section === 'profile'
           ? _(VIEW_PROFILE)

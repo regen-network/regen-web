@@ -8128,6 +8128,7 @@ export type AllProjectsQuery = (
           & Pick<ProjectTranslation, 'languageCode' | 'metadata'>
         )>> }
       ) }
+      & ProjectSellOrdersFieldsFragment
     )>> }
   )> }
 );
@@ -8394,6 +8395,18 @@ export type ProjectFieldsFragment = (
       & Pick<ProjectTranslation, 'languageCode' | 'metadata'>
     )>> }
   ) }
+  & ProjectSellOrdersFieldsFragment
+);
+
+export type ProjectSellOrdersFieldsFragment = (
+  { __typename?: 'Project' }
+  & { sellOrdersByProjectId: (
+    { __typename?: 'SellOrdersConnection' }
+    & { nodes: Array<Maybe<(
+      { __typename?: 'SellOrder' }
+      & Pick<SellOrder, 'onChainId' | 'price'>
+    )>> }
+  ) }
 );
 
 export type ProjectIdByOnChainIdQueryVariables = Exact<{
@@ -8538,6 +8551,16 @@ export const AccountFieldsFragmentDoc = gql`
   addr
 }
     ${OrganizationFieldsFragmentDoc}`;
+export const ProjectSellOrdersFieldsFragmentDoc = gql`
+    fragment projectSellOrdersFields on Project {
+  sellOrdersByProjectId {
+    nodes {
+      onChainId
+      price
+    }
+  }
+}
+    `;
 export const ProjectFieldsFragmentDoc = gql`
     fragment projectFields on Project {
   id
@@ -8596,8 +8619,10 @@ export const ProjectFieldsFragmentDoc = gql`
       metadata
     }
   }
+  ...projectSellOrdersFields
 }
-    ${AccountFieldsFragmentDoc}`;
+    ${AccountFieldsFragmentDoc}
+${ProjectSellOrdersFieldsFragmentDoc}`;
 export const AccountByAddrDocument = gql`
     query AccountByAddr($addr: String!) {
   accountByAddr(addr: $addr) {
@@ -8868,10 +8893,12 @@ export const AllProjectsDocument = gql`
           metadata
         }
       }
+      ...projectSellOrdersFields
     }
   }
 }
-    ${AccountFieldsFragmentDoc}`;
+    ${AccountFieldsFragmentDoc}
+${ProjectSellOrdersFieldsFragmentDoc}`;
 
 /**
  * __useAllProjectsQuery__

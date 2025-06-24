@@ -55,4 +55,14 @@ fragment projectFields on Project {
       metadata
     }
   }
+  ...projectSellOrdersFields
+}
+
+fragment projectSellOrdersFields on Project {
+  sellOrdersByProjectId {
+    nodes {
+      onChainId
+      price
+    }
+  }
 }

@@ -333,6 +333,6 @@
   }
 
   a {
-    color: tomato;
+    color: inherit;
   }
 }

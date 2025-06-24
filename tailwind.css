@@ -348,6 +348,7 @@
 
   body {
     font-family: var(--font-sans);
+    background-color: var(--bc-neutral-0);
   }
 
   /* 

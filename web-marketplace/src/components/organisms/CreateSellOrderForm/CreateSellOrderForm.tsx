@@ -71,7 +71,11 @@ const CreateSellOrderForm: React.FC<Props> = ({
 
   const defaultBatchDenom =
     batchDenoms.length === 1 ? batchDenoms[0]?.value : undefined;
-  const defaultAskDenom = canCreateFiatOrder ? USD_DENOM : USDC_DENOM;
+  const defaultAskDenom = canCreateFiatOrder
+    ? USD_DENOM
+    : allowedDenoms.find(denom => denom.value === USDC_DENOM)
+    ? USDC_DENOM
+    : undefined;
 
   const defaultInitialValues = {
     batchDenom: defaultBatchDenom,

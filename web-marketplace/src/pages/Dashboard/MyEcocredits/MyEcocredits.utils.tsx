@@ -71,7 +71,7 @@ export const getDenomAllowedOptions = ({
   denomTracesData,
 }: GetDenomAllowedOptionsParams): Option[] => {
   const allowedDenomsOptions =
-    allowedDenoms
+    (allowedDenoms
       ?.map(denom => {
         const denomTrace = denomTracesData?.find(denomTrace =>
           denom?.bankDenom?.includes(denomTrace.hash),
@@ -99,7 +99,7 @@ export const getDenomAllowedOptions = ({
           value: denom.bankDenom,
         };
       })
-      .filter(Boolean) ?? ([] as Option[]);
+      .filter(Boolean) as Option[]) ?? [];
 
   if (canCreateFiatOrder) {
     allowedDenomsOptions.unshift({

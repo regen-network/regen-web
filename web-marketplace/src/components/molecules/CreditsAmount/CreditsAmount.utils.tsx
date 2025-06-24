@@ -31,7 +31,7 @@ export function getSpendingCap(
   return paymentOption === PAYMENT_OPTIONS.CARD
     ? cardSellOrders.reduce((prev, cur) => {
         return formatCurrencyAmount(
-          prev + Number(cur.quantity) * cur.usdPrice,
+          prev + Number(cur.quantity) * cur.price,
           true,
         );
       }, 0)
@@ -155,7 +155,7 @@ type GetSellOrderPriceParams = {
   card: boolean;
 };
 export const getSellOrderPrice = ({ order, card }: GetSellOrderPriceParams) =>
-  card ? (order as CardSellOrder).usdPrice : Number(order.askAmount);
+  card ? (order as CardSellOrder).price : Number(order.askAmount);
 
 type FormatSellOrderParams = {
   price: number;

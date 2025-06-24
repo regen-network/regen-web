@@ -5,12 +5,12 @@ import {
   AccountFieldsFragment,
   Maybe,
   Project,
-  ProjectFieldsFragment,
+  ProjectSellOrdersFieldsFragment,
+  SellOrder,
 } from 'generated/graphql';
 import {
   AllCreditClassQuery,
   CreditClass,
-  Project as SanityProject,
   ProjectPrefinancing,
 } from 'generated/sanity-graphql';
 import {
@@ -31,7 +31,7 @@ import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCred
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 interface NormalizeProjectsWithOrderDataParams {
-  offChainProjects?: (Maybe<ProjectFieldsFragment> | undefined)[];
+  offChainProjects?: (OffChainProjectToNormalize | undefined)[];
   projectsWithOrderData?: Array<
     NormalizeProject | ProjectWithOrderData | undefined
   >;
@@ -81,8 +81,12 @@ export const normalizeProjectsWithMetadata = ({
   return projectsWithMetadata ?? [];
 };
 
+type OffChainProjectToNormalize = Maybe<
+  Pick<Project, 'id' | 'slug' | 'published'> & ProjectSellOrdersFieldsFragment
+>;
+
 interface NormalizeProjectWithMetadataParams {
-  offChainProject?: Maybe<Pick<Project, 'id' | 'slug' | 'published'>>;
+  offChainProject?: OffChainProjectToNormalize;
   projectWithOrderData?: NormalizeProject | ProjectWithOrderData;
   projectMetadata?: AnchoredProjectMetadataLD | undefined;
   projectPageMetadata?: ProjectPageMetadataLD;
@@ -144,7 +148,6 @@ export const normalizeProjectWithMetadata = ({
     classMetadata?.['regen:sourceRegistry'],
     programAccount,
   );
-
   const projectId = projectWithOrderData?.id || offChainProject?.id;
 
   const _projectPrefinancing =
@@ -155,8 +158,8 @@ export const normalizeProjectWithMetadata = ({
   );
 
   const cardSellOrders = getCardSellOrders(
-    sanityProject?.fiatSellOrders,
     filteredSellOrders,
+    offChainProject?.sellOrdersByProjectId?.nodes,
   );
 
   return {
@@ -224,29 +227,32 @@ export const normalizeProjectWithMetadata = ({
 };
 
 export const getCardSellOrders = (
-  sanityFiatSellOrders: SanityProject['fiatSellOrders'],
   sellOrders: UISellOrderInfo[],
+  fiatSellOrders?: ProjectSellOrdersFieldsFragment['sellOrdersByProjectId']['nodes'],
 ) => {
   const cardSellOrders = (
-    sanityFiatSellOrders
-      ? sanityFiatSellOrders.reduce((acc: CardSellOrder[], fiatOrder) => {
+    fiatSellOrders
+      ? fiatSellOrders.reduce((acc: CardSellOrder[], fiatOrder) => {
           const sellOrder = sellOrders.find(
-            cryptoOrder => cryptoOrder.id.toString() === fiatOrder?.sellOrderId,
+            cryptoOrder => cryptoOrder.id.toString() === fiatOrder?.onChainId,
           );
-          if (sellOrder) {
-            acc.push({ ...fiatOrder, ...sellOrder } as CardSellOrder);
+          if (sellOrder && fiatOrder) {
+            acc.push({
+              price: fiatOrder.price,
+              ...sellOrder,
+            } as CardSellOrder);
           }
           return acc;
         }, [])
       : []
-  ).sort((a, b) => a.usdPrice - b.usdPrice);
+  ).sort((a, b) => a.price - b.price);
 
   let hasMinUsdAmount = false;
   let currentSum = 0;
 
   for (const order of cardSellOrders) {
     currentSum = Number(
-      (currentSum + order.usdPrice * Number(order.quantity)).toFixed(2),
+      (currentSum + order.price * Number(order.quantity)).toFixed(2),
     );
     if (currentSum >= MIN_USD_CURRENCY_AMOUNT) {
       hasMinUsdAmount = true;

@@ -62,7 +62,7 @@ export const cryptoSellOrders = [
 ] as Array<UISellOrderInfo>;
 
 export const cardSellOrders = cryptoSellOrders.map((order, i) => ({
-  usdPrice: i + 1,
+  price: i + 1,
   ...order,
 }));
 

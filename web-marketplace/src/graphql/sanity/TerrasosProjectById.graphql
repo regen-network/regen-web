@@ -40,10 +40,6 @@ query terrasosProjectById($id: String!) {
       }
       supportEnables
     }
-    fiatSellOrders {
-      sellOrderId
-      usdPrice
-    }
     complianceCredits {
       creditsRegistered
       creditsAvailable

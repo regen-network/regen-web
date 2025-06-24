@@ -3,7 +3,7 @@ import { useFormState, useWatch } from 'react-hook-form';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
-import { USD_DENOM } from 'config/allowedBaseDenoms';
+import { USD_DENOM, USDC_DENOM } from 'config/allowedBaseDenoms';
 import { ERRORS, errorsMapping } from 'config/errors';
 import { useSetAtom } from 'jotai';
 
@@ -71,11 +71,12 @@ const CreateSellOrderForm: React.FC<Props> = ({
 
   const defaultBatchDenom =
     batchDenoms.length === 1 ? batchDenoms[0]?.value : undefined;
+  const defaultAskDenom = canCreateFiatOrder ? USD_DENOM : USDC_DENOM;
 
   const defaultInitialValues = {
     batchDenom: defaultBatchDenom,
     price: undefined,
-    askDenom: undefined,
+    askDenom: defaultAskDenom,
     amount: undefined,
     enableAutoRetire: true,
   };
@@ -198,6 +199,7 @@ const CreateSellOrderForm: React.FC<Props> = ({
             emptyOptionText={_(EMPTY_OPTION_TEXT)}
             placeholderText={_(msg`Choose denom`)}
             native={false}
+            defaultValue={defaultAskDenom}
             {...form.register('askDenom')}
           />
           {canCreateFiatOrder && (

@@ -482,7 +482,7 @@ msgstr ""
 msgid "amount now available in usd"
 msgstr ""
 
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:158
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:207
 msgid "amount of credits"
 msgstr ""
 
@@ -667,7 +667,7 @@ msgstr ""
 msgid "batch denom"
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:144
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:161
 msgid "Batch denom"
 msgstr ""
 
@@ -823,7 +823,7 @@ msgstr ""
 msgid "BUY CREDITS"
 msgstr ""
 
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:115
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:110
 msgid "Buy Credits Error"
 msgstr ""
 
@@ -1008,7 +1008,7 @@ msgstr ""
 msgid "Choose basket"
 msgstr ""
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:49
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:167
 msgid "Choose batch"
 msgstr ""
 
@@ -1020,7 +1020,7 @@ msgstr ""
 msgid "Choose credits"
 msgstr ""
 
-#: src/pages/Dashboard/MyEcocredits/MyEcocredits.utils.ts:67
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:204
 msgid "Choose denom"
 msgstr ""
 
@@ -1065,7 +1065,7 @@ msgstr ""
 msgid "Click on the confirmation link to return to Regen Network."
 msgstr ""
 
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:249
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:234
 #: src/pages/ProjectReview/ProjectReview.tsx:379
 msgid "close"
 msgstr ""
@@ -1257,8 +1257,8 @@ msgstr ""
 msgid "Create Project - Access Denied"
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:231
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:41
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:276
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:43
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
 msgid "Create Sell Order"
 msgstr ""
@@ -1281,7 +1281,7 @@ msgstr ""
 
 #: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:140
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:114
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:154
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:203
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:122
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:129
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:121
@@ -1524,6 +1524,10 @@ msgstr ""
 #: src/components/molecules/BatchTotalsGrid.tsx:46
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:119
 msgid "Credits Retired"
+msgstr ""
+
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:259
+msgid "Credits sold in USD cannot be sold in a tradable form."
 msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
@@ -2206,7 +2210,7 @@ msgstr ""
 msgid "If you select one of the following options, you will still be able to share the post, files, or location data privately via a secret link."
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:210
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:256
 msgid "If you uncheck this option, buyers will be able to choose to keep the credits tradable"
 msgstr ""
 
@@ -2358,6 +2362,7 @@ msgid "learn more"
 msgstr ""
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:53
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:220
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:10
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:83
 msgid "Learn more"
@@ -3054,6 +3059,10 @@ msgstr ""
 msgid "Please enter valid JSON-LD"
 msgstr ""
 
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:215
+msgid "Please note: US dollar sell orders will be created in USDC on the ledger, so crypto buyers may purchase in USDC."
+msgstr ""
+
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:35
 msgid "Please note: you can merge these accounts by logging in with your email account and connecting your Regen address to that account."
 msgstr ""
@@ -3162,7 +3171,7 @@ msgstr ""
 msgid "price"
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:170
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:188
 msgid "Price"
 msgstr ""
 
@@ -3182,7 +3191,7 @@ msgstr ""
 msgid "Price of credits for prefinance projects have specific terms, please click on the project to learn more."
 msgstr ""
 
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:126
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:175
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:89
 msgid "price per credit"
 msgstr ""
@@ -3272,7 +3281,7 @@ msgstr ""
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:5
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:299
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:107
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:147
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:196
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:120
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:114
@@ -3609,7 +3618,7 @@ msgstr ""
 msgid "Request fund"
 msgstr ""
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:206
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:250
 msgid "Require that credits are retired upon purchase"
 msgstr ""
 
@@ -3895,7 +3904,7 @@ msgid "sell order id:"
 msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:36
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:38
 #: src/pages/Marketplace/Storefront/Storefront.tsx:154
 msgid "Sell orders"
 msgstr ""

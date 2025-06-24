@@ -15,7 +15,6 @@ export const PERSONAL_ACCOUNT = msg`Personal Account`;
 export const PERSONAL_DASHBOARD = msg`Personal Dashboard`;
 export const NO_ACTIVE_ACCOUNT = msg`No active account`;
 
-// Add new constants for literal strings
 export const PORTFOLIO_TABS_ARIA_LABEL = msg`Portfolio tabs`;
 export const OPEN_MENU = msg`Open menu`;
 export const CLOSE_MENU = msg`Close menu`;

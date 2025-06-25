@@ -25,6 +25,10 @@ msgstr ""
 msgid "/+Z5u4"
 msgstr "/+Z5u4"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
+msgid " Exit to homepage "
+msgstr "Salir a la página de inicio"
+
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
 msgstr "- ver menos"
@@ -59,12 +63,9 @@ msgstr "(obligatorio si agregó una historia de proyecto)"
 
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:190
 msgid "(retirement is permanent and non-reversible)"
-msgstr "(la retirada es permanente e irreversible)"
+msgstr "(la retirada es permanente e irreversible)<<<<<<< HEAD======="
 
-<<<<<<< HEAD
-=======
 #. placeholder {0}: allowedCreditClasses.length
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:136
 msgid "{0, plural, one {allowed credit class} other {allowed credit classes}}"
 msgstr "{0, plural, one {clase de crédito permitida} other {clases de crédito permitidas}}"
@@ -321,14 +322,10 @@ msgstr "comportamiento"
 
 #: src/lib/constants/shared.constants.tsx:106
 msgid "Actions"
-msgstr "Comportamiento"
+msgstr "Comportamiento<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:49
-=======
 #: src/pages/Activity/Activity.tsx:12
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:73
->>>>>>> b5fe50f26 (chore: generate .po files)
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:49
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:52
 msgid "Activity"
 msgstr "Actividad"
@@ -439,14 +436,10 @@ msgstr "Todas las publicaciones"
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.constants.ts:3
 msgid "all profiles"
-msgstr "todos los perfiles"
+msgstr "todos los perfiles<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:21
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/pages/Projects/Projects.tsx:115
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:45
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:21
 msgid "All projects"
 msgstr "Todos los proyectos"
 
@@ -594,8 +587,8 @@ msgstr "Apruebe la solicitud de conexión de la aplicación móvil Keplr en su m
 msgid "approved methodologies"
 msgstr "metodologías aprobadas"
 
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:112
 #: src/pages/Marketplace/Storefront/Storefront.tsx:248
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:112
 msgid "Are you sure you want to cancel this sell order?"
 msgstr "¿Está seguro de que desea cancelar esta orden de venta?"
 
@@ -796,18 +789,11 @@ msgstr "Ecocréditos puenteables"
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:93
 msgid "bridgable ecocredits table"
-msgstr "Tabla de ecocréditos puenteables"
+msgstr "Tabla de ecocréditos puenteables<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
-#: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:4
 #: src/pages/Dashboard/Dashboard.constants.tsx:36
-#: src/pages/Dashboard/Dashboard.constants.tsx:36
-=======
-#: src/pages/Dashboard/Dashboard.constants.tsx:48
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:4
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
->>>>>>> b5fe50f26 (chore: generate .po files)
 msgid "Bridge"
 msgstr "Puente"
 
@@ -1104,14 +1090,10 @@ msgstr "Limpiar todo"
 
 #: src/pages/VerifyEmail/VerifyEmail.tsx:53
 msgid "Click on the confirmation link to return to Regen Network."
-msgstr "Haga clic en el enlace de confirmación para regresar a Regen Network."
+msgstr "Haga clic en el enlace de confirmación para regresar a Regen Network.<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:249
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/pages/ProjectReview/ProjectReview.tsx:379
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:236
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:249
 msgid "close"
 msgstr "cerca"
 
@@ -1304,15 +1286,11 @@ msgstr "Crear proyecto"
 
 #: src/components/organisms/ProjectDenied/ProjectDenied.tsx:43
 msgid "Create Project - Access Denied"
-msgstr "Crear proyecto - Acceso denegado"
+msgstr "Crear proyecto - Acceso denegado<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:231
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:41
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:227
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:41
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:231
 msgid "Create Sell Order"
 msgstr "Crear orden de venta"
 
@@ -1357,19 +1335,12 @@ msgstr "Información del lote de crédito"
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:127
 msgid "credit batch table"
-msgstr "tabla de lotes de crédito"
+msgstr "tabla de lotes de crédito<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/CreditBatches/CreditBatches.tsx:243
-#: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/pages/Dashboard/Dashboard.constants.tsx:30
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:94
-=======
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:93
-#: src/pages/Dashboard/Dashboard.constants.tsx:42
+#: src/pages/Dashboard/Dashboard.constants.tsx:30
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:243
->>>>>>> b5fe50f26 (chore: generate .po files)
 msgid "Credit Batches"
 msgstr "Lotes de crédito"
 
@@ -1436,17 +1407,11 @@ msgstr "Cronología de clases de créditos"
 
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:13
 msgid "Credit class: the structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
-msgstr "Clase de crédito: la estructura, procedimientos y requisitos para el registro de proyectos, la cuantificación, seguimiento, reporte y verificación (MRV), y la emisión de créditos relacionados con un determinado tipo de crédito."
+msgstr "Clase de crédito: la estructura, procedimientos y requisitos para el registro de proyectos, la cuantificación, seguimiento, reporte y verificación (MRV), y la emisión de créditos relacionados con un determinado tipo de crédito.<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
-#: src/pages/Dashboard/Dashboard.constants.tsx:24
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:88
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/pages/Home/Home.tsx:180
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:87
-#: src/pages/Dashboard/Dashboard.constants.tsx:36
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:88
+#: src/pages/Dashboard/Dashboard.constants.tsx:24
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
 msgid "Credit Classes"
 msgstr "Clases de crédito"
@@ -1495,15 +1460,11 @@ msgstr "Definición de unidad de crédito"
 
 #: src/components/molecules/CreditsAmount/CreditsInput.tsx:121
 msgid "credits"
-msgstr "créditos"
+msgstr "créditos<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:41
-#: src/components/organisms/Order/Order.Summary.tsx:60
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:305
 #: src/components/organisms/Order/Order.Summary.tsx:60
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:41
 msgid "Credits"
 msgstr "Créditos"
 
@@ -1514,21 +1475,9 @@ msgstr "Los créditos se mantienen en depósito en garantía cuando se crea una 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:71
 #: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:48
 msgid "credits available"
-msgstr "créditos disponibles<<<<<<< HEAD"
+msgstr "créditos disponibles<<<<<<< HEAD<<<<<<< HEAD<<<<<<< HEAD"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:103
-=======
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:115
-=======
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:100
->>>>>>> 970b7b177 (chore: update .po files)
->>>>>>> 05dbbaaf6 (merge .po files)
-=======
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:100
->>>>>>> b5fe50f26 (chore: generate .po files)
 msgid "Credits Available"
 msgstr "Créditos disponibles"
 
@@ -1586,20 +1535,8 @@ msgstr "Entrada de créditos"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:235
 msgid "Credits issuance is calculated based on a weighted scale between 20 and 50 years."
-msgstr "La emisión de créditos se calcula con base en una escala ponderada entre 20 y 50 años.<<<<<<< HEAD"
+msgstr "La emisión de créditos se calcula con base en una escala ponderada entre 20 y 50 años.<<<<<<< HEAD<<<<<<< HEAD<<<<<<< HEAD"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:67
-=======
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:69
->>>>>>> 05dbbaaf6 (merge .po files)
-msgid "Credits issued"
-msgstr "Créditos emitidos"
-=======
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:67
 #~ msgid "Credits issued"
 #~ msgstr "Créditos emitidos>>>>>>> 970b7b177 (chore: update .po files)"
@@ -1610,51 +1547,17 @@ msgstr "créditos comprados"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:26
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
-msgstr "Los créditos comprados con criptomonedas se pueden comprar en estado retirado o negociable.<<<<<<< HEAD"
+msgstr "Los créditos comprados con criptomonedas se pueden comprar en estado retirado o negociable.<<<<<<< HEAD<<<<<<< HEAD<<<<<<< HEAD"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:66
-=======
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:68
-=======
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:65
->>>>>>> 970b7b177 (chore: update .po files)
->>>>>>> 05dbbaaf6 (merge .po files)
-=======
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:65
->>>>>>> b5fe50f26 (chore: generate .po files)
 msgid "Credits Registered"
 msgstr "Créditos registrados"
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
-<<<<<<< HEAD
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:119
-=======
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:136
-=======
->>>>>>> 970b7b177 (chore: update .po files)
->>>>>>> 05dbbaaf6 (merge .po files)
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 msgid "Credits Retired"
 msgstr "Créditos Retirados"
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
-<<<<<<< HEAD
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:103
-=======
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:115
-=======
->>>>>>> 970b7b177 (chore: update .po files)
->>>>>>> 05dbbaaf6 (merge .po files)
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 msgid "Credits Tradable"
 msgstr "Créditos negociables"
 
@@ -1962,16 +1865,10 @@ msgstr "Editar perfil personal"
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.tsx:220
 msgid "edit profile"
-msgstr "editar perfil"
+msgstr "editar perfil<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:30
-#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:115
-=======
-#: src/pages/Dashboard/Dashboard.constants.tsx:54
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:115
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:30
->>>>>>> b5fe50f26 (chore: generate .po files)
 msgid "Edit profile"
 msgstr "Editar perfil"
 
@@ -2072,8 +1969,8 @@ msgid "Examples of a retirement reason include: “company travel 2025”, “of
 msgstr "Algunos ejemplos de motivos de retirada incluyen: “viajes de empresa en 2025”, “compensar mi impacto ambiental” o el nombre de una persona u organización específica."
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
-msgid "Exit to homepage"
-msgstr "Salir a la página de inicio"
+#~ msgid "Exit to homepage"
+#~ msgstr "Salir a la página de inicio"
 
 #: src/components/organisms/Order/Order.tsx:176
 msgid "Expected delivery date"
@@ -2174,17 +2071,13 @@ msgstr "Filtros"
 
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:118
 msgid "find another credit card project"
-msgstr "Encuentra otro proyecto de tarjeta de crédito"
+msgstr "Encuentra otro proyecto de tarjeta de crédito<<<<<<< HEAD"
 
-<<<<<<< HEAD
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:39
 msgid "finish creating organization"
 msgstr "terminar de crear la organización"
 
-#: src/components/molecules/PlanStepper.tsx:18
-=======
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:72
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:40
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:41
 #: src/components/molecules/PlanStepper.tsx:18
@@ -2205,21 +2098,9 @@ msgstr "Para obtener ayuda para resolver un problema, comuníquese con support@r
 
 #: src/pages/LandStewards/LandStewards.tsx:99
 msgid "For Land Stewards"
-msgstr "Para administradores de tierras<<<<<<< HEAD"
+msgstr "Para administradores de tierras<<<<<<< HEAD<<<<<<< HEAD<<<<<<< HEAD"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:87
-=======
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:94
-=======
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:85
->>>>>>> 970b7b177 (chore: update .po files)
->>>>>>> 05dbbaaf6 (merge .po files)
-=======
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:85
->>>>>>> b5fe50f26 (chore: generate .po files)
 msgid "For sale"
 msgstr "En venta"
 
@@ -2514,15 +2395,10 @@ msgstr "Obtenga información sobre los créditos {creditClassName} provenientes 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:23
 #: src/components/organisms/RegistryLayout/components/ConnectWalletModal/ConnectWalletModal.constants.ts:5
 msgid "Learn how to "
-msgstr "Aprenda cómo"
+msgstr "Aprenda cómo<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/DetailsSection/DetailsSection.Credit.tsx:54
-#: src/components/organisms/MethodologyDocumentationSection.tsx:102
-#: src/pages/EcocreditsByAccount/CreditClassTab/CreditClassTab.constants.ts:4
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/pages/Projects/PrefinanceProjects/PrefinanceProjects.tsx:85
+#: src/pages/EcocreditsByAccount/CreditClassTab/CreditClassTab.constants.ts:4
 #: src/components/organisms/MethodologyDocumentationSection.tsx:102
 #: src/components/organisms/DetailsSection/DetailsSection.Credit.tsx:54
 msgid "learn more"
@@ -2632,8 +2508,8 @@ msgstr "El correo electrónico de inicio de sesión se agregó correctamente"
 msgid "log in for faster checkout"
 msgstr "Inicie sesión para realizar un pago más rápido"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:133
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:11
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:133
 msgid "Log out"
 msgstr "Finalizar la sesión"
 
@@ -2861,15 +2737,10 @@ msgstr "Debe ser positivo"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:3
 msgid "Must have recipients"
-msgstr "Debe tener destinatarios"
+msgstr "Debe tener destinatarios<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:57
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:83
-=======
-#: src/pages/Dashboard/Dashboard.constants.tsx:79
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:57
->>>>>>> b5fe50f26 (chore: generate .po files)
 msgid "My orders"
 msgstr "Mis pedidos"
 
@@ -3073,8 +2944,8 @@ msgstr "Resumen del pedido"
 #~ msgid "orders"
 #~ msgstr "órdenes"
 
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:54
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:80
+#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:54
 msgid "Orders"
 msgstr "Pedidos"
 
@@ -3149,18 +3020,14 @@ msgstr "Información de pago"
 
 #: src/components/atoms/PeerReviewed.tsx:22
 #~ msgid "Peer <0/>Reviewed"
-#~ msgstr "Revisado por pares"
+#~ msgstr "Revisado por pares<<<<<<< HEAD"
 
-<<<<<<< HEAD
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:41
 msgid "Personal dashboard"
 msgstr "Panel de control personal"
 
-#: src/components/organisms/EditFileForm/EditFileForm.tsx:127
-=======
 #: src/lib/constants/shared.constants.tsx:98
 #: src/components/organisms/MediaForm/MediaFormStory.tsx:209
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:221
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:340
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:127
@@ -3264,16 +3131,11 @@ msgstr "Cambie a esta dirección en Keplr para acceder a este perfil."
 
 #: src/lib/constants/shared.constants.tsx:89
 msgid "Please wait while transaction processes"
-msgstr "Por favor espere mientras se procesa la transacción"
+msgstr "Por favor espere mientras se procesa la transacción<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:44
-#: src/pages/Dashboard/Dashboard.constants.tsx:12
 #: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:75
-=======
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:74
-#: src/pages/Dashboard/Dashboard.constants.tsx:24
->>>>>>> b5fe50f26 (chore: generate .po files)
+#: src/pages/Dashboard/Dashboard.constants.tsx:12
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:44
 msgid "Portfolio"
 msgstr "Cartera"
 
@@ -3316,14 +3178,10 @@ msgstr "Solicitud PQR"
 
 #: src/lib/constants/shared.constants.tsx:179
 msgid "prefinance"
-msgstr "prefinanciamiento"
+msgstr "prefinanciamiento<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:29
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/pages/Projects/Projects.tsx:125
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:53
+#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:29
 msgid "Prefinance projects"
 msgstr "Proyectos de prefinanciación"
 
@@ -3426,14 +3284,10 @@ msgstr "Proceda con precaución: ¡esto no se puede deshacer!"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:190
 #~ msgid "profile"
-#~ msgstr "perfil"
+#~ msgstr "perfil<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:27
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:90
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/pages/ProfileEdit/ProfileEdit.constants.tsx:8
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:90
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:27
 msgid "Profile"
 msgstr "Perfil"
@@ -3642,25 +3496,16 @@ msgstr "fecha de entrega de crédito proyectada"
 
 #: src/components/templates/ProjectDetails/ProjectDetails.PrefinanceTimeline.tsx:81
 msgid "PROJECTED:"
-msgstr "PROYECTADO:"
+msgstr "PROYECTADO:<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:63
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:66
-#: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
+#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:82
+#: src/pages/Dashboard/Dashboard.constants.tsx:18
+#: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:39
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
-#: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/pages/Dashboard/Dashboard.constants.tsx:18
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:82
-=======
-#: src/pages/EcocreditsByAccount/EcocreditsByAccount.tsx:81
-#: src/pages/Dashboard/Dashboard.constants.tsx:30
-#: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:63
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/components/organisms/ProjectCardsSection/ProjectCardsSection.tsx:81
->>>>>>> b5fe50f26 (chore: generate .po files)
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:63
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:66
 msgid "Projects"
 msgstr "Proyectos"
 
@@ -4083,8 +3928,8 @@ msgstr "Seleccionar todo"
 msgid "Select option"
 msgstr "Seleccionar opción"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:49
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:11
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:49
 msgid "Sell"
 msgstr "Vender"
 
@@ -4107,15 +3952,11 @@ msgstr "ID DE ORDEN DE VENTA"
 
 #: src/pages/Marketplace/Storefront/Storefront.utils.ts:43
 msgid "sell order id:"
-msgstr "ID de orden de venta:"
+msgstr "ID de orden de venta:<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:36
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/pages/Marketplace/Storefront/Storefront.tsx:154
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:52
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:36
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
 msgid "Sell orders"
 msgstr "Órdenes de venta"
 
@@ -4147,27 +3988,18 @@ msgstr "Establecer créditos máximos"
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:6
 #: src/components/organisms/RegistryLayout/components/ConnectWalletModal/ConnectWalletModal.constants.ts:6
 msgid "set up a Keplr wallet →"
-msgstr "Configurar una billetera Keplr →"
+msgstr "Configurar una billetera Keplr →<<<<<<< HEAD"
 
-<<<<<<< HEAD
 #: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:28
-=======
-#: src/pages/SellerSetupAccount/SellerSetupAccount.tsx:21
->>>>>>> b5fe50f26 (chore: generate .po files)
 msgid "set up account"
 msgstr "configurar cuenta"
 
 #: src/pages/ProjectEdit/ProjectEdit.Nav.tsx:29
 msgid "settings"
-msgstr "ajustes"
+msgstr "ajustes<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:37
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:100
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/pages/Settings/Settings.tsx:52
-#: src/pages/Dashboard/Dashboard.constants.tsx:62
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:100
 #: src/components/organisms/AdminNavigation/AdminNavigation.utils.tsx:37
 msgid "Settings"
 msgstr "Ajustes"
@@ -4260,12 +4092,8 @@ msgstr "Cuentas sociales"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:186
 msgid "Social and Cultural Index"
-msgstr "Índice social y cultural"
+msgstr "Índice social y cultural<<<<<<< HEAD"
 
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:9
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/lib/constants/shared.constants.tsx:174
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:9
 msgid "Sold Out"
@@ -4808,20 +4636,8 @@ msgstr "Créditos negociables"
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
 #~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
-#~ msgstr "Los créditos negociables aún no han sido retirados y pueden conservarse, venderse o enviarse a otra parte.<<<<<<< HEAD"
+#~ msgstr "Los créditos negociables aún no han sido retirados y pueden conservarse, venderse o enviarse a otra parte.<<<<<<< HEAD<<<<<<< HEAD<<<<<<< HEAD"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
-=======
-<<<<<<< HEAD
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
->>>>>>> 05dbbaaf6 (merge .po files)
-msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
-msgstr "Los créditos negociables aún no se han retirado y pueden conservarse, venderse o transferirse a un tercero. Excluye los créditos en depósito."
-=======
-=======
->>>>>>> b5fe50f26 (chore: generate .po files)
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
 #~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
 #~ msgstr "Los créditos negociables aún no se han retirado y pueden conservarse, venderse o transferirse a un tercero. Excluye los créditos en depósito."
@@ -5116,13 +4932,9 @@ msgstr "Ver la lista completa de videos de soporte»"
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:201
 msgid "view transaction"
-msgstr "ver transacción"
+msgstr "ver transacción<<<<<<< HEAD"
 
-<<<<<<< HEAD
 #: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:24
-=======
-#: src/pages/SellerSetupAccount/SellerSetupAccount.tsx:17
->>>>>>> b5fe50f26 (chore: generate .po files)
 msgid "view transactions"
 msgstr "ver transacciones"
 
@@ -5233,8 +5045,8 @@ msgstr "¿En qué tipos de proyectos de créditos de carbono está interesado?"
 msgid "whoops, cancel"
 msgstr "ups, cancelar"
 
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:111
 #: src/pages/Marketplace/Storefront/Storefront.tsx:247
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:111
 msgid "WHOOPS, EXIT"
 msgstr "UPOPS, SALIDA"
 
@@ -5258,8 +5070,8 @@ msgstr "Escriba un comentario breve o una actualización más larga del proyecto
 msgid "Yes"
 msgstr "Sí"
 
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:110
 #: src/pages/Marketplace/Storefront/Storefront.tsx:246
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:110
 msgid "Yes, cancel sell order"
 msgstr "Sí, cancelar orden de venta"
 

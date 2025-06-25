@@ -66,4 +66,7 @@ const AgreeErpaCheckbox = forwardRef<HTMLButtonElement, Props>(
   },
 );
 
+// eslint-disable-next-line lingui/no-unlocalized-strings
+AgreeErpaCheckbox.displayName = 'AgreeErpaCheckbox';
+
 export default AgreeErpaCheckbox;

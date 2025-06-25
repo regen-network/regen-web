@@ -21,6 +21,7 @@ const nextConfig = {
     pagesBufferLength: 5,
   },
   serverExternalPackages: ['electron', 'pino-pretty', 'lokijs', 'encoding'],
+  // Dev environment
   turbopack: {
     rules: {
       '*.po': {
@@ -38,12 +39,17 @@ const nextConfig = {
     },
     resolveAlias: {
       'rdf-canonize-native': './empty-shim.js',
+      electron: './empty-shim.js',
+      'pino-pretty': './empty-shim.js',
+      lokijs: './empty-shim.js',
+      encoding: './empty-shim.js',
     },
   },
   // Move the dev indicators to the bottom right corner to avoid blocking the view of ReactQueryDevtools
   devIndicators: {
     position: 'bottom-right',
   },
+  // Production environment
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // https://github.com/sindresorhus/got/issues/345
     config.plugins.push(
@@ -51,6 +57,7 @@ const nextConfig = {
         resourceRegExp: /^electron$/,
       }),
     );
+    config.externals.push('pino-pretty', 'lokijs', 'encoding');
     config.module.rules.push({
       test: /\.po$/,
       use: '@lingui/loader',

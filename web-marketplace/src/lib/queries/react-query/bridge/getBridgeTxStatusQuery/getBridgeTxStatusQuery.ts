@@ -9,7 +9,9 @@ import {
 export const getBridgeTxStatusQuery = ({
   request,
   ...params
-}: ReactQueryBridgeTxStatusParams): ReactQueryBridgeTxStatusResponse => ({
+}: ReactQueryBridgeTxStatusParams & {
+  keepPreviousData?: boolean;
+}): ReactQueryBridgeTxStatusResponse => ({
   queryKey: [BRIDGE_TX_STATUS_QUERY_KEY, request?.txHash],
   queryFn: async () => {
     try {

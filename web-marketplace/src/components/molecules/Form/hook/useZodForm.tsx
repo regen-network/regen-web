@@ -9,7 +9,7 @@ interface UseZodFormProps<S extends z.ZodSchema, D extends z.ZodSchema>
   isDraftRef?: React.MutableRefObject<boolean>;
 }
 
-export const useZodForm = <S extends z.ZodSchema, D extends z.ZodSchema>({
+export const useZodForm = <S extends z.ZodTypeAny, D extends z.ZodTypeAny>({
   schema,
   draftSchema,
   isDraftRef,
@@ -21,6 +21,6 @@ export const useZodForm = <S extends z.ZodSchema, D extends z.ZodSchema>({
       if (isDraftRef?.current && draftSchema) {
         return zodResolver(draftSchema)(...args);
       }
-      return zodResolver(schema)(...args);
+      return zodResolver(schema as any)(...args);
     },
   });

@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 
 import { CopyButton } from 'web-components/src/components/buttons/CopyButton';
 import BreadcrumbIcon from 'web-components/src/components/icons/BreadcrumbIcon';
@@ -25,6 +27,7 @@ export const DashboardNavHeader = ({
   collapsed = false,
   onViewProfileClick,
 }: Props) => {
+  const { _ } = useLingui();
   const { name, address, avatarSrc, type } = activeAccount;
   const short = `${address.slice(0, 9)}…${address.slice(-6)}`;
   const canSwitch = accounts.length > 1;
@@ -73,7 +76,7 @@ export const DashboardNavHeader = ({
             <CopyButton
               className="group/copy flex items-center gap-3"
               content={address}
-              toastText="Copied!"
+              toastText={_(msg`Copied!`)}
               iconClassName="h-[14px] w-[14px] text-bc-neutral-500 group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
               tooltipText={''}
             >

@@ -1,3 +1,5 @@
+import { msg } from '@lingui/core/macro';
+
 export const NAV_BASE_CLASSES =
   'relative flex flex-col justify-between h-screen overflow-visible transition-all duration-300 border-0 border-r border-solid border-r-[#D2D5D9] bg-white';
 

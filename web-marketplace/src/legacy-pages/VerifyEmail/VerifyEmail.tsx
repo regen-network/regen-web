@@ -46,7 +46,7 @@ function VerifyEmail(): JSX.Element {
     >
       <OnBoardingCard>
         <Body size="lg">
-          <Trans>We've just sent a confirmation email to:</Trans>{' '}
+          <Trans>We&apos;ve just sent a confirmation email to:</Trans>{' '}
           <a href={`mailto:${email}`}>{email}</a>.
         </Body>
         <br />

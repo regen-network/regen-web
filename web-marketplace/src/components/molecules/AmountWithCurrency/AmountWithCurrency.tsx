@@ -13,6 +13,7 @@ type Props = {
     amountContainer?: string;
     amount?: string;
     denom?: string;
+    text?: string;
   };
   tooltipText?: string;
 };
@@ -36,6 +37,7 @@ export const AmountWithCurrency = ({
       bankDenom={currency?.askDenom}
       displayDenom={displayDenom}
       className={classes?.denom}
+      textClassName={classes?.text}
       tooltipText={tooltipText}
     />
   </div>

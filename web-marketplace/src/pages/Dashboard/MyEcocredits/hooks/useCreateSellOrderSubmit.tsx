@@ -20,10 +20,15 @@ import { useLedger } from 'ledger';
 import { useAuth } from 'lib/auth/auth';
 import { denomToMicro } from 'lib/denom.utils';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
+import { ALL_PROJECTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/graphql/getAllProjectsQuery/getAllProjectsQuery.constants';
+import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
+import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
+import { getProjectBySlugKey } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery.constants';
 import { getProjectIdByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectIdByOnChainIdQuery/getProjectIdByOnChainIdQuery';
 import { SellFailureEvent, SellSuccessEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
+import { AmountWithCurrency } from 'components/molecules/AmountWithCurrency/AmountWithCurrency';
 import DenomIcon from 'components/molecules/DenomIcon';
 import { CreateSellOrderFormSchemaType } from 'components/organisms/CreateSellOrderForm/CreateSellOrderForm.schema';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
@@ -66,7 +71,8 @@ const useCreateSellOrderSubmit = ({
     async (values: CreateSellOrderFormSchemaType): Promise<void> => {
       if (!accountAddress) return Promise.reject();
       const { amount, batchDenom, price, enableAutoRetire, askDenom } = values;
-      const cryptoDenom = askDenom === USD_DENOM ? USDC_DENOM : askDenom;
+      const usdDenom = askDenom === USD_DENOM;
+      const cryptoDenom = usdDenom ? USDC_DENOM : askDenom;
 
       // convert to udenom
       const priceInMicro = price ? String(denomToMicro(price)) : ''; // TODO: When other currencies, check for micro denom before converting
@@ -114,7 +120,7 @@ const useCreateSellOrderSubmit = ({
       const onSuccess = async (
         deliverTxResponse?: DeliverTxResponse,
       ): Promise<void> => {
-        if (askDenom === USD_DENOM && activeAccountId) {
+        if (usdDenom && activeAccountId) {
           const data = await reactQueryClient.fetchQuery(
             getProjectIdByOnChainIdQuery({
               client: graphqlClient,
@@ -129,7 +135,7 @@ const useCreateSellOrderSubmit = ({
             ?.attributes?.find(attr => attr.key === 'sell_order_id')
             ?.value.replace(/"/g, '');
 
-          if (sellOrderId)
+          if (sellOrderId) {
             await createSellOrder({
               variables: {
                 input: {
@@ -142,6 +148,16 @@ const useCreateSellOrderSubmit = ({
                 },
               },
             });
+
+            await reactQueryClient.invalidateQueries({
+              queryKey: getProjectByOnChainIdKey(projectId),
+              refetchType: 'all',
+            });
+            await reactQueryClient.invalidateQueries({
+              queryKey: [ALL_PROJECTS_QUERY_KEY],
+              refetchType: 'all',
+            });
+          }
         }
 
         track<SellSuccessEvent>('sellSuccess', {
@@ -173,24 +189,41 @@ const useCreateSellOrderSubmit = ({
         setCardItems([
           {
             label: _(msg`price per credit`),
-            value: {
-              name: String(price),
-              icon: (
-                <Box
-                  sx={{
-                    mr: '4px',
-                    display: 'inline-block',
-                    verticalAlign: 'bottom',
-                  }}
-                >
-                  <DenomIcon
-                    baseDenom={baseDenom}
-                    bankDenom={cryptoDenom}
-                    sx={{ display: 'flex' }}
-                  />
-                </Box>
-              ),
-            },
+            value: usdDenom
+              ? {
+                  children: (
+                    <AmountWithCurrency
+                      amount={price}
+                      currency={{
+                        askDenom: USD_DENOM,
+                        askBaseDenom: USD_DENOM,
+                      }}
+                      displayDenom={USD_DENOM.toUpperCase()}
+                      classes={{
+                        root: 'items-start',
+                        text: 'text-[14px] sm:text-base',
+                      }}
+                    />
+                  ),
+                }
+              : {
+                  name: String(price),
+                  icon: (
+                    <Box
+                      sx={{
+                        mr: '4px',
+                        display: 'inline-block',
+                        verticalAlign: 'bottom',
+                      }}
+                    >
+                      <DenomIcon
+                        baseDenom={baseDenom}
+                        bankDenom={cryptoDenom}
+                        sx={{ display: 'flex' }}
+                      />
+                    </Box>
+                  ),
+                },
           },
           {
             label: _(msg`project`),

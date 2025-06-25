@@ -8418,7 +8418,7 @@ export type ProjectIdByOnChainIdQuery = (
   { __typename?: 'Query' }
   & { projectByOnChainId?: Maybe<(
     { __typename?: 'Project' }
-    & Pick<Project, 'id'>
+    & Pick<Project, 'id' | 'slug'>
   )> }
 );
 
@@ -9349,6 +9349,7 @@ export const ProjectIdByOnChainIdDocument = gql`
     query ProjectIdByOnChainId($onChainId: String!) {
   projectByOnChainId(onChainId: $onChainId) {
     id
+    slug
   }
 }
     `;

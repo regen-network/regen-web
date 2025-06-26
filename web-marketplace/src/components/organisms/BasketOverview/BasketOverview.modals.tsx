@@ -22,6 +22,7 @@ import {
 } from 'lib/atoms/modals.atoms';
 import {
   AMOUNT_LABEL,
+  AVAILABLE_LABEL,
   BASKET_LABEL,
   BASKET_PUT_SUBMIT_LABEL,
   BASKET_TAKE_AMOUNT_ERROR_TEXT,
@@ -45,7 +46,6 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { useMsgClient } from 'hooks';
 
-import { AVAILABLE_LABEL } from '../../../lib/constants/shared.constants';
 import {
   PUT_BASKET_LABEL,
   TAKE_BASKET_LABEL,

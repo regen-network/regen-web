@@ -106,7 +106,9 @@ export const TerrasosFooter = ({
                         {item.subLinks && (
                           <div className="flex flex-col items-center md:items-start">
                             {item.subLinks.map(subLink => (
-                              <Link href={subLink.href}>{subLink.label}</Link>
+                              <Link key={subLink.label} href={subLink.href}>
+                                {subLink.label}
+                              </Link>
                             ))}
                           </div>
                         )}

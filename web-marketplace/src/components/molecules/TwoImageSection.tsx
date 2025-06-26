@@ -10,8 +10,9 @@ const LabeledImage = (props: {
   imgSrc?: string | null;
   text?: string | null;
   label?: string | null;
+  alt?: string | null;
 }): JSX.Element => (
-  <Image backgroundImage src={props.imgSrc || ''}>
+  <Image backgroundImage src={props.imgSrc || ''} alt={props.alt || ''}>
     <Box
       sx={{
         py: {

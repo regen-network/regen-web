@@ -62,7 +62,7 @@ const RegistryLayoutHeader: React.FC = () => {
   // const isHome = pathname === '/';
   const clientConfig = getClientConfig();
 
-  // TODO
+  // TODO: Dynamically determine if there are prefinance projects available.
   const hasPrefinanceProjects = false;
 
   const menuItems = useMemo(

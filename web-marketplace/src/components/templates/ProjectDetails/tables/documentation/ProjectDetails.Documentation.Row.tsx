@@ -14,6 +14,7 @@ const getDocumentationTableRow = ({ document }: Props): React.ReactNode[] => {
   const { name, type, date } = document ?? {};
   return [
     <Box
+      key={name}
       sx={{
         color: 'info.dark',
         fontWeight: 700,
@@ -27,8 +28,12 @@ const getDocumentationTableRow = ({ document }: Props): React.ReactNode[] => {
       />
       {name}
     </Box>,
-    <Box sx={{ color: 'info.dark' }}>{type}</Box>,
-    <Box sx={{ color: 'info.dark' }}>{formatDate(date)}</Box>,
+    <Box key={name} sx={{ color: 'info.dark' }}>
+      {type}
+    </Box>,
+    <Box key={name} sx={{ color: 'info.dark' }}>
+      {formatDate(date)}
+    </Box>,
   ];
 };
 

@@ -107,10 +107,6 @@ export const getAreaUnit = (
 ): string => {
   if (!value || !area) return '';
   if (value === 'unit:HA') {
-    // return t(i18n)`${plural(area, {
-    //   one: 'hectare',
-    //   other: 'hectares',
-    // })}`;
     return _(
       msg`${plural(area, {
         one: 'hectare',
@@ -119,10 +115,6 @@ export const getAreaUnit = (
     );
   }
   if (value === 'unit:AC') {
-    // return t(i18n)`${plural(area, {
-    //   one: 'acre',
-    //   other: 'acres',
-    // })}`;
     return _(
       msg`${plural(area, {
         one: 'acre',

@@ -48,6 +48,7 @@ const ImageGridSection: React.FC<React.PropsWithChildren<Props>> = ({
           backgroundImage
           src={backgroundImage || ''}
           key={item?.header || index}
+          alt={item?.header || ''}
         >
           <ImageGrid
             img={

@@ -112,10 +112,11 @@ export const BridgableEcocreditsTable = ({
             </OutlinedButton>
           )}
           headerRows={[
-            <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>
+            <Box key="project" sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>
               <Trans>Project</Trans>
             </Box>,
             <Box
+              key="batch-denom"
               display="flex"
               sx={{
                 width: {
@@ -133,8 +134,8 @@ export const BridgableEcocreditsTable = ({
                 <InfoTooltipWithIcon outlined title={_(CREDIT_BATCH_TOOLTIP)} />
               </Box>
             </Box>,
-            <Trans>Credit Class</Trans>,
-            <Box display="flex">
+            <Trans key="credit-class">Credit Class</Trans>,
+            <Box key="amount" display="flex">
               <BreakTextEnd>
                 <Trans>Amount Bridgable</Trans>
               </BreakTextEnd>
@@ -145,22 +146,26 @@ export const BridgableEcocreditsTable = ({
                 />
               </Box>
             </Box>,
-            <Trans>Issuer</Trans>,
-            <Box sx={{ width: '6.25rem' }}>
+            <Trans key="issuer">Issuer</Trans>,
+            <Box key="start-date" sx={{ width: '6.25rem' }}>
               <BreakText>
                 <Trans>Batch Start Date</Trans>
               </BreakText>
             </Box>,
-            <Box sx={{ width: '6.25rem' }}>
+            <Box key="end-date" sx={{ width: '6.25rem' }}>
               <BreakText>
                 <Trans>Batch End Date</Trans>
               </BreakText>
             </Box>,
-            <Trans>Project Location</Trans>,
+            <Trans key="project-location">Project Location</Trans>,
           ]}
           rows={bridgableCredits.map((row, i) => {
             return [
-              <WithLoader isLoading={!row.projectName} variant="skeleton">
+              <WithLoader
+                key={`project-${row.projectId}`}
+                isLoading={!row.projectName}
+                variant="skeleton"
+              >
                 <Link
                   href={`/project/${row?.projectId}`}
                   sx={tableStyles.ellipsisColumn}
@@ -168,8 +173,17 @@ export const BridgableEcocreditsTable = ({
                   {row?.projectName}
                 </Link>
               </WithLoader>,
-              <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
-              <WithLoader isLoading={!row.classId} variant="skeleton">
+              <Link
+                key={`denom-${row.denom}`}
+                href={`/credit-batches/${row.denom}`}
+              >
+                {row.denom}
+              </Link>,
+              <WithLoader
+                key={`class-${row.classId}`}
+                isLoading={!row.classId}
+                variant="skeleton"
+              >
                 <Link
                   key="class_id"
                   href={`/credit-classes/${row.classId}`}
@@ -182,14 +196,18 @@ export const BridgableEcocreditsTable = ({
                 num: row.balance?.tradableAmount,
                 ...quantityFormatNumberOptions,
               }),
-              <AccountLink address={row.issuer} />,
-              <GreyText>
+              <AccountLink key={`issuer-${row.issuer}`} address={row.issuer} />,
+              <GreyText key={`start-${row.startDate}`}>
                 {formatDate(row.startDate, DATE_FORMAT_SECONDARY)}
               </GreyText>,
-              <GreyText>
+              <GreyText key={`end-${row.endDate}`}>
                 {formatDate(row.endDate, DATE_FORMAT_SECONDARY)}
               </GreyText>,
-              <WithLoader isLoading={!row.projectLocation} variant="skeleton">
+              <WithLoader
+                key={`location-${row.projectLocation}`}
+                isLoading={!row.projectLocation}
+                variant="skeleton"
+              >
                 <Box>{row.projectLocation}</Box>
               </WithLoader>,
             ];

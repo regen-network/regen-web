@@ -31,7 +31,7 @@ export const CreditClassTab = () => {
             const description = extractDescription(creditClass);
             const imageSrc = extractImageSrc(creditClass);
             const program = programs?.[index];
-
+            <Grid item xs={12} md={6} lg={4} key={creditClass.id}>
             return (
               <div key={creditClass.path} className="w-full">
                 <ImageActionCard

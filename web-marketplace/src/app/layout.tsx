@@ -1,6 +1,8 @@
 /* eslint-disable lingui/no-unlocalized-strings */
 import type { Metadata, Viewport } from 'next';
 
+import { IS_TERRASOS } from 'lib/env';
+
 import '../App.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -67,13 +69,21 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const fontModule = IS_TERRASOS
+    ? await import('../lib/fonts/terrasos')
+    : await import('../lib/fonts/regen');
+
+  const fontClassNames = Object.values(fontModule)
+    .map(font => font.variable)
+    .join(' ');
+
   return (
-    <html lang="en">
+    <html lang="en" className={fontClassNames}>
       <body>
         <div id="root">{children}</div>
       </body>

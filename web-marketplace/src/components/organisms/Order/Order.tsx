@@ -102,6 +102,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
                   src={project.imgSrc}
                   imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                   apiServerUrl={API_URI}
+                  alt={project.name}
                 />
               </Link>
             </div>

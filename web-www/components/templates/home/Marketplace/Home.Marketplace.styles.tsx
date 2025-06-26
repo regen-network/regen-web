@@ -17,7 +17,7 @@ export const useMarketplaceStyles = makeStyles()(theme => ({
     textAlign: 'center',
     '& h2': {
       width: '100%',
-      fontFamily: 'Muli',
+      fontFamily: 'var(--font-muli)',
       margin: '0 auto',
       lineHeight: '150%',
       paddingBottom: theme.spacing(10),

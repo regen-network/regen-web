@@ -46,20 +46,32 @@ const getSellOrdersTableRow = ({
   },
   _,
 }: Props): React.ReactNode[] => [
-  <Box sx={{ color: 'info.main' }}>{id}</Box>,
-  <WithLoader isLoading={project?.name === undefined} variant="skeleton">
+  <Box key="id" sx={{ color: 'info.main' }}>
+    {id}
+  </Box>,
+  <WithLoader
+    key="project"
+    isLoading={project?.name === undefined}
+    variant="skeleton"
+  >
     <Link href={`/project/${project?.id}`} sx={tableStyles.ellipsisColumn}>
       {project?.name}
     </Link>
   </WithLoader>,
-  <Box sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}>
+  <Box
+    key="ask-usd-amount"
+    sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}
+  >
     {`$${formatNumber({
       num: askUsdAmount,
       maximumFractionDigits: MAXIMUM_FRACTION_DIGITS,
       minimumFractionDigits: MINIMUM_FRACTION_DIGITS,
     })}`}
   </Box>,
-  <Box sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}>
+  <Box
+    key="ask-denom"
+    sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}
+  >
     <DenomIcon
       baseDenom={askBaseDenom}
       bankDenom={askDenom}
@@ -78,10 +90,14 @@ const getSellOrdersTableRow = ({
       }}
     />
   </Box>,
-  <Box sx={{ textAlign: 'right' }}>
+  <Box key="amount-available" sx={{ textAlign: 'right' }}>
     {formatNumber({ num: amountAvailable, ...quantityFormatNumberOptions })}
   </Box>,
-  <WithLoader isLoading={project?.classId === undefined} variant="skeleton">
+  <WithLoader
+    key="class-id"
+    isLoading={project?.classId === undefined}
+    variant="skeleton"
+  >
     <Link
       href={`/credit-classes/${project?.classId}`}
       sx={tableStyles.ellipsisContentColumn}
@@ -92,12 +108,13 @@ const getSellOrdersTableRow = ({
     </Link>
   </WithLoader>,
   <Link
+    key="batch-denom"
     href={`/credit-batches/${batchDenom}`}
     sx={{ ...tableStyles.ellipsisColumn, direction: 'rtl' }}
   >
     {batchDenom}
   </Link>,
-  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+  <Box key="disable-auto-retire" sx={{ display: 'flex', alignItems: 'center' }}>
     {disableAutoRetire && (
       <InfoLabel
         label={_(msg`Tradable`)}
@@ -112,17 +129,25 @@ const getSellOrdersTableRow = ({
       icon={<SellOrderPurchaseIcon icon="arrowDown" />}
     />
   </Box>,
-  <WithLoader isLoading={batchStartDate === undefined} variant="skeleton">
+  <WithLoader
+    key="batch-start-date"
+    isLoading={batchStartDate === undefined}
+    variant="skeleton"
+  >
     <Box sx={{ color: 'info.main' }}>
       {batchStartDate ? formatDate(batchStartDate) : ''}
     </Box>
   </WithLoader>,
-  <WithLoader isLoading={batchEndDate === undefined} variant="skeleton">
+  <WithLoader
+    key="batch-end-date"
+    isLoading={batchEndDate === undefined}
+    variant="skeleton"
+  >
     <Box sx={{ color: 'info.main' }}>
       {batchEndDate ? formatDate(batchEndDate) : ''}
     </Box>
   </WithLoader>,
-  <Link href={getAccountUrl(seller)} target="_blank">
+  <Link key="seller" href={getAccountUrl(seller)} target="_blank">
     {truncate(seller)}
   </Link>,
 ];

@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
+import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import { CopyButton } from 'web-components/src/components/buttons/CopyButton';
 import BreadcrumbIcon from 'web-components/src/components/icons/BreadcrumbIcon';
@@ -11,8 +12,6 @@ import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { AccountType } from 'generated/graphql';
-
-import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 
 import useClickOutside from '../../../utils/hooks/useClickOutside';
 import { COPIED, UNNAMED } from './DashboardNavigation.constants';

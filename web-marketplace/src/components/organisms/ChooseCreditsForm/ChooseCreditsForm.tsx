@@ -462,3 +462,6 @@ export const ChooseCreditsForm = React.memo(
     );
   },
 );
+
+// eslint-disable-next-line lingui/no-unlocalized-strings
+ChooseCreditsForm.displayName = 'ChooseCreditsForm';

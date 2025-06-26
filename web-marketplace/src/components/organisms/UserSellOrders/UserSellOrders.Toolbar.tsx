@@ -29,7 +29,7 @@ export const UserSellOrdersToolbar = ({
   const { credits } = useFetchEcocredits({ isPaginatedQuery: false });
   const tradableCredits =
     credits?.filter(credit => Number(credit.balance?.tradableAmount) > 0) || [];
-  const hasTradeableCredits = tradableCredits.length > 0;
+  const hasTradableCredits = tradableCredits.length > 0;
 
   return (
     <>
@@ -45,14 +45,14 @@ export const UserSellOrdersToolbar = ({
         <div className="flex-none flex items-center">
           {/* TODO:  If the member is an Editor or Viewer, this button should be hidden */}
           <ContainedButton
-            disabled={!hasTradeableCredits}
+            disabled={!hasTradableCredits}
             onClick={() => setIsSellFlowStarted(true)}
           >
             + <Trans>Create Sell Order</Trans>
           </ContainedButton>
         </div>
       </div>
-      {hasTradeableCredits && isSellFlowStarted && (
+      {hasTradableCredits && isSellFlowStarted && (
         <Suspense fallback={null}>
           <CreateSellOrderFlow
             isFlowStarted={isSellFlowStarted}

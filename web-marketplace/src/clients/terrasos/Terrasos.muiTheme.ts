@@ -16,17 +16,9 @@ const defaultTheme = createTheme({
 
 export const { pxToRem } = defaultTheme.typography;
 
-export const headerFontFamily = [
-  '"Montserrat"',
-  '-apple-system',
-  'sans-serif',
-].join(',');
+export const headerFontFamily = 'var(--font-montserrat)';
 
-export const defaultFontFamily = [
-  '"Montserrat"',
-  '-apple-system',
-  'sans-serif',
-].join(',');
+export const defaultFontFamily = 'var(--font-montserrat)';
 
 const headerDefaults = {
   fontWeight: 700,

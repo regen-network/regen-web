@@ -1,12 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Muli:500,800,900&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700,800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
-@font-face {
-  font-family: 'FoxesInLove';
-  src: url(./assets/fonts/foxes-in-love.ttf) format('truetype');
-}
-
 @font-face {
   font-family: 'Nilland';
   src: url(./assets/fonts/Nilland.ttf) format('truetype');

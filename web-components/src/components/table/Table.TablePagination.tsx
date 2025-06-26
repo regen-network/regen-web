@@ -74,7 +74,7 @@ const StyledTablePagination = withStyles(
     selectLabel: {
       fontSize: '1rem',
       '&:first-of-type': {
-        fontFamily: 'Muli',
+        fontFamily: 'var(--font-muli)',
         fontSize: '0.75rem',
         fontWeight: 800,
         letterSpacing: '1px',

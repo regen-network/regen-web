@@ -83,12 +83,14 @@ const PostFilesPublic = ({
   );
 
   const locations = {
-    type: 'FeatureCollection',
-    features: Object.values(groupByLocation).map(files => ({
-      type: 'Feature',
-      geometry: files[0].location,
-      properties: [],
-    })),
+    type: 'FeatureCollection' as const,
+    features: Object.values(groupByLocation)
+      .filter(groupedFiles => !!groupedFiles[0].location)
+      .map(files => ({
+        type: 'Feature' as const,
+        geometry: files[0].location!,
+        properties: [],
+      })),
   };
 
   const onLoad = (): void => {

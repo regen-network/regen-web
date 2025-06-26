@@ -89,7 +89,9 @@ export const useEmailConfirmationData = ({
         defaultError: _(DEFAULT_VALIDATE_ERROR),
         retryCsrfRequest,
         onSuccess: async response => {
-          await reactQueryClient.invalidateQueries([GET_ACCOUNTS_QUERY_KEY]);
+          await reactQueryClient.invalidateQueries({
+            queryKey: [GET_ACCOUNTS_QUERY_KEY],
+          });
           setBannerText(emailConfirmationText ?? _(EMAIL_CONFIRMATION_SUCCES));
           onConfirmationModalClose();
           if (isConnectingRef) isConnectingRef.current = true;

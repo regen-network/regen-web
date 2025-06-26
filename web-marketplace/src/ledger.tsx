@@ -3,13 +3,13 @@ import { OfflineSigner, Registry } from '@cosmjs/proto-signing';
 import { AminoTypes, SigningStargateClient } from '@cosmjs/stargate';
 import {
   cosmosAminoConverters,
-  // cosmosProtoRegistry,
-  // ibc,
-  // ibcAminoConverters,
-  // ibcProtoRegistry,
-  // regen,
-  // regenAminoConverters,
-  // regenProtoRegistry,
+  cosmosProtoRegistry,
+  ibc,
+  ibcAminoConverters,
+  ibcProtoRegistry,
+  regen,
+  regenAminoConverters,
+  regenProtoRegistry,
 } from '@regen-network/api';
 import { chains } from 'chain-registry';
 

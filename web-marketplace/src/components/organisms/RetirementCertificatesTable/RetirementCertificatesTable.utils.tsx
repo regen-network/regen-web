@@ -12,7 +12,9 @@ export const getBatchIds = (batchIds: string[]) => {
 };
 
 export const getBatchDate = (dates: string[]) => {
-  return dates.map(date => (
-    <GreyText className="whitespace-nowrap">{formatDate(date)}</GreyText>
+  return dates.map((date, index) => (
+    <GreyText key={`date-${index}`} className="whitespace-nowrap">
+      {formatDate(date)}
+    </GreyText>
   ));
 };

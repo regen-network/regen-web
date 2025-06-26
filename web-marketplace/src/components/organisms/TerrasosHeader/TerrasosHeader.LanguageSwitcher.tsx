@@ -38,7 +38,7 @@ export const LanguageSwitcher = ({ className }: Props) => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
         sx={{
-          fontFamily: 'Montserrat',
+          fontFamily: 'var(--font-montserrat)',
           fontWeight: '500',
         }}
       >

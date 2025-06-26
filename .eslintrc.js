@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['react-app', 'plugin:prettier/recommended'],
+  extends: ['plugin:prettier/recommended'],
   plugins: ['simple-import-sort', 'flowtype', 'lingui'],
   rules: {
     'no-empty': 'off',
@@ -27,6 +27,7 @@ module.exports = {
           'previewClassName',
           'color',
           'buttonClassName',
+          'iconClassName',
         ],
         ignoreProperty: [
           'border',

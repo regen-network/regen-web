@@ -38,3 +38,6 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     );
   },
 );
+
+// eslint-disable-next-line lingui/no-unlocalized-strings
+Link.displayName = 'Link';

@@ -155,6 +155,7 @@ export const DetailsSection: React.FC<
               className={`${projectId ? 'md:-mt-[90px]' : ''} pt-0`}
               items={credibilityCards.map((card, index) => (
                 <CredibilityCard
+                  key={`credibility-card-${index}`}
                   index={index}
                   title={card?.credibilityCard?.title as string}
                   descriptionRaw={card?.credibilityCard?.descriptionRaw}

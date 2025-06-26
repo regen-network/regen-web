@@ -69,27 +69,34 @@ export const BasketEcocreditsTable: React.FC<
       initialPaginationParams={initialPaginationParams}
       isIgnoreOffset={isIgnoreOffset}
       headerRows={[
-        <Box sx={{ minWidth: '8rem' }}>
+        <Box key="project" sx={{ minWidth: '8rem' }}>
           <Trans>Project</Trans>
         </Box>,
-        <Box sx={{ minWidth: { xs: '8rem', sm: '11rem', md: 'auto' } }}>
+        <Box
+          key="batch-denom"
+          sx={{ minWidth: { xs: '8rem', sm: '11rem', md: 'auto' } }}
+        >
           <Trans>Batch Denom</Trans>
         </Box>,
-        <Trans>Issuer</Trans>,
-        <Trans>Amount</Trans>,
-        <BreakText>
+        <Trans key="issuer">Issuer</Trans>,
+        <Trans key="amount">Amount</Trans>,
+        <BreakText key="class">
           <Trans>Credit Class</Trans>
         </BreakText>,
-        <BreakText>
+        <BreakText key="start-date">
           <Trans>Batch Start Date</Trans>
         </BreakText>,
-        <BreakText>
+        <BreakText key="end-date">
           <Trans>Batch End Date</Trans>
         </BreakText>,
-        <Trans>Project Location</Trans>,
+        <Trans key="location">Project Location</Trans>,
       ]}
       rows={basketCredits.map(credit => [
-        <WithLoader isLoading={credit.projectName === ''} variant="skeleton">
+        <WithLoader
+          key={`project-${credit.projectId}`}
+          isLoading={credit.projectName === ''}
+          variant="skeleton"
+        >
           <Link
             href={`/project/${credit.projectId}`}
             target="_blank"
@@ -98,15 +105,23 @@ export const BasketEcocreditsTable: React.FC<
             {credit.projectName}
           </Link>
         </WithLoader>,
-        <WithLoader isLoading={!credit.denom} variant="skeleton">
+        <WithLoader
+          key={`batch-${credit.denom}`}
+          isLoading={!credit.denom}
+          variant="skeleton"
+        >
           <Link href={`/credit-batches/${credit.denom}`}>{credit.denom}</Link>
         </WithLoader>,
-        <AccountLink address={credit.issuer} />,
+        <AccountLink key={`issuer-${credit.issuer}`} address={credit.issuer} />,
         formatNumber({
           num: credit.balance,
           ...quantityFormatNumberOptions,
         }),
-        <WithLoader isLoading={credit.classId === ''} variant="skeleton">
+        <WithLoader
+          key={`class-${credit.classId}`}
+          isLoading={credit.classId === ''}
+          variant="skeleton"
+        >
           <Link
             href={`/credit-classes/${credit.classId}`}
             sx={tableStyles.ellipsisContentColumn}
@@ -114,9 +129,14 @@ export const BasketEcocreditsTable: React.FC<
             {credit?.className && <BlockContent content={credit?.className} />}
           </Link>
         </WithLoader>,
-        <GreyText>{formatDate(credit.startDate)}</GreyText>,
-        <GreyText>{formatDate(credit.endDate)}</GreyText>,
+        <GreyText key={`start-${credit.startDate}`}>
+          {formatDate(credit.startDate)}
+        </GreyText>,
+        <GreyText key={`end-${credit.endDate}`}>
+          {formatDate(credit.endDate)}
+        </GreyText>,
         <WithLoader
+          key={`location-${credit.projectLocation}`}
           isLoading={credit.projectLocation === ''}
           variant="skeleton"
         >

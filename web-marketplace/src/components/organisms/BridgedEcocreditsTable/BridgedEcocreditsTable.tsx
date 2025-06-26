@@ -103,9 +103,9 @@ export const BridgedEcocreditsTable = ({
         initialPaginationParams={paginationParams}
         onTableChange={setPaginationParams}
         headerRows={[
-          <Trans>Tx Hash</Trans>,
-          <Trans>Timestamp</Trans>,
-          <Flex alignItems="flex-end" justifyContent="center">
+          <Trans key="tx-hash">Tx Hash</Trans>,
+          <Trans key="timestamp">Timestamp</Trans>,
+          <Flex key="status" alignItems="flex-end" justifyContent="center">
             <Box sx={{ mr: 1 }}>
               <Trans>Status</Trans>
             </Box>
@@ -129,10 +129,11 @@ export const BridgedEcocreditsTable = ({
               <Trans>Note / Link</Trans>
             </Box>
           ),
-          <Box sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>
+          <Box key="project" sx={{ width: ELLIPSIS_COLUMN_WIDTH }}>
             <Trans>Project</Trans>
           </Box>,
           <Box
+            key="credit-batch-id"
             display="flex"
             sx={{
               width: {
@@ -150,8 +151,8 @@ export const BridgedEcocreditsTable = ({
               <InfoTooltipWithIcon outlined title={_(CREDIT_BATCH_TOOLTIP)} />
             </Box>
           </Box>,
-          <Trans>Credit Class</Trans>,
-          <Box display="flex">
+          <Trans key="credit-class">Credit Class</Trans>,
+          <Box key="amount-bridged" display="flex">
             <BreakTextEnd>
               <Trans>Amount Bridged</Trans>
             </BreakTextEnd>
@@ -159,22 +160,26 @@ export const BridgedEcocreditsTable = ({
               <InfoTooltipWithIcon outlined title={_(AMOUNT_BRIDGED_TOOLTIP)} />
             </Box>
           </Box>,
-          <Trans>Issuer</Trans>,
-          <Box sx={{ width: '6.25rem' }}>
+          <Trans key="issuer">Issuer</Trans>,
+          <Box key="batch-start-date" sx={{ width: '6.25rem' }}>
             <BreakText>
               <Trans>Batch Start Date</Trans>
             </BreakText>
           </Box>,
-          <Box sx={{ width: '6.25rem' }}>
+          <Box key="batch-end-date" sx={{ width: '6.25rem' }}>
             <BreakText>
               <Trans>Batch End Date</Trans>
             </BreakText>
           </Box>,
-          <Trans>Project Location</Trans>,
+          <Trans key="project-location">Project Location</Trans>,
         ]}
         rows={bridgedCredits.map((row, i) => {
           return [
-            <WithLoader isLoading={!row.projectName} variant="skeleton">
+            <WithLoader
+              key={`tx-hash-${i}`}
+              isLoading={!row.projectName}
+              variant="skeleton"
+            >
               <Link
                 href={getHashUrl(row.txHash)}
                 target="_blank"
@@ -183,10 +188,18 @@ export const BridgedEcocreditsTable = ({
                 {truncateHash(row.txHash)}
               </Link>
             </WithLoader>,
-            <WithLoader isLoading={!row.projectName} variant="skeleton">
+            <WithLoader
+              key={`timestamp-${i}`}
+              isLoading={!row.projectName}
+              variant="skeleton"
+            >
               <GreyText>{dayjs(row.txTimestamp).fromNow()}</GreyText>
             </WithLoader>,
-            <WithLoader isLoading={row.status === undefined} variant="skeleton">
+            <WithLoader
+              key={`status-${i}`}
+              isLoading={row.status === undefined}
+              variant="skeleton"
+            >
               <GreyText>
                 {row.status && (
                   <StatusLabel
@@ -200,7 +213,11 @@ export const BridgedEcocreditsTable = ({
                 <Note status={row.status} txHash={row.destinationTxHash} />
               </GreyText>
             ),
-            <WithLoader isLoading={!row.projectName} variant="skeleton">
+            <WithLoader
+              key={`project-${i}`}
+              isLoading={!row.projectName}
+              variant="skeleton"
+            >
               <Link
                 href={`/project/${row?.projectId}`}
                 sx={tableStyles.ellipsisColumn}
@@ -208,8 +225,14 @@ export const BridgedEcocreditsTable = ({
                 {row?.projectName}
               </Link>
             </WithLoader>,
-            <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
-            <WithLoader isLoading={!row.classId} variant="skeleton">
+            <Link key={`denom-${i}`} href={`/credit-batches/${row.denom}`}>
+              {row.denom}
+            </Link>,
+            <WithLoader
+              key={`class-${i}`}
+              isLoading={!row.classId}
+              variant="skeleton"
+            >
               <Link
                 key="class_id"
                 href={`/credit-classes/${row.classId}`}
@@ -222,14 +245,18 @@ export const BridgedEcocreditsTable = ({
               num: row.amount,
               ...quantityFormatNumberOptions,
             }),
-            <AccountLink address={row.issuer} />,
-            <GreyText>
+            <AccountLink key={`issuer-${i}`} address={row.issuer} />,
+            <GreyText key={`start-${i}`}>
               {formatDate(row.startDate, DATE_FORMAT_SECONDARY)}
             </GreyText>,
-            <GreyText>
+            <GreyText key={`end-${i}`}>
               {formatDate(row.endDate, DATE_FORMAT_SECONDARY)}
             </GreyText>,
-            <WithLoader isLoading={!row.projectLocation} variant="skeleton">
+            <WithLoader
+              key={`location-${i}`}
+              isLoading={!row.projectLocation}
+              variant="skeleton"
+            >
               <Box>{row.projectLocation}</Box>
             </WithLoader>,
           ];

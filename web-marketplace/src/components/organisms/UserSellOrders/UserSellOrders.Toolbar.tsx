@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
@@ -6,8 +6,14 @@ import ContainedButton from 'web-components/src/components/buttons/ContainedButt
 import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
+// import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
+
+const CreateSellOrderFlow = lazy(async () => ({
+  default: (
+    await import('features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow')
+  ).CreateSellOrderFlow,
+}));
 
 interface UserSellOrdersToolbarProps {
   wrapperClassName?: string;
@@ -23,6 +29,7 @@ export const UserSellOrdersToolbar = ({
   const { credits } = useFetchEcocredits({ isPaginatedQuery: false });
   const tradableCredits =
     credits?.filter(credit => Number(credit.balance?.tradableAmount) > 0) || [];
+  const hasTradeableCredits = tradableCredits.length > 0;
 
   return (
     <>
@@ -37,19 +44,26 @@ export const UserSellOrdersToolbar = ({
         </Subtitle>
         <div className="flex-none flex items-center">
           {/* TODO:  If the member is an Editor or Viewer, this button should be hidden */}
-          <ContainedButton onClick={() => setIsSellFlowStarted(true)}>
+          <ContainedButton
+            disabled={!hasTradeableCredits}
+            onClick={() => setIsSellFlowStarted(true)}
+          >
             + <Trans>Create Sell Order</Trans>
           </ContainedButton>
         </div>
       </div>
-      <CreateSellOrderFlow
-        isFlowStarted={isSellFlowStarted}
-        setIsFlowStarted={setIsSellFlowStarted}
-        credits={tradableCredits}
-        placeholderText={_(msg`Choose batch`)}
-        refetchSellOrders={refetchSellOrders}
-        redirectOnSuccess={false}
-      />
+      {hasTradeableCredits && isSellFlowStarted && (
+        <Suspense fallback={null}>
+          <CreateSellOrderFlow
+            isFlowStarted={isSellFlowStarted}
+            setIsFlowStarted={setIsSellFlowStarted}
+            credits={tradableCredits}
+            placeholderText={_(msg`Choose batch`)}
+            refetchSellOrders={refetchSellOrders}
+            redirectOnSuccess={false}
+          />
+        </Suspense>
+      )}
     </>
   );
 };

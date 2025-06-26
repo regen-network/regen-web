@@ -3,6 +3,7 @@ import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
@@ -30,6 +31,18 @@ export const UserSellOrdersToolbar = ({
     credits?.filter(credit => Number(credit.balance?.tradableAmount) > 0) || [];
   const hasTradableCredits = tradableCredits.length > 0;
 
+  const createButton = (
+    <div className="flex-none flex items-center">
+      {/* TODO:  If the member is an Editor or Viewer, this button should be hidden */}
+      <ContainedButton
+        disabled={!hasTradableCredits}
+        onClick={() => setIsSellFlowStarted(true)}
+      >
+        + <Trans>Create Sell Order</Trans>
+      </ContainedButton>
+    </div>
+  );
+
   return (
     <>
       <div
@@ -41,15 +54,17 @@ export const UserSellOrdersToolbar = ({
         <Subtitle size="xl" className="text-base sm:text-[22px]">
           <Trans>Sell orders</Trans>
         </Subtitle>
-        <div className="flex-none flex items-center">
-          {/* TODO:  If the member is an Editor or Viewer, this button should be hidden */}
-          <ContainedButton
-            disabled={!hasTradableCredits}
-            onClick={() => setIsSellFlowStarted(true)}
+        {hasTradableCredits ? (
+          createButton
+        ) : (
+          <InfoTooltip
+            arrow
+            placement="top"
+            title={_(msg`You have no tradable credits that can be sold.`)}
           >
-            + <Trans>Create Sell Order</Trans>
-          </ContainedButton>
-        </div>
+            {createButton}
+          </InfoTooltip>
+        )}
       </div>
       {hasTradableCredits && isSellFlowStarted && (
         <Suspense fallback={null}>

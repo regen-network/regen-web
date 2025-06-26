@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.3](https://github.com/regen-network/regen-web/compare/v2.9.2...v2.9.3) (2025-06-12)
+
+### Bug Fixes
+
+- update \_redirects ([fa09468](https://github.com/regen-network/regen-web/commit/fa094684b5256b71ac139e9476f2c4320c4b8d5c))
+
 ## [2.9.2](https://github.com/regen-network/regen-web/compare/v2.9.1...v2.9.2) (2025-06-05)
 
 ### Bug Fixes

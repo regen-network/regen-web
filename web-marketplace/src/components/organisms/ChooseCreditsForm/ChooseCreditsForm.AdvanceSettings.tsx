@@ -27,7 +27,7 @@ export function AdvanceSettings({
     <div className="grid grid-rows-1 mt-20 sm:mt-40">
       <div className="flex flex-col">
         <TextButton
-          className="w-[193px] text-xs font-['Muli'] text-green-400 font-extrabold uppercase text-brand-400 self-start bg-transparent border-none p-0 text-left"
+          className="w-[193px] text-xs font-muli text-green-400 font-extrabold uppercase text-brand-400 self-start bg-transparent border-none p-0 text-left"
           textSize="sm"
           onClick={toggleAdvancedSettings}
         >

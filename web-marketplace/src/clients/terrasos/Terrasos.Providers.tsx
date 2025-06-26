@@ -8,7 +8,6 @@ import terrasosMuiTheme from './Terrasos.muiTheme';
 import { TerrasosRoutes } from './Terrasos.Routes';
 
 import './Terrasos.tailwind.css';
-import './Terrasos.base.css';
 
 export const TerrasosProvider = () => {
   return (

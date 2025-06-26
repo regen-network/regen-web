@@ -30,14 +30,14 @@ export const useAmountFieldStyles = makeStyles()((theme: Theme) => ({
     color: theme.palette.info.dark,
   },
   availableAmount: {
-    fontFamily: 'Muli',
+    fontFamily: 'var(--font-muli)',
     fontSize: '12px',
     color: theme.palette.info.dark,
     marginRight: theme.spacing(1),
     marginLeft: theme.spacing(1),
   },
   denom: {
-    fontFamily: 'Muli',
+    fontFamily: 'var(--font-muli)',
     fontSize: '12px',
     fontWeight: 'bold',
     color: theme.palette.info.dark,

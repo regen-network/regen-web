@@ -56,7 +56,7 @@ export const getOptions = (
   setProfileAdd: UseStateSetter<ProfileModalSchemaType | null>,
 ) => [
   ...options.sort((a, b) => -b.group.localeCompare(a.group)),
-  <AddNewProfile setProfileAdd={setProfileAdd} />,
+  <AddNewProfile key="add-new-profile" setProfileAdd={setProfileAdd} />,
 ];
 
 export const getIsOptionEqualToValue = (

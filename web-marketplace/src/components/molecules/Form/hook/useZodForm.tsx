@@ -1,20 +1,25 @@
 import { useForm, UseFormProps } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { z, ZodTypeAny } from 'zod';
 
-interface UseZodFormProps<S extends z.ZodSchema, D extends z.ZodSchema>
-  extends Exclude<UseFormProps<z.infer<S>>, 'resolver'> {
-  schema: S;
-  draftSchema?: D;
+interface UseZodFormProps<
+  TSchema extends ZodTypeAny,
+  TDraftSchema extends ZodTypeAny = TSchema,
+> extends Omit<UseFormProps<z.infer<TSchema>>, 'resolver'> {
+  schema: TSchema;
+  draftSchema?: TDraftSchema;
   isDraftRef?: React.MutableRefObject<boolean>;
 }
 
-export const useZodForm = <S extends z.ZodSchema, D extends z.ZodSchema>({
+export const useZodForm = <
+  TSchema extends ZodTypeAny,
+  TDraftSchema extends ZodTypeAny = TSchema,
+>({
   schema,
   draftSchema,
   isDraftRef,
   ...formProps
-}: UseZodFormProps<S, D>) =>
+}: UseZodFormProps<TSchema, TDraftSchema>) =>
   useForm({
     ...formProps,
     resolver: (...args) => {

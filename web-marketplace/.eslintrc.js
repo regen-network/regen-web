@@ -1,8 +1,8 @@
-const { plugin } = require('@graphql-codegen/introspection');
 const baseConfig = require('../.eslintrc');
 
 module.exports = {
   ...baseConfig,
+  extends: ['next/core-web-vitals', 'plugin:prettier/recommended'],
   ignorePatterns: ['src/generated/*.tsx'],
   overrides: [
     ...baseConfig.overrides,

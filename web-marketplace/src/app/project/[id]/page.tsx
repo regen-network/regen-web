@@ -9,6 +9,7 @@ import { getRPCQueryClient } from 'app/makeRPCQueryClient';
 import dynamic from 'next/dynamic';
 import { redirect } from 'next/navigation';
 
+import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -47,9 +48,9 @@ const getProject = cache(async (id: string) => {
   const apolloClient = await getClient();
   const rpcQueryClient = await getRPCQueryClient();
 
-  let onChainProjectId;
-  let offChainProject;
-  let slug;
+  let onChainProjectId: Maybe<string> | undefined;
+  let offChainProject: Maybe<ProjectFieldsFragment> | undefined;
+  let slug: Maybe<string> | undefined;
   if (isOnChainId) {
     const offChainProjectByIdData = await queryClient.fetchQuery(
       getProjectByOnChainIdQuery({
@@ -58,7 +59,7 @@ const getProject = cache(async (id: string) => {
         languageCode: 'en', // TODO get language code
       }),
     );
-    onChainProjectId = isOnChainId;
+    onChainProjectId = id;
     offChainProject = offChainProjectByIdData?.data?.projectByOnChainId;
     slug = offChainProject?.slug;
   } else if (isOffChainUuid) {

@@ -12,6 +12,7 @@ function OptimizedImage(props: ImageProps): JSX.Element {
     <Image
       apiServerUrl={apiServerUrl}
       imageStorageBaseUrl={imageStorageBaseUrl}
+      alt={props.alt || ''}
       {...props}
     />
   );

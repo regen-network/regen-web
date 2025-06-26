@@ -65,7 +65,7 @@ export const Stakeholders = ({ stakeholders, className }: Props) => {
                     ? { mb: { xs: 8.25, sm: 0 } }
                     : undefined;
                 return (
-                  <Grid item xs={12} sm={sm} sx={sx}>
+                  <Grid item xs={12} sm={sm} sx={sx} key={i}>
                     {Array.isArray(accounts) ? (
                       <>
                         <UserInfoWithTitle

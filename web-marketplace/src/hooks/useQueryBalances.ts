@@ -7,10 +7,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useLedger } from '../ledger';
 import { getBalancesQuery } from './../lib/queries/react-query/ecocredit/getBalancesQuery/getBalancesQuery';
 
-type FetchBalances = (
-  request: QueryBalancesRequest,
-) => Promise<QueryBalancesResponse | undefined | void>;
-
 type Params = {
   address?: string;
 };

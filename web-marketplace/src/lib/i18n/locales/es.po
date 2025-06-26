@@ -151,8 +151,12 @@ msgid "+ add"
 msgstr "+ añadir"
 
 #: src/components/organisms/CreditClassForms/CreditClassForm.tsx:87
-msgid "+ add another issuer'"
-msgstr "+ añadir otro emisor'"
+msgid "+ add another issuer"
+msgstr "+ añadir otro emisor"
+
+#: src/components/organisms/CreditClassForms/CreditClassForm.tsx:87
+#~ msgid "+ add another issuer'"
+#~ msgstr "+ añadir otro emisor'"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics.tsx:311
 msgid "+ add certification"
@@ -303,6 +307,10 @@ msgstr "Nosotros"
 #: src/components/organisms/AccountSwitchModal/AccountSwitchModal.constants.ts:3
 msgid "Account switch detected! "
 msgstr "¡Cambio de cuenta detectado!"
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Dropdown.tsx:25
+msgid "Account switcher"
+msgstr "Cambiador de cuenta"
 
 #: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:197
 msgid "Acres"
@@ -459,7 +467,7 @@ msgstr "cantidad"
 
 #: src/lib/constants/shared.constants.tsx:31
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:127
-#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:79
+#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:82
 #: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:36
 msgid "Amount"
 msgstr "Cantidad"
@@ -473,11 +481,11 @@ msgstr "Cantidad disponible"
 msgid "AMOUNT AVAILABLE"
 msgstr "CANTIDAD DISPONIBLE"
 
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:139
+#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:140
 msgid "Amount Bridgable"
 msgstr "Monto puenteable"
 
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:156
+#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:157
 msgid "Amount Bridged"
 msgstr "Monto puenteado"
 
@@ -523,7 +531,7 @@ msgstr "Monto retirado"
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:9
 #: src/components/organisms/EcocreditsTable.tsx:101
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:42
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:43
 msgid "Amount Retired"
 msgstr "Monto retirado"
 
@@ -695,7 +703,7 @@ msgid "Batch denom"
 msgstr "Nombre del lote"
 
 #: src/components/organisms/EcocreditsTable.tsx:94
-#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:76
+#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:79
 #: src/components/molecules/BatchInfoGrid.tsx:34
 msgid "Batch Denom"
 msgstr "Nombre del lote"
@@ -709,10 +717,10 @@ msgid "batch denom:"
 msgstr "nombre del lote:"
 
 #: src/components/organisms/EcocreditsTable.tsx:118
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:51
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:170
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:156
-#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:87
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:52
+#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:171
+#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:157
+#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:90
 msgid "Batch End Date"
 msgstr "Fecha de finalización del lote"
 
@@ -725,10 +733,10 @@ msgid "Batch start and end date"
 msgstr "Fecha de inicio y fin del lote"
 
 #: src/components/organisms/EcocreditsTable.tsx:117
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:48
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:165
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:151
-#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:84
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:49
+#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:166
+#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:152
+#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:87
 msgid "Batch Start Date"
 msgstr "Fecha de inicio del lote"
 
@@ -954,7 +962,7 @@ msgstr "Caribe"
 msgid "Categories of the IUCN Red List of Ecosystems assess ecosystem health and risk at a global scale. Tebu promotes protecting the most threatened ecosystems by giving a higher score to those at higher risk."
 msgstr "Las categorías de la Lista Roja de Ecosistemas de la UICN evalúan la salud y el riesgo de los ecosistemas a escala global. Tebu promueve la protección de los ecosistemas más amenazados otorgando una puntuación más alta a aquellos que presentan un riesgo mayor."
 
-#: src/components/organisms/Order/Order.tsx:118
+#: src/components/organisms/Order/Order.tsx:119
 msgid "certificate"
 msgstr "certificado"
 
@@ -1097,6 +1105,10 @@ msgstr "Haga clic en el enlace de confirmación para regresar a Regen Network."
 msgid "close"
 msgstr "cerca"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.tsx:64
+msgid "Close menu"
+msgstr "Cerrar menú"
+
 #: src/lib/constants/shared.constants.tsx:96
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.tsx:224
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:4
@@ -1106,6 +1118,10 @@ msgstr "CERRAR VENTANA"
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:9
 msgid "co-benefit"
 msgstr "cobeneficio"
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.tsx:75
+msgid "Collapse sidebar"
+msgstr "Contraer la barra lateral"
 
 #: src/lib/constants/shared.constants.tsx:171
 msgid "coming soon"
@@ -1217,6 +1233,10 @@ msgstr "Contribuye mínimamente"
 msgid "Cookies Policy"
 msgstr "Política de cookies"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:79
+msgid "Copied!"
+msgstr "¡Copiado!"
+
 #: src/components/atoms/WrappedStepCard.tsx:62
 msgid "Copy"
 msgstr "Copiar"
@@ -1319,8 +1339,8 @@ msgstr "Detalles del lote de crédito"
 msgid "credit batch id"
 msgstr "Identificación del lote de crédito"
 
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:146
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:129
+#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:147
+#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:130
 msgid "Credit Batch Id"
 msgstr "Id. de lote de crédito"
 
@@ -1368,10 +1388,10 @@ msgid "Credit class"
 msgstr "Clase de crédito"
 
 #: src/components/organisms/EcocreditsTable.tsx:96
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:39
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:153
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:136
-#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:81
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:40
+#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:154
+#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:137
+#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:84
 #: src/components/molecules/BatchInfoGrid.tsx:47
 msgid "Credit Class"
 msgstr "Clase de crédito"
@@ -1624,6 +1644,10 @@ msgstr "URL personalizada"
 msgid "Customer info"
 msgstr "Información del cliente"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.tsx:52
+msgid "Dashboard side navigation"
+msgstr "Navegación lateral del panel"
+
 #: src/legacy-pages/Dashboard/Dashboard.tsx:155
 msgid "dashboard tabs"
 msgstr "Pestañas del panel de control"
@@ -1746,7 +1770,7 @@ msgstr "Cada lote de crédito tiene un ID único (es decir, denominación) que c
 msgid "eco-credit"
 msgstr "eco-crédito"
 
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:32
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:33
 msgid "Ecocredit batch ID"
 msgstr "Identificación del lote de ecocrédito"
 
@@ -1974,7 +1998,11 @@ msgstr "Algunos ejemplos de motivos de retirada incluyen: “viajes de empresa e
 #~ msgid "Exit to homepage"
 #~ msgstr "Salir a la página de inicio"
 
-#: src/components/organisms/Order/Order.tsx:177
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.tsx:75
+msgid "Expand sidebar"
+msgstr "Expandir la barra lateral"
+
+#: src/components/organisms/Order/Order.tsx:178
 msgid "Expected delivery date"
 msgstr "Fecha de entrega prevista"
 
@@ -2328,10 +2356,10 @@ msgid "issuer"
 msgstr "editor"
 
 #: src/components/organisms/EcocreditsTable.tsx:116
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:45
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:162
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:148
-#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:78
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:46
+#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:163
+#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:149
+#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:81
 msgid "Issuer"
 msgstr "Editor"
 
@@ -3410,10 +3438,10 @@ msgid "Project location"
 msgstr "Ubicación del proyecto"
 
 #: src/components/organisms/EcocreditsTable.tsx:119
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:57
-#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:173
-#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:159
-#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:89
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:58
+#: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.tsx:174
+#: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.tsx:160
+#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:92
 msgid "Project Location"
 msgstr "Ubicación del proyecto"
 
@@ -3695,7 +3723,7 @@ msgstr "Restauración"
 msgid "Restoration Factor:"
 msgstr "Factor de restauración:"
 
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:109
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:126
 msgid "Retirable"
 msgstr "Retirable"
 
@@ -3752,7 +3780,7 @@ msgstr "La retirada es permanente e irreversible."
 
 #: src/legacy-pages/Certificate/Certificate.constants.ts:18
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Review.tsx:148
-#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:54
+#: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.headers.tsx:55
 #: src/components/organisms/Order/Order.Summary.tsx:125
 msgid "Retirement location"
 msgstr "Lugar de retiro"
@@ -4602,7 +4630,7 @@ msgstr "Identificación del token del proyecto Toucan"
 msgid "Toucan Vintage Token Id"
 msgstr "Identificación de token vintage de tucán"
 
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:102
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:119
 msgid "Tradable"
 msgstr "Negociable"
 
@@ -4878,11 +4906,11 @@ msgstr "Ver perfil"
 msgid "view project"
 msgstr "ver proyecto"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:96
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.Header.tsx:99
 msgid "View public profile"
 msgstr "Ver perfil público"
 
-#: src/components/organisms/Order/Order.tsx:126
+#: src/components/organisms/Order/Order.tsx:127
 msgid "View Receipt"
 msgstr "Ver recibo"
 

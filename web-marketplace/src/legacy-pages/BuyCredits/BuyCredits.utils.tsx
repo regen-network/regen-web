@@ -139,8 +139,8 @@ export const getWarningModalContent = (
           <p className="text-lg pb-10 text-center">
             <Trans>
               Because we use blockchain technology, if another user purchases
-              the credits before you check out, you'll need to choose different
-              credits.
+              the credits before you check out, you&apos;ll need to choose
+              different credits.
             </Trans>
           </p>
         ),

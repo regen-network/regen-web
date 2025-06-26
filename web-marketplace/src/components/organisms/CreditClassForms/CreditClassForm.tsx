@@ -84,7 +84,7 @@ export const CreditClassForm = (props: {
                 }}
                 sx={{ float: 'right', mt: [5.5] }}
               >
-                <Trans>+ add another issuer'</Trans>
+                <Trans>+ add another issuer</Trans>
               </TextButton>
             </Box>
           )}

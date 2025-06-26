@@ -33,7 +33,7 @@ export const CreditClassTab = () => {
       >
         <Grid container spacing={8}>
           {creditClasses.map(creditClass => (
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid item xs={12} md={6} lg={4} key={creditClass.id}>
               <CreditClassGridCard
                 bodyTexts={bodyTexts}
                 {...creditClass}

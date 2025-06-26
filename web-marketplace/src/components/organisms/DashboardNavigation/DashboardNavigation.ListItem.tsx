@@ -22,8 +22,10 @@ export const DashboardNavigationListItem: React.FC<NavigationListItemProps> = ({
   const isLogout = item.path === 'logout';
 
   const LIST_LAYOUT_CLASSES = collapsed
-    ? 'w-[40%] mx-auto justify-center h-40 px-1 py-2'
-    : 'w-full h-35 md:h-45 gap-10';
+    ? // eslint-disable-next-line lingui/no-unlocalized-strings
+      'w-[40%] mx-auto justify-center h-40 px-1 py-2'
+    : // eslint-disable-next-line lingui/no-unlocalized-strings
+      'w-full h-35 md:h-45 gap-10';
 
   const LIST_STATE_CLASSES = isActive
     ? LIST_ACTIVE_CLASSES

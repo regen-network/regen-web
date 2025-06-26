@@ -6,8 +6,6 @@ import {
 import { getPriceToDisplay } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
 import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
-import { formatNumber } from 'web-components/src/utils/format';
-
 import {
   AccountFieldsFragment,
   Maybe,

@@ -241,3 +241,6 @@ export const RoleField = forwardRef<HTMLInputElement, Props>(
     );
   },
 );
+
+// eslint-disable-next-line lingui/no-unlocalized-strings
+RoleField.displayName = 'RoleField';

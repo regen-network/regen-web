@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { z } from 'zod';
 
 export const RetireFormSchema = z.object({

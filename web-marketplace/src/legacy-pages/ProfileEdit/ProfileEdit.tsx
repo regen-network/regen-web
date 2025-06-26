@@ -12,7 +12,6 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { DISCARD_CHANGES_TITLE } from 'lib/constants/shared.constants';
 import { getPaymentMethodsQuery } from 'lib/queries/react-query/registry-server/getPaymentMethodsQuery/getPaymentMethodsQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
@@ -24,6 +23,7 @@ import { useShowOrders } from 'components/organisms/RegistryLayout/hooks/useShow
 import {
   DISCARD_CHANGES_BODY,
   DISCARD_CHANGES_BUTTON,
+  DISCARD_CHANGES_TITLE,
 } from '../../lib/constants/shared.constants';
 import { usePathSection } from './hooks/usePathSection';
 import { ViewProfileButton } from './ProfileEdit.ViewProfile';

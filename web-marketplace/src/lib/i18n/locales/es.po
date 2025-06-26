@@ -1011,7 +1011,7 @@ msgstr "Elige los ecocréditos que sean elegibles para esta cesta.<0>Más inform
 msgid "Choose basket"
 msgstr "Elija la cesta"
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:75
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:49
 msgid "Choose batch"
 msgstr "Seleccione lote"
 
@@ -3881,7 +3881,7 @@ msgid "sell order id:"
 msgstr "ID de orden de venta:"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:55
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:36
 #: src/pages/Marketplace/Storefront/Storefront.tsx:154
 msgid "Sell orders"
 msgstr "Órdenes de venta"
@@ -5060,10 +5060,6 @@ msgstr "Usted ingresó:"
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Tradable.tsx:25
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
 msgstr "Ha elegido comprar créditos negociables, por lo que no recibirá un certificado de retirada."
-
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:63
-msgid "You have no tradable credits that can be sold."
-msgstr "No tienes créditos negociables que se puedan vender."
 
 #: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.constants.ts:3
 msgid "You have not issued any credit batches yet"

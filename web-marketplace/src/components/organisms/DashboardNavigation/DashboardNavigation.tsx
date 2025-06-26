@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -48,7 +49,7 @@ export const DashboardNavigation = ({
 
   return (
     <nav
-      aria-label="Dashboard side navigation"
+      aria-label={_(msg`Dashboard side navigation`)}
       className={cn(
         NAV_BASE_CLASSES,
         collapsed ? 'w-[100px] px-2 pt-[27px] pb-20' : 'w-[263px]',
@@ -60,7 +61,7 @@ export const DashboardNavigation = ({
         type="button"
         onClick={onCloseMobile}
         className="absolute top-[6px] right-3 block md:hidden p-1 bg-transparent border-none rounded-full hover:bg-bc-neutral-200 cursor-pointer"
-        aria-label="Close menu"
+        aria-label={_(msg`Close menu`)}
       >
         <CloseIcon className="h-6 w-6 text-bc-neutral-500" />
       </button>
@@ -70,7 +71,9 @@ export const DashboardNavigation = ({
         type="button"
         onClick={() => setCollapsed(!collapsed)}
         className={COLLAPSE_BUTTON_CLASSES}
-        aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        aria-label={
+          collapsed ? _(msg`Expand sidebar`) : _(msg`Collapse sidebar`)
+        }
         aria-pressed={collapsed}
       >
         <DoubleBreadcrumbLeftIcon

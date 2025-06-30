@@ -20,6 +20,9 @@ const LinkBehavior = React.forwardRef<LinkRef, CombinedLinkProps>(
   },
 );
 
+// eslint-disable-next-line lingui/no-unlocalized-strings
+LinkBehavior.displayName = 'LinkBehavior';
+
 /**
  * Renders a Material UI `Link` - will use Next Link for local links.
  * Defaults to `target='_blank'` for external links.

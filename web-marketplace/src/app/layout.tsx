@@ -12,7 +12,7 @@ import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 
 import { LedgerProviderWithWallet } from 'ledger';
 import { AuthProvider } from 'lib/auth/auth';
-// import { IS_TERRASOS } from 'lib/env';
+import { IS_TERRASOS } from 'lib/env';
 import { WalletProvider } from 'lib/wallet/wallet';
 
 import PageLoader from 'components/atoms/PageLoader';

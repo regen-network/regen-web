@@ -351,60 +351,58 @@ export const getRegenRoutes = ({
           <Route path="certificate/:id" element={<CertificatePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
+
+        <Route
+          path="dashboard"
+          element={<KeplrOrAuthRoute component={Dashboard} />}
+          errorElement={<ErrorPage />}
+        >
+          <Route
+            index
+            element={<Navigate to={address ? 'portfolio' : 'projects'} />}
+          />
+          <Route
+            path="portfolio"
+            element={<KeplrRoute component={MyEcocredits} />}
+          />
+          <Route
+            path="portfolio/bridge"
+            element={<KeplrRoute component={MyBridge} />}
+          >
+            <Route index element={<MyBridgableEcocreditsTable />} />
+            <Route path="bridgable" element={<MyBridgableEcocreditsTable />} />
+            <Route path="bridged" element={<MyBridgedEcocreditsTable />} />
+          </Route>
+          <Route
+            path="projects"
+            element={<KeplrOrAuthRoute component={MyProjects} />}
+          />
+          <Route
+            path="credit-classes"
+            element={<KeplrRoute component={MyCreditClasses} />}
+          />
+          <Route
+            path="credit-batches"
+            element={<KeplrRoute component={MyCreditBatches} />}
+          />
+          <Route
+            path="profile"
+            element={<AuthRoute component={DashboardEditMain} />}
+          />
+          <Route
+            path="settings"
+            element={<AuthRoute component={DashboardEditSettings} />}
+          />
+          <Route
+            path="my-orders"
+            element={<KeplrOrAuthRoute component={Orders} />}
+          />
+          <Route path="sell" element={<AuthRoute component={Sell} />} />
+        </Route>
+
         <Route path="connect-wallet" element={<ConnectWalletPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="faucet" element={<Faucet />} />
-      </Route>
-
-      {/* Dashboard routes WITHOUT header/footer */}
-      <Route
-        path="dashboard"
-        element={<KeplrOrAuthRoute component={Dashboard} />}
-        errorElement={<ErrorPage />}
-      >
-        <Route
-          index
-          element={<Navigate to={address ? 'portfolio' : 'projects'} />}
-        />
-        {/* Dashboard sections */}
-        <Route
-          path="portfolio"
-          element={<KeplrRoute component={MyEcocredits} />}
-        />
-        <Route
-          path="portfolio/bridge"
-          element={<KeplrRoute component={MyBridge} />}
-        >
-          <Route index element={<MyBridgableEcocreditsTable />} />
-          <Route path="bridgable" element={<MyBridgableEcocreditsTable />} />
-          <Route path="bridged" element={<MyBridgedEcocreditsTable />} />
-        </Route>
-        <Route
-          path="projects"
-          element={<KeplrOrAuthRoute component={MyProjects} />}
-        />
-        <Route
-          path="credit-classes"
-          element={<KeplrRoute component={MyCreditClasses} />}
-        />
-        <Route
-          path="credit-batches"
-          element={<KeplrRoute component={MyCreditBatches} />}
-        />
-        {/* Profile sections */}
-        <Route
-          path="profile"
-          element={<AuthRoute component={DashboardEditMain} />}
-        />
-        <Route
-          path="settings"
-          element={<AuthRoute component={DashboardEditSettings} />}
-        />
-        <Route
-          path="my-orders"
-          element={<KeplrOrAuthRoute component={Orders} />}
-        />
-        <Route path="sell" element={<AuthRoute component={Sell} />} />
       </Route>
     </>,
   );

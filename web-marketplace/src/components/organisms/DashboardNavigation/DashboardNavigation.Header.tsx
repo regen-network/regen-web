@@ -10,6 +10,8 @@ import { Subtitle } from 'web-components/src/components/typography/Subtitle';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { AccountType } from 'generated/graphql';
+
 import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 
 import useClickOutside from '../../../utils/hooks/useClickOutside';
@@ -29,17 +31,25 @@ export const DashboardNavHeader = ({
   collapsed = false,
   onViewProfileClick,
 }: Props) => {
-  const { name, address, image } = activeAccount;
+  const { name, address, image, id } = activeAccount;
   const avatarSrc =
     image ||
     getDefaultAvatar({
       ...activeAccount,
       type:
         activeAccount.type === 'user'
-          ? (window as any).AccountType?.User || 'USER'
-          : (window as any).AccountType?.Org || 'ORG',
+          ? AccountType.User
+          : AccountType.Organization,
     });
-  const short = `${address.slice(0, 9)}…${address.slice(-6)}`;
+
+  const isWalletAddress =
+    address && (address.startsWith('regen') || address.length > 20);
+
+  const short = isWalletAddress
+    ? `${address.slice(0, 9)}…${address.slice(-6)}`
+    : address;
+  const canCopy = isWalletAddress;
+
   const canSwitch = accounts.length > 1;
   const { _ } = useLingui();
 
@@ -78,30 +88,34 @@ export const DashboardNavHeader = ({
             )}
           </button>
 
+          {/* Address/email display */}
           <div className="group flex items-center gap-3">
-            <CopyButton
-              className="group/copy flex items-center gap-3"
-              content={address}
-              toastText={_(COPIED)}
-              iconClassName="h-[14px] w-[14px] text-bc-neutral-500 group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
-              tooltipText={''}
-            >
-              <Body
-                size="xs"
-                className="text-sc-text-sub-header group-hover:text-sc-text-paragraph group-hover:underline group-hover/copy:text-sc-text-paragraph group-hover/copy:underline cursor-pointer"
-                onClick={() => navigator.clipboard.writeText(address)}
+            {canCopy ? (
+              <CopyButton
+                className="group/copy flex items-center gap-3"
+                content={address}
+                toastText={_(COPIED)}
+                iconClassName="h-[14px] w-[14px] text-bc-neutral-500 group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
+                tooltipText={''}
               >
-                {short}
+                <Body
+                  size="xs"
+                  className="text-sc-text-sub-header group-hover:text-sc-text-paragraph group-hover:underline group-hover/copy:text-sc-text-paragraph group-hover/copy:underline cursor-pointer"
+                >
+                  {short}
+                </Body>
+              </CopyButton>
+            ) : (
+              <Body size="xs" className="text-sc-text-sub-header">
+                {address} {/* Show email as-is */}
               </Body>
-            </CopyButton>
+            )}
           </div>
 
           <button
             type="button"
             className="mt-[4px] mb-[4px] flex items-center gap-[4px] text-[12px] bg-transparent border-none p-0 text-left cursor-pointer group hover:text-sc-text-paragraph"
-            onClick={() =>
-              onViewProfileClick?.('/profiles/' + (address || activeAccount.id))
-            }
+            onClick={() => onViewProfileClick?.('/profiles/' + (address || id))}
           >
             <Subtitle className="underline text-[12px] text-bc-neutral-400 group-hover:text-sc-text-paragraph transition-colors">
               <Trans>View public profile</Trans>
@@ -114,7 +128,7 @@ export const DashboardNavHeader = ({
       {open && (
         <AccountSwitcherDropdown
           accounts={accounts}
-          activeId={activeAccount.id}
+          activeId={id}
           onSelect={id => {
             setOpen(false);
             if (id !== activeAccount.id) onAccountSelect?.(id);

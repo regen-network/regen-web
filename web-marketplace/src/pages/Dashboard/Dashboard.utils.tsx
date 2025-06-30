@@ -98,7 +98,10 @@ export const getDefaultAvatar = (account?: Maybe<Pick<Account, 'type'>>) => {
 
   return defaultAvatar;
 };
-export const getProfileUrl = (account: { addr?: string; id?: string }) => {
+export const getProfileUrl = (account: {
+  addr?: string | null;
+  id?: string | null;
+}) => {
   const identifier = account.addr || account.id;
   return `/profiles/${identifier}`;
 };

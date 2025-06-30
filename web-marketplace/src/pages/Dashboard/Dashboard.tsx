@@ -28,7 +28,9 @@ import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
 import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
+import { getAddress } from 'components/organisms/RegistryLayout/RegistryLayout.utils';
 
+import { NavigationProvider } from '../../components/organisms/DashboardNavigation/contexts/NavigationContext';
 import {
   BRIDGE,
   PERSONAL_ACCOUNT,
@@ -36,20 +38,28 @@ import {
   PORTFOLIO,
   PORTFOLIO_TABS_ARIA_LABEL,
 } from './Dashboard.constants';
-import { getActivePortfolioTab, getPortfolioTabs } from './Dashboard.utils';
+import {
+  getActivePortfolioTab,
+  getPortfolioTabs,
+  getWalletAddress,
+} from './Dashboard.utils';
 import { ViewProfileButton } from './Dashboard.ViewProfileButton';
+import { useBridgeAvailability } from './hooks/useBridgeAvailabilty';
+import { useOrdersAvailability } from './hooks/useOrdersAvailability';
 import { usePathSection } from './hooks/usePathSection';
 
 export const Dashboard = () => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { accountChanging, disconnect, loginDisabled } = useWallet();
-  const { loading, activeAccount, authenticatedAccounts } = useAuth();
+  const { accountChanging, disconnect, loginDisabled, wallet } = useWallet(); // Add wallet
+  const { loading, activeAccount, authenticatedAccounts, privActiveAccount } =
+    useAuth(); // Add privActiveAccount
 
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
     string | undefined
   >(undefined);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(false); // Move this to Dashboard level
   const setIsProfileEditDirtyref = useSetAtom(isProfileEditDirtyRef);
   const isDirtyRef = useRef<boolean>(false);
   const navigate = useNavigate();
@@ -129,189 +139,211 @@ export const Dashboard = () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname]);
 
+  const resolvedAddress = useMemo(() => {
+    if (!activeAccount || !wallet?.address) return '';
+
+    return getAddress({
+      walletAddress: getWalletAddress({ activeAccount, wallet }),
+      email: privActiveAccount?.email,
+    });
+  }, [activeAccount, wallet, privActiveAccount?.email]);
+
+  const { hasOrders, isLoading: ordersLoading } = useOrdersAvailability();
+  const { hasAnyBridgeCredits, isLoading: bridgeLoading } =
+    useBridgeAvailability();
+
   if (!activeAccount) return null;
 
+  const hasWalletAddress = !!wallet?.address;
+
   return (
-    <div className="bg-grey-100">
-      <div className="relative md:flex md:min-h-screen">
-        {/* Mobile Header */}
-        <DashboardNavigationMobileHeader
-          activeAccount={{
-            ...activeAccount,
-            address: activeAccount.addr ?? '',
-            type: activeAccount.type === 'USER' ? 'user' : 'org',
-            image: activeAccount.image || '',
-          }}
-          onMenuClick={() => setMobileMenuOpen(true)}
-          mobileMenuOpen={mobileMenuOpen}
-        />
-
-        {/* Mobile overlay with blur */}
-        {mobileMenuOpen && (
-          <div
-            className="md:hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-30"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-        )}
-
-        {/* Left sidebar navigation */}
-        <div className="md:sticky md:top-0 md:h-screen">
-          <DashboardNavigation
-            currentPath={section ?? ''}
-            onNavItemClick={onNavClick}
-            isIssuer={isIssuer}
-            loginDisabled={loginDisabled}
+    <NavigationProvider collapsed={collapsed}>
+      <div className="bg-grey-100 min-h-screen">
+        <div className="relative md:flex md:min-h-screen">
+          {/* Mobile Header */}
+          <DashboardNavigationMobileHeader
+            activeAccount={{
+              ...activeAccount,
+              address: resolvedAddress || '',
+              type: activeAccount.type === 'USER' ? 'user' : 'org',
+              image: activeAccount.image || '',
+            }}
+            onMenuClick={() => setMobileMenuOpen(true)}
             mobileMenuOpen={mobileMenuOpen}
-            onLogout={handleLogout}
-            onCloseMobile={() => setMobileMenuOpen(false)}
-            onExitClick={() => {
-              setIsWarningModalOpen(undefined);
-              navigate('/');
-              setMobileMenuOpen(false);
-            }}
-            header={{
-              activeAccount: {
-                ...activeAccount,
-                address: activeAccount.addr ?? '',
-                type: activeAccount.type === 'USER' ? 'user' : 'org',
-                image: activeAccount.image || '',
-              },
-              accounts: (authenticatedAccounts || []).map(account => ({
-                id: account?.id,
-                name: account?.name || '',
-                address: account?.addr || '',
-                type: account?.type === 'USER' ? 'user' : 'org',
-                image: account?.image || '',
-              })),
-              onAccountSelect: (id: string) => {
-                setIsWarningModalOpen(undefined);
-                onAccountSelect(id);
-                setMobileMenuOpen(false);
-              },
-              onViewProfileClick: (path: string) => {
-                setIsWarningModalOpen(undefined);
-                navigate(path);
-                setMobileMenuOpen(false);
-              },
-            }}
           />
-        </div>
 
-        {/* Content area */}
-        <div
-          className={cn(
-            'flex-1 min-w-0 w-full md:w-auto md:pt-0 pt-[25px] transition-all duration-300',
-            mobileMenuOpen && 'md:blur-0 blur-sm',
+          {/* Mobile overlay with blur */}
+          {mobileMenuOpen && (
+            <div
+              className="md:hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-30"
+              onClick={() => setMobileMenuOpen(false)}
+            />
           )}
-        >
+
+          {/* Left sidebar navigation */}
+          <div className="md:sticky md:top-0 md:h-screen">
+            <DashboardNavigation
+              collapsed={collapsed}
+              onToggleCollapse={setCollapsed}
+              currentPath={section ?? ''}
+              onNavItemClick={onNavClick}
+              isIssuer={isIssuer}
+              loginDisabled={loginDisabled}
+              hasWalletAddress={hasWalletAddress}
+              hasOrders={hasOrders || ordersLoading}
+              mobileMenuOpen={mobileMenuOpen}
+              onLogout={handleLogout}
+              onCloseMobile={() => setMobileMenuOpen(false)}
+              onExitClick={() => {
+                setIsWarningModalOpen(undefined);
+                navigate('/');
+                setMobileMenuOpen(false);
+              }}
+              header={{
+                activeAccount: {
+                  ...activeAccount,
+                  address: resolvedAddress || '',
+                  type: activeAccount.type === 'USER' ? 'user' : 'org',
+                  image: activeAccount.image || '',
+                },
+                accounts: (authenticatedAccounts || []).map(account => ({
+                  id: account?.id,
+                  name: account?.name || '',
+                  address: resolvedAddress || '',
+                  type: account?.type === 'USER' ? 'user' : 'org',
+                  image: account?.image || '',
+                })),
+                onAccountSelect: (id: string) => {
+                  setIsWarningModalOpen(undefined);
+                  onAccountSelect(id);
+                  setMobileMenuOpen(false);
+                },
+                onViewProfileClick: (path: string) => {
+                  setIsWarningModalOpen(undefined);
+                  navigate(path);
+                  setMobileMenuOpen(false);
+                },
+              }}
+            />
+          </div>
+
+          {/* Content area */}
           <div
             className={cn(
-              'px-10 py-25 md:py-40 md:px-30 2xl:mx-auto',
-              section === 'profile' || section === 'settings'
-                ? 'max-w-[767px]'
-                : 'max-w-[1400px]',
+              'flex-1 min-w-0 w-full md:w-auto md:pt-0 pt-[25px] transition-all duration-300',
+              mobileMenuOpen && 'md:blur-0 blur-sm',
             )}
           >
-            <Flex
-              sx={{
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-              className={cn('w-full', section ? 'flex' : 'hidden')}
+            <div
+              className={cn(
+                'px-10 py-25 md:py-40 md:px-30 2xl:mx-auto',
+                section === 'profile' || section === 'settings'
+                  ? 'max-w-[767px]'
+                  : 'max-w-[1400px]',
+              )}
             >
               <Flex
-                justifyContent="space-between"
-                alignContent="center"
-                className="w-full h-50 my-25 md:my-0"
+                sx={{
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+                className={cn('w-full', section ? 'flex' : 'hidden')}
               >
-                <div className="flex flex-col">
-                  {/* Mobile-only subtitle */}
-                  <div className="block md:hidden mb-2">
-                    <span
-                      style={{
-                        fontFamily: 'Mulish',
-                        fontWeight: 800,
-                        fontSize: '10px',
-                        lineHeight: '100%',
-                        letterSpacing: '1px',
-                        textTransform: 'uppercase',
-                      }}
-                      className="text-sc-text-sub-header"
+                <Flex
+                  justifyContent="space-between"
+                  alignContent="center"
+                  className="w-full h-50 my-25 md:my-0"
+                >
+                  <div className="flex flex-col">
+                    {/* Mobile-only subtitle */}
+                    <div className="block md:hidden mb-2">
+                      <span
+                        style={{
+                          fontFamily: 'Mulish',
+                          fontWeight: 800,
+                          fontSize: '10px',
+                          lineHeight: '100%',
+                          letterSpacing: '1px',
+                          textTransform: 'uppercase',
+                        }}
+                        className="text-sc-text-sub-header"
+                      >
+                        {section === 'settings'
+                          ? _(PERSONAL_ACCOUNT)
+                          : _(PERSONAL_DASHBOARD)}
+                      </span>
+                    </div>
+
+                    {/* Main title */}
+                    <Title
+                      variant="h1"
+                      className="text-[21px] md:text-[32px] leading-[1.4]"
                     >
-                      {section === 'settings'
-                        ? _(PERSONAL_ACCOUNT)
-                        : _(PERSONAL_DASHBOARD)}
-                    </span>
+                      {pathname.includes('/portfolio')
+                        ? _(PORTFOLIO)
+                        : startCase(section)}
+                    </Title>
                   </div>
 
-                  {/* Main title */}
-                  <Title
-                    variant="h1"
-                    className="text-[21px] md:text-[32px] leading-[1.4]"
-                  >
-                    {pathname.includes('/portfolio')
-                      ? _(PORTFOLIO)
-                      : startCase(section)}
-                  </Title>
-                </div>
+                  {(section === 'credit-classes' ||
+                    section === 'projects' ||
+                    section === 'portfolio' ||
+                    section === 'credit-batches' || // Add this line
+                    section === 'profile') && (
+                    <ViewProfileButton
+                      setIsWarningModalOpen={setIsWarningModalOpen}
+                      section={section}
+                      activeAccount={
+                        activeAccount
+                          ? {
+                              ...activeAccount,
+                              addr: activeAccount.addr ?? undefined,
+                            }
+                          : undefined
+                      }
+                    />
+                  )}
+                </Flex>
 
-                {(section === 'credit-classes' ||
-                  section === 'projects' ||
-                  section === 'portfolio' ||
-                  section === 'credit-batches' || // Add this line
-                  section === 'profile') && (
-                  <ViewProfileButton
-                    setIsWarningModalOpen={setIsWarningModalOpen}
-                    section={section}
-                    activeAccount={
-                      activeAccount
-                        ? {
-                            ...activeAccount,
-                            addr: activeAccount.addr ?? undefined,
-                          }
-                        : undefined
-                    }
-                  />
-                )}
+                {/* Portfolio tabs section - only show if user has bridge credits */}
+                {(hasAnyBridgeCredits || bridgeLoading) &&
+                  (section === 'portfolio' ||
+                    pathname.includes('/portfolio/bridge')) && (
+                    <div className="w-full mb-20 md:mb-8 lg:mb-0">
+                      <IconTabs
+                        aria-label={_(PORTFOLIO_TABS_ARIA_LABEL)}
+                        tabs={portfolioTabs}
+                        activeTab={activePortfolioTab}
+                        linkComponent={Link}
+                        mobileFullWidth
+                      />
+                    </div>
+                  )}
+
+                <WithLoader isLoading={accountChanging || loading}>
+                  <div className="rounded-md border border-grey-200 bg-grey-100 lg:mt-30 w-full">
+                    <Outlet context={dashboardContextValue} />
+                  </div>
+                </WithLoader>
               </Flex>
-
-              {/* Portfolio tabs section */}
-              {(section === 'portfolio' ||
-                pathname.includes('/portfolio/bridge')) && (
-                <div className="w-full mb-20 md:mb-8 lg:mb-0">
-                  <IconTabs
-                    aria-label={_(PORTFOLIO_TABS_ARIA_LABEL)}
-                    tabs={portfolioTabs}
-                    activeTab={activePortfolioTab}
-                    linkComponent={Link}
-                    mobileFullWidth
-                  />
-                </div>
-              )}
-
-              <WithLoader isLoading={accountChanging || loading}>
-                <div className="rounded-md border border-grey-200 bg-grey-100 lg:mt-30 w-full">
-                  <Outlet context={dashboardContextValue} />
-                </div>
-              </WithLoader>
-            </Flex>
+            </div>
           </div>
         </div>
-      </div>
 
-      <SaveChangesWarningModal
-        open={!!isWarningModalOpen}
-        title={_(DISCARD_CHANGES_TITLE)}
-        bodyText={_(DISCARD_CHANGES_BODY)}
-        buttonText={_(DISCARD_CHANGES_BUTTON)}
-        navigate={() => {
-          if (isWarningModalOpen) navigate(isWarningModalOpen);
-          isDirtyRef.current = false;
-        }}
-        onClose={() => {
-          setIsWarningModalOpen(undefined);
-        }}
-      />
-    </div>
+        <SaveChangesWarningModal
+          open={!!isWarningModalOpen}
+          title={_(DISCARD_CHANGES_TITLE)}
+          bodyText={_(DISCARD_CHANGES_BODY)}
+          buttonText={_(DISCARD_CHANGES_BUTTON)}
+          navigate={() => {
+            if (isWarningModalOpen) navigate(isWarningModalOpen);
+            isDirtyRef.current = false;
+          }}
+          onClose={() => {
+            setIsWarningModalOpen(undefined);
+          }}
+        />
+      </div>
+    </NavigationProvider>
   );
 };

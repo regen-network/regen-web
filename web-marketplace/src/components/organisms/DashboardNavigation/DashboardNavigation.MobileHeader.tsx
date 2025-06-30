@@ -53,9 +53,9 @@ export const DashboardNavigationMobileHeader = ({
       </button>
 
       {/* User Info */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-5">
         <UserAvatar src={avatarSrc} alt={name} size="sm" />
-        <Subtitle className="text-bc-neutral-900" size="sm">
+        <Subtitle className="text-bc-neutral-900" size="lg">
           {name || _(UNNAMED)}
         </Subtitle>
       </div>

@@ -8,7 +8,7 @@ import { DashboardNavFooterProps } from './DashboardNavigation.types';
 export const DashboardNavFooter = ({
   onExitClick,
 }: DashboardNavFooterProps) => (
-  <div className="flex flex-col gap-10 items-center justify-between px-3 py-4">
+  <div className="flex flex-col gap-10 items-center justify-between px-3 pb-4 pt-10">
     {/* Logo area */}
     <RegistryIcon
       className="h-[53px] w-[80px] text-bc-neutral-400"

@@ -73,16 +73,6 @@ const getUserSections = (
   loginDisabled: boolean,
 ): DashboardNavigationSection[] => [
   {
-    heading: _(msg`Orders`),
-    items: [
-      {
-        label: _(msg`My orders`),
-        icon: <ShoppingBagIcon linearGradient />,
-        path: 'my-orders',
-      },
-    ],
-  },
-  {
     heading: _(msg`Profile`),
     items: [
       {
@@ -156,20 +146,41 @@ const getCreditIssuanceSection = (
   ],
 });
 
+const getOrdersSection = (
+  _: TranslatorType,
+  collapsed: boolean,
+): DashboardNavigationSection => ({
+  heading: collapsed ? _(msg`Orders`) : _(msg`Orders`),
+  items: [
+    {
+      label: _(msg`Orders`),
+      icon: <ShoppingBagIcon linearGradient />,
+      path: 'my-orders',
+    },
+  ],
+});
+
 export function getDashboardNavigationSections(
   _: TranslatorType,
   accountType: 'user' | 'org',
   loginDisabled: boolean,
   collapsed = false,
   isIssuer = false,
+  hasWalletAddress = true,
+  hasOrders = true,
 ): DashboardNavigationSection[] {
-  const sections = [
-    getCreditsSection(_, collapsed),
-    getProjectsSection(_, collapsed),
-  ];
+  const sections = [];
+  if (hasWalletAddress) {
+    sections.push(getCreditsSection(_, collapsed));
+  }
+
+  sections.push(getProjectsSection(_, collapsed));
 
   if (isIssuer) {
     sections.push(getCreditIssuanceSection(_, collapsed));
+  }
+  if (hasOrders && hasWalletAddress) {
+    sections.push(getOrdersSection(_, collapsed));
   }
 
   if (accountType === 'user') {

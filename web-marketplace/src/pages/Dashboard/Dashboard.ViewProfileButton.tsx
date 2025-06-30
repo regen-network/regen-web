@@ -5,8 +5,10 @@ import { useAtom } from 'jotai';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 
+import { Account } from 'generated/graphql';
 import { UseStateSetter } from 'types/react/use-state';
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
+import { useWallet } from 'lib/wallet/wallet';
 
 import {
   NO_ACTIVE_ACCOUNT,
@@ -17,7 +19,10 @@ import { getProfileUrl } from './Dashboard.utils';
 
 type Props = {
   setIsWarningModalOpen: UseStateSetter<string | undefined>;
-  activeAccount?: { addr?: string; id?: string; [key: string]: any } | null;
+  activeAccount?: Pick<
+    Account,
+    'addr' | 'id' | 'name' | 'type' | 'image'
+  > | null;
   section: string;
 };
 
@@ -29,9 +34,13 @@ export const ViewProfileButton = ({
   const { _ } = useLingui();
   const [isDirtyRef] = useAtom(isProfileEditDirtyRef);
   const navigate = useNavigate();
+  const { wallet } = useWallet();
 
   const handleViewProfile = () => {
-    if (!activeAccount) {
+    const profileAccount =
+      activeAccount || (wallet?.address ? { addr: wallet.address } : null);
+
+    if (!profileAccount) {
       console.warn(NO_ACTIVE_ACCOUNT);
       return;
     }
@@ -40,22 +49,22 @@ export const ViewProfileButton = ({
 
     switch (section) {
       case 'credit-classes':
-        profileUrl = `${getProfileUrl(activeAccount)}/credit-classes`;
+        profileUrl = `${getProfileUrl(profileAccount)}/credit-classes`;
         break;
       case 'projects':
-        profileUrl = `${getProfileUrl(activeAccount)}/projects`;
+        profileUrl = `${getProfileUrl(profileAccount)}/projects`;
         break;
       case 'credit-batches':
-        profileUrl = `${getProfileUrl(activeAccount)}/credit-batches`;
+        profileUrl = `${getProfileUrl(profileAccount)}/credit-batches`;
         break;
       case 'portfolio':
-        profileUrl = `${getProfileUrl(activeAccount)}/portfolio`;
+        profileUrl = `${getProfileUrl(profileAccount)}/portfolio`;
         break;
       case 'profile':
-        profileUrl = `${getProfileUrl(activeAccount)}/portfolio`;
+        profileUrl = `${getProfileUrl(profileAccount)}/portfolio`;
         break;
       default:
-        profileUrl = getProfileUrl(activeAccount);
+        profileUrl = getProfileUrl(profileAccount);
         break;
     }
 
@@ -66,7 +75,7 @@ export const ViewProfileButton = ({
     }
   };
 
-  if (!activeAccount) {
+  if (!activeAccount && !wallet?.address) {
     return null;
   }
 

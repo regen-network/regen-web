@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -31,8 +31,17 @@ export const DashboardNavigation = ({
   isIssuer,
   loginDisabled,
   mobileMenuOpen,
-}: DashboardNavigationProps & { mobileMenuOpen?: boolean }) => {
-  const [collapsed, setCollapsed] = useState(false);
+  hasWalletAddress,
+  hasOrders,
+  collapsed,
+  onToggleCollapse,
+}: DashboardNavigationProps & {
+  mobileMenuOpen?: boolean;
+  hasWalletAddress?: boolean;
+  hasOrders?: boolean;
+  collapsed: boolean;
+  onToggleCollapse: (collapsed: boolean) => void;
+}) => {
   const { _ } = useLingui();
 
   const sections = useMemo(
@@ -43,8 +52,18 @@ export const DashboardNavigation = ({
         loginDisabled || false,
         collapsed,
         isIssuer || false,
+        hasWalletAddress ?? true,
+        hasOrders ?? true,
       ),
-    [_, activeAccount.type, collapsed, isIssuer, loginDisabled],
+    [
+      _,
+      activeAccount.type,
+      collapsed,
+      isIssuer,
+      loginDisabled,
+      hasWalletAddress,
+      hasOrders,
+    ],
   );
 
   const handleItemClick = (path: string) => {
@@ -62,7 +81,7 @@ export const DashboardNavigation = ({
       className={cn(
         NAV_BASE_CLASSES,
         collapsed ? 'w-[100px] px-2 pt-[27px] pb-20' : 'w-[263px]',
-        !collapsed && 'px-20 md:px-30 pt-30 pb-20',
+        !collapsed && 'px-20 md:px- pt-30 pb-20',
         'md:block',
         'fixed md:relative top-0 left-0 h-full z-50 transform transition-transform duration-300 ease-in-out',
         mobileMenuOpen || false
@@ -84,7 +103,7 @@ export const DashboardNavigation = ({
       {/* Collapse toggle button */}
       <button
         type="button"
-        onClick={() => setCollapsed(!collapsed)}
+        onClick={() => onToggleCollapse(!collapsed)}
         className={cn(COLLAPSE_BUTTON_CLASSES)}
         aria-label={collapsed ? _(EXPAND_SIDEBAR) : _(COLLAPSE_SIDEBAR)}
         aria-pressed={collapsed}
@@ -160,7 +179,6 @@ export const DashboardNavigation = ({
         })}
       </div>
 
-      {/* Footer - should now stick to bottom */}
       {!collapsed && <DashboardNavFooter onExitClick={onExitClick} />}
     </nav>
   );

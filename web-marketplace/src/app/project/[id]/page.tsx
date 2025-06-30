@@ -9,7 +9,6 @@ import { getRPCQueryClient } from 'app/makeRPCQueryClient';
 import { redirect } from 'next/navigation';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
-import { QueryClient as RPCQueryClient } from 'ledger';
 import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQuery/getProjectQuery';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
@@ -31,18 +30,16 @@ interface ProjectPageProps {
 
 // getProject will be used twice, but execute only once
 const getProject = cache(async (id: string) => {
-  const isOnChainId = getIsOnChainId(id);
-  const isOffChainUuid = getIsUuid(id);
-  let onChainProjectId: Maybe<string> | undefined;
-  let offChainProject: Maybe<ProjectFieldsFragment> | undefined;
-  let slug: Maybe<string> | undefined;
-  const queryClient = new QueryClient();
-  let rpcQueryClient: RPCQueryClient | undefined;
-
   try {
-    const apolloClient = await getClient();
-    rpcQueryClient = await getRPCQueryClient();
+    const isOnChainId = getIsOnChainId(id);
+    const isOffChainUuid = getIsUuid(id);
+    let onChainProjectId: Maybe<string> | undefined;
+    let offChainProject: Maybe<ProjectFieldsFragment> | undefined;
+    let slug: Maybe<string> | undefined;
 
+    const queryClient = new QueryClient();
+    const apolloClient = await getClient();
+    const rpcQueryClient = await getRPCQueryClient();
     if (isOnChainId) {
       const offChainProjectByIdData = await queryClient.fetchQuery(
         getProjectByOnChainIdQuery({
@@ -104,14 +101,7 @@ const getProject = cache(async (id: string) => {
     };
   } catch (error) {
     // eslint-disable-next-line lingui/no-unlocalized-strings, no-console
-    console.error('Error fetching project:', error);
-    return {
-      projectMetadata: null,
-      projectPageMetadata: null,
-      slug: null,
-      rpcQueryClient,
-      queryClient,
-    };
+    throw error;
   }
 });
 

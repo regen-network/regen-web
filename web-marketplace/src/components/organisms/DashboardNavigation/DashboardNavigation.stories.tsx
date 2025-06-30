@@ -70,6 +70,10 @@ export const Default: StoryFn<typeof DashboardNavigation> = () => {
         onViewProfileClick: path =>
           action('navigation')(`view-profile: ${path}`),
       }}
+      collapsed={false}
+      onToggleCollapse={function (collapsed: boolean): void {
+        throw new Error('Function not implemented.');
+      }}
     />
   );
 };
@@ -97,6 +101,10 @@ export const NoOrganization: StoryFn<typeof DashboardNavigation> = () => {
         onAccountSelect: () => {},
         onViewProfileClick: path =>
           action('navigation')(`view-profile: ${path}`),
+      }}
+      collapsed={false}
+      onToggleCollapse={function (collapsed: boolean): void {
+        throw new Error('Function not implemented.');
       }}
     />
   );

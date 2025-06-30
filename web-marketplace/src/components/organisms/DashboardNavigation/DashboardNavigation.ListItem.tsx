@@ -67,8 +67,8 @@ export const DashboardNavigationListItem: React.FC<NavigationListItemProps> = ({
       {!collapsed && (
         <div className="flex items-center justify-between w-full">
           <Subtitle
-            size="sm"
             className={cn(
+              'text-[16px] md:text-[14px]',
               isLogout ? 'text-sc-text-sub-header' : '',
               !item.disabled && 'group-hover:font-bold transition-all',
               item.disabled && 'group-hover:underline',

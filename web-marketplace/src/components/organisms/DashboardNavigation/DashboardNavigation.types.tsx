@@ -4,6 +4,7 @@ export interface AccountOption {
   address: string;
   image: string;
   type: 'user' | 'org';
+  displayName?: string;
 }
 
 export type DashboardNavHeaderData = {
@@ -36,6 +37,7 @@ export interface DashboardNavigationProps {
   onExitClick?: () => void;
   isIssuer?: boolean;
   loginDisabled?: boolean;
+  hasWalletAddress?: boolean;
 }
 
 export interface NavigationListItemProps {

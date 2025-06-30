@@ -79,7 +79,7 @@ export const getBatchesTotal = (
       {
         cancelledAmount: 0,
         retiredAmount: 0,
-        tradableAmount: creditsForSale ?? 0,
+        tradableAmount: 0,
         forSaleAmount: creditsForSale ?? 0,
       },
     );

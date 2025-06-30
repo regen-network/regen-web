@@ -50,6 +50,7 @@ export function ProjectBatchTotals({
     ? isSoldOut
     : !hasAvailableCredits;
 
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   const tooltipClassName = IS_TERRASOS ? 'w-[17px] h-[17px]' : '';
   return (
     <div
@@ -72,9 +73,7 @@ export function ProjectBatchTotals({
         number={
           isComplianceProject
             ? totals.registeredAmount
-            : totals.tradableAmount +
-              totals.retiredAmount +
-              totals.forSaleAmount
+            : totals.tradableAmount + totals.retiredAmount
         }
         formatNumberOptions={formatNumberOptions}
         icon={<CreditsIssuedIcon />}

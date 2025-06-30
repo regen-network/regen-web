@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLingui } from '@lingui/react';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -43,6 +43,8 @@ export const DashboardNavigation = ({
   onToggleCollapse: (collapsed: boolean) => void;
 }) => {
   const { _ } = useLingui();
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showFooterShadow, setShowFooterShadow] = useState(false);
 
   const sections = useMemo(
     () =>
@@ -66,6 +68,32 @@ export const DashboardNavigation = ({
     ],
   );
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const container = scrollContainerRef.current;
+      if (!container) return;
+
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      const hasScrollableContent = scrollHeight > clientHeight;
+      const isAtBottom = Math.abs(scrollHeight - clientHeight - scrollTop) < 5;
+
+      setShowFooterShadow(hasScrollableContent && !isAtBottom);
+    };
+
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      const resizeObserver = new ResizeObserver(handleScroll);
+      resizeObserver.observe(container);
+      setTimeout(handleScroll, 100);
+
+      return () => {
+        container.removeEventListener('scroll', handleScroll);
+        resizeObserver.disconnect();
+      };
+    }
+  }, [sections]);
+
   const handleItemClick = (path: string) => {
     if (path === 'logout') {
       onLogout?.();
@@ -81,7 +109,7 @@ export const DashboardNavigation = ({
       className={cn(
         NAV_BASE_CLASSES,
         collapsed ? 'w-[100px] px-2 pt-[27px] pb-20' : 'w-[263px]',
-        !collapsed && 'px-20 md:px- pt-30 pb-20',
+        !collapsed && 'px-20 md:px-20 pt-30 pb-20', // Keep existing padding
         'md:block',
         'fixed md:relative top-0 left-0 h-full z-50 transform transition-transform duration-300 ease-in-out',
         mobileMenuOpen || false
@@ -128,6 +156,7 @@ export const DashboardNavigation = ({
 
       {/* Navigation sections */}
       <div
+        ref={scrollContainerRef}
         className="flex-1 overflow-y-auto min-h-0"
         style={{
           scrollbarWidth: 'none',
@@ -179,7 +208,16 @@ export const DashboardNavigation = ({
         })}
       </div>
 
-      {!collapsed && <DashboardNavFooter onExitClick={onExitClick} />}
+      {!collapsed && (
+        <div
+          className={cn(
+            '-mx-20 md:-mx-20',
+            showFooterShadow && 'shadow-[0_-2px_5px_0.5px_rgba(0,0,0,0.05)]',
+          )}
+        >
+          <DashboardNavFooter onExitClick={onExitClick} />
+        </div>
+      )}
     </nav>
   );
 };

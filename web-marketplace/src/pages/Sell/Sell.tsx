@@ -3,8 +3,7 @@ import { UserSellOrders } from 'components/organisms/UserSellOrders/UserSellOrde
 
 const Sell = () => {
   return (
-    <section className="overflow-x-auto bg-transparent">
-      {/* TODO:  If the member is an Editor or Viewer, <SellerSetupAccount /> should be hidden */}
+    <section className="overflow-x-auto bg-transparent shadow-[0_2px_5px_0.5px_rgba(0,0,0,0.05)]">
       <SellerSetupAccount />
       <UserSellOrders />
     </section>

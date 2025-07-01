@@ -19,7 +19,7 @@ import {
 import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import { Link } from 'components/atoms';
-import { LoginButton } from 'components/organisms/LoginButton/LoginButton';
+import { LoginButton } from 'components/organisms/LoginButton/LoginButton.legacy';
 
 import {
   CARD_BUTTON,

@@ -47,15 +47,17 @@ const BuyersEcologicalCreditCardsSection: React.FC<
               width: { xs: '100%', md: 400 },
             }}
           >
-            <CardMedia
-              src={card.image.src}
-              component="img"
-              alt={card.image.alt}
-              sx={{
-                height: '100%',
-                width: '100%',
-              }}
-            />
+            {card.image.src && (
+              <CardMedia
+                src={card.image.src}
+                component="img"
+                alt={card.image.alt}
+                sx={{
+                  height: '100%',
+                  width: '100%',
+                }}
+              />
+            )}
             <ProgramImageChildren program={card.program} />
           </Box>
         </EcologicalCreditCard>

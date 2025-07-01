@@ -18,21 +18,22 @@ export const batchDetailsLoader =
       return { batch: null, metadata: null };
     }
 
-    const batch = await reactQueryClient.fetchQuery(['batch', batchDenom], () =>
-      getBatchWithSupplyForDenom(batchDenom, rpcQueryClient),
-    );
+    const batch = await reactQueryClient.fetchQuery({
+      queryKey: ['batch', batchDenom],
+      queryFn: () => getBatchWithSupplyForDenom(batchDenom, rpcQueryClient),
+    });
 
     let metadata = null;
     if (batch?.metadata) {
-      metadata = await reactQueryClient.fetchQuery(
-        ['batchMetadata', batch.metadata, languageCode],
-        () =>
+      metadata = await reactQueryClient.fetchQuery({
+        queryKey: ['batchMetadata', batch.metadata, languageCode],
+        queryFn: () =>
           getMetadata({
             iri: batch.metadata,
             client: rpcQueryClient,
             languageCode,
           }),
-      );
+      });
     }
     return { batch, metadata };
   };

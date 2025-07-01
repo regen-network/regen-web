@@ -1,3 +1,5 @@
+import { keepPreviousData } from '@tanstack/react-query';
+
 import { queryDenomTraceByHashes } from 'lib/ibc/transfer/api';
 
 import {
@@ -15,6 +17,6 @@ export const getDenomTraceByHashesQuery = ({
   queryFn: async () => {
     return queryDenomTraceByHashes({ hashes, queryClient });
   },
-  keepPreviousData: true,
+  placeholderData: keepPreviousData,
   ...params,
 });

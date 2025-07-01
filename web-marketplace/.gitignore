@@ -27,3 +27,5 @@ stats.html
 .next
 next-env.d.ts
 dist
+
+tsconfig.tsbuildinfo

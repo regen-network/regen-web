@@ -1,3 +1,4 @@
+'use client';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';

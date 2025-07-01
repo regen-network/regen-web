@@ -36,7 +36,6 @@ export const useProjectMetadataSubmit = ({
         ...OMITTED_METADATA_KEYS,
       ]);
       merge(baseMetadata, parsedMetaData);
-
       if (baseMetadata) {
         await metadataSubmit({
           values: baseMetadata,

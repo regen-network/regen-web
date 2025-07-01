@@ -13,6 +13,7 @@ import { useTracker } from 'lib/tracker/useTracker';
 
 import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 import WithLoader from 'components/atoms/WithLoader';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick.legacy';
 
 import { useProfileData } from '../hooks/useProfileData';
 import { NoProjectsDisplay } from './NoProjectsDisplay';

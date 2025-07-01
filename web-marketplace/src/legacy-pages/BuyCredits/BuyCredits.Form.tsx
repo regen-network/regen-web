@@ -50,7 +50,7 @@ import { ChooseCreditsForm } from 'components/organisms/ChooseCreditsForm/Choose
 import { ChooseCreditsFormSchemaType } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.schema';
 import { CardSellOrder } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.types';
 import { getFilteredCryptoSellOrders } from 'components/organisms/ChooseCreditsForm/ChooseCreditsForm.utils';
-import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData';
+import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData.legacy';
 import { LoginFlow } from 'components/organisms/LoginFlow/LoginFlow';
 import { PaymentInfoForm } from 'components/organisms/PaymentInfoForm/PaymentInfoForm';
 import { defaultStripeOptions } from 'components/organisms/PaymentInfoForm/PaymentInfoForm.constants';

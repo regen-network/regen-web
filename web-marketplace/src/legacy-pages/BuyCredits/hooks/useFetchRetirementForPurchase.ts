@@ -249,9 +249,9 @@ export const useFetchRetirementForPurchase = ({
 
       // Reload crypto orders and balances
       if (wallet?.address && paymentOption === PAYMENT_OPTIONS.CRYPTO) {
-        await reactQueryClient.invalidateQueries(
-          getOrdersByBuyerAddressKey(wallet?.address),
-        );
+        await reactQueryClient.invalidateQueries({
+          queryKey: getOrdersByBuyerAddressKey(wallet?.address),
+        });
         await reactQueryClient.invalidateQueries({
           queryKey: ['balances', wallet?.address], // invalidate all query pages
         });

@@ -111,12 +111,14 @@ const QuoteSection = ({
             {person.role}
           </Box>
         </Box>
-        <Box
-          component="img"
-          src={logo.src}
-          alt={logo.alt}
-          sx={{ maxWidth: 236 }}
-        />
+        {logo.src && (
+          <Box
+            component="img"
+            src={logo.src}
+            alt={logo.alt}
+            sx={{ maxWidth: 236 }}
+          />
+        )}
       </Box>
     </Box>
   );

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useManager } from '@cosmos-kit/react-lite';
 import { useLingui } from '@lingui/react';
 import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
+import { useRouter } from 'next/navigation';
 
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
@@ -32,7 +32,7 @@ export const useLoginData = ({
   const { isIssuer, isLoadingIsIssuer } = useQueryIsIssuer({
     address: activeAccount?.addr,
   });
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const onButtonClick = useCallback(
     (): void => setIsModalOpen(true),
@@ -66,7 +66,7 @@ export const useLoginData = ({
   useEffect(() => {
     if (!isLoadingIsIssuer && isConnectingRef?.current && activeAccountId) {
       if (createProject)
-        navigate(
+        router.push(
           `/project-pages/${DRAFT_ID}/${
             isIssuer ? 'choose-credit-class' : 'basic-info'
           }`,
@@ -79,7 +79,7 @@ export const useLoginData = ({
     isConnectingRef,
     isIssuer,
     isLoadingIsIssuer,
-    navigate,
+    router,
   ]);
 
   return {

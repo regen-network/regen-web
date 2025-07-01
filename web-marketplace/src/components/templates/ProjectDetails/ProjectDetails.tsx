@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+'use client';
+
+import { useCallback, useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
-import { Box, Skeleton, useTheme } from '@mui/material';
+import { Box, CircularProgress, Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import cx from 'classnames';
 import { useAtom, useSetAtom } from 'jotai';
@@ -9,12 +10,12 @@ import { buyFromProjectIdAtom } from 'legacy-pages/BuyCredits/BuyCredits.atoms';
 import { CREATE_POST_DISABLED_TOOLTIP_TEXT } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
 import { SOLD_OUT_TOOLTIP } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
 import { getPriceToDisplay } from 'legacy-pages/Projects/hooks/useProjectsSellOrders.utils';
+import dynamic from 'next/dynamic';
+import { useParams } from 'next/navigation';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { PrefinanceIcon } from 'web-components/src/components/icons/PrefinanceIcon';
 import { Gallery } from 'web-components/src/components/organisms/Gallery/Gallery';
-import SEO from 'web-components/src/components/seo';
-import ProjectMedia from 'web-components/src/components/sliders/ProjectMedia';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import { Project } from 'generated/graphql';
@@ -30,7 +31,6 @@ import { CreditClassMetadataLD, ProjectMetadataLD } from 'lib/db/types/json-ld';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 import { IS_REGEN, IS_TERRASOS } from 'lib/env';
 import { normalizeProjectWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
-import { getGeocodingQuery } from 'lib/queries/react-query/mapbox/getGeocodingQuery/getGeocodingQuery';
 import { getMetadataQuery } from 'lib/queries/react-query/registry-server/getMetadataQuery/getMetadataQuery';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllProjectPageQuery } from 'lib/queries/react-query/sanity/getAllProjectPageQuery/getAllProjectPageQuery';
@@ -38,10 +38,7 @@ import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldO
 import { getTerrasosBookCallQuery } from 'lib/queries/react-query/sanity/getTerrasosBookCallQuery/getTerrasosBookCallQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
-import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
-import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 import { PostFormSchemaType } from 'components/organisms/PostForm/PostForm.schema';
 import { useAllSoldOutProjectsIds } from 'components/organisms/ProjectCardsSection/hooks/useSoldOutProjectsIds';
 import { ProjectStorySection } from 'components/organisms/ProjectStorySection/ProjectStorySection';
@@ -57,35 +54,48 @@ import { GettingStartedResourcesSection } from '../../molecules';
 import { ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';
 import { useGetProject } from './hooks/useGetProject';
-import { useNavigateToSlug } from './hooks/useNavigateToSlug';
-import useSeo from './hooks/useSeo';
 import { useSortedDocuments } from './hooks/useSortedDocuments';
 import { useStakeholders } from './hooks/useStakeholders';
 import { ProjectDetailsBannerCard } from './ProjectDetails.BannerCard';
-import { JURISDICTION_REGEX } from './ProjectDetails.constant';
 import { DataStream } from './ProjectDetails.DataStream';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
-import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
 import { ProjectDetailsStakeholders } from './ProjectDetails.Stakeholders';
-import { getMediaBoxStyles } from './ProjectDetails.styles';
 import {
   findSanityCreditClass,
   formatOtcCardData,
   getProjectGalleryPhotos,
-  parseMedia,
   parseOffChainProject,
 } from './ProjectDetails.utils';
 import { ProjectDetailsTableTabs } from './tables/ProjectDetails.TableTabs';
 
+const MoreProjects = dynamic(
+  () => import('./ProjectDetails.MoreProjects').then(mod => mod.MoreProjects),
+  {
+    loading: () => <CircularProgress color="secondary" />,
+  },
+);
+const PostFlow = dynamic(
+  () =>
+    import('components/organisms/PostFlow/PostFlow').then(mod => mod.PostFlow),
+  {
+    loading: () => <CircularProgress color="secondary" />,
+    ssr: false,
+  },
+);
+const Media = dynamic(
+  () => import('./ProjectDetails.Media').then(mod => mod.Media),
+  {
+    loading: () => <Skeleton className="h-[224px] sm:h-[400px]" />,
+  },
+);
+
 function ProjectDetails(): JSX.Element {
   const { _ } = useLingui();
-  const theme = useTheme();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { projectId } = useParams();
+  const { id: projectId } = useParams<{ id: string }>();
   const { queryClient } = useLedger();
   const { isConnected, isKeplrMobileWeb, wallet, loginDisabled } = useWallet();
 
-  const location = useLocation();
   const { activeAccount } = useAuth();
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState(false);
   const [draftPost, setDraftPost] = useState<
@@ -126,7 +136,6 @@ function ProjectDetails(): JSX.Element {
   );
 
   const setBuyFromProjectId = useSetAtom(buyFromProjectIdAtom);
-  const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
 
   const {
     sanityProject,
@@ -147,29 +156,20 @@ function ProjectDetails(): JSX.Element {
     loadingAnchoredMetadata,
     projectResponse,
     loadingDb,
-  } = useGetProject();
+  } = useGetProject({ projectId });
 
-  useNavigateToSlug(slug);
   const onBuyButtonClick = useOnBuyButtonClick();
 
-  const element = document.getElementById(location.hash.substring(1));
-  useEffect(() => {
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [element]);
+  // TODO
+  // const element = document.getElementById(location.hash.substring(1));
+  // useEffect(() => {
+  //   if (element) {
+  //     element.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // }, [element]);
 
   const onChainProject = projectResponse?.project;
   const jurisdiction = onChainProject?.jurisdiction;
-  const countryCodeMatch = jurisdiction?.match(JURISDICTION_REGEX);
-  const countryCode = countryCodeMatch?.[3] || countryCodeMatch?.[1];
-
-  const { data: geocodingJurisdictionData } = useQuery(
-    getGeocodingQuery({
-      request: { query: countryCode },
-      enabled: !!countryCode,
-    }),
-  );
 
   /* Credit class */
 
@@ -197,7 +197,7 @@ function ProjectDetails(): JSX.Element {
     managementActions,
     projectDocs,
     creditClass,
-    creditClassName,
+    // creditClassName,
     creditClassVersion,
   } = parseOffChainProject(offChainProject as Maybe<Project>);
 
@@ -231,25 +231,6 @@ function ProjectDetails(): JSX.Element {
     projectPageMetadata: offChainProjectMetadata,
   });
 
-  const seoData = useSeo({
-    projectMetadata,
-    projectPageMetadata: offChainProjectMetadata,
-    projectDeveloper,
-    creditClassName,
-    _,
-  });
-
-  const mediaData = parseMedia({
-    onChainProjectMetadata: projectMetadata,
-    offChainProjectMetadata,
-    geojson,
-    geocodingJurisdictionData,
-  });
-
-  const { credits } = useCreateSellOrderData({
-    projectId: projectsWithOrderData[0]?.id,
-  });
-
   const creditClassSanity = findSanityCreditClass({
     sanityCreditClassData,
     creditClassIdOrUrl:
@@ -258,14 +239,6 @@ function ProjectDetails(): JSX.Element {
       onChainProjectId?.split('-')?.[0], // if no offChain credit class
   });
   const isCommunityCredit = !creditClassSanity;
-
-  const creditsWithProjectName = useMemo(() => {
-    if (!credits || credits.length === 0 || !projectsWithOrderData[0]) return;
-    return credits.map(batch => ({
-      ...batch,
-      projectName: projectsWithOrderData[0]?.name,
-    }));
-  }, [credits, projectsWithOrderData]);
 
   const isSoldOut = useMemo(
     () =>
@@ -361,13 +334,6 @@ function ProjectDetails(): JSX.Element {
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
-      <SEO
-        location={seoData.location}
-        siteMetadata={seoData.siteMetadata}
-        title={seoData.title}
-        imageUrl={seoData.imageUrl}
-      />
-
       <ProjectDetailsBannerCard
         offChainProject={offChainProject}
         onChainProject={onChainProject}
@@ -375,24 +341,14 @@ function ProjectDetails(): JSX.Element {
         slug={slug}
       />
 
-      {mediaData.assets.length === 0 && loadingDb && (
-        <Skeleton sx={getMediaBoxStyles(theme)} />
-      )}
-
-      {mediaData.assets.length > 0 && (
-        <Box sx={{ pt: { xs: 0, sm: 12.5 } }}>
-          <ProjectMedia
-            bodyTexts={bodyTexts}
-            gridView
-            assets={mediaData.assets}
-            apiServerUrl={mediaData.apiServerUrl}
-            imageStorageBaseUrl={mediaData.imageStorageBaseUrl}
-            imageCredits={mediaData.imageCredits}
-            mobileHeight={theme.spacing(78.75)}
-            isPrefinanceProject={isPrefinanceProject}
-          />
-        </Box>
-      )}
+      <Media
+        isPrefinanceProject={isPrefinanceProject}
+        bodyTexts={bodyTexts}
+        geojson={geojson}
+        jurisdiction={jurisdiction}
+        onChainProjectMetadata={projectMetadata}
+        offChainProjectMetadata={offChainProjectMetadata}
+      />
 
       {(onChainProjectId ||
         isPrefinanceProject ||
@@ -552,7 +508,7 @@ function ProjectDetails(): JSX.Element {
 
       {managementActions && <ManagementActions actions={managementActions} />}
 
-      {onChainOrOffChainProjectId && (
+      {onChainOrOffChainProjectId && admin && (
         <MoreProjects
           skippedProjectId={onChainOrOffChainProjectId}
           projectAdmin={admin}
@@ -571,11 +527,6 @@ function ProjectDetails(): JSX.Element {
           />
         </div>
       )}
-      <CreateSellOrderFlow
-        isFlowStarted={isSellFlowStarted}
-        setIsFlowStarted={setIsSellFlowStarted}
-        credits={creditsWithProjectName}
-      />
 
       {isCreatePostModalOpen && projectLocation && (
         <PostFlow
@@ -596,11 +547,11 @@ function ProjectDetails(): JSX.Element {
             published: draftPost?.published || true,
           }}
           setDraftPost={setDraftPost}
-          scrollIntoDataStream={() => {
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth' });
-            }
-          }}
+          // scrollIntoDataStream={() => {
+          //   if (element) {
+          //     element.scrollIntoView({ behavior: 'smooth' });
+          //   }
+          // }}
         />
       )}
     </Box>

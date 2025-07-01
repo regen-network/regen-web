@@ -1,9 +1,52 @@
 /* eslint-disable lingui/no-unlocalized-strings */
+
+import { Suspense } from 'react';
+import { setI18n } from '@lingui/react/server';
+// import { ThemeProvider } from '@mui/material/styles';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { Metadata, Viewport } from 'next';
 
+// import regenTheme from 'web-components/src/theme/muiTheme';
+import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
+
+import { LedgerProviderWithWallet } from 'ledger';
+import { AuthProvider } from 'lib/auth/auth';
 import { IS_TERRASOS } from 'lib/env';
+import { WalletProvider } from 'lib/wallet/wallet';
+
+import PageLoader from 'components/atoms/PageLoader';
+
+// import { ScrollToTop } from 'components/atoms';
+// import { PageViewTracking } from 'components/molecules/PageViewTracking';
+// import { RegistryLayoutAccountSwitchModal } from 'components/organisms/RegistryLayout/RegistryLayout.AccountSwitchModal';
+// import { RegistryLayoutAddWalletModalSwitchWarning } from 'components/organisms/RegistryLayout/RegistryLayout.AddWalletModalSwitchWarning';
+// import { RegistryLayoutBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.Banner';
+// import { RegistryLayoutChooseHowToPurchaseModal } from 'components/organisms/RegistryLayout/RegistryLayout.ChooseHowToPurchaseModal';
+// import { RegistryLayoutConnectedEmailErrorModal } from 'components/organisms/RegistryLayout/RegistryLayout.ConnectedEmailErrorModal';
+// import { RegistryLayoutConnectWalletModal } from 'components/organisms/RegistryLayout/RegistryLayout.ConnectWalletModal';
+// import { RegistryLayoutCookiesTopBanner } from 'components/organisms/RegistryLayout/RegistryLayout.CookiesTopBanner';
+// import { RegistryLayoutErrorBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.ErrorBanner';
+// import { RegistryLayoutFooter } from 'components/organisms/RegistryLayout/RegistryLayout.Footer';
+// import { RegistryLayoutHeader } from 'components/organisms/RegistryLayout/RegistryLayout.Header';
+// import { RegistryLayoutProcessingModal } from 'components/organisms/RegistryLayout/RegistryLayout.ProcessingModal';
+// import { RetryFailedFunctions } from 'components/organisms/RegistryLayout/RegistryLayout.RetryFailedFunctions';
+// import { RegistryLayoutSwitchWalletModal } from 'components/organisms/RegistryLayout/RegistryLayout.SwitchWalletModal';
+// import { RegistryLayoutTerrasosFooter } from 'components/organisms/RegistryLayout/RegistryLayout.TerrasosFooter';
+// import { RegistryLayoutTxBuySuccessfulModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxBuySuccessfulModal';
+// import { RegistryLayoutTxErrorModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxErrorModal';
+// import { RegistryLayoutTxSuccessfulModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxSuccessfulModal';
+// import { RegistryLayoutWarningBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.WarningBanner';
+// import TerrasosHeader from 'components/organisms/TerrasosHeader';
+import { AnalyticsWrapper } from './AnalyticsWrapper';
+import { ApolloWrapper } from './ApolloWrapper';
+import { getI18nInstance } from './appRouterI18n';
+import { ChainWrapper } from './ChainWrapper';
+import { LinguiClientProvider } from './LinguiClientProvider';
+import QueryClientWrapper from './QueryClientWrapper';
 
 import '../App.css';
+import '../../../tailwind.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -82,10 +125,74 @@ export default async function RootLayout({
     .map(font => font.variable)
     .join(' ');
 
+  // TODO get user default local
+  const i18n = getI18nInstance('en'); // get a ready-made i18n instance for the given locale
+  setI18n(i18n);
+
   return (
     <html lang="en" className={fontClassNames}>
       <body>
-        <div id="root">{children}</div>
+        <AppRouterCacheProvider
+          options={{
+            enableCssLayer:
+              true /* https://mui.com/material-ui/integrations/nextjs/#using-other-styling-solutions */,
+          }}
+        >
+          <QueryClientWrapper>
+            <ApolloWrapper>
+              <div className="print:hidden">
+                <ReactQueryDevtools initialIsOpen={false} />
+              </div>
+              <LinguiClientProvider
+                initialLocale={'en'}
+                initialMessages={i18n.messages}
+              >
+                <ThemeProvider>
+                  <Suspense fallback={<PageLoader />}>
+                    <AnalyticsWrapper>
+                      <AuthProvider>
+                        <ChainWrapper>
+                          <WalletProvider>
+                            <LedgerProviderWithWallet>
+                              {/* {IS_TERRASOS ? (
+                              <TerrasosHeader />
+                            ) : (
+                              <RegistryLayoutHeader />
+                            )} */}
+                              {children}
+                              {/* {IS_TERRASOS ? (
+                              <RegistryLayoutTerrasosFooter />
+                            ) : (
+                              <RegistryLayoutFooter />
+                            )} */}
+                              {/* <PageViewTracking />
+                             <ScrollToTop />
+                            <RetryFailedFunctions />
+                            <RegistryLayoutCookiesTopBanner />
+                            <RegistryLayoutTxErrorModal />
+                            <RegistryLayoutBannerModal />
+                            <RegistryLayoutTxSuccessfulModal />
+                            <RegistryLayoutProcessingModal />
+                            <RegistryLayoutErrorBannerModal />
+                            <RegistryLayoutConnectWalletModal />
+                            <RegistryLayoutSwitchWalletModal />
+                            <RegistryLayoutAddWalletModalSwitchWarning />
+                            <RegistryLayoutAccountSwitchModal />
+                            <RegistryLayoutTxBuySuccessfulModal />
+                            <RegistryLayoutWarningBannerModal />
+                            <RegistryLayoutChooseHowToPurchaseModal />
+                            <RegistryLayoutConnectedEmailErrorModal /> */}
+                            </LedgerProviderWithWallet>
+                          </WalletProvider>
+                        </ChainWrapper>
+                      </AuthProvider>
+                    </AnalyticsWrapper>
+                  </Suspense>
+                </ThemeProvider>
+              </LinguiClientProvider>
+            </ApolloWrapper>
+          </QueryClientWrapper>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

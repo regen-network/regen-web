@@ -44,6 +44,7 @@ export const HeaderMenuItemContent = ({
       renderTitle={item.renderTitle}
       classes={{ title: styles.title, paper: classes?.paper }}
       isUserMenu={isUserMenu}
+      pathname={pathname}
     >
       {/* `render` overrides default dropdown */}
       {item.dropdownItems && !item.renderDropdownItems && (

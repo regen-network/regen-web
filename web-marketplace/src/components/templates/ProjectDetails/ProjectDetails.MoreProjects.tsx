@@ -13,7 +13,7 @@ import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import useMoreProjects from './hooks/useMoreProjects';
 
-type Props = { skippedProjectId: string; projectAdmin?: Account };
+type Props = { skippedProjectId: string; projectAdmin: Account };
 
 export function MoreProjects({
   skippedProjectId,

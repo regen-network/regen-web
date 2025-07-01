@@ -1,4 +1,4 @@
-import { plural } from '@lingui/core/macro';
+import { msg, plural } from '@lingui/core/macro';
 import Parser from '@rdfjs/parser-jsonld';
 import factory from 'rdf-ext';
 import DatasetExt from 'rdf-ext/lib/Dataset';
@@ -10,6 +10,7 @@ import {
   ProjectMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
+import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import {
   ANCHORED_PROJECT_CONTEXT,
@@ -99,19 +100,27 @@ export function getProjectBaseData(
 
 export type qudtUnit = 'unit:HA' | 'unit:AC';
 
-export const getAreaUnit = (value?: qudtUnit, area?: number): string => {
+export const getAreaUnit = (
+  _: TranslatorType,
+  value?: qudtUnit,
+  area?: number,
+): string => {
   if (!value || !area) return '';
   if (value === 'unit:HA') {
-    return plural(area, {
-      one: 'hectare',
-      other: 'hectares',
-    });
+    return _(
+      msg`${plural(area, {
+        one: 'hectare',
+        other: 'hectares',
+      })}`,
+    );
   }
   if (value === 'unit:AC') {
-    return plural(area, {
-      one: 'acre',
-      other: 'acres',
-    });
+    return _(
+      msg`${plural(area, {
+        one: 'acre',
+        other: 'acres',
+      })}`,
+    );
   }
   return value;
 };

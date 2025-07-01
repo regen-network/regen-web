@@ -54,7 +54,7 @@ export const CredibilityCard: React.FC<CredibilityCardProps> = ({
     <Title variant="h4" pt={[7.75, 8.23]} sx={{ clear: 'right' }}>
       {title}
     </Title>
-    <Body size="lg" sx={{ pt: [2.5], pb: [7.5, 12.5] }}>
+    <Body size="lg" sx={{ pt: [2.5], pb: [7.5, 12.5] }} component="div">
       <BlockContent content={descriptionRaw} />
     </Body>
     <Box>

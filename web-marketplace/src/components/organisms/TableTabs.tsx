@@ -44,7 +44,7 @@ export const TableTabs = ({ tabs, sx = [], tabOuterClassName }: Props) => {
             innerContainer: {
               paddingTop: 8.5,
               paddingBottom: 6.25,
-              '&:first-child': {
+              '&:first-of-type': {
                 marginLeft: { xs: 4, sm: 8.5 },
               },
             },

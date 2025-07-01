@@ -108,6 +108,7 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
       place={project.metadata?.['schema:location']?.place_name}
       area={project.metadata?.['regen:projectSize']?.['qudt:numericValue']}
       areaUnit={getAreaUnit(
+        _,
         project.metadata?.['regen:projectSize']?.['qudt:unit'] as qudtUnit,
         project.metadata?.['regen:projectSize']?.['qudt:numericValue'],
       )}

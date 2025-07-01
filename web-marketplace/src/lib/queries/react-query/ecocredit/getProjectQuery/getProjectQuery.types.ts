@@ -1,4 +1,4 @@
-import { QueryProjectResponse } from '@regen-network/api/regen/ecocredit/v1/query';
+import type { QueryProjectResponse } from '@regen-network/api/regen/ecocredit/v1/query';
 import { QueryObserverOptions } from '@tanstack/react-query';
 
 import { QueryProjectProps } from 'lib/ecocredit/api';

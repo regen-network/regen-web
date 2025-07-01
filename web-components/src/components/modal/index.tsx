@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import Modal from '@mui/material/Modal';

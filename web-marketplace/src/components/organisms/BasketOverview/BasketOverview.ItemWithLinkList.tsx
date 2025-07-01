@@ -28,7 +28,7 @@ export const BasketItemWithLinkList = ({
           <LinkWithArrow
             href={link + item.id}
             label={item.name}
-            sx={{ fontWeight: 'normal' }}
+            className="font-normal"
           />
         </Body>
       ))}

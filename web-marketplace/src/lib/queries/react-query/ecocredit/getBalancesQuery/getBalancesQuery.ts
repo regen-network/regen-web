@@ -1,3 +1,5 @@
+import { keepPreviousData } from '@tanstack/react-query';
+
 import { queryBalances } from 'lib/ecocredit/api';
 
 import {
@@ -20,6 +22,6 @@ export const getBalancesQuery = ({
     if (!client) return;
     return await queryBalances({ client, request });
   },
-  keepPreviousData: true,
+  placeholderData: keepPreviousData,
   ...params,
 });

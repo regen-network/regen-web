@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import { makeStyles } from 'tss-react/mui';

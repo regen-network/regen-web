@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 
 /**
  * Manages dropdown menu interactions for both mouse and touch devices.
  * Provides smooth transitions by coordinating animations with state changes.
  */
-export const useMenuState = () => {
-  const location = useLocation();
+export const useMenuState = (pathname: string) => {
   // eslint-disable-next-line lingui/no-unlocalized-strings
   const isTouchScreen = useMediaQuery('(pointer: coarse)');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,7 +33,7 @@ export const useMenuState = () => {
   useEffect(() => {
     setIsMenuOpen(false);
     setHasInteracted(false);
-  }, [location.pathname]);
+  }, [pathname]);
 
   return {
     isMenuOpen,

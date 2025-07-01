@@ -1,7 +1,6 @@
 import { Box, Link, SxProps, TooltipProps } from '@mui/material';
 
 import { headerFontFamily, Theme } from '../../theme/muiTheme';
-import { LinkComponentProp } from '../modal/ConfirmModal';
 import QuestionMarkTooltip from '../tooltip/QuestionMarkTooltip';
 import { Label } from '../typography';
 import type { TextSize } from '../typography/sizing';
@@ -15,7 +14,7 @@ interface Props {
   tooltip?: TooltipProps['title'];
   fontFamily?: string;
   sx?: SxProps<Theme>;
-  linkComponent?: LinkComponentProp;
+  linkComponent?: React.ElementType;
 }
 
 export default function UserInfoWithTitle({
@@ -46,7 +45,6 @@ export default function UserInfoWithTitle({
           size={size}
           fontFamily={fontFamily}
           border={border}
-          titleComponent="subtitle"
           linkComponent={linkComponent}
           alignItems={'start'}
         />

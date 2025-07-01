@@ -7,8 +7,7 @@ import { formatDate } from '../../utils/format';
 import { cn } from '../../utils/styles/cn';
 import { BlockContent, SanityBlockContent } from '../block-content';
 import { TextButton } from '../buttons/TextButton';
-import { LinkComponentProp } from '../modal/ConfirmModal';
-import { Body, Subtitle, Title } from '../typography';
+import { Body, Subtitle } from '../typography';
 import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
 import UserAvatar from './UserAvatar';
 import { UserInfoTypes } from './UserInfo.types';
@@ -44,7 +43,7 @@ interface UserInfoProps {
     title?: string;
     timestamp?: string;
   };
-  linkComponent?: LinkComponentProp;
+  linkComponent?: React.ElementType;
   alignItems?: GridProps['alignItems'];
 }
 export default function UserInfo({
@@ -53,7 +52,6 @@ export default function UserInfo({
   fontFamily = headerFontFamily,
   direction,
   border = true,
-  titleComponent = 'title',
   sx = [],
   nameHasPadding = true,
   classNames,
@@ -62,7 +60,6 @@ export default function UserInfo({
 }: UserInfoProps): JSX.Element {
   const sizeVariant = getSizeVariant(size);
   const mobileSizeVariant = getSizeVariant(getMobileSize(size));
-  const TitleComponent = titleComponent === 'title' ? Title : Subtitle;
   const { name: userName, nameRaw } = user;
   const name = nameRaw ? (
     isValidElement(nameRaw) ? (
@@ -71,7 +68,7 @@ export default function UserInfo({
       <BlockContent className={classNames?.title} content={nameRaw} />
     )
   ) : (
-    <TitleComponent
+    <Subtitle
       className={classNames?.title}
       sx={({ typography }) => {
         return {
@@ -84,7 +81,7 @@ export default function UserInfo({
       }}
     >
       {userName}
-    </TitleComponent>
+    </Subtitle>
   );
 
   return (
@@ -118,7 +115,7 @@ export default function UserInfo({
           <Grid item>
             {user.link ? (
               <LinkComponent
-                sx={{ color: 'primary.contrastText' }}
+                className="text-grey-700 font-bold"
                 href={user.link}
               >
                 {name}

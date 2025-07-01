@@ -47,7 +47,6 @@ import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { registryLayoutLoader } from 'components/organisms/RegistryLayout/RegistryLayout.loader';
-import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
 import { KeplrRoute } from '../../components/atoms';
 import { ProjectMetadata } from '../../legacy-pages/ProjectMetadata/ProjectMetadata';
@@ -100,7 +99,6 @@ const Post = safeLazy(() => import('../../legacy-pages/Post'));
 const PrefinanceProjects = safeLazy(
   () => import('../../legacy-pages/Projects/PrefinanceProjects'),
 );
-const Project = safeLazy(() => import('../../legacy-pages/Project'));
 const Projects = safeLazy(() => import('../../legacy-pages/Projects'));
 const ProjectCreate = safeLazy(
   () => import('../../legacy-pages/ProjectCreate'),
@@ -214,16 +212,6 @@ export const getRegenRoutes = ({
             })}
           />
           <Route path="prefinance" element={<PrefinanceProjects />} />
-        </Route>
-        <Route path="project">
-          <Route
-            path=":projectId"
-            element={<Project />}
-            loader={projectDetailsLoader({
-              queryClient: reactQueryClient,
-              apolloClientFactory,
-            })}
-          ></Route>
         </Route>
         <Route
           path="project/:projectId/buy"

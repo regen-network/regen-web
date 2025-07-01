@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState } from 'react';
-import { msg, Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
@@ -7,8 +7,6 @@ import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/us
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
-
-import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
 import { CreateButton } from './UserSellOrders.CreateButton';
 

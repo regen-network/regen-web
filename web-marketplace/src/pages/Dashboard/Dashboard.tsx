@@ -53,7 +53,7 @@ export const Dashboard = () => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { accountChanging, disconnect, loginDisabled, wallet } = useWallet(); // Add wallet
   const { loading, activeAccount, authenticatedAccounts, privActiveAccount } =
-    useAuth(); // Add privActiveAccount
+    useAuth();
 
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
     string | undefined
@@ -140,12 +140,10 @@ export const Dashboard = () => {
   }, [pathname]);
 
   const resolvedAddress = useMemo(() => {
-    if (!activeAccount || !wallet?.address) return '';
+    const walletAddress = getWalletAddress({ activeAccount, wallet });
+    if (walletAddress) return walletAddress;
 
-    return getAddress({
-      walletAddress: getWalletAddress({ activeAccount, wallet }),
-      email: privActiveAccount?.email,
-    });
+    return privActiveAccount?.email || '';
   }, [activeAccount, wallet, privActiveAccount?.email]);
 
   const { hasOrders, isLoading: ordersLoading } = useOrdersAvailability();
@@ -202,14 +200,14 @@ export const Dashboard = () => {
               header={{
                 activeAccount: {
                   ...activeAccount,
-                  address: resolvedAddress || '',
+                  address: resolvedAddress,
                   type: activeAccount.type === 'USER' ? 'user' : 'org',
                   image: activeAccount.image || '',
                 },
                 accounts: (authenticatedAccounts || []).map(account => ({
                   id: account?.id,
                   name: account?.name || '',
-                  address: resolvedAddress || '',
+                  address: account?.addr || privActiveAccount?.email || '',
                   type: account?.type === 'USER' ? 'user' : 'org',
                   image: account?.image || '',
                 })),

@@ -152,6 +152,7 @@ export const DashboardNavigation = ({
         onAccountSelect={onAccountSelect}
         collapsed={collapsed}
         onViewProfileClick={onViewProfileClick}
+        hasWalletAddress={hasWalletAddress}
       />
 
       {/* Navigation sections */}

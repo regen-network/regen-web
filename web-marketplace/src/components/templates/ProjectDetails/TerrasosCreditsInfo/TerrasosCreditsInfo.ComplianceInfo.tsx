@@ -38,7 +38,7 @@ const ComplianceInfo = ({
   const environmentalAuthority =
     projectMetadata?.['regen:environmentalAuthority'];
   const biomeType = projectMetadata?.['regen:biomeType'];
-  console.log(complianceCredits);
+
   return (
     <InfoTemplate
       upperContent={complianceCredits}

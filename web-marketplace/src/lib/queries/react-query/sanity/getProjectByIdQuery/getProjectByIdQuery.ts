@@ -23,7 +23,6 @@ export const getProjectByIdQuery = ({
       query: ProjectByIdDocument,
       variables: { id },
     });
-    console.log(projectById);
     const allProject = projectById.allProject;
 
     return {

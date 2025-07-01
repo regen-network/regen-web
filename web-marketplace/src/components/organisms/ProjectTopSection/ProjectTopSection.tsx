@@ -337,8 +337,8 @@ function ProjectTopSection({
                   soldOutProjectsIds={[]}
                   totals={batchTotals}
                   className="mt-30 sm:mt-50 mb-30"
-                  isComplianceProject={isComplianceProject}
                   isTerrasosProjectPage={isTerrasosProjectPage}
+                  complianceCredits
                 />
               }
             />

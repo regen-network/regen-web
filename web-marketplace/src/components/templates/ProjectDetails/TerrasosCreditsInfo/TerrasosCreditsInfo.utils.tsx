@@ -150,7 +150,7 @@ export function getAreaActionsCard(
     <TebuCard
       header={_(msg`Area Actions`)}
       headerTooltip={_(
-        msg`Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes.`,
+        msg`Eligible projects implement preservation and/or restoration activities in different proportion/rates. Tebu recognizes restoration activities have a higher cost by assigning a greater value to restoration actions.`,
       )}
       footerLabels={[
         {

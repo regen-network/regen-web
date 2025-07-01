@@ -1,3 +1,5 @@
+import { keepPreviousData } from '@tanstack/react-query';
+
 import {
   ReactQueryAllowedDenomProps,
   ReactQueryAllowedDenomResponse,
@@ -12,6 +14,6 @@ export const getAllowedDenomQuery = ({
     if (!client) return undefined;
     return await client.regen.ecocredit.marketplace.v1.allowedDenoms({});
   },
-  keepPreviousData: true,
+  placeholderData: keepPreviousData,
   ...params,
 });

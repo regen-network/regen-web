@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
@@ -19,9 +18,8 @@ import { useBuySellOrderData } from 'hooks/useBuySellOrderData';
 import { client as sanityClient } from '../../../../lib/clients/sanity';
 import { getIsOnChainId, getIsUuid } from '../ProjectDetails.utils';
 
-export const useGetProject = () => {
+export const useGetProject = ({ projectId }: { projectId?: string }) => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { projectId } = useParams();
   const graphqlClient = useApolloClient();
   const { queryClient } = useLedger();
 
@@ -32,33 +30,30 @@ export const useGetProject = () => {
   const isOffChainUuid = getIsUuid(projectId);
 
   // if projectId is slug, query project by slug
-  const { data: projectBySlug, isInitialLoading: loadingProjectBySlug } =
-    useQuery(
-      getProjectBySlugQuery({
-        client: graphqlClient,
-        slug: projectId as string,
-        enabled: !!projectId && !isOnChainId && !isOffChainUuid,
-        languageCode: selectedLanguage,
-      }),
-    );
-
-  // else fetch project by onChainId
-  const {
-    data: projectByOnChainId,
-    isInitialLoading: loadingProjectByOnChainId,
-  } = useQuery(
-    getProjectByOnChainIdQuery({
+  const { data: projectBySlug, isLoading: loadingProjectBySlug } = useQuery(
+    getProjectBySlugQuery({
       client: graphqlClient,
-      enabled: !!projectId && !!isOnChainId,
-      onChainId: projectId as string,
+      slug: projectId as string,
+      enabled: !!projectId && !isOnChainId && !isOffChainUuid,
       languageCode: selectedLanguage,
     }),
   );
 
+  // else fetch project by onChainId
+  const { data: projectByOnChainId, isLoading: loadingProjectByOnChainId } =
+    useQuery(
+      getProjectByOnChainIdQuery({
+        client: graphqlClient,
+        enabled: !!projectId && !!isOnChainId,
+        onChainId: projectId as string,
+        languageCode: selectedLanguage,
+      }),
+    );
+
   // else fetch project by uuid
   const {
     data: offchainProjectByIdData,
-    isInitialLoading: loadingOffchainProjectById,
+    isLoading: loadingOffchainProjectById,
   } = useQuery(
     getOffChainProjectByIdQuery({
       client: graphqlClient,
@@ -76,19 +71,17 @@ export const useGetProject = () => {
     ? projectId
     : projectBySlugOnChainId ?? projectByUuidOnChainId;
 
-  const { data: projectResponse, isInitialLoading: loadingOnChainProject } =
-    useQuery(
-      getProjectQuery({
-        request: { projectId: onChainProjectId as string },
-        client: queryClient,
-        enabled: !!queryClient && !!onChainProjectId,
-      }),
-    );
+  const { data: projectResponse, isLoading: loadingOnChainProject } = useQuery(
+    getProjectQuery({
+      request: { projectId: onChainProjectId as string },
+      client: queryClient,
+      enabled: !!queryClient && !!onChainProjectId,
+    }),
+  );
 
   const onChainProject = projectResponse?.project;
-
   /** Anchored project metadata comes from IRI resolver. */
-  const { data, isInitialLoading: loadingAnchoredMetadata } = useQuery(
+  const { data, isLoading: loadingAnchoredMetadata } = useQuery(
     getMetadataQuery({
       iri: onChainProject?.metadata,
       client: queryClient,
@@ -96,7 +89,6 @@ export const useGetProject = () => {
       languageCode: selectedLanguage,
     }),
   );
-
   const anchoredMetadata = data as AnchoredProjectMetadataLD | undefined;
 
   const offChainProjectById = offchainProjectByIdData?.data.projectById;
@@ -107,6 +99,7 @@ export const useGetProject = () => {
     ?.published
     ? projectBySlug?.data?.projectBySlug
     : undefined;
+
   const offChainProject = isOnChainId
     ? projectByOnChainId?.data.projectByOnChainId
     : publishedOffchainProjectById ?? publishedOffchainProjectBySlug;
@@ -141,15 +134,14 @@ export const useGetProject = () => {
   const sellOrders = projectsWithOrderData?.[0]?.filteredSellOrders || [];
   const cardSellOrders = projectsWithOrderData?.[0]?.cardSellOrders || [];
 
-  const { data: sanityProjectData, isInitialLoading: loadingSanityProject } =
-    useQuery(
-      getProjectByIdQuery({
-        id: slugOrId as string,
-        sanityClient,
-        enabled: !!sanityClient && !!slugOrId,
-        languageCode: selectedLanguage,
-      }),
-    );
+  const { data: sanityProjectData, isLoading: loadingSanityProject } = useQuery(
+    getProjectByIdQuery({
+      id: slugOrId as string,
+      sanityClient,
+      enabled: !!sanityClient && !!slugOrId,
+      languageCode: selectedLanguage,
+    }),
+  );
   const sanityProject = sanityProjectData?.allProject?.[0];
 
   const loadingDb =

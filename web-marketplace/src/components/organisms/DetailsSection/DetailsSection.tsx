@@ -66,6 +66,7 @@ export const DetailsSection: React.FC<
                     {header.title}
                   </Title>
                   <Body
+                    component="div"
                     size="lg"
                     mobileSize="md"
                     className={cn(

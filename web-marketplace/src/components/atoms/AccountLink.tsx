@@ -1,14 +1,12 @@
 import { ReactNode } from 'react';
-import { Link as MuiLink, LinkProps as MuiLinkProps } from '@mui/material';
+import Link, { LinkProps } from 'next/link';
 
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
 import { LINK_PREFIX } from 'lib/env';
 
-import { Link } from './Link';
-
-interface AccountLinkProps extends MuiLinkProps {
+interface AccountLinkProps extends Omit<LinkProps, 'href'> {
   address: string;
   children?: ReactNode;
 }
@@ -29,14 +27,14 @@ export const AccountLink = ({
   const content = !!children ? children : truncate(address);
   if (!isRegen) {
     return (
-      <MuiLink
+      <Link
         {...linkProps}
         href={getAccountUrl(address)}
-        target={linkProps.target || '_blank'}
+        target="_blank"
         rel="noopener noreferrer"
       >
         {content}
-      </MuiLink>
+      </Link>
     );
   }
   return (

@@ -1,4 +1,4 @@
-export * from './AccountLink';
+export * from './AccountLink.legacy';
 export * from './BreakText';
 export * from './BreakTextEnd';
 export * from './GreyText';
@@ -6,8 +6,8 @@ export * from './KeplrRoute';
 export * from './Link';
 export * from './LinkWithArrow';
 export * from './OptimizedImage';
-export * from './RegistryIconLink';
-export * from './RegistryNavLink';
+export * from './RegistryIconLink.legacy';
+export * from './RegistryNavLink.legacy';
 export * from './SanityButton';
 export * from './ScrollToTop';
 export * from './ScrollToTop';

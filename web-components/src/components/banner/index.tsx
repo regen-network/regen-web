@@ -28,7 +28,7 @@ const useStyles = makeStyles<StyleProps>()((theme, { color }) => ({
     lineHeight: '145%',
     fontWeight: 'bold',
     textAlign: 'center',
-    width: '100%',
+    width: '100vw',
     height: theme.spacing(17.5),
     fontSize: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {

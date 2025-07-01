@@ -28,7 +28,6 @@ import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
 import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
-import { getAddress } from 'components/organisms/RegistryLayout/RegistryLayout.utils';
 
 import { NavigationProvider } from '../../components/organisms/DashboardNavigation/contexts/NavigationContext';
 import {
@@ -255,17 +254,7 @@ export const Dashboard = () => {
                   <div className="flex flex-col">
                     {/* Mobile-only subtitle */}
                     <div className="block md:hidden mb-2">
-                      <span
-                        style={{
-                          fontFamily: 'Mulish',
-                          fontWeight: 800,
-                          fontSize: '10px',
-                          lineHeight: '100%',
-                          letterSpacing: '1px',
-                          textTransform: 'uppercase',
-                        }}
-                        className="text-sc-text-sub-header"
-                      >
+                      <span className="font-['Mulish'] font-extrabold text-[10px] leading-[100%] tracking-[1px] uppercase text-sc-text-sub-header">
                         {section === 'settings'
                           ? _(PERSONAL_ACCOUNT)
                           : _(PERSONAL_DASHBOARD)}
@@ -304,7 +293,8 @@ export const Dashboard = () => {
                 </Flex>
 
                 {/* Portfolio tabs section - only show if user has bridge credits */}
-                {(hasAnyBridgeCredits || bridgeLoading) &&
+                {!bridgeLoading &&
+                  hasAnyBridgeCredits &&
                   (section === 'portfolio' ||
                     pathname.includes('/portfolio/bridge')) && (
                     <div className="w-full mb-20 md:mb-8 lg:mb-0">

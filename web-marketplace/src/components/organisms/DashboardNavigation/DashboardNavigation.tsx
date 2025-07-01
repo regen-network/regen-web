@@ -109,7 +109,7 @@ export const DashboardNavigation = ({
       className={cn(
         NAV_BASE_CLASSES,
         collapsed ? 'w-[100px] px-2 pt-[27px] pb-20' : 'w-[263px]',
-        !collapsed && 'px-20 md:px-20 pt-30 pb-20', // Keep existing padding
+        !collapsed && 'px-20 md:px-20 pt-30 pb-20',
         'md:block',
         'fixed md:relative top-0 left-0 h-full z-50 transform transition-transform duration-300 ease-in-out',
         mobileMenuOpen || false

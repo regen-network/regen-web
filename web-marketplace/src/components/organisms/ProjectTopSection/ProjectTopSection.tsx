@@ -23,7 +23,7 @@ import {
   SEE_MORE,
 } from 'lib/constants/shared.constants';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
-import { IS_REGEN, IS_TERRASOS } from 'lib/env';
+import { IS_REGEN } from 'lib/env';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllCreditCertificationQuery } from 'lib/queries/react-query/sanity/getAllCreditCertificationQuery/getAllCreditCertificationQuery';
 import { getAllCreditTypeQuery } from 'lib/queries/react-query/sanity/getAllCreditTypeQuery/getAllCreditTypeQuery';
@@ -294,7 +294,7 @@ function ProjectTopSection({
             program={program}
           />
           <Box>
-            {!IS_TERRASOS && onChainProjectId && batchData?.totals && (
+            {!isTerrasosProjectPage && onChainProjectId && batchData?.totals && (
               <div className={`mt-50 ${quote ? 'mb-50' : ''}`}>
                 <Title
                   variant="h4"

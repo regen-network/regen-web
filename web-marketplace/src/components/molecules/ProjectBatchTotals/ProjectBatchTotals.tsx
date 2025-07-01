@@ -103,9 +103,7 @@ export function ProjectBatchTotals({
       )}
       <LabeledValue
         label={
-          isTerrasosProjectPage
-            ? _(msg`Credits Available`)
-            : _(msg`Credits Tradable`)
+          IS_TERRASOS ? _(msg`Credits Available`) : _(msg`Credits Tradable`)
         }
         tooltipLabel={_(TRADEABLE_CREDITS_TOOLTIP)}
         tooltipNumber={
@@ -122,11 +120,7 @@ export function ProjectBatchTotals({
         number={totals.tradableAmount}
         formatNumberOptions={formatNumberOptions}
         icon={
-          isTerrasosProjectPage ? (
-            <CreditsTradeableAltIcon />
-          ) : (
-            <CreditsTradeableIcon />
-          )
+          IS_TERRASOS ? <CreditsTradeableAltIcon /> : <CreditsTradeableIcon />
         }
         tooltipClassName={tooltipClassName}
       />

@@ -1,3 +1,4 @@
+'use client';
 /* eslint-disable lingui/no-unlocalized-strings */
 import { createTheme } from '@mui/material/styles';
 

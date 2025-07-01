@@ -25,13 +25,13 @@ import MyCreditClasses from 'legacy-pages/Dashboard/MyCreditClasses';
 import MyEcocredits from 'legacy-pages/Dashboard/MyEcocredits';
 import MyProjects from 'legacy-pages/Dashboard/MyProjects';
 import { ecocreditBatchesLoader } from 'legacy-pages/EcocreditBatches/EcocreditBatches.loader';
-import { CreditBatchesTab } from 'legacy-pages/EcocreditsByAccount/CreditBatchesTab/CreditBatchesTab';
-import { CreditClassTab } from 'legacy-pages/EcocreditsByAccount/CreditClassTab/CreditClassTab';
-import { PortfolioTab } from 'legacy-pages/EcocreditsByAccount/PortfolioTab/EcocreditsByAccount.PortfolioTab';
-import ProjectsTab from 'legacy-pages/EcocreditsByAccount/ProjectsTab';
 import Faucet from 'legacy-pages/Faucet';
 import { homeLoader } from 'legacy-pages/Home/Home.loader';
 import { storefrontLoader } from 'legacy-pages/Marketplace/Storefront/Storefront.loader';
+import { CreditBatchesTab } from 'legacy-pages/Profile/CreditBatchesTab/CreditBatchesTab';
+import { CreditClassTab } from 'legacy-pages/Profile/CreditClassTab/CreditClassTab';
+import { PortfolioTab } from 'legacy-pages/Profile/PortfolioTab/Profile.PortfolioTab';
+import ProjectsTab from 'legacy-pages/Profile/ProjectsTab';
 import { projectsLoader } from 'legacy-pages/Projects/AllProjects/AllProjects.loader';
 import Settings from 'legacy-pages/Settings';
 import { safeLazy } from 'utils/safeLazy';
@@ -47,7 +47,6 @@ import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { registryLayoutLoader } from 'components/organisms/RegistryLayout/RegistryLayout.loader';
-import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
 
 import { KeplrRoute } from '../../components/atoms';
 import { ProjectMetadata } from '../../legacy-pages/ProjectMetadata/ProjectMetadata';
@@ -100,7 +99,6 @@ const Post = safeLazy(() => import('../../legacy-pages/Post'));
 const PrefinanceProjects = safeLazy(
   () => import('../../legacy-pages/Projects/PrefinanceProjects'),
 );
-const Project = safeLazy(() => import('../../legacy-pages/Project'));
 const Projects = safeLazy(() => import('../../legacy-pages/Projects'));
 const ProjectCreate = safeLazy(
   () => import('../../legacy-pages/ProjectCreate'),
@@ -125,7 +123,6 @@ const Storefront = safeLazy(
 const ConnectWalletPage = safeLazy(
   () => import('../../legacy-pages/ConnectWalletPage'),
 );
-const ProfileEdit = safeLazy(() => import('../../legacy-pages/ProfileEdit'));
 const Orders = safeLazy(() => import('../../legacy-pages/Orders'));
 
 type RouterProps = {
@@ -215,16 +212,6 @@ export const getRegenRoutes = ({
               })}
             />
             <Route path="prefinance" element={<PrefinanceProjects />} />
-          </Route>
-          <Route path="project">
-            <Route
-              path=":projectId"
-              element={<Project />}
-              loader={projectDetailsLoader({
-                queryClient: reactQueryClient,
-                apolloClientFactory,
-              })}
-            ></Route>
           </Route>
           <Route
             path="project/:projectId/buy"

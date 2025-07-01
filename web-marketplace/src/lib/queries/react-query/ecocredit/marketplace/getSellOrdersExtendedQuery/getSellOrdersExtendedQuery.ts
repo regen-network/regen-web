@@ -2,6 +2,7 @@ import {
   QuerySellOrdersResponse,
   SellOrderInfo,
 } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
+import { keepPreviousData } from '@tanstack/react-query';
 import { getAskUsdAmount } from 'legacy-pages/Marketplace/Storefront/Storefront.utils';
 import uniq from 'lodash/uniq';
 import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
@@ -98,6 +99,6 @@ export const getSellOrdersExtendedQuery = ({
     });
     return sellOrdersWithBaseDenom;
   },
-  keepPreviousData: true,
+  placeholderData: keepPreviousData,
   ...params,
 });

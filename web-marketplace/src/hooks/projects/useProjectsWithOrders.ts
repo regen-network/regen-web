@@ -202,7 +202,6 @@ export function useProjectsWithOrders({
       sanityProjectsData,
       adminId,
       limitOffChainProjects,
-      random,
       skippedProjectId,
     });
   const onlyOffChainProjects = allOffChainProjects.filter(

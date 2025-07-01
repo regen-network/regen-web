@@ -5,7 +5,7 @@ import Modal, { RegenModalProps } from 'web-components/src/components/modal';
 import ConnectWallet from 'web-components/src/components/organisms/ConnectWallet';
 
 import { Link } from 'components/atoms';
-import { LoginButton } from 'components/organisms/LoginButton/LoginButton';
+import { LoginButton } from 'components/organisms/LoginButton/LoginButton.legacy';
 
 import {
   CONNECT_WALLET_MODAL_ACTION_DESCRIPTION,

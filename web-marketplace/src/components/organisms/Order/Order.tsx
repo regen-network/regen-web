@@ -160,6 +160,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
                   area={project.area}
                   iconClassName="mr-5 text-brand-400"
                   areaUnit={getAreaUnit(
+                    _,
                     project.areaUnit as qudtUnit | undefined,
                     project.area,
                   )}

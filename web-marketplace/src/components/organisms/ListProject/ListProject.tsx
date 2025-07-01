@@ -1,10 +1,10 @@
 import { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { isMobile as checkIsMobile } from '@walletconnect/browser-utils';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
 import { DRAFT_ID } from 'legacy-pages/Dashboard/MyProjects/MyProjects.constants';
+import { useRouter } from 'next/navigation';
 
 import { Body } from 'web-components/src/components/typography';
 
@@ -23,7 +23,7 @@ const ListProject = () => {
   const { _ } = useLingui();
   const { wallet } = useWallet();
   const { activeAccountId, activeAccount } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
   const isConnectingRef = useRef(false);
 
   const {
@@ -58,7 +58,7 @@ const ListProject = () => {
           onClick={
             activeAccountId
               ? () =>
-                  navigate(
+                  router.push(
                     `/project-pages/${DRAFT_ID}/${
                       isIssuer ? 'choose-credit-class' : 'basic-info'
                     }`,

@@ -9,7 +9,7 @@ import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
 import { AccountConnectWalletModal } from 'components/organisms/AccountConnectWalletModal/AccountConnectWalletModal';
 import { ConnectWalletFlow } from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow';
-import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData';
+import { useLoginData } from 'components/organisms/LoginButton/hooks/useLoginData.legacy';
 import { useEmailConfirmationData } from 'components/organisms/LoginFlow/hooks/useEmailConfirmationData';
 import { UserAccountSettings } from 'components/organisms/UserAccountSettings/UserAccountSettings';
 import { EMAIL_ADDED } from 'components/organisms/UserAccountSettings/UserAccountSettings.constants';

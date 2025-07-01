@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { msg, Trans } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/macro';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
+
+import { useAuth } from 'lib/auth/auth';
 
 import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
@@ -18,7 +19,8 @@ export const UserSellOrdersToolbar = ({
   wrapperClassName,
   refetchSellOrders,
 }: UserSellOrdersToolbarProps) => {
-  const { _ } = useLingui();
+  const { privActiveAccount, activeAccount } = useAuth();
+
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
   const { credits } = useFetchEcocredits({ isPaginatedQuery: false });
   const tradableCredits =
@@ -46,9 +48,12 @@ export const UserSellOrdersToolbar = ({
         isFlowStarted={isSellFlowStarted}
         setIsFlowStarted={setIsSellFlowStarted}
         credits={tradableCredits}
-        placeholderText={_(msg`Choose batch`)}
         refetchSellOrders={refetchSellOrders}
         redirectOnSuccess={false}
+        canCreateFiatOrder={
+          !!privActiveAccount?.can_use_stripe_connect &&
+          !!activeAccount?.stripeConnectedAccountId
+        }
       />
     </>
   );

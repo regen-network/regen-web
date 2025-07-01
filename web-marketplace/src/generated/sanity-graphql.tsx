@@ -9682,10 +9682,7 @@ export type AllProjectsQuery = (
     & { projectPrefinancing?: Maybe<(
       { __typename?: 'ProjectPrefinancing' }
       & Pick<ProjectPrefinancing, 'isPrefinanceProject' | 'price' | 'estimatedIssuance' | 'stripePaymentLink'>
-    )>, fiatSellOrders?: Maybe<Array<Maybe<(
-      { __typename?: 'SellOrderPrice' }
-      & Pick<SellOrderPrice, 'sellOrderId' | 'usdPrice'>
-    )>>> }
+    )> }
   )> }
 );
 
@@ -10105,10 +10102,7 @@ export type ProjectByIdQuery = (
           & Pick<PrefinanceTimelineItem, 'date' | 'endDate' | 'currentStatus'>
         )> }
       )>>> }
-    )>, fiatSellOrders?: Maybe<Array<Maybe<(
-      { __typename?: 'SellOrderPrice' }
-      & Pick<SellOrderPrice, 'sellOrderId' | 'usdPrice'>
-    )>>> }
+    )> }
   )> }
 );
 
@@ -10253,10 +10247,7 @@ export type TerrasosProjectByIdQuery = (
           & Pick<PrefinanceTimelineItem, 'date' | 'endDate' | 'currentStatus'>
         )> }
       )>>> }
-    )>, fiatSellOrders?: Maybe<Array<Maybe<(
-      { __typename?: 'SellOrderPrice' }
-      & Pick<SellOrderPrice, 'sellOrderId' | 'usdPrice'>
-    )>>>, complianceCredits?: Maybe<(
+    )>, complianceCredits?: Maybe<(
       { __typename?: 'ComplianceCredits' }
       & Pick<ComplianceCredits, 'creditsRegistered' | 'creditsAvailable' | 'creditsRetired'>
     )> }
@@ -12022,10 +12013,6 @@ export const AllProjectsDocument = gql`
       estimatedIssuance
       stripePaymentLink
     }
-    fiatSellOrders {
-      sellOrderId
-      usdPrice
-    }
   }
 }
     `;
@@ -12265,10 +12252,6 @@ export const ProjectByIdDocument = gql`
       }
       supportEnables
     }
-    fiatSellOrders {
-      sellOrderId
-      usdPrice
-    }
   }
 }
     ${DetailsCardFieldsFragmentDoc}
@@ -12464,10 +12447,6 @@ export const TerrasosProjectByIdDocument = gql`
         }
       }
       supportEnables
-    }
-    fiatSellOrders {
-      sellOrderId
-      usdPrice
     }
     complianceCredits {
       creditsRegistered

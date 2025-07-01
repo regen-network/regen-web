@@ -2,7 +2,6 @@ import { useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { SxProps, useTheme } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
 import { getSocialItems } from 'utils/components/ShareSection/getSocialItems';
 import { REGEN_APP_PROJECT_URL } from 'utils/components/ShareSection/getSocialItems.constants';
 
@@ -21,7 +20,7 @@ import { TxSuccessfulModal } from 'web-components/src/components/modal/TxSuccess
 import type { Theme } from 'web-components/src/theme/muiTheme';
 
 import { BasketTokens } from 'types/ledger/ecocredit';
-import { useLedger } from 'ledger';
+import { useAuth } from 'lib/auth/auth';
 import { getHashUrl } from 'lib/block-explorer';
 import {
   AMOUNT_LABEL,
@@ -54,7 +53,6 @@ import {
   TX_MODAL_TITLE,
   TX_SUCCESSFUL_MODAL_TITLE,
 } from 'lib/constants/shared.constants';
-import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import {
   PutInBasket1Event,
   Retire1Event,
@@ -64,6 +62,7 @@ import {
 import { useTracker } from 'lib/tracker/useTracker';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
+import { useAllowedDenomOptions } from 'features/marketplace/CreateSellOrderFlow/hooks/useAllowedDenomOptions';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { CreateSellOrderModal } from 'components/organisms/CreateSellOrderModal/CreateSellOrderModal';
@@ -99,7 +98,6 @@ import {
 import { OnTxSuccessfulProps } from './MyEcocredits.types';
 import {
   getAvailableAmountByBatch,
-  getDenomAllowedOptions,
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
 
@@ -122,10 +120,10 @@ export const MyEcocredits = (): JSX.Element => {
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
   const lastRetiredProjectIdRef = useRef('');
   const [activePortfolioTab, setActivePortfolioTab] = useState(0);
+  const { privActiveAccount, activeAccount } = useAuth();
 
   const navigate = useNavigate();
   const { track } = useTracker();
-  const { queryClient } = useLedger();
   const bottomFieldsTextMapping = useMemo(
     () => getBottomFieldsTextMapping(_),
     [_],
@@ -226,18 +224,6 @@ export const MyEcocredits = (): JSX.Element => {
     reloadBasketsBalance,
   } = useFetchBaskets({ credits });
 
-  const { data: allowedDenomsData } = useQuery(
-    getAllowedDenomQuery({
-      client: queryClient,
-      enabled: !!queryClient,
-    }),
-  );
-
-  const allowedDenomOptions = getDenomAllowedOptions({
-    allowedDenoms: allowedDenomsData?.allowedDenoms,
-    _,
-  });
-
   useUpdateTxModalTitle({ setTxModalTitle, deliverTxResponse });
 
   const openTakeModal = useOpenTakeModal({
@@ -312,6 +298,8 @@ export const MyEcocredits = (): JSX.Element => {
   }
   const shareUrl =
     REGEN_APP_PROJECT_URL + (lastRetiredProjectIdRef.current ?? '');
+
+  const allowedDenomOptions = useAllowedDenomOptions();
 
   return (
     <>
@@ -540,6 +528,10 @@ export const MyEcocredits = (): JSX.Element => {
           onClose={() => setSellOrderCreateOpen(-1)}
           onSubmit={createSellOrderSubmit}
           title={_(CREATE_SELL_ORDER_TITLE)}
+          canCreateFiatOrder={
+            !!privActiveAccount?.can_use_stripe_connect &&
+            !!activeAccount?.stripeConnectedAccountId
+          }
         />
       )}
       <ProcessingModal

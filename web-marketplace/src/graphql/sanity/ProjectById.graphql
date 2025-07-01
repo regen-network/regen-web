@@ -40,9 +40,5 @@ query ProjectById($id: String!) {
       }
       supportEnables
     }
-    fiatSellOrders {
-      sellOrderId
-      usdPrice
-    }
   }
 }

@@ -2,12 +2,13 @@ import { lazy, Suspense, useState } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
+
+import { CreateButton } from './UserSellOrders.CreateButton';
 
 const CreateSellOrderFlow = lazy(async () => ({
   default: (
@@ -30,19 +31,7 @@ export const UserSellOrdersToolbar = ({
   const tradableCredits =
     credits?.filter(credit => Number(credit.balance?.tradableAmount) > 0) || [];
   const hasTradableCredits = tradableCredits.length > 0;
-
-  const createButton = (
-    <div className="flex-none flex items-center">
-      {/* TODO:  If the member is an Editor or Viewer, this button should be hidden */}
-      <ContainedButton
-        disabled={!hasTradableCredits}
-        onClick={() => setIsSellFlowStarted(true)}
-      >
-        + <Trans>Create Sell Order</Trans>
-      </ContainedButton>
-    </div>
-  );
-
+  console.log(hasTradableCredits);
   return (
     <>
       <div
@@ -55,14 +44,22 @@ export const UserSellOrdersToolbar = ({
           <Trans>Sell orders</Trans>
         </Subtitle>
         {hasTradableCredits ? (
-          createButton
+          <CreateButton
+            hasTradableCredits={hasTradableCredits}
+            setIsSellFlowStarted={setIsSellFlowStarted}
+          />
         ) : (
           <InfoTooltip
             arrow
             placement="top"
             title={_(msg`You have no tradable credits that can be sold.`)}
           >
-            {createButton}
+            <div>
+              <CreateButton
+                hasTradableCredits={hasTradableCredits}
+                setIsSellFlowStarted={setIsSellFlowStarted}
+              />
+            </div>
           </InfoTooltip>
         )}
       </div>

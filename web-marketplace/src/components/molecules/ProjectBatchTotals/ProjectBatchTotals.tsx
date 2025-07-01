@@ -30,6 +30,8 @@ export type ProjectBatchTotalsProps = {
   projectWithOrderData?: NormalizeProject;
   soldOutProjectsIds: string[];
   className?: string;
+  isTerrasosProjectPage: boolean;
+  isComplianceProject?: boolean;
 };
 
 export function ProjectBatchTotals({
@@ -37,6 +39,8 @@ export function ProjectBatchTotals({
   projectWithOrderData,
   soldOutProjectsIds,
   className,
+  isTerrasosProjectPage,
+  isComplianceProject,
 }: ProjectBatchTotalsProps): JSX.Element {
   const { _ } = useLingui();
   const isSoldOut = getIsSoldOut({
@@ -45,7 +49,6 @@ export function ProjectBatchTotals({
   });
   const hasSoldOutProject = soldOutProjectsIds.length > 0;
   const hasAvailableCredits = totals.tradableAmount > 0;
-  const isComplianceProject = !hasSoldOutProject && IS_TERRASOS;
   const terrasosIsSoldOut = hasSoldOutProject
     ? isSoldOut
     : !hasAvailableCredits;
@@ -84,7 +87,7 @@ export function ProjectBatchTotals({
           label={_(msg`For sale`)}
           tooltipLabel={_(FOR_SALE_CREDITS_TOOLTIP)}
           tooltipNumber={getCreditsTooltip({
-            isSoldOut: IS_TERRASOS ? terrasosIsSoldOut : isSoldOut,
+            isSoldOut: isTerrasosProjectPage ? terrasosIsSoldOut : isSoldOut,
             project: projectWithOrderData,
             _,
           })}
@@ -96,17 +99,29 @@ export function ProjectBatchTotals({
         />
       )}
       <LabeledValue
-        label={IS_TERRASOS ? _(msg`Credits Available`) : _(msg`Tradable`)}
+        label={
+          isTerrasosProjectPage ? _(msg`Credits Available`) : _(msg`Tradable`)
+        }
         tooltipLabel={_(TRADEABLE_CREDITS_TOOLTIP)}
-        tooltipNumber={getCreditsTooltip({
-          isSoldOut: IS_TERRASOS ? terrasosIsSoldOut : isSoldOut,
-          project: projectWithOrderData,
-          _,
-        })}
+        tooltipNumber={
+          !isComplianceProject
+            ? getCreditsTooltip({
+                isSoldOut: isTerrasosProjectPage
+                  ? terrasosIsSoldOut
+                  : isSoldOut,
+                project: projectWithOrderData,
+                _,
+              })
+            : undefined
+        }
         number={totals.tradableAmount}
         formatNumberOptions={formatNumberOptions}
         icon={
-          IS_TERRASOS ? <CreditsTradeableAltIcon /> : <CreditsTradeableIcon />
+          isTerrasosProjectPage ? (
+            <CreditsTradeableAltIcon />
+          ) : (
+            <CreditsTradeableIcon />
+          )
         }
         tooltipClassName={tooltipClassName}
       />

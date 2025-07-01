@@ -166,7 +166,7 @@ export type BasketDetailsPageFilter = {
   language?: Maybe<StringFilter>;
 };
 
-export type BasketDetailsPageOrBridgePageOrBuyFlowChooseCreditsCardOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosBookCallOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage = BasketDetailsPage | BridgePage | BuyFlowChooseCreditsCard | BuyersPage | CaseStudiesPage | CaseStudyPage | Claim | ClassPrefinanceTimelineStatus | CommunityPage | ComplianceInfo | CreateCreditClassPage | CreateMethodologyPage | CreateProjectPage | CredibilityCard | CreditCategory | CreditCertification | CreditClass | CreditClassPage | CreditType | DevelopersPage | Doc | EcologicalCreditCard | EcologicalImpact | EcologicalOutcome | Faq | FeaturedProjectCard | FeaturedSection | GettingStartedResourcesCard | GettingStartedResourcesSection | HomePage | HomePageWeb | LandManagementPractice | LandStewardsPage | MainnetPage | Media | Methodology | MethodologyReviewProcessPage | NctPage | OffsetMethod | Partner | PartnersPage | Person | PresskitPage | ProfilePage | Program | Project | ProjectActivity | ProjectEcosystem | ProjectPage | ProjectPrefinanceTimelineStatus | ProjectRating | ProjectsPage | Resource | ResourcesPage | SciencePage | Sdg | SharedSections | SoldOutProjects | StatCard | Tag | TeamPage | TebuBanner | TerrasosBookCall | TerrasosProject | TokenPage | WalletAddressRegistrationPage;
+export type BasketDetailsPageOrBridgePageOrBuyFlowChooseCreditsCardOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosBookCallOrTokenPageOrWalletAddressRegistrationPage = BasketDetailsPage | BridgePage | BuyFlowChooseCreditsCard | BuyersPage | CaseStudiesPage | CaseStudyPage | Claim | ClassPrefinanceTimelineStatus | CommunityPage | ComplianceInfo | CreateCreditClassPage | CreateMethodologyPage | CreateProjectPage | CredibilityCard | CreditCategory | CreditCertification | CreditClass | CreditClassPage | CreditType | DevelopersPage | Doc | EcologicalCreditCard | EcologicalImpact | EcologicalOutcome | Faq | FeaturedProjectCard | FeaturedSection | GettingStartedResourcesCard | GettingStartedResourcesSection | HomePage | HomePageWeb | LandManagementPractice | LandStewardsPage | MainnetPage | Media | Methodology | MethodologyReviewProcessPage | NctPage | OffsetMethod | Partner | PartnersPage | Person | PresskitPage | ProfilePage | Program | Project | ProjectActivity | ProjectEcosystem | ProjectPage | ProjectPrefinanceTimelineStatus | ProjectRating | ProjectsPage | Resource | ResourcesPage | SciencePage | Sdg | SharedSections | SoldOutProjects | StatCard | Tag | TeamPage | TebuBanner | TerrasosBookCall | TokenPage | WalletAddressRegistrationPage;
 
 export type BasketDetailsPageSorting = {
   _id?: Maybe<SortOrder>;
@@ -3872,7 +3872,7 @@ export type InternationalizedArrayReferenceValue = {
   __typename?: 'InternationalizedArrayReferenceValue';
   _key?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
-  value?: Maybe<BasketDetailsPageOrBridgePageOrBuyFlowChooseCreditsCardOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosBookCallOrTerrasosProjectOrTokenPageOrWalletAddressRegistrationPage>;
+  value?: Maybe<BasketDetailsPageOrBridgePageOrBuyFlowChooseCreditsCardOrBuyersPageOrCaseStudiesPageOrCaseStudyPageOrClaimOrClassPrefinanceTimelineStatusOrCommunityPageOrComplianceInfoOrCreateCreditClassPageOrCreateMethodologyPageOrCreateProjectPageOrCredibilityCardOrCreditCategoryOrCreditCertificationOrCreditClassOrCreditClassPageOrCreditTypeOrDevelopersPageOrDocOrEcologicalCreditCardOrEcologicalImpactOrEcologicalOutcomeOrFaqOrFeaturedProjectCardOrFeaturedSectionOrGettingStartedResourcesCardOrGettingStartedResourcesSectionOrHomePageOrHomePageWebOrLandManagementPracticeOrLandStewardsPageOrMainnetPageOrMediaOrMethodologyOrMethodologyReviewProcessPageOrNctPageOrOffsetMethodOrPartnerOrPartnersPageOrPersonOrPresskitPageOrProfilePageOrProgramOrProjectOrProjectActivityOrProjectEcosystemOrProjectPageOrProjectPrefinanceTimelineStatusOrProjectRatingOrProjectsPageOrResourceOrResourcesPageOrSciencePageOrSdgOrSharedSectionsOrSoldOutProjectsOrStatCardOrTagOrTeamPageOrTebuBannerOrTerrasosBookCallOrTokenPageOrWalletAddressRegistrationPage>;
 };
 
 export type InternationalizedArrayReferenceValueFilter = {
@@ -5277,6 +5277,7 @@ export type Project = Document & {
   location?: Maybe<Scalars['String']>;
   area?: Maybe<Scalars['Float']>;
   areaUnit?: Maybe<Scalars['String']>;
+  complianceCredits?: Maybe<ComplianceCredits>;
   language?: Maybe<Scalars['String']>;
 };
 
@@ -5384,6 +5385,7 @@ export type ProjectFilter = {
   location?: Maybe<StringFilter>;
   area?: Maybe<FloatFilter>;
   areaUnit?: Maybe<StringFilter>;
+  complianceCredits?: Maybe<ComplianceCreditsFilter>;
   language?: Maybe<StringFilter>;
 };
 
@@ -5601,6 +5603,7 @@ export type ProjectSorting = {
   location?: Maybe<SortOrder>;
   area?: Maybe<SortOrder>;
   areaUnit?: Maybe<SortOrder>;
+  complianceCredits?: Maybe<ComplianceCreditsSorting>;
   language?: Maybe<SortOrder>;
 };
 
@@ -5969,7 +5972,6 @@ export type RootQuery = {
   NctPage?: Maybe<NctPage>;
   CreditCategory?: Maybe<CreditCategory>;
   TebuBanner?: Maybe<TebuBanner>;
-  TerrasosProject?: Maybe<TerrasosProject>;
   ComplianceInfo?: Maybe<ComplianceInfo>;
   TerrasosBookCall?: Maybe<TerrasosBookCall>;
   ImageGridItem?: Maybe<ImageGridItem>;
@@ -6046,7 +6048,6 @@ export type RootQuery = {
   allNctPage: Array<NctPage>;
   allCreditCategory: Array<CreditCategory>;
   allTebuBanner: Array<TebuBanner>;
-  allTerrasosProject: Array<TerrasosProject>;
   allComplianceInfo: Array<ComplianceInfo>;
   allTerrasosBookCall: Array<TerrasosBookCall>;
   allImageGridItem: Array<ImageGridItem>;
@@ -6382,11 +6383,6 @@ export type RootQueryCreditCategoryArgs = {
 
 
 export type RootQueryTebuBannerArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type RootQueryTerrasosProjectArgs = {
   id: Scalars['ID'];
 };
 
@@ -6961,14 +6957,6 @@ export type RootQueryAllCreditCategoryArgs = {
 export type RootQueryAllTebuBannerArgs = {
   where?: Maybe<TebuBannerFilter>;
   sort?: Maybe<Array<TebuBannerSorting>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-};
-
-
-export type RootQueryAllTerrasosProjectArgs = {
-  where?: Maybe<TerrasosProjectFilter>;
-  sort?: Maybe<Array<TerrasosProjectSorting>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 };
@@ -8354,71 +8342,6 @@ export type TerrasosBookCallSorting = {
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
   button?: Maybe<ButtonSorting>;
-  language?: Maybe<SortOrder>;
-};
-
-export type TerrasosProject = Document & {
-  __typename?: 'TerrasosProject';
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']>;
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']>;
-  _key?: Maybe<Scalars['String']>;
-  /** Slug should be the prefered option if the project has a slug, otherwise it might result in the data below not being displayed on the project page. */
-  projectId?: Maybe<Scalars['String']>;
-  projectPrefinancing?: Maybe<ProjectPrefinancing>;
-  credibilityCards?: Maybe<Array<Maybe<DetailsCard>>>;
-  fiatSellOrders?: Maybe<Array<Maybe<SellOrderPrice>>>;
-  projectName?: Maybe<Scalars['String']>;
-  image?: Maybe<CustomImage>;
-  location?: Maybe<Scalars['String']>;
-  area?: Maybe<Scalars['Float']>;
-  areaUnit?: Maybe<Scalars['String']>;
-  complianceCredits?: Maybe<ComplianceCredits>;
-  language?: Maybe<Scalars['String']>;
-};
-
-export type TerrasosProjectFilter = {
-  /** Apply filters on document level */
-  _?: Maybe<Sanity_DocumentFilter>;
-  _id?: Maybe<IdFilter>;
-  _type?: Maybe<StringFilter>;
-  _createdAt?: Maybe<DatetimeFilter>;
-  _updatedAt?: Maybe<DatetimeFilter>;
-  _rev?: Maybe<StringFilter>;
-  _key?: Maybe<StringFilter>;
-  projectId?: Maybe<StringFilter>;
-  projectPrefinancing?: Maybe<ProjectPrefinancingFilter>;
-  projectName?: Maybe<StringFilter>;
-  image?: Maybe<CustomImageFilter>;
-  location?: Maybe<StringFilter>;
-  area?: Maybe<FloatFilter>;
-  areaUnit?: Maybe<StringFilter>;
-  complianceCredits?: Maybe<ComplianceCreditsFilter>;
-  language?: Maybe<StringFilter>;
-};
-
-export type TerrasosProjectSorting = {
-  _id?: Maybe<SortOrder>;
-  _type?: Maybe<SortOrder>;
-  _createdAt?: Maybe<SortOrder>;
-  _updatedAt?: Maybe<SortOrder>;
-  _rev?: Maybe<SortOrder>;
-  _key?: Maybe<SortOrder>;
-  projectId?: Maybe<SortOrder>;
-  projectPrefinancing?: Maybe<ProjectPrefinancingSorting>;
-  projectName?: Maybe<SortOrder>;
-  image?: Maybe<CustomImageSorting>;
-  location?: Maybe<SortOrder>;
-  area?: Maybe<SortOrder>;
-  areaUnit?: Maybe<SortOrder>;
-  complianceCredits?: Maybe<ComplianceCreditsSorting>;
   language?: Maybe<SortOrder>;
 };
 
@@ -10108,7 +10031,10 @@ export type ProjectByIdQuery = (
     )>, fiatSellOrders?: Maybe<Array<Maybe<(
       { __typename?: 'SellOrderPrice' }
       & Pick<SellOrderPrice, 'sellOrderId' | 'usdPrice'>
-    )>>> }
+    )>>>, complianceCredits?: Maybe<(
+      { __typename?: 'ComplianceCredits' }
+      & Pick<ComplianceCredits, 'creditsRegistered' | 'creditsAvailable' | 'creditsRetired'>
+    )> }
   )> }
 );
 
@@ -10206,59 +10132,6 @@ export type TerrasosBookCallQuery = (
     & { button?: Maybe<(
       { __typename?: 'Button' }
       & ButtonFieldsFragment
-    )> }
-  )> }
-);
-
-export type TerrasosProjectByIdQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type TerrasosProjectByIdQuery = (
-  { __typename?: 'RootQuery' }
-  & { allTerrasosProject: Array<(
-    { __typename?: 'TerrasosProject' }
-    & Pick<TerrasosProject, 'language'>
-    & { credibilityCards?: Maybe<Array<Maybe<(
-      { __typename?: 'DetailsCard' }
-      & DetailsCardFieldsFragment
-    )>>>, projectPrefinancing?: Maybe<(
-      { __typename?: 'ProjectPrefinancing' }
-      & Pick<ProjectPrefinancing, 'isPrefinanceProject' | 'price' | 'estimatedIssuance' | 'stripePaymentLink' | 'prefinanceTermsRaw' | 'purchaseAgreementLink' | 'projectedCreditDeliveryDate' | 'supportEnables'>
-      & { projectTimeline?: Maybe<Array<Maybe<(
-        { __typename?: 'ProjectPrefinanceTimelineItem' }
-        & { status?: Maybe<(
-          { __typename?: 'ProjectPrefinanceTimelineStatus' }
-          & Pick<ProjectPrefinanceTimelineStatus, 'description'>
-          & { icon?: Maybe<(
-            { __typename?: 'CustomImage' }
-            & CustomImageFieldsFragment
-          )> }
-        )>, prefinanceTimelineItem?: Maybe<(
-          { __typename?: 'PrefinanceTimelineItem' }
-          & Pick<PrefinanceTimelineItem, 'date' | 'endDate' | 'currentStatus'>
-        )> }
-      )>>>, classTimeline?: Maybe<Array<Maybe<(
-        { __typename?: 'ClassPrefinanceTimelineItem' }
-        & { status?: Maybe<(
-          { __typename?: 'ClassPrefinanceTimelineStatus' }
-          & Pick<ClassPrefinanceTimelineStatus, 'description'>
-          & { icon?: Maybe<(
-            { __typename?: 'CustomImage' }
-            & CustomImageFieldsFragment
-          )> }
-        )>, prefinanceTimelineItem?: Maybe<(
-          { __typename?: 'PrefinanceTimelineItem' }
-          & Pick<PrefinanceTimelineItem, 'date' | 'endDate' | 'currentStatus'>
-        )> }
-      )>>> }
-    )>, fiatSellOrders?: Maybe<Array<Maybe<(
-      { __typename?: 'SellOrderPrice' }
-      & Pick<SellOrderPrice, 'sellOrderId' | 'usdPrice'>
-    )>>>, complianceCredits?: Maybe<(
-      { __typename?: 'ComplianceCredits' }
-      & Pick<ComplianceCredits, 'creditsRegistered' | 'creditsAvailable' | 'creditsRetired'>
     )> }
   )> }
 );
@@ -12269,6 +12142,11 @@ export const ProjectByIdDocument = gql`
       sellOrderId
       usdPrice
     }
+    complianceCredits {
+      creditsRegistered
+      creditsAvailable
+      creditsRetired
+    }
   }
 }
     ${DetailsCardFieldsFragmentDoc}
@@ -12422,90 +12300,6 @@ export function useTerrasosBookCallLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type TerrasosBookCallQueryHookResult = ReturnType<typeof useTerrasosBookCallQuery>;
 export type TerrasosBookCallLazyQueryHookResult = ReturnType<typeof useTerrasosBookCallLazyQuery>;
 export type TerrasosBookCallQueryResult = Apollo.QueryResult<TerrasosBookCallQuery, TerrasosBookCallQueryVariables>;
-export const TerrasosProjectByIdDocument = gql`
-    query terrasosProjectById($id: String!) {
-  allTerrasosProject(where: {projectId: {eq: $id}}) {
-    language
-    credibilityCards {
-      ...detailsCardFields
-    }
-    projectPrefinancing {
-      isPrefinanceProject
-      price
-      estimatedIssuance
-      stripePaymentLink
-      prefinanceTermsRaw
-      purchaseAgreementLink
-      projectedCreditDeliveryDate
-      projectTimeline {
-        status {
-          description
-          icon {
-            ...customImageFields
-          }
-        }
-        prefinanceTimelineItem {
-          date
-          endDate
-          currentStatus
-        }
-      }
-      classTimeline {
-        status {
-          description
-          icon {
-            ...customImageFields
-          }
-        }
-        prefinanceTimelineItem {
-          date
-          endDate
-          currentStatus
-        }
-      }
-      supportEnables
-    }
-    fiatSellOrders {
-      sellOrderId
-      usdPrice
-    }
-    complianceCredits {
-      creditsRegistered
-      creditsAvailable
-      creditsRetired
-    }
-  }
-}
-    ${DetailsCardFieldsFragmentDoc}
-${CustomImageFieldsFragmentDoc}`;
-
-/**
- * __useTerrasosProjectByIdQuery__
- *
- * To run a query within a React component, call `useTerrasosProjectByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useTerrasosProjectByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useTerrasosProjectByIdQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useTerrasosProjectByIdQuery(baseOptions: Apollo.QueryHookOptions<TerrasosProjectByIdQuery, TerrasosProjectByIdQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TerrasosProjectByIdQuery, TerrasosProjectByIdQueryVariables>(TerrasosProjectByIdDocument, options);
-      }
-export function useTerrasosProjectByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TerrasosProjectByIdQuery, TerrasosProjectByIdQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TerrasosProjectByIdQuery, TerrasosProjectByIdQueryVariables>(TerrasosProjectByIdDocument, options);
-        }
-export type TerrasosProjectByIdQueryHookResult = ReturnType<typeof useTerrasosProjectByIdQuery>;
-export type TerrasosProjectByIdLazyQueryHookResult = ReturnType<typeof useTerrasosProjectByIdLazyQuery>;
-export type TerrasosProjectByIdQueryResult = Apollo.QueryResult<TerrasosProjectByIdQuery, TerrasosProjectByIdQueryVariables>;
 export const AllBridgePageDocument = gql`
     query allBridgePage {
   allBridgePage {

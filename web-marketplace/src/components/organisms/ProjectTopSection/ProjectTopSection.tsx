@@ -219,7 +219,6 @@ function ProjectTopSection({
     retiredAmount: normalizedProject?.complianceCredits.creditsRetired ?? 0,
     tradableAmount: normalizedProject?.complianceCredits.creditsAvailable ?? 0,
   } as ProjectBatchTotalsProps['totals'];
-
   const isComplianceProject =
     normalizedProject?.marketType?.includes(COMPLIANCE_MARKET) ?? false;
 
@@ -308,6 +307,7 @@ function ProjectTopSection({
                   projectWithOrderData={projectWithOrderData}
                   soldOutProjectsIds={soldOutProjectsIds}
                   totals={batchData.totals}
+                  isTerrasosProjectPage={isTerrasosProjectPage}
                 />
               </div>
             )}
@@ -328,6 +328,7 @@ function ProjectTopSection({
                     soldOutProjectsIds={soldOutProjectsIds}
                     totals={batchData.totals}
                     className="my-30 sm:my-50"
+                    isTerrasosProjectPage={isTerrasosProjectPage}
                   />
                 ) : undefined
               }
@@ -336,6 +337,8 @@ function ProjectTopSection({
                   soldOutProjectsIds={[]}
                   totals={batchTotals}
                   className="mt-30 sm:mt-50 mb-30"
+                  isComplianceProject={isComplianceProject}
+                  isTerrasosProjectPage={isTerrasosProjectPage}
                 />
               }
             />

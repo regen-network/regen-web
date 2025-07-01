@@ -31,7 +31,7 @@ export const UserSellOrdersToolbar = ({
   const tradableCredits =
     credits?.filter(credit => Number(credit.balance?.tradableAmount) > 0) || [];
   const hasTradableCredits = tradableCredits.length > 0;
-  console.log(hasTradableCredits);
+
   return (
     <>
       <div

@@ -37,7 +37,7 @@ const ProjectTag = ({
       ]}
       onClick={onClick}
     >
-      {icon && isImageType(icon) && (
+      {icon && isImageType(icon) && icon.src && (
         <Box
           component="img"
           src={icon.src}

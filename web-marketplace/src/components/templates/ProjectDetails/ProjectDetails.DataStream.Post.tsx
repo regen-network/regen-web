@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   ApolloClient,
   NormalizedCacheObject,
   useApolloClient,
 } from '@apollo/client';
 import { useLingui } from '@lingui/react';
-import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import type { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineItem from '@mui/lab/TimelineItem';
@@ -25,6 +24,7 @@ import {
   POST_IS_PRIVATE,
   UNTITLED,
 } from 'legacy-pages/Post/Post.constants';
+import { useRouter } from 'next/navigation';
 import { parse } from 'wellknown';
 
 import PostCard from 'web-components/src/components/cards/PostCard/PostCard';
@@ -91,7 +91,7 @@ export const DataStreamPost = ({
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const setBannerText = useSetAtom(bannerTextAtom);
-  const navigate = useNavigate();
+  const router = useRouter();
   const [preview, setPreview] = useState<string | undefined>();
   const [file, setFile] = useState<FileToPreview | undefined>();
   const { iri, createdAt } = post;
@@ -200,7 +200,7 @@ export const DataStreamPost = ({
               onClick={() =>
                 post.published && LINK_PREFIX
                   ? window.open(`${LINK_PREFIX}/post/${post.iri}`)
-                  : navigate(`/post/${post.iri}`)
+                  : router.push(`/post/${post.iri}`)
               }
               title={post.contents.title || _(UNTITLED)}
               comment={post.contents.comment}

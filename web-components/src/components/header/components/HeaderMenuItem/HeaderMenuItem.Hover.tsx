@@ -18,6 +18,7 @@ interface Props extends MenuTitle {
   textColor?: string;
   dropdownColor?: string;
   isUserMenu?: boolean;
+  pathname: string;
 }
 
 /**
@@ -31,6 +32,7 @@ const HeaderMenuItemHover = ({
   dropdownColor,
   children,
   isUserMenu,
+  pathname,
 }: Props): JSX.Element => {
   const { classes: styles } = useMenuHoverStyles();
 
@@ -41,7 +43,7 @@ const HeaderMenuItemHover = ({
     openMenu,
     closeMenu,
     toggleMenu,
-  } = useMenuState();
+  } = useMenuState(pathname);
 
   return (
     <div

@@ -13,7 +13,7 @@ const RoundLogo = ({ image, sx = [] }: Props): JSX.Element => {
   return (
     <Box
       component="img"
-      src={image.src}
+      src={image.src || ''}
       alt={image.alt}
       sx={[
         {

@@ -7,7 +7,7 @@ import ConnectWallet from 'web-components/src/components/organisms/ConnectWallet
 
 import { useAuth } from 'lib/auth/auth';
 
-import { LoginButton } from 'components/organisms/LoginButton/LoginButton';
+import { LoginButton } from 'components/organisms/LoginButton/LoginButton.legacy';
 import { useAuthData } from 'hooks/useAuthData';
 
 import { LOGIN_PAGE_TITLE } from './Login.constants';

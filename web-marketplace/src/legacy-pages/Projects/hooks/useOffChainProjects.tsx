@@ -5,7 +5,6 @@ import {
 } from '@apollo/client';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
-import shuffle from 'lodash/shuffle';
 
 import {
   AllCreditClassQuery,
@@ -29,7 +28,6 @@ type Props = {
   sanityProjectsData?: AllProjectsQuery;
   adminId?: string;
   limitOffChainProjects?: number;
-  random?: boolean;
   skippedProjectId?: string;
 };
 
@@ -39,7 +37,6 @@ export const useOffChainProjects = ({
   sanityProjectsData,
   adminId,
   limitOffChainProjects,
-  random,
   skippedProjectId,
 }: Props) => {
   const graphqlClient =
@@ -136,9 +133,7 @@ export const useOffChainProjects = ({
     });
 
   return {
-    allOffChainProjects: random
-      ? shuffle(offChainProjectsWithDataFilteredByType)
-      : offChainProjectsWithDataFilteredByType,
+    allOffChainProjects: offChainProjectsWithDataFilteredByType,
     isAllOffChainProjectsLoading: isFetching || isAccountLoading,
   };
 };

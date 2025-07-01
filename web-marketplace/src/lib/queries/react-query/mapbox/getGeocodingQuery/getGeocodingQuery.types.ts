@@ -4,7 +4,7 @@ import {
   GeocodeResponse,
 } from '@mapbox/mapbox-sdk/services/geocoding';
 import { QueryObserverOptions } from '@tanstack/react-query';
-import { LngLatLike } from 'mapbox-gl';
+import type { LngLatLike } from 'mapbox-gl';
 
 import { ReactQueryBuilderResponse } from '../../types/react-query.types';
 

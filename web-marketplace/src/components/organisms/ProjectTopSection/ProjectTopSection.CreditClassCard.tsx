@@ -1,4 +1,5 @@
 import { useLingui } from '@lingui/react';
+import { useRouter } from 'next/navigation';
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -10,8 +11,6 @@ import { Account } from 'web-components/src/components/user/UserInfoCard';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { IS_REGEN, LINK_PREFIX } from 'lib/env';
-
-import { Link } from 'components/atoms';
 
 import {
   CREDIT_CLASS_SUBTITLE,
@@ -43,13 +42,18 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
   program,
 }) => {
   const { _ } = useLingui();
+  const router = useRouter();
 
   return (creditClassSanity || creditClassMetadata) &&
     (creditClassSanity?.path || onChainCreditClassId) ? (
-    <Link
-      href={`${LINK_PREFIX}/credit-classes/${
-        creditClassSanity?.path || onChainCreditClassId
-      }`}
+    <div
+      onClick={() =>
+        router.push(
+          `${LINK_PREFIX}/credit-classes/${
+            creditClassSanity?.path || onChainCreditClassId
+          }`,
+        )
+      }
     >
       <CreditClassCard
         title={
@@ -84,6 +88,6 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
         program={IS_REGEN ? program : undefined}
         sx={{ mt: [2, 4], py: [2, 6] }}
       />
-    </Link>
+    </div>
   ) : null;
 };

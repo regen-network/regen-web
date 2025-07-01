@@ -6,9 +6,9 @@ import cx from 'classnames';
 
 import { useWallet } from 'lib/wallet/wallet';
 
-import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection';
+import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection.legacy';
 import { useProjectsWithOrders } from 'hooks/projects/useProjectsWithOrders';
-import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick.legacy';
 
 interface Props {
   classId: string;

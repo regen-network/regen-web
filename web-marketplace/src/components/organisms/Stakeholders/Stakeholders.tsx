@@ -13,7 +13,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { SEE_LESS, SEE_MORE } from 'lib/constants/shared.constants';
 
-import { Link } from 'components/atoms';
+import { Link } from 'components/atoms/Link';
 
 export type Stakeholder = {
   accounts: Account | Account[] | undefined;

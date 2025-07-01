@@ -4,13 +4,14 @@ import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Image from 'next/image';
 import { makeStyles } from 'tss-react/mui';
 
 import { containerPaddingX, containerStyles } from '../../styles/container';
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 import { ProjectCardBodyTextsMapping } from '../cards/ProjectCard/ProjectCard.types';
 import PlayIcon from '../icons/PlayIcon';
-import { Image, OptimizeImageProps } from '../image';
+import { OptimizeImageProps } from '../image';
 import { PrefinanceTag } from '../PrefinanceTag/PrefinanceTag';
 import { ProjectAsset } from './ProjectMedia.ProjectAsset';
 
@@ -376,23 +377,14 @@ export default function ProjectMedia({
             {assets.map((item, index) => {
               if (isMedia(item)) {
                 if (item.type === 'image') {
-                  const image =
-                    imageStorageBaseUrl && apiServerUrl ? (
-                      <Image
-                        src={item.src}
-                        className={classes.item}
-                        alt={item.src}
-                        delay={index > 0 ? 1000 : 0}
-                        imageStorageBaseUrl={imageStorageBaseUrl}
-                        apiServerUrl={apiServerUrl}
-                      />
-                    ) : (
-                      <img
-                        src={item.src}
-                        className={classes.item}
-                        alt={item.src}
-                      />
-                    );
+                  const image = (
+                    <Image
+                      src={item.src}
+                      className={classes.item}
+                      alt={item.src}
+                      fill
+                    />
+                  );
 
                   return (
                     <div key={index} className={classes.sliderImageContainer}>

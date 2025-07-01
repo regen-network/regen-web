@@ -20,16 +20,12 @@ export const getMenuItems = (
           href: '/projects/1',
           label: _(msg`All projects`),
           linkComponent: Link,
-          importCallback: (): Promise<any> =>
-            import('../../../legacy-pages/Projects/AllProjects'),
         },
         {
           pathname,
           href: '/projects/prefinance',
           label: _(msg`Prefinance projects`),
           linkComponent: Link,
-          importCallback: (): Promise<any> =>
-            import('../../../legacy-pages/Projects/PrefinanceProjects'),
         },
       ]
     : undefined;
@@ -48,16 +44,12 @@ export const getMenuItems = (
           href: '/stats/activity',
           label: _(msg`Activity`),
           linkComponent: Link,
-          importCallback: (): Promise<any> =>
-            import('../../../legacy-pages/Activity'),
         },
         {
           pathname,
           href: '/ecocredit-batches/1',
           label: _(msg`Ecocredit batches`),
           linkComponent: Link,
-          importCallback: (): Promise<any> =>
-            import('../../../legacy-pages/EcocreditBatches'),
         },
       ],
     },

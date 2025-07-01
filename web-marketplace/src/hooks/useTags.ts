@@ -39,7 +39,7 @@ export const useTags = ({ activities, ecosystemTypes }: Params) => {
     activity => ({
       name: activity,
       icon: {
-        src: projectActivityIconsMapping?.[activity.toLowerCase()] ?? '',
+        src: projectActivityIconsMapping?.[activity.toLowerCase()] ?? null,
       },
     }),
   );

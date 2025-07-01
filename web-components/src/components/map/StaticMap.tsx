@@ -1,14 +1,22 @@
-import { lazy, Suspense, useState } from 'react';
+'use client';
+import { useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import bbox from '@turf/bbox';
 import { FeatureCollection } from 'geojson';
+import dynamic from 'next/dynamic';
 
 import { GreenPinIcon } from '../icons/GreenPinIcon';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-const Map = lazy(() => import('react-map-gl'));
-const Marker = lazy(() => import('./lib/Marker'));
+const Map = dynamic(() => import('react-map-gl'), {
+  loading: () => <CircularProgress color="secondary" />,
+  ssr: false,
+});
+const Marker = dynamic(() => import('react-map-gl').then(mod => mod.Marker), {
+  loading: () => <CircularProgress color="secondary" />,
+  ssr: false,
+});
 
 export interface MapProps {
   geojson: FeatureCollection;
@@ -55,32 +63,30 @@ export default function StaticMap({
   };
 
   return (
-    <Suspense fallback={<CircularProgress color="secondary" />}>
-      <Map
-        {...viewPort}
-        style={{ width: '100%', height: '100%' }}
-        mapboxAccessToken={mapboxToken}
-        mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
-        onLoad={onLoad}
-        attributionControl={false}
-        boxZoom={false}
-        doubleClickZoom={false}
-        dragRotate={false}
-        dragPan={false}
-        keyboard={false}
-        scrollZoom={false}
-        touchPitch={false}
-        touchZoomRotate={false}
-        cursor="default"
+    <Map
+      {...viewPort}
+      style={{ width: '100%', height: '100%' }}
+      mapboxAccessToken={mapboxToken}
+      mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
+      onLoad={onLoad}
+      attributionControl={false}
+      boxZoom={false}
+      doubleClickZoom={false}
+      dragRotate={false}
+      dragPan={false}
+      keyboard={false}
+      scrollZoom={false}
+      touchPitch={false}
+      touchZoomRotate={false}
+      cursor="default"
+    >
+      <Marker
+        latitude={boundary.latitude}
+        longitude={boundary.longitude}
+        style={{ cursor: 'default' }}
       >
-        <Marker
-          latitude={boundary.latitude}
-          longitude={boundary.longitude}
-          style={{ cursor: 'default' }}
-        >
-          <GreenPinIcon />
-        </Marker>
-      </Map>
-    </Suspense>
+        <GreenPinIcon />
+      </Marker>
+    </Map>
   );
 }

@@ -22,7 +22,7 @@ import {
 } from 'lib/constants/shared.constants';
 
 import { BreakText, GreyText, Link } from 'components/atoms';
-import { AccountLink } from 'components/atoms/AccountLink';
+import { AccountLink } from 'components/atoms/AccountLink.legacy';
 import WithLoader from 'components/atoms/WithLoader';
 import { NoCredits } from 'components/molecules';
 

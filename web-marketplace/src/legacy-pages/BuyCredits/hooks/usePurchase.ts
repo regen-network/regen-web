@@ -480,9 +480,9 @@ export const usePurchase = ({
                     });
                     // Reload crypto orders and balances
                     if (wallet?.address) {
-                      await reactQueryClient.invalidateQueries(
-                        getOrdersByBuyerAddressKey(wallet?.address),
-                      );
+                      await reactQueryClient.invalidateQueries({
+                        queryKey: getOrdersByBuyerAddressKey(wallet?.address),
+                      });
                       await reactQueryClient.invalidateQueries({
                         queryKey: ['balances', wallet?.address], // invalidate all query pages
                       });

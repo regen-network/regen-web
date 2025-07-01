@@ -10,8 +10,8 @@ import {
   Scalars,
 } from 'generated/sanity-graphql';
 
-import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection';
-import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
+import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection.legacy';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick.legacy';
 
 import { useFeaturedProjects } from './hooks/useFeaturedProjects';
 

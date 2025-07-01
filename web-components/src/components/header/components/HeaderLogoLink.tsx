@@ -1,5 +1,4 @@
 import React from 'react';
-import NextLink from 'next/link';
 import { makeStyles } from 'tss-react/mui';
 
 import RegenIcon from '../../icons/RegenIcon';

@@ -1,3 +1,5 @@
+import { keepPreviousData } from '@tanstack/react-query';
+
 import { queryProjectsByClass } from 'lib/ecocredit/api';
 
 import {
@@ -16,6 +18,6 @@ export const getProjectsByClassQuery = ({
 
     return await queryProjectsByClass({ client, request });
   },
-  keepPreviousData: true,
+  placeholderData: keepPreviousData,
   ...params,
 });

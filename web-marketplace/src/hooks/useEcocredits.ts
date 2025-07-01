@@ -154,20 +154,20 @@ export default function useEcocredits({
 
   const reloadBalances = async (): Promise<void> => {
     if (!address) return;
-    await reactQueryClient.invalidateQueries(
-      getBalancesQueryKey(
+    await reactQueryClient.invalidateQueries({
+      queryKey: getBalancesQueryKey(
         address,
         paginationParams?.offset ?? 0,
         paginationParams?.rowsPerPage ?? 0,
       ),
-    );
-    await reactQueryClient.invalidateQueries(
-      getEcocreditsQueryKey({
+    });
+    await reactQueryClient.invalidateQueries({
+      queryKey: getEcocreditsQueryKey({
         address,
         paginationParams,
         creditClassId,
       }),
-    );
+    });
   };
 
   return {

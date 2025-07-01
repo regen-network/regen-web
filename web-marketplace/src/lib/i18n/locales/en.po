@@ -1008,7 +1008,7 @@ msgstr ""
 msgid "Choose basket"
 msgstr ""
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:49
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:75
 msgid "Choose batch"
 msgstr ""
 
@@ -3895,7 +3895,7 @@ msgid "sell order id:"
 msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:36
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:55
 #: src/pages/Marketplace/Storefront/Storefront.tsx:154
 msgid "Sell orders"
 msgstr ""
@@ -5073,6 +5073,10 @@ msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Tradable.tsx:25
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
+msgstr ""
+
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:63
+msgid "You have no tradable credits that can be sold."
 msgstr ""
 
 #: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.constants.ts:3

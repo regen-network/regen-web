@@ -1,13 +1,20 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
+
+import { CreateButton } from './UserSellOrders.CreateButton';
+
+const CreateSellOrderFlow = lazy(async () => ({
+  default: (
+    await import('features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow')
+  ).CreateSellOrderFlow,
+}));
 
 interface UserSellOrdersToolbarProps {
   wrapperClassName?: string;
@@ -23,6 +30,7 @@ export const UserSellOrdersToolbar = ({
   const { credits } = useFetchEcocredits({ isPaginatedQuery: false });
   const tradableCredits =
     credits?.filter(credit => Number(credit.balance?.tradableAmount) > 0) || [];
+  const hasTradableCredits = tradableCredits.length > 0;
 
   return (
     <>
@@ -35,21 +43,38 @@ export const UserSellOrdersToolbar = ({
         <Subtitle size="xl" className="text-base sm:text-[22px]">
           <Trans>Sell orders</Trans>
         </Subtitle>
-        <div className="flex-none flex items-center">
-          {/* TODO:  If the member is an Editor or Viewer, this button should be hidden */}
-          <ContainedButton onClick={() => setIsSellFlowStarted(true)}>
-            + <Trans>Create Sell Order</Trans>
-          </ContainedButton>
-        </div>
+        {hasTradableCredits ? (
+          <CreateButton
+            hasTradableCredits={hasTradableCredits}
+            setIsSellFlowStarted={setIsSellFlowStarted}
+          />
+        ) : (
+          <InfoTooltip
+            arrow
+            placement="top"
+            title={_(msg`You have no tradable credits that can be sold.`)}
+          >
+            <div>
+              <CreateButton
+                hasTradableCredits={hasTradableCredits}
+                setIsSellFlowStarted={setIsSellFlowStarted}
+              />
+            </div>
+          </InfoTooltip>
+        )}
       </div>
-      <CreateSellOrderFlow
-        isFlowStarted={isSellFlowStarted}
-        setIsFlowStarted={setIsSellFlowStarted}
-        credits={tradableCredits}
-        placeholderText={_(msg`Choose batch`)}
-        refetchSellOrders={refetchSellOrders}
-        redirectOnSuccess={false}
-      />
+      {hasTradableCredits && isSellFlowStarted && (
+        <Suspense fallback={null}>
+          <CreateSellOrderFlow
+            isFlowStarted={isSellFlowStarted}
+            setIsFlowStarted={setIsSellFlowStarted}
+            credits={tradableCredits}
+            placeholderText={_(msg`Choose batch`)}
+            refetchSellOrders={refetchSellOrders}
+            redirectOnSuccess={false}
+          />
+        </Suspense>
+      )}
     </>
   );
 };

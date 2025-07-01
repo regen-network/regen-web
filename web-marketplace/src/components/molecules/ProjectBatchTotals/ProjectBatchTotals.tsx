@@ -31,7 +31,7 @@ export type ProjectBatchTotalsProps = {
   soldOutProjectsIds: string[];
   className?: string;
   isTerrasosProjectPage: boolean;
-  isComplianceProject?: boolean;
+  complianceCredits?: boolean;
 };
 
 export function ProjectBatchTotals({
@@ -40,7 +40,7 @@ export function ProjectBatchTotals({
   soldOutProjectsIds,
   className,
   isTerrasosProjectPage,
-  isComplianceProject,
+  complianceCredits,
 }: ProjectBatchTotalsProps): JSX.Element {
   const { _ } = useLingui();
   const isSoldOut = getIsSoldOut({
@@ -59,22 +59,20 @@ export function ProjectBatchTotals({
     <div
       className={cn(
         `grid grid-cols-1 ${
-          isComplianceProject ? 'sm:grid-cols-3' : 'sm:grid-cols-2'
+          complianceCredits ? 'sm:grid-cols-3' : 'sm:grid-cols-2'
         } gap-20 max-w-[650px]`,
         className,
       )}
     >
       <LabeledValue
-        label={
-          isComplianceProject ? _(msg`Credits Registered`) : _(msg`Issued`)
-        }
+        label={complianceCredits ? _(msg`Credits Registered`) : _(msg`Issued`)}
         tooltipLabel={
-          isComplianceProject
+          complianceCredits
             ? _(REGISTERED_CREDITS_TOOLTIP)
             : _(ISSUED_CREDITS_TOOLTIP)
         }
         number={
-          isComplianceProject
+          complianceCredits
             ? totals.registeredAmount
             : totals.tradableAmount + totals.retiredAmount
         }
@@ -82,7 +80,7 @@ export function ProjectBatchTotals({
         icon={<CreditsIssuedIcon />}
         tooltipClassName={tooltipClassName}
       />
-      {!isComplianceProject && (
+      {!complianceCredits && (
         <LabeledValue
           label={_(msg`For sale`)}
           tooltipLabel={_(FOR_SALE_CREDITS_TOOLTIP)}
@@ -104,7 +102,7 @@ export function ProjectBatchTotals({
         }
         tooltipLabel={_(TRADEABLE_CREDITS_TOOLTIP)}
         tooltipNumber={
-          !isComplianceProject
+          !complianceCredits
             ? getCreditsTooltip({
                 isSoldOut: isTerrasosProjectPage
                   ? terrasosIsSoldOut

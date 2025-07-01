@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useState } from 'react';
 import {
   createWasmAminoConverters,
@@ -16,6 +17,7 @@ import {
   regenAminoConverters,
   regenProtoRegistry,
 } from '@regen-network/api';
+import { getRPCQueryClient } from 'app/makeRPCQueryClient';
 import { chains } from 'chain-registry';
 
 import { UseStateSetter } from 'types/react/use-state';
@@ -138,20 +140,6 @@ export async function setupSigningClient(
       setLoading(false);
     }
   }
-}
-
-export async function getRPCQueryClient(): Promise<QueryClient> {
-  const { createRPCQueryClient } = regen.ClientFactory;
-  const client = await createRPCQueryClient({
-    rpcEndpoint: ledgerRPCUri,
-  });
-
-  const { createRPCQueryClient: createRPCQueryIBClient } = ibc.ClientFactory;
-  const ibcClient = await createRPCQueryIBClient({
-    rpcEndpoint: ledgerRPCUri,
-  });
-
-  return { ...ibcClient, ...client } as QueryClient;
 }
 
 async function setupRPCQueryClient(

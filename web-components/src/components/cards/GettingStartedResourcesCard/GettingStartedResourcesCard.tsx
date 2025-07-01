@@ -73,7 +73,7 @@ export const GettingStartedResourcesCard = ({
             >
               {header}
             </Title>
-            <Body size="lg" sx={{ pb: 5 }}>
+            <Body size="lg" sx={{ pb: 5 }} component="div">
               <BlockContent content={description} />
             </Body>
           </Grid>

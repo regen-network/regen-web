@@ -1,9 +1,9 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { SellOrderInfo } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
 import { QueryClient } from '@tanstack/react-query';
+import { getRPCQueryClient } from 'app/makeRPCQueryClient';
 
 import { Maybe } from 'generated/graphql';
-import { getRPCQueryClient } from 'ledger';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';

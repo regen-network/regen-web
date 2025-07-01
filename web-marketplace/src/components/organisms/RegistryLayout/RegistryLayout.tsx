@@ -16,7 +16,7 @@ import { RegistryLayoutConnectWalletModal } from './RegistryLayout.ConnectWallet
 import { RegistryLayoutCookiesTopBanner } from './RegistryLayout.CookiesTopBanner';
 import { RegistryLayoutErrorBannerModal } from './RegistryLayout.ErrorBanner';
 import { RegistryLayoutFooter } from './RegistryLayout.Footer';
-import { RegistryLayoutHeader } from './RegistryLayout.Header';
+import { RegistryLayoutHeader } from './RegistryLayout.Header.legacy';
 import { RegistryLayoutProcessingModal } from './RegistryLayout.ProcessingModal';
 import { RetryFailedFunctions } from './RegistryLayout.RetryFailedFunctions';
 import { RegistryLayoutSwitchWalletModal } from './RegistryLayout.SwitchWalletModal';

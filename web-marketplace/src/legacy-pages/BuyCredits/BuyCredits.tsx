@@ -8,13 +8,13 @@ import { Loading } from 'web-components/src/components/loading';
 import WithLoader from 'components/atoms/WithLoader';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetProject';
-import { useNavigateToSlug } from 'components/templates/ProjectDetails/hooks/useNavigateToSlug';
 
 import { cardDetailsMissingAtom, paymentOptionAtom } from './BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsForm } from './BuyCredits.Form';
 import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
 import { getFormModel } from './BuyCredits.utils';
+import { useNavigateToSlug } from './hooks/useNavigateToSlug';
 import { useSummarizePayment } from './hooks/useSummarizePayment';
 
 export const BuyCredits = () => {
@@ -40,7 +40,7 @@ export const BuyCredits = () => {
     cardSellOrders,
     slug,
     noProjectFound,
-  } = useGetProject();
+  } = useGetProject({ projectId });
 
   useNavigateToSlug(slug, '/buy');
 

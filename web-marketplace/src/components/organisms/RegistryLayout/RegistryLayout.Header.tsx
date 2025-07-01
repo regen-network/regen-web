@@ -1,14 +1,14 @@
-import { useMemo } from 'react';
-import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
+'use client';
+
+import React, { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 import { getClientConfig } from 'clients/Clients.config';
-import {
-  getDefaultAvatar,
-  getWalletAddress,
-} from 'legacy-pages/Dashboard/Dashboard.utils';
+import { getWalletAddress } from 'legacy-pages/Dashboard/Dashboard.utils';
+import { usePathname } from 'next/navigation';
 
 import Header from 'web-components/src/components/header';
 import { UserMenuItems } from 'web-components/src/components/header/components/UserMenuItems';
@@ -67,8 +67,8 @@ const getProfileLink = (
 
 const RegistryLayoutHeader: React.FC = () => {
   const { _ } = useLingui();
-  const { pathname } = useLocation();
   const navigate = useNavigate();
+  const pathname = usePathname();
   const { activeAccount, privActiveAccount } = useAuth();
   const { wallet, disconnect, accountByAddr, connect, isConnected } =
     useWallet();
@@ -79,7 +79,8 @@ const RegistryLayoutHeader: React.FC = () => {
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
   const clientConfig = getClientConfig();
 
-  const hasPrefinanceProjects = useLoaderData();
+  // TODO: Dynamically determine if there are prefinance projects available.
+  const hasPrefinanceProjects = false;
   const profileLink = getProfileLink(activeAccount, wallet);
 
   const {

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
@@ -10,6 +9,7 @@ import {
   getAvailableAmountByBatch,
   getDenomAllowedOptions,
 } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.utils';
+import { useRouter } from 'next/navigation';
 
 import { CelebrateIcon } from 'web-components/src/components/icons/CelebrateIcon';
 import { Option } from 'web-components/src/components/inputs/SelectTextField';
@@ -87,7 +87,7 @@ export const CreateSellOrderFlow = ({
 
   // Services access
   const { isConnected } = useWallet();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const closeCreateModal = (): void => {
     setIsCreateSellOrderOpen(false);
@@ -126,7 +126,7 @@ export const CreateSellOrderFlow = ({
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
     if (redirectOnSuccess) {
-      navigate('/dashboard/portfolio');
+      router.push('/dashboard/portfolio');
     } else {
       handleTxModalClose();
     }

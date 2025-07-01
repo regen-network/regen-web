@@ -1,4 +1,3 @@
-// eslint-disable-next-line lingui/no-unlocalized-strings
 'use client';
 
 import React from 'react';

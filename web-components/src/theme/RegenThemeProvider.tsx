@@ -1,4 +1,5 @@
-import * as React from 'react';
+'use client';
+import { ReactNode } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import {
   StyledEngineProvider,
@@ -19,7 +20,7 @@ declare module '@mui/styles/defaultTheme' {
 interface Props {
   readonly injectFonts?: boolean;
   readonly injectStyles?: (props?: any) => void;
-  readonly children: React.ReactNode;
+  readonly children: ReactNode;
   customTheme?: Theme;
 }
 
@@ -32,12 +33,10 @@ const RegenThemeProvider = ({
     injectStyles();
   }
   return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={customTheme ?? theme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
-    </StyledEngineProvider>
+    <ThemeProvider theme={customTheme ?? theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
   );
 };
 

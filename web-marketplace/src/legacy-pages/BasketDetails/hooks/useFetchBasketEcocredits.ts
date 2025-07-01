@@ -1,5 +1,9 @@
 import { useCallback, useMemo, useState } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
@@ -62,7 +66,7 @@ export const useFetchBasketEcocredits = ({
             key: new Uint8Array(),
           },
         },
-        keepPreviousData: true,
+        placeholderData: keepPreviousData,
       }),
     [queryClient, page, rowsPerPage, basketDenom],
   );

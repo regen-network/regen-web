@@ -26,10 +26,10 @@ import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/g
 import { getCreditClassByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getCreditClassByOnChainIdQuery/getCreditClassByOnChainIdQuery';
 import { getAllCreditClassPageQuery } from 'lib/queries/react-query/sanity/getAllCreditClassPageQuery/getAllCreditClassPageQuery';
 
-import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow';
+import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.legacy';
 import { useCreateSellOrderData } from 'features/marketplace/CreateSellOrderFlow/hooks/useCreateSellOrderData';
 import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
-import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar';
+import { SellOrdersActionsBar } from 'components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.legacy';
 import { getDisplayAccount } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 import { useBuySellOrderData } from 'hooks/useBuySellOrderData';
 

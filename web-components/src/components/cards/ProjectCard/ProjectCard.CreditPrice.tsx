@@ -125,6 +125,7 @@ export const CreditPrice = ({
           )}
         </Box>
         <Body
+          component="div"
           size="md"
           mobileSize="sm"
           sx={{

@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { State, WalletModalProps, WalletStatus } from '@cosmos-kit/core';
 import { useLingui } from '@lingui/react';

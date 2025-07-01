@@ -15,6 +15,7 @@ module.exports = {
     'lingui/no-unlocalized-strings': [
       1,
       {
+        ignore: ['use client'],
         ignoreFunction: ['test', 'makeStyles', 'withStyles', 'cn', 'styled'],
         ignoreAttribute: [
           'allow',

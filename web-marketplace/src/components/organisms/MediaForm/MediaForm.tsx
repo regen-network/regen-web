@@ -66,7 +66,7 @@ export const MediaForm = ({
       formRef={formRef}
       isDraftRef={isDraftRef}
       form={form}
-      onSubmit={async data => {
+      onSubmit={async (data: MediaFormSchemaType) => {
         try {
           // Remove the placeholder input
           const filteredData = {

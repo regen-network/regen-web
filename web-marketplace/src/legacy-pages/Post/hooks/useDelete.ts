@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
+import { useRouter } from 'next/navigation';
 import { postData } from 'utils/fetch/postData';
 
 import { apiUri } from 'lib/apiUri';
@@ -37,7 +37,7 @@ export const useDelete = ({ iri, offChainProjectId, projectHref }: Params) => {
     setOpen(true);
   };
   const reactQueryClient = useQueryClient();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const deletePost = useCallback(async () => {
     onClose();
@@ -67,7 +67,7 @@ export const useDelete = ({ iri, offChainProjectId, projectHref }: Params) => {
               refetchType: 'none',
             });
             setBannerText(_(POST_IS_DELETED));
-            if (projectHref) navigate(`${projectHref}#data-stream`);
+            if (projectHref) router.push(`${projectHref}#data-stream`);
           },
         });
       } catch (e) {
@@ -77,7 +77,7 @@ export const useDelete = ({ iri, offChainProjectId, projectHref }: Params) => {
   }, [
     _,
     iri,
-    navigate,
+    router,
     offChainProjectId,
     projectHref,
     reactQueryClient,

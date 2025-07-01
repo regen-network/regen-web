@@ -98,7 +98,7 @@ export const useStyles = makeStyles<StyleProps>()(
       },
     },
     hiddenScrollBar: {
-      '-ms-overflow-style': 'none',
+      msOverflowStyle: 'none',
       scrollbarWidth: 'none',
       '&::-webkit-scrollbar': {
         display: 'none',

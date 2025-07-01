@@ -29,7 +29,7 @@ import { COLOR_SCHEME, IS_REGEN, IS_TERRASOS } from 'lib/env';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import { TebuBannerWrapper } from 'components/organisms/TebuBannerWrapper/TebuBannerWrapper';
-import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick.legacy';
 
 import { useResetFilters } from '../hooks/useResetFilters';
 import { useProjectsContext } from '../Projects.context';

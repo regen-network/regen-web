@@ -99,31 +99,33 @@ export default function ProjectImpactCard({
           <Box>
             {hasSdgs && (
               <Grid container spacing={2.5} sx={{ mb: 3.125, mt: -2.5 }}>
-                {sdgs.map(sdg => (
-                  <Grid key={sdg.src} item>
-                    {IS_REGEN ? (
-                      <Box
-                        component="img"
-                        sx={{
-                          width: { xs: 50, sm: 60 },
-                          height: { xs: 50, sm: 60 },
-                        }}
-                        src={sdg.src}
-                        alt={sdg.alt}
-                      />
-                    ) : (
-                      <SvgColorOverride
-                        src={sdg.src}
-                        color="rgba(var(--ac-neutral-500) / 1)"
-                        filterIntensity={6}
-                        sx={{
-                          width: { xs: 50, sm: 60 },
-                          height: { xs: 50, sm: 60 },
-                        }}
-                      />
-                    )}
-                  </Grid>
-                ))}
+                {sdgs.map(sdg =>
+                  sdg.src ? (
+                    <Grid key={sdg.src} item>
+                      {IS_REGEN ? (
+                        <Box
+                          component="img"
+                          sx={{
+                            width: { xs: 50, sm: 60 },
+                            height: { xs: 50, sm: 60 },
+                          }}
+                          src={sdg.src}
+                          alt={sdg.alt}
+                        />
+                      ) : (
+                        <SvgColorOverride
+                          src={sdg.src}
+                          color="rgba(var(--ac-neutral-500) / 1)"
+                          filterIntensity={6}
+                          sx={{
+                            width: { xs: 50, sm: 60 },
+                            height: { xs: 50, sm: 60 },
+                          }}
+                        />
+                      )}
+                    </Grid>
+                  ) : null,
+                )}
               </Grid>
             )}
             {standard && (

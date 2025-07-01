@@ -1,10 +1,12 @@
+'use client';
+
 import { ReactNode, useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { EDIT_PROJECT } from 'legacy-pages/ProjectEdit/ProjectEdit.constants';
 import { SOLD_OUT_TOOLTIP } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
+import { usePathname, useRouter } from 'next/navigation';
 import { Buy1Event } from 'web-marketplace/src/lib/tracker/types';
 import { useTracker } from 'web-marketplace/src/lib/tracker/useTracker';
 
@@ -76,11 +78,13 @@ export const SellOrdersActionsBar = ({
   isTerrasos,
 }: Params): JSX.Element => {
   const { _ } = useLingui();
-  const location = useLocation();
+  const pathname = usePathname();
+  const router = useRouter();
+
   const { track } = useTracker();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const navigate = useNavigate();
+
   const { loginDisabled } = useWallet();
   const bodyTexts = useMemo(() => getProjectCardBodyTextMapping(_), [_]);
   const buttons = useMemo(() => getProjectCardButtonMapping(_), [_]);
@@ -114,7 +118,7 @@ export const SellOrdersActionsBar = ({
               ))}
             <ContainedButton
               onClick={() =>
-                navigate(
+                router.push(
                   `/project-pages/${
                     onChainProjectId ?? offChainProjectId
                   }/edit/basic-info`,
@@ -198,7 +202,7 @@ export const SellOrdersActionsBar = ({
                       }
                       onClick={() => {
                         track<Buy1Event>('buy1', {
-                          url: location.pathname,
+                          url: pathname,
                           buttonLocation: 'stickyNav',
                           projectName,
                           projectId: onChainProjectId,

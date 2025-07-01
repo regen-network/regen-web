@@ -22,6 +22,7 @@ import { DashboardNavHeaderData } from './DashboardNavigation.types';
 type Props = DashboardNavHeaderData & {
   collapsed?: boolean;
   onViewProfileClick?: (href: string) => void;
+  hasWalletAddress?: boolean;
 };
 
 export const DashboardNavHeader = ({
@@ -30,6 +31,7 @@ export const DashboardNavHeader = ({
   onAccountSelect,
   collapsed = false,
   onViewProfileClick,
+  hasWalletAddress = true,
 }: Props) => {
   const { name, address, image, id } = activeAccount;
   const avatarSrc =
@@ -42,13 +44,7 @@ export const DashboardNavHeader = ({
           : AccountType.Organization,
     });
 
-  const isWalletAddress =
-    address && (address.startsWith('regen') || address.length > 20);
-
-  const short = isWalletAddress
-    ? `${address.slice(0, 9)}…${address.slice(-6)}`
-    : address;
-  const canCopy = isWalletAddress;
+  const short = `${address.slice(0, 9)}…${address.slice(-6)}`;
 
   const canSwitch = accounts.length > 1;
   const { _ } = useLingui();
@@ -88,12 +84,11 @@ export const DashboardNavHeader = ({
             )}
           </button>
 
-          {/* Address/email display */}
           <div className="group flex items-center gap-3">
-            {canCopy ? (
+            {hasWalletAddress ? (
               <CopyButton
                 className="group/copy flex items-center gap-3"
-                content={address}
+                content={short}
                 toastText={_(COPIED)}
                 iconClassName="h-[14px] w-[14px] text-bc-neutral-500 group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
                 tooltipText={''}
@@ -107,7 +102,7 @@ export const DashboardNavHeader = ({
               </CopyButton>
             ) : (
               <Body size="xs" className="text-sc-text-sub-header">
-                {address} {/* Show email as-is */}
+                {address.length > 21 ? short : address}
               </Body>
             )}
           </div>
@@ -115,7 +110,7 @@ export const DashboardNavHeader = ({
           <button
             type="button"
             className="mt-[4px] mb-[4px] flex items-center gap-[4px] text-[12px] bg-transparent border-none p-0 text-left cursor-pointer group hover:text-sc-text-paragraph"
-            onClick={() => onViewProfileClick?.('/profiles/' + (address || id))}
+            onClick={() => onViewProfileClick?.('/profiles/' + id)}
           >
             <Subtitle className="underline text-[12px] text-bc-neutral-400 group-hover:text-sc-text-paragraph transition-colors">
               <Trans>View public profile</Trans>

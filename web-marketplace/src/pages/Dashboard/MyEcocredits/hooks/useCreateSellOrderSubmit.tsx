@@ -21,9 +21,7 @@ import { useAuth } from 'lib/auth/auth';
 import { denomToMicro } from 'lib/denom.utils';
 import { SELL_ORDERS_EXTENTED_KEY } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.constants';
 import { ALL_PROJECTS_QUERY_KEY } from 'lib/queries/react-query/registry-server/graphql/getAllProjectsQuery/getAllProjectsQuery.constants';
-import { getProjectByIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery.constants';
 import { getProjectByOnChainIdKey } from 'lib/queries/react-query/registry-server/graphql/getProjectByOnChainIdQuery/getProjectByOnChainIdQuery.constants';
-import { getProjectBySlugKey } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery.constants';
 import { getProjectIdByOnChainIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectIdByOnChainIdQuery/getProjectIdByOnChainIdQuery';
 import { SellFailureEvent, SellSuccessEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
@@ -103,7 +101,6 @@ const useCreateSellOrderSubmit = ({
         batchDenom.substring(0, batchDenom.indexOf('-', 4));
 
       const onError = (err?: Error): void => {
-        const batchInfo = credits?.find(batch => batch.denom === batchDenom);
         track<SellFailureEvent>('sellFailure', {
           batchDenom,
           projectId: batchInfo?.projectId,

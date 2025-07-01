@@ -231,5 +231,5 @@ export const socialCulturalFactors = [
 
 export const PRESERVATION = 'CONSERVATION';
 export const RESTORATION = 'ECOSYSTEM_RESTORATION';
-export const DEFAULT_DURATION_TOOLTIP = msg`Eligible projects implement preservation and/or restoration activities in different proportion/rates. Tebu recognizes restoration activities have a higher cost by assigning a greater value to restoration actions.`;
+export const DEFAULT_DURATION_TOOLTIP = msg`Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes.`;
 export const V4_DURATION_TOOLTIP = msg`Credits issuance is calculated based on a weighted scale between 20 and 50 years.`;

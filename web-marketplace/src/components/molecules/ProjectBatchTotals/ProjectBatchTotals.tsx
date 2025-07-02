@@ -16,6 +16,7 @@ import { getIsSoldOut } from 'pages/Projects/AllProjects/utils/getIsSoldOut';
 
 import type { BatchTotalsForProject } from '../../../types/ledger/ecocredit';
 import {
+  ESCROWED_CREDITS_TOOLTIP,
   FOR_SALE_CREDITS_TOOLTIP,
   formatNumberOptions,
   ISSUED_CREDITS_TOOLTIP,
@@ -105,7 +106,11 @@ export function ProjectBatchTotals({
         label={
           IS_TERRASOS ? _(msg`Credits Available`) : _(msg`Credits Tradable`)
         }
-        tooltipLabel={_(TRADEABLE_CREDITS_TOOLTIP)}
+        tooltipLabel={
+          complianceCredits
+            ? _(TRADEABLE_CREDITS_TOOLTIP)
+            : `${_(TRADEABLE_CREDITS_TOOLTIP)} ${_(ESCROWED_CREDITS_TOOLTIP)}`
+        }
         tooltipNumber={
           !complianceCredits
             ? getCreditsTooltip({

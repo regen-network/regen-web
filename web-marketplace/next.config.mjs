@@ -44,10 +44,6 @@ const nextConfig = {
       encoding: './empty-shim.js',
     },
   },
-  // Move the dev indicators to the bottom right corner to avoid blocking the view of ReactQueryDevtools
-  devIndicators: {
-    position: 'bottom-right',
-  },
   // Production environment
   images: {
     remotePatterns: [

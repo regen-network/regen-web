@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.4](https://github.com/regen-network/regen-web/compare/v2.9.3...v2.9.4) (2025-07-02)
+
+### Bug Fixes
+
+- update labels and tooltip texts in ProjectBatchTotals component; adjust amounts ([87ff7d8](https://github.com/regen-network/regen-web/commit/87ff7d83f995ffe1ab303b22d6a36d9f21474aa4))
+- update tooltip text ([f702292](https://github.com/regen-network/regen-web/commit/f7022924862e101a5ac02248b42938692396d3b0))
+
 ## [2.9.2](https://github.com/regen-network/regen-web/compare/v2.9.1...v2.9.2) (2025-06-05)
 
 ### Bug Fixes

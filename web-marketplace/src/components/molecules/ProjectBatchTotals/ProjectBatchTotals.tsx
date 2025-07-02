@@ -50,6 +50,7 @@ export function ProjectBatchTotals({
     ? isSoldOut
     : !hasAvailableCredits;
 
+  // eslint-disable-next-line lingui/no-unlocalized-strings
   const tooltipClassName = IS_TERRASOS ? 'w-[17px] h-[17px]' : '';
   return (
     <div
@@ -62,9 +63,7 @@ export function ProjectBatchTotals({
     >
       <LabeledValue
         label={
-          isComplianceProject
-            ? _(msg`Credits Registered`)
-            : _(msg`Credits issued`)
+          isComplianceProject ? _(msg`Credits Registered`) : _(msg`Issued`)
         }
         tooltipLabel={
           isComplianceProject
@@ -74,9 +73,7 @@ export function ProjectBatchTotals({
         number={
           isComplianceProject
             ? totals.registeredAmount
-            : totals.tradableAmount +
-              totals.retiredAmount +
-              totals.forSaleAmount
+            : totals.tradableAmount + totals.retiredAmount
         }
         formatNumberOptions={formatNumberOptions}
         icon={<CreditsIssuedIcon />}
@@ -99,9 +96,7 @@ export function ProjectBatchTotals({
         />
       )}
       <LabeledValue
-        label={
-          IS_TERRASOS ? _(msg`Credits Available`) : _(msg`Credits Tradable`)
-        }
+        label={IS_TERRASOS ? _(msg`Credits Available`) : _(msg`Tradable`)}
         tooltipLabel={_(TRADEABLE_CREDITS_TOOLTIP)}
         tooltipNumber={getCreditsTooltip({
           isSoldOut: IS_TERRASOS ? terrasosIsSoldOut : isSoldOut,
@@ -116,7 +111,7 @@ export function ProjectBatchTotals({
         tooltipClassName={tooltipClassName}
       />
       <LabeledValue
-        label={_(msg`Credits Retired`)}
+        label={_(msg`Retired`)}
         tooltipLabel={_(RETIRED_CREDITS_TOOLTIP)}
         number={totals.retiredAmount}
         formatNumberOptions={formatNumberOptions}

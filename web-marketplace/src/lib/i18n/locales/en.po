@@ -1008,7 +1008,7 @@ msgstr ""
 msgid "Choose basket"
 msgstr ""
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:75
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:72
 msgid "Choose batch"
 msgstr ""
 
@@ -1258,7 +1258,7 @@ msgid "Create Project - Access Denied"
 msgstr ""
 
 #: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:231
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:41
+#: src/components/organisms/UserSellOrders/UserSellOrders.CreateButton.tsx:21
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
 msgid "Create Sell Order"
 msgstr ""
@@ -1432,7 +1432,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:41
 #: src/components/organisms/Order/Order.Summary.tsx:60
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:305
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:304
 msgid "Credits"
 msgstr ""
 
@@ -1445,7 +1445,7 @@ msgstr ""
 msgid "credits available"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:103
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:107
 msgid "Credits Available"
 msgstr ""
 
@@ -1477,7 +1477,7 @@ msgstr ""
 msgid "Credits cannot exceed"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:8
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:9
 msgid "Credits currently available for purchase with fiat or cryptocurrency on Regen Marketplace."
 msgstr ""
 
@@ -1505,7 +1505,7 @@ msgstr ""
 msgid "Credits issuance is calculated based on a weighted scale between 20 and 50 years."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:67
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:71
 msgid "Credits issued"
 msgstr ""
 
@@ -1517,17 +1517,17 @@ msgstr ""
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:66
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:70
 msgid "Credits Registered"
 msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:46
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:119
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:133
 msgid "Credits Retired"
 msgstr ""
 
 #: src/components/molecules/BatchTotalsGrid.tsx:39
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:103
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:107
 msgid "Credits Tradable"
 msgstr ""
 
@@ -1871,7 +1871,7 @@ msgstr ""
 msgid "eligible activities"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:234
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:153
 msgid "Eligible projects implement preservation and/or restoration activities in different proportion/rates. Tebu recognizes restoration activities have a higher cost by assigning a greater value to restoration actions."
 msgstr ""
 
@@ -1932,6 +1932,10 @@ msgstr ""
 
 #: src/components/organisms/AgreePurchaseForm/AgreePurchaseForm.Retirement.tsx:129
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
+msgstr ""
+
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+msgid "Excludes escrowed credits."
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
@@ -2066,7 +2070,7 @@ msgstr ""
 msgid "For Land Stewards"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:87
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:91
 msgid "For sale"
 msgstr ""
 
@@ -3454,7 +3458,7 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
-#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:153
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:234
 msgid "Projects must have a duration of at least 20 years to ensure demonstrable and quantifiable results in biodiversity. Tebu promotes projects that last longer, ensuring long term ecological processes."
 msgstr ""
 
@@ -3689,7 +3693,7 @@ msgstr ""
 msgid "Retired by"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:8
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr ""
 
@@ -3895,7 +3899,7 @@ msgid "sell order id:"
 msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:55
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:44
 #: src/pages/Marketplace/Storefront/Storefront.tsx:154
 msgid "Sell orders"
 msgstr ""
@@ -4034,7 +4038,7 @@ msgstr ""
 msgid "Social and Cultural Index"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:9
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:10
 #: src/lib/constants/shared.constants.tsx:174
 msgid "Sold Out"
 msgstr ""
@@ -4567,13 +4571,13 @@ msgstr ""
 msgid "Tradable Credits"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
-#~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
-#~ msgstr ""
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
+msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
+msgstr ""
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
-msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
-msgstr ""
+#~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
+#~ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:36
 msgid "Trade"
@@ -5075,7 +5079,7 @@ msgstr ""
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
 msgstr ""
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:63
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:55
 msgid "You have no tradable credits that can be sold."
 msgstr ""
 

@@ -16,6 +16,7 @@ import { getIsSoldOut } from 'pages/Projects/AllProjects/utils/getIsSoldOut';
 
 import type { BatchTotalsForProject } from '../../../types/ledger/ecocredit';
 import {
+  ESCROWED_CREDITS_TOOLTIP,
   FOR_SALE_CREDITS_TOOLTIP,
   formatNumberOptions,
   ISSUED_CREDITS_TOOLTIP,
@@ -30,6 +31,8 @@ export type ProjectBatchTotalsProps = {
   projectWithOrderData?: NormalizeProject;
   soldOutProjectsIds: string[];
   className?: string;
+  isTerrasosProjectPage: boolean;
+  complianceCredits?: boolean;
 };
 
 export function ProjectBatchTotals({
@@ -37,6 +40,8 @@ export function ProjectBatchTotals({
   projectWithOrderData,
   soldOutProjectsIds,
   className,
+  isTerrasosProjectPage,
+  complianceCredits,
 }: ProjectBatchTotalsProps): JSX.Element {
   const { _ } = useLingui();
   const isSoldOut = getIsSoldOut({
@@ -45,7 +50,6 @@ export function ProjectBatchTotals({
   });
   const hasSoldOutProject = soldOutProjectsIds.length > 0;
   const hasAvailableCredits = totals.tradableAmount > 0;
-  const isComplianceProject = !hasSoldOutProject && IS_TERRASOS;
   const terrasosIsSoldOut = hasSoldOutProject
     ? isSoldOut
     : !hasAvailableCredits;
@@ -55,24 +59,24 @@ export function ProjectBatchTotals({
     <div
       className={cn(
         `grid grid-cols-1 ${
-          isComplianceProject ? 'sm:grid-cols-3' : 'sm:grid-cols-2'
+          complianceCredits ? 'sm:grid-cols-3' : 'sm:grid-cols-2'
         } gap-20 max-w-[650px]`,
         className,
       )}
     >
       <LabeledValue
         label={
-          isComplianceProject
+          complianceCredits
             ? _(msg`Credits Registered`)
             : _(msg`Credits issued`)
         }
         tooltipLabel={
-          isComplianceProject
+          complianceCredits
             ? _(REGISTERED_CREDITS_TOOLTIP)
             : _(ISSUED_CREDITS_TOOLTIP)
         }
         number={
-          isComplianceProject
+          complianceCredits
             ? totals.registeredAmount
             : totals.tradableAmount +
               totals.retiredAmount +
@@ -82,12 +86,12 @@ export function ProjectBatchTotals({
         icon={<CreditsIssuedIcon />}
         tooltipClassName={tooltipClassName}
       />
-      {!isComplianceProject && (
+      {!complianceCredits && (
         <LabeledValue
           label={_(msg`For sale`)}
           tooltipLabel={_(FOR_SALE_CREDITS_TOOLTIP)}
           tooltipNumber={getCreditsTooltip({
-            isSoldOut: IS_TERRASOS ? terrasosIsSoldOut : isSoldOut,
+            isSoldOut: isTerrasosProjectPage ? terrasosIsSoldOut : isSoldOut,
             project: projectWithOrderData,
             _,
           })}
@@ -102,12 +106,22 @@ export function ProjectBatchTotals({
         label={
           IS_TERRASOS ? _(msg`Credits Available`) : _(msg`Credits Tradable`)
         }
-        tooltipLabel={_(TRADEABLE_CREDITS_TOOLTIP)}
-        tooltipNumber={getCreditsTooltip({
-          isSoldOut: IS_TERRASOS ? terrasosIsSoldOut : isSoldOut,
-          project: projectWithOrderData,
-          _,
-        })}
+        tooltipLabel={
+          complianceCredits
+            ? _(TRADEABLE_CREDITS_TOOLTIP)
+            : `${_(TRADEABLE_CREDITS_TOOLTIP)} ${_(ESCROWED_CREDITS_TOOLTIP)}`
+        }
+        tooltipNumber={
+          !complianceCredits
+            ? getCreditsTooltip({
+                isSoldOut: isTerrasosProjectPage
+                  ? terrasosIsSoldOut
+                  : isSoldOut,
+                project: projectWithOrderData,
+                _,
+              })
+            : undefined
+        }
         number={totals.tradableAmount}
         formatNumberOptions={formatNumberOptions}
         icon={

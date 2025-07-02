@@ -1,6 +1,7 @@
 import React from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import Image from 'next/image';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import { StepCard } from 'web-components/src/components/cards/StepCard';
@@ -38,7 +39,7 @@ const WrappedStepCard: React.FC<
     <StepCard
       icon={
         icon?.asset?.url ? (
-          <img src={icon.asset.url} alt={title || ''} />
+          <Image src={icon.asset.url} alt={title || ''} />
         ) : undefined
       }
       step={{

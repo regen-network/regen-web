@@ -1,17 +1,20 @@
 import Box from '@mui/material/Box';
 import { Theme } from '@mui/material/styles';
 import { makeStyles } from 'tss-react/mui';
+import Image from 'next/image';
 
 import ContainedButton from '../buttons/ContainedButton';
 import { Body, Title } from '../typography';
+import { SadBeeIcon } from '../../components/icons/SadBeeIcon';
 
 export interface ErrorViewProps {
-  img?: JSX.Element;
   home?: string;
   msg?: string;
   title: string;
   bodyText: string;
   buttonText: string;
+  isNetworkError?: boolean;
+  imgSrc?: string;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -38,28 +41,48 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
   },
   image: {
-    '& img': {
-      width: '70%',
-      margin: '0 auto',
-      left: `-${theme.spacing(1.5)}`,
-    },
+    width: '70%',
+    margin: '0 auto',
+    left: `-${theme.spacing(1.5)}`,
   },
 }));
 
 const ErrorView = ({
-  img,
   home = '/',
   msg,
   title,
   bodyText,
   buttonText,
+  isNetworkError,
+  imgSrc,
 }: ErrorViewProps): JSX.Element => {
   const { classes } = useStyles();
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <div className={classes.container}>
-        {img && <div className={classes.image}>{img}</div>}
+        {isNetworkError && (
+          <div className={classes.image}>
+            <SadBeeIcon />
+          </div>
+        )}
+        {!isNetworkError && imgSrc && (
+          <div className={classes.image}>
+            <Image
+              alt="error"
+              src={imgSrc}
+              sizes="100vw"
+              // Make the image display full width
+              // and preserve its aspect ratio
+              style={{
+                width: '100%',
+                height: 'auto',
+              }}
+              width={366}
+              height={220}
+            />
+          </div>
+        )}
         <Title
           variant="h1"
           sx={{ textAlign: 'center', color: 'primary.contrastText', mb: 4.25 }}

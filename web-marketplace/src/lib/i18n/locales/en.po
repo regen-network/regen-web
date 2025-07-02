@@ -1475,9 +1475,9 @@ msgstr ""
 msgid "credits"
 msgstr ""
 
-#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:305
-#: src/components/organisms/Order/Order.Summary.tsx:60
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:42
+#: src/components/organisms/Order/Order.Summary.tsx:60
+#: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:304
 msgid "Credits"
 msgstr ""
 
@@ -1490,7 +1490,7 @@ msgstr ""
 msgid "credits available"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:99
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:101
 msgid "Credits Available"
 msgstr ""
 
@@ -1522,7 +1522,7 @@ msgstr ""
 msgid "Credits cannot exceed"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:8
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:9
 msgid "Credits currently available for purchase with fiat or cryptocurrency on Regen Marketplace."
 msgstr ""
 
@@ -1562,7 +1562,7 @@ msgstr ""
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:66
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:70
 msgid "Credits Registered"
 msgstr ""
 
@@ -1985,6 +1985,10 @@ msgstr ""
 msgid "Examples of a retirement reason include: “company travel 2025”, “offsetting my personal footprint”, or the name of a specific person or organization."
 msgstr ""
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+msgid "Excludes escrowed credits."
+msgstr ""
+
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 #~ msgid "Exit to homepage"
 #~ msgstr ""
@@ -2121,7 +2125,7 @@ msgstr ""
 msgid "For Land Stewards"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:84
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:86
 msgid "For sale"
 msgstr ""
 
@@ -3796,7 +3800,7 @@ msgstr ""
 msgid "Retired by"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:8
 msgid "Retired credits have been taken out of circulation permanently and cannot be sold to anyone else."
 msgstr ""
 
@@ -4141,6 +4145,7 @@ msgstr ""
 msgid "Social and Cultural Index"
 msgstr ""
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:10
 #: src/lib/constants/shared.constants.tsx:174
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:9
 msgid "Sold Out"
@@ -4685,17 +4690,17 @@ msgstr ""
 msgid "Tradable Credits"
 msgstr ""
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
-#~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
-#~ msgstr ""
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
+msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
+msgstr ""
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
 #~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
 #~ msgstr ""
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
-msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Includes escrowed credits."
-msgstr ""
+#~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
+#~ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:36
 msgid "Trade"

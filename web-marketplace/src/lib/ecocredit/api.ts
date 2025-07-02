@@ -79,7 +79,7 @@ export const getBatchesTotal = (
       {
         cancelledAmount: 0,
         retiredAmount: 0,
-        tradableAmount: creditsForSale ? -creditsForSale : 0, // Excludes escrowed credits.
+        tradableAmount: 0,
         forSaleAmount: creditsForSale ?? 0,
       },
     );

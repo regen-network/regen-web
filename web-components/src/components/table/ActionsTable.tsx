@@ -164,6 +164,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
         border: 1,
         borderColor: 'info.light',
         overflow: 'hidden',
+        borderRadius: '5px',
         ...sx?.root,
       }}
     >

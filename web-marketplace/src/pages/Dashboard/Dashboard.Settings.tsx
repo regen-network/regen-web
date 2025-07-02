@@ -61,7 +61,7 @@ export const DashboardEditSettings = () => {
   useVerifyToken();
 
   return (
-    <div className="px-10 py-40 md:p-40 bg-white border border-solid border-sc-card-standard-stroke rounded-[5px]">
+    <div className="px-10 py-40 md:p-40 bg-bc-neutral-0 border border-solid border-sc-card-standard-stroke rounded-[5px]">
       {(error as string) && (
         <ErrorBanner
           text={(error as string).toString()}

@@ -5,6 +5,8 @@ import { Subtitle } from 'web-components/src/components/typography/Subtitle';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { AccountType } from 'generated/graphql';
+
 import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 
 import { UNNAMED } from './DashboardNavigation.constants';
@@ -30,8 +32,8 @@ export const DashboardNavigationMobileHeader = ({
       ...activeAccount,
       type:
         activeAccount.type === 'user'
-          ? (window as any).AccountType?.User || 'USER'
-          : (window as any).AccountType?.Org || 'ORG',
+          ? AccountType.User
+          : AccountType.Organization,
     });
 
   return (

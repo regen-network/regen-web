@@ -149,7 +149,7 @@ export const Dashboard = () => {
   const { hasAnyBridgeCredits, isLoading: bridgeLoading } =
     useBridgeAvailability();
 
-  if (!activeAccount) return null;
+  if (!activeAccount || !wallet?.address || !privActiveAccount) return null;
 
   const hasWalletAddress = !!wallet?.address;
 
@@ -275,19 +275,12 @@ export const Dashboard = () => {
                   {(section === 'credit-classes' ||
                     section === 'projects' ||
                     section === 'portfolio' ||
-                    section === 'credit-batches' || // Add this line
+                    section === 'credit-batches' ||
                     section === 'profile') && (
                     <ViewProfileButton
                       setIsWarningModalOpen={setIsWarningModalOpen}
                       section={section}
-                      activeAccount={
-                        activeAccount
-                          ? {
-                              ...activeAccount,
-                              addr: activeAccount.addr ?? undefined,
-                            }
-                          : undefined
-                      }
+                      activeAccount={activeAccount}
                     />
                   )}
                 </Flex>

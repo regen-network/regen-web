@@ -1,5 +1,4 @@
 import { useCallback, useMemo, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
@@ -39,7 +38,6 @@ export const DashboardEditMain = () => {
   const { activeAccount } = useAuth();
   const [updateAccountById] = useUpdateAccountByIdMutation();
   const reactQueryClient = useQueryClient();
-  const navigate = useNavigate();
   const defaultAvatar = getDefaultAvatar(activeAccount);
   const [profileBannerCard, setProfileBannerCard] = useAtom(
     profileBannerCardAtom,
@@ -148,8 +146,7 @@ export const DashboardEditMain = () => {
   const onSuccess = useCallback(() => {
     setBannerTextAtom(_(PROFILE_SAVED));
     refreshProfileData();
-    navigate('/dashboard');
-  }, [setBannerTextAtom, _, refreshProfileData, navigate]);
+  }, [setBannerTextAtom, _, refreshProfileData]);
 
   const onUpload = useOnUploadCallback({
     fileNamesToDeleteRef,

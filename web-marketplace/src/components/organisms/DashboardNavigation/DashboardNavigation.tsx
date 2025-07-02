@@ -108,10 +108,12 @@ export const DashboardNavigation = ({
       aria-label={_(DASHBOARD_NAVIGATION_ARIA_LABEL)}
       className={cn(
         NAV_BASE_CLASSES,
-        collapsed ? 'w-[100px] px-2 pt-[27px] pb-20' : 'w-[263px]',
-        !collapsed && 'px-20 md:px-20 pt-30 pb-20',
+        collapsed
+          ? 'w-[100px] px-2 pt-[27px] pb-20'
+          : 'w-[263px] px-20 md:px-20 pt-30 pb-20',
         'md:block',
-        'fixed md:relative top-0 left-0 h-full z-50 transform transition-transform duration-300 ease-in-out',
+        'fixed md:relative top-0 left-0 h-full z-50 transform',
+        'transition-all duration-200 ease-in-out',
         mobileMenuOpen || false
           ? 'translate-x-0'
           : '-translate-x-full md:translate-x-0',

@@ -76,7 +76,7 @@ export const DashboardNavHeader = ({
             aria-expanded={open}
             aria-haspopup="true"
           >
-            <Subtitle className="text-bc-neutral-900 pt-5" size="md">
+            <Subtitle className="text-bc-neutral-900 pt-5 text-[16px]">
               {name || _(UNNAMED)}
             </Subtitle>
             {canSwitch && (

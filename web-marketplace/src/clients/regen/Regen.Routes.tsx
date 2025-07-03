@@ -85,7 +85,6 @@ const EcocreditsByAccount = safeLazy(
 // since safeLazy itself uses ErrorPage as its fallback component when imports fail.
 const ErrorPage = lazy(() => import('../../legacy-pages/ErrorPage'));
 const Home = safeLazy(() => import('../../legacy-pages/Home'));
-const LandStewards = safeLazy(() => import('../../legacy-pages/LandStewards'));
 const LoginPage = safeLazy(() => import('../../legacy-pages/Login'));
 const Media = safeLazy(() => import('../../legacy-pages/Media'));
 
@@ -187,7 +186,6 @@ export const getRegenRoutes = ({
           path="create-methodology"
           element={<Navigate to="/" replace />}
         />
-        <Route path="project-developers" element={<LandStewards />} />
         <Route
           path="methodology-review-process"
           element={<Navigate to="/" replace />}

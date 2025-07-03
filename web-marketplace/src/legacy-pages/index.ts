@@ -13,7 +13,6 @@ export * from './Description';
 export * from './EcocreditsByAccount';
 export * from './Eligibility';
 export * from './Home';
-export * from './LandStewards';
 export * from './Login';
 export * from './Media';
 export * from './MethodologiesList';

@@ -12,6 +12,3 @@ export * from './SanityButton';
 export * from './ScrollToTop';
 export * from './ScrollToTop';
 export * from './StatusLabel';
-export * from './WrappedImpactCard';
-export * from './WrappedResourcesCard';
-export * from './WrappedStepCard';

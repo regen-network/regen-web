@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
-import { OFFSET_GENERATION_METHOD } from 'legacy-pages/Buyers/Buyers.constants';
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
 import { CardRibbon } from 'web-components/src/components/atoms/CardRibbon/CardRibbon';
@@ -44,6 +43,7 @@ import { CreditClassDetailsTableTabs } from '../tables/CreditClassDetails.TableT
 import {
   CREDIT_CLASS_TOOLTIP,
   ELIGIBLE_ACTIVITIES,
+  OFFSET_GENERATION_METHOD,
 } from './CreditClassDetailsSimple.constants';
 import { CreditClassDetailsStakeholders } from './CreditClassDetailsSimple.Stakeholders';
 import { useCreditClassDetailsSimpleStyles } from './CreditClassDetailsSimple.styles';

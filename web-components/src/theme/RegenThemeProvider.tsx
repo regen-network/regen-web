@@ -2,7 +2,6 @@
 import { ReactNode } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import {
-  StyledEngineProvider,
   Theme,
   ThemeProvider,
 } from '@mui/material/styles';

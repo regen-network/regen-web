@@ -1,10 +1,12 @@
+'use client';
+
 import { useAtom } from 'jotai';
 
 import Banner from 'web-components/src/components/banner';
 
 import { warningBannerTextAtom } from 'lib/atoms/banner.atoms';
 
-export const RegistryLayoutWarningBannerModal = (): JSX.Element => {
+export const LayoutWarningBannerModal = (): JSX.Element => {
   const [warningBannerText, setWarningBannerTextAtom] = useAtom(
     warningBannerTextAtom,
   );

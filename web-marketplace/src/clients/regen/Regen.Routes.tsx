@@ -73,9 +73,6 @@ const Sell = safeLazy(() => import('../../legacy-pages/Sell/Sell'));
 const ChooseCreditClassPage = safeLazy(
   () => import('../../legacy-pages/ChooseCreditClass'),
 );
-const CreateCreditClassInfo = safeLazy(
-  () => import('../../legacy-pages/CreateCreditClassInfo'),
-);
 const CreateCreditClass = safeLazy(
   () => import('../../legacy-pages/CreateCreditClass'),
 );
@@ -93,7 +90,6 @@ const Profile = safeLazy(() => import('../../legacy-pages/Profile'));
 // since safeLazy itself uses ErrorPage as its fallback component when imports fail.
 const ErrorPage = lazy(() => import('../../legacy-pages/ErrorPage'));
 const Home = safeLazy(() => import('../../legacy-pages/Home'));
-const LandStewards = safeLazy(() => import('../../legacy-pages/LandStewards'));
 const LoginPage = safeLazy(() => import('../../legacy-pages/Login'));
 const Media = safeLazy(() => import('../../legacy-pages/Media'));
 const NotFoundPage = safeLazy(() => import('../../legacy-pages/NotFound'));
@@ -198,12 +194,6 @@ export const getRegenRoutes = ({
             path="create-methodology"
             element={<Navigate to="/" replace />}
           />
-          <Route
-            // TODO: thould this route be moved to /credit-classes?
-            path="create-credit-class"
-            element={<CreateCreditClassInfo />}
-          />
-          <Route path="project-developers" element={<LandStewards />} />
           <Route
             path="methodology-review-process"
             element={<Navigate to="/" replace />}

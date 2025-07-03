@@ -3,7 +3,6 @@ export * from './Additionality';
 export * from './BasicInfo';
 export * from './BasketDetails';
 export * from './BatchDetails';
-export * from './Buyers';
 export * from './ChooseCreditClass';
 export * from './CreateBatch';
 export * from './CreateCreditClass';

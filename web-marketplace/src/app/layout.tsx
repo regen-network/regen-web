@@ -19,7 +19,6 @@ import PageLoader from 'components/atoms/PageLoader';
 import { ScrollToTop } from 'components/atoms/ScrollToTop';
 import { LayoutFooter } from 'components/layout/Layout.Footer';
 import { LayoutHeader } from 'components/layout/Layout.Header';
-// import { PageViewTracking } from 'components/molecules/PageViewTracking';
 // import { RegistryLayoutAccountSwitchModal } from 'components/organisms/RegistryLayout/RegistryLayout.AccountSwitchModal';
 // import { RegistryLayoutAddWalletModalSwitchWarning } from 'components/organisms/RegistryLayout/RegistryLayout.AddWalletModalSwitchWarning';
 // import { RegistryLayoutBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.Banner';
@@ -31,7 +30,8 @@ import { LayoutHeader } from 'components/layout/Layout.Header';
 // import { RegistryLayoutFooter } from 'components/organisms/RegistryLayout/RegistryLayout.Footer';
 // import { RegistryLayoutHeader } from 'components/organisms/RegistryLayout/RegistryLayout.Header';
 // import { RegistryLayoutProcessingModal } from 'components/organisms/RegistryLayout/RegistryLayout.ProcessingModal';
-// import { RetryFailedFunctions } from 'components/organisms/RegistryLayout/RegistryLayout.RetryFailedFunctions';
+import { RetryFailedFunctions } from 'components/layout/Layout.RetryFailedFunctions';
+import { PageViewTracking } from 'components/molecules/PageViewTracking';
 // import { RegistryLayoutSwitchWalletModal } from 'components/organisms/RegistryLayout/RegistryLayout.SwitchWalletModal';
 import { RegistryLayoutTerrasosFooter } from 'components/organisms/RegistryLayout/RegistryLayout.TerrasosFooter';
 import { TerrasosHeader } from 'components/organisms/TerrasosHeader/TerrasosHeader';
@@ -170,9 +170,10 @@ export default async function RootLayout({
                               ) : (
                                 <LayoutFooter />
                               )}
+                              <PageViewTracking />
                               <ScrollToTop />
-                              {/* <PageViewTracking />
-                            <RetryFailedFunctions />
+                              <RetryFailedFunctions />
+                              {/* 
                             <RegistryLayoutCookiesTopBanner />
                             <RegistryLayoutTxErrorModal />
                             <RegistryLayoutBannerModal />

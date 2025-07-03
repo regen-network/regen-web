@@ -17,7 +17,7 @@ import { RegistryLayoutErrorBannerModal } from './RegistryLayout.ErrorBanner';
 import { RegistryLayoutFooter } from './RegistryLayout.Footer.legacy';
 // import { RegistryLayoutHeader } from './RegistryLayout.Header.legacy';
 import { RegistryLayoutProcessingModal } from './RegistryLayout.ProcessingModal';
-import { RetryFailedFunctions } from './RegistryLayout.RetryFailedFunctions';
+// import { RetryFailedFunctions } from './RegistryLayout.RetryFailedFunctions';
 import { RegistryLayoutSwitchWalletModal } from './RegistryLayout.SwitchWalletModal';
 // import { RegistryLayoutTerrasosFooter } from './RegistryLayout.TerrasosFooter';
 import { RegistryLayoutTxBuySuccessfulModal } from './RegistryLayout.TxBuySuccessfulModal';
@@ -35,9 +35,9 @@ const RegistryLayout: React.FC = () => {
       ) : (
         <RegistryLayoutFooter />
       )} */}
-      <PageViewTracking />
+      {/* <PageViewTracking /> */}
       {/* <ScrollToTop /> */}
-      <RetryFailedFunctions />
+      {/* <RetryFailedFunctions /> */}
       <RegistryLayoutCookiesTopBanner />
       <RegistryLayoutTxErrorModal />
       <RegistryLayoutBannerModal />

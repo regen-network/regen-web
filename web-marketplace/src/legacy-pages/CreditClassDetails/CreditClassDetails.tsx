@@ -11,7 +11,6 @@ import useImpact from 'legacy-pages/CreditClassDetails/hooks/useImpact';
 
 import { Account } from 'web-components/src/components/user/UserInfo';
 
-import { useCreditClassByUriQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getLinkHref, openLink } from 'lib/button';
@@ -39,15 +38,8 @@ import {
   parseCreditClassVersion,
 } from './CreditClassDetails.utils';
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
-import { CreditClassDetailsWithContent } from './CreditClassDetailsWithContent/CreditClassDetailsWithContent';
 
-interface CreditDetailsProps {
-  isLandSteward?: boolean;
-}
-
-function CreditClassDetails({
-  isLandSteward,
-}: CreditDetailsProps): JSX.Element {
+function CreditClassDetails(): JSX.Element {
   const { queryClient } = useLedger();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { creditClassId } = useParams();
@@ -102,8 +94,6 @@ function CreditClassDetails({
   const isOnChainClassId =
     creditClassId && onChainClassRegExp.test(creditClassId);
 
-  const iri = content?.iri?.current;
-
   const { data: dbDataByOnChainIdData } = useQuery(
     getCreditClassByOnChainIdQuery({
       client: graphqlClient,
@@ -117,13 +107,7 @@ function CreditClassDetails({
   const { offChainCoBenefitsIRIs, offChainPrimaryImpactIRI } =
     parseCreditClassVersion(dbDataByOnChainId?.creditClassByOnChainId);
 
-  const { data: dbDataByUri } = useCreditClassByUriQuery({
-    variables: { uri: iri as string },
-    skip: !iri || !!isOnChainClassId,
-  });
-
   const dbCreditClassByOnChainId = dbDataByOnChainId?.creditClassByOnChainId;
-  const dbCreditClassByUri = dbDataByUri?.creditClassByUri;
 
   const { projectsWithOrderData } = useBuySellOrderData({
     classId: creditClassId,
@@ -210,13 +194,6 @@ function CreditClassDetails({
 
   return (
     <>
-      {content && dbCreditClassByUri && (
-        <CreditClassDetailsWithContent
-          dbClass={dbCreditClassByUri}
-          content={content}
-          isLandSteward={isLandSteward}
-        />
-      )}
       {onChainClass && (
         <CreditClassDetailsSimple
           dbClass={dbCreditClassByOnChainId}

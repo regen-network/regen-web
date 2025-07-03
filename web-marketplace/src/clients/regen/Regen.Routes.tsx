@@ -66,9 +66,6 @@ const BuyCredits = safeLazy(() => import('../../legacy-pages/BuyCredits'));
 const ChooseCreditClassPage = safeLazy(
   () => import('../../legacy-pages/ChooseCreditClass'),
 );
-const CreateCreditClassInfo = safeLazy(
-  () => import('../../legacy-pages/CreateCreditClassInfo'),
-);
 const CreateCreditClass = safeLazy(
   () => import('../../legacy-pages/CreateCreditClass'),
 );
@@ -91,9 +88,7 @@ const Home = safeLazy(() => import('../../legacy-pages/Home'));
 const LandStewards = safeLazy(() => import('../../legacy-pages/LandStewards'));
 const LoginPage = safeLazy(() => import('../../legacy-pages/Login'));
 const Media = safeLazy(() => import('../../legacy-pages/Media'));
-const MethodologyDetails = safeLazy(
-  () => import('../../legacy-pages/MethodologyDetails'),
-);
+
 const NotFoundPage = safeLazy(() => import('../../legacy-pages/NotFound'));
 const Post = safeLazy(() => import('../../legacy-pages/Post'));
 const PrefinanceProjects = safeLazy(
@@ -191,11 +186,6 @@ export const getRegenRoutes = ({
         <Route
           path="create-methodology"
           element={<Navigate to="/" replace />}
-        />
-        <Route
-          // TODO: thould this route be moved to /credit-classes?
-          path="create-credit-class"
-          element={<CreateCreditClassInfo />}
         />
         <Route path="project-developers" element={<LandStewards />} />
         <Route
@@ -351,27 +341,8 @@ export const getRegenRoutes = ({
             </Route>
           </Route>
         </Route>
-        <Route
-          path="methodologies/:methodologyId"
-          element={<MethodologyDetails />}
-        />
         <Route path="credit-classes">
-          {/* TODO: Index route is same as /create-credit-class for now */}
-          <Route index element={<CreateCreditClassInfo />} />
-          <Route path=":creditClassId/*">
-            <Route
-              index
-              element={<CreditClassDetails isLandSteward={true} />}
-            />
-            <Route
-              path="buyer"
-              element={<CreditClassDetails isLandSteward={false} />}
-            />
-            <Route
-              path="land-steward"
-              element={<CreditClassDetails isLandSteward={true} />}
-            />
-          </Route>
+          <Route path=":creditClassId" element={<CreditClassDetails />} />
           <Route
             path="create"
             element={<KeplrRoute component={CreateCreditClass} />}

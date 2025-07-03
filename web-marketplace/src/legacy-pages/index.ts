@@ -16,7 +16,6 @@ export * from './LandStewards';
 export * from './Login';
 export * from './Media';
 export * from './MethodologiesList';
-export * from './MethodologyDetails';
 export * from './NotFound';
 export * from './Profile';
 export * from './ProjectEdit';

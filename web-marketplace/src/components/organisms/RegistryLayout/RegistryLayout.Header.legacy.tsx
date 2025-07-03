@@ -12,7 +12,6 @@ import { UserMenuItems } from 'web-components/src/components/header/components/U
 import { getUserMenuItems } from 'web-components/src/components/header/components/UserMenuItems.utils';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
-// import { cn } from 'web-components/src/utils/styles/cn';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 

@@ -1,12 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { IS_TERRASOS } from 'lib/env';
-
+// import { IS_TERRASOS } from 'lib/env';
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
-import { ScrollToTop } from '../../atoms';
-import TerrasosHeader from '../TerrasosHeader';
+// import { ScrollToTop } from '../../atoms';
+// import TerrasosHeader from '../TerrasosHeader';
 import { RegistryLayoutAccountSwitchModal } from './RegistryLayout.AccountSwitchModal';
 import { RegistryLayoutAddWalletModalSwitchWarning } from './RegistryLayout.AddWalletModalSwitchWarning';
 import { RegistryLayoutBannerModal } from './RegistryLayout.Banner';
@@ -15,12 +14,12 @@ import { RegistryLayoutConnectedEmailErrorModal } from './RegistryLayout.Connect
 import { RegistryLayoutConnectWalletModal } from './RegistryLayout.ConnectWalletModal';
 import { RegistryLayoutCookiesTopBanner } from './RegistryLayout.CookiesTopBanner';
 import { RegistryLayoutErrorBannerModal } from './RegistryLayout.ErrorBanner';
-import { RegistryLayoutFooter } from './RegistryLayout.Footer';
-import { RegistryLayoutHeader } from './RegistryLayout.Header.legacy';
+import { RegistryLayoutFooter } from './RegistryLayout.Footer.legacy';
+// import { RegistryLayoutHeader } from './RegistryLayout.Header.legacy';
 import { RegistryLayoutProcessingModal } from './RegistryLayout.ProcessingModal';
 import { RetryFailedFunctions } from './RegistryLayout.RetryFailedFunctions';
 import { RegistryLayoutSwitchWalletModal } from './RegistryLayout.SwitchWalletModal';
-import { RegistryLayoutTerrasosFooter } from './RegistryLayout.TerrasosFooter';
+// import { RegistryLayoutTerrasosFooter } from './RegistryLayout.TerrasosFooter';
 import { RegistryLayoutTxBuySuccessfulModal } from './RegistryLayout.TxBuySuccessfulModal';
 import { RegistryLayoutTxErrorModal } from './RegistryLayout.TxErrorModal';
 import { RegistryLayoutTxSuccessfulModal } from './RegistryLayout.TxSuccessfulModal';
@@ -29,15 +28,15 @@ import { RegistryLayoutWarningBannerModal } from './RegistryLayout.WarningBanner
 const RegistryLayout: React.FC = () => {
   return (
     <>
-      {IS_TERRASOS ? <TerrasosHeader /> : <RegistryLayoutHeader />}
+      {/* {IS_TERRASOS ? <TerrasosHeader /> : <RegistryLayoutHeader />} */}
       <Outlet />
-      {IS_TERRASOS ? (
+      {/* {IS_TERRASOS ? (
         <RegistryLayoutTerrasosFooter />
       ) : (
         <RegistryLayoutFooter />
-      )}
+      )} */}
       <PageViewTracking />
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
       <RetryFailedFunctions />
       <RegistryLayoutCookiesTopBanner />
       <RegistryLayoutTxErrorModal />

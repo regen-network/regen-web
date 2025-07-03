@@ -1,6 +1,6 @@
 'use client';
 import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { useLocation } from 'react-router-dom';
 
 // List of route segments that should not trigger a scroll reset
 const whitelist = ['ecocredit-batches'];
@@ -12,7 +12,7 @@ const whitelist = ['ecocredit-batches'];
  * This component does not render anything.
  */
 function ScrollToTop(): null {
-  const pathname = usePathname();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     if (!whitelist.some(route => pathname.includes(route)))

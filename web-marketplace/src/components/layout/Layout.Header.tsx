@@ -1,9 +1,12 @@
 'use client';
-import React, { useMemo } from 'react';
+
+import { useMemo } from 'react';
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
 import { getClientConfig } from 'clients/Clients.config';
+import { useAtom } from 'jotai';
 import { getWalletAddress } from 'legacy-pages/Dashboard/Dashboard.utils';
 import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
 import { usePathname } from 'next/navigation';
@@ -13,26 +16,30 @@ import { UserMenuItems } from 'web-components/src/components/header/components/U
 import { getUserMenuItems } from 'web-components/src/components/header/components/UserMenuItems.utils';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
-import { AccountFieldsFragment, Maybe } from 'generated/graphql';
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { useWallet, Wallet } from 'lib/wallet/wallet';
+import { apolloClientFactory } from 'lib/clients/apolloClientFactory';
+import { reactQueryClient } from 'lib/clients/reactQueryClient';
+import { client as sanityClient } from 'lib/clients/sanity';
+import { getAllProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getAllProjectsQuery/getAllProjectsQuery';
+import { getAllSanityProjectsQuery } from 'lib/queries/react-query/sanity/getAllProjectsQuery/getAllProjectsQuery';
+import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { useAuthData } from 'hooks/useAuthData';
 
-import { chainId } from '../../../lib/ledger';
-import { Link, RegistryIconLink, RegistryNavLink } from '../../atoms';
-import { ListProject } from '../ListProject/ListProject';
-import { LoginButton } from '../LoginButton/LoginButton';
-import {
-  ADDRESS_COPIED,
-  COPY_ADDRESS,
-} from '../UserAccountSettings/UserAccountSettings.constants';
+import { chainId } from '../../lib/ledger';
+import { Link } from '../atoms';
+import { HeaderNavLink } from '../atoms/HeaderNavLink';
+import { HomeIconLink } from '../atoms/HomeIconLink';
+import { ListProject } from '../organisms/ListProject/ListProject';
+import { LoginButton } from '../organisms/LoginButton/LoginButton';
 import {
   getBorderBottom,
   getHeaderColors,
   getIsTransparent,
   getMenuItems,
-} from './RegistryLayout.config';
+} from '../organisms/RegistryLayout/RegistryLayout.config';
 import {
   AVATAR_ALT,
   CREATE_ORG,
@@ -44,22 +51,58 @@ import {
   PERSONAL_DASHBOARD,
   PUBLIC_PROFILE,
   SIGNED_IN_AS,
-} from './RegistryLayout.constants';
-// import { LanguageSwitcher } from './RegistryLayout.LanguageSwitcher';
-import { getAddress, getProfile } from './RegistryLayout.utils';
+} from '../organisms/RegistryLayout/RegistryLayout.constants';
+import {
+  getAddress,
+  getProfile,
+} from '../organisms/RegistryLayout/RegistryLayout.utils';
+import {
+  ADDRESS_COPIED,
+  COPY_ADDRESS,
+} from '../organisms/UserAccountSettings/UserAccountSettings.constants';
 
-const getProfileLink = (
-  activeAccount: Maybe<AccountFieldsFragment>,
-  wallet: Wallet,
-): string => {
-  if (wallet.address) return `/profiles/${wallet.address}`;
-  if (activeAccount?.id) return `/profiles/${activeAccount.id}`;
+export const getHasPrefinanceProjects = (languageCode: string) => async () => {
+  // Queries
+  const allSanityProjectsQuery = getAllSanityProjectsQuery({
+    sanityClient,
+    languageCode,
+  });
 
-  return '/profiles/';
+  const allProjectsQuery = getAllProjectsQuery({
+    client:
+      apolloClientFactory.getClient() as ApolloClient<NormalizedCacheObject>,
+    enabled: true,
+    languageCode,
+  });
+
+  // Fetch or Cache
+  const allSanityProjects = await getFromCacheOrFetch({
+    query: allSanityProjectsQuery,
+    reactQueryClient,
+  });
+  const allOffChainProjects = await getFromCacheOrFetch({
+    query: allProjectsQuery,
+    reactQueryClient,
+  });
+
+  const prefinanceProjects =
+    allOffChainProjects?.data?.allProjects?.nodes?.filter(project => {
+      const sanityProject = allSanityProjects?.allProject?.find(
+        sanityProject =>
+          sanityProject.projectId === project?.id ||
+          sanityProject.projectId === project?.slug,
+      );
+      return sanityProject?.projectPrefinancing?.isPrefinanceProject;
+    });
+  const hasPrefinanceProjects =
+    prefinanceProjects && prefinanceProjects.length > 0;
+
+  return hasPrefinanceProjects;
 };
 
-const RegistryLayoutHeader: React.FC = () => {
+export const LayoutHeader = () => {
   const { _ } = useLingui();
+
   const pathname = usePathname();
   const { activeAccount, privActiveAccount } = useAuth();
 
@@ -69,11 +112,11 @@ const RegistryLayoutHeader: React.FC = () => {
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
-  // const isHome = pathname === '/';
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
   const clientConfig = getClientConfig();
 
-  // TODO: Dynamically determine if there are prefinance projects available.
-  const hasPrefinanceProjects = false;
+  const hasPrefinanceProjects = getHasPrefinanceProjects(selectedLanguage); //useLoaderData();
 
   const menuItems = useMemo(
     () => getMenuItems(pathname, _, !!hasPrefinanceProjects),
@@ -84,16 +127,13 @@ const RegistryLayoutHeader: React.FC = () => {
     () =>
       getUserMenuItems({
         linkComponent: Link,
-        navLinkComponent: RegistryNavLink,
+        navLinkComponent: HeaderNavLink,
         pathname,
         profile: getProfile({
           account: activeAccount ?? accountByAddr,
           privActiveAccount,
           _,
-          profileLink:
-            activeAccount && wallet
-              ? getProfileLink(activeAccount, wallet)
-              : '/profiles/',
+          profileLink: '/dashboard', // TODO APP-670 update to merged profile link
           // TODO APP-670 should go /dashboard/admin/portfolio or /dashboard/admin/projects
           // APP-697 then to /dashboard/portfolio or /dashboard/projects
           dashboardLink: '/dashboard/admin/profile',
@@ -112,7 +152,7 @@ const RegistryLayoutHeader: React.FC = () => {
           finishOrgCreation: _(FINISH_ORG_CREATION),
         },
       }),
-    [pathname, activeAccount, accountByAddr, privActiveAccount, wallet, _],
+    [pathname, activeAccount, accountByAddr, privActiveAccount, _],
   );
 
   const defaultAvatar = getDefaultAvatar(activeAccount);
@@ -125,8 +165,8 @@ const RegistryLayoutHeader: React.FC = () => {
     <>
       <Header
         isRegistry
-        linkComponent={RegistryNavLink}
-        homeLink={RegistryIconLink}
+        linkComponent={HeaderNavLink}
+        homeLink={HomeIconLink}
         menuItems={menuItems}
         color={color}
         transparent={isTransparent}
@@ -158,7 +198,7 @@ const RegistryLayoutHeader: React.FC = () => {
                 }
                 disconnect={disconnect}
                 pathname={pathname}
-                linkComponent={RegistryNavLink}
+                linkComponent={HeaderNavLink}
                 userMenuItems={userMenuItems}
                 logoutText={_(LOGOUT_TEXT)}
                 avatarAlt={_(AVATAR_ALT)}
@@ -172,5 +212,3 @@ const RegistryLayoutHeader: React.FC = () => {
     </>
   );
 };
-
-export { RegistryLayoutHeader };

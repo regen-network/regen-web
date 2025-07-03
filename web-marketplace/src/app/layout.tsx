@@ -16,8 +16,9 @@ import { IS_TERRASOS } from 'lib/env';
 import { WalletProvider } from 'lib/wallet/wallet';
 
 import PageLoader from 'components/atoms/PageLoader';
-
-// import { ScrollToTop } from 'components/atoms';
+import { ScrollToTop } from 'components/atoms/ScrollToTop';
+import { LayoutFooter } from 'components/layout/Layout.Footer';
+import { LayoutHeader } from 'components/layout/Layout.Header';
 // import { PageViewTracking } from 'components/molecules/PageViewTracking';
 // import { RegistryLayoutAccountSwitchModal } from 'components/organisms/RegistryLayout/RegistryLayout.AccountSwitchModal';
 // import { RegistryLayoutAddWalletModalSwitchWarning } from 'components/organisms/RegistryLayout/RegistryLayout.AddWalletModalSwitchWarning';
@@ -32,12 +33,13 @@ import PageLoader from 'components/atoms/PageLoader';
 // import { RegistryLayoutProcessingModal } from 'components/organisms/RegistryLayout/RegistryLayout.ProcessingModal';
 // import { RetryFailedFunctions } from 'components/organisms/RegistryLayout/RegistryLayout.RetryFailedFunctions';
 // import { RegistryLayoutSwitchWalletModal } from 'components/organisms/RegistryLayout/RegistryLayout.SwitchWalletModal';
-// import { RegistryLayoutTerrasosFooter } from 'components/organisms/RegistryLayout/RegistryLayout.TerrasosFooter';
+import { RegistryLayoutTerrasosFooter } from 'components/organisms/RegistryLayout/RegistryLayout.TerrasosFooter';
+import { TerrasosHeader } from 'components/organisms/TerrasosHeader/TerrasosHeader';
+
 // import { RegistryLayoutTxBuySuccessfulModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxBuySuccessfulModal';
 // import { RegistryLayoutTxErrorModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxErrorModal';
 // import { RegistryLayoutTxSuccessfulModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxSuccessfulModal';
 // import { RegistryLayoutWarningBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.WarningBanner';
-// import TerrasosHeader from 'components/organisms/TerrasosHeader';
 import { AnalyticsWrapper } from './AnalyticsWrapper';
 import { ApolloWrapper } from './ApolloWrapper';
 import { getI18nInstance } from './appRouterI18n';
@@ -141,7 +143,10 @@ export default async function RootLayout({
           <QueryClientWrapper>
             <ApolloWrapper>
               <div className="print:hidden">
-                <ReactQueryDevtools initialIsOpen={false} />
+                <ReactQueryDevtools
+                  initialIsOpen={false}
+                  buttonPosition="bottom-left"
+                />
               </div>
               <LinguiClientProvider
                 initialLocale={'en'}
@@ -154,19 +159,19 @@ export default async function RootLayout({
                         <ChainWrapper>
                           <WalletProvider>
                             <LedgerProviderWithWallet>
-                              {/* {IS_TERRASOS ? (
-                              <TerrasosHeader />
-                            ) : (
-                              <RegistryLayoutHeader />
-                            )} */}
+                              {IS_TERRASOS ? (
+                                <TerrasosHeader />
+                              ) : (
+                                <LayoutHeader />
+                              )}
                               {children}
-                              {/* {IS_TERRASOS ? (
-                              <RegistryLayoutTerrasosFooter />
-                            ) : (
-                              <RegistryLayoutFooter />
-                            )} */}
+                              {IS_TERRASOS ? (
+                                <RegistryLayoutTerrasosFooter />
+                              ) : (
+                                <LayoutFooter />
+                              )}
+                              <ScrollToTop />
                               {/* <PageViewTracking />
-                             <ScrollToTop />
                             <RetryFailedFunctions />
                             <RegistryLayoutCookiesTopBanner />
                             <RegistryLayoutTxErrorModal />

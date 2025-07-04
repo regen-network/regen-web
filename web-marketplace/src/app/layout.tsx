@@ -38,6 +38,7 @@ import { PageViewTracking } from 'components/molecules/PageViewTracking';
 import { RegistryLayoutTerrasosFooter } from 'components/organisms/RegistryLayout/RegistryLayout.TerrasosFooter';
 import { TerrasosHeader } from 'components/organisms/TerrasosHeader/TerrasosHeader';
 
+import { fontClassNames } from '../lib/fonts';
 import { AnalyticsWrapper } from './AnalyticsWrapper';
 import { ApolloWrapper } from './ApolloWrapper';
 import { getI18nInstance } from './appRouterI18n';
@@ -117,14 +118,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const fontModule = IS_TERRASOS
-    ? await import('../lib/fonts/terrasos')
-    : await import('../lib/fonts/regen');
-
-  const fontClassNames = Object.values(fontModule)
-    .map(font => font.variable)
-    .join(' ');
-
   // TODO get user default local
   const i18n = getI18nInstance('en'); // get a ready-made i18n instance for the given locale
   setI18n(i18n);

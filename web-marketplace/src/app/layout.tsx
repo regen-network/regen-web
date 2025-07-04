@@ -17,23 +17,11 @@ import { WalletProvider } from 'lib/wallet/wallet';
 
 import PageLoader from 'components/atoms/PageLoader';
 import { ScrollToTop } from 'components/atoms/ScrollToTop';
-import { LayoutAccountSwitchModal } from 'components/layout/Layout.AccountSwitchModal';
-import { LayoutAddWalletModalSwitchWarning } from 'components/layout/Layout.AddWalletModalSwitchWarning';
-import { LayoutBannerModal } from 'components/layout/Layout.Banner';
-import { LayoutChooseHowToPurchaseModal } from 'components/layout/Layout.ChooseHowToPurchaseModal';
-import { LayoutConnectedEmailErrorModal } from 'components/layout/Layout.ConnectedEmailErrorModal';
-import { LayoutConnectWalletModal } from 'components/layout/Layout.ConnectWalletModal';
 import { LayoutCookiesTopBanner } from 'components/layout/Layout.CookiesTopBanner';
-import { LayoutErrorBannerModal } from 'components/layout/Layout.ErrorBanner';
 import { LayoutFooter } from 'components/layout/Layout.Footer';
 import { LayoutHeader } from 'components/layout/Layout.Header';
-import { LayoutProcessingModal } from 'components/layout/Layout.ProcessingModal';
+import { LayoutModalManager } from 'components/layout/Layout.ModalManager';
 import { RetryFailedFunctions } from 'components/layout/Layout.RetryFailedFunctions';
-import { LayoutSwitchWalletModal } from 'components/layout/Layout.SwitchWalletModal';
-import { LayoutTxBuySuccessfulModal } from 'components/layout/Layout.TxBuySuccessfulModal';
-import { LayoutTxErrorModal } from 'components/layout/Layout.TxErrorModal';
-import { LayoutTxSuccessfulModal } from 'components/layout/Layout.TxSuccessfulModal';
-import { LayoutWarningBannerModal } from 'components/layout/Layout.WarningBanner';
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
 import { RegistryLayoutTerrasosFooter } from 'components/organisms/RegistryLayout/RegistryLayout.TerrasosFooter';
 import { TerrasosHeader } from 'components/organisms/TerrasosHeader/TerrasosHeader';
@@ -113,7 +101,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -133,12 +121,14 @@ export default async function RootLayout({
         >
           <QueryClientWrapper>
             <ApolloWrapper>
-              <div className="print:hidden">
-                <ReactQueryDevtools
-                  initialIsOpen={false}
-                  buttonPosition="bottom-left"
-                />
-              </div>
+              {process.env.NODE_ENV === 'development' && (
+                <div className="print:hidden">
+                  <ReactQueryDevtools
+                    initialIsOpen={false}
+                    buttonPosition="bottom-left"
+                  />
+                </div>
+              )}
               <LinguiClientProvider
                 initialLocale={'en'}
                 initialMessages={i18n.messages}
@@ -165,19 +155,7 @@ export default async function RootLayout({
                               <ScrollToTop />
                               <RetryFailedFunctions />
                               <LayoutCookiesTopBanner />
-                              <LayoutTxErrorModal />
-                              <LayoutTxSuccessfulModal />
-                              <LayoutBannerModal />
-                              <LayoutProcessingModal />
-                              <LayoutErrorBannerModal />
-                              <LayoutConnectWalletModal />
-                              <LayoutSwitchWalletModal />
-                              <LayoutAddWalletModalSwitchWarning />
-                              <LayoutAccountSwitchModal />
-                              <LayoutTxBuySuccessfulModal />
-                              <LayoutWarningBannerModal />
-                              <LayoutChooseHowToPurchaseModal />
-                              <LayoutConnectedEmailErrorModal />
+                              <LayoutModalManager />
                             </LedgerProviderWithWallet>
                           </WalletProvider>
                         </ChainWrapper>

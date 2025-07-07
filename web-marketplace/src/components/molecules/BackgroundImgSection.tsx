@@ -1,17 +1,17 @@
 import React from 'react';
 import { SxProps } from '@mui/material';
-import CardMedia from '@mui/material/CardMedia';
+import Image from 'next/image';
 import { makeStyles } from 'tss-react/mui';
 
 import Section from 'web-components/src/components/section';
 import { Theme } from 'web-components/src/theme/muiTheme';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 type Props = {
   img?: string;
   /** sets larger `minHeight` on mobile to match gatsby `BackgroundSection` */
   isBanner?: boolean;
   linearGradient?: string;
-  sx?: SxProps<Theme>;
   classes?: {
     section?: string;
     root?: string;
@@ -64,7 +64,7 @@ const BackgroundImgSection: React.FC<React.PropsWithChildren<Props>> = ({
   classes,
   title,
   id,
-  sx = [],
+  img,
   ...props
 }) => {
   const { classes: styles, cx } = useStyles({
@@ -73,16 +73,25 @@ const BackgroundImgSection: React.FC<React.PropsWithChildren<Props>> = ({
   });
 
   return (
-    <CardMedia
-      image={props.img}
-      classes={{
-        root: cx(
-          classes?.root,
-          props?.linearGradient ? styles.backgroundGradient : null,
-        ),
-      }}
-      sx={Array.isArray(sx) ? sx : [sx]}
+    <div
+      className={cn(
+        'relative',
+        classes?.root,
+        props?.linearGradient ? styles.backgroundGradient : null,
+      )}
     >
+      {img && (
+        <Image
+          alt=""
+          src={img}
+          quality={100}
+          fill
+          sizes="100vw"
+          style={{
+            objectFit: 'cover',
+          }}
+        />
+      )}
       <Section
         title={title}
         id={id}
@@ -95,7 +104,7 @@ const BackgroundImgSection: React.FC<React.PropsWithChildren<Props>> = ({
           {props.children}
         </div>
       </Section>
-    </CardMedia>
+    </div>
   );
 };
 

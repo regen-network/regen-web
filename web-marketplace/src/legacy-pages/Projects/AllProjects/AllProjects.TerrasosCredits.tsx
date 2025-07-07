@@ -5,13 +5,12 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 
+import hectaresLogo from '../../../../public/svg/logos/hectares.svg';
+import tebuLogo from '../../../../public/svg/logos/tebu.svg';
 import {
   COMPLIANCE_MARKET_TOOLTIP,
   VOLUNTARY_MARKET_TOOLTIP,
 } from './AllProjects.constants';
-
-import hectaresLogo from 'assets/svgs/logos/hectares.svg';
-import tebuLogo from 'assets/svgs/logos/tebu.svg';
 
 type Props = {
   project: NormalizeProject;

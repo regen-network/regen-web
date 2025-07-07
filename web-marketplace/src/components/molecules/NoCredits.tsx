@@ -7,7 +7,7 @@ import { StyledTableContainer } from 'web-components/src/components/table';
 import { Title } from 'web-components/src/components/typography';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
-import cloudData from '../../assets/svgs/cloud-data.svg';
+import cloudData from '../../../public/svg/cloud-data.svg';
 
 const NoCredits: React.FC<
   React.PropsWithChildren<{

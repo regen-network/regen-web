@@ -3,10 +3,9 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { Link } from 'components/atoms';
 
+import terrasosFooterLogo from '../../../../public/svg/logos/terrasosFooterLogo.svg';
 import { TERRASOS_BASE_PATHNAME } from '../TerrasosHeader/TerrasosHeader.constants';
 import { TerrasosColumnItem, TerrasosSocialItem } from './Terrasos.types';
-
-import terrasosFooterLogo from 'assets/svgs/logos/terrasosFooterLogo.svg';
 
 export interface Props {
   poweredBy: string;

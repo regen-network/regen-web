@@ -12,6 +12,7 @@ import { Loading } from 'web-components/src/components/loading';
 import Modal from 'web-components/src/components/modal';
 import SEO from 'web-components/src/components/seo';
 import { Body, Title } from 'web-components/src/components/typography';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { SKIPPED_CLASS_ID } from 'lib/env';
@@ -21,7 +22,7 @@ import { useWallet } from 'lib/wallet/wallet';
 import WithLoader from 'components/atoms/WithLoader';
 import BlockContentBody from 'components/molecules/BlockContentBody';
 
-import horsesImg from '../../assets/horses-grazing.png';
+import horsesImg from '../../../public/png/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
 import {
   BackgroundImgSection,
@@ -96,11 +97,9 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
       <BackgroundImgSection
         img={heroSection?.background?.image?.asset?.url || ''}
         linearGradient="linear-gradient(203.09deg, #000000 45.49%, #5E9078 92.1%);"
-        classes={{ section: classes.section }}
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          height: [600, 600, 760],
+        classes={{
+          root: 'flex items-center h-[600px] md:h-[760px]',
+          section: classes.section,
         }}
       >
         <Box
@@ -174,15 +173,11 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
 
       {creditClasses && (
         <BackgroundImgSection
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
           title={creditClassesSection?.title || _(msg`Credit Classes`)}
           classes={{
-            root: cx(
+            root: cn(
               classes.creditClassBackground,
-              'topo-background',
+              'flex items-center topo-background',
               isKeplrMobileWeb && 'dark',
             ),
             title: classes.title,

@@ -5,6 +5,7 @@ import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import Image from 'next/image';
 import { gradients } from 'styles/gradients';
 
 import { BlockContent } from 'web-components/src/components/block-content';

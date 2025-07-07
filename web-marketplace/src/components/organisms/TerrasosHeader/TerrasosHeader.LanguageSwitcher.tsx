@@ -2,14 +2,15 @@
 import { useState } from 'react';
 import { ButtonBase, Menu, MenuItem } from '@mui/material';
 import { useAtom } from 'jotai';
+import Image from 'next/image';
 
 import BreadcrumbIcon from 'web-components/src/components/icons/BreadcrumbIcon';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 
-import enFlag from 'assets/svgs/flags/en.svg';
-import esFlag from 'assets/svgs/flags/es.svg';
+import enFlag from '../../../../public/svg/flags/en.svg';
+import esFlag from '../../../../public/svg/flags/es.svg';
 
 type Props = {
   className?: string;
@@ -42,10 +43,12 @@ export const LanguageSwitcher = ({ className }: Props) => {
           fontWeight: '500',
         }}
       >
-        <img
+        <Image
           src={flagImg.src}
           alt={isEnglish ? 'English' : 'Español'}
           className="mt-5 mr-[6px] w-[25px] md:mt-0 md:w-fit"
+          width="18"
+          height="12"
         />
         <span className="hidden md:flex md:items-center">
           {isEnglish ? 'English' : 'Español'}
@@ -75,8 +78,14 @@ export const LanguageSwitcher = ({ className }: Props) => {
             }}
             className="flex items-center py-2 md:font-medium md:text-[15px]"
           >
-            <img src={enFlag.src} alt="English" className="mr-[6px]" /> English
-            (Inglés)
+            <Image
+              src={enFlag.src}
+              alt="English"
+              className="mr-[6px]"
+              width="18"
+              height="12"
+            />
+            English (Inglés)
           </MenuItem>
         )}
         {isEnglish && (
@@ -87,8 +96,14 @@ export const LanguageSwitcher = ({ className }: Props) => {
             }}
             className="flex items-center py-2 md:font-medium md:text-[15px]"
           >
-            <img src={esFlag.src} alt="Español" className="mr-[6px]" /> Español
-            (Spanish)
+            <Image
+              src={esFlag.src}
+              alt="Español"
+              className="mr-[6px]"
+              width="18"
+              height="12"
+            />
+            Español (Spanish)
           </MenuItem>
         )}
       </Menu>

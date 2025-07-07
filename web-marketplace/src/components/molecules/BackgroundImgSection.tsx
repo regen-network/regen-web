@@ -1,4 +1,6 @@
 import React from 'react';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { SxProps } from '@mui/material';
 import Image from 'next/image';
 import { makeStyles } from 'tss-react/mui';
@@ -71,6 +73,7 @@ const BackgroundImgSection: React.FC<React.PropsWithChildren<Props>> = ({
     isBanner: !!props.isBanner,
     linearGradient: props?.linearGradient,
   });
+  const { _ } = useLingui();
 
   return (
     <div
@@ -82,14 +85,12 @@ const BackgroundImgSection: React.FC<React.PropsWithChildren<Props>> = ({
     >
       {img && (
         <Image
-          alt=""
+          alt="" // decorative
           src={img}
           quality={100}
           fill
           sizes="100vw"
-          style={{
-            objectFit: 'cover',
-          }}
+          className="object-cover"
         />
       )}
       <Section

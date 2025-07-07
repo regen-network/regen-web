@@ -14,10 +14,7 @@ export const PortfolioTab = (): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (
-      (!address || (!!account?.hideEcocredits && !!account?.hideRetirements)) &&
-      !isLoading
-    ) {
+    if (!!account?.hideEcocredits && !!account?.hideRetirements && !isLoading) {
       navigate(`/profiles/${accountAddressOrId}/projects`, { replace: true });
     }
   }, [

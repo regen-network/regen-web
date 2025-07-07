@@ -17,6 +17,7 @@ import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
 import { truncate } from 'web-components/src/utils/truncate';
 
+import { useAuth } from 'lib/auth/auth';
 import { getAccountUrl } from 'lib/block-explorer';
 import {
   ALT_PROFILE_AVATAR,
@@ -37,6 +38,7 @@ import {
   getUserImages,
 } from 'pages/Dashboard/Dashboard.utils';
 import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
+import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
@@ -51,6 +53,7 @@ export const Profile = (): JSX.Element => {
   const { _ } = useLingui();
 
   const { address, account, isLoading } = useProfileData();
+  const { privActiveAccount } = useAuth();
   const { avatarImage, backgroundImage } = getUserImages({ account });
   const isProfileNotFound = !address && !account;
   const profileLink = accountAddressOrId
@@ -66,6 +69,11 @@ export const Profile = (): JSX.Element => {
     accountId: account?.id,
   });
 
+  const { adminProjects } = useFetchProjectByAdmin({
+    adminAccountId: account?.id,
+    adminAddress: address,
+  });
+
   const socialsLinks = useMemo(() => getSocialsLinks({ account }), [account]);
 
   const tabs: IconTabProps[] = useMemo(
@@ -74,14 +82,13 @@ export const Profile = (): JSX.Element => {
         label: _(msg`Portfolio`),
         icon: <CreditsIcon fontSize="small" linearGradient />,
         href: `/profiles/${accountAddressOrId}/portfolio`,
-        hidden:
-          !address || (!!account?.hideEcocredits && !!account?.hideRetirements),
+        hidden: !!account?.hideEcocredits && !!account?.hideRetirements,
       },
       {
         label: _(msg`Projects`),
         icon: <ProjectPageIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/projects`,
-        hidden: !isProjectAdmin,
+        hidden: !isProjectAdmin || adminProjects.length === 0,
       },
       {
         label: _(msg`Credit Classes`),
@@ -101,7 +108,7 @@ export const Profile = (): JSX.Element => {
       account?.hideEcocredits,
       account?.hideRetirements,
       accountAddressOrId,
-      address,
+      adminProjects.length,
       creditClasses.length,
       isIssuer,
       isProjectAdmin,
@@ -167,7 +174,16 @@ export const Profile = (): JSX.Element => {
                 description: account?.description?.trimEnd() ?? '',
                 socialsLinks,
               }}
-              editLink={wallet?.address || address ? '/dashboard/profile' : ''}
+              editLink={
+                (wallet?.address &&
+                  address &&
+                  wallet.address.toLowerCase() === address.toLowerCase()) ||
+                (privActiveAccount?.email &&
+                  account?.id &&
+                  privActiveAccount.id === account.id)
+                  ? '/dashboard/profile'
+                  : ''
+              }
               profileLink={profileLink}
               variant={
                 account?.type

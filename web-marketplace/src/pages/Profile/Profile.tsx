@@ -167,13 +167,7 @@ export const Profile = (): JSX.Element => {
                 description: account?.description?.trimEnd() ?? '',
                 socialsLinks,
               }}
-              editLink={
-                wallet?.address &&
-                address &&
-                wallet.address.toLowerCase() === address.toLowerCase()
-                  ? '/dashboard/profile'
-                  : ''
-              }
+              editLink={wallet?.address || address ? '/dashboard/profile' : ''}
               profileLink={profileLink}
               variant={
                 account?.type

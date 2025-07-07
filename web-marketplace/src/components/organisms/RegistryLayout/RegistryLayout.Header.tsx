@@ -50,10 +50,10 @@ import {
 import { getAddress, getProfile } from './RegistryLayout.utils';
 
 const getProfileLink = (
-  activeAccount: Maybe<AccountFieldsFragment>,
-  wallet: Wallet,
+  activeAccount: Maybe<AccountFieldsFragment> | undefined,
+  wallet?: Wallet | null,
 ): string => {
-  if (wallet.address) return `/profiles/${wallet.address}`;
+  if (wallet?.address) return `/profiles/${wallet.address}`;
   if (activeAccount?.id) return `/profiles/${activeAccount.id}`;
 
   return '/profiles/';
@@ -74,6 +74,7 @@ const RegistryLayoutHeader: React.FC = () => {
   const clientConfig = getClientConfig();
 
   const hasPrefinanceProjects = useLoaderData();
+  const profileLink = getProfileLink(activeAccount, wallet);
 
   const menuItems = useMemo(
     () => getMenuItems(pathname, _, !!hasPrefinanceProjects),
@@ -90,11 +91,9 @@ const RegistryLayoutHeader: React.FC = () => {
           account: activeAccount ?? accountByAddr,
           privActiveAccount,
           _,
-          profileLink:
-            activeAccount && wallet
-              ? getProfileLink(activeAccount, wallet)
-              : '/profiles/',
+          profileLink: profileLink,
           dashboardLink: '/dashboard',
+          address: wallet?.address,
         }),
         textContent: {
           signedInAs: _(SIGNED_IN_AS),
@@ -110,7 +109,15 @@ const RegistryLayoutHeader: React.FC = () => {
           finishOrgCreation: _(FINISH_ORG_CREATION),
         },
       }),
-    [pathname, activeAccount, accountByAddr, privActiveAccount, wallet, _],
+    [
+      pathname,
+      activeAccount,
+      accountByAddr,
+      privActiveAccount,
+      _,
+      profileLink,
+      wallet?.address,
+    ],
   );
 
   const defaultAvatar = getDefaultAvatar(activeAccount);

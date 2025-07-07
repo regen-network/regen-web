@@ -4,8 +4,7 @@ import { UserSellOrders } from 'components/organisms/UserSellOrders/UserSellOrde
 const Sell = () => {
   return (
     <section className="overflow-hidden">
-      <SellerSetupAccount
-      />
+      <SellerSetupAccount />
       <UserSellOrders />
     </section>
   );

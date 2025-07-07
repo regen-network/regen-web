@@ -21,12 +21,14 @@ type GetProfileParams = {
   _: TranslatorType;
   profileLink: string;
   dashboardLink: string;
+  address?: string;
 };
 export const getProfile = ({
   account,
   privActiveAccount,
   profileLink,
   dashboardLink,
+  address = '',
   _,
 }: GetProfileParams) =>
   account
@@ -35,10 +37,10 @@ export const getProfile = ({
         name: account.name ? account.name : _(DEFAULT_NAME),
         profileImage: account.image ? account.image : getDefaultAvatar(account),
         truncatedAddress: getAddress({
-          walletAddress: account.addr,
+          walletAddress: account.addr ?? address,
           email: privActiveAccount?.email,
         }),
-        address: account.addr ?? privActiveAccount?.email,
+        address: account.addr ?? privActiveAccount?.email ?? address,
         profileLink,
         dashboardLink,
       }

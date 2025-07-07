@@ -23,6 +23,7 @@ type Props = DashboardNavHeaderData & {
   collapsed?: boolean;
   onViewProfileClick?: (href: string) => void;
   hasWalletAddress?: boolean;
+  wallet?: String;
 };
 
 export const DashboardNavHeader = ({
@@ -32,8 +33,10 @@ export const DashboardNavHeader = ({
   collapsed = false,
   onViewProfileClick,
   hasWalletAddress = true,
+  wallet,
 }: Props) => {
   const { name, address, image, id } = activeAccount;
+
   const avatarSrc =
     image ||
     getDefaultAvatar({
@@ -110,7 +113,7 @@ export const DashboardNavHeader = ({
           <button
             type="button"
             className="mt-[4px] mb-[4px] flex items-center gap-[4px] text-[12px] bg-transparent border-none p-0 text-left cursor-pointer group hover:text-sc-text-paragraph"
-            onClick={() => onViewProfileClick?.('/profiles/' + id)}
+            onClick={() => onViewProfileClick?.('/profiles/' + (wallet || id))}
           >
             <Subtitle className="underline text-[12px] text-bc-neutral-400 group-hover:text-sc-text-paragraph transition-colors">
               <Trans>View public profile</Trans>

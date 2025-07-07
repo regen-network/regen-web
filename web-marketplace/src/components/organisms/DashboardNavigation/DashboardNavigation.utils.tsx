@@ -167,19 +167,26 @@ export function getDashboardNavigationSections(
   collapsed = false,
   isIssuer = false,
   hasWalletAddress = true,
+  hasProjects = false,
   hasOrders = true,
+  walletConnect = false,
 ): DashboardNavigationSection[] {
   const sections = [];
   if (hasWalletAddress) {
     sections.push(getCreditsSection(_, collapsed));
   }
-
-  sections.push(getProjectsSection(_, collapsed));
+  if (
+    (walletConnect && hasProjects) ||
+    (!walletConnect && !hasProjects) ||
+    (!walletConnect && hasProjects)
+  ) {
+    sections.push(getProjectsSection(_, collapsed));
+  }
 
   if (isIssuer) {
     sections.push(getCreditIssuanceSection(_, collapsed));
   }
-  if (hasOrders && hasWalletAddress) {
+  if (hasOrders) {
     sections.push(getOrdersSection(_, collapsed));
   }
 

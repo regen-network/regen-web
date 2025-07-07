@@ -46,19 +46,25 @@ import { ViewProfileButton } from './Dashboard.ViewProfileButton';
 import { useBridgeAvailability } from './hooks/useBridgeAvailabilty';
 import { useOrdersAvailability } from './hooks/useOrdersAvailability';
 import { usePathSection } from './hooks/usePathSection';
+import { useFetchProjectByAdmin } from './MyProjects/hooks/useFetchProjectsByAdmin';
 
 export const Dashboard = () => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const { accountChanging, disconnect, loginDisabled, wallet } = useWallet(); // Add wallet
-  const { loading, activeAccount, authenticatedAccounts, privActiveAccount } =
-    useAuth();
+  const { accountChanging, disconnect, loginDisabled, wallet } = useWallet();
+  const {
+    loading,
+    activeAccount,
+    activeAccountId,
+    authenticatedAccounts,
+    privActiveAccount,
+  } = useAuth();
 
   const [isWarningModalOpen, setIsWarningModalOpen] = useState<
     string | undefined
   >(undefined);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [collapsed, setCollapsed] = useState(false); // Move this to Dashboard level
+  const [collapsed, setCollapsed] = useState(false);
   const setIsProfileEditDirtyref = useSetAtom(isProfileEditDirtyRef);
   const isDirtyRef = useRef<boolean>(false);
   const navigate = useNavigate();
@@ -68,6 +74,15 @@ export const Dashboard = () => {
   const { isCreditClassCreator, isProjectAdmin, isIssuer } = useProfileItems(
     {},
   );
+  const projects = useFetchProjectByAdmin({
+    adminAccountId: activeAccountId,
+    adminAddress: loginDisabled ? wallet?.address : activeAccount?.addr,
+    keepUnpublished: true,
+  });
+
+  const hasProjects = projects?.adminProjects;
+
+  const walletConnect = !activeAccount && !privActiveAccount;
 
   const { data: sanityProfilePageData } = useQuery(
     getAllProfilePageQuery({
@@ -146,10 +161,11 @@ export const Dashboard = () => {
   }, [activeAccount, wallet, privActiveAccount?.email]);
 
   const { hasOrders, isLoading: ordersLoading } = useOrdersAvailability();
+
   const { hasAnyBridgeCredits, isLoading: bridgeLoading } =
     useBridgeAvailability();
 
-  if (!activeAccount || !wallet?.address || !privActiveAccount) return null;
+  if (!activeAccount && !wallet?.address && !privActiveAccount) return null;
 
   const hasWalletAddress = !!wallet?.address;
 
@@ -161,9 +177,11 @@ export const Dashboard = () => {
           <DashboardNavigationMobileHeader
             activeAccount={{
               ...activeAccount,
+              id: activeAccount?.id ?? '',
+              name: activeAccount?.name || '',
               address: resolvedAddress || '',
-              type: activeAccount.type === 'USER' ? 'user' : 'org',
-              image: activeAccount.image || '',
+              type: activeAccount?.type === 'USER' ? 'user' : 'org',
+              image: activeAccount?.image || '',
             }}
             onMenuClick={() => setMobileMenuOpen(true)}
             mobileMenuOpen={mobileMenuOpen}
@@ -187,6 +205,9 @@ export const Dashboard = () => {
               isIssuer={isIssuer}
               loginDisabled={loginDisabled}
               hasWalletAddress={hasWalletAddress}
+              wallet={wallet?.address}
+              walletConnect={walletConnect}
+              hasProjects={!!hasProjects && hasProjects.length > 0}
               hasOrders={hasOrders || ordersLoading}
               mobileMenuOpen={mobileMenuOpen}
               onLogout={handleLogout}
@@ -198,16 +219,17 @@ export const Dashboard = () => {
               }}
               header={{
                 activeAccount: {
-                  ...activeAccount,
+                  id: activeAccount?.id ?? '',
+                  name: activeAccount?.name || '',
                   address: resolvedAddress,
-                  type: activeAccount.type === 'USER' ? 'user' : 'org',
-                  image: activeAccount.image || '',
+                  type: activeAccount?.type === 'ORGANIZATION' ? 'org' : 'user',
+                  image: activeAccount?.image || '',
                 },
                 accounts: (authenticatedAccounts || []).map(account => ({
-                  id: account?.id,
+                  id: account?.id ?? '',
                   name: account?.name || '',
                   address: account?.addr || privActiveAccount?.email || '',
-                  type: account?.type === 'USER' ? 'user' : 'org',
+                  type: account?.type === 'ORGANIZATION' ? 'org' : 'user',
                   image: account?.image || '',
                 })),
                 onAccountSelect: (id: string) => {

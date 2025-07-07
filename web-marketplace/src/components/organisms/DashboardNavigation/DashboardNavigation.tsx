@@ -32,14 +32,20 @@ export const DashboardNavigation = ({
   loginDisabled,
   mobileMenuOpen,
   hasWalletAddress,
+  wallet,
+  walletConnect,
+  hasProjects,
   hasOrders,
   collapsed,
   onToggleCollapse,
 }: DashboardNavigationProps & {
   mobileMenuOpen?: boolean;
   hasWalletAddress?: boolean;
+  wallet?: String;
   hasOrders?: boolean;
   collapsed: boolean;
+  walletConnect?: boolean;
+  hasProjects?: boolean;
   onToggleCollapse: (collapsed: boolean) => void;
 }) => {
   const { _ } = useLingui();
@@ -55,16 +61,20 @@ export const DashboardNavigation = ({
         collapsed,
         isIssuer || false,
         hasWalletAddress ?? true,
+        hasProjects ?? false,
         hasOrders ?? true,
+        walletConnect ?? false,
       ),
     [
       _,
       activeAccount.type,
+      loginDisabled,
       collapsed,
       isIssuer,
-      loginDisabled,
       hasWalletAddress,
+      hasProjects,
       hasOrders,
+      walletConnect,
     ],
   );
 
@@ -155,6 +165,7 @@ export const DashboardNavigation = ({
         collapsed={collapsed}
         onViewProfileClick={onViewProfileClick}
         hasWalletAddress={hasWalletAddress}
+        wallet={wallet}
       />
 
       {/* Navigation sections */}

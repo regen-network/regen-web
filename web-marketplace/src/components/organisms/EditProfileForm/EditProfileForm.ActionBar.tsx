@@ -23,6 +23,7 @@ export const EditProfileFormActionBar = () => {
       sx={{
         left: { xs: 0, md: navWidth },
         width: { xs: '100%', md: `calc(100% - ${navWidth})` },
+        transition: 'left 0.15s ease-in-out, width 0.15s ease-in-out',
       }}
     >
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>

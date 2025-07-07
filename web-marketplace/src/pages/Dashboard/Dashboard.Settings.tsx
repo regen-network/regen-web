@@ -18,7 +18,7 @@ import { WalletProviderInfo } from 'components/organisms/UserAccountSettings/Use
 import { useSocialProviders } from './hooks/useSocialProviders';
 import { useVerifyToken } from './hooks/useVerifyToken';
 
-export const DashboardEditSettings = () => {
+export const DashboardSettings = () => {
   const { _ } = useLingui();
   const [error, setError] = useState<unknown>(undefined);
   const { activeAccount, privActiveAccount } = useAuth();

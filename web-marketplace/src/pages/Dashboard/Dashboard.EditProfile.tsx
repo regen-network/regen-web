@@ -30,7 +30,7 @@ import {
 import { getDefaultAvatar } from './Dashboard.utils';
 import { useOnUploadCallback } from './hooks/useOnUploadCallback';
 
-export const DashboardEditMain = () => {
+export const EditProfile = () => {
   const { _ } = useLingui();
   const [isDirtyRef] = useAtom(isProfileEditDirtyRef);
   const setBannerTextAtom = useSetAtom(bannerTextAtom);

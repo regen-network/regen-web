@@ -27,8 +27,8 @@ import { useWallet } from 'lib/wallet/wallet';
 import { batchDetailsLoader } from 'pages/BatchDetails/BatchDetails.loader';
 import { buyCreditsLoader } from 'pages/BuyCredits/BuyCredits.loader';
 import { CertificatePage } from 'pages/Certificate/Certificate';
-import { DashboardEditMain } from 'pages/Dashboard/Dashboard.Main';
-import { DashboardEditSettings } from 'pages/Dashboard/Dashboard.Settings';
+import { EditProfile } from 'pages/Dashboard/Dashboard.EditProfile';
+import { DashboardSettings } from 'pages/Dashboard/Dashboard.Settings';
 import MyBridge from 'pages/Dashboard/MyBridge';
 import { MyBridgableEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
 import { MyBridgedEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgedEcocreditsTable';
@@ -387,11 +387,11 @@ export const getRegenRoutes = ({
           />
           <Route
             path="profile"
-            element={<KeplrOrAuthRoute component={DashboardEditMain} />}
+            element={<KeplrOrAuthRoute component={EditProfile} />}
           />
           <Route
             path="settings"
-            element={<AuthRoute component={DashboardEditSettings} />}
+            element={<AuthRoute component={DashboardSettings} />}
           />
           <Route
             path="my-orders"

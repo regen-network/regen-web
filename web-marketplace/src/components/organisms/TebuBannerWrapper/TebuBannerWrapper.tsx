@@ -1,7 +1,9 @@
 import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
+import { createClient } from '@sanity/client';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import { useNextSanityImage } from 'next-sanity-image';
 import { getCustomImage } from 'utils/sanity/getCustomImage';
 
 import { LinkType } from 'web-components/src/types/shared/linkType';
@@ -23,6 +25,12 @@ type Props = {
   className?: string;
 };
 
+const configuredSanityClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  useCdn: true,
+});
+
 const TebuBannerWrapper = ({ className }: Props) => {
   const { _ } = useLingui();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -37,9 +45,16 @@ const TebuBannerWrapper = ({ className }: Props) => {
   const defaultTebuBannerLink = useMemo(() => getDefaultTebuBannerLink(_), [_]);
   const defaultTebuBannerLogo = useMemo(() => getDefaultTebuBannerLogo(_), [_]);
   const learnMoreLink = response?.learnMoreLink as LinkType;
-  const logo = getCustomImage(response?.logo);
   const logoAlt = response?.logo?.imageAlt;
-
+  const imageProps = useNextSanityImage(
+    configuredSanityClient,
+    response?.logo?.image || null,
+  ) ?? {
+    src: isLoading
+      ? response?.logo?.imageHref
+      : defaultTebuBannerLogo.imageHref,
+  };
+  console.log(response?.logo?.image);
   return (
     <div className={cn(!isVisible && 'hidden', className)}>
       <TebuBanner
@@ -47,11 +62,11 @@ const TebuBannerWrapper = ({ className }: Props) => {
         learnMoreLink={
           isLoading ? learnMoreLink : learnMoreLink ?? defaultTebuBannerLink
         }
-        logo={isLoading ? logo : logo ?? defaultTebuBannerLogo.imageHref}
         logoAlt={
           isLoading ? logoAlt : logoAlt ?? defaultTebuBannerLogo.imageAlt
         }
         onClose={() => setIsVisible(false)}
+        imageProps={imageProps}
       />
     </div>
   );

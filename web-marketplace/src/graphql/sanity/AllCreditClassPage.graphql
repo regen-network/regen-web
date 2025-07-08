@@ -1,0 +1,16 @@
+query allCreditClassPage {
+  allCreditClassPage {
+    language
+    creditClassDetailsSection {
+      label
+      title
+      descriptionRaw
+    }
+    creditImage {
+      ...imageFields
+    }
+    bookCallLink {
+      ...linkFields
+    }
+  }
+}

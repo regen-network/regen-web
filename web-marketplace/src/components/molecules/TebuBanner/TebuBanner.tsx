@@ -1,5 +1,6 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import Image from 'next/image';
 
 import {
   BlockContent,
@@ -24,12 +25,13 @@ export interface TebuBannerProps {
 export const TebuBanner = ({
   content,
   learnMoreLink,
-  logo,
+  logoAlt,
   className,
   onClose,
+  imageProps,
 }: TebuBannerProps) => {
+  console.log('imageProps', imageProps);
   const { _ } = useLingui();
-
   return (
     <div
       className={cn(
@@ -37,10 +39,10 @@ export const TebuBanner = ({
         className,
       )}
     >
-      {logo && (
-        <img
-          src={logo}
-          alt={_(msg`Tebu banner`)}
+      {imageProps && (
+        <Image
+          {...imageProps}
+          alt={logoAlt}
           className="mr-20 sm:mr-30 object-contain"
         />
       )}

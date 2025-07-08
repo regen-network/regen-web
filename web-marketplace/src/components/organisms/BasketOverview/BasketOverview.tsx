@@ -17,6 +17,7 @@ import {
   Title,
 } from 'web-components/src/components/typography';
 import { formatNumber } from 'web-components/src/utils/format';
+import { cn } from 'web-components/src/utils/styles/cn';
 import { truncate } from 'web-components/src/utils/truncate';
 
 import {
@@ -106,11 +107,10 @@ export const BasketOverview: React.FC<
           <Grid container>
             <BasketImageContainer item xs={12} sm={5}>
               <Image
-                className={styles.image}
-                src={toucanBasket.src}
+                className={cn(styles.image, 'w-full h-auto')}
+                src={toucanBasket}
                 alt={name}
-                width={411}
-                height={305}
+                sizes="100vw"
               />
             </BasketImageContainer>
             <BasketTextContainer item xs={12} sm={7}>

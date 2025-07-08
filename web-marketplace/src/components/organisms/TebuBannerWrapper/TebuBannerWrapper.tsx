@@ -50,11 +50,13 @@ const TebuBannerWrapper = ({ className }: Props) => {
     configuredSanityClient,
     response?.logo?.image || null,
   ) ?? {
-    src: isLoading
+    src: (isLoading
       ? response?.logo?.imageHref
-      : defaultTebuBannerLogo.imageHref,
+      : response?.logo?.imageHref ?? defaultTebuBannerLogo.imageHref) as string,
+    width: 62,
+    height: 76,
   };
-  console.log(response?.logo?.image);
+
   return (
     <div className={cn(!isVisible && 'hidden', className)}>
       <TebuBanner

@@ -1,11 +1,13 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import Image from 'next/image';
 
 import Modal from 'web-components/src/components/modal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Body, Title } from 'web-components/src/components/typography';
 import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
+import sadBee from '../../../../public/svg/sad-bee.svg';
 import {
   ADDRESS_USED_CANCEL,
   ADDRESS_USED_DESCRIPTION,
@@ -23,7 +25,7 @@ export const AddressUsedModal = ({ open, onClose, next }: Props) => {
   return (
     <Modal open={open} onClose={onClose}>
       <div className="flex justify-center">
-        <img src="/svg/sad-bee.svg" alt={_(msg`sad bee`)} />
+        <Image src={sadBee} alt={_(msg`sad bee`)} />
       </div>
       <Title variant="h4" align="center" sx={{ my: 5 }}>
         {_(ADDRESS_USED_TITLE)}

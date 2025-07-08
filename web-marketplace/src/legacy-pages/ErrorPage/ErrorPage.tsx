@@ -30,7 +30,7 @@ const ErrorPage = ({ importError }: ErrorPageProps): JSX.Element => {
       bodyText={_(ERROR_HELP_TEXT)}
       buttonText={_(HOMEPAGE_BUTTON_TEXT)}
       isNetworkError={isNetworkError(error)}
-      imgSrc={unhappyBee.src}
+      imgSrc={unhappyBee}
     />
   );
 };

@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import { Theme } from '@mui/material/styles';
 import { makeStyles } from 'tss-react/mui';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 import ContainedButton from '../buttons/ContainedButton';
 import { Body, Title } from '../typography';
@@ -14,7 +14,7 @@ export interface ErrorViewProps {
   bodyText: string;
   buttonText: string;
   isNetworkError?: boolean;
-  imgSrc?: string;
+  imgSrc?: StaticImageData;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -72,14 +72,7 @@ const ErrorView = ({
               alt="error"
               src={imgSrc}
               sizes="100vw"
-              // Make the image display full width
-              // and preserve its aspect ratio
-              style={{
-                width: '100%',
-                height: 'auto',
-              }}
-              width={366}
-              height={220}
+              className="w-full h-auto"
             />
           </div>
         )}

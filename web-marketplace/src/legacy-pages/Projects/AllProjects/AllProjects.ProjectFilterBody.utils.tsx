@@ -1,5 +1,5 @@
 import { msg } from '@lingui/core/macro';
-import { Box } from '@mui/material';
+import Image from 'next/image';
 
 import RegionIndicatorIcon from 'web-components/src/components/icons/terrasos/ColombiaRegionIcon';
 import HectaresBadge from 'web-components/src/components/icons/terrasos/HectaresBadge';
@@ -8,6 +8,7 @@ import type { FilterOption } from 'web-components/src/components/organisms/Proje
 
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
+import tebuBadge from '../../../../public/svg/tebu-badge.svg';
 import { COMPLIANCE_MARKET, VOLUNTARY_MARKET } from './AllProjects.constants';
 import { ProjectWithOrderData } from './AllProjects.types';
 
@@ -135,10 +136,9 @@ const marketCheckboxes = [
     name: msg`Voluntary`,
     id: VOLUNTARY_MARKET,
     endIcon: (
-      <Box
-        component="img"
-        sx={{ width: '24px' }}
-        src="/svg/tebu-badge.svg"
+      <Image
+        src={tebuBadge}
+        className="w-[24px]"
         // eslint-disable-next-line lingui/no-unlocalized-strings
         alt="Tebu"
       />

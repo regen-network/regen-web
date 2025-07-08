@@ -26,7 +26,7 @@ export default function Error({ error }: { error: Error }) {
       bodyText={_(ERROR_HELP_TEXT)}
       buttonText={_(HOMEPAGE_BUTTON_TEXT)}
       isNetworkError={isNetworkError(normalizedError)}
-      imgSrc={unhappyBee.src}
+      imgSrc={unhappyBee}
     />
   );
 }

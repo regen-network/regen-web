@@ -1,6 +1,7 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import Image from 'next/image';
+import { UseNextSanityImageProps } from 'next-sanity-image';
 
 import {
   BlockContent,
@@ -13,6 +14,12 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { Link } from 'components/atoms';
 
+type OptionalLoader = Partial<Pick<UseNextSanityImageProps, 'loader'>>;
+
+export interface CustomImageProps
+  extends Omit<UseNextSanityImageProps, 'loader'>,
+    OptionalLoader {}
+
 export interface TebuBannerProps {
   content: SanityBlockContent;
   learnMoreLink?: LinkType | null;
@@ -20,6 +27,7 @@ export interface TebuBannerProps {
   logoAlt?: string | null;
   className?: string;
   onClose: () => void;
+  imageProps: CustomImageProps;
 }
 
 export const TebuBanner = ({
@@ -30,7 +38,6 @@ export const TebuBanner = ({
   onClose,
   imageProps,
 }: TebuBannerProps) => {
-  console.log('imageProps', imageProps);
   const { _ } = useLingui();
   return (
     <div
@@ -42,7 +49,7 @@ export const TebuBanner = ({
       {imageProps && (
         <Image
           {...imageProps}
-          alt={logoAlt}
+          alt={logoAlt || _(msg`Tebu banner`)}
           className="mr-20 sm:mr-30 object-contain"
         />
       )}

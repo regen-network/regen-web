@@ -21,6 +21,8 @@ msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 msgid " Exit to homepage "
 msgstr "Salir a la página de inicio"
@@ -1343,7 +1345,7 @@ msgstr "tabla de lotes de crédito"
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:243
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/pages/Profile/Profile.tsx:93
+#: src/pages/Profile/Profile.tsx:105
 msgid "Credit Batches"
 msgstr "Lotes de crédito"
 
@@ -1418,7 +1420,7 @@ msgstr "Clases de crédito"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
 #: src/pages/Home/Home.tsx:180
-#: src/pages/Profile/Profile.tsx:87
+#: src/pages/Profile/Profile.tsx:99
 msgid "Credit Classes"
 msgstr "Clases de crédito"
 
@@ -2583,11 +2585,11 @@ msgstr "Hacer que los archivos y los datos de ubicación sean privados"
 msgid "Make the location data private"
 msgstr "Hacer que los datos de ubicación sean privados"
 
-#: src/pages/Profile/Profile.tsx:136
+#: src/pages/Profile/Profile.tsx:149
 msgid "Manage Credit Batches"
 msgstr "Administrar lotes de crédito"
 
-#: src/pages/Profile/Profile.tsx:131
+#: src/pages/Profile/Profile.tsx:144
 msgid "Manage Credit Classes"
 msgstr "Administrar clases de crédito"
 
@@ -2599,7 +2601,7 @@ msgstr "Administrar créditos"
 msgid "Manage organization"
 msgstr "Gestionar la organización"
 
-#: src/pages/Profile/Profile.tsx:121
+#: src/pages/Profile/Profile.tsx:134
 msgid "Manage Portfolio"
 msgstr "Administrar cartera"
 
@@ -2607,7 +2609,7 @@ msgstr "Administrar cartera"
 msgid "Manage projects"
 msgstr "Gestionar proyectos"
 
-#: src/pages/Profile/Profile.tsx:126
+#: src/pages/Profile/Profile.tsx:139
 msgid "Manage Projects"
 msgstr "Administrar proyectos"
 
@@ -2871,6 +2873,10 @@ msgstr "No hay órdenes de venta abiertas"
 #: src/lib/constants/shared.constants.tsx:62
 msgid "No options available"
 msgstr "No hay opciones disponibles"
+
+#: src/pages/Profile/ProjectsTab/NoProjectsDisplay.tsx:29
+msgid "No projects to display"
+msgstr "No hay proyectos para mostrar"
 
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:80
 msgid "No retirements to display"
@@ -3178,7 +3184,7 @@ msgstr "Por favor espere mientras se procesa la transacción"
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:45
 #: src/pages/Dashboard/Dashboard.constants.tsx:13
-#: src/pages/Profile/Profile.tsx:74
+#: src/pages/Profile/Profile.tsx:82
 msgid "Portfolio"
 msgstr "Cartera"
 
@@ -3550,7 +3556,7 @@ msgstr "PROYECTADO:"
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:39
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/pages/Profile/Profile.tsx:81
+#: src/pages/Profile/Profile.tsx:90
 msgid "Projects"
 msgstr "Proyectos"
 
@@ -3566,7 +3572,7 @@ msgstr "Pestañas de proyectos"
 msgid "Public profile"
 msgstr "Perfil público"
 
-#: src/pages/Profile/Profile.tsx:189
+#: src/pages/Profile/Profile.tsx:211
 msgid "public profile tabs"
 msgstr "pestañas de perfil público"
 

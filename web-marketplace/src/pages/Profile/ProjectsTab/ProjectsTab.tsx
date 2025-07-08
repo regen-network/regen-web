@@ -1,10 +1,8 @@
 import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
-import { NoProjectIcon } from 'web-components/src/components/icons/NoProjectIcon';
 
 import {
   getProjectCardBodyTextMapping,
@@ -15,9 +13,9 @@ import { useTracker } from 'lib/tracker/useTracker';
 
 import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 import WithLoader from 'components/atoms/WithLoader';
-import { NoCredits } from 'components/molecules';
 
 import { useProfileData } from '../hooks/useProfileData';
+import { NoProjectsDisplay } from './NoProjectsDisplay';
 
 const ProjectsTab = (): JSX.Element => {
   const { _ } = useLingui();
@@ -49,14 +47,7 @@ const ProjectsTab = (): JSX.Element => {
     !isLoadingAdminProjects &&
     (!adminProjects || adminProjects.length === 0)
   ) {
-    return (
-      <div className="shadow-[0px_4px_10px_rgba(0,0,0,0.05)]">
-        <NoCredits
-          title={_(msg`No projects yet`)}
-          icon={<NoProjectIcon sx={{ width: 100, height: 100 }} />}
-        />
-      </div>
-    );
+    return <NoProjectsDisplay />;
   }
 
   return (

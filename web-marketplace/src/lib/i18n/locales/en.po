@@ -18,6 +18,8 @@ msgstr ""
 msgid ""
 msgstr ""
 
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 #~ msgid " Exit to homepage "
 #~ msgstr ""
@@ -1340,7 +1342,7 @@ msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:243
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/pages/Profile/Profile.tsx:93
+#: src/pages/Profile/Profile.tsx:105
 msgid "Credit Batches"
 msgstr ""
 
@@ -1415,7 +1417,7 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
 #: src/pages/Home/Home.tsx:180
-#: src/pages/Profile/Profile.tsx:87
+#: src/pages/Profile/Profile.tsx:99
 msgid "Credit Classes"
 msgstr ""
 
@@ -2580,11 +2582,11 @@ msgstr ""
 msgid "Make the location data private"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:136
+#: src/pages/Profile/Profile.tsx:149
 msgid "Manage Credit Batches"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:131
+#: src/pages/Profile/Profile.tsx:144
 msgid "Manage Credit Classes"
 msgstr ""
 
@@ -2596,7 +2598,7 @@ msgstr ""
 msgid "Manage organization"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:121
+#: src/pages/Profile/Profile.tsx:134
 msgid "Manage Portfolio"
 msgstr ""
 
@@ -2604,7 +2606,7 @@ msgstr ""
 msgid "Manage projects"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:126
+#: src/pages/Profile/Profile.tsx:139
 msgid "Manage Projects"
 msgstr ""
 
@@ -2867,6 +2869,10 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:62
 msgid "No options available"
+msgstr ""
+
+#: src/pages/Profile/ProjectsTab/NoProjectsDisplay.tsx:29
+msgid "No projects to display"
 msgstr ""
 
 #: src/components/organisms/RetirementCertificatesTable/RetirementCertificatesTable.tsx:80
@@ -3175,7 +3181,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:45
 #: src/pages/Dashboard/Dashboard.constants.tsx:13
-#: src/pages/Profile/Profile.tsx:74
+#: src/pages/Profile/Profile.tsx:82
 msgid "Portfolio"
 msgstr ""
 
@@ -3547,7 +3553,7 @@ msgstr ""
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:39
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/pages/Profile/Profile.tsx:81
+#: src/pages/Profile/Profile.tsx:90
 msgid "Projects"
 msgstr ""
 
@@ -3563,7 +3569,7 @@ msgstr ""
 msgid "Public profile"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:189
+#: src/pages/Profile/Profile.tsx:211
 msgid "public profile tabs"
 msgstr ""
 

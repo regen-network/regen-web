@@ -303,6 +303,7 @@ export const Dashboard = () => {
                       setIsWarningModalOpen={setIsWarningModalOpen}
                       section={section}
                       activeAccount={activeAccount}
+                      hasProjects={hasProjects}
                     />
                   )}
                 </Flex>

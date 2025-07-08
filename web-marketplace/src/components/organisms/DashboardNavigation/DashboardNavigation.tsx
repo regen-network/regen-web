@@ -51,6 +51,19 @@ export const DashboardNavigation = ({
   const { _ } = useLingui();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showFooterShadow, setShowFooterShadow] = useState(false);
+  const [delayedCollapsed, setDelayedCollapsed] = useState(collapsed);
+
+  useEffect(() => {
+    if (collapsed) {
+      setDelayedCollapsed(true);
+    } else {
+      const timer = setTimeout(() => {
+        setDelayedCollapsed(false);
+      }, 150);
+
+      return () => clearTimeout(timer);
+    }
+  }, [collapsed]);
 
   const sections = useMemo(
     () =>
@@ -123,7 +136,7 @@ export const DashboardNavigation = ({
           : 'w-[263px] px-20 md:px-20 pt-30 pb-20',
         'md:block',
         'fixed md:relative top-0 left-0 h-full z-50 transform',
-        'transition-all duration-200 ease-in-out',
+        'transition-all duration-150 ease-in-out',
         mobileMenuOpen || false
           ? 'translate-x-0'
           : '-translate-x-full md:translate-x-0',
@@ -162,7 +175,7 @@ export const DashboardNavigation = ({
         activeAccount={activeAccount}
         accounts={accounts}
         onAccountSelect={onAccountSelect}
-        collapsed={collapsed}
+        collapsed={delayedCollapsed}
         onViewProfileClick={onViewProfileClick}
         hasWalletAddress={hasWalletAddress}
         wallet={wallet}
@@ -181,12 +194,12 @@ export const DashboardNavigation = ({
           const isLogoutSection = section.heading === '';
 
           return (
-            <div key={idx} className={collapsed ? 'px-0' : ''}>
+            <div key={idx} className={delayedCollapsed ? 'px-0' : ''}>
               {!isLogoutSection && (
                 <TextButton
                   className={cn(
                     SECTION_HEADING_BASE,
-                    collapsed
+                    delayedCollapsed
                       ? 'text-center text-[10px] leading-tight px-1 mx-auto block w-full'
                       : 'text-left text-[12px] w-full',
                   )}
@@ -200,7 +213,7 @@ export const DashboardNavigation = ({
                 <hr
                   className={cn(
                     'border-0 border-t border-solid border-t-bc-neutral-300 mx-auto my-2',
-                    collapsed ? 'w-[65%]' : 'w-full',
+                    delayedCollapsed ? 'w-[65%]' : 'w-full',
                   )}
                 />
               )}
@@ -212,7 +225,7 @@ export const DashboardNavigation = ({
                       item={item}
                       currentPath={currentPath}
                       onClick={handleItemClick}
-                      collapsed={collapsed}
+                      collapsed={delayedCollapsed}
                     />
                   </li>
                 ))}
@@ -222,7 +235,7 @@ export const DashboardNavigation = ({
         })}
       </div>
 
-      {!collapsed && (
+      {!delayedCollapsed && (
         <div
           className={cn(
             '-mx-20 md:-mx-20',

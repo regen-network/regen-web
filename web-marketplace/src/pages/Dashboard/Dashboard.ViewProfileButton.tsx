@@ -24,12 +24,14 @@ type Props = {
     'addr' | 'id' | 'name' | 'type' | 'image'
   > | null;
   section: string;
+  hasProjects?: Array<any>;
 };
 
 export const ViewProfileButton = ({
   setIsWarningModalOpen,
   activeAccount,
   section,
+  hasProjects = [],
 }: Props) => {
   const { _ } = useLingui();
   const [isDirtyRef] = useAtom(isProfileEditDirtyRef);
@@ -76,6 +78,10 @@ export const ViewProfileButton = ({
   };
 
   if (!activeAccount && !wallet?.address) {
+    return null;
+  }
+
+  if (section === 'projects' && hasProjects.length === 0) {
     return null;
   }
 

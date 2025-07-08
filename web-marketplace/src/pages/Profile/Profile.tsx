@@ -64,7 +64,7 @@ export const Profile = (): JSX.Element => {
     userAddress: wallet?.address,
   });
 
-  const { isIssuer, isProjectAdmin, showCreditClasses } = useProfileItems({
+  const { isIssuer, showCreditClasses } = useProfileItems({
     address,
     accountId: account?.id,
   });
@@ -82,25 +82,30 @@ export const Profile = (): JSX.Element => {
         label: _(msg`Portfolio`),
         icon: <CreditsIcon fontSize="small" linearGradient />,
         href: `/profiles/${accountAddressOrId}/portfolio`,
-        hidden: !!account?.hideEcocredits && !!account?.hideRetirements,
+        hidden: Boolean(
+          !address || (!!account?.hideEcocredits && !!account?.hideRetirements),
+        ),
       },
       {
         label: _(msg`Projects`),
         icon: <ProjectPageIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/projects`,
-        hidden: !isProjectAdmin || adminProjects.length === 0,
+        hidden: Boolean(
+          (adminProjects.length === 0 && !privActiveAccount?.email) ||
+            (address && adminProjects.length === 0),
+        ),
       },
       {
         label: _(msg`Credit Classes`),
         icon: <CreditClassIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/credit-classes`,
-        hidden: !showCreditClasses || creditClasses.length === 0,
+        hidden: Boolean(!showCreditClasses || creditClasses.length === 0),
       },
       {
         label: _(msg`Credit Batches`),
         icon: <CreditBatchIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/credit-batches`,
-        hidden: !isIssuer,
+        hidden: Boolean(!isIssuer),
       },
     ],
     [
@@ -108,10 +113,11 @@ export const Profile = (): JSX.Element => {
       account?.hideEcocredits,
       account?.hideRetirements,
       accountAddressOrId,
+      address,
       adminProjects.length,
       creditClasses.length,
       isIssuer,
-      isProjectAdmin,
+      privActiveAccount,
       showCreditClasses,
     ],
   );
@@ -126,22 +132,22 @@ export const Profile = (): JSX.Element => {
   const manageButtonConfig = [
     {
       label: _(msg`Manage Portfolio`),
-      show: activeTab === 0,
+      show: location.pathname.includes('/portfolio'),
       link: '/dashboard/portfolio',
     },
     {
       label: _(msg`Manage Projects`),
-      show: activeTab === 1,
+      show: location.pathname.includes('/projects'),
       link: '/dashboard/projects',
     },
     {
       label: _(msg`Manage Credit Classes`),
-      show: activeTab === 2,
+      show: location.pathname.includes('/credit-classes'),
       link: '/dashboard/credit-classes',
     },
     {
       label: _(msg`Manage Credit Batches`),
-      show: activeTab === 3,
+      show: location.pathname.includes('/credit-batches'),
       link: '/dashboard/credit-batches',
     },
   ];
@@ -212,10 +218,13 @@ export const Profile = (): JSX.Element => {
                       {manageButtonConfig.map(
                         btn =>
                           btn.show &&
-                          wallet?.address &&
-                          address &&
-                          wallet.address.toLowerCase() ===
-                            address.toLowerCase() && (
+                          ((wallet?.address &&
+                            address &&
+                            wallet.address.toLowerCase() ===
+                              address.toLowerCase()) ||
+                            (privActiveAccount?.email &&
+                              account?.id &&
+                              privActiveAccount.id === account.id)) && (
                             <OutlinedButton
                               key={btn.label}
                               variant="contained"

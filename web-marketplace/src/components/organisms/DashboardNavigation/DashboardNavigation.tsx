@@ -59,7 +59,7 @@ export const DashboardNavigation = ({
     } else {
       const timer = setTimeout(() => {
         setDelayedCollapsed(false);
-      }, 150);
+      }, 100);
 
       return () => clearTimeout(timer);
     }

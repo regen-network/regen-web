@@ -39,10 +39,9 @@ export const DashboardNavigationMobileHeader = ({
   return (
     <div
       className={cn(
-        'md:hidden fixed top-0 w-[100%] z-40 flex gap-10 bg-bc-neutral-0 px-5 py-10 transition-all duration-300',
+        'md:hidden fixed top-0 w-[100%] z-40 flex gap-10 bg-bc-neutral-0 px-5 py-10 transition-all duration-300 border-solid border-0 border-b border-sc-surface-stroke',
         mobileMenuOpen && 'blur-sm',
       )}
-      style={{ borderBottom: '1px solid #e5e7eb' }}
     >
       {/* Hamburger Menu */}
       <button

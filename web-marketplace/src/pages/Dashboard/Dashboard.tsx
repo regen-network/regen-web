@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { startCase } from 'lodash';
 
-import { Flex } from 'web-components/src/components/box';
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { Title } from 'web-components/src/components/typography';
@@ -261,22 +260,17 @@ export const Dashboard = () => {
                   : 'max-w-[1400px]',
               )}
             >
-              <Flex
-                sx={{
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                }}
-                className={cn('w-full', section ? 'flex' : 'hidden')}
+              <div
+                className={cn(
+                  'w-full flex flex-col items-center',
+                  section ? 'flex' : 'hidden',
+                )}
               >
-                <Flex
-                  justifyContent="space-between"
-                  alignContent="center"
-                  className="w-full h-50 my-25 md:my-0"
-                >
+                <div className="w-full h-50 my-25 md:my-0 flex justify-between items-center">
                   <div className="flex flex-col">
                     {/* Mobile-only subtitle */}
                     <div className="block md:hidden mb-2">
-                      <span className="font-['Mulish'] font-extrabold text-[10px] leading-[100%] tracking-[1px] uppercase text-sc-text-sub-header">
+                      <span className="font-muli font-extrabold text-[10px] leading-[100%] tracking-[1px] uppercase text-sc-text-sub-header">
                         {section === 'settings'
                           ? _(PERSONAL_ACCOUNT)
                           : _(PERSONAL_DASHBOARD)}
@@ -306,7 +300,7 @@ export const Dashboard = () => {
                       hasProjects={hasProjects}
                     />
                   )}
-                </Flex>
+                </div>
 
                 {/* Portfolio tabs section - only show if user has bridge credits */}
                 {!bridgeLoading &&
@@ -329,7 +323,7 @@ export const Dashboard = () => {
                     <Outlet context={dashboardContextValue} />
                   </div>
                 </WithLoader>
-              </Flex>
+              </div>
             </div>
           </div>
         </div>

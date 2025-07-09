@@ -31,7 +31,7 @@ import {
   HeroAction,
 } from '../../components/molecules';
 import { CreditClassCards } from '../../components/organisms';
-import { client as sanityClient } from '../../lib/clients/sanity';
+import { client as sanityClient } from '../../lib/clients/apolloSanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 import { useCreditClasses } from './hooks/useCreditClasses';

@@ -1,5 +1,6 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import Image from 'next/image';
 
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
@@ -41,7 +42,7 @@ export const TerrasosCredits = ({
             placement="top"
             title={_(VOLUNTARY_MARKET_TOOLTIP)}
           >
-            <img src={tebuLogo.src} alt="tebu" className="ml-3 w-[25px]" />
+            <Image src={tebuLogo} alt="tebu" className="ml-3 w-[25px]" />
           </InfoTooltip>
         </span>
       )}
@@ -53,8 +54,8 @@ export const TerrasosCredits = ({
             placement="top"
             title={_(COMPLIANCE_MARKET_TOOLTIP)}
           >
-            <img
-              src={hectaresLogo.src}
+            <Image
+              src={hectaresLogo}
               alt={_(msg`hectares`)}
               className="ml-[3px]"
             />

@@ -1,4 +1,7 @@
-import { Trans } from '@lingui/macro';
+import { msg } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
+import { Trans } from '@lingui/react/macro';
+import Image from 'next/image';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import Card from 'web-components/src/components/cards/Card';
@@ -6,11 +9,14 @@ import { Title } from 'web-components/src/components/typography';
 
 import { useAuth } from 'lib/auth/auth';
 
+import stripeLogo from '../../../../public/png/logo/stripe.png';
+import tokenization from '../../../../public/svg/tokenization.svg';
 import { useStripeAccount } from './hooks/useStripeAccount';
 
 const SellerSetupAccount = () => {
   const { activeAccount, privActiveAccount } = useAuth();
   const { setupAccount, openLoginLink } = useStripeAccount();
+  const { _ } = useLingui();
 
   return (
     privActiveAccount?.can_use_stripe_connect && (
@@ -28,17 +34,18 @@ const SellerSetupAccount = () => {
               <Trans>set up account</Trans>
             </ContainedButton>
           )}
-          <img
-            className="hidden sm:block sm:pl-20"
-            src="/png/logo/stripe.png"
+          <Image
+            className="hidden sm:block sm:ml-20"
+            src={stripeLogo}
             // eslint-disable-next-line lingui/no-unlocalized-strings
             alt="stripe logo"
           />
         </div>
         {/* eslint-disable-next-line jsx-a11y/alt-text */}
-        <img
+        <Image
           className="sm:h-[224px] sm:w-[224px] w-[168px] h-[168px] absolute right-0 sm:top-[-20px] top-40"
-          src="/svg/tokenization.svg"
+          src={tokenization}
+          alt={_(msg`tokenization`)}
         />
       </Card>
     )

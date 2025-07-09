@@ -8,7 +8,7 @@ export const tebuBannerMock: TebuBannerProps = {
     text: 'Learn more',
     href: 'https://www.terrasos.co/',
   },
-  logo: '/logos/tebu.png',
+  imageProps: { src: '/logos/tebu.png', width: 62, height: 76 },
   logoAlt: 'Tebu logo',
   onClose: () => void 0,
 };

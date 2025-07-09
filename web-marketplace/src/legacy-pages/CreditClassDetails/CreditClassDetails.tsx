@@ -14,7 +14,7 @@ import { Account } from 'web-components/src/components/user/UserInfo';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getLinkHref, openLink } from 'lib/button';
-import { client } from 'lib/clients/sanity';
+import { client } from 'lib/clients/apolloSanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { queryClassIssuers } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';

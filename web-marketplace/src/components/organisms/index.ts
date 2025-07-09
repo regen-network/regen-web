@@ -20,5 +20,4 @@ export * from './ProjectCards';
 export * from './ProjectTopSection/ProjectTopSection';
 export * from './RegistryLayout/RegistryLayout';
 export * from './RolesForm/RolesForm';
-export * from './SDGs';
 export * from './UserCredits';

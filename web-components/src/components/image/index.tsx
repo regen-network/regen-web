@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
 
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
-
+import NextImage from 'next/image';
 export interface OptimizeImageProps {
   imageStorageBaseUrl?: string;
   apiServerUrl?: string;

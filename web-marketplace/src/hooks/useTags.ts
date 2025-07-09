@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 import { ProjectTagType } from 'web-components/src/components/molecules/ProjectTag/ProjectTag.types';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { getAllActivityQuery } from 'lib/queries/react-query/sanity/getAllActivityQuery/getAllActivityQuery';
 import { getAllEcosystemQuery } from 'lib/queries/react-query/sanity/getAllEcosystemQuery/getAllEcosystemQuery';
 

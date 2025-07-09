@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import RegenIcon from 'web-components/src/components/icons/RegenIcon';
 import { cn } from 'web-components/src/utils/styles/cn';
 
@@ -37,8 +39,8 @@ export const TerrasosFooter = ({
         <div className="flex flex-col items-center self-stretch md:items-start md:justify-center md:flex-row md:max-w-[708px] lg:max-w-[940px] xl:max-w-[1220px] w-full md:mx-auto">
           <div className="max-w-[300px] md:max-w-none md:w-[40%] md:pl-[12px]">
             <div className="flex flex-col items-center md:items-start gap-30 md:pr-[10%]">
-              <img
-                src={terrasosFooterLogo.src}
+              <Image
+                src={terrasosFooterLogo}
                 alt={logoAlt}
                 className="w-[226px]"
               />

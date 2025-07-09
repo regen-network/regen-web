@@ -1,17 +1,16 @@
 import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
-import { createClient } from '@sanity/client';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { useNextSanityImage } from 'next-sanity-image';
-import { getCustomImage } from 'utils/sanity/getCustomImage';
 
 import { LinkType } from 'web-components/src/types/shared/linkType';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { isTebuBannerVisibleAtom } from 'lib/atoms/banner.atoms';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
+import { configuredSanityClient } from 'lib/clients/sanity';
 import { getTebuBannerQuery } from 'lib/queries/react-query/sanity/getTebuBannerQuery/getTebuBannerQuery';
 
 import { TebuBanner } from 'components/molecules/TebuBanner';
@@ -24,12 +23,6 @@ import {
 type Props = {
   className?: string;
 };
-
-const configuredSanityClient = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  useCdn: true,
-});
 
 const TebuBannerWrapper = ({ className }: Props) => {
   const { _ } = useLingui();

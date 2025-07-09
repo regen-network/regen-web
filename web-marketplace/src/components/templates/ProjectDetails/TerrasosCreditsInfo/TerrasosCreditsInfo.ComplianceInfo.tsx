@@ -42,7 +42,7 @@ const ComplianceInfo = ({
     <InfoTemplate
       upperContent={complianceCredits}
       title={_(msg`Compliance info`)}
-      imgSrc={ComplianceMarketIcon.src}
+      imgSrc={ComplianceMarketIcon}
       imgAlt={_(msg`Checkmark list`)}
       description={<BlockContent content={description} />}
       learnMoreLink={learnMoreLink}

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { getAllEcosystemQuery } from 'lib/queries/react-query/sanity/getAllEcosystemQuery/getAllEcosystemQuery';
 
 import { getIconsMapping } from 'components/organisms/ProjectTopSection/ProjectTopSection.utils';

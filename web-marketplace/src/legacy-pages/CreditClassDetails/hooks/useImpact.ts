@@ -5,7 +5,7 @@ import { useAtom } from 'jotai';
 import { ProjectImpactCardProps } from 'web-components/src/components/cards/ProjectImpactCard/ProjectImpactCard';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import {
   AnchoredProjectMetadataLD,
   CreditClassMetadataLD,

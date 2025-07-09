@@ -11,7 +11,7 @@ import { BridgedEcocredits } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { messageActionEquals } from 'lib/ecocredit/constants';
 import { normalizeBridgedEcocredits } from 'lib/normalizers/bridge/normalizeBridgedEcocredits';
 import { getBridgeTxStatusQuery } from 'lib/queries/react-query/bridge/getBridgeTxStatusQuery/getBridgeTxStatusQuery';

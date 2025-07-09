@@ -18,7 +18,7 @@ import { Body, Label, Title } from 'web-components/src/components/typography';
 
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import {
   ECOSYSTEM_LABEL,
   PROJECT_ACTIVITY_LABEL,

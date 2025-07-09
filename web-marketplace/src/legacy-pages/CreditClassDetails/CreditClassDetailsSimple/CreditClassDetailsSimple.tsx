@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import Image from 'next/image';
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
 import { CardRibbon } from 'web-components/src/components/atoms/CardRibbon/CardRibbon';
@@ -37,7 +38,7 @@ import { parseMethodologies } from 'components/organisms/ProjectTopSection/Proje
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 import { useTags } from 'hooks/useTags';
 
-import { client as sanityClient } from '../../../lib/clients/sanity';
+import { client as sanityClient } from '../../../lib/clients/apolloSanity';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
 import { CreditClassDetailsTableTabs } from '../tables/CreditClassDetails.TableTabs';
 import {
@@ -139,13 +140,7 @@ const CreditClassDetailsSimple: React.FC<
           >
             <Box sx={{ mb: 6 }}>
               {imageSrc && (
-                <Box
-                  sx={{
-                    position: 'relative',
-                    mb: { sm: 12.5 },
-                    mx: { xs: -4, sm: 0 },
-                  }}
-                >
+                <div className="relative mb-0 sm:mb-50 -mx-[16px] sm:mx-0">
                   <CardRibbon
                     icon={{
                       src: creditTypeSanity?.category?.icon?.asset?.url ?? '',
@@ -166,12 +161,17 @@ const CreditClassDetailsSimple: React.FC<
                     }}
                     sxIcon={{ with: 20, height: 20 }}
                   />
-                  <img
-                    className={styles.image}
-                    alt={image?.imageAlt || imageSrc || displayName}
-                    src={imageSrc}
-                  />
-                </Box>
+                  <div className="relative w-full h-[200px] sm:h-[400px]">
+                    <Image
+                      className="object-cover sm:rounded-[5px]"
+                      src={imageSrc}
+                      alt={image?.imageAlt || imageSrc || displayName}
+                      fill
+                      sizes="100vw"
+                      priority
+                    />
+                  </div>
+                </div>
               )}
               <Label
                 size="sm"

@@ -94,7 +94,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
       />
       <BackgroundImgSection
         img={heroSection?.background?.image?.asset?.url || ''}
-        linearGradient="linear-gradient(203.09deg, #000000 45.49%, #5E9078 92.1%);"
+        linearGradient="linear-gradient(180deg, rgba(0, 0, 0, 0.30) 20.79%, rgba(0, 0, 0, 0.15) 100%)"
         classes={{ section: classes.section }}
         sx={{
           display: 'flex',

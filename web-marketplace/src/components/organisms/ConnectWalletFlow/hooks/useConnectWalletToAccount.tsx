@@ -16,8 +16,8 @@ import { useSignArbitrary } from 'lib/wallet/hooks/useSignArbitrary';
 import { useWallet } from 'lib/wallet/wallet';
 
 import {
-  ADDRESS_USED_ERROR,
-  ADDRESS_USED_WITH_EMAIL_ERROR,
+  ADDRESS_USED_ERROR_RAW,
+  ADDRESS_USED_WITH_EMAIL_ERROR_RAW,
 } from 'components/organisms/ConnectWalletFlow/ConnectWalletFlow.constants';
 
 type Params = {
@@ -92,12 +92,12 @@ export const useConnectWalletToAccount = ({
 
         if (response.error) {
           switch (response.error) {
-            case ADDRESS_USED_ERROR:
+            case ADDRESS_USED_ERROR_RAW:
               onConnectModalClose();
               setSignature(signature);
               setAddressUsedModalOpen(true);
               break;
-            case ADDRESS_USED_WITH_EMAIL_ERROR:
+            case ADDRESS_USED_WITH_EMAIL_ERROR_RAW:
               onConnectModalClose();
               setAddressUsedWithEmailModalOpen(true);
               break;

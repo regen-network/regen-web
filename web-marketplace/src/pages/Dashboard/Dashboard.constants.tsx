@@ -1,40 +1,47 @@
+import { MessageDescriptor } from '@lingui/core';
 import { msg } from '@lingui/macro';
 
-import BridgeIcon from 'web-components/src/components/icons/BridgeIcon';
-import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';
-import { CreditClassIcon } from 'web-components/src/components/icons/CreditClassIcon';
-import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
-import { ProjectPageIcon } from 'web-components/src/components/icons/ProjectPageIcon';
+import { ProfileVariant } from 'web-components/src/components/organisms/ProfileHeader/ProfileHeader.types';
 
-const className = 'pl-20';
+import { AccountType } from 'generated/graphql';
 
-export const PORTFOLIO = {
-  label: msg`Portfolio`,
-  href: '/dashboard/portfolio',
-  icon: <CreditsIcon fontSize="small" linearGradient />,
-  className,
+export const PROFILE = msg`Profile`;
+export const VIEW_PROFILE = msg`View Public Profile`;
+export const VIEW_PUBLIC_PROFILE = msg`View On Personal Profile`;
+export const PROFILE_SAVED = msg`Profile Saved`;
+export const BRIDGE = msg`Bridge`;
+export const PORTFOLIO = msg`Portfolio`;
+export const PERSONAL_ACCOUNT = msg`Personal Account`;
+export const PERSONAL_DASHBOARD = msg`Personal Dashboard`;
+export const NO_ACTIVE_ACCOUNT = msg`No active account`;
+
+export const PORTFOLIO_TABS_ARIA_LABEL = msg`Portfolio tabs`;
+export const OPEN_MENU = msg`Open menu`;
+export const CLOSE_MENU = msg`Close menu`;
+export const DASHBOARD_NAVIGATION_ARIA_LABEL = msg`Dashboard side navigation`;
+
+export const DEFAULT_PROFILE_TYPE = AccountType.User;
+export const DEFAULT_NAME = msg`Unnamed`;
+export const DEFAULT_PROFILE_BG = '/jpg/profile-default-bg.jpg';
+export const DEFAULT_PROFILE_USER_AVATAR = '/svg/profile-default-avatar.svg';
+export const DEFAULT_PROFILE_COMPANY_AVATAR =
+  '/svg/profile-default-company.svg';
+
+export const PROFILE_S3_PATH = 'profiles';
+
+export const DEFAULT_PROFILE_AVATARS = [
+  DEFAULT_PROFILE_COMPANY_AVATAR,
+  DEFAULT_PROFILE_USER_AVATAR,
+];
+
+export const profileVariantMapping: Record<AccountType, ProfileVariant> = {
+  ORGANIZATION: 'organization',
+  USER: 'individual',
 };
-export const PROJECTS = {
-  label: msg`Projects`,
-  href: '/dashboard/projects',
-  icon: <ProjectPageIcon linearGradient />,
-  className,
+
+export const DEFAULT_TOKEN_ERROR = msg`Failed to validate token`;
+export const TOKEN_ERROR_MSGS: Record<string, MessageDescriptor> = {
+  'token.invalid': msg`Invalid token`,
+  'token.expired': msg`Token expired`,
 };
-export const CREDIT_CLASSES = {
-  label: msg`Credit Classes`,
-  href: '/dashboard/credit-classes',
-  icon: <CreditClassIcon linearGradient />,
-  className,
-};
-export const CREDIT_BATCHES = {
-  label: msg`Credit Batches`,
-  href: '/dashboard/credit-batches',
-  icon: <CreditBatchIcon linearGradient />,
-  className,
-};
-export const BRIDGE = {
-  label: msg`Bridge`,
-  href: '/dashboard/bridge',
-  icon: <BridgeIcon linearGradient />,
-  className,
-};
+export const EMAIL_ADDED = msg`Log in email successfully added`;

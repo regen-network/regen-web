@@ -2,6 +2,8 @@ import type { ComponentType, ReactElement, SVGProps } from 'react';
 import { msg } from '@lingui/macro';
 
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
+import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';
+import { CreditClassIcon } from 'web-components/src/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/src/components/icons/CreditsIcon';
 import { LogOutIcon } from 'web-components/src/components/icons/LogOutIcon';
 import { MembersIcon } from 'web-components/src/components/icons/MembersIcon';
@@ -35,39 +37,33 @@ export function wrapIcon<
 
 const getCreditsSection = (
   _: TranslatorType,
-  loginDisabled: boolean,
   collapsed: boolean,
 ): DashboardNavigationSection => ({
   heading: collapsed ? _(msg`Credits`) : _(msg`Manage credits`),
   items: [
     {
       label: _(msg`Portfolio`),
-      icon: wrapIcon(CreditsIcon, { disabled: loginDisabled }),
+      icon: wrapIcon(CreditsIcon),
       path: 'portfolio',
     },
     {
       label: _(msg`Sell`),
-      icon: <ShoppingCartIcon linearGradient disabled={loginDisabled} />,
+      icon: <ShoppingCartIcon linearGradient />,
       path: 'sell',
-      disabled: loginDisabled,
-      disabledTooltipText: _(NOT_SUPPORTED_TOOLTIP_TEXT),
     },
   ],
 });
 
 const getProjectsSection = (
   _: TranslatorType,
-  loginDisabled: boolean,
   collapsed: boolean,
 ): DashboardNavigationSection => ({
   heading: collapsed ? _(msg`Projects`) : _(msg`Manage projects`),
   items: [
     {
       label: _(msg`Projects`),
-      icon: <ProjectsIcon linearGradient disabled={loginDisabled} />,
+      icon: <ProjectsIcon linearGradient />,
       path: 'projects',
-      disabled: loginDisabled,
-      disabledTooltipText: _(NOT_SUPPORTED_TOOLTIP_TEXT),
     },
   ],
 });
@@ -76,16 +72,6 @@ const getUserSections = (
   _: TranslatorType,
   loginDisabled: boolean,
 ): DashboardNavigationSection[] => [
-  {
-    heading: _(msg`Orders`),
-    items: [
-      {
-        label: _(msg`My orders`),
-        icon: <ShoppingBagIcon linearGradient />,
-        path: 'orders',
-      },
-    ],
-  },
   {
     heading: _(msg`Profile`),
     items: [
@@ -141,16 +127,68 @@ const getLogoutSection = (_: TranslatorType): DashboardNavigationSection => ({
   ],
 });
 
+const getCreditIssuanceSection = (
+  _: TranslatorType,
+  collapsed: boolean,
+): DashboardNavigationSection => ({
+  heading: collapsed ? _(msg`Issuance`) : _(msg`Credit issuance`),
+  items: [
+    {
+      label: _(msg`Issued credit batches`),
+      icon: <CreditBatchIcon linearGradient />,
+      path: 'credit-batches',
+    },
+    {
+      label: _(msg`Credit classes`),
+      icon: <CreditClassIcon linearGradient />,
+      path: 'credit-classes',
+    },
+  ],
+});
+
+const getOrdersSection = (
+  _: TranslatorType,
+  collapsed: boolean,
+): DashboardNavigationSection => ({
+  heading: collapsed ? _(msg`Orders`) : _(msg`Orders`),
+  items: [
+    {
+      label: _(msg`Orders`),
+      icon: <ShoppingBagIcon linearGradient />,
+      path: 'my-orders',
+    },
+  ],
+});
+
 export function getDashboardNavigationSections(
   _: TranslatorType,
   accountType: 'user' | 'org',
-  loginDisabled = false,
+  loginDisabled: boolean,
   collapsed = false,
+  isIssuer = false,
+  hasWalletAddress = true,
+  hasProjects = false,
+  hasOrders = true,
+  walletConnect = false,
 ): DashboardNavigationSection[] {
-  const sections = [
-    getCreditsSection(_, loginDisabled, collapsed),
-    getProjectsSection(_, loginDisabled, collapsed),
-  ];
+  const sections = [];
+  if (hasWalletAddress) {
+    sections.push(getCreditsSection(_, collapsed));
+  }
+  if (
+    (walletConnect && hasProjects) ||
+    (!walletConnect && !hasProjects) ||
+    (!walletConnect && hasProjects)
+  ) {
+    sections.push(getProjectsSection(_, collapsed));
+  }
+
+  if (isIssuer) {
+    sections.push(getCreditIssuanceSection(_, collapsed));
+  }
+  if (hasOrders) {
+    sections.push(getOrdersSection(_, collapsed));
+  }
 
   if (accountType === 'user') {
     sections.push(...getUserSections(_, loginDisabled));

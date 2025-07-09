@@ -13,6 +13,7 @@ export interface RegenModalProps {
   closeIconColor?: string;
   isIFrame?: boolean;
   isFullscreenMobile?: boolean;
+  disableScrollLock?: boolean;
 }
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -107,29 +108,33 @@ const RegenModal: React.FC<React.PropsWithChildren<RegenModalProps>> = ({
   closeIconColor,
   isIFrame,
   isFullscreenMobile = true,
+  disableScrollLock = false,
 }) => {
   const { classes: styles, cx } = useStyles();
+
+  const content = (
+    <div
+      className={cx(
+        styles.content,
+        isFullscreenMobile
+          ? styles.fullscreenMobile
+          : styles.notFullscreenMobile,
+        isIFrame && styles.iframe,
+        className,
+      )}
+    >
+      {children}
+      {onClose && (
+        <div className={styles.closeIcon} onClick={onClose}>
+          <CloseIcon svgColor={closeIconColor} />
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <Modal open={open} onClose={onClose}>
-      <RemoveScroll>
-        <div
-          className={cx(
-            styles.content,
-            isFullscreenMobile
-              ? styles.fullscreenMobile
-              : styles.notFullscreenMobile,
-            isIFrame && styles.iframe,
-            className,
-          )}
-        >
-          {children}
-          {onClose && (
-            <div className={styles.closeIcon} onClick={onClose}>
-              <CloseIcon svgColor={closeIconColor} />
-            </div>
-          )}
-        </div>
-      </RemoveScroll>
+      {disableScrollLock ? content : <RemoveScroll>{content}</RemoveScroll>}
     </Modal>
   );
 };

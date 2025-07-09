@@ -6,7 +6,7 @@ import {
   DEFAULT_PROFILE_AVATARS,
   DEFAULT_PROFILE_COMPANY_AVATAR,
   DEFAULT_PROFILE_USER_AVATAR,
-} from 'pages/ProfileEdit/ProfileEdit.constants';
+} from 'pages/Dashboard/Dashboard.constants';
 
 type Params = {
   profileType: AccountType;

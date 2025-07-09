@@ -4,8 +4,8 @@ import { Account, Maybe } from 'generated/graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 
-import { DEFAULT_NAME } from 'pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'pages/ProfileEdit/ProfileEdit.utils';
+import { DEFAULT_NAME } from 'pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 
 type GetAddressParams = {
   walletAddress?: string | null;
@@ -21,12 +21,14 @@ type GetProfileParams = {
   _: TranslatorType;
   profileLink: string;
   dashboardLink: string;
+  address?: string;
 };
 export const getProfile = ({
   account,
   privActiveAccount,
   profileLink,
   dashboardLink,
+  address = '',
   _,
 }: GetProfileParams) =>
   account
@@ -35,10 +37,10 @@ export const getProfile = ({
         name: account.name ? account.name : _(DEFAULT_NAME),
         profileImage: account.image ? account.image : getDefaultAvatar(account),
         truncatedAddress: getAddress({
-          walletAddress: account.addr,
+          walletAddress: account.addr ?? address,
           email: privActiveAccount?.email,
         }),
-        address: account.addr ?? privActiveAccount?.email,
+        address: account.addr ?? privActiveAccount?.email ?? address,
         profileLink,
         dashboardLink,
       }

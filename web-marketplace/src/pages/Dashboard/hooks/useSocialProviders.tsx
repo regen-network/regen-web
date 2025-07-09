@@ -12,7 +12,7 @@ import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCs
 import { AccountEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 
-import { SocialProvider } from '../ProfileEdit.types';
+import { SocialProvider } from '../Dashboard.types';
 
 export const useSocialProviders = () => {
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);

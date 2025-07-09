@@ -163,8 +163,8 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
       sx={{
         border: 1,
         borderColor: 'info.light',
-        borderRadius: '8px',
         overflow: 'hidden',
+        borderRadius: '5px',
         ...sx?.root,
       }}
     >

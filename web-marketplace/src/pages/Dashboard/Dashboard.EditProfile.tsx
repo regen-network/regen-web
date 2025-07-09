@@ -1,5 +1,4 @@
 import { useCallback, useMemo, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
@@ -20,7 +19,6 @@ import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfil
 import { EditProfileFormActionBar } from 'components/organisms/EditProfileForm/EditProfileForm.ActionBar';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
-import { useOnUploadCallback } from './hooks/useOnUploadCallback';
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_AVATARS,
@@ -28,10 +26,11 @@ import {
   DEFAULT_PROFILE_TYPE,
   PROFILE_S3_PATH,
   PROFILE_SAVED,
-} from './ProfileEdit.constants';
-import { getDefaultAvatar } from './ProfileEdit.utils';
+} from './Dashboard.constants';
+import { getDefaultAvatar } from './Dashboard.utils';
+import { useOnUploadCallback } from './hooks/useOnUploadCallback';
 
-export const ProfileEditMain = () => {
+export const EditProfile = () => {
   const { _ } = useLingui();
   const [isDirtyRef] = useAtom(isProfileEditDirtyRef);
   const setBannerTextAtom = useSetAtom(bannerTextAtom);
@@ -39,7 +38,6 @@ export const ProfileEditMain = () => {
   const { activeAccount } = useAuth();
   const [updateAccountById] = useUpdateAccountByIdMutation();
   const reactQueryClient = useQueryClient();
-  const navigate = useNavigate();
   const defaultAvatar = getDefaultAvatar(activeAccount);
   const [profileBannerCard, setProfileBannerCard] = useAtom(
     profileBannerCardAtom,
@@ -148,8 +146,7 @@ export const ProfileEditMain = () => {
   const onSuccess = useCallback(() => {
     setBannerTextAtom(_(PROFILE_SAVED));
     refreshProfileData();
-    navigate('/dashboard');
-  }, [setBannerTextAtom, _, refreshProfileData, navigate]);
+  }, [setBannerTextAtom, _, refreshProfileData]);
 
   const onUpload = useOnUploadCallback({
     fileNamesToDeleteRef,

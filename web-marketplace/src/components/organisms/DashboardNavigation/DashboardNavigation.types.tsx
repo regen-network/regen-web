@@ -2,8 +2,9 @@ export interface AccountOption {
   id: string;
   name: string;
   address: string;
-  avatarSrc?: string;
+  image: string;
   type: 'user' | 'org';
+  displayName?: string;
 }
 
 export type DashboardNavHeaderData = {
@@ -30,11 +31,13 @@ export interface DashboardNavigationSection {
 export interface DashboardNavigationProps {
   header: DashboardNavHeaderData;
   currentPath: string;
-  className?: string;
-  onNavItemClick: (path: string) => void;
+  onNavItemClick: (sectionName: string) => void;
   onLogout?: () => void;
   onCloseMobile?: () => void;
   onExitClick?: () => void;
+  isIssuer?: boolean;
+  loginDisabled?: boolean;
+  hasWalletAddress?: boolean;
 }
 
 export interface NavigationListItemProps {

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLingui } from '@lingui/react';
 
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -7,7 +7,11 @@ import DoubleBreadcrumbLeftIcon from 'web-components/src/components/icons/Double
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import {
+  CLOSE_MENU,
   COLLAPSE_BUTTON_CLASSES,
+  COLLAPSE_SIDEBAR,
+  DASHBOARD_NAVIGATION_ARIA_LABEL,
+  EXPAND_SIDEBAR,
   NAV_BASE_CLASSES,
   SECTION_HEADING_BASE,
 } from './DashboardNavigation.constants';
@@ -24,19 +28,94 @@ export const DashboardNavigation = ({
   onLogout,
   onCloseMobile,
   onExitClick,
-}: DashboardNavigationProps) => {
+  isIssuer,
+  loginDisabled,
+  mobileMenuOpen,
+  hasWalletAddress,
+  wallet,
+  walletConnect,
+  hasProjects,
+  hasOrders,
+  collapsed,
+  onToggleCollapse,
+}: DashboardNavigationProps & {
+  mobileMenuOpen?: boolean;
+  hasWalletAddress?: boolean;
+  wallet?: String;
+  hasOrders?: boolean;
+  collapsed: boolean;
+  walletConnect?: boolean;
+  hasProjects?: boolean;
+  onToggleCollapse: (collapsed: boolean) => void;
+}) => {
   const { _ } = useLingui();
-  const [collapsed, setCollapsed] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showFooterShadow, setShowFooterShadow] = useState(false);
+  const [delayedCollapsed, setDelayedCollapsed] = useState(collapsed);
 
-  // Pass the translator function as the first parameter and include it in dependencies
-  const sections = useMemo(() => {
-    return getDashboardNavigationSections(
+  useEffect(() => {
+    if (collapsed) {
+      setDelayedCollapsed(true);
+    } else {
+      const timer = setTimeout(() => {
+        setDelayedCollapsed(false);
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [collapsed]);
+
+  const sections = useMemo(
+    () =>
+      getDashboardNavigationSections(
+        _,
+        activeAccount.type,
+        loginDisabled || false,
+        collapsed,
+        isIssuer || false,
+        hasWalletAddress ?? true,
+        hasProjects ?? false,
+        hasOrders ?? true,
+        walletConnect ?? false,
+      ),
+    [
       _,
       activeAccount.type,
-      false,
+      loginDisabled,
       collapsed,
-    );
-  }, [_, activeAccount.type, collapsed]);
+      isIssuer,
+      hasWalletAddress,
+      hasProjects,
+      hasOrders,
+      walletConnect,
+    ],
+  );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const container = scrollContainerRef.current;
+      if (!container) return;
+
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      const hasScrollableContent = scrollHeight > clientHeight;
+      const isAtBottom = Math.abs(scrollHeight - clientHeight - scrollTop) < 5;
+
+      setShowFooterShadow(hasScrollableContent && !isAtBottom);
+    };
+
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      const resizeObserver = new ResizeObserver(handleScroll);
+      resizeObserver.observe(container);
+      setTimeout(handleScroll, 100);
+
+      return () => {
+        container.removeEventListener('scroll', handleScroll);
+        resizeObserver.disconnect();
+      };
+    }
+  }, [sections]);
 
   const handleItemClick = (path: string) => {
     if (path === 'logout') {
@@ -44,15 +123,24 @@ export const DashboardNavigation = ({
     } else {
       onNavItemClick(path);
     }
+    onCloseMobile?.();
   };
 
   return (
     <nav
-      aria-label="Dashboard side navigation"
+      aria-label={_(DASHBOARD_NAVIGATION_ARIA_LABEL)}
       className={cn(
         NAV_BASE_CLASSES,
-        collapsed ? 'w-[100px] px-2 pt-[27px] pb-20' : 'w-[263px]',
-        !collapsed && 'px-20 md:px-30 pt-30 pb-20',
+        collapsed
+          ? 'w-[100px] px-2 pt-[27px] pb-20'
+          : 'w-[263px] px-20 md:px-20 pt-30 pb-20',
+        'md:block',
+        'fixed md:relative top-0 left-0 h-full z-50 transform',
+        'transition-all duration-150 ease-in-out',
+        mobileMenuOpen || false
+          ? 'translate-x-0'
+          : '-translate-x-full md:translate-x-0',
+        '!flex !flex-col !h-full',
       )}
     >
       {/* Mobile close button */}
@@ -60,7 +148,7 @@ export const DashboardNavigation = ({
         type="button"
         onClick={onCloseMobile}
         className="absolute top-[6px] right-3 block md:hidden p-1 bg-transparent border-none rounded-full hover:bg-bc-neutral-200 cursor-pointer"
-        aria-label="Close menu"
+        aria-label={_(CLOSE_MENU)}
       >
         <CloseIcon className="h-6 w-6 text-bc-neutral-500" />
       </button>
@@ -68,15 +156,15 @@ export const DashboardNavigation = ({
       {/* Collapse toggle button */}
       <button
         type="button"
-        onClick={() => setCollapsed(!collapsed)}
-        className={COLLAPSE_BUTTON_CLASSES}
-        aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        onClick={() => onToggleCollapse(!collapsed)}
+        className={cn(COLLAPSE_BUTTON_CLASSES)}
+        aria-label={collapsed ? _(EXPAND_SIDEBAR) : _(COLLAPSE_SIDEBAR)}
         aria-pressed={collapsed}
       >
         <DoubleBreadcrumbLeftIcon
           className={cn(
             'text-bc-neutral-400 w-[15px] h-[15px] transition-colors',
-            collapsed && 'transform -scale-x-100', // Flip horizontally when collapsed
+            collapsed && 'transform -scale-x-100',
             'group-hover:text-bc-neutral-100',
           )}
         />
@@ -87,44 +175,49 @@ export const DashboardNavigation = ({
         activeAccount={activeAccount}
         accounts={accounts}
         onAccountSelect={onAccountSelect}
-        collapsed={collapsed}
+        collapsed={delayedCollapsed}
         onViewProfileClick={onViewProfileClick}
+        hasWalletAddress={hasWalletAddress}
+        wallet={wallet}
       />
 
       {/* Navigation sections */}
-      <div className="flex-1 overflow-y-auto">
+      <div
+        ref={scrollContainerRef}
+        className="flex-1 overflow-y-auto min-h-0"
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+        }}
+      >
         {sections.map((section, idx) => {
           const isLogoutSection = section.heading === '';
 
           return (
-            <div key={idx} className={collapsed ? 'px-0' : ''}>
-              {/* Section heading */}
+            <div key={idx} className={delayedCollapsed ? 'px-0' : ''}>
               {!isLogoutSection && (
                 <TextButton
                   className={cn(
                     SECTION_HEADING_BASE,
-                    collapsed
+                    delayedCollapsed
                       ? 'text-center text-[10px] leading-tight px-1 mx-auto block w-full'
                       : 'text-left text-[12px] w-full',
                   )}
                   textSize="xs"
                 >
-                  {section.heading}{' '}
-                  {/* Section heading is already translated */}
+                  {section.heading}
                 </TextButton>
               )}
 
-              {/* Divider for logout section */}
               {isLogoutSection && (
                 <hr
                   className={cn(
                     'border-0 border-t border-solid border-t-bc-neutral-300 mx-auto my-2',
-                    collapsed ? 'w-[65%]' : 'w-full',
+                    delayedCollapsed ? 'w-[65%]' : 'w-full',
                   )}
                 />
               )}
 
-              {/* Navigation items */}
               <ul className="flex flex-col gap-[3px] list-none px-0 mt-5 mb-[10px] md:mb-[15px]">
                 {section.items.map(item => (
                   <li key={item.label}>
@@ -132,7 +225,7 @@ export const DashboardNavigation = ({
                       item={item}
                       currentPath={currentPath}
                       onClick={handleItemClick}
-                      collapsed={collapsed}
+                      collapsed={delayedCollapsed}
                     />
                   </li>
                 ))}
@@ -142,8 +235,16 @@ export const DashboardNavigation = ({
         })}
       </div>
 
-      {/* Footer (only when expanded) */}
-      {!collapsed && <DashboardNavFooter onExitClick={onExitClick} />}
+      {!delayedCollapsed && (
+        <div
+          className={cn(
+            '-mx-20 md:-mx-20',
+            showFooterShadow && 'shadow-[0_-2px_5px_0.5px_rgba(0,0,0,0.05)]',
+          )}
+        >
+          <DashboardNavFooter onExitClick={onExitClick} />
+        </div>
+      )}
     </nav>
   );
 };

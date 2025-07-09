@@ -9,7 +9,7 @@ import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';
 
-import { PROFILE_S3_PATH } from '../ProfileEdit.constants';
+import { PROFILE_S3_PATH } from '../Dashboard.constants';
 
 type Params = {
   fileNamesToDeleteRef: MutableRefObject<string[]>;

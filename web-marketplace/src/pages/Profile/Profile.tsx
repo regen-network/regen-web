@@ -4,7 +4,6 @@ import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 
-import { Flex } from 'web-components/src/components/box';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import { CreditBatchIcon } from 'web-components/src/components/icons/CreditBatchIcon';
@@ -18,6 +17,7 @@ import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
 import { truncate } from 'web-components/src/utils/truncate';
 
+import { useAuth } from 'lib/auth/auth';
 import { getAccountUrl } from 'lib/block-explorer';
 import {
   ALT_PROFILE_AVATAR,
@@ -30,28 +30,30 @@ import { getProfileLink } from 'lib/profileLink';
 import { useWallet } from 'lib/wallet/wallet';
 
 import {
+  DEFAULT_NAME,
+  profileVariantMapping,
+} from 'pages/Dashboard/Dashboard.constants';
+import {
   getSocialsLinks,
   getUserImages,
 } from 'pages/Dashboard/Dashboard.utils';
 import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
-import {
-  DEFAULT_NAME,
-  profileVariantMapping,
-} from 'pages/ProfileEdit/ProfileEdit.constants';
+import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
-import { ProfileNotFound } from './EcocreditsByAccount.NotFound';
 import { useProfileData } from './hooks/useProfileData';
+import { ProfileNotFound } from './Profile.NotFound';
 
-export const EcocreditsByAccount = (): JSX.Element => {
+export const Profile = (): JSX.Element => {
   const { accountAddressOrId } = useParams<{ accountAddressOrId: string }>();
   const { wallet } = useWallet();
   const location = useLocation();
   const { _ } = useLingui();
 
   const { address, account, isLoading } = useProfileData();
+  const { privActiveAccount } = useAuth();
   const { avatarImage, backgroundImage } = getUserImages({ account });
   const isProfileNotFound = !address && !account;
   const profileLink = accountAddressOrId
@@ -62,9 +64,14 @@ export const EcocreditsByAccount = (): JSX.Element => {
     userAddress: wallet?.address,
   });
 
-  const { isIssuer, isProjectAdmin, showCreditClasses } = useProfileItems({
+  const { isIssuer, showCreditClasses } = useProfileItems({
     address,
     accountId: account?.id,
+  });
+
+  const { adminProjects } = useFetchProjectByAdmin({
+    adminAccountId: account?.id,
+    adminAddress: address,
   });
 
   const socialsLinks = useMemo(() => getSocialsLinks({ account }), [account]);
@@ -75,26 +82,30 @@ export const EcocreditsByAccount = (): JSX.Element => {
         label: _(msg`Portfolio`),
         icon: <CreditsIcon fontSize="small" linearGradient />,
         href: `/profiles/${accountAddressOrId}/portfolio`,
-        hidden:
+        hidden: Boolean(
           !address || (!!account?.hideEcocredits && !!account?.hideRetirements),
+        ),
       },
       {
         label: _(msg`Projects`),
         icon: <ProjectPageIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/projects`,
-        hidden: !isProjectAdmin,
+        hidden: Boolean(
+          (adminProjects.length === 0 && !privActiveAccount?.email) ||
+            (address && adminProjects.length === 0),
+        ),
       },
       {
         label: _(msg`Credit Classes`),
         icon: <CreditClassIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/credit-classes`,
-        hidden: !showCreditClasses || creditClasses.length === 0,
+        hidden: Boolean(!showCreditClasses || creditClasses.length === 0),
       },
       {
         label: _(msg`Credit Batches`),
         icon: <CreditBatchIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/credit-batches`,
-        hidden: !isIssuer,
+        hidden: Boolean(!isIssuer),
       },
     ],
     [
@@ -103,9 +114,10 @@ export const EcocreditsByAccount = (): JSX.Element => {
       account?.hideRetirements,
       accountAddressOrId,
       address,
+      adminProjects.length,
       creditClasses.length,
       isIssuer,
-      isProjectAdmin,
+      privActiveAccount,
       showCreditClasses,
     ],
   );
@@ -120,22 +132,22 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const manageButtonConfig = [
     {
       label: _(msg`Manage Portfolio`),
-      show: activeTab === 0,
+      show: location.pathname.includes('/portfolio'),
       link: '/dashboard/portfolio',
     },
     {
       label: _(msg`Manage Projects`),
-      show: activeTab === 1,
+      show: location.pathname.includes('/projects'),
       link: '/dashboard/projects',
     },
     {
       label: _(msg`Manage Credit Classes`),
-      show: activeTab === 2,
+      show: location.pathname.includes('/credit-classes'),
       link: '/dashboard/credit-classes',
     },
     {
       label: _(msg`Manage Credit Batches`),
-      show: activeTab === 3,
+      show: location.pathname.includes('/credit-batches'),
       link: '/dashboard/credit-batches',
     },
   ];
@@ -169,10 +181,13 @@ export const EcocreditsByAccount = (): JSX.Element => {
                 socialsLinks,
               }}
               editLink={
-                wallet?.address &&
-                address &&
-                wallet.address.toLowerCase() === address.toLowerCase()
-                  ? '/dashboard/admin/profile'
+                (wallet?.address &&
+                  address &&
+                  wallet.address.toLowerCase() === address.toLowerCase()) ||
+                (privActiveAccount?.email &&
+                  account?.id &&
+                  privActiveAccount.id === account.id)
+                  ? '/dashboard/profile'
                   : ''
               }
               profileLink={profileLink}
@@ -203,10 +218,13 @@ export const EcocreditsByAccount = (): JSX.Element => {
                       {manageButtonConfig.map(
                         btn =>
                           btn.show &&
-                          wallet?.address &&
-                          address &&
-                          wallet.address.toLowerCase() ===
-                            address.toLowerCase() && (
+                          ((wallet?.address &&
+                            address &&
+                            wallet.address.toLowerCase() ===
+                              address.toLowerCase()) ||
+                            (privActiveAccount?.email &&
+                              account?.id &&
+                              privActiveAccount.id === account.id)) && (
                             <OutlinedButton
                               key={btn.label}
                               variant="contained"

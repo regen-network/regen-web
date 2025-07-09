@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 import { CopyButton } from 'web-components/src/components/buttons/CopyButton';
 import BreadcrumbIcon from 'web-components/src/components/icons/BreadcrumbIcon';
@@ -9,13 +10,20 @@ import { Subtitle } from 'web-components/src/components/typography/Subtitle';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { AccountType } from 'generated/graphql';
+
+import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
+
 import useClickOutside from '../../../utils/hooks/useClickOutside';
+import { COPIED, UNNAMED } from './DashboardNavigation.constants';
 import { AccountSwitcherDropdown } from './DashboardNavigation.Dropdown';
 import { DashboardNavHeaderData } from './DashboardNavigation.types';
 
 type Props = DashboardNavHeaderData & {
   collapsed?: boolean;
   onViewProfileClick?: (href: string) => void;
+  hasWalletAddress?: boolean;
+  wallet?: String;
 };
 
 export const DashboardNavHeader = ({
@@ -24,20 +32,30 @@ export const DashboardNavHeader = ({
   onAccountSelect,
   collapsed = false,
   onViewProfileClick,
+  hasWalletAddress = true,
+  wallet,
 }: Props) => {
-  const { name, address, avatarSrc, type } = activeAccount;
+  const { name, address, image, id } = activeAccount;
+
+  const avatarSrc =
+    image ||
+    getDefaultAvatar({
+      ...activeAccount,
+      type:
+        activeAccount.type === 'user'
+          ? AccountType.User
+          : AccountType.Organization,
+    });
+
   const short = `${address.slice(0, 9)}…${address.slice(-6)}`;
+
   const canSwitch = accounts.length > 1;
+  const { _ } = useLingui();
 
   const [open, setOpen] = useState(false);
   const rootRef = useClickOutside<HTMLDivElement>(() => {
     if (open) setOpen(false);
   });
-
-  const profileHref =
-    type === 'org'
-      ? `/dashboard/org/${activeAccount.id}`
-      : '/dashboard/profile';
 
   return (
     <div
@@ -61,8 +79,8 @@ export const DashboardNavHeader = ({
             aria-expanded={open}
             aria-haspopup="true"
           >
-            <Subtitle className="text-bc-neutral-900 pt-5" size="md">
-              {name}
+            <Subtitle className="text-bc-neutral-900 pt-5 text-[16px]">
+              {name || _(UNNAMED)}
             </Subtitle>
             {canSwitch && (
               <BreadcrumbIcon className="h-[15px] w-[15px] pt-5 text-bc-neutral-400" />
@@ -70,27 +88,32 @@ export const DashboardNavHeader = ({
           </button>
 
           <div className="group flex items-center gap-3">
-            <CopyButton
-              className="group/copy flex items-center gap-3"
-              content={address}
-              toastText="Copied!"
-              iconClassName="h-[14px] w-[14px] text-bc-neutral-500 group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
-              tooltipText={''}
-            >
-              <Body
-                size="xs"
-                className="text-sc-text-sub-header group-hover:text-sc-text-paragraph group-hover:underline group-hover/copy:text-sc-text-paragraph group-hover/copy:underline cursor-pointer"
-                onClick={() => navigator.clipboard.writeText(address)}
+            {hasWalletAddress ? (
+              <CopyButton
+                className="group/copy flex items-center gap-3"
+                content={short}
+                toastText={_(COPIED)}
+                iconClassName="h-[14px] w-[14px] text-bc-neutral-500 group-hover:text-ac-success-400 hover:stroke-none text-sc-icon-standard-disabled"
+                tooltipText={''}
               >
-                {short}
+                <Body
+                  size="xs"
+                  className="text-sc-text-sub-header group-hover:text-sc-text-paragraph group-hover:underline group-hover/copy:text-sc-text-paragraph group-hover/copy:underline cursor-pointer"
+                >
+                  {short}
+                </Body>
+              </CopyButton>
+            ) : (
+              <Body size="xs" className="text-sc-text-sub-header">
+                {address.length > 21 ? short : address}
               </Body>
-            </CopyButton>
+            )}
           </div>
 
           <button
             type="button"
             className="mt-[4px] mb-[4px] flex items-center gap-[4px] text-[12px] bg-transparent border-none p-0 text-left cursor-pointer group hover:text-sc-text-paragraph"
-            onClick={() => onViewProfileClick?.(profileHref)}
+            onClick={() => onViewProfileClick?.('/profiles/' + (wallet || id))}
           >
             <Subtitle className="underline text-[12px] text-bc-neutral-400 group-hover:text-sc-text-paragraph transition-colors">
               <Trans>View public profile</Trans>
@@ -103,7 +126,7 @@ export const DashboardNavHeader = ({
       {open && (
         <AccountSwitcherDropdown
           accounts={accounts}
-          activeId={activeAccount.id}
+          activeId={id}
           onSelect={id => {
             setOpen(false);
             if (id !== activeAccount.id) onAccountSelect?.(id);

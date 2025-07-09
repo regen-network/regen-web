@@ -41,9 +41,9 @@ import { getProjectQuery } from 'lib/queries/react-query/ecocredit/getProjectQue
 import { getProjectByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectByIdQuery/getProjectByIdQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { usePathSection } from 'pages/Dashboard/hooks/usePathSection';
 import { OnTxSuccessfulProps } from 'pages/Dashboard/MyEcocredits/MyEcocredits.types';
 import NotFoundPage from 'pages/NotFound';
-import { usePathSection } from 'pages/ProfileEdit/hooks/usePathSection';
 import WithLoader from 'components/atoms/WithLoader';
 import {
   getIsOnChainId,

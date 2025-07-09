@@ -58,6 +58,11 @@ const nextConfig = {
         hostname: 'regen-registry.s3.amazonaws.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'regen-registry.s3.us-east-1.amazonaws.com',
+        port: '',
+      },
     ],
   },
   // Handle how the server will dispose or keep in memory built pages in development

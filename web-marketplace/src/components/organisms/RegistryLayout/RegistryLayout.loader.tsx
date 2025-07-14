@@ -1,7 +1,6 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { QueryClient } from '@tanstack/react-query';
 
-import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { client as sanityClient } from 'lib/clients/sanity';
 import { getAllProjectsQuery } from 'lib/queries/react-query/registry-server/graphql/getAllProjectsQuery/getAllProjectsQuery';
 import { getAllSanityProjectsQuery } from 'lib/queries/react-query/sanity/getAllProjectsQuery/getAllProjectsQuery';
@@ -9,7 +8,7 @@ import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheO
 
 type LoaderType = {
   queryClient: QueryClient;
-  apolloClientFactory: ApolloClientFactory;
+  apolloClient: ApolloClient<NormalizedCacheObject>;
   languageCode: string;
 };
 
@@ -19,7 +18,7 @@ type LoaderType = {
  * Returns true if there are one or more prefinance project(s).
  */
 export const registryLayoutLoader =
-  ({ queryClient, apolloClientFactory, languageCode }: LoaderType) =>
+  ({ queryClient, apolloClient, languageCode }: LoaderType) =>
   async () => {
     // Queries
     const allSanityProjectsQuery = getAllSanityProjectsQuery({
@@ -28,8 +27,7 @@ export const registryLayoutLoader =
     });
 
     const allProjectsQuery = getAllProjectsQuery({
-      client:
-        apolloClientFactory.getClient() as ApolloClient<NormalizedCacheObject>,
+      client: apolloClient,
       enabled: true,
       languageCode,
     });
@@ -53,8 +51,7 @@ export const registryLayoutLoader =
         );
         return sanityProject?.projectPrefinancing?.isPrefinanceProject;
       });
-    const hasPrefinanceProjects =
-      prefinanceProjects && prefinanceProjects.length > 0;
+    const hasPrefinanceProjects = (prefinanceProjects?.length ?? 0) > 0;
 
     return hasPrefinanceProjects;
   };

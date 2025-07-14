@@ -95,7 +95,9 @@
     "zod": "^3.25.67"
   },
   "scripts": {
+    "predev": "bun run ./scripts/setClientCSS.js",
     "dev": "next dev --turbopack",
+    "prebuild": "bun run ./scripts/setClientCSS.js",
     "build": "next build",
     "start": "next start",
     "lint": "eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",

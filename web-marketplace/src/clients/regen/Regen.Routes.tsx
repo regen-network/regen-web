@@ -20,9 +20,9 @@ import ProjectsTab from 'web-marketplace/src/pages/Profile/ProjectsTab';
 
 import { Maybe } from 'generated/graphql';
 import { QueryClient as RPCQueryClient, useLedger } from 'ledger';
+import { useWallet } from 'lib//wallet/wallet';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
-import { useWallet } from 'lib/wallet/wallet';
 
 import { batchDetailsLoader } from 'pages/BatchDetails/BatchDetails.loader';
 import { buyCreditsLoader } from 'pages/BuyCredits/BuyCredits.loader';
@@ -105,6 +105,9 @@ const ConnectWalletPage = safeLazy(
 );
 const Dashboard = safeLazy(() => import('../../pages/Dashboard'));
 const Orders = safeLazy(() => import('../../pages/Orders'));
+const ManageProject = safeLazy(
+  () => import('../../pages/Dashboard/MyProjects/ManageProject'),
+);
 
 type RouterProps = {
   reactQueryClient: QueryClient;
@@ -368,6 +371,15 @@ export const getRegenRoutes = ({
             path="projects"
             element={<KeplrOrAuthRoute component={MyProjects} />}
           />
+          <Route
+            path="projects/:projectId/manage"
+            element={<KeplrOrAuthRoute component={ManageProject} />}
+          >
+            <Route index element={<Navigate to="posts" replace />} />
+            <Route path="posts" element={<ManageProject />} />
+            <Route path="collaborators" element={<ManageProject />} />
+            <Route path="projectportfolio" element={<ManageProject />} />
+          </Route>
           <Route
             path="credit-classes"
             element={<KeplrRoute component={MyCreditClasses} />}

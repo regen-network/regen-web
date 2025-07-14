@@ -255,7 +255,10 @@ export const Dashboard = () => {
           >
             <div
               className={cn(
-                'px-10 py-25 md:py-40 md:px-30 2xl:mx-auto',
+                'px-10 md:px-30 2xl:mx-auto',
+                pathname.includes('/manage')
+                  ? 'md:px-[111px] pt-20 pb-25 md:pb-40'
+                  : 'py-25 md:py-40',
                 section === 'profile' || section === 'settings'
                   ? 'max-w-[767px]'
                   : 'max-w-[1400px]',
@@ -267,41 +270,44 @@ export const Dashboard = () => {
                   section ? 'flex' : 'hidden',
                 )}
               >
-                <div className="w-full h-50 my-25 md:my-0 flex justify-between items-center">
-                  <div className="flex flex-col">
-                    {/* Mobile-only subtitle */}
-                    <div className="block md:hidden mb-2">
-                      <span className="font-muli font-extrabold text-[10px] leading-[100%] tracking-[1px] uppercase text-sc-text-sub-header">
-                        {section === 'settings'
-                          ? _(PERSONAL_ACCOUNT)
-                          : _(PERSONAL_DASHBOARD)}
-                      </span>
+                {/* Header section - hide completely on manage pages */}
+                {!pathname.includes('/manage') && (
+                  <div className="w-full h-50 my-25 md:my-0 flex justify-between items-center">
+                    <div className="flex flex-col">
+                      {/* Mobile-only subtitle */}
+                      <div className="block md:hidden mb-2">
+                        <span className="font-muli font-extrabold text-[10px] leading-[100%] tracking-[1px] uppercase text-sc-text-sub-header">
+                          {section === 'settings'
+                            ? _(PERSONAL_ACCOUNT)
+                            : _(PERSONAL_DASHBOARD)}
+                        </span>
+                      </div>
+
+                      {/* Main title */}
+                      <Title
+                        variant="h1"
+                        className="text-[21px] md:text-[32px] leading-[1.4]"
+                      >
+                        {pathname.includes('/portfolio')
+                          ? _(PORTFOLIO)
+                          : startCase(section)}
+                      </Title>
                     </div>
 
-                    {/* Main title */}
-                    <Title
-                      variant="h1"
-                      className="text-[21px] md:text-[32px] leading-[1.4]"
-                    >
-                      {pathname.includes('/portfolio')
-                        ? _(PORTFOLIO)
-                        : startCase(section)}
-                    </Title>
+                    {(section === 'credit-classes' ||
+                      section === 'projects' ||
+                      section === 'portfolio' ||
+                      section === 'credit-batches' ||
+                      section === 'profile') && (
+                      <ViewProfileButton
+                        setIsWarningModalOpen={setIsWarningModalOpen}
+                        section={section}
+                        activeAccount={activeAccount}
+                        hasProjects={hasProjects}
+                      />
+                    )}
                   </div>
-
-                  {(section === 'credit-classes' ||
-                    section === 'projects' ||
-                    section === 'portfolio' ||
-                    section === 'credit-batches' ||
-                    section === 'profile') && (
-                    <ViewProfileButton
-                      setIsWarningModalOpen={setIsWarningModalOpen}
-                      section={section}
-                      activeAccount={activeAccount}
-                      hasProjects={hasProjects}
-                    />
-                  )}
-                </div>
+                )}
 
                 {/* Portfolio tabs section - only show if user has bridge credits */}
                 {!bridgeLoading &&
@@ -320,7 +326,12 @@ export const Dashboard = () => {
                   )}
 
                 <WithLoader isLoading={accountChanging || loading}>
-                  <div className="border border-grey-200 bg-grey-100 lg:mt-30 w-full">
+                  <div
+                    className={cn(
+                      'border border-grey-200 bg-grey-100 w-full',
+                      !pathname.includes('/manage') && 'lg:mt-30 min-h-[520px]',
+                    )}
+                  >
                     <Outlet context={dashboardContextValue} />
                   </div>
                 </WithLoader>

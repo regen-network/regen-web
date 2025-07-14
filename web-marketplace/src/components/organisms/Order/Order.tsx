@@ -156,7 +156,7 @@ export const Order = ({ orderData, allowedDenoms, className }: OrderProps) => {
                 <ProjectPlaceInfo
                   place={project.place}
                   area={project.area}
-                  iconClassName="mr-5"
+                  iconClassName="mr-5 text-brand-400"
                   areaUnit={getAreaUnit(
                     project.areaUnit as qudtUnit | undefined,
                     project.area,

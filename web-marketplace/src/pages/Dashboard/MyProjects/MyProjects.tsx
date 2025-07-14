@@ -3,31 +3,27 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Grid } from '@mui/material';
-import { useAtom, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 
 import { CreateProjectCard } from 'web-components/src/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
+import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 
 import { useAuth } from 'lib/auth/auth';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
-import {
-  projectsCurrentStepAtom,
-  projectsDraftState,
-} from 'pages/ProjectCreate/ProjectCreate.store';
+import { projectsDraftState } from 'pages/ProjectCreate/ProjectCreate.store';
 import WithLoader from 'components/atoms/WithLoader';
 import { PostFlow } from 'components/organisms/PostFlow/PostFlow';
 
 import { useDashboardContext } from '../Dashboard.context';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
 import {
-  CREATE_POST,
-  CREATE_POST_DISABLED_TOOLTIP_TEXT,
   DRAFT_ID,
+  MANAGE_PROJECT_BUTTON_TEXT,
   MY_PROJECTS_BUTTON_TEXT,
   MY_PROJECTS_EMPTY_TITLE,
-  NOT_SUPPORTED_TOOLTIP_TEXT,
 } from './MyProjects.constants';
 import {
   getDefaultProject,
@@ -41,7 +37,6 @@ const MyProjects = (): JSX.Element => {
   const { isIssuer, isProjectAdmin, sanityProfilePageData } =
     useDashboardContext();
   const { track } = useTracker();
-  const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
   const { wallet, loginDisabled } = useWallet();
   const { activeAccountId, activeAccount } = useAuth();
 
@@ -106,41 +101,16 @@ const MyProjects = (): JSX.Element => {
                     {...getDefaultProject(!activeAccountId, _)}
                     {...project}
                     button={{
-                      text: _(CREATE_POST),
-                      disabled:
-                        !activeAccountId || project.draft || !project.location,
+                      text: _(MANAGE_PROJECT_BUTTON_TEXT),
+                      disabled: false,
+                      startIcon: <CogIcon linearGradient />,
                     }}
                     onButtonClick={() => {
-                      setPostProjectId(project.id);
-                      setPostOffChainProjectId(project.offChainId);
-                      setPostProjectName(project.name);
-                      setPostProjectSlug(project.slug);
-                    }}
-                    onContainedButtonClick={() => {
-                      if (
-                        !project.offChain ||
-                        (project.offChain && project.published)
-                      ) {
-                        navigate(
-                          `/project-pages/${project.id}/edit/basic-info`,
-                        );
-                      } else {
-                        const currentStep = projectsCurrentStep[project?.id];
-                        navigate(
-                          `/project-pages/${project?.id}/${
-                            currentStep || 'basic-info'
-                          }`,
-                        );
-                      }
+                      // Navigate to new manage project page
+                      navigate(`/dashboard/projects/${project.id}/manage`);
                     }}
                     track={track}
                     pathname={location.pathname}
-                    createPostTooltipText={
-                      loginDisabled
-                        ? _(NOT_SUPPORTED_TOOLTIP_TEXT)
-                        : _(CREATE_POST_DISABLED_TOOLTIP_TEXT)
-                    }
-                    editProjectTooltipText={_(NOT_SUPPORTED_TOOLTIP_TEXT)}
                   />
                 </WithLoader>
               </Grid>

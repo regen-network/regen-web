@@ -9,8 +9,6 @@ import FarmerIcon from '../icons/FarmerIcon';
 import TrustIcon from '../icons/TrustIcon';
 import Card from './Card';
 import GlanceCard from './GlanceCard';
-import GreenCard from './GreenCard';
-import GreenTopIconCard from './GreenTopIconCard';
 import { ImageActionCard } from './ImageActionCard';
 import ImpactCard from './ImpactCard';
 import MapCard from './MapCard';
@@ -213,24 +211,6 @@ export const glanceCard = (): JSX.Element => (
       'Wilmot Cattle Co has increased Soil Organic Carbon to 4.5% and removed 22,500 tons of CO2e in two years.',
     ]}
   />
-);
-
-export const greenCard = (): JSX.Element => (
-  <GreenCard>
-    <p>Green card content</p>
-  </GreenCard>
-);
-
-export const greenTopIconCard = (): JSX.Element => (
-  <>
-    <GreenTopIconCard
-      title="Green card 1"
-      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      linkText="Link text"
-      linkUrl="https://github.com/regen-network"
-      imgSrc="./mainnet-validators.svg"
-    />
-  </>
 );
 
 export const onBoardingCard = (): JSX.Element => (

@@ -1,12 +1,9 @@
 import React from 'react';
-import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { SxProps } from '@mui/material';
 import Image from 'next/image';
 import { makeStyles } from 'tss-react/mui';
 
 import Section from 'web-components/src/components/section';
-import { Theme } from 'web-components/src/theme/muiTheme';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 type Props = {
@@ -91,6 +88,7 @@ const BackgroundImgSection: React.FC<React.PropsWithChildren<Props>> = ({
           fill
           sizes="100vw"
           className="object-cover"
+          priority
         />
       )}
       <Section

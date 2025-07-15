@@ -1,6 +1,3 @@
-import Image from 'next/image';
-import { useNextSanityImage } from 'next-sanity-image';
-
 import { BlockContent } from 'web-components/src/components/block-content';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -8,7 +5,6 @@ import Modal, { RegenModalProps } from 'web-components/src/components/modal';
 import { Body, Title } from 'web-components/src/components/typography';
 
 import { AllCreateProjectPageQuery } from 'generated/sanity-graphql';
-import { configuredSanityClient } from 'lib/clients/sanity';
 
 import { Step } from './BasicInfo.CreateProjectPageModal.Step';
 

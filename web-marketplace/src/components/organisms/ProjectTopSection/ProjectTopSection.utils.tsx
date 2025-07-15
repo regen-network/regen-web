@@ -1,9 +1,11 @@
 /* parseMethodologies */
+import Image from 'next/image';
+
+import SvgColorOverride from 'web-components/src/components/icons/utils/SvgColorOverride';
 import {
   RoundLogoItemsListType,
   RoundLogoItemType,
 } from 'web-components/src/components/molecules/RoundLogoItemsList/RoundLogoItemsList.types';
-import { ImageType } from 'web-components/src/types/shared/imageType';
 
 import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { ImageFieldsFragment, Sdg } from 'generated/sanity-graphql';
@@ -16,10 +18,15 @@ import {
 import { Certification } from 'lib/db/types/json-ld/certification';
 import { ApprovedMethodologies } from 'lib/db/types/json-ld/methodology';
 import { Rating } from 'lib/db/types/json-ld/rating';
+import { IS_REGEN } from 'lib/env';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 
+import { SanityNextImage } from 'components/atoms/SanityNextImage';
+
+import certificationImg from '../../../../public/svg/certification.svg';
+import ratingImg from '../../../../public/svg/rating.svg';
 import {
   CERTIFICATIONS,
   RATINGS,
@@ -31,11 +38,30 @@ type GetSdgsImagesParams = {
 };
 
 export const getSdgsImages = ({ sdgs }: GetSdgsImagesParams) => {
-  const sdgsImages: ImageType[] =
-    sdgs?.map(sdg => ({
-      src: getSanityImgSrc(sdg?.image),
-      alt: String(sdg?.title ?? ''),
-    })) ?? [];
+  const sdgsImages =
+    sdgs?.map(sdg => {
+      const src = getSanityImgSrc(sdg?.image);
+      const image = IS_REGEN ? (
+        <SanityNextImage
+          alt={sdg?.title}
+          image={sdg?.image?.image}
+          fallback={
+            sdg?.image?.imageHref
+              ? { src: sdg?.image?.imageHref, width: 157, height: 157 }
+              : null
+          }
+          className="w-50 h-50 sm:w-60 sm:h-60"
+        />
+      ) : src ? (
+        <SvgColorOverride
+          src={src}
+          color="rgba(var(--ac-neutral-500) / 1)"
+          filterIntensity={6}
+          className="w-50 h-50 sm:w-60 sm:h-60"
+        />
+      ) : null;
+      return { title: sdg?.title, image };
+    }) ?? [];
 
   return sdgsImages;
 };
@@ -178,20 +204,22 @@ type GetIconsMappingParams = {
   data?: SanityItemType[];
 };
 
+type IconMapping = Record<string, ImageFieldsFragment | null | undefined>;
+
 export const getIconsMapping = ({ data }: GetIconsMappingParams) => {
   return data?.reduce((acc, item) => {
-    acc[item?.name?.toLowerCase() ?? ''] = String(item?.icon?.asset?.url);
+    acc[item?.name?.toLowerCase() ?? ''] = item?.icon;
     return acc;
-  }, {} as Record<string, string | undefined>);
+  }, {} as IconMapping);
 };
 
 /* getRatingAndCertificationsData */
 
 type GetRatingAndCertificationsDataParams = {
   ratings?: Rating[];
-  ratingIcons?: Record<string, string | undefined>;
+  ratingIcons?: IconMapping;
   certifications?: Certification[];
-  certificationIcons?: Record<string, string | undefined>;
+  certificationIcons?: IconMapping;
   _: TranslatorType;
 };
 
@@ -224,12 +252,14 @@ export const getRatingsAndCertificationsData = ({
     certifications?.map(certification => {
       const certificationName = certification['schema:name'] ?? '';
       const certificationLink = certification['schema:url'] ?? '';
+      const icon = certificationIcons?.[certificationName.toLowerCase()];
 
       return {
-        image: {
-          src:
-            certificationIcons?.[certificationName] ?? '/svg/certification.svg',
-        },
+        image: icon ? (
+          <SanityNextImage image={icon} alt={certificationName} />
+        ) : (
+          <Image src={certificationImg} alt={certificationName} unoptimized />
+        ),
         link: {
           text: certificationName,
           href: certificationLink,
@@ -241,11 +271,14 @@ export const getRatingsAndCertificationsData = ({
     ratings?.map(rating => {
       const ratingName = rating['schema:name'] ?? '';
       const ratingLink = rating['schema:url'] ?? '';
+      const icon = ratingIcons?.[ratingName.toLowerCase()];
 
       return {
-        image: {
-          src: ratingIcons?.[ratingName] ?? '/svg/rating.svg',
-        },
+        image: icon ? (
+          <SanityNextImage image={icon} alt={ratingName} />
+        ) : (
+          <Image src={ratingImg} alt={ratingName} unoptimized />
+        ),
         link: {
           text: ratingName,
           href: ratingLink,

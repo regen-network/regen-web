@@ -1,9 +1,6 @@
 import { Box, Grid, SxProps, Theme } from '@mui/material';
-import { IS_REGEN } from 'lib/env';
 
-import { ImageType } from '../../../types/shared/imageType';
 import { sxToArray } from '../../../utils/mui/sxToArray';
-import SvgColorOverride from '../../icons/utils/SvgColorOverride';
 import { Image } from '../../image';
 import { Body, Label, Title } from '../../typography';
 import Card from '../Card';
@@ -14,7 +11,7 @@ export interface ProjectImpactCardProps {
   name?: string | null;
   description?: JSX.Element | string;
   imgSrc: string;
-  sdgs?: ImageType[];
+  sdgs?: { title: string; image: JSX.Element }[];
   label: string;
   standard?: string;
   apiServerUrl?: string;
@@ -36,6 +33,7 @@ export default function ProjectImpactCard({
 }: ProjectImpactCardProps): JSX.Element {
   const hasSdgs = sdgs.length > 0;
   const { classes } = useProjectImpactCardStyles();
+  console.log(sdgs);
   return (
     <Card
       className={className}
@@ -99,33 +97,11 @@ export default function ProjectImpactCard({
           <Box>
             {hasSdgs && (
               <Grid container spacing={2.5} sx={{ mb: 3.125, mt: -2.5 }}>
-                {sdgs.map(sdg =>
-                  sdg.src ? (
-                    <Grid key={sdg.src} item>
-                      {IS_REGEN ? (
-                        <Box
-                          component="img"
-                          sx={{
-                            width: { xs: 50, sm: 60 },
-                            height: { xs: 50, sm: 60 },
-                          }}
-                          src={sdg.src}
-                          alt={sdg.alt}
-                        />
-                      ) : (
-                        <SvgColorOverride
-                          src={sdg.src}
-                          color="rgba(var(--ac-neutral-500) / 1)"
-                          filterIntensity={6}
-                          sx={{
-                            width: { xs: 50, sm: 60 },
-                            height: { xs: 50, sm: 60 },
-                          }}
-                        />
-                      )}
-                    </Grid>
-                  ) : null,
-                )}
+                {sdgs.map(sdg => (
+                  <Grid key={sdg.title} item>
+                    {sdg.image}
+                  </Grid>
+                ))}
               </Grid>
             )}
             {standard && (

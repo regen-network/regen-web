@@ -41,11 +41,12 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
     () => address && isValidAddress(address),
     [address],
   );
+  console.log('profileImage', profileImage);
   return (
     <Card className="group/card hover:border-grey-300 hover:bg-grey-100 border-[transparent] bg-grey-0 w-full shadow-none p-5">
       <Grid container wrap="nowrap" alignItems="center">
         <Grid item mr={3} position="relative">
-          <UserAvatar className="w-30 h-30" src={profileImage} />
+          <UserAvatar className="w-30 h-30" src={profileImage} alt={name} />
           {showCheckIcon && (
             <div className="flex items-center justify-center w-15 h-15 absolute rounded-[50%] bg-bc-green-200 right-0 bottom-0">
               <CheckIcon className="w-[13px] h-[13px] text-brand-400" />

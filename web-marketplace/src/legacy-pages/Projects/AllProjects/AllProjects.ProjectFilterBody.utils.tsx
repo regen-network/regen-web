@@ -6,6 +6,7 @@ import HectaresBadge from 'web-components/src/components/icons/terrasos/Hectares
 import SvgWithSelectedColor from 'web-components/src/components/icons/utils/SvgWithSelectedColor';
 import type { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
+import { ImageFieldsFragment } from 'generated/sanity-graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
 import tebuBadge from '../../../../public/svg/tebu-badge.svg';
@@ -71,7 +72,7 @@ export const filterEcosystemIds = ecosystemTags.map(({ id }) => id);
 
 export function getEcosystemTags(
   _: TranslatorType,
-  ecosystemIcons: Record<string, string>,
+  ecosystemIcons: Record<string, ImageFieldsFragment>,
   ecosystemTypes: string[],
 ): FilterOption[] {
   return ecosystemTags
@@ -79,14 +80,14 @@ export function getEcosystemTags(
     .map(({ id, name }) => ({
       name: _(name),
       id: id,
-      startIcon: (
+      startIcon: ecosystemIcons[id]?.asset?.url ? (
         <SvgWithSelectedColor
-          src={ecosystemIcons[id]}
+          src={ecosystemIcons[id]?.asset?.url}
           sx={ecosystemIconSx}
           unselectedColor="rgba(var(--sc-icon-standard-disabled))"
           selectedColor="rgba(var(--sc-icon-ecosystem-400))"
         />
-      ),
+      ) : undefined,
     }));
 }
 

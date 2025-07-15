@@ -33,6 +33,7 @@ export default function Certificate({
   certificateNotFoundDescription,
 }: CertificateProps): JSX.Element {
   const { classes, cx } = useCertificateStyles({ background });
+
   return (
     <Box className={classes.root}>
       <div className={classes.content}>
@@ -140,17 +141,8 @@ export default function Certificate({
                   '@media print': { top: -62 },
                 }}
               >
-                {certificateData.certificateIcon && (
-                  <Box
-                    component="img"
-                    src={certificateData.certificateIcon}
-                    sx={{
-                      width: { xs: 91, sm: 145 },
-                      height: { xs: 91, sm: 145 },
-                      '@media print': { with: 75, height: 75 },
-                    }}
-                  />
-                )}
+                {certificateData.certificateIcon &&
+                  certificateData.certificateIcon}
               </Box>
               <div className={cx(classes.bannerSideRight, classes.bannerSide)}>
                 <Box className={classes.whiteTriangle} />

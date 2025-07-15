@@ -1,7 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { RoundLogo } from './RoundLogo';
-import { RoundLogoMock } from './RoundLogo.mock';
 
 export default {
   title: 'atoms/RoundLogo',
@@ -15,5 +14,5 @@ const Template: ComponentStory<typeof RoundLogo> = args => (
 export const Default = Template.bind({});
 
 Default.args = {
-  image: RoundLogoMock,
+  image: <img src="/logos/beZero.svg" alt="Be Zero Logo" />,
 };

@@ -6,6 +6,7 @@ import { ClassInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import Image from 'next/image';
+import { useNextSanityImage } from 'next-sanity-image';
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
 import { CardRibbon } from 'web-components/src/components/atoms/CardRibbon/CardRibbon';
@@ -20,6 +21,7 @@ import { Account } from 'web-components/src/components/user/UserInfo';
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { configuredSanityClient } from 'lib/clients/sanity';
 import {
   ECOSYSTEM_LABEL,
   LESS,
@@ -32,6 +34,7 @@ import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getAllCreditClassPageQuery } from 'lib/queries/react-query/sanity/getAllCreditClassPageQuery/getAllCreditClassPageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { SanityNextImage } from 'components/atoms/SanityNextImage';
 import { EcocreditsSection } from 'components/molecules';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
 import { parseMethodologies } from 'components/organisms/ProjectTopSection/ProjectTopSection.utils';
@@ -116,6 +119,11 @@ const CreditClassDetailsSimple: React.FC<
     _,
   });
 
+  const icon = useNextSanityImage(
+    configuredSanityClient,
+    creditTypeSanity?.category?.icon || null,
+  );
+
   return (
     <Box
       sx={{
@@ -142,9 +150,13 @@ const CreditClassDetailsSimple: React.FC<
               {imageSrc && (
                 <div className="relative mb-0 sm:mb-50 -mx-[16px] sm:mx-0">
                   <CardRibbon
-                    icon={{
-                      src: creditTypeSanity?.category?.icon?.asset?.url ?? '',
-                    }}
+                    icon={
+                      <SanityNextImage
+                        image={creditTypeSanity?.category?.icon}
+                        alt={creditTypeSanity?.category?.icon?.asset?.altText}
+                        className="w-20 h-20"
+                      />
+                    }
                     label={
                       (creditTypeSanity?.category?.name ||
                         creditTypeSanity?.name) ??
@@ -159,8 +171,8 @@ const CreditClassDetailsSimple: React.FC<
                       zIndex: 1,
                       py: { xs: 1, sm: 1.5 },
                     }}
-                    sxIcon={{ with: 20, height: 20 }}
                   />
+
                   <div className="relative w-full h-[200px] sm:h-[400px]">
                     <Image
                       className="object-cover sm:rounded-[5px]"
@@ -199,7 +211,16 @@ const CreditClassDetailsSimple: React.FC<
               <Title variant="h1">{displayName}</Title>
               {generationMethods && (
                 <CreditClassCardItem
-                  items={generationMethods}
+                  items={generationMethods.map((method, i) => ({
+                    name: method?.name,
+                    icon: (
+                      <SanityNextImage
+                        key={i}
+                        image={method?.icon}
+                        className="mr-10 w-[24px] h-[24px]"
+                      />
+                    ),
+                  }))}
                   label={_(OFFSET_GENERATION_METHOD)}
                   sx={{ my: 5 }}
                   sxListContainer={{
@@ -249,12 +270,23 @@ const CreditClassDetailsSimple: React.FC<
         credibilityCards={content?.credibilityCards}
         methodology={methodology}
         credit={{
-          creditImage: sanityCreditClassPage?.creditImage?.asset?.url,
+          creditImage: (
+            <SanityNextImage
+              image={sanityCreditClassPage?.creditImage}
+              className="m-auto max-w-full"
+            />
+          ),
           creditTypeUnit:
             creditTypeSanity?.unit || creditTypeData?.creditType?.unit,
-          creditTypeImage:
-            creditTypeSanity?.largeImage?.asset?.url ||
-            creditTypeSanity?.category?.largeImage?.asset?.url,
+          creditTypeImage: (
+            <SanityNextImage
+              image={
+                creditTypeSanity?.largeImage ||
+                creditTypeSanity?.category?.largeImage
+              }
+              className="m-auto max-w-full"
+            />
+          ),
           creditTypeUnitDefinition: creditTypeSanity?.unitDefinitionRaw,
         }}
       ></DetailsSection>

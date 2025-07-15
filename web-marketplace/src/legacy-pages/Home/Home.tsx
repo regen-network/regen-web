@@ -6,6 +6,7 @@ import { Box } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import Image from 'next/image';
+import { useNextSanityImage } from 'next-sanity-image';
 import { gradients } from 'styles/gradients';
 
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -16,6 +17,7 @@ import { Body, Title } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { configuredSanityClient } from 'lib/clients/sanity';
 import { SKIPPED_CLASS_ID } from 'lib/env';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
@@ -68,6 +70,11 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const seo = content?.seo;
   const gettingStartedResourcesSection =
     content?.gettingStartedResourcesSection;
+
+  const imageProps = useNextSanityImage(
+    configuredSanityClient,
+    heroSection?.icon?.image || null,
+  );
 
   useEffect(() => {
     const anchor = window.location.hash.slice(1);
@@ -148,19 +155,21 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
               sx={{ mt: { xs: 4, sm: 4 } }}
             />
           </Box>
-          <Box
-            sx={{
-              alignSelf: 'center',
-              maxWidth: ['252px', '560px'],
-            }}
-          >
-            <img
-              loading="lazy"
-              style={{ width: '100%' }}
-              src={heroSection?.icon?.image?.asset?.url || ''}
-              alt={heroSection?.icon?.imageAlt || 'icon'}
-            />
-          </Box>
+          {imageProps?.src && (
+            <Box
+              sx={{
+                alignSelf: 'center',
+                maxWidth: ['252px', '560px'],
+              }}
+            >
+              <Image
+                {...imageProps}
+                style={{ width: '100%' }}
+                src={imageProps.src}
+                alt={heroSection?.icon?.imageAlt || 'icon'}
+              />
+            </Box>
+          )}
         </Box>
       </BackgroundImgSection>
 

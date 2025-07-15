@@ -34,6 +34,7 @@ import { getAllOffsetMethodQuery } from 'lib/queries/react-query/sanity/getAllOf
 import { getAllProjectRatingQuery } from 'lib/queries/react-query/sanity/getAllProjectRatingQuery/getAllProjectRatingQuery';
 import { getComplianceInfoQuery } from 'lib/queries/react-query/sanity/getComplianceInfoQuery/getComplianceInfoQuery';
 
+import { SanityNextImage } from 'components/atoms/SanityNextImage';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -182,7 +183,11 @@ function ProjectTopSection({
     'regen:offsetGenerationMethod'
   ]?.map(method => ({
     name: method,
-    icon: { src: offsetMethodIconsMapping?.[method] ?? '' },
+    icon: (
+      <SanityNextImage
+        image={offsetMethodIconsMapping?.[method.toLowerCase()]}
+      />
+    ),
   }));
 
   const projectActivity =
@@ -290,7 +295,9 @@ function ProjectTopSection({
               creditTypeSanity?.category?.name ||
               creditTypeData?.creditType?.name
             }
-            creditTypeImage={creditTypeSanity?.category?.icon?.asset?.url}
+            creditTypeImage={
+              <SanityNextImage image={creditTypeSanity?.category?.icon} />
+            }
             generationMethods={generationMethods}
             methodology={methodology}
             program={program}
@@ -379,7 +386,6 @@ function ProjectTopSection({
               impact={[...impact]}
               activitiesLabel={_(PROJECT_ACTIVITY_LABEL)}
               ecosystemLabel={_(ECOSYSTEM_LABEL)}
-              overrideIconColor={!IS_REGEN}
               classes={{
                 root: ratingsAndCertificationsData ? '' : 'mb-30 sm:mb-40',
               }}

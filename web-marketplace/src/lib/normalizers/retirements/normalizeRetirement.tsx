@@ -14,6 +14,8 @@ import {
   CreditClassMetadataLD,
 } from 'lib/db/types/json-ld';
 
+import { SanityNextImage } from 'components/atoms/SanityNextImage';
+
 type Props = {
   retirement?: Maybe<RetirementFieldsFragment>;
   retirementData?: ReturnType<typeof getDataFromBatchDenomId>[];
@@ -42,7 +44,7 @@ export type NormalizedRetirement = {
   projectName: string;
   projectLocation?: string;
   retirementLabel?: string;
-  retirementIcon?: string;
+  retirementIcon?: JSX.Element;
   retirementLocation?: string;
   retirementReason?: string;
   retiredBy?: string;
@@ -83,7 +85,12 @@ export const normalizeRetirement = ({
         projectLocation: project?.jurisdiction,
         retirementDate: retirement.timestamp,
         retirementLabel: sanityCreditClass?.retirementLabel ?? '',
-        retirementIcon: sanityCreditClass?.retirementIcon?.asset?.url ?? '',
+        retirementIcon: (
+          <SanityNextImage
+            className="w-[91px] h-[91px] sm:w-[145px] sm:h-[145px] print:w-[75px] print:h-[75px]"
+            image={sanityCreditClass?.retirementIcon}
+          />
+        ),
         retirementLocation: retirement.jurisdiction,
         retirementReason: retirement.reason,
         retiredBy: retirement.owner,

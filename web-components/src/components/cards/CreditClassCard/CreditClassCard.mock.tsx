@@ -4,10 +4,7 @@ import { Props } from './CreditClassCard';
 export const creditClassCardMock: Props = {
   type: {
     name: 'Carbon',
-    icon: {
-      src: '/icons/carbon-white.svg',
-      alt: 'carbon',
-    },
+    icon: <img src="/icons/carbon-white.svg" className="mr-10" />,
   },
   title: 'Verified Carbon Standard (C01)',
   subtitle: 'CREDIT CLASS',
@@ -17,10 +14,7 @@ export const creditClassCardMock: Props = {
   generationMethods: [
     {
       name: 'Carbon removal',
-      icon: {
-        src: '/icons/carbon.svg',
-        alt: 'carbon',
-      },
+      icon: <img className="mr-10" src="/icons/carbon.svg" />,
     },
   ],
   creditClassTooltip:

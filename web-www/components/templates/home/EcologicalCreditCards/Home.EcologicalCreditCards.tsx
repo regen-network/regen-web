@@ -41,7 +41,7 @@ const EcologicalCreditCardsSection = ({ ecologicalCreditCardsData }: Props) => {
               {...card}
             >
               <Image
-                src={card.image.src}
+                src={card.image.src ?? ''}
                 alt={String(card.title)}
                 width={400}
                 height={492}

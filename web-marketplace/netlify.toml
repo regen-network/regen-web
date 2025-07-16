@@ -71,6 +71,15 @@ NEXT_PUBLIC_PRE_PROPOSE_SINGLE_CODE_ID = "11"
 NEXT_PUBLIC_CW4_GROUP_CODE_ID = "2"
 NEXT_PUBLIC_DAO_VOTING_CW4_CODE_ID = "19"
 
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = [
+    "@keplr-wallet",
+    "@ledgerhq/hw-app-eth",
+    "@ethereumjs",
+    "mapbox-gl"
+  ]
+
 [build.environment]
 NODE_OPTIONS = "--max-old-space-size=10216"
 

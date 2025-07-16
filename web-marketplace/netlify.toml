@@ -28,6 +28,14 @@ NEXT_PUBLIC_BRIDGE = "true"
 NEXT_PUBLIC_SKIPPED_CLASS_ID = ""
 NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 
+# Build settings for Next.js deploy previews
+[context.deploy-preview]
+  command = "bun run build"
+  publish = ".next"
+
+[[context.deploy-preview.plugins]]
+  package = "@netlify/plugin-nextjs"
+
 [context.deploy-preview.environment]
 NEXT_PUBLIC_SANITY_DATASET = "staging"
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"

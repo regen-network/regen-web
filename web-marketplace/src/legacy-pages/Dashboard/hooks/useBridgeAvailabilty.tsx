@@ -1,9 +1,9 @@
 // hooks/useBridgeAvailability.ts
 import { useMemo } from 'react';
+import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 import { useFetchBridgedEcocredits } from 'components/organisms/BridgedEcocreditsTable/hooks/useFetchBridgedEcocredits';
 
 export const useBridgeAvailability = () => {
@@ -14,7 +14,7 @@ export const useBridgeAvailability = () => {
   const { credits: bridgableCredits, isLoadingCredits: isLoadingBridgable } =
     useFetchEcocredits({
       address: accountAddress,
-      creditClassId: import.meta.env.VITE_BRIDGE_CREDIT_CLASS_ID,
+      creditClassId: process.env.NEXT_PUBLIC_BRIDGE_CREDIT_CLASS_ID,
       isPaginatedQuery: false,
     });
 

@@ -9,9 +9,8 @@ import FarmerIcon from '../icons/FarmerIcon';
 import TrustIcon from '../icons/TrustIcon';
 import Card from './Card';
 import GlanceCard from './GlanceCard';
+import GreenCard from './GreenCard';
 import { ImageActionCard } from './ImageActionCard';
-import ImpactCard from './ImpactCard';
-import MapCard from './MapCard';
 import OnBoardingCard from './OnBoardingCard';
 import { OverviewCard } from './OverviewCard';
 import ProjectCard from './ProjectCard';
@@ -33,31 +32,19 @@ export default {
   component: Card,
 };
 
-export const impactCard = (): JSX.Element => (
-  <ImpactCard
-    name="name"
-    description="Increasing all living biomass which is located above the ground"
-    imgSrc="/biomass.png"
-  />
-);
-
-export const monitoredImpactCard = (): JSX.Element => (
-  <ImpactCard
-    name="name"
-    description="Healthy ecosystems and rich biodiversity are fundamental to life on our planet."
-    imgSrc="/biodiversity.png"
-    monitored
-  />
-);
-
 export const projectImpactCard = (): JSX.Element => (
   <ProjectImpactCard
     name="Reforestation"
-    imgSrc="/illustrations/reforestation.png"
+    image={
+      <img
+        src="/illustrations/reforestation.png"
+        className="w-[120px] sm:w-[149px] h-[120px] sm:h-[149px] object-cover rounded-[8px]"
+      />
+    }
     sdgs={[
-      { src: '/sdgs/sdg3.svg', alt: 'sdg3' },
-      { src: '/sdgs/sdg4.svg', alt: 'sdg4' },
-      { src: '/sdgs/sdg8.svg', alt: 'sdg8' },
+      { image: <img src="/sdgs/sdg3.svg" />, title: 'sdg3' },
+      { image: <img src="/sdgs/sdg4.svg" />, title: 'sdg4' },
+      { image: <img src="/sdgs/sdg8.svg" />, title: 'sdg8' },
     ]}
     standard="https://regen-registry.s3.amazonaws.com/projects/kasigau/VCS.png"
     label="primary impact"
@@ -149,7 +136,7 @@ export const projectCard = (): JSX.Element => (
       projectPrefinancing={{
         isPrefinanceProject: true,
         price: '100',
-        estimatedIssuance: '200',
+        estimatedIssuance: 200,
         stripePaymentLink: 'https://stripe.com',
       }}
       draftText="Draft"
@@ -172,14 +159,13 @@ export const projectCard = (): JSX.Element => (
       projectPrefinancing={{
         isPrefinanceProject: true,
         price: '100',
-        estimatedIssuance: '200',
+        estimatedIssuance: 200,
         stripePaymentLink: 'https://stripe.com',
       }}
       draftText="Draft"
       bodyTexts={projectCardBodyTextMapping}
       purchaseDetailsTitles={projectCardPurchaseDetailsTitleMapping}
       buttons={projectCardButtonMapping}
-      colorScheme="terrasos"
     />
   </Box>
 );
@@ -193,16 +179,6 @@ export const purchasedCreditsCard = (): JSX.Element => (
   />
 );
 
-export const mapCard = (): JSX.Element => (
-  <MapCard
-    isPopup
-    imgSrc="diversifola.png"
-    color="#FFE7AD"
-    name="Euc diversifola mallee"
-    description="This species from the Hawkesbury region of New South Wales may grow into a multi-trunked mallee, or as a single trunked small tree."
-  />
-);
-
 export const glanceCard = (): JSX.Element => (
   <GlanceCard
     imgSrc="./impactag-smallmap-top-v2.jpg"
@@ -211,6 +187,12 @@ export const glanceCard = (): JSX.Element => (
       'Wilmot Cattle Co has increased Soil Organic Carbon to 4.5% and removed 22,500 tons of CO2e in two years.',
     ]}
   />
+);
+
+export const greenCard = (): JSX.Element => (
+  <GreenCard>
+    <p>Green card content</p>
+  </GreenCard>
 );
 
 export const onBoardingCard = (): JSX.Element => (

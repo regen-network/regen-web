@@ -41,7 +41,6 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
     () => address && isValidAddress(address),
     [address],
   );
-  console.log('profileImage', profileImage);
   return (
     <Card className="group/card hover:border-grey-300 hover:bg-grey-100 border-[transparent] bg-grey-0 w-full shadow-none p-5">
       <Grid container wrap="nowrap" alignItems="center">

@@ -3,7 +3,7 @@ import { ImageType } from '../../../types/shared/imageType';
 
 export type EcologicalCreditTypeType = {
   name: string;
-  icon: JSX.Element;
+  icon: ImageType;
 };
 
 export type EcologicalCreditInfoType = {

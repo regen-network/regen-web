@@ -21,7 +21,7 @@ export const useEcosystemTags = (ecosystemTypes: string[]) => {
   const ecosystemTags = Object.fromEntries(
     ecosystemTypes?.map(ecosystem => [
       ecosystem,
-      projectEcosystemIconsMapping?.[ecosystem.toLowerCase()] ?? '',
+      projectEcosystemIconsMapping?.[ecosystem.toLowerCase()],
     ]) ?? [],
   );
 

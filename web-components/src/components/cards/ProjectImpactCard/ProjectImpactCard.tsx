@@ -10,7 +10,7 @@ export interface ProjectImpactCardProps {
   className?: string;
   name?: string | null;
   description?: JSX.Element | string;
-  imgSrc: string;
+  image: JSX.Element;
   sdgs?: { title: string; image: JSX.Element }[];
   label: string;
   standard?: string;
@@ -22,7 +22,7 @@ export interface ProjectImpactCardProps {
 export default function ProjectImpactCard({
   name,
   description,
-  imgSrc,
+  image,
   sdgs = [],
   label,
   className,
@@ -33,7 +33,6 @@ export default function ProjectImpactCard({
 }: ProjectImpactCardProps): JSX.Element {
   const hasSdgs = sdgs.length > 0;
   const { classes } = useProjectImpactCardStyles();
-  console.log(sdgs);
   return (
     <Card
       className={className}
@@ -45,40 +44,27 @@ export default function ProjectImpactCard({
       }}
     >
       <Grid container wrap="nowrap">
-        <Grid item>
-          <Box
-            sx={{
-              backgroundImage: `url(${imgSrc})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              textAlign: 'left',
-              position: 'relative',
-              height: [120, 149],
-              width: [120, 149],
-              borderRadius: '8px',
-            }}
+        <Grid item className="relative">
+          {image}
+          <Label
+            size="xxs"
+            mobileSize="xxs"
+            sx={[
+              {
+                position: 'absolute',
+                top: [15, 25],
+                left: 0,
+                width: 'fit-content',
+                borderRadius: '0px 2px 2px 0px',
+                p: 1.25,
+                pl: 2.5,
+              },
+              ...sxToArray(labelSx),
+            ]}
+            className="text-sc-tag-prefinance-text-icon bg-sc-tag-impact-background"
           >
-            <Label
-              size="xxs"
-              mobileSize="xxs"
-              sx={[
-                {
-                  position: 'absolute',
-                  top: [15, 25],
-                  left: 0,
-                  width: 'fit-content',
-                  borderRadius: '0px 2px 2px 0px',
-                  p: 1.25,
-                  pl: 2.5,
-                },
-                ...sxToArray(labelSx),
-              ]}
-              className="text-sc-tag-prefinance-text-icon bg-sc-tag-impact-background"
-            >
-              {label}
-            </Label>
-          </Box>
+            {label}
+          </Label>
         </Grid>
         <Grid item pl={[3.75, 5]}>
           <Title

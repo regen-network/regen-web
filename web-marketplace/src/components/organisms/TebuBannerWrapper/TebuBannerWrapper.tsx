@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
@@ -13,6 +14,7 @@ import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { configuredSanityClient } from 'lib/clients/sanity';
 import { getTebuBannerQuery } from 'lib/queries/react-query/sanity/getTebuBannerQuery/getTebuBannerQuery';
 
+import { SanityNextImage } from 'components/atoms/SanityNextImage';
 import { TebuBanner } from 'components/molecules/TebuBanner';
 
 import {
@@ -37,18 +39,9 @@ const TebuBannerWrapper = ({ className }: Props) => {
   const response = tebuBannerResponse?.allTebuBanner[0];
   const defaultTebuBannerLink = useMemo(() => getDefaultTebuBannerLink(_), [_]);
   const defaultTebuBannerLogo = useMemo(() => getDefaultTebuBannerLogo(_), [_]);
+
   const learnMoreLink = response?.learnMoreLink as LinkType;
   const logoAlt = response?.logo?.imageAlt;
-  const imageProps = useNextSanityImage(
-    configuredSanityClient,
-    response?.logo?.image || null,
-  ) ?? {
-    src: (isLoading
-      ? response?.logo?.imageHref
-      : response?.logo?.imageHref ?? defaultTebuBannerLogo.imageHref) as string,
-    width: 62,
-    height: 76,
-  };
 
   return (
     <div className={cn(!isVisible && 'hidden', className)}>
@@ -57,11 +50,24 @@ const TebuBannerWrapper = ({ className }: Props) => {
         learnMoreLink={
           isLoading ? learnMoreLink : learnMoreLink ?? defaultTebuBannerLink
         }
-        logoAlt={
-          isLoading ? logoAlt : logoAlt ?? defaultTebuBannerLogo.imageAlt
+        logo={
+          <SanityNextImage
+            image={response?.logo?.image}
+            fallback={{
+              src: (isLoading
+                ? response?.logo?.imageHref
+                : response?.logo?.imageHref ??
+                  defaultTebuBannerLogo.imageHref) as string,
+              width: 62,
+              height: 76,
+            }}
+            alt={
+              isLoading ? logoAlt : logoAlt ?? defaultTebuBannerLogo.imageAlt
+            }
+            className="mr-20 sm:mr-30 object-contain"
+          />
         }
         onClose={() => setIsVisible(false)}
-        imageProps={imageProps}
       />
     </div>
   );

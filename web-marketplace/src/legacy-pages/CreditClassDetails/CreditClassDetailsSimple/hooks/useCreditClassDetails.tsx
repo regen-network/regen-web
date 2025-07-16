@@ -55,6 +55,7 @@ export const useCreditClassDetails = ({ onChainClass, metadata }: Params) => {
   const offsetMethodIconsMapping = getIconsMapping({
     data: sanityOffsetMethodData?.allOffsetMethod,
   });
+
   const generationMethods = metadata?.['regen:offsetGenerationMethod']?.map(
     method => {
       const parsedMethod =
@@ -62,7 +63,7 @@ export const useCreditClassDetails = ({ onChainClass, metadata }: Params) => {
 
       return {
         name: parsedMethod,
-        icon: { src: offsetMethodIconsMapping?.[parsedMethod] ?? '' },
+        icon: offsetMethodIconsMapping?.[parsedMethod.toLowerCase()],
       };
     },
   );

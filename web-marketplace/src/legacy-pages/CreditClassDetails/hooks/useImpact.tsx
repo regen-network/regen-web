@@ -69,6 +69,7 @@ export default function useImpact({
   const sanityPrimaryImpact = usePrimaryImpact({
     primaryImpactIRI: primaryImpact?.['@id'] || offChainPrimaryImpactIRI,
   });
+
   const sanityCoBenefits = useCoBenefits({
     coBenefitsIRIs:
       coBenefits?.map(coBenefit =>
@@ -95,6 +96,7 @@ export default function useImpact({
       ) as ProjectImpactCardProps,
     );
   }
+
   let normalizedCoBenefits: ProjectImpactCardProps[] = [];
   if (coBenefits?.length) {
     normalizedCoBenefits = coBenefits.map((coBenefit, i) =>

@@ -8,7 +8,13 @@ export const tebuBannerMock: TebuBannerProps = {
     text: 'Learn more',
     href: 'https://www.terrasos.co/',
   },
-  imageProps: { src: '/logos/tebu.png', width: 62, height: 76 },
-  logoAlt: 'Tebu logo',
+  logo: (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/logos/tebu.png"
+      className="mr-20 sm:mr-30 object-contain"
+      alt="Tebu logo"
+    />
+  ),
   onClose: () => void 0,
 };

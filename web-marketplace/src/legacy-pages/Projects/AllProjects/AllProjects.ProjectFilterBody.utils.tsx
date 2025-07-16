@@ -72,23 +72,26 @@ export const filterEcosystemIds = ecosystemTags.map(({ id }) => id);
 
 export function getEcosystemTags(
   _: TranslatorType,
-  ecosystemIcons: Record<string, ImageFieldsFragment>,
+  ecosystemIcons: Record<string, ImageFieldsFragment | undefined | null>,
   ecosystemTypes: string[],
 ): FilterOption[] {
   return ecosystemTags
     .filter(tag => ecosystemTypes.includes(tag.id.toLowerCase()))
-    .map(({ id, name }) => ({
-      name: _(name),
-      id: id,
-      startIcon: ecosystemIcons[id]?.asset?.url ? (
-        <SvgWithSelectedColor
-          src={ecosystemIcons[id]?.asset?.url}
-          sx={ecosystemIconSx}
-          unselectedColor="rgba(var(--sc-icon-standard-disabled))"
-          selectedColor="rgba(var(--sc-icon-ecosystem-400))"
-        />
-      ) : undefined,
-    }));
+    .map(({ id, name }) => {
+      const src = ecosystemIcons[id]?.asset?.url;
+      return {
+        name: _(name),
+        id: id,
+        startIcon: src ? (
+          <SvgWithSelectedColor
+            src={src}
+            sx={ecosystemIconSx}
+            unselectedColor="rgba(var(--sc-icon-standard-disabled))"
+            selectedColor="rgba(var(--sc-icon-ecosystem-400))"
+          />
+        ) : undefined,
+      };
+    });
 }
 
 export const regionTags = [

@@ -10,14 +10,14 @@ import { CertificateItem } from './certificate.Item';
 import { useCertificateStyles } from './certificate.styles';
 import { CertificateType } from './certificate.types';
 import { formatCertificateDates } from './certificate.utils';
-
+import Image, { StaticImageData } from 'next/image';
 interface CertificateProps {
   certificateData?: CertificateType;
   background: string;
   labels: Record<string, string>;
   linkComponent: LinkComponentType;
   certificateNotFoundAlt: string;
-  certificateNotFoundSrc: string;
+  certificateNotFoundSrc: StaticImageData;
   certificateNotFoundTitle: string;
   certificateNotFoundDescription: JSX.Element | string;
 }
@@ -262,7 +262,7 @@ export default function Certificate({
           </>
         ) : (
           <div className="flex flex-col items-center max-w-[614px] m-auto py-[100px] sm:py-[250px]">
-            <img src={certificateNotFoundSrc} alt={certificateNotFoundAlt} />
+            <Image src={certificateNotFoundSrc} alt={certificateNotFoundAlt} />
             <Title align="center" variant="h4" className="py-10">
               {certificateNotFoundTitle}
             </Title>

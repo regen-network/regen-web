@@ -6,7 +6,6 @@ import { ClassInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import Image from 'next/image';
-import { useNextSanityImage } from 'next-sanity-image';
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
 import { CardRibbon } from 'web-components/src/components/atoms/CardRibbon/CardRibbon';
@@ -21,7 +20,6 @@ import { Account } from 'web-components/src/components/user/UserInfo';
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { configuredSanityClient } from 'lib/clients/sanity';
 import {
   ECOSYSTEM_LABEL,
   LESS,
@@ -119,11 +117,6 @@ const CreditClassDetailsSimple: React.FC<
     _,
   });
 
-  const icon = useNextSanityImage(
-    configuredSanityClient,
-    creditTypeSanity?.category?.icon || null,
-  );
-
   return (
     <Box
       sx={{
@@ -217,7 +210,7 @@ const CreditClassDetailsSimple: React.FC<
                       <SanityNextImage
                         key={i}
                         image={method?.icon}
-                        className="mr-10 w-[24px] h-[24px]"
+                        className="w-[24px] h-[24px]"
                       />
                     ),
                   }))}

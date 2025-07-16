@@ -17,6 +17,7 @@ import { microToDenom } from 'lib/denom.utils';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 import { getSanityImgSrc } from 'lib/imgSrc';
 
+import { SanityNextImage } from 'components/atoms/SanityNextImage';
 import {
   CO_BENEFIT,
   MEASURED_CO_BENEFIT,
@@ -105,7 +106,17 @@ const normalizeImpact = ({
 }: NormalizeImpactInput) => ({
   name: impact?.['schema:name'] || sanityImpact?.name,
   description: projectImpact?.['schema:description'],
-  imgSrc: getSanityImgSrc(sanityImpact?.image) || '/svg/default-impact.svg',
+  image: (
+    <SanityNextImage
+      className="w-[120px] sm:w-[149px] h-[120px] sm:h-[149px] object-cover rounded-[8px]"
+      image={sanityImpact?.image?.image}
+      fallback={{
+        src: sanityImpact?.image?.imageHref ?? '/svg/default-impact.svg',
+        height: 149,
+        width: 149,
+      }}
+    />
+  ),
   sdgs: getSdgsImages({ sdgs: sanityImpact?.sdgs || sdgs }),
   standard: getSanityImgSrc(sanityImpact?.standard),
 });

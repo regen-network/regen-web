@@ -326,10 +326,7 @@ const EditProfileForm = ({
           helperText={errors?.twitterLink?.message}
           error={!!errors?.twitterLink}
           startAdornment={
-            <TwitterIcon
-              color="currentColor"
-              className="ml-[9px] mr-[8px] text-grey-300"
-            />
+            <TwitterIcon className="ml-[9px] mr-[8px] text-grey-300" />
           }
           sx={{
             mt: { xs: 0, sm: 0 },

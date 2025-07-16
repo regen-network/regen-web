@@ -31,7 +31,7 @@ NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 # Build settings for Next.js deploy previews
 [context.deploy-preview]
   command = "bun run build"
-  publish = ".next"
+  publish = "web-marketplace/.next"
 
 [[context.deploy-preview.plugins]]
   package = "@netlify/plugin-nextjs"

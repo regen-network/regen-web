@@ -9,7 +9,7 @@ import type { Metadata, Viewport } from 'next';
 
 import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 
-import { LedgerProviderWithWallet } from 'ledger';
+import { LedgerProvider, LedgerProviderWithWallet } from 'ledger';
 import { AuthProvider } from 'lib/auth/auth';
 import { IS_TERRASOS } from 'lib/env';
 import { WalletProvider } from 'lib/wallet/wallet';
@@ -136,28 +136,32 @@ export default function RootLayout({
                   <Suspense fallback={<PageLoader />}>
                     <AnalyticsWrapper>
                       <AuthProvider>
-                        <ChainWrapper>
-                          <WalletProvider>
-                            <LedgerProviderWithWallet>
-                              {IS_TERRASOS ? (
-                                <TerrasosHeader />
-                              ) : (
-                                <LayoutHeader />
-                              )}
+                        {IS_TERRASOS ? (
+                          <>
+                            <LedgerProvider>
+                              <TerrasosHeader />
                               {children}
-                              {IS_TERRASOS ? (
-                                <RegistryLayoutTerrasosFooter />
-                              ) : (
-                                <LayoutFooter />
-                              )}
-                              <PageViewTracking />
-                              <ScrollToTop />
-                              <RetryFailedFunctions />
-                              <LayoutCookiesTopBanner />
-                              <LayoutModalManager />
-                            </LedgerProviderWithWallet>
-                          </WalletProvider>
-                        </ChainWrapper>
+                              <RegistryLayoutTerrasosFooter />
+                            </LedgerProvider>
+                          </>
+                        ) : (
+                          <>
+                            <ChainWrapper>
+                              <WalletProvider>
+                                <LedgerProviderWithWallet>
+                                  <LayoutHeader />
+                                  {children}
+                                  <LayoutFooter />
+                                </LedgerProviderWithWallet>
+                              </WalletProvider>
+                            </ChainWrapper>
+                          </>
+                        )}
+                        <PageViewTracking />
+                        <ScrollToTop />
+                        <RetryFailedFunctions />
+                        <LayoutCookiesTopBanner />
+                        <LayoutModalManager />
                       </AuthProvider>
                     </AnalyticsWrapper>
                   </Suspense>

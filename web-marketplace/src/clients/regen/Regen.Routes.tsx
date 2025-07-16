@@ -82,7 +82,7 @@ const Description = safeLazy(() => import('../../legacy-pages/Description'));
 const EcocreditBatches = safeLazy(
   () => import('../../legacy-pages/EcocreditBatches'),
 );
-const Profile = safeLazy(() => import('../../pages/Profile'));
+const Profile = safeLazy(() => import('../../legacy-pages/Profile'));
 
 // ErrorPage cannot use safeLazy because it could create a circular dependency
 // since safeLazy itself uses ErrorPage as its fallback component when imports fail.

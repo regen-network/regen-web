@@ -23,11 +23,7 @@ export const getPressKitConnectIcons = (theme: Theme): IconLabelProps[] => [
   },
   {
     icon: (
-      <TwitterIcon
-        color={theme.palette.primary.main}
-        hoverColor={theme.palette.secondary.main}
-        className="!p-15 sm:!p-20"
-      />
+      <TwitterIcon className="!p-15 sm:!p-20 text-grey-0 hover:text-brand-400" />
     ),
     href: 'https://twitter.com/regen_network',
     label: 'Twitter',

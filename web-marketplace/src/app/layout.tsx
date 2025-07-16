@@ -1,5 +1,4 @@
 /* eslint-disable lingui/no-unlocalized-strings */
-
 import { Suspense } from 'react';
 import { setI18n } from '@lingui/react/server';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';

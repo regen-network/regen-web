@@ -43,7 +43,7 @@ export const getSocialsLinks = ({
   return [
     {
       href: account?.twitterLink,
-      icon: <TwitterIcon color="currentColor" />,
+      icon: <TwitterIcon />,
     },
     {
       href: account?.websiteLink,

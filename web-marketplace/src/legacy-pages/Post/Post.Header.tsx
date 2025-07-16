@@ -3,8 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { DEFAULT_NAME } from 'legacy-pages/Dashboard/Dashboard.constants';
 import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
-import { DEFAULT_NAME } from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
 
 import Banner from 'web-components/src/components/banner';
 import { PostAdminButton } from 'web-components/src/components/buttons/PostAdminButton/PostAdminButton';

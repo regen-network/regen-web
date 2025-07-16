@@ -28,7 +28,7 @@ const BuyersEcologicalCreditCardsSection: React.FC<
           {...card}
         >
           <CardMedia
-            src={card.image.src}
+            src={card.image.src ?? undefined}
             component="img"
             alt={card.image.alt}
             sx={{

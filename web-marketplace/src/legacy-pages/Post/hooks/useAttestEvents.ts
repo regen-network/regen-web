@@ -18,8 +18,8 @@ import {
 } from '@regen-network/api/regen/data/v2/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
-import { DEFAULT_NAME } from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
+import { DEFAULT_NAME } from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import { User } from 'web-components/src/components/user/UserInfo';
 import { formatDate } from 'web-components/src/utils/format';
@@ -31,12 +31,6 @@ import { messageActionEquals } from 'lib/ecocredit/constants';
 import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
-<<<<<<< HEAD:web-marketplace/src/pages/Post/hooks/useAttestEvents.ts
-import { DEFAULT_NAME } from 'pages/Dashboard/Dashboard.constants';
-import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
-
-=======
->>>>>>> c01df37d7 (feat: next migration setup (#2662)):web-marketplace/src/legacy-pages/Post/hooks/useAttestEvents.ts
 import { ADMIN, REGISTRY } from '../Post.constants';
 
 type Event = {

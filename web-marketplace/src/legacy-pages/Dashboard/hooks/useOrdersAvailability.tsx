@@ -1,7 +1,7 @@
 // hooks/useOrdersAvailability.ts
-import { useWallet } from 'lib/wallet/wallet';
+import { useOrders } from 'legacy-pages/Orders/hooks/useOrders';
 
-import { useOrders } from 'pages/Orders/hooks/useOrders';
+import { useWallet } from 'lib/wallet/wallet';
 
 export const useOrdersAvailability = () => {
   const { wallet } = useWallet();

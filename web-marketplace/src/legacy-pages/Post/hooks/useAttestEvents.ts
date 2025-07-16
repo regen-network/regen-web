@@ -18,8 +18,8 @@ import {
 } from '@regen-network/api/regen/data/v2/tx';
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
-import { DEFAULT_NAME } from 'legacy-pages/ProfileEdit/ProfileEdit.constants';
-import { getDefaultAvatar } from 'legacy-pages/ProfileEdit/ProfileEdit.utils';
+import { DEFAULT_NAME } from 'legacy-pages/Dashboard/Dashboard.constants';
+import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
 import { User } from 'web-components/src/components/user/UserInfo';
 import { formatDate } from 'web-components/src/utils/format';

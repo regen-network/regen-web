@@ -82,11 +82,7 @@ export default function ShareIcons({
               'flex items-center justify-center',
             )}
           >
-            <TwitterIcon
-              color={theme.palette.primary.main}
-              hoverColor={theme.palette.secondary.main}
-              className="!w-25 md:!w-30"
-            />
+            <TwitterIcon className="!w-25 md:!w-30 text-grey-0 hover:text-brand-400" />
           </a>
         </Grid>
         <Grid item>

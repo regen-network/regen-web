@@ -10,7 +10,7 @@ import amplitudePlugin from '@analytics/amplitude';
 import googleAnalytics from '@analytics/google-analytics';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
-import { Box } from '@mui/material';
+// import { Box } from '@mui/material';
 import { Theme } from '@mui/material/styles';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -102,9 +102,9 @@ export const SharedProviders = ({ customTheme, children }: Props) => {
             </LocalizationProvider>
           </I18nProvider>
         </IntercomProvider>
-        <Box sx={{ displayPrint: 'none' }}>
+        {/* <Box sx={{ displayPrint: 'none' }}>
           <ReactQueryDevtools initialIsOpen={false} />
-        </Box>
+        </Box> */}
       </AuthApolloProvider>
     </QueryClientProvider>
   );

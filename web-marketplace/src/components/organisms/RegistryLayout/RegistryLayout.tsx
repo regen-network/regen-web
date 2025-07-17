@@ -2,8 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 // import { IS_TERRASOS } from 'lib/env';
-import { PageViewTracking } from 'components/molecules/PageViewTracking';
-
+// import { PageViewTracking } from 'components/molecules/PageViewTracking';
 // import { ScrollToTop } from '../../atoms';
 // import TerrasosHeader from '../TerrasosHeader';
 import { RegistryLayoutAccountSwitchModal } from './RegistryLayout.AccountSwitchModal';
@@ -17,8 +16,9 @@ import { RegistryLayoutErrorBannerModal } from './RegistryLayout.ErrorBanner';
 // import { RegistryLayoutFooter } from './RegistryLayout.Footer.legacy';
 // import { RegistryLayoutHeader } from './RegistryLayout.Header.legacy';
 import { RegistryLayoutProcessingModal } from './RegistryLayout.ProcessingModal';
-import { RetryFailedFunctions } from './RegistryLayout.RetryFailedFunctions';
+// import { RetryFailedFunctions } from './RegistryLayout.RetryFailedFunctions';
 import { RegistryLayoutSwitchWalletModal } from './RegistryLayout.SwitchWalletModal';
+// import { RegistryLayoutTerrasosFooter } from './RegistryLayout.TerrasosFooter';
 import { RegistryLayoutTxBuySuccessfulModal } from './RegistryLayout.TxBuySuccessfulModal';
 import { RegistryLayoutTxErrorModal } from './RegistryLayout.TxErrorModal';
 import { RegistryLayoutTxSuccessfulModal } from './RegistryLayout.TxSuccessfulModal';
@@ -34,9 +34,9 @@ const RegistryLayout: React.FC = () => {
       ) : (
         <RegistryLayoutFooter />
       )} */}
-      <PageViewTracking />
+      {/* <PageViewTracking /> */}
       {/* <ScrollToTop /> */}
-      <RetryFailedFunctions />
+      {/* <RetryFailedFunctions /> */}
       <RegistryLayoutCookiesTopBanner />
       <RegistryLayoutTxErrorModal />
       <RegistryLayoutBannerModal />

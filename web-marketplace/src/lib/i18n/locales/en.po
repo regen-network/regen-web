@@ -495,7 +495,7 @@ msgstr ""
 msgid "amount now available in usd"
 msgstr ""
 
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:207
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:237
 msgid "amount of credits"
 msgstr ""
 
@@ -1086,9 +1086,8 @@ msgstr ""
 msgid "Click on the confirmation link to return to Regen Network."
 msgstr ""
 
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:234
 #: src/pages/ProjectReview/ProjectReview.tsx:379
-#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:249
+#: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:234
 msgid "close"
 msgstr ""
 
@@ -1298,7 +1297,7 @@ msgstr ""
 
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
 #: src/components/organisms/UserSellOrders/UserSellOrders.CreateButton.tsx:21
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:231
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:276
 msgid "Create Sell Order"
 msgstr ""
 
@@ -1321,7 +1320,7 @@ msgstr ""
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:121
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:129
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:122
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:154
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:233
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:114
 #: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:140
 msgid "credit batch id"
@@ -3310,6 +3309,7 @@ msgid "Price of credits for prefinance projects have specific terms, please clic
 msgstr ""
 
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:89
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:188
 msgid "price per credit"
 msgstr ""
 
@@ -3395,7 +3395,7 @@ msgstr ""
 #: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:114
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:120
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:196
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:226
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:107
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:299
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:5
@@ -4020,7 +4020,7 @@ msgid "sell order id:"
 msgstr ""
 
 #: src/pages/Marketplace/Storefront/Storefront.tsx:154
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:44
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:48
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
 msgid "Sell orders"
 msgstr ""
@@ -5240,7 +5240,7 @@ msgstr ""
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
 msgstr ""
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:55
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:59
 msgid "You have no tradable credits that can be sold."
 msgstr ""
 

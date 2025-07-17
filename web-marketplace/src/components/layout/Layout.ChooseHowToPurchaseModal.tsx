@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useEffect } from 'react';
 import { useAtom } from 'jotai';
 
@@ -6,7 +8,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { ChooseHowToPurchaseModal } from 'components/organisms/ChooseHowToPurchaseModal/ChooseHowToPurchaseModal';
 
-export const RegistryLayoutChooseHowToPurchaseModal = (): JSX.Element => {
+export const LayoutChooseHowToPurchaseModal = (): JSX.Element => {
   const [chooseHowToPurchaseModal, setChooseHowToPurchaseModal] = useAtom(
     chooseHowToPurchaseModalAtom,
   );

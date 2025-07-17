@@ -17,29 +17,27 @@ import { WalletProvider } from 'lib/wallet/wallet';
 
 import PageLoader from 'components/atoms/PageLoader';
 import { ScrollToTop } from 'components/atoms/ScrollToTop';
+import { LayoutAccountSwitchModal } from 'components/layout/Layout.AccountSwitchModal';
+import { LayoutAddWalletModalSwitchWarning } from 'components/layout/Layout.AddWalletModalSwitchWarning';
+import { LayoutBannerModal } from 'components/layout/Layout.Banner';
+import { LayoutChooseHowToPurchaseModal } from 'components/layout/Layout.ChooseHowToPurchaseModal';
+import { LayoutConnectedEmailErrorModal } from 'components/layout/Layout.ConnectedEmailErrorModal';
+import { LayoutConnectWalletModal } from 'components/layout/Layout.ConnectWalletModal';
+import { LayoutCookiesTopBanner } from 'components/layout/Layout.CookiesTopBanner';
+import { LayoutErrorBannerModal } from 'components/layout/Layout.ErrorBanner';
 import { LayoutFooter } from 'components/layout/Layout.Footer';
 import { LayoutHeader } from 'components/layout/Layout.Header';
-// import { RegistryLayoutAccountSwitchModal } from 'components/organisms/RegistryLayout/RegistryLayout.AccountSwitchModal';
-// import { RegistryLayoutAddWalletModalSwitchWarning } from 'components/organisms/RegistryLayout/RegistryLayout.AddWalletModalSwitchWarning';
-// import { RegistryLayoutBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.Banner';
-// import { RegistryLayoutChooseHowToPurchaseModal } from 'components/organisms/RegistryLayout/RegistryLayout.ChooseHowToPurchaseModal';
-// import { RegistryLayoutConnectedEmailErrorModal } from 'components/organisms/RegistryLayout/RegistryLayout.ConnectedEmailErrorModal';
-// import { RegistryLayoutConnectWalletModal } from 'components/organisms/RegistryLayout/RegistryLayout.ConnectWalletModal';
-// import { RegistryLayoutCookiesTopBanner } from 'components/organisms/RegistryLayout/RegistryLayout.CookiesTopBanner';
-// import { RegistryLayoutErrorBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.ErrorBanner';
-// import { RegistryLayoutFooter } from 'components/organisms/RegistryLayout/RegistryLayout.Footer';
-// import { RegistryLayoutHeader } from 'components/organisms/RegistryLayout/RegistryLayout.Header';
-// import { RegistryLayoutProcessingModal } from 'components/organisms/RegistryLayout/RegistryLayout.ProcessingModal';
+import { LayoutProcessingModal } from 'components/layout/Layout.ProcessingModal';
 import { RetryFailedFunctions } from 'components/layout/Layout.RetryFailedFunctions';
+import { LayoutSwitchWalletModal } from 'components/layout/Layout.SwitchWalletModal';
+import { LayoutTxBuySuccessfulModal } from 'components/layout/Layout.TxBuySuccessfulModal';
+import { LayoutTxErrorModal } from 'components/layout/Layout.TxErrorModal';
+import { LayoutTxSuccessfulModal } from 'components/layout/Layout.TxSuccessfulModal';
+import { LayoutWarningBannerModal } from 'components/layout/Layout.WarningBanner';
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
-// import { RegistryLayoutSwitchWalletModal } from 'components/organisms/RegistryLayout/RegistryLayout.SwitchWalletModal';
 import { RegistryLayoutTerrasosFooter } from 'components/organisms/RegistryLayout/RegistryLayout.TerrasosFooter';
 import { TerrasosHeader } from 'components/organisms/TerrasosHeader/TerrasosHeader';
 
-// import { RegistryLayoutTxBuySuccessfulModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxBuySuccessfulModal';
-// import { RegistryLayoutTxErrorModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxErrorModal';
-// import { RegistryLayoutTxSuccessfulModal } from 'components/organisms/RegistryLayout/RegistryLayout.TxSuccessfulModal';
-// import { RegistryLayoutWarningBannerModal } from 'components/organisms/RegistryLayout/RegistryLayout.WarningBanner';
 import { AnalyticsWrapper } from './AnalyticsWrapper';
 import { ApolloWrapper } from './ApolloWrapper';
 import { getI18nInstance } from './appRouterI18n';
@@ -173,21 +171,20 @@ export default async function RootLayout({
                               <PageViewTracking />
                               <ScrollToTop />
                               <RetryFailedFunctions />
-                              {/* 
-                            <RegistryLayoutCookiesTopBanner />
-                            <RegistryLayoutTxErrorModal />
-                            <RegistryLayoutBannerModal />
-                            <RegistryLayoutTxSuccessfulModal />
-                            <RegistryLayoutProcessingModal />
-                            <RegistryLayoutErrorBannerModal />
-                            <RegistryLayoutConnectWalletModal />
-                            <RegistryLayoutSwitchWalletModal />
-                            <RegistryLayoutAddWalletModalSwitchWarning />
-                            <RegistryLayoutAccountSwitchModal />
-                            <RegistryLayoutTxBuySuccessfulModal />
-                            <RegistryLayoutWarningBannerModal />
-                            <RegistryLayoutChooseHowToPurchaseModal />
-                            <RegistryLayoutConnectedEmailErrorModal /> */}
+                              <LayoutCookiesTopBanner />
+                              <LayoutTxErrorModal />
+                              <LayoutTxSuccessfulModal />
+                              <LayoutBannerModal />
+                              <LayoutProcessingModal />
+                              <LayoutErrorBannerModal />
+                              <LayoutConnectWalletModal />
+                              <LayoutSwitchWalletModal />
+                              <LayoutAddWalletModalSwitchWarning />
+                              <LayoutAccountSwitchModal />
+                              <LayoutTxBuySuccessfulModal />
+                              <LayoutWarningBannerModal />
+                              <LayoutChooseHowToPurchaseModal />
+                              <LayoutConnectedEmailErrorModal />
                             </LedgerProviderWithWallet>
                           </WalletProvider>
                         </ChainWrapper>

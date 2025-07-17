@@ -4,12 +4,14 @@ import { Suspense } from 'react';
 import { setI18n } from '@lingui/react/server';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { RegenProviders } from 'clients/regen/Regen.Providers';
 import terrasosMuiTheme from 'clients/terrasos/Terrasos.muiTheme';
+import { TerrasosProviders } from 'clients/terrasos/Terrasos.Providers';
 import type { Metadata, Viewport } from 'next';
 
 import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 
-import { LedgerProviderWithWallet } from 'ledger';
+import { LedgerProvider, LedgerProviderWithWallet } from 'ledger';
 import { AuthProvider } from 'lib/auth/auth';
 import { IS_TERRASOS } from 'lib/env';
 import { WalletProvider } from 'lib/wallet/wallet';
@@ -136,28 +138,16 @@ export default function RootLayout({
                   <Suspense fallback={<PageLoader />}>
                     <AnalyticsWrapper>
                       <AuthProvider>
-                        <ChainWrapper>
-                          <WalletProvider>
-                            <LedgerProviderWithWallet>
-                              {IS_TERRASOS ? (
-                                <TerrasosHeader />
-                              ) : (
-                                <LayoutHeader />
-                              )}
-                              {children}
-                              {IS_TERRASOS ? (
-                                <RegistryLayoutTerrasosFooter />
-                              ) : (
-                                <LayoutFooter />
-                              )}
-                              <PageViewTracking />
-                              <ScrollToTop />
-                              <RetryFailedFunctions />
-                              <LayoutCookiesTopBanner />
-                              <LayoutModalManager />
-                            </LedgerProviderWithWallet>
-                          </WalletProvider>
-                        </ChainWrapper>
+                        {IS_TERRASOS ? (
+                          <TerrasosProviders>{children}</TerrasosProviders>
+                        ) : (
+                          <RegenProviders>{children}</RegenProviders>
+                        )}
+                        <PageViewTracking />
+                        <ScrollToTop />
+                        <RetryFailedFunctions />
+                        <LayoutCookiesTopBanner />
+                        <LayoutModalManager />
                       </AuthProvider>
                     </AnalyticsWrapper>
                   </Suspense>

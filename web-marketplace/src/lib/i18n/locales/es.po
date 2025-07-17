@@ -1481,9 +1481,9 @@ msgstr "Definición de unidad de crédito"
 msgid "credits"
 msgstr "créditos"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:42
-#: src/components/organisms/Order/Order.Summary.tsx:60
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.tsx:304
+#: src/components/organisms/Order/Order.Summary.tsx:60
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:42
 msgid "Credits"
 msgstr "Créditos"
 
@@ -1496,7 +1496,7 @@ msgstr "Los créditos se mantienen en depósito en garantía cuando se crea una 
 msgid "credits available"
 msgstr "créditos disponibles"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:101
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:109
 msgid "Credits Available"
 msgstr "Créditos disponibles"
 
@@ -1568,7 +1568,7 @@ msgstr "créditos comprados"
 msgid "Credits purchased with crypto can be purchased in either a retired or tradable state."
 msgstr "Los créditos comprados con criptomonedas se pueden comprar en estado retirado o negociable."
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:70
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:77
 msgid "Credits Registered"
 msgstr "Créditos registrados"
 
@@ -1992,8 +1992,8 @@ msgid "Examples of a retirement reason include: “company travel 2025”, “of
 msgstr "Algunos ejemplos de motivos de retirada incluyen: “viajes de empresa en 2025”, “compensar mi impacto ambiental” o el nombre de una persona u organización específica."
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
-msgid "Excludes escrowed credits."
-msgstr "Excluye créditos en depósito."
+#~ msgid "Excludes escrowed credits."
+#~ msgstr "Excluye créditos en depósito."
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 #~ msgid "Exit to homepage"
@@ -2131,7 +2131,7 @@ msgstr "Para obtener ayuda para resolver un problema, comuníquese con support@r
 msgid "For Land Stewards"
 msgstr "Para administradores de tierras"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:86
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:94
 msgid "For sale"
 msgstr "En venta"
 
@@ -2303,6 +2303,10 @@ msgstr "Para comprar y retirar ecocréditos mediante pago con tarjeta de crédit
 msgid "In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
 msgstr "En esta forma de pastoreo rotacional, los animales de pastoreo, con una densidad de población muy alta, pastan en una unidad de manejo durante un período muy corto de tiempo."
 
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
+msgid "Includes escrowed credits."
+msgstr "Incluye créditos en depósito."
+
 #: src/components/organisms/LoginButton/LoginButton.constants.ts:12
 msgid "Incorrect code! Double-check the code and try again."
 msgstr "¡Código incorrecto! Verifique el código nuevamente e intente nuevamente."
@@ -2356,7 +2360,7 @@ msgstr "Emisión"
 msgid "Issue and sell ecosystem service credits to buyers around the world - get paid for your ecological stewardship."
 msgstr "Emite y vende créditos de servicios ecosistémicos a compradores de todo el mundo: recibe un pago por tu gestión ecológica."
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:66
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:77
 msgid "Issued"
 msgstr "Emitido"
 
@@ -3797,7 +3801,7 @@ msgstr "Retirar créditos ahora"
 msgid "Retire credits upon transfer"
 msgstr "Retirar créditos al momento de la transferencia"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:114
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:132
 msgid "Retired"
 msgstr "Jubilado"
 
@@ -4151,9 +4155,8 @@ msgstr "Cuentas sociales"
 msgid "Social and Cultural Index"
 msgstr "Índice social y cultural"
 
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:10
 #: src/lib/constants/shared.constants.tsx:174
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:9
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:10
 msgid "Sold Out"
 msgstr "Agotado"
 
@@ -4688,7 +4691,7 @@ msgid "Toucan Vintage Token Id"
 msgstr "Identificación de token vintage de tucán"
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:102
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:99
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:109
 msgid "Tradable"
 msgstr "Negociable"
 
@@ -4697,16 +4700,16 @@ msgid "Tradable Credits"
 msgstr "Créditos negociables"
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
-msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
-msgstr "Los créditos negociables aún no han sido retirados y pueden conservarse, venderse o enviarse a otra parte."
-
-#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:5
-#~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
-#~ msgstr "Los créditos negociables aún no se han retirado y pueden conservarse, venderse o transferirse a un tercero. Excluye los créditos en depósito."
+#~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party."
+#~ msgstr "Los créditos negociables aún no han sido retirados y pueden conservarse, venderse o enviarse a otra parte."
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:6
 #~ msgid "Tradable credits have no yet been retired and can be held, sold, or sent to another party. Excludes escrowed credits."
 #~ msgstr "Los créditos negociables aún no se han retirado y pueden conservarse, venderse o transferirse a un tercero. Excluye los créditos en depósito."
+
+#: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.constants.ts:7
+msgid "Tradable credits have not yet been retired and can be held, sold, or sent to another party."
+msgstr "Los créditos negociables aún no han sido retirados y pueden conservarse, venderse o enviarse a otra parte."
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:36
 msgid "Trade"

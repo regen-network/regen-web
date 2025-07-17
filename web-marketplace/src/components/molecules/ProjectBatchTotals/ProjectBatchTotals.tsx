@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
@@ -44,15 +45,22 @@ export function ProjectBatchTotals({
   complianceCredits,
 }: ProjectBatchTotalsProps): JSX.Element {
   const { _ } = useLingui();
-  const isSoldOut = getIsSoldOut({
-    project: projectWithOrderData,
-    soldOutProjectsIds,
-  });
+  const isSoldOut = useMemo(
+    () =>
+      getIsSoldOut({
+        project: projectWithOrderData,
+        soldOutProjectsIds,
+      }),
+    [projectWithOrderData, soldOutProjectsIds],
+  );
   const hasSoldOutProject = soldOutProjectsIds.length > 0;
   const hasAvailableCredits = totals.tradableAmount > 0;
   const terrasosIsSoldOut = hasSoldOutProject
     ? isSoldOut
     : !hasAvailableCredits;
+  const tooltipIsSoldOut = isTerrasosProjectPage
+    ? terrasosIsSoldOut
+    : isSoldOut;
 
   // eslint-disable-next-line lingui/no-unlocalized-strings
   const tooltipClassName = IS_TERRASOS ? 'w-[17px] h-[17px]' : '';
@@ -86,7 +94,7 @@ export function ProjectBatchTotals({
           label={_(msg`For sale`)}
           tooltipLabel={_(FOR_SALE_CREDITS_TOOLTIP)}
           tooltipNumber={getCreditsTooltip({
-            isSoldOut: isTerrasosProjectPage ? terrasosIsSoldOut : isSoldOut,
+            isSoldOut: tooltipIsSoldOut,
             project: projectWithOrderData,
             _,
           })}
@@ -107,9 +115,7 @@ export function ProjectBatchTotals({
         tooltipNumber={
           !complianceCredits
             ? getCreditsTooltip({
-                isSoldOut: isTerrasosProjectPage
-                  ? terrasosIsSoldOut
-                  : isSoldOut,
+                isSoldOut: tooltipIsSoldOut,
                 project: projectWithOrderData,
                 _,
               })

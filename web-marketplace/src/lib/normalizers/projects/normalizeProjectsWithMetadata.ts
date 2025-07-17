@@ -1,8 +1,6 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
-import { formatNumber } from 'web-components/src/utils/format';
-
 import {
   AccountFieldsFragment,
   Maybe,

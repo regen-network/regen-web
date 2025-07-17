@@ -23,11 +23,11 @@ export const getProjectByIdQuery = ({
       query: ProjectByIdDocument,
       variables: { id },
     });
-    const allProject = projectById.allProject;
+    const projectArr = projectById.allProject;
 
     return {
       allProject: getLocalizedData({
-        data: allProject,
+        data: projectArr,
         languageCode,
       }),
     };

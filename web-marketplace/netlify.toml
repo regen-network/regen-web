@@ -58,7 +58,9 @@ NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
     "@keplr-wallet",
     "@ledgerhq/hw-app-eth",
     "@ethereumjs",
-    "mapbox-gl"
+    "mapbox-gl",
+    "@google-cloud/translate",
+    "@lingui/core"
   ]
 
 [build.environment]

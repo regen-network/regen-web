@@ -54,12 +54,22 @@ NEXT_PUBLIC_ANALYTICS_ENABLED = "true"
 NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 
 [functions]
+    included_files = [
+    "!./public/jpg/**",
+    "!./public/png/**",
+    "!./public/svg/**"
+  ]
   node_bundler = "esbuild"
   external_node_modules = [
     "@keplr-wallet",
     "@ledgerhq/hw-app-eth",
     "@ethereumjs",
-    "mapbox-gl"
+    "mapbox-gl",
+    "libsodium-sumo.js",
+    "@regen-network/api",
+    "chain-registry",
+    "pdfjs-dist",
+    "xlsx"
   ]
 
 [build.environment]

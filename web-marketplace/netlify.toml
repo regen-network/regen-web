@@ -12,6 +12,12 @@ NEXT_PUBLIC_TOUCAN_LINK = "https://toucan.earth/overview?chainId=137"
 NEXT_PUBLIC_SKIPPED_CLASS_ID = "C01"
 NEXT_PUBLIC_DEPLOY_CONTEXT = "production"
 
+[context.production]
+  command = "yarn build"
+
+[context.dev]
+  command = "yarn build"
+
 [context.dev.environment]
 NEXT_PUBLIC_SANITY_TAG = "default"
 NEXT_PUBLIC_SANITY_DATASET = "staging"
@@ -72,6 +78,10 @@ NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
   ]
 
 
+
+[build]
+  command = "bun run build"
+  publish = "web-marketplace/.next"
 
 [build.environment]
 NODE_OPTIONS = "--max-old-space-size=10216"

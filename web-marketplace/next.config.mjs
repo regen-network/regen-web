@@ -3,7 +3,7 @@ import withBundleAnalyzer from '@next/bundle-analyzer';
 
 const nextConfig = {
   // output: 'export', // Outputs a Single-Page Application (SPA).
-  distDir: './dist', // Changes the build output directory to `./dist/`.
+  // distDir: './dist', // Changes the build output directory to `./dist/`.
   experimental: {
     swcPlugins: [['@lingui/swc-plugin', {}]],
     // Optimize imports to reduce bundle size in development and production

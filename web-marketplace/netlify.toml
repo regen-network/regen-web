@@ -28,15 +28,6 @@ NEXT_PUBLIC_BRIDGE = "true"
 NEXT_PUBLIC_SKIPPED_CLASS_ID = ""
 NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 
-# Build settings for Next.js deploy previews
-[context.deploy-preview]
-  command = "bun run build"
-  publish = "web-marketplace/dist"
-
-[[context.deploy-preview.plugins]]
-  package = "@netlify/plugin-nextjs"
-
-
 [context.deploy-preview.environment]
 NEXT_PUBLIC_SANITY_DATASET = "staging"
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
@@ -53,12 +44,15 @@ NEXT_PUBLIC_SKIPPED_CLASS_ID = ""
 NEXT_PUBLIC_ANALYTICS_ENABLED = "true"
 NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 
-[functions]
-    included_files = [
-    "!./public/jpg/**",
-    "!./public/png/**",
-    "!./public/svg/**"
-  ]
+[context.deploy-preview]
+  base = "."
+  command = "bun run build"
+  publish = "web-marketplace/.next"
+
+[[context.deploy-preview.plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[context.deploy-preview.functions.functionsSource]
   node_bundler = "esbuild"
   external_node_modules = [
     "@keplr-wallet",
@@ -71,6 +65,13 @@ NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
     "pdfjs-dist",
     "xlsx"
   ]
+  included_files = [
+    "!public/jpg/**",
+    "!public/png/**",
+    "!public/svg/**"
+  ]
+
+
 
 [build.environment]
 NODE_OPTIONS = "--max-old-space-size=10216"

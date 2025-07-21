@@ -11,6 +11,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { Link } from 'components/atoms';
 
+import { CollaboratorsManagement } from './components/Collaborators';
 import ProjectBanner from './components/ProjectBanner';
 import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
 
@@ -58,7 +59,7 @@ const ManageProject = (): JSX.Element => {
     if (location.pathname.includes('/posts')) return 0;
     if (location.pathname.includes('/collaborators')) return 1;
     if (location.pathname.includes('/projectportfolio')) return 2;
-    return 1;
+    return 0;
   };
 
   const currentTab = getCurrentTabContent();
@@ -73,12 +74,21 @@ const ManageProject = (): JSX.Element => {
   );
 
   const renderCollaboratorsContent = () => (
-    <div>
-      <Title variant="h4" className="mb-20">
-        {_(msg`Collaborators`)}
-      </Title>
-      <p>Collaborator management will be implemented here.</p>
-    </div>
+    <CollaboratorsManagement
+      projectId={projectId || ''}
+      userRole="author"
+      onInvite={() => {
+        // Implement invitation flow
+      }}
+      onRoleChange={(collaboratorId, newRole) => {
+        console.log(`Changed role for ${collaboratorId} to ${newRole}`);
+        // Update role in your backend
+      }}
+      onRemove={collaboratorId => {
+        console.log(`Removing collaborator ${collaboratorId}`);
+        // Remove collaborator from your backend
+      }}
+    />
   );
 
   const renderPortfolioContent = () => (
@@ -96,7 +106,7 @@ const ManageProject = (): JSX.Element => {
       {project && <ProjectBanner project={project} />}
 
       {/* Tabs section */}
-      <div className="w-full mb-20 md:mb-8 lg:mb-0">
+      <div className="w-full py-30 md:mb-8 lg:mb-0">
         <IconTabs
           aria-label={_(msg`manage project tabs`)}
           tabs={tabs}
@@ -107,7 +117,7 @@ const ManageProject = (): JSX.Element => {
       </div>
 
       {/* Content section */}
-      <div className="p-30">
+      <div className="p-30 border-1 border-bc-neutral-300 rounded-lg bg-bc-neutral-0">
         {currentTab === 0 && renderDataPostsContent()}
         {currentTab === 1 && renderCollaboratorsContent()}
         {currentTab === 2 && renderPortfolioContent()}

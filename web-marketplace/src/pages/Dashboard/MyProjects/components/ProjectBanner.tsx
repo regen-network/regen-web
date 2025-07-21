@@ -67,7 +67,7 @@ const ProjectBanner: React.FC<ProjectBannerProps> = ({ project }) => {
   );
 
   return (
-    <div className="relative w-full md:mb-30 my-20">
+    <div className="relative w-full mt-20">
       {/* Background Image Container */}
       <div
         className="relative w-full min-h-[187px] bg-cover bg-center bg-no-repeat rounded-lg"

@@ -11,7 +11,7 @@ export const TerrasosProviders = ({ children }: Props) => {
   return (
     <LedgerProvider>
       <TerrasosHeader />
-      {children}
+      <main className="min-h-screen">{children}</main>
       <RegistryLayoutTerrasosFooter />
     </LedgerProvider>
   );

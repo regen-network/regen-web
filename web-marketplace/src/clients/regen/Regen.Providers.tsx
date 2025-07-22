@@ -16,7 +16,7 @@ export const RegenProviders = ({ children }: Props) => {
       <WalletProvider>
         <LedgerProviderWithWallet>
           <LayoutHeader />
-          {children}
+          <main className="min-h-screen">{children}</main>
           <LayoutFooter />
         </LedgerProviderWithWallet>
       </WalletProvider>

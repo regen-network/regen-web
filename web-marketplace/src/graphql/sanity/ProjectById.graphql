@@ -44,5 +44,10 @@ query ProjectById($id: String!) {
       sellOrderId
       usdPrice
     }
+    complianceCredits {
+      creditsRegistered
+      creditsAvailable
+      creditsRetired
+    }
   }
 }

@@ -1,8 +1,6 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { getClassImageWithProjectDefault } from 'utils/image/classImage';
 
-import { formatNumber } from 'web-components/src/utils/format';
-
 import {
   AccountFieldsFragment,
   Maybe,
@@ -20,10 +18,7 @@ import {
   CreditClassMetadataLD,
   ProjectPageMetadataLD,
 } from 'lib/db/types/json-ld';
-import {
-  isTerrasosProject,
-  ProjectByIdItemType,
-} from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery.types';
+import { ProjectByIdItemType } from 'lib/queries/react-query/sanity/getProjectByIdQuery/getProjectByIdQuery.types';
 import { Wallet } from 'lib/wallet/wallet';
 
 import {
@@ -220,18 +215,11 @@ export const normalizeProjectWithMetadata = ({
       projectWithOrderData?.region,
     cardSellOrders,
     filteredSellOrders,
-    complianceCredits: isTerrasosProject(sanityProject)
-      ? {
-          creditsAvailable: sanityProject?.complianceCredits?.creditsAvailable,
-          creditsRetired: sanityProject?.complianceCredits?.creditsRetired,
-          creditsRegistered:
-            sanityProject?.complianceCredits?.creditsRegistered,
-        }
-      : {
-          creditsAvailable: 0,
-          creditsRetired: 0,
-          creditsRegistered: 0,
-        },
+    complianceCredits: sanityProject?.complianceCredits ?? {
+      creditsAvailable: 0,
+      creditsRetired: 0,
+      creditsRegistered: 0,
+    },
   } as NormalizeProject;
 };
 

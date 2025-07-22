@@ -23,7 +23,7 @@ import {
   SEE_MORE,
 } from 'lib/constants/shared.constants';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
-import { IS_REGEN, IS_TERRASOS } from 'lib/env';
+import { IS_REGEN } from 'lib/env';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllCreditCertificationQuery } from 'lib/queries/react-query/sanity/getAllCreditCertificationQuery/getAllCreditCertificationQuery';
 import { getAllCreditTypeQuery } from 'lib/queries/react-query/sanity/getAllCreditTypeQuery/getAllCreditTypeQuery';
@@ -219,7 +219,6 @@ function ProjectTopSection({
     retiredAmount: normalizedProject?.complianceCredits.creditsRetired ?? 0,
     tradableAmount: normalizedProject?.complianceCredits.creditsAvailable ?? 0,
   } as ProjectBatchTotalsProps['totals'];
-
   const isComplianceProject =
     normalizedProject?.marketType?.includes(COMPLIANCE_MARKET) ?? false;
 
@@ -295,7 +294,7 @@ function ProjectTopSection({
             program={program}
           />
           <Box>
-            {!IS_TERRASOS && onChainProjectId && batchData?.totals && (
+            {!isTerrasosProjectPage && onChainProjectId && batchData?.totals && (
               <div className={`mt-50 ${quote ? 'mb-50' : ''}`}>
                 <Title
                   variant="h4"
@@ -308,6 +307,7 @@ function ProjectTopSection({
                   projectWithOrderData={projectWithOrderData}
                   soldOutProjectsIds={soldOutProjectsIds}
                   totals={batchData.totals}
+                  isTerrasosProjectPage={isTerrasosProjectPage}
                 />
               </div>
             )}
@@ -328,6 +328,7 @@ function ProjectTopSection({
                     soldOutProjectsIds={soldOutProjectsIds}
                     totals={batchData.totals}
                     className="my-30 sm:my-50"
+                    isTerrasosProjectPage={isTerrasosProjectPage}
                   />
                 ) : undefined
               }
@@ -336,6 +337,8 @@ function ProjectTopSection({
                   soldOutProjectsIds={[]}
                   totals={batchTotals}
                   className="mt-30 sm:mt-50 mb-30"
+                  isTerrasosProjectPage={isTerrasosProjectPage}
+                  complianceCredits
                 />
               }
             />

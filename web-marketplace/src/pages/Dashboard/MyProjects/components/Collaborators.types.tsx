@@ -6,6 +6,7 @@ export interface Collaborator {
   name: string;
   email: string;
   description?: string;
+  organization?: string;
   projectRole: ProjectRoleType;
   orgRole: OrgRoleType;
   avatar?: string;
@@ -14,8 +15,6 @@ export interface Collaborator {
 }
 
 export interface CollaboratorsManagementProps {
-  projectId: string;
-  userRole: ProjectRoleType;
   collaborators?: Collaborator[];
   onInvite?: () => void;
   onRoleChange?: (collaboratorId: string, newRole: ProjectRoleType) => void;
@@ -40,4 +39,22 @@ export interface CollaboratorActionsDropdownProps {
   onRemove: () => void;
   onEditOrgRole?: () => void;
   onEditTitle?: () => void;
+  context?: 'project' | 'members';
+  isOnlyAdmin?: boolean;
+  isExternalAdmin?: boolean;
+}
+
+interface Project {
+  id: string;
+  name?: string;
+  place?: string;
+  area?: number;
+  areaUnit?: string;
+  imgSrc?: string;
+  slug?: string;
+}
+
+export interface ProjectBannerProps {
+  project: Project;
+  canEdit?: boolean;
 }

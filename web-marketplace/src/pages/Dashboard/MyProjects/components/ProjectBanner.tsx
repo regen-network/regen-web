@@ -15,21 +15,9 @@ import TrashIcon from 'web-components/src/components/icons/TrashIcon';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
 import { Title } from 'web-components/src/components/typography';
 
-interface Project {
-  id: string;
-  name?: string;
-  place?: string;
-  area?: number;
-  areaUnit?: string;
-  imgSrc?: string;
-  slug?: string;
-}
+import { ProjectBannerProps } from './Collaborators.types';
 
-interface ProjectBannerProps {
-  project: Project;
-}
-
-const ProjectBanner: React.FC<ProjectBannerProps> = ({ project }) => {
+const ProjectBanner: React.FC<ProjectBannerProps> = ({ project, canEdit }) => {
   const { _ } = useLingui();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -134,14 +122,16 @@ const ProjectBanner: React.FC<ProjectBannerProps> = ({ project }) => {
                 {_(msg`View`)}
               </OutlinedButton>
 
-              <ContainedButton
-                startIcon={<EditIcon sx={{ color: 'white' }} />}
-                onClick={() => {
-                  navigate(`/project-pages/${project.id}/edit/basic-info`);
-                }}
-              >
-                {_(msg`Edit`)}
-              </ContainedButton>
+              {canEdit && (
+                <ContainedButton
+                  startIcon={<EditIcon sx={{ color: 'white' }} />}
+                  onClick={() => {
+                    navigate(`/project-pages/${project.id}/edit/basic-info`);
+                  }}
+                >
+                  {_(msg`Edit`)}
+                </ContainedButton>
+              )}
             </div>
           </div>
         </div>

@@ -29,6 +29,7 @@ import { buyCreditsLoader } from 'pages/BuyCredits/BuyCredits.loader';
 import { CertificatePage } from 'pages/Certificate/Certificate';
 import { EditProfile } from 'pages/Dashboard/Dashboard.EditProfile';
 import { DashboardSettings } from 'pages/Dashboard/Dashboard.Settings';
+import { Members } from 'pages/Dashboard/Members/Members';
 import MyBridge from 'pages/Dashboard/MyBridge';
 import { MyBridgableEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgableEcocreditsTable';
 import { MyBridgedEcocreditsTable } from 'pages/Dashboard/MyBridge/MyBridge.BridgedEcocreditsTable';
@@ -399,6 +400,10 @@ export const getRegenRoutes = ({
           <Route
             path="my-orders"
             element={<KeplrOrAuthRoute component={Orders} />}
+          />
+          <Route
+            path="members"
+            element={<KeplrOrAuthRoute component={Members} />}
           />
           <Route path="sell" element={<KeplrOrAuthRoute component={Sell} />} />
         </Route>

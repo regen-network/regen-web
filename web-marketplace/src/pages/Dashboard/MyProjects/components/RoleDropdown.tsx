@@ -80,9 +80,10 @@ export const RoleDropdown = ({
           disabled={disabled}
           className={cn(
             'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border cursor-pointer',
-            'bg-white text-bc-neutral-400',
+            'bg-bc-neutral-0 text-bc-neutral-700',
             'border-[#D2D5D9] hover:border-gray-300',
-            disabled && 'opacity-50 cursor-not-allowed',
+            disabled &&
+              'bg-bc-neutral-200 cursor-not-allowed text-bc-neutral-400',
           )}
         >
           <div className="flex items-center gap-2">

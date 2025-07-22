@@ -57,9 +57,9 @@ NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 NODE_OPTIONS = "--max-old-space-size=10216"
 
 # makes the plugin print the 20 biggest files in every handler
-NEXT_NETLIFY_DEBUG = true
+NEXT_NETLIFY_DEBUG = "true"
 # shows everything the build system is doing
-NETLIFY_BUILD_DEBUG = true
+NETLIFY_BUILD_DEBUG = "true"
 
 [[redirects]]
 from = "https://app.regen.network/create-methodology"

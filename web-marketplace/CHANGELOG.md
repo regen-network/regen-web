@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/regen-network/regen-web/compare/v2.9.5...v2.10.0) (2025-07-22)
+
+### Bug Fixes
+
+- APP-721 disable create sell order button if no tradable credits available ([#2677](https://github.com/regen-network/regen-web/issues/2677)) ([375c628](https://github.com/regen-network/regen-web/commit/375c628848aa02b8c4bf0eb2d3c9f604658a6a03))
+- APP-728 reversed tooltips on terrasos projects ([#2681](https://github.com/regen-network/regen-web/issues/2681)) ([8f5246a](https://github.com/regen-network/regen-web/commit/8f5246ae3bfcb8dff873f9a4a3923d4e210b79a3))
+- error msg checks when connecting a wallet to an existing account ([#2685](https://github.com/regen-network/regen-web/issues/2685)) ([4f9e36c](https://github.com/regen-network/regen-web/commit/4f9e36cc56f6126d7d4eeedf090c9aa657a95a07))
+
+### Features
+
+- APP-578 upgrade @regen-network/api and switch to data v2 ([#2660](https://github.com/regen-network/regen-web/issues/2660)) ([a9655f7](https://github.com/regen-network/regen-web/commit/a9655f70455ef8d9236133bf6217566eab2a7115))
+- APP-668 Dashboard left navigation [UI only] ([#2657](https://github.com/regen-network/regen-web/issues/2657)) ([7a0844e](https://github.com/regen-network/regen-web/commit/7a0844ebac4370fec43b902eddb171b8b448d57b))
+- APP-669 user menu dropdown ([#2658](https://github.com/regen-network/regen-web/issues/2658)) ([e055056](https://github.com/regen-network/regen-web/commit/e05505644c43b20dd16e0cb9af2fe717efead2dd))
+- APP-670 integrate new user personal dashboard ([#2674](https://github.com/regen-network/regen-web/issues/2674)) ([86fbc7e](https://github.com/regen-network/regen-web/commit/86fbc7e41590268972c961dfc7599ad910fc55f7))
+- APP-672 update personal profile page ([#2666](https://github.com/regen-network/regen-web/issues/2666)) ([3fdd8f9](https://github.com/regen-network/regen-web/commit/3fdd8f9613152179d04a883cc969a923a3408de1))
+- APP-686 seller dashboard page ([#2663](https://github.com/regen-network/regen-web/issues/2663)) ([90173ca](https://github.com/regen-network/regen-web/commit/90173ca599985875802eb2eb43f0e87f960248ca))
+- APP-696 display Seller stripe account setup when applicable ([#2664](https://github.com/regen-network/regen-web/issues/2664)) ([fa6e212](https://github.com/regen-network/regen-web/commit/fa6e212ce3d38063742e89b1028ca81e286809e2))
+
 ## [2.9.5](https://github.com/regen-network/regen-web/compare/v2.9.4...v2.9.5) (2025-07-09)
 
 **Note:** Version bump only for package web-marketplace

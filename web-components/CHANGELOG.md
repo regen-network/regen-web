@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/regen-network/regen-web/compare/v2.9.5...v2.10.0) (2025-07-22)
+
+### Features
+
+- APP-668 Dashboard left navigation [UI only] ([#2657](https://github.com/regen-network/regen-web/issues/2657)) ([7a0844e](https://github.com/regen-network/regen-web/commit/7a0844ebac4370fec43b902eddb171b8b448d57b))
+- APP-669 user menu dropdown ([#2658](https://github.com/regen-network/regen-web/issues/2658)) ([e055056](https://github.com/regen-network/regen-web/commit/e05505644c43b20dd16e0cb9af2fe717efead2dd))
+- APP-670 integrate new user personal dashboard ([#2674](https://github.com/regen-network/regen-web/issues/2674)) ([86fbc7e](https://github.com/regen-network/regen-web/commit/86fbc7e41590268972c961dfc7599ad910fc55f7))
+- APP-686 seller dashboard page ([#2663](https://github.com/regen-network/regen-web/issues/2663)) ([90173ca](https://github.com/regen-network/regen-web/commit/90173ca599985875802eb2eb43f0e87f960248ca))
+
 ## [2.9.1](https://github.com/regen-network/regen-web/compare/v2.9.0...v2.9.1) (2025-06-04)
 
 ### Bug Fixes

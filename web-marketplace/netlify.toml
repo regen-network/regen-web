@@ -35,6 +35,35 @@ NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 
 [[context.deploy-preview.plugins]]
   package = "@netlify/plugin-nextjs"
+  [context.deploy-preview.plugins.inputs]
+    external_node_modules = [
+      "@keplr-wallet",
+      "@ledgerhq",
+      "@ethereumjs",
+      "@cosmos-kit",
+      "@mapbox",
+      "pdfjs-dist",
+      "sharp",
+      "chain-registry",
+      "xlsx",
+      "web-components"
+    ]
+    included_files = [
+      "!node_modules/sharp/vendor/**",
+      "!node_modules/@img/sharp-libvips-*/**/*",
+      "!node_modules/@keplr-wallet/**/*",
+      "!node_modules/@ledgerhq/**/*",
+      "!node_modules/@ethereumjs/**/*",
+      "!node_modules/mapbox-gl/**/*",
+      "!node_modules/libsodium-sumo.js/**/*",
+      "!node_modules/@regen-network/api/**/*",
+      "!node_modules/chain-registry/**/*",
+      "!node_modules/pdfjs-dist/**/*",
+      "!node_modules/xlsx/**/*",
+      "!public/jpg/**",
+      "!public/png/**",
+      "!public/svg/**"
+    ]
 
 
 [context.deploy-preview.environment]

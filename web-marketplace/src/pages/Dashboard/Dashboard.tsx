@@ -297,7 +297,8 @@ export const Dashboard = () => {
                       section === 'projects' ||
                       section === 'portfolio' ||
                       section === 'credit-batches' ||
-                      section === 'profile') && (
+                      section === 'profile' ||
+                      section === 'members') && (
                       <ViewProfileButton
                         setIsWarningModalOpen={setIsWarningModalOpen}
                         section={section}

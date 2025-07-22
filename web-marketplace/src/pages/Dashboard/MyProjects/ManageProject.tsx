@@ -30,6 +30,8 @@ const ManageProject = (): JSX.Element => {
 
   const project = adminProjects?.find(p => p.id === projectId);
 
+  const canEditProject = true; // Replace with actual admin/editor check logic
+
   const tabs = useMemo(
     () => [
       {
@@ -75,8 +77,6 @@ const ManageProject = (): JSX.Element => {
 
   const renderCollaboratorsContent = () => (
     <CollaboratorsManagement
-      projectId={projectId || ''}
-      userRole="author"
       onInvite={() => {
         // Implement invitation flow
       }}
@@ -103,7 +103,7 @@ const ManageProject = (): JSX.Element => {
   return (
     <>
       {/* Project Banner */}
-      {project && <ProjectBanner project={project} />}
+      {project && <ProjectBanner project={project} canEdit={canEditProject} />}
 
       {/* Tabs section */}
       <div className="w-full py-30 md:mb-8 lg:mb-0">

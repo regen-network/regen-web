@@ -18,19 +18,17 @@ import { mockCollaborators } from './Collaborators.utils';
 import { RoleDropdown } from './RoleDropdown';
 
 export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
-  ({
-    projectId,
-    userRole,
-    collaborators = mockCollaborators,
-    onInvite,
-    onRoleChange,
-    onRemove,
-  }) => {
+  ({ collaborators = mockCollaborators, onInvite, onRoleChange, onRemove }) => {
     const { _ } = useLingui();
     const [openMenuId, setOpenMenuId] = useState<string | null>(null);
     const [openRoleId, setOpenRoleId] = useState<string | null>(null);
     const [localCollaborators, setLocalCollaborators] = useState(collaborators);
     const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+    const isExternalAdmin = collaborators.some(
+      c => c.orgRole === '' && c.projectRole === 'admin' && c.isCurrentUser,
+    );
+    const currentUserRole =
+      collaborators.find(c => c.isCurrentUser)?.projectRole || 'viewer';
 
     const handleSort = () => {
       const newDirection = sortDirection === 'asc' ? 'desc' : 'asc';
@@ -69,7 +67,7 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
     const handleEditTitle = (collaboratorId: string) => {};
 
     return (
-      <div className="w-full">
+      <div className="w-full border border-bc-neutral-300">
         {/* Header section with title and invite button */}
         <div className="flex justify-between items-center mb-10">
           <Title variant="h4">
@@ -78,7 +76,7 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
               ({collaborators.length})
             </span>
           </Title>
-          {userRole === 'admin' && (
+          {currentUserRole === 'admin' && (
             <ContainedButton
               className="w-[269px] h-[42px] text-[14px]"
               onClick={onInvite}
@@ -137,7 +135,7 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
                     )}
                   </div>
                   <div className="flex flex-col items-flex-start gap-5 flex-[1_0_0]">
-                    <div className="font-medium flex items-center flex-row gap-3">
+                    <div className="font-bold flex items-center flex-row gap-3">
                       {collaborator.name}
                       {collaborator.isCurrentUser && (
                         <span className="text-gray-400 ml-2 flex items-center flex-row gap-5">
@@ -152,10 +150,14 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
                         </span>
                       )}
                     </div>
-                    <div className="text-gray-700">
+                    <div className="text-bc-neutral-700 text-sm">
                       {collaborator.description}
+                      {collaborator.description && collaborator.organization
+                        ? ', '
+                        : ''}
+                      {collaborator.organization}
                     </div>
-                    <div className="text-gray-500 text-sm">
+                    <div className="text-bc-neutral-400 text-sm">
                       {collaborator.email}
                     </div>
                   </div>
@@ -166,12 +168,11 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
                   <RoleDropdown
                     projectRole={collaborator.projectRole}
                     orgRole={collaborator.orgRole}
-                    currentUserRole={userRole}
+                    currentUserRole={currentUserRole}
                     onChange={newRole =>
                       handleRoleChange(collaborator.id, newRole)
                     }
                     isCurrentUser={collaborator.isCurrentUser}
-                    isExternalAdmin={collaborator.isExternalAdmin}
                   />
                 </div>
 
@@ -179,12 +180,13 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
                 <div className="w-[60px] flex justify-center items-center">
                   <CollaboratorActionsDropdown
                     role={collaborator.projectRole}
-                    currentUserRole={userRole}
+                    currentUserRole={currentUserRole}
                     orgRole={collaborator.orgRole}
                     isCurrentUser={collaborator.isCurrentUser}
                     onRemove={() => handleRemove(collaborator.id)}
                     onEditOrgRole={() => handleEditOrgRole(collaborator.id)}
                     onEditTitle={() => handleEditTitle(collaborator.id)}
+                    isExternalAdmin={isExternalAdmin}
                   />
                 </div>
               </div>

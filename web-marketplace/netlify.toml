@@ -12,12 +12,6 @@ NEXT_PUBLIC_TOUCAN_LINK = "https://toucan.earth/overview?chainId=137"
 NEXT_PUBLIC_SKIPPED_CLASS_ID = "C01"
 NEXT_PUBLIC_DEPLOY_CONTEXT = "production"
 
-[context.production]
-  command = "yarn build"
-
-[context.dev]
-  command = "yarn build"
-
 [context.dev.environment]
 NEXT_PUBLIC_SANITY_TAG = "default"
 NEXT_PUBLIC_SANITY_DATASET = "staging"
@@ -33,6 +27,15 @@ NEXT_PUBLIC_BRIDGE_CREDIT_CLASS_ID = "C56"
 NEXT_PUBLIC_BRIDGE = "true"
 NEXT_PUBLIC_SKIPPED_CLASS_ID = ""
 NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
+
+# Build settings for Next.js deploy previews
+[context.deploy-preview]
+  command = "bun run build"
+  publish = "web-marketplace/.next"
+
+[[context.deploy-preview.plugins]]
+  package = "@netlify/plugin-nextjs"
+
 
 [context.deploy-preview.environment]
 NEXT_PUBLIC_SANITY_DATASET = "staging"
@@ -50,15 +53,7 @@ NEXT_PUBLIC_SKIPPED_CLASS_ID = ""
 NEXT_PUBLIC_ANALYTICS_ENABLED = "true"
 NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 
-[context.deploy-preview]
-  base = "."
-  command = "bun run build"
-  publish = "web-marketplace/.next"
-
-[[context.deploy-preview.plugins]]
-  package = "@netlify/plugin-nextjs"
-
-[context.deploy-preview.functions.functionsSource]
+[functions]
   node_bundler = "esbuild"
   external_node_modules = [
     "@keplr-wallet",
@@ -76,12 +71,6 @@ NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
     "!public/png/**",
     "!public/svg/**"
   ]
-
-
-
-[build]
-  command = "bun run build"
-  publish = "web-marketplace/.next"
 
 [build.environment]
 NODE_OPTIONS = "--max-old-space-size=10216"
@@ -116,3 +105,5 @@ from = "https://app.regen.network/ecocredits/accounts/*"
 to = "https://app.regen.network/profiles/:splat"
 force = true
 status = 302
+
+

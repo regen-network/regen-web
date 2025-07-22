@@ -53,25 +53,6 @@ NEXT_PUBLIC_SKIPPED_CLASS_ID = ""
 NEXT_PUBLIC_ANALYTICS_ENABLED = "true"
 NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 
-[functions]
-  node_bundler = "esbuild"
-  external_node_modules = [
-    "@keplr-wallet",
-    "@ledgerhq/hw-app-eth",
-    "@ethereumjs",
-    "mapbox-gl",
-    "libsodium-sumo.js",
-    "@regen-network/api",
-    "chain-registry",
-    "pdfjs-dist",
-    "xlsx"
-  ]
-  included_files = [
-    "!public/jpg/**",
-    "!public/png/**",
-    "!public/svg/**"
-  ]
-
 [build.environment]
 NODE_OPTIONS = "--max-old-space-size=10216"
 

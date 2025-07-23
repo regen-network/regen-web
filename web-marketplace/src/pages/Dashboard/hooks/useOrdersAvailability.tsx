@@ -8,7 +8,7 @@ export const useOrdersAvailability = () => {
   const hasOrders = orders && orders.length > 0;
 
   return {
-    hasOrders: hasOrders,
+    hasOrders,
     isLoading,
   };
 };

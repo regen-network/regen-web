@@ -1,10 +1,11 @@
 'use client';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useAnalytics } from 'use-analytics';
 
 export const PageViewTracking: React.FC = (): JSX.Element => {
-  const location = useLocation();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { plugins, page } = useAnalytics();
 
   useEffect(() => {
@@ -18,14 +19,14 @@ export const PageViewTracking: React.FC = (): JSX.Element => {
   }, [plugins]);
 
   useEffect(() => {
-    // send page view whenever react-router location changes
+    // send page view whenever location changes
     // this sends page views to all analytics plugins:
     // https://getanalytics.io/plugins/
     page({
-      path: location.pathname,
-      search: location.search,
-      title: location.pathname,
+      path: pathname,
+      search: searchParams.toString(),
+      title: pathname,
     });
-  }, [location, page]);
+  }, [pathname, searchParams, page]);
   return <></>;
 };

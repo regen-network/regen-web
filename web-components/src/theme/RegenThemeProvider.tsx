@@ -1,11 +1,8 @@
 'use client';
+
 import { ReactNode } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-import {
-  StyledEngineProvider,
-  Theme,
-  ThemeProvider,
-} from '@mui/material/styles';
+import { Theme, ThemeProvider } from '@mui/material/styles';
 
 import theme from './muiTheme';
 
@@ -21,7 +18,7 @@ interface Props {
   readonly injectFonts?: boolean;
   readonly injectStyles?: (props?: any) => void;
   readonly children: ReactNode;
-  customTheme?: Theme;
+  customTheme?: Theme | null;
 }
 
 const RegenThemeProvider = ({

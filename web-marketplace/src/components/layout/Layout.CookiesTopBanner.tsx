@@ -7,9 +7,9 @@ import CookiesTopBanner from 'web-components/src/components/banner/CookiesTopBan
 import {
   COOKIES_TOP_BANNER_ACCEPT_LABEL,
   COOKIES_TOP_BANNER_REJECT_LABEL,
-} from './RegistryLayout.constants';
+} from '../organisms/RegistryLayout/RegistryLayout.constants';
 
-export const RegistryLayoutCookiesTopBanner = () => {
+export const LayoutCookiesTopBanner = () => {
   return (
     <CookiesTopBanner
       acceptLabel={COOKIES_TOP_BANNER_ACCEPT_LABEL}

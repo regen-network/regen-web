@@ -95,7 +95,9 @@
     "zod": "^3.25.67"
   },
   "scripts": {
+    "predev": "bun run ./scripts/setClientCSS.js",
     "dev": "next dev --turbopack",
+    "prebuild": "bun run ./scripts/setClientCSS.js",
     "build": "next build",
     "start": "next start",
     "lint": "eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
@@ -131,6 +133,7 @@
     "@lingui/loader": "^5.3.1",
     "@lingui/swc-plugin": "^5.5.2",
     "@lingui/vite-plugin": "^4.11.2",
+    "@netlify/plugin-nextjs": "^5.11.6",
     "@next/bundle-analyzer": "^15.3.4",
     "@rollup/plugin-inject": "^5.0.3",
     "@testing-library/jest-dom": "^6.4.8",

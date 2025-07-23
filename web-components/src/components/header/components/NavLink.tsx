@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+
 import Link from '@mui/material/Link';
 import { makeStyles } from 'tss-react/mui';
 
@@ -55,7 +56,7 @@ export const NavLink: React.FC<React.PropsWithChildren<NavLinkProps>> = ({
   return (
     <Link
       {...(linkComponent ? { component: linkComponent } : {})}
-      className={overrideClassname ?? cn(styles.navLink, className, 'yoo')}
+      className={overrideClassname ?? cn(styles.navLink, className)}
       href={href}
     >
       {children}

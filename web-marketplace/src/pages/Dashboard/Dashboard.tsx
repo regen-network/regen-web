@@ -207,7 +207,7 @@ export const Dashboard = () => {
               wallet={wallet?.address}
               walletConnect={walletConnect}
               hasProjects={!!hasProjects && hasProjects.length > 0}
-              hasOrders={hasOrders || ordersLoading}
+              hasOrders={!ordersLoading && hasOrders}
               mobileMenuOpen={mobileMenuOpen}
               onLogout={handleLogout}
               onCloseMobile={() => setMobileMenuOpen(false)}

@@ -1,7 +1,7 @@
 /* eslint-disable lingui/no-unlocalized-strings */
 import { Montserrat } from 'next/font/google';
 
-export const montserrat = Montserrat({
+const montserrat = Montserrat({
   subsets: ['latin'],
   display: 'swap',
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -21,3 +21,5 @@ export const montserrat = Montserrat({
     'sans-serif', // Generic fallback
   ],
 });
+
+export const fonts = [montserrat];

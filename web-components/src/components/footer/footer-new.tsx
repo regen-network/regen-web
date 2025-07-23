@@ -107,6 +107,7 @@ const Footer: React.FC<
         backgroundColor: 'info.dark',
         color: 'primary.main',
         '& a': {
+          color: 'primary.main',
           fontWeight: 'normal',
           transition: 'color 200ms ease-in-out',
           ':hover': {

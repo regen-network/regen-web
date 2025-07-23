@@ -1,5 +1,5 @@
 'use client';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
@@ -21,20 +21,18 @@ import { useWallet, Wallet } from 'lib/wallet/wallet';
 
 import { useAuthData } from 'hooks/useAuthData';
 
-import { chainId } from '../../../lib/ledger';
-import { Link, RegistryIconLink, RegistryNavLink } from '../../atoms';
-import { ListProject } from '../ListProject/ListProject';
-import { LoginButton } from '../LoginButton/LoginButton';
-import {
-  ADDRESS_COPIED,
-  COPY_ADDRESS,
-} from '../UserAccountSettings/UserAccountSettings.constants';
+import { chainId } from '../../lib/ledger';
+import { Link } from '../atoms';
+import { HeaderNavLink } from '../atoms/HeaderNavLink';
+import { HomeIconLink } from '../atoms/HomeIconLink';
+import { ListProject } from '../organisms/ListProject/ListProject';
+import { LoginButton } from '../organisms/LoginButton/LoginButton';
 import {
   getBorderBottom,
   getHeaderColors,
   getIsTransparent,
   getMenuItems,
-} from './RegistryLayout.config';
+} from '../organisms/RegistryLayout/RegistryLayout.config';
 import {
   AVATAR_ALT,
   CREATE_ORG,
@@ -46,9 +44,15 @@ import {
   PERSONAL_DASHBOARD,
   PUBLIC_PROFILE,
   SIGNED_IN_AS,
-} from './RegistryLayout.constants';
-// import { LanguageSwitcher } from './RegistryLayout.LanguageSwitcher';
-import { getAddress, getProfile } from './RegistryLayout.utils';
+} from '../organisms/RegistryLayout/RegistryLayout.constants';
+import {
+  getAddress,
+  getProfile,
+} from '../organisms/RegistryLayout/RegistryLayout.utils';
+import {
+  ADDRESS_COPIED,
+  COPY_ADDRESS,
+} from '../organisms/UserAccountSettings/UserAccountSettings.constants';
 
 const getProfileLink = (
   activeAccount: Maybe<AccountFieldsFragment> | undefined,
@@ -60,7 +64,7 @@ const getProfileLink = (
   return '/profiles/';
 };
 
-const RegistryLayoutHeader: React.FC = () => {
+export const LayoutHeader = () => {
   const { _ } = useLingui();
   const pathname = usePathname();
   const { activeAccount, privActiveAccount } = useAuth();
@@ -87,7 +91,7 @@ const RegistryLayoutHeader: React.FC = () => {
     () =>
       getUserMenuItems({
         linkComponent: Link,
-        navLinkComponent: RegistryNavLink,
+        navLinkComponent: HeaderNavLink,
         pathname,
         profile: getProfile({
           account: activeAccount ?? accountByAddr,
@@ -132,8 +136,8 @@ const RegistryLayoutHeader: React.FC = () => {
     <>
       <Header
         isRegistry
-        linkComponent={RegistryNavLink}
-        homeLink={RegistryIconLink}
+        linkComponent={HeaderNavLink}
+        homeLink={HomeIconLink}
         menuItems={menuItems}
         color={color}
         transparent={isTransparent}
@@ -165,7 +169,7 @@ const RegistryLayoutHeader: React.FC = () => {
                 }
                 disconnect={disconnect}
                 pathname={pathname}
-                linkComponent={RegistryNavLink}
+                linkComponent={HeaderNavLink}
                 userMenuItems={userMenuItems}
                 logoutText={_(LOGOUT_TEXT)}
                 avatarAlt={_(AVATAR_ALT)}
@@ -179,5 +183,3 @@ const RegistryLayoutHeader: React.FC = () => {
     </>
   );
 };
-
-export { RegistryLayoutHeader };

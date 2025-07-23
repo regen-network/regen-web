@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback } from 'react';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
@@ -15,13 +17,13 @@ import {
   CONNECTED_EMAIL_ERROR_DESCRIPTION_START,
   CONNECTED_EMAIL_ERROR_NOTE,
   CONNECTED_EMAIL_ERROR_TITLE,
-} from './RegistryLayout.constants';
+} from '../organisms/RegistryLayout/RegistryLayout.constants';
 
 export interface ConnectedEmailErrorModalProps extends RegenModalProps {
   email: string;
 }
 
-export const RegistryLayoutConnectedEmailErrorModal = () => {
+export const LayoutConnectedEmailErrorModal = () => {
   const { _ } = useLingui();
   const [connectedEmailErrorModal, setConnectedEmailErrorModalAtom] = useAtom(
     connectedEmailErrorModalAtom,

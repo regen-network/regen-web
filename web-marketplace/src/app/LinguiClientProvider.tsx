@@ -1,9 +1,12 @@
 'use client';
 
-import { useState } from 'react';
-import type { Messages } from '@lingui/core';
-import { setupI18n } from '@lingui/core';
+import { useEffect, useState } from 'react';
+import { i18n, Messages } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
+import { useAtom } from 'jotai';
+
+import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
+import { dynamicActivate } from 'lib/i18n/utils/dynamicActivate';
 
 export function LinguiClientProvider({
   children,
@@ -14,11 +17,27 @@ export function LinguiClientProvider({
   initialLocale: string;
   initialMessages: Messages;
 }) {
-  const [i18n] = useState(() => {
-    return setupI18n({
-      locale: initialLocale,
-      messages: { [initialLocale]: initialMessages },
-    });
-  });
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Initialize i18n
+    i18n.load(initialLocale, initialMessages);
+    i18n.activate(initialLocale);
+    setIsLoaded(true);
+  }, [initialLocale, initialMessages]);
+
+  useEffect(() => {
+    // Dynamically load translations
+    if (isLoaded) {
+      dynamicActivate(selectedLanguage);
+    }
+  }, [selectedLanguage, isLoaded]);
+
+  // Don't render until i18n is loaded to avoid hydration mismatch
+  if (!isLoaded) {
+    return null;
+  }
+
   return <I18nProvider i18n={i18n}>{children}</I18nProvider>;
 }

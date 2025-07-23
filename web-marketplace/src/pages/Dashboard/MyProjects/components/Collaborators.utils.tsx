@@ -15,7 +15,7 @@ export const mockCollaborators: Collaborator[] = [
     projectRole: 'admin',
     orgRole: 'admin',
     avatar: 'https://i.pravatar.cc/299',
-    isCurrentUser: false,
+    isCurrentUser: true,
   },
   {
     id: '2',
@@ -26,7 +26,7 @@ export const mockCollaborators: Collaborator[] = [
     projectRole: 'admin',
     orgRole: 'editor',
     avatar: 'https://i.pravatar.cc/300',
-    isCurrentUser: true,
+    isCurrentUser: false,
   },
   {
     id: '3',
@@ -57,6 +57,17 @@ export const mockCollaborators: Collaborator[] = [
     projectRole: 'admin',
     orgRole: '',
     avatar: 'https://i.pravatar.cc/303',
+    isCurrentUser: false,
+  },
+  {
+    id: '6',
+    name: 'Dana White',
+    email: 'dana@example.com',
+    description: 'Project Manager',
+    organization: 'Regen Network',
+    projectRole: 'admin',
+    orgRole: '',
+    avatar: 'https://i.pravatar.cc/304',
     isCurrentUser: false,
   },
 ];

@@ -14,3 +14,4 @@ export const ADMIN_DESCRIPTION = msg`Manages user access and can edit all projec
 export const EDITOR_DESCRIPTION = msg`Can edit all project page info and posts. Cannot manage users or credits.`;
 export const AUTHOR_DESCRIPTION = msg`Can edit all project page info and posts. Cannot manage users or credits.`;
 export const VIEWER_DESCRIPTION = msg`Can view all project info and posts.`;
+export const SEE_HELP_DOCS = msg`SEE HELP DOCS`;

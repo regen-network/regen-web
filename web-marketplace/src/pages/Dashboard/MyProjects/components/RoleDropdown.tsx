@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import CheckIcon from 'web-components/src/components/icons/CheckIcon';
@@ -21,7 +22,8 @@ export const RoleDropdown = ({
   onChange,
   disabled = false,
   currentUserRole,
-}: RoleDropdownProps) => {
+  isExternalAdmin = false, // <-- add this prop
+}: RoleDropdownProps & { isExternalAdmin?: boolean }) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -37,8 +39,17 @@ export const RoleDropdown = ({
     return () => document.removeEventListener('mousedown', handle);
   }, [isOpen]);
 
+  // Disable dropdown if:
+  // - disabled prop is true
+  // - currentUserRole is not admin
+  // - isExternalAdmin is true AND the role being rendered is 'admin' (not self)
+  const isDropdownDisabled =
+    disabled ||
+    currentUserRole !== 'admin' ||
+    (isExternalAdmin && projectRole === 'admin' && orgRole !== ''); // Disable only if the user is an org admin
+
   const toggle = () => {
-    if (disabled) return;
+    if (isDropdownDisabled) return;
     setIsOpen(o => !o);
   };
 
@@ -47,13 +58,15 @@ export const RoleDropdown = ({
     setIsOpen(false);
   };
 
-  const isDropdownDisabled = disabled || currentUserRole !== 'admin';
-
   return (
     <div ref={ref} className="relative w-full font-sans">
       {isDropdownDisabled ? (
         <InfoTooltip
-          title={_(TOOLTIP_ROLE)}
+          title={
+            isExternalAdmin && projectRole === 'admin'
+              ? _(msg`External admins cannot change the role of other admins.`)
+              : _(TOOLTIP_ROLE)
+          }
           arrow={true}
           placement="top"
           className="bg-bc-neutral-0"

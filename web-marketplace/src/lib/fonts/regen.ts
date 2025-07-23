@@ -1,7 +1,7 @@
 /* eslint-disable lingui/no-unlocalized-strings */
 import { Lato, Mulish } from 'next/font/google';
 
-export const lato = Lato({
+const lato = Lato({
   subsets: ['latin'],
   display: 'swap',
   weight: ['100', '300', '400', '700'],
@@ -21,7 +21,7 @@ export const lato = Lato({
   ],
 });
 
-export const muli = Mulish({
+const muli = Mulish({
   subsets: ['latin'],
   display: 'swap',
   weight: ['500', '800', '900'],
@@ -40,3 +40,5 @@ export const muli = Mulish({
     'sans-serif', // Generic fallback
   ],
 });
+
+export const fonts = [lato, muli];

@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback } from 'react';
 import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
@@ -18,9 +20,7 @@ import {
 
 import { Link } from 'components/atoms';
 
-// import topographyPatternStepper from '../../../../public/png/topography-pattern-stepper.png';
-
-export const RegistryLayoutTxBuySuccessfulModal = (): JSX.Element => {
+export const LayoutTxBuySuccessfulModal = (): JSX.Element => {
   const { _ } = useLingui();
 
   const [

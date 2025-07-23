@@ -96,7 +96,7 @@ const MODAL_REGISTRY = {
   banner: dynamic(
     () =>
       import('./Layout.Banner').then(m => ({
-        default: m.LayoutBannerModal,
+        default: m.LayoutBanner,
       })),
     { ssr: false, loading: () => null },
   ),

@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { useSetAtom } from 'jotai';
@@ -7,6 +6,7 @@ import {
   BUYINGS_OPTIONS_FILTERS_PARAM,
   CREDIT_CARD_BUYING_OPTION_ID,
 } from 'legacy-pages/Projects/Projects.constants';
+import { useRouter } from 'next/navigation';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import Card from 'web-components/src/components/cards/Card';
@@ -19,7 +19,7 @@ import {
 import { RegenModalPropsWithOnClose } from 'web-components/src/types/shared/modalPropsWithOnClose';
 
 import { Link } from 'components/atoms';
-import { LoginButton } from 'components/organisms/LoginButton/LoginButton.legacy';
+import { LoginButton } from 'components/organisms/LoginButton/LoginButton';
 
 import {
   CARD_BUTTON,
@@ -40,7 +40,7 @@ export const ChooseHowToPurchaseModal = ({
 }: ChooseHowToPurchaseModalProps) => {
   const { _ } = useLingui();
   const setBuyFromProjectIdAtom = useSetAtom(buyFromProjectIdAtom);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <Modal open={open} onClose={onClose} className="!py-50 !px-20 sm:!px-30">
@@ -73,9 +73,8 @@ export const ChooseHowToPurchaseModal = ({
             size="small"
             onClick={() => {
               onClose();
-              navigate(
+              router.push(
                 `/projects/1?${BUYINGS_OPTIONS_FILTERS_PARAM}=${CREDIT_CARD_BUYING_OPTION_ID}`,
-                {},
               );
             }}
           >

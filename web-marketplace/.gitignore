@@ -29,3 +29,6 @@ next-env.d.ts
 dist
 
 tsconfig.tsbuildinfo
+
+# generated client CSS
+/src/generated/client-tailwind.css

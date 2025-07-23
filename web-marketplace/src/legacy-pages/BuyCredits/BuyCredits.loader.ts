@@ -4,7 +4,6 @@ import { QueryClient } from '@tanstack/react-query';
 import { getRPCQueryClient } from 'app/makeRPCQueryClient';
 
 import { Maybe } from 'generated/graphql';
-import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';
 import { getProjectBySlugQuery } from 'lib/queries/react-query/registry-server/graphql/getProjectBySlugQuery/getProjectBySlugQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
@@ -13,7 +12,7 @@ import { getIsOnChainId } from 'components/templates/ProjectDetails/ProjectDetai
 
 type LoaderType = {
   queryClient: QueryClient;
-  apolloClientFactory: ApolloClientFactory;
+  apolloClient: ApolloClient<NormalizedCacheObject>;
   address?: Maybe<string>;
   languageCode: string;
 };
@@ -23,15 +22,13 @@ type LoaderType = {
  * Returns true if at least one sell order exists from a different seller.
  */
 export const buyCreditsLoader =
-  ({ queryClient, apolloClientFactory, address, languageCode }: LoaderType) =>
+  ({ queryClient, apolloClient, address, languageCode }: LoaderType) =>
   async ({
     params: { projectId: projectIdParam },
   }: {
     params: { projectId?: string };
   }) => {
     const isOnChainId = getIsOnChainId(projectIdParam);
-    const apolloClient =
-      apolloClientFactory.getClient() as ApolloClient<NormalizedCacheObject>;
     const rpcQueryClient = await getRPCQueryClient();
 
     const sellOrdersQuery = getSellOrdersExtendedQuery({

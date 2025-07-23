@@ -23,7 +23,7 @@ Default.args = {
   isCurrentAccount: false,
 };
 
-export const WithCurrentAccount: Story = {
+export const AsCurrentAccount: Story = {
   render: args => (
     <div className="max-w-[270px]">
       <MemberCard {...args} />
@@ -31,7 +31,7 @@ export const WithCurrentAccount: Story = {
   ),
 };
 
-WithCurrentAccount.args = {
+AsCurrentAccount.args = {
   ...member,
   isCurrentAccount: true,
 };

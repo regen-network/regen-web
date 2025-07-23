@@ -5,7 +5,7 @@ import path from 'node:path';
 const projectRoot = path.join(import.meta.dir, '..');
 
 // Client CSS files must be added here.
-// The `key` must match the `MARKETPLACE_CLIENT` environment variable
+// The `key` must match the `NEXT_PUBLIC_MARKETPLACE_CLIENT` environment variable
 const CLIENT_CSS_PATHS = {
   regen: path.join(projectRoot, '..', 'tailwind.css'),
   terrasos: path.join(
@@ -14,11 +14,11 @@ const CLIENT_CSS_PATHS = {
   ),
 };
 
-const client = process.env.MARKETPLACE_CLIENT || 'regen';
+const client = process.env.NEXT_PUBLIC_MARKETPLACE_CLIENT || 'regen';
 const sourcePath = CLIENT_CSS_PATHS[client];
 
 if (!sourcePath) {
-  console.error(`Error: Invalid MARKETPLACE_CLIENT "${client}".`);
+  console.error(`Error: Invalid NEXT_PUBLIC_MARKETPLACE_CLIENT "${client}".`);
   process.exit(1);
 }
 

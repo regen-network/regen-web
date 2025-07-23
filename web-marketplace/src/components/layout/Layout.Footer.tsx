@@ -1,20 +1,22 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+'use client';
+
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { URL_REGISTRY_TERMS_SERVICE, URL_WEB_PRIVACY } from 'config/globals';
+import { usePathname } from 'next/navigation';
 
 import {
   Footer,
   FooterItemProps as FooterItem,
 } from 'web-components/src/components/footer/footer-new';
 
-import { Link, RegistryIconLink } from 'components/atoms';
+import { HomeIconLink } from 'components/atoms/HomeIconLink';
+import { Link } from 'components/atoms/Link';
 
-const RegistryLayoutFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
+export const LayoutFooter = () => {
   const { _ } = useLingui();
-  const { pathname } = useLocation();
+  const pathname = usePathname();
   const isHidden =
     /^\/project-pages$/.test(pathname) ||
     /^\/project\/[^\/]+\/buy$/.test(pathname);
@@ -82,7 +84,7 @@ const RegistryLayoutFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
     <footer>
       <Footer
         footerItems={footerItems}
-        iconLink={RegistryIconLink}
+        iconLink={HomeIconLink}
         linkComponent={Link}
         privacyUrl={URL_WEB_PRIVACY}
         termsUrl={URL_REGISTRY_TERMS_SERVICE}
@@ -106,5 +108,3 @@ const RegistryLayoutFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
     </footer>
   );
 };
-
-export { RegistryLayoutFooter };

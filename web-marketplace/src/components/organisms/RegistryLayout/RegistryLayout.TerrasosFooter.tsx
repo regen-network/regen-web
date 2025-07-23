@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { useLingui } from '@lingui/react';
 import { useAtomValue } from 'jotai';

@@ -3,14 +3,12 @@ import { safeLazy } from 'utils/safeLazy';
 
 import { CLIENT_CONFIG, MARKETPLACE_CLIENT_TYPE } from './Clients.types';
 
-const RegenProvider = safeLazy(() => import('./regen/Regen.Providers'));
-const TerrasosProvider = safeLazy(
-  () => import('./terrasos/Terrasos.Providers'),
-);
+const RegenRoutes = safeLazy(() => import('./regen/Regen.Routes'));
+const TerrasosRoutes = safeLazy(() => import('./terrasos/Terrasos.Routes'));
 
-export const PROVIDERS_MAPPING: Record<MARKETPLACE_CLIENT_TYPE, ReactNode> = {
-  regen: <RegenProvider />,
-  terrasos: <TerrasosProvider />,
+export const CLIENTS_MAPPING: Record<MARKETPLACE_CLIENT_TYPE, ReactNode> = {
+  regen: <RegenRoutes />,
+  terrasos: <TerrasosRoutes />,
 };
 
 export const CLIENTS_CONFIG_MAPPING: Record<

@@ -1,11 +1,11 @@
-import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
+import { usePathname } from 'next/navigation';
 
 import Modal, { RegenModalProps } from 'web-components/src/components/modal';
 import ConnectWallet from 'web-components/src/components/organisms/ConnectWallet';
 
 import { Link } from 'components/atoms';
-import { LoginButton } from 'components/organisms/LoginButton/LoginButton.legacy';
+import { LoginButton } from 'components/organisms/LoginButton/LoginButton';
 
 import {
   CONNECT_WALLET_MODAL_ACTION_DESCRIPTION,
@@ -20,9 +20,9 @@ interface Props extends RegenModalProps {}
 
 export const ConnectWalletModal = ({ open, onClose }: Props) => {
   const { _ } = useLingui();
-  const location = useLocation();
+  const pathname = usePathname();
   const isOnProjectBuy = /^\/project\/([A-Za-z0-9%\-_.~]+)\/buy$/.test(
-    location.pathname,
+    pathname,
   );
 
   return (

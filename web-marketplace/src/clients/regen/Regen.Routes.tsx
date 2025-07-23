@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, useMemo } from 'react';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -8,6 +8,11 @@ import {
   RouteObject,
   RouterProvider,
 } from 'react-router-dom';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { Router } from '@remix-run/router';
 import * as Sentry from '@sentry/react';
 import { QueryClient } from '@tanstack/react-query';
@@ -39,7 +44,7 @@ import { Maybe } from 'generated/graphql';
 import { QueryClient as RPCQueryClient, useLedger } from 'ledger';
 import { useWallet } from 'lib//wallet/wallet';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
+// import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 
 import { AuthRoute } from 'components/atoms/AuthRoute';
 import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
@@ -130,34 +135,38 @@ const CreateOrganization = safeLazy(
 
 type RouterProps = {
   reactQueryClient: QueryClient;
-  apolloClientFactory: ApolloClientFactory;
 };
 
-export const RegenRoutes = ({
-  reactQueryClient,
-  apolloClientFactory,
-}: RouterProps) => {
+export default function RegenRoutes({ reactQueryClient }: RouterProps) {
   const { activeWalletAddr } = useWallet();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { queryClient: rpcQueryClient } = useLedger();
+  const apolloClient = useApolloClient() as ApolloClient<NormalizedCacheObject>;
 
-  return (
-    <RouterProvider
-      router={getRegenRouter({
+  const router = useMemo(
+    () =>
+      getRegenRouter({
         reactQueryClient,
-        apolloClientFactory,
+        apolloClient,
         rpcQueryClient,
         address: activeWalletAddr,
         languageCode: selectedLanguage,
-      })}
-      fallbackElement={<PageLoader />}
-    />
+      }),
+    [
+      activeWalletAddr,
+      apolloClient,
+      selectedLanguage,
+      reactQueryClient,
+      rpcQueryClient,
+    ],
   );
-};
+
+  return <RouterProvider router={router} fallbackElement={<PageLoader />} />;
+}
 
 export type RouterParams = {
   reactQueryClient: QueryClient;
-  apolloClientFactory: ApolloClientFactory;
+  apolloClient: ApolloClient<NormalizedCacheObject>;
   rpcQueryClient: RPCQueryClient | undefined;
   address?: Maybe<string>;
   languageCode: string;
@@ -165,7 +174,7 @@ export type RouterParams = {
 
 export const getRegenRoutes = ({
   reactQueryClient,
-  apolloClientFactory,
+  apolloClient,
   rpcQueryClient,
   address,
   languageCode,
@@ -177,7 +186,7 @@ export const getRegenRoutes = ({
         element={<RegistryLayout />}
         loader={registryLayoutLoader({
           queryClient: reactQueryClient,
-          apolloClientFactory,
+          apolloClient,
           languageCode,
         })}
       >
@@ -221,7 +230,7 @@ export const getRegenRoutes = ({
             element={<BuyCredits />}
             loader={buyCreditsLoader({
               queryClient: reactQueryClient,
-              apolloClientFactory,
+              apolloClient,
               address,
               languageCode,
             })}
@@ -232,7 +241,7 @@ export const getRegenRoutes = ({
             // TODO
             // loader={postLoader({
             //   queryClient: reactQueryClient,
-            //   apolloClientFactory,
+            //   apolloClient,
             // })}
           />
           <Route path="profiles/:accountAddressOrId" element={<Profile />}>
@@ -433,7 +442,7 @@ export const getRegenRoutes = ({
 
 export const getRegenRouter = ({
   reactQueryClient,
-  apolloClientFactory,
+  apolloClient,
   rpcQueryClient,
   address,
   languageCode,
@@ -443,13 +452,13 @@ export const getRegenRouter = ({
   return sentryCreateBrowserRouter(
     getRegenRoutes({
       reactQueryClient,
-      apolloClientFactory,
+      apolloClient,
       rpcQueryClient,
       address,
       languageCode,
     }),
     {
-      basename: process.env.PUBLIC_URL,
+      basename: '',
     },
   );
 };

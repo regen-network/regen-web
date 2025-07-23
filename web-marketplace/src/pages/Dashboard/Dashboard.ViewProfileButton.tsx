@@ -67,7 +67,7 @@ export const ViewProfileButton = ({
         profileUrl = `${getProfileUrl(profileAccount)}/portfolio`;
         break;
       case 'members':
-        profileUrl = getProfileUrl(profileAccount);
+        profileUrl = `${getProfileUrl(profileAccount)}/members`;
         break;
       default:
         profileUrl = getProfileUrl(profileAccount);

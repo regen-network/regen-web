@@ -257,7 +257,7 @@ export const Dashboard = () => {
               className={cn(
                 'px-10 md:px-30 2xl:mx-auto',
                 pathname.includes('/manage')
-                  ? 'md:px-[111px] pt-20 pb-25 md:pb-40'
+                  ? 'xl:px-[111px] pt-20 pb-25 md:pb-40'
                   : 'py-25 md:py-40',
                 section === 'profile' || section === 'settings'
                   ? 'max-w-[767px]'
@@ -272,7 +272,7 @@ export const Dashboard = () => {
               >
                 {/* Header section - hide completely on manage pages */}
                 {!pathname.includes('/manage') && (
-                  <div className="w-full h-50 my-25 md:my-0 flex justify-between items-center">
+                  <div className="w-full h-50 my-25 md:mt-0 lg:my-0 flex justify-between items-center">
                     <div className="flex flex-col">
                       {/* Mobile-only subtitle */}
                       <div className="block md:hidden mb-2">

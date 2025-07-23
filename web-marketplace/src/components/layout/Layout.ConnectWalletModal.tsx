@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useEffect } from 'react';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
@@ -11,9 +13,9 @@ import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
-import keplrWalletExtension from '../../../../public/png/wallets/keplr-wallet-extension.png';
-import { ConnectWalletFlow } from '../ConnectWalletFlow/ConnectWalletFlow';
-import { ConnectWalletModal } from './components/ConnectWalletModal/ConnectWalletModal';
+import keplrWalletExtension from '../../../public/png/wallets/keplr-wallet-extension.png';
+import { ConnectWalletFlow } from '../organisms/ConnectWalletFlow/ConnectWalletFlow';
+import { ConnectWalletModal } from '../organisms/RegistryLayout/components/ConnectWalletModal/ConnectWalletModal';
 import {
   KEPLR_CONNECT_BUTTON,
   KEPLR_LINK_TEXT,
@@ -21,9 +23,9 @@ import {
   KEPLR_WALLET_CONNECT_LEARN_HOW_TEXT,
   KEPLR_WALLET_CONNECT_SUBTITLE,
   KEPLR_WALLET_CONNECT_TITLE,
-} from './RegistryLayout.constants';
+} from '../organisms/RegistryLayout/RegistryLayout.constants';
 
-export const RegistryLayoutConnectWalletModal = (): JSX.Element => {
+export const LayoutConnectWalletModal = (): JSX.Element => {
   const { _ } = useLingui();
   const [connectWalletModal, setConnectWalletModal] = useAtom(
     connectWalletModalAtom,

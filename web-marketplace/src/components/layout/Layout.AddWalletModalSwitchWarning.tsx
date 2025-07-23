@@ -1,3 +1,5 @@
+'use client';
+
 import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
@@ -5,9 +7,9 @@ import { AddWalletModalSwitchWarning } from 'web-components/src/components/modal
 
 import { addWalletModalSwitchWarningAtom } from 'lib/atoms/modals.atoms';
 
-import { ADD_WALLET_MODAL_SWITCH_WARNING_TITLE } from './RegistryLayout.constants';
+import { ADD_WALLET_MODAL_SWITCH_WARNING_TITLE } from '../organisms/RegistryLayout/RegistryLayout.constants';
 
-export const RegistryLayoutAddWalletModalSwitchWarning = (): JSX.Element => {
+export const LayoutAddWalletModalSwitchWarning = (): JSX.Element => {
   const { _ } = useLingui();
   const [{ open }, setAddWalletModalSwitchWarningAtom] = useAtom(
     addWalletModalSwitchWarningAtom,

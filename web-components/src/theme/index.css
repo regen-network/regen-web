@@ -18,9 +18,7 @@ code {
     monospace;
 }
 
-/* for some reason this isn't setting appropriately through MUI theme */
 a {
-  color: #4fb573; /* secondary.main */
   text-decoration: none;
   transition: '200ms ease-in-out';
 }

@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import { Button, Collapse, useTheme } from '@mui/material';
 import { Theme } from '@mui/material/styles';

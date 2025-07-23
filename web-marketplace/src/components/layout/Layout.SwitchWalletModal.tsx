@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useEffect } from 'react';
 import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
@@ -11,9 +13,9 @@ import { useWallet } from 'lib/wallet/wallet';
 import {
   SWITCH_WALLET_WARNING_MODAL_MESSAGE,
   SWITCH_WALLET_WARNING_MODAL_TITLE,
-} from './RegistryLayout.constants';
+} from '../organisms/RegistryLayout/RegistryLayout.constants';
 
-export const RegistryLayoutSwitchWalletModal = (): JSX.Element => {
+export const LayoutSwitchWalletModal = (): JSX.Element => {
   const { _ } = useLingui();
   const [switchWalletModal, setSwitchWalletModal] = useAtom(
     switchWalletModalAtom,

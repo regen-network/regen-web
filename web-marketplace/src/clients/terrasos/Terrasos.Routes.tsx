@@ -31,10 +31,10 @@ type RouterProps = {
   apolloClientFactory: ApolloClientFactory;
 };
 
-export const TerrasosRoutes = ({
+export default function TerrasosRoutes({
   reactQueryClient,
   apolloClientFactory,
-}: RouterProps) => {
+}: RouterProps): JSX.Element {
   return (
     <RouterProvider
       router={getRouter({
@@ -44,7 +44,7 @@ export const TerrasosRoutes = ({
       fallbackElement={<PageLoader />}
     />
   );
-};
+}
 
 type RouterParams = {
   reactQueryClient: QueryClient;

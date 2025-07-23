@@ -1,3 +1,5 @@
+'use client';
+
 import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 
@@ -9,7 +11,7 @@ import {
   PROCESSING_MODAL_TITLE,
 } from 'lib/constants/shared.constants';
 
-export const RegistryLayoutProcessingModal = (): JSX.Element => {
+export const LayoutProcessingModal = (): JSX.Element => {
   const { _ } = useLingui();
   const [{ open }, setProcessingModalAtom] = useAtom(processingModalAtom);
 

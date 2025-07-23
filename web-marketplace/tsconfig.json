@@ -1,8 +1,17 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["vite/client", "vite-plugin-svgr/client", "vitest/globals","@testing-library/jest-dom"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "types": [
+      "vite/client",
+      "vite-plugin-svgr/client",
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ],
     "typeRoots": [
       "./node_modules/@types/",
       "./types",
@@ -25,7 +34,9 @@
     "jsx": "preserve",
     "baseUrl": "./src",
     "paths": {
-      "test/*": ["../test/*"]
+      "test/*": [
+        "../test/*"
+      ]
     },
     "plugins": [
       {
@@ -35,12 +46,15 @@
     "incremental": true
   },
   "include": [
-    "test",
-    "./src",
-    "types/url-search-params-polyfill.d.ts",
-    "lib/rdf/types/rdf-validate-shacl/index.d.ts",
     "./dist/types/**/*.ts",
-    "./next-env.d.ts"
+    "./next-env.d.ts",
+    "./src",
+    "lib/rdf/types/rdf-validate-shacl/index.d.ts",
+    "test",
+    "types/url-search-params-polyfill.d.ts",
+    ".next/types/**/*.ts"
   ],
-  "exclude": ["./node_modules"]
+  "exclude": [
+    "./node_modules"
+  ]
 }

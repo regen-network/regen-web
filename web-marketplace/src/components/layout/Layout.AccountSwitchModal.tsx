@@ -1,10 +1,12 @@
+'use client';
+
 import { useAtom } from 'jotai';
 
 import { accountSwitchModalAtom } from 'lib/atoms/modals.atoms';
 
-import { AccountSwitchModal } from '../AccountSwitchModal/AccountSwitchModal';
+import { AccountSwitchModal } from '../organisms/AccountSwitchModal/AccountSwitchModal';
 
-export const RegistryLayoutAccountSwitchModal = (): JSX.Element => {
+export const LayoutAccountSwitchModal = (): JSX.Element => {
   const [{ open, prevAddr }, setAccountSwitchModalAtom] = useAtom(
     accountSwitchModalAtom,
   );

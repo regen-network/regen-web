@@ -11,27 +11,20 @@ import type { Metadata, Viewport } from 'next';
 
 import ThemeProvider from 'web-components/src/theme/RegenThemeProvider';
 
-import { LedgerProvider, LedgerProviderWithWallet } from 'ledger';
 import { AuthProvider } from 'lib/auth/auth';
 import { IS_TERRASOS } from 'lib/env';
-import { WalletProvider } from 'lib/wallet/wallet';
 
 import PageLoader from 'components/atoms/PageLoader';
 import { ScrollToTop } from 'components/atoms/ScrollToTop';
 import { LayoutCookiesTopBanner } from 'components/layout/Layout.CookiesTopBanner';
-import { LayoutFooter } from 'components/layout/Layout.Footer';
-import { LayoutHeader } from 'components/layout/Layout.Header';
 import { LayoutModalManager } from 'components/layout/Layout.ModalManager';
 import { RetryFailedFunctions } from 'components/layout/Layout.RetryFailedFunctions';
 import { PageViewTracking } from 'components/molecules/PageViewTracking';
-import { RegistryLayoutTerrasosFooter } from 'components/organisms/RegistryLayout/RegistryLayout.TerrasosFooter';
-import { TerrasosHeader } from 'components/organisms/TerrasosHeader/TerrasosHeader';
 
 import { fontClassNames } from '../lib/fonts';
 import { AnalyticsWrapper } from './AnalyticsWrapper';
 import { ApolloWrapper } from './ApolloWrapper';
 import { getI18nInstance } from './appRouterI18n';
-import { ChainWrapper } from './ChainWrapper';
 import { LinguiClientProvider } from './LinguiClientProvider';
 import QueryClientWrapper from './QueryClientWrapper';
 

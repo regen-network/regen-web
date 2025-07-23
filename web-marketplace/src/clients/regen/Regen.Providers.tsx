@@ -1,4 +1,7 @@
+'use client';
+
 import { ChainWrapper } from 'app/ChainWrapper';
+import { usePathname } from 'next/navigation';
 
 import { LedgerProviderWithWallet } from 'ledger';
 import { WalletProvider } from 'lib/wallet/wallet';
@@ -11,13 +14,17 @@ type Props = {
 };
 
 export const RegenProviders = ({ children }: Props) => {
+  const pathname = usePathname();
+  const isDashboard = pathname.startsWith('/dashboard');
   return (
     <ChainWrapper>
       <WalletProvider>
         <LedgerProviderWithWallet>
-          <LayoutHeader />
+          {/* TODO: When the /dashboard has been migrated, the LayoutHeader and LayoutFooter 
+              should be in a layout component for non-dashboard pages */}
+          {!isDashboard && <LayoutHeader />}
           <main className="min-h-screen">{children}</main>
-          <LayoutFooter />
+          {!isDashboard && <LayoutFooter />}
         </LedgerProviderWithWallet>
       </WalletProvider>
     </ChainWrapper>

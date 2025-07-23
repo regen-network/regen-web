@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState } from 'react';
 import { Box, Link, useTheme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';

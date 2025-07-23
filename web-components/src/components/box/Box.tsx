@@ -1,3 +1,4 @@
+'use client';
 import type { CSSProperties } from 'react';
 import { styled } from '@mui/material';
 import Box, { BoxProps } from '@mui/material/Box';

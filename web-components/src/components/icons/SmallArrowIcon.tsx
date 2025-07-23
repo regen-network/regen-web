@@ -1,5 +1,5 @@
-import React from 'react';
-import { SxProps, Theme } from '@mui/material';
+'use client';
+import type { SxProps, Theme } from '@mui/material';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import { makeStyles } from 'tss-react/mui';
 

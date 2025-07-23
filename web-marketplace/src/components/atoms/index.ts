@@ -9,8 +9,6 @@ export * from './OptimizedImage';
 export * from './RegistryIconLink.legacy';
 export * from './RegistryNavLink.legacy';
 export * from './SanityButton';
-export * from './ScrollToTop';
-export * from './ScrollToTop';
 export * from './StatusLabel';
 export * from './WrappedImpactCard';
 export * from './WrappedResourcesCard';

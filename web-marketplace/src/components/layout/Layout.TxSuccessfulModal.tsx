@@ -1,7 +1,9 @@
+'use client';
+
 import { useCallback, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
+import { usePathname } from 'next/navigation';
 
 import { TxSuccessfulModal } from 'web-components/src/components/modal/TxSuccessfulModal';
 
@@ -17,9 +19,9 @@ import {
 
 import { Link } from 'components/atoms';
 
-export const RegistryLayoutTxSuccessfulModal = (): JSX.Element => {
+export const LayoutTxSuccessfulModal = (): JSX.Element => {
   const { _ } = useLingui();
-  const location = useLocation();
+  const location = usePathname();
 
   const [
     { cardItems, title, cardTitle, open, txHash, buttonTitle, buttonLink },

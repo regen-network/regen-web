@@ -31,7 +31,7 @@ NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 # Build settings for Next.js deploy previews
 [context.deploy-preview]
   command = "bun run build"
-  publish = "web-marketplace/dist"
+  publish = "web-marketplace/.next"
 
 [[context.deploy-preview.plugins]]
   package = "@netlify/plugin-nextjs"
@@ -53,17 +53,13 @@ NEXT_PUBLIC_SKIPPED_CLASS_ID = ""
 NEXT_PUBLIC_ANALYTICS_ENABLED = "true"
 NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 
-[functions]
-  node_bundler = "esbuild"
-  external_node_modules = [
-    "@keplr-wallet",
-    "@ledgerhq/hw-app-eth",
-    "@ethereumjs",
-    "mapbox-gl"
-  ]
-
 [build.environment]
 NODE_OPTIONS = "--max-old-space-size=10216"
+
+# makes the plugin print the 20 biggest files in every handler
+NEXT_NETLIFY_DEBUG = "true"
+# shows everything the build system is doing
+NETLIFY_BUILD_DEBUG = "true"
 
 [[redirects]]
 from = "https://app.regen.network/create-methodology"
@@ -95,3 +91,36 @@ from = "https://app.regen.network/ecocredits/accounts/*"
 to = "https://app.regen.network/profiles/:splat"
 force = true
 status = 302
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = [
+    "@keplr-wallet",
+    "@ledgerhq",
+    "@ethereumjs",
+    "@cosmos-kit",
+    "@mapbox",
+    "pdfjs-dist",
+    "sharp",
+    "chain-registry",
+    "xlsx",
+    "web-components"
+  ]
+  included_files = [
+    "!node_modules/sharp/vendor/**",
+    "!node_modules/@img/sharp-libvips-*/**/*",
+    "!node_modules/@keplr-wallet/**/*",
+    "!node_modules/@ledgerhq/**/*",
+    "!node_modules/@ethereumjs/**/*",
+    "!node_modules/mapbox-gl/**/*",
+    "!node_modules/libsodium-sumo.js/**/*",
+    "!node_modules/@regen-network/api/**/*",
+    "!node_modules/chain-registry/**/*",
+    "!node_modules/pdfjs-dist/**/*",
+    "!node_modules/xlsx/**/*",
+    "!public/jpg/**",
+    "!public/png/**",
+    "!public/svg/**"
+  ]
+
+

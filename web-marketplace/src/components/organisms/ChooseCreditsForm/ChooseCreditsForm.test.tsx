@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   allowedDenoms,
   cardSellOrders,
@@ -16,6 +17,8 @@ vi.mock('react-router-dom', () => ({
     state: { from: '/project/test/buy' },
   })),
 }));
+
+const queryClient = new QueryClient();
 
 describe('ChooseCreditsForm', () => {
   const props = {
@@ -37,17 +40,27 @@ describe('ChooseCreditsForm', () => {
     isUserBalanceLoading: false,
   };
   it('renders without crashing', async () => {
-    render(<ChooseCreditsForm {...props} />, {
-      jotaiDefaultValues: [[paymentOptionAtom, 'card']],
-    });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ChooseCreditsForm {...props} />
+      </QueryClientProvider>,
+      {
+        jotaiDefaultValues: [[paymentOptionAtom, 'card']],
+      },
+    );
     const form = await screen.queryByTestId('choose-credits-form');
     expect(form).toBeInTheDocument();
   });
 
   it('selects card payment option', () => {
-    render(<ChooseCreditsForm {...props} />, {
-      jotaiDefaultValues: [[paymentOptionAtom, 'card']],
-    });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ChooseCreditsForm {...props} />
+      </QueryClientProvider>,
+      {
+        jotaiDefaultValues: [[paymentOptionAtom, 'card']],
+      },
+    );
 
     const cardOption = screen.getByTestId('choose-credit-card');
     if (cardOption) {

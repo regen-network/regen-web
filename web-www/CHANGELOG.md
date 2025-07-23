@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/regen-network/regen-web/compare/v2.9.5...v2.10.0) (2025-07-22)
+
+**Note:** Version bump only for package web-www
+
 ## [2.9.3](https://github.com/regen-network/regen-web/compare/v2.9.2...v2.9.3) (2025-06-12)
 
 ### Bug Fixes

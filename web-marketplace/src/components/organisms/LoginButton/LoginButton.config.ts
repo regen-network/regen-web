@@ -21,14 +21,14 @@ export const getAllWalletsUiConfig = ({
     // eslint-disable-next-line lingui/no-unlocalized-strings
     name: 'Keplr Wallet',
     description: _(msg`Keplr Chrome Extension`),
-    imageUrl: keplrWalletExtension.src,
+    image: keplrWalletExtension,
     onClick: () => connectToWallet({ walletType: WalletType.Keplr }),
   },
   {
     // eslint-disable-next-line lingui/no-unlocalized-strings
     name: 'WalletConnect',
     description: _(msg`Keplr Mobile`),
-    imageUrl: walletConnectKeplr.src,
+    image: walletConnectKeplr,
     onClick: () =>
       connectToWallet({ walletType: WalletType.WalletConnectKeplr }),
   },

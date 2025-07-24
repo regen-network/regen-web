@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect } from 'react';
 import { useLingui } from '@lingui/react';
-import { Box } from '@mui/material';
 import { useAtom, useSetAtom } from 'jotai';
+import Image from 'next/image';
 
 import { KeplrWalletConnectModal } from 'web-components/src/components/modal/keplr-wallet-connect-modal/KeplrWalletConnectModal';
 
@@ -71,11 +71,10 @@ export const LayoutConnectWalletModal = (): JSX.Element => {
                 }));
             },
             startIcon: (
-              <Box
-                component="img"
-                src={keplrWalletExtension.src}
+              <Image
+                src={keplrWalletExtension}
                 alt="keplr"
-                sx={{ width: 21, mr: 2 }}
+                className="w-[21px] mr-[8px]"
               />
             ),
           }}

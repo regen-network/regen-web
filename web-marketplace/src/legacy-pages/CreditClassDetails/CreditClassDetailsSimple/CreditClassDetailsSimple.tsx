@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import { ClassInfo } from '@regen-network/api/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
-import { OFFSET_GENERATION_METHOD } from 'legacy-pages/Buyers/Buyers.constants';
+import Image from 'next/image';
 import { getClassImageWithGreyDefault } from 'utils/image/classImage';
 
 import { CardRibbon } from 'web-components/src/components/atoms/CardRibbon/CardRibbon';
@@ -32,18 +32,20 @@ import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getAllCreditClassPageQuery } from 'lib/queries/react-query/sanity/getAllCreditClassPageQuery/getAllCreditClassPageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { SanityNextImage } from 'components/atoms/SanityNextImage';
 import { EcocreditsSection } from 'components/molecules';
 import { DetailsSection } from 'components/organisms/DetailsSection/DetailsSection';
 import { parseMethodologies } from 'components/organisms/ProjectTopSection/ProjectTopSection.utils';
 import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 import { useTags } from 'hooks/useTags';
 
-import { client as sanityClient } from '../../../lib/clients/sanity';
+import { client as sanityClient } from '../../../lib/clients/apolloSanity';
 import { MemoizedProjects as Projects } from '../CreditClassDetails.Projects';
 import { CreditClassDetailsTableTabs } from '../tables/CreditClassDetails.TableTabs';
 import {
   CREDIT_CLASS_TOOLTIP,
   ELIGIBLE_ACTIVITIES,
+  OFFSET_GENERATION_METHOD,
 } from './CreditClassDetailsSimple.constants';
 import { CreditClassDetailsStakeholders } from './CreditClassDetailsSimple.Stakeholders';
 import { useCreditClassDetailsSimpleStyles } from './CreditClassDetailsSimple.styles';
@@ -139,17 +141,15 @@ const CreditClassDetailsSimple: React.FC<
           >
             <Box sx={{ mb: 6 }}>
               {imageSrc && (
-                <Box
-                  sx={{
-                    position: 'relative',
-                    mb: { sm: 12.5 },
-                    mx: { xs: -4, sm: 0 },
-                  }}
-                >
+                <div className="relative mb-0 sm:mb-50 -mx-[16px] sm:mx-0">
                   <CardRibbon
-                    icon={{
-                      src: creditTypeSanity?.category?.icon?.asset?.url ?? '',
-                    }}
+                    icon={
+                      <SanityNextImage
+                        image={creditTypeSanity?.category?.icon}
+                        alt={creditTypeSanity?.category?.icon?.asset?.altText}
+                        className="w-20 h-20"
+                      />
+                    }
                     label={
                       (creditTypeSanity?.category?.name ||
                         creditTypeSanity?.name) ??
@@ -164,14 +164,19 @@ const CreditClassDetailsSimple: React.FC<
                       zIndex: 1,
                       py: { xs: 1, sm: 1.5 },
                     }}
-                    sxIcon={{ with: 20, height: 20 }}
                   />
-                  <img
-                    className={styles.image}
-                    alt={image?.imageAlt || imageSrc || displayName}
-                    src={imageSrc}
-                  />
-                </Box>
+
+                  <div className="relative w-full h-[200px] sm:h-[400px]">
+                    <Image
+                      className="object-cover sm:rounded-[5px]"
+                      src={imageSrc}
+                      alt={image?.imageAlt || imageSrc || displayName}
+                      fill
+                      sizes="100vw"
+                      priority
+                    />
+                  </div>
+                </div>
               )}
               <Label
                 size="sm"
@@ -199,7 +204,16 @@ const CreditClassDetailsSimple: React.FC<
               <Title variant="h1">{displayName}</Title>
               {generationMethods && (
                 <CreditClassCardItem
-                  items={generationMethods}
+                  items={generationMethods.map((method, i) => ({
+                    name: method?.name,
+                    icon: (
+                      <SanityNextImage
+                        key={i}
+                        image={method?.icon}
+                        className="w-[24px] h-[24px]"
+                      />
+                    ),
+                  }))}
                   label={_(OFFSET_GENERATION_METHOD)}
                   sx={{ my: 5 }}
                   sxListContainer={{
@@ -249,12 +263,23 @@ const CreditClassDetailsSimple: React.FC<
         credibilityCards={content?.credibilityCards}
         methodology={methodology}
         credit={{
-          creditImage: sanityCreditClassPage?.creditImage?.asset?.url,
+          creditImage: (
+            <SanityNextImage
+              image={sanityCreditClassPage?.creditImage}
+              className="m-auto max-w-full"
+            />
+          ),
           creditTypeUnit:
             creditTypeSanity?.unit || creditTypeData?.creditType?.unit,
-          creditTypeImage:
-            creditTypeSanity?.largeImage?.asset?.url ||
-            creditTypeSanity?.category?.largeImage?.asset?.url,
+          creditTypeImage: (
+            <SanityNextImage
+              image={
+                creditTypeSanity?.largeImage ||
+                creditTypeSanity?.category?.largeImage
+              }
+              className="m-auto max-w-full"
+            />
+          ),
           creditTypeUnitDefinition: creditTypeSanity?.unitDefinitionRaw,
         }}
       ></DetailsSection>

@@ -1,9 +1,10 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { createClient } from '@sanity/client';
 
-// Alternative Apollo client for querying data from Sanity (CMS)
-const client = new ApolloClient({
-  uri: `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v1/graphql/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${process.env.NEXT_PUBLIC_SANITY_TAG}`,
-  cache: new InMemoryCache(),
+const configuredSanityClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  useCdn: true,
+  apiVersion: '2025-02-06',
 });
 
-export { client };
+export { configuredSanityClient };

@@ -4,6 +4,7 @@ import { useLingui } from '@lingui/react';
 import { Grid } from '@mui/material';
 import { useAtom, useSetAtom } from 'jotai';
 import { basketDetailAtom } from 'legacy-pages/BasketDetails/BasketDetails.store';
+import Image from 'next/image';
 
 import { Flex } from 'web-components/src/components/box';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -16,6 +17,7 @@ import {
   Title,
 } from 'web-components/src/components/typography';
 import { formatNumber } from 'web-components/src/utils/format';
+import { cn } from 'web-components/src/utils/styles/cn';
 import { truncate } from 'web-components/src/utils/truncate';
 
 import {
@@ -25,8 +27,8 @@ import {
 import { useWallet } from 'lib/wallet/wallet';
 
 import toucanBasket from '../../../../public/png/toucan-basket.png';
+import topoImg from '../../../../public/svg/background-contour-2.svg';
 import { getAccountUrl } from '../../../lib/block-explorer';
-import { OptimizedImage } from '../../atoms/OptimizedImage';
 import { MAXIMUM_FRACTION_DIGITS } from '../SellOrdersTable/SellOrdersTable.constants';
 import {
   PUT_BASKET_HREF,
@@ -41,7 +43,6 @@ import { BasketItemWithLinkList } from './BasketOverview.ItemWithLinkList';
 import { BasketOverviewModals } from './BasketOverview.modals';
 import {
   BasketImageContainer,
-  BasketSectionContainer,
   BasketTextContainer,
   useBasketOverviewStyles,
 } from './BasketOverview.styles';
@@ -94,14 +95,22 @@ export const BasketOverview: React.FC<
 
   return (
     <>
-      <BasketSectionContainer>
+      <div className="relative flex justify-center border-solid border-0 border-b border-grey-300 bg-grey-100">
+        <Image
+          src={topoImg.src}
+          fill
+          alt={''}
+          className="object-cover"
+          sizes="100vw"
+        />
         <Section className={styles.content} isPaddingTopMobile={false}>
           <Grid container>
             <BasketImageContainer item xs={12} sm={5}>
-              <OptimizedImage
-                className={styles.image}
-                src={toucanBasket.src}
+              <Image
+                className={cn(styles.image, 'w-full h-auto')}
+                src={toucanBasket}
                 alt={name}
+                sizes="100vw"
               />
             </BasketImageContainer>
             <BasketTextContainer item xs={12} sm={7}>
@@ -228,7 +237,7 @@ export const BasketOverview: React.FC<
             </BasketTextContainer>
           </Grid>
         </Section>
-      </BasketSectionContainer>
+      </div>
       <BasketOverviewModals
         basketPutData={basketPutData}
         basketTakeData={basketTakeData}

@@ -5,6 +5,10 @@ import { ProfileVariant } from 'web-components/src/components/organisms/ProfileH
 
 import { AccountType } from 'generated/graphql';
 
+import defaultProfileBg from '../../../public/jpg/profile-default-bg.jpg';
+import defaultProfileAvatar from '../../../public/svg/profile-default-avatar.svg';
+import defaultProfileCompany from '../../../public/svg/profile-default-company.svg';
+
 export const PROFILE = msg`Profile`;
 export const VIEW_PROFILE = msg`View Public Profile`;
 export const VIEW_PUBLIC_PROFILE = msg`View On Personal Profile`;
@@ -22,10 +26,9 @@ export const DASHBOARD_NAVIGATION_ARIA_LABEL = msg`Dashboard side navigation`;
 
 export const DEFAULT_PROFILE_TYPE = AccountType.User;
 export const DEFAULT_NAME = msg`Unnamed`;
-export const DEFAULT_PROFILE_BG = '/jpg/profile-default-bg.jpg';
-export const DEFAULT_PROFILE_USER_AVATAR = '/svg/profile-default-avatar.svg';
-export const DEFAULT_PROFILE_COMPANY_AVATAR =
-  '/svg/profile-default-company.svg';
+export const DEFAULT_PROFILE_BG = defaultProfileBg.src;
+export const DEFAULT_PROFILE_USER_AVATAR = defaultProfileAvatar;
+export const DEFAULT_PROFILE_COMPANY_AVATAR = defaultProfileCompany;
 
 export const PROFILE_S3_PATH = 'profiles';
 

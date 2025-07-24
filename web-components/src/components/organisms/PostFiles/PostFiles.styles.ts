@@ -17,9 +17,9 @@ export const useStyles = makeStyles()((theme: Theme) => ({
       },
     },
     '& .mapboxgl-popup-content': {
-      padding: 0,
-      background: 'none',
-      boxShadow: 'none',
+      padding: '0 !important',
+      background: 'none !important',
+      boxShadow: 'none !important',
     },
     '& .mapboxgl-popup-tip': {
       display: 'none',

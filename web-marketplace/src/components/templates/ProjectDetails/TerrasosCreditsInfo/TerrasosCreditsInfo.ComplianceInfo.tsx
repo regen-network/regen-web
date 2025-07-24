@@ -12,9 +12,8 @@ import { ProjectMetadataLD } from 'lib/db/types/json-ld';
 
 import { MetaDetail } from 'components/molecules';
 
+import ComplianceMarketIcon from '../../../../../public/svg/checkmarkList.svg';
 import { InfoTemplate } from './TerrasosCreditsInfo.InfoTemplate';
-
-import ComplianceMarketIcon from 'assets/svgs/checkmarkList.svg';
 
 type Props = {
   learnMoreLink: LinkType;
@@ -43,7 +42,7 @@ const ComplianceInfo = ({
     <InfoTemplate
       upperContent={complianceCredits}
       title={_(msg`Compliance info`)}
-      imgSrc={ComplianceMarketIcon.src}
+      imgSrc={ComplianceMarketIcon}
       imgAlt={_(msg`Checkmark list`)}
       description={<BlockContent content={description} />}
       learnMoreLink={learnMoreLink}

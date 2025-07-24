@@ -9,7 +9,7 @@ import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/ma
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
-import { client as sanityClient } from '../../../lib/clients/sanity';
+import { client as sanityClient } from '../../../lib/clients/apolloSanity';
 
 type LoaderType = {
   queryClient: QueryClient;

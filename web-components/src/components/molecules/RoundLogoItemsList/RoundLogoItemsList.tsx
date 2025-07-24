@@ -40,8 +40,10 @@ const RoundLogoItemsList = ({
                 }}
               >
                 <LinkWrapper link={link}>
-                  <RoundLogo image={image} sx={{ mr: 2.5 }} />
-                  <Subtitle size="lg">{link.text}</Subtitle>
+                  <RoundLogo image={image} className="mr-10" />
+                  <Subtitle color="primary.light" size="lg">
+                    {link.text}
+                  </Subtitle>
                 </LinkWrapper>
               </Box>
             ))}

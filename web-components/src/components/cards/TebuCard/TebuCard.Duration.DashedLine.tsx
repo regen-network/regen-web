@@ -18,7 +18,7 @@ const DashedLine: React.FC<DashProps> = ({ style, className, height }) => (
   >
     <path
       d="M1 0L0.999999 26"
-      stroke-dasharray="4 4"
+      strokeDasharray="4 4"
       style={{
         stroke: 'rgba(var(--ac-neutral-500) / 1)',
       }}

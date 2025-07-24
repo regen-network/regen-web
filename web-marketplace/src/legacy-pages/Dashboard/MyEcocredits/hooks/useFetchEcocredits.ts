@@ -14,7 +14,7 @@ import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/g
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchBatchesWithMetadata } from '../../../../hooks/batches/useFetchBatchesWithMetadata';
-import { client as sanityClient } from '../../../../lib/clients/sanity';
+import { client as sanityClient } from '../../../../lib/clients/apolloSanity';
 import { isOfCreditClass } from '../MyEcocredits.utils';
 
 interface Response {

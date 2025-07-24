@@ -13,11 +13,13 @@ const NoCredits: React.FC<
     title: string;
     icon?: JSX.Element;
     sx?: SxProps<Theme>;
+    className?: string;
   }>
-> = ({ title, icon, sx = [] }) => {
+> = ({ title, icon, sx = [], className }) => {
   return (
     <StyledTableContainer>
       <Box
+        className={className}
         sx={[
           {
             minHeight: 230,

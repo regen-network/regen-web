@@ -6,7 +6,7 @@ import { quantityFormatNumberOptions } from 'config/decimals';
 import { ELLIPSIS_COLUMN_WIDTH, tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/src/components/block-content';
-import NoEcocreditsIcon from 'web-components/src/components/icons/NoEcocreditsIcon';
+import { PortfolioNoEcocredits } from 'web-components/src/components/icons/PortfolioNoEcocredits';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
@@ -32,6 +32,7 @@ type EcocreditsTableProps = {
   onTableChange?: UseStateSetter<TablePaginationParams>;
   initialPaginationParams?: TablePaginationParams;
   isIgnoreOffset?: boolean;
+  noEcocredits: boolean;
 };
 
 export const EcocreditsTable: React.FC<
@@ -42,6 +43,7 @@ export const EcocreditsTable: React.FC<
   onTableChange,
   initialPaginationParams,
   isIgnoreOffset = false,
+  noEcocredits,
 }) => {
   const { _ } = useLingui();
 
@@ -55,14 +57,12 @@ export const EcocreditsTable: React.FC<
     [_, credits?.length, isIgnoreOffset],
   );
 
-  const hasMorePages =
-    (initialPaginationParams?.count ?? 0) >
-    (initialPaginationParams?.rowsPerPage ?? 0);
-  if (!credits || (!credits?.length && !hasMorePages)) {
+  if (noEcocredits) {
     return (
       <NoCredits
+        className="bg-grey-200 border-0 border-t border-solid border-sc-card-standard-stroke"
         title={_(msg`No ecocredits to display`)}
-        icon={<NoEcocreditsIcon sx={{ width: 100, height: 100 }} />}
+        icon={<PortfolioNoEcocredits className="text-grey-400" />}
       />
     );
   }

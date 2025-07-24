@@ -30,10 +30,10 @@ export const MemberCard = ({
     {isCurrentAccount && (
       <LinkComponent href={editLink}>
         <Label
-          className="flex items-center gap-5 text-sc-text-link absolute top-[17px] left-20"
+          className="group flex items-center gap-5 text-sc-text-link hover:text-brand-300 absolute top-[17px] left-20"
           size="xs"
         >
-          <EditIcon className="" />
+          <EditIcon className="group-hover:text-brand-300" />
           {editText}
         </Label>
       </LinkComponent>

@@ -20,6 +20,7 @@ import { useQueries, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { DEFAULT_NAME } from 'legacy-pages/Dashboard/Dashboard.constants';
 import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
+import { StaticImageData } from 'next/image';
 
 import { User } from 'web-components/src/components/user/UserInfo';
 import { formatDate } from 'web-components/src/utils/format';
@@ -31,10 +32,12 @@ import { messageActionEquals } from 'lib/ecocredit/constants';
 import { getGetTxsEventQuery } from 'lib/queries/react-query/cosmos/bank/getTxsEventQuery/getTxsEventQuery';
 import { getAccountByAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByAddrQuery/getAccountByAddrQuery';
 
+import postCreated from '../../../../public/svg/post-created.svg';
+import postSigned from '../../../../public/svg/post-signed.svg';
 import { ADMIN, REGISTRY } from '../Post.constants';
 
 type Event = {
-  icon: string;
+  icon: string | StaticImageData;
   label: string;
   user: User;
   timestamp: string;
@@ -169,7 +172,7 @@ export const useAttestEvents = ({
   );
   if (creatorAccount && !onlyAttestEvents) {
     events.push({
-      icon: '/svg/post-created.svg',
+      icon: postCreated,
       label: _(msg`Created by`),
       user: {
         name: creatorAccount.name || _(DEFAULT_NAME),
@@ -205,7 +208,7 @@ export const useAttestEvents = ({
         attestorAccount?.addr === adminAddr;
 
       events.unshift({
-        icon: '/svg/post-signed.svg',
+        icon: postSigned,
         label: _(msg`Signed by`),
         timestamp: formatDate(
           attestTxResponses[i].timestamp,

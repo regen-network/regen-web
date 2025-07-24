@@ -49,7 +49,7 @@ import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import { useLedger } from '../../../ledger';
 import { NotFoundPage } from '../../../legacy-pages/NotFound/NotFound';
-import { client as sanityClient } from '../../../lib/clients/sanity';
+import { client as sanityClient } from '../../../lib/clients/apolloSanity';
 import { GettingStartedResourcesSection } from '../../molecules';
 import { ProjectTopSection } from '../../organisms';
 import useGeojson from './hooks/useGeojson';

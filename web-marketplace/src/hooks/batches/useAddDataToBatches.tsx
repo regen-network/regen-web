@@ -5,7 +5,7 @@ import { useAtom } from 'jotai';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { QueryClient as RPCQueryClient } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import {
   ECOCREDIT_MESSAGE_TYPES,
   messageActionEquals,

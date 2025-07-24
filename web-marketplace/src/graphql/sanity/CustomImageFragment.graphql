@@ -2,9 +2,6 @@ fragment customImageFields on CustomImage {
   imageAlt
   imageHref
   image {
-    asset {
-      altText
-      url
-    }
+    ...imageFields
   }
 }

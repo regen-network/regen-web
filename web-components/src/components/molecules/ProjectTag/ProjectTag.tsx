@@ -3,7 +3,7 @@ import { Box, SxProps } from '@mui/material';
 
 import { Theme } from '../../../theme/muiTheme';
 import { sxToArray } from '../../../utils/mui/sxToArray';
-import { isImageType, ProjectTagType } from './ProjectTag.types';
+import { ProjectTagType } from './ProjectTag.types';
 
 export interface Props {
   tag: ProjectTagType;
@@ -37,18 +37,6 @@ const ProjectTag = ({
       ]}
       onClick={onClick}
     >
-      {icon && isImageType(icon) && icon.src && (
-        <Box
-          component="img"
-          src={icon.src}
-          alt={icon.alt}
-          sx={{
-            width: { xs: 30, sm: 40 },
-            height: { xs: 30, sm: 40 },
-            mr: 2.5,
-          }}
-        />
-      )}
       {isValidElement(icon) && icon}
       <Box sx={{ fontWeight: 700, fontSize }}>{name}</Box>
     </Box>

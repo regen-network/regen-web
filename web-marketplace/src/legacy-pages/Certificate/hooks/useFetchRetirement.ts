@@ -20,7 +20,7 @@ import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/g
 import { getDisplayAccountOrAddress } from 'components/organisms/DetailsSection/DetailsSection.utils';
 import { useProjectsWithMetadata } from 'hooks/projects/useProjectsWithMetadata';
 
-import { client as sanityClient } from '../../../lib/clients/sanity';
+import { client as sanityClient } from '../../../lib/clients/apolloSanity';
 import { isPaymentIntentId } from '../Certificate.utils';
 
 type Params = {

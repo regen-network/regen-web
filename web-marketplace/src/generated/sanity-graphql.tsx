@@ -9431,67 +9431,6 @@ export type AllHomePageQuery = (
   )> }
 );
 
-export type AllLandStewardsPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllLandStewardsPageQuery = (
-  { __typename?: 'RootQuery' }
-  & { allLandStewardsPage: Array<(
-    { __typename?: 'LandStewardsPage' }
-    & Pick<LandStewardsPage, 'language'>
-    & { heroSection?: Maybe<(
-      { __typename?: 'HeroSection' }
-      & HeroSectionFieldsFragment
-    )>, designedForFarmersSection?: Maybe<(
-      { __typename?: 'ImageItemsSection' }
-      & Pick<ImageItemsSection, 'title'>
-      & { imageCards?: Maybe<Array<Maybe<(
-        { __typename?: 'Card' }
-        & CardFieldsFragment
-      )>>> }
-    )>, joinFarmersSection?: Maybe<(
-      { __typename?: 'DualImageSection' }
-      & Pick<DualImageSection, 'title'>
-      & { left?: Maybe<(
-        { __typename?: 'ImageBoldTextLabel' }
-        & ImageBoldTextLabelFieldsFragment
-      )>, right?: Maybe<(
-        { __typename?: 'ImageBoldTextLabel' }
-        & ImageBoldTextLabelFieldsFragment
-      )> }
-    )>, practicesOutcomesSection?: Maybe<(
-      { __typename?: 'PracticesOutcomesSection' }
-      & Pick<PracticesOutcomesSection, 'title' | 'note'>
-      & { practices?: Maybe<Array<Maybe<(
-        { __typename?: 'LandManagementPractice' }
-        & LandManagementPracticeFieldsFragment
-      )>>>, outcomes?: Maybe<Array<Maybe<(
-        { __typename?: 'EcologicalOutcome' }
-        & EcologicalOutcomeFieldsFragment
-      )>>> }
-    )>, timelineSection?: Maybe<(
-      { __typename?: 'TimelineSection' }
-      & Pick<TimelineSection, 'header'>
-      & { timelineItems?: Maybe<Array<Maybe<(
-        { __typename?: 'TimelineItem' }
-        & TimelineItemFieldsFragment
-      )>>> }
-    )>, featuredSection?: Maybe<(
-      { __typename?: 'FeaturedSection' }
-      & FeaturedSectionFieldsFragment
-    )>, moreQuestionsSection?: Maybe<(
-      { __typename?: 'BottomBanner' }
-      & BottomBannerFieldsFragment
-    )>, footerButton?: Maybe<(
-      { __typename?: 'Button' }
-      & ButtonFieldsFragment
-    )>, metadata?: Maybe<(
-      { __typename?: 'PageMetadata' }
-      & PageMetadataFieldsFragment
-    )> }
-  )> }
-);
-
 export type AllMethodologyQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -9792,10 +9731,7 @@ export type CustomImageFieldsFragment = (
   & Pick<CustomImage, 'imageAlt' | 'imageHref'>
   & { image?: Maybe<(
     { __typename?: 'Image' }
-    & { asset?: Maybe<(
-      { __typename?: 'SanityImageAsset' }
-      & Pick<SanityImageAsset, 'altText' | 'url'>
-    )> }
+    & ImageFieldsFragment
   )> }
 );
 
@@ -9954,7 +9890,15 @@ export type ImageFieldsFragment = (
   { __typename?: 'Image' }
   & { asset?: Maybe<(
     { __typename?: 'SanityImageAsset' }
-    & Pick<SanityImageAsset, 'url'>
+    & Pick<SanityImageAsset, '_id' | 'url' | 'altText'>
+    & { metadata?: Maybe<(
+      { __typename?: 'SanityImageMetadata' }
+      & Pick<SanityImageMetadata, 'lqip' | 'blurHash' | 'hasAlpha' | 'isOpaque'>
+      & { dimensions?: Maybe<(
+        { __typename?: 'SanityImageDimensions' }
+        & Pick<SanityImageDimensions, 'height' | 'width' | 'aspectRatio'>
+      )> }
+    )> }
   )> }
 );
 
@@ -10418,18 +10362,35 @@ export const ButtonFieldsFragmentDoc = gql`
   buttonBlankTarget
 }
     ${LinkFieldsFragmentDoc}`;
+export const ImageFieldsFragmentDoc = gql`
+    fragment imageFields on Image {
+  asset {
+    _id
+    url
+    altText
+    metadata {
+      dimensions {
+        height
+        width
+        aspectRatio
+      }
+      lqip
+      blurHash
+      hasAlpha
+      isOpaque
+    }
+  }
+}
+    `;
 export const CustomImageFieldsFragmentDoc = gql`
     fragment customImageFields on CustomImage {
   imageAlt
   imageHref
   image {
-    asset {
-      altText
-      url
-    }
+    ...imageFields
   }
 }
-    `;
+    ${ImageFieldsFragmentDoc}`;
 export const StepCardFieldsFragmentDoc = gql`
     fragment stepCardFields on StepCard {
   isActive
@@ -10834,13 +10795,6 @@ export const PersonFieldsFragmentDoc = gql`
     fragment personFields on Person {
   name
   role
-}
-    `;
-export const ImageFieldsFragmentDoc = gql`
-    fragment imageFields on Image {
-  asset {
-    url
-  }
 }
     `;
 export const BuyersQuoteSectionFieldsFragmentDoc = gql`
@@ -11557,95 +11511,6 @@ export function useAllHomePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type AllHomePageQueryHookResult = ReturnType<typeof useAllHomePageQuery>;
 export type AllHomePageLazyQueryHookResult = ReturnType<typeof useAllHomePageLazyQuery>;
 export type AllHomePageQueryResult = Apollo.QueryResult<AllHomePageQuery, AllHomePageQueryVariables>;
-export const AllLandStewardsPageDocument = gql`
-    query allLandStewardsPage {
-  allLandStewardsPage {
-    language
-    heroSection {
-      ...heroSectionFields
-    }
-    designedForFarmersSection {
-      title
-      imageCards {
-        ...cardFields
-      }
-    }
-    joinFarmersSection {
-      title
-      left {
-        ...imageBoldTextLabelFields
-      }
-      right {
-        ...imageBoldTextLabelFields
-      }
-    }
-    practicesOutcomesSection {
-      title
-      note
-      practices {
-        ...landManagementPracticeFields
-      }
-      outcomes {
-        ...ecologicalOutcomeFields
-      }
-    }
-    timelineSection {
-      header
-      timelineItems {
-        ...timelineItemFields
-      }
-    }
-    featuredSection {
-      ...featuredSectionFields
-    }
-    moreQuestionsSection {
-      ...bottomBannerFields
-    }
-    footerButton {
-      ...buttonFields
-    }
-    metadata {
-      ...pageMetadataFields
-    }
-  }
-}
-    ${HeroSectionFieldsFragmentDoc}
-${CardFieldsFragmentDoc}
-${ImageBoldTextLabelFieldsFragmentDoc}
-${LandManagementPracticeFieldsFragmentDoc}
-${EcologicalOutcomeFieldsFragmentDoc}
-${TimelineItemFieldsFragmentDoc}
-${FeaturedSectionFieldsFragmentDoc}
-${BottomBannerFieldsFragmentDoc}
-${ButtonFieldsFragmentDoc}
-${PageMetadataFieldsFragmentDoc}`;
-
-/**
- * __useAllLandStewardsPageQuery__
- *
- * To run a query within a React component, call `useAllLandStewardsPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useAllLandStewardsPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAllLandStewardsPageQuery({
- *   variables: {
- *   },
- * });
- */
-export function useAllLandStewardsPageQuery(baseOptions?: Apollo.QueryHookOptions<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>(AllLandStewardsPageDocument, options);
-      }
-export function useAllLandStewardsPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>(AllLandStewardsPageDocument, options);
-        }
-export type AllLandStewardsPageQueryHookResult = ReturnType<typeof useAllLandStewardsPageQuery>;
-export type AllLandStewardsPageLazyQueryHookResult = ReturnType<typeof useAllLandStewardsPageLazyQuery>;
-export type AllLandStewardsPageQueryResult = Apollo.QueryResult<AllLandStewardsPageQuery, AllLandStewardsPageQueryVariables>;
 export const AllMethodologyDocument = gql`
     query allMethodology {
   allMethodology {

@@ -4,8 +4,6 @@ import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from 'web-components/src/theme/muiTheme';
 
-import topoImg from '../../../assets/background-contour-2.svg';
-
 export const useBasketOverviewStyles = makeStyles()((theme: Theme) => ({
   content: {
     display: 'flex',
@@ -35,17 +33,8 @@ export const useBasketOverviewStyles = makeStyles()((theme: Theme) => ({
   card: {
     margin: theme.spacing(8, 0, 0),
     padding: theme.spacing(3, 5, 7),
+    zIndex: 1,
   },
-}));
-
-export const BasketSectionContainer = styled('div')(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'center',
-  borderBottom: `1px solid ${theme.palette.grey[100]}`,
-  backgroundColor: theme.palette.grey[50],
-  backgroundImage: `url(${topoImg.src})`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
 }));
 
 export const BasketImageContainer = styled(Grid)(({ theme }) => ({

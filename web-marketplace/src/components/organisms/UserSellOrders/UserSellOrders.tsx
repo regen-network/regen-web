@@ -7,8 +7,8 @@ import { Loading } from 'web-components/src/components/loading';
 
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useNormalizedSellOrders } from 'pages/Marketplace/Storefront/hooks/useNormalizedSellOrders';
-import { CANCEL_SELL_ORDER_ACTION } from 'pages/Marketplace/Storefront/Storefront.constants';
+import { CANCEL_SELL_ORDER_ACTION } from 'features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow.constants';
+import { useNormalizedSellOrders } from 'components/organisms/UserSellOrders/hooks/useNormalizedSellOrders';
 
 import { CancelSellOrderFlow } from '../../../features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow';
 import { NoUserSellOrdersCard } from './UserSellOrders.NoOrdersCard';

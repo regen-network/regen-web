@@ -85,6 +85,7 @@ import PinIcon from './PinIcon';
 import PlayIcon from './PlayIcon';
 import PlusIcon from './PlusIcon';
 import PointerIcon from './PointerIcon';
+import { PortfolioNoEcocredits } from './PortfolioNoEcocredits';
 import { PrefinanceIcon } from './PrefinanceIcon';
 import PrintIcon from './PrintIcon';
 import { PrivateFile } from './PrivateFile';
@@ -333,6 +334,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<PauseIcon height={'50px'} />} label="PauseIcon" />
     <LabeledIcon icon={<PlusIcon />} label="PlusIcon" />
     <LabeledIcon icon={<PointerIcon />} label="PointerIcon" />
+    <LabeledIcon icon={<PortfolioNoEcocredits />} label="PortfolioNoEcocredits" />
     <LabeledIcon icon={<PrefinanceIcon />} label="PrefinanceIcon" />
     <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
     <LabeledIcon icon={<PrivateFile />} label="PrivateFile" />

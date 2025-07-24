@@ -21,7 +21,7 @@ export const MemberCard = ({
   editText,
   linkComponent: LinkComponent,
 }: Props) => (
-  <div className="flex flex-col items-center relative px-20 py-40 border border-solid border-sc-card-standard-stroke rounded-[10px] shadow-[0_0_4px_0_rgba(0,0,0,0.05)]">
+  <article className="flex flex-col items-center relative px-20 py-40 border border-solid border-sc-card-standard-stroke rounded-[10px] shadow-[0_0_4px_0_rgba(0,0,0,0.05)]">
     <UserAvatar src={imageSrc} alt={name} className="w-[120px] h-[120px]" />
     <Title className="py-10" variant="h6">
       {name}
@@ -38,5 +38,5 @@ export const MemberCard = ({
         </Label>
       </LinkComponent>
     )}
-  </div>
+  </article>
 );

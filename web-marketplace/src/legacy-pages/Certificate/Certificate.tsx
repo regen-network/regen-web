@@ -18,6 +18,7 @@ import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 
 import certificateHeader from '../../../public/jpg/certificate-header.jpg';
+import certificateNotFound from '../../../public/svg/certificate-not-found.svg';
 import { getCertificateLabels } from './Certificate.constants';
 import { useCertificateStyles } from './Certificate.styles';
 import { getCertificateData } from './Certificate.utils';
@@ -59,7 +60,7 @@ function CertificatePage(): JSX.Element {
               labels={certificateLabels}
               background="/svg/topology.svg"
               linkComponent={Link as LinkComponentType}
-              certificateNotFoundSrc="/svg/certificate-not-found.svg"
+              certificateNotFoundSrc={certificateNotFound}
               certificateNotFoundAlt={_(msg`certificate not found`)}
               certificateNotFoundTitle={_(
                 msg`This certificate has not been generated yet because the credit transfer to you is still pending. Please refresh the page in a few moments.`,

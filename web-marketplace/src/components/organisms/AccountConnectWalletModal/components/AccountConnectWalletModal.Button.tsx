@@ -1,14 +1,15 @@
 import { Box } from '@mui/system';
+import Image from 'next/image';
 
 import { Title } from 'web-components/src/components/typography';
 
-import { LoginProvider } from '../AccountConnectWalletModal.types';
+import { LoginProvider } from 'components/organisms/LoginModal/LoginModal.types';
 
 export interface Props {
   provider: LoginProvider;
 }
 
-const LoginModalButton = ({ provider: { name, onClick, imageUrl } }: Props) => (
+const LoginModalButton = ({ provider: { name, onClick, image } }: Props) => (
   <Box
     component="button"
     sx={{
@@ -27,7 +28,7 @@ const LoginModalButton = ({ provider: { name, onClick, imageUrl } }: Props) => (
     onClick={onClick}
     key={name}
   >
-    <Box component="img" src={imageUrl} alt={name} sx={{ height: 40, pb: 1 }} />
+    <Image className="h-40 pb-[4px] object-contain" src={image} alt={name} />
     <Title variant="h6">{name}</Title>
   </Box>
 );

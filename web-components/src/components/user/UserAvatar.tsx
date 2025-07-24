@@ -3,10 +3,11 @@ import { makeStyles } from 'tss-react/mui';
 
 import { Theme } from '../../theme/muiTheme';
 import { cn } from '../../utils/styles/cn';
+import Image, { StaticImageData } from 'next/image';
 
 interface UserAvatarProps {
   alt?: string;
-  src?: string | null;
+  src?: string | StaticImageData;
   size?: string;
   border?: boolean;
   href?: string | null;
@@ -88,32 +89,19 @@ export default function UserAvatar({
   size,
   border = true,
   href,
-  icon,
   sx,
   className,
 }: UserAvatarProps): JSX.Element {
   const spacing: Sizes = getSize(size);
-  // TODO: is fallback icon when src not provided ok? what about the bg color?
   const { classes } = useStyles({ spacing, border });
-  const avatar =
-    !src || icon ? (
-      <Avatar
-        sx={sx}
-        className={cn(classes.root, className)}
-        alt={alt}
-        src={icon}
-      >
-        {icon}
-      </Avatar>
-    ) : (
-      <Avatar
-        sx={sx}
-        className={cn(classes.root, className)}
-        alt={alt}
-        src={src}
-      />
-    );
 
+  const avatar = (
+    <Avatar sx={sx} className={cn(classes.root, className)}>
+      {src && alt && (
+        <Image alt={alt} src={src} quality={100} fill sizes="5vw" />
+      )}
+    </Avatar>
+  );
   if (href) {
     return (
       <a href={href} rel="noopener noreferrer">

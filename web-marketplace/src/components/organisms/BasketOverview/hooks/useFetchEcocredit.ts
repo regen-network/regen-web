@@ -5,7 +5,7 @@ import { useAtom } from 'jotai';
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { normalizeEcocredits } from 'lib/normalizers/ecocredits/normalizeEcocredits';
 import { getBalanceQuery } from 'lib/queries/react-query/ecocredit/getBalanceQuery/getBalanceQuery';

@@ -10,7 +10,7 @@ export const useSocialProviders = (redirectRoute?: string) => {
     {
       // eslint-disable-next-line lingui/no-unlocalized-strings
       name: 'Google',
-      imageUrl: google.src,
+      image: google,
       onClick: async () => {
         await track<GoogleLoginEvent>('loginGoogle', {
           date: new Date().toUTCString(),

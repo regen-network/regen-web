@@ -167,7 +167,7 @@ export const MyEcocredits = (): JSX.Element => {
   const onButtonClick = (): void => {
     handleTxModalClose();
     if (txButtonTitle === _(CREATE_SELL_ORDER_BUTTON) && !error) {
-      navigate('/storefront');
+      navigate('/dashboard/sell');
     }
     if (txButtonTitle === _(RETIRE_SUCCESS_BUTTON) && !error) {
       setActivePortfolioTab(1);

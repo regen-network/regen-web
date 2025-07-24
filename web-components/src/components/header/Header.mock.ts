@@ -8,10 +8,6 @@ export const headerMenuItemsMock: Item[] = [
     href: '/projects',
   },
   {
-    title: 'Trade',
-    href: '/storefront',
-  },
-  {
     title: 'Activity',
     href: '/stats/activity',
   },

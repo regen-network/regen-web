@@ -23,6 +23,7 @@ import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllPro
 import { useWallet } from 'lib/wallet/wallet';
 
 import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
+import { useOrders } from 'pages/Orders/hooks/useOrders';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
@@ -43,7 +44,6 @@ import {
 } from './Dashboard.utils';
 import { ViewProfileButton } from './Dashboard.ViewProfileButton';
 import { useBridgeAvailability } from './hooks/useBridgeAvailabilty';
-import { useOrdersAvailability } from './hooks/useOrdersAvailability';
 import { usePathSection } from './hooks/usePathSection';
 import { useFetchProjectByAdmin } from './MyProjects/hooks/useFetchProjectsByAdmin';
 
@@ -159,7 +159,8 @@ export const Dashboard = () => {
     return privActiveAccount?.email || '';
   }, [activeAccount, wallet, privActiveAccount?.email]);
 
-  const { hasOrders, isLoading: ordersLoading } = useOrdersAvailability();
+  const { orders, isLoading: ordersLoading } = useOrders();
+  const hasOrders = orders && orders.length > 0;
 
   const { hasAnyBridgeCredits, isLoading: bridgeLoading } =
     useBridgeAvailability();

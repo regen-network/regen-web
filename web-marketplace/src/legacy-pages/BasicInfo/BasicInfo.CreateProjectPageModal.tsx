@@ -6,6 +6,8 @@ import { Body, Title } from 'web-components/src/components/typography';
 
 import { AllCreateProjectPageQuery } from 'generated/sanity-graphql';
 
+import { Step } from './BasicInfo.CreateProjectPageModal.Step';
+
 type Props = {
   sanityCreateProjectPageData: AllCreateProjectPageQuery;
 } & RegenModalProps;
@@ -40,24 +42,7 @@ export const CreateProjectPageModal = ({
             <BlockContent content={createProjectPagePopup.guidesLinkRaw} />
           </TextButton>
           {createProjectPagePopup.steps?.map(step => (
-            <div
-              className="mb-10 flex items-start gap-10 bg-grey-0 p-15 border border-solid border-grey-300 rounded-[5px]"
-              key={step?.title}
-            >
-              <img
-                width="100px"
-                src={
-                  step?.image?.imageHref ?? step?.image?.image?.asset?.url ?? ''
-                }
-                alt={step?.image?.imageAlt || ''}
-              />
-              <div>
-                <Title className="pb-10 text-base">{step?.title}</Title>
-                <Body size="sm">
-                  <BlockContent content={step?.bodyRaw} />
-                </Body>
-              </div>
-            </div>
+            <Step key={step?.title} step={step} />
           ))}
           <ContainedButton className="mt-30 float-right" onClick={onClose}>
             {createProjectPagePopup.buttonLabel}

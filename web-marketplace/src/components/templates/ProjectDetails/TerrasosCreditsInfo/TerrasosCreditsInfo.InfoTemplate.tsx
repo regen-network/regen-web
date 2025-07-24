@@ -1,4 +1,5 @@
 import { ButtonBase } from '@mui/material';
+import Image, { StaticImageData } from 'next/image';
 
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Title } from 'web-components/src/components/typography';
@@ -7,7 +8,7 @@ import { LinkType } from 'web-components/src/types/shared/linkType';
 type InfoTemplateProps = {
   upperContent?: JSX.Element;
   title: string;
-  imgSrc: string;
+  imgSrc: string | StaticImageData;
   imgAlt: string;
   description: string | JSX.Element;
   children: JSX.Element;
@@ -31,7 +32,7 @@ export const InfoTemplate = ({
           <Title variant="h3" mobileVariant="h5">
             {title}
           </Title>
-          <img src={imgSrc} alt={imgAlt} className="h-50 w-50" />
+          <Image src={imgSrc} alt={imgAlt} className="h-50 w-50" />
         </div>
         <div className="my-10">{description}</div>
         <ButtonBase

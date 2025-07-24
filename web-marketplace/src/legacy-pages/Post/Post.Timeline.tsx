@@ -6,6 +6,7 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import { Grid } from '@mui/material';
+import Image from 'next/image';
 
 import Section from 'web-components/src/components/section';
 import {
@@ -67,7 +68,7 @@ export const PostTimeline = ({
           return (
             <TimelineItem key={event.timestamp}>
               <TimelineSeparator>
-                <img src={event.icon} alt={event.label} />
+                <Image src={event.icon} alt={event.label} />
                 {index < events.length - 1 && (
                   <TimelineConnector className="bg-grey-300 w-1 mr-[2px]" />
                 )}

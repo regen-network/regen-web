@@ -17,7 +17,7 @@ import { getEcocreditsQuery } from 'lib/queries/react-query/ecocredit/getEcocred
 import { getEcocreditsQueryKey } from 'lib/queries/react-query/ecocredit/getEcocreditsQuery/getEcocreditsQuery.utils';
 
 import { useLedger } from '../ledger';
-import { client as sanityClient } from '../lib/clients/sanity';
+import { client as sanityClient } from '../lib/clients/apolloSanity';
 import useQueryBalances from './useQueryBalances';
 
 const hasBatchBalance = (batchWithBalance: BatchInfoWithBalance): boolean => {

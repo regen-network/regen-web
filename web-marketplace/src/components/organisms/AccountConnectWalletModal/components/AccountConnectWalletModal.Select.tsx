@@ -4,8 +4,8 @@ import { Box } from '@mui/system';
 import { Body, Title } from 'web-components/src/components/typography';
 
 import { Link } from 'components/atoms/Link';
+import { LoginProvider } from 'components/organisms/LoginModal/LoginModal.types';
 
-import { LoginProvider } from '../AccountConnectWalletModal.types';
 import { LoginModalProviders } from './AccountConnectWalletModal.Providers';
 
 export interface Props {

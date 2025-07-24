@@ -1,5 +1,18 @@
 fragment imageFields on Image {
   asset {
+    _id
     url
+    altText
+    metadata {
+      dimensions {
+        height
+        width
+        aspectRatio
+      }
+      lqip
+      blurHash
+      hasAlpha
+      isOpaque
+    }
   }
 }

@@ -10,7 +10,7 @@ import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/g
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
-import { client as sanityClient } from '../../lib/clients/sanity';
+import { client as sanityClient } from '../../lib/clients/apolloSanity';
 
 type LoaderType = {
   queryClient: QueryClient;

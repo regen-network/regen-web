@@ -67,7 +67,7 @@ const BuyersFeaturedProjectsSection = ({ content, sx }: Props) => {
                 address: '',
                 type: 'ORGANIZATION',
                 link,
-                image: image?.asset?.url,
+                image: image?.asset?.url || '',
               }}
               draftText={DRAFT_TEXT}
               bodyTexts={projectCardBodyTextMapping}

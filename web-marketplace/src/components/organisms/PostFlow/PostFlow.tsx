@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { ContentHash_Graph } from '@regen-network/api/regen/data/v2/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
+import { useRouter } from 'next/navigation';
 import { postData } from 'utils/fetch/postData';
 
 import Modal from 'web-components/src/components/modal';
@@ -53,7 +53,6 @@ type Props = {
   projectSlug?: string | null;
   offChainProjectId?: string;
   setDraftPost?: UseStateSetter<Partial<PostFormSchemaType> | undefined>;
-  scrollIntoDataStream?: () => void;
   disableScrollLock?: boolean;
 };
 
@@ -66,7 +65,6 @@ export const PostFlow = ({
   projectSlug,
   offChainProjectId: _offChainProjectId,
   setDraftPost,
-  scrollIntoDataStream,
   disableScrollLock = false,
 }: Props) => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
@@ -90,7 +88,7 @@ export const PostFlow = ({
     }),
   );
   const { _ } = useLingui();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const [offChainProjectId, setOffChainProjectId] =
     useState(_offChainProjectId);
@@ -201,12 +199,11 @@ export const PostFlow = ({
           setDraftPost(undefined);
         }
         onModalClose();
-        navigate(
+        router.push(
           `/project/${
             projectSlug ?? offChainProjectId ?? projectId
           }#data-stream`,
         );
-        scrollIntoDataStream && scrollIntoDataStream();
       }
     }
   }, [
@@ -218,12 +215,11 @@ export const PostFlow = ({
     initialValues?.iri,
     iri,
     isFetching,
-    navigate,
+    router,
     offChainProjectId,
     onModalClose,
     projectId,
     projectSlug,
-    scrollIntoDataStream,
     setBannerText,
     setDraftPost,
     setProcessingModalAtom,

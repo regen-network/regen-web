@@ -445,8 +445,8 @@ msgstr ""
 msgid "Amazon"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:125
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:121
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:125
 #: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:144
 msgid "amount"
 msgstr ""
@@ -462,7 +462,6 @@ msgstr ""
 msgid "Amount available"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty.tsx:51
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:34
 msgid "AMOUNT AVAILABLE"
 msgstr ""
@@ -581,8 +580,7 @@ msgstr ""
 msgid "approved methodologies"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.tsx:248
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:112
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:113
 msgid "Are you sure you want to cancel this sell order?"
 msgstr ""
 
@@ -698,7 +696,7 @@ msgstr ""
 msgid "BATCH DENOM"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.utils.ts:46
+#: src/features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow.utils.ts:23
 msgid "batch denom:"
 msgstr ""
 
@@ -816,10 +814,9 @@ msgid "buffer pool accounts"
 msgstr ""
 
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:3
-msgid "Buy"
-msgstr ""
+#~ msgid "Buy"
+#~ msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:4
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:218
 msgid "BUY"
 msgstr ""
@@ -911,8 +908,8 @@ msgstr ""
 msgid "cancel"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:8
 #: src/lib/constants/shared.constants.tsx:42
+#: src/features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow.constants.ts:5
 msgid "Cancel"
 msgstr ""
 
@@ -1317,11 +1314,11 @@ msgstr ""
 msgid "Credit Batch Details"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:121
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:129
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:122
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:233
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:114
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:121
 #: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:140
 msgid "credit batch id"
 msgstr ""
@@ -2241,8 +2238,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:11
-msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future! "
-msgstr ""
+#~ msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future! "
+#~ msgstr ""
 
 #: src/components/organisms/PostFlow/PostFlow.SignModal.tsx:91
 msgid "I verify this data is accurate to the best of my knowledge"
@@ -3308,8 +3305,8 @@ msgstr ""
 msgid "Price of credits for prefinance projects have specific terms, please click on the project to learn more."
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:89
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:188
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:89
 msgid "price per credit"
 msgstr ""
 
@@ -3392,12 +3389,12 @@ msgstr ""
 msgid "Program Guide"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:114
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:120
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:226
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:107
 #: src/pages/BuyCredits/BuyCredits.utils.tsx:299
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:114
 #: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:5
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:86
@@ -3616,7 +3613,7 @@ msgstr ""
 msgid "Put in basket"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.utils.ts:44
+#: src/features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow.utils.ts:21
 msgid "quantity:"
 msgstr ""
 
@@ -3783,7 +3780,7 @@ msgstr ""
 msgid "Restoration Factor:"
 msgstr ""
 
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:109
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:108
 msgid "Retirable"
 msgstr ""
 
@@ -3999,10 +3996,10 @@ msgid "Sell"
 msgstr ""
 
 #: src/pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty.tsx:48
-msgid "Sell order"
-msgstr ""
+#~ msgid "Sell order"
+#~ msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:7
+#: src/features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow.constants.ts:4
 msgid "Sell Order #"
 msgstr ""
 
@@ -4015,11 +4012,10 @@ msgstr ""
 msgid "SELL ORDER ID"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.utils.ts:43
+#: src/features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow.utils.ts:20
 msgid "sell order id:"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.tsx:154
 #: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:48
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
 msgid "Sell orders"
@@ -4693,7 +4689,7 @@ msgstr ""
 msgid "Toucan Vintage Token Id"
 msgstr ""
 
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:102
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:101
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:109
 msgid "Tradable"
 msgstr ""
@@ -4907,7 +4903,7 @@ msgstr ""
 msgid "Videos"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:9
+#: src/features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow.constants.ts:6
 msgid "View all sell orders"
 msgstr ""
 
@@ -5122,8 +5118,7 @@ msgstr ""
 msgid "whoops, cancel"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.tsx:247
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:111
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:112
 msgid "WHOOPS, EXIT"
 msgstr ""
 
@@ -5147,8 +5142,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.tsx:246
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:110
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:111
 msgid "Yes, cancel sell order"
 msgstr ""
 
@@ -5340,7 +5334,7 @@ msgstr ""
 msgid "Your retirement was successful!"
 msgstr ""
 
-#: src/pages/Marketplace/Storefront/Storefront.constants.ts:6
+#: src/features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow.constants.ts:3
 msgid "Your sell order was cancelled"
 msgstr ""
 

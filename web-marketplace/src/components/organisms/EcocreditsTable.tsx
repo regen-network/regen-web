@@ -117,49 +117,54 @@ export const EcocreditsTable: React.FC<
         <Trans>Batch End Date</Trans>,
         <Trans>Project Location</Trans>,
       ]}
-      rows={credits.map((row, i) => {
-        return [
-          <WithLoader isLoading={row.projectName === ''} variant="skeleton">
-            <Link
-              href={`/project/${row?.projectId}`}
-              sx={tableStyles.ellipsisColumn}
+      rows={
+        credits?.map((row, i) => {
+          return [
+            <WithLoader isLoading={row.projectName === ''} variant="skeleton">
+              <Link
+                href={`/project/${row?.projectId}`}
+                sx={tableStyles.ellipsisColumn}
+              >
+                {row?.projectName}
+              </Link>
+            </WithLoader>,
+            <WithLoader isLoading={!row.denom} variant="skeleton">
+              <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>
+            </WithLoader>,
+            <WithLoader isLoading={row.classId === ''} variant="skeleton">
+              <Link
+                href={`/credit-classes/${row.classId}`}
+                sx={tableStyles.ellipsisContentColumn}
+              >
+                {row?.className && <BlockContent content={row?.className} />}
+              </Link>
+            </WithLoader>,
+            formatNumber({
+              num: row.balance?.tradableAmount,
+              ...quantityFormatNumberOptions,
+            }),
+            formatNumber({
+              num: row.balance?.retiredAmount,
+              ...quantityFormatNumberOptions,
+            }),
+            formatNumber({
+              num: row.balance?.escrowedAmount,
+              ...quantityFormatNumberOptions,
+            }),
+            <WithLoader isLoading={!row.denom} variant="skeleton">
+              <AccountLink address={row.issuer} />
+            </WithLoader>,
+            <GreyText>{formatDate(row.startDate, undefined, true)}</GreyText>,
+            <GreyText>{formatDate(row.endDate, undefined, true)}</GreyText>,
+            <WithLoader
+              isLoading={row.projectLocation === ''}
+              variant="skeleton"
             >
-              {row?.projectName}
-            </Link>
-          </WithLoader>,
-          <WithLoader isLoading={!row.denom} variant="skeleton">
-            <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>
-          </WithLoader>,
-          <WithLoader isLoading={row.classId === ''} variant="skeleton">
-            <Link
-              href={`/credit-classes/${row.classId}`}
-              sx={tableStyles.ellipsisContentColumn}
-            >
-              {row?.className && <BlockContent content={row?.className} />}
-            </Link>
-          </WithLoader>,
-          formatNumber({
-            num: row.balance?.tradableAmount,
-            ...quantityFormatNumberOptions,
-          }),
-          formatNumber({
-            num: row.balance?.retiredAmount,
-            ...quantityFormatNumberOptions,
-          }),
-          formatNumber({
-            num: row.balance?.escrowedAmount,
-            ...quantityFormatNumberOptions,
-          }),
-          <WithLoader isLoading={!row.denom} variant="skeleton">
-            <AccountLink address={row.issuer} />
-          </WithLoader>,
-          <GreyText>{formatDate(row.startDate, undefined, true)}</GreyText>,
-          <GreyText>{formatDate(row.endDate, undefined, true)}</GreyText>,
-          <WithLoader isLoading={row.projectLocation === ''} variant="skeleton">
-            <Box>{row.projectLocation}</Box>
-          </WithLoader>,
-        ];
-      })}
+              <Box>{row.projectLocation}</Box>
+            </WithLoader>,
+          ];
+        }) || []
+      }
       /* eslint-enable react/jsx-key */
     />
   );

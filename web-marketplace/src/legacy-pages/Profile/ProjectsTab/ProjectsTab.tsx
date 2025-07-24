@@ -13,6 +13,7 @@ import { API_URI, IMAGE_STORAGE_BASE_URL } from 'lib/env';
 import { useTracker } from 'lib/tracker/useTracker';
 
 import WithLoader from 'components/atoms/WithLoader';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick.legacy';
 
 import { useProfileData } from '../hooks/useProfileData';
 import { NoProjectsDisplay } from './NoProjectsDisplay';

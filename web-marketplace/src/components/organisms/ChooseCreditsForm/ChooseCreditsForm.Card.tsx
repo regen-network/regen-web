@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 import InfoCard from 'web-components/src/components/molecules/InfoCard';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { getSanityImgSrc } from 'lib/imgSrc';
 import { getBuyFlowChooseCreditsCardQuery } from 'lib/queries/react-query/sanity/getBuyFlowChooseCreditsCardQuery/getBuyFlowChooseCreditsCardQuery';
 

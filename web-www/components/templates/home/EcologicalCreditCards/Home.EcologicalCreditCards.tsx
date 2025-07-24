@@ -40,13 +40,15 @@ const EcologicalCreditCardsSection = ({ ecologicalCreditCardsData }: Props) => {
               sx={{ mb: { xs: 5, sm: 7.5 } }}
               {...card}
             >
-              <Image
-                src={card.image.src}
-                alt={String(card.title)}
-                width={400}
-                height={492}
-                className={classes.image}
-              />
+              {card.image.src && (
+                <Image
+                  src={card.image.src}
+                  alt={String(card.title)}
+                  width={400}
+                  height={492}
+                  className={classes.image}
+                />
+              )}
             </EcologicalCreditCard>
           );
         })}

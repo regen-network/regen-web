@@ -20,7 +20,7 @@ import { Account } from 'web-components/src/components/user/UserInfo';
 
 import { QueryClient, useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { AnchoredProjectMetadataLD } from 'lib/db/types/json-ld';
 import { IS_REGEN, IS_TERRASOS, SKIPPED_CLASS_ID } from 'lib/env';
 import {

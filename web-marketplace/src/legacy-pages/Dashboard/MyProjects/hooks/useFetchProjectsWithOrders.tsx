@@ -7,7 +7,7 @@ import { Maybe, ProjectFieldsFragment } from 'generated/graphql';
 import { AllCreditClassQuery } from 'generated/sanity-graphql';
 import { QueryClient, useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { normalizeProjectsWithMetadata } from 'lib/normalizers/projects/normalizeProjectsWithMetadata';
 import { normalizeProjectsWithOrderData } from 'lib/normalizers/projects/normalizeProjectsWithOrderData';
 import { getSellOrdersExtendedQuery } from 'lib/queries/react-query/ecocredit/marketplace/getSellOrdersExtendedQuery/getSellOrdersExtendedQuery';

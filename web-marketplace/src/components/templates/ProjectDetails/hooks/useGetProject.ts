@@ -15,7 +15,7 @@ import { getProjectByIdQuery } from 'lib/queries/react-query/sanity/getProjectBy
 
 import { useBuySellOrderData } from 'hooks/useBuySellOrderData';
 
-import { client as sanityClient } from '../../../../lib/clients/sanity';
+import { client as sanityClient } from '../../../../lib/clients/apolloSanity';
 import { getIsOnChainId, getIsUuid } from '../ProjectDetails.utils';
 
 export const useGetProject = ({ projectId }: { projectId?: string }) => {

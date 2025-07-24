@@ -14,7 +14,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useAuth } from 'lib/auth/auth';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import {
   DISCARD_CHANGES_BODY,
   DISCARD_CHANGES_BUTTON,

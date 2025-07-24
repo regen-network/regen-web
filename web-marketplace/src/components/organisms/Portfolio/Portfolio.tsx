@@ -56,6 +56,11 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   const { _ } = useLingui();
   const navigate = useNavigate();
 
+  const hasMorePages =
+    (initialPaginationParams?.count ?? 0) >
+    (initialPaginationParams?.rowsPerPage ?? 0);
+  const noEcocredits = !credits || (!credits?.length && !hasMorePages);
+
   const tabs: IconTabProps[] = useMemo(
     () => [
       {
@@ -67,6 +72,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
             onTableChange={onTableChange}
             initialPaginationParams={initialPaginationParams}
             isIgnoreOffset={isIgnoreOffset}
+            noEcocredits={noEcocredits}
           />
         ),
         hidden: hideEcocredits,
@@ -107,6 +113,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
       onTableChange,
       initialPaginationParams,
       isIgnoreOffset,
+      noEcocredits,
       hideEcocredits,
       retirements,
       onRetirementTableChange,
@@ -120,7 +127,10 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
 
   return (
     <Box>
-      <Card>
+      <Card
+        elevation={0}
+        className={noEcocredits ? 'border-sc-card-standard-stroke' : ''}
+      >
         <IconTabs
           tabs={tabs}
           size={'xl'}

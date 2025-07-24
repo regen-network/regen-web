@@ -17,6 +17,7 @@ import DenomLabel from 'components/molecules/DenomLabel';
 import { getAccountUrl } from '../../../lib/block-explorer';
 import { Link } from '../../atoms';
 import WithLoader from '../../atoms/WithLoader';
+import { NormalizedSellOrder } from '../UserSellOrders/hooks/useNormalizedSellOrders';
 import {
   MAXIMUM_FRACTION_DIGITS,
   MINIMUM_FRACTION_DIGITS,

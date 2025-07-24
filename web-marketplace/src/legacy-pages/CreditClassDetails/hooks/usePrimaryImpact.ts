@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { getEcologicalImpactByIriQuery } from 'lib/queries/react-query/sanity/getEcologicalImpactByIriQuery/getEcologicalImpactByIriQuery';
 
-import { client } from '../../../lib/clients/sanity';
+import { client } from '../../../lib/clients/apolloSanity';
 
 interface InputProps {
   primaryImpactIRI?: string;

@@ -16,12 +16,12 @@ import { Body, Title } from 'web-components/src/components/typography';
 import { CREDIT_UNIT_DEFINITION } from './DetailsSection.constants';
 
 type Props = {
-  src: string;
+  image?: JSX.Element;
   label: string;
   learnMore?: SanityBlockContent | null;
 };
 
-export const DetailsSectionCredit = ({ src, label, learnMore }: Props) => {
+export const DetailsSectionCredit = ({ image, label, learnMore }: Props) => {
   const { _ } = useLingui();
   const [open, setOpen] = useState(false);
   return (
@@ -37,11 +37,7 @@ export const DetailsSectionCredit = ({ src, label, learnMore }: Props) => {
             height: { xs: 90, sm: 104 },
           }}
         >
-          <Box
-            sx={{ margin: 'auto', maxWidth: '100%' }}
-            component="img"
-            src={src}
-          />
+          {image}
         </Flex>
         <Title variant="h6" align="center" pt={2.5}>
           {label}

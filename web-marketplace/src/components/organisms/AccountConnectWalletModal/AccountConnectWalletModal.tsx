@@ -2,10 +2,8 @@ import { Box } from '@mui/system';
 
 import Modal, { RegenModalProps } from 'web-components/src/components/modal';
 
-import {
-  AccountConnectModalState,
-  LoginProvider,
-} from './AccountConnectWalletModal.types';
+import { LoginProvider } from '../LoginModal/LoginModal.types';
+import { AccountConnectModalState } from './AccountConnectWalletModal.types';
 import { LoginModalSelect } from './components/AccountConnectWalletModal.Select';
 
 export interface Props extends RegenModalProps {

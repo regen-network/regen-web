@@ -1,8 +1,7 @@
-import { ImageType } from '../../../types/shared/imageType';
 import { LinkType } from '../../../types/shared/linkType';
 
 export type RoundLogoItemType = {
-  image: ImageType;
+  image: JSX.Element;
   link: LinkType;
 };
 

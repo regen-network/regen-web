@@ -12,16 +12,18 @@ import { Loading } from 'web-components/src/components/loading';
 import Modal from 'web-components/src/components/modal';
 import SEO from 'web-components/src/components/seo';
 import { Body, Title } from 'web-components/src/components/typography';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { SKIPPED_CLASS_ID } from 'lib/env';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { SanityNextImage } from 'components/atoms/SanityNextImage';
 import WithLoader from 'components/atoms/WithLoader';
 import BlockContentBody from 'components/molecules/BlockContentBody';
 
-import horsesImg from '../../assets/horses-grazing.png';
+import horsesImg from '../../../public/png/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
 import {
   BackgroundImgSection,
@@ -29,7 +31,7 @@ import {
   HeroAction,
 } from '../../components/molecules';
 import { CreditClassCards } from '../../components/organisms';
-import { client as sanityClient } from '../../lib/clients/sanity';
+import { client as sanityClient } from '../../lib/clients/apolloSanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 import { useCreditClasses } from './hooks/useCreditClasses';
@@ -41,7 +43,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { isKeplrMobileWeb } = useWallet();
 
-  const { classes, cx } = useHomeStyles();
+  const { classes } = useHomeStyles();
 
   const { data: allHomePageData, isFetching: isFetchingAllHomePage } = useQuery(
     getAllHomePageQuery({
@@ -96,11 +98,9 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
       <BackgroundImgSection
         img={heroSection?.background?.image?.asset?.url || ''}
         linearGradient="linear-gradient(180deg, rgba(0, 0, 0, 0.30) 20.79%, rgba(0, 0, 0, 0.15) 100%)"
-        classes={{ section: classes.section }}
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          height: [600, 600, 760],
+        classes={{
+          root: 'flex items-center h-[600px] md:h-[760px]',
+          section: classes.section,
         }}
       >
         <Box
@@ -148,19 +148,20 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
               sx={{ mt: { xs: 4, sm: 4 } }}
             />
           </Box>
-          <Box
-            sx={{
-              alignSelf: 'center',
-              maxWidth: ['252px', '560px'],
-            }}
-          >
-            <img
-              loading="lazy"
-              style={{ width: '100%' }}
-              src={heroSection?.icon?.image?.asset?.url || ''}
-              alt={heroSection?.icon?.imageAlt || 'icon'}
-            />
-          </Box>
+          {heroSection?.icon?.image && (
+            <Box
+              sx={{
+                alignSelf: 'center',
+                maxWidth: ['252px', '560px'],
+              }}
+            >
+              <SanityNextImage
+                className="w-full"
+                image={heroSection?.icon?.image}
+                alt={heroSection?.icon?.imageAlt || 'icon'}
+              />
+            </Box>
+          )}
         </Box>
       </BackgroundImgSection>
 
@@ -174,15 +175,11 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
 
       {creditClasses && (
         <BackgroundImgSection
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
           title={creditClassesSection?.title || _(msg`Credit Classes`)}
           classes={{
-            root: cx(
+            root: cn(
               classes.creditClassBackground,
-              'topo-background',
+              'flex items-center topo-background',
               isKeplrMobileWeb && 'dark',
             ),
             title: classes.title,

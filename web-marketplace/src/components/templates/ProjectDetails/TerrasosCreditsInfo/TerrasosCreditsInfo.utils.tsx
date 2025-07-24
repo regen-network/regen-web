@@ -109,18 +109,24 @@ export function getDurationCard(
       ]}
     >
       <DurationBody
-        title={plural(years, {
-          one: `${years} year project duration`,
-          other: `${years} year project duration`,
-        })}
-        minDurationLabel={plural(minimumDuration, {
-          one: `${minimumDuration} year minimum`,
-          other: `${minimumDuration} years minimum`,
-        })}
-        maxDurationLabel={plural(minimumDuration, {
-          one: `${maxDurationPrefix}${maximumDuration} year`,
-          other: `${maxDurationPrefix}${maximumDuration} years`,
-        })}
+        title={_(
+          msg`${plural(years, {
+            one: `${years} year project duration`,
+            other: `${years} year project duration`,
+          })}`,
+        )}
+        minDurationLabel={_(
+          msg`${plural(minimumDuration, {
+            one: `${minimumDuration} year minimum`,
+            other: `${minimumDuration} years minimum`,
+          })}`,
+        )}
+        maxDurationLabel={_(
+          msg`${plural(minimumDuration, {
+            one: `${maxDurationPrefix}${maximumDuration} year`,
+            other: `${maxDurationPrefix}${maximumDuration} years`,
+          })}`,
+        )}
         minimumValue={minimumDuration}
         maximumValue={maximumDuration}
         duration={years}

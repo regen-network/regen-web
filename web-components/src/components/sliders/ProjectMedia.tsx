@@ -28,183 +28,169 @@ interface ProjectMediaProps extends OptimizeImageProps {
   assets: Asset[];
   imageCredits?: string;
   xsBorderRadius?: boolean;
-  mobileHeight?: string | number;
   isPrefinanceProject?: boolean | null;
   bodyTexts: ProjectCardBodyTextsMapping;
 }
 
 interface StyleProps {
   xsBorderRadius: boolean;
-  mobileHeight?: string | number;
 }
 
 export function isMedia(a: Asset): a is Media {
   return (a as Media).src !== undefined;
 }
 
-const useStyles = makeStyles<StyleProps>()(
-  (theme, { xsBorderRadius, mobileHeight }) => ({
-    root: {
-      [theme.breakpoints.down('sm')]: {
-        marginBottom: theme.spacing(8.75),
+const useStyles = makeStyles<StyleProps>()((theme, { xsBorderRadius }) => ({
+  root: {
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: theme.spacing(8.75),
+    },
+    '& .slick-dots': {
+      bottom: 'auto',
+      overflow: 'hidden',
+      '& ul': {
+        padding: 0,
+        whiteSpace: 'nowrap',
       },
-      '& .slick-slide img': {
-        [theme.breakpoints.down('sm')]: {
-          height: mobileHeight ? mobileHeight : 'inherit',
-          objectFit: mobileHeight ? 'cover' : 'inherit',
-          objectPosition: '0% 0%',
-        },
-      },
-      '& .slick-dots': {
-        bottom: 'auto',
-        overflow: 'hidden',
+      [theme.breakpoints.up('sm')]: {
+        textAlign: 'left',
+        paddingTop: theme.spacing(3.5),
         '& ul': {
-          padding: 0,
-          whiteSpace: 'nowrap',
-        },
-        [theme.breakpoints.up('sm')]: {
-          textAlign: 'left',
-          paddingTop: theme.spacing(3.5),
-          '& ul': {
-            marginLeft: '-8px',
-            '& li': {
-              width: 60,
-              height: 60,
-              margin: '0 8px',
-              '&.slick-active': {
-                '& img': {
-                  border: `2px solid ${theme.palette.secondary.dark}`,
-                },
+          marginLeft: '-8px',
+          '& li': {
+            width: 60,
+            height: 60,
+            margin: '0 8px',
+            '&.slick-active': {
+              '& img': {
+                border: `2px solid ${theme.palette.secondary.dark}`,
               },
             },
           },
         },
-        [theme.breakpoints.down('sm')]: {
-          height: theme.spacing(6),
-          '& ul': {
-            margin: '8px 0 -6.5px',
-            '& li': {
-              width: theme.spacing(2.5),
-              margin: '0 6.5px',
-              '&.slick-active': {
-                '& div': {
-                  backgroundColor: theme.palette.secondary.dark,
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-    thumbnail: {
-      position: 'relative',
-      display: 'inline-block',
-      '& img': {
-        width: 60,
-        height: 60,
-        borderRadius: '5px',
-        // border: `1px solid ${theme.palette.info.light}`,
-        boxSizing: 'border-box',
-        objectFit: 'cover',
-      },
-    },
-    play: {
-      position: 'absolute',
-      left: 19,
-      top: 19,
-      width: 22,
-      height: 22,
-      backgroundColor: theme.palette.primary.main,
-      borderRadius: '50%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    item: {
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        borderRadius: '5px',
       },
       [theme.breakpoints.down('sm')]: {
-        borderRadius: xsBorderRadius ? '5px' : 'none',
+        height: theme.spacing(6),
+        '& ul': {
+          margin: '8px 0 -6.5px',
+          '& li': {
+            width: theme.spacing(2.5),
+            margin: '0 6.5px',
+            '&.slick-active': {
+              '& div': {
+                backgroundColor: theme.palette.secondary.dark,
+              },
+            },
+          },
+        },
       },
     },
-    dot: {
-      height: theme.spacing(2.5),
-      width: theme.spacing(2.5),
-      backgroundColor: theme.palette.grey[100],
-      borderRadius: '50%',
-    },
-    sideGrid: {
-      flexGrow: 0,
-      maxWidth: '37%',
-      flexBasis: '37%',
-      maxHeight: theme.spacing(113),
-      position: 'relative',
-    },
-    centreGrid: {
-      flexGrow: 0,
-      maxWidth: '26%',
-      flexBasis: '26%',
-      maxHeight: theme.spacing(113),
-    },
-    imageContainer: {
-      paddingLeft: theme.spacing(2.5),
-      paddingRight: theme.spacing(2.5),
-      height: '50%',
-      '&:first-child': {
-        paddingBottom: theme.spacing(1.25),
-      },
-      '&:last-child': {
-        paddingTop: theme.spacing(1.25),
-      },
-    },
-    image: {
-      width: '100%',
-      height: '100%',
-      objectFit: 'cover',
+  },
+  thumbnail: {
+    position: 'relative',
+    display: 'inline-block',
+    '& img': {
+      width: 60,
+      height: 60,
       borderRadius: '5px',
-      objectPosition: '50% 50%',
+      // border: `1px solid ${theme.palette.info.light}`,
+      boxSizing: 'border-box',
+      objectFit: 'cover',
     },
-    imageCredits: {
-      color: theme.palette.primary.main,
-      position: 'absolute',
-      [theme.breakpoints.up('sm')]: {
-        fontSize: theme.typography.pxToRem(12),
-        left: theme.typography.pxToRem(13),
-        bottom: theme.typography.pxToRem(9),
-      },
-      [theme.breakpoints.down('sm')]: {
-        fontSize: theme.typography.pxToRem(11),
-        left: theme.typography.pxToRem(9),
-        bottom: theme.typography.pxToRem(6),
-      },
+  },
+  play: {
+    position: 'absolute',
+    left: 19,
+    top: 19,
+    width: 22,
+    height: 22,
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  item: {
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      borderRadius: '5px',
     },
-    sliderImageContainer: {
-      position: 'relative',
+    [theme.breakpoints.down('sm')]: {
+      borderRadius: xsBorderRadius ? '5px' : 'none',
     },
-    elementContainer: {
-      position: 'relative',
-      paddingRight: theme.spacing(5),
-      '&:last-child': {
-        paddingRight: 0,
-      },
-      [theme.breakpoints.up('sm')]: {
-        height: theme.spacing(100),
-      },
-      [theme.breakpoints.down('sm')]: {
-        height: theme.spacing(56),
-      },
+  },
+  dot: {
+    height: theme.spacing(2.5),
+    width: theme.spacing(2.5),
+    backgroundColor: theme.palette.grey[100],
+    borderRadius: '50%',
+  },
+  sideGrid: {
+    flexGrow: 0,
+    maxWidth: '37%',
+    flexBasis: '37%',
+    maxHeight: theme.spacing(113),
+    position: 'relative',
+  },
+  centreGrid: {
+    flexGrow: 0,
+    maxWidth: '26%',
+    flexBasis: '26%',
+    maxHeight: theme.spacing(113),
+  },
+  imageContainer: {
+    paddingLeft: theme.spacing(2.5),
+    paddingRight: theme.spacing(2.5),
+    height: '50%',
+    '&:first-child': {
+      paddingBottom: theme.spacing(1.25),
     },
-    element: {
-      [theme.breakpoints.up('sm')]: {
-        borderRadius: '5px',
-        overflow: 'hidden',
-        height: '100%',
-      },
+    '&:last-child': {
+      paddingTop: theme.spacing(1.25),
     },
-  }),
-);
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: '5px',
+    objectPosition: '50% 50%',
+  },
+  imageCredits: {
+    color: theme.palette.primary.main,
+    position: 'absolute',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(12),
+      left: theme.typography.pxToRem(13),
+      bottom: theme.typography.pxToRem(9),
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: theme.typography.pxToRem(11),
+      left: theme.typography.pxToRem(9),
+      bottom: theme.typography.pxToRem(6),
+    },
+  },
+  elementContainer: {
+    position: 'relative',
+    paddingRight: theme.spacing(5),
+    '&:last-child': {
+      paddingRight: 0,
+    },
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(100),
+    },
+    [theme.breakpoints.down('sm')]: {
+      height: theme.spacing(56),
+    },
+  },
+  element: {
+    [theme.breakpoints.up('sm')]: {
+      borderRadius: '5px',
+      overflow: 'hidden',
+      height: '100%',
+    },
+  },
+}));
 
 function getThumbnailStyle(thumbsTranslate: number): object {
   // eslint-disable-next-line lingui/no-unlocalized-strings
@@ -222,14 +208,13 @@ export default function ProjectMedia({
   assets,
   xsBorderRadius = false,
   gridView = false,
-  mobileHeight,
   imageStorageBaseUrl,
   apiServerUrl,
   imageCredits,
   isPrefinanceProject,
   bodyTexts,
 }: ProjectMediaProps): JSX.Element {
-  const { classes } = useStyles({ mobileHeight, xsBorderRadius });
+  const { classes } = useStyles({ xsBorderRadius });
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -377,18 +362,14 @@ export default function ProjectMedia({
             {assets.map((item, index) => {
               if (isMedia(item)) {
                 if (item.type === 'image') {
-                  const image = (
-                    <Image
-                      src={item.src}
-                      className={classes.item}
-                      alt={item.src}
-                      fill
-                    />
-                  );
-
                   return (
-                    <div key={index} className={classes.sliderImageContainer}>
-                      {image}{' '}
+                    <div key={index} className="relative h-[315px]">
+                      <Image
+                        src={item.src}
+                        className="object-left-top object-cover"
+                        alt={item.src}
+                        fill
+                      />
                       {imageCredits && (
                         <div className={classes.imageCredits}>
                           {imageCredits}

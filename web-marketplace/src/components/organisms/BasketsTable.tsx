@@ -19,7 +19,7 @@ import {
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
 
-import basketIcon from '../../assets/svgs/rNCT.svg';
+import basketIcon from '../../../public/svg/rNCT.svg';
 import { NoCredits } from '../molecules';
 
 type BasketTableProps = {

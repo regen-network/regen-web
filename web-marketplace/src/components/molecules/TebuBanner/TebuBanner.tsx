@@ -1,4 +1,3 @@
-import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
 import {
@@ -15,8 +14,7 @@ import { Link } from 'components/atoms';
 export interface TebuBannerProps {
   content: SanityBlockContent;
   learnMoreLink?: LinkType | null;
-  logo?: string | null;
-  logoAlt?: string | null;
+  logo?: JSX.Element;
   className?: string;
   onClose: () => void;
 }
@@ -24,9 +22,9 @@ export interface TebuBannerProps {
 export const TebuBanner = ({
   content,
   learnMoreLink,
-  logo,
   className,
   onClose,
+  logo,
 }: TebuBannerProps) => {
   const { _ } = useLingui();
 
@@ -37,13 +35,7 @@ export const TebuBanner = ({
         className,
       )}
     >
-      {logo && (
-        <img
-          src={logo}
-          alt={_(msg`Tebu banner`)}
-          className="mr-20 sm:mr-30 object-contain"
-        />
-      )}
+      {logo}
       <div
         className="flex flex-col max-w-[620px] gap-10 sm:gap-20 font-montserrat"
         style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}

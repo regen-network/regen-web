@@ -58,6 +58,7 @@ import { PaymentInfoFormSchemaType } from 'components/organisms/PaymentInfoForm/
 import { PaymentInfoFormFiat } from 'components/organisms/PaymentInfoForm/PaymentInfoFormFiat';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
+import infoWithHand from '../../../public/svg/info-with-hand.svg';
 import {
   cardDetailsMissingAtom,
   paymentOptionAtom,
@@ -486,7 +487,7 @@ export const BuyCreditsForm = ({
                 retiring={retiring}
                 onSubmit={agreePurchaseFormSubmit}
                 goToChooseCredits={() => handleActiveStep(0)}
-                imgSrc="/svg/info-with-hand.svg"
+                imgSrc={infoWithHand}
                 country={cardDetails?.country || 'US'}
                 initialValues={{
                   country: data?.country || cardDetails?.country || 'US',
@@ -531,7 +532,7 @@ export const BuyCreditsForm = ({
                 retiring={retiring}
                 onSubmit={agreePurchaseFormSubmit}
                 goToChooseCredits={() => handleActiveStep(0)}
-                imgSrc="/svg/info-with-hand.svg"
+                imgSrc={infoWithHand}
                 country={cardDetails?.country || 'US'}
                 initialValues={{
                   country: data?.country || 'US',

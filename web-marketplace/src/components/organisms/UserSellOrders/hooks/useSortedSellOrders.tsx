@@ -7,7 +7,7 @@ import { SellOrderInfoExtented } from 'lib/queries/react-query/ecocredit/marketp
 
 import { SELL_ORDERS_MAPPING } from 'components/organisms/SellOrdersTable/SellOrdersTable.constants';
 
-import { SellOrdersSortType, sortSellOrders } from '../Storefront.sort';
+import { SellOrdersSortType, sortSellOrders } from '../UserSellOrders.utils';
 
 type Params = {
   sellOrders?: SellOrderInfoExtented[];

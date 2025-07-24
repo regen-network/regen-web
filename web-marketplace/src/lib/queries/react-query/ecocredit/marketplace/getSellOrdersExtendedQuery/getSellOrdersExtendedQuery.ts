@@ -9,10 +9,9 @@ import { FetchSimplePriceResponse } from 'lib/coingecko';
 import { DenomTraceWithHash } from 'lib/ibc/transfer/api';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 
-import { getAskUsdAmount } from 'pages/Marketplace/Storefront/Storefront.utils';
-
 import { getDenomTraceByHashesQuery } from '../../../ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
 import { getFromCacheOrFetch } from '../../../utils/getFromCacheOrFetch';
+import { getAskUsdAmount } from '../getSellOrdersBySellerQuery/getSellOrdersBySellerQuery.utils';
 import { SELL_ORDERS_EXTENTED_KEY } from './getSellOrdersExtendedQuery.constants';
 import {
   ReactQuerySellOrdersExtentedProps,

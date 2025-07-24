@@ -39,7 +39,6 @@ import MyProjects from 'pages/Dashboard/MyProjects';
 import { ecocreditBatchesLoader } from 'pages/EcocreditBatches/EcocreditBatches.loader';
 import Faucet from 'pages/Faucet';
 import { homeLoader } from 'pages/Home/Home.loader';
-import { storefrontLoader } from 'pages/Marketplace/Storefront/Storefront.loader';
 import { projectsLoader } from 'pages/Projects/AllProjects/AllProjects.loader';
 import Settings from 'pages/Settings';
 import { AuthRoute } from 'components/atoms/AuthRoute';
@@ -101,7 +100,6 @@ const VerifyEmail = safeLazy(() => import('../../pages/VerifyEmail'));
 const ProjectEdit = safeLazy(() => import('../../pages/ProjectEdit'));
 const Activity = safeLazy(() => import('../../pages/Activity'));
 const CreateBatch = safeLazy(() => import('../../pages/CreateBatch'));
-const Storefront = safeLazy(() => import('../../pages/Marketplace/Storefront'));
 const ConnectWalletPage = safeLazy(
   () => import('../../pages/ConnectWalletPage'),
 );
@@ -341,13 +339,6 @@ export const getRegenRoutes = ({
             />
           </Route>
           <Route path="stats/activity" element={<Activity />} />
-          <Route
-            path="storefront"
-            element={<Storefront />}
-            loader={storefrontLoader({
-              queryClient: reactQueryClient,
-            })}
-          />
           <Route path="certificate/:id" element={<CertificatePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

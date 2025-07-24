@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { useQuery } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
 import { CelebrateIcon } from 'web-components/src/components/icons/CelebrateIcon';
@@ -15,7 +14,6 @@ import { TxSuccessfulModal } from 'web-components/src/components/modal/TxSuccess
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
-import { useLedger } from 'ledger';
 import {
   connectWalletModalAtom,
   switchWalletModalAtom,
@@ -31,26 +29,24 @@ import {
   TX_MODAL_TITLE,
   TX_SUCCESSFUL_MODAL_TITLE,
 } from 'lib/constants/shared.constants';
-import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
 import useCreateSellOrderSubmit from 'pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit';
 import { CREATE_SELL_ORDER_TITLE } from 'pages/Dashboard/MyEcocredits/MyEcocredits.constants';
-import {
-  getAvailableAmountByBatch,
-  getDenomAllowedOptions,
-} from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
+import { getAvailableAmountByBatch } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 import { Link } from 'components/atoms';
 import { CreateSellOrderModal } from 'components/organisms/CreateSellOrderModal/CreateSellOrderModal';
 import { useMsgClient } from 'hooks';
+
+import { useAllowedDenomOptions } from './hooks/useAllowedDenomOptions';
 
 type CreateSellOrderFlowProps = {
   isFlowStarted: boolean;
   setIsFlowStarted: UseStateSetter<boolean>;
   credits?: BatchInfoWithBalance[];
-  placeholderText?: string;
   refetchSellOrders?: () => void;
   redirectOnSuccess?: boolean;
+  canCreateFiatOrder?: boolean;
 };
 
 /**
@@ -66,9 +62,9 @@ export const CreateSellOrderFlow = ({
   isFlowStarted,
   setIsFlowStarted,
   credits = [],
-  placeholderText,
   refetchSellOrders,
   redirectOnSuccess = true,
+  canCreateFiatOrder,
 }: CreateSellOrderFlowProps): JSX.Element => {
   const { _ } = useLingui();
   // Modal visibility states
@@ -86,7 +82,6 @@ export const CreateSellOrderFlow = ({
   const setSwitchWalletModalAtom = useSetAtom(switchWalletModalAtom);
 
   // Services access
-  const { queryClient } = useLedger();
   const { isConnected } = useWallet();
   const navigate = useNavigate();
 
@@ -163,17 +158,7 @@ export const CreateSellOrderFlow = ({
     onTxBroadcast,
   });
 
-  const { data: allowedDenomsData } = useQuery(
-    getAllowedDenomQuery({
-      client: queryClient,
-      enabled: !!queryClient,
-    }),
-  );
-
-  const allowedDenomOptions = getDenomAllowedOptions({
-    allowedDenoms: allowedDenomsData?.allowedDenoms,
-    _,
-  });
+  const allowedDenomOptions = useAllowedDenomOptions(canCreateFiatOrder);
 
   // Wallet connection and create sell order flow initialization effect
   useEffect(() => {
@@ -211,7 +196,7 @@ export const CreateSellOrderFlow = ({
         onSubmit={createSellOrderSubmit}
         title={_(CREATE_SELL_ORDER_TITLE)}
         allowedDenoms={allowedDenomOptions}
-        placeholderText={placeholderText}
+        canCreateFiatOrder={canCreateFiatOrder}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

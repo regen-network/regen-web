@@ -40,7 +40,7 @@ import {
   QuerySupplyResponse,
 } from '@regen-network/api/regen/ecocredit/v1/query';
 import { QueryClient } from '@tanstack/react-query';
-import { uniq } from 'lodash';
+import uniq from 'lodash/uniq';
 
 import { TablePaginationParams } from 'web-components/src/components/table/ActionsTable';
 

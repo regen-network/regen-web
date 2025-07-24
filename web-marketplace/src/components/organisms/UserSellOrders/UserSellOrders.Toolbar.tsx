@@ -6,6 +6,8 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { useAuth } from 'lib/auth/auth';
+
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
 import { CreateButton } from './UserSellOrders.CreateButton';
@@ -26,6 +28,8 @@ export const UserSellOrdersToolbar = ({
   refetchSellOrders,
 }: UserSellOrdersToolbarProps) => {
   const { _ } = useLingui();
+  const { privActiveAccount, activeAccount } = useAuth();
+
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
   const { credits } = useFetchEcocredits({ isPaginatedQuery: false });
   const tradableCredits =
@@ -69,9 +73,12 @@ export const UserSellOrdersToolbar = ({
             isFlowStarted={isSellFlowStarted}
             setIsFlowStarted={setIsSellFlowStarted}
             credits={tradableCredits}
-            placeholderText={_(msg`Choose batch`)}
             refetchSellOrders={refetchSellOrders}
             redirectOnSuccess={false}
+            canCreateFiatOrder={
+              !!privActiveAccount?.can_use_stripe_connect &&
+              !!activeAccount?.stripeConnectedAccountId
+            }
           />
         </Suspense>
       )}

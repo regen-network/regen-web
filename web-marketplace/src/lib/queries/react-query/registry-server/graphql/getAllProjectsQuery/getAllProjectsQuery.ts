@@ -2,6 +2,7 @@
 import { AllProjectsDocument, AllProjectsQuery } from 'generated/graphql';
 import { jsonLdCompact } from 'lib/rdf';
 
+import { ALL_PROJECTS_QUERY_KEY } from './getAllProjectsQuery.constants';
 import {
   EnglishProjectsMetadata,
   ReactQueryGetAllProjectsParams,
@@ -13,7 +14,7 @@ export const getAllProjectsQuery = ({
   languageCode,
   ...params
 }: ReactQueryGetAllProjectsParams): ReactQueryGetAllProjectsResponse => ({
-  queryKey: ['AllProjectsQuery', languageCode],
+  queryKey: [ALL_PROJECTS_QUERY_KEY, languageCode],
   queryFn: async () => {
     const { data } = await client.query<AllProjectsQuery>({
       query: AllProjectsDocument,

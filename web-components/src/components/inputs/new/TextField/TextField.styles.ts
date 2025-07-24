@@ -70,7 +70,7 @@ export const useTextFieldStyles = makeStyles<UseStylesParams>()(
           fontSize: theme.spacing(3.5),
           height: theme.spacing(12.5), // 8.75
         },
-        '& .MuiSvgIcon-root': {
+        '& .MuiSvgIcon-root:not(.denom-icon)': {
           width: theme.spacing(3.25),
           height: theme.spacing(2.5),
           top: 'calc(50% - 5px)',

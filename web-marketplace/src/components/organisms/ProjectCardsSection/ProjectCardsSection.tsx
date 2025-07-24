@@ -18,7 +18,7 @@ import Section from 'web-components/src/components/section';
 
 import { Maybe, Scalars } from 'generated/sanity-graphql';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import {
   DRAFT_TEXT,
   getProjectCardBodyTextMapping,

@@ -1,13 +1,15 @@
 import { msg } from '@lingui/core/macro';
-import { Box } from '@mui/material';
+import Image from 'next/image';
 
 import RegionIndicatorIcon from 'web-components/src/components/icons/terrasos/ColombiaRegionIcon';
 import HectaresBadge from 'web-components/src/components/icons/terrasos/HectaresBadge';
 import SvgWithSelectedColor from 'web-components/src/components/icons/utils/SvgWithSelectedColor';
 import type { FilterOption } from 'web-components/src/components/organisms/ProjectFilters/ProjectFilters';
 
+import { ImageFieldsFragment } from 'generated/sanity-graphql';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
+import tebuBadge from '../../../../public/svg/tebu-badge.svg';
 import { COMPLIANCE_MARKET, VOLUNTARY_MARKET } from './AllProjects.constants';
 import { ProjectWithOrderData } from './AllProjects.types';
 
@@ -70,23 +72,26 @@ export const filterEcosystemIds = ecosystemTags.map(({ id }) => id);
 
 export function getEcosystemTags(
   _: TranslatorType,
-  ecosystemIcons: Record<string, string>,
+  ecosystemIcons: Record<string, ImageFieldsFragment | undefined | null>,
   ecosystemTypes: string[],
 ): FilterOption[] {
   return ecosystemTags
     .filter(tag => ecosystemTypes.includes(tag.id.toLowerCase()))
-    .map(({ id, name }) => ({
-      name: _(name),
-      id: id,
-      startIcon: (
-        <SvgWithSelectedColor
-          src={ecosystemIcons[id]}
-          sx={ecosystemIconSx}
-          unselectedColor="rgba(var(--sc-icon-standard-disabled))"
-          selectedColor="rgba(var(--sc-icon-ecosystem-400))"
-        />
-      ),
-    }));
+    .map(({ id, name }) => {
+      const src = ecosystemIcons[id]?.asset?.url;
+      return {
+        name: _(name),
+        id: id,
+        startIcon: src ? (
+          <SvgWithSelectedColor
+            src={src}
+            sx={ecosystemIconSx}
+            unselectedColor="rgba(var(--sc-icon-standard-disabled))"
+            selectedColor="rgba(var(--sc-icon-ecosystem-400))"
+          />
+        ) : undefined,
+      };
+    });
 }
 
 export const regionTags = [
@@ -135,10 +140,9 @@ const marketCheckboxes = [
     name: msg`Voluntary`,
     id: VOLUNTARY_MARKET,
     endIcon: (
-      <Box
-        component="img"
-        sx={{ width: '24px' }}
-        src="/svg/tebu-badge.svg"
+      <Image
+        src={tebuBadge}
+        className="w-[24px]"
         // eslint-disable-next-line lingui/no-unlocalized-strings
         alt="Tebu"
       />

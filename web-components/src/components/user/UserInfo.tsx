@@ -17,7 +17,7 @@ export interface User {
   nameRaw?: string | JSX.Element | SanityBlockContent;
   type: UserInfoTypes;
   location?: string;
-  image?: string | null;
+  image?: string;
   description?: string | null;
   link?: string | null;
   timestamp?: string;
@@ -99,7 +99,6 @@ export default function UserInfo({
           href={user.link}
           size={size}
           border={border}
-          icon={user.image}
         />
       </Grid>
       <Grid

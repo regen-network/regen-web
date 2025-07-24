@@ -1,32 +1,17 @@
-import { Box, SxProps } from '@mui/material';
+import { RoundLogoItemType } from '../../molecules/RoundLogoItemsList/RoundLogoItemsList.types';
+import { cn } from '../../../utils/styles/cn';
+type Props = Pick<RoundLogoItemType, 'image'> & { className: string };
 
-import { Theme } from '../../../theme/muiTheme';
-import { ImageType } from '../../../types/shared/imageType';
-import { sxToArray } from '../../../utils/mui/sxToArray';
-
-export interface Props {
-  image: ImageType;
-  sx?: SxProps<Theme>;
-}
-
-const RoundLogo = ({ image, sx = [] }: Props): JSX.Element => {
+const RoundLogo = ({ image, className }: Props): JSX.Element => {
   return (
-    <Box
-      component="img"
-      src={image.src || ''}
-      alt={image.alt}
-      sx={[
-        {
-          borderRadius: '58px',
-          border: theme => `1px solid ${theme.palette.grey[100]}`,
-          backgroundColor: 'primary.main',
-          width: 58,
-          height: 58,
-          p: 1,
-        },
-        ...sxToArray(sx),
-      ]}
-    />
+    <div
+      className={cn(
+        '[&>*]:h-[58px] [&>*]:w-[58px] [&>*]:rounded-[58px] [&>*]:border [&>*]:border-solid [&>*]:border-grey-300 [&>*]:bg-grey-0 [&>*]:p-[4px]',
+        className,
+      )}
+    >
+      {image}
+    </div>
   );
 };
 

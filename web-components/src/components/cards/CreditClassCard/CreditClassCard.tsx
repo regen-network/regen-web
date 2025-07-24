@@ -77,7 +77,6 @@ const CreditClassCard = ({
               zIndex: 1,
               py: { xs: 1, sm: 1.5 },
             }}
-            sxIcon={{ with: 20, height: 20 }}
           />
         )}
         <Box className={classes.image}>

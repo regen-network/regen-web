@@ -67,16 +67,5 @@ export const useCreditClassDetailsSimpleStyles = makeStyles()(
     textContainer: {
       paddingTop: 0,
     },
-    image: {
-      width: '100%',
-      objectFit: 'cover',
-      [theme.breakpoints.up('sm')]: {
-        borderRadius: '5px',
-        maxHeight: theme.spacing(100),
-      },
-      [theme.breakpoints.down('sm')]: {
-        maxHeight: theme.spacing(56),
-      },
-    },
   }),
 );

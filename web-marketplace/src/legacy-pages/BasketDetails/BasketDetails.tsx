@@ -14,7 +14,7 @@ import {
   BasketEcocreditsTable,
   BasketOverview,
 } from '../../components/organisms';
-import { client as sanityClient } from '../../lib/clients/sanity';
+import { client as sanityClient } from '../../lib/clients/apolloSanity';
 import { BasketDetailsSectionLayout } from './BasketDetails.SectionLayout';
 import useBasketDetails from './hooks/useBasketDetails';
 

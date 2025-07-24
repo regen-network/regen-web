@@ -16,7 +16,7 @@ import { BasicInfoFormSchemaType } from 'components/organisms/BasicInfoForm/Basi
 import { useProjectWithMetadata } from 'hooks/projects/useProjectWithMetadata';
 
 import { ProjectFormTemplate } from '../../components/templates/ProjectFormTemplate';
-import { client as sanityClient } from '../../lib/clients/sanity';
+import { client as sanityClient } from '../../lib/clients/apolloSanity';
 import { CreateProjectPageModal } from './BasicInfo.CreateProjectPageModal';
 
 const BasicInfo: React.FC<React.PropsWithChildren<unknown>> = () => {

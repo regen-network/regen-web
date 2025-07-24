@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { CreditClassMetadataLD } from 'lib/db/types/json-ld';
 import { getCreditTypeQuery } from 'lib/queries/react-query/ecocredit/getCreditTypeQuery/getCreditTypeQuery';
 import { getAllCreditTypeQuery } from 'lib/queries/react-query/sanity/getAllCreditTypeQuery/getAllCreditTypeQuery';
@@ -55,6 +55,7 @@ export const useCreditClassDetails = ({ onChainClass, metadata }: Params) => {
   const offsetMethodIconsMapping = getIconsMapping({
     data: sanityOffsetMethodData?.allOffsetMethod,
   });
+
   const generationMethods = metadata?.['regen:offsetGenerationMethod']?.map(
     method => {
       const parsedMethod =
@@ -62,7 +63,7 @@ export const useCreditClassDetails = ({ onChainClass, metadata }: Params) => {
 
       return {
         name: parsedMethod,
-        icon: { src: offsetMethodIconsMapping?.[parsedMethod] ?? '' },
+        icon: offsetMethodIconsMapping?.[parsedMethod.toLowerCase()],
       };
     },
   );

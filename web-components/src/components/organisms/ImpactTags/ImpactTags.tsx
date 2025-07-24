@@ -22,7 +22,6 @@ export interface Props {
   ecosystemLabel: string;
   seeMoreText: string;
   seeLessText: string;
-  overrideIconColor?: boolean;
 }
 
 const ImpactTags = ({
@@ -35,7 +34,6 @@ const ImpactTags = ({
   ecosystemLabel,
   seeMoreText,
   seeLessText,
-  overrideIconColor = false,
 }: Props) => {
   const isImpactCollapsed = impact.length > DEFAULT_COLLAPSED_ITEMS;
   return (
@@ -75,7 +73,6 @@ const ImpactTags = ({
           ecosystems={ecosystems}
           activitiesLabel={activitiesLabel}
           ecosystemLabel={ecosystemLabel}
-          overrideIconColor={overrideIconColor}
         />
       )}
     </Box>

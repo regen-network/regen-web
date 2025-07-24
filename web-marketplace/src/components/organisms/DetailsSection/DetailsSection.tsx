@@ -13,6 +13,7 @@ import { cn } from 'web-components/src/utils/styles/cn';
 import { IS_REGEN, IS_TERRASOS, MARKETPLACE_APP_URL } from 'lib/env';
 
 import { Link } from 'components/atoms';
+import { SanityNextImage } from 'components/atoms/SanityNextImage';
 
 import { DetailsSectionButton } from './DetailsSection.Button';
 import {
@@ -121,7 +122,7 @@ export const DetailsSection: React.FC<
                         wrap="nowrap"
                       >
                         <DetailsSectionCredit
-                          src={credit.creditImage}
+                          image={credit.creditImage}
                           label={_(CREDIT)}
                         />
                         <Grid
@@ -131,7 +132,7 @@ export const DetailsSection: React.FC<
                           =
                         </Grid>
                         <DetailsSectionCredit
-                          src={credit.creditTypeImage}
+                          image={credit.creditTypeImage}
                           label={credit.creditTypeUnit}
                           learnMore={credit.creditTypeUnitDefinition}
                         />
@@ -160,7 +161,7 @@ export const DetailsSection: React.FC<
                   index={index}
                   title={card?.credibilityCard?.title as string}
                   descriptionRaw={card?.credibilityCard?.descriptionRaw}
-                  icon={card?.credibilityCard?.icon?.asset?.url}
+                  icon={<SanityNextImage image={card?.credibilityCard?.icon} />}
                   claims={
                     card?.claims?.map(claim => ({
                       description: claim?.description as string,

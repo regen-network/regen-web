@@ -1,7 +1,5 @@
-import { ImageType } from '../../../types/shared/imageType';
-
 export type CreditClassCardItemType = {
-  icon: ImageType;
+  icon?: JSX.Element;
   name: string;
 };
 

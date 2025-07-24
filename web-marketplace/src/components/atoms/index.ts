@@ -10,6 +10,3 @@ export * from './RegistryIconLink.legacy';
 export * from './RegistryNavLink.legacy';
 export * from './SanityButton';
 export * from './StatusLabel';
-export * from './WrappedImpactCard';
-export * from './WrappedResourcesCard';
-export * from './WrappedStepCard';

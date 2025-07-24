@@ -63,7 +63,6 @@ function Media({
             apiServerUrl={mediaData.apiServerUrl}
             imageStorageBaseUrl={mediaData.imageStorageBaseUrl}
             imageCredits={mediaData.imageCredits}
-            mobileHeight={theme.spacing(78.75)}
             isPrefinanceProject={isPrefinanceProject}
           />
         </Box>

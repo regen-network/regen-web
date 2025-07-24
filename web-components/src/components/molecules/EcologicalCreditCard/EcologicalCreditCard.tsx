@@ -51,7 +51,14 @@ const EcologicalCreditCard = ({
       <Box sx={{ position: 'relative' }}>
         {children}
         <CardRibbon
-          icon={creditCategory.icon}
+          icon={
+            creditCategory.icon.src ? (
+              <img
+                src={creditCategory.icon.src}
+                alt={creditCategory.icon.alt}
+              />
+            ) : undefined
+          }
           label={creditCategory.name}
           sx={{ position: 'absolute', left: 0, top: 48 }}
         />

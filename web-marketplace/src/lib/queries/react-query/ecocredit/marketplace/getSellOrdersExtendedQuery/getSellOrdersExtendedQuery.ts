@@ -29,7 +29,6 @@ export const getSellOrdersExtendedQuery = ({
     if (!client) return undefined;
     let _request = { ...request };
     // Fetching all sell orders
-    // TODO this could potentially be improved with pagination for the storefront page
     let sellOrders: SellOrderInfo[] = [];
     let response: QuerySellOrdersResponse | undefined;
     while (!response || response.pagination?.nextKey?.length) {

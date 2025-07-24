@@ -10,14 +10,14 @@ import { CertificateItem } from './certificate.Item';
 import { useCertificateStyles } from './certificate.styles';
 import { CertificateType } from './certificate.types';
 import { formatCertificateDates } from './certificate.utils';
-
+import Image, { StaticImageData } from 'next/image';
 interface CertificateProps {
   certificateData?: CertificateType;
   background: string;
   labels: Record<string, string>;
   linkComponent: LinkComponentType;
   certificateNotFoundAlt: string;
-  certificateNotFoundSrc: string;
+  certificateNotFoundSrc: StaticImageData;
   certificateNotFoundTitle: string;
   certificateNotFoundDescription: JSX.Element | string;
 }
@@ -33,6 +33,7 @@ export default function Certificate({
   certificateNotFoundDescription,
 }: CertificateProps): JSX.Element {
   const { classes, cx } = useCertificateStyles({ background });
+
   return (
     <Box className={classes.root}>
       <div className={classes.content}>
@@ -140,17 +141,8 @@ export default function Certificate({
                   '@media print': { top: -62 },
                 }}
               >
-                {certificateData.certificateIcon && (
-                  <Box
-                    component="img"
-                    src={certificateData.certificateIcon}
-                    sx={{
-                      width: { xs: 91, sm: 145 },
-                      height: { xs: 91, sm: 145 },
-                      '@media print': { with: 75, height: 75 },
-                    }}
-                  />
-                )}
+                {certificateData.certificateIcon &&
+                  certificateData.certificateIcon}
               </Box>
               <div className={cx(classes.bannerSideRight, classes.bannerSide)}>
                 <Box className={classes.whiteTriangle} />
@@ -270,7 +262,7 @@ export default function Certificate({
           </>
         ) : (
           <div className="flex flex-col items-center max-w-[614px] m-auto py-[100px] sm:py-[250px]">
-            <img src={certificateNotFoundSrc} alt={certificateNotFoundAlt} />
+            <Image src={certificateNotFoundSrc} alt={certificateNotFoundAlt} />
             <Title align="center" variant="h4" className="py-10">
               {certificateNotFoundTitle}
             </Title>

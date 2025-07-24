@@ -1,19 +1,15 @@
-import { Box, SxProps } from '@mui/material';
+import { SxProps } from '@mui/material';
 
 import { LabelSize } from '../../../components/typography/sizing';
 import { Theme } from '../../../theme/muiTheme';
-import { ImageType } from '../../../types/shared/imageType';
-import { sxToArray } from '../../../utils/mui/sxToArray';
 import { Flex } from '../../box';
 import { Label } from '../../typography';
-
 export interface Props {
-  icon: ImageType;
+  icon?: JSX.Element;
   label: string;
   labelSize?: LabelSize;
   labelMobileSize?: LabelSize;
   sx?: SxProps<Theme>;
-  sxIcon?: SxProps<Theme>;
   className?: string;
 }
 const CardRibbon = ({
@@ -22,7 +18,6 @@ const CardRibbon = ({
   labelSize = 'sm',
   labelMobileSize = 'xs',
   sx = [],
-  sxIcon = [],
   className,
 }: Props): JSX.Element => {
   return (
@@ -41,14 +36,7 @@ const CardRibbon = ({
       ]}
       alignItems="center"
     >
-      {icon?.src && (
-        <Box
-          component="img"
-          src={icon?.src}
-          alt={icon?.alt}
-          sx={[{ mr: 2.5, width: 24, height: 24 }, ...sxToArray(sxIcon)]}
-        />
-      )}
+      {icon && <div className="flex mr-10">{icon}</div>}
       <Label
         size={labelSize}
         mobileSize={labelMobileSize}

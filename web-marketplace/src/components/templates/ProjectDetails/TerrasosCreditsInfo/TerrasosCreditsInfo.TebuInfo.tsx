@@ -8,6 +8,7 @@ import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { ProjectPageMetadataLD } from 'lib/db/types/json-ld';
 import { TranslatorType } from 'lib/i18n/i18n.types';
 
+import tebuBadge from '../../../../../public/svg/tebu-badge.svg';
 import {
   DEFAULT_DURATION_TOOLTIP,
   V4_DURATION_TOOLTIP,
@@ -75,7 +76,7 @@ const TebuInfo: React.FC<TebuInfoProps> = ({
     <InfoTemplate
       upperContent={projectBatchTotals}
       title={_(msg`Tebu factors`)}
-      imgSrc="/svg/tebu-badge.svg"
+      imgSrc={tebuBadge}
       imgAlt={_(msg`Tebu badge`)}
       description={_(
         msg`These factors are used to calculate the credits issued for this project.`,

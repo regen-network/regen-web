@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
 import { SOLD_OUT_TOOLTIP } from 'legacy-pages/Projects/AllProjects/AllProjects.constants';
+import Image from 'next/image';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -12,6 +13,9 @@ import { Body, Title } from 'web-components/src/components/typography';
 import { ProjectPrefinancing } from 'generated/sanity-graphql';
 import { getProjectCardBodyTextMapping } from 'lib/constants/shared.constants';
 
+import calendar from '../../../../public/svg/calendar.svg';
+import estimatedIssuanceImg from '../../../../public/svg/estimated-issuance.svg';
+import prefinancing from '../../../../public/svg/prefinancing.svg';
 import {
   CLASS_STATUS,
   CLASS_TIMELINE,
@@ -75,12 +79,10 @@ export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
               )}
             </Body>
           </div>
-          <img
-            src="/svg/prefinancing.svg"
+          <Image
+            src={prefinancing}
             alt="prefinancing"
-            width="189"
-            height="189"
-            className="absolute top-50 left-[50%] translate-x-[-50%] sm:translate-x-[auto] sm:left-[auto] sm:right-0 sm:top-25"
+            className="w-[189px] h-[189px] absolute top-50 left-[50%] translate-x-[-50%] sm:translate-x-[auto] sm:left-[auto] sm:right-0 sm:top-25"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 pt-40 gap-40 md:gap-y-50 md:gap-x-auto pb-40 sm:pb-50">
@@ -94,8 +96,8 @@ export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
                   maximumFractionDigits: 2,
                 }}
                 icon={
-                  <img
-                    src="/svg/estimated-issuance.svg"
+                  <Image
+                    src={estimatedIssuanceImg}
                     alt={bodyTexts.estimatedIssuance}
                   />
                 }
@@ -110,8 +112,8 @@ export const Prefinance = ({ projectPrefinancing, isSoldOut }: Props) => {
                 date={projectedCreditDeliveryDate}
                 formatDateOption="MMM YYYY"
                 icon={
-                  <img
-                    src="/svg/calendar.svg"
+                  <Image
+                    src={calendar}
                     alt={_(PROJECTED_CREDIT_DELIVERY_DATE)}
                   />
                 }

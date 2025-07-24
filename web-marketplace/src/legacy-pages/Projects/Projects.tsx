@@ -31,7 +31,7 @@ import {
   regionFiltersAtom,
   showCommunityProjectsAtom,
 } from 'lib/atoms/projects.atoms';
-import { client as sanityClient } from 'lib/clients/sanity';
+import { client as sanityClient } from 'lib/clients/apolloSanity';
 import { CREDIT_CLASS_FILTERS_TO_DESELECT, IS_REGEN } from 'lib/env';
 import { getAllSanityCreditClassesQuery } from 'lib/queries/react-query/sanity/getAllCreditClassesQuery/getAllCreditClassesQuery';
 import { getAllHomePageQuery } from 'lib/queries/react-query/sanity/getAllHomePageQuery/getAllHomePageQuery';

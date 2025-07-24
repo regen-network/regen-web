@@ -12,6 +12,7 @@ import { Point } from 'geojson';
 import { useAtom } from 'jotai';
 import NotFoundPage from 'legacy-pages/NotFound';
 import Linkify from 'linkify-react';
+import Image from 'next/image';
 import { parse } from 'wellknown';
 
 import { PostFiles } from 'web-components/src/components/organisms/PostFiles/PostFiles';
@@ -178,9 +179,9 @@ function Post(): JSX.Element {
                       }}
                     />
                     {(isAdmin || !privateFiles) && (
-                      <img
+                      <Image
                         className="hidden sm:block absolute top-[17px] left-20 z-[-1]"
-                        src={bgShadow.src}
+                        src={bgShadow}
                         alt="bg-shadow"
                       />
                     )}

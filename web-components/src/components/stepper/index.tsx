@@ -21,22 +21,16 @@ interface StepperProps {
     stepConnectorLine?: string;
   };
   activeStep: number;
-  background?: string;
   steps: string[];
   onStepClick?: (stepIndex: number) => void;
   sx?: SxProps<Theme>;
 }
 
-interface StyleProps {
-  background?: string;
-}
-
-const useStyles = makeStyles<StyleProps>()((theme, { background }) => ({
+const useStyles = makeStyles()(theme => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
     backgroundColor: theme.palette.info.light,
-    backgroundImage: `url(${background})`,
   },
   stepper: {
     width: '100%',
@@ -101,11 +95,10 @@ const RegenStepper = ({
   classes,
   activeStep,
   steps,
-  background,
   onStepClick,
   sx,
 }: StepperProps): JSX.Element => {
-  const { classes: styles, cx } = useStyles({ background });
+  const { classes: styles, cx } = useStyles();
 
   return (
     <div className={cn(classes?.root, styles.root)}>

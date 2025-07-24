@@ -5,7 +5,6 @@ import { Body } from '../typography';
 import { BasketPutForm } from './BasketPutForm/BasketPutForm';
 import { BasketTakeForm } from './BasketTakeForm';
 import { bottomTextMapping } from './form.mock';
-import MoreInfoForm from './MoreInfoForm';
 import NewsletterForm from './NewsletterForm';
 
 const MAPBOX_TOKEN = import.meta.env.STORYBOOK_MAPBOX_TOKEN || '';
@@ -78,74 +77,6 @@ export const basketTakeForm = (): JSX.Element => (
     invalidDecimalCount="Invalid decimal count"
     maxLabel="Max"
     availableLabel="Available"
-    invalidMemoLength="Invalid memo length"
-  />
-);
-
-export const moreInfoForm = (): JSX.Element => (
-  <MoreInfoForm
-    onClose={() => null}
-    onSubmit={() => null}
-    apiUrl=""
-    title="Yes, I’m interested in buying credits for myself or my organization!"
-    nameLabel="Your full name"
-    emailLabel="Your email address"
-    orgNameLabel="Organization Name"
-    budgetLabel="Budget"
-    projectTypesLabel="Which types of carbon credits projects are you interested in?"
-    onBehalfOfLabel="I am interested in buying carbon credits on behalf of:"
-    usdText="USD"
-    protecTypesOptions={[
-      {
-        label: 'All nature based carbon credits',
-        value: 'All nature based carbon credits',
-      },
-      {
-        label: 'Forestry-based credits',
-        value: 'Forestry-based credits',
-      },
-      {
-        label: 'Grasslands-based credits',
-        value: 'Grasslands-based credits',
-      },
-      {
-        label: 'Cropland-based credits',
-        value: 'Cropland-based credits',
-      },
-    ]}
-    onBehalfOfOptions={[
-      {
-        label: '',
-        value: '',
-      },
-      {
-        label: 'Consumer/Individual/myself',
-        value: 'Consumer/Individual/myself',
-      },
-      {
-        label: 'Small or Medium Sized Business',
-        value: 'Small or Medium Sized Business',
-      },
-      {
-        label: 'Nonprofit',
-        value: 'Nonprofit',
-      },
-      {
-        label: 'Large Corporation',
-        value: 'Large Corporation',
-      },
-      {
-        label: 'Crypto Organization',
-        value: 'Crypto Organization',
-      },
-    ]}
-    submitLabel="Submit"
-    submitErrorText="Please correct the errors above"
-    requiredMessage="Required"
-    invalidEmailMessage="Invalid email"
-    invalidAmount="Invalid amount"
-    insufficientCredits="Insufficient credits"
-    invalidDecimalCount="Invalid decimal count"
     invalidMemoLength="Invalid memo length"
   />
 );

@@ -26,7 +26,7 @@ type Props = {
   onChainCreditClassId?: string;
   generationMethods?: CreditClassCardItemType[];
   creditTypeName?: string;
-  creditTypeImage?: string | null;
+  creditTypeImage?: JSX.Element;
   methodology?: ProjectMethodology;
   program?: Account;
 };
@@ -76,9 +76,7 @@ export const ProjectTopSectionCreditClassCard: React.FC<Props> = ({
         })}
         type={{
           name: creditTypeName ?? '',
-          icon: {
-            src: creditTypeImage ?? '',
-          },
+          icon: creditTypeImage,
         }}
         generationMethods={generationMethods}
         methodology={{

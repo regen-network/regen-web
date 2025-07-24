@@ -15,10 +15,13 @@ export const Default = Template.bind({});
 
 Default.args = {
   label: 'Carbon',
-  icon: {
-    src: 'https://cdn.sanity.io/images/jm12rn9t/staging/c6de355349dec9f4914fea0705e293596d40f068-66x106.svg',
-    alt: 'co2',
-  },
+  icon: (
+    <img
+      src="https://cdn.sanity.io/images/jm12rn9t/staging/c6de355349dec9f4914fea0705e293596d40f068-66x106.svg"
+      alt="co2"
+      className="w-24 h-24 mr-10"
+    />
+  ),
 };
 
 Default.argTypes = {};

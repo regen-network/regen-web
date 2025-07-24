@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
+import Image from 'next/image';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -17,6 +18,7 @@ import {
 } from 'lib/constants/shared.constants';
 import { useTracker } from 'lib/tracker/useTracker';
 
+import prefinancing from '../../../../public/svg/prefinancing.svg';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -63,9 +65,9 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
         />
         {prefinanceProjectsContent && (
           <div className="flex items-start sm:items-center max-w-[696px] col-[1/-1] pt-[7px] sm:pt-[12px] pb-25 sm:pb-30">
-            <img
+            <Image
               className="pr-15 w-[75px] h-[75px] sm:w-[122px] sm:h-[122px]"
-              src="/svg/prefinancing.svg"
+              src={prefinancing}
               alt="prefinancing"
             />
             <div>

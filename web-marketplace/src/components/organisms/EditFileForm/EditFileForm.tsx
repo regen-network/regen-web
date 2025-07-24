@@ -5,6 +5,7 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { Feature, Point } from 'geojson';
+import Image from 'next/image';
 import { getRemainingCharacters } from 'utils/string/getRemainingCharacters';
 
 import { isImage } from 'web-components/src/components/inputs/new/FileDrop/FileDrop.utils';
@@ -85,13 +86,15 @@ export const EditFileForm = ({
         <Trans>Edit your file</Trans>
       </Title>
       {url && isImage(mimeType) && (
-        <img
-          className="block m-auto pb-40 sm:pb-50"
-          width="180px"
-          height="100%"
-          src={decodeURI(url)}
-          alt="preview"
-        />
+        <div className="flex justify-center">
+          <Image
+            src={decodeURI(url)}
+            alt="preview"
+            width={180}
+            height={0}
+            className="h-auto"
+          />
+        </div>
       )}
       <TextField
         type="text"

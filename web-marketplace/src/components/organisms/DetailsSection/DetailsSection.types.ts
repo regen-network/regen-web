@@ -13,9 +13,9 @@ export interface DetailsSectionProps {
   methodology?: CompactedNameUrl;
   creditClassDoc?: CompactedNameUrl;
   credit?: {
-    creditImage?: string | null;
+    creditImage?: JSX.Element;
     creditTypeUnit?: string;
-    creditTypeImage?: string | null;
+    creditTypeImage?: JSX.Element;
     creditTypeUnitDefinition?: SanityBlockContent | null;
   };
   sx?: SxProps<Theme>;

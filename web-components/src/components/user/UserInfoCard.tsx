@@ -6,19 +6,13 @@ import { BlockContent } from '../block-content';
 import { Subtitle } from '../typography';
 import { TextSize } from '../typography/sizing';
 import UserAvatar from './UserAvatar';
-import { UserInfoTypes } from './UserInfo.types';
+import { User } from './UserInfo';
 
-export interface User {
-  name: string;
-  nameRaw?: string | JSX.Element;
-  type: UserInfoTypes;
-  location?: string;
-  image?: string | null;
-  description?: string | null;
-  link?: string | null;
-}
-
-export interface Account extends User {
+export interface Account
+  extends Pick<
+    User,
+    'name' | 'nameRaw' | 'type' | 'location' | 'image' | 'description' | 'link'
+  > {
   address: string;
 }
 
@@ -45,7 +39,6 @@ export default function UserInfoCard({
         href={user.link}
         size={size}
         border={border}
-        icon={user.image}
         sx={{ mr: 2 }}
       />
       <Subtitle size="xs" sx={{ color: 'primary.main' }}>

@@ -12,4 +12,6 @@ https://registry.regen.network/* https://app.regen.network/:splat 301!
 /projects/pillango /project/pillango 301!
 /projects /projects/1 301!
 /land-stewards /project-developers 301!
+/storefront / 301!
 /* /index.html 200
+

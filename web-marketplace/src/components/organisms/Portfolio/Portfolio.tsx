@@ -93,7 +93,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
             initialPaginationParams={retirementsPaginationParams}
           />
         ),
-        hidden: hideRetirements,
+        hidden: hideRetirements || !retirements?.length,
       },
       {
         label: _(msg`Basket Tokens`),

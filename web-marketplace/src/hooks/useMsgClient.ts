@@ -10,7 +10,9 @@ import { useSetAtom } from 'jotai';
 import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import { txSuccessfulModalAtom } from 'lib/atoms/modals.atoms';
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
+import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
 import { BANK_BALANCE_KEY } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery.constants';
+import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
 import { useLedger } from '../ledger';
 import { assertIsError } from '../lib/error';
@@ -57,7 +59,7 @@ export default function useMsgClient(
   handleTxDelivered?: (deliverTxResponse: DeliverTxResponse) => void,
   handleError?: () => void,
 ): MsgClientType {
-  const { signingClient } = useLedger();
+  const { signingClient, queryClient } = useLedger();
   const { wallet } = useWallet();
   const [error, setError] = useState<string | undefined>();
   const setTxSuccessfulModalAtom = useSetAtom(txSuccessfulModalAtom);
@@ -75,15 +77,16 @@ export default function useMsgClient(
       const { msgs, fee: txFee, memo } = tx;
 
       const fee = txFee ?? defaultFee;
-      const balanceQueryKey = [BANK_BALANCE_KEY, wallet?.address, REGEN_DENOM];
 
-      await reactQueryClient.refetchQueries({
-        queryKey: balanceQueryKey,
-        exact: true,
+      const userRegenBalanceRes = await getFromCacheOrFetch({
+        query: getBalanceQuery({
+          request: { address: wallet?.address as string, denom: REGEN_DENOM },
+          client: queryClient,
+          enabled: !!queryClient && !!wallet?.address,
+        }),
+        reactQueryClient: reactQueryClient,
       });
-      const userRegenBalance = reactQueryClient?.getQueryData<
-        QueryBalanceResponse | undefined
-      >(balanceQueryKey)?.balance;
+      const userRegenBalance = userRegenBalanceRes?.balance;
 
       if (
         userRegenBalance === undefined ||

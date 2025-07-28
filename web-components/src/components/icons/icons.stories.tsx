@@ -262,6 +262,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<CreditsIssuedIcon />} label="CreditsIssuedIcon" />
     <LabeledIcon icon={<CreditsTradeableIcon />} label="CreditsTradeableIcon" />
     <LabeledIcon icon={<CreditsRetiredIcon />} label="CreditsRetiredIcon" />
+    <LabeledIcon icon={<ClipboardIcon />} label="ClipboardIcon" />
     <LabeledIcon
       icon={<CurrentCreditsIcon color="#4FB573" />}
       label="CurrentCreditsIcon"

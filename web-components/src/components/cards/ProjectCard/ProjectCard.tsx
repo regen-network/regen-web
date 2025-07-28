@@ -181,6 +181,7 @@ export function ProjectCard({
           smFontSize="0.8125rem"
           fontSize="0.75rem"
           color={theme.palette.primary.light}
+          iconClassName="text-brand-400"
         />
       </div>
       {isPrefinanceProject && bodyTexts && (

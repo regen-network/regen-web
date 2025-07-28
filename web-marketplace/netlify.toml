@@ -52,6 +52,7 @@ NEXT_PUBLIC_BRIDGE = "true"
 NEXT_PUBLIC_SKIPPED_CLASS_ID = ""
 NEXT_PUBLIC_ANALYTICS_ENABLED = "true"
 NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
+NODE_VERSION = "22.17.1"
 
 [build.environment]
 NODE_OPTIONS = "--max-old-space-size=10216"

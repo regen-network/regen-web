@@ -1,7 +1,7 @@
 import { msg } from '@lingui/macro';
 
 export const YOU = msg`(you)`;
-export const ORG_MEMBER_SETTINGS = msg`(organization member settings)`;
+export const ORG_MEMBER_SETTINGS = msg` organization member settings`;
 export const ORG_ADMIN = msg`This user is an organization admin and cannot be
                           downgraded on the project level unless you change
                           their role within the`;

@@ -6,31 +6,31 @@ import { useLingui } from '@lingui/react';
 import { IconTabs } from 'web-components/src/components/tabs/IconTabs';
 import { Title } from 'web-components/src/components/typography';
 
-import { useAuth } from 'lib/auth/auth';
-import { useWallet } from 'lib/wallet/wallet';
-
+//import { useAuth } from 'lib/auth/auth';
+//import { useWallet } from 'lib/wallet/wallet';
 import { Link } from 'components/atoms';
 
 import { CollaboratorsManagement } from './components/Collaborators';
-import ProjectBanner from './components/ProjectBanner';
-import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
+//import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
 
 const ManageProject = (): JSX.Element => {
   const { projectId } = useParams<{ projectId: string }>();
   const { _ } = useLingui();
   const location = useLocation();
-  const { activeAccountId, activeAccount } = useAuth();
-  const { wallet, loginDisabled } = useWallet();
 
-  const { adminProjects } = useFetchProjectByAdmin({
-    adminAccountId: activeAccountId,
-    adminAddress: loginDisabled ? wallet?.address : activeAccount?.addr,
-    keepUnpublished: true,
-  });
+  // Ucomment code when project banner is being implemented
+  // const { activeAccountId, activeAccount } = useAuth();
+  // const { wallet, loginDisabled } = useWallet();
 
-  const project = adminProjects?.find(p => p.id === projectId);
+  // const { adminProjects } = useFetchProjectByAdmin({
+  //   adminAccountId: activeAccountId,
+  //   adminAddress: loginDisabled ? wallet?.address : activeAccount?.addr,
+  //   keepUnpublished: true,
+  // });
 
-  const canEditProject = true; // Replace with actual admin/editor check logic
+  // const project = adminProjects?.find(p => p.id === projectId);
+
+  // const canEditProject = true; // Replace with actual admin/editor check logic
 
   const tabs = useMemo(
     () => [
@@ -102,8 +102,7 @@ const ManageProject = (): JSX.Element => {
 
   return (
     <>
-      {/* Project Banner */}
-      {project && <ProjectBanner project={project} canEdit={canEditProject} />}
+      {/* {project && <ProjectBanner project={project} canEdit={canEditProject} />} */}
 
       {/* Tabs section */}
       <div className="w-full py-30 md:mb-8 lg:mb-0">

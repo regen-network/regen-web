@@ -10,17 +10,16 @@ import EmailIcon from 'web-components/src/components/icons/EmailIcon';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Title } from 'web-components/src/components/typography';
 
-import { CollaboratorActionsDropdown } from './CollaboratorActionsDropdown';
+import { ActionsDropdown } from './ActionsDropdown';
 import { SEE_HELP_DOCS, YOU } from './Collaborators.constants';
 import {
   CollaboratorsManagementProps,
   ProjectRoleType,
 } from './Collaborators.types';
-import { mockCollaborators } from './Collaborators.utils';
 import { RoleDropdown } from './RoleDropdown';
 
 export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
-  ({ collaborators = mockCollaborators, onInvite, onRoleChange, onRemove }) => {
+  ({ collaborators, onInvite, onRoleChange, onRemove }) => {
     const { _ } = useLingui();
     const navigate = useNavigate();
 
@@ -28,8 +27,8 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
     const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
 
     const currentUserRole =
-      collaborators.find(c => c.isCurrentUser)?.projectRole || 'viewer';
-    const isExternalAdmin = collaborators.some(
+      collaborators?.find(c => c.isCurrentUser)?.projectRole || 'viewer';
+    const isExternalAdmin = collaborators?.some(
       c => c.orgRole === '' && c.projectRole === 'admin' && c.isCurrentUser,
     );
 
@@ -38,7 +37,7 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
       const dir = sortDir === 'asc' ? 'desc' : 'asc';
       setSortDir(dir);
       setLocalCollaborators(prev =>
-        [...prev].sort((a, b) =>
+        [...(prev ?? [])].sort((a, b) =>
           dir === 'asc'
             ? a.name.localeCompare(b.name)
             : b.name.localeCompare(a.name),
@@ -49,7 +48,7 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
     /* ───── role / remove handlers ───── */
     const handleRoleChange = (id: string, role: ProjectRoleType) => {
       setLocalCollaborators(prev =>
-        prev.map(c => (c.id === id ? { ...c, projectRole: role } : c)),
+        prev?.map(c => (c.id === id ? { ...c, projectRole: role } : c)),
       );
       onRoleChange?.(id, role);
     };
@@ -62,7 +61,7 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
           <Title variant="h4">
             {_(msg`Project Collaborators`)}{' '}
             <span className="text-bc-neutral-400 font-normal">
-              ({collaborators.length})
+              ({collaborators?.length})
             </span>
           </Title>
 
@@ -128,7 +127,7 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
 
         {/* ───────── Rows ───────── */}
         <div className="flex flex-col">
-          {localCollaborators.map(col => (
+          {localCollaborators?.map(col => (
             <div
               key={col.id}
               className="flex flex-col lg:flex-row justify-between py-20 gap-8 lg:gap-0"
@@ -179,7 +178,7 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
 
                 {/* dots on mobile */}
                 <div className="flex h-[94px] lg:hidden">
-                  <CollaboratorActionsDropdown
+                  <ActionsDropdown
                     role={col.projectRole}
                     currentUserRole={currentUserRole}
                     orgRole={col.orgRole}
@@ -206,7 +205,7 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
 
               {/* ③ dots for desktop */}
               <div className="hidden lg:flex w-[60px] justify-center items-center">
-                <CollaboratorActionsDropdown
+                <ActionsDropdown
                   role={col.projectRole}
                   currentUserRole={currentUserRole}
                   orgRole={col.orgRole}

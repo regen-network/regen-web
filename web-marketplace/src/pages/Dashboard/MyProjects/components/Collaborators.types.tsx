@@ -31,7 +31,7 @@ export interface RoleDropdownProps {
   isExternalAdmin?: boolean;
 }
 
-export interface CollaboratorActionsDropdownProps {
+export interface ActionsDropdownProps {
   role: ProjectRoleType;
   currentUserRole: ProjectRoleType;
   orgRole?: OrgRoleType;
@@ -42,19 +42,4 @@ export interface CollaboratorActionsDropdownProps {
   context?: 'project' | 'members';
   isOnlyAdmin?: boolean;
   isExternalAdmin?: boolean;
-}
-
-interface Project {
-  id: string;
-  name?: string;
-  place?: string;
-  area?: number;
-  areaUnit?: string;
-  imgSrc?: string;
-  slug?: string;
-}
-
-export interface ProjectBannerProps {
-  project: Project;
-  canEdit?: boolean;
 }

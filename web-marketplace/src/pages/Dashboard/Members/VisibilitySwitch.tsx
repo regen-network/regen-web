@@ -2,8 +2,8 @@ import React from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
-import { cn } from 'web-components/src/utils/styles/cn';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 export const VisibilitySwitch: React.FC<{
   checked: boolean;

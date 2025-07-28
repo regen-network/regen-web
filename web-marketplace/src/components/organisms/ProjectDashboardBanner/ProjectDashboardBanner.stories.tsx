@@ -1,11 +1,10 @@
 import type { Meta } from '@storybook/react';
 
-import ProjectDashboardBanner, {
-  ProjectBannerProps,
-} from './ProjectDashboardBanner';
+import ProjectDashboardBanner from './ProjectDashboardBanner';
+import { ProjectBannerProps } from './ProjectDashboardBanner.types';
 
 const meta: Meta<typeof ProjectDashboardBanner> = {
-  title: 'Dashboard/ProjectBanner',
+  title: 'Marketplace/Organisms/ProjectBanner',
   component: ProjectDashboardBanner,
   argTypes: {
     project: {
@@ -23,8 +22,8 @@ export default meta;
 
 const exampleProject: ProjectBannerProps['project'] = {
   id: '1',
-  name: 'Rainforest Restoration',
-  place: 'Amazon Basin',
+  name: 'Rainforest Reforest',
+  place: 'Amazon Basin, Brazil',
   area: 1200,
   areaUnit: 'ha',
   imgSrc:

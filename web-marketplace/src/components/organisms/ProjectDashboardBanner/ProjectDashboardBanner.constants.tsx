@@ -1,0 +1,2 @@
+export const MAX_ADDRESS_LENGTH_DESKTOP = 160;
+export const MAX_ADDRESS_LENGTH_MOBILE = 55;

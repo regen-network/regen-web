@@ -15,55 +15,56 @@ import TrashIcon from 'web-components/src/components/icons/TrashIcon';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
 import { Title } from 'web-components/src/components/typography';
 
-interface Project {
-  id: string;
-  name?: string;
-  place?: string;
-  area?: number;
-  areaUnit?: string;
-  imgSrc?: string;
-  slug?: string;
-}
-
-export interface ProjectBannerProps {
-  project: Project;
-  canEdit?: boolean;
-}
+import {
+  MAX_ADDRESS_LENGTH_DESKTOP,
+  MAX_ADDRESS_LENGTH_MOBILE,
+} from './ProjectDashboardBanner.constants';
+import { ProjectBannerProps } from './ProjectDashboardBanner.types';
+import { truncateEnd, useIsMobile } from './ProjectDashboardBanner.utils';
 
 const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
   project,
   canEdit,
 }) => {
   const { _ } = useLingui();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
   const navigate = useNavigate();
+
+  const truncatedPlace = useMemo(
+    () =>
+      truncateEnd(
+        project.place ?? '',
+        isMobile ? MAX_ADDRESS_LENGTH_MOBILE : MAX_ADDRESS_LENGTH_DESKTOP,
+      ),
+    [project.place, isMobile],
+  );
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = useMemo(
     () => [
       {
         label: _(msg`Register with a crediting protocol`),
-        color: 'text-gray-700',
+        color: 'text-bc-neutral-700',
         icon: <ClipboardIcon />,
-        action: () => {
-          setIsMenuOpen(false);
-        },
+        action: () => setIsMenuOpen(false),
       },
       {
         label: _(msg`Convert to draft`),
-        color: 'text-gray-700',
+        color: 'text-bc-neutral-700',
         icon: <DraftDocumentIcon className="w-6 h-6" useGradient />,
         action: () => setIsMenuOpen(false),
       },
       {
         label: _(msg`Migrate project`),
-        color: 'text-gray-700',
+        color: 'text-bc-neutral-700',
         icon: <ArrowDownIcon direction="next" fontSize="medium" useGradient />,
         action: () => setIsMenuOpen(false),
       },
       {
         label: _(msg`Delete project`),
-        color: 'text-red-600',
-        icon: <TrashIcon className="w-6 h-6" style={{ color: '#f87171' }} />,
+        color: 'text-bc-neutral-700',
+        icon: <TrashIcon className="w-6 h-6 text-bc-red-400" />,
         action: () => setIsMenuOpen(false),
       },
     ],
@@ -74,7 +75,7 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
     <div className="relative w-full mt-20">
       {/* Background Image Container */}
       <div
-        className="relative w-full min-h-[187px] bg-cover bg-center bg-no-repeat rounded-lg"
+        className="relative w-full min-h-[180px] bg-cover bg-center bg-no-repeat rounded-lg"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${
             project.imgSrc || '/default-project-image.jpg'
@@ -111,14 +112,15 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
           </div>
 
           {/* Project info and buttons */}
-          <div className="flex flex-col justify-end">
-            <Title sx={{ color: 'white', marginBottom: '4px' }} variant="h3">
+          <div className="flex flex-col justify-end max-w-[251px] md:max-w-[596px]">
+            <Title className="text-bc-neutral-0 mb-2 text-[21px] md:text-[32px] line-clamp-2 mb-20">
               {project.name || _(msg`Untitled Project`)}
             </Title>
 
-            <div className="mb-20">
+            {/* Address + area */}
+            <div className="mb-20 max-h-[40px] max-w-[251px] md:max-w-[596px]">
               <ProjectPlaceInfo
-                place={project.place ?? ''}
+                place={truncatedPlace}
                 area={project.area}
                 areaUnit={project.areaUnit}
                 smFontSize="0.8125rem"
@@ -128,12 +130,12 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-15">
+            <div className="flex flex-row gap-15">
               <OutlinedButton
                 startIcon={<EyeIcon />}
-                onClick={() => {
-                  navigate(`/project/${project.slug || project.id}`);
-                }}
+                onClick={() =>
+                  navigate(`/project/${project.slug || project.id}`)
+                }
               >
                 {_(msg`View`)}
               </OutlinedButton>
@@ -141,9 +143,9 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
               {canEdit && (
                 <ContainedButton
                   startIcon={<EditIcon sx={{ color: 'white' }} />}
-                  onClick={() => {
-                    navigate(`/project-pages/${project.id}/edit/basic-info`);
-                  }}
+                  onClick={() =>
+                    navigate(`/project-pages/${project.id}/edit/basic-info`)
+                  }
                 >
                   {_(msg`Edit`)}
                 </ContainedButton>

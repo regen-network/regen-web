@@ -10,7 +10,7 @@ import EmailIcon from 'web-components/src/components/icons/EmailIcon';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Title } from 'web-components/src/components/typography';
 
-import { CollaboratorActionsDropdown } from '../MyProjects/components/CollaboratorActionsDropdown';
+import { ActionsDropdown } from '../MyProjects/components/ActionsDropdown';
 import {
   SEE_HELP_DOCS,
   YOU,
@@ -183,7 +183,7 @@ export const Members = () => {
 
               {/* dots (mobile) */}
               <div className="flex h-[94px] xl:hidden">
-                <CollaboratorActionsDropdown
+                <ActionsDropdown
                   role={m.role}
                   currentUserRole={currentUserRole}
                   isCurrentUser={!!m.isCurrentUser}
@@ -226,7 +226,7 @@ export const Members = () => {
               />
             </div>
             <div className="hidden xl:flex w-[60px] h-[74px] justify-center items-center">
-              <CollaboratorActionsDropdown
+              <ActionsDropdown
                 role={m.role}
                 currentUserRole={currentUserRole}
                 isCurrentUser={!!m.isCurrentUser}

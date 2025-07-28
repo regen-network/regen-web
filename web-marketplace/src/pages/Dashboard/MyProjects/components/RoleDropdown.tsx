@@ -39,14 +39,10 @@ export const RoleDropdown = ({
     return () => document.removeEventListener('mousedown', handle);
   }, [isOpen]);
 
-  // Disable dropdown if:
-  // - disabled prop is true
-  // - currentUserRole is not admin
-  // - isExternalAdmin is true AND the role being rendered is 'admin' (not self)
   const isDropdownDisabled =
     disabled ||
     currentUserRole !== 'admin' ||
-    (isExternalAdmin && projectRole === 'admin' && orgRole !== ''); // Disable only if the user is an org admin
+    (isExternalAdmin && projectRole === 'admin' && orgRole !== '');
 
   const toggle = () => {
     if (isDropdownDisabled) return;
@@ -184,6 +180,7 @@ export const RoleDropdown = ({
                       (isOrgAndProjectAdmin && key === 'admin') ? (
                         <p className="text-[12px] leading-[1.45] font-bold italic text-left m-0 text-bc-neutral-500">
                           {_(ORG_EDITOR)}
+                          {' '}
                           <a
                             href="/dashboard/members"
                             className="underline decoration-0 text-bc-neutral-500 hover:text-bc-neutral-500"
@@ -201,6 +198,7 @@ export const RoleDropdown = ({
                       ) : isOrgAndProjectAdmin && key === 'admin' ? (
                         <p className="text-[12px] leading-[1.45] font-bold italic text-left m-0 text-bc-neutral-500">
                           {_(ORG_ADMIN)}
+                          {' '}
                           <a
                             href="/dashboard/members"
                             className="underline decoration-0 text-bc-neutral-500 hover:text-bc-neutral-500"

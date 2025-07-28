@@ -1,6 +1,6 @@
 export type MemberRole = 'admin' | 'editor' | 'viewer';
 
-export interface Member {
+export type Member = {
   id: string;
   name: string;
   email: string;
@@ -10,4 +10,4 @@ export interface Member {
   avatar?: string;
   visible: boolean;
   isCurrentUser?: boolean;
-}
+};

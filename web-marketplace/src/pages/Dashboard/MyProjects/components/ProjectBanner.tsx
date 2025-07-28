@@ -15,7 +15,20 @@ import TrashIcon from 'web-components/src/components/icons/TrashIcon';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
 import { Title } from 'web-components/src/components/typography';
 
-import { ProjectBannerProps } from './Collaborators.types';
+interface Project {
+  id: string;
+  name?: string;
+  place?: string;
+  area?: number;
+  areaUnit?: string;
+  imgSrc?: string;
+  slug?: string;
+}
+
+export interface ProjectBannerProps {
+  project: Project;
+  canEdit?: boolean;
+}
 
 const ProjectBanner: React.FC<ProjectBannerProps> = ({ project, canEdit }) => {
   const { _ } = useLingui();

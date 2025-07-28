@@ -1,11 +1,19 @@
 import { msg } from '@lingui/macro';
 import { AllowedDenom } from '@regen-network/api/regen/ecocredit/marketplace/v1/state';
 import { BatchBalanceInfo } from '@regen-network/api/regen/ecocredit/v1/query';
+import {
+  GRAVITY_USDC_DENOM,
+  UPPERCASE_DENOM,
+  USD_DENOM,
+} from 'config/allowedBaseDenoms';
 
 import { Option } from 'web-components/src/components/inputs/SelectTextField';
 
 import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { TranslatorType } from 'lib/i18n/i18n.types';
+import { DenomTraceWithHash } from 'lib/ibc/transfer/api';
+
+import { DenomIconWithCurrency } from 'components/molecules/DenomIconWithCurrency/DenomIconWithCurrency';
 
 type GetOtherSellOrderBatchDenomOptionsProps = {
   credits: BatchInfoWithBalance[];
@@ -52,23 +60,61 @@ export const getAvailableAmountByBatch = ({
 type GetDenomAllowedOptionsParams = {
   allowedDenoms?: AllowedDenom[];
   _: TranslatorType;
+  canCreateFiatOrder?: boolean;
+  denomTracesData?: DenomTraceWithHash[] | void;
 };
 
 export const getDenomAllowedOptions = ({
   allowedDenoms,
   _,
+  canCreateFiatOrder,
+  denomTracesData,
 }: GetDenomAllowedOptionsParams): Option[] => {
-  const allowedDenomsOptions: Option[] =
-    allowedDenoms?.map(denom => ({
-      label: denom.displayDenom,
-      value: denom.bankDenom,
-    })) ?? [];
-  allowedDenomsOptions.unshift({
-    label: _(msg`Choose denom`),
-    value: '',
-    disabled: true,
-    selected: true,
-  });
+  const allowedDenomsOptions =
+    (allowedDenoms
+      ?.map(denom => {
+        const denomTrace = denomTracesData?.find(denomTrace =>
+          denom?.bankDenom?.includes(denomTrace.hash),
+        );
+        const baseDenom =
+          (denomTrace ? denomTrace.baseDenom : denom?.bankDenom) ?? '';
+
+        // Do not display USDC.grv
+        if (baseDenom === GRAVITY_USDC_DENOM) return null;
+
+        return {
+          label: (
+            <DenomIconWithCurrency
+              baseDenom={baseDenom}
+              bankDenom={denom.bankDenom}
+              displayDenom={
+                UPPERCASE_DENOM.includes(denom.bankDenom)
+                  ? denom.displayDenom.toUpperCase()
+                  : denom.displayDenom
+              }
+              // eslint-disable-next-line lingui/no-unlocalized-strings
+              textClassName="text-sc-text-header text-base"
+            />
+          ),
+          value: denom.bankDenom,
+        };
+      })
+      .filter(Boolean) as Option[]) ?? [];
+
+  if (canCreateFiatOrder) {
+    allowedDenomsOptions.unshift({
+      value: USD_DENOM,
+      label: (
+        <DenomIconWithCurrency
+          baseDenom={USD_DENOM}
+          bankDenom={USD_DENOM}
+          displayDenom={USD_DENOM.toUpperCase()}
+          // eslint-disable-next-line lingui/no-unlocalized-strings
+          textClassName="text-sc-text-header text-base"
+        />
+      ),
+    });
+  }
 
   return allowedDenomsOptions;
 };

@@ -195,14 +195,16 @@ export function useProjectsWithOrders({
   const { allOffChainProjects, isAllOffChainProjectsLoading } =
     useOffChainProjects({
       sanityCreditClassesData: creditClassData,
-      enabled: enableOffchainProjectsQuery && !enoughProjectsByAdmin,
+      enabled:
+        enableOffchainProjectsQuery &&
+        !enoughProjectsByAdmin &&
+        !projectSlugOrId,
       sanityProjectsData,
       adminId,
       limitOffChainProjects,
       random,
       skippedProjectId,
     });
-
   const onlyOffChainProjects = allOffChainProjects.filter(
     project =>
       project.offChain &&
@@ -301,22 +303,14 @@ export function useProjectsWithOrders({
         const offChainProject = allOffChainProjects.find(
           offChainProject => project.id === offChainProject.onChainId,
         );
-        const sanityProject = sanityProjectsData?.allProject?.find(
-          sanityProject =>
-            sanityProject.projectId === (offChainProject?.slug ?? project?.id),
-        );
 
         const allCardSellOrders = getCardSellOrders(
-          sanityProject?.fiatSellOrders,
           project?.sellOrders,
+          offChainProject?.sellOrdersByProjectId?.nodes,
         );
         return { ...offChainProject, ...project, allCardSellOrders };
       }),
-    [
-      allOffChainProjects,
-      projectsWithOrderDataFiltered,
-      sanityProjectsData?.allProject,
-    ],
+    [allOffChainProjects, projectsWithOrderDataFiltered],
   );
 
   // Merge on-chain and off-chain projects
@@ -454,17 +448,19 @@ export function useProjectsWithOrders({
     ),
   });
 
-  const projectPagesMetadata = offChainProjectResults.map(
-    queryResult => queryResult.data?.data.projectByOnChainId?.metadata,
+  const offChainProjects = offChainProjectResults.map(
+    queryResult => queryResult.data?.data?.projectByOnChainId,
+  );
+
+  const projectPagesMetadata = offChainProjects.map(
+    project => project?.metadata,
   );
   const offChainProjectLoading = offChainProjectResults.some(
     res => res.isFetching,
   );
 
-  const programAccounts = offChainProjectResults.map(
-    queryResult =>
-      queryResult.data?.data.projectByOnChainId?.creditClassByCreditClassId
-        ?.accountByRegistryId,
+  const programAccounts = offChainProjects.map(
+    project => project?.creditClassByCreditClassId?.accountByRegistryId,
   );
 
   // Credit Classes and their metadata
@@ -495,6 +491,7 @@ export function useProjectsWithOrders({
   const projectsWithMetadata = useMemo(
     () =>
       normalizeProjectsWithMetadata({
+        offChainProjects,
         projectsWithOrderData: sortedProjects,
         projectsMetadata: projectsMetadata as (
           | AnchoredProjectMetadataLD
@@ -508,6 +505,7 @@ export function useProjectsWithOrders({
         wallet,
       }),
     [
+      offChainProjects,
       sortedProjects,
       projectsMetadata,
       projectPagesMetadata,

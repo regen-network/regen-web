@@ -205,7 +205,7 @@ export const ChooseCreditsForm = React.memo(
     const orderedSellOrders = useMemo(
       () =>
         card
-          ? cardSellOrders.sort((a, b) => a.usdPrice - b.usdPrice)
+          ? cardSellOrders.sort((a, b) => a.price - b.price)
           : filteredCryptoSellOrders?.sort(
               (a, b) => Number(a.askAmount) - Number(b.askAmount),
             ) || [],

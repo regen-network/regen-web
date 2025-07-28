@@ -1,0 +1,6 @@
+query ProjectIdByOnChainId($onChainId: String!) {
+  projectByOnChainId(onChainId: $onChainId) {
+    id
+    slug
+  }
+}

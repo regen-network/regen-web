@@ -103,6 +103,7 @@ export const useOffChainProjects = ({
           : undefined,
         onChainId: project?.onChainId,
         offChain,
+        sellOrdersByProjectId: project?.sellOrdersByProjectId,
         ...normalizeProjectWithMetadata({
           offChainProject: project,
           projectMetadata: project?.metadata,

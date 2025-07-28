@@ -18,7 +18,7 @@ export const MigrateProjects = ({
   });
 
   return (
-    <section className="border border-solid border-grey-300 rounded-2xl py-50 px-40 max-w-4xl">
+    <section className="border border-solid border-grey-300 rounded-md py-40 px-10 sm:py-50 sm:px-40 max-w-4xl">
       <form onSubmit={handleSubmit(onSubmit)} aria-label={formAriaLabel}>
         <Controller
           control={control}

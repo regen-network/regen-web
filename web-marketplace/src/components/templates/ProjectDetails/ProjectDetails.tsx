@@ -160,14 +160,6 @@ function ProjectDetails(): JSX.Element {
 
   const onBuyButtonClick = useOnBuyButtonClick();
 
-  // TODO
-  // const element = document.getElementById(location.hash.substring(1));
-  // useEffect(() => {
-  //   if (element) {
-  //     element.scrollIntoView({ behavior: 'smooth' });
-  //   }
-  // }, [element]);
-
   const onChainProject = projectResponse?.project;
   const jurisdiction = onChainProject?.jurisdiction;
 
@@ -547,11 +539,6 @@ function ProjectDetails(): JSX.Element {
             published: draftPost?.published || true,
           }}
           setDraftPost={setDraftPost}
-          // scrollIntoDataStream={() => {
-          //   if (element) {
-          //     element.scrollIntoView({ behavior: 'smooth' });
-          //   }
-          // }}
         />
       )}
     </Box>

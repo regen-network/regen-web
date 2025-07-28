@@ -11,6 +11,7 @@ export default function SuccessIcon({
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 20 20"
       sx={[{ fill: 'none' }, ...(Array.isArray(sx) ? sx : [sx])]}
+      data-testid="success-icon"
       {...props}
     >
       <path

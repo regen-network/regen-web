@@ -6,7 +6,7 @@ import { mockCollaborators } from './Collaborators.mock';
 import { ProjectRoleType } from './Collaborators.types';
 
 const meta: Meta<typeof CollaboratorsManagement> = {
-  title: 'Dashboard/CollaboratorsManagement',
+  title: 'Marketplace/Organisms/CollaboratorsManagement',
   component: CollaboratorsManagement,
   argTypes: {
     collaborators: {
@@ -15,9 +15,10 @@ const meta: Meta<typeof CollaboratorsManagement> = {
     },
   },
 };
+
 export default meta;
 
-export const Default = (args: { collaborators: typeof mockCollaborators }) => {
+const StoryComponent = (args: { collaborators: typeof mockCollaborators }) => {
   const [collaborators, setCollaborators] = useState(args.collaborators);
 
   const handleRoleChange = (id: string, role: ProjectRoleType) => {
@@ -39,6 +40,12 @@ export const Default = (args: { collaborators: typeof mockCollaborators }) => {
       onInvite={() => alert('Invite Collaborator')}
     />
   );
+};
+
+export const Default = (args: { collaborators: typeof mockCollaborators }) => {
+  const key = JSON.stringify(args.collaborators);
+
+  return <StoryComponent key={key} {...args} />;
 };
 
 Default.args = {

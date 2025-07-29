@@ -10,6 +10,7 @@ export const mockMembers: Member[] = [
     role: 'admin',
     avatar: 'https://i.pravatar.cc/299',
     visible: true,
+    isCurrentUser: false,
   },
   {
     id: '2',
@@ -20,6 +21,7 @@ export const mockMembers: Member[] = [
     role: 'editor',
     avatar: 'https://i.pravatar.cc/300',
     visible: false,
+    isCurrentUser: false,
   },
   {
     id: '3',
@@ -30,6 +32,7 @@ export const mockMembers: Member[] = [
     role: 'viewer',
     avatar: 'https://i.pravatar.cc/301',
     visible: true,
+    isCurrentUser: false,
   },
   {
     id: '4',

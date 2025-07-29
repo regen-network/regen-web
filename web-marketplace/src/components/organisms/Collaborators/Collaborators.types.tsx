@@ -29,6 +29,7 @@ export interface RoleDropdownProps {
   disabled?: boolean;
   isCurrentUser?: boolean;
   isExternalAdmin?: boolean;
+  isOnlyAdmin?: boolean;
 }
 
 export interface ActionsDropdownProps {

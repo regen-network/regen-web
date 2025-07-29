@@ -10,22 +10,25 @@ import EmailIcon from 'web-components/src/components/icons/EmailIcon';
 import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Title } from 'web-components/src/components/typography';
 
-import { ActionsDropdown } from '../MyProjects/components/ActionsDropdown';
-import {
-  SEE_HELP_DOCS,
-  YOU,
-} from '../MyProjects/components/Collaborators.constants';
+import { ActionsDropdown } from '../Collaborators/ActionsDropdown';
+import { SEE_HELP_DOCS, YOU } from '../Collaborators/Collaborators.constants';
 import { mockMembers } from './Members.mock';
 import { Member, MemberRole } from './Members.types';
 import { MemberRoleDropdown } from './MembersRoleDropdown';
 import { VisibilitySwitch } from './VisibilitySwitch';
 
-export const Members = () => {
+export const Members = ({
+  initialMembers = mockMembers,
+}: {
+  initialMembers?: Member[];
+}) => {
   const { _ } = useLingui();
   const navigate = useNavigate();
-  const [members, setMembers] = useState<Member[]>(mockMembers);
+  // Change this line to use the prop:
+  const [members, setMembers] = useState<Member[]>(initialMembers);
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
-  const currentUserRole: MemberRole = 'admin';
+  const currentUserRole: MemberRole =
+    members.find(m => m.isCurrentUser)?.role ?? 'viewer';
   const canAdmin = currentUserRole === 'admin';
   const isOnlyAdmin = members.filter(m => m.role === 'admin').length <= 1;
 

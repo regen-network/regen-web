@@ -80,7 +80,7 @@ export const MemberRoleDropdown: React.FC<
           title={
             showOnlyAdminTooltip
               ? _(
-                  msg`As the only admin, you can’t change your role or remove yourself without adding another admin to this organization. `,
+                  msg`This is the only admin on the project. You can’t change their role or remove them unless another admin is added. `,
                 )
               : _(msg`Please contact your administrator to change your role.`)
           }

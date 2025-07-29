@@ -22,8 +22,12 @@ export const RoleDropdown = ({
   onChange,
   disabled = false,
   currentUserRole,
-  isExternalAdmin = false, // <-- add this prop
-}: RoleDropdownProps & { isExternalAdmin?: boolean }) => {
+  isExternalAdmin = false,
+  isOnlyAdmin = false, // <-- add here
+}: RoleDropdownProps & {
+  isExternalAdmin?: boolean;
+  isOnlyAdmin?: boolean;
+}) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -39,9 +43,11 @@ export const RoleDropdown = ({
     return () => document.removeEventListener('mousedown', handle);
   }, [isOpen]);
 
+  const showOnlyAdminTooltip = isOnlyAdmin && projectRole === 'admin';
   const isDropdownDisabled =
     disabled ||
     currentUserRole !== 'admin' ||
+    showOnlyAdminTooltip ||
     (isExternalAdmin && projectRole === 'admin' && orgRole !== '');
 
   const toggle = () => {
@@ -59,7 +65,11 @@ export const RoleDropdown = ({
       {isDropdownDisabled ? (
         <InfoTooltip
           title={
-            isExternalAdmin && projectRole === 'admin'
+            showOnlyAdminTooltip
+              ? _(
+                  msg`This is the only admin on the project. You can’t change their role or remove them unless another admin is added.`,
+                )
+              : isExternalAdmin && projectRole === 'admin'
               ? _(msg`External admins cannot change the role of other admins.`)
               : _(TOOLTIP_ROLE)
           }
@@ -119,7 +129,7 @@ export const RoleDropdown = ({
               orgRole === 'editor' && projectRole === 'admin';
 
             const unavailable =
-              projectRole === 'viewer'
+              projectRole === 'viewer' || orgRole === 'viewer'
                 ? false
                 : orgRole === undefined || orgRole === null || orgRole === ''
                 ? false

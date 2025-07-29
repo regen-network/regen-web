@@ -27,10 +27,14 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
     const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
 
     const currentUserRole =
-      collaborators?.find(c => c.isCurrentUser)?.projectRole || 'viewer';
+      localCollaborators?.find(c => c.isCurrentUser)?.projectRole || 'viewer';
     const isExternalAdmin = collaborators?.some(
       c => c.orgRole === '' && c.projectRole === 'admin' && c.isCurrentUser,
     );
+
+    const adminCount = localCollaborators?.filter(
+      c => c.projectRole === 'admin',
+    ).length;
 
     /* ───── sort handler ───── */
     const toggleSort = () => {
@@ -52,7 +56,10 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
       );
       onRoleChange?.(id, role);
     };
-    const handleRemove = (id: string) => onRemove?.(id);
+    const handleRemove = (id: string) => {
+      setLocalCollaborators(prev => prev?.filter(c => c.id !== id));
+      onRemove?.(id);
+    };
 
     return (
       <div className="w-full border border-bc-neutral-300">
@@ -127,57 +134,89 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
 
         {/* ───────── Rows ───────── */}
         <div className="flex flex-col">
-          {localCollaborators?.map(col => (
-            <div
-              key={col.id}
-              className="flex flex-col lg:flex-row justify-between py-20 gap-8 lg:gap-0"
-              style={{ borderTop: '1px solid var(--surface-stroke,#D2D5D9)' }}
-            >
-              {/* ① Avatar / info + mobile dots */}
-              <div className="flex lg:w-[330px] items-center justify-between px-6">
-                <div className="flex items-center gap-10">
-                  <div className="w-40 h-40 rounded-full bg-gray-200 overflow-hidden">
-                    {col.avatar && (
-                      <img
-                        src={col.avatar}
-                        alt={col.name}
-                        className="w-full h-full object-cover"
-                      />
-                    )}
-                  </div>
-                  <div className="flex flex-col pb-10 lg:pb-0">
-                    <span className="text-gray-400 ml-2 flex items-center flex-row gap-5 font-bold">
-                      {col.name}
-                      {col.isCurrentUser && (
-                        <>
-                          {` ${_(YOU)}`}
-                          <a
-                            href="/dashboard/profile"
-                            className="ml-1 p-0 bg-transparent border-none cursor-pointer flex items-center group"
-                            aria-label="Edit your profile"
-                          >
-                            <EditIcon sx={{ height: '16px', width: '16px' }} />
-                            <span className="hidden group-hover:flex text-[12px] tracking-[1px] font-[800] bg-transparent font-muli cursor-pointer text-ac-primary-500 ml-5">
-                              {_(msg`EDIT PROFILE`)}
-                            </span>
-                          </a>
-                        </>
+          {localCollaborators?.map(col => {
+            const isOnlyAdmin = adminCount === 1 && col.projectRole === 'admin';
+            return (
+              <div
+                key={col.id}
+                className="flex flex-col lg:flex-row justify-between py-20 gap-8 lg:gap-0"
+                style={{ borderTop: '1px solid var(--surface-stroke,#D2D5D9)' }}
+              >
+                {/* ① Avatar / info + mobile dots */}
+                <div className="flex lg:w-[330px] items-center justify-between px-6">
+                  <div className="flex items-center gap-10">
+                    <div className="w-40 h-40 rounded-full bg-gray-200 overflow-hidden">
+                      {col.avatar && (
+                        <img
+                          src={col.avatar}
+                          alt={col.name}
+                          className="w-full h-full object-cover"
+                        />
                       )}
-                    </span>
+                    </div>
+                    <div className="flex flex-col pb-10 lg:pb-0">
+                      <span className="text-gray-400 ml-2 flex items-center flex-row gap-5 font-bold">
+                        {col.name}
+                        {col.isCurrentUser && (
+                          <>
+                            {` ${_(YOU)}`}
+                            <a
+                              href="/dashboard/profile"
+                              className="ml-1 p-0 bg-transparent border-none cursor-pointer flex items-center group"
+                              aria-label="Edit your profile"
+                            >
+                              <EditIcon
+                                sx={{ height: '16px', width: '16px' }}
+                              />
+                              <span className="hidden group-hover:flex text-[12px] tracking-[1px] font-[800] bg-transparent font-muli cursor-pointer text-ac-primary-500 ml-5">
+                                {_(msg`EDIT PROFILE`)}
+                              </span>
+                            </a>
+                          </>
+                        )}
+                      </span>
 
-                    <span className="text-bc-neutral-700 text-sm">
-                      {col.description}
-                      {col.description && col.organization ? ', ' : ''}
-                      {col.organization}
-                    </span>
-                    <span className="text-bc-neutral-400 text-sm">
-                      {col.email}
-                    </span>
+                      <span className="text-bc-neutral-700 text-sm">
+                        {col.description}
+                        {col.description && col.organization ? ', ' : ''}
+                        {col.organization}
+                      </span>
+                      <span className="text-bc-neutral-400 text-sm">
+                        {col.email}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* dots on mobile */}
+                  <div className="flex h-[94px] lg:hidden">
+                    <ActionsDropdown
+                      role={col.projectRole}
+                      currentUserRole={currentUserRole}
+                      orgRole={col.orgRole}
+                      isCurrentUser={col.isCurrentUser}
+                      onRemove={() => handleRemove(col.id)}
+                      onEditOrgRole={() => {}}
+                      onEditTitle={() => {}}
+                      isExternalAdmin={isExternalAdmin}
+                    />
                   </div>
                 </div>
 
-                {/* dots on mobile */}
-                <div className="flex h-[94px] lg:hidden">
+                {/* ② Role dropdown – full width on mobile */}
+                <div className="order-10 lg:order-none w-full lg:w-[170px] px-6">
+                  <RoleDropdown
+                    projectRole={col.projectRole}
+                    orgRole={col.orgRole}
+                    currentUserRole={currentUserRole}
+                    onChange={r => handleRoleChange(col.id, r)}
+                    isCurrentUser={col.isCurrentUser}
+                    isExternalAdmin={isExternalAdmin}
+                    isOnlyAdmin={isOnlyAdmin}
+                  />
+                </div>
+
+                {/* ③ dots for desktop */}
+                <div className="hidden lg:flex w-[60px] justify-center items-center">
                   <ActionsDropdown
                     role={col.projectRole}
                     currentUserRole={currentUserRole}
@@ -190,34 +229,8 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
                   />
                 </div>
               </div>
-
-              {/* ② Role dropdown – full width on mobile */}
-              <div className="order-10 lg:order-none w-full lg:w-[170px] px-6">
-                <RoleDropdown
-                  projectRole={col.projectRole}
-                  orgRole={col.orgRole}
-                  currentUserRole={currentUserRole}
-                  onChange={r => handleRoleChange(col.id, r)}
-                  isCurrentUser={col.isCurrentUser}
-                  isExternalAdmin={isExternalAdmin}
-                />
-              </div>
-
-              {/* ③ dots for desktop */}
-              <div className="hidden lg:flex w-[60px] justify-center items-center">
-                <ActionsDropdown
-                  role={col.projectRole}
-                  currentUserRole={currentUserRole}
-                  orgRole={col.orgRole}
-                  isCurrentUser={col.isCurrentUser}
-                  onRemove={() => handleRemove(col.id)}
-                  onEditOrgRole={() => {}}
-                  onEditTitle={() => {}}
-                  isExternalAdmin={isExternalAdmin}
-                />
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     );

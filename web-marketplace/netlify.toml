@@ -94,7 +94,8 @@ force = true
 status = 302
 
 [functions]
-  node_bundler = "esbuild"
+  external_node_modules = [] # override the runtime’s default list
+
   included_files = [
     "!node_modules/sharp/vendor/**",
     # Linux x64 libvips binaries (sharp <1.12)

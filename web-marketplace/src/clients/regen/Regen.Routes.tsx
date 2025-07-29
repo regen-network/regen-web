@@ -45,7 +45,7 @@ import Settings from 'pages/Settings';
 import { AuthRoute } from 'components/atoms/AuthRoute';
 import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';
-import { Members } from 'components/organisms/Members/Members';
+//import { Members } from 'components/organisms/Members/Members';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { registryLayoutLoader } from 'components/organisms/RegistryLayout/RegistryLayout.loader';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
@@ -381,7 +381,7 @@ export const getRegenRoutes = ({
             path="projects"
             element={<KeplrOrAuthRoute component={MyProjects} />}
           />
-          <Route
+          {/* <Route
             path="projects/:projectId/manage"
             element={<KeplrOrAuthRoute component={ManageProject} />}
           >
@@ -389,7 +389,7 @@ export const getRegenRoutes = ({
             <Route path="posts" element={<ManageProject />} />
             <Route path="collaborators" element={<ManageProject />} />
             <Route path="projectportfolio" element={<ManageProject />} />
-          </Route>
+          </Route> */}
           <Route
             path="credit-classes"
             element={<KeplrRoute component={MyCreditClasses} />}
@@ -410,10 +410,10 @@ export const getRegenRoutes = ({
             path="my-orders"
             element={<KeplrOrAuthRoute component={Orders} />}
           />
-          <Route
+          {/* <Route
             path="members"
             element={<KeplrOrAuthRoute component={Members} />}
-          />
+          /> */}
           <Route path="sell" element={<KeplrOrAuthRoute component={Sell} />} />
         </Route>
 

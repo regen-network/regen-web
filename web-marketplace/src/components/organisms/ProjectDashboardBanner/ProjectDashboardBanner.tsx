@@ -1,7 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { useMediaQuery, useTheme } from '@mui/material';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -16,60 +16,75 @@ import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceIn
 import { Title } from 'web-components/src/components/typography';
 
 import {
+  CONVERT_TO_DRAFT,
+  DELETE_PROJECT,
+  EDIT,
   MAX_ADDRESS_LENGTH_DESKTOP,
   MAX_ADDRESS_LENGTH_MOBILE,
+  MIGRATE_PROJECT,
+  REGISTER_WITH_PROTOCOL,
+  UNTITLED_PROJECT,
+  VIEW,
 } from './ProjectDashboardBanner.constants';
 import { ProjectBannerProps } from './ProjectDashboardBanner.types';
-import { truncateEnd, useIsMobile } from './ProjectDashboardBanner.utils';
+import { truncateEnd } from './ProjectDashboardBanner.utils';
 
 const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
   project,
   canEdit,
 }) => {
   const { _ } = useLingui();
-  const isMobile = useIsMobile();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
 
-  const truncatedPlace = useMemo(
-    () =>
-      truncateEnd(
-        project.place ?? '',
-        isMobile ? MAX_ADDRESS_LENGTH_MOBILE : MAX_ADDRESS_LENGTH_DESKTOP,
-      ),
-    [project.place, isMobile],
+  const truncatedPlace = truncateEnd(
+    project.place ?? '',
+    isMobile ? MAX_ADDRESS_LENGTH_MOBILE : MAX_ADDRESS_LENGTH_DESKTOP,
   );
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  const menuItems = useMemo(
-    () => [
-      {
-        label: _(msg`Register with a crediting protocol`),
-        color: 'text-bc-neutral-700',
-        icon: <ClipboardIcon />,
-        action: () => setIsMenuOpen(false),
-      },
-      {
-        label: _(msg`Convert to draft`),
-        color: 'text-bc-neutral-700',
-        icon: <DraftDocumentIcon className="w-6 h-6" useGradient />,
-        action: () => setIsMenuOpen(false),
-      },
-      {
-        label: _(msg`Migrate project`),
-        color: 'text-bc-neutral-700',
-        icon: <ArrowDownIcon direction="next" fontSize="medium" useGradient />,
-        action: () => setIsMenuOpen(false),
-      },
-      {
-        label: _(msg`Delete project`),
-        color: 'text-bc-neutral-700',
-        icon: <TrashIcon className="w-6 h-6 text-bc-red-400" />,
-        action: () => setIsMenuOpen(false),
-      },
-    ],
-    [_],
-  );
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  const menuItems = [
+    {
+      label: _(REGISTER_WITH_PROTOCOL),
+      color: 'text-bc-neutral-700',
+      icon: <ClipboardIcon />,
+      action: () => setIsMenuOpen(false),
+    },
+    {
+      label: _(CONVERT_TO_DRAFT),
+      color: 'text-bc-neutral-700',
+      icon: <DraftDocumentIcon className="w-6 h-6" hasGradient />,
+      action: () => setIsMenuOpen(false),
+    },
+    {
+      label: _(MIGRATE_PROJECT),
+      color: 'text-bc-neutral-700',
+      icon: <ArrowDownIcon direction="next" fontSize="medium" hasGradient />,
+      action: () => setIsMenuOpen(false),
+    },
+    {
+      label: _(DELETE_PROJECT),
+      color: 'text-bc-neutral-700',
+      icon: <TrashIcon className="w-6 h-6 text-bc-red-400" />,
+      action: () => setIsMenuOpen(false),
+    },
+  ];
 
   return (
     <div className="relative w-full mt-20">
@@ -86,7 +101,7 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
         <div className="relative z-10 p-20 pb-30 flex flex-col">
           {/* Top right menu */}
           <div className="flex justify-end">
-            <div className="absolute top-4 right-4">
+            <div className="absolute top-4 right-4" ref={menuRef}>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="flex items-center justify-center w-[39px] h-[39px] cursor-pointer rounded-full bg-bc-neutral-700 p-5 transition-colors"
@@ -114,7 +129,7 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
           {/* Project info and buttons */}
           <div className="flex flex-col justify-end max-w-[251px] md:max-w-[596px]">
             <Title className="text-bc-neutral-0 mb-2 text-[21px] md:text-[32px] line-clamp-2 mb-20">
-              {project.name || _(msg`Untitled Project`)}
+              {project.name || _(UNTITLED_PROJECT)}
             </Title>
 
             {/* Address + area */}
@@ -137,7 +152,7 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
                   navigate(`/project/${project.slug || project.id}`)
                 }
               >
-                {_(msg`View`)}
+                {_(VIEW)}
               </OutlinedButton>
 
               {canEdit && (
@@ -147,7 +162,7 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
                     navigate(`/project-pages/${project.id}/edit/basic-info`)
                   }
                 >
-                  {_(msg`Edit`)}
+                  {_(EDIT)}
                 </ContainedButton>
               )}
             </div>

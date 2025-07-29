@@ -95,20 +95,10 @@ status = 302
 
 [functions]
   node_bundler = "esbuild"
-  external_node_modules = [
-    "@keplr-wallet",
-    "@ledgerhq",
-    "@ethereumjs",
-    "@cosmos-kit",
-    "@mapbox",
-    "pdfjs-dist",
-    "sharp",
-    "chain-registry",
-    "xlsx",
-    "web-components"
-  ]
   included_files = [
     "!node_modules/sharp/vendor/**",
+    # Linux x64 libvips binaries (sharp <1.12)
+    "!node_modules/@img/sharp-linux-*/**/*",
     "!node_modules/@img/sharp-libvips-*/**/*",
     "!node_modules/@keplr-wallet/**/*",
     "!node_modules/@ledgerhq/**/*",
@@ -119,6 +109,7 @@ status = 302
     "!node_modules/chain-registry/**/*",
     "!node_modules/pdfjs-dist/**/*",
     "!node_modules/xlsx/**/*",
+    "!node_modules/canvas/**/*",
     "!public/jpg/**",
     "!public/png/**",
     "!public/svg/**"

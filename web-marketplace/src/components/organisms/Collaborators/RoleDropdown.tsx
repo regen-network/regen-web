@@ -11,6 +11,8 @@ import {
   ORG_ADMIN,
   ORG_EDITOR,
   ORG_MEMBER_SETTINGS,
+  TOOLTIP_EXTERNAL_ADMIN,
+  TOOLTIP_ONLY_ADMIN,
   TOOLTIP_ROLE,
 } from './Collaborators.constants';
 import { ProjectRoleType, RoleDropdownProps } from './Collaborators.types';
@@ -22,8 +24,9 @@ export const RoleDropdown = ({
   onChange,
   disabled = false,
   currentUserRole,
+  isCurrentUser = false,
   isExternalAdmin = false,
-  isOnlyAdmin = false, // <-- add here
+  isOnlyAdmin = false,
 }: RoleDropdownProps & {
   isExternalAdmin?: boolean;
   isOnlyAdmin?: boolean;
@@ -43,12 +46,27 @@ export const RoleDropdown = ({
     return () => document.removeEventListener('mousedown', handle);
   }, [isOpen]);
 
+  // Define tooltip conditions
   const showOnlyAdminTooltip = isOnlyAdmin && projectRole === 'admin';
+  const showExternalAdminTooltip =
+    isExternalAdmin && projectRole === 'admin' && orgRole !== '';
+  const showNotAdminTooltip = currentUserRole !== 'admin';
+
   const isDropdownDisabled =
     disabled ||
-    currentUserRole !== 'admin' ||
     showOnlyAdminTooltip ||
-    (isExternalAdmin && projectRole === 'admin' && orgRole !== '');
+    showExternalAdminTooltip ||
+    showNotAdminTooltip;
+
+  // Determine the tooltip title based on conditions
+  let tooltipTitle: string | undefined;
+  if (showOnlyAdminTooltip) {
+    tooltipTitle = _(TOOLTIP_ONLY_ADMIN);
+  } else if (showExternalAdminTooltip) {
+    tooltipTitle = _(TOOLTIP_EXTERNAL_ADMIN);
+  } else if (showNotAdminTooltip && isCurrentUser) {
+    tooltipTitle = _(TOOLTIP_ROLE);
+  }
 
   const toggle = () => {
     if (isDropdownDisabled) return;
@@ -63,36 +81,44 @@ export const RoleDropdown = ({
   return (
     <div ref={ref} className="relative w-full font-sans">
       {isDropdownDisabled ? (
-        <InfoTooltip
-          title={
-            showOnlyAdminTooltip
-              ? _(
-                  msg`This is the only admin on the project. You can’t change their role or remove them unless another admin is added.`,
-                )
-              : isExternalAdmin && projectRole === 'admin'
-              ? _(msg`External admins cannot change the role of other admins.`)
-              : _(TOOLTIP_ROLE)
-          }
-          arrow={true}
-          placement="top"
-          className="bg-bc-neutral-0"
-        >
-          <span>
-            <button
-              disabled
-              tabIndex={-1}
-              aria-disabled="true"
-              className={cn(
-                'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border cursor-not-allowed text-bc-neutral-400',
-              )}
-            >
-              <div className="flex items-center gap-2">
-                <span className="capitalize">{projectRole}</span>
-              </div>
-              <DropdownIcon className="w-4 h-4" color="text-bc-neutral-400" />{' '}
-            </button>
-          </span>
-        </InfoTooltip>
+        tooltipTitle ? (
+          <InfoTooltip
+            title={tooltipTitle}
+            arrow={true}
+            placement="top"
+            className="bg-bc-neutral-0"
+          >
+            <span>
+              <button
+                disabled
+                tabIndex={-1}
+                aria-disabled="true"
+                className={cn(
+                  'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border cursor-not-allowed text-bc-neutral-400 bg-bc-neutral-200',
+                )}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="capitalize">{projectRole}</span>
+                </div>
+                <DropdownIcon className="w-4 h-4" color="text-bc-neutral-400" />
+              </button>
+            </span>
+          </InfoTooltip>
+        ) : (
+          <button
+            disabled
+            tabIndex={-1}
+            aria-disabled="true"
+            className={cn(
+              'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border cursor-not-allowed text-bc-neutral-400 bg-bc-neutral-200',
+            )}
+          >
+            <div className="flex items-center gap-2">
+              <span className="capitalize">{projectRole}</span>
+            </div>
+            <DropdownIcon className="w-4 h-4" color="text-bc-neutral-400" />
+          </button>
+        )
       ) : (
         <button
           onClick={toggle}
@@ -102,7 +128,7 @@ export const RoleDropdown = ({
             'bg-bc-neutral-0 text-bc-neutral-700',
             'border-[#D2D5D9] hover:border-gray-300',
             disabled &&
-              'bg-bc-neutral-200 cursor-not-allowed text-bc-neutral-400',
+              'bg-bc-neutral-400 cursor-not-allowed text-bc-neutral-400',
           )}
         >
           <div className="flex items-center gap-2">
@@ -123,6 +149,8 @@ export const RoleDropdown = ({
             const isSelected = projectRole === key;
             const isOrgAndProjectAdmin =
               orgRole === 'admin' && projectRole === 'admin';
+            const isOrgAdminAndProjectEditor =
+              orgRole === 'admin' && projectRole === 'editor';
             const isOrgAndProjectEditor =
               orgRole === 'editor' && projectRole === 'editor';
             const isOrgEditorProjectAdmin =
@@ -187,7 +215,7 @@ export const RoleDropdown = ({
                         </span>
                       </div>
                       {(orgRole === 'editor' && key === 'editor') ||
-                      (isOrgAndProjectAdmin && key === 'admin') ? (
+                      (isOrgAdminAndProjectEditor && key === 'admin') ? (
                         <p className="text-[12px] leading-[1.45] font-bold italic text-left m-0 text-bc-neutral-500">
                           {_(ORG_EDITOR)}
                           {' '}

@@ -1,17 +1,23 @@
 import React from 'react';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import {
+  HIDDEN,
+  PLEASE_CONTACT_ADMIN_VISIBILITY,
+  VISIBLE,
+} from './Members.constants';
+
 export const VisibilitySwitch: React.FC<{
   checked: boolean;
   disabled?: boolean;
+  isCurrentUser?: boolean;
   onChange: (val: boolean) => void;
-}> = ({ checked, disabled, onChange }) => {
+}> = ({ checked, disabled, isCurrentUser, onChange }) => {
   const { _ } = useLingui();
-  const label = checked ? _(msg`Visible`) : _(msg`Hidden`);
+  const label = checked ? _(VISIBLE) : _(HIDDEN);
 
   const button = (
     <button
@@ -39,11 +45,9 @@ export const VisibilitySwitch: React.FC<{
     </button>
   );
 
-  return disabled ? (
+  return disabled && isCurrentUser ? (
     <InfoTooltip
-      title={_(
-        msg`Please contact your administrator to change your visibility.`,
-      )}
+      title={_(PLEASE_CONTACT_ADMIN_VISIBILITY)}
       arrow={true}
       placement="top"
       className="bg-bc-neutral-0"

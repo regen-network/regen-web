@@ -1,6 +1,5 @@
 import { MessageDescriptor } from '@lingui/core';
 
-import AuthorIcon from 'web-components/src/components/icons/AuthorIcon';
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 import EyeIcon from 'web-components/src/components/icons/EyeIcon';
@@ -8,17 +7,15 @@ import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import {
   ROLE_ADMIN_DESCRIPTION,
   ROLE_ADMIN_LABEL,
-  ROLE_AUTHOR_DESCRIPTION,
-  ROLE_AUTHOR_LABEL,
   ROLE_EDITOR_DESCRIPTION,
   ROLE_EDITOR_LABEL,
   ROLE_VIEWER_DESCRIPTION,
   ROLE_VIEWER_LABEL,
-} from './Collaborators.constants';
-import { ProjectRoleType } from './Collaborators.types';
+} from './Members.constants';
+import { MemberRole } from './Members.types';
 
-export const ROLE_OPTIONS: {
-  key: ProjectRoleType;
+export const ROLE_ITEMS: {
+  key: MemberRole;
   label: MessageDescriptor;
   Icon: React.FC<any>;
   description: MessageDescriptor;
@@ -36,22 +33,9 @@ export const ROLE_OPTIONS: {
     description: ROLE_EDITOR_DESCRIPTION,
   },
   {
-    key: 'author',
-    label: ROLE_AUTHOR_LABEL,
-    Icon: AuthorIcon,
-    description: ROLE_AUTHOR_DESCRIPTION,
-  },
-  {
     key: 'viewer',
     label: ROLE_VIEWER_LABEL,
     Icon: EyeIcon,
     description: ROLE_VIEWER_DESCRIPTION,
   },
 ];
-
-export const ROLE_HIERARCHY: Record<ProjectRoleType, number> = {
-  viewer: 0,
-  author: 1,
-  editor: 2,
-  admin: 3,
-};

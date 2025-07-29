@@ -100,7 +100,7 @@
     "predev": "bun run ./scripts/setClientCSS.js",
     "dev": "next dev --turbopack",
     "prebuild": "bun run ./scripts/setClientCSS.js",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
     "lint-fix": "eslint ./src --fix -c .eslintrc.js --ext .ts,.tsx",

@@ -56,6 +56,7 @@ NODE_VERSION = "22.17.1"
 
 [build.environment]
 NODE_OPTIONS = "--max-old-space-size=10216"
+ZIP_IT_AND_SHIP_IT_DEBUG = "1"
 
 # makes the plugin print the 20 biggest files in every handler
 NEXT_NETLIFY_DEBUG = "true"

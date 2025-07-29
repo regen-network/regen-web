@@ -108,9 +108,9 @@ const ConnectWalletPage = safeLazy(
 );
 const Dashboard = safeLazy(() => import('../../pages/Dashboard'));
 const Orders = safeLazy(() => import('../../pages/Orders'));
-const ManageProject = safeLazy(
-  () => import('../../pages/Dashboard/MyProjects/ManageProject'),
-);
+// const ManageProject = safeLazy(
+//   () => import('../../pages/Dashboard/MyProjects/ManageProject'),
+// );
 
 type RouterProps = {
   reactQueryClient: QueryClient;

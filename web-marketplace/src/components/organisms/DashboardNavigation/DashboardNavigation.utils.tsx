@@ -108,6 +108,7 @@ const getOrgSection = (
       label: _(msg`Members`),
       icon: <MembersIcon linearGradient />,
       path: 'members',
+      disabled: true, // TODO: Enable when members page is ready
     },
   ],
 });

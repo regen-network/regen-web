@@ -20,9 +20,9 @@ import ProjectsTab from 'web-marketplace/src/pages/Profile/ProjectsTab';
 
 import { Maybe } from 'generated/graphql';
 import { QueryClient as RPCQueryClient, useLedger } from 'ledger';
+import { useWallet } from 'lib//wallet/wallet';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
-import { useWallet } from 'lib/wallet/wallet';
 
 import { batchDetailsLoader } from 'pages/BatchDetails/BatchDetails.loader';
 import { buyCreditsLoader } from 'pages/BuyCredits/BuyCredits.loader';
@@ -45,6 +45,7 @@ import Settings from 'pages/Settings';
 import { AuthRoute } from 'components/atoms/AuthRoute';
 import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';
+//import { Members } from 'components/organisms/Members/Members';
 import { RegistryLayout } from 'components/organisms/RegistryLayout/RegistryLayout';
 import { registryLayoutLoader } from 'components/organisms/RegistryLayout/RegistryLayout.loader';
 import { projectDetailsLoader } from 'components/templates/ProjectDetails/ProjectDetails.loader';
@@ -107,6 +108,9 @@ const ConnectWalletPage = safeLazy(
 );
 const Dashboard = safeLazy(() => import('../../pages/Dashboard'));
 const Orders = safeLazy(() => import('../../pages/Orders'));
+const ManageProject = safeLazy(
+  () => import('../../pages/Dashboard/MyProjects/ManageProject'),
+);
 
 type RouterProps = {
   reactQueryClient: QueryClient;
@@ -377,6 +381,15 @@ export const getRegenRoutes = ({
             path="projects"
             element={<KeplrOrAuthRoute component={MyProjects} />}
           />
+          {/* <Route
+            path="projects/:projectId/manage"
+            element={<KeplrOrAuthRoute component={ManageProject} />}
+          >
+            <Route index element={<Navigate to="posts" replace />} />
+            <Route path="posts" element={<ManageProject />} />
+            <Route path="collaborators" element={<ManageProject />} />
+            <Route path="projectportfolio" element={<ManageProject />} />
+          </Route> */}
           <Route
             path="credit-classes"
             element={<KeplrRoute component={MyCreditClasses} />}
@@ -397,6 +410,10 @@ export const getRegenRoutes = ({
             path="my-orders"
             element={<KeplrOrAuthRoute component={Orders} />}
           />
+          {/* <Route
+            path="members"
+            element={<KeplrOrAuthRoute component={Members} />}
+          /> */}
           <Route path="sell" element={<KeplrOrAuthRoute component={Sell} />} />
         </Route>
 

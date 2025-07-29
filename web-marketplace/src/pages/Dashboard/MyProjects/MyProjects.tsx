@@ -8,6 +8,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { CreateProjectCard } from 'web-components/src/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/src/components/cards/ProjectCard';
 
+//import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import { useAuth } from 'lib/auth/auth';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
@@ -28,6 +29,7 @@ import {
   MY_PROJECTS_BUTTON_TEXT,
   MY_PROJECTS_EMPTY_TITLE,
   NOT_SUPPORTED_TOOLTIP_TEXT,
+  //MANAGE_PROJECT_BUTTON_TEXT,
 } from './MyProjects.constants';
 import {
   getDefaultProject,
@@ -41,9 +43,9 @@ const MyProjects = (): JSX.Element => {
   const { isIssuer, isProjectAdmin, sanityProfilePageData } =
     useDashboardContext();
   const { track } = useTracker();
-  const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
   const { wallet, loginDisabled } = useWallet();
   const { activeAccountId, activeAccount } = useAuth();
+  const [projectsCurrentStep] = useAtom(projectsCurrentStepAtom);
 
   const { adminProjects, isLoadingAdminProjects } = useFetchProjectByAdmin({
     adminAccountId: activeAccountId,
@@ -97,6 +99,26 @@ const MyProjects = (): JSX.Element => {
                   isLoading={isLoadingAdminProjects}
                   variant="skeleton"
                 >
+                  {/* <ProjectCard
+                    asAdmin
+                    adminPrompt={
+                      sanityProfilePageData?.allProfilePage?.[0]
+                        ?.projectCardPromptRaw
+                    }
+                    {...getDefaultProject(!activeAccountId, _)}
+                    {...project}
+                    button={{
+                      text: _(MANAGE_PROJECT_BUTTON_TEXT),
+                      disabled: false,
+                      startIcon: <CogIcon linearGradient />,
+                    }}
+                    onButtonClick={() => {
+                      // Navigate to new manage project page
+                      navigate(`/dashboard/projects/${project.id}/manage`);
+                    }}
+                    track={track}
+                    pathname={location.pathname}
+                  /> */}
                   <ProjectCard
                     asAdmin
                     adminPrompt={

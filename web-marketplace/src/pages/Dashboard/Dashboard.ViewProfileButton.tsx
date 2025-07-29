@@ -12,6 +12,7 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import {
   NO_ACTIVE_ACCOUNT,
+  VIEW_ORG_PROFILE,
   VIEW_PROFILE,
   VIEW_PUBLIC_PROFILE,
 } from './Dashboard.constants';
@@ -65,6 +66,9 @@ export const ViewProfileButton = ({
       case 'profile':
         profileUrl = `${getProfileUrl(profileAccount)}/portfolio`;
         break;
+      case 'members':
+        profileUrl = `${getProfileUrl(profileAccount)}/members`;
+        break;
       default:
         profileUrl = getProfileUrl(profileAccount);
         break;
@@ -93,10 +97,12 @@ export const ViewProfileButton = ({
         size="small"
         className="mb-10 py-[6] px-[20] md:py-[9px] md:px-[25px] md:h-[42px]"
       >
-        {section === 'portfolio' ||
-        section === 'credit-classes' ||
-        section === 'projects' ||
-        section === 'credit-batches'
+        {section === 'members'
+          ? _(VIEW_ORG_PROFILE)
+          : section === 'portfolio' ||
+            section === 'credit-classes' ||
+            section === 'projects' ||
+            section === 'credit-batches'
           ? _(VIEW_PUBLIC_PROFILE)
           : section === 'profile'
           ? _(VIEW_PROFILE)

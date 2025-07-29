@@ -8,6 +8,7 @@ import { AccountType } from 'generated/graphql';
 export const PROFILE = msg`Profile`;
 export const VIEW_PROFILE = msg`View Public Profile`;
 export const VIEW_PUBLIC_PROFILE = msg`View On Personal Profile`;
+export const VIEW_ORG_PROFILE = msg`View On Org Profile`;
 export const PROFILE_SAVED = msg`Profile Saved`;
 export const BRIDGE = msg`Bridge`;
 export const PORTFOLIO = msg`Portfolio`;

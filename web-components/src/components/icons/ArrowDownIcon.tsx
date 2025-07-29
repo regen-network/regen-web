@@ -17,7 +17,7 @@ interface ArrowDownIconProps {
   fontSize?: SvgIconProps['fontSize'];
   direction?: Direction;
   sx?: SxProps<Theme>;
-  useGradient?: boolean; // New prop for gradient
+  hasGradient?: boolean; // New prop for gradient
 }
 
 export interface StyleProps {
@@ -58,7 +58,7 @@ export default function ArrowDownIcon({
   fontSize = 'inherit',
   direction = 'down',
   sx,
-  useGradient = false,
+  hasGradient = false,
 }: ArrowDownIconProps): JSX.Element {
   const rotate: string = directionRotate[direction];
   const { classes, cx } = useStyles({ rotate });
@@ -66,7 +66,7 @@ export default function ArrowDownIcon({
   const gradientId = `arrow-gradient-${Math.random()
     .toString(36)
     .substr(2, 9)}`;
-  const fillColor = useGradient ? `url(#${gradientId})` : color;
+  const fillColor = hasGradient ? `url(#${gradientId})` : color;
 
   return (
     <SvgIcon
@@ -81,7 +81,7 @@ export default function ArrowDownIcon({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {useGradient && (
+        {hasGradient && (
           <defs>
             <linearGradient
               id={gradientId}

@@ -1,21 +1,21 @@
 import React from 'react';
 
 interface DraftDocumentIconProps extends React.SVGProps<SVGSVGElement> {
-  useGradient?: boolean;
+  hasGradient?: boolean;
 }
 
 export const DraftDocumentIcon = ({
-  useGradient = false,
+  hasGradient = false,
   ...props
 }: DraftDocumentIconProps) => {
   const gradientId = `draft-gradient-${Math.random()
     .toString(36)
     .substr(2, 9)}`;
-  const fillColor = useGradient ? `url(#${gradientId})` : 'currentColor';
+  const fillColor = hasGradient ? `url(#${gradientId})` : 'currentColor';
 
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" {...props}>
-      {useGradient && (
+      {hasGradient && (
         <defs>
           <linearGradient
             id={gradientId}

@@ -1,12 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import { HorizontalDotsIcon } from 'web-components/src/components/icons/HorizontalDotsIcon';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import {
+  ACTION_EDIT_MY_PROFILE,
+  ACTION_EDIT_MY_TITLE,
+  ACTION_EDIT_MY_USER_PROFILE,
+  ACTION_EDIT_ORG_ROLE,
+  ACTION_REMOVE,
+  TOOLTIP_ONLY_ADMIN_REMOVE,
+} from './Collaborators.constants';
 import { ActionsDropdownProps } from './Collaborators.types';
 
 export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
@@ -60,11 +67,11 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
     if (isCurrentUser) {
       items = [
         {
-          label: _(msg`Edit my user profile`),
+          label: _(ACTION_EDIT_MY_USER_PROFILE),
           onClick: () => navigate('/dashboard/profile'),
         },
         {
-          label: _(msg`Remove`),
+          label: _(ACTION_REMOVE),
           onClick: onRemove,
           danger: true,
           disabled: isOnlyAdmin && role === 'admin',
@@ -73,7 +80,7 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
     } else {
       items = [
         {
-          label: _(msg`Remove`),
+          label: _(ACTION_REMOVE),
           onClick: onRemove,
           danger: true,
           disabled: isOnlyAdmin && role === 'admin',
@@ -103,9 +110,7 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
               <li key={item.label} role="menuitem">
                 {item.disabled ? (
                   <InfoTooltip
-                    title={_(
-                      msg`As the only admin, you can’t change your role or remove yourself without adding another admin to this organization.`,
-                    )}
+                    title={_(TOOLTIP_ONLY_ADMIN_REMOVE)}
                     arrow={true}
                     placement="top"
                     className="bg-bc-neutral-0"
@@ -162,19 +167,19 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
     if (isCurrentUser) {
       items = [
         {
-          label: _(msg`Remove`),
+          label: _(ACTION_REMOVE),
           onClick: onRemove,
           danger: true,
         },
         {
-          label: _(msg`Edit my title`),
+          label: _(ACTION_EDIT_MY_TITLE),
           onClick: onEditTitle,
         },
       ];
     } else if (!orgRole) {
       items = [
         {
-          label: _(msg`Remove`),
+          label: _(ACTION_REMOVE),
           onClick: onRemove,
           danger: true,
         },
@@ -184,11 +189,11 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
     if (isCurrentUser && role === 'admin' && orgRole) {
       items = [
         {
-          label: _(msg`Edit organization role`),
+          label: _(ACTION_EDIT_ORG_ROLE),
           onClick: onEditOrgRole,
         },
         {
-          label: _(msg`Edit my title`),
+          label: _(ACTION_EDIT_MY_TITLE),
           onClick: onEditTitle,
         },
       ];
@@ -198,21 +203,21 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
     ) {
       items = [
         {
-          label: _(msg`Edit my profile`),
+          label: _(ACTION_EDIT_MY_PROFILE),
           onClick: () => navigate('/dashboard/profile'),
         },
       ];
     } else if (orgRole !== '') {
       items = [
         {
-          label: _(msg`Edit organization role`),
+          label: _(ACTION_EDIT_ORG_ROLE),
           onClick: onEditOrgRole,
         },
       ];
     } else {
       items = [
         {
-          label: _(msg`Remove`),
+          label: _(ACTION_REMOVE),
           onClick: onRemove,
           danger: true,
         },

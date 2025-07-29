@@ -57,6 +57,7 @@ NODE_VERSION = "22.17.1"
 [build.environment]
 NODE_OPTIONS = "--max-old-space-size=10216"
 SHARP_IGNORE_GLOBAL_LIBVIPS = "1"
+NEXT_DISABLE_IPX = "1"
 
 # makes the plugin print the 20 biggest files in every handler
 NEXT_NETLIFY_DEBUG = "true"

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.1](https://github.com/regen-network/regen-web/compare/v2.10.0...v2.10.1) (2025-07-29)
+
+### Bug Fixes
+
+- resolve failing tests in ChooseCreditsForm ([#2691](https://github.com/regen-network/regen-web/issues/2691)) ([fe47f20](https://github.com/regen-network/regen-web/commit/fe47f2095d1c3f3b025c88f3e677accf976ac6d6))
+- show orders on dashboard ([602aca3](https://github.com/regen-network/regen-web/commit/602aca3375d23af7edd1fd9655fdc29004df133f))
+- user balanace query ([47038cc](https://github.com/regen-network/regen-web/commit/47038cc6db3523fa2c10aafc70124146287b57f7))
+
 # [2.10.0](https://github.com/regen-network/regen-web/compare/v2.9.5...v2.10.0) (2025-07-22)
 
 ### Bug Fixes

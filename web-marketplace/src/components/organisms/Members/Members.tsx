@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
@@ -12,6 +11,15 @@ import { Title } from 'web-components/src/components/typography';
 
 import { ActionsDropdown } from '../Collaborators/ActionsDropdown';
 import { SEE_HELP_DOCS, YOU } from '../Collaborators/Collaborators.constants';
+import {
+  EDIT_PROFILE,
+  INVITE_MEMBERS,
+  NAME,
+  ORGANIZATION_MEMBERS,
+  ORGANIZATION_MEMBERS_DESCRIPTION,
+  ROLE,
+  VISIBILITY_ON_PROFILE,
+} from './Members.constants';
 import { mockMembers } from './Members.mock';
 import { Member, MemberRole } from './Members.types';
 import { MemberRoleDropdown } from './MembersRoleDropdown';
@@ -24,7 +32,6 @@ export const Members = ({
 }) => {
   const { _ } = useLingui();
   const navigate = useNavigate();
-  // Change this line to use the prop:
   const [members, setMembers] = useState<Member[]>(initialMembers);
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
   const currentUserRole: MemberRole =
@@ -65,7 +72,7 @@ export const Members = ({
       {/* Header row */}
       <div className="flex justify-between items-center mb-10">
         <Title variant="h4">
-          {_(msg`Organization Members`)}{' '}
+          {_(ORGANIZATION_MEMBERS)}{' '}
           <span className="text-bc-neutral-400 font-normal">
             ({members.length})
           </span>
@@ -78,15 +85,13 @@ export const Members = ({
             onClick={handleInvite}
             startIcon={<EmailIcon />}
           >
-            {_(msg`Invite Members`)}
+            {_(INVITE_MEMBERS)}
           </ContainedButton>
         )}
       </div>
 
       <p className="text-sc-text-paragraph mb-10 mt-0">
-        {_(
-          msg`Organization members have permissions for all projects associated with an organization`,
-        )}
+        {_(ORGANIZATION_MEMBERS_DESCRIPTION)}
       </p>
 
       <button
@@ -111,7 +116,7 @@ export const Members = ({
           onClick={handleInvite}
           startIcon={<EmailIcon />}
         >
-          {_(msg`Invite Members`)}
+          {_(INVITE_MEMBERS)}
         </ContainedButton>
       )}
 
@@ -121,17 +126,15 @@ export const Members = ({
           className="w-[330px] px-6 flex items-center cursor-pointer"
           onClick={toggleSort}
         >
-          {_(msg`NAME`)}
+          {_(NAME)}
           <DropdownIcon
             className={`ml-10 w-4 h-4 transition-transform ${
               sortDir === 'desc' ? 'rotate-180' : ''
             }`}
           />
         </div>
-        <div className="w-[170px] text-left">{_(msg`ROLE`)}</div>
-        <div className="w-[150px] text-left">
-          {_(msg`VISIBILITY ON PROFILE`)}
-        </div>
+        <div className="w-[170px] text-left">{_(ROLE)}</div>
+        <div className="w-[150px] text-left">{_(VISIBILITY_ON_PROFILE)}</div>
         <div className="w-[60px]" />
       </div>
 
@@ -168,7 +171,7 @@ export const Members = ({
                         >
                           <EditIcon sx={{ height: '16px', width: '16px' }} />
                           <span className="hidden group-hover:flex text-[12px] tracking-[1px] font-[800] bg-transparent font-muli cursor-pointer text-ac-primary-500 ml-5">
-                            {_(msg`EDIT PROFILE`)}
+                            {_(EDIT_PROFILE)}
                           </span>
                         </a>
                       </>
@@ -203,11 +206,13 @@ export const Members = ({
                 role={m.role}
                 disabled={!canAdmin}
                 isOnlyAdmin={isOnlyAdmin}
+                isCurrentUser={m.isCurrentUser}
                 onChange={r => updateRole(m.id, r)}
               />
               <VisibilitySwitch
                 checked={m.visible}
                 disabled={!canAdmin}
+                isCurrentUser={m.isCurrentUser}
                 onChange={v => updateVisibility(m.id, v)}
               />
             </div>
@@ -218,6 +223,7 @@ export const Members = ({
                 role={m.role}
                 disabled={!canAdmin}
                 isOnlyAdmin={isOnlyAdmin}
+                isCurrentUser={m.isCurrentUser}
                 onChange={r => updateRole(m.id, r)}
               />
             </div>
@@ -225,6 +231,7 @@ export const Members = ({
               <VisibilitySwitch
                 checked={m.visible}
                 disabled={!canAdmin}
+                isCurrentUser={m.isCurrentUser}
                 onChange={v => updateVisibility(m.id, v)}
               />
             </div>

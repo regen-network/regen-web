@@ -48,7 +48,7 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
   };
 
   if (context === 'members') {
-    if (currentUserRole !== 'admin') {
+    if (!isCurrentUser && currentUserRole !== 'admin') {
       return null;
     }
     let items: {

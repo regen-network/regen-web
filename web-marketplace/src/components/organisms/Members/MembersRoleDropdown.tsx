@@ -1,54 +1,27 @@
 import { useEffect, useRef, useState } from 'react';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import CheckIcon from 'web-components/src/components/icons/CheckIcon';
-import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import DropdownIcon from 'web-components/src/components/icons/DropdownIcon';
-import EditIcon from 'web-components/src/components/icons/EditIcon';
-import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { cn } from 'web-components/src/utils/styles/cn';
 
-export type MemberRole = 'admin' | 'editor' | 'viewer';
-
-interface MemberRoleDropdownProps {
-  role: MemberRole;
-  disabled?: boolean;
-  onChange: (newRole: MemberRole) => void;
-}
-
-const ROLE_ITEMS: {
-  key: MemberRole;
-  label: string;
-  Icon: React.FC<any>;
-  description: string;
-}[] = [
-  {
-    key: 'admin',
-    label: 'Admin',
-    Icon: CogIcon,
-    description:
-      'Manages user access and has full control of projects, credits, and credit classes.',
-  },
-  {
-    key: 'editor',
-    label: 'Editor',
-    Icon: EditIcon,
-    description:
-      'Has full control of projects and credit classes, but cannot manage users or credits.',
-  },
-  {
-    key: 'viewer',
-    label: 'Viewer',
-    Icon: EyeIcon,
-    description: 'Can view all data across all projects, even when private.',
-  },
-];
+import {
+  ONLY_ADMIN_CANNOT_CHANGE,
+  PLEASE_CONTACT_ADMIN,
+} from './Members.constants';
+import { MemberRole, MemberRoleDropdownProps } from './Members.types';
+import { ROLE_ITEMS } from './Members.utils';
 
 export const MemberRoleDropdown: React.FC<
   MemberRoleDropdownProps & { isOnlyAdmin?: boolean }
-> = ({ role, disabled = false, onChange, isOnlyAdmin = false }) => {
+> = ({
+  role,
+  disabled = false,
+  onChange,
+  isOnlyAdmin = false,
+  isCurrentUser,
+}) => {
   const { _ } = useLingui();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -63,8 +36,18 @@ export const MemberRoleDropdown: React.FC<
     return () => document.removeEventListener('mousedown', h);
   }, [open]);
 
-  const showOnlyAdminTooltip = isOnlyAdmin && role === 'admin';
-  const isDropdownDisabled = disabled || showOnlyAdminTooltip;
+  const showUserAdminTooltip = isOnlyAdmin && role === 'admin' && isCurrentUser;
+  const showContactAdminTooltip = isCurrentUser && role !== 'admin';
+
+  const isDropdownDisabled =
+    disabled || showUserAdminTooltip || showContactAdminTooltip;
+
+  let tooltipTitle: string | undefined;
+  if (showContactAdminTooltip) {
+    tooltipTitle = _(PLEASE_CONTACT_ADMIN);
+  } else if (showUserAdminTooltip) {
+    tooltipTitle = _(ONLY_ADMIN_CANNOT_CHANGE);
+  }
 
   const toggle = () => !isDropdownDisabled && setOpen(o => !o);
   const select = (r: MemberRole) => {
@@ -76,37 +59,50 @@ export const MemberRoleDropdown: React.FC<
     <div ref={ref} className="relative w-full font-sans">
       {/* ───── Trigger button ───── */}
       {isDropdownDisabled ? (
-        <InfoTooltip
-          title={
-            showOnlyAdminTooltip
-              ? _(
-                  msg`This is the only admin on the project. You can’t change their role or remove them unless another admin is added. `,
-                )
-              : _(msg`Please contact your administrator to change your role.`)
-          }
-          arrow={true}
-          placement="top"
-          className="bg-bc-neutral-0"
-        >
-          <span>
-            <button
-              disabled
-              tabIndex={-1}
-              aria-disabled="true"
-              className={cn(
-                'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border cursor-not-allowed bg-bc-neutral-200',
-              )}
-            >
-              <div className="flex items-center gap-2">
-                <span className="capitalize">{role}</span>
-              </div>
-              <DropdownIcon
-                className="w-4 h-4 text-bc-neutral-400"
-                color="text-bc-neutral-400"
-              />
-            </button>
-          </span>
-        </InfoTooltip>
+        tooltipTitle ? (
+          <InfoTooltip
+            title={tooltipTitle}
+            arrow={true}
+            placement="top"
+            className="bg-bc-neutral-0"
+          >
+            <span>
+              <button
+                disabled
+                tabIndex={-1}
+                aria-disabled="true"
+                className={cn(
+                  'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border cursor-not-allowed bg-bc-neutral-200',
+                )}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="capitalize">{role}</span>
+                </div>
+                <DropdownIcon
+                  className="w-4 h-4 text-bc-neutral-400"
+                  color="text-bc-neutral-400"
+                />
+              </button>
+            </span>
+          </InfoTooltip>
+        ) : (
+          <button
+            disabled
+            tabIndex={-1}
+            aria-disabled="true"
+            className={cn(
+              'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border cursor-not-allowed bg-bc-neutral-200',
+            )}
+          >
+            <div className="flex items-center gap-2">
+              <span className="capitalize">{role}</span>
+            </div>
+            <DropdownIcon
+              className="w-4 h-4 text-bc-neutral-400"
+              color="text-bc-neutral-400"
+            />
+          </button>
+        )
       ) : (
         <button
           onClick={toggle}
@@ -115,13 +111,12 @@ export const MemberRoleDropdown: React.FC<
             'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border cursor-pointer',
             'bg-bc-neutral-0 text-bc-neutral-700',
             'border-[#D2D5D9] hover:border-gray-300',
-            disabled && 'bg-bc-neutral-400 cursor-not-allowed',
           )}
         >
           <div className="flex items-center gap-2">
             <span className="capitalize">{role}</span>
           </div>
-          <DropdownIcon className="w-4 h-4" />
+          <DropdownIcon className="w-4 h-4 text-bc-neutral-400" />
         </button>
       )}
 
@@ -165,11 +160,11 @@ export const MemberRoleDropdown: React.FC<
                           aria-hidden
                         />
                         <span className="font-medium text-bc-neutral-900 text-[16px]">
-                          {_(msg`${label}`)}
+                          {_(label)}
                         </span>
                       </div>
                       <p className="text-[12px] leading-[1.45] not-italic text-left m-0 text-bc-neutral-500">
-                        {_(msg`${description}`)}
+                        {_(description)}
                       </p>
                     </div>
                   </div>

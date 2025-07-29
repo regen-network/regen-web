@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
@@ -11,7 +10,17 @@ import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Title } from 'web-components/src/components/typography';
 
 import { ActionsDropdown } from './ActionsDropdown';
-import { SEE_HELP_DOCS, YOU } from './Collaborators.constants';
+import {
+  COLLABORATORS_DESCRIPTION,
+  EDIT_PROFILE,
+  INVITE,
+  INVITE_COLLABORATORS,
+  NAME,
+  PROJECT_COLLABORATORS,
+  ROLE,
+  SEE_HELP_DOCS,
+  YOU,
+} from './Collaborators.constants';
 import {
   CollaboratorsManagementProps,
   ProjectRoleType,
@@ -66,7 +75,7 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
         {/* ───────── Header ───────── */}
         <div className="flex justify-between items-center mb-10">
           <Title variant="h4">
-            {_(msg`Project Collaborators`)}{' '}
+            {_(PROJECT_COLLABORATORS)}{' '}
             <span className="text-bc-neutral-400 font-normal">
               ({collaborators?.length})
             </span>
@@ -79,15 +88,13 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
               onClick={onInvite}
               startIcon={<EmailIcon />}
             >
-              {_(msg`Invite Collaborators`)}
+              {_(INVITE_COLLABORATORS)}
             </ContainedButton>
           )}
         </div>
 
         <p className="text-sc-text-paragraph mb-10 mt-0">
-          {_(
-            msg`Collaborators can manage the project page, posts, and credits, but aren’t visible publicly.`,
-          )}
+          {_(COLLABORATORS_DESCRIPTION)}
         </p>
         <button
           className="p-0 text-[12px] tracking-[1px] font-[800] mb-30 bg-transparent font-muli cursor-pointer text-ac-primary-500 border-none flex items-center gap-3 group"
@@ -111,7 +118,7 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
             onClick={onInvite}
             startIcon={<EmailIcon />}
           >
-            {_(msg`Invite`)}
+            {_(INVITE)}
           </ContainedButton>
         )}
 
@@ -121,14 +128,14 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
             className="w-[330px] px-6 flex items-center cursor-pointer"
             onClick={toggleSort}
           >
-            {_(msg`NAME`)}
+            {_(NAME)}
             <DropdownIcon
               className={`ml-10 w-4 h-4 transition-transform ${
                 sortDir === 'desc' ? 'rotate-180' : ''
               }`}
             />
           </div>
-          <div className="w-[170px] text-left">{_(msg`ROLE`)}</div>
+          <div className="w-[170px] text-left">{_(ROLE)}</div>
           <div className="w-[60px]" />
         </div>
 
@@ -169,7 +176,7 @@ export const CollaboratorsManagement: React.FC<CollaboratorsManagementProps> =
                                 sx={{ height: '16px', width: '16px' }}
                               />
                               <span className="hidden group-hover:flex text-[12px] tracking-[1px] font-[800] bg-transparent font-muli cursor-pointer text-ac-primary-500 ml-5">
-                                {_(msg`EDIT PROFILE`)}
+                                {_(EDIT_PROFILE)}
                               </span>
                             </a>
                           </>

@@ -20,6 +20,8 @@ msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 #~ msgid " Exit to homepage "
 #~ msgstr ""
@@ -60,6 +62,10 @@ msgstr ""
 msgid "(retirement is permanent and non-reversible)"
 msgstr ""
 
+#: src/components/organisms/Collaborators/Collaborators.constants.tsx:3
+msgid "(you)"
+msgstr ""
+
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:136
 msgid "{0, plural, one {allowed credit class} other {allowed credit classes}}"
 msgstr ""
@@ -80,12 +86,20 @@ msgstr ""
 msgid "{creditsAvailable, plural, one {Credit amount adjusted: Only {formattedCreditsAvailable} credit available in {displayDenom}} other {Credit amount adjusted: Only {formattedCreditsAvailable} credits available in {displayDenom}}}"
 msgstr ""
 
+#: src/components/organisms/Members/MembersRoleDropdown.tsx:172
+msgid "{description}"
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:233
 msgid "{from}–{displayedTo} of {count}"
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:234
 msgid "{from}–{displayedTo} of more than {to}"
+msgstr ""
+
+#: src/components/organisms/Members/MembersRoleDropdown.tsx:168
+msgid "{label}"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:120
@@ -601,6 +615,10 @@ msgstr ""
 msgid "Articles"
 msgstr ""
 
+#: src/components/organisms/Collaborators/ActionsDropdown.tsx:107
+msgid "As the only admin, you can’t change your role or remove yourself without adding another admin to this organization."
+msgstr ""
+
 #: src/components/organisms/BasketsTable.tsx:67
 msgid "Asset"
 msgstr ""
@@ -782,7 +800,7 @@ msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:4
-#: src/pages/Dashboard/Dashboard.constants.tsx:12
+#: src/pages/Dashboard/Dashboard.constants.tsx:13
 msgid "Bridge"
 msgstr ""
 
@@ -897,6 +915,15 @@ msgstr ""
 
 #: src/components/organisms/CreditSendForm/CreditSendForm.tsx:155
 msgid "By default these credits are tradable but you may check “retire all credits upon transfer” below to automatically retire them upon sending."
+msgstr ""
+
+#: src/components/organisms/Collaborators/Collaborators.constants.tsx:14
+#: src/components/organisms/Collaborators/Collaborators.constants.tsx:15
+msgid "Can edit all project page info and posts. Cannot manage users or credits."
+msgstr ""
+
+#: src/components/organisms/Collaborators/Collaborators.constants.tsx:16
+msgid "Can view all project info and posts."
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:121
@@ -1086,7 +1113,7 @@ msgid "close"
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:30
-#: src/pages/Dashboard/Dashboard.constants.tsx:20
+#: src/pages/Dashboard/Dashboard.constants.tsx:21
 msgid "Close menu"
 msgstr ""
 
@@ -1098,6 +1125,14 @@ msgstr ""
 
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:9
 msgid "co-benefit"
+msgstr ""
+
+#: src/pages/Dashboard/MyProjects/ManageProject.tsx:43
+msgid "Collaborators"
+msgstr ""
+
+#: src/components/organisms/Collaborators/Collaborators.tsx:89
+msgid "Collaborators can manage the project page, posts, and credits, but aren’t visible publicly."
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:32
@@ -1408,7 +1443,7 @@ msgstr ""
 msgid "Credit class: the structure, procedures and requirements for project registration, the quantification, monitoring, reporting and verification (MRV), and issuance of credits related to a certain credit type."
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:142
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:143
 msgid "Credit classes"
 msgstr ""
 
@@ -1422,7 +1457,7 @@ msgstr ""
 msgid "Credit Details"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:134
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:135
 msgid "Credit issuance"
 msgstr ""
 
@@ -1633,7 +1668,7 @@ msgid "Customer info"
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:29
-#: src/pages/Dashboard/Dashboard.constants.tsx:21
+#: src/pages/Dashboard/Dashboard.constants.tsx:22
 msgid "Dashboard side navigation"
 msgstr ""
 
@@ -1643,6 +1678,11 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:18
 msgid "Data Deficient"
+msgstr ""
+
+#: src/pages/Dashboard/MyProjects/ManageProject.tsx:38
+#: src/pages/Dashboard/MyProjects/ManageProject.tsx:72
+msgid "Data Posts"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:16
@@ -1870,8 +1910,26 @@ msgstr ""
 msgid "Edit filters"
 msgstr ""
 
+#: src/components/organisms/Collaborators/ActionsDropdown.tsx:201
+msgid "Edit my profile"
+msgstr ""
+
+#: src/components/organisms/Collaborators/ActionsDropdown.tsx:170
+#: src/components/organisms/Collaborators/ActionsDropdown.tsx:191
+msgid "Edit my title"
+msgstr ""
+
+#: src/components/organisms/Collaborators/ActionsDropdown.tsx:63
+msgid "Edit my user profile"
+msgstr ""
+
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:103
 msgid "Edit org profile"
+msgstr ""
+
+#: src/components/organisms/Collaborators/ActionsDropdown.tsx:187
+#: src/components/organisms/Collaborators/ActionsDropdown.tsx:208
+msgid "Edit organization role"
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:79
@@ -1888,6 +1946,11 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:99
 msgid "Edit Profile"
+msgstr ""
+
+#: src/components/organisms/Collaborators/Collaborators.tsx:172
+#: src/components/organisms/Members/Members.tsx:171
+msgid "EDIT PROFILE"
 msgstr ""
 
 #: src/pages/ProjectEdit/ProjectEdit.constants.ts:5
@@ -2012,6 +2075,10 @@ msgstr ""
 msgid "Explore Banks"
 msgstr ""
 
+#: src/components/organisms/Collaborators/RoleDropdown.tsx:73
+msgid "External admins cannot change the role of other admins."
+msgstr ""
+
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:11
 msgid "Extinct"
 msgstr ""
@@ -2040,7 +2107,7 @@ msgstr ""
 msgid "Failed to resend passcode"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:42
+#: src/pages/Dashboard/Dashboard.constants.tsx:43
 msgid "Failed to validate token"
 msgstr ""
 
@@ -2182,6 +2249,10 @@ msgstr ""
 
 #: src/components/organisms/BasicInfoForm/BasicInfoForm.tsx:193
 msgid "Hectares"
+msgstr ""
+
+#: src/components/organisms/Members/VisibilitySwitch.tsx:14
+msgid "Hidden"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:214
@@ -2339,11 +2410,24 @@ msgstr ""
 msgid "Invalid regen address"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:44
+#: src/pages/Dashboard/Dashboard.constants.tsx:45
 msgid "Invalid token"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:134
+#: src/components/organisms/Collaborators/Collaborators.tsx:114
+msgid "Invite"
+msgstr ""
+
+#: src/components/organisms/Collaborators/Collaborators.tsx:82
+msgid "Invite Collaborators"
+msgstr ""
+
+#: src/components/organisms/Members/Members.tsx:81
+#: src/components/organisms/Members/Members.tsx:114
+msgid "Invite Members"
+msgstr ""
+
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:135
 msgid "Issuance"
 msgstr ""
 
@@ -2355,7 +2439,7 @@ msgstr ""
 msgid "Issued"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:137
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:138
 msgid "Issued credit batches"
 msgstr ""
 
@@ -2535,7 +2619,7 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:36
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:3
-#: src/pages/Dashboard/Dashboard.constants.tsx:47
+#: src/pages/Dashboard/Dashboard.constants.tsx:48
 msgid "Log in email successfully added"
 msgstr ""
 
@@ -2543,7 +2627,7 @@ msgstr ""
 msgid "log in for faster checkout"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:119
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:120
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:11
 msgid "Log out"
 msgstr ""
@@ -2612,6 +2696,14 @@ msgstr ""
 msgid "Manage Portfolio"
 msgstr ""
 
+#: src/pages/Dashboard/MyProjects/MyProjects.constants.ts:9
+msgid "Manage Project"
+msgstr ""
+
+#: src/pages/Dashboard/MyProjects/ManageProject.tsx:110
+msgid "manage project tabs"
+msgstr ""
+
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:61
 msgid "Manage projects"
 msgstr ""
@@ -2626,6 +2718,10 @@ msgstr ""
 
 #: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:19
 msgid "Manage your Stripe account for fiat purchases"
+msgstr ""
+
+#: src/components/organisms/Collaborators/Collaborators.constants.tsx:13
+msgid "Manages user access and can edit all project info and project credits."
 msgstr ""
 
 #: src/pages/Projects/hooks/useClientFilters.tsx:146
@@ -2793,6 +2889,11 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+#: src/components/organisms/Collaborators/Collaborators.tsx:124
+#: src/components/organisms/Members/Members.tsx:124
+msgid "NAME"
+msgstr ""
+
 #: src/components/organisms/Documentation/Documentation.constants.ts:8
 #~ msgid "Name of document"
 #~ msgstr ""
@@ -2844,7 +2945,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:16
+#: src/pages/Dashboard/Dashboard.constants.tsx:17
 msgid "No active account"
 msgstr ""
 
@@ -2963,7 +3064,7 @@ msgstr ""
 msgid "Oops! Page not found."
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:19
+#: src/pages/Dashboard/Dashboard.constants.tsx:20
 msgid "Open menu"
 msgstr ""
 
@@ -2995,9 +3096,9 @@ msgstr ""
 #~ msgid "orders"
 #~ msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:153
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:153
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:156
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:154
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:154
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:157
 msgid "Orders"
 msgstr ""
 
@@ -3015,6 +3116,18 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:42
 msgid "Organization dashboard"
+msgstr ""
+
+#: src/components/organisms/Collaborators/Collaborators.constants.tsx:4
+msgid "organization member settings"
+msgstr ""
+
+#: src/components/organisms/Members/Members.tsx:68
+msgid "Organization Members"
+msgstr ""
+
+#: src/components/organisms/Members/Members.tsx:88
+msgid "Organization members have permissions for all projects associated with an organization"
 msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:6
@@ -3074,7 +3187,7 @@ msgstr ""
 #~ msgid "Peer <0/>Reviewed"
 #~ msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:14
+#: src/pages/Dashboard/Dashboard.constants.tsx:15
 msgid "Personal Account"
 msgstr ""
 
@@ -3082,7 +3195,7 @@ msgstr ""
 msgid "Personal dashboard"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:15
+#: src/pages/Dashboard/Dashboard.constants.tsx:16
 msgid "Personal Dashboard"
 msgstr ""
 
@@ -3128,6 +3241,15 @@ msgstr ""
 
 #: src/components/organisms/BridgedEcocreditsTable/BridgedEcocreditsTable.Note.tsx:25
 msgid "Please contact us at <0>support@regen.network</0>to resolve this issue. Do not reinitiate the transaction."
+msgstr ""
+
+#: src/components/organisms/Collaborators/Collaborators.constants.tsx:11
+#: src/components/organisms/Members/MembersRoleDropdown.tsx:85
+msgid "Please contact your administrator to change your role."
+msgstr ""
+
+#: src/components/organisms/Members/VisibilitySwitch.tsx:45
+msgid "Please contact your administrator to change your visibility."
 msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:27
@@ -3198,12 +3320,12 @@ msgid "Please wait while transaction processes"
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:45
-#: src/pages/Dashboard/Dashboard.constants.tsx:13
+#: src/pages/Dashboard/Dashboard.constants.tsx:14
 #: src/pages/Profile/Profile.tsx:82
 msgid "Portfolio"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:18
+#: src/pages/Dashboard/Dashboard.constants.tsx:19
 msgid "Portfolio tabs"
 msgstr ""
 
@@ -3372,7 +3494,7 @@ msgstr ""
 msgid "Profile not found"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:11
+#: src/pages/Dashboard/Dashboard.constants.tsx:12
 msgid "Profile Saved"
 msgstr ""
 
@@ -3446,6 +3568,10 @@ msgstr ""
 
 #: src/components/organisms/ProjectTopSection/ProjectTopSection.constants.ts:8
 msgid "project benefit"
+msgstr ""
+
+#: src/components/organisms/Collaborators/Collaborators.tsx:69
+msgid "Project Collaborators"
 msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:121
@@ -3522,6 +3648,11 @@ msgstr ""
 #: src/components/organisms/BasicInfoForm/BasicInfoForm.constants.ts:3
 #: src/components/organisms/MetadataForm/MetadataForm.constants.ts:3
 msgid "Project name"
+msgstr ""
+
+#: src/pages/Dashboard/MyProjects/ManageProject.tsx:47
+#: src/pages/Dashboard/MyProjects/ManageProject.tsx:97
+msgid "Project Portfolio"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:5
@@ -3722,6 +3853,14 @@ msgstr ""
 msgid "Reminder: this project is stored in the Regen Marketplace database. If you want to make a project on Regen Ledger, please log in with a keplr wallet."
 msgstr ""
 
+#: src/components/organisms/Collaborators/ActionsDropdown.tsx:67
+#: src/components/organisms/Collaborators/ActionsDropdown.tsx:76
+#: src/components/organisms/Collaborators/ActionsDropdown.tsx:165
+#: src/components/organisms/Collaborators/ActionsDropdown.tsx:177
+#: src/components/organisms/Collaborators/ActionsDropdown.tsx:215
+msgid "Remove"
+msgstr ""
+
 #: src/pages/Faucet/Faucet.tsx:45
 msgid "Request fund"
 msgstr ""
@@ -3875,6 +4014,11 @@ msgstr ""
 msgid "Riparian forest"
 msgstr ""
 
+#: src/components/organisms/Collaborators/Collaborators.tsx:131
+#: src/components/organisms/Members/Members.tsx:131
+msgid "ROLE"
+msgstr ""
+
 #: src/pages/ProjectEdit/ProjectEdit.Nav.tsx:25
 msgid "roles"
 msgstr ""
@@ -3959,6 +4103,10 @@ msgstr ""
 
 #: src/components/organisms/CreditClassForms/CreditClassFinished.tsx:48
 msgid "see credit class page"
+msgstr ""
+
+#: src/components/organisms/Collaborators/Collaborators.constants.tsx:17
+msgid "SEE HELP DOCS"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:19
@@ -4562,6 +4710,11 @@ msgstr ""
 msgid "This is the name of the farm, ranch, property, or conservation project."
 msgstr ""
 
+#: src/components/organisms/Collaborators/RoleDropdown.tsx:70
+#: src/components/organisms/Members/MembersRoleDropdown.tsx:83
+msgid "This is the only admin on the project. You can’t change their role or remove them unless another admin is added."
+msgstr ""
+
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:117
 msgid "This is the Polygon address of the recipient."
 msgstr ""
@@ -4622,7 +4775,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: src/pages/Dashboard/Dashboard.constants.tsx:45
+#: src/pages/Dashboard/Dashboard.constants.tsx:46
 msgid "Token expired"
 msgstr ""
 
@@ -4759,7 +4912,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:25
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:69
-#: src/pages/Dashboard/Dashboard.constants.tsx:24
+#: src/pages/Dashboard/Dashboard.constants.tsx:25
 msgid "Unnamed"
 msgstr ""
 
@@ -4949,6 +5102,10 @@ msgstr ""
 msgid "view on ledger"
 msgstr ""
 
+#: src/pages/Dashboard/Dashboard.constants.tsx:11
+msgid "View On Org Profile"
+msgstr ""
+
 #: src/pages/Dashboard/Dashboard.constants.tsx:10
 msgid "View On Personal Profile"
 msgstr ""
@@ -5027,6 +5184,14 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:196
 msgid "vintage period"
+msgstr ""
+
+#: src/components/organisms/Members/Members.tsx:133
+msgid "VISIBILITY ON PROFILE"
+msgstr ""
+
+#: src/components/organisms/Members/VisibilitySwitch.tsx:14
+msgid "Visible"
 msgstr ""
 
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:6

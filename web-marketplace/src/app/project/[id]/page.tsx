@@ -105,6 +105,12 @@ const getProject = cache(async (id: string) => {
   }
 });
 
+// Prevent Next.js from pre-rendering every possible /project/[id] route.
+// Pages will be generated on-demand the first time they’re requested.
+export async function generateStaticParams() {
+  return [];
+}
+
 export async function generateMetadata({ params }: ProjectPageProps) {
   const { id } = await params;
 

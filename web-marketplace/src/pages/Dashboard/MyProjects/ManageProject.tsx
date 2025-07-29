@@ -10,7 +10,7 @@ import { Title } from 'web-components/src/components/typography';
 //import { useWallet } from 'lib/wallet/wallet';
 import { Link } from 'components/atoms';
 
-import { CollaboratorsManagement } from './components/Collaborators';
+import { CollaboratorsManagement } from '../../../components/organisms/Collaborators/Collaborators';
 //import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
 
 const ManageProject = (): JSX.Element => {

@@ -101,7 +101,7 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
                       aria-disabled="true"
                       className={cn(
                         'flex w-full items-center gap-10 px-[15px] h-[45px] border-none text-left cursor-not-allowed',
-                        item.danger ? 'text-bc-red-600' : 'text-bc-neutral-700',
+                        'text-bc-neutral-400',
                         'bg-bc-neutral-100',
                       )}
                     >

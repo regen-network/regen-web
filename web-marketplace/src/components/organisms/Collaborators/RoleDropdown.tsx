@@ -1,12 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
-import CheckIcon from 'web-components/src/components/icons/CheckIcon';
-import DropdownIcon from 'web-components/src/components/icons/DropdownIcon';
-import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
-import { cn } from 'web-components/src/utils/styles/cn';
-
+import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
 import {
   ORG_ADMIN,
   ORG_EDITOR,
@@ -32,245 +26,138 @@ export const RoleDropdown = ({
   isOnlyAdmin?: boolean;
 }) => {
   const { _ } = useLingui();
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const handle = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
+  // Get unavailable roles function
+  const getUnavailableRoles =
+    (currentRole: string, orgRole?: string) => (key: string) => {
+      if (currentRole === 'viewer' || orgRole === 'viewer') return false;
+      if (orgRole === undefined || orgRole === null || orgRole === '')
+        return false;
+
+      const level = ROLE_HIERARCHY[key as ProjectRoleType];
+      const isOrgAndProjectAdmin =
+        orgRole === 'admin' && currentRole === 'admin';
+      const isOrgAdminAndProjectEditor =
+        orgRole === 'admin' && currentRole === 'editor';
+      const isOrgAndProjectEditor =
+        orgRole === 'editor' && currentRole === 'editor';
+      const isOrgEditorProjectAdmin =
+        orgRole === 'editor' && currentRole === 'admin';
+
+      if (isOrgAndProjectAdmin) return key !== 'admin';
+      if (isOrgAndProjectEditor) return key !== 'editor' && key !== 'admin';
+      if (isOrgEditorProjectAdmin) return key !== 'admin' && key !== 'editor';
+      if (orgRole === 'admin' && key !== 'admin') return true;
+
+      return level > ROLE_HIERARCHY[orgRole as ProjectRoleType];
     };
-    document.addEventListener('mousedown', handle);
-    return () => document.removeEventListener('mousedown', handle);
-  }, [isOpen]);
 
-  // Define tooltip conditions
-  const showOnlyAdminTooltip = isOnlyAdmin && projectRole === 'admin';
-  const showExternalAdminTooltip =
-    isExternalAdmin && projectRole === 'admin' && orgRole !== '';
-  const showNotAdminTooltip = currentUserRole !== 'admin';
+  // Get tooltip conditions
+  const getTooltipConditions = ({
+    isOnlyAdmin,
+    role,
+    isExternalAdmin,
+    orgRole,
+    currentUserRole,
+    isCurrentUser,
+  }: {
+    isOnlyAdmin: boolean;
+    role: string;
+    isExternalAdmin?: boolean;
+    orgRole?: string;
+    currentUserRole?: string;
+    isCurrentUser?: boolean;
+  }) => {
+    const showOnlyAdminTooltip = isOnlyAdmin && role === 'admin';
+    const showExternalAdminTooltip =
+      isExternalAdmin && role === 'admin' && orgRole !== '';
+    const showNotAdminTooltip = currentUserRole !== 'admin';
 
-  const isDropdownDisabled =
-    disabled ||
-    showOnlyAdminTooltip ||
-    showExternalAdminTooltip ||
-    showNotAdminTooltip;
+    let tooltipTitle: string | undefined;
+    if (showOnlyAdminTooltip) {
+      tooltipTitle = _(TOOLTIP_ONLY_ADMIN);
+    } else if (showExternalAdminTooltip) {
+      tooltipTitle = _(TOOLTIP_EXTERNAL_ADMIN);
+    } else if (showNotAdminTooltip && isCurrentUser) {
+      tooltipTitle = _(TOOLTIP_ROLE);
+    }
 
-  // Determine the tooltip title based on conditions
-  let tooltipTitle: string | undefined;
-  if (showOnlyAdminTooltip) {
-    tooltipTitle = _(TOOLTIP_ONLY_ADMIN);
-  } else if (showExternalAdminTooltip) {
-    tooltipTitle = _(TOOLTIP_EXTERNAL_ADMIN);
-  } else if (showNotAdminTooltip && isCurrentUser) {
-    tooltipTitle = _(TOOLTIP_ROLE);
-  }
-
-  const toggle = () => {
-    if (isDropdownDisabled) return;
-    setIsOpen(o => !o);
+    return {
+      tooltipTitle,
+      disabled:
+        showOnlyAdminTooltip || showExternalAdminTooltip || showNotAdminTooltip,
+    };
   };
 
-  const select = (role: ProjectRoleType) => {
-    onChange(role);
-    setIsOpen(false);
+  // Render additional description for org roles
+  const renderAdditionalDescription = (
+    roleKey: string,
+    isSelected: boolean,
+    orgRole?: string,
+  ) => {
+    const isOrgAdminAndProjectEditor =
+      orgRole === 'admin' && projectRole === 'editor';
+    const isOrgAndProjectAdmin = orgRole === 'admin' && projectRole === 'admin';
+
+    if (
+      (orgRole === 'editor' && roleKey === 'editor') ||
+      (isOrgAdminAndProjectEditor && roleKey === 'admin')
+    ) {
+      return (
+        <p className="text-[12px] leading-[1.45] font-bold italic text-left m-0 text-bc-neutral-500">
+          {_(ORG_EDITOR)}{' '}
+          <a
+            href="/dashboard/members"
+            className="underline decoration-0 text-bc-neutral-500 hover:text-bc-neutral-500"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              textDecoration: 'underline',
+              textDecorationColor: 'inherit',
+            }}
+          >
+            {_(ORG_MEMBER_SETTINGS)}
+          </a>
+          .
+        </p>
+      );
+    } else if (isOrgAndProjectAdmin && roleKey === 'admin') {
+      return (
+        <p className="text-[12px] leading-[1.45] font-bold italic text-left m-0 text-bc-neutral-500">
+          {_(ORG_ADMIN)}{' '}
+          <a
+            href="/dashboard/members"
+            className="underline decoration-0 text-bc-neutral-500 hover:text-bc-neutral-500"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              textDecoration: 'underline',
+              textDecorationColor: 'inherit',
+            }}
+          >
+            {_(ORG_MEMBER_SETTINGS)}
+          </a>
+          .
+        </p>
+      );
+    }
+    return null;
   };
 
   return (
-    <div ref={ref} className="relative w-full font-sans">
-      {isDropdownDisabled ? (
-        tooltipTitle ? (
-          <InfoTooltip
-            title={tooltipTitle}
-            arrow={true}
-            placement="top"
-            className="bg-bc-neutral-0"
-          >
-            <span>
-              <button
-                disabled
-                tabIndex={-1}
-                aria-disabled="true"
-                className={cn(
-                  'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border cursor-not-allowed text-bc-neutral-400 bg-bc-neutral-200',
-                )}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="capitalize">{projectRole}</span>
-                </div>
-                <DropdownIcon className="w-4 h-4" color="text-bc-neutral-400" />
-              </button>
-            </span>
-          </InfoTooltip>
-        ) : (
-          <button
-            disabled
-            tabIndex={-1}
-            aria-disabled="true"
-            className={cn(
-              'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border cursor-not-allowed text-bc-neutral-400 bg-bc-neutral-200',
-            )}
-          >
-            <div className="flex items-center gap-2">
-              <span className="capitalize">{projectRole}</span>
-            </div>
-            <DropdownIcon className="w-4 h-4" color="text-bc-neutral-400" />
-          </button>
-        )
-      ) : (
-        <button
-          onClick={toggle}
-          disabled={disabled}
-          className={cn(
-            'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border cursor-pointer',
-            'bg-bc-neutral-0 text-bc-neutral-700',
-            'border-[#D2D5D9] hover:border-gray-300',
-            disabled &&
-              'bg-bc-neutral-400 cursor-not-allowed text-bc-neutral-400',
-          )}
-        >
-          <div className="flex items-center gap-2">
-            <span className="capitalize">{projectRole}</span>
-          </div>
-          <DropdownIcon className="w-4 h-4" />
-        </button>
-      )}
-
-      {isOpen && !isDropdownDisabled && (
-        <ul
-          role="listbox"
-          aria-label="Select role"
-          className="absolute z-20 w-[330px] bg-bc-neutral-0 shadow-lg rounded mt-1 p-10 max-h-[32rem] overflow-auto flex gap-5 flex-col"
-        >
-          {ROLE_OPTIONS.map(({ key, label, Icon, description }) => {
-            const level = ROLE_HIERARCHY[key];
-            const isSelected = projectRole === key;
-            const isOrgAndProjectAdmin =
-              orgRole === 'admin' && projectRole === 'admin';
-            const isOrgAdminAndProjectEditor =
-              orgRole === 'admin' && projectRole === 'editor';
-            const isOrgAndProjectEditor =
-              orgRole === 'editor' && projectRole === 'editor';
-            const isOrgEditorProjectAdmin =
-              orgRole === 'editor' && projectRole === 'admin';
-
-            const unavailable =
-              projectRole === 'viewer' || orgRole === 'viewer'
-                ? false
-                : orgRole === undefined || orgRole === null || orgRole === ''
-                ? false
-                : isOrgAndProjectAdmin
-                ? key !== 'admin'
-                : isOrgAndProjectEditor
-                ? key !== 'editor' && key !== 'admin'
-                : isOrgEditorProjectAdmin
-                ? key !== 'admin' && key !== 'editor'
-                : orgRole === 'admin' && key !== 'admin'
-                ? true
-                : level > ROLE_HIERARCHY[orgRole];
-
-            const iconClass =
-              key === 'admin'
-                ? unavailable
-                  ? 'text-bc-neutral-400'
-                  : 'text-ac-primary-500'
-                : unavailable
-                ? 'text-bc-neutral-400'
-                : 'text-ac-primary-500';
-
-            return (
-              <li key={key} role="option" aria-selected={isSelected}>
-                <button
-                  type="button"
-                  onClick={() => !unavailable && select(key)}
-                  disabled={unavailable}
-                  className={cn(
-                    'flex flex-col items-start w-full p-5 rounded border-none bg-bc-neutral-0 gap-3 font-sans',
-                    isSelected && 'bg-bc-neutral-200 border-none',
-                    !unavailable && 'hover:bg-bc-neutral-200 cursor-pointer',
-                    unavailable &&
-                      'text-bc-neutral-400 bg-transparent cursor-not-allowed border-none',
-                  )}
-                >
-                  <div className="flex flex-row items-start gap-5">
-                    <div className="flex items-center justify-center w-20 mt-5">
-                      {isSelected && (
-                        <CheckIcon
-                          className="w-[12px] h-[12px] text-black"
-                          aria-hidden
-                        />
-                      )}
-                    </div>
-                    <div className="flex flex-col gap-3">
-                      <div className="flex items-center gap-5 w-full">
-                        <Icon
-                          className={iconClass}
-                          sx={{ width: 20, height: 20 }}
-                          aria-hidden
-                        />
-                        <span className="font-medium text-bc-neutral-900 text-[16px]">
-                          {_(label)}
-                        </span>
-                      </div>
-                      {(orgRole === 'editor' && key === 'editor') ||
-                      (isOrgAdminAndProjectEditor && key === 'admin') ? (
-                        <p className="text-[12px] leading-[1.45] font-bold italic text-left m-0 text-bc-neutral-500">
-                          {_(ORG_EDITOR)}
-                          {' '}
-                          <a
-                            href="/dashboard/members"
-                            className="underline decoration-0 text-bc-neutral-500 hover:text-bc-neutral-500"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              textDecoration: 'underline',
-                              textDecorationColor: 'inherit',
-                            }}
-                          >
-                            {_(ORG_MEMBER_SETTINGS)}
-                          </a>
-                          .
-                        </p>
-                      ) : isOrgAndProjectAdmin && key === 'admin' ? (
-                        <p className="text-[12px] leading-[1.45] font-bold italic text-left m-0 text-bc-neutral-500">
-                          {_(ORG_ADMIN)}
-                          {' '}
-                          <a
-                            href="/dashboard/members"
-                            className="underline decoration-0 text-bc-neutral-500 hover:text-bc-neutral-500"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              textDecoration: 'underline',
-                              textDecorationColor: 'inherit',
-                            }}
-                          >
-                            {_(ORG_MEMBER_SETTINGS)}
-                          </a>
-                          .
-                        </p>
-                      ) : (
-                        <p
-                          className={cn(
-                            'text-[12px] leading-[1.45] not-italic text-left m-0',
-                            unavailable
-                              ? 'text-bc-neutral-400'
-                              : 'text-bc-neutral-500',
-                          )}
-                        >
-                          {_(description)}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </div>
+    <BaseRoleDropdown
+      role={projectRole}
+      disabled={disabled}
+      onChange={onChange}
+      isCurrentUser={isCurrentUser}
+      isOnlyAdmin={isOnlyAdmin}
+      roleOptions={ROLE_OPTIONS}
+      getUnavailableRoles={getUnavailableRoles}
+      orgRole={orgRole}
+      currentUserRole={currentUserRole}
+      isExternalAdmin={isExternalAdmin}
+      renderAdditionalDescription={renderAdditionalDescription}
+      getTooltipConditions={getTooltipConditions}
+    />
   );
 };

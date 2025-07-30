@@ -54,7 +54,6 @@ export const useProjectTopSectionStyles = makeStyles()((theme: Theme) => ({
     },
   },
   icon: {
-    color: '#7BC796',
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(1),
     },

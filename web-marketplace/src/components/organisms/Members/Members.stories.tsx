@@ -1,4 +1,4 @@
-import React from 'react';
+import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 
 import { Members } from './Members';
@@ -13,12 +13,19 @@ const meta: Meta<typeof Members> = {
       control: 'object',
       description: 'Initial list of organization members',
     },
+    onInvite: {
+      action: 'invite-clicked',
+      description: 'Called when invite button is clicked',
+    },
   },
 };
 
 export default meta;
 
-export const Default = (args: { initialMembers: Member[] }) => {
+export const Default = (args: {
+  initialMembers: Member[];
+  onInvite?: () => void;
+}) => {
   const key = JSON.stringify(args.initialMembers);
 
   return <Members key={key} {...args} />;
@@ -26,4 +33,5 @@ export const Default = (args: { initialMembers: Member[] }) => {
 
 Default.args = {
   initialMembers: mockMembers,
+  onInvite: action('invite-clicked'),
 };

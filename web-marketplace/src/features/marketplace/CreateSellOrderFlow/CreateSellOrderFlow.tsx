@@ -37,7 +37,6 @@ import {
 } from 'lib/constants/shared.constants';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { getAvailableAmountByBatch } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 import { Link } from 'components/atoms';
 import { CreateSellOrderModal } from 'components/organisms/CreateSellOrderModal/CreateSellOrderModal';
 import { useMsgClient } from 'hooks';

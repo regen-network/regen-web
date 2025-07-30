@@ -7,9 +7,9 @@ import { useFetchEcocredits } from 'legacy-pages/Dashboard/MyEcocredits/hooks/us
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
+
 import { useAuth } from 'lib/auth/auth';
 import { useWallet } from 'lib/wallet/wallet';
-
 
 import { CreateButton } from './UserSellOrders.CreateButton';
 

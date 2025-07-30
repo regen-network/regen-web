@@ -21,6 +21,8 @@ msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 msgid " Exit to homepage "
 msgstr "Salir a la página de inicio"
@@ -1081,8 +1083,8 @@ msgstr "Limpiar todo"
 msgid "Click on the confirmation link to return to Regen Network."
 msgstr "Haga clic en el enlace de confirmación para regresar a Regen Network."
 
-#: src/pages/ProjectReview/ProjectReview.tsx:379
 #: src/features/marketplace/CreateSellOrderFlow/CreateSellOrderFlow.tsx:234
+#: src/pages/ProjectReview/ProjectReview.tsx:379
 msgid "close"
 msgstr "cerca"
 
@@ -1290,9 +1292,9 @@ msgstr "Crear proyecto"
 msgid "Create Project - Access Denied"
 msgstr "Crear proyecto - Acceso denegado"
 
-#: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
-#: src/components/organisms/UserSellOrders/UserSellOrders.CreateButton.tsx:21
 #: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:276
+#: src/components/organisms/UserSellOrders/UserSellOrders.CreateButton.tsx:21
+#: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:10
 msgid "Create Sell Order"
 msgstr "Crear orden de venta"
 
@@ -1312,12 +1314,12 @@ msgstr "Conceptos básicos de crédito"
 msgid "Credit Batch Details"
 msgstr "Detalles del lote de crédito"
 
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:129
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:122
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:233
-#: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:114
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:121
 #: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:140
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:121
+#: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:114
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:233
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:122
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:129
 msgid "credit batch id"
 msgstr "Identificación del lote de crédito"
 
@@ -2439,8 +2441,8 @@ msgstr "Aprenda cómo"
 msgid "learn more"
 msgstr "Aprende más"
 
-#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:220
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:53
+#: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:220
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:10
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.TebuInfo.tsx:83
 msgid "Learn more"
@@ -3306,8 +3308,8 @@ msgstr "PRECIO (USD)"
 msgid "Price of credits for prefinance projects have specific terms, please click on the project to learn more."
 msgstr "Los precios de los créditos para proyectos de prefinanciamiento tienen términos específicos, haga clic en el proyecto para obtener más información."
 
-#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:188
 #: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:89
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:188
 msgid "price per credit"
 msgstr "precio por crédito"
 
@@ -3781,7 +3783,7 @@ msgstr "Restauración"
 msgid "Restoration Factor:"
 msgstr "Factor de restauración:"
 
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:108
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:109
 msgid "Retirable"
 msgstr "Retirable"
 
@@ -4016,9 +4018,8 @@ msgstr "ID DE ORDEN DE VENTA"
 msgid "sell order id:"
 msgstr "ID de orden de venta:"
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:48
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:44
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:48
 msgid "Sell orders"
 msgstr "Órdenes de venta"
 
@@ -4691,7 +4692,7 @@ msgid "Toucan Vintage Token Id"
 msgstr "Identificación de token vintage de tucán"
 
 #: src/components/molecules/ProjectBatchTotals/ProjectBatchTotals.tsx:109
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:101
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.Row.tsx:102
 msgid "Tradable"
 msgstr "Negociable"
 

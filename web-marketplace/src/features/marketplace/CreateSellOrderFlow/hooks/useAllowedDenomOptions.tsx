@@ -1,14 +1,13 @@
 import { useMemo } from 'react';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
+import { getDenomAllowedOptions } from 'legacy-pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 import uniq from 'lodash/uniq';
 import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
 
 import { QueryClient, useLedger } from 'ledger';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
 import { getDenomTraceByHashesQuery } from 'lib/queries/react-query/ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
-
-import { getDenomAllowedOptions } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 
 export const useAllowedDenomOptions = (canCreateFiatOrder?: boolean) => {
   const { queryClient } = useLedger();

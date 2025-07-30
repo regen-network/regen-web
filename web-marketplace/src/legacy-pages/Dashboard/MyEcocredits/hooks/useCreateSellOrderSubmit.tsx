@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useApolloClient } from '@apollo/client';
-import { msg } from '@lingui/core/macro';
 import type { DeliverTxResponse } from '@cosmjs/stargate';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
 import { EventSell } from '@regen-network/api/regen/ecocredit/marketplace/v1/events';

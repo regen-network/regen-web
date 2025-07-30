@@ -19,6 +19,7 @@ import CelebrateRegenIcon from './CelebrateRegenIcon';
 import CertifiedDocumentIcon from './CertifiedDocumentIcon';
 import CheckedIcon from './CheckedIcon';
 import CheckIcon from './CheckIcon';
+import ClipboardIcon from './ClipboardIcon';
 import CloseIcon from './CloseIcon';
 import CoBenefitsIcon from './CoBenefitsIcon';
 import { CogIcon } from './CogIcon';
@@ -255,6 +256,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<CreditsIssuedIcon />} label="CreditsIssuedIcon" />
     <LabeledIcon icon={<CreditsTradeableIcon />} label="CreditsTradeableIcon" />
     <LabeledIcon icon={<CreditsRetiredIcon />} label="CreditsRetiredIcon" />
+    <LabeledIcon icon={<ClipboardIcon />} label="ClipboardIcon" />
     <LabeledIcon
       icon={<CurrentCreditsIcon color="#4FB573" />}
       label="CurrentCreditsIcon"

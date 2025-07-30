@@ -13,7 +13,6 @@ import {
 
 interface BaseRoleDropdownExtendedProps extends BaseRoleDropdownProps {
   roleOptions: RoleOption[];
-  getRoleHierarchy?: (role: string) => number;
   getUnavailableRoles?: (
     currentRole: string,
     orgRole?: string,
@@ -44,7 +43,6 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownExtendedProps> = ({
   isOnlyAdmin = false,
   tooltipTitle,
   roleOptions,
-  getRoleHierarchy,
   getUnavailableRoles,
   orgRole,
   currentUserRole,
@@ -155,7 +153,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownExtendedProps> = ({
         <ul
           role="listbox"
           aria-label="Select role"
-          className="absolute z-20 w-[330px] bg-bc-neutral-0 shadow-lg rounded mt-1 p-10 max-h-[32rem] overflow-auto flex gap-5 flex-col border border-solid border-bc-neutral-300"
+          className="absolute z-20 w-full lg:w-[330px] bg-bc-neutral-0 shadow-lg rounded mt-1 p-10 max-h-[32rem] overflow-auto flex gap-5 flex-col border border-solid border-bc-neutral-300"
         >
           {roleOptions.map(({ key, label, Icon, description }) => {
             const isSelected = role === key;

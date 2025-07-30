@@ -4,6 +4,7 @@ import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { useProfileItems } from 'legacy-pages/Dashboard/hooks/useProfileItems';
+import { useOrders } from 'legacy-pages/Orders/hooks/useOrders';
 import { startCase } from 'lodash';
 
 import { SaveChangesWarningModal } from 'web-components/src/components/modal/SaveChangesWarningModal/SaveChangesWarningModal';
@@ -23,7 +24,6 @@ import {
 import { getAllProfilePageQuery } from 'lib/queries/react-query/sanity/getAllProfilePageQuery/getAllProfilePageQuery';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useOrders } from 'pages/Orders/hooks/useOrders';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { DashboardNavigation } from 'components/organisms/DashboardNavigation';

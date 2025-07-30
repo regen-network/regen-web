@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 import { DeliverTxResponse, StdFee } from '@cosmjs/stargate';
-import { QueryBalanceResponse } from '@regen-network/api/cosmos/bank/v1beta1/query';
 import { TxRaw } from '@regen-network/api/cosmos/tx/v1beta1/tx';
 import { useQueryClient } from '@tanstack/react-query';
 import { REGEN_DENOM } from 'config/allowedBaseDenoms';
@@ -11,7 +10,6 @@ import { errorCodeAtom } from 'lib/atoms/error.atoms';
 import { txSuccessfulModalAtom } from 'lib/atoms/modals.atoms';
 import { isWaitingForSigningAtom } from 'lib/atoms/tx.atoms';
 import { getBalanceQuery } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery';
-import { BANK_BALANCE_KEY } from 'lib/queries/react-query/cosmos/bank/getBalanceQuery/getBalanceQuery.constants';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
 import { useLedger } from '../ledger';

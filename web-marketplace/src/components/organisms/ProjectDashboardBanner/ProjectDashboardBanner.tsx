@@ -87,24 +87,46 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
   ];
 
   return (
-    <div className="relative w-full mt-20">
+    <div className="relative w-full mt-20 ">
       {/* Background Image Container */}
-      <div
-        className="relative w-full min-h-[180px] bg-cover bg-center bg-no-repeat rounded-lg"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${
-            project.imgSrc || '/default-project-image.jpg'
-          })`,
-        }}
-      >
-        {/* Content Container */}
+      <div className="relative overflow-hidden border-solid border-[1px] border-bc-neutral-300 rounded-lg ">
+        {/* Original sharp background */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${
+              project.imgSrc || '/default-project-image.jpg'
+            })`,
+          }}
+        />
+
+        {/* Blurred layer with gradient mask */}
+        <div
+          className="absolute inset-0 bg-cover bg-center scale-110 blur-sm"
+          style={{
+            backgroundImage: `url(${
+              project.imgSrc || '/default-project-image.jpg'
+            })`,
+            maskImage: isMobile
+              ? 'linear-gradient(to right, black 0%, black 75%, transparent 90%)'
+              : 'linear-gradient(to right, black 0%, black 20%, transparent 70%)',
+            WebkitMaskImage: isMobile
+              ? 'linear-gradient(to right, black 0%, black 75%, transparent 90%)'
+              : 'linear-gradient(to right, black 0%, black 20%, transparent 70%)',
+          }}
+        />
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black bg-opacity-20" />
+
+        {/* Content */}
         <div className="relative z-10 p-20 pb-30 flex flex-col">
           {/* Top right menu */}
           <div className="flex justify-end">
             <div className="absolute top-4 right-4" ref={menuRef}>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="flex items-center justify-center w-[39px] h-[39px] cursor-pointer rounded-full bg-bc-neutral-700 p-5 transition-colors"
+                className="flex items-center justify-center w-[39px] h-[39px] cursor-pointer rounded-full border-solid border-bc-neutral-500 bg-bc-neutral-700 p-5 transition-colors"
               >
                 <HorizontalDotsIcon sx={{ color: 'white' }} />
               </button>
@@ -145,7 +167,7 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
               />
             </div>
 
-            <div className="flex flex-row gap-15">
+            <div className="flex flex-row gap-15 h-[42px]">
               <OutlinedButton
                 startIcon={<EyeIcon />}
                 onClick={() =>

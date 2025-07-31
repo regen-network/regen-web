@@ -29,7 +29,6 @@ import { LINK_PREFIX } from 'lib/env';
 
 import { AccountLink, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
-import { NoCredits } from 'components/molecules';
 
 import {
   CreditBatchesHeadCell,

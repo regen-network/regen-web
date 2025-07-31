@@ -37,8 +37,6 @@ export const RoleDropdown = ({
       const level = ROLE_HIERARCHY[key as ProjectRoleType];
       const isOrgAndProjectAdmin =
         orgRole === 'admin' && currentRole === 'admin';
-      const isOrgAdminAndProjectEditor =
-        orgRole === 'admin' && currentRole === 'editor';
       const isOrgAndProjectEditor =
         orgRole === 'editor' && currentRole === 'editor';
       const isOrgEditorProjectAdmin =
@@ -90,11 +88,7 @@ export const RoleDropdown = ({
   };
 
   // Render additional description for org roles
-  const renderAdditionalDescription = (
-    roleKey: string,
-    isSelected: boolean,
-    orgRole?: string,
-  ) => {
+  const renderAdditionalDescription = (roleKey: string, orgRole?: string) => {
     const isOrgAdminAndProjectEditor =
       orgRole === 'admin' && projectRole === 'editor';
     const isOrgAndProjectAdmin = orgRole === 'admin' && projectRole === 'admin';

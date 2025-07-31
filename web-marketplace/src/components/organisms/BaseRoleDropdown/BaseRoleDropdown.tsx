@@ -10,6 +10,7 @@ import {
   BaseRoleDropdownProps,
   RoleOption,
 } from '../BaseTable/Basetable.types';
+import { SELECT_ROLE_ARIA_LABEL } from '../Collaborators/Collaborators.constants';
 
 interface BaseRoleDropdownExtendedProps extends BaseRoleDropdownProps {
   roleOptions: RoleOption[];
@@ -22,7 +23,6 @@ interface BaseRoleDropdownExtendedProps extends BaseRoleDropdownProps {
   isExternalAdmin?: boolean;
   renderAdditionalDescription?: (
     roleKey: string,
-    isSelected: boolean,
     orgRole?: string,
   ) => React.ReactNode;
   getTooltipConditions?: (props: {
@@ -152,7 +152,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownExtendedProps> = ({
       {isOpen && !isDropdownDisabled && (
         <ul
           role="listbox"
-          aria-label="Select role"
+          aria-label={_(SELECT_ROLE_ARIA_LABEL)}
           className="absolute z-20 w-full lg:w-[330px] bg-bc-neutral-0 shadow-lg rounded mt-1 p-10 max-h-[32rem] overflow-auto flex gap-5 flex-col border border-solid border-bc-neutral-300"
         >
           {roleOptions.map(({ key, label, Icon, description }) => {
@@ -205,11 +205,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownExtendedProps> = ({
                         </span>
                       </div>
                       {renderAdditionalDescription ? (
-                        renderAdditionalDescription(
-                          key,
-                          isSelected,
-                          orgRole,
-                        ) || (
+                        renderAdditionalDescription(key, orgRole) || (
                           <p
                             className={cn(
                               'text-[12px] leading-[1.45] not-italic text-left m-0',

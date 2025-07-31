@@ -5,6 +5,12 @@ import {
   ACTION_EDIT_ORG_ROLE,
   ACTION_REMOVE,
 } from '../Collaborators/Collaborators.constants';
+import {
+  ROLE_ADMIN,
+  ROLE_AUTHOR,
+  ROLE_EDITOR,
+  ROLE_VIEWER,
+} from './ActionDropdown.constants';
 import { ActionItem, GetActionItemsParams } from './ActionDropdown.types';
 
 // Helper function to determine action items based on context and user permissions
@@ -23,7 +29,7 @@ export const getActionItems = ({
   _,
 }: GetActionItemsParams): ActionItem[] => {
   if (context === 'members') {
-    if (!isCurrentUser && currentUserRole !== 'admin') {
+    if (!isCurrentUser && currentUserRole !== ROLE_ADMIN) {
       return [];
     }
 
@@ -37,7 +43,7 @@ export const getActionItems = ({
           label: _(ACTION_REMOVE),
           onClick: onRemove,
           danger: true,
-          disabled: isOnlyAdmin && role === 'admin',
+          disabled: isOnlyAdmin && role === ROLE_ADMIN,
         },
       ];
     } else {
@@ -46,14 +52,14 @@ export const getActionItems = ({
           label: _(ACTION_REMOVE),
           onClick: onRemove,
           danger: true,
-          disabled: isOnlyAdmin && role === 'admin',
+          disabled: isOnlyAdmin && role === ROLE_ADMIN,
         },
       ];
     }
   }
 
   // Project context
-  if (currentUserRole !== 'admin' && !isCurrentUser) {
+  if (currentUserRole !== ROLE_ADMIN && !isCurrentUser) {
     return [];
   }
 
@@ -80,7 +86,7 @@ export const getActionItems = ({
       ];
     }
   } else {
-    if (isCurrentUser && role === 'admin' && orgRole) {
+    if (isCurrentUser && role === ROLE_ADMIN && orgRole) {
       return [
         {
           label: _(ACTION_EDIT_ORG_ROLE),
@@ -93,7 +99,7 @@ export const getActionItems = ({
       ];
     } else if (
       isCurrentUser &&
-      (role === 'viewer' || role === 'author' || role === 'editor')
+      (role === ROLE_VIEWER || role === ROLE_AUTHOR || role === ROLE_EDITOR)
     ) {
       return [
         {

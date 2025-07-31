@@ -6,7 +6,10 @@ import { HorizontalDotsIcon } from 'web-components/src/components/icons/Horizont
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import { TOOLTIP_ONLY_ADMIN_REMOVE } from '../Collaborators/Collaborators.constants';
+import {
+  COLLABORATOR_ACTIONS_ARIA_LABEL,
+  TOOLTIP_ONLY_ADMIN_REMOVE,
+} from '../Collaborators/Collaborators.constants';
 import { ActionsDropdownProps } from '../Collaborators/Collaborators.types';
 import { getActionItems } from './ActionDropdown.utils';
 
@@ -79,10 +82,10 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
             'absolute right-0 mt-2 w-[180px]',
             'shadow-[0_0_20px_rgba(0,0,0,0.25)] z-20',
             'list-none p-0 m-0',
-            'bg-bc-neutral-100 border border-[#D2D5D9] rounded-[2px]',
+            'bg-bc-neutral-100 border border-bc-neutral-300 border-solid rounded-[2px]',
           )}
           role="menu"
-          aria-label="Collaborator actions"
+          aria-label={_(COLLABORATOR_ACTIONS_ARIA_LABEL)}
         >
           {items.map(item => (
             <li key={item.label} role="menuitem">

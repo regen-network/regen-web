@@ -9,6 +9,7 @@ import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Title } from 'web-components/src/components/typography';
 
 import {
+  ACTION_EDIT_MY_USER_PROFILE,
   EDIT_PROFILE,
   INVITE,
   NAME,
@@ -139,10 +140,9 @@ export const BaseTable = <T extends BaseUser>({
         {users.map((user, index) => (
           <div
             key={user.id}
-            className={`flex flex-col ${rowBreakpoint} justify-between py-20 gap-8 ${
+            className={`flex flex-col ${rowBreakpoint} justify-between py-20 gap-8 border-0 border-t border-solid border-sc-surface-stroke ${
               isCollaborators ? 'lg:gap-0' : 'xl:gap-0'
             }`}
-            style={{ borderTop: '1px solid var(--surface-stroke,#D2D5D9)' }}
           >
             {children(user, index)}
           </div>
@@ -151,14 +151,12 @@ export const BaseTable = <T extends BaseUser>({
     </div>
   );
 };
-
-// Shared user info component
 interface UserInfoProps<T extends BaseUser> {
   user: T;
   context: 'members' | 'collaborators';
   description?: string;
   organization?: string;
-  children?: React.ReactNode; // For mobile dots
+  children?: React.ReactNode;
 }
 
 export const UserInfo = <T extends BaseUser>({
@@ -200,7 +198,7 @@ export const UserInfo = <T extends BaseUser>({
                 <a
                   href="/dashboard/profile"
                   className="ml-1 p-0 bg-transparent border-none cursor-pointer flex items-center group"
-                  aria-label="Edit your profile"
+                  aria-label={_(ACTION_EDIT_MY_USER_PROFILE)}
                 >
                   <EditIcon sx={{ height: '16px', width: '16px' }} />
                   <span className="hidden group-hover:flex text-[12px] tracking-[1px] font-[800] bg-transparent font-muli cursor-pointer text-ac-primary-500 ml-5">

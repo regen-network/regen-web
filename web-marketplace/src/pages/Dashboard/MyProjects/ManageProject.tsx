@@ -116,10 +116,7 @@ const ManageProject = (): JSX.Element => {
       </div>
 
       {/* Content section */}
-      <div
-        className="p-30 border border-bc-neutral-300 rounded-lg bg-bc-neutral-0"
-        style={{ border: '1px solid #D2D5D9' }}
-      >
+      <div className="p-30 border border-bc-neutral-300 border-solid rounded-lg bg-bc-neutral-0">
         {currentTab === 0 && renderDataPostsContent()}
         {currentTab === 1 && renderCollaboratorsContent()}
         {currentTab === 2 && renderPortfolioContent()}

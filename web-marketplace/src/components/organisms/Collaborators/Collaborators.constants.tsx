@@ -38,3 +38,5 @@ export const TOOLTIP_ONLY_ADMIN_REMOVE = msg`As the only admin, you can’t chan
 export const ACTION_EDIT_MY_PROFILE = msg`Edit my profile`;
 export const ACTION_EDIT_ORG_ROLE = msg`Edit organization role`;
 export const ACTION_EDIT_MY_TITLE = msg`Edit my title`;
+export const COLLABORATOR_ACTIONS_ARIA_LABEL = msg`Collaborator actions`;
+export const SELECT_ROLE_ARIA_LABEL = msg`Select role`;

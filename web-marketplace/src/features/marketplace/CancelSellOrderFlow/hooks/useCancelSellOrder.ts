@@ -6,10 +6,11 @@ import { Item } from 'web-components/src/components/modal/TxModal';
 
 import { useWallet } from 'lib/wallet/wallet';
 
-import useCancelSellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit';
-import { NormalizedSellOrder } from 'pages/Marketplace/Storefront/Storefront.types';
-import { getCancelCardItems } from 'pages/Marketplace/Storefront/Storefront.utils';
+import useCancelSellOrderSubmit from 'features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit';
+import { NormalizedSellOrder } from 'components/organisms/UserSellOrders/hooks/useNormalizedSellOrders';
 import useMsgClient from 'hooks/useMsgClient';
+
+import { getCancelCardItems } from '../CancelSellOrderFlow.utils';
 
 type UseCancelSellOrderProps = {
   normalizedSellOrders: NormalizedSellOrder[];

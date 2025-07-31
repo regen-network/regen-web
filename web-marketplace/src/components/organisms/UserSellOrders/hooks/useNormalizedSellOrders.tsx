@@ -25,10 +25,39 @@ import { useClassesWithMetadata } from 'hooks/classes/useClassesWithMetadata';
 import {
   normalizeProjectsInfosByHandleMap,
   normalizeSellOrders,
-} from '../Storefront.normalizer';
-import { NormalizedSellOrder } from '../Storefront.types';
+} from '../UserSellOrders.utils';
 import { useFetchSellOrders } from './useFetchSellOrders';
 import { useSortedSellOrders } from './useSortedSellOrders';
+
+export type SellOrderStatus =
+  | 'Not yet filled'
+  | 'Partially filled'
+  | 'Filled'
+  | 'Expired'
+  | 'Cancelled';
+
+export type NormalizedSellOrder = {
+  id: string;
+  expiration?: Date;
+  project?: {
+    name?: string | null;
+    id: string;
+    classIdOrName?: string | null;
+    classId?: string | null;
+  };
+  status?: SellOrderStatus;
+  askAmount: string;
+  askUsdAmount: number;
+  askDenom: string;
+  askBaseDenom: string;
+  amountAvailable: string;
+  amountSold?: string;
+  batchDenom: string;
+  batchStartDate?: Date | null;
+  batchEndDate?: Date | null;
+  seller: string;
+  disableAutoRetire: boolean;
+};
 
 type ResponseType = {
   normalizedSellOrders: NormalizedSellOrder[];

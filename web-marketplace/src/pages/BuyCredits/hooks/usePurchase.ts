@@ -35,7 +35,7 @@ import { BuyExtendedEvent, BuyFailureEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useFetchSellOrders } from 'pages/Marketplace/Storefront/hooks/useFetchSellOrders';
+import { useFetchSellOrders } from 'components/organisms/UserSellOrders/hooks/useFetchSellOrders';
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';

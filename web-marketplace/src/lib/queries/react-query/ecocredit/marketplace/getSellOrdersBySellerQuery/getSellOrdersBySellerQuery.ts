@@ -9,13 +9,14 @@ import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
 
 import { QueryClient } from 'ledger';
 
-import { getAskUsdAmount } from 'pages/Marketplace/Storefront/Storefront.utils';
-
 import { getSimplePriceQuery } from '../../../coingecko/simplePrice/simplePriceQuery';
 import { getDenomTraceByHashesQuery } from '../../../ibc/transfer/getDenomTraceByHashesQuery/getDenomTraceByHashesQuery';
 import { getFromCacheOrFetch } from '../../../utils/getFromCacheOrFetch';
 import { SellOrderInfoExtented } from '../getSellOrdersExtendedQuery/getSellOrdersExtendedQuery.types';
-import { getSellOrdersBySellerKey } from './getSellOrdersBySellerQuery.utils';
+import {
+  getAskUsdAmount,
+  getSellOrdersBySellerKey,
+} from './getSellOrdersBySellerQuery.utils';
 
 export function getSellOrdersBySellerQuery(queryConfig: {
   client: QueryClient;

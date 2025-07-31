@@ -165,7 +165,7 @@ export const MyEcocredits = (): JSX.Element => {
   const onButtonClick = (): void => {
     handleTxModalClose();
     if (txButtonTitle === _(CREATE_SELL_ORDER_BUTTON) && !error) {
-      navigate('/storefront');
+      navigate('/dashboard/sell');
     }
     if (txButtonTitle === _(RETIRE_SUCCESS_BUTTON) && !error) {
       setActivePortfolioTab(1);
@@ -299,7 +299,16 @@ export const MyEcocredits = (): JSX.Element => {
   const shareUrl =
     REGEN_APP_PROJECT_URL + (lastRetiredProjectIdRef.current ?? '');
 
-  const allowedDenomOptions = useAllowedDenomOptions();
+  const canCreateFiatOrder = useMemo(
+    () =>
+      !!privActiveAccount?.can_use_stripe_connect &&
+      !!activeAccount?.stripeConnectedAccountId,
+    [
+      activeAccount?.stripeConnectedAccountId,
+      privActiveAccount?.can_use_stripe_connect,
+    ],
+  );
+  const allowedDenomOptions = useAllowedDenomOptions(canCreateFiatOrder);
 
   return (
     <>
@@ -528,10 +537,7 @@ export const MyEcocredits = (): JSX.Element => {
           onClose={() => setSellOrderCreateOpen(-1)}
           onSubmit={createSellOrderSubmit}
           title={_(CREATE_SELL_ORDER_TITLE)}
-          canCreateFiatOrder={
-            !!privActiveAccount?.can_use_stripe_connect &&
-            !!activeAccount?.stripeConnectedAccountId
-          }
+          canCreateFiatOrder={canCreateFiatOrder}
         />
       )}
       <ProcessingModal

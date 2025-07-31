@@ -16,14 +16,14 @@ import { useLedger } from 'ledger';
 import { microToDenom } from 'lib/denom.utils';
 
 import DenomIcon from 'components/molecules/DenomIcon';
+import { NormalizedSellOrder } from 'components/organisms/UserSellOrders/hooks/useNormalizedSellOrders';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {
   CANCEL_SELL_ORDER_BUTTON,
   CANCEL_SELL_ORDER_HEADER,
   CANCEL_SELL_ORDER_TITLE,
-} from '../Storefront.constants';
-import { NormalizedSellOrder } from '../Storefront.types';
+} from '../CancelSellOrderFlow.constants';
 
 type Props = {
   accountAddress?: string;

@@ -1,0 +1,4 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "ignoreCommand": "if [ \"$VERCEL_GIT_COMMIT_REF\" = \"feat-next-migration\" ] || { [ \"$VERCEL_GIT_PULL_REQUEST\" != \"false\" ] && [ \"$VERCEL_GIT_TARGET_REF\" = \"feat-next-migration\" ]; }; then exit 0; else exit 1; fi"
+}

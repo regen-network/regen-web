@@ -48,15 +48,15 @@ NEXT_PUBLIC_DAO_VOTING_CW4_CODE_ID = "19"
 
 # Build settings for Next.js deploy previews
 [context.deploy-preview]
-  command = "bun run build"
-  publish = "web-marketplace/.next"
+command = "bun run build"
+publish = "web-marketplace/.next"
 
 [[context.deploy-preview.plugins]]
-  package = "@netlify/plugin-nextjs"
+package = "@netlify/plugin-nextjs"
 
 
 [context.deploy-preview.environment]
-
+NEXT_PUBLIC_SANITY_DATASET = "staging"
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
 NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
 NEXT_PUBLIC_LEDGER_CHAIN_ID = "regen-upgrade"
@@ -70,6 +70,61 @@ NEXT_PUBLIC_BRIDGE = "true"
 NEXT_PUBLIC_SKIPPED_CLASS_ID = ""
 NEXT_PUBLIC_ANALYTICS_ENABLED = "true"
 NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
+NEXT_PUBLIC_AMPLITUDE_API_KEY = "804411ae5b6e49e09e76d968a4193ae3"
+NEXT_PUBLIC_API_URI = "https://api-staging.regen.network"
+NEXT_PUBLIC_CREDIT_CLASS_FILTERS_TO_DESELECT = "C01"
+NEXT_PUBLIC_DEFAULT_COMMUNITY_PROJECTS_FILTER = "true"
+NEXT_PUBLIC_GA_MEASUREMENT_ID = "G-9ENS4JTCWY"
+NEXT_PUBLIC_IMAGE_STORAGE_BASE_URL = "https://regen-registry.s3.amazonaws.com/"
+NEXT_PUBLIC_MAPBOX_TOKEN = "pk.eyJ1IjoibWFyaWVnYXV0aGllciIsImEiOiJjazZxbTQxdzgxc3doM2xycmF0ZG9oaDFkIn0.vIa-uF0if11ZOInxPdZW1Q"
+NEXT_PUBLIC_MARKETPLACE_APP_URL = "https://dev.app.regen.network"
+NEXT_PUBLIC_MARKETPLACE_CLIENT = "terrasos"
+NEXT_PUBLIC_SUPPORTED_LOCALES = "en,es"
+NEXT_PUBLIC_REGEN_WORKER_ADDRESS = "regen1qsc8tsmtgrzg9az6jl7g2uf2zyevanngrge4p5"
+NEXT_PUBLIC_SANITY_PROJECT_ID = "jm12rn9t"
+NEXT_PUBLIC_SANITY_TAG = "default"
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = "pk_test_51ONHQTB79fEloexm1lsmRAbwidlxpDRFJxRiJT9R5hpQwJgeAElIX2vY99rDBJQnKPCzTntwg7qIcwMUlzBxTx5a004jUyOELV"
+NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID = "d6fdf2c8dd645ff3e6b444e551890c2b"
+NEXT_PUBLIC_WEBSITE_URL = "https://www.regen.network"
+NEXT_PUBLIC_CW_ADMIN_FACTORY_ADDR = "regen1hrpna9v7vs3stzyd4z3xf00676kf78zpe2u5ksvljswn2vnjp3ysp76v39"
+NEXT_PUBLIC_DAODAO_CORE_CODE_ID = "6"
+NEXT_PUBLIC_FILTER_CODE_ID = "14"
+NEXT_PUBLIC_PROTOCOLBUF_REGISTRY_CODE_ID = "15"
+NEXT_PUBLIC_RBAM_CODE_ID = "16"
+NEXT_PUBLIC_PROPOSAL_SINGLE_CODE_ID = "13"
+NEXT_PUBLIC_PRE_PROPOSE_SINGLE_CODE_ID = "11"
+NEXT_PUBLIC_CW4_GROUP_CODE_ID = "2"
+NEXT_PUBLIC_DAO_VOTING_CW4_CODE_ID = "19"
+
+[context."feat-next-migration".environment]
+NEXT_PUBLIC_SANITY_DATASET = "staging"
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"
+NEXT_PUBLIC_INTERCOM_APP_ID = "kn5di10s"
+NEXT_PUBLIC_LEDGER_CHAIN_ID = "regen-upgrade"
+NEXT_PUBLIC_LEDGER_CHAIN_NAME = "Regen - Upgrade Testnet"
+NEXT_PUBLIC_BLOCK_EXPLORER = "https://explorer-regen-upgrade.vitwit.com"
+NEXT_PUBLIC_SENTRY_ENVIRONMENT = "development"
+NEXT_PUBLIC_TOUCAN_LINK = "https://test.app.toucan.earth/?chainId=137"
+NEXT_PUBLIC_BRIDGE_API_URI = "https://toucan-bridge-staging.herokuapp.com"
+NEXT_PUBLIC_BRIDGE_CREDIT_CLASS_ID = "C56"
+NEXT_PUBLIC_BRIDGE = "true"
+NEXT_PUBLIC_SKIPPED_CLASS_ID = ""
+NEXT_PUBLIC_ANALYTICS_ENABLED = "true"
+NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
+NEXT_PUBLIC_AMPLITUDE_API_KEY = "804411ae5b6e49e09e76d968a4193ae3"
+NEXT_PUBLIC_API_URI = "https://api-staging.regen.network"
+NEXT_PUBLIC_CREDIT_CLASS_FILTERS_TO_DESELECT = "C01"
+NEXT_PUBLIC_DEFAULT_COMMUNITY_PROJECTS_FILTER = "true"
+NEXT_PUBLIC_GA_MEASUREMENT_ID = "G-9ENS4JTCWY"
+NEXT_PUBLIC_IMAGE_STORAGE_BASE_URL = "https://regen-registry.s3.amazonaws.com/"
+NEXT_PUBLIC_MAPBOX_TOKEN = "pk.eyJ1IjoibWFyaWVnYXV0aGllciIsImEiOiJjazZxbTQxdzgxc3doM2xycmF0ZG9oaDFkIn0.vIa-uF0if11ZOInxPdZW1Q"
+NEXT_PUBLIC_MARKETPLACE_APP_URL = "https://dev.app.regen.network"
+NEXT_PUBLIC_REGEN_WORKER_ADDRESS = "regen1qsc8tsmtgrzg9az6jl7g2uf2zyevanngrge4p5"
+NEXT_PUBLIC_SANITY_PROJECT_ID = "jm12rn9t"
+NEXT_PUBLIC_SANITY_TAG = "default"
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = "pk_test_51ONHQTB79fEloexm1lsmRAbwidlxpDRFJxRiJT9R5hpQwJgeAElIX2vY99rDBJQnKPCzTntwg7qIcwMUlzBxTx5a004jUyOELV"
+NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID = "d6fdf2c8dd645ff3e6b444e551890c2b"
+NEXT_PUBLIC_WEBSITE_URL = "https://www.regen.network"
 NEXT_PUBLIC_CW_ADMIN_FACTORY_ADDR = "regen1hrpna9v7vs3stzyd4z3xf00676kf78zpe2u5ksvljswn2vnjp3ysp76v39"
 NEXT_PUBLIC_DAODAO_CORE_CODE_ID = "6"
 NEXT_PUBLIC_FILTER_CODE_ID = "14"
@@ -118,25 +173,3 @@ from = "https://app.regen.network/ecocredits/accounts/*"
 to = "https://app.regen.network/profiles/:splat"
 force = true
 status = 302
-
-[functions]
-  node_bundler = "esbuild"
-  external_node_modules = []
-  included_files = [
-    "!node_modules/sharp/vendor/**",
-    "!node_modules/@img/sharp-libvips-*/**/*",
-    "!node_modules/@keplr-wallet/**/*",
-    "!node_modules/@ledgerhq/**/*",
-    "!node_modules/@ethereumjs/**/*",
-    "!node_modules/mapbox-gl/**/*",
-    "!node_modules/libsodium-sumo.js/**/*",
-    "!node_modules/@regen-network/api/**/*",
-    "!node_modules/chain-registry/**/*",
-    "!node_modules/pdfjs-dist/**/*",
-    "!node_modules/xlsx/**/*",
-    "!public/jpg/**",
-    "!public/png/**",
-    "!public/svg/**"
-  ]
-
-

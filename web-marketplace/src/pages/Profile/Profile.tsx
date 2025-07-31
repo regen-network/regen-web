@@ -41,6 +41,7 @@ import { useProfileItems } from 'pages/Dashboard/hooks/useProfileItems';
 import { useFetchProjectByAdmin } from 'pages/Dashboard/MyProjects/hooks/useFetchProjectsByAdmin';
 import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
+import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 import { useFetchCreditClassesWithOrder } from 'hooks/classes/useFetchCreditClassesWithOrder';
 
 import { useProfileData } from './hooks/useProfileData';
@@ -74,6 +75,11 @@ export const Profile = (): JSX.Element => {
     adminAddress: address,
   });
 
+  const { batchesWithSupply } = useFetchPaginatedBatches({
+    address,
+  });
+  const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
+
   const socialsLinks = useMemo(() => getSocialsLinks({ account }), [account]);
 
   const tabs: IconTabProps[] = useMemo(
@@ -105,7 +111,7 @@ export const Profile = (): JSX.Element => {
         label: _(msg`Credit Batches`),
         icon: <CreditBatchIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/credit-batches`,
-        hidden: Boolean(!isIssuer),
+        hidden: Boolean(!isIssuer || !hasCreditBatches),
       },
     ],
     [
@@ -117,6 +123,7 @@ export const Profile = (): JSX.Element => {
       adminProjects.length,
       creditClasses.length,
       isIssuer,
+      hasCreditBatches,
       privActiveAccount,
       showCreditClasses,
     ],

@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
-import { Box } from '@mui/system';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import EmptyState from 'web-components/src/components/empty-state';
@@ -27,7 +26,7 @@ export const MyCreditBatches = (): JSX.Element => {
   const hasNoBatches = batchesWithSupply && batchesWithSupply?.length === 0;
 
   return (
-    <Box className="shadow-[0_2px_5px_0.5px_rgba(0,0,0,0.05)] w-[100%]">
+    <div className="shadow-[0_2px_5px_0.5px_rgba(0,0,0,0.05)] w-[100%]">
       <MyCreditBatchesTable
         hasNoBatches={hasNoBatches}
         paginationParams={paginationParams}
@@ -50,6 +49,6 @@ export const MyCreditBatches = (): JSX.Element => {
           </OutlinedButton>
         </EmptyState>
       )}
-    </Box>
+    </div>
   );
 };

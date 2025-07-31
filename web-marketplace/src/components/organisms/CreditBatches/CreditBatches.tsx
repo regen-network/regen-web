@@ -8,7 +8,6 @@ import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/src/components/block-content';
-import NoEcocreditsIcon from 'web-components/src/components/icons/NoEcocreditsIcon';
 import Section from 'web-components/src/components/section';
 import {
   ActionsTable,
@@ -215,7 +214,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
     />
   );
 
-  return creditBatches.length > 0 ? (
+  return creditBatches && creditBatches.length > 0 ? (
     withSection ? (
       <Section
         classes={{ root: classes.section, title: classes.title }}

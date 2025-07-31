@@ -1,4 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "ignoreCommand": "if [ \"$VERCEL_GIT_COMMIT_REF\" = \"feat-next-migration\" ] || { [ \"$VERCEL_GIT_PULL_REQUEST\" != \"false\" ] && [ \"$VERCEL_GIT_TARGET_REF\" = \"feat-next-migration\" ]; }; then exit 0; else exit 1; fi"
+  "version": 2,
+  "ignoreCommand": "echo \"PR=$VERCEL_GIT_PULL_REQUEST, Branch=$VERCEL_GIT_COMMIT_REF\"; if [ \"$VERCEL_GIT_COMMIT_REF\" = \"feat-next-migration\" ]; then exit 0; fi; if [ \"$VERCEL_GIT_PULL_REQUEST\" != \"false\" ] && [ \"$VERCEL_GIT_COMMIT_REF\" != \"main\" ]; then exit 0; fi; exit 1"
 }

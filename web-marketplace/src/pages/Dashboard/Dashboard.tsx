@@ -28,6 +28,7 @@ import { Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 import { DashboardNavigation } from 'components/organisms/DashboardNavigation';
 import { DashboardNavigationMobileHeader } from 'components/organisms/DashboardNavigation/DashboardNavigation.MobileHeader';
+import { useFetchPaginatedBatches } from 'hooks/batches/useFetchPaginatedBatches';
 
 import { NavigationProvider } from '../../components/organisms/DashboardNavigation/contexts/NavigationContext';
 import {
@@ -70,9 +71,8 @@ export const Dashboard = () => {
   const { pathname } = useLocation();
   const section = usePathSection();
 
-  const { isCreditClassCreator, isProjectAdmin, isIssuer } = useProfileItems(
-    {},
-  );
+  const { isCreditClassCreator, isProjectAdmin, isIssuer, showCreditClasses } =
+    useProfileItems({});
   const projects = useFetchProjectByAdmin({
     adminAccountId: activeAccountId,
     adminAddress: loginDisabled ? wallet?.address : activeAccount?.addr,
@@ -80,6 +80,11 @@ export const Dashboard = () => {
   });
 
   const hasProjects = projects?.adminProjects;
+
+  const { batchesWithSupply } = useFetchPaginatedBatches({
+    address: wallet?.address,
+  });
+  const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 
   const walletConnect = !activeAccount && !privActiveAccount;
 
@@ -305,7 +310,9 @@ export const Dashboard = () => {
                         section={section}
                         activeAccount={activeAccount}
                         hasProjects={hasProjects}
-                      />
+                        hasCreditClasses={showCreditClasses}
+                      hasCreditBatches={hasCreditBatches}
+                    />
                     )}
                   </div>
                 )}

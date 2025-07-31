@@ -101,27 +101,6 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
     columnsToShow = columnsToShow.filter(column => column.id !== 'txhash');
   }
 
-  if (!creditBatches?.length) {
-    return (
-      <NoCredits
-        title={_(msg`No credits issued`)}
-        icon={
-          <NoEcocreditsIcon
-            sx={{
-              width: 100,
-              height: 100,
-            }}
-          />
-        }
-        sx={{
-          border: theme => `1px solid ${theme.palette.info.light}`,
-          borderTop: 0,
-          borderRadius: '0 0 10px 10px',
-        }}
-      />
-    );
-  }
-
   const table = (
     <ActionsTable
       tableLabel={_(msg`credit batch table`)}

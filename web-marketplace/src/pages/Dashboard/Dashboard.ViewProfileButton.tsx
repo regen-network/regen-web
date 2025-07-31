@@ -26,6 +26,8 @@ type Props = {
   > | null;
   section: string;
   hasProjects?: Array<any>;
+  hasCreditClasses?: boolean;
+  hasCreditBatches?: boolean;
 };
 
 export const ViewProfileButton = ({
@@ -33,6 +35,8 @@ export const ViewProfileButton = ({
   activeAccount,
   section,
   hasProjects = [],
+  hasCreditClasses = true,
+  hasCreditBatches = true,
 }: Props) => {
   const { _ } = useLingui();
   const [isDirtyRef] = useAtom(isProfileEditDirtyRef);
@@ -86,6 +90,13 @@ export const ViewProfileButton = ({
   }
 
   if (section === 'projects' && hasProjects.length === 0) {
+    return null;
+  }
+
+  if (section === 'credit-classes' && !hasCreditClasses) {
+    return null;
+  }
+  if (section === 'credit-batches' && !hasCreditBatches) {
     return null;
   }
 

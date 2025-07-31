@@ -1315,7 +1315,7 @@ msgid "Create a project without a credit class"
 msgstr "Crear un proyecto sin una clase de crédito"
 
 #: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.Table.tsx:72
-#: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.tsx:49
+#: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.tsx:48
 msgid "create credit batch"
 msgstr "crear lote de credito"
 
@@ -1324,6 +1324,10 @@ msgstr "crear lote de credito"
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:58
 msgid "Create Credit Batch"
 msgstr "Crear lote de créditos"
+
+#: src/pages/Dashboard/MyCreditClasses/MyCreditClasses.tsx:55
+msgid "create credit class"
+msgstr "crear clase de crédito"
 
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:28
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:29
@@ -1396,13 +1400,13 @@ msgstr "id de lote de crédito{0, plural, one {} other {(s)}}"
 msgid "Credit Batch Info"
 msgstr "Información del lote de crédito"
 
-#: src/components/organisms/CreditBatches/CreditBatches.tsx:127
+#: src/components/organisms/CreditBatches/CreditBatches.tsx:104
 msgid "credit batch table"
 msgstr "tabla de lotes de crédito"
 
-#: src/components/organisms/CreditBatches/CreditBatches.tsx:243
+#: src/components/organisms/CreditBatches/CreditBatches.tsx:220
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/pages/Profile/Profile.tsx:105
+#: src/pages/Profile/Profile.tsx:111
 msgid "Credit Batches"
 msgstr "Lotes de crédito"
 
@@ -1477,7 +1481,7 @@ msgstr "Clases de crédito"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
 #: src/pages/Home/Home.tsx:180
-#: src/pages/Profile/Profile.tsx:99
+#: src/pages/Profile/Profile.tsx:105
 msgid "Credit Classes"
 msgstr "Clases de crédito"
 
@@ -2715,11 +2719,11 @@ msgstr "Hacer que los archivos y los datos de ubicación sean privados"
 msgid "Make the location data private"
 msgstr "Hacer que los datos de ubicación sean privados"
 
-#: src/pages/Profile/Profile.tsx:149
+#: src/pages/Profile/Profile.tsx:156
 msgid "Manage Credit Batches"
 msgstr "Administrar lotes de crédito"
 
-#: src/pages/Profile/Profile.tsx:144
+#: src/pages/Profile/Profile.tsx:151
 msgid "Manage Credit Classes"
 msgstr "Administrar clases de crédito"
 
@@ -2731,7 +2735,7 @@ msgstr "Administrar créditos"
 msgid "Manage organization"
 msgstr "Gestionar la organización"
 
-#: src/pages/Profile/Profile.tsx:134
+#: src/pages/Profile/Profile.tsx:141
 msgid "Manage Portfolio"
 msgstr "Administrar cartera"
 
@@ -2747,7 +2751,7 @@ msgstr "administrar pestañas de proyectos"
 msgid "Manage projects"
 msgstr "Gestionar proyectos"
 
-#: src/pages/Profile/Profile.tsx:139
+#: src/pages/Profile/Profile.tsx:146
 msgid "Manage Projects"
 msgstr "Administrar proyectos"
 
@@ -3009,8 +3013,8 @@ msgid "No credit batches to display"
 msgstr "No hay lotes de créditos para mostrar"
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:107
-msgid "No credits issued"
-msgstr "No se emitieron créditos"
+#~ msgid "No credits issued"
+#~ msgstr "No se emitieron créditos"
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:58
 #: src/components/organisms/EcocreditsTable.tsx:64
@@ -3375,8 +3379,8 @@ msgid "Please wait while transaction processes"
 msgstr "Por favor espere mientras se procesa la transacción"
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:45
-#: src/pages/Dashboard/Dashboard.constants.tsx:14
-#: src/pages/Profile/Profile.tsx:82
+#: src/pages/Dashboard/Dashboard.constants.tsx:13
+#: src/pages/Profile/Profile.tsx:88
 msgid "Portfolio"
 msgstr "Cartera"
 
@@ -3757,7 +3761,7 @@ msgstr "PROYECTADO:"
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:39
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/pages/Profile/Profile.tsx:90
+#: src/pages/Profile/Profile.tsx:96
 msgid "Projects"
 msgstr "Proyectos"
 
@@ -3773,7 +3777,7 @@ msgstr "Pestañas de proyectos"
 msgid "Public profile"
 msgstr "Perfil público"
 
-#: src/pages/Profile/Profile.tsx:211
+#: src/pages/Profile/Profile.tsx:218
 msgid "public profile tabs"
 msgstr "pestañas de perfil público"
 
@@ -5472,6 +5476,10 @@ msgstr "Ha elegido comprar créditos negociables, por lo que no recibirá un cer
 #: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:59
 msgid "You have no tradable credits that can be sold."
 msgstr "No tienes créditos negociables que se puedan vender."
+
+#: src/pages/Dashboard/MyCreditClasses/MyCreditClasses.constants.ts:4
+msgid "You have not created any credit classes yet"
+msgstr "Aún no has creado ninguna clase de crédito"
 
 #: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.constants.ts:3
 msgid "You have not issued any credit batches yet"

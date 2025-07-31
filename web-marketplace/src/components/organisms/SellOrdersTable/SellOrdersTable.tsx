@@ -57,6 +57,7 @@ const SellOrdersTable = ({
     <>
       {hasSellOrders && (
         <ActionsTable
+          className="rounded-[10px]"
           tableLabel={_(msg`Sell orders`)}
           labelDisplayedRows={labelDisplayedRows}
           headerRows={sellOrdersRow}

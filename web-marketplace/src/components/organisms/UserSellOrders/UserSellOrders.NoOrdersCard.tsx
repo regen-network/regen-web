@@ -11,7 +11,7 @@ export const NoUserSellOrdersCard = ({
   refetchSellOrders: () => void;
 }) => {
   return (
-    <div className="rounded-xl overflow-hidden border-[1px] border-grey-300 border-solid">
+    <div className="rounded-[10px] overflow-hidden border-[1px] border-grey-300 border-solid">
       <UserSellOrdersToolbar refetchSellOrders={refetchSellOrders} />
       <div className="min-w-full bg-grey-200 flex flex-col items-center justify-center p-40">
         <SellOrderNotFoundIcon className="w-[100px] h-[100px] text-brand-400" />

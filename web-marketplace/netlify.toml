@@ -52,6 +52,21 @@ NEXT_PUBLIC_BRIDGE = "true"
 NEXT_PUBLIC_SKIPPED_CLASS_ID = ""
 NEXT_PUBLIC_ANALYTICS_ENABLED = "true"
 NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
+NEXT_PUBLIC_AMPLITUDE_API_KEY=804411ae5b6e49e09e76d968a4193ae3
+NEXT_PUBLIC_API_URI=https://api-staging.regen.network
+NEXT_PUBLIC_CREDIT_CLASS_FILTERS_TO_DESELECT=C01
+NEXT_PUBLIC_DEFAULT_COMMUNITY_PROJECTS_FILTER=true
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-9ENS4JTCWY
+NEXT_PUBLIC_IMAGE_STORAGE_BASE_URL=https://regen-registry.s3.amazonaws.com/
+NEXT_PUBLIC_MAPBOX_TOKEN=pk.eyJ1IjoibWFyaWVnYXV0aGllciIsImEiOiJjazZxbTQxdzgxc3doM2xycmF0ZG9oaDFkIn0.vIa-uF0if11ZOInxPdZW1Q
+NEXT_PUBLIC_MARKETPLACE_APP_URL=https://dev.app.regen.network
+NEXT_PUBLIC_MARKETPLACE_CLIENT=regen
+NEXT_PUBLIC_REGEN_WORKER_ADDRESS=regen1qsc8tsmtgrzg9az6jl7g2uf2zyevanngrge4p5
+NEXT_PUBLIC_SANITY_PROJECT_ID=jm12rn9t
+NEXT_PUBLIC_SANITY_TAG=default
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_51ONHQTB79fEloexm1lsmRAbwidlxpDRFJxRiJT9R5hpQwJgeAElIX2vY99rDBJQnKPCzTntwg7qIcwMUlzBxTx5a004jUyOELV
+NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=d6fdf2c8dd645ff3e6b444e551890c2b
+NEXT_PUBLIC_WEBSITE_URL=https://www.regen.network
 
 [build.environment]
 NODE_OPTIONS = "--max-old-space-size=10216"
@@ -92,24 +107,5 @@ to = "https://app.regen.network/profiles/:splat"
 force = true
 status = 302
 
-[functions]
-  node_bundler = "esbuild"
-  external_node_modules = []
-  included_files = [
-    "!node_modules/sharp/vendor/**",
-    "!node_modules/@img/sharp-libvips-*/**/*",
-    "!node_modules/@keplr-wallet/**/*",
-    "!node_modules/@ledgerhq/**/*",
-    "!node_modules/@ethereumjs/**/*",
-    "!node_modules/mapbox-gl/**/*",
-    "!node_modules/libsodium-sumo.js/**/*",
-    "!node_modules/@regen-network/api/**/*",
-    "!node_modules/chain-registry/**/*",
-    "!node_modules/pdfjs-dist/**/*",
-    "!node_modules/xlsx/**/*",
-    "!public/jpg/**",
-    "!public/png/**",
-    "!public/svg/**"
-  ]
 
 

@@ -56,6 +56,11 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
   const { _ } = useLingui();
   const navigate = useNavigate();
 
+  const hasMorePages =
+    (initialPaginationParams?.count ?? 0) >
+    (initialPaginationParams?.rowsPerPage ?? 0);
+  const noEcocredits = !credits || (!credits?.length && !hasMorePages);
+
   const tabs: IconTabProps[] = useMemo(
     () => [
       {
@@ -67,6 +72,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
             onTableChange={onTableChange}
             initialPaginationParams={initialPaginationParams}
             isIgnoreOffset={isIgnoreOffset}
+            noEcocredits={noEcocredits}
           />
         ),
         hidden: hideEcocredits,
@@ -87,7 +93,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
             initialPaginationParams={retirementsPaginationParams}
           />
         ),
-        hidden: hideRetirements,
+        hidden: hideRetirements || !retirements?.length,
       },
       {
         label: _(msg`Basket Tokens`),
@@ -107,6 +113,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
       onTableChange,
       initialPaginationParams,
       isIgnoreOffset,
+      noEcocredits,
       hideEcocredits,
       retirements,
       onRetirementTableChange,
@@ -120,8 +127,15 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
 
   return (
     <Box>
-      <Card>
+      <Card
+        className={
+          noEcocredits
+            ? 'shadow-none rounded-[10px] border-sc-card-standard-stroke'
+            : 'shadow-none rounded-[10px]'
+        }
+      >
         <IconTabs
+          hideIndicator
           tabs={tabs}
           size={'xl'}
           sxs={tabsStyles.tabsInsideCard}

@@ -9,12 +9,14 @@ export function DenomIconWithCurrency({
   bankDenom,
   displayDenom,
   className,
+  textClassName,
   tooltipText,
 }: {
   baseDenom: string | undefined;
   bankDenom: string | undefined;
   displayDenom: string;
   className?: string;
+  textClassName?: string;
   tooltipText?: string;
 }) {
   return baseDenom ? (
@@ -24,7 +26,9 @@ export function DenomIconWithCurrency({
         bankDenom={bankDenom}
         className="h-[24px] inline-block denom-icon"
       />
-      <span className="pb-5 pt-3 text-sm">{displayDenom}</span>
+      <span className={cn('pb-5 pt-3 text-sm', textClassName)}>
+        {displayDenom}
+      </span>
       {tooltipText && (
         <QuestionMarkTooltip
           placement="bottom"

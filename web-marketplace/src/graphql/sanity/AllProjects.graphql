@@ -8,9 +8,5 @@ query AllProjects {
       estimatedIssuance
       stripePaymentLink
     }
-    fiatSellOrders {
-      sellOrderId
-      usdPrice
-    }
   }
 }

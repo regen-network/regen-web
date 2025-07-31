@@ -8,7 +8,6 @@ import { quantityFormatNumberOptions } from 'config/decimals';
 import { tableStyles } from 'styles/table';
 
 import { BlockContent } from 'web-components/src/components/block-content';
-import NoEcocreditsIcon from 'web-components/src/components/icons/NoEcocreditsIcon';
 import Section from 'web-components/src/components/section';
 import {
   ActionsTable,
@@ -26,6 +25,7 @@ import {
   ACTIONS_TABLE_ACTIONS_TEXT,
   getLabelDisplayedRows,
 } from 'lib/constants/shared.constants';
+import { LINK_PREFIX } from 'lib/env';
 
 import { AccountLink, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
@@ -36,7 +36,6 @@ import {
   getCreditBatchesHeadCells,
 } from './CreditBatches.config';
 import { useCreditBatchesStyles } from './CreditBatches.styles';
-import { LINK_PREFIX } from 'lib/env';
 
 interface CreditBatchProps {
   creditClassId?: string | null;
@@ -215,7 +214,7 @@ const CreditBatches: React.FC<React.PropsWithChildren<CreditBatchProps>> = ({
     />
   );
 
-  return creditBatches.length > 0 ? (
+  return creditBatches && creditBatches.length > 0 ? (
     withSection ? (
       <Section
         classes={{ root: classes.section, title: classes.title }}

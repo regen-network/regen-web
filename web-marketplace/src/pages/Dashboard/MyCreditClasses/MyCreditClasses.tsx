@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { Box, Grid, useTheme } from '@mui/material';
+import { Grid, useTheme } from '@mui/material';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import EmptyState from 'web-components/src/components/empty-state';
@@ -36,7 +36,7 @@ export const MyCreditClasses = (): JSX.Element => {
   const hasNoCreditClasses = creditClasses && creditClasses.length === 0;
 
   return (
-    <Box className="shadow-[0_2px_5px_0.5px_rgba(0,0,0,0.05)] w-[100%]">
+    <div className="shadow-[0_2px_5px_0.5px_rgba(0,0,0,0.05)] w-[100%]">
       <WithLoader
         isLoading={isLoadingCreditClasses}
         sx={{ display: 'flex', justifyContent: 'center' }}
@@ -75,6 +75,6 @@ export const MyCreditClasses = (): JSX.Element => {
           </Grid>
         )}
       </WithLoader>
-    </Box>
+    </div>
   );
 };

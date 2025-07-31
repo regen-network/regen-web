@@ -1,11 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "git": {
-    "deploymentEnabled": {
-      "feat-next-migration": true,
-      "*": false
-    }
-  },
-  "ignoreCommand": "echo 'Debug Info:'; echo \"PR=$VERCEL_GIT_PULL_REQUEST\"; echo \"Target Branch=$VERCEL_GITHUB_PULL_REQUEST_TARGET_BRANCH\"; echo \"Source Branch=$VERCEL_GIT_COMMIT_REF\"; if [ \"$VERCEL_GIT_PULL_REQUEST\" != \"false\" ] && [ \"$VERCEL_GITHUB_PULL_REQUEST_TARGET_BRANCH\" = \"feat-next-migration\" ]; then exit 1; elif [ \"$VERCEL_GIT_COMMIT_REF\" = \"feat-next-migration\" ]; then exit 1; else exit 0; fi"
+  "ignoreCommand": "echo 'Debug Info:'; echo \"PR_ID=$VERCEL_GIT_PULL_REQUEST_ID\"; echo \"Branch=$VERCEL_GIT_COMMIT_REF\"; if [ \"$VERCEL_GIT_COMMIT_REF\" = \"feat-next-migration\" ]; then echo 'Deploying: dev environment'; exit 1; elif [ -n \"$VERCEL_GIT_PULL_REQUEST_ID\" ]; then echo 'Deploying: preview environment'; exit 1; else echo 'Skip deployment'; exit 0; fi"
 }

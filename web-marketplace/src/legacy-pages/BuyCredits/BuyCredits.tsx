@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
+import { useLoaderData, useParams } from 'react-router-dom';
 import { useAtom, useAtomValue } from 'jotai';
 import NotFoundPage from 'legacy-pages/NotFound';
+import { useRouter } from 'next/navigation';
 
 import { Loading } from 'web-components/src/components/loading';
 
@@ -19,14 +20,14 @@ import { useSummarizePayment } from './hooks/useSummarizePayment';
 
 export const BuyCredits = () => {
   const { projectId } = useParams();
-  const navigate = useNavigate();
+  const router = useRouter();
   const accountCanBuy = useLoaderData();
 
   useEffect(() => {
     if (!accountCanBuy) {
-      navigate(`/project/${projectId}`, { replace: true });
+      router.replace(`/project/${projectId}`);
     }
-  }, [navigate, projectId, accountCanBuy]);
+  }, [router, projectId, accountCanBuy]);
 
   const {
     loadingSanityProject,

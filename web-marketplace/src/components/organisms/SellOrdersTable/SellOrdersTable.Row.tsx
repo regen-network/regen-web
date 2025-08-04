@@ -14,7 +14,6 @@ import { TranslatorType } from 'lib/i18n/i18n.types';
 import DenomIcon from 'components/molecules/DenomIcon';
 import DenomLabel from 'components/molecules/DenomLabel';
 
-import { NormalizedSellOrder } from '../../../legacy-pages/Marketplace/Storefront/Storefront.types';
 import { getAccountUrl } from '../../../lib/block-explorer';
 import { Link } from '../../atoms';
 import WithLoader from '../../atoms/WithLoader';

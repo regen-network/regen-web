@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://github.com/regen-network/regen-web/compare/v2.10.1...v2.11.0) (2025-08-04)
+
+### Bug Fixes
+
+- APP-708 get compliance credits from shared sanity projects ([#2679](https://github.com/regen-network/regen-web/issues/2679)) ([6812c16](https://github.com/regen-network/regen-web/commit/6812c16f48e4ec0de25b9d724c796f3012346413))
+
+### Features
+
+- APP-673 add member card UI ([#2693](https://github.com/regen-network/regen-web/issues/2693)) ([ae97761](https://github.com/regen-network/regen-web/commit/ae97761aa0c3ea0b4667809394b451f6db07af06))
+- APP-706 Allow account with Stripe integration to create USD sell orders ([#2676](https://github.com/regen-network/regen-web/issues/2676)) ([72a2c97](https://github.com/regen-network/regen-web/commit/72a2c97420ba56bc8676c29cb5abfff503aa11cc))
+
 ## [2.10.1](https://github.com/regen-network/regen-web/compare/v2.10.0...v2.10.1) (2025-07-29)
 
 ### Bug Fixes

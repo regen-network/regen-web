@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://github.com/regen-network/regen-web/compare/v2.10.1...v2.11.0) (2025-08-04)
+
+### Features
+
+- APP-673 add member card UI ([#2693](https://github.com/regen-network/regen-web/issues/2693)) ([ae97761](https://github.com/regen-network/regen-web/commit/ae97761aa0c3ea0b4667809394b451f6db07af06))
+
 # [2.9.0](https://github.com/regen-network/regen-web/compare/v2.8.1...v2.9.0) (2025-05-19)
 
 **Note:** Version bump only for package web-storybook

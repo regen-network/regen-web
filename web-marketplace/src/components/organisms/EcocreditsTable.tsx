@@ -120,11 +120,7 @@ export const EcocreditsTable: React.FC<
       rows={
         credits?.map((row, i) => {
           return [
-            <WithLoader
-              key={row.denom}
-              isLoading={row.projectName === ''}
-              variant="skeleton"
-            >
+            <WithLoader isLoading={row.projectName === ''} variant="skeleton">
               <Link
                 href={`/project/${row?.projectId}`}
                 sx={tableStyles.ellipsisColumn}

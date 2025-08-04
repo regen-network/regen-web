@@ -28,6 +28,11 @@ interface ProjectPageProps {
   params: Promise<{ id: string }>;
 }
 
+// statically render all paths the first time they're visited
+export async function generateStaticParams() {
+  return [];
+}
+
 // getProject will be used twice, but execute only once
 const getProject = cache(async (id: string) => {
   try {

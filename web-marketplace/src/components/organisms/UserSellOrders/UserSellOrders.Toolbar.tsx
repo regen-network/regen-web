@@ -40,11 +40,11 @@ export const UserSellOrdersToolbar = ({
     <>
       <div
         className={cn(
-          'p-15 sm:px-25 sm:pt-25 flex justify-between items-center w-full bg-grey-0 border-b-[1px] border-grey-200 border-solid border-t-0 border-r-0 border-l-0',
+          'p-15 sm:p-25 flex justify-between items-center w-full bg-grey-0 border-b-[1px] border-grey-200 border-solid border-t-0 border-r-0 border-l-0',
           wrapperClassName,
         )}
       >
-        <Subtitle size="xl" className="text-base sm:text-[22px]">
+        <Subtitle size="xl" className="text-base sm:text-[22px] pt-3">
           <Trans>Sell orders</Trans>
         </Subtitle>
         {hasTradableCredits ? (

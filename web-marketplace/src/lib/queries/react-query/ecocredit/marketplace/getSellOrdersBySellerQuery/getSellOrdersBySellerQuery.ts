@@ -4,7 +4,6 @@ import {
   SellOrderInfo,
 } from '@regen-network/api/regen/ecocredit/marketplace/v1/query';
 import { QueryClient as ReactQueryClient } from '@tanstack/react-query'; // adjust import to your actual type
-import { getAskUsdAmount } from 'legacy-pages/Marketplace/Storefront/Storefront.utils';
 import uniq from 'lodash/uniq';
 import { IBC_DENOM_PREFIX } from 'utils/ibc/getDenomTrace';
 

@@ -32,7 +32,6 @@ import MyProjects from 'legacy-pages/Dashboard/MyProjects';
 import { ecocreditBatchesLoader } from 'legacy-pages/EcocreditBatches/EcocreditBatches.loader';
 import Faucet from 'legacy-pages/Faucet';
 import { homeLoader } from 'legacy-pages/Home/Home.loader';
-import { storefrontLoader } from 'legacy-pages/Marketplace/Storefront/Storefront.loader';
 import { CreditBatchesTab } from 'legacy-pages/Profile/CreditBatchesTab/CreditBatchesTab';
 import { CreditClassTab } from 'legacy-pages/Profile/CreditClassTab/CreditClassTab';
 import { PortfolioTab } from 'legacy-pages/Profile/PortfolioTab/Profile.PortfolioTab';
@@ -115,9 +114,6 @@ const VerifyEmail = safeLazy(() => import('../../legacy-pages/VerifyEmail'));
 const ProjectEdit = safeLazy(() => import('../../legacy-pages/ProjectEdit'));
 const Activity = safeLazy(() => import('../../legacy-pages/Activity'));
 const CreateBatch = safeLazy(() => import('../../legacy-pages/CreateBatch'));
-const Storefront = safeLazy(
-  () => import('../../legacy-pages/Marketplace/Storefront'),
-);
 const ConnectWalletPage = safeLazy(
   () => import('../../legacy-pages/ConnectWalletPage'),
 );

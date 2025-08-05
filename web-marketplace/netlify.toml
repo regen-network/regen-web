@@ -40,8 +40,6 @@ NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 [[context.deploy-preview.plugins]]
   package = "/web-marketplace/netlify-plugin-upload-function-bundle/"
 
-
-
 [context.deploy-preview.environment]
 NEXT_PUBLIC_SANITY_DATASET = "staging"
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "6LchxlAaAAAAANjtO3w4b5ihVCL87tYfbe0ltzp9"

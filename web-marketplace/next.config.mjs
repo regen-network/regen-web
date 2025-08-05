@@ -19,7 +19,13 @@ const nextConfig = {
     // number of pages that should be kept simultaneously in memory to avoid re-compilation
     pagesBufferLength: 5,
   },
-  serverExternalPackages: ['electron', 'pino-pretty', 'lokijs', 'encoding'],
+  serverExternalPackages: [
+    'electron',
+    'pino-pretty',
+    'lokijs',
+    'encoding',
+    'canvas',
+  ],
   // Dev environment
   turbopack: {
     rules: {
@@ -42,6 +48,7 @@ const nextConfig = {
       'pino-pretty': './empty-shim.js',
       lokijs: './empty-shim.js',
       encoding: './empty-shim.js',
+      canvas: './empty-shim.js',
     },
   },
   // Production environment
@@ -72,7 +79,13 @@ const nextConfig = {
     // number of pages that should be kept simultaneously in memory to avoid re-compilation
     pagesBufferLength: 5,
   },
-  serverExternalPackages: ['electron', 'pino-pretty', 'lokijs', 'encoding'],
+  serverExternalPackages: [
+    'electron',
+    'pino-pretty',
+    'lokijs',
+    'encoding',
+    'canvas',
+  ],
   // Dev environment
   turbopack: {
     rules: {
@@ -95,6 +108,7 @@ const nextConfig = {
       'pino-pretty': './empty-shim.js',
       lokijs: './empty-shim.js',
       encoding: './empty-shim.js',
+      canvas: './empty-shim.js',
     },
   },
   // Move the dev indicators to the bottom right corner to avoid blocking the view of ReactQueryDevtools
@@ -109,7 +123,7 @@ const nextConfig = {
         resourceRegExp: /^electron$/,
       }),
     );
-    config.externals.push('pino-pretty', 'lokijs', 'encoding');
+    config.externals.push('pino-pretty', 'lokijs', 'encoding', 'canvas');
     config.module.rules.push({
       test: /\.po$/,
       use: '@lingui/loader',
@@ -118,6 +132,7 @@ const nextConfig = {
     config.resolve.alias = {
       ...config.resolve.alias,
       'rdf-canonize-native': false,
+      canvas: false,
     };
 
     return config;

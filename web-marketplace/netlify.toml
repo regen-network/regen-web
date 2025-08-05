@@ -36,6 +36,11 @@ NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 [[context.deploy-preview.plugins]]
   package = "@netlify/plugin-nextjs"
 
+# plugin to export the functions bundle to dropbox
+[[context.deploy-preview.plugins]]
+  package = "/web-marketplace/netlify-plugin-upload-function-bundle/"
+
+
 
 [context.deploy-preview.environment]
 NEXT_PUBLIC_SANITY_DATASET = "staging"

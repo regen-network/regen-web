@@ -19,7 +19,23 @@ const nextConfig = {
     // number of pages that should be kept simultaneously in memory to avoid re-compilation
     pagesBufferLength: 5,
   },
-  serverExternalPackages: ['electron', 'pino-pretty', 'lokijs', 'encoding'],
+  serverExternalPackages: [
+    'electron',
+    'pino-pretty',
+    'lokijs',
+    'encoding',
+    'canvas',
+    'sharp',
+    '@keplr-wallet',
+    '@ledgerhq',
+    '@ethereumjs',
+    'mapbox-gl',
+    'libsodium-sumo.js',
+    '@regen-network/api',
+    'chain-registry',
+    'pdfjs-dist',
+    'xlsx',
+  ],
   // Dev environment
   turbopack: {
     rules: {
@@ -72,7 +88,6 @@ const nextConfig = {
     // number of pages that should be kept simultaneously in memory to avoid re-compilation
     pagesBufferLength: 5,
   },
-  serverExternalPackages: ['electron', 'pino-pretty', 'lokijs', 'encoding'],
   // Dev environment
   turbopack: {
     rules: {

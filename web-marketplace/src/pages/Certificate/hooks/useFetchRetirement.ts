@@ -79,7 +79,7 @@ export const useFetchRetirement = ({ id }: Params) => {
   );
 
   const retirement = isValidPaymentIntentId
-    ? retirementByTxHashData?.data.retirementByTxHash
+    ? retirementByTxHashData?.data?.allRetirements?.nodes?.[0]
     : data?.data.retirement;
 
   // Extract data from batch denom id

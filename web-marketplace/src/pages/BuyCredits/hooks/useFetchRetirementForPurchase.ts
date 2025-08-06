@@ -99,7 +99,7 @@ export const useFetchRetirementForPurchase = ({
       txHash: _txHash as string,
     }),
   );
-  const retirement = data?.data?.retirementByTxHash;
+  const retirement = data?.data?.allRetirements?.nodes?.[0];
 
   const onPending = useCallback(() => {
     if (

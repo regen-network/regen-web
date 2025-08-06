@@ -1190,16 +1190,6 @@ export type DeleteRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
   msgIdx: Scalars['Int'];
 };
 
-/** All input for the `deleteRetirementByTxHash` mutation. */
-export type DeleteRetirementByTxHashInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  txHash: Scalars['String'];
-};
-
 /** All input for the `deleteRetirement` mutation. */
 export type DeleteRetirementInput = {
   /**
@@ -2161,8 +2151,6 @@ export type Mutation = {
   updateRetirement?: Maybe<UpdateRetirementPayload>;
   /** Updates a single `Retirement` using a unique key and a patch. */
   updateRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<UpdateRetirementPayload>;
-  /** Updates a single `Retirement` using a unique key and a patch. */
-  updateRetirementByTxHash?: Maybe<UpdateRetirementPayload>;
   /** Updates a single `Tx` using its globally unique id and a patch. */
   updateTx?: Maybe<UpdateTxPayload>;
   /** Updates a single `Tx` using a unique key and a patch. */
@@ -2217,8 +2205,6 @@ export type Mutation = {
   deleteRetirement?: Maybe<DeleteRetirementPayload>;
   /** Deletes a single `Retirement` using a unique key. */
   deleteRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<DeleteRetirementPayload>;
-  /** Deletes a single `Retirement` using a unique key. */
-  deleteRetirementByTxHash?: Maybe<DeleteRetirementPayload>;
   /** Deletes a single `Tx` using its globally unique id. */
   deleteTx?: Maybe<DeleteTxPayload>;
   /** Deletes a single `Tx` using a unique key. */
@@ -2433,12 +2419,6 @@ export type MutationUpdateRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxArg
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateRetirementByTxHashArgs = {
-  input: UpdateRetirementByTxHashInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateTxArgs = {
   input: UpdateTxInput;
 };
@@ -2597,12 +2577,6 @@ export type MutationDeleteRetirementArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
   input: DeleteRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteRetirementByTxHashArgs = {
-  input: DeleteRetirementByTxHashInput;
 };
 
 
@@ -3050,7 +3024,6 @@ export type Query = Node & {
   orderByChainNumAndBlockHeightAndTxIdxAndMsgIdxAndProjectIdAndAskDenom?: Maybe<Order>;
   proposalByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Proposal>;
   retirementByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Retirement>;
-  retirementByTxHash?: Maybe<Retirement>;
   txByChainNumAndBlockHeightAndTxIdx?: Maybe<Tx>;
   txByHash?: Maybe<Tx>;
   voteByChainNumAndBlockHeightAndTxIdxAndMsgIdx?: Maybe<Vote>;
@@ -3363,12 +3336,6 @@ export type QueryRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxArgs = {
   blockHeight: Scalars['BigInt'];
   txIdx: Scalars['Int'];
   msgIdx: Scalars['Int'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryRetirementByTxHashArgs = {
-  txHash: Scalars['String'];
 };
 
 
@@ -4213,18 +4180,6 @@ export type UpdateRetirementByChainNumAndBlockHeightAndTxIdxAndMsgIdxInput = {
   msgIdx: Scalars['Int'];
 };
 
-/** All input for the `updateRetirementByTxHash` mutation. */
-export type UpdateRetirementByTxHashInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** An object where the defined keys will be set on the `Retirement` being updated. */
-  retirementPatch: RetirementPatch;
-  txHash: Scalars['String'];
-};
-
 /** All input for the `updateRetirement` mutation. */
 export type UpdateRetirementInput = {
   /**
@@ -4646,9 +4601,12 @@ export type IndexerRetirementByTxHashQueryVariables = Exact<{
 
 export type IndexerRetirementByTxHashQuery = (
   { __typename?: 'Query' }
-  & { retirementByTxHash?: Maybe<(
-    { __typename?: 'Retirement' }
-    & RetirementFieldsFragment
+  & { allRetirements?: Maybe<(
+    { __typename?: 'RetirementsConnection' }
+    & { nodes: Array<Maybe<(
+      { __typename?: 'Retirement' }
+      & RetirementFieldsFragment
+    )>> }
   )> }
 );
 
@@ -4953,8 +4911,10 @@ export type IndexerRetirementByNodeIdLazyQueryHookResult = ReturnType<typeof use
 export type IndexerRetirementByNodeIdQueryResult = Apollo.QueryResult<IndexerRetirementByNodeIdQuery, IndexerRetirementByNodeIdQueryVariables>;
 export const IndexerRetirementByTxHashDocument = gql`
     query IndexerRetirementByTxHash($txHash: String!) {
-  retirementByTxHash(txHash: $txHash) {
-    ...retirementFields
+  allRetirements(condition: {txHash: $txHash}, orderBy: TIMESTAMP_DESC) {
+    nodes {
+      ...retirementFields
+    }
   }
 }
     ${RetirementFieldsFragmentDoc}`;

@@ -1,5 +1,7 @@
 query IndexerRetirementByTxHash($txHash: String!) {
-  retirementByTxHash(txHash: $txHash) {
-    ...retirementFields
+  allRetirements(condition: { txHash: $txHash }, orderBy: TIMESTAMP_DESC) {
+    nodes {
+      ...retirementFields
+    }
   }
 }

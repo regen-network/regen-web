@@ -206,7 +206,8 @@ export const useOrders = () => {
         );
         const askBaseDenom =
           (denomTrace ? denomTrace.baseDenom : order?.askDenom) ?? '';
-        const retirement = retirementResults[i]?.data?.data?.retirementByTxHash;
+        const retirement =
+          retirementResults[i]?.data?.data?.allRetirements?.nodes?.[0];
         const formattedDate = i18n.date(order?.timestamp, {
           year: 'numeric',
           month: 'short',

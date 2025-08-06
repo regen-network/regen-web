@@ -54,7 +54,6 @@ const nextConfig = {
     '@keplr-wallet',
     '@ledgerhq',
     '@ethereumjs',
-    'mapbox-gl',
     'libsodium-sumo.js',
     '@regen-network/api',
     'chain-registry',

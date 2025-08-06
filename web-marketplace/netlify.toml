@@ -115,7 +115,6 @@ status = 302
     "!node_modules/@keplr-wallet/**/*",
     "!node_modules/@ledgerhq/**/*",
     "!node_modules/@ethereumjs/**/*",
-    "!node_modules/mapbox-gl/**/*",
     "!node_modules/libsodium-sumo.js/**/*",
     "!node_modules/@regen-network/api/**/*",
     "!node_modules/chain-registry/**/*",

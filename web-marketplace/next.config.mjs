@@ -18,7 +18,7 @@ const nextConfig = {
     ],
     // Set the root for Next.js file tracing to the monorepo root
     outputFileTracingRoot: path.join(__dirname, '..'),
-    // Exclude problematic packages from the server functions
+    // Exclude large packages from the server functions
     outputFileTracingExcludes: {
       '*': [
         './node_modules/canvas',

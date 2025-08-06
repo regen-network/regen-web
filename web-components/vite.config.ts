@@ -15,4 +15,9 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './test/setup.ts',
   },
-});
+  resolve: {
+    alias: {
+      'pdfjs-dist': 'pdfjs-dist/build/pdf.min.mjs', // Browser-compatible module
+    },
+  },
+  });

@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
 import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/material';
+import NextLink from 'next/link';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 
@@ -10,8 +10,8 @@ import {
   Scalars,
 } from 'generated/sanity-graphql';
 
-import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection.legacy';
-import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick.legacy';
+import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection';
+import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick';
 
 import { useFeaturedProjects } from './hooks/useFeaturedProjects';
 
@@ -48,11 +48,11 @@ export function FeaturedProjects({
         loading={loading}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 20 }}>
-        <Link to="/projects/1">
+        <NextLink href="/projects/1">
           <ContainedButton>
             <Trans>DISCOVER PROJECTS</Trans>
           </ContainedButton>
-        </Link>
+        </NextLink>
       </Box>
     </div>
   );

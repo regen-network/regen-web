@@ -189,7 +189,7 @@ export const useFetchRetirementForPurchase = ({
     let refetchedRetirement;
     while (i < 10) {
       const res = await refetchRetirement();
-      refetchedRetirement = res.data?.data.retirementByTxHash;
+      refetchedRetirement = res.data?.data?.allRetirements?.nodes?.[0];
       if (!!refetchedRetirement) {
         break;
       }

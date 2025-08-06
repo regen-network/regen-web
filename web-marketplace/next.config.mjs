@@ -1,6 +1,7 @@
 import withBundleAnalyzer from '@next/bundle-analyzer';
-/** @type {import('next').NextConfig} */
+import path from 'path';
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
     swcPlugins: [['@lingui/swc-plugin', {}]],
@@ -11,6 +12,26 @@ const nextConfig = {
       '@lingui/macro',
       'lodash',
     ],
+    // Set the root for Next.js file tracing to the monorepo root
+    outputFileTracingRoot: path.join(__dirname, '..'),
+    // Exclude problematic packages from the server functions
+    outputFileTracingExcludes: {
+      '*': [
+        './node_modules/canvas',
+        './node_modules/@img/sharp-libvips-linux-x64',
+        './node_modules/@img/sharp-libvips-linuxmusl-x64',
+        './node_modules/sharp',
+        './node_modules/@keplr-wallet',
+        './node_modules/@ledgerhq',
+        './node_modules/@ethereumjs',
+        './node_modules/mapbox-gl',
+        './node_modules/libsodium-sumo.js',
+        './node_modules/@regen-network/api',
+        './node_modules/chain-registry',
+        './node_modules/pdfjs-dist',
+        './node_modules/xlsx',
+      ],
+    },
   },
   // Handle how the server will dispose or keep in memory built pages in development
   onDemandEntries: {
@@ -117,7 +138,7 @@ const nextConfig = {
     position: 'bottom-right',
   },
   // Production environment
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+  webpack: (config, { webpack }) => {
     // https://github.com/sindresorhus/got/issues/345
     config.plugins.push(
       new webpack.IgnorePlugin({

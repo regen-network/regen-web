@@ -16,26 +16,26 @@ const nextConfig = {
       '@lingui/macro',
       'lodash',
     ],
-    // Set the root for Next.js file tracing to the monorepo root
-    outputFileTracingRoot: path.join(__dirname, '..'),
-    // Exclude large packages from the server functions
-    outputFileTracingExcludes: {
-      '*': [
-        './node_modules/canvas',
-        './node_modules/@img/sharp-libvips-linux-x64',
-        './node_modules/@img/sharp-libvips-linuxmusl-x64',
-        './node_modules/sharp',
-        './node_modules/@keplr-wallet',
-        './node_modules/@ledgerhq',
-        './node_modules/@ethereumjs',
-        './node_modules/mapbox-gl',
-        './node_modules/libsodium-sumo.js',
-        './node_modules/@regen-network/api',
-        './node_modules/chain-registry',
-        './node_modules/pdfjs-dist',
-        './node_modules/xlsx',
-      ],
-    },
+  },
+  // Set the root for Next.js file tracing to the monorepo root
+  outputFileTracingRoot: path.join(__dirname, '..'),
+  // Exclude large packages from the server functions
+  outputFileTracingExcludes: {
+    '*': [
+      './node_modules/canvas',
+      './node_modules/@img/sharp-libvips-linux-x64',
+      './node_modules/@img/sharp-libvips-linuxmusl-x64',
+      './node_modules/sharp',
+      './node_modules/@keplr-wallet',
+      './node_modules/@ledgerhq',
+      './node_modules/@ethereumjs',
+      './node_modules/mapbox-gl',
+      './node_modules/libsodium-sumo.js',
+      './node_modules/@regen-network/api',
+      './node_modules/chain-registry',
+      './node_modules/pdfjs-dist',
+      './node_modules/xlsx',
+    ],
   },
   // Handle how the server will dispose or keep in memory built pages in development
   onDemandEntries: {

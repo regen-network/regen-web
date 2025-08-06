@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.1](https://github.com/regen-network/regen-web/compare/v2.11.0...v2.11.1) (2025-08-06)
+
+### Bug Fixes
+
+- query for retirements by tx hash ([bf98e79](https://github.com/regen-network/regen-web/commit/bf98e796e713bc9f4895ac41c25a41b6d220c389))
+- ts error ([ca5a158](https://github.com/regen-network/regen-web/commit/ca5a1584f7b16abcd7806dbe1bddf61d2587237d))
+
 # [2.11.0](https://github.com/regen-network/regen-web/compare/v2.10.1...v2.11.0) (2025-08-04)
 
 ### Bug Fixes

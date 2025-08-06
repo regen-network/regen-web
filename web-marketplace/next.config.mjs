@@ -107,13 +107,6 @@ const nextConfig = {
       },
     ],
   },
-  // Handle how the server will dispose or keep in memory built pages in development
-  onDemandEntries: {
-    // pages will stay in memory for 15 minutes after their last access before being disposed to improve dev performance
-    maxInactiveAge: 15 * 60 * 1000,
-    // number of pages that should be kept simultaneously in memory to avoid re-compilation
-    pagesBufferLength: 5,
-  },
   // Move the dev indicators to the bottom right corner to avoid blocking the view of ReactQueryDevtools
   devIndicators: {
     position: 'bottom-right',

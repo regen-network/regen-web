@@ -26,14 +26,6 @@ const nextConfig = {
       './node_modules/@img/sharp-libvips-linux-x64',
       './node_modules/@img/sharp-libvips-linuxmusl-x64',
       './node_modules/sharp',
-      './node_modules/@keplr-wallet',
-      './node_modules/@ledgerhq',
-      './node_modules/@ethereumjs',
-      './node_modules/mapbox-gl',
-      './node_modules/libsodium-sumo.js',
-      './node_modules/chain-registry',
-      './node_modules/pdfjs-dist',
-      './node_modules/xlsx',
     ],
   },
   // Handle how the server will dispose or keep in memory built pages in development
@@ -50,13 +42,6 @@ const nextConfig = {
     'encoding',
     'canvas',
     'sharp',
-    '@keplr-wallet',
-    '@ledgerhq',
-    '@ethereumjs',
-    'libsodium-sumo.js',
-    'chain-registry',
-    'pdfjs-dist',
-    'xlsx',
   ],
   // Dev environment
   turbopack: {

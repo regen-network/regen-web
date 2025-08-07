@@ -29,10 +29,7 @@ export const ProjectCollaborators: React.FC<ProjectCollaboratorsProps> = ({
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
 
   const currentUserRole =
-    localCollaborators?.find(c => c.isCurrentUser)?.projectRole || ROLE_VIEWER;
-  const isExternalAdmin = collaborators?.some(
-    c => !c.orgRole && c.projectRole === 'admin' && c.isCurrentUser,
-  );
+    localCollaborators?.find(c => c.isCurrentUser)?.role || ROLE_VIEWER;
 
   /* ───── sort handler ───── */
   const toggleSort = useCallback(() => {
@@ -51,7 +48,7 @@ export const ProjectCollaborators: React.FC<ProjectCollaboratorsProps> = ({
   const handleRoleChange = useCallback(
     (id: string, role: ProjectRole) => {
       setLocalCollaborators(prev =>
-        prev?.map(c => (c.id === id ? { ...c, projectRole: role } : c)),
+        prev?.map(c => (c.id === id ? { ...c, role: role } : c)),
       );
       onRoleChange?.(id, role);
     },
@@ -71,7 +68,7 @@ export const ProjectCollaborators: React.FC<ProjectCollaboratorsProps> = ({
       title={_(PROJECT_COLLABORATORS)}
       description={_(COLLABORATORS_DESCRIPTION)}
       inviteButtonText={_(INVITE_COLLABORATORS)}
-      canAdmin={currentUserRole === 'admin'}
+      currentUserRole={currentUserRole}
       onInvite={onInvite}
       onSort={toggleSort}
       sortDir={sortDir}
@@ -88,40 +85,34 @@ export const ProjectCollaborators: React.FC<ProjectCollaboratorsProps> = ({
             organization={col.organization}
           >
             <ActionsDropdown
-              role={col.projectRole}
+              role={col.role}
               currentUserRole={currentUserRole}
-              orgRole={col.orgRole}
               isCurrentUser={col.isCurrentUser}
               onRemove={() => handleRemove(col.id)}
               onEditOrgRole={() => {}}
               onEditTitle={() => {}}
-              isExternalAdmin={isExternalAdmin}
             />
           </UserInfo>
 
           {/* Role dropdown – full width on mobile */}
           <div className="order-10 lg:order-none w-full lg:w-[170px] px-6">
             <RoleDropdown
-              projectRole={col.projectRole}
-              orgRole={col.orgRole}
+              role={col.role}
               currentUserRole={currentUserRole}
               onChange={r => handleRoleChange(col.id, r)}
               isCurrentUser={col.isCurrentUser}
-              isExternalAdmin={isExternalAdmin}
             />
           </div>
 
           {/* dots for desktop */}
           <div className="hidden lg:flex w-[60px] justify-center items-center">
             <ActionsDropdown
-              role={col.projectRole}
+              role={col.role}
               currentUserRole={currentUserRole}
-              orgRole={col.orgRole}
               isCurrentUser={col.isCurrentUser}
               onRemove={() => handleRemove(col.id)}
               onEditOrgRole={() => {}}
               onEditTitle={() => {}}
-              isExternalAdmin={isExternalAdmin}
             />
           </div>
         </>

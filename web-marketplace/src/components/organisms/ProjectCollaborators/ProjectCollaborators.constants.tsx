@@ -1,15 +1,6 @@
 import { msg } from '@lingui/macro';
 
 export const YOU = msg`(you)`;
-export const ORG_MEMBER_SETTINGS = msg` organization member settings`;
-export const ORG_ADMIN = msg`This user is an organization admin and cannot be
-                          downgraded on the project level unless you change
-                          their role within the`;
-export const ORG_EDITOR = msg`This user is an organization editor and cannot be
-                          downgraded on the project level unless you change
-                          their role within the`;
-export const TOOLTIP_ROLE = msg`Please contact your administrator to change your role.`;
-export const TOOLTIP_EXTERNAL_ADMIN = msg`External admins cannot change the role of other admins.`;
 
 export const ROLE_ADMIN_LABEL = msg`Admin`;
 export const ROLE_ADMIN_DESCRIPTION = msg`Manages user access and can edit all project info and project credits.`;
@@ -31,7 +22,6 @@ export const NAME = msg`NAME`;
 export const ROLE = msg`ROLE`;
 export const EDIT_PROFILE = msg`EDIT PROFILE`;
 export const SEE_HELP_DOCS = msg`SEE HELP DOCS`;
-export const ACTION_EDIT_MY_USER_PROFILE = msg`Edit my user profile`;
 export const ACTION_REMOVE = msg`Remove`;
 export const TOOLTIP_ONLY_ADMIN_REMOVE = msg`As the only admin, you can’t change your role or remove yourself without adding another admin to this organization.`;
 export const ACTION_EDIT_MY_PROFILE = msg`Edit my profile`;

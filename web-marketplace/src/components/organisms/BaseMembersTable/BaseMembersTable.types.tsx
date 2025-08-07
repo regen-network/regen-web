@@ -25,10 +25,12 @@ export interface BaseTableProps<T extends BaseUser> {
 
 export interface BaseRoleDropdownProps {
   role: string;
-  disabled?: boolean;
   onChange: (newRole: any) => void;
+  roleOptions: RoleOption[];
+  getUnavailableRoles?: (currentRole: string) => (role: string) => boolean;
+  currentUserRole?: string;
+  disabled?: boolean;
   isCurrentUser?: boolean;
-  tooltipTitle?: string;
 }
 
 export interface RoleOption {

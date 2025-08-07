@@ -11,9 +11,3 @@ export type Member = {
   visible: boolean;
   isCurrentUser?: boolean;
 };
-export interface MemberRoleDropdownProps {
-  role: BaseMemberRole;
-  disabled?: boolean;
-  onChange: (newRole: BaseMemberRole) => void;
-  isCurrentUser?: boolean;
-}

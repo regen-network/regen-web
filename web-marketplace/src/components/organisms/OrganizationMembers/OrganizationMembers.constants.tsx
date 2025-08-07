@@ -7,7 +7,6 @@ export const NAME = msg`NAME`;
 export const ROLE = msg`ROLE`;
 export const VISIBILITY_ON_PROFILE = msg`VISIBILITY ON PROFILE`;
 export const EDIT_PROFILE = msg`EDIT PROFILE`;
-export const PLEASE_CONTACT_ADMIN = msg`Please contact your administrator to change your role.`;
 export const PLEASE_CONTACT_ADMIN_VISIBILITY = msg`Please contact your administrator to change your visibility.`;
 export const VISIBLE = msg`Visible`;
 export const HIDDEN = msg`Hidden`;

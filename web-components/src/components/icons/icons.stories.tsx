@@ -78,6 +78,7 @@ import OrganizationIcon from './OrganizationIcon';
 import { OrgProfileIcon } from './OrgProfileIcon';
 import { OtherDocumentsIcon } from './OtherDocumentsIcon';
 import OutlinedCheckIcon from './OutlinedCheckIcon';
+import { OwnerIcon } from './OwnerIcon';
 import { PauseIcon } from './PauseIcon';
 import { PaymentInfoIcon } from './PaymentInfoIcon';
 import { PdfFileIcon } from './PdfFileIcon';
@@ -327,6 +328,7 @@ export const allIcons = (): JSX.Element => (
 
     <LabeledIcon icon={<OtherDocumentsIcon />} label="OtherDocumentsIcon" />
     <LabeledIcon icon={<OutlinedCheckIcon />} label="OutlinedCheckIcon" />
+    <LabeledIcon icon={<OwnerIcon />} label="OwnerIcon" />
     <LabeledIcon icon={<PdfFileIcon />} label="PdfFileIcon" />
     <LabeledIcon icon={<PendingIcon />} label="PendingIcon" />
     <LabeledIcon

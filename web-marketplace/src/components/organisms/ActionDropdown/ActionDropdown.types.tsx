@@ -11,9 +11,7 @@ export interface GetActionItemsParams {
   context: Context;
   role: string;
   currentUserRole: string;
-  orgRole?: string;
   isCurrentUser?: boolean;
-  isExternalAdmin: boolean;
   onRemove: () => void;
   onEditOrgRole?: () => void;
   onEditTitle?: () => void;

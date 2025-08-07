@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
+import { Project } from '@regen-network/api/regen/ecocredit/v1/state';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import DropdownIcon from 'web-components/src/components/icons/DropdownIcon';
@@ -8,27 +9,35 @@ import SmallArrowIcon from 'web-components/src/components/icons/SmallArrowIcon';
 import { Title } from 'web-components/src/components/typography';
 
 import {
+  ROLE_ADMIN,
+  ROLE_OWNER,
+} from '../ActionDropdown/ActionDropdown.constants';
+import {
   INVITE,
   NAME,
   ROLE,
   SEE_HELP_DOCS,
 } from '../ProjectCollaborators/ProjectCollaborators.constants';
 import { PROJECT_CONTEXT } from './BaseMembersTable.constants';
-import { BaseUser } from './BaseMembersTable.types';
+import {
+  BaseMemberRole,
+  BaseUser,
+  ProjectRole,
+} from './BaseMembersTable.types';
 
 interface BaseMembersTableProps<T extends BaseUser> {
   users: T[];
   title: string;
   description: string;
   inviteButtonText: string;
-  canAdmin: boolean;
   onInvite?: () => void;
   onSort?: () => void;
   sortDir?: 'asc' | 'desc';
-  children: (user: T, index: number) => React.ReactNode;
+  children: (user: T, canAdmin: boolean) => React.ReactNode;
   context: 'organization' | 'project';
   additionalColumns?: string[];
   showMobileInvite?: boolean;
+  currentUserRole: ProjectRole | BaseMemberRole;
 }
 
 export const BaseMembersTable = <T extends BaseUser>({
@@ -36,7 +45,6 @@ export const BaseMembersTable = <T extends BaseUser>({
   title,
   description,
   inviteButtonText,
-  canAdmin,
   onInvite,
   onSort,
   sortDir = 'asc',
@@ -44,6 +52,7 @@ export const BaseMembersTable = <T extends BaseUser>({
   context,
   additionalColumns = [],
   showMobileInvite = true,
+  currentUserRole,
 }: BaseMembersTableProps<T>) => {
   const { _ } = useLingui();
   const navigate = useNavigate();
@@ -52,6 +61,9 @@ export const BaseMembersTable = <T extends BaseUser>({
 
   const headerBreakpoint = isProjectContext ? 'lg:flex' : 'xl:flex';
   const rowBreakpoint = isProjectContext ? 'lg:flex-row' : 'xl:flex-row';
+
+  const canAdmin =
+    currentUserRole === ROLE_OWNER || currentUserRole === ROLE_ADMIN;
 
   return (
     <div className="w-full px-10 py-30 md:p-40 bg-bc-neutral-0 rounded-lg border border-solid border-bc-neutral-300">
@@ -139,7 +151,7 @@ export const BaseMembersTable = <T extends BaseUser>({
               isProjectContext ? 'lg:gap-0' : 'xl:gap-0'
             }`}
           >
-            {children(user, index)}
+            {children(user, canAdmin)}
           </div>
         ))}
       </div>

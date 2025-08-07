@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLingui } from '@lingui/react';
 
 import CheckIcon from 'web-components/src/components/icons/CheckIcon';
@@ -7,50 +7,36 @@ import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import {
+  ROLE_ADMIN,
+  ROLE_OWNER,
+} from '../ActionDropdown/ActionDropdown.constants';
+import {
   BaseRoleDropdownProps,
   RoleOption,
 } from '../BaseMembersTable/BaseMembersTable.types';
 import { SELECT_ROLE_ARIA_LABEL } from '../ProjectCollaborators/ProjectCollaborators.constants';
+import { PLEASE_CONTACT_ADMIN } from './BaseRoleDropdown.constants';
 
-interface BaseRoleDropdownExtendedProps extends BaseRoleDropdownProps {
-  roleOptions: RoleOption[];
-  getUnavailableRoles?: (
-    currentRole: string,
-    orgRole?: string,
-  ) => (role: string) => boolean;
-  orgRole?: string;
-  currentUserRole?: string;
-  isExternalAdmin?: boolean;
-  renderAdditionalDescription?: (
-    roleKey: string,
-    orgRole?: string,
-  ) => React.ReactNode;
-  getTooltipConditions?: (props: {
-    role: string;
-    isExternalAdmin?: boolean;
-    orgRole?: string;
-    currentUserRole?: string;
-    isCurrentUser?: boolean;
-  }) => { tooltipTitle?: string; disabled: boolean };
-}
-
-export const BaseRoleDropdown: React.FC<BaseRoleDropdownExtendedProps> = ({
+export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   role,
   disabled = false,
   onChange,
   isCurrentUser = false,
-  tooltipTitle,
   roleOptions,
   getUnavailableRoles,
-  orgRole,
   currentUserRole,
-  isExternalAdmin = false,
-  renderAdditionalDescription,
-  getTooltipConditions,
 }) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  console.log(currentUserRole);
+  const filteredRoleOptions = useMemo(
+    () =>
+      roleOptions.filter(option =>
+        currentUserRole === ROLE_OWNER ? true : option.key !== ROLE_OWNER,
+      ),
+    [currentUserRole, roleOptions],
+  );
 
   useEffect(() => {
     if (!isOpen) return;
@@ -63,18 +49,13 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownExtendedProps> = ({
     return () => document.removeEventListener('mousedown', handle);
   }, [isOpen]);
 
-  // Get tooltip conditions and disabled state
-  const tooltipConditions = getTooltipConditions?.({
-    role,
-    isExternalAdmin,
-    orgRole,
-    currentUserRole,
-    isCurrentUser,
-  }) || { disabled: false };
-
-  const finalTooltipTitle = tooltipTitle || tooltipConditions.tooltipTitle;
-  const isDropdownDisabled =
-    disabled || tooltipConditions.disabled || !!finalTooltipTitle;
+  const isOwner = role === ROLE_OWNER;
+  const tooltipTitle = disabled
+    ? _(PLEASE_CONTACT_ADMIN)
+    : isOwner
+    ? 'TODO'
+    : undefined;
+  const isDropdownDisabled = disabled || isOwner;
 
   const toggle = () => {
     if (isDropdownDisabled) return;
@@ -89,9 +70,9 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownExtendedProps> = ({
   return (
     <div ref={ref} className="relative w-full font-sans">
       {isDropdownDisabled ? (
-        finalTooltipTitle ? (
+        tooltipTitle ? (
           <InfoTooltip
-            title={finalTooltipTitle}
+            title={tooltipTitle}
             arrow={true}
             placement="top"
             className="bg-bc-neutral-0"
@@ -152,14 +133,14 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownExtendedProps> = ({
           aria-label={_(SELECT_ROLE_ARIA_LABEL)}
           className="absolute z-20 w-full lg:w-[330px] bg-bc-neutral-0 shadow-lg rounded mt-1 p-10 max-h-[32rem] overflow-auto flex gap-5 flex-col border border-solid border-bc-neutral-300"
         >
-          {roleOptions.map(({ key, label, Icon, description }) => {
+          {filteredRoleOptions.map(({ key, label, Icon, description }) => {
             const isSelected = role === key;
             const unavailable = getUnavailableRoles
-              ? getUnavailableRoles(role, orgRole)(key)
+              ? getUnavailableRoles(role)(key)
               : false;
 
             const iconClass =
-              key === 'admin'
+              key === ROLE_ADMIN
                 ? unavailable
                   ? 'text-bc-neutral-400'
                   : 'text-ac-primary-500'
@@ -201,31 +182,17 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownExtendedProps> = ({
                           {_(label)}
                         </span>
                       </div>
-                      {renderAdditionalDescription ? (
-                        renderAdditionalDescription(key, orgRole) || (
-                          <p
-                            className={cn(
-                              'text-[12px] leading-[1.45] not-italic text-left m-0',
-                              unavailable
-                                ? 'text-bc-neutral-400'
-                                : 'text-bc-neutral-500',
-                            )}
-                          >
-                            {_(description)}
-                          </p>
-                        )
-                      ) : (
-                        <p
-                          className={cn(
-                            'text-[12px] leading-[1.45] not-italic text-left m-0',
-                            unavailable
-                              ? 'text-bc-neutral-400'
-                              : 'text-bc-neutral-500',
-                          )}
-                        >
-                          {_(description)}
-                        </p>
-                      )}
+
+                      <p
+                        className={cn(
+                          'text-[12px] leading-[1.45] not-italic text-left m-0',
+                          unavailable
+                            ? 'text-bc-neutral-400'
+                            : 'text-bc-neutral-500',
+                        )}
+                      >
+                        {_(description)}
+                      </p>
                     </div>
                   </div>
                 </button>

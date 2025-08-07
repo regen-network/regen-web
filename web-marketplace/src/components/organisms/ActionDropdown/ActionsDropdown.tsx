@@ -8,7 +8,6 @@ import { cn } from 'web-components/src/utils/styles/cn';
 
 import { PROJECT_CONTEXT } from '../BaseMembersTable/BaseMembersTable.constants';
 import {
-  BaseMemberRole,
   Context,
   ProjectRole,
 } from '../BaseMembersTable/BaseMembersTable.types';
@@ -21,21 +20,17 @@ import { getActionItems } from './ActionDropdown.utils';
 export interface ActionsDropdownProps {
   role: ProjectRole;
   currentUserRole: ProjectRole;
-  orgRole?: BaseMemberRole;
   isCurrentUser?: boolean;
   onRemove: () => void;
   onEditOrgRole?: () => void;
   onEditTitle?: () => void;
   context?: Context;
-  isExternalAdmin?: boolean;
 }
 
 export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
   role,
   currentUserRole,
-  orgRole,
   isCurrentUser,
-  isExternalAdmin = false,
   onRemove,
   onEditOrgRole,
   onEditTitle,
@@ -71,9 +66,7 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
     context,
     role,
     currentUserRole,
-    orgRole,
     isCurrentUser,
-    isExternalAdmin,
     onRemove,
     onEditOrgRole,
     onEditTitle,
@@ -89,7 +82,7 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
         onClick={handleToggle}
         className="flex border-none bg-transparent cursor-pointer"
       >
-        <HorizontalDotsIcon className="w-4 h-4" />
+        <HorizontalDotsIcon className="w-4 h-4 text-grey-400" />
       </button>
       {isOpen && (
         <ul

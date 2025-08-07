@@ -40,9 +40,7 @@ const StoryComponent = (args: {
   const [collaborators, setCollaborators] = useState(args.collaborators);
 
   const handleRoleChange = (id: string, role: ProjectRole) => {
-    setCollaborators(prev =>
-      prev.map(c => (c.id === id ? { ...c, projectRole: role } : c)),
-    );
+    setCollaborators(prev => prev.map(c => (c.id === id ? { ...c, role } : c)));
     // Call the Storybook action
     args.onRoleChange?.(id, role);
   };

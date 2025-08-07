@@ -30,7 +30,6 @@ export const OrganizationMembers = ({
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
   const currentUserRole: BaseMemberRole =
     members.find(member => member.isCurrentUser)?.role ?? ROLE_VIEWER;
-  const canAdmin = currentUserRole === 'admin';
 
   const toggleSort = () => {
     const dir = sortDir === 'asc' ? 'desc' : 'asc';
@@ -63,7 +62,7 @@ export const OrganizationMembers = ({
       title={_(ORGANIZATION_MEMBERS)}
       description={_(ORGANIZATION_MEMBERS_DESCRIPTION)}
       inviteButtonText={_(INVITE_MEMBERS)}
-      canAdmin={canAdmin}
+      currentUserRole={currentUserRole}
       onInvite={onInvite}
       onSort={toggleSort}
       sortDir={sortDir}
@@ -71,7 +70,7 @@ export const OrganizationMembers = ({
       additionalColumns={[_(VISIBILITY_ON_PROFILE)]}
       showMobileInvite={true}
     >
-      {member => (
+      {(member, canAdmin) => (
         <>
           {/* Info + mobile dots */}
           <UserInfo
@@ -96,6 +95,7 @@ export const OrganizationMembers = ({
               disabled={!canAdmin}
               isCurrentUser={member.isCurrentUser}
               onChange={r => updateRole(member.id, r)}
+              currentUserRole={currentUserRole}
             />
             <VisibilitySwitch
               checked={member.visible}
@@ -112,6 +112,7 @@ export const OrganizationMembers = ({
               disabled={!canAdmin}
               isCurrentUser={member.isCurrentUser}
               onChange={r => updateRole(member.id, r)}
+              currentUserRole={currentUserRole}
             />
           </div>
           <div className="hidden xl:flex w-[150px] items-center">

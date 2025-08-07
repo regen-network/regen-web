@@ -1,4 +1,4 @@
-export type MemberRole = 'admin' | 'editor' | 'viewer';
+import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
 
 export type Member = {
   id: string;
@@ -6,14 +6,14 @@ export type Member = {
   email: string;
   title: string;
   organization: string;
-  role: MemberRole;
+  role: BaseMemberRole;
   avatar?: string;
   visible: boolean;
   isCurrentUser?: boolean;
 };
 export interface MemberRoleDropdownProps {
-  role: MemberRole;
+  role: BaseMemberRole;
   disabled?: boolean;
-  onChange: (newRole: MemberRole) => void;
+  onChange: (newRole: BaseMemberRole) => void;
   isCurrentUser?: boolean;
 }

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 
-import { CollaboratorsManagement } from './Collaborators';
-import { mockCollaborators } from './Collaborators.mock';
-import { ProjectRoleType } from './Collaborators.types';
+import { ProjectRole } from '../BaseMembersTable/BaseMembersTable.types';
+import { ProjectCollaborators } from './ProjectCollaborators';
+import { mockCollaborators } from './ProjectCollaborators.mock';
 
-const meta: Meta<typeof CollaboratorsManagement> = {
-  title: 'Marketplace/Organisms/CollaboratorsManagement',
-  component: CollaboratorsManagement,
+const meta: Meta<typeof ProjectCollaborators> = {
+  title: 'Marketplace/Organisms/ProjectCollaborators',
+  component: ProjectCollaborators,
   argTypes: {
     collaborators: {
       control: 'object',
@@ -34,12 +34,12 @@ export default meta;
 const StoryComponent = (args: {
   collaborators: typeof mockCollaborators;
   onInvite?: () => void;
-  onRoleChange?: (id: string, role: ProjectRoleType) => void;
+  onRoleChange?: (id: string, role: ProjectRole) => void;
   onRemove?: (id: string) => void;
 }) => {
   const [collaborators, setCollaborators] = useState(args.collaborators);
 
-  const handleRoleChange = (id: string, role: ProjectRoleType) => {
+  const handleRoleChange = (id: string, role: ProjectRole) => {
     setCollaborators(prev =>
       prev.map(c => (c.id === id ? { ...c, projectRole: role } : c)),
     );
@@ -54,7 +54,7 @@ const StoryComponent = (args: {
   };
 
   return (
-    <CollaboratorsManagement
+    <ProjectCollaborators
       {...args}
       collaborators={collaborators}
       onRoleChange={handleRoleChange}
@@ -67,7 +67,7 @@ const StoryComponent = (args: {
 export const Default = (args: {
   collaborators: typeof mockCollaborators;
   onInvite?: () => void;
-  onRoleChange?: (id: string, role: ProjectRoleType) => void;
+  onRoleChange?: (id: string, role: ProjectRole) => void;
   onRemove?: (id: string) => void;
 }) => {
   const key = JSON.stringify(args.collaborators);

@@ -44,7 +44,7 @@ export const MakeAnonymous = ({
           className={`w-full flex justify-between [@media(max-width:340px)]:flex-col [@media(max-width:340px)]:mb-20 sm:flex-row items-center [@media(max-width:340px)]:items-start h-[47px] ${className}`}
         >
           <select
-            className="w-[120px] py-10 px-10 border border-gray-300 text-base font-normal font-sans flex items-center"
+            className="w-[120px] py-10 px-10 border border-grey-300 text-base font-normal font-sans flex items-center"
             value={isAnonymous}
             onChange={handleOnChange}
             aria-label={ariaLabel}

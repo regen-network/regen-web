@@ -10,7 +10,6 @@ export const ORG_EDITOR = msg`This user is an organization editor and cannot be
                           their role within the`;
 export const TOOLTIP_ROLE = msg`Please contact your administrator to change your role.`;
 export const TOOLTIP_EXTERNAL_ADMIN = msg`External admins cannot change the role of other admins.`;
-export const TOOLTIP_ONLY_ADMIN = msg`You are the only admin. You can’t change your role unless another admin is added.`;
 
 export const ROLE_ADMIN_LABEL = msg`Admin`;
 export const ROLE_ADMIN_DESCRIPTION = msg`Manages user access and can edit all project info and project credits.`;

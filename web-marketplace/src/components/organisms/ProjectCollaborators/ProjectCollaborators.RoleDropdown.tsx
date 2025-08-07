@@ -1,16 +1,16 @@
 import { useLingui } from '@lingui/react';
 
+import { ProjectRole } from '../BaseMembersTable/BaseMembersTable.types';
 import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
 import {
   ORG_ADMIN,
   ORG_EDITOR,
   ORG_MEMBER_SETTINGS,
   TOOLTIP_EXTERNAL_ADMIN,
-  TOOLTIP_ONLY_ADMIN,
   TOOLTIP_ROLE,
-} from './Collaborators.constants';
-import { ProjectRoleType, RoleDropdownProps } from './Collaborators.types';
-import { ROLE_HIERARCHY, ROLE_OPTIONS } from './Collaborators.utils';
+} from './ProjectCollaborators.constants';
+import { RoleDropdownProps } from './ProjectCollaborators.types';
+import { ROLE_HIERARCHY, ROLE_OPTIONS } from './ProjectCollaborators.utils';
 
 export const RoleDropdown = ({
   projectRole,
@@ -20,10 +20,8 @@ export const RoleDropdown = ({
   currentUserRole,
   isCurrentUser = false,
   isExternalAdmin = false,
-  isOnlyAdmin = false,
 }: RoleDropdownProps & {
   isExternalAdmin?: boolean;
-  isOnlyAdmin?: boolean;
 }) => {
   const { _ } = useLingui();
 
@@ -34,7 +32,7 @@ export const RoleDropdown = ({
       if (orgRole === undefined || orgRole === null || orgRole === '')
         return false;
 
-      const level = ROLE_HIERARCHY[key as ProjectRoleType];
+      const level = ROLE_HIERARCHY[key as ProjectRole];
       const isOrgAndProjectAdmin =
         orgRole === 'admin' && currentRole === 'admin';
       const isOrgAndProjectEditor =
@@ -47,34 +45,29 @@ export const RoleDropdown = ({
       if (isOrgEditorProjectAdmin) return key !== 'admin' && key !== 'editor';
       if (orgRole === 'admin' && key !== 'admin') return true;
 
-      return level > ROLE_HIERARCHY[orgRole as ProjectRoleType];
+      return level > ROLE_HIERARCHY[orgRole as ProjectRole];
     };
 
   // Get tooltip conditions
   const getTooltipConditions = ({
-    isOnlyAdmin,
     role,
     isExternalAdmin,
     orgRole,
     currentUserRole,
     isCurrentUser,
   }: {
-    isOnlyAdmin: boolean;
     role: string;
     isExternalAdmin?: boolean;
     orgRole?: string;
     currentUserRole?: string;
     isCurrentUser?: boolean;
   }) => {
-    const showOnlyAdminTooltip = isOnlyAdmin && role === 'admin';
     const showExternalAdminTooltip =
       isExternalAdmin && role === 'admin' && orgRole !== '';
     const showNotAdminTooltip = currentUserRole !== 'admin';
 
     let tooltipTitle: string | undefined;
-    if (showOnlyAdminTooltip) {
-      tooltipTitle = _(TOOLTIP_ONLY_ADMIN);
-    } else if (showExternalAdminTooltip) {
+    if (showExternalAdminTooltip) {
       tooltipTitle = _(TOOLTIP_EXTERNAL_ADMIN);
     } else if (showNotAdminTooltip && isCurrentUser) {
       tooltipTitle = _(TOOLTIP_ROLE);
@@ -82,8 +75,7 @@ export const RoleDropdown = ({
 
     return {
       tooltipTitle,
-      disabled:
-        showOnlyAdminTooltip || showExternalAdminTooltip || showNotAdminTooltip,
+      disabled: showExternalAdminTooltip || showNotAdminTooltip,
     };
   };
 
@@ -144,7 +136,6 @@ export const RoleDropdown = ({
       disabled={disabled}
       onChange={onChange}
       isCurrentUser={isCurrentUser}
-      isOnlyAdmin={isOnlyAdmin}
       roleOptions={ROLE_OPTIONS}
       getUnavailableRoles={getUnavailableRoles}
       orgRole={orgRole}

@@ -9,8 +9,8 @@ import { cn } from 'web-components/src/utils/styles/cn';
 import {
   BaseRoleDropdownProps,
   RoleOption,
-} from '../BaseTable/Basetable.types';
-import { SELECT_ROLE_ARIA_LABEL } from '../Collaborators/Collaborators.constants';
+} from '../BaseMembersTable/BaseMembersTable.types';
+import { SELECT_ROLE_ARIA_LABEL } from '../ProjectCollaborators/ProjectCollaborators.constants';
 
 interface BaseRoleDropdownExtendedProps extends BaseRoleDropdownProps {
   roleOptions: RoleOption[];
@@ -26,7 +26,6 @@ interface BaseRoleDropdownExtendedProps extends BaseRoleDropdownProps {
     orgRole?: string,
   ) => React.ReactNode;
   getTooltipConditions?: (props: {
-    isOnlyAdmin: boolean;
     role: string;
     isExternalAdmin?: boolean;
     orgRole?: string;
@@ -40,7 +39,6 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownExtendedProps> = ({
   disabled = false,
   onChange,
   isCurrentUser = false,
-  isOnlyAdmin = false,
   tooltipTitle,
   roleOptions,
   getUnavailableRoles,
@@ -67,7 +65,6 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownExtendedProps> = ({
 
   // Get tooltip conditions and disabled state
   const tooltipConditions = getTooltipConditions?.({
-    isOnlyAdmin,
     role,
     isExternalAdmin,
     orgRole,

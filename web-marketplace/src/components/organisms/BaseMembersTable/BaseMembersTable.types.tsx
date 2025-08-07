@@ -1,6 +1,5 @@
-export type BaseRole = 'admin' | 'editor' | 'viewer';
-export type ProjectRoleType = BaseRole | 'author';
-export type MemberRole = BaseRole;
+export type BaseMemberRole = 'owner' | 'admin' | 'editor' | 'viewer';
+export type ProjectRole = BaseMemberRole | 'author';
 
 export interface BaseUser {
   id: string;
@@ -21,7 +20,7 @@ export interface BaseTableProps<T extends BaseUser> {
   description: string;
   inviteButtonText: string;
   canAdmin: boolean;
-  context: 'members' | 'collaborators';
+  context: Context;
 }
 
 export interface BaseRoleDropdownProps {
@@ -29,7 +28,6 @@ export interface BaseRoleDropdownProps {
   disabled?: boolean;
   onChange: (newRole: any) => void;
   isCurrentUser?: boolean;
-  isOnlyAdmin?: boolean;
   tooltipTitle?: string;
 }
 
@@ -39,3 +37,5 @@ export interface RoleOption {
   Icon: React.FC<any>;
   description: any;
 }
+
+export type Context = 'organization' | 'project';

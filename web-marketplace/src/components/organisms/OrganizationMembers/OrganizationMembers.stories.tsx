@@ -1,13 +1,13 @@
 import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 
-import { Members } from './Members';
-import { mockMembers } from './Members.mock';
-import { Member } from './Members.types';
+import { OrganizationMembers } from './OrganizationMembers';
+import { mockMembers } from './OrganizationMembers.mock';
+import { Member } from './OrganizationMembers.types';
 
-const meta: Meta<typeof Members> = {
-  title: 'Marketplace/Organisms/Members',
-  component: Members,
+const meta: Meta<typeof OrganizationMembers> = {
+  title: 'Marketplace/Organisms/OrganizationMembers',
+  component: OrganizationMembers,
   argTypes: {
     initialMembers: {
       control: 'object',
@@ -28,7 +28,7 @@ export const Default = (args: {
 }) => {
   const key = JSON.stringify(args.initialMembers);
 
-  return <Members key={key} {...args} />;
+  return <OrganizationMembers key={key} {...args} />;
 };
 
 Default.args = {

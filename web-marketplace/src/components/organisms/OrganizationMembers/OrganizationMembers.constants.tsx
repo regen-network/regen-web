@@ -8,10 +8,12 @@ export const ROLE = msg`ROLE`;
 export const VISIBILITY_ON_PROFILE = msg`VISIBILITY ON PROFILE`;
 export const EDIT_PROFILE = msg`EDIT PROFILE`;
 export const PLEASE_CONTACT_ADMIN = msg`Please contact your administrator to change your role.`;
-export const ONLY_ADMIN_CANNOT_CHANGE = msg`You are the only admin. You can’t change your role or remove yourself unless another admin is added.`;
 export const PLEASE_CONTACT_ADMIN_VISIBILITY = msg`Please contact your administrator to change your visibility.`;
 export const VISIBLE = msg`Visible`;
 export const HIDDEN = msg`Hidden`;
+
+export const ROLE_OWNER_LABEL = msg`Owner`;
+export const ROLE_OWNER_DESCRIPTION = msg`If you reassign the owner role to this user, you will be downgraded to Admin.`;
 
 export const ROLE_ADMIN_LABEL = msg`Admin`;
 export const ROLE_ADMIN_DESCRIPTION = msg`Manages user access and has full control of projects, credits, and credit classes.`;

@@ -8,7 +8,7 @@ import {
   HIDDEN,
   PLEASE_CONTACT_ADMIN_VISIBILITY,
   VISIBLE,
-} from './Members.constants';
+} from './OrganizationMembers.constants';
 
 export const VisibilitySwitch: React.FC<{
   checked: boolean;

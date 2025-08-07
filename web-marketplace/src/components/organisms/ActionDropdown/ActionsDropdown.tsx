@@ -6,12 +6,29 @@ import { HorizontalDotsIcon } from 'web-components/src/components/icons/Horizont
 import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { cn } from 'web-components/src/utils/styles/cn';
 
+import { PROJECT_CONTEXT } from '../BaseMembersTable/BaseMembersTable.constants';
+import {
+  BaseMemberRole,
+  Context,
+  ProjectRole,
+} from '../BaseMembersTable/BaseMembersTable.types';
 import {
   COLLABORATOR_ACTIONS_ARIA_LABEL,
   TOOLTIP_ONLY_ADMIN_REMOVE,
-} from '../Collaborators/Collaborators.constants';
-import { ActionsDropdownProps } from '../Collaborators/Collaborators.types';
+} from '../ProjectCollaborators/ProjectCollaborators.constants';
 import { getActionItems } from './ActionDropdown.utils';
+
+export interface ActionsDropdownProps {
+  role: ProjectRole;
+  currentUserRole: ProjectRole;
+  orgRole?: BaseMemberRole;
+  isCurrentUser?: boolean;
+  onRemove: () => void;
+  onEditOrgRole?: () => void;
+  onEditTitle?: () => void;
+  context?: Context;
+  isExternalAdmin?: boolean;
+}
 
 export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
   role,
@@ -22,8 +39,7 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
   onRemove,
   onEditOrgRole,
   onEditTitle,
-  context = 'project',
-  isOnlyAdmin = false,
+  context = PROJECT_CONTEXT,
 }) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +74,6 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
     orgRole,
     isCurrentUser,
     isExternalAdmin,
-    isOnlyAdmin,
     onRemove,
     onEditOrgRole,
     onEditTitle,
@@ -81,8 +96,8 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
           className={cn(
             'absolute right-0 mt-2 w-[180px]',
             'shadow-[0_0_20px_rgba(0,0,0,0.25)] z-20',
-            'list-none p-0 m-0',
-            'bg-bc-neutral-100 border border-bc-neutral-300 border-solid rounded-[2px]',
+            'list-none px-0 py-[8px] m-0',
+            'bg-bc-neutral-100 border border-bc-neutral-300 border-solid rounded-[5px]',
           )}
           role="menu"
           aria-label={_(COLLABORATOR_ACTIONS_ARIA_LABEL)}
@@ -103,7 +118,7 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
                       tabIndex={-1}
                       aria-disabled="true"
                       className={cn(
-                        'flex w-full items-center gap-10 px-[15px] h-[45px] border-none text-left cursor-not-allowed',
+                        'font-sans flex w-full items-center gap-10 px-[15px] h-[45px] border-none text-left cursor-not-allowed',
                         'text-bc-neutral-400',
                         'bg-bc-neutral-100',
                       )}
@@ -117,7 +132,7 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
                   type="button"
                   onClick={() => handleSelect(item.onClick)}
                   className={cn(
-                    'flex w-full items-center gap-10 px-[15px] h-[45px] hover:cursor-pointer border-none text-left',
+                    'font-sans flex w-full items-center gap-10 px-[15px] h-[45px] hover:cursor-pointer border-none text-left',
                     item.danger ? 'text-bc-red-600' : 'text-bc-neutral-700',
                     'bg-bc-neutral-100 hover:bg-bc-neutral-200',
                   )}

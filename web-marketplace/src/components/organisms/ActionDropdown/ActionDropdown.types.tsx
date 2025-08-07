@@ -1,3 +1,5 @@
+import { Context } from '../BaseMembersTable/BaseMembersTable.types';
+
 export type ActionItem = {
   label: string;
   onClick?: () => void;
@@ -6,13 +8,12 @@ export type ActionItem = {
 };
 
 export interface GetActionItemsParams {
-  context: 'project' | 'members';
+  context: Context;
   role: string;
   currentUserRole: string;
   orgRole?: string;
   isCurrentUser?: boolean;
   isExternalAdmin: boolean;
-  isOnlyAdmin: boolean;
   onRemove: () => void;
   onEditOrgRole?: () => void;
   onEditTitle?: () => void;

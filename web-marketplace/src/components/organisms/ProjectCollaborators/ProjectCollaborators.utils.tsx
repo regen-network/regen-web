@@ -4,7 +4,20 @@ import AuthorIcon from 'web-components/src/components/icons/AuthorIcon';
 import { CogIcon } from 'web-components/src/components/icons/CogIcon';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 import EyeIcon from 'web-components/src/components/icons/EyeIcon';
+import { OwnerIcon } from 'web-components/src/components/icons/OwnerIcon';
 
+import {
+  ROLE_ADMIN,
+  ROLE_AUTHOR,
+  ROLE_EDITOR,
+  ROLE_OWNER,
+  ROLE_VIEWER,
+} from '../ActionDropdown/ActionDropdown.constants';
+import { ProjectRole } from '../BaseMembersTable/BaseMembersTable.types';
+import {
+  ROLE_OWNER_DESCRIPTION,
+  ROLE_OWNER_LABEL,
+} from '../OrganizationMembers/OrganizationMembers.constants';
 import {
   ROLE_ADMIN_DESCRIPTION,
   ROLE_ADMIN_LABEL,
@@ -14,44 +27,50 @@ import {
   ROLE_EDITOR_LABEL,
   ROLE_VIEWER_DESCRIPTION,
   ROLE_VIEWER_LABEL,
-} from './Collaborators.constants';
-import { ProjectRoleType } from './Collaborators.types';
+} from './ProjectCollaborators.constants';
 
 export const ROLE_OPTIONS: {
-  key: ProjectRoleType;
+  key: ProjectRole;
   label: MessageDescriptor;
   Icon: React.FC<any>;
   description: MessageDescriptor;
 }[] = [
   {
-    key: 'admin',
+    key: ROLE_OWNER,
+    label: ROLE_OWNER_LABEL,
+    Icon: OwnerIcon,
+    description: ROLE_OWNER_DESCRIPTION,
+  },
+  {
+    key: ROLE_ADMIN,
     label: ROLE_ADMIN_LABEL,
     Icon: CogIcon,
     description: ROLE_ADMIN_DESCRIPTION,
   },
   {
-    key: 'editor',
+    key: ROLE_EDITOR,
     label: ROLE_EDITOR_LABEL,
     Icon: EditIcon,
     description: ROLE_EDITOR_DESCRIPTION,
   },
   {
-    key: 'author',
+    key: ROLE_AUTHOR,
     label: ROLE_AUTHOR_LABEL,
     Icon: AuthorIcon,
     description: ROLE_AUTHOR_DESCRIPTION,
   },
   {
-    key: 'viewer',
+    key: ROLE_VIEWER,
     label: ROLE_VIEWER_LABEL,
     Icon: EyeIcon,
     description: ROLE_VIEWER_DESCRIPTION,
   },
 ];
 
-export const ROLE_HIERARCHY: Record<ProjectRoleType, number> = {
-  viewer: 0,
-  author: 1,
-  editor: 2,
-  admin: 3,
+export const ROLE_HIERARCHY: Record<ProjectRole, number> = {
+  [ROLE_VIEWER]: 0,
+  [ROLE_AUTHOR]: 1,
+  [ROLE_EDITOR]: 2,
+  [ROLE_ADMIN]: 3,
+  [ROLE_OWNER]: 4,
 };

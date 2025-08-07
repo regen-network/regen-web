@@ -1,4 +1,4 @@
-import { Collaborator } from './Collaborators.types';
+import { Collaborator } from './ProjectCollaborators.types';
 
 export const mockCollaborators: Collaborator[] = [
   {
@@ -40,7 +40,6 @@ export const mockCollaborators: Collaborator[] = [
     email: 'bob@example.com',
     description: 'Farmer',
     projectRole: 'author',
-    orgRole: '',
     avatar: 'https://i.pravatar.cc/302',
     isCurrentUser: false,
   },
@@ -49,8 +48,7 @@ export const mockCollaborators: Collaborator[] = [
     name: 'Charlie Green',
     email: 'charlie@example.com',
     description: 'External Consultant',
-    projectRole: 'admin',
-    orgRole: '',
+    projectRole: 'owner',
     avatar: 'https://i.pravatar.cc/303',
     isCurrentUser: false,
   },
@@ -61,7 +59,6 @@ export const mockCollaborators: Collaborator[] = [
     description: 'Project Manager',
     organization: 'Regen Network',
     projectRole: 'admin',
-    orgRole: '',
     avatar: 'https://i.pravatar.cc/304',
     isCurrentUser: false,
   },

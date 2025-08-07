@@ -1,4 +1,5 @@
-import { Member } from './Members.types';
+/* eslint-disable lingui/no-unlocalized-strings */
+import { Member } from './OrganizationMembers.types';
 
 export const mockMembers: Member[] = [
   {
@@ -40,7 +41,7 @@ export const mockMembers: Member[] = [
     email: 'bob@example.com',
     title: 'Project Manager',
     organization: 'Ecometric',
-    role: 'admin',
+    role: 'owner',
     avatar: 'https://i.pravatar.cc/302',
     visible: true,
     isCurrentUser: true,

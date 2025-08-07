@@ -38,9 +38,7 @@ function getSize(size?: string): Sizes {
       break;
     case 'md':
     case 'medium':
-      spacing = { xs: 7.5, sm: 7.5 };
       spacing = { xs: 10, sm: 10 };
-
       break;
     case 'small':
     case 'sm':

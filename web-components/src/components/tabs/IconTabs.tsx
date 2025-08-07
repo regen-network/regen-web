@@ -16,23 +16,67 @@ export interface LinkProps extends LinkItem, PropsWithChildren {
 export type LinkComponentProp = React.FC<LinkProps>;
 
 interface IconTabsProps {
+  /**
+   * Index of the currently active tab (0-based).
+   * If not provided, the component may manage its own active state.
+   */
   activeTab?: number;
+
+  /**
+   * Array of tab definitions, each containing properties for an individual tab.
+   */
   tabs: IconTabProps[];
+
+  /**
+   * Text size to apply to the tab labels (e.g., "sm", "md", "lg").
+   */
   size?: TextSize;
+
+  /**
+   * Custom component to be used for rendering links inside the tabs,
+   * useful for integrating with routing libraries like Next.js or React Router.
+   */
   linkComponent?: LinkComponentProp;
+
+  /**
+   * Optional style overrides using the `sx` prop for customization.
+   */
   sxs?: {
     tab?: {
+      /** Styles applied to the outer container of each tab */
       outer?: SxProps<Theme>;
+
+      /** Styles applied to the container inside the outer tab wrapper */
       innerContainer?: SxProps<Theme>;
+
+      /** Styles applied to the actual tab element (e.g., button or link) */
       inner?: SxProps<Theme>;
     };
+
     panel?: {
+      /** Styles applied to the panel content container */
       inner?: SxProps<Theme>;
     };
   };
+
+  /**
+   * If true and there's only one tab with hidden set to false, hides the underline for the active tab.
+   */
   hideIndicator?: boolean;
+
+  /**
+   * If true, makes the tabs span the full width on mobile devices.
+   */
   mobileFullWidth?: boolean;
+
+  /**
+   * Additional class name to apply to the root component.
+   */
   className?: string;
+
+  /**
+   * Additional class name to apply specifically to the outer tab container.
+   */
   tabOuterClassName?: string;
 }
 
@@ -78,7 +122,6 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
   tabOuterClassName,
 }) => {
   const [value, setValue] = useState(activeTab);
-  const hasContent = tabs.some(tab => tab.content !== undefined);
 
   const handleChange = (
     event: React.ChangeEvent<{}>,
@@ -92,6 +135,10 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
   }, [activeTab]);
 
   const filteredTabs = useMemo(() => tabs.filter(tab => !tab.hidden), [tabs]);
+  const hasContent = useMemo(
+    () => filteredTabs.some(tab => tab.content !== undefined),
+    [filteredTabs],
+  );
 
   return (
     <div className={className}>
@@ -108,7 +155,7 @@ const IconTabs: React.FC<React.PropsWithChildren<IconTabsProps>> = ({
           variant="scrollable"
           scrollButtons={false}
           aria-label="tabs"
-          hideIndicator={hideIndicator}
+          hideIndicator={hideIndicator && filteredTabs.length === 1}
           mobileFullWidth={mobileFullWidth}
         >
           {filteredTabs.map((tab, index) => (

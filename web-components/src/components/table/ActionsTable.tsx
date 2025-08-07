@@ -20,6 +20,7 @@ import {
 } from '@mui/material';
 
 import type { Theme } from '../../theme/muiTheme';
+import { cn } from '../../utils/styles/cn';
 import {
   getTablePaginationPadding,
   StyledTableCell,
@@ -77,6 +78,7 @@ interface ActionsTableProps {
   sx?: {
     root?: SxProps<Theme>;
   };
+  className?: string;
 }
 
 const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
@@ -93,6 +95,7 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
   labelDisplayedRows,
   dark = true,
   sx,
+  className,
 }) => {
   const {
     offset: initialOffset,
@@ -164,9 +167,9 @@ const ActionsTable: React.FC<React.PropsWithChildren<ActionsTableProps>> = ({
         border: 1,
         borderColor: 'info.light',
         overflow: 'hidden',
-        borderRadius: '5px',
         ...sx?.root,
       }}
+      className={cn('rounded-b-[10px]', className)}
     >
       <StyledTableContainer>
         <Box

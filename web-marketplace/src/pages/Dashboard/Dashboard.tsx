@@ -320,7 +320,7 @@ export const Dashboard = () => {
                   )}
 
                 <WithLoader isLoading={accountChanging || loading}>
-                  <div className="rounded-md border border-grey-200 bg-grey-100 lg:mt-30 w-full">
+                  <div className="border border-grey-200 bg-grey-100 lg:mt-30 w-full">
                     <Outlet context={dashboardContextValue} />
                   </div>
                 </WithLoader>

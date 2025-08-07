@@ -15,6 +15,7 @@ export const CreateButton = ({
   <div className="flex-none flex items-center">
     {/* TODO:  If the member is an Editor or Viewer, this button should be hidden */}
     <ContainedButton
+      className="text-sm h-[42px]"
       disabled={!hasTradableCredits}
       onClick={() => setIsSellFlowStarted(true)}
     >

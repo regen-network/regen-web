@@ -1,6 +1,12 @@
+import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 
+import {
+  ROLE_ADMIN,
+  ROLE_OWNER,
+} from '../ActionDropdown/ActionDropdown.constants';
+import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
 import { OrganizationMembers } from './OrganizationMembers';
 import { mockMembers } from './OrganizationMembers.mock';
 import { Member } from './OrganizationMembers.types';
@@ -9,13 +15,13 @@ const meta: Meta<typeof OrganizationMembers> = {
   title: 'Marketplace/Organisms/OrganizationMembers',
   component: OrganizationMembers,
   argTypes: {
-    initialMembers: {
-      control: 'object',
-      description: 'Initial list of organization members',
-    },
     onInvite: {
       action: 'invite-clicked',
       description: 'Called when invite button is clicked',
+    },
+    onEditTitle: {
+      action: 'edit-title',
+      description: 'Called when edit title button is clicked',
     },
   },
 };
@@ -23,15 +29,60 @@ const meta: Meta<typeof OrganizationMembers> = {
 export default meta;
 
 export const Default = (args: {
-  initialMembers: Member[];
-  onInvite?: () => void;
+  onInvite: () => void;
+  onEditTitle: () => void;
 }) => {
-  const key = JSON.stringify(args.initialMembers);
+  const [members, setMembers] = useState<Member[]>(mockMembers);
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
 
-  return <OrganizationMembers key={key} {...args} />;
+  const toggleSort = () => {
+    const dir = sortDir === 'asc' ? 'desc' : 'asc';
+    setSortDir(dir);
+    setMembers(prev =>
+      [...prev].sort((a, b) =>
+        dir === 'asc'
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name),
+      ),
+    );
+  };
+
+  const updateRole = (id: string, role: BaseMemberRole) =>
+    setMembers(prev =>
+      prev.map(member => {
+        if (role === ROLE_OWNER) {
+          if (member.id === id) {
+            return { ...member, role: ROLE_OWNER };
+          }
+          return member.role === ROLE_OWNER
+            ? { ...member, role: ROLE_ADMIN }
+            : member;
+        }
+        return member.id === id ? { ...member, role } : member;
+      }),
+    );
+
+  const updateVisibility = (id: string, visible: boolean) =>
+    setMembers(prev =>
+      prev.map(member => (member.id === id ? { ...member, visible } : member)),
+    );
+
+  const handleRemove = (id: string) =>
+    setMembers(prev => prev.filter(member => member.id !== id));
+
+  return (
+    <OrganizationMembers
+      {...args}
+      members={members}
+      onToggleSort={toggleSort}
+      onUpdateRole={updateRole}
+      onUpdateVisibility={updateVisibility}
+      onRemove={handleRemove}
+    />
+  );
 };
 
 Default.args = {
-  initialMembers: mockMembers,
   onInvite: action('invite-clicked'),
+  onEditTitle: action('edit-title'),
 };

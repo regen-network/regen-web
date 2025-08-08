@@ -18,64 +18,31 @@ import { ProjectCollaboratorsProps } from './ProjectCollaborators.types';
 export const ProjectCollaborators: React.FC<ProjectCollaboratorsProps> = ({
   collaborators,
   onInvite,
-  onRoleChange,
+  onUpdateRole,
   onRemove,
+  onToggleSort,
+  sortDir,
+  onEditOrgRole,
 }) => {
   const { _ } = useLingui();
 
-  const [localCollaborators, setLocalCollaborators] = useState(
-    collaborators || [],
-  );
-  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
-
   const currentUserRole =
-    localCollaborators?.find(c => c.isCurrentUser)?.role || ROLE_VIEWER;
-
-  /* ───── sort handler ───── */
-  const toggleSort = useCallback(() => {
-    const dir = sortDir === 'asc' ? 'desc' : 'asc';
-    setSortDir(dir);
-    setLocalCollaborators(prev =>
-      [...(prev ?? [])].sort((a, b) =>
-        dir === 'asc'
-          ? a.name.localeCompare(b.name)
-          : b.name.localeCompare(a.name),
-      ),
-    );
-  }, [sortDir]);
-
-  /* ───── role / remove handlers ───── */
-  const handleRoleChange = useCallback(
-    (id: string, role: ProjectRole) => {
-      setLocalCollaborators(prev =>
-        prev?.map(c => (c.id === id ? { ...c, role: role } : c)),
-      );
-      onRoleChange?.(id, role);
-    },
-    [onRoleChange],
-  );
-  const handleRemove = useCallback(
-    (id: string) => {
-      setLocalCollaborators(prev => prev?.filter(c => c.id !== id));
-      onRemove?.(id);
-    },
-    [onRemove],
-  );
+    collaborators?.find(c => c.isCurrentUser)?.role || ROLE_VIEWER;
 
   return (
     <BaseMembersTable
-      users={localCollaborators}
+      users={collaborators}
       title={_(PROJECT_COLLABORATORS)}
       description={_(COLLABORATORS_DESCRIPTION)}
       inviteButtonText={_(INVITE_COLLABORATORS)}
       currentUserRole={currentUserRole}
       onInvite={onInvite}
-      onSort={toggleSort}
+      onSort={onToggleSort}
       sortDir={sortDir}
       context={PROJECT_CONTEXT}
       showMobileInvite={true}
     >
-      {col => (
+      {(col, canAdmin) => (
         <>
           {/* Avatar / info + mobile dots */}
           <UserInfo
@@ -88,19 +55,19 @@ export const ProjectCollaborators: React.FC<ProjectCollaboratorsProps> = ({
               role={col.role}
               currentUserRole={currentUserRole}
               isCurrentUser={col.isCurrentUser}
-              onRemove={() => handleRemove(col.id)}
-              onEditOrgRole={() => {}}
-              onEditTitle={() => {}}
+              onRemove={() => onRemove(col.id)}
+              onEditOrgRole={onEditOrgRole}
             />
           </UserInfo>
 
           {/* Role dropdown – full width on mobile */}
           <div className="order-10 lg:order-none w-full lg:w-[170px] px-6">
             <RoleDropdown
+              onChange={r => onUpdateRole(col.id, r)}
               role={col.role}
               currentUserRole={currentUserRole}
-              onChange={r => handleRoleChange(col.id, r)}
               isCurrentUser={col.isCurrentUser}
+              disabled={!canAdmin}
             />
           </div>
 
@@ -110,9 +77,8 @@ export const ProjectCollaborators: React.FC<ProjectCollaboratorsProps> = ({
               role={col.role}
               currentUserRole={currentUserRole}
               isCurrentUser={col.isCurrentUser}
-              onRemove={() => handleRemove(col.id)}
-              onEditOrgRole={() => {}}
-              onEditTitle={() => {}}
+              onRemove={() => onRemove(col.id)}
+              onEditOrgRole={onEditOrgRole}
             />
           </div>
         </>

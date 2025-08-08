@@ -20,7 +20,7 @@ export const getActionItems = ({
   navigate,
   _,
 }: GetActionItemsParams): ActionItem[] => {
-  // Only owner or admins can manage members
+  // Only owner or admins can manage other members
   if (
     !isCurrentUser &&
     currentUserRole !== ROLE_ADMIN &&
@@ -47,21 +47,19 @@ export const getActionItems = ({
     onClick: onEditOrgRole,
   };
 
-  if (context === ORGANIZATION_CONTEXT) {
-    if (isCurrentUser) {
-      if (role === ROLE_OWNER) {
-        return [editMyTitle];
-      }
-      return [editMyTitle, remove];
+  const currentUserActions =
+    context === ORGANIZATION_CONTEXT
+      ? [editMyTitle]
+      : [editMyProfile, editOrgRole];
+
+  if (isCurrentUser) {
+    if (role === ROLE_OWNER) {
+      return currentUserActions;
     }
-    return [remove];
-  } else {
-    if (isCurrentUser) {
-      if (role === ROLE_OWNER) {
-        return [editMyProfile, editOrgRole];
-      }
-      return [editMyProfile, editOrgRole, remove];
-    }
-    return [remove];
+    return [...currentUserActions, remove];
   }
+  if (role === ROLE_OWNER) {
+    return [];
+  }
+  return [remove];
 };

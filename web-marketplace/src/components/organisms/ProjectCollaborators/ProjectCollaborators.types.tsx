@@ -12,8 +12,11 @@ export interface Collaborator {
 }
 
 export interface ProjectCollaboratorsProps {
-  collaborators?: Collaborator[];
-  onInvite?: () => void;
-  onRoleChange?: (collaboratorId: string, newRole: ProjectRole) => void;
-  onRemove?: (collaboratorId: string) => void;
+  collaborators: Collaborator[];
+  onInvite: () => void;
+  sortDir?: 'asc' | 'desc';
+  onToggleSort: () => void;
+  onUpdateRole: (id: string, role: ProjectRole) => void;
+  onRemove: (id: string) => void;
+  onEditOrgRole: () => void;
 }

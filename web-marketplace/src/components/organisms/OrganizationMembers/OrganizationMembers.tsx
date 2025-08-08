@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useLingui } from '@lingui/react';
 
 import { ROLE_VIEWER } from '../ActionDropdown/ActionDropdown.constants';
@@ -13,48 +12,33 @@ import {
   ORGANIZATION_MEMBERS_DESCRIPTION,
   VISIBILITY_ON_PROFILE,
 } from './OrganizationMembers.constants';
-import { mockMembers } from './OrganizationMembers.mock';
 import { MemberRoleDropdown } from './OrganizationMembers.RoleDropdown';
 import { Member } from './OrganizationMembers.types';
 import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
 
+type Props = {
+  members: Member[];
+  onInvite: () => void;
+  sortDir?: 'asc' | 'desc';
+  onToggleSort: () => void;
+  onUpdateRole: (id: string, role: BaseMemberRole) => void;
+  onUpdateVisibility: (id: string, visible: boolean) => void;
+  onRemove: (id: string) => void;
+  onEditTitle: () => void;
+};
 export const OrganizationMembers = ({
-  initialMembers = mockMembers,
+  members,
   onInvite,
-}: {
-  initialMembers?: Member[];
-  onInvite?: () => void;
-}) => {
+  sortDir,
+  onToggleSort,
+  onUpdateRole,
+  onUpdateVisibility,
+  onRemove,
+  onEditTitle,
+}: Props) => {
   const { _ } = useLingui();
-  const [members, setMembers] = useState<Member[]>(initialMembers);
-  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
   const currentUserRole: BaseMemberRole =
     members.find(member => member.isCurrentUser)?.role ?? ROLE_VIEWER;
-
-  const toggleSort = () => {
-    const dir = sortDir === 'asc' ? 'desc' : 'asc';
-    setSortDir(dir);
-    setMembers(prev =>
-      [...prev].sort((a, b) =>
-        dir === 'asc'
-          ? a.name.localeCompare(b.name)
-          : b.name.localeCompare(a.name),
-      ),
-    );
-  };
-
-  const updateRole = (id: string, role: BaseMemberRole) =>
-    setMembers(prev =>
-      prev.map(member => (member.id === id ? { ...member, role } : member)),
-    );
-
-  const updateVisibility = (id: string, visible: boolean) =>
-    setMembers(prev =>
-      prev.map(member => (member.id === id ? { ...member, visible } : member)),
-    );
-
-  const handleRemove = (id: string) =>
-    setMembers(prev => prev.filter(member => member.id !== id));
 
   return (
     <BaseMembersTable
@@ -64,7 +48,7 @@ export const OrganizationMembers = ({
       inviteButtonText={_(INVITE_MEMBERS)}
       currentUserRole={currentUserRole}
       onInvite={onInvite}
-      onSort={toggleSort}
+      onSort={onToggleSort}
       sortDir={sortDir}
       context={ORGANIZATION_CONTEXT}
       additionalColumns={[_(VISIBILITY_ON_PROFILE)]}
@@ -83,7 +67,7 @@ export const OrganizationMembers = ({
               role={member.role}
               currentUserRole={currentUserRole}
               isCurrentUser={!!member.isCurrentUser}
-              onRemove={() => handleRemove(member.id)}
+              onRemove={() => onRemove(member.id)}
               context={ORGANIZATION_CONTEXT}
             />
           </UserInfo>
@@ -94,14 +78,14 @@ export const OrganizationMembers = ({
               role={member.role}
               disabled={!canAdmin}
               isCurrentUser={member.isCurrentUser}
-              onChange={r => updateRole(member.id, r)}
+              onChange={r => onUpdateRole(member.id, r)}
               currentUserRole={currentUserRole}
             />
             <VisibilitySwitch
               checked={member.visible}
               disabled={!canAdmin}
               isCurrentUser={member.isCurrentUser}
-              onChange={v => updateVisibility(member.id, v)}
+              onChange={v => onUpdateVisibility(member.id, v)}
             />
           </div>
 
@@ -111,7 +95,7 @@ export const OrganizationMembers = ({
               role={member.role}
               disabled={!canAdmin}
               isCurrentUser={member.isCurrentUser}
-              onChange={r => updateRole(member.id, r)}
+              onChange={r => onUpdateRole(member.id, r)}
               currentUserRole={currentUserRole}
             />
           </div>
@@ -120,7 +104,7 @@ export const OrganizationMembers = ({
               checked={member.visible}
               disabled={!canAdmin}
               isCurrentUser={member.isCurrentUser}
-              onChange={v => updateVisibility(member.id, v)}
+              onChange={v => onUpdateVisibility(member.id, v)}
             />
           </div>
           <div className="hidden xl:flex w-[60px] h-[74px] justify-center items-center">
@@ -128,8 +112,9 @@ export const OrganizationMembers = ({
               role={member.role}
               currentUserRole={currentUserRole}
               isCurrentUser={!!member.isCurrentUser}
-              onRemove={() => handleRemove(member.id)}
+              onRemove={() => onRemove(member.id)}
               context={ORGANIZATION_CONTEXT}
+              onEditTitle={onEditTitle}
             />
           </div>
         </>

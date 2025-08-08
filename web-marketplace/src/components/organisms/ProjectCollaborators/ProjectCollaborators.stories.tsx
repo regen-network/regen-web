@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 
+import {
+  ROLE_ADMIN,
+  ROLE_OWNER,
+} from '../ActionDropdown/ActionDropdown.constants';
 import { ProjectRole } from '../BaseMembersTable/BaseMembersTable.types';
 import { ProjectCollaborators } from './ProjectCollaborators';
 import { mockCollaborators } from './ProjectCollaborators.mock';
@@ -18,7 +22,7 @@ const meta: Meta<typeof ProjectCollaborators> = {
       action: 'invite-clicked',
       description: 'Called when invite button is clicked',
     },
-    onRoleChange: {
+    onUpdateRole: {
       action: 'role-changed',
       description: 'Called when a collaborator role is changed',
     },
@@ -31,51 +35,69 @@ const meta: Meta<typeof ProjectCollaborators> = {
 
 export default meta;
 
-const StoryComponent = (args: {
-  collaborators: typeof mockCollaborators;
-  onInvite?: () => void;
-  onRoleChange?: (id: string, role: ProjectRole) => void;
+export const Default = (args: {
+  onInvite: () => void;
+  onUpdateRole: (id: string, role: ProjectRole) => void;
   onRemove?: (id: string) => void;
+  onEditOrgRole: () => void;
 }) => {
-  const [collaborators, setCollaborators] = useState(args.collaborators);
+  const [collaborators, setCollaborators] = useState(mockCollaborators || []);
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
 
-  const handleRoleChange = (id: string, role: ProjectRole) => {
-    setCollaborators(prev => prev.map(c => (c.id === id ? { ...c, role } : c)));
-    // Call the Storybook action
-    args.onRoleChange?.(id, role);
-  };
+  /* ───── sort handler ───── */
+  const toggleSort = useCallback(() => {
+    const dir = sortDir === 'asc' ? 'desc' : 'asc';
+    setSortDir(dir);
+    setCollaborators(prev =>
+      [...(prev ?? [])].sort((a, b) =>
+        dir === 'asc'
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name),
+      ),
+    );
+  }, [sortDir]);
 
-  const handleRemove = (id: string) => {
-    setCollaborators(prev => prev.filter(c => c.id !== id));
-    // Call the Storybook action
-    args.onRemove?.(id);
-  };
-
+  /* ───── role / remove handlers ───── */
+  const updateRole = useCallback(
+    (id: string, role: ProjectRole) => {
+      setCollaborators(prev =>
+        prev.map(member => {
+          if (role === ROLE_OWNER) {
+            if (member.id === id) {
+              return { ...member, role: ROLE_OWNER };
+            }
+            return member.role === ROLE_OWNER
+              ? { ...member, role: ROLE_ADMIN }
+              : member;
+          }
+          return member.id === id ? { ...member, role } : member;
+        }),
+      );
+      args.onUpdateRole?.(id, role);
+    },
+    [args],
+  );
+  const handleRemove = useCallback(
+    (id: string) => {
+      setCollaborators(prev => prev?.filter(c => c.id !== id));
+      args.onRemove?.(id);
+    },
+    [args],
+  );
   return (
     <ProjectCollaborators
       {...args}
       collaborators={collaborators}
-      onRoleChange={handleRoleChange}
+      onToggleSort={toggleSort}
+      onUpdateRole={updateRole}
       onRemove={handleRemove}
-      onInvite={args.onInvite} // Use the Storybook action
     />
   );
 };
 
-export const Default = (args: {
-  collaborators: typeof mockCollaborators;
-  onInvite?: () => void;
-  onRoleChange?: (id: string, role: ProjectRole) => void;
-  onRemove?: (id: string) => void;
-}) => {
-  const key = JSON.stringify(args.collaborators);
-
-  return <StoryComponent key={key} {...args} />;
-};
-
 Default.args = {
-  collaborators: mockCollaborators,
   onInvite: action('invite-clicked'),
-  onRoleChange: action('role-changed'),
+  onUpdateRole: action('role-changed'),
   onRemove: action('collaborator-removed'),
+  onEditOrgRole: action('edit-org-role'),
 };

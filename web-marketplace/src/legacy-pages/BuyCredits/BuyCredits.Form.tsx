@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { useQuery } from '@tanstack/react-query';
@@ -7,6 +7,7 @@ import { USD_DENOM } from 'config/allowedBaseDenoms';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useFetchUserBalance } from 'legacy-pages/BuyCredits/hooks/useFetchUserBalance';
 import { UISellOrderInfo } from 'legacy-pages/Projects/AllProjects/AllProjects.types';
+import { useRouter } from 'next/navigation';
 
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 
@@ -127,7 +128,7 @@ export const BuyCreditsForm = ({
     walletsUiConfig,
     onButtonClick,
   } = useLoginData({});
-  const navigate = useNavigate();
+  const router = useRouter();
   const { track } = useTracker();
   const location = useLocation();
   const warningModalContent = useRef<BuyWarningModalContent | undefined>();
@@ -193,14 +194,14 @@ export const BuyCreditsForm = ({
       !warningModalContent.current
     ) {
       // Else if there's no connected wallet address or buy disabled, redirect to project page
-      navigate(`/project/${projectId}`, { replace: true });
+      router.replace(`/project/${projectId}`);
     }
   }, [
     loadingSanityProject,
     loadingBuySellOrders,
     loaded,
     wallet?.address,
-    navigate,
+    router,
     projectId,
     cardSellOrders.length,
     isBuyFlowDisabled,
@@ -423,7 +424,7 @@ export const BuyCreditsForm = ({
             creditTypePrecision={creditTypePrecision}
             onPrev={
               window.history.state && window.history.state.idx > 0
-                ? () => navigate(-1)
+                ? () => router.back()
                 : undefined
             }
             initialValues={{
@@ -638,7 +639,7 @@ export const BuyCreditsForm = ({
                 handleActiveStep(0);
               }
             } else if (action) {
-              navigate(action);
+              router.push(action);
             } else {
               setWarningModalState({
                 ...warningModalState,

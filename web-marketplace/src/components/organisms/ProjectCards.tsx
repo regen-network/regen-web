@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from 'tss-react/mui';
 
@@ -18,6 +17,8 @@ import {
 } from 'lib/constants/shared.constants';
 import { getAreaUnit, qudtUnit } from 'lib/rdf';
 import { useTracker } from 'lib/tracker/useTracker';
+
+import { Link as AppLink } from 'components/atoms';
 
 import defaultProject from '../../../public/jpg/default-project.jpg';
 import { Maybe, MoreProjectFieldsFragment } from '../../generated/graphql';
@@ -124,13 +125,13 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
         const projectId = project?.onChainId || project?.slug;
         return (
           project && (
-            <Link
+            <AppLink
               className={styles.swipeItem}
               key={projectId || i}
               href={`/project/${projectId}`}
             >
               <LinkedProject project={project} />
-            </Link>
+            </AppLink>
           )
         );
       })}
@@ -152,12 +153,12 @@ const ProjectCards: React.FC<React.PropsWithChildren<Props>> = props => {
               key={projectId || i}
               className={styles.item}
             >
-              <Link
+              <AppLink
                 className={styles.projectCard}
                 href={`/project/${projectId}`}
               >
                 <LinkedProject project={project} />
-              </Link>
+              </AppLink>
             </Grid>
           )
         );

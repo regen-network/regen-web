@@ -47,7 +47,7 @@ export const getActionItems = ({
       : [editMyProfile, editOrgRole];
 
   if (isCurrentUser) {
-    if (role === ROLE_OWNER) {
+    if (role !== ROLE_ADMIN) {
       return currentUserActions;
     }
     return [...currentUserActions, remove];

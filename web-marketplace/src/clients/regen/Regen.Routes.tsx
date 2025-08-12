@@ -379,7 +379,7 @@ export const getRegenRoutes = ({
             <Route index element={<Navigate to="posts" replace />} />
             <Route path="posts" element={<ManageProject />} />
             <Route path="collaborators" element={<ManageProject />} />
-            <Route path="projectportfolio" element={<ManageProject />} />
+            <Route path="portfolio" element={<ManageProject />} />
           </Route> */}
           <Route
             path="credit-classes"

@@ -10,7 +10,7 @@ import { Title } from 'web-components/src/components/typography';
 //import { useWallet } from 'lib/wallet/wallet';
 import { Link } from 'components/atoms';
 
-import { ProjectCollaborators } from '../../../components/organisms/ProjectCollaborators/ProjectCollaborators';
+// import { ProjectCollaborators } from '../../../components/organisms/ProjectCollaborators/ProjectCollaborators';
 //import { useFetchProjectByAdmin } from './hooks/useFetchProjectsByAdmin';
 
 const ManageProject = (): JSX.Element => {
@@ -45,7 +45,7 @@ const ManageProject = (): JSX.Element => {
       },
       {
         label: _(msg`Project Portfolio`),
-        href: `/dashboard/projects/${projectId}/manage/projectportfolio`,
+        href: `/dashboard/projects/${projectId}/manage/portfolio`,
         disabled: true,
       },
     ],
@@ -60,7 +60,7 @@ const ManageProject = (): JSX.Element => {
   const getCurrentTabContent = () => {
     if (location.pathname.includes('/posts')) return 0;
     if (location.pathname.includes('/collaborators')) return 1;
-    if (location.pathname.includes('/projectportfolio')) return 2;
+    if (location.pathname.includes('/portfolio')) return 2;
     return 0;
   };
 
@@ -71,32 +71,16 @@ const ManageProject = (): JSX.Element => {
       <Title variant="h4" className="mb-20">
         {_(msg`Data Posts`)}
       </Title>
-      <p>Coming soon...</p>
     </div>
   );
 
-  const renderCollaboratorsContent = () => (
-    <ProjectCollaborators
-      onInvite={() => {
-        // Implement invitation flow
-      }}
-      onRoleChange={(collaboratorId, newRole) => {
-        console.log(`Changed role for ${collaboratorId} to ${newRole}`);
-        // Update role in your backend
-      }}
-      onRemove={collaboratorId => {
-        console.log(`Removing collaborator ${collaboratorId}`);
-        // Remove collaborator from your backend
-      }}
-    />
-  );
+  const renderCollaboratorsContent = () => null; // <ProjectCollaborators />;
 
   const renderPortfolioContent = () => (
     <div>
       <Title variant="h4" className="mb-20">
         {_(msg`Project Portfolio`)}
       </Title>
-      <p>Coming soon...</p>
     </div>
   );
 

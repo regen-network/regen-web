@@ -32,6 +32,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const roleLabel = roleOptions.find(option => option.key === role)?.label
 
   const isCurrentUserOwner = currentUserRole === ROLE_OWNER;
   const filteredRoleOptions = useMemo(
@@ -78,7 +79,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
       {isDropdownDisabled ? (
         <div className="flex items-center gap-5">
           <Body className="capitalize text-sc-text-header" size="sm">
-            {role}
+            {roleLabel}
           </Body>
           {tooltipTitle && (
             <QuestionMarkTooltip
@@ -98,7 +99,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
           )}
         >
           <div className="flex items-center gap-2">
-            <span className="capitalize font-sans">{role}</span>
+            <span className="capitalize font-sans">{roleLabel}</span>
           </div>
           <DropdownIcon className="w-4 h-4" />
         </button>

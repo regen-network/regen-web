@@ -61,12 +61,12 @@ export const ProjectCollaborators: React.FC<ProjectCollaboratorsProps> = ({
           </UserInfo>
 
           {/* Role dropdown – full width on mobile */}
-          <div className="order-10 lg:order-none w-full lg:w-[170px] px-6">
+          <div className="flex items-center order-10 lg:order-none w-full lg:w-[170px] px-6">
             <RoleDropdown
               onChange={r => onUpdateRole(col.id, r)}
               role={col.role}
               currentUserRole={currentUserRole}
-              isCurrentUser={col.isCurrentUser}
+              hasWalletAddress={col.hasWalletAddress}
               disabled={!canAdmin}
             />
           </div>

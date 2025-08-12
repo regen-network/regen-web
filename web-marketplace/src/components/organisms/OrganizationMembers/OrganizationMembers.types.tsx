@@ -10,4 +10,5 @@ export type Member = {
   avatar?: string;
   visible: boolean;
   isCurrentUser?: boolean;
+  hasWalletAddress: boolean;
 };

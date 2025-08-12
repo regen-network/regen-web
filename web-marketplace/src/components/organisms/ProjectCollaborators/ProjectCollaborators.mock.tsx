@@ -10,6 +10,7 @@ export const mockCollaborators: Collaborator[] = [
     role: 'admin',
     avatar: 'https://i.pravatar.cc/299',
     isCurrentUser: true,
+    hasWalletAddress: true,
   },
   {
     id: '2',
@@ -20,6 +21,7 @@ export const mockCollaborators: Collaborator[] = [
     role: 'admin',
     avatar: 'https://i.pravatar.cc/300',
     isCurrentUser: false,
+    hasWalletAddress: true,
   },
   {
     id: '3',
@@ -30,6 +32,7 @@ export const mockCollaborators: Collaborator[] = [
     role: 'viewer',
     avatar: 'https://i.pravatar.cc/301',
     isCurrentUser: false,
+    hasWalletAddress: false,
   },
   {
     id: '4',
@@ -39,6 +42,7 @@ export const mockCollaborators: Collaborator[] = [
     role: 'author',
     avatar: 'https://i.pravatar.cc/302',
     isCurrentUser: false,
+    hasWalletAddress: true,
   },
   {
     id: '5',
@@ -48,6 +52,7 @@ export const mockCollaborators: Collaborator[] = [
     role: 'owner',
     avatar: 'https://i.pravatar.cc/303',
     isCurrentUser: false,
+    hasWalletAddress: true,
   },
   {
     id: '6',
@@ -58,5 +63,6 @@ export const mockCollaborators: Collaborator[] = [
     role: 'admin',
     avatar: 'https://i.pravatar.cc/304',
     isCurrentUser: false,
+    hasWalletAddress: true,
   },
 ];

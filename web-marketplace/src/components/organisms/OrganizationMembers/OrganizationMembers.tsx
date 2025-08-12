@@ -24,7 +24,6 @@ type Props = {
   onUpdateRole: (id: string, role: BaseMemberRole) => void;
   onUpdateVisibility: (id: string, visible: boolean) => void;
   onRemove: (id: string) => void;
-  onEditTitle: () => void;
 };
 export const OrganizationMembers = ({
   members,
@@ -34,7 +33,6 @@ export const OrganizationMembers = ({
   onUpdateRole,
   onUpdateVisibility,
   onRemove,
-  onEditTitle,
 }: Props) => {
   const { _ } = useLingui();
   const currentUserRole: BaseMemberRole =
@@ -77,7 +75,7 @@ export const OrganizationMembers = ({
             <MemberRoleDropdown
               role={member.role}
               disabled={!canAdmin}
-              isCurrentUser={member.isCurrentUser}
+              hasWalletAddress={member.hasWalletAddress}
               onChange={r => onUpdateRole(member.id, r)}
               currentUserRole={currentUserRole}
             />
@@ -94,7 +92,7 @@ export const OrganizationMembers = ({
             <MemberRoleDropdown
               role={member.role}
               disabled={!canAdmin}
-              isCurrentUser={member.isCurrentUser}
+              hasWalletAddress={member.hasWalletAddress}
               onChange={r => onUpdateRole(member.id, r)}
               currentUserRole={currentUserRole}
             />
@@ -114,7 +112,6 @@ export const OrganizationMembers = ({
               isCurrentUser={!!member.isCurrentUser}
               onRemove={() => onRemove(member.id)}
               context={ORGANIZATION_CONTEXT}
-              onEditTitle={onEditTitle}
             />
           </div>
         </>

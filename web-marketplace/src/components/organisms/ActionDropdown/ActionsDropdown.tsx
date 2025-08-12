@@ -23,7 +23,6 @@ export interface ActionsDropdownProps {
   isCurrentUser?: boolean;
   onRemove: () => void;
   onEditOrgRole?: () => void;
-  onEditTitle?: () => void;
   context?: Context;
 }
 
@@ -33,7 +32,6 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
   isCurrentUser,
   onRemove,
   onEditOrgRole,
-  onEditTitle,
   context = PROJECT_CONTEXT,
 }) => {
   const { _ } = useLingui();
@@ -69,7 +67,6 @@ export const ActionsDropdown: React.FC<ActionsDropdownProps> = ({
     isCurrentUser,
     onRemove,
     onEditOrgRole,
-    onEditTitle,
     navigate,
     _,
   });

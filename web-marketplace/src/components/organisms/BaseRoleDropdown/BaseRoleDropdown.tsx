@@ -3,39 +3,43 @@ import { useLingui } from '@lingui/react';
 
 import CheckIcon from 'web-components/src/components/icons/CheckIcon';
 import DropdownIcon from 'web-components/src/components/icons/DropdownIcon';
-import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import {
   ROLE_ADMIN,
   ROLE_OWNER,
 } from '../ActionDropdown/ActionDropdown.constants';
-import {
-  BaseRoleDropdownProps,
-  RoleOption,
-} from '../BaseMembersTable/BaseMembersTable.types';
+import { BaseRoleDropdownProps } from '../BaseMembersTable/BaseMembersTable.types';
 import { SELECT_ROLE_ARIA_LABEL } from '../ProjectCollaborators/ProjectCollaborators.constants';
-import { PLEASE_CONTACT_ADMIN } from './BaseRoleDropdown.constants';
+import {
+  MUST_ASSIGN_NEW_OWNER,
+  MUST_HAVE_BLOCKCHAIN_ACCOUNT,
+  OWNER_ADMIN_CAN_EDIT,
+  OWNER_CAN_EDIT_SELF,
+  ROLE_HIERARCHY,
+} from './BaseRoleDropdown.constants';
+import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
+import { Body } from 'web-components/src/components/typography';
 
 export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   role,
   disabled = false,
   onChange,
-  isCurrentUser = false,
   roleOptions,
-  getUnavailableRoles,
   currentUserRole,
+  hasWalletAddress,
 }) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  console.log(currentUserRole);
+
+  const isCurrentUserOwner = currentUserRole === ROLE_OWNER;
   const filteredRoleOptions = useMemo(
     () =>
       roleOptions.filter(option =>
-        currentUserRole === ROLE_OWNER ? true : option.key !== ROLE_OWNER,
+        isCurrentUserOwner ? true : option.key !== ROLE_OWNER,
       ),
-    [currentUserRole, roleOptions],
+    [isCurrentUserOwner, roleOptions],
   );
 
   useEffect(() => {
@@ -51,9 +55,11 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
 
   const isOwner = role === ROLE_OWNER;
   const tooltipTitle = disabled
-    ? _(PLEASE_CONTACT_ADMIN)
+    ? _(OWNER_ADMIN_CAN_EDIT)
     : isOwner
-    ? 'TODO'
+    ? isCurrentUserOwner
+      ? _(MUST_ASSIGN_NEW_OWNER)
+      : _(OWNER_CAN_EDIT_SELF)
     : undefined;
   const isDropdownDisabled = disabled || isOwner;
 
@@ -70,54 +76,25 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   return (
     <div ref={ref} className="relative w-full font-sans">
       {isDropdownDisabled ? (
-        tooltipTitle ? (
-          <InfoTooltip
-            title={tooltipTitle}
-            arrow={true}
-            placement="top"
-            className="bg-bc-neutral-0"
-          >
-            <span>
-              <button
-                disabled
-                tabIndex={-1}
-                aria-disabled="true"
-                className={cn(
-                  'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border-solid cursor-not-allowed text-bc-neutral-400 bg-bc-neutral-200',
-                )}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="capitalize font-sans">{role}</span>
-                </div>
-                <DropdownIcon className="w-4 h-4" color="text-bc-neutral-400" />
-              </button>
-            </span>
-          </InfoTooltip>
-        ) : (
-          <button
-            disabled
-            tabIndex={-1}
-            aria-disabled="true"
-            className={cn(
-              'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border-solid cursor-not-allowed text-bc-neutral-400 bg-bc-neutral-200',
-            )}
-          >
-            <div className="flex items-center gap-2">
-              <span className="capitalize font-sans">{role}</span>
-            </div>
-            <DropdownIcon className="w-4 h-4" color="text-bc-neutral-400" />
-          </button>
-        )
+        <div className="flex items-center gap-5">
+          <Body className="capitalize text-sc-text-header" size="sm">
+            {role}
+          </Body>
+          {tooltipTitle && (
+            <QuestionMarkTooltip
+              title={tooltipTitle}
+              placement="top"
+              className="bg-bc-neutral-0"
+            />
+          )}
+        </div>
       ) : (
         <button
           onClick={toggle}
-          disabled={disabled}
           className={cn(
             'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border border-solid cursor-pointer',
             'bg-bc-neutral-0 text-bc-neutral-700',
             'border-bc-neutral-300 hover:border-gray-300',
-            disabled &&
-              'bg-bc-neutral-400 cursor-not-allowed text-bc-neutral-400',
           )}
         >
           <div className="flex items-center gap-2">
@@ -131,22 +108,16 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
         <ul
           role="listbox"
           aria-label={_(SELECT_ROLE_ARIA_LABEL)}
-          className="absolute z-20 w-full lg:w-[330px] bg-bc-neutral-0 shadow-lg rounded mt-1 p-10 max-h-[32rem] overflow-auto flex gap-5 flex-col border border-solid border-bc-neutral-300"
+          className="list-none absolute z-20 w-full lg:w-[330px] bg-bc-neutral-0 shadow-lg rounded mt-1 p-10 max-h-[32rem] overflow-auto flex gap-5 flex-col border border-solid border-bc-neutral-300"
         >
           {filteredRoleOptions.map(({ key, label, Icon, description }) => {
             const isSelected = role === key;
-            const unavailable = getUnavailableRoles
-              ? getUnavailableRoles(role)(key)
-              : false;
+            const unavailable =
+              ROLE_HIERARCHY[key] > 1 && !hasWalletAddress ? true : false;
 
-            const iconClass =
-              key === ROLE_ADMIN
-                ? unavailable
-                  ? 'text-bc-neutral-400'
-                  : 'text-ac-primary-500'
-                : unavailable
-                ? 'text-bc-neutral-400'
-                : 'text-ac-primary-500';
+            const iconClass = unavailable
+              ? 'text-bc-neutral-400'
+              : 'text-ac-primary-500';
 
             return (
               <li key={key} role="option" aria-selected={isSelected}>
@@ -162,15 +133,13 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
                       'text-bc-neutral-400 bg-transparent cursor-not-allowed border-none',
                   )}
                 >
-                  <div className="flex flex-row items-start gap-5">
-                    <div className="flex items-center justify-center w-20 mt-5">
-                      {isSelected && (
-                        <CheckIcon
-                          className="w-[12px] h-[12px] text-black"
-                          aria-hidden
-                        />
-                      )}
-                    </div>
+                  <div className="pl-20 relative">
+                    {isSelected && (
+                      <CheckIcon
+                        className="absolute top-5 left-0 w-[12px] h-[12px] text-black"
+                        aria-hidden
+                      />
+                    )}
                     <div className="flex flex-col gap-3">
                       <div className="flex items-center gap-5 w-full">
                         <Icon
@@ -179,19 +148,21 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
                           aria-hidden
                         />
                         <span className="font-medium text-bc-neutral-900 text-[16px]">
-                          {_(label)}
+                          {label}
                         </span>
                       </div>
 
                       <p
                         className={cn(
-                          'text-[12px] leading-[1.45] not-italic text-left m-0',
+                          'text-[14px] leading-[1.45] text-left m-0',
                           unavailable
-                            ? 'text-bc-neutral-400'
+                            ? 'text-bc-neutral-400 italic font-bold'
                             : 'text-bc-neutral-500',
                         )}
                       >
-                        {_(description)}
+                        {unavailable
+                          ? _(MUST_HAVE_BLOCKCHAIN_ACCOUNT)
+                          : description}
                       </p>
                     </div>
                   </div>

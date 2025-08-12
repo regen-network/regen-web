@@ -11,6 +11,7 @@ export const mockMembers: Member[] = [
     role: 'admin',
     avatar: 'https://i.pravatar.cc/299',
     visible: true,
+    hasWalletAddress: true,
     isCurrentUser: false,
   },
   {
@@ -22,6 +23,7 @@ export const mockMembers: Member[] = [
     role: 'editor',
     avatar: 'https://i.pravatar.cc/300',
     visible: false,
+    hasWalletAddress: true,
     isCurrentUser: false,
   },
   {
@@ -33,6 +35,7 @@ export const mockMembers: Member[] = [
     role: 'viewer',
     avatar: 'https://i.pravatar.cc/301',
     visible: true,
+    hasWalletAddress: false,
     isCurrentUser: false,
   },
   {
@@ -44,6 +47,7 @@ export const mockMembers: Member[] = [
     role: 'owner',
     avatar: 'https://i.pravatar.cc/302',
     visible: true,
+    hasWalletAddress: true,
     isCurrentUser: true,
   },
 ];

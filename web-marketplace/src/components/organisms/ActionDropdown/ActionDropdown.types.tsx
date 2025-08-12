@@ -14,7 +14,6 @@ export interface GetActionItemsParams {
   isCurrentUser?: boolean;
   onRemove: () => void;
   onEditOrgRole?: () => void;
-  onEditTitle?: () => void;
   navigate: (path: string) => void;
   _: (message: any) => string;
 }

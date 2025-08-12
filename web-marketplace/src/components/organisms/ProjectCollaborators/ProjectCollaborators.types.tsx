@@ -9,6 +9,7 @@ export interface Collaborator {
   role: ProjectRole;
   avatar?: string;
   isCurrentUser?: boolean;
+  hasWalletAddress: boolean;
 }
 
 export interface ProjectCollaboratorsProps {

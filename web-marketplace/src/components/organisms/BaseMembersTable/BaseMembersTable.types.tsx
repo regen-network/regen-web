@@ -27,17 +27,16 @@ export interface BaseRoleDropdownProps {
   role: string;
   onChange: (newRole: any) => void;
   roleOptions: RoleOption[];
-  getUnavailableRoles?: (currentRole: string) => (role: string) => boolean;
   currentUserRole?: string;
   disabled?: boolean;
-  isCurrentUser?: boolean;
+  hasWalletAddress: boolean;
 }
 
 export interface RoleOption {
-  key: string;
-  label: any;
+  key: ProjectRole;
+  label: string;
   Icon: React.FC<any>;
-  description: any;
+  description: string;
 }
 
 export type Context = 'organization' | 'project';

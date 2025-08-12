@@ -1,7 +1,6 @@
 import { ORGANIZATION_CONTEXT } from '../BaseMembersTable/BaseMembersTable.constants';
 import {
   ACTION_EDIT_MY_PROFILE,
-  ACTION_EDIT_MY_TITLE,
   ACTION_EDIT_ORG_ROLE,
   ACTION_REMOVE,
 } from '../ProjectCollaborators/ProjectCollaborators.constants';
@@ -16,7 +15,6 @@ export const getActionItems = ({
   isCurrentUser,
   onRemove,
   onEditOrgRole,
-  onEditTitle,
   navigate,
   _,
 }: GetActionItemsParams): ActionItem[] => {
@@ -29,10 +27,6 @@ export const getActionItems = ({
     return [];
   }
 
-  const editMyTitle = {
-    label: _(ACTION_EDIT_MY_TITLE),
-    onClick: onEditTitle,
-  };
   const remove = {
     label: _(ACTION_REMOVE),
     onClick: onRemove,
@@ -49,7 +43,7 @@ export const getActionItems = ({
 
   const currentUserActions =
     context === ORGANIZATION_CONTEXT
-      ? [editMyTitle]
+      ? [editMyProfile]
       : [editMyProfile, editOrgRole];
 
   if (isCurrentUser) {

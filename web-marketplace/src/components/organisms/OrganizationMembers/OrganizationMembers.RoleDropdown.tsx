@@ -1,18 +1,26 @@
+import { useLingui } from '@lingui/react';
 import { BaseRoleDropdownProps } from '../BaseMembersTable/BaseMembersTable.types';
 import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
-import { ROLE_ITEMS } from './OrganizationMembers.utils';
+import { getRoleItems } from './OrganizationMembers.utils';
 
 export const MemberRoleDropdown: React.FC<
   Omit<BaseRoleDropdownProps, 'roleOptions'>
-> = ({ role, disabled = false, onChange, isCurrentUser, currentUserRole }) => {
+> = ({
+  role,
+  disabled = false,
+  onChange,
+  currentUserRole,
+  hasWalletAddress,
+}) => {
+  const { _ } = useLingui();
   return (
     <BaseRoleDropdown
       role={role}
       disabled={disabled}
       onChange={onChange}
-      isCurrentUser={isCurrentUser}
       currentUserRole={currentUserRole}
-      roleOptions={ROLE_ITEMS}
+      hasWalletAddress={hasWalletAddress}
+      roleOptions={getRoleItems(_)}
     />
   );
 };

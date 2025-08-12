@@ -19,10 +19,6 @@ const meta: Meta<typeof OrganizationMembers> = {
       action: 'invite-clicked',
       description: 'Called when invite button is clicked',
     },
-    onEditTitle: {
-      action: 'edit-title',
-      description: 'Called when edit title button is clicked',
-    },
   },
 };
 
@@ -30,7 +26,6 @@ export default meta;
 
 export const Default = (args: {
   onInvite: () => void;
-  onEditTitle: () => void;
 }) => {
   const [members, setMembers] = useState<Member[]>(mockMembers);
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
@@ -84,5 +79,4 @@ export const Default = (args: {
 
 Default.args = {
   onInvite: action('invite-clicked'),
-  onEditTitle: action('edit-title'),
 };

@@ -1,41 +1,24 @@
 import { useLingui } from '@lingui/react';
-
-import {
-  BaseRoleDropdownProps,
-  ProjectRole,
-} from '../BaseMembersTable/BaseMembersTable.types';
+import { BaseRoleDropdownProps } from '../BaseMembersTable/BaseMembersTable.types';
 import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
-import { ROLE_HIERARCHY, ROLE_OPTIONS } from './ProjectCollaborators.utils';
+import { getRoleItems } from './ProjectCollaborators.utils';
 
 export const RoleDropdown = ({
   role,
   onChange,
   disabled = false,
   currentUserRole,
-  isCurrentUser = false,
+  hasWalletAddress,
 }: Omit<BaseRoleDropdownProps, 'roleOptions'>) => {
   const { _ } = useLingui();
-
-  // Get unavailable roles function
-  const getUnavailableRoles = (currentRole: string) => (key: string) => {
-    if (currentRole === 'viewer') return false;
-
-    // const level = ROLE_HIERARCHY[key as ProjectRole];
-
-    // return level > ROLE_HIERARCHY[orgRole as ProjectRole];
-    // TODO
-    return false;
-  };
-
   return (
     <BaseRoleDropdown
       role={role}
       disabled={disabled}
       onChange={onChange}
-      isCurrentUser={isCurrentUser}
-      roleOptions={ROLE_OPTIONS}
-      // getUnavailableRoles={getUnavailableRoles}
+      roleOptions={getRoleItems(_)}
       currentUserRole={currentUserRole}
+      hasWalletAddress={hasWalletAddress}
     />
   );
 };

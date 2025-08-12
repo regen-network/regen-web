@@ -52,6 +52,64 @@ import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 export const encodeJsonToBase64 = (object: any) =>
   toBase64(toUtf8(JSON.stringify(object)));
 
+const proposalModules = [
+  {
+    admin: { core_module: {} },
+    code_id: 13,
+    label: `dao-proposal-single_${Date.now()}`,
+    msg: encodeJsonToBase64({
+      allow_revoting: false,
+      close_proposal_on_execution_failure: true,
+      max_voting_period: { time: 604800 },
+      only_members_execute: true,
+      pre_propose_info: {
+        module_may_propose: {
+          info: {
+            admin: { core_module: {} },
+            code_id: 11,
+            label: `dao-pre-propose-single_${Date.now()}`,
+            msg: encodeJsonToBase64({
+              deposit_info: null,
+              submission_policy: {
+                specific: { dao_members: true, allowlist: [], denylist: [] },
+              },
+              extension: {},
+            }),
+            funds: [],
+          },
+        },
+      },
+      threshold: {
+        threshold_quorum: {
+          quorum: { percent: '0.20' },
+          threshold: { majority: {} },
+        },
+      },
+      veto: null,
+    }),
+    funds: [],
+  },
+];
+const votingModule = {
+  admin: { core_module: {} },
+  code_id: 19,
+  label: `dao-voting-cw4__${Date.now()}`,
+  msg: encodeJsonToBase64({
+    group_contract: {
+      new: {
+        cw4_group_code_id: 2,
+        initial_members: [
+          {
+            addr: 'regen1gtlfmszmhv3jnlqx6smt9n6rcwsfydrhznqyk9',
+            weight: 1000,
+          },
+        ],
+      },
+    },
+  }),
+  funds: [],
+};
+
 export const getFundsFromDaoInstantiateMsg = ({
   voting_module_instantiate_info,
   proposal_modules_instantiate_info,

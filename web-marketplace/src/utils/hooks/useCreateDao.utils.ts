@@ -4,23 +4,23 @@ const creditClassesAuthorization = {
   filter: {
     $or: [
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgCreateClass',
         },
       },
 
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgUpdateClassIssuers',
         },
       },
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgUpdateClassAdmin',
         },
       },
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgUpdateClassMetadata',
         },
       },
@@ -35,17 +35,17 @@ const createProjectAuthorization = {
   filter: {
     $or: [
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgCreateProject',
         },
       },
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgCreateUnregisteredProject',
         },
       },
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgUpdateProjectEnrollment',
         },
       },
@@ -59,38 +59,38 @@ const creditsAuthorization = {
   filter: {
     $or: [
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgCreateBatch',
         },
       },
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgRetire',
         },
       },
 
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgSend',
         },
       },
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgCancel',
         },
       },
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgMintBatchCredits',
         },
       },
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgSealBatch',
         },
       },
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgUpdateBatchMetadata',
         },
       },
@@ -104,17 +104,17 @@ const sellOrdersAuthorization = {
   filter: {
     $or: [
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.marketplace.v1.MsgSell',
         },
       },
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.marketplace.v1.MsgUpdateSellOrders',
         },
       },
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.marketplace.v1.MsgCancelSellOrder',
         },
       },
@@ -319,12 +319,12 @@ const projectsAuthorization = {
   filter: {
     $or: [
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgUpdateProjectMetadata',
         },
       },
       {
-        '#stargate': {
+        'stargate': {
           type_url: '/regen.ecocredit.v1.MsgUpdateProjectAdmin',
         },
       },

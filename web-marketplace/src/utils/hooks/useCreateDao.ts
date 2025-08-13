@@ -14,6 +14,7 @@ export const useCreateDao = () => {
       const client = await SigningCosmWasmClient.connectWithSigner(
         ledgerRPCUri,
         wallet?.offlineSigner,
+        { gasPrice: { amount: 0.025 } },
       );
 
       const salt = nanoid();
@@ -129,7 +130,15 @@ export const useCreateDao = () => {
             expect: predictedDaoAddress,
           },
         },
-        2,
+        {
+          amount: [
+            {
+              denom: 'uregen',
+              amount: '5000', // TODO: what should fee and gas be?
+            },
+          ],
+          gas: '20000000',
+        },
         undefined,
         getFundsFromDaoInstantiateMsg({
           voting_module_instantiate_info: votingModule,

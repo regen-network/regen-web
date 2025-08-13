@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
-
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { gradients } from 'styles/gradients';

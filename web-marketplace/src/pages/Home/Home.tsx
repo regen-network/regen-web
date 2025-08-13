@@ -1,23 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate';
-import { Registry } from '@cosmjs/proto-signing';
-import { AminoTypes } from '@cosmjs/stargate';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Box } from '@mui/material';
-import {
-  cosmosAminoConverters,
-  cosmosProtoRegistry,
-  ibcAminoConverters,
-  ibcProtoRegistry,
-  regenAminoConverters,
-  regenProtoRegistry,
-} from '@regen-network/api';
+
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { gradients } from 'styles/gradients';
-import { nanoid } from 'nanoid';
-import { toBase64, toUtf8 } from '@cosmjs/encoding';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import { Loading } from 'web-components/src/components/loading';
@@ -32,7 +20,6 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import WithLoader from 'components/atoms/WithLoader';
 import BlockContentBody from 'components/molecules/BlockContentBody';
-import { instantiate2Address } from '@cosmjs/cosmwasm-stargate';
 
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
@@ -46,80 +33,6 @@ import { client as sanityClient } from '../../lib/clients/sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 import { useCreditClasses } from './hooks/useCreditClasses';
-import { chainId, ledgerRPCUri } from 'lib/ledger';
-import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
-
-export const encodeJsonToBase64 = (object: any) =>
-  toBase64(toUtf8(JSON.stringify(object)));
-
-const proposalModules = [
-  {
-    admin: { core_module: {} },
-    code_id: 13,
-    label: `dao-proposal-single_${Date.now()}`,
-    msg: encodeJsonToBase64({
-      allow_revoting: false,
-      close_proposal_on_execution_failure: true,
-      max_voting_period: { time: 604800 },
-      only_members_execute: true,
-      pre_propose_info: {
-        module_may_propose: {
-          info: {
-            admin: { core_module: {} },
-            code_id: 11,
-            label: `dao-pre-propose-single_${Date.now()}`,
-            msg: encodeJsonToBase64({
-              deposit_info: null,
-              submission_policy: {
-                specific: { dao_members: true, allowlist: [], denylist: [] },
-              },
-              extension: {},
-            }),
-            funds: [],
-          },
-        },
-      },
-      threshold: {
-        threshold_quorum: {
-          quorum: { percent: '0.20' },
-          threshold: { majority: {} },
-        },
-      },
-      veto: null,
-    }),
-    funds: [],
-  },
-];
-const votingModule = {
-  admin: { core_module: {} },
-  code_id: 19,
-  label: `dao-voting-cw4__${Date.now()}`,
-  msg: encodeJsonToBase64({
-    group_contract: {
-      new: {
-        cw4_group_code_id: 2,
-        initial_members: [
-          {
-            addr: 'regen1gtlfmszmhv3jnlqx6smt9n6rcwsfydrhznqyk9',
-            weight: 1000,
-          },
-        ],
-      },
-    },
-  }),
-  funds: [],
-};
-
-export const getFundsFromDaoInstantiateMsg = ({
-  voting_module_instantiate_info,
-  proposal_modules_instantiate_info,
-}: {
-  voting_module_instantiate_info: any;
-  proposal_modules_instantiate_info: any;
-}) => [
-  ...(voting_module_instantiate_info.funds || []),
-  ...proposal_modules_instantiate_info.flatMap(({ funds }) => funds || []),
-];
 
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
@@ -163,88 +76,8 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
       }
     }
   }, []);
-  const { wallet } = useWallet();
 
   if (isFetchingAllHomePage) return <Loading sx={{ minHeight: '100vh' }} />;
-
-  const createDao = async () => {
-    const protoRegistry = [
-      ...cosmosProtoRegistry,
-      ...ibcProtoRegistry,
-      ...regenProtoRegistry,
-    ];
-
-    const aminoConverters = {
-      ...cosmosAminoConverters,
-      ...ibcAminoConverters,
-      ...regenAminoConverters,
-    };
-
-    const registry = new Registry(protoRegistry);
-    const aminoTypes = new AminoTypes(aminoConverters);
-    const client = await SigningCosmWasmClient.connectWithSigner(
-      ledgerRPCUri,
-      wallet?.offlineSigner,
-      {
-        registry,
-        aminoTypes,
-      },
-    );
-    const salt = nanoid();
-    const cwAdminFactoryAddr =
-      'regen1hrpna9v7vs3stzyd4z3xf00676kf78zpe2u5ksvljswn2vnjp3ysp76v39';
-    const daoDaoCoreCodeId = 6;
-
-    const codeDetails = await client.getCodeDetails(daoDaoCoreCodeId);
-
-    const predictedDaoAddress = instantiate2Address(
-      toUtf8(codeDetails?.checksum),
-      cwAdminFactoryAddr,
-      toUtf8(salt),
-      chainInfo.bech32Config.bech32PrefixAccAddr,
-    );
-
-    await client.execute(
-      wallet?.address,
-      cwAdminFactoryAddr,
-      {
-        instantiate2_contract_with_self_admin: {
-          code_id: daoDaoCoreCodeId,
-          instantiate_msg: encodeJsonToBase64({
-            admin: null,
-            automatically_add_cw20s: true,
-            automatically_add_cw721s: true,
-            // dao_uri: config.uri,
-            description: 'test dao',
-            // Replace empty strings with null.
-            image_url: null,
-            initial_items: [{ key: 'type', value: 'organization' }],
-            initial_actions: [],
-            name: 'DAO with rbam test',
-            proposal_modules_instantiate_info: proposalModules,
-            voting_module_instantiate_info: votingModule,
-          }),
-          funds: getFundsFromDaoInstantiateMsg({
-            voting_module_instantiate_info: votingModule,
-            proposal_modules_instantiate_info: proposalModules,
-          }),
-
-          label: 'Regen DAO',
-          salt,
-          expect: predictedDaoAddress,
-        },
-      },
-      {
-        amount: [
-          {
-            denom: 'uregen',
-            amount: '5000',
-          },
-        ],
-        gas: '200000',
-      },
-    );
-  };
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>

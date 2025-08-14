@@ -1,3 +1,5 @@
+/* eslint-disable lingui/no-unlocalized-strings */
+
 import { Collaborator } from './ProjectCollaborators.types';
 
 export const mockCollaborators: Collaborator[] = [

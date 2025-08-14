@@ -6,7 +6,8 @@ import {
   screen,
   userEvent,
   waitFor,
-} from '../../../../test/test-utils';
+} from 'web-components/test/test-utils';
+
 import { MigrateProjects } from './MigrateProjects';
 import { Project } from './MigrateProjects.types';
 

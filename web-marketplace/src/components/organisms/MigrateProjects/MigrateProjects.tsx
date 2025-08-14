@@ -1,6 +1,7 @@
 import { Controller, useForm } from 'react-hook-form';
 
-import { SelectProjectCard } from '../../cards/SelectProjectCard/SelectProjectCard';
+import { SelectProjectCard } from 'web-components/src/components/cards/SelectProjectCard/SelectProjectCard';
+
 import { MigrateProjectsProps, Project } from './MigrateProjects.types';
 
 type FormValues = {

@@ -11,7 +11,6 @@ import { isProfileEditDirtyRef } from 'lib/atoms/ref.atoms';
 import { useWallet } from 'lib/wallet/wallet';
 
 import {
-  NO_ACTIVE_ACCOUNT,
   VIEW_ORG_PROFILE,
   VIEW_PROFILE,
   VIEW_PUBLIC_PROFILE,
@@ -48,7 +47,6 @@ export const ViewProfileButton = ({
       activeAccount || (wallet?.address ? { addr: wallet.address } : null);
 
     if (!profileAccount) {
-      console.warn(NO_ACTIVE_ACCOUNT);
       return;
     }
 

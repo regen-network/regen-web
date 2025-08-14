@@ -1,4 +1,4 @@
-import { Account } from 'src/components/user/UserInfo';
+import { Account } from 'web-components/src/components/user/UserInfo';
 
 export interface Project {
   /** Unique identifier for the project */

@@ -227,8 +227,8 @@ export function ProjectCard({
                 <PurchaseDetails
                   title={
                     serialNumber
-                      ? purchaseDetailsTitles?.vintageIdWithSerial
-                      : purchaseDetailsTitles?.vintageId
+                      ? purchaseDetailsTitles.vintageIdWithSerial
+                      : purchaseDetailsTitles.vintageId
                   }
                   info={
                     (serialNumber ||
@@ -239,27 +239,27 @@ export function ProjectCard({
               )}
               {purchaseInfo?.vintagePeriod && purchaseDetailsTitles && (
                 <PurchaseDetails
-                  title={purchaseDetailsTitles?.vintagePeriod}
+                  title={purchaseDetailsTitles.vintagePeriod}
                   info={purchaseInfo.vintagePeriod}
                 />
               )}
               {purchaseInfo?.creditClass && purchaseDetailsTitles && (
                 <PurchaseDetails
                   url={purchaseInfo?.creditClass?.url}
-                  title={purchaseDetailsTitles?.creditClass}
+                  title={purchaseDetailsTitles.creditClass}
                   info={formatStandardInfo(purchaseInfo.creditClass)}
                 />
               )}
               {purchaseInfo?.methodology && purchaseDetailsTitles && (
                 <PurchaseDetails
                   url={purchaseInfo?.methodology.url}
-                  title={purchaseDetailsTitles?.methodology}
+                  title={purchaseDetailsTitles.methodology}
                   info={formatStandardInfo(purchaseInfo.methodology)}
                 />
               )}
               {purchaseInfo?.projectType && purchaseDetailsTitles && (
                 <PurchaseDetails
-                  title={purchaseDetailsTitles?.projectType}
+                  title={purchaseDetailsTitles.projectType}
                   info={purchaseInfo?.projectType}
                 />
               )}

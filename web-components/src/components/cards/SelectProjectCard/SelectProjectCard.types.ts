@@ -1,4 +1,4 @@
-import { Project } from '../../organisms/MigrateProjects/MigrateProjects.types';
+import { Project } from 'web-marketplace/src/components/organisms/MigrateProjects/MigrateProjects.types';
 
 /**
  * Props for the SelectProjectCard component.

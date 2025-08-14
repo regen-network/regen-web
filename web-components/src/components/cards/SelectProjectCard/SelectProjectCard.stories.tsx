@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
+import { mockProjects } from 'web-marketplace/src/components/organisms/MigrateProjects/MigrateProjects.mock';
 
-import { mockProjects } from '../../organisms/MigrateProjects/MigrateProjects.mock';
 import { SelectProjectCard } from './SelectProjectCard';
 
 const meta: Meta<typeof SelectProjectCard> = {

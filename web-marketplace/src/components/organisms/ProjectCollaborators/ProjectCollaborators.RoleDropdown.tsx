@@ -1,4 +1,5 @@
 import { useLingui } from '@lingui/react';
+
 import { BaseRoleDropdownProps } from '../BaseMembersTable/BaseMembersTable.types';
 import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
 import { getRoleItems } from './ProjectCollaborators.utils';

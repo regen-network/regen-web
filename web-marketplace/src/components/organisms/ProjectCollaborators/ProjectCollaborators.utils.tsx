@@ -6,6 +6,8 @@ import EditIcon from 'web-components/src/components/icons/EditIcon';
 import EyeIcon from 'web-components/src/components/icons/EyeIcon';
 import { OwnerIcon } from 'web-components/src/components/icons/OwnerIcon';
 
+import { TranslatorType } from 'lib/i18n/i18n.types';
+
 import {
   ROLE_ADMIN,
   ROLE_AUTHOR,
@@ -31,7 +33,6 @@ import {
   ROLE_VIEWER_DESCRIPTION,
   ROLE_VIEWER_LABEL,
 } from './ProjectCollaborators.constants';
-import { TranslatorType } from 'lib/i18n/i18n.types';
 
 export const getRoleItems = (_: TranslatorType) =>
   [

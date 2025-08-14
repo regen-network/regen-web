@@ -3,6 +3,8 @@ import { useLingui } from '@lingui/react';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 
+import { Link } from 'components/atoms';
+
 import {
   ACTION_EDIT_MY_PROFILE,
   EDIT_PROFILE,
@@ -52,7 +54,7 @@ export const UserInfo = <T extends BaseUser>({
             {user.isCurrentUser && (
               <>
                 {` ${_(YOU)}`}
-                <a
+                <Link
                   href="/dashboard/profile"
                   className="ml-1 p-0 bg-transparent border-none cursor-pointer flex items-center group"
                   aria-label={_(ACTION_EDIT_MY_PROFILE)}
@@ -61,7 +63,7 @@ export const UserInfo = <T extends BaseUser>({
                   <span className="hidden group-hover:flex text-[12px] tracking-[1px] font-[800] bg-transparent font-muli cursor-pointer text-ac-primary-500 ml-5">
                     {_(EDIT_PROFILE)}
                   </span>
-                </a>
+                </Link>
               </>
             )}
           </span>

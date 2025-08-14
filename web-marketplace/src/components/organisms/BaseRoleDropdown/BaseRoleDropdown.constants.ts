@@ -1,10 +1,11 @@
 import { msg } from '@lingui/macro';
+
 import {
-  ROLE_VIEWER,
+  ROLE_ADMIN,
   ROLE_AUTHOR,
   ROLE_EDITOR,
-  ROLE_ADMIN,
   ROLE_OWNER,
+  ROLE_VIEWER,
 } from '../ActionDropdown/ActionDropdown.constants';
 import { ProjectRole } from '../BaseMembersTable/BaseMembersTable.types';
 

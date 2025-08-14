@@ -112,6 +112,7 @@ export default function useMsgClient(
       reactQueryClient,
       setIsWaitingForSigning,
       setErrorCodeAtom,
+      queryClient,
     ],
   );
 

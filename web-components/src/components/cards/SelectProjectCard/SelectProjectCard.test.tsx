@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+import { Project } from 'web-marketplace/src/components/organisms/MigrateProjects/MigrateProjects.types';
 
-import { Project } from '../../organisms/MigrateProjects/MigrateProjects.types';
 import { SelectProjectCard } from './SelectProjectCard';
 
 const mockProject: Project = {

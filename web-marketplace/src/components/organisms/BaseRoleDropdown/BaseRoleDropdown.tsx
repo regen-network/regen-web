@@ -3,6 +3,8 @@ import { useLingui } from '@lingui/react';
 
 import CheckIcon from 'web-components/src/components/icons/CheckIcon';
 import DropdownIcon from 'web-components/src/components/icons/DropdownIcon';
+import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
+import { Body } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import {
@@ -18,8 +20,6 @@ import {
   OWNER_CAN_EDIT_SELF,
   ROLE_HIERARCHY,
 } from './BaseRoleDropdown.constants';
-import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
-import { Body } from 'web-components/src/components/typography';
 
 export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   role,
@@ -32,7 +32,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const roleLabel = roleOptions.find(option => option.key === role)?.label
+  const roleLabel = roleOptions.find(option => option.key === role)?.label;
 
   const isCurrentUserOwner = currentUserRole === ROLE_OWNER;
   const filteredRoleOptions = useMemo(

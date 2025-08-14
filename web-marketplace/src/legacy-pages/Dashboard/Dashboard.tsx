@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
@@ -103,7 +104,6 @@ export const Dashboard = () => {
       setMobileMenuOpen(false);
       navigate('/');
     } catch (error) {
-      console.error('Logout failed:', error);
       navigate('/');
     }
   };
@@ -121,7 +121,7 @@ export const Dashboard = () => {
   // This should be replaced with actual logic to handle
   // account selection when Org functionality is implemented
   const onAccountSelect = (id: string) => {
-    throw new Error('Function not implemented.');
+    throw new Error(_(msg`Function not implemented.`));
   };
 
   const dashboardContextValue = useMemo(

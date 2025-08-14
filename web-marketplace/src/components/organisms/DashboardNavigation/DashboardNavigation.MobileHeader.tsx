@@ -1,3 +1,4 @@
+import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { getDefaultAvatar } from 'legacy-pages/Dashboard/Dashboard.utils';
 
@@ -47,7 +48,7 @@ export const DashboardNavigationMobileHeader = ({
         type="button"
         onClick={onMenuClick}
         className="md:hidden z-50 border-none bg-bc-neutral-0 pt-5"
-        aria-label="Open menu"
+        aria-label={_(msg`Open menu`)}
       >
         <HamburgerIcon className="w-[29px] h-[22px] cursor-pointer" />
       </button>

@@ -44,8 +44,8 @@ import { Maybe } from 'generated/graphql';
 import { QueryClient as RPCQueryClient, useLedger } from 'ledger';
 import { useWallet } from 'lib//wallet/wallet';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-// import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 
+// import { ApolloClientFactory } from 'lib/clients/apolloClientFactory';
 import { AuthRoute } from 'components/atoms/AuthRoute';
 import { KeplrOrAuthRoute } from 'components/atoms/KeplrOrAuthRoute';
 import PageLoader from 'components/atoms/PageLoader';

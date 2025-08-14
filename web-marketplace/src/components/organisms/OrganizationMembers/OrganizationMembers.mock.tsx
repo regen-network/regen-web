@@ -1,0 +1,53 @@
+/* eslint-disable lingui/no-unlocalized-strings */
+import { Member } from './OrganizationMembers.types';
+
+export const mockMembers: Member[] = [
+  {
+    id: '1',
+    name: 'Jane Smith',
+    email: 'jane@example.com',
+    title: 'Project Manager',
+    organization: 'Ecometric',
+    role: 'admin',
+    avatar: 'https://i.pravatar.cc/299',
+    visible: true,
+    hasWalletAddress: true,
+    isCurrentUser: false,
+  },
+  {
+    id: '2',
+    name: 'John Doe',
+    email: 'john@example.com',
+    title: 'Project Manager',
+    organization: 'Ecometric',
+    role: 'editor',
+    avatar: 'https://i.pravatar.cc/300',
+    visible: false,
+    hasWalletAddress: true,
+    isCurrentUser: false,
+  },
+  {
+    id: '3',
+    name: 'Alice Johnson',
+    email: 'alice@example.com',
+    title: 'Project Manager',
+    organization: 'Ecometric',
+    role: 'viewer',
+    avatar: 'https://i.pravatar.cc/301',
+    visible: true,
+    hasWalletAddress: false,
+    isCurrentUser: false,
+  },
+  {
+    id: '4',
+    name: 'Bob Brown',
+    email: 'bob@example.com',
+    title: 'Project Manager',
+    organization: 'Ecometric',
+    role: 'owner',
+    avatar: 'https://i.pravatar.cc/302',
+    visible: true,
+    hasWalletAddress: true,
+    isCurrentUser: true,
+  },
+];

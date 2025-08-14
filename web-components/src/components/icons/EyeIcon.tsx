@@ -41,13 +41,13 @@ const EyeIcon: React.FC<
               fillRule="evenodd"
               clipRule="evenodd"
               d="M0 6.91021C1.29537 2.90035 5.05898 0 9.5 0C13.941 0 17.7046 2.90035 19 6.91021C17.7046 10.9201 13.941 13.8204 9.5 13.8204C5.05898 13.8204 1.29537 10.9201 0 6.91021Z"
-              fill={color}
+              fill="currentColor"
             />
             <circle
               cx="9.81977"
               cy="6.91022"
               r="3.29587"
-              fill={color}
+              fill="currentColor"
               stroke="white"
               strokeWidth="1.5"
             />

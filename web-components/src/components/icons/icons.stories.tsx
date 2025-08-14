@@ -9,6 +9,7 @@ import ArrowRightIcon from './ArrowRight';
 import ArrowSkipLeftIcon from './ArrowSkipLeft';
 import ArrowSkipRightIcon from './ArrowSkipRight';
 import { AudioFileIcon } from './AudioFileIcon';
+import AuthorIcon from './AuthorIcon';
 import AvailableCreditsIcon from './AvailableCreditsIcon';
 import AvatarIcon from './AvatarIcon';
 import AvatarOutlineIcon from './AvatarOutlineIcon';
@@ -19,6 +20,7 @@ import CelebrateRegenIcon from './CelebrateRegenIcon';
 import CertifiedDocumentIcon from './CertifiedDocumentIcon';
 import CheckedIcon from './CheckedIcon';
 import CheckIcon from './CheckIcon';
+import ClipboardIcon from './ClipboardIcon';
 import CloseIcon from './CloseIcon';
 import CoBenefitsIcon from './CoBenefitsIcon';
 import { CogIcon } from './CogIcon';
@@ -76,6 +78,7 @@ import OrganizationIcon from './OrganizationIcon';
 import { OrgProfileIcon } from './OrgProfileIcon';
 import { OtherDocumentsIcon } from './OtherDocumentsIcon';
 import OutlinedCheckIcon from './OutlinedCheckIcon';
+import { OwnerIcon } from './OwnerIcon';
 import { PauseIcon } from './PauseIcon';
 import { PaymentInfoIcon } from './PaymentInfoIcon';
 import { PdfFileIcon } from './PdfFileIcon';
@@ -218,6 +221,7 @@ export const allIcons = (): JSX.Element => (
       icon={<AvailableCreditsIcon sx={{ height: 40 }} />}
       label="AvailableCreditsIcon"
     />
+    <LabeledIcon icon={<AuthorIcon />} label="AuthorIcon" />
     <LabeledIcon
       icon={<BreadcrumbIcon direction="down" />}
       label="BreadcrumbIcon"
@@ -253,6 +257,7 @@ export const allIcons = (): JSX.Element => (
       icon={<CreditClassIcon sx={{ color: 'secondary.main' }} />}
       label="CreditClassIcon"
     />
+    <LabeledIcon icon={<ClipboardIcon />} label="ClipboardIcon" />
     <LabeledIcon icon={<CreditsIssuedIcon />} label="CreditsIssuedIcon" />
     <LabeledIcon icon={<CreditsTradeableIcon />} label="CreditsTradeableIcon" />
     <LabeledIcon icon={<CreditsRetiredIcon />} label="CreditsRetiredIcon" />
@@ -323,6 +328,7 @@ export const allIcons = (): JSX.Element => (
 
     <LabeledIcon icon={<OtherDocumentsIcon />} label="OtherDocumentsIcon" />
     <LabeledIcon icon={<OutlinedCheckIcon />} label="OutlinedCheckIcon" />
+    <LabeledIcon icon={<OwnerIcon />} label="OwnerIcon" />
     <LabeledIcon icon={<PdfFileIcon />} label="PdfFileIcon" />
     <LabeledIcon icon={<PendingIcon />} label="PendingIcon" />
     <LabeledIcon

@@ -1,4 +1,5 @@
 import { Controller, useForm } from 'react-hook-form';
+import Form from 'web-marketplace/src/components/molecules/Form/Form';
 
 import { SelectProjectCard } from 'web-components/src/components/cards/SelectProjectCard/SelectProjectCard';
 
@@ -14,15 +15,15 @@ export const MigrateProjects = ({
   // eslint-disable-next-line lingui/no-unlocalized-strings
   formAriaLabel = 'migrate projects form',
 }: MigrateProjectsProps) => {
-  const { control, handleSubmit } = useForm<FormValues>({
+  const form = useForm<FormValues>({
     defaultValues: { selectedProjectIds: [] },
   });
 
   return (
     <section className="border border-solid border-grey-300 rounded-md py-40 px-10 sm:py-50 sm:px-40 max-w-4xl">
-      <form onSubmit={handleSubmit(onSubmit)} aria-label={formAriaLabel}>
+      <Form form={form} onSubmit={onSubmit} aria-label={formAriaLabel}>
         <Controller
-          control={control}
+          control={form.control}
           name="selectedProjectIds"
           render={({ field: { value: selectedIds, onChange } }) => (
             <div className="grid sm:grid-cols-2 gap-30">
@@ -46,7 +47,7 @@ export const MigrateProjects = ({
             </div>
           )}
         />
-      </form>
+      </Form>
     </section>
   );
 };

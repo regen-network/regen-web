@@ -15,13 +15,18 @@ import TrashIcon from 'web-components/src/components/icons/TrashIcon';
 import ProjectPlaceInfo from 'web-components/src/components/place/ProjectPlaceInfo';
 import { Title } from 'web-components/src/components/typography';
 
+import { OptimizedImage } from 'components/atoms/OptimizedImage';
+
 import {
+  BACKGROUND_IMAGE_ALT,
   CONVERT_TO_DRAFT,
   DELETE_PROJECT,
+  DESKTOP_GRADIENT,
   EDIT,
   MAX_ADDRESS_LENGTH_DESKTOP,
   MAX_ADDRESS_LENGTH_MOBILE,
   MIGRATE_PROJECT,
+  MOBILE_GRADIENT,
   REGISTER_WITH_PROTOCOL,
   UNTITLED_PROJECT,
   VIEW,
@@ -45,11 +50,17 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!isMenuOpen) return;
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
         setIsMenuOpen(false);
       }
     };
@@ -86,72 +97,54 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
     },
   ];
 
+  const projectName = project.name || _(UNTITLED_PROJECT);
+
   return (
     <div className="relative w-full mt-20 ">
-      {/* Background Image Container */}
-      <div className="relative overflow-hidden border-solid border-[1px] border-bc-neutral-300 rounded-lg ">
-        {/* Original sharp background */}
+      <div className="relative border-solid border-[1px] border-bc-neutral-300 rounded-lg overflow-hidden">
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src={project.imgSrc || '/default-project-image.jpg'}
+            alt={`${BACKGROUND_IMAGE_ALT} ${projectName}`}
+            className="w-full h-full object-cover"
+          />
+        </div>
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0"
           style={{
-            backgroundImage: `url(${
-              project.imgSrc || '/default-project-image.jpg'
-            })`,
+            maskImage: isMobile ? MOBILE_GRADIENT : DESKTOP_GRADIENT,
+            WebkitMaskImage: isMobile ? MOBILE_GRADIENT : DESKTOP_GRADIENT,
           }}
-        />
-
-        {/* Blurred layer with gradient mask */}
-        <div
-          className="absolute inset-0 bg-cover bg-center scale-110 blur-sm"
-          style={{
-            backgroundImage: `url(${
-              project.imgSrc || '/default-project-image.jpg'
-            })`,
-            maskImage: isMobile
-              ? 'linear-gradient(to right, black 0%, black 75%, transparent 90%)'
-              : 'linear-gradient(to right, black 0%, black 20%, transparent 70%)',
-            WebkitMaskImage: isMobile
-              ? 'linear-gradient(to right, black 0%, black 75%, transparent 90%)'
-              : 'linear-gradient(to right, black 0%, black 20%, transparent 70%)',
-          }}
-        />
+        >
+          <OptimizedImage
+            src={project.imgSrc || '/default-project-image.jpg'}
+            alt=""
+            className="w-full h-full object-cover scale-110 blur-sm"
+          />
+        </div>
 
         {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-20" />
 
         {/* Content */}
         <div className="relative z-10 p-20 pb-30 flex flex-col">
-          {/* Top right menu */}
+          {/* Top right menu button */}
           <div className="flex justify-end">
-            <div className="absolute top-4 right-4" ref={menuRef}>
+            <div className="absolute top-4 right-4">
               <button
+                ref={buttonRef}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="flex items-center justify-center w-[39px] h-[39px] cursor-pointer rounded-full border-solid border-bc-neutral-500 bg-bc-neutral-700 p-5 transition-colors"
               >
                 <HorizontalDotsIcon sx={{ color: 'white' }} />
               </button>
-
-              {isMenuOpen && (
-                <div className="absolute top-12 right-0 w-[199px] bg-bc-neutral-100 rounded-md shadow-lg z-10 p-15 pr-10 flex flex-col gap-10">
-                  {menuItems.map((item, idx) => (
-                    <button
-                      key={idx}
-                      className={`flex items-center justify-start p-0 gap-10 w-full bg-transparent border-none text-left text-[16px] ${item.color} hover:bg-gray-100 cursor-pointer`}
-                      onClick={item.action}
-                    >
-                      {item.icon}
-                      {item.label}
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
 
           {/* Project info and buttons */}
           <div className="flex flex-col justify-end max-w-[251px] md:max-w-[596px]">
             <Title className="text-bc-neutral-0 mb-2 text-[21px] md:text-[32px] line-clamp-2 mb-20">
-              {project.name || _(UNTITLED_PROJECT)}
+              {projectName}
             </Title>
 
             {/* Address + area */}
@@ -191,6 +184,24 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
           </div>
         </div>
       </div>
+
+      {isMenuOpen && (
+        <div
+          ref={menuRef}
+          className="absolute top-[60px] right-[20px] w-[199px] bg-bc-neutral-100 rounded-md shadow-lg z-50 p-15 pr-10 flex flex-col gap-10"
+        >
+          {menuItems.map((item, idx) => (
+            <button
+              key={idx}
+              className={`flex items-center justify-start p-0 gap-10 w-full bg-transparent border-none text-left text-[16px] ${item.color} hover:bg-gray-100 cursor-pointer font-sans`}
+              onClick={item.action}
+            >
+              {item.icon}
+              {item.label}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

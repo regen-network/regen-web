@@ -10,3 +10,9 @@ export const DELETE_PROJECT = msg`Delete project`;
 export const UNTITLED_PROJECT = msg`Untitled Project`;
 export const VIEW = msg`View`;
 export const EDIT = msg`Edit`;
+
+export const MOBILE_GRADIENT =
+  'linear-gradient(to right, black 0%, black 75%, transparent 90%)';
+export const DESKTOP_GRADIENT =
+  'linear-gradient(to right, black 0%, black 20%, transparent 70%)';
+export const BACKGROUND_IMAGE_ALT = 'Background image for';

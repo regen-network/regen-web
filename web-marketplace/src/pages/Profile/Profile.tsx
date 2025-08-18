@@ -91,8 +91,7 @@ export const Profile = (): JSX.Element => {
         icon: <ProjectPageIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/projects`,
         hidden: Boolean(
-          (adminProjects.length === 0 && !privActiveAccount?.email) ||
-            (address && adminProjects.length === 0),
+          address && adminProjects.length === 0 && !privActiveAccount?.email,
         ),
       },
       {

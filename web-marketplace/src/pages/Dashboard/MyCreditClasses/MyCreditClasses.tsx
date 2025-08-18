@@ -1,14 +1,14 @@
 import { useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { Trans } from '@lingui/macro';
+//import { Link } from 'react-router-dom';
+//import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { Grid, useTheme } from '@mui/material';
 
-import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
+//import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import EmptyState from 'web-components/src/components/empty-state';
 import EditIcon from 'web-components/src/components/icons/EditIcon';
-import NoCreditClassesIcon from 'web-components/src/components/icons/NoCreditClassesIcon';
-import PlusIcon from 'web-components/src/components/icons/PlusIcon';
+import { NoCreditClassesIcon } from 'web-components/src/components/icons/NoCreditClassesIcon';
+//import PlusIcon from 'web-components/src/components/icons/PlusIcon';
 import { CreditClassGridCard } from 'web-components/src/components/molecules/CreditClassGridCard/CreditClassGridCard';
 import { LinkComponentType } from 'web-components/src/types/shared/linkComponentType';
 
@@ -26,7 +26,7 @@ import {
 
 export const MyCreditClasses = (): JSX.Element => {
   const { _ } = useLingui();
-  const theme = useTheme();
+  //const theme = useTheme();
   const { wallet } = useWallet();
   const { creditClasses, isLoadingCreditClasses } =
     useFetchCreditClassesWithOrder({
@@ -44,7 +44,7 @@ export const MyCreditClasses = (): JSX.Element => {
         {hasNoCreditClasses ? (
           <EmptyState
             message={_(NO_CREDIT_CLASSES_MESSAGE)}
-            icon={<NoCreditClassesIcon sx={{ width: 100, height: 100 }} />}
+            icon={<NoCreditClassesIcon />}
             sx={{ backgroundColor: 'info.light' }}
           >
             {/* <OutlinedButton

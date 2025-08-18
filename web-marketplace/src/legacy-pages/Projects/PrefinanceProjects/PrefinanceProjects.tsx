@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import { TextButton } from 'web-components/src/components/buttons/TextButton';
@@ -31,7 +31,7 @@ import { useProjectsContext } from '../Projects.context';
 export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
   () => {
     const { _ } = useLingui();
-    const navigate = useNavigate();
+    const router = useRouter();
     const { track } = useTracker();
     const {
       prefinanceProjects,
@@ -105,7 +105,7 @@ export const PrefinanceProjects: React.FC<React.PropsWithChildren<unknown>> =
                 areaUnit={project?.areaUnit}
                 purchaseInfo={project.purchaseInfo || {}}
                 onClick={() =>
-                  navigate(`/project/${project.slug ?? project.id}`)
+                  router.push(`/project/${project.slug ?? project.id}`)
                 }
                 imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                 apiServerUrl={API_URI}

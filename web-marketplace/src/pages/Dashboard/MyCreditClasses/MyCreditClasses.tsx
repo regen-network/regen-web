@@ -47,13 +47,13 @@ export const MyCreditClasses = (): JSX.Element => {
             icon={<NoCreditClassesIcon sx={{ width: 100, height: 100 }} />}
             sx={{ backgroundColor: 'info.light' }}
           >
-            <OutlinedButton
-              startIcon={<PlusIcon color={theme.palette.secondary.main} />}
+            {/* <OutlinedButton
+              startIcon={<PlusIcon className="text-brand-400" />}
               component={Link}
               to="/credit-classes/create"
             >
               <Trans>create credit class</Trans>
-            </OutlinedButton>
+            </OutlinedButton> */}
           </EmptyState>
         ) : (
           <Grid container spacing={8}>

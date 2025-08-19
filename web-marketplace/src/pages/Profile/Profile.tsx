@@ -230,7 +230,7 @@ export const Profile = (): JSX.Element => {
                               color="primary"
                               component={Link}
                               href={btn.link}
-                              className="text-[12px] md:text-[14px] py-[6px] px-[20px] md:py-[9px] md:px-[25px] whitespace-nowrap w-full md:w-auto"
+                              className="text-[12px] mb-30 md:mb-0 md:text-[14px] py-[6px] px-[20px] md:py-[9px] md:px-[25px] whitespace-nowrap w-full md:w-auto"
                             >
                               <CogIcon className="mr-10" />
                               {btn.label}
@@ -240,7 +240,7 @@ export const Profile = (): JSX.Element => {
                     </div>
                   </div>
                 </div>
-                <div className="pt-[30px] md:pt-[40px] pb-[85px] md:pb-[113px] w-full">
+                <div className="md:pt-40 pb-[85px] md:pb-[113px] w-full">
                   <Outlet />
                 </div>
               </Section>

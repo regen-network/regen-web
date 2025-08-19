@@ -10,6 +10,7 @@ export const DELETE_PROJECT = msg`Delete project`;
 export const UNTITLED_PROJECT = msg`Untitled Project`;
 export const VIEW = msg`View`;
 export const EDIT = msg`Edit`;
+export const TOGGLE_PROJECT_OPTIONS = msg`Toggle project options`;
 
 export const MOBILE_GRADIENT =
   'linear-gradient(to right, black 0%, black 75%, transparent 90%)';

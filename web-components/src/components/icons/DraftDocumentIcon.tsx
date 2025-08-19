@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useGradientId } from './hooks/useGradientId';
+
 interface DraftDocumentIconProps extends React.SVGProps<SVGSVGElement> {
   hasGradient?: boolean;
 }
@@ -8,9 +10,7 @@ export const DraftDocumentIcon = ({
   hasGradient = false,
   ...props
 }: DraftDocumentIconProps) => {
-  const gradientId = `draft-gradient-${Math.random()
-    .toString(36)
-    .substr(2, 9)}`;
+  const gradientId = useGradientId('draft_document_icon');
   const fillColor = hasGradient ? `url(#${gradientId})` : 'currentColor';
 
   return (

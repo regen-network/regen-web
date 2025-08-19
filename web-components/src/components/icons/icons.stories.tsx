@@ -70,7 +70,7 @@ import { LogOutIcon } from './LogOutIcon';
 import { MembersIcon } from './MembersIcon';
 import MinusIcon from './MinusIcon';
 import NoBasketTokensIcon from './NoBasketTokensIcon';
-import NoCreditClassesIcon from './NoCreditClassesIcon';
+import { NoCreditClassesIcon } from './NoCreditClassesIcon';
 import NoEcocreditsIcon from './NoEcocreditsIcon';
 import { NoProjectIcon } from './NoProjectIcon';
 import NoRetirementCertificatesIcon from './NoRetirementCertificatesIcon';
@@ -342,7 +342,10 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<PauseIcon height={'50px'} />} label="PauseIcon" />
     <LabeledIcon icon={<PlusIcon />} label="PlusIcon" />
     <LabeledIcon icon={<PointerIcon />} label="PointerIcon" />
-    <LabeledIcon icon={<PortfolioNoEcocredits />} label="PortfolioNoEcocredits" />
+    <LabeledIcon
+      icon={<PortfolioNoEcocredits />}
+      label="PortfolioNoEcocredits"
+    />
     <LabeledIcon icon={<PrefinanceIcon />} label="PrefinanceIcon" />
     <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
     <LabeledIcon icon={<PrivateFile />} label="PrivateFile" />

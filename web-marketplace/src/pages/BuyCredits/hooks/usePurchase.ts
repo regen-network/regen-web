@@ -498,18 +498,18 @@ export const usePurchase = ({
                         });
                       }
                     })();
-                  }
 
-                  // Reset BuyCredits forms
-                  handleSuccess();
-                  navigate(`/dashboard/portfolio`);
+                    // Reset BuyCredits forms
+                    handleSuccess();
+                    navigate(`/dashboard/portfolio`);
 
-                  if (shouldRefreshProfileData) {
-                    await reactQueryClient.invalidateQueries({
-                      queryKey: getAccountByIdQueryKey({
-                        id: activeAccount?.id,
-                      }),
-                    });
+                    if (shouldRefreshProfileData) {
+                      await reactQueryClient.invalidateQueries({
+                        queryKey: getAccountByIdQueryKey({
+                          id: activeAccount?.id,
+                        }),
+                      });
+                    }
                   }
                 },
               },

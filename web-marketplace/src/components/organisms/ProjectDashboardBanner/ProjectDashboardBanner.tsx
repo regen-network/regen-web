@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useMediaQuery, useTheme } from '@mui/material';
+import useClickOutside from 'utils/hooks/useClickOutside';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -28,6 +29,7 @@ import {
   MIGRATE_PROJECT,
   MOBILE_GRADIENT,
   REGISTER_WITH_PROTOCOL,
+  TOGGLE_PROJECT_OPTIONS,
   UNTITLED_PROJECT,
   VIEW,
 } from './ProjectDashboardBanner.constants';
@@ -49,26 +51,9 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
   );
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (!isMenuOpen) return;
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target as Node) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(event.target as Node)
-      ) {
-        setIsMenuOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isMenuOpen]);
+  const menuContainerRef = useClickOutside<HTMLDivElement>(() => {
+    setIsMenuOpen(false);
+  });
 
   const menuItems = [
     {
@@ -129,26 +114,42 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
         {/* Content */}
         <div className="relative z-10 p-20 pb-30 flex flex-col">
           {/* Top right menu button */}
-          <div className="flex justify-end">
+          <div className="flex justify-end" ref={menuContainerRef}>
             <div className="absolute top-4 right-4">
               <button
-                ref={buttonRef}
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={() => setIsMenuOpen(o => !o)}
+                aria-haspopup="true"
+                aria-expanded={isMenuOpen}
+                aria-label={_(TOGGLE_PROJECT_OPTIONS)}
                 className="flex items-center justify-center w-[39px] h-[39px] cursor-pointer rounded-full border-solid border-bc-neutral-500 bg-bc-neutral-700 p-5 transition-colors"
               >
                 <HorizontalDotsIcon sx={{ color: 'white' }} />
               </button>
             </div>
+            {isMenuOpen && (
+              <div className="absolute top-[60px] right-[20px] w-[199px] bg-bc-neutral-100 rounded-md shadow-lg z-50 p-15 pr-10 flex flex-col gap-10">
+                {menuItems.map((item, idx) => (
+                  <button
+                    key={idx}
+                    className={`flex items-center justify-start p-0 gap-10 w-full bg-transparent border-none text-left text-[16px] ${item.color} hover:bg-gray-100 cursor-pointer font-sans`}
+                    onClick={item.action}
+                  >
+                    {item.icon}
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Project info and buttons */}
-          <div className="flex flex-col justify-end max-w-[251px] md:max-w-[596px]">
-            <Title className="text-bc-neutral-0 mb-2 text-[21px] md:text-[32px] line-clamp-2 mb-20">
+          <div className="flex flex-col justify-end max-w-[70%]">
+            <Title className="text-bc-neutral-0 mb-2 text-[21px] md:text-[32px] line-clamp-2 mb-20 text-ellipsis [overflow-wrap:anywhere]">
               {projectName}
             </Title>
 
             {/* Address + area */}
-            <div className="mb-20 max-h-[40px] max-w-[251px] md:max-w-[596px]">
+            <div className="mb-20 max-h-[40px] max-w-[251px] md:max-w-[596px] text-ellipsis [overflow-wrap:anywhere]">
               <ProjectPlaceInfo
                 place={truncatedPlace}
                 area={project.area}
@@ -185,23 +186,7 @@ const ProjectDashboardBanner: React.FC<ProjectBannerProps> = ({
         </div>
       </div>
 
-      {isMenuOpen && (
-        <div
-          ref={menuRef}
-          className="absolute top-[60px] right-[20px] w-[199px] bg-bc-neutral-100 rounded-md shadow-lg z-50 p-15 pr-10 flex flex-col gap-10"
-        >
-          {menuItems.map((item, idx) => (
-            <button
-              key={idx}
-              className={`flex items-center justify-start p-0 gap-10 w-full bg-transparent border-none text-left text-[16px] ${item.color} hover:bg-gray-100 cursor-pointer font-sans`}
-              onClick={item.action}
-            >
-              {item.icon}
-              {item.label}
-            </button>
-          ))}
-        </div>
-      )}
+      {/* menu moved inside positioned container above */}
     </div>
   );
 };

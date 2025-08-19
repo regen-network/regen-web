@@ -3,6 +3,8 @@ import { SxProps, Theme } from '@mui/material';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import { makeStyles } from 'tss-react/mui';
 
+import { useGradientId } from './hooks/useGradientId';
+
 export type Direction =
   | 'next'
   | 'prev'
@@ -63,9 +65,7 @@ export default function ArrowDownIcon({
   const rotate: string = directionRotate[direction];
   const { classes, cx } = useStyles({ rotate });
 
-  const gradientId = `arrow-gradient-${Math.random()
-    .toString(36)
-    .substr(2, 9)}`;
+  const gradientId = useGradientId('arrow_down_icon');
   const fillColor = hasGradient ? `url(#${gradientId})` : color;
 
   return (

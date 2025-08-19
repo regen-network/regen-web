@@ -434,7 +434,7 @@ export const usePurchase = ({
                   track<BuyExtendedEvent>('buySuccess', trackingEvent);
 
                   // In case of retirement, it's handled in useFetchRetirementForPurchase
-                  if (!retiring)
+                  if (!retiring) {
                     if (email && token && _txHash) {
                       // Send purchase confirmation if email provided
                       await sendPurchaseConfirmationEmail({
@@ -452,63 +452,64 @@ export const usePurchase = ({
                       });
                     }
 
-                  setProcessingModalAtom(atom => void (atom.open = false));
-                  setTxBuySuccessfulModalAtom(atom => {
-                    atom.open = true;
-                    atom.cardItems = getCardItems({
-                      retiring,
-                      creditsAmount,
-                      currencyAmount,
-                      project,
-                      currency,
-                      displayDenom,
+                    setProcessingModalAtom(atom => void (atom.open = false));
+                    setTxBuySuccessfulModalAtom(atom => {
+                      atom.open = true;
+                      atom.cardItems = getCardItems({
+                        retiring,
+                        creditsAmount,
+                        currencyAmount,
+                        project,
+                        currency,
+                        displayDenom,
+                      });
+                      atom.buttonTitle = _(VIEW_PORTFOLIO);
+                      atom.onButtonClick = () =>
+                        setTxBuySuccessfulModalAtom(
+                          atom => void (atom.open = false),
+                        );
+                      atom.txHash = _txHash;
+                      atom.steps = getSteps(paymentOption, retiring);
+                      atom.description = email
+                        ? `${_(EMAIL_RECEIPT)} ${email}`
+                        : undefined;
                     });
-                    atom.buttonTitle = _(VIEW_PORTFOLIO);
-                    atom.onButtonClick = () =>
-                      setTxBuySuccessfulModalAtom(
-                        atom => void (atom.open = false),
-                      );
-                    atom.txHash = _txHash;
-                    atom.steps = getSteps(paymentOption, retiring);
-                    atom.description = email
-                      ? `${_(EMAIL_RECEIPT)} ${email}`
-                      : undefined;
-                  });
 
-                  await reactQueryClient.invalidateQueries({
-                    queryKey: [SELL_ORDERS_EXTENTED_KEY],
-                  });
-                  // Reload crypto orders and balances
-                  if (wallet?.address) {
-                    await reactQueryClient.invalidateQueries(
-                      getOrdersByBuyerAddressKey(wallet?.address),
-                    );
                     await reactQueryClient.invalidateQueries({
-                      queryKey: ['balances', wallet?.address], // invalidate all query pages
+                      queryKey: [SELL_ORDERS_EXTENTED_KEY],
                     });
+                    // Reload crypto orders and balances
+                    if (wallet?.address) {
+                      await reactQueryClient.invalidateQueries(
+                        getOrdersByBuyerAddressKey(wallet?.address),
+                      );
+                      await reactQueryClient.invalidateQueries({
+                        queryKey: ['balances', wallet?.address], // invalidate all query pages
+                      });
 
-                    // After tx success the ledger may not reflect updated balances immediately.
-                    // Briefly re-invalidate the balances query to pull the new tradable amounts as soon as they're visible,
-                    // so the portfolio updates behind the success modal without requiring a manual reload.
-                    (async () => {
-                      for (let i = 0; i < 4; i++) {
-                        await new Promise(r => setTimeout(r, 1000));
+                      // After tx success the ledger may not reflect updated balances immediately.
+                      // Briefly re-invalidate the balances query to pull the new tradable amounts as soon as they're visible,
+                      // so the portfolio updates behind the success modal without requiring a manual reload.
+                      (async () => {
+                        for (let i = 0; i < 4; i++) {
+                          await new Promise(r => setTimeout(r, 1000));
+                          await reactQueryClient.invalidateQueries({
+                            queryKey: ['balances', wallet.address],
+                          });
+                        }
+                      })();
+
+                      // Reset BuyCredits forms
+                      handleSuccess();
+                      navigate(`/dashboard/portfolio`);
+
+                      if (shouldRefreshProfileData) {
                         await reactQueryClient.invalidateQueries({
-                          queryKey: ['balances', wallet.address],
+                          queryKey: getAccountByIdQueryKey({
+                            id: activeAccount?.id,
+                          }),
                         });
                       }
-                    })();
-
-                    // Reset BuyCredits forms
-                    handleSuccess();
-                    navigate(`/dashboard/portfolio`);
-
-                    if (shouldRefreshProfileData) {
-                      await reactQueryClient.invalidateQueries({
-                        queryKey: getAccountByIdQueryKey({
-                          id: activeAccount?.id,
-                        }),
-                      });
                     }
                   }
                 },

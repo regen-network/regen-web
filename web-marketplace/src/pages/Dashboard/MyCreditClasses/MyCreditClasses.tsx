@@ -41,39 +41,40 @@ export const MyCreditClasses = (): JSX.Element => {
         isLoading={isLoadingCreditClasses}
         sx={{ display: 'flex', justifyContent: 'center' }}
       >
-        {hasNoCreditClasses ? (
-          <EmptyState
-            message={_(NO_CREDIT_CLASSES_MESSAGE)}
-            icon={<NoCreditClassesIcon />}
-            sx={{ backgroundColor: 'info.light' }}
-          >
-            {/* <OutlinedButton
-              startIcon={<PlusIcon className="text-brand-400" />}
-              component={Link}
-              to="/credit-classes/create"
-            >
-              <Trans>create credit class</Trans>
-            </OutlinedButton> */}
-          </EmptyState>
-        ) : (
-          <Grid container spacing={8}>
-            {creditClasses.map(creditClass => (
-              <Grid item xs={12} md={6} lg={4} key={creditClass.id}>
-                <CreditClassGridCard
-                  bodyTexts={bodyTexts}
-                  {...creditClass}
-                  button={{
-                    text: _(MY_CREDIT_CLASS_BUTTON),
-                    startIcon: <EditIcon sx={{ color: 'grey.100' }} />,
-                    disabled: true,
-                  }}
-                  href={`/credit-classes/${creditClass.id}`}
-                  LinkComponent={LinkComponent as LinkComponentType}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        )}
+        <>
+          {hasNoCreditClasses ? (
+            <EmptyState
+              message={_(NO_CREDIT_CLASSES_MESSAGE)}
+              icon={<NoCreditClassesIcon />}
+              sx={{ backgroundColor: 'info.light' }}
+            />
+          ) : (
+            /* <OutlinedButton
+                startIcon={<PlusIcon className="text-brand-400" />}
+                component={Link}
+                to="/credit-classes/create"
+              >
+                <Trans>create credit class</Trans>
+              </OutlinedButton> */
+            <Grid container spacing={8}>
+              {creditClasses.map(creditClass => (
+                <Grid item xs={12} md={6} lg={4} key={creditClass.id}>
+                  <CreditClassGridCard
+                    bodyTexts={bodyTexts}
+                    {...creditClass}
+                    button={{
+                      text: _(MY_CREDIT_CLASS_BUTTON),
+                      startIcon: <EditIcon sx={{ color: 'grey.100' }} />,
+                      disabled: true,
+                    }}
+                    href={`/credit-classes/${creditClass.id}`}
+                    LinkComponent={LinkComponent as LinkComponentType}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </>
       </WithLoader>
     </div>
   );

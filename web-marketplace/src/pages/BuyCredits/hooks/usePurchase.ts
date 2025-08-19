@@ -35,12 +35,12 @@ import { BuyExtendedEvent, BuyFailureEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useFetchSellOrders } from 'components/organisms/UserSellOrders/hooks/useFetchSellOrders';
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { VIEW_PORTFOLIO } from 'components/organisms/BasketOverview/BasketOverview.constants';
 import { BuyWarningModalContent } from 'components/organisms/BuyWarningModal/BuyWarningModal.types';
+import { useFetchSellOrders } from 'components/organisms/UserSellOrders/hooks/useFetchSellOrders';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useMsgClient } from 'hooks';
 
@@ -428,9 +428,9 @@ export const usePurchase = ({
                   track<BuyExtendedEvent>('buySuccess', trackingEvent);
 
                   // In case of retirement, it's handled in useFetchRetirementForPurchase
-                  if (!retiring) {
-                    // Send purchase confirmation if email provided
+                  if (!retiring)
                     if (email && token && _txHash) {
+                      // Send purchase confirmation if email provided
                       await sendPurchaseConfirmationEmail({
                         currency,
                         retiring,
@@ -446,53 +446,64 @@ export const usePurchase = ({
                       });
                     }
 
-                    setProcessingModalAtom(atom => void (atom.open = false));
-                    setTxBuySuccessfulModalAtom(atom => {
-                      atom.open = true;
-                      atom.cardItems = getCardItems({
-                        retiring,
-                        creditsAmount,
-                        currencyAmount,
-                        project,
-                        currency,
-                        displayDenom,
-                      });
-                      atom.buttonTitle = _(VIEW_PORTFOLIO);
-                      atom.onButtonClick = () =>
-                        setTxBuySuccessfulModalAtom(
-                          atom => void (atom.open = false),
-                        );
-                      atom.txHash = _txHash;
-                      atom.steps = getSteps(paymentOption, retiring);
-                      atom.description = email
-                        ? `${_(EMAIL_RECEIPT)} ${email}`
-                        : undefined;
+                  setProcessingModalAtom(atom => void (atom.open = false));
+                  setTxBuySuccessfulModalAtom(atom => {
+                    atom.open = true;
+                    atom.cardItems = getCardItems({
+                      retiring,
+                      creditsAmount,
+                      currencyAmount,
+                      project,
+                      currency,
+                      displayDenom,
                     });
-
-                    await reactQueryClient.invalidateQueries({
-                      queryKey: [SELL_ORDERS_EXTENTED_KEY],
-                    });
-                    // Reload crypto orders and balances
-                    if (wallet?.address) {
-                      await reactQueryClient.invalidateQueries(
-                        getOrdersByBuyerAddressKey(wallet?.address),
+                    atom.buttonTitle = _(VIEW_PORTFOLIO);
+                    atom.onButtonClick = () =>
+                      setTxBuySuccessfulModalAtom(
+                        atom => void (atom.open = false),
                       );
-                      await reactQueryClient.invalidateQueries({
-                        queryKey: ['balances', wallet?.address], // invalidate all query pages
-                      });
-                    }
+                    atom.txHash = _txHash;
+                    atom.steps = getSteps(paymentOption, retiring);
+                    atom.description = email
+                      ? `${_(EMAIL_RECEIPT)} ${email}`
+                      : undefined;
+                  });
 
-                    // Reset BuyCredits forms
-                    handleSuccess();
-                    navigate(`/dashboard/portfolio`);
+                  await reactQueryClient.invalidateQueries({
+                    queryKey: [SELL_ORDERS_EXTENTED_KEY],
+                  });
+                  // Reload crypto orders and balances
+                  if (wallet?.address) {
+                    await reactQueryClient.invalidateQueries(
+                      getOrdersByBuyerAddressKey(wallet?.address),
+                    );
+                    await reactQueryClient.invalidateQueries({
+                      queryKey: ['balances', wallet?.address], // invalidate all query pages
+                    });
 
-                    if (shouldRefreshProfileData) {
-                      await reactQueryClient.invalidateQueries({
-                        queryKey: getAccountByIdQueryKey({
-                          id: activeAccount?.id,
-                        }),
-                      });
-                    }
+                    // After tx success the ledger may not reflect updated balances immediately.
+                    // Briefly re-invalidate the balances query to pull the new tradable amounts as soon as they're visible,
+                    // so the portfolio updates behind the success modal without requiring a manual reload.
+                    (async () => {
+                      for (let i = 0; i < 4; i++) {
+                        await new Promise(r => setTimeout(r, 1000));
+                        await reactQueryClient.invalidateQueries({
+                          queryKey: ['balances', wallet.address],
+                        });
+                      }
+                    })();
+                  }
+
+                  // Reset BuyCredits forms
+                  handleSuccess();
+                  navigate(`/dashboard/portfolio`);
+
+                  if (shouldRefreshProfileData) {
+                    await reactQueryClient.invalidateQueries({
+                      queryKey: getAccountByIdQueryKey({
+                        id: activeAccount?.id,
+                      }),
+                    });
                   }
                 },
               },

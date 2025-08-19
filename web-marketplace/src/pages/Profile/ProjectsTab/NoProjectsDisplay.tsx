@@ -18,7 +18,7 @@ export const NoProjectsDisplay = ({
   return (
     <div
       className={`flex flex-col justify-center items-center rounded-[10px]
-                  h-[321px] px-5 gap-[15px] md:py-[40px] -mt-[30px] md:mt-0
+                  h-[321px] px-5 gap-15 pt-0 md:py-40 md:mt-0
                   md:px-[263px] md:w-auto md:h-auto md:gap-[10px] ${className}`}
       style={{
         border: '1px solid var(--card-standard-stroke, #D2D5D9)',

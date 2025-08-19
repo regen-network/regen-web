@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import Grid from '@mui/material/Grid';
 import { useProjectEditContext } from 'legacy-pages';
+import { useRouter } from 'next/navigation';
 import { makeStyles } from 'tss-react/mui';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
@@ -57,7 +58,7 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
   const { _ } = useLingui();
   const { classes: styles } = useStyles();
   const { projectId } = useParams();
-  const navigate = useNavigate();
+  const router = useRouter();
   const { isDirtyRef, setIsWarningModalOpen } = useProjectEditContext();
   const projectCardButtons = useMemo(() => getProjectCardButtonMapping(_), [_]);
 
@@ -72,7 +73,7 @@ const EditProjectPageFooter: React.FC<React.PropsWithChildren<Props>> = ({
               if (isDirtyRef.current) {
                 setIsWarningModalOpen(path);
               } else {
-                navigate(path);
+                router.push(path);
               }
             }}
           >

@@ -1,32 +1,33 @@
 import { useEffect, useState } from 'react';
-import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
+import { useLoaderData, useParams } from 'react-router-dom';
 import { useAtom, useAtomValue } from 'jotai';
 import NotFoundPage from 'legacy-pages/NotFound';
+import { useRouter } from 'next/navigation';
 
 import { Loading } from 'web-components/src/components/loading';
 
 import WithLoader from 'components/atoms/WithLoader';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import { useGetProject } from 'components/templates/ProjectDetails/hooks/useGetProject';
+import { useNavigateToSlug } from 'components/templates/ProjectDetails/hooks/useNavigateToSlug';
 
 import { cardDetailsMissingAtom, paymentOptionAtom } from './BuyCredits.atoms';
 import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsForm } from './BuyCredits.Form';
 import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
 import { getFormModel } from './BuyCredits.utils';
-import { useNavigateToSlug } from './hooks/useNavigateToSlug';
 import { useSummarizePayment } from './hooks/useSummarizePayment';
 
 export const BuyCredits = () => {
   const { projectId } = useParams();
-  const navigate = useNavigate();
+  const router = useRouter();
   const accountCanBuy = useLoaderData();
 
   useEffect(() => {
     if (!accountCanBuy) {
-      navigate(`/project/${projectId}`, { replace: true });
+      router.replace(`/project/${projectId}`);
     }
-  }, [navigate, projectId, accountCanBuy]);
+  }, [router, projectId, accountCanBuy]);
 
   const {
     loadingSanityProject,

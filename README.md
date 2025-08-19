@@ -397,3 +397,5 @@ Then you will be able to run any commands, i.e. the build:
 ```sh
 /opt/build-bin/build bun run build
 ```
+
+**Note:** In some instances we had experienced issues when buiding the Next.js app in Netlify because the CI build produces a serverless function that in some cases exceeds the 250 MB limit, even though the local build does not. For detailed debugging instructions, please refer to the [netlify-plugin-upload-function-bundle README](./web-marketplace/scripts/netlify-plugin-upload-function-bundle/README.md).

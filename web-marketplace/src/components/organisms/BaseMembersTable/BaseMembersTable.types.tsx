@@ -13,7 +13,7 @@ export interface BaseTableProps<T extends BaseUser> {
   users: T[];
   currentUserRole: string;
   onInvite?: () => void;
-  onRoleChange?: (userId: string, newRole: any) => void;
+  onRoleChange?: (userId: string, newRole: ProjectRole) => void;
   onRemove?: (userId: string) => void;
   onVisibilityChange?: (userId: string, visible: boolean) => void;
   title: string;

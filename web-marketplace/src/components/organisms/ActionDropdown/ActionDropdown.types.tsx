@@ -1,3 +1,4 @@
+import { TranslatorType } from '../../../lib/i18n/i18n.types';
 import { Context } from '../BaseMembersTable/BaseMembersTable.types';
 
 export type ActionItem = {
@@ -15,5 +16,5 @@ export interface GetActionItemsParams {
   onRemove: () => void;
   onEditOrgRole?: () => void;
   navigate: (path: string) => void;
-  _: (message: any) => string;
+  _: TranslatorType;
 }

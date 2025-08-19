@@ -1,14 +1,14 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react';
+import useClickOutside from 'utils/hooks/useClickOutside';
 
 import CheckIcon from 'web-components/src/components/icons/CheckIcon';
 import DropdownIcon from 'web-components/src/components/icons/DropdownIcon';
+import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
+import { Body } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import {
-  ROLE_ADMIN,
-  ROLE_OWNER,
-} from '../ActionDropdown/ActionDropdown.constants';
+import { ROLE_OWNER } from '../ActionDropdown/ActionDropdown.constants';
 import { BaseRoleDropdownProps } from '../BaseMembersTable/BaseMembersTable.types';
 import { SELECT_ROLE_ARIA_LABEL } from '../ProjectCollaborators/ProjectCollaborators.constants';
 import {
@@ -18,8 +18,6 @@ import {
   OWNER_CAN_EDIT_SELF,
   ROLE_HIERARCHY,
 } from './BaseRoleDropdown.constants';
-import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
-import { Body } from 'web-components/src/components/typography';
 
 export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   role,
@@ -31,8 +29,10 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
 }) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const roleLabel = roleOptions.find(option => option.key === role)?.label
+  const ref = useClickOutside<HTMLDivElement>(() => {
+    if (isOpen) setIsOpen(false);
+  });
+  const roleLabel = roleOptions.find(option => option.key === role)?.label;
 
   const isCurrentUserOwner = currentUserRole === ROLE_OWNER;
   const filteredRoleOptions = useMemo(
@@ -43,25 +43,17 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
     [isCurrentUserOwner, roleOptions],
   );
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const handle = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handle);
-    return () => document.removeEventListener('mousedown', handle);
-  }, [isOpen]);
-
   const isOwner = role === ROLE_OWNER;
-  const tooltipTitle = disabled
-    ? _(OWNER_ADMIN_CAN_EDIT)
-    : isOwner
-    ? isCurrentUserOwner
-      ? _(MUST_ASSIGN_NEW_OWNER)
-      : _(OWNER_CAN_EDIT_SELF)
-    : undefined;
+  const getTooltipTitle = () => {
+    if (disabled) return _(OWNER_ADMIN_CAN_EDIT);
+    if (isOwner) {
+      return isCurrentUserOwner
+        ? _(MUST_ASSIGN_NEW_OWNER)
+        : _(OWNER_CAN_EDIT_SELF);
+    }
+    return undefined;
+  };
+  const tooltipTitle = getTooltipTitle();
   const isDropdownDisabled = disabled || isOwner;
 
   const toggle = () => {
@@ -77,7 +69,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   return (
     <div ref={ref} className="relative w-full font-sans">
       {isDropdownDisabled ? (
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 justify-center">
           <Body className="capitalize text-sc-text-header" size="sm">
             {roleLabel}
           </Body>

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useApolloClient } from '@apollo/client';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
@@ -7,6 +7,7 @@ import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/system';
 import { useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import { useRouter } from 'next/navigation';
 
 import OutlinedButton from 'web-components/src/components/buttons/OutlinedButton';
 import OnBoardingCard from 'web-components/src/components/cards/OnBoardingCard';
@@ -33,7 +34,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
   const { deliverTxResponse } = useCreateProjectContext();
   const { projectId } = useParams();
-  const navigate = useNavigate();
+  const router = useRouter();
   const graphqlClient = useApolloClient();
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const { data, isLoading } = useQuery(
@@ -138,7 +139,7 @@ const ProjectFinished: React.FC<React.PropsWithChildren<unknown>> = () => {
         <OutlinedButton
           sx={{ margin: '0 auto' }}
           role="link"
-          onClick={() => navigate(`/project/${currentProjectId}`)}
+          onClick={() => router.push(`/project/${currentProjectId}`)}
         >
           {buttons.view.text}
         </OutlinedButton>

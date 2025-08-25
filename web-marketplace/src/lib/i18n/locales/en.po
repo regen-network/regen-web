@@ -26,6 +26,8 @@ msgstr ""
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 #~ msgid " Exit to homepage "
 #~ msgstr ""
@@ -1312,7 +1314,7 @@ msgid "Create a project without a credit class"
 msgstr ""
 
 #: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.Table.tsx:72
-#: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.tsx:49
+#: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.tsx:48
 msgid "create credit batch"
 msgstr ""
 
@@ -1320,6 +1322,10 @@ msgstr ""
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/Result.tsx:220
 #: src/features/ecocredit/CreateBatchBySteps/form-model.ts:58
 msgid "Create Credit Batch"
+msgstr ""
+
+#: src/pages/Dashboard/MyCreditClasses/MyCreditClasses.tsx:55
+msgid "create credit class"
 msgstr ""
 
 #: src/components/organisms/CreditClassForms/CreateCreditClassForm.tsx:28
@@ -1393,13 +1399,13 @@ msgstr ""
 msgid "Credit Batch Info"
 msgstr ""
 
-#: src/components/organisms/CreditBatches/CreditBatches.tsx:127
+#: src/components/organisms/CreditBatches/CreditBatches.tsx:104
 msgid "credit batch table"
 msgstr ""
 
-#: src/components/organisms/CreditBatches/CreditBatches.tsx:243
+#: src/components/organisms/CreditBatches/CreditBatches.tsx:220
 #: src/components/organisms/CreditBatchesSection/CreditBatchesSection.tsx:24
-#: src/pages/Profile/Profile.tsx:105
+#: src/pages/Profile/Profile.tsx:111
 msgid "Credit Batches"
 msgstr ""
 
@@ -1474,7 +1480,7 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:30
 #: src/pages/Home/Home.tsx:180
-#: src/pages/Profile/Profile.tsx:99
+#: src/pages/Profile/Profile.tsx:105
 msgid "Credit Classes"
 msgstr ""
 
@@ -2712,11 +2718,11 @@ msgstr ""
 msgid "Make the location data private"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:149
+#: src/pages/Profile/Profile.tsx:156
 msgid "Manage Credit Batches"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:144
+#: src/pages/Profile/Profile.tsx:151
 msgid "Manage Credit Classes"
 msgstr ""
 
@@ -2728,7 +2734,7 @@ msgstr ""
 msgid "Manage organization"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:134
+#: src/pages/Profile/Profile.tsx:141
 msgid "Manage Portfolio"
 msgstr ""
 
@@ -2744,7 +2750,7 @@ msgstr ""
 msgid "Manage projects"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:139
+#: src/pages/Profile/Profile.tsx:146
 msgid "Manage Projects"
 msgstr ""
 
@@ -3006,8 +3012,8 @@ msgid "No credit batches to display"
 msgstr ""
 
 #: src/components/organisms/CreditBatches/CreditBatches.tsx:107
-msgid "No credits issued"
-msgstr ""
+#~ msgid "No credits issued"
+#~ msgstr ""
 
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:58
 #: src/components/organisms/EcocreditsTable.tsx:64
@@ -3372,8 +3378,8 @@ msgid "Please wait while transaction processes"
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:45
-#: src/pages/Dashboard/Dashboard.constants.tsx:14
-#: src/pages/Profile/Profile.tsx:82
+#: src/pages/Dashboard/Dashboard.constants.tsx:13
+#: src/pages/Profile/Profile.tsx:88
 msgid "Portfolio"
 msgstr ""
 
@@ -3754,7 +3760,7 @@ msgstr ""
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:39
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:26
 #: src/pages/CreditClassDetails/CreditClassDetails.Projects.tsx:40
-#: src/pages/Profile/Profile.tsx:90
+#: src/pages/Profile/Profile.tsx:96
 msgid "Projects"
 msgstr ""
 
@@ -3770,7 +3776,7 @@ msgstr ""
 msgid "Public profile"
 msgstr ""
 
-#: src/pages/Profile/Profile.tsx:211
+#: src/pages/Profile/Profile.tsx:218
 msgid "public profile tabs"
 msgstr ""
 
@@ -5468,6 +5474,10 @@ msgstr ""
 
 #: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:59
 msgid "You have no tradable credits that can be sold."
+msgstr ""
+
+#: src/pages/Dashboard/MyCreditClasses/MyCreditClasses.constants.ts:4
+msgid "You have not created any credit classes yet"
 msgstr ""
 
 #: src/pages/Dashboard/MyCreditBatches/MyCreditBatches.constants.ts:3

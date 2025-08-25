@@ -11,6 +11,7 @@ export type Member = {
   visible: boolean;
   isCurrentUser?: boolean;
   hasWalletAddress: boolean;
+  invited?: boolean;
 };
 
 export type VisibilitySwitchProps = {

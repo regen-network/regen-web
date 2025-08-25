@@ -26,6 +26,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   roleOptions,
   currentUserRole,
   hasWalletAddress,
+  placeholder,
 }) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
@@ -71,7 +72,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
       {isDropdownDisabled ? (
         <div className="flex items-center gap-5 justify-center">
           <Body className="capitalize text-sc-text-header" size="sm">
-            {roleLabel}
+            {displayLabel}
           </Body>
           {tooltipTitle && (
             <QuestionMarkTooltip
@@ -91,7 +92,14 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
           )}
         >
           <div className="flex items-center gap-2">
-            <span className="capitalize font-sans">{roleLabel}</span>
+            <span
+              className={cn(
+                'font-sans',
+                roleLabel ? 'capitalize' : 'text-bc-neutral-400',
+              )}
+            >
+              {displayLabel}
+            </span>
           </div>
           <DropdownIcon className="w-4 h-4" />
         </button>

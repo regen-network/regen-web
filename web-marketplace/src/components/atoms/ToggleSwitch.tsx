@@ -2,28 +2,6 @@ import React, { useId } from 'react';
 
 import { cn } from 'web-components/src/utils/styles/cn';
 
-/* eslint-disable lingui/no-unlocalized-strings */
-const SIZE_CONFIG = {
-  sm: {
-    height: 'h-22',
-    knob: 'w-16 h-16',
-    font: 'text-xs',
-    paddingX: { on: 'pl-3 pr-2', off: 'pl-2 pr-3' },
-    paddingY: 'py-2',
-    gap: 'gap-4',
-    knobMargin: { on: 'ml-3', off: 'mr-3' },
-  },
-  md: {
-    height: 'h-28',
-    knob: 'w-20 h-20',
-    font: 'text-[13.3333px]',
-    paddingX: { on: 'pl-5 pr-3', off: 'pl-3 pr-5' },
-    paddingY: 'py-3',
-    gap: 'gap-5',
-    knobMargin: { on: 'ml-4', off: 'mr-4' },
-  },
-} as const;
-
 export interface ToggleSwitchProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
@@ -32,10 +10,9 @@ export interface ToggleSwitchProps {
   offLabel?: React.ReactNode;
   ariaLabel?: string;
   className?: string;
-  size?: 'sm' | 'md';
 }
 
-export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
+export const ToggleSwitch = ({
   checked,
   onChange,
   disabled = false,
@@ -43,31 +20,18 @@ export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
   offLabel,
   ariaLabel,
   className,
-  size = 'md',
-}) => {
+}: ToggleSwitchProps) => {
   const id = useId();
-  const cfg = SIZE_CONFIG[size];
-  const paddingX = checked ? cfg.paddingX.on : cfg.paddingX.off;
-  const {
-    height,
-    knob: knobSize,
-    font: fontSize,
-    paddingY,
-    gap,
-    knobMargin,
-  } = cfg;
 
   return (
     <label
       htmlFor={id}
       className={cn(
-        'inline-flex items-center rounded-full font-bold font-sans leading-none transition-colors duration-200 cursor-pointer text-bc-neutral-0 select-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ac-primary-500',
-        gap,
-        height,
-        checked ? 'bg-ac-primary-500' : 'bg-bc-neutral-700',
+        'inline-flex items-center rounded-full h-28 py-3 gap-3 font-bold font-sans leading-none transition-colors duration-200 cursor-pointer text-bc-neutral-0 select-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ac-primary-500',
+        checked
+          ? 'bg-ac-primary-500 pl-5 pr-3'
+          : 'bg-bc-neutral-700 pl-3 pr-[8px]',
         disabled && 'bg-bc-neutral-300 cursor-not-allowed',
-        paddingX,
-        paddingY,
         className,
       )}
     >
@@ -82,29 +46,20 @@ export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
         disabled={disabled}
         onChange={e => !disabled && onChange(e.target.checked)}
       />
-      {checked ? (
-        <>
-          <span className={cn(fontSize)}>{onLabel}</span>
-          <span
-            className={cn(
-              knobSize,
-              'rounded-full bg-bc-neutral-0 shadow shrink-0',
-              knobMargin.on,
-            )}
-          />
-        </>
-      ) : (
-        <>
-          <span
-            className={cn(
-              knobSize,
-              'rounded-full bg-bc-neutral-0 shadow shrink-0',
-              knobMargin.off,
-            )}
-          />
-          <span className={cn(fontSize)}>{offLabel}</span>
-        </>
-      )}
+      <span
+        className={cn(
+          'w-20 h-20 rounded-full bg-bc-neutral-0 shadow shrink-0 transition-transform duration-200',
+          checked ? 'order-2 ml-4' : 'order-1 mr-4',
+        )}
+      />
+      <span
+        className={cn(
+          'text-[14px] w-[43px] block',
+          checked ? 'order-1' : 'order-2',
+        )}
+      >
+        {checked ? onLabel : offLabel}
+      </span>
     </label>
   );
 };

@@ -17,6 +17,7 @@ interface UserInfoProps<T extends BaseUser> {
   description?: string;
   organization?: string;
   children?: React.ReactNode;
+  onEditPersonalProfile?: () => void;
 }
 
 export const UserInfo = <T extends BaseUser>({
@@ -25,6 +26,7 @@ export const UserInfo = <T extends BaseUser>({
   description,
   organization,
   children,
+  onEditPersonalProfile,
 }: UserInfoProps<T>) => {
   const { _ } = useLingui();
   const isProjectContext = context === PROJECT_CONTEXT;
@@ -52,8 +54,9 @@ export const UserInfo = <T extends BaseUser>({
             {user.isCurrentUser && (
               <>
                 {` ${_(YOU)}`}
-                <a
-                  href="/dashboard/profile"
+                <button
+                  type="button"
+                  onClick={onEditPersonalProfile}
                   className="ml-1 p-0 bg-transparent border-none cursor-pointer flex items-center group"
                   aria-label={_(ACTION_EDIT_MY_PROFILE)}
                 >
@@ -61,7 +64,7 @@ export const UserInfo = <T extends BaseUser>({
                   <span className="hidden group-hover:flex text-[12px] tracking-[1px] font-[800] bg-transparent font-muli cursor-pointer text-ac-primary-500 ml-5">
                     {_(EDIT_PROFILE)}
                   </span>
-                </a>
+                </button>
               </>
             )}
           </span>

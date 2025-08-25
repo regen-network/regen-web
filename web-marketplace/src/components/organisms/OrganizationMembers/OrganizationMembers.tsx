@@ -79,12 +79,14 @@ export const OrganizationMembers = ({
               onChange={r => onUpdateRole(member.id, r)}
               currentUserRole={currentUserRole}
             />
-            <VisibilitySwitch
-              checked={member.visible}
-              disabled={!canAdmin}
-              isCurrentUser={member.isCurrentUser}
-              onChange={v => onUpdateVisibility(member.id, v)}
-            />
+            <div className="w-[122px] flex justify-end">
+              <VisibilitySwitch
+                checked={member.visible}
+                disabled={!canAdmin}
+                isCurrentUser={member.isCurrentUser}
+                onChange={v => onUpdateVisibility(member.id, v)}
+              />
+            </div>
           </div>
 
           {/* Desktop columns */}
@@ -97,7 +99,7 @@ export const OrganizationMembers = ({
               currentUserRole={currentUserRole}
             />
           </div>
-          <div className="hidden xl:flex w-[150px] items-center">
+          <div className="hidden xl:flex md:w-[150px] items-center">
             <VisibilitySwitch
               checked={member.visible}
               disabled={!canAdmin}

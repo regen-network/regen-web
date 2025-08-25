@@ -35,12 +35,12 @@ import { BuyExtendedEvent, BuyFailureEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useFetchSellOrders } from 'components/organisms/UserSellOrders/hooks/useFetchSellOrders';
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { VIEW_PORTFOLIO } from 'components/organisms/BasketOverview/BasketOverview.constants';
 import { BuyWarningModalContent } from 'components/organisms/BuyWarningModal/BuyWarningModal.types';
+import { useFetchSellOrders } from 'components/organisms/UserSellOrders/hooks/useFetchSellOrders';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useMsgClient } from 'hooks';
 
@@ -429,8 +429,8 @@ export const usePurchase = ({
 
                   // In case of retirement, it's handled in useFetchRetirementForPurchase
                   if (!retiring) {
-                    // Send purchase confirmation if email provided
                     if (email && token && _txHash) {
+                      // Send purchase confirmation if email provided
                       await sendPurchaseConfirmationEmail({
                         currency,
                         retiring,
@@ -480,18 +480,30 @@ export const usePurchase = ({
                       await reactQueryClient.invalidateQueries({
                         queryKey: ['balances', wallet?.address], // invalidate all query pages
                       });
-                    }
 
-                    // Reset BuyCredits forms
-                    handleSuccess();
-                    navigate(`/dashboard/portfolio`);
+                      // After tx success the ledger may not reflect updated balances immediately.
+                      // Briefly re-invalidate the balances query to pull the new tradable amounts as soon as they're visible,
+                      // so the portfolio updates behind the success modal without requiring a manual reload.
+                      (async () => {
+                        for (let i = 0; i < 4; i++) {
+                          await new Promise(r => setTimeout(r, 1000));
+                          await reactQueryClient.invalidateQueries({
+                            queryKey: ['balances', wallet.address],
+                          });
+                        }
+                      })();
 
-                    if (shouldRefreshProfileData) {
-                      await reactQueryClient.invalidateQueries({
-                        queryKey: getAccountByIdQueryKey({
-                          id: activeAccount?.id,
-                        }),
-                      });
+                      // Reset BuyCredits forms
+                      handleSuccess();
+                      navigate(`/dashboard/portfolio`);
+
+                      if (shouldRefreshProfileData) {
+                        await reactQueryClient.invalidateQueries({
+                          queryKey: getAccountByIdQueryKey({
+                            id: activeAccount?.id,
+                          }),
+                        });
+                      }
                     }
                   }
                 },

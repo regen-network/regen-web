@@ -60,6 +60,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const content = allHomePageData?.allHomePage?.[0];
 
   const heroSection = content?.heroSection;
+  console.log('🚀 ~ Home ~ heroSection:', heroSection?.icon?.image?.asset?.url);
   const projectsSection = content?.projectsSection;
   const creditClassesSection = content?.creditClassesSection;
   const seo = content?.seo;
@@ -147,19 +148,21 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
               sx={{ mt: { xs: 4, sm: 4 } }}
             />
           </Box>
-          <Box
-            sx={{
-              alignSelf: 'center',
-              maxWidth: ['252px', '560px'],
-            }}
-          >
-            <img
-              loading="lazy"
-              style={{ width: '100%' }}
-              src={heroSection?.icon?.image?.asset?.url || ''}
-              alt={heroSection?.icon?.imageAlt || 'icon'}
-            />
-          </Box>
+          {heroSection?.icon?.image?.asset?.url && (
+            <Box
+              sx={{
+                alignSelf: 'center',
+                maxWidth: ['252px', '560px'],
+              }}
+            >
+              <img
+                loading="lazy"
+                style={{ width: '100%' }}
+                src={heroSection.icon.image.asset.url}
+                alt={heroSection.icon.imageAlt || ''}
+              />
+            </Box>
+          )}
         </Box>
       </BackgroundImgSection>
 

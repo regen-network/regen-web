@@ -29,7 +29,6 @@ export const VisibilitySwitch: React.FC<VisibilitySwitchProps> = ({
       onChange={onChange}
       onLabel={onLabel}
       offLabel={offLabel}
-      size="md"
     />
   );
 

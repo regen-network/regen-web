@@ -21,6 +21,7 @@ import {
 import { MemberRoleDropdown } from './OrganizationMembers.RoleDropdown';
 import { Member } from './OrganizationMembers.types';
 import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
+import { PersonalProfileModal } from './PersonalProfileModal';
 import { RemoveMemberModal } from './RemoveMemberModal';
 
 type Props = {
@@ -46,6 +47,8 @@ export const OrganizationMembersInviteTable = ({
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [memberToRemove, setMemberToRemove] = useState<string | null>(null);
   const [bannerText, setBannerText] = useAtom(bannerTextAtom);
+  const [showPersonalProfileModal, setShowPersonalProfileModal] =
+    useState(false);
   const { _ } = useLingui();
   const currentUserRole: BaseMemberRole =
     members.find(member => member.isCurrentUser)?.role ?? ROLE_VIEWER;
@@ -88,6 +91,11 @@ export const OrganizationMembersInviteTable = ({
               context={ORGANIZATION_CONTEXT}
               description={member.title}
               organization={member.organization}
+              onEditPersonalProfile={() => {
+                if (member.isCurrentUser) {
+                  setShowPersonalProfileModal(true);
+                }
+              }}
             >
               {member.invited && !member.isCurrentUser && (
                 <ActionsDropdown
@@ -176,6 +184,15 @@ export const OrganizationMembersInviteTable = ({
           setShowRemoveModal(false);
           setMemberToRemove(null);
         }}
+      />
+      <PersonalProfileModal
+        open={showPersonalProfileModal}
+        onClose={() => setShowPersonalProfileModal(false)}
+        initialName={members.find(m => m.isCurrentUser)?.name || ''}
+        initialAvatar={members.find(m => m.isCurrentUser)?.avatar}
+        initialDescription={undefined}
+        initialTitle={members.find(m => m.isCurrentUser)?.title}
+        onSave={() => setShowPersonalProfileModal(false)}
       />
     </>
   );

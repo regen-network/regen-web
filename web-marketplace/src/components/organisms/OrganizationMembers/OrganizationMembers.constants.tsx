@@ -41,3 +41,13 @@ export const REMOVE_MEMBER_TITLE = msg`Are you sure you want to remove this memb
 export const REMOVE_MEMBER_DESCRIPTION = msg`Any posts they have created or signed will remain.`;
 export const REMOVE_CONFIRM_LABEL = msg`Yes, Remove`;
 export const MEMBER_REMOVED_BANNER = msg`Member has been removed from your organization.`;
+// Personal Profile Modal
+export const PERSONAL_PROFILE_TITLE = msg`Personal Profile`;
+export const PERSONAL_PROFILE_SUBHEADER = msg`Your name, profile image, and title will be visible on your organization profile if set to visible.`;
+export const TITLE_LABEL = msg`Title (optional)`;
+export const TITLE_SUBHEADER = msg`For example: farmer, CTO, CEO, data analyst, ranger, etc.`;
+export const SAVE_LABEL = msg`SAVE`;
+export const NAME_LABEL = msg`Name`;
+export const PROFILE_IMAGE_LABEL = msg`Profile Image`;
+export const CHANGE_LABEL = msg`Change`;
+export const DESCRIPTION_LABEL = msg`Description`;

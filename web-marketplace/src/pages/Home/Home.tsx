@@ -60,7 +60,6 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const content = allHomePageData?.allHomePage?.[0];
 
   const heroSection = content?.heroSection;
-  console.log('🚀 ~ Home ~ heroSection:', heroSection?.icon?.image?.asset?.url);
   const projectsSection = content?.projectsSection;
   const creditClassesSection = content?.creditClassesSection;
   const seo = content?.seo;

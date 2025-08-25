@@ -38,6 +38,10 @@ interface BaseMembersTableProps<T extends BaseUser> {
   additionalColumns?: string[];
   showMobileInvite?: boolean;
   currentUserRole: ProjectRole | BaseMemberRole;
+  hideHeader?: boolean;
+  hideDescription?: boolean;
+  hideHelpDocs?: boolean;
+  showActionsColumn?: boolean; // controls trailing placeholder column width (60px)
 }
 
 export const BaseMembersTable = <T extends BaseUser>({
@@ -53,6 +57,10 @@ export const BaseMembersTable = <T extends BaseUser>({
   additionalColumns = [],
   showMobileInvite = true,
   currentUserRole,
+  hideHeader = false,
+  hideDescription = false,
+  hideHelpDocs = false,
+  showActionsColumn = true,
 }: BaseMembersTableProps<T>) => {
   const { _ } = useLingui();
   const navigate = useNavigate();
@@ -68,42 +76,61 @@ export const BaseMembersTable = <T extends BaseUser>({
   return (
     <div className="w-full px-10 py-30 md:p-40 bg-bc-neutral-0 rounded-lg border border-solid border-bc-neutral-300">
       {/* Header row */}
-      <div className="flex justify-between items-center mb-10">
-        <Title variant="h4">
-          {title}{' '}
-          <span className="text-bc-neutral-400 font-normal">
-            ({users.length})
-          </span>
-        </Title>
+      {!hideHeader && (
+        <div className="flex justify-between items-center mb-10">
+          <Title variant="h4">
+            {title}{' '}
+            <span className="text-bc-neutral-400 font-normal">
+              ({users.length})
+            </span>
+          </Title>
 
-        {/* desktop / tablet invite */}
-        {canAdmin && (
+          {/* desktop / tablet invite */}
+          {canAdmin && (
+            <ContainedButton
+              className="hidden lg:flex w-[269px] h-[42px] text-[14px]"
+              onClick={onInvite}
+              startIcon={<EmailIcon />}
+            >
+              {inviteButtonText}
+            </ContainedButton>
+          )}
+        </div>
+      )}
+
+      {/* Invite button only when header is hidden */}
+      {hideHeader && canAdmin && (
+        <div className="flex justify-start items-center mb-40">
           <ContainedButton
-            className="hidden lg:flex w-[269px] h-[42px] text-[14px]"
+            className="w-[269px] h-[42px] text-[14px]"
             onClick={onInvite}
             startIcon={<EmailIcon />}
           >
             {inviteButtonText}
           </ContainedButton>
-        )}
-      </div>
+        </div>
+      )}
 
-      <p className="text-sc-text-paragraph mb-10 mt-0">{description}</p>
+      {!hideDescription && (
+        <p className="text-sc-text-paragraph mb-10 mt-0">{description}</p>
+      )}
 
-      <button
-        className="p-0 text-[12px] tracking-[1px] font-[800] mb-30 bg-transparent font-muli cursor-pointer text-ac-primary-500 border-none flex items-center gap-3 group"
-        onClick={() => navigate('/docs')}
-      >
-        {_(SEE_HELP_DOCS)}
-        <SmallArrowIcon
-          sx={{
-            height: '16px',
-            width: '16px',
-            transition: 'transform 0.2s',
-          }}
-          className="group-hover:translate-x-3 "
-        />
-      </button>
+      {!hideHelpDocs && (
+        <button
+          className="p-0 text-[12px] tracking-[1px] font-[800] mb-30 bg-transparent font-muli cursor-pointer text-ac-primary-500 border-none flex items-center gap-3 group"
+          onClick={() => navigate('/docs')}
+        >
+          {_(SEE_HELP_DOCS)}
+          <SmallArrowIcon
+            sx={{
+              height: '16px',
+              width: '16px',
+              transition: 'transform 0.2s',
+            }}
+            className="group-hover:translate-x-3 "
+          />
+        </button>
+      )}
 
       {/* mobile invite under subtitle */}
       {canAdmin && showMobileInvite && (
@@ -139,7 +166,7 @@ export const BaseMembersTable = <T extends BaseUser>({
             {column}
           </div>
         ))}
-        <div className="w-[60px]" />
+        {showActionsColumn && <div className="w-[60px]" />}
       </div>
 
       {/* Rows */}

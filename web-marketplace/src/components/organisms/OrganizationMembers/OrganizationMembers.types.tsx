@@ -11,4 +11,5 @@ export type Member = {
   visible: boolean;
   isCurrentUser?: boolean;
   hasWalletAddress: boolean;
+  invited?: boolean;
 };

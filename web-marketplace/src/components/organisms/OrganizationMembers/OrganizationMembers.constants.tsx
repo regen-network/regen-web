@@ -22,3 +22,22 @@ export const ROLE_EDITOR_DESCRIPTION = msg`Has full control of projects and cred
 
 export const ROLE_VIEWER_LABEL = msg`Viewer`;
 export const ROLE_VIEWER_DESCRIPTION = msg`Can view all data across all projects, even when private.`;
+
+// Invite Member Modal
+export const ADD_MEMBER_LABEL = msg`Add a member`;
+export const ROLE_LABEL = msg`Role`;
+export const CHOOSE_ROLE_HELP = msg`Choose a role`;
+export const CHOOSE_A_ROLE_FOR_THIS_USER = msg`Choose a role for this user`;
+export const EMAIL_OR_ADDRESS_LABEL = msg`Email or REGEN address`;
+export const ADMIN_EDITOR_RULE = msg`Admins or editors must be invited via a REGEN address`;
+export const REGEN_ADDRESS_LABEL = msg`REGEN address`;
+export const ENTER_EMAIL_OR_ADDRESS_PLACEHOLDER = msg`Enter email or address`;
+export const VISIBLE_QUESTION = msg`Is this member visible on the organization page?`;
+export const VISIBLE_DESCRIPTION = msg`If marked visible, this user will be shown on the ‘members’ tab of your organization page once they have accepted their invite and added a name.`;
+export const CANCEL_LABEL = msg`CANCEL`;
+export const INVITE_LABEL = msg`Invite`;
+// Remove Member Modal
+export const REMOVE_MEMBER_TITLE = msg`Are you sure you want to remove this member from your organization?`;
+export const REMOVE_MEMBER_DESCRIPTION = msg`Any posts they have created or signed will remain.`;
+export const REMOVE_CONFIRM_LABEL = msg`Yes, Remove`;
+export const MEMBER_REMOVED_BANNER = msg`Member has been removed from your organization.`;

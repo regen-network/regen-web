@@ -7,13 +7,13 @@ import {
   ROLE_OWNER,
 } from '../ActionDropdown/ActionDropdown.constants';
 import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
-import { OrganizationMembers } from './OrganizationMembers';
+import { OrganizationMembersInviteTable } from './OrganizationMembers.InviteTable';
 import { mockMembers } from './OrganizationMembers.mock';
 import { Member } from './OrganizationMembers.types';
 
-const meta: Meta<typeof OrganizationMembers> = {
-  title: 'Marketplace/Organisms/OrganizationMembers',
-  component: OrganizationMembers,
+const meta: Meta<typeof OrganizationMembersInviteTable> = {
+  title: 'Marketplace/Organisms/OrganizationMembersInviteTable',
+  component: OrganizationMembersInviteTable,
   argTypes: {
     onInvite: {
       action: 'invite-clicked',
@@ -60,17 +60,18 @@ export const Default = (args: { onInvite: () => void }) => {
       prev.map(member => (member.id === id ? { ...member, visible } : member)),
     );
 
-  const handleRemove = (id: string) =>
+  const removeMember = (id: string) =>
     setMembers(prev => prev.filter(member => member.id !== id));
 
   return (
-    <OrganizationMembers
+    <OrganizationMembersInviteTable
+      onRemove={removeMember}
       {...args}
       members={members}
+      sortDir={sortDir}
       onToggleSort={toggleSort}
       onUpdateRole={updateRole}
       onUpdateVisibility={updateVisibility}
-      onRemove={handleRemove}
     />
   );
 };

@@ -32,6 +32,13 @@ type Props = {
   onUpdateRole: (id: string, role: BaseMemberRole) => void;
   onUpdateVisibility: (id: string, visible: boolean) => void;
   onRemove: (id: string) => void;
+  onAddMember?: (data: {
+    role: BaseMemberRole | undefined;
+    addressOrEmail: string;
+    visible: boolean;
+  }) => void;
+  accounts?: any;
+  setDebouncedValue?: (value: string) => void;
 };
 
 export const OrganizationMembersInviteTable = ({
@@ -42,7 +49,10 @@ export const OrganizationMembersInviteTable = ({
   onUpdateRole,
   onUpdateVisibility,
   onRemove,
-}: Props) => {
+  onAddMember,
+  accounts,
+  setDebouncedValue,
+}: Props): JSX.Element => {
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [memberToRemove, setMemberToRemove] = useState<string | null>(null);
@@ -115,7 +125,7 @@ export const OrganizationMembersInviteTable = ({
             <div className="flex gap-20 xl:hidden w-full px-6 justify-between items-center">
               <MemberRoleDropdown
                 role={member.role}
-                disabled={!canAdmin}
+                disabled={!canAdmin || member.isCurrentUser}
                 hasWalletAddress={member.hasWalletAddress}
                 onChange={r => onUpdateRole(member.id, r)}
                 currentUserRole={currentUserRole}
@@ -132,7 +142,7 @@ export const OrganizationMembersInviteTable = ({
             <div className="hidden xl:flex w-[170px] items-center">
               <MemberRoleDropdown
                 role={member.role}
-                disabled={!canAdmin}
+                disabled={!canAdmin || member.isCurrentUser}
                 hasWalletAddress={member.hasWalletAddress}
                 onChange={r => onUpdateRole(member.id, r)}
                 currentUserRole={currentUserRole}
@@ -168,7 +178,14 @@ export const OrganizationMembersInviteTable = ({
       <InviteMemberModal
         open={showInviteModal}
         onClose={() => setShowInviteModal(false)}
-        onSubmit={() => setShowInviteModal(false)}
+        onSubmit={data => {
+          if (onAddMember) {
+            onAddMember(data);
+          }
+          setShowInviteModal(false);
+        }}
+        accounts={accounts}
+        setDebouncedValue={setDebouncedValue}
       />
       <RemoveMemberModal
         open={showRemoveModal}

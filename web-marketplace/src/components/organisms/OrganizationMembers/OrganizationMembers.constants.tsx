@@ -1,7 +1,7 @@
 import { msg } from '@lingui/macro';
 
 export const ORGANIZATION_MEMBERS = msg`Organization Members`;
-export const INVITE_MEMBERS = msg`Invite Members`;
+export const INVITE_MEMBERS = msg`Invite Member`;
 export const ORGANIZATION_MEMBERS_DESCRIPTION = msg`Organization members have permissions for all projects associated with an organization`;
 export const NAME = msg`NAME`;
 export const ROLE = msg`ROLE`;

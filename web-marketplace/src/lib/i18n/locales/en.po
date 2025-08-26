@@ -348,6 +348,10 @@ msgstr ""
 msgid "Actual number of credits issued may be different from the estimated issuance."
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:27
+msgid "Add a member"
+msgstr ""
+
 #: src/components/organisms/MediaForm/MediaFormStory.tsx:160
 msgid "Add a photo"
 msgstr ""
@@ -429,6 +433,10 @@ msgstr ""
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:5
 #: src/components/organisms/RolesForm/RolesForm.tsx:255
 msgid "Admin"
+msgstr ""
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:32
+msgid "Admins or editors must be invited via a REGEN address"
 msgstr ""
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:37
@@ -590,6 +598,10 @@ msgstr ""
 msgid "Andean"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:41
+msgid "Any posts they have created or signed will remain."
+msgstr ""
+
 #: src/lib/constants/shared.constants.tsx:41
 msgid "Apply"
 msgstr ""
@@ -623,6 +635,10 @@ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:86
 msgid "Are you sure you want to discard your changes?"
+msgstr ""
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:40
+msgid "Are you sure you want to remove this member from your organization?"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:151
@@ -972,6 +988,10 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:37
+msgid "CANCEL"
+msgstr ""
+
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:40
 msgid "Cancelled credits have been removed from from the credit batch's tradable supply. Cancelling credits is permanent and implies the credits have been moved to another chain or registry."
 msgstr ""
@@ -1028,6 +1048,10 @@ msgstr ""
 msgid "Chain"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:52
+msgid "Change"
+msgstr ""
+
 #: src/components/organisms/RolesForm/components/AdminModal/AdminModal.constants.ts:5
 msgid "change admin"
 msgstr ""
@@ -1071,6 +1095,14 @@ msgstr ""
 
 #: src/components/organisms/AdditionalityForm.tsx:59
 msgid "Choose a practice start date"
+msgstr ""
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:29
+msgid "Choose a role"
+msgstr ""
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:30
+msgid "Choose a role for this user"
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:192
@@ -1779,6 +1811,7 @@ msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:104
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:199
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:53
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/pages/Description/Description.tsx:48
 #: src/pages/ProjectReview/ProjectReview.tsx:224
@@ -2057,6 +2090,10 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:31
+msgid "Email or REGEN address"
+msgstr ""
+
 #: src/pages/VerifyEmail/VerifyEmail.tsx:31
 msgid "Email resent! Please check your inbox."
 msgstr ""
@@ -2080,6 +2117,10 @@ msgstr ""
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.PaymentInfo.tsx:75
 msgid "Enter a new credit card"
+msgstr ""
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:34
+msgid "Enter email or address"
 msgstr ""
 
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:178
@@ -2248,6 +2289,10 @@ msgstr ""
 msgid "For Buyers"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:48
+msgid "For example: farmer, CTO, CEO, data analyst, ranger, etc."
+msgstr ""
+
 #: src/pages/ErrorPage/ErrorPage.contants.ts:4
 msgid "For help resolving an issue, reach out to support@regen.network."
 msgstr ""
@@ -2388,6 +2433,10 @@ msgstr ""
 msgid "i.e. Sunnybrook Farms"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:36
+msgid "If marked visible, this user will be shown on the ‘members’ tab of your organization page once they have accepted their invite and added a name."
+msgstr ""
+
 #: src/pages/Certificate/Certificate.tsx:66
 #~ msgid "If you do not see your certificate within 24 hours, please reach out to <0>support@regen.network</0>."
 #~ msgstr ""
@@ -2489,6 +2538,7 @@ msgstr ""
 msgid "Invalid token"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:38
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:19
 msgid "Invite"
 msgstr ""
@@ -2498,7 +2548,15 @@ msgid "Invite Collaborators"
 msgstr ""
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:4
-msgid "Invite Members"
+msgid "Invite Member"
+msgstr ""
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:4
+#~ msgid "Invite Members"
+#~ msgstr ""
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:35
+msgid "Is this member visible on the organization page?"
 msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:135
@@ -2848,6 +2906,10 @@ msgstr ""
 msgid "Medium"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:43
+msgid "Member has been removed from your organization."
+msgstr ""
+
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:108
 msgid "Members"
 msgstr ""
@@ -2974,6 +3036,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:151
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:50
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/pages/ProjectReview/ProjectReview.tsx:202
 msgid "Name"
@@ -3150,11 +3213,11 @@ msgstr ""
 msgid "Only the locations of the files will be hidden from public view."
 msgstr ""
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:12
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:13
 msgid "Only the owner can change their role."
 msgstr ""
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:11
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:12
 msgid "Only the owner or admin can edit user roles."
 msgstr ""
 
@@ -3299,6 +3362,10 @@ msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:16
 msgid "Personal Dashboard"
+msgstr ""
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:45
+msgid "Personal Profile"
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:127
@@ -3591,6 +3658,10 @@ msgstr ""
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:157
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:137
 msgid "Profile image"
+msgstr ""
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:51
+msgid "Profile Image"
 msgstr ""
 
 #: src/pages/Profile/Profile.constants.tsx:3
@@ -3909,6 +3980,10 @@ msgstr ""
 msgid "Regen - Ecocredits"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:33
+msgid "REGEN address"
+msgstr ""
+
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:100
 msgid "Regen Data Provider"
 msgstr ""
@@ -4125,6 +4200,10 @@ msgstr ""
 msgid "Riparian forest"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:28
+msgid "Role"
+msgstr ""
+
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:7
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:22
 msgid "ROLE"
@@ -4160,6 +4239,10 @@ msgstr ""
 #: src/components/molecules/ProjectPageFooter.tsx:43
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:27
 msgid "Save"
+msgstr ""
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:49
+msgid "SAVE"
 msgstr ""
 
 #: src/components/organisms/PostForm/PostForm.tsx:510
@@ -4892,6 +4975,10 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:47
+msgid "Title (optional)"
+msgstr ""
+
 #: src/pages/Dashboard/Dashboard.constants.tsx:46
 msgid "Token expired"
 msgstr ""
@@ -5101,7 +5188,7 @@ msgstr ""
 msgid "useMultiStep must be used within a MultiStepProvider"
 msgstr ""
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:14
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:15
 msgid "User must have a blockchain account."
 msgstr ""
 
@@ -5472,6 +5559,10 @@ msgstr ""
 msgid "Yes, please create an account for me so I can easily see my purchase details and retirement certificate when I log in"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:42
+msgid "Yes, Remove"
+msgstr ""
+
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:17
 msgid "yes, remove & connect"
 msgstr ""
@@ -5568,7 +5659,7 @@ msgstr ""
 msgid "You must agree to continue"
 msgstr ""
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:13
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:14
 msgid "You must assign a new owner before you can change your role."
 msgstr ""
 
@@ -5630,6 +5721,10 @@ msgstr ""
 
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:61
 msgid "Your name"
+msgstr ""
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:46
+msgid "Your name, profile image, and title will be visible on your organization profile if set to visible."
 msgstr ""
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.constants.ts:4

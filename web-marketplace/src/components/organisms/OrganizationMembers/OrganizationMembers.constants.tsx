@@ -36,6 +36,10 @@ export const VISIBLE_QUESTION = msg`Is this member visible on the organization p
 export const VISIBLE_DESCRIPTION = msg`If marked visible, this user will be shown on the ‘members’ tab of your organization page once they have accepted their invite and added a name.`;
 export const CANCEL_LABEL = msg`CANCEL`;
 export const INVITE_LABEL = msg`Invite`;
+export const REGEN_ADDRESS_REQUIRED_ERROR =
+  'You must enter a REGEN address in order to add this user as an Admin or Editor.';
+export const INVALID_EMAIL_ERROR = 'Invalid email';
+export const INVALID_REGEN_ADDRESS_ERROR = 'Invalid REGEN address';
 // Remove Member Modal
 export const REMOVE_MEMBER_TITLE = msg`Are you sure you want to remove this member from your organization?`;
 export const REMOVE_MEMBER_DESCRIPTION = msg`Any posts they have created or signed will remain.`;

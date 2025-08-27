@@ -26,6 +26,8 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   currentUserRole,
   hasWalletAddress,
   placeholder,
+  height = 'h-[50px]',
+  fullWidth = false,
 }) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
@@ -92,7 +94,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
         <button
           onClick={toggle}
           className={cn(
-            'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border border-solid cursor-pointer',
+            `flex items-center justify-between w-full ${height} px-20 py-15 rounded border border-solid cursor-pointer`,
             'bg-bc-neutral-0 text-bc-neutral-700',
             'border-bc-neutral-300 hover:border-gray-300',
           )}
@@ -115,7 +117,10 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
         <ul
           role="listbox"
           aria-label={_(SELECT_ROLE_ARIA_LABEL)}
-          className="list-none absolute z-20 w-full lg:w-[330px] bg-bc-neutral-0 shadow-lg rounded mt-1 p-10 max-h-[32rem] overflow-auto flex gap-5 flex-col border border-solid border-bc-neutral-300"
+          className={cn(
+            'list-none absolute z-20 bg-bc-neutral-0 shadow-lg rounded mt-1 p-10 max-h-[32rem] overflow-auto flex gap-5 flex-col border border-solid border-bc-neutral-300',
+            fullWidth ? 'w-full' : 'w-full lg:w-[330px]',
+          )}
         >
           {filteredRoleOptions.map(({ key, label, Icon, description }) => {
             const isSelected = role === key;

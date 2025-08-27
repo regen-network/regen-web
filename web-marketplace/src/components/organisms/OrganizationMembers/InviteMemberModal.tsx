@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useLingui } from '@lingui/react';
+import useClickOutside from 'utils/hooks/useClickOutside';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import CloseIcon from 'web-components/src/components/icons/CloseIcon';
@@ -17,19 +18,17 @@ import {
   CHOOSE_ROLE_HELP,
   EMAIL_OR_ADDRESS_LABEL,
   ENTER_EMAIL_OR_ADDRESS_PLACEHOLDER,
+  INVALID_EMAIL_ERROR,
+  INVALID_REGEN_ADDRESS_ERROR,
   INVITE_LABEL,
   REGEN_ADDRESS_LABEL,
+  REGEN_ADDRESS_REQUIRED_ERROR,
   ROLE_LABEL,
   VISIBLE_DESCRIPTION,
   VISIBLE_QUESTION,
 } from './OrganizationMembers.constants';
 import { MemberRoleDropdown } from './OrganizationMembers.RoleDropdown';
 import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
-
-const REGEN_ADDRESS_REQUIRED_ERROR =
-  'You must enter a REGEN address in order to add this user as an Admin or Editor.';
-const INVALID_EMAIL_ERROR = 'Invalid email';
-const INVALID_REGEN_ADDRESS_ERROR = 'Invalid REGEN address';
 
 interface InviteMemberModalProps {
   open: boolean;
@@ -56,6 +55,10 @@ export const InviteMemberModal = ({
   const [visible, setVisible] = useState(true);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const blurTimeoutRef = useRef<number | undefined>();
+  const modalRef = useClickOutside<HTMLDivElement>(() => {
+    resetFields();
+    onClose();
+  });
 
   const accountSuggestions =
     accounts?.getAccountsByNameOrAddr?.nodes?.slice(0, 8) || [];
@@ -140,8 +143,13 @@ export const InviteMemberModal = ({
     !isValidAddressOrEmail(addressOrEmail);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="  bg-bc-neutral-0 rounded-lg relative flex flex-col border-solid border-[1px] border-bc-neutral-300 px-20 py-50 md:p-50 w-[360px] md:w-[560px] md:h-[733px]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+      <div
+        ref={modalRef}
+        className="bg-bc-neutral-0 rounded-lg relative flex flex-col border-solid border-[1px] border-bc-neutral-300 px-20 py-50 md:p-50 w-[360px] md:w-[560px] md:h-auto shadow-md"
+      >
         <button
           onClick={() => {
             resetFields();
@@ -152,12 +160,12 @@ export const InviteMemberModal = ({
         >
           <CloseIcon className="w-6 h-6 text-bc-neutral-500" />
         </button>
-        <Title variant="h4" className="mb-30 md:mb-50 mx-auto">
+        <Title variant="h4" className="mb-30 md:mb-45 mx-auto">
           {_(ADD_MEMBER_LABEL)}
         </Title>
 
         {/* Role Section */}
-        <div className="flex flex-col mb-50">
+        <div className="flex flex-col mb-45">
           <span className="font-bold text-md md:text-lg mb-6">
             {_(ROLE_LABEL)}
           </span>
@@ -171,11 +179,13 @@ export const InviteMemberModal = ({
             onChange={r => setRole(r)}
             currentUserRole={role as BaseMemberRole}
             placeholder={_(CHOOSE_ROLE_HELP)}
+            height="h-[50px] md:h-[60px]"
+            fullWidth={true}
           />
         </div>
 
         {/* Address / Email Section */}
-        <div className="flex flex-col mb-50 relative">
+        <div className="flex flex-col mb-45 relative">
           <span className="font-bold text-md md:text-lg mb-6">
             {_(
               role === 'admin' || role === 'editor'
@@ -207,7 +217,7 @@ export const InviteMemberModal = ({
               }
             }}
             placeholder={_(ENTER_EMAIL_OR_ADDRESS_PLACEHOLDER)}
-            className="w-full h-[50px] border-solid border-[1px] border-bc-neutral-300 rounded px-12 text-sm focus:outline-none p-20"
+            className="w-full h-[50px] md:h-[60px] border-solid border-[1px] border-bc-neutral-300 rounded px-12 text-sm focus:outline-none p-20"
           />
           {getValidationError() && (
             <div className="text-bc-red-500 text-sm font-bold font-sans mt-2">
@@ -218,7 +228,7 @@ export const InviteMemberModal = ({
             addressOrEmail &&
             !addressOrEmail.includes('(') &&
             accountSuggestions.length > 0 && (
-              <ul className="absolute top-[83px] left-0 w-full z-10 min-h-[84px] bg-bc-neutral-0 border-[1px] border-solid border-bc-neutral-300 pl-0 rounded shadow-lg overflow-hidden">
+              <ul className="absolute top-[100px]  md:top-[83px] left-0 w-full z-10 min-h-[84px] bg-bc-neutral-0 border-[1px] border-solid border-bc-neutral-300 pl-0 rounded shadow-lg overflow-hidden">
                 {accountSuggestions.map(acc => (
                   <li
                     key={acc?.id}
@@ -254,7 +264,7 @@ export const InviteMemberModal = ({
         </div>
 
         {/* Visibility */}
-        <div className="flex flex-col mb-50">
+        <div className="flex flex-col mb-45">
           <span className="font-bold text-md md:text-lg mb-6">
             {_(VISIBLE_QUESTION)}
           </span>
@@ -270,7 +280,7 @@ export const InviteMemberModal = ({
         </div>
 
         {/* Actions */}
-        <div className="mt-auto flex justify-end gap-40 pt-20">
+        <div className="mt-0 flex justify-end gap-40">
           <button
             onClick={() => {
               resetFields();

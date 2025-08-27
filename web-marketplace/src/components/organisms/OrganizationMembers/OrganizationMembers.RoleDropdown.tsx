@@ -13,6 +13,8 @@ export const MemberRoleDropdown: React.FC<
   currentUserRole,
   hasWalletAddress,
   placeholder,
+  height,
+  fullWidth,
 }) => {
   const { _ } = useLingui();
   return (
@@ -23,6 +25,8 @@ export const MemberRoleDropdown: React.FC<
       currentUserRole={currentUserRole}
       hasWalletAddress={hasWalletAddress}
       placeholder={placeholder}
+      height={height}
+      fullWidth={fullWidth}
       roleOptions={getRoleItems(_)}
     />
   );

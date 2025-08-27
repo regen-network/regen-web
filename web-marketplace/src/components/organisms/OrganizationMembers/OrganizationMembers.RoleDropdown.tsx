@@ -1,4 +1,5 @@
 import { useLingui } from '@lingui/react';
+
 import { BaseRoleDropdownProps } from '../BaseMembersTable/BaseMembersTable.types';
 import { BaseRoleDropdown } from '../BaseRoleDropdown/BaseRoleDropdown';
 import { getRoleItems } from './OrganizationMembers.utils';
@@ -11,6 +12,9 @@ export const MemberRoleDropdown: React.FC<
   onChange,
   currentUserRole,
   hasWalletAddress,
+  placeholder,
+  height,
+  fullWidth,
 }) => {
   const { _ } = useLingui();
   return (
@@ -20,6 +24,9 @@ export const MemberRoleDropdown: React.FC<
       onChange={onChange}
       currentUserRole={currentUserRole}
       hasWalletAddress={hasWalletAddress}
+      placeholder={placeholder}
+      height={height}
+      fullWidth={fullWidth}
       roleOptions={getRoleItems(_)}
     />
   );

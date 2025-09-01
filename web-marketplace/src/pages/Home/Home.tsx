@@ -32,7 +32,6 @@ import { client as sanityClient } from '../../lib/clients/sanity';
 import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 import { useCreditClasses } from './hooks/useCreditClasses';
-import { useCreateDao } from 'utils/hooks/useCreateDao';
 
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
@@ -76,7 +75,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
       }
     }
   }, []);
-  const { createDao } = useCreateDao();
+
   if (isFetchingAllHomePage) return <Loading sx={{ minHeight: '100vh' }} />;
 
   return (
@@ -112,7 +111,6 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
             pt: { xs: 8, sm: 15 },
           }}
         >
-          <button onClick={createDao}>create dao</button>
           <Box sx={{ pr: [0, 4], alignSelf: 'center', maxWidth: '715px' }}>
             <Title
               variant="h1"

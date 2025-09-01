@@ -17,7 +17,6 @@ import { UseStateSetter } from 'types/react/use-state';
 import { apiUri } from 'lib/apiUri';
 import { errorBannerTextAtom, errorCodeAtom } from 'lib/atoms/error.atoms';
 import {
-  connectedEmailErrorModalAtom,
   errorModalAtom,
   processingModalAtom,
   txBuySuccessfulModalAtom,
@@ -35,12 +34,12 @@ import { BuyExtendedEvent, BuyFailureEvent } from 'lib/tracker/types';
 import { useTracker } from 'lib/tracker/useTracker';
 import { useWallet } from 'lib/wallet/wallet';
 
-import { useFetchSellOrders } from 'components/organisms/UserSellOrders/hooks/useFetchSellOrders';
 import { normalizeToUISellOrderInfo } from 'pages/Projects/hooks/useProjectsSellOrders.utils';
 import { Currency } from 'components/molecules/CreditsAmount/CreditsAmount.types';
 import { findDisplayDenom } from 'components/molecules/DenomLabel/DenomLabel.utils';
 import { VIEW_PORTFOLIO } from 'components/organisms/BasketOverview/BasketOverview.constants';
 import { BuyWarningModalContent } from 'components/organisms/BuyWarningModal/BuyWarningModal.types';
+import { useFetchSellOrders } from 'components/organisms/UserSellOrders/hooks/useFetchSellOrders';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { useMsgClient } from 'hooks';
 
@@ -110,7 +109,7 @@ export const usePurchase = ({
   const { track } = useTracker();
   const location = useLocation();
 
-  const { activeAccount, privActiveAccount } = useAuth();
+  const { activeAccount } = useAuth();
   const navigate = useNavigate();
   const { signAndBroadcast } = useMsgClient();
   const { data } = useMultiStep<BuyCreditsSchemaTypes>();
@@ -120,9 +119,6 @@ export const usePurchase = ({
   const setErrorCodeAtom = useSetAtom(errorCodeAtom);
   const setErrorModalAtom = useSetAtom(errorModalAtom);
   const setErrorBannerTextAtom = useSetAtom(errorBannerTextAtom);
-  const setConnectedEmailErrorModalAtom = useSetAtom(
-    connectedEmailErrorModalAtom,
-  );
 
   const reactQueryClient = useQueryClient();
   const { data: token } = useQuery(getCsrfTokenQuery({}));
@@ -270,7 +266,7 @@ export const usePurchase = ({
 
             try {
               if (token) {
-                await postData({
+                const res = await postData({
                   url: `${apiUri}/marketplace/v1/stripe/create-payment-intent`,
                   data: {
                     items: selectedSellOrders,
@@ -362,6 +358,16 @@ export const usePurchase = ({
                     }
                   },
                 });
+                // If backend returned an error
+                if (res?.error) {
+                  const errorMessage = String(res.error);
+                  setErrorBannerTextAtom(errorMessage);
+                  track<BuyFailureEvent>('buyFailure', {
+                    ...trackingEvent,
+                    errorMessage,
+                  });
+                  return;
+                }
               }
             } catch (error) {
               const errorMessage = String(error);

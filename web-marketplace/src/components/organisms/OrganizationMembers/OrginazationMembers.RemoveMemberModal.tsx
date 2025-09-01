@@ -26,8 +26,10 @@ export const RemoveMemberModal = ({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="bg-bc-neutral-0 rounded-lg relative flex flex-col border-solid border-[1px] border-bc-neutral-300 px-20 py-50 md:p-50 w-[360px] md:w-[560px] md:h-[318px]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-bc-neutral-700/40 backdrop-blur-sm" />
+      <div className="bg-bc-neutral-0 rounded-lg relative flex flex-col border-solid border-[1px] border-bc-neutral-300 px-20 py-50 md:p-50 w-[360px] md:w-[560px] md:h-[318px] shadow-md shadow-bc-neutral-700/10">
         <button
           onClick={onClose}
           aria-label="close"
@@ -44,7 +46,7 @@ export const RemoveMemberModal = ({
         <div className="flex justify-end gap-40">
           <button
             onClick={onClose}
-            className="bg-transparent border-none cursor-pointer text-sm font-bold text-bc-neutral-400"
+            className="bg-transparent border-none cursor-pointer text-sm font-bold text-bc-neutral-400 font-muli"
           >
             {_(CANCEL_LABEL)}
           </button>

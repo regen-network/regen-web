@@ -72,10 +72,10 @@ export const PersonalProfileModal = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-bc-neutral-700/40 backdrop-blur-sm" />
       <div
         ref={modalRef}
-        className="bg-bc-neutral-100 rounded-lg relative flex flex-col border-solid border-[1px] border-bc-neutral-300 w-[360px] md:w-[560px] max-h-[90vh] overflow-hidden shadow-md"
+        className="bg-bc-neutral-100 rounded-lg relative flex flex-col border-solid border-[1px] border-bc-neutral-300 w-[360px] md:w-[560px] max-h-[90vh] overflow-hidden shadow-md shadow-bc-neutral-700/10"
       >
         <div className="flex-shrink-0 px-20 py-40 md:px-40 md:pt-40 md:pb-0">
           <button
@@ -163,7 +163,7 @@ export const PersonalProfileModal = ({
           <div className="flex justify-end gap-40">
             <button
               onClick={onClose}
-              className="bg-transparent border-none cursor-pointer text-sm font-bold text-bc-neutral-400"
+              className="bg-transparent border-none cursor-pointer text-sm font-bold text-bc-neutral-400 font-muli"
             >
               {_(CANCEL_LABEL)}
             </button>

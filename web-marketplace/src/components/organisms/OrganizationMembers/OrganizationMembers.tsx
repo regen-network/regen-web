@@ -1,20 +1,6 @@
-import { useLingui } from '@lingui/react';
-
-import { ROLE_VIEWER } from '../ActionDropdown/ActionDropdown.constants';
-import { ActionsDropdown } from '../ActionDropdown/ActionsDropdown';
-import { BaseMembersTable } from '../BaseMembersTable/BaseMembersTable';
-import { ORGANIZATION_CONTEXT } from '../BaseMembersTable/BaseMembersTable.constants';
 import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
-import { UserInfo } from '../BaseMembersTable/BaseMembersTable.UserInfo';
-import {
-  INVITE_MEMBERS,
-  ORGANIZATION_MEMBERS,
-  ORGANIZATION_MEMBERS_DESCRIPTION,
-  VISIBILITY_ON_PROFILE,
-} from './OrganizationMembers.constants';
-import { MemberRoleDropdown } from './OrganizationMembers.RoleDropdown';
+import { OrganizationMembersBase } from './OrganizationMembers.BaseTable';
 import { Member } from './OrganizationMembers.types';
-import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
 
 type Props = {
   members: Member[];
@@ -34,19 +20,11 @@ export const OrganizationMembers = ({
   onUpdateVisibility,
   onRemove,
 }: Props) => {
-  const { _ } = useLingui();
-  const currentUserRole: BaseMemberRole =
-    members.find(member => member.isCurrentUser)?.role ?? ROLE_VIEWER;
-
   return (
-    <BaseMembersTable
-      users={members}
-      title={_(ORGANIZATION_MEMBERS)}
-      description={_(ORGANIZATION_MEMBERS_DESCRIPTION)}
-      inviteButtonText={_(INVITE_MEMBERS)}
-      currentUserRole={currentUserRole}
+    <OrganizationMembersBase
+      variant="standard"
+      members={members}
       onInvite={onInvite}
-      onSort={onToggleSort}
       sortDir={sortDir}
       context={ORGANIZATION_CONTEXT}
       additionalColumns={[_(VISIBILITY_ON_PROFILE)]}

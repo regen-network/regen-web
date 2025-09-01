@@ -40,7 +40,7 @@ interface BaseMembersTableProps<T extends BaseUser> {
   hideHeader?: boolean;
   hideDescription?: boolean;
   hideHelpDocs?: boolean;
-  showActionsColumn?: boolean; // controls trailing placeholder column width (60px)
+  showActionsColumn?: boolean;
 }
 
 export const BaseMembersTable = <T extends BaseUser>({

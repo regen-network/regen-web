@@ -77,10 +77,10 @@ export const InviteMemberModal = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-bc-neutral-700/40 backdrop-blur-sm" />
       <div
         ref={modalRef}
-        className="bg-bc-neutral-0 rounded-lg relative flex flex-col border-solid border-[1px] border-bc-neutral-300 px-20 py-50 md:p-50 w-[360px] md:w-[560px] md:h-auto shadow-md"
+        className="bg-bc-neutral-0 rounded-lg relative flex flex-col border-solid border-[1px] border-bc-neutral-300 px-20 py-50 md:p-50 w-[360px] md:w-[560px] md:h-auto shadow-md shadow-bc-neutral-700/10"
       >
         <button
           onClick={() => {
@@ -230,7 +230,7 @@ export const InviteMemberModal = ({
               resetFields();
               onClose();
             }}
-            className="bg-transparent border-none cursor-pointer text-sm font-bold text-bc-neutral-400"
+            className="font-muli bg-transparent border-none cursor-pointer text-sm font-bold text-bc-neutral-400"
           >
             {_(CANCEL_LABEL)}
           </button>

@@ -7,6 +7,11 @@ import { nanoid } from 'nanoid';
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate';
 import { toBase64, toUtf8, fromHex } from '@cosmjs/encoding';
 
+/**
+ * Disclaimer: This code is still a draft and should be refactored to import utils from @dao-dao/* packages.
+ * A custom React hook that provides a function to create a DAO
+ * @returns A function to create a DAO using the connected wallet.
+ */
 export const useCreateDao = () => {
   const { wallet } = useWallet();
   const createDao = async () => {

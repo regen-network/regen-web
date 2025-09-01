@@ -5,6 +5,7 @@ type CardProps = MuiCardProps & {
   height?: string;
   borderColor?: string;
   borderRadius?: string;
+  borderWidth?: number;
 };
 export function Card({
   children,
@@ -12,6 +13,7 @@ export function Card({
   height,
   onClick,
   elevation = 0,
+  borderWidth = 1,
   borderColor,
   borderRadius,
   sx = [],
@@ -22,7 +24,7 @@ export function Card({
       onClick={onClick}
       sx={[
         {
-          border: 1,
+          border: borderWidth,
           borderColor: borderColor || 'info.light',
           borderRadius: borderRadius || '5px',
           maxWidth: width || '100%',

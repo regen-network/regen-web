@@ -64,9 +64,9 @@ export interface ProjectCardProps extends MediaCardProps {
   adminPrompt?: SanityBlockContent;
   createPostTooltipText?: string;
   editProjectTooltipText?: string;
-  bodyTexts: ProjectCardBodyTextsMapping;
-  purchaseDetailsTitles: ProjectCardTitlesMapping;
-  buttons: ProjectCardButtonsMapping;
+  bodyTexts?: ProjectCardBodyTextsMapping;
+  purchaseDetailsTitles?: ProjectCardTitlesMapping;
+  buttons?: ProjectCardButtonsMapping;
   useProjectCardButton?: boolean;
   hasBottomCard?: boolean;
   creditsChildren?: ReactNode;
@@ -119,18 +119,18 @@ export function ProjectCard({
   const cardButton =
     button ??
     (isSoldOut
-      ? buttons.view
+      ? buttons?.view
       : isPrefinanceProject
-      ? buttons.prefinance
+      ? buttons?.prefinance
       : offChain
-      ? buttons.view
-      : buttons.default);
+      ? buttons?.view
+      : buttons?.default);
 
   const {
     text: buttonText,
     startIcon: buttonStartIcon,
     className: buttonClassName,
-  } = cardButton;
+  } = cardButton ?? {};
   const isButtonDisabled =
     cardButton?.disabled !== undefined
       ? cardButton?.disabled
@@ -183,7 +183,7 @@ export function ProjectCard({
           color={theme.palette.primary.light}
         />
       </div>
-      {isPrefinanceProject && (
+      {isPrefinanceProject && bodyTexts && (
         <PrefinanceTag
           bodyTexts={bodyTexts}
           classNames={{
@@ -194,7 +194,9 @@ export function ProjectCard({
       )}
       {comingSoon && (
         <div className={classes.comingSoon}>
-          <span className={classes.comingSoonText}>{bodyTexts.comingSoon}</span>
+          <span className={classes.comingSoonText}>
+            {bodyTexts?.comingSoon}
+          </span>
         </div>
       )}
       {(purchaseInfo || isPrefinanceProject || offChain) && hasBottomCard && (
@@ -205,7 +207,7 @@ export function ProjectCard({
           {purchaseInfo?.units && (
             <>
               <span className={classes.units}>
-                {purchaseInfo.units} {bodyTexts.creditsPurchased}
+                {purchaseInfo.units} {bodyTexts?.creditsPurchased}
               </span>
               <span
                 onClick={() => setOpen(!open)}
@@ -215,13 +217,13 @@ export function ProjectCard({
                   direction={open ? 'up' : 'down'}
                   className={cn(classes.icon, 'text-brand-400')}
                 />{' '}
-                {bodyTexts.viewDetails}
+                {bodyTexts?.viewDetails}
               </span>
             </>
           )}
           {open && (
             <div className={classes.purchaseDetails}>
-              {purchaseInfo?.creditClass?.standard && (
+              {purchaseInfo?.creditClass?.standard && purchaseDetailsTitles && (
                 <PurchaseDetails
                   title={
                     serialNumber
@@ -235,42 +237,43 @@ export function ProjectCard({
                   }
                 />
               )}
-              {purchaseInfo?.vintagePeriod && (
+              {purchaseInfo?.vintagePeriod && purchaseDetailsTitles && (
                 <PurchaseDetails
                   title={purchaseDetailsTitles.vintagePeriod}
                   info={purchaseInfo.vintagePeriod}
                 />
               )}
-              {purchaseInfo?.creditClass && (
+              {purchaseInfo?.creditClass && purchaseDetailsTitles && (
                 <PurchaseDetails
                   url={purchaseInfo?.creditClass?.url}
                   title={purchaseDetailsTitles.creditClass}
                   info={formatStandardInfo(purchaseInfo.creditClass)}
                 />
               )}
-              {purchaseInfo?.methodology && (
+              {purchaseInfo?.methodology && purchaseDetailsTitles && (
                 <PurchaseDetails
                   url={purchaseInfo?.methodology.url}
                   title={purchaseDetailsTitles.methodology}
                   info={formatStandardInfo(purchaseInfo.methodology)}
                 />
               )}
-              {purchaseInfo?.projectType && (
+              {purchaseInfo?.projectType && purchaseDetailsTitles && (
                 <PurchaseDetails
                   title={purchaseDetailsTitles.projectType}
                   info={purchaseInfo?.projectType}
                 />
               )}
-              {additionalCertifications && (
+              {additionalCertifications && purchaseDetailsTitles && (
                 <PurchaseDetails
                   title={purchaseDetailsTitles.additionalCertifications}
                   info={additionalCertifications.join(', ')}
                 />
               )}
               <>
-                {!offChain ||
-                projectPrefinancing?.isPrefinanceProject ||
-                creditsChildren ? (
+                {(!offChain ||
+                  projectPrefinancing?.isPrefinanceProject ||
+                  creditsChildren) &&
+                bodyTexts ? (
                   <CreditPrice
                     bodyTexts={bodyTexts}
                     priceTooltip={
@@ -336,6 +339,7 @@ export function ProjectCard({
                       </ContainedButton>
                     ))}
                   {(hasButton || isPrefinanceProject || offChain) &&
+                    buttonText &&
                     useProjectCardButton &&
                     (isButtonDisabled && createPostTooltipText ? (
                       <InfoTooltip

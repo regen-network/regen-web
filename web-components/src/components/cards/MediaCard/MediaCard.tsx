@@ -21,6 +21,7 @@ export interface MediaCardProps extends OptimizeImageProps {
   width?: string;
   titleVariant?: Variant;
   elevation?: number;
+  borderWidth?: number;
   borderColor?: string;
   borderRadius?: string;
   className?: string;
@@ -51,6 +52,7 @@ export default function MediaCard({
   width,
   titleVariant = 'h4',
   elevation = 0,
+  borderWidth,
   borderColor,
   borderRadius,
   className,
@@ -110,6 +112,7 @@ export default function MediaCard({
       onClick={onClick}
       width={width}
       elevation={elevation}
+      borderWidth={borderWidth}
       borderColor={borderColor}
       borderRadius={borderRadius}
       sx={[

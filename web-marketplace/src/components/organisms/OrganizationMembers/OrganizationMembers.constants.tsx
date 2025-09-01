@@ -49,7 +49,7 @@ export const MEMBER_REMOVED_BANNER = msg`Member has been removed from your organ
 // Personal Profile Modal
 export const PERSONAL_PROFILE_TITLE = msg`Personal Profile`;
 export const PERSONAL_PROFILE_SUBHEADER = msg`Your name, profile image, and title will be visible on your organization profile if set to visible.`;
-export const TITLE_LABEL = msg`Title (optional)`;
+export const TITLE_LABEL = msg`Title`;
 export const TITLE_SUBHEADER = msg`For example: farmer, CTO, CEO, data analyst, ranger, etc.`;
 export const SAVE_LABEL = msg`SAVE`;
 export const NAME_LABEL = msg`Name`;

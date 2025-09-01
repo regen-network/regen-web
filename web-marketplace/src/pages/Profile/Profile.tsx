@@ -151,6 +151,35 @@ export const Profile = (): JSX.Element => {
     },
   ];
 
+  const isOwnProfile =
+    (wallet?.address &&
+      address &&
+      wallet.address.toLowerCase() === address.toLowerCase()) ||
+    (privActiveAccount?.id &&
+      account?.id &&
+      privActiveAccount.id === account.id);
+
+  const addressDisplay = address
+    ? truncate(address)
+    : isOwnProfile
+    ? privActiveAccount?.email || ''
+    : '';
+
+  const infos = {
+    ...(addressDisplay
+      ? {
+          addressLink: {
+            href: address
+              ? getAccountUrl(address, true)
+              : `/profiles/${accountAddressOrId}/portfolio`,
+            text: addressDisplay,
+          },
+        }
+      : {}),
+    description: account?.description?.trimEnd() ?? '',
+    socialsLinks,
+  };
+
   return (
     <WithLoader
       isLoading={isLoading}
@@ -169,26 +198,8 @@ export const Profile = (): JSX.Element => {
               name={account?.name ? account?.name : _(DEFAULT_NAME)}
               backgroundImage={backgroundImage}
               avatar={avatarImage}
-              infos={{
-                addressLink: {
-                  href: address
-                    ? getAccountUrl(address, true)
-                    : `/profiles/${accountAddressOrId}/portfolio`,
-                  text: address ? truncate(address) : '',
-                },
-                description: account?.description?.trimEnd() ?? '',
-                socialsLinks,
-              }}
-              editLink={
-                (wallet?.address &&
-                  address &&
-                  wallet.address.toLowerCase() === address.toLowerCase()) ||
-                (privActiveAccount?.email &&
-                  account?.id &&
-                  privActiveAccount.id === account.id)
-                  ? '/dashboard/profile'
-                  : ''
-              }
+              infos={infos}
+              editLink={isOwnProfile ? '/dashboard/profile' : ''}
               profileLink={profileLink}
               variant={
                 account?.type
@@ -217,13 +228,7 @@ export const Profile = (): JSX.Element => {
                       {manageButtonConfig.map(
                         btn =>
                           btn.show &&
-                          ((wallet?.address &&
-                            address &&
-                            wallet.address.toLowerCase() ===
-                              address.toLowerCase()) ||
-                            (privActiveAccount?.email &&
-                              account?.id &&
-                              privActiveAccount.id === account.id)) && (
+                          isOwnProfile && (
                             <OutlinedButton
                               key={btn.label}
                               variant="contained"

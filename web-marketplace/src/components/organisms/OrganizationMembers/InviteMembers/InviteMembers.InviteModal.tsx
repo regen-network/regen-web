@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { useFormState } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
-import useClickOutside from 'utils/hooks/useClickOutside';
+// no outside click auto-close to avoid accidental closure during input interactions
 import { z } from 'zod';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
@@ -68,14 +68,7 @@ export const InviteMemberModal = ({
   const addressOrEmail = watch('addressOrEmail');
   const visible = watch('visible');
 
-  const modalRef = useClickOutside<HTMLDivElement>(event => {
-    const target = event.target as HTMLElement;
-    if (target.closest('ul.absolute') || target.closest('li.cursor-pointer'))
-      return;
-    if (isInputFocused) return;
-    resetFields();
-    onClose();
-  });
+  // intentionally not using useClickOutside here; closing handled by overlay click or explicit actions
 
   const accountSuggestions =
     accounts?.getAccountsByNameOrAddr?.nodes?.slice(0, 8) || [];
@@ -95,11 +88,14 @@ export const InviteMemberModal = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Overlay */}
-      <div className="absolute inset-0 bg-bc-neutral-700/40 backdrop-blur-sm" />
       <div
-        ref={modalRef}
-        className="bg-bc-neutral-0 rounded-lg relative flex flex-col border-solid border-[1px] border-bc-neutral-300 px-20 py-50 md:p-50 w-[360px] md:w-[560px] md:h-auto shadow-md shadow-bc-neutral-700/10"
-      >
+        className="absolute inset-0 bg-bc-neutral-700/40 backdrop-blur-sm"
+        onMouseDown={() => {
+          resetFields();
+          onClose();
+        }}
+      />
+      <div className="bg-bc-neutral-0 rounded-lg relative flex flex-col border-solid border-[1px] border-bc-neutral-300 px-20 py-50 md:p-50 w-[360px] md:w-[560px] md:h-auto shadow-md shadow-bc-neutral-700/10">
         <Form
           form={form}
           className="flex flex-col"
@@ -120,6 +116,7 @@ export const InviteMemberModal = ({
             }}
             aria-label="close"
             className="absolute top-10 right-5 p-8 bg-transparent border-none cursor-pointer"
+            type="button"
           >
             <CloseIcon className="w-6 h-6 text-bc-neutral-500" />
           </button>
@@ -294,6 +291,7 @@ export const InviteMemberModal = ({
                 onClose();
               }}
               className="font-muli bg-transparent border-none cursor-pointer text-sm font-bold text-bc-neutral-400"
+              type="button"
             >
               {_(CANCEL_LABEL)}
             </button>

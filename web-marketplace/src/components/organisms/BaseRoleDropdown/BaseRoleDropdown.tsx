@@ -3,12 +3,11 @@ import { useLingui } from '@lingui/react';
 
 import CheckIcon from 'web-components/src/components/icons/CheckIcon';
 import DropdownIcon from 'web-components/src/components/icons/DropdownIcon';
+import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
+import { Body } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
-import {
-  ROLE_ADMIN,
-  ROLE_OWNER,
-} from '../ActionDropdown/ActionDropdown.constants';
+import { ROLE_OWNER } from '../ActionDropdown/ActionDropdown.constants';
 import { BaseRoleDropdownProps } from '../BaseMembersTable/BaseMembersTable.types';
 import { SELECT_ROLE_ARIA_LABEL } from '../ProjectCollaborators/ProjectCollaborators.constants';
 import {
@@ -18,8 +17,6 @@ import {
   OWNER_CAN_EDIT_SELF,
   ROLE_HIERARCHY,
 } from './BaseRoleDropdown.constants';
-import QuestionMarkTooltip from 'web-components/src/components/tooltip/QuestionMarkTooltip';
-import { Body } from 'web-components/src/components/typography';
 
 export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   role,
@@ -28,11 +25,15 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   roleOptions,
   currentUserRole,
   hasWalletAddress,
+  placeholder,
+  height = 'h-[50px]',
+  fullWidth = false,
 }) => {
   const { _ } = useLingui();
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const roleLabel = roleOptions.find(option => option.key === role)?.label
+  const roleLabel = roleOptions.find(option => option.key === role)?.label;
+  const displayLabel = roleLabel || placeholder;
 
   const isCurrentUserOwner = currentUserRole === ROLE_OWNER;
   const filteredRoleOptions = useMemo(
@@ -79,7 +80,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
       {isDropdownDisabled ? (
         <div className="flex items-center gap-5">
           <Body className="capitalize text-sc-text-header" size="sm">
-            {roleLabel}
+            {displayLabel}
           </Body>
           {tooltipTitle && (
             <QuestionMarkTooltip
@@ -91,15 +92,23 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
         </div>
       ) : (
         <button
+          type="button"
           onClick={toggle}
           className={cn(
-            'flex items-center justify-between w-full h-[50px] px-20 py-15 rounded border border-solid cursor-pointer',
+            `flex items-center justify-between w-full ${height} px-20 py-15 rounded border border-solid cursor-pointer`,
             'bg-bc-neutral-0 text-bc-neutral-700',
             'border-bc-neutral-300 hover:border-gray-300',
           )}
         >
           <div className="flex items-center gap-2">
-            <span className="capitalize font-sans">{roleLabel}</span>
+            <span
+              className={cn(
+                'font-sans',
+                roleLabel ? 'capitalize' : 'text-bc-neutral-400',
+              )}
+            >
+              {displayLabel}
+            </span>
           </div>
           <DropdownIcon className="w-4 h-4" />
         </button>
@@ -109,7 +118,10 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
         <ul
           role="listbox"
           aria-label={_(SELECT_ROLE_ARIA_LABEL)}
-          className="list-none absolute z-20 w-full lg:w-[330px] bg-bc-neutral-0 shadow-lg rounded mt-1 p-10 max-h-[32rem] overflow-auto flex gap-5 flex-col border border-solid border-bc-neutral-300"
+          className={cn(
+            'list-none absolute z-20 bg-bc-neutral-0 shadow-lg rounded mt-1 p-10 max-h-[32rem] overflow-auto flex gap-5 flex-col border border-solid border-bc-neutral-300',
+            fullWidth ? 'w-full' : 'w-full lg:w-[330px]',
+          )}
         >
           {filteredRoleOptions.map(({ key, label, Icon, description }) => {
             const isSelected = role === key;

@@ -29,6 +29,8 @@ msgstr ""
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 msgid " Exit to homepage "
 msgstr "Salir a la página de inicio"
@@ -349,6 +351,10 @@ msgstr "Actividad"
 msgid "Actual number of credits issued may be different from the estimated issuance."
 msgstr "El número real de créditos emitidos puede ser diferente de la emisión estimada."
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:27
+msgid "Add a member"
+msgstr "Agregar un miembro"
+
 #: src/components/organisms/MediaForm/MediaFormStory.tsx:160
 msgid "Add a photo"
 msgstr "Añadir una foto"
@@ -431,6 +437,10 @@ msgstr "Admin"
 #: src/components/organisms/RolesForm/RolesForm.tsx:255
 msgid "Admin"
 msgstr "Admin"
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:32
+msgid "Admins or editors must be invited via a REGEN address"
+msgstr "Los administradores o editores deben ser invitados a través de una dirección REGEN"
 
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.AdvanceSettings.tsx:37
 msgid "Advanced settings"
@@ -593,6 +603,10 @@ msgstr "y"
 msgid "Andean"
 msgstr "Andino"
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:41
+msgid "Any posts they have created or signed will remain."
+msgstr "Cualquier publicación que hayan creado o firmado permanecerá."
+
 #: src/lib/constants/shared.constants.tsx:41
 msgid "Apply"
 msgstr "Aplicar"
@@ -626,6 +640,10 @@ msgstr "¿Estás seguro de que deseas eliminar esta publicación?"
 #: src/lib/constants/shared.constants.tsx:86
 msgid "Are you sure you want to discard your changes?"
 msgstr "¿Está seguro de que desea descartar los cambios?"
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:40
+msgid "Are you sure you want to remove this member from your organization?"
+msgstr "¿Está seguro de que desea eliminar a este miembro de su organización?"
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.utils.tsx:151
 msgid "Area Actions"
@@ -976,6 +994,10 @@ msgstr "Cancelar"
 msgid "Cancel"
 msgstr "Cancelar"
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:37
+msgid "CANCEL"
+msgstr "CANCELAR"
+
 #: src/components/organisms/CreditBatches/CreditBatches.config.ts:40
 msgid "Cancelled credits have been removed from from the credit batch's tradable supply. Cancelling credits is permanent and implies the credits have been moved to another chain or registry."
 msgstr "Los créditos cancelados se han eliminado del suministro comercializable del lote de créditos. La cancelación de créditos es permanente e implica que los créditos se han trasladado a otra cadena o registro."
@@ -1032,6 +1054,10 @@ msgstr "año de cosecha de cfc"
 msgid "Chain"
 msgstr "Cadena"
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:52
+msgid "Change"
+msgstr "Cambiar"
+
 #: src/components/organisms/RolesForm/components/AdminModal/AdminModal.constants.ts:5
 msgid "change admin"
 msgstr "cambiar administrador"
@@ -1076,6 +1102,14 @@ msgstr "Elija un método de inicio de sesión"
 #: src/components/organisms/AdditionalityForm.tsx:59
 msgid "Choose a practice start date"
 msgstr "Elija una fecha de inicio de práctica"
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:29
+msgid "Choose a role"
+msgstr "Elige un rol"
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:30
+msgid "Choose a role for this user"
+msgstr "Elija un rol para este usuario"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:192
 msgid "Choose a specific location on the map"
@@ -1793,6 +1827,7 @@ msgstr "descripción"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:104
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:199
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:53
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/pages/Description/Description.tsx:48
 #: src/pages/ProjectReview/ProjectReview.tsx:224
@@ -2066,6 +2101,10 @@ msgstr "Los proyectos elegibles implementan actividades de conservación y/o res
 msgid "Email"
 msgstr "Correo electrónico"
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:31
+msgid "Email or REGEN address"
+msgstr "Dirección de correo electrónico o REGEN"
+
 #: src/pages/VerifyEmail/VerifyEmail.tsx:31
 msgid "Email resent! Please check your inbox."
 msgstr "¡Correo electrónico reenviado! Por favor, revise su bandeja de entrada."
@@ -2090,6 +2129,10 @@ msgstr "terminando en"
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.PaymentInfo.tsx:75
 msgid "Enter a new credit card"
 msgstr "Introduzca una nueva tarjeta de crédito"
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:34
+msgid "Enter email or address"
+msgstr "Introduzca su correo electrónico o dirección"
 
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:178
 msgid "Enter the wallet address here if this entity has a wallet address but has not yet signed up on Regen Marketplace. Make sure this is a valid wallet address."
@@ -2257,6 +2300,10 @@ msgstr "Finalizado"
 msgid "For Buyers"
 msgstr "Para compradores"
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:48
+msgid "For example: farmer, CTO, CEO, data analyst, ranger, etc."
+msgstr "Por ejemplo: agricultor, director de tecnología, director ejecutivo, analista de datos, guardabosques, etc."
+
 #: src/pages/ErrorPage/ErrorPage.contants.ts:4
 msgid "For help resolving an issue, reach out to support@regen.network."
 msgstr "Para obtener ayuda para resolver un problema, comuníquese con support@regen.network."
@@ -2397,6 +2444,10 @@ msgstr "Verifico que estos datos son exactos según mi leal saber y entender."
 msgid "i.e. Sunnybrook Farms"
 msgstr "es decir, Sunnybrook Farms"
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:36
+msgid "If marked visible, this user will be shown on the ‘members’ tab of your organization page once they have accepted their invite and added a name."
+msgstr "Si está marcado como visible, este usuario se mostrará en la pestaña \"miembros\" de la página de su organización una vez que haya aceptado su invitación y haya agregado un nombre."
+
 #: src/pages/Certificate/Certificate.tsx:66
 #~ msgid "If you do not see your certificate within 24 hours, please reach out to <0>support@regen.network</0>."
 #~ msgstr "Si no ve su certificado dentro de las 24 horas, comuníquese con <0>support@regen.network</0>."
@@ -2498,6 +2549,7 @@ msgstr "Dirección de regeneración no válida"
 msgid "Invalid token"
 msgstr "Token no válido"
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:38
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:19
 msgid "Invite"
 msgstr "Invitar"
@@ -2507,8 +2559,16 @@ msgid "Invite Collaborators"
 msgstr "Invitar a colaboradores"
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:4
-msgid "Invite Members"
-msgstr "Invitar a miembros"
+msgid "Invite Member"
+msgstr "Invitar a un miembro"
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:4
+#~ msgid "Invite Members"
+#~ msgstr "Invitar a miembros"
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:35
+msgid "Is this member visible on the organization page?"
+msgstr "¿Este miembro es visible en la página de la organización?"
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:135
 msgid "Issuance"
@@ -2853,6 +2913,10 @@ msgstr "Medios de comunicación"
 msgid "Medium"
 msgstr "Medio"
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:43
+msgid "Member has been removed from your organization."
+msgstr "El miembro ha sido eliminado de su organización."
+
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:108
 msgid "Members"
 msgstr "Miembros"
@@ -2979,6 +3043,7 @@ msgstr "Debe tener destinatarios"
 #~ msgstr "Mis proyectos de prefinanciamiento"
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:151
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:50
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/pages/ProjectReview/ProjectReview.tsx:202
 msgid "Name"
@@ -3155,11 +3220,11 @@ msgstr "antiguo administrador del proyecto"
 msgid "Only the locations of the files will be hidden from public view."
 msgstr "Sólo las ubicaciones de los archivos quedarán ocultas a la vista del público."
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:12
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:13
 msgid "Only the owner can change their role."
 msgstr "Sólo el propietario puede cambiar su rol."
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:11
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:12
 msgid "Only the owner or admin can edit user roles."
 msgstr "Sólo el propietario o administrador pueden editar los roles de usuario."
 
@@ -3305,6 +3370,10 @@ msgstr "Panel de control personal"
 #: src/pages/Dashboard/Dashboard.constants.tsx:16
 msgid "Personal Dashboard"
 msgstr "Panel personal"
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:45
+msgid "Personal Profile"
+msgstr "Perfil personal"
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:127
 #: src/components/organisms/MediaForm/MediaFormPhotos.tsx:221
@@ -3598,6 +3667,10 @@ msgstr "Perfil"
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:157
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:137
 msgid "Profile image"
+msgstr "Imagen de perfil"
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:51
+msgid "Profile Image"
 msgstr "Imagen de perfil"
 
 #: src/pages/Profile/Profile.constants.tsx:3
@@ -3916,6 +3989,10 @@ msgstr "ID de referencia (ID del proyecto CFC)"
 msgid "Regen - Ecocredits"
 msgstr "Regen - Ecocréditos"
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:33
+msgid "REGEN address"
+msgstr "Dirección REGEN"
+
 #: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:100
 msgid "Regen Data Provider"
 msgstr "Proveedor de datos de regeneración"
@@ -4132,6 +4209,10 @@ msgstr "Revisar"
 msgid "Riparian forest"
 msgstr "Bosque ripario"
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:28
+msgid "Role"
+msgstr "Role"
+
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:7
 #: src/components/organisms/ProjectCollaborators/ProjectCollaborators.constants.tsx:22
 msgid "ROLE"
@@ -4168,6 +4249,10 @@ msgstr "Sabana"
 #: src/components/organisms/EditProfileForm/EditProfileForm.constants.tsx:27
 msgid "Save"
 msgstr "Ahorrar"
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:49
+msgid "SAVE"
+msgstr "AHORRAR"
 
 #: src/components/organisms/PostForm/PostForm.tsx:510
 msgid "save draft"
@@ -4899,6 +4984,10 @@ msgstr "Marca de tiempo"
 msgid "Title"
 msgstr "Título"
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:47
+msgid "Title (optional)"
+msgstr "Título (opcional)"
+
 #: src/pages/Dashboard/Dashboard.constants.tsx:46
 msgid "Token expired"
 msgstr "Token caducado"
@@ -5108,7 +5197,7 @@ msgstr "Utilice su cuenta social para iniciar sesión en Regen Marketplace."
 msgid "useMultiStep must be used within a MultiStepProvider"
 msgstr "useMultiStep debe usarse dentro de un MultiStepProvider"
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:14
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:15
 msgid "User must have a blockchain account."
 msgstr "El usuario debe tener una cuenta blockchain."
 
@@ -5479,6 +5568,10 @@ msgstr "Sí, mi proyecto incluye pastizales."
 msgid "Yes, please create an account for me so I can easily see my purchase details and retirement certificate when I log in"
 msgstr "Sí, por favor crea una cuenta para mí para que pueda ver fácilmente los detalles de mi compra y mi certificado de retirada cuando inicie sesión."
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:42
+msgid "Yes, Remove"
+msgstr "Sí, eliminar"
+
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:17
 msgid "yes, remove & connect"
 msgstr "Sí, quitar y conectar"
@@ -5575,7 +5668,7 @@ msgstr "Debes agregar como máximo {GALLERY_PHOTOS_MAX} fotos a la galería de f
 msgid "You must agree to continue"
 msgstr "Debes aceptar para continuar"
 
-#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:13
+#: src/components/organisms/BaseRoleDropdown/BaseRoleDropdown.constants.ts:14
 msgid "You must assign a new owner before you can change your role."
 msgstr "Debes asignar un nuevo propietario antes de poder cambiar tu rol."
 
@@ -5638,6 +5731,10 @@ msgstr "Tu nombre completo"
 #: src/components/organisms/PaymentInfoForm/PaymentInfoForm.CustomerInfo.tsx:61
 msgid "Your name"
 msgstr "Su nombre"
+
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:46
+msgid "Your name, profile image, and title will be visible on your organization profile if set to visible."
+msgstr "Su nombre, imagen de perfil y título serán visibles en el perfil de su organización si están configurados como visibles."
 
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.constants.ts:4
 msgid "your profiles"

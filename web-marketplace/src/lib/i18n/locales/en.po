@@ -31,6 +31,8 @@ msgstr ""
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 #~ msgid " Exit to homepage "
 #~ msgstr ""
+#~ msgid " Exit to homepage "
+#~ msgstr ""
 
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
@@ -336,7 +338,7 @@ msgid "Actions"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.config.tsx:49
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:48
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:52
 #: src/pages/Activity/Activity.tsx:12
 msgid "Activity"
 msgstr ""
@@ -416,6 +418,8 @@ msgstr ""
 #: src/components/templates/ProjectDetails/ProjectDetails.Stakeholders.tsx:45
 #: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:38
 #: src/pages/Post/Post.constants.ts:8
+#: src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.Stakeholders.tsx:38
+#: src/pages/Post/Post.constants.ts:8
 msgid "admin"
 msgstr ""
 
@@ -465,12 +469,15 @@ msgid "Amazon"
 msgstr ""
 
 #: src/features/ecocredit/BridgeFlow/hooks/useCreditBridgeSubmit.tsx:144
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:125
 #: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:121
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:125
 msgid "amount"
 msgstr ""
 
 #: src/components/molecules/CreditsAmount/CreditsAmount.Header.tsx:36
+#: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:78
+#: src/components/organisms/BridgeForm/BridgeForm.tsx:127
+#: src/lib/constants/shared.constants.tsx:30
 #: src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx:78
 #: src/components/organisms/BridgeForm/BridgeForm.tsx:127
 #: src/lib/constants/shared.constants.tsx:30
@@ -482,6 +489,7 @@ msgid "Amount available"
 msgstr ""
 
 #: src/components/organisms/SellOrdersTable/SellOrdersTable.constants.ts:34
+#: src/pages/Marketplace/Storefront/hooks/useCheckSellOrderAvailabilty.tsx:51
 msgid "AMOUNT AVAILABLE"
 msgstr ""
 
@@ -592,6 +600,7 @@ msgstr ""
 
 #: src/components/organisms/AccountConnectWalletModal/components/AccountConnectWalletModal.Mobile.constants.ts:3
 #: src/components/organisms/LoginModal/components/LoginModal.Mobile.constants.ts:3
+#: src/components/organisms/LoginModal/components/LoginModal.Mobile.constants.ts:3
 msgid "Approve Keplr mobile app connection request on your mobile."
 msgstr ""
 
@@ -599,7 +608,8 @@ msgstr ""
 msgid "approved methodologies"
 msgstr ""
 
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:113
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:112
+#: src/pages/Marketplace/Storefront/Storefront.tsx:248
 msgid "Are you sure you want to cancel this sell order?"
 msgstr ""
 
@@ -812,7 +822,7 @@ msgstr ""
 
 #: src/components/organisms/BridgableEcocreditsTable/BridgableEcocreditsTable.constants.ts:3
 #: src/features/ecocredit/BridgeFlow/BridgeFlow.constants.ts:4
-#: src/pages/Dashboard/Dashboard.constants.tsx:13
+#: src/pages/Dashboard/Dashboard.constants.tsx:12
 msgid "Bridge"
 msgstr ""
 
@@ -845,6 +855,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/SellOrdersActionsBar/SellOrdersActionsBar.tsx:218
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:4
 msgid "BUY"
 msgstr ""
 
@@ -957,6 +968,7 @@ msgstr ""
 
 #: src/features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow.constants.ts:5
 #: src/lib/constants/shared.constants.tsx:42
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:8
 msgid "Cancel"
 msgstr ""
 
@@ -1270,6 +1282,10 @@ msgstr ""
 
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.constants.tsx:169
 msgid "Contributes minimally"
+msgstr ""
+
+#: src/components/organisms/ProjectDashboardBanner/ProjectDashboardBanner.tsx:53
+msgid "Convert to draft"
 msgstr ""
 
 #: src/components/organisms/TerrasosFooter/TerrasosFooter.constants.ts:116
@@ -1731,11 +1747,16 @@ msgstr ""
 
 #: src/components/organisms/ConnectWalletFlow/ConnectWalletFlow.SelectAccountModal.tsx:67
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:12
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:12
 msgid "default avatar"
 msgstr ""
 
 #: src/features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreateBatchMultiStepForm.constants.ts:6
 msgid "Delete"
+msgstr ""
+
+#: src/components/organisms/ProjectDashboardBanner/ProjectDashboardBanner.tsx:65
+msgid "Delete project"
 msgstr ""
 
 #: src/components/templates/ProjectDetails/ProjectDetails.constant.ts:9
@@ -1748,6 +1769,7 @@ msgstr ""
 
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:152
 #: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:55
+#: src/components/templates/ProjectDetails/TerrasosCreditsInfo/TerrasosCreditsInfo.ComplianceInfo.tsx:55
 msgid "department"
 msgstr ""
 
@@ -1756,6 +1778,10 @@ msgid "description"
 msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:104
+#: src/components/organisms/EditProfileForm/EditProfileForm.tsx:199
+#: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
+#: src/pages/Description/Description.tsx:48
+#: src/pages/ProjectReview/ProjectReview.tsx:224
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:199
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/pages/Description/Description.tsx:48
@@ -1802,6 +1828,8 @@ msgstr ""
 #: src/components/organisms/MediaSection.tsx:50
 #: src/lib/constants/shared.constants.tsx:23
 #: src/pages/Post/Post.constants.ts:16
+#: src/lib/constants/shared.constants.tsx:23
+#: src/pages/Post/Post.constants.ts:16
 msgid "Draft"
 msgstr ""
 
@@ -1845,10 +1873,11 @@ msgstr ""
 
 #: src/components/atoms/AgreeErpaCheckbox.tsx:37
 #: src/components/atoms/AgreeErpaCheckboxNew.tsx:46
+#: src/components/atoms/AgreeErpaCheckboxNew.tsx:46
 msgid "Ecocredit Sales Agreement"
 msgstr ""
 
-#: src/components/organisms/Portfolio/Portfolio.tsx:67
+#: src/components/organisms/Portfolio/Portfolio.tsx:62
 #: src/pages/BasketDetails/BasketDetails.SectionLayout.tsx:14
 msgid "Ecocredits"
 msgstr ""
@@ -1928,6 +1957,9 @@ msgid "edit"
 msgstr ""
 
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:119
+#: src/components/organisms/Order/Order.MakeAnonymous.tsx:76
+#: src/components/organisms/ProjectDashboardBanner/ProjectDashboardBanner.tsx:150
+#: src/lib/constants/shared.constants.tsx:22
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:76
 #: src/lib/constants/shared.constants.tsx:22
 msgid "Edit"
@@ -2340,8 +2372,8 @@ msgid "I just offset my carbon footprint on #RegenMarketplace with @regen_networ
 msgstr ""
 
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:11
-#~ msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future!"
-#~ msgstr ""
+msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future!"
+msgstr ""
 
 #: src/pages/Marketplace/Storefront/Storefront.constants.ts:11
 #~ msgid "I just purchased carbon credits on #RegenMarketplace with @regen_network. Let's work together to reduce our carbon footprint. Join me in investing in a regenerative future! "
@@ -2551,9 +2583,13 @@ msgstr ""
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:23
 msgid "Learn how to"
 msgstr ""
+msgid "Learn how to"
+msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:23
 #: src/components/organisms/RegistryLayout/components/ConnectWalletModal/ConnectWalletModal.constants.ts:5
+#~ msgid "Learn how to "
+#~ msgstr ""
 #~ msgid "Learn how to "
 #~ msgstr ""
 
@@ -2561,9 +2597,13 @@ msgstr ""
 #: src/components/organisms/MethodologyDocumentationSection.tsx:102
 #: src/pages/Profile/CreditClassTab/CreditClassTab.constants.ts:4
 #: src/pages/Projects/PrefinanceProjects/PrefinanceProjects.tsx:85
+#: src/components/organisms/MethodologyDocumentationSection.tsx:102
+#: src/pages/Profile/CreditClassTab/CreditClassTab.constants.ts:4
+#: src/pages/Projects/PrefinanceProjects/PrefinanceProjects.tsx:85
 msgid "learn more"
 msgstr ""
 
+#: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:53
 #: src/components/organisms/ChooseCreditsForm/ChooseCreditsForm.CryptoOptions.tsx:53
 #: src/components/organisms/CreateSellOrderForm/CreateSellOrderForm.tsx:220
 #: src/components/organisms/TebuBannerWrapper/TebuBannerWrapper.contants.ts:10
@@ -2572,7 +2612,7 @@ msgid "Learn more"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.ConnectedEmailErrorModal.tsx:56
-#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:58
+#: src/components/organisms/RegistryLayout/RegistryLayout.Footer.tsx:62
 #: src/pages/Home/Home.tsx:199
 msgid "Learn More"
 msgstr ""
@@ -2661,7 +2701,7 @@ msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:36
 #: src/components/organisms/UserAccountSettings/UserAccountSettings.constants.ts:3
-#: src/pages/Dashboard/Dashboard.constants.tsx:48
+#: src/pages/Dashboard/Dashboard.constants.tsx:47
 msgid "Log in email successfully added"
 msgstr ""
 
@@ -2669,7 +2709,7 @@ msgstr ""
 msgid "log in for faster checkout"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:120
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:119
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:11
 msgid "Log out"
 msgstr ""
@@ -2854,6 +2894,10 @@ msgstr ""
 
 #: src/components/organisms/MethodologySteps.tsx:76
 msgid "Methodology Process"
+msgstr ""
+
+#: src/components/organisms/ProjectDashboardBanner/ProjectDashboardBanner.tsx:59
+msgid "Migrate project"
 msgstr ""
 
 #: src/components/organisms/BasketOverview/BasketOverview.tsx:147
@@ -3487,6 +3531,7 @@ msgstr ""
 
 #: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrderSubmit.tsx:89
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:188
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:89
 msgid "price per credit"
 msgstr ""
 
@@ -3578,6 +3623,14 @@ msgstr ""
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:226
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
 #: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:120
+#: src/components/organisms/CreditBatches/CreditBatches.config.ts:18
+#: src/components/organisms/OrderCryptoReceiptModal/OrderCryptoReceiptModal.constants.ts:5
+#: src/pages/BuyCredits/BuyCredits.utils.tsx:299
+#: src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx:107
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx:226
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx:113
+#: src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx:120
+#: src/pages/Marketplace/Storefront/hooks/useCancelSellOrderSubmit.tsx:114
 msgid "project"
 msgstr ""
 
@@ -3895,6 +3948,10 @@ msgstr ""
 msgid "Region"
 msgstr ""
 
+#: src/components/organisms/ProjectDashboardBanner/ProjectDashboardBanner.tsx:47
+msgid "Register with a crediting protocol"
+msgstr ""
+
 #: src/pages/Post/Post.constants.ts:9
 msgid "registry"
 msgstr ""
@@ -4198,6 +4255,7 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:50
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:11
+#: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:11
 msgid "Sell"
 msgstr ""
 
@@ -4221,8 +4279,9 @@ msgstr ""
 msgid "sell order id:"
 msgstr ""
 
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:61
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:60
 #: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:48
+#: src/pages/Marketplace/Storefront/Storefront.tsx:154
 msgid "Sell orders"
 msgstr ""
 
@@ -4970,6 +5029,8 @@ msgstr ""
 
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.constants.tsx:25
 #: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:69
+#: src/pages/Dashboard/Dashboard.constants.tsx:24
+#: src/components/organisms/RolesForm/components/RoleField/RoleField.utils.tsx:69
 #: src/pages/Dashboard/Dashboard.constants.tsx:25
 msgid "Unnamed"
 msgstr ""
@@ -4982,7 +5043,12 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
+#: src/components/organisms/ProjectDashboardBanner/ProjectDashboardBanner.tsx:117
+msgid "Untitled Project"
+msgstr ""
+
 #: src/components/molecules/OrderSummaryCard/OrderSummaryCard.Content.tsx:120
+#: src/components/organisms/Order/Order.MakeAnonymous.tsx:68
 #: src/components/organisms/Order/Order.MakeAnonymous.tsx:68
 msgid "update"
 msgstr ""
@@ -5116,7 +5182,11 @@ msgstr ""
 msgid "Videos"
 msgstr ""
 
-#: src/features/marketplace/CancelSellOrderFlow/CancelSellOrderFlow.constants.ts:6
+#: src/components/organisms/ProjectDashboardBanner/ProjectDashboardBanner.tsx:140
+msgid "View"
+msgstr ""
+
+#: src/pages/Marketplace/Storefront/Storefront.constants.ts:9
 msgid "View all sell orders"
 msgstr ""
 
@@ -5348,7 +5418,8 @@ msgstr ""
 msgid "whoops, cancel"
 msgstr ""
 
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:112
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:111
+#: src/pages/Marketplace/Storefront/Storefront.tsx:247
 msgid "WHOOPS, EXIT"
 msgstr ""
 
@@ -5372,7 +5443,8 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:111
+#: src/features/marketplace/CancelSellOrderFlow/hooks/useCancelSellOrder.ts:110
+#: src/pages/Marketplace/Storefront/Storefront.tsx:246
 msgid "Yes, cancel sell order"
 msgstr ""
 

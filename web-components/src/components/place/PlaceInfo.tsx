@@ -48,7 +48,7 @@ export default function PlaceInfo({
     <Box sx={{ display: 'flex' }}>
       {showIcon && (
         <Box component="span" className={iconClassName} sx={{ mr: 1 }}>
-          <PinIcon className="w-20 h-20 text-brand-400" />
+          <PinIcon className="w-20 h-20" />
         </Box>
       )}
       <StyledBody

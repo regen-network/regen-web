@@ -8,7 +8,7 @@ export type SocialLink = {
 };
 
 export type ProfileInfos = {
-  addressLink: LinkType;
+  addressLink?: LinkType;
   description?: string;
   socialsLinks?: SocialLink[];
 };

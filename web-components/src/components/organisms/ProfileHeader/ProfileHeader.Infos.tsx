@@ -21,56 +21,69 @@ export const ProfileHeaderInfos = ({
   socialsLinks,
   LinkComponent,
   sx = [],
-}: Props) => (
-  <Flex
-    flexDirection={{ xs: 'column', sm: 'row' }}
-    alignItems={{ xs: 'center', sm: 'flex-start' }}
-    justifyContent={{ xs: 'center', sm: 'flex-start' }}
-    textAlign={{ xs: 'center', sm: 'left' }}
-    width="100%"
-    sx={[...sxToArray(sx)]}
-  >
-    <Box sx={{ width: '100%', mb: { xs: 1.25, sm: 0 } }}>
-      {addressLink.text && (
-        <Body
-          size="lg"
+}: Props) => {
+  const showAddress = !!addressLink?.text;
+  const showDescription = !!description?.trim();
+  return (
+    <Flex
+      flexDirection={{ xs: 'column', sm: 'row' }}
+      alignItems={{ xs: 'center', sm: 'flex-start' }}
+      justifyContent={{ xs: 'center', sm: 'flex-start' }}
+      textAlign={{ xs: 'center', sm: 'left' }}
+      width="100%"
+      sx={[...sxToArray(sx)]}
+    >
+      {(showAddress || showDescription) && (
+        <Box
           sx={{
-            display: 'flex',
-            justifyContent: { xs: 'center', sm: 'flex-start' },
-            mb: { xs: 1.5, sm: 3 },
-            color: 'primary.light',
-            '& .MuiLink-root': {
-              color: 'primary.light',
-              fontWeight: 400,
-            },
+            width: '100%',
+            mb: { xs: showAddress ? 1.25 : 0, sm: 0 },
           }}
         >
-          <Box sx={{ fontSize: 24, mr: 1, color: 'info.main' }}>
-            {ProfileVariantIconMapping[variant]}
-          </Box>
-          <LinkComponent href={addressLink.href}>
-            {addressLink.text}
-          </LinkComponent>
-        </Body>
+          {showAddress && (
+            <Body
+              size="lg"
+              sx={{
+                display: 'flex',
+                justifyContent: { xs: 'center', sm: 'flex-start' },
+                mb: { xs: 1.5, sm: 3 },
+                color: 'primary.light',
+                '& .MuiLink-root': {
+                  color: 'primary.light',
+                  fontWeight: 400,
+                },
+              }}
+            >
+              <Box sx={{ fontSize: 24, mr: 1, color: 'info.main' }}>
+                {ProfileVariantIconMapping[variant]}
+              </Box>
+              <LinkComponent href={addressLink!.href}>
+                {addressLink!.text}
+              </LinkComponent>
+            </Body>
+          )}
+          {showDescription && (
+            <Body size="md" sx={{ px: { xs: 3.75, sm: 0 } }}>
+              {description}
+            </Body>
+          )}
+        </Box>
       )}
-      <Body size="md" sx={{ px: { xs: 3.75, sm: 0 }, minHeight: 24 }}>
-        {description}
-      </Body>
-    </Box>
-    <Flex sx={{ alignItems: 'center' }}>
-      {socialsLinks?.map(({ href, icon }) => (
-        <LinkComponent
-          key={href}
-          href={href}
-          sx={{
-            color: 'secondary.dark',
-            '& .MuiSvgIcon-root': { fontSize: 40 },
-            ':not(:last-child)': { mr: 2 },
-          }}
-        >
-          {icon}
-        </LinkComponent>
-      ))}
+      <Flex sx={{ alignItems: 'center' }}>
+        {socialsLinks?.map(({ href, icon }) => (
+          <LinkComponent
+            key={href}
+            href={href}
+            sx={{
+              color: 'secondary.dark',
+              '& .MuiSvgIcon-root': { fontSize: 40 },
+              ':not(:last-child)': { mr: 2 },
+            }}
+          >
+            {icon}
+          </LinkComponent>
+        ))}
+      </Flex>
     </Flex>
-  </Flex>
-);
+  );
+};

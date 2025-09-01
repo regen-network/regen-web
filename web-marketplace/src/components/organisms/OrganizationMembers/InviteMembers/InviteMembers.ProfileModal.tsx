@@ -19,7 +19,7 @@ import {
   SAVE_LABEL,
   TITLE_LABEL,
   TITLE_SUBHEADER,
-} from './OrganizationMembers.constants';
+} from '../OrganizationMembers.constants';
 
 interface PersonalProfileModalProps {
   open: boolean;

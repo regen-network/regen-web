@@ -7,9 +7,7 @@ import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 import { Title } from 'web-components/src/components/typography';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 
-import { GetAccountsByNameOrAddrQuery } from 'generated/graphql';
-
-import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
+import { BaseMemberRole } from '../../BaseMembersTable/BaseMembersTable.types';
 import {
   ADD_MEMBER_LABEL,
   ADMIN_EDITOR_RULE,
@@ -26,21 +24,15 @@ import {
   ROLE_LABEL,
   VISIBLE_DESCRIPTION,
   VISIBLE_QUESTION,
-} from './OrganizationMembers.constants';
-import { MemberRoleDropdown } from './OrganizationMembers.RoleDropdown';
-import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
-
-interface InviteMemberModalProps {
-  open: boolean;
-  onClose: () => void;
-  onSubmit: (data: {
-    role: BaseMemberRole | undefined;
-    addressOrEmail: string;
-    visible: boolean;
-  }) => void;
-  accounts?: GetAccountsByNameOrAddrQuery | null;
-  setDebouncedValue?: (value: string) => void;
-}
+} from '../OrganizationMembers.constants';
+import { MemberRoleDropdown } from '../OrganizationMembers.RoleDropdown';
+import { InviteMemberModalProps } from '../OrganizationMembers.types';
+import { VisibilitySwitch } from '../OrganizationMembers.VisibilitySwitch';
+import {
+  getDisplayValue,
+  getValidationError,
+  isValidAddressOrEmail,
+} from './InviteMembers.utils';
 
 export const InviteMemberModal = ({
   open,
@@ -55,78 +47,18 @@ export const InviteMemberModal = ({
   const [visible, setVisible] = useState(true);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const blurTimeoutRef = useRef<number | undefined>();
-  const modalRef = useClickOutside<HTMLDivElement>(() => {
+  const modalRef = useClickOutside<HTMLDivElement>(event => {
+    const target = event.target as HTMLElement;
+    if (target.closest('ul.absolute') || target.closest('li.cursor-pointer')) {
+      return;
+    }
+    if (isInputFocused) return;
     resetFields();
     onClose();
   });
 
   const accountSuggestions =
     accounts?.getAccountsByNameOrAddr?.nodes?.slice(0, 8) || [];
-
-  const shortenAddress = (addr: string): string => {
-    if (addr.length <= 15) return addr;
-    return `${addr.slice(0, 9)}...${addr.slice(-6)}`;
-  };
-  const isValidEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const isValidRegenAddress = (address: string): boolean => {
-    return (
-      address.startsWith('regen1') &&
-      address.length >= 39 &&
-      address.length <= 45
-    );
-  };
-
-  const isValidAddressOrEmail = (value: string): boolean => {
-    if (!value.trim()) return false;
-    const match = value.match(/^(.+)\s\((.+)\)$/);
-    if (match) {
-      return true;
-    }
-    if (role === 'admin' || role === 'editor') {
-      return isValidRegenAddress(value);
-    }
-
-    return isValidEmail(value) || isValidRegenAddress(value);
-  };
-  const getValidationError = (): string | null => {
-    if (!addressOrEmail.trim()) return null;
-    const match = addressOrEmail.match(/^(.+)\s\((.+)\)$/);
-    if (match) {
-      return null;
-    }
-    if (role === 'admin' || role === 'editor') {
-      if (!isValidRegenAddress(addressOrEmail)) {
-        return REGEN_ADDRESS_REQUIRED_ERROR;
-      }
-    } else {
-      if (
-        !isValidEmail(addressOrEmail) &&
-        !isValidRegenAddress(addressOrEmail)
-      ) {
-        if (addressOrEmail.includes('@')) {
-          return INVALID_EMAIL_ERROR;
-        } else if (addressOrEmail.startsWith('regen')) {
-          return INVALID_REGEN_ADDRESS_ERROR;
-        } else {
-          return INVALID_EMAIL_ERROR;
-        }
-      }
-    }
-
-    return null;
-  };
-  const getDisplayValue = (): string => {
-    const match = addressOrEmail.match(/^(.+)\s\((.+)\)$/);
-    if (match) {
-      const [, name, address] = match;
-      return `${name} (${shortenAddress(address)})`;
-    }
-    return addressOrEmail;
-  };
 
   const resetFields = () => {
     setRole(undefined);
@@ -140,7 +72,7 @@ export const InviteMemberModal = ({
   const disabledInvite =
     !role ||
     addressOrEmail.trim() === '' ||
-    !isValidAddressOrEmail(addressOrEmail);
+    !isValidAddressOrEmail(addressOrEmail, role);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -198,7 +130,7 @@ export const InviteMemberModal = ({
           </span>
           <input
             type="text"
-            value={getDisplayValue()}
+            value={getDisplayValue(addressOrEmail)}
             onFocus={() => {
               if (blurTimeoutRef.current)
                 window.clearTimeout(blurTimeoutRef.current);
@@ -219,9 +151,21 @@ export const InviteMemberModal = ({
             placeholder={_(ENTER_EMAIL_OR_ADDRESS_PLACEHOLDER)}
             className="w-full h-[50px] md:h-[60px] border-solid border-[1px] border-bc-neutral-300 rounded px-12 text-sm focus:outline-none p-20"
           />
-          {getValidationError() && (
+          {getValidationError(
+            addressOrEmail,
+            role,
+            REGEN_ADDRESS_REQUIRED_ERROR,
+            INVALID_EMAIL_ERROR,
+            INVALID_REGEN_ADDRESS_ERROR,
+          ) && (
             <div className="text-bc-red-500 text-sm font-bold font-sans mt-2">
-              {getValidationError()}
+              {getValidationError(
+                addressOrEmail,
+                role,
+                REGEN_ADDRESS_REQUIRED_ERROR,
+                INVALID_EMAIL_ERROR,
+                INVALID_REGEN_ADDRESS_ERROR,
+              )}
             </div>
           )}
           {isInputFocused &&

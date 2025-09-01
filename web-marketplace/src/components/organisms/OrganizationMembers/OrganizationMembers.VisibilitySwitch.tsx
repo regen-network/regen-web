@@ -19,16 +19,16 @@ export const VisibilitySwitch: React.FC<VisibilitySwitchProps> = ({
   onChange,
 }) => {
   const { _ } = useLingui();
-  const onLabel = _(VISIBLE);
-  const offLabel = _(HIDDEN);
+  const visibleLabel = _(VISIBLE);
+  const hiddenLabel = _(HIDDEN);
 
   const control = (
     <ToggleSwitch
       checked={checked}
       disabled={disabled}
       onChange={onChange}
-      onLabel={onLabel}
-      offLabel={offLabel}
+      visibleLabel={visibleLabel}
+      hiddenLabel={hiddenLabel}
     />
   );
 

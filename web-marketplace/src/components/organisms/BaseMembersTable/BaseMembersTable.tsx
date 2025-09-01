@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
-import { Project } from '@regen-network/api/regen/ecocredit/v1/state';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import DropdownIcon from 'web-components/src/components/icons/DropdownIcon';
@@ -41,7 +40,7 @@ interface BaseMembersTableProps<T extends BaseUser> {
   hideHeader?: boolean;
   hideDescription?: boolean;
   hideHelpDocs?: boolean;
-  showActionsColumn?: boolean; // controls trailing placeholder column width (60px)
+  showActionsColumn?: boolean;
 }
 
 export const BaseMembersTable = <T extends BaseUser>({

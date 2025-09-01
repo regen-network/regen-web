@@ -83,11 +83,7 @@ export const UserInfo = <T extends BaseUser>({
       </div>
 
       {/* dots (mobile) */}
-      {children && (
-        <div className={`flex h-[94px] ${mobileDotsBreakpoint}`}>
-          {children}
-        </div>
-      )}
+      <div className={`flex h-[94px] ${mobileDotsBreakpoint}`}>{children}</div>
     </div>
   );
 };

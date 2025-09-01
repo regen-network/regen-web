@@ -86,6 +86,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
         </div>
       ) : (
         <button
+          type="button"
           onClick={toggle}
           className={cn(
             `flex items-center justify-between w-full ${height} px-20 py-15 rounded border border-solid cursor-pointer`,

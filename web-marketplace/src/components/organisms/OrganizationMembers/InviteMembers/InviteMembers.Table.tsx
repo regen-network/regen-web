@@ -6,23 +6,23 @@ import Banner from 'web-components/src/components/banner';
 
 import { bannerTextAtom } from 'lib/atoms/banner.atoms';
 
-import { ROLE_VIEWER } from '../ActionDropdown/ActionDropdown.constants';
-import { ActionsDropdown } from '../ActionDropdown/ActionsDropdown';
-import { BaseMembersTable } from '../BaseMembersTable/BaseMembersTable';
-import { ORGANIZATION_CONTEXT } from '../BaseMembersTable/BaseMembersTable.constants';
-import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
-import { UserInfo } from '../BaseMembersTable/BaseMembersTable.UserInfo';
-import { InviteMemberModal } from './InviteMemberModal';
+import { ROLE_VIEWER } from '../../ActionDropdown/ActionDropdown.constants';
+import { ActionsDropdown } from '../../ActionDropdown/ActionsDropdown';
+import { BaseMembersTable } from '../../BaseMembersTable/BaseMembersTable';
+import { ORGANIZATION_CONTEXT } from '../../BaseMembersTable/BaseMembersTable.constants';
+import { BaseMemberRole } from '../../BaseMembersTable/BaseMembersTable.types';
+import { UserInfo } from '../../BaseMembersTable/BaseMembersTable.UserInfo';
 import {
   INVITE_MEMBERS,
   MEMBER_REMOVED_BANNER,
   VISIBILITY_ON_PROFILE,
-} from './OrganizationMembers.constants';
-import { MemberRoleDropdown } from './OrganizationMembers.RoleDropdown';
-import { Member } from './OrganizationMembers.types';
-import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
-import { PersonalProfileModal } from './PersonalProfileModal';
-import { RemoveMemberModal } from './RemoveMemberModal';
+} from '../OrganizationMembers.constants';
+import { MemberRoleDropdown } from '../OrganizationMembers.RoleDropdown';
+import { Member } from '../OrganizationMembers.types';
+import { VisibilitySwitch } from '../OrganizationMembers.VisibilitySwitch';
+import { RemoveMemberModal } from '../OrginazationMembers.RemoveMemberModal';
+import { InviteMemberModal } from './InviteMemberModal';
+import { PersonalProfileModal } from './InviteMembers.ProfileModal';
 
 type Props = {
   members: Member[];

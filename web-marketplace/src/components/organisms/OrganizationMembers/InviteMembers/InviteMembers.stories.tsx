@@ -8,11 +8,11 @@ import { Provider as JotaiProvider } from 'jotai';
 import {
   ROLE_ADMIN,
   ROLE_OWNER,
-} from '../ActionDropdown/ActionDropdown.constants';
-import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
-import { OrganizationMembersInviteTable } from './OrganizationMembers.InviteTable';
-import { mockMembers } from './OrganizationMembers.mock';
-import { Member } from './OrganizationMembers.types';
+} from '../../ActionDropdown/ActionDropdown.constants';
+import { BaseMemberRole } from '../../BaseMembersTable/BaseMembersTable.types';
+import { mockMembers } from '../OrganizationMembers.mock';
+import { Member } from '../OrganizationMembers.types';
+import { OrganizationMembersInviteTable } from './InviteMembers.Table';
 
 const mockAccounts = [
   {

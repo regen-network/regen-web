@@ -48,18 +48,20 @@ export const useHeaderStyles = makeStyles<StyleProps>()(
           color: theme.palette.primary.light,
           background: theme.palette.primary.main,
         },
-        '& ul > li > a, & ul > li > div > span': {
+      },
+      menuList: {
+        [theme.breakpoints.up('sm')]: {
+          display: 'flex',
+        },
+        // Limit link color rules to the top-level header menu only
+        // to avoid overriding colors inside dropdown menus.
+        '& > li > a, & > li > div > span': {
           color: color,
           textDecoration: 'none',
           paddingTop: theme.spacing(0.25),
           '&:link, &:visited, &:hover, &:active': {
             textDecoration: 'none',
           },
-        },
-      },
-      menuList: {
-        [theme.breakpoints.up('sm')]: {
-          display: 'flex',
         },
         '& li.MuiMenuItem-root': {
           // BEGIN HACK setting jss styles (duplicated from emotion style)

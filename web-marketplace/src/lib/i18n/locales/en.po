@@ -28,6 +28,8 @@ msgstr ""
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 #~ msgid " Exit to homepage "
 #~ msgstr ""
@@ -122,6 +124,7 @@ msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:117
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:212
+#: src/components/organisms/OrganizationMembers/InviteMembers/InviteMembers.ProfileModal.tsx:208
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:168
 msgid "{remainingDescriptionCharacters, plural, one {{remainingDescriptionCharacters} character remaining} other {{remainingDescriptionCharacters} characters remaining}}"
 msgstr ""
@@ -590,7 +593,7 @@ msgstr ""
 msgid "Andean"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:41
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:46
 msgid "Any posts they have created or signed will remain."
 msgstr ""
 
@@ -627,7 +630,7 @@ msgstr ""
 msgid "Are you sure you want to discard your changes?"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:40
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:45
 msgid "Are you sure you want to remove this member from your organization?"
 msgstr ""
 
@@ -1036,7 +1039,7 @@ msgstr ""
 msgid "Chain"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:52
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:57
 msgid "Change"
 msgstr ""
 
@@ -1785,7 +1788,7 @@ msgstr ""
 
 #: src/components/organisms/EditFileForm/EditFileForm.tsx:104
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:199
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:53
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:58
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:155
 #: src/pages/Description/Description.tsx:48
 #: src/pages/ProjectReview/ProjectReview.tsx:224
@@ -2253,7 +2256,7 @@ msgstr ""
 msgid "For Buyers"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:48
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:53
 msgid "For example: farmer, CTO, CEO, data analyst, ranger, etc."
 msgstr ""
 
@@ -2862,7 +2865,7 @@ msgstr ""
 msgid "Medium"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:43
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:48
 msgid "Member has been removed from your organization."
 msgstr ""
 
@@ -2988,7 +2991,7 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/organisms/EditProfileForm/EditProfileForm.tsx:151
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:50
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:55
 #: src/components/organisms/RolesForm/components/ProfileModal/ProfileModal.tsx:131
 #: src/pages/ProjectReview/ProjectReview.tsx:202
 msgid "Name"
@@ -3316,7 +3319,7 @@ msgstr ""
 msgid "Personal Dashboard"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:45
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:50
 msgid "Personal Profile"
 msgstr ""
 
@@ -3611,7 +3614,7 @@ msgstr ""
 msgid "Profile image"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:51
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:56
 msgid "Profile Image"
 msgstr ""
 
@@ -4180,7 +4183,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:49
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:54
 msgid "SAVE"
 msgstr ""
 
@@ -4908,13 +4911,14 @@ msgstr ""
 msgid "Timestamp"
 msgstr ""
 
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:52
 #: src/components/organisms/PostForm/PostForm.tsx:256
 msgid "Title"
 msgstr ""
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:47
-msgid "Title (optional)"
-msgstr ""
+#~ msgid "Title (optional)"
+#~ msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:46
 msgid "Token expired"
@@ -5483,7 +5487,7 @@ msgstr ""
 msgid "Yes, please create an account for me so I can easily see my purchase details and retirement certificate when I log in"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:42
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:47
 msgid "Yes, Remove"
 msgstr ""
 
@@ -5643,7 +5647,7 @@ msgstr ""
 msgid "Your name"
 msgstr ""
 
-#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:46
+#: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:51
 msgid "Your name, profile image, and title will be visible on your organization profile if set to visible."
 msgstr ""
 

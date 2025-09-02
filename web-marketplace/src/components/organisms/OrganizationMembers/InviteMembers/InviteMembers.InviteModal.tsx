@@ -85,6 +85,14 @@ export const InviteMemberModal = ({
     !(addressOrEmail || '').trim() ||
     !isValidAddressOrEmail(addressOrEmail || '', role);
 
+  const validationError = getValidationError(
+    addressOrEmail || '',
+    role,
+    REGEN_ADDRESS_REQUIRED_ERROR,
+    INVALID_EMAIL_ERROR,
+    INVALID_REGEN_ADDRESS_ERROR,
+  );
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Overlay */}
@@ -161,27 +169,11 @@ export const InviteMemberModal = ({
               label=""
               value={getDisplayValue(addressOrEmail || '')}
               placeholder={_(ENTER_EMAIL_OR_ADDRESS_PLACEHOLDER)}
-              helperText={(() => {
-                const err = getValidationError(
-                  addressOrEmail || '',
-                  role,
-                  REGEN_ADDRESS_REQUIRED_ERROR,
-                  INVALID_EMAIL_ERROR,
-                  INVALID_REGEN_ADDRESS_ERROR,
-                );
-                return (
-                  err || (errors.addressOrEmail?.message as string | undefined)
-                );
-              })()}
-              error={
-                !!getValidationError(
-                  addressOrEmail || '',
-                  role,
-                  REGEN_ADDRESS_REQUIRED_ERROR,
-                  INVALID_EMAIL_ERROR,
-                  INVALID_REGEN_ADDRESS_ERROR,
-                )
+              helperText={
+                validationError ||
+                (errors.addressOrEmail?.message as string | undefined)
               }
+              error={!!validationError}
               onFocus={() => {
                 if (blurTimeoutRef.current)
                   window.clearTimeout(blurTimeoutRef.current);
@@ -201,23 +193,6 @@ export const InviteMemberModal = ({
               }}
               InputProps={{ className: 'h-[50px] md:h-[60px]' }}
             />
-            {getValidationError(
-              addressOrEmail || '',
-              role,
-              REGEN_ADDRESS_REQUIRED_ERROR,
-              INVALID_EMAIL_ERROR,
-              INVALID_REGEN_ADDRESS_ERROR,
-            ) && (
-              <div className="text-bc-red-500 text-sm font-bold font-sans mt-2">
-                {getValidationError(
-                  addressOrEmail || '',
-                  role,
-                  REGEN_ADDRESS_REQUIRED_ERROR,
-                  INVALID_EMAIL_ERROR,
-                  INVALID_REGEN_ADDRESS_ERROR,
-                )}
-              </div>
-            )}
             {isInputFocused &&
               (addressOrEmail || '') &&
               !addressOrEmail.includes('(') &&

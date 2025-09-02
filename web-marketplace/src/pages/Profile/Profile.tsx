@@ -97,8 +97,7 @@ export const Profile = (): JSX.Element => {
         icon: <ProjectPageIcon linearGradient />,
         href: `/profiles/${accountAddressOrId}/projects`,
         hidden: Boolean(
-          (adminProjects.length === 0 && !privActiveAccount?.email) ||
-            (address && adminProjects.length === 0),
+          address && adminProjects.length === 0 && !privActiveAccount?.email,
         ),
       },
       {
@@ -159,6 +158,35 @@ export const Profile = (): JSX.Element => {
     },
   ];
 
+  const isOwnProfile =
+    (wallet?.address &&
+      address &&
+      wallet.address.toLowerCase() === address.toLowerCase()) ||
+    (privActiveAccount?.id &&
+      account?.id &&
+      privActiveAccount.id === account.id);
+
+  const addressDisplay = address
+    ? truncate(address)
+    : isOwnProfile
+    ? privActiveAccount?.email || ''
+    : '';
+
+  const infos = {
+    ...(addressDisplay
+      ? {
+          addressLink: {
+            href: address
+              ? getAccountUrl(address, true)
+              : `/profiles/${accountAddressOrId}/portfolio`,
+            text: addressDisplay,
+          },
+        }
+      : {}),
+    description: account?.description?.trimEnd() ?? '',
+    socialsLinks,
+  };
+
   return (
     <WithLoader
       isLoading={isLoading}
@@ -177,26 +205,8 @@ export const Profile = (): JSX.Element => {
               name={account?.name ? account?.name : _(DEFAULT_NAME)}
               backgroundImage={backgroundImage}
               avatar={avatarImage}
-              infos={{
-                addressLink: {
-                  href: address
-                    ? getAccountUrl(address, true)
-                    : `/profiles/${accountAddressOrId}/portfolio`,
-                  text: address ? truncate(address) : '',
-                },
-                description: account?.description?.trimEnd() ?? '',
-                socialsLinks,
-              }}
-              editLink={
-                (wallet?.address &&
-                  address &&
-                  wallet.address.toLowerCase() === address.toLowerCase()) ||
-                (privActiveAccount?.email &&
-                  account?.id &&
-                  privActiveAccount.id === account.id)
-                  ? '/dashboard/profile'
-                  : ''
-              }
+              infos={infos}
+              editLink={isOwnProfile ? '/dashboard/profile' : ''}
               profileLink={profileLink}
               variant={
                 account?.type
@@ -225,20 +235,14 @@ export const Profile = (): JSX.Element => {
                       {manageButtonConfig.map(
                         btn =>
                           btn.show &&
-                          ((wallet?.address &&
-                            address &&
-                            wallet.address.toLowerCase() ===
-                              address.toLowerCase()) ||
-                            (privActiveAccount?.email &&
-                              account?.id &&
-                              privActiveAccount.id === account.id)) && (
+                          isOwnProfile && (
                             <OutlinedButton
                               key={btn.label}
                               variant="contained"
                               color="primary"
                               component={Link}
                               href={btn.link}
-                              className="text-[12px] md:text-[14px] py-[6px] px-[20px] md:py-[9px] md:px-[25px] whitespace-nowrap w-full md:w-auto"
+                              className="text-[12px] mb-30 md:mb-0 md:text-[14px] py-[6px] px-[20px] md:py-[9px] md:px-[25px] whitespace-nowrap w-full md:w-auto"
                             >
                               <CogIcon className="mr-10" />
                               {btn.label}
@@ -248,7 +252,7 @@ export const Profile = (): JSX.Element => {
                     </div>
                   </div>
                 </div>
-                <div className="pt-[30px] md:pt-[40px] pb-[85px] md:pb-[113px] w-full">
+                <div className="md:pt-40 pb-[85px] md:pb-[113px] w-full">
                   <Outlet />
                 </div>
               </Section>

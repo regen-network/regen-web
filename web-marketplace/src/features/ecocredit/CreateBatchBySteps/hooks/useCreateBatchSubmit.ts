@@ -66,8 +66,9 @@ async function prepareMsg(issuer: string, data: CreateBatchFormValues) {
     | undefined;
 
   try {
-    iriResponse = await generateIri(metadata);
-    if (!iriResponse) return;
+    if (Object.keys(metadata).length !== 0) {
+      iriResponse = await generateIri(metadata);
+    }
   } catch (err) {
     throw new Error(err as string);
   }
@@ -98,7 +99,7 @@ async function prepareMsg(issuer: string, data: CreateBatchFormValues) {
     issuer,
     projectId: data.projectId,
     issuance: issuance,
-    metadata: iriResponse.iri,
+    metadata: iriResponse?.iri || '{}',
     startDate: new Date(data.startDate as Date),
     endDate: new Date(data.endDate as Date),
     open: false,

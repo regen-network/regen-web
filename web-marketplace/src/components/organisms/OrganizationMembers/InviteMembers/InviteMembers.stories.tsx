@@ -60,7 +60,7 @@ const mockAccounts = [
 i18n.activate('en');
 
 const meta: Meta<typeof OrganizationMembersInviteTable> = {
-  title: 'Marketplace/Organisms/OrganizationMembersInviteTable',
+  title: 'Marketplace/Organisms/InviteMembersTable',
   component: OrganizationMembersInviteTable,
   argTypes: {
     onInvite: {

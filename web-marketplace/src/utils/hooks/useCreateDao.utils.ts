@@ -4,23 +4,23 @@ const creditClassesAuthorization = {
   filter: {
     $or: [
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgCreateClass',
         },
       },
 
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgUpdateClassIssuers',
         },
       },
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgUpdateClassAdmin',
         },
       },
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgUpdateClassMetadata',
         },
       },
@@ -35,17 +35,17 @@ const createProjectAuthorization = {
   filter: {
     $or: [
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgCreateProject',
         },
       },
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgCreateUnregisteredProject',
         },
       },
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgUpdateProjectEnrollment',
         },
       },
@@ -59,39 +59,54 @@ const creditsAuthorization = {
   filter: {
     $or: [
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgCreateBatch',
         },
       },
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgRetire',
         },
       },
 
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgSend',
         },
       },
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgCancel',
         },
       },
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgMintBatchCredits',
         },
       },
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgSealBatch',
         },
       },
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgUpdateBatchMetadata',
+        },
+      },
+      {
+        stargate: {
+          type_url: '/regen.ecocredit.basket.v1.MsgPut',
+        },
+      },
+      {
+        stargate: {
+          type_url: '/regen.ecocredit.basket.v1.MsgTake',
+        },
+      },
+      {
+        stargate: {
+          type_url: '/regen.ecocredit.basket.v1.MsgCreate',
         },
       },
     ],
@@ -104,17 +119,17 @@ const sellOrdersAuthorization = {
   filter: {
     $or: [
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.marketplace.v1.MsgSell',
         },
       },
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.marketplace.v1.MsgUpdateSellOrders',
         },
       },
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.marketplace.v1.MsgCancelSellOrder',
         },
       },
@@ -129,7 +144,12 @@ const orgAdminAuthorizations = [
   creditClassesAuthorization,
 ];
 
-const ownerMembersAuthorizations = [
+// Cannot be added on instantiation because it requires the cw4_group and rbam contract addresses
+// which are not predictable
+const ownerMembersAuthorizations = (
+  cw4GroupAddress: string,
+  rbamAddress: string,
+) => [
   {
     name: 'can_manage_members',
     metadata: 'Can manage members of the organization',
@@ -138,8 +158,7 @@ const ownerMembersAuthorizations = [
         {
           wasm: {
             execute: {
-              contract_addr:
-                'replace with cw4_group membership contract address',
+              contract_addr: cw4GroupAddress,
               msg: {
                 '#base64': {
                   update_members: {
@@ -156,7 +175,7 @@ const ownerMembersAuthorizations = [
         {
           wasm: {
             execute: {
-              contract_addr: 'replace with rbam contract address',
+              contract_addr: rbamAddress,
               msg: {
                 '#base64': {
                   create_role: {},
@@ -169,7 +188,7 @@ const ownerMembersAuthorizations = [
         {
           wasm: {
             execute: {
-              contract_addr: 'replace with rbam contract address',
+              contract_addr: rbamAddress,
               msg: {
                 '#base64': {
                   create_authorization: {},
@@ -182,7 +201,7 @@ const ownerMembersAuthorizations = [
         {
           wasm: {
             execute: {
-              contract_addr: 'replace with rbam contract address',
+              contract_addr: rbamAddress,
               msg: {
                 '#base64': {
                   // in particular, useful to update can_manage_members_except_owner authorization
@@ -197,7 +216,7 @@ const ownerMembersAuthorizations = [
         {
           wasm: {
             execute: {
-              contract_addr: 'replace with rbam contract address',
+              contract_addr: rbamAddress,
               msg: {
                 '#base64': {
                   assign: {},
@@ -210,7 +229,7 @@ const ownerMembersAuthorizations = [
         {
           wasm: {
             execute: {
-              contract_addr: 'replace with rbam contract address',
+              contract_addr: rbamAddress,
               msg: {
                 '#base64': {
                   revoke: {},
@@ -225,7 +244,11 @@ const ownerMembersAuthorizations = [
   },
 ];
 
-const adminMembersAuthorizations = (initialOwnerAddress: string) => [
+const adminMembersAuthorizations = (
+  initialOwnerAddress: string,
+  cw4GroupAddress: string,
+  rbamAddress: string,
+) => [
   {
     name: 'can_manage_members_except_owner',
     metadata: 'Can manage members of the organization except the owner',
@@ -234,8 +257,7 @@ const adminMembersAuthorizations = (initialOwnerAddress: string) => [
         {
           wasm: {
             execute: {
-              contract_addr:
-                'replace with cw4_group membership contract address',
+              contract_addr: cw4GroupAddress,
               msg: {
                 '#base64': {
                   update_members: {
@@ -252,7 +274,7 @@ const adminMembersAuthorizations = (initialOwnerAddress: string) => [
         {
           wasm: {
             execute: {
-              contract_addr: 'replace with rbam contract address',
+              contract_addr: rbamAddress,
               msg: {
                 '#base64': {
                   assign: {},
@@ -265,7 +287,7 @@ const adminMembersAuthorizations = (initialOwnerAddress: string) => [
         {
           wasm: {
             execute: {
-              contract_addr: 'replace with rbam contract address',
+              contract_addr: rbamAddress,
               msg: {
                 '#base64': {
                   revoke: {
@@ -284,11 +306,18 @@ const adminMembersAuthorizations = (initialOwnerAddress: string) => [
   },
 ];
 
-export const organizationRoles = (initialOwnerAddress: string) => [
+export const organizationRoles = (
+  initialOwnerAddress: string,
+  cw4GroupAddress: string,
+  rbamAddress: string,
+) => [
   {
     name: 'Owner',
     metadata: 'Owner of the organization',
-    authorizations: [...ownerMembersAuthorizations, ...orgAdminAuthorizations],
+    authorizations: [
+      ...ownerMembersAuthorizations(cw4GroupAddress, rbamAddress),
+      ...orgAdminAuthorizations,
+    ],
     assignments: [initialOwnerAddress],
   },
   {
@@ -296,7 +325,11 @@ export const organizationRoles = (initialOwnerAddress: string) => [
     metadata:
       'Manages user access and has full control of projects, credits, and credit classes.',
     authorizations: [
-      ...adminMembersAuthorizations(initialOwnerAddress),
+      ...adminMembersAuthorizations(
+        initialOwnerAddress,
+        cw4GroupAddress,
+        rbamAddress,
+      ),
       ...orgAdminAuthorizations,
     ],
   },
@@ -319,12 +352,12 @@ const projectsAuthorization = {
   filter: {
     $or: [
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgUpdateProjectMetadata',
         },
       },
       {
-        'stargate': {
+        stargate: {
           type_url: '/regen.ecocredit.v1.MsgUpdateProjectAdmin',
         },
       },
@@ -338,12 +371,16 @@ const projectAdminAuthorizations = [
   sellOrdersAuthorization,
 ];
 
-export const projectRoles = (initialOwnerAddress: string) => [
+export const projectRoles = (
+  initialOwnerAddress: string,
+  cw4GroupAddress: string,
+  rbamAddress: string,
+) => [
   {
     name: 'Owner',
     metadata: 'Owner of the project',
     authorizations: [
-      ...ownerMembersAuthorizations,
+      ...ownerMembersAuthorizations(cw4GroupAddress, rbamAddress),
       ...projectAdminAuthorizations,
     ],
     assignments: [initialOwnerAddress],
@@ -353,7 +390,11 @@ export const projectRoles = (initialOwnerAddress: string) => [
     metadata:
       'Manages user access and can edit all project info and project credits.',
     authorizations: [
-      ...adminMembersAuthorizations(initialOwnerAddress),
+      ...adminMembersAuthorizations(
+        initialOwnerAddress,
+        cw4GroupAddress,
+        rbamAddress,
+      ),
       ...projectAdminAuthorizations,
     ],
   },

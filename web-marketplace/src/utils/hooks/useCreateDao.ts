@@ -14,6 +14,7 @@ import { toBase64, toUtf8, fromHex } from '@cosmjs/encoding';
  */
 export const useCreateDao = () => {
   const { wallet } = useWallet();
+
   const createDao = async () => {
     if (wallet?.offlineSigner) {
       const client = await SigningCosmWasmClient.connectWithSigner(
@@ -44,7 +45,7 @@ export const useCreateDao = () => {
           msg: encodeJsonToBase64({
             dao: predictedDaoAddress,
             filter_code_id: 14,
-            initial_roles: organizationRoles(wallet?.address),
+            initial_roles: organizationRoles(wallet?.address), // TODO provide other contract addresses if possible
             protobuf_registry_code_id: 15,
           }),
           funds: [],

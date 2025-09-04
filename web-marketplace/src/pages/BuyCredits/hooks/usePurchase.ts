@@ -57,6 +57,7 @@ import {
   getWarningModalContent,
   sendPurchaseConfirmationEmail,
 } from '../BuyCredits.utils';
+import { invalidateBalancesWithRetries } from './invalidateBalancesWithRetries';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
 
 type UsePurchaseParams = {
@@ -491,11 +492,11 @@ export const usePurchase = ({
                       // Briefly re-invalidate the balances query to pull the new tradable amounts as soon as they're visible,
                       // so the portfolio updates behind the success modal without requiring a manual reload.
                       (async () => {
-                        for (let i = 0; i < 4; i++) {
-                          await new Promise(r => setTimeout(r, 1000));
-                          await reactQueryClient.invalidateQueries({
-                            queryKey: ['balances', wallet.address],
-                          });
+                        if (wallet?.address) {
+                          await invalidateBalancesWithRetries(
+                            reactQueryClient,
+                            wallet.address,
+                          );
                         }
                       })();
 

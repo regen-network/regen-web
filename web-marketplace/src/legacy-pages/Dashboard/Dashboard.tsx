@@ -311,8 +311,8 @@ export const Dashboard = () => {
                         activeAccount={activeAccount}
                         hasProjects={hasProjects}
                         hasCreditClasses={showCreditClasses}
-                      hasCreditBatches={hasCreditBatches}
-                    />
+                        hasCreditBatches={hasCreditBatches}
+                      />
                     )}
                   </div>
                 )}

@@ -24,4 +24,3 @@ export function useChangeLocale() {
     router.replace(nextPath);
   };
 }
-

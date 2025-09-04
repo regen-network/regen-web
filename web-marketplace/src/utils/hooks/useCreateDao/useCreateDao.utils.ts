@@ -436,26 +436,26 @@ type PredictAddressParams = {
    */
   codeId: number;
   /**
-   * The address of the CwAdminFactory contract used for instantiation.
+   * The address of the contract creator.
    */
-  cwAdminFactoryAddr: string;
+  creator: string;
 };
 
 export const predictAddress = async ({
   client,
   codeId,
-  cwAdminFactoryAddr,
+  creator,
 }: PredictAddressParams) => {
-  const salt = nanoid();
+  const salt = toUtf8(nanoid());
   const codeDetails = await client.getCodeDetails(codeId);
   const predictedAddress = instantiate2Address(
     fromHex(codeDetails?.checksum),
-    cwAdminFactoryAddr,
-    toUtf8(salt),
+    creator,
+    salt,
     chainInfo.bech32Config.bech32PrefixAccAddr,
   );
-  console.log('predictedAddress', predictedAddress);
-  return { salt, predictedAddress };
+
+  return { salt: toBase64(salt), predictedAddress };
 };
 
 // from dao-dao-ui

@@ -7,3 +7,5 @@ export const protobufRegistryCodeId = 15;
 export const rbamCodeId = 16;
 export const proposalSingleCodeId = 13;
 export const preProposeSingleCodeId = 11;
+export const cw4GroupCodeId = 2;
+export const daoVotingCw4CodeId = 19;

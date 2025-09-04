@@ -8,7 +8,9 @@ import {
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate';
 import { toBase64, toUtf8 } from '@cosmjs/encoding';
 import {
+  cw4GroupCodeId,
   daoDaoCoreCodeId,
+  daoVotingCw4CodeId,
   filterCodeId,
   preProposeSingleCodeId,
   proposalSingleCodeId,
@@ -40,25 +42,30 @@ export const useCreateDao = () => {
         await predictAddress({
           client,
           codeId: daoDaoCoreCodeId,
-          cwAdminFactoryAddr,
+          creator: cwAdminFactoryAddr,
         });
       console.log('daoAddress', daoAddress);
+
+      const { salt: daoVotingCw4Salt, predictedAddress: daoVotingCw4Address } = await predictAddress({
+        client,
+        codeId: daoVotingCw4CodeId,
+        creator: daoAddress,
+      });
+      const { salt: cw4GroupSalt, predictedAddress: cw4GroupAddress } =
+        await predictAddress({
+          client,
+          codeId: cw4GroupCodeId,
+          creator: daoVotingCw4Address,
+        });
+      console.log('cw4GroupAddress', cw4GroupAddress);
 
       const { salt: rbamSalt, predictedAddress: rbamAddress } =
         await predictAddress({
           client,
-          codeId: daoDaoCoreCodeId,
-          cwAdminFactoryAddr,
+          codeId: rbamCodeId,
+          creator: daoAddress,
         });
       console.log('rbamAddress', rbamAddress);
-
-      const { salt: cw4GroupSalt, predictedAddress: cw4GroupAddress } =
-        await predictAddress({
-          client,
-          codeId: daoDaoCoreCodeId,
-          cwAdminFactoryAddr,
-        });
-      console.log('cw4GroupAddress', cw4GroupAddress);
 
       const proposalModules = [
         {
@@ -138,6 +145,7 @@ export const useCreateDao = () => {
           },
         }),
         funds: [],
+        salt: daoVotingCw4Salt,
       };
 
       const exRes = await client.execute(
@@ -161,7 +169,7 @@ export const useCreateDao = () => {
               voting_module_instantiate_info: votingModule,
             }),
             label: `Regen DAO with RBAM ${Date.now()}`,
-            salt: toBase64(toUtf8(daoSalt)),
+            salt: daoSalt,
             expect: daoAddress,
           },
         },

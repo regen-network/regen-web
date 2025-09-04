@@ -1,4 +1,5 @@
-import { ReactNode, useCallback } from 'react';
+import type { ReactNode } from 'react';
+import { useCallback } from 'react';
 import { CardMedia, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { makeStyles } from 'tss-react/mui';
@@ -16,6 +17,14 @@ export interface MediaCardProps extends OptimizeImageProps {
   name?: JSX.Element | string;
   href?: string;
   target?: string;
+  LinkComponent?: React.ComponentType<{
+    href: string;
+    children: React.ReactNode;
+    className?: string;
+    target?: string;
+    rel?: string;
+    onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  }>;
   tag?: string;
   onClick?: () => void;
   width?: string;
@@ -48,6 +57,7 @@ export default function MediaCard({
   imgSrc,
   href,
   target = '_blank',
+  LinkComponent,
   onClick,
   width,
   titleVariant = 'h4',
@@ -127,9 +137,23 @@ export default function MediaCard({
       ]}
     >
       {href ? (
-        <a href={href} target={target}>
-          {media}
-        </a>
+        LinkComponent ? (
+          <LinkComponent
+            href={href}
+            target={target}
+            rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+          >
+            {media}
+          </LinkComponent>
+        ) : (
+          <a
+            href={href}
+            target={target}
+            rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+          >
+            {media}
+          </a>
+        )
       ) : (
         media
       )}

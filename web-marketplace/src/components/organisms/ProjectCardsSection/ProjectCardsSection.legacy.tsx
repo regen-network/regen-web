@@ -32,6 +32,7 @@ import { NormalizeProject } from 'lib/normalizers/projects/normalizeProjectsWith
 import { getSoldOutProjectsQuery } from 'lib/queries/react-query/sanity/getSoldOutProjectsQuery/getSoldOutProjectsQuery';
 import { useTracker } from 'lib/tracker/useTracker';
 
+import { Link } from 'components/atoms/Link';
 import WithLoader from 'components/atoms/WithLoader';
 import BlockContentBody from 'components/molecules/BlockContentBody';
 
@@ -116,8 +117,8 @@ export function ProjectCardsSection({
                 }
                 purchaseInfo={project.purchaseInfo}
                 href={href}
-                onClick={() => router.push(href)}
                 target={'_self'}
+                LinkComponent={Link}
                 imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                 apiServerUrl={API_URI}
                 truncateTitle={true}

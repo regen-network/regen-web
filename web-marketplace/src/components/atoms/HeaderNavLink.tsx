@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import {
@@ -6,6 +5,8 @@ import {
   useNavLinkStyles,
 } from 'web-components/src/components/header/components/NavLink';
 import { cn } from 'web-components/src/utils/styles/cn';
+
+import { Link } from './Link';
 
 /**
  * Renders a header `Link` with the navlink styles applied.

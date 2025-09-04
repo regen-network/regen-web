@@ -1,3 +1,10 @@
+import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate';
+import { nanoid } from 'nanoid';
+import { instantiate2Address } from '@cosmjs/cosmwasm-stargate';
+import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
+import { toBase64, toUtf8, fromHex } from '@cosmjs/encoding';
+
+// Roles and authorizations definitions
 const creditClassesAuthorization = {
   name: 'can_manage_credit_classes',
   metadata: 'Can manage credit classes from the organization account',
@@ -415,3 +422,43 @@ export const projectRoles = (
       'Viewer of the organization, can view all data across all projects, even when private.',
   },
 ];
+
+/**
+ * Parameters required to predict the address of a contract instantiation.
+ */
+type PredictAddressParams = {
+  /**
+   * An instance of SigningCosmWasmClient used to interact with the blockchain.
+   */
+  client: SigningCosmWasmClient;
+  /**
+   * The code ID of the contract to be instantiated.
+   */
+  codeId: number;
+  /**
+   * The address of the CwAdminFactory contract used for instantiation.
+   */
+  cwAdminFactoryAddr: string;
+};
+
+export const predictAddress = async ({
+  client,
+  codeId,
+  cwAdminFactoryAddr,
+}: PredictAddressParams) => {
+  const salt = nanoid();
+  const codeDetails = await client.getCodeDetails(codeId);
+  const predictedAddress = instantiate2Address(
+    fromHex(codeDetails?.checksum),
+    cwAdminFactoryAddr,
+    toUtf8(salt),
+    chainInfo.bech32Config.bech32PrefixAccAddr,
+  );
+  console.log('predictedAddress', predictedAddress);
+  return { salt, predictedAddress };
+};
+
+// from dao-dao-ui
+
+export const encodeJsonToBase64 = (object: any) =>
+  toBase64(toUtf8(JSON.stringify(object)));

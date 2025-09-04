@@ -119,8 +119,5 @@ status = 302
     "!node_modules/@regen-network/api/**/*",
     "!node_modules/chain-registry/**/*",
     "!node_modules/pdfjs-dist/**/*",
-    "!node_modules/xlsx/**/*",
-    "!public/jpg/**",
-    "!public/png/**",
-    "!public/svg/**"
+    "!node_modules/xlsx/**/*"
   ]

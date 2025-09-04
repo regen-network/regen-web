@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 import { getRPCQueryClient } from 'app/makeRPCQueryClient';
 
-import { defaultLocale } from 'lib/i18n/i18n';
+import { DEFAULT_LOCALE } from 'lib/i18n/locales';
 import { getSimplePriceQuery } from 'lib/queries/react-query/coingecko/simplePrice/simplePriceQuery';
 import { getProjectsQuery } from 'lib/queries/react-query/ecocredit/getProjectsQuery/getProjectsQuery';
 import { getAllowedDenomQuery } from 'lib/queries/react-query/ecocredit/marketplace/getAllowedDenomQuery/getAllowedDenomQuery';
@@ -25,11 +25,11 @@ export const homeLoader =
     // Queries
     const allHomePageQuery = getAllHomePageQuery({
       sanityClient,
-      languageCode: defaultLocale,
+      languageCode: DEFAULT_LOCALE,
     });
     const allCreditClassesQuery = getAllSanityCreditClassesQuery({
       sanityClient,
-      languageCode: defaultLocale,
+      languageCode: DEFAULT_LOCALE,
     });
     const simplePriceQuery = getSimplePriceQuery({});
     const projectsQuery = getProjectsQuery({

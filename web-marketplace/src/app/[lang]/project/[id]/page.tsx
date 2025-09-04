@@ -25,11 +25,10 @@ import {
 } from 'components/templates/ProjectDetails/ProjectDetails.utils';
 
 interface ProjectPageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; lang: string }>;
 }
 
-// getProject will be used twice, but execute only once
-const getProject = cache(async (id: string) => {
+const getProject = cache(async (id: string, lang: string) => {
   try {
     const isOnChainId = getIsOnChainId(id);
     const isOffChainUuid = getIsUuid(id);
@@ -45,7 +44,7 @@ const getProject = cache(async (id: string) => {
         getProjectByOnChainIdQuery({
           client: apolloClient,
           onChainId: id,
-          languageCode: 'en', // TODO get language code
+          languageCode: lang,
         }),
       );
       onChainProjectId = id;
@@ -56,7 +55,7 @@ const getProject = cache(async (id: string) => {
         getOffChainProjectByIdQuery({
           client: apolloClient,
           id,
-          languageCode: 'en',
+          languageCode: lang,
         }),
       );
       offChainProject = offChainProjectByIdData?.data?.projectById;
@@ -67,7 +66,7 @@ const getProject = cache(async (id: string) => {
         getProjectBySlugQuery({
           client: apolloClient,
           slug: id,
-          languageCode: 'en',
+          languageCode: lang,
         }),
       );
       offChainProject = projectBySlug?.data.projectBySlug;
@@ -88,7 +87,7 @@ const getProject = cache(async (id: string) => {
         iri: onChainProject?.metadata,
         client: rpcQueryClient,
         enabled: !!rpcQueryClient,
-        languageCode: 'en',
+        languageCode: lang,
       }),
     );
 
@@ -100,15 +99,14 @@ const getProject = cache(async (id: string) => {
       queryClient,
     };
   } catch (error) {
-    // eslint-disable-next-line lingui/no-unlocalized-strings, no-console
     throw error;
   }
 });
 
 export async function generateMetadata({ params }: ProjectPageProps) {
-  const { id } = await params;
+  const { id, lang } = await params;
 
-  const { projectMetadata, projectPageMetadata } = await getProject(id);
+  const { projectMetadata, projectPageMetadata } = await getProject(id, lang);
   const title =
     projectMetadata?.['schema:name'] || projectPageMetadata?.['schema:name'];
   const description = projectPageMetadata?.['schema:description'];
@@ -128,27 +126,25 @@ export async function generateMetadata({ params }: ProjectPageProps) {
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { id } = await params;
+  const { id, lang } = await params;
 
   const sanityClient = await getSanityClient();
-  const { rpcQueryClient, queryClient, slug } = await getProject(id);
+  const { rpcQueryClient, queryClient, slug } = await getProject(id, lang);
   if (slug) {
-    // TODO preserve hash it exists
-    redirect(`/project/${slug}`);
+    redirect(`/${lang}/project/${slug}`);
   }
 
-  // https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#streaming-with-server-components
   queryClient.prefetchQuery(
     getAllProjectPageQuery({
       sanityClient: sanityClient,
-      languageCode: 'en',
+      languageCode: lang,
     }),
   );
 
   queryClient.prefetchQuery(
     getAllSanityCreditClassesQuery({
       sanityClient: sanityClient,
-      languageCode: 'en',
+      languageCode: lang,
     }),
   );
 
@@ -167,3 +163,4 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     </HydrationBoundary>
   );
 }
+

@@ -1,5 +1,7 @@
 import { I18n, Messages, setupI18n } from '@lingui/core';
 
+import { DEFAULT_LOCALE } from 'lib/i18n/locales';
+
 import linguiConfig from '../../lingui.config';
 
 import 'server-only';
@@ -42,5 +44,5 @@ export const getI18nInstance = (locale: SupportedLocales): I18n => {
     // eslint-disable-next-line lingui/no-unlocalized-strings, no-console
     console.warn(`No i18n instance found for locale "${locale}"`);
   }
-  return allI18nInstances[locale]! || allI18nInstances['en']!;
+  return allI18nInstances[locale]! || allI18nInstances[DEFAULT_LOCALE]!;
 };

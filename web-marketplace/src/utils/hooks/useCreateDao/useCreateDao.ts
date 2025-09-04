@@ -1,11 +1,21 @@
 import { useWallet } from 'lib/wallet/wallet';
-import { instantiate2Address } from '@cosmjs/cosmwasm-stargate';
 import { ledgerRPCUri } from 'lib/ledger';
-import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
-import { organizationRoles } from './useCreateDao.utils';
-import { nanoid } from 'nanoid';
+import {
+  encodeJsonToBase64,
+  organizationRoles,
+  predictAddress,
+} from './useCreateDao.utils';
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate';
-import { toBase64, toUtf8, fromHex } from '@cosmjs/encoding';
+import { toBase64, toUtf8 } from '@cosmjs/encoding';
+import {
+  daoDaoCoreCodeId,
+  filterCodeId,
+  preProposeSingleCodeId,
+  proposalSingleCodeId,
+  protobufRegistryCodeId,
+  rbamCodeId,
+} from './useCreateDao.constants';
+import { GasPrice } from '@cosmjs/stargate';
 
 /**
  * Disclaimer: This code is still a draft and should be refactored to import utils from @dao-dao/* packages.
@@ -20,39 +30,57 @@ export const useCreateDao = () => {
       const client = await SigningCosmWasmClient.connectWithSigner(
         ledgerRPCUri,
         wallet?.offlineSigner,
-        { gasPrice: { amount: 0.025 } },
+        { gasPrice: GasPrice.fromString('0.025uregen') },
       );
-
-      const salt = nanoid();
+      // TODO: We should query this instead based on CwAdminFactory code id.
       const cwAdminFactoryAddr =
         'regen1hrpna9v7vs3stzyd4z3xf00676kf78zpe2u5ksvljswn2vnjp3ysp76v39';
-      const daoDaoCoreCodeId = 6;
 
-      const codeDetails = await client.getCodeDetails(daoDaoCoreCodeId);
-      const predictedDaoAddress = instantiate2Address(
-        fromHex(codeDetails?.checksum),
-        cwAdminFactoryAddr,
-        toUtf8(salt),
-        chainInfo.bech32Config.bech32PrefixAccAddr,
-      );
-      console.log('predictedDaoAddress', predictedDaoAddress);
+      const { salt: daoSalt, predictedAddress: daoAddress } =
+        await predictAddress({
+          client,
+          codeId: daoDaoCoreCodeId,
+          cwAdminFactoryAddr,
+        });
+      console.log('daoAddress', daoAddress);
+
+      const { salt: rbamSalt, predictedAddress: rbamAddress } =
+        await predictAddress({
+          client,
+          codeId: daoDaoCoreCodeId,
+          cwAdminFactoryAddr,
+        });
+      console.log('rbamAddress', rbamAddress);
+
+      const { salt: cw4GroupSalt, predictedAddress: cw4GroupAddress } =
+        await predictAddress({
+          client,
+          codeId: daoDaoCoreCodeId,
+          cwAdminFactoryAddr,
+        });
+      console.log('cw4GroupAddress', cw4GroupAddress);
 
       const proposalModules = [
         {
           admin: { core_module: {} },
-          code_id: 16,
+          code_id: rbamCodeId,
           label: `dao-rbam_${Date.now()}`,
           msg: encodeJsonToBase64({
-            dao: predictedDaoAddress,
-            filter_code_id: 14,
-            initial_roles: organizationRoles(wallet?.address), // TODO provide other contract addresses if possible
-            protobuf_registry_code_id: 15,
+            dao: daoAddress,
+            filter_code_id: filterCodeId,
+            initial_roles: organizationRoles(
+              wallet?.address,
+              cw4GroupAddress,
+              rbamAddress,
+            ),
+            protobuf_registry_code_id: protobufRegistryCodeId,
           }),
           funds: [],
+          salt: rbamSalt,
         },
         {
           admin: { core_module: {} },
-          code_id: 13,
+          code_id: proposalSingleCodeId,
           label: `dao-proposal-single_${Date.now()}`,
           msg: encodeJsonToBase64({
             allow_revoting: false,
@@ -63,7 +91,7 @@ export const useCreateDao = () => {
               module_may_propose: {
                 info: {
                   admin: { core_module: {} },
-                  code_id: 11,
+                  code_id: preProposeSingleCodeId,
                   label: `dao-pre-propose-single_${Date.now()}`,
                   msg: encodeJsonToBase64({
                     deposit_info: null,
@@ -99,6 +127,7 @@ export const useCreateDao = () => {
           group_contract: {
             new: {
               cw4_group_code_id: 2,
+              cw4_group_salt: cw4GroupSalt,
               initial_members: [
                 {
                   addr: wallet?.address,
@@ -132,8 +161,8 @@ export const useCreateDao = () => {
               voting_module_instantiate_info: votingModule,
             }),
             label: `Regen DAO with RBAM ${Date.now()}`,
-            salt: toBase64(toUtf8(salt)),
-            expect: predictedDaoAddress,
+            salt: toBase64(toUtf8(daoSalt)),
+            expect: daoAddress,
           },
         },
         {
@@ -146,29 +175,10 @@ export const useCreateDao = () => {
           gas: '20000000',
         },
         undefined,
-        getFundsFromDaoInstantiateMsg({
-          voting_module_instantiate_info: votingModule,
-          proposal_modules_instantiate_info: proposalModules,
-        }),
+        [],
       );
       console.log('exRes', exRes);
     }
   };
   return { createDao };
 };
-
-// from dao-dao-ui
-
-export const encodeJsonToBase64 = (object: any) =>
-  toBase64(toUtf8(JSON.stringify(object)));
-
-export const getFundsFromDaoInstantiateMsg = ({
-  voting_module_instantiate_info,
-  proposal_modules_instantiate_info,
-}: {
-  voting_module_instantiate_info: any;
-  proposal_modules_instantiate_info: any;
-}) => [
-  ...(voting_module_instantiate_info.funds || []),
-  ...proposal_modules_instantiate_info.flatMap(({ funds }) => funds || []),
-];

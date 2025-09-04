@@ -163,4 +163,3 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     </HydrationBoundary>
   );
 }
-

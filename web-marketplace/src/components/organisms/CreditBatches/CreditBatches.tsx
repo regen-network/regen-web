@@ -5,7 +5,6 @@ import { SxProps } from '@mui/material';
 import Box from '@mui/material/Box';
 import cx from 'clsx';
 import { quantityFormatNumberOptions } from 'config/decimals';
-import Link from 'next/link';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import Section from 'web-components/src/components/section';
@@ -27,6 +26,7 @@ import {
 } from 'lib/constants/shared.constants';
 import { LINK_PREFIX } from 'lib/env';
 
+import { Link } from 'components/atoms';
 import { AccountLink } from 'components/atoms/AccountLink';
 import WithLoader from 'components/atoms/WithLoader';
 

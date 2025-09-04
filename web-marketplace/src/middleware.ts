@@ -5,8 +5,7 @@ import linguiConfig from '../lingui.config';
 
 const locales = linguiConfig.locales as string[];
 export const COOKIE_LOCALE = 'NEXT_LOCALE';
-
-const COOKIE_OPTS = { path: '/', maxAge: 60 * 60 * 24 * 365 };
+export const COOKIE_OPTS = { path: '/', maxAge: 60 * 60 * 24 * 365 };
 
 const setLocaleCookie = (res: NextResponse, locale: string) => {
   if (res.cookies.get(COOKIE_LOCALE)?.value !== locale) {

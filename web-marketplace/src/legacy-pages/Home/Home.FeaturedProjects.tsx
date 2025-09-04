@@ -1,6 +1,5 @@
 import { Trans } from '@lingui/react/macro';
 import { Box } from '@mui/material';
-import NextLink from 'next/link';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 
@@ -10,6 +9,7 @@ import {
   Scalars,
 } from 'generated/sanity-graphql';
 
+import { Link } from 'components/atoms';
 import { ProjectCardsSection } from 'components/organisms/ProjectCardsSection/ProjectCardsSection.legacy';
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick.legacy';
 
@@ -48,11 +48,11 @@ export function FeaturedProjects({
         loading={loading}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 20 }}>
-        <NextLink href="/projects/1">
+        <Link href="/projects/1">
           <ContainedButton>
             <Trans>DISCOVER PROJECTS</Trans>
           </ContainedButton>
-        </NextLink>
+        </Link>
       </Box>
     </div>
   );

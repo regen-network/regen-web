@@ -57,6 +57,7 @@ import {
   getWarningModalContent,
   sendPurchaseConfirmationEmail,
 } from '../BuyCredits.utils';
+import { invalidateBalancesWithRetries } from './invalidateBalancesWithRetries';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
 
 type UsePurchaseParams = {
@@ -435,8 +436,8 @@ export const usePurchase = ({
 
                   // In case of retirement, it's handled in useFetchRetirementForPurchase
                   if (!retiring) {
-                    // Send purchase confirmation if email provided
                     if (email && token && _txHash) {
+                      // Send purchase confirmation if email provided
                       await sendPurchaseConfirmationEmail({
                         currency,
                         retiring,
@@ -486,18 +487,30 @@ export const usePurchase = ({
                       await reactQueryClient.invalidateQueries({
                         queryKey: ['balances', wallet?.address], // invalidate all query pages
                       });
-                    }
 
-                    // Reset BuyCredits forms
-                    handleSuccess();
-                    navigate(`/dashboard/portfolio`);
+                      // After tx success the ledger may not reflect updated balances immediately.
+                      // Briefly re-invalidate the balances query to pull the new tradable amounts as soon as they're visible,
+                      // so the portfolio updates behind the success modal without requiring a manual reload.
+                      (async () => {
+                        if (wallet?.address) {
+                          await invalidateBalancesWithRetries(
+                            reactQueryClient,
+                            wallet.address,
+                          );
+                        }
+                      })();
 
-                    if (shouldRefreshProfileData) {
-                      await reactQueryClient.invalidateQueries({
-                        queryKey: getAccountByIdQueryKey({
-                          id: activeAccount?.id,
-                        }),
-                      });
+                      // Reset BuyCredits forms
+                      handleSuccess();
+                      navigate(`/dashboard/portfolio`);
+
+                      if (shouldRefreshProfileData) {
+                        await reactQueryClient.invalidateQueries({
+                          queryKey: getAccountByIdQueryKey({
+                            id: activeAccount?.id,
+                          }),
+                        });
+                      }
                     }
                   }
                 },

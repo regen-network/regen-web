@@ -1,10 +1,12 @@
 import { ReactNode } from 'react';
-import Link, { LinkProps } from 'next/link';
 
 import { truncate } from 'web-components/src/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
 import { LINK_PREFIX } from 'lib/env';
+
+import type { LinkProps } from './Link';
+import { Link } from './Link';
 
 interface AccountLinkProps extends Omit<LinkProps, 'href'> {
   address: string;
@@ -37,8 +39,9 @@ export const AccountLink = ({
       </Link>
     );
   }
+  const href = `${LINK_PREFIX}/profiles/${address}/portfolio`;
   return (
-    <Link {...linkProps} href={`${LINK_PREFIX}/profiles/${address}/portfolio`}>
+    <Link {...linkProps} href={href}>
       {content}
     </Link>
   );

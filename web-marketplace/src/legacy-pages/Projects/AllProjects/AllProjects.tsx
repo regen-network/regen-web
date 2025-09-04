@@ -30,6 +30,7 @@ import {
 import { COLOR_SCHEME, IS_REGEN, IS_TERRASOS } from 'lib/env';
 import { useTracker } from 'lib/tracker/useTracker';
 
+import { Link } from 'components/atoms';
 import { TebuBannerWrapper } from 'components/organisms/TebuBannerWrapper/TebuBannerWrapper';
 import { useOnBuyButtonClick } from 'hooks/useOnBuyButtonClick.legacy';
 
@@ -205,7 +206,9 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                     }
               }
               purchaseInfo={project.purchaseInfo || {}}
-              onClick={() => router.push(`/project/${project.id}`)}
+              // onClick={() => router.push(`/project/${project.id}`)}
+              href={`/project/${project.id}`}
+              LinkComponent={Link}
               imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
               apiServerUrl={API_URI}
               truncateTitle={true}

@@ -35,11 +35,23 @@ export default function TerrasosRoutes({
   reactQueryClient,
   apolloClientFactory,
 }: RouterProps): JSX.Element {
+  // Sets React Router’s basename to the current locale (e.g., /en, /es)
+  // so all legacy React Router paths (/, /projects, etc.) resolve under /{lang}.
+  // TODO: Remove `basename` when the legacy React Router is fully migrated
+  // to Next’s App Router and no React Router routes remain.
+  const basename =
+    typeof window !== 'undefined'
+      ? (() => {
+          const segment = window.location.pathname.split('/')[1];
+          return segment === 'en' || segment === 'es' ? `/${segment}` : '';
+        })()
+      : '';
   return (
     <RouterProvider
       router={getRouter({
         reactQueryClient,
         apolloClientFactory,
+        basename,
       })}
       fallbackElement={<PageLoader />}
     />
@@ -49,6 +61,7 @@ export default function TerrasosRoutes({
 type RouterParams = {
   reactQueryClient: QueryClient;
   apolloClientFactory: ApolloClientFactory;
+  basename?: string;
 };
 
 export const getTerrasosRoutes = ({
@@ -83,13 +96,14 @@ export const getTerrasosRoutes = ({
 export const getRouter = ({
   reactQueryClient,
   apolloClientFactory,
+  basename = '',
 }: RouterParams): Router => {
   const sentryCreateBrowserRouter =
     Sentry.wrapCreateBrowserRouter(createBrowserRouter);
   return sentryCreateBrowserRouter(
     getTerrasosRoutes({ reactQueryClient, apolloClientFactory }),
     {
-      basename: process.env.PUBLIC_URL,
+      basename,
     },
   );
 };

@@ -36,6 +36,13 @@ NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 [[context.deploy-preview.plugins]]
   package = "@netlify/plugin-nextjs"
 
+# Main build configuration
+[build]
+  command = "bun run build"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 
 [context.deploy-preview.environment]
 NEXT_PUBLIC_SANITY_DATASET = "staging"
@@ -119,5 +126,8 @@ status = 302
     "!node_modules/@regen-network/api/**/*",
     "!node_modules/chain-registry/**/*",
     "!node_modules/pdfjs-dist/**/*",
-    "!node_modules/xlsx/**/*"
+    "!node_modules/xlsx/**/*",
+    "!public/jpg/**",
+    "!public/png/**",
+    "!public/svg/**"
   ]

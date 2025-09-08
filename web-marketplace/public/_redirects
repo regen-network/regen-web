@@ -14,10 +14,10 @@ https://registry.regen.network/*   https://app.regen.network/:splat   301!
 /land-stewards                     /project-developers                301!
 /storefront                        /                                  301!
 
-# keep Netlify internals available for the Image CDN
-/.netlify/*     /.netlify/:splat    200
-# pass API routes through
-/api/*          /api/:splat         200
+# --- pass-throughs (must be ABOVE the fallback) ---
+/.netlify/*                        /.netlify/:splat                   200
+/api/*                             /api/:splat                        200
+/_next/static/*                    /_next/static/:splat               200
 
-# SPA fallback — LAST, and safe
-/((?!api|_next|\.netlify|.*\..*).*)   /index.html   200
+# --- SPA fallback (LAST) ---
+/((?!api|_next|\.netlify|.*\..*).*)   /index.html                     200

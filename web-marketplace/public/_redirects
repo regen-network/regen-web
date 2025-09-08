@@ -13,5 +13,13 @@ https://registry.regen.network/* https://app.regen.network/:splat 301!
 /projects /projects/1 301!
 /land-stewards /project-developers 301!
 /storefront / 301!
-/* /index.html 200
+
+# let Next.js and Netlify internals pass through
+/_next/*      /_next/:splat     200
+/.netlify/*   /.netlify/:splat  200
+/api/*        /api/:splat       200
+
+# SPA fallback
+/((?!api|_next|\.netlify|.*\..*).*)   /index.html   200
+
 

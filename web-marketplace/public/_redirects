@@ -1,25 +1,23 @@
-https://registry.regen.network/* https://app.regen.network/:splat 301!
-/projects/C02-002 /project/C02-002 301!
-/projects/C02-003 /project/C02-003 301!
-/projects/C02-004 /project/C02-004 301!
-/projects/C02-001 /project/C02-001 301!
-/projects/C01-001 /project/C01-001 301!
-/projects/C01-002 /project/C01-002 301!
-/projects/C01-003 /project/C01-003 301!
-/projects/wilmot /project/wilmot 301!
-/projects/cavan-station /project/cavan-station 301!
-/projects/woodburn /project/woodburn 301!
-/projects/pillango /project/pillango 301!
-/projects /projects/1 301!
-/land-stewards /project-developers 301!
-/storefront / 301!
+https://registry.regen.network/*   https://app.regen.network/:splat   301!
+/projects/C02-002                  /project/C02-002                   301!
+/projects/C02-003                  /project/C02-003                   301!
+/projects/C02-004                  /project/C02-004                   301!
+/projects/C02-001                  /project/C02-001                   301!
+/projects/C01-001                  /project/C01-001                   301!
+/projects/C01-002                  /project/C01-002                   301!
+/projects/C01-003                  /project/C01-003                   301!
+/projects/wilmot                   /project/wilmot                    301!
+/projects/cavan-station            /project/cavan-station             301!
+/projects/woodburn                 /project/woodburn                  301!
+/projects/pillango                 /project/pillango                  301!
+/projects                          /projects/1                        301!
+/land-stewards                     /project-developers                301!
+/storefront                        /                                  301!
 
-# let Next.js and Netlify internals pass through
-/_next/*      /_next/:splat     200
-/.netlify/*   /.netlify/:splat  200
-/api/*        /api/:splat       200
+# keep Netlify internals available for the Image CDN
+/.netlify/*     /.netlify/:splat    200
+# pass API routes through
+/api/*          /api/:splat         200
 
-# SPA fallback
+# SPA fallback — LAST, and safe
 /((?!api|_next|\.netlify|.*\..*).*)   /index.html   200
-
-

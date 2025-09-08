@@ -167,10 +167,12 @@ export function getDashboardNavigationSections(
   loginDisabled: boolean,
   collapsed = false,
   isIssuer = false,
+  showCreditClasses = false,
   hasWalletAddress = true,
   hasProjects = false,
   hasOrders = true,
   walletConnect = false,
+  hasCreditBatches = false,
 ): DashboardNavigationSection[] {
   const sections = [];
   if (hasWalletAddress) {
@@ -184,8 +186,14 @@ export function getDashboardNavigationSections(
     sections.push(getProjectsSection(_, collapsed));
   }
 
-  if (isIssuer) {
-    sections.push(getCreditIssuanceSection(_, collapsed));
+  if (isIssuer || showCreditClasses || hasCreditBatches) {
+    const issuance = getCreditIssuanceSection(_, collapsed);
+    issuance.items = issuance.items.filter(item => {
+      if (item.path === 'credit-batches') return isIssuer || hasCreditBatches;
+      if (item.path === 'credit-classes') return showCreditClasses;
+      return true;
+    });
+    if (issuance.items.length > 0) sections.push(issuance);
   }
   if (hasOrders) {
     sections.push(getOrdersSection(_, collapsed));

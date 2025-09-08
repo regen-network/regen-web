@@ -208,12 +208,14 @@ export const Dashboard = () => {
               currentPath={section ?? ''}
               onNavItemClick={onNavClick}
               isIssuer={isIssuer}
+              showCreditClasses={showCreditClasses}
               loginDisabled={loginDisabled}
               hasWalletAddress={hasWalletAddress}
               wallet={wallet?.address}
               walletConnect={walletConnect}
               hasProjects={!!hasProjects && hasProjects.length > 0}
               hasOrders={!ordersLoading && hasOrders}
+              hasCreditBatches={hasCreditBatches}
               mobileMenuOpen={mobileMenuOpen}
               onLogout={handleLogout}
               onCloseMobile={() => setMobileMenuOpen(false)}
@@ -311,8 +313,8 @@ export const Dashboard = () => {
                         activeAccount={activeAccount}
                         hasProjects={hasProjects}
                         hasCreditClasses={showCreditClasses}
-                      hasCreditBatches={hasCreditBatches}
-                    />
+                        hasCreditBatches={hasCreditBatches}
+                      />
                     )}
                   </div>
                 )}

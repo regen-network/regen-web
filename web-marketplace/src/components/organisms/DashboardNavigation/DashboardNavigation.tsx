@@ -29,6 +29,7 @@ export const DashboardNavigation = ({
   onCloseMobile,
   onExitClick,
   isIssuer,
+  showCreditClasses,
   loginDisabled,
   mobileMenuOpen,
   hasWalletAddress,
@@ -36,6 +37,7 @@ export const DashboardNavigation = ({
   walletConnect,
   hasProjects,
   hasOrders,
+  hasCreditBatches,
   collapsed,
   onToggleCollapse,
 }: DashboardNavigationProps & {
@@ -46,6 +48,7 @@ export const DashboardNavigation = ({
   collapsed: boolean;
   walletConnect?: boolean;
   hasProjects?: boolean;
+  hasCreditBatches?: boolean;
   onToggleCollapse: (collapsed: boolean) => void;
 }) => {
   const { _ } = useLingui();
@@ -73,10 +76,12 @@ export const DashboardNavigation = ({
         loginDisabled || false,
         collapsed,
         isIssuer || false,
+        showCreditClasses || false,
         hasWalletAddress ?? true,
         hasProjects ?? false,
         hasOrders ?? true,
         walletConnect ?? false,
+        hasCreditBatches ?? false,
       ),
     [
       _,
@@ -84,10 +89,12 @@ export const DashboardNavigation = ({
       loginDisabled,
       collapsed,
       isIssuer,
+      showCreditClasses,
       hasWalletAddress,
       hasProjects,
       hasOrders,
       walletConnect,
+      hasCreditBatches,
     ],
   );
 

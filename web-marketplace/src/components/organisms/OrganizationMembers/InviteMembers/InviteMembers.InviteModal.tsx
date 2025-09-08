@@ -197,7 +197,7 @@ export const InviteMemberModal = ({
                 (addressOrEmail || '') &&
                 !addressOrEmail.includes('(') &&
                 accountSuggestions.length > 0 && (
-                  <ul className="absolute top-full mt-2 left-0 w-full z-10 min-h-[84px] bg-bc-neutral-0 border-[1px] border-solid border-bc-neutral-300 pl-0 rounded shadow-lg overflow-hidden">
+                  <ul className="absolute top-[108px] mt-2 left-0 w-full z-10 min-h-[84px] bg-bc-neutral-0 border-[1px] border-solid border-bc-neutral-300 pl-0 rounded shadow-lg overflow-hidden">
                     {accountSuggestions.map(acc => (
                       <li
                         key={acc?.id}

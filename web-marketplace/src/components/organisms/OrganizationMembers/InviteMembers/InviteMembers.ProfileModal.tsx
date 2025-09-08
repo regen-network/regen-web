@@ -3,15 +3,14 @@ import { useFormState } from 'react-hook-form';
 import { plural } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import useClickOutside from 'utils/hooks/useClickOutside';
-import { z } from 'zod';
 
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 import { ImageField } from 'web-components/src/components/inputs/new/ImageField/ImageField';
 import { ImageFieldAvatar } from 'web-components/src/components/inputs/new/ImageField/ImageField.Avatar';
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
+import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Title as H } from 'web-components/src/components/typography';
 
 import Form from 'components/molecules/Form/Form';
@@ -29,6 +28,7 @@ import {
   TITLE_LABEL,
   TITLE_SUBHEADER,
 } from '../OrganizationMembers.constants';
+import { getPersonalProfileSchema } from './InviteMembers.InviteModal.schema';
 
 interface PersonalProfileModalProps {
   open: boolean;
@@ -45,14 +45,6 @@ interface PersonalProfileModalProps {
     description?: string;
   }) => void;
 }
-
-const getPersonalProfileSchema = () =>
-  z.object({
-    name: z.string().min(1),
-    avatar: z.string().optional(),
-    title: z.string().optional(),
-    description: z.string().max(160).optional(),
-  });
 
 export const PersonalProfileModal = ({
   open,
@@ -218,22 +210,14 @@ export const PersonalProfileModal = ({
           </div>
 
           <div className="flex-shrink-0 px-20 py-20 md:px-40 md:py-40">
-            <div className="flex justify-end gap-40">
-              <button
-                onClick={onClose}
-                className="bg-transparent border-none cursor-pointer text-sm font-bold text-bc-neutral-400 font-muli"
-                type="button"
-              >
-                {_(CANCEL_LABEL)}
-              </button>
-              <ContainedButton
-                disabled={disabledSave}
-                type="submit"
-                className="h-[53px] w-[138px] text-[18px]"
-              >
-                {_(SAVE_LABEL)}
-              </ContainedButton>
-            </div>
+            <CancelButtonFooter
+              onCancel={onClose}
+              cancelLabel={_(CANCEL_LABEL)}
+              label={_(SAVE_LABEL)}
+              disabled={disabledSave}
+              type="submit"
+              className="h-[53px] w-[138px] text-[18px]"
+            />
           </div>
         </Form>
       </div>

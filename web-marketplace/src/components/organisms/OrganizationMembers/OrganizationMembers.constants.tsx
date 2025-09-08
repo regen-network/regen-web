@@ -37,7 +37,7 @@ export const VISIBLE_DESCRIPTION = msg`If marked visible, this user will be show
 export const CANCEL_LABEL = msg`CANCEL`;
 export const INVITE_LABEL = msg`Invite`;
 export const REGEN_ADDRESS_REQUIRED_ERROR =
-  'You must enter a REGEN address in order to add this user as an Admin or Editor.';
+  'Enter a REGEN address in order to add this user as an Admin or Editor.';
 export const INVALID_EMAIL_ERROR = 'Invalid email';
 export const INVALID_REGEN_ADDRESS_ERROR = 'Invalid REGEN address';
 

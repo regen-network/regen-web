@@ -114,17 +114,6 @@ status = 302
   to = "/.netlify/:splat"
   status = 200
 
-# Route Next.js optimizer to Netlify Image CDN (preserves query params)
-[[redirects]]
-  from = "/_next/image"
-  to = "/.netlify/images"
-  status = 200
-  [redirects.query]
-    url = ":url"
-    w   = ":width"
-    q   = ":quality"
-
-
 [functions]
   included_files = [
     "!node_modules/canvas/**/*",

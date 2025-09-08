@@ -313,6 +313,25 @@ const adminMembersAuthorizations = (
   },
 ];
 
+const dataAuthorization = {
+  name: 'can_anchor_attest_data',
+  metadata: 'Can anchor and attest data',
+  filter: {
+    $or: [
+      {
+        stargate: {
+          type_url: '/regen.data.v1.MsgAnchor',
+        },
+      },
+      {
+        stargate: {
+          type_url: '/regen.data.v1.MsgAttest',
+        },
+      },
+    ],
+  },
+};
+
 export const organizationRoles = (
   initialOwnerAddress: string,
   cw4GroupAddress: string,
@@ -376,6 +395,7 @@ const projectAdminAuthorizations = [
   projectsAuthorization,
   creditsAuthorization,
   sellOrdersAuthorization,
+  dataAuthorization,
 ];
 
 export const projectRoles = (
@@ -409,12 +429,13 @@ export const projectRoles = (
     name: 'Editor',
     metadata:
       'Can edit all project page info and posts. Cannot manage users or credits.',
-    authorizations: [projectsAuthorization],
+    authorizations: [projectsAuthorization, dataAuthorization],
   },
   {
     name: 'Author',
     metadata:
       'Can create, edit, and delete their own data posts. Cannot see private post data.',
+    authorizations: [dataAuthorization],
   },
   {
     name: 'Viewer',

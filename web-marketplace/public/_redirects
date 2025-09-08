@@ -16,8 +16,8 @@ https://registry.regen.network/*   https://app.regen.network/:splat   301!
 
 # --- pass-throughs (must be ABOVE the fallback) ---
 /.netlify/*                        /.netlify/:splat                   200
-/api/*                             /api/:splat                        200
 /_next/static/*                    /_next/static/:splat               200
+/api/*                             /api/:splat                        200
 
 # --- SPA fallback (LAST) ---
 /((?!api|_next|\.netlify|.*\..*).*)   /index.html                     200

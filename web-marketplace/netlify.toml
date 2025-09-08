@@ -28,17 +28,11 @@ NEXT_PUBLIC_BRIDGE = "true"
 NEXT_PUBLIC_SKIPPED_CLASS_ID = ""
 NEXT_PUBLIC_DEPLOY_CONTEXT = "development"
 
-# Build settings for Next.js deploy previews
-[context.deploy-preview]
-  command = "bun run build"
-  publish = "web-marketplace/.next"
-
-[[context.deploy-preview.plugins]]
-  package = "@netlify/plugin-nextjs"
-
 # Main build configuration
 [build]
+  base = "web-marketplace"
   command = "bun run build"
+  publish = ".next"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

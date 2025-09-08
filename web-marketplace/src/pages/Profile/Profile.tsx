@@ -166,11 +166,7 @@ export const Profile = (): JSX.Element => {
       account?.id &&
       privActiveAccount.id === account.id);
 
-  const addressDisplay = address
-    ? truncate(address)
-    : isOwnProfile
-    ? privActiveAccount?.email || ''
-    : '';
+  const addressDisplay = address ? truncate(address) : '';
 
   const infos = {
     ...(addressDisplay
@@ -221,7 +217,7 @@ export const Profile = (): JSX.Element => {
               altAvatar={_(ALT_PROFILE_AVATAR)}
             />
             <Box sx={{ backgroundColor: 'grey.50' }}>
-              <Section sx={{ root: { pt: { xs: 15 } } }}>
+              <Section sx={{ root: { pt: { xs: '30px', sm: '60px' } } }}>
                 <div>
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-2">
                     <IconTabs

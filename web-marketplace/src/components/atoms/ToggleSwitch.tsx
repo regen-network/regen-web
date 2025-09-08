@@ -1,5 +1,4 @@
 import React, { useId } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 
 import { cn } from 'web-components/src/utils/styles/cn';
 
@@ -24,13 +23,11 @@ export const ToggleSwitch = ({
 }: ToggleSwitchProps) => {
   const id = useId();
 
-  const spring = { type: 'spring', stiffness: 700, damping: 35 };
-
   return (
     <label
       htmlFor={id}
       className={cn(
-        'inline-flex items-center rounded-full h-28 py-3 gap-3 font-bold font-sans leading-none',
+        'relative inline-flex items-center rounded-full h-[26px] font-bold font-sans leading-none',
         'transition-colors duration-200 cursor-pointer select-none',
         'text-bc-neutral-0 focus-visible:outline focus-visible:outline-2',
         'focus-visible:outline-offset-2 focus-visible:outline-ac-primary-500',
@@ -52,51 +49,46 @@ export const ToggleSwitch = ({
         disabled={disabled}
         onChange={e => !disabled && onChange(e.target.checked)}
       />
+      <div className="relative" style={{ width: '71px', height: 0 }} aria-hidden />
 
-      {/* Knob */}
-      <motion.span
-        layout
-        transition={spring}
-        whileTap={!disabled ? { scale: 0.96 } : undefined}
+      <span
         className={cn(
+          'absolute left-3 top-1/2 -translate-y-1/2',
           'w-20 h-20 rounded-full bg-bc-neutral-0 shadow shrink-0',
-          checked ? 'order-2' : 'order-1',
+          'transition-transform duration-300 ease-[cubic-bezier(.34,1.56,.64,1)] will-change-transform',
+          checked ? 'translate-x-[51px]' : 'translate-x-0',
+          !disabled && 'active:scale-[0.96]',
         )}
       />
-
-      {/* Text container with animated swap */}
       <div
         className={cn(
-          'relative overflow-hidden w-[48px] h-[14px] leading-[14px]',
-          checked ? 'order-1 text-center' : 'order-2',
+          'absolute top-1/2 -translate-y-1/2',
+          checked ? 'left-3' : 'left-[calc(3px+20px+3px)]',
+          'w-[48px] h-[14px] leading-[14px] text-center overflow-hidden',
         )}
         aria-hidden={!ariaLabel ? undefined : true}
       >
-        <AnimatePresence initial={false} mode="popLayout">
-          {checked ? (
-            <motion.span
-              key="visible"
-              initial={{ y: 12, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -12, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 700, damping: 35 }}
-              className="absolute inset-0 block text-[14px]"
-            >
-              {visibleLabel}
-            </motion.span>
-          ) : (
-            <motion.span
-              key="hidden"
-              initial={{ y: 12, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -12, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 700, damping: 35 }}
-              className="absolute inset-0 block text-[14px]"
-            >
-              {hiddenLabel}
-            </motion.span>
+        {/* Hidden label */}
+        <span
+          className={cn(
+            'absolute inset-0 block text-[14px]',
+            'transition-all duration-300 ease-[cubic-bezier(.34,1.56,.64,1)]',
+            checked ? 'opacity-0 translate-y-[-12px]' : 'opacity-100 translate-y-0',
           )}
-        </AnimatePresence>
+        >
+          {hiddenLabel}
+        </span>
+
+        {/* Visible label */}
+        <span
+          className={cn(
+            'absolute inset-0 block text-[14px]',
+            'transition-all duration-300 ease-[cubic-bezier(.34,1.56,.64,1)]',
+            checked ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[12px]',
+          )}
+        >
+          {visibleLabel}
+        </span>
       </div>
     </label>
   );

@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
-import { Project } from '@regen-network/api/regen/ecocredit/v1/state';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import DropdownIcon from 'web-components/src/components/icons/DropdownIcon';
@@ -140,6 +139,22 @@ export const BaseMembersTable = <T extends BaseUser>({
           </div>
         ))}
         <div className="w-[60px]" />
+      </div>
+
+      {/* Mobile column header - just Name */}
+      <div
+        className={`${
+          isProjectContext ? 'lg:hidden' : 'xl:hidden'
+        } pb-20 font-muli text-sc-text-sub-header font-bold text-[12px]`}
+      >
+        <div className="px-6 flex items-center cursor-pointer" onClick={onSort}>
+          {_(NAME)}
+          <DropdownIcon
+            className={`ml-10 w-4 h-4 transition-transform ${
+              sortDir === 'desc' ? 'rotate-180' : ''
+            }`}
+          />
+        </div>
       </div>
 
       {/* Rows */}

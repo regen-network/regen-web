@@ -24,9 +24,7 @@ const meta: Meta<typeof OrganizationMembers> = {
 
 export default meta;
 
-export const Default = (args: {
-  onInvite: () => void;
-}) => {
+export const Default = (args: { onInvite: () => void }) => {
   const [members, setMembers] = useState<Member[]>(mockMembers);
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
 

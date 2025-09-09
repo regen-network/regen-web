@@ -30,6 +30,9 @@ export interface BaseRoleDropdownProps {
   currentUserRole?: string;
   disabled?: boolean;
   hasWalletAddress: boolean;
+  placeholder?: string;
+  height?: string;
+  fullWidth?: boolean;
 }
 
 export interface RoleOption {

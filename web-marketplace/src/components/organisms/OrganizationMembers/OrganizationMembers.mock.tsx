@@ -25,6 +25,7 @@ export const mockMembers: Member[] = [
     visible: false,
     hasWalletAddress: true,
     isCurrentUser: false,
+    invited: true,
   },
   {
     id: '3',

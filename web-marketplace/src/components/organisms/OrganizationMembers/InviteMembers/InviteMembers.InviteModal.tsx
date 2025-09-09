@@ -220,7 +220,7 @@ export const InviteMemberModal = ({
                         className="cursor-pointer hover:bg-bc-neutral-100 p-[20px] flex items-center gap-[10px] min-h-[84px]"
                       >
                         <UserAvatar
-                          src={acc?.image}
+                          src={acc?.image ?? undefined}
                           alt={acc?.name || acc?.addr || ''}
                           size="medium"
                         />

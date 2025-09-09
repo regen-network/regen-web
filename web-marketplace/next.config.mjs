@@ -21,12 +21,7 @@ const nextConfig = {
   outputFileTracingRoot: path.join(__dirname, '..'),
   // Exclude large packages from the server functions
   outputFileTracingExcludes: {
-    '*': [
-      './node_modules/canvas',
-      './node_modules/@img/sharp-libvips-linux-x64',
-      './node_modules/@img/sharp-libvips-linuxmusl-x64',
-      './node_modules/sharp',
-    ],
+    '*': ['./node_modules/canvas'],
   },
   // Handle how the server will dispose or keep in memory built pages in development
   onDemandEntries: {
@@ -41,7 +36,6 @@ const nextConfig = {
     'lokijs',
     'encoding',
     'canvas',
-    'sharp',
   ],
   // Dev environment
   turbopack: {

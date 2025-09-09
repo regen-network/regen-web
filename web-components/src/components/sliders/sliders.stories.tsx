@@ -1,34 +1,14 @@
-import Grid from '@mui/material/Grid';
-
 import { projectCardBodyTextMapping } from '../cards/ProjectCard/ProjectCard.mock';
 import StaticMap from '../map/StaticMap';
-import { ItemProps } from './Item';
 import ProjectMedia, { Asset, Media } from './ProjectMedia';
-import ProtectedSpecies from './ProtectedSpecies';
 
 export default {
   title: 'Sliders',
-  component: ProtectedSpecies,
+  component: ProjectMedia,
 };
 
-const item: ItemProps = {
-  name: 'Melaleuca brevifolia',
-  imgSrc: './melaleuca-b.png',
-};
-
-const species = [item, item, item, item, item, item, item, item, item, item];
-
-// export const protectedSpeciesItem = (): JSX.Element => (
-//   <Item name={text('Name', item.name)} imgSrc={item.imgSrc} />
-// );
-
-export const protectedSpecies = (): JSX.Element => (
-  <Grid container>
-    <Grid item xs={12} sm={4}>
-      <ProtectedSpecies species={species} />
-    </Grid>
-  </Grid>
-);
+// Protected Species component and related stories have been removed
+// as the ProtectedSpecies and Item components were deleted
 
 const mediaAssets: Media[] = [
   {

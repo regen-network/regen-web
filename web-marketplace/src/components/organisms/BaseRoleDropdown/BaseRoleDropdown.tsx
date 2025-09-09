@@ -36,6 +36,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
     if (isOpen) setIsOpen(false);
   });
   const roleLabel = roleOptions.find(option => option.key === role)?.label;
+  const displayLabel = roleLabel ?? placeholder ?? '';
 
   const isCurrentUserOwner = currentUserRole === ROLE_OWNER;
   const filteredRoleOptions = useMemo(

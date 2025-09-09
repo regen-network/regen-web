@@ -26,7 +26,7 @@ export const MyCreditBatches = (): JSX.Element => {
   const hasNoBatches = batchesWithSupply && batchesWithSupply?.length === 0;
 
   return (
-    <div className="shadow-[0_2px_5px_0.5px_rgba(0,0,0,0.05)] w-[100%]">
+    <div className="w-[100%]">
       <MyCreditBatchesTable
         hasNoBatches={hasNoBatches}
         paginationParams={paginationParams}

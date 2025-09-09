@@ -142,10 +142,6 @@ export default function RegenRoutes({ reactQueryClient }: RouterProps) {
         rpcQueryClient,
         address: activeWalletAddr,
         languageCode: selectedLanguage,
-        // Sets React Router’s basename to the current locale (e.g., /en, /es)
-        // so all legacy React Router paths (/, /projects, etc.) resolve under /{lang}.
-        // TODO: Remove `basename` when the legacy React Router is fully migrated
-        // to Next’s App Router and no React Router routes remain.
         basename:
           typeof window !== 'undefined'
             ? (() => {

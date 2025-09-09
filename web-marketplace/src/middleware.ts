@@ -1,6 +1,8 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import { DEFAULT_LOCALE } from 'lib/i18n/locales';
+
 import linguiConfig from '../lingui.config';
 
 const locales = linguiConfig.locales as string[];
@@ -11,28 +13,6 @@ const setLocaleCookie = (res: NextResponse, locale: string) => {
   if (res.cookies.get(COOKIE_LOCALE)?.value !== locale) {
     res.cookies.set(COOKIE_LOCALE, locale, COOKIE_OPTS);
   }
-};
-
-const getPreferredLocale = (request: NextRequest): string => {
-  const cookieLocale = request.cookies.get(COOKIE_LOCALE)?.value;
-  if (cookieLocale && locales.includes(cookieLocale)) return cookieLocale;
-
-  const acceptLanguage = request.headers.get('accept-language') || '';
-  const parsed = acceptLanguage
-    .split(',')
-    .map(token => {
-      const [tagPart, qPart] = token.trim().split(';q=');
-      const baseTag = tagPart.split('-')[0];
-      const quality = qPart ? parseFloat(qPart) : 1;
-      return { tag: baseTag, q: Number.isFinite(quality) ? quality : 0 };
-    })
-    .sort((a, b) => b.q - a.q)
-    .map(x => x.tag);
-
-  for (const lang of parsed) {
-    if (locales.includes(lang)) return lang;
-  }
-  return locales[0] || 'en';
 };
 
 export const middleware = (request: NextRequest) => {
@@ -49,16 +29,56 @@ export const middleware = (request: NextRequest) => {
     l => pathname === `/${l}` || pathname.startsWith(`/${l}/`),
   );
   if (matchedLocale) {
+    // If the matched locale is the default, redirect to path without the locale prefix
+    if (matchedLocale === DEFAULT_LOCALE) {
+      // Remove the leading default locale from the path
+      const escaped = DEFAULT_LOCALE.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+      const re = new RegExp(`^/${escaped}(?:/|$)`);
+      const strippedPath = pathname.replace(re, '/');
+      nextUrl.pathname = strippedPath === '' ? '/' : strippedPath;
+      const response = NextResponse.redirect(nextUrl.href);
+      setLocaleCookie(response, matchedLocale);
+      return response;
+    }
+
     const response = NextResponse.next();
     setLocaleCookie(response, matchedLocale);
     return response;
   }
 
-  // No locale -> redirect to preferred
-  const locale = getPreferredLocale(request);
-  nextUrl.pathname = `/${locale}${pathname}`;
-  const response = NextResponse.redirect(nextUrl.href);
-  setLocaleCookie(response, locale);
+  // No locale in URL (first time visitor or explicit default choice)
+  const cookieLocale = request.cookies.get(COOKIE_LOCALE)?.value;
 
+  // If no cookie exists, detect browser locale
+  if (!cookieLocale) {
+    const acceptLanguage = request.headers.get('accept-language') || '';
+    const parsed = acceptLanguage
+      .split(',')
+      .map(token => {
+        const [tagPart, qPart] = token.trim().split(';q=');
+        const baseTag = tagPart.split('-')[0];
+        const quality = qPart ? parseFloat(qPart) : 1;
+        return { tag: baseTag, q: Number.isFinite(quality) ? quality : 0 };
+      })
+      .sort((a, b) => b.q - a.q)
+      .map(x => x.tag);
+
+    for (const lang of parsed) {
+      if (locales.includes(lang) && lang !== DEFAULT_LOCALE) {
+        // Redirect to prefixed URL
+        nextUrl.pathname = `/${lang}${pathname}`;
+        const response = NextResponse.redirect(nextUrl.href);
+        setLocaleCookie(response, lang);
+        return response;
+      }
+    }
+  }
+
+  // No locale in URL means default locale (either explicit choice or browser default)
+  // For default locale, internally rewrite to the default locale prefixed route
+  // so the app's [lang] routes are matched, but keep the URL path without prefix.
+  nextUrl.pathname = `/${DEFAULT_LOCALE}${pathname}`;
+  const response = NextResponse.rewrite(nextUrl);
+  setLocaleCookie(response, DEFAULT_LOCALE);
   return response;
 };

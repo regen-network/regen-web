@@ -1,4 +1,4 @@
-import { LOCALE_PREFIX_REGEX } from '../locales';
+import { DEFAULT_LOCALE, LOCALE_PREFIX_REGEX } from '../locales';
 
 export function updateLocaleInPath(pathname: string, locale: string): string {
   const stripped = pathname.replace(LOCALE_PREFIX_REGEX, '');
@@ -7,5 +7,6 @@ export function updateLocaleInPath(pathname: string, locale: string): string {
       ? stripped
       : `/${stripped}`
     : '/';
+  if (locale === DEFAULT_LOCALE) return suffix;
   return `/${locale}${suffix}`;
 }

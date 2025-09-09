@@ -127,13 +127,7 @@ export const Portfolio: React.FC<React.PropsWithChildren<PortfolioProps>> = ({
 
   return (
     <Box>
-      <Card
-        className={
-          noEcocredits
-            ? 'shadow-none rounded-[10px] border-sc-card-standard-stroke'
-            : 'shadow-none rounded-[10px]'
-        }
-      >
+      <Card className="shadow-none rounded-[10px] border-solid border-bc-neutral-300 border-[1px]">
         <IconTabs
           hideIndicator
           tabs={tabs}

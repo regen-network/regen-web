@@ -41,7 +41,7 @@ export const MyCreditBatchesTable = ({
         alignItems: 'center',
       }}
     >
-      <>
+      <div className="border-solid border-bc-neutral-300 border-[1px] rounded-[10px] overflow-hidden">
         <Box
           sx={{
             display: hasNoBatches ? 'none' : 'flex',
@@ -51,8 +51,6 @@ export const MyCreditBatchesTable = ({
             backgroundColor: 'primary.main',
             px: 6.25,
             py: 6.25,
-            border: theme => `1px solid ${theme.palette.info.light}`,
-            borderRadius: '8px 8px 0 0',
           }}
         >
           <Subtitle
@@ -78,9 +76,8 @@ export const MyCreditBatchesTable = ({
           onTableChange={setPaginationParams}
           initialPaginationParams={paginationParams}
           isIgnoreOffset
-          sx={{ root: { borderTop: 0 } }}
         />
-      </>
+      </div>
     </WithLoader>
   );
 };

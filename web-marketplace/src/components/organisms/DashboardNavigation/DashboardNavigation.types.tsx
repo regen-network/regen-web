@@ -38,6 +38,8 @@ export interface DashboardNavigationProps {
   isIssuer?: boolean;
   loginDisabled?: boolean;
   hasWalletAddress?: boolean;
+  showCreditClasses?: boolean;
+  hasCreditBatches?: boolean;
 }
 
 export interface NavigationListItemProps {

@@ -29,7 +29,10 @@ export const Bridge = ({
 
   return (
     <Flex flexDirection="column" sx={{ width: '100%' }}>
-      <Card sx={{ mb: 5 }}>
+      <Card
+        sx={{ mb: 5 }}
+        className="rounded-[10px] border-solid border-bc-neutral-300 border-[1px]"
+      >
         <IconTabs
           tabs={tabs}
           size={'xl'}

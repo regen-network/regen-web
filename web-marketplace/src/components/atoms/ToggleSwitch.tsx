@@ -49,7 +49,11 @@ export const ToggleSwitch = ({
         disabled={disabled}
         onChange={e => !disabled && onChange(e.target.checked)}
       />
-      <div className="relative" style={{ width: '71px', height: 0 }} aria-hidden />
+      <div
+        className="relative"
+        style={{ width: '71px', height: 0 }}
+        aria-hidden
+      />
 
       <span
         className={cn(
@@ -73,7 +77,9 @@ export const ToggleSwitch = ({
           className={cn(
             'absolute inset-0 block text-[14px]',
             'transition-all duration-300 ease-[cubic-bezier(.34,1.56,.64,1)]',
-            checked ? 'opacity-0 translate-y-[-12px]' : 'opacity-100 translate-y-0',
+            checked
+              ? 'opacity-0 translate-y-[-12px]'
+              : 'opacity-100 translate-y-0',
           )}
         >
           {hiddenLabel}
@@ -84,7 +90,9 @@ export const ToggleSwitch = ({
           className={cn(
             'absolute inset-0 block text-[14px]',
             'transition-all duration-300 ease-[cubic-bezier(.34,1.56,.64,1)]',
-            checked ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[12px]',
+            checked
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-[12px]',
           )}
         >
           {visibleLabel}

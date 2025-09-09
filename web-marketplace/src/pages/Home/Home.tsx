@@ -147,19 +147,21 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
               sx={{ mt: { xs: 4, sm: 4 } }}
             />
           </Box>
-          <Box
-            sx={{
-              alignSelf: 'center',
-              maxWidth: ['252px', '560px'],
-            }}
-          >
-            <img
-              loading="lazy"
-              style={{ width: '100%' }}
-              src={heroSection?.icon?.image?.asset?.url || ''}
-              alt={heroSection?.icon?.imageAlt || 'icon'}
-            />
-          </Box>
+          {heroSection?.icon?.image?.asset?.url && (
+            <Box
+              sx={{
+                alignSelf: 'center',
+                maxWidth: ['252px', '560px'],
+              }}
+            >
+              <img
+                loading="lazy"
+                style={{ width: '100%' }}
+                src={heroSection.icon.image.asset.url}
+                alt={heroSection.icon.imageAlt || ''}
+              />
+            </Box>
+          )}
         </Box>
       </BackgroundImgSection>
 

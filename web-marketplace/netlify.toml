@@ -46,12 +46,13 @@ NEXT_PUBLIC_PRE_PROPOSE_SINGLE_CODE_ID = "11"
 NEXT_PUBLIC_CW4_GROUP_CODE_ID = "2"
 NEXT_PUBLIC_DAO_VOTING_CW4_CODE_ID = "19"
 
-# Build settings for Next.js deploy previews
-[context.deploy-preview]
+# Main build configuration
+[build]
+base = "web-marketplace"
 command = "bun run build"
-publish = "web-marketplace/.next"
+publish = ".next"
 
-[[context.deploy-preview.plugins]]
+[[plugins]]
 package = "@netlify/plugin-nextjs"
 
 
@@ -173,3 +174,12 @@ from = "https://app.regen.network/ecocredits/accounts/*"
 to = "https://app.regen.network/profiles/:splat"
 force = true
 status = 302
+
+# Netlify internals (Image CDN lives under /.netlify/*)
+[[redirects]]
+from = "/.netlify/*"
+to = "/.netlify/:splat"
+status = 200
+
+[functions]
+included_files = ["!node_modules/canvas/**/*"]

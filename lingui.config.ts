@@ -1,11 +1,11 @@
 import type { LinguiConfig } from '@lingui/conf';
 
-export const localesConst = ['en', 'es'] as const;
+export const locales = ['en', 'es'] as const;
 
-export type Locale = (typeof localesConst)[number];
+export type Locale = (typeof locales)[number];
 
 const config: LinguiConfig = {
-  locales: [...localesConst],
+  locales: [...locales],
 };
 
 export default config;

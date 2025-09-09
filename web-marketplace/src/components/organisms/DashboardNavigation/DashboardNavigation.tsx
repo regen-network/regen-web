@@ -48,7 +48,6 @@ export const DashboardNavigation = ({
   collapsed: boolean;
   walletConnect?: boolean;
   hasProjects?: boolean;
-  hasCreditBatches?: boolean;
   onToggleCollapse: (collapsed: boolean) => void;
 }) => {
   const { _ } = useLingui();

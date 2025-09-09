@@ -32,7 +32,7 @@ import {
 import { MemberRoleDropdown } from '../OrganizationMembers.RoleDropdown';
 import { InviteMemberModalProps } from '../OrganizationMembers.types';
 import { VisibilitySwitch } from '../OrganizationMembers.VisibilitySwitch';
-import { inviteSchema } from './InviteMembers.InviteModal.schema';
+import { inviteSchema } from './InviteMembers.schema';
 import {
   getDisplayValue,
   getValidationError,

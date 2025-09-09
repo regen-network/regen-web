@@ -28,7 +28,7 @@ import {
   TITLE_LABEL,
   TITLE_SUBHEADER,
 } from '../OrganizationMembers.constants';
-import { getPersonalProfileSchema } from './InviteMembers.InviteModal.schema';
+import { personalProfileSchema } from './InviteMembers.schema';
 
 interface PersonalProfileModalProps {
   open: boolean;
@@ -59,9 +59,11 @@ export const PersonalProfileModal = ({
   const { _ } = useLingui();
   const modalRef = useClickOutside<HTMLDivElement>(() => onClose());
 
-  const schema = useMemo(() => getPersonalProfileSchema(), []);
-  const form = useZodForm<typeof schema, typeof schema>({
-    schema,
+  const form = useZodForm<
+    typeof personalProfileSchema,
+    typeof personalProfileSchema
+  >({
+    schema: personalProfileSchema,
     defaultValues: {
       name: initialName || '',
       avatar: initialAvatar || '',

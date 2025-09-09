@@ -6,10 +6,9 @@ export const inviteSchema = z.object({
   visible: z.boolean().default(true),
 });
 
-export const getPersonalProfileSchema = () =>
-  z.object({
-    name: z.string().min(1),
-    avatar: z.string().optional(),
-    title: z.string().optional(),
-    description: z.string().max(160).optional(),
-  });
+export const personalProfileSchema = z.object({
+  name: z.string().min(1),
+  avatar: z.string().optional(),
+  title: z.string().optional(),
+  description: z.string().max(160).optional(),
+});

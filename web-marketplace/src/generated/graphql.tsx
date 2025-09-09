@@ -8317,15 +8317,6 @@ export type ProjectByOnChainIdQuery = (
 export type AccountFieldsFragment = (
   { __typename?: 'Account' }
   & Pick<Account, 'id' | 'creatorId' | 'type' | 'name' | 'description' | 'image' | 'websiteLink' | 'twitterLink' | 'addr'>
-  & { organizationByAccountId?: Maybe<(
-    { __typename?: 'Organization' }
-    & OrganizationFieldsFragment
-  )> }
-);
-
-export type OrganizationFieldsFragment = (
-  { __typename?: 'Organization' }
-  & Pick<Organization, 'id'>
 );
 
 export type ProjectBySlugQueryVariables = Exact<{
@@ -8467,38 +8458,6 @@ export type UpdateAccountByIdMutation = (
   )> }
 );
 
-export type UpdateOrganizationByAccountIdMutationVariables = Exact<{
-  input: UpdateOrganizationByAccountIdInput;
-}>;
-
-
-export type UpdateOrganizationByAccountIdMutation = (
-  { __typename?: 'Mutation' }
-  & { updateOrganizationByAccountId?: Maybe<(
-    { __typename?: 'UpdateOrganizationPayload' }
-    & { organization?: Maybe<(
-      { __typename?: 'Organization' }
-      & Pick<Organization, 'id' | 'legalName'>
-    )> }
-  )> }
-);
-
-export type UpdateOrganizationByIdMutationVariables = Exact<{
-  input: UpdateOrganizationByIdInput;
-}>;
-
-
-export type UpdateOrganizationByIdMutation = (
-  { __typename?: 'Mutation' }
-  & { updateOrganizationById?: Maybe<(
-    { __typename?: 'UpdateOrganizationPayload' }
-    & { organization?: Maybe<(
-      { __typename?: 'Organization' }
-      & Pick<Organization, 'id' | 'legalName'>
-    )> }
-  )> }
-);
-
 export type UpdateProjectByIdMutationVariables = Exact<{
   input: UpdateProjectByIdInput;
 }>;
@@ -8530,11 +8489,6 @@ export const MoreProjectFieldsFragmentDoc = gql`
   }
 }
     `;
-export const OrganizationFieldsFragmentDoc = gql`
-    fragment organizationFields on Organization {
-  id
-}
-    `;
 export const AccountFieldsFragmentDoc = gql`
     fragment accountFields on Account {
   id
@@ -8545,12 +8499,9 @@ export const AccountFieldsFragmentDoc = gql`
   image
   websiteLink
   twitterLink
-  organizationByAccountId {
-    ...organizationFields
-  }
   addr
 }
-    ${OrganizationFieldsFragmentDoc}`;
+    `;
 export const ProjectSellOrdersFieldsFragmentDoc = gql`
     fragment projectSellOrdersFields on Project {
   sellOrdersByProjectId {
@@ -9489,78 +9440,6 @@ export function useUpdateAccountByIdMutation(baseOptions?: Apollo.MutationHookOp
 export type UpdateAccountByIdMutationHookResult = ReturnType<typeof useUpdateAccountByIdMutation>;
 export type UpdateAccountByIdMutationResult = Apollo.MutationResult<UpdateAccountByIdMutation>;
 export type UpdateAccountByIdMutationOptions = Apollo.BaseMutationOptions<UpdateAccountByIdMutation, UpdateAccountByIdMutationVariables>;
-export const UpdateOrganizationByAccountIdDocument = gql`
-    mutation UpdateOrganizationByAccountId($input: UpdateOrganizationByAccountIdInput!) {
-  updateOrganizationByAccountId(input: $input) {
-    organization {
-      id
-      legalName
-    }
-  }
-}
-    `;
-export type UpdateOrganizationByAccountIdMutationFn = Apollo.MutationFunction<UpdateOrganizationByAccountIdMutation, UpdateOrganizationByAccountIdMutationVariables>;
-
-/**
- * __useUpdateOrganizationByAccountIdMutation__
- *
- * To run a mutation, you first call `useUpdateOrganizationByAccountIdMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateOrganizationByAccountIdMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateOrganizationByAccountIdMutation, { data, loading, error }] = useUpdateOrganizationByAccountIdMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useUpdateOrganizationByAccountIdMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOrganizationByAccountIdMutation, UpdateOrganizationByAccountIdMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateOrganizationByAccountIdMutation, UpdateOrganizationByAccountIdMutationVariables>(UpdateOrganizationByAccountIdDocument, options);
-      }
-export type UpdateOrganizationByAccountIdMutationHookResult = ReturnType<typeof useUpdateOrganizationByAccountIdMutation>;
-export type UpdateOrganizationByAccountIdMutationResult = Apollo.MutationResult<UpdateOrganizationByAccountIdMutation>;
-export type UpdateOrganizationByAccountIdMutationOptions = Apollo.BaseMutationOptions<UpdateOrganizationByAccountIdMutation, UpdateOrganizationByAccountIdMutationVariables>;
-export const UpdateOrganizationByIdDocument = gql`
-    mutation UpdateOrganizationById($input: UpdateOrganizationByIdInput!) {
-  updateOrganizationById(input: $input) {
-    organization {
-      id
-      legalName
-    }
-  }
-}
-    `;
-export type UpdateOrganizationByIdMutationFn = Apollo.MutationFunction<UpdateOrganizationByIdMutation, UpdateOrganizationByIdMutationVariables>;
-
-/**
- * __useUpdateOrganizationByIdMutation__
- *
- * To run a mutation, you first call `useUpdateOrganizationByIdMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateOrganizationByIdMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateOrganizationByIdMutation, { data, loading, error }] = useUpdateOrganizationByIdMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useUpdateOrganizationByIdMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOrganizationByIdMutation, UpdateOrganizationByIdMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateOrganizationByIdMutation, UpdateOrganizationByIdMutationVariables>(UpdateOrganizationByIdDocument, options);
-      }
-export type UpdateOrganizationByIdMutationHookResult = ReturnType<typeof useUpdateOrganizationByIdMutation>;
-export type UpdateOrganizationByIdMutationResult = Apollo.MutationResult<UpdateOrganizationByIdMutation>;
-export type UpdateOrganizationByIdMutationOptions = Apollo.BaseMutationOptions<UpdateOrganizationByIdMutation, UpdateOrganizationByIdMutationVariables>;
 export const UpdateProjectByIdDocument = gql`
     mutation UpdateProjectById($input: UpdateProjectByIdInput!) {
   updateProjectById(input: $input) {

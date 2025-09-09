@@ -3,7 +3,6 @@ import { PaginationItem, PaginationItemProps, SxProps } from '@mui/material';
 import { makeStyles, withStyles } from 'tss-react/mui';
 
 import { pxToRem, Theme } from '../../theme/muiTheme';
-import { ColorScheme } from '../../theme/theme.types';
 
 export const usePaginationStyles = makeStyles()(theme => ({
   root: {

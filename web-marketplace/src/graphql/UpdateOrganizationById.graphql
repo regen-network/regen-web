@@ -1,8 +1,0 @@
-mutation UpdateOrganizationById($input: UpdateOrganizationByIdInput!) {
-  updateOrganizationById(input: $input) {
-    organization {
-      id
-      legalName
-    }
-  }
-}

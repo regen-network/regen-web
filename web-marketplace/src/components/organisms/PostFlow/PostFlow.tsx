@@ -138,6 +138,7 @@ export const PostFlow = ({
                 files,
               },
               published: data.published,
+              canDownloadFiles: !data.canDownloadFiles,
             },
             token,
             retryCsrfRequest,

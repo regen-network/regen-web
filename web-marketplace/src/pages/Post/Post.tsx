@@ -176,6 +176,7 @@ function Post(): JSX.Element {
                         lessText: _(LESS),
                         moreText: _(MORE),
                       }}
+                      canDownloadFiles={!!data.canDownloadFiles}
                     />
                     {(isAdmin || !privateFiles) && (
                       <img

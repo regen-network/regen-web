@@ -299,15 +299,14 @@ export const MyEcocredits = (): JSX.Element => {
   const shareUrl =
     REGEN_APP_PROJECT_URL + (lastRetiredProjectIdRef.current ?? '');
 
-  const canCreateFiatOrder = useMemo(
-    () =>
+  const canCreateFiatOrder = useMemo(() => {
+    const walletConnect = !activeAccount && !privActiveAccount;
+    return (
       !!privActiveAccount?.can_use_stripe_connect &&
-      !!activeAccount?.stripeConnectedAccountId,
-    [
-      activeAccount?.stripeConnectedAccountId,
-      privActiveAccount?.can_use_stripe_connect,
-    ],
-  );
+      !!activeAccount?.stripeConnectedAccountId &&
+      !walletConnect
+    );
+  }, [activeAccount, privActiveAccount]);
   const allowedDenomOptions = useAllowedDenomOptions(canCreateFiatOrder);
 
   return (

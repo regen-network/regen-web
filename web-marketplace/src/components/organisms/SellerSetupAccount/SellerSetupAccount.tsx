@@ -10,7 +10,10 @@ import { useStripeAccount } from './hooks/useStripeAccount';
 
 const SellerSetupAccount = () => {
   const { activeAccount, privActiveAccount } = useAuth();
+  const walletConnect = !activeAccount && !privActiveAccount;
   const { setupAccount, openLoginLink } = useStripeAccount();
+
+  if (walletConnect) return null;
 
   return (
     privActiveAccount?.can_use_stripe_connect && (

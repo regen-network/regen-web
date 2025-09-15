@@ -29,6 +29,7 @@ export const UserSellOrdersToolbar = ({
 }: UserSellOrdersToolbarProps) => {
   const { _ } = useLingui();
   const { privActiveAccount, activeAccount } = useAuth();
+  const walletConnect = !activeAccount && !privActiveAccount;
 
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
   const { credits } = useFetchEcocredits({ isPaginatedQuery: false });
@@ -77,7 +78,8 @@ export const UserSellOrdersToolbar = ({
             redirectOnSuccess={false}
             canCreateFiatOrder={
               !!privActiveAccount?.can_use_stripe_connect &&
-              !!activeAccount?.stripeConnectedAccountId
+              !!activeAccount?.stripeConnectedAccountId &&
+              !walletConnect
             }
           />
         </Suspense>

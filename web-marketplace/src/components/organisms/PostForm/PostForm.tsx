@@ -1,5 +1,10 @@
 import { MutableRefObject, useEffect, useMemo, useState } from 'react';
-import { SubmitHandler, useFieldArray, useWatch } from 'react-hook-form';
+import {
+  Controller,
+  SubmitHandler,
+  useFieldArray,
+  useWatch,
+} from 'react-hook-form';
 import { msg, plural, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
@@ -13,6 +18,7 @@ import { LockIcon } from 'web-components/src/components/icons/LockIcon';
 import { PrivateFile } from 'web-components/src/components/icons/PrivateFile';
 import { SaveIcon } from 'web-components/src/components/icons/SaveIcon';
 import { UnlockIcon } from 'web-components/src/components/icons/UnlockIcon';
+import Checkbox from 'web-components/src/components/inputs/new/CheckBox/Checkbox';
 import {
   FileDrop,
   FileDropProps,
@@ -332,7 +338,7 @@ export const PostForm = ({
               setValue={setFiles}
               className={cn(
                 index === fields.length - 1
-                  ? 'mb-40 sm:mb-50'
+                  ? 'mb-0 sm:mb-20'
                   : 'mb-20 sm:mb-30',
                 ' mt-0 overflow-hidden',
                 classes.galleryItem,
@@ -361,6 +367,31 @@ export const PostForm = ({
           );
         }}
       />
+
+      {!noFiles && (
+        <Controller
+          name="canDownloadFiles"
+          control={form.control}
+          defaultValue={false}
+          render={({ field }) => (
+            <div
+              onClick={() =>
+                field.onChange(field.value === true ? false : true)
+              }
+              className="flex items-center hover:cursor-pointer mb-20 sm:mb-40"
+            >
+              <Checkbox
+                checked={!!field.value}
+                onChange={(_, checked) => field.onChange(checked)}
+                name={field.name}
+                inputRef={field.ref}
+                className="pl-0"
+              />
+              <Trans>Project files cannot be downloaded</Trans>
+            </div>
+          )}
+        />
+      )}
 
       <div className="flex flex-col mb-40 sm:mb-50">
         <RadioGroup

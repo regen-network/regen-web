@@ -17,6 +17,7 @@ export const getPostFormSchema = ({ requiredMessage }: PostFormSchemaParams) =>
     files: z.array(editFileFormSchema).optional(),
     privacyType: z.custom<PostPrivacyType>(val => !!val, requiredMessage),
     published: z.boolean(),
+    canDownloadFiles: z.boolean().optional(),
   });
 
 export type PostFormSchemaType = z.infer<ReturnType<typeof getPostFormSchema>>;

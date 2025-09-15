@@ -405,7 +405,10 @@ export const getRegenRoutes = ({
             path="members"
             element={<KeplrOrAuthRoute component={Members} />}
           /> */}
-          <Route path="sell" element={<KeplrOrAuthRoute component={Sell} />} />
+          <Route
+            path="sell-orders"
+            element={<KeplrOrAuthRoute component={Sell} />}
+          />
         </Route>
 
         <Route path="connect-wallet" element={<ConnectWalletPage />} />

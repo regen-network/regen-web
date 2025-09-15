@@ -47,9 +47,9 @@ const getCreditsSection = (
       path: 'portfolio',
     },
     {
-      label: _(msg`Sell`),
+      label: _(msg`Sell orders`),
       icon: <ShoppingCartIcon linearGradient />,
-      path: 'sell',
+      path: 'sell-orders',
     },
   ],
 });

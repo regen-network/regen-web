@@ -423,7 +423,6 @@ export const organizationRoles = (
       'Has full control of projects and credit classes, but cannot manage users or credits.',
     authorizations: [
       creditClassesAuthorization,
-      createProjectAuthorization,
       orgEditAuthorization(daoAddress),
     ],
   },

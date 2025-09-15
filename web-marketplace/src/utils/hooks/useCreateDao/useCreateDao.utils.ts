@@ -144,11 +144,68 @@ const sellOrdersAuthorization = {
   },
 };
 
-const orgAdminAuthorizations = [
+const orgEditAuthorization = (daoAddress: string) => ({
+  name: 'can_edit_organization',
+  metadata: 'Can edit the organization profile',
+  filter: {
+    $or: [
+      {
+        wasm: {
+          execute: {
+            contract_addr: daoAddress,
+            msg: {
+              '#base64': {
+                update_config: {}, // update name, description or image_url
+              },
+            },
+            funds: [],
+          },
+        },
+      },
+      {
+        wasm: {
+          execute: {
+            contract_addr: daoAddress,
+            msg: {
+              '#base64': {
+                set_item: {
+                  key: {
+                    $not: { $eq: 'type' },
+                  },
+                },
+              },
+            },
+            funds: [],
+          },
+        },
+      },
+      {
+        wasm: {
+          execute: {
+            contract_addr: daoAddress,
+            msg: {
+              '#base64': {
+                remove_item: {
+                  key: {
+                    $not: { $eq: 'type' },
+                  },
+                },
+              },
+            },
+            funds: [],
+          },
+        },
+      },
+    ],
+  },
+});
+
+const orgAdminAuthorizations = (daoAddress: string) => [
   createProjectAuthorization,
   creditsAuthorization,
   sellOrdersAuthorization,
   creditClassesAuthorization,
+  orgEditAuthorization(daoAddress),
 ];
 
 // Cannot be added on instantiation because it requires the cw4_group and rbam contract addresses
@@ -334,6 +391,7 @@ const dataAuthorization = {
 
 export const organizationRoles = (
   initialOwnerAddress: string,
+  daoAddress: string,
   cw4GroupAddress: string,
   rbamAddress: string,
 ) => [
@@ -342,7 +400,7 @@ export const organizationRoles = (
     metadata: 'Owner of the organization',
     authorizations: [
       ...ownerMembersAuthorizations(cw4GroupAddress, rbamAddress),
-      ...orgAdminAuthorizations,
+      ...orgAdminAuthorizations(daoAddress),
     ],
     assignments: [initialOwnerAddress],
   },
@@ -356,14 +414,18 @@ export const organizationRoles = (
         cw4GroupAddress,
         rbamAddress,
       ),
-      ...orgAdminAuthorizations,
+      ...orgAdminAuthorizations(daoAddress),
     ],
   },
   {
     name: 'Editor',
     metadata:
       'Has full control of projects and credit classes, but cannot manage users or credits.',
-    authorizations: [creditClassesAuthorization, createProjectAuthorization],
+    authorizations: [
+      creditClassesAuthorization,
+      createProjectAuthorization,
+      orgEditAuthorization(daoAddress),
+    ],
   },
   {
     name: 'Viewer',

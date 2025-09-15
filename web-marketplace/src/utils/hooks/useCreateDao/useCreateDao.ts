@@ -46,11 +46,12 @@ export const useCreateDao = () => {
         });
       console.log('daoAddress', daoAddress);
 
-      const { salt: daoVotingCw4Salt, predictedAddress: daoVotingCw4Address } = await predictAddress({
-        client,
-        codeId: daoVotingCw4CodeId,
-        creator: daoAddress,
-      });
+      const { salt: daoVotingCw4Salt, predictedAddress: daoVotingCw4Address } =
+        await predictAddress({
+          client,
+          codeId: daoVotingCw4CodeId,
+          creator: daoAddress,
+        });
       const { salt: cw4GroupSalt, predictedAddress: cw4GroupAddress } =
         await predictAddress({
           client,
@@ -77,6 +78,7 @@ export const useCreateDao = () => {
             filter_code_id: filterCodeId,
             initial_roles: organizationRoles(
               wallet?.address,
+              daoAddress,
               cw4GroupAddress,
               rbamAddress,
             ),

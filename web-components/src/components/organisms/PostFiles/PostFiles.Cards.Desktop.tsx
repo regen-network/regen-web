@@ -11,6 +11,7 @@ type Props = {
   setSelectedUrl: UseStateSetter<string | undefined>;
   selectedUrl: string;
   filesPreviews: FilesPreviews;
+  canDownloadFiles: boolean;
 };
 
 const PostFilesCardsDesktop = ({
@@ -19,6 +20,7 @@ const PostFilesCardsDesktop = ({
   setSelectedUrl,
   selectedUrl,
   filesPreviews,
+  canDownloadFiles,
 }: Props) => (
   <Cards
     files={files}
@@ -42,7 +44,11 @@ const PostFilesCardsDesktop = ({
       />
     ))}
   >
-    <Buttons onClose={onClose} selectedUrl={selectedUrl} />
+    <Buttons
+      onClose={onClose}
+      selectedUrl={selectedUrl}
+      canDownloadFiles={canDownloadFiles}
+    />
   </Cards>
 );
 

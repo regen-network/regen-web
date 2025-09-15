@@ -42,6 +42,7 @@ type Props = Pick<PostFilesProps, 'files' | 'mapboxToken' | 'isAdmin'> & {
   filesPreviews: FilesPreviews;
   adminPrivateLabel: string;
   readMoreText: { text: string; lessText: string; moreText: string };
+  canDownloadFiles: boolean;
 };
 
 const PostFilesPublic = ({
@@ -53,6 +54,7 @@ const PostFilesPublic = ({
   filesPreviews,
   adminPrivateLabel,
   readMoreText,
+  canDownloadFiles,
 }: Props) => {
   const { classes: styles } = useStyles();
   const theme = useTheme();
@@ -235,6 +237,7 @@ const PostFilesPublic = ({
                   }}
                   setSelectedUrl={setSelectedUrl}
                   selectedUrl={selectedUrl}
+                  canDownloadFiles={canDownloadFiles}
                 />
               </Popup>
             )}
@@ -276,6 +279,7 @@ const PostFilesPublic = ({
               setAnimateMarker={setAnimateMarker}
               filesPreviews={filesPreviews}
               readMoreText={readMoreText}
+              canDownloadFiles={canDownloadFiles}
             />
           )}
           {isAdmin && (privateLocations || privateFiles) && (

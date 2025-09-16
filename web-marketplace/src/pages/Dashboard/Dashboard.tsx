@@ -86,8 +86,6 @@ export const Dashboard = () => {
   });
   const hasCreditBatches = batchesWithSupply && batchesWithSupply.length > 0;
 
-  const walletConnect = !activeAccount && !privActiveAccount;
-
   const { data: sanityProfilePageData } = useQuery(
     getAllProfilePageQuery({
       sanityClient,
@@ -212,7 +210,6 @@ export const Dashboard = () => {
               loginDisabled={loginDisabled}
               hasWalletAddress={hasWalletAddress}
               wallet={wallet?.address}
-              walletConnect={walletConnect}
               hasProjects={!!hasProjects && hasProjects.length > 0}
               hasOrders={!ordersLoading && hasOrders}
               hasCreditBatches={hasCreditBatches}

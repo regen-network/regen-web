@@ -5,15 +5,16 @@ import Card from 'web-components/src/components/cards/Card';
 import { Title } from 'web-components/src/components/typography';
 
 import { useAuth } from 'lib/auth/auth';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { useStripeAccount } from './hooks/useStripeAccount';
 
 const SellerSetupAccount = () => {
   const { activeAccount, privActiveAccount } = useAuth();
-  const walletConnect = !activeAccount && !privActiveAccount;
+  const { loginDisabled } = useWallet();
   const { setupAccount, openLoginLink } = useStripeAccount();
 
-  if (walletConnect) return null;
+  if (loginDisabled) return null;
 
   return (
     privActiveAccount?.can_use_stripe_connect && (

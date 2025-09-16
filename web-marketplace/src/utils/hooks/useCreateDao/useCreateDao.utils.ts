@@ -60,25 +60,14 @@ const createProjectAuthorization = {
   },
 };
 
-const creditsAuthorization = {
-  name: 'can_manage_credits',
-  metadata: 'Can manage credits',
+const creditIssuanceAuthorization = {
+  name: 'can_manage_credit_issuance',
+  metadata: 'Can manage credit issuance',
   filter: {
     $or: [
       {
         stargate: {
           type_url: '/regen.ecocredit.v1.MsgCreateBatch',
-        },
-      },
-      {
-        stargate: {
-          type_url: '/regen.ecocredit.v1.MsgRetire',
-        },
-      },
-
-      {
-        stargate: {
-          type_url: '/regen.ecocredit.v1.MsgSend',
         },
       },
       {
@@ -103,17 +92,37 @@ const creditsAuthorization = {
       },
       {
         stargate: {
+          type_url: '/regen.ecocredit.basket.v1.MsgCreate',
+        },
+      },
+    ],
+  },
+};
+
+const creditManagementAuthorization = {
+  name: 'can_manage_credits',
+  metadata: 'Can manage credits',
+  filter: {
+    $or: [
+      {
+        stargate: {
+          type_url: '/regen.ecocredit.v1.MsgRetire',
+        },
+      },
+
+      {
+        stargate: {
+          type_url: '/regen.ecocredit.v1.MsgSend',
+        },
+      },
+      {
+        stargate: {
           type_url: '/regen.ecocredit.basket.v1.MsgPut',
         },
       },
       {
         stargate: {
           type_url: '/regen.ecocredit.basket.v1.MsgTake',
-        },
-      },
-      {
-        stargate: {
-          type_url: '/regen.ecocredit.basket.v1.MsgCreate',
         },
       },
     ],
@@ -202,7 +211,8 @@ const orgEditAuthorization = (daoAddress: string) => ({
 
 const orgAdminAuthorizations = (daoAddress: string) => [
   createProjectAuthorization,
-  creditsAuthorization,
+  creditIssuanceAuthorization,
+  creditManagementAuthorization,
   sellOrdersAuthorization,
   creditClassesAuthorization,
   orgEditAuthorization(daoAddress),
@@ -454,7 +464,8 @@ const projectsAuthorization = {
 
 const projectAdminAuthorizations = [
   projectsAuthorization,
-  creditsAuthorization,
+  creditIssuanceAuthorization,
+  creditManagementAuthorization,
   sellOrdersAuthorization,
   dataAuthorization,
 ];

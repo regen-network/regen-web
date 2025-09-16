@@ -1,12 +1,13 @@
 'use client';
 
 import React, { useMemo } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { Box, SelectChangeEvent, useMediaQuery, useTheme } from '@mui/material';
 import { getClientConfig } from 'clients/Clients.config';
 import { useAtom } from 'jotai';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { Flex } from 'web-components/src/components/box';
 import { ProjectCard } from 'web-components/src/components/cards/ProjectCard';
@@ -53,12 +54,16 @@ import { getIsSoldOut } from './utils/getIsSoldOut';
 
 export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { _ } = useLingui();
+  // TODO: remove this and use next.js router when we migrate to next.js
+  // React Router for pagination
   const { page: routePage } = useParams() as { page?: string };
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const locationSearch = searchParams.toString()
-    ? `?${searchParams.toString()}`
-    : '';
+  const navigate = useNavigate();
+  const location = useLocation();
+  const locationSearch = location.search || '';
+
+  // Next.js router for project navigation
+  const nextRouter = useRouter();
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { track } = useTracker();
@@ -205,7 +210,7 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
                     }
               }
               purchaseInfo={project.purchaseInfo || {}}
-              onClick={() => router.push(`/project/${project.id}`)}
+              onClick={() => nextRouter.push(`/project/${project.id}`)}
               imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
               apiServerUrl={API_URI}
               truncateTitle={true}
@@ -277,8 +282,8 @@ export const AllProjects: React.FC<React.PropsWithChildren<unknown>> = () => {
           <Pagination
             count={pagesCount}
             page={Number(routePage)}
-            onChange={(event, value) =>
-              router.push(`/projects/${value}${locationSearch}`)
+            onChange={(_, value) =>
+              navigate(`/projects/${value}${locationSearch}`)
             }
             size={isMobile ? 'small' : 'large'}
             colorScheme={COLOR_SCHEME}

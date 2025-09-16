@@ -136,7 +136,7 @@ export default function MediaCard({
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
     >
-      {href ? (
+      {href && !onClick ? (
         LinkComponent ? (
           <LinkComponent
             href={href}
@@ -155,7 +155,7 @@ export default function MediaCard({
           </a>
         )
       ) : (
-        media
+        <>{media}</>
       )}
       {name && (
         <Title

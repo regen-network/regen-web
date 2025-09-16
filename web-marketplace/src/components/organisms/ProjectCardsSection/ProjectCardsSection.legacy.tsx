@@ -118,6 +118,7 @@ export function ProjectCardsSection({
                 purchaseInfo={project.purchaseInfo}
                 href={href}
                 target={'_self'}
+                onClick={() => router.push(href)}
                 LinkComponent={Link}
                 imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
                 apiServerUrl={API_URI}

@@ -6,7 +6,6 @@ import {
   predictAddress,
 } from './useCreateDao.utils';
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate';
-import { toBase64, toUtf8 } from '@cosmjs/encoding';
 import {
   cw4GroupCodeId,
   daoDaoCoreCodeId,
@@ -175,15 +174,7 @@ export const useCreateDao = () => {
             expect: daoAddress,
           },
         },
-        {
-          amount: [
-            {
-              denom: 'uregen',
-              amount: '5000', // TODO: what should fee and gas be?
-            },
-          ],
-          gas: '20000000',
-        },
+        2,
         undefined,
         [],
       );

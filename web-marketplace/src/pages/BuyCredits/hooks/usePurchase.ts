@@ -57,7 +57,6 @@ import {
   getWarningModalContent,
   sendPurchaseConfirmationEmail,
 } from '../BuyCredits.utils';
-import { invalidateBalancesWithRetries } from './invalidateBalancesWithRetries';
 import { useFetchRetirementForPurchase } from './useFetchRetirementForPurchase';
 
 type UsePurchaseParams = {
@@ -486,19 +485,8 @@ export const usePurchase = ({
                       );
                       await reactQueryClient.invalidateQueries({
                         queryKey: ['balances', wallet?.address], // invalidate all query pages
+                        refetchType: 'all',
                       });
-
-                      // After tx success the ledger may not reflect updated balances immediately.
-                      // Briefly re-invalidate the balances query to pull the new tradable amounts as soon as they're visible,
-                      // so the portfolio updates behind the success modal without requiring a manual reload.
-                      (async () => {
-                        if (wallet?.address) {
-                          await invalidateBalancesWithRetries(
-                            reactQueryClient,
-                            wallet.address,
-                          );
-                        }
-                      })();
 
                       // Reset BuyCredits forms
                       handleSuccess();

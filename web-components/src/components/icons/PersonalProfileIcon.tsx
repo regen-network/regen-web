@@ -1,8 +1,21 @@
 import React from 'react';
 
-function PersonalProfileIcon(
-  props: React.SVGProps<SVGSVGElement>,
-): JSX.Element {
+import { useGradientId } from './hooks/useGradientId';
+
+type Props = {
+  /** use the green gradient when true */
+  linearGradient?: boolean;
+  /** grey-out the icon when true */
+  disabled?: boolean;
+} & React.SVGProps<SVGSVGElement>;
+
+export default function PersonalProfileIcon({
+  linearGradient,
+  disabled,
+  ...props
+}: Props): JSX.Element {
+  const gradientId = useGradientId('linear_personal_profile_icon');
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,25 +25,34 @@ function PersonalProfileIcon(
       fill="none"
       {...props}
     >
+      {linearGradient && (
+        <defs>
+          <linearGradient
+            id={gradientId}
+            x1="11.5674"
+            y1="4"
+            x2="4.89427"
+            y2="19.7593"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop
+              offset="0.00458717"
+              stopColor={disabled ? '#8F8F8F' : '#7BC796'}
+            />
+            <stop offset="1" stopColor={disabled ? '#EFEFEF' : '#C5E6D1'} />
+          </linearGradient>
+        </defs>
+      )}
       <path
         d="M11.5674 4L11.5674 3H11.5674V4ZM16.0488 8.48145H17.0488V8.48144L16.0488 8.48145ZM14.3125 12.0215L13.6991 11.2317C13.4184 11.4497 13.2745 11.8003 13.3211 12.1527C13.3678 12.5051 13.598 12.8062 13.9257 12.9437L14.3125 12.0215ZM19.0986 18.0352L20.0763 17.8249L20.0763 17.8249L19.0986 18.0352ZM5.82617 20.0215L5.8259 21.0215H5.82617V20.0215ZM4.03613 18.0352L3.05849 17.8249L3.05848 17.8249L4.03613 18.0352ZM8.82129 12.0215L9.20819 12.9436C9.53589 12.8061 9.76601 12.505 9.81264 12.1527C9.85928 11.8004 9.71542 11.4498 9.43477 11.2318L8.82129 12.0215ZM7.08594 8.48145L6.08594 8.48144V8.48145H7.08594ZM11.5674 4L11.5674 5C13.4901 5.00001 15.0488 6.5587 15.0488 8.48145L16.0488 8.48145L17.0488 8.48144C17.0488 5.45413 14.5947 3.00002 11.5674 3L11.5674 4ZM16.0488 8.48145H15.0488C15.0488 9.59876 14.5223 10.5925 13.6991 11.2317L14.3125 12.0215L14.9259 12.8113C16.2142 11.8108 17.0488 10.2445 17.0488 8.48145H16.0488ZM14.3125 12.0215L13.9257 12.9437C15.9728 13.8022 17.5877 15.7664 18.121 18.2454L19.0986 18.0352L20.0763 17.8249C19.4174 14.7619 17.3997 12.2319 14.6993 11.0993L14.3125 12.0215ZM19.0986 18.0352L18.121 18.2454C18.162 18.4363 18.1098 18.6053 17.9746 18.7496C17.8293 18.9048 17.5898 19.0215 17.3076 19.0215V20.0215V21.0215C18.8893 21.0215 20.4741 19.6748 20.0763 17.8249L19.0986 18.0352ZM17.3076 20.0215V19.0215H5.82617V20.0215V21.0215H17.3076V20.0215ZM5.82617 20.0215L5.82644 19.0215C5.54438 19.0214 5.3051 18.9047 5.15999 18.7497C5.02492 18.6054 4.97271 18.4364 5.01378 18.2454L4.03613 18.0352L3.05848 17.8249C2.6608 19.6742 4.24421 21.0211 5.8259 21.0215L5.82617 20.0215ZM4.03613 18.0352L5.01377 18.2454C5.54696 15.7666 7.16156 13.8023 9.20819 12.9436L8.82129 12.0215L8.43439 11.0994C5.73446 12.2322 3.71724 14.7623 3.05849 17.8249L4.03613 18.0352ZM8.82129 12.0215L9.43477 11.2318C8.61217 10.5927 8.08594 9.59886 8.08594 8.48145H7.08594H6.08594C6.08594 10.2439 6.91959 11.8104 8.20781 12.8112L8.82129 12.0215ZM7.08594 8.48145L8.08594 8.48145C8.08595 6.55869 9.64463 5 11.5674 5V4V3C8.54005 3 6.08596 5.45413 6.08594 8.48144L7.08594 8.48145Z"
-        fill="url(#paint0_linear_10781_213589)"
+        fill={
+          linearGradient
+            ? `url(#${gradientId})`
+            : disabled
+            ? '#8F8F8F'
+            : 'currentColor'
+        }
       />
-      <defs>
-        <linearGradient
-          id="paint0_linear_10781_213589"
-          x1="11.5674"
-          y1="4"
-          x2="4.89427"
-          y2="19.7593"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0.00458717" stop-color="#7BC796" />
-          <stop offset="1" stop-color="#C5E6D1" />
-        </linearGradient>
-      </defs>
     </svg>
   );
 }
-
-export default PersonalProfileIcon;

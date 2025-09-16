@@ -13,7 +13,7 @@ import { UserMenuItemProfile, UserMenuProfile } from './UserMenuItem.Profile';
 type TextContent = {
   signedInAs: string;
   copyText: Pick<CopyButtonProps, 'tooltipText' | 'toastText'>;
-  publicProfile: string;
+  personalProfile: string;
   organizationProfile: string;
   personalDashboard: string;
   organizationDashboard: string;
@@ -63,7 +63,7 @@ export const getUserMenuItems = ({
             <UserMenuItemProfile
               {...profile}
               profileLink={undefined}
-              publicProfileText={textContent.publicProfile}
+              personalProfileText={textContent.personalProfile}
               copyText={textContent.copyText}
               linkComponent={linkComponent}
               showCheckIcon
@@ -79,8 +79,8 @@ export const getUserMenuItems = ({
       href: profile.profileLink,
       labelClassName,
       className,
-      icon: <PersonalProfileIcon />,
-      label: textContent.publicProfile,
+      icon: <PersonalProfileIcon linearGradient />,
+      label: textContent.personalProfile,
     },
     // Personal dashboard
     {
@@ -107,7 +107,7 @@ export const getUserMenuItems = ({
             <UserMenuItemProfile
               {...organizationProfile}
               profileLink={undefined}
-              publicProfileText={textContent.publicProfile}
+              personalProfileText={textContent.personalProfile}
               copyText={textContent.copyText}
               linkComponent={linkComponent}
             />

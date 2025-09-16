@@ -21,6 +21,13 @@ msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+msgid ""
+msgstr ""
+
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
@@ -36,8 +43,8 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
-msgid " Exit to homepage "
-msgstr "Salir a la página de inicio"
+#~ msgid " Exit to homepage "
+#~ msgstr "Salir a la página de inicio"
 
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
@@ -3249,7 +3256,7 @@ msgstr "Pedidos"
 msgid "Org"
 msgstr "Organización"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:43
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:44
 msgid "organization"
 msgstr "organización"
 
@@ -3257,7 +3264,7 @@ msgstr "organización"
 msgid "Organization"
 msgstr "Organización"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:42
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:43
 msgid "Organization dashboard"
 msgstr "Panel de control de la organización"
 
@@ -3276,6 +3283,10 @@ msgstr "Los miembros de la organización tienen permisos para todos los proyecto
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:6
 msgid "Organization Name"
 msgstr "Nombre de la organización"
+
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:41
+msgid "Organization profile"
+msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:104
 msgid "Orinoco"
@@ -3338,13 +3349,17 @@ msgstr "Información de pago"
 msgid "Personal Account"
 msgstr "Cuenta personal"
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:41
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:42
 msgid "Personal dashboard"
 msgstr "Panel de control personal"
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:16
 msgid "Personal Dashboard"
 msgstr "Panel personal"
+
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:40
+msgid "Personal profile"
+msgstr ""
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:50
 msgid "Personal Profile"
@@ -3870,8 +3885,8 @@ msgid "projects tabs"
 msgstr "Pestañas de proyectos"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:40
-msgid "Public profile"
-msgstr "Perfil público"
+#~ msgid "Public profile"
+#~ msgstr "Perfil público"
 
 #: src/pages/Profile/Profile.tsx:224
 msgid "public profile tabs"
@@ -4309,6 +4324,7 @@ msgstr "Seleccionar opción"
 msgid "Select role"
 msgstr "Seleccionar rol"
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:50
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:11
 msgid "Sell"
 msgstr "Vender"
@@ -4333,7 +4349,8 @@ msgstr "ID DE ORDEN DE VENTA"
 msgid "sell order id:"
 msgstr "ID de orden de venta:"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:50
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:61
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:48
 msgid "Sell orders"
 msgstr "Órdenes de venta"
 

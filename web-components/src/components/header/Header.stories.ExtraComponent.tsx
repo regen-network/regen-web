@@ -45,7 +45,7 @@ export const ExtraComponent = ({
     textContent: {
       signedInAs: 'signed in as',
       copyText: { tooltipText: 'Copy address', toastText: 'Address copied' },
-      publicProfile: 'Personal profile',
+      personalProfile: 'Personal profile',
       organizationProfile: 'Organization profile',
       personalDashboard: 'Personal dashboard',
       organizationDashboard: 'Organization dashboard',

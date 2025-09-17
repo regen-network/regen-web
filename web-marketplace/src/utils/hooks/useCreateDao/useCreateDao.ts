@@ -118,7 +118,7 @@ export const useCreateDao = () => {
             },
             threshold: {
               threshold_quorum: {
-                quorum: { percent: '0.20' },
+                quorum: { percent: '0.70' },
                 threshold: { majority: {} },
               },
             },

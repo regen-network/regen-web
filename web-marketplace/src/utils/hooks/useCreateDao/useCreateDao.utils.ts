@@ -432,7 +432,15 @@ export const organizationRoles = (
     metadata:
       'Has full control of projects and credit classes, but cannot manage users or credits.',
     authorizations: [
-      creditClassesAuthorization,
+      {
+        name: 'can_update_credit_classes_metadata',
+        metadata: 'Can update credit classes metadata from the organization account',
+        filter: {
+          stargate: {
+            type_url: '/regen.ecocredit.v1.MsgUpdateClassMetadata',
+          },
+        },
+      },
       orgEditAuthorization(daoAddress),
     ],
   },

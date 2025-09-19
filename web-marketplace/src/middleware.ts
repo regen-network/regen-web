@@ -1,11 +1,9 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { DEFAULT_LOCALE } from 'lib/i18n/locales';
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from 'lib/i18n/locales';
 
-import linguiConfig from '../lingui.config';
-
-const locales = linguiConfig.locales as string[];
+const locales = SUPPORTED_LOCALES;
 export const COOKIE_LOCALE = 'NEXT_LOCALE';
 export const COOKIE_OPTS = { path: '/', maxAge: 60 * 60 * 24 * 365 };
 
@@ -19,8 +17,12 @@ export const middleware = (request: NextRequest) => {
   const { nextUrl } = request;
   const { pathname } = nextUrl;
 
-  // Skip Next internals and static assets
-  if (pathname.startsWith('/_next') || pathname.includes('.')) {
+  // Skip Next internals, static assets, and well-known paths
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.includes('.') ||
+    pathname.startsWith('/.well-known')
+  ) {
     return NextResponse.next();
   }
 

@@ -1,6 +1,6 @@
 import linguiConfig from '../../../lingui.config';
 
-export type SupportedLocales = typeof linguiConfig.locales[number];
+export type SupportedLocales = string;
 
 export const SUPPORTED_LOCALES = linguiConfig.locales as SupportedLocales[];
 

@@ -45,7 +45,7 @@ export const UserSellOrdersToolbar = ({
         )}
       >
         <Subtitle size="xl" className="text-base sm:text-[22px] pt-3">
-          <Trans>Open orders</Trans>
+          <Trans>Open sell orders</Trans>
         </Subtitle>
         {hasTradableCredits ? (
           <CreateButton

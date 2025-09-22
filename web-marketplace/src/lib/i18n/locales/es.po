@@ -41,6 +41,8 @@ msgstr ""
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
 msgid " Exit to homepage "
 msgstr "Salir a la página de inicio"
@@ -2750,6 +2752,10 @@ msgstr "El correo electrónico de inicio de sesión se agregó correctamente"
 msgid "log in for faster checkout"
 msgstr "Inicie sesión para realizar un pago más rápido"
 
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:34
+msgid "Log in with keplr wallet on desktop to setup account"
+msgstr "Inicie sesión con la billetera keplr en el escritorio para configurar la cuenta"
+
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:120
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:11
 msgid "Log out"
@@ -2839,7 +2845,7 @@ msgstr "Administrar proyectos"
 msgid "manage sell orders"
 msgstr "gestionar órdenes de venta"
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:19
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:22
 msgid "Manage your Stripe account for fiat purchases"
 msgstr "Administra tu cuenta de Stripe para compras con moneda fiduciaria"
 
@@ -4351,7 +4357,8 @@ msgstr "ID DE ORDEN DE VENTA"
 msgid "sell order id:"
 msgstr "ID de orden de venta:"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:50
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:61
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:49
 msgid "Sell orders"
 msgstr "Órdenes de venta"
 
@@ -4385,7 +4392,8 @@ msgstr "Establecer créditos máximos"
 msgid "set up a Keplr wallet →"
 msgstr "Configurar una billetera Keplr →"
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:28
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:44
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:50
 msgid "set up account"
 msgstr "configurar cuenta"
 
@@ -5370,7 +5378,7 @@ msgstr "Ver la lista completa de videos de soporte»"
 msgid "view transaction"
 msgstr "ver transacción"
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:24
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:27
 msgid "view transactions"
 msgstr "ver transacciones"
 
@@ -5590,6 +5598,10 @@ msgstr "No puedes conectar tu cuenta a esta dirección de billetera. Esta direcc
 msgid "You cannot make posts because either the project is still a draft or it doesn't have assigned a location."
 msgstr "No puedes hacer publicaciones porque el proyecto aún está en borrador o no tiene una ubicación asignada."
 
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:54
+msgid "You cannot make USD sell orders while logged in with Wallet Connect."
+msgstr "No puedes realizar órdenes de venta en USD mientras estés conectado a Wallet Connect."
+
 #: src/components/organisms/BasketOverview/BasketOverview.constants.ts:4
 msgid "You do not have any ecocredits that are elligible for this basket."
 msgstr "No tienes ningún ecocrédito que sea elegible para esta cesta."
@@ -5622,7 +5634,7 @@ msgstr "Usted ingresó:"
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
 msgstr "Ha elegido comprar créditos negociables, por lo que no recibirá un certificado de retirada."
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:59
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:69
 msgid "You have no tradable credits that can be sold."
 msgstr "No tienes créditos negociables que se puedan vender."
 

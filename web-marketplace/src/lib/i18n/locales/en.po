@@ -2728,6 +2728,10 @@ msgstr ""
 msgid "log in for faster checkout"
 msgstr ""
 
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:34
+msgid "Log in with keplr wallet on desktop to setup account"
+msgstr ""
+
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:120
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:11
 msgid "Log out"
@@ -2817,7 +2821,7 @@ msgstr ""
 msgid "manage sell orders"
 msgstr ""
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:19
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:22
 msgid "Manage your Stripe account for fiat purchases"
 msgstr ""
 
@@ -4329,7 +4333,8 @@ msgstr ""
 msgid "sell order id:"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:50
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:61
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:49
 msgid "Sell orders"
 msgstr ""
 
@@ -4363,7 +4368,8 @@ msgstr ""
 msgid "set up a Keplr wallet →"
 msgstr ""
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:28
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:44
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:50
 msgid "set up account"
 msgstr ""
 
@@ -5348,7 +5354,7 @@ msgstr ""
 msgid "view transaction"
 msgstr ""
 
-#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:24
+#: src/components/organisms/SellerSetupAccount/SellerSetupAccount.tsx:27
 msgid "view transactions"
 msgstr ""
 
@@ -5568,6 +5574,10 @@ msgstr ""
 msgid "You cannot make posts because either the project is still a draft or it doesn't have assigned a location."
 msgstr ""
 
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:54
+msgid "You cannot make USD sell orders while logged in with Wallet Connect."
+msgstr ""
+
 #: src/components/organisms/BasketOverview/BasketOverview.constants.ts:4
 msgid "You do not have any ecocredits that are elligible for this basket."
 msgstr ""
@@ -5600,7 +5610,7 @@ msgstr ""
 msgid "You have chosen to purchase tradable credits, so you will not receive a retirement certificate."
 msgstr ""
 
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:59
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:69
 msgid "You have no tradable credits that can be sold."
 msgstr ""
 

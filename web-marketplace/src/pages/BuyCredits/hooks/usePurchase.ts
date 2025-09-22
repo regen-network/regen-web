@@ -435,8 +435,8 @@ export const usePurchase = ({
 
                   // In case of retirement, it's handled in useFetchRetirementForPurchase
                   if (!retiring) {
-                    // Send purchase confirmation if email provided
                     if (email && token && _txHash) {
+                      // Send purchase confirmation if email provided
                       await sendPurchaseConfirmationEmail({
                         currency,
                         retiring,
@@ -485,19 +485,20 @@ export const usePurchase = ({
                       );
                       await reactQueryClient.invalidateQueries({
                         queryKey: ['balances', wallet?.address], // invalidate all query pages
+                        refetchType: 'all',
                       });
-                    }
 
-                    // Reset BuyCredits forms
-                    handleSuccess();
-                    navigate(`/dashboard/portfolio`);
+                      // Reset BuyCredits forms
+                      handleSuccess();
+                      navigate(`/dashboard/portfolio`);
 
-                    if (shouldRefreshProfileData) {
-                      await reactQueryClient.invalidateQueries({
-                        queryKey: getAccountByIdQueryKey({
-                          id: activeAccount?.id,
-                        }),
-                      });
+                      if (shouldRefreshProfileData) {
+                        await reactQueryClient.invalidateQueries({
+                          queryKey: getAccountByIdQueryKey({
+                            id: activeAccount?.id,
+                          }),
+                        });
+                      }
                     }
                   }
                 },

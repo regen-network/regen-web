@@ -106,6 +106,9 @@ const ConnectWalletPage = safeLazy(
 );
 const Dashboard = safeLazy(() => import('../../pages/Dashboard'));
 const Orders = safeLazy(() => import('../../pages/Orders'));
+const CreateOrganization = safeLazy(
+  () => import('../../pages/CreateOrganization'),
+);
 // const ManageProject = safeLazy(
 //   () => import('../../pages/Dashboard/MyProjects/ManageProject'),
 // );
@@ -316,6 +319,10 @@ export const getRegenRoutes = ({
               </Route>
             </Route>
           </Route>
+          <Route
+            path="organizations/create"
+            element={<KeplrOrAuthRoute component={CreateOrganization} />}
+          />
           <Route
             path="methodologies/:methodologyId"
             element={<MethodologyDetails />}

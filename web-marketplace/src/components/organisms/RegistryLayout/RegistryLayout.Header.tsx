@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useLoaderData, useLocation } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
@@ -63,6 +63,7 @@ const getProfileLink = (
 const RegistryLayoutHeader: React.FC = () => {
   const { _ } = useLingui();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { activeAccount, privActiveAccount } = useAuth();
 
   const { wallet, disconnect, accountByAddr } = useWallet();
@@ -76,6 +77,32 @@ const RegistryLayoutHeader: React.FC = () => {
 
   const hasPrefinanceProjects = useLoaderData();
   const profileLink = getProfileLink(activeAccount, wallet);
+
+  // Build organization profile (no extra data fetching; use active account when it's an organization)
+  const organizationProfile = useMemo(
+    () =>
+      activeAccount?.type === 'ORGANIZATION'
+        ? getProfile({
+            account: activeAccount,
+            privActiveAccount,
+            _,
+            profileLink,
+            dashboardLink: '/dashboard',
+            address: wallet?.address,
+          })
+        : undefined,
+    [activeAccount, privActiveAccount, _, profileLink, wallet?.address],
+  );
+
+  // Simple route handlers for org actions (kept minimal; no backend work here)
+  const createOrganization = useMemo(
+    () => () => navigate('/organizations/create'),
+    [navigate],
+  );
+  const finishOrgCreation = useMemo(
+    () => () => navigate('/dashboard?finishOrgCreation=1'),
+    [navigate],
+  );
 
   const menuItems = useMemo(
     () => getMenuItems(pathname, _, !!hasPrefinanceProjects),
@@ -96,6 +123,12 @@ const RegistryLayoutHeader: React.FC = () => {
           dashboardLink: '/dashboard',
           address: wallet?.address,
         }),
+        organizationProfile,
+        // Show create organization when not currently viewing an organization account
+        createOrganization: activeAccount?.type !== 'ORGANIZATION' ? createOrganization : undefined,
+  // Toggle this flag from real state later; leaving off by default
+  unfinalizedOrgCreation: false,
+  finishOrgCreation,
         textContent: {
           signedInAs: _(SIGNED_IN_AS),
           copyText: {
@@ -119,6 +152,8 @@ const RegistryLayoutHeader: React.FC = () => {
       _,
       profileLink,
       wallet?.address,
+      organizationProfile,
+      createOrganization,
     ],
   );
 

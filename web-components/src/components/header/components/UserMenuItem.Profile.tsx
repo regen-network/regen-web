@@ -42,7 +42,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
     [address],
   );
   return (
-    <Card className="group/card hover:border-grey-300 hover:bg-grey-100 border-[transparent] bg-grey-0 w-full shadow-none p-5">
+    <Card className="group/card border-[transparent] bg-grey-0 w-full shadow-none p-5">
       <Grid container wrap="nowrap" alignItems="center">
         <Grid item mr={3} position="relative">
           <UserAvatar className="w-30 h-30" src={profileImage} />

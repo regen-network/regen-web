@@ -58,6 +58,9 @@ const HeaderMenuItem: React.FC<MenuItemProps> = ({
         pathname === item.href && styles.currentMenuItem,
         isTablet && !isUserMenu ? '!hidden' : '',
       )}
+      // prevent gray ripple animation on header trigger when clicking inside dropdown
+      disableRipple
+      disableTouchRipple
       sx={[...sxToArray(sx)]}
       component={component}
     >

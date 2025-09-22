@@ -18,6 +18,37 @@ import {
 } from './useCreateDao.constants';
 import { GasPrice } from '@cosmjs/stargate';
 
+export const retry = async <T extends unknown>(
+  tries: number,
+  callback: (
+    attempt: number,
+    bail: (error?: Error | string) => void,
+  ) => T | Promise<T>,
+  delayMs?: number,
+): Promise<T> => {
+  let attempt = 1;
+
+  const bail = (error: Error | string = 'Bailed out of retry loop') => {
+    attempt = tries;
+    throw typeof error === 'string' ? new Error(error) : error;
+  };
+
+  while (true) {
+    try {
+      return await callback(attempt, bail);
+    } catch (err) {
+      attempt++;
+      if (attempt > tries) {
+        throw err;
+      }
+
+      if (delayMs) {
+        await new Promise(resolve => setTimeout(resolve, delayMs));
+      }
+    }
+  }
+};
+
 /**
  * Disclaimer: This code is still a draft and should be refactored to import utils from @dao-dao/* packages.
  * A custom React hook that provides a function to create a DAO
@@ -26,6 +57,54 @@ import { GasPrice } from '@cosmjs/stargate';
 export const useCreateDao = () => {
   const { wallet } = useWallet();
 
+  const fetch = async () => {
+    const client = await SigningCosmWasmClient.connect(ledgerRPCUri);
+
+    const limit = 1;
+    let items: any[] = [];
+    let startAfter: string | undefined;
+    while (true) {
+      const itemsPage = await client.queryContractSmart(
+        'regen1euhg5w32yqqa8apshxfu48rx7ggzk0w6jaa99atuflcnsx6hw9vsvz549z',
+        {
+          list_items: {
+            start_after: startAfter,
+            limit,
+          },
+        },
+      );
+      console.log('itemsPage', itemsPage);
+
+      items.push(...itemsPage);
+      if (itemsPage.length < limit) {
+        break;
+      }
+      startAfter =
+        itemsPage.length > 0 ? itemsPage[itemsPage.length - 1][0] : undefined;
+      console.log('startAfter', startAfter);
+    }
+    console.log('items', items);
+
+    // while (true) {
+    //   const res = await client.queryContractSmart(
+    //     'regen1662uxvyc9rvdyc6yuategfj2xzpex6yjgjww7ymws0ft5x29fsts4lsv5z',
+    //     {
+    //       list_items: {
+    //         start_after: startAfterRole,
+    //         limit,
+    //       },
+    //     },
+    //   );
+    //   console.log('res', res);
+    //   roles.push(...rolesPage);
+    //   if (rolesPage.length < limit) {
+    //     break;
+    //   }
+    //   startAfterRole =
+    //     rolesPage.length > 0 ? rolesPage[rolesPage.length - 1].id : undefined;
+    // }
+    // console.log('roles', roles);
+  };
   const createDao = async () => {
     if (wallet?.offlineSigner) {
       const client = await SigningCosmWasmClient.connectWithSigner(
@@ -163,7 +242,10 @@ export const useCreateDao = () => {
               description: 'test dao',
               // Replace empty strings with null.
               image_url: null,
-              initial_items: [{ key: 'type', value: 'organization' }],
+              initial_items: [
+                { key: 'type', value: 'organization' },
+                { key: 'banner', value: 'some_url' }, // bg_image
+              ],
               initial_actions: [],
               name: 'DAO with rbam test',
               proposal_modules_instantiate_info: proposalModules,
@@ -181,5 +263,5 @@ export const useCreateDao = () => {
       console.log('exRes', exRes);
     }
   };
-  return { createDao };
+  return { createDao, fetch };
 };

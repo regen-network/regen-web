@@ -48,25 +48,35 @@ export const UserSellOrdersToolbar = ({
         <Subtitle size="xl" className="text-base sm:text-[22px] pt-3">
           <Trans>Open sell orders</Trans>
         </Subtitle>
-        {hasTradableCredits ? (
-          <CreateButton
-            hasTradableCredits={hasTradableCredits}
-            setIsSellFlowStarted={setIsSellFlowStarted}
-          />
-        ) : (
-          <InfoTooltip
-            arrow
-            placement="top"
-            title={_(msg`You have no tradable credits that can be sold.`)}
-          >
-            <div>
-              <CreateButton
-                hasTradableCredits={hasTradableCredits}
-                setIsSellFlowStarted={setIsSellFlowStarted}
-              />
-            </div>
-          </InfoTooltip>
-        )}
+        <div className="flex items-center">
+          {walletConnect && (
+            <span className="mr-20 italic text-grey-500 text-[12px] w-[190px] text-right">
+              <Trans>
+                You cannot make USD sell orders while logged in with Wallet
+                Connect.
+              </Trans>
+            </span>
+          )}
+          {hasTradableCredits ? (
+            <CreateButton
+              hasTradableCredits={hasTradableCredits}
+              setIsSellFlowStarted={setIsSellFlowStarted}
+            />
+          ) : (
+            <InfoTooltip
+              arrow
+              placement="top"
+              title={_(msg`You have no tradable credits that can be sold.`)}
+            >
+              <div>
+                <CreateButton
+                  hasTradableCredits={hasTradableCredits}
+                  setIsSellFlowStarted={setIsSellFlowStarted}
+                />
+              </div>
+            </InfoTooltip>
+          )}
+        </div>
       </div>
       {hasTradableCredits && isSellFlowStarted && (
         <Suspense fallback={null}>

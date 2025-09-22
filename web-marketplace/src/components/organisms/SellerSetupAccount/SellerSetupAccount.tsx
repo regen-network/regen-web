@@ -1,4 +1,5 @@
 import { Trans } from '@lingui/macro';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import Card from 'web-components/src/components/cards/Card';
@@ -14,8 +15,6 @@ const SellerSetupAccount = () => {
   const { loginDisabled } = useWallet();
   const { setupAccount, openLoginLink } = useStripeAccount();
 
-  if (loginDisabled) return null;
-
   return (
     privActiveAccount?.can_use_stripe_connect && (
       <Card className="rounded-[10px] border-sc-card-standard-stroke shadow-none p-20 sm:p-30 relative mb-20">
@@ -28,9 +27,29 @@ const SellerSetupAccount = () => {
               <Trans>view transactions</Trans>
             </ContainedButton>
           ) : (
-            <ContainedButton onClick={setupAccount} className="z-1">
-              <Trans>set up account</Trans>
-            </ContainedButton>
+            loginDisabled ? (
+              <InfoTooltip
+                placement="top"
+                title={
+                  <Trans>
+                    Log in with keplr wallet on desktop to setup account
+                  </Trans>
+                }
+                arrow
+                classes={{ tooltip: 'w-[203px]' }}
+              >
+                {/* Wrap disabled button so Tooltip still triggers */}
+                <span className="inline-block">
+                  <ContainedButton disabled className="z-1 w-[188px] text-[14px]">
+                    <Trans>set up account</Trans>
+                  </ContainedButton>
+                </span>
+              </InfoTooltip>
+            ) : (
+              <ContainedButton onClick={setupAccount} className="z-1">
+                <Trans>set up account</Trans>
+              </ContainedButton>
+            )
           )}
           <img
             className="hidden sm:block sm:pl-20"

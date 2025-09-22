@@ -55,9 +55,23 @@ export interface EditProfileFormProps {
   onSubmit: (values: EditProfileFormSchemaType) => Promise<void>;
   onSuccess?: () => void;
   onUpload?: (imageFile: File) => Promise<{ url: string }>;
+  // Optional enhancements for reuse in Create Organization flow
+  formId?: string;
+  hideProfileType?: boolean;
+  nameLabel?: string;
 }
 const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
-  ({ children, initialValues, isDirtyRef, onSubmit, onSuccess, onUpload }) => {
+  ({
+    children,
+    initialValues,
+    isDirtyRef,
+    onSubmit,
+    onSuccess,
+    onUpload,
+    formId,
+    hideProfileType,
+    nameLabel,
+  }) => {
     const { _ } = useLingui();
     const form = useZodForm({
       schema: editProfileFormSchema,
@@ -124,6 +138,7 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
       <Form
         className="px-10 py-40 md:p-40 bg-bc-neutral-0 border border-solid border-bc-neutral-300 mb-[120px] rounded-[10px]"
         form={form}
+        id={formId}
         onSubmit={async data => {
           const hasError = validateEditProfileForm({
             setError: form.setError,
@@ -140,15 +155,17 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
           }
         }}
       >
-        <RadioCard
-          label={_(PROFILE_TYPE)}
-          items={radioCardItems}
-          selectedValue={profileType ?? ''}
-          {...form.register('profileType')}
-        />
+        {!hideProfileType && (
+          <RadioCard
+            label={_(PROFILE_TYPE)}
+            items={radioCardItems}
+            selectedValue={profileType ?? ''}
+            {...form.register('profileType')}
+          />
+        )}
         <TextField
           type="text"
-          label={_(msg`Name`)}
+          label={nameLabel ?? _(msg`Name`)}
           {...form.register('name')}
           helperText={errors.name?.message}
           error={!!errors.name}

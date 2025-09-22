@@ -50,7 +50,7 @@ export const ExtraComponent = ({
       personalDashboard: 'Personal dashboard',
       organizationDashboard: 'Organization dashboard',
       organization: 'organization',
-      createOrganization: 'create organization',
+      createOrganization: 'create new organization',
       finishOrgCreation: 'finish creating organization',
     },
   });

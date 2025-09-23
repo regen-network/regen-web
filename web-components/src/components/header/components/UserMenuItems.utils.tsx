@@ -52,7 +52,7 @@ export const getUserMenuItems = ({
   textContent,
 }: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
   [
-    // Personal card (no hover link)
+    // Personal card
     profile && {
       children: (
         <div className="w-full">
@@ -115,7 +115,7 @@ export const getUserMenuItems = ({
         </div>
       ),
     },
-    // Organization profile item (reduced left padding)
+    // Organization profile item
     organizationProfile && {
       pathname,
       linkComponent: navLinkComponent,

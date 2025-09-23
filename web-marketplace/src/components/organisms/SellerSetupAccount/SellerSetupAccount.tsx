@@ -40,7 +40,7 @@ const SellerSetupAccount = () => {
               >
                 {/* Wrap disabled button so Tooltip still triggers */}
                 <span className="inline-block">
-                  <ContainedButton disabled className="z-1 w-[188px] text-[14px]">
+                  <ContainedButton disabled className="z-1">
                     <Trans>set up account</Trans>
                   </ContainedButton>
                 </span>

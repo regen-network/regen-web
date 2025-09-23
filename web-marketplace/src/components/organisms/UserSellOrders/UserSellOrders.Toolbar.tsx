@@ -11,6 +11,7 @@ import { useAuth } from 'lib/auth/auth';
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
 import { CreateButton } from './UserSellOrders.CreateButton';
+import { useWallet } from 'lib/wallet/wallet';
 
 const CreateSellOrderFlow = lazy(async () => ({
   default: (
@@ -29,7 +30,7 @@ export const UserSellOrdersToolbar = ({
 }: UserSellOrdersToolbarProps) => {
   const { _ } = useLingui();
   const { privActiveAccount, activeAccount } = useAuth();
-  const walletConnect = !activeAccount && !privActiveAccount;
+  const { loginDisabled } = useWallet();
 
   const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
   const { credits } = useFetchEcocredits({ isPaginatedQuery: false });
@@ -48,34 +49,36 @@ export const UserSellOrdersToolbar = ({
         <Subtitle size="xl" className="text-base sm:text-[22px] pt-3">
           <Trans>Open sell orders</Trans>
         </Subtitle>
-        <div className="flex items-center">
-          {walletConnect && (
-            <span className="mr-20 italic text-grey-500 text-[12px] w-[190px] text-right">
+        <div className="flex sm:flex-row flex-col sm:items-center items-end">
+          {loginDisabled && (
+            <span className="sm:order-1 order-2 sm:mr-20 sm:mt-0 mt-10 italic text-grey-500 text-[12px] w-[230px] md:w-[190px] text-center md:text-right">
               <Trans>
                 You cannot make USD sell orders while logged in with Wallet
                 Connect.
               </Trans>
             </span>
           )}
-          {hasTradableCredits ? (
-            <CreateButton
-              hasTradableCredits={hasTradableCredits}
-              setIsSellFlowStarted={setIsSellFlowStarted}
-            />
-          ) : (
-            <InfoTooltip
-              arrow
-              placement="top"
-              title={_(msg`You have no tradable credits that can be sold.`)}
-            >
-              <div>
-                <CreateButton
-                  hasTradableCredits={hasTradableCredits}
-                  setIsSellFlowStarted={setIsSellFlowStarted}
-                />
-              </div>
-            </InfoTooltip>
-          )}
+          <div className="sm:order-2 order-1">
+            {hasTradableCredits ? (
+              <CreateButton
+                hasTradableCredits={hasTradableCredits}
+                setIsSellFlowStarted={setIsSellFlowStarted}
+              />
+            ) : (
+              <InfoTooltip
+                arrow
+                placement="top"
+                title={_(msg`You have no tradable credits that can be sold.`)}
+              >
+                <div>
+                  <CreateButton
+                    hasTradableCredits={hasTradableCredits}
+                    setIsSellFlowStarted={setIsSellFlowStarted}
+                  />
+                </div>
+              </InfoTooltip>
+            )}
+          </div>
         </div>
       </div>
       {hasTradableCredits && isSellFlowStarted && (
@@ -89,7 +92,7 @@ export const UserSellOrdersToolbar = ({
             canCreateFiatOrder={
               !!privActiveAccount?.can_use_stripe_connect &&
               !!activeAccount?.stripeConnectedAccountId &&
-              !walletConnect
+              !loginDisabled
             }
           />
         </Suspense>

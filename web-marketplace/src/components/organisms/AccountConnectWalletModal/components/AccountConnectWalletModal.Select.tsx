@@ -10,21 +10,25 @@ import { LoginModalProviders } from './AccountConnectWalletModal.Providers';
 
 export interface Props {
   wallets: LoginProvider[];
+  title?: string;
+  description?: string;
 }
 
-const LoginModalSelect = ({ wallets }: Props): JSX.Element => {
+const LoginModalSelect = ({ wallets, title, description }: Props): JSX.Element => {
   return (
     <Box textAlign="center">
       <Title variant="h4" mb={5}>
-        <Trans>Select a wallet</Trans>
+        {title || <Trans>Select a wallet</Trans>}
       </Title>
       <Body pb={7.5}>
-        <Trans>
-          Learn more about wallets in our{' '}
-          <Link href="https://guides.regen.network/guides/wallets">
-            user guide.
-          </Link>
-        </Trans>
+        {description || (
+          <Trans>
+            Learn more about wallets in our{' '}
+            <Link href="https://guides.regen.network/guides/wallets">
+              user guide.
+            </Link>
+          </Trans>
+        )}
       </Body>
       <LoginModalProviders providers={wallets} />
     </Box>

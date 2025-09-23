@@ -61,14 +61,14 @@ export const HeaderDropdownItem: React.FC<
       component="li"
     >
       {SVG && (
-        <Box className={cn('flex items-center', iconClassName ?? 'mr-[14px]')}>
+        <div className={cn('flex items-center', iconClassName ?? 'mr-[14px]')}>
           <SVG />
-        </Box>
+        </div>
       )}
       {iconElement && (
-        <Box className={cn('flex items-center', iconClassName ?? 'mr-[14px]')}>
+        <div className={cn('flex items-center', iconClassName ?? 'mr-[14px]')}>
           {iconElement}
-        </Box>
+        </div>
       )}
       {props.pathname &&
         (props.disabled ? (

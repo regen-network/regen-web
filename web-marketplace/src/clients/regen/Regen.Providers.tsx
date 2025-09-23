@@ -22,9 +22,11 @@ export const RegenProviders = ({ children }: Props) => {
         <LedgerProviderWithWallet>
           {/* TODO: When the /dashboard has been migrated, the LayoutHeader and LayoutFooter 
               should be in a layout component for non-dashboard pages */}
-          {!isDashboard && <LayoutHeader />}
-          <main className="min-h-screen">{children}</main>
-          {!isDashboard && <LayoutFooter />}
+          <div className="min-h-screen flex flex-col">
+            {!isDashboard && <LayoutHeader />}
+            <main className="flex-1">{children}</main>
+            {!isDashboard && <LayoutFooter />}
+          </div>
         </LedgerProviderWithWallet>
       </WalletProvider>
     </ChainWrapper>

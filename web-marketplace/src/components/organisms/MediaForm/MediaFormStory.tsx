@@ -123,7 +123,7 @@ export const MediaFormStory = ({
             <span>
               {_(VIDEO_INPUT_HELPER_TEXT)}{' '}
               <a
-                className="font-bold"
+                className="font-bold text-brand-400"
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://github.com/cookpete/react-player?tab=readme-ov-file#supported-media"

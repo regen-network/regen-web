@@ -40,7 +40,7 @@ export const CreditClassForm = (props: {
     props?.disabledFields?.includes(field) ?? false;
 
   return (
-    <Form translate="yes" id={props.id}>
+    <Form translate="yes" id={props.id} {...({} as any)}>
       <OnBoardingCard>
         <Field
           component={ControlledTextField}

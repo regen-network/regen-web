@@ -98,7 +98,7 @@ export const AdditionalityForm: React.FC<
     >
       {({ values, handleChange }) => {
         return (
-          <Form>
+          <Form {...({} as any)}>
             <OnBoardingCard className={classes.card}>
               <ControlledFormLabel>
                 <Trans>

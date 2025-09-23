@@ -153,7 +153,7 @@ export default function NewsletterForm({
           return successChildren;
         }
         return (
-          <Form>
+          <Form {...({} as any)}>
             <Grid container wrap="nowrap" className={classes.grid}>
               <Grid item xs={gridXs.textField}>
                 <Field

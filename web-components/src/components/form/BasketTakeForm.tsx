@@ -177,7 +177,7 @@ const BasketTakeForm: React.FC<React.PropsWithChildren<FormProps>> = ({
       onSubmit={submitHandler}
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
-        <Form>
+        <Form {...({} as any)}>
           <>
             <AmountField
               maxLabel={maxLabel}

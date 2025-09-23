@@ -99,7 +99,7 @@ const BridgeForm = ({
       onSubmit={onSubmit}
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
-        <Form>
+        <Form {...({} as any)}>
           <Field
             name="target"
             label={_(msg`Chain`)}

@@ -147,7 +147,7 @@ export const ImageField = forwardRef<HTMLInputElement, Props>(
                       setInitialImage(image);
                       setFileType(file.type);
                       setFileName(
-                        `${initialFileName}.${fileExtension}` ?? fileName,
+                        `${initialFileName}.${fileExtension}`,
                       );
                     }
                   });

@@ -31,6 +31,7 @@ import QueryClientWrapper from './QueryClientWrapper';
 import '../App.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import '../styles/slick-overrides.css';
 // Import the stylesheet that our predev/prebuild scripts generate
 // (see scripts/setClientCSS.js and package.json).
 import '../generated/client-tailwind.css';

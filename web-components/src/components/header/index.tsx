@@ -9,7 +9,7 @@ import {
   HeaderMenuItem,
   Item,
 } from './components/HeaderMenuItem/HeaderMenuItem';
-import { NavLink, NavLinkProps } from './components/NavLink';
+import { NavLink } from './components/NavLink';
 import { useHeaderStyles } from './Header.styles';
 
 export interface node {

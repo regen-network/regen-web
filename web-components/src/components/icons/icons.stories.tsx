@@ -84,6 +84,7 @@ import { PauseIcon } from './PauseIcon';
 import { PaymentInfoIcon } from './PaymentInfoIcon';
 import { PdfFileIcon } from './PdfFileIcon';
 import PendingIcon from './PendingIcon';
+import PersonalProfileIcon from './PersonalProfileIcon';
 import PhoneIcon from './PhoneIcon';
 import PinIcon from './PinIcon';
 import PlayIcon from './PlayIcon';
@@ -334,6 +335,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<OwnerIcon />} label="OwnerIcon" />
     <LabeledIcon icon={<PdfFileIcon />} label="PdfFileIcon" />
     <LabeledIcon icon={<PendingIcon />} label="PendingIcon" />
+    <LabeledIcon icon={<PersonalProfileIcon />} label="PersonalProfileIcon" />
     <LabeledIcon
       icon={<PhoneIcon sx={{ color: 'secondary.main' }} />}
       label="PhoneIcon"

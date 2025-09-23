@@ -3,6 +3,8 @@ import Separator from '../../atoms/Separator';
 import { CopyButtonProps } from '../../buttons/CopyButton';
 import { TextButton } from '../../buttons/TextButton';
 import { CogIcon } from '../../icons/CogIcon';
+import { OrgProfileIcon } from '../../icons/OrgProfileIcon';
+import PersonalProfileIcon from '../../icons/PersonalProfileIcon';
 import SmallArrowIcon from '../../icons/SmallArrowIcon';
 import { LinkComponentProp } from '../../modal/ConfirmModal';
 import { HeaderDropdownItemProps } from './HeaderDropdown/HeaderDropdown.Item';
@@ -11,7 +13,8 @@ import { UserMenuItemProfile, UserMenuProfile } from './UserMenuItem.Profile';
 type TextContent = {
   signedInAs: string;
   copyText: Pick<CopyButtonProps, 'tooltipText' | 'toastText'>;
-  publicProfile: string;
+  personalProfile: string;
+  organizationProfile: string;
   personalDashboard: string;
   organizationDashboard: string;
   organization: string;
@@ -49,16 +52,18 @@ export const getUserMenuItems = ({
   textContent,
 }: GetUserMenuItemsParams): HeaderDropdownItemProps[] =>
   [
+    // Personal card
     profile && {
       children: (
         <div className="w-full">
-          <div className="text-[11px] text-grey-400 uppercase font-extrabold pl-15 tracking-wider font-extrabold">
+          <div className="text-[11px] text-grey-400 uppercase font-extrabold pl-15 tracking-wider">
             {textContent.signedInAs}
           </div>
           <div className="px-10">
             <UserMenuItemProfile
               {...profile}
-              publicProfileText={textContent.publicProfile}
+              profileLink={undefined}
+              personalProfileText={textContent.personalProfile}
               copyText={textContent.copyText}
               linkComponent={linkComponent}
               showCheckIcon
@@ -67,6 +72,17 @@ export const getUserMenuItems = ({
         </div>
       ),
     },
+    // Personal profile item
+    profile && {
+      pathname,
+      linkComponent: navLinkComponent,
+      href: profile.profileLink,
+      labelClassName,
+      className,
+      icon: <PersonalProfileIcon linearGradient />,
+      label: textContent.personalProfile,
+    },
+    // Personal dashboard
     {
       pathname,
       linkComponent: navLinkComponent,
@@ -76,19 +92,22 @@ export const getUserMenuItems = ({
       icon: <CogIcon linearGradient />,
       label: textContent.personalDashboard,
     },
+    // Separator (only when create org is available)
     createOrganization && {
       children: <Separator className="w-full my-[14px]" />,
     },
+    // Organization card (no hover link)
     organizationProfile && {
       children: (
         <div className="w-full">
-          <div className="text-[11px] text-grey-400 uppercase font-extrabold pl-15 tracking-wider font-extrabold">
+          <div className="text-[11px] text-grey-400 uppercase font-extrabold pl-15 tracking-wider">
             {textContent.organization}
           </div>
           <div className="px-10">
             <UserMenuItemProfile
               {...organizationProfile}
-              publicProfileText={textContent.publicProfile}
+              profileLink={undefined}
+              personalProfileText={textContent.personalProfile}
               copyText={textContent.copyText}
               linkComponent={linkComponent}
             />
@@ -96,6 +115,18 @@ export const getUserMenuItems = ({
         </div>
       ),
     },
+    // Organization profile item
+    organizationProfile && {
+      pathname,
+      linkComponent: navLinkComponent,
+      href: organizationProfile.profileLink,
+      labelClassName,
+      className: 'pl-[17px]',
+      iconClassName: 'mr-[11px]',
+      icon: <OrgProfileIcon linearGradient />,
+      label: textContent.organizationProfile,
+    },
+    // Organization dashboard
     organizationProfile &&
       !unfinalizedOrgCreation && {
         pathname,
@@ -106,6 +137,7 @@ export const getUserMenuItems = ({
         icon: <CogIcon linearGradient />,
         label: textContent.organizationDashboard,
       },
+    // Create organization CTA (when no org)
     !organizationProfile &&
       createOrganization && {
         children: (
@@ -117,6 +149,7 @@ export const getUserMenuItems = ({
           </TextButton>
         ),
       },
+    // Finish org creation CTA
     unfinalizedOrgCreation &&
       finishOrgCreation && {
         children: (
@@ -129,6 +162,7 @@ export const getUserMenuItems = ({
           </TextButton>
         ),
       },
+    // Bottom separator
     {
       children: <Separator className="h-1 w-full my-[14px]" />,
     },

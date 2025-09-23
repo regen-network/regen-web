@@ -17,6 +17,7 @@ export type HeaderDropdownItemProps = {
     React.PropsWithChildren<React.SVGProps<SVGSVGElement>>
   >;
   icon?: JSX.Element;
+  iconClassName?: string;
   children?: ReactNode;
   right?: () => JSX.Element;
   className?: string;
@@ -35,6 +36,7 @@ export const HeaderDropdownItem: React.FC<
   linkComponent: LinkComponent,
   className,
   labelClassName,
+  iconClassName,
   ...props
 }) => {
   const { classes: styles } = useStyles();
@@ -59,12 +61,14 @@ export const HeaderDropdownItem: React.FC<
       component="li"
     >
       {SVG && (
-        <Box className="mr-[14px] flex items-center">
+        <div className={cn('flex items-center', iconClassName ?? 'mr-[14px]')}>
           <SVG />
-        </Box>
+        </div>
       )}
       {iconElement && (
-        <Box className="mr-[14px] flex items-center">{iconElement}</Box>
+        <div className={cn('flex items-center', iconClassName ?? 'mr-[14px]')}>
+          {iconElement}
+        </div>
       )}
       {props.pathname &&
         (props.disabled ? (

@@ -18,6 +18,8 @@ msgstr ""
 msgid ""
 msgstr ""
 
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #~ msgid " Exit to homepage "
 #~ msgstr ""
 
@@ -3229,7 +3231,7 @@ msgstr ""
 msgid "Org"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:43
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:44
 msgid "organization"
 msgstr ""
 
@@ -3237,7 +3239,7 @@ msgstr ""
 msgid "Organization"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:42
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:43
 msgid "Organization dashboard"
 msgstr ""
 
@@ -3255,6 +3257,10 @@ msgstr ""
 
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:6
 msgid "Organization Name"
+msgstr ""
+
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:41
+msgid "Organization profile"
 msgstr ""
 
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:104
@@ -3318,12 +3324,16 @@ msgstr ""
 msgid "Personal Account"
 msgstr ""
 
-#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:41
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:42
 msgid "Personal dashboard"
 msgstr ""
 
 #: src/pages/Dashboard/Dashboard.constants.tsx:16
 msgid "Personal Dashboard"
+msgstr ""
+
+#: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:40
+msgid "Personal profile"
 msgstr ""
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:50
@@ -3850,8 +3860,8 @@ msgid "projects tabs"
 msgstr ""
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:40
-msgid "Public profile"
-msgstr ""
+#~ msgid "Public profile"
+#~ msgstr ""
 
 #: src/pages/Profile/Profile.tsx:224
 msgid "public profile tabs"
@@ -4289,6 +4299,7 @@ msgstr ""
 msgid "Select role"
 msgstr ""
 
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:50
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:11
 msgid "Sell"
 msgstr ""
@@ -4313,7 +4324,8 @@ msgstr ""
 msgid "sell order id:"
 msgstr ""
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:50
+#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:61
+#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:48
 msgid "Sell orders"
 msgstr ""
 

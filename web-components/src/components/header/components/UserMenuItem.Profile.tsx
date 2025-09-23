@@ -20,7 +20,7 @@ export type UserMenuProfile = {
 };
 export type UserMenuItemProfileProps = UserMenuProfile & {
   profileLink?: string;
-  publicProfileText: string;
+  personalProfileText: string;
   copyText: Pick<CopyButtonProps, 'tooltipText' | 'toastText'>;
   linkComponent: LinkComponentProp;
   showCheckIcon?: boolean;
@@ -33,7 +33,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
   truncatedAddress,
   profileLink,
   linkComponent: LinkComponent,
-  publicProfileText,
+  personalProfileText,
   copyText,
   showCheckIcon,
 }) => {
@@ -42,7 +42,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
     [address],
   );
   return (
-    <Card className="group/card hover:border-grey-300 hover:bg-grey-100 border-[transparent] bg-grey-0 w-full shadow-none p-5">
+    <Card className="group/card border-[transparent] bg-grey-0 w-full shadow-none p-5">
       <Grid container wrap="nowrap" alignItems="center">
         <Grid item mr={3} position="relative">
           <UserAvatar className="w-30 h-30" src={profileImage} />
@@ -88,7 +88,7 @@ const UserMenuItemProfile: React.FC<UserMenuItemProfileProps> = ({
                   className="underline text-sc-text-sub-header hover:text-sc-text-paragraph"
                   size="xs"
                 >
-                  {publicProfileText}
+                  {personalProfileText}
                   <SmallArrowIcon className="h-[8px] ml-3" />
                 </Subtitle>
               </LinkComponent>

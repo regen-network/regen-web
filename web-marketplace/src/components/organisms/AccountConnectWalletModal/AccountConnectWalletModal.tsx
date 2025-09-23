@@ -11,6 +11,8 @@ import { LoginModalSelect } from './components/AccountConnectWalletModal.Select'
 export interface Props extends RegenModalProps {
   state?: AccountConnectModalState;
   wallets: LoginProvider[];
+  title?: string;
+  description?: string;
 }
 
 const AccountConnectWalletModal = ({
@@ -18,11 +20,13 @@ const AccountConnectWalletModal = ({
   onClose,
   state = 'select',
   wallets,
+  title,
+  description,
 }: Props): JSX.Element => {
   const isSelectState = state === 'select';
   return (
     <Modal open={open} onClose={onClose}>
-      <Box>{isSelectState && <LoginModalSelect wallets={wallets} />}</Box>
+      <Box>{isSelectState && <LoginModalSelect wallets={wallets} title={title} description={description} />}</Box>
     </Modal>
   );
 };

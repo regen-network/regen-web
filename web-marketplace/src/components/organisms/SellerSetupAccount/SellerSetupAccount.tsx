@@ -1,5 +1,4 @@
 import { Trans } from '@lingui/macro';
-import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import Card from 'web-components/src/components/cards/Card';
@@ -12,11 +11,10 @@ import { useStripeAccount } from './hooks/useStripeAccount';
 
 const SellerSetupAccount = () => {
   const { activeAccount, privActiveAccount } = useAuth();
-  const { loginDisabled } = useWallet();
   const { setupAccount, openLoginLink } = useStripeAccount();
 
   return (
-    (privActiveAccount?.can_use_stripe_connect || loginDisabled) && (
+    privActiveAccount?.can_use_stripe_connect && (
       <Card className="rounded-[10px] border-sc-card-standard-stroke shadow-none p-20 sm:p-30 relative mb-20">
         <Title variant="h5" className="pb-20 relative z-1">
           <Trans>Manage your Stripe account for fiat purchases</Trans>
@@ -27,29 +25,9 @@ const SellerSetupAccount = () => {
               <Trans>view transactions</Trans>
             </ContainedButton>
           ) : (
-            loginDisabled ? (
-              <InfoTooltip
-                placement="top"
-                title={
-                  <Trans>
-                    Log in with keplr wallet on desktop to setup account
-                  </Trans>
-                }
-                arrow
-                classes={{ tooltip: 'w-[203px]' }}
-              >
-                {/* Wrap disabled button so Tooltip still triggers */}
-                <span className="inline-block">
-                  <ContainedButton disabled className="z-1">
-                    <Trans>set up account</Trans>
-                  </ContainedButton>
-                </span>
-              </InfoTooltip>
-            ) : (
-              <ContainedButton onClick={setupAccount} className="z-1">
-                <Trans>set up account</Trans>
-              </ContainedButton>
-            )
+            <ContainedButton onClick={setupAccount} className="z-1">
+              <Trans>set up account</Trans>
+            </ContainedButton>
           )}
           <img
             className="hidden sm:block sm:pl-20"

@@ -177,11 +177,7 @@ export function getDashboardNavigationSections(
   if (hasWalletAddress) {
     sections.push(getCreditsSection(_, collapsed));
   }
-  if (
-    (loginDisabled && hasProjects) ||
-    (loginDisabled && !hasProjects) ||
-    (!loginDisabled && hasProjects)
-  ) {
+  if (!loginDisabled || hasProjects) {
     sections.push(getProjectsSection(_, collapsed));
   }
 

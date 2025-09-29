@@ -7,11 +7,11 @@ import { Subtitle } from 'web-components/src/components/typography';
 import { cn } from 'web-components/src/utils/styles/cn';
 
 import { useAuth } from 'lib/auth/auth';
+import { useWallet } from 'lib/wallet/wallet';
 
 import { useFetchEcocredits } from 'pages/Dashboard/MyEcocredits/hooks/useFetchEcocredits';
 
 import { CreateButton } from './UserSellOrders.CreateButton';
-import { useWallet } from 'lib/wallet/wallet';
 
 const CreateSellOrderFlow = lazy(async () => ({
   default: (
@@ -50,14 +50,6 @@ export const UserSellOrdersToolbar = ({
           <Trans>Open sell orders</Trans>
         </Subtitle>
         <div className="flex sm:flex-row flex-col sm:items-center items-end">
-          {loginDisabled && (
-            <span className="sm:order-1 order-2 sm:mr-20 sm:mt-0 mt-10 italic text-grey-500 text-[12px] w-[230px] md:w-[190px] text-center md:text-right">
-              <Trans>
-                You cannot make USD sell orders while logged in with Wallet
-                Connect.
-              </Trans>
-            </span>
-          )}
           <div className="sm:order-2 order-1">
             {hasTradableCredits ? (
               <CreateButton

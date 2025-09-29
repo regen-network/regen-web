@@ -20,13 +20,13 @@ import {
   getWalletAddress,
 } from 'pages/Dashboard/Dashboard.utils';
 import { useAuthData } from 'hooks/useAuthData';
-import { AccountConnectWalletModal } from '../AccountConnectWalletModal/AccountConnectWalletModal';
-import { ConnectWalletFlow } from '../ConnectWalletFlow/ConnectWalletFlow';
-import { useLoginData } from '../LoginButton/hooks/useLoginData';
 
 import { chainId } from '../../../lib/ledger';
 import { Link, RegistryIconLink, RegistryNavLink } from '../../atoms';
+import { AccountConnectWalletModal } from '../AccountConnectWalletModal/AccountConnectWalletModal';
+import { ConnectWalletFlow } from '../ConnectWalletFlow/ConnectWalletFlow';
 import { ListProject } from '../ListProject/ListProject';
+import { useLoginData } from '../LoginButton/hooks/useLoginData';
 import { LoginButton } from '../LoginButton/LoginButton';
 import {
   ADDRESS_COPIED,
@@ -69,11 +69,14 @@ const RegistryLayoutHeader: React.FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { activeAccount, privActiveAccount } = useAuth();
-  const [isConnectWalletModalOpen, setIsConnectWalletModalOpen] = useState(false);
-  const [shouldRedirectToCreateOrg, setShouldRedirectToCreateOrg] = useState(false);
+  const [isConnectWalletModalOpen, setIsConnectWalletModalOpen] =
+    useState(false);
+  const [shouldRedirectToCreateOrg, setShouldRedirectToCreateOrg] =
+    useState(false);
   const [error, setError] = useState<unknown>(undefined);
 
-  const { wallet, disconnect, accountByAddr, connect, isConnected } = useWallet();
+  const { wallet, disconnect, accountByAddr, connect, isConnected } =
+    useWallet();
   const { accountOrWallet, noAccountAndNoWallet } = useAuthData();
   const theme = useTheme<Theme>();
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
@@ -85,12 +88,8 @@ const RegistryLayoutHeader: React.FC = () => {
   const hasPrefinanceProjects = useLoaderData();
   const profileLink = getProfileLink(activeAccount, wallet);
 
-  const {
-    modalState,
-    onButtonClick,
-    onModalClose,
-    walletsUiConfig,
-  } = useLoginData({});
+  const { modalState, onButtonClick, onModalClose, walletsUiConfig } =
+    useLoginData({});
 
   const organizationProfile = useMemo(
     () =>
@@ -145,7 +144,12 @@ const RegistryLayoutHeader: React.FC = () => {
       setShouldRedirectToCreateOrg(false);
       navigate('/organizations/create');
     }
-  }, [shouldRedirectToCreateOrg, isConnected, isConnectWalletModalOpen, navigate]);
+  }, [
+    shouldRedirectToCreateOrg,
+    isConnected,
+    isConnectWalletModalOpen,
+    navigate,
+  ]);
 
   const menuItems = useMemo(
     () => getMenuItems(pathname, _, !!hasPrefinanceProjects),
@@ -167,10 +171,13 @@ const RegistryLayoutHeader: React.FC = () => {
           address: wallet?.address,
         }),
         organizationProfile,
-        createOrganization: activeAccount?.type !== 'ORGANIZATION' ? createOrganization : undefined,
-  // Toggle this flag from real state later; leaving off by default
-  unfinalizedOrgCreation: false,
-  finishOrgCreation,
+        createOrganization:
+          activeAccount?.type !== 'ORGANIZATION'
+            ? createOrganization
+            : undefined,
+        // Toggle this flag from real state later; leaving off by default
+        unfinalizedOrgCreation: false,
+        finishOrgCreation,
         textContent: {
           signedInAs: _(SIGNED_IN_AS),
           copyText: {
@@ -196,6 +203,7 @@ const RegistryLayoutHeader: React.FC = () => {
       wallet?.address,
       organizationProfile,
       createOrganization,
+      finishOrgCreation,
     ],
   );
 

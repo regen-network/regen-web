@@ -1,6 +1,6 @@
 import CloseIcon from 'web-components/src/components/icons/CloseIcon';
-import { Title as H } from 'web-components/src/components/typography';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
+import { Title as H } from 'web-components/src/components/typography';
 
 type Props = {
   open: boolean;
@@ -12,7 +12,13 @@ type Props = {
   avatar?: string;
 };
 
-export function TransferProfileModal({ open, onSkip, onTransfer, name, avatar }: Props) {
+export function TransferProfileModal({
+  open,
+  onSkip,
+  onTransfer,
+  name,
+  avatar,
+}: Props) {
   if (!open) return null;
 
   return (
@@ -37,7 +43,8 @@ export function TransferProfileModal({ open, onSkip, onTransfer, name, avatar }:
               <CloseIcon className="w-6 h-6 text-bc-neutral-500" />
             </button>
             <H variant="h4" className="mb-10 text-center">
-              Transfer organization profile data from your personal account to your new organization profile?
+              Transfer organization profile data from your personal account to
+              your new organization profile?
             </H>
             <p className="text-[18px] font-normal text-bc-neutral-500 text-center mb-30 px-10">
               You can edit this profile data on the next step.
@@ -55,7 +62,9 @@ export function TransferProfileModal({ open, onSkip, onTransfer, name, avatar }:
                   alt={name}
                   className="w-[56px] h-[56px] rounded-full object-cover bg-bc-neutral-200"
                 />
-                <span className="text-[16px] font-bold text-bc-neutral-800">{name}</span>
+                <span className="text-[16px] font-bold text-bc-neutral-800">
+                  {name}
+                </span>
               </div>
             </div>
           </div>

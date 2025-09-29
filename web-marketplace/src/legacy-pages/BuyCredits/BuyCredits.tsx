@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useLoaderData, useParams } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useAtom, useAtomValue } from 'jotai';
 import NotFoundPage from 'legacy-pages/NotFound';
 import { useRouter } from 'next/navigation';
@@ -16,18 +16,14 @@ import { PAYMENT_OPTIONS } from './BuyCredits.constants';
 import { BuyCreditsForm } from './BuyCredits.Form';
 import { CardDetails, PaymentOptionsType } from './BuyCredits.types';
 import { getFormModel } from './BuyCredits.utils';
+import { useAccountCanBuy } from './hooks/useAccountCanBuy';
 import { useSummarizePayment } from './hooks/useSummarizePayment';
 
 export const BuyCredits = () => {
   const { projectId } = useParams();
   const router = useRouter();
-  const accountCanBuy = useLoaderData();
-
-  useEffect(() => {
-    if (!accountCanBuy) {
-      router.replace(`/project/${projectId}`);
-    }
-  }, [router, projectId, accountCanBuy]);
+  const { accountCanBuy, isLoading: loadingAccountCanBuy } =
+    useAccountCanBuy(projectId);
 
   const {
     loadingSanityProject,
@@ -42,6 +38,19 @@ export const BuyCredits = () => {
     slug,
     noProjectFound,
   } = useGetProject({ projectId });
+
+  const hasCardOrders = useMemo(
+    () => (cardSellOrders && cardSellOrders.length > 0) || false,
+    [cardSellOrders],
+  );
+
+  const canEnterBuy = accountCanBuy || hasCardOrders;
+  const isLoadingAll = loadingAccountCanBuy || loadingBuySellOrders;
+
+  useEffect(() => {
+    if (isLoadingAll) return;
+    if (!canEnterBuy) router.replace(`/project/${projectId}`);
+  }, [isLoadingAll, canEnterBuy, router, projectId]);
 
   useNavigateToSlug(slug, '/buy');
 
@@ -89,7 +98,7 @@ export const BuyCredits = () => {
     }
   }, [paymentOption, retiring, setRetiring]);
 
-  if (!accountCanBuy) return <Loading />;
+  if (loadingAccountCanBuy) return <Loading />;
 
   if (noProjectFound) return <NotFoundPage />;
 

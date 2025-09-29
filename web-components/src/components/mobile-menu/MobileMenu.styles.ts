@@ -12,10 +12,11 @@ export const useMobileMenuStyles = makeStyles()((theme: Theme) => ({
       backgroundColor: theme.palette.primary.light,
       width: '85%',
       maxWidth: '350px',
-      height: `calc(100% - 75px)`,
+      height: `calc(100% - 60px)`,
+      
     },
     '& .MuiBackdrop-root, & .MuiDrawer-paper': {
-      top: theme.spacing(16),
+      top: '60px',
       right: '0',
     },
   },
@@ -37,6 +38,7 @@ export const useMobileMenuStyles = makeStyles()((theme: Theme) => ({
     paddingLeft: theme.spacing(5),
     minHeight: theme.spacing(9.75),
     '& a': {
+      color: theme.palette.primary.main,
       '&:link, &:visited, &:hover, &:active': {
         textDecoration: 'none',
       },
@@ -50,6 +52,9 @@ export const useMobileMenuStyles = makeStyles()((theme: Theme) => ({
     paddingBottom: 0,
     paddingLeft: theme.spacing(6),
     minHeight: theme.spacing(9),
+    '& a': {
+      color: theme.palette.primary.main,
+    },
   },
   icon: {
     cursor: 'pointer',

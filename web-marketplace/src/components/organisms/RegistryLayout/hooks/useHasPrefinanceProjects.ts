@@ -1,6 +1,10 @@
 'use client';
 
-import { useApolloClient } from '@apollo/client';
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  useApolloClient,
+} from '@apollo/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 
@@ -18,7 +22,7 @@ export function useHasPrefinanceProjects(): boolean {
     queryFn: () =>
       fetchHasPrefinanceProjects({
         queryClient,
-        apolloClient,
+        apolloClient: apolloClient as ApolloClient<NormalizedCacheObject>,
         languageCode,
       }),
     staleTime: Infinity,

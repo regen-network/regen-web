@@ -14,7 +14,11 @@ export interface Props {
   description?: string;
 }
 
-const LoginModalSelect = ({ wallets, title, description }: Props): JSX.Element => {
+const LoginModalSelect = ({
+  wallets,
+  title,
+  description,
+}: Props): JSX.Element => {
   return (
     <Box textAlign="center">
       <Title variant="h4" mb={5}>

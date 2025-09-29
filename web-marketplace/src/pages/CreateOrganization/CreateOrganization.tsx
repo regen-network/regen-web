@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -26,6 +26,7 @@ import {
   CREATE_ORG_INITIAL_VALUES,
   CREATE_ORG_STEPS,
 } from './CreateOrganization.constants';
+import { useCreateDao } from './hooks/useCreateDao/useCreateDao';
 import { InviteMembersStep } from './steps/InviteMembersStep';
 import { MigrateProjectsStep } from './steps/MigrateProjectsStep';
 import { OrganizationProfileStep } from './steps/OrganizationProfileStep';
@@ -42,6 +43,7 @@ function CreateOrganizationContent(): JSX.Element {
     handleSave,
   } = useMultiStep<Record<string, unknown>>();
   const { activeAccount } = useAuth();
+  const { createDao, isCreating } = useCreateDao();
 
   const [showTransferModal, setShowTransferModal] = useState(true);
   const [orgProfileInitialValues, setOrgProfileInitialValues] = useState<
@@ -90,6 +92,56 @@ function CreateOrganizationContent(): JSX.Element {
     setShowTransferModal(false);
   };
 
+  const handleOrganizationProfileSaved = useCallback(
+    async (values: EditProfileFormSchemaType) => {
+      try {
+        const daoResult = await createDao({
+          name: values.name,
+          description: values.description,
+          profileImage: values.profileImage,
+          backgroundImage: values.backgroundImage,
+          websiteLink: values.websiteLink,
+          twitterLink: values.twitterLink,
+        });
+
+        const payload: Record<string, unknown> = {
+          ...values,
+          dao: daoResult,
+        };
+
+        handleSaveNext(payload);
+      } catch (error) {
+        // Surface to the form error boundary for user feedback
+        console.error('Failed to create DAO', error);
+        throw error;
+      }
+    },
+    [createDao, handleSaveNext],
+  );
+
+  const handleNextClick = useCallback(() => {
+    if (isCreating) return;
+
+    if (activeStep === 0) {
+      const form = document.getElementById(CREATE_ORG_FORM_ID) as
+        | HTMLFormElement
+        | undefined;
+
+      if (!form) return;
+
+      if (typeof form.requestSubmit === 'function') {
+        form.requestSubmit();
+      } else {
+        form.dispatchEvent(
+          new Event('submit', { bubbles: true, cancelable: true }),
+        );
+      }
+      return;
+    }
+
+    handleSaveNext({});
+  }, [activeStep, handleSaveNext, isCreating]);
+
   return (
     <>
       {activeStep === 0 && (
@@ -98,7 +150,7 @@ function CreateOrganizationContent(): JSX.Element {
           // Remount when we set transferred values to ensure RHF defaultValues apply
           key={JSON.stringify(orgProfileInitialValues)}
           initialValues={orgProfileInitialValues}
-          onSaved={(values: Record<string, unknown>) => handleSaveNext(values)}
+          onSaved={handleOrganizationProfileSaved}
         />
       )}
       <TransferProfileModal
@@ -113,9 +165,9 @@ function CreateOrganizationContent(): JSX.Element {
       {activeStep === 3 && <InviteMembersStep />}
       <SaveFooter
         onPrev={activeStep > 0 ? handleBack : undefined}
-        onSave={() => handleSaveNext({})}
+        onSave={handleNextClick}
         saveText={isLastStep ? _(msg`Finish`) : _(SAVE_TEXT)}
-        saveDisabled={false}
+        saveDisabled={isCreating}
         percentComplete={percentComplete}
       />
     </>

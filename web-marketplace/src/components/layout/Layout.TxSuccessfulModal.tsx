@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useLingui } from '@lingui/react';
 import { useAtom } from 'jotai';
 import { usePathname } from 'next/navigation';
@@ -34,8 +34,13 @@ export const LayoutTxSuccessfulModal = (): JSX.Element => {
 
   const txHashUrl = getHashUrl(txHash);
 
+  // Close the modal only on actual pathname changes
+  const prevLocationRef = useRef(location);
   useEffect(() => {
-    onClose();
+    if (prevLocationRef.current !== location) {
+      prevLocationRef.current = location;
+      onClose();
+    }
   }, [location, onClose]);
 
   return (

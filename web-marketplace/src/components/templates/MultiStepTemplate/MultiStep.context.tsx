@@ -116,9 +116,9 @@ export function MultiStepProvider<T extends object>({
   const maxAllowedStep =
     forceStep !== undefined
       ? forceStep
-      : (data?.maxAllowedStep !== undefined
-          ? data?.maxAllowedStep
-          : 0);
+      : data?.maxAllowedStep !== undefined
+      ? data?.maxAllowedStep
+      : 0;
 
   const {
     activeStep,

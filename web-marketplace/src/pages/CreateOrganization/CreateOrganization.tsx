@@ -1,38 +1,57 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { msg } from '@lingui/macro';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
+import { SadBeeModal } from 'web-components/src/components/modal/SadBeeModal/SadBeeModal';
+import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
+import { Title as H } from 'web-components/src/components/typography';
 
-import { SAVE_TEXT } from 'lib/constants/shared.constants';
+import { AccountType } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
-import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
+import { SAVE_TEXT } from 'lib/constants/shared.constants';
 
-import { MultiStepTemplate, useMultiStep } from '../../components/templates/MultiStepTemplate';
+import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
+import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
+
+import {
+  MultiStepTemplate,
+  useMultiStep,
+} from '../../components/templates/MultiStepTemplate';
+import { DEFAULT_PROFILE_BG } from '../Dashboard/Dashboard.constants';
+import { TransferProfileModal } from './components/TransferProfileModal';
 import {
   CREATE_ORG_FORM_ID,
   CREATE_ORG_INITIAL_VALUES,
   CREATE_ORG_STEPS,
 } from './CreateOrganization.constants';
-import { OrganizationProfileStep } from './steps/OrganizationProfileStep';
-import { MigrateProjectsStep } from './steps/MigrateProjectsStep';
-import { PersonalInfoStep } from './steps/PersonalInfoStep';
 import { InviteMembersStep } from './steps/InviteMembersStep';
-import { TransferProfileModal } from './components/TransferProfileModal';
-import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
-import { DEFAULT_PROFILE_BG } from '../Dashboard/Dashboard.constants';
-import { AccountType } from 'generated/graphql';
+import { MigrateProjectsStep } from './steps/MigrateProjectsStep';
+import { OrganizationProfileStep } from './steps/OrganizationProfileStep';
+import { PersonalInfoStep } from './steps/PersonalInfoStep';
 
 function CreateOrganizationContent(): JSX.Element {
   const { _ } = useLingui();
-  const { handleBack, activeStep, percentComplete, handleSaveNext, isLastStep, handleSave } =
-    useMultiStep<Record<string, unknown>>();
+  const {
+    handleBack,
+    activeStep,
+    percentComplete,
+    handleSaveNext,
+    isLastStep,
+    handleSave,
+  } = useMultiStep<Record<string, unknown>>();
   const { activeAccount } = useAuth();
 
   const [showTransferModal, setShowTransferModal] = useState(true);
-  const [orgProfileInitialValues, setOrgProfileInitialValues] = useState<Partial<EditProfileFormSchemaType>>({});
+  const [orgProfileInitialValues, setOrgProfileInitialValues] = useState<
+    Partial<EditProfileFormSchemaType>
+  >({});
 
-  const displayName = useMemo(() => activeAccount?.name || 'User', [activeAccount?.name]);
+  const displayName = useMemo(
+    () => activeAccount?.name || _(msg`User`),
+    [activeAccount?.name, _],
+  );
   const avatarUrl = useMemo(
     () => activeAccount?.image || getDefaultAvatar(activeAccount as any),
     [activeAccount],
@@ -104,16 +123,54 @@ function CreateOrganizationContent(): JSX.Element {
 }
 
 export default function CreateOrganizationPage(): JSX.Element {
+  const navigate = useNavigate();
+  const { _ } = useLingui();
+  const [showDiscardModal, setShowDiscardModal] = useState(false);
+
+  const handleRequestClose = () => setShowDiscardModal(true);
+  const handleCancelDiscard = () => setShowDiscardModal(false);
+  const handleConfirmDiscard = () => {
+    setShowDiscardModal(false);
+    navigate('/dashboard', { replace: true });
+  };
   return (
-    <MultiStepTemplate
-      formId={CREATE_ORG_FORM_ID}
-      initialValues={CREATE_ORG_INITIAL_VALUES}
-      steps={CREATE_ORG_STEPS.map(step => ({ ...step }))}
-      withLocalStorage
-      forceStep={0}
-      classes={{ titleWrap: 'pb-40' }}
-    >
-      <CreateOrganizationContent />
-    </MultiStepTemplate>
+    <>
+      {/* Close button now rendered inside MultiStepTemplate via closable prop */}
+      <SadBeeModal open={showDiscardModal} onClose={handleCancelDiscard}>
+        <H variant="h4" className="mt-20 mb-10 text-center">
+          <Trans>Are you sure you want to discard your changes?</Trans>
+        </H>
+        <p className="text-[18px] font-normal text-bc-neutral-500 text-center mb-30 px-10">
+          <Trans>
+            If you proceed, you will lose all the unsaved changes you made. This
+            cannot be undone.
+          </Trans>
+        </p>
+        <div className="flex justify-center pb-10">
+          <CancelButtonFooter
+            onCancel={handleCancelDiscard}
+            cancelLabel={_(msg`CANCEL`)}
+            label={_(msg`YES, DISCARD`)}
+            disabled={false}
+            type="button"
+            onClick={handleConfirmDiscard}
+            className="h-[53px] w-full md:w-[260px] text-[16px]"
+          />
+        </div>
+      </SadBeeModal>
+      <MultiStepTemplate
+        formId={CREATE_ORG_FORM_ID}
+        initialValues={CREATE_ORG_INITIAL_VALUES}
+        steps={CREATE_ORG_STEPS.map(step => ({ ...step }))}
+        withLocalStorage
+        forceStep={0}
+        closable
+        onRequestClose={handleRequestClose}
+        closeAriaLabel={_(msg`close create organization`)}
+        classes={{ titleWrap: 'pb-40' }}
+      >
+        <CreateOrganizationContent />
+      </MultiStepTemplate>
+    </>
   );
 }

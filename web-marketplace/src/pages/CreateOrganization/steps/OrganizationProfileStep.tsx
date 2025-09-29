@@ -8,7 +8,7 @@ import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/
 type Props = {
   formId: string;
   initialValues: Partial<EditProfileFormSchemaType>;
-  onSaved: (values: EditProfileFormSchemaType) => void;
+  onSaved: (values: EditProfileFormSchemaType) => Promise<void>;
 };
 
 export const OrganizationProfileStep: React.FC<Props> = ({
@@ -20,7 +20,7 @@ export const OrganizationProfileStep: React.FC<Props> = ({
 
   const handleSubmit = useCallback(
     async (values: EditProfileFormSchemaType) => {
-      onSaved(values);
+      await onSaved(values);
     },
     [onSaved],
   );

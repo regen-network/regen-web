@@ -26,7 +26,15 @@ const AccountConnectWalletModal = ({
   const isSelectState = state === 'select';
   return (
     <Modal open={open} onClose={onClose}>
-      <Box>{isSelectState && <LoginModalSelect wallets={wallets} title={title} description={description} />}</Box>
+      <Box>
+        {isSelectState && (
+          <LoginModalSelect
+            wallets={wallets}
+            title={title}
+            description={description}
+          />
+        )}
+      </Box>
     </Modal>
   );
 };

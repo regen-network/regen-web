@@ -108,7 +108,7 @@ export default function ShareIcons({
             <LinkedInIcon
               color={theme.palette.primary.main}
               hoverColor={theme.palette.secondary.main}
-              className="w-[50px] h-[50px]"
+              className="sm:w-[50px] sm:h-[50px]"
             />
           </a>
         </Grid>

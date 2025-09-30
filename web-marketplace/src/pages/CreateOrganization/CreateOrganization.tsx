@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -11,6 +17,13 @@ import { Title as H } from 'web-components/src/components/typography';
 import { AccountType } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { SAVE_TEXT } from 'lib/constants/shared.constants';
+import {
+  getAllOrganizationProgress,
+  OrgProgressMap,
+  removeOrganizationProgress,
+  setOrganizationProgressStep,
+  useOrganizationProgress,
+} from 'lib/storage/organizationProgress.storage';
 
 import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
@@ -32,18 +45,31 @@ import { MigrateProjectsStep } from './steps/MigrateProjectsStep';
 import { OrganizationProfileStep } from './steps/OrganizationProfileStep';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
 
-function CreateOrganizationContent(): JSX.Element {
+type CreateOrganizationContentProps = {
+  organizationProgress: OrgProgressMap;
+};
+
+function CreateOrganizationContent({
+  organizationProgress,
+}: CreateOrganizationContentProps): JSX.Element {
   const { _ } = useLingui();
   const {
     handleBack,
+    handleActiveStep,
     activeStep,
     percentComplete,
     handleSaveNext,
     isLastStep,
     handleSave,
+    maxAllowedStep,
+    data,
   } = useMultiStep<Record<string, unknown>>();
   const { activeAccount } = useAuth();
   const { createDao, isCreating } = useCreateDao();
+  const daoAddressRef = useRef<string | undefined>(undefined);
+  const organizationNameRef = useRef<string | undefined>(undefined);
+  const [hasUnfinishedOrganization, setHasUnfinishedOrganization] =
+    useState(false);
 
   const [showTransferModal, setShowTransferModal] = useState(true);
   const [orgProfileInitialValues, setOrgProfileInitialValues] = useState<
@@ -58,6 +84,63 @@ function CreateOrganizationContent(): JSX.Element {
     () => activeAccount?.image || getDefaultAvatar(activeAccount as any),
     [activeAccount],
   );
+
+  useEffect(() => {
+    const storedDaoAddress = (data as Record<string, any>)?.dao?.daoAddress as
+      | string
+      | undefined;
+    const storedName = (data as Record<string, any>)?.name as
+      | string
+      | undefined;
+
+    if (storedDaoAddress) {
+      daoAddressRef.current = storedDaoAddress;
+      organizationNameRef.current = storedName ?? organizationNameRef.current;
+
+      const existing = organizationProgress[storedDaoAddress];
+      const nextStep = Math.max(maxAllowedStep, 1);
+      if (!existing || existing.step !== nextStep || !existing.name) {
+        setOrganizationProgressStep(
+          storedDaoAddress,
+          nextStep,
+          storedName ?? organizationNameRef.current,
+        );
+      }
+      setHasUnfinishedOrganization(true);
+    }
+  }, [data, organizationProgress, maxAllowedStep]);
+
+  useEffect(() => {
+    const entries = Object.values(organizationProgress);
+    if (entries.length > 0) {
+      const entry = entries[0];
+      daoAddressRef.current = entry.daoAddress;
+      organizationNameRef.current = entry.name;
+      setHasUnfinishedOrganization(true);
+    } else {
+      daoAddressRef.current = undefined;
+      organizationNameRef.current = undefined;
+      setHasUnfinishedOrganization(false);
+    }
+  }, [organizationProgress]);
+
+  const currentProgressEntry = useMemo(
+    () => Object.values(organizationProgress)[0],
+    [organizationProgress],
+  );
+  const resumeStep = useMemo(() => {
+    if (!currentProgressEntry) return 0;
+    return Math.min(
+      currentProgressEntry.step ?? 0,
+      CREATE_ORG_STEPS.length - 1,
+    );
+  }, [currentProgressEntry]);
+
+  useEffect(() => {
+    if (resumeStep > 0 && activeStep === 0) {
+      handleActiveStep(resumeStep);
+    }
+  }, [resumeStep, activeStep, handleActiveStep]);
 
   // No-op: modal starts open (showTransferModal=true) and will be closed via Skip/Yes handlers
 
@@ -95,6 +178,19 @@ function CreateOrganizationContent(): JSX.Element {
   const handleOrganizationProfileSaved = useCallback(
     async (values: EditProfileFormSchemaType) => {
       try {
+        if (hasUnfinishedOrganization && daoAddressRef.current) {
+          organizationNameRef.current = values.name;
+          setOrganizationProgressStep(daoAddressRef.current, 1, values.name);
+          const payload: Record<string, unknown> = {
+            ...values,
+            dao: (data as Record<string, unknown>)?.dao ?? {
+              daoAddress: daoAddressRef.current,
+            },
+          };
+          handleSaveNext(payload);
+          return;
+        }
+
         const daoResult = await createDao({
           name: values.name,
           description: values.description,
@@ -103,6 +199,10 @@ function CreateOrganizationContent(): JSX.Element {
           websiteLink: values.websiteLink,
           twitterLink: values.twitterLink,
         });
+
+        daoAddressRef.current = daoResult.daoAddress;
+        organizationNameRef.current = values.name;
+        setOrganizationProgressStep(daoResult.daoAddress, 1, values.name);
 
         const payload: Record<string, unknown> = {
           ...values,
@@ -116,8 +216,21 @@ function CreateOrganizationContent(): JSX.Element {
         throw error;
       }
     },
-    [createDao, handleSaveNext],
+    [createDao, handleSaveNext, hasUnfinishedOrganization, data],
   );
+
+  const handlePrevClick = useCallback(() => {
+    if (activeStep === 0) return;
+    if (hasUnfinishedOrganization && daoAddressRef.current) {
+      const previousStep = Math.max(activeStep - 1, 1);
+      setOrganizationProgressStep(
+        daoAddressRef.current,
+        previousStep,
+        organizationNameRef.current,
+      );
+    }
+    handleBack();
+  }, [activeStep, handleBack, hasUnfinishedOrganization]);
 
   const handleNextClick = useCallback(() => {
     if (isCreating) return;
@@ -139,8 +252,30 @@ function CreateOrganizationContent(): JSX.Element {
       return;
     }
 
+    if (hasUnfinishedOrganization && daoAddressRef.current) {
+      if (isLastStep) {
+        removeOrganizationProgress(daoAddressRef.current);
+        daoAddressRef.current = undefined;
+        organizationNameRef.current = undefined;
+        setHasUnfinishedOrganization(false);
+      } else {
+        const nextStep = Math.max(activeStep + 1, 1);
+        setOrganizationProgressStep(
+          daoAddressRef.current,
+          nextStep,
+          organizationNameRef.current,
+        );
+      }
+    }
+
     handleSaveNext({});
-  }, [activeStep, handleSaveNext, isCreating]);
+  }, [
+    activeStep,
+    handleSaveNext,
+    hasUnfinishedOrganization,
+    isCreating,
+    isLastStep,
+  ]);
 
   return (
     <>
@@ -164,7 +299,7 @@ function CreateOrganizationContent(): JSX.Element {
       {activeStep === 2 && <PersonalInfoStep />}
       {activeStep === 3 && <InviteMembersStep />}
       <SaveFooter
-        onPrev={activeStep > 0 ? handleBack : undefined}
+        onPrev={activeStep > 0 ? handlePrevClick : undefined}
         onSave={handleNextClick}
         saveText={isLastStep ? _(msg`Finish`) : _(SAVE_TEXT)}
         saveDisabled={isCreating}
@@ -177,12 +312,26 @@ function CreateOrganizationContent(): JSX.Element {
 export default function CreateOrganizationPage(): JSX.Element {
   const navigate = useNavigate();
   const { _ } = useLingui();
+  const organizationProgress = useOrganizationProgress();
   const [showDiscardModal, setShowDiscardModal] = useState(false);
+  const currentProgressEntry = useMemo(
+    () => Object.values(organizationProgress)[0],
+    [organizationProgress],
+  );
+  const resumeStep = useMemo(
+    () =>
+      Math.min(currentProgressEntry?.step ?? 0, CREATE_ORG_STEPS.length - 1),
+    [currentProgressEntry],
+  );
 
   const handleRequestClose = () => setShowDiscardModal(true);
   const handleCancelDiscard = () => setShowDiscardModal(false);
   const handleConfirmDiscard = () => {
     setShowDiscardModal(false);
+    const progress = getAllOrganizationProgress();
+    Object.values(progress).forEach(entry =>
+      removeOrganizationProgress(entry.daoAddress),
+    );
     navigate('/dashboard', { replace: true });
   };
   return (
@@ -215,13 +364,15 @@ export default function CreateOrganizationPage(): JSX.Element {
         initialValues={CREATE_ORG_INITIAL_VALUES}
         steps={CREATE_ORG_STEPS.map(step => ({ ...step }))}
         withLocalStorage
-        forceStep={0}
+        forceStep={resumeStep}
         closable
         onRequestClose={handleRequestClose}
         closeAriaLabel={_(msg`close create organization`)}
         classes={{ titleWrap: 'pb-40' }}
       >
-        <CreateOrganizationContent />
+        <CreateOrganizationContent
+          organizationProgress={organizationProgress}
+        />
       </MultiStepTemplate>
     </>
   );

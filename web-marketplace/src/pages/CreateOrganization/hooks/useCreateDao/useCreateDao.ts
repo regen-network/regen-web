@@ -7,6 +7,8 @@ import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { ledgerRPCUri } from 'lib/ledger';
 import { useWallet } from 'lib/wallet/wallet';
 
+import { PROFILE_S3_PATH } from 'pages/Dashboard/Dashboard.constants';
+
 import {
   cw4GroupCodeId,
   daoDaoCoreCodeId,
@@ -30,6 +32,8 @@ type CreateDaoParams = {
   backgroundImage?: string;
   websiteLink?: string;
   twitterLink?: string;
+  organizationId?: string;
+  currentAccountId?: string;
 };
 
 type CreateDaoResult = {
@@ -38,6 +42,7 @@ type CreateDaoResult = {
   cw4GroupAddress: string;
   rbamAddress: string;
   transactionHash: string;
+  organizationId?: string;
 };
 
 /**
@@ -79,6 +84,7 @@ export const useCreateDao = () => {
       console.info('[useCreateDao] starting DAO creation', {
         walletAddress,
         name: params.name,
+        currentAccountId: params.currentAccountId,
       });
 
       try {
@@ -114,8 +120,27 @@ export const useCreateDao = () => {
 
         const sanitizedName = params.name.trim();
         const sanitizedDescription = params.description?.trim() || null;
-        const sanitizedProfileImage = params.profileImage?.trim() || null;
-        const sanitizedBackgroundImage = params.backgroundImage?.trim() || null;
+
+        const rewriteMediaUrl = (value?: string): string | null => {
+          const trimmed = value?.trim();
+          if (!trimmed) return null;
+          if (!params.organizationId || !params.currentAccountId) {
+            return trimmed;
+          }
+
+          const accountSegment = `${PROFILE_S3_PATH}/${params.currentAccountId}/`;
+          if (!trimmed.includes(accountSegment)) {
+            return trimmed;
+          }
+
+          const organizationSegment = `${PROFILE_S3_PATH}/${params.organizationId}/`;
+          return trimmed.replace(accountSegment, organizationSegment);
+        };
+
+        const sanitizedProfileImage = rewriteMediaUrl(params.profileImage);
+        const sanitizedBackgroundImage = rewriteMediaUrl(
+          params.backgroundImage,
+        );
         const sanitizedWebsite = params.websiteLink?.trim() || null;
         const sanitizedTwitter = params.twitterLink?.trim() || null;
 
@@ -254,15 +279,15 @@ export const useCreateDao = () => {
           { key: 'type', value: 'organization' },
         ];
 
-        if (sanitizedBackgroundImage) {
-          initialItems.push({ key: 'banner', value: sanitizedBackgroundImage });
+        if (params.organizationId) {
+          initialItems.push({
+            key: 'organization_id',
+            value: params.organizationId,
+          });
         }
 
-        if (sanitizedProfileImage) {
-          initialItems.push({
-            key: 'profile_image',
-            value: sanitizedProfileImage,
-          });
+        if (sanitizedBackgroundImage) {
+          initialItems.push({ key: 'banner', value: sanitizedBackgroundImage });
         }
 
         if (sanitizedWebsite) {
@@ -314,6 +339,7 @@ export const useCreateDao = () => {
           transactionHash: executeResult.transactionHash,
           height: executeResult.height,
           gasUsed: executeResult.gasUsed,
+          organizationId: params.organizationId,
         });
 
         // ExecuteResult from SigningCosmWasmClient already throws on error
@@ -324,6 +350,7 @@ export const useCreateDao = () => {
           cw4GroupAddress,
           rbamAddress,
           transactionHash: executeResult.transactionHash,
+          organizationId: params.organizationId,
         };
       } finally {
         setIsCreating(false);

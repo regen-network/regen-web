@@ -16,7 +16,7 @@ type Props = {
 export async function RegenPrefetch({ children }: Props) {
   const queryClient = new QueryClient();
   const apolloClient = await getClient();
-  const languageCode = 'en'; // TODO: get user language
+  const languageCode = 'en'; // TODO: get user language from cookies/url segment
 
   // Prefetch prefinance data on the server
   await queryClient.prefetchQuery(

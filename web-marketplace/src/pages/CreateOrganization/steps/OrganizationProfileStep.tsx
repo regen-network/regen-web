@@ -1,7 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
+import { useOnUploadCallback } from 'pages/Dashboard/hooks/useOnUploadCallback';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
@@ -17,6 +18,10 @@ export const OrganizationProfileStep: React.FC<Props> = ({
   onSaved,
 }) => {
   const { _ } = useLingui();
+  const fileNamesToDeleteRef = useRef<string[]>([]);
+  const onUpload = useOnUploadCallback({
+    fileNamesToDeleteRef,
+  });
 
   const handleSubmit = useCallback(
     async (values: EditProfileFormSchemaType) => {
@@ -32,6 +37,7 @@ export const OrganizationProfileStep: React.FC<Props> = ({
       initialValues={initialValues as EditProfileFormSchemaType}
       hideProfileType
       nameLabel={_(msg`Organization Name`)}
+      onUpload={onUpload}
     />
   );
 };

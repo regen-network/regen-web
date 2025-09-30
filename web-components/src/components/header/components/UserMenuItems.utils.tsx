@@ -93,7 +93,7 @@ export const getUserMenuItems = ({
       label: textContent.personalDashboard,
     },
     // Separator (only when create org is available)
-    createOrganization && {
+    (createOrganization || organizationProfile) && {
       children: <Separator className="w-full my-[14px]" />,
     },
     // Organization card (no hover link)
@@ -116,16 +116,17 @@ export const getUserMenuItems = ({
       ),
     },
     // Organization profile item
-    organizationProfile && {
-      pathname,
-      linkComponent: navLinkComponent,
-      href: organizationProfile.profileLink,
-      labelClassName,
-      className: 'pl-[17px]',
-      iconClassName: 'mr-[11px]',
-      icon: <OrgProfileIcon linearGradient />,
-      label: textContent.organizationProfile,
-    },
+    organizationProfile &&
+      !unfinalizedOrgCreation && {
+        pathname,
+        linkComponent: navLinkComponent,
+        href: organizationProfile.profileLink,
+        labelClassName,
+        className: 'pl-[17px]',
+        iconClassName: 'mr-[11px]',
+        icon: <OrgProfileIcon linearGradient />,
+        label: textContent.organizationProfile,
+      },
     // Organization dashboard
     organizationProfile &&
       !unfinalizedOrgCreation && {

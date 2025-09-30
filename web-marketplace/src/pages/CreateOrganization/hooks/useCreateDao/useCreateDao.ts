@@ -1,12 +1,11 @@
-import { useCallback, useState } from 'react';
-
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate';
-import { toUtf8 } from '@cosmjs/encoding';
-import { GasPrice, StdFee } from '@cosmjs/stargate';
+import { StdFee } from '@cosmjs/stargate';
+import { useSetAtom } from 'jotai';
 
+import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { ledgerRPCUri } from 'lib/ledger';
 import { useWallet } from 'lib/wallet/wallet';
-import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import {
   cw4GroupCodeId,
@@ -48,32 +47,64 @@ type CreateDaoResult = {
  */
 export const useCreateDao = () => {
   const { wallet } = useWallet();
+  const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const [isCreating, setIsCreating] = useState(false);
+  const signingClientRef = useRef<SigningCosmWasmClient | null>(null);
+  const signingClientAddressRef = useRef<string | undefined>(undefined);
+
+  // Disconnect cached client on unmount to avoid dangling connections.
+  useEffect(() => {
+    return () => {
+      if (signingClientRef.current) {
+        void signingClientRef.current.disconnect();
+      }
+      signingClientRef.current = null;
+      signingClientAddressRef.current = undefined;
+    };
+  }, []);
 
   const createDao = useCallback(
-    async (
-      params: CreateDaoParams,
-    ): Promise<CreateDaoResult> => {
+    async (params: CreateDaoParams): Promise<CreateDaoResult> => {
       const walletAddress = wallet?.address?.trim();
       const offlineSigner = wallet?.offlineSigner;
 
       if (!offlineSigner || !walletAddress) {
-        throw new Error('A connected wallet is required to create an organization.');
+        throw new Error(
+          'A connected wallet is required to create an organization.',
+        );
       }
 
       setIsCreating(true);
-
-      let signingClient: SigningCosmWasmClient | undefined;
+      setProcessingModalAtom(atom => void (atom.open = true));
+      console.info('[useCreateDao] starting DAO creation', {
+        walletAddress,
+        name: params.name,
+      });
 
       try {
-        signingClient = await SigningCosmWasmClient.connectWithSigner(
-          ledgerRPCUri,
-          offlineSigner,
-          {
-            gasPrice: GasPrice.fromString('0.025uregen'),
-            overrideSignerChainId: chainInfo.chainId || undefined,
-          },
-        );
+        // Recreate client if we don't have one yet or the wallet changed.
+        if (
+          signingClientAddressRef.current &&
+          signingClientAddressRef.current !== walletAddress &&
+          signingClientRef.current
+        ) {
+          await signingClientRef.current.disconnect();
+          signingClientRef.current = null;
+          signingClientAddressRef.current = undefined;
+        }
+
+        if (!signingClientRef.current) {
+          signingClientRef.current =
+            await SigningCosmWasmClient.connectWithSigner(
+              ledgerRPCUri,
+              offlineSigner,
+              {},
+            );
+          signingClientAddressRef.current = walletAddress;
+        }
+
+        const signingClient = signingClientRef.current;
+
         if (!signingClient) {
           throw new Error('Failed to initialize signing client');
         }
@@ -88,10 +119,15 @@ export const useCreateDao = () => {
         const sanitizedWebsite = params.websiteLink?.trim() || null;
         const sanitizedTwitter = params.twitterLink?.trim() || null;
 
-        const { salt: daoSalt, predictedAddress: daoAddress } = await predictAddress({
-          client: signingClient as any,
-          codeId: daoDaoCoreCodeId,
-          creator: cwAdminFactoryAddr,
+        const { salt: daoSalt, predictedAddress: daoAddress } =
+          await predictAddress({
+            client: signingClient as any,
+            codeId: daoDaoCoreCodeId,
+            creator: cwAdminFactoryAddr,
+          });
+        console.info('[useCreateDao] predicted dao core address', {
+          daoAddress,
+          daoSalt,
         });
 
         const {
@@ -102,6 +138,10 @@ export const useCreateDao = () => {
           codeId: daoVotingCw4CodeId,
           creator: daoAddress,
         });
+        console.info('[useCreateDao] predicted voting module address', {
+          daoVotingCw4Address,
+          daoVotingCw4Salt,
+        });
 
         const { salt: cw4GroupSalt, predictedAddress: cw4GroupAddress } =
           await predictAddress({
@@ -109,6 +149,10 @@ export const useCreateDao = () => {
             codeId: cw4GroupCodeId,
             creator: daoVotingCw4Address,
           });
+        console.info('[useCreateDao] predicted cw4 group address', {
+          cw4GroupAddress,
+          cw4GroupSalt,
+        });
 
         const { salt: rbamSalt, predictedAddress: rbamAddress } =
           await predictAddress({
@@ -116,6 +160,10 @@ export const useCreateDao = () => {
             codeId: rbamCodeId,
             creator: daoAddress,
           });
+        console.info('[useCreateDao] predicted rbam address', {
+          rbamAddress,
+          rbamSalt,
+        });
 
         const now = Date.now();
 
@@ -211,7 +259,10 @@ export const useCreateDao = () => {
         }
 
         if (sanitizedProfileImage) {
-          initialItems.push({ key: 'profile_image', value: sanitizedProfileImage });
+          initialItems.push({
+            key: 'profile_image',
+            value: sanitizedProfileImage,
+          });
         }
 
         if (sanitizedWebsite) {
@@ -250,7 +301,7 @@ export const useCreateDao = () => {
               denom: 'uregen',
             },
           ],
-          gas: '800000',
+          gas: '10000000',
         };
 
         const executeResult = await signingClient.execute(
@@ -259,6 +310,11 @@ export const useCreateDao = () => {
           executeMsg,
           fee,
         );
+        console.info('[useCreateDao] execute result', {
+          transactionHash: executeResult.transactionHash,
+          height: executeResult.height,
+          gasUsed: executeResult.gasUsed,
+        });
 
         // ExecuteResult from SigningCosmWasmClient already throws on error
 
@@ -271,10 +327,10 @@ export const useCreateDao = () => {
         };
       } finally {
         setIsCreating(false);
-        await signingClient?.disconnect();
+        setProcessingModalAtom(atom => void (atom.open = false));
       }
     },
-    [wallet?.address, wallet?.offlineSigner],
+    [wallet?.address, wallet?.offlineSigner, setProcessingModalAtom],
   );
 
   return { createDao, isCreating };

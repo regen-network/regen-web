@@ -15,11 +15,6 @@ import { AuthProvider } from 'lib/auth/auth';
 import { IS_TERRASOS } from 'lib/env';
 
 import PageLoader from 'components/atoms/PageLoader';
-import { ScrollToTop } from 'components/atoms/ScrollToTop';
-import { LayoutCookiesTopBanner } from 'components/layout/Layout.CookiesTopBanner';
-import { LayoutModalManager } from 'components/layout/Layout.ModalManager';
-import { RetryFailedFunctions } from 'components/layout/Layout.RetryFailedFunctions';
-import { PageViewTracking } from 'components/molecules/PageViewTracking';
 
 import { fontClassNames } from '../lib/fonts';
 import { AnalyticsWrapper } from './AnalyticsWrapper';
@@ -137,11 +132,6 @@ export default function RootLayout({
                         ) : (
                           <RegenPrefetch>{children}</RegenPrefetch>
                         )}
-                        <PageViewTracking />
-                        <ScrollToTop />
-                        <RetryFailedFunctions />
-                        <LayoutCookiesTopBanner />
-                        <LayoutModalManager />
                       </AuthProvider>
                     </AnalyticsWrapper>
                   </Suspense>

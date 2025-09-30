@@ -15,17 +15,26 @@ type Props = {
 
 export async function RegenPrefetch({ children }: Props) {
   const queryClient = new QueryClient();
-  const apolloClient = await getClient();
-  const languageCode = 'en'; // TODO: get user language from cookies/url segment
 
-  // Prefetch prefinance data on the server
-  await queryClient.prefetchQuery(
-    getHasPrefinanceProjectsQuery({
-      queryClient,
-      apolloClient,
-      languageCode,
-    }),
-  );
+  /**
+   * Try-catch prevents build failures when static routes are pre-rendered during CI (API unavailable).
+   * Falls back to client-side fetch via useHasPrefinanceProjects if prefetch fails.
+   */
+  try {
+    const apolloClient = await getClient();
+    const languageCode = 'en'; // TODO: get user language from cookies/url segment
+
+    await queryClient.prefetchQuery(
+      getHasPrefinanceProjectsQuery({
+        queryClient,
+        apolloClient,
+        languageCode,
+      }),
+    );
+  } catch (error) {
+    // eslint-disable-next-line no-console, lingui/no-unlocalized-strings
+    console.warn('Failed to prefetch prefinance projects data:', error);
+  }
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

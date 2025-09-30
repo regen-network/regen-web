@@ -222,7 +222,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
         onSubmit={handleSubmit}
       >
         {({ submitForm, isValid, isSubmitting }) => (
-          <Form id={formModel.formId} {...({} as any)}>
+          <Form id={formModel.formId}>
             {renderStep(activeStep)}
             {/* TODO ? - Move to: MultiStepTemplate > StepperSection > StepperControls */}
             {!isLastStep && (

@@ -416,7 +416,7 @@ const CreditRetireForm: React.FC<FormProps> = ({
       onSubmit={onSubmit}
     >
       {({ submitForm, isSubmitting, isValid, submitCount, status }) => (
-        <Form {...({} as any)}>
+        <Form>
           <RetirementReminder
             sx={{ textAlign: 'center', mb: 8 }}
             retirementInfoText={retirementInfoText}

@@ -55,7 +55,7 @@ const CertificationForm: React.FC<React.PropsWithChildren<FormProps>> = ({
       onSubmit={onSubmit}
     >
       {({ submitForm, isSubmitting, isValid, submitCount, status }) => (
-        <Form {...({} as any)}>
+        <Form>
           <OnBoardingCard>
             <Field
               name="schema:name"

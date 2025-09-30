@@ -60,7 +60,7 @@ export const IncludesGrasslandsForm: React.FC<
     >
       {({ values }) => {
         return (
-          <Form {...({} as any)}>
+          <Form>
             <OnBoardingCard>
               <ControlledFormLabel>
                 <Trans>Does your project include grasslands?</Trans>

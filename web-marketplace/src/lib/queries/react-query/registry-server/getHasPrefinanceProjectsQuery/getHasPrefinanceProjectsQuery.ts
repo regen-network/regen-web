@@ -26,5 +26,4 @@ export const getHasPrefinanceProjectsQuery = ({
       languageCode,
     }),
   enabled,
-  staleTime: Infinity,
 });

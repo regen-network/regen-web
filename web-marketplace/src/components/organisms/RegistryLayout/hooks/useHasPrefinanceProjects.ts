@@ -9,24 +9,20 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-
-import { fetchHasPrefinanceProjects } from '../prefinance';
+import { getHasPrefinanceProjectsQuery } from 'lib/queries/react-query/registry-server/getHasPrefinanceProjectsQuery/getHasPrefinanceProjectsQuery';
 
 export function useHasPrefinanceProjects(): boolean {
   const queryClient = useQueryClient();
   const apolloClient = useApolloClient();
   const languageCode = useAtomValue(selectedLanguageAtom);
 
-  const { data } = useQuery({
-    queryKey: ['has-prefinance-projects', languageCode],
-    queryFn: () =>
-      fetchHasPrefinanceProjects({
-        queryClient,
-        apolloClient: apolloClient as ApolloClient<NormalizedCacheObject>,
-        languageCode,
-      }),
-    staleTime: Infinity,
-  });
+  const { data } = useQuery(
+    getHasPrefinanceProjectsQuery({
+      queryClient,
+      apolloClient: apolloClient as ApolloClient<NormalizedCacheObject>,
+      languageCode,
+    }),
+  );
 
   return Boolean(data);
 }

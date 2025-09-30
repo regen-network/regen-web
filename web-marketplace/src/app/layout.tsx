@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import { setI18n } from '@lingui/react/server';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { RegenProviders } from 'clients/regen/Regen.Providers';
+import { RegenPrefetch } from 'clients/regen/Regen.Prefetch';
 import terrasosMuiTheme from 'clients/terrasos/Terrasos.muiTheme';
 import { TerrasosProviders } from 'clients/terrasos/Terrasos.Providers';
 import type { Metadata, Viewport } from 'next';
@@ -135,7 +135,7 @@ export default function RootLayout({
                         {IS_TERRASOS ? (
                           <TerrasosProviders>{children}</TerrasosProviders>
                         ) : (
-                          <RegenProviders>{children}</RegenProviders>
+                          <RegenPrefetch>{children}</RegenPrefetch>
                         )}
                         <PageViewTracking />
                         <ScrollToTop />

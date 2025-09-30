@@ -40,13 +40,13 @@ export const useAccountCanBuy = (projectIdParam?: string) => {
 
   const effectiveProjectId = useMemo(() => {
     if (isOnChainId) return projectIdParam;
-    return (projectBySlug as any)?.data?.projectBySlug?.onChainId ?? undefined;
+    return projectBySlug?.data?.projectBySlug?.onChainId ?? undefined;
   }, [isOnChainId, projectIdParam, projectBySlug]);
 
   const accountCanBuy = useMemo(() => {
     if (!allSellOrders || !effectiveProjectId) return false;
     const available = allSellOrders.filter(
-      (sellOrder: any) =>
+      sellOrder =>
         sellOrder.seller !== activeWalletAddr &&
         sellOrder.batchDenom?.startsWith(effectiveProjectId),
     );

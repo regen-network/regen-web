@@ -630,7 +630,10 @@ async function getCodeDetailsWithFallback(
   }
 }
 
-function normalizeCodeDetails(details: any, fallbackId: number): CodeDetailsLike {
+function normalizeCodeDetails(
+  details: any,
+  fallbackId: number,
+): CodeDetailsLike {
   if (!details) {
     return {
       id: fallbackId,
@@ -680,7 +683,9 @@ async function getLegacyCodeDetails(
     return undefined;
   }
 
-  const requestMessage = QueryCodeRequest.fromPartial({ codeId: Long.fromNumber(codeId) });
+  const requestMessage = QueryCodeRequest.fromPartial({
+    codeId: Long.fromNumber(codeId),
+  });
   const requestBytes = QueryCodeRequest.encode(requestMessage).finish();
   const emptyRequest = new Uint8Array();
   const encoderFallbacks: Uint8Array[] = [requestBytes, emptyRequest];
@@ -697,7 +702,10 @@ async function getLegacyCodeDetails(
   for (const buildPath of legacyPaths) {
     try {
       for (const request of encoderFallbacks) {
-        const response = await queryClient.queryAbci(buildPath(codeId), request);
+        const response = await queryClient.queryAbci(
+          buildPath(codeId),
+          request,
+        );
 
         if (!response?.value || response.value.length === 0) continue;
 
@@ -752,7 +760,10 @@ function decodeJsonCodeResponse(
 
     const parsed = JSON.parse(decodedString);
     const codeInfo =
-      parsed?.code_info || parsed?.CodeInfoResponse || parsed?.codeInfo || parsed?.code;
+      parsed?.code_info ||
+      parsed?.CodeInfoResponse ||
+      parsed?.codeInfo ||
+      parsed?.code;
 
     if (!codeInfo) return undefined;
 

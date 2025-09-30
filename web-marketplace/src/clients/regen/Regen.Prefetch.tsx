@@ -7,6 +7,8 @@ import { getClient } from 'app/ApolloClient';
 
 import { getHasPrefinanceProjectsQuery } from 'lib/queries/react-query/registry-server/getHasPrefinanceProjectsQuery/getHasPrefinanceProjectsQuery';
 
+import { LayoutSharedComponents } from 'components/layout/Layout.SharedComponents';
+
 import { RegenProviders } from './Regen.Providers';
 
 type Props = {
@@ -38,7 +40,10 @@ export async function RegenPrefetch({ children }: Props) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <RegenProviders>{children}</RegenProviders>
+      <RegenProviders>
+        {children}
+        <LayoutSharedComponents />
+      </RegenProviders>
     </HydrationBoundary>
   );
 }

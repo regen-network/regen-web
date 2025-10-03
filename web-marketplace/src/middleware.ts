@@ -51,7 +51,22 @@ export const middleware = (request: NextRequest) => {
   // No locale in URL (first time visitor or explicit default choice)
   const cookieLocale = request.cookies.get(COOKIE_LOCALE)?.value;
 
-  // If no cookie exists, detect browser locale
+  // 1) If cookie exists and is supported, honor it. For default locale, keep clean URL.
+  if (cookieLocale && locales.includes(cookieLocale)) {
+    if (cookieLocale !== DEFAULT_LOCALE) {
+      nextUrl.pathname = `/${cookieLocale}${pathname}`;
+      const response = NextResponse.redirect(nextUrl.href);
+      setLocaleCookie(response, cookieLocale);
+      return response;
+    }
+    // Default locale: rewrite internally so [lang] routes match, keep URL clean
+    nextUrl.pathname = `/${DEFAULT_LOCALE}${pathname}`;
+    const response = NextResponse.rewrite(nextUrl);
+    setLocaleCookie(response, DEFAULT_LOCALE);
+    return response;
+  }
+
+  // 2) If no cookie exists, detect browser locale
   if (!cookieLocale) {
     const acceptLanguage = request.headers.get('accept-language') || '';
     const parsed = acceptLanguage
@@ -76,8 +91,7 @@ export const middleware = (request: NextRequest) => {
     }
   }
 
-  // No locale in URL means default locale (either explicit choice or browser default)
-  // For default locale, internally rewrite to the default locale prefixed route
+  // 3) Fallback: default locale. Internally rewrite to default prefixed route
   // so the app's [lang] routes are matched, but keep the URL path without prefix.
   nextUrl.pathname = `/${DEFAULT_LOCALE}${pathname}`;
   const response = NextResponse.rewrite(nextUrl);

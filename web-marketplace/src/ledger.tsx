@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { OfflineSigner, Registry } from '@cosmjs/proto-signing';
+import { GeneratedType, OfflineSigner, Registry } from '@cosmjs/proto-signing';
 import { AminoTypes, SigningStargateClient } from '@cosmjs/stargate';
 import {
   cosmosAminoConverters,
@@ -43,14 +43,21 @@ const LedgerContext = React.createContext<ContextValue>({
   error: undefined,
 });
 
+type StargateOfflineSigner = Parameters<
+  typeof SigningStargateClient.connectWithSigner
+>[1];
+type StargateConnectOptions = Parameters<
+  typeof SigningStargateClient.connectWithSigner
+>[2];
+
 export async function setupSigningClient(
   setSigningClient: UseStateSetter<SigningStargateClient | undefined>,
   setLoading: UseStateSetter<boolean>,
   setError: UseStateSetter<unknown>,
   signer: OfflineSigner,
-) {
+): Promise<void> {
   if (chain && ledgerRPCUri) {
-    const protoRegistry = [
+    const protoRegistry: ReadonlyArray<[string, GeneratedType]> = [
       ...cosmosProtoRegistry,
       ...ibcProtoRegistry,
       ...regenProtoRegistry,
@@ -60,31 +67,44 @@ export async function setupSigningClient(
       ...cosmosAminoConverters,
       ...ibcAminoConverters,
       ...regenAminoConverters,
+    } as const;
+
+    const buildLocalRegistry = (
+      entries: ReadonlyArray<[string, GeneratedType]>,
+    ): Registry => {
+      const r = new Registry();
+      for (const [typeUrl, generatedType] of entries) {
+        r.register(typeUrl, generatedType);
+      }
+      return r;
     };
 
-    const registry = new Registry(protoRegistry);
+    const registry = buildLocalRegistry(protoRegistry);
     const aminoTypes = new AminoTypes(aminoConverters);
 
     setLoading(true);
     try {
+      const options: StargateConnectOptions = {
+        registry:
+          registry as unknown as NonNullable<StargateConnectOptions>['registry'],
+        aminoTypes,
+      };
+
       const signingClient = await SigningStargateClient.connectWithSigner(
         ledgerRPCUri,
-        signer,
-        {
-          registry,
-          aminoTypes,
-        },
+        signer as unknown as StargateOfflineSigner,
+        options,
       );
       setSigningClient(signingClient);
       setLoading(false);
     } catch (e) {
-      setError(e);
+      setError(e as unknown);
       setLoading(false);
     }
   }
 }
 
-export async function getRPCQueryClient() {
+export async function getRPCQueryClient(): Promise<QueryClient> {
   const { createRPCQueryClient } = regen.ClientFactory;
   const client = await createRPCQueryClient({
     rpcEndpoint: ledgerRPCUri,
@@ -95,14 +115,14 @@ export async function getRPCQueryClient() {
     rpcEndpoint: ledgerRPCUri,
   });
 
-  return { ...ibcClient, ...client };
+  return { ...ibcClient, ...client } as QueryClient;
 }
 
 async function setupRPCQueryClient(
   setQueryClient: UseStateSetter<QueryClient | undefined>,
   setLoading: UseStateSetter<boolean>,
   setError: UseStateSetter<unknown>,
-) {
+): Promise<void> {
   if (ledgerRPCUri) {
     setLoading(true);
     try {
@@ -110,7 +130,7 @@ async function setupRPCQueryClient(
       setQueryClient(queryClient);
       setLoading(false);
     } catch (e) {
-      setError(e);
+      setError(e as unknown);
       setLoading(false);
     }
   }

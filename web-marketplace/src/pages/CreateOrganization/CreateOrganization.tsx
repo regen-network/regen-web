@@ -8,6 +8,7 @@ import React, {
 import { useNavigate } from 'react-router-dom';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { useSetAtom } from 'jotai';
 import { v4 as uuidv4 } from 'uuid';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
@@ -15,7 +16,9 @@ import { SadBeeModal } from 'web-components/src/components/modal/SadBeeModal/Sad
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Title as H } from 'web-components/src/components/typography';
 
+import type { AccountByIdQuery } from 'generated/graphql';
 import { AccountType } from 'generated/graphql';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { SAVE_TEXT } from 'lib/constants/shared.constants';
 import {
@@ -45,6 +48,38 @@ import { InviteMembersStep } from './steps/InviteMembersStep';
 import { MigrateProjectsStep } from './steps/MigrateProjectsStep';
 import { OrganizationProfileStep } from './steps/OrganizationProfileStep';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
+
+type AccountAssignmentNode = {
+  roleName?: string | null;
+  visible?: boolean | null;
+  daoByDaoAddress?: {
+    address?: string | null;
+    organizationByDaoAddress?: {
+      name?: string | null;
+    } | null;
+  } | null;
+};
+
+const getVisibleOrganizationAssignments = (
+  account?: AccountByIdQuery['accountById'],
+): AccountAssignmentNode[] => {
+  if (!account || !('assignmentsByAccountId' in account)) return [];
+  const nodes = (
+    (
+      account as {
+        assignmentsByAccountId?: {
+          nodes?: Array<AccountAssignmentNode | null>;
+        };
+      }
+    ).assignmentsByAccountId?.nodes ?? []
+  ).filter(Boolean) as AccountAssignmentNode[];
+
+  return nodes.filter(
+    assignment =>
+      assignment.visible &&
+      assignment.daoByDaoAddress?.organizationByDaoAddress?.name,
+  );
+};
 
 type CreateOrganizationContentProps = {
   organizationProgress: OrgProgressMap;
@@ -356,6 +391,8 @@ function CreateOrganizationContent({
 export default function CreateOrganizationPage(): JSX.Element {
   const navigate = useNavigate();
   const { _ } = useLingui();
+  const { activeAccount } = useAuth();
+  const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const organizationProgress = useOrganizationProgress();
   const [showDiscardModal, setShowDiscardModal] = useState(false);
   const currentProgressEntry = useMemo(
@@ -368,6 +405,27 @@ export default function CreateOrganizationPage(): JSX.Element {
     [currentProgressEntry],
   );
 
+  const visibleOrganizationAssignments = useMemo(
+    () => getVisibleOrganizationAssignments(activeAccount),
+    [activeAccount],
+  );
+  const hasOrganizationAssignment = visibleOrganizationAssignments.length > 0;
+
+  useEffect(() => {
+    if (hasOrganizationAssignment) {
+      setErrorBannerText(
+        _(
+          msg`You already belong to an organization. Please manage your existing organization from your dashboard.`,
+        ),
+      );
+      navigate('/dashboard', { replace: true });
+    }
+  }, [hasOrganizationAssignment, navigate, setErrorBannerText, _]);
+
+  if (hasOrganizationAssignment) {
+    return <></>;
+  }
+
   const handleRequestClose = () => setShowDiscardModal(true);
   const handleCancelDiscard = () => setShowDiscardModal(false);
   const handleConfirmDiscard = () => {
@@ -378,6 +436,7 @@ export default function CreateOrganizationPage(): JSX.Element {
     );
     navigate('/dashboard', { replace: true });
   };
+
   return (
     <>
       {/* Close button now rendered inside MultiStepTemplate via closable prop */}

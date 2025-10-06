@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Box } from '@mui/system';
 
 import Modal, { RegenModalProps } from 'web-components/src/components/modal';
@@ -12,7 +13,7 @@ export interface Props extends RegenModalProps {
   state?: AccountConnectModalState;
   wallets: LoginProvider[];
   title?: string;
-  description?: string;
+  description?: ReactNode;
 }
 
 const AccountConnectWalletModal = ({

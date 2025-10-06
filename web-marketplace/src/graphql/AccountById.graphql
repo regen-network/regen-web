@@ -34,5 +34,17 @@ query AccountById($id: UUID!) {
         anonymous
       }
     }
+    assignmentsByAccountId {
+      nodes {
+        roleName
+        visible
+        daoByDaoAddress {
+          address
+          organizationByDaoAddress {
+            name
+          }
+        }
+      }
+    }
   }
 }

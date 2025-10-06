@@ -370,7 +370,7 @@ export const PostForm = ({
 
       {!noFiles && (
         <Controller
-          name="canDownloadFiles"
+          name="disallowFileDownloads"
           control={form.control}
           defaultValue={false}
           render={({ field }) => (

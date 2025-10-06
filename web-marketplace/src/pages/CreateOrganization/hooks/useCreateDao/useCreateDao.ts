@@ -32,8 +32,8 @@ type CreateDaoParams = {
   backgroundImage?: string;
   websiteLink?: string;
   twitterLink?: string;
-  organizationId?: string;
-  currentAccountId?: string;
+  organizationId: string;
+  currentAccountId: string;
 };
 
 type CreateDaoResult = {
@@ -42,7 +42,7 @@ type CreateDaoResult = {
   cw4GroupAddress: string;
   rbamAddress: string;
   transactionHash: string;
-  organizationId?: string;
+  organizationId: string;
 };
 
 /**
@@ -85,6 +85,7 @@ export const useCreateDao = () => {
         walletAddress,
         name: params.name,
         currentAccountId: params.currentAccountId,
+        organizationId: params.organizationId,
       });
 
       try {
@@ -124,10 +125,6 @@ export const useCreateDao = () => {
         const rewriteMediaUrl = (value?: string): string | null => {
           const trimmed = value?.trim();
           if (!trimmed) return null;
-          if (!params.organizationId || !params.currentAccountId) {
-            return trimmed;
-          }
-
           const accountSegment = `${PROFILE_S3_PATH}/${params.currentAccountId}/`;
           if (!trimmed.includes(accountSegment)) {
             return trimmed;
@@ -297,6 +294,12 @@ export const useCreateDao = () => {
         if (sanitizedTwitter) {
           initialItems.push({ key: 'twitter', value: sanitizedTwitter });
         }
+
+        initialItems.push({ key: 'dao_rbam_address', value: rbamAddress });
+        initialItems.push({
+          key: 'dao_cw4_group_address',
+          value: cw4GroupAddress,
+        });
 
         const executeMsg = {
           instantiate2_contract_with_self_admin: {

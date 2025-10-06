@@ -8,6 +8,7 @@ import React, {
 import { useNavigate } from 'react-router-dom';
 import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
+import { v4 as uuidv4 } from 'uuid';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
 import { SadBeeModal } from 'web-components/src/components/modal/SadBeeModal/SadBeeModal';
@@ -68,6 +69,7 @@ function CreateOrganizationContent({
   const { createDao, isCreating } = useCreateDao();
   const daoAddressRef = useRef<string | undefined>(undefined);
   const organizationNameRef = useRef<string | undefined>(undefined);
+  const organizationIdRef = useRef<string | undefined>(undefined);
   const [hasUnfinishedOrganization, setHasUnfinishedOrganization] =
     useState(false);
 
@@ -89,13 +91,26 @@ function CreateOrganizationContent({
     const storedDaoAddress = (data as Record<string, any>)?.dao?.daoAddress as
       | string
       | undefined;
+    const storedOrganizationId = (data as Record<string, any>)?.dao
+      ?.organizationId as string | undefined;
     const storedName = (data as Record<string, any>)?.name as
       | string
       | undefined;
 
     if (storedDaoAddress) {
       daoAddressRef.current = storedDaoAddress;
+      organizationIdRef.current =
+        storedOrganizationId ?? organizationIdRef.current;
       organizationNameRef.current = storedName ?? organizationNameRef.current;
+
+      if (organizationIdRef.current) {
+        console.info(
+          '[CreateOrganization] restored organization id from draft',
+          {
+            organizationId: organizationIdRef.current,
+          },
+        );
+      }
 
       const existing = organizationProgress[storedDaoAddress];
       const nextStep = Math.max(maxAllowedStep, 1);
@@ -178,6 +193,8 @@ function CreateOrganizationContent({
   const handleOrganizationProfileSaved = useCallback(
     async (values: EditProfileFormSchemaType) => {
       try {
+        const currentAccountId = activeAccount?.id;
+
         if (hasUnfinishedOrganization && daoAddressRef.current) {
           organizationNameRef.current = values.name;
           setOrganizationProgressStep(daoAddressRef.current, 1, values.name);
@@ -185,11 +202,30 @@ function CreateOrganizationContent({
             ...values,
             dao: (data as Record<string, unknown>)?.dao ?? {
               daoAddress: daoAddressRef.current,
+              organizationId: organizationIdRef.current,
             },
           };
           handleSaveNext(payload);
           return;
         }
+
+        if (!currentAccountId) {
+          throw new Error(
+            'Active account is required to create an organization.',
+          );
+        }
+
+        const isNewOrganization = !organizationIdRef.current;
+        const organizationId = organizationIdRef.current ?? uuidv4();
+        organizationIdRef.current = organizationId;
+        console.info(
+          isNewOrganization
+            ? '[CreateOrganization] generated organization id'
+            : '[CreateOrganization] reusing existing organization id',
+          {
+            organizationId,
+          },
+        );
 
         const daoResult = await createDao({
           name: values.name,
@@ -198,10 +234,18 @@ function CreateOrganizationContent({
           backgroundImage: values.backgroundImage,
           websiteLink: values.websiteLink,
           twitterLink: values.twitterLink,
+          organizationId,
+          currentAccountId,
+        });
+
+        console.info('[CreateOrganization] dao created', {
+          organizationId: daoResult.organizationId,
+          daoAddress: daoResult.daoAddress,
         });
 
         daoAddressRef.current = daoResult.daoAddress;
         organizationNameRef.current = values.name;
+        organizationIdRef.current = daoResult.organizationId;
         setOrganizationProgressStep(daoResult.daoAddress, 1, values.name);
 
         const payload: Record<string, unknown> = {

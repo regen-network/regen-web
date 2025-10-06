@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Trans } from '@lingui/macro';
 import { Box } from '@mui/system';
 
@@ -11,7 +12,7 @@ import { LoginModalProviders } from './AccountConnectWalletModal.Providers';
 export interface Props {
   wallets: LoginProvider[];
   title?: string;
-  description?: string;
+  description?: ReactNode;
 }
 
 const LoginModalSelect = ({
@@ -28,7 +29,10 @@ const LoginModalSelect = ({
         {description || (
           <Trans>
             Learn more about wallets in our{' '}
-            <Link href="https://guides.regen.network/guides/wallets">
+            <Link
+              href="https://guides.regen.network/guides/wallets"
+              className="font-bold bg-clip-text text-transparent bg-blue-green-gradient"
+            >
               user guide.
             </Link>
           </Trans>

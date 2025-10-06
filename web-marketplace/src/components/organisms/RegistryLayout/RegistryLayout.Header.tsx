@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/styles';
@@ -10,7 +11,7 @@ import { UserMenuItems } from 'web-components/src/components/header/components/U
 import { getUserMenuItems } from 'web-components/src/components/header/components/UserMenuItems.utils';
 import { Theme } from 'web-components/src/theme/muiTheme';
 
-import { AccountFieldsFragment, Maybe } from 'generated/graphql';
+import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import {
   OrgProgressEntry,
@@ -162,7 +163,6 @@ const RegistryLayoutHeader: React.FC = () => {
     };
   }, [unfinishedEntry, _]);
 
-  // Simple route handlers for org actions (kept minimal; no backend work here)
   const createOrganization = useMemo(
     () => () => {
       if (privActiveAccount && !isConnected) {
@@ -210,13 +210,63 @@ const RegistryLayoutHeader: React.FC = () => {
     navigate,
   ]);
 
+  const connectWalletDescription = (
+    <Trans>
+      Creating an organization requires signing a blockchain transaction. Learn
+      more about wallets in our{' '}
+      <Link
+        href="https://guides.regen.network/guides/wallets"
+        className="font-bold bg-clip-text text-transparent bg-blue-green-gradient"
+      >
+        user guide.
+      </Link>
+    </Trans>
+  );
+
   const menuItems = useMemo(
     () => getMenuItems(pathname, _, !!hasPrefinanceProjects),
     [pathname, _, hasPrefinanceProjects],
   );
 
+  const organizationProfileFromAssignments = useMemo(() => {
+    const assignments = activeAccount?.assignmentsByAccountId?.nodes;
+    console.log(activeAccount);
+
+    console.log(assignments);
+
+    if (!assignments || assignments.length === 0) return undefined;
+
+    const visibleAssignment = assignments.find(
+      assignment =>
+        assignment?.visible &&
+        assignment.daoByDaoAddress?.address &&
+        assignment.daoByDaoAddress?.organizationByDaoAddress?.name,
+    );
+
+    if (!visibleAssignment) return undefined;
+
+    const daoAddress = visibleAssignment.daoByDaoAddress?.address;
+    if (!daoAddress) return undefined;
+
+    const organizationName =
+      visibleAssignment.daoByDaoAddress?.organizationByDaoAddress?.name ??
+      _(DEFAULT_NAME);
+
+    return {
+      id: daoAddress,
+      name: organizationName,
+      profileImage: DEFAULT_PROFILE_COMPANY_AVATAR,
+      truncatedAddress: getAddress({ walletAddress: daoAddress }),
+      address: daoAddress,
+      profileLink: `/profiles/${daoAddress}`,
+      dashboardLink: '/dashboard',
+    };
+  }, [activeAccount?.assignmentsByAccountId?.nodes, _]);
+
   const menuOrganizationProfile =
-    organizationProfile ?? fallbackOrganizationProfile;
+    organizationProfile ??
+    fallbackOrganizationProfile ??
+    organizationProfileFromAssignments;
 
   const userMenuItems = useMemo(
     () =>
@@ -329,7 +379,7 @@ const RegistryLayoutHeader: React.FC = () => {
         open={isConnectWalletModalOpen}
         onClose={handleConnectWalletModalClose}
         title="Please connect with Keplr to create an organization"
-        description="Creating an organization requires signing a blockchain transaction. Learn more about wallets in our user guide."
+        description={connectWalletDescription}
         wallets={[
           {
             ...walletsUiConfig[0],

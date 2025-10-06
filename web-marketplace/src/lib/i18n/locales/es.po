@@ -21,9 +21,8 @@ msgstr ""
 
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
-msgid ""
-msgstr ""
-
+#: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
+#: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
@@ -43,8 +42,8 @@ msgstr ""
 #: src/components/organisms/CreditActivityTable/CreditActivityTable.tsx:65
 #: src/pages/CreditClassDetails/CreditClassDetailsWithContent/CreditClassDetailsWithContent.constants.ts:35
 #: src/components/organisms/DashboardNavigation/DashboardNavigation.Footer.tsx:23
-#~ msgid " Exit to homepage "
-#~ msgstr "Salir a la página de inicio"
+msgid " Exit to homepage "
+msgstr "Salir a la página de inicio"
 
 #: src/lib/constants/shared.constants.tsx:96
 msgid "- see less"
@@ -153,7 +152,7 @@ msgstr "{remainingStoryTitleCharacters, plural, one {{remainingStoryTitleCharact
 msgid "{remainingSummaryCharacters, plural, one {{remainingSummaryCharacters} character remaining} other {{remainingSummaryCharacters} characters remaining}}"
 msgstr "{remainingSummaryCharacters, plural, one {{remainingSummaryCharacters} carácter} other {{remainingSummaryCharacters} caracteres}}"
 
-#: src/components/organisms/PostForm/PostForm.tsx:265
+#: src/components/organisms/PostForm/PostForm.tsx:271
 msgid "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} character remaining} other {{remainingTitleCharacters} characters remaining}}"
 msgstr "{remainingTitleCharacters, plural, one {{remainingTitleCharacters} carácter restante} other {{remainingTitleCharacters} caracteres restantes}}"
 
@@ -280,7 +279,7 @@ msgstr "1 publicación privada"
 msgid "1 Ton of CO2e"
 msgstr "1 tonelada de CO2e"
 
-#: src/components/organisms/PostForm/PostForm.tsx:292
+#: src/components/organisms/PostForm/PostForm.tsx:298
 msgid "5MB max. Supported file types include text, spreadsheets, images, and video files."
 msgstr "Máximo de 5 MB. Los tipos de archivos admitidos incluyen texto, hojas de cálculo, imágenes y archivos de video."
 
@@ -479,7 +478,7 @@ msgstr "todos los perfiles"
 msgid "All projects"
 msgstr "Todos los proyectos"
 
-#: src/components/organisms/PostForm/PostForm.tsx:446
+#: src/components/organisms/PostForm/PostForm.tsx:477
 msgid "All uploaded files and their location data will be hidden from public view."
 msgstr "Todos los archivos cargados y sus datos de ubicación quedarán ocultos a la vista del público."
 
@@ -1217,7 +1216,7 @@ msgstr "Contraer la barra lateral"
 msgid "coming soon"
 msgstr "muy pronto"
 
-#: src/components/organisms/PostForm/PostForm.tsx:278
+#: src/components/organisms/PostForm/PostForm.tsx:284
 msgid "Comment"
 msgstr "Comentario"
 
@@ -2224,7 +2223,7 @@ msgstr "Proyectos destacados"
 msgid "File is uploading"
 msgstr "El archivo se está cargando"
 
-#: src/components/organisms/PostForm/PostForm.tsx:418
+#: src/components/organisms/PostForm/PostForm.tsx:449
 msgid "File locations can still be shared privately via a secret link."
 msgstr "Las ubicaciones de los archivos aún se pueden compartir de forma privada a través de un enlace secreto."
 
@@ -2236,7 +2235,7 @@ msgstr "Nombre del archivo"
 msgid "file name(s)"
 msgstr "nombre(s) de archivo"
 
-#: src/components/organisms/PostForm/PostForm.tsx:289
+#: src/components/organisms/PostForm/PostForm.tsx:295
 msgid "Files"
 msgstr "Archivos"
 
@@ -2249,7 +2248,7 @@ msgstr "Los archivos son privados"
 msgid "Files available on request"
 msgstr "Archivos disponibles a pedido"
 
-#: src/components/organisms/PostForm/PostForm.tsx:453
+#: src/components/organisms/PostForm/PostForm.tsx:484
 msgid "Files can still be shared privately via secret link."
 msgstr "Los archivos aún se pueden compartir de forma privada a través de un enlace secreto."
 
@@ -2784,19 +2783,19 @@ msgstr "Hacer que Anónimo seleccione"
 msgid "Make sure this is the correct REGEN address. <0>If you change this to an address you don’t have access to, you will be unable to edit the project.</0>"
 msgstr "Asegúrate de que esta sea la dirección REGEN correcta. <0>Si la cambias a una dirección a la que no tienes acceso, no podrás editar el proyecto.</0>"
 
-#: src/components/organisms/PostForm/PostForm.tsx:469
+#: src/components/organisms/PostForm/PostForm.tsx:500
 msgid "Make the entire post private"
 msgstr "Hacer que toda la publicación sea privada"
 
-#: src/components/organisms/PostForm/PostForm.tsx:383
+#: src/components/organisms/PostForm/PostForm.tsx:414
 msgid "Make the entire post public"
 msgstr "Hacer pública toda la publicación"
 
-#: src/components/organisms/PostForm/PostForm.tsx:435
+#: src/components/organisms/PostForm/PostForm.tsx:466
 msgid "Make the files and location data private"
 msgstr "Hacer que los archivos y los datos de ubicación sean privados"
 
-#: src/components/organisms/PostForm/PostForm.tsx:400
+#: src/components/organisms/PostForm/PostForm.tsx:431
 msgid "Make the location data private"
 msgstr "Hacer que los datos de ubicación sean privados"
 
@@ -3055,7 +3054,7 @@ msgstr "Nueva dirección de administrador"
 msgid "New confirmation code sent"
 msgstr "Nuevo código de confirmación enviado"
 
-#: src/components/organisms/PostForm/PostForm.tsx:251
+#: src/components/organisms/PostForm/PostForm.tsx:257
 msgid "New post"
 msgstr "Nueva publicación"
 
@@ -3163,7 +3162,7 @@ msgstr "Nota / Enlace"
 msgid "Note: all location data can be made private on the main create post form."
 msgstr "Nota: todos los datos de ubicación pueden hacerse privados en el formulario principal de creación de publicaciones."
 
-#: src/components/organisms/PostForm/PostForm.tsx:516
+#: src/components/organisms/PostForm/PostForm.tsx:547
 msgid "NOTE: As posts are anchored to the blockchain, they are not editable once published"
 msgstr "NOTA: Como las publicaciones están ancladas a la cadena de bloques, no se pueden editar una vez publicadas."
 
@@ -3193,7 +3192,7 @@ msgstr "Método de generación de compensación"
 msgid "old project admin"
 msgstr "antiguo administrador del proyecto"
 
-#: src/components/organisms/PostForm/PostForm.tsx:411
+#: src/components/organisms/PostForm/PostForm.tsx:442
 msgid "Only the locations of the files will be hidden from public view."
 msgstr "Sólo las ubicaciones de los archivos quedarán ocultas a la vista del público."
 
@@ -3286,7 +3285,7 @@ msgstr "Nombre de la organización"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:41
 msgid "Organization profile"
-msgstr ""
+msgstr "Perfil de la organización"
 
 #: src/pages/Projects/AllProjects/AllProjects.ProjectFilterBody.utils.tsx:104
 msgid "Orinoco"
@@ -3359,7 +3358,7 @@ msgstr "Panel personal"
 
 #: src/components/organisms/RegistryLayout/RegistryLayout.constants.ts:40
 msgid "Personal profile"
-msgstr ""
+msgstr "Perfil personal"
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:50
 msgid "Personal Profile"
@@ -3499,7 +3498,7 @@ msgstr "Pestañas de cartera"
 msgid "Position and size your image"
 msgstr "Posiciona y dimensiona tu imagen"
 
-#: src/components/organisms/PostForm/PostForm.tsx:405
+#: src/components/organisms/PostForm/PostForm.tsx:436
 msgid "Post and files are public"
 msgstr "Las publicaciones y los archivos son públicos."
 
@@ -3511,7 +3510,7 @@ msgstr "La publicación ha sido eliminada"
 msgid "Post is private"
 msgstr "La publicación es privada"
 
-#: src/components/organisms/PostForm/PostForm.tsx:440
+#: src/components/organisms/PostForm/PostForm.tsx:471
 msgid "Post is public"
 msgstr "La publicación es pública"
 
@@ -3630,7 +3629,7 @@ msgstr "Privacidad"
 msgid "Privacy Policy"
 msgstr "política de privacidad"
 
-#: src/components/organisms/PostForm/PostForm.tsx:371
+#: src/components/organisms/PostForm/PostForm.tsx:402
 msgid "Privacy settings"
 msgstr "Configuración de privacidad"
 
@@ -3769,6 +3768,10 @@ msgstr "Duración del proyecto"
 #: src/components/molecules/ProjectPageMetadata/ProjectPageMetadata.tsx:144
 msgid "project end date"
 msgstr "fecha de finalización del proyecto"
+
+#: src/components/organisms/PostForm/PostForm.tsx:390
+msgid "Project files cannot be downloaded"
+msgstr "No se pueden descargar los archivos del proyecto"
 
 #: src/pages/ProjectFinished/ProjectFinished.tsx:58
 msgid "Project has been created!"
@@ -4233,7 +4236,7 @@ msgstr "Ahorrar"
 msgid "SAVE"
 msgstr "AHORRAR"
 
-#: src/components/organisms/PostForm/PostForm.tsx:510
+#: src/components/organisms/PostForm/PostForm.tsx:541
 msgid "save draft"
 msgstr "guardar borrador"
 
@@ -4324,7 +4327,6 @@ msgstr "Seleccionar opción"
 msgid "Select role"
 msgstr "Seleccionar rol"
 
-#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:50
 #: src/pages/Dashboard/MyEcocredits/MyEcocredits.constants.ts:11
 msgid "Sell"
 msgstr "Vender"
@@ -4349,8 +4351,7 @@ msgstr "ID DE ORDEN DE VENTA"
 msgid "sell order id:"
 msgstr "ID de orden de venta:"
 
-#: src/components/organisms/SellOrdersTable/SellOrdersTable.tsx:61
-#: src/components/organisms/UserSellOrders/UserSellOrders.Toolbar.tsx:48
+#: src/components/organisms/DashboardNavigation/DashboardNavigation.utils.tsx:50
 msgid "Sell orders"
 msgstr "Órdenes de venta"
 
@@ -4633,7 +4634,7 @@ msgstr "¡Copiado exitosamente!"
 msgid "Successfully issued credit batches"
 msgstr "Lotes de créditos emitidos con éxito"
 
-#: src/components/organisms/PostForm/PostForm.tsx:257
+#: src/components/organisms/PostForm/PostForm.tsx:263
 msgid "Summarize this update."
 msgstr "Resuma esta actualización."
 
@@ -4762,11 +4763,11 @@ msgstr "La integración del conocimiento de las comunidades locales, las estruct
 msgid "The page you are looking for might have been temporarily removed or had its name changed."
 msgstr "Es posible que la página que estás buscando haya sido eliminada temporalmente o haya cambiado su nombre."
 
-#: src/components/organisms/PostForm/PostForm.tsx:475
+#: src/components/organisms/PostForm/PostForm.tsx:506
 msgid "The post and all of its contents will be hidden from public view."
 msgstr "La publicación y todo su contenido quedarán ocultos a la vista del público."
 
-#: src/components/organisms/PostForm/PostForm.tsx:482
+#: src/components/organisms/PostForm/PostForm.tsx:513
 msgid "The post and files still can be shared privately via secret link."
 msgstr "La publicación y los archivos aún se pueden compartir de forma privada a través de un enlace secreto."
 
@@ -4921,7 +4922,7 @@ msgstr "Este nombre aparecerá en el certificado de jubilación y es el nombre d
 msgid "This name will appear on the retirement certificate."
 msgstr "Este nombre aparecerá en el certificado de retirada."
 
-#: src/components/organisms/PostForm/PostForm.tsx:388
+#: src/components/organisms/PostForm/PostForm.tsx:419
 msgid "This post and all of its files will be visible."
 msgstr "Esta publicación y todos sus archivos serán visibles."
 
@@ -4958,7 +4959,7 @@ msgid "Timestamp"
 msgstr "Marca de tiempo"
 
 #: src/components/organisms/OrganizationMembers/OrganizationMembers.constants.tsx:52
-#: src/components/organisms/PostForm/PostForm.tsx:256
+#: src/components/organisms/PostForm/PostForm.tsx:262
 msgid "Title"
 msgstr "Título"
 
@@ -5269,7 +5270,7 @@ msgstr "Ver todas las órdenes de venta"
 #~ msgid "VIEW ALL SELL ORDERS"
 #~ msgstr "VER TODOS LOS ÓRDENES DE VENTA"
 
-#: src/components/organisms/PostForm/PostForm.tsx:298
+#: src/components/organisms/PostForm/PostForm.tsx:304
 msgid "View all supported file types»"
 msgstr "Ver todos los tipos de archivos compatibles»"
 
@@ -5505,7 +5506,7 @@ msgstr "ups! Cancelar"
 msgid "Wilmot, Carbon<0>Plus</0> Grasslands Credits"
 msgstr "Wilmot, créditos de pastizales Carbon<0>Plus</0>"
 
-#: src/components/organisms/PostForm/PostForm.tsx:279
+#: src/components/organisms/PostForm/PostForm.tsx:285
 msgid "Write a short comment or longer project update."
 msgstr "Escriba un comentario breve o una actualización más larga del proyecto."
 

@@ -121,7 +121,7 @@ export default function useMsgClient(
       if (!signingClient || !txBytes) return;
       handleTxQueued && handleTxQueued();
       const _deliverTxResponse = await signingClient.broadcastTx(txBytes);
-      // The transaction succeeded iff code is 0.
+      // The transaction succeeded if code is 0.
       // TODO: this can give false positives. Some errors return code 0.
       if (_deliverTxResponse.code !== 0) {
         throw new Error(_deliverTxResponse.rawLog);

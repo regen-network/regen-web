@@ -81,6 +81,7 @@ export const useCreateOrUpdateProject = () => {
             queryKey: getAccountProjectsByIdQueryKey({
               id: activeAccount?.id,
             }),
+            refetchType: 'all',
           });
           return projectId;
         }

@@ -9,7 +9,7 @@ import { useStyles } from './HeaderDropdown.styles';
 
 export type HeaderDropdownItemProps = {
   label: string;
-  href?: string;
+  href: string;
   pathname: string;
   linkComponent: React.ElementType<NavLinkProps>;
   importCallback?: () => Promise<any>;

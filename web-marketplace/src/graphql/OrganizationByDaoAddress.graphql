@@ -1,0 +1,21 @@
+query OrganizationByDaoAddress($daoAddress: String!) {
+  organizationByDaoAddress(daoAddress: $daoAddress) {
+    daoByDaoAddress {
+      assignmentsByDaoAddress {
+        nodes {
+          roleName
+          visible
+          accountByAccountId {
+            id
+            name
+            type
+            image
+            addr
+            title
+          }
+        }
+      }
+    }
+
+  }
+}

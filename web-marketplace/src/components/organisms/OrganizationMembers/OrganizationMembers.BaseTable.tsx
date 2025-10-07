@@ -24,7 +24,7 @@ import {
 import { MemberRoleDropdown } from './OrganizationMembers.RoleDropdown';
 import { Member } from './OrganizationMembers.types';
 import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
-import { RemoveMemberModal } from './OrginazationMembers.RemoveMemberModal';
+import { RemoveMemberModal } from './OrganizationMembers.RemoveMemberModal';
 
 type BaseProps = {
   members: Member[];

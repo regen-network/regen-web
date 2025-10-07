@@ -38,6 +38,7 @@ import {
   getValidationError,
   isValidAddressOrEmail,
 } from './InviteMembers.utils';
+import Modal from 'web-components/src/components/modal';
 
 export const InviteMemberModal = ({
   open,
@@ -69,8 +70,6 @@ export const InviteMemberModal = ({
     setIsInputFocused(false);
   };
 
-  if (!open) return null;
-
   const disabledInvite =
     !role ||
     !(addressOrEmail || '').trim() ||
@@ -85,196 +84,181 @@ export const InviteMemberModal = ({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Overlay */}
-      <div
-        className="absolute inset-0 bg-bc-neutral-700/40 backdrop-blur-sm"
-        onMouseDown={() => {
+    <Modal
+      open={open}
+      onClose={() => {
+        resetFields();
+        onClose();
+      }}
+    >
+      <Form
+        form={form}
+        className="flex flex-col"
+        onSubmit={v => {
+          onSubmit({
+            role: v.role as BaseMemberRole | undefined,
+            addressOrEmail: v.addressOrEmail,
+            visible: v.visible,
+          });
           resetFields();
           onClose();
         }}
-      />
-      <div className="bg-bc-neutral-0 rounded-lg relative flex flex-col border-solid border-[1px] border-bc-neutral-300 px-20 py-50 md:p-50 w-[360px] md:w-[560px] md:h-auto shadow-md shadow-bc-neutral-700/10">
-        <Form
-          form={form}
-          className="flex flex-col"
-          onSubmit={v => {
-            onSubmit({
-              role: v.role as BaseMemberRole | undefined,
-              addressOrEmail: v.addressOrEmail,
-              visible: v.visible,
-            });
-            resetFields();
-            onClose();
-          }}
-        >
-          <button
-            onClick={() => {
+      >
+        <Title variant="h4" className="mb-30 md:mb-45 text-center">
+          {_(ADD_MEMBER_LABEL)}
+        </Title>
+
+        {/* Role Section */}
+        <div className="flex flex-col mb-45">
+          <span className="font-bold text-md md:text-lg mb-6">
+            {_(ROLE_LABEL)}
+          </span>
+          <span className="text-sm md:text-md text-bc-neutral-500 mb-5">
+            {_(CHOOSE_A_ROLE_FOR_THIS_USER)}
+          </span>
+          <MemberRoleDropdown
+            role={role as BaseMemberRole}
+            disabled={false}
+            hasWalletAddress={true}
+            onChange={r => setValue('role', r, { shouldDirty: true })}
+            currentUserRole={role as BaseMemberRole}
+            placeholder={_(CHOOSE_ROLE_HELP)}
+            height="h-[50px] md:h-[60px]"
+            fullWidth={true}
+          />
+        </div>
+
+        {/* Address / Email Section */}
+        <div className="flex flex-col mb-0">
+          {/* Reserve 45px below the field so helper text sits within that space, avoiding layout jump */}
+          <div className="relative pb-[45px]">
+            <TextField
+              type="text"
+              label={_(
+                role === 'admin' || role === 'editor'
+                  ? REGEN_ADDRESS_LABEL
+                  : EMAIL_OR_ADDRESS_LABEL,
+              )}
+              description={_(ADMIN_EDITOR_RULE)}
+              labelClassName="font-bold text-md md:text-lg"
+              value={getDisplayValue(addressOrEmail || '')}
+              placeholder={_(ENTER_EMAIL_OR_ADDRESS_PLACEHOLDER)}
+              helperText={
+                validationError ||
+                (errors.addressOrEmail?.message as string | undefined)
+              }
+              error={!!validationError}
+              onFocus={() => {
+                if (blurTimeoutRef.current)
+                  window.clearTimeout(blurTimeoutRef.current);
+                setIsInputFocused(true);
+              }}
+              onBlur={() => {
+                blurTimeoutRef.current = window.setTimeout(
+                  () => setIsInputFocused(false),
+                  120,
+                );
+              }}
+              onChange={e => {
+                setValue('addressOrEmail', e.target.value, {
+                  shouldDirty: true,
+                });
+                if (setDebouncedValue) setDebouncedValue(e.target.value);
+              }}
+              InputProps={{ className: 'h-[50px] md:h-[60px]' }}
+              sx={{
+                position: 'relative',
+                '& .MuiFormHelperText-root': {
+                  position: 'absolute',
+                  top: 'calc(100% + 2px)',
+                  left: 5,
+                  right: 0,
+                  margin: 0,
+                  whiteSpace: 'normal',
+                },
+              }}
+            />
+            {isInputFocused &&
+              (addressOrEmail || '') &&
+              !addressOrEmail.includes('(') &&
+              accountSuggestions.length > 0 && (
+                <ul className="absolute top-[108px] mt-2 left-0 w-full z-10 min-h-[84px] bg-bc-neutral-0 border-[1px] border-solid border-bc-neutral-300 pl-0 rounded shadow-lg overflow-hidden">
+                  {accountSuggestions.map(acc => (
+                    <li
+                      key={acc?.id}
+                      onMouseDown={() => {
+                        if (acc?.addr && acc?.name) {
+                          setValue(
+                            'addressOrEmail',
+                            `${acc.name} (${acc.addr})`,
+                            {
+                              shouldDirty: true,
+                            },
+                          );
+                        } else if (acc?.addr) {
+                          setValue('addressOrEmail', acc.addr, {
+                            shouldDirty: true,
+                          });
+                        }
+                        setIsInputFocused(false);
+                      }}
+                      className="cursor-pointer hover:bg-bc-neutral-100 p-[20px] flex items-center gap-[10px] min-h-[84px]"
+                    >
+                      <UserAvatar
+                        src={acc?.image}
+                        alt={acc?.name || acc?.addr || ''}
+                        size="medium"
+                      />
+                      <div className="flex flex-col flex-1 min-w-0 gap-2">
+                        <span className="text-md font-medium leading-tight">
+                          {acc?.name || acc?.addr}
+                        </span>
+                        {acc?.name && (
+                          <span className="text-sm text-bc-neutral-500 truncate">
+                            ({acc?.addr})
+                          </span>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+          </div>
+        </div>
+
+        {/* Visibility */}
+        <div className="flex flex-col mb-45">
+          <span className="font-bold text-md md:text-lg mb-6">
+            {_(VISIBLE_QUESTION)}
+          </span>
+          <span className="text-sm text-bc-neutral-500 mb-10">
+            {_(VISIBLE_DESCRIPTION)}
+          </span>
+          <div className="flex items-center gap-12">
+            <VisibilitySwitch
+              checked={visible}
+              onChange={(v: boolean) =>
+                setValue('visible', v, { shouldDirty: true })
+              }
+            />
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="mt-0">
+          <CancelButtonFooter
+            onCancel={() => {
               resetFields();
               onClose();
             }}
-            aria-label="close"
-            className="absolute top-10 right-5 p-8 bg-transparent border-none cursor-pointer"
-            type="button"
-          >
-            <CloseIcon className="w-6 h-6 text-bc-neutral-500" />
-          </button>
-          <Title variant="h4" className="mb-30 md:mb-45 text-center">
-            {_(ADD_MEMBER_LABEL)}
-          </Title>
-
-          {/* Role Section */}
-          <div className="flex flex-col mb-45">
-            <span className="font-bold text-md md:text-lg mb-6">
-              {_(ROLE_LABEL)}
-            </span>
-            <span className="text-sm md:text-md text-bc-neutral-500 mb-5">
-              {_(CHOOSE_A_ROLE_FOR_THIS_USER)}
-            </span>
-            <MemberRoleDropdown
-              role={role as BaseMemberRole}
-              disabled={false}
-              hasWalletAddress={true}
-              onChange={r => setValue('role', r, { shouldDirty: true })}
-              currentUserRole={role as BaseMemberRole}
-              placeholder={_(CHOOSE_ROLE_HELP)}
-              height="h-[50px] md:h-[60px]"
-              fullWidth={true}
-            />
-          </div>
-
-          {/* Address / Email Section */}
-          <div className="flex flex-col mb-0">
-            {/* Reserve 45px below the field so helper text sits within that space, avoiding layout jump */}
-            <div className="relative pb-[45px]">
-              <TextField
-                type="text"
-                label={_(
-                  role === 'admin' || role === 'editor'
-                    ? REGEN_ADDRESS_LABEL
-                    : EMAIL_OR_ADDRESS_LABEL,
-                )}
-                description={_(ADMIN_EDITOR_RULE)}
-                labelClassName="font-bold text-md md:text-lg"
-                value={getDisplayValue(addressOrEmail || '')}
-                placeholder={_(ENTER_EMAIL_OR_ADDRESS_PLACEHOLDER)}
-                helperText={
-                  validationError ||
-                  (errors.addressOrEmail?.message as string | undefined)
-                }
-                error={!!validationError}
-                onFocus={() => {
-                  if (blurTimeoutRef.current)
-                    window.clearTimeout(blurTimeoutRef.current);
-                  setIsInputFocused(true);
-                }}
-                onBlur={() => {
-                  blurTimeoutRef.current = window.setTimeout(
-                    () => setIsInputFocused(false),
-                    120,
-                  );
-                }}
-                onChange={e => {
-                  setValue('addressOrEmail', e.target.value, {
-                    shouldDirty: true,
-                  });
-                  if (setDebouncedValue) setDebouncedValue(e.target.value);
-                }}
-                InputProps={{ className: 'h-[50px] md:h-[60px]' }}
-                sx={{
-                  position: 'relative',
-                  '& .MuiFormHelperText-root': {
-                    position: 'absolute',
-                    top: 'calc(100% + 2px)',
-                    left: 5,
-                    right: 0,
-                    margin: 0,
-                    whiteSpace: 'normal',
-                  },
-                }}
-              />
-              {isInputFocused &&
-                (addressOrEmail || '') &&
-                !addressOrEmail.includes('(') &&
-                accountSuggestions.length > 0 && (
-                  <ul className="absolute top-[108px] mt-2 left-0 w-full z-10 min-h-[84px] bg-bc-neutral-0 border-[1px] border-solid border-bc-neutral-300 pl-0 rounded shadow-lg overflow-hidden">
-                    {accountSuggestions.map(acc => (
-                      <li
-                        key={acc?.id}
-                        onMouseDown={() => {
-                          if (acc?.addr && acc?.name) {
-                            setValue(
-                              'addressOrEmail',
-                              `${acc.name} (${acc.addr})`,
-                              {
-                                shouldDirty: true,
-                              },
-                            );
-                          } else if (acc?.addr) {
-                            setValue('addressOrEmail', acc.addr, {
-                              shouldDirty: true,
-                            });
-                          }
-                          setIsInputFocused(false);
-                        }}
-                        className="cursor-pointer hover:bg-bc-neutral-100 p-[20px] flex items-center gap-[10px] min-h-[84px]"
-                      >
-                        <UserAvatar
-                          src={acc?.image}
-                          alt={acc?.name || acc?.addr || ''}
-                          size="medium"
-                        />
-                        <div className="flex flex-col flex-1 min-w-0 gap-2">
-                          <span className="text-md font-medium leading-tight">
-                            {acc?.name || acc?.addr}
-                          </span>
-                          {acc?.name && (
-                            <span className="text-sm text-bc-neutral-500 truncate">
-                              ({acc?.addr})
-                            </span>
-                          )}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-            </div>
-          </div>
-
-          {/* Visibility */}
-          <div className="flex flex-col mb-45">
-            <span className="font-bold text-md md:text-lg mb-6">
-              {_(VISIBLE_QUESTION)}
-            </span>
-            <span className="text-sm text-bc-neutral-500 mb-10">
-              {_(VISIBLE_DESCRIPTION)}
-            </span>
-            <div className="flex items-center gap-12">
-              <VisibilitySwitch
-                checked={visible}
-                onChange={(v: boolean) =>
-                  setValue('visible', v, { shouldDirty: true })
-                }
-              />
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="mt-0">
-            <CancelButtonFooter
-              onCancel={() => {
-                resetFields();
-                onClose();
-              }}
-              cancelLabel={_(CANCEL_LABEL)}
-              label={_(INVITE_LABEL)}
-              disabled={disabledInvite}
-              type="submit"
-              className="h-[53px] w-[138px] text-[18px]"
-            />
-          </div>
-        </Form>
-      </div>
-    </div>
+            cancelLabel={_(CANCEL_LABEL)}
+            label={_(INVITE_LABEL)}
+            disabled={disabledInvite}
+            type="submit"
+            className="h-[53px] w-[138px] text-[18px]"
+          />
+        </div>
+      </Form>
+    </Modal>
   );
 };

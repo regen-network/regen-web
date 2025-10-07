@@ -5,8 +5,8 @@ import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
 export type Member = {
   id: string;
   name: string;
-  email: string;
-  title: string;
+  email?: string | null;
+  title?: string | null;
   organization: string;
   role: BaseMemberRole;
   avatar?: string;

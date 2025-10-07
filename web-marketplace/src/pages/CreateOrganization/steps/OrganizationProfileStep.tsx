@@ -1,10 +1,11 @@
 import React, { useCallback, useRef } from 'react';
-import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 
 import { useOnUploadCallback } from 'pages/Dashboard/hooks/useOnUploadCallback';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
+
+import { CREATE_ORG_ORGANIZATION_NAME_LABEL } from '../CreateOrganization.constants';
 
 type Props = {
   formId: string;
@@ -36,7 +37,7 @@ export const OrganizationProfileStep: React.FC<Props> = ({
       onSubmit={handleSubmit}
       initialValues={initialValues as EditProfileFormSchemaType}
       hideProfileType
-      nameLabel={_(msg`Organization Name`)}
+      nameLabel={_(CREATE_ORG_ORGANIZATION_NAME_LABEL)}
       onUpload={onUpload}
     />
   );

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate';
 import { StdFee } from '@cosmjs/stargate';
+import { i18n } from '@lingui/core';
 import { useSetAtom } from 'jotai';
 
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
@@ -9,6 +10,10 @@ import { useWallet } from 'lib/wallet/wallet';
 
 import { PROFILE_S3_PATH } from 'pages/Dashboard/Dashboard.constants';
 
+import {
+  CREATE_ORG_SIGNING_CLIENT_ERROR,
+  CREATE_ORG_WALLET_REQUIRED_ERROR,
+} from '../../CreateOrganization.constants';
 import {
   cw4GroupCodeId,
   daoDaoCoreCodeId,
@@ -74,9 +79,7 @@ export const useCreateDao = () => {
       const offlineSigner = wallet?.offlineSigner;
 
       if (!offlineSigner || !walletAddress) {
-        throw new Error(
-          'A connected wallet is required to create an organization.',
-        );
+        throw new Error(i18n._(CREATE_ORG_WALLET_REQUIRED_ERROR));
       }
 
       setIsCreating(true);
@@ -113,7 +116,7 @@ export const useCreateDao = () => {
         const signingClient = signingClientRef.current;
 
         if (!signingClient) {
-          throw new Error('Failed to initialize signing client');
+          throw new Error(i18n._(CREATE_ORG_SIGNING_CLIENT_ERROR));
         }
         // TODO: We should query this instead based on CwAdminFactory code id.
         const cwAdminFactoryAddr =

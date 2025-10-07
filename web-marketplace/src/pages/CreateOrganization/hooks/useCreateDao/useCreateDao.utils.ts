@@ -1,18 +1,13 @@
 import { instantiate2Address } from '@cosmjs/cosmwasm-stargate';
-import { fromBase64, fromHex, toBase64, toHex, toUtf8 } from '@cosmjs/encoding';
-import {
-  QueryCodeRequest,
-  QueryCodeResponse,
-} from 'cosmjs-types/cosmwasm/wasm/v1/query';
-import Long from 'long';
+import { fromHex, toBase64, toUtf8 } from '@cosmjs/encoding';
+import type { QueryClient } from '@tanstack/react-query';
 import { nanoid } from 'nanoid';
 
-import {
-  hashContractChecksum,
-  lookupContractChecksum,
-} from './useCreateDao.constants';
-
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
+
+import { CodeDetailsLike, WasmCodeClient } from './useCreateDao.codeDetails';
+import { lookupContractChecksum } from './useCreateDao.constants';
+import { getCodeDetailsQuery } from './useCreateDao.queries';
 
 // Roles and authorizations definitions
 const creditClassesAuthorization = {
@@ -551,15 +546,30 @@ type PredictAddressParams = {
    * The address of the contract creator.
    */
   creator: string;
+  /**
+   * React Query client used to cache checksum lookups.
+   */
+  queryClient: QueryClient;
+  /**
+   * Optional RPC endpoint identifier to scope the cache key.
+   */
+  rpcEndpoint?: string | null;
 };
 
 export const predictAddress = async ({
   client,
   codeId,
   creator,
+  queryClient,
+  rpcEndpoint,
 }: PredictAddressParams) => {
   const salt = toUtf8(nanoid());
-  const checksum = await resolveCodeChecksum(client, codeId);
+  const checksum = await resolveCodeChecksum(
+    client,
+    codeId,
+    queryClient,
+    rpcEndpoint,
+  );
   const predictedAddress = instantiate2Address(
     fromHex(checksum),
     creator,
@@ -575,219 +585,44 @@ export const predictAddress = async ({
 export const encodeJsonToBase64 = (object: any) =>
   toBase64(toUtf8(JSON.stringify(object)));
 
-const UNKNOWN_QUERY_PATH_REGEX = /unknown query path/i;
-
 async function resolveCodeChecksum(
   client: WasmCodeClient,
   codeId: number,
+  queryClient: QueryClient,
+  rpcEndpoint?: string | null,
 ): Promise<string> {
   const staticChecksum = lookupContractChecksum(codeId);
   if (staticChecksum) {
     return staticChecksum;
   }
 
-  const codeDetails = await getCodeDetailsWithFallback(client, codeId);
+  const queryOptions = getCodeDetailsQuery({ client, codeId, rpcEndpoint });
+
+  let codeDetails: CodeDetailsLike | undefined;
+  const anyClient = queryClient as any;
+  if (typeof anyClient.ensureQueryData === 'function') {
+    codeDetails = await anyClient.ensureQueryData(queryOptions);
+  } else {
+    codeDetails = await queryClient.fetchQuery(queryOptions);
+  }
   const checksum = codeDetails?.checksum;
 
   if (checksum) {
-    hashContractChecksum(codeId, checksum);
     return checksum;
   }
 
   throw new Error(`Unable to resolve checksum for codeId ${codeId}`);
 }
 
-type CodeDetailsLike = {
-  id: number;
-  checksum: string;
-  creator: string;
-  data?: Uint8Array;
+export const rewriteMediaUrl = (
+  value: string | undefined,
+  params: { currentAccountId: string; organizationId: string },
+  basePath: string,
+): string | null => {
+  const trimmed = value?.trim();
+  if (!trimmed) return null;
+  const accountSegment = `${basePath}/${params.currentAccountId}/`;
+  if (!trimmed.includes(accountSegment)) return trimmed;
+  const organizationSegment = `${basePath}/${params.organizationId}/`;
+  return trimmed.replace(accountSegment, organizationSegment);
 };
-
-type WasmCodeClient = {
-  getCodeDetails: (codeId: number) => Promise<CodeDetailsLike>;
-  getQueryClient?: () => any;
-  queryClient?: any;
-};
-
-async function getCodeDetailsWithFallback(
-  client: WasmCodeClient,
-  codeId: number,
-): Promise<CodeDetailsLike> {
-  try {
-    const details = await client.getCodeDetails(codeId);
-    return normalizeCodeDetails(details, codeId);
-  } catch (error) {
-    if (!isUnknownQueryPathError(error)) {
-      throw error;
-    }
-
-    const legacyDetails = await getLegacyCodeDetails(client, codeId);
-    if (!legacyDetails) {
-      throw error;
-    }
-    return legacyDetails;
-  }
-}
-
-function normalizeCodeDetails(
-  details: any,
-  fallbackId: number,
-): CodeDetailsLike {
-  if (!details) {
-    return {
-      id: fallbackId,
-      checksum: '',
-      creator: '',
-    };
-  }
-
-  if ('checksum' in details || 'id' in details) {
-    return {
-      id: details.id ?? details.codeId ?? fallbackId,
-      checksum: details.checksum ?? toHex(details.dataHash ?? new Uint8Array()),
-      creator: details.creator ?? '',
-      data: details.data,
-    };
-  }
-
-  if ('codeInfo' in details) {
-    const info = details.codeInfo;
-    return {
-      id: info?.codeId ?? fallbackId,
-      checksum: info?.checksum ?? toHex(info?.dataHash ?? new Uint8Array()),
-      creator: info?.creator ?? '',
-      data: details.data,
-    };
-  }
-
-  return {
-    id: fallbackId,
-    checksum: '',
-    creator: '',
-  };
-}
-
-function isUnknownQueryPathError(error: unknown): boolean {
-  if (!(error instanceof Error)) return false;
-  return UNKNOWN_QUERY_PATH_REGEX.test(error.message);
-}
-
-async function getLegacyCodeDetails(
-  client: WasmCodeClient,
-  codeId: number,
-): Promise<CodeDetailsLike | undefined> {
-  const queryClient = client.getQueryClient?.() ?? client.queryClient;
-
-  if (!queryClient || typeof queryClient.queryAbci !== 'function') {
-    return undefined;
-  }
-
-  const requestMessage = QueryCodeRequest.fromPartial({
-    codeId: Long.fromNumber(codeId),
-  });
-  const requestBytes = QueryCodeRequest.encode(requestMessage).finish();
-  const emptyRequest = new Uint8Array();
-  const encoderFallbacks: Uint8Array[] = [requestBytes, emptyRequest];
-
-  const legacyPaths = [
-    (id: number) => `/cosmwasm.wasm.v1.Query/Code`,
-    (id: number) => `/custom/wasm/code`,
-    (id: number) => `/custom/wasm/code/${id}`,
-    (id: number) => `/wasm/code`,
-    (id: number) => `/wasm/code/${id}`,
-    (id: number) => `/wasm/code?id=${id}`,
-  ];
-
-  for (const buildPath of legacyPaths) {
-    try {
-      for (const request of encoderFallbacks) {
-        const response = await queryClient.queryAbci(
-          buildPath(codeId),
-          request,
-        );
-
-        if (!response?.value || response.value.length === 0) continue;
-
-        const decodedProto = decodeCodeResponse(response.value, codeId);
-        if (decodedProto) {
-          return decodedProto;
-        }
-
-        const decodedJson = decodeJsonCodeResponse(response.value, codeId);
-        if (decodedJson) {
-          return decodedJson;
-        }
-      }
-    } catch (legacyError) {
-      console.warn('Legacy wasm code query failed', legacyError);
-      continue;
-    }
-  }
-
-  return undefined;
-}
-
-function decodeCodeResponse(
-  value: Uint8Array,
-  codeId: number,
-): CodeDetailsLike | undefined {
-  try {
-    const decoded = QueryCodeResponse.decode(value);
-    const info = decoded.codeInfo;
-    const data = decoded.data?.length ? decoded.data : undefined;
-
-    if (!info?.dataHash?.length) return undefined;
-
-    return {
-      id: info.codeId?.toNumber?.() ?? Number(codeId),
-      checksum: toHex(info.dataHash),
-      creator: info.creator || '',
-      data,
-    };
-  } catch (err) {
-    return undefined;
-  }
-}
-
-function decodeJsonCodeResponse(
-  value: Uint8Array,
-  codeId: number,
-): CodeDetailsLike | undefined {
-  try {
-    const decodedString = new TextDecoder().decode(value);
-    if (!decodedString) return undefined;
-
-    const parsed = JSON.parse(decodedString);
-    const codeInfo =
-      parsed?.code_info ||
-      parsed?.CodeInfoResponse ||
-      parsed?.codeInfo ||
-      parsed?.code;
-
-    if (!codeInfo) return undefined;
-
-    const checksumBase64 =
-      codeInfo.data_hash ||
-      codeInfo.dataHash ||
-      codeInfo.code_hash ||
-      codeInfo.codeHash ||
-      parsed?.data_hash ||
-      parsed?.dataHash;
-
-    if (!checksumBase64) return undefined;
-
-    const checksumHex = toHex(fromBase64(checksumBase64));
-    const dataBase64 = parsed?.data || parsed?.Data || parsed?.data_base64;
-    const data = dataBase64 ? fromBase64(dataBase64) : undefined;
-
-    return {
-      id: Number(codeInfo.code_id || codeInfo.codeId || codeId),
-      checksum: checksumHex,
-      creator: codeInfo.creator || '',
-      data,
-    };
-  } catch (err) {
-    return undefined;
-  }
-}

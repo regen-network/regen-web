@@ -1,7 +1,9 @@
 import { useLingui } from '@lingui/react';
+
+import Modal from 'web-components/src/components/modal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Title as H } from 'web-components/src/components/typography';
-import Modal from 'web-components/src/components/modal';
+import UserAvatar from 'web-components/src/components/user/UserAvatar';
 
 import {
   CREATE_ORG_TRANSFER_MODAL_CONFIRM_LABEL,
@@ -13,9 +15,7 @@ import {
 
 type Props = {
   open: boolean;
-  // Triggered when the user clicks SKIP
   onSkip: () => void;
-  // Triggered when the user clicks YES, TRANSFER PROFILE
   onTransfer: () => void;
   name: string;
   avatar?: string;
@@ -61,10 +61,12 @@ export function TransferProfileModal({
               {_(CREATE_ORG_TRANSFER_MODAL_SECTION_TITLE)}
             </p>
             <div className="flex items-center gap-[15px]">
-              <img
+              <UserAvatar
                 src={avatar || ''}
                 alt={name}
-                className="h-[56px] w-[56px] rounded-full bg-bc-neutral-200 object-cover"
+                size="xl"
+                border={false}
+                className="!w-[56px] !h-[56px]"
               />
               <span className="text-[16px] font-bold text-bc-neutral-800">
                 {name}

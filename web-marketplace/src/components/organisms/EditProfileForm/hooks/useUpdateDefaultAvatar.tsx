@@ -9,7 +9,7 @@ import {
 } from 'pages/Dashboard/Dashboard.constants';
 
 type Params = {
-  profileType: AccountType;
+  profileType?: AccountType;
   profileImage: string;
   setProfileImage: (value: string) => void;
 };
@@ -20,6 +20,7 @@ export const useUpdateDefaultAvatar = ({
   profileType,
 }: Params) => {
   useEffect(() => {
+    if (!profileType) return;
     const isOrganization = profileType === AccountType.Organization;
     const defaultAvatar = isOrganization
       ? DEFAULT_PROFILE_COMPANY_AVATAR

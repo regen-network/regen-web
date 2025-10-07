@@ -4,4 +4,5 @@ export type CLIENT_CONFIG = {
   buyButton: boolean;
   loginButton: boolean;
   listProject: boolean;
+  cwAdminFactoryAddress?: string;
 };

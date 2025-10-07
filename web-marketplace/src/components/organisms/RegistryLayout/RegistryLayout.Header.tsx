@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -13,22 +13,10 @@ import { Theme } from 'web-components/src/theme/muiTheme';
 
 import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
-import {
-  OrgProgressEntry,
-  useOrganizationProgress,
-} from 'lib/storage/organizationProgress.storage';
 import { useWallet, Wallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
-import { CREATE_ORG_FORM_ID } from 'pages/CreateOrganization/CreateOrganization.constants';
-import {
-  DEFAULT_NAME,
-  DEFAULT_PROFILE_COMPANY_AVATAR,
-} from 'pages/Dashboard/Dashboard.constants';
-import {
-  getDefaultAvatar,
-  getWalletAddress,
-} from 'pages/Dashboard/Dashboard.utils';
+import { getWalletAddress } from 'pages/Dashboard/Dashboard.utils';
 import { useAuthData } from 'hooks/useAuthData';
 
 import { chainId } from '../../../lib/ledger';
@@ -42,6 +30,7 @@ import {
   ADDRESS_COPIED,
   COPY_ADDRESS,
 } from '../UserAccountSettings/UserAccountSettings.constants';
+import { useOrganizationMenuProfile } from './hooks/useOrganizationMenuProfile';
 import {
   getBorderBottom,
   getHeaderColors,
@@ -101,87 +90,29 @@ const RegistryLayoutHeader: React.FC = () => {
   const { modalState, onButtonClick, onModalClose, walletsUiConfig } =
     useLoginData({});
 
-  const organizationProfile = useMemo(
-    () =>
-      activeAccount?.type === 'ORGANIZATION'
-        ? getProfile({
-            account: activeAccount,
-            privActiveAccount,
-            _,
-            profileLink,
-            dashboardLink: '/dashboard',
-            address: wallet?.address,
-          })
-        : undefined,
-    [activeAccount, privActiveAccount, _, profileLink, wallet?.address],
-  );
-
-  const organizationProgress = useOrganizationProgress();
-
-  const multiStepEntry = useMemo(() => {
-    if (typeof window === 'undefined') return undefined;
-    try {
-      const stored = window.localStorage.getItem(CREATE_ORG_FORM_ID);
-      if (!stored) return undefined;
-      const parsed = JSON.parse(stored);
-      const daoAddress: string | undefined =
-        parsed?.formValues?.dao?.daoAddress;
-      if (!daoAddress) return undefined;
-      return {
-        daoAddress,
-        step: parsed?.maxAllowedStep ?? 0,
-        name: parsed?.formValues?.name,
-        updatedAt: parsed?.updatedAt ?? new Date().toISOString(),
-      } as OrgProgressEntry;
-    } catch (error) {
-      console.warn('Failed to parse create-organization storage', error);
-      return undefined;
-    }
-  }, []);
-
-  const unfinishedEntry = useMemo(() => {
-    const entry = Object.values(organizationProgress)[0];
-    return entry ?? multiStepEntry;
-  }, [organizationProgress, multiStepEntry]);
-
-  const unfinalizedOrgCreation = !!unfinishedEntry;
-
-  const fallbackOrganizationProfile = useMemo(() => {
-    if (!unfinishedEntry) return undefined;
-    const fallbackName =
-      unfinishedEntry.name || multiStepEntry?.name || _(DEFAULT_NAME);
-    return {
-      id: unfinishedEntry.daoAddress,
-      name: fallbackName,
-      profileImage: DEFAULT_PROFILE_COMPANY_AVATAR,
-      truncatedAddress: getAddress({
-        walletAddress: unfinishedEntry.daoAddress,
-      }),
-      address: unfinishedEntry.daoAddress,
-      profileLink: '/organizations/create',
-      dashboardLink: '/organizations/create',
-    };
-  }, [unfinishedEntry, _]);
-
-  const createOrganization = useMemo(
-    () => () => {
-      if (privActiveAccount && !isConnected) {
-        setShouldRedirectToCreateOrg(true);
-        setIsConnectWalletModalOpen(true);
-      } else if (isConnected) {
-        navigate('/organizations/create');
-        onButtonClick();
-      }
-    },
-    [navigate, privActiveAccount, isConnected, onButtonClick],
-  );
-  const finishOrgCreation = useMemo(
-    () => () => {
+  const createOrganization = useCallback(() => {
+    if (privActiveAccount && !isConnected) {
+      setShouldRedirectToCreateOrg(true);
+      setIsConnectWalletModalOpen(true);
       onButtonClick();
+    } else if (isConnected) {
       navigate('/organizations/create');
-    },
-    [navigate, onButtonClick],
-  );
+    }
+  }, [navigate, privActiveAccount, isConnected, onButtonClick]);
+  const finishOrgCreation = useCallback(() => {
+    onButtonClick();
+    navigate('/organizations/create');
+  }, [navigate, onButtonClick]);
+
+  const { defaultAvatar, menuOrganizationProfile, unfinalizedOrgCreation } =
+    useOrganizationMenuProfile({
+      activeAccount,
+      privActiveAccount,
+      wallet,
+      profileLink,
+      dashboardLink: '/dashboard',
+      translate: _,
+    });
 
   const handleConnectWalletModalClose = () => {
     setIsConnectWalletModalOpen(false);
@@ -227,46 +158,6 @@ const RegistryLayoutHeader: React.FC = () => {
     () => getMenuItems(pathname, _, !!hasPrefinanceProjects),
     [pathname, _, hasPrefinanceProjects],
   );
-
-  const organizationProfileFromAssignments = useMemo(() => {
-    const assignments = activeAccount?.assignmentsByAccountId?.nodes;
-    console.log(activeAccount);
-
-    console.log(assignments);
-
-    if (!assignments || assignments.length === 0) return undefined;
-
-    const visibleAssignment = assignments.find(
-      assignment =>
-        assignment?.visible &&
-        assignment.daoByDaoAddress?.address &&
-        assignment.daoByDaoAddress?.organizationByDaoAddress?.name,
-    );
-
-    if (!visibleAssignment) return undefined;
-
-    const daoAddress = visibleAssignment.daoByDaoAddress?.address;
-    if (!daoAddress) return undefined;
-
-    const organizationName =
-      visibleAssignment.daoByDaoAddress?.organizationByDaoAddress?.name ??
-      _(DEFAULT_NAME);
-
-    return {
-      id: daoAddress,
-      name: organizationName,
-      profileImage: DEFAULT_PROFILE_COMPANY_AVATAR,
-      truncatedAddress: getAddress({ walletAddress: daoAddress }),
-      address: daoAddress,
-      profileLink: `/profiles/${daoAddress}`,
-      dashboardLink: '/dashboard',
-    };
-  }, [activeAccount?.assignmentsByAccountId?.nodes, _]);
-
-  const menuOrganizationProfile =
-    organizationProfile ??
-    fallbackOrganizationProfile ??
-    organizationProfileFromAssignments;
 
   const userMenuItems = useMemo(
     () =>
@@ -320,8 +211,6 @@ const RegistryLayoutHeader: React.FC = () => {
       finishOrgCreation,
     ],
   );
-
-  const defaultAvatar = getDefaultAvatar(activeAccount);
 
   const color = headerColors[pathname]
     ? headerColors[pathname]

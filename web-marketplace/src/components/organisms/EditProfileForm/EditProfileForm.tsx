@@ -18,6 +18,7 @@ import { TextAreaField } from 'web-components/src/components/inputs/new/TextArea
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 
+import { AccountType } from 'generated/graphql';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import {
   APPLY,
@@ -42,6 +43,7 @@ import {
   WEBSITE_PLACEHOLDER,
 } from './EditProfileForm.constants';
 import {
+  createEditProfileFormSchema,
   editProfileFormSchema,
   EditProfileFormSchemaType,
 } from './EditProfileForm.schema';
@@ -59,6 +61,10 @@ export interface EditProfileFormProps {
   formId?: string;
   hideProfileType?: boolean;
   nameLabel?: string;
+  // Allows parent steps (e.g. Create Organization) to inject partial values
+  // after the form has mounted (e.g. from a transfer profile modal)
+  onPrefill?: (values: Partial<EditProfileFormSchemaType>) => void; // not used internally, documented for symmetry
+  prefillValues?: Partial<EditProfileFormSchemaType>;
 }
 const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
   ({
@@ -71,12 +77,23 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
     formId,
     hideProfileType,
     nameLabel,
+    prefillValues,
   }) => {
     const { _ } = useLingui();
+    const formSchema = useMemo(
+      () =>
+        hideProfileType
+          ? createEditProfileFormSchema({ requireProfileType: false })
+          : editProfileFormSchema,
+      [hideProfileType],
+    );
     const form = useZodForm({
-      schema: editProfileFormSchema,
+      schema: formSchema,
       defaultValues: {
         ...initialValues,
+        profileType:
+          initialValues?.profileType ??
+          (hideProfileType ? AccountType.Organization : undefined),
       },
       mode: 'onBlur',
     });
@@ -133,6 +150,19 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         isDirtyRef.current = isDirty;
       }
     }, [isDirtyRef, isDirty]);
+
+    // When parent supplies new prefillValues, merge them into the form without
+    // wiping user edits for untouched fields. Only set provided keys.
+    useEffect(() => {
+      if (prefillValues && Object.keys(prefillValues).length) {
+        for (const [key, value] of Object.entries(prefillValues)) {
+          if (value !== undefined) {
+            // @ts-expect-error: dynamic key assignment aligned with schema
+            form.setValue(key, value, { shouldDirty: true, shouldTouch: true });
+          }
+        }
+      }
+    }, [prefillValues, form]);
 
     return (
       <Form
@@ -214,7 +244,6 @@ const EditProfileForm: React.FC<React.PropsWithChildren<EditProfileFormProps>> =
         <TextAreaField
           type="text"
           label={_(msg`Description`)}
-          rows={3}
           minRows={3}
           disabled={isSubmitting}
           multiline

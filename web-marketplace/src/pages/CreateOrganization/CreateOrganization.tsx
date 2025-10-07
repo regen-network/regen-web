@@ -8,7 +8,6 @@ import React, {
 import { useNavigate } from 'react-router-dom';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
-import { v4 as uuidv4 } from 'uuid';
 
 import SaveFooter from 'web-components/src/components/fixed-footer/SaveFooter';
 import { SadBeeModal } from 'web-components/src/components/modal/SadBeeModal/SadBeeModal';
@@ -28,22 +27,25 @@ import {
   useOrganizationProgress,
 } from 'lib/storage/organizationProgress.storage';
 
-import { getDefaultAvatar } from 'pages/Dashboard/Dashboard.utils';
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_BG,
+  DEFAULT_PROFILE_COMPANY_AVATAR,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from 'pages/Dashboard/Dashboard.constants';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
 import {
   MultiStepTemplate,
   useMultiStep,
 } from '../../components/templates/MultiStepTemplate';
-import { DEFAULT_PROFILE_BG } from '../Dashboard/Dashboard.constants';
-import { TransferProfileModal } from './components/TransferProfileModal';
+import TransferProfileModal from './components/TransferProfileModal';
 import {
-  CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR,
   CREATE_ORG_ALREADY_IN_ORG_MESSAGE,
   CREATE_ORG_CANCEL_LABEL,
   CREATE_ORG_CLOSE_ARIA_LABEL,
   CREATE_ORG_CONFIRM_DISCARD_LABEL,
-  CREATE_ORG_DEFAULT_USER,
+  // CREATE_ORG_DEFAULT_USER removed
   CREATE_ORG_DISCARD_DESCRIPTION,
   CREATE_ORG_DISCARD_TITLE,
   CREATE_ORG_FINISH_LABEL,
@@ -90,7 +92,7 @@ const getVisibleOrganizationAssignments = (
 };
 
 type CreateOrganizationContentProps = {
-  organizationProgress: OrgProgressMap;
+  organizationProgress: OrgProgressMap; // map daoAddress -> step
 };
 
 function CreateOrganizationContent({
@@ -104,30 +106,35 @@ function CreateOrganizationContent({
     percentComplete,
     handleSaveNext,
     isLastStep,
-    handleSave,
+    // handleSave removed (unused after refactor)
     maxAllowedStep,
     data,
   } = useMultiStep<Record<string, unknown>>();
   const { activeAccount } = useAuth();
-  const { createDao, isCreating } = useCreateDao();
+  const { isCreating } = useCreateDao();
   const daoAddressRef = useRef<string | undefined>(undefined);
-  const organizationNameRef = useRef<string | undefined>(undefined);
   const organizationIdRef = useRef<string | undefined>(undefined);
+  const organizationNameRef = useRef<string | undefined>(undefined);
   const [hasUnfinishedOrganization, setHasUnfinishedOrganization] =
     useState(false);
 
-  const [showTransferModal, setShowTransferModal] = useState(true);
+  // Step 0 form validity tracking
+  const [isOrgProfileValid, setIsOrgProfileValid] = useState(false);
   const [orgProfileInitialValues, setOrgProfileInitialValues] = useState<
     Partial<EditProfileFormSchemaType>
-  >({});
+  >({
+    profileImage: DEFAULT_PROFILE_COMPANY_AVATAR,
+    backgroundImage: DEFAULT_PROFILE_BG,
+    profileType: AccountType.Organization,
+  });
+  const [showTransferModal, setShowTransferModal] = useState(false);
+  const [transferHandled, setTransferHandled] = useState(false);
 
-  const displayName = useMemo(
-    () => activeAccount?.name || _(CREATE_ORG_DEFAULT_USER),
-    [activeAccount?.name, _],
-  );
-  const avatarUrl = useMemo(
-    () => activeAccount?.image || getDefaultAvatar(activeAccount as any),
-    [activeAccount],
+  // Removed displayName and avatarUrl (not needed until future prefill reintroduction)
+
+  const formData = useMemo(
+    () => data as Partial<EditProfileFormSchemaType> | undefined,
+    [data],
   );
 
   useEffect(() => {
@@ -145,54 +152,96 @@ function CreateOrganizationContent({
       organizationIdRef.current =
         storedOrganizationId ?? organizationIdRef.current;
       organizationNameRef.current = storedName ?? organizationNameRef.current;
-
-      if (organizationIdRef.current) {
-        console.info(
-          '[CreateOrganization] restored organization id from draft',
-          {
-            organizationId: organizationIdRef.current,
-          },
-        );
-      }
-
-      const existing = organizationProgress[storedDaoAddress];
+      const existingStep = organizationProgress[storedDaoAddress] ?? 0;
       const nextStep = Math.max(maxAllowedStep, 1);
-      if (!existing || existing.step !== nextStep || !existing.name) {
-        setOrganizationProgressStep(
-          storedDaoAddress,
-          nextStep,
-          storedName ?? organizationNameRef.current,
-        );
+      if (existingStep !== nextStep) {
+        setOrganizationProgressStep(storedDaoAddress, nextStep);
       }
       setHasUnfinishedOrganization(true);
+      setTransferHandled(true);
     }
   }, [data, organizationProgress, maxAllowedStep]);
 
   useEffect(() => {
-    const entries = Object.values(organizationProgress);
+    const entries = Object.keys(organizationProgress);
     if (entries.length > 0) {
-      const entry = entries[0];
-      daoAddressRef.current = entry.daoAddress;
-      organizationNameRef.current = entry.name;
+      const daoAddress = entries[0];
+      daoAddressRef.current = daoAddress;
       setHasUnfinishedOrganization(true);
     } else {
       daoAddressRef.current = undefined;
-      organizationNameRef.current = undefined;
       setHasUnfinishedOrganization(false);
     }
   }, [organizationProgress]);
 
-  const currentProgressEntry = useMemo(
+  useEffect(() => {
+    if (!formData) return;
+    const fields: Array<keyof EditProfileFormSchemaType> = [
+      'name',
+      'description',
+      'profileImage',
+      'backgroundImage',
+      'websiteLink',
+      'twitterLink',
+    ];
+    const nextValues: Partial<EditProfileFormSchemaType> = {};
+    fields.forEach(field => {
+      const value = formData[field];
+      if (field === 'profileType') {
+        if (value === AccountType.Organization || value === AccountType.User) {
+          nextValues[field] = value;
+        }
+      } else if (typeof value === 'string' && value.trim().length > 0) {
+        nextValues[field] = value;
+      }
+    });
+    if (Object.keys(nextValues).length > 0) {
+      setOrgProfileInitialValues(prev => ({ ...prev, ...nextValues }));
+      if (typeof formData.name === 'string' && formData.name.trim().length) {
+        organizationNameRef.current = formData.name.trim();
+      }
+      setShowTransferModal(false);
+      setTransferHandled(true);
+    }
+  }, [formData]);
+
+  const currentProgress = useMemo<number | undefined>(
     () => Object.values(organizationProgress)[0],
     [organizationProgress],
   );
-  const resumeStep = useMemo(() => {
-    if (!currentProgressEntry) return 0;
-    return Math.min(
-      currentProgressEntry.step ?? 0,
-      CREATE_ORG_STEPS.length - 1,
+  const canOfferTransfer = useMemo(() => {
+    if (!activeAccount) return false;
+    if (activeAccount.type !== 'ORGANIZATION') return false;
+    return Boolean(
+      activeAccount.name?.trim() ||
+        activeAccount.description?.trim() ||
+        activeAccount.image?.trim() ||
+        activeAccount.bgImage?.trim() ||
+        activeAccount.websiteLink?.trim() ||
+        activeAccount.twitterLink?.trim(),
     );
-  }, [currentProgressEntry]);
+  }, [activeAccount]);
+  const resumeStep = useMemo(() => {
+    if (typeof currentProgress !== 'number') return 0;
+    return Math.min(currentProgress, CREATE_ORG_STEPS.length - 1);
+  }, [currentProgress]);
+
+  useEffect(() => {
+    if (activeStep !== 0) {
+      if (showTransferModal) setShowTransferModal(false);
+      return;
+    }
+
+    if (!transferHandled && !hasUnfinishedOrganization && canOfferTransfer) {
+      setShowTransferModal(true);
+    }
+  }, [
+    activeStep,
+    transferHandled,
+    hasUnfinishedOrganization,
+    showTransferModal,
+    canOfferTransfer,
+  ]);
 
   useEffect(() => {
     if (resumeStep > 0 && activeStep === 0) {
@@ -200,132 +249,45 @@ function CreateOrganizationContent({
     }
   }, [resumeStep, activeStep, handleActiveStep]);
 
-  // No-op: modal starts open (showTransferModal=true) and will be closed via Skip/Yes handlers
+  const handleSkipTransfer = useCallback(() => {
+    setShowTransferModal(false);
+    setTransferHandled(true);
+  }, []);
 
-  const prefillFromActiveAccount = (): Partial<EditProfileFormSchemaType> => {
-    const name = activeAccount?.name || displayName;
-    const profileImage = activeAccount?.image || avatarUrl;
-    const backgroundImage = activeAccount?.bgImage || DEFAULT_PROFILE_BG;
-    const description = activeAccount?.description?.trimEnd() || '';
-    const websiteLink = activeAccount?.websiteLink || '';
-    const twitterLink = activeAccount?.twitterLink || '';
-    return {
-      name,
-      profileImage,
-      backgroundImage,
-      description,
-      websiteLink,
-      twitterLink,
-      // Ensure org type even if hidden
+  const handleTransferProfile = useCallback(() => {
+    if (!activeAccount) {
+      setShowTransferModal(false);
+      setTransferHandled(true);
+      return;
+    }
+    const fallbackName = activeAccount.name?.trim() || _(DEFAULT_NAME);
+    const nextValues: Partial<EditProfileFormSchemaType> = {
+      name: fallbackName,
+      description: activeAccount.description?.trim() ?? '',
+      profileImage: activeAccount.image || DEFAULT_PROFILE_COMPANY_AVATAR,
+      backgroundImage: activeAccount.bgImage || DEFAULT_PROFILE_BG,
+      websiteLink: activeAccount.websiteLink?.trim() ?? '',
+      twitterLink: activeAccount.twitterLink?.trim() ?? '',
       profileType: AccountType.Organization,
-    } as Partial<EditProfileFormSchemaType>;
-  };
-
-  const handleSkipTransfer = () => {
+    };
+    organizationNameRef.current = fallbackName;
+    setOrgProfileInitialValues(prev => ({ ...prev, ...nextValues }));
     setShowTransferModal(false);
-  };
-
-  const handleYesTransfer = () => {
-    const values = prefillFromActiveAccount();
-    setOrgProfileInitialValues(values);
-    // persist values for this step so user can immediately proceed if desired
-    handleSave(values as Record<string, unknown>, 0);
-    setShowTransferModal(false);
-  };
-
-  const handleOrganizationProfileSaved = useCallback(
-    async (values: EditProfileFormSchemaType) => {
-      try {
-        const currentAccountId = activeAccount?.id;
-
-        if (hasUnfinishedOrganization && daoAddressRef.current) {
-          organizationNameRef.current = values.name;
-          setOrganizationProgressStep(daoAddressRef.current, 1, values.name);
-          const payload: Record<string, unknown> = {
-            ...values,
-            dao: (data as Record<string, unknown>)?.dao ?? {
-              daoAddress: daoAddressRef.current,
-              organizationId: organizationIdRef.current,
-            },
-          };
-          handleSaveNext(payload);
-          return;
-        }
-
-        if (!currentAccountId) {
-          throw new Error(_(CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR));
-        }
-
-        const isNewOrganization = !organizationIdRef.current;
-        const organizationId = organizationIdRef.current ?? uuidv4();
-        organizationIdRef.current = organizationId;
-        console.info(
-          isNewOrganization
-            ? '[CreateOrganization] generated organization id'
-            : '[CreateOrganization] reusing existing organization id',
-          {
-            organizationId,
-          },
-        );
-
-        const daoResult = await createDao({
-          name: values.name,
-          description: values.description,
-          profileImage: values.profileImage,
-          backgroundImage: values.backgroundImage,
-          websiteLink: values.websiteLink,
-          twitterLink: values.twitterLink,
-          organizationId,
-          currentAccountId,
-        });
-
-        console.info('[CreateOrganization] dao created', {
-          organizationId: daoResult.organizationId,
-          daoAddress: daoResult.daoAddress,
-        });
-
-        daoAddressRef.current = daoResult.daoAddress;
-        organizationNameRef.current = values.name;
-        organizationIdRef.current = daoResult.organizationId;
-        setOrganizationProgressStep(daoResult.daoAddress, 1, values.name);
-
-        const payload: Record<string, unknown> = {
-          ...values,
-          dao: daoResult,
-        };
-
-        handleSaveNext(payload);
-      } catch (error) {
-        // Surface to the form error boundary for user feedback
-        console.error('Failed to create DAO', error);
-        throw error;
-      }
-    },
-    [
-      activeAccount?.id,
-      hasUnfinishedOrganization,
-      createDao,
-      handleSaveNext,
-      data,
-      _,
-    ],
-  );
+    setTransferHandled(true);
+  }, [activeAccount, _, organizationNameRef]);
 
   const handlePrevClick = useCallback(() => {
     if (activeStep === 0) return;
     if (hasUnfinishedOrganization && daoAddressRef.current) {
       const previousStep = Math.max(activeStep - 1, 1);
-      setOrganizationProgressStep(
-        daoAddressRef.current,
-        previousStep,
-        organizationNameRef.current,
-      );
+      setOrganizationProgressStep(daoAddressRef.current, previousStep);
     }
     handleBack();
   }, [activeStep, handleBack, hasUnfinishedOrganization]);
 
   const handleNextClick = useCallback(() => {
     if (isCreating) return;
+    if (activeStep === 0 && !isOrgProfileValid) return; // guard if somehow triggered
 
     if (activeStep === 0) {
       const form = document.getElementById(CREATE_ORG_FORM_ID) as
@@ -352,11 +314,7 @@ function CreateOrganizationContent({
         setHasUnfinishedOrganization(false);
       } else {
         const nextStep = Math.max(activeStep + 1, 1);
-        setOrganizationProgressStep(
-          daoAddressRef.current,
-          nextStep,
-          organizationNameRef.current,
-        );
+        setOrganizationProgressStep(daoAddressRef.current, nextStep);
       }
     }
 
@@ -367,26 +325,49 @@ function CreateOrganizationContent({
     hasUnfinishedOrganization,
     isCreating,
     isLastStep,
+    isOrgProfileValid,
   ]);
+
+  useEffect(() => {
+    if (activeStep !== 0) return;
+    const form = document.getElementById(
+      CREATE_ORG_FORM_ID,
+    ) as HTMLFormElement | null;
+    if (!form) return;
+    const check = () => setIsOrgProfileValid(form.checkValidity());
+    check();
+    form.addEventListener('input', check);
+    form.addEventListener('change', check);
+    return () => {
+      form.removeEventListener('input', check);
+      form.removeEventListener('change', check);
+    };
+  }, [activeStep]);
 
   return (
     <>
+      <TransferProfileModal
+        open={showTransferModal && !!activeAccount}
+        onSkip={handleSkipTransfer}
+        onTransfer={handleTransferProfile}
+        name={activeAccount?.name?.trim() || _(DEFAULT_NAME)}
+        avatar={activeAccount?.image || DEFAULT_PROFILE_USER_AVATAR}
+      />
       {activeStep === 0 && (
         <OrganizationProfileStep
           formId={CREATE_ORG_FORM_ID}
-          // Remount when we set transferred values to ensure RHF defaultValues apply
           key={JSON.stringify(orgProfileInitialValues)}
           initialValues={orgProfileInitialValues}
-          onSaved={handleOrganizationProfileSaved}
+          activeAccountId={activeAccount?.id}
+          hasUnfinishedOrganization={hasUnfinishedOrganization}
+          daoAddressRef={daoAddressRef}
+          organizationIdRef={organizationIdRef}
+          organizationNameRef={organizationNameRef}
+          data={data as Record<string, unknown>}
+          handleSaveNext={handleSaveNext as any}
+          _t={_}
         />
       )}
-      <TransferProfileModal
-        open={activeStep === 0 && showTransferModal}
-        onSkip={handleSkipTransfer}
-        onTransfer={handleYesTransfer}
-        name={displayName}
-        avatar={avatarUrl}
-      />
       {activeStep === 1 && <MigrateProjectsStep />}
       {activeStep === 2 && <PersonalInfoStep />}
       {activeStep === 3 && <InviteMembersStep />}
@@ -394,7 +375,7 @@ function CreateOrganizationContent({
         onPrev={activeStep > 0 ? handlePrevClick : undefined}
         onSave={handleNextClick}
         saveText={isLastStep ? _(CREATE_ORG_FINISH_LABEL) : _(SAVE_TEXT)}
-        saveDisabled={isCreating}
+        saveDisabled={isCreating || (activeStep === 0 && !isOrgProfileValid)}
         percentComplete={percentComplete}
       />
     </>
@@ -408,14 +389,13 @@ export default function CreateOrganizationPage(): JSX.Element {
   const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const organizationProgress = useOrganizationProgress();
   const [showDiscardModal, setShowDiscardModal] = useState(false);
-  const currentProgressEntry = useMemo(
+  const currentProgress = useMemo<number | undefined>(
     () => Object.values(organizationProgress)[0],
     [organizationProgress],
   );
   const resumeStep = useMemo(
-    () =>
-      Math.min(currentProgressEntry?.step ?? 0, CREATE_ORG_STEPS.length - 1),
-    [currentProgressEntry],
+    () => Math.min(currentProgress ?? 0, CREATE_ORG_STEPS.length - 1),
+    [currentProgress],
   );
 
   const visibleOrganizationAssignments = useMemo(
@@ -440,15 +420,12 @@ export default function CreateOrganizationPage(): JSX.Element {
   const handleConfirmDiscard = () => {
     setShowDiscardModal(false);
     const progress = getAllOrganizationProgress();
-    Object.values(progress).forEach(entry =>
-      removeOrganizationProgress(entry.daoAddress),
-    );
+    Object.keys(progress).forEach(addr => removeOrganizationProgress(addr));
     navigate('/dashboard', { replace: true });
   };
 
   return (
     <>
-      {/* Close button now rendered inside MultiStepTemplate via closable prop */}
       <SadBeeModal open={showDiscardModal} onClose={handleCancelDiscard}>
         <H variant="h4" className="mt-20 mb-10 text-center">
           {_(CREATE_ORG_DISCARD_TITLE)}

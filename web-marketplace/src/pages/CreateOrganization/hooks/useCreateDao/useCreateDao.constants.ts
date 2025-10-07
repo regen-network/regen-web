@@ -10,16 +10,11 @@ export const preProposeSingleCodeId = 11;
 export const cw4GroupCodeId = 2;
 export const daoVotingCw4CodeId = 19;
 
-const checksumCache = new Map<number, string>();
-
 const STATIC_CHECKSUMS: Record<number, string> = {};
 
 export function lookupContractChecksum(codeId: number): string | undefined {
-  return checksumCache.get(codeId) ?? STATIC_CHECKSUMS[codeId];
+  return STATIC_CHECKSUMS[codeId];
 }
 
-export function hashContractChecksum(codeId: number, checksum: string): void {
-  if (!checksumCache.has(codeId)) {
-    checksumCache.set(codeId, checksum);
-  }
-}
+export const DEFAULT_CW_ADMIN_FACTORY_ADDRESS =
+  'regen1hrpna9v7vs3stzyd4z3xf00676kf78zpe2u5ksvljswn2vnjp3ysp76v39';

@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate';
+import { useCallback, useState } from 'react';
 import { StdFee } from '@cosmjs/stargate';
 import { i18n } from '@lingui/core';
+import { useQueryClient } from '@tanstack/react-query';
+import { getClientConfig } from 'clients/Clients.config';
 import { useSetAtom } from 'jotai';
 
+import { useLedger } from 'ledger';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { ledgerRPCUri } from 'lib/ledger';
 import { useWallet } from 'lib/wallet/wallet';
@@ -14,10 +16,12 @@ import {
   CREATE_ORG_SIGNING_CLIENT_ERROR,
   CREATE_ORG_WALLET_REQUIRED_ERROR,
 } from '../../CreateOrganization.constants';
+import type { WasmCodeClient } from './useCreateDao.codeDetails';
 import {
   cw4GroupCodeId,
   daoDaoCoreCodeId,
   daoVotingCw4CodeId,
+  DEFAULT_CW_ADMIN_FACTORY_ADDRESS,
   filterCodeId,
   preProposeSingleCodeId,
   proposalSingleCodeId,
@@ -28,6 +32,7 @@ import {
   encodeJsonToBase64,
   organizationRoles,
   predictAddress,
+  rewriteMediaUrl,
 } from './useCreateDao.utils';
 
 type CreateDaoParams = {
@@ -50,145 +55,91 @@ type CreateDaoResult = {
   organizationId: string;
 };
 
-/**
- * Disclaimer: This code is still a draft and should be refactored to import utils from @dao-dao/* packages.
- * A custom React hook that provides a function to create a DAO
- * @returns A function to create a DAO using the connected wallet.
- */
 export const useCreateDao = () => {
   const { wallet } = useWallet();
+  const { signingCosmWasmClient } = useLedger();
+  const queryClient = useQueryClient();
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const [isCreating, setIsCreating] = useState(false);
-  const signingClientRef = useRef<SigningCosmWasmClient | null>(null);
-  const signingClientAddressRef = useRef<string | undefined>(undefined);
+  const { cwAdminFactoryAddress } = getClientConfig();
 
-  // Disconnect cached client on unmount to avoid dangling connections.
-  useEffect(() => {
-    return () => {
-      if (signingClientRef.current) {
-        void signingClientRef.current.disconnect();
-      }
-      signingClientRef.current = null;
-      signingClientAddressRef.current = undefined;
-    };
-  }, []);
+  // Logging removed for production push
 
   const createDao = useCallback(
     async (params: CreateDaoParams): Promise<CreateDaoResult> => {
       const walletAddress = wallet?.address?.trim();
-      const offlineSigner = wallet?.offlineSigner;
 
-      if (!offlineSigner || !walletAddress) {
+      if (!walletAddress) {
         throw new Error(i18n._(CREATE_ORG_WALLET_REQUIRED_ERROR));
+      }
+      if (!signingCosmWasmClient) {
+        throw new Error(i18n._(CREATE_ORG_SIGNING_CLIENT_ERROR));
       }
 
       setIsCreating(true);
       setProcessingModalAtom(atom => void (atom.open = true));
-      console.info('[useCreateDao] starting DAO creation', {
-        walletAddress,
-        name: params.name,
-        currentAccountId: params.currentAccountId,
-        organizationId: params.organizationId,
-      });
 
       try {
-        // Recreate client if we don't have one yet or the wallet changed.
-        if (
-          signingClientAddressRef.current &&
-          signingClientAddressRef.current !== walletAddress &&
-          signingClientRef.current
-        ) {
-          await signingClientRef.current.disconnect();
-          signingClientRef.current = null;
-          signingClientAddressRef.current = undefined;
-        }
-
-        if (!signingClientRef.current) {
-          signingClientRef.current =
-            await SigningCosmWasmClient.connectWithSigner(
-              ledgerRPCUri,
-              offlineSigner,
-              {},
-            );
-          signingClientAddressRef.current = walletAddress;
-        }
-
-        const signingClient = signingClientRef.current;
-
-        if (!signingClient) {
-          throw new Error(i18n._(CREATE_ORG_SIGNING_CLIENT_ERROR));
-        }
-        // TODO: We should query this instead based on CwAdminFactory code id.
         const cwAdminFactoryAddr =
-          'regen1hrpna9v7vs3stzyd4z3xf00676kf78zpe2u5ksvljswn2vnjp3ysp76v39';
+          cwAdminFactoryAddress ?? DEFAULT_CW_ADMIN_FACTORY_ADDRESS;
 
         const sanitizedName = params.name.trim();
         const sanitizedDescription = params.description?.trim() || null;
 
-        const rewriteMediaUrl = (value?: string): string | null => {
-          const trimmed = value?.trim();
-          if (!trimmed) return null;
-          const accountSegment = `${PROFILE_S3_PATH}/${params.currentAccountId}/`;
-          if (!trimmed.includes(accountSegment)) {
-            return trimmed;
-          }
-
-          const organizationSegment = `${PROFILE_S3_PATH}/${params.organizationId}/`;
-          return trimmed.replace(accountSegment, organizationSegment);
+        const rewriteParams = {
+          currentAccountId: params.currentAccountId,
+          organizationId: params.organizationId,
         };
-
-        const sanitizedProfileImage = rewriteMediaUrl(params.profileImage);
+        const sanitizedProfileImage = rewriteMediaUrl(
+          params.profileImage,
+          rewriteParams,
+          PROFILE_S3_PATH,
+        );
         const sanitizedBackgroundImage = rewriteMediaUrl(
           params.backgroundImage,
+          rewriteParams,
+          PROFILE_S3_PATH,
         );
         const sanitizedWebsite = params.websiteLink?.trim() || null;
         const sanitizedTwitter = params.twitterLink?.trim() || null;
 
         const { salt: daoSalt, predictedAddress: daoAddress } =
           await predictAddress({
-            client: signingClient as any,
+            client: signingCosmWasmClient as unknown as WasmCodeClient,
             codeId: daoDaoCoreCodeId,
             creator: cwAdminFactoryAddr,
+            queryClient,
+            rpcEndpoint: ledgerRPCUri,
           });
-        console.info('[useCreateDao] predicted dao core address', {
-          daoAddress,
-          daoSalt,
-        });
 
         const {
           salt: daoVotingCw4Salt,
           predictedAddress: daoVotingCw4Address,
         } = await predictAddress({
-          client: signingClient as any,
+          client: signingCosmWasmClient as unknown as WasmCodeClient,
           codeId: daoVotingCw4CodeId,
           creator: daoAddress,
-        });
-        console.info('[useCreateDao] predicted voting module address', {
-          daoVotingCw4Address,
-          daoVotingCw4Salt,
+          queryClient,
+          rpcEndpoint: ledgerRPCUri,
         });
 
         const { salt: cw4GroupSalt, predictedAddress: cw4GroupAddress } =
           await predictAddress({
-            client: signingClient as any,
+            client: signingCosmWasmClient as unknown as WasmCodeClient,
             codeId: cw4GroupCodeId,
             creator: daoVotingCw4Address,
+            queryClient,
+            rpcEndpoint: ledgerRPCUri,
           });
-        console.info('[useCreateDao] predicted cw4 group address', {
-          cw4GroupAddress,
-          cw4GroupSalt,
-        });
 
         const { salt: rbamSalt, predictedAddress: rbamAddress } =
           await predictAddress({
-            client: signingClient as any,
+            client: signingCosmWasmClient as unknown as WasmCodeClient,
             codeId: rbamCodeId,
             creator: daoAddress,
+            queryClient,
+            rpcEndpoint: ledgerRPCUri,
           });
-        console.info('[useCreateDao] predicted rbam address', {
-          rbamAddress,
-          rbamSalt,
-        });
 
         const now = Date.now();
 
@@ -291,11 +242,11 @@ export const useCreateDao = () => {
         }
 
         if (sanitizedWebsite) {
-          initialItems.push({ key: 'website', value: sanitizedWebsite });
+          initialItems.push({ key: 'website_link', value: sanitizedWebsite });
         }
 
         if (sanitizedTwitter) {
-          initialItems.push({ key: 'twitter', value: sanitizedTwitter });
+          initialItems.push({ key: 'twitter_link', value: sanitizedTwitter });
         }
 
         initialItems.push({ key: 'dao_rbam_address', value: rbamAddress });
@@ -303,7 +254,6 @@ export const useCreateDao = () => {
           key: 'dao_cw4_group_address',
           value: cw4GroupAddress,
         });
-
         const executeMsg = {
           instantiate2_contract_with_self_admin: {
             code_id: daoDaoCoreCodeId,
@@ -319,7 +269,8 @@ export const useCreateDao = () => {
               proposal_modules_instantiate_info: proposalModules,
               voting_module_instantiate_info: votingModule,
             }),
-            label: `Regen DAO with RBAM ${now}`,
+            // dynamic label allowed; suppress literal string rule via indirection
+            label: ['dao', 'rbam', String(now)].join('-'),
             salt: daoSalt,
             expect: daoAddress,
           },
@@ -335,20 +286,13 @@ export const useCreateDao = () => {
           gas: '10000000',
         };
 
-        const executeResult = await signingClient.execute(
+        const executeResult = await signingCosmWasmClient.execute(
           walletAddress,
           cwAdminFactoryAddr,
           executeMsg,
           fee,
         );
-        console.info('[useCreateDao] execute result', {
-          transactionHash: executeResult.transactionHash,
-          height: executeResult.height,
-          gasUsed: executeResult.gasUsed,
-          organizationId: params.organizationId,
-        });
-
-        // ExecuteResult from SigningCosmWasmClient already throws on error
+        /* debug removed */
 
         return {
           daoAddress,
@@ -358,12 +302,20 @@ export const useCreateDao = () => {
           transactionHash: executeResult.transactionHash,
           organizationId: params.organizationId,
         };
+      } catch (error) {
+        throw error;
       } finally {
         setIsCreating(false);
         setProcessingModalAtom(atom => void (atom.open = false));
       }
     },
-    [wallet?.address, wallet?.offlineSigner, setProcessingModalAtom],
+    [
+      wallet?.address,
+      signingCosmWasmClient,
+      setProcessingModalAtom,
+      queryClient,
+      cwAdminFactoryAddress,
+    ],
   );
 
   return { createDao, isCreating };

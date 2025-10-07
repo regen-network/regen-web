@@ -22,6 +22,8 @@ export const CLIENTS_CONFIG_MAPPING: Record<
     buyButton: true,
     loginButton: true,
     listProject: true,
+    cwAdminFactoryAddress:
+      'regen1hrpna9v7vs3stzyd4z3xf00676kf78zpe2u5ksvljswn2vnjp3ysp76v39',
   },
   terrasos: {
     buySellOrderFlow: false,

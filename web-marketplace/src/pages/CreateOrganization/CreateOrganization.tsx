@@ -6,7 +6,6 @@ import React, {
   useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { msg, Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { useSetAtom } from 'jotai';
 import { v4 as uuidv4 } from 'uuid';
@@ -39,6 +38,15 @@ import {
 import { DEFAULT_PROFILE_BG } from '../Dashboard/Dashboard.constants';
 import { TransferProfileModal } from './components/TransferProfileModal';
 import {
+  CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR,
+  CREATE_ORG_ALREADY_IN_ORG_MESSAGE,
+  CREATE_ORG_CANCEL_LABEL,
+  CREATE_ORG_CLOSE_ARIA_LABEL,
+  CREATE_ORG_CONFIRM_DISCARD_LABEL,
+  CREATE_ORG_DEFAULT_USER,
+  CREATE_ORG_DISCARD_DESCRIPTION,
+  CREATE_ORG_DISCARD_TITLE,
+  CREATE_ORG_FINISH_LABEL,
   CREATE_ORG_FORM_ID,
   CREATE_ORG_INITIAL_VALUES,
   CREATE_ORG_STEPS,
@@ -114,7 +122,7 @@ function CreateOrganizationContent({
   >({});
 
   const displayName = useMemo(
-    () => activeAccount?.name || _(msg`User`),
+    () => activeAccount?.name || _(CREATE_ORG_DEFAULT_USER),
     [activeAccount?.name, _],
   );
   const avatarUrl = useMemo(
@@ -245,9 +253,7 @@ function CreateOrganizationContent({
         }
 
         if (!currentAccountId) {
-          throw new Error(
-            'Active account is required to create an organization.',
-          );
+          throw new Error(_(CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR));
         }
 
         const isNewOrganization = !organizationIdRef.current;
@@ -295,7 +301,14 @@ function CreateOrganizationContent({
         throw error;
       }
     },
-    [createDao, handleSaveNext, hasUnfinishedOrganization, data],
+    [
+      activeAccount?.id,
+      hasUnfinishedOrganization,
+      createDao,
+      handleSaveNext,
+      data,
+      _,
+    ],
   );
 
   const handlePrevClick = useCallback(() => {
@@ -380,7 +393,7 @@ function CreateOrganizationContent({
       <SaveFooter
         onPrev={activeStep > 0 ? handlePrevClick : undefined}
         onSave={handleNextClick}
-        saveText={isLastStep ? _(msg`Finish`) : _(SAVE_TEXT)}
+        saveText={isLastStep ? _(CREATE_ORG_FINISH_LABEL) : _(SAVE_TEXT)}
         saveDisabled={isCreating}
         percentComplete={percentComplete}
       />
@@ -413,11 +426,7 @@ export default function CreateOrganizationPage(): JSX.Element {
 
   useEffect(() => {
     if (hasOrganizationAssignment) {
-      setErrorBannerText(
-        _(
-          msg`You already belong to an organization. Please manage your existing organization from your dashboard.`,
-        ),
-      );
+      setErrorBannerText(_(CREATE_ORG_ALREADY_IN_ORG_MESSAGE));
       navigate('/dashboard', { replace: true });
     }
   }, [hasOrganizationAssignment, navigate, setErrorBannerText, _]);
@@ -442,19 +451,16 @@ export default function CreateOrganizationPage(): JSX.Element {
       {/* Close button now rendered inside MultiStepTemplate via closable prop */}
       <SadBeeModal open={showDiscardModal} onClose={handleCancelDiscard}>
         <H variant="h4" className="mt-20 mb-10 text-center">
-          <Trans>Are you sure you want to discard your changes?</Trans>
+          {_(CREATE_ORG_DISCARD_TITLE)}
         </H>
         <p className="text-[18px] font-normal text-bc-neutral-500 text-center mb-30 px-10">
-          <Trans>
-            If you proceed, you will lose all the unsaved changes you made. This
-            cannot be undone.
-          </Trans>
+          {_(CREATE_ORG_DISCARD_DESCRIPTION)}
         </p>
         <div className="flex justify-center pb-10">
           <CancelButtonFooter
             onCancel={handleCancelDiscard}
-            cancelLabel={_(msg`CANCEL`)}
-            label={_(msg`YES, DISCARD`)}
+            cancelLabel={_(CREATE_ORG_CANCEL_LABEL)}
+            label={_(CREATE_ORG_CONFIRM_DISCARD_LABEL)}
             disabled={false}
             type="button"
             onClick={handleConfirmDiscard}
@@ -470,7 +476,7 @@ export default function CreateOrganizationPage(): JSX.Element {
         forceStep={resumeStep}
         closable
         onRequestClose={handleRequestClose}
-        closeAriaLabel={_(msg`close create organization`)}
+        closeAriaLabel={_(CREATE_ORG_CLOSE_ARIA_LABEL)}
         classes={{ titleWrap: 'pb-40' }}
       >
         <CreateOrganizationContent

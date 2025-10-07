@@ -9,7 +9,7 @@ import { useStyles } from './HeaderDropdown.styles';
 
 export type HeaderDropdownItemProps = {
   label: string;
-  href: string;
+  href?: string;
   pathname: string;
   linkComponent: React.ElementType<NavLinkProps>;
   importCallback?: () => Promise<any>;
@@ -71,6 +71,7 @@ export const HeaderDropdownItem: React.FC<
         </div>
       )}
       {props.pathname &&
+        props?.href &&
         (props.disabled ? (
           <InfoTooltip title={props.disabledTooltipText} arrow>
             <div>

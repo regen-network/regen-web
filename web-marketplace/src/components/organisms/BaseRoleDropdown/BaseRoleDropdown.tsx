@@ -27,7 +27,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   currentUserRole,
   hasWalletAddress,
   placeholder,
-  height = 'h-[50px]',
+  height = 'h-50',
   fullWidth = false,
 }) => {
   const { _ } = useLingui();
@@ -73,7 +73,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
   return (
     <div ref={ref} className="relative w-full font-sans">
       {isDropdownDisabled ? (
-        <div className="flex items-center gap-5 justify-center">
+        <div className="flex items-center gap-5">
           <Body className="capitalize text-sc-text-header" size="sm">
             {displayLabel}
           </Body>
@@ -93,6 +93,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
             `flex items-center justify-between w-full ${height} px-20 py-15 rounded border border-solid cursor-pointer`,
             'bg-bc-neutral-0 text-bc-neutral-700',
             'border-bc-neutral-300 hover:border-gray-300',
+            'text-sm sm:text-base'
           )}
         >
           <div className="flex items-center gap-2">
@@ -155,14 +156,14 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
                           sx={{ width: 20, height: 20 }}
                           aria-hidden
                         />
-                        <span className="font-medium text-bc-neutral-900 text-[16px]">
+                        <span className="font-medium text-bc-neutral-900 text-sm sm:text-base">
                           {label}
                         </span>
                       </div>
 
                       <p
                         className={cn(
-                          'text-[14px] leading-[1.45] text-left m-0',
+                          'text-xs sm:text-sm leading-[1.45] text-left m-0',
                           unavailable
                             ? 'text-bc-neutral-400 italic font-bold'
                             : 'text-bc-neutral-500',

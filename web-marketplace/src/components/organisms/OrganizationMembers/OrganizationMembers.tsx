@@ -1,3 +1,4 @@
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
 import { OrganizationMembersBase } from './OrganizationMembers.BaseTable';
 import { Member } from './OrganizationMembers.types';
@@ -10,6 +11,7 @@ type Props = {
   onUpdateRole: (id: string, role: BaseMemberRole) => void;
   onUpdateVisibility: (id: string, visible: boolean) => void;
   onRemove: (id: string) => void;
+  setDebouncedValue: UseStateSetter<string>;
 };
 export const OrganizationMembers = ({
   members,
@@ -19,6 +21,7 @@ export const OrganizationMembers = ({
   onUpdateRole,
   onUpdateVisibility,
   onRemove,
+  setDebouncedValue,
 }: Props) => {
   return (
     <OrganizationMembersBase
@@ -30,6 +33,7 @@ export const OrganizationMembers = ({
       onUpdateRole={onUpdateRole}
       onUpdateVisibility={onUpdateVisibility}
       onRemove={onRemove}
+      setDebouncedValue={setDebouncedValue}
     />
   );
 };

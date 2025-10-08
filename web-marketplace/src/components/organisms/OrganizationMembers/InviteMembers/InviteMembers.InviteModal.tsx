@@ -1,8 +1,7 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useFormState } from 'react-hook-form';
 import { useLingui } from '@lingui/react';
 
-import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
 import { Title } from 'web-components/src/components/typography';
@@ -20,11 +19,8 @@ import {
   CHOOSE_ROLE_HELP,
   EMAIL_OR_ADDRESS_LABEL,
   ENTER_EMAIL_OR_ADDRESS_PLACEHOLDER,
-  INVALID_EMAIL_ERROR,
-  INVALID_REGEN_ADDRESS_ERROR,
   INVITE_LABEL,
   REGEN_ADDRESS_LABEL,
-  REGEN_ADDRESS_REQUIRED_ERROR,
   ROLE_LABEL,
   VISIBLE_DESCRIPTION,
   VISIBLE_QUESTION,
@@ -32,13 +28,10 @@ import {
 import { MemberRoleDropdown } from '../OrganizationMembers.RoleDropdown';
 import { InviteMemberModalProps } from '../OrganizationMembers.types';
 import { VisibilitySwitch } from '../OrganizationMembers.VisibilitySwitch';
-import { inviteSchema } from './InviteMembers.schema';
-import {
-  getDisplayValue,
-  getValidationError,
-  isValidAddressOrEmail,
-} from './InviteMembers.utils';
+import { getInviteSchema } from './InviteMembers.schema';
 import Modal from 'web-components/src/components/modal';
+import { useDebounce } from 'hooks/useDebounce';
+import { truncate } from 'web-components/src/utils/truncate';
 
 export const InviteMemberModal = ({
   open,
@@ -51,13 +44,13 @@ export const InviteMemberModal = ({
   const [isInputFocused, setIsInputFocused] = useState(false);
   const blurTimeoutRef = useRef<number | undefined>();
 
-  const form = useZodForm<typeof inviteSchema, typeof inviteSchema>({
-    schema: inviteSchema,
+  const form = useZodForm({
+    schema: getInviteSchema(_),
     defaultValues: { role: undefined, addressOrEmail: '', visible: true },
     mode: 'onChange',
   });
-  const { control, setValue, reset, watch } = form;
-  const { errors } = useFormState({ control });
+  const { control, setValue, reset, watch, register } = form;
+  const { isSubmitting, errors, isValid } = useFormState({ control });
   const role = watch('role');
   const addressOrEmail = watch('addressOrEmail');
   const visible = watch('visible');
@@ -70,18 +63,13 @@ export const InviteMemberModal = ({
     setIsInputFocused(false);
   };
 
-  const disabledInvite =
-    !role ||
-    !(addressOrEmail || '').trim() ||
-    !isValidAddressOrEmail(addressOrEmail || '', role);
-
-  const validationError = getValidationError(
-    addressOrEmail || '',
-    role,
-    REGEN_ADDRESS_REQUIRED_ERROR,
-    INVALID_EMAIL_ERROR,
-    INVALID_REGEN_ADDRESS_ERROR,
+  const addressOrEmailDebouncedValue = useDebounce(addressOrEmail);
+  useEffect(
+    () => setDebouncedValue(addressOrEmailDebouncedValue),
+    [addressOrEmailDebouncedValue, setDebouncedValue],
   );
+
+  const [addressOrEmailDisplayValue, setAddressOrEmailDisplayValue] = useState('');
 
   return (
     <Modal
@@ -120,7 +108,9 @@ export const InviteMemberModal = ({
             role={role as BaseMemberRole}
             disabled={false}
             hasWalletAddress={true}
-            onChange={r => setValue('role', r, { shouldDirty: true })}
+            onChange={r =>
+              setValue('role', r, { shouldDirty: true, shouldValidate: true })
+            }
             currentUserRole={role as BaseMemberRole}
             placeholder={_(CHOOSE_ROLE_HELP)}
             height="h-[50px] md:h-[60px]"
@@ -132,6 +122,9 @@ export const InviteMemberModal = ({
         <div className="flex flex-col mb-0">
           {/* Reserve 45px below the field so helper text sits within that space, avoiding layout jump */}
           <div className="relative pb-[45px]">
+            {/* Hidden real value that will be submitted */}
+            <input type="hidden" {...register('addressOrEmail')} />
+
             <TextField
               type="text"
               label={_(
@@ -141,31 +134,16 @@ export const InviteMemberModal = ({
               )}
               description={_(ADMIN_EDITOR_RULE)}
               labelClassName="font-bold text-md md:text-lg"
-              value={getDisplayValue(addressOrEmail || '')}
+              value={addressOrEmailDisplayValue}
               placeholder={_(ENTER_EMAIL_OR_ADDRESS_PLACEHOLDER)}
-              helperText={
-                validationError ||
-                (errors.addressOrEmail?.message as string | undefined)
-              }
-              error={!!validationError}
+              helperText={errors.addressOrEmail?.message}
+              error={!!errors.addressOrEmail}
               onFocus={() => {
                 if (blurTimeoutRef.current)
                   window.clearTimeout(blurTimeoutRef.current);
                 setIsInputFocused(true);
               }}
-              onBlur={() => {
-                blurTimeoutRef.current = window.setTimeout(
-                  () => setIsInputFocused(false),
-                  120,
-                );
-              }}
-              onChange={e => {
-                setValue('addressOrEmail', e.target.value, {
-                  shouldDirty: true,
-                });
-                if (setDebouncedValue) setDebouncedValue(e.target.value);
-              }}
-              InputProps={{ className: 'h-[50px] md:h-[60px]' }}
+              InputProps={{ className: 'h-50 md:h-60' }}
               sx={{
                 position: 'relative',
                 '& .MuiFormHelperText-root': {
@@ -176,6 +154,22 @@ export const InviteMemberModal = ({
                   margin: 0,
                   whiteSpace: 'normal',
                 },
+              }}
+              onChange={e => {
+                setAddressOrEmailDisplayValue(e.target.value);
+                // keep the hidden form value in sync when user types manually
+                setValue('addressOrEmail', e.target.value, {
+                  shouldDirty: true,
+                  shouldValidate: true,
+                });
+              }}
+              onBlur={e => {
+                register('addressOrEmail').onBlur(e);
+
+                blurTimeoutRef.current = window.setTimeout(
+                  () => setIsInputFocused(false),
+                  120,
+                );
               }}
             />
             {isInputFocused &&
@@ -188,17 +182,21 @@ export const InviteMemberModal = ({
                       key={acc?.id}
                       onMouseDown={() => {
                         if (acc?.addr && acc?.name) {
-                          setValue(
-                            'addressOrEmail',
-                            `${acc.name} (${acc.addr})`,
-                            {
-                              shouldDirty: true,
-                            },
+                          // store raw addr/email
+                          setValue('addressOrEmail', acc.addr, {
+                            shouldDirty: true,
+                            shouldValidate: true,
+                          });
+                          // display truncated
+                          setAddressOrEmailDisplayValue(
+                            `${acc?.name} (${truncate(acc?.addr)})`,
                           );
                         } else if (acc?.addr) {
                           setValue('addressOrEmail', acc.addr, {
                             shouldDirty: true,
+                            shouldValidate: true,
                           });
+                          setAddressOrEmailDisplayValue(acc.addr);
                         }
                         setIsInputFocused(false);
                       }}
@@ -253,7 +251,7 @@ export const InviteMemberModal = ({
             }}
             cancelLabel={_(CANCEL_LABEL)}
             label={_(INVITE_LABEL)}
-            disabled={disabledInvite}
+            disabled={!isValid || isSubmitting}
             type="submit"
             className="h-[53px] w-[138px] text-[18px]"
           />

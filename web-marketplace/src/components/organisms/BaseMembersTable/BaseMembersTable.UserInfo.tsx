@@ -14,7 +14,7 @@ import { BaseUser, Context } from './BaseMembersTable.types';
 interface UserInfoProps<T extends BaseUser> {
   user: T;
   context: Context;
-  description?: string;
+  description?: string | null;
   organization?: string;
   children?: React.ReactNode;
   onEditPersonalProfile?: () => void;
@@ -70,7 +70,7 @@ export const UserInfo = <T extends BaseUser>({
           </span>
 
           <span
-            className={`text-sm ${
+            className={`text-sm text-left ${
               isProjectContext ? 'text-bc-neutral-700' : 'text-bc-neutral-700'
             }`}
           >

@@ -1,6 +1,7 @@
 import { GetAccountsByNameOrAddrQuery } from 'generated/graphql';
 
 import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 
 export type Member = {
   id: string;
@@ -25,7 +26,7 @@ export interface InviteMemberModalProps {
     visible: boolean;
   }) => void;
   accounts?: GetAccountsByNameOrAddrQuery | null;
-  setDebouncedValue?: (value: string) => void;
+  setDebouncedValue: UseStateSetter<string>;
 }
 
 export type VisibilitySwitchProps = {

@@ -1,23 +1,10 @@
+import { UseStateSetter } from 'web-components/src/types/react/useState';
 import { BaseMemberRole } from '../../BaseMembersTable/BaseMembersTable.types';
-import { OrganizationMembersBase } from '../OrganizationMembers.BaseTable';
+import {
+  BaseProps,
+  OrganizationMembersBase,
+} from '../OrganizationMembers.BaseTable';
 import { Member } from '../OrganizationMembers.types';
-
-type Props = {
-  members: Member[];
-  onInvite: () => void;
-  sortDir?: 'asc' | 'desc';
-  onToggleSort: () => void;
-  onUpdateRole: (id: string, role: BaseMemberRole) => void;
-  onUpdateVisibility: (id: string, visible: boolean) => void;
-  onRemove: (id: string) => void;
-  onAddMember?: (data: {
-    role: BaseMemberRole | undefined;
-    addressOrEmail: string;
-    visible: boolean;
-  }) => void;
-  accounts?: any;
-  setDebouncedValue?: (value: string) => void;
-};
 
 export const OrganizationMembersInviteTable = ({
   members,
@@ -30,7 +17,7 @@ export const OrganizationMembersInviteTable = ({
   onAddMember,
   accounts,
   setDebouncedValue,
-}: Props): JSX.Element => {
+}: BaseProps): JSX.Element => {
   return (
     <OrganizationMembersBase
       variant="invite"

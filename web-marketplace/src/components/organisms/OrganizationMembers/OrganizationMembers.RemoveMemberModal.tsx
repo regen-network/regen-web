@@ -58,6 +58,7 @@ export const RemoveMemberModal = ({
         >
           {_(REMOVE_CONFIRM_LABEL)}
         </ContainedButton>
+      </div>
     </Modal>
   );
 };

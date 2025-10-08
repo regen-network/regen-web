@@ -25,8 +25,10 @@ import { MemberRoleDropdown } from './OrganizationMembers.RoleDropdown';
 import { Member } from './OrganizationMembers.types';
 import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
 import { RemoveMemberModal } from './OrganizationMembers.RemoveMemberModal';
+import { UseStateSetter } from 'web-components/src/types/react/useState';
+import { GetAccountsByNameOrAddrQuery } from 'generated/graphql';
 
-type BaseProps = {
+export type BaseProps = {
   members: Member[];
   sortDir?: 'asc' | 'desc';
   onToggleSort: () => void;
@@ -39,8 +41,8 @@ type BaseProps = {
     addressOrEmail: string;
     visible: boolean;
   }) => void;
-  accounts?: any;
-  setDebouncedValue?: (value: string) => void;
+  accounts?: GetAccountsByNameOrAddrQuery | null;
+  setDebouncedValue: UseStateSetter<string>;
 };
 
 type VariantConfig = {

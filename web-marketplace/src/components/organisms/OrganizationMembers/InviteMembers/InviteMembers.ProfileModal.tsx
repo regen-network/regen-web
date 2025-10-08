@@ -4,14 +4,13 @@ import { plural } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import useClickOutside from 'utils/hooks/useClickOutside';
 
-import CloseIcon from 'web-components/src/components/icons/CloseIcon';
 import { ImageField } from 'web-components/src/components/inputs/new/ImageField/ImageField';
 import { ImageFieldAvatar } from 'web-components/src/components/inputs/new/ImageField/ImageField.Avatar';
 import { TextAreaField } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField';
 import { TextAreaFieldChartCounter } from 'web-components/src/components/inputs/new/TextAreaField/TextAreaField.ChartCounter';
 import TextField from 'web-components/src/components/inputs/new/TextField/TextField';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
-import { Title as H } from 'web-components/src/components/typography';
+import { Title as H, Body } from 'web-components/src/components/typography';
 
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
@@ -37,7 +36,7 @@ interface PersonalProfileModalProps {
   initialName: string;
   initialAvatar?: string;
   initialDescription?: string;
-  initialTitle?: string;
+  initialTitle?: string | null;
   onUploadAvatar?: (file: File) => Promise<{ url: string }>;
   onSave: (data: {
     name: string;
@@ -99,7 +98,7 @@ export const PersonalProfileModal = ({
   const disabledSave = !isValid || isSubmitting;
 
   return (
-    <Modal onClose={onClose} open={open}>
+    <Modal onClose={onClose} open={open} className="!px-20 !py-50">
       <Form
         form={form}
         className="flex flex-col"
@@ -113,16 +112,16 @@ export const PersonalProfileModal = ({
           onClose();
         }}
       >
-        <div className="flex-shrink-0 px-20 py-40 md:px-40 md:pt-40 md:pb-0">
-          <H variant="h4" className="mb-10 text-center">
+        <div className="flex-shrink-0 px-20 md:px-50 pb-30 sm:pb-50">
+          <H variant="h4" className="mb-20 text-center">
             {_(PERSONAL_PROFILE_TITLE)}
           </H>
-          <p className="text-sm md:text-md text-bc-neutral-500 text-center mb-30 px-10">
+          <Body size="lg" className="text-center px-10">
             {_(PERSONAL_PROFILE_SUBHEADER)}
-          </p>
+          </Body>
         </div>
 
-        <div className="flex-1 px-20 md:px-40">
+        <div className="flex-1">
           <div className="flex flex-col bg-bc-neutral-0 border border-solid border-bc-neutral-300 rounded px-20 py-30 md:p-40">
             {/* Name */}
             <TextField

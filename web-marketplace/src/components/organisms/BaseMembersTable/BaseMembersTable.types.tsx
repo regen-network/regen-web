@@ -4,7 +4,7 @@ export type ProjectRole = BaseMemberRole | 'author';
 export interface BaseUser {
   id: string;
   name: string;
-  email: string;
+  email?: string | null;
   avatar?: string;
   isCurrentUser?: boolean;
 }

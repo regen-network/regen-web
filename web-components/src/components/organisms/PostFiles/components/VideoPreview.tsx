@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ReactPlayer from 'react-player';
-import { PlayPauseButton } from 'web-components/src/components/atoms/PlayPauseButton/PlayPauseButton';
+import { PlayPauseButton } from '../../components/atoms/PlayPauseButton/PlayPauseButton';
 
 export const VideoPreview = ({
   url,

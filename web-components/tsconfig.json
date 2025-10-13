@@ -22,10 +22,7 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "target": "es6",
-    "paths": {
-      "web-components/*": ["./src/*"]
-    }
+    "target": "es6"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.test.ts", "src/**/*.spec.tsx"],
   "exclude": ["node_modules"]

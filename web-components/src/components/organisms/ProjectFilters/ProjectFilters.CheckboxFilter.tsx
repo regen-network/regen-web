@@ -1,5 +1,5 @@
 import { Box, FormControlLabel } from '@mui/material';
-import Checkbox from 'web-components/src/components/inputs/new/CheckBox/Checkbox';
+import Checkbox from '../../components/inputs/new/CheckBox/Checkbox';
 
 export default function CheckboxFilter({
   startIcon,

@@ -1,6 +1,6 @@
-import { SadBeeModal } from 'web-components/src/components/modal/SadBeeModal/SadBeeModal';
-import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
-import { Body, Title } from 'web-components/src/components/typography';
+import { SadBeeModal } from '../../components/modal/SadBeeModal/SadBeeModal';
+import { CancelButtonFooter } from '../../components/organisms/CancelButtonFooter/CancelButtonFooter';
+import { Body, Title } from '../../components/typography';
 
 import { RegenModalPropsWithOnClose } from '../../../types/shared/modalPropsWithOnClose';
 

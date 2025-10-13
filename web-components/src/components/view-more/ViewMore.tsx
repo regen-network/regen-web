@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TextButton } from 'web-components/src/components/buttons/TextButton';
+import { TextButton } from '../../components/buttons/TextButton';
 
 interface ViewMoreProps {
   items: React.ReactNode[];

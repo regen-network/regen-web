@@ -22,6 +22,7 @@ type Props = {
     lessText: string;
     moreText: string;
   };
+  canDownloadFiles: boolean;
 };
 
 const PostFilesCardsMobile = ({
@@ -33,6 +34,7 @@ const PostFilesCardsMobile = ({
   setAnimateMarker,
   filesPreviews,
   readMoreText,
+  canDownloadFiles,
 }: Props) => {
   const { classes: styles } = useStyles();
 
@@ -62,7 +64,11 @@ const PostFilesCardsMobile = ({
           <div className="absolute bottom-0 h-[42px] bg-grey-0 py-[2px] px-[7px]">
             <FileBody showMediaName file={file} readMoreText={readMoreText} />
           </div>
-          <Buttons onClose={onClose} selectedUrl={selectedUrl} />
+          <Buttons
+            onClose={onClose}
+            selectedUrl={selectedUrl}
+            canDownloadFiles={canDownloadFiles}
+          />
         </div>
       ))}
     />

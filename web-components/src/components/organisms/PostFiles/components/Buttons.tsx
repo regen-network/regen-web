@@ -4,9 +4,10 @@ import { OpenInNewIcon } from '../../../icons/OpenInNewIcon';
 type Props = {
   onClose: () => void;
   selectedUrl: string;
+  canDownloadFiles: boolean;
 };
 
-const Buttons = ({ onClose, selectedUrl }: Props) => (
+const Buttons = ({ onClose, selectedUrl, canDownloadFiles }: Props) => (
   <>
     <div
       onClick={onClose}
@@ -14,14 +15,16 @@ const Buttons = ({ onClose, selectedUrl }: Props) => (
     >
       <CloseIcon className="h-[24px] w-[24px] rounded-[50%] text-grey-0 bg-grey-700/[.6] p-3" />
     </div>
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href={selectedUrl}
-      className="outline-none cursor-pointer absolute top-[13px] right-[47px] z-10"
-    >
-      <OpenInNewIcon className="h-[24px] w-[24px] rounded-[50%] text-grey-0 bg-grey-700/[.6] p-3" />
-    </a>
+    {canDownloadFiles && (
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href={selectedUrl}
+        className="outline-none cursor-pointer absolute top-[13px] right-[47px] z-10"
+      >
+        <OpenInNewIcon className="h-[24px] w-[24px] rounded-[50%] text-grey-0 bg-grey-700/[.6] p-3" />
+      </a>
+    )}
   </>
 );
 

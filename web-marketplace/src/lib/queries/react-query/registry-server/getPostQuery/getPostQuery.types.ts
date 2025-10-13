@@ -42,6 +42,7 @@ export type Post = {
   error?: string;
   prevIri?: string;
   nextIri?: string;
+  canDownloadFiles: boolean;
 };
 
 export type ReactQueryGetPostQueryResponse = QueryObserverOptions<Post | null>;

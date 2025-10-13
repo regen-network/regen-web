@@ -17,7 +17,6 @@ const nextConfig = {
       'lodash',
     ],
   },
-  transpilePackages: ['web-components'],
   // Set the root for Next.js file tracing to the monorepo root
   outputFileTracingRoot: path.join(__dirname, '..'),
   // Exclude large packages from the server functions

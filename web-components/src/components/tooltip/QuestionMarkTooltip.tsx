@@ -1,5 +1,5 @@
 import { Box, SxProps, TooltipProps } from '@mui/material';
-import { cn } from 'web-components/src/utils/styles/cn';
+import { cn } from '../../utils/styles/cn';
 
 import { Theme } from '../../theme/muiTheme';
 import { sxToArray } from '../../utils/mui/sxToArray';

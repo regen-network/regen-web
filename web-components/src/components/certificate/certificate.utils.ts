@@ -1,7 +1,7 @@
 import {
   DATE_FORMAT_SECONDARY,
   formatDate,
-} from 'web-components/src/utils/format';
+} from '../../utils/format';
 
 export function formatCertificateDates(
   startDate: string,

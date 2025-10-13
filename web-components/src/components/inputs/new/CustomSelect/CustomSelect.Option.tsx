@@ -1,4 +1,4 @@
-import { Option } from 'web-components/src/components/inputs/new/CustomSelect/CustomSelect.types';
+import { Option } from '../../components/inputs/new/CustomSelect/CustomSelect.types';
 
 type SelectOptionProps = {
   option: Option;

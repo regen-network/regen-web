@@ -4,7 +4,7 @@ import { CircularProgress, useMediaQuery, useTheme } from '@mui/material';
 import bbox from '@turf/bbox';
 import type { FeatureCollection, Point } from 'geojson';
 import dynamic from 'next/dynamic';
-import { VideoIcon } from 'web-components/src/components/icons/VideoIcon';
+import { VideoIcon } from '../../components/icons/VideoIcon';
 
 import { cn } from '../../../utils/styles/cn';
 import { AudioFileIcon } from '../../icons/AudioFileIcon';
@@ -246,7 +246,7 @@ const PostFilesPublic = ({
                 }}
                 setSelectedUrl={setSelectedUrl}
                 selectedUrl={selectedUrl}
-                  canDownloadFiles={canDownloadFiles}
+                canDownloadFiles={canDownloadFiles}
               />
             </Popup>
           )}
@@ -288,7 +288,7 @@ const PostFilesPublic = ({
             setAnimateMarker={setAnimateMarker}
             filesPreviews={filesPreviews}
             readMoreText={readMoreText}
-              canDownloadFiles={canDownloadFiles}
+            canDownloadFiles={canDownloadFiles}
           />
         )}
         {isAdmin && (privateLocations || privateFiles) && (

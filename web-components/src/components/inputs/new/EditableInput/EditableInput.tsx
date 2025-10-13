@@ -1,6 +1,6 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
-import { EditButtonIcon } from 'web-components/src/components/buttons/EditButtonIcon';
-import { TextButton } from 'web-components/src/components/buttons/TextButton';
+import { EditButtonIcon } from '../../components/buttons/EditButtonIcon';
+import { TextButton } from '../../components/buttons/TextButton';
 
 import { localizeNumber, sanitizeValue } from './EditableInput.utils';
 

@@ -12,7 +12,7 @@ export const useMobileMenuStyles = makeStyles()((theme: Theme) => ({
       backgroundColor: theme.palette.primary.light,
       width: '85%',
       maxWidth: '350px',
-      height: `calc(100% - ${theme.spacing(15)}px)`,
+      height: `calc(100% - ${theme.spacing(15)})`,
       
     },
     '& .MuiBackdrop-root, & .MuiDrawer-paper': {

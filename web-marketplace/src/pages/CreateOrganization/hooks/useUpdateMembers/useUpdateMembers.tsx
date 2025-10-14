@@ -210,7 +210,18 @@ export const useUpdateMembers = ({
         );
       }
     },
-    [daoAddress],
+    [
+      daoAddress,
+      _,
+      graphqlClient,
+      selectedLanguage,
+      reactQueryClient,
+      refetch,
+      setProcessingModalAtom,
+      updateAssignment,
+      setErrorBannerText,
+      activeAccountId,
+    ],
   );
 
   const addMember = useCallback(
@@ -411,6 +422,7 @@ export const useUpdateMembers = ({
         return;
       }
       const {
+        role: oldRoleName,
         onChainRoleId: oldRoleId,
         address: memberAddress,
         visible,
@@ -530,7 +542,56 @@ export const useUpdateMembers = ({
           setErrorBannerText(String(error));
         }
       } else {
-        // TODO web2 members
+        try {
+          await updateAssignment({
+            variables: {
+              input: {
+                daoAddress,
+                roleName: oldRoleName,
+                accountId: id,
+                assignmentPatch: { roleName: role },
+              },
+            },
+          });
+          await reactQueryClient.invalidateQueries({
+            queryKey: getAccountByIdQueryKey({
+              id: activeAccountId,
+            }),
+          });
+        } catch (e) {
+          setErrorBannerText(String(e));
+        }
+
+        if (projectsCurrentUserCanManageMembers)
+          for (let project of projectsCurrentUserCanManageMembers) {
+            if (project)
+              try {
+                const projectDaoAddress =
+                  project?.projectByProjectId?.adminDaoAddress;
+                const projectOldRoleName =
+                  project?.projectByProjectId?.daoByAdminDaoAddress?.assignmentsByDaoAddress.nodes?.find(
+                    assignment => assignment?.accountId === id,
+                  )?.roleName;
+                if (!projectDaoAddress || !projectOldRoleName) return; // TODO should we add back the user?
+                await updateAssignment({
+                  variables: {
+                    input: {
+                      daoAddress: projectDaoAddress,
+                      roleName: projectOldRoleName,
+                      accountId: id,
+                      assignmentPatch: { roleName: role },
+                    },
+                  },
+                });
+                await reactQueryClient.invalidateQueries({
+                  queryKey: getAccountByIdQueryKey({
+                    id: activeAccountId,
+                  }),
+                });
+              } catch (e) {
+                setErrorBannerText(String(e));
+              }
+          }
       }
     },
     [

@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { useEffect, useState } from 'react';
 import type { Meta } from '@storybook/react';
 
 import {
@@ -8,25 +7,43 @@ import {
 } from '../ActionDropdown/ActionDropdown.constants';
 import { BaseMemberRole } from '../BaseMembersTable/BaseMembersTable.types';
 import { OrganizationMembers } from './OrganizationMembers';
-import { mockMembers } from './OrganizationMembers.mock';
+import { mockMembers, mockAccounts } from './OrganizationMembers.mock';
 import { Member } from './OrganizationMembers.types';
 
 const meta: Meta<typeof OrganizationMembers> = {
   title: 'Marketplace/Organisms/OrganizationMembers',
   component: OrganizationMembers,
-  argTypes: {
-    onInvite: {
-      action: 'invite-clicked',
-      description: 'Called when invite button is clicked',
-    },
-  },
 };
 
 export default meta;
 
-export const Default = (args: { onInvite: () => void }) => {
+export const Default = () => {
   const [members, setMembers] = useState<Member[]>(mockMembers);
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
+  const [debouncedValue, setDebouncedValue] = useState('');
+  const [accounts, setAccounts] = useState<any>(null);
+
+  useEffect(() => {
+    if (debouncedValue.trim()) {
+      const filteredAccounts = mockAccounts.filter(account => {
+        const nameMatch = account.name
+          ?.toLowerCase()
+          .includes(debouncedValue.toLowerCase());
+        const addrMatch = account.addr
+          ?.toLowerCase()
+          .includes(debouncedValue.toLowerCase());
+        return nameMatch || addrMatch;
+      });
+
+      setAccounts({
+        getAccountsByNameOrAddr: {
+          nodes: filteredAccounts,
+        },
+      });
+    } else {
+      setAccounts(null);
+    }
+  }, [debouncedValue]);
 
   const toggleSort = () => {
     const dir = sortDir === 'asc' ? 'desc' : 'asc';
@@ -63,18 +80,48 @@ export const Default = (args: { onInvite: () => void }) => {
   const handleRemove = (id: string) =>
     setMembers(prev => prev.filter(member => member.id !== id));
 
+  const addMember = (data: {
+    role: BaseMemberRole | undefined;
+    addressOrEmail: string;
+    visible: boolean;
+  }) => {
+    if (!data.role) return;
+
+    const foundAccount = mockAccounts.find(
+      acc =>
+        acc.addr === data.addressOrEmail || acc.name === data.addressOrEmail,
+    );
+
+    const newMember: Member = {
+      id: `member-${Date.now()}`,
+      name: foundAccount?.name || data.addressOrEmail,
+      email: foundAccount?.addr || data.addressOrEmail,
+      avatar: foundAccount?.image || undefined,
+      role: data.role,
+      visible: data.visible,
+      invited: true,
+      isCurrentUser: false,
+      hasWalletAddress: true,
+      title: foundAccount?.description || '',
+      organization:
+        foundAccount?.type === 'organization' ? foundAccount.name || '' : '',
+    };
+
+    setMembers(prev => [...prev, newMember]);
+  };
+
   return (
     <OrganizationMembers
-      {...args}
       members={members}
       onToggleSort={toggleSort}
       onUpdateRole={updateRole}
       onUpdateVisibility={updateVisibility}
       onRemove={handleRemove}
+      setDebouncedValue={setDebouncedValue}
+      onAddMember={addMember}
+      accounts={accounts}
     />
   );
 };
 
-Default.args = {
-  onInvite: action('invite-clicked'),
-};
+Default.args = {};

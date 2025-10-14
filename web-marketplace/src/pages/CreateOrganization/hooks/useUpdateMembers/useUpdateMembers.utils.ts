@@ -1,8 +1,21 @@
-import { encodeJsonToBase64 } from '../useCreateDao/useCreateDao.utils';
+import { toBase64, toUtf8 } from '@cosmjs/encoding';
+import {
+  AccountByIdQuery,
+  OrganizationByDaoAddressQuery,
+} from 'generated/graphql';
+import { orgRoles, projectRoles } from './useUpdateMembers.constants';
+import { cosmos } from '@regen-network/api';
+import { AllowedMsgAllowance } from '@regen-network/api/cosmos/feegrant/v1beta1/feegrant';
+import { MsgGrantAllowance } from '@regen-network/api/cosmos/feegrant/v1beta1/tx';
+import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
+import {
+  ROLE_ADMIN,
+  ROLE_OWNER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 
 type AssignNewOrgOwnerActionsParams = Pick<
   AssignNewOwnerActionsParams,
-  | 'rbamAddress'
+  | 'daoRbamAddress'
   | 'cw4GroupAddress'
   | 'authorizationId'
   | 'roleId'
@@ -11,8 +24,11 @@ type AssignNewOrgOwnerActionsParams = Pick<
   | 'newOwnerOldRoleId'
 >;
 
+export const encodeJsonToBase64 = (object: any) =>
+  toBase64(toUtf8(JSON.stringify(object)));
+
 export const assignNewOrgOwnerActions = ({
-  rbamAddress,
+  daoRbamAddress,
   authorizationId,
   roleId,
   cw4GroupAddress,
@@ -23,7 +39,7 @@ export const assignNewOrgOwnerActions = ({
   const ownerRoleId = orgRoles.owner.roleId;
   const adminRoleId = orgRoles.admin.roleId;
   return assignNewOwnerActions({
-    rbamAddress,
+    daoRbamAddress,
     authorizationId,
     roleId,
     cw4GroupAddress,
@@ -37,7 +53,7 @@ export const assignNewOrgOwnerActions = ({
 
 type AssignNewOwnerActionsParams = {
   /** the address of the dao-rbam contract */
-  rbamAddress: string;
+  daoRbamAddress: string;
   /** the address of the cw4_group contract */
   cw4GroupAddress: string;
   /** the id of the role that includes an authorization to update members */
@@ -56,7 +72,7 @@ type AssignNewOwnerActionsParams = {
   adminRoleId: number;
 };
 const assignNewOwnerActions = ({
-  rbamAddress,
+  daoRbamAddress,
   authorizationId,
   roleId,
   cw4GroupAddress,
@@ -82,7 +98,7 @@ const assignNewOwnerActions = ({
       },
     }),
     assignAction({
-      rbamAddress,
+      daoRbamAddress,
       authorizationId,
       roleId,
       assignments: [
@@ -98,7 +114,7 @@ const assignNewOwnerActions = ({
       ],
     }),
     revokeAction({
-      rbamAddress,
+      daoRbamAddress,
       authorizationId,
       roleId,
       assignments: [
@@ -117,7 +133,7 @@ const assignNewOwnerActions = ({
 
 type AddMemberActions = {
   /** the address of the dao-rbam contract */
-  rbamAddress: string;
+  daoRbamAddress: string;
   /** the address of the cw4_group contract */
   cw4GroupAddress: string;
   /** the id of the role that includes an authorization to add members */
@@ -131,7 +147,7 @@ type AddMemberActions = {
 };
 
 export const addMemberActions = ({
-  rbamAddress,
+  daoRbamAddress,
   cw4GroupAddress,
   authorizationId,
   roleId,
@@ -153,7 +169,7 @@ export const addMemberActions = ({
     },
   }),
   assignAction({
-    rbamAddress,
+    daoRbamAddress,
     authorizationId,
     roleId,
     assignments: [
@@ -165,9 +181,43 @@ export const addMemberActions = ({
   }),
 ];
 
+type FeegrantActionParams = {
+  /** the address of the dao */
+  daoAddress: string;
+  /** the address of the dao-rbam contract */
+  daoRbamAddress: string;
+  /** the id of the role that includes an authorization to grant feegrant allowance */
+  roleId: number;
+  /** the id of the authorization that has permission to grant feegrant allowance */
+  authorizationId: number;
+  /** the address of the member to add */
+  memberAddress: string;
+};
+
+export const feegrantAction = ({
+  daoAddress,
+  authorizationId,
+  roleId,
+  memberAddress,
+}: FeegrantActionParams) => ({
+  authorization_id: authorizationId,
+  role_id: roleId,
+  msg: {
+    '#stargate': {
+      type_url: MsgGrantAllowance.typeUrl,
+      value: {
+        granter: daoAddress,
+        grantee: memberAddress,
+        // TODO
+        // allowance: AllowedMsgAllowance...
+      },
+    },
+  },
+});
+
 type UpdateMemberRoleActionsParams = {
   /** the address of the dao-rbam contract */
-  rbamAddress: string;
+  daoRbamAddress: string;
   /** the id of the role that includes an authorization to update roles */
   roleId: number;
   /** the id of the authorization that has permission to update roles */
@@ -181,7 +231,7 @@ type UpdateMemberRoleActionsParams = {
 };
 
 export const updateMemberRoleActions = ({
-  rbamAddress,
+  daoRbamAddress,
   authorizationId,
   roleId,
   memberAddress,
@@ -189,7 +239,7 @@ export const updateMemberRoleActions = ({
   oldRoleId,
 }: UpdateMemberRoleActionsParams) => [
   assignAction({
-    rbamAddress,
+    daoRbamAddress,
     authorizationId,
     roleId,
     assignments: [
@@ -200,7 +250,7 @@ export const updateMemberRoleActions = ({
     ],
   }),
   revokeAction({
-    rbamAddress,
+    daoRbamAddress,
     authorizationId,
     roleId,
     assignments: [
@@ -214,7 +264,7 @@ export const updateMemberRoleActions = ({
 
 type RemoveMemberActionsParams = {
   /** the address of the dao-rbam contract */
-  rbamAddress: string;
+  daoRbamAddress: string;
   /** the address of the cw4_group contract */
   cw4GroupAddress: string;
   /** the id of the role that includes an authorization to remove members */
@@ -227,7 +277,7 @@ type RemoveMemberActionsParams = {
   memberRoleId: number;
 };
 export const removeMemberActions = ({
-  rbamAddress,
+  daoRbamAddress,
   cw4GroupAddress,
   authorizationId,
   roleId,
@@ -244,7 +294,7 @@ export const removeMemberActions = ({
     },
   }),
   revokeAction({
-    rbamAddress,
+    daoRbamAddress,
     authorizationId,
     roleId,
     assignments: [
@@ -301,7 +351,7 @@ type Assignment = {
 
 type UpdateAssignmentsActionParams = {
   /** the address of the dao-rbam contract */
-  rbamAddress: string;
+  daoRbamAddress: string;
   /** the id of the role that includes an authorization to assign roles */
   roleId: number;
   /** the id of the authorization that has permission to assign roles */
@@ -311,7 +361,7 @@ type UpdateAssignmentsActionParams = {
 };
 
 const assignAction = ({
-  rbamAddress,
+  daoRbamAddress,
   authorizationId,
   roleId,
   assignments,
@@ -321,7 +371,7 @@ const assignAction = ({
   msg: {
     wasm: {
       execute: {
-        contract_addr: rbamAddress,
+        contract_addr: daoRbamAddress,
         msg: encodeJsonToBase64({
           assign: {
             assign: assignments,
@@ -334,7 +384,7 @@ const assignAction = ({
 });
 
 const revokeAction = ({
-  rbamAddress,
+  daoRbamAddress,
   authorizationId,
   roleId,
   assignments,
@@ -344,7 +394,7 @@ const revokeAction = ({
   msg: {
     wasm: {
       execute: {
-        contract_addr: rbamAddress,
+        contract_addr: daoRbamAddress,
         msg: encodeJsonToBase64({
           revoke: {
             revoke: assignments,
@@ -355,3 +405,77 @@ const revokeAction = ({
     },
   },
 });
+
+type FindNewAssignmentParams = {
+  data?: AccountByIdQuery;
+  daoAddress?: string;
+  accountId: string;
+};
+
+export function findNewAssignment({
+  data,
+  daoAddress,
+  accountId,
+}: FindNewAssignmentParams) {
+  if (!daoAddress) return;
+  const assignments =
+    data?.accountById?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
+      node => node?.address === daoAddress,
+    )?.assignmentsByDaoAddress?.nodes;
+  return assignments?.find(assig => assig?.accountByAccountId?.id == accountId);
+}
+
+type GetRoleAuthorizationIdsParams = {
+  type: 'organization' | 'project';
+  currentUserRole?: BaseMemberRole;
+  authorizationName?: 'can_manage_members' | 'can_manage_members_except_owner';
+};
+export function getRoleAuthorizationIds({
+  type,
+  currentUserRole,
+  authorizationName,
+}: GetRoleAuthorizationIdsParams) {
+  const roles = type === 'organization' ? orgRoles : projectRoles;
+
+  const roleId = currentUserRole ? roles[currentUserRole].roleId : undefined;
+  const authorizationId =
+    currentUserRole && authorizationName
+      ? roles[currentUserRole].authorizations[authorizationName]
+      : undefined;
+  return { roleId, authorizationId };
+}
+
+type GetProjectIdsParams = {
+  type: 'organization' | 'project';
+  role: BaseMemberRole;
+};
+export function getNewRoleId({ type, role }: GetProjectIdsParams) {
+  const roles = type === 'organization' ? orgRoles : projectRoles;
+  return roles[role].roleId;
+}
+
+export function getAuthorizationName(currentUserRole?: string) {
+  if (!currentUserRole) return;
+  return currentUserRole === ROLE_OWNER
+    ? 'can_manage_members'
+    : 'can_manage_members_except_owner';
+}
+
+type GetProjectsCurrentUserCanManageMembers = {
+  orgData?: OrganizationByDaoAddressQuery | null;
+  activeAccountId?: string;
+};
+export function getProjectsCurrentUserCanManageMembers({
+  orgData,
+  activeAccountId,
+}: GetProjectsCurrentUserCanManageMembers) {
+  return orgData?.organizationByDaoAddress?.organizationProjectsByOrganizationId?.nodes?.filter(
+    project =>
+      project?.projectByProjectId?.daoByAdminDaoAddress?.assignmentsByDaoAddress?.nodes?.some(
+        assignment =>
+          assignment?.accountId === activeAccountId &&
+          (assignment?.roleName === ROLE_OWNER ||
+            assignment?.roleName === ROLE_ADMIN),
+      ),
+  );
+}

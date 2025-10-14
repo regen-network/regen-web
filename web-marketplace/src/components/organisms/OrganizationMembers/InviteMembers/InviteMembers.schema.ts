@@ -6,11 +6,17 @@ import {
   REGEN_ADDRESS_REQUIRED_ERROR,
 } from '../OrganizationMembers.constants';
 import { isValidAddress } from 'web-components/src/components/inputs/validation';
+import {
+  ROLE_ADMIN,
+  ROLE_EDITOR,
+  ROLE_OWNER,
+  ROLE_VIEWER,
+} from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 
 export const getInviteSchema = (_: TranslatorType) =>
   z
     .object({
-      role: z.enum(['owner', 'admin', 'editor', 'viewer']),
+      role: z.enum([ROLE_OWNER, ROLE_ADMIN, ROLE_EDITOR, ROLE_VIEWER]),
       addressOrEmail: z.string().min(1),
       visible: z.boolean().default(true),
     })

@@ -131,6 +131,7 @@ export default function useMsgClient(
         fee,
         memo || '',
       );
+
       setIsWaitingForSigning(false);
       const txBytes = TxRaw.encode(txRaw).finish();
       return txBytes;

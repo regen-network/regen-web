@@ -52,3 +52,46 @@ export const mockMembers: Member[] = [
     isCurrentUser: true,
   },
 ];
+
+export const mockAccounts = [
+  {
+    id: 'acc-1',
+    creatorId: 'creator-1',
+    name: 'Alice Regeneros',
+    type: 'individual',
+    image: 'https://i.pravatar.cc/300',
+    description: 'Forest project lead',
+    addr: 'regen1aliceaddressxyz',
+    accountTranslationsById: { nodes: [] },
+  },
+  {
+    id: 'acc-2',
+    creatorId: 'creator-2',
+    name: 'Bob Carbon',
+    type: 'individual',
+    image: 'https://i.pravatar.cc/299',
+    description: 'Soil data analyst',
+    addr: 'regen1bobcarbonaddr',
+    accountTranslationsById: { nodes: [] },
+  },
+  {
+    id: 'acc-3',
+    creatorId: 'creator-3',
+    name: 'Carol Ecosystem',
+    type: 'organization',
+    image: 'https://i.pravatar.cc/288',
+    description: 'Biodiversity NGO',
+    addr: 'regen1carolorgaddr',
+    accountTranslationsById: { nodes: [] },
+  },
+  {
+    id: 'acc-4',
+    creatorId: 'creator-4',
+    name: 'Dave Verifier',
+    type: 'individual',
+    image: 'https://i.pravatar.cc/320',
+    description: 'Independent verifier',
+    addr: 'regen1daveverifier',
+    accountTranslationsById: { nodes: [] },
+  },
+];

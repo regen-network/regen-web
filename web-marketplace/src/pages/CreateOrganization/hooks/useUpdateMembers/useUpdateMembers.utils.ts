@@ -410,19 +410,25 @@ type FindNewAssignmentParams = {
   data?: AccountByIdQuery;
   daoAddress?: string;
   accountId: string;
+  roleName: string;
 };
 
-export function findNewAssignment({
+export function findAssignment({
   data,
   daoAddress,
   accountId,
+  roleName,
 }: FindNewAssignmentParams) {
   if (!daoAddress) return;
   const assignments =
     data?.accountById?.daosByAssignmentAccountIdAndDaoAddress?.nodes?.find(
       node => node?.address === daoAddress,
     )?.assignmentsByDaoAddress?.nodes;
-  return assignments?.find(assig => assig?.accountByAccountId?.id == accountId);
+  return assignments?.find(
+    assig =>
+      assig?.accountByAccountId?.id == accountId &&
+      assig?.roleName === roleName,
+  );
 }
 
 type GetRoleAuthorizationIdsParams = {

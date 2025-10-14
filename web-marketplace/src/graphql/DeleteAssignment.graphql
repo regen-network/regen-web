@@ -1,0 +1,9 @@
+mutation DeleteAssignment($input: DeleteAssignmentByAccountIdAndDaoAddressAndRoleNameInput!) {
+  deleteAssignmentByAccountIdAndDaoAddressAndRoleName(input: $input) {
+    assignment {
+      daoAddress
+      roleName
+      accountId
+    }
+  }
+}

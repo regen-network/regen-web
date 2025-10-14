@@ -42,8 +42,9 @@ import {
   LOGOUT_TEXT,
   ORGANIZATION,
   ORGANIZATION_DASHBOARD,
+  ORGANIZATION_PROFILE,
   PERSONAL_DASHBOARD,
-  PUBLIC_PROFILE,
+  PERSONAL_PROFILE,
   SIGNED_IN_AS,
 } from './RegistryLayout.constants';
 // import { LanguageSwitcher } from './RegistryLayout.LanguageSwitcher';
@@ -101,7 +102,8 @@ const RegistryLayoutHeader: React.FC = () => {
             tooltipText: _(COPY_ADDRESS),
             toastText: _(ADDRESS_COPIED),
           },
-          publicProfile: _(PUBLIC_PROFILE),
+          personalProfile: _(PERSONAL_PROFILE),
+          organizationProfile: _(ORGANIZATION_PROFILE),
           personalDashboard: _(PERSONAL_DASHBOARD),
           organizationDashboard: _(ORGANIZATION_DASHBOARD),
           organization: _(ORGANIZATION),

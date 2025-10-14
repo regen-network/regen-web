@@ -1,11 +1,11 @@
 import { MutableRefObject, useEffect, useMemo, useState } from 'react';
-import { msg, plural } from '@lingui/core/macro';
 import {
   Controller,
   SubmitHandler,
   useFieldArray,
   useWatch,
 } from 'react-hook-form';
+import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';

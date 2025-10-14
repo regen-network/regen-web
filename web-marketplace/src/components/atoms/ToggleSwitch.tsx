@@ -1,4 +1,6 @@
-import React, { useId } from 'react';
+import React, { ReactNode, useId } from 'react';
+import { i18n } from '@lingui/core';
+import { msg } from '@lingui/core/macro';
 
 import { cn } from 'web-components/src/utils/styles/cn';
 
@@ -6,8 +8,8 @@ export interface ToggleSwitchProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
   disabled?: boolean;
-  visibleLabel?: React.ReactNode;
-  hiddenLabel?: React.ReactNode;
+  visibleLabel?: ReactNode;
+  hiddenLabel?: ReactNode;
   ariaLabel?: string;
   className?: string;
 }
@@ -16,8 +18,8 @@ export const ToggleSwitch = ({
   checked,
   onChange,
   disabled = false,
-  visibleLabel = 'Visible',
-  hiddenLabel = 'Hidden',
+  visibleLabel = i18n._(msg`Visible`),
+  hiddenLabel = i18n._(msg`Hidden`),
   ariaLabel,
   className,
 }: ToggleSwitchProps) => {

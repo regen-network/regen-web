@@ -11646,20 +11646,27 @@ export type OrganizationByDaoAddressQuery = (
   { __typename?: 'Query' }
   & { organizationByDaoAddress?: Maybe<(
     { __typename?: 'Organization' }
-    & { daoByDaoAddress?: Maybe<(
-      { __typename?: 'Dao' }
-      & { assignmentsByDaoAddress: (
-        { __typename?: 'AssignmentsConnection' }
-        & { nodes: Array<Maybe<(
-          { __typename?: 'Assignment' }
-          & Pick<Assignment, 'roleName' | 'visible'>
-          & { accountByAccountId?: Maybe<(
-            { __typename?: 'Account' }
-            & Pick<Account, 'id' | 'name' | 'type' | 'image' | 'addr' | 'title'>
+    & { organizationProjectsByOrganizationId: (
+      { __typename?: 'OrganizationProjectsConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'OrganizationProject' }
+        & { projectByProjectId?: Maybe<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'adminDaoAddress'>
+          & { daoByAdminDaoAddress?: Maybe<(
+            { __typename?: 'Dao' }
+            & Pick<Dao, 'daoRbamAddress' | 'cw4GroupAddress'>
+            & { assignmentsByDaoAddress: (
+              { __typename?: 'AssignmentsConnection' }
+              & { nodes: Array<Maybe<(
+                { __typename?: 'Assignment' }
+                & Pick<Assignment, 'accountId' | 'roleName' | 'onChainRoleId'>
+              )>> }
+            ) }
           )> }
-        )>> }
-      ) }
-    )> }
+        )> }
+      )>> }
+    ) }
   )> }
 );
 
@@ -11829,6 +11836,22 @@ export type UpdateAccountByIdMutation = (
     & { account?: Maybe<(
       { __typename?: 'Account' }
       & Pick<Account, 'id'>
+    )> }
+  )> }
+);
+
+export type UpdateAssignmentMutationVariables = Exact<{
+  input: UpdateAssignmentByAccountIdAndDaoAddressAndRoleNameInput;
+}>;
+
+
+export type UpdateAssignmentMutation = (
+  { __typename?: 'Mutation' }
+  & { updateAssignmentByAccountIdAndDaoAddressAndRoleName?: Maybe<(
+    { __typename?: 'UpdateAssignmentPayload' }
+    & { assignment?: Maybe<(
+      { __typename?: 'Assignment' }
+      & Pick<Assignment, 'daoAddress' | 'roleName' | 'accountId'>
     )> }
   )> }
 );
@@ -12602,18 +12625,20 @@ export type MoreProjectsQueryResult = Apollo.QueryResult<MoreProjectsQuery, More
 export const OrganizationByDaoAddressDocument = gql`
     query OrganizationByDaoAddress($daoAddress: String!) {
   organizationByDaoAddress(daoAddress: $daoAddress) {
-    daoByDaoAddress {
-      assignmentsByDaoAddress {
-        nodes {
-          roleName
-          visible
-          accountByAccountId {
-            id
-            name
-            type
-            image
-            addr
-            title
+    organizationProjectsByOrganizationId {
+      nodes {
+        projectByProjectId {
+          adminDaoAddress
+          daoByAdminDaoAddress {
+            daoRbamAddress
+            cw4GroupAddress
+            assignmentsByDaoAddress {
+              nodes {
+                accountId
+                roleName
+                onChainRoleId
+              }
+            }
           }
         }
       }
@@ -12898,6 +12923,43 @@ export function useUpdateAccountByIdMutation(baseOptions?: Apollo.MutationHookOp
 export type UpdateAccountByIdMutationHookResult = ReturnType<typeof useUpdateAccountByIdMutation>;
 export type UpdateAccountByIdMutationResult = Apollo.MutationResult<UpdateAccountByIdMutation>;
 export type UpdateAccountByIdMutationOptions = Apollo.BaseMutationOptions<UpdateAccountByIdMutation, UpdateAccountByIdMutationVariables>;
+export const UpdateAssignmentDocument = gql`
+    mutation UpdateAssignment($input: UpdateAssignmentByAccountIdAndDaoAddressAndRoleNameInput!) {
+  updateAssignmentByAccountIdAndDaoAddressAndRoleName(input: $input) {
+    assignment {
+      daoAddress
+      roleName
+      accountId
+    }
+  }
+}
+    `;
+export type UpdateAssignmentMutationFn = Apollo.MutationFunction<UpdateAssignmentMutation, UpdateAssignmentMutationVariables>;
+
+/**
+ * __useUpdateAssignmentMutation__
+ *
+ * To run a mutation, you first call `useUpdateAssignmentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateAssignmentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateAssignmentMutation, { data, loading, error }] = useUpdateAssignmentMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateAssignmentMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAssignmentMutation, UpdateAssignmentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateAssignmentMutation, UpdateAssignmentMutationVariables>(UpdateAssignmentDocument, options);
+      }
+export type UpdateAssignmentMutationHookResult = ReturnType<typeof useUpdateAssignmentMutation>;
+export type UpdateAssignmentMutationResult = Apollo.MutationResult<UpdateAssignmentMutation>;
+export type UpdateAssignmentMutationOptions = Apollo.BaseMutationOptions<UpdateAssignmentMutation, UpdateAssignmentMutationVariables>;
 export const UpdateProjectByIdDocument = gql`
     mutation UpdateProjectById($input: UpdateProjectByIdInput!) {
   updateProjectById(input: $input) {

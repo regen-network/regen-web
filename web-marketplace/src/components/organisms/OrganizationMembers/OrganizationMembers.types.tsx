@@ -7,9 +7,11 @@ export type Member = {
   id: string;
   name: string;
   email?: string | null;
+  address?: string | null;
   title?: string | null;
   organization: string;
   role: BaseMemberRole;
+  onChainRoleId: number;
   avatar?: string;
   visible: boolean;
   isCurrentUser?: boolean;

@@ -102,7 +102,6 @@ export default function useMsgClient(
         reactQueryClient: reactQueryClient,
       });
       const userRegenBalance = userRegenBalanceRes?.balance;
-
       if (
         userRegenBalance === undefined ||
         Number(userRegenBalance?.amount) < Number(fee.amount[0].amount)
@@ -112,13 +111,13 @@ export default function useMsgClient(
       }
 
       setIsWaitingForSigning(true);
-
       const txRaw = await signingClient.sign(
         wallet.address,
         msgs,
         fee,
         memo || '',
       );
+
       setIsWaitingForSigning(false);
       const txBytes = TxRaw.encode(txRaw).finish();
       return txBytes;

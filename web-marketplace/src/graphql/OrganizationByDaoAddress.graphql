@@ -1,21 +1,22 @@
 query OrganizationByDaoAddress($daoAddress: String!) {
   organizationByDaoAddress(daoAddress: $daoAddress) {
-    daoByDaoAddress {
-      assignmentsByDaoAddress {
-        nodes {
-          roleName
-          visible
-          accountByAccountId {
-            id
-            name
-            type
-            image
-            addr
-            title
+    organizationProjectsByOrganizationId {
+      nodes {
+        projectByProjectId {
+          adminDaoAddress
+          daoByAdminDaoAddress {
+            daoRbamAddress
+            cw4GroupAddress
+            assignmentsByDaoAddress {
+              nodes {
+                accountId
+                roleName
+                onChainRoleId
+              }
+            }
           }
         }
       }
     }
-
   }
 }

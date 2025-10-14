@@ -28,19 +28,20 @@ import { RemoveMemberModal } from './OrganizationMembers.RemoveMemberModal';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 import { GetAccountsByNameOrAddrQuery } from 'generated/graphql';
 
+export type MemberData = {
+  role: BaseMemberRole | undefined;
+  addressOrEmail: string;
+  visible: boolean;
+};
+
 export type BaseProps = {
   members: Member[];
   sortDir?: 'asc' | 'desc';
   onToggleSort: () => void;
-  onInvite: () => void;
   onUpdateRole: (id: string, role: BaseMemberRole) => void;
   onUpdateVisibility: (id: string, visible: boolean) => void;
   onRemove: (id: string) => void;
-  onAddMember?: (data: {
-    role: BaseMemberRole | undefined;
-    addressOrEmail: string;
-    visible: boolean;
-  }) => void;
+  onAddMember: (data: MemberData) => void;
   accounts?: GetAccountsByNameOrAddrQuery | null;
   setDebouncedValue: UseStateSetter<string>;
 };
@@ -94,7 +95,6 @@ export const OrganizationMembersBase = ({
   members,
   sortDir,
   onToggleSort,
-  onInvite,
   onUpdateRole,
   onUpdateVisibility,
   onRemove,
@@ -140,7 +140,6 @@ export const OrganizationMembersBase = ({
         currentUserRole={currentUserRole}
         onInvite={() => {
           if (cfg.enableInviteModal) setShowInviteModal(true);
-          onInvite();
         }}
         onSort={onToggleSort}
         sortDir={sortDir}

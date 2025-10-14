@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
-import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 import { Provider as JotaiProvider } from 'jotai';
 
@@ -10,64 +9,15 @@ import {
   ROLE_OWNER,
 } from '../../ActionDropdown/ActionDropdown.constants';
 import { BaseMemberRole } from '../../BaseMembersTable/BaseMembersTable.types';
-import { mockMembers } from '../OrganizationMembers.mock';
+import { mockMembers, mockAccounts } from '../OrganizationMembers.mock';
 import { Member } from '../OrganizationMembers.types';
 import { OrganizationMembersInviteTable } from './InviteMembers.Table';
-
-const mockAccounts = [
-  {
-    id: 'acc-1',
-    creatorId: 'creator-1',
-    name: 'Alice Regeneros',
-    type: 'individual',
-    image: 'https://i.pravatar.cc/300',
-    description: 'Forest project lead',
-    addr: 'regen1aliceaddressxyz',
-    accountTranslationsById: { nodes: [] },
-  },
-  {
-    id: 'acc-2',
-    creatorId: 'creator-2',
-    name: 'Bob Carbon',
-    type: 'individual',
-    image: 'https://i.pravatar.cc/299',
-    description: 'Soil data analyst',
-    addr: 'regen1bobcarbonaddr',
-    accountTranslationsById: { nodes: [] },
-  },
-  {
-    id: 'acc-3',
-    creatorId: 'creator-3',
-    name: 'Carol Ecosystem',
-    type: 'organization',
-    image: 'https://i.pravatar.cc/288',
-    description: 'Biodiversity NGO',
-    addr: 'regen1carolorgaddr',
-    accountTranslationsById: { nodes: [] },
-  },
-  {
-    id: 'acc-4',
-    creatorId: 'creator-4',
-    name: 'Dave Verifier',
-    type: 'individual',
-    image: 'https://i.pravatar.cc/320',
-    description: 'Independent verifier',
-    addr: 'regen1daveverifier',
-    accountTranslationsById: { nodes: [] },
-  },
-];
 
 i18n.activate('en');
 
 const meta: Meta<typeof OrganizationMembersInviteTable> = {
   title: 'Marketplace/Organisms/InviteMembersTable',
   component: OrganizationMembersInviteTable,
-  argTypes: {
-    onInvite: {
-      action: 'invite-clicked',
-      description: 'Called when invite button is clicked',
-    },
-  },
   decorators: [
     Story => (
       <I18nProvider i18n={i18n}>
@@ -81,7 +31,7 @@ const meta: Meta<typeof OrganizationMembersInviteTable> = {
 
 export default meta;
 
-export const Default = (args: { onInvite: () => void }) => {
+export const Default = () => {
   const [members, setMembers] = useState<Member[]>(mockMembers);
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
   const [debouncedValue, setDebouncedValue] = useState('');
@@ -179,7 +129,6 @@ export const Default = (args: { onInvite: () => void }) => {
       <OrganizationMembersInviteTable
         onRemove={removeMember}
         onAddMember={addMember}
-        {...args}
         members={members}
         sortDir={sortDir}
         onToggleSort={toggleSort}
@@ -192,6 +141,4 @@ export const Default = (args: { onInvite: () => void }) => {
   );
 };
 
-Default.args = {
-  onInvite: action('invite-clicked'),
-};
+Default.args = {};

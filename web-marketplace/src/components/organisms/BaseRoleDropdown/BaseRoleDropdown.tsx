@@ -49,12 +49,12 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
 
   const isOwner = role === ROLE_OWNER;
   const getTooltipTitle = () => {
-    if (disabled) return _(OWNER_ADMIN_CAN_EDIT);
     if (isOwner) {
       return isCurrentUserOwner
         ? _(MUST_ASSIGN_NEW_OWNER)
         : _(OWNER_CAN_EDIT_SELF);
     }
+    if (disabled) return _(OWNER_ADMIN_CAN_EDIT);
     return undefined;
   };
   const tooltipTitle = getTooltipTitle();
@@ -74,7 +74,11 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
     <div ref={ref} className="relative w-full font-sans">
       {isDropdownDisabled ? (
         <div className="flex items-center gap-5">
-          <Body className="capitalize text-sc-text-header" size="sm">
+          <Body
+            className="capitalize text-sc-text-header"
+            size="sm"
+            mobileSize="sm"
+          >
             {displayLabel}
           </Body>
           {tooltipTitle && (
@@ -93,7 +97,7 @@ export const BaseRoleDropdown: React.FC<BaseRoleDropdownProps> = ({
             `flex items-center justify-between w-full ${height} px-20 py-15 rounded border border-solid cursor-pointer`,
             'bg-bc-neutral-0 text-bc-neutral-700',
             'border-bc-neutral-300 hover:border-gray-300',
-            'text-sm sm:text-base'
+            'text-sm',
           )}
         >
           <div className="flex items-center gap-2">

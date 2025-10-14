@@ -56,7 +56,6 @@ type VariantConfig = {
   enableProfileEdit: boolean;
   limitActionsToInvited: boolean;
   showActionsColumnWhenInvited: boolean;
-  disableRoleEditForCurrentUser: boolean;
 };
 
 export type OrganizationMembersBaseProps = BaseProps & {
@@ -75,7 +74,6 @@ const defaultConfig: Record<'standard' | 'invite', VariantConfig> = {
     enableProfileEdit: false,
     limitActionsToInvited: false,
     showActionsColumnWhenInvited: false,
-    disableRoleEditForCurrentUser: false,
   },
   invite: {
     showHeader: false,
@@ -87,7 +85,6 @@ const defaultConfig: Record<'standard' | 'invite', VariantConfig> = {
     enableProfileEdit: true,
     limitActionsToInvited: true,
     showActionsColumnWhenInvited: true,
-    disableRoleEditForCurrentUser: true,
   },
 };
 
@@ -191,10 +188,7 @@ export const OrganizationMembersBase = ({
             <div className="flex gap-20 xl:hidden w-full px-6 justify-between items-center">
               <MemberRoleDropdown
                 role={member.role}
-                disabled={
-                  !canAdmin ||
-                  (cfg.disableRoleEditForCurrentUser && member.isCurrentUser)
-                }
+                disabled={!canAdmin}
                 hasWalletAddress={member.hasWalletAddress}
                 onChange={r => onUpdateRole(member.id, r)}
                 currentUserRole={currentUserRole}
@@ -211,10 +205,7 @@ export const OrganizationMembersBase = ({
             <div className="hidden xl:flex w-[170px] items-center">
               <MemberRoleDropdown
                 role={member.role}
-                disabled={
-                  !canAdmin ||
-                  (cfg.disableRoleEditForCurrentUser && member.isCurrentUser)
-                }
+                disabled={!canAdmin}
                 hasWalletAddress={member.hasWalletAddress}
                 onChange={r => onUpdateRole(member.id, r)}
                 currentUserRole={currentUserRole}

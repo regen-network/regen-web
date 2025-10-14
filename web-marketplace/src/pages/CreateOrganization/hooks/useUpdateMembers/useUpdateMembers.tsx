@@ -52,7 +52,10 @@ import {
   getRoleAuthorizationIds,
   updateMemberRoleActions,
 } from './useUpdateMembers.utils';
-import { MISSING_REQUIRED_PARAMS } from './useUpdateMembers.constants';
+import {
+  MEMBER_NOT_FOUND,
+  MISSING_REQUIRED_PARAMS,
+} from './useUpdateMembers.constants';
 
 import { postData } from 'utils/fetch/postData';
 import { apiServerUrl } from 'lib/env';
@@ -418,7 +421,7 @@ export const useUpdateMembers = ({
 
       const member = members.find(member => member.id === id);
       if (!member) {
-        setErrorBannerText(_(msg`member not found`));
+        setErrorBannerText(_(MEMBER_NOT_FOUND));
         return;
       }
       const {
@@ -595,16 +598,68 @@ export const useUpdateMembers = ({
       }
     },
     [
-      members,
-      projectsCurrentUserCanManageMembers,
+      wallet?.address,
+      signingCosmWasmClient,
+      daoAddress,
+      daoRbamAddress,
+      cw4GroupAddress,
       roleId,
       authorizationId,
       projectRoleId,
       projectAuthorizationId,
+      setErrorBannerText,
+      _,
+      members,
+      projectsCurrentUserCanManageMembers,
+      refetchMembers,
+      updateAssignment,
+      reactQueryClient,
+      activeAccountId,
     ],
   );
 
-  const updateVisibility = useCallback(async () => {}, []);
+  const updateVisibility = useCallback(
+    async (id: string, visible: boolean) => {
+      if (!daoAddress) {
+        setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
+        return;
+      }
+      const member = members.find(member => member.id === id);
+      if (!member) {
+        setErrorBannerText(_(MEMBER_NOT_FOUND));
+        return;
+      }
+      const { role: roleName } = member;
+      try {
+        await updateAssignment({
+          variables: {
+            input: {
+              daoAddress,
+              roleName,
+              accountId: id,
+              assignmentPatch: { visible },
+            },
+          },
+        });
+        await reactQueryClient.invalidateQueries({
+          queryKey: getAccountByIdQueryKey({
+            id: activeAccountId,
+          }),
+        });
+      } catch (e) {
+        setErrorBannerText(String(e));
+      }
+    },
+    [
+      daoAddress,
+      setErrorBannerText,
+      _,
+      members,
+      updateAssignment,
+      reactQueryClient,
+      activeAccountId,
+    ],
+  );
 
   return { addMember, removeMember, updateRole, updateVisibility };
 };

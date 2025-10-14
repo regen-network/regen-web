@@ -32,7 +32,10 @@ import { getOrganizationByDaoAddressQueryKey } from 'lib/queries/react-query/reg
 import { getCsrfTokenQuery } from 'lib/queries/react-query/registry-server/getCsrfTokenQuery/getCsrfTokenQuery';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
-import { useUpdateAssignmentMutation } from 'generated/graphql';
+import {
+  useDeleteAssignmentMutation,
+  useUpdateAssignmentMutation,
+} from 'generated/graphql';
 
 import { MemberData } from 'components/organisms/OrganizationMembers/OrganizationMembers.BaseTable';
 import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
@@ -45,11 +48,12 @@ import { isValidAddress } from 'web-components/src/components/inputs/validation'
 
 import {
   addMemberActions,
-  findNewAssignment,
+  findAssignment,
   getAuthorizationName,
   getNewRoleId,
   getProjectsCurrentUserCanManageMembers,
   getRoleAuthorizationIds,
+  removeMemberActions,
   updateMemberRoleActions,
 } from './useUpdateMembers.utils';
 import {
@@ -62,6 +66,7 @@ import { apiServerUrl } from 'lib/env';
 import { useRetryCsrfRequest } from 'lib/errors/hooks/useRetryCsrfRequest';
 import { timer } from 'utils/timer';
 import { Member } from 'components/organisms/OrganizationMembers/OrganizationMembers.types';
+import { RefetchMembersParams } from './useUpdateMembers.types';
 
 type UseUpdateMembersParams = {
   currentUserRole?: BaseMemberRole;
@@ -108,6 +113,7 @@ export const useUpdateMembers = ({
   );
 
   const [updateAssignment] = useUpdateAssignmentMutation();
+  const [deleteAssignment] = useDeleteAssignmentMutation();
 
   // We also need to update members for the org projects where current user can manage members,
   // ie has owner or admin role
@@ -142,19 +148,20 @@ export const useUpdateMembers = ({
     );
 
   const refetchMembers = useCallback(
-    async (
-      address: string,
-      role: string,
-      visible: boolean,
-      accountId?: string,
-    ) => {
+    async ({
+      address,
+      role,
+      visible,
+      accountId,
+      shouldFindAssignment = true,
+    }: RefetchMembersParams) => {
       if (!daoAddress) {
         throw new Error(_(MISSING_REQUIRED_PARAMS));
       }
-      let assignment;
+      let stop: boolean = false;
       let i = 0;
-      // wait for the assignment to be indexed in the db
-      while (!assignment && i < 10) {
+      // wait for the assignment change(s) to be indexed in the db
+      while (!stop && i < 10) {
         if (!accountId) {
           // fetch new member account
           const accRes = await getFromCacheOrFetch({
@@ -172,17 +179,19 @@ export const useUpdateMembers = ({
         if (accountId) {
           // refetch assignments
           const res = await refetch();
-          assignment = findNewAssignment({
+          const assignment = findAssignment({
             data: res.data,
             daoAddress,
             accountId,
+            roleName: role,
           });
-          if (assignment) {
+          stop = shouldFindAssignment ? !!assignment : !assignment;
+          if (stop) {
             setProcessingModalAtom(atom => void (atom.open = false));
             // assignment.visible is true by default in our db,
             // but if the member shouldn't be visible,
             // then we need to update it manually
-            if (!visible) {
+            if (shouldFindAssignment && !visible) {
               await updateAssignment({
                 variables: {
                   input: {
@@ -204,11 +213,11 @@ export const useUpdateMembers = ({
         i++;
         await timer(1000);
       }
-      if (!assignment) {
+      if (!stop) {
         setProcessingModalAtom(atom => void (atom.open = false));
         setErrorBannerText(
           _(
-            msg`Could not find assignment, you might need to reload the page later`,
+            msg`Could not refetch assignments, you might need to reload the page later`,
           ),
         );
       }
@@ -308,7 +317,7 @@ export const useUpdateMembers = ({
             2,
           );
 
-          await refetchMembers(addressOrEmail, role, visible);
+          await refetchMembers({ address: addressOrEmail, role, visible });
         } catch (error) {
           setProcessingModalAtom(atom => void (atom.open = false));
           setErrorBannerText(String(error));
@@ -398,7 +407,152 @@ export const useUpdateMembers = ({
     ],
   );
 
-  const removeMember = useCallback(async () => {}, []);
+  const removeMember = useCallback(async (id: string) => {
+    if (
+      !wallet?.address ||
+      !signingCosmWasmClient ||
+      !daoAddress ||
+      !daoRbamAddress ||
+      !cw4GroupAddress ||
+      !currentUserRole ||
+      !authorizationId ||
+      !roleId ||
+      !projectAuthorizationId ||
+      !projectRoleId
+    ) {
+      setErrorBannerText(_(MISSING_REQUIRED_PARAMS));
+      return;
+    }
+
+    const member = members.find(member => member.id === id);
+    if (!member) {
+      setErrorBannerText(_(MEMBER_NOT_FOUND));
+      return;
+    }
+    const {
+      onChainRoleId: memberRoleId,
+      address: memberAddress,
+      role,
+    } = member;
+
+    if (memberAddress) {
+      // TODO how to handle edge case where web2 member was added off-chain only
+      // then adds a wallet address to his/her account
+      // in this case, the following would fail
+      // is it worth querying on chain assignments beforehand?
+      // relevant for updateRole too
+
+      const orgExecuteInstruction = {
+        contractAddress: daoRbamAddress,
+        msg: {
+          execute_actions: {
+            actions: removeMemberActions({
+              daoRbamAddress,
+              cw4GroupAddress,
+              authorizationId,
+              roleId,
+              memberAddress,
+              memberRoleId,
+            }),
+          },
+        },
+      };
+
+      const projectExecuteInstructions = (projectsCurrentUserCanManageMembers
+        ?.map(project => {
+          const projectDao = project?.projectByProjectId?.daoByAdminDaoAddress;
+          if (!projectDao) return null;
+          const assignment = projectDao.assignmentsByDaoAddress.nodes.find(
+            assignment => assignment?.accountId === id,
+          );
+          if (!assignment) return null;
+          return {
+            contractAddress: project?.projectByProjectId?.adminDaoAddress,
+            msg: {
+              execute_actions: {
+                actions: removeMemberActions({
+                  daoRbamAddress: projectDao.daoRbamAddress,
+                  cw4GroupAddress: projectDao.cw4GroupAddress,
+                  authorizationId: projectAuthorizationId,
+                  roleId: projectRoleId,
+                  memberAddress,
+                  memberRoleId: parseInt(assignment.onChainRoleId),
+                }),
+              },
+            },
+          };
+        })
+        .filter(Boolean) || []) as ExecuteInstruction[];
+
+      try {
+        setProcessingModalAtom(atom => void (atom.open = true));
+        await signingCosmWasmClient.executeMultiple(
+          wallet?.address,
+          [orgExecuteInstruction, ...projectExecuteInstructions],
+          2,
+        );
+
+        await refetchMembers({
+          address: memberAddress,
+          role,
+          accountId: id,
+          shouldFindAssignment: false,
+        });
+      } catch (error) {
+        setProcessingModalAtom(atom => void (atom.open = false));
+        setErrorBannerText(String(error));
+      }
+    } else {
+      try {
+        await deleteAssignment({
+          variables: {
+            input: {
+              daoAddress,
+              roleName: role,
+              accountId: id,
+            },
+          },
+        });
+        await reactQueryClient.invalidateQueries({
+          queryKey: getAccountByIdQueryKey({
+            id: activeAccountId,
+          }),
+        });
+      } catch (e) {
+        setErrorBannerText(String(e));
+      }
+
+      if (projectsCurrentUserCanManageMembers)
+        for (let project of projectsCurrentUserCanManageMembers) {
+          if (project)
+            try {
+              const projectDaoAddress =
+                project?.projectByProjectId?.adminDaoAddress;
+              const projectRoleName =
+                project?.projectByProjectId?.daoByAdminDaoAddress?.assignmentsByDaoAddress.nodes?.find(
+                  assignment => assignment?.accountId === id,
+                )?.roleName;
+              if (!projectDaoAddress || !projectRoleName) return;
+              await deleteAssignment({
+                variables: {
+                  input: {
+                    daoAddress: projectDaoAddress,
+                    roleName: projectRoleName,
+                    accountId: id,
+                  },
+                },
+              });
+              await reactQueryClient.invalidateQueries({
+                queryKey: getAccountByIdQueryKey({
+                  id: activeAccountId,
+                }),
+              });
+            } catch (e) {
+              setErrorBannerText(String(e));
+            }
+        }
+    }
+  }, []);
 
   const updateRole = useCallback(
     async (id: string, role: BaseMemberRole) => {
@@ -539,7 +693,12 @@ export const useUpdateMembers = ({
             [orgExecuteInstruction, ...projectExecuteInstructions],
             2,
           );
-          await refetchMembers(memberAddress, role, visible, id);
+          await refetchMembers({
+            address: memberAddress,
+            role,
+            visible,
+            accountId: id,
+          });
         } catch (error) {
           setProcessingModalAtom(atom => void (atom.open = false));
           setErrorBannerText(String(error));

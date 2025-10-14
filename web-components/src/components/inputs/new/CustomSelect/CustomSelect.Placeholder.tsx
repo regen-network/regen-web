@@ -1,6 +1,6 @@
 import { ComponentType } from 'react';
-import BreadcrumbIcon from '../../components/icons/BreadcrumbIcon';
-import { Option } from '../../components/inputs/new/CustomSelect/CustomSelect.types';
+import BreadcrumbIcon from 'web-components/src/components/icons/BreadcrumbIcon';
+import { Option } from 'web-components/src/components/inputs/new/CustomSelect/CustomSelect.types';
 
 export function Placeholder({
   setIsOpen,

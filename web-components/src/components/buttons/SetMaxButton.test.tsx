@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { SetMaxButton } from '../../components/buttons/SetMaxButton';
+import { SetMaxButton } from 'web-components/src/components/buttons/SetMaxButton';
 import { fireEvent, screen } from 'web-components/test/test-utils';
 
 describe('SetMaxButton', () => {

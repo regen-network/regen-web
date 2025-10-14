@@ -9,7 +9,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { Feature } from 'geojson';
-import { PlayPauseButton } from '../../components/atoms/PlayPauseButton/PlayPauseButton';
+import { PlayPauseButton } from 'web-components/src/components/atoms/PlayPauseButton/PlayPauseButton';
 
 import { cn } from '../../../../utils/styles/cn';
 import ArrowDownIcon from '../../../icons/ArrowDownIcon';

@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { SupCurrencyAndAmount } from '../../components/SupCurrencyAndAmount/SupCurrencyAndAmount';
+import { SupCurrencyAndAmount } from 'web-components/src/components/SupCurrencyAndAmount/SupCurrencyAndAmount';
 import { USD_DENOM } from 'web-marketplace/src/config/allowedBaseDenoms';
 
 describe('SupCurrencyAndAmount', () => {

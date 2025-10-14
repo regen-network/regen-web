@@ -1,8 +1,8 @@
 import { ReactNode, useState } from 'react';
 import { SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
-import { PrefinanceTag } from '../../components/PrefinanceTag/PrefinanceTag';
-import InfoTooltip from '../../components/tooltip/InfoTooltip';
+import { PrefinanceTag } from 'web-components/src/components/PrefinanceTag/PrefinanceTag';
+import InfoTooltip from 'web-components/src/components/tooltip/InfoTooltip';
 import { Track } from 'web-marketplace/src/lib/tracker/types';
 
 import { ButtonType } from '../../../types/shared/buttonType';

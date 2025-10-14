@@ -1,5 +1,5 @@
 import { ComponentType, useEffect, useState } from 'react';
-import { Option } from '../../components/inputs/new/CustomSelect/CustomSelect.types';
+import { Option } from 'web-components/src/components/inputs/new/CustomSelect/CustomSelect.types';
 
 import { SelectOption } from './CustomSelect.Option';
 import { Placeholder } from './CustomSelect.Placeholder';

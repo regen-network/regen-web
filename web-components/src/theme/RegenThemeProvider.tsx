@@ -6,8 +6,8 @@ import { Theme, ThemeProvider } from '@mui/material/styles';
 
 import theme from './muiTheme';
 
-import '../../theme/index.css';
-import '../../theme/fonts.css';
+import 'web-components/src/theme/index.css';
+import 'web-components/src/theme/fonts.css';
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

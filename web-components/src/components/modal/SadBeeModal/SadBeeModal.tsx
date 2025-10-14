@@ -1,5 +1,5 @@
-import { SadBeeIcon } from '../../components/icons/SadBeeIcon';
-import Modal, { RegenModalProps } from '../../components/modal';
+import { SadBeeIcon } from 'web-components/src/components/icons/SadBeeIcon';
+import Modal, { RegenModalProps } from 'web-components/src/components/modal';
 
 type Props = React.PropsWithChildren<RegenModalProps>;
 

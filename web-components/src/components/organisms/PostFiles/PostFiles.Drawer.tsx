@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { Slide } from '@mui/material';
 import { Point } from 'geojson';
-import { PlayPauseButton } from '../../components/atoms/PlayPauseButton/PlayPauseButton';
+import { PlayPauseButton } from 'web-components/src/components/atoms/PlayPauseButton/PlayPauseButton';
 
 import { UseStateSetter } from '../../../types/react/useState';
 import { cn } from '../../../utils/styles/cn';

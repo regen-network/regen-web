@@ -1,4 +1,4 @@
-import { cn } from '../../utils/styles/cn';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 import { ProjectCardBodyTextsMapping } from '../cards/ProjectCard/ProjectCard.types';
 import { PrefinanceIcon } from '../icons/PrefinanceIcon';

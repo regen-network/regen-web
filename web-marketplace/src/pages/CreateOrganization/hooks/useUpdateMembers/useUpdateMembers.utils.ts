@@ -1,17 +1,67 @@
-import { toBase64, toUtf8 } from '@cosmjs/encoding';
 import {
   AccountByIdQuery,
   OrganizationByDaoAddressQuery,
 } from 'generated/graphql';
 import { orgRoles, projectRoles } from './useUpdateMembers.constants';
-import { cosmos } from '@regen-network/api';
-import { AllowedMsgAllowance } from '@regen-network/api/cosmos/feegrant/v1beta1/feegrant';
+// import { cosmos } from '@regen-network/api';
+// import { AllowedMsgAllowance } from '@regen-network/api/cosmos/feegrant/v1beta1/feegrant';
 import { MsgGrantAllowance } from '@regen-network/api/cosmos/feegrant/v1beta1/tx';
 import { BaseMemberRole } from 'components/organisms/BaseMembersTable/BaseMembersTable.types';
 import {
   ROLE_ADMIN,
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
+import {
+  adminMembersAuthorizations,
+  encodeJsonToBase64,
+} from '../useCreateDao/useCreateDao.utils';
+
+type UpdateAuthorizationActionParams = {
+  /** the address of the dao-rbam contract */
+  daoRbamAddress: string;
+  /** the address of the cw4_group contract */
+  cw4GroupAddress: string;
+  /** the id of the role that includes an authorization to update members */
+  roleId: number;
+  /** the id of the authorization that has permission to update members */
+  authorizationId: number;
+  /** the address of the new owner to be assigned during the update */
+  newOwnerAddress: string;
+  /** the id of the 'can_manage_members_except_owner' authorization to update */
+  authorizationIdToUpdate: number;
+};
+
+export const updateAuthorizationAction = ({
+  daoRbamAddress,
+  authorizationId,
+  roleId,
+  cw4GroupAddress,
+  newOwnerAddress,
+  authorizationIdToUpdate,
+}: UpdateAuthorizationActionParams) => ({
+  authorization_id: authorizationId,
+  role_id: roleId,
+  msg: {
+    wasm: {
+      execute: {
+        funds: [],
+        contract_addr: daoRbamAddress,
+        msg: encodeJsonToBase64({
+          update_authorization: {
+            authorization_id: authorizationIdToUpdate,
+            filter: {
+              set: adminMembersAuthorizations(
+                newOwnerAddress,
+                cw4GroupAddress,
+                daoRbamAddress,
+              ).filter,
+            },
+          },
+        }),
+      },
+    },
+  },
+});
 
 type AssignNewOrgOwnerActionsParams = Pick<
   AssignNewOwnerActionsParams,
@@ -23,9 +73,6 @@ type AssignNewOrgOwnerActionsParams = Pick<
   | 'newOwnerAddress'
   | 'newOwnerOldRoleId'
 >;
-
-export const encodeJsonToBase64 = (object: any) =>
-  toBase64(toUtf8(JSON.stringify(object)));
 
 export const assignNewOrgOwnerActions = ({
   daoRbamAddress,

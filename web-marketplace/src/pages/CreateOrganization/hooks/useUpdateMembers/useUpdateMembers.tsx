@@ -9,9 +9,7 @@ import {
   useApolloClient,
 } from '@apollo/client';
 
-import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx';
 import type { ExecuteInstruction } from '@cosmjs/cosmwasm-stargate';
-import { toUtf8 } from '@cosmjs/encoding';
 
 import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -54,11 +52,14 @@ import {
   getProjectsCurrentUserCanManageMembers,
   getRoleAuthorizationIds,
   removeMemberActions,
+  updateAuthorizationAction,
   updateMemberRoleActions,
 } from './useUpdateMembers.utils';
 import {
   MEMBER_NOT_FOUND,
   MISSING_REQUIRED_PARAMS,
+  orgRoles,
+  projectRoles,
 } from './useUpdateMembers.constants';
 
 import { postData } from 'utils/fetch/postData';
@@ -499,6 +500,7 @@ export const useUpdateMembers = ({
           shouldFindAssignment: false,
         });
       } catch (error) {
+        console.log(error);
         setProcessingModalAtom(atom => void (atom.open = false));
         setErrorBannerText(String(error));
       }
@@ -591,22 +593,35 @@ export const useUpdateMembers = ({
 
         // If we assign member the owner role,
         // it means we need to downgrade current user to admin
+        // and update the 'can_manage_members_except_owner' authorization to use the new owner address
         const orgOwnerActions =
           role === ROLE_OWNER
-            ? updateMemberRoleActions({
-                daoRbamAddress,
-                authorizationId,
-                roleId,
-                memberAddress: wallet?.address,
-                newRoleId: getNewRoleId({
-                  type: 'organization',
-                  role: ROLE_ADMIN,
+            ? [
+                ...updateMemberRoleActions({
+                  daoRbamAddress,
+                  authorizationId,
+                  roleId,
+                  memberAddress: wallet?.address,
+                  newRoleId: getNewRoleId({
+                    type: 'organization',
+                    role: ROLE_ADMIN,
+                  }),
+                  oldRoleId: getNewRoleId({
+                    type: 'organization',
+                    role: ROLE_OWNER,
+                  }),
                 }),
-                oldRoleId: getNewRoleId({
-                  type: 'organization',
-                  role: ROLE_OWNER,
+                updateAuthorizationAction({
+                  daoRbamAddress,
+                  cw4GroupAddress,
+                  roleId,
+                  authorizationId,
+                  newOwnerAddress: memberAddress,
+                  authorizationIdToUpdate: orgRoles['admin'].authorizations[
+                    'can_manage_members_except_owner'
+                  ] as number,
                 }),
-              })
+              ]
             : [];
         const orgExecuteInstruction = {
           contractAddress: daoRbamAddress,
@@ -642,23 +657,37 @@ export const useUpdateMembers = ({
 
             // If current user is owner of the project,
             // we need to downgrade current user to admin
+            // and update the 'can_manage_members_except_owner' authorization to use the new owner address
             const projectOwnerActions =
               currentUserOldAssignment?.roleName === ROLE_OWNER &&
               role === ROLE_OWNER
-                ? updateMemberRoleActions({
-                    daoRbamAddress: projectDao.daoRbamAddress,
-                    authorizationId: projectAuthorizationId,
-                    roleId: projectRoleId,
-                    memberAddress: wallet?.address,
-                    newRoleId: getNewRoleId({
-                      type: 'project',
-                      role: ROLE_ADMIN,
+                ? [
+                    ...updateMemberRoleActions({
+                      daoRbamAddress: projectDao.daoRbamAddress,
+                      authorizationId: projectAuthorizationId,
+                      roleId: projectRoleId,
+                      memberAddress: wallet?.address,
+                      newRoleId: getNewRoleId({
+                        type: 'project',
+                        role: ROLE_ADMIN,
+                      }),
+                      oldRoleId: getNewRoleId({
+                        type: 'project',
+                        role: ROLE_OWNER,
+                      }),
                     }),
-                    oldRoleId: getNewRoleId({
-                      type: 'project',
-                      role: ROLE_OWNER,
+                    updateAuthorizationAction({
+                      daoRbamAddress: projectDao.daoRbamAddress,
+                      cw4GroupAddress: projectDao.cw4GroupAddress,
+                      roleId: projectRoleId,
+                      authorizationId: projectAuthorizationId,
+                      newOwnerAddress: memberAddress,
+                      authorizationIdToUpdate: projectRoles['admin']
+                        .authorizations[
+                        'can_manage_members_except_owner'
+                      ] as number,
                     }),
-                  })
+                  ]
                 : [];
 
             // TODO this means the user is in the org but not in this project anymore

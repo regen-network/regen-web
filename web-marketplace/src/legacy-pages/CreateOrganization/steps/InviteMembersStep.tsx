@@ -114,6 +114,7 @@ const InviteMembersStep = () => {
           setDebouncedValue={setDebouncedValue}
           accounts={accounts}
           onAddMember={addMember}
+          onSaveProfile={async () => {}} // TODO
         />
       )}
     </div>

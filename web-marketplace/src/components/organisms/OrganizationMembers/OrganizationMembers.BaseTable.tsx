@@ -27,6 +27,7 @@ import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
 import { RemoveMemberModal } from './OrganizationMembers.RemoveMemberModal';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
 import { GetAccountsByNameOrAddrQuery } from 'generated/graphql';
+import { PersonalProfileSchemaType } from './InviteMembers/InviteMembers.schema';
 
 export type MemberData = {
   role: BaseMemberRole | undefined;
@@ -38,12 +39,13 @@ export type BaseProps = {
   members: Member[];
   sortDir?: 'asc' | 'desc';
   onToggleSort: () => void;
-  onUpdateRole: (id: string, role: BaseMemberRole) => void;
-  onUpdateVisibility: (id: string, visible: boolean) => void;
-  onRemove: (id: string) => void;
-  onAddMember: (data: MemberData) => void;
+  onUpdateRole: (id: string, role: BaseMemberRole) => Promise<void>;
+  onUpdateVisibility: (id: string, visible: boolean) => Promise<void>;
+  onRemove: (id: string) => Promise<void>;
+  onAddMember: (data: MemberData) => Promise<void>;
   accounts?: GetAccountsByNameOrAddrQuery | null;
   setDebouncedValue: UseStateSetter<string>;
+  onSaveProfile: (data: PersonalProfileSchemaType) => Promise<void>;
 };
 
 type VariantConfig = {
@@ -83,8 +85,8 @@ const defaultConfig: Record<'standard' | 'invite', VariantConfig> = {
     enableInviteModal: true,
     enableRemoveModal: true,
     enableProfileEdit: true,
-    limitActionsToInvited: true,
-    showActionsColumnWhenInvited: true,
+    limitActionsToInvited: false,
+    showActionsColumnWhenInvited: false,
   },
 };
 
@@ -99,6 +101,7 @@ export const OrganizationMembersBase = ({
   accounts,
   setDebouncedValue,
   variant,
+  onSaveProfile,
   config: overrideConfig = {},
 }: OrganizationMembersBaseProps) => {
   const cfg: VariantConfig = { ...defaultConfig[variant], ...overrideConfig };
@@ -264,9 +267,9 @@ export const OrganizationMembersBase = ({
             setShowRemoveModal(false);
             setMemberToRemove(null);
           }}
-          onConfirm={() => {
+          onConfirm={async () => {
             if (memberToRemove) {
-              onRemove(memberToRemove);
+              await onRemove(memberToRemove);
               setBannerText(_(MEMBER_REMOVED_BANNER));
             }
             setShowRemoveModal(false);
@@ -282,7 +285,10 @@ export const OrganizationMembersBase = ({
           initialAvatar={members.find(m => m.isCurrentUser)?.avatar}
           initialDescription={undefined}
           initialTitle={members.find(m => m.isCurrentUser)?.title}
-          onSave={() => setShowPersonalProfileModal(false)}
+          onSave={async (data) => {
+            await onSaveProfile(data);
+            setShowPersonalProfileModal(false);
+          }}
         />
       )}
     </>

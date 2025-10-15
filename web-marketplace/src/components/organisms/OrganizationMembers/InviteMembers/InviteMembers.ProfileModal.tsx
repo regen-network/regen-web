@@ -27,7 +27,10 @@ import {
   TITLE_LABEL,
   TITLE_SUBHEADER,
 } from '../OrganizationMembers.constants';
-import { personalProfileSchema } from './InviteMembers.schema';
+import {
+  personalProfileSchema,
+  PersonalProfileSchemaType,
+} from './InviteMembers.schema';
 import Modal from 'web-components/src/components/modal';
 
 interface PersonalProfileModalProps {
@@ -38,12 +41,7 @@ interface PersonalProfileModalProps {
   initialDescription?: string;
   initialTitle?: string | null;
   onUploadAvatar?: (file: File) => Promise<{ url: string }>;
-  onSave: (data: {
-    name: string;
-    avatar?: string;
-    title?: string;
-    description?: string;
-  }) => void;
+  onSave: (data: PersonalProfileSchemaType) => Promise<void>;
 }
 
 export const PersonalProfileModal = ({
@@ -57,12 +55,8 @@ export const PersonalProfileModal = ({
   onSave,
 }: PersonalProfileModalProps) => {
   const { _ } = useLingui();
-  const modalRef = useClickOutside<HTMLDivElement>(() => onClose());
 
-  const form = useZodForm<
-    typeof personalProfileSchema,
-    typeof personalProfileSchema
-  >({
+  const form = useZodForm({
     schema: personalProfileSchema,
     defaultValues: {
       name: initialName || '',

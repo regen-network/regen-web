@@ -60,3 +60,5 @@ export const personalProfileSchema = z.object({
   title: z.string().optional(),
   description: z.string().max(160).optional(),
 });
+
+export type PersonalProfileSchemaType = z.infer<typeof personalProfileSchema>;

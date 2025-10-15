@@ -349,7 +349,7 @@ const ownerMembersAuthorizations = (
   },
 ];
 
-export const adminMembersAuthorizations = (
+const adminMembersAuthorization = (
   initialOwnerAddress: string,
   cw4GroupAddress: string,
   rbamAddress: string,
@@ -454,7 +454,7 @@ export const organizationRoles = (
     metadata:
       'Manages user access and has full control of projects, credits, and credit classes.',
     authorizations: [
-      ...adminMembersAuthorizations(
+      adminMembersAuthorization(
         initialOwnerAddress,
         cw4GroupAddress,
         rbamAddress,
@@ -533,7 +533,7 @@ export const projectRoles = (
     metadata:
       'Manages user access and can edit all project info and project credits.',
     authorizations: [
-      ...adminMembersAuthorizations(
+      adminMembersAuthorization(
         initialOwnerAddress,
         cw4GroupAddress,
         rbamAddress,

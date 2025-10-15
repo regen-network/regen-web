@@ -623,6 +623,8 @@ export const useUpdateMembers = ({
                 }),
               ]
             : [];
+
+        console.log('orgOwnerActions', orgOwnerActions);
         const orgExecuteInstruction = {
           contractAddress: daoRbamAddress,
           msg: {

@@ -12,7 +12,7 @@ import {
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import {
-  adminMembersAuthorizations,
+  adminMembersAuthorization,
   encodeJsonToBase64,
 } from '../useCreateDao/useCreateDao.utils';
 
@@ -38,30 +38,32 @@ export const updateAuthorizationAction = ({
   cw4GroupAddress,
   newOwnerAddress,
   authorizationIdToUpdate,
-}: UpdateAuthorizationActionParams) => ({
-  authorization_id: authorizationId,
-  role_id: roleId,
-  msg: {
-    wasm: {
-      execute: {
-        funds: [],
-        contract_addr: daoRbamAddress,
-        msg: encodeJsonToBase64({
-          update_authorization: {
-            authorization_id: authorizationIdToUpdate,
-            filter: {
-              set: adminMembersAuthorizations(
-                newOwnerAddress,
-                cw4GroupAddress,
-                daoRbamAddress,
-              ).filter,
+}: UpdateAuthorizationActionParams) => {
+  return {
+    authorization_id: authorizationId,
+    role_id: roleId,
+    msg: {
+      wasm: {
+        execute: {
+          funds: [],
+          contract_addr: daoRbamAddress,
+          msg: encodeJsonToBase64({
+            update_authorization: {
+              authorization_id: authorizationIdToUpdate,
+              filter: {
+                set: adminMembersAuthorization(
+                  newOwnerAddress,
+                  cw4GroupAddress,
+                  daoRbamAddress,
+                ).filter,
+              },
             },
-          },
-        }),
+          }),
+        },
       },
     },
-  },
-});
+  };
+};
 
 type AssignNewOrgOwnerActionsParams = Pick<
   AssignNewOwnerActionsParams,

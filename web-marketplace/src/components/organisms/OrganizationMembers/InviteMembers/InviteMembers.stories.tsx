@@ -13,6 +13,7 @@ import { BaseMemberRole } from '../../BaseMembersTable/BaseMembersTable.types';
 import { mockMembers, mockAccounts } from '../OrganizationMembers.mock';
 import { Member } from '../OrganizationMembers.types';
 import { OrganizationMembersInviteTable } from './InviteMembers.Table';
+import { AccountsOrderBy } from 'generated/graphql';
 
 i18n.activate('en');
 
@@ -45,7 +46,9 @@ export const Default = (args: {
   onUpload: () => Promise<{ url: string }>;
 }) => {
   const [members, setMembers] = useState<Member[]>(mockMembers);
-  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
+  const [sortDir, setSortDir] = useState<
+    AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc
+  >(AccountsOrderBy.NameAsc);
   const [debouncedValue, setDebouncedValue] = useState('');
   const [accounts, setAccounts] = useState<any>(null);
 
@@ -72,11 +75,14 @@ export const Default = (args: {
   }, [debouncedValue]);
 
   const toggleSort = () => {
-    const dir = sortDir === 'asc' ? 'desc' : 'asc';
+    const dir =
+      sortDir === AccountsOrderBy.NameAsc
+        ? AccountsOrderBy.NameDesc
+        : AccountsOrderBy.NameAsc;
     setSortDir(dir);
     setMembers(prev =>
       [...prev].sort((a, b) =>
-        dir === 'asc'
+        dir === AccountsOrderBy.NameAsc
           ? a.name.localeCompare(b.name)
           : b.name.localeCompare(a.name),
       ),

@@ -23,6 +23,7 @@ import {
   BaseUser,
   ProjectRole,
 } from './BaseMembersTable.types';
+import { AccountsOrderBy } from 'generated/graphql';
 
 interface BaseMembersTableProps<T extends BaseUser> {
   users: T[];
@@ -31,7 +32,7 @@ interface BaseMembersTableProps<T extends BaseUser> {
   inviteButtonText: string;
   onInvite?: () => void;
   onSort?: () => void;
-  sortDir?: 'asc' | 'desc';
+  sortDir?: AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc;
   children: (user: T, canAdmin: boolean) => React.ReactNode;
   context: 'organization' | 'project';
   additionalColumns?: string[];
@@ -50,7 +51,7 @@ export const BaseMembersTable = <T extends BaseUser>({
   inviteButtonText,
   onInvite,
   onSort,
-  sortDir = 'asc',
+  sortDir = AccountsOrderBy.NameAsc,
   children,
   context,
   additionalColumns = [],
@@ -155,7 +156,7 @@ export const BaseMembersTable = <T extends BaseUser>({
           {_(NAME)}
           <DropdownIcon
             className={`ml-10 w-4 h-4 transition-transform ${
-              sortDir === 'desc' ? 'rotate-180' : ''
+              sortDir === AccountsOrderBy.NameDesc ? 'rotate-180' : ''
             }`}
           />
         </div>
@@ -178,7 +179,7 @@ export const BaseMembersTable = <T extends BaseUser>({
           {_(NAME)}
           <DropdownIcon
             className={`ml-10 w-4 h-4 transition-transform ${
-              sortDir === 'desc' ? 'rotate-180' : ''
+              sortDir === AccountsOrderBy.NameDesc ? 'rotate-180' : ''
             }`}
           />
         </div>

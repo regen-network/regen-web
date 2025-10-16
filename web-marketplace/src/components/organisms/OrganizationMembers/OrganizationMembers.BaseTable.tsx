@@ -26,7 +26,10 @@ import { Member } from './OrganizationMembers.types';
 import { VisibilitySwitch } from './OrganizationMembers.VisibilitySwitch';
 import { RemoveMemberModal } from './OrganizationMembers.RemoveMemberModal';
 import { UseStateSetter } from 'web-components/src/types/react/useState';
-import { GetAccountsByNameOrAddrQuery } from 'generated/graphql';
+import {
+  AccountsOrderBy,
+  GetAccountsByNameOrAddrQuery,
+} from 'generated/graphql';
 import { PersonalProfileSchemaType } from './InviteMembers/InviteMembers.schema';
 
 export type MemberData = {
@@ -37,7 +40,7 @@ export type MemberData = {
 
 export type BaseProps = {
   members: Member[];
-  sortDir?: 'asc' | 'desc';
+  sortDir?: AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc;
   onToggleSort: () => void;
   onUpdateRole: (id: string, role: BaseMemberRole) => Promise<void>;
   onUpdateVisibility: (id: string, visible: boolean) => Promise<void>;

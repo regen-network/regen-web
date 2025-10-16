@@ -143,6 +143,7 @@ const InviteMembersStep = () => {
           onAddMember={addMember}
           onSaveProfile={saveProfile}
           onUpload={onUpload}
+          sortDir={daoAccountsOrderBy}
         />
       )}
     </div>

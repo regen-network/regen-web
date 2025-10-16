@@ -16,7 +16,9 @@ import { useDeleteAssignmentMutation } from 'generated/graphql';
 import { removeMemberActions } from './utils';
 import { MEMBER_NOT_FOUND, MISSING_REQUIRED_PARAMS } from './constants';
 import { useMembersContext } from './useMembersContext';
-import { MembersHookParams } from './types';
+import { AssignmentToDelete, MembersHookParams } from './types';
+import { getAssignedQuery } from 'lib/queries/react-query/cosmwasm/dao-rbam/getAssignedQuery/getAssignedQuery';
+import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 
 export function useRemoveMember(params: MembersHookParams) {
   const {
@@ -74,61 +76,119 @@ export function useRemoveMember(params: MembersHookParams) {
       } = member;
 
       if (memberAddress) {
-        // TODO how to handle edge case where web2 member was added off-chain only
-        // then adds a wallet address to his/her account
-        // in this case, the following would fail
-        // is it worth querying on chain assignments beforehand?
-        // relevant for updateRole too
-        const orgExecuteInstruction = {
-          contractAddress: daoRbamAddress,
-          msg: {
-            execute_actions: {
-              actions: removeMemberActions({
-                daoRbamAddress,
-                cw4GroupAddress,
-                authorizationId,
-                roleId,
-                memberAddress,
-                memberRoleId,
-              }),
-            },
-          },
-        };
+        // Check if role is assigned
+        // If member was initially added with email address and added a wallet address later on,
+        // then role was not assigned on chain (only off chain)
+        const assignedRes = await getFromCacheOrFetch({
+          reactQueryClient,
+          query: getAssignedQuery({
+            client: signingCosmWasmClient,
+            addr: memberAddress as string,
+            roleId: memberRoleId,
+            daoRbamAddress,
+            enabled: !!memberAddress,
+          }),
+        });
+        const assigned = assignedRes?.assigned;
 
-        const projectExecuteInstructions = (projectsCurrentUserCanManageMembers
-          ?.map(project => {
-            const projectDao =
-              project?.projectByProjectId?.daoByAdminDaoAddress;
-            if (!projectDao) return null;
-            const assignment = projectDao.assignmentsByDaoAddress.nodes.find(
-              a => a?.accountId === id,
-            );
-            if (!assignment) return null;
-            return {
-              contractAddress: project?.projectByProjectId?.adminDaoAddress,
+        const orgExecuteInstruction = assigned
+          ? {
+              contractAddress: daoRbamAddress,
               msg: {
                 execute_actions: {
                   actions: removeMemberActions({
-                    daoRbamAddress: projectDao.daoRbamAddress,
-                    cw4GroupAddress: projectDao.cw4GroupAddress,
-                    authorizationId: projectAuthorizationId,
-                    roleId: projectRoleId,
+                    daoRbamAddress,
+                    cw4GroupAddress,
+                    authorizationId,
+                    roleId,
                     memberAddress,
-                    memberRoleId: parseInt(assignment.onChainRoleId),
+                    memberRoleId,
                   }),
                 },
               },
-            };
-          })
-          .filter(Boolean) || []) as ExecuteInstruction[];
+            }
+          : undefined;
+
+        const offchainProjectAssignmentsToDelete: AssignmentToDelete[] = [];
+        const projectExecuteInstructions = (await Promise.all(
+          projectsCurrentUserCanManageMembers
+            ?.map(async project => {
+              const projectDao =
+                project?.projectByProjectId?.daoByAdminDaoAddress;
+              if (!projectDao) return null;
+              const assignment = projectDao.assignmentsByDaoAddress.nodes.find(
+                a => a?.accountId === id,
+              );
+              if (!assignment) return null;
+
+              const assignedRes = await getFromCacheOrFetch({
+                reactQueryClient,
+                query: getAssignedQuery({
+                  client: signingCosmWasmClient,
+                  addr: memberAddress,
+                  roleId: assignment.onChainRoleId,
+                  daoRbamAddress,
+                }),
+              });
+              const assigned = assignedRes?.assigned;
+              if (!assigned && project.projectByProjectId?.adminDaoAddress) {
+                offchainProjectAssignmentsToDelete.push({
+                  daoAddress: project.projectByProjectId?.adminDaoAddress,
+                  roleName: assignment.roleName,
+                });
+                return null;
+              }
+
+              return {
+                contractAddress: project?.projectByProjectId?.adminDaoAddress,
+                msg: {
+                  execute_actions: {
+                    actions: removeMemberActions({
+                      daoRbamAddress: projectDao.daoRbamAddress,
+                      cw4GroupAddress: projectDao.cw4GroupAddress,
+                      authorizationId: projectAuthorizationId,
+                      roleId: projectRoleId,
+                      memberAddress,
+                      memberRoleId: parseInt(assignment.onChainRoleId),
+                    }),
+                  },
+                },
+              };
+            })
+            .filter(Boolean) || [],
+        )) as ExecuteInstruction[];
 
         try {
           setProcessingModal(atom => void (atom.open = true));
-          await signingCosmWasmClient.executeMultiple(
-            wallet.address,
-            [orgExecuteInstruction, ...projectExecuteInstructions],
-            2,
-          );
+          const executions = [
+            orgExecuteInstruction,
+            ...projectExecuteInstructions,
+          ].filter(Boolean) as ExecuteInstruction[];
+          if (executions.length > 0) {
+            await signingCosmWasmClient.executeMultiple(
+              wallet.address,
+              executions,
+              2,
+            );
+          }
+          if (!assigned) {
+            await deleteAssignment({
+              variables: {
+                input: { daoAddress, roleName: role, accountId: id },
+              },
+            });
+          }
+          for (const assignment of offchainProjectAssignmentsToDelete) {
+            await deleteAssignment({
+              variables: {
+                input: {
+                  daoAddress: assignment.daoAddress,
+                  roleName: assignment.roleName,
+                  accountId: id,
+                },
+              },
+            });
+          }
           await refetchMembers({
             address: memberAddress,
             role,

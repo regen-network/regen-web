@@ -33,7 +33,7 @@ import {
   ROLE_ADMIN,
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
-import { MembersHookParams } from './types';
+import { MembersHookParams, AssignmentToDelete } from './types';
 import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
 import { getAssignedQuery } from 'lib/queries/react-query/cosmwasm/dao-rbam/getAssignedQuery/getAssignedQuery';
 
@@ -176,10 +176,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
           },
         };
 
-        const offchainProjectAssignmentsToDelete: {
-          daoAddress: string;
-          roleName: string;
-        }[] = [];
+        const offchainProjectAssignmentsToDelete: AssignmentToDelete[] = [];
         const projectExecuteInstructions = (await Promise.all(
           projectsCurrentUserCanManageMembers
             ?.map(async project => {
@@ -298,17 +295,17 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                 input: { daoAddress, roleName: oldRoleName, accountId: id },
               },
             });
-            for (const assignment of offchainProjectAssignmentsToDelete) {
-              await deleteAssignment({
-                variables: {
-                  input: {
-                    daoAddress: assignment.daoAddress,
-                    roleName: assignment.roleName,
-                    accountId: id,
-                  },
+          }
+          for (const assignment of offchainProjectAssignmentsToDelete) {
+            await deleteAssignment({
+              variables: {
+                input: {
+                  daoAddress: assignment.daoAddress,
+                  roleName: assignment.roleName,
+                  accountId: id,
                 },
-              });
-            }
+              },
+            });
           }
           await refetchMembers({
             address: memberAddress,

@@ -18,3 +18,8 @@ export type MembersHookParams = {
   members: Member[];
   daoAccountsOrderBy: AccountsOrderBy;
 };
+
+export type AssignmentToDelete = {
+  daoAddress: string;
+  roleName: string;
+};

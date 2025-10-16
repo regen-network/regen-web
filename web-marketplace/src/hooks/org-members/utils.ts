@@ -474,9 +474,7 @@ export function findAssignment({
       node => node?.address === daoAddress,
     )?.assignmentsByDaoAddress?.nodes;
   return assignments?.find(
-    assig =>
-      assig?.accountByAccountId?.id == accountId &&
-      assig?.roleName === roleName,
+    assig => assig?.accountId == accountId && assig?.roleName === roleName,
   );
 }
 

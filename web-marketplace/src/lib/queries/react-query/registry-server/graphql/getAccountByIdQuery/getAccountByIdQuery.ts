@@ -1,4 +1,8 @@
-import { AccountByIdDocument, AccountByIdQuery } from 'generated/graphql';
+import {
+  AccountByIdDocument,
+  AccountByIdQuery,
+  AccountsOrderBy,
+} from 'generated/graphql';
 
 import {
   ReactQueryGetAccountByIdQueryParams,
@@ -9,13 +13,20 @@ import { getAccountByIdQueryKey } from './getAccountByIdQuery.utils';
 export const getAccountByIdQuery = ({
   client,
   languageCode,
+  daoAccountsOrderBy = AccountsOrderBy.NameAsc,
   ...params
 }: ReactQueryGetAccountByIdQueryParams): ReactQueryGetAccountByIdQueryResponse => ({
-  queryKey: [...getAccountByIdQueryKey({ id: params.id }), languageCode],
+  queryKey: [
+    ...getAccountByIdQueryKey({
+      id: params.id,
+      daoAccountsOrderBy,
+    }),
+    languageCode,
+  ],
   queryFn: async () => {
     const { data } = await client.query<AccountByIdQuery>({
       query: AccountByIdDocument,
-      variables: { ...params },
+      variables: { ...params, daoAccountsOrderBy },
     });
 
     const localizedDescription =

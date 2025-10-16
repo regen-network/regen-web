@@ -7,14 +7,17 @@ import {
   DEFAULT_PROFILE_AVATARS,
   PROFILE_S3_PATH,
 } from 'pages/Dashboard/Dashboard.constants';
-import { useUpdateAccountByIdMutation } from 'generated/graphql';
+import {
+  AccountsOrderBy,
+  useUpdateAccountByIdMutation,
+} from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { apiServerUrl } from 'lib/env';
 import { useOnUploadCallback } from 'pages/Dashboard/hooks/useOnUploadCallback';
 import { useQueryClient } from '@tanstack/react-query';
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
 
-export const useSaveProfile = () => {
+export const useSaveProfile = (daoAccountsOrderBy: AccountsOrderBy) => {
   const [updateAccountById] = useUpdateAccountByIdMutation();
   const { activeAccountId } = useAuth();
   const fileNamesToDeleteRef = useRef<string[]>([]);
@@ -56,10 +59,13 @@ export const useSaveProfile = () => {
       fileNamesToDeleteRef.current = [];
 
       await reactQueryClient.invalidateQueries({
-        queryKey: getAccountByIdQueryKey({ id: activeAccountId }),
+        queryKey: getAccountByIdQueryKey({
+          id: activeAccountId,
+          daoAccountsOrderBy,
+        }),
       });
     },
-    [activeAccountId, updateAccountById],
+    [activeAccountId, updateAccountById, daoAccountsOrderBy],
   );
 
   return { saveProfile, onUpload };

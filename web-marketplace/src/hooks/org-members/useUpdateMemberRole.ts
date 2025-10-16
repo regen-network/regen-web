@@ -247,7 +247,10 @@ export function useUpdateMemberRole(params: MembersHookParams) {
             },
           });
           await reactQueryClient.invalidateQueries({
-            queryKey: getAccountByIdQueryKey({ id: activeAccountId }),
+            queryKey: getAccountByIdQueryKey({
+              id: activeAccountId,
+              daoAccountsOrderBy: params.daoAccountsOrderBy,
+            }),
           });
         } catch (e) {
           setErrorBannerText(String(e));
@@ -275,7 +278,10 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                 },
               });
               await reactQueryClient.invalidateQueries({
-                queryKey: getAccountByIdQueryKey({ id: activeAccountId }),
+                queryKey: getAccountByIdQueryKey({
+                  id: activeAccountId,
+                  daoAccountsOrderBy: params.daoAccountsOrderBy,
+                }),
               });
             } catch (e) {
               setErrorBannerText(String(e));
@@ -303,6 +309,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
       setProcessingModal,
       updateAssignment,
       refetchMembers,
+      params.daoAccountsOrderBy,
     ],
   );
 

@@ -145,7 +145,10 @@ export function useRemoveMember(params: MembersHookParams) {
             variables: { input: { daoAddress, roleName: role, accountId: id } },
           });
           await reactQueryClient.invalidateQueries({
-            queryKey: getAccountByIdQueryKey({ id: activeAccountId }),
+            queryKey: getAccountByIdQueryKey({
+              id: activeAccountId,
+              daoAccountsOrderBy: params.daoAccountsOrderBy,
+            }),
           });
         } catch (e) {
           setErrorBannerText(String(e));
@@ -172,7 +175,10 @@ export function useRemoveMember(params: MembersHookParams) {
                 },
               });
               await reactQueryClient.invalidateQueries({
-                queryKey: getAccountByIdQueryKey({ id: activeAccountId }),
+                queryKey: getAccountByIdQueryKey({
+                  id: activeAccountId,
+                  daoAccountsOrderBy: params.daoAccountsOrderBy,
+                }),
               });
             } catch (e) {
               setErrorBannerText(String(e));
@@ -200,6 +206,7 @@ export function useRemoveMember(params: MembersHookParams) {
       activeAccountId,
       setProcessingModal,
       refetchMembers,
+      params.daoAccountsOrderBy,
     ],
   );
 

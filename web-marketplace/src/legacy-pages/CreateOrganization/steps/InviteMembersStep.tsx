@@ -22,13 +22,30 @@ import { useAtom } from 'jotai';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useUpdateMembers } from 'hooks/org-members';
 import { useSaveProfile } from '../hooks/useSaveProfile';
+import { AccountsOrderBy } from 'generated/graphql';
+import { getAccountByIdQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery';
 
 const InviteMembersStep = () => {
   const { _ } = useLingui();
-  const { activeAccount } = useAuth();
+  const [daoAccountsOrderBy, setDaoAccountsOrderBy] = useState<
+    AccountsOrderBy.NameAsc | AccountsOrderBy.NameDesc
+  >(AccountsOrderBy.NameAsc);
+
+  const { activeAccountId } = useAuth();
   const graphqlClient =
     useApolloClient() as ApolloClient<NormalizedCacheObject>;
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
+
+  const { data, refetch } = useQuery(
+    getAccountByIdQuery({
+      client: graphqlClient,
+      enabled: !!graphqlClient && !!activeAccountId,
+      id: activeAccountId,
+      daoAccountsOrderBy,
+      languageCode: selectedLanguage,
+    }),
+  );
+  const activeAccount = useMemo(() => data?.accountById, [data]);
 
   const dao = useMemo(
     () =>
@@ -41,7 +58,7 @@ const InviteMembersStep = () => {
   const currentUserRole = useMemo(
     () =>
       dao?.assignmentsByDaoAddress?.nodes?.find(
-        assignment => assignment?.accountByAccountId?.id === activeAccount?.id,
+        assignment => assignment?.accountId === activeAccount?.id,
       )?.roleName,
     [dao, activeAccount],
   ) as BaseMemberRole | undefined;
@@ -49,8 +66,10 @@ const InviteMembersStep = () => {
   const members = useMemo(
     () =>
       (
-        dao?.assignmentsByDaoAddress?.nodes?.map(assignment => {
-          const acc = assignment?.accountByAccountId;
+        dao?.accountsByAssignmentDaoAddressAndAccountId?.nodes?.map(acc => {
+          const assignment = dao?.assignmentsByDaoAddress?.nodes?.find(
+            assignment => acc?.id === assignment?.accountId,
+          );
           return assignment
             ? {
                 id: acc?.id,
@@ -82,6 +101,7 @@ const InviteMembersStep = () => {
       daoRbamAddress: dao?.daoRbamAddress,
       cw4GroupAddress: dao?.cw4GroupAddress,
       members,
+      daoAccountsOrderBy,
     });
 
   const [debouncedValue, setDebouncedValue] = useState('');
@@ -94,7 +114,7 @@ const InviteMembersStep = () => {
     }),
   );
 
-  const { saveProfile, onUpload } = useSaveProfile();
+  const { saveProfile, onUpload } = useSaveProfile(daoAccountsOrderBy);
 
   return (
     <div className="text-center">
@@ -108,9 +128,13 @@ const InviteMembersStep = () => {
       {members && (
         <OrganizationMembersInviteTable
           members={members}
-          onToggleSort={function (): void {
-            throw new Error('Function not implemented.');
-          }}
+          onToggleSort={() =>
+            setDaoAccountsOrderBy(prev =>
+              prev === AccountsOrderBy.NameAsc
+                ? AccountsOrderBy.NameDesc
+                : AccountsOrderBy.NameAsc,
+            )
+          }
           onUpdateRole={updateRole}
           onUpdateVisibility={updateVisibility}
           onRemove={removeMember}

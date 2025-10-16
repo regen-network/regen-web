@@ -57,6 +57,7 @@ export function useMembersContext(params: MembersHookParams) {
       client: graphqlClient,
       enabled: !!graphqlClient && !!activeAccountId,
       id: activeAccountId,
+      daoAccountsOrderBy: params.daoAccountsOrderBy,
       languageCode: selectedLanguage,
     }),
   );
@@ -146,6 +147,7 @@ export function useMembersContext(params: MembersHookParams) {
               await reactQueryClient.invalidateQueries({
                 queryKey: getAccountByIdQueryKey({
                   id: activeAccountId,
+                  daoAccountsOrderBy: params.daoAccountsOrderBy,
                 }),
               });
             }
@@ -174,6 +176,7 @@ export function useMembersContext(params: MembersHookParams) {
       updateAssignment,
       setErrorBannerText,
       activeAccountId,
+      params.daoAccountsOrderBy,
     ],
   );
 

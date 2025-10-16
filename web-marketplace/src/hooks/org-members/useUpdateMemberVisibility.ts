@@ -12,7 +12,10 @@ import { MEMBER_NOT_FOUND, MISSING_REQUIRED_PARAMS } from './constants';
 import { MembersHookParams } from './types';
 
 export function useUpdateMemberVisibility(
-  params: Pick<MembersHookParams, 'daoAddress' | 'members'>,
+  params: Pick<
+    MembersHookParams,
+    'daoAddress' | 'members' | 'daoAccountsOrderBy'
+  >,
 ) {
   const { daoAddress, members } = params;
   const { _ } = useLingui();
@@ -45,7 +48,10 @@ export function useUpdateMemberVisibility(
           },
         });
         await reactQueryClient.invalidateQueries({
-          queryKey: getAccountByIdQueryKey({ id: activeAccountId }),
+          queryKey: getAccountByIdQueryKey({
+            id: activeAccountId,
+            daoAccountsOrderBy: params.daoAccountsOrderBy,
+          }),
         });
       } catch (e) {
         setErrorBannerText(String(e));
@@ -59,6 +65,7 @@ export function useUpdateMemberVisibility(
       updateAssignment,
       reactQueryClient,
       activeAccountId,
+      params.daoAccountsOrderBy,
     ],
   );
 

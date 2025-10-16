@@ -140,7 +140,10 @@ export function useAddMember(params: MembersHookParams) {
             retryCsrfRequest,
             onSuccess: async () => {
               await reactQueryClient.invalidateQueries({
-                queryKey: getAccountByIdQueryKey({ id: activeAccountId }),
+                queryKey: getAccountByIdQueryKey({
+                  id: activeAccountId,
+                  daoAccountsOrderBy: params.daoAccountsOrderBy,
+                }),
               });
             },
           });
@@ -196,6 +199,7 @@ export function useAddMember(params: MembersHookParams) {
       reactQueryClient,
       activeAccountId,
       refetchMembers,
+      params.daoAccountsOrderBy,
     ],
   );
 

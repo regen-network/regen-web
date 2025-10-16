@@ -11,9 +11,13 @@ import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 
 import { getAccountByIdQueryKey } from 'lib/queries/react-query/registry-server/graphql/getAccountByIdQuery/getAccountByIdQuery.utils';
-import { useUpdateAssignmentMutation } from 'generated/graphql';
+import {
+  useDeleteAssignmentMutation,
+  useUpdateAssignmentMutation,
+} from 'generated/graphql';
 
 import {
+  addMemberActions,
   getNewRoleId,
   updateAuthorizationAction,
   updateMemberRoleActions,
@@ -30,6 +34,8 @@ import {
   ROLE_OWNER,
 } from 'components/organisms/ActionDropdown/ActionDropdown.constants';
 import { MembersHookParams } from './types';
+import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
+import { getAssignedQuery } from 'lib/queries/react-query/cosmwasm/dao-rbam/getAssignedQuery/getAssignedQuery';
 
 export function useUpdateMemberRole(params: MembersHookParams) {
   const {
@@ -56,6 +62,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
     projectsCurrentUserCanManageMembers,
     refetchMembers,
   } = useMembersContext(params);
+  const [deleteAssignment] = useDeleteAssignmentMutation();
 
   const updateRole = useCallback(
     async (id: string, roleNameNew: any) => {
@@ -100,7 +107,7 @@ export function useUpdateMemberRole(params: MembersHookParams) {
           role === ROLE_OWNER
             ? [
                 ...updateMemberRoleActions({
-                  daoRbamAddress: daoRbamAddress!,
+                  daoRbamAddress,
                   authorizationId,
                   roleId,
                   memberAddress: wallet.address,
@@ -114,8 +121,8 @@ export function useUpdateMemberRole(params: MembersHookParams) {
                   }),
                 }),
                 updateAuthorizationAction({
-                  daoRbamAddress: daoRbamAddress!,
-                  cw4GroupAddress: cw4GroupAddress!,
+                  daoRbamAddress,
+                  cw4GroupAddress,
                   roleId,
                   authorizationId,
                   newOwnerAddress: memberAddress,
@@ -126,96 +133,156 @@ export function useUpdateMemberRole(params: MembersHookParams) {
               ]
             : [];
 
+        // Check if old role is assigned
+        // If member was initially added with email address and added a wallet address later on,
+        // then old role was not assigned on chain (only off chain)
+        const assignedRes = await getFromCacheOrFetch({
+          reactQueryClient,
+          query: getAssignedQuery({
+            client: signingCosmWasmClient,
+            addr: memberAddress,
+            roleId: oldRoleId,
+            daoRbamAddress,
+          }),
+        });
+        const assigned = assignedRes?.assigned;
+
+        // If member was not assigned on chain, then we only add him
+        // revoking the old role will be done off chain only
+        const memberRoleActions = assigned
+          ? updateMemberRoleActions({
+              daoRbamAddress,
+              authorizationId,
+              roleId,
+              memberAddress,
+              newRoleId,
+              oldRoleId,
+            })
+          : addMemberActions({
+              daoRbamAddress,
+              cw4GroupAddress,
+              authorizationId,
+              roleId,
+              memberAddress,
+              roleIdToAdd: newRoleId,
+            });
+
         const orgExecuteInstruction = {
-          contractAddress: daoRbamAddress!,
+          contractAddress: daoRbamAddress,
           msg: {
             execute_actions: {
-              actions: [
-                ...updateMemberRoleActions({
-                  daoRbamAddress: daoRbamAddress!,
-                  authorizationId,
-                  roleId,
-                  memberAddress,
-                  newRoleId,
-                  oldRoleId,
-                }),
-                ...orgOwnerActions,
-              ],
+              actions: [...memberRoleActions, ...orgOwnerActions],
             },
           },
         };
 
-        const projectExecuteInstructions = (projectsCurrentUserCanManageMembers
-          ?.map(project => {
-            const projectDao =
-              project?.projectByProjectId?.daoByAdminDaoAddress;
-            if (!projectDao) return null;
-            const oldAssignment = projectDao.assignmentsByDaoAddress.nodes.find(
-              a => a?.accountId === id,
-            );
-            const currentUserOldAssignment =
-              projectDao.assignmentsByDaoAddress.nodes.find(
-                a => a?.accountId === activeAccountId,
-              );
+        const offchainProjectAssignmentsToDelete: {
+          daoAddress: string;
+          roleName: string;
+        }[] = [];
+        const projectExecuteInstructions = (await Promise.all(
+          projectsCurrentUserCanManageMembers
+            ?.map(async project => {
+              const projectDao =
+                project?.projectByProjectId?.daoByAdminDaoAddress;
+              if (!projectDao) return null;
+              const oldAssignment =
+                projectDao.assignmentsByDaoAddress.nodes.find(
+                  a => a?.accountId === id,
+                );
 
-            // If current user is owner of the project,
-            // we need to downgrade current user to admin
-            // and update the 'can_manage_members_except_owner' authorization to use the new owner address
-            const projectOwnerActions =
-              currentUserOldAssignment?.roleName === ROLE_OWNER &&
-              role === ROLE_OWNER
-                ? [
-                    ...updateMemberRoleActions({
-                      daoRbamAddress: projectDao.daoRbamAddress,
-                      authorizationId: projectAuthorizationId!,
-                      roleId: projectRoleId!,
-                      memberAddress: wallet.address,
-                      newRoleId: getNewRoleId({
-                        type: 'project',
-                        role: ROLE_ADMIN,
-                      }),
-                      oldRoleId: getNewRoleId({
-                        type: 'project',
-                        role: ROLE_OWNER,
-                      }),
-                    }),
-                    updateAuthorizationAction({
-                      daoRbamAddress: projectDao.daoRbamAddress,
-                      cw4GroupAddress: projectDao.cw4GroupAddress,
-                      roleId: projectRoleId!,
-                      authorizationId: projectAuthorizationId!,
-                      newOwnerAddress: memberAddress,
-                      authorizationIdToUpdate: projectRoles['admin']
-                        .authorizations[
-                        'can_manage_members_except_owner'
-                      ] as number,
-                    }),
-                  ]
-                : [];
+              // if the user is in the org but not in this project anymore,
+              // we do not add him back to the project
+              if (!oldAssignment) return null;
 
-            // if the user is in the org but not in this project anymore,
-            // we do not add him back to the project
-            if (!oldAssignment) return null;
-            return {
-              contractAddress: project?.projectByProjectId?.adminDaoAddress,
-              msg: {
-                execute_actions: {
-                  actions: [
-                    ...updateMemberRoleActions({
-                      daoRbamAddress: projectDao.daoRbamAddress,
-                      authorizationId: projectAuthorizationId!,
-                      roleId: projectRoleId!,
-                      memberAddress,
-                      newRoleId: projectNewRoleId,
-                      oldRoleId: parseInt(oldAssignment.onChainRoleId),
-                    }),
-                    ...projectOwnerActions,
-                  ],
+              const currentUserOldAssignment =
+                projectDao.assignmentsByDaoAddress.nodes.find(
+                  a => a?.accountId === activeAccountId,
+                );
+
+              // If current user is owner of the project,
+              // we need to downgrade current user to admin
+              // and update the 'can_manage_members_except_owner' authorization to use the new owner address
+              const projectOwnerActions =
+                currentUserOldAssignment?.roleName === ROLE_OWNER &&
+                role === ROLE_OWNER
+                  ? [
+                      ...updateMemberRoleActions({
+                        daoRbamAddress: projectDao.daoRbamAddress,
+                        authorizationId: projectAuthorizationId!,
+                        roleId: projectRoleId,
+                        memberAddress: wallet.address,
+                        newRoleId: getNewRoleId({
+                          type: 'project',
+                          role: ROLE_ADMIN,
+                        }),
+                        oldRoleId: getNewRoleId({
+                          type: 'project',
+                          role: ROLE_OWNER,
+                        }),
+                      }),
+                      updateAuthorizationAction({
+                        daoRbamAddress: projectDao.daoRbamAddress,
+                        cw4GroupAddress: projectDao.cw4GroupAddress,
+                        roleId: projectRoleId,
+                        authorizationId: projectAuthorizationId!,
+                        newOwnerAddress: memberAddress,
+                        authorizationIdToUpdate: projectRoles['admin']
+                          .authorizations[
+                          'can_manage_members_except_owner'
+                        ] as number,
+                      }),
+                    ]
+                  : [];
+
+              const assignedRes = await getFromCacheOrFetch({
+                reactQueryClient,
+                query: getAssignedQuery({
+                  client: signingCosmWasmClient,
+                  addr: memberAddress,
+                  roleId: oldRoleId,
+                  daoRbamAddress,
+                }),
+              });
+              const assigned = assignedRes?.assigned;
+
+              if (!assigned && project.projectByProjectId?.adminDaoAddress)
+                offchainProjectAssignmentsToDelete.push({
+                  daoAddress: project.projectByProjectId?.adminDaoAddress,
+                  roleName: oldAssignment.roleName,
+                });
+
+              // If member was not assigned on chain, then we only add him
+              // revoking the old role will be done off chain only
+              const memberRoleActions = assigned
+                ? updateMemberRoleActions({
+                    daoRbamAddress: projectDao.daoRbamAddress,
+                    authorizationId: projectAuthorizationId,
+                    roleId: projectRoleId,
+                    memberAddress,
+                    newRoleId: projectNewRoleId,
+                    oldRoleId: parseInt(oldAssignment.onChainRoleId),
+                  })
+                : addMemberActions({
+                    cw4GroupAddress: projectDao.cw4GroupAddress,
+                    daoRbamAddress: projectDao.daoRbamAddress,
+                    authorizationId: projectAuthorizationId,
+                    roleId: projectRoleId,
+                    memberAddress,
+                    roleIdToAdd: projectNewRoleId,
+                  });
+
+              return {
+                contractAddress: project?.projectByProjectId?.adminDaoAddress,
+                msg: {
+                  execute_actions: {
+                    actions: [...memberRoleActions, ...projectOwnerActions],
+                  },
                 },
-              },
-            };
-          })
-          .filter(Boolean) || []) as ExecuteInstruction[];
+              };
+            })
+            .filter(Boolean) || [],
+        )) as ExecuteInstruction[];
 
         try {
           setProcessingModal(atom => void (atom.open = true));
@@ -224,6 +291,25 @@ export function useUpdateMemberRole(params: MembersHookParams) {
             [orgExecuteInstruction, ...projectExecuteInstructions],
             2,
           );
+          // revoking the old role if it was only off chain
+          if (!assigned) {
+            await deleteAssignment({
+              variables: {
+                input: { daoAddress, roleName: oldRoleName, accountId: id },
+              },
+            });
+            for (const assignment of offchainProjectAssignmentsToDelete) {
+              await deleteAssignment({
+                variables: {
+                  input: {
+                    daoAddress: assignment.daoAddress,
+                    roleName: assignment.roleName,
+                    accountId: id,
+                  },
+                },
+              });
+            }
+          }
           await refetchMembers({
             address: memberAddress,
             role,

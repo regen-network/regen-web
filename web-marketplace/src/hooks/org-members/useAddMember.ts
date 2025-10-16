@@ -138,7 +138,8 @@ export function useAddMember(params: MembersHookParams) {
       } else if (token) {
         try {
           await postData({
-            url: `${apiServerUrl}/marketplace/v1/add-by-email`,
+            url: `${apiServerUrl}/marketplace/v1/assignments/add-by-email`,
+            parseTextResponse: true,
             data: {
               email: addressOrEmail,
               roleName: role,
@@ -177,7 +178,8 @@ export function useAddMember(params: MembersHookParams) {
 
             try {
               await postData({
-                url: `${apiServerUrl}/marketplace/v1/add-by-email`,
+                url: `${apiServerUrl}/marketplace/v1/assignments/add-by-email`,
+                parseTextResponse: true,
                 data: {
                   email: addressOrEmail,
                   roleName: role,
@@ -190,7 +192,7 @@ export function useAddMember(params: MembersHookParams) {
                 onSuccess: async () => {
                   await reactQueryClient.invalidateQueries({
                     queryKey: getOrganizationByDaoAddressQueryKey({
-                      daoAddress: daoAddress!,
+                      daoAddress,
                     }),
                   });
                 },

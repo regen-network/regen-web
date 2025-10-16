@@ -46,6 +46,7 @@ export type BaseProps = {
   accounts?: GetAccountsByNameOrAddrQuery | null;
   setDebouncedValue: UseStateSetter<string>;
   onSaveProfile: (data: PersonalProfileSchemaType) => Promise<void>;
+  onUpload: (imageFile: File) => Promise<{ url: string }>;
 };
 
 type VariantConfig = {
@@ -102,6 +103,7 @@ export const OrganizationMembersBase = ({
   setDebouncedValue,
   variant,
   onSaveProfile,
+  onUpload,
   config: overrideConfig = {},
 }: OrganizationMembersBaseProps) => {
   const cfg: VariantConfig = { ...defaultConfig[variant], ...overrideConfig };
@@ -285,10 +287,11 @@ export const OrganizationMembersBase = ({
           initialAvatar={members.find(m => m.isCurrentUser)?.avatar}
           initialDescription={undefined}
           initialTitle={members.find(m => m.isCurrentUser)?.title}
-          onSave={async (data) => {
+          onSave={async data => {
             await onSaveProfile(data);
             setShowPersonalProfileModal(false);
           }}
+          onUploadAvatar={onUpload}
         />
       )}
     </>

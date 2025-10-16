@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
+import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 import { Provider as JotaiProvider } from 'jotai';
 
@@ -18,6 +19,14 @@ i18n.activate('en');
 const meta: Meta<typeof OrganizationMembersInviteTable> = {
   title: 'Marketplace/Organisms/InviteMembersTable',
   component: OrganizationMembersInviteTable,
+  argTypes: {
+    onSaveProfile: {
+      action: 'save-profile',
+    },
+    onUpload: {
+      action: 'upload',
+    },
+  },
   decorators: [
     Story => (
       <I18nProvider i18n={i18n}>
@@ -31,7 +40,10 @@ const meta: Meta<typeof OrganizationMembersInviteTable> = {
 
 export default meta;
 
-export const Default = () => {
+export const Default = (args: {
+  onSaveProfile: () => Promise<void>;
+  onUpload: () => Promise<{ url: string }>;
+}) => {
   const [members, setMembers] = useState<Member[]>(mockMembers);
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
   const [debouncedValue, setDebouncedValue] = useState('');
@@ -71,7 +83,7 @@ export const Default = () => {
     );
   };
 
-  const updateRole = (id: string, role: BaseMemberRole) =>
+  const updateRole = async (id: string, role: BaseMemberRole) =>
     setMembers(prev =>
       prev.map(member => {
         if (role === ROLE_OWNER) {
@@ -86,15 +98,15 @@ export const Default = () => {
       }),
     );
 
-  const updateVisibility = (id: string, visible: boolean) =>
+  const updateVisibility = async (id: string, visible: boolean) =>
     setMembers(prev =>
       prev.map(member => (member.id === id ? { ...member, visible } : member)),
     );
 
-  const removeMember = (id: string) =>
+  const removeMember = async (id: string) =>
     setMembers(prev => prev.filter(member => member.id !== id));
 
-  const addMember = (data: {
+  const addMember = async (data: {
     role: BaseMemberRole | undefined;
     addressOrEmail: string;
     visible: boolean;
@@ -112,6 +124,7 @@ export const Default = () => {
       email: foundAccount?.addr || data.addressOrEmail,
       avatar: foundAccount?.image || undefined,
       role: data.role,
+      onChainRoleId: 1,
       visible: data.visible,
       invited: true,
       isCurrentUser: false,
@@ -136,6 +149,8 @@ export const Default = () => {
         onUpdateVisibility={updateVisibility}
         accounts={accounts}
         setDebouncedValue={setDebouncedValue}
+        onSaveProfile={args.onSaveProfile}
+        onUpload={args.onUpload}
       />
     </>
   );

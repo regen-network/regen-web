@@ -12,6 +12,8 @@ export const OrganizationMembers = ({
   onRemove,
   setDebouncedValue,
   onAddMember,
+  onSaveProfile,
+  onUpload,
 }: BaseProps) => {
   return (
     <OrganizationMembersBase
@@ -24,6 +26,8 @@ export const OrganizationMembers = ({
       onUpdateVisibility={onUpdateVisibility}
       onRemove={onRemove}
       setDebouncedValue={setDebouncedValue}
+      onSaveProfile={onSaveProfile}
+      onUpload={onUpload}
     />
   );
 };

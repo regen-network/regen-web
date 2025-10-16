@@ -21,6 +21,7 @@ import { getAccountsByNameOrAddrQuery } from 'lib/queries/react-query/registry-s
 import { useAtom } from 'jotai';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
 import { useUpdateMembers } from 'hooks/org-members';
+import { useSaveProfile } from '../hooks/useSaveProfile';
 
 const InviteMembersStep = () => {
   const { _ } = useLingui();
@@ -93,6 +94,8 @@ const InviteMembersStep = () => {
     }),
   );
 
+  const { saveProfile, onUpload } = useSaveProfile();
+
   return (
     <div className="text-center">
       <Title variant="h3">{_(INVITE_MEMBERS)}</Title>
@@ -114,7 +117,8 @@ const InviteMembersStep = () => {
           setDebouncedValue={setDebouncedValue}
           accounts={accounts}
           onAddMember={addMember}
-          onSaveProfile={async () => {}} // TODO
+          onSaveProfile={saveProfile}
+          onUpload={onUpload}
         />
       )}
     </div>

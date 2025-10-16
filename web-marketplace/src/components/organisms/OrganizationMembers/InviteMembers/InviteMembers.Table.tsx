@@ -14,6 +14,7 @@ export const OrganizationMembersInviteTable = ({
   accounts,
   setDebouncedValue,
   onSaveProfile,
+  onUpload,
 }: BaseProps): JSX.Element => {
   return (
     <OrganizationMembersBase
@@ -28,6 +29,7 @@ export const OrganizationMembersInviteTable = ({
       accounts={accounts}
       setDebouncedValue={setDebouncedValue}
       onSaveProfile={onSaveProfile}
+      onUpload={onUpload}
     />
   );
 };

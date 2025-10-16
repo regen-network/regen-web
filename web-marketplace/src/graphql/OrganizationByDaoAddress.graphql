@@ -10,6 +10,13 @@ query OrganizationByDaoAddress($daoAddress: String!) {
             assignmentsByDaoAddress {
               nodes {
                 accountId
+                accountByAccountId {
+                  addr
+                  privateAccountById {
+                    email
+                    googleEmail
+                  }
+                }
                 roleName
                 onChainRoleId
               }

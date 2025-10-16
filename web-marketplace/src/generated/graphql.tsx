@@ -11677,6 +11677,14 @@ export type OrganizationByDaoAddressQuery = (
               & { nodes: Array<Maybe<(
                 { __typename?: 'Assignment' }
                 & Pick<Assignment, 'accountId' | 'roleName' | 'onChainRoleId'>
+                & { accountByAccountId?: Maybe<(
+                  { __typename?: 'Account' }
+                  & Pick<Account, 'addr'>
+                  & { privateAccountById?: Maybe<(
+                    { __typename?: 'PrivateAccount' }
+                    & Pick<PrivateAccount, 'email' | 'googleEmail'>
+                  )> }
+                )> }
               )>> }
             ) }
           )> }
@@ -12688,6 +12696,13 @@ export const OrganizationByDaoAddressDocument = gql`
             assignmentsByDaoAddress {
               nodes {
                 accountId
+                accountByAccountId {
+                  addr
+                  privateAccountById {
+                    email
+                    googleEmail
+                  }
+                }
                 roleName
                 onChainRoleId
               }

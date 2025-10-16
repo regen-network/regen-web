@@ -2,7 +2,7 @@ import {
   AccountByIdQuery,
   OrganizationByDaoAddressQuery,
 } from 'generated/graphql';
-import { orgRoles, projectRoles } from './useUpdateMembers.constants';
+import { orgRoles, projectRoles } from './constants';
 // import { cosmos } from '@regen-network/api';
 // import { AllowedMsgAllowance } from '@regen-network/api/cosmos/feegrant/v1beta1/feegrant';
 import { MsgGrantAllowance } from '@regen-network/api/cosmos/feegrant/v1beta1/tx';
@@ -14,7 +14,7 @@ import {
 import {
   adminMembersAuthorization,
   encodeJsonToBase64,
-} from '../useCreateDao/useCreateDao.utils';
+} from 'pages/CreateOrganization/hooks/useCreateDao/useCreateDao.utils';
 
 type UpdateAuthorizationActionParams = {
   /** the address of the dao-rbam contract */

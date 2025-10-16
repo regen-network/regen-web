@@ -20,7 +20,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getAccountsByNameOrAddrQuery } from 'lib/queries/react-query/registry-server/graphql/getAccountsByNameOrAddr/getAccountsByNameOrAddrQuery';
 import { useAtom } from 'jotai';
 import { selectedLanguageAtom } from 'lib/atoms/languageSwitcher.atoms';
-import { useUpdateMembers } from '../hooks/useUpdateMembers/useUpdateMembers';
+import { useUpdateMembers } from 'hooks/org-members';
 
 const InviteMembersStep = () => {
   const { _ } = useLingui();

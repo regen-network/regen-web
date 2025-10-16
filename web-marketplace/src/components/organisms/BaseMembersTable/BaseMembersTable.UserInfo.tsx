@@ -79,7 +79,9 @@ export const UserInfo = <T extends BaseUser>({
             {description && organization ? ', ' : ''}
             {organization}
           </span>
-          <span className="text-sm text-bc-neutral-400">{user.email}</span>
+          <span className="text-sm text-bc-neutral-400 text-left">
+            {user.email}
+          </span>
         </div>
       </div>
 

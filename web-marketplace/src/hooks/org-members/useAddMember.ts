@@ -95,6 +95,16 @@ export function useAddMember(params: MembersHookParams) {
             const projectDao =
               project?.projectByProjectId?.daoByAdminDaoAddress;
             if (!projectDao) return null;
+
+            // If user is already member of the project,
+            const isMemberOfProject =
+              projectDao?.assignmentsByDaoAddress?.nodes.some(
+                assignment =>
+                  assignment?.accountByAccountId?.addr === addressOrEmail,
+              );
+            // then we keep his/her role there unchanged
+            if (isMemberOfProject) return null;
+
             return {
               contractAddress: project?.projectByProjectId?.adminDaoAddress,
               msg: {
@@ -154,6 +164,17 @@ export function useAddMember(params: MembersHookParams) {
         if (projectsCurrentUserCanManageMembers)
           for (const project of projectsCurrentUserCanManageMembers) {
             if (!project) continue;
+
+            // If user is already member of the project,
+            const isMemberOfProject =
+              project?.projectByProjectId?.daoByAdminDaoAddress?.assignmentsByDaoAddress?.nodes.some(
+                assignment =>
+                  assignment?.accountByAccountId?.privateAccountById?.email ===
+                  addressOrEmail,
+              );
+            // then we keep his/her role there unchanged
+            if (isMemberOfProject) continue;
+
             try {
               await postData({
                 url: `${apiServerUrl}/marketplace/v1/add-by-email`,

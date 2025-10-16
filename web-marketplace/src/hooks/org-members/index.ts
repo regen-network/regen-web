@@ -11,6 +11,7 @@ export function useUpdateMembers(params: MembersHookParams) {
   const updateVisibility = useUpdateMemberVisibility({
     daoAddress: params.daoAddress,
     members: params.members,
+    daoAccountsOrderBy: params.daoAccountsOrderBy,
   });
   return { addMember, removeMember, updateRole, updateVisibility };
-};
+}

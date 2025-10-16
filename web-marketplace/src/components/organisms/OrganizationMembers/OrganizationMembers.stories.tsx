@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 
 import {
@@ -13,11 +14,22 @@ import { Member } from './OrganizationMembers.types';
 const meta: Meta<typeof OrganizationMembers> = {
   title: 'Marketplace/Organisms/OrganizationMembers',
   component: OrganizationMembers,
+  argTypes: {
+    onSaveProfile: {
+      action: 'save-profile',
+    },
+    onUpload: {
+      action: 'upload',
+    },
+  },
 };
 
 export default meta;
 
-export const Default = () => {
+export const Default = (args: {
+  onSaveProfile: () => Promise<void>;
+  onUpload: () => Promise<{ url: string }>;
+}) => {
   const [members, setMembers] = useState<Member[]>(mockMembers);
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
   const [debouncedValue, setDebouncedValue] = useState('');
@@ -57,7 +69,7 @@ export const Default = () => {
     );
   };
 
-  const updateRole = (id: string, role: BaseMemberRole) =>
+  const updateRole = async (id: string, role: BaseMemberRole) =>
     setMembers(prev =>
       prev.map(member => {
         if (role === ROLE_OWNER) {
@@ -72,15 +84,15 @@ export const Default = () => {
       }),
     );
 
-  const updateVisibility = (id: string, visible: boolean) =>
+  const updateVisibility = async (id: string, visible: boolean) =>
     setMembers(prev =>
       prev.map(member => (member.id === id ? { ...member, visible } : member)),
     );
 
-  const handleRemove = (id: string) =>
+  const handleRemove = async (id: string) =>
     setMembers(prev => prev.filter(member => member.id !== id));
 
-  const addMember = (data: {
+  const addMember = async (data: {
     role: BaseMemberRole | undefined;
     addressOrEmail: string;
     visible: boolean;
@@ -98,6 +110,7 @@ export const Default = () => {
       email: foundAccount?.addr || data.addressOrEmail,
       avatar: foundAccount?.image || undefined,
       role: data.role,
+      onChainRoleId: 1,
       visible: data.visible,
       invited: true,
       isCurrentUser: false,
@@ -120,8 +133,13 @@ export const Default = () => {
       setDebouncedValue={setDebouncedValue}
       onAddMember={addMember}
       accounts={accounts}
+      onSaveProfile={args.onSaveProfile}
+      onUpload={args.onUpload}
     />
   );
 };
 
-Default.args = {};
+Default.args = {
+  onSaveProfile: action('save profile'),
+  onUpload: action('upload'),
+};

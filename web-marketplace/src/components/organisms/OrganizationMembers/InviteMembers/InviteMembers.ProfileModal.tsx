@@ -40,7 +40,7 @@ interface PersonalProfileModalProps {
   initialAvatar?: string;
   initialDescription?: string;
   initialTitle?: string | null;
-  onUploadAvatar?: (file: File) => Promise<{ url: string }>;
+  onUploadAvatar: (file: File) => Promise<{ url: string }>;
   onSave: (data: PersonalProfileSchemaType) => Promise<void>;
 }
 

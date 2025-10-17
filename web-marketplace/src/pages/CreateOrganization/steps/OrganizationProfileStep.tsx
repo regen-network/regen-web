@@ -10,7 +10,6 @@ import { useLingui } from '@lingui/react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { AccountType } from 'generated/graphql';
-import { setOrganizationProgressStep } from 'lib/storage/organizationProgress.storage';
 
 import {
   DEFAULT_NAME,
@@ -123,7 +122,6 @@ export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
         if (hasUnfinishedOrganization && daoAddress) {
           setTransferHandled(true);
           setShowTransferModal(false);
-          setOrganizationProgressStep(daoAddress, 1);
           const payload: OrganizationMultiStepData = {
             ...values,
             dao: data?.dao ?? {
@@ -158,7 +156,6 @@ export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
           setOrganizationId(daoResult.organizationId);
           setTransferHandled(true);
           setShowTransferModal(false);
-          setOrganizationProgressStep(daoResult.daoAddress, 1);
 
           const payload: OrganizationMultiStepData = {
             ...values,

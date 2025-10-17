@@ -139,8 +139,10 @@ async function getLegacyCodeDetails(
         }
       }
     } catch (legacyError) {
-      const LEGACY_WASM_QUERY_FAILED = 'Legacy wasm code query failed';
-      logLegacyQueryFailure(LEGACY_WASM_QUERY_FAILED, legacyError);
+      if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
+        console.warn('Legacy wasm code query failed', legacyError);
+      }
       continue;
     }
   }

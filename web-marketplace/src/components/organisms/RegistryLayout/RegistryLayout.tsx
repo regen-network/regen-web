@@ -28,9 +28,9 @@ import { RegistryLayoutWarningBannerModal } from './RegistryLayout.WarningBanner
 
 const RegistryLayout: React.FC = () => {
   const location = useLocation();
-const path = location.pathname;
-const isFullScreen =
-  path.startsWith('/dashboard') || path.startsWith('/organizations/create');
+  const path = location.pathname;
+  const isFullScreen =
+    path.startsWith('/dashboard') || path.startsWith('/organizations/create');
 
   return (
     <>

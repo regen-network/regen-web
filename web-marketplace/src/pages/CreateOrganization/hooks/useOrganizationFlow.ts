@@ -1,11 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { AccountType } from 'generated/graphql';
-import type { OrgProgressMap } from 'lib/storage/organizationProgress.storage';
-import {
-  removeOrganizationProgress,
-  setOrganizationProgressStep,
-} from 'lib/storage/organizationProgress.storage';
 
 import {
   DEFAULT_PROFILE_BG,
@@ -26,12 +21,11 @@ type UseOrganizationFlowParams = {
   activeStep: number;
   isLastStep: boolean;
   isCreating: boolean;
-  organizationProgress: OrgProgressMap;
-  maxAllowedStep: number;
   data: OrganizationMultiStepData | undefined;
   handleActiveStep: (step: number) => void;
   handleBack: () => void;
   handleSaveNext: (payload: OrganizationMultiStepData) => void;
+  handleResetData: () => void;
   resumeStep: number;
 };
 
@@ -73,12 +67,11 @@ export const useOrganizationFlow = ({
   activeStep,
   isLastStep,
   isCreating,
-  organizationProgress,
-  maxAllowedStep,
   data,
   handleActiveStep,
   handleBack,
   handleSaveNext,
+  handleResetData,
   resumeStep,
 }: UseOrganizationFlowParams) => {
   const [daoAddress, setDaoAddress] = useState<string | undefined>(undefined);
@@ -114,25 +107,14 @@ export const useOrganizationFlow = ({
       if (storedOrganizationId) {
         setOrganizationId(storedOrganizationId);
       }
-      const existingStep = organizationProgress[storedDaoAddress] ?? 0;
-      const nextStep = Math.max(maxAllowedStep, 1);
-      if (existingStep !== nextStep) {
-        setOrganizationProgressStep(storedDaoAddress, nextStep);
-      }
       setHasUnfinishedOrganization(true);
+      return;
     }
-  }, [data, organizationProgress, maxAllowedStep]);
 
-  useEffect(() => {
-    const entries = Object.keys(organizationProgress);
-    if (entries.length > 0) {
-      setDaoAddress(entries[0]);
-      setHasUnfinishedOrganization(true);
-    } else {
-      setDaoAddress(undefined);
-      setHasUnfinishedOrganization(false);
-    }
-  }, [organizationProgress]);
+    setHasUnfinishedOrganization(false);
+    setDaoAddress(undefined);
+    setOrganizationId(undefined);
+  }, [data]);
 
   useEffect(() => {
     const mappedValues = mapInitialValues(formData);
@@ -150,12 +132,8 @@ export const useOrganizationFlow = ({
 
   const handlePrevClick = useCallback(() => {
     if (activeStep === 0) return;
-    if (hasUnfinishedOrganization && daoAddress) {
-      const previousStep = Math.max(activeStep - 1, 1);
-      setOrganizationProgressStep(daoAddress, previousStep);
-    }
     handleBack();
-  }, [activeStep, daoAddress, handleBack, hasUnfinishedOrganization]);
+  }, [activeStep, handleBack]);
 
   const handleNextClick = useCallback(() => {
     if (isCreating) return;
@@ -173,30 +151,29 @@ export const useOrganizationFlow = ({
         return;
       }
 
-      form.requestSubmit?.() ??
+      if (typeof form.requestSubmit === 'function') {
+        form.requestSubmit();
+      } else {
         form.dispatchEvent(
           new Event('submit', { bubbles: true, cancelable: true }),
         );
+      }
       return;
     }
 
-    if (hasUnfinishedOrganization && daoAddress) {
-      if (isLastStep) {
-        removeOrganizationProgress(daoAddress);
-        setDaoAddress(undefined);
-        setOrganizationId(undefined);
-        setHasUnfinishedOrganization(false);
-      } else {
-        const nextStep = Math.max(activeStep + 1, 1);
-        setOrganizationProgressStep(daoAddress, nextStep);
-      }
-    }
-
     handleSaveNext({});
+
+    if (hasUnfinishedOrganization && daoAddress && isLastStep) {
+      handleResetData();
+      setDaoAddress(undefined);
+      setOrganizationId(undefined);
+      setHasUnfinishedOrganization(false);
+    }
   }, [
     activeStep,
     daoAddress,
     handleSaveNext,
+    handleResetData,
     hasUnfinishedOrganization,
     isCreating,
     isLastStep,

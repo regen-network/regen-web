@@ -1,177 +1,124 @@
-import { getDefaultStore, useAtomValue } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
+import { useEffect, useState } from 'react';
 
-const STORAGE_KEY = 'regen:organization-progress';
-const UPDATE_EVENT = 'organization-progress-updated';
+const CREATE_ORGANIZATION_STORAGE_KEY = 'create-organization';
+const LOCAL_STORAGE_EVENT = 'local-storage:update';
 
-// New canonical shape: map of daoAddress => step (number >=0)
-export type OrgProgressMap = Record<string, number>;
+type StoredDaoInfo = {
+  daoAddress?: unknown;
+  organizationId?: unknown;
+};
+
+type StoredFormValues = {
+  name?: unknown;
+  dao?: StoredDaoInfo;
+};
+
+type StoredCreateOrgData = {
+  formValues?: StoredFormValues;
+  maxAllowedStep?: unknown;
+};
+
+export type OrganizationProgress = {
+  daoAddress: string;
+  step: number;
+  name?: string;
+};
 
 const isBrowser = typeof window !== 'undefined';
-const defaultStore = getDefaultStore();
 
 const normalizeStep = (value: unknown): number =>
-  typeof value === 'number' && value >= 0 ? value : 0;
+  typeof value === 'number' && value >= 0 ? Math.floor(value) : 0;
 
-const normalizeProgress = (parsed: unknown): OrgProgressMap => {
-  const result: OrgProgressMap = {};
-  if (!parsed || typeof parsed !== 'object') return result;
+const parseOrganizationProgress = (
+  rawValue: string | null,
+): OrganizationProgress | undefined => {
+  if (!rawValue) return undefined;
 
-  Object.entries(parsed as Record<string, unknown>).forEach(([key, value]) => {
-    if (value == null) return;
-    if (typeof value === 'number') {
-      result[key] = normalizeStep(value);
-      return;
-    }
-    if (typeof value === 'object') {
-      const legacyStep = (value as { step?: unknown }).step;
-      result[key] = normalizeStep(legacyStep);
-    }
-  });
-  return result;
-};
-
-const safeParse = (value: string | null): OrgProgressMap => {
-  if (!value) return {};
   try {
-    const parsed = JSON.parse(value) as unknown;
-    return normalizeProgress(parsed);
+    const parsed = JSON.parse(rawValue) as StoredCreateOrgData;
+    const daoAddress = parsed?.formValues?.dao?.daoAddress;
+
+    if (!daoAddress || typeof daoAddress !== 'string' || !daoAddress.trim()) {
+      return undefined;
+    }
+
+    const step = normalizeStep(parsed?.maxAllowedStep);
+    const nameValue = parsed?.formValues?.name;
+    const name =
+      typeof nameValue === 'string' && nameValue.trim().length > 0
+        ? nameValue
+        : undefined;
+
+    return { daoAddress, step, name };
   } catch (_error) {
-    return {};
+    return undefined;
   }
 };
 
-const readProgress = (initialValue: OrgProgressMap = {}): OrgProgressMap => {
-  if (!isBrowser) return initialValue;
+const readProgress = (): OrganizationProgress | undefined => {
+  if (!isBrowser) return undefined;
+
   try {
-    const value = window.localStorage.getItem(STORAGE_KEY);
-    if (!value) return initialValue;
-    return safeParse(value);
+    const storedValue = window.localStorage.getItem(
+      CREATE_ORGANIZATION_STORAGE_KEY,
+    );
+    return parseOrganizationProgress(storedValue);
   } catch (_error) {
-    return initialValue;
+    return undefined;
   }
 };
 
-type StorageCallback = (value: OrgProgressMap) => void;
+export const getStoredOrganizationProgress = ():
+  | OrganizationProgress
+  | undefined => readProgress();
 
-type OrganizationStorage = {
-  getItem: (key: string, initialValue: OrgProgressMap) => OrgProgressMap;
-  setItem: (key: string, newValue: OrgProgressMap) => void;
-  removeItem: (key: string) => void;
-  subscribe?: (
-    key: string,
-    callback: StorageCallback,
-    initialValue: OrgProgressMap,
-  ) => () => void;
+export const clearStoredOrganizationProgress = (): void => {
+  if (!isBrowser) return;
+
+  try {
+    window.localStorage.removeItem(CREATE_ORGANIZATION_STORAGE_KEY);
+    window.dispatchEvent(
+      new CustomEvent(LOCAL_STORAGE_EVENT, {
+        detail: { key: CREATE_ORGANIZATION_STORAGE_KEY },
+      }),
+    );
+  } catch (_error) {
+    // ignore failures when interacting with storage
+  }
 };
 
-const storage: OrganizationStorage = {
-  getItem: (_key: string, initialValue: OrgProgressMap) =>
-    readProgress(initialValue),
-  setItem: (_key: string, newValue: OrgProgressMap) => {
-    if (!isBrowser) return;
-    try {
-      if (!newValue || Object.keys(newValue).length === 0) {
-        window.localStorage.removeItem(STORAGE_KEY);
-      } else {
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue));
-      }
-      window.dispatchEvent(new Event(UPDATE_EVENT));
-    } catch (_error) {}
-  },
-  removeItem: (_key: string) => {
-    if (!isBrowser) return;
-    try {
-      window.localStorage.removeItem(STORAGE_KEY);
-      window.dispatchEvent(new Event(UPDATE_EVENT));
-    } catch (_error) {}
-  },
-  subscribe: (
-    _key: string,
-    callback: StorageCallback,
-    initialValue: OrgProgressMap,
-  ) => {
-    if (!isBrowser) return () => undefined;
+type CustomStorageEvent = CustomEvent<{ key?: string }>;
 
-    const handleStorageChange = (event: StorageEvent) => {
-      if (
-        event.storageArea === window.localStorage &&
-        event.key === STORAGE_KEY
-      ) {
-        callback(readProgress(initialValue));
-      }
+const shouldHandleEvent = (key?: string | null): boolean =>
+  !key || key === CREATE_ORGANIZATION_STORAGE_KEY;
+
+export const useOrganizationProgress = (): OrganizationProgress | undefined => {
+  const [progress, setProgress] = useState<OrganizationProgress | undefined>(
+    () => readProgress(),
+  );
+
+  useEffect(() => {
+    if (!isBrowser) return undefined;
+
+    const handleStorage = (event: StorageEvent) => {
+      if (!shouldHandleEvent(event.key)) return;
+      setProgress(readProgress());
     };
 
-    const handleCustomUpdate = () => {
-      callback(readProgress(initialValue));
+    const handleCustom = (event: Event) => {
+      const customEvent = event as CustomStorageEvent;
+      if (!shouldHandleEvent(customEvent.detail?.key)) return;
+      setProgress(readProgress());
     };
 
-    window.addEventListener('storage', handleStorageChange);
-    window.addEventListener(UPDATE_EVENT, handleCustomUpdate);
+    window.addEventListener('storage', handleStorage);
+    window.addEventListener(LOCAL_STORAGE_EVENT, handleCustom);
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener(UPDATE_EVENT, handleCustomUpdate);
+      window.removeEventListener('storage', handleStorage);
+      window.removeEventListener(LOCAL_STORAGE_EVENT, handleCustom);
     };
-  },
+  }, []);
+
+  return progress;
 };
-
-const organizationProgressAtom = atomWithStorage<OrgProgressMap>(
-  STORAGE_KEY,
-  {},
-  storage,
-);
-
-const isPromise = (value: unknown): value is Promise<OrgProgressMap> =>
-  !!value && typeof (value as Promise<OrgProgressMap>).then === 'function';
-
-const readAtomValue = (): OrgProgressMap => {
-  const value = defaultStore.get(organizationProgressAtom);
-  if (isPromise(value)) {
-    return {};
-  }
-  return value ?? {};
-};
-
-export const setOrganizationProgressStep = (
-  daoAddress: string,
-  step: number,
-): void => {
-  if (!daoAddress) return;
-  defaultStore.set(
-    organizationProgressAtom,
-    (previous: OrgProgressMap | Promise<OrgProgressMap> | undefined) => {
-      const prevValue: OrgProgressMap = isPromise(previous)
-        ? {}
-        : previous ?? {};
-      return {
-        ...prevValue,
-        [daoAddress]: normalizeStep(step),
-      };
-    },
-  );
-};
-
-export const removeOrganizationProgress = (daoAddress?: string): void => {
-  if (!daoAddress) return;
-  defaultStore.set(
-    organizationProgressAtom,
-    (previous: OrgProgressMap | Promise<OrgProgressMap> | undefined) => {
-      const prevValue: OrgProgressMap = isPromise(previous)
-        ? {}
-        : previous ?? {};
-      if (!prevValue[daoAddress]) return prevValue;
-      const { [daoAddress]: _removed, ...rest } = prevValue;
-      return rest;
-    },
-  );
-};
-
-export const getOrganizationProgress = (
-  daoAddress: string,
-): number | undefined => readAtomValue()[daoAddress];
-
-export const getAllOrganizationProgress = (): OrgProgressMap => readAtomValue();
-
-export const useOrganizationProgress = (): OrgProgressMap =>
-  useAtomValue(organizationProgressAtom);

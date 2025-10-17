@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import type { NavigateFunction } from 'react-router-dom';
 
 import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
-import type { TranslatorType } from 'lib/i18n/i18n.types';
 import type { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 import type { Wallet } from 'lib/wallet/wallet';
 import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
@@ -16,7 +15,6 @@ type UseOrganizationActionsParams = {
   wallet?: Wallet | null;
   profileLink: string;
   navigate: NavigateFunction;
-  translate: TranslatorType;
   connect?: (...args: any[]) => void;
   isConnected: boolean;
 };
@@ -27,7 +25,6 @@ export const useOrganizationActions = ({
   wallet,
   profileLink,
   navigate,
-  translate,
   connect,
   isConnected,
 }: UseOrganizationActionsParams) => {
@@ -47,7 +44,6 @@ export const useOrganizationActions = ({
       wallet,
       profileLink,
       dashboardLink: '/dashboard',
-      translate,
     });
 
   const createOrganization = useCallback(() => {

@@ -1,13 +1,15 @@
+/* eslint-disable lingui/no-unlocalized-strings */
 import { instantiate2Address } from '@cosmjs/cosmwasm-stargate';
 import { fromHex, toBase64, toUtf8 } from '@cosmjs/encoding';
 import type { QueryClient } from '@tanstack/react-query';
 import { nanoid } from 'nanoid';
 
+import { getFromCacheOrFetch } from 'lib/queries/react-query/utils/getFromCacheOrFetch';
+import { getCodeDetailsQuery } from 'lib/queries/react-query/wasm/wasmCodeDetails.query';
 import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 
 import { CodeDetailsLike, WasmCodeClient } from './useCreateDao.codeDetails';
 import { lookupContractChecksum } from './useCreateDao.constants';
-import { getCodeDetailsQuery } from './useCreateDao.queries';
 
 // Roles and authorizations definitions
 const creditClassesAuthorization = {
@@ -169,7 +171,7 @@ const orgEditAuthorization = (daoAddress: string) => ({
             contract_addr: daoAddress,
             msg: {
               '#base64': {
-                update_config: {}, // update name, description or image_url
+                update_config: {},
               },
             },
             funds: [],
@@ -234,6 +236,11 @@ const ownerMembersAuthorizations = (
     metadata: 'Can manage members of the organization',
     filter: {
       $or: [
+        {
+          stargate: {
+            type_url: '/cosmos.feegrant.v1beta1.MsgGrantAllowance',
+          },
+        },
         {
           wasm: {
             execute: {
@@ -370,8 +377,10 @@ const adminMembersAuthorizations = (
               msg: {
                 '#base64': {
                   revoke: {
-                    $all: {
-                      addr: { $ne: initialOwnerAddress },
+                    revoke: {
+                      $all: {
+                        addr: { $ne: initialOwnerAddress },
+                      },
                     },
                   },
                 },
@@ -411,7 +420,7 @@ export const organizationRoles = (
   rbamAddress: string,
 ) => [
   {
-    name: 'Owner',
+    name: 'owner',
     metadata: 'Owner of the organization',
     authorizations: [
       ...ownerMembersAuthorizations(cw4GroupAddress, rbamAddress),
@@ -420,7 +429,7 @@ export const organizationRoles = (
     assignments: [initialOwnerAddress],
   },
   {
-    name: 'Admin',
+    name: 'admin',
     metadata:
       'Manages user access and has full control of projects, credits, and credit classes.',
     authorizations: [
@@ -433,7 +442,7 @@ export const organizationRoles = (
     ],
   },
   {
-    name: 'Editor',
+    name: 'editor',
     metadata:
       'Has full control of projects and credit classes, but cannot manage users or credits.',
     authorizations: [
@@ -451,7 +460,7 @@ export const organizationRoles = (
     ],
   },
   {
-    name: 'Viewer',
+    name: 'viewer',
     metadata:
       'Viewer of the organization, can view all data across all projects, even when private.',
   },
@@ -490,7 +499,7 @@ export const projectRoles = (
   rbamAddress: string,
 ) => [
   {
-    name: 'Owner',
+    name: 'owner',
     metadata: 'Owner of the project',
     authorizations: [
       ...ownerMembersAuthorizations(cw4GroupAddress, rbamAddress),
@@ -499,7 +508,7 @@ export const projectRoles = (
     assignments: [initialOwnerAddress],
   },
   {
-    name: 'Admin',
+    name: 'admin',
     metadata:
       'Manages user access and can edit all project info and project credits.',
     authorizations: [
@@ -512,19 +521,19 @@ export const projectRoles = (
     ],
   },
   {
-    name: 'Editor',
+    name: 'editor',
     metadata:
       'Can edit all project page info and posts. Cannot manage users or credits.',
     authorizations: [projectsAuthorization, dataAuthorization],
   },
   {
-    name: 'Author',
+    name: 'author',
     metadata:
       'Can create, edit, and delete their own data posts. Cannot see private post data.',
     authorizations: [dataAuthorization],
   },
   {
-    name: 'Viewer',
+    name: 'viewer',
     metadata:
       'Viewer of the organization, can view all data across all projects, even when private.',
   },
@@ -730,13 +739,10 @@ async function resolveCodeChecksum(
 
   const queryOptions = getCodeDetailsQuery({ client, codeId, rpcEndpoint });
 
-  let codeDetails: CodeDetailsLike | undefined;
-  const anyClient = queryClient as any;
-  if (typeof anyClient.ensureQueryData === 'function') {
-    codeDetails = await anyClient.ensureQueryData(queryOptions);
-  } else {
-    codeDetails = await queryClient.fetchQuery(queryOptions);
-  }
+  const codeDetails = (await getFromCacheOrFetch<CodeDetailsLike>({
+    reactQueryClient: queryClient,
+    query: queryOptions,
+  })) as CodeDetailsLike | undefined;
   const checksum = codeDetails?.checksum;
 
   if (checksum) {

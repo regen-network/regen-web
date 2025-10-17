@@ -1,114 +1,211 @@
-import React, { useCallback, useRef } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { msg } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { AccountType } from 'generated/graphql';
 import { setOrganizationProgressStep } from 'lib/storage/organizationProgress.storage';
 
+import {
+  DEFAULT_NAME,
+  DEFAULT_PROFILE_BG,
+  DEFAULT_PROFILE_COMPANY_AVATAR,
+  DEFAULT_PROFILE_USER_AVATAR,
+} from 'pages/Dashboard/Dashboard.constants';
 import { useOnUploadCallback } from 'pages/Dashboard/hooks/useOnUploadCallback';
 import { EditProfileForm } from 'components/organisms/EditProfileForm/EditProfileForm';
 import { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
 
+import TransferProfileModal from '../components/TransferProfileModal';
 import {
   CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR,
   CREATE_ORG_ORGANIZATION_NAME_LABEL,
 } from '../CreateOrganization.constants';
+import { hasTransferableProfile } from '../CreateOrganization.utils';
 import { useCreateDao } from '../hooks/useCreateDao/useCreateDao';
+import type { OrganizationMultiStepData } from '../hooks/useOrganizationFlow';
+import type { OrganizationProfileStepProps } from './OrganizationProfileStep.types';
 
-type Props = {
-  formId: string;
-  initialValues: Partial<EditProfileFormSchemaType>;
-  activeAccountId?: string;
-  hasUnfinishedOrganization: boolean;
-  daoAddressRef: React.MutableRefObject<string | undefined>;
-  organizationIdRef: React.MutableRefObject<string | undefined>;
-  organizationNameRef: React.MutableRefObject<string | undefined>;
-  data: Record<string, unknown>;
-  handleSaveNext: (payload: Record<string, unknown>) => void;
-  _t: (id: any) => string; // lingui _ passthrough for error messages
-};
+export const OrganizationProfileStep: React.FC<OrganizationProfileStepProps> =
+  ({
+    formId,
+    initialValues,
+    activeAccountId,
+    activeAccount,
+    hasUnfinishedOrganization,
+    daoAddress,
+    setDaoAddress,
+    organizationId,
+    setOrganizationId,
+    onTransferProfile,
+    data,
+    handleSaveNext,
+  }) => {
+    const { _ } = useLingui();
+    const { createDao } = useCreateDao();
+    const fileNamesToDeleteRef = useRef<string[]>([]);
+    const onUpload = useOnUploadCallback({
+      fileNamesToDeleteRef,
+    });
 
-export const OrganizationProfileStep: React.FC<Props> = ({
-  formId,
-  initialValues,
-  activeAccountId,
-  hasUnfinishedOrganization,
-  daoAddressRef,
-  organizationIdRef,
-  organizationNameRef,
-  data,
-  handleSaveNext,
-  _t,
-}) => {
-  const { _ } = useLingui();
-  const { createDao } = useCreateDao();
-  const fileNamesToDeleteRef = useRef<string[]>([]);
-  const onUpload = useOnUploadCallback({
-    fileNamesToDeleteRef,
-  });
+    const [showTransferModal, setShowTransferModal] = useState(false);
+    const [transferHandled, setTransferHandled] = useState(
+      hasUnfinishedOrganization || Boolean(initialValues?.name?.trim()),
+    );
 
-  const handleSubmit = useCallback(
-    async (values: EditProfileFormSchemaType) => {
-      if (hasUnfinishedOrganization && daoAddressRef.current) {
-        organizationNameRef.current = values.name;
-        setOrganizationProgressStep(daoAddressRef.current, 1);
-        const payload: Record<string, unknown> = {
-          ...values,
-          dao: (data as Record<string, unknown>)?.dao ?? {
-            daoAddress: daoAddressRef.current,
-            organizationId: organizationIdRef.current,
-          },
-        };
-        handleSaveNext(payload);
+    const canOfferTransfer = useMemo(
+      () => hasTransferableProfile(activeAccount),
+      [activeAccount],
+    );
+
+    useEffect(() => {
+      if (hasUnfinishedOrganization) {
+        setTransferHandled(true);
+        setShowTransferModal(false);
         return;
       }
 
-      if (!activeAccountId) {
-        throw new Error(_(CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR));
+      if (!canOfferTransfer) {
+        setShowTransferModal(false);
+        return;
       }
-      const organizationId = organizationIdRef.current ?? uuidv4();
-      organizationIdRef.current = organizationId;
 
-      const daoResult = await createDao({
-        name: values.name,
-        description: values.description,
-        profileImage: values.profileImage,
-        backgroundImage: values.backgroundImage,
-        websiteLink: values.websiteLink,
-        twitterLink: values.twitterLink,
+      if (!transferHandled) {
+        setShowTransferModal(true);
+      }
+    }, [canOfferTransfer, hasUnfinishedOrganization, transferHandled]);
+
+    useEffect(() => {
+      if (initialValues?.name && initialValues.name.trim().length > 0) {
+        setTransferHandled(true);
+        setShowTransferModal(false);
+      }
+    }, [initialValues?.name]);
+
+    const handleCloseTransferModal = useCallback(() => {
+      setTransferHandled(true);
+      setShowTransferModal(false);
+    }, []);
+
+    const handleTransferProfile = useCallback(() => {
+      if (!activeAccount) {
+        handleCloseTransferModal();
+        return;
+      }
+
+      const fallbackName = activeAccount.name?.trim() || _(DEFAULT_NAME);
+      const nextValues: Partial<EditProfileFormSchemaType> = {
+        name: fallbackName,
+        description: activeAccount.description?.trim() ?? '',
+        profileImage: activeAccount.image || DEFAULT_PROFILE_COMPANY_AVATAR,
+        backgroundImage: activeAccount.bgImage || DEFAULT_PROFILE_BG,
+        websiteLink: activeAccount.websiteLink?.trim() ?? '',
+        twitterLink: activeAccount.twitterLink?.trim() ?? '',
+        profileType:
+          activeAccount.type === AccountType.Organization
+            ? AccountType.Organization
+            : undefined,
+      };
+
+      onTransferProfile({ nextValues });
+      setTransferHandled(true);
+      setShowTransferModal(false);
+    }, [activeAccount, handleCloseTransferModal, onTransferProfile, _]);
+
+    const handleSubmit = useCallback(
+      async (values: EditProfileFormSchemaType) => {
+        if (hasUnfinishedOrganization && daoAddress) {
+          setTransferHandled(true);
+          setShowTransferModal(false);
+          setOrganizationProgressStep(daoAddress, 1);
+          const payload: OrganizationMultiStepData = {
+            ...values,
+            dao: data?.dao ?? {
+              daoAddress,
+              organizationId,
+            },
+          };
+          handleSaveNext(payload);
+          return;
+        }
+
+        try {
+          if (!activeAccountId) {
+            throw new Error(_(CREATE_ORG_ACTIVE_ACCOUNT_REQUIRED_ERROR));
+          }
+
+          const organizationIdValue = organizationId ?? uuidv4();
+          setOrganizationId(organizationIdValue);
+
+          const daoResult = await createDao({
+            name: values.name,
+            description: values.description,
+            profileImage: values.profileImage,
+            backgroundImage: values.backgroundImage,
+            websiteLink: values.websiteLink,
+            twitterLink: values.twitterLink,
+            organizationId: organizationIdValue,
+            currentAccountId: activeAccountId,
+          });
+
+          setDaoAddress(daoResult.daoAddress);
+          setOrganizationId(daoResult.organizationId);
+          setTransferHandled(true);
+          setShowTransferModal(false);
+          setOrganizationProgressStep(daoResult.daoAddress, 1);
+
+          const payload: OrganizationMultiStepData = {
+            ...values,
+            dao: daoResult,
+          };
+          handleSaveNext(payload);
+        } catch (error) {
+          if (error instanceof Error) {
+            throw error;
+          }
+          throw new Error(
+            _(msg`Something went wrong while creating the organization.`),
+          );
+        }
+      },
+      [
+        hasUnfinishedOrganization,
+        daoAddress,
         organizationId,
-        currentAccountId: activeAccountId,
-      });
+        setDaoAddress,
+        setOrganizationId,
+        data,
+        handleSaveNext,
+        activeAccountId,
+        createDao,
+        _,
+      ],
+    );
 
-      daoAddressRef.current = daoResult.daoAddress;
-      organizationIdRef.current = daoResult.organizationId;
-      organizationNameRef.current = values.name;
-      setOrganizationProgressStep(daoResult.daoAddress, 1);
-
-      const payload: Record<string, unknown> = { ...values, dao: daoResult };
-      handleSaveNext(payload);
-    },
-    [
-      hasUnfinishedOrganization,
-      daoAddressRef,
-      organizationIdRef,
-      data,
-      handleSaveNext,
-      activeAccountId,
-      createDao,
-      organizationNameRef,
-      _,
-    ],
-  );
-
-  return (
-    <EditProfileForm
-      formId={formId}
-      onSubmit={handleSubmit}
-      initialValues={initialValues as EditProfileFormSchemaType}
-      hideProfileType
-      nameLabel={_(CREATE_ORG_ORGANIZATION_NAME_LABEL)}
-      onUpload={onUpload}
-      prefillValues={initialValues as EditProfileFormSchemaType}
-    />
-  );
-};
+    return (
+      <>
+        <TransferProfileModal
+          open={showTransferModal}
+          onSkip={handleCloseTransferModal}
+          onTransfer={handleTransferProfile}
+          name={activeAccount?.name?.trim() || _(DEFAULT_NAME)}
+          avatar={activeAccount?.image || DEFAULT_PROFILE_USER_AVATAR}
+        />
+        <EditProfileForm
+          formId={formId}
+          onSubmit={handleSubmit}
+          initialValues={initialValues as EditProfileFormSchemaType}
+          hideProfileType
+          nameLabel={_(CREATE_ORG_ORGANIZATION_NAME_LABEL)}
+          onUpload={onUpload}
+          prefillValues={initialValues as EditProfileFormSchemaType}
+        />
+      </>
+    );
+  };

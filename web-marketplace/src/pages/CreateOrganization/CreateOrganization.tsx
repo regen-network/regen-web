@@ -12,9 +12,7 @@ import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { useAuth } from 'lib/auth/auth';
 import { SAVE_TEXT } from 'lib/constants/shared.constants';
 import {
-  getAllOrganizationProgress,
-  OrgProgressMap,
-  removeOrganizationProgress,
+  clearStoredOrganizationProgress,
   useOrganizationProgress,
 } from 'lib/storage/organizationProgress.storage';
 
@@ -47,12 +45,10 @@ import { PersonalInfoStep } from './steps/PersonalInfoStep';
 
 type CreateOrganizationContentProps = {
   resumeStep: number;
-  organizationProgress: OrgProgressMap;
 };
 
 function CreateOrganizationContent({
   resumeStep,
-  organizationProgress,
 }: CreateOrganizationContentProps): JSX.Element {
   const { _ } = useLingui();
   const {
@@ -62,8 +58,8 @@ function CreateOrganizationContent({
     percentComplete,
     handleSaveNext,
     isLastStep,
-    maxAllowedStep,
     data,
+    handleResetData,
   } = useMultiStep<OrganizationMultiStepData>();
   const { activeAccount } = useAuth();
   const { isCreating } = useCreateDao();
@@ -83,12 +79,11 @@ function CreateOrganizationContent({
     activeStep,
     isLastStep,
     isCreating,
-    organizationProgress,
-    maxAllowedStep,
     data,
     handleActiveStep,
     handleBack,
     handleSaveNext,
+    handleResetData,
     resumeStep,
   });
 
@@ -133,14 +128,13 @@ export default function CreateOrganizationPage(): JSX.Element {
   const organizationProgress = useOrganizationProgress();
   const [showDiscardModal, setShowDiscardModal] = useState(false);
 
-  const currentProgress = useMemo<number | undefined>(
-    () => Object.values(organizationProgress)[0],
-    [organizationProgress],
-  );
   const resumeStep = useMemo(() => {
-    if (typeof currentProgress !== 'number') return 0;
-    return Math.min(currentProgress, CREATE_ORG_STEPS.length - 1);
-  }, [currentProgress]);
+    if (!organizationProgress) return 0;
+    return Math.min(
+      organizationProgress.step,
+      CREATE_ORG_STEPS.length - 1,
+    );
+  }, [organizationProgress]);
 
   const visibleOrganizationAssignments = useMemo(
     () => getVisibleOrganizationAssignments(activeAccount),
@@ -159,8 +153,7 @@ export default function CreateOrganizationPage(): JSX.Element {
   const handleCancelDiscard = useCallback(() => setShowDiscardModal(false), []);
   const handleConfirmDiscard = useCallback(() => {
     setShowDiscardModal(false);
-    const progress = getAllOrganizationProgress();
-    Object.keys(progress).forEach(addr => removeOrganizationProgress(addr));
+    clearStoredOrganizationProgress();
     navigate('/dashboard', { replace: true });
   }, [navigate]);
 
@@ -200,10 +193,7 @@ export default function CreateOrganizationPage(): JSX.Element {
         closeAriaLabel={_(CREATE_ORG_CLOSE_ARIA_LABEL)}
         classes={{ titleWrap: 'pb-40' }}
       >
-        <CreateOrganizationContent
-          organizationProgress={organizationProgress}
-          resumeStep={resumeStep}
-        />
+        <CreateOrganizationContent resumeStep={resumeStep} />
       </MultiStepTemplate>
     </>
   );

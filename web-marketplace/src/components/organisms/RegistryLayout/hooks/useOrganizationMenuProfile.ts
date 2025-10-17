@@ -1,12 +1,11 @@
 import { useMemo } from 'react';
+import { useLingui } from '@lingui/react';
 
 import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
-import type { TranslatorType } from 'lib/i18n/i18n.types';
 import type { PrivateAccount } from 'lib/queries/react-query/registry-server/getAccounts/getAccountsQuery.types';
 import { useOrganizationProgress } from 'lib/storage/organizationProgress.storage';
 import type { Wallet } from 'lib/wallet/wallet';
 
-import { CREATE_ORG_FORM_ID } from 'pages/CreateOrganization/CreateOrganization.constants';
 import {
   DEFAULT_NAME,
   DEFAULT_PROFILE_COMPANY_AVATAR,
@@ -21,7 +20,6 @@ type UseOrganizationMenuProfileParams = {
   wallet: Wallet | null | undefined;
   profileLink: string;
   dashboardLink: string;
-  translate: TranslatorType;
 };
 
 type AssignmentNode = {
@@ -46,8 +44,8 @@ export const useOrganizationMenuProfile = ({
   wallet,
   profileLink,
   dashboardLink,
-  translate,
 }: UseOrganizationMenuProfileParams) => {
+  const { _ } = useLingui();
   const organizationProgress = useOrganizationProgress();
 
   const organizationProfile = useMemo(
@@ -56,7 +54,7 @@ export const useOrganizationMenuProfile = ({
         ? getProfile({
             account: activeAccount,
             privActiveAccount,
-            _: translate,
+            _: _,
             profileLink,
             dashboardLink,
             address: wallet?.address,
@@ -65,56 +63,26 @@ export const useOrganizationMenuProfile = ({
     [
       activeAccount,
       privActiveAccount,
-      translate,
+      _,
       profileLink,
       dashboardLink,
       wallet?.address,
     ],
   );
 
-  const multiStepEntry = useMemo<
-    { daoAddress: string; step: number; name?: string } | undefined
-  >(() => {
-    if (typeof window === 'undefined') return undefined;
-    try {
-      const stored = window.localStorage.getItem(CREATE_ORG_FORM_ID);
-      if (!stored) return undefined;
-      const parsed = JSON.parse(stored);
-      const daoAddress: string | undefined =
-        parsed?.formValues?.dao?.daoAddress;
-      if (!daoAddress) return undefined;
-      const parsedEntry = {
-        daoAddress,
-        step: parsed?.maxAllowedStep ?? 0,
-        name: parsed?.formValues?.name,
-      };
-      return parsedEntry;
-    } catch (error) {
-      const PARSE_CREATE_ORG_STORAGE_FAILED =
-        'Failed to parse create-organization storage';
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const noop = (_msg: string, _err: unknown) => {};
-      noop(PARSE_CREATE_ORG_STORAGE_FAILED, error);
-      return undefined;
-    }
-  }, []);
-
-  const unfinishedEntry = useMemo<
-    { daoAddress: string; step: number; name?: string } | undefined
-  >(() => {
-    const firstKey = Object.keys(organizationProgress)[0];
-    if (firstKey) {
-      return { daoAddress: firstKey, step: organizationProgress[firstKey] };
-    }
-    return multiStepEntry;
-  }, [organizationProgress, multiStepEntry]);
+  const unfinishedEntry = useMemo(
+    () => organizationProgress,
+    [organizationProgress],
+  );
 
   const unfinalizedOrgCreation = !!unfinishedEntry;
 
   const fallbackOrganizationProfile = useMemo(() => {
     if (!unfinishedEntry) return undefined;
     const fallbackName =
-      unfinishedEntry.name || multiStepEntry?.name || translate(DEFAULT_NAME);
+      unfinishedEntry.name && unfinishedEntry.name.trim().length > 0
+        ? unfinishedEntry.name
+        : _(DEFAULT_NAME);
     return {
       id: unfinishedEntry.daoAddress,
       name: fallbackName,
@@ -126,7 +94,7 @@ export const useOrganizationMenuProfile = ({
       profileLink: '/organizations/create',
       dashboardLink: '/organizations/create',
     };
-  }, [unfinishedEntry, multiStepEntry, translate]);
+  }, [unfinishedEntry, _]);
 
   const organizationProfileFromAssignments = useMemo(() => {
     const assignments =
@@ -146,7 +114,7 @@ export const useOrganizationMenuProfile = ({
 
     const organizationName =
       visibleAssignment?.daoByDaoAddress?.organizationByDaoAddress?.name ??
-      translate(DEFAULT_NAME);
+      _(DEFAULT_NAME);
 
     return {
       id: daoAddress,
@@ -157,7 +125,7 @@ export const useOrganizationMenuProfile = ({
       profileLink: `/profiles/${daoAddress}`,
       dashboardLink: '/dashboard',
     };
-  }, [activeAccount, translate]);
+  }, [activeAccount, _]);
 
   const menuOrganizationProfile =
     organizationProfile ??

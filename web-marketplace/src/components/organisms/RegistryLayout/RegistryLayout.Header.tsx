@@ -97,7 +97,6 @@ const RegistryLayoutHeader: React.FC = () => {
     wallet,
     profileLink,
     navigate,
-    translate: _,
     connect,
     isConnected,
   });

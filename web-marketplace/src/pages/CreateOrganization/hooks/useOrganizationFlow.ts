@@ -1,17 +1,19 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { CREATE_ORG_FORM_ID } from '../CreateOrganization.constants';
+import { AccountType } from 'generated/graphql';
 import type { OrgProgressMap } from 'lib/storage/organizationProgress.storage';
 import {
   removeOrganizationProgress,
   setOrganizationProgressStep,
 } from 'lib/storage/organizationProgress.storage';
+
 import {
   DEFAULT_PROFILE_BG,
   DEFAULT_PROFILE_COMPANY_AVATAR,
 } from 'pages/Dashboard/Dashboard.constants';
-import { AccountType } from 'generated/graphql';
 import type { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
+
+import { CREATE_ORG_FORM_ID } from '../CreateOrganization.constants';
 
 export type OrganizationMultiStepData = Partial<EditProfileFormSchemaType> & {
   dao?: {

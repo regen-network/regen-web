@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { Trans } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
@@ -14,7 +14,6 @@ import { Theme } from 'web-components/src/theme/muiTheme';
 import type { AccountFieldsFragment, Maybe } from 'generated/graphql';
 import { useAuth } from 'lib/auth/auth';
 import { useWallet, Wallet } from 'lib/wallet/wallet';
-import { WalletType } from 'lib/wallet/walletsConfig/walletsConfig.types';
 
 import { getWalletAddress } from 'pages/Dashboard/Dashboard.utils';
 import { useAuthData } from 'hooks/useAuthData';
@@ -24,13 +23,12 @@ import { Link, RegistryIconLink, RegistryNavLink } from '../../atoms';
 import { AccountConnectWalletModal } from '../AccountConnectWalletModal/AccountConnectWalletModal';
 import { ConnectWalletFlow } from '../ConnectWalletFlow/ConnectWalletFlow';
 import { ListProject } from '../ListProject/ListProject';
-import { useLoginData } from '../LoginButton/hooks/useLoginData';
 import { LoginButton } from '../LoginButton/LoginButton';
 import {
   ADDRESS_COPIED,
   COPY_ADDRESS,
 } from '../UserAccountSettings/UserAccountSettings.constants';
-import { useOrganizationMenuProfile } from './hooks/useOrganizationMenuProfile';
+import { useOrganizationActions } from './hooks/useOrganizationActions';
 import {
   getBorderBottom,
   getHeaderColors,
@@ -39,6 +37,7 @@ import {
 } from './RegistryLayout.config';
 import {
   AVATAR_ALT,
+  CONNECT_TO_KEPLR_ORGANIZATION,
   CREATE_ORG,
   FINISH_ORG_CREATION,
   fullWidthRegExp,
@@ -68,12 +67,6 @@ const RegistryLayoutHeader: React.FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { activeAccount, privActiveAccount } = useAuth();
-  const [isConnectWalletModalOpen, setIsConnectWalletModalOpen] =
-    useState(false);
-  const [shouldRedirectToCreateOrg, setShouldRedirectToCreateOrg] =
-    useState(false);
-  const [error, setError] = useState<unknown>(undefined);
-
   const { wallet, disconnect, accountByAddr, connect, isConnected } =
     useWallet();
   const { accountOrWallet, noAccountAndNoWallet } = useAuthData();
@@ -81,65 +74,33 @@ const RegistryLayoutHeader: React.FC = () => {
   const headerColors = useMemo(() => getHeaderColors(theme), [theme]);
   const isTransparent = useMemo(() => getIsTransparent(pathname), [pathname]);
   const borderBottom = useMemo(() => getBorderBottom(pathname), [pathname]);
-  // const isHome = pathname === '/';
   const clientConfig = getClientConfig();
 
   const hasPrefinanceProjects = useLoaderData();
   const profileLink = getProfileLink(activeAccount, wallet);
 
-  const { modalState, onButtonClick, onModalClose, walletsUiConfig } =
-    useLoginData({});
-
-  const createOrganization = useCallback(() => {
-    if (privActiveAccount && !isConnected) {
-      setShouldRedirectToCreateOrg(true);
-      setIsConnectWalletModalOpen(true);
-      onButtonClick();
-    } else if (isConnected) {
-      navigate('/organizations/create');
-    }
-  }, [navigate, privActiveAccount, isConnected, onButtonClick]);
-  const finishOrgCreation = useCallback(() => {
-    onButtonClick();
-    navigate('/organizations/create');
-  }, [navigate, onButtonClick]);
-
-  const { defaultAvatar, menuOrganizationProfile, unfinalizedOrgCreation } =
-    useOrganizationMenuProfile({
-      activeAccount,
-      privActiveAccount,
-      wallet,
-      profileLink,
-      dashboardLink: '/dashboard',
-      translate: _,
-    });
-
-  const handleConnectWalletModalClose = () => {
-    setIsConnectWalletModalOpen(false);
-    setShouldRedirectToCreateOrg(false);
-    onModalClose();
-  };
-
-  const handleWalletConnect = () => {
-    connect &&
-      connect({
-        walletType: WalletType.Keplr,
-        doLogin: true,
-      });
-  };
-
-  // Handle successful wallet connection and redirect to create org if needed
-  React.useEffect(() => {
-    if (shouldRedirectToCreateOrg && isConnected && !isConnectWalletModalOpen) {
-      setShouldRedirectToCreateOrg(false);
-      navigate('/organizations/create');
-    }
-  }, [
-    shouldRedirectToCreateOrg,
-    isConnected,
+  const {
+    modalState,
+    walletsUiConfig,
+    createOrganization,
+    finishOrgCreation,
+    defaultAvatar,
+    menuOrganizationProfile,
+    unfinalizedOrgCreation,
     isConnectWalletModalOpen,
+    handleConnectWalletModalClose,
+    handleWalletConnect,
+    setError,
+  } = useOrganizationActions({
+    activeAccount,
+    privActiveAccount,
+    wallet,
+    profileLink,
     navigate,
-  ]);
+    translate: _,
+    connect,
+    isConnected,
+  });
 
   const connectWalletDescription = (
     <Trans>
@@ -267,7 +228,7 @@ const RegistryLayoutHeader: React.FC = () => {
       <AccountConnectWalletModal
         open={isConnectWalletModalOpen}
         onClose={handleConnectWalletModalClose}
-        title="Please connect with Keplr to create an organization"
+        title={_(CONNECT_TO_KEPLR_ORGANIZATION)}
         description={connectWalletDescription}
         wallets={[
           {

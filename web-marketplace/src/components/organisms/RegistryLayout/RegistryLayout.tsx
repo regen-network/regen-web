@@ -34,12 +34,10 @@ const isFullScreen =
 
   return (
     <>
-      {!isDashboard &&
-        !isFullScreenCreateOrg &&
+      {!isFullScreen &&
         (IS_TERRASOS ? <TerrasosHeader /> : <RegistryLayoutHeader />)}
       <Outlet />
-      {!isDashboard &&
-        !isFullScreenCreateOrg &&
+      {!isFullScreen &&
         (IS_TERRASOS ? (
           <RegistryLayoutTerrasosFooter />
         ) : (

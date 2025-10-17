@@ -585,6 +585,138 @@ export const predictAddress = async ({
 export const encodeJsonToBase64 = (object: any) =>
   toBase64(toUtf8(JSON.stringify(object)));
 
+export type SanitizeDaoParamsInput = {
+  name: string;
+  description?: string;
+  profileImage?: string;
+  backgroundImage?: string;
+  websiteLink?: string;
+  twitterLink?: string;
+  organizationId: string;
+  currentAccountId: string;
+  profileBasePath: string;
+};
+
+export type SanitizeDaoParamsResult = {
+  sanitizedName: string;
+  sanitizedDescription: string | null;
+  sanitizedProfileImage: string | null;
+  sanitizedBackgroundImage: string | null;
+  sanitizedWebsite: string | null;
+  sanitizedTwitter: string | null;
+};
+
+export const sanitizeDaoParams = ({
+  name,
+  description,
+  profileImage,
+  backgroundImage,
+  websiteLink,
+  twitterLink,
+  organizationId,
+  currentAccountId,
+  profileBasePath,
+}: SanitizeDaoParamsInput): SanitizeDaoParamsResult => {
+  const sanitizedName = name.trim();
+  const sanitizedDescription = description?.trim() || null;
+
+  const rewriteParams = { currentAccountId, organizationId };
+
+  const sanitizedProfileImage = rewriteMediaUrl(
+    profileImage,
+    rewriteParams,
+    profileBasePath,
+  );
+  const sanitizedBackgroundImage = rewriteMediaUrl(
+    backgroundImage,
+    rewriteParams,
+    profileBasePath,
+  );
+
+  const sanitizedWebsite = websiteLink?.trim() || null;
+  const sanitizedTwitter = twitterLink?.trim() || null;
+
+  return {
+    sanitizedName,
+    sanitizedDescription,
+    sanitizedProfileImage,
+    sanitizedBackgroundImage,
+    sanitizedWebsite,
+    sanitizedTwitter,
+  };
+};
+
+export type PredictAllAddressesParams = {
+  client: WasmCodeClient;
+  queryClient: QueryClient;
+  rpcEndpoint?: string | null;
+  adminFactoryAddress: string;
+  daoCoreCodeId: number;
+  daoVotingCw4CodeId: number;
+  cw4GroupCodeId: number;
+  rbamCodeId: number;
+};
+
+export type PredictAllAddressesResult = {
+  dao: { address: string; salt: string };
+  daoVotingCw4: { address: string; salt: string };
+  cw4Group: { address: string; salt: string };
+  rbam: { address: string; salt: string };
+};
+
+export const predictAllAddresses = async ({
+  client,
+  queryClient,
+  rpcEndpoint,
+  adminFactoryAddress,
+  daoCoreCodeId,
+  daoVotingCw4CodeId,
+  cw4GroupCodeId,
+  rbamCodeId,
+}: PredictAllAddressesParams): Promise<PredictAllAddressesResult> => {
+  const dao = await predictAddress({
+    client,
+    codeId: daoCoreCodeId,
+    creator: adminFactoryAddress,
+    queryClient,
+    rpcEndpoint,
+  });
+
+  const daoVotingCw4 = await predictAddress({
+    client,
+    codeId: daoVotingCw4CodeId,
+    creator: dao.predictedAddress,
+    queryClient,
+    rpcEndpoint,
+  });
+
+  const cw4Group = await predictAddress({
+    client,
+    codeId: cw4GroupCodeId,
+    creator: daoVotingCw4.predictedAddress,
+    queryClient,
+    rpcEndpoint,
+  });
+
+  const rbam = await predictAddress({
+    client,
+    codeId: rbamCodeId,
+    creator: dao.predictedAddress,
+    queryClient,
+    rpcEndpoint,
+  });
+
+  return {
+    dao: { address: dao.predictedAddress, salt: dao.salt },
+    daoVotingCw4: {
+      address: daoVotingCw4.predictedAddress,
+      salt: daoVotingCw4.salt,
+    },
+    cw4Group: { address: cw4Group.predictedAddress, salt: cw4Group.salt },
+    rbam: { address: rbam.predictedAddress, salt: rbam.salt },
+  };
+};
+
 async function resolveCodeChecksum(
   client: WasmCodeClient,
   codeId: number,

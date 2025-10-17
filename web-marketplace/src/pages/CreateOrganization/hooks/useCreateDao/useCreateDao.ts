@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react';
 import { StdFee } from '@cosmjs/stargate';
 import { i18n } from '@lingui/core';
 import { useQueryClient } from '@tanstack/react-query';
-import { getClientConfig } from 'clients/Clients.config';
 import { useSetAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
@@ -19,41 +18,24 @@ import {
 import type { WasmCodeClient } from './useCreateDao.codeDetails';
 import {
   cw4GroupCodeId,
+  cwAdminFactoryAddr,
   daoDaoCoreCodeId,
   daoVotingCw4CodeId,
-  DEFAULT_CW_ADMIN_FACTORY_ADDRESS,
+  feeAmount,
   filterCodeId,
+  gasLimit,
   preProposeSingleCodeId,
   proposalSingleCodeId,
   protobufRegistryCodeId,
   rbamCodeId,
 } from './useCreateDao.constants';
+import type { CreateDaoParams, CreateDaoResult } from './useCreateDao.types';
 import {
   encodeJsonToBase64,
   organizationRoles,
-  predictAddress,
-  rewriteMediaUrl,
+  predictAllAddresses,
+  sanitizeDaoParams,
 } from './useCreateDao.utils';
-
-type CreateDaoParams = {
-  name: string;
-  description?: string;
-  profileImage?: string;
-  backgroundImage?: string;
-  websiteLink?: string;
-  twitterLink?: string;
-  organizationId: string;
-  currentAccountId: string;
-};
-
-type CreateDaoResult = {
-  daoAddress: string;
-  votingModuleAddress: string;
-  cw4GroupAddress: string;
-  rbamAddress: string;
-  transactionHash: string;
-  organizationId: string;
-};
 
 export const useCreateDao = () => {
   const { wallet } = useWallet();
@@ -61,9 +43,6 @@ export const useCreateDao = () => {
   const queryClient = useQueryClient();
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
   const [isCreating, setIsCreating] = useState(false);
-  const { cwAdminFactoryAddress } = getClientConfig();
-
-  // Logging removed for production push
 
   const createDao = useCallback(
     async (params: CreateDaoParams): Promise<CreateDaoResult> => {
@@ -80,66 +59,46 @@ export const useCreateDao = () => {
       setProcessingModalAtom(atom => void (atom.open = true));
 
       try {
-        const cwAdminFactoryAddr =
-          cwAdminFactoryAddress ?? DEFAULT_CW_ADMIN_FACTORY_ADDRESS;
-
-        const sanitizedName = params.name.trim();
-        const sanitizedDescription = params.description?.trim() || null;
-
-        const rewriteParams = {
-          currentAccountId: params.currentAccountId,
-          organizationId: params.organizationId,
-        };
-        const sanitizedProfileImage = rewriteMediaUrl(
-          params.profileImage,
-          rewriteParams,
-          PROFILE_S3_PATH,
-        );
-        const sanitizedBackgroundImage = rewriteMediaUrl(
-          params.backgroundImage,
-          rewriteParams,
-          PROFILE_S3_PATH,
-        );
-        const sanitizedWebsite = params.websiteLink?.trim() || null;
-        const sanitizedTwitter = params.twitterLink?.trim() || null;
-
-        const { salt: daoSalt, predictedAddress: daoAddress } =
-          await predictAddress({
-            client: signingCosmWasmClient as unknown as WasmCodeClient,
-            codeId: daoDaoCoreCodeId,
-            creator: cwAdminFactoryAddr,
-            queryClient,
-            rpcEndpoint: ledgerRPCUri,
-          });
-
         const {
-          salt: daoVotingCw4Salt,
-          predictedAddress: daoVotingCw4Address,
-        } = await predictAddress({
-          client: signingCosmWasmClient as unknown as WasmCodeClient,
-          codeId: daoVotingCw4CodeId,
-          creator: daoAddress,
-          queryClient,
-          rpcEndpoint: ledgerRPCUri,
+          sanitizedName,
+          sanitizedDescription,
+          sanitizedProfileImage,
+          sanitizedBackgroundImage,
+          sanitizedWebsite,
+          sanitizedTwitter,
+        } = sanitizeDaoParams({
+          name: params.name,
+          description: params.description,
+          profileImage: params.profileImage,
+          backgroundImage: params.backgroundImage,
+          websiteLink: params.websiteLink,
+          twitterLink: params.twitterLink,
+          organizationId: params.organizationId,
+          currentAccountId: params.currentAccountId,
+          profileBasePath: PROFILE_S3_PATH,
         });
 
-        const { salt: cw4GroupSalt, predictedAddress: cw4GroupAddress } =
-          await predictAddress({
+        const { dao, daoVotingCw4, cw4Group, rbam } = await predictAllAddresses(
+          {
             client: signingCosmWasmClient as unknown as WasmCodeClient,
-            codeId: cw4GroupCodeId,
-            creator: daoVotingCw4Address,
             queryClient,
             rpcEndpoint: ledgerRPCUri,
-          });
+            adminFactoryAddress: cwAdminFactoryAddr,
+            daoCoreCodeId: Number(daoDaoCoreCodeId),
+            daoVotingCw4CodeId: Number(daoVotingCw4CodeId),
+            cw4GroupCodeId: Number(cw4GroupCodeId),
+            rbamCodeId: Number(rbamCodeId),
+          },
+        );
 
-        const { salt: rbamSalt, predictedAddress: rbamAddress } =
-          await predictAddress({
-            client: signingCosmWasmClient as unknown as WasmCodeClient,
-            codeId: rbamCodeId,
-            creator: daoAddress,
-            queryClient,
-            rpcEndpoint: ledgerRPCUri,
-          });
+        const daoAddress = dao.address;
+        const daoSalt = dao.salt;
+        const daoVotingCw4Address = daoVotingCw4.address;
+        const daoVotingCw4Salt = daoVotingCw4.salt;
+        const cw4GroupAddress = cw4Group.address;
+        const cw4GroupSalt = cw4Group.salt;
+        const rbamAddress = rbam.address;
+        const rbamSalt = rbam.salt;
 
         const now = Date.now();
 
@@ -279,11 +238,11 @@ export const useCreateDao = () => {
         const fee: StdFee = {
           amount: [
             {
-              amount: '20000',
+              amount: feeAmount.toString(),
               denom: 'uregen',
             },
           ],
-          gas: '10000000',
+          gas: gasLimit.toString(),
         };
 
         const executeResult = await signingCosmWasmClient.execute(
@@ -292,8 +251,6 @@ export const useCreateDao = () => {
           executeMsg,
           fee,
         );
-        /* debug removed */
-
         return {
           daoAddress,
           votingModuleAddress: daoVotingCw4Address,
@@ -314,7 +271,6 @@ export const useCreateDao = () => {
       signingCosmWasmClient,
       setProcessingModalAtom,
       queryClient,
-      cwAdminFactoryAddress,
     ],
   );
 

@@ -1,14 +1,15 @@
-// TODO: replace with env variables
-// these are the code IDs on regen-upgrade testnet
-// https://github.com/DA0-DA0/dao-dao-ui/blob/development/packages/utils/constants/codeIds.json#L1777
-export const daoDaoCoreCodeId = 6;
-export const filterCodeId = 14;
-export const protobufRegistryCodeId = 15;
-export const rbamCodeId = 16;
-export const proposalSingleCodeId = 13;
-export const preProposeSingleCodeId = 11;
-export const cw4GroupCodeId = 2;
-export const daoVotingCw4CodeId = 19;
+export const daoDaoCoreCodeId = import.meta.env.VITE_DAODAO_CORE_CODE_ID;
+export const filterCodeId = import.meta.env.VITE_FILTER_CODE_ID;
+export const protobufRegistryCodeId = import.meta.env
+  .VITE_PROTOCOLBUF_REGISTRY_CODE_ID;
+export const rbamCodeId = import.meta.env.VITE_RBAM_CODE_ID;
+export const proposalSingleCodeId = import.meta.env
+  .VITE_PROPOSAL_SINGLE_CODE_ID;
+export const preProposeSingleCodeId = import.meta.env
+  .VITE_PRE_PROPOSE_SINGLE_CODE_ID;
+export const cw4GroupCodeId = import.meta.env.VITE_CW4_GROUP_CODE_ID;
+export const daoVotingCw4CodeId = import.meta.env.VITE_DAO_VOTING_CW4_CODE_ID;
+export const cwAdminFactoryAddr = import.meta.env.VITE_CW_ADMIN_FACTORY_ADDR;
 
 const STATIC_CHECKSUMS: Record<number, string> = {};
 
@@ -16,5 +17,8 @@ export function lookupContractChecksum(codeId: number): string | undefined {
   return STATIC_CHECKSUMS[codeId];
 }
 
-export const DEFAULT_CW_ADMIN_FACTORY_ADDRESS =
-  'regen1hrpna9v7vs3stzyd4z3xf00676kf78zpe2u5ksvljswn2vnjp3ysp76v39';
+const GAS_BASE = 10_000_000;
+const GAS_AMOUNT_BASE = 20_000;
+const GAS_MULTIPLIER = 2;
+export const gasLimit = GAS_BASE * GAS_MULTIPLIER;
+export const feeAmount = GAS_AMOUNT_BASE * GAS_MULTIPLIER;

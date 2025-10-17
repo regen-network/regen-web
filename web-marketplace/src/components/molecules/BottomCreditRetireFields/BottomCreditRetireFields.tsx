@@ -153,7 +153,7 @@ export const BottomCreditRetireFields: React.FC<
               optional
               emptyOptionText={_(EMPTY_OPTION_TEXT)}
               label={_(STATE_LABEL)}
-              country={country}
+              country={country as string}
               key={fieldId}
               error={!!errors?.retireFields?.[fieldIndex]?.stateProvince}
               helperText={

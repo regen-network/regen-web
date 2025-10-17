@@ -28,7 +28,7 @@ async function loadDataset(jsonLd: string): Promise<DatasetExt> {
       stream.push(null);
     },
   });
-  const parser = new Parser({ factory });
+  const parser = new Parser({ factory: factory as any });
   return factory.dataset().import(parser.import(stream));
 }
 
@@ -41,7 +41,10 @@ export async function validate(shapesJSON: any, dataJSON: any, group?: string) {
   const shapes = await loadDataset(JSON.stringify(shapesJSON));
   const data = await loadDataset(JSON.stringify(dataJSON));
   const result = await import('./rdf-lib').then(async ({ SHACLValidator }) => {
-    const validator = new SHACLValidator(shapes, { factory, group });
+    const validator = new SHACLValidator(shapes, {
+      factory: factory as any,
+      group,
+    });
     const report = await validator.validate(data);
     return report;
   });

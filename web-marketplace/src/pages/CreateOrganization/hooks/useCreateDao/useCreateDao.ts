@@ -5,6 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
+import { errorBannerTextAtom } from 'lib/atoms/error.atoms';
 import { processingModalAtom } from 'lib/atoms/modals.atoms';
 import { ledgerRPCUri } from 'lib/ledger';
 import { useWallet } from 'lib/wallet/wallet';
@@ -42,6 +43,7 @@ export const useCreateDao = () => {
   const { signingCosmWasmClient } = useLedger();
   const queryClient = useQueryClient();
   const setProcessingModalAtom = useSetAtom(processingModalAtom);
+  const setErrorBannerText = useSetAtom(errorBannerTextAtom);
   const [isCreating, setIsCreating] = useState(false);
 
   const createDao = useCallback(
@@ -260,6 +262,7 @@ export const useCreateDao = () => {
           organizationId: params.organizationId,
         };
       } catch (error) {
+        setErrorBannerText(String(error));
         throw error;
       } finally {
         setIsCreating(false);
@@ -270,6 +273,7 @@ export const useCreateDao = () => {
       wallet?.address,
       signingCosmWasmClient,
       setProcessingModalAtom,
+      setErrorBannerText,
       queryClient,
     ],
   );

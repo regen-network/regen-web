@@ -2,7 +2,7 @@ import { useLingui } from '@lingui/react';
 
 import Modal from 'web-components/src/components/modal';
 import { CancelButtonFooter } from 'web-components/src/components/organisms/CancelButtonFooter/CancelButtonFooter';
-import { Title as H } from 'web-components/src/components/typography';
+import { Title } from 'web-components/src/components/typography';
 import UserAvatar from 'web-components/src/components/user/UserAvatar';
 
 import {
@@ -39,21 +39,15 @@ export function TransferProfileModal({
       isFullscreenMobile={false}
       closeIconColor="#6B7280"
     >
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          onTransfer();
-        }}
-        className="flex h-full flex-col"
-      >
-        <div className="flex-shrink-0 px-20 py-40 md:px-40 md:pt-40 md:pb-0">
-          <H variant="h4" className="mb-10 text-center">
+      <div className="flex h-full flex-col">
+        <header className="flex-shrink-0 px-20 py-40 md:px-40 md:pt-40 md:pb-0">
+          <Title variant="h4" className="mb-10 text-center">
             {_(CREATE_ORG_TRANSFER_MODAL_TITLE)}
-          </H>
+          </Title>
           <p className="text-center px-10 text-[18px] font-normal text-bc-neutral-500 md:px-40">
             {_(CREATE_ORG_TRANSFER_MODAL_DESCRIPTION)}
           </p>
-        </div>
+        </header>
 
         <div className="flex-1 px-20 md:px-40">
           <div className="flex flex-col rounded-[5px] border border-solid border-bc-neutral-300 bg-bc-neutral-0 px-20 py-30 md:p-40">
@@ -75,17 +69,18 @@ export function TransferProfileModal({
           </div>
         </div>
 
-        <div className="flex-shrink-0 px-20 py-20 md:px-40 md:py-40">
+        <footer className="flex-shrink-0 px-20 py-20 md:px-40 md:py-40">
           <CancelButtonFooter
             onCancel={onSkip}
             cancelLabel={_(CREATE_ORG_TRANSFER_MODAL_SKIP_LABEL)}
             label={_(CREATE_ORG_TRANSFER_MODAL_CONFIRM_LABEL)}
             disabled={false}
-            type="submit"
+            type="button"
+            onClick={onTransfer}
             className="h-[53px] w-full text-[16px] md:w-[260px]"
           />
-        </div>
-      </form>
+        </footer>
+      </div>
     </Modal>
   );
 }

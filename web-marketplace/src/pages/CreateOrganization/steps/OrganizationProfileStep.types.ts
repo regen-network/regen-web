@@ -1,6 +1,7 @@
 import type { AccountByIdQuery } from 'generated/graphql';
 
 import type { EditProfileFormSchemaType } from 'components/organisms/EditProfileForm/EditProfileForm.schema';
+
 import type { OrganizationMultiStepData } from '../hooks/useOrganizationFlow';
 
 export type OrganizationProfileStepProps = {

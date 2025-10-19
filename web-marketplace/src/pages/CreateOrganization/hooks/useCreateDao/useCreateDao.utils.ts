@@ -11,6 +11,19 @@ import { chainInfo } from 'lib/wallet/chainInfo/chainInfo';
 import { CodeDetailsLike, WasmCodeClient } from './useCreateDao.codeDetails';
 import { lookupContractChecksum } from './useCreateDao.constants';
 
+export const parseCodeId = (
+  envVarName: string,
+  rawValue: string | undefined,
+): number => {
+  const parsed = Number(rawValue?.toString().trim());
+
+  if (!Number.isInteger(parsed) || parsed < 0) {
+    throw new Error(`Invalid ${envVarName} configuration`);
+  }
+
+  return parsed;
+};
+
 // Roles and authorizations definitions
 const creditClassesAuthorization = {
   name: 'can_manage_credit_classes',

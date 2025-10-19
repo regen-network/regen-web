@@ -17,8 +17,6 @@ export function lookupContractChecksum(codeId: number): string | undefined {
   return STATIC_CHECKSUMS[codeId];
 }
 
-const GAS_BASE = 10_000_000;
-const GAS_AMOUNT_BASE = 20_000;
-const GAS_MULTIPLIER = 2;
-export const gasLimit = GAS_BASE * GAS_MULTIPLIER;
-export const feeAmount = GAS_AMOUNT_BASE * GAS_MULTIPLIER;
+export const gasPrice = '0.025uregen';
+export const gasMultiplier = 2;
+export const defaultGasLimit = 20_000_000;

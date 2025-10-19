@@ -4,11 +4,6 @@ import {
   QueryCodeResponse,
 } from 'cosmjs-types/cosmwasm/wasm/v1/query';
 
-// Local noop logger to avoid console usage (lint compliance)
-const logLegacyQueryFailure = (_message: string, _error: unknown): void => {
-  // intentionally silent
-};
-
 const UNKNOWN_QUERY_PATH_REGEX = /unknown query path/i;
 
 export type CodeDetailsLike = {

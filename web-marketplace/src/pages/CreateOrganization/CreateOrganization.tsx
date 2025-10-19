@@ -188,8 +188,7 @@ export default function CreateOrganizationPage(): JSX.Element {
         steps={CREATE_ORG_STEPS.map(step => ({ ...step }))}
         withLocalStorage
         forceStep={resumeStep}
-        closable
-        onRequestClose={handleRequestClose}
+        onClose={handleRequestClose}
         closeAriaLabel={_(CREATE_ORG_CLOSE_ARIA_LABEL)}
         classes={{ titleWrap: 'pb-40' }}
       >

@@ -11,6 +11,7 @@ import { Body, Label, Title } from 'web-components/src/components/typography';
 import { Link } from 'components/atoms/Link';
 import Form from 'components/molecules/Form/Form';
 import { useZodForm } from 'components/molecules/Form/hook/useZodForm';
+import { WalletGuideLearnMore } from 'components/molecules/WalletGuideLearnMore';
 
 import { emailFormSchema, EmailFormSchemaType } from '../LoginModal.schema';
 import { LoginProvider } from '../LoginModal.types';
@@ -48,14 +49,7 @@ const LoginModalSelect = ({
       </Title>
       {wallets.length > 0 && (
         <>
-          <Body pb={7.5}>
-            <Trans>
-              Learn more about wallets in our{' '}
-              <Link href="https://guides.regen.network/guides/wallets">
-                user guide.
-              </Link>
-            </Trans>
-          </Body>
+          <WalletGuideLearnMore />
           <LoginModalProviders providers={wallets} />
           {!onlyWallets && (
             <Grid container alignItems="center" pb={7.5} spacing={7.5} pt={5}>

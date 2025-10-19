@@ -130,10 +130,7 @@ export default function CreateOrganizationPage(): JSX.Element {
 
   const resumeStep = useMemo(() => {
     if (!organizationProgress) return 0;
-    return Math.min(
-      organizationProgress.step,
-      CREATE_ORG_STEPS.length - 1,
-    );
+    return Math.min(organizationProgress.step, CREATE_ORG_STEPS.length - 1);
   }, [organizationProgress]);
 
   const visibleOrganizationAssignments = useMemo(

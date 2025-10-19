@@ -1,7 +1,10 @@
 import { useCallback, useState } from 'react';
-import { StdFee } from '@cosmjs/stargate';
+import { toUtf8 } from '@cosmjs/encoding';
+import type { EncodeObject } from '@cosmjs/proto-signing';
+import { calculateFee, GasPrice } from '@cosmjs/stargate';
 import { i18n } from '@lingui/core';
 import { useQueryClient } from '@tanstack/react-query';
+import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx';
 import { useSetAtom } from 'jotai';
 
 import { useLedger } from 'ledger';
@@ -22,9 +25,10 @@ import {
   cwAdminFactoryAddr,
   daoDaoCoreCodeId,
   daoVotingCw4CodeId,
-  feeAmount,
+  defaultGasLimit,
   filterCodeId,
-  gasLimit,
+  gasMultiplier,
+  gasPrice,
   preProposeSingleCodeId,
   proposalSingleCodeId,
   protobufRegistryCodeId,
@@ -34,6 +38,7 @@ import type { CreateDaoParams, CreateDaoResult } from './useCreateDao.types';
 import {
   encodeJsonToBase64,
   organizationRoles,
+  parseCodeId,
   predictAllAddresses,
   sanitizeDaoParams,
 } from './useCreateDao.utils';
@@ -56,6 +61,29 @@ export const useCreateDao = () => {
       if (!signingCosmWasmClient) {
         throw new Error(i18n._(CREATE_ORG_SIGNING_CLIENT_ERROR));
       }
+
+      const codeIds = {
+        daoCore: parseCodeId('VITE_DAODAO_CORE_CODE_ID', daoDaoCoreCodeId),
+        votingCw4: parseCodeId(
+          'VITE_DAO_VOTING_CW4_CODE_ID',
+          daoVotingCw4CodeId,
+        ),
+        cw4Group: parseCodeId('VITE_CW4_GROUP_CODE_ID', cw4GroupCodeId),
+        rbam: parseCodeId('VITE_RBAM_CODE_ID', rbamCodeId),
+        proposalSingle: parseCodeId(
+          'VITE_PROPOSAL_SINGLE_CODE_ID',
+          proposalSingleCodeId,
+        ),
+        preProposeSingle: parseCodeId(
+          'VITE_PRE_PROPOSE_SINGLE_CODE_ID',
+          preProposeSingleCodeId,
+        ),
+        filter: parseCodeId('VITE_FILTER_CODE_ID', filterCodeId),
+        protobufRegistry: parseCodeId(
+          'VITE_PROTOCOLBUF_REGISTRY_CODE_ID',
+          protobufRegistryCodeId,
+        ),
+      };
 
       setIsCreating(true);
       setProcessingModalAtom(atom => void (atom.open = true));
@@ -86,10 +114,10 @@ export const useCreateDao = () => {
             queryClient,
             rpcEndpoint: ledgerRPCUri,
             adminFactoryAddress: cwAdminFactoryAddr,
-            daoCoreCodeId: Number(daoDaoCoreCodeId),
-            daoVotingCw4CodeId: Number(daoVotingCw4CodeId),
-            cw4GroupCodeId: Number(cw4GroupCodeId),
-            rbamCodeId: Number(rbamCodeId),
+            daoCoreCodeId: codeIds.daoCore,
+            daoVotingCw4CodeId: codeIds.votingCw4,
+            cw4GroupCodeId: codeIds.cw4Group,
+            rbamCodeId: codeIds.rbam,
           },
         );
 
@@ -107,25 +135,25 @@ export const useCreateDao = () => {
         const proposalModules = [
           {
             admin: { core_module: {} },
-            code_id: rbamCodeId,
+            code_id: codeIds.rbam,
             label: `dao-rbam_${now}`,
             msg: encodeJsonToBase64({
               dao: daoAddress,
-              filter_code_id: filterCodeId,
+              filter_code_id: codeIds.filter,
               initial_roles: organizationRoles(
                 walletAddress,
                 daoAddress,
                 cw4GroupAddress,
                 rbamAddress,
               ),
-              protobuf_registry_code_id: protobufRegistryCodeId,
+              protobuf_registry_code_id: codeIds.protobufRegistry,
             }),
             funds: [],
             salt: rbamSalt,
           },
           {
             admin: { core_module: {} },
-            code_id: proposalSingleCodeId,
+            code_id: codeIds.proposalSingle,
             label: `dao-proposal-single_${now}`,
             msg: encodeJsonToBase64({
               allow_revoting: false,
@@ -136,7 +164,7 @@ export const useCreateDao = () => {
                 module_may_propose: {
                   info: {
                     admin: { core_module: {} },
-                    code_id: preProposeSingleCodeId,
+                    code_id: codeIds.preProposeSingle,
                     label: `dao-pre-propose-single_${now}`,
                     msg: encodeJsonToBase64({
                       deposit_info: null,
@@ -167,12 +195,12 @@ export const useCreateDao = () => {
 
         const votingModule = {
           admin: { core_module: {} },
-          code_id: daoVotingCw4CodeId,
+          code_id: codeIds.votingCw4,
           label: `dao-voting-cw4__${now}`,
           msg: encodeJsonToBase64({
             group_contract: {
               new: {
-                cw4_group_code_id: cw4GroupCodeId,
+                cw4_group_code_id: codeIds.cw4Group,
                 cw4_group_salt: cw4GroupSalt,
                 initial_members: [
                   {
@@ -215,37 +243,57 @@ export const useCreateDao = () => {
           key: 'dao_cw4_group_address',
           value: cw4GroupAddress,
         });
+
+        const instantiatePayload = {
+          admin: null,
+          automatically_add_cw20s: true,
+          automatically_add_cw721s: true,
+          description: sanitizedDescription ?? '',
+          image_url: sanitizedProfileImage,
+          initial_items: initialItems,
+          initial_actions: [],
+          name: sanitizedName,
+          proposal_modules_instantiate_info: proposalModules,
+          voting_module_instantiate_info: votingModule,
+        };
+
         const executeMsg = {
           instantiate2_contract_with_self_admin: {
-            code_id: daoDaoCoreCodeId,
-            instantiate_msg: encodeJsonToBase64({
-              admin: null,
-              automatically_add_cw20s: true,
-              automatically_add_cw721s: true,
-              description: sanitizedDescription,
-              image_url: sanitizedProfileImage,
-              initial_items: initialItems,
-              initial_actions: [],
-              name: sanitizedName,
-              proposal_modules_instantiate_info: proposalModules,
-              voting_module_instantiate_info: votingModule,
-            }),
-            // dynamic label allowed; suppress literal string rule via indirection
+            code_id: codeIds.daoCore,
+            instantiate_msg: encodeJsonToBase64(instantiatePayload),
             label: ['dao', 'rbam', String(now)].join('-'),
             salt: daoSalt,
             expect: daoAddress,
           },
         };
 
-        const fee: StdFee = {
-          amount: [
-            {
-              amount: feeAmount.toString(),
-              denom: 'uregen',
-            },
-          ],
-          gas: gasLimit.toString(),
-        };
+        let gasLimit = defaultGasLimit;
+
+        try {
+          const simulateMsg: EncodeObject = {
+            typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
+            value: MsgExecuteContract.fromPartial({
+              sender: walletAddress,
+              contract: cwAdminFactoryAddr,
+              msg: toUtf8(JSON.stringify(executeMsg)),
+            }),
+          };
+          const simulatedGas = await signingCosmWasmClient.simulate(
+            walletAddress,
+            [simulateMsg],
+            undefined,
+          );
+          gasLimit = Math.ceil(simulatedGas * gasMultiplier);
+        } catch (simulationError) {
+          /* eslint-disable no-console */
+          console.warn(
+            'useCreateDao: gas simulation failed, falling back to default gas limit',
+            simulationError,
+          );
+          /* eslint-enable no-console */
+        }
+
+        const fee = calculateFee(gasLimit, GasPrice.fromString(gasPrice));
 
         const executeResult = await signingCosmWasmClient.execute(
           walletAddress,
@@ -253,6 +301,16 @@ export const useCreateDao = () => {
           executeMsg,
           fee,
         );
+
+        /* eslint-disable no-console */
+        console.log({
+          useCreateDao_success: {
+            daoAddress,
+            transactionHash: executeResult.transactionHash,
+          },
+        });
+        /* eslint-enable no-console */
+
         return {
           daoAddress,
           votingModuleAddress: daoVotingCw4Address,
@@ -262,6 +320,9 @@ export const useCreateDao = () => {
           organizationId: params.organizationId,
         };
       } catch (error) {
+        /* eslint-disable no-console */
+        console.log(error);
+        /* eslint-enable no-console */
         setErrorBannerText(String(error));
         throw error;
       } finally {

@@ -7,7 +7,7 @@ import {
   AccountConnectModalState,
   LoginProvider,
 } from './AccountConnectWalletModal.types';
-import { LoginModalSelect } from './components/AccountConnectWalletModal.Select';
+import { AccountConnectWalletModalSelect } from './components/AccountConnectWalletModal.Select';
 
 export interface Props extends RegenModalProps {
   state?: AccountConnectModalState;
@@ -29,7 +29,7 @@ const AccountConnectWalletModal = ({
     <Modal open={open} onClose={onClose}>
       <Box>
         {isSelectState && (
-          <LoginModalSelect
+          <AccountConnectWalletModalSelect
             wallets={wallets}
             title={title}
             description={description}

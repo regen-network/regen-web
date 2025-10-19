@@ -7,8 +7,7 @@ import { StepperSection } from './StepperSection';
 type MultiStepProps<T extends object> = ProviderProps<T> & {
   children: JSX.Element;
   forceStep?: number;
-  closable?: boolean;
-  onRequestClose?: () => void;
+  onClose?: () => void;
   closeAriaLabel?: string;
 } & Pick<OnBoardingSectionProps, 'classes'>;
 
@@ -20,8 +19,7 @@ export function MultiStepTemplate<T extends object>({
   withLocalStorage,
   classes,
   forceStep,
-  closable = false,
-  onRequestClose,
+  onClose,
   closeAriaLabel = 'close',
 }: MultiStepProps<T>): JSX.Element {
   return (
@@ -33,11 +31,11 @@ export function MultiStepTemplate<T extends object>({
       forceStep={forceStep}
     >
       <div className="relative">
-        {closable && onRequestClose && (
+        {onClose && (
           <button
             type="button"
             aria-label={closeAriaLabel}
-            onClick={onRequestClose}
+            onClick={onClose}
             className="absolute top-0 right-0 mt-10 mr-10 z-50 p-8 rounded-full border-none bg-transparent hover:bg-bc-neutral-200 transition-colors cursor-pointer"
           >
             <CloseIcon className="w-24 h-24 text-bc-neutral-600" />

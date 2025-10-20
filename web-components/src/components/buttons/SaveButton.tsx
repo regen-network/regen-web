@@ -1,9 +1,9 @@
 import { ButtonProps } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
-import ContainedButton from '../buttons/ContainedButton';
-import { SaveIcon } from '../icons/SaveIcon';
-import { Theme } from '../../theme/muiTheme';
-import { cn } from '../../utils/styles/cn';
+import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import { SaveIcon } from 'web-components/src/components/icons/SaveIcon';
+import { Theme } from 'web-components/src/theme/muiTheme';
+import { cn } from 'web-components/src/utils/styles/cn';
 
 interface SaveButtonProps extends ButtonProps {
   buttonText: string;

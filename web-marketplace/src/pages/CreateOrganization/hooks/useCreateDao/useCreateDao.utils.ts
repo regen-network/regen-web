@@ -249,7 +249,7 @@ const feegrantFilter = {
         '#proto': {
           type: 'cosmos.feegrant.v1beta1.AllowedMsgAllowance',
           value: {
-            allowed_messages: { $contains: 'example' },
+            allowed_messages: { $contains: '/cosmwasm.wasm.v1.MsgExecuteContract' },
           },
         },
       },
